@@ -1,5 +1,9 @@
 export const LOADER_SIZE = {
+  smaller: "smaller",
   small: "small",
-  medium: "medium",
-  large: "large"
+  base: "base",
+  large: "large",
+  larger: "larger",
+  huge: "huge",
+  massive: "massive"
 };

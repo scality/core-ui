@@ -1,2 +1,10 @@
 node_modules/
 dist/
+.build-storybook
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

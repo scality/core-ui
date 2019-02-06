@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Toggle Default 1`] = `
+<div>
+  <div
+    className="sc-bdVaJa gEyPxw"
+  >
+    <label
+      className="switch sc-bwzfXH cycMUH"
+    >
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="slider"
+      />
+    </label>
+    <span
+      className="text sc-htpNat efAdPk"
+    >
+      Airplane Mode
+    </span>
+  </div>
+  <div
+    className="sc-bdVaJa gEyPxw"
+  >
+    <label
+      className="switch sc-bwzfXH cycMUH"
+    >
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="slider"
+      />
+    </label>
+    <span
+      className="text sc-htpNat efAdPk"
+    >
+      Airplane Mode
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Toggle ThemeProvider 1`] = `
+<div>
+  <div>
+    <div
+      className="sc-bdVaJa gEyPxw"
+    >
+      <label
+        className="switch sc-bwzfXH oUJpL"
+      >
+        <input
+          checked={false}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="slider"
+        />
+      </label>
+      <span
+        className="text sc-htpNat efAdPk"
+      >
+        Airplane Mode
+      </span>
+    </div>
+    <div
+      className="sc-bdVaJa gEyPxw"
+    >
+      <label
+        className="switch sc-bwzfXH oUJpL"
+      >
+        <input
+          checked={true}
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="slider"
+        />
+      </label>
+      <span
+        className="text sc-htpNat efAdPk"
+      >
+        Airplane Mode
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,72 +1,50 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { Loader as SemanticUILoader } from "semantic-ui-react";
 
 import { LOADER_SIZE as SIZE } from "../constants";
-import { ReactComponent as LoaderIcon } from "../../icons/svg/scality-loading.svg";
-
-import { gray, svgMd, svgLg, svgSm } from "../../style/theme";
+import LoaderIcon from "../../icons/scality-loading";
+import * as defaultTheme from "../../style/theme";
+import { mergeTheme } from "../../utils";
 
 const LoaderContainer = styled.div`
+  display: flex;
   ${props => {
-    switch (props.size) {
-      case SIZE.small:
-        return css`
-          svg {
-            height: ${svgSm};
-            width: ${svgSm};
-            fill: ${props.color};
-          }
-        `;
-      case SIZE.large:
-        return css`
-          svg {
-            height: ${svgLg};
-            width: ${svgLg};
-            fill: ${props.color};
-          }
-        `;
-      default:
-        return css`
-          svg {
-            height: ${svgMd};
-            width: ${svgMd};
-            fill: ${props.color};
-          }
-        `;
-    }
-  }}
-`;
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
 
-const SemanticUILoaderContainer = styled.div`
-  ${props => {
     return css`
-      .ui.loader:after {
-        border-color: ${props.color} transparent transparent;
+      font-size: ${defaultTheme.fontSize[props.size]};
+      svg {
+        height: ${defaultTheme.svgSize[props.size]};
+        width: ${defaultTheme.svgSize[props.size]};
+        fill: ${brandingTheme.primary};
       }
     `;
   }}
 `;
 
-SemanticUILoaderContainer;
-function Loader({ color = gray, customized, size = SIZE.medium }) {
-  return customized ? (
-    <LoaderContainer size={size} color={color}>
-      <LoaderIcon />
+const LoaderText = styled.span`
+  padding: 10px 0;
+`;
+
+const LoaderTextDiv = styled.span`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+`;
+
+function Loader({ children, color = defaultTheme.gray, size = SIZE.large }) {
+  return (
+    <LoaderContainer size={size} color={color} className="sc-loader">
+      <LoaderTextDiv>
+        <LoaderIcon />
+        <LoaderText> {children}</LoaderText>
+      </LoaderTextDiv>
     </LoaderContainer>
-  ) : (
-    <SemanticUILoaderContainer color={color}>
-      <SemanticUILoader active inline size={size} />
-    </SemanticUILoaderContainer>
   );
 }
 
 Loader.propTypes = {
-  id: PropTypes.string,
-  color: PropTypes.string,
-  customized: PropTypes.bool,
-  className: PropTypes.string,
   size: PropTypes.oneOf(Object.values(SIZE))
 };
 

@@ -1,0 +1,620 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Dropdown Default 1`] = `
+<div
+  className="storybook-dropdown"
+>
+  <h3>
+    Dropdown with text/icon
+  </h3>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU bPFXaI"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="smaller"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="smaller"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU engQCv"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="small"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="small"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU nBybQ"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU FfRBh"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="large"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="large"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU dTGfyA"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="larger"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="larger"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <h3>
+    Dropdown with icon
+  </h3>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU nBybQ"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX bccMeP"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+    </div>
+  </div>
+  <h3>
+    Dropdown with text
+  </h3>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU nBybQ"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-EHOje boinrg"
+      >
+        Charles NGUYEN
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <h3>
+    Dropdown with variant
+  </h3>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU nBybQ"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        primary
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU hQVVIm"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        secondary
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU cwSAxV"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        success
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU egBCQb"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        info
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU dnQiAa"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        warning
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-dropdown sc-htoDjs dlhJIS"
+  >
+    <div
+      className="trigger sc-gqjmRU ibtvFE"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-ifAKCX joVDVz"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-EHOje boinrg"
+      >
+        danger
+      </span>
+      <span
+        className="sc-gZMcBi cfFiuj"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Dropdown ThemeProvider 1`] = `
+<div
+  className="storybook-dropdown"
+>
+  <div>
+    <h3>
+      Dropdown With ThemeProvider
+    </h3>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU kcHVYC"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          primary
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU WHAla"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          secondary
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU hQVVIm"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          success
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU egBCQb"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          info
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU ecInsh"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          warning
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-dropdown sc-htoDjs dlhJIS"
+    >
+      <div
+        className="trigger sc-gqjmRU dnQiAa"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        size="base"
+        tabIndex="0"
+      >
+        <span
+          className="sc-ifAKCX joVDVz"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-EHOje boinrg"
+        >
+          danger
+        </span>
+        <span
+          className="sc-gZMcBi cfFiuj"
+        >
+          <i
+            className="fas fa-caret-down"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

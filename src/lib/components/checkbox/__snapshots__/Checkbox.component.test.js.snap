@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Checkbox Default 1`] = `
+<div>
+  <h3>
+    Checkbox checked
+  </h3>
+  <div
+    className="sc-checkbox sc-bdVaJa iJSPUN"
+    onClick={[Function]}
+  >
+    <div
+      checked={true}
+      className="checkbox sc-htpNat EJACu"
+    >
+      <input
+        checked={true}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
+    </div>
+    <span
+      className="text sc-bwzfXH iiFAtu"
+    >
+      interested?
+    </span>
+  </div>
+  <h3>
+    Checkbox unchecked
+  </h3>
+  <div
+    className="sc-checkbox sc-bdVaJa iJSPUN"
+    onClick={[Function]}
+  >
+    <div
+      checked={false}
+      className="checkbox sc-htpNat hvlNrh"
+    >
+      <input
+        checked={false}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
+    </div>
+    <span
+      className="text sc-bwzfXH iiFAtu"
+    >
+      interested?
+    </span>
+  </div>
+  <h3>
+    Checkbox disabled
+  </h3>
+  <div
+    className="sc-checkbox sc-bdVaJa fnFfKl"
+    disabled={true}
+    onClick={[Function]}
+  >
+    <div
+      checked={false}
+      className="checkbox sc-htpNat EJACu"
+      disabled={true}
+    >
+      <input
+        checked={false}
+        disabled={true}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
+    </div>
+    <span
+      className="text sc-bwzfXH iiFAtu"
+    >
+      interested?
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Checkbox ThemeProvider 1`] = `
+<div>
+  <div>
+    <h3>
+      Checkbox checked
+    </h3>
+    <div
+      className="sc-checkbox sc-bdVaJa iJSPUN"
+      onClick={[Function]}
+    >
+      <div
+        checked={true}
+        className="checkbox sc-htpNat gtJWcW"
+      >
+        <input
+          checked={true}
+          type="checkbox"
+        />
+        <i
+          className="fas fa-check"
+        />
+      </div>
+      <span
+        className="text sc-bwzfXH iiFAtu"
+      >
+        interested?
+      </span>
+    </div>
+    <h3>
+      Checkbox unchecked
+    </h3>
+    <div
+      className="sc-checkbox sc-bdVaJa iJSPUN"
+      onClick={[Function]}
+    >
+      <div
+        checked={false}
+        className="checkbox sc-htpNat hXKlqZ"
+      >
+        <input
+          checked={false}
+          type="checkbox"
+        />
+        <i
+          className="fas fa-check"
+        />
+      </div>
+      <span
+        className="text sc-bwzfXH iiFAtu"
+      >
+        interested?
+      </span>
+    </div>
+    <h3>
+      Checkbox disabled
+    </h3>
+    <div
+      className="sc-checkbox sc-bdVaJa fnFfKl"
+      disabled={true}
+      onClick={[Function]}
+    >
+      <div
+        checked={false}
+        className="checkbox sc-htpNat gtJWcW"
+        disabled={true}
+      >
+        <input
+          checked={false}
+          disabled={true}
+          type="checkbox"
+        />
+        <i
+          className="fas fa-check"
+        />
+      </div>
+      <span
+        className="text sc-bwzfXH iiFAtu"
+      >
+        interested?
+      </span>
+    </div>
+  </div>
+</div>
+`;
