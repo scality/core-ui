@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Loader Combinations 1`] = `
+<div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH fnJBjG"
+      color="#555"
+    >
+      <div
+        className="ui small active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={false}
+  size="small"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH fnJBjG"
+      color="#555"
+    >
+      <div
+        className="ui medium active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={false}
+  size="medium"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH fnJBjG"
+      color="#555"
+    >
+      <div
+        className="ui large active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={false}
+  size="large"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH dbAvUl"
+      color="#00B2A9"
+    >
+      <div
+        className="ui small active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={false}
+  size="small"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH dbAvUl"
+      color="#00B2A9"
+    >
+      <div
+        className="ui medium active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={false}
+  size="medium"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bwzfXH dbAvUl"
+      color="#00B2A9"
+    >
+      <div
+        className="ui large active inline loader"
+      />
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={false}
+  size="large"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa bACYRQ"
+      color="#555"
+      size="small"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={true}
+  size="small"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa vWFTs"
+      color="#555"
+      size="medium"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={true}
+  size="medium"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa bCqfiP"
+      color="#555"
+      size="large"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color={undefined}
+  customized={true}
+  size="large"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa gvIsOf"
+      color="#00B2A9"
+      size="small"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={true}
+  size="small"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa gphgwN"
+      color="#00B2A9"
+      size="medium"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={true}
+  size="medium"
+/&gt;
+    </pre>
+  </div>
+  <div
+    style={Object {}}
+  >
+    <div
+      className="sc-bdVaJa iPLlAP"
+      color="#00B2A9"
+      size="large"
+    >
+      <svg>
+        scality-loading.svg
+      </svg>
+    </div>
+    <pre
+      className="source"
+    >
+      &lt;Loader
+  color="#00B2A9"
+  customized={true}
+  size="large"
+/&gt;
+    </pre>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Loader With dynamic props 1`] = `
+<div
+  className="sc-bdVaJa gphgwN"
+  color="#00B2A9"
+  size="medium"
+>
+  <svg>
+    scality-loading.svg
+  </svg>
+</div>
+`;
