@@ -8,6 +8,7 @@ import Dropdown from "./components/dropdown/Dropdown.component";
 import Button from "./components/button/Button.component";
 import Checkbox from "./components/checkbox/Checkbox.component";
 import Toggle from "./components/toggle/Toggle.component";
+import Table from "./components/table/Table.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -20,5 +21,6 @@ export {
   Dropdown,
   Button,
   Checkbox,
-  Toggle
+  Toggle,
+  Table
 };

@@ -6,4 +6,5 @@ import "./layout";
 import "./loader";
 import "./navbar";
 import "./sidebar";
+import "./table";
 import "./toggle";
