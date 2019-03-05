@@ -27,24 +27,9 @@ In this folder, you will find all components, icons and themes.
 Launch Storybook to test all the components on the `http://localhost:3000`.
 
 
-### `npm run storybook:build`
+### `npm run storybook:deploy`
 
-This will build the storybook configured in the Storybook directory into a static web app and place it inside the `.build-storybook` directory. Then you can deploy the content in the `.build-storybook` directory wherever you want.
-
-For example:
-
-Run the following commands with Python HTTP Server:
-```
-cd .build-storybook
-python -m SimpleHTTPServer
-```
-
-or Node HTTP Server:
-```
-npm install http-server -g
-cd .build-storybook
-http-server
-```
+This will build the Storybook and deploy the Storybook to the [ui-core GitHub Pages](https://scality.github.io/core-ui/).
 
 ### `npm run plop`
 
