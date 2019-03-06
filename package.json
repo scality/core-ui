@@ -51,7 +51,8 @@
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "5.7.2",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "react-virtualized": "9.21.0"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
