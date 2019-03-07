@@ -10,7 +10,8 @@ const columns = [
   {
     label: "Id",
     dataKey: "id",
-    disableSort: false
+    disableSort: false,
+    renderer: data => <span className="badge">{data}</span>
   },
   {
     label: "First Name",

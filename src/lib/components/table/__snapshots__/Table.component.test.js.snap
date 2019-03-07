@@ -19,7 +19,7 @@ exports[`Storyshots Table Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa iyEjyO"
+      className="sc-bdVaJa fmSKEG"
     >
       <div
         aria-colcount={6}
@@ -63,7 +63,7 @@ exports[`Storyshots Table Default 1`] = `
                 Id
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -98,7 +98,7 @@ exports[`Storyshots Table Default 1`] = `
                 First Name
               </label>
               <div
-                className="sc-htpNat iHhtxD"
+                className="sc-htpNat fWlXkf"
                 selected={true}
               >
                 <i
@@ -133,7 +133,7 @@ exports[`Storyshots Table Default 1`] = `
                 Last Name
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -206,7 +206,7 @@ exports[`Storyshots Table Default 1`] = `
                 Age
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -265,7 +265,7 @@ exports[`Storyshots Table Empty Table 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa iyEjyO"
+      className="sc-bdVaJa fmSKEG"
     >
       <div
         aria-colcount={6}
@@ -309,7 +309,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 Id
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -344,7 +344,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 First Name
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -379,7 +379,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 Last Name
               </label>
               <div
-                className="sc-htpNat hrnmMY"
+                className="sc-htpNat hZQQiA"
                 selected={true}
               >
                 <i
@@ -452,7 +452,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 Age
               </label>
               <div
-                className="sc-htpNat dkojKu"
+                className="sc-htpNat ixsqkW"
                 selected={false}
               >
                 <i
@@ -512,7 +512,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
       }
     >
       <div
-        className="sc-bdVaJa dTciQw"
+        className="sc-bdVaJa jMkWUw"
       >
         <div
           aria-colcount={6}
@@ -556,7 +556,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
                   Id
                 </label>
                 <div
-                  className="sc-htpNat dkojKu"
+                  className="sc-htpNat ixsqkW"
                   selected={false}
                 >
                   <i
@@ -591,7 +591,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
                   First Name
                 </label>
                 <div
-                  className="sc-htpNat kgsZKr"
+                  className="sc-htpNat kBVugE"
                   selected={true}
                 >
                   <i
@@ -626,7 +626,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
                   Last Name
                 </label>
                 <div
-                  className="sc-htpNat dkojKu"
+                  className="sc-htpNat ixsqkW"
                   selected={false}
                 >
                   <i
@@ -699,7 +699,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
                   Age
                 </label>
                 <div
-                  className="sc-htpNat dkojKu"
+                  className="sc-htpNat ixsqkW"
                   selected={false}
                 >
                   <i

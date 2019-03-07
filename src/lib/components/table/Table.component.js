@@ -26,6 +26,7 @@ const TableContainer = styled.div`
   }
   .ReactVirtualized__Table__headerRow {
     border-bottom: 2px solid ${defaultTheme.gray};
+    background-color: ${defaultTheme.grayLightest};
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       return css`
@@ -73,7 +74,7 @@ const HeaderSortIcon = styled.div`
 
   .fa-sort-up {
     position: absolute;
-    color: ${defaultTheme.grayLight};
+    color: ${defaultTheme.gray};
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       if (props.selected && props.sortDirection === "ASC") {
@@ -85,7 +86,7 @@ const HeaderSortIcon = styled.div`
   }
 
   .fa-sort-down {
-    color: ${defaultTheme.grayLight};
+    color: ${defaultTheme.gray};
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       if (props.selected && props.sortDirection === "DESC") {
@@ -170,7 +171,11 @@ class Table extends React.PureComponent {
                   label={column.label}
                   dataKey={column.dataKey}
                   className={"sc-table-column"}
-                  cellRenderer={({ cellData }) => cellData}
+                  cellRenderer={({ cellData }) => {
+                    return column.renderer
+                      ? column.renderer(cellData)
+                      : cellData;
+                  }}
                   flexGrow={1}
                   headerRenderer={this._headerRenderer}
                 />

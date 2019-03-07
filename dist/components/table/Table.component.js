@@ -92,7 +92,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  .ReactVirtualized__Table__Grid {\n    &:focus {\n      outline: none;\n    }\n    .sc-table-noRows {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100%;\n      font-size: ", ";\n    }\n  }\n  .ReactVirtualized__Table__headerRow {\n    border-bottom: 2px solid ", ";\n    ", "\n\n    .sc-table-header {\n      &:focus {\n        outline: none;\n      }\n      display: inline-flex;\n      font-size: ", ";\n      font-weight: ", ";\n      padding: ", ";\n    }\n  }\n\n  .ReactVirtualized__Table__row {\n    display: flex;\n    align-items: center;\n    border-bottom: 1px solid ", ";\n\n    &:hover,\n    &:focus {\n      background-color: ", ";\n      outline: none;\n      border-bottom: 1px solid transparent;\n      cursor: pointer;\n    }\n  }\n\n  .sc-table-column {\n    padding: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  .ReactVirtualized__Table__Grid {\n    &:focus {\n      outline: none;\n    }\n    .sc-table-noRows {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100%;\n      font-size: ", ";\n    }\n  }\n  .ReactVirtualized__Table__headerRow {\n    border-bottom: 2px solid ", ";\n    background-color: ", ";\n    ", "\n\n    .sc-table-header {\n      &:focus {\n        outline: none;\n      }\n      display: inline-flex;\n      font-size: ", ";\n      font-weight: ", ";\n      padding: ", ";\n    }\n  }\n\n  .ReactVirtualized__Table__row {\n    display: flex;\n    align-items: center;\n    border-bottom: 1px solid ", ";\n\n    &:hover,\n    &:focus {\n      background-color: ", ";\n      outline: none;\n      border-bottom: 1px solid transparent;\n      cursor: pointer;\n    }\n  }\n\n  .sc-table-column {\n    padding: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -103,20 +103,20 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var TableContainer = _styledComponents.default.div(_templateObject(), defaultTheme.fontSize.large, defaultTheme.gray, function (props) {
+var TableContainer = _styledComponents.default.div(_templateObject(), defaultTheme.fontSize.large, defaultTheme.gray, defaultTheme.grayLightest, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary);
 }, defaultTheme.fontSize.large, defaultTheme.fontWeight.semibold, defaultTheme.padding.small, defaultTheme.gray, defaultTheme.grayLightest, defaultTheme.padding.small);
 
 var HeaderContainer = _styledComponents.default.div(_templateObject3());
 
-var HeaderSortIcon = _styledComponents.default.div(_templateObject4(), defaultTheme.grayLight, function (props) {
+var HeaderSortIcon = _styledComponents.default.div(_templateObject4(), defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.selected && props.sortDirection === "ASC") {
     return (0, _styledComponents.css)(_templateObject5(), brandingTheme.primary);
   }
-}, defaultTheme.grayLight, function (props) {
+}, defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.selected && props.sortDirection === "DESC") {
@@ -219,7 +219,7 @@ function (_React$PureComponent) {
             className: "sc-table-column",
             cellRenderer: function cellRenderer(_ref4) {
               var cellData = _ref4.cellData;
-              return cellData;
+              return column.renderer ? column.renderer(cellData) : cellData;
             },
             flexGrow: 1,
             headerRenderer: _this2._headerRenderer
