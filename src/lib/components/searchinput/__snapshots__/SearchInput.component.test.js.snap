@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots SearchInput Default 1`] = `
+<div>
+  <h3>
+    Default
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-searchinput sc-bdVaJa kHAOGi"
+    >
+      <input
+        name="search"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search server..."
+        type="text"
+        value=""
+      />
+      <button
+        className="sc-bwzfXH sc-htpNat chKSNp"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bwzfXH sc-bxivhb cUDkHe"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+  <h3>
+    Search Input filled
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-searchinput sc-bdVaJa kHAOGi"
+    >
+      <input
+        name="search"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value="carlito"
+      />
+      <button
+        className="sc-bwzfXH sc-htpNat chKSNp"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bwzfXH sc-bxivhb cUDkHe"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SearchInput ThemeProvider 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-searchinput sc-bdVaJa iNGFJv"
+    >
+      <input
+        name="search"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Search server..."
+        type="text"
+        value=""
+      />
+      <button
+        className="sc-bwzfXH sc-htpNat fjDMjF"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bwzfXH sc-bxivhb knSRRk"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

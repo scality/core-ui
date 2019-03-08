@@ -57,6 +57,12 @@ Object.defineProperty(exports, "Table", {
     return _Table.default;
   }
 });
+Object.defineProperty(exports, "SearchInput", {
+  enumerable: true,
+  get: function get() {
+    return _SearchInput.default;
+  }
+});
 Object.defineProperty(exports, "LOADER_SIZE", {
   enumerable: true,
   get: function get() {
@@ -83,6 +89,8 @@ var _Checkbox = _interopRequireDefault(require("./components/checkbox/Checkbox.c
 var _Toggle = _interopRequireDefault(require("./components/toggle/Toggle.component"));
 
 var _Table = _interopRequireDefault(require("./components/table/Table.component"));
+
+var _SearchInput = _interopRequireDefault(require("./components/searchinput/SearchInput.component"));
 
 var _constants = require("./components/constants");
 

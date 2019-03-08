@@ -126,8 +126,8 @@ var HeaderSortIcon = _styledComponents.default.div(_templateObject4(), defaultTh
 
 var Table =
 /*#__PURE__*/
-function (_React$PureComponent) {
-  _inherits(Table, _React$PureComponent);
+function (_React$Component) {
+  _inherits(Table, _React$Component);
 
   function Table(props) {
     var _this;
@@ -230,7 +230,7 @@ function (_React$PureComponent) {
   }]);
 
   return Table;
-}(_react.default.PureComponent);
+}(_react.default.Component);
 
 Table.propTypes = {
   list: _propTypes.default.array.isRequired,

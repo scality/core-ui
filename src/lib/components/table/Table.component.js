@@ -98,7 +98,7 @@ const HeaderSortIcon = styled.div`
   }
 `;
 
-class Table extends React.PureComponent {
+class Table extends React.Component {
   constructor(props) {
     super(props);
     this._noRowsRenderer = this._noRowsRenderer.bind(this);
