@@ -25,7 +25,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         value=""
       />
       <button
-        className="sc-bwzfXH sc-htpNat chKSNp"
+        className="sc-bwzfXH sc-htpNat kYsliv"
         disabled={false}
         onClick={[Function]}
       >
@@ -34,7 +34,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb cUDkHe"
+        className="sc-bwzfXH sc-bxivhb hPgSUf"
         onClick={[Function]}
       >
         <i
@@ -65,7 +65,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         value="carlito"
       />
       <button
-        className="sc-bwzfXH sc-htpNat chKSNp"
+        className="sc-bwzfXH sc-htpNat kYsliv"
         disabled={false}
         onClick={[Function]}
       >
@@ -74,7 +74,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb cUDkHe"
+        className="sc-bwzfXH sc-bxivhb hPgSUf"
         onClick={[Function]}
       >
         <i
@@ -108,7 +108,7 @@ exports[`Storyshots SearchInput ThemeProvider 1`] = `
         value=""
       />
       <button
-        className="sc-bwzfXH sc-htpNat fjDMjF"
+        className="sc-bwzfXH sc-htpNat goOiff"
         disabled={false}
         onClick={[Function]}
       >
@@ -117,7 +117,7 @@ exports[`Storyshots SearchInput ThemeProvider 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb knSRRk"
+        className="sc-bwzfXH sc-bxivhb iAvqzh"
         onClick={[Function]}
       >
         <i

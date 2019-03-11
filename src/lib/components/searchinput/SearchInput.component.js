@@ -29,6 +29,7 @@ const IconButton = styled.button`
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
   color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+  background-color: ${defaultTheme.white};
   ${props => {
     return (
       !props.disabled &&
@@ -71,8 +72,8 @@ class SearchInput extends React.Component {
   }
 
   reset() {
-    this.setState({ docked: true });
     this.props.onReset();
+    this.setState({ docked: true });
   }
 
   render() {

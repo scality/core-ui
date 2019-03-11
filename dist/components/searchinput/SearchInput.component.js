@@ -72,7 +72,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  border: none;\n  outline: none;\n  top: 1px;\n  padding: 6px 10px 4px 10px;\n  border-radius: 5px;\n  font-size: ", ";\n  color: ", ";\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  border: none;\n  outline: none;\n  top: 1px;\n  padding: 6px 10px 4px 10px;\n  border-radius: 5px;\n  font-size: ", ";\n  color: ", ";\n  background-color: ", ";\n  ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -103,7 +103,7 @@ var SearchInputContainer = _styledComponents.default.div(_templateObject(), func
 
 var IconButton = _styledComponents.default.button(_templateObject2(), defaultTheme.fontSize.base, function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
-}, function (props) {
+}, defaultTheme.white, function (props) {
   return !props.disabled && (0, _styledComponents.css)(_templateObject3(), (0, _color.default)((0, _utils.mergeTheme)(props.theme, defaultTheme).primary).lighten(0.3).hsl().string());
 });
 
@@ -145,10 +145,10 @@ function (_React$Component) {
   }, {
     key: "reset",
     value: function reset() {
+      this.props.onReset();
       this.setState({
         docked: true
       });
-      this.props.onReset();
     }
   }, {
     key: "render",
