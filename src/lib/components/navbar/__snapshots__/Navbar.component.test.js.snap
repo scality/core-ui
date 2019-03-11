@@ -20,6 +20,7 @@ exports[`Storyshots Navbar Default 1`] = `
           disabled={false}
           size="larger"
           title="Main Menu"
+          type="button"
         >
           <span
             className="sc-bZQynM iMWVsx"
@@ -411,6 +412,7 @@ exports[`Storyshots Navbar Default 1`] = `
           disabled={false}
           size="larger"
           title="Main Menu"
+          type="button"
         >
           <span
             className="sc-bZQynM iMWVsx"
@@ -568,6 +570,7 @@ exports[`Storyshots Navbar ThemeProvider 1`] = `
             disabled={false}
             size="larger"
             title="Main Menu"
+            type="button"
           >
             <span
               className="sc-bZQynM iMWVsx"
@@ -785,6 +788,7 @@ exports[`Storyshots Navbar ThemeProvider 1`] = `
             disabled={false}
             size="larger"
             title="Main Menu"
+            type="button"
           >
             <span
               className="sc-bZQynM iMWVsx"
@@ -1002,6 +1006,7 @@ exports[`Storyshots Navbar ThemeProvider 1`] = `
             disabled={false}
             size="larger"
             title="Main Menu"
+            type="button"
           >
             <span
               className="sc-bZQynM iMWVsx"

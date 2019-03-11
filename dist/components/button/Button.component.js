@@ -164,6 +164,7 @@ var propTypes = {
   href: _propTypes.default.string,
   text: _propTypes.default.string,
   title: _propTypes.default.string,
+  type: _propTypes.default.string,
   isLoading: _propTypes.default.bool
 };
 var defaultProps = {
@@ -175,6 +176,7 @@ var defaultProps = {
   href: "",
   text: "",
   title: "",
+  type: "button",
   isLoading: false
 };
 
@@ -235,7 +237,8 @@ function Button(_ref) {
       disabled = _ref.disabled,
       onClick = _ref.onClick,
       title = _ref.title,
-      isLoading = _ref.isLoading;
+      isLoading = _ref.isLoading,
+      type = _ref.type;
   return href && href.length ? _react.default.createElement(Anchor, {
     className: "sc-button",
     href: href,
@@ -255,7 +258,8 @@ function Button(_ref) {
     size: size,
     onClick: onClick,
     title: title,
-    isLoading: isLoading
+    isLoading: isLoading,
+    type: type
   }, _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
     size: size
   }), _react.default.createElement("span", {

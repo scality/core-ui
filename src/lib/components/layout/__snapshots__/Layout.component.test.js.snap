@@ -19,6 +19,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           disabled={false}
           size="larger"
           title="Main Menu"
+          type="button"
         >
           <span
             className="sc-bZQynM iMWVsx"
@@ -415,6 +416,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           disabled={false}
           size="larger"
           title="Main Menu"
+          type="button"
         >
           <span
             className="sc-bZQynM iMWVsx"
@@ -826,6 +828,7 @@ exports[`Storyshots Layout ThemeProvider 1`] = `
           disabled={false}
           size="larger"
           title="Main Menu"
+          type="button"
         >
           <span
             className="sc-bZQynM iMWVsx"

@@ -23,6 +23,7 @@ const propTypes = {
   href: PropTypes.string,
   text: PropTypes.string,
   title: PropTypes.string,
+  type: PropTypes.string,
   isLoading: PropTypes.bool
 };
 
@@ -35,6 +36,7 @@ const defaultProps = {
   href: "",
   text: "",
   title: "",
+  type: "button",
   isLoading: false
 };
 
@@ -233,7 +235,8 @@ function Button({
   disabled,
   onClick,
   title,
-  isLoading
+  isLoading,
+  type
 }) {
   return href && href.length ? (
     <Anchor
@@ -262,6 +265,7 @@ function Button({
       onClick={onClick}
       title={title}
       isLoading={isLoading}
+      type={type}
     >
       <ButtonContent>
         {isLoading && <Loader size={size} />}
