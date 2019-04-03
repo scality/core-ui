@@ -7,5 +7,6 @@ import "./loader";
 import "./navbar";
 import "./searchinput";
 import "./sidebar";
+import "./steppers";
 import "./table";
 import "./toggle";

@@ -10,6 +10,7 @@ import Checkbox from "./components/checkbox/Checkbox.component";
 import Toggle from "./components/toggle/Toggle.component";
 import Table from "./components/table/Table.component";
 import SearchInput from "./components/searchinput/SearchInput.component";
+import Steppers from "./components/steppers/Steppers.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -24,5 +25,6 @@ export {
   Checkbox,
   Toggle,
   Table,
-  SearchInput
+  SearchInput,
+  Steppers
 };
