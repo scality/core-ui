@@ -63,6 +63,12 @@ Object.defineProperty(exports, "SearchInput", {
     return _SearchInput.default;
   }
 });
+Object.defineProperty(exports, "Steppers", {
+  enumerable: true,
+  get: function get() {
+    return _Steppers.default;
+  }
+});
 Object.defineProperty(exports, "LOADER_SIZE", {
   enumerable: true,
   get: function get() {
@@ -91,6 +97,8 @@ var _Toggle = _interopRequireDefault(require("./components/toggle/Toggle.compone
 var _Table = _interopRequireDefault(require("./components/table/Table.component"));
 
 var _SearchInput = _interopRequireDefault(require("./components/searchinput/SearchInput.component"));
+
+var _Steppers = _interopRequireDefault(require("./components/steppers/Steppers.component"));
 
 var _constants = require("./components/constants");
 
