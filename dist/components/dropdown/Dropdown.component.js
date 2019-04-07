@@ -205,6 +205,11 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleOnTriggerClick",
+    value: function handleOnTriggerClick(event) {
+      event.stopPropagation();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -235,9 +240,10 @@ function (_React$Component) {
         onBlur: function onBlur() {
           return _this2.handleOpenCloseDropdown();
         },
-        onFocus: function onFocus() {
-          return _this2.handleOpenCloseDropdown();
+        onFocus: function onFocus(event) {
+          return _this2.handleOpenCloseDropdown(event);
         },
+        onClick: this.handleOnTriggerClick,
         tabIndex: "0",
         title: title,
         ref: this.refTriggerCallback

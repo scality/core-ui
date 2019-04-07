@@ -6,6 +6,14 @@ import Table from "../src/lib/components/table/Table.component";
 import { jade } from "../src/lib/style/theme";
 import { list } from "./data/list";
 
+const items = [
+  { label: "Edit", onClick: action("Edit clicked") },
+  {
+    label: "Remove",
+    onClick: action("Remove clicked")
+  }
+];
+
 const columns = [
   {
     label: "Id",
@@ -58,6 +66,24 @@ storiesOf("Table", module)
       </div>
     );
   })
+  .add("With rowActions", () => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <Table
+          list={list}
+          columns={columns}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={"first_name"}
+          sortDirection={"ASC"}
+          onSort={action("Sort Clicked")}
+          onRowClick={action("Row Clicked")}
+          rowActions={items}
+        />
+      </div>
+    );
+  })
   .add("Empty Table", () => {
     return (
       <div style={{ height: "100vh" }}>
@@ -71,6 +97,7 @@ storiesOf("Table", module)
           sortDirection={"DESC"}
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
+          rowActions={items}
         />
       </div>
     );
@@ -94,6 +121,7 @@ storiesOf("Table", module)
               sortBy={"first_name"}
               sortDirection={"ASC"}
               onSort={action("Sort Clicked")}
+              rowActions={items}
             />
           </div>
         </ThemeProvider>

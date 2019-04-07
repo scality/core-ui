@@ -13,9 +13,13 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 require("react-virtualized/styles.css");
 
+var _color = _interopRequireDefault(require("color"));
+
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
+
+var _Dropdown = _interopRequireDefault(require("../dropdown/Dropdown.component"));
 
 var _reactVirtualized = require("react-virtualized");
 
@@ -41,8 +45,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _templateObject6() {
+function _templateObject8() {
   var data = _taggedTemplateLiteral(["\n          color: ", ";\n        "]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n          color: ", ";\n        "]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  padding-left: ", ";\n\n  .fa-sort-up {\n    position: absolute;\n    color: ", ";\n    ", "\n  }\n\n  .fa-sort-down {\n    color: ", ";\n    ", "\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -52,7 +76,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n          color: ", ";\n        "]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -62,7 +86,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  padding-left: 10px;\n\n  .fa-sort-up {\n    position: absolute;\n    color: ", ";\n    ", "\n  }\n\n  .fa-sort-down {\n    color: ", ";\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -72,7 +96,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  .sc-dropdown .trigger {\n    background-color: transparent;\n    color: ", ";\n    padding: ", " ", ";\n    &:hover {\n      color: ", ";\n    }\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -92,7 +116,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  .ReactVirtualized__Table__Grid {\n    &:focus {\n      outline: none;\n    }\n    .sc-table-noRows {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100%;\n      font-size: ", ";\n    }\n  }\n  .ReactVirtualized__Table__headerRow {\n    border-bottom: 2px solid ", ";\n    background-color: ", ";\n    ", "\n\n    .sc-table-header {\n      &:focus {\n        outline: none;\n      }\n      display: inline-flex;\n      font-size: ", ";\n      font-weight: ", ";\n      padding: ", ";\n    }\n  }\n\n  .ReactVirtualized__Table__row {\n    display: flex;\n    align-items: center;\n    border-bottom: 1px solid ", ";\n\n    &:hover,\n    &:focus {\n      background-color: ", ";\n      outline: none;\n      border-bottom: 1px solid transparent;\n      cursor: pointer;\n    }\n  }\n\n  .sc-table-column {\n    padding: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  .ReactVirtualized__Table__Grid {\n    &:focus {\n      outline: none;\n    }\n    .sc-table-noRows {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100%;\n      font-size: ", ";\n    }\n  }\n  .ReactVirtualized__Table__headerRow {\n    border-bottom: 2px solid ", ";\n    background-color: ", ";\n    ", "\n\n    .sc-table-header {\n      &:focus {\n        outline: none;\n      }\n      display: inline-flex;\n      font-size: ", ";\n      font-weight: ", ";\n      padding: ", ";\n    }\n  }\n\n  .ReactVirtualized__Table__row {\n    display: flex;\n    align-items: center;\n    border-bottom: 1px solid ", ";\n    overflow: visible !important;\n\n    &:hover,\n    &:focus {\n      background-color: ", ";\n      outline: none;\n      border-bottom: 1px solid transparent;\n      cursor: pointer;\n    }\n  }\n\n  .sc-table-column {\n    padding: ", ";\n    overflow: visible !important;\n    margin: 0;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -108,19 +132,27 @@ var TableContainer = _styledComponents.default.div(_templateObject(), defaultThe
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary);
 }, defaultTheme.fontSize.large, defaultTheme.fontWeight.semibold, defaultTheme.padding.small, defaultTheme.gray, defaultTheme.grayLightest, defaultTheme.padding.small);
 
-var HeaderContainer = _styledComponents.default.div(_templateObject3());
+var CellContainer = _styledComponents.default.div(_templateObject3(), function (props) {
+  return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
+}, defaultTheme.padding.smaller, defaultTheme.padding.small, function (props) {
+  return (0, _color.default)((0, _utils.mergeTheme)(props.theme, defaultTheme).primary).lighten(0.3).hsl().string();
+});
 
-var HeaderSortIcon = _styledComponents.default.div(_templateObject4(), defaultTheme.gray, function (props) {
+var CellContent = _styledComponents.default.span(_templateObject4());
+
+var HeaderContainer = _styledComponents.default.div(_templateObject5());
+
+var HeaderSortIcon = _styledComponents.default.div(_templateObject6(), defaultTheme.padding.small, defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.selected && props.sortDirection === "ASC") {
-    return (0, _styledComponents.css)(_templateObject5(), brandingTheme.primary);
+    return (0, _styledComponents.css)(_templateObject7(), brandingTheme.primary);
   }
 }, defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.selected && props.sortDirection === "DESC") {
-    return (0, _styledComponents.css)(_templateObject6(), brandingTheme.primary);
+    return (0, _styledComponents.css)(_templateObject8(), brandingTheme.primary);
   }
 });
 
@@ -180,7 +212,8 @@ function (_React$Component) {
           onSort = _this$props.onSort,
           sortBy = _this$props.sortBy,
           sortDirection = _this$props.sortDirection,
-          list = _this$props.list;
+          list = _this$props.list,
+          rowActions = _this$props.rowActions;
 
       var rowGetter = function rowGetter(_ref2) {
         var index = _ref2.index;
@@ -218,8 +251,17 @@ function (_React$Component) {
             dataKey: column.dataKey,
             className: "sc-table-column",
             cellRenderer: function cellRenderer(_ref4) {
-              var cellData = _ref4.cellData;
-              return column.renderer ? column.renderer(cellData) : cellData;
+              var cellData = _ref4.cellData,
+                  columnIndex = _ref4.columnIndex;
+              return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
+                title: cellData
+              }, column.renderer ? column.renderer(cellData) : cellData), rowActions && rowActions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
+                icon: _react.default.createElement("i", {
+                  className: "fas fa-ellipsis-v"
+                }),
+                items: rowActions,
+                caret: false
+              }));
             },
             flexGrow: 1,
             headerRenderer: _this2._headerRenderer
