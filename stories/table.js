@@ -6,7 +6,7 @@ import Table from "../src/lib/components/table/Table.component";
 import { jade } from "../src/lib/style/theme";
 import { list } from "./data/list";
 
-const items = [
+const actions = [
   { label: "Edit", onClick: action("Edit clicked") },
   {
     label: "Remove",
@@ -14,6 +14,12 @@ const items = [
   }
 ];
 
+const listWithActions = list.map(item => {
+  return {
+    ...item,
+    actions
+  };
+});
 const columns = [
   {
     label: "Id",
@@ -70,7 +76,7 @@ storiesOf("Table", module)
     return (
       <div style={{ height: "100vh" }}>
         <Table
-          list={list}
+          list={listWithActions}
           columns={columns}
           disableHeader={false}
           headerHeight={40}
@@ -79,7 +85,6 @@ storiesOf("Table", module)
           sortDirection={"ASC"}
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
-          rowActions={items}
         />
       </div>
     );
@@ -97,7 +102,6 @@ storiesOf("Table", module)
           sortDirection={"DESC"}
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
-          rowActions={items}
         />
       </div>
     );
@@ -113,7 +117,7 @@ storiesOf("Table", module)
         <ThemeProvider theme={theme}>
           <div style={{ height: "100vh" }}>
             <Table
-              list={list}
+              list={listWithActions}
               columns={columns}
               disableHeader={false}
               headerHeight={40}
@@ -121,7 +125,6 @@ storiesOf("Table", module)
               sortBy={"first_name"}
               sortDirection={"ASC"}
               onSort={action("Sort Clicked")}
-              rowActions={items}
             />
           </div>
         </ThemeProvider>

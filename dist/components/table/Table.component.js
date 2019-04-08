@@ -29,6 +29,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -197,6 +201,17 @@ function (_React$Component) {
       })));
     }
   }, {
+    key: "_decorateDropdownActions",
+    value: function _decorateDropdownActions(actions, rowData) {
+      return actions.map(function (action) {
+        return _objectSpread({}, action, {
+          onClick: function onClick() {
+            return action.onClick(rowData);
+          }
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -212,8 +227,7 @@ function (_React$Component) {
           onSort = _this$props.onSort,
           sortBy = _this$props.sortBy,
           sortDirection = _this$props.sortDirection,
-          list = _this$props.list,
-          rowActions = _this$props.rowActions;
+          list = _this$props.list;
 
       var rowGetter = function rowGetter(_ref2) {
         var index = _ref2.index;
@@ -252,14 +266,15 @@ function (_React$Component) {
             className: "sc-table-column",
             cellRenderer: function cellRenderer(_ref4) {
               var cellData = _ref4.cellData,
-                  columnIndex = _ref4.columnIndex;
+                  columnIndex = _ref4.columnIndex,
+                  rowData = _ref4.rowData;
               return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
                 title: cellData
-              }, column.renderer ? column.renderer(cellData) : cellData), rowActions && rowActions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
+              }, column.renderer ? column.renderer(cellData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
                 icon: _react.default.createElement("i", {
                   className: "fas fa-ellipsis-v"
                 }),
-                items: rowActions,
+                items: _this2._decorateDropdownActions(rowData.actions, rowData),
                 caret: false
               }));
             },

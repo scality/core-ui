@@ -153,6 +153,14 @@ class Table extends React.Component {
       </HeaderContainer>
     );
   }
+  _decorateDropdownActions(actions, rowData) {
+    return actions.map(action => {
+      return {
+        ...action,
+        onClick: () => action.onClick(rowData)
+      };
+    });
+  }
 
   render() {
     const {
@@ -166,8 +174,7 @@ class Table extends React.Component {
       onSort,
       sortBy,
       sortDirection,
-      list,
-      rowActions
+      list
     } = this.props;
     const rowGetter = ({ index }) => list[index];
     return (
@@ -200,7 +207,7 @@ class Table extends React.Component {
                   label={column.label}
                   dataKey={column.dataKey}
                   className={"sc-table-column"}
-                  cellRenderer={({ cellData, columnIndex }) => {
+                  cellRenderer={({ cellData, columnIndex, rowData }) => {
                     return (
                       <CellContainer>
                         <CellContent title={cellData}>
@@ -208,12 +215,15 @@ class Table extends React.Component {
                             ? column.renderer(cellData)
                             : cellData}
                         </CellContent>
-                        {rowActions &&
-                          rowActions.length &&
+                        {rowData.actions &&
+                          rowData.actions.length &&
                           columnIndex === columns.length - 1 && (
                             <Dropdown
                               icon={<i className="fas fa-ellipsis-v" />}
-                              items={rowActions}
+                              items={this._decorateDropdownActions(
+                                rowData.actions,
+                                rowData
+                              )}
                               caret={false}
                             />
                           )}
