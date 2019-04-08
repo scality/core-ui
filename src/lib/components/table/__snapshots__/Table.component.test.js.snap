@@ -19,7 +19,7 @@ exports[`Storyshots Table Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa fmSKEG"
+      className="sc-VigVT kXKXzr"
     >
       <div
         aria-colcount={6}
@@ -57,13 +57,13 @@ exports[`Storyshots Table Default 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Id
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -92,13 +92,13 @@ exports[`Storyshots Table Default 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 First Name
               </label>
               <div
-                className="sc-htpNat fWlXkf"
+                className="sc-cSHVUG ftEIoF"
                 selected={true}
               >
                 <i
@@ -127,13 +127,13 @@ exports[`Storyshots Table Default 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Last Name
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -157,7 +157,7 @@ exports[`Storyshots Table Default 1`] = `
             }
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Email
@@ -176,7 +176,7 @@ exports[`Storyshots Table Default 1`] = `
             }
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Ip Address
@@ -200,13 +200,13 @@ exports[`Storyshots Table Default 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Age
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -265,7 +265,7 @@ exports[`Storyshots Table Empty Table 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa fmSKEG"
+      className="sc-VigVT kXKXzr"
     >
       <div
         aria-colcount={6}
@@ -303,13 +303,13 @@ exports[`Storyshots Table Empty Table 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Id
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -338,13 +338,13 @@ exports[`Storyshots Table Empty Table 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 First Name
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -373,13 +373,13 @@ exports[`Storyshots Table Empty Table 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Last Name
               </label>
               <div
-                className="sc-htpNat hZQQiA"
+                className="sc-cSHVUG dJNMPw"
                 selected={true}
               >
                 <i
@@ -403,7 +403,7 @@ exports[`Storyshots Table Empty Table 1`] = `
             }
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Email
@@ -422,7 +422,7 @@ exports[`Storyshots Table Empty Table 1`] = `
             }
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Ip Address
@@ -446,13 +446,13 @@ exports[`Storyshots Table Empty Table 1`] = `
             tabIndex={0}
           >
             <div
-              className="sc-bwzfXH jIEWCi"
+              className="sc-jzJRlG dPOBZH"
             >
               <label>
                 Age
               </label>
               <div
-                className="sc-htpNat ixsqkW"
+                className="sc-cSHVUG uMoDM"
                 selected={false}
               >
                 <i
@@ -512,7 +512,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
       }
     >
       <div
-        className="sc-bdVaJa jMkWUw"
+        className="sc-VigVT gElqhl"
       >
         <div
           aria-colcount={6}
@@ -550,13 +550,13 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               tabIndex={0}
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   Id
                 </label>
                 <div
-                  className="sc-htpNat ixsqkW"
+                  className="sc-cSHVUG uMoDM"
                   selected={false}
                 >
                   <i
@@ -585,13 +585,13 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               tabIndex={0}
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   First Name
                 </label>
                 <div
-                  className="sc-htpNat kBVugE"
+                  className="sc-cSHVUG isFwXi"
                   selected={true}
                 >
                   <i
@@ -620,13 +620,13 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               tabIndex={0}
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   Last Name
                 </label>
                 <div
-                  className="sc-htpNat ixsqkW"
+                  className="sc-cSHVUG uMoDM"
                   selected={false}
                 >
                   <i
@@ -650,7 +650,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               }
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   Email
@@ -669,7 +669,7 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               }
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   Ip Address
@@ -693,13 +693,13 @@ exports[`Storyshots Table ThemeProvider 1`] = `
               tabIndex={0}
             >
               <div
-                className="sc-bwzfXH jIEWCi"
+                className="sc-jzJRlG dPOBZH"
               >
                 <label>
                   Age
                 </label>
                 <div
-                  className="sc-htpNat ixsqkW"
+                  className="sc-cSHVUG uMoDM"
                   selected={false}
                 >
                   <i
@@ -734,6 +734,252 @@ exports[`Storyshots Table ThemeProvider 1`] = `
             tabIndex={0}
           />
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Table With rowActions 1`] = `
+<div
+  style={
+    Object {
+      "height": "100vh",
+    }
+  }
+>
+  <div
+    className="sc-table"
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
+  >
+    <div
+      className="sc-VigVT kXKXzr"
+    >
+      <div
+        aria-colcount={6}
+        aria-rowcount={100}
+        className="ReactVirtualized__Table"
+        role="grid"
+        style={Object {}}
+      >
+        <div
+          className="ReactVirtualized__Table__headerRow sc-table-row"
+          role="row"
+          style={
+            Object {
+              "height": 40,
+              "overflow": "hidden",
+              "paddingRight": 0,
+              "width": 0,
+            }
+          }
+        >
+          <div
+            aria-label="Id"
+            aria-sort="none"
+            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                Id
+              </label>
+              <div
+                className="sc-cSHVUG uMoDM"
+                selected={false}
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+                <i
+                  className="fas fa-sort-down"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            aria-label="First Name"
+            aria-sort="ascending"
+            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                First Name
+              </label>
+              <div
+                className="sc-cSHVUG ftEIoF"
+                selected={true}
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+                <i
+                  className="fas fa-sort-down"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            aria-label="Last Name"
+            aria-sort="none"
+            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                Last Name
+              </label>
+              <div
+                className="sc-cSHVUG uMoDM"
+                selected={false}
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+                <i
+                  className="fas fa-sort-down"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn sc-table-header"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                Email
+              </label>
+            </div>
+          </div>
+          <div
+            className="ReactVirtualized__Table__headerColumn sc-table-header"
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                Ip Address
+              </label>
+            </div>
+          </div>
+          <div
+            aria-label="Age"
+            aria-sort="none"
+            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
+              }
+            }
+            tabIndex={0}
+          >
+            <div
+              className="sc-jzJRlG dPOBZH"
+            >
+              <label>
+                Age
+              </label>
+              <div
+                className="sc-cSHVUG uMoDM"
+                selected={false}
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+                <i
+                  className="fas fa-sort-down"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          aria-readonly={true}
+          className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          onScroll={[Function]}
+          role="rowgroup"
+          style={
+            Object {
+              "WebkitOverflowScrolling": "touch",
+              "boxSizing": "border-box",
+              "direction": "ltr",
+              "height": -40,
+              "overflowX": "hidden",
+              "overflowY": "auto",
+              "position": "relative",
+              "width": 0,
+              "willChange": "transform",
+            }
+          }
+          tabIndex={0}
+        />
       </div>
     </div>
   </div>

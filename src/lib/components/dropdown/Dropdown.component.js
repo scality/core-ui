@@ -126,6 +126,10 @@ class Dropdown extends React.Component {
     });
   }
 
+  handleOnTriggerClick(event) {
+    event.stopPropagation();
+  }
+
   refMenuCallback = element => {
     if (element) {
       this.setState({ menuSize: element.getBoundingClientRect() });
@@ -157,7 +161,8 @@ class Dropdown extends React.Component {
           size={size}
           className="trigger"
           onBlur={() => this.handleOpenCloseDropdown()}
-          onFocus={() => this.handleOpenCloseDropdown()}
+          onFocus={event => this.handleOpenCloseDropdown(event)}
+          onClick={this.handleOnTriggerClick}
           tabIndex="0"
           title={title}
           ref={this.refTriggerCallback}

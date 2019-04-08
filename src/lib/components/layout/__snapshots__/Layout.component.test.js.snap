@@ -141,6 +141,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -166,6 +167,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -191,6 +193,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -538,6 +541,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -563,6 +567,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -588,6 +593,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           <div
             className="trigger sc-gqjmRU dTGfyA"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -950,6 +956,7 @@ exports[`Storyshots Layout ThemeProvider 1`] = `
           <div
             className="trigger sc-gqjmRU kFDemd"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -975,6 +982,7 @@ exports[`Storyshots Layout ThemeProvider 1`] = `
           <div
             className="trigger sc-gqjmRU kFDemd"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
@@ -1000,6 +1008,7 @@ exports[`Storyshots Layout ThemeProvider 1`] = `
           <div
             className="trigger sc-gqjmRU kFDemd"
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
             size="larger"
             tabIndex="0"

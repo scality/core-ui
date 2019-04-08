@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
+import Color from "color";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
-
+import Dropdown from "../dropdown/Dropdown.component";
 import {
   Column,
   Table as VirtualizedTable,
@@ -49,6 +50,7 @@ const TableContainer = styled.div`
     display: flex;
     align-items: center;
     border-bottom: 1px solid ${defaultTheme.gray};
+    overflow: visible !important;
 
     &:hover,
     &:focus {
@@ -61,7 +63,33 @@ const TableContainer = styled.div`
 
   .sc-table-column {
     padding: ${defaultTheme.padding.small};
+    overflow: visible !important;
+    margin: 0;
   }
+`;
+const CellContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .sc-dropdown .trigger {
+    background-color: transparent;
+    color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+    padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
+    &:hover {
+      color: ${props =>
+        Color(mergeTheme(props.theme, defaultTheme).primary)
+          .lighten(0.3)
+          .hsl()
+          .string()};
+    }
+  }
+`;
+
+const CellContent = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const HeaderContainer = styled.div`
@@ -70,7 +98,7 @@ const HeaderContainer = styled.div`
 
 const HeaderSortIcon = styled.div`
   position: relative;
-  padding-left: 10px;
+  padding-left: ${defaultTheme.padding.small};
 
   .fa-sort-up {
     position: absolute;
@@ -138,7 +166,8 @@ class Table extends React.Component {
       onSort,
       sortBy,
       sortDirection,
-      list
+      list,
+      rowActions
     } = this.props;
     const rowGetter = ({ index }) => list[index];
     return (
@@ -171,10 +200,25 @@ class Table extends React.Component {
                   label={column.label}
                   dataKey={column.dataKey}
                   className={"sc-table-column"}
-                  cellRenderer={({ cellData }) => {
-                    return column.renderer
-                      ? column.renderer(cellData)
-                      : cellData;
+                  cellRenderer={({ cellData, columnIndex }) => {
+                    return (
+                      <CellContainer>
+                        <CellContent title={cellData}>
+                          {column.renderer
+                            ? column.renderer(cellData)
+                            : cellData}
+                        </CellContent>
+                        {rowActions &&
+                          rowActions.length &&
+                          columnIndex === columns.length - 1 && (
+                            <Dropdown
+                              icon={<i className="fas fa-ellipsis-v" />}
+                              items={rowActions}
+                              caret={false}
+                            />
+                          )}
+                      </CellContainer>
+                    );
                   }}
                   flexGrow={1}
                   headerRenderer={this._headerRenderer}
