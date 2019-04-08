@@ -25,6 +25,11 @@ const TableContainer = styled.div`
       font-size: ${defaultTheme.fontSize.large};
     }
   }
+
+  .ReactVirtualized__Grid__innerScrollContainer {
+    overflow: visible !important;
+  }
+
   .ReactVirtualized__Table__headerRow {
     border-bottom: 2px solid ${defaultTheme.gray};
     background-color: ${defaultTheme.grayLightest};
