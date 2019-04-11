@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import {
@@ -110,100 +110,81 @@ const Caret = styled.span`
 `;
 
 const TriggerStyled = ButtonStyled.withComponent("div");
-class Dropdown extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      open: false,
-      menuSize: null,
-      triggerSize: null
-    };
-  }
 
-  handleOpenCloseDropdown() {
-    this.setState({
-      open: !this.state.open
-    });
-  }
+function Dropdown({
+  items,
+  text,
+  icon,
+  size = "base",
+  variant = "primary",
+  title,
+  caret = true
+}) {
+  const [open, setOpen] = useState(false);
+  const [menuSize, setMenuSize] = useState();
+  const [triggerSize, setTriggerSize] = useState();
 
-  handleOnTriggerClick(event) {
-    event.stopPropagation();
-  }
-
-  refMenuCallback = element => {
-    if (element) {
-      this.setState({ menuSize: element.getBoundingClientRect() });
+  const refMenuCallback = useCallback(node => {
+    if (node !== null) {
+      setMenuSize(node.getBoundingClientRect());
     }
-  };
+  }, []);
 
-  refTriggerCallback = element => {
-    if (element) {
-      this.setState({ triggerSize: element.getBoundingClientRect() });
+  const refTriggerCallback = useCallback(node => {
+    if (node !== null) {
+      setTriggerSize(node.getBoundingClientRect());
     }
-  };
+  }, []);
 
-  render() {
-    const { open, menuSize, triggerSize } = this.state;
-    const {
-      items,
-      text,
-      icon,
-      size = "base",
-      variant = "primary",
-      title,
-      caret = true
-    } = this.props;
-
-    return (
-      <DropdownStyled active={open} variant={variant} className="sc-dropdown">
-        <TriggerStyled
-          variant={variant}
-          size={size}
-          className="trigger"
-          onBlur={() => this.handleOpenCloseDropdown()}
-          onFocus={event => this.handleOpenCloseDropdown(event)}
-          onClick={this.handleOnTriggerClick}
-          tabIndex="0"
-          title={title}
-          ref={this.refTriggerCallback}
-        >
-          {icon && (
-            <ButtonIcon text={text} size={size}>
-              {icon}
-            </ButtonIcon>
-          )}
-          {text && <ButtonText>{text}</ButtonText>}
-          {caret && (
-            <Caret>
-              <i className="fas fa-caret-down" />
-            </Caret>
-          )}
-          {open && (
-            <DropdownMenuStyled
-              className="menu-item"
-              postion={"right"}
-              ref={this.refMenuCallback}
-              size={menuSize}
-              triggerSize={triggerSize}
-            >
-              {items.map(item => {
-                const { label, onClick } = item;
-                return (
-                  <DropdownMenuItemStyled
-                    key={label}
-                    onClick={onClick}
-                    variant={variant}
-                  >
-                    {label}
-                  </DropdownMenuItemStyled>
-                );
-              })}
-            </DropdownMenuStyled>
-          )}
-        </TriggerStyled>
-      </DropdownStyled>
-    );
-  }
+  return (
+    <DropdownStyled active={open} variant={variant} className="sc-dropdown">
+      <TriggerStyled
+        variant={variant}
+        size={size}
+        className="trigger"
+        onBlur={() => setOpen(!open)}
+        onFocus={() => setOpen(!open)}
+        onClick={event => event.stopPropagation()}
+        tabIndex="0"
+        title={title}
+        ref={refTriggerCallback}
+      >
+        {icon && (
+          <ButtonIcon text={text} size={size}>
+            {icon}
+          </ButtonIcon>
+        )}
+        {text && <ButtonText>{text}</ButtonText>}
+        {caret && (
+          <Caret>
+            <i className="fas fa-caret-down" />
+          </Caret>
+        )}
+        {open && (
+          <DropdownMenuStyled
+            className="menu-item"
+            postion={"right"}
+            ref={refMenuCallback}
+            size={menuSize}
+            triggerSize={triggerSize}
+          >
+            {items.map(item => {
+              const { label, onClick } = item;
+              return (
+                <DropdownMenuItemStyled
+                  key={label}
+                  onClick={onClick}
+                  variant={variant}
+                >
+                  {label}
+                </DropdownMenuItemStyled>
+              );
+            })}
+          </DropdownMenuStyled>
+        )}
+      </TriggerStyled>
+    </DropdownStyled>
+  );
 }
 
 Dropdown.propTypes = {

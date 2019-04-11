@@ -30,30 +30,30 @@ storiesOf("Dropdown", module)
       <div className="storybook-dropdown">
         <h3>Dropdown with text/icon</h3>
         <Dropdown
-          text="Charles NGUYEN"
+          text="Help"
           icon={<i className="fas fa-star" />}
           items={items}
           size="smaller"
         />
         <Dropdown
-          text="Charles NGUYEN"
+          text="Help"
           icon={<i className="fas fa-star" />}
           items={items}
           size="small"
         />
         <Dropdown
-          text="Charles NGUYEN"
+          text="Help"
           icon={<i className="fas fa-star" />}
           items={items}
         />
         <Dropdown
-          text="Charles NGUYEN"
+          text="Help"
           icon={<i className="fas fa-star" />}
           items={items}
           size="large"
         />
         <Dropdown
-          text="Charles NGUYEN"
+          text="Help"
           icon={<i className="fas fa-star" />}
           items={items}
           size="larger"
@@ -67,7 +67,7 @@ storiesOf("Dropdown", module)
         />
 
         <h3>Dropdown with text</h3>
-        <Dropdown text="Charles NGUYEN" items={items} />
+        <Dropdown text="Help" items={items} />
 
         <h3>Dropdown with variant</h3>
         <Dropdown
