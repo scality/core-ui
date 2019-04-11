@@ -5,81 +5,68 @@ exports[`Storyshots Checkbox Default 1`] = `
   <h3>
     Checkbox checked
   </h3>
-  <div
-    className="sc-checkbox sc-bdVaJa iJSPUN"
-    onClick={[Function]}
+  <label
+    checked={true}
+    className="sc-checkbox sc-bwzfXH jJrNMO"
   >
-    <div
+    <input
       checked={true}
-      className="checkbox sc-htpNat EJACu"
-    >
-      <input
-        checked={true}
-        type="checkbox"
-      />
-      <i
-        className="fas fa-check"
-      />
-    </div>
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
     <span
-      className="text sc-bwzfXH iiFAtu"
+      className="text sc-bdVaJa hAWWmg"
     >
       interested?
     </span>
-  </div>
+  </label>
   <h3>
     Checkbox unchecked
   </h3>
-  <div
-    className="sc-checkbox sc-bdVaJa iJSPUN"
-    onClick={[Function]}
+  <label
+    checked={false}
+    className="sc-checkbox sc-bwzfXH kvDNwS"
   >
-    <div
+    <input
       checked={false}
-      className="checkbox sc-htpNat hvlNrh"
-    >
-      <input
-        checked={false}
-        type="checkbox"
-      />
-      <i
-        className="fas fa-check"
-      />
-    </div>
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
     <span
-      className="text sc-bwzfXH iiFAtu"
+      className="text sc-bdVaJa hAWWmg"
     >
       interested?
     </span>
-  </div>
+  </label>
   <h3>
     Checkbox disabled
   </h3>
-  <div
-    className="sc-checkbox sc-bdVaJa fnFfKl"
+  <label
+    checked={false}
+    className="sc-checkbox sc-bwzfXH gVdLqp"
     disabled={true}
-    onClick={[Function]}
   >
-    <div
+    <input
       checked={false}
-      className="checkbox sc-htpNat EJACu"
       disabled={true}
-    >
-      <input
-        checked={false}
-        disabled={true}
-        type="checkbox"
-      />
-      <i
-        className="fas fa-check"
-      />
-    </div>
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
     <span
-      className="text sc-bwzfXH iiFAtu"
+      className="text sc-bdVaJa hAWWmg"
     >
       interested?
     </span>
-  </div>
+  </label>
 </div>
 `;
 
@@ -89,81 +76,68 @@ exports[`Storyshots Checkbox ThemeProvider 1`] = `
     <h3>
       Checkbox checked
     </h3>
-    <div
-      className="sc-checkbox sc-bdVaJa iJSPUN"
-      onClick={[Function]}
+    <label
+      checked={true}
+      className="sc-checkbox sc-bwzfXH ljPWtD"
     >
-      <div
+      <input
         checked={true}
-        className="checkbox sc-htpNat gtJWcW"
-      >
-        <input
-          checked={true}
-          type="checkbox"
-        />
-        <i
-          className="fas fa-check"
-        />
-      </div>
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
       <span
-        className="text sc-bwzfXH iiFAtu"
+        className="text sc-bdVaJa hAWWmg"
       >
         interested?
       </span>
-    </div>
+    </label>
     <h3>
       Checkbox unchecked
     </h3>
-    <div
-      className="sc-checkbox sc-bdVaJa iJSPUN"
-      onClick={[Function]}
+    <label
+      checked={false}
+      className="sc-checkbox sc-bwzfXH IQfvm"
     >
-      <div
+      <input
         checked={false}
-        className="checkbox sc-htpNat hXKlqZ"
-      >
-        <input
-          checked={false}
-          type="checkbox"
-        />
-        <i
-          className="fas fa-check"
-        />
-      </div>
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
       <span
-        className="text sc-bwzfXH iiFAtu"
+        className="text sc-bdVaJa hAWWmg"
       >
         interested?
       </span>
-    </div>
+    </label>
     <h3>
       Checkbox disabled
     </h3>
-    <div
-      className="sc-checkbox sc-bdVaJa fnFfKl"
+    <label
+      checked={false}
+      className="sc-checkbox sc-bwzfXH bWZifM"
       disabled={true}
-      onClick={[Function]}
     >
-      <div
+      <input
         checked={false}
-        className="checkbox sc-htpNat gtJWcW"
         disabled={true}
-      >
-        <input
-          checked={false}
-          disabled={true}
-          type="checkbox"
-        />
-        <i
-          className="fas fa-check"
-        />
-      </div>
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <i
+        className="fas fa-check"
+      />
       <span
-        className="text sc-bwzfXH iiFAtu"
+        className="text sc-bdVaJa hAWWmg"
       >
         interested?
       </span>
-    </div>
+    </label>
   </div>
 </div>
 `;

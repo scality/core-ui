@@ -1,49 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-class Checkbox extends Component {
-  constructor() {
-    super();
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
-
-  handleOnClick(event) {
-    if (!this.props.disabled) {
-      this.props.onChange(!this.props.checked);
-    } else {
-      event.stopPropagation();
-    }
-  }
-
-  render() {
-    return (
-      <StyledCheckboxContainer
-        onClick={this.handleOnClick}
-        className="sc-checkbox"
-        disabled={this.props.disabled}
-      >
-        <StyledCheckbox
-          className="checkbox"
-          checked={this.props.checked}
-          disabled={this.props.disabled}
-        >
-          <input
-            type="checkbox"
-            checked={this.props.checked}
-            disabled={this.props.disabled}
-          />
-          <i className="fas fa-check" />
-        </StyledCheckbox>
-        <StyledCheckboxLabel className="text">
-          {this.props.label}
-        </StyledCheckboxLabel>
-      </StyledCheckboxContainer>
-    );
-  }
+function Checkbox({ disabled, checked, label, value, onChange, ...rest }) {
+  return (
+    <StyledCheckbox
+      className="checkbox"
+      checked={checked}
+      disabled={disabled}
+      className="sc-checkbox"
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        value={value}
+        onChange={onChange}
+        {...rest}
+      />
+      <i className="fas fa-check" />
+      <StyledCheckboxLabel className="text">{label}</StyledCheckboxLabel>
+    </StyledCheckbox>
+  );
 }
 
 Checkbox.propTypes = {
@@ -55,9 +36,15 @@ Checkbox.propTypes = {
 
 export default Checkbox;
 
-const StyledCheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
+const StyledCheckboxLabel = styled.span`
+  font-size: ${defaultTheme.fontSize.large};
+  padding-left: ${defaultTheme.padding.base};
+  vertical-align: middle;
+`;
+
+const StyledCheckbox = styled.label`
+  position: relative;
+  display: inline-block;
   ${props => {
     return props.disabled
       ? css`
@@ -68,17 +55,6 @@ const StyledCheckboxContainer = styled.div`
           cursor: pointer;
         `;
   }}
-`;
-
-const StyledCheckboxLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
-`;
-
-const StyledCheckbox = styled.div`
-  position: relative;
-  width: 22px;
-  height: 22px;
-  padding-right: ${defaultTheme.padding.small};
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
