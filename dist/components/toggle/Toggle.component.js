@@ -73,15 +73,13 @@ var StyledSwitchLabel = _styledComponents.default.span(_templateObject4(), defau
 function ToggleSwitch(_ref) {
   var toggle = _ref.toggle,
       label = _ref.label,
-      _onChange = _ref.onChange;
+      onChange = _ref.onChange;
   return _react.default.createElement(ToggleContainer, null, _react.default.createElement(Switch, {
     className: "switch"
   }, _react.default.createElement("input", {
     type: "checkbox",
     checked: toggle,
-    onChange: function onChange() {
-      return _onChange(!toggle);
-    }
+    onChange: onChange
   }), _react.default.createElement("span", {
     className: "slider"
   })), _react.default.createElement(StyledSwitchLabel, {
