@@ -81,11 +81,7 @@ function ToggleSwitch({ toggle, label, onChange }) {
   return (
     <ToggleContainer>
       <Switch className="switch">
-        <input
-          type="checkbox"
-          checked={toggle}
-          onChange={() => onChange(!toggle)}
-        />
+        <input type="checkbox" checked={toggle} onChange={onChange} />
         <span className="slider" />
       </Switch>
       <StyledSwitchLabel className="text">{label}</StyledSwitchLabel>

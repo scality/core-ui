@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
@@ -57,53 +57,40 @@ const ResetIcon = styled(IconButton)`
   transition: opacity 0.5s ease-in-out;
 `;
 
-class SearchInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.reset = this.reset.bind(this);
-    this.state = { docked: true };
-    this.myInputRef = React.createRef();
-  }
+function SearchInput(props) {
+  const [docked, setDocked] = useState(true);
+  const myInputRef = useRef(null);
 
-  toggle() {
-    this.setState({ docked: !this.state.docked });
-    this.myInputRef.current.focus();
-  }
+  const toggle = () => {
+    setDocked(!docked);
+    myInputRef.current.focus();
+  };
 
-  reset() {
-    this.props.onReset();
-    this.setState({ docked: true });
-  }
+  const reset = () => {
+    props.onReset();
+    setDocked(true);
+  };
 
-  render() {
-    return (
-      <SearchInputContainer
-        className="sc-searchinput"
-        docked={this.state.docked}
-      >
-        <DebounceInput
-          minLength={1}
-          debounceTimeout={300}
-          type="text"
-          name="search"
-          placeholder={this.props.placeholder}
-          value={this.props.value}
-          onChange={event => this.props.onChange(event.target.value)}
-          inputRef={this.myInputRef}
-        />
-        <SearchIcon onClick={this.toggle} disabled={!this.state.docked}>
-          <i className="fas fa-search" />
-        </SearchIcon>
-        <ResetIcon
-          onClick={this.reset}
-          visible={this.props.value && !this.state.docked}
-        >
-          <i className="fas fa-times-circle" />
-        </ResetIcon>
-      </SearchInputContainer>
-    );
-  }
+  return (
+    <SearchInputContainer className="sc-searchinput" docked={docked}>
+      <DebounceInput
+        minLength={1}
+        debounceTimeout={300}
+        type="text"
+        name="search"
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={props.onChange}
+        inputRef={myInputRef}
+      />
+      <SearchIcon onClick={toggle} disabled={!docked}>
+        <i className="fas fa-search" />
+      </SearchIcon>
+      <ResetIcon onClick={reset} visible={props.value && !docked}>
+        <i className="fas fa-times-circle" />
+      </ResetIcon>
+    </SearchInputContainer>
+  );
 }
 
 SearchInput.propTypes = {
