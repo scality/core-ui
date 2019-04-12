@@ -101,7 +101,7 @@ function Checkbox(_ref) {
     onChange: onChange
   }, rest)), _react.default.createElement("i", {
     className: "fas fa-check"
-  }), _react.default.createElement(StyledCheckboxLabel, {
+  }), label && _react.default.createElement(StyledCheckboxLabel, {
     className: "text"
   }, label));
 }

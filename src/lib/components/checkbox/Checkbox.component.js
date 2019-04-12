@@ -22,7 +22,9 @@ function Checkbox({ disabled, checked, label, value, onChange, ...rest }) {
         {...rest}
       />
       <i className="fas fa-check" />
-      <StyledCheckboxLabel className="text">{label}</StyledCheckboxLabel>
+      {label && (
+        <StyledCheckboxLabel className="text">{label}</StyledCheckboxLabel>
+      )}
     </StyledCheckbox>
   );
 }
