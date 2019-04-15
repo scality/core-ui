@@ -37,6 +37,12 @@ module.exports = function(plop) {
         type: "add",
         path: "stories/{{lowerCase name}}.js",
         templateFile: "plop-templates/stories.hbs"
+      },
+      {
+        type: "append",
+        path: "stories/index.js",
+        template: 'import "./{{lowerCase name}}";',
+        separator: ""
       }
     ]
   });
