@@ -106,8 +106,7 @@ var Input = function Input(_ref) {
       error = _ref.error,
       value = _ref.value,
       onChange = _ref.onChange,
-      className = _ref.className,
-      rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange", "className"]);
+      rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange"]);
 
   return _react.default.createElement(InputContainer, {
     className: "sc-input",
@@ -119,17 +118,24 @@ var Input = function Input(_ref) {
     id: id,
     type: type,
     value: value,
-    onChange: onChange ? onChange : null
+    onChange: onChange
   }, rest)) : _react.default.createElement(_reactDebounceInput.DebounceInput, _extends({
     minLength: 1,
     debounceTimeout: 300,
     id: id,
     type: type,
     value: value,
-    onChange: onChange ? onChange : null
+    onChange: onChange
   }, rest)), error && _react.default.createElement(InputErrorMessage, null, error)));
 };
 
-Input.propTypes = {};
+Input.propTypes = {
+  value: _propTypes.default.string.isRequired,
+  type: _propTypes.default.string,
+  label: _propTypes.default.string,
+  error: _propTypes.default.string,
+  id: _propTypes.default.string,
+  onChange: _propTypes.default.func.isRequired
+};
 var _default = Input;
 exports.default = _default;

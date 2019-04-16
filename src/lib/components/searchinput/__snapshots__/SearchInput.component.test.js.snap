@@ -13,19 +13,27 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-bdVaJa kHAOGi"
+      className="sc-searchinput sc-bZQynM dhJuuP"
     >
-      <input
-        name="search"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Search server..."
-        type="text"
-        value=""
-      />
+      <div
+        className="sc-input sc-htpNat utwCv"
+      >
+        <div
+          className="sc-EHOje fpqoIO"
+        >
+          <input
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search server..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
       <button
-        className="sc-bwzfXH sc-htpNat kYsliv"
+        className="sc-gzVnrw sc-htoDjs fxPEWG"
         disabled={false}
         onClick={[Function]}
       >
@@ -34,7 +42,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb hPgSUf"
+        className="sc-gzVnrw sc-dnqmqq PVduJ"
         onClick={[Function]}
       >
         <i
@@ -54,18 +62,26 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-bdVaJa kHAOGi"
+      className="sc-searchinput sc-bZQynM dhJuuP"
     >
-      <input
-        name="search"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        type="text"
-        value="carlito"
-      />
+      <div
+        className="sc-input sc-htpNat utwCv"
+      >
+        <div
+          className="sc-EHOje fpqoIO"
+        >
+          <input
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            type="text"
+            value="carlito"
+          />
+        </div>
+      </div>
       <button
-        className="sc-bwzfXH sc-htpNat kYsliv"
+        className="sc-gzVnrw sc-htoDjs fxPEWG"
         disabled={false}
         onClick={[Function]}
       >
@@ -74,7 +90,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb hPgSUf"
+        className="sc-gzVnrw sc-dnqmqq PVduJ"
         onClick={[Function]}
       >
         <i
@@ -96,19 +112,27 @@ exports[`Storyshots SearchInput ThemeProvider 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-bdVaJa iNGFJv"
+      className="sc-searchinput sc-bZQynM dhJuuP"
     >
-      <input
-        name="search"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Search server..."
-        type="text"
-        value=""
-      />
+      <div
+        className="sc-input sc-htpNat fDqccW"
+      >
+        <div
+          className="sc-EHOje fpqoIO"
+        >
+          <input
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search server..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
       <button
-        className="sc-bwzfXH sc-htpNat goOiff"
+        className="sc-gzVnrw sc-htoDjs bNlhgA"
         disabled={false}
         onClick={[Function]}
       >
@@ -117,7 +141,7 @@ exports[`Storyshots SearchInput ThemeProvider 1`] = `
         />
       </button>
       <button
-        className="sc-bwzfXH sc-bxivhb iAvqzh"
+        className="sc-gzVnrw sc-dnqmqq fZvZqA"
         onClick={[Function]}
       >
         <i

@@ -13,7 +13,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _color = _interopRequireDefault(require("color"));
 
-var _reactDebounceInput = require("react-debounce-input");
+var _Input = _interopRequireDefault(require("../input/Input.component"));
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
@@ -62,7 +62,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  border: none;\n  outline: none;\n  top: 1px;\n  padding: 6px 10px 4px 10px;\n  border-radius: 5px;\n  font-size: ", ";\n  color: ", ";\n  background-color: ", ";\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  border: none;\n  outline: none;\n  top: 1px;\n  padding: 8px 12px;\n  border-radius: 5px;\n  font-size: ", ";\n  color: ", ";\n  background-color: ", ";\n  ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -72,7 +72,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  input[type=\"text\"] {\n    outline: none;\n    width: ", ";\n    box-sizing: border-box;\n    border: 1px solid ", ";\n    border-radius: 5px;\n    font-size: ", ";\n    padding: ", ";\n    transition: width 0.2s ease-in-out;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n\n  .sc-input {\n    display: block;\n    input[type=\"text\"] {\n      width: ", ";\n      box-sizing: border-box;\n      padding-right: ", ";\n      padding-left: ", ";\n      transition: width 0.2s ease-in-out;\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -84,11 +84,11 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var SearchInputContainer = _styledComponents.default.div(_templateObject(), function (props) {
-  return props.docked ? "36px" : "100%";
+  return props.docked ? "40px" : "100%";
 }, function (props) {
-  return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
-}, defaultTheme.fontSize.base, function (props) {
-  return props.docked ? "5px 10px" : "5px 34px";
+  return props.docked ? "12px" : "40px";
+}, function (props) {
+  return props.docked ? "12px" : "40px";
 });
 
 var IconButton = _styledComponents.default.button(_templateObject2(), defaultTheme.fontSize.base, function (props) {
@@ -125,7 +125,7 @@ function SearchInput(props) {
   return _react.default.createElement(SearchInputContainer, {
     className: "sc-searchinput",
     docked: docked
-  }, _react.default.createElement(_reactDebounceInput.DebounceInput, {
+  }, _react.default.createElement(_Input.default, {
     minLength: 1,
     debounceTimeout: 300,
     type: "text",
@@ -151,7 +151,7 @@ SearchInput.propTypes = {
   placeholder: _propTypes.default.string,
   value: _propTypes.default.string.isRequired,
   onChange: _propTypes.default.func.isRequired,
-  onReset: _propTypes.default.func
+  onReset: _propTypes.default.func.isRequired
 };
 var _default = SearchInput;
 exports.default = _default;

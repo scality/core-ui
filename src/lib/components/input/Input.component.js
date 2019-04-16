@@ -80,16 +80,7 @@ const InputWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Input = ({
-  type,
-  id,
-  label,
-  error,
-  value,
-  onChange,
-  className,
-  ...rest
-}) => {
+const Input = ({ type, id, label, error, value, onChange, ...rest }) => {
   return (
     <InputContainer className="sc-input" error={error}>
       {label && (
@@ -103,7 +94,7 @@ const Input = ({
             id={id}
             type={type}
             value={value}
-            onChange={onChange ? onChange : null}
+            onChange={onChange}
             {...rest}
           />
         ) : (
@@ -113,7 +104,7 @@ const Input = ({
             id={id}
             type={type}
             value={value}
-            onChange={onChange ? onChange : null}
+            onChange={onChange}
             {...rest}
           />
         )}
@@ -123,5 +114,12 @@ const Input = ({
   );
 };
 
-Input.propTypes = {};
+Input.propTypes = {
+  value: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  error: PropTypes.string,
+  id: PropTypes.string,
+  onChange: PropTypes.func.isRequired
+};
 export default Input;

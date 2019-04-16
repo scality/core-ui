@@ -2,21 +2,22 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
-import { DebounceInput } from "react-debounce-input";
+import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
 const SearchInputContainer = styled.div`
   position: relative;
-  input[type="text"] {
-    outline: none;
-    width: ${props => (props.docked ? "36px" : "100%")};
-    box-sizing: border-box;
-    border: 1px solid ${props => mergeTheme(props.theme, defaultTheme).primary};
-    border-radius: 5px;
-    font-size: ${defaultTheme.fontSize.base};
-    padding: ${props => (props.docked ? "5px 10px" : "5px 34px")};
-    transition: width 0.2s ease-in-out;
+
+  .sc-input {
+    display: block;
+    input[type="text"] {
+      width: ${props => (props.docked ? "40px" : "100%")};
+      box-sizing: border-box;
+      padding-right: ${props => (props.docked ? "12px" : "40px")};
+      padding-left: ${props => (props.docked ? "12px" : "40px")};
+      transition: width 0.2s ease-in-out;
+    }
   }
 `;
 
@@ -25,7 +26,7 @@ const IconButton = styled.button`
   border: none;
   outline: none;
   top: 1px;
-  padding: 6px 10px 4px 10px;
+  padding: 8px 12px;
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
   color: ${props => mergeTheme(props.theme, defaultTheme).primary};
@@ -73,7 +74,7 @@ function SearchInput(props) {
 
   return (
     <SearchInputContainer className="sc-searchinput" docked={docked}>
-      <DebounceInput
+      <Input
         minLength={1}
         debounceTimeout={300}
         type="text"
@@ -97,7 +98,7 @@ SearchInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  onReset: PropTypes.func
+  onReset: PropTypes.func.isRequired
 };
 
 export default SearchInput;
