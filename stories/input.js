@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import Input from "../src/lib/components/input/Input.component";
-import { jade } from "../src/lib/style/theme";
+import { jade, mediumOrange } from "../src/lib/style/theme";
 import { action } from "@storybook/addon-actions";
 
 const ExampleInput = () => {
@@ -10,7 +10,7 @@ const ExampleInput = () => {
     <div>
       <h3>Input without label</h3>
       <Input id="id1" value="value" onChange={action("onChange")} />
-      <h3>Input without label</h3>
+      <h3>Input with label</h3>
       <Input
         id="id2"
         label="label"
@@ -53,7 +53,8 @@ storiesOf("Input", module)
   .add("ThemeProvider", () => {
     const theme = {
       brand: {
-        primary: jade
+        primary: jade,
+        danger: mediumOrange
       }
     };
     return (

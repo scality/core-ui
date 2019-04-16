@@ -22,7 +22,7 @@ exports[`Storyshots Input Default 1`] = `
     </div>
   </div>
   <h3>
-    Input without label
+    Input with label
   </h3>
   <div
     className="sc-input sc-htpNat utwCv"
@@ -167,7 +167,7 @@ exports[`Storyshots Input ThemeProvider 1`] = `
       </div>
     </div>
     <h3>
-      Input without label
+      Input with label
     </h3>
     <div
       className="sc-input sc-htpNat fDqccW"
@@ -195,7 +195,7 @@ exports[`Storyshots Input ThemeProvider 1`] = `
       Input with error
     </h3>
     <div
-      className="sc-input sc-htpNat erlxOd"
+      className="sc-input sc-htpNat kYMJDK"
     >
       <label
         className="sc-input-label sc-bxivhb imEKDv"
@@ -215,7 +215,7 @@ exports[`Storyshots Input ThemeProvider 1`] = `
           value="value"
         />
         <span
-          className="sc-ifAKCX cYELHX"
+          className="sc-ifAKCX jpmSzV"
         >
           error
         </span>
@@ -255,7 +255,7 @@ exports[`Storyshots Input ThemeProvider 1`] = `
       Checkbox Input with error
     </h3>
     <div
-      className="sc-input sc-htpNat erlxOd"
+      className="sc-input sc-htpNat kYMJDK"
     >
       <label
         className="sc-input-label sc-bxivhb imEKDv"
@@ -280,7 +280,7 @@ exports[`Storyshots Input ThemeProvider 1`] = `
           />
         </label>
         <span
-          className="sc-ifAKCX cYELHX"
+          className="sc-ifAKCX jpmSzV"
         >
           error
         </span>
