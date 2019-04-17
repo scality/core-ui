@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Input Default 1`] = `
+<div>
+  <h3>
+    Input without label
+  </h3>
+  <div
+    className="sc-input sc-htpNat utwCv"
+  >
+    <div
+      className="sc-EHOje fpqoIO"
+    >
+      <input
+        id="id1"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value="value"
+      />
+    </div>
+  </div>
+  <h3>
+    Input with label
+  </h3>
+  <div
+    className="sc-input sc-htpNat utwCv"
+  >
+    <label
+      className="sc-input-label sc-bxivhb imEKDv"
+      htmlFor="id2"
+    >
+      label
+    </label>
+    <div
+      className="sc-EHOje fpqoIO"
+    >
+      <input
+        id="id2"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value="value"
+      />
+    </div>
+  </div>
+  <h3>
+    Input with error
+  </h3>
+  <div
+    className="sc-input sc-htpNat euiEjm"
+  >
+    <label
+      className="sc-input-label sc-bxivhb imEKDv"
+      htmlFor="id3"
+    >
+      label
+    </label>
+    <div
+      className="sc-EHOje fpqoIO"
+    >
+      <input
+        id="id3"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value="value"
+      />
+      <span
+        className="sc-ifAKCX cYELHX"
+      >
+        error
+      </span>
+    </div>
+  </div>
+  <h3>
+    Checkbox Input
+  </h3>
+  <div
+    className="sc-input sc-htpNat utwCv"
+  >
+    <label
+      className="sc-input-label sc-bxivhb imEKDv"
+      htmlFor="id4"
+    >
+      label
+    </label>
+    <div
+      className="sc-EHOje fpqoIO"
+    >
+      <label
+        className="sc-checkbox sc-bwzfXH kvDNwS"
+      >
+        <input
+          id="id4"
+          onChange={[Function]}
+          type="checkbox"
+          value="value"
+        />
+        <i
+          className="fas fa-check"
+        />
+      </label>
+    </div>
+  </div>
+  <h3>
+    Checkbox Input with error
+  </h3>
+  <div
+    className="sc-input sc-htpNat euiEjm"
+  >
+    <label
+      className="sc-input-label sc-bxivhb imEKDv"
+      htmlFor="id5"
+    >
+      label
+    </label>
+    <div
+      className="sc-EHOje fpqoIO"
+    >
+      <label
+        className="sc-checkbox sc-bwzfXH kvDNwS"
+      >
+        <input
+          id="id5"
+          onChange={[Function]}
+          type="checkbox"
+          value="value"
+        />
+        <i
+          className="fas fa-check"
+        />
+      </label>
+      <span
+        className="sc-ifAKCX cYELHX"
+      >
+        error
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Input ThemeProvider 1`] = `
+<div>
+  <div>
+    <h3>
+      Input without label
+    </h3>
+    <div
+      className="sc-input sc-htpNat fDqccW"
+    >
+      <div
+        className="sc-EHOje fpqoIO"
+      >
+        <input
+          id="id1"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+          value="value"
+        />
+      </div>
+    </div>
+    <h3>
+      Input with label
+    </h3>
+    <div
+      className="sc-input sc-htpNat fDqccW"
+    >
+      <label
+        className="sc-input-label sc-bxivhb imEKDv"
+        htmlFor="id2"
+      >
+        label
+      </label>
+      <div
+        className="sc-EHOje fpqoIO"
+      >
+        <input
+          id="id2"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+          value="value"
+        />
+      </div>
+    </div>
+    <h3>
+      Input with error
+    </h3>
+    <div
+      className="sc-input sc-htpNat kYMJDK"
+    >
+      <label
+        className="sc-input-label sc-bxivhb imEKDv"
+        htmlFor="id3"
+      >
+        label
+      </label>
+      <div
+        className="sc-EHOje fpqoIO"
+      >
+        <input
+          id="id3"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+          value="value"
+        />
+        <span
+          className="sc-ifAKCX jpmSzV"
+        >
+          error
+        </span>
+      </div>
+    </div>
+    <h3>
+      Checkbox Input
+    </h3>
+    <div
+      className="sc-input sc-htpNat fDqccW"
+    >
+      <label
+        className="sc-input-label sc-bxivhb imEKDv"
+        htmlFor="id4"
+      >
+        label
+      </label>
+      <div
+        className="sc-EHOje fpqoIO"
+      >
+        <label
+          className="sc-checkbox sc-bwzfXH IQfvm"
+        >
+          <input
+            id="id4"
+            onChange={[Function]}
+            type="checkbox"
+            value="value"
+          />
+          <i
+            className="fas fa-check"
+          />
+        </label>
+      </div>
+    </div>
+    <h3>
+      Checkbox Input with error
+    </h3>
+    <div
+      className="sc-input sc-htpNat kYMJDK"
+    >
+      <label
+        className="sc-input-label sc-bxivhb imEKDv"
+        htmlFor="id5"
+      >
+        label
+      </label>
+      <div
+        className="sc-EHOje fpqoIO"
+      >
+        <label
+          className="sc-checkbox sc-bwzfXH IQfvm"
+        >
+          <input
+            id="id5"
+            onChange={[Function]}
+            type="checkbox"
+            value="value"
+          />
+          <i
+            className="fas fa-check"
+          />
+        </label>
+        <span
+          className="sc-ifAKCX jpmSzV"
+        >
+          error
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

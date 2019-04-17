@@ -10,3 +10,4 @@ import "./sidebar";
 import "./steppers";
 import "./table";
 import "./toggle";
+import "./input";
