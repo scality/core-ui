@@ -79,7 +79,7 @@ const StyledSwitchLabel = styled.span`
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }) {
   return (
-    <ToggleContainer>
+    <ToggleContainer className="sc-toggle">
       <Switch>
         <input type="checkbox" checked={toggle} onChange={onChange} {...rest} />
         <span className="sc-slider" />

@@ -3,7 +3,7 @@
 exports[`Storyshots Toggle Default 1`] = `
 <div>
   <div
-    className="sc-bdVaJa gEyPxw"
+    className="sc-toggle sc-bdVaJa gEyPxw"
   >
     <label
       className="sc-bwzfXH kUCBNx"
@@ -25,7 +25,7 @@ exports[`Storyshots Toggle Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-bdVaJa gEyPxw"
+    className="sc-toggle sc-bdVaJa gEyPxw"
   >
     <label
       className="sc-bwzfXH kUCBNx"
@@ -53,7 +53,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
 <div>
   <div>
     <div
-      className="sc-bdVaJa gEyPxw"
+      className="sc-toggle sc-bdVaJa gEyPxw"
     >
       <label
         className="sc-bwzfXH jvMNrq"
@@ -74,7 +74,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
       </span>
     </div>
     <div
-      className="sc-bdVaJa gEyPxw"
+      className="sc-toggle sc-bdVaJa gEyPxw"
     >
       <label
         className="sc-bwzfXH jvMNrq"

@@ -82,7 +82,9 @@ function ToggleSwitch(_ref) {
       onChange = _ref.onChange,
       rest = _objectWithoutProperties(_ref, ["toggle", "label", "onChange"]);
 
-  return _react.default.createElement(ToggleContainer, null, _react.default.createElement(Switch, null, _react.default.createElement("input", _extends({
+  return _react.default.createElement(ToggleContainer, {
+    className: "sc-toggle"
+  }, _react.default.createElement(Switch, null, _react.default.createElement("input", _extends({
     type: "checkbox",
     checked: toggle,
     onChange: onChange
