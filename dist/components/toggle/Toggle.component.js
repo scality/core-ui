@@ -19,6 +19,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject4() {
   var data = _taggedTemplateLiteral(["\n  font-size: ", ";\n"]);
 
@@ -30,7 +36,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n      .slider {\n        position: absolute;\n        cursor: pointer;\n        top: 10px;\n        left: 0;\n        right: 0;\n        background-color: ", ";\n        transition: 0.5s;\n        height: 4px;\n        border-radius: 4px;\n\n        &:hover {\n          &:before {\n            box-shadow: 0 0 3px ", ";\n          }\n        }\n      }\n\n      .slider:before {\n        position: absolute;\n        content: \"\";\n        height: 24px;\n        width: 24px;\n        top: -10px;\n        background-color: ", ";\n        transition: 0.5s;\n        border-radius: 50%;\n      }\n\n      input:checked + .slider {\n        background-color: ", ";\n        &:hover {\n          &:before {\n            box-shadow: 0 0 3px ", ";\n          }\n        }\n      }\n\n      input:checked + .slider:before {\n        transform: translateX(26px);\n        background-color: ", ";\n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      .sc-slider {\n        position: absolute;\n        cursor: pointer;\n        top: 10px;\n        left: 0;\n        right: 0;\n        background-color: ", ";\n        transition: 0.5s;\n        height: 4px;\n        border-radius: 4px;\n\n        &:hover {\n          &:before {\n            box-shadow: 0 0 3px ", ";\n          }\n        }\n      }\n\n      .sc-slider:before {\n        position: absolute;\n        content: \"\";\n        height: 24px;\n        width: 24px;\n        top: -10px;\n        background-color: ", ";\n        transition: 0.5s;\n        border-radius: 50%;\n      }\n\n      input:checked + .sc-slider {\n        background-color: ", ";\n        &:hover {\n          &:before {\n            box-shadow: 0 0 3px ", ";\n          }\n        }\n      }\n\n      input:checked + .sc-slider:before {\n        transform: translateX(26px);\n        background-color: ", ";\n      }\n    "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -73,15 +79,15 @@ var StyledSwitchLabel = _styledComponents.default.span(_templateObject4(), defau
 function ToggleSwitch(_ref) {
   var toggle = _ref.toggle,
       label = _ref.label,
-      onChange = _ref.onChange;
-  return _react.default.createElement(ToggleContainer, null, _react.default.createElement(Switch, {
-    className: "switch"
-  }, _react.default.createElement("input", {
+      onChange = _ref.onChange,
+      rest = _objectWithoutProperties(_ref, ["toggle", "label", "onChange"]);
+
+  return _react.default.createElement(ToggleContainer, null, _react.default.createElement(Switch, null, _react.default.createElement("input", _extends({
     type: "checkbox",
     checked: toggle,
     onChange: onChange
-  }), _react.default.createElement("span", {
-    className: "slider"
+  }, rest)), _react.default.createElement("span", {
+    className: "sc-slider"
   })), _react.default.createElement(StyledSwitchLabel, {
     className: "text"
   }, label));

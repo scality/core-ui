@@ -27,7 +27,7 @@ const Switch = styled.label`
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
 
     return css`
-      .slider {
+      .sc-slider {
         position: absolute;
         cursor: pointer;
         top: 10px;
@@ -45,7 +45,7 @@ const Switch = styled.label`
         }
       }
 
-      .slider:before {
+      .sc-slider:before {
         position: absolute;
         content: "";
         height: 24px;
@@ -56,7 +56,7 @@ const Switch = styled.label`
         border-radius: 50%;
       }
 
-      input:checked + .slider {
+      input:checked + .sc-slider {
         background-color: ${brandingTheme.primary};
         &:hover {
           &:before {
@@ -65,7 +65,7 @@ const Switch = styled.label`
         }
       }
 
-      input:checked + .slider:before {
+      input:checked + .sc-slider:before {
         transform: translateX(26px);
         background-color: ${brandingTheme.primary};
       }
@@ -77,12 +77,12 @@ const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
 `;
 
-function ToggleSwitch({ toggle, label, onChange }) {
+function ToggleSwitch({ toggle, label, onChange, ...rest }) {
   return (
     <ToggleContainer>
-      <Switch className="switch">
-        <input type="checkbox" checked={toggle} onChange={onChange} />
-        <span className="slider" />
+      <Switch>
+        <input type="checkbox" checked={toggle} onChange={onChange} {...rest} />
+        <span className="sc-slider" />
       </Switch>
       <StyledSwitchLabel className="text">{label}</StyledSwitchLabel>
     </ToggleContainer>

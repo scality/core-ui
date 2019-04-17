@@ -6,15 +6,16 @@ exports[`Storyshots Toggle Default 1`] = `
     className="sc-bdVaJa gEyPxw"
   >
     <label
-      className="switch sc-bwzfXH cycMUH"
+      className="sc-bwzfXH kUCBNx"
     >
       <input
         checked={false}
+        name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="slider"
+        className="sc-slider"
       />
     </label>
     <span
@@ -27,15 +28,16 @@ exports[`Storyshots Toggle Default 1`] = `
     className="sc-bdVaJa gEyPxw"
   >
     <label
-      className="switch sc-bwzfXH cycMUH"
+      className="sc-bwzfXH kUCBNx"
     >
       <input
         checked={true}
+        name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="slider"
+        className="sc-slider"
       />
     </label>
     <span
@@ -54,7 +56,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
       className="sc-bdVaJa gEyPxw"
     >
       <label
-        className="switch sc-bwzfXH oUJpL"
+        className="sc-bwzfXH jvMNrq"
       >
         <input
           checked={false}
@@ -62,7 +64,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
           type="checkbox"
         />
         <span
-          className="slider"
+          className="sc-slider"
         />
       </label>
       <span
@@ -75,7 +77,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
       className="sc-bdVaJa gEyPxw"
     >
       <label
-        className="switch sc-bwzfXH oUJpL"
+        className="sc-bwzfXH jvMNrq"
       >
         <input
           checked={true}
@@ -83,7 +85,7 @@ exports[`Storyshots Toggle ThemeProvider 1`] = `
           type="checkbox"
         />
         <span
-          className="slider"
+          className="sc-slider"
         />
       </label>
       <span
