@@ -20,98 +20,37 @@ const user = {
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
-storiesOf("Navbar", module)
-  .add("Default", () => {
-    return (
-      <div>
-        <h3>Navbar with toggle</h3>
-        <Navbar
-          onToggleClick={action("toggle clicked")}
-          toggleVisible={true}
-          productName={"Harware UI"}
-          applications={applications}
-          help={help}
-          user={user}
-        />
-        <h3>Navbar without toggle</h3>
-        <Navbar
-          onToggleClick={action("toggle clicked")}
-          toggleVisible={false}
-          productName={"Harware UI"}
-          applications={applications}
-          help={help}
-          user={user}
-        />
-        <h3>Navbar with customized logo</h3>
-        <Navbar
-          onToggleClick={action("toggle clicked")}
-          toggleVisible={true}
-          productName={"Harware UI"}
-          applications={applications}
-          help={help}
-          user={user}
-          logo={<i className="fas fa-ring" />}
-        />
-      </div>
-    );
-  })
-  .add("ThemeProvider", () => {
-    return (
-      <div>
-        <div style={{ paddingBottom: "15px" }}>
-          <ThemeProvider
-            theme={{
-              brand: {
-                primary: hotPink
-              }
-            }}
-          >
-            <Navbar
-              onToggleClick={action("toggle clicked")}
-              toggleVisible={true}
-              productName={"Harware UI"}
-              applications={applications}
-              help={help}
-              user={user}
-            />
-          </ThemeProvider>
-        </div>
-        <div style={{ paddingBottom: "15px" }}>
-          <ThemeProvider
-            theme={{
-              brand: {
-                primary: jade
-              }
-            }}
-          >
-            <Navbar
-              onToggleClick={action("toggle clicked")}
-              toggleVisible={true}
-              productName={"Harware UI"}
-              applications={applications}
-              help={help}
-              user={user}
-            />
-          </ThemeProvider>
-        </div>
-        <div style={{ paddingBottom: "15px" }}>
-          <ThemeProvider
-            theme={{
-              brand: {
-                primary: turquoise
-              }
-            }}
-          >
-            <Navbar
-              onToggleClick={action("toggle clicked")}
-              toggleVisible={true}
-              productName={"Harware UI"}
-              applications={applications}
-              help={help}
-              user={user}
-            />
-          </ThemeProvider>
-        </div>
-      </div>
-    );
-  });
+storiesOf("Navbar", module).add("Default", () => {
+  return (
+    <div>
+      <h3>Navbar with toggle</h3>
+      <Navbar
+        onToggleClick={action("toggle clicked")}
+        toggleVisible={true}
+        productName={"Harware UI"}
+        applications={applications}
+        help={help}
+        user={user}
+      />
+      <h3>Navbar without toggle</h3>
+      <Navbar
+        onToggleClick={action("toggle clicked")}
+        toggleVisible={false}
+        productName={"Harware UI"}
+        applications={applications}
+        help={help}
+        user={user}
+      />
+      <h3>Navbar with customized logo</h3>
+      <Navbar
+        onToggleClick={action("toggle clicked")}
+        toggleVisible={true}
+        productName={"Harware UI"}
+        applications={applications}
+        help={help}
+        user={user}
+        logo={<i className="fas fa-ring" />}
+      />
+    </div>
+  );
+});

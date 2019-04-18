@@ -41,29 +41,4 @@ storiesOf("Sidebar", module)
         </div>
       </div>
     );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: hotPink
-      }
-    };
-
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <div>
-            <h3>Sidebar docked</h3>
-            <div style={{ width: "55px" }}>
-              <Sidebar actions={actions} />
-            </div>
-
-            <h3>Sidebar expanded</h3>
-            <div style={{ width: "150px" }}>
-              <Sidebar expanded actions={actions} />
-            </div>
-          </div>
-        </ThemeProvider>
-      </div>
-    );
   });

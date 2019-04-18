@@ -83,32 +83,6 @@ storiesOf("Button", module)
       </div>
     );
   })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        secondary: grayLight,
-        success: jade,
-        info: turquoise,
-        base: grayLight
-      }
-    };
-
-    return (
-      <div className="storybook-button">
-        <ThemeProvider theme={theme}>
-          <div>
-            <h3>Button With ThemeProvider</h3>
-            <Button variant="primary" text="primary" />
-            <Button variant="secondary" text="secondary" />
-            <Button variant="success" text="success" />
-            <Button variant="info" text="info" />
-            <Button variant="warning" text="warning" />
-            <Button variant="danger" text="danger" />
-          </div>
-        </ThemeProvider>
-      </div>
-    );
-  })
   .add(
     "Combinations",
     withPropsCombinations(Button, {

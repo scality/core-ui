@@ -59,29 +59,10 @@ const steps = [
   }
 ];
 
-storiesOf("Steppers", module)
-  .add("Default", () => {
-    return (
-      <div>
-        <Steppers steps={steps} activeStep={1} />
-      </div>
-    );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: hotPink
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <div>
-            <div>
-              <Steppers steps={steps} activeStep={2} />
-            </div>
-          </div>
-        </ThemeProvider>
-      </div>
-    );
-  });
+storiesOf("Steppers", module).add("Default", () => {
+  return (
+    <div>
+      <Steppers steps={steps} activeStep={1} />
+    </div>
+  );
+});

@@ -88,33 +88,4 @@ storiesOf("Layout", module)
         <Loader size="massive" />
       </Layout>
     );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade
-      }
-    };
-
-    const sidebar = {
-      expanded: false,
-      actions: sideBarActions
-    };
-
-    const navbar = {
-      onToggleClick: action("toggle clicked"),
-      toggleVisible: true,
-      productName: "Harware UI",
-      applications,
-      help,
-      user
-    };
-
-    return (
-      <ThemeProvider theme={theme}>
-        <Layout sidebar={sidebar} navbar={navbar}>
-          <Loader size="massive" />
-        </Layout>
-      </ThemeProvider>
-    );
   });

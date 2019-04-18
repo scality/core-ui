@@ -105,29 +105,4 @@ storiesOf("Table", module)
         />
       </div>
     );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <div style={{ height: "100vh" }}>
-            <Table
-              list={listWithActions}
-              columns={columns}
-              disableHeader={false}
-              headerHeight={40}
-              rowHeight={40}
-              sortBy={"first_name"}
-              sortDirection={"ASC"}
-              onSort={action("Sort Clicked")}
-            />
-          </div>
-        </ThemeProvider>
-      </div>
-    );
   });

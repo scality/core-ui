@@ -46,22 +46,6 @@ const ExampleInput = () => {
   );
 };
 
-storiesOf("Input", module)
-  .add("Default", () => {
-    return <ExampleInput />;
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade,
-        danger: mediumOrange
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <ExampleInput />
-        </ThemeProvider>
-      </div>
-    );
-  });
+storiesOf("Input", module).add("Default", () => {
+  return <ExampleInput />;
+});

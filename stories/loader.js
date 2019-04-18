@@ -8,29 +8,6 @@ import { hotPink } from "../src/lib/style/theme";
 
 storiesOf("Loader", module)
   .addDecorator(withKnobs)
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: hotPink
-      }
-    };
-
-    return (
-      <div>
-        <h3>Default</h3>
-
-        <Loader>Loading...</Loader>
-
-        <ThemeProvider theme={theme}>
-          <div>
-            <h3>Button With ThemeProvider</h3>
-
-            <Loader>Loading...</Loader>
-          </div>
-        </ThemeProvider>
-      </div>
-    );
-  })
   .add(
     "Combinations",
     withPropsCombinations(Loader, {
