@@ -13,11 +13,13 @@ storiesOf("Toggle", module)
           label="Airplane Mode"
           onChange={action("toggle clicked")}
           toggle={false}
+          name="toggle"
         />
         <Toggle
           label="Airplane Mode"
           onChange={action("toggle clicked")}
           toggle={true}
+          name="toggle"
         />
       </div>
     );
