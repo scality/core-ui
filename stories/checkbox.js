@@ -1,9 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ThemeProvider } from "styled-components";
 import Checkbox from "../src/lib/components/checkbox/Checkbox.component";
-import { jade } from "../src/lib/style/theme";
 
 storiesOf("Checkbox", module).add("Default", () => {
   return (

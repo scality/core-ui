@@ -4,8 +4,6 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import withPropsCombinations from "react-storybook-addon-props-combinations";
-import { ThemeProvider } from "styled-components";
-import { grayLight, turquoise, jade } from "../src/lib/style/theme";
 
 storiesOf("Button", module)
   .addDecorator(withKnobs)

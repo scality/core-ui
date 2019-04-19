@@ -5,9 +5,6 @@ import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 
-import { ThemeProvider } from "styled-components";
-import { jade } from "../src/lib/style/theme";
-
 const sideBarActions = [
   {
     label: "Dashboard",

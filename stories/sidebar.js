@@ -3,8 +3,6 @@ import Sidebar from "../src/lib/components/sidebar/Sidebar.component";
 import { withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
-import { hotPink } from "../src/lib/style/theme";
-import { ThemeProvider } from "styled-components";
 
 const actions = [
   {

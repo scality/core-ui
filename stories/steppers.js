@@ -1,9 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import Steppers from "../src/lib/components/steppers/Steppers.component";
 import { action } from "@storybook/addon-actions";
-import { hotPink } from "../src/lib/style/theme";
 import Button from "../src/lib/components/button/Button.component";
 
 const steps = [

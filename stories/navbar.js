@@ -2,8 +2,6 @@ import React from "react";
 import Navbar from "../src/lib/components/navbar/Navbar.component";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
-import { hotPink, turquoise, jade } from "../src/lib/style/theme";
-import { ThemeProvider } from "styled-components";
 
 const applications = [
   { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") }

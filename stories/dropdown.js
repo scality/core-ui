@@ -2,15 +2,6 @@ import React from "react";
 import Dropdown from "../src/lib/components/dropdown/Dropdown.component";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
-import {
-  hotPink,
-  yellowOrange,
-  grayLight,
-  turquoise,
-  jade,
-  mediumOrange
-} from "../src/lib/style/theme";
 
 const items = [
   { label: "About", onClick: action("About clicked") },

@@ -1,9 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import { action } from "@storybook/addon-actions";
 import Table from "../src/lib/components/table/Table.component";
-import { jade } from "../src/lib/style/theme";
 import { list } from "./data/list";
 
 const actions = [
