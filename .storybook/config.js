@@ -29,9 +29,15 @@ const themes = [
   }
 ];
 addDecorator(withThemesProvider(themes));
+addDecorator(
+  withInfo({
+    header: false,
+    inline: false,
+    maxPropArrayLength: 10
+  })
+);
 
 setAddon(withPropsCombinations);
-setAddon(withInfo);
 
 function loadStories() {
   require("../stories");
