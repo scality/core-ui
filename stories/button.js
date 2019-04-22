@@ -4,8 +4,6 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import withPropsCombinations from "react-storybook-addon-props-combinations";
-import { ThemeProvider } from "styled-components";
-import { grayLight, turquoise, jade } from "../src/lib/style/theme";
 
 storiesOf("Button", module)
   .addDecorator(withKnobs)
@@ -80,32 +78,6 @@ storiesOf("Button", module)
         <Button icon={<i className="fas fa-star" />} />
         <Button size="large" icon={<i className="fas fa-star" />} />
         <Button size="larger" icon={<i className="fas fa-star" />} />
-      </div>
-    );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        secondary: grayLight,
-        success: jade,
-        info: turquoise,
-        base: grayLight
-      }
-    };
-
-    return (
-      <div className="storybook-button">
-        <ThemeProvider theme={theme}>
-          <div>
-            <h3>Button With ThemeProvider</h3>
-            <Button variant="primary" text="primary" />
-            <Button variant="secondary" text="secondary" />
-            <Button variant="success" text="success" />
-            <Button variant="info" text="info" />
-            <Button variant="warning" text="warning" />
-            <Button variant="danger" text="danger" />
-          </div>
-        </ThemeProvider>
       </div>
     );
   })

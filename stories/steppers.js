@@ -1,9 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import Steppers from "../src/lib/components/steppers/Steppers.component";
 import { action } from "@storybook/addon-actions";
-import { hotPink } from "../src/lib/style/theme";
 import Button from "../src/lib/components/button/Button.component";
 
 const steps = [
@@ -59,29 +57,10 @@ const steps = [
   }
 ];
 
-storiesOf("Steppers", module)
-  .add("Default", () => {
-    return (
-      <div>
-        <Steppers steps={steps} activeStep={1} />
-      </div>
-    );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: hotPink
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <div>
-            <div>
-              <Steppers steps={steps} activeStep={2} />
-            </div>
-          </div>
-        </ThemeProvider>
-      </div>
-    );
-  });
+storiesOf("Steppers", module).add("Default", () => {
+  return (
+    <div>
+      <Steppers steps={steps} activeStep={1} />
+    </div>
+  );
+});

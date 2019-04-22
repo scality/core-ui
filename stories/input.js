@@ -1,8 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import Input from "../src/lib/components/input/Input.component";
-import { jade, mediumOrange } from "../src/lib/style/theme";
 import { action } from "@storybook/addon-actions";
 
 const ExampleInput = () => {
@@ -46,22 +44,6 @@ const ExampleInput = () => {
   );
 };
 
-storiesOf("Input", module)
-  .add("Default", () => {
-    return <ExampleInput />;
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade,
-        danger: mediumOrange
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <ExampleInput />
-        </ThemeProvider>
-      </div>
-    );
-  });
+storiesOf("Input", module).add("Default", () => {
+  return <ExampleInput />;
+});

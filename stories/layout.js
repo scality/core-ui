@@ -5,9 +5,6 @@ import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 
-import { ThemeProvider } from "styled-components";
-import { jade } from "../src/lib/style/theme";
-
 const sideBarActions = [
   {
     label: "Dashboard",
@@ -87,34 +84,5 @@ storiesOf("Layout", module)
       <Layout sidebar={sidebar} navbar={navbar}>
         <Loader size="massive" />
       </Layout>
-    );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade
-      }
-    };
-
-    const sidebar = {
-      expanded: false,
-      actions: sideBarActions
-    };
-
-    const navbar = {
-      onToggleClick: action("toggle clicked"),
-      toggleVisible: true,
-      productName: "Harware UI",
-      applications,
-      help,
-      user
-    };
-
-    return (
-      <ThemeProvider theme={theme}>
-        <Layout sidebar={sidebar} navbar={navbar}>
-          <Loader size="massive" />
-        </Layout>
-      </ThemeProvider>
     );
   });
