@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import Button from "../src/lib/components/button/Button.component";
 import { withKnobs } from "@storybook/addon-knobs";
@@ -11,7 +12,7 @@ storiesOf("Button", module)
     return (
       <div className="storybook-button">
         <h3>Button Default</h3>
-        <Button size="smaller" text="Smaller" />
+        <Button size={"smaller"} text="Smaller" />
         <Button size="small" text="Small" />
         <Button text="default" />
         <Button size="large" text="Large" />
