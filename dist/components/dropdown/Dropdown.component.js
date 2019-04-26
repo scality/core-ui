@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _Button = require("../button/Button.component");
@@ -228,13 +226,5 @@ function Dropdown(_ref) {
   }))));
 }
 
-Dropdown.propTypes = {
-  size: _propTypes.default.oneOf(["smaller", "small", "base", "large", "larger"]),
-  variant: _propTypes.default.oneOf(["primary", "secondary", "danger", "success", "warning", "info", "base"]),
-  icon: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.func]),
-  text: _propTypes.default.string,
-  items: _propTypes.default.array,
-  caret: _propTypes.default.bool
-};
 var _default = Dropdown;
 exports.default = _default;

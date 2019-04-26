@@ -1,5 +1,6 @@
+//@flow
 import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
+import type { Node } from "react";
 import styled, { css } from "styled-components";
 import {
   ButtonStyled,
@@ -9,6 +10,18 @@ import {
 import Color from "color";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Item = { label: string, onClick: () => void };
+type Items = Array<Item>;
+type Props = {
+  text?: string,
+  size?: string,
+  variant?: string,
+  title?: string,
+  items: Items,
+  icon?: Node,
+  caret?: boolean
+};
 
 const DropdownStyled = styled.div`
   position: relative;
@@ -119,7 +132,7 @@ function Dropdown({
   variant = "primary",
   title,
   caret = true
-}) {
+}: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
@@ -186,22 +199,5 @@ function Dropdown({
     </DropdownStyled>
   );
 }
-
-Dropdown.propTypes = {
-  size: PropTypes.oneOf(["smaller", "small", "base", "large", "larger"]),
-  variant: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "danger",
-    "success",
-    "warning",
-    "info",
-    "base"
-  ]),
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  text: PropTypes.string,
-  items: PropTypes.array,
-  caret: PropTypes.bool
-};
 
 export default Dropdown;
