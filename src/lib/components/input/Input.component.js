@@ -1,10 +1,21 @@
+//@flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import Checkbox from "../checkbox/Checkbox.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Props = {
+  value: string,
+  type?: string,
+  label?: string,
+  title?: string,
+  error?: string,
+  id?: string,
+  checked?: boolean,
+  onChange: () => void
+};
 
 const InputContainer = styled.div`
   display: inline-flex;
@@ -80,7 +91,16 @@ const InputWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Input = ({ type, id, label, error, value, onChange, ...rest }) => {
+const Input = ({
+  type,
+  id,
+  label,
+  error,
+  value,
+  onChange,
+  checked,
+  ...rest
+}: Props) => {
   return (
     <InputContainer className="sc-input" error={error}>
       {label && (
@@ -94,6 +114,7 @@ const Input = ({ type, id, label, error, value, onChange, ...rest }) => {
             id={id}
             type={type}
             value={value}
+            checked={!!checked}
             onChange={onChange}
             {...rest}
           />
@@ -114,12 +135,4 @@ const Input = ({ type, id, label, error, value, onChange, ...rest }) => {
   );
 };
 
-Input.propTypes = {
-  value: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  label: PropTypes.string,
-  error: PropTypes.string,
-  id: PropTypes.string,
-  onChange: PropTypes.func.isRequired
-};
 export default Input;

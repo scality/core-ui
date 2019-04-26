@@ -7,7 +7,7 @@ import { mergeTheme } from "../../utils";
 
 type Props = {
   label?: string,
-  value?: boolean,
+  value?: string,
   checked: boolean,
   disabled?: boolean,
   onChange: () => void
