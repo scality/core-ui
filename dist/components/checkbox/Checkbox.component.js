@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _color = _interopRequireDefault(require("color"));
@@ -106,12 +104,6 @@ function Checkbox(_ref) {
   }, label));
 }
 
-Checkbox.propTypes = {
-  checked: _propTypes.default.bool,
-  disabled: _propTypes.default.bool,
-  onChange: _propTypes.default.func,
-  label: _propTypes.default.string
-};
 var _default = Checkbox;
 exports.default = _default;
 

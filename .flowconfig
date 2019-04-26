@@ -9,6 +9,7 @@ unclear-type=warn
 sketchy-null=off
 unsafe-getters-setters=warn
 dynamic-export=off
+inexact-spread =off
 
 [options]
 include_warnings=false
