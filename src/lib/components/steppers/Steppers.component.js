@@ -1,8 +1,22 @@
+//@flow
 import React from "react";
 import styled, { css } from "styled-components";
+import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+type StepProps = {
+  title: string,
+  content: Node,
+  active?: boolean,
+  completed?: boolean,
+  isLast?: boolean,
+  index?: number
+};
 
+type Props = {
+  steps: Array<StepProps>,
+  activeStep: number
+};
 const SteppersContainer = styled.div``;
 
 const StepContainer = styled.div`
@@ -69,7 +83,7 @@ const BottomBar = styled.hr`
   }};
 `;
 
-function Step(props) {
+function Step(props: StepProps) {
   const { title, content, active, completed, isLast, index } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
@@ -90,7 +104,7 @@ function Step(props) {
   );
 }
 
-function Steppers(props) {
+function Steppers(props: Props) {
   const { steps, activeStep } = props;
   return (
     <SteppersContainer className="sc-steppers">
@@ -100,6 +114,7 @@ function Steppers(props) {
           title={step.title}
           content={step.content}
           active={index === activeStep}
+          //$FlowFixMe
           completed={index < activeStep}
           isLast={index === steps.length - 1}
           index={index}
