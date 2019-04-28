@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _constants = require("../constants");
@@ -87,8 +85,5 @@ function Loader(_ref) {
   }, _react.default.createElement(LoaderTextDiv, null, _react.default.createElement(_scalityLoading.default, null), _react.default.createElement(LoaderText, null, " ", children)));
 }
 
-Loader.propTypes = {
-  size: _propTypes.default.oneOf(Object.values(_constants.LOADER_SIZE))
-};
 var _default = Loader;
 exports.default = _default;

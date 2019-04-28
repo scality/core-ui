@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _branding = _interopRequireDefault(require("../../icons/branding"));
@@ -148,13 +146,5 @@ function NavBar(_ref) {
   }))));
 }
 
-NavBar.propTypes = {
-  onToggleClick: _propTypes.default.func,
-  toggleVisible: _propTypes.default.bool,
-  productName: _propTypes.default.string,
-  applications: _propTypes.default.array,
-  help: _propTypes.default.array,
-  user: _propTypes.default.object
-};
 var _default = NavBar;
 exports.default = _default;

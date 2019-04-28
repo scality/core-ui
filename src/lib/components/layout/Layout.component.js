@@ -1,8 +1,18 @@
+//@flow
 import React from "react";
 import styled from "styled-components";
+import type { Node } from "react";
 import { navbarHeight } from "../../style/theme";
 import Navbar from "../navbar/Navbar.component";
+import type { Props as NavbarProps } from "../navbar/Navbar.component";
+import type { Props as SidebarProps } from "../sidebar/Sidebar.component";
 import Sidebar from "../sidebar/Sidebar.component";
+
+type Props = {
+  navbar: NavbarProps,
+  sidebar: SidebarProps,
+  children: Node
+};
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -21,7 +31,7 @@ const MainContent = styled.div`
   flex-grow: 1;
 `;
 
-function Layout({ children, sidebar, navbar }) {
+function Layout({ children, sidebar, navbar }: Props) {
   return (
     <LayoutContainer className="sc-layout">
       <Navbar {...navbar} />

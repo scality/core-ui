@@ -1,11 +1,18 @@
+//@flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+import type { Node } from "react";
 
 import { LOADER_SIZE as SIZE } from "../constants";
 import LoaderIcon from "../../icons/scality-loading";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Props = {
+  size?: string,
+  color?: string,
+  children?: Node
+};
 
 const LoaderContainer = styled.div`
   display: flex;
@@ -33,7 +40,11 @@ const LoaderTextDiv = styled.span`
   align-items: center;
 `;
 
-function Loader({ children, color = defaultTheme.gray, size = SIZE.large }) {
+function Loader({
+  children,
+  color = defaultTheme.gray,
+  size = SIZE.large
+}: Props) {
   return (
     <LoaderContainer size={size} color={color} className="sc-loader">
       <LoaderTextDiv>
@@ -43,9 +54,5 @@ function Loader({ children, color = defaultTheme.gray, size = SIZE.large }) {
     </LoaderContainer>
   );
 }
-
-Loader.propTypes = {
-  size: PropTypes.oneOf(Object.values(SIZE))
-};
 
 export default Loader;

@@ -153,9 +153,5 @@ function Sidebar(_ref) {
   }));
 }
 
-Sidebar.propTypes = {
-  expanded: _propTypes.default.bool,
-  actions: _propTypes.default.array
-};
 var _default = Sidebar;
 exports.default = _default;

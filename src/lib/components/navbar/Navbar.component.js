@@ -1,11 +1,28 @@
+//@flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+import type { Node } from "react";
 import Logo from "../../icons/branding";
 import Dropdown from "../dropdown/Dropdown.component";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Item = { label: string, onClick: () => void };
+type Items = Array<Item>;
+type User = {
+  name: string,
+  actions: Items
+};
+export type Props = {
+  onToggleClick?: () => void,
+  toggleVisible?: boolean,
+  productName?: string,
+  applications?: Items,
+  help?: Items,
+  user?: User,
+  logo?: Node
+};
 
 const NavbarContainer = styled.div`
   height: ${defaultTheme.navbarHeight};
@@ -70,7 +87,7 @@ function NavBar({
   help,
   user,
   logo
-}) {
+}: Props) {
   return (
     <NavbarContainer className="sc-navbar">
       <NavbarMenu>
@@ -131,14 +148,5 @@ function NavBar({
     </NavbarContainer>
   );
 }
-
-NavBar.propTypes = {
-  onToggleClick: PropTypes.func,
-  toggleVisible: PropTypes.bool,
-  productName: PropTypes.string,
-  applications: PropTypes.array,
-  help: PropTypes.array,
-  user: PropTypes.object
-};
 
 export default NavBar;

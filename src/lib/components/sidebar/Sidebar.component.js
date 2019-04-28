@@ -1,10 +1,23 @@
+//@flow
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
-
+import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Item = {
+  label: string,
+  onClick: () => void,
+  active?: boolean,
+  icon?: Node
+};
+type Items = Array<Item>;
+export type Props = {
+  expanded?: boolean,
+  actions: Items
+};
 
 const SidebarContainer = styled.div`
   ${props => {
@@ -78,7 +91,7 @@ const MenuItemIcon = styled.div`
   align-items: end;
 `;
 
-function Sidebar({ expanded, actions }) {
+function Sidebar({ expanded, actions }: Props) {
   return (
     <SidebarContainer expanded={expanded} className="sc-sidebar">
       {actions.map((action, index) => {
@@ -99,10 +112,5 @@ function Sidebar({ expanded, actions }) {
     </SidebarContainer>
   );
 }
-
-Sidebar.propTypes = {
-  expanded: PropTypes.bool,
-  actions: PropTypes.array
-};
 
 export default Sidebar;
