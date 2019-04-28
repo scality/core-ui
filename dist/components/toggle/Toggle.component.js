@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
@@ -95,10 +93,5 @@ function ToggleSwitch(_ref) {
   }, label));
 }
 
-ToggleSwitch.propTypes = {
-  toggle: _propTypes.default.bool,
-  onChange: _propTypes.default.func,
-  label: _propTypes.default.string
-};
 var _default = ToggleSwitch;
 exports.default = _default;

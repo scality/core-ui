@@ -114,7 +114,6 @@ function Steppers(props: Props) {
           title={step.title}
           content={step.content}
           active={index === activeStep}
-          //$FlowFixMe
           completed={index < activeStep}
           isLast={index === steps.length - 1}
           index={index}

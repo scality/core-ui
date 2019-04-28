@@ -201,8 +201,7 @@ function Steppers(props) {
       key: index,
       title: step.title,
       content: step.content,
-      active: index === activeStep //$FlowFixMe
-      ,
+      active: index === activeStep,
       completed: index < activeStep,
       isLast: index === steps.length - 1,
       index: index

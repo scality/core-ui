@@ -1,5 +1,5 @@
+//@flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
 import Color from "color";
@@ -11,6 +11,33 @@ import {
   Table as VirtualizedTable,
   AutoSizer
 } from "react-virtualized";
+
+type Item = {
+  label: string,
+  onClick: () => void
+};
+
+export type Props = {
+  list: Array<any>,
+  columns: Array<any>,
+  disableHeader: boolean,
+  headerHeight: number,
+  onHeaderClick: () => void,
+  onRowClick: () => void,
+  overscanRowCount: number,
+  rowHeight: number,
+  onSort: () => void,
+  sortBy: string,
+  sortDirection: string
+};
+
+type HeaderProps = {
+  dataKey: string,
+  label: string,
+  sortBy: string,
+  sortDirection: string,
+  disableSort: boolean
+};
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
@@ -131,18 +158,25 @@ const HeaderSortIcon = styled.div`
   }
 `;
 
-class Table extends React.Component {
-  constructor(props) {
+class Table extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this._noRowsRenderer = this._noRowsRenderer.bind(this);
     this._headerRenderer = this._headerRenderer.bind(this);
   }
-
+  _noRowsRenderer: () => void;
   _noRowsRenderer() {
     return <div className={"sc-table-noRows"}>No rows</div>;
   }
 
-  _headerRenderer({ dataKey, label, sortBy, sortDirection, disableSort }) {
+  _headerRenderer: () => void;
+  _headerRenderer({
+    dataKey,
+    label,
+    sortBy,
+    sortDirection,
+    disableSort
+  }: HeaderProps) {
     return (
       <HeaderContainer>
         <label>{label}</label>
@@ -158,6 +192,7 @@ class Table extends React.Component {
       </HeaderContainer>
     );
   }
+  //$FlowFixMe
   _decorateDropdownActions(actions, rowData) {
     return actions.map(action => {
       return {
@@ -246,19 +281,5 @@ class Table extends React.Component {
     );
   }
 }
-
-Table.propTypes = {
-  list: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired,
-  disableHeader: PropTypes.bool,
-  headerHeight: PropTypes.number,
-  onHeaderClick: PropTypes.func,
-  onRowClick: PropTypes.func,
-  overscanRowCount: PropTypes.number,
-  rowHeight: PropTypes.number,
-  onSort: PropTypes.func,
-  sortBy: PropTypes.string,
-  sortDirection: PropTypes.string
-};
 
 export default Table;
