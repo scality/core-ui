@@ -158,25 +158,30 @@ const HeaderSortIcon = styled.div`
   }
 `;
 
-class Table extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-    this._noRowsRenderer = this._noRowsRenderer.bind(this);
-    this._headerRenderer = this._headerRenderer.bind(this);
-  }
-  _noRowsRenderer: () => void;
-  _noRowsRenderer() {
+function Table({
+  columns,
+  disableHeader,
+  headerHeight,
+  onHeaderClick,
+  onRowClick,
+  overscanRowCount,
+  rowHeight,
+  onSort,
+  sortBy,
+  sortDirection,
+  list
+}: Props) {
+  const _noRowsRenderer = () => {
     return <div className={"sc-table-noRows"}>No rows</div>;
-  }
+  };
 
-  _headerRenderer: () => void;
-  _headerRenderer({
+  const _headerRenderer = ({
     dataKey,
     label,
     sortBy,
     sortDirection,
     disableSort
-  }: HeaderProps) {
+  }: HeaderProps) => {
     return (
       <HeaderContainer>
         <label>{label}</label>
@@ -191,95 +196,77 @@ class Table extends React.Component<Props> {
         )}
       </HeaderContainer>
     );
-  }
-  //$FlowFixMe
-  _decorateDropdownActions(actions, rowData) {
+  };
+  const _decorateDropdownActions = (actions, rowData) => {
     return actions.map(action => {
       return {
         ...action,
         onClick: () => action.onClick(rowData)
       };
     });
-  }
+  };
 
-  render() {
-    const {
-      columns,
-      disableHeader,
-      headerHeight,
-      onHeaderClick,
-      onRowClick,
-      overscanRowCount,
-      rowHeight,
-      onSort,
-      sortBy,
-      sortDirection,
-      list
-    } = this.props;
-    const rowGetter = ({ index }) => list[index];
-    return (
-      <AutoSizer className="sc-table">
-        {({ height, width }) => (
-          <TableContainer>
-            <VirtualizedTable
-              disableHeader={disableHeader}
-              headerClassName={"sc-table-header"}
-              headerHeight={headerHeight}
-              height={height}
-              onHeaderClick={onHeaderClick}
-              onRowClick={onRowClick}
-              overscanRowCount={overscanRowCount || 5}
-              noRowsRenderer={this._noRowsRenderer}
-              rowClassName={"sc-table-row"}
-              rowHeight={rowHeight}
-              rowGetter={rowGetter}
-              rowCount={list.length}
-              sort={onSort}
-              sortBy={sortBy}
-              sortDirection={sortDirection}
-              width={width}
-            >
-              {columns.map(column => (
-                <Column
-                  key={column.dataKey}
-                  width={200}
-                  disableSort={column.disableSort}
-                  label={column.label}
-                  dataKey={column.dataKey}
-                  className={"sc-table-column"}
-                  cellRenderer={({ cellData, columnIndex, rowData }) => {
-                    return (
-                      <CellContainer>
-                        <CellContent title={cellData}>
-                          {column.renderer
-                            ? column.renderer(cellData)
-                            : cellData}
-                        </CellContent>
-                        {rowData.actions &&
-                          rowData.actions.length &&
-                          columnIndex === columns.length - 1 && (
-                            <Dropdown
-                              icon={<i className="fas fa-ellipsis-v" />}
-                              items={this._decorateDropdownActions(
-                                rowData.actions,
-                                rowData
-                              )}
-                              caret={false}
-                            />
-                          )}
-                      </CellContainer>
-                    );
-                  }}
-                  flexGrow={1}
-                  headerRenderer={this._headerRenderer}
-                />
-              ))}
-            </VirtualizedTable>
-          </TableContainer>
-        )}
-      </AutoSizer>
-    );
-  }
+  const rowGetter = ({ index }) => list[index];
+  return (
+    <AutoSizer className="sc-table">
+      {({ height, width }) => (
+        <TableContainer>
+          <VirtualizedTable
+            disableHeader={disableHeader}
+            headerClassName={"sc-table-header"}
+            headerHeight={headerHeight}
+            height={height}
+            onHeaderClick={onHeaderClick}
+            onRowClick={onRowClick}
+            overscanRowCount={overscanRowCount || 5}
+            noRowsRenderer={_noRowsRenderer}
+            rowClassName={"sc-table-row"}
+            rowHeight={rowHeight}
+            rowGetter={rowGetter}
+            rowCount={list.length}
+            sort={onSort}
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            width={width}
+          >
+            {columns.map(column => (
+              <Column
+                key={column.dataKey}
+                width={200}
+                disableSort={column.disableSort}
+                label={column.label}
+                dataKey={column.dataKey}
+                className={"sc-table-column"}
+                cellRenderer={({ cellData, columnIndex, rowData }) => {
+                  return (
+                    <CellContainer>
+                      <CellContent title={cellData}>
+                        {column.renderer ? column.renderer(cellData) : cellData}
+                      </CellContent>
+                      {rowData.actions &&
+                        rowData.actions.length &&
+                        columnIndex === columns.length - 1 && (
+                          <Dropdown
+                            icon={<i className="fas fa-ellipsis-v" />}
+                            items={_decorateDropdownActions(
+                              rowData.actions,
+                              rowData
+                            )}
+                            caret={false}
+                          />
+                        )}
+                    </CellContainer>
+                  );
+                }}
+                flexGrow={1}
+                headerRenderer={_headerRenderer}
+              />
+            ))}
+          </VirtualizedTable>
+        </TableContainer>
+      )}
+    </AutoSizer>
+  );
 }
 
 export default Table;
