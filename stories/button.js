@@ -12,7 +12,7 @@ storiesOf("Button", module)
     return (
       <div className="storybook-button">
         <h3>Button Default</h3>
-        <Button size={"smaller"} text="Smaller" />
+        <Button size="smaller" text="Smaller" />
         <Button size="small" text="Small" />
         <Button text="default" />
         <Button size="large" text="Large" />
