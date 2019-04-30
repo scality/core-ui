@@ -92,9 +92,11 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-EHOje fpqoIO"
     >
       <label
+        checked={false}
         className="sc-checkbox sc-bwzfXH kvDNwS"
       >
         <input
+          checked={false}
           id="id4"
           onChange={[Function]}
           type="checkbox"
@@ -122,9 +124,11 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-EHOje fpqoIO"
     >
       <label
+        checked={false}
         className="sc-checkbox sc-bwzfXH kvDNwS"
       >
         <input
+          checked={false}
           id="id5"
           onChange={[Function]}
           type="checkbox"

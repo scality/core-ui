@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _color = _interopRequireDefault(require("color"));
@@ -113,7 +111,8 @@ function SearchInput(props) {
   var myInputRef = (0, _react.useRef)(null);
 
   var toggle = function toggle() {
-    setDocked(!docked);
+    setDocked(!docked); //$FlowFixMe
+
     myInputRef.current.focus();
   };
 
@@ -147,11 +146,5 @@ function SearchInput(props) {
   })));
 }
 
-SearchInput.propTypes = {
-  placeholder: _propTypes.default.string,
-  value: _propTypes.default.string.isRequired,
-  onChange: _propTypes.default.func.isRequired,
-  onReset: _propTypes.default.func.isRequired
-};
 var _default = SearchInput;
 exports.default = _default;

@@ -1,10 +1,17 @@
+//@flow
 import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
 import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
+type Props = {
+  placeholder?: string,
+  value: string,
+  onChange: () => void,
+  onReset: () => void
+};
 
 const SearchInputContainer = styled.div`
   position: relative;
@@ -58,12 +65,13 @@ const ResetIcon = styled(IconButton)`
   transition: opacity 0.5s ease-in-out;
 `;
 
-function SearchInput(props) {
+function SearchInput(props: Props) {
   const [docked, setDocked] = useState(true);
   const myInputRef = useRef(null);
 
   const toggle = () => {
     setDocked(!docked);
+    //$FlowFixMe
     myInputRef.current.focus();
   };
 
@@ -93,12 +101,5 @@ function SearchInput(props) {
     </SearchInputContainer>
   );
 }
-
-SearchInput.propTypes = {
-  placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired
-};
 
 export default SearchInput;

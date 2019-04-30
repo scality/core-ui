@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import Sidebar from "../src/lib/components/sidebar/Sidebar.component";
 import { withKnobs } from "@storybook/addon-knobs";

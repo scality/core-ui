@@ -1,9 +1,14 @@
+//@flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
+type Props = {
+  toggle: boolean,
+  onChange: () => void,
+  label: string
+};
 const ToggleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -77,7 +82,7 @@ const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
 `;
 
-function ToggleSwitch({ toggle, label, onChange, ...rest }) {
+function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
   return (
     <ToggleContainer className="sc-toggle">
       <Switch>
@@ -88,11 +93,5 @@ function ToggleSwitch({ toggle, label, onChange, ...rest }) {
     </ToggleContainer>
   );
 }
-
-ToggleSwitch.propTypes = {
-  toggle: PropTypes.bool,
-  onChange: PropTypes.func,
-  label: PropTypes.string
-};
 
 export default ToggleSwitch;

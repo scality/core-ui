@@ -1,30 +1,25 @@
+// @flow
 import React from "react";
-import PropTypes from "prop-types";
+import type { Node } from "react";
 import styled, { css } from "styled-components";
 import Color from "color";
 import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
+import type { LoaderSize } from "../constants";
 
-const propTypes = {
-  size: PropTypes.oneOf(["smaller", "small", "base", "large", "larger"]),
-  variant: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "danger",
-    "success",
-    "warning",
-    "info",
-    "base"
-  ]),
-  outlined: PropTypes.bool,
-  disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  href: PropTypes.string,
-  text: PropTypes.string,
-  title: PropTypes.string,
-  type: PropTypes.string,
-  isLoading: PropTypes.bool
+type Props = {
+  text: string,
+  size?: LoaderSize,
+  variant?: string,
+  outlined?: boolean,
+  disabled?: boolean,
+  icon?: Node,
+  href?: string,
+  title?: string,
+  type?: string,
+  isLoading?: boolean,
+  onClick?: () => void
 };
 
 const defaultProps = {
@@ -237,7 +232,7 @@ function Button({
   title,
   isLoading,
   type
-}) {
+}: Props) {
   return href && href.length ? (
     <Anchor
       className="sc-button"
@@ -282,7 +277,6 @@ function Button({
   );
 }
 
-Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
 export default Button;

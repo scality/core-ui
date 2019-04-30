@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import Loader from "../src/lib/components/loader/Loader.component";
 import withPropsCombinations from "react-storybook-addon-props-combinations";

@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _reactDebounceInput = require("react-debounce-input");
@@ -106,7 +104,8 @@ var Input = function Input(_ref) {
       error = _ref.error,
       value = _ref.value,
       onChange = _ref.onChange,
-      rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange"]);
+      checked = _ref.checked,
+      rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange", "checked"]);
 
   return _react.default.createElement(InputContainer, {
     className: "sc-input",
@@ -118,6 +117,7 @@ var Input = function Input(_ref) {
     id: id,
     type: type,
     value: value,
+    checked: !!checked,
     onChange: onChange
   }, rest)) : _react.default.createElement(_reactDebounceInput.DebounceInput, _extends({
     minLength: 1,
@@ -129,13 +129,5 @@ var Input = function Input(_ref) {
   }, rest)), error && _react.default.createElement(InputErrorMessage, null, error)));
 };
 
-Input.propTypes = {
-  value: _propTypes.default.string.isRequired,
-  type: _propTypes.default.string,
-  label: _propTypes.default.string,
-  error: _propTypes.default.string,
-  id: _propTypes.default.string,
-  onChange: _propTypes.default.func.isRequired
-};
 var _default = Input;
 exports.default = _default;

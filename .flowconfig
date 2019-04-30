@@ -1,0 +1,17 @@
+[include]
+<PROJECT_ROOT>/src/.*
+<PROJECT_ROOT>/stories/.*
+
+[lints]
+all=error
+untyped-import=off
+unclear-type=warn
+sketchy-null=off
+unsafe-getters-setters=warn
+dynamic-export=off
+inexact-spread =off
+
+[options]
+include_warnings=false
+
+[strict]

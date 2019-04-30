@@ -1,11 +1,26 @@
+// @flow
 import React from "react";
-import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import Color from "color";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-function Checkbox({ disabled, checked, label, value, onChange, ...rest }) {
+type Props = {
+  label?: string,
+  value?: string,
+  checked: boolean,
+  disabled?: boolean,
+  onChange: () => void
+};
+
+function Checkbox({
+  disabled,
+  checked,
+  label,
+  value,
+  onChange,
+  ...rest
+}: Props) {
   return (
     <StyledCheckbox
       className="checkbox"
@@ -28,13 +43,6 @@ function Checkbox({ disabled, checked, label, value, onChange, ...rest }) {
     </StyledCheckbox>
   );
 }
-
-Checkbox.propTypes = {
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  label: PropTypes.string
-};
 
 export default Checkbox;
 

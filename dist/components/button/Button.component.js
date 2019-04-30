@@ -7,8 +7,6 @@ exports.default = exports.ButtonContent = exports.ButtonText = exports.ButtonIco
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _color = _interopRequireDefault(require("color"));
@@ -155,18 +153,6 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var propTypes = {
-  size: _propTypes.default.oneOf(["smaller", "small", "base", "large", "larger"]),
-  variant: _propTypes.default.oneOf(["primary", "secondary", "danger", "success", "warning", "info", "base"]),
-  outlined: _propTypes.default.bool,
-  disabled: _propTypes.default.bool,
-  icon: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.func]),
-  href: _propTypes.default.string,
-  text: _propTypes.default.string,
-  title: _propTypes.default.string,
-  type: _propTypes.default.string,
-  isLoading: _propTypes.default.bool
-};
 var defaultProps = {
   size: "base",
   variant: "primary",
@@ -270,7 +256,6 @@ function Button(_ref) {
   }, icon), _react.default.createElement(ButtonText, null, text))));
 }
 
-Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 var _default = Button;
 exports.default = _default;

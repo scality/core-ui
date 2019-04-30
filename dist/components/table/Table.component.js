@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 require("react-virtualized/styles.css");
@@ -31,8 +29,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -48,6 +44,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject8() {
   var data = _taggedTemplateLiteral(["\n          color: ", ";\n        "]);
@@ -171,6 +169,11 @@ function (_React$Component) {
     _classCallCheck(this, Table);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "_noRowsRenderer", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "_headerRenderer", void 0);
+
     _this._noRowsRenderer = _this._noRowsRenderer.bind(_assertThisInitialized(_this));
     _this._headerRenderer = _this._headerRenderer.bind(_assertThisInitialized(_this));
     return _this;
@@ -199,7 +202,8 @@ function (_React$Component) {
       }), _react.default.createElement("i", {
         className: "fas fa-sort-down"
       })));
-    }
+    } //$FlowFixMe
+
   }, {
     key: "_decorateDropdownActions",
     value: function _decorateDropdownActions(actions, rowData) {
@@ -289,18 +293,5 @@ function (_React$Component) {
   return Table;
 }(_react.default.Component);
 
-Table.propTypes = {
-  list: _propTypes.default.array.isRequired,
-  columns: _propTypes.default.array.isRequired,
-  disableHeader: _propTypes.default.bool,
-  headerHeight: _propTypes.default.number,
-  onHeaderClick: _propTypes.default.func,
-  onRowClick: _propTypes.default.func,
-  overscanRowCount: _propTypes.default.number,
-  rowHeight: _propTypes.default.number,
-  onSort: _propTypes.default.func,
-  sortBy: _propTypes.default.string,
-  sortDirection: _propTypes.default.string
-};
 var _default = Table;
 exports.default = _default;

@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import Dropdown from "../src/lib/components/dropdown/Dropdown.component";
 import { action } from "@storybook/addon-actions";
