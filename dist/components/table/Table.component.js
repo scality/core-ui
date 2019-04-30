@@ -25,25 +25,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -158,140 +140,106 @@ var HeaderSortIcon = _styledComponents.default.div(_templateObject6(), defaultTh
   }
 });
 
-var Table =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Table, _React$Component);
+function Table(_ref) {
+  var columns = _ref.columns,
+      disableHeader = _ref.disableHeader,
+      headerHeight = _ref.headerHeight,
+      onHeaderClick = _ref.onHeaderClick,
+      onRowClick = _ref.onRowClick,
+      overscanRowCount = _ref.overscanRowCount,
+      rowHeight = _ref.rowHeight,
+      onSort = _ref.onSort,
+      sortBy = _ref.sortBy,
+      sortDirection = _ref.sortDirection,
+      list = _ref.list;
 
-  function Table(props) {
-    var _this;
+  var _noRowsRenderer = function _noRowsRenderer() {
+    return _react.default.createElement("div", {
+      className: "sc-table-noRows"
+    }, "No rows");
+  };
 
-    _classCallCheck(this, Table);
+  var _headerRenderer = function _headerRenderer(_ref2) {
+    var dataKey = _ref2.dataKey,
+        label = _ref2.label,
+        sortBy = _ref2.sortBy,
+        sortDirection = _ref2.sortDirection,
+        disableSort = _ref2.disableSort;
+    return _react.default.createElement(HeaderContainer, null, _react.default.createElement("label", null, label), !disableSort && _react.default.createElement(HeaderSortIcon, {
+      selected: sortBy === dataKey,
+      sortDirection: sortDirection
+    }, _react.default.createElement("i", {
+      className: "fas fa-sort-up"
+    }), _react.default.createElement("i", {
+      className: "fas fa-sort-down"
+    })));
+  };
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "_noRowsRenderer", void 0);
-
-    _defineProperty(_assertThisInitialized(_this), "_headerRenderer", void 0);
-
-    _this._noRowsRenderer = _this._noRowsRenderer.bind(_assertThisInitialized(_this));
-    _this._headerRenderer = _this._headerRenderer.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Table, [{
-    key: "_noRowsRenderer",
-    value: function _noRowsRenderer() {
-      return _react.default.createElement("div", {
-        className: "sc-table-noRows"
-      }, "No rows");
-    }
-  }, {
-    key: "_headerRenderer",
-    value: function _headerRenderer(_ref) {
-      var dataKey = _ref.dataKey,
-          label = _ref.label,
-          sortBy = _ref.sortBy,
-          sortDirection = _ref.sortDirection,
-          disableSort = _ref.disableSort;
-      return _react.default.createElement(HeaderContainer, null, _react.default.createElement("label", null, label), !disableSort && _react.default.createElement(HeaderSortIcon, {
-        selected: sortBy === dataKey,
-        sortDirection: sortDirection
-      }, _react.default.createElement("i", {
-        className: "fas fa-sort-up"
-      }), _react.default.createElement("i", {
-        className: "fas fa-sort-down"
-      })));
-    } //$FlowFixMe
-
-  }, {
-    key: "_decorateDropdownActions",
-    value: function _decorateDropdownActions(actions, rowData) {
-      return actions.map(function (action) {
-        return _objectSpread({}, action, {
-          onClick: function onClick() {
-            return action.onClick(rowData);
-          }
-        });
+  var _decorateDropdownActions = function _decorateDropdownActions(actions, rowData) {
+    return actions.map(function (action) {
+      return _objectSpread({}, action, {
+        onClick: function onClick() {
+          return action.onClick(rowData);
+        }
       });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+    });
+  };
 
-      var _this$props = this.props,
-          columns = _this$props.columns,
-          disableHeader = _this$props.disableHeader,
-          headerHeight = _this$props.headerHeight,
-          onHeaderClick = _this$props.onHeaderClick,
-          onRowClick = _this$props.onRowClick,
-          overscanRowCount = _this$props.overscanRowCount,
-          rowHeight = _this$props.rowHeight,
-          onSort = _this$props.onSort,
-          sortBy = _this$props.sortBy,
-          sortDirection = _this$props.sortDirection,
-          list = _this$props.list;
+  var rowGetter = function rowGetter(_ref3) {
+    var index = _ref3.index;
+    return list[index];
+  };
 
-      var rowGetter = function rowGetter(_ref2) {
-        var index = _ref2.index;
-        return list[index];
-      };
-
-      return _react.default.createElement(_reactVirtualized.AutoSizer, {
-        className: "sc-table"
-      }, function (_ref3) {
-        var height = _ref3.height,
-            width = _ref3.width;
-        return _react.default.createElement(TableContainer, null, _react.default.createElement(_reactVirtualized.Table, {
-          disableHeader: disableHeader,
-          headerClassName: "sc-table-header",
-          headerHeight: headerHeight,
-          height: height,
-          onHeaderClick: onHeaderClick,
-          onRowClick: onRowClick,
-          overscanRowCount: overscanRowCount || 5,
-          noRowsRenderer: _this2._noRowsRenderer,
-          rowClassName: "sc-table-row",
-          rowHeight: rowHeight,
-          rowGetter: rowGetter,
-          rowCount: list.length,
-          sort: onSort,
-          sortBy: sortBy,
-          sortDirection: sortDirection,
-          width: width
-        }, columns.map(function (column) {
-          return _react.default.createElement(_reactVirtualized.Column, {
-            key: column.dataKey,
-            width: 200,
-            disableSort: column.disableSort,
-            label: column.label,
-            dataKey: column.dataKey,
-            className: "sc-table-column",
-            cellRenderer: function cellRenderer(_ref4) {
-              var cellData = _ref4.cellData,
-                  columnIndex = _ref4.columnIndex,
-                  rowData = _ref4.rowData;
-              return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
-                title: cellData
-              }, column.renderer ? column.renderer(cellData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
-                icon: _react.default.createElement("i", {
-                  className: "fas fa-ellipsis-v"
-                }),
-                items: _this2._decorateDropdownActions(rowData.actions, rowData),
-                caret: false
-              }));
-            },
-            flexGrow: 1,
-            headerRenderer: _this2._headerRenderer
-          });
-        })));
+  return _react.default.createElement(_reactVirtualized.AutoSizer, {
+    className: "sc-table"
+  }, function (_ref4) {
+    var height = _ref4.height,
+        width = _ref4.width;
+    return _react.default.createElement(TableContainer, null, _react.default.createElement(_reactVirtualized.Table, {
+      disableHeader: disableHeader,
+      headerClassName: "sc-table-header",
+      headerHeight: headerHeight,
+      height: height,
+      onHeaderClick: onHeaderClick,
+      onRowClick: onRowClick,
+      overscanRowCount: overscanRowCount || 5,
+      noRowsRenderer: _noRowsRenderer,
+      rowClassName: "sc-table-row",
+      rowHeight: rowHeight,
+      rowGetter: rowGetter,
+      rowCount: list.length,
+      sort: onSort,
+      sortBy: sortBy,
+      sortDirection: sortDirection,
+      width: width
+    }, columns.map(function (column) {
+      return _react.default.createElement(_reactVirtualized.Column, {
+        key: column.dataKey,
+        width: 200,
+        disableSort: column.disableSort,
+        label: column.label,
+        dataKey: column.dataKey,
+        className: "sc-table-column",
+        cellRenderer: function cellRenderer(_ref5) {
+          var cellData = _ref5.cellData,
+              columnIndex = _ref5.columnIndex,
+              rowData = _ref5.rowData;
+          return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
+            title: cellData
+          }, column.renderer ? column.renderer(cellData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
+            icon: _react.default.createElement("i", {
+              className: "fas fa-ellipsis-v"
+            }),
+            items: _decorateDropdownActions(rowData.actions, rowData),
+            caret: false
+          }));
+        },
+        flexGrow: 1,
+        headerRenderer: _headerRenderer
       });
-    }
-  }]);
-
-  return Table;
-}(_react.default.Component);
+    })));
+  });
+}
 
 var _default = Table;
 exports.default = _default;
