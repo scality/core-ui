@@ -1,3 +1,4 @@
+// @flow
 export const LOADER_SIZE = {
   smaller: "smaller",
   small: "small",
@@ -7,3 +8,11 @@ export const LOADER_SIZE = {
   huge: "huge",
   massive: "massive"
 };
+export type LoaderSize =
+  | "smaller"
+  | "small"
+  | "base"
+  | "large"
+  | "larger"
+  | "huge"
+  | "massive";

@@ -6,10 +6,11 @@ import Color from "color";
 import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
+import type { LoaderSize } from "../constants";
 
 type Props = {
   text: string,
-  size?: string,
+  size?: LoaderSize,
   variant?: string,
   outlined?: boolean,
   disabled?: boolean,
