@@ -29,11 +29,9 @@ const NotificationContainer = styled.div`
   }};
 `;
 const NotificationTitle = styled.div`
-  padding-bottom: ${defaultTheme.padding.smaller};
+  padding: 0 ${defaultTheme.padding.base} ${defaultTheme.padding.smaller} 0;
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
-
-const NotificationMessage = styled.div``;
 const NotificationDismissProgress = styled.div`
   position: absolute;
   bottom: 0;
@@ -54,6 +52,16 @@ const NotificationDismissProgress = styled.div`
   }};
 `;
 
+const NotificationClose = styled.div`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  &:hover {
+    color: ${defaultTheme.grayLightest};
+  }
+`;
+
 function Notification(props: Props) {
   const [visible, setVisible] = useState(true);
   const [dismissProgress, setDismissProgress] = useState(0);
@@ -64,7 +72,7 @@ function Notification(props: Props) {
   useEffect(() => {
     if (props.dismissAfter) {
       if (dismissProgressRef.current === props.dismissAfter) {
-        setVisible(false);
+        dismiss();
       } else {
         let timerId = setTimeout(() => {
           setDismissProgress(dismissProgressRef.current + 1000); // setDismissProgress relaunchs useEffect
@@ -76,15 +84,21 @@ function Notification(props: Props) {
     }
   }, [dismissProgress]);
 
+  const dismiss = () => {
+    setVisible(false);
+  };
   return visible ? (
     <NotificationContainer className="sc-notification" variant={props.variant}>
       <NotificationTitle>{props.title}</NotificationTitle>
-      <NotificationMessage>{props.message}</NotificationMessage>
+      <div>{props.message}</div>
       <NotificationDismissProgress
         value={dismissProgress}
         max={props.dismissAfter}
         variant={props.variant}
       />
+      <NotificationClose onClick={dismiss}>
+        <i className="fas fa-times" />
+      </NotificationClose>
     </NotificationContainer>
   ) : null;
 }

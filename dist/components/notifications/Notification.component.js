@@ -30,7 +30,7 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n      background-color: ", ";\n      width: ", "%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  cursor: pointer;\n  &:hover {\n    color: ", ";\n  }\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -40,7 +40,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 5px;\n\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n      background-color: ", ";\n      width: ", "%;\n    "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -50,7 +50,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 5px;\n\n  ", ";\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -60,7 +60,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  padding-bottom: ", ";\n  font-weight: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 0 ", " ", " 0;\n  font-weight: ", ";\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -96,15 +96,15 @@ var NotificationContainer = _styledComponents.default.div(_templateObject(), def
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme[props.variant || "primary"], defaultTheme.white);
 });
 
-var NotificationTitle = _styledComponents.default.div(_templateObject3(), defaultTheme.padding.smaller, defaultTheme.fontWeight.bold);
+var NotificationTitle = _styledComponents.default.div(_templateObject3(), defaultTheme.padding.base, defaultTheme.padding.smaller, defaultTheme.fontWeight.bold);
 
-var NotificationMessage = _styledComponents.default.div(_templateObject4());
-
-var NotificationDismissProgress = _styledComponents.default.div(_templateObject5(), function (props) {
+var NotificationDismissProgress = _styledComponents.default.div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   var brandDark = (0, _color.default)(brandingTheme[props.variant || "primary"]).darken(0.2).hsl().string();
-  return (0, _styledComponents.css)(_templateObject6(), brandDark, props.value / props.max * 100);
+  return (0, _styledComponents.css)(_templateObject5(), brandDark, props.value / props.max * 100);
 });
+
+var NotificationClose = _styledComponents.default.div(_templateObject6(), defaultTheme.grayLightest);
 
 function Notification(props) {
   var _useState = (0, _react.useState)(true),
@@ -122,7 +122,7 @@ function Notification(props) {
   (0, _react.useEffect)(function () {
     if (props.dismissAfter) {
       if (dismissProgressRef.current === props.dismissAfter) {
-        setVisible(false);
+        dismiss();
       } else {
         var timerId = setTimeout(function () {
           setDismissProgress(dismissProgressRef.current + 1000); // setDismissProgress relaunchs useEffect
@@ -133,14 +133,23 @@ function Notification(props) {
       }
     }
   }, [dismissProgress]);
+
+  var dismiss = function dismiss() {
+    setVisible(false);
+  };
+
   return visible ? _react.default.createElement(NotificationContainer, {
     className: "sc-notification",
     variant: props.variant
-  }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement(NotificationMessage, null, props.message), _react.default.createElement(NotificationDismissProgress, {
+  }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement("div", null, props.message), _react.default.createElement(NotificationDismissProgress, {
     value: dismissProgress,
     max: props.dismissAfter,
     variant: props.variant
-  })) : null;
+  }), _react.default.createElement(NotificationClose, {
+    onClick: dismiss
+  }, _react.default.createElement("i", {
+    className: "fas fa-times"
+  }))) : null;
 }
 
 var _default = Notification;

@@ -9,37 +9,49 @@ exports[`Storyshots Notifications Default 1`] = `
       className="sc-notification sc-htoDjs iJaLkP"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Carlito. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gZMcBi kbXGnU"
+        className="sc-iwsKbI bPAano"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
     <div
       className="sc-notification sc-htoDjs fiiBBZ"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Patrick. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gZMcBi cUZHfV"
+        className="sc-iwsKbI kqpNBg"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -49,38 +61,50 @@ exports[`Storyshots Notifications Default 1`] = `
       className="sc-notification sc-htoDjs dCtEfn"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Jordi. I live at TOP_LEFT
       </div>
       <div
-        className="sc-gZMcBi iqWEPy"
+        className="sc-iwsKbI qwTTx"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
     <div
       className="sc-notification sc-htoDjs CTlgA"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Guillaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-gZMcBi dTaqwh"
+        className="sc-iwsKbI fwqiQS"
         max={10000}
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -90,38 +114,50 @@ exports[`Storyshots Notifications Default 1`] = `
       className="sc-notification sc-htoDjs fEDxWu"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Teddy. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-gZMcBi jZhflx"
+        className="sc-iwsKbI elrvNz"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
     <div
       className="sc-notification sc-htoDjs hrgOQB"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Saif. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-gZMcBi cVsCEj"
+        className="sc-iwsKbI krNqle"
         max={5000}
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -131,37 +167,49 @@ exports[`Storyshots Notifications Default 1`] = `
       className="sc-notification sc-htoDjs dCtEfn"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Charles. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gZMcBi iqWEPy"
+        className="sc-iwsKbI qwTTx"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
     <div
       className="sc-notification sc-htoDjs fEDxWu"
     >
       <div
-        className="sc-dnqmqq eQFaOP"
+        className="sc-dnqmqq fChpCA"
       >
         Hi
       </div>
-      <div
-        className="sc-iwsKbI jQhHGA"
-      >
+      <div>
         I am Claude. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gZMcBi jZhflx"
+        className="sc-iwsKbI elrvNz"
         value={0}
       />
+      <div
+        className="sc-gZMcBi gwcgHY"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
     </div>
   </div>
 </div>
