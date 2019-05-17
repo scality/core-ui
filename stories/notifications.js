@@ -25,7 +25,8 @@ const tlNotifications = [
   {
     title: "Hi",
     message: "I am Guillaume. I live at TOP_LEFT",
-    variant: "success"
+    variant: "success",
+    dismissAfter: 10000
   }
 ];
 
@@ -38,7 +39,8 @@ const blNotifications = [
   {
     title: "Hi",
     message: "I am Saif. I live at BOTTOM_LEFT",
-    variant: "info"
+    variant: "info",
+    dismissAfter: 5000
   }
 ];
 
