@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Notifications Default 1`] = `
+<div>
+  <div
+    className="sc-notifications sc-gqjmRU bSQwCu"
+  >
+    <div
+      className="sc-notification sc-htoDjs iJaLkP"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Carlito. I live at TOP_RIGHT
+      </div>
+      <div
+        className="sc-gZMcBi kbXGnU"
+        value={0}
+      />
+    </div>
+    <div
+      className="sc-notification sc-htoDjs fiiBBZ"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Patrick. I live at TOP_RIGHT
+      </div>
+      <div
+        className="sc-gZMcBi cUZHfV"
+        value={0}
+      />
+    </div>
+  </div>
+  <div
+    className="sc-notifications sc-gqjmRU cPXWBc"
+  >
+    <div
+      className="sc-notification sc-htoDjs dCtEfn"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Jordi. I live at TOP_LEFT
+      </div>
+      <div
+        className="sc-gZMcBi iqWEPy"
+        value={0}
+      />
+    </div>
+    <div
+      className="sc-notification sc-htoDjs CTlgA"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Guillaume. I live at TOP_LEFT
+      </div>
+      <div
+        className="sc-gZMcBi dTaqwh"
+        max={10000}
+        value={0}
+      />
+    </div>
+  </div>
+  <div
+    className="sc-notifications sc-gqjmRU eokZvu"
+  >
+    <div
+      className="sc-notification sc-htoDjs fEDxWu"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Teddy. I live at BOTTOM_LEFT
+      </div>
+      <div
+        className="sc-gZMcBi jZhflx"
+        value={0}
+      />
+    </div>
+    <div
+      className="sc-notification sc-htoDjs hrgOQB"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Saif. I live at BOTTOM_LEFT
+      </div>
+      <div
+        className="sc-gZMcBi cVsCEj"
+        max={5000}
+        value={0}
+      />
+    </div>
+  </div>
+  <div
+    className="sc-notifications sc-gqjmRU bKfRMB"
+  >
+    <div
+      className="sc-notification sc-htoDjs dCtEfn"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Charles. I live at BOTTOM_RIGHT
+      </div>
+      <div
+        className="sc-gZMcBi iqWEPy"
+        value={0}
+      />
+    </div>
+    <div
+      className="sc-notification sc-htoDjs fEDxWu"
+    >
+      <div
+        className="sc-dnqmqq eQFaOP"
+      >
+        Hi
+      </div>
+      <div
+        className="sc-iwsKbI jQhHGA"
+      >
+        I am Claude. I live at BOTTOM_RIGHT
+      </div>
+      <div
+        className="sc-gZMcBi jZhflx"
+        value={0}
+      />
+    </div>
+  </div>
+</div>
+`;
