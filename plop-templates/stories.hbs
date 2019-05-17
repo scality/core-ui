@@ -11,20 +11,4 @@ storiesOf("{{properCase name}}", module)
           <{{properCase name}} />
       </div>
     );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-            <div>
-                <{{properCase name}} />
-            </div>
-        </ThemeProvider>
-      </div>
-    );
   });

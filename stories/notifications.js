@@ -49,33 +49,13 @@ const brNotifications = [
   }
 ];
 
-storiesOf("Notifications", module)
-  .add("Default", () => {
-    return (
-      <div>
-        <Notifications notifications={trNotifications} />
-        <Notifications position="tl" notifications={tlNotifications} />
-        <Notifications position="bl" notifications={blNotifications} />
-        <Notifications position="br" notifications={brNotifications} />
-      </div>
-    );
-  })
-  .add("ThemeProvider", () => {
-    const theme = {
-      brand: {
-        primary: jade
-      }
-    };
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <div>
-            <Notifications notifications={trNotifications} />
-            <Notifications position="tl" notifications={tlNotifications} />
-            <Notifications position="bl" notifications={blNotifications} />
-            <Notifications position="br" notifications={brNotifications} />
-          </div>
-        </ThemeProvider>
-      </div>
-    );
-  });
+storiesOf("Notifications", module).add("Default", () => {
+  return (
+    <div>
+      <Notifications notifications={trNotifications} />
+      <Notifications position="tl" notifications={tlNotifications} />
+      <Notifications position="bl" notifications={blNotifications} />
+      <Notifications position="br" notifications={brNotifications} />
+    </div>
+  );
+});
