@@ -3,7 +3,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import Notifications from "../src/lib/components/notifications/Notifications.component";
-import { jade } from "../src/lib/style/theme";
 
 const trNotifications = [
   {
@@ -12,40 +11,47 @@ const trNotifications = [
   },
   {
     title: "Hi",
-    message: "I am Patrick. I live at TOP_RIGHT"
+    message: "I am Patrick. I live at TOP_RIGHT",
+    variant: "secondary"
   }
 ];
 
 const tlNotifications = [
   {
     title: "Hi",
-    message: "I am Jordi. I live at TOP_LEFT"
+    message: "I am Jordi. I live at TOP_LEFT",
+    variant: "danger"
   },
   {
     title: "Hi",
-    message: "I am Guillaume. I live at TOP_LEFT"
+    message: "I am Guillaume. I live at TOP_LEFT",
+    variant: "success"
   }
 ];
 
 const blNotifications = [
   {
     title: "Hi",
-    message: "I am Teddy. I live at BOTTOM_LEFT"
+    message: "I am Teddy. I live at BOTTOM_LEFT",
+    variant: "warning"
   },
   {
     title: "Hi",
-    message: "I am Saif. I live at BOTTOM_LEFT"
+    message: "I am Saif. I live at BOTTOM_LEFT",
+    variant: "info"
   }
 ];
 
 const brNotifications = [
   {
     title: "Hi",
-    message: "I am Charles. I live at BOTTOM_RIGHT"
+    message: "I am Charles. I live at BOTTOM_RIGHT",
+    variant: "danger"
   },
   {
     title: "Hi",
-    message: "I am Claude. I live at BOTTOM_RIGHT"
+    message: "I am Claude. I live at BOTTOM_RIGHT",
+    variant: "warning"
   }
 ];
 

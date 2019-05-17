@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Button from "../button/Button.component";
 import { Timer } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+import type { Variant } from "../constants";
 
 type Item = { label: string, onClick: () => void };
 type Items = Array<Item>;
@@ -11,7 +12,7 @@ type Items = Array<Item>;
 export type Props = {
   title: string,
   message: string,
-  level: string,
+  variant: Variant,
   dismissAfter: number,
   actions: Items
 };
@@ -20,10 +21,14 @@ const NotificationContainer = styled.div`
   padding: ${defaultTheme.padding.base};
   margin-top: ${defaultTheme.padding.base};
   border-radius: 5px;
-  color: ${defaultTheme.white};
-  background-color: blue;
-  bottom: 0;
-  left: 0;
+
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      background-color: ${brandingTheme[props.variant || "primary"]};
+      color: ${defaultTheme.white};
+    `;
+  }};
 `;
 const NotificationTitle = styled.div``;
 const NotificationMessage = styled.div``;
@@ -61,7 +66,7 @@ function Notification(props: Props) {
       className="sc-notification"
       onMouseEnter={_handleMouseEnter}
       onMouseLeave={_handleMouseLeave}
-      level={props.level}
+      variant={props.variant}
     >
       <NotificationTitle>{props.title}</NotificationTitle>
       <NotificationMessage>{props.message}</NotificationMessage>
