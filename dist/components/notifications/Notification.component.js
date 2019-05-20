@@ -107,15 +107,10 @@ var NotificationDismissProgress = _styledComponents.default.div(_templateObject4
 var NotificationClose = _styledComponents.default.div(_templateObject6(), defaultTheme.grayLightest);
 
 function Notification(props) {
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
-      visible = _useState2[0],
-      setVisible = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      dismissProgress = _useState4[0],
-      setDismissProgress = _useState4[1];
+      dismissProgress = _useState2[0],
+      setDismissProgress = _useState2[1];
 
   var dismissProgressRef = (0, _react.useRef)(dismissProgress);
   dismissProgressRef.current = dismissProgress;
@@ -135,13 +130,13 @@ function Notification(props) {
   }, [dismissProgress]);
 
   var dismiss = function dismiss() {
-    setVisible(false);
+    props.onDismiss && props.onDismiss(props.uid);
   };
 
-  return visible ? _react.default.createElement(NotificationContainer, {
+  return _react.default.createElement(NotificationContainer, {
     className: "sc-notification",
     variant: props.variant
-  }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement("div", null, props.message), _react.default.createElement(NotificationDismissProgress, {
+  }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement("div", null, props.message), !!props.dismissAfter && _react.default.createElement(NotificationDismissProgress, {
     value: dismissProgress,
     max: props.dismissAfter,
     variant: props.variant
@@ -149,7 +144,7 @@ function Notification(props) {
     onClick: dismiss
   }, _react.default.createElement("i", {
     className: "fas fa-times"
-  }))) : null;
+  })));
 }
 
 var _default = Notification;

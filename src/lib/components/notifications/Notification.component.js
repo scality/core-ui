@@ -1,3 +1,4 @@
+//@flow
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import Color from "color";
@@ -7,10 +8,12 @@ import { mergeTheme } from "../../utils";
 import type { Variant } from "../constants";
 
 export type Props = {
+  uid: string,
   title: string,
-  message: string,
-  variant: Variant,
-  dismissAfter: number
+  message?: string,
+  variant?: Variant,
+  dismissAfter?: number,
+  onDismiss?: string => void
 };
 
 const NotificationContainer = styled.div`
@@ -63,7 +66,6 @@ const NotificationClose = styled.div`
 `;
 
 function Notification(props: Props) {
-  const [visible, setVisible] = useState(true);
   const [dismissProgress, setDismissProgress] = useState(0);
 
   const dismissProgressRef = useRef(dismissProgress);
@@ -85,22 +87,24 @@ function Notification(props: Props) {
   }, [dismissProgress]);
 
   const dismiss = () => {
-    setVisible(false);
+    props.onDismiss && props.onDismiss(props.uid);
   };
-  return visible ? (
+  return (
     <NotificationContainer className="sc-notification" variant={props.variant}>
       <NotificationTitle>{props.title}</NotificationTitle>
       <div>{props.message}</div>
-      <NotificationDismissProgress
-        value={dismissProgress}
-        max={props.dismissAfter}
-        variant={props.variant}
-      />
+      {!!props.dismissAfter && (
+        <NotificationDismissProgress
+          value={dismissProgress}
+          max={props.dismissAfter}
+          variant={props.variant}
+        />
+      )}
       <NotificationClose onClick={dismiss}>
         <i className="fas fa-times" />
       </NotificationClose>
     </NotificationContainer>
-  ) : null;
+  );
 }
 
 export default Notification;

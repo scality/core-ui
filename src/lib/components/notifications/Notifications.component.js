@@ -1,22 +1,24 @@
+//@flow
 import React from "react";
 import styled, { css } from "styled-components";
-import Button from "../button/Button.component";
-import { Timer } from "../../utils";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
-import Notification, {
-  Props as NotificationProps
-} from "./Notification.component";
+import Notification from "./Notification.component";
+import type { Props as NotificationProps } from "./Notification.component";
 
 export const TOP_LEFT = "tl";
 export const TOP_RIGHT = "tr";
 export const BOTTOM_LEFT = "bl";
 export const BOTTOM_RIGHT = "br";
 
-type Position = TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT;
+type Position =
+  | typeof TOP_LEFT
+  | typeof TOP_RIGHT
+  | typeof BOTTOM_LEFT
+  | typeof BOTTOM_RIGHT;
 type Props = {
-  position: Position,
-  notifications: Array<NotificationProps>
+  position?: Position,
+  notifications: Array<NotificationProps>,
+  onDismiss: string => void
 };
 
 const NotificationsContainer = styled.div`
@@ -55,8 +57,12 @@ function Notifications(props: Props) {
       className="sc-notifications"
       position={props.position}
     >
-      {props.notifications.map((notification, index) => (
-        <Notification key={index} {...notification} />
+      {props.notifications.map(notification => (
+        <Notification
+          key={notification.uid}
+          {...notification}
+          onDismiss={props.onDismiss}
+        />
       ))}
     </NotificationsContainer>
   );

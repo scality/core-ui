@@ -9,13 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _Button = _interopRequireDefault(require("../button/Button.component"));
-
-var _utils = require("../../utils");
-
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
-var _Notification = _interopRequireWildcard(require("./Notification.component"));
+var _Notification = _interopRequireDefault(require("./Notification.component"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -104,10 +100,12 @@ function Notifications(props) {
   return _react.default.createElement(NotificationsContainer, {
     className: "sc-notifications",
     position: props.position
-  }, props.notifications.map(function (notification, index) {
+  }, props.notifications.map(function (notification) {
     return _react.default.createElement(_Notification.default, _extends({
-      key: index
-    }, notification));
+      key: notification.uid
+    }, notification, {
+      onDismiss: props.onDismiss
+    }));
   }));
 }
 

@@ -17,10 +17,6 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Carlito. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-iwsKbI bPAano"
-        value={0}
-      />
-      <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
       >
@@ -40,10 +36,6 @@ exports[`Storyshots Notifications Default 1`] = `
       <div>
         I am Patrick. I live at TOP_RIGHT
       </div>
-      <div
-        className="sc-iwsKbI kqpNBg"
-        value={0}
-      />
       <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
@@ -69,10 +61,6 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Jordi. I live at TOP_LEFT
       </div>
       <div
-        className="sc-iwsKbI qwTTx"
-        value={0}
-      />
-      <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
       >
@@ -90,7 +78,7 @@ exports[`Storyshots Notifications Default 1`] = `
         Hi
       </div>
       <div>
-        I am Guillaume. I live at TOP_LEFT
+        I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
         className="sc-iwsKbI fwqiQS"
@@ -121,10 +109,6 @@ exports[`Storyshots Notifications Default 1`] = `
       <div>
         I am Teddy. I live at BOTTOM_LEFT
       </div>
-      <div
-        className="sc-iwsKbI elrvNz"
-        value={0}
-      />
       <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
@@ -175,10 +159,6 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Charles. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-iwsKbI qwTTx"
-        value={0}
-      />
-      <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
       >
@@ -198,10 +178,6 @@ exports[`Storyshots Notifications Default 1`] = `
       <div>
         I am Claude. I live at BOTTOM_RIGHT
       </div>
-      <div
-        className="sc-iwsKbI elrvNz"
-        value={0}
-      />
       <div
         className="sc-gZMcBi gwcgHY"
         onClick={[Function]}
