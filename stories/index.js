@@ -11,3 +11,4 @@ import "./steppers";
 import "./table";
 import "./toggle";
 import "./input";
+import "./notifications";

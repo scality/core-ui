@@ -86,6 +86,7 @@ export const svgSize = {
 };
 export const zIndex = {
   tooltip: 9990,
+  notification: 9000,
   modal: 8500,
   overlay: 8000,
   dropdown: 7000,

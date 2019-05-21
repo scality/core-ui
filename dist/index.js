@@ -75,6 +75,12 @@ Object.defineProperty(exports, "Input", {
     return _Input.default;
   }
 });
+Object.defineProperty(exports, "Notification", {
+  enumerable: true,
+  get: function get() {
+    return _Notification.default;
+  }
+});
 Object.defineProperty(exports, "LOADER_SIZE", {
   enumerable: true,
   get: function get() {
@@ -107,6 +113,8 @@ var _SearchInput = _interopRequireDefault(require("./components/searchinput/Sear
 var _Steppers = _interopRequireDefault(require("./components/steppers/Steppers.component"));
 
 var _Input = _interopRequireDefault(require("./components/input/Input.component"));
+
+var _Notification = _interopRequireDefault(require("./components/notification/Notification.component"));
 
 var _constants = require("./components/constants");
 

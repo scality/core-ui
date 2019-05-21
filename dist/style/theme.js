@@ -119,6 +119,7 @@ var svgSize = {
 exports.svgSize = svgSize;
 var zIndex = {
   tooltip: 9990,
+  notification: 9000,
   modal: 8500,
   overlay: 8000,
   dropdown: 7000,
