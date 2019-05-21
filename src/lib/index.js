@@ -12,7 +12,7 @@ import Table from "./components/table/Table.component";
 import SearchInput from "./components/searchinput/SearchInput.component";
 import Steppers from "./components/steppers/Steppers.component";
 import Input from "./components/input/Input.component";
-import Notification from "./components/notification/Notification.component";
+import Notifications from "./components/notifications/Notifications.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -30,5 +30,5 @@ export {
   SearchInput,
   Steppers,
   Input,
-  Notification
+  Notifications
 };

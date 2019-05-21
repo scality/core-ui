@@ -75,10 +75,10 @@ Object.defineProperty(exports, "Input", {
     return _Input.default;
   }
 });
-Object.defineProperty(exports, "Notification", {
+Object.defineProperty(exports, "Notifications", {
   enumerable: true,
   get: function get() {
-    return _Notification.default;
+    return _Notifications.default;
   }
 });
 Object.defineProperty(exports, "LOADER_SIZE", {
@@ -114,7 +114,7 @@ var _Steppers = _interopRequireDefault(require("./components/steppers/Steppers.c
 
 var _Input = _interopRequireDefault(require("./components/input/Input.component"));
 
-var _Notification = _interopRequireDefault(require("./components/notification/Notification.component"));
+var _Notifications = _interopRequireDefault(require("./components/notifications/Notifications.component"));
 
 var _constants = require("./components/constants");
 
