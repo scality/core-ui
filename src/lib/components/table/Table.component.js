@@ -232,7 +232,7 @@ function Table({
             {columns.map(column => (
               <Column
                 key={column.dataKey}
-                width={200}
+                width={column.width || 200}
                 disableSort={column.disableSort}
                 label={column.label}
                 dataKey={column.dataKey}

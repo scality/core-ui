@@ -215,7 +215,7 @@ function Table(_ref) {
     }, columns.map(function (column) {
       return _react.default.createElement(_reactVirtualized.Column, {
         key: column.dataKey,
-        width: 200,
+        width: column.width || 200,
         disableSort: column.disableSort,
         label: column.label,
         dataKey: column.dataKey,
