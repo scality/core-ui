@@ -216,6 +216,8 @@ function Table(_ref) {
       return _react.default.createElement(_reactVirtualized.Column, {
         key: column.dataKey,
         width: column.width || 200,
+        flexGrow: column.flexGrow || 0,
+        flexShrink: column.flexShrink || 1,
         disableSort: column.disableSort,
         label: column.label,
         dataKey: column.dataKey,
@@ -234,7 +236,6 @@ function Table(_ref) {
             caret: false
           }));
         },
-        flexGrow: 1,
         headerRenderer: _headerRenderer
       });
     })));
