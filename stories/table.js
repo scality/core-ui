@@ -68,6 +68,46 @@ const columns = [
   }
 ];
 
+const columnsChangeSize = [
+  {
+    label: "Id",
+    dataKey: "id",
+    disableSort: false,
+    renderer: data => <span className="badge">{data}</span>,
+    width: 50
+  },
+  {
+    label: "First Name",
+    dataKey: "first_name",
+    disableSort: false,
+    width: 150
+  },
+  {
+    label: "Last Name",
+    dataKey: "last_name",
+    disableSort: false,
+    width: 150
+  },
+  {
+    label: "Email",
+    dataKey: "email",
+    disableSort: true,
+    flexGrow: 1
+  },
+  {
+    label: "Ip Address",
+    dataKey: "ip_address",
+    disableSort: true,
+    width: 150
+  },
+  {
+    label: "Age",
+    dataKey: "age",
+    disableSort: false,
+    width: 50
+  }
+];
+
 storiesOf("Table", module)
   .add("Default", () => {
     return (
@@ -92,6 +132,23 @@ storiesOf("Table", module)
         <Table
           list={listWithActions}
           columns={columns}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={"first_name"}
+          sortDirection={"ASC"}
+          onSort={action("Sort Clicked")}
+          onRowClick={action("Row Clicked")}
+        />
+      </div>
+    );
+  })
+  .add("Change column size", () => {
+    return (
+      <div style={{ height: "100vh" }}>
+        <Table
+          list={listWithActions}
+          columns={columnsChangeSize}
           disableHeader={false}
           headerHeight={40}
           rowHeight={40}
