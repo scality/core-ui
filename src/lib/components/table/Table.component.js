@@ -232,7 +232,9 @@ function Table({
             {columns.map(column => (
               <Column
                 key={column.dataKey}
-                width={200}
+                width={column.width || 200}
+                flexGrow={column.flexGrow || 0}
+                flexShrink={column.flexShrink || 1}
                 disableSort={column.disableSort}
                 label={column.label}
                 dataKey={column.dataKey}
@@ -258,7 +260,6 @@ function Table({
                     </CellContainer>
                   );
                 }}
-                flexGrow={1}
                 headerRenderer={_headerRenderer}
               />
             ))}
