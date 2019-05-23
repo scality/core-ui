@@ -93,12 +93,17 @@ const TableContainer = styled.div`
     }
   }
 
+  .ReactVirtualized__Table__headerColumn {
+    margin-right: 0;
+  }
+
   .sc-table-column {
     padding: ${defaultTheme.padding.small};
     overflow: visible !important;
     margin: 0;
   }
 `;
+
 const CellContainer = styled.div`
   display: flex;
   justify-content: space-between;

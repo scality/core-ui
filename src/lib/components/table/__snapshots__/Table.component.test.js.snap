@@ -19,7 +19,7 @@ exports[`Storyshots Table Change column size 1`] = `
     }
   >
     <div
-      className="sc-VigVT dpWcup"
+      className="sc-VigVT fkJSuK"
     >
       <div
         aria-colcount={6}
@@ -265,7 +265,7 @@ exports[`Storyshots Table Default 1`] = `
     }
   >
     <div
-      className="sc-VigVT dpWcup"
+      className="sc-VigVT fkJSuK"
     >
       <div
         aria-colcount={6}
@@ -511,7 +511,7 @@ exports[`Storyshots Table Empty Table 1`] = `
     }
   >
     <div
-      className="sc-VigVT dpWcup"
+      className="sc-VigVT fkJSuK"
     >
       <div
         aria-colcount={6}
@@ -757,7 +757,7 @@ exports[`Storyshots Table With rowActions 1`] = `
     }
   >
     <div
-      className="sc-VigVT dpWcup"
+      className="sc-VigVT fkJSuK"
     >
       <div
         aria-colcount={6}
