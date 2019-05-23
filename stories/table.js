@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Table from "../src/lib/components/table/Table.component";
+import Button from "../src/lib/components/button/Button.component";
 import { list } from "./data/list";
 
 const actions = [
@@ -24,7 +25,21 @@ const columns = [
     label: "Id",
     dataKey: "id",
     disableSort: false,
-    renderer: data => <span className="badge">{data}</span>
+    renderer: (data, rowData) => {
+      if (data === 3) {
+        return (
+          <Button
+            text={data}
+            onClick={event => {
+              console.log(rowData);
+              event.stopPropagation();
+            }}
+            size="smaller"
+          />
+        );
+      }
+      return <span className="badge">{data}</span>;
+    }
   },
   {
     label: "First Name",
