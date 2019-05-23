@@ -243,7 +243,9 @@ function Table({
                   return (
                     <CellContainer>
                       <CellContent title={cellData}>
-                        {column.renderer ? column.renderer(cellData) : cellData}
+                        {column.renderer
+                          ? column.renderer(cellData, rowData)
+                          : cellData}
                       </CellContent>
                       {rowData.actions &&
                         rowData.actions.length &&

@@ -228,7 +228,7 @@ function Table(_ref) {
               rowData = _ref5.rowData;
           return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
             title: cellData
-          }, column.renderer ? column.renderer(cellData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
+          }, column.renderer ? column.renderer(cellData, rowData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
             icon: _react.default.createElement("i", {
               className: "fas fa-ellipsis-v"
             }),
