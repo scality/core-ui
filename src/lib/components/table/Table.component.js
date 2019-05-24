@@ -67,6 +67,8 @@ const TableContainer = styled.div`
       `;
     }}
 
+    text-transform: none;
+
     .sc-table-header {
       &:focus {
         outline: none;
