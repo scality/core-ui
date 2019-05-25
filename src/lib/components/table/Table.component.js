@@ -41,10 +41,6 @@ type HeaderProps = {
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
-    border-right: 1px solid ${defaultTheme.gray};
-    border-left: 1px solid ${defaultTheme.gray};
-    border-bottom: 1px solid ${defaultTheme.gray};
-
     &:focus {
       outline: none;
     }
@@ -60,6 +56,8 @@ const TableContainer = styled.div`
 
   .ReactVirtualized__Grid__innerScrollContainer {
     overflow: visible !important;
+    border-right: 1px solid ${defaultTheme.gray};
+    border-left: 1px solid ${defaultTheme.gray};
   }
 
   .ReactVirtualized__Table__headerRow {
