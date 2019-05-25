@@ -41,9 +41,13 @@ type HeaderProps = {
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
+    border-right: 1px solid ${defaultTheme.gray};
+    border-left: 1px solid ${defaultTheme.gray};
+
     &:focus {
       outline: none;
     }
+
     .sc-table-noRows {
       display: flex;
       justify-content: center;
@@ -58,8 +62,13 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
+    border-right: 1px solid ${defaultTheme.gray};
+    border-left: 1px solid ${defaultTheme.gray};
+    border-top: 1px solid ${defaultTheme.gray};
     border-bottom: 2px solid ${defaultTheme.gray};
     background-color: ${defaultTheme.grayLightest};
+
+    padding-right: 0px !important
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       return css`
