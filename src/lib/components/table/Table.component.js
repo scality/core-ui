@@ -54,6 +54,10 @@ const TableContainer = styled.div`
     }
   }
 
+  .ReactVirtualized__Table__headerColumn {
+    margin: 0;
+  }
+
   .ReactVirtualized__Grid__innerScrollContainer {
     overflow: visible !important;
     border-right: 1px solid ${defaultTheme.gray};
