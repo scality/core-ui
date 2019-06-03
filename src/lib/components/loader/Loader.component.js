@@ -49,7 +49,7 @@ function Loader({
     <LoaderContainer size={size} color={color} className="sc-loader">
       <LoaderTextDiv>
         <LoaderIcon />
-        <LoaderText> {children}</LoaderText>
+        {children && <LoaderText> {children}</LoaderText>}
       </LoaderTextDiv>
     </LoaderContainer>
   );

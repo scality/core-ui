@@ -82,7 +82,7 @@ function Loader(_ref) {
     size: size,
     color: color,
     className: "sc-loader"
-  }, _react.default.createElement(LoaderTextDiv, null, _react.default.createElement(_scalityLoading.default, null), _react.default.createElement(LoaderText, null, " ", children)));
+  }, _react.default.createElement(LoaderTextDiv, null, _react.default.createElement(_scalityLoading.default, null), children && _react.default.createElement(LoaderText, null, " ", children)));
 }
 
 var _default = Loader;

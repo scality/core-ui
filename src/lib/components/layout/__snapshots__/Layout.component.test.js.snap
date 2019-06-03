@@ -388,11 +388,6 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
               />
             </g>
           </svg>
-          <span
-            className="sc-bwzfXH jSSQYq"
-          >
-             
-          </span>
         </span>
       </div>
     </div>
@@ -803,11 +798,6 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
               />
             </g>
           </svg>
-          <span
-            className="sc-bwzfXH jSSQYq"
-          >
-             
-          </span>
         </span>
       </div>
     </div>
