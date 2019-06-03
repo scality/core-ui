@@ -40,6 +40,8 @@ type HeaderProps = {
 };
 
 const TableContainer = styled.div`
+  box-shadow: 0 1px 5px 0 ${defaultTheme.grayLight};
+
   .ReactVirtualized__Table__Grid {
     &:focus {
       outline: none;
@@ -60,18 +62,10 @@ const TableContainer = styled.div`
 
   .ReactVirtualized__Grid__innerScrollContainer {
     overflow: visible !important;
-    border-right: 1px solid ${defaultTheme.gray};
-    border-left: 1px solid ${defaultTheme.gray};
   }
 
   .ReactVirtualized__Table__headerRow {
-    border-right: 1px solid ${defaultTheme.gray};
-    border-left: 1px solid ${defaultTheme.gray};
-    border-top: 1px solid ${defaultTheme.gray};
-    border-bottom: 2px solid ${defaultTheme.gray};
     background-color: ${defaultTheme.grayLightest};
-
-    padding-right: 0px !important
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       return css`
@@ -95,7 +89,7 @@ const TableContainer = styled.div`
   .ReactVirtualized__Table__row {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid ${defaultTheme.gray};
+    border-bottom: 1px solid ${defaultTheme.grayLightest};
     overflow: visible !important;
 
     &:hover,
@@ -227,7 +221,7 @@ function Table({
 
   const rowGetter = ({ index }) => list[index];
   return (
-    <AutoSizer className="sc-table">
+    <AutoSizer className="sc-table" style={{ height: "auto", width: "auto" }}>
       {({ height, width }) => (
         <TableContainer>
           <VirtualizedTable
