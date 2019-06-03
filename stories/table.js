@@ -64,7 +64,8 @@ const columns = [
   {
     label: "Age",
     dataKey: "age",
-    disableSort: false
+    disableSort: false,
+    flexGrow: 1
   }
 ];
 

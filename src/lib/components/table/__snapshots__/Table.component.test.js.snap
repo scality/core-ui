@@ -438,9 +438,9 @@ exports[`Storyshots Table Default 1`] = `
             role="columnheader"
             style={
               Object {
-                "WebkitFlex": "0 1 200px",
-                "flex": "0 1 200px",
-                "msFlex": "0 1 200px",
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
               }
             }
             tabIndex={0}
@@ -684,9 +684,9 @@ exports[`Storyshots Table Empty Table 1`] = `
             role="columnheader"
             style={
               Object {
-                "WebkitFlex": "0 1 200px",
-                "flex": "0 1 200px",
-                "msFlex": "0 1 200px",
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
               }
             }
             tabIndex={0}
@@ -930,9 +930,9 @@ exports[`Storyshots Table With rowActions 1`] = `
             role="columnheader"
             style={
               Object {
-                "WebkitFlex": "0 1 200px",
-                "flex": "0 1 200px",
-                "msFlex": "0 1 200px",
+                "WebkitFlex": "1 1 200px",
+                "flex": "1 1 200px",
+                "msFlex": "1 1 200px",
               }
             }
             tabIndex={0}
