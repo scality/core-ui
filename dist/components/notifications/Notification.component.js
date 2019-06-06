@@ -40,7 +40,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      background-color: ", ";\n      width: ", "%;\n    "]);
+  var data = _taggedTemplateLiteral(["\n      background-color: ", ";\n      width: ", "%;\n      transition: width 1s;\n      transition-timing-function: linear;\n    "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -50,7 +50,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 5px;\n\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  height: 5px;\n  border-radius: 5px;\n  ", ";\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -112,30 +112,49 @@ function Notification(props) {
       dismissProgress = _useState2[0],
       setDismissProgress = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      timerId = _useState4[0],
+      setTimerId = _useState4[1];
+
   var dismissProgressRef = (0, _react.useRef)(dismissProgress);
   dismissProgressRef.current = dismissProgress;
   (0, _react.useEffect)(function () {
+    resumeTimer();
+  }, [dismissProgress]);
+
+  var clearTimer = function clearTimer() {
+    if (props.dismissAfter) {
+      setTimerId(null);
+      clearInterval(timerId);
+    }
+  };
+
+  var resumeTimer = function resumeTimer() {
     if (props.dismissAfter) {
       if (dismissProgressRef.current === props.dismissAfter) {
         dismiss();
-      } else {
-        var timerId = setTimeout(function () {
-          setDismissProgress(dismissProgressRef.current + 1000); // setDismissProgress relaunchs useEffect
-        }, 1000);
-        return function () {
-          clearTimeout(timerId);
-        };
+      } else if (!timerId) {
+        setTimerId(setInterval(function () {
+          setDismissProgress(dismissProgressRef.current + 1000);
+        }, 1000));
       }
     }
-  }, [dismissProgress]);
+  };
 
   var dismiss = function dismiss() {
+    if (timerId) {
+      clearTimer();
+    }
+
     props.onDismiss && props.onDismiss(props.uid);
   };
 
   return _react.default.createElement(NotificationContainer, {
     className: "sc-notification",
-    variant: props.variant
+    variant: props.variant,
+    onMouseEnter: clearTimer,
+    onMouseLeave: resumeTimer
   }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement("div", null, props.message), !!props.dismissAfter && _react.default.createElement(NotificationDismissProgress, {
     value: dismissProgress,
     max: props.dismissAfter,

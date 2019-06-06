@@ -7,6 +7,8 @@ exports[`Storyshots Notifications Default 1`] = `
   >
     <div
       className="sc-notification sc-htoDjs iJaLkP"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -27,6 +29,8 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
     <div
       className="sc-notification sc-htoDjs fiiBBZ"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -51,6 +55,8 @@ exports[`Storyshots Notifications Default 1`] = `
   >
     <div
       className="sc-notification sc-htoDjs dCtEfn"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -71,6 +77,8 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
     <div
       className="sc-notification sc-htoDjs CTlgA"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -81,7 +89,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-iwsKbI fwqiQS"
+        className="sc-iwsKbI eUgAqp"
         max={10000}
         value={0}
       />
@@ -100,6 +108,8 @@ exports[`Storyshots Notifications Default 1`] = `
   >
     <div
       className="sc-notification sc-htoDjs fEDxWu"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -120,6 +130,8 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
     <div
       className="sc-notification sc-htoDjs hrgOQB"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -130,7 +142,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Saif. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-iwsKbI krNqle"
+        className="sc-iwsKbI hDgymj"
         max={5000}
         value={0}
       />
@@ -149,6 +161,8 @@ exports[`Storyshots Notifications Default 1`] = `
   >
     <div
       className="sc-notification sc-htoDjs dCtEfn"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
@@ -169,6 +183,8 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
     <div
       className="sc-notification sc-htoDjs fEDxWu"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="sc-dnqmqq fChpCA"
