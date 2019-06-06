@@ -26,6 +26,13 @@ const themes = [
       danger: mediumOrange,
       base: grayLight
     }
+  },
+  {
+    name: "Scality",
+    brand: {
+      primary: "#403e40",
+      secondary: "#e99121"
+    }
   }
 ];
 addDecorator(withThemesProvider(themes));

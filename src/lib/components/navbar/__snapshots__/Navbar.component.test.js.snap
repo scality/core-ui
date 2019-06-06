@@ -6,13 +6,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with toggle
   </h3>
   <div
-    className="sc-navbar sc-VigVT drCNZt"
+    className="sc-navbar sc-VigVT boYEij"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
         onClick={[Function]}
       >
         <button
@@ -46,7 +46,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -121,7 +121,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <span
           className="sc-jzJRlG knTCrh"
@@ -134,7 +134,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -160,7 +160,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -186,7 +186,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -222,13 +222,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar without toggle
   </h3>
   <div
-    className="sc-navbar sc-VigVT drCNZt"
+    className="sc-navbar sc-VigVT boYEij"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -303,7 +303,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <span
           className="sc-jzJRlG knTCrh"
@@ -316,7 +316,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -342,7 +342,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -368,7 +368,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -404,13 +404,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with customized logo
   </h3>
   <div
-    className="sc-navbar sc-VigVT drCNZt"
+    className="sc-navbar sc-VigVT boYEij"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
         onClick={[Function]}
       >
         <button
@@ -444,7 +444,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -455,7 +455,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <span
           className="sc-jzJRlG knTCrh"
@@ -468,7 +468,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -494,7 +494,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
@@ -520,7 +520,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX cOxlQF"
+        className="sc-fjdhpX iVODDu"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"

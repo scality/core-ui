@@ -23,8 +23,18 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject6() {
+function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 15px;\n  svg {\n    width: 100px;\n    height: 30px;\n  }\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n  text-transform: uppercase;\n  font-size: ", ";\n  padding: 0 15px;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -34,7 +44,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  text-transform: uppercase;\n  font-size: ", ";\n  padding: 0 15px;\n"]);
+  var data = _taggedTemplateLiteral(["\n      .fas {\n        background-color: ", ";\n        color: ", ";\n      }\n    "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -44,7 +54,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  .fas {\n    font-size: ", ";\n  }\n  button {\n    margin: 0;\n    border-radius: 0;\n    height: ", ";\n    width: ", ";\n  }\n  .trigger {\n    height: ", ";\n    font-size: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  ", "\n\n  button {\n    margin: 0;\n    border-radius: 0;\n    height: ", ";\n    width: ", ";\n  }\n  .trigger {\n    height: ", ";\n    font-size: ", ";\n  }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -87,16 +97,19 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var NavbarContainer = _styledComponents.default.div(_templateObject(), defaultTheme.navbarHeight, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, defaultTheme.white);
+  return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, brandingTheme.secondary);
 });
 
 var NavbarMenu = _styledComponents.default.div(_templateObject3());
 
-var NavbarMenuItem = _styledComponents.default.div(_templateObject4(), defaultTheme.fontSize.large, defaultTheme.navbarHeight, defaultTheme.navbarItemWidth, defaultTheme.navbarHeight, defaultTheme.fontSize.base);
+var NavbarMenuItem = _styledComponents.default.div(_templateObject4(), function (props) {
+  var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
+  return (0, _styledComponents.css)(_templateObject5(), brandingTheme.primary, brandingTheme.secondary);
+}, defaultTheme.navbarHeight, defaultTheme.navbarItemWidth, defaultTheme.navbarHeight, defaultTheme.fontSize.base);
 
-var ProductNameSpan = _styledComponents.default.span(_templateObject5(), defaultTheme.fontSize.larger);
+var ProductNameSpan = _styledComponents.default.span(_templateObject6(), defaultTheme.fontSize.larger);
 
-var LogoContainer = _styledComponents.default.div(_templateObject6());
+var LogoContainer = _styledComponents.default.div(_templateObject7());
 
 function NavBar(_ref) {
   var onToggleClick = _ref.onToggleClick,
