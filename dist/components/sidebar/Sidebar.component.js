@@ -50,7 +50,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n          background-color: ", ";\n          color: ", ";\n          cursor: default;\n        "]);
+  var data = _taggedTemplateLiteral(["\n          background-color: ", ";\n          color: ", ";\n          cursor: default;\n          border-right: solid 5px ", ";\n        "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -113,7 +113,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var SidebarContainer = _styledComponents.default.div(_templateObject(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, defaultTheme.white);
+  return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, brandingTheme.secondary);
 }, function (props) {
   if (props.expanded) {
     return (0, _styledComponents.css)(_templateObject3());
@@ -125,8 +125,8 @@ var SidebarContainer = _styledComponents.default.div(_templateObject(), function
 var SidebarItem = _styledComponents.default.div(_templateObject5(), defaultTheme.padding.base, defaultTheme.fontSize.large, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   var brandLight = (0, _color.default)(brandingTheme.primary).lighten(0.1).hsl().string();
-  var brandDark = (0, _color.default)(brandingTheme.primary).darken(0.1).hsl().string();
-  return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, defaultTheme.white) : (0, _styledComponents.css)(_templateObject7(), brandLight, defaultTheme.white, brandingTheme.primary, defaultTheme.white);
+  var brandDark = (0, _color.default)(brandingTheme.primary).darken(0.3).hsl().string();
+  return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, brandingTheme.secondary, brandingTheme.secondary) : (0, _styledComponents.css)(_templateObject7(), brandLight, brandingTheme.secondary, brandingTheme.primary, brandingTheme.secondary);
 });
 
 var MenuItemText = _styledComponents.default.div(_templateObject8(), defaultTheme.padding.large);

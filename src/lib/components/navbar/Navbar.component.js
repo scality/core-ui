@@ -32,7 +32,7 @@ const NavbarContainer = styled.div`
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
       background-color: ${brandingTheme.primary};
-      color: ${defaultTheme.white};
+      color: ${brandingTheme.secondary};
     `;
   }};
 `;
@@ -47,9 +47,16 @@ const NavbarMenuItem = styled.div`
   justify-content: center;
   align-items: center;
 
-  .fas {
-    font-size: ${defaultTheme.fontSize.large};
-  }
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      .fas {
+        background-color: ${brandingTheme.primary};
+        color: ${brandingTheme.secondary};
+      }
+    `;
+  }}
+
   button {
     margin: 0;
     border-radius: 0;

@@ -23,7 +23,7 @@ const SidebarContainer = styled.div`
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
       background-color: ${brandingTheme.primary};
-      color: ${defaultTheme.white};
+      color: ${brandingTheme.secondary};
     `;
   }}
 
@@ -57,23 +57,24 @@ const SidebarItem = styled.div`
       .hsl()
       .string();
     const brandDark = Color(brandingTheme.primary)
-      .darken(0.1)
+      .darken(0.3)
       .hsl()
       .string();
     return props.active
       ? css`
           background-color: ${brandDark};
-          color: ${defaultTheme.white};
+          color: ${brandingTheme.secondary};
           cursor: default;
+          border-right: solid 5px ${brandingTheme.secondary};
         `
       : css`
           &:hover {
             background-color: ${brandLight};
-            color: ${defaultTheme.white};
+            color: ${brandingTheme.secondary};
           }
           &:active {
             background-color: ${brandingTheme.primary};
-            color: ${defaultTheme.white};
+            color: ${brandingTheme.secondary};
           }
         `;
   }}
