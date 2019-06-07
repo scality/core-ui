@@ -40,3 +40,16 @@ You can use plop when you want to create a new react component. Plop generates c
 ✔  ++ /src/lib/components/menuitem/__snapshots__/config.js
 ✔  ++ /stories/menuitem.js
 ```
+
+## How to contribute
+
+### Create a new component
+
+- Run `npm run plop` to generates component template files
+- Update these template files to add features
+- Add storybook stories to cover all features 
+- Run `npm run test` to generates snapshot tests which are based on storybook stories
+- Update `src/lib/index.js` to export the new component
+- Run `npm run build` to update `dist` folder with the new component
+- Once all is done, create Pull Request for review
+- When the Pull Request is merged, checkout the `master` branch, update it then run `npm run storybook:deploy` to deploy the new component to [ui-core GitHub Pages](https://scality.github.io/core-ui/)
