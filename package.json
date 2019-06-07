@@ -1,5 +1,5 @@
 {
-  "name": "core-ui",
+  "name": "@scality/core-ui",
   "version": "0.1.0",
   "description": "Scality commun React component library",
   "repository": {
