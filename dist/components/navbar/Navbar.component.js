@@ -107,7 +107,7 @@ var NavbarMenuItem = _styledComponents.default.div(_templateObject4(), function 
   return (0, _styledComponents.css)(_templateObject5(), brandingTheme.primary, brandingTheme.secondary);
 }, defaultTheme.navbarHeight, defaultTheme.navbarItemWidth, defaultTheme.navbarHeight, defaultTheme.fontSize.base);
 
-var ProductNameSpan = _styledComponents.default.span(_templateObject6(), defaultTheme.fontSize.larger);
+var ProductNameSpan = _styledComponents.default.h1(_templateObject6(), defaultTheme.fontSize.larger);
 
 var LogoContainer = _styledComponents.default.div(_templateObject7());
 

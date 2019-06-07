@@ -254,8 +254,15 @@ function Table({
                 className={"sc-table-column"}
                 cellRenderer={({ cellData, columnIndex, rowData }) => {
                   return (
-                    <CellContainer>
-                      <CellContent title={cellData}>
+                    <CellContainer
+                      className={`sc-table-column-cell-container-${
+                        column.dataKey
+                      }`}
+                    >
+                      <CellContent
+                        className={`sc-table-column-cell-${column.dataKey}`}
+                        title={cellData}
+                      >
                         {column.renderer
                           ? column.renderer(cellData, rowData)
                           : cellData}

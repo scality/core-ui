@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 import Table from "../src/lib/components/table/Table.component";
 import Button from "../src/lib/components/button/Button.component";
 import { list } from "./data/list";
+import styled from "styled-components";
 
 const actions = [
   { label: "Edit", onClick: action("Edit clicked") },
@@ -109,6 +110,13 @@ const columnsChangeSize = [
   }
 ];
 
+const ContainerWithClassName = styled.div`
+  height: 100vh;
+  .sc-table-column-cell-container-first_name {
+    justify-content: center;
+  }
+`;
+
 storiesOf("Table", module)
   .add("Default", () => {
     return (
@@ -159,6 +167,23 @@ storiesOf("Table", module)
           onRowClick={action("Row Clicked")}
         />
       </div>
+    );
+  })
+  .add("Center a column with CSS", () => {
+    return (
+      <ContainerWithClassName>
+        <Table
+          list={listWithActions}
+          columns={columnsChangeSize}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={"first_name"}
+          sortDirection={"ASC"}
+          onSort={action("Sort Clicked")}
+          onRowClick={action("Row Clicked")}
+        />
+      </ContainerWithClassName>
     );
   })
   .add("Empty Table", () => {
