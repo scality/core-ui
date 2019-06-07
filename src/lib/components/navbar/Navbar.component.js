@@ -69,7 +69,7 @@ const NavbarMenuItem = styled.div`
   }
 `;
 
-const ProductNameSpan = styled.span`
+const ProductNameSpan = styled.h1`
   text-transform: uppercase;
   font-size: ${defaultTheme.fontSize.larger};
   padding: 0 15px;

@@ -123,11 +123,11 @@ exports[`Storyshots Navbar Default 1`] = `
       <div
         className="sc-fjdhpX iVODDu"
       >
-        <span
+        <h1
           className="sc-jzJRlG knTCrh"
         >
           Harware UI
-        </span>
+        </h1>
       </div>
     </div>
     <div
@@ -305,11 +305,11 @@ exports[`Storyshots Navbar Default 1`] = `
       <div
         className="sc-fjdhpX iVODDu"
       >
-        <span
+        <h1
           className="sc-jzJRlG knTCrh"
         >
           Harware UI
-        </span>
+        </h1>
       </div>
     </div>
     <div
@@ -457,11 +457,11 @@ exports[`Storyshots Navbar Default 1`] = `
       <div
         className="sc-fjdhpX iVODDu"
       >
-        <span
+        <h1
           className="sc-jzJRlG knTCrh"
         >
           Harware UI
-        </span>
+        </h1>
       </div>
     </div>
     <div

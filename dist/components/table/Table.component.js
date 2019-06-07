@@ -230,7 +230,10 @@ function Table(_ref) {
           var cellData = _ref5.cellData,
               columnIndex = _ref5.columnIndex,
               rowData = _ref5.rowData;
-          return _react.default.createElement(CellContainer, null, _react.default.createElement(CellContent, {
+          return _react.default.createElement(CellContainer, {
+            className: "sc-table-column-cell-container-".concat(column.dataKey)
+          }, _react.default.createElement(CellContent, {
+            className: "sc-table-column-cell-".concat(column.dataKey),
             title: cellData
           }, column.renderer ? column.renderer(cellData, rowData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
             icon: _react.default.createElement("i", {
