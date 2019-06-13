@@ -40,7 +40,7 @@ const NotificationDismissProgress = styled.div`
   bottom: 0;
   left: 0;
   height: 5px;
-
+  border-radius: 5px;
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     const brandDark = Color(brandingTheme[props.variant || "primary"])
@@ -51,6 +51,8 @@ const NotificationDismissProgress = styled.div`
     return css`
       background-color: ${brandDark};
       width: ${(props.value / props.max) * 100}%;
+      transition: width 1s;
+      transition-timing-function: linear;
     `;
   }};
 `;
@@ -67,30 +69,50 @@ const NotificationClose = styled.div`
 
 function Notification(props: Props) {
   const [dismissProgress, setDismissProgress] = useState(0);
+  const [timerId, setTimerId] = useState(null);
 
   const dismissProgressRef = useRef(dismissProgress);
   dismissProgressRef.current = dismissProgress;
 
   useEffect(() => {
+    resumeTimer();
+  }, [dismissProgress]);
+
+  const clearTimer = () => {
+    if (props.dismissAfter) {
+      setTimerId(null);
+      clearInterval(timerId);
+    }
+  };
+
+  const resumeTimer = () => {
     if (props.dismissAfter) {
       if (dismissProgressRef.current === props.dismissAfter) {
         dismiss();
-      } else {
-        let timerId = setTimeout(() => {
-          setDismissProgress(dismissProgressRef.current + 1000); // setDismissProgress relaunchs useEffect
-        }, 1000);
-        return () => {
-          clearTimeout(timerId);
-        };
+      } else if (!timerId) {
+        setTimerId(
+          setInterval(() => {
+            setDismissProgress(dismissProgressRef.current + 1000);
+          }, 1000)
+        );
       }
     }
-  }, [dismissProgress]);
+  };
 
   const dismiss = () => {
+    if (timerId) {
+      clearTimer();
+    }
     props.onDismiss && props.onDismiss(props.uid);
   };
+
   return (
-    <NotificationContainer className="sc-notification" variant={props.variant}>
+    <NotificationContainer
+      className="sc-notification"
+      variant={props.variant}
+      onMouseEnter={clearTimer}
+      onMouseLeave={resumeTimer}
+    >
       <NotificationTitle>{props.title}</NotificationTitle>
       <div>{props.message}</div>
       {!!props.dismissAfter && (
