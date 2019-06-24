@@ -11,33 +11,50 @@ const sideBarActions = [
     label: "Dashboard",
     icon: <i className="fas fa-tachometer-alt" />,
     onClick: action("dashboard clicked"),
-    active: true
+    active: true,
+    "data-cy": "Dashboard"
   },
   {
     label: "Servers",
     icon: <i className="fas fa-server" />,
-    onClick: action("server clicked")
+    onClick: action("server clicked"),
+    "data-cy": "Servers"
   },
   {
     label: "Disks",
     icon: <i className="fas fa-hdd" />,
-    onClick: action("disk clicked")
+    onClick: action("disk clicked"),
+    "data-cy": "Disks"
   }
 ];
 
 const applications = [
-  { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") }
+  {
+    label: "Hyperdrive UI",
+    onClick: action("Hyperdrive UI clicked"),
+    "data-cy": "Hyperdrive_UI"
+  }
 ];
 
 const help = [
-  { label: "About", onClick: action("About clicked") },
-  { label: "Documentation", onClick: action("Documentation clicked") },
-  { label: "Onboarding", onClick: action("Onboarding clicked") }
+  { label: "About", onClick: action("About clicked"), "data-cy": "About" },
+  {
+    label: "Documentation",
+    onClick: action("Documentation clicked"),
+    "data-cy": "Documentation"
+  },
+  {
+    label: "Onboarding",
+    onClick: action("Onboarding clicked"),
+    "data-cy": "Onboarding"
+  }
 ];
 
 const user = {
   name: "Charles NGUYEN",
-  actions: [{ label: "Log out", onClick: action("Logout clicked") }]
+  actions: [
+    { label: "Log out", onClick: action("Logout clicked"), "data-cy": "Logout" }
+  ]
 };
 
 storiesOf("Layout", module)

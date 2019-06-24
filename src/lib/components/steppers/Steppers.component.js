@@ -104,19 +104,19 @@ function Step(props: StepProps) {
   );
 }
 
-function Steppers(props: Props) {
-  const { steps, activeStep } = props;
+function Steppers({ steps, activeStep, ...rest }: Props) {
   return (
-    <SteppersContainer className="sc-steppers">
-      {steps.map((step, index) => (
+    <SteppersContainer className="sc-steppers" {...rest}>
+      {steps.map(({ title, content, ...stepRest }, index) => (
         <Step
           key={index}
-          title={step.title}
-          content={step.content}
+          title={title}
+          content={content}
           active={index === activeStep}
           completed={index < activeStep}
           isLast={index === steps.length - 1}
           index={index}
+          {...stepRest}
         />
       ))}
     </SteppersContainer>

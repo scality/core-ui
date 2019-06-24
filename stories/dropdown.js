@@ -5,14 +5,20 @@ import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 
 const items = [
-  { label: "About", onClick: action("About clicked") },
+  {
+    label: "About",
+    onClick: action("About clicked"),
+    "data-cy": "About"
+  },
   {
     label: "Documentation",
-    onClick: action("Documentation clicked")
+    onClick: action("Documentation clicked"),
+    "data-cy": "Documentation"
   },
   {
     label: "Onboarding",
-    onClick: action("Onboarding clicked")
+    onClick: action("Onboarding clicked"),
+    "data-cy": "Onboarding"
   }
 ];
 

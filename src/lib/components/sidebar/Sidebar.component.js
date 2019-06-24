@@ -85,24 +85,27 @@ const MenuItemIcon = styled.div`
   align-items: end;
 `;
 
-function Sidebar({ expanded, actions }: Props) {
+function Sidebar({ expanded, actions, ...rest }: Props) {
   return (
-    <SidebarContainer expanded={expanded} className="sc-sidebar">
-      {actions.map((action, index) => {
-        return (
-          <SidebarItem
-            className="sc-sidebar-item"
-            key={index}
-            active={action.active}
-            title={action.label}
-            onClick={action.onClick}
-            expanded={expanded}
-          >
-            {action.icon && <MenuItemIcon>{action.icon}</MenuItemIcon>}
-            {expanded && <MenuItemText>{action.label}</MenuItemText>}
-          </SidebarItem>
-        );
-      })}
+    <SidebarContainer expanded={expanded} className="sc-sidebar" {...rest}>
+      {actions.map(
+        ({ active, label, onClick, icon = null, ...actionRest }, index) => {
+          return (
+            <SidebarItem
+              className="sc-sidebar-item"
+              key={index}
+              active={active}
+              title={label}
+              onClick={onClick}
+              expanded={expanded}
+              {...actionRest}
+            >
+              {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
+              {expanded && <MenuItemText>{label}</MenuItemText>}
+            </SidebarItem>
+          );
+        }
+      )}
     </SidebarContainer>
   );
 }

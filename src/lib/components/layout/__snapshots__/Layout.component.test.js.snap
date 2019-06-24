@@ -224,7 +224,8 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-sidebar sc-kAzzGY jRhIZZ"
     >
       <div
-        className="sc-sidebar-item sc-chPdSV fJHGte"
+        className="sc-sidebar-item sc-chPdSV SqDMd"
+        data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -237,7 +238,8 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jCHZyL"
+        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
@@ -250,7 +252,8 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jCHZyL"
+        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >
@@ -619,7 +622,8 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-sidebar sc-kAzzGY dEuMQm"
     >
       <div
-        className="sc-sidebar-item sc-chPdSV fJHGte"
+        className="sc-sidebar-item sc-chPdSV SqDMd"
+        data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -637,7 +641,8 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jCHZyL"
+        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
@@ -655,7 +660,8 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jCHZyL"
+        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >

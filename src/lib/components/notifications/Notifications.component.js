@@ -51,17 +51,18 @@ const NotificationsContainer = styled.div`
   }};
 `;
 
-function Notifications(props: Props) {
+function Notifications({ position, notifications, onDismiss, ...rest }: Props) {
   return (
     <NotificationsContainer
       className="sc-notifications"
-      position={props.position}
+      position={position}
+      {...rest}
     >
-      {props.notifications.map(notification => (
+      {notifications.map(notification => (
         <Notification
           key={notification.uid}
           {...notification}
-          onDismiss={props.onDismiss}
+          onDismiss={onDismiss}
         />
       ))}
     </NotificationsContainer>

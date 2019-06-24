@@ -7,6 +7,7 @@ exports[`Storyshots Notifications Default 1`] = `
   >
     <div
       className="sc-notification sc-htoDjs iJaLkP"
+      data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -28,7 +29,8 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs kVflel"
+      className="sc-notification sc-htoDjs fiiBBZ"
+      data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >

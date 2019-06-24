@@ -14,7 +14,7 @@ storiesOf("Button", module)
         <h3>Button Default</h3>
         <Button size="smaller" text="Smaller" />
         <Button size="small" text="Small" />
-        <Button text="default" />
+        <Button text="default" data-cy="default_button" />
         <Button size="large" text="Large" />
         <Button size="larger" text="Larger" />
 

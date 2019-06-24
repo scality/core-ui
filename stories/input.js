@@ -8,7 +8,12 @@ const ExampleInput = () => {
   return (
     <div>
       <h3>Input without label</h3>
-      <Input id="id1" value="value" onChange={action("onChange")} />
+      <Input
+        id="id1"
+        value="value"
+        onChange={action("onChange")}
+        data-cy="default_input"
+      />
       <h3>Input with label</h3>
       <Input
         id="id2"

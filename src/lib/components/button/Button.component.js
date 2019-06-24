@@ -221,7 +221,8 @@ function Button({
   onClick,
   title,
   isLoading,
-  type
+  type,
+  ...rest
 }: Props) {
   return href && href.length ? (
     <Anchor
@@ -232,6 +233,7 @@ function Button({
       disabled={disabled}
       size={size}
       title={title}
+      {...rest}
     >
       {icon && (
         <ButtonIcon text={text} size={size}>
@@ -251,6 +253,7 @@ function Button({
       title={title}
       isLoading={isLoading}
       type={type}
+      {...rest}
     >
       <ButtonContent>
         {isLoading && <Loader size={size} />}

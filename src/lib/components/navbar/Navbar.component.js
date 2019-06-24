@@ -93,10 +93,11 @@ function NavBar({
   applications,
   help,
   user,
-  logo
+  logo,
+  ...rest
 }: Props) {
   return (
-    <NavbarContainer className="sc-navbar">
+    <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
         {toggleVisible && (
           <NavbarMenuItem onClick={onToggleClick}>
