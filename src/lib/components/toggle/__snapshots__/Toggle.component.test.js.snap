@@ -10,6 +10,7 @@ exports[`Storyshots Toggle Default 1`] = `
     >
       <input
         checked={false}
+        data-cy="default_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"
@@ -32,6 +33,7 @@ exports[`Storyshots Toggle Default 1`] = `
     >
       <input
         checked={true}
+        data-cy="custom_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"

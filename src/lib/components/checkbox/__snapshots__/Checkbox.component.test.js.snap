@@ -11,6 +11,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   >
     <input
       checked={true}
+      data-cy="checked_checkbox"
       onChange={[Function]}
       type="checkbox"
     />

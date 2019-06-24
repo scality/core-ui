@@ -21,6 +21,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject13() {
   var data = _taggedTemplateLiteral(["\n  position: relative;\n"]);
 
@@ -224,8 +230,10 @@ function Button(_ref) {
       onClick = _ref.onClick,
       title = _ref.title,
       isLoading = _ref.isLoading,
-      type = _ref.type;
-  return href && href.length ? _react.default.createElement(Anchor, {
+      type = _ref.type,
+      rest = _objectWithoutProperties(_ref, ["text", "href", "icon", "size", "variant", "outlined", "disabled", "onClick", "title", "isLoading", "type"]);
+
+  return href && href.length ? _react.default.createElement(Anchor, _extends({
     className: "sc-button",
     href: href,
     variant: variant,
@@ -233,10 +241,10 @@ function Button(_ref) {
     disabled: disabled,
     size: size,
     title: title
-  }, icon && _react.default.createElement(ButtonIcon, {
+  }, rest), icon && _react.default.createElement(ButtonIcon, {
     text: text,
     size: size
-  }, icon), _react.default.createElement(ButtonText, null, text)) : _react.default.createElement(ButtonStyled, {
+  }, icon), _react.default.createElement(ButtonText, null, text)) : _react.default.createElement(ButtonStyled, _extends({
     className: "sc-button",
     variant: variant,
     outlined: outlined,
@@ -246,7 +254,7 @@ function Button(_ref) {
     title: title,
     isLoading: isLoading,
     type: type
-  }, _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
+  }, rest), _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
     size: size
   }), _react.default.createElement("span", {
     className: "sc-button-text"

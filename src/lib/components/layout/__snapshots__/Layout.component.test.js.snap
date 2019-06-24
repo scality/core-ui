@@ -225,6 +225,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     >
       <div
         className="sc-sidebar-item sc-chPdSV SqDMd"
+        data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -238,6 +239,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       </div>
       <div
         className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
@@ -251,6 +253,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       </div>
       <div
         className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >
@@ -620,6 +623,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     >
       <div
         className="sc-sidebar-item sc-chPdSV SqDMd"
+        data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -638,6 +642,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       </div>
       <div
         className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
@@ -656,6 +661,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       </div>
       <div
         className="sc-sidebar-item sc-chPdSV jNkAIa"
+        data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >

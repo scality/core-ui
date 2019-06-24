@@ -692,6 +692,7 @@ exports[`Storyshots Button Default 1`] = `
   </button>
   <button
     className="sc-button sc-bxivhb oNPue"
+    data-cy="default_button"
     disabled={false}
     size="base"
     title=""

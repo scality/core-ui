@@ -22,6 +22,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           value="carlito"
           onChange={action("on input change")}
           onReset={action("on input reset")}
+          data-cy="carlito_searchinput"
         />
       </div>
     </div>

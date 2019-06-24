@@ -131,7 +131,8 @@ function Dropdown({
   size = "base",
   variant = "primary",
   title,
-  caret = true
+  caret = true,
+  ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
@@ -150,7 +151,12 @@ function Dropdown({
   }, []);
 
   return (
-    <DropdownStyled active={open} variant={variant} className="sc-dropdown">
+    <DropdownStyled
+      active={open}
+      variant={variant}
+      className="sc-dropdown"
+      {...rest}
+    >
       <TriggerStyled
         variant={variant}
         size={size}
@@ -181,13 +187,13 @@ function Dropdown({
             size={menuSize}
             triggerSize={triggerSize}
           >
-            {items.map(item => {
-              const { label, onClick } = item;
+            {items.map(({ label, onClick, ...itemRest }) => {
               return (
                 <DropdownMenuItemStyled
                   key={label}
                   onClick={onClick}
                   variant={variant}
+                  {...itemRest}
                 >
                   {label}
                 </DropdownMenuItemStyled>
