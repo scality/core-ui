@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var _Button = _interopRequireDefault(require("../button/Button.component"));
 
@@ -100,7 +100,7 @@ var NotificationTitle = _styledComponents.default.div(_templateObject3(), defaul
 
 var NotificationDismissProgress = _styledComponents.default.div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandDark = (0, _color.default)(brandingTheme[props.variant || "primary"]).darken(0.2).hsl().string();
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme[props.variant || "primary"]);
   return (0, _styledComponents.css)(_templateObject5(), brandDark, props.value / props.max * 100);
 });
 

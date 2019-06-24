@@ -33,8 +33,8 @@ export const grayLightest = "#E9EBED";
 
 export const brand = {
   primary: blue,
-  secondary: jade,
-  success: green,
+  secondary: grayLightest,
+  success: jade,
   info: turquoise,
   warning: mediumOrange,
   danger: warmRed,

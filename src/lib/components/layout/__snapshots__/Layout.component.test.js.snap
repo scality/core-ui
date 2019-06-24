@@ -5,17 +5,17 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
   className="sc-layout sc-kpOJdX kBUtiv"
 >
   <div
-    className="sc-navbar sc-VigVT boYEij"
+    className="sc-navbar sc-VigVT eELKml"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
         onClick={[Function]}
       >
         <button
-          className="sc-button sc-bxivhb jysFwW"
+          className="sc-button sc-bxivhb eaqdBK"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -45,7 +45,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -120,7 +120,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <h1
           className="sc-jzJRlG knTCrh"
@@ -133,13 +133,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -159,13 +159,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -185,13 +185,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -221,10 +221,10 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     className="sc-dxgOiQ hPoQNI"
   >
     <div
-      className="sc-sidebar sc-kAzzGY hbYkEk"
+      className="sc-sidebar sc-kAzzGY jRhIZZ"
     >
       <div
-        className="sc-sidebar-item sc-chPdSV SqDMd"
+        className="sc-sidebar-item sc-chPdSV fJHGte"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -237,7 +237,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        className="sc-sidebar-item sc-chPdSV jCHZyL"
         onClick={[Function]}
         title="Servers"
       >
@@ -250,7 +250,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        className="sc-sidebar-item sc-chPdSV jCHZyL"
         onClick={[Function]}
         title="Disks"
       >
@@ -400,17 +400,17 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
   className="sc-layout sc-kpOJdX kBUtiv"
 >
   <div
-    className="sc-navbar sc-VigVT boYEij"
+    className="sc-navbar sc-VigVT eELKml"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
         onClick={[Function]}
       >
         <button
-          className="sc-button sc-bxivhb jysFwW"
+          className="sc-button sc-bxivhb eaqdBK"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -440,7 +440,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -515,7 +515,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <h1
           className="sc-jzJRlG knTCrh"
@@ -528,13 +528,13 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -554,13 +554,13 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -580,13 +580,13 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -616,10 +616,10 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     className="sc-dxgOiQ hPoQNI"
   >
     <div
-      className="sc-sidebar sc-kAzzGY dotBgS"
+      className="sc-sidebar sc-kAzzGY dEuMQm"
     >
       <div
-        className="sc-sidebar-item sc-chPdSV SqDMd"
+        className="sc-sidebar-item sc-chPdSV fJHGte"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -637,7 +637,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        className="sc-sidebar-item sc-chPdSV jCHZyL"
         onClick={[Function]}
         title="Servers"
       >
@@ -655,7 +655,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-chPdSV jNkAIa"
+        className="sc-sidebar-item sc-chPdSV jCHZyL"
         onClick={[Function]}
         title="Disks"
       >

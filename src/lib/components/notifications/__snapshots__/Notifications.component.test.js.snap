@@ -28,7 +28,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs fiiBBZ"
+      className="sc-notification sc-htoDjs kVflel"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -76,7 +76,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs CTlgA"
+      className="sc-notification sc-htoDjs fiiBBZ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -89,7 +89,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-iwsKbI eUgAqp"
+        className="sc-iwsKbI kaNhZZ"
         max={10000}
         value={0}
       />
@@ -142,7 +142,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Saif. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-iwsKbI hDgymj"
+        className="sc-iwsKbI lbLlOw"
         max={5000}
         value={0}
       />

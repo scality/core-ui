@@ -7,7 +7,7 @@ import {
   ButtonIcon,
   ButtonText
 } from "../button/Button.component";
-import Color from "color";
+import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
@@ -32,10 +32,7 @@ const DropdownStyled = styled.div`
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
 
-      const brandDark = Color(brandingTheme[props.variant])
-        .darken(0.1)
-        .hsl()
-        .string();
+      const brandDark = darken(0.1, brandingTheme[props.variant]);
       return props.active
         ? css`
             background-color: ${brandDark};
@@ -99,10 +96,7 @@ const DropdownMenuItemStyled = styled.li`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = Color(brandingTheme[props.variant])
-      .lighten(0.1)
-      .hsl()
-      .string();
+    const brandLight = lighten(0.1, brandingTheme[props.variant]);
     return css`
       background-color: ${brandingTheme[props.variant]};
       color: ${defaultTheme.white};

@@ -6,17 +6,17 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with toggle
   </h3>
   <div
-    className="sc-navbar sc-VigVT boYEij"
+    className="sc-navbar sc-VigVT eELKml"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
         onClick={[Function]}
       >
         <button
-          className="sc-button sc-bxivhb jysFwW"
+          className="sc-button sc-bxivhb eaqdBK"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -46,7 +46,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -121,7 +121,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <h1
           className="sc-jzJRlG knTCrh"
@@ -134,13 +134,13 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -160,13 +160,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -186,13 +186,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -222,13 +222,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar without toggle
   </h3>
   <div
-    className="sc-navbar sc-VigVT boYEij"
+    className="sc-navbar sc-VigVT eELKml"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -303,7 +303,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <h1
           className="sc-jzJRlG knTCrh"
@@ -316,13 +316,13 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -342,13 +342,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -368,13 +368,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -404,17 +404,17 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with customized logo
   </h3>
   <div
-    className="sc-navbar sc-VigVT boYEij"
+    className="sc-navbar sc-VigVT eELKml"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
         onClick={[Function]}
       >
         <button
-          className="sc-button sc-bxivhb jysFwW"
+          className="sc-button sc-bxivhb eaqdBK"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -444,7 +444,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-logo sc-cSHVUG byVnbd"
@@ -455,7 +455,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <h1
           className="sc-jzJRlG knTCrh"
@@ -468,13 +468,13 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -494,13 +494,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -520,13 +520,13 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX iVODDu"
+        className="sc-fjdhpX gQuqWJ"
       >
         <div
           className="sc-dropdown sc-htoDjs dlhJIS"
         >
           <div
-            className="trigger sc-gqjmRU dTGfyA"
+            className="trigger sc-gqjmRU cUGHcq"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

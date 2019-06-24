@@ -1,7 +1,7 @@
 //@flow
 import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { darken } from "polished";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
@@ -43,10 +43,7 @@ const NotificationDismissProgress = styled.div`
   border-radius: 5px;
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandDark = Color(brandingTheme[props.variant || "primary"])
-      .darken(0.2)
-      .hsl()
-      .string();
+    const brandDark = darken(0.1, brandingTheme[props.variant || "primary"]);
 
     return css`
       background-color: ${brandDark};

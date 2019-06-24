@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
@@ -124,8 +124,8 @@ var SidebarContainer = _styledComponents.default.div(_templateObject(), function
 
 var SidebarItem = _styledComponents.default.div(_templateObject5(), defaultTheme.padding.base, defaultTheme.fontSize.large, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLight = (0, _color.default)(brandingTheme.primary).lighten(0.1).hsl().string();
-  var brandDark = (0, _color.default)(brandingTheme.primary).darken(0.3).hsl().string();
+  var brandLight = (0, _polished.lighten)(0.1, brandingTheme.primary);
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme.primary);
   return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, brandingTheme.secondary, brandingTheme.secondary) : (0, _styledComponents.css)(_templateObject7(), brandLight, brandingTheme.secondary, brandingTheme.primary, brandingTheme.secondary);
 });
 

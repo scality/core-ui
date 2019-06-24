@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var _utils = require("../../utils");
 
@@ -185,12 +185,12 @@ var ButtonStyled = _styledComponents.default.button(_templateObject(), defaultTh
   }
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLighter = (0, _color.default)(brandingTheme[props.variant]).lighten(0.5).hsl().string();
-  var brandLight = (0, _color.default)(brandingTheme[props.variant]).lighten(0.3).hsl().string();
+  var brandLighter = (0, _polished.lighten)(0.3, brandingTheme[props.variant]).toString();
+  var brandLight = (0, _polished.lighten)(0.1, brandingTheme[props.variant]).toString();
   return (0, _styledComponents.css)(_templateObject7(), props.outlined ? "\n        border-width: 1px;\n        border-style: solid;\n        border-color: ".concat(brandingTheme[props.variant], ";\n        background-color: ").concat(defaultTheme.white, ";\n        color: ").concat(brandingTheme[props.variant], ";\n        \n        &:hover{      \n          border-color: ").concat(brandingTheme[props.variant], ";\n          background-color: ").concat(brandLight, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n\n        &:active {      \n          border-color: ").concat(brandingTheme[props.variant], ";\n          background-color: ").concat(brandLighter, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n        ") : "          \n        background-color: ".concat(brandingTheme[props.variant], ";\n        color: ").concat(defaultTheme.white, ";\n  \n        &:hover {\n          background-color: ").concat(brandLight, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n        \n        &:active {      \n          background-color: ").concat(brandingTheme[props.variant], ";\n          color: ").concat(defaultTheme.white, ";\n        }\n      "));
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLighter = (0, _color.default)(brandingTheme[props.variant]).lighten(0.5).hsl().string();
+  var brandLighter = (0, _polished.lighten)(0.3, brandingTheme[props.variant]).toString();
   return (0, _styledComponents.css)(_templateObject8(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          &,\n          &:hover,\n          &:focus,\n          &:active {\n            cursor: default;\n            background-color: ".concat(brandLighter, ";\n            border-color: ").concat(brandLighter, ";\n            color: ").concat(defaultTheme.white, ";\n            box-shadow: none;\n          };\n        ") : null);
 }, function (props) {
   return (0, _styledComponents.css)(_templateObject9(), props.isLoading ? "\n          .sc-button-text {\n            visibility: hidden;\n          }\n          .sc-loader {\n            svg {\n              fill: ".concat(defaultTheme.white, ";\n            }\n            > span {\n              position: absolute;\n              right: 0;\n              left: 0;\n            }\n          }\n        ") : null);

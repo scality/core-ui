@@ -2,7 +2,7 @@
 import React from "react";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { lighten } from "polished";
 import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
@@ -100,15 +100,8 @@ export const ButtonStyled = styled.button`
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
 
-    const brandLighter = Color(brandingTheme[props.variant])
-      .lighten(0.5)
-      .hsl()
-      .string();
-    const brandLight = Color(brandingTheme[props.variant])
-      .lighten(0.3)
-      .hsl()
-      .string();
-
+    const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
+    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
     return css`
       ${props.outlined
         ? `
@@ -150,10 +143,7 @@ export const ButtonStyled = styled.button`
 
 ${props => {
   const brandingTheme = mergeTheme(props.theme, defaultTheme);
-  const brandLighter = Color(brandingTheme[props.variant])
-    .lighten(0.5)
-    .hsl()
-    .string();
+  const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
 
   return css`
     ${props.disabled

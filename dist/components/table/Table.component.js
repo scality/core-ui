@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 require("react-virtualized/styles.css");
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
@@ -119,7 +119,7 @@ var TableContainer = _styledComponents.default.div(_templateObject(), defaultThe
 var CellContainer = _styledComponents.default.div(_templateObject3(), function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
 }, defaultTheme.padding.smaller, defaultTheme.padding.small, function (props) {
-  return (0, _color.default)((0, _utils.mergeTheme)(props.theme, defaultTheme).primary).lighten(0.3).hsl().string();
+  return (0, _polished.lighten)(0.3, (0, _utils.mergeTheme)(props.theme, defaultTheme).primary);
 });
 
 var CellContent = _styledComponents.default.span(_templateObject4());

@@ -7,7 +7,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={true}
-    className="sc-checkbox sc-bwzfXH jJrNMO"
+    className="sc-checkbox sc-bwzfXH hVzLpS"
   >
     <input
       checked={true}
@@ -28,7 +28,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH kvDNwS"
+    className="sc-checkbox sc-bwzfXH gvHcHm"
   >
     <input
       checked={false}
@@ -49,7 +49,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH gVdLqp"
+    className="sc-checkbox sc-bwzfXH fvhYca"
     disabled={true}
   >
     <input
