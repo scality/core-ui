@@ -2,7 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
-import { lighten } from "polished";
+import { lighten, ellipsis } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import Dropdown from "../dropdown/Dropdown.component";
@@ -129,9 +129,7 @@ const CellContainer = styled.div`
 `;
 
 const CellContent = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  ${ellipsis()}
 `;
 
 const HeaderContainer = styled.div`

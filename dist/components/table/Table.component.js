@@ -70,7 +70,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n"]);
+  var data = _taggedTemplateLiteral(["\n  ", "\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -122,7 +122,7 @@ var CellContainer = _styledComponents.default.div(_templateObject3(), function (
   return (0, _polished.lighten)(0.3, (0, _utils.mergeTheme)(props.theme, defaultTheme).primary);
 });
 
-var CellContent = _styledComponents.default.span(_templateObject4());
+var CellContent = _styledComponents.default.span(_templateObject4(), (0, _polished.ellipsis)());
 
 var HeaderContainer = _styledComponents.default.div(_templateObject5());
 
