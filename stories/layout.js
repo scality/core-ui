@@ -40,6 +40,8 @@ const user = {
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
+const languages = [{ label: "Français", onClick: action("French selected") }];
+
 storiesOf("Layout", module)
   .addDecorator(withKnobs)
   .add("Sidebar docked", () => {
@@ -55,6 +57,7 @@ storiesOf("Layout", module)
       onToggleClick: action("toggle clicked"),
       toggleVisible: toggle,
       productName: "Harware UI",
+      languages,
       applications,
       help,
       user
