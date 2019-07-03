@@ -29,7 +29,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs fiiBBZ"
+      className="sc-notification sc-htoDjs kVflel"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
