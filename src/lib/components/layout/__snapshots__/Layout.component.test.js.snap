@@ -208,7 +208,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>
@@ -603,7 +603,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>

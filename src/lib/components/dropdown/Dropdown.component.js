@@ -167,7 +167,7 @@ function Dropdown({
             {icon}
           </ButtonIcon>
         )}
-        {text && <ButtonText>{text}</ButtonText>}
+        {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
         {caret && (
           <Caret>
             <i className="fas fa-caret-down" />
@@ -185,6 +185,7 @@ function Dropdown({
               const { label, onClick } = item;
               return (
                 <DropdownMenuItemStyled
+                  className="menu-item-label"
                   key={label}
                   onClick={onClick}
                   variant={variant}

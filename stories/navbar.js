@@ -19,6 +19,8 @@ const user = {
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
+const languages = [{ label: "Français", onClick: action("French selected") }];
+
 storiesOf("Navbar", module).add("Default", () => {
   return (
     <div>
@@ -27,6 +29,7 @@ storiesOf("Navbar", module).add("Default", () => {
         onToggleClick={action("toggle clicked")}
         toggleVisible={true}
         productName={"Harware UI"}
+        languages={languages}
         applications={applications}
         help={help}
         user={user}
@@ -36,6 +39,7 @@ storiesOf("Navbar", module).add("Default", () => {
         onToggleClick={action("toggle clicked")}
         toggleVisible={false}
         productName={"Harware UI"}
+        languages={languages}
         applications={applications}
         help={help}
         user={user}
@@ -45,6 +49,7 @@ storiesOf("Navbar", module).add("Default", () => {
         onToggleClick={action("toggle clicked")}
         toggleVisible={true}
         productName={"Harware UI"}
+        languages={languages}
         applications={applications}
         help={help}
         user={user}

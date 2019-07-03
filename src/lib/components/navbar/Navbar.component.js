@@ -21,7 +21,8 @@ export type Props = {
   applications?: Items,
   help?: Items,
   user?: User,
-  logo?: Node
+  logo?: Node,
+  language?: Items
 };
 
 const NavbarContainer = styled.div`
@@ -93,7 +94,8 @@ function NavBar({
   applications,
   help,
   user,
-  logo
+  logo,
+  languages
 }: Props) {
   return (
     <NavbarContainer className="sc-navbar">
@@ -117,6 +119,18 @@ function NavBar({
         </NavbarMenuItem>
       </NavbarMenu>
       <NavbarMenu>
+        {languages && (
+          <NavbarMenuItem>
+            <Dropdown
+              size="larger"
+              items={languages}
+              icon={<i className="fas fa-globe" />}
+              title="Language"
+              caret={false}
+              text="EN"
+            />
+          </NavbarMenuItem>
+        )}
         {applications && (
           <NavbarMenuItem>
             <Dropdown

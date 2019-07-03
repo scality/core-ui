@@ -146,6 +146,37 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="Language"
+          >
+            <span
+              className="sc-ifAKCX joVDVz"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fjdhpX iVODDu"
+      >
+        <div
+          className="sc-dropdown sc-htoDjs dlhJIS"
+        >
+          <div
+            className="trigger sc-gqjmRU dTGfyA"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
             title="Scality Apps"
           >
             <span
@@ -209,7 +240,7 @@ exports[`Storyshots Navbar Default 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>
@@ -328,6 +359,37 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="Language"
+          >
+            <span
+              className="sc-ifAKCX joVDVz"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fjdhpX iVODDu"
+      >
+        <div
+          className="sc-dropdown sc-htoDjs dlhJIS"
+        >
+          <div
+            className="trigger sc-gqjmRU dTGfyA"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
             title="Scality Apps"
           >
             <span
@@ -391,7 +453,7 @@ exports[`Storyshots Navbar Default 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>
@@ -480,6 +542,37 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="Language"
+          >
+            <span
+              className="sc-ifAKCX joVDVz"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fjdhpX iVODDu"
+      >
+        <div
+          className="sc-dropdown sc-htoDjs dlhJIS"
+        >
+          <div
+            className="trigger sc-gqjmRU dTGfyA"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
             title="Scality Apps"
           >
             <span
@@ -543,7 +636,7 @@ exports[`Storyshots Navbar Default 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>

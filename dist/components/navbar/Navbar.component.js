@@ -118,7 +118,8 @@ function NavBar(_ref) {
       applications = _ref.applications,
       help = _ref.help,
       user = _ref.user,
-      logo = _ref.logo;
+      logo = _ref.logo,
+      languages = _ref.languages;
   return _react.default.createElement(NavbarContainer, {
     className: "sc-navbar"
   }, _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
@@ -131,7 +132,16 @@ function NavBar(_ref) {
     title: "Main Menu"
   })), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(LogoContainer, {
     className: "sc-logo"
-  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+    size: "larger",
+    items: languages,
+    icon: _react.default.createElement("i", {
+      className: "fas fa-globe"
+    }),
+    title: "Language",
+    caret: false,
+    text: "EN"
+  })), applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
     items: applications,
     icon: _react.default.createElement("i", {
