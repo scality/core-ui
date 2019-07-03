@@ -17,6 +17,12 @@ var _Sidebar = _interopRequireDefault(require("../sidebar/Sidebar.component"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject3() {
   var data = _taggedTemplateLiteral(["\n  flex-grow: 1;\n"]);
 
@@ -58,10 +64,12 @@ var MainContent = _styledComponents.default.div(_templateObject3());
 function Layout(_ref) {
   var children = _ref.children,
       sidebar = _ref.sidebar,
-      navbar = _ref.navbar;
-  return _react.default.createElement(LayoutContainer, {
+      navbar = _ref.navbar,
+      rest = _objectWithoutProperties(_ref, ["children", "sidebar", "navbar"]);
+
+  return _react.default.createElement(LayoutContainer, _extends({
     className: "sc-layout"
-  }, _react.default.createElement(_Navbar.default, navbar), _react.default.createElement(ContentContainer, null, _react.default.createElement(_Sidebar.default, sidebar), _react.default.createElement(MainContent, {
+  }, rest), _react.default.createElement(_Navbar.default, navbar), _react.default.createElement(ContentContainer, null, _react.default.createElement(_Sidebar.default, sidebar), _react.default.createElement(MainContent, {
     className: "main"
   }, children)));
 }

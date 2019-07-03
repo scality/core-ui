@@ -64,7 +64,15 @@ const NotificationClose = styled.div`
   }
 `;
 
-function Notification(props: Props) {
+function Notification({
+  uid,
+  title,
+  message,
+  variant,
+  dismissAfter,
+  onDismiss,
+  ...rest
+}: Props) {
   const [dismissProgress, setDismissProgress] = useState(0);
   const [timerId, setTimerId] = useState(null);
 
@@ -76,15 +84,15 @@ function Notification(props: Props) {
   }, [dismissProgress]);
 
   const clearTimer = () => {
-    if (props.dismissAfter) {
+    if (dismissAfter) {
       setTimerId(null);
       clearInterval(timerId);
     }
   };
 
   const resumeTimer = () => {
-    if (props.dismissAfter) {
-      if (dismissProgressRef.current === props.dismissAfter) {
+    if (dismissAfter) {
+      if (dismissProgressRef.current === dismissAfter) {
         dismiss();
       } else if (!timerId) {
         setTimerId(
@@ -100,23 +108,24 @@ function Notification(props: Props) {
     if (timerId) {
       clearTimer();
     }
-    props.onDismiss && props.onDismiss(props.uid);
+    onDismiss && onDismiss(uid);
   };
 
   return (
     <NotificationContainer
       className="sc-notification"
-      variant={props.variant}
+      variant={variant}
       onMouseEnter={clearTimer}
       onMouseLeave={resumeTimer}
+      {...rest}
     >
-      <NotificationTitle>{props.title}</NotificationTitle>
-      <div>{props.message}</div>
-      {!!props.dismissAfter && (
+      <NotificationTitle>{title}</NotificationTitle>
+      <div>{message}</div>
+      {!!dismissAfter && (
         <NotificationDismissProgress
           value={dismissProgress}
-          max={props.dismissAfter}
-          variant={props.variant}
+          max={dismissAfter}
+          variant={variant}
         />
       )}
       <NotificationClose onClick={dismiss}>

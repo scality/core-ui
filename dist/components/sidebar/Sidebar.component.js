@@ -19,6 +19,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject9() {
   var data = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: end;\n"]);
 
@@ -135,19 +141,28 @@ var MenuItemIcon = _styledComponents.default.div(_templateObject9(), defaultThem
 
 function Sidebar(_ref) {
   var expanded = _ref.expanded,
-      actions = _ref.actions;
-  return _react.default.createElement(SidebarContainer, {
+      actions = _ref.actions,
+      rest = _objectWithoutProperties(_ref, ["expanded", "actions"]);
+
+  return _react.default.createElement(SidebarContainer, _extends({
     expanded: expanded,
     className: "sc-sidebar"
-  }, actions.map(function (action, index) {
-    return _react.default.createElement(SidebarItem, {
+  }, rest), actions.map(function (_ref2, index) {
+    var active = _ref2.active,
+        label = _ref2.label,
+        onClick = _ref2.onClick,
+        _ref2$icon = _ref2.icon,
+        icon = _ref2$icon === void 0 ? null : _ref2$icon,
+        actionRest = _objectWithoutProperties(_ref2, ["active", "label", "onClick", "icon"]);
+
+    return _react.default.createElement(SidebarItem, _extends({
       className: "sc-sidebar-item",
       key: index,
-      active: action.active,
-      title: action.label,
-      onClick: action.onClick,
+      active: active,
+      title: label,
+      onClick: onClick,
       expanded: expanded
-    }, action.icon && _react.default.createElement(MenuItemIcon, null, action.icon), expanded && _react.default.createElement(MenuItemText, null, action.label));
+    }, actionRest), !!icon && _react.default.createElement(MenuItemIcon, null, icon), expanded && _react.default.createElement(MenuItemText, null, label));
   }));
 }
 

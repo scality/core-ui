@@ -9,13 +9,15 @@ const trNotifications = [
   {
     uid: "1",
     title: "Hi",
-    message: "I am Carlito. I live at TOP_RIGHT"
+    message: "I am Carlito. I live at TOP_RIGHT",
+    "data-cy": "Carlito_notification"
   },
   {
     uid: "2",
     title: "Hi",
     message: "I am Patrick. I live at TOP_RIGHT",
-    variant: "secondary"
+    variant: "secondary",
+    "data-cy": "Patrick_notification"
   }
 ];
 

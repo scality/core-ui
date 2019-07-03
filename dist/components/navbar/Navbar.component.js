@@ -23,6 +23,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 15px;\n  svg {\n    width: 100px;\n    height: 30px;\n  }\n"]);
 
@@ -118,10 +124,12 @@ function NavBar(_ref) {
       applications = _ref.applications,
       help = _ref.help,
       user = _ref.user,
-      logo = _ref.logo;
-  return _react.default.createElement(NavbarContainer, {
+      logo = _ref.logo,
+      rest = _objectWithoutProperties(_ref, ["onToggleClick", "toggleVisible", "productName", "applications", "help", "user", "logo"]);
+
+  return _react.default.createElement(NavbarContainer, _extends({
     className: "sc-navbar"
-  }, _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
+  }, rest), _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
     onClick: onToggleClick
   }, _react.default.createElement(_Button.default, {
     size: "larger",

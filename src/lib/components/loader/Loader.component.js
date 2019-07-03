@@ -43,10 +43,11 @@ const LoaderTextDiv = styled.span`
 function Loader({
   children,
   color = defaultTheme.gray,
-  size = SIZE.large
+  size = SIZE.large,
+  ...rest
 }: Props) {
   return (
-    <LoaderContainer size={size} color={color} className="sc-loader">
+    <LoaderContainer size={size} color={color} className="sc-loader" {...rest}>
       <LoaderTextDiv>
         <LoaderIcon />
         {children && <LoaderText> {children}</LoaderText>}

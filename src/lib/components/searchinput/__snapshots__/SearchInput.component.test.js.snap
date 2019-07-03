@@ -63,6 +63,7 @@ exports[`Storyshots SearchInput Default 1`] = `
   >
     <div
       className="sc-searchinput sc-bZQynM dhJuuP"
+      data-cy="carlito_searchinput"
     >
       <div
         className="sc-input sc-htpNat utwCv"
