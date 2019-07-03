@@ -93,7 +93,7 @@ exports[`Storyshots Input Default 1`] = `
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH kvDNwS"
+        className="sc-checkbox sc-bwzfXH gvHcHm"
       >
         <input
           checked={false}
@@ -125,7 +125,7 @@ exports[`Storyshots Input Default 1`] = `
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH kvDNwS"
+        className="sc-checkbox sc-bwzfXH gvHcHm"
       >
         <input
           checked={false}

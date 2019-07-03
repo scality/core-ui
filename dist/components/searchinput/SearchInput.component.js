@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var _Input = _interopRequireDefault(require("../input/Input.component"));
 
@@ -92,7 +92,7 @@ var SearchInputContainer = _styledComponents.default.div(_templateObject(), func
 var IconButton = _styledComponents.default.button(_templateObject2(), defaultTheme.fontSize.base, function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
 }, defaultTheme.white, function (props) {
-  return !props.disabled && (0, _styledComponents.css)(_templateObject3(), (0, _color.default)((0, _utils.mergeTheme)(props.theme, defaultTheme).primary).lighten(0.3).hsl().string());
+  return !props.disabled && (0, _styledComponents.css)(_templateObject3(), (0, _polished.lighten)(0.1, (0, _utils.mergeTheme)(props.theme, defaultTheme).primary));
 });
 
 var SearchIcon = (0, _styledComponents.default)(IconButton)(_templateObject4());

@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { darken, lighten } from "polished";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
@@ -52,14 +52,8 @@ const SidebarItem = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = Color(brandingTheme.primary)
-      .lighten(0.1)
-      .hsl()
-      .string();
-    const brandDark = Color(brandingTheme.primary)
-      .darken(0.3)
-      .hsl()
-      .string();
+    const brandLight = lighten(0.1, brandingTheme.primary);
+    const brandDark = darken(0.1, brandingTheme.primary);
     return props.active
       ? css`
           background-color: ${brandDark};

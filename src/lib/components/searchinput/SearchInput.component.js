@@ -1,7 +1,7 @@
 //@flow
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { lighten } from "polished";
 import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
@@ -44,10 +44,7 @@ const IconButton = styled.button`
       css`
         cursor: pointer;
         &:hover {
-          color: ${Color(mergeTheme(props.theme, defaultTheme).primary)
-            .lighten(0.3)
-            .hsl()
-            .string()};
+          color: ${lighten(0.1, mergeTheme(props.theme, defaultTheme).primary)};
         }
       `
     );

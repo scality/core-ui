@@ -11,13 +11,11 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _Button = require("../button/Button.component");
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -123,7 +121,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var DropdownStyled = _styledComponents.default.div(_templateObject(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandDark = (0, _color.default)(brandingTheme[props.variant]).darken(0.1).hsl().string();
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme[props.variant]);
   return props.active ? (0, _styledComponents.css)(_templateObject2(), brandDark, defaultTheme.white, brandDark, defaultTheme.white) : null;
 });
 
@@ -139,7 +137,7 @@ var DropdownMenuStyled = _styledComponents.default.ul(_templateObject3(), defaul
 
 var DropdownMenuItemStyled = _styledComponents.default.li(_templateObject7(), defaultTheme.padding.base, defaultTheme.fontSize.base, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLight = (0, _color.default)(brandingTheme[props.variant]).lighten(0.1).hsl().string();
+  var brandLight = (0, _polished.lighten)(0.1, brandingTheme[props.variant]);
   return (0, _styledComponents.css)(_templateObject8(), brandingTheme[props.variant], defaultTheme.white, brandLight, defaultTheme.white, brandingTheme[props.variant], defaultTheme.white);
 });
 

@@ -12,7 +12,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <div
-          className="sc-bxivhb jbpSPb"
+          className="sc-bxivhb jxsHiK"
         >
           <span>
             <i
@@ -21,7 +21,7 @@ exports[`Storyshots Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-bZQynM jwKKmN"
+          className="sc-bZQynM cZBAaM"
         />
       </div>
       <div
@@ -63,7 +63,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-EHOje iUebre"
         >
           <button
-            className="sc-button sc-iwsKbI hURFNI"
+            className="sc-button sc-iwsKbI iZLdlJ"
             disabled={false}
             onClick={[Function]}
             size="small"

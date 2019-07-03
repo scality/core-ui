@@ -7,6 +7,7 @@ import { withThemesProvider } from "storybook-addon-styled-component-theme";
 import {
   turquoise,
   yellowOrange,
+  grayLightest,
   grayLight,
   blueLight,
   jade,
@@ -19,7 +20,7 @@ const themes = [
     name: "Custom",
     brand: {
       primary: turquoise,
-      secondary: grayLight,
+      secondary: grayLightest,
       success: jade,
       info: blueLight,
       warning: yellowOrange,
