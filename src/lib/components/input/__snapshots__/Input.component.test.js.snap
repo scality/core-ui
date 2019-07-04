@@ -12,6 +12,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-EHOje fpqoIO"
     >
       <input
+        data-cy="default_input"
         id="id1"
         onBlur={[Function]}
         onChange={[Function]}
@@ -93,7 +94,7 @@ exports[`Storyshots Input Default 1`] = `
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH kvDNwS"
+        className="sc-checkbox sc-bwzfXH gvHcHm"
       >
         <input
           checked={false}
@@ -125,7 +126,7 @@ exports[`Storyshots Input Default 1`] = `
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH kvDNwS"
+        className="sc-checkbox sc-bwzfXH gvHcHm"
       >
         <input
           checked={false}

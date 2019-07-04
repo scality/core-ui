@@ -14,7 +14,8 @@ const steps = [
         text="Apply"
         onClick={action("Button Apply Click")}
       />
-    )
+    ),
+    "data-cy": "Node_Registerd"
   },
   {
     title: "Deploy Salt Minion on node",
@@ -24,7 +25,8 @@ const steps = [
         text="Apply"
         onClick={action("Button Apply Click")}
       />
-    )
+    ),
+    "data-cy": "Deploy_Salt"
   },
   {
     title: "Add node to Workload Plane",
@@ -34,7 +36,8 @@ const steps = [
         text="Apply"
         onClick={action("Button Apply Click")}
       />
-    )
+    ),
+    "data-cy": "Add_Node_WP"
   },
   {
     title: "Add node to Control Plane",
@@ -44,7 +47,8 @@ const steps = [
         text="Apply"
         onClick={action("Button Apply Click")}
       />
-    )
+    ),
+    "data-cy": "Add_Node_CP"
   },
   {
     title: "Extend etcd cluster to node",
@@ -54,7 +58,8 @@ const steps = [
         text="Apply"
         onClick={action("Button Apply Click")}
       />
-    )
+    ),
+    "data-cy": "Extend_Node"
   }
 ];
 

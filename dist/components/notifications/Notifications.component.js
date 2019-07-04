@@ -19,6 +19,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n          top: 0;\n          right: 0;\n        "]);
 
@@ -96,15 +100,20 @@ var NotificationsContainer = _styledComponents.default.div(_templateObject(), de
   }
 });
 
-function Notifications(props) {
-  return _react.default.createElement(NotificationsContainer, {
+function Notifications(_ref) {
+  var position = _ref.position,
+      notifications = _ref.notifications,
+      onDismiss = _ref.onDismiss,
+      rest = _objectWithoutProperties(_ref, ["position", "notifications", "onDismiss"]);
+
+  return _react.default.createElement(NotificationsContainer, _extends({
     className: "sc-notifications",
-    position: props.position
-  }, props.notifications.map(function (notification) {
+    position: position
+  }, rest), notifications.map(function (notification) {
     return _react.default.createElement(_Notification.default, _extends({
       key: notification.uid
     }, notification, {
-      onDismiss: props.onDismiss
+      onDismiss: onDismiss
     }));
   }));
 }

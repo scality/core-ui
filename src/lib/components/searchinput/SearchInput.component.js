@@ -1,7 +1,7 @@
 //@flow
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { lighten } from "polished";
 import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
@@ -44,10 +44,7 @@ const IconButton = styled.button`
       css`
         cursor: pointer;
         &:hover {
-          color: ${Color(mergeTheme(props.theme, defaultTheme).primary)
-            .lighten(0.3)
-            .hsl()
-            .string()};
+          color: ${lighten(0.1, mergeTheme(props.theme, defaultTheme).primary)};
         }
       `
     );
@@ -65,7 +62,13 @@ const ResetIcon = styled(IconButton)`
   transition: opacity 0.5s ease-in-out;
 `;
 
-function SearchInput(props: Props) {
+function SearchInput({
+  placeholder,
+  value,
+  onChange,
+  onReset,
+  ...rest
+}: Props) {
   const [docked, setDocked] = useState(true);
   const myInputRef = useRef(null);
 
@@ -76,26 +79,26 @@ function SearchInput(props: Props) {
   };
 
   const reset = () => {
-    props.onReset();
+    onReset();
     setDocked(true);
   };
 
   return (
-    <SearchInputContainer className="sc-searchinput" docked={docked}>
+    <SearchInputContainer className="sc-searchinput" docked={docked} {...rest}>
       <Input
         minLength={1}
         debounceTimeout={300}
         type="text"
         name="search"
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         inputRef={myInputRef}
       />
       <SearchIcon onClick={toggle} disabled={!docked}>
         <i className="fas fa-search" />
       </SearchIcon>
-      <ResetIcon onClick={reset} visible={props.value && !docked}>
+      <ResetIcon onClick={reset} visible={value && !docked}>
         <i className="fas fa-times-circle" />
       </ResetIcon>
     </SearchInputContainer>

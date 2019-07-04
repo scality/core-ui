@@ -108,13 +108,14 @@ function NavBar({
   user,
   logo,
   languages = [],
-  currentLanguage
+  currentLanguage,
+  ...rest
 }: Props) {
   const filterLanguage = languages.filter(
     language => language.name !== currentLanguage
   );
   return (
-    <NavbarContainer className="sc-navbar">
+    <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
         {toggleVisible && (
           <NavbarMenuItem onClick={onToggleClick}>

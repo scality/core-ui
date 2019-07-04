@@ -2,7 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
-import Color from "color";
+import { lighten, ellipsis } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import Dropdown from "../dropdown/Dropdown.component";
@@ -123,18 +123,13 @@ const CellContainer = styled.div`
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
       color: ${props =>
-        Color(mergeTheme(props.theme, defaultTheme).primary)
-          .lighten(0.3)
-          .hsl()
-          .string()};
+        lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
     }
   }
 `;
 
 const CellContent = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  ${ellipsis()}
 `;
 
 const HeaderContainer = styled.div`

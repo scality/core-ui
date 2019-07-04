@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var _utils = require("../../utils");
 
@@ -20,6 +20,12 @@ var _Loader = _interopRequireDefault(require("../loader/Loader.component"));
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject13() {
   var data = _taggedTemplateLiteral(["\n  position: relative;\n"]);
@@ -185,12 +191,12 @@ var ButtonStyled = _styledComponents.default.button(_templateObject(), defaultTh
   }
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLighter = (0, _color.default)(brandingTheme[props.variant]).lighten(0.5).hsl().string();
-  var brandLight = (0, _color.default)(brandingTheme[props.variant]).lighten(0.3).hsl().string();
+  var brandLighter = (0, _polished.lighten)(0.3, brandingTheme[props.variant]).toString();
+  var brandLight = (0, _polished.lighten)(0.1, brandingTheme[props.variant]).toString();
   return (0, _styledComponents.css)(_templateObject7(), props.outlined ? "\n        border-width: 1px;\n        border-style: solid;\n        border-color: ".concat(brandingTheme[props.variant], ";\n        background-color: ").concat(defaultTheme.white, ";\n        color: ").concat(brandingTheme[props.variant], ";\n        \n        &:hover{      \n          border-color: ").concat(brandingTheme[props.variant], ";\n          background-color: ").concat(brandLight, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n\n        &:active {      \n          border-color: ").concat(brandingTheme[props.variant], ";\n          background-color: ").concat(brandLighter, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n        ") : "          \n        background-color: ".concat(brandingTheme[props.variant], ";\n        color: ").concat(defaultTheme.white, ";\n  \n        &:hover {\n          background-color: ").concat(brandLight, ";\n          color: ").concat(defaultTheme.white, ";\n        }\n        \n        &:active {      \n          background-color: ").concat(brandingTheme[props.variant], ";\n          color: ").concat(defaultTheme.white, ";\n        }\n      "));
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLighter = (0, _color.default)(brandingTheme[props.variant]).lighten(0.5).hsl().string();
+  var brandLighter = (0, _polished.lighten)(0.3, brandingTheme[props.variant]).toString();
   return (0, _styledComponents.css)(_templateObject8(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          &,\n          &:hover,\n          &:focus,\n          &:active {\n            cursor: default;\n            background-color: ".concat(brandLighter, ";\n            border-color: ").concat(brandLighter, ";\n            color: ").concat(defaultTheme.white, ";\n            box-shadow: none;\n          };\n        ") : null);
 }, function (props) {
   return (0, _styledComponents.css)(_templateObject9(), props.isLoading ? "\n          .sc-button-text {\n            visibility: hidden;\n          }\n          .sc-loader {\n            svg {\n              fill: ".concat(defaultTheme.white, ";\n            }\n            > span {\n              position: absolute;\n              right: 0;\n              left: 0;\n            }\n          }\n        ") : null);
@@ -224,8 +230,10 @@ function Button(_ref) {
       onClick = _ref.onClick,
       title = _ref.title,
       isLoading = _ref.isLoading,
-      type = _ref.type;
-  return href && href.length ? _react.default.createElement(Anchor, {
+      type = _ref.type,
+      rest = _objectWithoutProperties(_ref, ["text", "href", "icon", "size", "variant", "outlined", "disabled", "onClick", "title", "isLoading", "type"]);
+
+  return href && href.length ? _react.default.createElement(Anchor, _extends({
     className: "sc-button",
     href: href,
     variant: variant,
@@ -233,10 +241,10 @@ function Button(_ref) {
     disabled: disabled,
     size: size,
     title: title
-  }, icon && _react.default.createElement(ButtonIcon, {
+  }, rest), icon && _react.default.createElement(ButtonIcon, {
     text: text,
     size: size
-  }, icon), _react.default.createElement(ButtonText, null, text)) : _react.default.createElement(ButtonStyled, {
+  }, icon), _react.default.createElement(ButtonText, null, text)) : _react.default.createElement(ButtonStyled, _extends({
     className: "sc-button",
     variant: variant,
     outlined: outlined,
@@ -246,7 +254,7 @@ function Button(_ref) {
     title: title,
     isLoading: isLoading,
     type: type
-  }, _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
+  }, rest), _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
     size: size
   }), _react.default.createElement("span", {
     className: "sc-button-text"

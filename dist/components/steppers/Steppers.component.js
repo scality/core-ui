@@ -17,6 +17,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _templateObject12() {
   var data = _taggedTemplateLiteral(["\n        border-left: 2px solid ", ";\n      "]);
 
@@ -191,21 +197,27 @@ function Step(props) {
   }, title), active && _react.default.createElement(StepContent, null, content)));
 }
 
-function Steppers(props) {
-  var steps = props.steps,
-      activeStep = props.activeStep;
-  return _react.default.createElement(SteppersContainer, {
+function Steppers(_ref) {
+  var steps = _ref.steps,
+      activeStep = _ref.activeStep,
+      rest = _objectWithoutProperties(_ref, ["steps", "activeStep"]);
+
+  return _react.default.createElement(SteppersContainer, _extends({
     className: "sc-steppers"
-  }, steps.map(function (step, index) {
-    return _react.default.createElement(Step, {
+  }, rest), steps.map(function (_ref2, index) {
+    var title = _ref2.title,
+        content = _ref2.content,
+        stepRest = _objectWithoutProperties(_ref2, ["title", "content"]);
+
+    return _react.default.createElement(Step, _extends({
       key: index,
-      title: step.title,
-      content: step.content,
+      title: title,
+      content: content,
       active: index === activeStep,
       completed: index < activeStep,
       isLast: index === steps.length - 1,
       index: index
-    });
+    }, stepRest));
   }));
 }
 

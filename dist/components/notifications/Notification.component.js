@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var _Button = _interopRequireDefault(require("../button/Button.component"));
 
@@ -21,6 +21,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -28,6 +30,10 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject6() {
   var data = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  cursor: pointer;\n  &:hover {\n    color: ", ";\n  }\n"]);
@@ -100,13 +106,21 @@ var NotificationTitle = _styledComponents.default.div(_templateObject3(), defaul
 
 var NotificationDismissProgress = _styledComponents.default.div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandDark = (0, _color.default)(brandingTheme[props.variant || "primary"]).darken(0.2).hsl().string();
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme[props.variant || "primary"]);
   return (0, _styledComponents.css)(_templateObject5(), brandDark, props.value / props.max * 100);
 });
 
 var NotificationClose = _styledComponents.default.div(_templateObject6(), defaultTheme.grayLightest);
 
-function Notification(props) {
+function Notification(_ref) {
+  var uid = _ref.uid,
+      title = _ref.title,
+      message = _ref.message,
+      variant = _ref.variant,
+      dismissAfter = _ref.dismissAfter,
+      onDismiss = _ref.onDismiss,
+      rest = _objectWithoutProperties(_ref, ["uid", "title", "message", "variant", "dismissAfter", "onDismiss"]);
+
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       dismissProgress = _useState2[0],
@@ -124,15 +138,15 @@ function Notification(props) {
   }, [dismissProgress]);
 
   var clearTimer = function clearTimer() {
-    if (props.dismissAfter) {
+    if (dismissAfter) {
       setTimerId(null);
       clearInterval(timerId);
     }
   };
 
   var resumeTimer = function resumeTimer() {
-    if (props.dismissAfter) {
-      if (dismissProgressRef.current === props.dismissAfter) {
+    if (dismissAfter) {
+      if (dismissProgressRef.current === dismissAfter) {
         dismiss();
       } else if (!timerId) {
         setTimerId(setInterval(function () {
@@ -147,18 +161,18 @@ function Notification(props) {
       clearTimer();
     }
 
-    props.onDismiss && props.onDismiss(props.uid);
+    onDismiss && onDismiss(uid);
   };
 
-  return _react.default.createElement(NotificationContainer, {
+  return _react.default.createElement(NotificationContainer, _extends({
     className: "sc-notification",
-    variant: props.variant,
+    variant: variant,
     onMouseEnter: clearTimer,
     onMouseLeave: resumeTimer
-  }, _react.default.createElement(NotificationTitle, null, props.title), _react.default.createElement("div", null, props.message), !!props.dismissAfter && _react.default.createElement(NotificationDismissProgress, {
+  }, rest), _react.default.createElement(NotificationTitle, null, title), _react.default.createElement("div", null, message), !!dismissAfter && _react.default.createElement(NotificationDismissProgress, {
     value: dismissProgress,
-    max: props.dismissAfter,
-    variant: props.variant
+    max: dismissAfter,
+    variant: variant
   }), _react.default.createElement(NotificationClose, {
     onClick: dismiss
   }, _react.default.createElement("i", {

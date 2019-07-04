@@ -12,6 +12,7 @@ storiesOf("Checkbox", module).add("Default", () => {
         checked={true}
         label="interested?"
         onChange={action("checkbox clicked")}
+        data-cy="checked_checkbox"
       />
       <h3>Checkbox unchecked</h3>
       <Checkbox

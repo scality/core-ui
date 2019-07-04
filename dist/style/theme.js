@@ -63,8 +63,8 @@ var grayLightest = "#E9EBED";
 exports.grayLightest = grayLightest;
 var brand = {
   primary: blue,
-  secondary: jade,
-  success: green,
+  secondary: grayLightest,
+  success: jade,
   info: turquoise,
   warning: mediumOrange,
   danger: warmRed,

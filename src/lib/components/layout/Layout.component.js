@@ -31,9 +31,9 @@ const MainContent = styled.div`
   flex-grow: 1;
 `;
 
-function Layout({ children, sidebar, navbar }: Props) {
+function Layout({ children, sidebar, navbar, ...rest }: Props) {
   return (
-    <LayoutContainer className="sc-layout">
+    <LayoutContainer className="sc-layout" {...rest}>
       <Navbar {...navbar} />
       <ContentContainer>
         <Sidebar {...sidebar} />

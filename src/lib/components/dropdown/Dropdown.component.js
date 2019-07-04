@@ -7,7 +7,7 @@ import {
   ButtonIcon,
   ButtonText
 } from "../button/Button.component";
-import Color from "color";
+import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
@@ -32,10 +32,7 @@ const DropdownStyled = styled.div`
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
 
-      const brandDark = Color(brandingTheme[props.variant])
-        .darken(0.1)
-        .hsl()
-        .string();
+      const brandDark = darken(0.1, brandingTheme[props.variant]);
       return props.active
         ? css`
             background-color: ${brandDark};
@@ -99,10 +96,7 @@ const DropdownMenuItemStyled = styled.li`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = Color(brandingTheme[props.variant])
-      .lighten(0.1)
-      .hsl()
-      .string();
+    const brandLight = lighten(0.1, brandingTheme[props.variant]);
     return css`
       background-color: ${brandingTheme[props.variant]};
       color: ${defaultTheme.white};
@@ -131,7 +125,8 @@ function Dropdown({
   size = "base",
   variant = "primary",
   title,
-  caret = true
+  caret = true,
+  ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
@@ -150,7 +145,12 @@ function Dropdown({
   }, []);
 
   return (
-    <DropdownStyled active={open} variant={variant} className="sc-dropdown">
+    <DropdownStyled
+      active={open}
+      variant={variant}
+      className="sc-dropdown"
+      {...rest}
+    >
       <TriggerStyled
         variant={variant}
         size={size}
@@ -181,14 +181,14 @@ function Dropdown({
             size={menuSize}
             triggerSize={triggerSize}
           >
-            {items.map(item => {
-              const { label, onClick } = item;
+            {items.map(({ label, onClick, ...itemRest }) => {
               return (
                 <DropdownMenuItemStyled
                   className="menu-item-label"
                   key={label}
                   onClick={onClick}
                   variant={variant}
+                  {...itemRest}
                 >
                   {label}
                 </DropdownMenuItemStyled>

@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
@@ -113,7 +113,7 @@ var StyledCheckbox = _styledComponents.default.label(_templateObject2(), functio
   return props.disabled ? (0, _styledComponents.css)(_templateObject3()) : (0, _styledComponents.css)(_templateObject4());
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandDark = (0, _color.default)(brandingTheme.primary).darken(0.1).hsl().string();
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme.primary);
   var iconCheckedColor = props.checked || props.disabled ? brandingTheme.primary : "transparent";
   var checkBoxColor = props.checked || props.disabled ? brandingTheme.primary : defaultTheme.grayLight;
   return (0, _styledComponents.css)(_templateObject5(), checkBoxColor, defaultTheme.white, iconCheckedColor, brandDark);

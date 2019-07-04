@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { darken, lighten } from "polished";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
@@ -52,14 +52,8 @@ const SidebarItem = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = Color(brandingTheme.primary)
-      .lighten(0.1)
-      .hsl()
-      .string();
-    const brandDark = Color(brandingTheme.primary)
-      .darken(0.3)
-      .hsl()
-      .string();
+    const brandLight = lighten(0.1, brandingTheme.primary);
+    const brandDark = darken(0.1, brandingTheme.primary);
     return props.active
       ? css`
           background-color: ${brandDark};
@@ -91,24 +85,27 @@ const MenuItemIcon = styled.div`
   align-items: end;
 `;
 
-function Sidebar({ expanded, actions }: Props) {
+function Sidebar({ expanded, actions, ...rest }: Props) {
   return (
-    <SidebarContainer expanded={expanded} className="sc-sidebar">
-      {actions.map((action, index) => {
-        return (
-          <SidebarItem
-            className="sc-sidebar-item"
-            key={index}
-            active={action.active}
-            title={action.label}
-            onClick={action.onClick}
-            expanded={expanded}
-          >
-            {action.icon && <MenuItemIcon>{action.icon}</MenuItemIcon>}
-            {expanded && <MenuItemText>{action.label}</MenuItemText>}
-          </SidebarItem>
-        );
-      })}
+    <SidebarContainer expanded={expanded} className="sc-sidebar" {...rest}>
+      {actions.map(
+        ({ active, label, onClick, icon = null, ...actionRest }, index) => {
+          return (
+            <SidebarItem
+              className="sc-sidebar-item"
+              key={index}
+              active={active}
+              title={label}
+              onClick={onClick}
+              expanded={expanded}
+              {...actionRest}
+            >
+              {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
+              {expanded && <MenuItemText>{label}</MenuItemText>}
+            </SidebarItem>
+          );
+        }
+      )}
     </SidebarContainer>
   );
 }

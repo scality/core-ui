@@ -11,15 +11,15 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _Button = require("../button/Button.component");
 
-var _color = _interopRequireDefault(require("color"));
+var _polished = require("polished");
 
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -28,6 +28,10 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject9() {
   var data = _taggedTemplateLiteral(["\n  margin-left: ", ";\n"]);
@@ -123,7 +127,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var DropdownStyled = _styledComponents.default.div(_templateObject(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandDark = (0, _color.default)(brandingTheme[props.variant]).darken(0.1).hsl().string();
+  var brandDark = (0, _polished.darken)(0.1, brandingTheme[props.variant]);
   return props.active ? (0, _styledComponents.css)(_templateObject2(), brandDark, defaultTheme.white, brandDark, defaultTheme.white) : null;
 });
 
@@ -139,7 +143,7 @@ var DropdownMenuStyled = _styledComponents.default.ul(_templateObject3(), defaul
 
 var DropdownMenuItemStyled = _styledComponents.default.li(_templateObject7(), defaultTheme.padding.base, defaultTheme.fontSize.base, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
-  var brandLight = (0, _color.default)(brandingTheme[props.variant]).lighten(0.1).hsl().string();
+  var brandLight = (0, _polished.lighten)(0.1, brandingTheme[props.variant]);
   return (0, _styledComponents.css)(_templateObject8(), brandingTheme[props.variant], defaultTheme.white, brandLight, defaultTheme.white, brandingTheme[props.variant], defaultTheme.white);
 });
 
@@ -157,7 +161,8 @@ function Dropdown(_ref) {
       variant = _ref$variant === void 0 ? "primary" : _ref$variant,
       title = _ref.title,
       _ref$caret = _ref.caret,
-      caret = _ref$caret === void 0 ? true : _ref$caret;
+      caret = _ref$caret === void 0 ? true : _ref$caret,
+      rest = _objectWithoutProperties(_ref, ["items", "text", "icon", "size", "variant", "title", "caret"]);
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -184,11 +189,11 @@ function Dropdown(_ref) {
       setTriggerSize(node.getBoundingClientRect());
     }
   }, []);
-  return _react.default.createElement(DropdownStyled, {
+  return _react.default.createElement(DropdownStyled, _extends({
     active: open,
     variant: variant,
     className: "sc-dropdown"
-  }, _react.default.createElement(TriggerStyled, {
+  }, rest), _react.default.createElement(TriggerStyled, {
     variant: variant,
     size: size,
     className: "trigger",
@@ -217,15 +222,17 @@ function Dropdown(_ref) {
     ref: refMenuCallback,
     size: menuSize,
     triggerSize: triggerSize
-  }, items.map(function (item) {
-    var label = item.label,
-        onClick = item.onClick;
-    return _react.default.createElement(DropdownMenuItemStyled, {
+  }, items.map(function (_ref2) {
+    var label = _ref2.label,
+        onClick = _ref2.onClick,
+        itemRest = _objectWithoutProperties(_ref2, ["label", "onClick"]);
+
+    return _react.default.createElement(DropdownMenuItemStyled, _extends({
       className: "menu-item-label",
       key: label,
       onClick: onClick,
       variant: variant
-    }, label);
+    }, itemRest), label);
   }))));
 }
 

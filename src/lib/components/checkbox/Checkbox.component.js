@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import styled, { css } from "styled-components";
-import Color from "color";
+import { darken } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
@@ -68,10 +68,7 @@ const StyledCheckbox = styled.label`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandDark = Color(brandingTheme.primary)
-      .darken(0.1)
-      .hsl()
-      .string();
+    const brandDark = darken(0.1, brandingTheme.primary);
 
     const iconCheckedColor =
       props.checked || props.disabled ? brandingTheme.primary : "transparent";
