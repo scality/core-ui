@@ -19,7 +19,20 @@ const user = {
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
-const languages = [{ label: "Français", onClick: action("French selected") }];
+const languages = [
+  {
+    label: "Français",
+    name: "FR",
+    onClick: action("French selected")
+  },
+  {
+    label: "English",
+    name: "EN",
+    onClick: action("English selected")
+  }
+];
+
+let currentLanguage = "EN";
 
 storiesOf("Navbar", module).add("Default", () => {
   return (
@@ -30,6 +43,7 @@ storiesOf("Navbar", module).add("Default", () => {
         toggleVisible={true}
         productName={"Harware UI"}
         languages={languages}
+        currentLanguage={currentLanguage}
         applications={applications}
         help={help}
         user={user}
@@ -40,6 +54,7 @@ storiesOf("Navbar", module).add("Default", () => {
         toggleVisible={false}
         productName={"Harware UI"}
         languages={languages}
+        currentLanguage={currentLanguage}
         applications={applications}
         help={help}
         user={user}
@@ -51,6 +66,7 @@ storiesOf("Navbar", module).add("Default", () => {
         productName={"Harware UI"}
         languages={languages}
         applications={applications}
+        currentLanguage={currentLanguage}
         help={help}
         user={user}
         logo={<i className="fas fa-ring" />}

@@ -23,6 +23,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n  margin-right: 6px;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 15px;\n  svg {\n    width: 100px;\n    height: 30px;\n  }\n"]);
 
@@ -111,6 +121,8 @@ var ProductNameSpan = _styledComponents.default.h1(_templateObject6(), defaultTh
 
 var LogoContainer = _styledComponents.default.div(_templateObject7());
 
+var IconContainer = _styledComponents.default.i(_templateObject8());
+
 function NavBar(_ref) {
   var onToggleClick = _ref.onToggleClick,
       toggleVisible = _ref.toggleVisible,
@@ -119,7 +131,12 @@ function NavBar(_ref) {
       help = _ref.help,
       user = _ref.user,
       logo = _ref.logo,
-      languages = _ref.languages;
+      _ref$languages = _ref.languages,
+      languages = _ref$languages === void 0 ? [] : _ref$languages,
+      currentLanguage = _ref.currentLanguage;
+  var filterLanguage = languages.filter(function (language) {
+    return language.name !== currentLanguage;
+  });
   return _react.default.createElement(NavbarContainer, {
     className: "sc-navbar"
   }, _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
@@ -132,15 +149,13 @@ function NavBar(_ref) {
     title: "Main Menu"
   })), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(LogoContainer, {
     className: "sc-logo"
-  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages.length > 0 && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
-    items: languages,
-    icon: _react.default.createElement("i", {
+    items: filterLanguage,
+    icon: _react.default.createElement("div", null, _react.default.createElement(IconContainer, {
       className: "fas fa-globe"
-    }),
-    title: "Language",
-    caret: false,
-    text: "EN"
+    }), currentLanguage),
+    caret: false
   })), applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
     items: applications,
