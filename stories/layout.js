@@ -109,6 +109,8 @@ storiesOf("Layout", module)
       onToggleClick: action("toggle clicked"),
       toggleVisible: true,
       productName: "Harware UI",
+      currentLanguage,
+      languages,
       applications,
       help,
       user
