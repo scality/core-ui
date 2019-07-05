@@ -146,17 +146,20 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="EN"
           >
             <span
-              className="sc-ifAKCX bccMeP"
+              className="sc-ifAKCX joVDVz"
               size="larger"
             >
-              <div>
-                <i
-                  className="fas fa-globe sc-kAzzGY cixBdn"
-                />
-                EN
-              </div>
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
             </span>
           </div>
         </div>
@@ -356,17 +359,20 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="EN"
           >
             <span
-              className="sc-ifAKCX bccMeP"
+              className="sc-ifAKCX joVDVz"
               size="larger"
             >
-              <div>
-                <i
-                  className="fas fa-globe sc-kAzzGY cixBdn"
-                />
-                EN
-              </div>
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
             </span>
           </div>
         </div>
@@ -536,17 +542,20 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="EN"
           >
             <span
-              className="sc-ifAKCX bccMeP"
+              className="sc-ifAKCX joVDVz"
               size="larger"
             >
-              <div>
-                <i
-                  className="fas fa-globe sc-kAzzGY cixBdn"
-                />
-                EN
-              </div>
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
             </span>
           </div>
         </div>

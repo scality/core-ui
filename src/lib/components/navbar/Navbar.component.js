@@ -8,18 +8,17 @@ import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-type Item = { label: string, name?: string, onClick: () => void };
+type Item = {
+  label: string,
+  name?: string,
+  selected?: boolean => false,
+  onClick: () => void
+};
 type Items = Array<Item>;
 type User = {
   name: string,
   actions: Items
 };
-type Language = {
-  label: string,
-  name?: string,
-  onClick: () => void
-};
-type Languages = Array<Language>;
 
 export type Props = {
   onToggleClick?: () => void,
@@ -29,8 +28,7 @@ export type Props = {
   help?: Items,
   user?: User,
   logo?: Node,
-  languages?: Languages,
-  currentLanguage?: string
+  languages?: Items
 };
 
 const NavbarContainer = styled.div`
@@ -95,10 +93,6 @@ const LogoContainer = styled.div`
   }
 `;
 
-const IconContainer = styled.i`
-  margin-right: 6px;
-`;
-
 function NavBar({
   onToggleClick,
   toggleVisible,
@@ -108,12 +102,14 @@ function NavBar({
   user,
   logo,
   languages = [],
-  currentLanguage,
   ...rest
 }: Props) {
   const filterLanguage = languages.filter(
-    language => language.name !== currentLanguage
+    language => language.selected === false
   );
+  const currentLanguage = languages
+    .filter(language => language.selected === true)
+    .pop();
   return (
     <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
@@ -141,13 +137,10 @@ function NavBar({
             <Dropdown
               size="larger"
               items={filterLanguage}
-              icon={
-                <div>
-                  <IconContainer className="fas fa-globe" />
-                  {currentLanguage}
-                </div>
-              }
+              icon={<i className="fas fa-globe" />}
+              title={currentLanguage.name}
               caret={false}
+              text={currentLanguage.name}
             />
           </NavbarMenuItem>
         )}

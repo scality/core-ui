@@ -11,7 +11,12 @@ import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-type Item = { label: string, name?: string, onClick: () => void };
+type Item = {
+  label: string,
+  name?: string,
+  selected?: boolean => false,
+  onClick: () => void
+};
 type Items = Array<Item>;
 type Props = {
   text?: string,
