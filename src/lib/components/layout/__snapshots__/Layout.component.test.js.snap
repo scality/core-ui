@@ -145,6 +145,37 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="EN"
+          >
+            <span
+              className="sc-ifAKCX joVDVz"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fjdhpX gQuqWJ"
+      >
+        <div
+          className="sc-dropdown sc-htoDjs dlhJIS"
+        >
+          <div
+            className="trigger sc-gqjmRU cUGHcq"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
             title="Scality Apps"
           >
             <span
@@ -208,7 +239,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>
@@ -543,6 +574,37 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
+            title="EN"
+          >
+            <span
+              className="sc-ifAKCX joVDVz"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-trigger-text sc-EHOje boinrg"
+            >
+              EN
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fjdhpX gQuqWJ"
+      >
+        <div
+          className="sc-dropdown sc-htoDjs dlhJIS"
+        >
+          <div
+            className="trigger sc-gqjmRU cUGHcq"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
             title="Scality Apps"
           >
             <span
@@ -606,7 +668,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
               />
             </span>
             <span
-              className="sc-EHOje boinrg"
+              className="sc-trigger-text sc-EHOje boinrg"
             >
               Charles NGUYEN
             </span>

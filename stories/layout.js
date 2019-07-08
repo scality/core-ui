@@ -57,6 +57,21 @@ const user = {
   ]
 };
 
+const languages = [
+  {
+    label: "Français",
+    name: "FR",
+    onClick: action("French selected"),
+    selected: false
+  },
+  {
+    label: "English",
+    name: "EN",
+    onClick: action("English selected"),
+    selected: true
+  }
+];
+
 storiesOf("Layout", module)
   .addDecorator(withKnobs)
   .add("Sidebar docked", () => {
@@ -72,6 +87,7 @@ storiesOf("Layout", module)
       onToggleClick: action("toggle clicked"),
       toggleVisible: toggle,
       productName: "Harware UI",
+      languages,
       applications,
       help,
       user
@@ -93,6 +109,7 @@ storiesOf("Layout", module)
       onToggleClick: action("toggle clicked"),
       toggleVisible: true,
       productName: "Harware UI",
+      languages,
       applications,
       help,
       user

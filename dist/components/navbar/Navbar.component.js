@@ -125,8 +125,16 @@ function NavBar(_ref) {
       help = _ref.help,
       user = _ref.user,
       logo = _ref.logo,
-      rest = _objectWithoutProperties(_ref, ["onToggleClick", "toggleVisible", "productName", "applications", "help", "user", "logo"]);
+      _ref$languages = _ref.languages,
+      languages = _ref$languages === void 0 ? [] : _ref$languages,
+      rest = _objectWithoutProperties(_ref, ["onToggleClick", "toggleVisible", "productName", "applications", "help", "user", "logo", "languages"]);
 
+  var filterLanguage = languages.filter(function (language) {
+    return !language.selected;
+  });
+  var currentLanguage = languages.find(function (language) {
+    return language.selected === true;
+  });
   return _react.default.createElement(NavbarContainer, _extends({
     className: "sc-navbar"
   }, rest), _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
@@ -139,7 +147,16 @@ function NavBar(_ref) {
     title: "Main Menu"
   })), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(LogoContainer, {
     className: "sc-logo"
-  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages.length > 0 && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+    size: "larger",
+    items: filterLanguage,
+    icon: _react.default.createElement("i", {
+      className: "fas fa-globe"
+    }),
+    title: currentLanguage ? currentLanguage.name : languages[0].name,
+    caret: false,
+    text: currentLanguage ? currentLanguage.name : languages[0].name
+  })), applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
     items: applications,
     icon: _react.default.createElement("i", {

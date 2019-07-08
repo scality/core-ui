@@ -7,13 +7,14 @@ import Dropdown from "../dropdown/Dropdown.component";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+import type { Item } from "../dropdown/Dropdown.component";
 
-type Item = { label: string, onClick: () => void };
 type Items = Array<Item>;
 type User = {
   name: string,
   actions: Items
 };
+
 export type Props = {
   onToggleClick?: () => void,
   toggleVisible?: boolean,
@@ -21,7 +22,8 @@ export type Props = {
   applications?: Items,
   help?: Items,
   user?: User,
-  logo?: Node
+  logo?: Node,
+  languages?: Items
 };
 
 const NavbarContainer = styled.div`
@@ -94,8 +96,13 @@ function NavBar({
   help,
   user,
   logo,
+  languages = [],
   ...rest
 }: Props) {
+  const filterLanguage = languages.filter(language => !language.selected);
+  const currentLanguage = languages.find(
+    language => language.selected === true
+  );
   return (
     <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
@@ -118,6 +125,18 @@ function NavBar({
         </NavbarMenuItem>
       </NavbarMenu>
       <NavbarMenu>
+        {languages.length > 0 && (
+          <NavbarMenuItem>
+            <Dropdown
+              size="larger"
+              items={filterLanguage}
+              icon={<i className="fas fa-globe" />}
+              title={currentLanguage ? currentLanguage.name : languages[0].name}
+              caret={false}
+              text={currentLanguage ? currentLanguage.name : languages[0].name}
+            />
+          </NavbarMenuItem>
+        )}
         {applications && (
           <NavbarMenuItem>
             <Dropdown

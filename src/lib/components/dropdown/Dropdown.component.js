@@ -11,7 +11,12 @@ import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-type Item = { label: string, onClick: () => void };
+export type Item = {
+  label: string,
+  name?: string,
+  selected?: boolean,
+  onClick: () => void
+};
 type Items = Array<Item>;
 type Props = {
   text?: string,
@@ -167,7 +172,7 @@ function Dropdown({
             {icon}
           </ButtonIcon>
         )}
-        {text && <ButtonText>{text}</ButtonText>}
+        {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
         {caret && (
           <Caret>
             <i className="fas fa-caret-down" />
@@ -184,6 +189,7 @@ function Dropdown({
             {items.map(({ label, onClick, ...itemRest }) => {
               return (
                 <DropdownMenuItemStyled
+                  className="menu-item-label"
                   key={label}
                   onClick={onClick}
                   variant={variant}

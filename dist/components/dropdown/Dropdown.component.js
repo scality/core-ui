@@ -212,7 +212,9 @@ function Dropdown(_ref) {
   }, icon && _react.default.createElement(_Button.ButtonIcon, {
     text: text,
     size: size
-  }, icon), text && _react.default.createElement(_Button.ButtonText, null, text), caret && _react.default.createElement(Caret, null, _react.default.createElement("i", {
+  }, icon), text && _react.default.createElement(_Button.ButtonText, {
+    className: "sc-trigger-text"
+  }, text), caret && _react.default.createElement(Caret, null, _react.default.createElement("i", {
     className: "fas fa-caret-down"
   })), open && _react.default.createElement(DropdownMenuStyled, {
     className: "menu-item",
@@ -226,6 +228,7 @@ function Dropdown(_ref) {
         itemRest = _objectWithoutProperties(_ref2, ["label", "onClick"]);
 
     return _react.default.createElement(DropdownMenuItemStyled, _extends({
+      className: "menu-item-label",
       key: label,
       onClick: onClick,
       variant: variant
