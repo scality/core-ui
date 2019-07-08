@@ -11,7 +11,7 @@ import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
-type Item = {
+export type Item = {
   label: string,
   name?: string,
   selected?: boolean,

@@ -7,13 +7,8 @@ import Dropdown from "../dropdown/Dropdown.component";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+import type { Item } from "../dropdown/Dropdown.component";
 
-type Item = {
-  label: string,
-  name?: string,
-  selected?: boolean,
-  onClick: () => void
-};
 type Items = Array<Item>;
 type User = {
   name: string,
