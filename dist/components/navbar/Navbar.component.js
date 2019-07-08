@@ -29,16 +29,6 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  margin-right: 6px;\n"]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject7() {
   var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0 15px;\n  svg {\n    width: 100px;\n    height: 30px;\n  }\n"]);
 
@@ -127,8 +117,6 @@ var ProductNameSpan = _styledComponents.default.h1(_templateObject6(), defaultTh
 
 var LogoContainer = _styledComponents.default.div(_templateObject7());
 
-var IconContainer = _styledComponents.default.i(_templateObject8());
-
 function NavBar(_ref) {
   var onToggleClick = _ref.onToggleClick,
       toggleVisible = _ref.toggleVisible,
@@ -139,11 +127,13 @@ function NavBar(_ref) {
       logo = _ref.logo,
       _ref$languages = _ref.languages,
       languages = _ref$languages === void 0 ? [] : _ref$languages,
-      currentLanguage = _ref.currentLanguage,
-      rest = _objectWithoutProperties(_ref, ["onToggleClick", "toggleVisible", "productName", "applications", "help", "user", "logo", "languages", "currentLanguage"]);
+      rest = _objectWithoutProperties(_ref, ["onToggleClick", "toggleVisible", "productName", "applications", "help", "user", "logo", "languages"]);
 
   var filterLanguage = languages.filter(function (language) {
-    return language.name !== currentLanguage;
+    return !language.selected;
+  });
+  var currentLanguage = languages.find(function (language) {
+    return language.selected === true;
   });
   return _react.default.createElement(NavbarContainer, _extends({
     className: "sc-navbar"
@@ -160,10 +150,12 @@ function NavBar(_ref) {
   }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages.length > 0 && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
     items: filterLanguage,
-    icon: _react.default.createElement("div", null, _react.default.createElement(IconContainer, {
+    icon: _react.default.createElement("i", {
       className: "fas fa-globe"
-    }), currentLanguage),
-    caret: false
+    }),
+    title: currentLanguage ? currentLanguage.name : languages[0].name,
+    caret: false,
+    text: currentLanguage ? currentLanguage.name : languages[0].name
   })), applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
     size: "larger",
     items: applications,

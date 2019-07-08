@@ -14,7 +14,7 @@ import { mergeTheme } from "../../utils";
 type Item = {
   label: string,
   name?: string,
-  selected?: boolean => false,
+  selected?: boolean,
   onClick: () => void
 };
 type Items = Array<Item>;

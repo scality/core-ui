@@ -11,7 +11,7 @@ import { mergeTheme } from "../../utils";
 type Item = {
   label: string,
   name?: string,
-  selected?: boolean => false,
+  selected?: boolean,
   onClick: () => void
 };
 type Items = Array<Item>;
@@ -104,12 +104,10 @@ function NavBar({
   languages = [],
   ...rest
 }: Props) {
-  const filterLanguage = languages.filter(
-    language => language.selected === false
+  const filterLanguage = languages.filter(language => !language.selected);
+  const currentLanguage = languages.find(
+    language => language.selected === true
   );
-  const currentLanguage = languages
-    .filter(language => language.selected === true)
-    .pop();
   return (
     <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
@@ -138,9 +136,9 @@ function NavBar({
               size="larger"
               items={filterLanguage}
               icon={<i className="fas fa-globe" />}
-              title={currentLanguage.name}
+              title={currentLanguage ? currentLanguage.name : languages[0].name}
               caret={false}
-              text={currentLanguage.name}
+              text={currentLanguage ? currentLanguage.name : languages[0].name}
             />
           </NavbarMenuItem>
         )}
