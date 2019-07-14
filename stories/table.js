@@ -117,6 +117,10 @@ const ContainerWithClassName = styled.div`
   }
 `;
 
+const _noRowsRenderer = () => {
+  return <div className={"sc-table-noRows-override"}>No rows available</div>;
+};
+
 storiesOf("Table", module)
   .add("Default", () => {
     return (
@@ -199,6 +203,7 @@ storiesOf("Table", module)
           sortDirection={"DESC"}
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
+          noRowsRenderer={_noRowsRenderer}
         />
       </div>
     );
