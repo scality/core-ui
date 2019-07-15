@@ -40,6 +40,7 @@ const SidebarContainer = styled.div`
 `;
 
 const SidebarItem = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: ${defaultTheme.padding.base} 0;
@@ -59,7 +60,6 @@ const SidebarItem = styled.div`
           background-color: ${brandDark};
           color: ${brandingTheme.secondary};
           cursor: default;
-          border-right: solid 5px ${brandingTheme.secondary};
         `
       : css`
           &:hover {
@@ -76,6 +76,19 @@ const SidebarItem = styled.div`
 
 const MenuItemText = styled.div`
   margin-right: ${defaultTheme.padding.large};
+`;
+
+const MenuItemSelected = styled.div`
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  right: 0;
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      background-color: ${brandingTheme.secondary};
+    `;
+  }}
 `;
 
 const MenuItemIcon = styled.div`
@@ -102,6 +115,7 @@ function Sidebar({ expanded, actions, ...rest }: Props) {
             >
               {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
               {expanded && <MenuItemText>{label}</MenuItemText>}
+              {active && <MenuItemSelected />}
             </SidebarItem>
           );
         }

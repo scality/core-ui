@@ -25,8 +25,28 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _templateObject9() {
+function _templateObject11() {
   var data = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: end;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = _taggedTemplateLiteral(["\n      background-color: ", ";\n    "]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 5px;\n  height: 100%;\n  right: 0;\n  ", "\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -56,7 +76,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n          background-color: ", ";\n          color: ", ";\n          cursor: default;\n          border-right: solid 5px ", ";\n        "]);
+  var data = _taggedTemplateLiteral(["\n          background-color: ", ";\n          color: ", ";\n          cursor: default;\n        "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -66,7 +86,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: ", " 0;\n  cursor: pointer;\n  justify-content: flex-start;\n\n  .fas {\n    font-size: ", ";\n  }\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  padding: ", " 0;\n  cursor: pointer;\n  justify-content: flex-start;\n\n  .fas {\n    font-size: ", ";\n  }\n\n  ", "\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -132,12 +152,17 @@ var SidebarItem = _styledComponents.default.div(_templateObject5(), defaultTheme
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   var brandLight = (0, _polished.lighten)(0.1, brandingTheme.primary);
   var brandDark = (0, _polished.darken)(0.1, brandingTheme.primary);
-  return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, brandingTheme.secondary, brandingTheme.secondary) : (0, _styledComponents.css)(_templateObject7(), brandLight, brandingTheme.secondary, brandingTheme.primary, brandingTheme.secondary);
+  return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, brandingTheme.secondary) : (0, _styledComponents.css)(_templateObject7(), brandLight, brandingTheme.secondary, brandingTheme.primary, brandingTheme.secondary);
 });
 
 var MenuItemText = _styledComponents.default.div(_templateObject8(), defaultTheme.padding.large);
 
-var MenuItemIcon = _styledComponents.default.div(_templateObject9(), defaultTheme.navbarItemWidth);
+var MenuItemSelected = _styledComponents.default.div(_templateObject9(), function (props) {
+  var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
+  return (0, _styledComponents.css)(_templateObject10(), brandingTheme.secondary);
+});
+
+var MenuItemIcon = _styledComponents.default.div(_templateObject11(), defaultTheme.navbarItemWidth);
 
 function Sidebar(_ref) {
   var expanded = _ref.expanded,
@@ -162,7 +187,7 @@ function Sidebar(_ref) {
       title: label,
       onClick: onClick,
       expanded: expanded
-    }, actionRest), !!icon && _react.default.createElement(MenuItemIcon, null, icon), expanded && _react.default.createElement(MenuItemText, null, label));
+    }, actionRest), !!icon && _react.default.createElement(MenuItemIcon, null, icon), expanded && _react.default.createElement(MenuItemText, null, label), active && _react.default.createElement(MenuItemSelected, null));
   }));
 }
 
