@@ -1,5 +1,6 @@
 //@flow
 import React from "react";
+import type { Node } from "react";
 import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
 import { lighten, ellipsis } from "polished";
@@ -28,7 +29,8 @@ export type Props = {
   rowHeight: number,
   onSort: () => void,
   sortBy: string,
-  sortDirection: string
+  sortDirection: string,
+  noRowsRenderer: Node
 };
 
 type HeaderProps = {
@@ -177,9 +179,10 @@ function Table({
   onSort,
   sortBy,
   sortDirection,
-  list
+  list,
+  noRowsRenderer
 }: Props) {
-  const _noRowsRenderer = () => {
+  const _defaultNoRowsRenderer = () => {
     return <div className={"sc-table-noRows"}>No rows</div>;
   };
 
@@ -227,7 +230,7 @@ function Table({
             onHeaderClick={onHeaderClick}
             onRowClick={onRowClick}
             overscanRowCount={overscanRowCount || 5}
-            noRowsRenderer={_noRowsRenderer}
+            noRowsRenderer={noRowsRenderer || _defaultNoRowsRenderer}
             rowClassName={"sc-table-row"}
             rowHeight={rowHeight}
             rowGetter={rowGetter}

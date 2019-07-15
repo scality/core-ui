@@ -151,9 +151,10 @@ function Table(_ref) {
       onSort = _ref.onSort,
       sortBy = _ref.sortBy,
       sortDirection = _ref.sortDirection,
-      list = _ref.list;
+      list = _ref.list,
+      noRowsRenderer = _ref.noRowsRenderer;
 
-  var _noRowsRenderer = function _noRowsRenderer() {
+  var _defaultNoRowsRenderer = function _defaultNoRowsRenderer() {
     return _react.default.createElement("div", {
       className: "sc-table-noRows"
     }, "No rows");
@@ -207,7 +208,7 @@ function Table(_ref) {
       onHeaderClick: onHeaderClick,
       onRowClick: onRowClick,
       overscanRowCount: overscanRowCount || 5,
-      noRowsRenderer: _noRowsRenderer,
+      noRowsRenderer: noRowsRenderer || _defaultNoRowsRenderer,
       rowClassName: "sc-table-row",
       rowHeight: rowHeight,
       rowGetter: rowGetter,
