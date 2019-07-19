@@ -13,6 +13,7 @@ import SearchInput from "./components/searchinput/SearchInput.component";
 import Steppers from "./components/steppers/Steppers.component";
 import Input from "./components/input/Input.component";
 import Notifications from "./components/notifications/Notifications.component";
+import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -30,5 +31,6 @@ export {
   SearchInput,
   Steppers,
   Input,
-  Notifications
+  Notifications,
+  Breadcrumb
 };

@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Breadcrumb Default 1`] = `
+<div>
+  <h3>
+    Default Breadcrumb 
+  </h3>
+  <ol
+    className="sc-breadcrumb sc-bdVaJa uRaVh"
+  >
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="home"
+      >
+        home
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="clusters"
+      >
+        clusters
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="cluster"
+      >
+        cluster_1
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="nodes"
+      >
+        nodes
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="node"
+        title="node_longlonglonglonglonglonglonglonglonglonglong"
+      >
+        node_longlonglonglonglonglonglonglonglonglonglong
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+    >
+      <a
+        href="volumes"
+      >
+        volumes
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH hdxbJD"
+    >
+      <label>
+        volume_1
+      </label>
+    </li>
+  </ol>
+  <h3>
+    Breadcrumb with customized color
+  </h3>
+  <ol
+    className="sc-breadcrumb sc-bdVaJa uRaVh"
+  >
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="home"
+      >
+        home
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="clusters"
+      >
+        clusters
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="cluster"
+      >
+        cluster_1
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="nodes"
+      >
+        nodes
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="node"
+        title="node_longlonglonglonglonglonglonglonglonglonglong"
+      >
+        node_longlonglonglonglonglonglonglonglonglonglong
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+    >
+      <a
+        href="volumes"
+      >
+        volumes
+      </a>
+    </li>
+    <li
+      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-breadcrumb_item sc-bwzfXH hSuiPS"
+    >
+      <label>
+        volume_1
+      </label>
+    </li>
+  </ol>
+</div>
+`;
