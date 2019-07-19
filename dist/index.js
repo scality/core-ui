@@ -87,6 +87,12 @@ Object.defineProperty(exports, "Breadcrumb", {
     return _Breadcrumb.default;
   }
 });
+Object.defineProperty(exports, "Tabs", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.default;
+  }
+});
 Object.defineProperty(exports, "LOADER_SIZE", {
   enumerable: true,
   get: function get() {
@@ -123,6 +129,8 @@ var _Input = _interopRequireDefault(require("./components/input/Input.component"
 var _Notifications = _interopRequireDefault(require("./components/notifications/Notifications.component"));
 
 var _Breadcrumb = _interopRequireDefault(require("./components/breadcrumb/Breadcrumb.component"));
+
+var _Tabs = _interopRequireDefault(require("./components/tabs/Tabs.component"));
 
 var _constants = require("./components/constants");
 
