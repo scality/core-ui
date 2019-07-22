@@ -14,6 +14,7 @@ import Steppers from "./components/steppers/Steppers.component";
 import Input from "./components/input/Input.component";
 import Notifications from "./components/notifications/Notifications.component";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
+import Tabs from "./components/tabs/Tabs.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -32,5 +33,6 @@ export {
   Steppers,
   Input,
   Notifications,
-  Breadcrumb
+  Breadcrumb,
+  Tabs
 };

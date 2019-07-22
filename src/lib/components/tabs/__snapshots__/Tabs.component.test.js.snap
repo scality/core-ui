@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Tabs Default 1`] = `
+<div>
+  <h3>
+    Default Tabs 
+  </h3>
+  <div
+    className="sc-tabs sc-bdVaJa iROZJK"
+  >
+    <div
+      className="sc-tabs-bar sc-bwzfXH itIjAn"
+    >
+      <div
+        className="sc-tabs-item sc-htpNat jSgFvj"
+        onClick={[Function]}
+        selected={true}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb cmXBdT"
+          selected={true}
+        >
+          Detail
+        </p>
+      </div>
+      <div
+        className="sc-tabs-item sc-htpNat iPpPlk"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb iBFlue"
+          selected={false}
+        >
+          Pods
+        </p>
+      </div>
+      <div
+        className="sc-tabs-item sc-htpNat iPpPlk"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb iBFlue"
+          selected={false}
+        >
+          Volumes
+        </p>
+      </div>
+    </div>
+    <div
+      className="sc-tabs-item-content sc-ifAKCX hpMKg"
+    >
+      Content
+    </div>
+  </div>
+  <h3>
+    Tabs with customized color
+  </h3>
+  <div
+    className="sc-tabs sc-bdVaJa iROZJK"
+  >
+    <div
+      className="sc-tabs-bar sc-bwzfXH itIjAn"
+    >
+      <div
+        className="sc-tabs-item sc-htpNat jSgFvj"
+        onClick={[Function]}
+        selected={true}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb djtaox"
+          selected={true}
+        >
+          Detail
+        </p>
+      </div>
+      <div
+        className="sc-tabs-item sc-htpNat iPpPlk"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb iBFlue"
+          selected={false}
+        >
+          Pods
+        </p>
+      </div>
+      <div
+        className="sc-tabs-item sc-htpNat iPpPlk"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-tabs-item-title sc-bxivhb iBFlue"
+          selected={false}
+        >
+          Volumes
+        </p>
+      </div>
+    </div>
+    <div
+      className="sc-tabs-item-content sc-ifAKCX hpMKg"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;

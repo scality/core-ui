@@ -11,5 +11,6 @@ import "./notifications";
 import "./searchinput";
 import "./sidebar";
 import "./steppers";
+import "./tabs";
 import "./table";
 import "./toggle";
