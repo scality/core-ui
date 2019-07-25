@@ -1,0 +1,45 @@
+---
+version: "0.2"
+
+branches:
+  user/*, feature/*, improvement/*, bugfix/*, w/*, q/*, hotfix/*, dependabot/*:
+    stage: pre-merge
+
+stages:
+  pre-merge:
+    worker:
+      type: local
+    steps:
+      - TriggerStages:
+          name: Trigger unit tests
+          stage_names:
+            - unit_tests
+          haltOnFailure: true
+  unit_tests:
+    worker:
+      type: kube_pod
+      path: eve/workers/pod-unit-tests/pod.yaml
+      images:
+        docker-unit-tests:
+          context: '.'
+          dockerfile: eve/workers/pod-unit-tests/Dockerfile
+    steps:
+      - Git: &git_pull
+          name: git pull
+          repourl: "%(prop:git_reference)s"
+          method: clobber
+          retryFetch: true
+          haltOnFailure: true
+      - ShellCommand:
+          name: Run all UI unit tests
+          workdir: build/core-ui
+          command: >
+            npm install -g yarn &&
+            yarn install
+            --no-cache
+            --no-save
+            -q
+            --no-update-notifier &&
+            yarn test
+          haltOnFailure: false
+  

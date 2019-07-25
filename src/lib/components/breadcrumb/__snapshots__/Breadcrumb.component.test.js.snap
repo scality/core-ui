@@ -9,7 +9,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
     className="sc-breadcrumb sc-bdVaJa uRaVh"
   >
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="home"
@@ -25,7 +25,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="clusters"
@@ -41,7 +41,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="cluster"
@@ -57,7 +57,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="nodes"
@@ -73,7 +73,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="node"
@@ -90,7 +90,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH kSfEaJ"
+      className="sc-breadcrumb_item sc-bwzfXH ivdgiW"
     >
       <a
         href="volumes"
@@ -106,7 +106,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH hdxbJD"
+      className="sc-breadcrumb_item sc-bwzfXH eZtnXH"
     >
       <label>
         volume_1
@@ -120,7 +120,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
     className="sc-breadcrumb sc-bdVaJa uRaVh"
   >
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="home"
@@ -136,7 +136,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="clusters"
@@ -152,7 +152,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="cluster"
@@ -168,7 +168,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="nodes"
@@ -184,7 +184,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="node"
@@ -201,7 +201,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH jcALTO"
+      className="sc-breadcrumb_item sc-bwzfXH cgzeoU"
     >
       <a
         href="volumes"
@@ -217,7 +217,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH hSuiPS"
+      className="sc-breadcrumb_item sc-bwzfXH ipfFVV"
     >
       <label>
         volume_1
