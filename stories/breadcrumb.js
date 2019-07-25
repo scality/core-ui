@@ -10,7 +10,7 @@ storiesOf("Breadcrumb", module).add("Default", () => {
       <h3>Default Breadcrumb </h3>
       <Breadcrumb
         paths={[
-          <a href="home">home</a>,
+          <a href="home">Home</a>,
           <a href="clusters">clusters</a>,
           <a href="cluster">cluster_1</a>,
           <a href="nodes">nodes</a>,
