@@ -113,7 +113,9 @@ var Input = function Input(_ref) {
   }, label && _react.default.createElement(LabelStyle, {
     htmlFor: id,
     className: "sc-input-label"
-  }, label), _react.default.createElement(InputWrapper, null, type === "checkbox" ? _react.default.createElement(_Checkbox.default, _extends({
+  }, label), _react.default.createElement(InputWrapper, {
+    className: "sc-input-wrapper"
+  }, type === "checkbox" ? _react.default.createElement(_Checkbox.default, _extends({
     id: id,
     type: type,
     value: value,
@@ -126,7 +128,9 @@ var Input = function Input(_ref) {
     type: type,
     value: value,
     onChange: onChange
-  }, rest)), error && _react.default.createElement(InputErrorMessage, null, error)));
+  }, rest)), error && _react.default.createElement(InputErrorMessage, {
+    className: "sc-input-error"
+  }, error)));
 };
 
 var _default = Input;

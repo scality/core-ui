@@ -86,6 +86,7 @@ const InputErrorMessage = styled.span`
   margin: ${defaultTheme.padding.smaller} 0;
   font-size: ${defaultTheme.fontSize.small};
 `;
+
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,7 +109,7 @@ const Input = ({
           {label}
         </LabelStyle>
       )}
-      <InputWrapper>
+      <InputWrapper className="sc-input-wrapper">
         {type === "checkbox" ? (
           <Checkbox
             id={id}
@@ -129,7 +130,11 @@ const Input = ({
             {...rest}
           />
         )}
-        {error && <InputErrorMessage>{error}</InputErrorMessage>}
+        {error && (
+          <InputErrorMessage className="sc-input-error">
+            {error}
+          </InputErrorMessage>
+        )}
       </InputWrapper>
     </InputContainer>
   );

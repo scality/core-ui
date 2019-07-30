@@ -3,8 +3,15 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import Input from "../src/lib/components/input/Input.component";
 import { action } from "@storybook/addon-actions";
+import styled from "styled-components";
 
 const ExampleInput = () => {
+  const CustomInput = styled.div`
+    .sc-input-error {
+      width: 200px;
+    }
+  `;
+
   return (
     <div>
       <h3>Input without label</h3>
@@ -29,6 +36,17 @@ const ExampleInput = () => {
         error="error"
         onChange={action("onChange")}
       />
+      <h3>Input with long error</h3>
+      <CustomInput>
+        <Input
+          id="id3"
+          label="label"
+          value="value"
+          error="long error error error error error error error error error"
+          onChange={action("onChange")}
+        />
+      </CustomInput>
+
       <h3>Checkbox Input</h3>
       <Input
         id="id4"

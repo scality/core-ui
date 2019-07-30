@@ -1,8 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import Breadcrumb from "../src/lib/components/breadcrumb/Breadcrumb.component";
-import { jade } from "../src/lib/style/theme";
 
 storiesOf("Breadcrumb", module).add("Default", () => {
   return (

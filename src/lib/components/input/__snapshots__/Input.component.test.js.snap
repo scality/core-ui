@@ -71,7 +71,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-ifAKCX cYELHX"
+        className="sc-input-error sc-ifAKCX cYELHX"
       >
         error
       </span>
@@ -140,7 +140,7 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-ifAKCX cYELHX"
+        className="sc-input-error sc-ifAKCX cYELHX"
       >
         error
       </span>
