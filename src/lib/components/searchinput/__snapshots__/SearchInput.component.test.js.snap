@@ -19,7 +19,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         className="sc-input sc-htpNat utwCv"
       >
         <div
-          className="sc-EHOje fpqoIO"
+          className="sc-input-wrapper sc-EHOje fpqoIO"
         >
           <input
             name="search"
@@ -69,7 +69,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         className="sc-input sc-htpNat utwCv"
       >
         <div
-          className="sc-EHOje fpqoIO"
+          className="sc-input-wrapper sc-EHOje fpqoIO"
         >
           <input
             name="search"

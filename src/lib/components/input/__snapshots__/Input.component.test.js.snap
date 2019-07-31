@@ -9,7 +9,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-input sc-htpNat utwCv"
   >
     <div
-      className="sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-EHOje fpqoIO"
     >
       <input
         data-cy="default_input"
@@ -35,7 +35,7 @@ exports[`Storyshots Input Default 1`] = `
       label
     </label>
     <div
-      className="sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-EHOje fpqoIO"
     >
       <input
         id="id2"
@@ -60,7 +60,7 @@ exports[`Storyshots Input Default 1`] = `
       label
     </label>
     <div
-      className="sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-EHOje fpqoIO"
     >
       <input
         id="id3"
@@ -78,6 +78,40 @@ exports[`Storyshots Input Default 1`] = `
     </div>
   </div>
   <h3>
+    Input with long error
+  </h3>
+  <div
+    className="sc-bZQynM kwchJm"
+  >
+    <div
+      className="sc-input sc-htpNat euiEjm"
+    >
+      <label
+        className="sc-input-label sc-bxivhb imEKDv"
+        htmlFor="id3"
+      >
+        label
+      </label>
+      <div
+        className="sc-input-wrapper sc-EHOje fpqoIO"
+      >
+        <input
+          id="id3"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+          value="value"
+        />
+        <span
+          className="sc-input-error sc-ifAKCX cYELHX"
+        >
+          long error error error error error error error error error
+        </span>
+      </div>
+    </div>
+  </div>
+  <h3>
     Checkbox Input
   </h3>
   <div
@@ -90,7 +124,7 @@ exports[`Storyshots Input Default 1`] = `
       label
     </label>
     <div
-      className="sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-EHOje fpqoIO"
     >
       <label
         checked={false}
@@ -122,7 +156,7 @@ exports[`Storyshots Input Default 1`] = `
       label
     </label>
     <div
-      className="sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-EHOje fpqoIO"
     >
       <label
         checked={false}
