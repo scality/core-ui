@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import Select from "../src/lib/components/select/Select.component";

@@ -1,3 +1,4 @@
+//@flow
 import React from "react";
 import styled from "styled-components";
 import Select from "react-virtualized-select";
@@ -7,7 +8,7 @@ import { lighten } from "polished";
 
 export type Item = {
   label: string,
-  value: string
+  value: string | number
 };
 type Items = Array<Item>;
 

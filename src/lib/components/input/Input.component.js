@@ -8,8 +8,9 @@ import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 export type Item = {
   label: string,
-  value: string
+  value: string | number
 };
+type Items = Array<Item>;
 type Props = {
   value: any,
   type?: string,
@@ -18,7 +19,8 @@ type Props = {
   error?: string,
   id?: string,
   checked?: boolean,
-  onChange: () => void
+  onChange: () => void,
+  options?: Items
 };
 
 const InputContainer = styled.div`
@@ -99,9 +101,25 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const InputRenderer = ({ type, id, value, checked, onChange, ...rest }) => {
+const InputRenderer = ({
+  type,
+  id,
+  value,
+  checked,
+  onChange,
+  options = [],
+  ...rest
+}) => {
   if (type === "select") {
-    return <Select id={id} value={value} onChange={onChange} {...rest} />;
+    return (
+      <Select
+        id={id}
+        value={value}
+        onChange={onChange}
+        options={options}
+        {...rest}
+      />
+    );
   } else if (type === "checkbox") {
     return (
       <Checkbox

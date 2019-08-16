@@ -5,7 +5,7 @@
 [lints]
 all=error
 untyped-import=off
-unclear-type=warn
+unclear-type=off
 sketchy-null=off
 unsafe-getters-setters=warn
 dynamic-export=off
