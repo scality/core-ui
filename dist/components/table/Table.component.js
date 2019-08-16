@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,11 +21,13 @@ var _Dropdown = _interopRequireDefault(require("../dropdown/Dropdown.component")
 
 var _reactVirtualized = require("react-virtualized");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -111,22 +113,22 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var TableContainer = _styledComponents.default.div(_templateObject(), defaultTheme.grayLight, defaultTheme.fontSize.large, defaultTheme.grayLightest, function (props) {
+var TableContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.grayLight, defaultTheme.fontSize.large, defaultTheme.grayLightest, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary);
 }, defaultTheme.fontSize.large, defaultTheme.fontWeight.semibold, defaultTheme.padding.small, defaultTheme.grayLightest, defaultTheme.grayLightest, defaultTheme.padding.small);
 
-var CellContainer = _styledComponents.default.div(_templateObject3(), function (props) {
+var CellContainer = _styledComponents["default"].div(_templateObject3(), function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
 }, defaultTheme.padding.smaller, defaultTheme.padding.small, function (props) {
   return (0, _polished.lighten)(0.3, (0, _utils.mergeTheme)(props.theme, defaultTheme).primary);
 });
 
-var CellContent = _styledComponents.default.span(_templateObject4(), (0, _polished.ellipsis)());
+var CellContent = _styledComponents["default"].span(_templateObject4(), (0, _polished.ellipsis)());
 
-var HeaderContainer = _styledComponents.default.div(_templateObject5());
+var HeaderContainer = _styledComponents["default"].div(_templateObject5());
 
-var HeaderSortIcon = _styledComponents.default.div(_templateObject6(), defaultTheme.padding.small, defaultTheme.gray, function (props) {
+var HeaderSortIcon = _styledComponents["default"].div(_templateObject6(), defaultTheme.padding.small, defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.selected && props.sortDirection === "ASC") {
@@ -155,7 +157,7 @@ function Table(_ref) {
       noRowsRenderer = _ref.noRowsRenderer;
 
   var _defaultNoRowsRenderer = function _defaultNoRowsRenderer() {
-    return _react.default.createElement("div", {
+    return _react["default"].createElement("div", {
       className: "sc-table-noRows"
     }, "No rows");
   };
@@ -166,12 +168,12 @@ function Table(_ref) {
         sortBy = _ref2.sortBy,
         sortDirection = _ref2.sortDirection,
         disableSort = _ref2.disableSort;
-    return _react.default.createElement(HeaderContainer, null, _react.default.createElement("label", null, label), !disableSort && _react.default.createElement(HeaderSortIcon, {
+    return _react["default"].createElement(HeaderContainer, null, _react["default"].createElement("label", null, label), !disableSort && _react["default"].createElement(HeaderSortIcon, {
       selected: sortBy === dataKey,
       sortDirection: sortDirection
-    }, _react.default.createElement("i", {
+    }, _react["default"].createElement("i", {
       className: "fas fa-sort-up"
-    }), _react.default.createElement("i", {
+    }), _react["default"].createElement("i", {
       className: "fas fa-sort-down"
     })));
   };
@@ -191,7 +193,7 @@ function Table(_ref) {
     return list[index];
   };
 
-  return _react.default.createElement(_reactVirtualized.AutoSizer, {
+  return _react["default"].createElement(_reactVirtualized.AutoSizer, {
     className: "sc-table",
     style: {
       height: "auto",
@@ -200,7 +202,7 @@ function Table(_ref) {
   }, function (_ref4) {
     var height = _ref4.height,
         width = _ref4.width;
-    return _react.default.createElement(TableContainer, null, _react.default.createElement(_reactVirtualized.Table, {
+    return _react["default"].createElement(TableContainer, null, _react["default"].createElement(_reactVirtualized.Table, {
       disableHeader: disableHeader,
       headerClassName: "sc-table-header",
       headerHeight: headerHeight,
@@ -218,7 +220,7 @@ function Table(_ref) {
       sortDirection: sortDirection,
       width: width
     }, columns.map(function (column) {
-      return _react.default.createElement(_reactVirtualized.Column, {
+      return _react["default"].createElement(_reactVirtualized.Column, {
         key: column.dataKey,
         width: column.width || 200,
         flexGrow: column.flexGrow || 0,
@@ -231,13 +233,13 @@ function Table(_ref) {
           var cellData = _ref5.cellData,
               columnIndex = _ref5.columnIndex,
               rowData = _ref5.rowData;
-          return _react.default.createElement(CellContainer, {
+          return _react["default"].createElement(CellContainer, {
             className: "sc-table-column-cell-container-".concat(column.dataKey)
-          }, _react.default.createElement(CellContent, {
+          }, _react["default"].createElement(CellContent, {
             className: "sc-table-column-cell-".concat(column.dataKey),
             title: cellData
-          }, column.renderer ? column.renderer(cellData, rowData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react.default.createElement(_Dropdown.default, {
-            icon: _react.default.createElement("i", {
+          }, column.renderer ? column.renderer(cellData, rowData) : cellData), rowData.actions && rowData.actions.length && columnIndex === columns.length - 1 && _react["default"].createElement(_Dropdown["default"], {
+            icon: _react["default"].createElement("i", {
               className: "fas fa-ellipsis-v"
             }),
             items: _decorateDropdownActions(rowData.actions, rowData),
@@ -251,4 +253,4 @@ function Table(_ref) {
 }
 
 var _default = Table;
-exports.default = _default;
+exports["default"] = _default;

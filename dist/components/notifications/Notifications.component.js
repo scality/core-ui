@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.BOTTOM_RIGHT = exports.BOTTOM_LEFT = exports.TOP_RIGHT = exports.TOP_LEFT = void 0;
+exports["default"] = exports.BOTTOM_RIGHT = exports.BOTTOM_LEFT = exports.TOP_RIGHT = exports.TOP_LEFT = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,9 +13,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _Notification = _interopRequireDefault(require("./Notification.component"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -84,7 +84,7 @@ exports.BOTTOM_LEFT = BOTTOM_LEFT;
 var BOTTOM_RIGHT = "br";
 exports.BOTTOM_RIGHT = BOTTOM_RIGHT;
 
-var NotificationsContainer = _styledComponents.default.div(_templateObject(), defaultTheme.zIndex.notification, defaultTheme.padding.larger, function (props) {
+var NotificationsContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.zIndex.notification, defaultTheme.padding.larger, function (props) {
   switch (props.position) {
     case TOP_LEFT:
       return (0, _styledComponents.css)(_templateObject2());
@@ -106,11 +106,11 @@ function Notifications(_ref) {
       onDismiss = _ref.onDismiss,
       rest = _objectWithoutProperties(_ref, ["position", "notifications", "onDismiss"]);
 
-  return _react.default.createElement(NotificationsContainer, _extends({
+  return _react["default"].createElement(NotificationsContainer, _extends({
     className: "sc-notifications",
     position: position
   }, rest), notifications.map(function (notification) {
-    return _react.default.createElement(_Notification.default, _extends({
+    return _react["default"].createElement(_Notification["default"], _extends({
       key: notification.uid
     }, notification, {
       onDismiss: onDismiss
@@ -119,4 +119,4 @@ function Notifications(_ref) {
 }
 
 var _default = Notifications;
-exports.default = _default;
+exports["default"] = _default;

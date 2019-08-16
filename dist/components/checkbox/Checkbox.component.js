@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,9 +15,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n      &:before {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        top: 0;\n        width: 18px;\n        height: 18px;\n        border: 2px solid ", ";\n        background: ", ";\n        border-radius: 4px;\n      }\n      i {\n        position: absolute;\n        top: 3px;\n        left: 3px;\n        font-size: 16px;\n        color: ", ";\n      }\n\n      &:hover {\n        &:before {\n          border-color: ", ";\n        }\n      }\n    "]);
@@ -87,29 +87,29 @@ function Checkbox(_ref) {
       onChange = _ref.onChange,
       rest = _objectWithoutProperties(_ref, ["disabled", "checked", "label", "value", "onChange"]);
 
-  return _react.default.createElement(StyledCheckbox, _defineProperty({
+  return _react["default"].createElement(StyledCheckbox, _defineProperty({
     className: "checkbox",
     checked: checked,
     disabled: disabled
-  }, "className", "sc-checkbox"), _react.default.createElement("input", _extends({
+  }, "className", "sc-checkbox"), _react["default"].createElement("input", _extends({
     type: "checkbox",
     checked: checked,
     disabled: disabled,
     value: value,
     onChange: onChange
-  }, rest)), _react.default.createElement("i", {
+  }, rest)), _react["default"].createElement("i", {
     className: "fas fa-check"
-  }), label && _react.default.createElement(StyledCheckboxLabel, {
+  }), label && _react["default"].createElement(StyledCheckboxLabel, {
     className: "text"
   }, label));
 }
 
 var _default = Checkbox;
-exports.default = _default;
+exports["default"] = _default;
 
-var StyledCheckboxLabel = _styledComponents.default.span(_templateObject(), defaultTheme.fontSize.large, defaultTheme.padding.base);
+var StyledCheckboxLabel = _styledComponents["default"].span(_templateObject(), defaultTheme.fontSize.large, defaultTheme.padding.base);
 
-var StyledCheckbox = _styledComponents.default.label(_templateObject2(), function (props) {
+var StyledCheckbox = _styledComponents["default"].label(_templateObject2(), function (props) {
   return props.disabled ? (0, _styledComponents.css)(_templateObject3()) : (0, _styledComponents.css)(_templateObject4());
 }, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);

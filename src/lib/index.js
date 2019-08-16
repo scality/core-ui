@@ -15,6 +15,7 @@ import Input from "./components/input/Input.component";
 import Notifications from "./components/notifications/Notifications.component";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 import Tabs from "./components/tabs/Tabs.component";
+import Select from "./components/select/Select.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -34,5 +35,6 @@ export {
   Input,
   Notifications,
   Breadcrumb,
-  Tabs
+  Tabs,
+  Select
 };

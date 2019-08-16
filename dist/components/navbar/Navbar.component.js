@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -19,9 +19,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -101,21 +101,21 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NavbarContainer = _styledComponents.default.div(_templateObject(), defaultTheme.navbarHeight, function (props) {
+var NavbarContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.navbarHeight, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, brandingTheme.secondary);
 });
 
-var NavbarMenu = _styledComponents.default.div(_templateObject3());
+var NavbarMenu = _styledComponents["default"].div(_templateObject3());
 
-var NavbarMenuItem = _styledComponents.default.div(_templateObject4(), function (props) {
+var NavbarMenuItem = _styledComponents["default"].div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject5(), brandingTheme.primary, brandingTheme.secondary);
 }, defaultTheme.navbarHeight, defaultTheme.navbarItemWidth, defaultTheme.navbarHeight, defaultTheme.fontSize.base);
 
-var ProductNameSpan = _styledComponents.default.h1(_templateObject6(), defaultTheme.fontSize.larger);
+var ProductNameSpan = _styledComponents["default"].h1(_templateObject6(), defaultTheme.fontSize.larger);
 
-var LogoContainer = _styledComponents.default.div(_templateObject7());
+var LogoContainer = _styledComponents["default"].div(_templateObject7());
 
 function NavBar(_ref) {
   var onToggleClick = _ref.onToggleClick,
@@ -135,46 +135,46 @@ function NavBar(_ref) {
   var currentLanguage = languages.find(function (language) {
     return language.selected === true;
   });
-  return _react.default.createElement(NavbarContainer, _extends({
+  return _react["default"].createElement(NavbarContainer, _extends({
     className: "sc-navbar"
-  }, rest), _react.default.createElement(NavbarMenu, null, toggleVisible && _react.default.createElement(NavbarMenuItem, {
+  }, rest), _react["default"].createElement(NavbarMenu, null, toggleVisible && _react["default"].createElement(NavbarMenuItem, {
     onClick: onToggleClick
-  }, _react.default.createElement(_Button.default, {
+  }, _react["default"].createElement(_Button["default"], {
     size: "larger",
-    icon: _react.default.createElement("i", {
+    icon: _react["default"].createElement("i", {
       className: "fas fa-bars"
     }),
     title: "Main Menu"
-  })), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(LogoContainer, {
+  })), _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(LogoContainer, {
     className: "sc-logo"
-  }, logo ? logo : _react.default.createElement(_branding.default, null))), _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(ProductNameSpan, null, productName))), _react.default.createElement(NavbarMenu, null, languages.length > 0 && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  }, logo ? logo : _react["default"].createElement(_branding["default"], null))), _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(ProductNameSpan, null, productName))), _react["default"].createElement(NavbarMenu, null, languages.length > 0 && _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(_Dropdown["default"], {
     size: "larger",
     items: filterLanguage,
-    icon: _react.default.createElement("i", {
+    icon: _react["default"].createElement("i", {
       className: "fas fa-globe"
     }),
     title: currentLanguage ? currentLanguage.name : languages[0].name,
     caret: false,
     text: currentLanguage ? currentLanguage.name : languages[0].name
-  })), applications && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  })), applications && _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(_Dropdown["default"], {
     size: "larger",
     items: applications,
-    icon: _react.default.createElement("i", {
+    icon: _react["default"].createElement("i", {
       className: "fas fa-th"
     }),
     title: "Scality Apps",
     caret: false
-  })), help && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  })), help && _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(_Dropdown["default"], {
     size: "larger",
     items: help,
-    icon: _react.default.createElement("i", {
+    icon: _react["default"].createElement("i", {
       className: "fas fa-question-circle"
     }),
     title: "Help",
     caret: false
-  })), user && _react.default.createElement(NavbarMenuItem, null, _react.default.createElement(_Dropdown.default, {
+  })), user && _react["default"].createElement(NavbarMenuItem, null, _react["default"].createElement(_Dropdown["default"], {
     items: user.actions,
-    icon: _react.default.createElement("i", {
+    icon: _react["default"].createElement("i", {
       className: "fas fa-user"
     }),
     title: user.name,
@@ -185,4 +185,4 @@ function NavBar(_ref) {
 }
 
 var _default = NavBar;
-exports.default = _default;
+exports["default"] = _default;

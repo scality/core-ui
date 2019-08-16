@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,9 +15,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -85,9 +85,9 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BreadcrumbContainer = _styledComponents.default.ol(_templateObject(), defaultTheme.padding.base);
+var BreadcrumbContainer = _styledComponents["default"].ol(_templateObject(), defaultTheme.padding.base);
 
-var BreadcrumbItem = _styledComponents.default.li(_templateObject2(), defaultTheme.padding.smaller, defaultTheme.padding.base, defaultTheme.fontSize.larger, (0, _polished.ellipsis)("250px"), defaultTheme.textColor, function (props) {
+var BreadcrumbItem = _styledComponents["default"].li(_templateObject2(), defaultTheme.padding.smaller, defaultTheme.padding.base, defaultTheme.fontSize.larger, (0, _polished.ellipsis)("250px"), defaultTheme.textColor, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.active) {
@@ -99,15 +99,15 @@ var BreadcrumbItem = _styledComponents.default.li(_templateObject2(), defaultThe
   return (0, _styledComponents.css)(_templateObject4(), hoverColor, hoverColor, hoverColor);
 });
 
-var BreadcrumbSeparator = _styledComponents.default.li(_templateObject5(), defaultTheme.padding.smaller, defaultTheme.padding.base, defaultTheme.grayLight, defaultTheme.fontSize.small);
+var BreadcrumbSeparator = _styledComponents["default"].li(_templateObject5(), defaultTheme.padding.smaller, defaultTheme.padding.base, defaultTheme.grayLight, defaultTheme.fontSize.small);
 
 var withBreadcrumbSeparator = function withBreadcrumbSeparator(lastIndex) {
   return function (acc, item, index) {
     var notLast = index < lastIndex;
-    return notLast ? [].concat(_toConsumableArray(acc), [item, _react.default.createElement(BreadcrumbSeparator, {
+    return notLast ? [].concat(_toConsumableArray(acc), [item, _react["default"].createElement(BreadcrumbSeparator, {
       key: "sc-breadcrumb_separator_".concat(index),
       className: "sc-breadcrumb_separator"
-    }, _react.default.createElement("i", {
+    }, _react["default"].createElement("i", {
       className: "fas fa-chevron-right"
     }))]) : [].concat(_toConsumableArray(acc), [item]);
   };
@@ -124,7 +124,7 @@ var Breadcrumb = function Breadcrumb(_ref) {
 
   var lastIndex = paths.length - 1;
   var breadcrumbItems = paths.map(function (item, index) {
-    return _react.default.createElement(BreadcrumbItem, {
+    return _react["default"].createElement(BreadcrumbItem, {
       key: "sc-breadcrumb_item_".concat(index),
       className: "sc-breadcrumb_item",
       active: index === lastIndex,
@@ -132,10 +132,10 @@ var Breadcrumb = function Breadcrumb(_ref) {
       activeColor: activeColor
     }, item);
   }).reduce(withBreadcrumbSeparator(lastIndex), []);
-  return _react.default.createElement(BreadcrumbContainer, _extends({
+  return _react["default"].createElement(BreadcrumbContainer, _extends({
     className: "sc-breadcrumb"
   }, rest), breadcrumbItems);
 };
 
 var _default = Breadcrumb;
-exports.default = _default;
+exports["default"] = _default;

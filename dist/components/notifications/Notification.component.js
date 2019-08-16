@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,9 +17,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -97,20 +97,20 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NotificationContainer = _styledComponents.default.div(_templateObject(), defaultTheme.padding.base, defaultTheme.padding.base, defaultTheme.gray, function (props) {
+var NotificationContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.padding.base, defaultTheme.padding.base, defaultTheme.gray, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme[props.variant || "primary"], defaultTheme.white);
 });
 
-var NotificationTitle = _styledComponents.default.div(_templateObject3(), defaultTheme.padding.base, defaultTheme.padding.smaller, defaultTheme.fontWeight.bold);
+var NotificationTitle = _styledComponents["default"].div(_templateObject3(), defaultTheme.padding.base, defaultTheme.padding.smaller, defaultTheme.fontWeight.bold);
 
-var NotificationDismissProgress = _styledComponents.default.div(_templateObject4(), function (props) {
+var NotificationDismissProgress = _styledComponents["default"].div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   var brandDark = (0, _polished.darken)(0.1, brandingTheme[props.variant || "primary"]);
   return (0, _styledComponents.css)(_templateObject5(), brandDark, props.value / props.max * 100);
 });
 
-var NotificationClose = _styledComponents.default.div(_templateObject6(), defaultTheme.grayLightest);
+var NotificationClose = _styledComponents["default"].div(_templateObject6(), defaultTheme.grayLightest);
 
 function Notification(_ref) {
   var uid = _ref.uid,
@@ -164,21 +164,21 @@ function Notification(_ref) {
     onDismiss && onDismiss(uid);
   };
 
-  return _react.default.createElement(NotificationContainer, _extends({
+  return _react["default"].createElement(NotificationContainer, _extends({
     className: "sc-notification",
     variant: variant,
     onMouseEnter: clearTimer,
     onMouseLeave: resumeTimer
-  }, rest), _react.default.createElement(NotificationTitle, null, title), _react.default.createElement("div", null, message), !!dismissAfter && _react.default.createElement(NotificationDismissProgress, {
+  }, rest), _react["default"].createElement(NotificationTitle, null, title), _react["default"].createElement("div", null, message), !!dismissAfter && _react["default"].createElement(NotificationDismissProgress, {
     value: dismissProgress,
     max: dismissAfter,
     variant: variant
-  }), _react.default.createElement(NotificationClose, {
+  }), _react["default"].createElement(NotificationClose, {
     onClick: dismiss
-  }, _react.default.createElement("i", {
+  }, _react["default"].createElement("i", {
     className: "fas fa-times"
   })));
 }
 
 var _default = Notification;
-exports.default = _default;
+exports["default"] = _default;

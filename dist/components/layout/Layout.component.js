@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,7 +15,7 @@ var _Navbar = _interopRequireDefault(require("../navbar/Navbar.component"));
 
 var _Sidebar = _interopRequireDefault(require("../sidebar/Sidebar.component"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -55,11 +55,11 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var LayoutContainer = _styledComponents.default.div(_templateObject());
+var LayoutContainer = _styledComponents["default"].div(_templateObject());
 
-var ContentContainer = _styledComponents.default.div(_templateObject2(), _theme.navbarHeight);
+var ContentContainer = _styledComponents["default"].div(_templateObject2(), _theme.navbarHeight);
 
-var MainContent = _styledComponents.default.div(_templateObject3());
+var MainContent = _styledComponents["default"].div(_templateObject3());
 
 function Layout(_ref) {
   var children = _ref.children,
@@ -67,12 +67,12 @@ function Layout(_ref) {
       navbar = _ref.navbar,
       rest = _objectWithoutProperties(_ref, ["children", "sidebar", "navbar"]);
 
-  return _react.default.createElement(LayoutContainer, _extends({
+  return _react["default"].createElement(LayoutContainer, _extends({
     className: "sc-layout"
-  }, rest), _react.default.createElement(_Navbar.default, navbar), _react.default.createElement(ContentContainer, null, _react.default.createElement(_Sidebar.default, sidebar), _react.default.createElement(MainContent, {
+  }, rest), _react["default"].createElement(_Navbar["default"], navbar), _react["default"].createElement(ContentContainer, null, _react["default"].createElement(_Sidebar["default"], sidebar), _react["default"].createElement(MainContent, {
     className: "main"
   }, children)));
 }
 
 var _default = Layout;
-exports.default = _default;
+exports["default"] = _default;

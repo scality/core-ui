@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,9 +17,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -79,7 +79,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var InputContainer = _styledComponents.default.div(_templateObject(), defaultTheme.padding.smaller, defaultTheme.padding.small, defaultTheme.fontSize.base, function (props) {
+var InputContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.padding.smaller, defaultTheme.padding.small, defaultTheme.fontSize.base, function (props) {
   return props.error ? (0, _utils.mergeTheme)(props.theme, defaultTheme).danger : defaultTheme.gray;
 }, function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
@@ -89,13 +89,13 @@ var InputContainer = _styledComponents.default.div(_templateObject(), defaultThe
   }
 });
 
-var LabelStyle = _styledComponents.default.label(_templateObject3(), defaultTheme.padding.small, defaultTheme.fontSize.base);
+var LabelStyle = _styledComponents["default"].label(_templateObject3(), defaultTheme.padding.small, defaultTheme.fontSize.base);
 
-var InputErrorMessage = _styledComponents.default.span(_templateObject4(), function (props) {
+var InputErrorMessage = _styledComponents["default"].span(_templateObject4(), function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).danger;
 }, defaultTheme.padding.smaller, defaultTheme.fontSize.small);
 
-var InputWrapper = _styledComponents.default.div(_templateObject5());
+var InputWrapper = _styledComponents["default"].div(_templateObject5());
 
 var Input = function Input(_ref) {
   var type = _ref.type,
@@ -107,31 +107,31 @@ var Input = function Input(_ref) {
       checked = _ref.checked,
       rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange", "checked"]);
 
-  return _react.default.createElement(InputContainer, {
+  return _react["default"].createElement(InputContainer, {
     className: "sc-input",
     error: error
-  }, label && _react.default.createElement(LabelStyle, {
+  }, label && _react["default"].createElement(LabelStyle, {
     htmlFor: id,
     className: "sc-input-label"
-  }, label), _react.default.createElement(InputWrapper, {
+  }, label), _react["default"].createElement(InputWrapper, {
     className: "sc-input-wrapper"
-  }, type === "checkbox" ? _react.default.createElement(_Checkbox.default, _extends({
+  }, type === "checkbox" ? _react["default"].createElement(_Checkbox["default"], _extends({
     id: id,
     type: type,
     value: value,
     checked: !!checked,
     onChange: onChange
-  }, rest)) : _react.default.createElement(_reactDebounceInput.DebounceInput, _extends({
+  }, rest)) : _react["default"].createElement(_reactDebounceInput.DebounceInput, _extends({
     minLength: 1,
     debounceTimeout: 300,
     id: id,
     type: type,
     value: value,
     onChange: onChange
-  }, rest)), error && _react.default.createElement(InputErrorMessage, {
+  }, rest)), error && _react["default"].createElement(InputErrorMessage, {
     className: "sc-input-error"
   }, error)));
 };
 
 var _default = Input;
-exports.default = _default;
+exports["default"] = _default;

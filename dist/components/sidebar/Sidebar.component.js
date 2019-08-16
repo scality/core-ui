@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,9 +15,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -137,7 +137,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SidebarContainer = _styledComponents.default.div(_templateObject(), function (props) {
+var SidebarContainer = _styledComponents["default"].div(_templateObject(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject2(), brandingTheme.primary, brandingTheme.secondary);
 }, function (props) {
@@ -148,28 +148,28 @@ var SidebarContainer = _styledComponents.default.div(_templateObject(), function
   return (0, _styledComponents.css)(_templateObject4(), defaultTheme.navbarItemWidth);
 });
 
-var SidebarItem = _styledComponents.default.div(_templateObject5(), defaultTheme.padding.base, defaultTheme.fontSize.large, function (props) {
+var SidebarItem = _styledComponents["default"].div(_templateObject5(), defaultTheme.padding.base, defaultTheme.fontSize.large, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   var brandLight = (0, _polished.lighten)(0.1, brandingTheme.primary);
   var brandDark = (0, _polished.darken)(0.1, brandingTheme.primary);
   return props.active ? (0, _styledComponents.css)(_templateObject6(), brandDark, brandingTheme.secondary) : (0, _styledComponents.css)(_templateObject7(), brandLight, brandingTheme.secondary, brandingTheme.primary, brandingTheme.secondary);
 });
 
-var MenuItemText = _styledComponents.default.div(_templateObject8(), defaultTheme.padding.large);
+var MenuItemText = _styledComponents["default"].div(_templateObject8(), defaultTheme.padding.large);
 
-var MenuItemSelected = _styledComponents.default.div(_templateObject9(), function (props) {
+var MenuItemSelected = _styledComponents["default"].div(_templateObject9(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject10(), brandingTheme.secondary);
 });
 
-var MenuItemIcon = _styledComponents.default.div(_templateObject11(), defaultTheme.navbarItemWidth);
+var MenuItemIcon = _styledComponents["default"].div(_templateObject11(), defaultTheme.navbarItemWidth);
 
 function Sidebar(_ref) {
   var expanded = _ref.expanded,
       actions = _ref.actions,
       rest = _objectWithoutProperties(_ref, ["expanded", "actions"]);
 
-  return _react.default.createElement(SidebarContainer, _extends({
+  return _react["default"].createElement(SidebarContainer, _extends({
     expanded: expanded,
     className: "sc-sidebar"
   }, rest), actions.map(function (_ref2, index) {
@@ -180,16 +180,16 @@ function Sidebar(_ref) {
         icon = _ref2$icon === void 0 ? null : _ref2$icon,
         actionRest = _objectWithoutProperties(_ref2, ["active", "label", "onClick", "icon"]);
 
-    return _react.default.createElement(SidebarItem, _extends({
+    return _react["default"].createElement(SidebarItem, _extends({
       className: "sc-sidebar-item",
       key: index,
       active: active,
       title: label,
       onClick: onClick,
       expanded: expanded
-    }, actionRest), !!icon && _react.default.createElement(MenuItemIcon, null, icon), expanded && _react.default.createElement(MenuItemText, null, label), active && _react.default.createElement(MenuItemSelected, null));
+    }, actionRest), !!icon && _react["default"].createElement(MenuItemIcon, null, icon), expanded && _react["default"].createElement(MenuItemText, null, label), active && _react["default"].createElement(MenuItemSelected, null));
   }));
 }
 
 var _default = Sidebar;
-exports.default = _default;
+exports["default"] = _default;

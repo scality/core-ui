@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,9 +13,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -145,13 +145,13 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SteppersContainer = _styledComponents.default.div(_templateObject());
+var SteppersContainer = _styledComponents["default"].div(_templateObject());
 
-var StepContainer = _styledComponents.default.div(_templateObject2());
+var StepContainer = _styledComponents["default"].div(_templateObject2());
 
-var Panel = _styledComponents.default.div(_templateObject3());
+var Panel = _styledComponents["default"].div(_templateObject3());
 
-var Circle = _styledComponents.default.div(_templateObject4(), function (props) {
+var Circle = _styledComponents["default"].div(_templateObject4(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.active) {
@@ -163,11 +163,11 @@ var Circle = _styledComponents.default.div(_templateObject4(), function (props) 
   }
 });
 
-var StepHeader = _styledComponents.default.span(_templateObject8());
+var StepHeader = _styledComponents["default"].span(_templateObject8());
 
-var StepContent = _styledComponents.default.div(_templateObject9(), defaultTheme.padding.small);
+var StepContent = _styledComponents["default"].div(_templateObject9(), defaultTheme.padding.small);
 
-var BottomBar = _styledComponents.default.hr(_templateObject10(), function (props) {
+var BottomBar = _styledComponents["default"].hr(_templateObject10(), function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
 
   if (props.completed) {
@@ -184,17 +184,17 @@ function Step(props) {
       completed = props.completed,
       isLast = props.isLast,
       index = props.index;
-  var circleContent = completed ? _react.default.createElement("i", {
+  var circleContent = completed ? _react["default"].createElement("i", {
     className: "fas fa-check"
   }) : index + 1;
-  return _react.default.createElement(StepContainer, null, _react.default.createElement(Panel, null, _react.default.createElement(Circle, {
+  return _react["default"].createElement(StepContainer, null, _react["default"].createElement(Panel, null, _react["default"].createElement(Circle, {
     active: active,
     completed: completed
-  }, _react.default.createElement("span", null, circleContent)), !isLast && _react.default.createElement(BottomBar, {
+  }, _react["default"].createElement("span", null, circleContent)), !isLast && _react["default"].createElement(BottomBar, {
     completed: completed
-  })), _react.default.createElement(Panel, null, _react.default.createElement(StepHeader, {
+  })), _react["default"].createElement(Panel, null, _react["default"].createElement(StepHeader, {
     completed: completed
-  }, title), active && _react.default.createElement(StepContent, null, content)));
+  }, title), active && _react["default"].createElement(StepContent, null, content)));
 }
 
 function Steppers(_ref) {
@@ -202,14 +202,14 @@ function Steppers(_ref) {
       activeStep = _ref.activeStep,
       rest = _objectWithoutProperties(_ref, ["steps", "activeStep"]);
 
-  return _react.default.createElement(SteppersContainer, _extends({
+  return _react["default"].createElement(SteppersContainer, _extends({
     className: "sc-steppers"
   }, rest), steps.map(function (_ref2, index) {
     var title = _ref2.title,
         content = _ref2.content,
         stepRest = _objectWithoutProperties(_ref2, ["title", "content"]);
 
-    return _react.default.createElement(Step, _extends({
+    return _react["default"].createElement(Step, _extends({
       key: index,
       title: title,
       content: content,
@@ -222,4 +222,4 @@ function Steppers(_ref) {
 }
 
 var _default = Steppers;
-exports.default = _default;
+exports["default"] = _default;

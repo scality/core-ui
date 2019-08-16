@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,9 +13,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -65,14 +65,14 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ToggleContainer = _styledComponents.default.div(_templateObject());
+var ToggleContainer = _styledComponents["default"].div(_templateObject());
 
-var Switch = _styledComponents.default.label(_templateObject2(), defaultTheme.padding.small, function (props) {
+var Switch = _styledComponents["default"].label(_templateObject2(), defaultTheme.padding.small, function (props) {
   var brandingTheme = (0, _utils.mergeTheme)(props.theme, defaultTheme);
   return (0, _styledComponents.css)(_templateObject3(), defaultTheme.grayLight, defaultTheme.grayLight, defaultTheme.grayLight, brandingTheme.primary, brandingTheme.primary, brandingTheme.primary);
 });
 
-var StyledSwitchLabel = _styledComponents.default.span(_templateObject4(), defaultTheme.fontSize.large);
+var StyledSwitchLabel = _styledComponents["default"].span(_templateObject4(), defaultTheme.fontSize.large);
 
 function ToggleSwitch(_ref) {
   var toggle = _ref.toggle,
@@ -80,18 +80,18 @@ function ToggleSwitch(_ref) {
       onChange = _ref.onChange,
       rest = _objectWithoutProperties(_ref, ["toggle", "label", "onChange"]);
 
-  return _react.default.createElement(ToggleContainer, {
+  return _react["default"].createElement(ToggleContainer, {
     className: "sc-toggle"
-  }, _react.default.createElement(Switch, null, _react.default.createElement("input", _extends({
+  }, _react["default"].createElement(Switch, null, _react["default"].createElement("input", _extends({
     type: "checkbox",
     checked: toggle,
     onChange: onChange
-  }, rest)), _react.default.createElement("span", {
+  }, rest)), _react["default"].createElement("span", {
     className: "sc-slider"
-  })), _react.default.createElement(StyledSwitchLabel, {
+  })), _react["default"].createElement(StyledSwitchLabel, {
     className: "text"
   }, label));
 }
 
 var _default = ToggleSwitch;
-exports.default = _default;
+exports["default"] = _default;

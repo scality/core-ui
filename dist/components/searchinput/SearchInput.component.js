@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,9 +17,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -87,7 +87,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SearchInputContainer = _styledComponents.default.div(_templateObject(), function (props) {
+var SearchInputContainer = _styledComponents["default"].div(_templateObject(), function (props) {
   return props.docked ? "40px" : "100%";
 }, function (props) {
   return props.docked ? "12px" : "40px";
@@ -95,14 +95,14 @@ var SearchInputContainer = _styledComponents.default.div(_templateObject(), func
   return props.docked ? "12px" : "40px";
 });
 
-var IconButton = _styledComponents.default.button(_templateObject2(), defaultTheme.fontSize.base, function (props) {
+var IconButton = _styledComponents["default"].button(_templateObject2(), defaultTheme.fontSize.base, function (props) {
   return (0, _utils.mergeTheme)(props.theme, defaultTheme).primary;
 }, defaultTheme.white, function (props) {
   return !props.disabled && (0, _styledComponents.css)(_templateObject3(), (0, _polished.lighten)(0.1, (0, _utils.mergeTheme)(props.theme, defaultTheme).primary));
 });
 
-var SearchIcon = (0, _styledComponents.default)(IconButton)(_templateObject4());
-var ResetIcon = (0, _styledComponents.default)(IconButton)(_templateObject5(), function (props) {
+var SearchIcon = (0, _styledComponents["default"])(IconButton)(_templateObject4());
+var ResetIcon = (0, _styledComponents["default"])(IconButton)(_templateObject5(), function (props) {
   return props.visible ? "visible" : "hidden";
 }, function (props) {
   return props.visible ? 1 : 0;
@@ -133,10 +133,10 @@ function SearchInput(_ref) {
     setDocked(true);
   };
 
-  return _react.default.createElement(SearchInputContainer, _extends({
+  return _react["default"].createElement(SearchInputContainer, _extends({
     className: "sc-searchinput",
     docked: docked
-  }, rest), _react.default.createElement(_Input.default, {
+  }, rest), _react["default"].createElement(_Input["default"], {
     minLength: 1,
     debounceTimeout: 300,
     type: "text",
@@ -145,18 +145,18 @@ function SearchInput(_ref) {
     value: value,
     onChange: onChange,
     inputRef: myInputRef
-  }), _react.default.createElement(SearchIcon, {
+  }), _react["default"].createElement(SearchIcon, {
     onClick: toggle,
     disabled: !docked
-  }, _react.default.createElement("i", {
+  }, _react["default"].createElement("i", {
     className: "fas fa-search"
-  })), _react.default.createElement(ResetIcon, {
+  })), _react["default"].createElement(ResetIcon, {
     onClick: reset,
     visible: value && !docked
-  }, _react.default.createElement("i", {
+  }, _react["default"].createElement("i", {
     className: "fas fa-times-circle"
   })));
 }
 
 var _default = SearchInput;
-exports.default = _default;
+exports["default"] = _default;

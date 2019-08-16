@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.ButtonContent = exports.ButtonText = exports.ButtonIcon = exports.ButtonStyled = void 0;
+exports["default"] = exports.ButtonContent = exports.ButtonText = exports.ButtonIcon = exports.ButtonStyled = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,9 +17,9 @@ var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _Loader = _interopRequireDefault(require("../loader/Loader.component"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -172,7 +172,7 @@ var defaultProps = {
   isLoading: false
 };
 
-var ButtonStyled = _styledComponents.default.button(_templateObject(), defaultTheme.fontWeight.base, function (props) {
+var ButtonStyled = _styledComponents["default"].button(_templateObject(), defaultTheme.fontWeight.base, function (props) {
   switch (props.size) {
     case "smaller":
       return (0, _styledComponents.css)(_templateObject2(), defaultTheme.fontSize.smaller);
@@ -204,17 +204,17 @@ var ButtonStyled = _styledComponents.default.button(_templateObject(), defaultTh
 
 exports.ButtonStyled = ButtonStyled;
 
-var ButtonIcon = _styledComponents.default.span(_templateObject10(), function (props) {
+var ButtonIcon = _styledComponents["default"].span(_templateObject10(), function (props) {
   return props.text && (0, _styledComponents.css)(_templateObject11(), defaultTheme.padding.smaller);
 });
 
 exports.ButtonIcon = ButtonIcon;
 
-var ButtonText = _styledComponents.default.span(_templateObject12());
+var ButtonText = _styledComponents["default"].span(_templateObject12());
 
 exports.ButtonText = ButtonText;
 
-var ButtonContent = _styledComponents.default.span(_templateObject13());
+var ButtonContent = _styledComponents["default"].span(_templateObject13());
 
 exports.ButtonContent = ButtonContent;
 var Anchor = ButtonStyled.withComponent("a");
@@ -233,7 +233,7 @@ function Button(_ref) {
       type = _ref.type,
       rest = _objectWithoutProperties(_ref, ["text", "href", "icon", "size", "variant", "outlined", "disabled", "onClick", "title", "isLoading", "type"]);
 
-  return href && href.length ? _react.default.createElement(Anchor, _extends({
+  return href && href.length ? _react["default"].createElement(Anchor, _extends({
     className: "sc-button",
     href: href,
     variant: variant,
@@ -241,10 +241,10 @@ function Button(_ref) {
     disabled: disabled,
     size: size,
     title: title
-  }, rest), icon && _react.default.createElement(ButtonIcon, {
+  }, rest), icon && _react["default"].createElement(ButtonIcon, {
     text: text,
     size: size
-  }, icon), _react.default.createElement(ButtonText, null, text)) : _react.default.createElement(ButtonStyled, _extends({
+  }, icon), _react["default"].createElement(ButtonText, null, text)) : _react["default"].createElement(ButtonStyled, _extends({
     className: "sc-button",
     variant: variant,
     outlined: outlined,
@@ -254,16 +254,16 @@ function Button(_ref) {
     title: title,
     isLoading: isLoading,
     type: type
-  }, rest), _react.default.createElement(ButtonContent, null, isLoading && _react.default.createElement(_Loader.default, {
+  }, rest), _react["default"].createElement(ButtonContent, null, isLoading && _react["default"].createElement(_Loader["default"], {
     size: size
-  }), _react.default.createElement("span", {
+  }), _react["default"].createElement("span", {
     className: "sc-button-text"
-  }, icon && _react.default.createElement(ButtonIcon, {
+  }, icon && _react["default"].createElement(ButtonIcon, {
     text: text,
     size: size
-  }, icon), _react.default.createElement(ButtonText, null, text))));
+  }, icon), _react["default"].createElement(ButtonText, null, text))));
 }
 
 Button.defaultProps = defaultProps;
 var _default = Button;
-exports.default = _default;
+exports["default"] = _default;
