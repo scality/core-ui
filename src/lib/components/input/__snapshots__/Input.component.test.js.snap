@@ -6,12 +6,13 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-input sc-htpNat utwCv"
+    className="sc-input sc-bxivhb ktEkRb"
   >
     <div
-      className="sc-input-wrapper sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        className="sc-input-type"
         data-cy="default_input"
         id="id1"
         onBlur={[Function]}
@@ -26,18 +27,19 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-input sc-htpNat utwCv"
+    className="sc-input sc-bxivhb ktEkRb"
   >
     <label
-      className="sc-input-label sc-bxivhb imEKDv"
+      className="sc-input-label sc-ifAKCX jdmIxg"
       htmlFor="id2"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        className="sc-input-type"
         id="id2"
         onBlur={[Function]}
         onChange={[Function]}
@@ -51,18 +53,19 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-input sc-htpNat euiEjm"
+    className="sc-input sc-bxivhb etTDMT"
   >
     <label
-      className="sc-input-label sc-bxivhb imEKDv"
+      className="sc-input-label sc-ifAKCX jdmIxg"
       htmlFor="id3"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        className="sc-input-type"
         id="id3"
         onBlur={[Function]}
         onChange={[Function]}
@@ -71,7 +74,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-input-error sc-ifAKCX cYELHX"
+        className="sc-input-error sc-EHOje evwsgB"
       >
         error
       </span>
@@ -81,21 +84,22 @@ exports[`Storyshots Input Default 1`] = `
     Input with long error
   </h3>
   <div
-    className="sc-bZQynM kwchJm"
+    className="sc-gzVnrw gBtQdP"
   >
     <div
-      className="sc-input sc-htpNat euiEjm"
+      className="sc-input sc-bxivhb etTDMT"
     >
       <label
-        className="sc-input-label sc-bxivhb imEKDv"
+        className="sc-input-label sc-ifAKCX jdmIxg"
         htmlFor="id3"
       >
         label
       </label>
       <div
-        className="sc-input-wrapper sc-EHOje fpqoIO"
+        className="sc-input-wrapper sc-bZQynM AMncx"
       >
         <input
+          className="sc-input-type"
           id="id3"
           onBlur={[Function]}
           onChange={[Function]}
@@ -104,7 +108,7 @@ exports[`Storyshots Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-input-error sc-ifAKCX cYELHX"
+          className="sc-input-error sc-EHOje evwsgB"
         >
           long error error error error error error error error error
         </span>
@@ -115,16 +119,16 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-input sc-htpNat utwCv"
+    className="sc-input sc-bxivhb ktEkRb"
   >
     <label
-      className="sc-input-label sc-bxivhb imEKDv"
+      className="sc-input-label sc-ifAKCX jdmIxg"
       htmlFor="id4"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <label
         checked={false}
@@ -147,16 +151,16 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-input sc-htpNat euiEjm"
+    className="sc-input sc-bxivhb etTDMT"
   >
     <label
-      className="sc-input-label sc-bxivhb imEKDv"
+      className="sc-input-label sc-ifAKCX jdmIxg"
       htmlFor="id5"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-EHOje fpqoIO"
+      className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <label
         checked={false}
@@ -174,10 +178,131 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-input-error sc-ifAKCX cYELHX"
+        className="sc-input-error sc-EHOje evwsgB"
       >
         error
       </span>
+    </div>
+  </div>
+  <h3>
+    Select Input
+  </h3>
+  <div
+    className="sc-input sc-bxivhb ktEkRb"
+  >
+    <label
+      className="sc-input-label sc-ifAKCX jdmIxg"
+      htmlFor="id6"
+    >
+      label
+    </label>
+    <div
+      className="sc-input-wrapper sc-bZQynM AMncx"
+    >
+      <div
+        className="sc-select sc-htpNat dyKhmK"
+      >
+        <div
+          className="Select has-value is-clearable is-searchable Select--single"
+        >
+          <div
+            className="Select-control"
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+          >
+            <div
+              className="Select-multi-value-wrapper"
+              id="react-select-2--value"
+            >
+              <div
+                className="Select-value"
+              >
+                <span
+                  aria-selected="true"
+                  className="Select-value-label"
+                  id="react-select-2--value-item"
+                  role="option"
+                >
+                  Item 0
+                </span>
+              </div>
+              <div
+                className="Select-input"
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
+                }
+              >
+                <input
+                  aria-activedescendant="react-select-2--value"
+                  aria-expanded="false"
+                  aria-haspopup="false"
+                  aria-owns=""
+                  id="id6"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  role="combobox"
+                  style={
+                    Object {
+                      "boxSizing": "content-box",
+                      "width": "5px",
+                    }
+                  }
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
+            <span
+              aria-label="Clear value"
+              className="Select-clear-zone"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              title="Clear value"
+            >
+              <span
+                className="Select-clear"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "&times;",
+                  }
+                }
+              />
+            </span>
+            <span
+              className="Select-arrow-zone"
+              onMouseDown={[Function]}
+            >
+              <span
+                className="Select-arrow"
+                onMouseDown={[Function]}
+              />
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

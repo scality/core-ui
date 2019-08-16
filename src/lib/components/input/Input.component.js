@@ -3,11 +3,15 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import Checkbox from "../checkbox/Checkbox.component";
+import Select from "../select/Select.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
-
+export type Item = {
+  label: string,
+  value: string
+};
 type Props = {
-  value: string,
+  value: any,
   type?: string,
   label?: string,
   title?: string,
@@ -24,7 +28,11 @@ const InputContainer = styled.div`
     margin: ${defaultTheme.padding.smaller} 0;
   }
 
-  input {
+  .sc-select {
+    width: 200px;
+  }
+
+  input.sc-input-type {
     padding: 8px ${defaultTheme.padding.small};
     font-size: ${defaultTheme.fontSize.base};
     display: block;
@@ -36,7 +44,7 @@ const InputContainer = styled.div`
           : defaultTheme.gray};
   }
 
-  input:focus {
+  input.sc-input-type:focus {
     border-color: ${props => mergeTheme(props.theme, defaultTheme).primary};
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 1px rgba(0, 126, 255, 0.1);
@@ -91,17 +99,37 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const InputRenderer = ({ type, id, value, checked, onChange, ...rest }) => {
+  if (type === "select") {
+    return <Select id={id} value={value} onChange={onChange} {...rest} />;
+  } else if (type === "checkbox") {
+    return (
+      <Checkbox
+        id={id}
+        type={type}
+        value={value}
+        checked={!!checked}
+        onChange={onChange}
+        {...rest}
+      />
+    );
+  } else {
+    return (
+      <DebounceInput
+        className="sc-input-type"
+        minLength={1}
+        debounceTimeout={300}
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        {...rest}
+      />
+    );
+  }
+};
 
-const Input = ({
-  type,
-  id,
-  label,
-  error,
-  value,
-  onChange,
-  checked,
-  ...rest
-}: Props) => {
+const Input = ({ label, id, error, ...rest }: Props) => {
   return (
     <InputContainer className="sc-input" error={error}>
       {label && (
@@ -110,26 +138,7 @@ const Input = ({
         </LabelStyle>
       )}
       <InputWrapper className="sc-input-wrapper">
-        {type === "checkbox" ? (
-          <Checkbox
-            id={id}
-            type={type}
-            value={value}
-            checked={!!checked}
-            onChange={onChange}
-            {...rest}
-          />
-        ) : (
-          <DebounceInput
-            minLength={1}
-            debounceTimeout={300}
-            id={id}
-            type={type}
-            value={value}
-            onChange={onChange}
-            {...rest}
-          />
-        )}
+        <InputRenderer id={id} {...rest} />
         {error && (
           <InputErrorMessage className="sc-input-error">
             {error}

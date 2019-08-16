@@ -4,6 +4,10 @@ import { storiesOf } from "@storybook/react";
 import Input from "../src/lib/components/input/Input.component";
 import { action } from "@storybook/addon-actions";
 import styled from "styled-components";
+const options = Array.from(new Array(1000), (_, index) => ({
+  label: `Item ${index}`,
+  value: index
+}));
 
 const ExampleInput = () => {
   const CustomInput = styled.div`
@@ -63,6 +67,17 @@ const ExampleInput = () => {
         onChange={action("onChange")}
         type="checkbox"
         error="error"
+      />
+      <h3>Select Input</h3>
+      <Input
+        id="id6"
+        label="label"
+        onChange={action("onChange")}
+        type="select"
+        options={options}
+        placeholder="Select an item..."
+        noResultsText="Not found"
+        value={options[0]}
       />
     </div>
   );

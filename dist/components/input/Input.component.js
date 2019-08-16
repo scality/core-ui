@@ -13,6 +13,8 @@ var _reactDebounceInput = require("react-debounce-input");
 
 var _Checkbox = _interopRequireDefault(require("../checkbox/Checkbox.component"));
 
+var _Select = _interopRequireDefault(require("../select/Select.component"));
+
 var defaultTheme = _interopRequireWildcard(require("../../style/theme"));
 
 var _utils = require("../../utils");
@@ -68,7 +70,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n\n  .sc-checkbox {\n    margin: ", " 0;\n  }\n\n  input {\n    padding: 8px ", ";\n    font-size: ", ";\n    display: block;\n    border-radius: 4px;\n    border: 1px solid\n      ", ";\n  }\n\n  input:focus {\n    border-color: ", ";\n    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),\n      0 0 0 1px rgba(0, 126, 255, 0.1);\n    outline: none;\n  }\n\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: inline-flex;\n\n  .sc-checkbox {\n    margin: ", " 0;\n  }\n\n  .sc-select {\n    width: 200px;\n  }\n\n  input.sc-input-type {\n    padding: 8px ", ";\n    font-size: ", ";\n    display: block;\n    border-radius: 4px;\n    border: 1px solid\n      ", ";\n  }\n\n  input.sc-input-type:focus {\n    border-color: ", ";\n    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),\n      0 0 0 1px rgba(0, 126, 255, 0.1);\n    outline: none;\n  }\n\n  ", ";\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -97,15 +99,46 @@ var InputErrorMessage = _styledComponents["default"].span(_templateObject4(), fu
 
 var InputWrapper = _styledComponents["default"].div(_templateObject5());
 
-var Input = function Input(_ref) {
+var InputRenderer = function InputRenderer(_ref) {
   var type = _ref.type,
       id = _ref.id,
-      label = _ref.label,
-      error = _ref.error,
       value = _ref.value,
-      onChange = _ref.onChange,
       checked = _ref.checked,
-      rest = _objectWithoutProperties(_ref, ["type", "id", "label", "error", "value", "onChange", "checked"]);
+      onChange = _ref.onChange,
+      rest = _objectWithoutProperties(_ref, ["type", "id", "value", "checked", "onChange"]);
+
+  if (type === "select") {
+    return _react["default"].createElement(_Select["default"], _extends({
+      id: id,
+      value: value,
+      onChange: onChange
+    }, rest));
+  } else if (type === "checkbox") {
+    return _react["default"].createElement(_Checkbox["default"], _extends({
+      id: id,
+      type: type,
+      value: value,
+      checked: !!checked,
+      onChange: onChange
+    }, rest));
+  } else {
+    return _react["default"].createElement(_reactDebounceInput.DebounceInput, _extends({
+      className: "sc-input-type",
+      minLength: 1,
+      debounceTimeout: 300,
+      id: id,
+      type: type,
+      value: value,
+      onChange: onChange
+    }, rest));
+  }
+};
+
+var Input = function Input(_ref2) {
+  var label = _ref2.label,
+      id = _ref2.id,
+      error = _ref2.error,
+      rest = _objectWithoutProperties(_ref2, ["label", "id", "error"]);
 
   return _react["default"].createElement(InputContainer, {
     className: "sc-input",
@@ -115,19 +148,8 @@ var Input = function Input(_ref) {
     className: "sc-input-label"
   }, label), _react["default"].createElement(InputWrapper, {
     className: "sc-input-wrapper"
-  }, type === "checkbox" ? _react["default"].createElement(_Checkbox["default"], _extends({
-    id: id,
-    type: type,
-    value: value,
-    checked: !!checked,
-    onChange: onChange
-  }, rest)) : _react["default"].createElement(_reactDebounceInput.DebounceInput, _extends({
-    minLength: 1,
-    debounceTimeout: 300,
-    id: id,
-    type: type,
-    value: value,
-    onChange: onChange
+  }, _react["default"].createElement(InputRenderer, _extends({
+    id: id
   }, rest)), error && _react["default"].createElement(InputErrorMessage, {
     className: "sc-input-error"
   }, error)));

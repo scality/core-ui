@@ -13,15 +13,16 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-bZQynM dhJuuP"
+      className="sc-searchinput sc-gzVnrw kjCCUz"
     >
       <div
-        className="sc-input sc-htpNat utwCv"
+        className="sc-input sc-bxivhb ktEkRb"
       >
         <div
-          className="sc-input-wrapper sc-EHOje fpqoIO"
+          className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            className="sc-input-type"
             name="search"
             onBlur={[Function]}
             onChange={[Function]}
@@ -33,7 +34,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-gzVnrw sc-htoDjs bfFIZd"
+        className="sc-htoDjs sc-dnqmqq bGFxWO"
         disabled={false}
         onClick={[Function]}
       >
@@ -42,7 +43,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-gzVnrw sc-dnqmqq vgClU"
+        className="sc-htoDjs sc-iwsKbI dBQYwg"
         onClick={[Function]}
       >
         <i
@@ -62,16 +63,17 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-bZQynM dhJuuP"
+      className="sc-searchinput sc-gzVnrw kjCCUz"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-input sc-htpNat utwCv"
+        className="sc-input sc-bxivhb ktEkRb"
       >
         <div
-          className="sc-input-wrapper sc-EHOje fpqoIO"
+          className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            className="sc-input-type"
             name="search"
             onBlur={[Function]}
             onChange={[Function]}
@@ -82,7 +84,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-gzVnrw sc-htoDjs bfFIZd"
+        className="sc-htoDjs sc-dnqmqq bGFxWO"
         disabled={false}
         onClick={[Function]}
       >
@@ -91,7 +93,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-gzVnrw sc-dnqmqq vgClU"
+        className="sc-htoDjs sc-iwsKbI dBQYwg"
         onClick={[Function]}
       >
         <i
