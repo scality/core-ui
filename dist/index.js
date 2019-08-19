@@ -99,6 +99,12 @@ Object.defineProperty(exports, "Select", {
     return _Select["default"];
   }
 });
+Object.defineProperty(exports, "Modal", {
+  enumerable: true,
+  get: function get() {
+    return _Modal["default"];
+  }
+});
 Object.defineProperty(exports, "LOADER_SIZE", {
   enumerable: true,
   get: function get() {
@@ -139,6 +145,8 @@ var _Breadcrumb = _interopRequireDefault(require("./components/breadcrumb/Breadc
 var _Tabs = _interopRequireDefault(require("./components/tabs/Tabs.component"));
 
 var _Select = _interopRequireDefault(require("./components/select/Select.component"));
+
+var _Modal = _interopRequireDefault(require("./components/modal/Modal.component"));
 
 var _constants = require("./components/constants");
 

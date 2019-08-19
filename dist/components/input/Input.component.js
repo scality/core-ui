@@ -105,13 +105,16 @@ var InputRenderer = function InputRenderer(_ref) {
       value = _ref.value,
       checked = _ref.checked,
       onChange = _ref.onChange,
-      rest = _objectWithoutProperties(_ref, ["type", "id", "value", "checked", "onChange"]);
+      _ref$options = _ref.options,
+      options = _ref$options === void 0 ? [] : _ref$options,
+      rest = _objectWithoutProperties(_ref, ["type", "id", "value", "checked", "onChange", "options"]);
 
   if (type === "select") {
     return _react["default"].createElement(_Select["default"], _extends({
       id: id,
       value: value,
-      onChange: onChange
+      onChange: onChange,
+      options: options
     }, rest));
   } else if (type === "checkbox") {
     return _react["default"].createElement(_Checkbox["default"], _extends({

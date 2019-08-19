@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Modal Default 1`] = `
+<div>
+  <div
+    className="sc-modal sc-bdVaJa dskuhT"
+  >
+    <div
+      className="sc-modal-content sc-bwzfXH jICJi"
+    >
+      <div
+        className="sc-modal-header sc-htpNat fPOfap"
+      >
+        <span
+          className="sc-bxivhb jmnWmC"
+        >
+          Hello
+        </span>
+        <div
+          className="sc-bZQynM fBBzW"
+          onClick={[Function]}
+        >
+          <i
+            className="fas fa-times"
+          />
+        </div>
+      </div>
+      <div
+        className="sc-modal-body sc-ifAKCX ftDzci"
+      >
+        <span>
+          Do you want a cookie?
+        </span>
+      </div>
+      <div
+        className="sc-modal-footer sc-EHOje iWyHIu"
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justify-content": "space-between",
+            }
+          }
+        >
+          <button
+            className="sc-button sc-iwsKbI gBNfWZ"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-VigVT gRqLsd"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-gqjmRU icJnoE"
+                >
+                  No
+                </span>
+              </span>
+            </span>
+          </button>
+          <button
+            className="sc-button sc-iwsKbI iZLdlJ"
+            disabled={false}
+            onClick={[Function]}
+            size="small"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-VigVT gRqLsd"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-gqjmRU icJnoE"
+                >
+                  Yes
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

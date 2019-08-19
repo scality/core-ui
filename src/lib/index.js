@@ -16,6 +16,7 @@ import Notifications from "./components/notifications/Notifications.component";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 import Tabs from "./components/tabs/Tabs.component";
 import Select from "./components/select/Select.component";
+import Modal from "./components/modal/Modal.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -36,5 +37,6 @@ export {
   Notifications,
   Breadcrumb,
   Tabs,
-  Select
+  Select,
+  Modal
 };
