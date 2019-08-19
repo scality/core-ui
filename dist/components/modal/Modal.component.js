@@ -82,7 +82,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0;\n  left: 0;\n  display: flex;\n  height: 100%;\n  width: 100%;\n  justify-content: center;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0;\n  left: 0;\n  display: flex;\n  height: 100%;\n  width: 100%;\n  justify-content: center;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n  z-index: ", ";\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -93,7 +93,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ModalContainer = _styledComponents["default"].div(_templateObject());
+var ModalContainer = _styledComponents["default"].div(_templateObject(), defaultTheme.zIndex.modal);
 
 var ModalContent = _styledComponents["default"].div(_templateObject2(), defaultTheme.white);
 

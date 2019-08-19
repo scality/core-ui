@@ -13,7 +13,7 @@ storiesOf("Modal", module).add("Default", () => {
         isOpen={true}
         title="Hello"
         footer={
-          <div style={{ display: "flex", "justify-content": "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               variant="danger"
               text="No"

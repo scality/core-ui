@@ -3,7 +3,7 @@
 exports[`Storyshots Modal Default 1`] = `
 <div>
   <div
-    className="sc-modal sc-bdVaJa dskuhT"
+    className="sc-modal sc-bdVaJa gIywMY"
   >
     <div
       className="sc-modal-content sc-bwzfXH jICJi"
@@ -39,7 +39,7 @@ exports[`Storyshots Modal Default 1`] = `
           style={
             Object {
               "display": "flex",
-              "justify-content": "space-between",
+              "justifyContent": "space-between",
             }
           }
         >
