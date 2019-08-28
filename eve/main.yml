@@ -35,11 +35,5 @@ stages:
           workdir: build/core-ui
           command: >
             npm install -g yarn &&
-            yarn install
-            --no-cache
-            --no-save
-            -q
-            --no-update-notifier &&
-            yarn test
+            yarn && yarn test
           haltOnFailure: false
-  
