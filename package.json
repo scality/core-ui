@@ -46,11 +46,9 @@
     "storybook-addon-styled-component-theme": "1.2.1",
     "styled-components": "^4.1.2"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@fortawesome/fontawesome-free": "5.7.2",
     "polished": "3.4.1",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
     "react-debounce-input": "3.2.0",
     "react-virtualized": "9.21.0",
     "react-virtualized-select": "3.1.3",
