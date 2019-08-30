@@ -61,7 +61,7 @@
     "build": "rimraf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files && rimraf dist/**/*.test.js && rimraf dist/**/__snapshots__",
     "plop": "plop",
     "storybook:deploy": "storybook-to-ghpages",
-    "prepare": "yarn build"
+    "prepare": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
