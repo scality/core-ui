@@ -2,9 +2,10 @@
 import React from "react";
 import styled from "styled-components";
 import Select from "react-virtualized-select";
+import type { Node } from "react";
+import { lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
-import { lighten } from "polished";
 
 export type Item = {
   label: string,
@@ -13,7 +14,8 @@ export type Item = {
 type Items = Array<Item>;
 
 type Props = {
-  options: Items
+  options: Items,
+  optionRenderer?: any => Node
 };
 
 const SelectContainer = styled.div`
@@ -30,9 +32,13 @@ const SelectContainer = styled.div`
     outline: none;
   }
 
-  .VirtualizedSelectFocusedOption {
+  .VirtualizedSelectOption:hover {
     background-color: ${props =>
       lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
+  }
+
+  .VirtualizedSelectSelectedOption {
+    background-color: ${defaultTheme.white};
   }
 
   .Select-menu-outer {
@@ -56,10 +62,64 @@ const SelectContainer = styled.div`
   }
 `;
 
-function SelectBox({ options, ...rest }: Props) {
+const defaultOptionRenderer = ({
+  focusedOption,
+  focusOption,
+  key,
+  labelKey,
+  option,
+  selectValue,
+  style,
+  valueArray
+}) => {
+  const classNames = ["sc-select-option", "VirtualizedSelectOption"];
+  const { disabled, className, title, ...rest } = option;
+
+  if (option === focusedOption) {
+    classNames.push("VirtualizedSelectFocusedOption");
+  }
+
+  if (disabled) {
+    classNames.push("VirtualizedSelectDisabledOption");
+  }
+
+  if (valueArray && valueArray.indexOf(option) >= 0) {
+    classNames.push("VirtualizedSelectSelectedOption");
+  }
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  const events = disabled
+    ? {}
+    : {
+        onClick: () => selectValue(option),
+        onMouseEnter: () => focusOption(option)
+      };
+
+  return (
+    <div
+      className={classNames.join(" ")}
+      key={key}
+      style={style}
+      title={title}
+      {...events}
+      {...rest}
+    >
+      {option[labelKey]}
+    </div>
+  );
+};
+
+function SelectBox({ options, optionRenderer, ...rest }: Props) {
   return (
     <SelectContainer className="sc-select">
-      <Select options={options} {...rest} />
+      <Select
+        options={options}
+        optionRenderer={optionRenderer || defaultOptionRenderer}
+        {...rest}
+      />
     </SelectContainer>
   );
 }

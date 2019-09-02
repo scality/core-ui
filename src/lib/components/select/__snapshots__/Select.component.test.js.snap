@@ -13,7 +13,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa gPWWsl"
+      className="sc-select sc-bdVaJa dXjhLN"
     >
       <div
         className="Select has-value is-clearable is-searchable Select--single"
@@ -123,6 +123,126 @@ exports[`Storyshots Select Default 1`] = `
     </div>
   </div>
   <h3>
+    Default with custom optionRenderer
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "200px",
+      }
+    }
+  >
+    <div
+      className="sc-select sc-bdVaJa dXjhLN"
+    >
+      <div
+        className="Select has-value is-clearable is-searchable Select--single"
+      >
+        <input
+          disabled={false}
+          name="default_select"
+          type="hidden"
+          value="0"
+        />
+        <div
+          className="Select-control"
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="Select-multi-value-wrapper"
+            id="react-select-3--value"
+          >
+            <div
+              className="Select-value"
+            >
+              <span
+                aria-selected="true"
+                className="Select-value-label"
+                id="react-select-3--value-item"
+                role="option"
+              >
+                Item 0
+              </span>
+            </div>
+            <div
+              className="Select-input"
+              style={
+                Object {
+                  "display": "inline-block",
+                }
+              }
+            >
+              <input
+                aria-activedescendant="react-select-3--value"
+                aria-expanded="false"
+                aria-haspopup="false"
+                aria-owns=""
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                role="combobox"
+                style={
+                  Object {
+                    "boxSizing": "content-box",
+                    "width": "5px",
+                  }
+                }
+                value=""
+              />
+              <div
+                style={
+                  Object {
+                    "height": 0,
+                    "left": 0,
+                    "overflow": "scroll",
+                    "position": "absolute",
+                    "top": 0,
+                    "visibility": "hidden",
+                    "whiteSpace": "pre",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <span
+            aria-label="Clear value"
+            className="Select-clear-zone"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            title="Clear value"
+          >
+            <span
+              className="Select-clear"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "&times;",
+                }
+              }
+            />
+          </span>
+          <span
+            className="Select-arrow-zone"
+            onMouseDown={[Function]}
+          >
+            <span
+              className="Select-arrow"
+              onMouseDown={[Function]}
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>
     Multi Select
   </h3>
   <div
@@ -133,7 +253,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa gPWWsl"
+      className="sc-select sc-bdVaJa dXjhLN"
     >
       <div
         className="Select has-value is-clearable is-searchable Select--multi"
@@ -160,7 +280,7 @@ exports[`Storyshots Select Default 1`] = `
         >
           <div
             className="Select-multi-value-wrapper"
-            id="react-select-3--value"
+            id="react-select-4--value"
           >
             <div
               className="Select-value"
@@ -178,7 +298,7 @@ exports[`Storyshots Select Default 1`] = `
               <span
                 aria-selected="true"
                 className="Select-value-label"
-                id="react-select-3--value-0"
+                id="react-select-4--value-0"
                 role="option"
               >
                 Item 0
@@ -205,7 +325,7 @@ exports[`Storyshots Select Default 1`] = `
               <span
                 aria-selected="true"
                 className="Select-value-label"
-                id="react-select-3--value-1"
+                id="react-select-4--value-1"
                 role="option"
               >
                 Item 1
@@ -225,7 +345,7 @@ exports[`Storyshots Select Default 1`] = `
               }
             >
               <input
-                aria-activedescendant="react-select-3--value"
+                aria-activedescendant="react-select-4--value"
                 aria-expanded="false"
                 aria-haspopup="false"
                 aria-owns=""

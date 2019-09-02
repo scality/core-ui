@@ -6,7 +6,8 @@ import { action } from "@storybook/addon-actions";
 import styled from "styled-components";
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
-  value: index
+  value: index,
+  "data-cy": `Item_${index}`
 }));
 
 const ExampleInput = () => {
