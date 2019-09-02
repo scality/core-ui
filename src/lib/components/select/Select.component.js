@@ -55,10 +55,10 @@ const SelectContainer = styled.div`
 const DefaultOption = styled.div`
   background-color: ${props =>
     lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
-  display: flex;
+  /* display: flex;
   align-items: center;
   padding: 0 10px;
-  cursor: pointer;
+  cursor: pointer; */
 `;
 const defaultOptionRenderer = ({ option, selectValue }) => {
   const { value, ...rest } = option;
