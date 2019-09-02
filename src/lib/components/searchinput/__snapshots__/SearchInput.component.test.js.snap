@@ -13,13 +13,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-searchinput sc-htoDjs jlmSGk"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-ifAKCX jzNSVf"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-input-wrapper sc-gzVnrw kvhoeX"
         >
           <input
             className="sc-input-type"
@@ -34,7 +34,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq bGFxWO"
+        className="sc-dnqmqq sc-iwsKbI dVOhtD"
         disabled={false}
         onClick={[Function]}
       >
@@ -43,7 +43,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-dnqmqq sc-gZMcBi gnvPYW"
         onClick={[Function]}
       >
         <i
@@ -63,14 +63,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-searchinput sc-htoDjs jlmSGk"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-ifAKCX jzNSVf"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-input-wrapper sc-gzVnrw kvhoeX"
         >
           <input
             className="sc-input-type"
@@ -84,7 +84,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq bGFxWO"
+        className="sc-dnqmqq sc-iwsKbI dVOhtD"
         disabled={false}
         onClick={[Function]}
       >
@@ -93,7 +93,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-dnqmqq sc-gZMcBi gnvPYW"
         onClick={[Function]}
       >
         <i
