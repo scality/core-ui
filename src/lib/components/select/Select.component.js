@@ -13,7 +13,8 @@ export type Item = {
 type Items = Array<Item>;
 
 type Props = {
-  options: Items
+  options: Items,
+  optionRenderer?: () => void
 };
 
 const SelectContainer = styled.div`
@@ -28,11 +29,6 @@ const SelectContainer = styled.div`
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 1px rgba(0, 126, 255, 0.1);
     outline: none;
-  }
-
-  .VirtualizedSelectFocusedOption {
-    background-color: ${props =>
-      lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
   }
 
   .Select-menu-outer {
@@ -56,10 +52,31 @@ const SelectContainer = styled.div`
   }
 `;
 
-function SelectBox({ options, ...rest }: Props) {
+const DefaultOption = styled.div`
+  background-color: ${props =>
+    lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+`;
+const defaultOptionRenderer = ({ option, selectValue }) => {
+  const { value, ...rest } = option;
+  return (
+    <DefaultOption onClick={() => selectValue(option)} {...rest}>
+      {option.value}
+    </DefaultOption>
+  );
+};
+
+function SelectBox({ options, optionRenderer, ...rest }: Props) {
   return (
     <SelectContainer className="sc-select">
-      <Select options={options} {...rest} />
+      <Select
+        options={options}
+        optionRenderer={optionRenderer || defaultOptionRenderer}
+        {...rest}
+      />
     </SelectContainer>
   );
 }
