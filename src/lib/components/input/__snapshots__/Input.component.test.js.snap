@@ -6,10 +6,10 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-input sc-bxivhb ktEkRb"
+    className="sc-input sc-ifAKCX jzNSVf"
   >
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <input
         className="sc-input-type"
@@ -27,16 +27,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-input sc-bxivhb ktEkRb"
+    className="sc-input sc-ifAKCX jzNSVf"
   >
     <label
-      className="sc-input-label sc-ifAKCX jdmIxg"
+      className="sc-input-label sc-EHOje huBPjW"
       htmlFor="id2"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <input
         className="sc-input-type"
@@ -53,16 +53,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-input sc-bxivhb etTDMT"
+    className="sc-input sc-ifAKCX zzHPn"
   >
     <label
-      className="sc-input-label sc-ifAKCX jdmIxg"
+      className="sc-input-label sc-EHOje huBPjW"
       htmlFor="id3"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <input
         className="sc-input-type"
@@ -74,7 +74,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-input-error sc-EHOje evwsgB"
+        className="sc-input-error sc-bZQynM fUcYPm"
       >
         error
       </span>
@@ -84,19 +84,19 @@ exports[`Storyshots Input Default 1`] = `
     Input with long error
   </h3>
   <div
-    className="sc-gzVnrw gBtQdP"
+    className="sc-htoDjs dMTjCj"
   >
     <div
-      className="sc-input sc-bxivhb etTDMT"
+      className="sc-input sc-ifAKCX zzHPn"
     >
       <label
-        className="sc-input-label sc-ifAKCX jdmIxg"
+        className="sc-input-label sc-EHOje huBPjW"
         htmlFor="id3"
       >
         label
       </label>
       <div
-        className="sc-input-wrapper sc-bZQynM AMncx"
+        className="sc-input-wrapper sc-gzVnrw kvhoeX"
       >
         <input
           className="sc-input-type"
@@ -108,7 +108,7 @@ exports[`Storyshots Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-input-error sc-EHOje evwsgB"
+          className="sc-input-error sc-bZQynM fUcYPm"
         >
           long error error error error error error error error error
         </span>
@@ -119,16 +119,16 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-input sc-bxivhb ktEkRb"
+    className="sc-input sc-ifAKCX jzNSVf"
   >
     <label
-      className="sc-input-label sc-ifAKCX jdmIxg"
+      className="sc-input-label sc-EHOje huBPjW"
       htmlFor="id4"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <label
         checked={false}
@@ -151,16 +151,16 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-input sc-bxivhb etTDMT"
+    className="sc-input sc-ifAKCX zzHPn"
   >
     <label
-      className="sc-input-label sc-ifAKCX jdmIxg"
+      className="sc-input-label sc-EHOje huBPjW"
       htmlFor="id5"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <label
         checked={false}
@@ -178,7 +178,7 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-input-error sc-EHOje evwsgB"
+        className="sc-input-error sc-bZQynM fUcYPm"
       >
         error
       </span>
@@ -188,19 +188,19 @@ exports[`Storyshots Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-input sc-bxivhb ktEkRb"
+    className="sc-input sc-ifAKCX jzNSVf"
   >
     <label
-      className="sc-input-label sc-ifAKCX jdmIxg"
+      className="sc-input-label sc-EHOje huBPjW"
       htmlFor="id6"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-input-wrapper sc-gzVnrw kvhoeX"
     >
       <div
-        className="sc-select sc-htpNat dyKhmK"
+        className="sc-select sc-htpNat kkOfMk"
       >
         <div
           className="Select has-value is-clearable is-searchable Select--single"

@@ -13,7 +13,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa gPWWsl"
+      className="sc-select sc-bdVaJa hdzEXs"
     >
       <div
         className="Select has-value is-clearable is-searchable Select--single"
@@ -133,7 +133,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa gPWWsl"
+      className="sc-select sc-bdVaJa hdzEXs"
     >
       <div
         className="Select has-value is-clearable is-searchable Select--multi"

@@ -64,11 +64,52 @@ const DefaultOption = styled.div`
   cursor: pointer;
 `;
 
-const defaultOptionRenderer = ({ option, selectValue }) => {
-  const { value, ...rest } = option;
+const defaultOptionRenderer = ({
+  focusedOption,
+  focusOption,
+  key,
+  labelKey,
+  option,
+  selectValue,
+  style,
+  valueArray
+}) => {
+  const classNames = ["VirtualizedSelectOption"];
+  const { disabled, className, title, ...rest } = option;
+
+  if (option === focusedOption) {
+    classNames.push("VirtualizedSelectFocusedOption");
+  }
+
+  if (disabled) {
+    classNames.push("VirtualizedSelectDisabledOption");
+  }
+
+  if (valueArray && valueArray.indexOf(option) >= 0) {
+    classNames.push("VirtualizedSelectSelectedOption");
+  }
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  const events = disabled
+    ? {}
+    : {
+        onClick: () => selectValue(option),
+        onMouseEnter: () => focusOption(option)
+      };
+
   return (
-    <DefaultOption onClick={() => selectValue(option)} {...rest}>
-      {option.value}
+    <DefaultOption
+      className={classNames.join(" ")}
+      key={key}
+      style={style}
+      title={title}
+      {...events}
+      {...rest}
+    >
+      {option[labelKey]}
     </DefaultOption>
   );
 };
