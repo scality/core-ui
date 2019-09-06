@@ -14,6 +14,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           placeholder="Search server..."
           onChange={action("on input change")}
           onReset={action("on input reset")}
+          disableToggle={false}
         />
       </div>
       <h3>Search Input filled</h3>
@@ -22,8 +23,19 @@ storiesOf("SearchInput", module).add("Default", () => {
           value="carlito"
           onChange={action("on input change")}
           onReset={action("on input reset")}
+          disableToggle={false}
           data-cy="carlito_searchinput"
         />
+      </div>
+      <h3>Search Input disable default toggle</h3>
+      <div style={{ width: "250px" }}>
+        <SearchInput
+          value=""
+          placeholder="Search and Filter..."
+          onChange={action("on input change")}
+          onReset={action("on input reset")}
+          disableToggle={true}
+        ></SearchInput>
       </div>
     </div>
   );

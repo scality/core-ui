@@ -10,7 +10,8 @@ type Props = {
   placeholder?: string,
   value: string,
   onChange: () => void,
-  onReset: () => void
+  onReset: () => void,
+  disableToggle: boolean
 };
 
 const SearchInputContainer = styled.div`
@@ -63,24 +64,29 @@ const ResetIcon = styled(IconButton)`
 `;
 
 function SearchInput({
+  disableToggle,
   placeholder,
   value,
   onChange,
   onReset,
   ...rest
 }: Props) {
-  const [docked, setDocked] = useState(true);
+  const [docked, setDocked] = useState(!disableToggle);
   const myInputRef = useRef(null);
 
   const toggle = () => {
-    setDocked(!docked);
-    //$FlowFixMe
-    myInputRef.current.focus();
+    if (!disableToggle) {
+      setDocked(!docked);
+      //$FlowFixMe
+      myInputRef.current.focus();
+    }
   };
 
   const reset = () => {
     onReset();
-    setDocked(true);
+    if (!disableToggle) {
+      setDocked(true);
+    }
   };
 
   return (
