@@ -102,5 +102,55 @@ exports[`Storyshots SearchInput Default 1`] = `
       </button>
     </div>
   </div>
+  <h3>
+    Search Input disable default toggle
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-searchinput sc-gzVnrw hqmodQ"
+    >
+      <div
+        className="sc-input sc-bxivhb ktEkRb"
+      >
+        <div
+          className="sc-input-wrapper sc-bZQynM AMncx"
+        >
+          <input
+            className="sc-input-type"
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search and Filter..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="sc-htoDjs sc-dnqmqq fzqjWe"
+        disabled={true}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
 </div>
 `;

@@ -35,7 +35,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           onChange={action("on input change")}
           onReset={action("on input reset")}
           disableToggle={true}
-        ></SearchInput>
+        />
       </div>
     </div>
   );
