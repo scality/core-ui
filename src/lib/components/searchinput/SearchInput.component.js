@@ -98,7 +98,10 @@ function SearchInput({
       <SearchIcon onClick={toggle} disabled={!docked}>
         <i className="fas fa-search" />
       </SearchIcon>
-      <ResetIcon onClick={reset} visible={value && !docked}>
+      <ResetIcon
+        onClick={reset}
+        visible={value && !docked && typeof onReset === "function"}
+      >
         <i className="fas fa-times-circle" />
       </ResetIcon>
     </SearchInputContainer>
