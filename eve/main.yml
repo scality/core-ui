@@ -4,6 +4,8 @@ version: "0.2"
 branches:
   user/*, feature/*, improvement/*, bugfix/*, w/*, q/*, hotfix/*, dependabot/*:
     stage: pre-merge
+  development/*:
+    stage: post-merge
 
 stages:
   pre-merge:
@@ -36,4 +38,35 @@ stages:
           command: >
             npm install -g yarn &&
             yarn && yarn test
+          haltOnFailure: false
+  post-merge:
+    worker:
+      type: local
+    steps:
+      - TriggerStages:
+          name: Trigger storybook_deploy
+          stage_names:
+            - storybook_deploy
+          haltOnFailure: true
+  storybook_deploy:
+    worker:
+      type: kube_pod
+      path: eve/workers/pod-unit-tests/pod.yaml
+      images:
+        docker-unit-tests:
+          context: '.'
+          dockerfile: eve/workers/pod-unit-tests/Dockerfile
+    steps:
+      - Git: &git_pull
+          name: git pull
+          repourl: "%(prop:git_reference)s"
+          method: clobber
+          retryFetch: true
+          haltOnFailure: true
+      - ShellCommand:
+          name: Deploy storybook
+          workdir: build/core-ui
+          command: >
+            npm install -g yarn &&
+            yarn && yarn deploy-storybook -- --ci --host-token-env-variable=%(secret:github_token)s
           haltOnFailure: false
