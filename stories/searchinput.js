@@ -27,13 +27,22 @@ storiesOf("SearchInput", module).add("Default", () => {
           data-cy="carlito_searchinput"
         />
       </div>
-      <h3>Search Input disable default toggle</h3>
+      <h3>Disable the default toggle</h3>
       <div style={{ width: "250px" }}>
         <SearchInput
           value=""
-          placeholder="Search and Filter..."
+          placeholder="Search and Filter…"
           onChange={action("on input change")}
           onReset={action("on input reset")}
+          disableToggle={true}
+        />
+      </div>
+      <h3>Disable the default toggle undefined onReset action</h3>
+      <div style={{ width: "250px" }}>
+        <SearchInput
+          value=""
+          placeholder="Search and Filter…"
+          onChange={action("on input change")}
           disableToggle={true}
         />
       </div>
