@@ -1,6 +1,6 @@
 [include]
-<PROJECT_ROOT>/src/.*
-<PROJECT_ROOT>/stories/.*
+src/.*
+stories/.*
 
 [lints]
 all=error
