@@ -35,5 +35,5 @@ stages:
           workdir: build/core-ui
           command: >
             npm install -g yarn &&
-            yarn && yarn test
+            yarn && yarn test && yarn run flow
           haltOnFailure: false

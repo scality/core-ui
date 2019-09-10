@@ -83,7 +83,9 @@ function SearchInput({
   };
 
   const reset = () => {
-    onReset();
+    if (onReset) {
+      onReset();
+    }
     if (!disableToggle) {
       setDocked(true);
     }
