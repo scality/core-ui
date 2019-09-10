@@ -10,7 +10,7 @@ type Props = {
   placeholder?: string,
   value: string,
   onChange: () => void,
-  onReset: () => void,
+  onReset?: () => void,
   disableToggle: boolean
 };
 
@@ -83,7 +83,9 @@ function SearchInput({
   };
 
   const reset = () => {
-    onReset();
+    if (onReset) {
+      onReset();
+    }
     if (!disableToggle) {
       setDocked(true);
     }
@@ -104,7 +106,7 @@ function SearchInput({
       <SearchIcon onClick={toggle} disabled={!docked}>
         <i className="fas fa-search" />
       </SearchIcon>
-      <ResetIcon onClick={reset} visible={value && !docked}>
+      <ResetIcon onClick={reset} visible={value && !docked && onReset}>
         <i className="fas fa-times-circle" />
       </ResetIcon>
     </SearchInputContainer>
