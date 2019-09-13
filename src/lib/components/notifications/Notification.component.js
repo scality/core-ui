@@ -80,12 +80,12 @@ function Notification({
 
   useEffect(() => {
     resumeTimer();
-  }, [dismissProgress]);
+  });
 
   const clearTimer = () => {
     if (dismissAfter) {
       setTimerId(null);
-      clearInterval(timerId);
+      clearTimeout(timerId);
     }
   };
 
@@ -95,8 +95,9 @@ function Notification({
         dismiss();
       } else if (!timerId) {
         setTimerId(
-          setInterval(() => {
+          setTimeout(() => {
             setDismissProgress(dismissProgressRef.current + 1000);
+            resumeTimer();
           }, 1000)
         );
       }
