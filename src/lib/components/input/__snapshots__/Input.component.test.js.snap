@@ -218,7 +218,13 @@ exports[`Storyshots Input Default 1`] = `
               <div
                 className="sc-select__single-value css-1uccc91-singleValue"
               >
-                Item 0
+                <div
+                  className="sc-select-option-label"
+                  data-cy="Item_0"
+                  value={0}
+                >
+                  Item 0
+                </div>
               </div>
               <div
                 className="css-w8afj7-Input"

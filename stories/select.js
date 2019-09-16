@@ -5,59 +5,16 @@ import Select from "../src/lib/components/select/Select.component";
 
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
-  value: index
+  value: index,
+  title: `Item ${index}`,
+  "data-cy": `Item_${index}`
 }));
 
-const customOptionRenderer = ({
-  focusedOption,
-  focusOption,
-  key,
-  labelKey,
-  option,
-  selectValue,
-  style,
-  valueArray
-}) => {
-  const classNames = ["sc-select-option", "VirtualizedSelectOption"];
-  const { disabled, className, title, ...rest } = option;
-
-  if (option === focusedOption) {
-    classNames.push("VirtualizedSelectFocusedOption");
-  }
-
-  if (disabled) {
-    classNames.push("VirtualizedSelectDisabledOption");
-  }
-
-  if (valueArray && valueArray.indexOf(option) >= 0) {
-    classNames.push("VirtualizedSelectSelectedOption");
-  }
-
-  if (className) {
-    classNames.push(className);
-  }
-
-  const events = disabled
-    ? {}
-    : {
-        onClick: () => selectValue(option),
-        onMouseEnter: () => focusOption(option)
-      };
-
-  return (
-    <div
-      className={classNames.join(" ")}
-      key={key}
-      style={style}
-      title={title}
-      {...events}
-      {...rest}
-    >
-      {option[labelKey]}&nbsp;
-      {option.value % 2 === 0 ? <i className="fas fa-flag-usa"></i> : null}
-    </div>
-  );
-};
+const customFormatOptionLabel = ({ value, label, ...rest }) => (
+  <div className="sc-select-option-custom-label" {...rest}>
+    {label} {value % 2 === 0 ? <i className="fas fa-flag-usa"></i> : null}
+  </div>
+);
 
 storiesOf("Select", module).add("Default", () => {
   return (
@@ -73,7 +30,7 @@ storiesOf("Select", module).add("Default", () => {
           value=""
         />
       </div>
-      <h3>Default with custom optionRenderer</h3>
+      <h3>Default with custom formatOptionLabel</h3>
       <div style={{ width: "200px" }}>
         <Select
           name="default_select"
@@ -82,7 +39,7 @@ storiesOf("Select", module).add("Default", () => {
           placeholder="Select an item..."
           noOptionsMessage={() => "Not found"}
           value={options[0]}
-          optionRenderer={customOptionRenderer}
+          formatOptionLabel={customFormatOptionLabel}
         />
       </div>
       <h3>Multi Select</h3>

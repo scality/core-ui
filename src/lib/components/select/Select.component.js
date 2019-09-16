@@ -15,7 +15,7 @@ type Items = Array<Item>;
 
 type Props = {
   options: Items,
-  optionRenderer?: any => Node
+  formatOptionLabel?: any => Node
 };
 
 const SelectContainer = styled.div`
@@ -72,46 +72,20 @@ const SelectContainer = styled.div`
   }
 `;
 
-const defaultOptionRenderer = ({
-  focusedOption,
-  focusOption,
-  key,
-  labelKey,
-  option,
-  selectValue,
-  style,
-  valueArray
-}) => {
-  const { disabled, className, title, ...rest } = option;
-  const events = disabled
-    ? {}
-    : {
-        onClick: () => selectValue(option),
-        onMouseEnter: () => focusOption(option)
-      };
+const defaultFormatOptionLabel = ({ label, ...rest }) => (
+  <div className="sc-select-option-label" {...rest}>
+    {label}
+  </div>
+);
 
-  return (
-    <div
-      className="sc-select-option"
-      key={key}
-      style={style}
-      title={title}
-      {...events}
-      {...rest}
-    >
-      {option[labelKey]}
-    </div>
-  );
-};
-
-function SelectBox({ options, optionRenderer, ...rest }: Props) {
+function SelectBox({ options, formatOptionLabel, ...rest }: Props) {
   return (
     <SelectContainer>
       <Select
         className="sc-select"
         classNamePrefix="sc-select"
         options={options}
-        optionRenderer={optionRenderer || defaultOptionRenderer}
+        formatOptionLabel={formatOptionLabel || defaultFormatOptionLabel}
         {...rest}
       />
     </SelectContainer>

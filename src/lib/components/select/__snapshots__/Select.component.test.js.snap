@@ -126,7 +126,7 @@ exports[`Storyshots Select Default 1`] = `
     </div>
   </div>
   <h3>
-    Default with custom optionRenderer
+    Default with custom formatOptionLabel
   </h3>
   <div
     style={
@@ -153,7 +153,17 @@ exports[`Storyshots Select Default 1`] = `
             <div
               className="sc-select__single-value css-1uccc91-singleValue"
             >
-              Item 0
+              <div
+                className="sc-select-option-custom-label"
+                data-cy="Item_0"
+                title="Item 0"
+              >
+                Item 0
+                 
+                <i
+                  className="fas fa-flag-usa"
+                />
+              </div>
             </div>
             <div
               className="css-w8afj7-Input"
@@ -279,7 +289,14 @@ exports[`Storyshots Select Default 1`] = `
               <div
                 className="css-12jo7m5 sc-select__multi-value__label"
               >
-                Item 0
+                <div
+                  className="sc-select-option-label"
+                  data-cy="Item_0"
+                  title="Item 0"
+                  value={0}
+                >
+                  Item 0
+                </div>
               </div>
               <div
                 className="css-1alnv5e sc-select__multi-value__remove"
@@ -307,7 +324,14 @@ exports[`Storyshots Select Default 1`] = `
               <div
                 className="css-12jo7m5 sc-select__multi-value__label"
               >
-                Item 1
+                <div
+                  className="sc-select-option-label"
+                  data-cy="Item_1"
+                  title="Item 1"
+                  value={1}
+                >
+                  Item 1
+                </div>
               </div>
               <div
                 className="css-1alnv5e sc-select__multi-value__remove"
