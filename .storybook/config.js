@@ -1,5 +1,5 @@
-import "react-select/dist/react-select.css";
-import "react-virtualized-select/styles.css";
+// import "react-select/dist/react-select.css";
+// import "react-virtualized-select/styles.css";
 
 import { configure, setAddon, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
