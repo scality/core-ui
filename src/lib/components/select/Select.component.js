@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import styled from "styled-components";
-import Select from "react-virtualized-select";
+import Select from "react-select";
 import type { Node } from "react";
 import { lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
@@ -19,46 +19,56 @@ type Props = {
 };
 
 const SelectContainer = styled.div`
-  .Select-control {
+  .sc-select__control {
     border-radius: 4px;
     border: 1px solid ${defaultTheme.gray};
     height: auto;
-  }
 
-  .Select.is-focused > .Select-control {
-    border-color: ${props => mergeTheme(props.theme, defaultTheme).primary};
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
-      0 0 0 1px rgba(0, 126, 255, 0.1);
-    outline: none;
+    &.sc-select__control--is-focused {
+      border-color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 0 1px rgba(0, 126, 255, 0.1);
+      outline: none;
+    }
+    .sc-select__indicator {
+      color: ${defaultTheme.grayLight};
+      &.sc-select__dropdown-indicator:hover {
+        color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+      }
+      &.sc-select__clear-indicator:hover {
+        color: ${props => mergeTheme(props.theme, defaultTheme).danger};
+      }
+    }
+    .sc-select__multi-value__remove {
+      color: ${defaultTheme.grayLight};
+      background-color: ${defaultTheme.grayLightest};
+      &:hover {
+        color: ${props => mergeTheme(props.theme, defaultTheme).danger};
+        background-color: ${defaultTheme.grayLightest};
+      }
+    }
+    .sc-select__multi-value__label {
+      color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+      background-color: ${defaultTheme.grayLightest};
+      vertical-align: initial;
+    }
   }
-
-  .VirtualizedSelectOption:hover {
-    background-color: ${props =>
-      lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
-  }
-
-  .VirtualizedSelectSelectedOption {
-    background-color: ${defaultTheme.white};
-  }
-
-  .Select-menu-outer {
-    margin-top: -2px;
-    border: 1px solid ${props => mergeTheme(props.theme, defaultTheme).primary};
+  .sc-select__menu {
+    border: 1px solid ${defaultTheme.gray};
     box-sizing: border-box;
-  }
+    overflow: hidden;
 
-  .Select--multi .Select-value {
-    color: ${props => mergeTheme(props.theme, defaultTheme).primary};
-    background-color: ${defaultTheme.grayLightest};
-    vertical-align: initial;
-  }
-
-  .Select-clear {
-    line-height: inherit;
-  }
-
-  .Select-clear-zone:hover {
-    color: ${props => mergeTheme(props.theme, defaultTheme).danger};
+    .sc-select__option {
+      background-color: ${defaultTheme.white};
+      &.sc-select__option--is-focused {
+        background-color: ${props =>
+          lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
+      }
+      &.sc-select__option--is-selected {
+        color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+        font-weight: ${defaultTheme.fontWeight.bold};
+      }
+    }
   }
 `;
 
@@ -72,25 +82,7 @@ const defaultOptionRenderer = ({
   style,
   valueArray
 }) => {
-  const classNames = ["sc-select-option", "VirtualizedSelectOption"];
   const { disabled, className, title, ...rest } = option;
-
-  if (option === focusedOption) {
-    classNames.push("VirtualizedSelectFocusedOption");
-  }
-
-  if (disabled) {
-    classNames.push("VirtualizedSelectDisabledOption");
-  }
-
-  if (valueArray && valueArray.indexOf(option) >= 0) {
-    classNames.push("VirtualizedSelectSelectedOption");
-  }
-
-  if (className) {
-    classNames.push(className);
-  }
-
   const events = disabled
     ? {}
     : {
@@ -100,7 +92,7 @@ const defaultOptionRenderer = ({
 
   return (
     <div
-      className={classNames.join(" ")}
+      className="sc-select-option"
       key={key}
       style={style}
       title={title}
@@ -114,8 +106,10 @@ const defaultOptionRenderer = ({
 
 function SelectBox({ options, optionRenderer, ...rest }: Props) {
   return (
-    <SelectContainer className="sc-select">
+    <SelectContainer>
       <Select
+        className="sc-select"
+        classNamePrefix="sc-select"
         options={options}
         optionRenderer={optionRenderer || defaultOptionRenderer}
         {...rest}

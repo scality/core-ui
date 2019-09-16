@@ -69,8 +69,8 @@ storiesOf("Select", module).add("Default", () => {
           options={options}
           onChange={e => console.log(e)}
           placeholder="Select an item..."
-          noResultsText="Not found"
-          value={options[0]}
+          noOptionsMessage={() => "Not found"}
+          value=""
         />
       </div>
       <h3>Default with custom optionRenderer</h3>
@@ -80,7 +80,7 @@ storiesOf("Select", module).add("Default", () => {
           options={options}
           onChange={e => console.log(e)}
           placeholder="Select an item..."
-          noResultsText="Not found"
+          noOptionsMessage={() => "Not found"}
           value={options[0]}
           optionRenderer={customOptionRenderer}
         />
@@ -92,8 +92,8 @@ storiesOf("Select", module).add("Default", () => {
           options={options}
           onChange={e => console.log(e)}
           placeholder="Select an item..."
-          noResultsText="Not found"
-          multi={true}
+          noOptionsMessage={() => "Not found"}
+          isMulti={true}
           value={[options[0], options[1]]}
         />
       </div>

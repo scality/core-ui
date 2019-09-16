@@ -13,112 +13,115 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa dXjhLN"
+      className="sc-bdVaJa hLQQPA"
     >
       <div
-        className="Select has-value is-clearable is-searchable Select--single"
+        className="sc-select css-2b097c-container"
+        onKeyDown={[Function]}
       >
-        <input
-          disabled={false}
-          name="default_select"
-          type="hidden"
-          value="0"
-        />
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className="sc-select__control css-yk16xz-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-2--value"
+            className="sc-select__value-container css-1hwfws3"
           >
             <div
-              className="Select-value"
+              className="sc-select__placeholder css-1wa3eu0-placeholder"
             >
-              <span
-                aria-selected="true"
-                className="Select-value-label"
-                id="react-select-2--value-item"
-                role="option"
-              >
-                Item 0
-              </span>
+              Select an item...
             </div>
             <div
-              className="Select-input"
-              style={
-                Object {
-                  "display": "inline-block",
-                }
-              }
+              className="css-w8afj7-Input"
             >
-              <input
-                aria-activedescendant="react-select-2--value"
-                aria-expanded="false"
-                aria-haspopup="false"
-                aria-owns=""
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                required={false}
-                role="combobox"
-                style={
-                  Object {
-                    "boxSizing": "content-box",
-                    "width": "5px",
-                  }
-                }
-                value=""
-              />
               <div
+                className="sc-select__input"
                 style={
                   Object {
-                    "height": 0,
-                    "left": 0,
-                    "overflow": "scroll",
-                    "position": "absolute",
-                    "top": 0,
-                    "visibility": "hidden",
-                    "whiteSpace": "pre",
+                    "display": "inline-block",
                   }
                 }
               >
-                
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={false}
+                  id="react-select-2-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
               </div>
             </div>
           </div>
-          <span
-            aria-label="Clear value"
-            className="Select-clear-zone"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            title="Clear value"
+          <div
+            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
-              className="Select-clear"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": "&times;",
-                }
-              }
+              className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
             />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
-            />
-          </span>
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-tj5bde-Svg"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
+        <input
+          name="default_select"
+          type="hidden"
+          value=""
+        />
       </div>
     </div>
   </div>
@@ -133,112 +136,115 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa dXjhLN"
+      className="sc-bdVaJa hLQQPA"
     >
       <div
-        className="Select has-value is-clearable is-searchable Select--single"
+        className="sc-select css-2b097c-container"
+        onKeyDown={[Function]}
       >
-        <input
-          disabled={false}
-          name="default_select"
-          type="hidden"
-          value="0"
-        />
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className="sc-select__control css-yk16xz-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-3--value"
+            className="sc-select__value-container sc-select__value-container--has-value css-1hwfws3"
           >
             <div
-              className="Select-value"
+              className="sc-select__single-value css-1uccc91-singleValue"
             >
-              <span
-                aria-selected="true"
-                className="Select-value-label"
-                id="react-select-3--value-item"
-                role="option"
-              >
-                Item 0
-              </span>
+              Item 0
             </div>
             <div
-              className="Select-input"
-              style={
-                Object {
-                  "display": "inline-block",
-                }
-              }
+              className="css-w8afj7-Input"
             >
-              <input
-                aria-activedescendant="react-select-3--value"
-                aria-expanded="false"
-                aria-haspopup="false"
-                aria-owns=""
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                required={false}
-                role="combobox"
-                style={
-                  Object {
-                    "boxSizing": "content-box",
-                    "width": "5px",
-                  }
-                }
-                value=""
-              />
               <div
+                className="sc-select__input"
                 style={
                   Object {
-                    "height": 0,
-                    "left": 0,
-                    "overflow": "scroll",
-                    "position": "absolute",
-                    "top": 0,
-                    "visibility": "hidden",
-                    "whiteSpace": "pre",
+                    "display": "inline-block",
                   }
                 }
               >
-                
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={false}
+                  id="react-select-3-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
               </div>
             </div>
           </div>
-          <span
-            aria-label="Clear value"
-            className="Select-clear-zone"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            title="Clear value"
+          <div
+            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
-              className="Select-clear"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": "&times;",
-                }
-              }
+              className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
             />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
-            />
-          </span>
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-tj5bde-Svg"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
+        <input
+          name="default_select"
+          type="hidden"
+          value={0}
+        />
       </div>
     </div>
   </div>
@@ -253,159 +259,191 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select sc-bdVaJa dXjhLN"
+      className="sc-bdVaJa hLQQPA"
     >
       <div
-        className="Select has-value is-clearable is-searchable Select--multi"
+        className="sc-select css-2b097c-container"
+        onKeyDown={[Function]}
       >
-        <input
-          disabled={false}
-          name="multi_select"
-          type="hidden"
-          value="0"
-        />
-        <input
-          disabled={false}
-          name="multi_select"
-          type="hidden"
-          value="1"
-        />
         <div
-          className="Select-control"
-          onKeyDown={[Function]}
+          className="sc-select__control css-yk16xz-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
         >
           <div
-            className="Select-multi-value-wrapper"
-            id="react-select-4--value"
+            className="sc-select__value-container sc-select__value-container--is-multi sc-select__value-container--has-value css-1hwfws3"
           >
             <div
-              className="Select-value"
+              className="css-1rhbuit-multiValue sc-select__multi-value"
             >
-              <span
-                aria-hidden="true"
-                className="Select-value-icon"
-                onMouseDown={[Function]}
-                onTouchEnd={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
-              >
-                ×
-              </span>
-              <span
-                aria-selected="true"
-                className="Select-value-label"
-                id="react-select-4--value-0"
-                role="option"
+              <div
+                className="css-12jo7m5 sc-select__multi-value__label"
               >
                 Item 0
-                <span
-                  className="Select-aria-only"
-                >
-                   
-                </span>
-              </span>
-            </div>
-            <div
-              className="Select-value"
-            >
-              <span
-                aria-hidden="true"
-                className="Select-value-icon"
+              </div>
+              <div
+                className="css-1alnv5e sc-select__multi-value__remove"
+                onClick={[Function]}
                 onMouseDown={[Function]}
                 onTouchEnd={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
               >
-                ×
-              </span>
-              <span
-                aria-selected="true"
-                className="Select-value-label"
-                id="react-select-4--value-1"
-                role="option"
-              >
-                Item 1
-                <span
-                  className="Select-aria-only"
+                <svg
+                  aria-hidden="true"
+                  className="css-tj5bde-Svg"
+                  focusable="false"
+                  height={14}
+                  viewBox="0 0 20 20"
+                  width={14}
                 >
-                   
-                </span>
-              </span>
+                  <path
+                    d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                  />
+                </svg>
+              </div>
             </div>
             <div
-              className="Select-input"
-              style={
-                Object {
-                  "display": "inline-block",
-                }
-              }
+              className="css-1rhbuit-multiValue sc-select__multi-value"
             >
-              <input
-                aria-activedescendant="react-select-4--value"
-                aria-expanded="false"
-                aria-haspopup="false"
-                aria-owns=""
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                required={false}
-                role="combobox"
-                style={
-                  Object {
-                    "boxSizing": "content-box",
-                    "width": "5px",
-                  }
-                }
-                value=""
-              />
               <div
+                className="css-12jo7m5 sc-select__multi-value__label"
+              >
+                Item 1
+              </div>
+              <div
+                className="css-1alnv5e sc-select__multi-value__remove"
+                onClick={[Function]}
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="css-tj5bde-Svg"
+                  focusable="false"
+                  height={14}
+                  viewBox="0 0 20 20"
+                  width={14}
+                >
+                  <path
+                    d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              className="css-w8afj7-Input"
+            >
+              <div
+                className="sc-select__input"
                 style={
                   Object {
-                    "height": 0,
-                    "left": 0,
-                    "overflow": "scroll",
-                    "position": "absolute",
-                    "top": 0,
-                    "visibility": "hidden",
-                    "whiteSpace": "pre",
+                    "display": "inline-block",
                   }
                 }
               >
-                
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={false}
+                  id="react-select-4-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
               </div>
             </div>
           </div>
-          <span
-            aria-label="Clear all"
-            className="Select-clear-zone"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            title="Clear all"
+          <div
+            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
           >
-            <span
-              className="Select-clear"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": "&times;",
-                }
-              }
-            />
-          </span>
-          <span
-            className="Select-arrow-zone"
-            onMouseDown={[Function]}
-          >
-            <span
-              className="Select-arrow"
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__clear-indicator css-tlfecz-indicatorContainer"
               onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-tj5bde-Svg"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                />
+              </svg>
+            </div>
+            <span
+              className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
             />
-          </span>
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="css-tj5bde-Svg"
+                focusable="false"
+                height={20}
+                viewBox="0 0 20 20"
+                width={20}
+              >
+                <path
+                  d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            name="multi_select"
+            type="hidden"
+            value={0}
+          />
+          <input
+            name="multi_select"
+            type="hidden"
+            value={1}
+          />
         </div>
       </div>
     </div>
