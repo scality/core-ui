@@ -108,8 +108,10 @@ exports[`Storyshots Breadcrumb Default 1`] = `
     <li
       className="sc-breadcrumb_item sc-bwzfXH eZtnXH"
     >
-      <label>
-        volume_1
+      <label
+        title="volume_longlonglonglonglonglonglonglonglong"
+      >
+        volume_longlonglonglonglonglonglonglonglong
       </label>
     </li>
   </ol>

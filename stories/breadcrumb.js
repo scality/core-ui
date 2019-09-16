@@ -19,7 +19,9 @@ storiesOf("Breadcrumb", module).add("Default", () => {
             node_longlonglonglonglonglonglonglonglonglonglong
           </a>,
           <a href="volumes">volumes</a>,
-          <label>volume_1</label>
+          <label title={"volume_longlonglonglonglonglonglonglonglong"}>
+            volume_longlonglonglonglonglonglonglonglong
+          </label>
         ]}
       />
       <h3>Breadcrumb with customized color</h3>
