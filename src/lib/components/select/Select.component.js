@@ -57,7 +57,7 @@ const SelectContainer = styled.div`
     border: 1px solid ${defaultTheme.gray};
     box-sizing: border-box;
     overflow: hidden;
-
+    z-index: ${defaultTheme.zIndex.dropdown};
     .sc-select__option {
       background-color: ${defaultTheme.white};
       &.sc-select__option--is-focused {
