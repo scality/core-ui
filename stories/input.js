@@ -77,7 +77,7 @@ const ExampleInput = () => {
         type="select"
         options={options}
         placeholder="Select an item..."
-        noResultsText="Not found"
+        noOptionsMessage={() => "Not found"}
         value={options[0]}
       />
     </div>

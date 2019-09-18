@@ -3,16 +3,16 @@
 exports[`Storyshots Notifications Default 1`] = `
 <div>
   <div
-    className="sc-notifications sc-gqjmRU bSQwCu"
+    className="sc-notifications sc-ifAKCX foTAQB"
   >
     <div
-      className="sc-notification sc-htoDjs iJaLkP"
+      className="sc-notification sc-bdVaJa biSBkq"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -20,7 +20,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Carlito. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -29,13 +29,13 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs kVflel"
+      className="sc-notification sc-bdVaJa gzpENg"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -43,7 +43,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Patrick. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -53,15 +53,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-gqjmRU cPXWBc"
+    className="sc-notifications sc-ifAKCX rJoNA"
   >
     <div
-      className="sc-notification sc-htoDjs dCtEfn"
+      className="sc-notification sc-bdVaJa cojbSw"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -69,7 +69,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Jordi. I live at TOP_LEFT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -78,12 +78,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs fiiBBZ"
+      className="sc-notification sc-bdVaJa kWDgMl"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -91,12 +91,12 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-iwsKbI kaNhZZ"
+        className="sc-htpNat exAJUA"
         max={10000}
         value={0}
       />
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -106,15 +106,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-gqjmRU eokZvu"
+    className="sc-notifications sc-ifAKCX fQVauU"
   >
     <div
-      className="sc-notification sc-htoDjs fEDxWu"
+      className="sc-notification sc-bdVaJa cnrULM"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -122,7 +122,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Teddy. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -131,12 +131,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs hrgOQB"
+      className="sc-notification sc-bdVaJa tGEAk"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -144,12 +144,12 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Saif. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-iwsKbI lbLlOw"
+        className="sc-htpNat kLmLPY"
         max={5000}
         value={0}
       />
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -159,15 +159,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-gqjmRU bKfRMB"
+    className="sc-notifications sc-ifAKCX dsdPyg"
   >
     <div
-      className="sc-notification sc-htoDjs dCtEfn"
+      className="sc-notification sc-bdVaJa cojbSw"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -175,7 +175,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Charles. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i
@@ -184,12 +184,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-htoDjs fEDxWu"
+      className="sc-notification sc-bdVaJa cnrULM"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-dnqmqq fChpCA"
+        className="sc-bwzfXH kumyrY"
       >
         Hi
       </div>
@@ -197,7 +197,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Claude. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gZMcBi gwcgHY"
+        className="sc-bxivhb iITFSd"
         onClick={[Function]}
       >
         <i

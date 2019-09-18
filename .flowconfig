@@ -15,3 +15,6 @@ inexact-spread =off
 include_warnings=false
 
 [strict]
+
+[untyped]
+.*/node_modules/**/.*

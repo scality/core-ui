@@ -23,7 +23,6 @@ function Checkbox({
 }: Props) {
   return (
     <StyledCheckbox
-      className="checkbox"
       checked={checked}
       disabled={disabled}
       className="sc-checkbox"

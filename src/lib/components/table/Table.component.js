@@ -13,11 +13,6 @@ import {
   AutoSizer
 } from "react-virtualized";
 
-type Item = {
-  label: string,
-  onClick: () => void
-};
-
 export type Props = {
   list: Array<any>,
   columns: Array<any>,
@@ -253,9 +248,7 @@ function Table({
                 cellRenderer={({ cellData, columnIndex, rowData }) => {
                   return (
                     <CellContainer
-                      className={`sc-table-column-cell-container-${
-                        column.dataKey
-                      }`}
+                      className={`sc-table-column-cell-container-${column.dataKey}`}
                     >
                       <CellContent
                         className={`sc-table-column-cell-${column.dataKey}`}
