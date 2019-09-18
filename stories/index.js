@@ -14,5 +14,5 @@ import "./steppers";
 import "./tabs";
 import "./table";
 import "./toggle";
-import "./select";
+// import "./select";
 import "./modal";
