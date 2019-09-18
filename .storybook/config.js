@@ -1,5 +1,6 @@
 import "react-select/dist/react-select.css";
 import "react-virtualized-select/styles.css";
+import "rc-tooltip/assets/bootstrap.css";
 
 import { configure, setAddon, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";

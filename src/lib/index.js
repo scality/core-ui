@@ -17,6 +17,7 @@ import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 import Tabs from "./components/tabs/Tabs.component";
 import Select from "./components/select/Select.component";
 import Modal from "./components/modal/Modal.component";
+import Tooltip from "./components/tooltip/Tooltip.component";
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -38,5 +39,6 @@ export {
   Breadcrumb,
   Tabs,
   Select,
-  Modal
+  Modal,
+  Tooltip
 };
