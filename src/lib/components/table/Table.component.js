@@ -18,14 +18,14 @@ export type Props = {
   columns: Array<any>,
   disableHeader: boolean,
   headerHeight: number,
-  onHeaderClick: () => void,
-  onRowClick: () => void,
-  overscanRowCount: number,
+  onHeaderClick?: any => void,
+  onRowClick: ({ rowData: any }) => void,
+  overscanRowCount?: number,
   rowHeight: number,
-  onSort: () => void,
+  onSort: ({ sortBy: string, sortDirection: string }) => void,
   sortBy: string,
   sortDirection: string,
-  noRowsRenderer: Node
+  noRowsRenderer: any => Node
 };
 
 type HeaderProps = {

@@ -1,3 +1,4 @@
+//@flow
 import "@fortawesome/fontawesome-free/css/all.css";
 
 import Loader from "./components/loader/Loader.component";
