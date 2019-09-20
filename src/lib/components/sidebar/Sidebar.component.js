@@ -8,7 +8,7 @@ import { mergeTheme } from "../../utils";
 
 type Item = {
   label: string,
-  onClick: () => void,
+  onClick: any => void,
   active?: boolean,
   icon?: Node
 };

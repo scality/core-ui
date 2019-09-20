@@ -8,7 +8,7 @@ import { mergeTheme } from "../../utils";
 type Item = {
   title: string,
   selected?: boolean,
-  onClick: () => void
+  onClick: any => void
 };
 
 type Props = {

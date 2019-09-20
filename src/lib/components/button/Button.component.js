@@ -19,7 +19,7 @@ type Props = {
   title?: string,
   type?: string,
   isLoading?: boolean,
-  onClick?: () => void
+  onClick?: any => void
 };
 
 const defaultProps = {

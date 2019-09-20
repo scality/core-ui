@@ -15,7 +15,7 @@ export type Item = {
   label: string,
   name?: string,
   selected?: boolean,
-  onClick: () => void
+  onClick: any => void
 };
 type Items = Array<Item>;
 type Props = {
