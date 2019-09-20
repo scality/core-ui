@@ -10,6 +10,7 @@
     "analyze": "source-map-explorer 'dist/*.js'",
     "build": "rimraf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files && rimraf dist/**/*.test.js && rimraf dist/**/__snapshots__",
     "flow": "flow check",
+    "lint": "eslint src/* --ext .js",
     "prepare": "npm run build",
     "plop": "plop",
     "test": "jest",
@@ -32,8 +33,19 @@
     "@storybook/react": "^5.1.11",
     "@storybook/storybook-deployer": "^2.8.1",
     "@storybook/theming": "^5.1.11",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "8.0.6",
+    "eslint": "^6.4.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
     "flow-bin": "^0.107.0",
+    "husky": "^3.0.5",
     "jest": "^24.9.0",
     "plop": "^2.4.0",
     "polished": "^3.4.1",
@@ -65,6 +77,11 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
     }
   }
 }

@@ -12,8 +12,7 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 10.x
-      - run: npm install -g yarn
-      - run: yarn
-      - run: yarn storybook:deploy --ci --host-token-env-variable=GITHUB_TOKEN
+      - run: npm install
+      - run: npm run storybook:deploy --ci --host-token-env-variable=GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{secrets.core_ui_github_token}}
