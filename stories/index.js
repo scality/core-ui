@@ -16,4 +16,4 @@ import "./table";
 import "./toggle";
 import "./select";
 import "./modal";
-import "./tooltip";
+import "./tooltip";import "./collapsiblepanel";
