@@ -34,6 +34,8 @@ stages:
           name: Run all UI unit tests
           workdir: build/core-ui
           command: >
-            npm install -g yarn &&
-            yarn && yarn test && yarn run flow
+            npm ci &&
+            npm run test &&
+            npm run flow &&
+            npm run lint
           haltOnFailure: false
