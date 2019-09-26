@@ -1,61 +1,33 @@
-// @flow
-
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import Tooltip from "../src/lib/components/tooltip/Tooltip.component";
 
 storiesOf("Tooltip", module).add("Default", () => {
   return (
-    <div>
-      <h3>Right (Default) </h3>
-      <div class="tooltipDiv">
-        <Tooltip
-          overlay={
-            <span>
-              Hello <i className="fas fa-smile" />
-            </span>
-          }
-        >
-          <span class="tooltipText">Hover me!</span>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        <h3>Default Tooltip</h3>
+        <Tooltip>
+          <span>Hover here!</span>
         </Tooltip>
       </div>
-      <h3>Top</h3>
-      <div class="tooltipDiv">
-        <Tooltip
-          placement="top"
-          overlay={
-            <span>
-              Hello <i className="fas fa-smile" />
-            </span>
-          }
-        >
-          <span class="tooltipText">Hover me!</span>
+
+      <div>
+        <h3>Tooltip right</h3>
+        <Tooltip placement="right">
+          <span>Hover here!</span>
         </Tooltip>
       </div>
-      <h3>Bottom</h3>
-      <div class="tooltipDiv">
-        <Tooltip
-          placement="bottom"
-          overlay={
-            <span>
-              Hello <i className="fas fa-smile" />
-            </span>
-          }
-        >
-          <span class="tooltipText">Hover me!</span>
+      <div style={{ marginLeft: "100px" }}>
+        <h3>Tooltip left</h3>
+        <Tooltip placement="left">
+          <span>Hover here!</span>
         </Tooltip>
       </div>
-      <h3>Left</h3>
-      <div class="tooltipDiv">
-        <Tooltip
-          placement="left"
-          overlay={
-            <span>
-              Hello <i className="fas fa-smile" />
-            </span>
-          }
-        >
-          <span class="tooltipText">Hover me!</span>
+      <div>
+        <h3>Tooltip buttom</h3>
+        <Tooltip placement="buttom">
+          <span>Hover here!</span>
         </Tooltip>
       </div>
     </div>
