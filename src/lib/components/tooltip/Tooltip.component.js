@@ -1,19 +1,18 @@
+//@flow
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
 
 export const TOP = "top";
-export const BUTTOM = "buttom";
+export const BOTTOM = "bottom";
 export const LEFT = "left";
 export const RIGHT = "right";
-type Position = typeof TOP | typeof BUTTOM | typeof LEFT | typeof RIGHT;
+type Position = typeof TOP | typeof BOTTOM | typeof LEFT | typeof RIGHT;
 type Props = {
   placement?: Position,
+  overlaystyle?: Node,
   overlay?: Node,
-  trigger?: Array<string>,
   children?: Node
 };
 
@@ -23,71 +22,76 @@ const TooltipContainer = styled.div`
 `;
 
 const TooltipOverLayContainer = styled.div`
+  display: flex;
   position: absolute;
-  background-color: ${defaultTheme.grayDarker};
-  color: ${defaultTheme.white}
+  background-color: ${props =>
+    (props && props.overlaystyle && props.overlaystyle.backgroundColor) ||
+    defaultTheme.grayDark};
+  color: ${props =>
+    (props && props.overlaystyle && props.overlaystyle.color) ||
+    defaultTheme.white}
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
-  font-size: ${defaultTheme.fontSize.small};
-  letter-spacing: 0.8px;
+  font-size: ${props =>
+    (props && props.overlaystyle && props.overlaystyle.fontSize) ||
+    defaultTheme.fontSize.small};
   text-align: center;
   vertical-align: middle;
-  line-height: 20px;
-  min-height: 20px;
-  padding: 3px 5px 3px 5px
+  padding: ${defaultTheme.padding.smaller};
     ${props => {
-      console.log("props", props);
-
       switch (props.placement) {
         case LEFT:
           return css`
-            top: 0px;
-            right: 105%;
+            right: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
           `;
         case RIGHT:
           return css`
-            top: 0px;
-            left: 105%;
+            left: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
           `;
-        case BUTTOM:
+        case BOTTOM:
           return css`
-            top: 105%;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
           `;
         default:
           return css`
-            bottom: 105%;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
           `;
       }
     }};
 `;
 
-function Tooltip({ placement, overlay, children }: Props) {
+function Tooltip({
+  placement = TOP,
+  overlaystyle,
+  children,
+  overlay,
+  ...rest
+}: Props) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  const [tooltipId, setTooltipID] = useState(
-    "tooltip-" +
-      Math.random()
-        .toString(36)
-        .substring(7)
-  );
-  const setTooltipVisible = () => {
-    setIsTooltipVisible(!isTooltipVisible);
-  };
 
   return (
     <TooltipContainer
       className="sc-tooltip"
-      id={tooltipId}
-      onMouseEnter={setTooltipVisible}
-      onMouseLeave={setTooltipVisible}
+      onMouseEnter={() => setIsTooltipVisible(true)}
+      onMouseLeave={() => setIsTooltipVisible(false)}
     >
-      {isTooltipVisible
-        ? ReactDOM.createPortal(
-            <TooltipOverLayContainer placement={placement} overlay={overlay}>
-              Helloooooooooooo
-            </TooltipOverLayContainer>,
-            document.getElementById(tooltipId)
-          )
-        : null}
+      {isTooltipVisible && overlay ? (
+        <TooltipOverLayContainer
+          className="sc-tooltip-overlay"
+          placement={placement}
+          overlaystyle={overlaystyle}
+        >
+          <div className="sc-tooltip-overlay-text">{overlay}</div>
+        </TooltipOverLayContainer>
+      ) : null}
       {children}
     </TooltipContainer>
   );

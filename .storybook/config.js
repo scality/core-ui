@@ -1,5 +1,3 @@
-import "react-select/dist/react-select.css";
-
 import { configure, setAddon, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import withPropsCombinations from "react-storybook-addon-props-combinations";
