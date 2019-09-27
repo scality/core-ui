@@ -1,76 +1,147 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Tooltip Default 1`] = `
-<div>
-  <h3>
-    Right (Default) 
-  </h3>
-  <div
-    class="tooltipDiv"
-  >
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <div>
+    <h3>
+      Default Tooltip
+    </h3>
     <div
-      className="sc-tooltip sc-bdVaJa bDWFJH"
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <span
-        class="tooltipText"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        Hover me!
+      <span>
+        Hover here!
       </span>
     </div>
   </div>
-  <h3>
-    Top
-  </h3>
-  <div
-    class="tooltipDiv"
-  >
+  <div>
+    <h3>
+      Tooltip right
+    </h3>
     <div
-      className="sc-tooltip sc-bdVaJa bDWFJH"
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <span
-        class="tooltipText"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        Hover me!
+      <span>
+        Hover here!
       </span>
     </div>
   </div>
-  <h3>
-    Bottom
-  </h3>
   <div
-    class="tooltipDiv"
+    style={
+      Object {
+        "marginLeft": "100px",
+      }
+    }
   >
+    <h3>
+      Tooltip left
+    </h3>
     <div
-      className="sc-tooltip sc-bdVaJa bDWFJH"
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <span
-        class="tooltipText"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        Hover me!
+      <span>
+        Hover here!
       </span>
     </div>
   </div>
-  <h3>
-    Left
-  </h3>
-  <div
-    class="tooltipDiv"
-  >
+  <div>
+    <h3>
+      Tooltip bottom
+    </h3>
     <div
-      className="sc-tooltip sc-bdVaJa bDWFJH"
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <span
-        class="tooltipText"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      <span>
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Customize your tooltip style
+    </h3>
+    <div
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span>
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Tooltip with button
+    </h3>
+    <div
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="sc-button sc-EHOje bXvdjF"
+        disabled={false}
+        size="small"
+        title=""
+        type="button"
       >
-        Hover me!
+        <span
+          className="sc-htoDjs fHktW"
+        >
+          <span
+            className="sc-button-text"
+          >
+            <span
+              className="sc-gzVnrw jIdixa"
+            >
+              Hover here
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <h3>
+      add icon in the overlay of tooltip
+    </h3>
+    <div
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span>
+        tooltip with icon
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Tooltip doesn't trigger
+    </h3>
+    <div
+      className="sc-tooltip sc-bdVaJa jCeSos"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span>
+        Hover here!
       </span>
     </div>
   </div>
