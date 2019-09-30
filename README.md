@@ -22,7 +22,7 @@ You have to run all the tests and update all snapshots before each commit.
 Builds the app for production to the `dist` folder.
 In this folder, you will find all components, icons and themes.
 
-### `npm run start`
+### `npm run storybook`
 
 Launch Storybook to test all the components on the `http://localhost:3000`.
 
@@ -50,6 +50,4 @@ You can use plop when you want to create a new react component. Plop generates c
 - Add storybook stories to cover all features 
 - Run `npm run test` to generates snapshot tests which are based on storybook stories
 - Update `src/lib/index.js` to export the new component
-- Run `npm run build` to update `dist` folder with the new component
 - Once all is done, create Pull Request for review
-- When the Pull Request is merged, checkout the `master` branch, update it then run `npm run storybook:deploy` to deploy the new component to [ui-core GitHub Pages](https://scality.github.io/core-ui/)
