@@ -13,6 +13,6 @@ jobs:
         with:
           node-version: 10.x
       - run: npm ci
-      - run: npm run storybook:deploy --ci --host-token-env-variable=GITHUB_TOKEN
+      - run: npm run storybook:deploy -- --ci --host-token-env-variable=GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{secrets.core_ui_github_token}}
