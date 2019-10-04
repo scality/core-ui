@@ -1,5 +1,5 @@
-import Chips from "../src/lib/components/chips/Chips.component";
 //@flow
+import Chips from "../src/lib/components/chips/Chips.component";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
@@ -52,35 +52,35 @@ storiesOf("Chips", module).add("Default", () => {
         icon={<i className="fas fa-star" />}
         buttonIcon={<i className="fas fa-times" />}
         variant={"primary"}
-        onClick={action("Deletable Chip")}
+        onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         buttonIcon={<i className="fas fa-times" />}
         variant={"base"}
-        onClick={action("Deletable Chip")}
+        onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         buttonIcon={<i className="fas fa-times" />}
         variant={"success"}
-        onClick={action("Deletable Chip")}
+        onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         buttonIcon={<i className="fas fa-times" />}
         variant={"warning"}
-        onClick={action("Deletable Chip")}
+        onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         buttonIcon={<i className="fas fa-times" />}
         variant={"danger"}
-        onClick={action("Deletable Chip")}
+        onRemove={action("Deletable Chip")}
       />
     </div>
   );

@@ -1,21 +1,23 @@
 //@flow
 import * as defaultTheme from "../../style/theme";
+
 import styled, { css } from "styled-components";
+
 import React from "react";
 import { lighten } from "polished";
 import { mergeTheme } from "../../utils";
 
 type Props = {
-  text: string,
+  text: String,
   color?: String,
   variant?: Variant,
   icon?: Node,
   buttonIcon?: Node,
   onClick?: any => void,
+  onRemove?: any => void,
 };
 
 const defaultProps = {
-  variant: "base",
   icon: null,
   buttonIcon:null,
   text: "",
@@ -29,20 +31,27 @@ const ChipsContainer = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
-    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
-    console.log(brandingTheme);
     
     return css`
       background-color: ${brandingTheme[props.variant]};
       color: ${props.color};
     
+    `;
+  }}
+
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+
+    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+    
+    return props.onClick && css`    
       &:hover {
+        pointer: cursor
         background-color: ${brandLight};
         color: ${props.color};
       }
       
-      &:active {      
+      &:active {
         background-color: ${brandingTheme[props.variant]};
         color: ${props.color};
       }
@@ -66,11 +75,31 @@ export const ChipsIcon = styled.span`
 `;
 
 export const ChipsButton = styled.span`
-  padding-right: ${defaultTheme.padding.smaller};
   display: inline-flex;
   justify-content: center;
   align-items: center;
   margin-left:7px;
+  border-radius: 15px;
+  padding: 2px ${defaultTheme.padding.smaller};
+
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+
+    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+    
+    return props.onClick && css`    
+      &:hover {
+        background-color: ${brandLight};
+        color: ${props.color};
+      }
+      
+      &:active {
+        pointer: cursor
+        background-color: ${brandingTheme[props.variant]};
+        color: ${props.color};
+      }
+    `;
+  }}
     
 `;
 
@@ -84,14 +113,20 @@ export const ChipsText = styled.span`
 
 function Chips({
   text,
-  variant,
+  variant = defaultTheme.brand.base,
   icon,
   buttonIcon,
   onClick, 
+  onRemove,
   color = defaultTheme.white,
 }: Props) {
-  return ( //tirar negação dos ícone
-    <ChipsContainer className="sc-chips" onClick={onClick} variant={variant} color={color}>
+  return (
+    <ChipsContainer 
+      className="sc-chips"
+      onClick={onClick}
+      variant={variant}
+      color={color}
+    >
       { icon && (
         <ChipsIcon text={text} variant={variant}>
           {icon}
@@ -99,8 +134,12 @@ function Chips({
       )} 
       <ChipsText>
         {text}
-        { buttonIcon && (
-          <ChipsButton >
+        { onRemove && (
+          <ChipsButton
+            onClick={onRemove}
+            color={color}
+            variant={variant}
+          >
             {buttonIcon}
           </ChipsButton>
         )}
