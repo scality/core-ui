@@ -17,3 +17,4 @@ import "./toggle";
 import "./select";
 import "./modal";
 import "./tooltip";
+import "./multiselect";

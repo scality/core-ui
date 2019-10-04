@@ -19,6 +19,7 @@ import Tabs from "./components/tabs/Tabs.component";
 import Select from "./components/select/Select.component";
 import Modal from "./components/modal/Modal.component";
 import Tooltip from "./components/tooltip/Tooltip.component";
+import MultiSelect from './components/multiselect/MultiSelect.component'
 
 import { LOADER_SIZE } from "./components/constants";
 
@@ -41,5 +42,6 @@ export {
   Tabs,
   Select,
   Modal,
-  Tooltip
+  Tooltip,
+  MultiSelect
 };

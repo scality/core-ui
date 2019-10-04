@@ -1,6 +1,8 @@
-import React, { useReducer } from "react";
+//@flow
+import React from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
+import CheckBox from  './../checkbox/Checkbox.component';
 type MultiSelectProps = {
   options: Array<MultiSelectOption>,
   newOption: {
@@ -15,7 +17,9 @@ type MultiSelectProps = {
   },
   title: string,
   labelCheckBox: string,
-  width: string
+  width: string,
+  onChange: () => void,
+  onAdd: () => void
 };
 
 type MultiSelectOptionProps = {
@@ -32,24 +36,6 @@ type MultiSelectFormProps = {
   onChange:() => void, 
   onClick: () => void
 }
-
-const defaultProps = {
-  options: [],
-  title: '',
-  labelCheckBox: '',
-  width: '500px',
-  newOption: {
-    title: {
-      value: '',
-      placeholder: 'Content of option'
-    },
-    label: {
-      value: '',
-      placeholder: 'Label of option'
-    },
-  },
-  currentInput: 'title'
-};
 
 const MultiSelectContainer = styled.div`
   display: block;
@@ -150,30 +136,8 @@ const MultiSelectContent = styled.div`
 
 const MultiSelectMark = styled.div`
   display: inline-block;
-  width: 29%;
-  height: 100%;
-  position: relative;
-
-  .checkbox {
-    appearance: none;
-    width: 13px;
-    height: 13px;
-    border-radius: 4px;
-    position: absolute;
-    left: 23px;
-    top: 6px;
-    border: 1px solid ${defaultTheme.grayDark};
-    cursor: pointer;
-    transition: ease-in-out .2s;
-  }
-
-  .checkbox:focus { 
-    outline: 0;
-  }
-
-  .checkbox:checked {
-    background: ${defaultTheme.black};
-  }
+  vertical-align: top;
+  padding: 5px 0 0 10px;
 `;
 
 const RemoveIcon = styled.div`
@@ -263,80 +227,6 @@ const MultiSelectFormContainer = styled.div`
   }
 `;
 
-function reducer(state, action) {  
-  const changeOption = ({ newValue }) => {
-    const { newOption, currentInput } = state
-    newOption[currentInput].value = newValue
-    
-    return {
-      ...state,
-      newOption
-    }
-  }
-
-  const checkOption = ({ option }) => {
-    const changedOptions = state.options.map(item => {
-      if (item === option) {
-        return {
-          ...item,
-          checked: !item.checked
-        }
-      } else {
-        return item
-      }
-    })
-    return {
-      ...state,
-      options: changedOptions
-    }
-  }
-
-  const removeOption = ({ option }) => {
-    const changedOptions = state.options.filter(item => item !== option)
-    return {
-      ...state,
-      options: changedOptions
-    }
-  }
-  
-  const addOption = () => {
-    if (state.currentInput === 'title' && state.newOption['title'].value) {
-      return {
-        ...state,
-        currentInput: 'label'
-      }
-    } else if (state.newOption['label'].value) {
-      const { newOption, options } = state;
-
-      options.push({
-        checked: false, 
-        label: newOption['label'].value, 
-        content: newOption['title'].value
-      });
-            
-      newOption['title'].value = '';
-      newOption['label'].value = '';
-
-      return {
-        ...state,
-        options,
-        newOption,
-        currentInput: 'title'
-      };
-    }
-
-    return state;
-  }
-
-  switch (action.type) {
-    case 'change': return changeOption(action);
-    case 'check': return checkOption(action);
-    case 'remove': return removeOption(action);
-    case 'add': return addOption();
-    default: return state;
-  }
-}
-
 function MultiSelectOption(props: MultiSelectOptionProps) {
   const { checked, label, content, onClick, onCheck } = props;
 
@@ -350,7 +240,10 @@ function MultiSelectOption(props: MultiSelectOptionProps) {
         </button>
       </MultiSelectContent>
       <MultiSelectMark>
-        <input type="checkbox" className="checkbox" onChange={onCheck} checked={checked} />
+        <CheckBox 
+          checked={checked}
+          onChange={onCheck}
+        />
       </MultiSelectMark>
     </MultiSelectOptionContainer>
   )
@@ -378,43 +271,56 @@ function MultiSelectForm(props: MultiSelectFormProps) {
   )
 }
 
-function MultiSelect(props: MultiSelectProps) {
-  const [state, dispatch] = useReducer(reducer, props);
+function MultiSelect(props: MultiSelectProps = {
+  options: [],
+  title: '',
+  labelCheckBox: '',
+  width: '500px',
+  newOption: {
+    title: {
+      value: '',
+      placeholder: 'Content of option'
+    },
+    label: {
+      value: '',
+      placeholder: 'Label of option'
+    },
+  },
+  currentInput: 'title'
+}) {
 
   return (
     <MultiSelectContainer
-      width={state.width}
+      width={props.width}
     >
       <BlockContainer>
-        <h3 className="title-multi-select">{state.title}</h3>
-        <h3 className="label-checkbox-multi-select">{state.labelCheckBox}</h3>
+        <h3 className="title-multi-select">{props.title}</h3>
+        <h3 className="label-checkbox-multi-select">{props.labelCheckBox}</h3>
       </BlockContainer>
       <BlockContainer>
         {
-          state.options.map(option =>
+          props.options.map(option =>
             <MultiSelectOption 
               checked={option.checked}
               label={option.label}
               content={option.content}
               key={option.content}
-              onClick={() => dispatch({ type: 'remove', option })}
-              onCheck={() => dispatch({ type: 'check', option })}
+              onClick={props.onRemoveOption}
+              onCheck={props.onCheck}
             />  
           )
         }
       </BlockContainer>
       <BlockContainer>
         <MultiSelectForm 
-          value={state.newOption[state.currentInput].value}
-          placeholder={state.newOption[state.currentInput].placeholder}
-          onChange={e => dispatch({ type: 'change', newValue: e.target.value })}
-          onClick={() => dispatch({ type: 'add' })}
+          value={props.newOption[props.currentInput].value}
+          placeholder={props.newOption[props.currentInput].placeholder}
+          onChange={props.onChange}
+          onClick={props.onAdd}
         />
       </BlockContainer>
     </MultiSelectContainer>
   );
 }
-
-MultiSelect.defaultProps = defaultProps;
 
 export default MultiSelect
