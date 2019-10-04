@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useReducer } from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
 type MultiSelectProps = {
@@ -15,7 +15,7 @@ type MultiSelectProps = {
   },
   title: string,
   labelCheckBox: string,
-  width: string,
+  width: string
 };
 
 type MultiSelectOptionProps = {
@@ -48,6 +48,7 @@ const defaultProps = {
       placeholder: 'Label of option'
     },
   },
+  currentInput: 'title'
 };
 
 const MultiSelectContainer = styled.div`
@@ -262,6 +263,80 @@ const MultiSelectFormContainer = styled.div`
   }
 `;
 
+function reducer(state, action) {  
+  const changeOption = ({ newValue }) => {
+    const { newOption, currentInput } = state
+    newOption[currentInput].value = newValue
+    
+    return {
+      ...state,
+      newOption
+    }
+  }
+
+  const checkOption = ({ option }) => {
+    const changedOptions = state.options.map(item => {
+      if (item === option) {
+        return {
+          ...item,
+          checked: !item.checked
+        }
+      } else {
+        return item
+      }
+    })
+    return {
+      ...state,
+      options: changedOptions
+    }
+  }
+
+  const removeOption = ({ option }) => {
+    const changedOptions = state.options.filter(item => item !== option)
+    return {
+      ...state,
+      options: changedOptions
+    }
+  }
+  
+  const addOption = () => {
+    if (state.currentInput === 'title' && state.newOption['title'].value) {
+      return {
+        ...state,
+        currentInput: 'label'
+      }
+    } else if (state.newOption['label'].value) {
+      const { newOption, options } = state;
+
+      options.push({
+        checked: false, 
+        label: newOption['label'].value, 
+        content: newOption['title'].value
+      });
+            
+      newOption['title'].value = '';
+      newOption['label'].value = '';
+
+      return {
+        ...state,
+        options,
+        newOption,
+        currentInput: 'title'
+      };
+    }
+
+    return state;
+  }
+
+  switch (action.type) {
+    case 'change': return changeOption(action);
+    case 'check': return checkOption(action);
+    case 'remove': return removeOption(action);
+    case 'add': return addOption();
+    default: return state;
+  }
+}
+
 function MultiSelectOption(props: MultiSelectOptionProps) {
   const { checked, label, content, onClick, onCheck } = props;
 
@@ -303,98 +378,41 @@ function MultiSelectForm(props: MultiSelectFormProps) {
   )
 }
 
-class MultiSelect extends Component {
-  constructor(props: MultiSelectProps) {
-    super(props)
+function MultiSelect(props: MultiSelectProps) {
+  const [state, dispatch] = useReducer(reducer, props);
 
-    this.state = {
-      ...props,
-      currentInput: 'title'
-    };
-  }
-
-  handleChange = e => {
-    const { newOption, currentInput } = this.state
-    newOption[currentInput].value = e.target.value
-    this.setState({ newOption })
-  }
-
-  handleRemove = option => {
-    const { options } = this.state
-    const changedOptions = options.filter(item => item != option)
-    this.setState({ options: changedOptions })
-  }
-
-  handleCheck = option => {
-    const { options } = this.state
-    const changedOptions = options.map(item => {
-      if (item == option) {
-        return {
-          ...item,
-          checked: !item.checked
+  return (
+    <MultiSelectContainer
+      width={state.width}
+    >
+      <BlockContainer>
+        <h3 className="title-multi-select">{state.title}</h3>
+        <h3 className="label-checkbox-multi-select">{state.labelCheckBox}</h3>
+      </BlockContainer>
+      <BlockContainer>
+        {
+          state.options.map(option =>
+            <MultiSelectOption 
+              checked={option.checked}
+              label={option.label}
+              content={option.content}
+              key={option.content}
+              onClick={() => dispatch({ type: 'remove', option })}
+              onCheck={() => dispatch({ type: 'check', option })}
+            />  
+          )
         }
-      } else {
-        return item
-      }
-    })
-    this.setState({ options: changedOptions })
-  }
-
-  handleAdd = e => {
-    const { options, newOption, currentInput } = this.state
-
-    if (currentInput == 'title' && newOption['title'].value) {
-      this.setState({ currentInput: 'label' })
-    } else if (newOption['label'].value) {
-      options.push({
-        checked: false, 
-        label: newOption['label'].value, 
-        content: newOption['title'].value
-      });
-            
-      newOption['title'].value = '';
-      newOption['label'].value = '';
-
-      this.setState({ options, newOption, currentInput: 'title' })
-    }
-  }
-
-  render() {
-    const { options, title, labelCheckBox, width, newOption, currentInput } = this.state;
-
-    return (
-      <MultiSelectContainer
-        width={width}
-      >
-        <BlockContainer>
-          <h3 className="title-multi-select">{title}</h3>
-          <h3 className="label-checkbox-multi-select">{labelCheckBox}</h3>
-        </BlockContainer>
-        <BlockContainer>
-          {
-            options.map(option =>
-              <MultiSelectOption 
-                checked={option.checked}
-                label={option.label}
-                content={option.content}
-                key={options.content}
-                onClick={() => this.handleRemove(option)}
-                onCheck={() => this.handleCheck(option)}
-              />  
-            )
-          }
-        </BlockContainer>
-        <BlockContainer>
-          <MultiSelectForm 
-            value={newOption[currentInput].value}
-            placeholder={newOption[currentInput].placeholder}
-            onChange={this.handleChange}
-            onClick={this.handleAdd}
-          />
-        </BlockContainer>
-      </MultiSelectContainer>
-    );
-  }
+      </BlockContainer>
+      <BlockContainer>
+        <MultiSelectForm 
+          value={state.newOption[state.currentInput].value}
+          placeholder={state.newOption[state.currentInput].placeholder}
+          onChange={e => dispatch({ type: 'change', newValue: e.target.value })}
+          onClick={() => dispatch({ type: 'add' })}
+        />
+      </BlockContainer>
+    </MultiSelectContainer>
+  );
 }
 
 MultiSelect.defaultProps = defaultProps;
