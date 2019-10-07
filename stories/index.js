@@ -17,3 +17,8 @@ import "./toggle";
 import "./select";
 import "./modal";
 import "./tooltip";
+import "./linechart";
+import "./reactlinechart";
+import "./linechartnivo";
+import "./victorylinechart";
+import "./pierechart";

@@ -82,5 +82,13 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "dependencies": {
+    "@nivo/line": "^0.59.3",
+    "@nivo/pie": "^0.59.1",
+    "chart.js": "^2.8.0",
+    "react-chartjs-2": "^2.8.0",
+    "recharts": "^1.7.1",
+    "victory": "^33.1.0"
   }
 }
