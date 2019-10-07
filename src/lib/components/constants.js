@@ -23,4 +23,5 @@ export type Variant =
   | "success"
   | "info"
   | "warning"
-  | "danger";
+  | "danger"
+  | "base";
