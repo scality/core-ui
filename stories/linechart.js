@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import Linechart from "../src/lib/components/linechart/Linechart.component";
 import Pierechart from "../src/lib/components/pierechart/Pierechart.component";
 
-storiesOf("Rechart", module).add("Default", () => {
+storiesOf("Recharts", module).add("Default", () => {
   return (
     <div>
       <h3>Recharts linechart demo</h3>

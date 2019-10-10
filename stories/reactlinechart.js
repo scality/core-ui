@@ -14,7 +14,7 @@ const data = {
   ]
 };
 
-storiesOf("Reactlinechart", module).add("Default", () => {
+storiesOf("react-chartjs-2", module).add("Default", () => {
   return (
     <div>
       <h3>react-chartjs-2 linechart demo</h3>

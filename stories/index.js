@@ -22,3 +22,4 @@ import "./reactlinechart";
 import "./linechartnivo";
 import "./victorylinechart";
 import "./pierechart";
+import "./billboardlinechart";import "./billboardpiechart";import "./buildboardgaugechart";

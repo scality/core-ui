@@ -6,9 +6,7 @@ import {
   VictoryChart,
   VictoryTheme,
   VictoryTooltip,
-  VictoryGroup,
   createContainer,
-  VictoryScatter,
   VictoryAxis
 } from "victory";
 import { chartdatalist } from "/Users/yanjin/Scality/core-ui/stories/data/chartdatalist";
@@ -33,8 +31,8 @@ function Victorylinechart(props: Props) {
             voronoiDimension="x"
             labels={({ datum }) =>
               datum._y === datum.total_space
-                ? `${datum.time} TOTAL SPACE: ${datum.total_space}`
-                : `${datum.time} USED SPACE: ${datum.used_space}`
+                ? `${datum.time} total space: ${datum.total_space}`
+                : `${datum.time} used space: ${datum.used_space}`
             }
             labelComponent={
               <VictoryTooltip
@@ -53,10 +51,10 @@ function Victorylinechart(props: Props) {
           data={chartdatalist}
           x="time"
           y="total_space"
-          animate={{
-            duration: 2000,
-            onLoad: { duration: 1000 }
-          }}
+          // animate={{
+          //   duration: 2000,
+          //   onLoad: { duration: 1000 }
+          // }}
         />
 
         <VictoryLine
@@ -65,10 +63,10 @@ function Victorylinechart(props: Props) {
           data={chartdatalist}
           x="time"
           y="used_space"
-          animate={{
-            duration: 2000,
-            onLoad: { duration: 1000 }
-          }}
+          // animate={{
+          //   duration: 2000,
+          //   onLoad: { duration: 1000 }
+          // }}
         />
       </VictoryChart>
     </VictorylinechartContainer>

@@ -86,7 +86,9 @@
   "dependencies": {
     "@nivo/line": "^0.59.3",
     "@nivo/pie": "^0.59.1",
+    "billboard.js": "^1.10.2",
     "chart.js": "^2.8.0",
+    "d3": "^5.12.0",
     "react-chartjs-2": "^2.8.0",
     "recharts": "^1.7.1",
     "victory": "^33.1.0"
