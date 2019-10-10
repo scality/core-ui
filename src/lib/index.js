@@ -1,27 +1,27 @@
 //@flow
 import "@fortawesome/fontawesome-free/css/all.css";
 
-import Loader from "./components/loader/Loader.component";
-import Navbar from "./components/navbar/Navbar.component";
-import Sidebar from "./components/sidebar/Sidebar.component";
-import Layout from "./components/layout/Layout.component";
-import Dropdown from "./components/dropdown/Dropdown.component";
+import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 import Button from "./components/button/Button.component";
 import Checkbox from "./components/checkbox/Checkbox.component";
-import Toggle from "./components/toggle/Toggle.component";
-import Table from "./components/table/Table.component";
-import SearchInput from "./components/searchinput/SearchInput.component";
-import Steppers from "./components/steppers/Steppers.component";
+import Chips from "./components/chips/Chips.component";
+import Dropdown from "./components/dropdown/Dropdown.component";
 import Input from "./components/input/Input.component";
-import Notifications from "./components/notifications/Notifications.component";
-import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
-import Tabs from "./components/tabs/Tabs.component";
-import Select from "./components/select/Select.component";
+import { LOADER_SIZE } from "./components/constants";
+import Layout from "./components/layout/Layout.component";
+import Loader from "./components/loader/Loader.component";
 import Modal from "./components/modal/Modal.component";
+import Navbar from "./components/navbar/Navbar.component";
+import Notifications from "./components/notifications/Notifications.component";
+import SearchInput from "./components/searchinput/SearchInput.component";
+import Select from "./components/select/Select.component";
+import Sidebar from "./components/sidebar/Sidebar.component";
+import Steppers from "./components/steppers/Steppers.component";
+import Table from "./components/table/Table.component";
+import Tabs from "./components/tabs/Tabs.component";
+import Toggle from "./components/toggle/Toggle.component";
 import Tooltip from "./components/tooltip/Tooltip.component";
 import MultiSelect from './components/multiselect/MultiSelect.component'
-
-import { LOADER_SIZE } from "./components/constants";
 
 export {
   LOADER_SIZE,
@@ -43,5 +43,6 @@ export {
   Select,
   Modal,
   Tooltip,
-  MultiSelect
+  MultiSelect,
+  Chips
 };

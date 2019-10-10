@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Chips Default 1`] = `
+<div
+  className="storybook-chips"
+>
+  <h3>
+    Basic Chip
+  </h3>
+  <div
+    className="sc-chips sc-bdVaJa hQXHzc"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa bfHeJr"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa jOQzRt"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa cTVvKF"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa kUyHTe"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <h3>
+    Clickable Chip
+  </h3>
+  <div
+    className="sc-chips sc-bdVaJa chdiVa"
+    color="#ffffff"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-bwzfXH hFfFkW"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa dCRMFB"
+    color="#ffffff"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-bwzfXH kJhQhe"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa fvoLGG"
+    color="#ffffff"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-bwzfXH eLXInO"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa hJcnAj"
+    color="#ffffff"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-bwzfXH hZLrYr"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa dvBfpI"
+    color="#ffffff"
+    onClick={[Function]}
+  >
+    <span
+      className="sc-bwzfXH dInkzr"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <h3>
+    Deletable Chip
+  </h3>
+  <div
+    className="sc-chips sc-bdVaJa hQXHzc"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bwzfXH hFfFkW"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Deletable
+      <span
+        className="sc-htpNat jQyVXu"
+        color="#ffffff"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa bfHeJr"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bwzfXH kJhQhe"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Deletable
+      <span
+        className="sc-htpNat iOUFRA"
+        color="#ffffff"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa jOQzRt"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bwzfXH eLXInO"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Deletable
+      <span
+        className="sc-htpNat jZuLzz"
+        color="#ffffff"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa cTVvKF"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bwzfXH hZLrYr"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Deletable
+      <span
+        className="sc-htpNat ccSPSG"
+        color="#ffffff"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+    </span>
+  </div>
+  <div
+    className="sc-chips sc-bdVaJa kUyHTe"
+    color="#ffffff"
+  >
+    <span
+      className="sc-bwzfXH dInkzr"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-bxivhb jtBzxc"
+    >
+      Deletable
+      <span
+        className="sc-htpNat dzsiLW"
+        color="#ffffff"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
