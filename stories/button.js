@@ -73,12 +73,35 @@ storiesOf("Button", module)
           text="Larger"
         />
 
-        <h3>Button Icon</h3>
+        <h3>Icon Button</h3>
         <Button size="smaller" icon={<i className="fas fa-star" />} />
         <Button size="small" icon={<i className="fas fa-star" />} />
         <Button icon={<i className="fas fa-star" />} />
         <Button size="large" icon={<i className="fas fa-star" />} />
         <Button size="larger" icon={<i className="fas fa-star" />} />
+
+        <h3>Icon Button Inverted</h3>
+        <Button
+          inverted={true}
+          size="smaller"
+          icon={<i className="fas fa-star" />}
+        />
+        <Button
+          inverted={true}
+          size="small"
+          icon={<i className="fas fa-star" />}
+        />
+        <Button inverted={true} icon={<i className="fas fa-star" />} />
+        <Button
+          inverted={true}
+          size="large"
+          icon={<i className="fas fa-star" />}
+        />
+        <Button
+          inverted={true}
+          size="larger"
+          icon={<i className="fas fa-star" />}
+        />
       </div>
     );
   })

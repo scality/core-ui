@@ -44,7 +44,7 @@ exports[`Storyshots Modal Default 1`] = `
           }
         >
           <button
-            className="sc-button sc-iwsKbI gBNfWZ"
+            className="sc-button sc-iwsKbI dzjUlM"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -66,7 +66,7 @@ exports[`Storyshots Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-button sc-iwsKbI iZLdlJ"
+            className="sc-button sc-iwsKbI dnERAW"
             disabled={false}
             onClick={[Function]}
             size="small"
