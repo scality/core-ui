@@ -200,7 +200,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <div
-        className="sc-htpNat ckwISE"
+        className="sc-select-container sc-htpNat ckwISE"
       >
         <div
           className="sc-select css-2b097c-container"

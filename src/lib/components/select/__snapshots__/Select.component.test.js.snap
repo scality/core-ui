@@ -13,7 +13,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa hGWMfX"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -136,7 +136,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa hGWMfX"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -269,7 +269,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa hGWMfX"
     >
       <div
         className="sc-select css-2b097c-container"

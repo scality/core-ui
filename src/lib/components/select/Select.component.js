@@ -80,7 +80,7 @@ const defaultFormatOptionLabel = ({ label, ...rest }) => (
 
 function SelectBox({ options, formatOptionLabel, ...rest }: Props) {
   return (
-    <SelectContainer>
+    <SelectContainer className="sc-select-container">
       <Select
         className="sc-select"
         classNamePrefix="sc-select"
