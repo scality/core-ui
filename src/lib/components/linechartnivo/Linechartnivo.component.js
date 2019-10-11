@@ -124,7 +124,7 @@ const data = [
     ]
   }
 ];
-function Linechartnivo(props: Props) {
+function Linechartnivo(props) {
   return (
     <NivoLinechartContainer className="sc-linechartnivo">
       <ResponsiveLine

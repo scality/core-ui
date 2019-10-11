@@ -1,5 +1,5 @@
 import initStoryshots from "@storybook/addon-storyshots";
 
 initStoryshots({
-  configPath: "src/lib/components/buildboardgaugechart/__snapshots__"
+  configPath: "src/lib/components/billboardgaugechart/__snapshots__"
 });
