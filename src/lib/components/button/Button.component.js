@@ -9,10 +9,11 @@ import Loader from "../loader/Loader.component";
 import type { LoaderSize, Variant } from "../constants";
 
 type Props = {
-  text: string,
+  text?: string,
   size?: LoaderSize,
   variant?: Variant,
   outlined?: boolean,
+  inverted?: boolean,
   disabled?: boolean,
   icon?: Node,
   href?: string,
@@ -20,19 +21,6 @@ type Props = {
   type?: string,
   isLoading?: boolean,
   onClick?: any => void
-};
-
-const defaultProps = {
-  size: "base",
-  variant: "primary",
-  outlined: false,
-  disabled: false,
-  icon: null,
-  href: "",
-  text: "",
-  title: "",
-  type: "button",
-  isLoading: false
 };
 
 export const ButtonStyled = styled.button`
@@ -186,6 +174,35 @@ ${props => {
       : null}
   `;
 }}
+
+${props => {
+  const brandingTheme = mergeTheme(props.theme, defaultTheme);
+  const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
+  const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+
+  return css`
+    ${!props.text && props.icon && props.inverted
+      ? `
+        padding: 0;
+        height: auto;
+        border: none;
+        background-color: transparent;
+        color: ${brandingTheme[props.variant]};
+        
+        &:hover{      
+          background-color: transparent;
+          color: ${brandLight};
+        }
+
+        &:active {  
+          background-color: transparent;
+          color: ${brandLighter};
+        }
+        `
+      : null}
+  `;
+}}
+
 `;
 export const ButtonIcon = styled.span`
   ${props =>
@@ -211,17 +228,18 @@ export const ButtonContent = styled.span`
 const Anchor = ButtonStyled.withComponent("a");
 
 function Button({
-  text,
-  href,
-  icon,
-  size,
-  variant,
-  outlined,
-  disabled,
+  text = "",
+  href = "",
+  icon = null,
+  size = "base",
+  variant = "primary",
+  outlined = false,
+  disabled = false,
   onClick,
-  title,
-  isLoading,
-  type,
+  title = "",
+  isLoading = false,
+  type = "button",
+  inverted = false,
   ...rest
 }: Props) {
   return href && href.length ? (
@@ -253,6 +271,9 @@ function Button({
       title={title}
       isLoading={isLoading}
       type={type}
+      inverted={inverted}
+      icon={icon}
+      text={text}
       {...rest}
     >
       <ButtonContent>
@@ -269,7 +290,4 @@ function Button({
     </ButtonStyled>
   );
 }
-
-Button.defaultProps = defaultProps;
-
 export default Button;
