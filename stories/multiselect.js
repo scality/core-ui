@@ -25,6 +25,36 @@ const items = [
   }
 ];
 
+const itemsWithoutFavourite = [
+  {
+    selected: true,
+    label: "AWS",
+    description: "Amazon",
+    onRemove: action("onRemove clicked"),
+    onSelect: action("onSelect clicked")
+  },
+  {
+    selected: false,
+    label: "WM",
+    description: "Walmart",
+    onRemove: action("onRemove clicked"),
+    onSelect: action("onSelect clicked")
+  }
+];
+
+const itemsWithoutCheckboxFavourite = [
+  {
+    label: "AWS",
+    description: "Amazon",
+    onRemove: action("onRemove clicked")
+  },
+  {
+    label: "WM",
+    description: "Walmart",
+    onRemove: action("onRemove clicked")
+  }
+];
+
 const options = [
   {
     label: "Azure",
@@ -56,7 +86,27 @@ storiesOf("MultiSelect", module).add("Default", () => {
       </div>
       <h3>MultiSelect List without search</h3>
       <div className="storybook-mutiselect-container">
-        <MultiSelect title="Destination Locations" items={items} />
+        <MultiSelect
+          title="Destination Locations"
+          items={items}
+          search={search}
+        />
+      </div>
+      <h3>MultiSelect List without Favourite</h3>
+      <div className="storybook-mutiselect-container">
+        <MultiSelect
+          title="Destination Locations"
+          items={itemsWithoutFavourite}
+          search={search}
+        />
+      </div>
+      <h3>MultiSelect List without Favourite and Selectbox</h3>
+      <div className="storybook-mutiselect-container">
+        <MultiSelect
+          title="Destination Locations"
+          items={itemsWithoutCheckboxFavourite}
+          search={search}
+        />
       </div>
     </div>
   );
