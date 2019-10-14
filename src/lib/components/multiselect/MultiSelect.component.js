@@ -11,9 +11,9 @@ export type ItemProps = {
   isFavorite?: boolean,
   label: string,
   description?: string,
-  onRemove?: any => void, //on remove button click
-  onSelect?: any => void, //on checkbox click
-  onFavoriteClick?: any => void // on Favorite icon click
+  onRemove?: (any, any) => void, //on remove button click
+  onSelect?: (any, any) => void, //on checkbox click
+  onFavoriteClick?: (any, any) => void // on Favorite icon click
 };
 
 export type OptionProps = {
@@ -103,13 +103,16 @@ function MultiSelectItem(props: ItemProps) {
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
         {typeof selected !== "undefined" && onSelect && (
-          <CheckBox checked={selected} onChange={onSelect} />
+          <CheckBox
+            checked={selected}
+            onChange={event => onSelect(label, event)}
+          />
         )}
         {typeof isFavorite !== "undefined" && onFavoriteClick && (
           <Button
             inverted={true}
             icon={<i className={`${isFavorite ? "fas" : "far"} fa-star`} />}
-            onClick={onFavoriteClick}
+            onClick={event => onFavoriteClick(label, event)}
           />
         )}
       </MultiSelectItemLeft>
@@ -127,7 +130,7 @@ function MultiSelectItem(props: ItemProps) {
         {onRemove && (
           <Button
             inverted={true}
-            onClick={onRemove}
+            onClick={event => onRemove(label, event)}
             icon={<i className="fas fa-trash" />}
           />
         )}
