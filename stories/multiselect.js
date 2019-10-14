@@ -10,7 +10,6 @@ const items = [
     isFavorite: true,
     label: "AWS",
     description: "Amazon",
-    onRemove: action("onRemove clicked"),
     onSelect: action("onSelect clicked"),
     onFavoriteClick: action("onFavoriteClick clicked")
   },
@@ -19,7 +18,6 @@ const items = [
     isFavorite: false,
     label: "WM",
     description: "Walmart",
-    onRemove: action("onRemove clicked"),
     onSelect: action("onSelect clicked"),
     onFavoriteClick: action("onFavoriteClick clicked")
   }
@@ -30,14 +28,12 @@ const itemsWithoutFavourite = [
     selected: true,
     label: "AWS",
     description: "Amazon",
-    onRemove: action("onRemove clicked"),
     onSelect: action("onSelect clicked")
   },
   {
     selected: false,
     label: "WM",
     description: "Walmart",
-    onRemove: action("onRemove clicked"),
     onSelect: action("onSelect clicked")
   }
 ];
@@ -45,13 +41,11 @@ const itemsWithoutFavourite = [
 const itemsWithoutCheckboxFavourite = [
   {
     label: "AWS",
-    description: "Amazon",
-    onRemove: action("onRemove clicked")
+    description: "Amazon"
   },
   {
     label: "WM",
-    description: "Walmart",
-    onRemove: action("onRemove clicked")
+    description: "Walmart"
   }
 ];
 
@@ -82,6 +76,7 @@ storiesOf("MultiSelect", module).add("Default", () => {
           title="Destination Locations"
           items={items}
           search={search}
+          onItemRemove={action("onItemRemove clicked")}
         />
       </div>
       <h3>MultiSelect List without search</h3>
@@ -89,7 +84,7 @@ storiesOf("MultiSelect", module).add("Default", () => {
         <MultiSelect
           title="Destination Locations"
           items={items}
-          search={search}
+          onItemRemove={action("onItemRemove clicked")}
         />
       </div>
       <h3>MultiSelect List without Favourite</h3>
@@ -98,9 +93,19 @@ storiesOf("MultiSelect", module).add("Default", () => {
           title="Destination Locations"
           items={itemsWithoutFavourite}
           search={search}
+          onItemRemove={action("onItemRemove clicked")}
         />
       </div>
       <h3>MultiSelect List without Favourite and Selectbox</h3>
+      <div className="storybook-mutiselect-container">
+        <MultiSelect
+          title="Destination Locations"
+          items={itemsWithoutCheckboxFavourite}
+          search={search}
+          onItemRemove={action("onItemRemove clicked")}
+        />
+      </div>
+      <h3>MultiSelect List without Remove Button, Favourite and Selectbox</h3>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"

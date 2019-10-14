@@ -11,8 +11,8 @@ export type ItemProps = {
   isFavorite?: boolean,
   label: string,
   description?: string,
-  onRemove?: (any, any) => void, //on remove button click
   onSelect?: (any, any) => void, //on checkbox click
+  onItemRemove?: (any, any) => void, //on item remove button click
   onFavoriteClick?: (any, any) => void // on Favorite icon click
 };
 
@@ -30,9 +30,10 @@ export type SearchProps = {
 };
 
 type MultiSelectProps = {
-  title: string,
+  title?: string,
   items: Array<ItemProps>,
-  search?: SearchProps
+  search?: SearchProps,
+  onItemRemove?: (any, any) => void //on item remove button click
 };
 
 const MultiSelectContainer = styled.div`
@@ -93,7 +94,7 @@ function MultiSelectItem(props: ItemProps) {
     selected,
     label,
     description,
-    onRemove,
+    onItemRemove,
     onSelect,
     isFavorite,
     onFavoriteClick
@@ -127,10 +128,10 @@ function MultiSelectItem(props: ItemProps) {
         )}
       </MultiSelectItemCenter>
       <MultiSelectItemRight className="sc-multi-select-item-right">
-        {onRemove && (
+        {onItemRemove && (
           <Button
             inverted={true}
-            onClick={event => onRemove(label, event)}
+            onClick={event => onItemRemove(label, event)}
             icon={<i className="fas fa-trash" />}
           />
         )}
@@ -162,13 +163,22 @@ function MultiSelectSearch(props: SearchProps) {
   );
 }
 
-function MultiSelectList({ title = "", items = [], search }: MultiSelectProps) {
+function MultiSelectList({
+  title = "",
+  items = [],
+  search,
+  onItemRemove
+}: MultiSelectProps) {
   return (
     <MultiSelectContainer className="sc-multi-select-list">
-      <MultiSelectTitle>{title}</MultiSelectTitle>
+      {title && <MultiSelectTitle>{title}</MultiSelectTitle>}
       {search && <MultiSelectSearch {...search} />}
       {items.map((item, index) => (
-        <MultiSelectItem key={`sc-multi-select-item-${index}`} {...item} />
+        <MultiSelectItem
+          key={`sc-multi-select-item-${index}`}
+          onItemRemove={onItemRemove}
+          {...item}
+        />
       ))}
     </MultiSelectContainer>
   );
