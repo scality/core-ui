@@ -113,6 +113,12 @@ storiesOf("MultiSelect", module).add("Default", () => {
           search={search}
         />
       </div>
+      <h3>
+        MultiSelect List without Title, Remove Button, Favourite and Selectbox
+      </h3>
+      <div className="storybook-mutiselect-container">
+        <MultiSelect items={itemsWithoutCheckboxFavourite} search={search} />
+      </div>
     </div>
   );
 });

@@ -23,7 +23,7 @@ export type OptionProps = {
 
 export type SearchProps = {
   placeholder?: string,
-  options: Array<OptionProps>, // "Content of option"
+  options: Array<OptionProps>, //The options displayed in search suggestion
   onSelect: any => void, //on option click
   onAdd?: any => void,
   selectedOption: any
@@ -36,11 +36,11 @@ type MultiSelectProps = {
   onItemRemove?: (any, any) => void //on item remove button click
 };
 
-const MultiSelectContainer = styled.div`
-  padding: ${defaultTheme.padding.base};
-`;
+const MultiSelectContainer = styled.div``;
 
 const MultiSelectTitle = styled.h3`
+  padding: ${defaultTheme.padding.base} 0;
+  margin: 0;
   color: ${defaultTheme.grayDarker};
   font-weight: ${defaultTheme.fontWeight.bold};
   font-size: ${defaultTheme.fontSize.large};
@@ -103,13 +103,13 @@ function MultiSelectItem(props: ItemProps) {
   return (
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
-        {typeof selected !== "undefined" && onSelect && (
+        {typeof selected === "boolean" && onSelect && (
           <CheckBox
             checked={selected}
             onChange={event => onSelect(label, event)}
           />
         )}
-        {typeof isFavorite !== "undefined" && onFavoriteClick && (
+        {typeof isFavorite === "boolean" && onFavoriteClick && (
           <Button
             inverted={true}
             icon={<i className={`${isFavorite ? "fas" : "far"} fa-star`} />}
