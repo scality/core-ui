@@ -82,6 +82,40 @@ storiesOf("Chips", module).add("Default", () => {
         variant="danger"
         onRemove={action("Deletable Chip")}
       />
+
+      <h3>Different sizes</h3>
+      <Chips
+        text="Smaller"
+        icon={<i className="fas fa-star" />}
+        buttonIcon={<i className="fas fa-times" />}
+        variant="primary"
+        onRemove={action("Deletable Chip")}
+        size="smaller"
+      />
+      <Chips
+        text="Small"
+        icon={<i className="fas fa-star" />}
+        buttonIcon={<i className="fas fa-times" />}
+        variant="base"
+        onRemove={action("Deletable Chip")}
+        size="small"
+      />
+      <Chips
+        text="Large"
+        icon={<i className="fas fa-star" />}
+        buttonIcon={<i className="fas fa-times" />}
+        variant="success"
+        onRemove={action("Deletable Chip")}
+        size="large"
+      />
+      <Chips
+        text="Larger"
+        icon={<i className="fas fa-star" />}
+        buttonIcon={<i className="fas fa-times" />}
+        variant="warning"
+        onRemove={action("Deletable Chip")}
+        size="larger"
+      />
     </div>
   );
 });

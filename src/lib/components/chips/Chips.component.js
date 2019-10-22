@@ -1,6 +1,6 @@
 //@flow
 import * as defaultTheme from "../../style/theme";
-import type { Variant } from "../constants";
+import type { Variant, LoaderSize } from "../constants";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
 
@@ -15,7 +15,8 @@ type Props = {
   icon?: Node,
   buttonIcon?: Node,
   onClick?: any => void,
-  onRemove?: any => void
+  onRemove?: any => void,
+  size?: LoaderSize
 };
 
 const ChipsContainer = styled.div`
@@ -25,11 +26,45 @@ const ChipsContainer = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
-    return css`
+    const defaultStyle = `
       background-color: ${brandingTheme[props.variant]};
       color: ${props.color};
-    `;
+    `
+
+    switch (props.size) {
+      case "smaller":
+        return css`
+          font-size: ${defaultTheme.fontSize.smaller};
+          ${defaultStyle}
+          height: 27px;
+        `;
+      case "small":
+        return css`
+          font-size: ${defaultTheme.fontSize.small};
+          ${defaultStyle}
+          height: 30px;
+        `;
+      case "large":
+        return css`
+          font-size: ${defaultTheme.fontSize.larger};
+          ${defaultStyle}
+          height: 35px;
+          width: 200px;
+        `;
+      case "larger":
+        return css`
+          font-size: ${defaultTheme.fontSize.huge};
+          ${defaultStyle}
+          height: 40px;
+          width: 210px;
+        `;
+      default:
+        return css`
+          font-size: ${defaultTheme.fontSize.base};
+          ${defaultStyle}
+          height: 30px;
+        `;
+    }
   }}
 
   ${props => {
@@ -117,6 +152,7 @@ function Chips({
   buttonIcon = null,
   onClick,
   onRemove,
+  size,
   color = defaultTheme.white
 }: Props) {
   return (
@@ -125,6 +161,7 @@ function Chips({
       onClick={onClick}
       variant={variant}
       color={color}
+      size={size}
     >
       {icon && (
         <ChipsIcon text={text} variant={variant}>
