@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots billboard-linechart Default 1`] = `
+<div>
+  <h3>
+    billboard linechart demo (supervisor)
+  </h3>
+  <div
+    className="sc-bdVaJa gWtJaj sc-billboardlinechart"
+    id="supdragZoom"
+  />
+  <h3>
+    billboard linechart performance test
+  </h3>
+  <div
+    className="sc-bdVaJa gWtJaj sc-billboardlinechart"
+    id="dragZoom"
+  />
+</div>
+`;

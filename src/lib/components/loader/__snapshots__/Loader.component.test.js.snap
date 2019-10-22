@@ -6,7 +6,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-loader sc-bdVaJa gHEhaZ"
+      className="sc-bdVaJa gHEhaZ sc-loader"
       color="#87929D"
       size="base"
     >
@@ -141,7 +141,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-loader sc-bdVaJa iQQBuD"
+      className="sc-bdVaJa iQQBuD sc-loader"
       color="#87929D"
       size="large"
     >
@@ -276,7 +276,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-loader sc-bdVaJa QwkjP"
+      className="sc-bdVaJa QwkjP sc-loader"
       color="#87929D"
       size="larger"
     >
@@ -411,7 +411,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-loader sc-bdVaJa gzvyxX"
+      className="sc-bdVaJa gzvyxX sc-loader"
       color="#87929D"
       size="huge"
     >
@@ -546,7 +546,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-loader sc-bdVaJa fPkzLg"
+      className="sc-bdVaJa fPkzLg sc-loader"
       color="#87929D"
       size="massive"
     >
@@ -682,7 +682,7 @@ exports[`Storyshots Loader Combinations 1`] = `
 
 exports[`Storyshots Loader With dynamic props 1`] = `
 <div
-  className="sc-loader sc-bdVaJa gHEhaZ"
+  className="sc-bdVaJa gHEhaZ sc-loader"
   color="#87929D"
   size="base"
 >

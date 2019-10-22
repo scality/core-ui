@@ -13,13 +13,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-gzVnrw kjCCUz sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-bxivhb ktEkRb sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             className="sc-input-type"
@@ -63,14 +63,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-gzVnrw kjCCUz sc-searchinput"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-bxivhb ktEkRb sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             className="sc-input-type"
@@ -113,13 +113,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw hqmodQ"
+      className="sc-gzVnrw hqmodQ sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-bxivhb ktEkRb sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             className="sc-input-type"
@@ -163,13 +163,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw hqmodQ"
+      className="sc-gzVnrw hqmodQ sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-bxivhb ktEkRb sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             className="sc-input-type"

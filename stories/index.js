@@ -24,4 +24,4 @@ import "./victorylinechart";
 import "./pierechart";
 import "./billboardlinechart";
 import "./billboardpiechart";
-import "./billboardgaugechart";
+import "./billboardgaugechart";import "./vegalinechart";import "./testchart";import "./vegatestchart";import "./sparkline";

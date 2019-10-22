@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Nivo Default 1`] = `
+<div>
+  <h3>
+    nivo linechart demo
+  </h3>
+  <div
+    className="sc-bdVaJa lplWgj sc-linechartnivo"
+  >
+    <div
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+  <h3>
+    nivo piechart demo
+  </h3>
+  <div
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <svg
+      height={400}
+      role="img"
+      width={600}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        fill="transparent"
+        height={400}
+        width={600}
+      />
+      <g
+        transform="translate(120,80)"
+      >
+        <g
+          transform="translate(180,120)"
+        >
+          <path
+            d="M7.34788079488412e-15,-120A120,120,0,0,1,99.46904062450406,67.12607509188038L0,0Z"
+            fill="#e8c1a0"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseMove={[Function]}
+            stroke="rgb(162, 135, 112)"
+            strokeWidth={0}
+          />
+          <path
+            d="M99.46904062450406,67.12607509188038A120,120,0,1,1,-2.2043642384652355e-14,-120L0,0Z"
+            fill="#f47560"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseMove={[Function]}
+            stroke="rgb(171, 82, 67)"
+            strokeWidth={0}
+          />
+          <path
+            d="M105.96020246070137,-56.324377444292956L120.08822945546154,-63.834294436865356L144.08822945546154,-63.834294436865356"
+            fill="none"
+            strokeWidth={1}
+            style={
+              Object {
+                "fill": "none",
+                "stroke": "#777777",
+              }
+            }
+          />
+          <g
+            transform="translate(150.08822945546154, -63.834294436865356)"
+          >
+            <text
+              dominantBaseline="central"
+              style={
+                Object {
+                  "fill": "#333333",
+                  "fontFamily": "sans-serif",
+                  "fontSize": 11,
+                }
+              }
+              textAnchor="start"
+            >
+              used
+            </text>
+          </g>
+          <path
+            d="M-105.96020246070134,56.32437744429299L-120.08822945546152,63.83429443686539L-144.08822945546152,63.83429443686539"
+            fill="none"
+            strokeWidth={1}
+            style={
+              Object {
+                "fill": "none",
+                "stroke": "#777777",
+              }
+            }
+          />
+          <g
+            transform="translate(-150.08822945546152, 63.83429443686539)"
+          >
+            <text
+              dominantBaseline="central"
+              style={
+                Object {
+                  "fill": "#333333",
+                  "fontFamily": "sans-serif",
+                  "fontSize": 11,
+                }
+              }
+              textAnchor="end"
+            >
+              availble
+            </text>
+          </g>
+          <g
+            style={
+              Object {
+                "pointerEvents": "none",
+              }
+            }
+            transform="translate(52.980101230350684, -28.162188722146478)"
+          >
+            <text
+              dominantBaseline="central"
+              style={
+                Object {
+                  "fill": "#333333",
+                  "fontFamily": "sans-serif",
+                  "fontSize": 11,
+                }
+              }
+              textAnchor="middle"
+            >
+              2400
+            </text>
+          </g>
+          <g
+            style={
+              Object {
+                "pointerEvents": "none",
+              }
+            }
+            transform="translate(-52.98010123035067, 28.162188722146496)"
+          >
+            <text
+              dominantBaseline="central"
+              style={
+                Object {
+                  "fill": "#333333",
+                  "fontFamily": "sans-serif",
+                  "fontSize": 11,
+                }
+              }
+              textAnchor="middle"
+            >
+              4567
+            </text>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+`;

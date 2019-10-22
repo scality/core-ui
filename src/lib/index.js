@@ -19,7 +19,7 @@ import Tabs from "./components/tabs/Tabs.component";
 import Select from "./components/select/Select.component";
 import Modal from "./components/modal/Modal.component";
 import Tooltip from "./components/tooltip/Tooltip.component";
-
+//import Testchart from "./components/testchart/Testchart.component";
 import { LOADER_SIZE } from "./components/constants";
 
 export {
@@ -42,4 +42,5 @@ export {
   Select,
   Modal,
   Tooltip
+  // Testchart
 };

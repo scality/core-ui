@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Pierechart Default 1`] = `
+<div>
+  <div
+    className="sc-bdVaJa bDWFJH sc-pierechart"
+  >
+    <div
+      className="recharts-wrapper"
+      style={
+        Object {
+          "cursor": "default",
+          "height": 400,
+          "position": "relative",
+          "width": 400,
+        }
+      }
+    >
+      <svg
+        className="recharts-surface"
+        height={400}
+        version="1.1"
+        viewBox="0 0 400 400"
+        width={400}
+      >
+        <defs>
+          <clipPath
+            id="recharts1-clip"
+          >
+            <rect
+              height={390}
+              width={390}
+              x={5}
+              y={5}
+            />
+          </clipPath>
+        </defs>
+        <g
+          className="recharts-layer recharts-pie"
+        >
+          <g
+            className="recharts-layer"
+          >
+            <g
+              className="recharts-layer recharts-pie-sector"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <g>
+                <text
+                  dy={8}
+                  fill="#FF8F1C"
+                  textAnchor="middle"
+                  x={205}
+                  y={205}
+                >
+                  used
+                </text>
+                <path
+                  d="M247.24328308321972,125.52984815447398L256.6306793239352,107.86981441102377L278.6306793239352,107.86981441102377"
+                  fill="none"
+                  stroke="#FF8F1C"
+                />
+                <circle
+                  cx={278.6306793239352}
+                  cy={107.86981441102377}
+                  fill="#FF8F1C"
+                  r={2}
+                  stroke="none"
+                />
+                <text
+                  fill="#333"
+                  textAnchor="start"
+                  x={290.6306793239352}
+                  y={107.86981441102377}
+                >
+                  2400 GB
+                </text>
+                <text
+                  dy={18}
+                  fill="#999"
+                  textAnchor="start"
+                  x={290.6306793239352}
+                  y={107.86981441102377}
+                >
+                  (Rate 34.45%)
+                </text>
+              </g>
+            </g>
+            <g
+              className="recharts-layer recharts-pie-sector"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+`;

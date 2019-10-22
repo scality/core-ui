@@ -3,7 +3,7 @@
 exports[`Storyshots Steppers Default 1`] = `
 <div>
   <div
-    className="sc-steppers sc-bdVaJa bDWFJH"
+    className="sc-bdVaJa bDWFJH sc-steppers"
   >
     <div
       className="sc-bwzfXH jamqMm"
@@ -63,7 +63,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-EHOje iUebre"
         >
           <button
-            className="sc-button sc-iwsKbI iZLdlJ"
+            className="sc-iwsKbI iZLdlJ sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

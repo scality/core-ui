@@ -3,7 +3,7 @@
 exports[`Storyshots Toggle Default 1`] = `
 <div>
   <div
-    className="sc-toggle sc-bdVaJa gEyPxw"
+    className="sc-bdVaJa gEyPxw sc-toggle"
   >
     <label
       className="sc-bwzfXH kUCBNx"
@@ -20,13 +20,13 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="text sc-htpNat efAdPk"
+      className="sc-htpNat efAdPk text"
     >
       Airplane Mode
     </span>
   </div>
   <div
-    className="sc-toggle sc-bdVaJa gEyPxw"
+    className="sc-bdVaJa gEyPxw sc-toggle"
   >
     <label
       className="sc-bwzfXH kUCBNx"
@@ -43,7 +43,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="text sc-htpNat efAdPk"
+      className="sc-htpNat efAdPk text"
     >
       Airplane Mode
     </span>

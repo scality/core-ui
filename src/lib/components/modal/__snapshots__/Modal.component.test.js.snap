@@ -3,13 +3,13 @@
 exports[`Storyshots Modal Default 1`] = `
 <div>
   <div
-    className="sc-modal sc-bdVaJa gIywMY"
+    className="sc-bdVaJa gIywMY sc-modal"
   >
     <div
-      className="sc-modal-content sc-bwzfXH jICJi"
+      className="sc-bwzfXH jICJi sc-modal-content"
     >
       <div
-        className="sc-modal-header sc-htpNat fPOfap"
+        className="sc-htpNat fPOfap sc-modal-header"
       >
         <span
           className="sc-bxivhb jmnWmC"
@@ -26,14 +26,14 @@ exports[`Storyshots Modal Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-modal-body sc-ifAKCX ftDzci"
+        className="sc-ifAKCX ftDzci sc-modal-body"
       >
         <span>
           Do you want a cookie?
         </span>
       </div>
       <div
-        className="sc-modal-footer sc-EHOje iWyHIu"
+        className="sc-EHOje iWyHIu sc-modal-footer"
       >
         <div
           style={
@@ -44,7 +44,7 @@ exports[`Storyshots Modal Default 1`] = `
           }
         >
           <button
-            className="sc-button sc-iwsKbI gBNfWZ"
+            className="sc-iwsKbI gBNfWZ sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -66,7 +66,7 @@ exports[`Storyshots Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-button sc-iwsKbI iZLdlJ"
+            className="sc-iwsKbI iZLdlJ sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

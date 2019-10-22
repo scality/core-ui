@@ -13,10 +13,10 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-sidebar sc-bdVaJa ebxrwA"
+      className="sc-bdVaJa ebxrwA sc-sidebar"
     >
       <div
-        className="sc-sidebar-item sc-bwzfXH kUtkie"
+        className="sc-bwzfXH kUtkie sc-sidebar-item"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -32,7 +32,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         />
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-bwzfXH gEDodU sc-sidebar-item"
         onClick={[Function]}
         title="Servers"
       >
@@ -45,7 +45,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-bwzfXH gEDodU sc-sidebar-item"
         onClick={[Function]}
         title="Disks"
       >
@@ -70,10 +70,10 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-sidebar sc-bdVaJa eZKrii"
+      className="sc-bdVaJa eZKrii sc-sidebar"
     >
       <div
-        className="sc-sidebar-item sc-bwzfXH kUtkie"
+        className="sc-bwzfXH kUtkie sc-sidebar-item"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -94,7 +94,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         />
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-bwzfXH gEDodU sc-sidebar-item"
         onClick={[Function]}
         title="Servers"
       >
@@ -112,7 +112,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-bwzfXH gEDodU sc-sidebar-item"
         onClick={[Function]}
         title="Disks"
       >

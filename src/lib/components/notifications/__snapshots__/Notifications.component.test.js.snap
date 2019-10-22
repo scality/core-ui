@@ -3,10 +3,10 @@
 exports[`Storyshots Notifications Default 1`] = `
 <div>
   <div
-    className="sc-notifications sc-ifAKCX foTAQB"
+    className="sc-ifAKCX foTAQB sc-notifications"
   >
     <div
-      className="sc-notification sc-bdVaJa biSBkq"
+      className="sc-bdVaJa biSBkq sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -29,7 +29,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa gzpENg"
+      className="sc-bdVaJa gzpENg sc-notification"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -53,10 +53,10 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-ifAKCX rJoNA"
+    className="sc-ifAKCX rJoNA sc-notifications"
   >
     <div
-      className="sc-notification sc-bdVaJa cojbSw"
+      className="sc-bdVaJa cojbSw sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -78,7 +78,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa kWDgMl"
+      className="sc-bdVaJa kWDgMl sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -106,10 +106,10 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-ifAKCX fQVauU"
+    className="sc-ifAKCX fQVauU sc-notifications"
   >
     <div
-      className="sc-notification sc-bdVaJa cnrULM"
+      className="sc-bdVaJa cnrULM sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -131,7 +131,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa tGEAk"
+      className="sc-bdVaJa tGEAk sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -159,10 +159,10 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-notifications sc-ifAKCX dsdPyg"
+    className="sc-ifAKCX dsdPyg sc-notifications"
   >
     <div
-      className="sc-notification sc-bdVaJa cojbSw"
+      className="sc-bdVaJa cojbSw sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -184,7 +184,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa cnrULM"
+      className="sc-bdVaJa cnrULM sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
