@@ -17,6 +17,15 @@ export type LoaderSize =
   | "huge"
   | "massive";
 
+export type Size =
+  | "smaller"
+  | "small"
+  | "base"
+  | "large"
+  | "larger"
+  | "huge"
+  | "massive";
+
 export type Variant =
   | "primary"
   | "secondary"
