@@ -1,6 +1,6 @@
 //@flow
 import * as defaultTheme from "../../style/theme";
-import type { Variant, LoaderSize } from "../constants";
+import type { Variant, Size } from "../constants";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
 
@@ -16,7 +16,7 @@ type Props = {
   buttonIcon?: Node,
   onClick?: any => void,
   onRemove?: any => void,
-  size?: LoaderSize
+  size?: Size
 };
 
 const ChipsContainer = styled.div`
