@@ -64,18 +64,83 @@ const encoding = {
     field: "time",
     type: "temporal",
     timeUnit: "yearmonthdatehoursminutes",
-    scale: { type: "utc" }
+    title: "time"
   },
-  y: { field: "total_space", type: "quantitative" },
-  y2: { field: "used_space", type: "quantitative" }
+  tooltip: [
+    {
+      field: "time",
+      type: "temporal",
+      timeUnit: "yearmonthdatehoursminutes"
+    },
+    {
+      field: "total_space",
+      type: "quantitative",
+      title: "TOTAL SPACE"
+    },
+    {
+      field: "used_space",
+      type: "quantitative",
+      title: "USED SPACE"
+    }
+  ]
 };
 
+const layer = [
+  {
+    mark: { type: "line", color: "green" },
+    encoding: {
+      y: {
+        field: "total_space",
+        type: "quantitative",
+        title: "TOTAL SPACE (/GB)"
+      }
+    }
+  },
+  {
+    mark: { type: "line", color: "orange" },
+    encoding: {
+      y: {
+        field: "used_space",
+        type: "quantitative",
+        title: "USED SPACE (/GB)"
+      }
+    }
+  },
+  {
+    mark: "rule",
+    selection: {
+      index: {
+        type: "single",
+        on: "mousemove",
+        encodings: ["x"],
+        nearest: true
+      }
+    },
+    encoding: {
+      color: {
+        condition: {
+          selection: { not: "index" },
+          value: "transparent"
+        }
+      }
+    }
+  }
+];
+
 const id = "#vis";
+
 storiesOf("Testchart", module).add("Default", () => {
   return (
     <div>
       <h3>Vega-Lite linechart demo</h3>
-      <Testchart id={id} data={data} encoding={encoding} />
+      <Testchart
+        id={id}
+        data={data}
+        encoding={encoding}
+        layer={layer}
+        height={400}
+        width={1000}
+      />
     </div>
   );
 });
