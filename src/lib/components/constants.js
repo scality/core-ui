@@ -8,15 +8,6 @@ export const LOADER_SIZE = {
   huge: "huge",
   massive: "massive"
 };
-export type LoaderSize =
-  | "smaller"
-  | "small"
-  | "base"
-  | "large"
-  | "larger"
-  | "huge"
-  | "massive";
-
 export type Size =
   | "smaller"
   | "small"
