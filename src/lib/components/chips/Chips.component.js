@@ -34,29 +34,31 @@ const ChipsContainer = styled.div`
     switch (props.size) {
       case "smaller":
         return css`
-          font-size: ${defaultTheme.fontSize.smaller};
+          font-size: ${defaultTheme.fontSize[props.size]};
           ${defaultStyle}
           height: 27px;
         `;
       case "small":
         return css`
-          font-size: ${defaultTheme.fontSize.small};
+          font-size: ${defaultTheme.fontSize[props.size]};
           ${defaultStyle}
           height: 30px;
         `;
       case "large":
         return css`
-          font-size: ${defaultTheme.fontSize.larger};
+          font-size: ${defaultTheme.fontSize[props.size]};
           ${defaultStyle}
           height: 35px;
           width: 200px;
+          border-radius: 40px;
         `;
       case "larger":
         return css`
-          font-size: ${defaultTheme.fontSize.huge};
+          font-size: ${defaultTheme.fontSize[props.size]};
           ${defaultStyle}
           height: 40px;
           width: 210px;
+          border-radius: 50px;
         `;
       default:
         return css`
@@ -91,20 +93,36 @@ const ChipsContainer = styled.div`
 `;
 
 export const ChipsIcon = styled.span`
-  ${props =>
-    props.text &&
-    css`
-      padding-right: ${defaultTheme.padding.smaller};
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      background-color: ${lighten(
-        0.15,
-        mergeTheme(props.theme, defaultTheme)[props.variant]
-      ).toString()};
-      border-radius: 15px;
-      padding: 7px 8px;
-    `}
+  ${props => {
+    let borderRadiusAndPadding;
+
+    switch (props.size) {
+      case "smaller":
+        borderRadiusAndPadding = `border-radius: 15px;`; break;
+      case "small":
+        borderRadiusAndPadding = `border-radius: 15px;`; break;
+      case "large":
+        borderRadiusAndPadding = `border-radius: 30px;`; break;
+      case "larger":
+        borderRadiusAndPadding = `border-radius: 30px;`; break;
+      default:
+        borderRadiusAndPadding = `border-radius: 15px;`; break;
+    }
+
+    if (props.text) 
+      return css`
+        padding-right: ${defaultTheme.padding.smaller};
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: ${lighten(
+          0.15,
+          mergeTheme(props.theme, defaultTheme)[props.variant]
+        ).toString()};
+        padding: 7px 8px;
+        ${borderRadiusAndPadding}
+      `
+  }}
 `;
 
 export const ChipsButton = styled.span`
@@ -164,7 +182,7 @@ function Chips({
       size={size}
     >
       {icon && (
-        <ChipsIcon text={text} variant={variant}>
+        <ChipsIcon text={text} variant={variant} size={size}>
           {icon}
         </ChipsIcon>
       )}

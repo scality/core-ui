@@ -6,11 +6,11 @@ import { lighten } from "polished";
 import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
-import type { LoaderSize, Variant } from "../constants";
+import type { Size, Variant } from "../constants";
 
 type Props = {
   text?: string,
-  size?: LoaderSize,
+  size?: Size,
   variant?: Variant,
   outlined?: boolean,
   inverted?: boolean,
