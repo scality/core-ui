@@ -2,6 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import Select from "../src/lib/components/select/Select.component";
+import { Wrapper, Title } from "./common";
 
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
@@ -18,8 +19,8 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 
 storiesOf("Select", module).add("Default", () => {
   return (
-    <div>
-      <h3>Default</h3>
+    <Wrapper>
+      <Title>Default</Title>
       <div style={{ width: "200px" }}>
         <Select
           name="default_select"
@@ -30,7 +31,7 @@ storiesOf("Select", module).add("Default", () => {
           value=""
         />
       </div>
-      <h3>Default with custom formatOptionLabel</h3>
+      <Title>Default with custom formatOptionLabel</Title>
       <div style={{ width: "200px" }}>
         <Select
           name="default_select"
@@ -42,7 +43,7 @@ storiesOf("Select", module).add("Default", () => {
           formatOptionLabel={customFormatOptionLabel}
         />
       </div>
-      <h3>Multi Select</h3>
+      <Title>Multi Select</Title>
       <div style={{ width: "400px" }}>
         <Select
           name="multi_select"
@@ -54,6 +55,6 @@ storiesOf("Select", module).add("Default", () => {
           value={[options[0], options[1]]}
         />
       </div>
-    </div>
+    </Wrapper>
   );
 });
