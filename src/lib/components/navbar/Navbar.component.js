@@ -33,8 +33,12 @@ const NavbarContainer = styled.div`
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
-      background-color: ${brandingTheme.primary};
-      color: ${brandingTheme.secondary};
+      background-color: ${brandingTheme.base};
+      color: ${brandingTheme.primary};
+      .fas,
+      .sc-trigger-text {
+        color: ${brandingTheme.primary};
+      }
     `;
   }};
 `;
@@ -48,16 +52,6 @@ const NavbarMenuItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      .fas {
-        background-color: ${brandingTheme.primary};
-        color: ${brandingTheme.secondary};
-      }
-    `;
-  }}
 
   button {
     margin: 0;
@@ -103,6 +97,7 @@ function NavBar({
   const currentLanguage = languages.find(
     language => language.selected === true
   );
+
   return (
     <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
@@ -110,6 +105,7 @@ function NavBar({
           <NavbarMenuItem onClick={onToggleClick}>
             <Button
               size="larger"
+              variant="base"
               icon={<i className="fas fa-bars" />}
               title="Main Menu"
             />
@@ -129,6 +125,7 @@ function NavBar({
           <NavbarMenuItem>
             <Dropdown
               size="larger"
+              variant="base"
               items={filterLanguage}
               icon={<i className="fas fa-globe" />}
               title={currentLanguage ? currentLanguage.name : languages[0].name}
@@ -141,6 +138,7 @@ function NavBar({
           <NavbarMenuItem>
             <Dropdown
               size="larger"
+              variant="base"
               items={applications}
               icon={<i className="fas fa-th" />}
               title="Scality Apps"
@@ -152,6 +150,7 @@ function NavBar({
           <NavbarMenuItem>
             <Dropdown
               size="larger"
+              variant="base"
               items={help}
               icon={<i className="fas fa-question-circle" />}
               title="Help"
@@ -162,6 +161,7 @@ function NavBar({
         {user && (
           <NavbarMenuItem>
             <Dropdown
+              variant="base"
               items={user.actions}
               icon={<i className="fas fa-user" />}
               title={user.name}

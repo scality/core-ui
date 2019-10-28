@@ -15,7 +15,7 @@ const help = [
 ];
 
 const user = {
-  name: "Charles NGUYEN",
+  name: "Carlito",
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
