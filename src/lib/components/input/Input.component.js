@@ -25,7 +25,6 @@ type Props = {
 
 const InputContainer = styled.div`
   display: inline-flex;
-
   .sc-checkbox {
     margin: ${defaultTheme.padding.smaller} 0;
   }
@@ -35,15 +34,19 @@ const InputContainer = styled.div`
   }
 
   input.sc-input-type {
+    ${props => {
+      const brandingTheme = mergeTheme(props.theme, defaultTheme);
+      return css`
+        background-color: ${brandingTheme.backgroundContrast1};
+        color: ${brandingTheme.text};
+        border: 1px solid
+          ${props.error ? brandingTheme.danger : brandingTheme.text};
+      `;
+    }};
     padding: 8px ${defaultTheme.padding.small};
     font-size: ${defaultTheme.fontSize.base};
     display: block;
     border-radius: 4px;
-    border: 1px solid
-      ${props =>
-        props.error
-          ? mergeTheme(props.theme, defaultTheme).danger
-          : defaultTheme.gray};
   }
 
   input.sc-input-type:focus {
@@ -89,6 +92,10 @@ const LabelStyle = styled.label`
   align-self: flex-start;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.base};
+  color: ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return brandingTheme.text;
+  }};
 `;
 
 const InputErrorMessage = styled.span`
