@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots SearchInput Default 1`] = `
-<div>
-  <h3>
+<div
+  className="sc-gZMcBi cINIPt"
+>
+  <h3
+    className="sc-gqjmRU fdxAVz"
+  >
     Default
   </h3>
   <div
@@ -13,10 +17,10 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-searchinput sc-gzVnrw sksES"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-bxivhb iaQBfF"
       >
         <div
           className="sc-input-wrapper sc-bZQynM AMncx"
@@ -34,7 +38,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq bGFxWO"
+        className="sc-htoDjs sc-dnqmqq krVvXm"
         disabled={false}
         onClick={[Function]}
       >
@@ -43,7 +47,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-htoDjs sc-iwsKbI czdqdD"
         onClick={[Function]}
       >
         <i
@@ -52,7 +56,9 @@ exports[`Storyshots SearchInput Default 1`] = `
       </button>
     </div>
   </div>
-  <h3>
+  <h3
+    className="sc-gqjmRU fdxAVz"
+  >
     Search Input filled
   </h3>
   <div
@@ -63,11 +69,11 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw kjCCUz"
+      className="sc-searchinput sc-gzVnrw sksES"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-bxivhb iaQBfF"
       >
         <div
           className="sc-input-wrapper sc-bZQynM AMncx"
@@ -84,7 +90,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq bGFxWO"
+        className="sc-htoDjs sc-dnqmqq krVvXm"
         disabled={false}
         onClick={[Function]}
       >
@@ -93,7 +99,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-htoDjs sc-iwsKbI czdqdD"
         onClick={[Function]}
       >
         <i
@@ -102,7 +108,9 @@ exports[`Storyshots SearchInput Default 1`] = `
       </button>
     </div>
   </div>
-  <h3>
+  <h3
+    className="sc-gqjmRU fdxAVz"
+  >
     Disable the default toggle
   </h3>
   <div
@@ -113,10 +121,10 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw hqmodQ"
+      className="sc-searchinput sc-gzVnrw iCGhZM"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-bxivhb iaQBfF"
       >
         <div
           className="sc-input-wrapper sc-bZQynM AMncx"
@@ -134,7 +142,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq fzqjWe"
+        className="sc-htoDjs sc-dnqmqq WdYKm"
         disabled={true}
         onClick={[Function]}
       >
@@ -143,7 +151,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-htoDjs sc-iwsKbI czdqdD"
         onClick={[Function]}
       >
         <i
@@ -152,7 +160,9 @@ exports[`Storyshots SearchInput Default 1`] = `
       </button>
     </div>
   </div>
-  <h3>
+  <h3
+    className="sc-gqjmRU fdxAVz"
+  >
     Disable the default toggle undefined onReset action
   </h3>
   <div
@@ -163,10 +173,10 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw hqmodQ"
+      className="sc-searchinput sc-gzVnrw iCGhZM"
     >
       <div
-        className="sc-input sc-bxivhb ktEkRb"
+        className="sc-input sc-bxivhb iaQBfF"
       >
         <div
           className="sc-input-wrapper sc-bZQynM AMncx"
@@ -184,7 +194,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-htoDjs sc-dnqmqq fzqjWe"
+        className="sc-htoDjs sc-dnqmqq WdYKm"
         disabled={true}
         onClick={[Function]}
       >
@@ -193,7 +203,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-htoDjs sc-iwsKbI dBQYwg"
+        className="sc-htoDjs sc-iwsKbI czdqdD"
         onClick={[Function]}
       >
         <i
