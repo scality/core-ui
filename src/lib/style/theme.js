@@ -32,18 +32,20 @@ export const grayLighter = "#D8DCDE";
 export const grayLightest = "#E9EBED";
 
 export const brand = {
-  primary: blue,
-  secondary: grayLightest,
+  base: blueLighter,
+  baseContrast1: "#94B3CB",
+  primary: "#403e40",
+  secondary: "#e99121",
   success: jade,
   info: turquoise,
-  warning: mediumOrange,
+  warning: yellowOrange,
   danger: warmRed,
-  base: gray
+  background: white,
+  backgroundContrast1: white,
+  backgroundContrast2: "#E6E6E6",
+  text: gray,
+  border: gray
 };
-
-//body
-export const bodyBg = white;
-export const textColor = grayDark;
 
 //navbar
 export const navbarHeight = "50px";
