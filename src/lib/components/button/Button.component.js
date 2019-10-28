@@ -96,19 +96,19 @@ export const ButtonStyled = styled.button`
         border-width: 1px;
         border-style: solid;
         border-color: ${brandingTheme[props.variant]};
-        background-color: ${defaultTheme.white};
+        background-color: ${brandingTheme.background};
         color: ${brandingTheme[props.variant]};
         
         &:hover{      
           border-color: ${brandingTheme[props.variant]};
           background-color: ${brandLight};
-          color: ${defaultTheme.white};
+          color: ${brandingTheme.background};
         }
 
         &:active {      
           border-color: ${brandingTheme[props.variant]};
           background-color: ${brandLighter};
-          color: ${defaultTheme.white};
+          color:  ${brandingTheme.background};
         }
         `
         : `          

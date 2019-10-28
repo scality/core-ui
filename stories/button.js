@@ -1,24 +1,24 @@
 // @flow
 import React from "react";
-import Button from "../src/lib/components/button/Button.component";
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import withPropsCombinations from "react-storybook-addon-props-combinations";
+import Button from "../src/lib/components/button/Button.component";
+import { Wrapper, Title } from "./common";
 
 storiesOf("Button", module)
   .addDecorator(withKnobs)
   .add("Default", () => {
     return (
-      <div className="storybook-button">
-        <h3>Button Default</h3>
+      <Wrapper className="storybook-button">
+        <Title>Button Default</Title>
         <Button size="smaller" text="Smaller" />
         <Button size="small" text="Small" />
         <Button text="default" data-cy="default_button" />
         <Button size="large" text="Large" />
         <Button size="larger" text="Larger" />
 
-        <h3>Button Variant</h3>
+        <Title>Button Variant</Title>
         <Button variant="primary" text="primary" />
         <Button variant="secondary" text="secondary" />
         <Button variant="success" text="success" />
@@ -26,31 +26,31 @@ storiesOf("Button", module)
         <Button variant="warning" text="warning" />
         <Button variant="danger" text="danger" />
 
-        <h3>Button Outlined</h3>
+        <Title>Button Outlined</Title>
         <Button
           outlined
           text="Hello"
           onClick={action("Button Outlined Click")}
         />
 
-        <h3>Button Disabled</h3>
+        <Title>Button Disabled</Title>
         <Button
           disabled
           text="Hello"
           onClick={action("Button Disabled Click")}
         />
 
-        <h3>Button Link</h3>
+        <Title>Button Link</Title>
         <Button text="Hello" href="/" />
 
-        <h3>Button Loading</h3>
+        <Title>Button Loading</Title>
         <Button
           text="Hello"
           icon={<i className="fas fa-star" />}
           isLoading={true}
         />
 
-        <h3>Button Text Icon</h3>
+        <Title>Button Text Icon</Title>
         <Button
           size="smaller"
           icon={<i className="fas fa-star" />}
@@ -73,14 +73,14 @@ storiesOf("Button", module)
           text="Larger"
         />
 
-        <h3>Icon Button</h3>
+        <Title>Icon Button</Title>
         <Button size="smaller" icon={<i className="fas fa-star" />} />
         <Button size="small" icon={<i className="fas fa-star" />} />
         <Button icon={<i className="fas fa-star" />} />
         <Button size="large" icon={<i className="fas fa-star" />} />
         <Button size="larger" icon={<i className="fas fa-star" />} />
 
-        <h3>Icon Button Inverted</h3>
+        <Title>Icon Button Inverted</Title>
         <Button
           inverted={true}
           size="smaller"
@@ -102,15 +102,6 @@ storiesOf("Button", module)
           size="larger"
           icon={<i className="fas fa-star" />}
         />
-      </div>
+      </Wrapper>
     );
-  })
-  .add(
-    "Combinations",
-    withPropsCombinations(Button, {
-      outlined: [false, true],
-      variant: ["primary", "secondary", "success", "info", "warning", "danger"],
-      text: ["Hello"],
-      icon: [<i className="fas fa-star" />]
-    })
-  );
+  });
