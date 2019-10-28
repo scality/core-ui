@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import Steppers from "../src/lib/components/steppers/Steppers.component";
 import { action } from "@storybook/addon-actions";
 import Button from "../src/lib/components/button/Button.component";
+import { Wrapper } from "./common";
 
 const steps = [
   {
@@ -65,8 +66,8 @@ const steps = [
 
 storiesOf("Steppers", module).add("Default", () => {
   return (
-    <div>
+    <Wrapper>
       <Steppers steps={steps} activeStep={1} />
-    </div>
+    </Wrapper>
   );
 });

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Steppers Default 1`] = `
-<div>
+<div
+  className="sc-fjdhpX fYqDPr"
+>
   <div
     className="sc-steppers sc-bdVaJa bDWFJH"
   >
@@ -28,7 +30,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <span
-          className="sc-ifAKCX QEthr"
+          className="sc-ifAKCX jWzwRg"
         >
           Node Registerd
         </span>
@@ -41,7 +43,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <div
-          className="sc-bxivhb hlhDUq"
+          className="sc-bxivhb bMIpTm"
         >
           <span>
             2
@@ -55,7 +57,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <span
-          className="sc-ifAKCX QEthr"
+          className="sc-ifAKCX jWzwRg"
         >
           Deploy Salt Minion on node
         </span>
@@ -63,7 +65,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-EHOje iUebre"
         >
           <button
-            className="sc-button sc-iwsKbI dnERAW"
+            className="sc-button sc-iwsKbI bVCWGk"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -108,7 +110,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <span
-          className="sc-ifAKCX QEthr"
+          className="sc-ifAKCX jWzwRg"
         >
           Add node to Workload Plane
         </span>
@@ -135,7 +137,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <span
-          className="sc-ifAKCX QEthr"
+          className="sc-ifAKCX jWzwRg"
         >
           Add node to Control Plane
         </span>
@@ -159,7 +161,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-htpNat dePyzG"
       >
         <span
-          className="sc-ifAKCX QEthr"
+          className="sc-ifAKCX jWzwRg"
         >
           Extend etcd cluster to node
         </span>
