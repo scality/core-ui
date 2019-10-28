@@ -5,6 +5,7 @@ import * as defaultTheme from "../../style/theme";
 import CheckBox from "./../checkbox/Checkbox.component";
 import Button from "./../button/Button.component";
 import Select from "./../select/Select.component";
+import { mergeTheme } from "../../utils";
 
 export type ItemProps = {
   selected?: boolean,
@@ -36,12 +37,13 @@ type MultiSelectProps = {
   onItemRemove?: (any, any) => void //on item remove button click
 };
 
-const MultiSelectContainer = styled.div``;
+const MultiSelectContainer = styled.div`
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+`;
 
 const MultiSelectTitle = styled.h3`
   padding: ${defaultTheme.padding.base} 0;
   margin: 0;
-  color: ${defaultTheme.grayDarker};
   font-weight: ${defaultTheme.fontWeight.bold};
   font-size: ${defaultTheme.fontSize.large};
 `;
@@ -131,6 +133,7 @@ function MultiSelectItem(props: ItemProps) {
         {onItemRemove && (
           <Button
             inverted={true}
+            variant="danger"
             onClick={event => onItemRemove(label, event)}
             icon={<i className="fas fa-trash" />}
           />

@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import MultiSelect from "../src/lib/components/multiselect/MultiSelect.component";
 import { action } from "@storybook/addon-actions";
+import { Wrapper, Title } from "./common";
 
 const items = [
   {
@@ -69,8 +70,8 @@ const search = {
 
 storiesOf("MultiSelect", module).add("Default", () => {
   return (
-    <div>
-      <h3>MultiSelect List</h3>
+    <Wrapper>
+      <Title>MultiSelect List</Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"
@@ -79,7 +80,7 @@ storiesOf("MultiSelect", module).add("Default", () => {
           onItemRemove={action("onItemRemove clicked")}
         />
       </div>
-      <h3>MultiSelect List without search</h3>
+      <Title>MultiSelect List without search</Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"
@@ -87,7 +88,7 @@ storiesOf("MultiSelect", module).add("Default", () => {
           onItemRemove={action("onItemRemove clicked")}
         />
       </div>
-      <h3>MultiSelect List without Favourite</h3>
+      <Title>MultiSelect List without Favourite</Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"
@@ -96,7 +97,7 @@ storiesOf("MultiSelect", module).add("Default", () => {
           onItemRemove={action("onItemRemove clicked")}
         />
       </div>
-      <h3>MultiSelect List without Favourite and Selectbox</h3>
+      <Title>MultiSelect List without Favourite and Selectbox</Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"
@@ -105,7 +106,9 @@ storiesOf("MultiSelect", module).add("Default", () => {
           onItemRemove={action("onItemRemove clicked")}
         />
       </div>
-      <h3>MultiSelect List without Remove Button, Favourite and Selectbox</h3>
+      <Title>
+        MultiSelect List without Remove Button, Favourite and Selectbox
+      </Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect
           title="Destination Locations"
@@ -113,12 +116,12 @@ storiesOf("MultiSelect", module).add("Default", () => {
           search={search}
         />
       </div>
-      <h3>
+      <Title>
         MultiSelect List without Title, Remove Button, Favourite and Selectbox
-      </h3>
+      </Title>
       <div className="storybook-mutiselect-container">
         <MultiSelect items={itemsWithoutCheckboxFavourite} search={search} />
       </div>
-    </div>
+    </Wrapper>
   );
 });
