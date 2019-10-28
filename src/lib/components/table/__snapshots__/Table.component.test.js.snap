@@ -2,240 +2,244 @@
 
 exports[`Storyshots Table Center a column with CSS 1`] = `
 <div
-  className="sc-kAzzGY pgMWR"
+  className="sc-kGXeez eEyLKz"
 >
   <div
-    className="sc-table"
-    style={
-      Object {
-        "height": "auto",
-        "overflow": "visible",
-        "width": "auto",
-      }
-    }
+    className="sc-kGXeez eEyLKz"
   >
     <div
-      className="sc-VigVT fUbDfg"
+      className="sc-table"
+      style={
+        Object {
+          "height": "auto",
+          "overflow": "visible",
+          "width": "auto",
+        }
+      }
     >
       <div
-        aria-colcount={6}
-        aria-rowcount={100}
-        className="ReactVirtualized__Table"
-        role="grid"
-        style={Object {}}
+        className="sc-VigVT kbdswJ"
       >
         <div
-          className="ReactVirtualized__Table__headerRow sc-table-row"
-          role="row"
-          style={
-            Object {
-              "height": 40,
-              "overflow": "hidden",
-              "paddingRight": 0,
-              "width": 0,
-            }
-          }
+          aria-colcount={6}
+          aria-rowcount={100}
+          className="ReactVirtualized__Table"
+          role="grid"
+          style={Object {}}
         >
           <div
-            aria-label="Id"
-            aria-sort="none"
-            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="columnheader"
+            className="ReactVirtualized__Table__headerRow sc-table-row"
+            role="row"
             style={
               Object {
-                "WebkitFlex": "0 1 50px",
-                "flex": "0 1 50px",
-                "msFlex": "0 1 50px",
+                "height": 40,
+                "overflow": "hidden",
+                "paddingRight": 0,
+                "width": 0,
               }
             }
-            tabIndex={0}
           >
             <div
-              className="sc-jzJRlG dPOBZH"
+              aria-label="Id"
+              aria-sort="none"
+              className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "0 1 50px",
+                  "flex": "0 1 50px",
+                  "msFlex": "0 1 50px",
+                }
+              }
+              tabIndex={0}
             >
-              <label>
-                Id
-              </label>
               <div
-                className="sc-cSHVUG uMoDM"
-                selected={false}
+                className="sc-jzJRlG dPOBZH"
               >
-                <i
-                  className="fas fa-sort-up"
-                />
-                <i
-                  className="fas fa-sort-down"
-                />
+                <label>
+                  Id
+                </label>
+                <div
+                  className="sc-cSHVUG uMoDM"
+                  selected={false}
+                >
+                  <i
+                    className="fas fa-sort-up"
+                  />
+                  <i
+                    className="fas fa-sort-down"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              aria-label="First Name"
+              aria-sort="ascending"
+              className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "0 1 150px",
+                  "flex": "0 1 150px",
+                  "msFlex": "0 1 150px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                className="sc-jzJRlG dPOBZH"
+              >
+                <label>
+                  First Name
+                </label>
+                <div
+                  className="sc-cSHVUG jEmWiM"
+                  selected={true}
+                >
+                  <i
+                    className="fas fa-sort-up"
+                  />
+                  <i
+                    className="fas fa-sort-down"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              aria-label="Last Name"
+              aria-sort="none"
+              className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "0 1 150px",
+                  "flex": "0 1 150px",
+                  "msFlex": "0 1 150px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                className="sc-jzJRlG dPOBZH"
+              >
+                <label>
+                  Last Name
+                </label>
+                <div
+                  className="sc-cSHVUG uMoDM"
+                  selected={false}
+                >
+                  <i
+                    className="fas fa-sort-up"
+                  />
+                  <i
+                    className="fas fa-sort-down"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="ReactVirtualized__Table__headerColumn sc-table-header"
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "1 1 200px",
+                  "flex": "1 1 200px",
+                  "msFlex": "1 1 200px",
+                }
+              }
+            >
+              <div
+                className="sc-jzJRlG dPOBZH"
+              >
+                <label>
+                  Email
+                </label>
+              </div>
+            </div>
+            <div
+              className="ReactVirtualized__Table__headerColumn sc-table-header"
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "0 1 150px",
+                  "flex": "0 1 150px",
+                  "msFlex": "0 1 150px",
+                }
+              }
+            >
+              <div
+                className="sc-jzJRlG dPOBZH"
+              >
+                <label>
+                  Ip Address
+                </label>
+              </div>
+            </div>
+            <div
+              aria-label="Age"
+              aria-sort="none"
+              className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "WebkitFlex": "0 1 50px",
+                  "flex": "0 1 50px",
+                  "msFlex": "0 1 50px",
+                }
+              }
+              tabIndex={0}
+            >
+              <div
+                className="sc-jzJRlG dPOBZH"
+              >
+                <label>
+                  Age
+                </label>
+                <div
+                  className="sc-cSHVUG uMoDM"
+                  selected={false}
+                >
+                  <i
+                    className="fas fa-sort-up"
+                  />
+                  <i
+                    className="fas fa-sort-down"
+                  />
+                </div>
               </div>
             </div>
           </div>
           <div
-            aria-label="First Name"
-            aria-sort="ascending"
-            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="columnheader"
+            aria-label="grid"
+            aria-readonly={true}
+            className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+            onScroll={[Function]}
+            role="rowgroup"
             style={
               Object {
-                "WebkitFlex": "0 1 150px",
-                "flex": "0 1 150px",
-                "msFlex": "0 1 150px",
+                "WebkitOverflowScrolling": "touch",
+                "boxSizing": "border-box",
+                "direction": "ltr",
+                "height": -40,
+                "overflowX": "hidden",
+                "overflowY": "auto",
+                "position": "relative",
+                "width": 0,
+                "willChange": "transform",
               }
             }
             tabIndex={0}
-          >
-            <div
-              className="sc-jzJRlG dPOBZH"
-            >
-              <label>
-                First Name
-              </label>
-              <div
-                className="sc-cSHVUG ftEIoF"
-                selected={true}
-              >
-                <i
-                  className="fas fa-sort-up"
-                />
-                <i
-                  className="fas fa-sort-down"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            aria-label="Last Name"
-            aria-sort="none"
-            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="columnheader"
-            style={
-              Object {
-                "WebkitFlex": "0 1 150px",
-                "flex": "0 1 150px",
-                "msFlex": "0 1 150px",
-              }
-            }
-            tabIndex={0}
-          >
-            <div
-              className="sc-jzJRlG dPOBZH"
-            >
-              <label>
-                Last Name
-              </label>
-              <div
-                className="sc-cSHVUG uMoDM"
-                selected={false}
-              >
-                <i
-                  className="fas fa-sort-up"
-                />
-                <i
-                  className="fas fa-sort-down"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className="ReactVirtualized__Table__headerColumn sc-table-header"
-            role="columnheader"
-            style={
-              Object {
-                "WebkitFlex": "1 1 200px",
-                "flex": "1 1 200px",
-                "msFlex": "1 1 200px",
-              }
-            }
-          >
-            <div
-              className="sc-jzJRlG dPOBZH"
-            >
-              <label>
-                Email
-              </label>
-            </div>
-          </div>
-          <div
-            className="ReactVirtualized__Table__headerColumn sc-table-header"
-            role="columnheader"
-            style={
-              Object {
-                "WebkitFlex": "0 1 150px",
-                "flex": "0 1 150px",
-                "msFlex": "0 1 150px",
-              }
-            }
-          >
-            <div
-              className="sc-jzJRlG dPOBZH"
-            >
-              <label>
-                Ip Address
-              </label>
-            </div>
-          </div>
-          <div
-            aria-label="Age"
-            aria-sort="none"
-            className="ReactVirtualized__Table__headerColumn sc-table-header ReactVirtualized__Table__sortableHeaderColumn"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="columnheader"
-            style={
-              Object {
-                "WebkitFlex": "0 1 50px",
-                "flex": "0 1 50px",
-                "msFlex": "0 1 50px",
-              }
-            }
-            tabIndex={0}
-          >
-            <div
-              className="sc-jzJRlG dPOBZH"
-            >
-              <label>
-                Age
-              </label>
-              <div
-                className="sc-cSHVUG uMoDM"
-                selected={false}
-              >
-                <i
-                  className="fas fa-sort-up"
-                />
-                <i
-                  className="fas fa-sort-down"
-                />
-              </div>
-            </div>
-          </div>
+          />
         </div>
-        <div
-          aria-label="grid"
-          aria-readonly={true}
-          className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
-          onScroll={[Function]}
-          role="rowgroup"
-          style={
-            Object {
-              "WebkitOverflowScrolling": "touch",
-              "boxSizing": "border-box",
-              "direction": "ltr",
-              "height": -40,
-              "overflowX": "hidden",
-              "overflowY": "auto",
-              "position": "relative",
-              "width": 0,
-              "willChange": "transform",
-            }
-          }
-          tabIndex={0}
-        />
       </div>
     </div>
   </div>
@@ -244,11 +248,7 @@ exports[`Storyshots Table Center a column with CSS 1`] = `
 
 exports[`Storyshots Table Change column size 1`] = `
 <div
-  style={
-    Object {
-      "height": "100vh",
-    }
-  }
+  className="sc-kAzzGY jZVyLJ"
 >
   <div
     className="sc-table"
@@ -261,7 +261,7 @@ exports[`Storyshots Table Change column size 1`] = `
     }
   >
     <div
-      className="sc-VigVT fUbDfg"
+      className="sc-VigVT kbdswJ"
     >
       <div
         aria-colcount={6}
@@ -340,7 +340,7 @@ exports[`Storyshots Table Change column size 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG ftEIoF"
+                className="sc-cSHVUG jEmWiM"
                 selected={true}
               >
                 <i
@@ -490,11 +490,7 @@ exports[`Storyshots Table Change column size 1`] = `
 
 exports[`Storyshots Table Default 1`] = `
 <div
-  style={
-    Object {
-      "height": "100vh",
-    }
-  }
+  className="sc-kAzzGY jZVyLJ"
 >
   <div
     className="sc-table"
@@ -507,7 +503,7 @@ exports[`Storyshots Table Default 1`] = `
     }
   >
     <div
-      className="sc-VigVT fUbDfg"
+      className="sc-VigVT kbdswJ"
     >
       <div
         aria-colcount={6}
@@ -586,7 +582,7 @@ exports[`Storyshots Table Default 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG ftEIoF"
+                className="sc-cSHVUG jEmWiM"
                 selected={true}
               >
                 <i
@@ -736,11 +732,7 @@ exports[`Storyshots Table Default 1`] = `
 
 exports[`Storyshots Table Empty Table 1`] = `
 <div
-  style={
-    Object {
-      "height": "100vh",
-    }
-  }
+  className="sc-kAzzGY jZVyLJ"
 >
   <div
     className="sc-table"
@@ -753,7 +745,7 @@ exports[`Storyshots Table Empty Table 1`] = `
     }
   >
     <div
-      className="sc-VigVT fUbDfg"
+      className="sc-VigVT kbdswJ"
     >
       <div
         aria-colcount={6}
@@ -867,7 +859,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 Last Name
               </label>
               <div
-                className="sc-cSHVUG dJNMPw"
+                className="sc-cSHVUG jFhtvU"
                 selected={true}
               >
                 <i
@@ -982,11 +974,7 @@ exports[`Storyshots Table Empty Table 1`] = `
 
 exports[`Storyshots Table With rowActions 1`] = `
 <div
-  style={
-    Object {
-      "height": "100vh",
-    }
-  }
+  className="sc-kAzzGY jZVyLJ"
 >
   <div
     className="sc-table"
@@ -999,7 +987,7 @@ exports[`Storyshots Table With rowActions 1`] = `
     }
   >
     <div
-      className="sc-VigVT fUbDfg"
+      className="sc-VigVT kbdswJ"
     >
       <div
         aria-colcount={6}
@@ -1078,7 +1066,7 @@ exports[`Storyshots Table With rowActions 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG ftEIoF"
+                className="sc-cSHVUG jEmWiM"
                 selected={true}
               >
                 <i
