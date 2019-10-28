@@ -4,10 +4,11 @@ import { storiesOf } from "@storybook/react";
 import Modal from "../src/lib/components/modal/Modal.component";
 import Button from "../src/lib/components/button/Button.component";
 import { action } from "@storybook/addon-actions";
+import { Wrapper } from "./common";
 
 storiesOf("Modal", module).add("Default", () => {
   return (
-    <div>
+    <Wrapper>
       <Modal
         close={action("close clicked")}
         isOpen={true}
@@ -31,6 +32,6 @@ storiesOf("Modal", module).add("Default", () => {
       >
         <span>Do you want a cookie?</span>
       </Modal>
-    </div>
+    </Wrapper>
   );
 });
