@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Notifications Default 1`] = `
-<div>
+<div
+  className="sc-EHOje dxVLzp"
+>
   <div
     className="sc-notifications sc-ifAKCX foTAQB"
   >
     <div
-      className="sc-notification sc-bdVaJa biSBkq"
+      className="sc-notification sc-bdVaJa cORIOQ"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -29,7 +31,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa gzpENg"
+      className="sc-notification sc-bdVaJa iMRTLO"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -109,7 +111,7 @@ exports[`Storyshots Notifications Default 1`] = `
     className="sc-notifications sc-ifAKCX fQVauU"
   >
     <div
-      className="sc-notification sc-bdVaJa cnrULM"
+      className="sc-notification sc-bdVaJa iuvsdJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -184,7 +186,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-notification sc-bdVaJa cnrULM"
+      className="sc-notification sc-bdVaJa iuvsdJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
