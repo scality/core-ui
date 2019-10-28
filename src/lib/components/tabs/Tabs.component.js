@@ -13,8 +13,7 @@ type Item = {
 
 type Props = {
   items: Array<Item>,
-  children: Node,
-  activeColor?: string
+  children: Node
 };
 
 const TabsContainer = styled.div`
@@ -41,7 +40,8 @@ const TabItem = styled.div`
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${defaultTheme.grayLightest};
+          background-color: ${props =>
+            mergeTheme(props.theme, defaultTheme).backgroundContrast2};
         }
       `
     );
@@ -50,21 +50,20 @@ const TabItem = styled.div`
 
 const TabItemTitle = styled.p`
   margin: 0;
-  color: ${defaultTheme.textColor};
+  font-size: ${defaultTheme.fontSize.large};
   padding: ${defaultTheme.padding.base} 0 14px;
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const activeColor = props.activeColor || brandingTheme.primary;
-    return (
-      props.selected &&
-      css`
-        color: ${activeColor};
-        border-bottom: 2px solid ${activeColor};
-        font-weight: ${defaultTheme.fontWeight.bold};
-      `
-    );
+    return props.selected
+      ? css`
+          color: ${brandingTheme.primary};
+          border-bottom: 2px solid ${brandingTheme.primary};
+          font-weight: ${defaultTheme.fontWeight.bold};
+        `
+      : css`
+          color: ${brandingTheme.text};
+        `;
   }}
-  font-size: ${defaultTheme.fontSize.large};
 `;
 
 const TabContent = styled.div`
@@ -72,7 +71,7 @@ const TabContent = styled.div`
   padding: ${defaultTheme.padding.larger};
 `;
 
-export default function Tab({ items, children, activeColor, ...rest }: Props) {
+export default function Tab({ items, children, ...rest }: Props) {
   return (
     <TabsContainer className="sc-tabs" {...rest}>
       <TabBar className="sc-tabs-bar">
@@ -84,11 +83,7 @@ export default function Tab({ items, children, activeColor, ...rest }: Props) {
             selected={selected}
             {...itemRest}
           >
-            <TabItemTitle
-              className="sc-tabs-item-title"
-              selected={selected}
-              activeColor={activeColor}
-            >
+            <TabItemTitle className="sc-tabs-item-title" selected={selected}>
               {title}
             </TabItemTitle>
           </TabItem>
