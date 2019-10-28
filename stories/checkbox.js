@@ -3,30 +3,31 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Checkbox from "../src/lib/components/checkbox/Checkbox.component";
+import { Wrapper, Title } from "./common";
 
 storiesOf("Checkbox", module).add("Default", () => {
   return (
-    <div>
-      <h3>Checkbox checked</h3>
+    <Wrapper>
+      <Title>Checkbox checked</Title>
       <Checkbox
         checked={true}
         label="interested?"
         onChange={action("checkbox clicked")}
         data-cy="checked_checkbox"
       />
-      <h3>Checkbox unchecked</h3>
+      <Title>Checkbox unchecked</Title>
       <Checkbox
         checked={false}
         label="interested?"
         onChange={action("checkbox clicked")}
       />
-      <h3>Checkbox disabled</h3>
+      <Title>Checkbox disabled</Title>
       <Checkbox
         checked={false}
         disabled={true}
         label="interested?"
         onChange={action("checkbox clicked")}
       />
-    </div>
+    </Wrapper>
   );
 });
