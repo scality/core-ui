@@ -8,9 +8,7 @@ import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
 type Props = {
-  paths: Array<Node>,
-  hoverColor?: string,
-  activeColor?: string
+  paths: Array<Node>
 };
 
 const BreadcrumbContainer = styled.ol`
@@ -26,15 +24,11 @@ const BreadcrumbItem = styled.li`
   font-size: ${defaultTheme.fontSize.larger};
   ${ellipsis("250px")}
 
-  a {
-    color: ${defaultTheme.textColor};
-    text-decoration: none;
-  }
-
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
+
     if (props.active) {
-      const activeColor = props.activeColor || brandingTheme.primary;
+      const activeColor = brandingTheme.primary;
       return css`
         font-weight: ${defaultTheme.fontWeight.bold};
         a {
@@ -44,13 +38,17 @@ const BreadcrumbItem = styled.li`
         border-bottom: 2px solid ${activeColor};
       `;
     }
-    const hoverColor = props.hoverColor || brandingTheme.primary;
+    const hoverColor = brandingTheme.primary;
     return css`
+      a {
+        text-decoration: none;
+        color: ${brandingTheme.text};
+      }
+      color: ${brandingTheme.text};
       &:hover {
         a {
           color: ${hoverColor};
         }
-        color: ${hoverColor};
         border-bottom: 2px solid ${hoverColor};
       }
     `;
@@ -80,12 +78,7 @@ const withBreadcrumbSeparator = lastIndex => (acc, item, index) => {
     : [...acc, item];
 };
 
-const Breadcrumb = ({
-  paths = [],
-  hoverColor = "",
-  activeColor = "",
-  ...rest
-}: Props) => {
+const Breadcrumb = ({ paths = [], ...rest }: Props) => {
   const lastIndex = paths.length - 1;
   const breadcrumbItems = paths
     .map((item, index) => {
@@ -94,8 +87,6 @@ const Breadcrumb = ({
           key={`sc-breadcrumb_item_${index}`}
           className="sc-breadcrumb_item"
           active={index === lastIndex}
-          hoverColor={hoverColor}
-          activeColor={activeColor}
         >
           {item}
         </BreadcrumbItem>
