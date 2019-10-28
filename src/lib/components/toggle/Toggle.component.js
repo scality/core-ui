@@ -80,6 +80,7 @@ const Switch = styled.label`
 
 const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {

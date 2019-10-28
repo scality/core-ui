@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Toggle Default 1`] = `
-<div>
+<div
+  className="sc-bxivhb eTQnSH"
+>
   <div
     className="sc-toggle sc-bdVaJa gEyPxw"
   >
     <label
-      className="sc-bwzfXH kUCBNx"
+      className="sc-bwzfXH jmAdKA"
     >
       <input
         checked={false}
@@ -20,7 +22,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="text sc-htpNat efAdPk"
+      className="text sc-htpNat gYCxUV"
     >
       Airplane Mode
     </span>
@@ -29,7 +31,7 @@ exports[`Storyshots Toggle Default 1`] = `
     className="sc-toggle sc-bdVaJa gEyPxw"
   >
     <label
-      className="sc-bwzfXH kUCBNx"
+      className="sc-bwzfXH jmAdKA"
     >
       <input
         checked={true}
@@ -43,7 +45,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="text sc-htpNat efAdPk"
+      className="text sc-htpNat gYCxUV"
     >
       Airplane Mode
     </span>

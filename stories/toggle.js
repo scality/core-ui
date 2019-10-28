@@ -3,10 +3,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Toggle from "../src/lib/components/toggle/Toggle.component";
+import { Wrapper } from "./common";
 
 storiesOf("Toggle", module).add("Default", () => {
   return (
-    <div>
+    <Wrapper>
       <Toggle
         label="Airplane Mode"
         onChange={action("toggle clicked")}
@@ -21,6 +22,6 @@ storiesOf("Toggle", module).add("Default", () => {
         name="toggle"
         data-cy="custom_toggle"
       />
-    </div>
+    </Wrapper>
   );
 });
