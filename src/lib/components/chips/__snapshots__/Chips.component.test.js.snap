@@ -8,8 +8,7 @@ exports[`Storyshots Chips Default 1`] = `
     Basic Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa hQXHzc"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa cRjkCS"
   >
     <span
       className="sc-bxivhb jtBzxc"
@@ -18,8 +17,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa bfHeJr"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa kviEkn"
   >
     <span
       className="sc-bxivhb jtBzxc"
@@ -28,8 +26,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa jOQzRt"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa jFdlss"
   >
     <span
       className="sc-bxivhb jtBzxc"
@@ -38,18 +35,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa cTVvKF"
-    color="#ffffff"
-  >
-    <span
-      className="sc-bxivhb jtBzxc"
-    >
-      Basic Chip
-    </span>
-  </div>
-  <div
-    className="sc-chips sc-bdVaJa kUyHTe"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa UtTdS"
   >
     <span
       className="sc-bxivhb jtBzxc"
@@ -61,12 +47,11 @@ exports[`Storyshots Chips Default 1`] = `
     Clickable Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa chdiVa"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa hryNys"
     onClick={[Function]}
   >
     <span
-      className="sc-bwzfXH hFfFkW"
+      className="sc-bwzfXH btFtVa"
     >
       <i
         className="fas fa-star"
@@ -79,12 +64,11 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa dCRMFB"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa djSmWm"
     onClick={[Function]}
   >
     <span
-      className="sc-bwzfXH kJhQhe"
+      className="sc-bwzfXH ldtRcB"
     >
       <i
         className="fas fa-star"
@@ -97,12 +81,11 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa fvoLGG"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa wpkKz"
     onClick={[Function]}
   >
     <span
-      className="sc-bwzfXH eLXInO"
+      className="sc-bwzfXH rwODA"
     >
       <i
         className="fas fa-star"
@@ -115,30 +98,11 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa hJcnAj"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa foufuM"
     onClick={[Function]}
   >
     <span
-      className="sc-bwzfXH hZLrYr"
-    >
-      <i
-        className="fas fa-star"
-      />
-    </span>
-    <span
-      className="sc-bxivhb jtBzxc"
-    >
-      Clickable Chip
-    </span>
-  </div>
-  <div
-    className="sc-chips sc-bdVaJa dvBfpI"
-    color="#ffffff"
-    onClick={[Function]}
-  >
-    <span
-      className="sc-bwzfXH dInkzr"
+      className="sc-bwzfXH ldXkiL"
     >
       <i
         className="fas fa-star"
@@ -154,11 +118,10 @@ exports[`Storyshots Chips Default 1`] = `
     Deletable Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa hQXHzc"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa cRjkCS"
   >
     <span
-      className="sc-bwzfXH hFfFkW"
+      className="sc-bwzfXH btFtVa"
     >
       <i
         className="fas fa-star"
@@ -169,8 +132,7 @@ exports[`Storyshots Chips Default 1`] = `
     >
       Deletable
       <span
-        className="sc-htpNat jQyVXu"
-        color="#ffffff"
+        className="sc-htpNat dGAvWQ"
         onClick={[Function]}
       >
         <i
@@ -180,11 +142,10 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa bfHeJr"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa kviEkn"
   >
     <span
-      className="sc-bwzfXH kJhQhe"
+      className="sc-bwzfXH ldtRcB"
     >
       <i
         className="fas fa-star"
@@ -195,8 +156,7 @@ exports[`Storyshots Chips Default 1`] = `
     >
       Deletable
       <span
-        className="sc-htpNat iOUFRA"
-        color="#ffffff"
+        className="sc-htpNat kGqNwD"
         onClick={[Function]}
       >
         <i
@@ -206,11 +166,10 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa jOQzRt"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa jFdlss"
   >
     <span
-      className="sc-bwzfXH eLXInO"
+      className="sc-bwzfXH rwODA"
     >
       <i
         className="fas fa-star"
@@ -221,8 +180,7 @@ exports[`Storyshots Chips Default 1`] = `
     >
       Deletable
       <span
-        className="sc-htpNat jZuLzz"
-        color="#ffffff"
+        className="sc-htpNat fwXmyb"
         onClick={[Function]}
       >
         <i
@@ -232,11 +190,10 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa cTVvKF"
-    color="#ffffff"
+    className="sc-chips sc-bdVaJa UtTdS"
   >
     <span
-      className="sc-bwzfXH hZLrYr"
+      className="sc-bwzfXH ldXkiL"
     >
       <i
         className="fas fa-star"
@@ -247,34 +204,7 @@ exports[`Storyshots Chips Default 1`] = `
     >
       Deletable
       <span
-        className="sc-htpNat ccSPSG"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
-    </span>
-  </div>
-  <div
-    className="sc-chips sc-bdVaJa kUyHTe"
-    color="#ffffff"
-  >
-    <span
-      className="sc-bwzfXH dInkzr"
-    >
-      <i
-        className="fas fa-star"
-      />
-    </span>
-    <span
-      className="sc-bxivhb jtBzxc"
-    >
-      Deletable
-      <span
-        className="sc-htpNat dzsiLW"
-        color="#ffffff"
+        className="sc-htpNat MqEmn"
         onClick={[Function]}
       >
         <i
