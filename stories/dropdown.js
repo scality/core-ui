@@ -3,6 +3,7 @@ import React from "react";
 import Dropdown from "../src/lib/components/dropdown/Dropdown.component";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
+import { Wrapper, Title } from "./common";
 
 const items = [
   {
@@ -24,8 +25,8 @@ const items = [
 
 storiesOf("Dropdown", module).add("Default", () => {
   return (
-    <div className="storybook-dropdown">
-      <h3>Dropdown with text/icon</h3>
+    <Wrapper className="storybook-dropdown">
+      <Title>Dropdown with text/icon</Title>
       <Dropdown
         text="Help"
         icon={<i className="fas fa-star" />}
@@ -56,17 +57,17 @@ storiesOf("Dropdown", module).add("Default", () => {
         size="larger"
       />
 
-      <h3>Dropdown with icon</h3>
+      <Title>Dropdown with icon</Title>
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
         caret={false}
       />
 
-      <h3>Dropdown with text</h3>
+      <Title>Dropdown with text</Title>
       <Dropdown text="Help" items={items} />
 
-      <h3>Dropdown with variant</h3>
+      <Title>Dropdown with variant</Title>
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
@@ -103,6 +104,6 @@ storiesOf("Dropdown", module).add("Default", () => {
         variant="danger"
         text="danger"
       />
-    </div>
+    </Wrapper>
   );
 });
