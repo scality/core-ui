@@ -8,51 +8,51 @@ exports[`Storyshots Chips Default 1`] = `
     Basic Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa hQXHzc"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs kZilGX"
+    size="base"
   >
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jVLeHm"
     >
       Basic Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa bfHeJr"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs danFhE"
+    size="base"
   >
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jVLeHm"
     >
       Basic Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa jOQzRt"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs idrXf"
+    size="base"
   >
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jVLeHm"
     >
       Basic Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa cTVvKF"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs cxcMQf"
+    size="base"
   >
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jVLeHm"
     >
       Basic Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa kUyHTe"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs jSNdpv"
+    size="base"
   >
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jVLeHm"
     >
       Basic Chip
     </span>
@@ -61,91 +61,96 @@ exports[`Storyshots Chips Default 1`] = `
     Clickable Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa chdiVa"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs cQnyZg"
     onClick={[Function]}
+    size="base"
   >
     <span
-      className="sc-bwzfXH hFfFkW"
+      className="sc-chips-icon sc-dnqmqq ciBsFb"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
     >
       Clickable Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa dCRMFB"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs hhKEwv"
     onClick={[Function]}
+    size="base"
   >
     <span
-      className="sc-bwzfXH kJhQhe"
+      className="sc-chips-icon sc-dnqmqq fGUwyn"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
     >
       Clickable Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa fvoLGG"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs fLlqhG"
     onClick={[Function]}
+    size="base"
   >
     <span
-      className="sc-bwzfXH eLXInO"
+      className="sc-chips-icon sc-dnqmqq hIRPMN"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
     >
       Clickable Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa hJcnAj"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs ibvEqW"
     onClick={[Function]}
+    size="base"
   >
     <span
-      className="sc-bwzfXH hZLrYr"
+      className="sc-chips-icon sc-dnqmqq cjmUOr"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
     >
       Clickable Chip
     </span>
   </div>
   <div
-    className="sc-chips sc-bdVaJa dvBfpI"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs iBjYjB"
     onClick={[Function]}
+    size="base"
   >
     <span
-      className="sc-bwzfXH dInkzr"
+      className="sc-chips-icon sc-dnqmqq fmChSf"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
     >
       Clickable Chip
     </span>
@@ -154,134 +159,497 @@ exports[`Storyshots Chips Default 1`] = `
     Deletable Chip
   </h3>
   <div
-    className="sc-chips sc-bdVaJa hQXHzc"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs kZilGX"
+    size="base"
   >
     <span
-      className="sc-bwzfXH hFfFkW"
+      className="sc-chips-icon sc-dnqmqq ciBsFb"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
     >
       Deletable
-      <span
-        className="sc-htpNat jQyVXu"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
     </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
   </div>
   <div
-    className="sc-chips sc-bdVaJa bfHeJr"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs danFhE"
+    size="base"
   >
     <span
-      className="sc-bwzfXH kJhQhe"
+      className="sc-chips-icon sc-dnqmqq fGUwyn"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
     >
       Deletable
-      <span
-        className="sc-htpNat iOUFRA"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
     </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
   </div>
   <div
-    className="sc-chips sc-bdVaJa jOQzRt"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs idrXf"
+    size="base"
   >
     <span
-      className="sc-bwzfXH eLXInO"
+      className="sc-chips-icon sc-dnqmqq hIRPMN"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
     >
       Deletable
-      <span
-        className="sc-htpNat jZuLzz"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
     </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
   </div>
   <div
-    className="sc-chips sc-bdVaJa cTVvKF"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs cxcMQf"
+    size="base"
   >
     <span
-      className="sc-bwzfXH hZLrYr"
+      className="sc-chips-icon sc-dnqmqq cjmUOr"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
     >
       Deletable
-      <span
-        className="sc-htpNat ccSPSG"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
     </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
   </div>
   <div
-    className="sc-chips sc-bdVaJa kUyHTe"
-    color="#ffffff"
+    className="sc-chips sc-htoDjs jSNdpv"
+    size="base"
   >
     <span
-      className="sc-bwzfXH dInkzr"
+      className="sc-chips-icon sc-dnqmqq fmChSf"
+      size="base"
     >
       <i
         className="fas fa-star"
       />
     </span>
     <span
-      className="sc-bxivhb jtBzxc"
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
     >
       Deletable
-      <span
-        className="sc-htpNat dzsiLW"
-        color="#ffffff"
-        onClick={[Function]}
-      >
-        <i
-          className="fas fa-times"
-        />
-      </span>
     </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <h3>
+    Different sizes
+  </h3>
+  <div
+    className="sc-chips sc-htoDjs eDsWwR"
+    size="smaller"
+  >
+    <span
+      className="sc-chips-icon sc-dnqmqq ciBsFb"
+      size="smaller"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
+    >
+      Smaller
+    </span>
+    <button
+      className="sc-chips-remove sc-bxivhb hpJUsZ"
+      disabled={false}
+      onClick={[Function]}
+      size="smaller"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="smaller"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-chips sc-htoDjs eUhfjI"
+    size="small"
+  >
+    <span
+      className="sc-chips-icon sc-dnqmqq fGUwyn"
+      size="small"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
+    >
+      Small
+    </span>
+    <button
+      className="sc-chips-remove sc-bxivhb hCfuac"
+      disabled={false}
+      onClick={[Function]}
+      size="small"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="small"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-chips sc-htoDjs cxcMQf"
+    size="base"
+  >
+    <span
+      className="sc-chips-icon sc-dnqmqq cjmUOr"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
+    >
+      Base
+    </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kjJbLP"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-chips sc-htoDjs jimRAN"
+    size="large"
+  >
+    <span
+      className="sc-chips-icon sc-dnqmqq hIRPMN"
+      size="large"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
+    >
+      Large
+    </span>
+    <button
+      className="sc-chips-remove sc-bxivhb kGLnHM"
+      disabled={false}
+      onClick={[Function]}
+      size="large"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="large"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-chips sc-htoDjs dxHUqG"
+    size="larger"
+  >
+    <span
+      className="sc-chips-icon sc-dnqmqq cjmUOr"
+      size="larger"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-chips-text sc-iwsKbI jkfBoi"
+      onRemove={[Function]}
+    >
+      Larger
+    </span>
+    <button
+      className="sc-chips-remove sc-bxivhb jupGLz"
+      disabled={false}
+      onClick={[Function]}
+      size="larger"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-bZQynM iMWVsx"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-ifAKCX bccMeP"
+            size="larger"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-EHOje boinrg"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
   </div>
 </div>
 `;

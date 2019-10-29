@@ -3,17 +3,15 @@ import * as defaultTheme from "../../style/theme";
 import type { Variant, Size } from "../constants";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
-
+import Button from "../button/Button.component";
 import React from "react";
 import { lighten } from "polished";
 import { mergeTheme } from "../../utils";
 
 type Props = {
   text: string,
-  color?: string,
   variant?: Variant,
   icon?: Node,
-  buttonIcon?: Node,
   onClick?: any => void,
   onRemove?: any => void,
   size?: Size
@@ -22,70 +20,83 @@ type Props = {
 const ChipsContainer = styled.div`
   display: inline-flex;
   background-color: ${defaultTheme.grayLighter};
-  border-radius: 15px;
-
+  .sc-chips-remove {
+    padding-right: 10px;
+    color: ${defaultTheme.white};
+    &:hover {
+      color: ${defaultTheme.gray};
+    }
+  }
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const defaultStyle = `
-      background-color: ${brandingTheme[props.variant]};
-      color: ${props.color};
-    `
-
     switch (props.size) {
       case "smaller":
         return css`
-          font-size: ${defaultTheme.fontSize[props.size]};
-          ${defaultStyle}
-          height: 27px;
+          border-radius: 10px;
+          .sc-chips-icon {
+            border-radius: 10px;
+            padding: 5px;
+          }
         `;
+
       case "small":
         return css`
-          font-size: ${defaultTheme.fontSize[props.size]};
-          ${defaultStyle}
-          height: 30px;
+          border-radius: 12px;
+          .sc-chips-icon {
+            border-radius: 12px;
+            padding: 6px;
+          }
         `;
+
       case "large":
         return css`
-          font-size: ${defaultTheme.fontSize[props.size]};
-          ${defaultStyle}
-          height: 35px;
-          width: 200px;
-          border-radius: 40px;
+          border-radius: 14px;
+          .sc-chips-icon {
+            border-radius: 14px;
+            padding: 6px;
+          }
         `;
+
       case "larger":
         return css`
-          font-size: ${defaultTheme.fontSize[props.size]};
-          ${defaultStyle}
-          height: 40px;
-          width: 210px;
-          border-radius: 50px;
+          border-radius: 17px;
+          .sc-chips-icon {
+            border-radius: 17px;
+            padding: 7px;
+          }
         `;
+
       default:
         return css`
-          font-size: ${defaultTheme.fontSize.base};
-          ${defaultStyle}
-          height: 30px;
+          border-radius: 12px;
+          .sc-chips-icon {
+            border-radius: 12px;
+            padding: 6px;
+          }
         `;
     }
   }}
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      font-size: ${defaultTheme.fontSize[props.size]};
+      background-color: ${brandingTheme[props.variant]};
+      color: ${defaultTheme.white};
+    `;
+  }}
 
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
     const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
-
     return (
       props.onClick &&
       css`
         &:hover {
           cursor: pointer;
           background-color: ${brandLight};
-          color: ${props.color};
         }
-
         &:active {
           background-color: ${brandingTheme[props.variant]};
-          color: ${props.color};
         }
       `
     );
@@ -93,107 +104,62 @@ const ChipsContainer = styled.div`
 `;
 
 export const ChipsIcon = styled.span`
-  ${props => {
-    let borderRadiusAndPadding;
-
-    switch (props.size) {
-      case "smaller":
-        borderRadiusAndPadding = `border-radius: 15px;`; break;
-      case "small":
-        borderRadiusAndPadding = `border-radius: 15px;`; break;
-      case "large":
-        borderRadiusAndPadding = `border-radius: 30px;`; break;
-      case "larger":
-        borderRadiusAndPadding = `border-radius: 30px;`; break;
-      default:
-        borderRadiusAndPadding = `border-radius: 15px;`; break;
-    }
-
-    if (props.text) 
-      return css`
-        padding-right: ${defaultTheme.padding.smaller};
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        background-color: ${lighten(
-          0.15,
-          mergeTheme(props.theme, defaultTheme)[props.variant]
-        ).toString()};
-        padding: 7px 8px;
-        ${borderRadiusAndPadding}
-      `
-  }}
-`;
-
-export const ChipsButton = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-left: 7px;
-  border-radius: 15px;
-  padding: 2px ${defaultTheme.padding.smaller};
-
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
-    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
-
-    return (
-      props.onClick &&
-      css`
-        &:hover {
-          background-color: ${brandLight};
-          color: ${props.color};
-          cursor: pointer;
-        }
-
-        &:active {
-          background-color: ${brandingTheme[props.variant]};
-          color: ${props.color};
-        }
-      `
-    );
-  }}
+  background-color: ${props => {
+    return lighten(
+      0.15,
+      mergeTheme(props.theme, defaultTheme)[props.variant]
+    ).toString();
+  }};
 `;
 
 export const ChipsText = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 14px;
+  padding: ${props => (props.icon || props.onRemove ? "5px" : "5px 10px")};
 `;
 
 function Chips({
   text = "",
   variant = defaultTheme.brand.base,
   icon = null,
-  buttonIcon = null,
   onClick,
   onRemove,
-  size,
-  color = defaultTheme.white
+  size = "base"
 }: Props) {
   return (
     <ChipsContainer
       className="sc-chips"
       onClick={onClick}
       variant={variant}
-      color={color}
+      icon={icon}
       size={size}
     >
       {icon && (
-        <ChipsIcon text={text} variant={variant} size={size}>
+        <ChipsIcon
+          className="sc-chips-icon"
+          text={text}
+          variant={variant}
+          size={size}
+        >
           {icon}
         </ChipsIcon>
       )}
-      <ChipsText>
+      <ChipsText className="sc-chips-text" icon={icon} onRemove={onRemove}>
         {text}
-        {onRemove && (
-          <ChipsButton onClick={onRemove} color={color} variant={variant}>
-            {buttonIcon}
-          </ChipsButton>
-        )}
       </ChipsText>
+      {onRemove && (
+        <Button
+          className="sc-chips-remove"
+          size={size}
+          inverted={true}
+          icon={<i className="fas fa-times" />}
+          onClick={onRemove}
+        />
+      )}
     </ChipsContainer>
   );
 }

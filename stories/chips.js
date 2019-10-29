@@ -50,35 +50,30 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="primary"
         onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="base"
         onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="success"
         onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="warning"
         onRemove={action("Deletable Chip")}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="danger"
         onRemove={action("Deletable Chip")}
       />
@@ -87,7 +82,6 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Smaller"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="primary"
         onRemove={action("Deletable Chip")}
         size="smaller"
@@ -95,15 +89,20 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Small"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="base"
         onRemove={action("Deletable Chip")}
         size="small"
       />
       <Chips
+        text="Base"
+        icon={<i className="fas fa-star" />}
+        variant="warning"
+        onRemove={action("Deletable Chip")}
+        size="base"
+      />
+      <Chips
         text="Large"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="success"
         onRemove={action("Deletable Chip")}
         size="large"
@@ -111,7 +110,6 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Larger"
         icon={<i className="fas fa-star" />}
-        buttonIcon={<i className="fas fa-times" />}
         variant="warning"
         onRemove={action("Deletable Chip")}
         size="larger"
