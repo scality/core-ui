@@ -7,7 +7,6 @@ import {
   ButtonIcon,
   ButtonText
 } from "../button/Button.component";
-import { darken, lighten } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
