@@ -2,9 +2,11 @@
 
 exports[`Storyshots Chips Default 1`] = `
 <div
-  className="storybook-chips"
+  className="storybook-chips sc-ifAKCX krxbjr"
 >
-  <h3>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
     Basic Chip
   </h3>
   <div
@@ -43,7 +45,9 @@ exports[`Storyshots Chips Default 1`] = `
       Basic Chip
     </span>
   </div>
-  <h3>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
     Clickable Chip
   </h3>
   <div
@@ -114,7 +118,9 @@ exports[`Storyshots Chips Default 1`] = `
       Clickable Chip
     </span>
   </div>
-  <h3>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
     Deletable Chip
   </h3>
   <div

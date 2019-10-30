@@ -15,11 +15,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
   <div>
@@ -33,11 +33,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
   <div
@@ -57,11 +57,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
   <div>
@@ -75,11 +75,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
   <div>
@@ -93,11 +93,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
   <div>
@@ -145,11 +145,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         tooltip with icon
-      </h4>
+      </span>
     </div>
   </div>
   <div>
@@ -163,11 +163,11 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <h4
+      <span
         className="sc-gqjmRU fdxAVz"
       >
         Hover here!
-      </h4>
+      </span>
     </div>
   </div>
 </div>

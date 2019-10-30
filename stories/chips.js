@@ -3,17 +3,18 @@ import Chips from "../src/lib/components/chips/Chips.component";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
+import { Wrapper, Title } from "./common";
 
 storiesOf("Chips", module).add("Default", () => {
   return (
-    <div className="storybook-chips">
-      <h3>Basic Chip</h3>
+    <Wrapper className="storybook-chips">
+      <Title>Basic Chip</Title>
       <Chips text="Basic Chip" variant="primary" />
       <Chips text="Basic Chip" variant="success" />
       <Chips text="Basic Chip" variant="warning" />
       <Chips text="Basic Chip" variant="danger" />
 
-      <h3>Clickable Chip</h3>
+      <Title>Clickable Chip</Title>
       <Chips
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
@@ -39,7 +40,7 @@ storiesOf("Chips", module).add("Default", () => {
         onClick={action("Clickable Chip")}
       />
 
-      <h3>Deletable Chip</h3>
+      <Title>Deletable Chip</Title>
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
@@ -68,6 +69,6 @@ storiesOf("Chips", module).add("Default", () => {
         variant="danger"
         onRemove={action("Deletable Chip")}
       />
-    </div>
+    </Wrapper>
   );
 });

@@ -19,7 +19,7 @@ const StyledTitle = styled.h3`
   }};
 `;
 
-const StyledSubTitle = styled.h4`
+const StyledSubTitle = styled.span`
   color: ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return brandingTheme.text;
