@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Checkbox Default 1`] = `
-<div>
-  <h3>
+<div
+  className="sc-htpNat iharJH"
+>
+  <h3
+    className="sc-bxivhb iDJTyr"
+  >
     Checkbox checked
   </h3>
   <label
     checked={true}
-    className="sc-checkbox sc-bwzfXH hVzLpS"
+    className="sc-checkbox sc-bwzfXH buIIzS"
   >
     <input
       checked={true}
@@ -19,17 +23,19 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hAWWmg"
+      className="text sc-bdVaJa hERZIf"
     >
       interested?
     </span>
   </label>
-  <h3>
+  <h3
+    className="sc-bxivhb iDJTyr"
+  >
     Checkbox unchecked
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH gvHcHm"
+    className="sc-checkbox sc-bwzfXH fiqgwR"
   >
     <input
       checked={false}
@@ -40,17 +46,19 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hAWWmg"
+      className="text sc-bdVaJa hERZIf"
     >
       interested?
     </span>
   </label>
-  <h3>
+  <h3
+    className="sc-bxivhb iDJTyr"
+  >
     Checkbox disabled
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH fvhYca"
+    className="sc-checkbox sc-bwzfXH dIukKP"
     disabled={true}
   >
     <input
@@ -63,7 +71,7 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hAWWmg"
+      className="text sc-bdVaJa hERZIf"
     >
       interested?
     </span>

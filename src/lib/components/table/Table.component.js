@@ -25,7 +25,7 @@ export type Props = {
   onSort: ({ sortBy: string, sortDirection: string }) => void,
   sortBy: string,
   sortDirection: string,
-  noRowsRenderer: any => Node
+  noRowsRenderer?: any => Node
 };
 
 type HeaderProps = {
@@ -37,9 +37,8 @@ type HeaderProps = {
 };
 
 const TableContainer = styled.div`
-  box-shadow: 0 1px 5px 0 ${defaultTheme.grayLight};
-
   .ReactVirtualized__Table__Grid {
+    color: ${props => mergeTheme(props.theme, defaultTheme).text};
     &:focus {
       outline: none;
     }
@@ -62,7 +61,10 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
-    background-color: ${defaultTheme.grayLightest};
+    background-color: ${props =>
+      mergeTheme(props.theme, defaultTheme).backgroundContrast1};
+    border-bottom: 1px solid
+      ${props => mergeTheme(props.theme, defaultTheme).border};
     ${props => {
       const brandingTheme = mergeTheme(props.theme, defaultTheme);
       return css`
@@ -86,14 +88,18 @@ const TableContainer = styled.div`
   .ReactVirtualized__Table__row {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid ${defaultTheme.grayLightest};
     overflow: visible !important;
-
+    color: ${props => mergeTheme(props.theme, defaultTheme).text};
+    background-color: ${props =>
+      mergeTheme(props.theme, defaultTheme).backgroundContrast1};
+    border-bottom: 1px solid
+      ${props => mergeTheme(props.theme, defaultTheme).border};
+    box-sizing: border-box;
     &:hover,
     &:focus {
-      background-color: ${defaultTheme.grayLightest};
+      background-color: ${props =>
+        mergeTheme(props.theme, defaultTheme).backgroundContrast2};
       outline: none;
-      border-bottom: 1px solid transparent;
       cursor: pointer;
     }
   }
@@ -116,7 +122,7 @@ const CellContainer = styled.div`
 
   .sc-dropdown .trigger {
     background-color: transparent;
-    color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+    color: ${props => mergeTheme(props.theme, defaultTheme).text};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
       color: ${props =>

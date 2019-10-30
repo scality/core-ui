@@ -13,10 +13,10 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-sidebar sc-bdVaJa ebxrwA"
+      className="sc-sidebar sc-bdVaJa gguJuH"
     >
       <div
-        className="sc-sidebar-item sc-bwzfXH kUtkie"
+        className="sc-sidebar-item sc-bwzfXH jBzhYZ"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -28,11 +28,11 @@ exports[`Storyshots Sidebar Default 1`] = `
           />
         </div>
         <div
-          className="sc-bxivhb bryELZ"
+          className="sc-bxivhb dwOGvF"
         />
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-sidebar-item sc-bwzfXH gcwdVF"
         onClick={[Function]}
         title="Servers"
       >
@@ -45,7 +45,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-sidebar-item sc-bwzfXH gcwdVF"
         onClick={[Function]}
         title="Disks"
       >
@@ -70,10 +70,10 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-sidebar sc-bdVaJa eZKrii"
+      className="sc-sidebar sc-bdVaJa kxFxIY"
     >
       <div
-        className="sc-sidebar-item sc-bwzfXH kUtkie"
+        className="sc-sidebar-item sc-bwzfXH jBzhYZ"
         onClick={[Function]}
         title="Dashboard"
       >
@@ -90,11 +90,11 @@ exports[`Storyshots Sidebar Default 1`] = `
           Dashboard
         </div>
         <div
-          className="sc-bxivhb bryELZ"
+          className="sc-bxivhb dwOGvF"
         />
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-sidebar-item sc-bwzfXH gcwdVF"
         onClick={[Function]}
         title="Servers"
       >
@@ -112,7 +112,7 @@ exports[`Storyshots Sidebar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-sidebar-item sc-bwzfXH gEDodU"
+        className="sc-sidebar-item sc-bwzfXH gcwdVF"
         onClick={[Function]}
         title="Disks"
       >

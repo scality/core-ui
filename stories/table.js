@@ -1,4 +1,4 @@
-//@Flow
+//@flow
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -6,6 +6,7 @@ import Table from "../src/lib/components/table/Table.component";
 import Button from "../src/lib/components/button/Button.component";
 import { list } from "./data/list";
 import styled from "styled-components";
+import { Wrapper } from "./common";
 
 const actions = [
   { label: "Edit", onClick: action("Edit clicked") },
@@ -30,7 +31,7 @@ const columns = [
       if (data === 3) {
         return (
           <Button
-            text={data}
+            text={"" + data}
             onClick={event => {
               console.log(rowData);
               event.stopPropagation();
@@ -124,7 +125,7 @@ const _noRowsRenderer = () => {
 storiesOf("Table", module)
   .add("Default", () => {
     return (
-      <div style={{ height: "100vh" }}>
+      <Wrapper style={{ height: "100vh" }}>
         <Table
           list={list}
           columns={columns}
@@ -136,12 +137,12 @@ storiesOf("Table", module)
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
         />
-      </div>
+      </Wrapper>
     );
   })
   .add("With rowActions", () => {
     return (
-      <div style={{ height: "100vh" }}>
+      <Wrapper style={{ height: "100vh" }}>
         <Table
           list={listWithActions}
           columns={columns}
@@ -153,12 +154,12 @@ storiesOf("Table", module)
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
         />
-      </div>
+      </Wrapper>
     );
   })
   .add("Change column size", () => {
     return (
-      <div style={{ height: "100vh" }}>
+      <Wrapper style={{ height: "100vh" }}>
         <Table
           list={listWithActions}
           columns={columnsChangeSize}
@@ -170,29 +171,31 @@ storiesOf("Table", module)
           onSort={action("Sort Clicked")}
           onRowClick={action("Row Clicked")}
         />
-      </div>
+      </Wrapper>
     );
   })
   .add("Center a column with CSS", () => {
     return (
       <ContainerWithClassName>
-        <Table
-          list={listWithActions}
-          columns={columnsChangeSize}
-          disableHeader={false}
-          headerHeight={40}
-          rowHeight={40}
-          sortBy={"first_name"}
-          sortDirection={"ASC"}
-          onSort={action("Sort Clicked")}
-          onRowClick={action("Row Clicked")}
-        />
+        <ContainerWithClassName>
+          <Table
+            list={listWithActions}
+            columns={columnsChangeSize}
+            disableHeader={false}
+            headerHeight={40}
+            rowHeight={40}
+            sortBy={"first_name"}
+            sortDirection={"ASC"}
+            onSort={action("Sort Clicked")}
+            onRowClick={action("Row Clicked")}
+          />
+        </ContainerWithClassName>
       </ContainerWithClassName>
     );
   })
   .add("Empty Table", () => {
     return (
-      <div style={{ height: "100vh" }}>
+      <Wrapper style={{ height: "100vh" }}>
         <Table
           list={[]}
           columns={columns}
@@ -205,6 +208,6 @@ storiesOf("Table", module)
           onRowClick={action("Row Clicked")}
           noRowsRenderer={_noRowsRenderer}
         />
-      </div>
+      </Wrapper>
     );
   });

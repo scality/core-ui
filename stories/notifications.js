@@ -1,9 +1,9 @@
 // @flow
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import { action } from "@storybook/addon-actions";
 import Notifications from "../src/lib/components/notifications/Notifications.component";
+import { Wrapper } from "./common";
 
 const trNotifications = [
   {
@@ -70,7 +70,7 @@ const brNotifications = [
 
 storiesOf("Notifications", module).add("Default", () => {
   return (
-    <div>
+    <Wrapper>
       <Notifications
         notifications={trNotifications}
         onDismiss={action("onDismiss")}
@@ -90,6 +90,6 @@ storiesOf("Notifications", module).add("Default", () => {
         notifications={brNotifications}
         onDismiss={action("onDismiss")}
       />
-    </div>
+    </Wrapper>
   );
 });

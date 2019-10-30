@@ -32,6 +32,10 @@ const LoaderContainer = styled.div`
 
 const LoaderText = styled.span`
   padding: 10px 0;
+  color: ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return brandingTheme.text;
+  }};
 `;
 
 const LoaderTextDiv = styled.span`

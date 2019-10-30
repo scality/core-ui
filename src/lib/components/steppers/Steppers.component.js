@@ -59,6 +59,7 @@ const Circle = styled.div`
 
 const StepHeader = styled.span`
   padding: 8px;
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
 `;
 const StepContent = styled.div`
   padding: ${defaultTheme.padding.small};

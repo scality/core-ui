@@ -3,34 +3,50 @@ import { withInfo } from "@storybook/addon-info";
 import withPropsCombinations from "react-storybook-addon-props-combinations";
 import { withThemesProvider } from "storybook-addon-styled-component-theme";
 import {
+  gray,
+  blueLighter,
+  jade,
   turquoise,
   yellowOrange,
-  grayLightest,
-  grayLight,
-  blueLight,
-  jade,
-  mediumOrange
+  warmRed,
+  white
 } from "../src/lib/style/theme";
 
 const themes = [
-  { name: "Default" },
   {
-    name: "Custom",
+    name: "Light Theme",
     brand: {
-      primary: turquoise,
-      secondary: grayLightest,
+      base: blueLighter,
+      baseContrast1: "#94B3CB",
+      primary: "#403e40",
+      secondary: "#e99121",
       success: jade,
-      info: blueLight,
+      info: turquoise,
       warning: yellowOrange,
-      danger: mediumOrange,
-      base: grayLight
+      danger: warmRed,
+      background: white,
+      backgroundContrast1: white,
+      backgroundContrast2: "#E6E6E6",
+      text: gray,
+      border: gray
     }
   },
   {
-    name: "Scality",
+    name: "Dark Theme",
     brand: {
-      primary: "#403e40",
-      secondary: "#e99121"
+      base: "#19161D",
+      baseContrast1: "#26232A",
+      primary: "#e99121",
+      secondary: "#2979ff",
+      success: jade,
+      info: turquoise,
+      warning: yellowOrange,
+      danger: warmRed,
+      background: "#26232A",
+      backgroundContrast1: "#333037",
+      backgroundContrast2: "#3F3C43",
+      text: white,
+      border: white
     }
   }
 ];

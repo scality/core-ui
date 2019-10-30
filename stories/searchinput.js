@@ -3,11 +3,12 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import SearchInput from "../src/lib/components/searchinput/SearchInput.component";
+import { Wrapper, Title } from "./common";
 
 storiesOf("SearchInput", module).add("Default", () => {
   return (
-    <div>
-      <h3>Default</h3>
+    <Wrapper>
+      <Title>Default</Title>
       <div style={{ width: "250px" }}>
         <SearchInput
           value=""
@@ -17,7 +18,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           disableToggle={false}
         />
       </div>
-      <h3>Search Input filled</h3>
+      <Title>Search Input filled</Title>
       <div style={{ width: "250px" }}>
         <SearchInput
           value="carlito"
@@ -27,7 +28,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           data-cy="carlito_searchinput"
         />
       </div>
-      <h3>Disable the default toggle</h3>
+      <Title>Disable the default toggle</Title>
       <div style={{ width: "250px" }}>
         <SearchInput
           value=""
@@ -37,7 +38,7 @@ storiesOf("SearchInput", module).add("Default", () => {
           disableToggle={true}
         />
       </div>
-      <h3>Disable the default toggle undefined onReset action</h3>
+      <Title>Disable the default toggle undefined onReset action</Title>
       <div style={{ width: "250px" }}>
         <SearchInput
           value=""
@@ -46,6 +47,6 @@ storiesOf("SearchInput", module).add("Default", () => {
           disableToggle={true}
         />
       </div>
-    </div>
+    </Wrapper>
   );
 });

@@ -22,8 +22,7 @@ const SearchInputContainer = styled.div`
     input[type="text"] {
       width: ${props => (props.docked ? "40px" : "100%")};
       box-sizing: border-box;
-      padding-right: ${props => (props.docked ? "12px" : "40px")};
-      padding-left: ${props => (props.docked ? "12px" : "40px")};
+      padding-left: ${props => (props.docked ? "28px" : "40px")};
       transition: width 0.2s ease-in-out;
     }
   }
@@ -38,7 +37,7 @@ const IconButton = styled.button`
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
   color: ${props => mergeTheme(props.theme, defaultTheme).primary};
-  background-color: ${defaultTheme.white};
+  background-color: transparent;
   ${props => {
     return (
       !props.disabled &&

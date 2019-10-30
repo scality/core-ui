@@ -1,10 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { ThemeProvider } from "styled-components";
 import { action } from "@storybook/addon-actions";
-
 import Tabs from "../src/lib/components/tabs/Tabs.component";
-import { jade } from "../src/lib/style/theme";
+import { Wrapper, Title } from "./common";
 
 const tabs = [
   {
@@ -26,13 +24,9 @@ const tabs = [
 
 storiesOf("Tabs", module).add("Default", () => {
   return (
-    <div>
-      <h3>Default Tabs </h3>
-      <Tabs items={tabs}>Content</Tabs>
-      <h3>Tabs with customized color</h3>
-      <Tabs items={tabs} activeColor="#e99121">
-        Content
-      </Tabs>
-    </div>
+    <Wrapper>
+      <Title>Default Tabs </Title>
+      <Tabs items={tabs}></Tabs>
+    </Wrapper>
   );
 });

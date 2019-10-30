@@ -2,53 +2,54 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import Tooltip from "../src/lib/components/tooltip/Tooltip.component";
 import Button from "../src/lib/components/button/Button.component";
+import { Wrapper, Title, SubTitle } from "./common";
 
 storiesOf("Tooltip", module).add("Default", () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <Wrapper style={{ display: "flex", flexDirection: "column" }}>
       <div>
-        <h3>Default Tooltip</h3>
+        <Title>Default Tooltip</Title>
         <Tooltip overlay="Hellooooo">
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
 
       <div>
-        <h3>Tooltip right</h3>
+        <Title>Tooltip right</Title>
         <Tooltip placement="right" overlay="Helloooooo">
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
       <div style={{ marginLeft: "100px" }}>
-        <h3>Tooltip left</h3>
+        <Title>Tooltip left</Title>
         <Tooltip placement="left" overlay="Helloooooo">
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
       <div>
-        <h3>Tooltip bottom</h3>
+        <Title>Tooltip bottom</Title>
         <Tooltip placement="bottom" overlay="Helloooooo">
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
       <div>
-        <h3>Customize your tooltip style</h3>
+        <Title>Customize your tooltip style</Title>
         <Tooltip
           placement="right"
           overlaystyle={{ backgroundColor: "green", fontSize: "20px" }}
           overlay="Helloooooo"
         >
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
       <div>
-        <h3>Tooltip with button</h3>
+        <Title>Tooltip with button</Title>
         <Tooltip placement="bottom" overlay="Helloooooo">
           <Button size="small" text="Hover here" />
         </Tooltip>
       </div>
       <div>
-        <h3>add icon in the overlay of tooltip</h3>
+        <Title>add icon in the overlay of tooltip</Title>
         <Tooltip
           placement="bottom"
           overlay={
@@ -57,15 +58,15 @@ storiesOf("Tooltip", module).add("Default", () => {
             </div>
           }
         >
-          <span>tooltip with icon</span>
+          <SubTitle>tooltip with icon</SubTitle>
         </Tooltip>
       </div>
       <div>
-        <h3>Tooltip doesn't trigger</h3>
+        <Title>Tooltip doesn't trigger</Title>
         <Tooltip placement="bottom">
-          <span>Hover here!</span>
+          <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
-    </div>
+    </Wrapper>
   );
 });

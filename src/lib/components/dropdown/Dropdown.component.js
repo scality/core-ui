@@ -34,22 +34,6 @@ const DropdownStyled = styled.div`
   .trigger {
     margin: 0;
     border-radius: 0;
-    ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
-      const brandDark = darken(0.1, brandingTheme[props.variant]);
-      return props.active
-        ? css`
-            background-color: ${brandDark};
-            color: ${defaultTheme.white};
-
-            &:hover {
-              background-color: ${brandDark};
-              color: ${defaultTheme.white};
-            }
-          `
-        : null;
-    }}
   }
 `;
 
@@ -57,7 +41,8 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  box-shadow: 0 1px 3px 0 ${defaultTheme.gray};
+  border: 1px solid
+    ${props => mergeTheme(props.theme, defaultTheme).backgroundContrast2};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
@@ -101,17 +86,14 @@ const DropdownMenuItemStyled = styled.li`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = lighten(0.1, brandingTheme[props.variant]);
     return css`
-      background-color: ${brandingTheme[props.variant]};
-      color: ${defaultTheme.white};
+      background-color: ${brandingTheme.backgroundContrast1};
+      color: ${brandingTheme.text};
       &:hover {
-        background-color: ${brandLight};
-        color: ${defaultTheme.white};
+        background-color: ${brandingTheme.backgroundContrast2};
       }
       &:active {
-        background-color: ${brandingTheme[props.variant]};
-        color: ${defaultTheme.white};
+        background-color: ${brandingTheme.backgroundContrast1};
       }
     `;
   }};

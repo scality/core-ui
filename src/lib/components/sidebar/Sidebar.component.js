@@ -22,8 +22,11 @@ const SidebarContainer = styled.div`
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
-      background-color: ${brandingTheme.primary};
-      color: ${brandingTheme.secondary};
+      background-color: ${brandingTheme.base};
+      color: ${brandingTheme.primary};
+      .fas {
+        color: ${brandingTheme.primary};
+      }
     `;
   }}
 
@@ -53,22 +56,20 @@ const SidebarItem = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = lighten(0.1, brandingTheme.primary);
-    const brandDark = darken(0.1, brandingTheme.primary);
     return props.active
       ? css`
-          background-color: ${brandDark};
-          color: ${brandingTheme.secondary};
+          background-color: ${brandingTheme.baseContrast1};
+          color: ${brandingTheme.primary};
           cursor: default;
         `
       : css`
           &:hover {
-            background-color: ${brandLight};
-            color: ${brandingTheme.secondary};
+            background-color: ${brandingTheme.baseContrast1};
+            color: ${brandingTheme.primary};
           }
           &:active {
-            background-color: ${brandingTheme.primary};
-            color: ${brandingTheme.secondary};
+            background-color: ${brandingTheme.baseContrast1};
+            color: ${brandingTheme.primary};
           }
         `;
   }}
@@ -86,7 +87,7 @@ const MenuItemSelected = styled.div`
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
-      background-color: ${brandingTheme.secondary};
+      background-color: ${brandingTheme.primary};
     `;
   }}
 `;

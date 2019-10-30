@@ -1,583 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Button Combinations 1`] = `
-<div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb dBYILs"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="primary"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb fxegYw"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="secondary"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb dHrFjj"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="success"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb hlfXUS"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="info"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb hglVPL"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="warning"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb dETwpl"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={false}
-  text="Hello"
-  variant="danger"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb giQLJB"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="primary"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb fINfQy"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="secondary"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb kNqqrq"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="success"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb gabfdz"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="info"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb ktmPjX"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="warning"
-/&gt;
-    </pre>
-  </div>
-  <div
-    style={Object {}}
-  >
-    <button
-      className="sc-button sc-bxivhb jNITad"
-      disabled={false}
-      size="base"
-      title=""
-      type="button"
-    >
-      <span
-        className="sc-bZQynM iMWVsx"
-      >
-        <span
-          className="sc-button-text"
-        >
-          <span
-            className="sc-ifAKCX joVDVz"
-            size="base"
-          >
-            <i
-              className="fas fa-star"
-            />
-          </span>
-          <span
-            className="sc-EHOje boinrg"
-          >
-            Hello
-          </span>
-        </span>
-      </span>
-    </button>
-    <pre
-      className="source"
-    >
-      &lt;Button
-  icon={
-    &lt;i
-      className="fas fa-star"
-    /&gt;
-  }
-  outlined={true}
-  text="Hello"
-  variant="danger"
-/&gt;
-    </pre>
-  </div>
-</div>
-`;
-
 exports[`Storyshots Button Default 1`] = `
 <div
-  className="storybook-button"
+  className="storybook-button sc-htoDjs cSFtNk"
 >
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Default
   </h3>
   <button
-    className="sc-button sc-bxivhb dNMuux"
+    className="sc-button sc-bxivhb fKJuJK"
     disabled={false}
     size="smaller"
     title=""
@@ -598,7 +31,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb geVSnK"
+    className="sc-button sc-bxivhb gxZvuR"
     disabled={false}
     size="small"
     title=""
@@ -619,7 +52,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb dBYILs"
+    className="sc-button sc-bxivhb hMzQXI"
     data-cy="default_button"
     disabled={false}
     size="base"
@@ -641,7 +74,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb ghVuvW"
+    className="sc-button sc-bxivhb dApMWo"
     disabled={false}
     size="large"
     title=""
@@ -662,7 +95,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb eUrjuL"
+    className="sc-button sc-bxivhb fWtgix"
     disabled={false}
     size="larger"
     title=""
@@ -682,11 +115,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Variant
   </h3>
   <button
-    className="sc-button sc-bxivhb dBYILs"
+    className="sc-button sc-bxivhb hMzQXI"
     disabled={false}
     size="base"
     title=""
@@ -707,7 +142,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb fxegYw"
+    className="sc-button sc-bxivhb dqKujv"
     disabled={false}
     size="base"
     title=""
@@ -770,7 +205,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb hglVPL"
+    className="sc-button sc-bxivhb cVVPvQ"
     disabled={false}
     size="base"
     title=""
@@ -811,11 +246,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Outlined
   </h3>
   <button
-    className="sc-button sc-bxivhb giQLJB"
+    className="sc-button sc-bxivhb kxYbdf"
     disabled={false}
     onClick={[Function]}
     size="base"
@@ -836,11 +273,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Disabled
   </h3>
   <button
-    className="sc-button sc-bxivhb chEApC"
+    className="sc-button sc-bxivhb lphces"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -861,11 +300,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Link
   </h3>
   <a
-    className="sc-button sc-gzVnrw eqbljQ"
+    className="sc-button sc-gzVnrw dxIUDu"
     disabled={false}
     href="/"
     size="base"
@@ -877,11 +318,13 @@ exports[`Storyshots Button Default 1`] = `
       Hello
     </span>
   </a>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Loading
   </h3>
   <button
-    className="sc-button sc-bxivhb guYvBw"
+    className="sc-button sc-bxivhb hdwVjf"
     disabled={true}
     size="base"
     title=""
@@ -891,7 +334,7 @@ exports[`Storyshots Button Default 1`] = `
       className="sc-bZQynM iMWVsx"
     >
       <div
-        className="sc-loader sc-bdVaJa gHEhaZ"
+        className="sc-loader sc-bdVaJa calEWh"
         color="#87929D"
         size="base"
       >
@@ -1033,11 +476,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Button Text Icon
   </h3>
   <button
-    className="sc-button sc-bxivhb dNMuux"
+    className="sc-button sc-bxivhb fKJuJK"
     disabled={false}
     size="smaller"
     title=""
@@ -1066,7 +511,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb geVSnK"
+    className="sc-button sc-bxivhb gxZvuR"
     disabled={false}
     size="small"
     title=""
@@ -1095,7 +540,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb dBYILs"
+    className="sc-button sc-bxivhb hMzQXI"
     disabled={false}
     size="base"
     title=""
@@ -1124,7 +569,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb ghVuvW"
+    className="sc-button sc-bxivhb dApMWo"
     disabled={false}
     size="large"
     title=""
@@ -1153,7 +598,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb eUrjuL"
+    className="sc-button sc-bxivhb fWtgix"
     disabled={false}
     size="larger"
     title=""
@@ -1181,11 +626,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Icon Button
   </h3>
   <button
-    className="sc-button sc-bxivhb dNMuux"
+    className="sc-button sc-bxivhb fKJuJK"
     disabled={false}
     size="smaller"
     title=""
@@ -1214,7 +661,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb geVSnK"
+    className="sc-button sc-bxivhb gxZvuR"
     disabled={false}
     size="small"
     title=""
@@ -1243,7 +690,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb dBYILs"
+    className="sc-button sc-bxivhb hMzQXI"
     disabled={false}
     size="base"
     title=""
@@ -1272,7 +719,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb ghVuvW"
+    className="sc-button sc-bxivhb dApMWo"
     disabled={false}
     size="large"
     title=""
@@ -1301,7 +748,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb eUrjuL"
+    className="sc-button sc-bxivhb fWtgix"
     disabled={false}
     size="larger"
     title=""
@@ -1329,11 +776,13 @@ exports[`Storyshots Button Default 1`] = `
       </span>
     </span>
   </button>
-  <h3>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
     Icon Button Inverted
   </h3>
   <button
-    className="sc-button sc-bxivhb hpJUsZ"
+    className="sc-button sc-bxivhb fRmOTD"
     disabled={false}
     size="smaller"
     title=""
@@ -1362,7 +811,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb hCfuac"
+    className="sc-button sc-bxivhb LLhWa"
     disabled={false}
     size="small"
     title=""
@@ -1391,7 +840,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb kjJbLP"
+    className="sc-button sc-bxivhb bGOshX"
     disabled={false}
     size="base"
     title=""
@@ -1420,7 +869,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb kGLnHM"
+    className="sc-button sc-bxivhb fgMFFV"
     disabled={false}
     size="large"
     title=""
@@ -1449,7 +898,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-button sc-bxivhb jupGLz"
+    className="sc-button sc-bxivhb krAwuY"
     disabled={false}
     size="larger"
     title=""

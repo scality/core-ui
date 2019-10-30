@@ -4,6 +4,8 @@ import { storiesOf } from "@storybook/react";
 import Input from "../src/lib/components/input/Input.component";
 import { action } from "@storybook/addon-actions";
 import styled from "styled-components";
+import { Wrapper, Title } from "./common";
+
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
   value: index,
@@ -18,22 +20,22 @@ const ExampleInput = () => {
   `;
 
   return (
-    <div>
-      <h3>Input without label</h3>
+    <Wrapper>
+      <Title>Input without label</Title>
       <Input
         id="id1"
         value="value"
         onChange={action("onChange")}
         data-cy="default_input"
       />
-      <h3>Input with label</h3>
+      <Title>Input with label</Title>
       <Input
         id="id2"
         label="label"
         value="value"
         onChange={action("onChange")}
       />
-      <h3>Input with error</h3>
+      <Title>Input with error</Title>
       <Input
         id="id3"
         label="label"
@@ -41,7 +43,7 @@ const ExampleInput = () => {
         error="error"
         onChange={action("onChange")}
       />
-      <h3>Input with long error</h3>
+      <Title>Input with long error</Title>
       <CustomInput>
         <Input
           id="id3"
@@ -52,7 +54,7 @@ const ExampleInput = () => {
         />
       </CustomInput>
 
-      <h3>Checkbox Input</h3>
+      <Title>Checkbox Input</Title>
       <Input
         id="id4"
         label="label"
@@ -60,7 +62,7 @@ const ExampleInput = () => {
         onChange={action("onChange")}
         type="checkbox"
       />
-      <h3>Checkbox Input with error</h3>
+      <Title>Checkbox Input with error</Title>
       <Input
         id="id5"
         label="label"
@@ -69,7 +71,7 @@ const ExampleInput = () => {
         type="checkbox"
         error="error"
       />
-      <h3>Select Input</h3>
+      <Title>Select Input</Title>
       <Input
         id="id6"
         label="label"
@@ -80,7 +82,7 @@ const ExampleInput = () => {
         noOptionsMessage={() => "Not found"}
         value={options[0]}
       />
-    </div>
+    </Wrapper>
   );
 };
 

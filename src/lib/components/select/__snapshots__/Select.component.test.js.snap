@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Select Default 1`] = `
-<div>
-  <h3>
+<div
+  className="sc-bwzfXH hilSGa"
+>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
     Default
   </h3>
   <div
@@ -13,7 +17,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa dkTmkC"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -125,7 +129,9 @@ exports[`Storyshots Select Default 1`] = `
       </div>
     </div>
   </div>
-  <h3>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
     Default with custom formatOptionLabel
   </h3>
   <div
@@ -136,7 +142,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa dkTmkC"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -258,7 +264,9 @@ exports[`Storyshots Select Default 1`] = `
       </div>
     </div>
   </div>
-  <h3>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
     Multi Select
   </h3>
   <div
@@ -269,7 +277,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa hGWMfX"
+      className="sc-select-container sc-bdVaJa dkTmkC"
     >
       <div
         className="sc-select css-2b097c-container"

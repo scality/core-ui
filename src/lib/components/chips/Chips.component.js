@@ -19,12 +19,11 @@ type Props = {
 
 const ChipsContainer = styled.div`
   display: inline-flex;
-  background-color: ${defaultTheme.grayLighter};
   .sc-chips-remove {
     padding-right: 10px;
     color: ${defaultTheme.white};
     &:hover {
-      color: ${defaultTheme.gray};
+      color: ${defaultTheme.grayLight};
     }
   }
   ${props => {
@@ -78,28 +77,25 @@ const ChipsContainer = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      font-size: ${defaultTheme.fontSize[props.size]};
-      background-color: ${brandingTheme[props.variant]};
-      color: ${defaultTheme.white};
-    `;
-  }}
-
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
     const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
-    return (
-      props.onClick &&
-      css`
-        &:hover {
-          cursor: pointer;
-          background-color: ${brandLight};
-        }
-        &:active {
+    return props.onClick
+      ? css`
           background-color: ${brandingTheme[props.variant]};
-        }
-      `
-    );
+          color: ${defaultTheme.white};
+          font-size: ${defaultTheme.fontSize[props.size]};
+          &:hover {
+            cursor: pointer;
+            background-color: ${brandLight};
+          }
+          &:active {
+            background-color: ${brandingTheme[props.variant]};
+          }
+        `
+      : css`
+          background-color: ${brandingTheme[props.variant]};
+          color: ${defaultTheme.white};
+          font-size: ${defaultTheme.fontSize[props.size]};
+        `;
   }}
 `;
 
@@ -122,46 +118,43 @@ export const ChipsText = styled.span`
   padding: ${props => (props.icon || props.onRemove ? "5px" : "5px 10px")};
 `;
 
-function Chips({
+const Chips = ({
   text = "",
-  variant = defaultTheme.brand.base,
+  variant = defaultTheme.brand.primary,
   icon = null,
   onClick,
   onRemove,
   size = "base"
-}: Props) {
-  return (
-    <ChipsContainer
-      className="sc-chips"
-      onClick={onClick}
-      variant={variant}
-      icon={icon}
-      size={size}
-    >
-      {icon && (
-        <ChipsIcon
-          className="sc-chips-icon"
-          text={text}
-          variant={variant}
-          size={size}
-        >
-          {icon}
-        </ChipsIcon>
-      )}
-      <ChipsText className="sc-chips-text" icon={icon} onRemove={onRemove}>
-        {text}
-      </ChipsText>
-      {onRemove && (
-        <Button
-          className="sc-chips-remove"
-          size={size}
-          inverted={true}
-          icon={<i className="fas fa-times" />}
-          onClick={onRemove}
-        />
-      )}
-    </ChipsContainer>
-  );
-}
-
+}: Props) => (
+  <ChipsContainer
+    className="sc-chips"
+    onClick={onClick}
+    variant={variant}
+    icon={icon}
+    size={size}
+  >
+    {icon && (
+      <ChipsIcon
+        className="sc-chips-icon"
+        text={text}
+        variant={variant}
+        size={size}
+      >
+        {icon}
+      </ChipsIcon>
+    )}
+    <ChipsText className="sc-chips-text" icon={icon} onRemove={onRemove}>
+      {text}
+    </ChipsText>
+    {onRemove && (
+      <Button
+        className="sc-chips-remove"
+        size={size}
+        inverted={true}
+        icon={<i className="fas fa-times" />}
+        onClick={onRemove}
+      />
+    )}
+  </ChipsContainer>
+);
 export default Chips;

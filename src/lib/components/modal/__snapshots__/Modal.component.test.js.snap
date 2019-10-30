@@ -1,12 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Modal Default 1`] = `
-<div>
+<div
+  className="sc-fjdhpX fYqDPr"
+>
   <div
     className="sc-modal sc-bdVaJa gIywMY"
   >
     <div
-      className="sc-modal-content sc-bwzfXH jICJi"
+      className="sc-modal-content sc-bwzfXH fKuiVN"
     >
       <div
         className="sc-modal-header sc-htpNat fPOfap"
@@ -33,7 +35,7 @@ exports[`Storyshots Modal Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-modal-footer sc-EHOje iWyHIu"
+        className="sc-modal-footer sc-EHOje gzTeXM"
       >
         <div
           style={
@@ -66,7 +68,7 @@ exports[`Storyshots Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-button sc-iwsKbI dnERAW"
+            className="sc-button sc-iwsKbI bVCWGk"
             disabled={false}
             onClick={[Function]}
             size="small"

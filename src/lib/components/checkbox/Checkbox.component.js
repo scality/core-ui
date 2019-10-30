@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import styled, { css } from "styled-components";
-import { darken } from "polished";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
@@ -49,6 +48,7 @@ const StyledCheckboxLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   padding-left: ${defaultTheme.padding.base};
   vertical-align: middle;
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
 `;
 
 const StyledCheckbox = styled.label`
@@ -67,7 +67,6 @@ const StyledCheckbox = styled.label`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandDark = darken(0.1, brandingTheme.primary);
 
     const iconCheckedColor =
       props.checked || props.disabled ? brandingTheme.primary : "transparent";
@@ -86,7 +85,7 @@ const StyledCheckbox = styled.label`
         width: 18px;
         height: 18px;
         border: 2px solid ${checkBoxColor};
-        background: ${defaultTheme.white};
+        background: ${brandingTheme.backgroundContrast1};
         border-radius: 4px;
       }
       i {
@@ -99,7 +98,7 @@ const StyledCheckbox = styled.label`
 
       &:hover {
         &:before {
-          border-color: ${brandDark};
+          border-color: ${brandingTheme.primary};
         }
       }
     `;
