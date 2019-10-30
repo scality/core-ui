@@ -1,7 +1,6 @@
 //@flow
 import React from "react";
 import styled, { css } from "styled-components";
-import { darken, lighten } from "polished";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
