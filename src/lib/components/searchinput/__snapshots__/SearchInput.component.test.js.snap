@@ -26,6 +26,7 @@ exports[`Storyshots SearchInput Default 1`] = `
           className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            autocomplete="off"
             className="sc-input-type"
             name="search"
             onBlur={[Function]}
@@ -79,6 +80,7 @@ exports[`Storyshots SearchInput Default 1`] = `
           className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            autocomplete="off"
             className="sc-input-type"
             name="search"
             onBlur={[Function]}
@@ -130,6 +132,7 @@ exports[`Storyshots SearchInput Default 1`] = `
           className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            autocomplete="off"
             className="sc-input-type"
             name="search"
             onBlur={[Function]}
@@ -182,6 +185,7 @@ exports[`Storyshots SearchInput Default 1`] = `
           className="sc-input-wrapper sc-bZQynM AMncx"
         >
           <input
+            autocomplete="off"
             className="sc-input-type"
             name="search"
             onBlur={[Function]}

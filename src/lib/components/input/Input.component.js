@@ -148,6 +148,7 @@ const InputRenderer = ({
         type={type}
         value={value}
         onChange={onChange}
+        autocomplete="off"
         {...rest}
       />
     );

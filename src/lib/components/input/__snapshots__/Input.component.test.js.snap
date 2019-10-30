@@ -16,6 +16,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        autocomplete="off"
         className="sc-input-type"
         data-cy="default_input"
         id="id1"
@@ -45,6 +46,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        autocomplete="off"
         className="sc-input-type"
         id="id2"
         onBlur={[Function]}
@@ -73,6 +75,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-input-wrapper sc-bZQynM AMncx"
     >
       <input
+        autocomplete="off"
         className="sc-input-type"
         id="id3"
         onBlur={[Function]}
@@ -109,6 +112,7 @@ exports[`Storyshots Input Default 1`] = `
         className="sc-input-wrapper sc-bZQynM AMncx"
       >
         <input
+          autocomplete="off"
           className="sc-input-type"
           id="id3"
           onBlur={[Function]}
