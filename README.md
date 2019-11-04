@@ -55,7 +55,6 @@ const BooksList = (props) => {
 ```
     "@fortawesome/fontawesome-free": "5.7.2",
     "polished": "3.4.1",
-    "rc-tooltip": "^3.7.3",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-debounce-input": "3.2.0",
@@ -66,15 +65,28 @@ const BooksList = (props) => {
 
 - Run ```npm install``` to install dependencies
 
-- Import a component (e.g. Layout). You can wrap your component in a styled-components'```ThemeProvider``` to override its default theme.
+- Import a component (e.g. Layout). You can wrap your component in a styled-components'```ThemeProvider``` to override its [default theme](https://github.com/scality/core-ui/blob/6f5a7946e7086e08883a8fe48182598ce8a476e5/src/lib/style/theme.js#L34) by defining your own theme like below.
 ```
+
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '@scality/core-ui';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-const theme= {
+const theme= {  //Dark Theme
   "brand": {
-    "primary": "#283593"
+    "base": "#19161D",
+    "baseContrast1": "#26232A",
+    "primary": "#e99121",
+    "secondary": "#2979ff",
+    "success": "#006F62",
+    "info": "#00B2A9",
+    "warning": "#F1B434",
+    "danger": "#EF3340",
+    "background": "#26232A",
+    "backgroundContrast1": "#333037",
+    "backgroundContrast2": "#3F3C43",
+    "text": "#ffffff",
+    "border": "#ffffff"
   }
 };
 
@@ -141,6 +153,7 @@ You can use plop when you want to create a new react component. Plop generates c
 
 - Run `npm run plop` to generate component template files
 - Update these template files to add features
+- Make sure that the component is themable (i.e support Dark/Light Mode)
 - Add storybook stories to cover all features 
 - Update `src/lib/index.js` to export the new component
 - Run `npm run test` to generate snapshot tests which are based on storybook stories
