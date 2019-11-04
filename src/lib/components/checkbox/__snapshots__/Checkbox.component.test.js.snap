@@ -11,7 +11,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={true}
-    className="sc-checkbox sc-bwzfXH buIIzS"
+    className="sc-bwzfXH buIIzS sc-checkbox"
   >
     <input
       checked={true}
@@ -23,7 +23,7 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hERZIf"
+      className="sc-bdVaJa hERZIf text"
     >
       interested?
     </span>
@@ -35,7 +35,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH fiqgwR"
+    className="sc-bwzfXH fiqgwR sc-checkbox"
   >
     <input
       checked={false}
@@ -46,7 +46,7 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hERZIf"
+      className="sc-bdVaJa hERZIf text"
     >
       interested?
     </span>
@@ -58,7 +58,7 @@ exports[`Storyshots Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-checkbox sc-bwzfXH dIukKP"
+    className="sc-bwzfXH dIukKP sc-checkbox"
     disabled={true}
   >
     <input
@@ -71,7 +71,7 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="text sc-bdVaJa hERZIf"
+      className="sc-bdVaJa hERZIf text"
     >
       interested?
     </span>

@@ -10,10 +10,10 @@ exports[`Storyshots Breadcrumb Default 1`] = `
     Default Breadcrumb 
   </h3>
   <ol
-    className="sc-breadcrumb sc-bdVaJa uRaVh"
+    className="sc-bdVaJa uRaVh sc-breadcrumb"
   >
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <a
         href="home"
@@ -22,14 +22,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <label
         href="clusters"
@@ -38,14 +38,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </label>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <a
         href="cluster"
@@ -54,14 +54,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <label
         href="nodes"
@@ -70,14 +70,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </label>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <a
         href="node"
@@ -87,14 +87,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH lMHcU"
+      className="sc-bwzfXH lMHcU sc-breadcrumb_item"
     >
       <a
         href="volumes"
@@ -103,14 +103,14 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-breadcrumb_separator sc-htpNat fmvEAc"
+      className="sc-htpNat fmvEAc sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-breadcrumb_item sc-bwzfXH cAeBKZ"
+      className="sc-bwzfXH cAeBKZ sc-breadcrumb_item"
     >
       <label
         title="volume_longlonglonglonglonglonglonglonglong"

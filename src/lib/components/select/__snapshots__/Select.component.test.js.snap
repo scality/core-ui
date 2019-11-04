@@ -17,7 +17,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa dkTmkC"
+      className="sc-bdVaJa dkTmkC sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -37,7 +37,7 @@ exports[`Storyshots Select Default 1`] = `
               Select an item...
             </div>
             <div
-              className="css-w8afj7-Input"
+              className="css-b8ldur-Input"
             >
               <div
                 className="sc-select__input"
@@ -95,7 +95,7 @@ exports[`Storyshots Select Default 1`] = `
             </div>
           </div>
           <div
-            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
           >
             <span
               className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -108,7 +108,7 @@ exports[`Storyshots Select Default 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-tj5bde-Svg"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -142,7 +142,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa dkTmkC"
+      className="sc-bdVaJa dkTmkC sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -172,7 +172,7 @@ exports[`Storyshots Select Default 1`] = `
               </div>
             </div>
             <div
-              className="css-w8afj7-Input"
+              className="css-b8ldur-Input"
             >
               <div
                 className="sc-select__input"
@@ -230,7 +230,7 @@ exports[`Storyshots Select Default 1`] = `
             </div>
           </div>
           <div
-            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
           >
             <span
               className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -243,7 +243,7 @@ exports[`Storyshots Select Default 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-tj5bde-Svg"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -277,7 +277,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-select-container sc-bdVaJa dkTmkC"
+      className="sc-bdVaJa dkTmkC sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -307,14 +307,14 @@ exports[`Storyshots Select Default 1`] = `
                 </div>
               </div>
               <div
-                className="css-1alnv5e sc-select__multi-value__remove"
+                className="css-xb97g8 sc-select__multi-value__remove"
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onTouchEnd={[Function]}
               >
                 <svg
                   aria-hidden="true"
-                  className="css-tj5bde-Svg"
+                  className="css-6q0nyr-Svg"
                   focusable="false"
                   height={14}
                   viewBox="0 0 20 20"
@@ -342,14 +342,14 @@ exports[`Storyshots Select Default 1`] = `
                 </div>
               </div>
               <div
-                className="css-1alnv5e sc-select__multi-value__remove"
+                className="css-xb97g8 sc-select__multi-value__remove"
                 onClick={[Function]}
                 onMouseDown={[Function]}
                 onTouchEnd={[Function]}
               >
                 <svg
                   aria-hidden="true"
-                  className="css-tj5bde-Svg"
+                  className="css-6q0nyr-Svg"
                   focusable="false"
                   height={14}
                   viewBox="0 0 20 20"
@@ -362,7 +362,7 @@ exports[`Storyshots Select Default 1`] = `
               </div>
             </div>
             <div
-              className="css-w8afj7-Input"
+              className="css-b8ldur-Input"
             >
               <div
                 className="sc-select__input"
@@ -420,7 +420,7 @@ exports[`Storyshots Select Default 1`] = `
             </div>
           </div>
           <div
-            className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
           >
             <div
               aria-hidden="true"
@@ -430,7 +430,7 @@ exports[`Storyshots Select Default 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-tj5bde-Svg"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"
@@ -452,7 +452,7 @@ exports[`Storyshots Select Default 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="css-tj5bde-Svg"
+                className="css-6q0nyr-Svg"
                 focusable="false"
                 height={20}
                 viewBox="0 0 20 20"

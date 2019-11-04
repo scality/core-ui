@@ -10,10 +10,10 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-input sc-bxivhb iaQBfF"
+    className="sc-bxivhb iaQBfF sc-input"
   >
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <input
         autocomplete="off"
@@ -34,16 +34,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-input sc-bxivhb iaQBfF"
+    className="sc-bxivhb iaQBfF sc-input"
   >
     <label
-      className="sc-input-label sc-ifAKCX gtuqkp"
+      className="sc-ifAKCX gtuqkp sc-input-label"
       htmlFor="id2"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <input
         autocomplete="off"
@@ -63,16 +63,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-input sc-bxivhb hRIJRa"
+    className="sc-bxivhb hRIJRa sc-input"
   >
     <label
-      className="sc-input-label sc-ifAKCX gtuqkp"
+      className="sc-ifAKCX gtuqkp sc-input-label"
       htmlFor="id3"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <input
         autocomplete="off"
@@ -85,7 +85,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-input-error sc-EHOje evwsgB"
+        className="sc-EHOje evwsgB sc-input-error"
       >
         error
       </span>
@@ -100,16 +100,16 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-iwsKbI cChjqy"
   >
     <div
-      className="sc-input sc-bxivhb hRIJRa"
+      className="sc-bxivhb hRIJRa sc-input"
     >
       <label
-        className="sc-input-label sc-ifAKCX gtuqkp"
+        className="sc-ifAKCX gtuqkp sc-input-label"
         htmlFor="id3"
       >
         label
       </label>
       <div
-        className="sc-input-wrapper sc-bZQynM AMncx"
+        className="sc-bZQynM AMncx sc-input-wrapper"
       >
         <input
           autocomplete="off"
@@ -122,7 +122,7 @@ exports[`Storyshots Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-input-error sc-EHOje evwsgB"
+          className="sc-EHOje evwsgB sc-input-error"
         >
           long error error error error error error error error error
         </span>
@@ -135,20 +135,20 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-input sc-bxivhb iaQBfF"
+    className="sc-bxivhb iaQBfF sc-input"
   >
     <label
-      className="sc-input-label sc-ifAKCX gtuqkp"
+      className="sc-ifAKCX gtuqkp sc-input-label"
       htmlFor="id4"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH fiqgwR"
+        className="sc-bwzfXH fiqgwR sc-checkbox"
       >
         <input
           checked={false}
@@ -169,20 +169,20 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-input sc-bxivhb hRIJRa"
+    className="sc-bxivhb hRIJRa sc-input"
   >
     <label
-      className="sc-input-label sc-ifAKCX gtuqkp"
+      className="sc-ifAKCX gtuqkp sc-input-label"
       htmlFor="id5"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <label
         checked={false}
-        className="sc-checkbox sc-bwzfXH fiqgwR"
+        className="sc-bwzfXH fiqgwR sc-checkbox"
       >
         <input
           checked={false}
@@ -196,7 +196,7 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-input-error sc-EHOje evwsgB"
+        className="sc-EHOje evwsgB sc-input-error"
       >
         error
       </span>
@@ -208,19 +208,19 @@ exports[`Storyshots Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-input sc-bxivhb iaQBfF"
+    className="sc-bxivhb iaQBfF sc-input"
   >
     <label
-      className="sc-input-label sc-ifAKCX gtuqkp"
+      className="sc-ifAKCX gtuqkp sc-input-label"
       htmlFor="id6"
     >
       label
     </label>
     <div
-      className="sc-input-wrapper sc-bZQynM AMncx"
+      className="sc-bZQynM AMncx sc-input-wrapper"
     >
       <div
-        className="sc-select-container sc-htpNat hvWcaF"
+        className="sc-htpNat hvWcaF sc-select-container"
       >
         <div
           className="sc-select css-2b097c-container"
@@ -247,7 +247,7 @@ exports[`Storyshots Input Default 1`] = `
                 </div>
               </div>
               <div
-                className="css-w8afj7-Input"
+                className="css-b8ldur-Input"
               >
                 <div
                   className="sc-select__input"
@@ -305,7 +305,7 @@ exports[`Storyshots Input Default 1`] = `
               </div>
             </div>
             <div
-              className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+              className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
             >
               <span
                 className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -318,7 +318,7 @@ exports[`Storyshots Input Default 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="css-tj5bde-Svg"
+                  className="css-6q0nyr-Svg"
                   focusable="false"
                   height={20}
                   viewBox="0 0 20 20"

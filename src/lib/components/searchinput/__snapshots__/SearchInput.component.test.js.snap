@@ -17,13 +17,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw sksES"
+      className="sc-gzVnrw sksES sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb iaQBfF"
+        className="sc-bxivhb iaQBfF sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             autocomplete="off"
@@ -70,14 +70,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw sksES"
+      className="sc-gzVnrw sksES sc-searchinput"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-input sc-bxivhb iaQBfF"
+        className="sc-bxivhb iaQBfF sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             autocomplete="off"
@@ -123,13 +123,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw iCGhZM"
+      className="sc-gzVnrw iCGhZM sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb iaQBfF"
+        className="sc-bxivhb iaQBfF sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             autocomplete="off"
@@ -176,13 +176,13 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-searchinput sc-gzVnrw iCGhZM"
+      className="sc-gzVnrw iCGhZM sc-searchinput"
     >
       <div
-        className="sc-input sc-bxivhb iaQBfF"
+        className="sc-bxivhb iaQBfF sc-input"
       >
         <div
-          className="sc-input-wrapper sc-bZQynM AMncx"
+          className="sc-bZQynM AMncx sc-input-wrapper"
         >
           <input
             autocomplete="off"

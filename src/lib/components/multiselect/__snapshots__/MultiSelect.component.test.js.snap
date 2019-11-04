@@ -13,7 +13,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -21,10 +21,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         Destination Locations
       </h3>
       <div
-        className="sc-multi-select-list-search sc-jTzLTM gqMPpu"
+        className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-select-container sc-iwsKbI hhmqLO"
+          className="sc-iwsKbI hhmqLO sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -44,7 +44,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                   Select location to add
                 </div>
                 <div
-                  className="css-w8afj7-Input"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className="sc-select__input"
@@ -102,7 +102,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+                className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -115,7 +115,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-tj5bde-Svg"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -131,7 +131,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-button sc-EHOje hSgWMt"
+          className="sc-EHOje hSgWMt sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -162,14 +162,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-checkbox sc-bwzfXH buIIzS"
+            className="sc-bwzfXH buIIzS sc-checkbox"
           >
             <input
               checked={true}
@@ -181,7 +181,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-button sc-EHOje fuJWbI"
+            className="sc-EHOje fuJWbI sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -212,24 +212,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -261,14 +261,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-checkbox sc-bwzfXH fiqgwR"
+            className="sc-bwzfXH fiqgwR sc-checkbox"
           >
             <input
               checked={false}
@@ -280,7 +280,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-button sc-EHOje fuJWbI"
+            className="sc-EHOje fuJWbI sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -311,24 +311,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -370,7 +370,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -378,14 +378,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         Destination Locations
       </h3>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-checkbox sc-bwzfXH buIIzS"
+            className="sc-bwzfXH buIIzS sc-checkbox"
           >
             <input
               checked={true}
@@ -397,7 +397,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-button sc-EHOje fuJWbI"
+            className="sc-EHOje fuJWbI sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -428,24 +428,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -477,14 +477,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-checkbox sc-bwzfXH fiqgwR"
+            className="sc-bwzfXH fiqgwR sc-checkbox"
           >
             <input
               checked={false}
@@ -496,7 +496,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-button sc-EHOje fuJWbI"
+            className="sc-EHOje fuJWbI sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -527,24 +527,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -586,7 +586,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -594,10 +594,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         Destination Locations
       </h3>
       <div
-        className="sc-multi-select-list-search sc-jTzLTM gqMPpu"
+        className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-select-container sc-iwsKbI hhmqLO"
+          className="sc-iwsKbI hhmqLO sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -617,7 +617,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                   Select location to add
                 </div>
                 <div
-                  className="css-w8afj7-Input"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className="sc-select__input"
@@ -675,7 +675,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+                className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -688,7 +688,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-tj5bde-Svg"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -704,7 +704,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-button sc-EHOje hSgWMt"
+          className="sc-EHOje hSgWMt sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -735,14 +735,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-checkbox sc-bwzfXH buIIzS"
+            className="sc-bwzfXH buIIzS sc-checkbox"
           >
             <input
               checked={true}
@@ -755,24 +755,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -804,14 +804,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-checkbox sc-bwzfXH fiqgwR"
+            className="sc-bwzfXH fiqgwR sc-checkbox"
           >
             <input
               checked={false}
@@ -824,24 +824,24 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -883,7 +883,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -891,10 +891,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         Destination Locations
       </h3>
       <div
-        className="sc-multi-select-list-search sc-jTzLTM gqMPpu"
+        className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-select-container sc-iwsKbI hhmqLO"
+          className="sc-iwsKbI hhmqLO sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -914,7 +914,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                   Select location to add
                 </div>
                 <div
-                  className="css-w8afj7-Input"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className="sc-select__input"
@@ -972,7 +972,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+                className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -985,7 +985,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-tj5bde-Svg"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -1001,7 +1001,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-button sc-EHOje hSgWMt"
+          className="sc-EHOje hSgWMt sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1032,30 +1032,30 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1087,30 +1087,30 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-button sc-EHOje hcFjoY"
+            className="sc-EHOje hcFjoY sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1152,7 +1152,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -1160,10 +1160,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         Destination Locations
       </h3>
       <div
-        className="sc-multi-select-list-search sc-jTzLTM gqMPpu"
+        className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-select-container sc-iwsKbI hhmqLO"
+          className="sc-iwsKbI hhmqLO sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1183,7 +1183,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                   Select location to add
                 </div>
                 <div
-                  className="css-w8afj7-Input"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className="sc-select__input"
@@ -1241,7 +1241,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+                className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1254,7 +1254,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-tj5bde-Svg"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -1270,7 +1270,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-button sc-EHOje hSgWMt"
+          className="sc-EHOje hSgWMt sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1301,51 +1301,51 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         />
       </div>
     </div>
@@ -1359,14 +1359,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-multi-select-list sc-gZMcBi ghgeNe"
+      className="sc-gZMcBi ghgeNe sc-multi-select-list"
     >
       
       <div
-        className="sc-multi-select-list-search sc-jTzLTM gqMPpu"
+        className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-select-container sc-iwsKbI hhmqLO"
+          className="sc-iwsKbI hhmqLO sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1386,7 +1386,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                   Select location to add
                 </div>
                 <div
-                  className="css-w8afj7-Input"
+                  className="css-b8ldur-Input"
                 >
                   <div
                     className="sc-select__input"
@@ -1444,7 +1444,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 </div>
               </div>
               <div
-                className="sc-select__indicators css-1g48xl4-IndicatorsContainer"
+                className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
               >
                 <span
                   className="sc-select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1457,7 +1457,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="css-tj5bde-Svg"
+                    className="css-6q0nyr-Svg"
                     focusable="false"
                     height={20}
                     viewBox="0 0 20 20"
@@ -1473,7 +1473,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-button sc-EHOje hSgWMt"
+          className="sc-EHOje hSgWMt sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1504,51 +1504,51 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-multi-select-item sc-VigVT geNRFa"
+        className="sc-VigVT geNRFa sc-multi-select-item"
       >
         <div
-          className="sc-multi-select-item-left sc-fjdhpX exklvF"
+          className="sc-fjdhpX exklvF sc-multi-select-item-left"
         />
         <div
-          className="sc-multi-select-item-center sc-jzJRlG hpMexG"
+          className="sc-jzJRlG hpMexG sc-multi-select-item-center"
         >
           <span
-            className="sc-multi-select-item-label sc-kAzzGY bKkxec"
+            className="sc-kAzzGY bKkxec sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-multi-select-item-description sc-chPdSV byfFmt"
+            className="sc-chPdSV byfFmt sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-multi-select-item-right sc-cSHVUG aXlwx"
+          className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         />
       </div>
     </div>
