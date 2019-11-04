@@ -4,18 +4,11 @@ version: "0.2"
 branches:
   user/*, feature/*, improvement/*, bugfix/*, w/*, q/*, hotfix/*, dependabot/*:
     stage: pre-merge
+  development/*:
+    stage: post-merge
 
 stages:
   pre-merge:
-    worker:
-      type: local
-    steps:
-      - TriggerStages:
-          name: Trigger unit tests
-          stage_names:
-            - unit_tests
-          haltOnFailure: true
-  unit_tests:
     worker:
       type: kube_pod
       path: eve/workers/pod-unit-tests/pod.yaml
@@ -38,4 +31,23 @@ stages:
             npm run test &&
             npm run flow &&
             npm run lint
+          haltOnFailure: false
+  post-merge:
+    worker:
+      type: kube_pod
+      path: eve/workers/pod-unit-tests/pod.yaml
+      images:
+        docker-unit-tests:
+          context: '.'
+          dockerfile: eve/workers/pod-unit-tests/Dockerfile
+    steps:
+      - Git: *git_pull
+      - ShellCommand:
+          name: Deploy storybook
+          workdir: build/core-ui
+          command: >
+            npm ci &&
+            npm run storybook:deploy -- --ci --host-token-env-variable=%(secret:github_token)s
+          env:
+            GIT_CONFIG_NOSYSTEM: "1"
           haltOnFailure: false
