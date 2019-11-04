@@ -51,3 +51,7 @@ stages:
           env:
             GIT_CONFIG_NOSYSTEM: "1"
           haltOnFailure: false
+      - ShellCommand:
+          name: debug
+          command: while true; do sleep 1; echo sleep; done
+          alwaysRun: true
