@@ -4,25 +4,16 @@ version: "0.2"
 branches:
   user/*, feature/*, improvement/*, bugfix/*, w/*, q/*, hotfix/*, dependabot/*:
     stage: pre-merge
+  development/*:
+    stage: post-merge
 
 stages:
   pre-merge:
-    worker:
-      type: local
-    steps:
-      - TriggerStages:
-          name: Trigger unit tests
-          stage_names:
-            - unit_tests
-          haltOnFailure: true
-  unit_tests:
-    worker:
+    worker: &worker_unit_tests
       type: kube_pod
       path: eve/workers/pod-unit-tests/pod.yaml
       images:
-        docker-unit-tests:
-          context: '.'
-          dockerfile: eve/workers/pod-unit-tests/Dockerfile
+        docker-unit-tests: 'eve/workers/pod-unit-tests'
     steps:
       - Git: &git_pull
           name: git pull
@@ -38,4 +29,22 @@ stages:
             npm run test &&
             npm run flow &&
             npm run lint
+          haltOnFailure: false
+  post-merge:
+    simultaneous_builds: 1
+    worker: *worker_unit_tests
+    steps:
+      - Git: *git_pull
+      - ShellCommand:
+          name: Deploy storybook
+          workdir: build/core-ui
+          command: >
+            npm ci &&
+            npm run storybook:deploy -- --ci --host-token-env-variable=GITHUB_TOKEN
+          env:
+          # Our system gitconfig is setup to go through a gitcache service and
+          # as we're preforming write operations with git on this step, we don't want that the request
+          # go through the gitcache.
+            GIT_CONFIG_NOSYSTEM: "1"
+            GITHUB_TOKEN: '%(secret:github_token)s'
           haltOnFailure: false
