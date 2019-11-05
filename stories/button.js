@@ -39,6 +39,12 @@ storiesOf("Button", module)
           text="Hello"
           onClick={action("Button Disabled Click")}
         />
+        <Button
+          inverted={true}
+          size="larger"
+          icon={<i className="fas fa-star" />}
+          disabled={true}
+        />
 
         <Title>Button Link</Title>
         <Button text="Hello" href="/" />

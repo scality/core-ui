@@ -26,7 +26,6 @@ type Props = {
 export const ButtonStyled = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
-  cursor: pointer;
   position: relative;
   display: inline-flex;
   user-select: none;
@@ -128,31 +127,6 @@ export const ButtonStyled = styled.button`
     `;
   }}
 
-
-${props => {
-  const brandingTheme = mergeTheme(props.theme, defaultTheme);
-  const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
-
-  return css`
-    ${props.disabled
-      ? `
-          box-shadow: none;
-          pointer-events: none;
-          &,
-          &:hover,
-          &:focus,
-          &:active {
-            cursor: default;
-            background-color: ${brandLighter};
-            border-color: ${brandLighter};
-            color: ${defaultTheme.white};
-            box-shadow: none;
-          };
-        `
-      : null}
-  `;
-}}
-
 ${props => {
   return css`
     ${props.isLoading
@@ -177,7 +151,24 @@ ${props => {
 
 ${props => {
   const brandingTheme = mergeTheme(props.theme, defaultTheme);
-  const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
+  const brandLighter = lighten(0.2, brandingTheme[props.variant]).toString();
+
+  return css`
+    ${props.disabled
+      ? `
+          box-shadow: none;
+          pointer-events: none;
+          background-color: ${brandLighter};
+          border-color: ${brandLighter};
+          color: ${defaultTheme.white};
+        `
+      : null}
+  `;
+}}
+
+${props => {
+  const brandingTheme = mergeTheme(props.theme, defaultTheme);
+  const brandLighter = lighten(0.2, brandingTheme[props.variant]).toString();
   const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
 
   return css`
@@ -187,7 +178,7 @@ ${props => {
         height: auto;
         border: none;
         background-color: transparent;
-        color: ${brandingTheme[props.variant]};
+        color: ${props.disabled ? brandLight : brandingTheme[props.variant]};
         
         &:hover{      
           background-color: transparent;
