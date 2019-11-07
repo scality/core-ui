@@ -14,6 +14,11 @@ type User = {
   name: string,
   actions: Items
 };
+type Tab = {
+  title: string,
+  selected?: boolean,
+  onClick: any => void
+};
 
 export type Props = {
   onToggleClick?: () => void,
@@ -23,8 +28,10 @@ export type Props = {
   help?: Items,
   user?: User,
   logo?: Node,
-  languages?: Items
+  languages?: Items,
+  tabs?:Tab,
 };
+
 
 const NavbarContainer = styled.div`
   height: ${defaultTheme.navbarHeight};
@@ -46,6 +53,26 @@ const NavbarMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const NavbarTabs = styled.div`
+flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TabItems = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  margin: 0 1vh;
+  :hover{
+    height: 100%;
+    border-bottom: 1vh solid black;
+    cursor: pointer;
+  }
 `;
 
 const NavbarMenuItem = styled.div`
@@ -90,6 +117,7 @@ function NavBar({
   help,
   user,
   logo,
+  tabs = [],
   languages = [],
   ...rest
 }: Props) {
@@ -120,6 +148,13 @@ function NavBar({
           <ProductNameSpan>{productName}</ProductNameSpan>
         </NavbarMenuItem>
       </NavbarMenu>
+      <NavbarTabs>
+        {tabs.length > 0 &&
+          tabs.map(({title}) => 
+            <TabItems>{title}</TabItems>
+          )
+        }
+      </NavbarTabs>
       <NavbarMenu>
         {languages.length > 0 && (
           <NavbarMenuItem>
