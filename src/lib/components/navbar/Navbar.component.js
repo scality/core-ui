@@ -150,8 +150,8 @@ function NavBar({
       </NavbarMenu>
       <NavbarTabs>
         {tabs.length > 0 &&
-          tabs.map(({title}) => 
-            <TabItems>{title}</TabItems>
+          tabs.map(
+            ({ title }) => <TabItems>{title}</TabItems>
           )
         }
       </NavbarTabs>
