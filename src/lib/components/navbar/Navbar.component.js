@@ -8,6 +8,7 @@ import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
+import {padding} from "../../style/theme"; 
 
 type Items = Array<Item>;
 type User = {
@@ -29,7 +30,7 @@ export type Props = {
   user?: User,
   logo?: Node,
   languages?: Items,
-  tabs?:Tab,
+  tabs?:Array<Tab>,
 };
 
 
@@ -58,21 +59,38 @@ const NavbarMenu = styled.div`
 const NavbarTabs = styled.div`
 flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
 const TabItems = styled.div`
+box-sizing: border-box;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;  
-  margin: 0 1vh;
+  padding: ${defaultTheme.padding.base};
   :hover{
-    height: 100%;
     border-bottom: 1vh solid black;
     cursor: pointer;
   }
+  ${props => 
+    css`
+        {
+          color: mergeTheme(props.theme, defaultTheme).primary
+        }
+    `}
+  ${props => {
+    return (
+      
+      props.selected &&
+      css`
+        {
+          border-bottom: 1vh solid black;
+        }
+      `
+    );
+  }}
 `;
 
 const NavbarMenuItem = styled.div`
@@ -151,7 +169,7 @@ function NavBar({
       <NavbarTabs>
         {tabs.length > 0 &&
           tabs.map(
-            ({ title }) => <TabItems>{title}</TabItems>
+            ({ title, selected }) => <TabItems selected={selected}>{title}</TabItems>
           )
         }
       </NavbarTabs>
