@@ -19,6 +19,29 @@ const user = {
   actions: [{ label: "Log out", onClick: action("Logout clicked") }]
 };
 
+const tabs = [
+  {
+    selected: true,
+    title: "Did ",
+    onClick: action("Detail clicked")
+  },
+  {
+    selected: false,
+    title: "You ",
+    onClick: action("Pods clicked")
+  },
+  {
+    selected: false,
+    title: "Like ",
+    onClick: action("Volumes clicked")
+  },
+  {
+    selected: false,
+    title: "It ?",
+    onClick: action("Volumes clicked")
+  }
+];
+
 const languages = [
   {
     label: "Français",
@@ -46,6 +69,7 @@ storiesOf("Navbar", module).add("Default", () => {
         applications={applications}
         help={help}
         user={user}
+        tabs={tabs}
       />
       <h3>Navbar without toggle</h3>
       <Navbar
@@ -56,7 +80,8 @@ storiesOf("Navbar", module).add("Default", () => {
         applications={applications}
         help={help}
         user={user}
-      />
+        tabs={tabs}
+        />
       <h3>Navbar with customized logo</h3>
       <Navbar
         onToggleClick={action("toggle clicked")}
@@ -67,7 +92,8 @@ storiesOf("Navbar", module).add("Default", () => {
         help={help}
         user={user}
         logo={<i className="fas fa-ring" />}
-      />
+        tabs={tabs}
+        />
     </div>
   );
 });
