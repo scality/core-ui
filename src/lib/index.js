@@ -21,7 +21,8 @@ import Table from "./components/table/Table.component";
 import Tabs from "./components/tabs/Tabs.component";
 import Toggle from "./components/toggle/Toggle.component";
 import Tooltip from "./components/tooltip/Tooltip.component";
-import MultiSelect from './components/multiselect/MultiSelect.component'
+import MultiSelect from './components/multiselect/MultiSelect.component';
+import ProgressBar from './components/progressbar/ProgressBar.component';
 
 export {
   LOADER_SIZE,
@@ -44,5 +45,6 @@ export {
   Modal,
   Tooltip,
   MultiSelect,
-  Chips
+  Chips,
+  ProgressBar
 };

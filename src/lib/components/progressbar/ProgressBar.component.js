@@ -187,7 +187,7 @@ function ProgressBar({
 }) {
   const [width, setWidth] = useState(0);
   const filledWidth = calcWidth(total, filled);
-  useEffect(() => setWidth(filledWidth), []);
+  useEffect(() => setWidth(filledWidth), [filledWidth]);
 
   return (
     <Container
