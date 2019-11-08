@@ -69,7 +69,7 @@ storiesOf("Navbar", module).add("Default", () => {
       <Navbar
         onToggleClick={action("toggle clicked")}
         toggleVisible={true}
-        productName={"Harware UI"}
+        productName={"Hardware UI"}
         languages={languages}
         applications={applications}
         help={help}
@@ -80,25 +80,27 @@ storiesOf("Navbar", module).add("Default", () => {
       <Navbar
         onToggleClick={action("toggle clicked")}
         toggleVisible={false}
-        productName={"Harware UI"}
+        productName={"Hardware UI"}
         languages={languages}
         applications={applications}
         help={help}
         user={user}
         tabs={tabs}
-        />
+      />
       <h3>Navbar with customized logo</h3>
       <Navbar
         onToggleClick={action("toggle clicked")}
         toggleVisible={true}
-        productName={"Harware UI"}
+        productName={"Hardware UI"}
         languages={languages}
         applications={applications}
         help={help}
         user={user}
         logo={<i className="fas fa-ring" />}
         tabs={tabs}
-        />
+      />
+      <h3>Navbar with only tabs</h3>
+      <Navbar user={user} tabs={tabs} />
     </div>
   );
 });

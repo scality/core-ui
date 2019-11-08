@@ -9,7 +9,6 @@ import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
 
-
 type Items = Array<Item>;
 type User = {
   name: string,
@@ -30,9 +29,8 @@ export type Props = {
   user?: User,
   logo?: Node,
   languages?: Items,
-  tabs?:Array<Tab>,
+  tabs?: Array<Tab>
 };
-
 
 const NavbarContainer = styled.div`
   height: ${defaultTheme.navbarHeight};
@@ -68,28 +66,29 @@ const TabItems = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
-  padding: ${defaultTheme.padding.base};
+  align-items: center;
+  padding: 0 ${defaultTheme.padding.base};
   ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);      
-      return css`        
-          color: ${brandingTheme.primary};
-          &:hover 
-          {
-            border-bottom: 2px solid ${brandingTheme.primary};
-            cursor: pointer;
-          }
-        
-    `}};
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme).primary;    
-    return (      
-      props.selected &&
-      css`        
-          border-bottom: 2px solid ${brandingTheme.primary};        
-      `
-    );
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      color: ${brandingTheme.primary};
+      &:hover {
+        border-bottom: 2px solid ${brandingTheme.primary};
+        span {
+          padding-top: 2px;
+        }
+        cursor: pointer;
+      }
+    `;
   }};
+  ${props =>
+    props.selected &&
+    css`
+      border-bottom: 2px solid ${mergeTheme(props.theme, defaultTheme).primary};
+      span {
+        padding-top: 2px;
+      }
+    `};
 `;
 
 const NavbarMenuItem = styled.div`
@@ -161,16 +160,19 @@ function NavBar({
             {logo ? logo : <Logo />}
           </LogoContainer>
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <ProductNameSpan>{productName}</ProductNameSpan>
-        </NavbarMenuItem>
+        {productName && (
+          <NavbarMenuItem>
+            <ProductNameSpan>{productName}</ProductNameSpan>
+          </NavbarMenuItem>
+        )}
       </NavbarMenu>
       <NavbarTabs>
         {tabs.length > 0 &&
-          tabs.map(
-            ({ title, selected, onClick }) => <TabItems onClick={onClick} selected={selected}>{title}</TabItems>
-          )
-        }
+          tabs.map(({ title, selected, onClick }) => (
+            <TabItems onClick={onClick} selected={selected}>
+              <span>{title}</span>
+            </TabItems>
+          ))}
       </NavbarTabs>
       <NavbarMenu>
         {languages.length > 0 && (
