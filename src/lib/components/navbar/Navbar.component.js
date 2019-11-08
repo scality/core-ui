@@ -8,7 +8,7 @@ import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
-import {padding} from "../../style/theme"; 
+
 
 type Items = Array<Item>;
 type User = {
@@ -57,40 +57,39 @@ const NavbarMenu = styled.div`
 `;
 
 const NavbarTabs = styled.div`
-flex: 1;
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 `;
 
 const TabItems = styled.div`
-box-sizing: border-box;
+  box-sizing: border-box;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;  
   padding: ${defaultTheme.padding.base};
-  :hover{
-    border-bottom: 1vh solid black;
-    cursor: pointer;
-  }
-  ${props => 
-    css`
-        {
-          color: mergeTheme(props.theme, defaultTheme).primary
-        }
-    `}
   ${props => {
-    return (
-      
+      const brandingTheme = mergeTheme(props.theme, defaultTheme);      
+      return css`        
+          color: ${brandingTheme.primary};
+          &:hover 
+          {
+            border-bottom: 2px solid ${brandingTheme.primary};
+            cursor: pointer;
+          }
+        
+    `}};
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme).primary;    
+    return (      
       props.selected &&
-      css`
-        {
-          border-bottom: 1vh solid black;
-        }
+      css`        
+          border-bottom: 2px solid ${brandingTheme.primary};        
       `
     );
-  }}
+  }};
 `;
 
 const NavbarMenuItem = styled.div`
@@ -169,7 +168,7 @@ function NavBar({
       <NavbarTabs>
         {tabs.length > 0 &&
           tabs.map(
-            ({ title, selected }) => <TabItems selected={selected}>{title}</TabItems>
+            ({ title, selected, onClick }) => <TabItems onClick={onClick} selected={selected}>{title}</TabItems>
           )
         }
       </NavbarTabs>

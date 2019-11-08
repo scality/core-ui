@@ -22,23 +22,28 @@ const user = {
 const tabs = [
   {
     selected: true,
-    title: "Did ",
-    onClick: action("Detail clicked")
+    title: "Groups",
+    onClick: action("Groups clicked")
   },
   {
     selected: false,
-    title: "You ",
-    onClick: action("Pods clicked")
+    title: "Users",
+    onClick: action("Users clicked")
   },
   {
     selected: false,
-    title: "Like ",
-    onClick: action("Volumes clicked")
+    title: "Policies",
+    onClick: action("Policies clicked")
   },
   {
     selected: false,
-    title: "It ?",
-    onClick: action("Volumes clicked")
+    title: "Buckets",
+    onClick: action("Buckets clicked")
+  },
+  {
+    selected: false,
+    title: "Workflows",
+    onClick: action("Workflows clicked")
   }
 ];
 
