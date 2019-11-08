@@ -24,6 +24,7 @@ import Tooltip from "./components/tooltip/Tooltip.component";
 import MultiSelect from "./components/multiselect/MultiSelect.component";
 import VegaChart from "./components/vegachart/VegaChart.component";
 import LineChart from "./components/linechart/LineChart.component";
+import ProgressBar from "./components/progressbar/ProgressBar.component";
 
 export {
   LOADER_SIZE,
@@ -48,5 +49,6 @@ export {
   MultiSelect,
   Chips,
   VegaChart,
-  LineChart
+  LineChart,
+  ProgressBar
 };
