@@ -19,4 +19,3 @@ import "./modal";
 import "./tooltip";
 import "./multiselect";
 import "./chips";
-import "./progressbar";
