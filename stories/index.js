@@ -22,3 +22,4 @@ import "./chips";
 import "./linechart";
 import "./vegachart";
 import "./progressbar";
+import "./textarea";
