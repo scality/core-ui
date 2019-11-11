@@ -139,6 +139,16 @@ const InputRenderer = ({
         {...rest}
       />
     );
+  } else if (type === "textarea") {
+    return (
+      <TextArea
+        rows={10} 
+        cols={200} 
+        id={"text"} 
+        label="Text Area:"  
+        {...rest}
+      />
+    );
   } else {
     return (
       <DebounceInput

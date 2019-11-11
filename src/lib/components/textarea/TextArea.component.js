@@ -5,14 +5,14 @@ import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 
 type Props = {
-  rows?: int,
-  cols?: int,
+  rows?: number,
+  cols?: number,
   placeholder?: string,
   label?: string,
-  value?: string,  
+  value?: string,
   error?: string,
   disabled?: boolean,
-  onChange: () => void
+  onChange: any => void
 };
 
 const TextAreaContainer = styled.div`
@@ -21,7 +21,7 @@ const TextAreaContainer = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  ${props => {      
+  ${props => {
     return props.disabled
       ? css`
           cursor: default;
@@ -30,63 +30,45 @@ const TextAreaContainer = styled.div`
       : css`
           cursor: pointer;
         `;
-    }
-  }
-  textarea{
+  }}
+  textarea {
     margin: ${defaultTheme.padding.base};
     padding: ${defaultTheme.padding.base};
     border-radius: 10px;
   }
   ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
-      return (
-        css`
-        background: ${brandingTheme.backgroundContrast1};
-        textarea{
-          &:hover {
-            border-color: ${brandingTheme.primary};
-          }
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      background: ${brandingTheme.backgroundContrast1};
+      textarea {
+        &:hover {
+          border-color: ${brandingTheme.primary};
         }
-    ` )
-    }
-  }
+      }
+    `;
+  }}
 `;
 
-const LabelStyle = styled.label`
-  font-size: ${defaultTheme.fontSize.large};
-  padding-left: ${defaultTheme.padding.base};
-  vertical-align: middle;
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
-`;
-
-const TextareaErrorMessage = styled.span`
-  color: ${props => mergeTheme(props.theme, defaultTheme).danger};
-  margin: ${defaultTheme.padding.smaller} 0;
-  font-size: ${defaultTheme.fontSize.small};
-`;
-
-function TextArea({ id,rows,cols, label, error, placeholder,disabled,...rest }: Props) {
+function TextArea({
+  id,
+  rows,
+  cols,
+  label,
+  error,
+  placeholder,
+  disabled,
+  ...rest
+}: Props) {
   return (
     <TextAreaContainer className="sc-textarea">
-      {label && (
-        <LabelStyle htmlFor={id} className="sc-input-label">
-          {label}
-        </LabelStyle>
-      )}
-        <textarea 
-          placeholder={placeholder}
-          id={id} 
-          rows={rows} 
-          cols={cols}
-          error={error}
-          disabled={disabled}
-        >          
-        </textarea>
-        {error && (
-          <TextareaErrorMessage className="sc-input-error">
-            {error}
-          </TextareaErrorMessage>
-        )}
+      <textarea
+        placeholder={placeholder}
+        id={id}
+        rows={rows}
+        cols={cols}
+        error={error}
+        disabled={disabled}
+      ></textarea>
     </TextAreaContainer>
   );
 }
