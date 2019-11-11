@@ -22,7 +22,6 @@ const TextAreaContainer = styled.div`
   flex-direction: column;
 
   ${props => {      
-    console.log("defaultTheme: ", defaultTheme)
     return props.disabled
       ? css`
           cursor: default;
