@@ -82,6 +82,15 @@ const ExampleInput = () => {
         noOptionsMessage={() => "Not found"}
         value={options[0]}
       />
+      <Title>Text Input</Title>
+      <Input
+        id="id7"
+        label="label"
+        onChange={action("onChange")}
+        type="textarea"        
+        placeholder="Write here..."
+        error="error"
+      />
     </Wrapper>
   );
 };

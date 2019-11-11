@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import Checkbox from "../checkbox/Checkbox.component";
 import Select from "../select/Select.component";
+import TextArea from "../textarea/TextArea.component";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 export type Item = {
@@ -135,6 +136,16 @@ const InputRenderer = ({
         value={value}
         checked={!!checked}
         onChange={onChange}
+        {...rest}
+      />
+    );
+  } else if (type === "textarea") {
+    return (
+      <TextArea
+        rows={10} 
+        cols={200} 
+        id={"text"} 
+        label="Text Area:"  
         {...rest}
       />
     );
