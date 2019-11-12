@@ -1,8 +1,9 @@
 //@flow
-import React, { useEffect, useState } from 'react';
+import React from "react";
 import styled, { css } from "styled-components";
 import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
+import type { Size } from "../constants";
 
 export type ProgressBarProps = {
   percentage: number,
@@ -11,149 +12,144 @@ export type ProgressBarProps = {
   topLeftLabel?: string,
   topRightLabel?: string,
   bottomLeftLabel?: string,
-  bottomRightLabel?: string,
-}
+  bottomRightLabel?: string
+};
 
-export const ProgressBarContainer = styled.div`
-  background: ${defaultTheme.gray};
-  width: 100%;
+const Container = styled.div`
+  margin: ${defaultTheme.padding.small};
+`;
+
+const ProgressBarContainer = styled.div`
+  background: ${defaultTheme.grayLight};
+  border-radius: 12px;
 
   ${props => {
     switch (props.size) {
       case "smaller":
         return css`
-          border-radius: 12px;
           height: 10px;
         `;
 
       case "small":
         return css`
-          border-radius: 12px;
           height: 15px;
         `;
 
       case "large":
         return css`
-          border-radius: 12px;
           height: 15px;
         `;
 
       case "larger":
         return css`
-          border-radius: 12px;
           height: 20px;
         `;
 
       default:
         return css`
-          border-radius: 12px;
           height: 10px;
         `;
-  }
-}}
+    }
+  }}
 `;
 
-export const Container = styled.div`
-  .percentage {
-    font-size: 20px;
-    display: inline-block;
-    font-weight: 800;
-    margin-bottom: 4px;
-    width: 50%;
-    text-align: left;
-  }
-
-  .capacity {
-    display: inline-block;
-    width: 50%;
-    text-align: right;
-    font-size: 14px;
-    color: #908d8d;
-  }
-
-  .used {
-    display: inline-block;
-    width: 50%;
-    text-align: left;
-  }
-
-  .free {
-    display: inline-block;
-    width: 50%;
-    text-align: right;
-  }
-
-  margin: 10px 0 10px 0;
+const TopLeftLabel = styled.span`
+  font-size: ${defaultTheme.fontSize.large};
+  display: inline-block;
+  font-weight: ${defaultTheme.fontWeight.bold};
+  color: ${props => mergeTheme(props.theme, defaultTheme).text}};
 `;
 
-export const LabelContainer = styled.div`
-  margin-top: 6px;
-  font-size: ${defaultTheme.base};
+const TopRightLabel = styled.span`
+  display: inline-block;
+  color: ${defaultTheme.gray};
+  font-size: ${defaultTheme.fontSize.small};
 `;
 
-export const FilledAreaContainer = styled.div`
-  transition:All 1s ease;
-  -webkit-transition:All 1s ease;
-  -moz-transition:All 1s ease;
-  -o-transition:All 1s ease;
+const BottomLabel = styled.span`
+  color: ${props => mergeTheme(props.theme, defaultTheme).text}};
+  display: inline-block;
+`;
 
+const TopLabelsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 ${defaultTheme.padding.smaller} 0;
+`;
+
+const BottomLabelsContainer = styled(TopLabelsContainer)`
+  margin: ${defaultTheme.padding.smaller} 0 0 0;
+`;
+
+const FilledAreaContainer = styled.div`
+  border-radius: 12px;
+  height: 100%;
   ${props => {
     return css`
-      border-radius: 12px;
-      background-color: ${props => props.color || mergeTheme(props.theme, defaultTheme).primary};
+      @keyframes widthAnimation {
+        from {
+          width: 0%;
+        }
+        to {
+          width: ${props.width} + "%";
+        }
+      }
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: widthAnimation;
+
+      background-color: ${props =>
+        props.color || mergeTheme(props.theme, defaultTheme).secondary};
       width: ${props.width}%;
-      height: 100%;
     `;
-  }
-}}
+  }}
 `;
 
 function ProgressBar({
   percentage = 50,
-  size = 'base',
-  color = '#fcb039',
-  topLeftLabel = '55%',
-  topRightLabel = '80GB Total',
-  bottomLeftLabel = '45GB Used',
-  bottomRightLabel = '25GB Free'
-} : ProgressBarProps) {
-  const [width, setWidth] = useState(0);
-  useEffect(() => setWidth(percentage), [percentage]);
-
+  size = "base",
+  color,
+  topLeftLabel = "",
+  topRightLabel = "",
+  bottomLeftLabel = "",
+  bottomRightLabel = ""
+}: ProgressBarProps) {
   return (
-    <Container
-      size={size}
-    >
-      {
-        <span className="percentage">
-          {topLeftLabel}
-        </span>
-      }
-      {
-        <span className="capacity">
-          {topRightLabel}
-        </span>
-      }
-      <ProgressBarContainer
-        size={size}
-      >
-        <FilledAreaContainer
-          color={color}
-          width={width}
-        />
+    <Container className="sc-progressbar">
+      {(topLeftLabel || topRightLabel) && (
+        <TopLabelsContainer>
+          {topLeftLabel && (
+            <TopLeftLabel className="sc-progressbar-topLeftLabel">
+              {topLeftLabel}
+            </TopLeftLabel>
+          )}
+          {topRightLabel && (
+            <TopRightLabel className="sc-progressbar-toprightlabel">
+              {topRightLabel}
+            </TopRightLabel>
+          )}
+        </TopLabelsContainer>
+      )}
+      <ProgressBarContainer size={size}>
+        <FilledAreaContainer color={color} width={percentage} />
       </ProgressBarContainer>
-      {
-        <LabelContainer>
-          <span className="used">
-            {bottomLeftLabel}
-          </span>
-          <span className="free">
-            {bottomRightLabel}
-          </span>
-        </LabelContainer>
-      }
+      {(bottomLeftLabel || bottomRightLabel) && (
+        <BottomLabelsContainer>
+          {bottomLeftLabel && (
+            <BottomLabel className="sc-progressbar-bottomleftlabel">
+              {bottomLeftLabel}
+            </BottomLabel>
+          )}
+          {bottomRightLabel && (
+            <BottomLabel className="sc-progressbar-bottomrightlabel">
+              {bottomRightLabel}
+            </BottomLabel>
+          )}
+        </BottomLabelsContainer>
+      )}
     </Container>
-  )
+  );
 }
 
 export default ProgressBar;
