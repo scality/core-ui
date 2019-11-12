@@ -112,7 +112,7 @@ exports[`Storyshots Tooltip Default 1`] = `
       onMouseLeave={[Function]}
     >
       <button
-        className="sc-EHOje hGGgRm sc-button"
+        className="sc-EHOje jfyPtt sc-button"
         disabled={false}
         size="small"
         title=""

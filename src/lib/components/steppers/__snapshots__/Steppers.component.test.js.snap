@@ -65,7 +65,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-EHOje iUebre"
         >
           <button
-            className="sc-iwsKbI bVREWY sc-button"
+            className="sc-iwsKbI gmQrZU sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
