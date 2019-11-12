@@ -38,7 +38,7 @@ const TextAreaContainer = styled.div`
     border-radius: 10px;
   }
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+      const brandingTheme = mergeTheme(props.theme, defaultTheme);
       return (
         css`
         background: ${brandingTheme.backgroundContrast1};
