@@ -30,6 +30,7 @@ type Props = {
 const DropdownStyled = styled.div`
   position: relative;
   user-select: none;
+  cursor: pointer;
   .trigger {
     margin: 0;
     border-radius: 0;
