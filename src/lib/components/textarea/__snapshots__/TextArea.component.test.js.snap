@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots TextArea Default 1`] = `
+<div
+  className="sc-bwzfXH hilSGa"
+>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Text Area without label
+  </h3>
+  <div
+    className="sc-textarea sc-bdVaJa chipxc"
+  >
+    <textarea
+      cols={200}
+      id="text"
+      rows={10}
+    />
+  </div>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Text Area with label
+  </h3>
+  <div
+    className="sc-textarea sc-bdVaJa chipxc"
+  >
+    <textarea
+      cols={50}
+      id="text"
+      placeholder="Text area input"
+      rows={10}
+    />
+  </div>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Text Area with error
+  </h3>
+  <div
+    className="sc-textarea sc-bdVaJa chipxc"
+  >
+    <textarea
+      cols={50}
+      error="error"
+      id="text"
+      placeholder="Text area input"
+      rows={10}
+    />
+  </div>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Text Area disabled
+  </h3>
+  <div
+    className="sc-textarea sc-bdVaJa chipxc"
+  >
+    <textarea
+      cols={50}
+      disabled={true}
+      id="text"
+      placeholder="Text area input"
+      rows={10}
+    />
+  </div>
+</div>
+`;
