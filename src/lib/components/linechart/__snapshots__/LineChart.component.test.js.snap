@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots LineChart Default 1`] = `
+<div>
+  <h3>
+    Vege-Lite line chart demo
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis"
+  />
+</div>
+`;
