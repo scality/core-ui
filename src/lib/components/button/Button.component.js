@@ -42,6 +42,7 @@ export const ButtonStyled = styled.button`
   &:focus,
   &:active {
     outline: none;
+    cursor:pointer;
   }
 
   ${props => {
@@ -97,7 +98,7 @@ export const ButtonStyled = styled.button`
         border-color: ${brandingTheme[props.variant]};
         background-color: ${brandingTheme.background};
         color: ${brandingTheme[props.variant]};
-        
+
         &:hover{      
           border-color: ${brandingTheme[props.variant]};
           background-color: ${brandLight};
@@ -179,7 +180,7 @@ ${props => {
         border: none;
         background-color: transparent;
         color: ${props.disabled ? brandLight : brandingTheme[props.variant]};
-        
+
         &:hover{      
           background-color: transparent;
           color: ${brandLight};
