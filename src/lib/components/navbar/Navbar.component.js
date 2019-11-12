@@ -14,6 +14,11 @@ type User = {
   name: string,
   actions: Items
 };
+type Tab = {
+  title: string,
+  selected?: boolean,
+  onClick: any => void
+};
 
 export type Props = {
   onToggleClick?: () => void,
@@ -23,7 +28,8 @@ export type Props = {
   help?: Items,
   user?: User,
   logo?: Node,
-  languages?: Items
+  languages?: Items,
+  tabs?: Array<Tab>
 };
 
 const NavbarContainer = styled.div`
@@ -46,6 +52,43 @@ const NavbarMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const NavbarTabs = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const TabItems = styled.div`
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 ${defaultTheme.padding.base};
+  ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return css`
+      color: ${brandingTheme.primary};
+      &:hover {
+        border-bottom: 2px solid ${brandingTheme.primary};
+        span {
+          padding-top: 2px;
+        }
+        cursor: pointer;
+      }
+    `;
+  }};
+  ${props =>
+    props.selected &&
+    css`
+      border-bottom: 2px solid ${mergeTheme(props.theme, defaultTheme).primary};
+      span {
+        padding-top: 2px;
+      }
+    `};
 `;
 
 const NavbarMenuItem = styled.div`
@@ -90,6 +133,7 @@ function NavBar({
   help,
   user,
   logo,
+  tabs = [],
   languages = [],
   ...rest
 }: Props) {
@@ -116,10 +160,20 @@ function NavBar({
             {logo ? logo : <Logo />}
           </LogoContainer>
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <ProductNameSpan>{productName}</ProductNameSpan>
-        </NavbarMenuItem>
+        {productName && (
+          <NavbarMenuItem>
+            <ProductNameSpan>{productName}</ProductNameSpan>
+          </NavbarMenuItem>
+        )}
       </NavbarMenu>
+      <NavbarTabs>
+        {tabs.length > 0 &&
+          tabs.map(({ title, selected, onClick }) => (
+            <TabItems onClick={onClick} selected={selected}>
+              <span>{title}</span>
+            </TabItems>
+          ))}
+      </NavbarTabs>
       <NavbarMenu>
         {languages.length > 0 && (
           <NavbarMenuItem>

@@ -2,7 +2,7 @@
 
 exports[`Storyshots Layout Sidebar docked 1`] = `
 <div
-  className="sc-dxgOiQ cIVYYK sc-layout"
+  className="sc-jKJlTe eAnLij sc-layout"
 >
   <div
     className="sc-VigVT bwNEVA sc-navbar"
@@ -11,7 +11,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
         onClick={[Function]}
       >
         <button
@@ -45,10 +45,10 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
-          className="sc-cSHVUG byVnbd sc-logo"
+          className="sc-chPdSV cpBXOe sc-logo"
         >
           <svg
             height="49"
@@ -120,20 +120,23 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <h1
-          className="sc-jzJRlG knTCrh"
+          className="sc-kAzzGY dSCoqg"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
+      className="sc-fjdhpX gQmaqJ"
+    />
+    <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -164,7 +167,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -190,7 +193,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -216,7 +219,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -249,36 +252,36 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     </div>
   </div>
   <div
-    className="sc-ckVGcZ enrCFr"
+    className="sc-eNQAEJ fqpmMW"
   >
     <div
-      className="sc-kAzzGY iAKIDR sc-sidebar"
+      className="sc-kgoBCf kJJQjP sc-sidebar"
     >
       <div
-        className="sc-chPdSV jyRYHY sc-sidebar-item"
+        className="sc-kGXeez idAeyg sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-tachometer-alt"
           />
         </div>
         <div
-          className="sc-kGXeez kUkRsU"
+          className="sc-dxgOiQ gGSja"
         />
       </div>
       <div
-        className="sc-chPdSV cmHWWA sc-sidebar-item"
+        className="sc-kGXeez hdEljY sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-server"
@@ -286,13 +289,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-chPdSV cmHWWA sc-sidebar-item"
+        className="sc-kGXeez hdEljY sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-hdd"
@@ -301,7 +304,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       </div>
     </div>
     <div
-      className="sc-jKJlTe gKYrnU main"
+      className="sc-hMqMXs bPMbmI main"
     >
       <div
         className="sc-bdVaJa iywnbC sc-loader"
@@ -434,7 +437,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
 
 exports[`Storyshots Layout Sidebar expanded 1`] = `
 <div
-  className="sc-dxgOiQ cIVYYK sc-layout"
+  className="sc-jKJlTe eAnLij sc-layout"
 >
   <div
     className="sc-VigVT bwNEVA sc-navbar"
@@ -443,7 +446,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
         onClick={[Function]}
       >
         <button
@@ -477,10 +480,10 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
-          className="sc-cSHVUG byVnbd sc-logo"
+          className="sc-chPdSV cpBXOe sc-logo"
         >
           <svg
             height="49"
@@ -552,20 +555,23 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <h1
-          className="sc-jzJRlG knTCrh"
+          className="sc-kAzzGY dSCoqg"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
+      className="sc-fjdhpX gQmaqJ"
+    />
+    <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -596,7 +602,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -622,7 +628,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -648,7 +654,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX dRMqcT"
+        className="sc-cSHVUG hQKQAr"
       >
         <div
           className="sc-htoDjs jLvNAM sc-dropdown"
@@ -681,74 +687,74 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     </div>
   </div>
   <div
-    className="sc-ckVGcZ enrCFr"
+    className="sc-eNQAEJ fqpmMW"
   >
     <div
-      className="sc-kAzzGY kqjofg sc-sidebar"
+      className="sc-kgoBCf eEmgwG sc-sidebar"
     >
       <div
-        className="sc-chPdSV jyRYHY sc-sidebar-item"
+        className="sc-kGXeez idAeyg sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-tachometer-alt"
           />
         </div>
         <div
-          className="sc-kgoBCf ekNaYQ"
+          className="sc-kpOJdX hHhPsA"
         >
           Dashboard
         </div>
         <div
-          className="sc-kGXeez kUkRsU"
+          className="sc-dxgOiQ gGSja"
         />
       </div>
       <div
-        className="sc-chPdSV cmHWWA sc-sidebar-item"
+        className="sc-kGXeez hdEljY sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-server"
           />
         </div>
         <div
-          className="sc-kgoBCf ekNaYQ"
+          className="sc-kpOJdX hHhPsA"
         >
           Servers
         </div>
       </div>
       <div
-        className="sc-chPdSV cmHWWA sc-sidebar-item"
+        className="sc-kGXeez hdEljY sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
       >
         <div
-          className="sc-kpOJdX eLdZbj"
+          className="sc-ckVGcZ dFhizc"
         >
           <i
             className="fas fa-hdd"
           />
         </div>
         <div
-          className="sc-kgoBCf ekNaYQ"
+          className="sc-kpOJdX hHhPsA"
         >
           Disks
         </div>
       </div>
     </div>
     <div
-      className="sc-jKJlTe gKYrnU main"
+      className="sc-hMqMXs bPMbmI main"
     >
       <div
         className="sc-bdVaJa iywnbC sc-loader"

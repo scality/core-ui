@@ -20,3 +20,5 @@ import "./tooltip";
 import "./multiselect";
 import "./chips";
 import "./progressbar";
+import "./linechart";
+import "./vegachart";

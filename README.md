@@ -60,7 +60,10 @@ const BooksList = (props) => {
     "react-debounce-input": "3.2.0",
     "react-virtualized": "9.21.0",
     "react-select": "3.0.3",
-    "styled-components": "^4.1.2"
+    "styled-components": "^4.1.2",
+    "vega": "^5.7.3",
+    "vega-embed": "^6.0.0",
+    "vega-lite": "^4.0.0-beta.10"
 ```
 
 - Run ```npm install``` to install dependencies
