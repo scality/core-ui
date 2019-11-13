@@ -16,7 +16,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
     >
       <input
-        autocomplete="off"
+        autoComplete="off"
         className="sc-input-type"
         data-cy="default_input"
         id="id1"
@@ -46,7 +46,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
     >
       <input
-        autocomplete="off"
+        autoComplete="off"
         className="sc-input-type"
         id="id2"
         onBlur={[Function]}
@@ -75,7 +75,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
     >
       <input
-        autocomplete="off"
+        autoComplete="off"
         className="sc-input-type"
         id="id3"
         onBlur={[Function]}
@@ -112,7 +112,7 @@ exports[`Storyshots Input Default 1`] = `
         className="sc-gzVnrw kvhoeX sc-input-wrapper"
       >
         <input
-          autocomplete="off"
+          autoComplete="off"
           className="sc-input-type"
           id="id3"
           onBlur={[Function]}
@@ -338,7 +338,35 @@ exports[`Storyshots Input Default 1`] = `
   <h3
     className="sc-dnqmqq gBKyfL"
   >
-    Text Input
+    Textarea Input
+  </h3>
+  <div
+    className="sc-ifAKCX bcDIIa sc-input"
+  >
+    <label
+      className="sc-EHOje bzWQRB sc-input-label"
+      htmlFor="id7"
+    >
+      label
+    </label>
+    <div
+      className="sc-gzVnrw kvhoeX sc-input-wrapper"
+    >
+      <textarea
+        className="sc-bxivhb xvqyq sc-textarea"
+        cols={20}
+        id="id7"
+        onChange={[Function]}
+        placeholder="Write here..."
+        rows={3}
+        value=""
+      />
+    </div>
+  </div>
+  <h3
+    className="sc-dnqmqq gBKyfL"
+  >
+    Textarea Input with error
   </h3>
   <div
     className="sc-ifAKCX eBwbfE sc-input"
@@ -352,16 +380,15 @@ exports[`Storyshots Input Default 1`] = `
     <div
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
     >
-      <div
-        className="sc-bxivhb eqXHYQ sc-textarea"
-      >
-        <textarea
-          cols={200}
-          id="text"
-          placeholder="Write here..."
-          rows={10}
-        />
-      </div>
+      <textarea
+        className="sc-bxivhb xvqyq sc-textarea"
+        cols={50}
+        id="id7"
+        onChange={[Function]}
+        placeholder="Write here..."
+        rows={5}
+        value="Hello"
+      />
       <span
         className="sc-bZQynM fUcYPm sc-input-error"
       >

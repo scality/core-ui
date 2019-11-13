@@ -4,7 +4,12 @@ import { DebounceInput } from "react-debounce-input";
 import Checkbox from "../checkbox/Checkbox.component";
 import Select from "../select/Select.component";
 import TextArea from "../textarea/TextArea.component";
-import { InputContainer, LabelStyle, InputErrorMessage, InputWrapper} from "./input.component.style";
+import {
+  InputContainer,
+  LabelStyle,
+  InputErrorMessage,
+  InputWrapper
+} from "./Input.component.style";
 
 export type Item = {
   label: string,
@@ -35,44 +40,40 @@ const InputRenderer = ({
   ...rest
 }) => {
   const input = {
-    select: 
+    select: (
       <Select
         id={id}
         value={value}
         onChange={onChange}
         options={options}
         {...rest}
-      />,
-    checkbox:      
+      />
+    ),
+    checkbox: (
       <Checkbox
         id={id}
         value={value}
         checked={!!checked}
         onChange={onChange}
         {...rest}
-      />,
-    textarea:
-      <TextArea
-        rows={10} 
-        cols={200} 
-        id={"text"} 
-        label="Text Area:"  
-        {...rest}
-      />,
-    debounceInput:
+      />
+    ),
+    textarea: <TextArea id={id} value={value} onChange={onChange} {...rest} />,
+    text: (
       <DebounceInput
         className="sc-input-type"
         minLength={1}
         debounceTimeout={300}
-        id={id}          
+        id={id}
         value={value}
         onChange={onChange}
-        autocomplete="off"
+        autoComplete="off"
         {...rest}
-      />    
-  }
+      />
+    )
+  };
 
-return input[type] || input.debounceInput
+  return input[type] || input.text;
 };
 
 const Input = ({ label, id, error, ...rest }: Props) => {
@@ -82,7 +83,7 @@ const Input = ({ label, id, error, ...rest }: Props) => {
         <LabelStyle htmlFor={id} className="sc-input-label">
           {label}
         </LabelStyle>
-      )}      
+      )}
       <InputWrapper className="sc-input-wrapper">
         <InputRenderer id={id} {...rest} />
         {error && (

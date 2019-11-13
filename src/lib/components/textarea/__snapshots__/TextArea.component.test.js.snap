@@ -9,61 +9,26 @@ exports[`Storyshots TextArea Default 1`] = `
   >
     Text Area without label
   </h3>
-  <div
-    className="sc-bdVaJa gURMtl sc-textarea"
-  >
-    <textarea
-      cols={200}
-      id="text"
-      rows={10}
-    />
-  </div>
-  <h3
-    className="sc-htpNat bnCVRm"
-  >
-    Text Area with label
-  </h3>
-  <div
-    className="sc-bdVaJa gURMtl sc-textarea"
-  >
-    <textarea
-      cols={50}
-      id="text"
-      placeholder="Text area input"
-      rows={10}
-    />
-  </div>
-  <h3
-    className="sc-htpNat bnCVRm"
-  >
-    Text Area with error
-  </h3>
-  <div
-    className="sc-bdVaJa gURMtl sc-textarea"
-  >
-    <textarea
-      cols={50}
-      error="error"
-      id="text"
-      placeholder="Text area input"
-      rows={10}
-    />
-  </div>
+  <textarea
+    className="sc-bdVaJa kIwpfz sc-textarea"
+    cols={10}
+    id="text"
+    onChange={[Function]}
+    rows={10}
+    value="Hello"
+  />
   <h3
     className="sc-htpNat bnCVRm"
   >
     Text Area disabled
   </h3>
-  <div
-    className="sc-bdVaJa gURMtl sc-textarea"
-  >
-    <textarea
-      cols={50}
-      disabled={true}
-      id="text"
-      placeholder="Text area input"
-      rows={10}
-    />
-  </div>
+  <textarea
+    className="sc-bdVaJa kIwpfz sc-textarea"
+    cols={50}
+    onChange={[Function]}
+    placeholder="Text area input"
+    rows={10}
+    value=""
+  />
 </div>
 `;

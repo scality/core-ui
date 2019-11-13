@@ -8,68 +8,48 @@ type Props = {
   rows?: number,
   cols?: number,
   placeholder?: string,
-  label?: string,
-  value?: string,
-  error?: string,
+  value: string,
   disabled?: boolean,
   onChange: any => void
 };
 
-const TextAreaContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-
-  ${props => {
-    return props.disabled
-      ? css`
-          cursor: default;
-          opacity: 0.5;
-        `
-      : css`
-          cursor: pointer;
-        `;
-  }}
-  textarea {
-    margin: ${defaultTheme.padding.base};
-    padding: ${defaultTheme.padding.base};
-    border-radius: 10px;
-  }
+const TextAreaContainer = styled.textarea`
+  padding: ${defaultTheme.padding.small};
+  border-radius: 4px;
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     return css`
+      border-color: ${brandingTheme.border};
+      color: ${brandingTheme.text};
       background: ${brandingTheme.backgroundContrast1};
-      textarea {
-        &:hover {
-          border-color: ${brandingTheme.primary};
-        }
+      &:focus {
+        border-color: ${brandingTheme.primary};
+        outline: none;
       }
     `;
   }}
 `;
 
 function TextArea({
-  id,
-  rows,
-  cols,
-  label,
-  error,
+  value,
+  onChange,
+  rows = 3,
+  cols = 20,
   placeholder,
   disabled,
   ...rest
 }: Props) {
   return (
-    <TextAreaContainer className="sc-textarea">
-      <textarea
-        placeholder={placeholder}
-        id={id}
-        rows={rows}
-        cols={cols}
-        error={error}
-        disabled={disabled}
-      ></textarea>
-    </TextAreaContainer>
+    <TextAreaContainer
+      className="sc-textarea"
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={rows}
+      cols={cols}
+      disabled={disabled}
+      {...rest}
+    ></TextAreaContainer>
   );
 }
 

@@ -25,6 +25,7 @@ import MultiSelect from "./components/multiselect/MultiSelect.component";
 import VegaChart from "./components/vegachart/VegaChart.component";
 import LineChart from "./components/linechart/LineChart.component";
 import ProgressBar from "./components/progressbar/ProgressBar.component";
+import TextArea from "./components/textarea/TextArea.component";
 
 export {
   LOADER_SIZE,
@@ -50,5 +51,6 @@ export {
   Chips,
   VegaChart,
   LineChart,
-  ProgressBar
+  ProgressBar,
+  TextArea
 };
