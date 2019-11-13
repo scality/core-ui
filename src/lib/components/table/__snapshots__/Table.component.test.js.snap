@@ -220,7 +220,7 @@ exports[`Storyshots Table Center a column with CSS 1`] = `
           </div>
           <div
             aria-label="grid"
-            aria-readonly={true}
+            aria-readonly={null}
             className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
             onScroll={[Function]}
             role="rowgroup"
@@ -463,7 +463,7 @@ exports[`Storyshots Table Change column size 1`] = `
         </div>
         <div
           aria-label="grid"
-          aria-readonly={true}
+          aria-readonly={null}
           className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
           onScroll={[Function]}
           role="rowgroup"
@@ -705,7 +705,7 @@ exports[`Storyshots Table Default 1`] = `
         </div>
         <div
           aria-label="grid"
-          aria-readonly={true}
+          aria-readonly={null}
           className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
           onScroll={[Function]}
           role="rowgroup"
@@ -947,7 +947,7 @@ exports[`Storyshots Table Empty Table 1`] = `
         </div>
         <div
           aria-label="grid"
-          aria-readonly={true}
+          aria-readonly={null}
           className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
           onScroll={[Function]}
           role="rowgroup"
@@ -1189,7 +1189,7 @@ exports[`Storyshots Table With rowActions 1`] = `
         </div>
         <div
           aria-label="grid"
-          aria-readonly={true}
+          aria-readonly={null}
           className="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
           onScroll={[Function]}
           role="rowgroup"
