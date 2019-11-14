@@ -23,3 +23,4 @@ import "./linechart";
 import "./vegachart";
 import "./progressbar";
 import "./textarea";
+import "./banner";

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Banner Default 1`] = `
+<div
+  className="sc-ifAKCX krxbjr"
+>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    Error banner 
+  </h3>
+  <div
+    className="sc-bdVaJa czPhAI sc-banner"
+  >
+    <i
+      className="fas fa-exclamation-triangle"
+    />
+    <div
+      className="sc-bwzfXH kulSxP"
+    >
+      <div
+        className="sc-bxivhb fUzblA"
+      >
+        Error
+      </div>
+      <span
+        className="sc-htpNat huuJxa"
+      >
+        There is an error.
+      </span>
+    </div>
+  </div>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    Warning banner 
+  </h3>
+  <div
+    className="sc-bdVaJa iTgNUh sc-banner"
+  >
+    <i
+      className="fas fa-exclamation-triangle"
+    />
+    <div
+      className="sc-bwzfXH kulSxP"
+    >
+      <div
+        className="sc-bxivhb fUzblA"
+      >
+        Warning
+      </div>
+      <span
+        className="sc-htpNat huuJxa"
+      >
+        There is a warning.
+      </span>
+    </div>
+  </div>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    Success banner 
+  </h3>
+  <div
+    className="sc-bdVaJa hXaEkV sc-banner"
+  >
+    <i
+      className="fas fa-check-circle"
+    />
+    <div
+      className="sc-bwzfXH kulSxP"
+    >
+      <div
+        className="sc-bxivhb fUzblA"
+      >
+        Success
+      </div>
+      <span
+        className="sc-htpNat huuJxa"
+      >
+        Everything is ok.
+      </span>
+    </div>
+  </div>
+</div>
+`;
