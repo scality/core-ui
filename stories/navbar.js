@@ -62,6 +62,11 @@ const rightActions = [
     ]
   },
   {
+    type: "button",
+    icon: <i className="fas fa-sun" />,
+    onClick: action("Theme toggle clicked")
+  },
+  {
     type: "dropdown",
     text: "Carlito",
     icon: <i className="fas fa-user" />,
@@ -94,7 +99,7 @@ storiesOf("Navbar", module).add("Default", () => {
         tabs={tabs}
       />
       <h3>Navbar with only tabs</h3>
-      <Navbar rightActions={[rightActions[3]]} tabs={tabs} />
+      <Navbar rightActions={[rightActions[4]]} tabs={tabs} />
     </div>
   );
 });

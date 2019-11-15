@@ -92,14 +92,16 @@ const NavbarMenuItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .sc-dropdown {
+    .trigger {
+      height: ${defaultTheme.navbarHeight};
+      font-size: ${defaultTheme.fontSize.base};
+    }
+  }
 
-  button {
+  .sc-button {
     margin: 0;
     border-radius: 0;
-    height: ${defaultTheme.navbarHeight};
-    width: ${defaultTheme.navbarItemWidth};
-  }
-  .trigger {
     height: ${defaultTheme.navbarHeight};
     font-size: ${defaultTheme.fontSize.base};
   }

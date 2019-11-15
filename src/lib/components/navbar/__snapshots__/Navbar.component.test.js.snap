@@ -12,7 +12,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
         onClick={[Function]}
       >
         <button
@@ -46,7 +46,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -121,7 +121,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <h1
           className="sc-kAzzGY dSCoqg"
@@ -183,7 +183,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -253,6 +253,36 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
+        <button
+          className="sc-bxivhb rkToF sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-bZQynM iMWVsx"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-ifAKCX bccMeP"
+                size="larger"
+              >
+                <i
+                  className="fas fa-sun"
+                />
+              </span>
+              <span
+                className="sc-EHOje boinrg"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -292,7 +322,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -367,7 +397,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <h1
           className="sc-kAzzGY dSCoqg"
@@ -429,7 +459,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -499,6 +529,36 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
+        <button
+          className="sc-bxivhb rkToF sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-bZQynM iMWVsx"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-ifAKCX bccMeP"
+                size="larger"
+              >
+                <i
+                  className="fas fa-sun"
+                />
+              </span>
+              <span
+                className="sc-EHOje boinrg"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -538,7 +598,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
         onClick={[Function]}
       >
         <button
@@ -572,7 +632,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -583,7 +643,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <h1
           className="sc-kAzzGY dSCoqg"
@@ -645,7 +705,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -715,6 +775,36 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
+        <button
+          className="sc-bxivhb rkToF sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-bZQynM iMWVsx"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-ifAKCX bccMeP"
+                size="larger"
+              >
+                <i
+                  className="fas fa-sun"
+                />
+              </span>
+              <span
+                className="sc-EHOje boinrg"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -754,7 +844,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -882,7 +972,7 @@ exports[`Storyshots Navbar Default 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"

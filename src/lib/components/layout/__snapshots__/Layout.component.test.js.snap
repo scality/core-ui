@@ -11,7 +11,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
         onClick={[Function]}
       >
         <button
@@ -45,7 +45,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -120,7 +120,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <h1
           className="sc-kAzzGY dSCoqg"
@@ -133,7 +133,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -427,7 +427,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
         onClick={[Function]}
       >
         <button
@@ -461,7 +461,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-chPdSV cpBXOe sc-logo"
@@ -536,7 +536,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <h1
           className="sc-kAzzGY dSCoqg"
@@ -549,7 +549,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-cSHVUG hQKQAr"
+        className="sc-cSHVUG iBdEdM"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
