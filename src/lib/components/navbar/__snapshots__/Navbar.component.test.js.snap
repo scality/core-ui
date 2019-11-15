@@ -195,7 +195,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="EN"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -208,14 +207,10 @@ exports[`Storyshots Navbar Default 1`] = `
             <span
               className="sc-EHOje boinrg sc-trigger-text"
             >
-              EN
+              FR
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -226,7 +221,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Scality Apps"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -238,10 +232,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -252,7 +242,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Help"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -264,10 +253,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -278,7 +263,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Carlito"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -457,7 +441,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="EN"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -470,14 +453,10 @@ exports[`Storyshots Navbar Default 1`] = `
             <span
               className="sc-EHOje boinrg sc-trigger-text"
             >
-              EN
+              FR
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -488,7 +467,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Scality Apps"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -500,10 +478,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -514,7 +488,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Help"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -526,10 +499,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -540,7 +509,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Carlito"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -689,7 +657,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="EN"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -702,14 +669,10 @@ exports[`Storyshots Navbar Default 1`] = `
             <span
               className="sc-EHOje boinrg sc-trigger-text"
             >
-              EN
+              FR
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -720,7 +683,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Scality Apps"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -732,10 +694,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -746,7 +704,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Help"
           >
             <span
               className="sc-ifAKCX bccMeP"
@@ -758,10 +715,6 @@ exports[`Storyshots Navbar Default 1`] = `
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="sc-cSHVUG hQKQAr"
-      >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
@@ -772,7 +725,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Carlito"
           >
             <span
               className="sc-ifAKCX joVDVz"
@@ -942,7 +894,6 @@ exports[`Storyshots Navbar Default 1`] = `
             onFocus={[Function]}
             size="larger"
             tabIndex="0"
-            title="Carlito"
           >
             <span
               className="sc-ifAKCX joVDVz"

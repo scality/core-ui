@@ -28,54 +28,46 @@ const sideBarActions = [
   }
 ];
 
-const applications = [
+const rightActions = [
   {
-    label: "Hyperdrive UI",
-    onClick: action("Hyperdrive UI clicked"),
-    "data-cy": "Hyperdrive_UI"
-  }
-];
-
-const help = [
-  { label: "About", onClick: action("About clicked"), "data-cy": "About" },
-  {
-    label: "Documentation",
-    onClick: action("Documentation clicked"),
-    "data-cy": "Documentation"
+    type: "dropdown",
+    text: "FR",
+    icon: <i className="fas fa-globe" />,
+    items: [
+      {
+        label: "English",
+        name: "EN",
+        onClick: action("English selected")
+      }
+    ]
   },
   {
-    label: "Onboarding",
-    onClick: action("Onboarding clicked"),
-    "data-cy": "Onboarding"
-  }
-];
-
-const user = {
-  name: "Carlito",
-  actions: [
-    { label: "Log out", onClick: action("Logout clicked"), "data-cy": "Logout" }
-  ]
-};
-
-const languages = [
-  {
-    label: "Français",
-    name: "FR",
-    onClick: action("French selected"),
-    selected: false
+    type: "dropdown",
+    icon: <i className="fas fa-th" />,
+    items: [
+      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") }
+    ]
   },
   {
-    label: "English",
-    name: "EN",
-    onClick: action("English selected"),
-    selected: true
+    type: "dropdown",
+    icon: <i className="fas fa-question-circle" />,
+    items: [
+      { label: "About", onClick: action("About clicked") },
+      { label: "Documentation", onClick: action("Documentation clicked") },
+      { label: "Onboarding", onClick: action("Onboarding clicked") }
+    ]
+  },
+  {
+    type: "dropdown",
+    text: "Carlito",
+    icon: <i className="fas fa-user" />,
+    items: [{ label: "Log out", onClick: action("Logout clicked") }]
   }
 ];
 
 storiesOf("Layout", module)
   .addDecorator(withKnobs)
   .add("Sidebar docked", () => {
-    const toggle = boolean("Sidebar Toogle Visible", true);
     const expanded = boolean("Sidebar Expanded", false);
 
     const sidebar = {
@@ -85,12 +77,8 @@ storiesOf("Layout", module)
 
     const navbar = {
       onToggleClick: action("toggle clicked"),
-      toggleVisible: toggle,
       productName: "Harware UI",
-      languages,
-      applications,
-      help,
-      user
+      rightActions
     };
 
     return (
@@ -107,12 +95,8 @@ storiesOf("Layout", module)
 
     const navbar = {
       onToggleClick: action("toggle clicked"),
-      toggleVisible: true,
       productName: "Harware UI",
-      languages,
-      applications,
-      help,
-      user
+      rightActions
     };
 
     return (
