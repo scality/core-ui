@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import VegaChart from "../src/lib/components/vegachart/VegaChart.component";
 import { data } from "./data/linechart";
+import { Wrapper, Title } from "./common";
 
 const spec = {
   data: { values: data },
@@ -78,9 +79,9 @@ const id = "vis";
 
 storiesOf("VegaChart", module).add("Default", () => {
   return (
-    <div>
-      <h3>Vega-Lite wrapper - need to specify the entire spec</h3>
+    <Wrapper>
+      <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
       <VegaChart id={id} spec={spec} />
-    </div>
+    </Wrapper>
   );
 });

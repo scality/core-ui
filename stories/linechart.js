@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import LineChart from "../src/lib/components/linechart/LineChart.component";
 import { data } from "./data/linechart";
+import { Wrapper, Title } from "./common";
 
 const xAxis = {
   field: "time",
@@ -30,9 +31,9 @@ const id = "vis";
 
 storiesOf("LineChart", module).add("Default", () => {
   return (
-    <div>
-      <h3>Vege-Lite line chart demo</h3>
+    <Wrapper>
+      <Title>Vege-Lite line chart demo</Title>
       <LineChart id={id} data={data} xAxis={xAxis} yAxis={yAxis} width={1000} />
-    </div>
+    </Wrapper>
   );
 });
