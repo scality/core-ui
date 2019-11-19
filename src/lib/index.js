@@ -22,6 +22,7 @@ import Tabs from "./components/tabs/Tabs.component";
 import Toggle from "./components/toggle/Toggle.component";
 import Tooltip from "./components/tooltip/Tooltip.component";
 import MultiSelect from './components/multiselect/MultiSelect.component'
+import CircularProgressBar from './components/circularprogressbar/CircularProgressBar.component'
 
 export {
   LOADER_SIZE,
@@ -44,5 +45,5 @@ export {
   Modal,
   Tooltip,
   MultiSelect,
-  Chips
+  CircularProgressBar
 };

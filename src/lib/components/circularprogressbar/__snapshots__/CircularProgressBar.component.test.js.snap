@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots CircularProgressBar Default 1`] = `
+<div
+  className="sc-ifAKCX krxbjr"
+>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    With Custom Color
+  </h3>
+  <div
+    className="sc-circularprogressbar sc-bdVaJa cRSqbK"
+    color="#00ff43"
+  >
+    <div
+      className="sc-bxivhb bUZGRr"
+    >
+      <h2>
+        Total Capacity
+      </h2>
+    </div>
+    <div
+      className="sc-bwzfXH bWjxaj"
+    >
+      <svg>
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+      </svg>
+      <div
+        className="sc-htpNat ktbemA"
+      >
+        <h2>
+          90
+          %
+        </h2>
+        <h3>
+          used
+        </h3>
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    With Default Color
+  </h3>
+  <div
+    className="sc-circularprogressbar sc-bdVaJa dNQqff"
+  >
+    <div
+      className="sc-bxivhb bUZGRr"
+    >
+      <h2>
+        Total Capacity
+      </h2>
+    </div>
+    <div
+      className="sc-bwzfXH bWjxaj"
+    >
+      <svg>
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+      </svg>
+      <div
+        className="sc-htpNat ktbemA"
+      >
+        <h2>
+          60
+          %
+        </h2>
+        <h3>
+          used
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-circularprogressbar sc-bdVaJa iIbTZu"
+  >
+    <div
+      className="sc-bxivhb bUZGRr"
+    >
+      <h2>
+        Total Capacity
+      </h2>
+    </div>
+    <div
+      className="sc-bwzfXH bWjxaj"
+    >
+      <svg>
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+        <circle
+          cx="70"
+          cy="70"
+          r="70"
+        />
+      </svg>
+      <div
+        className="sc-htpNat ktbemA"
+      >
+        <h2>
+          30
+          %
+        </h2>
+        <h3>
+          used
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+`;
