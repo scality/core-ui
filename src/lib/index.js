@@ -26,6 +26,7 @@ import VegaChart from "./components/vegachart/VegaChart.component";
 import LineChart from "./components/linechart/LineChart.component";
 import ProgressBar from "./components/progressbar/ProgressBar.component";
 import TextArea from "./components/textarea/TextArea.component";
+import CloudProgressBar from "./components/cloudprogressbar/CloudProgressBar.component";
 
 export {
   LOADER_SIZE,
@@ -52,5 +53,6 @@ export {
   VegaChart,
   LineChart,
   ProgressBar,
-  TextArea
+  TextArea,
+  CloudProgressBar
 };
