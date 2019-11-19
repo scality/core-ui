@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots CircularProgressBar Default 1`] = `
+<div
+  className="sc-ifAKCX krxbjr"
+>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    With Default Color
+  </h3>
+  <div
+    className="sc-bdVaJa eNoRay sc-circularprogressbar"
+  >
+    <span
+      className="sc-bwzfXH eKTvSU"
+    >
+      Total Capacity
+    </span>
+    <svg
+      height={150}
+      width={150}
+    >
+      <circle
+        className="sc-bxivhb cWLPzx"
+        cx={75}
+        cy={75}
+        r={70}
+        strokeWidth={10}
+      />
+      <circle
+        className="sc-htpNat cpIyhC"
+        cx={75}
+        cy={75}
+        r={70}
+        strokeWidth={10}
+        transform="rotate(-90 75  75)"
+      />
+      <text
+        className="sc-gzVnrw kEyYyY sc-circularprogressbar-text"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        x="50%"
+        y="50%"
+      >
+        60% used
+      </text>
+    </svg>
+  </div>
+  <h3
+    className="sc-EHOje ccjuFF"
+  >
+    With Custom Color
+  </h3>
+  <div
+    className="sc-bdVaJa eNoRay sc-circularprogressbar"
+  >
+    <span
+      className="sc-bwzfXH eKTvSU"
+    >
+      Total Capacity
+    </span>
+    <svg
+      height={110}
+      width={110}
+    >
+      <circle
+        className="sc-bxivhb cWLPzx"
+        cx={55}
+        cy={55}
+        r={50}
+        strokeWidth={10}
+      />
+      <circle
+        className="sc-htpNat ksSFlo"
+        color="#00ff43"
+        cx={55}
+        cy={55}
+        r={50}
+        strokeWidth={10}
+        transform="rotate(-90 55  55)"
+      />
+      <text
+        className="sc-gzVnrw kEyYyY sc-circularprogressbar-text"
+        dominantBaseline="middle"
+        style={
+          Object {
+            "fontSize": "15px",
+            "fontWeight": "700",
+          }
+        }
+        textAnchor="middle"
+        x="50%"
+        y="45%"
+      >
+        4.9 PB
+      </text>
+      <text
+        className="sc-gzVnrw kEyYyY sc-circularprogressbar-text"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        x="50%"
+        y="60%"
+      >
+        used
+      </text>
+    </svg>
+  </div>
+</div>
+`;

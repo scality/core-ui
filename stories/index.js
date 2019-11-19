@@ -28,3 +28,4 @@ import "./collapsiblepanel";
 import "./cloudprogressbar";
 import "./sparkline";
 import "./barchart";
+import "./circularprogressbar";

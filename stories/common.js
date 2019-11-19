@@ -16,6 +16,13 @@ const StyledSubTitle = styled.span`
   color: ${getThemePropSelector("text")};
 `;
 
+const StyledText = styled.text`
+  fill: ${props => {
+    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    return brandingTheme.text;
+  }};
+`;
+
 export const Wrapper = ({ children, className }) => {
   return <StyledWrapper className={className}>{children}</StyledWrapper>;
 };
@@ -26,4 +33,12 @@ export const Title = ({ children, className }) => {
 
 export const SubTitle = ({ children, className }) => {
   return <StyledSubTitle className={className}>{children}</StyledSubTitle>;
+};
+
+export const Text = ({ children, className, ...rest }) => {
+  return (
+    <StyledText className={className} {...rest}>
+      {children}
+    </StyledText>
+  );
 };
