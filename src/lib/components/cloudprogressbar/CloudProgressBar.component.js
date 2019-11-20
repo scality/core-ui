@@ -27,13 +27,23 @@ const Container = styled.div`
 const ContainerProgress = styled.div`
   ${props => {
     return css`
+      @keyframes heightAnimation {
+        from {
+          height: 100%;
+        }
+        to {
+          height: ${100 - props.percentage}%;
+        }
+      }
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: heightAnimation;
       position: absolute;
       z-index: 222;
       top: 0;
       left: 0;
       display: block;
       width: 100%;
-      height: ${100 - props.percentage}%;
       overflow: hidden;
     `;
   }}
