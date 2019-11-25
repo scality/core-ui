@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Item = {
   label: string,
@@ -19,7 +19,7 @@ export type Props = {
 
 const SidebarContainer = styled.div`
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return css`
       background-color: ${brandingTheme.base};
       color: ${brandingTheme.primary};
@@ -54,7 +54,7 @@ const SidebarItem = styled.div`
   }
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return props.active
       ? css`
           background-color: ${brandingTheme.baseContrast1};
@@ -84,7 +84,7 @@ const MenuItemSelected = styled.div`
   height: 100%;
   right: 0;
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return css`
       background-color: ${brandingTheme.primary};
     `;

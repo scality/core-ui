@@ -2,7 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Props = {
   rows?: number,
@@ -17,7 +17,7 @@ const TextAreaContainer = styled.textarea`
   padding: ${defaultTheme.padding.small};
   border-radius: 4px;
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return css`
       border-color: ${brandingTheme.border};
       color: ${brandingTheme.text};

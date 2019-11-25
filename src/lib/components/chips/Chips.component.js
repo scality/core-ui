@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 import Button from "../button/Button.component";
 import React from "react";
 import { lighten } from "polished";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Props = {
   text: string,
@@ -76,7 +76,7 @@ const ChipsContainer = styled.div`
   }}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
     return props.onClick
       ? css`
@@ -106,7 +106,7 @@ export const ChipsIcon = styled.span`
   background-color: ${props => {
     return lighten(
       0.15,
-      mergeTheme(props.theme, defaultTheme)[props.variant]
+      getTheme(props)[props.variant]
     ).toString();
   }};
 `;

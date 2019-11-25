@@ -3,7 +3,7 @@ import React from "react";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
 import { lighten } from "polished";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
 import type { Size, Variant } from "../constants";
@@ -86,42 +86,40 @@ export const ButtonStyled = styled.button`
   }}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
-    const brandLighter = lighten(0.3, brandingTheme[props.variant]).toString();
-    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+    const brandLighter = lighten(0.3, getThemeProp(props => props.variant).toString();
+    const brandLight = lighten(0.1, getThemeProp(props => props.variant).toString();
     return css`
       ${props.outlined
         ? `
         border-width: 1px;
         border-style: solid;
-        border-color: ${brandingTheme[props.variant]};
+        border-color: ${getThemeProp(props => props.variant};
         background-color: ${brandingTheme.background};
-        color: ${brandingTheme[props.variant]};
+        color: ${getThemeProp(props => props.variant};
 
-        &:hover{      
-          border-color: ${brandingTheme[props.variant]};
+        &:hover{
+          border-color: ${getThemeProp(props => props.variant};
           background-color: ${brandLight};
           color: ${brandingTheme.background};
         }
 
-        &:active {      
-          border-color: ${brandingTheme[props.variant]};
+        &:active {
+          border-color: ${getThemeProp(props => props.variant};
           background-color: ${brandLighter};
           color:  ${brandingTheme.background};
         }
         `
-        : `          
-        background-color: ${brandingTheme[props.variant]};
+        : `
+        background-color: ${getThemeProp(props => props.variant};
         color: ${defaultTheme.white};
-  
+
         &:hover {
           background-color: ${brandLight};
           color: ${defaultTheme.white};
         }
-        
-        &:active {      
-          background-color: ${brandingTheme[props.variant]};
+
+        &:active {
+          background-color: ${getThemeProp(props => props.variant};
           color: ${defaultTheme.white};
         }
       `}
@@ -151,8 +149,8 @@ ${props => {
 }}
 
 ${props => {
-  const brandingTheme = mergeTheme(props.theme, defaultTheme);
-  const brandLighter = lighten(0.2, brandingTheme[props.variant]).toString();
+  const brandingTheme = getTheme(props);
+  const brandLighter = lighten(0.2, getThemeProp(props => props.variant).toString();
 
   return css`
     ${props.disabled
@@ -168,9 +166,9 @@ ${props => {
 }}
 
 ${props => {
-  const brandingTheme = mergeTheme(props.theme, defaultTheme);
-  const brandLighter = lighten(0.2, brandingTheme[props.variant]).toString();
-  const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+  const brandingTheme = getTheme(props);
+  const brandLighter = lighten(0.2, getThemeProp(props => props.variant).toString();
+  const brandLight = lighten(0.1, getThemeProp(props => props.variant).toString();
 
   return css`
     ${!props.text && props.icon && props.inverted
@@ -179,14 +177,14 @@ ${props => {
         height: auto;
         border: none;
         background-color: transparent;
-        color: ${props.disabled ? brandLight : brandingTheme[props.variant]};
+        color: ${props.disabled ? brandLight : getThemeProp(props => props.variant};
 
-        &:hover{      
+        &:hover{
           background-color: transparent;
           color: ${brandLight};
         }
 
-        &:active {  
+        &:active {
           background-color: transparent;
           color: ${brandLighter};
         }

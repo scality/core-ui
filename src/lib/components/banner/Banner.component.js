@@ -3,7 +3,7 @@ import React from "react";
 import type { Node } from "react";
 import styled from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 import type { Variant } from "../constants";
 
 type Props = {
@@ -17,24 +17,18 @@ const BannerContainer = styled.div`
   display: flex;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.small};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemeProp('text')};
 
   border: 1px solid;
   border-left: 5px solid;
   border-radius: 3px;
-  border-color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme[props.variant];
-  }};
+  border-color: ${getThemeProp(props => props.variant)};
 
   i {
     display: flex;
     align-items: center;
     margin-left: ${defaultTheme.padding.small};
-    color: ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
-      return brandingTheme[props.variant];
-    }};
+    color: ${getThemeProp(props => props.variant)}
   }
 `;
 

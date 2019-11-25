@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { ellipsis } from "polished";
 
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Props = {
   paths: Array<Node>
@@ -25,7 +25,7 @@ const BreadcrumbItem = styled.li`
   ${ellipsis("250px")}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
 
     if (props.active) {
       const activeColor = brandingTheme.primary;

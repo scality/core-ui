@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { darken } from "polished";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 import type { Variant } from "../constants";
 
 export type Props = {
@@ -23,7 +23,7 @@ const NotificationContainer = styled.div`
   box-shadow: 5px 5px 15px ${defaultTheme.gray};
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return css`
       background-color: ${brandingTheme[props.variant || "primary"]};
       color: ${defaultTheme.white};
@@ -41,7 +41,7 @@ const NotificationDismissProgress = styled.div`
   height: 5px;
   border-radius: 5px;
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     const brandDark = darken(0.1, brandingTheme[props.variant || "primary"]);
 
     return css`

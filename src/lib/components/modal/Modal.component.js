@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import * as defaultTheme from "../../style/theme";
 import type { Node } from "react";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Props = {
   isOpen: boolean,
@@ -29,9 +29,8 @@ const ModalContainer = styled.div`
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).backgroundContrast1};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  background-color: ${getThemeProp('backgroundContrast1')};
+  color: ${getThemeProp('text')};
   border-radius: 5px;
   overflow: hidden;
   min-width: 250px;
@@ -54,8 +53,7 @@ const ModalBody = styled.div`
 `;
 const ModalFooter = styled.div`
   padding: ${defaultTheme.padding.base} ${defaultTheme.padding.larger};
-  background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+  background-color: ${getThemeProp('backgroundContrast2')};
 `;
 
 const ModalClose = styled.div`

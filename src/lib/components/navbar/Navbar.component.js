@@ -6,7 +6,7 @@ import Logo from "../../icons/branding";
 import Dropdown from "../dropdown/Dropdown.component";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
 
 type Items = Array<Item>;
@@ -36,16 +36,15 @@ const NavbarContainer = styled.div`
   height: ${defaultTheme.navbarHeight};
   display: flex;
   justify-content: space-between;
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      background-color: ${brandingTheme.base};
-      color: ${brandingTheme.primary};
+  ${
+    css`
+      background-color: ${getThemeProp('base')};
+      color: ${getThemeProp('primary')};
       .fas,
       .sc-trigger-text {
-        color: ${brandingTheme.primary};
+        color: ${getThemeProp('primary')};
       }
-    `;
+    `
   }};
 `;
 const NavbarMenu = styled.div`
@@ -69,7 +68,7 @@ const TabItems = styled.div`
   align-items: center;
   padding: 0 ${defaultTheme.padding.base};
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     return css`
       color: ${brandingTheme.primary};
       &:hover {
@@ -84,7 +83,7 @@ const TabItems = styled.div`
   ${props =>
     props.selected &&
     css`
-      border-bottom: 2px solid ${mergeTheme(props.theme, defaultTheme).primary};
+      border-bottom: 2px solid ${getThemeProp('primary')};
       span {
         padding-top: 2px;
       }

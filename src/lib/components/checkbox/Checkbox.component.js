@@ -2,7 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 type Props = {
   label?: string,
@@ -48,7 +48,7 @@ const StyledCheckboxLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   padding-left: ${defaultTheme.padding.base};
   vertical-align: middle;
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemeProp('text')};
 `;
 
 const StyledCheckbox = styled.label`
@@ -66,14 +66,12 @@ const StyledCheckbox = styled.label`
   }}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
     const iconCheckedColor =
-      props.checked || props.disabled ? brandingTheme.primary : "transparent";
+      props.checked || props.disabled ? getThemeProp('primary') : "transparent";
 
     const checkBoxColor =
       props.checked || props.disabled
-        ? brandingTheme.primary
+        ? getThemeProp('primary')
         : defaultTheme.grayLight;
 
     return css`
@@ -85,7 +83,7 @@ const StyledCheckbox = styled.label`
         width: 18px;
         height: 18px;
         border: 2px solid ${checkBoxColor};
-        background: ${brandingTheme.backgroundContrast1};
+        background: ${getThemeProp('backgroundContrast1')};
         border-radius: 4px;
       }
       i {
@@ -98,7 +96,7 @@ const StyledCheckbox = styled.label`
 
       &:hover {
         &:before {
-          border-color: ${brandingTheme.primary};
+          border-color: ${getThemeProp('primary')};
         }
       }
     `;

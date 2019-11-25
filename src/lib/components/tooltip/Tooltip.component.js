@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 
 export const TOP = "top";
 export const BOTTOM = "bottom";
@@ -27,10 +27,10 @@ const TooltipOverLayContainer = styled.div`
   position: absolute;
   background-color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.backgroundColor) ||
-    mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+    getThemeProp('backgroundContrast2')};
   color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.color) ||
-    mergeTheme(props.theme, defaultTheme).text}
+    getThemeProp('text')}
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
   font-size: ${props =>

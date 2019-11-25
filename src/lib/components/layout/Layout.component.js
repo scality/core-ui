@@ -8,7 +8,7 @@ import type { Props as NavbarProps } from "../navbar/Navbar.component";
 import type { Props as SidebarProps } from "../sidebar/Sidebar.component";
 import Sidebar from "../sidebar/Sidebar.component";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 type Props = {
   navbar: NavbarProps,
   sidebar: SidebarProps,
@@ -30,8 +30,7 @@ const ContentContainer = styled.div`
 
 const MainContent = styled.div`
   flex-grow: 1;
-  background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).background};
+  background-color: ${getThemeProp('background')};
 `;
 
 function Layout({ children, sidebar, navbar, ...rest }: Props) {

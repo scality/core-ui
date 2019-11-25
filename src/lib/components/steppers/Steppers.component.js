@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemeProp } from "../../utils";
 type StepProps = {
   title: string,
   content: Node,
@@ -37,7 +37,7 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     if (props.active) {
       return css`
         background-color: ${brandingTheme.primary};
@@ -59,7 +59,7 @@ const Circle = styled.div`
 
 const StepHeader = styled.span`
   padding: 8px;
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemeProp('text')};
 `;
 const StepContent = styled.div`
   padding: ${defaultTheme.padding.small};
@@ -71,7 +71,7 @@ const BottomBar = styled.hr`
   margin: 2px 14px;
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const brandingTheme = getTheme(props);
     if (props.completed) {
       return css`
         border-left: 2px solid ${brandingTheme.success};
