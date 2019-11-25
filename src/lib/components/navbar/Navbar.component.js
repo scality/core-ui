@@ -6,7 +6,7 @@ import Logo from "../../icons/branding";
 import Dropdown from "../dropdown/Dropdown.component";
 import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
 
 type Action = {
@@ -33,17 +33,14 @@ const NavbarContainer = styled.div`
   height: ${defaultTheme.navbarHeight};
   display: flex;
   justify-content: space-between;
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      background-color: ${brandingTheme.base};
-      color: ${brandingTheme.primary};
-      .fas,
-      .sc-trigger-text {
-        color: ${brandingTheme.primary};
-      }
-    `;
-  }};
+  ${css`
+    background-color: ${getThemePropSelector("base")};
+    color: ${getThemePropSelector("primary")};
+    .fas,
+    .sc-trigger-text {
+      color: ${getThemePropSelector("primary")};
+    }
+  `}};
 `;
 const NavbarMenu = styled.div`
   display: flex;
@@ -66,11 +63,11 @@ const TabItems = styled.div`
   align-items: center;
   padding: 0 ${defaultTheme.padding.base};
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const { primary } = getTheme(props);
     return css`
-      color: ${brandingTheme.primary};
+      color: ${primary};
       &:hover {
-        border-bottom: 2px solid ${brandingTheme.primary};
+        border-bottom: 2px solid ${primary};
         span {
           padding-top: 2px;
         }
@@ -81,7 +78,7 @@ const TabItems = styled.div`
   ${props =>
     props.selected &&
     css`
-      border-bottom: 2px solid ${mergeTheme(props.theme, defaultTheme).primary};
+      border-bottom: 2px solid ${getTheme(props).primary};
       span {
         padding-top: 2px;
       }
@@ -124,10 +121,11 @@ const LogoContainer = styled.div`
   }
 `;
 
-const getActionRenderer = ({ type, items = null, ...rest }) => {
+const getActionRenderer = ({ type, items = null, ...rest }, index) => {
   if (type === "dropdown") {
     return items ? (
       <Dropdown
+        key={`navbar_right_action_${index}`}
         size="larger"
         variant="base"
         items={items}
@@ -136,7 +134,14 @@ const getActionRenderer = ({ type, items = null, ...rest }) => {
       />
     ) : null;
   } else if (type === "button") {
-    return <Button size="larger" variant="base" {...rest} />;
+    return (
+      <Button
+        key={`navbar_right_action_${index}`}
+        size="larger"
+        variant="base"
+        {...rest}
+      />
+    );
   }
   return null;
 };
@@ -175,8 +180,12 @@ function NavBar({
       </NavbarMenu>
       {tabs.length ? (
         <NavbarTabs>
-          {tabs.map(({ title, selected, onClick }) => (
-            <TabItems onClick={onClick} selected={selected}>
+          {tabs.map(({ title, selected, onClick }, index) => (
+            <TabItems
+              onClick={onClick}
+              selected={selected}
+              key={`navbar_tab_item_${index}`}
+            >
               <span>{title}</span>
             </TabItems>
           ))}
@@ -185,7 +194,9 @@ function NavBar({
       {rightActions.length ? (
         <NavbarMenu>
           <NavbarMenuItem>
-            {rightActions.map(action => getActionRenderer(action))}
+            {rightActions.map((action, index) =>
+              getActionRenderer(action, index)
+            )}
           </NavbarMenuItem>
         </NavbarMenu>
       ) : null}

@@ -1,3 +1,5 @@
+import * as defaultTheme from "./style/theme";
+
 export function mergeTheme(theme, defaultTheme) {
   return theme && theme.brand
     ? {
@@ -6,3 +8,10 @@ export function mergeTheme(theme, defaultTheme) {
       }
     : defaultTheme.brand;
 }
+
+export const getTheme = props => mergeTheme(props.theme, defaultTheme);
+
+export const getThemePropSelector = key => props => getTheme(props)[key];
+
+export const getThemeVariantSelector = () => props =>
+  getTheme(props)[props.variant];

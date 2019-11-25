@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { lighten } from "polished";
 import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 
 type Props = {
   placeholder?: string,
@@ -36,7 +36,7 @@ const IconButton = styled.button`
   padding: 8px 12px;
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
-  color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+  color: ${getThemePropSelector("primary")};
   background-color: transparent;
   ${props => {
     return (
@@ -44,7 +44,7 @@ const IconButton = styled.button`
       css`
         cursor: pointer;
         &:hover {
-          color: ${lighten(0.1, mergeTheme(props.theme, defaultTheme).primary)};
+          color: ${lighten(0.1, getTheme(props).primary)};
         }
       `
     );

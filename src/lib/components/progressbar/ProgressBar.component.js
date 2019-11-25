@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import styled, { css } from "styled-components";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import type { Size } from "../constants";
 
@@ -57,7 +57,7 @@ const TopLeftLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   display: inline-block;
   font-weight: ${defaultTheme.fontWeight.bold};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text}};
+  color: ${getThemePropSelector("text")}};
 `;
 
 const TopRightLabel = styled.span`
@@ -67,7 +67,7 @@ const TopRightLabel = styled.span`
 `;
 
 const BottomLabel = styled.span`
-  color: ${props => mergeTheme(props.theme, defaultTheme).text}};
+  color: ${getThemePropSelector("text")}};
   display: inline-block;
 `;
 
@@ -99,8 +99,7 @@ const FilledAreaContainer = styled.div`
       animation-fill-mode: both;
       animation-name: widthAnimation;
 
-      background-color: ${props =>
-        props.color || mergeTheme(props.theme, defaultTheme).secondary};
+      background-color: ${props.color || getTheme(props).secondary}
       width: ${props.width}%;
     `;
   }}

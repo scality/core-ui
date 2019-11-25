@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import "react-virtualized/styles.css";
 import { lighten, ellipsis } from "polished";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 import Dropdown from "../dropdown/Dropdown.component";
 import {
   Column,
@@ -38,7 +38,7 @@ type HeaderProps = {
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
-    color: ${props => mergeTheme(props.theme, defaultTheme).text};
+    color: ${getThemePropSelector("text")};
     &:focus {
       outline: none;
     }
@@ -61,16 +61,9 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
-    background-color: ${props =>
-      mergeTheme(props.theme, defaultTheme).backgroundContrast1};
-    border-bottom: 1px solid
-      ${props => mergeTheme(props.theme, defaultTheme).border};
-    ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
-      return css`
-        color: ${brandingTheme.primary};
-      `;
-    }}
+    background-color: ${getThemePropSelector("backgroundContrast1")};
+    border-bottom: 1px solid ${getThemePropSelector("border")};
+    color: ${getThemePropSelector("primary")};
 
     text-transform: none;
 
@@ -89,16 +82,13 @@ const TableContainer = styled.div`
     display: flex;
     align-items: center;
     overflow: visible !important;
-    color: ${props => mergeTheme(props.theme, defaultTheme).text};
-    background-color: ${props =>
-      mergeTheme(props.theme, defaultTheme).backgroundContrast1};
-    border-bottom: 1px solid
-      ${props => mergeTheme(props.theme, defaultTheme).border};
+    color: ${getThemePropSelector("text")};
+    background-color: ${getThemePropSelector("backgroundContrast1")};
+    border-bottom: 1px solid ${getThemePropSelector("border")};
     box-sizing: border-box;
     &:hover,
     &:focus {
-      background-color: ${props =>
-        mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+      background-color: ${getThemePropSelector("backgroundContrast2")};
       outline: none;
       cursor: pointer;
     }
@@ -122,11 +112,10 @@ const CellContainer = styled.div`
 
   .sc-dropdown .trigger {
     background-color: transparent;
-    color: ${props => mergeTheme(props.theme, defaultTheme).text};
+    color: ${getThemePropSelector("text")};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
-      color: ${props =>
-        lighten(0.3, mergeTheme(props.theme, defaultTheme).primary)};
+      color: ${props => lighten(0.3, getTheme(props).primary).toString()};
     }
   }
 `;
@@ -147,10 +136,9 @@ const HeaderSortIcon = styled.div`
     position: absolute;
     color: ${defaultTheme.gray};
     ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
       if (props.selected && props.sortDirection === "ASC") {
         return css`
-          color: ${brandingTheme.primary};
+          color: ${getTheme(props).primary};
         `;
       }
     }}
@@ -159,10 +147,9 @@ const HeaderSortIcon = styled.div`
   .fa-sort-down {
     color: ${defaultTheme.gray};
     ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
       if (props.selected && props.sortDirection === "DESC") {
         return css`
-          color: ${brandingTheme.primary};
+          color: ${getTheme(props).primary};
         `;
       }
     }}

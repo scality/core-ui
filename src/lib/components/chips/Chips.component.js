@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 import Button from "../button/Button.component";
 import React from "react";
 import { lighten } from "polished";
-import { mergeTheme } from "../../utils";
+import { getTheme } from "../../utils";
 
 type Props = {
   text: string,
@@ -76,11 +76,11 @@ const ChipsContainer = styled.div`
   }}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = lighten(0.1, brandingTheme[props.variant]).toString();
+    const brand = getTheme(props);
+    const brandLight = lighten(0.1, brand[props.variant]).toString();
     return props.onClick
       ? css`
-          background-color: ${brandingTheme[props.variant]};
+          background-color: ${brand[props.variant]};
           color: ${defaultTheme.white};
           font-size: ${defaultTheme.fontSize[props.size]};
           &:hover {
@@ -88,11 +88,11 @@ const ChipsContainer = styled.div`
             background-color: ${brandLight};
           }
           &:active {
-            background-color: ${brandingTheme[props.variant]};
+            background-color: ${brand[props.variant]};
           }
         `
       : css`
-          background-color: ${brandingTheme[props.variant]};
+          background-color: ${brand[props.variant]};
           color: ${defaultTheme.white};
           font-size: ${defaultTheme.fontSize[props.size]};
         `;
@@ -103,12 +103,8 @@ export const ChipsIcon = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => {
-    return lighten(
-      0.15,
-      mergeTheme(props.theme, defaultTheme)[props.variant]
-    ).toString();
-  }};
+  background-color: ${props =>
+    lighten(0.15, getTheme(props)[props.variant]).toString()};
 `;
 
 export const ChipsText = styled.span`

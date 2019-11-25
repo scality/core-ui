@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme } from "../../utils";
 
 type Item = {
   title: string,
@@ -40,8 +40,7 @@ const TabItem = styled.div`
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${props =>
-            mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+          background-color: ${getTheme(props).backgroundContrast2};
         }
       `
     );
@@ -53,15 +52,15 @@ const TabItemTitle = styled.p`
   font-size: ${defaultTheme.fontSize.large};
   padding: ${defaultTheme.padding.base} 0 14px;
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const { primary, text } = getTheme(props);
     return props.selected
       ? css`
-          color: ${brandingTheme.primary};
-          border-bottom: 2px solid ${brandingTheme.primary};
+          color: ${primary};
+          border-bottom: 2px solid ${primary};
           font-weight: ${defaultTheme.fontWeight.bold};
         `
       : css`
-          color: ${brandingTheme.text};
+          color: ${text};
         `;
   }}
 `;

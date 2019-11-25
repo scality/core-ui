@@ -38,7 +38,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw laogzy"
+          className="sc-gzVnrw jYjDNn"
           width={50}
         />
       </div>
@@ -84,7 +84,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="small"
       >
         <div
-          className="sc-gzVnrw laogzy"
+          className="sc-gzVnrw jYjDNn"
           width={50}
         />
       </div>
@@ -130,7 +130,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="large"
       >
         <div
-          className="sc-gzVnrw laogzy"
+          className="sc-gzVnrw jYjDNn"
           width={50}
         />
       </div>
@@ -176,7 +176,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="larger"
       >
         <div
-          className="sc-gzVnrw laogzy"
+          className="sc-gzVnrw jYjDNn"
           width={50}
         />
       </div>
@@ -222,7 +222,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw dFRdSQ"
+          className="sc-gzVnrw foSaKD"
           color="#2f67ac"
           width={50}
         />
@@ -260,7 +260,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw jDurVO"
+          className="sc-gzVnrw cOgprB"
           color="#ff5722"
           width={10}
         />
@@ -289,7 +289,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw hVFiIl"
+          className="sc-gzVnrw jxAtbd"
           color="#982803"
           width={90}
         />

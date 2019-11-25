@@ -70,7 +70,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI gmQrZU sc-button"
+            className="sc-iwsKbI dIpcya sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -360,7 +360,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI gmQrZU sc-button"
+            className="sc-iwsKbI dIpcya sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -558,7 +558,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI gmQrZU sc-button"
+            className="sc-iwsKbI dIpcya sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

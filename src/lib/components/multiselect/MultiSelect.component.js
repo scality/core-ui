@@ -5,7 +5,7 @@ import * as defaultTheme from "../../style/theme";
 import CheckBox from "./../checkbox/Checkbox.component";
 import Button from "./../button/Button.component";
 import Select from "./../select/Select.component";
-import { mergeTheme } from "../../utils";
+import { getThemePropSelector } from "../../utils";
 
 export type ItemProps = {
   selected?: boolean,
@@ -38,7 +38,7 @@ type MultiSelectProps = {
 };
 
 const MultiSelectContainer = styled.div`
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemePropSelector('text')};
 `;
 
 const MultiSelectTitle = styled.h3`

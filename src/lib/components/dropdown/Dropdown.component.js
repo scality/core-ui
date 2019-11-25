@@ -8,7 +8,7 @@ import {
   ButtonText
 } from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getThemePropSelector } from "../../utils";
 
 export type Item = {
   label: string,
@@ -41,8 +41,7 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  border: 1px solid
-    ${props => mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+  border: 1px solid ${getThemePropSelector("backgroundContrast2")};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
@@ -84,19 +83,16 @@ const DropdownMenuItemStyled = styled.li`
   cursor: pointer;
   font-size: ${defaultTheme.fontSize.base};
 
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      background-color: ${brandingTheme.backgroundContrast1};
-      color: ${brandingTheme.text};
-      &:hover {
-        background-color: ${brandingTheme.backgroundContrast2};
-      }
-      &:active {
-        background-color: ${brandingTheme.backgroundContrast1};
-      }
-    `;
-  }};
+  ${css`
+    background-color: ${getThemePropSelector("backgroundContrast1")};
+    color: ${getThemePropSelector("text")};
+    &:hover {
+      background-color: ${getThemePropSelector("backgroundContrast2")};
+    }
+    &:active {
+      background-color: ${getThemePropSelector("backgroundContrast1")};
+    }
+  `};
 `;
 
 const Caret = styled.span`

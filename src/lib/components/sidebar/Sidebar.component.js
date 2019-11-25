@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 
 type Item = {
   label: string,
@@ -19,12 +19,12 @@ export type Props = {
 
 const SidebarContainer = styled.div`
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const { base, primary } = getTheme(props);
     return css`
-      background-color: ${brandingTheme.base};
-      color: ${brandingTheme.primary};
+      background-color: ${base};
+      color: ${primary};
       .fas {
-        color: ${brandingTheme.primary};
+        color: ${primary};
       }
     `;
   }}
@@ -54,21 +54,21 @@ const SidebarItem = styled.div`
   }
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
+    const { baseContrast1, primary } = getTheme(props);
     return props.active
       ? css`
-          background-color: ${brandingTheme.baseContrast1};
-          color: ${brandingTheme.primary};
+          background-color: ${baseContrast1};
+          color: ${primary};
           cursor: default;
         `
       : css`
           &:hover {
-            background-color: ${brandingTheme.baseContrast1};
-            color: ${brandingTheme.primary};
+            background-color: ${baseContrast1};
+            color: ${primary};
           }
           &:active {
-            background-color: ${brandingTheme.baseContrast1};
-            color: ${brandingTheme.primary};
+            background-color: ${baseContrast1};
+            color: ${primary};
           }
         `;
   }}
@@ -83,12 +83,7 @@ const MenuItemSelected = styled.div`
   width: 5px;
   height: 100%;
   right: 0;
-  ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return css`
-      background-color: ${brandingTheme.primary};
-    `;
-  }}
+  background-color: ${getThemePropSelector("primary")};
 `;
 
 const MenuItemIcon = styled.div`

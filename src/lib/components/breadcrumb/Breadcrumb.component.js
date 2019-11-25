@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { ellipsis } from "polished";
 
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme } from "../../utils";
 
 type Props = {
   paths: Array<Node>
@@ -25,31 +25,29 @@ const BreadcrumbItem = styled.li`
   ${ellipsis("250px")}
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
+    const { primary, text } = getTheme(props);
     if (props.active) {
-      const activeColor = brandingTheme.primary;
       return css`
         font-weight: ${defaultTheme.fontWeight.bold};
         a {
-          color: ${activeColor};
+          color: ${primary};
         }
-        color: ${activeColor};
-        border-bottom: 2px solid ${activeColor};
+        color: ${primary};
+        border-bottom: 2px solid ${primary};
       `;
     }
-    const hoverColor = brandingTheme.primary;
+
     return css`
       a {
         text-decoration: none;
-        color: ${brandingTheme.text};
+        color: ${text};
       }
-      color: ${brandingTheme.text};
+      color: ${text};
       &:hover {
         a {
-          color: ${hoverColor};
+          color: ${primary};
         }
-        border-bottom: 2px solid ${hoverColor};
+        border-bottom: 2px solid ${primary};
       }
     `;
   }}

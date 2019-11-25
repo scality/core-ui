@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 
 export const InputContainer = styled.div`
   display: inline-flex;
@@ -14,12 +14,11 @@ export const InputContainer = styled.div`
 
   input.sc-input-type {
     ${props => {
-      const brandingTheme = mergeTheme(props.theme, defaultTheme);
+      const { backgroundContrast1, text, danger } = getTheme(props);
       return css`
-        background-color: ${brandingTheme.backgroundContrast1};
-        color: ${brandingTheme.text};
-        border: 1px solid
-          ${props.error ? brandingTheme.danger : brandingTheme.text};
+        background-color: ${backgroundContrast1};
+        color: ${text};
+        border: 1px solid ${props.error ? danger : text};
       `;
     }};
     padding: 8px ${defaultTheme.padding.small};
@@ -29,7 +28,7 @@ export const InputContainer = styled.div`
   }
 
   input.sc-input-type:focus {
-    border-color: ${props => mergeTheme(props.theme, defaultTheme).primary};
+    border-color: ${getThemePropSelector("primary")};
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 1px rgba(0, 126, 255, 0.1);
     outline: none;
@@ -71,14 +70,11 @@ export const LabelStyle = styled.label`
   align-self: flex-start;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.base};
-  color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.text;
-  }};
+  color: ${getThemePropSelector("text")};
 `;
 
 export const InputErrorMessage = styled.span`
-  color: ${props => mergeTheme(props.theme, defaultTheme).danger};
+  color: ${getThemePropSelector("danger")};
   margin: ${defaultTheme.padding.smaller} 0;
   font-size: ${defaultTheme.fontSize.small};
 `;
