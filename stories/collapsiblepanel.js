@@ -25,6 +25,7 @@ storiesOf("CollapsiblePanel", module)
           expanded
           onHeaderClick={action("Colapse panel")}
           children={items}
+          onClick={action("Clickable Item")}
         />
       </Wrapper>
     );

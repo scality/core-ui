@@ -2,9 +2,9 @@
 import React from "react";
 import { lighten } from "polished";
 import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
 import Button from "../button/Button.component";
 import { mergeTheme } from "../../utils";
+import * as defaultTheme from "../../style/theme";
 
 type Props = {
   expand?: Boolean,
@@ -52,11 +52,11 @@ const ExpandedItems = styled.div`
   height: ${defaultTheme.navbarHeight};
   display: flex;
   align-items: center;
-  padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.large}
+  padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.large};
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    const brandLight = lighten(0.1,  brandingTheme.background).toString();
+    const brandLight = lighten(0.1,  brandingTheme[props.variant]).toString();
     return props.onClick
       && css`
         &:hover {
