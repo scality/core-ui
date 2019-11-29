@@ -1,12 +1,11 @@
-import { Title, Wrapper } from "./common";
-
-import CollapsiblePanel from "../src/lib/components/collapsiblepanel/CollapsiblePanel.component";
 //@flow
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { Title, Wrapper } from "./common";
+import CollapsiblePanel from "../src/lib/components/collapsiblepanel/CollapsiblePanel.component";
 
-const items = ['banana', 'apple', 'grape'];
+const items = ['Text', 'apple', 'grape'];
 
 storiesOf("CollapsiblePanel", module)
   .add("Default", () => {
@@ -14,18 +13,17 @@ storiesOf("CollapsiblePanel", module)
       <Wrapper className="storybook-chips">
         <Title>Colapsed</Title>
         <CollapsiblePanel
-          node="Colapsed Panel"
+          node={items}
           onHeaderClick={action("Expand panel")}
-          children={items}
+          children="orange"
         />
 
         <Title>Expanded</Title>
         <CollapsiblePanel
-          node="Expanded Panel"
+          node={items}
           expanded
           onHeaderClick={action("Colapse panel")}
-          children={items}
-          onClick={action("Clickable Item")}
+          children="orange"
         />
       </Wrapper>
     );

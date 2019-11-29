@@ -19,7 +19,6 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@scality/core-ui": "github:scality/core-ui.git",
     "@babel/cli": "7.6.0",
     "@babel/core": "7.6.0",
     "@babel/preset-env": "7.6.0",
