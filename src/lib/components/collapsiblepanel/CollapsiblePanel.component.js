@@ -1,15 +1,14 @@
 //@flow
 import React from "react";
+import { mergeTheme } from "../../utils";
 import styled from "styled-components";
-import Button from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 
-
 type Props = {
-  expand?: Boolean,
-  onHeaderClick?: any => void,
-  children?: any,
-  node: Array,
+  expand: Boolean,
+  onHeaderClick: any => void,
+  children: any,
+  header: Array,
 };
 
 const ARROW = {
@@ -25,15 +24,16 @@ const HeaderItem = styled.div`
   margin-right: 20px; 
 `;
 const HeaderIcon = styled.div`
+  font-size: 18px
   margin: 0 20px;
 `;
 
 const CollapsiblePanelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 8px 8px 4px 4px;
-  background-color: ${defaultTheme.brand.primary};
-  color: ${defaultTheme.brand.backgroundContrast1};
+  border-radius: 4px;
+  background-color: ${props => mergeTheme(props.theme, defaultTheme).backgroundContrast1};
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};;
 `;
 
 const HeaderContainer = styled.div`
@@ -55,28 +55,25 @@ function CollapsiblePanel({
   expanded = false,
   onHeaderClick,
   children,
-  node = [],
+  header = [],
 }: Props) {
   return (
     <CollapsiblePanelContainer className="sc-collapsiblepanel" >
-      <HeaderContainer onClick={onHeaderClick}>
-        <HeaderText className="sc-chips-text" >
+      <HeaderContainer onClick={onHeaderClick} className="sc-collapsiblepanel-header">
+        <HeaderText>
           {
-            node.map(item =>
-              <HeaderItem>{item}</HeaderItem>
+            header.map(item =>
+              <HeaderItem key={item} >{item}</HeaderItem>
             )
           }
         </HeaderText>
         <HeaderIcon>
-          <Button
-            icon={<i className={expanded ? ARROW.expanded : ARROW.colapsed} />}
-            size="larger"
-          />
+          <i className={expanded ? ARROW.expanded : ARROW.colapsed} />
         </HeaderIcon>
       </HeaderContainer>
       {
         expanded && (
-          <ExpandedContainer>
+          <ExpandedContainer className="sc-collapsiblepanel-content">
             {children}
           </ExpandedContainer>
         )
