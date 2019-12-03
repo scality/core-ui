@@ -24,4 +24,5 @@ import "./vegachart";
 import "./progressbar";
 import "./textarea";
 import "./banner";
+import "./collapsiblepanel";
 import "./cloudprogressbar";

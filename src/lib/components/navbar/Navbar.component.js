@@ -9,11 +9,12 @@ import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 import type { Item } from "../dropdown/Dropdown.component";
 
-type Items = Array<Item>;
-type User = {
-  name: string,
-  actions: Items
+type Action = {
+  type: string,
+  items?: Array<Item>
 };
+
+type Actions = Array<Action>;
 type Tab = {
   title: string,
   selected?: boolean,
@@ -22,13 +23,9 @@ type Tab = {
 
 export type Props = {
   onToggleClick?: () => void,
-  toggleVisible?: boolean,
+  rightActions: Actions,
   productName?: string,
-  applications?: Items,
-  help?: Items,
-  user?: User,
   logo?: Node,
-  languages?: Items,
   tabs?: Array<Tab>
 };
 
@@ -95,14 +92,16 @@ const NavbarMenuItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .sc-dropdown {
+    .trigger {
+      height: ${defaultTheme.navbarHeight};
+      font-size: ${defaultTheme.fontSize.base};
+    }
+  }
 
-  button {
+  .sc-button {
     margin: 0;
     border-radius: 0;
-    height: ${defaultTheme.navbarHeight};
-    width: ${defaultTheme.navbarItemWidth};
-  }
-  .trigger {
     height: ${defaultTheme.navbarHeight};
     font-size: ${defaultTheme.fontSize.base};
   }
@@ -125,27 +124,35 @@ const LogoContainer = styled.div`
   }
 `;
 
+const getActionRenderer = ({ type, items = null, ...rest }) => {
+  if (type === "dropdown") {
+    return items ? (
+      <Dropdown
+        size="larger"
+        variant="base"
+        items={items}
+        caret={false}
+        {...rest}
+      />
+    ) : null;
+  } else if (type === "button") {
+    return <Button size="larger" variant="base" {...rest} />;
+  }
+  return null;
+};
+
 function NavBar({
   onToggleClick,
-  toggleVisible,
   productName,
-  applications,
-  help,
-  user,
   logo,
   tabs = [],
-  languages = [],
+  rightActions = [],
   ...rest
 }: Props) {
-  const filterLanguage = languages.filter(language => !language.selected);
-  const currentLanguage = languages.find(
-    language => language.selected === true
-  );
-
   return (
     <NavbarContainer className="sc-navbar" {...rest}>
       <NavbarMenu>
-        {toggleVisible && (
+        {onToggleClick && (
           <NavbarMenuItem onClick={onToggleClick}>
             <Button
               size="larger"
@@ -166,66 +173,22 @@ function NavBar({
           </NavbarMenuItem>
         )}
       </NavbarMenu>
-      <NavbarTabs>
-        {tabs.length > 0 &&
-          tabs.map(({ title, selected, onClick }) => (
+      {tabs.length ? (
+        <NavbarTabs>
+          {tabs.map(({ title, selected, onClick }) => (
             <TabItems onClick={onClick} selected={selected}>
               <span>{title}</span>
             </TabItems>
           ))}
-      </NavbarTabs>
-      <NavbarMenu>
-        {languages.length > 0 && (
+        </NavbarTabs>
+      ) : null}
+      {rightActions.length ? (
+        <NavbarMenu>
           <NavbarMenuItem>
-            <Dropdown
-              size="larger"
-              variant="base"
-              items={filterLanguage}
-              icon={<i className="fas fa-globe" />}
-              title={currentLanguage ? currentLanguage.name : languages[0].name}
-              caret={false}
-              text={currentLanguage ? currentLanguage.name : languages[0].name}
-            />
+            {rightActions.map(action => getActionRenderer(action))}
           </NavbarMenuItem>
-        )}
-        {applications && (
-          <NavbarMenuItem>
-            <Dropdown
-              size="larger"
-              variant="base"
-              items={applications}
-              icon={<i className="fas fa-th" />}
-              title="Scality Apps"
-              caret={false}
-            />
-          </NavbarMenuItem>
-        )}
-        {help && (
-          <NavbarMenuItem>
-            <Dropdown
-              size="larger"
-              variant="base"
-              items={help}
-              icon={<i className="fas fa-question-circle" />}
-              title="Help"
-              caret={false}
-            />
-          </NavbarMenuItem>
-        )}
-        {user && (
-          <NavbarMenuItem>
-            <Dropdown
-              variant="base"
-              items={user.actions}
-              icon={<i className="fas fa-user" />}
-              title={user.name}
-              text={user.name}
-              size="larger"
-              caret={false}
-            />
-          </NavbarMenuItem>
-        )}
-      </NavbarMenu>
+        </NavbarMenu>
+      ) : null}
     </NavbarContainer>
   );
 }
