@@ -1,83 +1,86 @@
 //@flow
 import React from "react";
-import { mergeTheme } from "../../utils";
+import type { Node } from "react";
 import styled from "styled-components";
 import * as defaultTheme from "../../style/theme";
+import { mergeTheme } from "../../utils";
 
 type Props = {
-  expand: Boolean,
+  expanded: boolean,
   onHeaderClick: any => void,
-  children: any,
-  header: Array,
+  children: Node,
+  headerItems: Array<Node>
 };
 
 const ARROW = {
-  colapsed: 'fas fa-angle-down',
-  expanded: 'fas fa-angle-up',
-}
+  colapsed: "fas fa-angle-down",
+  expanded: "fas fa-angle-up"
+};
 
 const HeaderText = styled.div`
   display: flex;
+  align-items: center;
+  flex-grow: 1;
 `;
 
 const HeaderItem = styled.div`
-  margin-right: 20px; 
+  margin-right: ${defaultTheme.padding.base};
+  display: flex;
+  flex-grow: 1;
 `;
 const HeaderIcon = styled.div`
-  font-size: 18px
-  margin: 0 20px;
+  font-size: ${defaultTheme.fontSize.larger};
+  margin: 0 ${defaultTheme.padding.base};
 `;
 
 const CollapsiblePanelContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-color: ${props => mergeTheme(props.theme, defaultTheme).backgroundContrast1};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};;
+  background-color: ${props =>
+    mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
 `;
 
 const HeaderContainer = styled.div`
-  height: ${defaultTheme.navbarHeight};
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer
-  padding: ${defaultTheme.padding.small} ${defaultTheme.padding.large}
+  cursor: pointer;
+  padding: ${defaultTheme.padding.base};
 `;
 
 const ExpandedContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: ${defaultTheme.padding.small} ${defaultTheme.padding.large}
+  padding: ${defaultTheme.padding.base};
+  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  background-color: ${props =>
+    mergeTheme(props.theme, defaultTheme).backgroundContrast1};
 `;
 
 function CollapsiblePanel({
   expanded = false,
   onHeaderClick,
   children,
-  header = [],
+  headerItems = []
 }: Props) {
   return (
-    <CollapsiblePanelContainer className="sc-collapsiblepanel" >
-      <HeaderContainer onClick={onHeaderClick} className="sc-collapsiblepanel-header">
+    <CollapsiblePanelContainer className="sc-collapsiblepanel">
+      <HeaderContainer
+        onClick={onHeaderClick}
+        className="sc-collapsiblepanel-header"
+      >
         <HeaderText>
-          {
-            header.map(item =>
-              <HeaderItem key={item} >{item}</HeaderItem>
-            )
-          }
+          {headerItems.map((item, index) => (
+            <HeaderItem key={index}>{item}</HeaderItem>
+          ))}
         </HeaderText>
         <HeaderIcon>
           <i className={expanded ? ARROW.expanded : ARROW.colapsed} />
         </HeaderIcon>
       </HeaderContainer>
-      {
-        expanded && (
-          <ExpandedContainer className="sc-collapsiblepanel-content">
-            {children}
-          </ExpandedContainer>
-        )
-      }
+      {expanded && (
+        <ExpandedContainer className="sc-collapsiblepanel-content">
+          {children}
+        </ExpandedContainer>
+      )}
     </CollapsiblePanelContainer>
   );
 }
