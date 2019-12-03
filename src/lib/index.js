@@ -27,6 +27,7 @@ import LineChart from "./components/linechart/LineChart.component";
 import ProgressBar from "./components/progressbar/ProgressBar.component";
 import TextArea from "./components/textarea/TextArea.component";
 import CloudProgressBar from "./components/cloudprogressbar/CloudProgressBar.component";
+import Sparkline from "./components/sparkline/SparkLine.component.js";
 
 export {
   LOADER_SIZE,
@@ -54,5 +55,6 @@ export {
   LineChart,
   ProgressBar,
   TextArea,
-  CloudProgressBar
+  CloudProgressBar,
+  Sparkline
 };

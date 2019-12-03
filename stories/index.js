@@ -26,3 +26,4 @@ import "./textarea";
 import "./banner";
 import "./collapsiblepanel";
 import "./cloudprogressbar";
+import "./sparkline";
