@@ -5,7 +5,7 @@ import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
 type StepProps = {
-  title: string,
+  title: Node,
   content: Node,
   active?: boolean,
   completed?: boolean,
