@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import * as defaultTheme from "../../style/theme";
 import type { Node } from "react";
@@ -46,22 +46,15 @@ const ContainerProgress = styled.div`
   }}
 `;
 
-const CloudContainer = styled.div`
-  position: relative;
-`;
-
-const Cloud = ({
-  strokeColor,
-  borderSize
-}) =>
-  <svg 
+const Cloud = ({ strokeColor, borderSize }) => (
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 15 72 42"
     enable-background="new 0 0 72 72"
   >
     <g>
-      <path 
-        fill="none" 
+      <path
+        fill="none"
         stroke={strokeColor}
         stroke-width={borderSize}
         stroke-linecap="round"
@@ -71,23 +64,18 @@ const Cloud = ({
       />
     </g>
   </svg>
-  
-const CloudProgress = ({
-  strokeColor,
-  percentage,
-  borderSize
-}) =>
-  <ContainerProgress
-    percentage={percentage}
-  >
-    <svg 
+);
+
+const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
+  <ContainerProgress percentage={percentage}>
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 15 72 42"
       enable-background="new 0 0 72 72"
     >
       <g>
-        <path 
-          fill="none" 
+        <path
+          fill="none"
           stroke={strokeColor}
           stroke-width={borderSize}
           stroke-linecap="round"
@@ -98,29 +86,25 @@ const CloudProgress = ({
       </g>
     </svg>
   </ContainerProgress>
+);
 
 const CloudProgressBar = ({
   percentage = 0,
-  borderSize = '2px',
+  borderSize = "2px",
   cloudColor = defaultTheme.brand.primary,
   progressCloudColor = defaultTheme.brand.backgroundContrast2,
   children
-}: CloudProgressBarProps) =>
-  <Container
-    className='sc-cloudprogressbar'
-  >
-    <CloudContainer>
-      <Cloud
-        strokeColor={progressCloudColor}
-        borderSize={borderSize}
-      />
-      <CloudProgress
-        strokeColor={cloudColor}
-        percentage={percentage}
-        borderSize={borderSize}
-      />
-    </CloudContainer>
-    { children }
+}: CloudProgressBarProps) => (
+  <Container className="sc-cloudprogressbar">
+    <Cloud strokeColor={progressCloudColor} borderSize={borderSize} />
+    <CloudProgress
+      strokeColor={cloudColor}
+      percentage={percentage}
+      borderSize={borderSize}
+    />
+
+    {children}
   </Container>
+);
 
 export default CloudProgressBar;

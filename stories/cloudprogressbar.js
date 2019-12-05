@@ -8,12 +8,12 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
   return (
     <Wrapper>
       <Title>CloudProgressBar</Title>
-      <div style={{ width: "300px", margin: '20px 0 20px 0' }}>
+      <div style={{ width: "300px", margin: "20px 0 20px 0" }}>
         <CloudProgressBar
           percentage={30}
-          borderSize='3px'
-          cloudColor='yellow'
-          progressCloudColor='blue'
+          borderSize="1.5px"
+          cloudColor="yellow"
+          progressCloudColor="blue"
         >
           <div
             style={{
@@ -28,12 +28,12 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
           </div>
         </CloudProgressBar>
       </div>
-      <div style={{ width: "400px", margin: '20px 0 20px 0' }}>
+      <div style={{ width: "400px", margin: "20px 0 20px 0" }}>
         <CloudProgressBar
           percentage={50}
-          borderSize='3px'
-          cloudColor='#ccc'
-          progressCloudColor='#000'
+          borderSize="1.5px"
+          cloudColor="#ccc"
+          progressCloudColor="#000"
         >
           <div
             style={{
@@ -48,12 +48,12 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
           </div>
         </CloudProgressBar>
       </div>
-      <div style={{ width: "500px", margin: '20px 0 20px 0' }}>
+      <div style={{ width: "500px", margin: "20px 0 20px 0" }}>
         <CloudProgressBar
           percentage={80}
-          borderSize='3px'
-          cloudColor='#3d383a'
-          progressCloudColor='#83d136'
+          borderSize="2px"
+          cloudColor="#3d383a"
+          progressCloudColor="#83d136"
         >
           <div
             style={{
@@ -68,12 +68,12 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
           </div>
         </CloudProgressBar>
       </div>
-      <div style={{ width: "600px", margin: '20px 0 20px 0' }}>
+      <div style={{ width: "600px", margin: "20px 0 20px 0" }}>
         <CloudProgressBar
           percentage={70}
-          borderSize='3px'
-          cloudColor='#BDFFB0'
-          progressCloudColor='#A3FFCB'
+          borderSize="2px"
+          cloudColor="#BDFFB0"
+          progressCloudColor="#A3FFCB"
         >
           <div
             style={{
