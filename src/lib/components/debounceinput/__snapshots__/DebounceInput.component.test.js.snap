@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots DebounceInput Default 1`] = `
+<div>
+  <div
+    className="sc-debounceinput sc-bdVaJa bDWFJH"
+  >
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <label>
+      Value: 
+      
+    </label>
+  </div>
+</div>
+`;

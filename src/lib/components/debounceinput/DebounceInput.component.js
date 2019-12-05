@@ -1,28 +1,32 @@
 //@flow
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 
 type Props = {
+  minLength: Number,
+  delay: Number
 };
 
 const DebounceInputContainer = styled.div``;
 
-function DebounceInput(props: Props) {
-  const minLength = 1
-  const delay = 300
-  const[value, setValue] = useState('')
+function DebounceInput({minLength,delay, ...rest}: Props) {
 
-  const handleChange = async e => {
-    
-    e.persist();
-    
+  const[value, setValue] = useState('')
+  const[timeOutID, setTimeOutID] = useState(null)
+
+  const handleChange = e => {        
     let newValue =  e.target.value;
-    let lengthDiff = Math.abs(newValue.length - value.length);
+    let lengthDiff = Math.abs(newValue.length - value.length) % (minLength + 1) ;
     
-    if(minLength === lengthDiff) 
-    await setTimeout(() => {
-      return setValue(newValue)
-      },delay);
+    if(minLength === lengthDiff){
+      clearTimeout(timeOutID)
+
+      const newTimeOutID = setTimeout(() => {
+          setValue(newValue)
+        },delay);
+
+      setTimeOutID(newTimeOutID)
+    } 
   }
 
   return (

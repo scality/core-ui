@@ -220,7 +220,8 @@ function Table({
 
   const rowGetter = ({ index }) => list[index];
   return (
-    <AutoSizer className="sc-table" style={{ height: "auto", width: "auto" }}>
+  <React.Suspense fallback={<div>Loading...</div>}>
+<AutoSizer className="sc-table" style={{ height: "auto", width: "auto" }}>
       {({ height, width }) => (
         <TableContainer>
           <VirtualizedTable
@@ -286,6 +287,8 @@ function Table({
         </TableContainer>
       )}
     </AutoSizer>
+  </React.Suspense>
+    
   );
 }
 

@@ -7,7 +7,7 @@ storiesOf("DebounceInput", module)
   .add("Default", () => {
     return (
       <div>
-          <DebounceInput />
+          <DebounceInput minLength={3} delay={300} />
       </div>
     );
   });
