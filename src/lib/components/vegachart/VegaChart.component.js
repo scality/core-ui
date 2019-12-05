@@ -26,6 +26,13 @@ function VegaChart({ id, spec }: Props) {
   const brandText =
     themeContext && themeContext.brand && themeContext.brand.text;
 
+  let tooltipTheme;
+  if (currentBackgroundColor === "#ffffff") {
+    tooltipTheme = "light";
+  } else {
+    tooltipTheme = "dark";
+  }
+
   const themeConfig = {
     config: {
       background: currentBackgroundColor,
@@ -49,14 +56,19 @@ function VegaChart({ id, spec }: Props) {
       // the trend line max/min and verticle
       rule: {
         color: brandText
-      }
+      },
+
+      mark: { tooltip: null }
     }
   };
   const themedSpec = { ...spec, ...themeConfig };
 
   useEffect(() => {
-    vegaEmbed(`#${id}`, themedSpec, { renderer: "svg" });
-  }, [id, themedSpec]);
+    vegaEmbed(`#${id}`, themedSpec, {
+      renderer: "svg",
+      tooltip: { theme: tooltipTheme }
+    });
+  }, [id, themedSpec, tooltipTheme]);
 
   return (
     <VegaChartContainer id={id} className="sc-vegachart"></VegaChartContainer>
