@@ -4,13 +4,15 @@ import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+
 type StepProps = {
   title: Node,
   content: Node,
   active?: boolean,
   completed?: boolean,
   isLast?: boolean,
-  index?: number
+  index?: number,
+  error?: boolean
 };
 
 type Props = {
@@ -41,6 +43,11 @@ const Circle = styled.div`
     if (props.active) {
       return css`
         background-color: ${brandingTheme.primary};
+        color: ${defaultTheme.white};
+      `;
+    } else if (props.error) {
+      return css`
+        background-color: red;
         color: ${defaultTheme.white};
       `;
     } else if (props.completed) {
@@ -85,14 +92,14 @@ const BottomBar = styled.hr`
 `;
 
 function Step(props: StepProps) {
-  const { title, content, active, completed, isLast, index } = props;
+  const { title, content, active, completed, isLast, index, error } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
 
   return (
     <StepContainer>
       <Panel>
-        <Circle active={active} completed={completed}>
+        <Circle active={active} error={error} completed={completed}>
           <span>{circleContent}</span>
         </Circle>
         {!isLast && <BottomBar completed={completed} />}

@@ -42,6 +42,7 @@ const steps = [
   },
   {
     title: "Add node to Control Plane",
+    error: true,
     content: (
       <Button
         size="small"
