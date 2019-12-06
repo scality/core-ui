@@ -27,6 +27,7 @@ import LineChart from "./components/linechart/LineChart.component";
 import ProgressBar from "./components/progressbar/ProgressBar.component";
 import TextArea from "./components/textarea/TextArea.component";
 import CloudProgressBar from "./components/cloudprogressbar/CloudProgressBar.component";
+import NotificationList from "./components/notificationlist/NotificationList.component";
 
 export {
   LOADER_SIZE,
@@ -54,5 +55,6 @@ export {
   LineChart,
   ProgressBar,
   TextArea,
-  CloudProgressBar
+  CloudProgressBar,
+  NotificationList
 };
