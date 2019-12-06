@@ -20,6 +20,7 @@ const steps = [
   },
   {
     title: "Deploy Salt Minion on node",
+    inProgress: true,
     content: (
       <Button
         size="small"

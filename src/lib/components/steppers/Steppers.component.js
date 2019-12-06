@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+import Loader from "../loader/Loader.component";
 
 type StepProps = {
   title: Node,
@@ -12,7 +13,8 @@ type StepProps = {
   completed?: boolean,
   isLast?: boolean,
   index?: number,
-  error?: boolean
+  error?: boolean,
+  inProgress?: boolean
 };
 
 type Props = {
@@ -92,7 +94,7 @@ const BottomBar = styled.hr`
 `;
 
 function Step(props: StepProps) {
-  const { title, content, active, completed, isLast, index, error } = props;
+  const { title, content, active, completed, isLast, index, error, inProgress } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
 
@@ -100,7 +102,11 @@ function Step(props: StepProps) {
     <StepContainer>
       <Panel>
         <Circle active={active} error={error} completed={completed}>
-          <span>{circleContent}</span>
+          {active && inProgress ? (
+            <Loader size="base" color="white" />
+          ) : (
+            <span>{circleContent}</span>
+          )}
         </Circle>
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
