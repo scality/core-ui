@@ -5,12 +5,15 @@ import vegaEmbed from "vega-embed";
 
 type Props = {
   id: string,
-  spec: Object
+  spec: Object,
+  theme?: string // predefine theme light/dark, or 'custom'
+  // How to theme tooltip:
+  // https://github.com/vega/vega-tooltip/blob/master/docs/customizing_your_tooltip.md)
 };
 
 const VegaChartContainer = styled.div``;
 
-function VegaChart({ id, spec }: Props) {
+function VegaChart({ id, spec, theme = "light" }: Props) {
   const themeContext = useContext(ThemeContext);
 
   const currentBackgroundColor =
@@ -25,13 +28,6 @@ function VegaChart({ id, spec }: Props) {
 
   const brandText =
     themeContext && themeContext.brand && themeContext.brand.text;
-
-  let tooltipTheme;
-  if (currentBackgroundColor === "#ffffff") {
-    tooltipTheme = "light";
-  } else {
-    tooltipTheme = "dark";
-  }
 
   const themeConfig = {
     config: {
@@ -53,12 +49,10 @@ function VegaChart({ id, spec }: Props) {
       text: {
         color: brandText
       },
-      // the trend line max/min and verticle
+      // the up,bottom trend line and verticle line when hover
       rule: {
         color: brandText
-      },
-
-      mark: { tooltip: null }
+      }
     }
   };
   const themedSpec = { ...spec, ...themeConfig };
@@ -66,9 +60,9 @@ function VegaChart({ id, spec }: Props) {
   useEffect(() => {
     vegaEmbed(`#${id}`, themedSpec, {
       renderer: "svg",
-      tooltip: { theme: tooltipTheme }
+      tooltip: { theme: theme }
     });
-  }, [id, themedSpec, tooltipTheme]);
+  }, [id, themedSpec, theme]);
 
   return (
     <VegaChartContainer id={id} className="sc-vegachart"></VegaChartContainer>

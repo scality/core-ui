@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import VegaChart from "../vegachart/VegaChart.component.js";
-import { lighten } from "polished";
+import * as defaultTheme from "../../style/theme";
 type Props = {
   id: string,
   title?: string,
@@ -11,9 +11,9 @@ type Props = {
   xAxis: Object,
   yAxis: Object,
   row: Object,
-  color?: string,
-  maxRuleColor?: string,
-  minRuleColor?: string
+  sparkLineColor?: string,
+  upTrendColor?: string,
+  bottomTrendColor?: string
 };
 
 function SparkLine({
@@ -25,13 +25,10 @@ function SparkLine({
   xAxis,
   yAxis,
   row,
-  color,
-  maxRuleColor = "#F1B434",
-  minRuleColor = "#006F62"
+  sparkLineColor,
+  upTrendColor = defaultTheme.yellowOrange,
+  bottomTrendColor = defaultTheme.green
 }: Props) {
-  const maxRuleColorLight = lighten(0.5, maxRuleColor).toString();
-  const minRuleColorLight = lighten(0.5, minRuleColor).toString();
-
   const spec = {
     title: { text: title },
     data: { values: data },
@@ -41,7 +38,6 @@ function SparkLine({
     spec: {
       width,
       height,
-      fill: "yellow",
       layer: [
         // display the sparkline chart
         {
@@ -49,7 +45,7 @@ function SparkLine({
           encoding: {
             x: xAxis,
             y: yAxis,
-            color: { value: color }
+            color: { value: sparkLineColor }
           }
         },
         // display the label to specify the max/min data
@@ -77,9 +73,9 @@ function SparkLine({
             text: { aggregate: "max", field: "y", type: "quantitative" }
           }
         },
-        // display the rule of the max/min line
+        // display the up and bottom trend line
         {
-          mark: { type: "rule", style: "ruleMaxEnd", color: maxRuleColor },
+          mark: { type: "rule", style: "ruleMaxEnd", color: upTrendColor },
           encoding: {
             y: { aggregate: "max", field: "y", type: "quantitative" },
             x: { value: width - 15 },
@@ -90,8 +86,8 @@ function SparkLine({
           mark: {
             type: "rule",
             style: "ruleMaxStart",
-            color: maxRuleColorLight,
-            opacity: 0.2
+            color: upTrendColor,
+            opacity: 0.1
           },
           encoding: {
             y: { aggregate: "max", field: "y", type: "quantitative" },
@@ -100,7 +96,7 @@ function SparkLine({
           }
         },
         {
-          mark: { type: "rule", style: "ruleMinEnd", color: minRuleColor },
+          mark: { type: "rule", style: "ruleMinEnd", color: bottomTrendColor },
           encoding: {
             y: { value: height },
             x: { value: width - 15 },
@@ -111,8 +107,8 @@ function SparkLine({
           mark: {
             type: "rule",
             style: "ruleMinStart",
-            color: minRuleColorLight,
-            opacity: 0.2
+            color: bottomTrendColor,
+            opacity: 0.1
           },
           encoding: {
             y: { value: height },
