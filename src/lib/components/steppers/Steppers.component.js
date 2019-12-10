@@ -42,15 +42,15 @@ const Circle = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    if (props.active) {
+    if (props.error) {
       return css`
-        background-color: ${brandingTheme.primary};
+        background-color: ${props => mergeTheme(props.theme, defaultTheme).danger};
         color: ${defaultTheme.white};
       `;
-    } else if (props.error) {
+    } else if (props.active) {
       return css`
-        background-color: red;
-        color: ${defaultTheme.white};
+        background-color: ${brandingTheme.primary};
+        color: ${props => mergeTheme(props.theme, defaultTheme).text};
       `;
     } else if (props.completed) {
       return css`
@@ -103,7 +103,7 @@ function Step(props: StepProps) {
       <Panel>
         <Circle active={active} error={error} completed={completed}>
           {active && inProgress ? (
-            <Loader size="base" color="white" />
+            <Loader size="base" />
           ) : (
             <span>{circleContent}</span>
           )}
