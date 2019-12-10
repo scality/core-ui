@@ -44,13 +44,17 @@ const Circle = styled.div`
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
     if (props.error) {
       return css`
-        background-color: ${props => mergeTheme(props.theme, defaultTheme).danger};
+        background-color: ${props =>
+          mergeTheme(props.theme, defaultTheme).danger};
         color: ${defaultTheme.white};
       `;
     } else if (props.active) {
       return css`
         background-color: ${brandingTheme.primary};
-        color: ${props => mergeTheme(props.theme, defaultTheme).text};
+        color: ${defaultTheme.white};
+        svg {
+          fill: ${defaultTheme.white};
+        }
       `;
     } else if (props.completed) {
       return css`
@@ -94,7 +98,16 @@ const BottomBar = styled.hr`
 `;
 
 function Step(props: StepProps) {
-  const { title, content, active, completed, isLast, index, error, inProgress } = props;
+  const {
+    title,
+    content,
+    active,
+    completed,
+    isLast,
+    index,
+    error,
+    inProgress
+  } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
 
