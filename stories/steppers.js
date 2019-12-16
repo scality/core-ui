@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import Steppers from "../src/lib/components/steppers/Steppers.component";
 import { action } from "@storybook/addon-actions";
 import Button from "../src/lib/components/button/Button.component";
-import { Wrapper } from "./common";
+import { Wrapper, Title } from "./common";
 
 const steps = [
   {
@@ -20,6 +20,7 @@ const steps = [
   },
   {
     title: "Deploy Salt Minion on node",
+    inProgress: false,
     content: (
       <Button
         size="small"
@@ -31,6 +32,7 @@ const steps = [
   },
   {
     title: "Add node to Workload Plane",
+    error: false,
     content: (
       <Button
         size="small"
@@ -64,10 +66,35 @@ const steps = [
   }
 ];
 
+const stepsWithProgress = [...steps];
+stepsWithProgress[1] = {
+  title: "Deploy Salt Minion on node",
+  inProgress: true,
+  content: (
+    <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
+  ),
+  "data-cy": "Deploy_Salt"
+};
+
+const stepsWithError = [...steps];
+stepsWithError[2] = {
+  title: "Add node to Workload Plane",
+  error: true,
+  content: (
+    <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
+  ),
+  "data-cy": "Add_Node_WP"
+};
+
 storiesOf("Steppers", module).add("Default", () => {
   return (
     <Wrapper>
+      <Title>Default Steppers </Title>
       <Steppers steps={steps} activeStep={1} />
+      <Title>Steppers with loading</Title>
+      <Steppers steps={stepsWithProgress} activeStep={1} />
+      <Title>Steppers with error</Title>
+      <Steppers steps={stepsWithError} activeStep={2} />
     </Wrapper>
   );
 });

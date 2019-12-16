@@ -4,13 +4,17 @@ import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { mergeTheme } from "../../utils";
+import Loader from "../loader/Loader.component";
+
 type StepProps = {
-  title: string,
+  title: Node,
   content: Node,
   active?: boolean,
   completed?: boolean,
   isLast?: boolean,
-  index?: number
+  index?: number,
+  error?: boolean,
+  inProgress?: boolean
 };
 
 type Props = {
@@ -38,10 +42,19 @@ const Circle = styled.div`
 
   ${props => {
     const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    if (props.active) {
+    if (props.error) {
+      return css`
+        background-color: ${props =>
+          mergeTheme(props.theme, defaultTheme).danger};
+        color: ${defaultTheme.white};
+      `;
+    } else if (props.active) {
       return css`
         background-color: ${brandingTheme.primary};
         color: ${defaultTheme.white};
+        svg {
+          fill: ${defaultTheme.white};
+        }
       `;
     } else if (props.completed) {
       return css`
@@ -85,15 +98,28 @@ const BottomBar = styled.hr`
 `;
 
 function Step(props: StepProps) {
-  const { title, content, active, completed, isLast, index } = props;
+  const {
+    title,
+    content,
+    active,
+    completed,
+    isLast,
+    index,
+    error,
+    inProgress
+  } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
 
   return (
     <StepContainer>
       <Panel>
-        <Circle active={active} completed={completed}>
-          <span>{circleContent}</span>
+        <Circle active={active} error={error} completed={completed}>
+          {active && inProgress ? (
+            <Loader size="base" />
+          ) : (
+            <span>{circleContent}</span>
+          )}
         </Circle>
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
