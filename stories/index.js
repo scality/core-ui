@@ -27,3 +27,4 @@ import "./banner";
 import "./collapsiblepanel";
 import "./cloudprogressbar";
 import "./sparkline";
+import "./stackedbarchart";
