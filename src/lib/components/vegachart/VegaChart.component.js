@@ -52,6 +52,10 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
       // the up,bottom trend line and verticle line when hover
       rule: {
         color: brandText
+      },
+      legend: {
+        labelColor: brandText,
+        titleColor: brandText
       }
     }
   };
