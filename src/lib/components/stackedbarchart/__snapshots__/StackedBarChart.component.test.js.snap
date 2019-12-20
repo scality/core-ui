@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots BarChart Default 1`] = `
+<div
+  className="sc-bwzfXH hilSGa"
+>
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Vertical Stacked Bar Chart Demo 
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_vertical_stacked"
+  />
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Horizontal Stacked Bar Chart Demo 
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_horizontal_stacked"
+  />
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Vertical Bar Chart Demo 
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_vertical"
+  />
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Horizontal Bar Chart Demo 
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_horizontal"
+  />
+</div>
+`;
