@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import BarChart from "../src/lib/components/barchart/BarChart.component";
 import { Wrapper, Title } from "./common";
-import { data, horizontalData } from "./data/barchart";
+import { data, horizontalData, verticalbarchartData } from "./data/barchart";
 
 // props for vertical stacked bar chart
 const id = "vis";
@@ -41,6 +41,9 @@ const yAxisHorizontal = { field: "variety", type: "nominal" };
 const colorHorizontal = { field: "site", type: "nominal" };
 
 // props for simple bar chart
+const idVertical = "vis_Vertical";
+const xAxisVertical = { field: "a", type: "ordinal" };
+const yAxisVertical = { field: "b", type: "quantitative" };
 
 storiesOf("BarChart", module).add("Default", () => {
   return (
@@ -55,13 +58,20 @@ storiesOf("BarChart", module).add("Default", () => {
         width={width}
         barConfig={barConfig}
       />
-      <Title>horizontal Stacked Bar Chart Demo </Title>
+      <Title>Horizontal Stacked Bar Chart Demo </Title>
       <BarChart
         id={idHorizontal}
         data={horizontalData}
         xAxis={xAxisHorizontal}
         yAxis={yAxisHorizontal}
         color={colorHorizontal}
+      />
+      <Title>Vertical Bar Chart Demo </Title>
+      <BarChart
+        id={idVertical}
+        data={verticalbarchartData}
+        xAxis={xAxisVertical}
+        yAxis={yAxisVertical}
       />
     </Wrapper>
   );
