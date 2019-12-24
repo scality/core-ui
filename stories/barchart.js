@@ -6,7 +6,7 @@ import { Wrapper, Title } from "./common";
 import {
   verticalStackedData,
   horizontalStackedData,
-  verticalbarchartData
+  barchartData
 } from "./data/barchart";
 
 // props for vertical stacked bar chart
@@ -53,6 +53,10 @@ const idVertical = "vis_vertical";
 const xAxisVertical = { field: "a", type: "ordinal" };
 const yAxisVertical = { field: "b", type: "quantitative" };
 
+// props for horizontal bar chart
+const idHorizontal = "vis_horizontal";
+const xAxisHorizontal = { field: "b", type: "quantitative" };
+const yAxisHorizontal = { field: "a", type: "ordinal" };
 storiesOf("BarChart", module).add("Default", () => {
   return (
     <Wrapper>
@@ -77,9 +81,16 @@ storiesOf("BarChart", module).add("Default", () => {
       <Title>Vertical Bar Chart Demo </Title>
       <BarChart
         id={idVertical}
-        data={verticalbarchartData}
+        data={barchartData}
         xAxis={xAxisVertical}
         yAxis={yAxisVertical}
+      />
+      <Title>Horizontal Bar Chart Demo </Title>
+      <BarChart
+        id={idHorizontal}
+        data={barchartData}
+        xAxis={xAxisHorizontal}
+        yAxis={yAxisHorizontal}
       />
     </Wrapper>
   );

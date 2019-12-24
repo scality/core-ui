@@ -202,7 +202,7 @@ export const horizontalStackedData = [
   { yield: 29.33333, variety: "Wisconsin No. 38", year: 1932, site: "Duluth" }
 ];
 
-export const verticalbarchartData = [
+export const barchartData = [
   { a: "A", b: 28 },
   { a: "B", b: 55 },
   { a: "C", b: 43 },
