@@ -12,15 +12,7 @@ type Props = {
   barConfig?: Object
 };
 
-function StackedBarChart({
-  id,
-  data,
-  xAxis,
-  yAxis,
-  color,
-  width,
-  barConfig
-}: Props) {
+function BarChart({ id, data, xAxis, yAxis, color, width, barConfig }: Props) {
   const spec = {
     mark: { type: "bar", ...barConfig },
     width,
@@ -37,4 +29,4 @@ function StackedBarChart({
   return <VegaChart id={id} spec={spec}></VegaChart>;
 }
 
-export default StackedBarChart;
+export default BarChart;

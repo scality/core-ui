@@ -1,9 +1,9 @@
 //@flow
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import StackedBarChart from "../src/lib/components/stackedbarchart/StackedBarChart.component";
+import BarChart from "../src/lib/components/barchart/BarChart.component";
 import { Wrapper, Title } from "./common";
-import { data, horizontalData } from "./data/stackedbarchart";
+import { data, horizontalData } from "./data/barchart";
 
 // props for vertical stacked bar chart
 const id = "vis";
@@ -42,11 +42,11 @@ const colorHorizontal = { field: "site", type: "nominal" };
 
 // props for simple bar chart
 
-storiesOf("StackedBarChart", module).add("Default", () => {
+storiesOf("BarChart", module).add("Default", () => {
   return (
     <Wrapper>
       <Title>Vertical Stacked Bar Chart Demo </Title>
-      <StackedBarChart
+      <BarChart
         id={id}
         data={data}
         xAxis={xAxis}
@@ -56,7 +56,7 @@ storiesOf("StackedBarChart", module).add("Default", () => {
         barConfig={barConfig}
       />
       <Title>horizontal Stacked Bar Chart Demo </Title>
-      <StackedBarChart
+      <BarChart
         id={idHorizontal}
         data={horizontalData}
         xAxis={xAxisHorizontal}
