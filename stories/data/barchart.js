@@ -1,4 +1,4 @@
-export const data = [
+export const verticalStackedData = [
   { date: "2019-01-01 01:00:00", status: "2XX" },
   { date: "2019-01-01 01:01:00", status: "2XX" },
   { date: "2019-01-01 02:00:00", status: "2XX" },
@@ -54,7 +54,7 @@ export const data = [
   { date: "2019-01-06 09:00:00", status: "5XX" }
 ];
 
-export const horizontalData = [
+export const horizontalStackedData = [
   { yield: 27, variety: "Manchuria", year: 1931, site: "University Farm" },
   { yield: 48.86667, variety: "Manchuria", year: 1931, site: "Waseca" },
   { yield: 27.43334, variety: "Manchuria", year: 1931, site: "Morris" },

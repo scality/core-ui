@@ -3,12 +3,20 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import BarChart from "../src/lib/components/barchart/BarChart.component";
 import { Wrapper, Title } from "./common";
-import { data, horizontalData, verticalbarchartData } from "./data/barchart";
+import {
+  verticalStackedData,
+  horizontalStackedData,
+  verticalbarchartData
+} from "./data/barchart";
 
 // props for vertical stacked bar chart
-const id = "vis";
-const xAxis = { timeUnit: "yearmonthdate", field: "date", type: "ordinal" };
-const yAxis = {
+const idVerticalStacked = "vis_vertical_stacked";
+const xAxisVerticalStacked = {
+  timeUnit: "yearmonthdate",
+  field: "date",
+  type: "ordinal"
+};
+const yAxisVerticalStacked = {
   aggregate: "count",
   field: "*",
   title: null,
@@ -17,7 +25,7 @@ const yAxis = {
     padding: 1
   }
 };
-const color = {
+const colorVerticalStacked = {
   field: "status",
   type: "nominal",
   legend: { direction: "horizontal", orient: "top" },
@@ -31,17 +39,17 @@ const width = 1000;
 const barConfig = { cornerRadius: 8, size: 12 };
 
 // props for horizontal stacked bar chart
-const idHorizontal = "vis_horizontal";
-const xAxisHorizontal = {
+const idHorizontalStacked = "vis_horizontal_stacked";
+const xAxisHorizontalStacked = {
   aggregate: "sum",
   field: "yield",
   type: "quantitative"
 };
-const yAxisHorizontal = { field: "variety", type: "nominal" };
-const colorHorizontal = { field: "site", type: "nominal" };
+const yAxisHorizontalStacked = { field: "variety", type: "nominal" };
+const colorHorizontalStacked = { field: "site", type: "nominal" };
 
-// props for simple bar chart
-const idVertical = "vis_Vertical";
+// props for vertical bar chart
+const idVertical = "vis_vertical";
 const xAxisVertical = { field: "a", type: "ordinal" };
 const yAxisVertical = { field: "b", type: "quantitative" };
 
@@ -50,21 +58,21 @@ storiesOf("BarChart", module).add("Default", () => {
     <Wrapper>
       <Title>Vertical Stacked Bar Chart Demo </Title>
       <BarChart
-        id={id}
-        data={data}
-        xAxis={xAxis}
-        yAxis={yAxis}
-        color={color}
+        id={idVerticalStacked}
+        data={verticalStackedData}
+        xAxis={xAxisVerticalStacked}
+        yAxis={yAxisVerticalStacked}
+        color={colorVerticalStacked}
         width={width}
         barConfig={barConfig}
       />
       <Title>Horizontal Stacked Bar Chart Demo </Title>
       <BarChart
-        id={idHorizontal}
-        data={horizontalData}
-        xAxis={xAxisHorizontal}
-        yAxis={yAxisHorizontal}
-        color={colorHorizontal}
+        id={idHorizontalStacked}
+        data={horizontalStackedData}
+        xAxis={xAxisHorizontalStacked}
+        yAxis={yAxisHorizontalStacked}
+        color={colorHorizontalStacked}
       />
       <Title>Vertical Bar Chart Demo </Title>
       <BarChart
