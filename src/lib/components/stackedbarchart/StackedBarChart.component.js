@@ -7,9 +7,9 @@ type Props = {
   data: Array<Object>,
   xAxis: Object,
   yAxis: Object,
-  mark: Object,
   color?: Object,
-  width?: number
+  width?: number,
+  barConfig?: Object
 };
 
 function StackedBarChart({
@@ -17,12 +17,12 @@ function StackedBarChart({
   data,
   xAxis,
   yAxis,
-  mark,
   color,
-  width = 1000
+  width,
+  barConfig
 }: Props) {
   const spec = {
-    mark,
+    mark: { type: "bar", ...barConfig },
     width,
     data: {
       values: data

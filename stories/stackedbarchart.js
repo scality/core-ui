@@ -3,12 +3,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import StackedBarChart from "../src/lib/components/stackedbarchart/StackedBarChart.component";
 import { Wrapper, Title } from "./common";
-import { data } from "./data/stackedbarchart";
+import { data, horizontalData } from "./data/stackedbarchart";
 
+// props for vertical stacked bar chart
 const id = "vis";
-
 const xAxis = { timeUnit: "yearmonthdate", field: "date", type: "ordinal" };
-
 const yAxis = {
   aggregate: "count",
   field: "*",
@@ -18,7 +17,6 @@ const yAxis = {
     padding: 1
   }
 };
-
 const color = {
   field: "status",
   type: "nominal",
@@ -28,9 +26,21 @@ const color = {
     range: ["#4BE4E2", "#E45834", "#FEFA52", "#968BFF", "#BE2543", "#DC90F1"]
   }
 };
-
+const width = 1000;
 // the size control the size of each small item of the bar
-const mark = { type: "bar", cornerRadius: 8, size: 12 };
+const barConfig = { cornerRadius: 8, size: 12 };
+
+// props for horizontal stacked bar chart
+const idHorizontal = "vis_horizontal";
+const xAxisHorizontal = {
+  aggregate: "sum",
+  field: "yield",
+  type: "quantitative"
+};
+const yAxisHorizontal = { field: "variety", type: "nominal" };
+const colorHorizontal = { field: "site", type: "nominal" };
+
+// props for simple bar chart
 
 storiesOf("StackedBarChart", module).add("Default", () => {
   return (
@@ -42,7 +52,16 @@ storiesOf("StackedBarChart", module).add("Default", () => {
         xAxis={xAxis}
         yAxis={yAxis}
         color={color}
-        mark={mark}
+        width={width}
+        barConfig={barConfig}
+      />
+      <Title>horizontal Stacked Bar Chart Demo </Title>
+      <StackedBarChart
+        id={idHorizontal}
+        data={horizontalData}
+        xAxis={xAxisHorizontal}
+        yAxis={yAxisHorizontal}
+        color={colorHorizontal}
       />
     </Wrapper>
   );
