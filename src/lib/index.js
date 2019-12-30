@@ -1,6 +1,7 @@
 //@flow
 import "@fortawesome/fontawesome-free/css/all.css";
 
+import Banner from "./components/banner/Banner.component";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
 import Button from "./components/button/Button.component";
 import Checkbox from "./components/checkbox/Checkbox.component";
@@ -56,5 +57,6 @@ export {
   ProgressBar,
   TextArea,
   CloudProgressBar,
-  Sparkline
+  Sparkline,
+  Banner
 };
