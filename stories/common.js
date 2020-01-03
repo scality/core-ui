@@ -1,29 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { mergeTheme } from "../src/lib/utils";
-import * as defaultTheme from "../src/lib/style/theme";
+import { getThemePropSelector } from "../src/lib/utils";
 
 const StyledWrapper = styled.div`
   padding: 30px;
   min-height: 100vh;
-  background-color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.background;
-  }};
+  background-color: ${getThemePropSelector("background")};
 `;
 
 const StyledTitle = styled.h3`
-  color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.text;
-  }};
+  color: ${getThemePropSelector("text")};
 `;
 
 const StyledSubTitle = styled.span`
-  color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.text;
-  }};
+  color: ${getThemePropSelector("text")};
 `;
 
 export const Wrapper = ({ children, className }) => {

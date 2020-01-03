@@ -2,7 +2,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 
 type Props = {
   toggle: boolean,
@@ -29,8 +29,7 @@ const Switch = styled.label`
   }
 
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
+    const { primary } = getTheme(props);
     return css`
       .sc-slider {
         position: absolute;
@@ -62,17 +61,17 @@ const Switch = styled.label`
       }
 
       input:checked + .sc-slider {
-        background-color: ${brandingTheme.primary};
+        background-color: ${primary};
         &:hover {
           &:before {
-            box-shadow: 0 0 3px ${brandingTheme.primary};
+            box-shadow: 0 0 3px ${primary};
           }
         }
       }
 
       input:checked + .sc-slider:before {
         transform: translateX(26px);
-        background-color: ${brandingTheme.primary};
+        background-color: ${primary};
       }
     `;
   }}
@@ -80,7 +79,7 @@ const Switch = styled.label`
 
 const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemePropSelector("text")};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {

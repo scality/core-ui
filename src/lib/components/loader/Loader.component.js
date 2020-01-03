@@ -6,7 +6,7 @@ import type { Node } from "react";
 import { LOADER_SIZE as SIZE } from "../constants";
 import LoaderIcon from "../../icons/scality-loading";
 import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import { getTheme, getThemePropSelector } from "../../utils";
 
 type Props = {
   size?: string,
@@ -17,14 +17,12 @@ type Props = {
 const LoaderContainer = styled.div`
   display: flex;
   ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-
     return css`
       font-size: ${defaultTheme.fontSize[props.size]};
       svg {
         height: ${defaultTheme.svgSize[props.size]};
         width: ${defaultTheme.svgSize[props.size]};
-        fill: ${brandingTheme.primary};
+        fill: ${getTheme(props).primary};
       }
     `;
   }}
@@ -32,10 +30,7 @@ const LoaderContainer = styled.div`
 
 const LoaderText = styled.span`
   padding: 10px 0;
-  color: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.text;
-  }};
+  color: ${getThemePropSelector("text")};
 `;
 
 const LoaderTextDiv = styled.span`
