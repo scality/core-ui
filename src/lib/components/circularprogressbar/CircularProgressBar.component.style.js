@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { mergeTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
+import { getThemePropSelector, getTheme } from "../../utils";
 
 export const CircularProgressBarContainer = styled.div`
   display: inline-block;
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${getThemePropSelector("text")};
 `;
 
 export const Title = styled.span`
@@ -15,12 +15,12 @@ export const Title = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
+
 export const ProgressCircle = styled.circle`
   stroke-dasharray: ${({ circumference }) => circumference};
   stroke-dashoffset: ${({ percent, circumference }) =>
     ((100 - percent) / 100) * circumference};
-  stroke: ${({ color, theme }) =>
-    color || mergeTheme(theme, defaultTheme).primary};
+  stroke: ${props => props.color || getTheme(props).primary};
   stroke-width: ${props => props.strokeWidth};
   stroke-linecap: round;
   fill: none;
@@ -29,7 +29,6 @@ export const ProgressCircle = styled.circle`
 export const BackgroundCircle = styled.circle`
   fill: none;
   stroke: ${props =>
-    props.backgroundColor ||
-    mergeTheme(props.theme, defaultTheme).backgroundContrast2};
+    props.backgroundColor || getTheme(props).backgroundContrast2};
   stroke-width: ${props => props.strokeWidth};
 `;

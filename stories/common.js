@@ -17,10 +17,7 @@ const StyledSubTitle = styled.span`
 `;
 
 const StyledText = styled.text`
-  fill: ${props => {
-    const brandingTheme = mergeTheme(props.theme, defaultTheme);
-    return brandingTheme.text;
-  }};
+  fill: ${getThemePropSelector("text")};
 `;
 
 export const Wrapper = ({ children, className }) => {
