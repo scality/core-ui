@@ -35,9 +35,9 @@ const MainContent = styled.div`
 function Layout({ children, sidebar, navbar, ...rest }: Props) {
   return (
     <LayoutContainer className="sc-layout" {...rest}>
-      <Navbar {...navbar} />
+      {navbar && <Navbar {...navbar} />}
       <ContentContainer>
-        <Sidebar {...sidebar} />
+        {sidebar && <Sidebar {...sidebar} />}
         <MainContent className="main">{children}</MainContent>
       </ContentContainer>
     </LayoutContainer>

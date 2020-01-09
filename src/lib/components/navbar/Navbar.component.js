@@ -16,9 +16,10 @@ type Action = {
 
 type Actions = Array<Action>;
 type Tab = {
-  title: string,
+  title?: string,
   selected?: boolean,
-  onClick: any => void
+  onClick?: any => void,
+  link?: Node
 };
 
 export type Props = {
@@ -55,7 +56,7 @@ const NavbarTabs = styled.div`
   align-items: center;
 `;
 
-const TabItems = styled.div`
+const TabItem = styled.div`
   box-sizing: border-box;
   height: 100%;
   display: flex;
@@ -68,7 +69,8 @@ const TabItems = styled.div`
       color: ${primary};
       &:hover {
         border-bottom: 2px solid ${primary};
-        span {
+        span,
+        a {
           padding-top: 2px;
         }
         cursor: pointer;
@@ -79,10 +81,18 @@ const TabItems = styled.div`
     props.selected &&
     css`
       border-bottom: 2px solid ${getTheme(props).primary};
-      span {
+      span,
+      a {
         padding-top: 2px;
       }
     `};
+`;
+
+const TabLinkItem = styled(TabItem)`
+  a {
+    color: ${getThemePropSelector("primary")};
+    text-decoration: none;
+  }
 `;
 
 const NavbarMenuItem = styled.div`
@@ -180,15 +190,24 @@ function NavBar({
       </NavbarMenu>
       {tabs.length ? (
         <NavbarTabs>
-          {tabs.map(({ title, selected, onClick }, index) => (
-            <TabItems
-              onClick={onClick}
-              selected={selected}
-              key={`navbar_tab_item_${index}`}
-            >
-              <span>{title}</span>
-            </TabItems>
-          ))}
+          {tabs.map(({ link, title, selected, onClick }, index) =>
+            link ? (
+              <TabLinkItem
+                selected={selected}
+                key={`navbar_tab_link_item_${index}`}
+              >
+                {link}
+              </TabLinkItem>
+            ) : (
+              <TabItem
+                onClick={onClick}
+                selected={selected}
+                key={`navbar_tab_item_${index}`}
+              >
+                <span>{title}</span>
+              </TabItem>
+            )
+          )}
         </NavbarTabs>
       ) : null}
       {rightActions.length ? (

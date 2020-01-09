@@ -32,6 +32,24 @@ const tabs = [
   }
 ];
 
+const linkTabs = [
+  {
+    link: <a href="/groups">Groups</a>,
+    selected: true
+  },
+  {
+    link: <a href="/users">Users</a>
+  },
+  {
+    link: <a href="/policies">Policies</a>
+  },
+  {
+    link: <a href="/buckets">Buckets</a>
+  },
+  {
+    link: <a href="/workflows">Workflows</a>
+  }
+];
 const rightActions = [
   {
     type: "dropdown",
@@ -100,6 +118,9 @@ storiesOf("Navbar", module).add("Default", () => {
       />
       <h3>Navbar with only tabs</h3>
       <Navbar rightActions={[rightActions[4]]} tabs={tabs} />
+
+      <h3>Navbar with only link tabs</h3>
+      <Navbar rightActions={[rightActions[4]]} tabs={linkTabs} />
     </div>
   );
 });
