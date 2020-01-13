@@ -8,17 +8,13 @@ import { Wrapper, Title } from "./common";
 const xAxis = {
   field: "date",
   type: "temporal",
-  axis: {
-    title: "Time"
-  }
+  axis: null
 };
 
 const yAxis = {
   field: "y",
   type: "quantitative",
-  axis: {
-    title: null
-  }
+  axis: { title: null, ticks: false, labels: false }
 };
 
 const row = {

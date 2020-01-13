@@ -64,7 +64,12 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
   useEffect(() => {
     vegaEmbed(`#${id}`, themedSpec, {
       renderer: "svg",
-      tooltip: { theme: theme }
+      tooltip: { theme: theme },
+      // Determines if action links
+      // ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor")
+      // are included with the embedded view.
+      // If the value is true, all action links will be shown and none if the value is false.
+      actions: false
     });
   }, [id, themedSpec, theme]);
 
