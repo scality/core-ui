@@ -35,7 +35,8 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
       axis: {
         labelColor: brandText,
         titleColor: brandText,
-        grid: false
+        grid: false,
+        domainColor: currentBackgroundColor2
       },
       title: {
         color: brandText
