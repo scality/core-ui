@@ -43,8 +43,8 @@ const themes = [
       warning: yellowOrange,
       danger: warmRed,
       background: "#26232A",
-      backgroundContrast1: "#333037",
-      backgroundContrast2: "#3F3C43",
+      backgroundContrast1: "#161617",
+      backgroundContrast2: "#08080A",
       text: white,
       border: white
     }

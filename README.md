@@ -86,8 +86,8 @@ const theme= {  //Dark Theme
     "warning": "#F1B434",
     "danger": "#EF3340",
     "background": "#26232A",
-    "backgroundContrast1": "#333037",
-    "backgroundContrast2": "#3F3C43",
+    "backgroundContrast1": "#161617",
+    "backgroundContrast2": "#08080A",
     "text": "#ffffff",
     "border": "#ffffff"
   }
