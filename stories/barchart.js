@@ -14,7 +14,8 @@ const idVerticalStacked = "vis_vertical_stacked";
 const xAxisVerticalStacked = {
   timeUnit: "yearmonthdate",
   field: "date",
-  type: "ordinal"
+  type: "ordinal",
+  title: null
 };
 const yAxisVerticalStacked = {
   aggregate: "count",
@@ -28,7 +29,7 @@ const yAxisVerticalStacked = {
 const colorVerticalStacked = {
   field: "status",
   type: "nominal",
-  legend: { direction: "horizontal", orient: "top" },
+  legend: { direction: "horizontal", orient: "top", title: null },
   scale: {
     domain: ["2XX", "401", "404", "4XX", "503", "5XX"],
     range: ["#4BE4E2", "#E45834", "#FEFA52", "#968BFF", "#BE2543", "#DC90F1"]
