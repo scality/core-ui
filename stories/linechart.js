@@ -68,15 +68,17 @@ const color = {
     direction: "horizontal",
     orient: "bottom",
     title: null,
-    symbolType: "circle",
-    columnPadding: 50
+    symbolType: "stroke",
+    labelFontSize: 15,
+    columnPadding: 50,
+    symbolStrokeWidth: 5
   },
   domain: ["Get", "Put", "Delete", "List"],
   scale: {
     range: ["#18DFAD", "#968BFF", "#F6B187", "#4BE4E2"]
   }
 };
-
+const lineConfig = { strokeWidth: 1 };
 const id = "vis";
 const id_without_axis = "vis2";
 
@@ -101,6 +103,7 @@ storiesOf("LineChart", module).add("Default", () => {
         width={800}
         color={color}
         tooltip={false}
+        lineConfig={lineConfig}
       />
     </Wrapper>
   );

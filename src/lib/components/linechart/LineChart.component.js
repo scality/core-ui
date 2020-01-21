@@ -7,7 +7,8 @@ type Props = {
   xAxis: Object,
   yAxis: Array<Object>,
   color?: Object,
-  tooltip?: boolean
+  tooltip?: boolean,
+  lineConfig?: Object
 };
 
 function LineChart({
@@ -17,6 +18,7 @@ function LineChart({
   yAxis,
   color,
   tooltip = false,
+  lineConfig,
   ...rest
 }: Props) {
   // hardcode the trendline configuration for tooltip
@@ -41,7 +43,7 @@ function LineChart({
   };
 
   const lines = yAxis.map(y => ({
-    mark: { type: "line" },
+    mark: { type: "line", ...lineConfig },
     encoding: { y }
   }));
 
