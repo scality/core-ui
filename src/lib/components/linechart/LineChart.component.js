@@ -5,11 +5,21 @@ type Props = {
   id: string,
   data: Array<Object>,
   xAxis: Object,
-  yAxis: Array<Object>
+  yAxis: Array<Object>,
+  color?: Object,
+  tooltip?: boolean
 };
 
-function LineChart({ id, data, xAxis, yAxis, ...rest }: Props) {
-  // hardcode the trendline configuration
+function LineChart({
+  id,
+  data,
+  xAxis,
+  yAxis,
+  color,
+  tooltip = false,
+  ...rest
+}: Props) {
+  // hardcode the trendline configuration for tooltip
   const trendline = {
     mark: "rule",
     selection: {
@@ -31,17 +41,23 @@ function LineChart({ id, data, xAxis, yAxis, ...rest }: Props) {
   };
 
   const lines = yAxis.map(y => ({
-    mark: { type: "line", color: y.color },
+    mark: { type: "line" },
     encoding: { y }
   }));
 
   const spec = {
     data: { values: data },
-    encoding: { x: xAxis, tooltip: [xAxis, ...yAxis] },
-    layer: [...lines, trendline],
+    encoding: {
+      x: xAxis,
+      color,
+      tooltip: tooltip && [xAxis, ...yAxis]
+    },
+    layer: [...lines],
     ...rest
   };
-
+  if (tooltip) {
+    spec.layer.push(trendline);
+  }
   return <VegaChart id={id} spec={spec}></VegaChart>;
 }
 

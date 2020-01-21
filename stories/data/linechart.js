@@ -51,3 +51,226 @@ export const data = [
   { time: "2019-10-01 12:15:00", total_space: 100, used_space: 34 },
   { time: "2019-10-01 12:30:00", total_space: 86, used_space: 30 }
 ];
+
+export const data_graph_with_axis = [
+  {
+    time: "2019-10-01 00:00:00",
+    resquest_method: "Get",
+    Latency: 13
+  },
+  {
+    time: "2019-10-01 00:00:00",
+    resquest_method: "Put",
+    Latency: 14
+  },
+  {
+    time: "2019-10-01 00:00:00",
+    resquest_method: "Delete",
+    Latency: 133
+  },
+  {
+    time: "2019-10-01 00:00:00",
+    resquest_method: "List",
+    Latency: 55
+  },
+  {
+    time: "2019-10-01 00:15:00",
+    resquest_method: "Get",
+    Latency: 43
+  },
+  {
+    time: "2019-10-01 00:15:00",
+    resquest_method: "Put",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 00:15:00",
+    resquest_method: "Delete",
+    Latency: 34
+  },
+  {
+    time: "2019-10-01 00:15:00",
+    resquest_method: "List",
+    Latency: 44
+  },
+  {
+    time: "2019-10-01 00:30:00",
+    resquest_method: "Get",
+    Latency: 23
+  },
+  {
+    time: "2019-10-01 00:30:00",
+    resquest_method: "Put",
+    Latency: 55
+  },
+  {
+    time: "2019-10-01 00:30:00",
+    resquest_method: "Delete",
+    Latency: 53
+  },
+  {
+    time: "2019-10-01 00:30:00",
+    resquest_method: "List",
+    Latency: 80
+  },
+  {
+    time: "2019-10-01 00:45:00",
+    resquest_method: "Get",
+    Latency: 33
+  },
+  {
+    time: "2019-10-01 00:45:00",
+    resquest_method: "Put",
+    Latency: 19
+  },
+  {
+    time: "2019-10-01 00:45:00",
+    resquest_method: "Delete",
+    Latency: 22
+  },
+  {
+    time: "2019-10-01 00:45:00",
+    resquest_method: "List",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 01:00:00",
+    resquest_method: "Get",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 01:00:00",
+    resquest_method: "Put",
+    Latency: 25
+  },
+  {
+    time: "2019-10-01 01:00:00",
+    resquest_method: "Delete",
+    Latency: 45
+  },
+  {
+    time: "2019-10-01 01:00:00",
+    resquest_method: "List",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 01:15:00",
+    resquest_method: "Get",
+    Latency: 54
+  },
+  {
+    time: "2019-10-01 01:15:00",
+    resquest_method: "Put",
+    Latency: 14
+  },
+  {
+    time: "2019-10-01 01:15:00",
+    resquest_method: "Delete",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 01:15:00",
+    resquest_method: "List",
+    Latency: 33
+  },
+  {
+    time: "2019-10-01 01:30:00",
+    resquest_method: "Get",
+    Latency: 11
+  },
+  {
+    time: "2019-10-01 01:30:00",
+    resquest_method: "Put",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 01:30:00",
+    resquest_method: "Delete",
+    Latency: 276
+  },
+  {
+    time: "2019-10-01 01:30:00",
+    resquest_method: "List",
+    Latency: 80
+  },
+  {
+    time: "2019-10-01 01:45:00",
+    resquest_method: "Get",
+    Latency: 23
+  },
+  {
+    time: "2019-10-01 01:45:00",
+    resquest_method: "Put",
+    Latency: 198
+  },
+  {
+    time: "2019-10-01 01:45:00",
+    resquest_method: "Delete",
+    Latency: 53
+  },
+  {
+    time: "2019-10-01 01:45:00",
+    resquest_method: "List",
+    Latency: 99
+  },
+  {
+    time: "2019-10-01 02:00:00",
+    resquest_method: "Get",
+    Latency: 33
+  },
+  {
+    time: "2019-10-01 02:00:00",
+    resquest_method: "Put",
+    Latency: 98
+  },
+  {
+    time: "2019-10-01 02:00:00",
+    resquest_method: "Delete",
+    Latency: 153
+  },
+  {
+    time: "2019-10-01 02:00:00",
+    resquest_method: "List",
+    Latency: 44
+  },
+  {
+    time: "2019-10-01 02:15:00",
+    resquest_method: "Get",
+    Latency: 133
+  },
+  {
+    time: "2019-10-01 02:15:00",
+    resquest_method: "Put",
+    Latency: 98
+  },
+  {
+    time: "2019-10-01 02:15:00",
+    resquest_method: "Delete",
+    Latency: 33
+  },
+  {
+    time: "2019-10-01 02:15:00",
+    resquest_method: "List",
+    Latency: 90
+  },
+  {
+    time: "2019-10-01 02:30:00",
+    resquest_method: "Get",
+    Latency: 55
+  },
+  {
+    time: "2019-10-01 02:30:00",
+    resquest_method: "Put",
+    Latency: 13
+  },
+  {
+    time: "2019-10-01 02:30:00",
+    resquest_method: "Delete",
+    Latency: 90
+  },
+  {
+    time: "2019-10-01 02:30:00",
+    resquest_method: "List",
+    Latency: 33
+  }
+];
