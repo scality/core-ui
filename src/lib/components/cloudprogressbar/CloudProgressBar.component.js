@@ -50,16 +50,16 @@ const Cloud = ({ strokeColor, borderSize }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 15 72 42"
-    enable-background="new 0 0 72 72"
+    enableBackground="new 0 0 72 72"
   >
     <g>
       <path
         fill="none"
         stroke={strokeColor}
-        stroke-width={borderSize}
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-miterlimit="10"
+        strokeWidth={borderSize}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10"
         d="M15.9,30.3c0,0.4-0.4,0.8-0.8,0.8C10,31.6,6,36.7,6,42.9c0,6.6,4.5,11.9,10.2,11.9h38.7C61,54.8,66,49.1,66,42.2c0-6.6-4.6-12.1-10.4-12.5c-0.4,0-0.8-0.3-0.9-0.8c-1.3-6.7-7.3-11.7-14.3-11.7c-4.6,0-8.7,2.1-11.3,5.4C28.8,23,28.3,23.1,28,23c-1-0.4-2.1-0.6-3.3-0.6C20.1,22.3,16.3,25.8,15.9,30.3z"
       />
     </g>
@@ -71,16 +71,16 @@ const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 15 72 42"
-      enable-background="new 0 0 72 72"
+      enableBackground="new 0 0 72 72"
     >
       <g>
         <path
           fill="none"
           stroke={strokeColor}
-          stroke-width={borderSize}
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-miterlimit="10"
+          strokeWidth={borderSize}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeMiterlimit="10"
           d="M15.9,30.3c0,0.4-0.4,0.8-0.8,0.8C10,31.6,6,36.7,6,42.9c0,6.6,4.5,11.9,10.2,11.9h38.7C61,54.8,66,49.1,66,42.2c0-6.6-4.6-12.1-10.4-12.5c-0.4,0-0.8-0.3-0.9-0.8c-1.3-6.7-7.3-11.7-14.3-11.7c-4.6,0-8.7,2.1-11.3,5.4C28.8,23,28.3,23.1,28,23c-1-0.4-2.1-0.6-3.3-0.6C20.1,22.3,16.3,25.8,15.9,30.3z"
         />
       </g>
