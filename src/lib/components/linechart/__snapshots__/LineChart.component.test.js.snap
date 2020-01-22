@@ -22,5 +22,23 @@ exports[`Storyshots LineChart Default 1`] = `
     className="sc-bdVaJa bDWFJH sc-vegachart"
     id="vis2"
   />
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Vege-Lite area chart without axis
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_area_chart"
+  />
+  <h3
+    className="sc-htpNat bnCVRm"
+  >
+    Vege-Lite forecast chart
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis_forecast_chart"
+  />
 </div>
 `;
