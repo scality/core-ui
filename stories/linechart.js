@@ -2,12 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import LineChart from "../src/lib/components/linechart/LineChart.component";
-import {
-  data,
-  data_graph_with_axis,
-  area_charts,
-  forecast_data
-} from "./data/linechart";
+import { data, data_graph_with_axis, forecast_data } from "./data/linechart";
 import { Wrapper, Title } from "./common";
 
 const xAxis = {
@@ -84,62 +79,18 @@ const color = {
   }
 };
 const lineConfig = { strokeWidth: 1, opacity: 0.5 };
-const AreaConfig = { line: true, opacity: 1 };
+
 const id = "vis";
 const id_without_axis = "vis2";
-// the area chart
-const xAxis_area_chart = {
-  field: "time",
-  type: "temporal",
-  timeUnit: "yearmonthdatehoursminutes",
-  title: "time",
-  axis: null
-};
-const yAxis_area_chart = [
-  {
-    aggregate: "max",
-    field: "Bandwidth",
-    type: "quantitative",
-    color: "#968BFF",
-    axis: { title: null, ticks: false, labels: false }
-  },
-  {
-    aggregate: "max",
-    field: "Bandwidth",
-    type: "quantitative",
-    color: "#F6B288",
-    axis: { title: null, ticks: false, labels: false }
-  }
-];
-const color_area_chart = {
-  field: "Average",
-  type: "nominal",
-  legend: {
-    direction: "horizontal",
-    orient: "bottom",
-    title: null,
-    labelFontSize: 15,
-    columnPadding: 50,
-    symbolStrokeWidth: 5
-  },
-  domain: ["AvgIn", "AvgOut"],
-  scale: {
-    range: ["#968BFF", "#F6B288"]
-  }
-};
-
-const id_area_chart = "vis_area_chart";
 
 // forecast chart
-
 const xAxis_forecast_chart = {
   field: "time",
   type: "ordinal",
   title: null,
   axis: { labelAngle: 0 },
-  sort: {
-    order: "ascending"
-  }
+  // sort the according the given xlabel
+  sort: ["-3m", "Now", "+3m"]
 };
 const yAxis_forecast_chart = [
   {
@@ -150,7 +101,7 @@ const yAxis_forecast_chart = [
   }
 ];
 const lineConfig_forecast_chart = {
-  interpolate: "linear-closed"
+  interpolate: "monotone"
 };
 const id_forecast_chart = "vis_forecast_chart";
 storiesOf("LineChart", module).add("Default", () => {
@@ -175,17 +126,6 @@ storiesOf("LineChart", module).add("Default", () => {
         color={color}
         tooltip={false}
         lineConfig={lineConfig}
-      />
-      <Title>Vege-Lite area chart without axis</Title>
-      <LineChart
-        id={id_area_chart}
-        data={area_charts}
-        xAxis={xAxis_without_axis}
-        yAxis={yAxis_area_chart}
-        color={color_area_chart}
-        tooltip={false}
-        width={1000}
-        lineConfig={AreaConfig}
       />
       <Title>Vege-Lite forecast chart</Title>
       <LineChart
