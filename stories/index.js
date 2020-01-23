@@ -29,3 +29,4 @@ import "./cloudprogressbar";
 import "./sparkline";
 import "./barchart";
 import "./circularprogressbar";
+import "./areachart";
