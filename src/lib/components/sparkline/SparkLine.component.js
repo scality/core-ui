@@ -11,6 +11,7 @@ type Props = {
   xAxis: Object,
   yAxis: Object,
   row: Object,
+  lineConfig?: Object,
   sparkLineColor?: string,
   upTrendColor?: string,
   bottomTrendColor?: string
@@ -25,6 +26,7 @@ function SparkLine({
   xAxis,
   yAxis,
   row,
+  lineConfig,
   sparkLineColor,
   upTrendColor = defaultTheme.yellowOrange,
   bottomTrendColor = defaultTheme.green
@@ -41,7 +43,7 @@ function SparkLine({
       layer: [
         // display the sparkline chart
         {
-          mark: "line",
+          mark: { type: "line", ...lineConfig },
           encoding: {
             x: xAxis,
             y: yAxis,

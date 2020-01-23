@@ -27,7 +27,7 @@ const row = {
 
 const id = "vis";
 const id_multi = "multiVis";
-
+const lineConfig = { interpolate: "monotone" };
 storiesOf("SparkLine", module).add("Default", () => {
   return (
     <Wrapper>
@@ -39,6 +39,7 @@ storiesOf("SparkLine", module).add("Default", () => {
         yAxis={yAxis}
         title={"OPERATIONS PER SECONDS"}
         row={row}
+        lineConfig={lineConfig}
       />
       <Title>Vege-Lite sparkline multi chart demo</Title>
       <SparkLine
