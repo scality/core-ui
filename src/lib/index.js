@@ -31,6 +31,7 @@ import CloudProgressBar from "./components/cloudprogressbar/CloudProgressBar.com
 import Sparkline from "./components/sparkline/SparkLine.component.js";
 import BarChart from "./components/barchart/BarChart.component";
 import CircularProgressBar from "./components/circularprogressbar/CircularProgressBar.component";
+import AreaChart from "./components/areachart/AreaChart.component";
 
 export {
   LOADER_SIZE,
@@ -62,5 +63,6 @@ export {
   Sparkline,
   Banner,
   BarChart,
-  CircularProgressBar
+  CircularProgressBar,
+  AreaChart
 };
