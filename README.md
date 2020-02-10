@@ -78,7 +78,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const theme= {  //Dark Theme
   "brand": {
     "base": "#19161D",
-    "baseContrast1": "#26232A",
     "primary": "#e99121",
     "secondary": "#2979ff",
     "success": "#006F62",
@@ -86,8 +85,6 @@ const theme= {  //Dark Theme
     "warning": "#F1B434",
     "danger": "#EF3340",
     "background": "#26232A",
-    "backgroundContrast1": "#161617",
-    "backgroundContrast2": "#08080A",
     "text": "#ffffff",
     "border": "#ffffff"
   }

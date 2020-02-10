@@ -18,10 +18,11 @@ export type Size =
   | "massive";
 
 export type Variant =
-  | "primary"
+  | "base"
   | "secondary"
   | "success"
   | "info"
   | "warning"
   | "danger"
-  | "base";
+  | "healthy"
+  | "critical";
