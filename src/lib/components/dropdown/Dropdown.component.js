@@ -41,7 +41,7 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  border: 1px solid ${getThemePropSelector("backgroundContrast2")};
+  border: 1px solid ${getThemePropSelector("primary")};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
@@ -84,13 +84,13 @@ const DropdownMenuItemStyled = styled.li`
   font-size: ${defaultTheme.fontSize.base};
 
   ${css`
-    background-color: ${getThemePropSelector("backgroundContrast1")};
-    color: ${getThemePropSelector("text")};
+    background-color: ${getThemePropSelector("primary")};
+    color: ${getThemePropSelector("textPrimary")};
     &:hover {
-      background-color: ${getThemePropSelector("backgroundContrast2")};
+      background-color: ${getThemePropSelector("primaryDark2")};
     }
     &:active {
-      background-color: ${getThemePropSelector("backgroundContrast1")};
+      background-color: ${getThemePropSelector("primaryDark2")};
     }
   `};
 `;
