@@ -71,7 +71,7 @@ storiesOf("Dropdown", module).add("Default", () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="primary"
+        variant="primaryButton"
         text="primary"
       />
       <Dropdown
@@ -83,8 +83,8 @@ storiesOf("Dropdown", module).add("Default", () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="success"
-        text="success"
+        variant="healthy"
+        text="healthy"
       />
       <Dropdown
         icon={<i className="fas fa-star" />}
@@ -101,8 +101,8 @@ storiesOf("Dropdown", module).add("Default", () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="danger"
-        text="danger"
+        variant="critical"
+        text="critical"
       />
     </Wrapper>
   );

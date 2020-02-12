@@ -19,12 +19,12 @@ storiesOf("Button", module)
         <Button size="larger" text="Larger" />
 
         <Title>Button Variant</Title>
-        <Button variant="primary" text="primary" />
+        <Button variant="primaryButton" text="primary" />
         <Button variant="secondary" text="secondary" />
-        <Button variant="success" text="success" />
+        <Button variant="healthy" text="healthy" />
         <Button variant="info" text="info" />
         <Button variant="warning" text="warning" />
-        <Button variant="danger" text="danger" />
+        <Button variant="critical" text="critical" />
 
         <Title>Button Outlined</Title>
         <Button
@@ -50,11 +50,7 @@ storiesOf("Button", module)
         <Button text="Hello" href="/" />
 
         <Title>Button Loading</Title>
-        <Button
-          text="Hello"
-          icon={<i className="fas fa-star" />}
-          isLoading={true}
-        />
+        <Button isLoading={true} />
 
         <Title>Button Text Icon</Title>
         <Button

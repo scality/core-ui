@@ -14,6 +14,7 @@ export const yellow = "#EFC93D";
 export const green = "#228F67";
 export const white = "#ffffff";
 export const black = "#000000";
+export const blackLight = "#313B44";
 
 export const blueDarkest = "#0F3554";
 export const blueDarker = "#144A75";
