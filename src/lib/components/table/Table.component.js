@@ -38,7 +38,7 @@ type HeaderProps = {
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
-    color: ${getThemePropSelector("text")};
+    color: ${getThemePropSelector("textPrimary")};
     &:focus {
       outline: none;
     }
@@ -61,9 +61,9 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
-    background-color: ${getThemePropSelector("backgroundContrast1")};
-    border-bottom: 1px solid ${getThemePropSelector("border")};
-    color: ${getThemePropSelector("primary")};
+    background-color: ${getThemePropSelector("background")};
+    border-bottom: 2px solid ${getThemePropSelector("borderLight")};
+    color: ${getThemePropSelector("textPrimary")};
 
     text-transform: none;
 
@@ -82,13 +82,16 @@ const TableContainer = styled.div`
     display: flex;
     align-items: center;
     overflow: visible !important;
-    color: ${getThemePropSelector("text")};
-    background-color: ${getThemePropSelector("backgroundContrast1")};
-    border-bottom: 1px solid ${getThemePropSelector("border")};
+    color: ${getThemePropSelector("textPrimary")};
+    background-color: ${getThemePropSelector("primary")};
+    border-top: 1px solid ${getThemePropSelector("borderLight")};
+    border-bottom: 1px solid ${getThemePropSelector("borderLight")};
     box-sizing: border-box;
     &:hover,
     &:focus {
-      background-color: ${getThemePropSelector("backgroundContrast2")};
+      background-color: ${getThemePropSelector("backgroundBluer")};
+      border-top: 1px solid ${getThemePropSelector("secondary")};
+      border-bottom: 1px solid ${getThemePropSelector("secondary")};
       outline: none;
       cursor: pointer;
     }
@@ -112,7 +115,7 @@ const CellContainer = styled.div`
 
   .sc-dropdown .trigger {
     background-color: transparent;
-    color: ${getThemePropSelector("text")};
+    color: ${getThemePropSelector("textPrimary")};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
       color: ${props => lighten(0.3, getTheme(props).primary).toString()};
