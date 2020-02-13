@@ -19,12 +19,12 @@ export type Props = {
 
 const SidebarContainer = styled.div`
   ${props => {
-    const { base, primary } = getTheme(props);
+    const { primary, textPrimary } = getTheme(props);
     return css`
-      background-color: ${base};
-      color: ${primary};
+      background-color: ${primary};
+      color: ${textPrimary};
       .fas {
-        color: ${primary};
+        color: ${textPrimary};
       }
     `;
   }}
@@ -54,21 +54,21 @@ const SidebarItem = styled.div`
   }
 
   ${props => {
-    const { baseContrast1, primary } = getTheme(props);
+    const { textPrimary, backgroundBluer } = getTheme(props);
     return props.active
       ? css`
-          background-color: ${baseContrast1};
-          color: ${primary};
+          background-color: ${backgroundBluer};
+          color: ${textPrimary};
           cursor: default;
         `
       : css`
           &:hover {
-            background-color: ${baseContrast1};
-            color: ${primary};
+            background-color: ${backgroundBluer};
+            color: ${textPrimary};
           }
           &:active {
-            background-color: ${baseContrast1};
-            color: ${primary};
+            background-color: ${backgroundBluer};
+            color: ${textPrimary};
           }
         `;
   }}
@@ -83,7 +83,7 @@ const MenuItemSelected = styled.div`
   width: 5px;
   height: 100%;
   right: 0;
-  background-color: ${getThemePropSelector("primary")};
+  background-color: ${getThemePropSelector("secondary")};
 `;
 
 const MenuItemIcon = styled.div`
