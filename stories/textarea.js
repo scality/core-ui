@@ -11,14 +11,21 @@ storiesOf("TextArea", module).add("Default", () => {
       <Title>Text Area without label</Title>
       <TextArea
         rows={10}
-        cols={10}
+        cols={50}
         id={"text"}
-        value="Hello"
-        onChange={ action("onChange")}
+        value="Add a note"
+        onChange={action("onChange")}
       />
 
       <Title>Text Area disabled</Title>
-      <TextArea rows={10} cols={50} placeholder="Text area input" value="" onChange={ action("onChange") }/>
+      <TextArea
+        rows={10}
+        cols={50}
+        placeholder="Text area input"
+        value=""
+        disabled={true}
+        onChange={action("onChange")}
+      />
     </Wrapper>
   );
 });
