@@ -14,11 +14,11 @@ export const InputContainer = styled.div`
 
   input.sc-input-type {
     ${props => {
-      const { backgroundContrast1, text, danger } = getTheme(props);
+      const { primary, danger, textSecondary, border } = getTheme(props);
       return css`
-        background-color: ${backgroundContrast1};
-        color: ${text};
-        border: 1px solid ${props.error ? danger : text};
+        background-color: ${primary};
+        color: ${textSecondary};
+        border: 1px solid ${props.error ? danger : border};
       `;
     }};
     padding: 8px ${defaultTheme.padding.small};
@@ -28,7 +28,7 @@ export const InputContainer = styled.div`
   }
 
   input.sc-input-type:focus {
-    border-color: ${getThemePropSelector("primary")};
+    border-color: ${getThemePropSelector("secondary")};
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 1px rgba(0, 126, 255, 0.1);
     outline: none;
