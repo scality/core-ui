@@ -48,7 +48,7 @@ const StyledCheckboxLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   padding-left: ${defaultTheme.padding.base};
   vertical-align: middle;
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 const StyledCheckbox = styled.label`
@@ -66,12 +66,11 @@ const StyledCheckbox = styled.label`
   }}
 
   ${props => {
-    const { primary, backgroundContrast1 } = getTheme(props);
+    const { primary, border, secondary } = getTheme(props);
     const iconCheckedColor =
-      props.checked || props.disabled ? primary : "transparent";
+      props.checked || props.disabled ? secondary : "transparent";
 
-    const checkBoxColor =
-      props.checked || props.disabled ? primary : defaultTheme.grayLight;
+    const checkBoxColor = props.checked || props.disabled ? secondary : border;
 
     return css`
       &:before {
@@ -82,7 +81,7 @@ const StyledCheckbox = styled.label`
         width: 18px;
         height: 18px;
         border: 2px solid ${checkBoxColor};
-        background: ${backgroundContrast1};
+        background: ${primary};
         border-radius: 4px;
       }
       i {
@@ -95,7 +94,7 @@ const StyledCheckbox = styled.label`
 
       &:hover {
         &:before {
-          border-color: ${primary};
+          border-color: ${secondary};
         }
       }
     `;
