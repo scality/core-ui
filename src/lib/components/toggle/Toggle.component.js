@@ -29,7 +29,7 @@ const Switch = styled.label`
   }
 
   ${props => {
-    const { primary } = getTheme(props);
+    const { secondary } = getTheme(props);
     return css`
       .sc-slider {
         position: absolute;
@@ -61,17 +61,17 @@ const Switch = styled.label`
       }
 
       input:checked + .sc-slider {
-        background-color: ${primary};
+        background-color: ${secondary};
         &:hover {
           &:before {
-            box-shadow: 0 0 3px ${primary};
+            box-shadow: 0 0 3px ${secondary};
           }
         }
       }
 
       input:checked + .sc-slider:before {
         transform: translateX(26px);
-        background-color: ${primary};
+        background-color: ${secondary};
       }
     `;
   }}
