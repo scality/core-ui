@@ -17,17 +17,13 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
   const themeContext = useContext(ThemeContext);
 
   const currentBackgroundColor =
-    themeContext &&
-    themeContext.brand &&
-    themeContext.brand.backgroundContrast1;
+    themeContext && themeContext.brand && themeContext.brand.primaryDark1;
 
   const currentBackgroundColor2 =
-    themeContext &&
-    themeContext.brand &&
-    themeContext.brand.backgroundContrast2;
+    themeContext && themeContext.brand && themeContext.brand.primaryDark2;
 
   const brandText =
-    themeContext && themeContext.brand && themeContext.brand.text;
+    themeContext && themeContext.brand && themeContext.brand.textPrimary;
 
   const themeConfig = {
     config: {
