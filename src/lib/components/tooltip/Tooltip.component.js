@@ -27,7 +27,7 @@ const TooltipOverLayContainer = styled.div`
   position: absolute;
   background-color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.backgroundColor) ||
-    getTheme(props).backgroundContrast2};
+    getTheme(props).primaryDark1};
   color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.color) ||
     getTheme(props).text}
