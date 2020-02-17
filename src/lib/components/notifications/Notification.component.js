@@ -23,16 +23,26 @@ const NotificationContainer = styled.div`
   box-shadow: 5px 5px 15px ${defaultTheme.gray};
 
   ${props => {
-    return css`
-      background-color: ${getTheme(props)[props.variant || "primary"]};
-      color: ${defaultTheme.white};
-    `;
-  }};
+    switch (props.variant) {
+      case "warning":
+        return css`
+          background-color: ${getTheme(props)[props.variant || "primary"]};
+          color: ${defaultTheme.black};
+        `;
+      default:
+        return css`
+          background-color: ${getTheme(props)[props.variant || "primary"]};
+          color: ${defaultTheme.white};
+        `;
+    }
+  }}
 `;
+
 const NotificationTitle = styled.div`
   padding: 0 ${defaultTheme.padding.base} ${defaultTheme.padding.smaller} 0;
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
+
 const NotificationDismissProgress = styled.div`
   position: absolute;
   bottom: 0;
