@@ -74,6 +74,13 @@ const ChipsContainer = styled.div`
         `;
     }
   }}
+${props => {
+  return css`
+    ${props.variant === "warning"
+      ? `color: ${defaultTheme.blackLight}`
+      : `color: ${defaultTheme.white}`}
+  `;
+}}
 
   ${props => {
     const brand = getTheme(props);
@@ -81,7 +88,6 @@ const ChipsContainer = styled.div`
     return props.onClick
       ? css`
           background-color: ${brand[props.variant]};
-          color: ${defaultTheme.white};
           font-size: ${defaultTheme.fontSize[props.size]};
           &:hover {
             cursor: pointer;
@@ -93,7 +99,6 @@ const ChipsContainer = styled.div`
         `
       : css`
           background-color: ${brand[props.variant]};
-          color: ${defaultTheme.white};
           font-size: ${defaultTheme.fontSize[props.size]};
         `;
   }}
