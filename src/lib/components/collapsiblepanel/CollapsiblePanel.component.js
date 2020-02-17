@@ -38,8 +38,8 @@ const CollapsiblePanelContainer = styled.div`
   flex-direction: column;
   border-radius: 4px;
   background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).backgroundContrast2};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+    mergeTheme(props.theme, defaultTheme).primaryDark2};
+  color: ${props => mergeTheme(props.theme, defaultTheme).textPrimary};
 `;
 
 const HeaderContainer = styled.div`
@@ -50,9 +50,9 @@ const HeaderContainer = styled.div`
 
 const ExpandedContainer = styled.div`
   padding: ${defaultTheme.padding.base};
-  color: ${props => mergeTheme(props.theme, defaultTheme).text};
+  color: ${props => mergeTheme(props.theme, defaultTheme).textPrimary};
   background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).backgroundContrast1};
+    mergeTheme(props.theme, defaultTheme).primaryDark2};
 `;
 
 function CollapsiblePanel({
