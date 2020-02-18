@@ -22,7 +22,7 @@ const LoaderContainer = styled.div`
       svg {
         height: ${defaultTheme.svgSize[props.size]};
         width: ${defaultTheme.svgSize[props.size]};
-        fill: ${getTheme(props).primaryButton};
+        fill: ${getTheme(props).base};
       }
     `;
   }}

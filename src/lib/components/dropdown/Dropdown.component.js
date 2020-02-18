@@ -106,7 +106,7 @@ function Dropdown({
   text,
   icon,
   size = "base",
-  variant = "primaryButton",
+  variant = "base",
   title,
   caret = true,
   ...rest

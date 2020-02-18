@@ -71,7 +71,7 @@ storiesOf("Dropdown", module).add("Default", () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="primaryButton"
+        variant="base"
         text="primary"
       />
       <Dropdown

@@ -19,7 +19,7 @@ storiesOf("Button", module)
         <Button size="larger" text="Larger" />
 
         <Title>Button Variant</Title>
-        <Button variant="primaryButton" text="primary" />
+        <Button variant="base" text="base" />
         <Button variant="secondary" text="secondary" />
         <Button variant="healthy" text="healthy" />
         <Button variant="info" text="info" />

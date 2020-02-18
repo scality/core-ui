@@ -214,7 +214,7 @@ function Button({
   href = "",
   icon = null,
   size = "base",
-  variant = "primaryButton",
+  variant = "base",
   outlined = false,
   disabled = false,
   onClick,

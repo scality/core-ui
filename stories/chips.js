@@ -9,7 +9,7 @@ storiesOf("Chips", module).add("Default", () => {
   return (
     <Wrapper className="storybook-chips">
       <Title>Basic Chip</Title>
-      <Chips text="Basic Chip" variant="primaryButton" />
+      <Chips text="Basic Chip" variant="base" />
       <Chips text="Basic Chip" variant="success" />
       <Chips text="Basic Chip" variant="warning" />
       <Chips text="Basic Chip" variant="danger" />
@@ -18,7 +18,7 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
-        variant="primaryButton"
+        variant="base"
         onClick={action("Clickable Chip")}
       />
       <Chips
@@ -41,12 +41,6 @@ storiesOf("Chips", module).add("Default", () => {
       />
 
       <Title>Deletable Chip</Title>
-      <Chips
-        text="Deletable"
-        icon={<i className="fas fa-star" />}
-        variant="primaryButton"
-        onRemove={action("Deletable Chip")}
-      />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
@@ -76,7 +70,7 @@ storiesOf("Chips", module).add("Default", () => {
       <Chips
         text="Smaller"
         icon={<i className="fas fa-star" />}
-        variant="primaryButton"
+        variant="base"
         onRemove={action("Deletable Chip")}
         size="smaller"
       />
