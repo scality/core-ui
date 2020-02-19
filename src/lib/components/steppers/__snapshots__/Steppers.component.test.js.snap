@@ -2,10 +2,10 @@
 
 exports[`Storyshots Steppers Default 1`] = `
 <div
-  className="sc-fjdhpX fYqDPr"
+  className="sc-fjdhpX kmDTsr"
 >
   <h3
-    className="sc-jzJRlG jNoFXv"
+    className="sc-jzJRlG fWFhAz"
   >
     Default Steppers 
   </h3>
@@ -35,7 +35,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Node Registerd
         </span>
@@ -48,7 +48,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <div
-          className="sc-bZQynM bCDTJE"
+          className="sc-bZQynM bXhRIV"
         >
           <span>
             2
@@ -62,7 +62,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Deploy Salt Minion on node
         </span>
@@ -70,7 +70,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI dIpcya sc-button"
+            className="sc-iwsKbI SOvlX sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -115,7 +115,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Workload Plane
         </span>
@@ -142,7 +142,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Control Plane
         </span>
@@ -166,7 +166,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Extend etcd cluster to node
         </span>
@@ -174,7 +174,7 @@ exports[`Storyshots Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jzJRlG jNoFXv"
+    className="sc-jzJRlG fWFhAz"
   >
     Steppers with loading
   </h3>
@@ -204,7 +204,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Node Registerd
         </span>
@@ -217,10 +217,10 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <div
-          className="sc-bZQynM bCDTJE"
+          className="sc-bZQynM bXhRIV"
         >
           <div
-            className="sc-bdVaJa calEWh sc-loader"
+            className="sc-bdVaJa oUjDc sc-loader"
             color="#87929D"
             size="base"
           >
@@ -352,7 +352,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Deploy Salt Minion on node
         </span>
@@ -360,7 +360,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI dIpcya sc-button"
+            className="sc-iwsKbI SOvlX sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -405,7 +405,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Workload Plane
         </span>
@@ -432,7 +432,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Control Plane
         </span>
@@ -456,7 +456,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Extend etcd cluster to node
         </span>
@@ -464,7 +464,7 @@ exports[`Storyshots Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jzJRlG jNoFXv"
+    className="sc-jzJRlG fWFhAz"
   >
     Steppers with error
   </h3>
@@ -494,7 +494,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Node Registerd
         </span>
@@ -523,7 +523,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Deploy Salt Minion on node
         </span>
@@ -550,7 +550,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Workload Plane
         </span>
@@ -558,7 +558,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI dIpcya sc-button"
+            className="sc-iwsKbI SOvlX sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -603,7 +603,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Add node to Control Plane
         </span>
@@ -627,7 +627,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw RPtSQ"
+          className="sc-gzVnrw dhxpXn"
         >
           Extend etcd cluster to node
         </span>

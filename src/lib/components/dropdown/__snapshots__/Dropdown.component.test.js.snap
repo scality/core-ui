@@ -2,10 +2,10 @@
 
 exports[`Storyshots Dropdown Default 1`] = `
 <div
-  className="sc-VigVT ciOuIf storybook-dropdown"
+  className="sc-VigVT dSxAmm storybook-dropdown"
 >
   <h3
-    className="sc-jTzLTM eWkzeL"
+    className="sc-jTzLTM irAFsh"
   >
     Dropdown with text/icon
   </h3>
@@ -13,7 +13,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU PdYCE trigger"
+      className="sc-gqjmRU bFtefY trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -46,7 +46,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU hRZNKO trigger"
+      className="sc-gqjmRU fbYntr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -79,7 +79,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU bYdnZO trigger"
+      className="sc-gqjmRU kUKCnc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -112,7 +112,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU dqhyfr trigger"
+      className="sc-gqjmRU jGIDhk trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -145,7 +145,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU emAYAA trigger"
+      className="sc-gqjmRU fswrPR trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -175,7 +175,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jTzLTM eWkzeL"
+    className="sc-jTzLTM irAFsh"
   >
     Dropdown with icon
   </h3>
@@ -183,7 +183,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU bYdnZO trigger"
+      className="sc-gqjmRU kUKCnc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -201,7 +201,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jTzLTM eWkzeL"
+    className="sc-jTzLTM irAFsh"
   >
     Dropdown with text
   </h3>
@@ -209,7 +209,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU bYdnZO trigger"
+      className="sc-gqjmRU kUKCnc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -231,7 +231,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jTzLTM eWkzeL"
+    className="sc-jTzLTM irAFsh"
   >
     Dropdown with variant
   </h3>
@@ -239,7 +239,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU bYdnZO trigger"
+      className="sc-gqjmRU kUKCnc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -272,7 +272,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU eHGVzV trigger"
+      className="sc-gqjmRU dropla trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -305,7 +305,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU iUdIaI trigger"
+      className="sc-gqjmRU fJNeQP trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -323,7 +323,7 @@ exports[`Storyshots Dropdown Default 1`] = `
       <span
         className="sc-EHOje boinrg sc-trigger-text"
       >
-        success
+        healthy
       </span>
       <span
         className="sc-gZMcBi cfFiuj"
@@ -338,7 +338,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU gXyRVK trigger"
+      className="sc-gqjmRU bzQUpj trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -371,7 +371,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU hVqecw trigger"
+      className="sc-gqjmRU jCEBPE trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -404,7 +404,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU eGcwNo trigger"
+      className="sc-gqjmRU ckujpm trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -422,7 +422,7 @@ exports[`Storyshots Dropdown Default 1`] = `
       <span
         className="sc-EHOje boinrg sc-trigger-text"
       >
-        danger
+        critical
       </span>
       <span
         className="sc-gZMcBi cfFiuj"

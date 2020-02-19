@@ -2,13 +2,13 @@
 
 exports[`Storyshots Notifications Default 1`] = `
 <div
-  className="sc-EHOje dxVLzp"
+  className="sc-EHOje jlgJjP"
 >
   <div
     className="sc-ifAKCX foTAQB sc-notifications"
   >
     <div
-      className="sc-bdVaJa cORIOQ sc-notification"
+      className="sc-bdVaJa fuAYVT sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -31,7 +31,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa iMRTLO sc-notification"
+      className="sc-bdVaJa kheLfk sc-notification"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
@@ -58,7 +58,7 @@ exports[`Storyshots Notifications Default 1`] = `
     className="sc-ifAKCX rJoNA sc-notifications"
   >
     <div
-      className="sc-bdVaJa cojbSw sc-notification"
+      className="sc-bdVaJa euocbl sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -80,7 +80,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa kWDgMl sc-notification"
+      className="sc-bdVaJa MnSNT sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -111,7 +111,7 @@ exports[`Storyshots Notifications Default 1`] = `
     className="sc-ifAKCX fQVauU sc-notifications"
   >
     <div
-      className="sc-bdVaJa iuvsdJ sc-notification"
+      className="sc-bdVaJa eieSyr sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -133,7 +133,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa tGEAk sc-notification"
+      className="sc-bdVaJa bWBilp sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -146,7 +146,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Saif. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-htpNat kLmLPY"
+        className="sc-htpNat gkkqDW"
         max={5000}
         value={0}
       />
@@ -164,7 +164,7 @@ exports[`Storyshots Notifications Default 1`] = `
     className="sc-ifAKCX dsdPyg sc-notifications"
   >
     <div
-      className="sc-bdVaJa cojbSw sc-notification"
+      className="sc-bdVaJa euocbl sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -186,7 +186,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa iuvsdJ sc-notification"
+      className="sc-bdVaJa eieSyr sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >

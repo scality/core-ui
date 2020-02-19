@@ -18,7 +18,7 @@ exports[`Storyshots Table Center a column with CSS 1`] = `
       }
     >
       <div
-        className="sc-VigVT hMhzBX"
+        className="sc-VigVT lvmqo"
       >
         <div
           aria-colcount={6}
@@ -97,7 +97,7 @@ exports[`Storyshots Table Center a column with CSS 1`] = `
                   First Name
                 </label>
                 <div
-                  className="sc-cSHVUG jEmWiM"
+                  className="sc-cSHVUG eWBnEj"
                   selected={true}
                 >
                   <i
@@ -248,7 +248,7 @@ exports[`Storyshots Table Center a column with CSS 1`] = `
 
 exports[`Storyshots Table Change column size 1`] = `
 <div
-  className="sc-kAzzGY jZVyLJ"
+  className="sc-kAzzGY hqerrA"
 >
   <div
     className="sc-table"
@@ -261,7 +261,7 @@ exports[`Storyshots Table Change column size 1`] = `
     }
   >
     <div
-      className="sc-VigVT hMhzBX"
+      className="sc-VigVT lvmqo"
     >
       <div
         aria-colcount={6}
@@ -340,7 +340,7 @@ exports[`Storyshots Table Change column size 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG jEmWiM"
+                className="sc-cSHVUG eWBnEj"
                 selected={true}
               >
                 <i
@@ -490,7 +490,7 @@ exports[`Storyshots Table Change column size 1`] = `
 
 exports[`Storyshots Table Default 1`] = `
 <div
-  className="sc-kAzzGY jZVyLJ"
+  className="sc-kAzzGY hqerrA"
 >
   <div
     className="sc-table"
@@ -503,7 +503,7 @@ exports[`Storyshots Table Default 1`] = `
     }
   >
     <div
-      className="sc-VigVT hMhzBX"
+      className="sc-VigVT lvmqo"
     >
       <div
         aria-colcount={6}
@@ -582,7 +582,7 @@ exports[`Storyshots Table Default 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG jEmWiM"
+                className="sc-cSHVUG eWBnEj"
                 selected={true}
               >
                 <i
@@ -732,7 +732,7 @@ exports[`Storyshots Table Default 1`] = `
 
 exports[`Storyshots Table Empty Table 1`] = `
 <div
-  className="sc-kAzzGY jZVyLJ"
+  className="sc-kAzzGY hqerrA"
 >
   <div
     className="sc-table"
@@ -745,7 +745,7 @@ exports[`Storyshots Table Empty Table 1`] = `
     }
   >
     <div
-      className="sc-VigVT hMhzBX"
+      className="sc-VigVT lvmqo"
     >
       <div
         aria-colcount={6}
@@ -859,7 +859,7 @@ exports[`Storyshots Table Empty Table 1`] = `
                 Last Name
               </label>
               <div
-                className="sc-cSHVUG jFhtvU"
+                className="sc-cSHVUG bGmJcn"
                 selected={true}
               >
                 <i
@@ -974,7 +974,7 @@ exports[`Storyshots Table Empty Table 1`] = `
 
 exports[`Storyshots Table With rowActions 1`] = `
 <div
-  className="sc-kAzzGY jZVyLJ"
+  className="sc-kAzzGY hqerrA"
 >
   <div
     className="sc-table"
@@ -987,7 +987,7 @@ exports[`Storyshots Table With rowActions 1`] = `
     }
   >
     <div
-      className="sc-VigVT hMhzBX"
+      className="sc-VigVT lvmqo"
     >
       <div
         aria-colcount={6}
@@ -1066,7 +1066,7 @@ exports[`Storyshots Table With rowActions 1`] = `
                 First Name
               </label>
               <div
-                className="sc-cSHVUG jEmWiM"
+                className="sc-cSHVUG eWBnEj"
                 selected={true}
               >
                 <i

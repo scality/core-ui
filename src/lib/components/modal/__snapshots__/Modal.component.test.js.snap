@@ -2,13 +2,13 @@
 
 exports[`Storyshots Modal Default 1`] = `
 <div
-  className="sc-fjdhpX fYqDPr"
+  className="sc-fjdhpX kmDTsr"
 >
   <div
     className="sc-bdVaJa gIywMY sc-modal"
   >
     <div
-      className="sc-bwzfXH fKuiVN sc-modal-content"
+      className="sc-bwzfXH OSZEi sc-modal-content"
     >
       <div
         className="sc-htpNat fPOfap sc-modal-header"
@@ -35,7 +35,7 @@ exports[`Storyshots Modal Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-EHOje gzTeXM sc-modal-footer"
+        className="sc-EHOje kQovqt sc-modal-footer"
       >
         <div
           style={
@@ -46,7 +46,7 @@ exports[`Storyshots Modal Default 1`] = `
           }
         >
           <button
-            className="sc-iwsKbI bXjaSa sc-button"
+            className="sc-iwsKbI gqaxUG sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -68,7 +68,7 @@ exports[`Storyshots Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-iwsKbI dIpcya sc-button"
+            className="sc-iwsKbI hSzrkv sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

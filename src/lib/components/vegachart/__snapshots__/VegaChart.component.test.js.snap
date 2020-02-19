@@ -2,10 +2,10 @@
 
 exports[`Storyshots VegaChart Default 1`] = `
 <div
-  className="sc-bwzfXH hilSGa"
+  className="sc-bwzfXH dNCSlp"
 >
   <h3
-    className="sc-htpNat bnCVRm"
+    className="sc-htpNat iELaDV"
   >
     Vega-Lite wrapper - need to specify the entire spec
   </h3>
