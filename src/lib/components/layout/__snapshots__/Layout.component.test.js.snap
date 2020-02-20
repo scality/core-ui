@@ -5,17 +5,17 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
   className="sc-eNQAEJ iByiJn sc-layout"
 >
   <div
-    className="sc-VigVT bBpHgA sc-navbar"
+    className="sc-VigVT fOohjo sc-navbar"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
         onClick={[Function]}
       >
         <button
-          className="sc-bxivhb kyNZMK sc-button"
+          className="sc-bxivhb dCegKj sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -45,7 +45,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <div
           className="sc-kgoBCf eZcjUs sc-logo"
@@ -120,7 +120,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <h1
           className="sc-chPdSV hsiPpx"
@@ -133,13 +133,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -165,7 +165,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -186,7 +186,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -207,7 +207,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -236,10 +236,10 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     className="sc-hMqMXs dAWvsW"
   >
     <div
-      className="sc-kGXeez bFrjEV sc-sidebar"
+      className="sc-kGXeez hjDfPR sc-sidebar"
     >
       <div
-        className="sc-kpOJdX idUvNE sc-sidebar-item"
+        className="sc-kpOJdX icEZg sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
@@ -252,11 +252,11 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
           />
         </div>
         <div
-          className="sc-ckVGcZ bsfZvt"
+          className="sc-ckVGcZ hmtLZx"
         />
       </div>
       <div
-        className="sc-kpOJdX bsmReV sc-sidebar-item"
+        className="sc-kpOJdX fAfEsW sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
@@ -270,7 +270,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-kpOJdX bsmReV sc-sidebar-item"
+        className="sc-kpOJdX fAfEsW sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
@@ -285,10 +285,10 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       </div>
     </div>
     <div
-      className="sc-kEYyzF gEYbDe main"
+      className="sc-kEYyzF gnvgcU main"
     >
       <div
-        className="sc-bdVaJa iywnbC sc-loader"
+        className="sc-bdVaJa eXPBCK sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -421,17 +421,17 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
   className="sc-eNQAEJ iByiJn sc-layout"
 >
   <div
-    className="sc-VigVT bBpHgA sc-navbar"
+    className="sc-VigVT fOohjo sc-navbar"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
         onClick={[Function]}
       >
         <button
-          className="sc-bxivhb kyNZMK sc-button"
+          className="sc-bxivhb dCegKj sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -461,7 +461,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <div
           className="sc-kgoBCf eZcjUs sc-logo"
@@ -536,7 +536,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <h1
           className="sc-chPdSV hsiPpx"
@@ -549,13 +549,13 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY hGkRGt"
+        className="sc-kAzzGY cRktIp"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -581,7 +581,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -602,7 +602,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -623,7 +623,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           className="sc-htoDjs iIbcxe sc-dropdown"
         >
           <div
-            className="sc-gqjmRU fmQlVr trigger"
+            className="sc-gqjmRU fswrPR trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -652,10 +652,10 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     className="sc-hMqMXs dAWvsW"
   >
     <div
-      className="sc-kGXeez gmMXhR sc-sidebar"
+      className="sc-kGXeez iPALFX sc-sidebar"
     >
       <div
-        className="sc-kpOJdX idUvNE sc-sidebar-item"
+        className="sc-kpOJdX icEZg sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
@@ -673,11 +673,11 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
           Dashboard
         </div>
         <div
-          className="sc-ckVGcZ bsfZvt"
+          className="sc-ckVGcZ hmtLZx"
         />
       </div>
       <div
-        className="sc-kpOJdX bsmReV sc-sidebar-item"
+        className="sc-kpOJdX fAfEsW sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
@@ -696,7 +696,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-kpOJdX bsmReV sc-sidebar-item"
+        className="sc-kpOJdX fAfEsW sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
@@ -716,10 +716,10 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       </div>
     </div>
     <div
-      className="sc-kEYyzF gEYbDe main"
+      className="sc-kEYyzF gnvgcU main"
     >
       <div
-        className="sc-bdVaJa iywnbC sc-loader"
+        className="sc-bdVaJa eXPBCK sc-loader"
         color="#87929D"
         size="massive"
       >

@@ -10,6 +10,7 @@ const trNotifications = [
     uid: "1",
     title: "Hi",
     message: "I am Carlito. I live at TOP_RIGHT",
+    variant: "base",
     "data-cy": "Carlito_notification"
   },
   {

@@ -16,13 +16,13 @@ storiesOf("Modal", module).add("Default", () => {
         footer={
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button
-              variant="danger"
               text="No"
               size="small"
+              outlined
               onClick={action("No clicked")}
             />
             <Button
-              variant="primary"
+              variant="secondary"
               text="Yes"
               size="small"
               onClick={action("Yes clicked")}

@@ -9,15 +9,15 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledTitle = styled.h3`
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 const StyledSubTitle = styled.span`
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 const StyledText = styled.text`
-  fill: ${getThemePropSelector("text")};
+  fill: ${getThemePropSelector("textPrimary")};
 `;
 
 export const Wrapper = ({ children, className }) => {

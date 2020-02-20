@@ -40,7 +40,7 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${props => {
-    const { danger, primary, success } = getTheme(props);
+    const { danger, success, secondary } = getTheme(props);
     if (props.error) {
       return css`
         background-color: ${danger};
@@ -48,7 +48,7 @@ const Circle = styled.div`
       `;
     } else if (props.active) {
       return css`
-        background-color: ${primary};
+        background-color: ${secondary};
         color: ${defaultTheme.white};
         svg {
           fill: ${defaultTheme.white};

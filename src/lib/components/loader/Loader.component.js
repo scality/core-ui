@@ -22,7 +22,7 @@ const LoaderContainer = styled.div`
       svg {
         height: ${defaultTheme.svgSize[props.size]};
         width: ${defaultTheme.svgSize[props.size]};
-        fill: ${getTheme(props).primary};
+        fill: ${getTheme(props).base};
       }
     `;
   }}
@@ -30,7 +30,7 @@ const LoaderContainer = styled.div`
 
 const LoaderText = styled.span`
   padding: 10px 0;
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 const LoaderTextDiv = styled.span`

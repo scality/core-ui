@@ -25,29 +25,29 @@ const BreadcrumbItem = styled.li`
   ${ellipsis("250px")}
 
   ${props => {
-    const { primary, text } = getTheme(props);
+    const { textPrimary, secondary } = getTheme(props);
     if (props.active) {
       return css`
         font-weight: ${defaultTheme.fontWeight.bold};
         a {
-          color: ${primary};
+          color: ${secondary};
         }
-        color: ${primary};
-        border-bottom: 2px solid ${primary};
+        color: ${secondary};
+        border-bottom: 2px solid ${secondary};
       `;
     }
 
     return css`
       a {
         text-decoration: none;
-        color: ${text};
+        color: ${textPrimary};
       }
-      color: ${text};
+      color: ${textPrimary};
       &:hover {
         a {
-          color: ${primary};
+          color: ${secondary};
         }
-        border-bottom: 2px solid ${primary};
+        border-bottom: 2px solid ${secondary};
       }
     `;
   }}

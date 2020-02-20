@@ -87,30 +87,42 @@ export const ButtonStyled = styled.button`
 
   ${props => {
     const brand = getTheme(props);
-    const brandLighter = lighten(0.3, brand[props.variant]).toString();
     const brandLight = lighten(0.1, brand[props.variant]).toString();
-    return css`
-      ${props.outlined
-        ? `
+    if (props.outlined) {
+      return css`
         border-width: 1px;
         border-style: solid;
-        border-color: ${brand[props.variant]};
+        border-color: ${brand.secondaryDark1};
         background-color: ${brand.background};
-        color: ${brand[props.variant]};
+        color: ${brand.textPrimary};
 
-        &:hover{
-          border-color: ${brand[props.variant]};
-          background-color: ${brandLight};
-          color: ${brand.background};
+        &:hover {
+          border-color: ${brand.secondaryDark1};
+          background-color: ${brand.secondaryDark2};
+          color: ${defaultTheme.white};
         }
 
         &:active {
-          border-color: ${brand[props.variant]};
-          background-color: ${brandLighter};
-          color:  ${brand.background};
+          border-color: ${brand.secondaryDark1};
+          background-color: ${brand.secondaryDark2};
+          color: ${defaultTheme.white};
         }
-        `
-        : `
+      `;
+    } else if (props.variant === "warning") {
+      return css`
+        background-color: ${brand[props.variant]};
+        color: ${defaultTheme.blackLight};
+        &:hover {
+          background-color: ${brandLight};
+          color: ${defaultTheme.blackLight};
+        }
+        &:active {
+          background-color: ${brand[props.variant]};
+          color: ${defaultTheme.blackLight};
+        }
+      `;
+    } else {
+      return css`
         background-color: ${brand[props.variant]};
         color: ${defaultTheme.white};
 
@@ -123,31 +135,9 @@ export const ButtonStyled = styled.button`
           background-color: ${brand[props.variant]};
           color: ${defaultTheme.white};
         }
-      `}
-    `;
+      `;
+    }
   }}
-
-${props => {
-  return css`
-    ${props.isLoading
-      ? `
-          .sc-button-text {
-            visibility: hidden;
-          }
-          .sc-loader {
-            svg {
-              fill: ${defaultTheme.white};
-            }
-            > span {
-              position: absolute;
-              right: 0;
-              left: 0;
-            }
-          }
-        `
-      : null}
-  `;
-}}
 
 ${props => {
   const brand = getTheme(props);
@@ -168,6 +158,7 @@ ${props => {
 
 ${props => {
   const brand = getTheme(props);
+
   const brandLighter = lighten(0.2, brand[props.variant]).toString();
   const brandLight = lighten(0.1, brand[props.variant]).toString();
 
@@ -223,7 +214,7 @@ function Button({
   href = "",
   icon = null,
   size = "base",
-  variant = "primary",
+  variant = "base",
   outlined = false,
   disabled = false,
   onClick,

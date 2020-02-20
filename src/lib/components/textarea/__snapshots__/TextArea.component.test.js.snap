@@ -2,29 +2,30 @@
 
 exports[`Storyshots TextArea Default 1`] = `
 <div
-  className="sc-bwzfXH hilSGa"
+  className="sc-bwzfXH dNCSlp"
 >
   <h3
-    className="sc-htpNat bnCVRm"
+    className="sc-htpNat iELaDV"
   >
     Text Area without label
   </h3>
   <textarea
-    className="sc-bdVaJa kIwpfz sc-textarea"
-    cols={10}
+    className="sc-bdVaJa jItPTD sc-textarea"
+    cols={50}
     id="text"
     onChange={[Function]}
     rows={10}
-    value="Hello"
+    value="Add a note"
   />
   <h3
-    className="sc-htpNat bnCVRm"
+    className="sc-htpNat iELaDV"
   >
     Text Area disabled
   </h3>
   <textarea
-    className="sc-bdVaJa kIwpfz sc-textarea"
+    className="sc-bdVaJa jItPTD sc-textarea"
     cols={50}
+    disabled={true}
     onChange={[Function]}
     placeholder="Text area input"
     rows={10}

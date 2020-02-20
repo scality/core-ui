@@ -29,8 +29,8 @@ const ModalContainer = styled.div`
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${getThemePropSelector('backgroundContrast1')};
-  color: ${getThemePropSelector('text')};
+  background-color: ${getThemePropSelector("primary")};
+  color: ${getThemePropSelector("textPrimary")};
   border-radius: 5px;
   overflow: hidden;
   min-width: 250px;
@@ -53,7 +53,7 @@ const ModalBody = styled.div`
 `;
 const ModalFooter = styled.div`
   padding: ${defaultTheme.padding.base} ${defaultTheme.padding.larger};
-  background-color: ${getThemePropSelector('backgroundContrast2')};
+  background-color: ${getThemePropSelector("primaryDark1")};
 `;
 
 const ModalClose = styled.div`

@@ -17,13 +17,13 @@ const TextAreaContainer = styled.textarea`
   padding: ${defaultTheme.padding.small};
   border-radius: 4px;
   ${props => {
-    const { border, text, backgroundContrast1, primary } = getTheme(props);
+    const { border, textSecondary, primary, secondary } = getTheme(props);
     return css`
       border-color: ${border};
-      color: ${text};
-      background: ${backgroundContrast1};
+      color: ${textSecondary};
+      background: ${primary};
       &:focus {
-        border-color: ${primary};
+        border-color: ${secondary};
         outline: none;
       }
     `;

@@ -14,6 +14,7 @@ export const yellow = "#EFC93D";
 export const green = "#228F67";
 export const white = "#ffffff";
 export const black = "#000000";
+export const blackLight = "#313B44";
 
 export const blueDarkest = "#0F3554";
 export const blueDarker = "#144A75";
@@ -32,19 +33,15 @@ export const grayLighter = "#D8DCDE";
 export const grayLightest = "#E9EBED";
 
 export const brand = {
-  base: blueLighter,
-  baseContrast1: "#94B3CB",
-  primary: "#403e40",
-  secondary: "#e99121",
+  base: "#6A7B92",
+  secondary: "#037AFF",
   success: jade,
-  info: turquoise,
-  warning: yellowOrange,
+  healthy: "#25AC56",
+  healthyLight: "#75FE63",
+  info: "#027AFF",
+  warning: "#FEFA51",
   danger: warmRed,
-  background: white,
-  backgroundContrast1: white,
-  backgroundContrast2: "#E6E6E6",
-  text: gray,
-  border: gray
+  critical: "#BE2543"
 };
 
 //navbar

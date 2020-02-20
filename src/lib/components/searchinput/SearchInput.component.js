@@ -1,10 +1,9 @@
 //@flow
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import { lighten } from "polished";
 import Input from "../input/Input.component";
 import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import { getThemePropSelector } from "../../utils";
 
 type Props = {
   placeholder?: string,
@@ -36,7 +35,7 @@ const IconButton = styled.button`
   padding: 8px 12px;
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
-  color: ${getThemePropSelector("primary")};
+  color: ${getThemePropSelector("textSecondary")};
   background-color: transparent;
   ${props => {
     return (
@@ -44,7 +43,7 @@ const IconButton = styled.button`
       css`
         cursor: pointer;
         &:hover {
-          color: ${lighten(0.1, getTheme(props).primary)};
+          color: ${getThemePropSelector("secondary")};
         }
       `
     );

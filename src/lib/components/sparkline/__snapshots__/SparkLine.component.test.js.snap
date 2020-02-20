@@ -2,10 +2,10 @@
 
 exports[`Storyshots SparkLine Default 1`] = `
 <div
-  className="sc-bwzfXH hilSGa"
+  className="sc-bwzfXH dNCSlp"
 >
   <h3
-    className="sc-htpNat bnCVRm"
+    className="sc-htpNat iELaDV"
   >
     Vege-Lite sparkline chart demo
   </h3>
@@ -14,7 +14,7 @@ exports[`Storyshots SparkLine Default 1`] = `
     id="vis"
   />
   <h3
-    className="sc-htpNat bnCVRm"
+    className="sc-htpNat iELaDV"
   >
     Vege-Lite sparkline multi chart demo
   </h3>

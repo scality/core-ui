@@ -17,13 +17,13 @@ const BannerContainer = styled.div`
   display: flex;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.small};
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 
   border: 1px solid;
   border-left: 5px solid;
   border-radius: 3px;
   border-color: ${getThemeVariantSelector()};
-
+  background-color: ${getThemePropSelector("primary")};
   i {
     display: flex;
     align-items: center;

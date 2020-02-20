@@ -57,7 +57,7 @@ const TopLeftLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   display: inline-block;
   font-weight: ${defaultTheme.fontWeight.bold};
-  color: ${getThemePropSelector("text")}};
+  color: ${getThemePropSelector("textPrimary")}};
 `;
 
 const TopRightLabel = styled.span`
@@ -67,7 +67,7 @@ const TopRightLabel = styled.span`
 `;
 
 const BottomLabel = styled.span`
-  color: ${getThemePropSelector("text")}};
+  color: ${getThemePropSelector("textPrimary")}};
   display: inline-block;
 `;
 

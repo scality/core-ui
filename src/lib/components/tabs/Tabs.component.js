@@ -25,7 +25,6 @@ const TabsContainer = styled.div`
 
 const TabBar = styled.div`
   display: flex;
-  border-bottom: 2px solid ${defaultTheme.grayLight};
   position: relative;
   height: 50px;
 `;
@@ -40,7 +39,7 @@ const TabItem = styled.div`
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${getTheme(props).backgroundContrast2};
+          background-color: ${getTheme(props).primary};
         }
       `
     );
@@ -50,17 +49,16 @@ const TabItem = styled.div`
 const TabItemTitle = styled.p`
   margin: 0;
   font-size: ${defaultTheme.fontSize.large};
-  padding: ${defaultTheme.padding.base} 0 14px;
+  padding: ${defaultTheme.padding.base} 0 16.5px;
   ${props => {
-    const { primary, text } = getTheme(props);
+    const { textPrimary } = getTheme(props);
     return props.selected
       ? css`
-          color: ${primary};
-          border-bottom: 2px solid ${primary};
-          font-weight: ${defaultTheme.fontWeight.bold};
+          color: ${textPrimary};
+          background-color: ${getTheme(props).primary};
         `
       : css`
-          color: ${text};
+          color: ${textPrimary};
         `;
   }}
 `;

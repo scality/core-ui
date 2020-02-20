@@ -2,7 +2,7 @@
 
 exports[`Storyshots ProgressBar Default 1`] = `
 <div
-  className="sc-htoDjs cSFtNk"
+  className="sc-htoDjs lojtKA"
 >
   <div
     style={
@@ -12,7 +12,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
     }
   >
     <h3
-      className="sc-dnqmqq gBKyfL"
+      className="sc-dnqmqq frBWRE"
     >
       Smaller
     </h3>
@@ -23,7 +23,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           50%
         </span>
@@ -38,7 +38,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw jYjDNn"
+          className="sc-gzVnrw iOmtUz"
           width={50}
         />
       </div>
@@ -46,19 +46,19 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje sc-bZQynM fEUSOO"
       >
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomleftlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomrightlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <h3
-      className="sc-dnqmqq gBKyfL"
+      className="sc-dnqmqq frBWRE"
     >
       Small
     </h3>
@@ -69,7 +69,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           50%
         </span>
@@ -84,7 +84,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="small"
       >
         <div
-          className="sc-gzVnrw jYjDNn"
+          className="sc-gzVnrw iOmtUz"
           width={50}
         />
       </div>
@@ -92,19 +92,19 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje sc-bZQynM fEUSOO"
       >
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomleftlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomrightlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <h3
-      className="sc-dnqmqq gBKyfL"
+      className="sc-dnqmqq frBWRE"
     >
       Large
     </h3>
@@ -115,7 +115,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           50%
         </span>
@@ -130,7 +130,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="large"
       >
         <div
-          className="sc-gzVnrw jYjDNn"
+          className="sc-gzVnrw iOmtUz"
           width={50}
         />
       </div>
@@ -138,19 +138,19 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje sc-bZQynM fEUSOO"
       >
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomleftlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomrightlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <h3
-      className="sc-dnqmqq gBKyfL"
+      className="sc-dnqmqq frBWRE"
     >
       Larger
     </h3>
@@ -161,7 +161,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           50%
         </span>
@@ -176,7 +176,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="larger"
       >
         <div
-          className="sc-gzVnrw jYjDNn"
+          className="sc-gzVnrw iOmtUz"
           width={50}
         />
       </div>
@@ -184,19 +184,19 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje sc-bZQynM fEUSOO"
       >
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomleftlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomrightlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <h3
-      className="sc-dnqmqq gBKyfL"
+      className="sc-dnqmqq frBWRE"
     >
       Different colors
     </h3>
@@ -207,7 +207,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           50%
         </span>
@@ -231,12 +231,12 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje sc-bZQynM fEUSOO"
       >
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomleftlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-ifAKCX bdlSQc sc-progressbar-bottomrightlabel"
+          className="sc-ifAKCX dJwnWw sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -249,7 +249,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           10%
         </span>
@@ -274,7 +274,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         className="sc-EHOje kvGeEx"
       >
         <span
-          className="sc-htpNat eimWEs sc-progressbar-topLeftLabel"
+          className="sc-htpNat kSBRXR sc-progressbar-topLeftLabel"
         >
           90% Used
         </span>

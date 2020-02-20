@@ -35,14 +35,16 @@ const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${css`
-    background-color: ${getThemePropSelector("base")};
-    color: ${getThemePropSelector("primary")};
+    background-color: ${getThemePropSelector("background")};
+    color: ${getThemePropSelector("textPrimary")};
     .fas,
     .sc-trigger-text {
-      color: ${getThemePropSelector("primary")};
+      color: ${getThemePropSelector("textPrimary")};
     }
+    border-bottom: 1px solid ${getThemePropSelector("primary")};
   `}};
 `;
+
 const NavbarMenu = styled.div`
   display: flex;
   justify-content: center;
@@ -64,14 +66,15 @@ const TabItem = styled.div`
   align-items: center;
   padding: 0 ${defaultTheme.padding.base};
   ${props => {
-    const { primary } = getTheme(props);
+    const { textPrimary, secondary, backgroundBluer } = getTheme(props);
     return css`
-      color: ${primary};
+      color: ${textPrimary};
       &:hover {
-        border-bottom: 2px solid ${primary};
-        span,
-        a {
-          padding-top: 2px;
+        border-bottom: 2px solid ${secondary};
+        background-color: ${backgroundBluer};
+        border-top: 4px solid ${secondary};
+        span {
+          padding-bottom: 2px;
         }
         cursor: pointer;
       }
@@ -81,16 +84,16 @@ const TabItem = styled.div`
     props.selected &&
     css`
       border-bottom: 2px solid ${getTheme(props).primary};
-      span,
-      a {
-        padding-top: 2px;
+      border-top: 4px solid ${getTheme(props).primary};
+      span {
+        padding-bottom: 2px;
       }
     `};
 `;
 
 const TabLinkItem = styled(TabItem)`
   a {
-    color: ${getThemePropSelector("primary")};
+    color: ${getThemePropSelector("textPrimary")};
     text-decoration: none;
   }
 `;
@@ -101,6 +104,10 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
+      background-color: ${getThemePropSelector("background")};
+      &:hover {
+        background-color: ${getThemePropSelector("backgroundBluer")};
+      }
       height: ${defaultTheme.navbarHeight};
       font-size: ${defaultTheme.fontSize.base};
     }
@@ -111,6 +118,10 @@ const NavbarMenuItem = styled.div`
     border-radius: 0;
     height: ${defaultTheme.navbarHeight};
     font-size: ${defaultTheme.fontSize.base};
+    background-color: ${getThemePropSelector("background")};
+    &:hover {
+      background-color: ${getThemePropSelector("backgroundBluer")};
+    }
   }
 `;
 
