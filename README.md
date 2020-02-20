@@ -11,7 +11,7 @@ Stateless Components just receive an input as props and return an output as JSX:
 Examples:
 
 - Stateless/Presentational/Dumb component:
-```
+```javascript
 const BooksList = ({books}) => {
  return (
    <ul>
@@ -24,7 +24,7 @@ const BooksList = ({books}) => {
 ```
 
 - Stateful/Container/Smart component:
-```
+```javascript
 import React, { useState, useEffect } from 'react';
 
 const BooksList = (props) => {
@@ -47,12 +47,12 @@ const BooksList = (props) => {
 ## How to use it
 
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
-```
+```json
  "@scality/core-ui": "github:scality/core-ui.git",
 ```
 
 - ```@scality/core-ui```requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
-```
+```json
     "@fortawesome/fontawesome-free": "5.7.2",
     "polished": "3.4.1",
     "react": "^16.8.0",
@@ -69,26 +69,66 @@ const BooksList = (props) => {
 - Run ```npm install``` to install dependencies
 
 - Import a component (e.g. Layout). You can wrap your component in a styled-components'```ThemeProvider``` to override its [default theme](https://github.com/scality/core-ui/blob/6f5a7946e7086e08883a8fe48182598ce8a476e5/src/lib/style/theme.js#L34) by defining your own theme like below.
-```
+```javascript
 
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '@scality/core-ui';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-const theme= {  //Dark Theme
-  "brand": {
-    "base": "#19161D",
-    "primary": "#e99121",
-    "secondary": "#2979ff",
-    "success": "#006F62",
-    "info": "#00B2A9",
-    "warning": "#F1B434",
-    "danger": "#EF3340",
-    "background": "#26232A",
-    "text": "#ffffff",
-    "border": "#ffffff"
+const themes = [
+  {
+    name: "Light Theme",
+    brand: {
+      base: "#607080",
+      primary: "#FAF9FB",
+      primaryDark1: "#F7F6F9",
+      primaryDark2: "#EDEAF0",
+      secondary: "#037AFF",
+      secondaryDark1: "#1C3D59",
+      secondaryDark2: "#1C2E3F",
+      success: jade,
+      healthy: "#25AC56",
+      healthyLight: "#75FE63",
+      info: "#027AFF",
+      warning: "#FEFA51",
+      danger: warmRed,
+      critical: "#BE2543",
+      background: white,
+      backgroundBluer: "#ECF4FF",
+      textPrimary: "#313B44",
+      textSecondary: "#8593A0",
+      textTertiary: "#6C8398",
+      borderLight: "#A5A5A5",
+      border: "#A5A5A5"
+    }
+  },
+  {
+    name: "Dark Theme",
+    brand: {
+      base: "#6A7B92",
+      primary: "#1D1D1F",
+      primaryDark1: "#171718",
+      primaryDark2: "#0A0A0A",
+      secondary: "#037AFF",
+      secondaryDark1: "#1C3D59",
+      secondaryDark2: "#1C2E3F",
+      success: jade,
+      healthy: "#25AC56",
+      healthyLight: "#75FE63",
+      info: "#027AFF",
+      warning: "#FEFA51",
+      danger: warmRed,
+      critical: "#BE2543",
+      background: "#121214",
+      backgroundBluer: "#182A41",
+      textPrimary: "#FFFFFF",
+      textSecondary: "#A8B5C1",
+      textTertiary: "#A7B6C3",
+      borderLight: "#2C3137",
+      border: "#A5A5A5"
+    }
   }
-};
+];
 
 <ThemeProvider theme={theme}>
     <Layout sidebar={sidebar} navbar={navbar}>
