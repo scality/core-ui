@@ -27,10 +27,10 @@ const TooltipOverLayContainer = styled.div`
   position: absolute;
   background-color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.backgroundColor) ||
-    getTheme(props).primaryDark1};
+    getTheme(props).primaryDark2};
   color: ${props =>
     (props && props.overlaystyle && props.overlaystyle.color) ||
-    getTheme(props).text}
+    getTheme(props).textPrimary}
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
   font-size: ${props =>
