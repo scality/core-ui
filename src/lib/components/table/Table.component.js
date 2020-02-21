@@ -61,7 +61,7 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
-    background-color: ${getThemePropSelector("background")};
+    background-color: ${getThemePropSelector("primary")};
     border-bottom: 2px solid ${getThemePropSelector("borderLight")};
     color: ${getThemePropSelector("textPrimary")};
 
