@@ -33,15 +33,27 @@ export const grayLighter = "#D8DCDE";
 export const grayLightest = "#E9EBED";
 
 export const brand = {
-  base: "#6A7B92",
+  base: "#607080",
+  primary: "#FAF9FB",
+  primaryDark1: "#F7F6F9",
+  primaryDark2: "#EDEAF0",
   secondary: "#037AFF",
+  secondaryDark1: "#1C3D59",
+  secondaryDark2: "#1C2E3F",
   success: jade,
   healthy: "#25AC56",
   healthyLight: "#75FE63",
   info: "#027AFF",
   warning: "#FEFA51",
   danger: warmRed,
-  critical: "#BE2543"
+  critical: "#BE2543",
+  background: white,
+  backgroundBluer: "#ECF4FF",
+  textPrimary: "#313B44",
+  textSecondary: "#8593A0",
+  textTertiary: "#6C8398",
+  borderLight: "#A5A5A5",
+  border: "#A5A5A5"
 };
 
 //navbar
