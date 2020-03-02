@@ -189,6 +189,12 @@ Object.defineProperty(exports, "AreaChart", {
     return _AreaChart["default"];
   }
 });
+Object.defineProperty(exports, "CollapsiblePanel", {
+  enumerable: true,
+  get: function get() {
+    return _CollapsiblePanelComponent["default"];
+  }
+});
 
 require("@fortawesome/fontawesome-free/css/all.css");
 
@@ -253,5 +259,7 @@ var _BarChart = _interopRequireDefault(require("./components/barchart/BarChart.c
 var _CircularProgressBar = _interopRequireDefault(require("./components/circularprogressbar/CircularProgressBar.component"));
 
 var _AreaChart = _interopRequireDefault(require("./components/areachart/AreaChart.component"));
+
+var _CollapsiblePanelComponent = _interopRequireDefault(require("./components/collapsiblepanel/CollapsiblePanel.component.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
