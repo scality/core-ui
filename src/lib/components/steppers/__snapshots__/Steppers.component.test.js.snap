@@ -2,10 +2,10 @@
 
 exports[`Storyshots Steppers Default 1`] = `
 <div
-  className="sc-fjdhpX kmDTsr"
+  className="sc-fjdhpX fYqDPr"
 >
   <h3
-    className="sc-jzJRlG fWFhAz"
+    className="sc-jzJRlG iBYloN"
   >
     Default Steppers 
   </h3>
@@ -70,7 +70,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI SOvlX sc-button"
+            className="sc-iwsKbI RWkvp sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -174,7 +174,7 @@ exports[`Storyshots Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jzJRlG fWFhAz"
+    className="sc-jzJRlG iBYloN"
   >
     Steppers with loading
   </h3>
@@ -220,7 +220,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-bZQynM bXhRIV"
         >
           <div
-            className="sc-bdVaJa oUjDc sc-loader"
+            className="sc-bdVaJa jGCmKI sc-loader"
             color="#87929D"
             size="base"
           >
@@ -360,7 +360,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI SOvlX sc-button"
+            className="sc-iwsKbI RWkvp sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -464,7 +464,7 @@ exports[`Storyshots Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-jzJRlG fWFhAz"
+    className="sc-jzJRlG iBYloN"
   >
     Steppers with error
   </h3>
@@ -558,7 +558,7 @@ exports[`Storyshots Steppers Default 1`] = `
           className="sc-htoDjs bKhna"
         >
           <button
-            className="sc-iwsKbI SOvlX sc-button"
+            className="sc-iwsKbI RWkvp sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

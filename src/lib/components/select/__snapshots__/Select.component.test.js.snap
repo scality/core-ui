@@ -2,10 +2,10 @@
 
 exports[`Storyshots Select Default 1`] = `
 <div
-  className="sc-bwzfXH dNCSlp"
+  className="sc-bwzfXH hilSGa"
 >
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Default
   </h3>
@@ -17,7 +17,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa iRfhWL sc-select-container"
+      className="sc-bdVaJa iBpCMH sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -130,7 +130,7 @@ exports[`Storyshots Select Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Default with custom formatOptionLabel
   </h3>
@@ -142,7 +142,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa iRfhWL sc-select-container"
+      className="sc-bdVaJa iBpCMH sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -265,7 +265,7 @@ exports[`Storyshots Select Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Multi Select
   </h3>
@@ -277,7 +277,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa iRfhWL sc-select-container"
+      className="sc-bdVaJa iBpCMH sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"

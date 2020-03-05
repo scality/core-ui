@@ -2,10 +2,10 @@
 
 exports[`Storyshots Breadcrumb Default 1`] = `
 <div
-  className="sc-bxivhb iqIXLC"
+  className="sc-bxivhb eTQnSH"
 >
   <h3
-    className="sc-ifAKCX eXRWbD"
+    className="sc-ifAKCX gDoZKl"
   >
     Default Breadcrumb 
   </h3>
@@ -13,7 +13,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
     className="sc-bdVaJa uRaVh sc-breadcrumb"
   >
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <a
         href="home"
@@ -29,7 +29,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <label
         href="clusters"
@@ -45,7 +45,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <a
         href="cluster"
@@ -61,7 +61,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <label
         href="nodes"
@@ -77,7 +77,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <a
         href="node"
@@ -94,7 +94,7 @@ exports[`Storyshots Breadcrumb Default 1`] = `
       />
     </li>
     <li
-      className="sc-bwzfXH fqKPAk sc-breadcrumb_item"
+      className="sc-bwzfXH cClySW sc-breadcrumb_item"
     >
       <a
         href="volumes"

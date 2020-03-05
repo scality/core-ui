@@ -2,15 +2,15 @@
 
 exports[`Storyshots CollapsiblePanel Default 1`] = `
 <div
-  className="sc-bdVaJa igQpFe storybook-collapsiblepanel"
+  className="sc-bdVaJa iCguif storybook-collapsiblepanel"
 >
   <h3
-    className="sc-bwzfXH jivAqU"
+    className="sc-bwzfXH fAaNVH"
   >
     Collapsed
   </h3>
   <div
-    className="sc-gzVnrw buvgTs sc-collapsiblepanel"
+    className="sc-gzVnrw kekhgO sc-collapsiblepanel"
   >
     <div
       className="sc-htoDjs kLoPxj sc-collapsiblepanel-header"
@@ -52,12 +52,12 @@ exports[`Storyshots CollapsiblePanel Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-bwzfXH jivAqU"
+    className="sc-bwzfXH fAaNVH"
   >
     Expanded
   </h3>
   <div
-    className="sc-gzVnrw buvgTs sc-collapsiblepanel"
+    className="sc-gzVnrw kekhgO sc-collapsiblepanel"
   >
     <div
       className="sc-htoDjs kLoPxj sc-collapsiblepanel-header"
@@ -98,7 +98,7 @@ exports[`Storyshots CollapsiblePanel Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-dnqmqq gbLoPM sc-collapsiblepanel-content"
+      className="sc-dnqmqq efoCkH sc-collapsiblepanel-content"
     >
       orange
     </div>

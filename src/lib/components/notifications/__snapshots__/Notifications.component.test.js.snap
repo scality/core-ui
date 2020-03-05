@@ -2,13 +2,13 @@
 
 exports[`Storyshots Notifications Default 1`] = `
 <div
-  className="sc-EHOje jlgJjP"
+  className="sc-EHOje dxVLzp"
 >
   <div
     className="sc-ifAKCX foTAQB sc-notifications"
   >
     <div
-      className="sc-bdVaJa fuAYVT sc-notification"
+      className="sc-bdVaJa eDQbOV sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}

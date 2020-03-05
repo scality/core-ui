@@ -2,16 +2,16 @@
 
 exports[`Storyshots Checkbox Default 1`] = `
 <div
-  className="sc-htpNat izDZFJ"
+  className="sc-htpNat iharJH"
 >
   <h3
-    className="sc-bxivhb SCoYE"
+    className="sc-bxivhb fcltBK"
   >
     Checkbox checked
   </h3>
   <label
     checked={true}
-    className="sc-bwzfXH fPdYyX sc-checkbox"
+    className="sc-bwzfXH bLyocb sc-checkbox"
   >
     <input
       checked={true}
@@ -23,19 +23,19 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bdVaJa cUNVcN text"
+      className="sc-bdVaJa gQXApI text"
     >
       interested?
     </span>
   </label>
   <h3
-    className="sc-bxivhb SCoYE"
+    className="sc-bxivhb fcltBK"
   >
     Checkbox unchecked
   </h3>
   <label
     checked={false}
-    className="sc-bwzfXH gJFoMU sc-checkbox"
+    className="sc-bwzfXH fPlAHx sc-checkbox"
   >
     <input
       checked={false}
@@ -46,19 +46,19 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bdVaJa cUNVcN text"
+      className="sc-bdVaJa gQXApI text"
     >
       interested?
     </span>
   </label>
   <h3
-    className="sc-bxivhb SCoYE"
+    className="sc-bxivhb fcltBK"
   >
     Checkbox disabled
   </h3>
   <label
     checked={false}
-    className="sc-bwzfXH gpjZdy sc-checkbox"
+    className="sc-bwzfXH jOEcYl sc-checkbox"
     disabled={true}
   >
     <input
@@ -71,7 +71,7 @@ exports[`Storyshots Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bdVaJa cUNVcN text"
+      className="sc-bdVaJa gQXApI text"
     >
       interested?
     </span>

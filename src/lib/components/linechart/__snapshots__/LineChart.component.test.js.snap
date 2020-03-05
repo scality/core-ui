@@ -2,10 +2,10 @@
 
 exports[`Storyshots LineChart Default 1`] = `
 <div
-  className="sc-bwzfXH dNCSlp"
+  className="sc-bwzfXH hilSGa"
 >
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Vege-Lite line chart demo
   </h3>
@@ -14,7 +14,7 @@ exports[`Storyshots LineChart Default 1`] = `
     id="vis"
   />
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Vege-Lite line chart without axis
   </h3>
@@ -23,7 +23,7 @@ exports[`Storyshots LineChart Default 1`] = `
     id="vis2"
   />
   <h3
-    className="sc-htpNat iELaDV"
+    className="sc-htpNat loHzkE"
   >
     Vege-Lite forecast chart
   </h3>

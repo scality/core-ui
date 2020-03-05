@@ -2,15 +2,15 @@
 
 exports[`Storyshots CircularProgressBar Default 1`] = `
 <div
-  className="sc-ifAKCX cgGCUq"
+  className="sc-ifAKCX krxbjr"
 >
   <h3
-    className="sc-EHOje eylSLQ"
+    className="sc-EHOje jFyawi"
   >
     With Default Color
   </h3>
   <div
-    className="sc-bdVaJa hXeNgV sc-circularprogressbar"
+    className="sc-bdVaJa dSLzxR sc-circularprogressbar"
   >
     <span
       className="sc-bwzfXH eKTvSU"
@@ -22,7 +22,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
       width={150}
     >
       <circle
-        className="sc-bxivhb jqYIkz"
+        className="sc-bxivhb goMCKs"
         cx={75}
         cy={75}
         r={70}
@@ -37,7 +37,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
         transform="rotate(-90 75  75)"
       />
       <text
-        className="sc-gzVnrw bSTbpI sc-circularprogressbar-text"
+        className="sc-gzVnrw gSWrpW sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"
@@ -48,12 +48,12 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
     </svg>
   </div>
   <h3
-    className="sc-EHOje eylSLQ"
+    className="sc-EHOje jFyawi"
   >
     With Custom Color
   </h3>
   <div
-    className="sc-bdVaJa hXeNgV sc-circularprogressbar"
+    className="sc-bdVaJa dSLzxR sc-circularprogressbar"
   >
     <span
       className="sc-bwzfXH eKTvSU"
@@ -65,7 +65,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
       width={110}
     >
       <circle
-        className="sc-bxivhb jqYIkz"
+        className="sc-bxivhb goMCKs"
         cx={55}
         cy={55}
         r={50}
@@ -81,7 +81,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
         transform="rotate(-90 55  55)"
       />
       <text
-        className="sc-gzVnrw bSTbpI sc-circularprogressbar-text"
+        className="sc-gzVnrw gSWrpW sc-circularprogressbar-text"
         dominantBaseline="middle"
         style={
           Object {
@@ -96,7 +96,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
         4.9 PB
       </text>
       <text
-        className="sc-gzVnrw bSTbpI sc-circularprogressbar-text"
+        className="sc-gzVnrw gSWrpW sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"

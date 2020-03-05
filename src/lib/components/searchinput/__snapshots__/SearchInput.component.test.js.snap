@@ -2,10 +2,10 @@
 
 exports[`Storyshots SearchInput Default 1`] = `
 <div
-  className="sc-gqjmRU feTVof"
+  className="sc-gqjmRU kDphYc"
 >
   <h3
-    className="sc-VigVT ekfDkL"
+    className="sc-VigVT wnCgq"
   >
     Default
   </h3>
@@ -20,7 +20,7 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs gpFhwS sc-searchinput"
     >
       <div
-        className="sc-ifAKCX bMHsPD sc-input"
+        className="sc-ifAKCX dUAmzj sc-input"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -39,7 +39,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-dnqmqq sc-iwsKbI fmCZWf"
+        className="sc-dnqmqq sc-iwsKbI fvmrkM"
         disabled={false}
         onClick={[Function]}
       >
@@ -48,7 +48,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-dnqmqq sc-gZMcBi fNEfgt"
+        className="sc-dnqmqq sc-gZMcBi eQMLkH"
         onClick={[Function]}
       >
         <i
@@ -58,7 +58,7 @@ exports[`Storyshots SearchInput Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-VigVT ekfDkL"
+    className="sc-VigVT wnCgq"
   >
     Search Input filled
   </h3>
@@ -74,7 +74,7 @@ exports[`Storyshots SearchInput Default 1`] = `
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-ifAKCX bMHsPD sc-input"
+        className="sc-ifAKCX dUAmzj sc-input"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -92,7 +92,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-dnqmqq sc-iwsKbI fmCZWf"
+        className="sc-dnqmqq sc-iwsKbI fvmrkM"
         disabled={false}
         onClick={[Function]}
       >
@@ -101,7 +101,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-dnqmqq sc-gZMcBi fNEfgt"
+        className="sc-dnqmqq sc-gZMcBi eQMLkH"
         onClick={[Function]}
       >
         <i
@@ -111,7 +111,7 @@ exports[`Storyshots SearchInput Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-VigVT ekfDkL"
+    className="sc-VigVT wnCgq"
   >
     Disable the default toggle
   </h3>
@@ -126,7 +126,7 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs cAmcWy sc-searchinput"
     >
       <div
-        className="sc-ifAKCX bMHsPD sc-input"
+        className="sc-ifAKCX dUAmzj sc-input"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -145,7 +145,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-dnqmqq sc-iwsKbI juHEXY"
+        className="sc-dnqmqq sc-iwsKbI eyjuBK"
         disabled={true}
         onClick={[Function]}
       >
@@ -154,7 +154,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-dnqmqq sc-gZMcBi fNEfgt"
+        className="sc-dnqmqq sc-gZMcBi eQMLkH"
         onClick={[Function]}
       >
         <i
@@ -164,7 +164,7 @@ exports[`Storyshots SearchInput Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-VigVT ekfDkL"
+    className="sc-VigVT wnCgq"
   >
     Disable the default toggle undefined onReset action
   </h3>
@@ -179,7 +179,7 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs cAmcWy sc-searchinput"
     >
       <div
-        className="sc-ifAKCX bMHsPD sc-input"
+        className="sc-ifAKCX dUAmzj sc-input"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -198,7 +198,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-dnqmqq sc-iwsKbI juHEXY"
+        className="sc-dnqmqq sc-iwsKbI eyjuBK"
         disabled={true}
         onClick={[Function]}
       >
@@ -207,7 +207,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-dnqmqq sc-gZMcBi fNEfgt"
+        className="sc-dnqmqq sc-gZMcBi eQMLkH"
         onClick={[Function]}
       >
         <i

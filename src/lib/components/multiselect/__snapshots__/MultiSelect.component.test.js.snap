@@ -2,10 +2,10 @@
 
 exports[`Storyshots MultiSelect Default 1`] = `
 <div
-  className="sc-kgoBCf dxigDC"
+  className="sc-kgoBCf cLQuys"
 >
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List
   </h3>
@@ -24,7 +24,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI eScjtk sc-select-container"
+          className="sc-iwsKbI iNhfYt sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -131,7 +131,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-EHOje gKKueq sc-button"
+          className="sc-EHOje cmdjUq sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -169,7 +169,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH fPdYyX sc-checkbox"
+            className="sc-bwzfXH bLyocb sc-checkbox"
           >
             <input
               checked={true}
@@ -181,7 +181,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-EHOje clfGbL sc-button"
+            className="sc-EHOje iRMcxR sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -268,7 +268,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH gJFoMU sc-checkbox"
+            className="sc-bwzfXH fPlAHx sc-checkbox"
           >
             <input
               checked={false}
@@ -280,7 +280,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-EHOje clfGbL sc-button"
+            className="sc-EHOje iRMcxR sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -362,7 +362,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List without search
   </h3>
@@ -385,7 +385,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH fPdYyX sc-checkbox"
+            className="sc-bwzfXH bLyocb sc-checkbox"
           >
             <input
               checked={true}
@@ -397,7 +397,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-EHOje clfGbL sc-button"
+            className="sc-EHOje iRMcxR sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -484,7 +484,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH gJFoMU sc-checkbox"
+            className="sc-bwzfXH fPlAHx sc-checkbox"
           >
             <input
               checked={false}
@@ -496,7 +496,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-EHOje clfGbL sc-button"
+            className="sc-EHOje iRMcxR sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -578,7 +578,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List without Favourite
   </h3>
@@ -597,7 +597,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI eScjtk sc-select-container"
+          className="sc-iwsKbI iNhfYt sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -704,7 +704,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-EHOje gKKueq sc-button"
+          className="sc-EHOje cmdjUq sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -742,7 +742,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH fPdYyX sc-checkbox"
+            className="sc-bwzfXH bLyocb sc-checkbox"
           >
             <input
               checked={true}
@@ -811,7 +811,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH gJFoMU sc-checkbox"
+            className="sc-bwzfXH fPlAHx sc-checkbox"
           >
             <input
               checked={false}
@@ -875,7 +875,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List without Favourite and Selectbox
   </h3>
@@ -894,7 +894,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI eScjtk sc-select-container"
+          className="sc-iwsKbI iNhfYt sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1001,7 +1001,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-EHOje gKKueq sc-button"
+          className="sc-EHOje cmdjUq sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1144,7 +1144,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List without Remove Button, Favourite and Selectbox
   </h3>
@@ -1163,7 +1163,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI eScjtk sc-select-container"
+          className="sc-iwsKbI iNhfYt sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1270,7 +1270,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-EHOje gKKueq sc-button"
+          className="sc-EHOje cmdjUq sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1351,7 +1351,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-kGXeez kBROQR"
+    className="sc-kGXeez gkhxgb"
   >
     MultiSelect List without Title, Remove Button, Favourite and Selectbox
   </h3>
@@ -1366,7 +1366,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI eScjtk sc-select-container"
+          className="sc-iwsKbI iNhfYt sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1473,7 +1473,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-EHOje gKKueq sc-button"
+          className="sc-EHOje cmdjUq sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"

@@ -2,10 +2,10 @@
 
 exports[`Storyshots CloudProgressBar Default 1`] = `
 <div
-  className="sc-htpNat izDZFJ"
+  className="sc-htpNat iharJH"
 >
   <h3
-    className="sc-bxivhb SCoYE"
+    className="sc-bxivhb fcltBK"
   >
     CloudProgressBar
   </h3>
@@ -69,12 +69,12 @@ exports[`Storyshots CloudProgressBar Default 1`] = `
         }
       >
         <h3
-          className="sc-bxivhb SCoYE"
+          className="sc-bxivhb fcltBK"
         >
           30%
         </h3>
         <span
-          className="sc-ifAKCX eXRWbD"
+          className="sc-ifAKCX gDoZKl"
         >
           of the quotas has been reached.
         </span>
@@ -141,12 +141,12 @@ exports[`Storyshots CloudProgressBar Default 1`] = `
         }
       >
         <h3
-          className="sc-bxivhb SCoYE"
+          className="sc-bxivhb fcltBK"
         >
           50%
         </h3>
         <span
-          className="sc-ifAKCX eXRWbD"
+          className="sc-ifAKCX gDoZKl"
         >
           of the quotas has been reached
         </span>
@@ -213,12 +213,12 @@ exports[`Storyshots CloudProgressBar Default 1`] = `
         }
       >
         <h3
-          className="sc-bxivhb SCoYE"
+          className="sc-bxivhb fcltBK"
         >
           80%
         </h3>
         <span
-          className="sc-ifAKCX eXRWbD"
+          className="sc-ifAKCX gDoZKl"
         >
           of the quotas has been reached
         </span>
@@ -285,12 +285,12 @@ exports[`Storyshots CloudProgressBar Default 1`] = `
         }
       >
         <h3
-          className="sc-bxivhb SCoYE"
+          className="sc-bxivhb fcltBK"
         >
           70%
         </h3>
         <span
-          className="sc-ifAKCX eXRWbD"
+          className="sc-ifAKCX gDoZKl"
         >
           of the quotas has been reached
         </span>
