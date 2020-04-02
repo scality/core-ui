@@ -2,7 +2,7 @@
 import React from "react";
 import type { Node } from "react";
 import styled, { css } from "styled-components";
-import { lighten } from "polished";
+import { darken, lighten } from "polished";
 import { getTheme } from "../../utils";
 import * as defaultTheme from "../../style/theme";
 import Loader from "../loader/Loader.component";
@@ -151,15 +151,15 @@ ${props => {
 
 ${props => {
   const brand = getTheme(props);
-  const brandLighter = lighten(0.2, brand[props.variant]).toString();
+  const brandDarker = darken(0.2, brand[props.variant]).toString();
 
   return css`
     ${props.disabled
       ? `
           box-shadow: none;
           pointer-events: none;
-          background-color: ${brandLighter};
-          border-color: ${brandLighter};
+          background-color: ${brandDarker};
+          border-color: ${brandDarker};
           color: ${defaultTheme.white};
         `
       : null}

@@ -199,8 +199,8 @@ var ButtonStyled = _styledComponents["default"].button(_templateObject(), defaul
   return (0, _styledComponents.css)(_templateObject8(), props.isLoading ? "\n          .sc-button-text {\n            visibility: hidden;\n          }\n          .sc-loader {\n            svg {\n              fill: ".concat(defaultTheme.white, ";\n            }\n            > span {\n              position: absolute;\n              right: 0;\n              left: 0;\n            }\n          }\n        ") : null);
 }, function (props) {
   var brand = (0, _utils.getTheme)(props);
-  var brandLighter = (0, _polished.lighten)(0.2, brand[props.variant]).toString();
-  return (0, _styledComponents.css)(_templateObject9(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          background-color: ".concat(brandLighter, ";\n          border-color: ").concat(brandLighter, ";\n          color: ").concat(defaultTheme.white, ";\n        ") : null);
+  var brandDarker = (0, _polished.darken)(0.2, brand[props.variant]).toString();
+  return (0, _styledComponents.css)(_templateObject9(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          background-color: ".concat(brandDarker, ";\n          border-color: ").concat(brandDarker, ";\n          color: ").concat(defaultTheme.white, ";\n        ") : null);
 }, function (props) {
   var brand = (0, _utils.getTheme)(props);
   var brandLighter = (0, _polished.lighten)(0.2, brand[props.variant]).toString();
