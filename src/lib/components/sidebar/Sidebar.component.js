@@ -3,33 +3,34 @@ import React from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import { getTheme, getThemePropSelector, getFontFace } from "../../utils";
 
 type Item = {
   label: string,
-  onClick: any => void,
+  onClick: (any) => void,
   active?: boolean,
-  icon?: Node
+  icon?: Node,
 };
 type Items = Array<Item>;
 export type Props = {
   expanded?: boolean,
-  actions: Items
+  actions: Items,
 };
 
 const SidebarContainer = styled.div`
-  ${props => {
+  ${(props) => {
     const { primary, textPrimary } = getTheme(props);
     return css`
       background-color: ${primary};
       color: ${textPrimary};
+      font-family: ${getFontFace(props)};
       .fas {
         color: ${textPrimary};
       }
     `;
   }}
 
-  ${props => {
+  ${(props) => {
     if (props.expanded) {
       return css`
         width: auto;
@@ -53,7 +54,7 @@ const SidebarItem = styled.div`
     font-size: ${defaultTheme.fontSize.large};
   }
 
-  ${props => {
+  ${(props) => {
     const { textPrimary, backgroundBluer } = getTheme(props);
     return props.active
       ? css`

@@ -53,13 +53,14 @@ export const brand = {
   textSecondary: "#8593A0",
   textTertiary: "#6C8398",
   borderLight: "#A5A5A5",
-  border: "#A5A5A5"
+  border: "#A5A5A5",
 };
 
-//navbar
+// navbar
 export const navbarHeight = "50px";
 export const navbarItemWidth = "60px";
 
+// fonts
 export const fontSize = {
   smaller: "10px",
   small: "12px",
@@ -67,22 +68,22 @@ export const fontSize = {
   large: "16px",
   larger: "20px",
   huge: "22px",
-  massive: "24px"
+  massive: "24px",
 };
-
 export const fontWeight = {
   light: "400",
   base: "400",
   semibold: "600",
-  bold: "700"
+  bold: "700",
 };
+export const fontFace = "Lato";
 
 export const padding = {
   smaller: "5px",
   small: "10px",
   base: "15px",
   large: "20px",
-  larger: "30px"
+  larger: "30px",
 };
 
 // Svg size
@@ -93,7 +94,7 @@ export const svgSize = {
   large: "18px",
   larger: "22px",
   huge: "30px",
-  massive: "40px"
+  massive: "40px",
 };
 export const zIndex = {
   tooltip: 9990,
@@ -102,5 +103,5 @@ export const zIndex = {
   overlay: 8000,
   dropdown: 7000,
   nav: 500,
-  base: 1
+  base: 1,
 };

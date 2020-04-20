@@ -2,14 +2,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import { getTheme, getThemePropSelector, getFontFace } from "../../utils";
 
 type Props = {
   label?: string,
   value?: string,
   checked: boolean,
   disabled?: boolean,
-  onChange: () => void
+  onChange: () => void,
 };
 
 function Checkbox({
@@ -49,12 +49,17 @@ const StyledCheckboxLabel = styled.span`
   padding-left: ${defaultTheme.padding.base};
   vertical-align: middle;
   color: ${getThemePropSelector("textPrimary")};
+  ${(props) => {
+    return css`
+      font-family: ${getFontFace(props)};
+    `;
+  }}
 `;
 
 const StyledCheckbox = styled.label`
   position: relative;
   display: inline-block;
-  ${props => {
+  ${(props) => {
     return props.disabled
       ? css`
           cursor: default;
@@ -65,7 +70,7 @@ const StyledCheckbox = styled.label`
         `;
   }}
 
-  ${props => {
+  ${(props) => {
     const { primary, border, secondary } = getTheme(props);
     const iconCheckedColor =
       props.checked || props.disabled ? secondary : "transparent";

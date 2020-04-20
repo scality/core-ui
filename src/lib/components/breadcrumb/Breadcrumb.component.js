@@ -8,7 +8,7 @@ import * as defaultTheme from "../../style/theme";
 import { getTheme } from "../../utils";
 
 type Props = {
-  paths: Array<Node>
+  paths: Array<Node>,
 };
 
 const BreadcrumbContainer = styled.ol`
@@ -17,6 +17,7 @@ const BreadcrumbContainer = styled.ol`
   padding: ${defaultTheme.padding.base};
   margin: 0;
 `;
+
 const BreadcrumbItem = styled.li`
   padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.base};
   box-sizing: border-box;
@@ -24,7 +25,7 @@ const BreadcrumbItem = styled.li`
   font-size: ${defaultTheme.fontSize.larger};
   ${ellipsis("250px")}
 
-  ${props => {
+  ${(props) => {
     const { textPrimary, secondary } = getTheme(props);
     if (props.active) {
       return css`
@@ -52,6 +53,7 @@ const BreadcrumbItem = styled.li`
     `;
   }}
 `;
+
 const BreadcrumbSeparator = styled.li`
   padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.base};
   color: ${defaultTheme.grayLight};
@@ -60,7 +62,7 @@ const BreadcrumbSeparator = styled.li`
   font-size: ${defaultTheme.fontSize.small};
 `;
 
-const withBreadcrumbSeparator = lastIndex => (acc, item, index) => {
+const withBreadcrumbSeparator = (lastIndex) => (acc, item, index) => {
   const notLast = index < lastIndex;
   return notLast
     ? [
@@ -71,7 +73,7 @@ const withBreadcrumbSeparator = lastIndex => (acc, item, index) => {
           className="sc-breadcrumb_separator"
         >
           <i className="fas fa-chevron-right" />
-        </BreadcrumbSeparator>
+        </BreadcrumbSeparator>,
       ]
     : [...acc, item];
 };
