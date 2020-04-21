@@ -76,7 +76,9 @@ export const fontWeight = {
   semibold: "600",
   bold: "700",
 };
-export const fontFace = "Lato";
+export const fontFace = `"Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif`;
 
 export const padding = {
   smaller: "5px",
