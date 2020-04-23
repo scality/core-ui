@@ -236,53 +236,26 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     className="sc-hMqMXs dAWvsW"
   >
     <div
-      className="sc-kGXeez eAuGlJ sc-sidebar"
+      className="sc-kGXeez ecBbEw sc-sidebar"
     >
       <div
         className="sc-kpOJdX iYjHiU sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
-      >
-        <div
-          className="sc-jKJlTe drUbss"
-        >
-          <i
-            className="fas fa-tachometer-alt"
-          />
-        </div>
-        <div
-          className="sc-ckVGcZ hmtLZx"
-        />
-      </div>
+      />
       <div
         className="sc-kpOJdX jylrLq sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
-      >
-        <div
-          className="sc-jKJlTe drUbss"
-        >
-          <i
-            className="fas fa-server"
-          />
-        </div>
-      </div>
+      />
       <div
         className="sc-kpOJdX jylrLq sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
-      >
-        <div
-          className="sc-jKJlTe drUbss"
-        >
-          <i
-            className="fas fa-hdd"
-          />
-        </div>
-      </div>
+      />
     </div>
     <div
       className="sc-kEYyzF gEYbDe main"

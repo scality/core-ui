@@ -13,50 +13,23 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa bhRRSg sc-sidebar"
+      className="sc-bdVaJa bMwKCr sc-sidebar"
     >
       <div
         className="sc-bwzfXH hHKJvX sc-sidebar-item"
         onClick={[Function]}
         title="Dashboard"
-      >
-        <div
-          className="sc-ifAKCX irnTxV"
-        >
-          <i
-            className="fas fa-tachometer-alt"
-          />
-        </div>
-        <div
-          className="sc-bxivhb izdkiU"
-        />
-      </div>
+      />
       <div
         className="sc-bwzfXH XOvKN sc-sidebar-item"
         onClick={[Function]}
         title="Servers"
-      >
-        <div
-          className="sc-ifAKCX irnTxV"
-        >
-          <i
-            className="fas fa-server"
-          />
-        </div>
-      </div>
+      />
       <div
         className="sc-bwzfXH XOvKN sc-sidebar-item"
         onClick={[Function]}
         title="Disks"
-      >
-        <div
-          className="sc-ifAKCX irnTxV"
-        >
-          <i
-            className="fas fa-hdd"
-          />
-        </div>
-      </div>
+      />
     </div>
   </div>
   <h3>
