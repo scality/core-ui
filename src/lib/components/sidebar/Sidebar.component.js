@@ -7,18 +7,18 @@ import { getTheme, getThemePropSelector } from "../../utils";
 
 type Item = {
   label: string,
-  onClick: any => void,
+  onClick: (any) => void,
   active?: boolean,
-  icon?: Node
+  icon?: Node,
 };
 type Items = Array<Item>;
 export type Props = {
   expanded?: boolean,
-  actions: Items
+  actions: Items,
 };
 
 const SidebarContainer = styled.div`
-  ${props => {
+  ${(props) => {
     const { primary, textPrimary } = getTheme(props);
     return css`
       background-color: ${primary};
@@ -29,14 +29,15 @@ const SidebarContainer = styled.div`
     `;
   }}
 
-  ${props => {
+  ${(props) => {
     if (props.expanded) {
       return css`
         width: auto;
       `;
     }
     return css`
-      width: ${defaultTheme.navbarItemWidth};
+      /* width: ${defaultTheme.navbarItemWidth}; */
+      width: 0;
     `;
   }}
 `;
@@ -53,8 +54,9 @@ const SidebarItem = styled.div`
     font-size: ${defaultTheme.fontSize.large};
   }
 
-  ${props => {
+  ${(props) => {
     const { textPrimary, backgroundBluer } = getTheme(props);
+
     return props.active
       ? css`
           background-color: ${backgroundBluer};
@@ -108,9 +110,9 @@ function Sidebar({ expanded, actions, ...rest }: Props) {
               expanded={expanded}
               {...actionRest}
             >
-              {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
+              {!!icon && expanded && <MenuItemIcon>{icon}</MenuItemIcon>}
               {expanded && <MenuItemText>{label}</MenuItemText>}
-              {active && <MenuItemSelected />}
+              {active && expanded && <MenuItemSelected />}
             </SidebarItem>
           );
         }
