@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
@@ -51,6 +51,36 @@ storiesOf("LateralNavbarLayout", module)
     };
     return (
       <LateralNavbarLayout sidebar={sidebar}>
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
+  })
+  .add("Sidebar expand when hovering to the left", () => {
+    const [isExpanded, setIsExpanded] = useState(true);
+    const [isOpening, setIsOpening] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
+
+    const sidebar = {
+      expanded: isExpanded,
+      actions: sideBarActions,
+      isClosing: isClosing,
+      isOpening: isOpening,
+    };
+    const isMouseHoverLeft = (e) => {
+      const x = e.clientX;
+      // the x scope should define base on the margin-left in the real case
+      if (x <= 10) {
+        setIsOpening(true);
+        setIsClosing(false);
+        setIsExpanded(true);
+      } else if (x > 156) {
+        setIsClosing(true);
+        setIsOpening(false);
+        setIsExpanded(false);
+      }
+    };
+    return (
+      <LateralNavbarLayout sidebar={sidebar} onMouseMove={isMouseHoverLeft}>
         <Loader size="massive" />
       </LateralNavbarLayout>
     );
