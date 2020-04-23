@@ -31,3 +31,4 @@ import "./barchart";
 import "./circularprogressbar";
 import "./areachart";
 import "./colorPalette";
+import "./lateralnavbarlayout";
