@@ -15,6 +15,8 @@ type Items = Array<Item>;
 export type Props = {
   expanded?: boolean,
   actions: Items,
+  isClosing?: boolean,
+  isOpening?: boolean,
 };
 
 const SidebarContainer = styled.div`
@@ -30,15 +32,77 @@ const SidebarContainer = styled.div`
   }}
 
   ${(props) => {
+    if (props.isClosing) {
+      return css`
+        @-webkit-keyframes closingSidebar {
+          0% {
+            width: auto;
+          }
+          100% {
+            width: 0;
+          }
+        }
+        @-moz-keyframes closingSidebar {
+          0% {
+            width: auto;
+          }
+          100% {
+            width: 0;
+          }
+        }
+        @keyframes closingSidebar {
+          0% {
+            width: auto;
+          }
+          100% {
+            width: 0;
+          }
+        }
+        -moz-animation: closingSidebar 0.4s;
+        animation: closingSidebar 0.4s;
+        width: 0;
+      `;
+    } else if (props.isOpening) {
+      return css`
+        @-webkit-keyframes openingSidebar {
+          0% {
+            width: 0;
+          }
+          100% {
+            width: auto;
+          }
+        }
+        @-moz-keyframes openingSidebar {
+          0% {
+            width: 0;
+          }
+          100% {
+            width: auto;
+          }
+        }
+        @keyframes openingSidebar {
+          0% {
+            width: 0;
+          }
+          100% {
+            width: auto;
+          }
+        }
+        -moz-animation: openingSidebar 0.4s;
+        animation: openingSidebar 0.4s;
+        width: auto;
+      `;
+    }
     if (props.expanded) {
       return css`
         width: auto;
       `;
     }
-    return css`
-      /* width: ${defaultTheme.navbarItemWidth}; */
-      width: 0;
-    `;
+    if (!props.expanded) {
+      return css`
+        width: 0;
+      `;
+    }
   }}
 `;
 
@@ -95,9 +159,21 @@ const MenuItemIcon = styled.div`
   align-items: end;
 `;
 
-function Sidebar({ expanded, actions, ...rest }: Props) {
+function Sidebar({
+  expanded,
+  actions,
+  isClosing = false,
+  isOpening = false,
+  ...rest
+}: Props) {
   return (
-    <SidebarContainer expanded={expanded} className="sc-sidebar" {...rest}>
+    <SidebarContainer
+      expanded={expanded}
+      className="sc-sidebar"
+      isClosing={isClosing}
+      isOpening={isOpening}
+      {...rest}
+    >
       {actions.map(
         ({ active, label, onClick, icon = null, ...actionRest }, index) => {
           return (
