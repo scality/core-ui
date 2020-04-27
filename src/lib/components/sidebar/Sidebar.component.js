@@ -36,7 +36,7 @@ const SidebarContainer = styled.div`
       return css`
         @-webkit-keyframes closingSidebar {
           0% {
-            width: auto;
+           ops;
           }
           100% {
             width: 0;
@@ -61,6 +61,7 @@ const SidebarContainer = styled.div`
         -moz-animation: closingSidebar 0.4s;
         animation: closingSidebar 0.4s;
         width: 0;
+        z-index: 100;
       `;
     } else if (props.isOpening) {
       return css`
@@ -91,6 +92,7 @@ const SidebarContainer = styled.div`
         -moz-animation: openingSidebar 0.4s;
         animation: openingSidebar 0.4s;
         width: auto;
+        z-index: 100;
       `;
     }
     if (props.expanded) {
