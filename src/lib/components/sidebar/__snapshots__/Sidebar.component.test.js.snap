@@ -13,23 +13,47 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa bMwKCr sc-sidebar"
+      className="sc-htoDjs gOrAcV sc-sidebar"
     >
       <div
-        className="sc-bwzfXH hHKJvX sc-sidebar-item"
+        className="sc-dnqmqq eCZUVx sc-sidebar-item"
         onClick={[Function]}
         title="Dashboard"
-      />
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-tachometer-alt"
+          />
+        </div>
+      </div>
       <div
-        className="sc-bwzfXH XOvKN sc-sidebar-item"
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
         onClick={[Function]}
         title="Servers"
-      />
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-server"
+          />
+        </div>
+      </div>
       <div
-        className="sc-bwzfXH XOvKN sc-sidebar-item"
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
         onClick={[Function]}
         title="Disks"
-      />
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-hdd"
+          />
+        </div>
+      </div>
     </div>
   </div>
   <h3>
@@ -43,61 +67,167 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-bdVaJa fdGEoi sc-sidebar"
+      className="sc-htoDjs kEUMyu sc-sidebar"
     >
       <div
-        className="sc-bwzfXH hHKJvX sc-sidebar-item"
+        className="sc-dnqmqq eCZUVx sc-sidebar-item"
         onClick={[Function]}
         title="Dashboard"
       >
         <div
-          className="sc-ifAKCX irnTxV"
+          className="sc-gqjmRU coMoOk"
         >
           <i
             className="fas fa-tachometer-alt"
           />
         </div>
         <div
-          className="sc-htpNat jyYvCB"
+          className="sc-iwsKbI kIlsEa"
         >
           Dashboard
         </div>
         <div
-          className="sc-bxivhb izdkiU"
+          className="sc-gZMcBi dZkYTy"
         />
       </div>
       <div
-        className="sc-bwzfXH XOvKN sc-sidebar-item"
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
         onClick={[Function]}
         title="Servers"
       >
         <div
-          className="sc-ifAKCX irnTxV"
+          className="sc-gqjmRU coMoOk"
         >
           <i
             className="fas fa-server"
           />
         </div>
         <div
-          className="sc-htpNat jyYvCB"
+          className="sc-iwsKbI kIlsEa"
         >
           Servers
         </div>
       </div>
       <div
-        className="sc-bwzfXH XOvKN sc-sidebar-item"
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
         onClick={[Function]}
         title="Disks"
       >
         <div
-          className="sc-ifAKCX irnTxV"
+          className="sc-gqjmRU coMoOk"
         >
           <i
             className="fas fa-hdd"
           />
         </div>
         <div
-          className="sc-htpNat jyYvCB"
+          className="sc-iwsKbI kIlsEa"
+        >
+          Disks
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>
+    Sidebar with toggle
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "150px",
+      }
+    }
+  >
+    <div
+      className="sc-htoDjs kEUMyu sc-sidebar"
+    >
+      <div
+        className="sc-gqjmRU coMoOk"
+      >
+        <button
+          className="sc-bxivhb hAHRzA sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-bZQynM iMWVsx"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-ifAKCX bccMeP"
+                size="larger"
+              >
+                <i
+                  className="fas fa-chevron-left"
+                />
+              </span>
+              <span
+                className="sc-EHOje boinrg"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        className="sc-dnqmqq eCZUVx sc-sidebar-item"
+        onClick={[Function]}
+        title="Dashboard"
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-tachometer-alt"
+          />
+        </div>
+        <div
+          className="sc-iwsKbI kIlsEa"
+        >
+          Dashboard
+        </div>
+        <div
+          className="sc-gZMcBi dZkYTy"
+        />
+      </div>
+      <div
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        onClick={[Function]}
+        title="Servers"
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-server"
+          />
+        </div>
+        <div
+          className="sc-iwsKbI kIlsEa"
+        >
+          Servers
+        </div>
+      </div>
+      <div
+        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        onClick={[Function]}
+        title="Disks"
+      >
+        <div
+          className="sc-gqjmRU coMoOk"
+        >
+          <i
+            className="fas fa-hdd"
+          />
+        </div>
+        <div
+          className="sc-iwsKbI kIlsEa"
         >
           Disks
         </div>
