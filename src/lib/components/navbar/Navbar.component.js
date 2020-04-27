@@ -11,15 +11,15 @@ import type { Item } from "../dropdown/Dropdown.component";
 
 type Action = {
   type: string,
-  items?: Array<Item>
+  items?: Array<Item>,
 };
 
 type Actions = Array<Action>;
 type Tab = {
   title?: string,
   selected?: boolean,
-  onClick?: any => void,
-  link?: Node
+  onClick?: (any) => void,
+  link?: Node,
 };
 
 export type Props = {
@@ -27,7 +27,7 @@ export type Props = {
   rightActions: Actions,
   productName?: string,
   logo?: Node,
-  tabs?: Array<Tab>
+  tabs?: Array<Tab>,
 };
 
 const NavbarContainer = styled.div`
@@ -65,7 +65,7 @@ const TabItem = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 ${defaultTheme.padding.base};
-  ${props => {
+  ${(props) => {
     const { textPrimary, secondary, backgroundBluer } = getTheme(props);
     return css`
       color: ${textPrimary};
@@ -80,7 +80,7 @@ const TabItem = styled.div`
       }
     `;
   }};
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       border-bottom: 2px solid ${getTheme(props).primary};
@@ -122,6 +122,7 @@ const NavbarMenuItem = styled.div`
     &:hover {
       background-color: ${getThemePropSelector("backgroundBluer")};
     }
+    width: ${defaultTheme.navbarItemWidth};
   }
 `;
 
