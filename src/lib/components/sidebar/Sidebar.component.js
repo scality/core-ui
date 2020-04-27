@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
 import { getTheme, getThemePropSelector } from "../../utils";
+import Button from "../button/Button.component";
 
 type Item = {
   label: string,
@@ -15,6 +16,7 @@ type Items = Array<Item>;
 export type Props = {
   expanded?: boolean,
   actions: Items,
+  onToggleClick?: () => void,
 };
 
 const SidebarContainer = styled.div`
@@ -36,10 +38,17 @@ const SidebarContainer = styled.div`
       `;
     }
     return css`
-      /* width: ${defaultTheme.navbarItemWidth}; */
-      width: 0;
+      width: ${defaultTheme.navbarItemWidth};
     `;
   }}
+
+  .sc-button {
+    border-radius: 0;
+    background-color: ${getThemePropSelector("primary")};
+    &:hover {
+      background-color: ${getThemePropSelector("backgroundBluer")};
+    }
+  }
 `;
 
 const SidebarItem = styled.div`
@@ -95,9 +104,27 @@ const MenuItemIcon = styled.div`
   align-items: end;
 `;
 
-function Sidebar({ expanded, actions, ...rest }: Props) {
+function Sidebar({ expanded, actions, onToggleClick, ...rest }: Props) {
   return (
     <SidebarContainer expanded={expanded} className="sc-sidebar" {...rest}>
+      {onToggleClick && expanded && (
+        <MenuItemIcon>
+          <Button
+            size="larger"
+            variant="base"
+            icon={<i className="fas fa-chevron-left" />}
+            onClick={() => onToggleClick()}
+          />
+        </MenuItemIcon>
+      )}
+      {onToggleClick && !expanded && (
+        <Button
+          size="larger"
+          variant="base"
+          icon={<i className="fas fa-chevron-right" />}
+          onClick={() => onToggleClick()}
+        />
+      )}
       {actions.map(
         ({ active, label, onClick, icon = null, ...actionRest }, index) => {
           return (
@@ -110,7 +137,7 @@ function Sidebar({ expanded, actions, ...rest }: Props) {
               expanded={expanded}
               {...actionRest}
             >
-              {!!icon && expanded && <MenuItemIcon>{icon}</MenuItemIcon>}
+              {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
               {expanded && <MenuItemText>{label}</MenuItemText>}
               {active && expanded && <MenuItemSelected />}
             </SidebarItem>
