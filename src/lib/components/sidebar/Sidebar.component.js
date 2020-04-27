@@ -38,7 +38,7 @@ const SidebarContainer = styled.div`
       `;
     }
     return css`
-      width: ${defaultTheme.navbarItemWidth};
+      width: ${defaultTheme.sidebarWidth};
     `;
   }}
 
@@ -48,6 +48,8 @@ const SidebarContainer = styled.div`
     &:hover {
       background-color: ${getThemePropSelector("backgroundBluer")};
     }
+    height: ${defaultTheme.sidebarItemHeight};
+    width: ${defaultTheme.sidebarWidth};
   }
 `;
 
@@ -55,10 +57,8 @@ const SidebarItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: ${defaultTheme.padding.base} 0;
   cursor: pointer;
   justify-content: flex-start;
-
   .fas {
     font-size: ${defaultTheme.fontSize.large};
   }
@@ -98,10 +98,11 @@ const MenuItemSelected = styled.div`
 `;
 
 const MenuItemIcon = styled.div`
-  width: ${defaultTheme.navbarItemWidth};
+  width: ${defaultTheme.sidebarWidth};
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: center;
+  height: ${defaultTheme.sidebarItemHeight};
 `;
 
 function Sidebar({ expanded, actions, onToggleClick, ...rest }: Props) {
