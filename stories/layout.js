@@ -12,20 +12,20 @@ const sideBarActions = [
     icon: <i className="fas fa-tachometer-alt" />,
     onClick: action("dashboard clicked"),
     active: true,
-    "data-cy": "Dashboard"
+    "data-cy": "Dashboard",
   },
   {
     label: "Servers",
     icon: <i className="fas fa-server" />,
     onClick: action("server clicked"),
-    "data-cy": "Servers"
+    "data-cy": "Servers",
   },
   {
     label: "Disks",
     icon: <i className="fas fa-hdd" />,
     onClick: action("disk clicked"),
-    "data-cy": "Disks"
-  }
+    "data-cy": "Disks",
+  },
 ];
 
 const rightActions = [
@@ -37,16 +37,16 @@ const rightActions = [
       {
         label: "English",
         name: "EN",
-        onClick: action("English selected")
-      }
-    ]
+        onClick: action("English selected"),
+      },
+    ],
   },
   {
     type: "dropdown",
     icon: <i className="fas fa-th" />,
     items: [
-      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") }
-    ]
+      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") },
+    ],
   },
   {
     type: "dropdown",
@@ -54,15 +54,15 @@ const rightActions = [
     items: [
       { label: "About", onClick: action("About clicked") },
       { label: "Documentation", onClick: action("Documentation clicked") },
-      { label: "Onboarding", onClick: action("Onboarding clicked") }
-    ]
+      { label: "Onboarding", onClick: action("Onboarding clicked") },
+    ],
   },
   {
     type: "dropdown",
     text: "Carlito",
     icon: <i className="fas fa-user" />,
-    items: [{ label: "Log out", onClick: action("Logout clicked") }]
-  }
+    items: [{ label: "Log out", onClick: action("Logout clicked") }],
+  },
 ];
 
 storiesOf("Layout", module)
@@ -72,13 +72,13 @@ storiesOf("Layout", module)
 
     const sidebar = {
       expanded,
-      actions: sideBarActions
+      actions: sideBarActions,
     };
 
     const navbar = {
       onToggleClick: action("toggle clicked"),
       productName: "Harware UI",
-      rightActions
+      rightActions,
     };
 
     return (
@@ -90,13 +90,31 @@ storiesOf("Layout", module)
   .add("Sidebar expanded", () => {
     const sidebar = {
       expanded: true,
-      actions: sideBarActions
+      actions: sideBarActions,
     };
 
     const navbar = {
       onToggleClick: action("toggle clicked"),
       productName: "Harware UI",
-      rightActions
+      rightActions,
+    };
+
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  })
+  .add("Sidebar with toggle", () => {
+    const sidebar = {
+      expanded: true,
+      actions: sideBarActions,
+      onToggleClick: action("toggle clicked"),
+    };
+
+    const navbar = {
+      productName: "Harware UI",
+      rightActions,
     };
 
     return (

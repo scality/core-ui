@@ -10,18 +10,18 @@ const actions = [
     label: "Dashboard",
     icon: <i className="fas fa-tachometer-alt" />,
     onClick: action("dashboard clicked"),
-    active: true
+    active: true,
   },
   {
     label: "Servers",
     icon: <i className="fas fa-server" />,
-    onClick: action("server clicked")
+    onClick: action("server clicked"),
   },
   {
     label: "Disks",
     icon: <i className="fas fa-hdd" />,
-    onClick: action("disk clicked")
-  }
+    onClick: action("disk clicked"),
+  },
 ];
 
 storiesOf("Sidebar", module)
@@ -37,6 +37,15 @@ storiesOf("Sidebar", module)
         <h3>Sidebar expanded</h3>
         <div style={{ width: "150px" }}>
           <Sidebar expanded actions={actions} />
+        </div>
+
+        <h3>Sidebar with toggle</h3>
+        <div style={{ width: "150px" }}>
+          <Sidebar
+            actions={actions}
+            expanded
+            onToggleClick={action("toggle clicked")}
+          />
         </div>
       </div>
     );

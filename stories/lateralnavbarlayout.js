@@ -54,4 +54,16 @@ storiesOf("LateralNavbarLayout", module)
         <Loader size="massive" />
       </LateralNavbarLayout>
     );
+  })
+  .add("Sidebar with toggle", () => {
+    const sidebar = {
+      expanded: true,
+      actions: sideBarActions,
+      onToggleClick: action("toggle clicked"),
+    };
+    return (
+      <LateralNavbarLayout sidebar={sidebar}>
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
   });
