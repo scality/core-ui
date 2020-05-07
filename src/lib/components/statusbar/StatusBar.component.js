@@ -11,11 +11,11 @@ type Props = {
   title?: Object,
   width?: number,
   height?: number,
-  // external links
+  // External links
   transform?: Array<Object>,
   href?: Object,
   tooltip?: Array<Object>,
-  // the addional text be display in the top right
+  // The addional text be display in the top right
   text?: Object,
 };
 
@@ -45,16 +45,26 @@ function StatusBar({
           tooltip: true,
           cornerRadius: 1,
         },
+        selection: {
+          highlight: { type: "single", on: "mouseover" },
+        },
         transform,
         encoding: {
           x: xAxis,
-          color,
           y: yAxis,
+          color,
+          // Tooltip Channel
           tooltip,
+          // Hyperlink Channel
           href,
+          // Highlight the focused time-period
+          opacity: {
+            condition: { selection: "highlight", value: 1 },
+            value: 0.6,
+          },
         },
       },
-      // text on the top right
+      // Text on the top right
       {
         mark: {
           type: "text",

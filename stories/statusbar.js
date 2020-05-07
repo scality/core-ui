@@ -19,11 +19,11 @@ const xAxis = {
   type: "nominal",
   title: null,
   axis: {
-    // refer to all the available time format: https://github.com/d3/d3-time-format#locale_format
+    // Refer to all the available time format: https://github.com/d3/d3-time-format#locale_format
     format: "%d %b",
-    // boolean value that determines whether the axis should include ticks.
+    // Boolean value that determines whether the axis should include ticks.
     ticks: false,
-    // display the label when the new day starts
+    // Display the label when the new day starts
     labelExpr: "timeFormat(datum.value, '%H') == '00'? datum.label:''",
     labelAngle: -80,
     labelColor: "#a8b5c1",
@@ -41,36 +41,47 @@ const color = {
   field: "status",
   type: "quantitative",
   title: null,
-  // set the color of the 3 statuss
+  // Set the color of the 3 statuss
   scale: {
     range: ["#dc3545", "#fefa52", "#28a745"],
   },
-  // disable the legend status bar
+  // Disable the legend status bar
   legend: null,
 };
 
 const transform = [
+  // Calculate Transform: transform extends data objects with new fields (columns).
   {
     calculate: "'https://www.google.com/search?q=' + datum.date",
     as: "url",
   },
 ];
 
-const href = { field: "url", type: "nominal" };
+// The mark becomes a hyperlink. The specified URL is loaded upon a mouse click.
+const href = {
+  field: "url",
+  type: "nominal",
+  condition: {
+    test: "datum.alertNum === 0",
+    field: null,
+  },
+};
 
 const tooltip = [
   {
     field: "date",
     type: "temporal",
     timeUnit: "yearmonthdatehoursminutes",
+    title: "Date and Time",
   },
-  { field: "alert", type: "nominal", title: "ALERTS" },
+  { field: "alertNum", type: "nominal", title: "Number of alerts" },
+  { field: "alert", type: "nominal", title: "Alerts" },
 ];
 
 const text = {
   field: "currentStatus",
   type: "nominal",
-  // the color of current status
+  // The color of `Current Status` text
   color: "#a8b5c1",
 };
 

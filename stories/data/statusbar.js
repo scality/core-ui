@@ -1,23 +1,32 @@
-// status: -1 represents error which is red on the bar
-// status: 0 represents warning which is yellow on the bar
-// status: 1 represents healthy which is green on the bar
+// Explanation of the props in the dataset:
+// ------------------------------------------
+// status:
+//   -1 => error => red rect
+//   0 =>  warning => yellow rect
+//   1 => healthy => green rect
+// alert: should be an array include all the alerts.
+// label: it's possible to display the label (-7days, -6, -5...today) as x-axis label instead of real date.
+// currentStatus: specify the current status, only be used for the least one (need to find a better way).
+// alertNum: specify the number of the alerts.
 
 export const data = [
-  {
-    symbol: "health",
-    date: "2019-10-01 01:00:00",
-    status: 1,
-    label: "-7 days",
-    currentStatus: " ",
-    alert: "None",
-  },
   {
     symbol: "health",
     date: "2019-10-01 00:00:00",
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
+  },
+  {
+    symbol: "health",
+    date: "2019-10-01 01:00:00",
+    status: 1,
+    label: "-7 days",
+    currentStatus: " ",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -25,7 +34,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -33,7 +43,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -41,7 +52,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -49,7 +61,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -57,7 +70,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -65,7 +79,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -73,7 +88,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -81,7 +97,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -89,7 +106,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -97,7 +115,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -105,7 +124,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -113,7 +133,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -121,7 +142,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -129,7 +151,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -137,7 +160,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -145,7 +169,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -153,7 +178,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -161,7 +187,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -169,7 +196,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -177,7 +205,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -185,7 +214,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -193,7 +223,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -201,7 +232,8 @@ export const data = [
     status: 1,
     label: "-6",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -209,7 +241,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -217,7 +250,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -225,7 +259,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -233,7 +268,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -241,7 +277,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -249,7 +286,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -257,7 +295,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -265,7 +304,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -273,7 +313,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -281,7 +322,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -289,7 +331,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -297,7 +340,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -305,7 +349,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -313,7 +358,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -321,7 +367,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -329,7 +376,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -338,6 +386,7 @@ export const data = [
     label: " ",
     currentStatus: " ",
     alert: "Grouped alarms",
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -345,7 +394,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -353,7 +403,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -361,7 +412,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -369,7 +421,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -377,7 +430,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -385,7 +439,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -393,7 +448,8 @@ export const data = [
     status: 1,
     label: "-5",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -401,8 +457,10 @@ export const data = [
     status: -1,
     label: " ",
     currentStatus: " ",
-    alert:
+    alert: [
       "**cleared** connector status was OFFLINE over the last 15 seconds...",
+    ],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -410,8 +468,10 @@ export const data = [
     status: -1,
     label: " ",
     currentStatus: " ",
-    alert:
+    alert: [
       "**cleared** connector status was OFFLINE over the last 15 seconds...",
+    ],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -419,7 +479,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -427,7 +488,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -435,7 +497,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -443,7 +506,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -451,7 +515,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -459,7 +524,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -467,7 +533,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -475,7 +542,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -483,8 +551,10 @@ export const data = [
     status: -1,
     label: " ",
     currentStatus: " ",
-    alert:
+    alert: [
       "**cleared** connector status was OFFLINE over the last 15 seconds...",
+    ],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -492,7 +562,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -500,7 +571,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -508,7 +580,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -516,7 +589,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -524,7 +598,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -532,7 +607,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -540,7 +616,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -548,7 +625,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -556,7 +634,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -564,7 +643,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -572,7 +652,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -580,7 +661,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -588,7 +670,8 @@ export const data = [
     status: 1,
     label: "-4",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -596,7 +679,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -604,7 +688,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -612,7 +697,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -620,7 +706,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -628,7 +715,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -636,7 +724,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -644,7 +733,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -652,7 +742,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -660,7 +751,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -668,7 +760,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -676,7 +769,8 @@ export const data = [
     status: -1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -684,7 +778,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -692,7 +787,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -700,7 +796,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -708,7 +805,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -716,7 +814,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -724,7 +823,8 @@ export const data = [
     status: 0,
     label: " ",
     currentStatus: " ",
-    alert: "Connector writes 3 times slower than usual",
+    alert: ["Connector writes 3 times slower than usual"],
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -732,7 +832,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -740,7 +841,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -748,7 +850,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -756,7 +859,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -764,7 +868,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -772,7 +877,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -780,7 +886,8 @@ export const data = [
     status: 1,
     label: "-3",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -788,7 +895,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -796,7 +904,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -804,7 +913,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -812,7 +922,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -820,7 +931,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -828,7 +940,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -836,7 +949,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -844,7 +958,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -852,7 +967,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -860,7 +976,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -868,7 +985,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -876,7 +994,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -884,7 +1003,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -892,7 +1012,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -900,7 +1021,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -908,7 +1030,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -920,6 +1043,7 @@ export const data = [
       "Disk out of service permanently",
       "Average disk latency over the last 30 minutes is higher than 1s...",
     ],
+    alertNum: 2,
   },
   {
     symbol: "health",
@@ -927,7 +1051,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -935,7 +1060,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -943,7 +1069,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -951,7 +1078,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -959,7 +1087,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -967,7 +1096,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -975,7 +1105,8 @@ export const data = [
     status: 1,
     label: "-2",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -983,7 +1114,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -991,7 +1123,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -999,7 +1132,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1007,7 +1141,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1015,7 +1150,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1023,7 +1159,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1031,7 +1168,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1039,7 +1177,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1047,7 +1186,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1055,7 +1195,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1063,7 +1204,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1071,7 +1213,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1079,7 +1222,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1087,7 +1231,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1095,7 +1240,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1103,7 +1249,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1112,6 +1259,7 @@ export const data = [
     label: " ",
     currentStatus: " ",
     alert: "Grouped alarms",
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -1119,7 +1267,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1127,7 +1276,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1135,7 +1285,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1143,7 +1294,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1151,7 +1303,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1159,7 +1312,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1167,7 +1321,8 @@ export const data = [
     status: 1,
     label: "-1",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1175,7 +1330,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1183,7 +1339,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1191,7 +1348,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1199,7 +1357,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1207,7 +1366,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1215,7 +1375,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1223,7 +1384,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1231,7 +1393,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1239,7 +1402,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1247,7 +1411,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1255,7 +1420,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1263,7 +1429,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1271,7 +1438,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1279,7 +1447,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1287,7 +1456,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1295,7 +1465,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1304,6 +1475,7 @@ export const data = [
     label: " ",
     currentStatus: " ",
     alert: "Grouped alarms",
+    alertNum: 1,
   },
   {
     symbol: "health",
@@ -1311,7 +1483,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1319,7 +1492,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1327,7 +1501,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1335,7 +1510,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1343,7 +1519,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1351,7 +1528,8 @@ export const data = [
     status: 1,
     label: " ",
     currentStatus: " ",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
   {
     symbol: "health",
@@ -1359,6 +1537,7 @@ export const data = [
     status: 1,
     label: "today",
     currentStatus: "Current: OK",
-    alert: "None",
+    alert: [],
+    alertNum: 0,
   },
 ];
