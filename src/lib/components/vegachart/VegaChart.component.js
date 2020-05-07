@@ -69,7 +69,14 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
       // are included with the embedded view.
       // If the value is true, all action links will be shown and none if the value is false.
       actions: false,
-    });
+    })
+      .then(({ spec, view }) => {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/)
+        view.addEventListener("click", function (event, item) {
+          // Event Handling refer to: https://github.com/vega/vega-view#event-handling
+        });
+      })
+      .catch(console.error);
   }, [id, themedSpec, theme]);
 
   return (

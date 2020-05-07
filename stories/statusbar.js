@@ -58,6 +58,7 @@ const transform = [
 ];
 
 // The mark becomes a hyperlink. The specified URL is loaded upon a mouse click.
+// Note that using Hyperlink would lose all the context. `VegaEmbed` provides us a way to use `addEventListener`.
 const href = {
   field: "url",
   type: "nominal",
