@@ -6,6 +6,7 @@ import {
   useFilters,
   useGlobalFilter,
   useAsyncDebounce,
+  useSortBy,
 } from "react-table";
 import makeData from "./makeData";
 // A great library for fuzzy filtering/sorting items
@@ -163,7 +164,8 @@ function ReactTable(props: Props) {
         filterTypes,
       },
       useFilters, // useFilters!
-      useGlobalFilter // useGlobalFilter!
+      useGlobalFilter, // useGlobalFilter!
+      useSortBy
     );
 
     // Render the UI for your table
@@ -187,10 +189,28 @@ function ReactTable(props: Props) {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
                   {/* Render the columns filter UI */}
                   {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
+                  {/* Add a sort direction indicator */}
+                  <span>
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <>
+                          {"   "}
+                          <i class="fas fa-sort-down"></i>
+                        </>
+                      ) : (
+                        <>
+                          {"   "}
+                          <i class="fas fa-sort-up"></i>
+                        </>
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </span>
                 </th>
               ))}
             </tr>
