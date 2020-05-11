@@ -202,9 +202,38 @@ function ReactTable(props: Props) {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
+                  if (
+                    cell.column.Header === "Status" &&
+                    cell.value === "single"
+                  ) {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        <Chips text={cell.render("Cell")} variant="success" />
+                      </td>
+                    );
+                  } else if (
+                    cell.column.Header === "Status" &&
+                    cell.value === "relationship"
+                  ) {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        <Chips text={cell.render("Cell")} variant="warning" />
+                      </td>
+                    );
+                  } else if (
+                    cell.column.Header === "Status" &&
+                    cell.value === "complicated"
+                  ) {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        <Chips text={cell.render("Cell")} variant="danger" />
+                      </td>
+                    );
+                  } else {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  }
                 })}
               </tr>
             );
