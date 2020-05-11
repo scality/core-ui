@@ -87,5 +87,10 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "dependencies": {
+    "match-sorter": "^4.1.0",
+    "namor": "^2.0.2",
+    "react-table": "^7.0.4"
   }
 }
