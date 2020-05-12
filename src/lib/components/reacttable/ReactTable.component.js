@@ -12,6 +12,7 @@ import makeData from "./makeData";
 // A great library for fuzzy filtering/sorting items
 import matchSorter from "match-sorter";
 import Chips from "../chips/Chips.component";
+import Select from "../select/Select.component";
 
 type Props = {};
 
@@ -24,7 +25,10 @@ const ReactTableContainer = styled.div`
   table {
     border-spacing: 0;
     width: 900px;
-
+    .sc-select-container {
+      width: 120px;
+      height: 22px;
+    }
     tr {
       :last-child {
         td {
@@ -105,6 +109,78 @@ function GlobalFilter({
         }}
       />
     </span>
+  );
+}
+
+// This is a custom filter UI that uses a
+// slider to set the filter value between a column's
+// min and max values
+function SliderColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the min and max
+  // using the preFilteredRows
+
+  const [min, max] = React.useMemo(() => {
+    let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+    preFilteredRows.forEach((row) => {
+      min = Math.min(row.values[id], min);
+      max = Math.max(row.values[id], max);
+    });
+    return [min, max];
+  }, [id, preFilteredRows]);
+
+  return (
+    <>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={filterValue || min}
+        onChange={(e) => {
+          setFilter(parseInt(e.target.value, 10));
+        }}
+      />
+      <button onClick={() => setFilter(undefined)}>Off</button>
+    </>
+  );
+}
+
+// This is a custom filter UI for selecting
+// a unique option from a list
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set();
+    preFilteredRows.forEach((row) => {
+      options.add(row.values[id]);
+    });
+    return [...options.values()];
+  }, [id, preFilteredRows]);
+
+  // use the select from core-ui
+  const selectOptions = options.map((option, i) => ({
+    label: `${option}`,
+    value: option,
+  }));
+  const filterOption = selectOptions.find((sel) => sel.value === filterValue);
+
+  // Render a multi-select box
+  return (
+    <Select
+      name="default_select"
+      options={selectOptions}
+      onChange={(e) => {
+        setFilter(e.value || undefined);
+      }}
+      placeholder="All"
+      noOptionsMessage={() => "Not found"}
+      value={filterOption}
+    />
   );
 }
 
@@ -191,8 +267,9 @@ function ReactTable(props: Props) {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
+                  {console.log("column", column)}
                   {/* Render the columns filter UI */}
-                  {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
+                  <div>{column.canFilter ? column.render("Filter") : null}</div>
                   {/* Add a sort direction indicator */}
                   <span>
                     {column.isSorted ? (
@@ -268,27 +345,38 @@ function ReactTable(props: Props) {
       {
         Header: "First Name",
         accessor: "firstName",
+        disableSortBy: true,
+        disableFilters: true,
       },
       {
         Header: "Last Name",
         accessor: "lastName",
+        disableSortBy: true,
+        disableFilters: true,
       },
-
       {
         Header: "Age",
         accessor: "age",
+        Filter: SliderColumnFilter,
+        filter: "equals",
+        disableSortBy: true,
       },
       {
         Header: "Visits",
         accessor: "visits",
+        disableFilters: true,
       },
       {
         Header: "Status",
         accessor: "status",
+        Filter: SelectColumnFilter,
+        filter: "includes",
+        disableSortBy: true,
       },
       {
         Header: "Profile Progress",
         accessor: "progress",
+        disableSortBy: true,
       },
     ],
     []
