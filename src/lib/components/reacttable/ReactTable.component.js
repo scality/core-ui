@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   useTable,
@@ -7,6 +7,7 @@ import {
   useGlobalFilter,
   useAsyncDebounce,
   useSortBy,
+  useRowSelect,
 } from "react-table";
 import makeData from "./makeData";
 // A great library for fuzzy filtering/sorting items
@@ -27,7 +28,7 @@ const ReactTableContainer = styled.div`
     width: 900px;
     .sc-select-container {
       width: 120px;
-      height: 22px;
+      height: 10px;
     }
     tr {
       :last-child {
@@ -78,6 +79,7 @@ function GlobalFilter({
   globalFilter,
   setGlobalFilter,
 }) {
+  const count = preGlobalFilteredRows.length;
   const [value, setValue] = React.useState(globalFilter);
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
@@ -191,6 +193,23 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = (val) => !val;
 
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
+
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  }
+);
+
 function ReactTable(props: Props) {
   function Table({ columns, data }) {
     const filterTypes = React.useMemo(
@@ -241,7 +260,31 @@ function ReactTable(props: Props) {
       },
       useFilters, // useFilters!
       useGlobalFilter, // useGlobalFilter!
-      useSortBy
+      useSortBy,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => [
+          // Let's make a column for selection
+          {
+            id: "selection",
+            // The header can use the table's getToggleAllRowsSelectedProps method
+            // to render a checkbox
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <div>
+                <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            ),
+            // The cell can use the individual row's getToggleRowSelectedProps method
+            // to the render a checkbox
+            Cell: ({ row }) => (
+              <div>
+                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              </div>
+            ),
+          },
+          ...columns,
+        ]);
+      }
     );
 
     // Render the UI for your table
@@ -267,7 +310,6 @@ function ReactTable(props: Props) {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
-                  {console.log("column", column)}
                   {/* Render the columns filter UI */}
                   <div>{column.canFilter ? column.render("Filter") : null}</div>
                   {/* Add a sort direction indicator */}
@@ -383,10 +425,32 @@ function ReactTable(props: Props) {
   );
 
   const data = React.useMemo(() => makeData(20), []);
-
+  const [selectedRows, setSelectedRows] = useState(0);
   return (
     <ReactTableContainer>
-      <Table columns={columns} data={data} />
+      <Table
+        columns={columns}
+        data={data}
+        getTrProps={(state, rowInfo) => {
+          return {
+            className:
+              rowInfo && rowInfo.original && rowInfo.original.status === "D"
+                ? "status-refused"
+                : "", // no effect
+            style: {
+              // works as expected
+              color:
+                rowInfo && rowInfo.original && rowInfo.original.status === "D"
+                  ? "#121315"
+                  : "#313123",
+              opacity:
+                rowInfo && rowInfo.original && rowInfo.original.status === "D"
+                  ? 0.5
+                  : 1.0,
+            },
+          };
+        }}
+      />
     </ReactTableContainer>
   );
 }
