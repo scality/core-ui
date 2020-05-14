@@ -35,7 +35,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Node Registerd
         </span>
@@ -62,7 +62,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Deploy Salt Minion on node
         </span>
@@ -115,7 +115,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Workload Plane
         </span>
@@ -142,7 +142,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Control Plane
         </span>
@@ -166,7 +166,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Extend etcd cluster to node
         </span>
@@ -204,7 +204,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Node Registerd
         </span>
@@ -352,7 +352,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Deploy Salt Minion on node
         </span>
@@ -405,7 +405,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Workload Plane
         </span>
@@ -432,7 +432,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Control Plane
         </span>
@@ -456,7 +456,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Extend etcd cluster to node
         </span>
@@ -494,7 +494,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Node Registerd
         </span>
@@ -523,7 +523,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Deploy Salt Minion on node
         </span>
@@ -550,7 +550,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Workload Plane
         </span>
@@ -603,7 +603,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Add node to Control Plane
         </span>
@@ -627,7 +627,7 @@ exports[`Storyshots Steppers Default 1`] = `
         className="sc-EHOje fpqoIO"
       >
         <span
-          className="sc-gzVnrw dhxpXn"
+          className="sc-gzVnrw gctCna"
         >
           Extend etcd cluster to node
         </span>

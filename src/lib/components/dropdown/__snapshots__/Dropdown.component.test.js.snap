@@ -338,39 +338,6 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU bzQUpj trigger"
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      size="base"
-      tabIndex="0"
-    >
-      <span
-        className="sc-ifAKCX joVDVz"
-        size="base"
-      >
-        <i
-          className="fas fa-star"
-        />
-      </span>
-      <span
-        className="sc-EHOje boinrg sc-trigger-text"
-      >
-        info
-      </span>
-      <span
-        className="sc-gZMcBi cfFiuj"
-      >
-        <i
-          className="fas fa-caret-down"
-        />
-      </span>
-    </div>
-  </div>
-  <div
-    className="sc-htoDjs iIbcxe sc-dropdown"
-  >
-    <div
       className="sc-gqjmRU jCEBPE trigger"
       onBlur={[Function]}
       onClick={[Function]}

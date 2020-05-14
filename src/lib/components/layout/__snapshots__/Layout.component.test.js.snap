@@ -5,13 +5,13 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
   className="sc-eNQAEJ iByiJn sc-layout"
 >
   <div
-    className="sc-VigVT hngRrn sc-navbar"
+    className="sc-VigVT fyyQeq sc-navbar"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
         onClick={[Function]}
       >
         <button
@@ -45,7 +45,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-kgoBCf eZcjUs sc-logo"
@@ -120,7 +120,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <h1
           className="sc-chPdSV hsiPpx"
@@ -133,7 +133,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -233,10 +233,10 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     </div>
   </div>
   <div
-    className="sc-hMqMXs dAWvsW"
+    className="sc-hMqMXs imuZbu"
   >
     <div
-      className="sc-kGXeez iFjPvA sc-sidebar"
+      className="sc-kGXeez disOYu sc-sidebar"
     >
       <div
         className="sc-kpOJdX iPVskz sc-sidebar-item"
@@ -418,13 +418,13 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
   className="sc-eNQAEJ iByiJn sc-layout"
 >
   <div
-    className="sc-VigVT hngRrn sc-navbar"
+    className="sc-VigVT fyyQeq sc-navbar"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
         onClick={[Function]}
       >
         <button
@@ -458,7 +458,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-kgoBCf eZcjUs sc-logo"
@@ -533,7 +533,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <h1
           className="sc-chPdSV hsiPpx"
@@ -546,7 +546,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -646,10 +646,10 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     </div>
   </div>
   <div
-    className="sc-hMqMXs dAWvsW"
+    className="sc-hMqMXs imuZbu"
   >
     <div
-      className="sc-kGXeez eCkLwt sc-sidebar"
+      className="sc-kGXeez cKIBNi sc-sidebar"
     >
       <div
         className="sc-kpOJdX iPVskz sc-sidebar-item"
@@ -849,13 +849,13 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
   className="sc-eNQAEJ iByiJn sc-layout"
 >
   <div
-    className="sc-VigVT hngRrn sc-navbar"
+    className="sc-VigVT fyyQeq sc-navbar"
   >
     <div
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-kgoBCf eZcjUs sc-logo"
@@ -930,7 +930,7 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
         </div>
       </div>
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <h1
           className="sc-chPdSV hsiPpx"
@@ -943,7 +943,7 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
       className="sc-jTzLTM drTWqF"
     >
       <div
-        className="sc-kAzzGY gYypQO"
+        className="sc-kAzzGY ekCeje"
       >
         <div
           className="sc-htoDjs iIbcxe sc-dropdown"
@@ -1043,10 +1043,10 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
     </div>
   </div>
   <div
-    className="sc-hMqMXs dAWvsW"
+    className="sc-hMqMXs imuZbu"
   >
     <div
-      className="sc-kGXeez eCkLwt sc-sidebar"
+      className="sc-kGXeez cKIBNi sc-sidebar"
     >
       <div
         className="sc-jKJlTe hJeLlx"

@@ -13,7 +13,7 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-htoDjs gOrAcV sc-sidebar"
+      className="sc-htoDjs hlIRNL sc-sidebar"
     >
       <div
         className="sc-dnqmqq eCZUVx sc-sidebar-item"
@@ -67,7 +67,7 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-htoDjs kEUMyu sc-sidebar"
+      className="sc-htoDjs jHkWRG sc-sidebar"
     >
       <div
         className="sc-dnqmqq eCZUVx sc-sidebar-item"
@@ -139,7 +139,7 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-htoDjs kEUMyu sc-sidebar"
+      className="sc-htoDjs jHkWRG sc-sidebar"
     >
       <div
         className="sc-gqjmRU coMoOk"

@@ -22,7 +22,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-htpNat fTPXXM text"
+      className="sc-htpNat dlgUft text"
     >
       Airplane Mode
     </span>
@@ -45,7 +45,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-htpNat fTPXXM text"
+      className="sc-htpNat dlgUft text"
     >
       Airplane Mode
     </span>

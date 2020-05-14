@@ -37,7 +37,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX dUAmzj sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id2"
     >
       label
@@ -66,7 +66,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX jJpmTy sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id3"
     >
       label
@@ -103,7 +103,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-ifAKCX jJpmTy sc-input"
     >
       <label
-        className="sc-EHOje iAcjDw sc-input-label"
+        className="sc-EHOje TtbFm sc-input-label"
         htmlFor="id3"
       >
         label
@@ -138,7 +138,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX dUAmzj sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id4"
     >
       label
@@ -172,7 +172,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX jJpmTy sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id5"
     >
       label
@@ -211,7 +211,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX dUAmzj sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id6"
     >
       label
@@ -344,7 +344,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX dUAmzj sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id7"
     >
       label
@@ -372,7 +372,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-ifAKCX jJpmTy sc-input"
   >
     <label
-      className="sc-EHOje iAcjDw sc-input-label"
+      className="sc-EHOje TtbFm sc-input-label"
       htmlFor="id7"
     >
       label

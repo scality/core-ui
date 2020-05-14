@@ -9,7 +9,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar docked 1`] = `
       className="sc-jTzLTM uWek"
     >
       <div
-        className="sc-htoDjs gOrAcV sc-sidebar"
+        className="sc-htoDjs hlIRNL sc-sidebar"
       >
         <div
           className="sc-dnqmqq eCZUVx sc-sidebar-item"
@@ -195,7 +195,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
     className="sc-jTzLTM uWek"
   >
     <div
-      className="sc-htoDjs kEUMyu sc-sidebar"
+      className="sc-htoDjs jHkWRG sc-sidebar"
     >
       <div
         className="sc-dnqmqq eCZUVx sc-sidebar-item"
@@ -398,7 +398,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
     className="sc-jTzLTM uWek"
   >
     <div
-      className="sc-htoDjs kEUMyu sc-sidebar"
+      className="sc-htoDjs jHkWRG sc-sidebar"
     >
       <div
         className="sc-gqjmRU coMoOk"

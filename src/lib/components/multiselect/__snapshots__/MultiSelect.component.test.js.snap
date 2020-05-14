@@ -13,7 +13,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -370,7 +370,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -586,7 +586,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -883,7 +883,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -1152,7 +1152,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       <h3
         className="sc-gqjmRU kKvYqO"
@@ -1359,7 +1359,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-gZMcBi clmwXm sc-multi-select-list"
+      className="sc-gZMcBi fZLiIC sc-multi-select-list"
     >
       
       <div

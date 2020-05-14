@@ -133,7 +133,7 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa bWBilp sc-notification"
+      className="sc-bdVaJa MnSNT sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -143,11 +143,11 @@ exports[`Storyshots Notifications Default 1`] = `
         Hi
       </div>
       <div>
-        I am Saif. I live at BOTTOM_LEFT
+        I am Yanjin. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-htpNat gkkqDW"
-        max={5000}
+        className="sc-htpNat exAJUA"
+        max={10000}
         value={0}
       />
       <div
