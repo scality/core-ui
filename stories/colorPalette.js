@@ -70,11 +70,6 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#8593A0</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#6C8398" }} />
-          <div className="text">textTertiary</div>
-          <div className="text">#6C8398</div>
-        </div>
-        <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#A5A5A5" }} />
           <div className="text">border</div>
           <div className="text">the border for the input</div>
@@ -95,11 +90,6 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="color" style={{ backgroundColor: "#75FE63" }} />
           <div className="text">healthyLight</div>
           <div className="text">#75FE63</div>
-        </div>
-        <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#027AFF" }} />
-          <div className="text">info</div>
-          <div className="text">#027AFF</div>
         </div>
         <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#FEFA51" }} />
@@ -175,11 +165,6 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#A8B5C1</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#A7B6C3" }} />
-          <div className="text">textTertiary</div>
-          <div className="text">#A7B6C3</div>
-        </div>
-        <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#A5A5A5" }} />
           <div className="text">border</div>
           <div className="text">the border for the input</div>
@@ -200,11 +185,6 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="color" style={{ backgroundColor: "#75FE63" }} />
           <div className="text">healthyLight</div>
           <div className="text">#75FE63</div>
-        </div>
-        <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#027AFF" }} />
-          <div className="text">info</div>
-          <div className="text">#027AFF</div>
         </div>
         <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#FEFA51" }} />

@@ -22,7 +22,6 @@ storiesOf("Button", module)
         <Button variant="base" text="base" />
         <Button variant="secondary" text="secondary" />
         <Button variant="healthy" text="healthy" />
-        <Button variant="info" text="info" />
         <Button variant="warning" text="warning" />
         <Button variant="critical" text="critical" />
 

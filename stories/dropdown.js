@@ -9,18 +9,18 @@ const items = [
   {
     label: "About",
     onClick: action("About clicked"),
-    "data-cy": "About"
+    "data-cy": "About",
   },
   {
     label: "Documentation",
     onClick: action("Documentation clicked"),
-    "data-cy": "Documentation"
+    "data-cy": "Documentation",
   },
   {
     label: "Onboarding",
     onClick: action("Onboarding clicked"),
-    "data-cy": "Onboarding"
-  }
+    "data-cy": "Onboarding",
+  },
 ];
 
 storiesOf("Dropdown", module).add("Default", () => {
@@ -85,12 +85,6 @@ storiesOf("Dropdown", module).add("Default", () => {
         items={items}
         variant="healthy"
         text="healthy"
-      />
-      <Dropdown
-        icon={<i className="fas fa-star" />}
-        items={items}
-        variant="info"
-        text="info"
       />
       <Dropdown
         icon={<i className="fas fa-star" />}

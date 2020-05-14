@@ -6,7 +6,7 @@ export const LOADER_SIZE = {
   large: "large",
   larger: "larger",
   huge: "huge",
-  massive: "massive"
+  massive: "massive",
 };
 export type Size =
   | "smaller"
@@ -21,7 +21,6 @@ export type Variant =
   | "base"
   | "secondary"
   | "success"
-  | "info"
   | "warning"
   | "danger"
   | "healthy"

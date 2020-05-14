@@ -13,12 +13,12 @@ type StepProps = {
   isLast?: boolean,
   index?: number,
   error?: boolean,
-  inProgress?: boolean
+  inProgress?: boolean,
 };
 
 type Props = {
   steps: Array<StepProps>,
-  activeStep: number
+  activeStep: number,
 };
 const SteppersContainer = styled.div``;
 
@@ -39,7 +39,7 @@ const Circle = styled.div`
   height: 30px;
   border-radius: 50%;
 
-  ${props => {
+  ${(props) => {
     const { danger, success, secondary } = getTheme(props);
     if (props.error) {
       return css`
@@ -70,7 +70,7 @@ const Circle = styled.div`
 
 const StepHeader = styled.span`
   padding: 8px;
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 const StepContent = styled.div`
   padding: ${defaultTheme.padding.small};
@@ -81,7 +81,7 @@ const BottomBar = styled.hr`
   border: none;
   margin: 2px 14px;
 
-  ${props => {
+  ${(props) => {
     if (props.completed) {
       return css`
         border-left: 2px solid ${getTheme(props).success};
@@ -103,7 +103,7 @@ function Step(props: StepProps) {
     isLast,
     index,
     error,
-    inProgress
+    inProgress,
   } = props;
 
   const circleContent = completed ? <i className="fas fa-check" /> : index + 1;

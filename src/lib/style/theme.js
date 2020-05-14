@@ -43,7 +43,6 @@ export const brand = {
   success: jade,
   healthy: "#25AC56",
   healthyLight: "#75FE63",
-  info: "#027AFF",
   warning: "#FEFA51",
   danger: warmRed,
   critical: "#BE2543",
@@ -51,7 +50,6 @@ export const brand = {
   backgroundBluer: "#ECF4FF",
   textPrimary: "#313B44",
   textSecondary: "#8593A0",
-  textTertiary: "#6C8398",
   borderLight: "#A5A5A5",
   border: "#A5A5A5",
 };

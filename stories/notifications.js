@@ -11,15 +11,15 @@ const trNotifications = [
     title: "Hi",
     message: "I am Carlito. I live at TOP_RIGHT",
     variant: "base",
-    "data-cy": "Carlito_notification"
+    "data-cy": "Carlito_notification",
   },
   {
     uid: "2",
     title: "Hi",
     message: "I am Patrick. I live at TOP_RIGHT",
     variant: "secondary",
-    "data-cy": "Patrick_notification"
-  }
+    "data-cy": "Patrick_notification",
+  },
 ];
 
 const tlNotifications = [
@@ -27,15 +27,15 @@ const tlNotifications = [
     uid: "3",
     title: "Hi",
     message: "I am Jordi. I live at TOP_LEFT",
-    variant: "danger"
+    variant: "danger",
   },
   {
     uid: "4",
     title: "Hi",
     message: "I am Guidllaume. I live at TOP_LEFT",
     variant: "success",
-    dismissAfter: 10000
-  }
+    dismissAfter: 10000,
+  },
 ];
 
 const blNotifications = [
@@ -43,15 +43,15 @@ const blNotifications = [
     uid: "5",
     title: "Hi",
     message: "I am Teddy. I live at BOTTOM_LEFT",
-    variant: "warning"
+    variant: "warning",
   },
   {
     uid: "6",
     title: "Hi",
-    message: "I am Saif. I live at BOTTOM_LEFT",
-    variant: "info",
-    dismissAfter: 5000
-  }
+    message: "I am Yanjin. I live at BOTTOM_LEFT",
+    variant: "success",
+    dismissAfter: 10000,
+  },
 ];
 
 const brNotifications = [
@@ -59,14 +59,14 @@ const brNotifications = [
     uid: "7",
     title: "Hi",
     message: "I am Charles. I live at BOTTOM_RIGHT",
-    variant: "danger"
+    variant: "danger",
   },
   {
     uid: "8",
     title: "Hi",
     message: "I am Claude. I live at BOTTOM_RIGHT",
-    variant: "warning"
-  }
+    variant: "warning",
+  },
 ];
 
 storiesOf("Notifications", module).add("Default", () => {

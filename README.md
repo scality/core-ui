@@ -89,7 +89,6 @@ const themes = [
       success: jade,
       healthy: "#25AC56",
       healthyLight: "#75FE63",
-      info: "#027AFF",
       warning: "#FEFA51",
       danger: warmRed,
       critical: "#BE2543",
@@ -97,7 +96,6 @@ const themes = [
       backgroundBluer: "#ECF4FF",
       textPrimary: "#313B44",
       textSecondary: "#8593A0",
-      textTertiary: "#6C8398",
       borderLight: "#A5A5A5",
       border: "#A5A5A5"
     }
@@ -115,7 +113,6 @@ const themes = [
       success: jade,
       healthy: "#25AC56",
       healthyLight: "#75FE63",
-      info: "#027AFF",
       warning: "#FEFA51",
       danger: warmRed,
       critical: "#BE2543",
@@ -123,7 +120,6 @@ const themes = [
       backgroundBluer: "#182A41",
       textPrimary: "#FFFFFF",
       textSecondary: "#A8B5C1",
-      textTertiary: "#A7B6C3",
       borderLight: "#2C3137",
       border: "#A5A5A5"
     }
