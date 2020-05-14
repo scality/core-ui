@@ -13,7 +13,7 @@ export const InputContainer = styled.div`
   }
 
   input.sc-input-type {
-    ${props => {
+    ${(props) => {
       const { primary, danger, textSecondary, border } = getTheme(props);
       return css`
         background-color: ${primary};
@@ -34,7 +34,7 @@ export const InputContainer = styled.div`
     outline: none;
   }
 
-  ${props => {
+  ${(props) => {
     if (props.error) {
       return css`
         @keyframes shake {
@@ -70,7 +70,7 @@ export const LabelStyle = styled.label`
   align-self: flex-start;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.base};
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 export const InputErrorMessage = styled.span`

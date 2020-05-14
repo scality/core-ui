@@ -7,7 +7,7 @@ import { getTheme, getThemePropSelector } from "../../utils";
 type Props = {
   toggle: boolean,
   onChange: () => void,
-  label: string
+  label: string,
 };
 const ToggleContainer = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Switch = styled.label`
     height: 0;
   }
 
-  ${props => {
+  ${(props) => {
     const { secondary } = getTheme(props);
     return css`
       .sc-slider {
@@ -79,7 +79,7 @@ const Switch = styled.label`
 
 const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
-  color: ${getThemePropSelector("text")};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {

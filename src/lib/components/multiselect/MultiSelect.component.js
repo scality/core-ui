@@ -14,31 +14,31 @@ export type ItemProps = {
   description?: string,
   onSelect?: (any, any) => void, //on checkbox click
   onItemRemove?: (any, any) => void, //on item remove button click
-  onFavoriteClick?: (any, any) => void // on Favorite icon click
+  onFavoriteClick?: (any, any) => void, // on Favorite icon click
 };
 
 export type OptionProps = {
   label: string,
-  value: string | number
+  value: string | number,
 };
 
 export type SearchProps = {
   placeholder?: string,
   options: Array<OptionProps>, //The options displayed in search suggestion
-  onSelect: any => void, //on option click
-  onAdd?: any => void,
-  selectedOption: any
+  onSelect: (any) => void, //on option click
+  onAdd?: (any) => void,
+  selectedOption: any,
 };
 
 type MultiSelectProps = {
   title?: string,
   items: Array<ItemProps>,
   search?: SearchProps,
-  onItemRemove?: (any, any) => void //on item remove button click
+  onItemRemove?: (any, any) => void, //on item remove button click
 };
 
 const MultiSelectContainer = styled.div`
-  color: ${getThemePropSelector('text')};
+  color: ${getThemePropSelector("textPrimary")};
 `;
 
 const MultiSelectTitle = styled.h3`
@@ -99,7 +99,7 @@ function MultiSelectItem(props: ItemProps) {
     onItemRemove,
     onSelect,
     isFavorite,
-    onFavoriteClick
+    onFavoriteClick,
   } = props;
 
   return (
@@ -108,14 +108,14 @@ function MultiSelectItem(props: ItemProps) {
         {typeof selected === "boolean" && onSelect && (
           <CheckBox
             checked={selected}
-            onChange={event => onSelect(label, event)}
+            onChange={(event) => onSelect(label, event)}
           />
         )}
         {typeof isFavorite === "boolean" && onFavoriteClick && (
           <Button
             inverted={true}
             icon={<i className={`${isFavorite ? "fas" : "far"} fa-star`} />}
-            onClick={event => onFavoriteClick(label, event)}
+            onClick={(event) => onFavoriteClick(label, event)}
           />
         )}
       </MultiSelectItemLeft>
@@ -134,7 +134,7 @@ function MultiSelectItem(props: ItemProps) {
           <Button
             inverted={true}
             variant="danger"
-            onClick={event => onItemRemove(label, event)}
+            onClick={(event) => onItemRemove(label, event)}
             icon={<i className="fas fa-trash" />}
           />
         )}
@@ -170,7 +170,7 @@ function MultiSelectList({
   title = "",
   items = [],
   search,
-  onItemRemove
+  onItemRemove,
 }: MultiSelectProps) {
   return (
     <MultiSelectContainer className="sc-multi-select-list">
