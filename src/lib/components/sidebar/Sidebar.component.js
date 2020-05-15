@@ -21,9 +21,9 @@ export type Props = {
 
 const SidebarContainer = styled.div`
   ${(props) => {
-    const { primary, textPrimary } = getTheme(props);
+    const { background, textPrimary } = getTheme(props);
     return css`
-      background-color: ${primary};
+      background-color: ${background};
       color: ${textPrimary};
       .fas {
         color: ${textPrimary};
