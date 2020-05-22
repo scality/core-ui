@@ -55,7 +55,7 @@ export const brand = {
 };
 
 //navbar
-export const navbarHeight = "50px";
+export const navbarHeight = "47px";
 export const navbarItemWidth = "60px";
 
 //sidebar
