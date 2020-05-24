@@ -9,10 +9,13 @@ export type ProgressBarProps = {
   percentage: number,
   size?: Size,
   color?: string,
+  // The color of unfill bar
+  backgroundColor?: string,
   topLeftLabel?: string,
   topRightLabel?: string,
   bottomLeftLabel?: string,
-  bottomRightLabel?: string
+  bottomRightLabel?: string,
+  buildinLabel?: string,
 };
 
 const Container = styled.div`
@@ -20,19 +23,23 @@ const Container = styled.div`
 `;
 
 const ProgressBarContainer = styled.div`
-  background: ${defaultTheme.grayLight};
+  display: flex;
   border-radius: 12px;
+  justify-content: space-between;
+  align-items: center;
 
-  ${props => {
+  ${(props) => {
     switch (props.size) {
       case "smaller":
         return css`
           height: 10px;
+          font-size: ${defaultTheme.fontSize.smaller};
         `;
 
-      case "small":
+      case "base":
         return css`
-          height: 15px;
+          height: 12px;
+          font-size: ${defaultTheme.fontSize.base};
         `;
 
       case "large":
@@ -47,28 +54,41 @@ const ProgressBarContainer = styled.div`
 
       default:
         return css`
-          height: 10px;
+          height: 12px;
+          font-size: ${defaultTheme.fontSize.base};
         `;
     }
-  }}
+  }};
+
+  background-color: ${(props) => {
+    return props.backgroundColor;
+  }};
+  /* Add the border for the progress bar when there is label inside.*/
+  ${(props) => {
+    if (props.buildinLabel) {
+      return css`     
+     border: 1px solid;
+     border-color: ${getThemePropSelector("border")}};`;
+    }
+  }};
 `;
 
 const TopLeftLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
   display: inline-block;
+  font-size: ${defaultTheme.fontSize.large};
   font-weight: ${defaultTheme.fontWeight.bold};
   color: ${getThemePropSelector("textPrimary")}};
 `;
 
 const TopRightLabel = styled.span`
   display: inline-block;
-  color: ${defaultTheme.gray};
   font-size: ${defaultTheme.fontSize.small};
+  color: ${getThemePropSelector("textPrimary")}};
 `;
 
 const BottomLabel = styled.span`
-  color: ${getThemePropSelector("textPrimary")}};
-  display: inline-block;
+  display: inline-block; 
+  color: ${getThemePropSelector("textSecondary")}};
 `;
 
 const TopLabelsContainer = styled.div`
@@ -80,12 +100,13 @@ const TopLabelsContainer = styled.div`
 
 const BottomLabelsContainer = styled(TopLabelsContainer)`
   margin: ${defaultTheme.padding.smaller} 0 0 0;
+  font-size: ${defaultTheme.fontSize.smaller};
 `;
 
 const FilledAreaContainer = styled.div`
   border-radius: 12px;
   height: 100%;
-  ${props => {
+  ${(props) => {
     return css`
       @keyframes widthAnimation {
         from {
@@ -105,14 +126,21 @@ const FilledAreaContainer = styled.div`
   }}
 `;
 
+const BuildinLabel = styled.span`
+  color: ${getThemePropSelector("textPrimary")}};
+  padding-right:5px;
+`;
+
 function ProgressBar({
   percentage = 50,
   size = "base",
   color,
-  topLeftLabel = "",
-  topRightLabel = "",
-  bottomLeftLabel = "",
-  bottomRightLabel = ""
+  backgroundColor = "#332C2C",
+  topLeftLabel,
+  topRightLabel,
+  bottomLeftLabel,
+  bottomRightLabel,
+  buildinLabel,
 }: ProgressBarProps) {
   return (
     <Container className="sc-progressbar">
@@ -130,9 +158,19 @@ function ProgressBar({
           )}
         </TopLabelsContainer>
       )}
-      <ProgressBarContainer size={size}>
-        <FilledAreaContainer color={color} width={percentage} />
+      <ProgressBarContainer
+        className="sc-progressbarcontainer"
+        size={size}
+        buildinLabel={buildinLabel}
+        backgroundColor={backgroundColor}
+      >
+        <FilledAreaContainer
+          color={color}
+          width={percentage}
+        ></FilledAreaContainer>
+        <BuildinLabel>{buildinLabel}</BuildinLabel>
       </ProgressBarContainer>
+
       {(bottomLeftLabel || bottomRightLabel) && (
         <BottomLabelsContainer>
           {bottomLeftLabel && (

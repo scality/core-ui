@@ -7,7 +7,7 @@ import { Wrapper, Title } from "./common";
 storiesOf("ProgressBar", module).add("Default", () => {
   return (
     <Wrapper>
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "260px" }}>
         <Title>Smaller</Title>
         <ProgressBar
           size="smaller"
@@ -16,16 +16,19 @@ storiesOf("ProgressBar", module).add("Default", () => {
           topRightLabel="100GB Total"
           bottomLeftLabel="50GB Used"
           bottomRightLabel="50GB Free"
+          buildinLabel="50%"
+          backgroundColor="#87929D"
         />
 
-        <Title>Small</Title>
+        <Title>Base</Title>
         <ProgressBar
-          size="small"
+          size="base"
           percentage={50}
-          topLeftLabel="50%"
-          topRightLabel="100GB Total"
-          bottomLeftLabel="50GB Used"
-          bottomRightLabel="50GB Free"
+          topLeftLabel="Usage"
+          topRightLabel="50%"
+          bottomLeftLabel="5.17TB STORED - 13TB USED"
+          bottomRightLabel="12.9TB FREE - 25.83TB TOTAL"
+          buildinLabel="50%"
         />
 
         <Title>Large</Title>
@@ -36,6 +39,8 @@ storiesOf("ProgressBar", module).add("Default", () => {
           topRightLabel="100GB Total"
           bottomLeftLabel="50GB Used"
           bottomRightLabel="50GB Free"
+          buildinLabel="50%"
+          backgroundColor="#87929D"
         />
 
         <Title>Larger</Title>
@@ -46,6 +51,8 @@ storiesOf("ProgressBar", module).add("Default", () => {
           topRightLabel="100GB Total"
           bottomLeftLabel="50GB Used"
           bottomRightLabel="50GB Free"
+          buildinLabel="50%"
+          backgroundColor="#87929D"
         />
 
         <Title>Different colors</Title>
@@ -57,12 +64,16 @@ storiesOf("ProgressBar", module).add("Default", () => {
           topRightLabel="100GB Total"
           bottomLeftLabel="50GB Used"
           bottomRightLabel="50GB Free"
+          buildinLabel="50%"
+          backgroundColor="#87929D"
         />
         <ProgressBar
           size="smaller"
           color="#ff5722"
           percentage={10}
           topLeftLabel="10%"
+          buildinLabel="10%"
+          backgroundColor="#87929D"
         />
         <ProgressBar
           size="smaller"
@@ -70,6 +81,8 @@ storiesOf("ProgressBar", module).add("Default", () => {
           percentage={90}
           topLeftLabel="90% Used"
           topRightLabel="100GB Total"
+          buildinLabel="90%"
+          backgroundColor="#87929D"
         />
       </div>
     </Wrapper>
