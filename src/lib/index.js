@@ -34,6 +34,7 @@ import CircularProgressBar from "./components/circularprogressbar/CircularProgre
 import AreaChart from "./components/areachart/AreaChart.component";
 import CollapsiblePanel from "./components/collapsiblepanel/CollapsiblePanel.component.js";
 import LateralNavbarLayout from "./components/lateralnavbarlayout/LateralNavbarLayout.component";
+import StatusBar from "./components/statusbar/StatusBar.component";
 
 export {
   LOADER_SIZE,
@@ -69,4 +70,5 @@ export {
   AreaChart,
   CollapsiblePanel,
   LateralNavbarLayout,
+  StatusBar,
 };

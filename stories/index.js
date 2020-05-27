@@ -32,3 +32,4 @@ import "./circularprogressbar";
 import "./areachart";
 import "./colorPalette";
 import "./lateralnavbarlayout";
+import "./statusbar";

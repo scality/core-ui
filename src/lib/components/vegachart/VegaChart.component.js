@@ -6,7 +6,7 @@ import vegaEmbed from "vega-embed";
 type Props = {
   id: string,
   spec: Object,
-  theme?: string // predefine theme light/dark, or 'custom'
+  theme?: string, // predefine theme light/dark, or 'custom'
   // How to theme tooltip:
   // https://github.com/vega/vega-tooltip/blob/master/docs/customizing_your_tooltip.md)
 };
@@ -32,29 +32,31 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
         labelColor: brandText,
         titleColor: brandText,
         grid: false,
-        domainColor: currentBackgroundColor2
+        domainColor: currentBackgroundColor2,
       },
       title: {
-        color: brandText
+        color: brandText,
+        font: "Lato",
       },
       view: { stroke: "transparent", fill: currentBackgroundColor2 },
       // the headers provide a title and labels for faceted plots.
       header: {
-        labelColor: brandText
+        labelColor: brandText,
       },
       // the label of max/min
       text: {
-        color: brandText
+        color: brandText,
+        font: "Lato",
       },
       // the up,bottom trend line and verticle line when hover
       rule: {
-        color: brandText
+        color: brandText,
       },
       legend: {
         labelColor: brandText,
-        titleColor: brandText
-      }
-    }
+        titleColor: brandText,
+      },
+    },
   };
   const themedSpec = { ...spec, ...themeConfig };
 
@@ -66,8 +68,15 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
       // ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor")
       // are included with the embedded view.
       // If the value is true, all action links will be shown and none if the value is false.
-      actions: false
-    });
+      actions: false,
+    })
+      .then(({ spec, view }) => {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/)
+        view.addEventListener("click", function (event, item) {
+          // Event Handling refer to: https://github.com/vega/vega-view#event-handling
+        });
+      })
+      .catch(console.error);
   }, [id, themedSpec, theme]);
 
   return (
