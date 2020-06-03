@@ -31,7 +31,7 @@ storiesOf("ProgressBar", module).add("Default", () => {
           buildinLabel="50%"
         />
 
-        <Title>Large</Title>
+        <Title>Large with animation</Title>
         <ProgressBar
           size="large"
           percentage={50}
@@ -41,6 +41,7 @@ storiesOf("ProgressBar", module).add("Default", () => {
           bottomRightLabel="50GB Free"
           buildinLabel="50%"
           backgroundColor="#87929D"
+          isAnimation={true}
         />
 
         <Title>Larger</Title>

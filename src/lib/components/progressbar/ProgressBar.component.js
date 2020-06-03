@@ -16,10 +16,12 @@ export type ProgressBarProps = {
   bottomLeftLabel?: string,
   bottomRightLabel?: string,
   buildinLabel?: string,
+  // The animation to full the progress bar
+  isAnimation?: boolean,
 };
 
 const Container = styled.div`
-  margin: ${defaultTheme.padding.small};
+  /* margin: ${defaultTheme.padding.small}; */
 `;
 
 const ProgressBarContainer = styled.div`
@@ -107,7 +109,8 @@ const FilledAreaContainer = styled.div`
   border-radius: 12px;
   height: 100%;
   ${(props) => {
-    return css`
+    if (props.isAnimation) {
+      return css`
       @keyframes widthAnimation {
         from {
           width: 0%;
@@ -123,6 +126,12 @@ const FilledAreaContainer = styled.div`
       background-color: ${props.color || getTheme(props).secondary}
       width: ${props.width}%;
     `;
+    } else {
+      return css`
+        background-color: ${props.color || getTheme(props).secondary};
+        width: ${props.width}%;
+      `;
+    }
   }}
 `;
 
@@ -141,6 +150,7 @@ function ProgressBar({
   bottomLeftLabel,
   bottomRightLabel,
   buildinLabel,
+  isAnimation = false,
 }: ProgressBarProps) {
   return (
     <Container className="sc-progressbar">
@@ -167,6 +177,7 @@ function ProgressBar({
         <FilledAreaContainer
           color={color}
           width={percentage}
+          isAnimation={isAnimation}
         ></FilledAreaContainer>
         <BuildinLabel>{buildinLabel}</BuildinLabel>
       </ProgressBarContainer>
