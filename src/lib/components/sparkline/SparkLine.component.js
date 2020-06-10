@@ -14,7 +14,7 @@ type Props = {
   lineConfig?: Object,
   sparkLineColor?: string,
   upTrendColor?: string,
-  bottomTrendColor?: string
+  bottomTrendColor?: string,
 };
 
 function SparkLine({
@@ -29,13 +29,13 @@ function SparkLine({
   lineConfig,
   sparkLineColor,
   upTrendColor = defaultTheme.yellowOrange,
-  bottomTrendColor = defaultTheme.green
+  bottomTrendColor = defaultTheme.green,
 }: Props) {
   const spec = {
     title: { text: title },
     data: { values: data },
     facet: {
-      row
+      row,
     },
     spec: {
       width,
@@ -47,8 +47,8 @@ function SparkLine({
           encoding: {
             x: xAxis,
             y: yAxis,
-            color: { value: sparkLineColor }
-          }
+            color: { value: sparkLineColor },
+          },
         },
         // display the label to specify the max/min data
         {
@@ -57,11 +57,11 @@ function SparkLine({
             style: "labelMin",
             align: "bottom",
             dy: height / 2,
-            dx: width / 2 + 10
+            dx: width / 2 + 10,
           },
           encoding: {
-            text: { aggregate: "min", field: "y", type: "quantitative" }
-          }
+            text: { aggregate: "min", field: "y", type: "quantitative" },
+          },
         },
         {
           mark: {
@@ -69,11 +69,11 @@ function SparkLine({
             style: "labelMax",
             align: "top",
             dy: -(height / 2),
-            dx: width / 2 + 10
+            dx: width / 2 + 10,
           },
           encoding: {
-            text: { aggregate: "max", field: "y", type: "quantitative" }
-          }
+            text: { aggregate: "max", field: "y", type: "quantitative" },
+          },
         },
         // display the up and bottom trend line
         {
@@ -81,45 +81,49 @@ function SparkLine({
           encoding: {
             y: { aggregate: "max", field: "y", type: "quantitative" },
             x: { value: width - 15 },
-            x2: { value: width }
-          }
+            x2: { value: width },
+          },
         },
         {
           mark: {
             type: "rule",
             style: "ruleMaxStart",
             color: upTrendColor,
-            opacity: 0.1
+            opacity: 0.1,
           },
           encoding: {
             y: { aggregate: "max", field: "y", type: "quantitative" },
             x: { value: 0 },
-            x2: { value: width - 15 }
-          }
+            x2: { value: width - 15 },
+          },
         },
         {
-          mark: { type: "rule", style: "ruleMinEnd", color: bottomTrendColor },
+          mark: {
+            type: "rule",
+            style: "ruleMinEnd",
+            color: bottomTrendColor,
+            opacity: 0.1,
+          },
           encoding: {
             y: { value: height },
             x: { value: width - 15 },
-            x2: { value: width }
-          }
+            x2: { value: width },
+          },
         },
         {
           mark: {
             type: "rule",
             style: "ruleMinStart",
             color: bottomTrendColor,
-            opacity: 0.1
           },
           encoding: {
             y: { value: height },
             x: { value: 0 },
-            x2: { value: width - 15 }
-          }
-        }
-      ]
-    }
+            x2: { value: width - 15 },
+          },
+        },
+      ],
+    },
   };
   return <VegaChart className="sc-sparkline" id={id} spec={spec}></VegaChart>;
 }
