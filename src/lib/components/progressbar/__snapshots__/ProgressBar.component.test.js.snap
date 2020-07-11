@@ -17,7 +17,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Smaller
     </h3>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -38,7 +38,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw iOmtUz"
+          className="sc-gzVnrw juUkfm"
           width={50}
         />
         <span
@@ -68,7 +68,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Base
     </h3>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -89,7 +89,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="base"
       >
         <div
-          className="sc-gzVnrw iOmtUz"
+          className="sc-gzVnrw juUkfm"
           width={50}
         />
         <span
@@ -116,10 +116,10 @@ exports[`Storyshots ProgressBar Default 1`] = `
     <h3
       className="sc-iwsKbI kghVKP"
     >
-      Large
+      Large with animation
     </h3>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -170,7 +170,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Larger
     </h3>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -191,7 +191,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="larger"
       >
         <div
-          className="sc-gzVnrw iOmtUz"
+          className="sc-gzVnrw juUkfm"
           width={50}
         />
         <span
@@ -221,7 +221,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Different colors
     </h3>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -242,7 +242,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw foSaKD"
+          className="sc-gzVnrw fApfET"
           color="#2f67ac"
           width={50}
         />
@@ -268,7 +268,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -284,7 +284,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw cOgprB"
+          className="sc-gzVnrw jiAxeB"
           color="#ff5722"
           width={10}
         />
@@ -296,7 +296,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-bdVaJa elpbvZ sc-progressbar"
+      className="sc-bdVaJa hEPghN sc-progressbar"
     >
       <div
         className="sc-EHOje kvGeEx"
@@ -317,7 +317,7 @@ exports[`Storyshots ProgressBar Default 1`] = `
         size="smaller"
       >
         <div
-          className="sc-gzVnrw jxAtbd"
+          className="sc-gzVnrw gIYNeu"
           color="#982803"
           width={90}
         />
