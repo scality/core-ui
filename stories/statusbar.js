@@ -49,24 +49,24 @@ const color = {
   legend: null,
 };
 
-const transform = [
-  // Calculate Transform: transform extends data objects with new fields (columns).
-  {
-    calculate: "'https://www.google.com/search?q=' + datum.date",
-    as: "url",
-  },
-];
+// const transform = [
+//   // Calculate Transform: transform extends data objects with new fields (columns).
+//   {
+//     calculate: "'https://www.google.com/search?q=' + datum.date",
+//     as: "url",
+//   },
+// ];
 
 // The mark becomes a hyperlink. The specified URL is loaded upon a mouse click.
 // Note that using Hyperlink would lose all the context. `VegaEmbed` provides us a way to use `addEventListener`.
-const href = {
-  field: "url",
-  type: "nominal",
-  condition: {
-    test: "datum.alertNum === 0",
-    field: null,
-  },
-};
+// const href = {
+//   field: "url",
+//   type: "nominal",
+//   condition: {
+//     test: "datum.alertNum === 0",
+//     field: null,
+//   },
+// };
 
 const tooltip = [
   {
@@ -97,8 +97,8 @@ storiesOf("StatusBar", module).add("Default", () => {
         xAxis={xAxis}
         yAxis={yAxis}
         color={color}
-        transform={transform}
-        href={href}
+        // transform={transform}
+        //  href={href}
         tooltip={tooltip}
         text={text}
       />
