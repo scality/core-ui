@@ -11,7 +11,7 @@ type Props = {
   lineConfig?: Object,
   width?: number,
   height?: number,
-  displayTrendLine?: boolean
+  displayTrendLine?: boolean,
 };
 
 function LineChart({
@@ -35,25 +35,25 @@ function LineChart({
         type: "single",
         on: "mousemove",
         encodings: ["x"],
-        nearest: true
-      }
+        nearest: true,
+      },
     },
     encoding: {
       color: {
         condition: {
           selection: { not: "index" },
-          value: "transparent"
-        }
-      }
-    }
+          value: "transparent",
+        },
+      },
+    },
   };
 
-  const lines = yAxis.map(y => ({
+  const lines = yAxis.map((y) => ({
     mark: {
       type: "line",
-      ...lineConfig
+      ...lineConfig,
     },
-    encoding: { y }
+    encoding: { y },
   }));
 
   const currentTimeTrendline = {
@@ -61,13 +61,13 @@ function LineChart({
       type: "rule",
       style: "ruleCurrentTime",
       color: "white",
-      opacity: 0.2
+      opacity: 0.2,
     },
     encoding: {
       x: { value: width / 2 },
       y: { value: height },
-      y2: { value: 0 }
-    }
+      y2: { value: 0 },
+    },
   };
 
   const topTrendline = {
@@ -75,26 +75,27 @@ function LineChart({
       type: "rule",
       style: "ruleTop",
       color: "orange",
-      opacity: 0.2
+      opacity: 0.2,
     },
     encoding: {
       y: { aggregate: "max", field: "capacity", type: "quantitative" },
       x: { value: 0 },
-      x2: { value: width }
-    }
+      x2: { value: width },
+    },
   };
 
   const spec = {
+    $schema: "https://vega.github.io/schema/vega-lite/v4.json",
     data: { values: data },
     encoding: {
       x: xAxis,
       color,
-      tooltip: tooltip && [xAxis, ...yAxis]
+      tooltip: tooltip && [xAxis, ...yAxis],
     },
     height,
     width,
     layer: [...lines],
-    ...rest
+    ...rest,
   };
   if (tooltip) {
     spec.layer.push(trendline);
