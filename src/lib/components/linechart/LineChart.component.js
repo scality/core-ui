@@ -85,12 +85,12 @@ function LineChart({
   };
 
   const spec = {
-    $schema: "https://vega.github.io/schema/vega-lite/v4.json",
     data: { values: data },
     encoding: {
       x: xAxis,
       color,
-      tooltip: tooltip && [xAxis, ...yAxis],
+      // To disable tooltips for a particular single view specification, you can set the "tooltip" property of a mark definition block to null.
+      tooltip: tooltip ? [xAxis, ...yAxis] : null,
     },
     height,
     width,
