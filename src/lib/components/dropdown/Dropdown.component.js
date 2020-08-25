@@ -116,13 +116,13 @@ function Dropdown({
   const [triggerSize, setTriggerSize] = useState();
 
   const refMenuCallback = useCallback(node => {
-    if (node !== null) {
+    if (node && node.getBoundingClientRect) {
       setMenuSize(node.getBoundingClientRect());
     }
   }, []);
 
   const refTriggerCallback = useCallback(node => {
-    if (node !== null) {
+    if (node && node.getBoundingClientRect) {
       setTriggerSize(node.getBoundingClientRect());
     }
   }, []);

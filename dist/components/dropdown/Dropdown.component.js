@@ -164,12 +164,12 @@ function Dropdown(_ref) {
       setTriggerSize = _useState6[1];
 
   var refMenuCallback = (0, _react.useCallback)(function (node) {
-    if (node !== null) {
+    if (node && node.getBoundingClientRect) {
       setMenuSize(node.getBoundingClientRect());
     }
   }, []);
   var refTriggerCallback = (0, _react.useCallback)(function (node) {
-    if (node !== null) {
+    if (node && node.getBoundingClientRect) {
       setTriggerSize(node.getBoundingClientRect());
     }
   }, []);
