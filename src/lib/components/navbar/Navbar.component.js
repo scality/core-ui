@@ -80,15 +80,16 @@ const TabItem = styled.div`
       }
     `;
   }};
-  ${(props) =>
-    props.selected &&
-    css`
-      border-bottom: 2px solid ${getTheme(props).primary};
-      border-top: 4px solid ${getTheme(props).primary};
+  ${(props) => {
+    const { secondary, backgroundBluer } = getTheme(props);
+    return props.selected && css`
+      border-bottom: 2px solid ${secondary};
+      background-color: ${backgroundBluer};
+      border-top: 4px solid ${secondary};
       span {
         padding-bottom: 2px;
       }
-    `};
+    `}};
 `;
 
 const TabLinkItem = styled(TabItem)`

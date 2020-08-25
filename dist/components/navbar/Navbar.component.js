@@ -74,7 +74,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n      border-bottom: 2px solid ", ";\n      border-top: 4px solid ", ";\n      span {\n        padding-bottom: 2px;\n      }\n    "]);
+  var data = _taggedTemplateLiteral(["\n      border-bottom: 2px solid ", ";\n      background-color: ", ";\n      border-top: 4px solid ", ";\n      span {\n        padding-bottom: 2px;\n      }\n    "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -159,7 +159,11 @@ var TabItem = _styledComponents["default"].div(_templateObject5(), defaultTheme.
 
   return (0, _styledComponents.css)(_templateObject6(), textPrimary, secondary, backgroundBluer, secondary);
 }, function (props) {
-  return props.selected && (0, _styledComponents.css)(_templateObject7(), (0, _utils.getTheme)(props).primary, (0, _utils.getTheme)(props).primary);
+  var _getTheme2 = (0, _utils.getTheme)(props),
+      secondary = _getTheme2.secondary,
+      backgroundBluer = _getTheme2.backgroundBluer;
+
+  return props.selected && (0, _styledComponents.css)(_templateObject7(), secondary, backgroundBluer, secondary);
 });
 
 var TabLinkItem = (0, _styledComponents["default"])(TabItem)(_templateObject8(), (0, _utils.getThemePropSelector)("textPrimary"));
