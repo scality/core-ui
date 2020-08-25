@@ -28,7 +28,7 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: ", ";\n  background-color: ", ";\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -124,7 +124,9 @@ var TabItemTitle = _styledComponents["default"].p(_templateObject5(), defaultThe
   return props.selected ? (0, _styledComponents.css)(_templateObject6(), textPrimary, (0, _utils.getTheme)(props).primary) : (0, _styledComponents.css)(_templateObject7(), textPrimary);
 });
 
-var TabContent = _styledComponents["default"].div(_templateObject8(), defaultTheme.padding.larger);
+var TabContent = _styledComponents["default"].div(_templateObject8(), defaultTheme.padding.larger, function (props) {
+  return (0, _utils.getTheme)(props).primary;
+});
 
 function Tab(_ref) {
   var items = _ref.items,

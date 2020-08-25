@@ -67,6 +67,7 @@ const TabItemTitle = styled.p`
 const TabContent = styled.div`
   margin: 0;
   padding: ${defaultTheme.padding.larger};
+  background-color: ${props => getTheme(props).primary};
 `;
 
 export default function Tab({
