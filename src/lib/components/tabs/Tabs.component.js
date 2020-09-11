@@ -8,12 +8,13 @@ import { getTheme } from "../../utils";
 type Item = {
   title: string,
   selected?: boolean,
-  onClick: any => void
+  onClick: (any) => void,
 };
 
 type Props = {
   items: Array<Item>,
-  children: Node
+  children: Node,
+  activeTabColor: string,
 };
 
 const TabsContainer = styled.div`
@@ -33,13 +34,14 @@ const TabItem = styled.div`
   flex-basis: 15%;
   flex-shrink: 1;
   text-align: center;
-  ${props => {
+  ${(props) => {
     return (
       !props.selected &&
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${getTheme(props).primary};
+          background-color: ${props.activeTabColor ||
+          getTheme(props).primaryDark1};
         }
       `
     );
@@ -50,12 +52,12 @@ const TabItemTitle = styled.p`
   margin: 0;
   font-size: ${defaultTheme.fontSize.large};
   padding: ${defaultTheme.padding.base} 0 16.5px;
-  ${props => {
-    const { textPrimary } = getTheme(props);
+  ${(props) => {
+    const { textPrimary, primaryDark1 } = getTheme(props);
     return props.selected
       ? css`
           color: ${textPrimary};
-          background-color: ${getTheme(props).primary};
+          background-color: ${props.activeTabColor || primaryDark1};
         `
       : css`
           color: ${textPrimary};
@@ -68,7 +70,12 @@ const TabContent = styled.div`
   padding: ${defaultTheme.padding.larger};
 `;
 
-export default function Tab({ items, children, ...rest }: Props) {
+export default function Tab({
+  items,
+  children,
+  activeTabColor,
+  ...rest
+}: Props) {
   return (
     <TabsContainer className="sc-tabs" {...rest}>
       <TabBar className="sc-tabs-bar">
@@ -79,8 +86,13 @@ export default function Tab({ items, children, ...rest }: Props) {
             onClick={selected ? () => {} : onClick}
             selected={selected}
             {...itemRest}
+            activeTabColor={activeTabColor}
           >
-            <TabItemTitle className="sc-tabs-item-title" selected={selected}>
+            <TabItemTitle
+              className="sc-tabs-item-title"
+              selected={selected}
+              activeTabColor={activeTabColor}
+            >
               {title}
             </TabItemTitle>
           </TabItem>
