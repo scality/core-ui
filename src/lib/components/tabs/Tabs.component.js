@@ -8,12 +8,13 @@ import { getTheme } from "../../utils";
 type Item = {
   title: string,
   selected?: boolean,
-  onClick: any => void
+  onClick: (any) => void,
+  activeColor: string,
 };
 
 type Props = {
   items: Array<Item>,
-  children: Node
+  children: Node,
 };
 
 const TabsContainer = styled.div`
@@ -33,13 +34,14 @@ const TabItem = styled.div`
   flex-basis: 15%;
   flex-shrink: 1;
   text-align: center;
-  ${props => {
+  ${(props) => {
     return (
       !props.selected &&
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${getTheme(props).primary};
+          background-color: ${props.activeTabColor}||
+            ${defaultTheme.brand.primaryDark1};
         }
       `
     );
@@ -50,12 +52,13 @@ const TabItemTitle = styled.p`
   margin: 0;
   font-size: ${defaultTheme.fontSize.large};
   padding: ${defaultTheme.padding.base} 0 16.5px;
-  ${props => {
+  ${(props) => {
     const { textPrimary } = getTheme(props);
     return props.selected
       ? css`
           color: ${textPrimary};
-          background-color: ${getTheme(props).primary};
+          background-color: ${props.activeTabColor}||
+            ${defaultTheme.brand.primaryDark1};
         `
       : css`
           color: ${textPrimary};
