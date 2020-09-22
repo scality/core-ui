@@ -20,13 +20,11 @@ export type ProgressBarProps = {
   isAnimation?: boolean,
 };
 
-const Container = styled.div`
-  /* margin: ${defaultTheme.padding.small}; */
-`;
+const Container = styled.div``;
 
 const ProgressBarContainer = styled.div`
   display: flex;
-  border-radius: 12px;
+  border-radius: 4px;
   justify-content: space-between;
   align-items: center;
 
@@ -41,12 +39,13 @@ const ProgressBarContainer = styled.div`
       case "base":
         return css`
           height: 12px;
-          font-size: ${defaultTheme.fontSize.base};
+          font-size: ${defaultTheme.fontSize.small};
         `;
 
       case "large":
         return css`
           height: 15px;
+          font-size: ${defaultTheme.fontSize.base};
         `;
 
       case "larger":
@@ -106,7 +105,9 @@ const BottomLabelsContainer = styled(TopLabelsContainer)`
 `;
 
 const FilledAreaContainer = styled.div`
-  border-radius: 12px;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 4px;
   height: 100%;
   ${(props) => {
     if (props.isAnimation) {
@@ -135,9 +136,10 @@ const FilledAreaContainer = styled.div`
   }}
 `;
 
-const BuildinLabel = styled.span`
-  color: ${getThemePropSelector("textPrimary")}};
-  padding-right:5px;
+const BuildinLabel = styled.div`
+  color: ${getThemePropSelector("textPrimary")};
+  padding-left: 5px;
+  white-space: nowrap;
 `;
 
 function ProgressBar({
@@ -178,8 +180,9 @@ function ProgressBar({
           color={color}
           width={percentage}
           isAnimation={isAnimation}
-        ></FilledAreaContainer>
-        <BuildinLabel>{buildinLabel}</BuildinLabel>
+        >
+          <BuildinLabel>{buildinLabel}</BuildinLabel>
+        </FilledAreaContainer>
       </ProgressBarContainer>
 
       {(bottomLeftLabel || bottomRightLabel) && (
