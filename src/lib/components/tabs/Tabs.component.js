@@ -69,6 +69,7 @@ const TabItemTitle = styled.p`
 const TabContent = styled.div`
   margin: 0;
   padding: ${defaultTheme.padding.larger};
+  overflow-y: scroll;
 `;
 
 export default function Tab({ items, children, ...rest }: Props) {
