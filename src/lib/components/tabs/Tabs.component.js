@@ -40,8 +40,7 @@ const TabItem = styled.div`
       css`
         &:hover {
           cursor: pointer;
-          background-color: ${props.activeTabColor ||
-          getTheme(props).primaryDark1};
+          background-color: ${props.activeTabColor || getTheme(props).primary};
         }
       `
     );
@@ -53,11 +52,11 @@ const TabItemTitle = styled.p`
   font-size: ${defaultTheme.fontSize.large};
   padding: ${defaultTheme.padding.base} 0 16.5px;
   ${(props) => {
-    const { textPrimary, primaryDark1 } = getTheme(props);
+    const { textPrimary, primary } = getTheme(props);
     return props.selected
       ? css`
           color: ${textPrimary};
-          background-color: ${props.activeTabColor || primaryDark1};
+          background-color: ${props.activeTabColor || primary};
         `
       : css`
           color: ${textPrimary};
