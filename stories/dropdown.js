@@ -98,6 +98,16 @@ storiesOf("Dropdown", module).add("Default", () => {
         variant="critical"
         text="critical"
       />
+      <Title>Dropdown Outlined</Title>
+      <Dropdown items={items} variant="base" text="secondary" outlined={true} />
+      <Title>Dropdown Round Corner</Title>
+      <Dropdown
+        items={items}
+        variant="base"
+        text="primary"
+        outlined={true}
+        round={true}
+      />
     </Wrapper>
   );
 });
