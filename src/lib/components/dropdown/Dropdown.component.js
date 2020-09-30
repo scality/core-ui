@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import {
   ButtonStyled,
   ButtonIcon,
-  ButtonText
+  ButtonText,
 } from "../button/Button.component";
 import * as defaultTheme from "../../style/theme";
 import { getThemePropSelector } from "../../utils";
@@ -14,7 +14,7 @@ export type Item = {
   label: string,
   name?: string,
   selected?: boolean,
-  onClick: any => void
+  onClick: (any) => void,
 };
 type Items = Array<Item>;
 type Props = {
@@ -24,30 +24,43 @@ type Props = {
   title?: string,
   items: Items,
   icon?: Node,
-  caret?: boolean
+  caret?: boolean,
+  outlined?: boolean,
+  // if rounds the corners
+  round?: boolean,
 };
 
 const DropdownStyled = styled.div`
   position: relative;
   user-select: none;
   cursor: pointer;
-  .trigger {
+
+  ${(props) =>
+    props.round
+      ? `.trigger {
+    margin: 0;
+  }`
+      : `.trigger {
     margin: 0;
     border-radius: 0;
-  }
+  }`}
 `;
 
 const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  border: 1px solid ${getThemePropSelector("primary")};
+  border: 1px solid
+    ${(props) =>
+      props.outlined
+        ? getThemePropSelector("textPrimary ")
+        : getThemePropSelector("primary")};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
 
-  ${props => {
+  ${(props) => {
     if (
       props.size &&
       props.triggerSize &&
@@ -109,19 +122,21 @@ function Dropdown({
   variant = "base",
   title,
   caret = true,
+  outlined = false,
+  round = false,
   ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
 
-  const refMenuCallback = useCallback(node => {
+  const refMenuCallback = useCallback((node) => {
     if (node !== null) {
       setMenuSize(node.getBoundingClientRect());
     }
   }, []);
 
-  const refTriggerCallback = useCallback(node => {
+  const refTriggerCallback = useCallback((node) => {
     if (node !== null) {
       setTriggerSize(node.getBoundingClientRect());
     }
@@ -132,6 +147,7 @@ function Dropdown({
       active={open}
       variant={variant}
       className="sc-dropdown"
+      round={round}
       {...rest}
     >
       <TriggerStyled
@@ -140,10 +156,11 @@ function Dropdown({
         className="trigger"
         onBlur={() => setOpen(!open)}
         onFocus={() => setOpen(!open)}
-        onClick={event => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         tabIndex="0"
         title={title}
         ref={refTriggerCallback}
+        outlined={outlined}
       >
         {icon && (
           <ButtonIcon text={text} size={size}>
