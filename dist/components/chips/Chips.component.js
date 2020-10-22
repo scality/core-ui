@@ -155,7 +155,7 @@ var ChipsContainer = _styledComponents["default"].div(_templateObject(), default
       return (0, _styledComponents.css)(_templateObject6());
   }
 }, function (props) {
-  return (0, _styledComponents.css)(_templateObject7(), props.variant === "warning" ? "color: ".concat(defaultTheme.blackLight) : "color: ".concat(defaultTheme.white));
+  return (0, _styledComponents.css)(_templateObject7(), props.variant === "warning" ? "color: ".concat(defaultTheme.blackLight, ";") : "color: ".concat(defaultTheme.white, ";"));
 }, function (props) {
   var brand = (0, _utils.getTheme)(props);
   var brandLight = (0, _polished.lighten)(0.1, brand[props.variant]).toString();

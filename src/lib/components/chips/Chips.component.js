@@ -77,8 +77,8 @@ const ChipsContainer = styled.div`
 ${props => {
   return css`
     ${props.variant === "warning"
-      ? `color: ${defaultTheme.blackLight}`
-      : `color: ${defaultTheme.white}`}
+      ? `color: ${defaultTheme.blackLight};`
+      : `color: ${defaultTheme.white};`}
   `;
 }}
 
