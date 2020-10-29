@@ -84,8 +84,8 @@ export default function Tab({
             key={index}
             onClick={selected ? () => {} : onClick}
             selected={selected}
-            {...itemRest}
             activeTabColor={activeTabColor}
+            {...itemRest}
           >
             <TabItemTitle
               className="sc-tabs-item-title"
