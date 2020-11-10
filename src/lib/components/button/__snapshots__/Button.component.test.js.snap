@@ -258,7 +258,7 @@ exports[`Storyshots Button Default 1`] = `
     Button Disabled
   </h3>
   <button
-    className="sc-bxivhb dsfYFV sc-button"
+    className="sc-bxivhb ddnOwU sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -280,7 +280,51 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb diowwC sc-button"
+    className="sc-bxivhb jpzxRX sc-button"
+    disabled={true}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-bZQynM iMWVsx"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-EHOje boinrg"
+        >
+          secondary
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-bxivhb vrodH sc-button"
+    disabled={true}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-bZQynM iMWVsx"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-EHOje boinrg"
+        >
+          critical
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-bxivhb dsiAlN sc-button"
     disabled={true}
     size="larger"
     title=""
@@ -332,7 +376,7 @@ exports[`Storyshots Button Default 1`] = `
     Button Loading
   </h3>
   <button
-    className="sc-bxivhb dsfYFV sc-button"
+    className="sc-bxivhb ddnOwU sc-button"
     disabled={true}
     size="base"
     title=""
