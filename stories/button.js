@@ -39,6 +39,18 @@ storiesOf("Button", module)
           onClick={action("Button Disabled Click")}
         />
         <Button
+          variant="secondary"
+          disabled
+          text="secondary"
+          onClick={action("Button Disabled Click")}
+        />
+        <Button
+          variant="critical"
+          disabled
+          text="critical"
+          onClick={action("Button Disabled Click")}
+        />
+        <Button
           inverted={true}
           size="larger"
           icon={<i className="fas fa-star" />}
