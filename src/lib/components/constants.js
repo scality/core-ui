@@ -17,11 +17,10 @@ export type Size =
   | "huge"
   | "massive";
 
+// Replace the "success" by "health", but keep the key in the color-paltte for the moment.
 export type Variant =
   | "base"
   | "secondary"
-  | "success"
+  | "healthy"
   | "warning"
   | "danger"
-  | "healthy"
-  | "critical";

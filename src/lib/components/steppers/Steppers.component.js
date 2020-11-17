@@ -40,7 +40,7 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${(props) => {
-    const { danger, success, secondary } = getTheme(props);
+    const { danger, healthy, secondary } = getTheme(props);
     if (props.error) {
       return css`
         background-color: ${danger};
@@ -56,7 +56,7 @@ const Circle = styled.div`
       `;
     } else if (props.completed) {
       return css`
-        background-color: ${success};
+        background-color: ${healthy};
         color: ${defaultTheme.white};
       `;
     } else {
@@ -84,7 +84,7 @@ const BottomBar = styled.hr`
   ${(props) => {
     if (props.completed) {
       return css`
-        border-left: 2px solid ${getTheme(props).success};
+        border-left: 2px solid ${getTheme(props).healthy};
       `;
     } else {
       return css`

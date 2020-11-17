@@ -2,10 +2,10 @@
 
 exports[`Storyshots BarChart Default 1`] = `
 <div
-  className="sc-bwzfXH hilSGa"
+  className="sc-bwzfXH hyPwIk"
 >
   <h3
-    className="sc-htpNat loHzkE"
+    className="sc-htpNat kmOyGE"
   >
     Vertical Stacked Bar Chart Demo 
   </h3>
@@ -14,7 +14,7 @@ exports[`Storyshots BarChart Default 1`] = `
     id="vis_vertical_stacked"
   />
   <h3
-    className="sc-htpNat loHzkE"
+    className="sc-htpNat kmOyGE"
   >
     Horizontal Stacked Bar Chart Demo 
   </h3>
@@ -23,7 +23,7 @@ exports[`Storyshots BarChart Default 1`] = `
     id="vis_horizontal_stacked"
   />
   <h3
-    className="sc-htpNat loHzkE"
+    className="sc-htpNat kmOyGE"
   >
     Vertical Bar Chart Demo 
   </h3>
@@ -32,7 +32,7 @@ exports[`Storyshots BarChart Default 1`] = `
     id="vis_vertical"
   />
   <h3
-    className="sc-htpNat loHzkE"
+    className="sc-htpNat kmOyGE"
   >
     Horizontal Bar Chart Demo 
   </h3>

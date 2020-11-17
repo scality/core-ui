@@ -2,15 +2,15 @@
 
 exports[`Storyshots Banner Default 1`] = `
 <div
-  className="sc-ifAKCX krxbjr"
+  className="sc-ifAKCX ugGGx"
 >
   <h3
-    className="sc-EHOje jFyawi"
+    className="sc-EHOje ftwWfK"
   >
     Error banner 
   </h3>
   <div
-    className="sc-bdVaJa YGaMz sc-banner"
+    className="sc-bdVaJa bWrxOz sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -31,12 +31,12 @@ exports[`Storyshots Banner Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-EHOje jFyawi"
+    className="sc-EHOje ftwWfK"
   >
     Warning banner 
   </h3>
   <div
-    className="sc-bdVaJa klmDVe sc-banner"
+    className="sc-bdVaJa jmTOYp sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -57,12 +57,12 @@ exports[`Storyshots Banner Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-EHOje jFyawi"
+    className="sc-EHOje ftwWfK"
   >
     Success banner 
   </h3>
   <div
-    className="sc-bdVaJa fpTUGs sc-banner"
+    className="sc-bdVaJa fUTRqM sc-banner"
   >
     <i
       className="fas fa-check-circle"

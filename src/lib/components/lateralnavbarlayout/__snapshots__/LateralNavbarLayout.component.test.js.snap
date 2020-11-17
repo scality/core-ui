@@ -9,10 +9,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar docked 1`] = `
       className="sc-jTzLTM uWek"
     >
       <div
-        className="sc-htoDjs hlIRNL sc-sidebar"
+        className="sc-htoDjs mffkx sc-sidebar"
       >
         <div
-          className="sc-dnqmqq eCZUVx sc-sidebar-item"
+          className="sc-dnqmqq hHMncO sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
@@ -26,7 +26,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-dnqmqq keEEvP sc-sidebar-item"
+          className="sc-dnqmqq gzcMSc sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
@@ -40,7 +40,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-dnqmqq keEEvP sc-sidebar-item"
+          className="sc-dnqmqq gzcMSc sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
@@ -55,10 +55,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-fjdhpX hlQASM main"
+        className="sc-fjdhpX cqEFOw main"
       >
         <div
-          className="sc-bdVaJa fzetMk sc-loader"
+          className="sc-bdVaJa gXtcHQ sc-loader"
           color="#87929D"
           size="massive"
         >
@@ -195,10 +195,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
     className="sc-jTzLTM uWek"
   >
     <div
-      className="sc-htoDjs jHkWRG sc-sidebar"
+      className="sc-htoDjs bTIpkD sc-sidebar"
     >
       <div
-        className="sc-dnqmqq eCZUVx sc-sidebar-item"
+        className="sc-dnqmqq hHMncO sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
@@ -216,11 +216,11 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
           Dashboard
         </div>
         <div
-          className="sc-gZMcBi dZkYTy"
+          className="sc-gZMcBi ehsNBu"
         />
       </div>
       <div
-        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        className="sc-dnqmqq gzcMSc sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
@@ -239,7 +239,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        className="sc-dnqmqq gzcMSc sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
@@ -259,10 +259,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
       </div>
     </div>
     <div
-      className="sc-fjdhpX hlQASM main"
+      className="sc-fjdhpX cqEFOw main"
     >
       <div
-        className="sc-bdVaJa fzetMk sc-loader"
+        className="sc-bdVaJa gXtcHQ sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -398,13 +398,13 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
     className="sc-jTzLTM uWek"
   >
     <div
-      className="sc-htoDjs jHkWRG sc-sidebar"
+      className="sc-htoDjs bTIpkD sc-sidebar"
     >
       <div
         className="sc-gqjmRU coMoOk"
       >
         <button
-          className="sc-bxivhb hAHRzA sc-button"
+          className="sc-bxivhb egRmZd sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -435,7 +435,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
         </button>
       </div>
       <div
-        className="sc-dnqmqq eCZUVx sc-sidebar-item"
+        className="sc-dnqmqq hHMncO sc-sidebar-item"
         data-cy="Dashboard"
         onClick={[Function]}
         title="Dashboard"
@@ -453,11 +453,11 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
           Dashboard
         </div>
         <div
-          className="sc-gZMcBi dZkYTy"
+          className="sc-gZMcBi ehsNBu"
         />
       </div>
       <div
-        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        className="sc-dnqmqq gzcMSc sc-sidebar-item"
         data-cy="Servers"
         onClick={[Function]}
         title="Servers"
@@ -476,7 +476,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
         </div>
       </div>
       <div
-        className="sc-dnqmqq keEEvP sc-sidebar-item"
+        className="sc-dnqmqq gzcMSc sc-sidebar-item"
         data-cy="Disks"
         onClick={[Function]}
         title="Disks"
@@ -496,10 +496,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
       </div>
     </div>
     <div
-      className="sc-fjdhpX hlQASM main"
+      className="sc-fjdhpX cqEFOw main"
     >
       <div
-        className="sc-bdVaJa fzetMk sc-loader"
+        className="sc-bdVaJa gXtcHQ sc-loader"
         color="#87929D"
         size="massive"
       >
