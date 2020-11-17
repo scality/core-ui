@@ -33,7 +33,7 @@ const tlNotifications = [
     uid: "4",
     title: "Hi",
     message: "I am Guidllaume. I live at TOP_LEFT",
-    variant: "success",
+    variant: "healthy",
     dismissAfter: 10000,
   },
 ];
@@ -49,7 +49,7 @@ const blNotifications = [
     uid: "6",
     title: "Hi",
     message: "I am Yanjin. I live at BOTTOM_LEFT",
-    variant: "success",
+    variant: "healthy",
     dismissAfter: 10000,
   },
 ];

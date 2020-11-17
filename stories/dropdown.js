@@ -95,8 +95,8 @@ storiesOf("Dropdown", module).add("Default", () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="critical"
-        text="critical"
+        variant="danger"
+        text="danger"
       />
     </Wrapper>
   );

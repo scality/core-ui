@@ -1,14 +1,14 @@
 // @flow
-import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import Button from "../src/lib/components/button/Button.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import { withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import Button from '../src/lib/components/button/Button.component';
+import { Wrapper, Title } from './common';
 
-storiesOf("Button", module)
+storiesOf('Button', module)
   .addDecorator(withKnobs)
-  .add("Default", () => {
+  .add('Default', () => {
     return (
       <Wrapper className="storybook-button">
         <Title>Button Default</Title>
@@ -23,32 +23,32 @@ storiesOf("Button", module)
         <Button variant="secondary" text="secondary" />
         <Button variant="healthy" text="healthy" />
         <Button variant="warning" text="warning" />
-        <Button variant="critical" text="critical" />
+        <Button variant="danger" text="danger" />
 
         <Title>Button Outlined</Title>
         <Button
           outlined
           text="Hello"
-          onClick={action("Button Outlined Click")}
+          onClick={action('Button Outlined Click')}
         />
 
         <Title>Button Disabled</Title>
         <Button
           disabled
           text="Hello"
-          onClick={action("Button Disabled Click")}
+          onClick={action('Button Disabled Click')}
         />
         <Button
           variant="secondary"
           disabled
           text="secondary"
-          onClick={action("Button Disabled Click")}
+          onClick={action('Button Disabled Click')}
         />
         <Button
-          variant="critical"
+          variant="danger"
           disabled
-          text="critical"
-          onClick={action("Button Disabled Click")}
+          text="danger"
+          onClick={action('Button Disabled Click')}
         />
         <Button
           inverted={true}

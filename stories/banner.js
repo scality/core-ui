@@ -25,7 +25,7 @@ storiesOf("Banner", module).add("Default", () => {
       </Banner>
       <Title>Success banner </Title>
       <Banner
-        variant="success"
+        variant="healthy"
         icon={<i className="fas fa-check-circle" />}
         title={"Success"}
       >
