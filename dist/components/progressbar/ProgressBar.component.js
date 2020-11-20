@@ -22,7 +22,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _templateObject17() {
-  var data = _taggedTemplateLiteral(["\n  color: ", "};\n  padding-right:5px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  padding-left: 5px;\n  white-space: nowrap;\n"]);
 
   _templateObject17 = function _templateObject17() {
     return data;
@@ -52,7 +52,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  border-radius: 12px;\n  height: 100%;\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  border-radius: 4px;\n  height: 100%;\n  ", "\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -142,7 +142,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n          height: 15px;\n        "]);
+  var data = _taggedTemplateLiteral(["\n          height: 15px;\n          font-size: ", ";\n        "]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -172,7 +172,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  border-radius: 12px;\n  justify-content: space-between;\n  align-items: center;\n\n  ", ";\n\n  background-color: ", ";\n  /* Add the border for the progress bar when there is label inside.*/\n  ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  border-radius: 4px;\n  justify-content: space-between;\n  align-items: center;\n\n  ", ";\n\n  background-color: ", ";\n  /* Add the border for the progress bar when there is label inside.*/\n  ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -182,7 +182,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  /* margin: ", "; */\n"]);
+  var data = _taggedTemplateLiteral([""]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -193,7 +193,7 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents["default"].div(_templateObject(), defaultTheme.padding.small);
+var Container = _styledComponents["default"].div(_templateObject());
 
 var ProgressBarContainer = _styledComponents["default"].div(_templateObject2(), function (props) {
   switch (props.size) {
@@ -201,10 +201,10 @@ var ProgressBarContainer = _styledComponents["default"].div(_templateObject2(), 
       return (0, _styledComponents.css)(_templateObject3(), defaultTheme.fontSize.smaller);
 
     case "base":
-      return (0, _styledComponents.css)(_templateObject4(), defaultTheme.fontSize.base);
+      return (0, _styledComponents.css)(_templateObject4(), defaultTheme.fontSize.small);
 
     case "large":
-      return (0, _styledComponents.css)(_templateObject5());
+      return (0, _styledComponents.css)(_templateObject5(), defaultTheme.fontSize.base);
 
     case "larger":
       return (0, _styledComponents.css)(_templateObject6());
@@ -238,7 +238,7 @@ var FilledAreaContainer = _styledComponents["default"].div(_templateObject14(), 
   }
 });
 
-var BuildinLabel = _styledComponents["default"].span(_templateObject17(), (0, _utils.getThemePropSelector)("textPrimary"));
+var BuildinLabel = _styledComponents["default"].div(_templateObject17(), (0, _utils.getThemePropSelector)("textPrimary"));
 
 function ProgressBar(_ref) {
   var _ref$percentage = _ref.percentage,
@@ -270,7 +270,7 @@ function ProgressBar(_ref) {
     color: color,
     width: percentage,
     isAnimation: isAnimation
-  }), _react["default"].createElement(BuildinLabel, null, buildinLabel)), (bottomLeftLabel || bottomRightLabel) && _react["default"].createElement(BottomLabelsContainer, null, bottomLeftLabel && _react["default"].createElement(BottomLabel, {
+  }, _react["default"].createElement(BuildinLabel, null, buildinLabel))), (bottomLeftLabel || bottomRightLabel) && _react["default"].createElement(BottomLabelsContainer, null, bottomLeftLabel && _react["default"].createElement(BottomLabel, {
     className: "sc-progressbar-bottomleftlabel"
   }, bottomLeftLabel), bottomRightLabel && _react["default"].createElement(BottomLabel, {
     className: "sc-progressbar-bottomrightlabel"

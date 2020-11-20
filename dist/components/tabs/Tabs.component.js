@@ -114,14 +114,15 @@ var TabsContainer = _styledComponents["default"].div(_templateObject(), defaultT
 var TabBar = _styledComponents["default"].div(_templateObject2());
 
 var TabItem = _styledComponents["default"].div(_templateObject3(), function (props) {
-  return !props.selected && (0, _styledComponents.css)(_templateObject4(), (0, _utils.getTheme)(props).primary);
+  return !props.selected && (0, _styledComponents.css)(_templateObject4(), props.activeTabColor || (0, _utils.getTheme)(props).primary);
 });
 
 var TabItemTitle = _styledComponents["default"].p(_templateObject5(), defaultTheme.fontSize.large, defaultTheme.padding.base, function (props) {
   var _getTheme = (0, _utils.getTheme)(props),
-      textPrimary = _getTheme.textPrimary;
+      textPrimary = _getTheme.textPrimary,
+      primary = _getTheme.primary;
 
-  return props.selected ? (0, _styledComponents.css)(_templateObject6(), textPrimary, (0, _utils.getTheme)(props).primary) : (0, _styledComponents.css)(_templateObject7(), textPrimary);
+  return props.selected ? (0, _styledComponents.css)(_templateObject6(), textPrimary, props.activeTabColor || primary) : (0, _styledComponents.css)(_templateObject7(), textPrimary);
 });
 
 var TabContent = _styledComponents["default"].div(_templateObject8(), defaultTheme.padding.larger, function (props) {
@@ -131,7 +132,8 @@ var TabContent = _styledComponents["default"].div(_templateObject8(), defaultThe
 function Tab(_ref) {
   var items = _ref.items,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ["items", "children"]);
+      activeTabColor = _ref.activeTabColor,
+      rest = _objectWithoutProperties(_ref, ["items", "children", "activeTabColor"]);
 
   return _react["default"].createElement(TabsContainer, _extends({
     className: "sc-tabs"
@@ -148,9 +150,12 @@ function Tab(_ref) {
       key: index,
       onClick: selected ? function () {} : onClick,
       selected: selected
-    }, itemRest), _react["default"].createElement(TabItemTitle, {
+    }, itemRest, {
+      activeTabColor: activeTabColor
+    }), _react["default"].createElement(TabItemTitle, {
       className: "sc-tabs-item-title",
-      selected: selected
+      selected: selected,
+      activeTabColor: activeTabColor
     }, title));
   })), _react["default"].createElement(TabContent, {
     className: "sc-tabs-item-content"
