@@ -267,9 +267,11 @@ function Healthselector(props: Props) {
         size={size || 'base'}
         className="trigger"
         ref={refTriggerCallback}
-        onBlur={() => setOpen(!open)}
-        onFocus={() => setOpen(!open)}
-        onClick={(event) => event.stopPropagation()}
+        onBlur={() => setOpen(false)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen(!open);
+        }}
         opened={open}
       >
         <LeftRowWrapper>{icons[selectedIndex]}</LeftRowWrapper>
