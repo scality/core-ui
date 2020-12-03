@@ -263,7 +263,7 @@ function Healthselector(props: Props) {
   return (
     <HealthselectorContainer className="sc-healthselector">
       <TriggerStyled
-        variant={variant || 'base'}
+        variant={'base'}
         size={size || 'base'}
         className="trigger"
         ref={refTriggerCallback}
