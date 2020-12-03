@@ -1,0 +1,303 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Healthselector Default 1`] = `
+<div
+  className="sc-cSHVUG ezjFEE"
+>
+  <h3
+    className="sc-kAzzGY gSNaEJ"
+  >
+    Basic usage
+  </h3>
+  <div
+    className="sc-htoDjs ixiQr sc-healthselector"
+  >
+    <button
+      className="sc-bxivhb sc-gqjmRU iPKhEf trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      size="base"
+    >
+      <div
+        className="sc-VigVT ceQhNn"
+      >
+        <span
+          className="sc-gZMcBi bvGPfj"
+        >
+          <span
+            className="sc-dnqmqq fMtEyy"
+          />
+          <span
+            className="sc-dnqmqq fyiBQy"
+          />
+          <span
+            className="sc-dnqmqq eolozk"
+          />
+        </span>
+      </div>
+      <div
+        className="sc-jTzLTM hoEajO"
+      >
+        All
+      </div>
+      <i
+        className="fas fa-caret-down"
+      />
+    </button>
+  </div>
+  <h3
+    className="sc-kAzzGY gSNaEJ"
+  >
+    Health Selector Sizes (Triggering StoryBook actions)
+  </h3>
+  <div
+    className="sc-kGXeez httvMN"
+  >
+    <div
+      className="sc-kpOJdX iVjlhL"
+    >
+      <div
+        className="sc-htoDjs ixiQr sc-healthselector"
+      >
+        <button
+          className="sc-bxivhb sc-gqjmRU ikavUJ trigger"
+          onBlur={[Function]}
+          onClick={[Function]}
+          size="smaller"
+        >
+          <div
+            className="sc-VigVT ceQhNn"
+          >
+            <span
+              className="sc-gZMcBi bvGPfj"
+            >
+              <span
+                className="sc-dnqmqq fMtEyy"
+              />
+              <span
+                className="sc-dnqmqq fyiBQy"
+              />
+              <span
+                className="sc-dnqmqq eolozk"
+              />
+            </span>
+          </div>
+          <div
+            className="sc-jTzLTM hoEajO"
+          >
+            All
+          </div>
+          <i
+            className="fas fa-caret-down"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="sc-kpOJdX iVjlhL"
+    >
+      <div
+        className="sc-htoDjs ixiQr sc-healthselector"
+      >
+        <button
+          className="sc-bxivhb sc-gqjmRU eOBDLK trigger"
+          onBlur={[Function]}
+          onClick={[Function]}
+          size="small"
+        >
+          <div
+            className="sc-VigVT ceQhNn"
+          >
+            <span
+              className="sc-gZMcBi bvGPfj"
+            >
+              <span
+                className="sc-dnqmqq fMtEyy"
+              />
+              <span
+                className="sc-dnqmqq fyiBQy"
+              />
+              <span
+                className="sc-dnqmqq eolozk"
+              />
+            </span>
+          </div>
+          <div
+            className="sc-jTzLTM hoEajO"
+          >
+            All
+          </div>
+          <i
+            className="fas fa-caret-down"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="sc-kpOJdX iVjlhL"
+    >
+      <div
+        className="sc-htoDjs ixiQr sc-healthselector"
+      >
+        <button
+          className="sc-bxivhb sc-gqjmRU iPKhEf trigger"
+          onBlur={[Function]}
+          onClick={[Function]}
+          size="base"
+        >
+          <div
+            className="sc-VigVT ceQhNn"
+          >
+            <span
+              className="sc-gZMcBi bvGPfj"
+            >
+              <span
+                className="sc-dnqmqq fMtEyy"
+              />
+              <span
+                className="sc-dnqmqq fyiBQy"
+              />
+              <span
+                className="sc-dnqmqq eolozk"
+              />
+            </span>
+          </div>
+          <div
+            className="sc-jTzLTM hoEajO"
+          >
+            All
+          </div>
+          <i
+            className="fas fa-caret-down"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-kGXeez httvMN"
+  >
+    <div
+      className="sc-kpOJdX iVjlhL"
+    >
+      <div
+        className="sc-htoDjs ixiQr sc-healthselector"
+      >
+        <button
+          className="sc-bxivhb sc-gqjmRU eYYYUH trigger"
+          onBlur={[Function]}
+          onClick={[Function]}
+          size="large"
+        >
+          <div
+            className="sc-VigVT ceQhNn"
+          >
+            <span
+              className="sc-gZMcBi bvGPfj"
+            >
+              <span
+                className="sc-dnqmqq fMtEyy"
+              />
+              <span
+                className="sc-dnqmqq fyiBQy"
+              />
+              <span
+                className="sc-dnqmqq eolozk"
+              />
+            </span>
+          </div>
+          <div
+            className="sc-jTzLTM hoEajO"
+          >
+            All
+          </div>
+          <i
+            className="fas fa-caret-down"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="sc-kpOJdX iVjlhL"
+    >
+      <div
+        className="sc-htoDjs ixiQr sc-healthselector"
+      >
+        <button
+          className="sc-bxivhb sc-gqjmRU euNQmC trigger"
+          onBlur={[Function]}
+          onClick={[Function]}
+          size="larger"
+        >
+          <div
+            className="sc-VigVT ceQhNn"
+          >
+            <span
+              className="sc-gZMcBi bvGPfj"
+            >
+              <span
+                className="sc-dnqmqq fMtEyy"
+              />
+              <span
+                className="sc-dnqmqq fyiBQy"
+              />
+              <span
+                className="sc-dnqmqq eolozk"
+              />
+            </span>
+          </div>
+          <div
+            className="sc-jTzLTM hoEajO"
+          >
+            All
+          </div>
+          <i
+            className="fas fa-caret-down"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-kAzzGY gSNaEJ"
+  >
+    With custom labels (Triggering StoryBook actions)
+  </h3>
+  <div
+    className="sc-htoDjs ixiQr sc-healthselector"
+  >
+    <button
+      className="sc-bxivhb sc-gqjmRU iPKhEf trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      size="base"
+    >
+      <div
+        className="sc-VigVT ceQhNn"
+      >
+        <span
+          className="sc-gZMcBi bvGPfj"
+        >
+          <span
+            className="sc-dnqmqq fMtEyy"
+          />
+          <span
+            className="sc-dnqmqq fyiBQy"
+          />
+          <span
+            className="sc-dnqmqq eolozk"
+          />
+        </span>
+      </div>
+      <div
+        className="sc-jTzLTM hoEajO"
+      >
+        Custom1
+      </div>
+      <i
+        className="fas fa-caret-down"
+      />
+    </button>
+  </div>
+</div>
+`;
