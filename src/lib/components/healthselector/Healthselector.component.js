@@ -113,9 +113,9 @@ const TriggerStyled = styled(ButtonStyled)`
           }
 
           padding: ${defaultTheme.padding.large};
-          width: 150px;
+          width: 160px;
           ul {
-            width: 150px;
+            width: 160px;
             li {
               padding: ${defaultTheme.padding.large};
             }
@@ -129,9 +129,9 @@ const TriggerStyled = styled(ButtonStyled)`
           }
 
           padding: ${defaultTheme.padding.larger};
-          width: 190px;
+          width: 200px;
           ul {
-            width: 190px;
+            width: 200px;
             li {
               padding: ${defaultTheme.padding.larger};
             }
@@ -145,9 +145,9 @@ const TriggerStyled = styled(ButtonStyled)`
           }
 
           padding: ${defaultTheme.padding.base};
-          width: 130px;
+          width: 150px;
           ul {
-            width: 130px;
+            width: 150px;
             li {
               padding: ${defaultTheme.padding.base};
             }
@@ -160,12 +160,12 @@ const TriggerStyled = styled(ButtonStyled)`
 const LeftRowWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 40%;
+  width: 35%;
 `;
 const RightRowWrapper = styled.div`
-  width: 60%;
+  width: 65%;
   text-align: left;
-  padding-left: 10%;
+  padding-left: 5%;
 `;
 
 const HealthSelectorMenu = styled.ul`
@@ -276,6 +276,7 @@ function Healthselector(props: Props) {
       >
         <LeftRowWrapper>{icons[selectedIndex]}</LeftRowWrapper>
         <RightRowWrapper>{(selected && selected.label) || ''}</RightRowWrapper>
+        <i className="fas fa-caret-down" />
         {open && (
           <HealthSelectorMenu
             ref={refMenuCallback}
