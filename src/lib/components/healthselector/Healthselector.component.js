@@ -282,38 +282,46 @@ function Healthselector(props: Props) {
             size={menuSize}
             triggerSize={triggerSize}
           >
-            <HealthSelectorMenuItem
-              onClick={items && items[0] && items[0].onClick}
-            >
-              <LeftRowWrapper>{icons[0]}</LeftRowWrapper>
-              <RightRowWrapper>
-                {(items[0] && items[0].label) || 'All'}
-              </RightRowWrapper>
-            </HealthSelectorMenuItem>
-            <HealthSelectorMenuItem
-              onClick={items && items[1] && items[1].onClick}
-            >
-              <LeftRowWrapper>{icons[1]}</LeftRowWrapper>
-              <RightRowWrapper>
-                {(items[1] && items[1].label) || 'Ok'}
-              </RightRowWrapper>
-            </HealthSelectorMenuItem>
-            <HealthSelectorMenuItem
-              onClick={items && items[2] && items[2].onClick}
-            >
-              <LeftRowWrapper>{icons[2]}</LeftRowWrapper>
-              <RightRowWrapper>
-                {(items[2] && items[2].label) || 'Warning'}
-              </RightRowWrapper>
-            </HealthSelectorMenuItem>
-            <HealthSelectorMenuItem
-              onClick={items && items[3] && items[3].onClick}
-            >
-              <LeftRowWrapper>{icons[3]}</LeftRowWrapper>
-              <RightRowWrapper>
-                {(items[3] && items[3].label) || 'Critical'}
-              </RightRowWrapper>
-            </HealthSelectorMenuItem>
+            {!items[0].selected && (
+              <HealthSelectorMenuItem
+                onClick={items && items[0] && items[0].onClick}
+              >
+                <LeftRowWrapper>{icons[0]}</LeftRowWrapper>
+                <RightRowWrapper>
+                  {(items[0] && items[0].label) || 'All'}
+                </RightRowWrapper>
+              </HealthSelectorMenuItem>
+            )}
+            {!items[1].selected && (
+              <HealthSelectorMenuItem
+                onClick={items && items[1] && items[1].onClick}
+              >
+                <LeftRowWrapper>{icons[1]}</LeftRowWrapper>
+                <RightRowWrapper>
+                  {(items[1] && items[1].label) || 'Ok'}
+                </RightRowWrapper>
+              </HealthSelectorMenuItem>
+            )}
+            {!items[2].selected && (
+              <HealthSelectorMenuItem
+                onClick={items && items[2] && items[2].onClick}
+              >
+                <LeftRowWrapper>{icons[2]}</LeftRowWrapper>
+                <RightRowWrapper>
+                  {(items[2] && items[2].label) || 'Warning'}
+                </RightRowWrapper>
+              </HealthSelectorMenuItem>
+            )}
+            {!items[3].selected && (
+              <HealthSelectorMenuItem
+                onClick={items && items[3] && items[3].onClick}
+              >
+                <LeftRowWrapper>{icons[3]}</LeftRowWrapper>
+                <RightRowWrapper>
+                  {(items[3] && items[3].label) || 'Critical'}
+                </RightRowWrapper>
+              </HealthSelectorMenuItem>
+            )}
           </HealthSelectorMenu>
         )}
       </TriggerStyled>
