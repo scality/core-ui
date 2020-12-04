@@ -14,7 +14,6 @@ type Items = Array<Item>;
 
 type Props = {
   size?: string,
-  variant?: string,
   items: Items,
 };
 
@@ -223,7 +222,7 @@ const HealthSelectorMenuItem = styled.li`
 `;
 
 function Healthselector(props: Props) {
-  const { variant, size, items } = props;
+  const { size, items } = props;
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
