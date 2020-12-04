@@ -283,42 +283,28 @@ function Healthselector(props: Props) {
             triggerSize={triggerSize}
           >
             {!items[0].selected && (
-              <HealthSelectorMenuItem
-                onClick={items && items[0] && items[0].onClick}
-              >
+              <HealthSelectorMenuItem onClick={items[0].onClick}>
                 <LeftRowWrapper>{icons[0]}</LeftRowWrapper>
-                <RightRowWrapper>
-                  {(items[0] && items[0].label) || 'All'}
-                </RightRowWrapper>
+                <RightRowWrapper>{items[0].label || 'All'}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[1].selected && (
-              <HealthSelectorMenuItem
-                onClick={items && items[1] && items[1].onClick}
-              >
+              <HealthSelectorMenuItem onClick={items[1].onClick}>
                 <LeftRowWrapper>{icons[1]}</LeftRowWrapper>
-                <RightRowWrapper>
-                  {(items[1] && items[1].label) || 'Ok'}
-                </RightRowWrapper>
+                <RightRowWrapper>{items[1].label || 'Ok'}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[2].selected && (
-              <HealthSelectorMenuItem
-                onClick={items && items[2] && items[2].onClick}
-              >
+              <HealthSelectorMenuItem onClick={items[2].onClick}>
                 <LeftRowWrapper>{icons[2]}</LeftRowWrapper>
-                <RightRowWrapper>
-                  {(items[2] && items[2].label) || 'Warning'}
-                </RightRowWrapper>
+                <RightRowWrapper>{items[2].label || 'Warning'}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[3].selected && (
-              <HealthSelectorMenuItem
-                onClick={items && items[3] && items[3].onClick}
-              >
+              <HealthSelectorMenuItem onClick={items[3].onClick}>
                 <LeftRowWrapper>{icons[3]}</LeftRowWrapper>
                 <RightRowWrapper>
-                  {(items[3] && items[3].label) || 'Critical'}
+                  {items[3].label || 'Critical'}
                 </RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
