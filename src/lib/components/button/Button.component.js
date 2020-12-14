@@ -148,7 +148,7 @@ ${props => {
       ? `
           box-shadow: none;
           pointer-events: none;
-          background-color: ${brandLighter};
+          opacity: 0.2;
           border-color: ${brandLighter};
           color: ${defaultTheme.white};
         `
