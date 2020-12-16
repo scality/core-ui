@@ -1,7 +1,8 @@
 //@flow
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import styled, { ThemeContext } from "styled-components";
-import vegaEmbed from "vega-embed";
+import vegaEmbed, {Result} from "vega-embed";
+
 
 type Props = {
   id: string,
@@ -60,21 +61,36 @@ function VegaChart({ id, spec, theme = "light" }: Props) {
   };
   const themedSpec = { ...spec, ...themeConfig };
 
+  const vegaInstance = useRef<Result>();
+
   useEffect(() => {
-    vegaEmbed(`#${id}`, themedSpec, {
-      renderer: "svg",
-      tooltip: { theme: theme },
-      // Determines if action links
-      // ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor")
-      // are included with the embedded view.
-      // If the value is true, all action links will be shown and none if the value is false.
-      actions: false,
-    })
-      .then(function (result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      let isMounted = true;
+      
+      vegaEmbed(`#${id}`, themedSpec, {
+        renderer: "svg",
+        tooltip: { theme: theme },
+        // Determines if action links
+        // ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor")
+        // are included with the embedded view.
+        // If the value is true, all action links will be shown and none if the value is false.
+        actions: false,
       })
-      .catch(console.error);
-  }, [id, themedSpec, theme]);
+      .then(result => {
+        vegaInstance.current = result;
+      })
+      .catch((...args) => {
+        if (isMounted) {
+          console.error(...args) // TODO: we should handle this with a retry or an error state of the component
+        }
+      });
+      
+      return () => {
+        isMounted = false;
+        if (vegaInstance.current) {
+          vegaInstance.current.view.finalize();
+        }
+      }
+  }, [id, themedSpec, theme, vegaInstance]);
 
   return (
     <VegaChartContainer id={id} className="sc-vegachart"></VegaChartContainer>
