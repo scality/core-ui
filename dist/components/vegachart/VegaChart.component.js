@@ -11,9 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _vegaEmbed = _interopRequireDefault(require("vega-embed"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _vegaEmbed = _interopRequireWildcard(require("vega-embed"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -87,7 +85,9 @@ function VegaChart(_ref) {
 
   var themedSpec = _objectSpread({}, spec, {}, themeConfig);
 
+  var vegaInstance = (0, _react.useRef)();
   (0, _react.useEffect)(function () {
+    var isMounted = true;
     (0, _vegaEmbed["default"])("#".concat(id), themedSpec, {
       renderer: "svg",
       tooltip: {
@@ -98,9 +98,24 @@ function VegaChart(_ref) {
       // are included with the embedded view.
       // If the value is true, all action links will be shown and none if the value is false.
       actions: false
-    }).then(function (result) {// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    })["catch"](console.error);
-  }, [id, themedSpec, theme]);
+    }).then(function (result) {
+      vegaInstance.current = result;
+    })["catch"](function () {
+      if (isMounted) {
+        var _console;
+
+        (_console = console).error.apply(_console, arguments); // TODO: we should handle this with a retry or an error state of the component
+
+      }
+    });
+    return function () {
+      isMounted = false;
+
+      if (vegaInstance.current) {
+        vegaInstance.current.view.finalize();
+      }
+    };
+  }, [id, themedSpec, theme, vegaInstance]);
   return _react["default"].createElement(VegaChartContainer, {
     id: id,
     className: "sc-vegachart"

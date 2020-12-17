@@ -214,7 +214,7 @@ var ButtonStyled = _styledComponents["default"].button(_templateObject(), defaul
 }, function (props) {
   var brand = (0, _utils.getTheme)(props);
   var brandLighter = (0, _polished.lighten)(0.2, brand[props.variant]).toString();
-  return (0, _styledComponents.css)(_templateObject10(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          background-color: ".concat(brandLighter, ";\n          border-color: ").concat(brandLighter, ";\n          color: ").concat(defaultTheme.white, ";\n        ") : null);
+  return (0, _styledComponents.css)(_templateObject10(), props.disabled ? "\n          box-shadow: none;\n          pointer-events: none;\n          opacity: 0.2;\n          border-color: ".concat(brandLighter, ";\n          color: ").concat(defaultTheme.white, ";\n        ") : null);
 }, function (props) {
   var brand = (0, _utils.getTheme)(props);
   var brandLighter = (0, _polished.lighten)(0.2, brand[props.variant]).toString();
