@@ -34,6 +34,47 @@ export const InputContainer = styled.div`
     outline: none;
   }
 
+  input[type="number"] {
+    /* Adding a padding to make room for the custom absolute postionned arrows */
+    padding-right: 20px;
+    -moz-appearance: textfield; /*For FireFox*/
+
+    &::-webkit-inner-spin-button {
+      /*For Webkits like Chrome and Safari*/
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  ${(props) => {
+    if (props.type === "number")
+      return css`
+        .sc-input-wrapper {
+          align-items: center;
+          position: relative;
+          .carets-wrapper {
+            display: flex;
+            flex-direction: column;
+            ${(props) => {
+              const { textSecondary } = getTheme(props);
+              return css`
+                color: ${textSecondary};
+              `;
+            }};
+            position: absolute;
+            right: ${defaultTheme.padding.smaller};
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            i {
+              font-size: 0.8em;
+              cursor: pointer;
+            }
+          }
+        }
+      `;
+  }}
+
   ${(props) => {
     if (props.error) {
       return css`
