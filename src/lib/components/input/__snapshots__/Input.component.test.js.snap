@@ -10,7 +10,7 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-ifAKCX hULCSa sc-input"
+    className="sc-ifAKCX kwGiKK sc-input"
   >
     <div
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -34,7 +34,7 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-ifAKCX hULCSa sc-input"
+    className="sc-ifAKCX kwGiKK sc-input"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -63,7 +63,7 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-ifAKCX exwQMG sc-input"
+    className="sc-ifAKCX iDfclL sc-input"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -100,7 +100,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-gqjmRU czbDPR"
   >
     <div
-      className="sc-ifAKCX exwQMG sc-input"
+      className="sc-ifAKCX iDfclL sc-input"
     >
       <label
         className="sc-EHOje glQODq sc-input-label"
@@ -135,7 +135,8 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-ifAKCX hULCSa sc-input"
+    className="sc-ifAKCX kwGiKK sc-input"
+    type="checkbox"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -169,7 +170,8 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-ifAKCX exwQMG sc-input"
+    className="sc-ifAKCX iDfclL sc-input"
+    type="checkbox"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -208,7 +210,8 @@ exports[`Storyshots Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-ifAKCX hULCSa sc-input"
+    className="sc-ifAKCX kwGiKK sc-input"
+    type="select"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -341,7 +344,8 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input
   </h3>
   <div
-    className="sc-ifAKCX hULCSa sc-input"
+    className="sc-ifAKCX kwGiKK sc-input"
+    type="textarea"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -369,7 +373,8 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-ifAKCX exwQMG sc-input"
+    className="sc-ifAKCX iDfclL sc-input"
+    type="textarea"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -394,6 +399,47 @@ exports[`Storyshots Input Default 1`] = `
       >
         error
       </span>
+    </div>
+  </div>
+  <h3
+    className="sc-dnqmqq lgiIQQ"
+  >
+    Number Input
+  </h3>
+  <div
+    className="sc-ifAKCX iqCCSp sc-input"
+    type="number"
+  >
+    <div
+      className="sc-gzVnrw kvhoeX sc-input-wrapper"
+    >
+      <div
+        className="sc-number-input-wrapper"
+      >
+        <input
+          className="sc-input-type sc-number-input"
+          id="id8"
+          max="100"
+          min="0"
+          onChange={[Function]}
+          type="number"
+          value={1}
+        />
+        <div
+          className="carets-wrapper"
+        >
+          <i
+            className="fas fa-caret-up"
+            data-core="up"
+            onClick={[Function]}
+          />
+          <i
+            className="fas fa-caret-down"
+            data-core="down"
+            onClick={[Function]}
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>

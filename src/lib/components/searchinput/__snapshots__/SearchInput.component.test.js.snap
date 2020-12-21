@@ -20,7 +20,8 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs gpFhwS sc-searchinput"
     >
       <div
-        className="sc-ifAKCX hULCSa sc-input"
+        className="sc-ifAKCX kwGiKK sc-input"
+        type="text"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -74,7 +75,8 @@ exports[`Storyshots SearchInput Default 1`] = `
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-ifAKCX hULCSa sc-input"
+        className="sc-ifAKCX kwGiKK sc-input"
+        type="text"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -126,7 +128,8 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs cAmcWy sc-searchinput"
     >
       <div
-        className="sc-ifAKCX hULCSa sc-input"
+        className="sc-ifAKCX kwGiKK sc-input"
+        type="text"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -179,7 +182,8 @@ exports[`Storyshots SearchInput Default 1`] = `
       className="sc-htoDjs cAmcWy sc-searchinput"
     >
       <div
-        className="sc-ifAKCX hULCSa sc-input"
+        className="sc-ifAKCX kwGiKK sc-input"
+        type="text"
       >
         <div
           className="sc-gzVnrw kvhoeX sc-input-wrapper"
