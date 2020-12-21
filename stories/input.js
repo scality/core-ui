@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import Input from "../src/lib/components/input/Input.component";
 import { action } from "@storybook/addon-actions";
@@ -9,7 +9,7 @@ import { Wrapper, Title } from "./common";
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
   value: index,
-  "data-cy": `Item_${index}`
+  "data-cy": `Item_${index}`,
 }));
 
 const ExampleInput = () => {
@@ -18,6 +18,8 @@ const ExampleInput = () => {
       width: 200px;
     }
   `;
+
+  const [numberValue, setNumberValue] = useState(1);
 
   return (
     <Wrapper>
@@ -53,7 +55,6 @@ const ExampleInput = () => {
           onChange={action("onChange")}
         />
       </CustomInput>
-
       <Title>Checkbox Input</Title>
       <Input
         id="id4"
@@ -102,6 +103,17 @@ const ExampleInput = () => {
         value="Hello"
         cols={50}
         rows={5}
+      />
+      <Title>Number Input</Title>
+      <Input
+        id="id8"
+        value={numberValue}
+        onChange={(e) => {
+          if (e && e.target) setNumberValue(e.target.value);
+        }}
+        type="number"
+        min="0"
+        max="100"
       />
     </Wrapper>
   );
