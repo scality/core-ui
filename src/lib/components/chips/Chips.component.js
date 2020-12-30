@@ -77,8 +77,8 @@ const ChipsContainer = styled.div`
 ${props => {
   return css`
     ${props.variant === "warning"
-      ? `color: ${defaultTheme.blackLight}`
-      : `color: ${defaultTheme.white}`}
+      ? `color: ${defaultTheme.blackLight};`
+      : `color: ${defaultTheme.white};`}
   `;
 }}
 
@@ -116,7 +116,7 @@ export const ChipsText = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: ${props => (props.icon || props.onRemove ? "5px" : "5px 10px")};
+  padding: ${props => (props.icon || props.isRemovable ? "5px" : "5px 10px")};
 `;
 
 const Chips = ({
@@ -144,7 +144,7 @@ const Chips = ({
         {icon}
       </ChipsIcon>
     )}
-    <ChipsText className="sc-chips-text" icon={icon} onRemove={onRemove}>
+    <ChipsText className="sc-chips-text" icon={icon} isRemovable={!!onRemove}>
       {text}
     </ChipsText>
     {onRemove && (
