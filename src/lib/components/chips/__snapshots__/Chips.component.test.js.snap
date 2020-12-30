@@ -10,7 +10,7 @@ exports[`Storyshots Chips Default 1`] = `
     Basic Chip
   </h3>
   <div
-    className="sc-htoDjs oAfeq sc-chips"
+    className="sc-htoDjs iGXwyJ sc-chips"
     size="base"
   >
     <span
@@ -20,7 +20,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs kwCbVz sc-chips"
+    className="sc-htoDjs knTkHh sc-chips"
     size="base"
   >
     <span
@@ -30,7 +30,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs gktCMn sc-chips"
+    className="sc-htoDjs gKfSCM sc-chips"
     size="base"
   >
     <span
@@ -40,7 +40,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs eqomIC sc-chips"
+    className="sc-htoDjs HpTIe sc-chips"
     size="base"
   >
     <span
@@ -55,7 +55,7 @@ exports[`Storyshots Chips Default 1`] = `
     Clickable Chip
   </h3>
   <div
-    className="sc-htoDjs jherpk sc-chips"
+    className="sc-htoDjs gvzZBe sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -74,7 +74,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs jLYxwU sc-chips"
+    className="sc-htoDjs hGrNJX sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -93,7 +93,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs jgKGle sc-chips"
+    className="sc-htoDjs cDOotG sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -112,7 +112,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs bWXOiM sc-chips"
+    className="sc-htoDjs jZevLT sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -136,7 +136,7 @@ exports[`Storyshots Chips Default 1`] = `
     Deletable Chip
   </h3>
   <div
-    className="sc-htoDjs oAfeq sc-chips"
+    className="sc-htoDjs iGXwyJ sc-chips"
     size="base"
   >
     <span
@@ -149,7 +149,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Deletable
     </span>
@@ -185,7 +184,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs kwCbVz sc-chips"
+    className="sc-htoDjs knTkHh sc-chips"
     size="base"
   >
     <span
@@ -198,7 +197,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Deletable
     </span>
@@ -234,7 +232,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs gktCMn sc-chips"
+    className="sc-htoDjs gKfSCM sc-chips"
     size="base"
   >
     <span
@@ -247,7 +245,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Deletable
     </span>
@@ -283,7 +280,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs eqomIC sc-chips"
+    className="sc-htoDjs HpTIe sc-chips"
     size="base"
   >
     <span
@@ -296,7 +293,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Deletable
     </span>
@@ -337,7 +333,7 @@ exports[`Storyshots Chips Default 1`] = `
     Different sizes
   </h3>
   <div
-    className="sc-htoDjs bZdUyG sc-chips"
+    className="sc-htoDjs fDWOsI sc-chips"
     size="smaller"
   >
     <span
@@ -350,7 +346,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Smaller
     </span>
@@ -386,7 +381,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs hOuyzW sc-chips"
+    className="sc-htoDjs kWxCfZ sc-chips"
     size="small"
   >
     <span
@@ -399,7 +394,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Small
     </span>
@@ -435,7 +429,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs gktCMn sc-chips"
+    className="sc-htoDjs gKfSCM sc-chips"
     size="base"
   >
     <span
@@ -448,7 +442,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Base
     </span>
@@ -484,7 +477,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs eNzVGU sc-chips"
+    className="sc-htoDjs jBLNdH sc-chips"
     size="large"
   >
     <span
@@ -497,7 +490,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Large
     </span>
@@ -533,7 +525,7 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs beIFWW sc-chips"
+    className="sc-htoDjs jcMTPC sc-chips"
     size="larger"
   >
     <span
@@ -546,7 +538,6 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
     <span
       className="sc-iwsKbI jkfBoi sc-chips-text"
-      onRemove={[Function]}
     >
       Larger
     </span>
