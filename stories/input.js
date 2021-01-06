@@ -115,6 +115,18 @@ const ExampleInput = () => {
         min="0"
         max="100"
       />
+      <Title>Number Input with error</Title>
+      <Input
+        id="id9"
+        value={numberValue}
+        onChange={(e) => {
+          if (e && e.target) setNumberValue(e.target.value);
+        }}
+        type="number"
+        min="0"
+        max="100"
+        error="error"
+      />
     </Wrapper>
   );
 };

@@ -50,8 +50,10 @@ export const InputContainer = styled.div`
     if (props.type === "number")
       return css`
         .sc-input-wrapper {
+          .sc-number-input-wrapper {
+            position: relative;
+          }
           align-items: center;
-          position: relative;
           .carets-wrapper {
             display: flex;
             flex-direction: column;
