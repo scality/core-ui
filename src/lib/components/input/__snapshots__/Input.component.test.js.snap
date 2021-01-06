@@ -407,7 +407,7 @@ exports[`Storyshots Input Default 1`] = `
     Number Input
   </h3>
   <div
-    className="sc-ifAKCX iqCCSp sc-input"
+    className="sc-ifAKCX sKzsc sc-input"
     type="number"
   >
     <div
@@ -440,6 +440,52 @@ exports[`Storyshots Input Default 1`] = `
           />
         </div>
       </div>
+    </div>
+  </div>
+  <h3
+    className="sc-dnqmqq lgiIQQ"
+  >
+    Number Input with error
+  </h3>
+  <div
+    className="sc-ifAKCX kqgMrq sc-input"
+    type="number"
+  >
+    <div
+      className="sc-gzVnrw kvhoeX sc-input-wrapper"
+    >
+      <div
+        className="sc-number-input-wrapper"
+      >
+        <input
+          className="sc-input-type sc-number-input"
+          id="id9"
+          max="100"
+          min="0"
+          onChange={[Function]}
+          type="number"
+          value={1}
+        />
+        <div
+          className="carets-wrapper"
+        >
+          <i
+            className="fas fa-caret-up"
+            data-core="up"
+            onClick={[Function]}
+          />
+          <i
+            className="fas fa-caret-down"
+            data-core="down"
+            onClick={[Function]}
+          />
+        </div>
+      </div>
+      <span
+        className="sc-bZQynM iZyYwj sc-input-error"
+      >
+        error
+      </span>
     </div>
   </div>
 </div>
