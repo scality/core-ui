@@ -47,6 +47,15 @@ storiesOf("Sidebar", module)
             onToggleClick={action("toggle clicked")}
           />
         </div>
+
+        <h3>Hoverable Sidebar</h3>
+        <div style={{ width: "150px" }}>
+          <Sidebar
+            actions={actions}
+            hoverable
+            onToggleClick={action("toggle clicked")}
+          />
+        </div>
       </div>
     );
   });
