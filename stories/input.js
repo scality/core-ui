@@ -104,7 +104,7 @@ const ExampleInput = () => {
         cols={50}
         rows={5}
       />
-      <Title>Number Input</Title>
+      <Title>Number Input (Max 100)</Title>
       <Input
         id="id8"
         value={numberValue}
@@ -114,18 +114,11 @@ const ExampleInput = () => {
         type="number"
         min="0"
         max="100"
-      />
-      <Title>Number Input with error</Title>
-      <Input
-        id="id9"
-        value={numberValue}
-        onChange={(e) => {
-          if (e && e.target) setNumberValue(e.target.value);
-        }}
-        type="number"
-        min="0"
-        max="100"
-        error="error"
+        error={
+          numberValue > 100
+            ? "The input number must be less than or equal to 100"
+            : ""
+        }
       />
     </Wrapper>
   );
