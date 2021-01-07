@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import type { Node } from "react";
 import * as defaultTheme from "../../style/theme";
@@ -16,10 +16,12 @@ type Items = Array<Item>;
 export type Props = {
   expanded?: boolean,
   actions: Items,
+  hoverable?: boolean,
   onToggleClick?: () => void,
 };
 
-const SidebarContainer = styled.div`
+const Wrapper = styled.div`
+  flex-shrink: 0;
   ${(props) => {
     const { background, textPrimary } = getTheme(props);
     return css`
@@ -33,6 +35,44 @@ const SidebarContainer = styled.div`
 
   ${(props) => {
     if (props.expanded) {
+      return css`
+        width: auto;
+      `;
+    }
+    return css`
+      width: ${defaultTheme.sidebarWidth};
+    `;
+  }}
+
+  ${(props) => {
+    const { background } = getTheme(props);
+
+    if (props.hoverable && props.hovered && !props.expanded) {
+      return css`
+        .sc-sidebar {
+          position: absolute;
+          height: 100%;
+          background-color: ${background};
+          z-index: 100;
+        }
+      `;
+    }
+  }}
+`;
+
+const SidebarContainer = styled.div`
+  ${(props) => {
+    const { background } = getTheme(props);
+    return css`
+      background-color: ${background};
+    `;
+  }}
+
+  ${(props) => {
+    if (
+      props.expanded ||
+      (props.hoverable && props.hovered && !props.expanded)
+    ) {
       return css`
         width: auto;
       `;
@@ -105,47 +145,73 @@ const MenuItemIcon = styled.div`
   height: ${defaultTheme.sidebarItemHeight};
 `;
 
-function Sidebar({ expanded, actions, onToggleClick, ...rest }: Props) {
+function Sidebar({
+  expanded,
+  actions,
+  onToggleClick,
+  hoverable,
+  ...rest
+}: Props) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <SidebarContainer expanded={expanded} className="sc-sidebar" {...rest}>
-      {onToggleClick && expanded && (
-        <MenuItemIcon>
+    <Wrapper
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      hoverable={hoverable}
+      hovered={hovered}
+      expanded={expanded}
+    >
+      <SidebarContainer
+        expanded={expanded}
+        className="sc-sidebar"
+        hoverable={hoverable}
+        hovered={hovered}
+        {...rest}
+      >
+        {onToggleClick && expanded && (
+          <MenuItemIcon>
+            <Button
+              size="larger"
+              variant="base"
+              icon={<i className="fas fa-chevron-left" />}
+              onClick={() => onToggleClick()}
+            />
+          </MenuItemIcon>
+        )}
+        {onToggleClick && !expanded && (
           <Button
             size="larger"
             variant="base"
-            icon={<i className="fas fa-chevron-left" />}
+            icon={<i className="fas fa-chevron-right" />}
             onClick={() => onToggleClick()}
           />
-        </MenuItemIcon>
-      )}
-      {onToggleClick && !expanded && (
-        <Button
-          size="larger"
-          variant="base"
-          icon={<i className="fas fa-chevron-right" />}
-          onClick={() => onToggleClick()}
-        />
-      )}
-      {actions.map(
-        ({ active, label, onClick, icon = null, ...actionRest }, index) => {
-          return (
-            <SidebarItem
-              className="sc-sidebar-item"
-              key={index}
-              active={active}
-              title={label}
-              onClick={onClick}
-              expanded={expanded}
-              {...actionRest}
-            >
-              {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
-              {expanded && <MenuItemText>{label}</MenuItemText>}
-              {active && expanded && <MenuItemSelected />}
-            </SidebarItem>
-          );
-        }
-      )}
-    </SidebarContainer>
+        )}
+        {actions.map(
+          ({ active, label, onClick, icon = null, ...actionRest }, index) => {
+            return (
+              <SidebarItem
+                className="sc-sidebar-item"
+                key={index}
+                active={active}
+                title={label}
+                onClick={onClick}
+                expanded={expanded || (hoverable && hovered)}
+                {...actionRest}
+              >
+                {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}
+                {(expanded || (hoverable && hovered)) && (
+                  <MenuItemText>{label}</MenuItemText>
+                )}
+                {active && (expanded || (hoverable && hovered)) && (
+                  <MenuItemSelected />
+                )}
+              </SidebarItem>
+            );
+          },
+        )}
+      </SidebarContainer>
+    </Wrapper>
   );
 }
 
