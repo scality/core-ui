@@ -53,7 +53,7 @@ export const InputContainer = styled.div`
           .sc-number-input-wrapper {
             position: relative;
           }
-          align-items: center;
+          align-items: baseline;
           .carets-wrapper {
             display: flex;
             flex-direction: column;
