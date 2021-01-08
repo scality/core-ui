@@ -54,7 +54,7 @@ export const brand = {
   textTertiary: "#DFDFDF",
   borderLight: "#A5A5A5",
   border: "#313131",
-  info: "#434343"
+  info: "#434343",
 };
 
 //navbar
@@ -107,5 +107,6 @@ export const zIndex = {
   overlay: 8000,
   dropdown: 7000,
   nav: 500,
+  sidebar: 100,
   base: 1,
 };

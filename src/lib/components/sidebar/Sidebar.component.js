@@ -53,7 +53,7 @@ const Wrapper = styled.div`
           position: absolute;
           height: 100%;
           background-color: ${background};
-          z-index: 100;
+          z-index: ${defaultTheme.zIndex.sidebar};
         }
       `;
     }
