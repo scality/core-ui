@@ -1,5 +1,5 @@
 //@flow
-import React from "react";
+import React, { useRef } from "react";
 import { DebounceInput } from "react-debounce-input";
 import Checkbox from "../checkbox/Checkbox.component";
 import Select from "../select/Select.component";
@@ -8,12 +8,12 @@ import {
   InputContainer,
   LabelStyle,
   InputErrorMessage,
-  InputWrapper
+  InputWrapper,
 } from "./Input.component.style";
 
 export type Item = {
   label: string,
-  value: string | number
+  value: string | number,
 };
 
 type Items = Array<Item>;
@@ -26,8 +26,10 @@ type Props = {
   error?: string,
   id?: string,
   checked?: boolean,
-  onChange: () => void,
-  options?: Items
+  onChange: (e?: any) => void,
+  options?: Items,
+  min?: string,
+  max?: string,
 };
 
 const InputRenderer = ({
@@ -37,8 +39,48 @@ const InputRenderer = ({
   checked,
   onChange,
   options = [],
+  min,
+  max,
   ...rest
 }) => {
+  const inputEl = useRef(null);
+
+  const handleNumberClick = (e) => {
+    /*
+     ** Since react is using Synthetic event we have to do the following to be
+     ** able to programmatically dispatch the onChange event from the input
+     */
+    const valuePropDescriptor = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      "value",
+    );
+    if (valuePropDescriptor && inputEl.current) {
+      const nativeInputValueSetter = valuePropDescriptor.set;
+      if (nativeInputValueSetter) {
+        if (e.target.dataset.core === "up")
+          nativeInputValueSetter.call(
+            inputEl.current,
+            max
+              ? max && parseInt(value) + 1 <= parseInt(max)
+                ? parseInt(value) + 1
+                : parseInt(value)
+              : parseInt(value) + 1,
+          );
+        else
+          nativeInputValueSetter.call(
+            inputEl.current,
+            min
+              ? min && parseInt(value) - 1 >= parseInt(min)
+                ? parseInt(value) - 1
+                : parseInt(value)
+              : parseInt(value) - 1,
+          );
+      }
+      const event = new Event("input", { bubbles: true });
+      inputEl.current.dispatchEvent(event);
+    }
+  };
+
   const input = {
     select: (
       <Select
@@ -59,6 +101,33 @@ const InputRenderer = ({
       />
     ),
     textarea: <TextArea id={id} value={value} onChange={onChange} {...rest} />,
+    number: (
+      <div className="sc-number-input-wrapper">
+        <input
+          className="sc-input-type sc-number-input"
+          type="number"
+          id={id}
+          value={value}
+          onChange={onChange}
+          ref={inputEl}
+          min={min}
+          max={max}
+          {...rest}
+        />
+        <div className="carets-wrapper">
+          <i
+            className="fas fa-caret-up"
+            data-core="up"
+            onClick={handleNumberClick}
+          ></i>
+          <i
+            className="fas fa-caret-down"
+            data-core="down"
+            onClick={handleNumberClick}
+          ></i>
+        </div>
+      </div>
+    ),
     text: (
       <DebounceInput
         className="sc-input-type"
@@ -70,22 +139,23 @@ const InputRenderer = ({
         autoComplete="off"
         {...rest}
       />
-    )
+    ),
   };
 
-  return input[type] || input.text;
+  if (type) return input[type];
+  else return input.text;
 };
 
-const Input = ({ label, id, error, ...rest }: Props) => {
+const Input = ({ label, id, error, type, ...rest }: Props) => {
   return (
-    <InputContainer className="sc-input" error={error}>
+    <InputContainer className="sc-input" error={error} type={type}>
       {label && (
         <LabelStyle htmlFor={id} className="sc-input-label">
           {label}
         </LabelStyle>
       )}
       <InputWrapper className="sc-input-wrapper">
-        <InputRenderer id={id} {...rest} />
+        <InputRenderer id={id} type={type} {...rest} />
         {error && (
           <InputErrorMessage className="sc-input-error">
             {error}
