@@ -1,10 +1,12 @@
 //@flow
-import React from "react";
+import React, { useState, createElement } from "react";
 import Layout from "../src/lib/components/layout/Layout.component";
 import Loader from "../src/lib/components/loader/Loader.component";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
+import { storiesOf, addDecorator } from "@storybook/react";
+
+addDecorator(createElement);
 
 const sideBarActions = [
   {
@@ -110,6 +112,26 @@ storiesOf("Layout", module)
       expanded: true,
       actions: sideBarActions,
       onToggleClick: action("toggle clicked"),
+    };
+
+    const navbar = {
+      productName: "Harware UI",
+      rightActions,
+    };
+
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  })
+  .add("Hoverable Sidebar ", () => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      hoverable: true,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
     };
 
     const navbar = {

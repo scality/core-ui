@@ -1,10 +1,12 @@
 //@flow
-import React from "react";
+import React, { useState, createElement } from "react";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
+import { storiesOf, addDecorator } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import LateralNavbarLayout from "../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component";
 import Loader from "../src/lib/components/loader/Loader.component";
+
+addDecorator(createElement);
 
 const sideBarActions = [
   {
@@ -60,6 +62,20 @@ storiesOf("LateralNavbarLayout", module)
       expanded: true,
       actions: sideBarActions,
       onToggleClick: action("toggle clicked"),
+    };
+    return (
+      <LateralNavbarLayout sidebar={sidebar}>
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
+  })
+  .add("Hoverable Sidebar", () => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      hoverable: true,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
     };
     return (
       <LateralNavbarLayout sidebar={sidebar}>
