@@ -26,7 +26,7 @@ stages:
           workdir: build/core-ui
           command: >
             npm ci &&
-            npm run test &&
+            npm run test -- -w 1 &&
             npm run flow &&
             npm run lint
           haltOnFailure: false
