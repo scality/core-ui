@@ -11,6 +11,15 @@ import {
   warmRed,
   white,
 } from "../src/lib/style/theme";
+import { addParameters } from "@storybook/react";
+import { DocsPage, DocsContainer } from "@storybook/addon-docs/blocks";
+
+addParameters({
+  docs: {
+    container: DocsContainer,
+    page: DocsPage,
+  },
+});
 
 const themes = [
   {
@@ -36,7 +45,7 @@ const themes = [
       textSecondary: "#8593A0",
       borderLight: "#A5A5A5",
       border: "#A5A5A5",
-      info: "#8C8C8C"
+      info: "#8C8C8C",
     },
   },
   {
@@ -63,7 +72,7 @@ const themes = [
       textTertiary: "#DFDFDF",
       borderLight: "#A5A5A5",
       border: "#313131",
-      info: "#434343"
+      info: "#434343",
     },
   },
 ];
@@ -73,7 +82,7 @@ addDecorator(
     header: false,
     inline: false,
     maxPropArrayLength: 10,
-  })
+  }),
 );
 
 setAddon(withPropsCombinations);
@@ -82,4 +91,14 @@ function loadStories() {
   require("../stories");
 }
 
-configure(loadStories, module);
+const loadFn = () => {
+  const req = require.context("../stories", true, /\.stories\.js$/);
+  return req
+    .keys()
+    .map((fname) => req(fname))
+    .filter((exp) => !!exp.default);
+};
+
+// configure(loadFn, module);
+
+configure(loadFn, module);
