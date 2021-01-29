@@ -153,9 +153,10 @@ function ProgressBar({
   bottomRightLabel,
   buildinLabel,
   isAnimation = false,
+  ...rest
 }: ProgressBarProps) {
   return (
-    <Container className="sc-progressbar">
+    <Container className="sc-progressbar" {...rest}>
       {(topLeftLabel || topRightLabel) && (
         <TopLabelsContainer>
           {topLeftLabel && (
