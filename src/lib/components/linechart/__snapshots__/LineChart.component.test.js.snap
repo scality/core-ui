@@ -7,7 +7,7 @@ exports[`Storyshots LineChart Default 1`] = `
   <h3
     className="sc-htpNat kmOyGE"
   >
-    Vege-Lite line chart demo
+    Vega-Lite line chart demo
   </h3>
   <div
     className="sc-bdVaJa bDWFJH sc-vegachart"
@@ -16,7 +16,7 @@ exports[`Storyshots LineChart Default 1`] = `
   <h3
     className="sc-htpNat kmOyGE"
   >
-    Vege-Lite line chart without axis
+    Vega-Lite line chart without axis
   </h3>
   <div
     className="sc-bdVaJa bDWFJH sc-vegachart"
@@ -25,11 +25,20 @@ exports[`Storyshots LineChart Default 1`] = `
   <h3
     className="sc-htpNat kmOyGE"
   >
-    Vege-Lite forecast chart
+    Vega-Lite forecast chart
   </h3>
   <div
     className="sc-bdVaJa bDWFJH sc-vegachart"
     id="vis_forecast_chart"
+  />
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Vega-Lite with strokeDash config, opacity config and custom Tooltip
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="id_strokedash"
   />
 </div>
 `;
