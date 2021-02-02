@@ -12,6 +12,10 @@ type Props = {
   width?: number,
   height?: number,
   displayTrendLine?: boolean,
+  strokeDashEncodingConfig?: Object,
+  opacityEncodingConfig?: Object,
+  tooltipConfig?: Object,
+  tooltipTheme?: string,
 };
 
 function LineChart({
@@ -25,6 +29,10 @@ function LineChart({
   height = 300,
   width = 1000,
   displayTrendLine = false,
+  strokeDashEncodingConfig,
+  opacityEncodingConfig,
+  tooltipConfig,
+  tooltipTheme,
   ...rest
 }: Props) {
   // hardcode the trendline configuration for tooltip
@@ -48,12 +56,25 @@ function LineChart({
     },
   };
 
+  /*
+   ** strokeDash encoding allows to define a field in data items that defines the line stroke dash property
+   ** this would allow to get same color lines but having some dashed and some plains
+   ** https://vega.github.io/vega-lite/docs/line.html#multi-series-line-chart-with-varying-dashes
+   */
+
+  /*
+   ** opacity Encoding allows to define rules for each line's opacity
+   */
   const lines = yAxis.map((y) => ({
     mark: {
       type: "line",
       ...lineConfig,
     },
-    encoding: { y },
+    encoding: {
+      y,
+      strokeDash: strokeDashEncodingConfig,
+      opacity: opacityEncodingConfig,
+    },
   }));
 
   const currentTimeTrendline = {
@@ -98,13 +119,16 @@ function LineChart({
     ...rest,
   };
   if (tooltip) {
-    spec.layer.push(trendline);
+    spec.layer.push(tooltipConfig || trendline);
   }
   if (displayTrendLine) {
     spec.layer.push(currentTimeTrendline);
     spec.layer.push(topTrendline);
   }
-  return <VegaChart id={id} spec={spec}></VegaChart>;
+
+  return (
+    <VegaChart id={id} spec={spec} theme={tooltipTheme || "light"}></VegaChart>
+  );
 }
 
 export default LineChart;
