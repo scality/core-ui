@@ -272,7 +272,7 @@ exports[`Storyshots Dropdown Default 1`] = `
     className="sc-htoDjs iIbcxe sc-dropdown"
   >
     <div
-      className="sc-gqjmRU iWaZnD trigger"
+      className="sc-gqjmRU hyOoNF trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

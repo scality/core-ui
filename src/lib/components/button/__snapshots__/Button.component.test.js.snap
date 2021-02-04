@@ -142,7 +142,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb iIASyT sc-button"
+    className="sc-bxivhb kytZxy sc-button"
     disabled={false}
     size="base"
     title=""
@@ -280,7 +280,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb bMyHGN sc-button"
+    className="sc-bxivhb iHzUtf sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"

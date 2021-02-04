@@ -1096,7 +1096,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-jKJlTe cafJgG"
+            className="sc-jKJlTe hLqdKN"
           />
         </div>
         <div
@@ -1533,7 +1533,7 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-jKJlTe cafJgG"
+            className="sc-jKJlTe hLqdKN"
           />
         </div>
         <div

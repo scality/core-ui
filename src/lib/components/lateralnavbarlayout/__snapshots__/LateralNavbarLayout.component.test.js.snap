@@ -448,7 +448,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar expanded 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gqjmRU KuNrg"
+            className="sc-gqjmRU fIZaJF"
           />
         </div>
         <div
@@ -691,7 +691,7 @@ exports[`Storyshots LateralNavbarLayout Sidebar with toggle 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gqjmRU KuNrg"
+            className="sc-gqjmRU fIZaJF"
           />
         </div>
         <div

@@ -24,7 +24,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI kmhuIk sc-select-container"
+          className="sc-iwsKbI giDcxC sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -169,7 +169,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH ckJhMz sc-checkbox"
+            className="sc-bwzfXH kBirfa sc-checkbox"
           >
             <input
               checked={true}
@@ -268,7 +268,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH eHtcdR sc-checkbox"
+            className="sc-bwzfXH ciMUGB sc-checkbox"
           >
             <input
               checked={false}
@@ -385,7 +385,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH ckJhMz sc-checkbox"
+            className="sc-bwzfXH kBirfa sc-checkbox"
           >
             <input
               checked={true}
@@ -484,7 +484,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH eHtcdR sc-checkbox"
+            className="sc-bwzfXH ciMUGB sc-checkbox"
           >
             <input
               checked={false}
@@ -597,7 +597,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI kmhuIk sc-select-container"
+          className="sc-iwsKbI giDcxC sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -742,7 +742,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={true}
-            className="sc-bwzfXH ckJhMz sc-checkbox"
+            className="sc-bwzfXH kBirfa sc-checkbox"
           >
             <input
               checked={true}
@@ -811,7 +811,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         >
           <label
             checked={false}
-            className="sc-bwzfXH eHtcdR sc-checkbox"
+            className="sc-bwzfXH ciMUGB sc-checkbox"
           >
             <input
               checked={false}
@@ -894,7 +894,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI kmhuIk sc-select-container"
+          className="sc-iwsKbI giDcxC sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1163,7 +1163,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI kmhuIk sc-select-container"
+          className="sc-iwsKbI giDcxC sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1366,7 +1366,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI kmhuIk sc-select-container"
+          className="sc-iwsKbI giDcxC sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"

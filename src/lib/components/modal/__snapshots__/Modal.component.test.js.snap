@@ -68,7 +68,7 @@ exports[`Storyshots Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-iwsKbI gwopHK sc-button"
+            className="sc-iwsKbI jHjLoZ sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
