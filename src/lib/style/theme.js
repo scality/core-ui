@@ -32,31 +32,6 @@ export const grayLight = "#C2C8CC";
 export const grayLighter = "#D8DCDE";
 export const grayLightest = "#E9EBED";
 
-export const brand = {
-  alert: "#FFC10A",
-  base: "#7B7B7B",
-  primary: "#1D1D1D",
-  primaryDark1: "#171717",
-  primaryDark2: "#0A0A0A",
-  secondary: "#0F7FFF",
-  secondaryDark1: "#1C3D59",
-  secondaryDark2: "#1C2E3F",
-  success: "#006F62",
-  healthy: "#69E44C",
-  healthySecondary: "#30AC26",
-  warning: "#FFE508",
-  danger: "#BE321F",
-  critical: "#AA1D05",
-  background: "#121212",
-  backgroundBluer: "#192A41",
-  textPrimary: "#FFFFFF",
-  textSecondary: "#B5B5B5",
-  textTertiary: "#DFDFDF",
-  borderLight: "#A5A5A5",
-  border: "#313131",
-  info: "#434343",
-};
-
 // Export the default light & dark theme
 export const defaultTheme = {
   light: {
@@ -108,6 +83,7 @@ export const defaultTheme = {
     info: "#434343",
   },
 };
+export const brand = defaultTheme.dark;
 
 //navbar
 export const navbarHeight = "47px";
