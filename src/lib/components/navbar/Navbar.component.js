@@ -66,16 +66,12 @@ const TabItem = styled.div`
   align-items: center;
   padding: 0 ${defaultTheme.padding.base};
   ${(props) => {
-    const { textPrimary, secondary, backgroundBluer } = getTheme(props);
+    const { textPrimary, secondary, background } = getTheme(props);
     return css`
       color: ${textPrimary};
       &:hover {
         border-bottom: 2px solid ${secondary};
-        background-color: ${backgroundBluer};
-        border-top: 4px solid ${secondary};
-        span {
-          padding-bottom: 2px;
-        }
+        border-top: 2px solid ${background};
         cursor: pointer;
       }
     `;
@@ -83,11 +79,8 @@ const TabItem = styled.div`
   ${(props) =>
     props.selected &&
     css`
-      border-bottom: 2px solid ${getTheme(props).primary};
-      border-top: 4px solid ${getTheme(props).primary};
-      span {
-        padding-bottom: 2px;
-      }
+      border-top: 2px solid ${getTheme(props).background};
+      border-bottom: 2px solid ${getTheme(props).secondary};
     `};
 `;
 
@@ -218,7 +211,7 @@ function NavBar({
               >
                 <span>{title}</span>
               </TabItem>
-            )
+            ),
           )}
         </NavbarTabs>
       ) : null}
@@ -226,7 +219,7 @@ function NavBar({
         <NavbarMenu>
           <NavbarMenuItem>
             {rightActions.map((action, index) =>
-              getActionRenderer(action, index)
+              getActionRenderer(action, index),
             )}
           </NavbarMenuItem>
         </NavbarMenu>
