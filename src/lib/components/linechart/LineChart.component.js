@@ -1,6 +1,7 @@
-//@flow
+// @flow
 import React from "react";
 import VegaChart from "../vegachart/VegaChart.component.js";
+import { Encoding, Field } from "vega-lite";
 type Props = {
   id: string,
   data: Array<Object>,
@@ -12,10 +13,10 @@ type Props = {
   width?: number,
   height?: number,
   displayTrendLine?: boolean,
-  strokeDashEncodingConfig?: Object,
-  opacityEncodingConfig?: Object,
-  tooltipConfig?: Object,
-  tooltipTheme?: string,
+  strokeDashEncodingConfig?: $PropertyType<Encoding<Field>, "strokeDash">,
+  opacityEncodingConfig?: $PropertyType<Encoding<Field>, "opacity">,
+  tooltipConfig?: $PropertyType<Encoding<Field>, "tooltip">,
+  tooltipTheme?: "light" | "dark" | "custom",
 };
 
 function LineChart({
