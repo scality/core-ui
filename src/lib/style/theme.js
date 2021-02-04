@@ -38,7 +38,7 @@ export const brand = {
   primary: "#1D1D1D",
   primaryDark1: "#171717",
   primaryDark2: "#0A0A0A",
-  secondary: "#055DFF",
+  secondary: "#0F7FFF",
   secondaryDark1: "#1C3D59",
   secondaryDark2: "#1C2E3F",
   success: "#006F62",

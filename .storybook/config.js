@@ -21,7 +21,7 @@ const themes = [
       primary: "#FAF9FB",
       primaryDark1: "#F7F6F9",
       primaryDark2: "#EDEAF0",
-      secondary: "#037AFF",
+      secondary: "#0F7FFF",
       secondaryDark1: "#1C3D59",
       secondaryDark2: "#1C2E3F",
       success: jade,
@@ -36,7 +36,7 @@ const themes = [
       textSecondary: "#8593A0",
       borderLight: "#A5A5A5",
       border: "#A5A5A5",
-      info: "#8C8C8C"
+      info: "#8C8C8C",
     },
   },
   {
@@ -47,7 +47,7 @@ const themes = [
       primary: "#1D1D1D",
       primaryDark1: "#171717",
       primaryDark2: "#0A0A0A",
-      secondary: "#055DFF",
+      secondary: "#0F7FFF",
       secondaryDark1: "#1C3D59",
       secondaryDark2: "#1C2E3F",
       success: "#006F62",
@@ -63,7 +63,7 @@ const themes = [
       textTertiary: "#DFDFDF",
       borderLight: "#A5A5A5",
       border: "#313131",
-      info: "#434343"
+      info: "#434343",
     },
   },
 ];
@@ -73,7 +73,7 @@ addDecorator(
     header: false,
     inline: false,
     maxPropArrayLength: 10,
-  })
+  }),
 );
 
 setAddon(withPropsCombinations);

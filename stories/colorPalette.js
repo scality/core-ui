@@ -30,10 +30,10 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#EDEAF0</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#037AFF" }} />
+          <div className="color" style={{ backgroundColor: "#0F7FFF" }} />
           <div className="text">secondary</div>
           <div className="text">The main interactive color</div>
-          <div className="text">#037AFF</div>
+          <div className="text">#0F7FFF</div>
         </div>
         <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#1C3D59" }} />
@@ -105,12 +105,12 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#24871D</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor:  "#006F62" }} />
+          <div className="color" style={{ backgroundColor: "#006F62" }} />
           <div className="text">success</div>
           <div className="text">Deprecated color</div>
           <div className="text">#006F62</div>
         </div>
-       <div className="card-color-palette">
+        <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#A39300" }} />
           <div className="text">warning</div>
           <div className="text">Yellow warning element (button)</div>
@@ -159,10 +159,10 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#0A0A0A</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor: "#037AFF" }} />
+          <div className="color" style={{ backgroundColor: "#0F7FFF" }} />
           <div className="text">secondary</div>
           <div className="text">The main interactive color</div>
-          <div className="text">#037AFF</div>
+          <div className="text">#0F7FFF</div>
         </div>
         <div className="card-color-palette">
           <div className="color" style={{ backgroundColor: "#1C3D59" }} />
@@ -229,7 +229,7 @@ storiesOf("ColorPalette", module).add("Default", () => {
           <div className="text">#30AC26</div>
         </div>
         <div className="card-color-palette">
-          <div className="color" style={{ backgroundColor:  "#006F62" }} />
+          <div className="color" style={{ backgroundColor: "#006F62" }} />
           <div className="text">success</div>
           <div className="text">Deprecated color</div>
           <div className="text">#006F62</div>
