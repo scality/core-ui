@@ -9,7 +9,7 @@ type Props = {
   value?: string,
   checked: boolean,
   disabled?: boolean,
-  onChange: () => void
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 };
 
 function Checkbox({
@@ -54,7 +54,7 @@ const StyledCheckboxLabel = styled.span`
 const StyledCheckbox = styled.label`
   position: relative;
   display: inline-block;
-  ${props => {
+  ${(props) => {
     return props.disabled
       ? css`
           cursor: default;
@@ -65,7 +65,7 @@ const StyledCheckbox = styled.label`
         `;
   }}
 
-  ${props => {
+  ${(props) => {
     const { primary, border, secondary } = getTheme(props);
     const iconCheckedColor =
       props.checked || props.disabled ? secondary : "transparent";

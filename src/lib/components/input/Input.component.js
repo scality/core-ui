@@ -26,7 +26,7 @@ type Props = {
   error?: string,
   id?: string,
   checked?: boolean,
-  onChange: (e?: any) => void,
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   options?: Items,
   min?: string,
   max?: string,

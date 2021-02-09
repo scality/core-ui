@@ -109,13 +109,13 @@ const ExampleInput = () => {
         id="id8"
         value={numberValue}
         onChange={(e) => {
-          if (e && e.target) setNumberValue(e.target.value);
+          if (e && e.target) setNumberValue(e.currentTarget.value);
         }}
         type="number"
         min="0"
         max="100"
         error={
-          numberValue > 100
+          parseInt(numberValue) > 100
             ? "The input number must be less than or equal to 100"
             : ""
         }

@@ -6,7 +6,7 @@ import { getTheme, getThemePropSelector } from "../../utils";
 
 type Props = {
   toggle: boolean,
-  onChange: () => void,
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   label: string,
 };
 const ToggleContainer = styled.div`
