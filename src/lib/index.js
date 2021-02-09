@@ -36,6 +36,7 @@ import CollapsiblePanel from "./components/collapsiblepanel/CollapsiblePanel.com
 import LateralNavbarLayout from "./components/lateralnavbarlayout/LateralNavbarLayout.component";
 import StatusBar from "./components/statusbar/StatusBar.component";
 import Healthselector from "./components/healthselector/Healthselector.component";
+import "./index.css";
 
 export {
   LOADER_SIZE,
