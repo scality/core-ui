@@ -11,20 +11,20 @@ import { getThemePropSelector } from "../../utils";
 type Props = {
   navbar: NavbarProps,
   sidebar: SidebarProps,
-  children: Node
+  children: Node,
 };
 
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
-  height: calc(100vh - ${navbarHeight});
+  // there is a 1px border between the navbar and the content
+  height: calc(100vh - ${navbarHeight} - 1px);
 `;
 
 const MainContent = styled.div`
