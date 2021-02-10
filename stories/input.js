@@ -109,7 +109,7 @@ const ExampleInput = () => {
         id="id8"
         value={numberValue}
         onChange={(e) => {
-          if (e && e.target) setNumberValue(e.currentTarget.value);
+          setNumberValue(e.currentTarget.value);
         }}
         type="number"
         min="0"
