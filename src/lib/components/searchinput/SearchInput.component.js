@@ -8,9 +8,9 @@ import { getThemePropSelector } from "../../utils";
 type Props = {
   placeholder?: string,
   value: string,
-  onChange: () => void,
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   onReset?: () => void,
-  disableToggle: boolean
+  disableToggle: boolean,
 };
 
 const SearchInputContainer = styled.div`
@@ -19,9 +19,9 @@ const SearchInputContainer = styled.div`
   .sc-input {
     display: block;
     input[type="text"] {
-      width: ${props => (props.docked ? "40px" : "100%")};
+      width: ${(props) => (props.docked ? "40px" : "100%")};
       box-sizing: border-box;
-      padding-left: ${props => (props.docked ? "28px" : "40px")};
+      padding-left: ${(props) => (props.docked ? "28px" : "40px")};
       transition: width 0.2s ease-in-out;
     }
   }
@@ -37,7 +37,7 @@ const IconButton = styled.button`
   font-size: ${defaultTheme.fontSize.base};
   color: ${getThemePropSelector("textSecondary")};
   background-color: transparent;
-  ${props => {
+  ${(props) => {
     return (
       !props.disabled &&
       css`
@@ -56,8 +56,8 @@ const SearchIcon = styled(IconButton)`
 
 const ResetIcon = styled(IconButton)`
   right: 1px;
-  visibility: ${props => (props.visible ? "visible" : "hidden")};
-  opacity: ${props => (props.visible ? 1 : 0)};
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
 `;
 

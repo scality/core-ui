@@ -10,13 +10,13 @@ type Props = {
   placeholder?: string,
   value: string,
   disabled?: boolean,
-  onChange: any => void
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 };
 
 const TextAreaContainer = styled.textarea`
   padding: ${defaultTheme.padding.small};
   border-radius: 4px;
-  ${props => {
+  ${(props) => {
     const { border, textSecondary, primary, secondary } = getTheme(props);
     return css`
       border-color: ${border};
