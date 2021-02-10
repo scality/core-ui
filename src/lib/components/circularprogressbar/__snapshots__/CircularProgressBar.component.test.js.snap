@@ -29,7 +29,7 @@ exports[`Storyshots CircularProgressBar Default 1`] = `
         strokeWidth={10}
       />
       <circle
-        className="sc-htpNat eKcDGS"
+        className="sc-htpNat iiAuCT"
         cx={75}
         cy={75}
         r={70}

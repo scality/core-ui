@@ -20,7 +20,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs knTkHh sc-chips"
+    className="sc-htoDjs YUyfO sc-chips"
     size="base"
   >
     <span
@@ -30,7 +30,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs gKfSCM sc-chips"
+    className="sc-htoDjs cuqZvO sc-chips"
     size="base"
   >
     <span
@@ -40,7 +40,7 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs HpTIe sc-chips"
+    className="sc-htoDjs epKCCb sc-chips"
     size="base"
   >
     <span
@@ -74,12 +74,12 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs hGrNJX sc-chips"
+    className="sc-htoDjs bGtCVp sc-chips"
     onClick={[Function]}
     size="base"
   >
     <span
-      className="sc-dnqmqq bMnDSL sc-chips-icon"
+      className="sc-dnqmqq iGFQfy sc-chips-icon"
       size="base"
     >
       <i
@@ -93,12 +93,12 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs cDOotG sc-chips"
+    className="sc-htoDjs bzxLmr sc-chips"
     onClick={[Function]}
     size="base"
   >
     <span
-      className="sc-dnqmqq bBckuc sc-chips-icon"
+      className="sc-dnqmqq lmMTvy sc-chips-icon"
       size="base"
     >
       <i
@@ -112,12 +112,12 @@ exports[`Storyshots Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-htoDjs jZevLT sc-chips"
+    className="sc-htoDjs hOykNQ sc-chips"
     onClick={[Function]}
     size="base"
   >
     <span
-      className="sc-dnqmqq gSUsIw sc-chips-icon"
+      className="sc-dnqmqq gTZcWu sc-chips-icon"
       size="base"
     >
       <i
@@ -184,11 +184,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs knTkHh sc-chips"
+    className="sc-htoDjs YUyfO sc-chips"
     size="base"
   >
     <span
-      className="sc-dnqmqq bMnDSL sc-chips-icon"
+      className="sc-dnqmqq iGFQfy sc-chips-icon"
       size="base"
     >
       <i
@@ -232,11 +232,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs gKfSCM sc-chips"
+    className="sc-htoDjs cuqZvO sc-chips"
     size="base"
   >
     <span
-      className="sc-dnqmqq bBckuc sc-chips-icon"
+      className="sc-dnqmqq lmMTvy sc-chips-icon"
       size="base"
     >
       <i
@@ -280,11 +280,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs HpTIe sc-chips"
+    className="sc-htoDjs epKCCb sc-chips"
     size="base"
   >
     <span
-      className="sc-dnqmqq gSUsIw sc-chips-icon"
+      className="sc-dnqmqq gTZcWu sc-chips-icon"
       size="base"
     >
       <i
@@ -429,11 +429,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs gKfSCM sc-chips"
+    className="sc-htoDjs cuqZvO sc-chips"
     size="base"
   >
     <span
-      className="sc-dnqmqq bBckuc sc-chips-icon"
+      className="sc-dnqmqq lmMTvy sc-chips-icon"
       size="base"
     >
       <i
@@ -477,11 +477,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs jBLNdH sc-chips"
+    className="sc-htoDjs fKDBev sc-chips"
     size="large"
   >
     <span
-      className="sc-dnqmqq bMnDSL sc-chips-icon"
+      className="sc-dnqmqq iGFQfy sc-chips-icon"
       size="large"
     >
       <i
@@ -525,11 +525,11 @@ exports[`Storyshots Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-htoDjs jcMTPC sc-chips"
+    className="sc-htoDjs jzvGlc sc-chips"
     size="larger"
   >
     <span
-      className="sc-dnqmqq bBckuc sc-chips-icon"
+      className="sc-dnqmqq lmMTvy sc-chips-icon"
       size="larger"
     >
       <i
