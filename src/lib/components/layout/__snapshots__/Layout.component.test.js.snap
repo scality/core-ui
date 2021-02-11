@@ -2,7 +2,7 @@
 
 exports[`Storyshots Layout Hoverable Sidebar  1`] = `
 <div
-  className="sc-hMqMXs jFpxVx sc-layout"
+  className="sc-hMqMXs zbdhu sc-layout"
 >
   <div
     className="sc-VigVT fonxNn sc-navbar"
@@ -199,7 +199,7 @@ exports[`Storyshots Layout Hoverable Sidebar  1`] = `
     </div>
   </div>
   <div
-    className="sc-kEYyzF hnyeUU"
+    className="sc-kEYyzF YUpbU"
   >
     <div
       className="sc-kGXeez cxEHIa"
@@ -417,7 +417,7 @@ exports[`Storyshots Layout Hoverable Sidebar  1`] = `
 
 exports[`Storyshots Layout Sidebar docked 1`] = `
 <div
-  className="sc-hMqMXs jFpxVx sc-layout"
+  className="sc-hMqMXs zbdhu sc-layout"
 >
   <div
     className="sc-VigVT fonxNn sc-navbar"
@@ -648,7 +648,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
     </div>
   </div>
   <div
-    className="sc-kEYyzF hnyeUU"
+    className="sc-kEYyzF YUpbU"
   >
     <div
       className="sc-kGXeez cxEHIa"
@@ -836,7 +836,7 @@ exports[`Storyshots Layout Sidebar docked 1`] = `
 
 exports[`Storyshots Layout Sidebar expanded 1`] = `
 <div
-  className="sc-hMqMXs jFpxVx sc-layout"
+  className="sc-hMqMXs zbdhu sc-layout"
 >
   <div
     className="sc-VigVT fonxNn sc-navbar"
@@ -1067,7 +1067,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
     </div>
   </div>
   <div
-    className="sc-kEYyzF hnyeUU"
+    className="sc-kEYyzF YUpbU"
   >
     <div
       className="sc-kGXeez goPxDc"
@@ -1273,7 +1273,7 @@ exports[`Storyshots Layout Sidebar expanded 1`] = `
 
 exports[`Storyshots Layout Sidebar with toggle 1`] = `
 <div
-  className="sc-hMqMXs jFpxVx sc-layout"
+  className="sc-hMqMXs zbdhu sc-layout"
 >
   <div
     className="sc-VigVT fonxNn sc-navbar"
@@ -1470,7 +1470,7 @@ exports[`Storyshots Layout Sidebar with toggle 1`] = `
     </div>
   </div>
   <div
-    className="sc-kEYyzF hnyeUU"
+    className="sc-kEYyzF YUpbU"
   >
     <div
       className="sc-kGXeez goPxDc"
