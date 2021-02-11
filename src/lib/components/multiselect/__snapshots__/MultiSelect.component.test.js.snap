@@ -229,7 +229,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -328,7 +328,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -445,7 +445,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -544,7 +544,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -772,7 +772,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -841,7 +841,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1055,7 +1055,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1110,7 +1110,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
           className="sc-cSHVUG aXlwx sc-multi-select-item-right"
         >
           <button
-            className="sc-EHOje lpbhmX sc-button"
+            className="sc-EHOje iQUpRw sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"

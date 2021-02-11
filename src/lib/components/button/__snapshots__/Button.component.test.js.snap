@@ -163,7 +163,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb gIKpTZ sc-button"
+    className="sc-bxivhb kYyBiR sc-button"
     disabled={false}
     size="base"
     title=""
@@ -184,7 +184,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb kVJLDh sc-button"
+    className="sc-bxivhb jKZRwN sc-button"
     disabled={false}
     size="base"
     title=""
@@ -205,7 +205,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb jmMpcQ sc-button"
+    className="sc-bxivhb cuoVmM sc-button"
     disabled={false}
     size="base"
     title=""
@@ -302,7 +302,7 @@ exports[`Storyshots Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-bxivhb iKEcaQ sc-button"
+    className="sc-bxivhb clwQRG sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"

@@ -63,7 +63,7 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-ifAKCX gaOrGD sc-input"
+    className="sc-ifAKCX JVMPS sc-input"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -85,7 +85,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-bZQynM iZyYwj sc-input-error"
+        className="sc-bZQynM hsPmzh sc-input-error"
       >
         error
       </span>
@@ -100,7 +100,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-gqjmRU czbDPR"
   >
     <div
-      className="sc-ifAKCX gaOrGD sc-input"
+      className="sc-ifAKCX JVMPS sc-input"
     >
       <label
         className="sc-EHOje glQODq sc-input-label"
@@ -122,7 +122,7 @@ exports[`Storyshots Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-bZQynM iZyYwj sc-input-error"
+          className="sc-bZQynM hsPmzh sc-input-error"
         >
           long error error error error error error error error error
         </span>
@@ -170,7 +170,7 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-ifAKCX gaOrGD sc-input"
+    className="sc-ifAKCX JVMPS sc-input"
     type="checkbox"
   >
     <label
@@ -198,7 +198,7 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-bZQynM iZyYwj sc-input-error"
+        className="sc-bZQynM hsPmzh sc-input-error"
       >
         error
       </span>
@@ -373,7 +373,7 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-ifAKCX gaOrGD sc-input"
+    className="sc-ifAKCX JVMPS sc-input"
     type="textarea"
   >
     <label
@@ -395,7 +395,7 @@ exports[`Storyshots Input Default 1`] = `
         value="Hello"
       />
       <span
-        className="sc-bZQynM iZyYwj sc-input-error"
+        className="sc-bZQynM hsPmzh sc-input-error"
       >
         error
       </span>
