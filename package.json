@@ -12,6 +12,7 @@
     "flow": "flow check",
     "lint": "eslint src/* --ext .js",
     "prepare": "npm run build",
+    "prepack": "npm run build",
     "plop": "plop",
     "test": "jest",
     "storybook": "start-storybook -p 3000",
