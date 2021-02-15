@@ -14,9 +14,9 @@ export const InputContainer = styled.div`
 
   input.sc-input-type {
     ${(props) => {
-      const { primary, danger, textSecondary, border } = getTheme(props);
+      const { primaryDark2, danger, textSecondary, border } = getTheme(props);
       return css`
-        background-color: ${primary};
+        background-color: ${primaryDark2};
         color: ${textSecondary};
         border: 1px solid ${props.error ? danger : border};
       `;

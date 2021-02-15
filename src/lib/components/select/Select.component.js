@@ -18,8 +18,9 @@ type Props = {
 };
 
 const SelectContainer = styled.div`
+  font-size: ${defaultTheme.fontSize.base};
   .sc-select__control {
-    background-color: ${getThemePropSelector("primary")};
+    background-color: ${getThemePropSelector("primaryDark2")};
     border-radius: 4px;
     border: 1px solid ${getThemePropSelector("border")};
     height: auto;
