@@ -10,7 +10,7 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-ifAKCX jhteBm sc-input"
+    className="sc-ifAKCX idOrFE sc-input"
   >
     <div
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
@@ -34,7 +34,7 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-ifAKCX jhteBm sc-input"
+    className="sc-ifAKCX idOrFE sc-input"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -63,7 +63,7 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-ifAKCX JVMPS sc-input"
+    className="sc-ifAKCX brleGD sc-input"
   >
     <label
       className="sc-EHOje glQODq sc-input-label"
@@ -100,7 +100,7 @@ exports[`Storyshots Input Default 1`] = `
     className="sc-gqjmRU czbDPR"
   >
     <div
-      className="sc-ifAKCX JVMPS sc-input"
+      className="sc-ifAKCX brleGD sc-input"
     >
       <label
         className="sc-EHOje glQODq sc-input-label"
@@ -135,7 +135,7 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-ifAKCX jhteBm sc-input"
+    className="sc-ifAKCX idOrFE sc-input"
     type="checkbox"
   >
     <label
@@ -170,7 +170,7 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-ifAKCX JVMPS sc-input"
+    className="sc-ifAKCX brleGD sc-input"
     type="checkbox"
   >
     <label
@@ -210,7 +210,7 @@ exports[`Storyshots Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-ifAKCX jhteBm sc-input"
+    className="sc-ifAKCX idOrFE sc-input"
     type="select"
   >
     <label
@@ -223,7 +223,7 @@ exports[`Storyshots Input Default 1`] = `
       className="sc-gzVnrw kvhoeX sc-input-wrapper"
     >
       <div
-        className="sc-htpNat bNYCSV sc-select-container"
+        className="sc-htpNat jmdMhK sc-select-container"
       >
         <div
           className="sc-select css-2b097c-container"
@@ -344,7 +344,7 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input
   </h3>
   <div
-    className="sc-ifAKCX jhteBm sc-input"
+    className="sc-ifAKCX idOrFE sc-input"
     type="textarea"
   >
     <label
@@ -373,7 +373,7 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-ifAKCX JVMPS sc-input"
+    className="sc-ifAKCX brleGD sc-input"
     type="textarea"
   >
     <label
@@ -407,7 +407,7 @@ exports[`Storyshots Input Default 1`] = `
     Number Input (Max 100)
   </h3>
   <div
-    className="sc-ifAKCX jvSzsM sc-input"
+    className="sc-ifAKCX jGDdmj sc-input"
     type="number"
   >
     <div
