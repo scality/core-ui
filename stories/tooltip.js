@@ -36,7 +36,11 @@ storiesOf("Tooltip", module).add("Default", () => {
         <Title>Customize your tooltip style</Title>
         <Tooltip
           placement="right"
-          overlaystyle={{ backgroundColor: "green", fontSize: "20px" }}
+          overlayStyle={{
+            backgroundColor: "green",
+            fontSize: "20px",
+            width: "120px",
+          }}
           overlay="Helloooooo"
         >
           <SubTitle>Hover here!</SubTitle>

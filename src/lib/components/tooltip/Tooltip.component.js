@@ -10,11 +10,16 @@ export const BOTTOM = "bottom";
 export const LEFT = "left";
 export const RIGHT = "right";
 type Position = typeof TOP | typeof BOTTOM | typeof LEFT | typeof RIGHT;
-type Props = {
+export type Props = {
   placement?: Position,
-  overlaystyle?: Node,
+  overlayStyle?: {
+    backgroundColor?: string,
+    color?: string,
+    fontSize?: string,
+    width?: string,
+  },
   overlay?: Node,
-  children?: Node
+  children?: Node,
 };
 
 const TooltipContainer = styled.div`
@@ -25,21 +30,23 @@ const TooltipContainer = styled.div`
 const TooltipOverLayContainer = styled.div`
   display: flex;
   position: absolute;
-  background-color: ${props =>
-    (props && props.overlaystyle && props.overlaystyle.backgroundColor) ||
+  background-color: ${(props) =>
+    (props && props.overlayStyle && props.overlayStyle.backgroundColor) ||
     getTheme(props).primaryDark2};
-  color: ${props =>
-    (props && props.overlaystyle && props.overlaystyle.color) ||
+  color: ${(props) =>
+    (props && props.overlayStyle && props.overlayStyle.color) ||
     getTheme(props).textPrimary}
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
-  font-size: ${props =>
-    (props && props.overlaystyle && props.overlaystyle.fontSize) ||
+  font-size: ${(props) =>
+    (props && props.overlayStyle && props.overlayStyle.fontSize) ||
     defaultTheme.fontSize.small};
+  width:${(props) =>
+    (props && props.overlayStyle && props.overlayStyle.width) || "50px"};
   text-align: center;
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
-    ${props => {
+    ${(props) => {
       switch (props.placement) {
         case LEFT:
           return css`
@@ -71,7 +78,7 @@ const TooltipOverLayContainer = styled.div`
 
 function Tooltip({
   placement = TOP,
-  overlaystyle,
+  overlayStyle,
   children,
   overlay,
   ...rest
@@ -88,7 +95,7 @@ function Tooltip({
         <TooltipOverLayContainer
           className="sc-tooltip-overlay"
           placement={placement}
-          overlaystyle={overlaystyle}
+          overlayStyle={overlayStyle}
         >
           <div className="sc-tooltip-overlay-text">{overlay}</div>
         </TooltipOverLayContainer>
