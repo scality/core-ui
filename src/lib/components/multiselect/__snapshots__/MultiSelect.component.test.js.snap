@@ -24,7 +24,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI giDcxC sc-select-container"
+          className="sc-iwsKbI cYxtRA sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -597,7 +597,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI giDcxC sc-select-container"
+          className="sc-iwsKbI cYxtRA sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -894,7 +894,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI giDcxC sc-select-container"
+          className="sc-iwsKbI cYxtRA sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1163,7 +1163,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI giDcxC sc-select-container"
+          className="sc-iwsKbI cYxtRA sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1366,7 +1366,7 @@ exports[`Storyshots MultiSelect Default 1`] = `
         className="sc-jTzLTM gqMPpu sc-multi-select-list-search"
       >
         <div
-          className="sc-iwsKbI giDcxC sc-select-container"
+          className="sc-iwsKbI cYxtRA sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
