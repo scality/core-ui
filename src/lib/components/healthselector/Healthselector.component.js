@@ -222,7 +222,7 @@ const HealthSelectorMenuItem = styled.li`
 `;
 
 function Healthselector(props: Props) {
-  const { size, items } = props;
+  const { size, items, ...rest } = props;
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
@@ -260,7 +260,7 @@ function Healthselector(props: Props) {
   ];
 
   return (
-    <HealthselectorContainer className="sc-healthselector">
+    <HealthselectorContainer className="sc-healthselector" {...rest}>
       <TriggerStyled
         variant={'base'}
         size={size || 'base'}
