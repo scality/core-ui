@@ -1,5 +1,6 @@
 //@flow
 import "@fortawesome/fontawesome-free/css/all.css";
+import "./index.css";
 
 import Banner from "./components/banner/Banner.component";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb.component";
@@ -36,7 +37,7 @@ import CollapsiblePanel from "./components/collapsiblepanel/CollapsiblePanel.com
 import LateralNavbarLayout from "./components/lateralnavbarlayout/LateralNavbarLayout.component";
 import StatusBar from "./components/statusbar/StatusBar.component";
 import Healthselector from "./components/healthselector/Healthselector.component";
-import "./index.css";
+import ConstrainedText from "./components/constrainedtext/Constrainedtext.component";
 
 export {
   LOADER_SIZE,
@@ -74,4 +75,5 @@ export {
   LateralNavbarLayout,
   StatusBar,
   Healthselector,
+  ConstrainedText,
 };
