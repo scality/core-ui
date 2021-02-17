@@ -47,13 +47,13 @@ const ThreeCirclesWrapper = styled.span`
 
 const TriggerStyled = styled(ButtonStyled)`
   box-sizing: border-box;
-  background-color: ${getThemePropSelector('primary')};
+  background-color: ${getThemePropSelector('border')};
   color: ${getThemePropSelector('textPrimary')};
   &:hover {
-    background-color: ${getThemePropSelector('primaryDark2')};
+    background-color: ${getThemePropSelector("secondaryDark1")};
   }
   &:active {
-    background-color: ${getThemePropSelector('primaryDark2')};
+    background-color: ${getThemePropSelector("secondaryDark1")};
   }
   border-radius: 4px;
 
@@ -210,13 +210,13 @@ const HealthSelectorMenuItem = styled.li`
   justify-content: space-around;
 
   ${css`
-    background-color: ${getThemePropSelector('primary')};
+    background-color: ${getThemePropSelector('border')};
     color: ${getThemePropSelector('textPrimary')};
     &:hover {
-      background-color: ${getThemePropSelector('primaryDark2')};
+      background-color: ${getThemePropSelector("secondaryDark1")};
     }
     &:active {
-      background-color: ${getThemePropSelector('primaryDark2')};
+      background-color: ${getThemePropSelector("secondaryDark1")};
     }
   `};
 `;
