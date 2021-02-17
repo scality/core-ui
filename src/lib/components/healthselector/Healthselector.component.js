@@ -1,9 +1,9 @@
 //@flow
-import React, { useState, useCallback } from 'react';
-import styled, { css } from 'styled-components';
-import { getThemePropSelector } from '../../utils';
-import { ButtonStyled } from '../button/Button.component';
-import * as defaultTheme from '../../style/theme';
+import React, { useState, useCallback } from "react";
+import styled, { css } from "styled-components";
+import { getThemePropSelector } from "../../utils";
+import { ButtonStyled } from "../button/Button.component";
+import * as defaultTheme from "../../style/theme";
 
 export type Item = {
   label: string,
@@ -47,8 +47,8 @@ const ThreeCirclesWrapper = styled.span`
 
 const TriggerStyled = styled(ButtonStyled)`
   box-sizing: border-box;
-  background-color: ${getThemePropSelector('border')};
-  color: ${getThemePropSelector('textPrimary')};
+  background-color: ${getThemePropSelector("border")};
+  color: ${getThemePropSelector("textPrimary")};
   &:hover {
     background-color: ${getThemePropSelector("secondaryDark1")};
   }
@@ -72,7 +72,7 @@ const TriggerStyled = styled(ButtonStyled)`
 
   ${(props) => {
     switch (props.size) {
-      case 'smaller':
+      case "smaller":
         return css`
           ${CSSCircle} {
             width: 8px;
@@ -88,7 +88,7 @@ const TriggerStyled = styled(ButtonStyled)`
             }
           }
         `;
-      case 'small':
+      case "small":
         return css`
           ${CSSCircle} {
             width: 10px;
@@ -104,7 +104,7 @@ const TriggerStyled = styled(ButtonStyled)`
             }
           }
         `;
-      case 'large':
+      case "large":
         return css`
           ${CSSCircle} {
             width: 12px;
@@ -120,7 +120,7 @@ const TriggerStyled = styled(ButtonStyled)`
             }
           }
         `;
-      case 'larger':
+      case "larger":
         return css`
           ${CSSCircle} {
             width: 15px;
@@ -191,7 +191,7 @@ const HealthSelectorMenu = styled.ul`
     ) {
       return css`
         left: 0;
-        bottom: ${props.triggerSize.height + 'px'};
+        bottom: ${props.triggerSize.height + "px"};
       `;
     } else {
       return css`
@@ -210,8 +210,8 @@ const HealthSelectorMenuItem = styled.li`
   justify-content: space-around;
 
   ${css`
-    background-color: ${getThemePropSelector('border')};
-    color: ${getThemePropSelector('textPrimary')};
+    background-color: ${getThemePropSelector("border")};
+    color: ${getThemePropSelector("textPrimary")};
     &:hover {
       background-color: ${getThemePropSelector("secondaryDark1")};
     }
@@ -262,8 +262,8 @@ function Healthselector(props: Props) {
   return (
     <HealthselectorContainer className="sc-healthselector" {...rest}>
       <TriggerStyled
-        variant={'base'}
-        size={size || 'base'}
+        variant={"base"}
+        size={size || "base"}
         className="trigger"
         ref={refTriggerCallback}
         onBlur={() => setOpen(false)}
@@ -274,7 +274,7 @@ function Healthselector(props: Props) {
         opened={open}
       >
         <LeftRowWrapper>{icons[selectedIndex]}</LeftRowWrapper>
-        <RightRowWrapper>{(selected && selected.label) || ''}</RightRowWrapper>
+        <RightRowWrapper>{(selected && selected.label) || ""}</RightRowWrapper>
         <i className="fas fa-caret-down" />
         {open && (
           <HealthSelectorMenu
@@ -285,26 +285,26 @@ function Healthselector(props: Props) {
             {!items[0].selected && (
               <HealthSelectorMenuItem onClick={items[0].onClick}>
                 <LeftRowWrapper>{icons[0]}</LeftRowWrapper>
-                <RightRowWrapper>{items[0].label || 'All'}</RightRowWrapper>
+                <RightRowWrapper>{items[0].label || "All"}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[1].selected && (
               <HealthSelectorMenuItem onClick={items[1].onClick}>
                 <LeftRowWrapper>{icons[1]}</LeftRowWrapper>
-                <RightRowWrapper>{items[1].label || 'Ok'}</RightRowWrapper>
+                <RightRowWrapper>{items[1].label || "Ok"}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[2].selected && (
               <HealthSelectorMenuItem onClick={items[2].onClick}>
                 <LeftRowWrapper>{icons[2]}</LeftRowWrapper>
-                <RightRowWrapper>{items[2].label || 'Warning'}</RightRowWrapper>
+                <RightRowWrapper>{items[2].label || "Warning"}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
             {!items[3].selected && (
               <HealthSelectorMenuItem onClick={items[3].onClick}>
                 <LeftRowWrapper>{icons[3]}</LeftRowWrapper>
                 <RightRowWrapper>
-                  {items[3].label || 'Critical'}
+                  {items[3].label || "Critical"}
                 </RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
