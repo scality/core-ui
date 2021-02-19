@@ -1,10 +1,13 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import CircularProgressBar from "../src/lib/components/circularprogressbar/CircularProgressBar.component";
 import { Wrapper, Title, Text } from "./common";
 
-storiesOf("CircularProgressBar", module).add("Default", () => {
+export default {
+  title: "CircularProgressBar",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>With Default Color</Title>
@@ -48,4 +51,4 @@ storiesOf("CircularProgressBar", module).add("Default", () => {
       </CircularProgressBar>
     </Wrapper>
   );
-});
+};

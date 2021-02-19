@@ -1,8 +1,11 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import * as defaultTheme from "../src/lib/style/theme";
 
-storiesOf("Color", module).add("Default", () => {
+export default {
+  title: "Color",
+};
+
+export const Default = () => {
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div className="card">
@@ -202,4 +205,4 @@ storiesOf("Color", module).add("Default", () => {
       </div>
     </div>
   );
-});
+};

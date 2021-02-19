@@ -1,11 +1,14 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Toggle from "../src/lib/components/toggle/Toggle.component";
 import { Wrapper } from "./common";
 
-storiesOf("Toggle", module).add("Default", () => {
+export default {
+  title: "Toggle",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Toggle
@@ -24,4 +27,4 @@ storiesOf("Toggle", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

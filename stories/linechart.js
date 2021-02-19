@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import LineChart from "../src/lib/components/linechart/LineChart.component";
 import {
   data,
@@ -207,7 +206,11 @@ const tooltipConfigInOut = {
   },
 };
 
-storiesOf("LineChart", module).add("Default", () => {
+export default {
+  title: "LineChart",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Vega-Lite line chart demo</Title>
@@ -262,4 +265,4 @@ storiesOf("LineChart", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

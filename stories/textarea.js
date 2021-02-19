@@ -1,11 +1,14 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import TextArea from "../src/lib/components/textarea/TextArea.component";
 import { Wrapper, Title } from "./common";
 import { action } from "@storybook/addon-actions";
 
-storiesOf("TextArea", module).add("Default", () => {
+export default {
+  title: "TextArea",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Text Area without label</Title>
@@ -28,4 +31,4 @@ storiesOf("TextArea", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

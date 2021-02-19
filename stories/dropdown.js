@@ -2,7 +2,6 @@
 import React from "react";
 import Dropdown from "../src/lib/components/dropdown/Dropdown.component";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
 import { Wrapper, Title } from "./common";
 
 const items = [
@@ -23,7 +22,11 @@ const items = [
   },
 ];
 
-storiesOf("Dropdown", module).add("Default", () => {
+export default {
+  title: "Dropdown",
+};
+
+export const Default = () => {
   return (
     <Wrapper className="storybook-dropdown">
       <Title>Dropdown with text/icon</Title>
@@ -100,4 +103,4 @@ storiesOf("Dropdown", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

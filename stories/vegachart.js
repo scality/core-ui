@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import VegaChart from "../src/lib/components/vegachart/VegaChart.component";
 import { data } from "./data/linechart";
 import { Wrapper, Title } from "./common";
@@ -12,25 +11,25 @@ const spec = {
       field: "time",
       type: "temporal",
       timeUnit: "yearmonthdatehoursminutes",
-      title: "time"
+      title: "time",
     },
     tooltip: [
       {
         field: "time",
         type: "temporal",
-        timeUnit: "yearmonthdatehoursminutes"
+        timeUnit: "yearmonthdatehoursminutes",
       },
       {
         field: "total_space",
         type: "quantitative",
-        title: "TOTAL SPACE"
+        title: "TOTAL SPACE",
       },
       {
         field: "used_space",
         type: "quantitative",
-        title: "USED SPACE"
-      }
-    ]
+        title: "USED SPACE",
+      },
+    ],
   },
   layer: [
     {
@@ -39,9 +38,9 @@ const spec = {
         y: {
           field: "total_space",
           type: "quantitative",
-          title: "TOTAL SPACE (GB)"
-        }
-      }
+          title: "TOTAL SPACE (GB)",
+        },
+      },
     },
     {
       mark: { type: "line", color: "orange" },
@@ -49,9 +48,9 @@ const spec = {
         y: {
           field: "used_space",
           type: "quantitative",
-          title: "USED SPACE (GB)"
-        }
-      }
+          title: "USED SPACE (GB)",
+        },
+      },
     },
     {
       mark: "rule",
@@ -60,28 +59,32 @@ const spec = {
           type: "single",
           on: "mousemove",
           encodings: ["x"],
-          nearest: true
-        }
+          nearest: true,
+        },
       },
       encoding: {
         color: {
           condition: {
             selection: { not: "index" },
-            value: "transparent"
-          }
-        }
-      }
-    }
-  ]
+            value: "transparent",
+          },
+        },
+      },
+    },
+  ],
 };
 
 const id = "vis";
 
-storiesOf("VegaChart", module).add("Default", () => {
+export default {
+  title: "VegaChart",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
       <VegaChart id={id} spec={spec} />
     </Wrapper>
   );
-});
+};

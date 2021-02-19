@@ -2,53 +2,52 @@
 import React from "react";
 import Navbar from "../src/lib/components/navbar/Navbar.component";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
 
 const tabs = [
   {
     selected: true,
     title: "Groups",
-    onClick: action("Groups clicked")
+    onClick: action("Groups clicked"),
   },
   {
     selected: false,
     title: "Users",
-    onClick: action("Users clicked")
+    onClick: action("Users clicked"),
   },
   {
     selected: false,
     title: "Policies",
-    onClick: action("Policies clicked")
+    onClick: action("Policies clicked"),
   },
   {
     selected: false,
     title: "Buckets",
-    onClick: action("Buckets clicked")
+    onClick: action("Buckets clicked"),
   },
   {
     selected: false,
     title: "Workflows",
-    onClick: action("Workflows clicked")
-  }
+    onClick: action("Workflows clicked"),
+  },
 ];
 
 const linkTabs = [
   {
     link: <a href="/groups">Groups</a>,
-    selected: true
+    selected: true,
   },
   {
-    link: <a href="/users">Users</a>
+    link: <a href="/users">Users</a>,
   },
   {
-    link: <a href="/policies">Policies</a>
+    link: <a href="/policies">Policies</a>,
   },
   {
-    link: <a href="/buckets">Buckets</a>
+    link: <a href="/buckets">Buckets</a>,
   },
   {
-    link: <a href="/workflows">Workflows</a>
-  }
+    link: <a href="/workflows">Workflows</a>,
+  },
 ];
 const rightActions = [
   {
@@ -59,16 +58,16 @@ const rightActions = [
       {
         label: "English",
         name: "EN",
-        onClick: action("English selected")
-      }
-    ]
+        onClick: action("English selected"),
+      },
+    ],
   },
   {
     type: "dropdown",
     icon: <i className="fas fa-th" />,
     items: [
-      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") }
-    ]
+      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") },
+    ],
   },
   {
     type: "dropdown",
@@ -76,23 +75,27 @@ const rightActions = [
     items: [
       { label: "About", onClick: action("About clicked") },
       { label: "Documentation", onClick: action("Documentation clicked") },
-      { label: "Onboarding", onClick: action("Onboarding clicked") }
-    ]
+      { label: "Onboarding", onClick: action("Onboarding clicked") },
+    ],
   },
   {
     type: "button",
     icon: <i className="fas fa-sun" />,
-    onClick: action("Theme toggle clicked")
+    onClick: action("Theme toggle clicked"),
   },
   {
     type: "dropdown",
     text: "Carlito",
     icon: <i className="fas fa-user" />,
-    items: [{ label: "Log out", onClick: action("Logout clicked") }]
-  }
+    items: [{ label: "Log out", onClick: action("Logout clicked") }],
+  },
 ];
 
-storiesOf("Navbar", module).add("Default", () => {
+export default {
+  title: "Navbar",
+};
+
+export const Default = () => {
   return (
     <div>
       <h3>Navbar with toggle</h3>
@@ -123,4 +126,4 @@ storiesOf("Navbar", module).add("Default", () => {
       <Navbar rightActions={[rightActions[4]]} tabs={linkTabs} />
     </div>
   );
-});
+};

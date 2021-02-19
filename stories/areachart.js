@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import AreaChart from "../src/lib/components/areachart/AreaChart.component";
 import { area_charts } from "./data/areachart";
 import { Wrapper, Title } from "./common";
@@ -10,21 +9,21 @@ const xAxis_area_chart = {
   type: "temporal",
   timeUnit: "yearmonthdatehoursminutes",
   title: "time",
-  axis: null
+  axis: null,
 };
 const yAxis_area_chart = [
   {
     field: "Bandwidth",
     type: "quantitative",
     color: "#968BFF",
-    axis: { title: null, ticks: false, labels: false }
+    axis: { title: null, ticks: false, labels: false },
   },
   {
     field: "Bandwidth",
     type: "quantitative",
     color: "#F6B288",
-    axis: { title: null, ticks: false, labels: false }
-  }
+    axis: { title: null, ticks: false, labels: false },
+  },
 ];
 const color_area_chart = {
   field: "Average",
@@ -35,18 +34,18 @@ const color_area_chart = {
     title: null,
     labelFontSize: 15,
     columnPadding: 50,
-    symbolStrokeWidth: 5
+    symbolStrokeWidth: 5,
   },
   domain: ["AvgIn", "AvgOut"],
   scale: {
-    range: ["#968BFF", "#F6B288"]
-  }
+    range: ["#968BFF", "#F6B288"],
+  },
 };
 const area = {
   transform: [
     {
-      filter: "datum.Average==='AvgOut'"
-    }
+      filter: "datum.Average==='AvgOut'",
+    },
   ],
   mark: { opacity: 0.3, type: "area" },
   encoding: {
@@ -55,23 +54,23 @@ const area = {
       type: "temporal",
       timeUnit: "yearmonthdatehoursminutes",
       title: "time",
-      axis: null
+      axis: null,
     },
     y: {
       field: "Bandwidth",
-      type: "quantitative"
+      type: "quantitative",
     },
     y2: {
-      value: 0
-    }
-  }
+      value: 0,
+    },
+  },
 };
 
 const area2 = {
   transform: [
     {
-      filter: "datum.Average==='AvgIn'"
-    }
+      filter: "datum.Average==='AvgIn'",
+    },
   ],
   mark: { opacity: 0.3, type: "area" },
   encoding: {
@@ -80,21 +79,26 @@ const area2 = {
       type: "temporal",
       timeUnit: "yearmonthdatehoursminutes",
       title: "time",
-      axis: null
+      axis: null,
     },
     y: {
       field: "Bandwidth",
-      type: "quantitative"
+      type: "quantitative",
     },
     y2: {
-      value: 0
-    }
-  }
+      value: 0,
+    },
+  },
 };
 const areas = [area, area2];
 
 const id_area_chart = "vis_area_chart";
-storiesOf("AreaChart", module).add("Default", () => {
+
+export default {
+  title: "AreaChart",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Vege-Lite area chart</Title>
@@ -108,4 +112,4 @@ storiesOf("AreaChart", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

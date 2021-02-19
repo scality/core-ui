@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import StatusBar from "../src/lib/components/statusbar/StatusBar.component";
 import { data } from "./data/statusbar";
 import { Wrapper, Title } from "./common";
@@ -86,7 +85,11 @@ const text = {
   color: "#a8b5c1",
 };
 
-storiesOf("StatusBar", module).add("Default", () => {
+export default {
+  title: "StatusBar",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Vege-Lite statusbar demo</Title>
@@ -104,4 +107,4 @@ storiesOf("StatusBar", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

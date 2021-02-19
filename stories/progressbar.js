@@ -1,10 +1,13 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import ProgressBar from "../src/lib/components/progressbar/ProgressBar.component";
 import { Wrapper, Title } from "./common";
 
-storiesOf("ProgressBar", module).add("Default", () => {
+export default {
+  title: "ProgressBar",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <div style={{ width: "260px" }}>
@@ -88,4 +91,4 @@ storiesOf("ProgressBar", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

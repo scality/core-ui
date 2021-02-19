@@ -1,10 +1,13 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Tooltip from "../src/lib/components/tooltip/Tooltip.component";
 import Button from "../src/lib/components/button/Button.component";
 import { Wrapper, Title, SubTitle } from "./common";
 
-storiesOf("Tooltip", module).add("Default", () => {
+export default {
+  title: "Tooltip",
+};
+
+export const Default = () => {
   return (
     <Wrapper style={{ display: "flex", flexDirection: "column" }}>
       <div>
@@ -73,4 +76,4 @@ storiesOf("Tooltip", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

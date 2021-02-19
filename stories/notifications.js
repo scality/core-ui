@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Notifications from "../src/lib/components/notifications/Notifications.component";
 import { Wrapper } from "./common";
@@ -69,7 +68,11 @@ const brNotifications = [
   },
 ];
 
-storiesOf("Notifications", module).add("Default", () => {
+export default {
+  title: "Notifications",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Notifications
@@ -93,4 +96,4 @@ storiesOf("Notifications", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

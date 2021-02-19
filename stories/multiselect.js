@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import MultiSelect from "../src/lib/components/multiselect/MultiSelect.component";
 import { action } from "@storybook/addon-actions";
 import { Wrapper, Title } from "./common";
@@ -12,7 +11,7 @@ const items = [
     label: "AWS",
     description: "Amazon",
     onSelect: action("onSelect clicked"),
-    onFavoriteClick: action("onFavoriteClick clicked")
+    onFavoriteClick: action("onFavoriteClick clicked"),
   },
   {
     selected: false,
@@ -20,8 +19,8 @@ const items = [
     label: "WM",
     description: "Walmart",
     onSelect: action("onSelect clicked"),
-    onFavoriteClick: action("onFavoriteClick clicked")
-  }
+    onFavoriteClick: action("onFavoriteClick clicked"),
+  },
 ];
 
 const itemsWithoutFavourite = [
@@ -29,46 +28,50 @@ const itemsWithoutFavourite = [
     selected: true,
     label: "AWS",
     description: "Amazon",
-    onSelect: action("onSelect clicked")
+    onSelect: action("onSelect clicked"),
   },
   {
     selected: false,
     label: "WM",
     description: "Walmart",
-    onSelect: action("onSelect clicked")
-  }
+    onSelect: action("onSelect clicked"),
+  },
 ];
 
 const itemsWithoutCheckboxFavourite = [
   {
     label: "AWS",
-    description: "Amazon"
+    description: "Amazon",
   },
   {
     label: "WM",
-    description: "Walmart"
-  }
+    description: "Walmart",
+  },
 ];
 
 const options = [
   {
     label: "Azure",
-    value: "Azure"
+    value: "Azure",
   },
   {
     label: "S3",
-    value: "S3"
-  }
+    value: "S3",
+  },
 ];
 const search = {
   placeholder: "Select location to add",
   options: options,
   onSelect: action("onSelect clicked"),
   onAdd: action("onAdd clicked"),
-  selectedOption: null
+  selectedOption: null,
 };
 
-storiesOf("MultiSelect", module).add("Default", () => {
+export default {
+  title: "MultiSelect",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>MultiSelect List</Title>
@@ -124,4 +127,4 @@ storiesOf("MultiSelect", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

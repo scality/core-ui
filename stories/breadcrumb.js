@@ -1,9 +1,12 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Breadcrumb from "../src/lib/components/breadcrumb/Breadcrumb.component";
 import { Wrapper, Title } from "./common";
 
-storiesOf("Breadcrumb", module).add("Default", () => {
+export default {
+  title: "Breadcrumb",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Default Breadcrumb </Title>
@@ -22,9 +25,9 @@ storiesOf("Breadcrumb", module).add("Default", () => {
           <a href="volumes">volumes</a>,
           <label title={"volume_longlonglonglonglonglonglonglonglong"}>
             volume_longlonglonglonglonglonglonglonglong
-          </label>
+          </label>,
         ]}
       />
     </Wrapper>
   );
-});
+};

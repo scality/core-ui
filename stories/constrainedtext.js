@@ -1,10 +1,13 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Constrainedtext from "../src/lib/components/constrainedtext/Constrainedtext.component";
 import { Wrapper, Title } from "./common";
 
-storiesOf("Constrainedtext", module).add("Default", () => {
+export default {
+  title: "Constrainedtext",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Constrained Text</Title>
@@ -34,4 +37,4 @@ storiesOf("Constrainedtext", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

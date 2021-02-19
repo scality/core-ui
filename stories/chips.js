@@ -2,10 +2,13 @@
 import Chips from "../src/lib/components/chips/Chips.component";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
 import { Wrapper, Title } from "./common";
 
-storiesOf("Chips", module).add("Default", () => {
+export default {
+  title: "Chips",
+};
+
+export const Default = () => {
   return (
     <Wrapper className="storybook-chips">
       <Title>Basic Chip</Title>
@@ -104,4 +107,4 @@ storiesOf("Chips", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

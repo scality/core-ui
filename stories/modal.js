@@ -1,12 +1,15 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Modal from "../src/lib/components/modal/Modal.component";
 import Button from "../src/lib/components/button/Button.component";
 import { action } from "@storybook/addon-actions";
 import { Wrapper } from "./common";
 
-storiesOf("Modal", module).add("Default", () => {
+export default {
+  title: "Modal",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Modal
@@ -34,4 +37,4 @@ storiesOf("Modal", module).add("Default", () => {
       </Modal>
     </Wrapper>
   );
-});
+};

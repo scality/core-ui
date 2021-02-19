@@ -4,7 +4,7 @@ import Layout from "../src/lib/components/layout/Layout.component";
 import Loader from "../src/lib/components/loader/Loader.component";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { storiesOf, addDecorator } from "@storybook/react";
+import { addDecorator } from "@storybook/react";
 
 addDecorator(createElement);
 
@@ -67,81 +67,103 @@ const rightActions = [
   },
 ];
 
-storiesOf("Layout", module)
-  .addDecorator(withKnobs)
-  .add("Sidebar docked", () => {
-    const expanded = boolean("Sidebar Expanded", false);
+export default {
+  title: "Layout",
+  decorators: [withKnobs],
+};
 
-    const sidebar = {
-      expanded,
-      actions: sideBarActions,
-    };
+export const SidebarDocked = () => {
+  const expanded = boolean("Sidebar Expanded", false);
 
-    const navbar = {
-      onToggleClick: action("toggle clicked"),
-      productName: "Harware UI",
-      rightActions,
-    };
+  const sidebar = {
+    expanded,
+    actions: sideBarActions,
+  };
 
-    return (
-      <Layout sidebar={sidebar} navbar={navbar}>
-        <Loader size="massive" />
-      </Layout>
-    );
-  })
-  .add("Sidebar expanded", () => {
-    const sidebar = {
-      expanded: true,
-      actions: sideBarActions,
-    };
+  const navbar = {
+    onToggleClick: action("toggle clicked"),
+    productName: "Harware UI",
+    rightActions,
+  };
 
-    const navbar = {
-      onToggleClick: action("toggle clicked"),
-      productName: "Harware UI",
-      rightActions,
-    };
+  return (
+    <Layout sidebar={sidebar} navbar={navbar}>
+      <Loader size="massive" />
+    </Layout>
+  );
+};
 
-    return (
-      <Layout sidebar={sidebar} navbar={navbar}>
-        <Loader size="massive" />
-      </Layout>
-    );
-  })
-  .add("Sidebar with toggle", () => {
-    const sidebar = {
-      expanded: true,
-      actions: sideBarActions,
-      onToggleClick: action("toggle clicked"),
-    };
+SidebarDocked.story = {
+  name: "Sidebar docked",
+};
 
-    const navbar = {
-      productName: "Harware UI",
-      rightActions,
-    };
+export const SidebarExpanded = () => {
+  const sidebar = {
+    expanded: true,
+    actions: sideBarActions,
+  };
 
-    return (
-      <Layout sidebar={sidebar} navbar={navbar}>
-        <Loader size="massive" />
-      </Layout>
-    );
-  })
-  .add("Hoverable Sidebar ", () => {
-    const [expanded, setExpanded] = useState(false);
-    const sidebar = {
-      expanded: expanded,
-      hoverable: true,
-      actions: sideBarActions,
-      onToggleClick: () => setExpanded(!expanded),
-    };
+  const navbar = {
+    onToggleClick: action("toggle clicked"),
+    productName: "Harware UI",
+    rightActions,
+  };
 
-    const navbar = {
-      productName: "Harware UI",
-      rightActions,
-    };
+  return (
+    <Layout sidebar={sidebar} navbar={navbar}>
+      <Loader size="massive" />
+    </Layout>
+  );
+};
 
-    return (
-      <Layout sidebar={sidebar} navbar={navbar}>
-        <Loader size="massive" />
-      </Layout>
-    );
-  });
+SidebarExpanded.story = {
+  name: "Sidebar expanded",
+};
+
+export const SidebarWithToggle = () => {
+  const sidebar = {
+    expanded: true,
+    actions: sideBarActions,
+    onToggleClick: action("toggle clicked"),
+  };
+
+  const navbar = {
+    productName: "Harware UI",
+    rightActions,
+  };
+
+  return (
+    <Layout sidebar={sidebar} navbar={navbar}>
+      <Loader size="massive" />
+    </Layout>
+  );
+};
+
+SidebarWithToggle.story = {
+  name: "Sidebar with toggle",
+};
+
+export const HoverableSidebar = () => {
+  const [expanded, setExpanded] = useState(false);
+  const sidebar = {
+    expanded: expanded,
+    hoverable: true,
+    actions: sideBarActions,
+    onToggleClick: () => setExpanded(!expanded),
+  };
+
+  const navbar = {
+    productName: "Harware UI",
+    rightActions,
+  };
+
+  return (
+    <Layout sidebar={sidebar} navbar={navbar}>
+      <Loader size="massive" />
+    </Layout>
+  );
+};
+
+HoverableSidebar.story = {
+  name: "Hoverable Sidebar ",
+};

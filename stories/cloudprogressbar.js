@@ -2,9 +2,12 @@
 import React from "react";
 import CloudProgressBar from "../src/lib/components/cloudprogressbar/CloudProgressBar.component";
 import { Wrapper, Title, SubTitle } from "./common";
-import { storiesOf } from "@storybook/react";
 
-storiesOf("CloudProgressBar", module).add("Default", () => {
+export default {
+  title: "CloudProgressBar",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>CloudProgressBar</Title>
@@ -20,7 +23,7 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
             }}
           >
             <Title>30%</Title>
@@ -40,7 +43,7 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
             }}
           >
             <Title>50%</Title>
@@ -60,7 +63,7 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
             }}
           >
             <Title>80%</Title>
@@ -80,7 +83,7 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
             }}
           >
             <Title>70%</Title>
@@ -90,4 +93,4 @@ storiesOf("CloudProgressBar", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

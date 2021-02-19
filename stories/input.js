@@ -1,6 +1,5 @@
 //@flow
 import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
 import Input from "../src/lib/components/input/Input.component";
 import { action } from "@storybook/addon-actions";
 import styled from "styled-components";
@@ -124,6 +123,10 @@ const ExampleInput = () => {
   );
 };
 
-storiesOf("Input", module).add("Default", () => {
+export default {
+  title: "Input",
+};
+
+export const Default = () => {
   return <ExampleInput />;
-});
+};

@@ -1,12 +1,11 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import BarChart from "../src/lib/components/barchart/BarChart.component";
 import { Wrapper, Title } from "./common";
 import {
   verticalStackedData,
   horizontalStackedData,
-  barchartData
+  barchartData,
 } from "./data/barchart";
 
 // props for vertical stacked bar chart
@@ -17,8 +16,8 @@ const xAxisVerticalStacked = {
   title: null,
   axis: { labelAngle: 0 },
   sort: {
-    order: "ascending"
-  }
+    order: "ascending",
+  },
 };
 const yAxisVerticalStacked = {
   aggregate: "count",
@@ -26,8 +25,8 @@ const yAxisVerticalStacked = {
   title: null,
   type: "quantitative",
   scale: {
-    padding: 1
-  }
+    padding: 1,
+  },
 };
 const colorVerticalStacked = {
   field: "status",
@@ -37,12 +36,12 @@ const colorVerticalStacked = {
     orient: "top",
     title: null,
     symbolType: "circle",
-    columnPadding: 50
+    columnPadding: 50,
   },
   scale: {
     domain: ["2XX", "401", "404", "4XX", "503", "5XX"],
-    range: ["#4BE4E2", "#E45834", "#FEFA52", "#968BFF", "#BE2543", "#DC90F1"]
-  }
+    range: ["#4BE4E2", "#E45834", "#FEFA52", "#968BFF", "#BE2543", "#DC90F1"],
+  },
 };
 const width = 800;
 // the size control the size of each small item of the bar
@@ -53,7 +52,7 @@ const idHorizontalStacked = "vis_horizontal_stacked";
 const xAxisHorizontalStacked = {
   aggregate: "sum",
   field: "yield",
-  type: "quantitative"
+  type: "quantitative",
 };
 const yAxisHorizontalStacked = { field: "variety", type: "nominal" };
 const colorHorizontalStacked = { field: "site", type: "nominal" };
@@ -67,7 +66,12 @@ const yAxisVertical = { field: "b", type: "quantitative" };
 const idHorizontal = "vis_horizontal";
 const xAxisHorizontal = { field: "b", type: "quantitative" };
 const yAxisHorizontal = { field: "a", type: "ordinal" };
-storiesOf("BarChart", module).add("Default", () => {
+
+export default {
+  title: "BarChart",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Vertical Stacked Bar Chart Demo </Title>
@@ -104,4 +108,4 @@ storiesOf("BarChart", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

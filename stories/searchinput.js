@@ -1,11 +1,14 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import SearchInput from "../src/lib/components/searchinput/SearchInput.component";
 import { Wrapper, Title } from "./common";
 
-storiesOf("SearchInput", module).add("Default", () => {
+export default {
+  title: "SearchInput",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Default</Title>
@@ -49,4 +52,4 @@ storiesOf("SearchInput", module).add("Default", () => {
       </div>
     </Wrapper>
   );
-});
+};

@@ -1,7 +1,11 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import * as defaultTheme from "../src/lib/style/theme";
-storiesOf("ColorPalette", module).add("Default", () => {
+
+export default {
+  title: "ColorPalette",
+};
+
+export const Default = () => {
   return (
     <div>
       <h3> Color Palette - Light Mode</h3>
@@ -261,4 +265,4 @@ storiesOf("ColorPalette", module).add("Default", () => {
       </div>
     </div>
   );
-});
+};

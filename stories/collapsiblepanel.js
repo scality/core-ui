@@ -1,13 +1,16 @@
 //@flow
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
 import { Title, Wrapper } from "./common";
 import CollapsiblePanel from "../src/lib/components/collapsiblepanel/CollapsiblePanel.component";
 
 const items = [<i className="fas fa-carrot" />, "banana", "apple", "grape"];
 
-storiesOf("CollapsiblePanel", module).add("Default", () => {
+export default {
+  title: "CollapsiblePanel",
+};
+
+export const Default = () => {
   return (
     <Wrapper className="storybook-collapsiblepanel">
       <Title>Collapsed</Title>
@@ -27,4 +30,4 @@ storiesOf("CollapsiblePanel", module).add("Default", () => {
       />
     </Wrapper>
   );
-});
+};

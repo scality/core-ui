@@ -1,6 +1,5 @@
 //@flow
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Steppers from "../src/lib/components/steppers/Steppers.component";
 import { action } from "@storybook/addon-actions";
 import Button from "../src/lib/components/button/Button.component";
@@ -16,7 +15,7 @@ const steps = [
         onClick={action("Button Apply Click")}
       />
     ),
-    "data-cy": "Node_Registerd"
+    "data-cy": "Node_Registerd",
   },
   {
     title: "Deploy Salt Minion on node",
@@ -28,7 +27,7 @@ const steps = [
         onClick={action("Button Apply Click")}
       />
     ),
-    "data-cy": "Deploy_Salt"
+    "data-cy": "Deploy_Salt",
   },
   {
     title: "Add node to Workload Plane",
@@ -40,7 +39,7 @@ const steps = [
         onClick={action("Button Apply Click")}
       />
     ),
-    "data-cy": "Add_Node_WP"
+    "data-cy": "Add_Node_WP",
   },
   {
     title: "Add node to Control Plane",
@@ -51,7 +50,7 @@ const steps = [
         onClick={action("Button Apply Click")}
       />
     ),
-    "data-cy": "Add_Node_CP"
+    "data-cy": "Add_Node_CP",
   },
   {
     title: "Extend etcd cluster to node",
@@ -62,8 +61,8 @@ const steps = [
         onClick={action("Button Apply Click")}
       />
     ),
-    "data-cy": "Extend_Node"
-  }
+    "data-cy": "Extend_Node",
+  },
 ];
 
 const stepsWithProgress = [...steps];
@@ -73,7 +72,7 @@ stepsWithProgress[1] = {
   content: (
     <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
   ),
-  "data-cy": "Deploy_Salt"
+  "data-cy": "Deploy_Salt",
 };
 
 const stepsWithError = [...steps];
@@ -83,10 +82,14 @@ stepsWithError[2] = {
   content: (
     <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
   ),
-  "data-cy": "Add_Node_WP"
+  "data-cy": "Add_Node_WP",
 };
 
-storiesOf("Steppers", module).add("Default", () => {
+export default {
+  title: "Steppers",
+};
+
+export const Default = () => {
   return (
     <Wrapper>
       <Title>Default Steppers </Title>
@@ -97,4 +100,4 @@ storiesOf("Steppers", module).add("Default", () => {
       <Steppers steps={stepsWithError} activeStep={2} />
     </Wrapper>
   );
-});
+};
