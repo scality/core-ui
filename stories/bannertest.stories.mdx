@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import Banner from "../src/lib/components/banner/Banner.component";
+
+<Meta title="MDX/Banner" component={Banner} />
+
+# Banner
+
+With `MDX` we can define a story for `Banner` right in the middle of our
+Markdown documentation.
+
+<Canvas>
+  <Story name="danger">
+    <Wrapper>
+      <Banner
+        variant="danger"
+        icon={<i className="fas fa-exclamation-triangle" />}
+        title={"Error"}
+      >
+        {"There is an error."}
+      </Banner>
+    </Wrapper>
+  </Story>
+</Canvas>
+
+Second :
+
+<Canvas>
+  <Story name="warning">
+    <Wrapper>
+      <Banner
+        variant="warning"
+        icon={<i className="fas fa-exclamation-triangle" />}
+        title={"Warning"}
+      >
+        {"There is a warning."}
+      </Banner>
+    </Wrapper>
+  </Story>
+</Canvas>
