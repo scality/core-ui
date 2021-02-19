@@ -35,45 +35,44 @@ const TooltipOverLayContainer = styled.div`
     getTheme(props).primaryDark2};
   color: ${(props) =>
     (props && props.overlayStyle && props.overlayStyle.color) ||
-    getTheme(props).textPrimary}
+    getTheme(props).textPrimary};
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
   font-size: ${(props) =>
     (props && props.overlayStyle && props.overlayStyle.fontSize) ||
     defaultTheme.fontSize.small};
-  width:${(props) =>
-    (props && props.overlayStyle && props.overlayStyle.width) || "50px"};
+  width: ${(props) => props && props.overlayStyle && props.overlayStyle.width};
   text-align: center;
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
-    ${(props) => {
-      switch (props.placement) {
-        case LEFT:
-          return css`
-            right: calc(100% + 10px);
-            top: 50%;
-            transform: translateY(-50%);
-          `;
-        case RIGHT:
-          return css`
-            left: calc(100% + 10px);
-            top: 50%;
-            transform: translateY(-50%);
-          `;
-        case BOTTOM:
-          return css`
-            top: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%);
-          `;
-        default:
-          return css`
-            bottom: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%);
-          `;
-      }
-    }};
+  ${(props) => {
+    switch (props.placement) {
+      case LEFT:
+        return css`
+          right: calc(100% + 10px);
+          top: 50%;
+          transform: translateY(-50%);
+        `;
+      case RIGHT:
+        return css`
+          left: calc(100% + 10px);
+          top: 50%;
+          transform: translateY(-50%);
+        `;
+      case BOTTOM:
+        return css`
+          top: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
+        `;
+      default:
+        return css`
+          bottom: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
+        `;
+    }
+  }};
 `;
 
 function Tooltip({

@@ -58,7 +58,7 @@ storiesOf("Tooltip", module).add("Default", () => {
           placement="bottom"
           overlay={
             <div>
-              <i className="fal fa-smile"></i>Helloooooooo
+              <i className="far fa-smile"></i>Helloooooooo
             </div>
           }
         >
