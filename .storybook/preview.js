@@ -22,13 +22,3 @@ const themes = [
   },
 ];
 addDecorator(withThemesProvider(themes));
-// addDecorator(
-//   withInfo({
-//     header: false,
-//     inline: false,
-//     maxPropArrayLength: 10,
-//   }),
-// );
-
-// const themes = [theme1, theme2];
-// addDecorator(withThemesProvider(themes));
