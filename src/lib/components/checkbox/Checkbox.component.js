@@ -67,10 +67,10 @@ const StyledCheckbox = styled.label`
 
   ${(props) => {
     const { primary, border, secondary } = getTheme(props);
-    const iconCheckedColor =
-      props.checked || props.disabled ? secondary : "transparent";
+    const iconCheckedColor = props.checked ? secondary : "transparent";
 
-    const checkBoxColor = props.checked || props.disabled ? secondary : border;
+    const checkBoxColor = props.checked ? secondary : border;
+    const checkBoxColorHover = props.disabled ? checkBoxColor : secondary;
 
     return css`
       &:before {
@@ -94,7 +94,7 @@ const StyledCheckbox = styled.label`
 
       &:hover {
         &:before {
-          border-color: ${secondary};
+          border-color: ${checkBoxColorHover};
         }
       }
     `;
