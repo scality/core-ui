@@ -21,9 +21,16 @@ storiesOf("Checkbox", module).add("Default", () => {
         label="interested?"
         onChange={action("checkbox clicked")}
       />
-      <Title>Checkbox disabled</Title>
+      <Title>Checkbox unchecked disabled</Title>
       <Checkbox
         checked={false}
+        disabled={true}
+        label="interested?"
+        onChange={action("checkbox clicked")}
+      />
+    <Title>Checkbox checked disabled</Title>
+      <Checkbox
+        checked={true}
         disabled={true}
         label="interested?"
         onChange={action("checkbox clicked")}
