@@ -93,10 +93,6 @@ export const SidebarDocked = () => {
   );
 };
 
-SidebarDocked.story = {
-  name: "Sidebar docked",
-};
-
 export const SidebarExpanded = () => {
   const sidebar = {
     expanded: true,
@@ -114,10 +110,6 @@ export const SidebarExpanded = () => {
       <Loader size="massive" />
     </Layout>
   );
-};
-
-SidebarExpanded.story = {
-  name: "Sidebar expanded",
 };
 
 export const SidebarWithToggle = () => {
@@ -139,10 +131,6 @@ export const SidebarWithToggle = () => {
   );
 };
 
-SidebarWithToggle.story = {
-  name: "Sidebar with toggle",
-};
-
 export const HoverableSidebar = () => {
   const [expanded, setExpanded] = useState(false);
   const sidebar = {
@@ -162,8 +150,4 @@ export const HoverableSidebar = () => {
       <Loader size="massive" />
     </Layout>
   );
-};
-
-HoverableSidebar.story = {
-  name: "Hoverable Sidebar ",
 };

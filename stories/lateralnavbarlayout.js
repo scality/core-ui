@@ -50,10 +50,6 @@ export const SidebarDocked = () => {
   );
 };
 
-SidebarDocked.story = {
-  name: "Sidebar docked",
-};
-
 export const SidebarExpanded = () => {
   const sidebar = {
     expanded: true,
@@ -64,10 +60,6 @@ export const SidebarExpanded = () => {
       <Loader size="massive" />
     </LateralNavbarLayout>
   );
-};
-
-SidebarExpanded.story = {
-  name: "Sidebar expanded",
 };
 
 export const SidebarWithToggle = () => {
@@ -81,10 +73,6 @@ export const SidebarWithToggle = () => {
       <Loader size="massive" />
     </LateralNavbarLayout>
   );
-};
-
-SidebarWithToggle.story = {
-  name: "Sidebar with toggle",
 };
 
 export const HoverableSidebar = () => {

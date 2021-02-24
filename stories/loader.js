@@ -24,7 +24,3 @@ export const WithDynamicProps = () => {
     </Wrapper>
   );
 };
-
-WithDynamicProps.story = {
-  name: "With dynamic props",
-};

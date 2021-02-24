@@ -161,10 +161,6 @@ export const WithRowActions = () => {
   );
 };
 
-WithRowActions.story = {
-  name: "With rowActions",
-};
-
 export const ChangeColumnSize = () => {
   return (
     <Wrapper style={{ height: "100vh" }}>
@@ -181,10 +177,6 @@ export const ChangeColumnSize = () => {
       />
     </Wrapper>
   );
-};
-
-ChangeColumnSize.story = {
-  name: "Change column size",
 };
 
 export const CenterAColumnWithCss = () => {
@@ -205,10 +197,6 @@ export const CenterAColumnWithCss = () => {
       </ContainerWithClassName>
     </ContainerWithClassName>
   );
-};
-
-CenterAColumnWithCss.story = {
-  name: "Center a column with CSS",
 };
 
 export const EmptyTable = () => {
