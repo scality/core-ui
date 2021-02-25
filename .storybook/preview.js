@@ -32,3 +32,30 @@ const withThemeProvider = (Story, context) => {
 };
 
 export const decorators = [withThemeProvider];
+
+export const parameters = {
+  options: {
+    storySort: {
+      order: [
+        "Style",
+        ["Color", "Icons"],
+        "Components",
+        [
+          "Navigation",
+          "Button",
+          "Chips",
+          "Checkbox",
+          "Toggle",
+          "Dropdown",
+          "Input",
+          "Selector",
+          "Chart",
+          "Progress & loading",
+          "Table",
+          "Notification",
+        ],
+        "Guideline",
+      ],
+    },
+  },
+};

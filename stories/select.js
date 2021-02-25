@@ -17,7 +17,7 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 );
 
 export default {
-  title: "Select",
+  title: "Components/Selector/Select",
 };
 
 export const Default = () => {

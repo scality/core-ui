@@ -5,7 +5,7 @@ import Toggle from "../src/lib/components/toggle/Toggle.component";
 import { Wrapper } from "./common";
 
 export default {
-  title: "Toggle",
+  title: "Components/Toggle",
 };
 
 export const Default = () => {

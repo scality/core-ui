@@ -4,7 +4,7 @@ import Button from "../src/lib/components/button/Button.component";
 import { Wrapper, Title, SubTitle } from "./common";
 
 export default {
-  title: "Tooltip",
+  title: "Components/Notification/Tooltip",
 };
 
 export const Default = () => {

@@ -5,7 +5,7 @@ import { Wrapper, Title } from "./common";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "TextArea",
+  title: "Components/Input/TextArea",
 };
 
 export const Default = () => {

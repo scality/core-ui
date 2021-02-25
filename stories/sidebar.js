@@ -24,7 +24,7 @@ const actions = [
 ];
 
 export default {
-  title: "Sidebar",
+  title: "Components/Navigation/Sidebar",
   decorators: [withKnobs],
 };
 

@@ -207,7 +207,7 @@ const tooltipConfigInOut = {
 };
 
 export default {
-  title: "LineChart",
+  title: "Components/Chart/LineChart",
 };
 
 export const Default = () => {

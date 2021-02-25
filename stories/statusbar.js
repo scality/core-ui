@@ -86,7 +86,7 @@ const text = {
 };
 
 export default {
-  title: "StatusBar",
+  title: "Components/Chart/StatusBar",
 };
 
 export const Default = () => {

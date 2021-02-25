@@ -68,7 +68,7 @@ const search = {
 };
 
 export default {
-  title: "MultiSelect",
+  title: "Components/Selector/MultiSelect",
 };
 
 export const Default = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import * as defaultTheme from "../src/lib/style/theme";
 
 export default {
-  title: "ColorPalette",
+  title: "Style/Color/ColorPalette",
 };
 
 export const Default = () => {

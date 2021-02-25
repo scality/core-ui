@@ -5,7 +5,7 @@ import Checkbox from "../src/lib/components/checkbox/Checkbox.component";
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "Checkbox",
+  title: "Components/Checkbox",
 };
 
 export const Default = () => {

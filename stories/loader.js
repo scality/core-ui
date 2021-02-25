@@ -6,7 +6,7 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 import { Wrapper } from "./common";
 
 export default {
-  title: "Loader",
+  title: "Components/Progress & loading/Loader",
   decorators: [withKnobs],
 };
 

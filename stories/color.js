@@ -2,7 +2,7 @@ import React from "react";
 import * as defaultTheme from "../src/lib/style/theme";
 
 export default {
-  title: "Color",
+  title: "Style/Color/Color",
 };
 
 export const Default = () => {

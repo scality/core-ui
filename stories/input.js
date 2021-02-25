@@ -124,7 +124,7 @@ const ExampleInput = () => {
 };
 
 export default {
-  title: "Input",
+  title: "Components/Input/Input",
 };
 
 export const Default = () => {

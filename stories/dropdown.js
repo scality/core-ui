@@ -23,7 +23,7 @@ const items = [
 ];
 
 export default {
-  title: "Dropdown",
+  title: "Components/Dropdown",
 };
 
 export const Default = () => {

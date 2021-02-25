@@ -86,7 +86,7 @@ stepsWithError[2] = {
 };
 
 export default {
-  title: "Steppers",
+  title: "Components/Progress & loading/Steppers",
 };
 
 export const Default = () => {

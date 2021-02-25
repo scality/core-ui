@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "Chips",
+  title: "Components/Chips",
 };
 
 export const Default = () => {

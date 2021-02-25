@@ -6,7 +6,7 @@ import Button from "../src/lib/components/button/Button.component";
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "Button",
+  title: "Components/Button",
   decorators: [withKnobs],
 };
 

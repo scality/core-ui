@@ -122,7 +122,7 @@ const _noRowsRenderer = () => {
 };
 
 export default {
-  title: "Table",
+  title: "Components/Table",
 };
 
 export const Default = () => {

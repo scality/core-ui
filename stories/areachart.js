@@ -95,7 +95,7 @@ const areas = [area, area2];
 const id_area_chart = "vis_area_chart";
 
 export default {
-  title: "AreaChart",
+  title: "Components/Chart/AreaChart",
 };
 
 export const Default = () => {

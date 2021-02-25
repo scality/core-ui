@@ -3,7 +3,7 @@ import React from "react";
 import Banner from "../src/lib/components/banner/Banner.component";
 import { Wrapper } from "./common";
 
-export default { title: "Banner" };
+export default { title: "Components/Notification/Banner" };
 
 export const ErrorBanner = () => (
   <Wrapper>
@@ -31,11 +31,11 @@ export const WarningBanner = () => (
 export const SuccessBanner = () => (
   <Wrapper>
     <Banner
-      variant="danger"
+      variant="success"
       icon={<i className="fas fa-exclamation-triangle" />}
-      title={"Error"}
+      title={"Success"}
     >
-      {"There is an error."}
+      {"There is a success."}
     </Banner>
   </Wrapper>
 );

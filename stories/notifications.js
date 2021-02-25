@@ -69,7 +69,7 @@ const brNotifications = [
 ];
 
 export default {
-  title: "Notifications",
+  title: "Components/Notification/Notifications",
 };
 
 export const Default = () => {

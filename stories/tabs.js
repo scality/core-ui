@@ -22,7 +22,7 @@ const tabs = [
 ];
 
 export default {
-  title: "Tabs",
+  title: "Components/Navigation/Tabs",
 };
 
 export const Default = () => {

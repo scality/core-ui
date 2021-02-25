@@ -92,7 +92,7 @@ const rightActions = [
 ];
 
 export default {
-  title: "Navbar",
+  title: "Components/Navigation/Navbar",
 };
 
 export const Default = () => {

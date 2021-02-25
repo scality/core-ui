@@ -5,7 +5,7 @@ import SearchInput from "../src/lib/components/searchinput/SearchInput.component
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "SearchInput",
+  title: "Components/Input/SearchInput",
 };
 
 export const Default = () => {

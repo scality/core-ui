@@ -4,7 +4,7 @@ import CircularProgressBar from "../src/lib/components/circularprogressbar/Circu
 import { Wrapper, Title, Text } from "./common";
 
 export default {
-  title: "CircularProgressBar",
+  title: "Components/Progress & loading/CircularProgressBar",
 };
 
 export const Default = () => {

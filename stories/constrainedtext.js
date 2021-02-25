@@ -4,7 +4,7 @@ import Constrainedtext from "../src/lib/components/constrainedtext/Constrainedte
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "Constrainedtext",
+  title: "Components/Constrainedtext",
 };
 
 export const Default = () => {

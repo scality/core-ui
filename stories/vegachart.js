@@ -77,7 +77,7 @@ const spec = {
 const id = "vis";
 
 export default {
-  title: "VegaChart",
+  title: "Components/Chart/VegaChart",
 };
 
 export const Default = () => {

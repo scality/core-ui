@@ -29,7 +29,7 @@ const id_multi = "multiVis";
 const lineConfig = { interpolate: "monotone" };
 
 export default {
-  title: "SparkLine",
+  title: "Components/Chart/SparkLine",
 };
 
 export const Default = () => {

@@ -68,7 +68,7 @@ const xAxisHorizontal = { field: "b", type: "quantitative" };
 const yAxisHorizontal = { field: "a", type: "ordinal" };
 
 export default {
-  title: "BarChart",
+  title: "Components/Chart/BarChart"
 };
 
 export const Default = () => {

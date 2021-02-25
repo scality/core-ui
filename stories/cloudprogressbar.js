@@ -4,7 +4,7 @@ import CloudProgressBar from "../src/lib/components/cloudprogressbar/CloudProgre
 import { Wrapper, Title, SubTitle } from "./common";
 
 export default {
-  title: "CloudProgressBar",
+  title: "Components/Progress & loading/CloudProgressBar",
 };
 
 export const Default = () => {

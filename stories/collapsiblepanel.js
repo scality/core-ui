@@ -7,7 +7,7 @@ import CollapsiblePanel from "../src/lib/components/collapsiblepanel/Collapsible
 const items = [<i className="fas fa-carrot" />, "banana", "apple", "grape"];
 
 export default {
-  title: "CollapsiblePanel",
+  title: "Components/Navigation/CollapsiblePanel",
 };
 
 export const Default = () => {

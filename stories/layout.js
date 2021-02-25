@@ -68,7 +68,7 @@ const rightActions = [
 ];
 
 export default {
-  title: "Layout",
+  title: "Components/Navigation/Layout",
   decorators: [withKnobs],
 };
 

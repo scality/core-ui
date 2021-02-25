@@ -28,7 +28,7 @@ const sideBarActions = [
 ];
 
 export default {
-  title: "LateralNavbarLayout",
+  title: "Components/Navigation/LateralNavbarLayout",
   decorators: [withKnobs],
 };
 

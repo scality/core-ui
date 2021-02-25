@@ -15,7 +15,7 @@ const HorizontalContainer = styled.div`
 `;
 
 export default {
-  title: "Healthselector",
+  title: "Components/Selector/Healthselector",
 };
 
 export const Default = () => {

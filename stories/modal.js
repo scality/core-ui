@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { Wrapper } from "./common";
 
 export default {
-  title: "Modal",
+  title: "Components/Notification/Modal",
 };
 
 export const Default = () => {

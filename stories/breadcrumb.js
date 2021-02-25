@@ -3,7 +3,7 @@ import Breadcrumb from "../src/lib/components/breadcrumb/Breadcrumb.component";
 import { Wrapper, Title } from "./common";
 
 export default {
-  title: "Breadcrumb",
+  title: "Components/Navigation/Breadcrumb",
 };
 
 export const Default = () => {
