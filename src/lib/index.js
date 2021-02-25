@@ -38,6 +38,7 @@ import LateralNavbarLayout from "./components/lateralnavbarlayout/LateralNavbarL
 import StatusBar from "./components/statusbar/StatusBar.component";
 import Healthselector from "./components/healthselector/Healthselector.component";
 import ConstrainedText from "./components/constrainedtext/Constrainedtext.component";
+import EmptyState from "./components/emptystate/Emptystate.component";
 
 export {
   LOADER_SIZE,
@@ -76,4 +77,5 @@ export {
   StatusBar,
   Healthselector,
   ConstrainedText,
+  EmptyState,
 };
