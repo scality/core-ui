@@ -1,12 +1,9 @@
 //@flow
-import React, { useState, createElement } from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-import { addDecorator } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import LateralNavbarLayout from "../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component";
 import Loader from "../src/lib/components/loader/Loader.component";
-
-addDecorator(createElement);
 
 const sideBarActions = [
   {

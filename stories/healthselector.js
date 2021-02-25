@@ -1,12 +1,9 @@
 //@flow
-import React, { useState, createElement } from "react";
-import { addDecorator } from "@storybook/react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import styled from "styled-components";
 import Healthselector from "../src/lib/components/healthselector/Healthselector.component";
 import { Wrapper, Title } from "./common";
-
-addDecorator(createElement);
 
 const RowWrapper = styled.div`
   margin-bottom: 70px;
