@@ -1,17 +1,21 @@
 import * as defaultTheme from "./style/theme";
 
 export function mergeTheme(theme, defaultTheme) {
-  return theme && theme.brand
+  return theme
     ? {
         ...defaultTheme.brand,
-        ...theme.brand
+        ...theme,
       }
     : defaultTheme.brand;
 }
 
-export const getTheme = props => mergeTheme(props.theme, defaultTheme);
+export const getTheme = (props) => {
+  return mergeTheme(props.theme, defaultTheme);
+};
 
-export const getThemePropSelector = key => props => getTheme(props)[key];
+export const getThemePropSelector = (key) => (props) => {
+  return getTheme(props)[key];
+};
 
-export const getThemeVariantSelector = () => props =>
+export const getThemeVariantSelector = () => (props) =>
   getTheme(props)[props.variant];

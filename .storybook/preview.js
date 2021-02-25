@@ -1,24 +1,34 @@
+import React from "react";
 import { addDecorator } from "@storybook/react";
-import { withThemesProvider } from "storybook-addon-styled-component-theme";
-import {
-  gray,
-  blueLighter,
-  jade,
-  turquoise,
-  yellowOrange,
-  warmRed,
-  white,
-  defaultTheme,
-} from "../src/lib/style/theme";
+import { ThemeProvider } from "styled-components";
 
-const themes = [
-  {
-    name: "Dark Theme",
-    brand: defaultTheme.dark,
+import { defaultTheme } from "../src/lib/style/theme";
+
+const themes = {
+  dark: defaultTheme.dark,
+  light: defaultTheme.light,
+};
+
+export const globalTypes = {
+  theme: {
+    name: "Theme",
+    description: "Global theme for components",
+    defaultValue: "dark",
+    toolbar: {
+      icon: "circlehollow",
+      // array of plain string values or MenuItem shape (see below)
+      items: ["light", "dark"],
+    },
   },
-  {
-    name: "Light Theme",
-    brand: defaultTheme.light,
-  },
-];
-addDecorator(withThemesProvider(themes));
+};
+
+const withThemeProvider = (Story, context) => {
+  const theme = themes[context.globals.theme];
+  return (
+    <ThemeProvider theme={theme}>
+      <Story {...context} />
+    </ThemeProvider>
+  );
+};
+
+export const decorators = [withThemeProvider];
