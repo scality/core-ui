@@ -651,7 +651,7 @@ exports[`Storyshots Button Default 1`] = `
       className="sc-kAzzGY ebaOMy"
     >
       <div
-        className="sc-gqjmRU ldDUvI sc-loader"
+        className="sc-gqjmRU cvSyVs sc-loader"
         color="#87929D"
         size="base"
       >
@@ -4564,6 +4564,134 @@ exports[`Storyshots Dropdown Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots EmptyState With Link 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <div
+    className="sc-hzDkRC jTMrPM sc-emptystate"
+  >
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <div
+        className="sc-dVhcbM cmlnyx"
+      >
+        <i
+          className="fas fa-server"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <h3
+        className="sc-jhAzac csXHtc"
+      >
+        A list of 
+        nodes
+         will appear here
+      </h3>
+    </div>
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <h3
+        className="sc-jhAzac csXHtc"
+      >
+        There are no 
+        nodes
+         created yet, let's create your first
+         
+        node
+        .
+      </h3>
+    </div>
+    <div
+      className="sc-fMiknA CQjH"
+    >
+      <button
+        className="sc-fjdhpX gZwnNg sc-button"
+        disabled={false}
+        onClick={[Function]}
+        size="large"
+        title=""
+        type="button"
+      >
+        <span
+          className="sc-kAzzGY ebaOMy"
+        >
+          <span
+            className="sc-button-text"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="large"
+            >
+              <i
+                className="fas fa-plus"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted"
+            >
+              Create node
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots EmptyState Without Link 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <div
+    className="sc-hzDkRC jTMrPM sc-emptystate"
+  >
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <div
+        className="sc-dVhcbM cmlnyx"
+      >
+        <i
+          className="fas fa-server"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <h3
+        className="sc-jhAzac csXHtc"
+      >
+        A list of 
+        nodes
+         will appear here
+      </h3>
+    </div>
+    <div
+      className="sc-fBuWsC ghXEEH"
+    >
+      <h3
+        className="sc-jhAzac csXHtc"
+      >
+        There are no 
+        nodes
+         created yet, let's create your first
+         
+        node
+        .
+      </h3>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Healthselector Default 1`] = `
 <div
   className="sc-bwzfXH hyPwIk"
@@ -4574,33 +4702,33 @@ exports[`Storyshots Healthselector Default 1`] = `
     Basic usage
   </h3>
   <div
-    className="sc-hzDkRC gSIsRO sc-healthselector"
+    className="sc-eqIVtm kNdZLb sc-healthselector"
   >
     <button
-      className="sc-fjdhpX sc-dVhcbM cbEqpG trigger"
+      className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
     >
       <div
-        className="sc-eqIVtm fIQfzw"
+        className="sc-cHGsZl hCYmyq"
       >
         <span
-          className="sc-fMiknA dKnmav"
+          className="sc-gisBJw kUGHEc"
         >
           <span
-            className="sc-jhAzac hSHqbk"
+            className="sc-fAjcbJ cNlWXU"
           />
           <span
-            className="sc-jhAzac ioIhBt"
+            className="sc-fAjcbJ jbngQO"
           />
           <span
-            className="sc-jhAzac bbLwcm"
+            className="sc-fAjcbJ bbEPnU"
           />
         </span>
       </div>
       <div
-        className="sc-fAjcbJ khTEYx"
+        className="sc-TOsTZ lcIwuI"
       >
         All
       </div>
@@ -4615,39 +4743,39 @@ exports[`Storyshots Healthselector Default 1`] = `
     Health Selector Sizes (Triggering StoryBook actions)
   </h3>
   <div
-    className="sc-kjoXOD ghRhps"
+    className="sc-ksYbfQ cvrXWt"
   >
     <div
-      className="sc-cHGsZl cQpJJF"
+      className="sc-hmzhuo hRxmID"
     >
       <div
-        className="sc-hzDkRC gSIsRO sc-healthselector"
+        className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-dVhcbM ghHQpw trigger"
+          className="sc-fjdhpX sc-kjoXOD cPaimw trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="smaller"
         >
           <div
-            className="sc-eqIVtm fIQfzw"
+            className="sc-cHGsZl hCYmyq"
           >
             <span
-              className="sc-fMiknA dKnmav"
+              className="sc-gisBJw kUGHEc"
             >
               <span
-                className="sc-jhAzac hSHqbk"
+                className="sc-fAjcbJ cNlWXU"
               />
               <span
-                className="sc-jhAzac ioIhBt"
+                className="sc-fAjcbJ jbngQO"
               />
               <span
-                className="sc-jhAzac bbLwcm"
+                className="sc-fAjcbJ bbEPnU"
               />
             </span>
           </div>
           <div
-            className="sc-fAjcbJ khTEYx"
+            className="sc-TOsTZ lcIwuI"
           >
             All
           </div>
@@ -4658,36 +4786,36 @@ exports[`Storyshots Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-cHGsZl cQpJJF"
+      className="sc-hmzhuo hRxmID"
     >
       <div
-        className="sc-hzDkRC gSIsRO sc-healthselector"
+        className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-dVhcbM iISnbn trigger"
+          className="sc-fjdhpX sc-kjoXOD inGrFY trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="small"
         >
           <div
-            className="sc-eqIVtm fIQfzw"
+            className="sc-cHGsZl hCYmyq"
           >
             <span
-              className="sc-fMiknA dKnmav"
+              className="sc-gisBJw kUGHEc"
             >
               <span
-                className="sc-jhAzac hSHqbk"
+                className="sc-fAjcbJ cNlWXU"
               />
               <span
-                className="sc-jhAzac ioIhBt"
+                className="sc-fAjcbJ jbngQO"
               />
               <span
-                className="sc-jhAzac bbLwcm"
+                className="sc-fAjcbJ bbEPnU"
               />
             </span>
           </div>
           <div
-            className="sc-fAjcbJ khTEYx"
+            className="sc-TOsTZ lcIwuI"
           >
             All
           </div>
@@ -4698,36 +4826,36 @@ exports[`Storyshots Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-cHGsZl cQpJJF"
+      className="sc-hmzhuo hRxmID"
     >
       <div
-        className="sc-hzDkRC gSIsRO sc-healthselector"
+        className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-dVhcbM cbEqpG trigger"
+          className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="base"
         >
           <div
-            className="sc-eqIVtm fIQfzw"
+            className="sc-cHGsZl hCYmyq"
           >
             <span
-              className="sc-fMiknA dKnmav"
+              className="sc-gisBJw kUGHEc"
             >
               <span
-                className="sc-jhAzac hSHqbk"
+                className="sc-fAjcbJ cNlWXU"
               />
               <span
-                className="sc-jhAzac ioIhBt"
+                className="sc-fAjcbJ jbngQO"
               />
               <span
-                className="sc-jhAzac bbLwcm"
+                className="sc-fAjcbJ bbEPnU"
               />
             </span>
           </div>
           <div
-            className="sc-fAjcbJ khTEYx"
+            className="sc-TOsTZ lcIwuI"
           >
             All
           </div>
@@ -4739,39 +4867,39 @@ exports[`Storyshots Healthselector Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-kjoXOD ghRhps"
+    className="sc-ksYbfQ cvrXWt"
   >
     <div
-      className="sc-cHGsZl cQpJJF"
+      className="sc-hmzhuo hRxmID"
     >
       <div
-        className="sc-hzDkRC gSIsRO sc-healthselector"
+        className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-dVhcbM eDVaHD trigger"
+          className="sc-fjdhpX sc-kjoXOD eSuYgR trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="large"
         >
           <div
-            className="sc-eqIVtm fIQfzw"
+            className="sc-cHGsZl hCYmyq"
           >
             <span
-              className="sc-fMiknA dKnmav"
+              className="sc-gisBJw kUGHEc"
             >
               <span
-                className="sc-jhAzac hSHqbk"
+                className="sc-fAjcbJ cNlWXU"
               />
               <span
-                className="sc-jhAzac ioIhBt"
+                className="sc-fAjcbJ jbngQO"
               />
               <span
-                className="sc-jhAzac bbLwcm"
+                className="sc-fAjcbJ bbEPnU"
               />
             </span>
           </div>
           <div
-            className="sc-fAjcbJ khTEYx"
+            className="sc-TOsTZ lcIwuI"
           >
             All
           </div>
@@ -4782,36 +4910,36 @@ exports[`Storyshots Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-cHGsZl cQpJJF"
+      className="sc-hmzhuo hRxmID"
     >
       <div
-        className="sc-hzDkRC gSIsRO sc-healthselector"
+        className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-dVhcbM fLRNDu trigger"
+          className="sc-fjdhpX sc-kjoXOD vJicb trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="larger"
         >
           <div
-            className="sc-eqIVtm fIQfzw"
+            className="sc-cHGsZl hCYmyq"
           >
             <span
-              className="sc-fMiknA dKnmav"
+              className="sc-gisBJw kUGHEc"
             >
               <span
-                className="sc-jhAzac hSHqbk"
+                className="sc-fAjcbJ cNlWXU"
               />
               <span
-                className="sc-jhAzac ioIhBt"
+                className="sc-fAjcbJ jbngQO"
               />
               <span
-                className="sc-jhAzac bbLwcm"
+                className="sc-fAjcbJ bbEPnU"
               />
             </span>
           </div>
           <div
-            className="sc-fAjcbJ khTEYx"
+            className="sc-TOsTZ lcIwuI"
           >
             All
           </div>
@@ -4828,33 +4956,33 @@ exports[`Storyshots Healthselector Default 1`] = `
     With custom labels (Triggering StoryBook actions)
   </h3>
   <div
-    className="sc-hzDkRC gSIsRO sc-healthselector"
+    className="sc-eqIVtm kNdZLb sc-healthselector"
   >
     <button
-      className="sc-fjdhpX sc-dVhcbM cbEqpG trigger"
+      className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
     >
       <div
-        className="sc-eqIVtm fIQfzw"
+        className="sc-cHGsZl hCYmyq"
       >
         <span
-          className="sc-fMiknA dKnmav"
+          className="sc-gisBJw kUGHEc"
         >
           <span
-            className="sc-jhAzac hSHqbk"
+            className="sc-fAjcbJ cNlWXU"
           />
           <span
-            className="sc-jhAzac ioIhBt"
+            className="sc-fAjcbJ jbngQO"
           />
           <span
-            className="sc-jhAzac bbLwcm"
+            className="sc-fAjcbJ bbEPnU"
           />
         </span>
       </div>
       <div
-        className="sc-fAjcbJ khTEYx"
+        className="sc-TOsTZ lcIwuI"
       >
         Custom1
       </div>
@@ -4876,10 +5004,10 @@ exports[`Storyshots Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-cJSrbW fsGQCf sc-input"
+    className="sc-hqyNC ebElpj sc-input"
   >
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -4900,16 +5028,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-cJSrbW fsGQCf sc-input"
+    className="sc-hqyNC ebElpj sc-input"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id2"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -4929,16 +5057,16 @@ exports[`Storyshots Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-cJSrbW fzVsGz sc-input"
+    className="sc-hqyNC dxvodp sc-input"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id3"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -4951,7 +5079,7 @@ exports[`Storyshots Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-hmzhuo eqoyZD sc-input-error"
+        className="sc-dNLxif kysLYa sc-input-error"
       >
         error
       </span>
@@ -4963,19 +5091,19 @@ exports[`Storyshots Input Default 1`] = `
     Input with long error
   </h3>
   <div
-    className="sc-fYiAbW iJPEZA"
+    className="sc-eerKOB ErgZX"
   >
     <div
-      className="sc-cJSrbW fzVsGz sc-input"
+      className="sc-hqyNC dxvodp sc-input"
     >
       <label
-        className="sc-ksYbfQ drKOtP sc-input-label"
+        className="sc-jbKcbu eRuGQf sc-input-label"
         htmlFor="id3"
       >
         label
       </label>
       <div
-        className="sc-frDJqD cgZNsg sc-input-wrapper"
+        className="sc-jqCOkK iWcKla sc-input-wrapper"
       >
         <input
           autoComplete="off"
@@ -4988,7 +5116,7 @@ exports[`Storyshots Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-hmzhuo eqoyZD sc-input-error"
+          className="sc-dNLxif kysLYa sc-input-error"
         >
           long error error error error error error error error error
         </span>
@@ -5001,17 +5129,17 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-cJSrbW fsGQCf sc-input"
+    className="sc-hqyNC ebElpj sc-input"
     type="checkbox"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id4"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <label
         checked={false}
@@ -5036,17 +5164,17 @@ exports[`Storyshots Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-cJSrbW fzVsGz sc-input"
+    className="sc-hqyNC dxvodp sc-input"
     type="checkbox"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id5"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <label
         checked={false}
@@ -5064,7 +5192,7 @@ exports[`Storyshots Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-hmzhuo eqoyZD sc-input-error"
+        className="sc-dNLxif kysLYa sc-input-error"
       >
         error
       </span>
@@ -5076,20 +5204,20 @@ exports[`Storyshots Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-cJSrbW fsGQCf sc-input"
+    className="sc-hqyNC ebElpj sc-input"
     type="select"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id6"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <div
-        className="sc-TOsTZ jFtyqW sc-select-container"
+        className="sc-frDJqD jLOKHY sc-select-container"
       >
         <div
           className="sc-select css-2b097c-container"
@@ -5210,20 +5338,20 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input
   </h3>
   <div
-    className="sc-cJSrbW fsGQCf sc-input"
+    className="sc-hqyNC ebElpj sc-input"
     type="textarea"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id7"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <textarea
-        className="sc-kgAjT kGgLau sc-textarea"
+        className="sc-kvZOFW gTEJfZ sc-textarea"
         cols={20}
         id="id7"
         onChange={[Function]}
@@ -5239,20 +5367,20 @@ exports[`Storyshots Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-cJSrbW fzVsGz sc-input"
+    className="sc-hqyNC dxvodp sc-input"
     type="textarea"
   >
     <label
-      className="sc-ksYbfQ drKOtP sc-input-label"
+      className="sc-jbKcbu eRuGQf sc-input-label"
       htmlFor="id7"
     >
       label
     </label>
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <textarea
-        className="sc-kgAjT kGgLau sc-textarea"
+        className="sc-kvZOFW gTEJfZ sc-textarea"
         cols={50}
         id="id7"
         onChange={[Function]}
@@ -5261,7 +5389,7 @@ exports[`Storyshots Input Default 1`] = `
         value="Hello"
       />
       <span
-        className="sc-hmzhuo eqoyZD sc-input-error"
+        className="sc-dNLxif kysLYa sc-input-error"
       >
         error
       </span>
@@ -5273,11 +5401,11 @@ exports[`Storyshots Input Default 1`] = `
     Number Input (Max 100)
   </h3>
   <div
-    className="sc-cJSrbW jMtXIv sc-input"
+    className="sc-hqyNC ijjCdr sc-input"
     type="number"
   >
     <div
-      className="sc-frDJqD cgZNsg sc-input-wrapper"
+      className="sc-jqCOkK iWcKla sc-input-wrapper"
     >
       <div
         className="sc-number-input-wrapper"
@@ -5314,18 +5442,18 @@ exports[`Storyshots Input Default 1`] = `
 
 exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
 <div
-  className="sc-bbmXgH eZZcMG sc-lateralnavbarlayout"
+  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
 >
   <div
-    className="sc-gGBfsJ THvxQ"
+    className="sc-ktHwxA kIsNqM"
   >
     <div
-      className="sc-kvZOFW cheqqw"
+      className="sc-uJMKN kQfogJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC edKtSq sc-sidebar"
+        className="sc-bbmXgH klJqKM sc-sidebar"
       >
         <button
           className="sc-fjdhpX bkJuHk sc-button"
@@ -5358,13 +5486,13 @@ exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
           </span>
         </button>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
@@ -5372,13 +5500,13 @@ exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
@@ -5386,13 +5514,13 @@ exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
@@ -5402,10 +5530,10 @@ exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
       </div>
     </div>
     <div
-      className="sc-jnlKLf kNmKWc main"
+      className="sc-cIShpX EUShx main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -5536,27 +5664,27 @@ exports[`Storyshots LateralNavbarLayout Hoverable Sidebar 1`] = `
 exports[`Storyshots LateralNavbarLayout Sidebar Docked 1`] = `
 <div>
   <div
-    className="sc-bbmXgH eZZcMG sc-lateralnavbarlayout"
+    className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
   >
     <div
-      className="sc-gGBfsJ THvxQ"
+      className="sc-ktHwxA kIsNqM"
     >
       <div
-        className="sc-kvZOFW cheqqw"
+        className="sc-uJMKN kQfogJ"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-hqyNC edKtSq sc-sidebar"
+          className="sc-bbmXgH klJqKM sc-sidebar"
         >
           <div
-            className="sc-jbKcbu kqrzQm sc-sidebar-item"
+            className="sc-gGBfsJ eWguid sc-sidebar-item"
             data-cy="Dashboard"
             onClick={[Function]}
             title="Dashboard"
           >
             <div
-              className="sc-uJMKN jOaiZz"
+              className="sc-tilXH bnjRiv"
             >
               <i
                 className="fas fa-tachometer-alt"
@@ -5564,13 +5692,13 @@ exports[`Storyshots LateralNavbarLayout Sidebar Docked 1`] = `
             </div>
           </div>
           <div
-            className="sc-jbKcbu ctSykk sc-sidebar-item"
+            className="sc-gGBfsJ cOfOmm sc-sidebar-item"
             data-cy="Servers"
             onClick={[Function]}
             title="Servers"
           >
             <div
-              className="sc-uJMKN jOaiZz"
+              className="sc-tilXH bnjRiv"
             >
               <i
                 className="fas fa-server"
@@ -5578,13 +5706,13 @@ exports[`Storyshots LateralNavbarLayout Sidebar Docked 1`] = `
             </div>
           </div>
           <div
-            className="sc-jbKcbu ctSykk sc-sidebar-item"
+            className="sc-gGBfsJ cOfOmm sc-sidebar-item"
             data-cy="Disks"
             onClick={[Function]}
             title="Disks"
           >
             <div
-              className="sc-uJMKN jOaiZz"
+              className="sc-tilXH bnjRiv"
             >
               <i
                 className="fas fa-hdd"
@@ -5594,10 +5722,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar Docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-jnlKLf kNmKWc main"
+        className="sc-cIShpX EUShx main"
       >
         <div
-          className="sc-gqjmRU jIaNVi sc-loader"
+          className="sc-gqjmRU kKEJsW sc-loader"
           color="#87929D"
           size="massive"
         >
@@ -5728,75 +5856,75 @@ exports[`Storyshots LateralNavbarLayout Sidebar Docked 1`] = `
 
 exports[`Storyshots LateralNavbarLayout Sidebar Expanded 1`] = `
 <div
-  className="sc-bbmXgH eZZcMG sc-lateralnavbarlayout"
+  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
 >
   <div
-    className="sc-gGBfsJ THvxQ"
+    className="sc-ktHwxA kIsNqM"
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -5804,10 +5932,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar Expanded 1`] = `
       </div>
     </div>
     <div
-      className="sc-jnlKLf kNmKWc main"
+      className="sc-cIShpX EUShx main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -5937,21 +6065,21 @@ exports[`Storyshots LateralNavbarLayout Sidebar Expanded 1`] = `
 
 exports[`Storyshots LateralNavbarLayout Sidebar With Toggle 1`] = `
 <div
-  className="sc-bbmXgH eZZcMG sc-lateralnavbarlayout"
+  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
 >
   <div
-    className="sc-gGBfsJ THvxQ"
+    className="sc-ktHwxA kIsNqM"
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-uJMKN jOaiZz"
+          className="sc-tilXH bnjRiv"
         >
           <button
             className="sc-fjdhpX bkJuHk sc-button"
@@ -5985,61 +6113,61 @@ exports[`Storyshots LateralNavbarLayout Sidebar With Toggle 1`] = `
           </button>
         </div>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -6047,10 +6175,10 @@ exports[`Storyshots LateralNavbarLayout Sidebar With Toggle 1`] = `
       </div>
     </div>
     <div
-      className="sc-jnlKLf kNmKWc main"
+      className="sc-cIShpX EUShx main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -6180,19 +6308,19 @@ exports[`Storyshots LateralNavbarLayout Sidebar With Toggle 1`] = `
 
 exports[`Storyshots Layout Hoverable Sidebar 1`] = `
 <div
-  className="sc-cmTdod dvqgiq sc-layout"
+  className="sc-elJkPf dsZFnF sc-layout"
 >
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -6264,20 +6392,20 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -6377,15 +6505,15 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
     </div>
   </div>
   <div
-    className="sc-jwKygS jeUsTP"
+    className="sc-jtRfpW DPCey"
   >
     <div
-      className="sc-kvZOFW cheqqw"
+      className="sc-uJMKN kQfogJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC edKtSq sc-sidebar"
+        className="sc-bbmXgH klJqKM sc-sidebar"
       >
         <button
           className="sc-fjdhpX bkJuHk sc-button"
@@ -6418,13 +6546,13 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
           </span>
         </button>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
@@ -6432,13 +6560,13 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
@@ -6446,13 +6574,13 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
@@ -6462,10 +6590,10 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
       </div>
     </div>
     <div
-      className="sc-btzYZH fDXnZg main"
+      className="sc-kTUwUJ cKXLve main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -6595,16 +6723,16 @@ exports[`Storyshots Layout Hoverable Sidebar 1`] = `
 
 exports[`Storyshots Layout Sidebar Docked 1`] = `
 <div
-  className="sc-cmTdod dvqgiq sc-layout"
+  className="sc-elJkPf dsZFnF sc-layout"
 >
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
         onClick={[Function]}
       >
         <button
@@ -6638,10 +6766,10 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -6713,20 +6841,20 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -6826,24 +6954,24 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
     </div>
   </div>
   <div
-    className="sc-jwKygS jeUsTP"
+    className="sc-jtRfpW DPCey"
   >
     <div
-      className="sc-kvZOFW cheqqw"
+      className="sc-uJMKN kQfogJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC edKtSq sc-sidebar"
+        className="sc-bbmXgH klJqKM sc-sidebar"
       >
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
@@ -6851,13 +6979,13 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
@@ -6865,13 +6993,13 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
@@ -6881,10 +7009,10 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
       </div>
     </div>
     <div
-      className="sc-btzYZH fDXnZg main"
+      className="sc-kTUwUJ cKXLve main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -7014,16 +7142,16 @@ exports[`Storyshots Layout Sidebar Docked 1`] = `
 
 exports[`Storyshots Layout Sidebar Expanded 1`] = `
 <div
-  className="sc-cmTdod dvqgiq sc-layout"
+  className="sc-elJkPf dsZFnF sc-layout"
 >
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
         onClick={[Function]}
       >
         <button
@@ -7057,10 +7185,10 @@ exports[`Storyshots Layout Sidebar Expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -7132,20 +7260,20 @@ exports[`Storyshots Layout Sidebar Expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -7245,72 +7373,72 @@ exports[`Storyshots Layout Sidebar Expanded 1`] = `
     </div>
   </div>
   <div
-    className="sc-jwKygS jeUsTP"
+    className="sc-jtRfpW DPCey"
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -7318,10 +7446,10 @@ exports[`Storyshots Layout Sidebar Expanded 1`] = `
       </div>
     </div>
     <div
-      className="sc-btzYZH fDXnZg main"
+      className="sc-kTUwUJ cKXLve main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -7451,19 +7579,19 @@ exports[`Storyshots Layout Sidebar Expanded 1`] = `
 
 exports[`Storyshots Layout Sidebar With Toggle 1`] = `
 <div
-  className="sc-cmTdod dvqgiq sc-layout"
+  className="sc-elJkPf dsZFnF sc-layout"
 >
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -7535,20 +7663,20 @@ exports[`Storyshots Layout Sidebar With Toggle 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -7648,18 +7776,18 @@ exports[`Storyshots Layout Sidebar With Toggle 1`] = `
     </div>
   </div>
   <div
-    className="sc-jwKygS jeUsTP"
+    className="sc-jtRfpW DPCey"
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-uJMKN jOaiZz"
+          className="sc-tilXH bnjRiv"
         >
           <button
             className="sc-fjdhpX bkJuHk sc-button"
@@ -7693,61 +7821,61 @@ exports[`Storyshots Layout Sidebar With Toggle 1`] = `
           </button>
         </div>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -7755,10 +7883,10 @@ exports[`Storyshots Layout Sidebar With Toggle 1`] = `
       </div>
     </div>
     <div
-      className="sc-btzYZH fDXnZg main"
+      className="sc-kTUwUJ cKXLve main"
     >
       <div
-        className="sc-gqjmRU jIaNVi sc-loader"
+        className="sc-gqjmRU kKEJsW sc-loader"
         color="#87929D"
         size="massive"
       >
@@ -7935,7 +8063,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-gqjmRU ldDUvI sc-loader"
+      className="sc-gqjmRU cvSyVs sc-loader"
       color="#87929D"
       size="base"
     >
@@ -8070,7 +8198,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-gqjmRU dbVCoq sc-loader"
+      className="sc-gqjmRU dUyVVO sc-loader"
       color="#87929D"
       size="large"
     >
@@ -8205,7 +8333,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-gqjmRU cotchT sc-loader"
+      className="sc-gqjmRU chjZYF sc-loader"
       color="#87929D"
       size="larger"
     >
@@ -8340,7 +8468,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-gqjmRU iyUXiw sc-loader"
+      className="sc-gqjmRU kSOJfk sc-loader"
       color="#87929D"
       size="huge"
     >
@@ -8475,7 +8603,7 @@ exports[`Storyshots Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-gqjmRU jIaNVi sc-loader"
+      className="sc-gqjmRU kKEJsW sc-loader"
       color="#87929D"
       size="massive"
     >
@@ -8614,7 +8742,7 @@ exports[`Storyshots Loader With Dynamic Props 1`] = `
   className="sc-bwzfXH hyPwIk"
 >
   <div
-    className="sc-gqjmRU ldDUvI sc-loader"
+    className="sc-gqjmRU cvSyVs sc-loader"
     color="#87929D"
     size="base"
   >
@@ -8751,21 +8879,21 @@ exports[`Storyshots Modal Default 1`] = `
   className="sc-bwzfXH hyPwIk"
 >
   <div
-    className="sc-lhVmIH kQeEki sc-modal"
+    className="sc-dqBHgY OGZSZ sc-modal"
   >
     <div
-      className="sc-bYSBpT iFjWqp sc-modal-content"
+      className="sc-gxMtzJ cVftnq sc-modal-content"
     >
       <div
-        className="sc-elJkPf codiOV sc-modal-header"
+        className="sc-dfVpRl jssEbb sc-modal-header"
       >
         <span
-          className="sc-jtRfpW izdAYh"
+          className="sc-gzOgki kTuuLR"
         >
           Hello
         </span>
         <div
-          className="sc-gxMtzJ cDJosp"
+          className="sc-kPVwWT huJXgW"
           onClick={[Function]}
         >
           <i
@@ -8774,14 +8902,14 @@ exports[`Storyshots Modal Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kTUwUJ kwvglT sc-modal-body"
+        className="sc-iyvyFf kczwnX sc-modal-body"
       >
         <span>
           Do you want a cookie?
         </span>
       </div>
       <div
-        className="sc-dqBHgY jpjwzB sc-modal-footer"
+        className="sc-hwwEjo PCffr sc-modal-footer"
       >
         <div
           style={
@@ -8855,18 +8983,18 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       <h3
-        className="sc-gzOgki doKHfW"
+        className="sc-esjQYD eDGSWu"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-hwwEjo ziLKK sc-multi-select-list-search"
+        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
       >
         <div
-          className="sc-TOsTZ jFtyqW sc-select-container"
+          className="sc-frDJqD jLOKHY sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -9004,10 +9132,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -9054,21 +9182,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9103,10 +9231,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -9153,21 +9281,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9212,18 +9340,18 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       <h3
-        className="sc-gzOgki doKHfW"
+        className="sc-esjQYD eDGSWu"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -9270,21 +9398,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9319,10 +9447,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -9369,21 +9497,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9428,18 +9556,18 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       <h3
-        className="sc-gzOgki doKHfW"
+        className="sc-esjQYD eDGSWu"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-hwwEjo ziLKK sc-multi-select-list-search"
+        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
       >
         <div
-          className="sc-TOsTZ jFtyqW sc-select-container"
+          className="sc-frDJqD jLOKHY sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -9577,10 +9705,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -9597,21 +9725,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9646,10 +9774,10 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -9666,21 +9794,21 @@ exports[`Storyshots MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9725,18 +9853,18 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       <h3
-        className="sc-gzOgki doKHfW"
+        className="sc-esjQYD eDGSWu"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-hwwEjo ziLKK sc-multi-select-list-search"
+        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
       >
         <div
-          className="sc-TOsTZ jFtyqW sc-select-container"
+          className="sc-frDJqD jLOKHY sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -9874,27 +10002,27 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9929,27 +10057,27 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         >
           <button
             className="sc-fjdhpX ksRsJL sc-button"
@@ -9994,18 +10122,18 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       <h3
-        className="sc-gzOgki doKHfW"
+        className="sc-esjQYD eDGSWu"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-hwwEjo ziLKK sc-multi-select-list-search"
+        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
       >
         <div
-          className="sc-TOsTZ jFtyqW sc-select-container"
+          className="sc-frDJqD jLOKHY sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -10143,51 +10271,51 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         />
       </div>
     </div>
@@ -10201,14 +10329,14 @@ exports[`Storyshots MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dfVpRl kGbJFo sc-multi-select-list"
+      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
     >
       
       <div
-        className="sc-hwwEjo ziLKK sc-multi-select-list-search"
+        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
       >
         <div
-          className="sc-TOsTZ jFtyqW sc-select-container"
+          className="sc-frDJqD jLOKHY sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -10346,51 +10474,51 @@ exports[`Storyshots MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-iyvyFf jCYirb sc-multi-select-item"
+        className="sc-kIPQKe HZWav sc-multi-select-item"
       >
         <div
-          className="sc-kPVwWT aOjCT sc-multi-select-item-left"
+          className="sc-ibxdXY joluPq sc-multi-select-item-left"
         />
         <div
-          className="sc-kfGgVZ jcojAC sc-multi-select-item-center"
+          className="sc-RefOD bKIgpe sc-multi-select-item-center"
         >
           <span
-            className="sc-kIPQKe hEnwbm sc-multi-select-item-label"
+            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-eXEjpC fuVqJC sc-multi-select-item-description"
+            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-esjQYD kRppAP sc-multi-select-item-right"
+          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
         />
       </div>
     </div>
@@ -10404,13 +10532,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with toggle
   </h3>
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
         onClick={[Function]}
       >
         <button
@@ -10444,10 +10572,10 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -10519,20 +10647,20 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Hardware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-hEsumM jlBddX"
+      className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-ktHwxA arSMu"
+        className="sc-cmTdod vWIxg"
         onClick={[Function]}
         selected={true}
       >
@@ -10541,7 +10669,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10550,7 +10678,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10559,7 +10687,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10568,7 +10696,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10578,10 +10706,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -10714,16 +10842,16 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar without toggle
   </h3>
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -10795,20 +10923,20 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Hardware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-hEsumM jlBddX"
+      className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-ktHwxA arSMu"
+        className="sc-cmTdod vWIxg"
         onClick={[Function]}
         selected={true}
       >
@@ -10817,7 +10945,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10826,7 +10954,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10835,7 +10963,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10844,7 +10972,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -10854,10 +10982,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -10990,13 +11118,13 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with customized logo
   </h3>
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
         onClick={[Function]}
       >
         <button
@@ -11030,10 +11158,10 @@ exports[`Storyshots Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <i
             className="fas fa-ring"
@@ -11041,20 +11169,20 @@ exports[`Storyshots Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <h1
-          className="sc-feJyhm jfQbnI"
+          className="sc-lhVmIH dRlcpE"
         >
           Hardware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-hEsumM jlBddX"
+      className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-ktHwxA arSMu"
+        className="sc-cmTdod vWIxg"
         onClick={[Function]}
         selected={true}
       >
@@ -11063,7 +11191,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11072,7 +11200,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11081,7 +11209,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11090,7 +11218,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11100,10 +11228,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -11236,16 +11364,16 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with only tabs
   </h3>
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -11318,10 +11446,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hEsumM jlBddX"
+      className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-ktHwxA arSMu"
+        className="sc-cmTdod vWIxg"
         onClick={[Function]}
         selected={true}
       >
@@ -11330,7 +11458,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11339,7 +11467,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11348,7 +11476,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11357,7 +11485,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-ktHwxA CDWHG"
+        className="sc-cmTdod gfBtMw"
         onClick={[Function]}
         selected={false}
       >
@@ -11367,10 +11495,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -11405,16 +11533,16 @@ exports[`Storyshots Navbar Default 1`] = `
     Navbar with only link tabs
   </h3>
   <div
-    className="sc-fYxtnH jtAiaa sc-navbar"
+    className="sc-kafWEX kbouyE sc-navbar"
   >
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
-          className="sc-iELTvK hlqjDa sc-logo"
+          className="sc-bYSBpT gXxIVy sc-logo"
         >
           <svg
             height="49"
@@ -11487,10 +11615,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hEsumM jlBddX"
+      className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-ktHwxA sc-cIShpX kgEigK"
+        className="sc-cmTdod sc-jwKygS cJigiZ"
         selected={true}
       >
         <a
@@ -11500,7 +11628,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-ktHwxA sc-cIShpX eagUSd"
+        className="sc-cmTdod sc-jwKygS chbICS"
       >
         <a
           href="/users"
@@ -11509,7 +11637,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-ktHwxA sc-cIShpX eagUSd"
+        className="sc-cmTdod sc-jwKygS chbICS"
       >
         <a
           href="/policies"
@@ -11518,7 +11646,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-ktHwxA sc-cIShpX eagUSd"
+        className="sc-cmTdod sc-jwKygS chbICS"
       >
         <a
           href="/buckets"
@@ -11527,7 +11655,7 @@ exports[`Storyshots Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-ktHwxA sc-cIShpX eagUSd"
+        className="sc-cmTdod sc-jwKygS chbICS"
       >
         <a
           href="/workflows"
@@ -11537,10 +11665,10 @@ exports[`Storyshots Navbar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-tilXH kGycRn"
+      className="sc-feJyhm EbppY"
     >
       <div
-        className="sc-kafWEX bJESCE"
+        className="sc-btzYZH jasLoq"
       >
         <div
           className="sc-jlyJG hnrnwX sc-dropdown"
@@ -11579,16 +11707,16 @@ exports[`Storyshots Notifications Default 1`] = `
   className="sc-bwzfXH hyPwIk"
 >
   <div
-    className="sc-hrWEMg cCOJSA sc-notifications"
+    className="sc-iQNlJl fTiHBH sc-notifications"
   >
     <div
-      className="sc-ibxdXY kanblO sc-notification"
+      className="sc-eTuwsz hZJfen sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11596,7 +11724,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Carlito. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11605,13 +11733,13 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-ibxdXY bnIrMe sc-notification"
+      className="sc-eTuwsz lbAPhg sc-notification"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11619,7 +11747,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Patrick. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11629,15 +11757,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-hrWEMg hHGEmo sc-notifications"
+    className="sc-iQNlJl cOAVjG sc-notifications"
   >
     <div
-      className="sc-ibxdXY dEmVLW sc-notification"
+      className="sc-eTuwsz kpLIIV sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11645,7 +11773,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Jordi. I live at TOP_LEFT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11654,12 +11782,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-ibxdXY jqkgFN sc-notification"
+      className="sc-eTuwsz bRKNum sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11667,12 +11795,12 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-iQKALj EggsS"
+        className="sc-hXRMBi hfbPSl"
         max={10000}
         value={0}
       />
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11682,15 +11810,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-hrWEMg hlmTdl sc-notifications"
+    className="sc-iQNlJl cLhFRe sc-notifications"
   >
     <div
-      className="sc-ibxdXY byWgf sc-notification"
+      className="sc-eTuwsz djZXzr sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11698,7 +11826,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Teddy. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11707,12 +11835,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-ibxdXY jqkgFN sc-notification"
+      className="sc-eTuwsz bRKNum sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11720,12 +11848,12 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Yanjin. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-iQKALj EggsS"
+        className="sc-hXRMBi hfbPSl"
         max={10000}
         value={0}
       />
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11735,15 +11863,15 @@ exports[`Storyshots Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-hrWEMg iqvhWa sc-notifications"
+    className="sc-iQNlJl bXZflO sc-notifications"
   >
     <div
-      className="sc-ibxdXY dEmVLW sc-notification"
+      className="sc-eTuwsz kpLIIV sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11751,7 +11879,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Charles. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11760,12 +11888,12 @@ exports[`Storyshots Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-ibxdXY byWgf sc-notification"
+      className="sc-eTuwsz djZXzr sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-RefOD gNySXs"
+        className="sc-gwVKww hHieRD"
       >
         Hi
       </div>
@@ -11773,7 +11901,7 @@ exports[`Storyshots Notifications Default 1`] = `
         I am Claude. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-bwCtUz kfARJy"
+        className="sc-epnACN fbZmvO"
         onClick={[Function]}
       >
         <i
@@ -11802,47 +11930,47 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Smaller
     </h3>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gwVKww hgOigx sc-progressbarcontainer"
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-cMhqgX fyIlsy"
+          className="sc-cLQEGU kChWpk"
           width={50}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-bsbRJL sc-hZSUBg kySRSh"
+        className="sc-cmthru sc-hMFtBS jMkLWh"
       >
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomleftlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomrightlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -11854,47 +11982,47 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Base
     </h3>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           Usage
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           50%
         </span>
       </div>
       <div
-        className="sc-gwVKww gCFDSM sc-progressbarcontainer"
+        className="sc-hZSUBg kGOUrh sc-progressbarcontainer"
         size="base"
       >
         <div
-          className="sc-cMhqgX fyIlsy"
+          className="sc-cLQEGU kChWpk"
           width={50}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-bsbRJL sc-hZSUBg kySRSh"
+        className="sc-cmthru sc-hMFtBS jMkLWh"
       >
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomleftlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
         >
           5.17TB STORED - 13TB USED
         </span>
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomrightlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
         >
           12.9TB FREE - 25.83TB TOTAL
         </span>
@@ -11906,47 +12034,47 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Large with animation
     </h3>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gwVKww faGhYZ sc-progressbarcontainer"
+        className="sc-hZSUBg bgspmu sc-progressbarcontainer"
         size="large"
       >
         <div
-          className="sc-cMhqgX eILetJ"
+          className="sc-cLQEGU jBIyYV"
           width={50}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-bsbRJL sc-hZSUBg kySRSh"
+        className="sc-cmthru sc-hMFtBS jMkLWh"
       >
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomleftlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomrightlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -11958,47 +12086,47 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Larger
     </h3>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gwVKww iTjYiL sc-progressbarcontainer"
+        className="sc-hZSUBg ceICCX sc-progressbarcontainer"
         size="larger"
       >
         <div
-          className="sc-cMhqgX fyIlsy"
+          className="sc-cLQEGU kChWpk"
           width={50}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-bsbRJL sc-hZSUBg kySRSh"
+        className="sc-cmthru sc-hMFtBS jMkLWh"
       >
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomleftlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomrightlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -12010,76 +12138,76 @@ exports[`Storyshots ProgressBar Default 1`] = `
       Different colors
     </h3>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gwVKww hgOigx sc-progressbarcontainer"
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-cMhqgX cTUKsS"
+          className="sc-cLQEGU UVrFp"
           color="#2f67ac"
           width={50}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-bsbRJL sc-hZSUBg kySRSh"
+        className="sc-cmthru sc-hMFtBS jMkLWh"
       >
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomleftlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iQNlJl kTTknY sc-progressbar-bottomrightlabel"
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           10%
         </span>
       </div>
       <div
-        className="sc-gwVKww hgOigx sc-progressbarcontainer"
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-cMhqgX bYJPdR"
+          className="sc-cLQEGU jONfbG"
           color="#ff5722"
           width={10}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             10%
           </div>
@@ -12087,33 +12215,33 @@ exports[`Storyshots ProgressBar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-eTuwsz jtSbhi sc-progressbar"
+      className="sc-bsbRJL kfmymT sc-progressbar"
     >
       <div
-        className="sc-bsbRJL eZpDVC"
+        className="sc-cmthru ggqKXN"
       >
         <span
-          className="sc-hXRMBi dyRqpx sc-progressbar-topLeftLabel"
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
         >
           90% Used
         </span>
         <span
-          className="sc-epnACN fJvlOo sc-progressbar-toprightlabel"
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gwVKww hgOigx sc-progressbarcontainer"
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-cMhqgX gswSEB"
+          className="sc-cLQEGU eZgRBF"
           color="#982803"
           width={90}
         >
           <div
-            className="sc-iuJeZd kgqHvF"
+            className="sc-gqPbQI gKFoAl"
           >
             90%
           </div>
@@ -12141,14 +12269,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-esOvli IPEAQ sc-searchinput"
+      className="sc-hORach eIJvKd sc-searchinput"
     >
       <div
-        className="sc-cJSrbW fsGQCf sc-input"
+        className="sc-hqyNC ebElpj sc-input"
         type="text"
       >
         <div
-          className="sc-frDJqD cgZNsg sc-input-wrapper"
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -12164,7 +12292,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-cmthru sc-hMFtBS eQpgck"
+        className="sc-bMVAic sc-bAeIUo iXYWen"
         disabled={false}
         onClick={[Function]}
       >
@@ -12173,7 +12301,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-cmthru sc-cLQEGU bNEvVw"
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
         onClick={[Function]}
       >
         <i
@@ -12195,15 +12323,15 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-esOvli IPEAQ sc-searchinput"
+      className="sc-hORach eIJvKd sc-searchinput"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-cJSrbW fsGQCf sc-input"
+        className="sc-hqyNC ebElpj sc-input"
         type="text"
       >
         <div
-          className="sc-frDJqD cgZNsg sc-input-wrapper"
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -12218,7 +12346,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-cmthru sc-hMFtBS eQpgck"
+        className="sc-bMVAic sc-bAeIUo iXYWen"
         disabled={false}
         onClick={[Function]}
       >
@@ -12227,7 +12355,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-cmthru sc-cLQEGU bNEvVw"
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
         onClick={[Function]}
       >
         <i
@@ -12249,14 +12377,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-esOvli dnBaPN sc-searchinput"
+      className="sc-hORach ljbzhm sc-searchinput"
     >
       <div
-        className="sc-cJSrbW fsGQCf sc-input"
+        className="sc-hqyNC ebElpj sc-input"
         type="text"
       >
         <div
-          className="sc-frDJqD cgZNsg sc-input-wrapper"
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -12272,7 +12400,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-cmthru sc-hMFtBS dqxCnJ"
+        className="sc-bMVAic sc-bAeIUo gktcdf"
         disabled={true}
         onClick={[Function]}
       >
@@ -12281,7 +12409,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-cmthru sc-cLQEGU bNEvVw"
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
         onClick={[Function]}
       >
         <i
@@ -12303,14 +12431,14 @@ exports[`Storyshots SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-esOvli dnBaPN sc-searchinput"
+      className="sc-hORach ljbzhm sc-searchinput"
     >
       <div
-        className="sc-cJSrbW fsGQCf sc-input"
+        className="sc-hqyNC ebElpj sc-input"
         type="text"
       >
         <div
-          className="sc-frDJqD cgZNsg sc-input-wrapper"
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -12326,7 +12454,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-cmthru sc-hMFtBS dqxCnJ"
+        className="sc-bMVAic sc-bAeIUo gktcdf"
         disabled={true}
         onClick={[Function]}
       >
@@ -12335,7 +12463,7 @@ exports[`Storyshots SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-cmthru sc-cLQEGU bNEvVw"
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
         onClick={[Function]}
       >
         <i
@@ -12364,7 +12492,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-TOsTZ jFtyqW sc-select-container"
+      className="sc-frDJqD jLOKHY sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -12489,7 +12617,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-TOsTZ jFtyqW sc-select-container"
+      className="sc-frDJqD jLOKHY sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -12624,7 +12752,7 @@ exports[`Storyshots Select Default 1`] = `
     }
   >
     <div
-      className="sc-TOsTZ jFtyqW sc-select-container"
+      className="sc-frDJqD jLOKHY sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -12843,20 +12971,20 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-kvZOFW cheqqw"
+      className="sc-uJMKN kQfogJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC edKtSq sc-sidebar"
+        className="sc-bbmXgH klJqKM sc-sidebar"
       >
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
@@ -12864,12 +12992,12 @@ exports[`Storyshots Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
@@ -12877,12 +13005,12 @@ exports[`Storyshots Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
@@ -12903,66 +13031,66 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -12981,15 +13109,15 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-kvZOFW OaqjP"
+      className="sc-uJMKN kbGcMy"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC kxSkhH sc-sidebar"
+        className="sc-bbmXgH fpfnVk sc-sidebar"
       >
         <div
-          className="sc-uJMKN jOaiZz"
+          className="sc-tilXH bnjRiv"
         >
           <button
             className="sc-fjdhpX bkJuHk sc-button"
@@ -13023,58 +13151,58 @@ exports[`Storyshots Sidebar Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Dashboard
           </div>
           <div
-            className="sc-jqCOkK eEnQZG"
+            className="sc-fYxtnH cLjGlm"
           />
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-dNLxif hhzHuo"
+            className="sc-jnlKLf kzhJck"
           >
             Disks
           </div>
@@ -13093,12 +13221,12 @@ exports[`Storyshots Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-kvZOFW cheqqw"
+      className="sc-uJMKN kQfogJ"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-hqyNC edKtSq sc-sidebar"
+        className="sc-bbmXgH klJqKM sc-sidebar"
       >
         <button
           className="sc-fjdhpX bkJuHk sc-button"
@@ -13131,12 +13259,12 @@ exports[`Storyshots Sidebar Default 1`] = `
           </span>
         </button>
         <div
-          className="sc-jbKcbu kqrzQm sc-sidebar-item"
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-tachometer-alt"
@@ -13144,12 +13272,12 @@ exports[`Storyshots Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-server"
@@ -13157,12 +13285,12 @@ exports[`Storyshots Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-jbKcbu ctSykk sc-sidebar-item"
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-uJMKN jOaiZz"
+            className="sc-tilXH bnjRiv"
           >
             <i
               className="fas fa-hdd"
@@ -13226,16 +13354,16 @@ exports[`Storyshots Steppers Default 1`] = `
     Default Steppers 
   </h3>
   <div
-    className="sc-gqPbQI lnbsjh sc-steppers"
+    className="sc-GMQeP jXMCGy sc-steppers"
   >
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo jvRotx"
+          className="sc-gojNiO eroBRX"
         >
           <span>
             <i
@@ -13244,46 +13372,46 @@ exports[`Storyshots Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-exAgwC feXjwc"
+          className="sc-lkqHmb hFxJSi"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo htulUF"
+          className="sc-gojNiO fieBtQ"
         >
           <span>
             2
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-GMQeP hqDXGm"
+          className="sc-bXGyLb iuWlcD"
         >
           <button
             className="sc-fjdhpX jDaDkC sc-button"
@@ -13311,67 +13439,67 @@ exports[`Storyshots Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Workload Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             5
@@ -13379,10 +13507,10 @@ exports[`Storyshots Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Extend etcd cluster to node
         </span>
@@ -13395,16 +13523,16 @@ exports[`Storyshots Steppers Default 1`] = `
     Steppers with loading
   </h3>
   <div
-    className="sc-gqPbQI lnbsjh sc-steppers"
+    className="sc-GMQeP jXMCGy sc-steppers"
   >
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo jvRotx"
+          className="sc-gojNiO eroBRX"
         >
           <span>
             <i
@@ -13413,30 +13541,30 @@ exports[`Storyshots Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-exAgwC feXjwc"
+          className="sc-lkqHmb hFxJSi"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo htulUF"
+          className="sc-gojNiO fieBtQ"
         >
           <div
-            className="sc-gqjmRU ldDUvI sc-loader"
+            className="sc-gqjmRU cvSyVs sc-loader"
             color="#87929D"
             size="base"
           >
@@ -13561,19 +13689,19 @@ exports[`Storyshots Steppers Default 1`] = `
           </div>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-GMQeP hqDXGm"
+          className="sc-bXGyLb iuWlcD"
         >
           <button
             className="sc-fjdhpX jDaDkC sc-button"
@@ -13601,67 +13729,67 @@ exports[`Storyshots Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Workload Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             5
@@ -13669,10 +13797,10 @@ exports[`Storyshots Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Extend etcd cluster to node
         </span>
@@ -13685,16 +13813,16 @@ exports[`Storyshots Steppers Default 1`] = `
     Steppers with error
   </h3>
   <div
-    className="sc-gqPbQI lnbsjh sc-steppers"
+    className="sc-GMQeP jXMCGy sc-steppers"
   >
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo jvRotx"
+          className="sc-gojNiO eroBRX"
         >
           <span>
             <i
@@ -13703,27 +13831,27 @@ exports[`Storyshots Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-exAgwC feXjwc"
+          className="sc-lkqHmb hFxJSi"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo jvRotx"
+          className="sc-gojNiO eroBRX"
         >
           <span>
             <i
@@ -13732,46 +13860,46 @@ exports[`Storyshots Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-exAgwC feXjwc"
+          className="sc-lkqHmb hFxJSi"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Deploy Salt Minion on node
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo hJYyxS"
+          className="sc-gojNiO ipAnwI"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Workload Plane
         </span>
         <div
-          className="sc-GMQeP hqDXGm"
+          className="sc-bXGyLb iuWlcD"
         >
           <button
             className="sc-fjdhpX jDaDkC sc-button"
@@ -13799,40 +13927,40 @@ exports[`Storyshots Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-exAgwC hmMXED"
+          className="sc-lkqHmb hdLmSw"
         />
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-hORach dmVdku"
+      className="sc-exAgwC bvHQGo"
     >
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <div
-          className="sc-bAeIUo erBceZ"
+          className="sc-gojNiO bqhLnA"
         >
           <span>
             5
@@ -13840,10 +13968,10 @@ exports[`Storyshots Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-bMVAic AysHt"
+        className="sc-cQFLBn ffVKHL"
       >
         <span
-          className="sc-iujRgT fVrnQV"
+          className="sc-daURTG kUUhXB"
         >
           Extend etcd cluster to node
         </span>
@@ -13863,42 +13991,42 @@ exports[`Storyshots Tabs Default 1`] = `
     Default Tabs 
   </h3>
   <div
-    className="sc-cQFLBn iULggn sc-tabs"
+    className="sc-eLExRp ijcYAw sc-tabs"
   >
     <div
-      className="sc-gojNiO fjbDUU sc-tabs-bar"
+      className="sc-cbkKFq fyugYc sc-tabs-bar"
     >
       <div
-        className="sc-daURTG isVelv sc-tabs-item"
+        className="sc-krvtoX ecLhol sc-tabs-item"
         onClick={[Function]}
         selected={true}
       >
         <p
-          className="sc-bXGyLb jMrmzs sc-tabs-item-title"
+          className="sc-fYiAbW cuIcGm sc-tabs-item-title"
           selected={true}
         >
           Detail
         </p>
       </div>
       <div
-        className="sc-daURTG fraBWO sc-tabs-item"
+        className="sc-krvtoX djSjeE sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bXGyLb llTNsb sc-tabs-item-title"
+          className="sc-fYiAbW eyyfNd sc-tabs-item-title"
           selected={false}
         >
           Pods
         </p>
       </div>
       <div
-        className="sc-daURTG fraBWO sc-tabs-item"
+        className="sc-krvtoX djSjeE sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bXGyLb llTNsb sc-tabs-item-title"
+          className="sc-fYiAbW eyyfNd sc-tabs-item-title"
           selected={false}
         >
           Volumes
@@ -13906,7 +14034,7 @@ exports[`Storyshots Tabs Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-lkqHmb eVsqEa sc-tabs-item-content"
+      className="sc-fOKMvo jDazZw sc-tabs-item-content"
     />
   </div>
 </div>
@@ -13922,7 +14050,7 @@ exports[`Storyshots TextArea Default 1`] = `
     Text Area without label
   </h3>
   <textarea
-    className="sc-kgAjT kGgLau sc-textarea"
+    className="sc-kvZOFW gTEJfZ sc-textarea"
     cols={50}
     id="text"
     onChange={[Function]}
@@ -13935,7 +14063,7 @@ exports[`Storyshots TextArea Default 1`] = `
     Text Area disabled
   </h3>
   <textarea
-    className="sc-kgAjT kGgLau sc-textarea"
+    className="sc-kvZOFW gTEJfZ sc-textarea"
     cols={50}
     disabled={true}
     onChange={[Function]}
@@ -13951,10 +14079,10 @@ exports[`Storyshots Toggle Default 1`] = `
   className="sc-bwzfXH hyPwIk"
 >
   <div
-    className="sc-eLExRp jqbPLO sc-toggle"
+    className="sc-dUjcNx dIqnXx sc-toggle"
   >
     <label
-      className="sc-cbkKFq bApgFV"
+      className="sc-gHboQg iNVgys"
     >
       <input
         checked={false}
@@ -13968,16 +14096,16 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-krvtoX cbSWmT text"
+      className="sc-eilVRo fhyOYZ text"
     >
       Airplane Mode
     </span>
   </div>
   <div
-    className="sc-eLExRp jqbPLO sc-toggle"
+    className="sc-dUjcNx dIqnXx sc-toggle"
   >
     <label
-      className="sc-cbkKFq bApgFV"
+      className="sc-gHboQg iNVgys"
     >
       <input
         checked={true}
@@ -13991,7 +14119,7 @@ exports[`Storyshots Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-krvtoX cbSWmT text"
+      className="sc-eilVRo fhyOYZ text"
     >
       Airplane Mode
     </span>
