@@ -11,12 +11,13 @@ import { getTheme, getThemePropSelector } from "../../utils";
 type Props = {
   size?: string,
   color?: string,
-  children?: Node
+  children?: Node,
+  centered?: boolean,
 };
 
 const LoaderContainer = styled.div`
   display: flex;
-  ${props => {
+  ${(props) => {
     return css`
       font-size: ${defaultTheme.fontSize[props.size]};
       svg {
@@ -25,6 +26,15 @@ const LoaderContainer = styled.div`
         fill: ${getTheme(props).base};
       }
     `;
+  }}
+
+  ${(props) => {
+    if (props.centered)
+      return css`
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      `;
   }}
 `;
 
@@ -43,10 +53,17 @@ function Loader({
   children,
   color = defaultTheme.gray,
   size = SIZE.large,
+  centered = false,
   ...rest
 }: Props) {
   return (
-    <LoaderContainer size={size} color={color} className="sc-loader" {...rest}>
+    <LoaderContainer
+      size={size}
+      color={color}
+      centered={centered}
+      className="sc-loader"
+      {...rest}
+    >
       <LoaderTextDiv>
         <LoaderIcon />
         {children && <LoaderText> {children}</LoaderText>}
