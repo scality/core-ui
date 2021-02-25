@@ -1292,15 +1292,40 @@ exports[`Storyshots Checkbox Default 1`] = `
   <h3
     className="sc-htpNat kmOyGE"
   >
-    Checkbox disabled
+    Checkbox unchecked disabled
   </h3>
   <label
     checked={false}
-    className="sc-kGXeez gNnGeO sc-checkbox"
+    className="sc-kGXeez fwZKnO sc-checkbox"
     disabled={true}
   >
     <input
       checked={false}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
+    <span
+      className="sc-kgoBCf dPHGjr text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Checkbox checked disabled
+  </h3>
+  <label
+    checked={true}
+    className="sc-kGXeez gNnGeO sc-checkbox"
+    disabled={true}
+  >
+    <input
+      checked={true}
       disabled={true}
       onChange={[Function]}
       type="checkbox"
