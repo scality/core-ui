@@ -39,6 +39,7 @@ import StatusBar from "./components/statusbar/StatusBar.component";
 import Healthselector from "./components/healthselector/Healthselector.component";
 import ConstrainedText from "./components/constrainedtext/Constrainedtext.component";
 import EmptyState from "./components/emptystate/Emptystate.component";
+import EmptyTable from "./components/emptytable/Emptytable.component";
 
 export {
   LOADER_SIZE,
@@ -78,4 +79,5 @@ export {
   Healthselector,
   ConstrainedText,
   EmptyState,
+  EmptyTable,
 };

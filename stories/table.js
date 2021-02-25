@@ -3,6 +3,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import Table from "../src/lib/components/table/Table.component";
 import Button from "../src/lib/components/button/Button.component";
+import Emptytable from "../src/lib/components/emptytable/Emptytable.component";
 import { list } from "./data/list";
 import styled from "styled-components";
 import { Wrapper } from "./common";
@@ -118,7 +119,11 @@ const ContainerWithClassName = styled.div`
 `;
 
 const _noRowsRenderer = () => {
-  return <div className={"sc-table-noRows-override"}>No rows available</div>;
+  return (
+    <Emptytable>
+      <span>No rows available</span>
+    </Emptytable>
+  );
 };
 
 export default {
