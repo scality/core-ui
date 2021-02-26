@@ -90,8 +90,8 @@ export const navbarHeight = "47px";
 export const navbarItemWidth = "60px";
 
 //sidebar
-export const sidebarItemHeight = "50px";
-export const sidebarWidth = "60px";
+export const sidebarItemHeight = "40px";
+export const sidebarWidth = "40px";
 
 export const fontSize = {
   smaller: "10px",

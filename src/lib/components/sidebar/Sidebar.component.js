@@ -90,6 +90,7 @@ const SidebarContainer = styled.div`
     }
     height: ${defaultTheme.sidebarItemHeight};
     width: ${defaultTheme.sidebarWidth};
+    padding: 0px;
   }
 `;
 
@@ -100,7 +101,7 @@ const SidebarItem = styled.div`
   cursor: pointer;
   justify-content: flex-start;
   .fas {
-    font-size: ${defaultTheme.fontSize.large};
+    font-size: ${defaultTheme.fontSize.larger};
   }
 
   ${(props) => {
@@ -131,7 +132,7 @@ const MenuItemText = styled.div`
 
 const MenuItemSelected = styled.div`
   position: absolute;
-  width: 5px;
+  width: 3px;
   height: 100%;
   right: 0;
   background-color: ${getThemePropSelector("secondary")};
@@ -203,9 +204,7 @@ function Sidebar({
                 {(expanded || (hoverable && hovered)) && (
                   <MenuItemText>{label}</MenuItemText>
                 )}
-                {active && (expanded || (hoverable && hovered)) && (
-                  <MenuItemSelected />
-                )}
+                {active && <MenuItemSelected />}
               </SidebarItem>
             );
           },
