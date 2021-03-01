@@ -10,6 +10,32 @@ export default {
   decorators: [withKnobs],
 };
 
+
+import { storiesOf } from '@storybook/react';
+
+//create a specific story id
+storiesOf('Components/Button', module)
+  .add('Size', () => (
+    <Button
+        variant="base"
+        text="text"
+        >
+    </Button>
+  )
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const Default = () => {
   return (
     <Wrapper className="storybook-button">
