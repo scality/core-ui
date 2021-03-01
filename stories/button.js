@@ -25,17 +25,6 @@ storiesOf('Components/Button', module)
   );
 
 
-
-
-
-
-
-
-
-
-
-
-
 export const Default = () => {
   return (
     <Wrapper className="storybook-button">

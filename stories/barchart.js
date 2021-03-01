@@ -8,6 +8,12 @@ import {
   barchartData,
 } from "./data/barchart";
 
+
+import { storiesOf } from '@storybook/react';
+
+
+
+
 // props for vertical stacked bar chart
 const idVerticalStacked = "vis_vertical_stacked";
 const xAxisVerticalStacked = {
@@ -109,3 +115,23 @@ export const Default = () => {
     </Wrapper>
   );
 };
+
+
+
+//create a specific story id
+storiesOf('Components/Chart/BarChart', module)
+  .add('Example', () => (
+      <BarChart
+        id={idVerticalStacked}
+        data={verticalStackedData}
+        xAxis={xAxisVerticalStacked}
+        yAxis={yAxisVerticalStacked}
+        color={colorVerticalStacked}
+        width={width}
+        barConfig={barConfig}
+      />
+  )
+  );
+
+
+

@@ -266,3 +266,29 @@ export const Default = () => {
     </Wrapper>
   );
 };
+
+
+
+//create a specific story id
+storiesOf('Components/Chart/LineChart', module)
+  .add('Example', () => (
+      <LineChart
+        id={"id_strokedash"}
+        data={in_out_data}
+        xAxis={xAxis_inout_chart}
+        yAxis={yAxis_inout_chart}
+        color={color_inout_chart}
+        tooltip={true}
+        width={800}
+        height={250}
+        lineConfig={lineConfigInOut}
+        strokeDashEncodingConfig={strokeDashConfig_inout}
+        opacityEncodingConfig={opacityConfig_inout}
+        tooltipConfig={tooltipConfigInOut}
+        tooltipTheme={"dark"}
+      />
+  )
+  );
+
+
+

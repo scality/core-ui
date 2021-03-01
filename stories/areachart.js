@@ -3,6 +3,7 @@ import React from "react";
 import AreaChart from "../src/lib/components/areachart/AreaChart.component";
 import { area_charts } from "./data/areachart";
 import { Wrapper, Title } from "./common";
+import { storiesOf } from '@storybook/react';
 
 const xAxis_area_chart = {
   field: "time",
@@ -113,3 +114,22 @@ export const Default = () => {
     </Wrapper>
   );
 };
+
+
+//create a specific story id
+storiesOf('Components/Chart/AreaChart', module)
+  .add('Example', () => (
+      <AreaChart
+        id={id_area_chart}
+        data={area_charts}
+        xAxis={xAxis_area_chart}
+        yAxis={yAxis_area_chart}
+        color={color_area_chart}
+        areas={areas}
+      />
+  )
+  );
+
+
+
+
