@@ -1,20 +1,19 @@
 import { Meta, Story } from "@storybook/addon-docs/blocks";
-import BarChart from "../src/lib/components/barchart/BarChart.component";
-import LineChart from "../src/lib/components/linechart/LineChart.component";
-import Button from "../src/lib/components/button/Button.component";
-
+import { ChartExample } from "./mdxExampleComponents";
+import LineChart from "../../src/lib/components/linechart/LineChart.component";
+import Button from "../../src/lib/components/button/Button.component";
 
 <Meta title="Guideline/Chart" />
 
 # Charts
 
-Used mostly for monitoring-related tasks.  
+Used mostly for monitoring-related tasks.
 
 ## UI
 
 ### Tooltips
 
-Don’t depend too heavily on tooltips. They are as providing supplemental or expanded information, but shouldn’t be the only way a user can see the plotted value.  
+Don’t depend too heavily on tooltips. They are as providing supplemental or expanded information, but shouldn’t be the only way a user can see the plotted value.
 
 ### Grid lines
 
@@ -26,7 +25,7 @@ Only use grid lines when it’s helpful. Possible to use only horizontal or vert
 - Axis
 - Legend
 
-*produce an example WIP*
+_produce an example WIP_
 
 ## Type
 
@@ -39,16 +38,15 @@ Only use grid lines when it’s helpful. Possible to use only horizontal or vert
 - Should be a 100% total
 - Categories in the desc order
 
-*produce an example WIP*
+_produce an example WIP_
 
-*(Currently, there is no Pie chart in the UI)*
-
+_(Currently, there is no Pie chart in the UI)_
 
 ### Bar and column charts
 
 - should start at a baseline of zero.
 
-<Story id="components-chart-barchart--example" />
+<ChartExample />
 
 ### Line charts
 
@@ -57,14 +55,11 @@ Only use grid lines when it’s helpful. Possible to use only horizontal or vert
 
 Here, the colors for Get and List are too close.
 
-
-Components/Chart/LineChart  
+Components/Chart/LineChart
 
 <Story id="components-button--size" />
-
 
 Area charts
 
 - could be a single area, overlapping area, or stacked area
 - max 3-4 categories
-
