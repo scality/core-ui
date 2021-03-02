@@ -85,9 +85,40 @@ const TabItem = styled.div`
 `;
 
 const TabLinkItem = styled(TabItem)`
+  padding: 0px;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border-bottom: 2px solid ${getTheme(props).secondary};
+    `};
+
+  // Disabling TabItem hover to move it to <a> instead
+  &:hover {
+    border-bottom: none;
+    border-top: none;
+    cursor: pointer;
+  }
+
   a {
     color: ${getThemePropSelector("textPrimary")};
     text-decoration: none;
+    padding: 12px ${defaultTheme.padding.base};
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+
+    ${(props) => {
+      const { secondary } = getTheme(props);
+      return css`
+        &:hover {
+          border-bottom: 2px solid ${secondary};
+          border-top: 2px solid transparent;
+        }
+      `;
+    }}
   }
 `;
 
