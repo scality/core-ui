@@ -12,7 +12,7 @@ export type Props = {
   message?: string,
   variant?: Variant,
   dismissAfter?: number,
-  onDismiss?: string => void
+  onDismiss?: (string) => void,
 };
 
 const NotificationContainer = styled.div`
@@ -20,9 +20,9 @@ const NotificationContainer = styled.div`
   padding: ${defaultTheme.padding.base};
   margin-top: ${defaultTheme.padding.base};
   border-radius: 5px;
-  box-shadow: 5px 5px 15px ${defaultTheme.gray};
+  box-shadow: 0px 0px 3px ${defaultTheme.grayDarkest};
 
-  ${props => {
+  ${(props) => {
     switch (props.variant) {
       case "warning":
         return css`
@@ -49,7 +49,7 @@ const NotificationDismissProgress = styled.div`
   left: 0;
   height: 5px;
   border-radius: 5px;
-  ${props => {
+  ${(props) => {
     const brandDark = darken(0.1, getTheme(props)[props.variant || "primary"]);
     return css`
       background-color: ${brandDark};
@@ -105,7 +105,7 @@ function Notification({
           setTimeout(() => {
             setDismissProgress(dismissProgressRef.current + 1000);
             resumeTimer();
-          }, 1000)
+          }, 1000),
         );
       }
     }
