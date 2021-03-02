@@ -34,6 +34,11 @@ const TabItem = styled.div`
   flex-basis: 15%;
   flex-shrink: 1;
   text-align: center;
+  margin-right: 0.3rem;
+  background-color: ${(props) => getTheme(props).border};
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
   ${(props) => {
     return (
       !props.selected &&
@@ -49,8 +54,11 @@ const TabItem = styled.div`
 
 const TabItemTitle = styled.p`
   margin: 0;
-  font-size: ${defaultTheme.fontSize.large};
+  font-size: ${defaultTheme.fontSize.base};
   padding: ${defaultTheme.padding.base} 0 16.5px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
   ${(props) => {
     const { textPrimary, primary } = getTheme(props);
     return props.selected
@@ -67,7 +75,7 @@ const TabItemTitle = styled.p`
 const TabContent = styled.div`
   margin: 0;
   padding: ${defaultTheme.padding.larger};
-  background-color: ${props => getTheme(props).primary};
+  background-color: ${(props) => getTheme(props).primary};
 `;
 
 export default function Tab({
