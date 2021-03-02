@@ -13,7 +13,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-eqIVtm kNdZLb sc-healthselector"
   >
     <button
-      className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
+      className="sc-fjdhpX sc-kjoXOD BkRlR trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
@@ -60,7 +60,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-kjoXOD cPaimw trigger"
+          className="sc-fjdhpX sc-kjoXOD dHZzJj trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="smaller"
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-kjoXOD inGrFY trigger"
+          className="sc-fjdhpX sc-kjoXOD kzduyb trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="small"
@@ -140,7 +140,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
+          className="sc-fjdhpX sc-kjoXOD BkRlR trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="base"
@@ -184,7 +184,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-kjoXOD eSuYgR trigger"
+          className="sc-fjdhpX sc-kjoXOD hNRQvX trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="large"
@@ -224,7 +224,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-eqIVtm kNdZLb sc-healthselector"
       >
         <button
-          className="sc-fjdhpX sc-kjoXOD vJicb trigger"
+          className="sc-fjdhpX sc-kjoXOD iuELaX trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="larger"
@@ -267,7 +267,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-eqIVtm kNdZLb sc-healthselector"
   >
     <button
-      className="sc-fjdhpX sc-kjoXOD ntUVQ trigger"
+      className="sc-fjdhpX sc-kjoXOD BkRlR trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"

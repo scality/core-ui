@@ -70,7 +70,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-bXGyLb iuWlcD"
         >
           <button
-            className="sc-fjdhpX jDaDkC sc-button"
+            className="sc-fjdhpX fjyyDY sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -360,7 +360,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-bXGyLb iuWlcD"
         >
           <button
-            className="sc-fjdhpX jDaDkC sc-button"
+            className="sc-fjdhpX fjyyDY sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -558,7 +558,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-bXGyLb iuWlcD"
         >
           <button
-            className="sc-fjdhpX jDaDkC sc-button"
+            className="sc-fjdhpX fjyyDY sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

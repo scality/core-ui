@@ -153,7 +153,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      className="sc-fjdhpX hLKstG sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -201,7 +201,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      className="sc-fjdhpX hLKstG sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -249,7 +249,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      className="sc-fjdhpX hLKstG sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -297,7 +297,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      className="sc-fjdhpX hLKstG sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -350,7 +350,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Smaller
     </span>
     <button
-      className="sc-fjdhpX jzOtYS sc-chips-remove"
+      className="sc-fjdhpX cbgZEz sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="smaller"
@@ -398,7 +398,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Small
     </span>
     <button
-      className="sc-fjdhpX fPhwRq sc-chips-remove"
+      className="sc-fjdhpX xnnmy sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="small"
@@ -446,7 +446,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Base
     </span>
     <button
-      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      className="sc-fjdhpX hLKstG sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -494,7 +494,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Large
     </span>
     <button
-      className="sc-fjdhpX ghjtDU sc-chips-remove"
+      className="sc-fjdhpX bohfKz sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="large"
@@ -542,7 +542,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Larger
     </span>
     <button
-      className="sc-fjdhpX cAnAsZ sc-chips-remove"
+      className="sc-fjdhpX hsEgyx sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="larger"

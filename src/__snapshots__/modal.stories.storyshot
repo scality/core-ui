@@ -46,7 +46,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
           }
         >
           <button
-            className="sc-fjdhpX jtqeVa sc-button"
+            className="sc-fjdhpX gIfOVE sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -68,7 +68,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-fjdhpX eEcCpy sc-button"
+            className="sc-fjdhpX OWegP sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"

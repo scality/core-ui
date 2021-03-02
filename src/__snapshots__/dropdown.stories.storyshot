@@ -13,7 +13,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo iPlupz trigger"
+      className="sc-bRBYWo finca trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -21,7 +21,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="smaller"
       >
         <i
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo dNpTYF trigger"
+      className="sc-bRBYWo fPyXzF trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -54,7 +54,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="small"
       >
         <i
@@ -79,7 +79,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo kbTTuq trigger"
+      className="sc-bRBYWo dkbgAx trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -87,7 +87,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i
@@ -112,7 +112,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo WDZhK trigger"
+      className="sc-bRBYWo eSXBqc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -120,7 +120,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="large"
       >
         <i
@@ -145,7 +145,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo fcYMzN trigger"
+      className="sc-bRBYWo dNEgpI trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -153,7 +153,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="larger"
       >
         <i
@@ -183,7 +183,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo kbTTuq trigger"
+      className="sc-bRBYWo dkbgAx trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -209,7 +209,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo kbTTuq trigger"
+      className="sc-bRBYWo dkbgAx trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -239,7 +239,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo kbTTuq trigger"
+      className="sc-bRBYWo dkbgAx trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -247,7 +247,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i
@@ -272,7 +272,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo cBNplB trigger"
+      className="sc-bRBYWo kfBZhH trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -280,7 +280,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i
@@ -305,7 +305,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo bNXBzh trigger"
+      className="sc-bRBYWo iqpJYS trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -313,7 +313,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i
@@ -338,7 +338,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo jqFGgt trigger"
+      className="sc-bRBYWo glvPil trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -346,7 +346,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i
@@ -371,7 +371,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     className="sc-jlyJG hnrnwX sc-dropdown"
   >
     <div
-      className="sc-bRBYWo bbRiXk trigger"
+      className="sc-bRBYWo egzWFe trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -379,7 +379,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       tabIndex="0"
     >
       <span
-        className="sc-jzJRlG dNcaou"
+        className="sc-jzJRlG bzSlWL"
         size="base"
       >
         <i

@@ -16,7 +16,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         onClick={[Function]}
       >
         <button
-          className="sc-fjdhpX bkJuHk sc-button"
+          className="sc-fjdhpX bvOPjo sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -189,7 +189,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -197,7 +197,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -215,7 +215,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -236,7 +236,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -254,7 +254,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX bkJuHk sc-button"
+          className="sc-fjdhpX bvOPjo sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -287,7 +287,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -295,7 +295,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -465,7 +465,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -473,7 +473,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -491,7 +491,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -512,7 +512,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -530,7 +530,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX bkJuHk sc-button"
+          className="sc-fjdhpX bvOPjo sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -563,7 +563,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -571,7 +571,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -602,7 +602,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         onClick={[Function]}
       >
         <button
-          className="sc-fjdhpX bkJuHk sc-button"
+          className="sc-fjdhpX bvOPjo sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -711,7 +711,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -719,7 +719,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -737,7 +737,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -758,7 +758,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -776,7 +776,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX bkJuHk sc-button"
+          className="sc-fjdhpX bvOPjo sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -809,7 +809,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -817,7 +817,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -978,7 +978,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -986,7 +986,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i
@@ -1092,7 +1092,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-iELTvK ejqQIV"
     >
       <div
-        className="sc-cmTdod sc-jwKygS cJigiZ"
+        className="sc-cmTdod sc-jwKygS bEnWgV"
         selected={true}
       >
         <a
@@ -1102,7 +1102,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-cmTdod sc-jwKygS chbICS"
+        className="sc-cmTdod sc-jwKygS cAmTRr"
       >
         <a
           href="/users"
@@ -1111,7 +1111,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-cmTdod sc-jwKygS chbICS"
+        className="sc-cmTdod sc-jwKygS cAmTRr"
       >
         <a
           href="/policies"
@@ -1120,7 +1120,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-cmTdod sc-jwKygS chbICS"
+        className="sc-cmTdod sc-jwKygS cAmTRr"
       >
         <a
           href="/buckets"
@@ -1129,7 +1129,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-cmTdod sc-jwKygS chbICS"
+        className="sc-cmTdod sc-jwKygS cAmTRr"
       >
         <a
           href="/workflows"
@@ -1148,7 +1148,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-jlyJG hnrnwX sc-dropdown"
         >
           <div
-            className="sc-bRBYWo fcYMzN trigger"
+            className="sc-bRBYWo dNEgpI trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1156,7 +1156,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
             tabIndex="0"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="larger"
             >
               <i

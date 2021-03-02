@@ -47,7 +47,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       className="sc-fMiknA CQjH"
     >
       <button
-        className="sc-fjdhpX gZwnNg sc-button"
+        className="sc-fjdhpX hKeghL sc-button"
         disabled={false}
         onClick={[Function]}
         size="large"
@@ -61,7 +61,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
             className="sc-button-text"
           >
             <span
-              className="sc-jzJRlG dNcaou"
+              className="sc-jzJRlG bzSlWL"
               size="large"
             >
               <i
