@@ -20,7 +20,7 @@ type Props = {
   title?: string,
   type?: string,
   isLoading?: boolean,
-  onClick?: any => void
+  onClick?: (any) => void,
 };
 
 export const ButtonStyled = styled.button`
@@ -42,10 +42,10 @@ export const ButtonStyled = styled.button`
   &:focus,
   &:active {
     outline: none;
-    cursor:pointer;
+    cursor: pointer;
   }
 
-  ${props => {
+  ${(props) => {
     switch (props.size) {
       case "smaller":
         return css`
@@ -77,17 +77,32 @@ export const ButtonStyled = styled.button`
         `;
       default:
         return css`
-          padding: 9px 18px;
+          padding: 12px 16px;
           font-size: ${defaultTheme.fontSize.base};
           border-radius: 6px;
-          height: 37px;
+          height: 32px;
         `;
     }
   }}
 
-  ${props => {
+  ${(props) => {
     const brand = getTheme(props);
     const brandLight = lighten(0.1, brand[props.variant]).toString();
+
+    if (props.isLoading) {
+      return css`
+        > span {
+          display: flex;
+          .sc-loader {
+            margin: 0px ${defaultTheme.padding.smaller};
+            svg {
+              fill: ${brand.textPrimary} !important;
+            }
+          }
+        }
+      `;
+    }
+
     if (props.outlined) {
       return css`
         border-width: 1px;
@@ -139,7 +154,7 @@ export const ButtonStyled = styled.button`
     }
   }}
 
-${props => {
+${(props) => {
   const brand = getTheme(props);
   const brandLighter = lighten(0.2, brand[props.variant]).toString();
 
@@ -156,7 +171,7 @@ ${props => {
   `;
 }}
 
-${props => {
+${(props) => {
   const brand = getTheme(props);
 
   const brandLighter = lighten(0.2, brand[props.variant]).toString();
@@ -184,13 +199,12 @@ ${props => {
       : null}
   `;
 }}
-
 `;
 export const ButtonIcon = styled.span`
-  ${props =>
+  ${(props) =>
     props.text &&
     css`
-      padding-right: ${defaultTheme.padding.smaller};
+      padding-right: 8px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
