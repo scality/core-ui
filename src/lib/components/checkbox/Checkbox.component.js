@@ -66,8 +66,8 @@ const StyledCheckbox = styled.label`
   }}
 
   ${(props) => {
-    const { primary, border, secondary } = getTheme(props);
-    const iconCheckedColor = props.checked ? secondary : "transparent";
+    const { border, secondary } = getTheme(props);
+    const iconCheckedColor = props.checked ? "white" : "transparent";
 
     const checkBoxColor = props.checked ? secondary : border;
     const checkBoxColorHover = props.disabled ? checkBoxColor : secondary;
@@ -81,14 +81,14 @@ const StyledCheckbox = styled.label`
         width: 18px;
         height: 18px;
         border: 2px solid ${checkBoxColor};
-        background: ${primary};
+        background: ${checkBoxColor};
         border-radius: 4px;
       }
       i {
         position: absolute;
-        top: 3px;
-        left: 3px;
-        font-size: 16px;
+        top: 4px;
+        left: 4px;
+        font-size: 14px;
         color: ${iconCheckedColor};
       }
 
