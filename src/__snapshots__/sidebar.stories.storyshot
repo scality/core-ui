@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
+<div>
+  <h3>
+    Sidebar docked
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "55px",
+      }
+    }
+  >
+    <div
+      className="sc-uJMKN kQfogJ"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH klJqKM sc-sidebar"
+      >
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>
+    Sidebar expanded
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "150px",
+      }
+    }
+  >
+    <div
+      className="sc-uJMKN kbGcMy"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH fpfnVk sc-sidebar"
+      >
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Dashboard
+          </div>
+          <div
+            className="sc-fYxtnH cLjGlm"
+          />
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Servers
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Disks
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>
+    Sidebar with toggle
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "150px",
+      }
+    }
+  >
+    <div
+      className="sc-uJMKN kbGcMy"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH fpfnVk sc-sidebar"
+      >
+        <div
+          className="sc-tilXH bnjRiv"
+        >
+          <button
+            className="sc-fjdhpX bkJuHk sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="larger"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-kAzzGY ebaOMy"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-jzJRlG idGKfE"
+                  size="larger"
+                >
+                  <i
+                    className="fas fa-chevron-left"
+                  />
+                </span>
+                <span
+                  className="sc-cSHVUG jGeted"
+                >
+                  
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Dashboard
+          </div>
+          <div
+            className="sc-fYxtnH cLjGlm"
+          />
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Servers
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Disks
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>
+    Hoverable Sidebar
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "150px",
+      }
+    }
+  >
+    <div
+      className="sc-uJMKN kQfogJ"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH klJqKM sc-sidebar"
+      >
+        <button
+          className="sc-fjdhpX bkJuHk sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-kAzzGY ebaOMy"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-jzJRlG idGKfE"
+                size="larger"
+              >
+                <i
+                  className="fas fa-chevron-right"
+                />
+              </span>
+              <span
+                className="sc-cSHVUG jGeted"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

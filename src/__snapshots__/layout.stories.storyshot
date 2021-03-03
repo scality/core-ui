@@ -1,0 +1,1709 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
+<div
+  className="sc-elJkPf dsZFnF sc-layout"
+>
+  <div
+    className="sc-kafWEX kbouyE sc-navbar"
+  >
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-bYSBpT gXxIVy sc-logo"
+        >
+          <svg
+            height="49"
+            viewBox="0 0 186 49"
+            width="186"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71z"
+              fill="#fff"
+            />
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM143.72 36.67c0 .53-.19.71-.73.71h-2.36c-.45 0-.63-.27-.63-.71V12.8c0-.53.09-.8.63-.8h2.36c.54 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71zM175.53 23.76l5.71-11.05c.18-.36.36-.71.82-.71h2.35c.55 0 .82.27.55.71l-7.53 14.59v9.37c0 .44-.18.71-.72.71h-2.36c-.54 0-.63-.27-.63-.71V27.3l-7.61-14.59c-.28-.44 0-.71.54-.71h2.27c.54 0 .63.27.9.71zM110.76 12c.45 0 .73.27.91.71l7.43 23.96c.18.44 0 .71-.54.71h-2.45c-.45 0-.73-.27-.82-.71l-1.72-5.75h-7.97l-1.73 5.75c-.09.44-.36.71-.81.71h-2.45c-.54 0-.72-.27-.54-.71l7.43-23.96c.18-.44.45-.71.91-.71zm-1.18 5.48l-3.17 10.61h6.25z"
+              fill="#fff"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#3d9bd6"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#007664"
+            />
+            <path
+              d="M21.16 44.25V37h3.99v7.25l5.16-2.92 2 3.36-5.17 2.92a7.9 7.9 0 0 1-7.88 0L14 44.69l1.99-3.36z"
+              fill="#ee4642"
+            />
+            <path
+              d="M40.43 13.28L34 16.9l1.99 3.36 6.44-3.62v5.83h3.99v-5.92c0-1.33-.37-2.65-1.09-3.8a8.82 8.82 0 0 0-2.9-2.83L37.17 7l-1.99 3.36z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M4.99 32.84l6.43-3.63 2 3.36-6.44 3.63 5.17 2.91-2 3.36-5.25-2.92a7.6 7.6 0 0 1-2.81-2.82A7.1 7.1 0 0 1 1 32.92V27h3.99z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M4.08 16.64l6.43 3.62 2-3.36-6.44-3.62 5.17-2.92-2-3.36-5.25 2.92a8.72 8.72 0 0 0-2.9 2.83A7.16 7.16 0 0 0 0 16.64v5.92h3.99z"
+              fill="#9e2569"
+            />
+            <path
+              d="M40.34 36.2L34 32.57l1.99-3.36 6.44 3.63V27h3.99v5.92c0 1.33-.37 2.57-1.09 3.81a8.69 8.69 0 0 1-2.9 2.82l-5.26 2.92-1.99-3.36z"
+              fill="#f79836"
+            />
+            <path
+              d="M24 15v8.22l7.34-4.06z"
+              fill="#007664"
+            />
+            <path
+              d="M23.25 15L16 19.16l7.25 4.06z"
+              fill="#9e2569"
+            />
+            <path
+              d="M22.25 25.07L15 21v8.13z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M24 24.98l7.25 4.07V21z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M23.16 26L16 30.07l7.16 4.15z"
+              fill="#ee4642"
+            />
+            <path
+              d="M24 26v8.22l7.25-4.15z"
+              fill="#f79836"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <h1
+          className="sc-lhVmIH dRlcpE"
+        >
+          Harware UI
+        </h1>
+      </div>
+    </div>
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              FR
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-th"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-question-circle"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-user"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              Carlito
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-jtRfpW DPCey"
+  >
+    <div
+      className="sc-uJMKN kQfogJ"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH klJqKM sc-sidebar"
+      >
+        <button
+          className="sc-fjdhpX bkJuHk sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
+        >
+          <span
+            className="sc-kAzzGY ebaOMy"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-jzJRlG idGKfE"
+                size="larger"
+              >
+                <i
+                  className="fas fa-chevron-right"
+                />
+              </span>
+              <span
+                className="sc-cSHVUG jGeted"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          data-cy="Dashboard"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Servers"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Disks"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-kTUwUJ cKXLve main"
+    >
+      <div
+        className="sc-gqjmRU kKEJsW sc-loader"
+        color="#87929D"
+        size="massive"
+      >
+        <span
+          className="sc-jTzLTM hkxQjq"
+        >
+          <svg
+            height="50"
+            version="1.1"
+            viewBox="0 0 56 56"
+            width="50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              className="container"
+            >
+              <path
+                className="svg_3"
+                d="M25.80000004768371,5.250000393390657 v8.2 H30.200000047683716 V5.1500003933906555 l5.7,3.3 l2.2,-3.8 l-5.8,-3.3 c-1.3,-0.8 -2.8,-1.1 -4.4,-1.1 c-1.5,0 -3,0.4 -4.3,1.2 l-5.8,3.3 l2.2,3.8 L25.80000004768371,5.250000393390657 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_5"
+                d="M46.60000004768372,14.650000393390656 l-7.1,4.1 l2.2,3.8 l7.1,-4.1 l0,6.6 l4.4,0 l0,-6.7 c0,-1.5 -0.4,-3 -1.2,-4.3 c-0.8,-1.3 -1.9,-2.4 -3.2,-3.2 l-5.8,-3.3 l-2.2,3.8 L46.60000004768372,14.650000393390656 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.3s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_8"
+                d="M46.60000004768372,41.25000039339065 L39.60000004768372,37.150000393390656 l2.2,-3.8 l7.1,4.1 l0,-6.6 l4.4,0 l0,6.7 c0,1.5 -0.4,2.9 -1.2,4.3 c-0.8,1.3 -1.9,2.4 -3.2,3.2 l-5.8,3.3 l-2.2,-3.8 L46.60000004768372,41.25000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.55s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_4"
+                d="M25.80000004768371,50.75000039339065 v-8.2 H30.200000047683716 v8.2 l5.7,-3.3 l2.2,3.8 l-5.7,3.3 c-1.3,0.8 -2.9,1.2 -4.4,1.2 c-1.5,0 -3,-0.4 -4.3,-1.2 l-5.8,-3.3 l2.2,-3.8 L25.80000004768371,50.75000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.75s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_6"
+                d="M7.2000000476837185,37.45000039339065 l7.1,-4.1 l2.2,3.8 l-7.1,4.1 l5.7,3.3 l-2.2,3.8 l-5.8,-3.3 c-1.3,-0.8 -2.4,-1.9 -3.1,-3.2 c-0.8,-1.3 -1.2,-2.8 -1.2,-4.3 l0,-6.7 l4.4,0 L7.2000000476837185,37.45000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.85s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_7"
+                d="M7.2000000476837185,18.550000393390654 l7.1,4.1 l2.2,-3.8 l-7.1,-4.1 l5.7,-3.3 l-2.2,-3.8 l-5.8,3.3 c-1.3,0.8 -2.4,1.9 -3.2,3.2 c-0.8,1.3 -1.2,2.8 -1.2,4.4 l0,6.7 l4.4,0 L7.2000000476837185,18.550000393390654 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.9"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <polygon
+                className="svg_9"
+                points="28.60000228881836,17.649999976158142 28.60000228881836,26.950003027915955 36.70000076293945,22.34999692440033 "
+              />
+              <polygon
+                className="svg_10"
+                points="27.39999771118164,17.649999976158142 19.39999771118164,22.34999692440033 27.39999771118164,26.950003027915955 "
+              />
+              <polygon
+                className="svg_11"
+                points="26.89999771118164,27.950003027915955 18.89999771118164,23.34999692440033 18.89999771118164,32.55000340938568 "
+              />
+              <polygon
+                className="svg_12"
+                points="29.200000762939453,27.950003027915955 37.20000076293945,32.55000340938568 37.20000076293945,23.450003027915955 "
+              />
+              <polygon
+                className="svg_13"
+                points="27.39999771118164,29.05000150203705 19.500003814697266,33.650001883506775 27.39999771118164,38.34999883174896 "
+              />
+              <polygon
+                className="svg_14"
+                points="28.60000228881836,29.05000150203705 28.60000228881836,38.34999883174896 36.60000228881836,33.650001883506775 "
+              />
+            </g>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
+<div
+  className="sc-elJkPf dsZFnF sc-layout"
+>
+  <div
+    className="sc-kafWEX kbouyE sc-navbar"
+  >
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+        onClick={[Function]}
+      >
+        <button
+          className="sc-fjdhpX bkJuHk sc-button"
+          disabled={false}
+          size="larger"
+          title="Main Menu"
+          type="button"
+        >
+          <span
+            className="sc-kAzzGY ebaOMy"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-jzJRlG idGKfE"
+                size="larger"
+              >
+                <i
+                  className="fas fa-bars"
+                />
+              </span>
+              <span
+                className="sc-cSHVUG jGeted"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-bYSBpT gXxIVy sc-logo"
+        >
+          <svg
+            height="49"
+            viewBox="0 0 186 49"
+            width="186"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71z"
+              fill="#fff"
+            />
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM143.72 36.67c0 .53-.19.71-.73.71h-2.36c-.45 0-.63-.27-.63-.71V12.8c0-.53.09-.8.63-.8h2.36c.54 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71zM175.53 23.76l5.71-11.05c.18-.36.36-.71.82-.71h2.35c.55 0 .82.27.55.71l-7.53 14.59v9.37c0 .44-.18.71-.72.71h-2.36c-.54 0-.63-.27-.63-.71V27.3l-7.61-14.59c-.28-.44 0-.71.54-.71h2.27c.54 0 .63.27.9.71zM110.76 12c.45 0 .73.27.91.71l7.43 23.96c.18.44 0 .71-.54.71h-2.45c-.45 0-.73-.27-.82-.71l-1.72-5.75h-7.97l-1.73 5.75c-.09.44-.36.71-.81.71h-2.45c-.54 0-.72-.27-.54-.71l7.43-23.96c.18-.44.45-.71.91-.71zm-1.18 5.48l-3.17 10.61h6.25z"
+              fill="#fff"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#3d9bd6"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#007664"
+            />
+            <path
+              d="M21.16 44.25V37h3.99v7.25l5.16-2.92 2 3.36-5.17 2.92a7.9 7.9 0 0 1-7.88 0L14 44.69l1.99-3.36z"
+              fill="#ee4642"
+            />
+            <path
+              d="M40.43 13.28L34 16.9l1.99 3.36 6.44-3.62v5.83h3.99v-5.92c0-1.33-.37-2.65-1.09-3.8a8.82 8.82 0 0 0-2.9-2.83L37.17 7l-1.99 3.36z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M4.99 32.84l6.43-3.63 2 3.36-6.44 3.63 5.17 2.91-2 3.36-5.25-2.92a7.6 7.6 0 0 1-2.81-2.82A7.1 7.1 0 0 1 1 32.92V27h3.99z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M4.08 16.64l6.43 3.62 2-3.36-6.44-3.62 5.17-2.92-2-3.36-5.25 2.92a8.72 8.72 0 0 0-2.9 2.83A7.16 7.16 0 0 0 0 16.64v5.92h3.99z"
+              fill="#9e2569"
+            />
+            <path
+              d="M40.34 36.2L34 32.57l1.99-3.36 6.44 3.63V27h3.99v5.92c0 1.33-.37 2.57-1.09 3.81a8.69 8.69 0 0 1-2.9 2.82l-5.26 2.92-1.99-3.36z"
+              fill="#f79836"
+            />
+            <path
+              d="M24 15v8.22l7.34-4.06z"
+              fill="#007664"
+            />
+            <path
+              d="M23.25 15L16 19.16l7.25 4.06z"
+              fill="#9e2569"
+            />
+            <path
+              d="M22.25 25.07L15 21v8.13z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M24 24.98l7.25 4.07V21z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M23.16 26L16 30.07l7.16 4.15z"
+              fill="#ee4642"
+            />
+            <path
+              d="M24 26v8.22l7.25-4.15z"
+              fill="#f79836"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <h1
+          className="sc-lhVmIH dRlcpE"
+        >
+          Harware UI
+        </h1>
+      </div>
+    </div>
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              FR
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-th"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-question-circle"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-user"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              Carlito
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-jtRfpW DPCey"
+  >
+    <div
+      className="sc-uJMKN kQfogJ"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH klJqKM sc-sidebar"
+      >
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          data-cy="Dashboard"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Servers"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Disks"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-kTUwUJ cKXLve main"
+    >
+      <div
+        className="sc-gqjmRU kKEJsW sc-loader"
+        color="#87929D"
+        size="massive"
+      >
+        <span
+          className="sc-jTzLTM hkxQjq"
+        >
+          <svg
+            height="50"
+            version="1.1"
+            viewBox="0 0 56 56"
+            width="50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              className="container"
+            >
+              <path
+                className="svg_3"
+                d="M25.80000004768371,5.250000393390657 v8.2 H30.200000047683716 V5.1500003933906555 l5.7,3.3 l2.2,-3.8 l-5.8,-3.3 c-1.3,-0.8 -2.8,-1.1 -4.4,-1.1 c-1.5,0 -3,0.4 -4.3,1.2 l-5.8,3.3 l2.2,3.8 L25.80000004768371,5.250000393390657 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_5"
+                d="M46.60000004768372,14.650000393390656 l-7.1,4.1 l2.2,3.8 l7.1,-4.1 l0,6.6 l4.4,0 l0,-6.7 c0,-1.5 -0.4,-3 -1.2,-4.3 c-0.8,-1.3 -1.9,-2.4 -3.2,-3.2 l-5.8,-3.3 l-2.2,3.8 L46.60000004768372,14.650000393390656 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.3s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_8"
+                d="M46.60000004768372,41.25000039339065 L39.60000004768372,37.150000393390656 l2.2,-3.8 l7.1,4.1 l0,-6.6 l4.4,0 l0,6.7 c0,1.5 -0.4,2.9 -1.2,4.3 c-0.8,1.3 -1.9,2.4 -3.2,3.2 l-5.8,3.3 l-2.2,-3.8 L46.60000004768372,41.25000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.55s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_4"
+                d="M25.80000004768371,50.75000039339065 v-8.2 H30.200000047683716 v8.2 l5.7,-3.3 l2.2,3.8 l-5.7,3.3 c-1.3,0.8 -2.9,1.2 -4.4,1.2 c-1.5,0 -3,-0.4 -4.3,-1.2 l-5.8,-3.3 l2.2,-3.8 L25.80000004768371,50.75000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.75s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_6"
+                d="M7.2000000476837185,37.45000039339065 l7.1,-4.1 l2.2,3.8 l-7.1,4.1 l5.7,3.3 l-2.2,3.8 l-5.8,-3.3 c-1.3,-0.8 -2.4,-1.9 -3.1,-3.2 c-0.8,-1.3 -1.2,-2.8 -1.2,-4.3 l0,-6.7 l4.4,0 L7.2000000476837185,37.45000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.85s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_7"
+                d="M7.2000000476837185,18.550000393390654 l7.1,4.1 l2.2,-3.8 l-7.1,-4.1 l5.7,-3.3 l-2.2,-3.8 l-5.8,3.3 c-1.3,0.8 -2.4,1.9 -3.2,3.2 c-0.8,1.3 -1.2,2.8 -1.2,4.4 l0,6.7 l4.4,0 L7.2000000476837185,18.550000393390654 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.9"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <polygon
+                className="svg_9"
+                points="28.60000228881836,17.649999976158142 28.60000228881836,26.950003027915955 36.70000076293945,22.34999692440033 "
+              />
+              <polygon
+                className="svg_10"
+                points="27.39999771118164,17.649999976158142 19.39999771118164,22.34999692440033 27.39999771118164,26.950003027915955 "
+              />
+              <polygon
+                className="svg_11"
+                points="26.89999771118164,27.950003027915955 18.89999771118164,23.34999692440033 18.89999771118164,32.55000340938568 "
+              />
+              <polygon
+                className="svg_12"
+                points="29.200000762939453,27.950003027915955 37.20000076293945,32.55000340938568 37.20000076293945,23.450003027915955 "
+              />
+              <polygon
+                className="svg_13"
+                points="27.39999771118164,29.05000150203705 19.500003814697266,33.650001883506775 27.39999771118164,38.34999883174896 "
+              />
+              <polygon
+                className="svg_14"
+                points="28.60000228881836,29.05000150203705 28.60000228881836,38.34999883174896 36.60000228881836,33.650001883506775 "
+              />
+            </g>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
+<div
+  className="sc-elJkPf dsZFnF sc-layout"
+>
+  <div
+    className="sc-kafWEX kbouyE sc-navbar"
+  >
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+        onClick={[Function]}
+      >
+        <button
+          className="sc-fjdhpX bkJuHk sc-button"
+          disabled={false}
+          size="larger"
+          title="Main Menu"
+          type="button"
+        >
+          <span
+            className="sc-kAzzGY ebaOMy"
+          >
+            <span
+              className="sc-button-text"
+            >
+              <span
+                className="sc-jzJRlG idGKfE"
+                size="larger"
+              >
+                <i
+                  className="fas fa-bars"
+                />
+              </span>
+              <span
+                className="sc-cSHVUG jGeted"
+              >
+                
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-bYSBpT gXxIVy sc-logo"
+        >
+          <svg
+            height="49"
+            viewBox="0 0 186 49"
+            width="186"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71z"
+              fill="#fff"
+            />
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM143.72 36.67c0 .53-.19.71-.73.71h-2.36c-.45 0-.63-.27-.63-.71V12.8c0-.53.09-.8.63-.8h2.36c.54 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71zM175.53 23.76l5.71-11.05c.18-.36.36-.71.82-.71h2.35c.55 0 .82.27.55.71l-7.53 14.59v9.37c0 .44-.18.71-.72.71h-2.36c-.54 0-.63-.27-.63-.71V27.3l-7.61-14.59c-.28-.44 0-.71.54-.71h2.27c.54 0 .63.27.9.71zM110.76 12c.45 0 .73.27.91.71l7.43 23.96c.18.44 0 .71-.54.71h-2.45c-.45 0-.73-.27-.82-.71l-1.72-5.75h-7.97l-1.73 5.75c-.09.44-.36.71-.81.71h-2.45c-.54 0-.72-.27-.54-.71l7.43-23.96c.18-.44.45-.71.91-.71zm-1.18 5.48l-3.17 10.61h6.25z"
+              fill="#fff"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#3d9bd6"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#007664"
+            />
+            <path
+              d="M21.16 44.25V37h3.99v7.25l5.16-2.92 2 3.36-5.17 2.92a7.9 7.9 0 0 1-7.88 0L14 44.69l1.99-3.36z"
+              fill="#ee4642"
+            />
+            <path
+              d="M40.43 13.28L34 16.9l1.99 3.36 6.44-3.62v5.83h3.99v-5.92c0-1.33-.37-2.65-1.09-3.8a8.82 8.82 0 0 0-2.9-2.83L37.17 7l-1.99 3.36z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M4.99 32.84l6.43-3.63 2 3.36-6.44 3.63 5.17 2.91-2 3.36-5.25-2.92a7.6 7.6 0 0 1-2.81-2.82A7.1 7.1 0 0 1 1 32.92V27h3.99z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M4.08 16.64l6.43 3.62 2-3.36-6.44-3.62 5.17-2.92-2-3.36-5.25 2.92a8.72 8.72 0 0 0-2.9 2.83A7.16 7.16 0 0 0 0 16.64v5.92h3.99z"
+              fill="#9e2569"
+            />
+            <path
+              d="M40.34 36.2L34 32.57l1.99-3.36 6.44 3.63V27h3.99v5.92c0 1.33-.37 2.57-1.09 3.81a8.69 8.69 0 0 1-2.9 2.82l-5.26 2.92-1.99-3.36z"
+              fill="#f79836"
+            />
+            <path
+              d="M24 15v8.22l7.34-4.06z"
+              fill="#007664"
+            />
+            <path
+              d="M23.25 15L16 19.16l7.25 4.06z"
+              fill="#9e2569"
+            />
+            <path
+              d="M22.25 25.07L15 21v8.13z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M24 24.98l7.25 4.07V21z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M23.16 26L16 30.07l7.16 4.15z"
+              fill="#ee4642"
+            />
+            <path
+              d="M24 26v8.22l7.25-4.15z"
+              fill="#f79836"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <h1
+          className="sc-lhVmIH dRlcpE"
+        >
+          Harware UI
+        </h1>
+      </div>
+    </div>
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              FR
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-th"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-question-circle"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-user"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              Carlito
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-jtRfpW DPCey"
+  >
+    <div
+      className="sc-uJMKN kbGcMy"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH fpfnVk sc-sidebar"
+      >
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          data-cy="Dashboard"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Dashboard
+          </div>
+          <div
+            className="sc-fYxtnH cLjGlm"
+          />
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Servers"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Servers
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Disks"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Disks
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-kTUwUJ cKXLve main"
+    >
+      <div
+        className="sc-gqjmRU kKEJsW sc-loader"
+        color="#87929D"
+        size="massive"
+      >
+        <span
+          className="sc-jTzLTM hkxQjq"
+        >
+          <svg
+            height="50"
+            version="1.1"
+            viewBox="0 0 56 56"
+            width="50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              className="container"
+            >
+              <path
+                className="svg_3"
+                d="M25.80000004768371,5.250000393390657 v8.2 H30.200000047683716 V5.1500003933906555 l5.7,3.3 l2.2,-3.8 l-5.8,-3.3 c-1.3,-0.8 -2.8,-1.1 -4.4,-1.1 c-1.5,0 -3,0.4 -4.3,1.2 l-5.8,3.3 l2.2,3.8 L25.80000004768371,5.250000393390657 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_5"
+                d="M46.60000004768372,14.650000393390656 l-7.1,4.1 l2.2,3.8 l7.1,-4.1 l0,6.6 l4.4,0 l0,-6.7 c0,-1.5 -0.4,-3 -1.2,-4.3 c-0.8,-1.3 -1.9,-2.4 -3.2,-3.2 l-5.8,-3.3 l-2.2,3.8 L46.60000004768372,14.650000393390656 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.3s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_8"
+                d="M46.60000004768372,41.25000039339065 L39.60000004768372,37.150000393390656 l2.2,-3.8 l7.1,4.1 l0,-6.6 l4.4,0 l0,6.7 c0,1.5 -0.4,2.9 -1.2,4.3 c-0.8,1.3 -1.9,2.4 -3.2,3.2 l-5.8,3.3 l-2.2,-3.8 L46.60000004768372,41.25000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.55s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_4"
+                d="M25.80000004768371,50.75000039339065 v-8.2 H30.200000047683716 v8.2 l5.7,-3.3 l2.2,3.8 l-5.7,3.3 c-1.3,0.8 -2.9,1.2 -4.4,1.2 c-1.5,0 -3,-0.4 -4.3,-1.2 l-5.8,-3.3 l2.2,-3.8 L25.80000004768371,50.75000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.75s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_6"
+                d="M7.2000000476837185,37.45000039339065 l7.1,-4.1 l2.2,3.8 l-7.1,4.1 l5.7,3.3 l-2.2,3.8 l-5.8,-3.3 c-1.3,-0.8 -2.4,-1.9 -3.1,-3.2 c-0.8,-1.3 -1.2,-2.8 -1.2,-4.3 l0,-6.7 l4.4,0 L7.2000000476837185,37.45000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.85s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_7"
+                d="M7.2000000476837185,18.550000393390654 l7.1,4.1 l2.2,-3.8 l-7.1,-4.1 l5.7,-3.3 l-2.2,-3.8 l-5.8,3.3 c-1.3,0.8 -2.4,1.9 -3.2,3.2 c-0.8,1.3 -1.2,2.8 -1.2,4.4 l0,6.7 l4.4,0 L7.2000000476837185,18.550000393390654 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.9"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <polygon
+                className="svg_9"
+                points="28.60000228881836,17.649999976158142 28.60000228881836,26.950003027915955 36.70000076293945,22.34999692440033 "
+              />
+              <polygon
+                className="svg_10"
+                points="27.39999771118164,17.649999976158142 19.39999771118164,22.34999692440033 27.39999771118164,26.950003027915955 "
+              />
+              <polygon
+                className="svg_11"
+                points="26.89999771118164,27.950003027915955 18.89999771118164,23.34999692440033 18.89999771118164,32.55000340938568 "
+              />
+              <polygon
+                className="svg_12"
+                points="29.200000762939453,27.950003027915955 37.20000076293945,32.55000340938568 37.20000076293945,23.450003027915955 "
+              />
+              <polygon
+                className="svg_13"
+                points="27.39999771118164,29.05000150203705 19.500003814697266,33.650001883506775 27.39999771118164,38.34999883174896 "
+              />
+              <polygon
+                className="svg_14"
+                points="28.60000228881836,29.05000150203705 28.60000228881836,38.34999883174896 36.60000228881836,33.650001883506775 "
+              />
+            </g>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
+<div
+  className="sc-elJkPf dsZFnF sc-layout"
+>
+  <div
+    className="sc-kafWEX kbouyE sc-navbar"
+  >
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-bYSBpT gXxIVy sc-logo"
+        >
+          <svg
+            height="49"
+            viewBox="0 0 186 49"
+            width="186"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71z"
+              fill="#fff"
+            />
+            <path
+              d="M72.23 18.19c0-2.03-1.18-3.18-4.53-3.18-3.35 0-4.53 1.15-4.53 3.18v.71c0 1.68 1.09 2.21 1.9 2.47l6.98 2.57c2.27.88 4.17 2.29 4.17 5.04v3.09c0 3.09-2.27 5.75-8.61 5.75-6.43 0-8.61-2.66-8.61-5.75v-2.03c0-.53.27-.71.82-.71h2.26c.45 0 .64.18.64.71v1.68c0 2.03 1.45 3.18 4.89 3.18 3.44 0 4.89-1.15 4.89-3.18v-1.77c0-1.86-1.72-2.48-3.17-3.1l-6.43-2.38a4.98 4.98 0 0 1-3.36-4.6v-2.12c0-3.1 2-5.75 8.16-5.75 6.25 0 8.25 2.65 8.25 5.75v1.68c0 .44-.18.7-.64.7h-2.26c-.55 0-.82-.17-.82-.7zM97.04 32.16c0 3.09-1.91 5.75-8.52 5.75-6.62 0-8.52-2.66-8.52-5.75V17.75c0-3.1 1.9-5.75 8.52-5.75 6.61 0 8.52 2.65 8.52 5.75v1.85c0 .53-.18.71-.73.71h-2.17c-.55 0-.82-.18-.82-.71v-1.23c0-2.04-1.36-3.28-4.8-3.28-3.44 0-4.8 1.24-4.8 3.28v13.26c0 2.03 1.36 3.27 4.8 3.27 3.44 0 4.8-1.24 4.8-3.27v-1.77c0-.44.27-.71.82-.71h2.17c.46 0 .73.27.73.71zM125.81 34.28h9.78c.46 0 .82.18.82.71v1.68c0 .53-.36.71-.82.71h-12.96c-.45 0-.63-.27-.63-.71V12.8c0-.53.18-.8.73-.8h2.35c.45 0 .73.27.73.8zM143.72 36.67c0 .53-.19.71-.73.71h-2.36c-.45 0-.63-.27-.63-.71V12.8c0-.53.09-.8.63-.8h2.36c.54 0 .73.27.73.8zM164.58 12c.46 0 .64.18.64.71v1.68c0 .53-.09.7-.64.7h-5.98v21.58c0 .53-.27.71-.81.71h-2.36c-.45 0-.81-.27-.81-.71V15.09h-5.99c-.54 0-.63-.17-.63-.7v-1.68c0-.53.09-.71.63-.71zM175.53 23.76l5.71-11.05c.18-.36.36-.71.82-.71h2.35c.55 0 .82.27.55.71l-7.53 14.59v9.37c0 .44-.18.71-.72.71h-2.36c-.54 0-.63-.27-.63-.71V27.3l-7.61-14.59c-.28-.44 0-.71.54-.71h2.27c.54 0 .63.27.9.71zM110.76 12c.45 0 .73.27.91.71l7.43 23.96c.18.44 0 .71-.54.71h-2.45c-.45 0-.73-.27-.82-.71l-1.72-5.75h-7.97l-1.73 5.75c-.09.44-.36.71-.81.71h-2.45c-.54 0-.72-.27-.54-.71l7.43-23.96c.18-.44.45-.71.91-.71zm-1.18 5.48l-3.17 10.61h6.25z"
+              fill="#fff"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#3d9bd6"
+            />
+            <path
+              d="M21.25 4.42v7.25h3.99V4.33l5.16 2.92 2-3.36L27.14.97A7.7 7.7 0 0 0 23.15 0c-1.36 0-2.72.35-3.89 1.06L14 3.98l1.99 3.36z"
+              fill="#007664"
+            />
+            <path
+              d="M21.16 44.25V37h3.99v7.25l5.16-2.92 2 3.36-5.17 2.92a7.9 7.9 0 0 1-7.88 0L14 44.69l1.99-3.36z"
+              fill="#ee4642"
+            />
+            <path
+              d="M40.43 13.28L34 16.9l1.99 3.36 6.44-3.62v5.83h3.99v-5.92c0-1.33-.37-2.65-1.09-3.8a8.82 8.82 0 0 0-2.9-2.83L37.17 7l-1.99 3.36z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M4.99 32.84l6.43-3.63 2 3.36-6.44 3.63 5.17 2.91-2 3.36-5.25-2.92a7.6 7.6 0 0 1-2.81-2.82A7.1 7.1 0 0 1 1 32.92V27h3.99z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M4.08 16.64l6.43 3.62 2-3.36-6.44-3.62 5.17-2.92-2-3.36-5.25 2.92a8.72 8.72 0 0 0-2.9 2.83A7.16 7.16 0 0 0 0 16.64v5.92h3.99z"
+              fill="#9e2569"
+            />
+            <path
+              d="M40.34 36.2L34 32.57l1.99-3.36 6.44 3.63V27h3.99v5.92c0 1.33-.37 2.57-1.09 3.81a8.69 8.69 0 0 1-2.9 2.82l-5.26 2.92-1.99-3.36z"
+              fill="#f79836"
+            />
+            <path
+              d="M24 15v8.22l7.34-4.06z"
+              fill="#007664"
+            />
+            <path
+              d="M23.25 15L16 19.16l7.25 4.06z"
+              fill="#9e2569"
+            />
+            <path
+              d="M22.25 25.07L15 21v8.13z"
+              fill="#d71d4f"
+            />
+            <path
+              d="M24 24.98l7.25 4.07V21z"
+              fill="#2aad8e"
+            />
+            <path
+              d="M23.16 26L16 30.07l7.16 4.15z"
+              fill="#ee4642"
+            />
+            <path
+              d="M24 26v8.22l7.25-4.15z"
+              fill="#f79836"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <h1
+          className="sc-lhVmIH dRlcpE"
+        >
+          Harware UI
+        </h1>
+      </div>
+    </div>
+    <div
+      className="sc-feJyhm EbppY"
+    >
+      <div
+        className="sc-btzYZH jasLoq"
+      >
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-globe"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              FR
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-th"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG idGKfE"
+              size="larger"
+            >
+              <i
+                className="fas fa-question-circle"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          className="sc-jlyJG hnrnwX sc-dropdown"
+        >
+          <div
+            className="sc-bRBYWo fcYMzN trigger"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            size="larger"
+            tabIndex="0"
+          >
+            <span
+              className="sc-jzJRlG dNcaou"
+              size="larger"
+            >
+              <i
+                className="fas fa-user"
+              />
+            </span>
+            <span
+              className="sc-cSHVUG jGeted sc-trigger-text"
+            >
+              Carlito
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-jtRfpW DPCey"
+  >
+    <div
+      className="sc-uJMKN kbGcMy"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-bbmXgH fpfnVk sc-sidebar"
+      >
+        <div
+          className="sc-tilXH bnjRiv"
+        >
+          <button
+            className="sc-fjdhpX bkJuHk sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="larger"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-kAzzGY ebaOMy"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-jzJRlG idGKfE"
+                  size="larger"
+                >
+                  <i
+                    className="fas fa-chevron-left"
+                  />
+                </span>
+                <span
+                  className="sc-cSHVUG jGeted"
+                >
+                  
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div
+          className="sc-gGBfsJ eWguid sc-sidebar-item"
+          data-cy="Dashboard"
+          onClick={[Function]}
+          title="Dashboard"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-tachometer-alt"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Dashboard
+          </div>
+          <div
+            className="sc-fYxtnH cLjGlm"
+          />
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Servers"
+          onClick={[Function]}
+          title="Servers"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-server"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Servers
+          </div>
+        </div>
+        <div
+          className="sc-gGBfsJ cOfOmm sc-sidebar-item"
+          data-cy="Disks"
+          onClick={[Function]}
+          title="Disks"
+        >
+          <div
+            className="sc-tilXH bnjRiv"
+          >
+            <i
+              className="fas fa-hdd"
+            />
+          </div>
+          <div
+            className="sc-jnlKLf kzhJck"
+          >
+            Disks
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-kTUwUJ cKXLve main"
+    >
+      <div
+        className="sc-gqjmRU kKEJsW sc-loader"
+        color="#87929D"
+        size="massive"
+      >
+        <span
+          className="sc-jTzLTM hkxQjq"
+        >
+          <svg
+            height="50"
+            version="1.1"
+            viewBox="0 0 56 56"
+            width="50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              className="container"
+            >
+              <path
+                className="svg_3"
+                d="M25.80000004768371,5.250000393390657 v8.2 H30.200000047683716 V5.1500003933906555 l5.7,3.3 l2.2,-3.8 l-5.8,-3.3 c-1.3,-0.8 -2.8,-1.1 -4.4,-1.1 c-1.5,0 -3,0.4 -4.3,1.2 l-5.8,3.3 l2.2,3.8 L25.80000004768371,5.250000393390657 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_5"
+                d="M46.60000004768372,14.650000393390656 l-7.1,4.1 l2.2,3.8 l7.1,-4.1 l0,6.6 l4.4,0 l0,-6.7 c0,-1.5 -0.4,-3 -1.2,-4.3 c-0.8,-1.3 -1.9,-2.4 -3.2,-3.2 l-5.8,-3.3 l-2.2,3.8 L46.60000004768372,14.650000393390656 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.3s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_8"
+                d="M46.60000004768372,41.25000039339065 L39.60000004768372,37.150000393390656 l2.2,-3.8 l7.1,4.1 l0,-6.6 l4.4,0 l0,6.7 c0,1.5 -0.4,2.9 -1.2,4.3 c-0.8,1.3 -1.9,2.4 -3.2,3.2 l-5.8,3.3 l-2.2,-3.8 L46.60000004768372,41.25000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.55s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_4"
+                d="M25.80000004768371,50.75000039339065 v-8.2 H30.200000047683716 v8.2 l5.7,-3.3 l2.2,3.8 l-5.7,3.3 c-1.3,0.8 -2.9,1.2 -4.4,1.2 c-1.5,0 -3,-0.4 -4.3,-1.2 l-5.8,-3.3 l2.2,-3.8 L25.80000004768371,50.75000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.75s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_6"
+                d="M7.2000000476837185,37.45000039339065 l7.1,-4.1 l2.2,3.8 l-7.1,4.1 l5.7,3.3 l-2.2,3.8 l-5.8,-3.3 c-1.3,-0.8 -2.4,-1.9 -3.1,-3.2 c-0.8,-1.3 -1.2,-2.8 -1.2,-4.3 l0,-6.7 l4.4,0 L7.2000000476837185,37.45000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.85s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_7"
+                d="M7.2000000476837185,18.550000393390654 l7.1,4.1 l2.2,-3.8 l-7.1,-4.1 l5.7,-3.3 l-2.2,-3.8 l-5.8,3.3 c-1.3,0.8 -2.4,1.9 -3.2,3.2 c-0.8,1.3 -1.2,2.8 -1.2,4.4 l0,6.7 l4.4,0 L7.2000000476837185,18.550000393390654 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.9"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <polygon
+                className="svg_9"
+                points="28.60000228881836,17.649999976158142 28.60000228881836,26.950003027915955 36.70000076293945,22.34999692440033 "
+              />
+              <polygon
+                className="svg_10"
+                points="27.39999771118164,17.649999976158142 19.39999771118164,22.34999692440033 27.39999771118164,26.950003027915955 "
+              />
+              <polygon
+                className="svg_11"
+                points="26.89999771118164,27.950003027915955 18.89999771118164,23.34999692440033 18.89999771118164,32.55000340938568 "
+              />
+              <polygon
+                className="svg_12"
+                points="29.200000762939453,27.950003027915955 37.20000076293945,32.55000340938568 37.20000076293945,23.450003027915955 "
+              />
+              <polygon
+                className="svg_13"
+                points="27.39999771118164,29.05000150203705 19.500003814697266,33.650001883506775 27.39999771118164,38.34999883174896 "
+              />
+              <polygon
+                className="svg_14"
+                points="28.60000228881836,29.05000150203705 28.60000228881836,38.34999883174896 36.60000228881836,33.650001883506775 "
+              />
+            </g>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

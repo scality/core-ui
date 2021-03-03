@@ -1,0 +1,974 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Button Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk storybook-button"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Default
+  </h3>
+  <button
+    className="sc-fjdhpX kjmDOt sc-button"
+    disabled={false}
+    size="smaller"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Smaller
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX jDaDkC sc-button"
+    disabled={false}
+    size="small"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Small
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fHrjPg sc-button"
+    data-cy="default_button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          default
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fNSqkk sc-button"
+    disabled={false}
+    size="large"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Large
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX bkJuHk sc-button"
+    disabled={false}
+    size="larger"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Larger
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Variant
+  </h3>
+  <button
+    className="sc-fjdhpX fHrjPg sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          base
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX iQkvEA sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          secondary
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX byXSUn sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          healthy
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX ecQiqT sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          warning
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX cYVxqb sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          danger
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Outlined
+  </h3>
+  <button
+    className="sc-fjdhpX UHokM sc-button"
+    disabled={false}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Hello
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Disabled
+  </h3>
+  <button
+    className="sc-fjdhpX jCPfRq sc-button"
+    disabled={true}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Hello
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX cXWflZ sc-button"
+    disabled={true}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          secondary
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX jWkvsq sc-button"
+    disabled={true}
+    onClick={[Function]}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          danger
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX bkHkNh sc-button"
+    disabled={true}
+    size="larger"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="larger"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Link
+  </h3>
+  <a
+    className="sc-chPdSV kZmiQP sc-button"
+    disabled={false}
+    href="/"
+    size="base"
+    title=""
+  >
+    <span
+      className="sc-cSHVUG jGeted"
+    >
+      Hello
+    </span>
+  </a>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Loading
+  </h3>
+  <button
+    className="sc-fjdhpX jCPfRq sc-button"
+    disabled={true}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <div
+        className="sc-gqjmRU cvSyVs sc-loader"
+        color="#87929D"
+        size="base"
+      >
+        <span
+          className="sc-jTzLTM hkxQjq"
+        >
+          <svg
+            height="50"
+            version="1.1"
+            viewBox="0 0 56 56"
+            width="50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              className="container"
+            >
+              <path
+                className="svg_3"
+                d="M25.80000004768371,5.250000393390657 v8.2 H30.200000047683716 V5.1500003933906555 l5.7,3.3 l2.2,-3.8 l-5.8,-3.3 c-1.3,-0.8 -2.8,-1.1 -4.4,-1.1 c-1.5,0 -3,0.4 -4.3,1.2 l-5.8,3.3 l2.2,3.8 L25.80000004768371,5.250000393390657 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_5"
+                d="M46.60000004768372,14.650000393390656 l-7.1,4.1 l2.2,3.8 l7.1,-4.1 l0,6.6 l4.4,0 l0,-6.7 c0,-1.5 -0.4,-3 -1.2,-4.3 c-0.8,-1.3 -1.9,-2.4 -3.2,-3.2 l-5.8,-3.3 l-2.2,3.8 L46.60000004768372,14.650000393390656 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.3s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_8"
+                d="M46.60000004768372,41.25000039339065 L39.60000004768372,37.150000393390656 l2.2,-3.8 l7.1,4.1 l0,-6.6 l4.4,0 l0,6.7 c0,1.5 -0.4,2.9 -1.2,4.3 c-0.8,1.3 -1.9,2.4 -3.2,3.2 l-5.8,3.3 l-2.2,-3.8 L46.60000004768372,41.25000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.55s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_4"
+                d="M25.80000004768371,50.75000039339065 v-8.2 H30.200000047683716 v8.2 l5.7,-3.3 l2.2,3.8 l-5.7,3.3 c-1.3,0.8 -2.9,1.2 -4.4,1.2 c-1.5,0 -3,-0.4 -4.3,-1.2 l-5.8,-3.3 l2.2,-3.8 L25.80000004768371,50.75000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.75s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_6"
+                d="M7.2000000476837185,37.45000039339065 l7.1,-4.1 l2.2,3.8 l-7.1,4.1 l5.7,3.3 l-2.2,3.8 l-5.8,-3.3 c-1.3,-0.8 -2.4,-1.9 -3.1,-3.2 c-0.8,-1.3 -1.2,-2.8 -1.2,-4.3 l0,-6.7 l4.4,0 L7.2000000476837185,37.45000039339065 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.85s"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <path
+                className="svg_7"
+                d="M7.2000000476837185,18.550000393390654 l7.1,4.1 l2.2,-3.8 l-7.1,-4.1 l5.7,-3.3 l-2.2,-3.8 l-5.8,3.3 c-1.3,0.8 -2.4,1.9 -3.2,3.2 c-0.8,1.3 -1.2,2.8 -1.2,4.4 l0,6.7 l4.4,0 L7.2000000476837185,18.550000393390654 z"
+              >
+                <animate
+                  attributeName="opacity"
+                  attributeType="XML"
+                  begin="0.9"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  values="1; 0"
+                />
+              </path>
+              <polygon
+                className="svg_9"
+                points="28.60000228881836,17.649999976158142 28.60000228881836,26.950003027915955 36.70000076293945,22.34999692440033 "
+              />
+              <polygon
+                className="svg_10"
+                points="27.39999771118164,17.649999976158142 19.39999771118164,22.34999692440033 27.39999771118164,26.950003027915955 "
+              />
+              <polygon
+                className="svg_11"
+                points="26.89999771118164,27.950003027915955 18.89999771118164,23.34999692440033 18.89999771118164,32.55000340938568 "
+              />
+              <polygon
+                className="svg_12"
+                points="29.200000762939453,27.950003027915955 37.20000076293945,32.55000340938568 37.20000076293945,23.450003027915955 "
+              />
+              <polygon
+                className="svg_13"
+                points="27.39999771118164,29.05000150203705 19.500003814697266,33.650001883506775 27.39999771118164,38.34999883174896 "
+              />
+              <polygon
+                className="svg_14"
+                points="28.60000228881836,29.05000150203705 28.60000228881836,38.34999883174896 36.60000228881836,33.650001883506775 "
+              />
+            </g>
+          </svg>
+        </span>
+      </div>
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Button Text Icon
+  </h3>
+  <button
+    className="sc-fjdhpX kjmDOt sc-button"
+    disabled={false}
+    size="smaller"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG dNcaou"
+          size="smaller"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Smaller
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX jDaDkC sc-button"
+    disabled={false}
+    size="small"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG dNcaou"
+          size="small"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Small
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fHrjPg sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG dNcaou"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          default
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fNSqkk sc-button"
+    disabled={false}
+    size="large"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG dNcaou"
+          size="large"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Large
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX bkJuHk sc-button"
+    disabled={false}
+    size="larger"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG dNcaou"
+          size="larger"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          Larger
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Icon Button
+  </h3>
+  <button
+    className="sc-fjdhpX kjmDOt sc-button"
+    disabled={false}
+    size="smaller"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="smaller"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX jDaDkC sc-button"
+    disabled={false}
+    size="small"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="small"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fHrjPg sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fNSqkk sc-button"
+    disabled={false}
+    size="large"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="large"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX bkJuHk sc-button"
+    disabled={false}
+    size="larger"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="larger"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Icon Button Inverted
+  </h3>
+  <button
+    className="sc-fjdhpX jzOtYS sc-button"
+    disabled={false}
+    size="smaller"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="smaller"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX fPhwRq sc-button"
+    disabled={false}
+    size="small"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="small"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX lmCjQY sc-button"
+    disabled={false}
+    size="base"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="base"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX ghjtDU sc-button"
+    disabled={false}
+    size="large"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="large"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-fjdhpX cAnAsZ sc-button"
+    disabled={false}
+    size="larger"
+    title=""
+    type="button"
+  >
+    <span
+      className="sc-kAzzGY ebaOMy"
+    >
+      <span
+        className="sc-button-text"
+      >
+        <span
+          className="sc-jzJRlG idGKfE"
+          size="larger"
+        >
+          <i
+            className="fas fa-star"
+          />
+        </span>
+        <span
+          className="sc-cSHVUG jGeted"
+        >
+          
+        </span>
+      </span>
+    </span>
+  </button>
+</div>
+`;

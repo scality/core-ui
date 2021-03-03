@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Chart/SparkLine Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Vege-Lite sparkline chart demo
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="vis"
+  />
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Vege-Lite sparkline multi chart demo
+  </h3>
+  <div
+    className="sc-bdVaJa bDWFJH sc-vegachart"
+    id="multiVis"
+  />
+</div>
+`;

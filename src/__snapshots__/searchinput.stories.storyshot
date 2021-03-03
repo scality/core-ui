@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Input/SearchInput Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Default
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-hORach eIJvKd sc-searchinput"
+    >
+      <div
+        className="sc-hqyNC ebElpj sc-input"
+        type="text"
+      >
+        <div
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
+        >
+          <input
+            autoComplete="off"
+            className="sc-input-type"
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search server..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="sc-bMVAic sc-bAeIUo iXYWen"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Search Input filled
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-hORach eIJvKd sc-searchinput"
+      data-cy="carlito_searchinput"
+    >
+      <div
+        className="sc-hqyNC ebElpj sc-input"
+        type="text"
+      >
+        <div
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
+        >
+          <input
+            autoComplete="off"
+            className="sc-input-type"
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            type="text"
+            value="carlito"
+          />
+        </div>
+      </div>
+      <button
+        className="sc-bMVAic sc-bAeIUo iXYWen"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Disable the default toggle
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-hORach ljbzhm sc-searchinput"
+    >
+      <div
+        className="sc-hqyNC ebElpj sc-input"
+        type="text"
+      >
+        <div
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
+        >
+          <input
+            autoComplete="off"
+            className="sc-input-type"
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search and Filter…"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="sc-bMVAic sc-bAeIUo gktcdf"
+        disabled={true}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Disable the default toggle undefined onReset action
+  </h3>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <div
+      className="sc-hORach ljbzhm sc-searchinput"
+    >
+      <div
+        className="sc-hqyNC ebElpj sc-input"
+        type="text"
+      >
+        <div
+          className="sc-jqCOkK iWcKla sc-input-wrapper"
+        >
+          <input
+            autoComplete="off"
+            className="sc-input-type"
+            name="search"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search and Filter…"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="sc-bMVAic sc-bAeIUo gktcdf"
+        disabled={true}
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-search"
+        />
+      </button>
+      <button
+        className="sc-bMVAic sc-iujRgT bNwAXZ"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times-circle"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

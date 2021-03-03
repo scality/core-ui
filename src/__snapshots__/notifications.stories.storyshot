@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Notification/Notifications Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <div
+    className="sc-iQNlJl fTiHBH sc-notifications"
+  >
+    <div
+      className="sc-eTuwsz hZJfen sc-notification"
+      data-cy="Carlito_notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Carlito. I live at TOP_RIGHT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-eTuwsz lbAPhg sc-notification"
+      data-cy="Patrick_notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Patrick. I live at TOP_RIGHT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-iQNlJl cOAVjG sc-notifications"
+  >
+    <div
+      className="sc-eTuwsz kpLIIV sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Jordi. I live at TOP_LEFT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-eTuwsz bRKNum sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Guidllaume. I live at TOP_LEFT
+      </div>
+      <div
+        className="sc-hXRMBi hfbPSl"
+        max={10000}
+        value={0}
+      />
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-iQNlJl cLhFRe sc-notifications"
+  >
+    <div
+      className="sc-eTuwsz djZXzr sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Teddy. I live at BOTTOM_LEFT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-eTuwsz bRKNum sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Yanjin. I live at BOTTOM_LEFT
+      </div>
+      <div
+        className="sc-hXRMBi hfbPSl"
+        max={10000}
+        value={0}
+      />
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-iQNlJl bXZflO sc-notifications"
+  >
+    <div
+      className="sc-eTuwsz kpLIIV sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Charles. I live at BOTTOM_RIGHT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-eTuwsz djZXzr sc-notification"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="sc-gwVKww hHieRD"
+      >
+        Hi
+      </div>
+      <div>
+        I am Claude. I live at BOTTOM_RIGHT
+      </div>
+      <div
+        className="sc-epnACN fbZmvO"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-times"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

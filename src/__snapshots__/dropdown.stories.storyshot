@@ -1,0 +1,404 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Dropdown Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk storybook-dropdown"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Dropdown with text/icon
+  </h3>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo iPlupz trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="smaller"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="smaller"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo dNpTYF trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="small"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="small"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo kbTTuq trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo WDZhK trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="large"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="large"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo fcYMzN trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="larger"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="larger"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Dropdown with icon
+  </h3>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo kbTTuq trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG idGKfE"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Dropdown with text
+  </h3>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo kbTTuq trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Dropdown with variant
+  </h3>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo kbTTuq trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        primary
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo cBNplB trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        secondary
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo bNXBzh trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        healthy
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo jqFGgt trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        warning
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-jlyJG hnrnwX sc-dropdown"
+  >
+    <div
+      className="sc-bRBYWo bbRiXk trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-jzJRlG dNcaou"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-cSHVUG jGeted sc-trigger-text"
+      >
+        danger
+      </span>
+      <span
+        className="sc-Rmtcm dbrDxZ"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
+</div>
+`;

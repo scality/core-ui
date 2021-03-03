@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Checkbox Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Checkbox checked
+  </h3>
+  <label
+    checked={true}
+    className="sc-kGXeez kMLUzw sc-checkbox"
+  >
+    <input
+      checked={true}
+      data-cy="checked_checkbox"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
+    <span
+      className="sc-kgoBCf dPHGjr text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Checkbox unchecked
+  </h3>
+  <label
+    checked={false}
+    className="sc-kGXeez gJDonv sc-checkbox"
+  >
+    <input
+      checked={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
+    <span
+      className="sc-kgoBCf dPHGjr text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Checkbox unchecked disabled
+  </h3>
+  <label
+    checked={false}
+    className="sc-kGXeez fwZKnO sc-checkbox"
+    disabled={true}
+  >
+    <input
+      checked={false}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
+    <span
+      className="sc-kgoBCf dPHGjr text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Checkbox checked disabled
+  </h3>
+  <label
+    checked={true}
+    className="sc-kGXeez gNnGeO sc-checkbox"
+    disabled={true}
+  >
+    <input
+      checked={true}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <i
+      className="fas fa-check"
+    />
+    <span
+      className="sc-kgoBCf dPHGjr text"
+    >
+      interested?
+    </span>
+  </label>
+</div>
+`;

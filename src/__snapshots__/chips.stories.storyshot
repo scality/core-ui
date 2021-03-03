@@ -1,0 +1,576 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Chips Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk storybook-chips"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Basic Chip
+  </h3>
+  <div
+    className="sc-kpOJdX iVTYXr sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-ckVGcZ kuriQt sc-chips-text"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX icGrpH sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-ckVGcZ kuriQt sc-chips-text"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX KpUyo sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-ckVGcZ kuriQt sc-chips-text"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX llKqWf sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-ckVGcZ kuriQt sc-chips-text"
+    >
+      Basic Chip
+    </span>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Clickable Chip
+  </h3>
+  <div
+    className="sc-kpOJdX kUvszH sc-chips"
+    onClick={[Function]}
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ cDWksI sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX bijYAM sc-chips"
+    onClick={[Function]}
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ loZPaI sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX qvYrt sc-chips"
+    onClick={[Function]}
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ iMlaxt sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <div
+    className="sc-kpOJdX fxYcJi sc-chips"
+    onClick={[Function]}
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ JIRAm sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Clickable Chip
+    </span>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Deletable Chip
+  </h3>
+  <div
+    className="sc-kpOJdX iVTYXr sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ cDWksI sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Deletable
+    </span>
+    <button
+      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX icGrpH sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ loZPaI sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Deletable
+    </span>
+    <button
+      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX KpUyo sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ iMlaxt sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Deletable
+    </span>
+    <button
+      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX llKqWf sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ JIRAm sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Deletable
+    </span>
+    <button
+      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Different sizes
+  </h3>
+  <div
+    className="sc-kpOJdX pWASS sc-chips"
+    size="smaller"
+  >
+    <span
+      className="sc-dxgOiQ cDWksI sc-chips-icon"
+      size="smaller"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Smaller
+    </span>
+    <button
+      className="sc-fjdhpX jzOtYS sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="smaller"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="smaller"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX eSzDsw sc-chips"
+    size="small"
+  >
+    <span
+      className="sc-dxgOiQ cDWksI sc-chips-icon"
+      size="small"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Small
+    </span>
+    <button
+      className="sc-fjdhpX fPhwRq sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="small"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="small"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX KpUyo sc-chips"
+    size="base"
+  >
+    <span
+      className="sc-dxgOiQ iMlaxt sc-chips-icon"
+      size="base"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Base
+    </span>
+    <button
+      className="sc-fjdhpX lmCjQY sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="base"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="base"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX exzYaw sc-chips"
+    size="large"
+  >
+    <span
+      className="sc-dxgOiQ loZPaI sc-chips-icon"
+      size="large"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Large
+    </span>
+    <button
+      className="sc-fjdhpX ghjtDU sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="large"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="large"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-kpOJdX gFwpNK sc-chips"
+    size="larger"
+  >
+    <span
+      className="sc-dxgOiQ iMlaxt sc-chips-icon"
+      size="larger"
+    >
+      <i
+        className="fas fa-star"
+      />
+    </span>
+    <span
+      className="sc-ckVGcZ cXFDUb sc-chips-text"
+    >
+      Larger
+    </span>
+    <button
+      className="sc-fjdhpX cAnAsZ sc-chips-remove"
+      disabled={false}
+      onClick={[Function]}
+      size="larger"
+      title=""
+      type="button"
+    >
+      <span
+        className="sc-kAzzGY ebaOMy"
+      >
+        <span
+          className="sc-button-text"
+        >
+          <span
+            className="sc-jzJRlG idGKfE"
+            size="larger"
+          >
+            <i
+              className="fas fa-times"
+            />
+          </span>
+          <span
+            className="sc-cSHVUG jGeted"
+          >
+            
+          </span>
+        </span>
+      </span>
+    </button>
+  </div>
+</div>
+`;

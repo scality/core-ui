@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Toggle Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <div
+    className="sc-dUjcNx dIqnXx sc-toggle"
+  >
+    <label
+      className="sc-gHboQg iNVgys"
+    >
+      <input
+        checked={false}
+        data-cy="default_toggle"
+        name="toggle"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="sc-slider"
+      />
+    </label>
+    <span
+      className="sc-eilVRo fhyOYZ text"
+    >
+      Airplane Mode
+    </span>
+  </div>
+  <div
+    className="sc-dUjcNx dIqnXx sc-toggle"
+  >
+    <label
+      className="sc-gHboQg iNVgys"
+    >
+      <input
+        checked={true}
+        data-cy="custom_toggle"
+        name="toggle"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="sc-slider"
+      />
+    </label>
+    <span
+      className="sc-eilVRo fhyOYZ text"
+    >
+      Airplane Mode
+    </span>
+  </div>
+</div>
+`;

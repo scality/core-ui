@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Default Breadcrumb 
+  </h3>
+  <ol
+    className="sc-dnqmqq hHGMaC sc-breadcrumb"
+  >
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <a
+        href="home"
+      >
+        home
+      </a>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <label
+        href="clusters"
+      >
+        clusters
+      </label>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <a
+        href="cluster"
+      >
+        cluster_1
+      </a>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <label
+        href="nodes"
+      >
+        nodes
+      </label>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <a
+        href="node"
+        title="node_longlonglonglonglonglonglonglonglonglonglong"
+      >
+        node_longlonglonglonglonglonglonglonglonglonglong
+      </a>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI fFZyec sc-breadcrumb_item"
+    >
+      <a
+        href="volumes"
+      >
+        volumes
+      </a>
+    </li>
+    <li
+      className="sc-gZMcBi krkiEj sc-breadcrumb_separator"
+    >
+      <i
+        className="fas fa-chevron-right"
+      />
+    </li>
+    <li
+      className="sc-iwsKbI enhaPn sc-breadcrumb_item"
+    >
+      <label
+        title="volume_longlonglonglonglonglonglonglonglong"
+      >
+        volume_longlonglonglonglonglonglonglonglong
+      </label>
+    </li>
+  </ol>
+</div>
+`;

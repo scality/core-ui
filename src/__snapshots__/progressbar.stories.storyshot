@@ -1,0 +1,340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <div
+    style={
+      Object {
+        "width": "260px",
+      }
+    }
+  >
+    <h3
+      className="sc-htpNat kmOyGE"
+    >
+      Smaller
+    </h3>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          50%
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          100GB Total
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
+        size="smaller"
+      >
+        <div
+          className="sc-cLQEGU kChWpk"
+          width={50}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            50%
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-cmthru sc-hMFtBS jMkLWh"
+      >
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
+        >
+          50GB Used
+        </span>
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
+        >
+          50GB Free
+        </span>
+      </div>
+    </div>
+    <h3
+      className="sc-htpNat kmOyGE"
+    >
+      Base
+    </h3>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          Usage
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          50%
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg kGOUrh sc-progressbarcontainer"
+        size="base"
+      >
+        <div
+          className="sc-cLQEGU kChWpk"
+          width={50}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            50%
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-cmthru sc-hMFtBS jMkLWh"
+      >
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
+        >
+          5.17TB STORED - 13TB USED
+        </span>
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
+        >
+          12.9TB FREE - 25.83TB TOTAL
+        </span>
+      </div>
+    </div>
+    <h3
+      className="sc-htpNat kmOyGE"
+    >
+      Large with animation
+    </h3>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          50%
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          100GB Total
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg bgspmu sc-progressbarcontainer"
+        size="large"
+      >
+        <div
+          className="sc-cLQEGU jBIyYV"
+          width={50}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            50%
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-cmthru sc-hMFtBS jMkLWh"
+      >
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
+        >
+          50GB Used
+        </span>
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
+        >
+          50GB Free
+        </span>
+      </div>
+    </div>
+    <h3
+      className="sc-htpNat kmOyGE"
+    >
+      Larger
+    </h3>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          50%
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          100GB Total
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg ceICCX sc-progressbarcontainer"
+        size="larger"
+      >
+        <div
+          className="sc-cLQEGU kChWpk"
+          width={50}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            50%
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-cmthru sc-hMFtBS jMkLWh"
+      >
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
+        >
+          50GB Used
+        </span>
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
+        >
+          50GB Free
+        </span>
+      </div>
+    </div>
+    <h3
+      className="sc-htpNat kmOyGE"
+    >
+      Different colors
+    </h3>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          50%
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          100GB Total
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
+        size="smaller"
+      >
+        <div
+          className="sc-cLQEGU UVrFp"
+          color="#2f67ac"
+          width={50}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            50%
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-cmthru sc-hMFtBS jMkLWh"
+      >
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomleftlabel"
+        >
+          50GB Used
+        </span>
+        <span
+          className="sc-esOvli dtiunJ sc-progressbar-bottomrightlabel"
+        >
+          50GB Free
+        </span>
+      </div>
+    </div>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          10%
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
+        size="smaller"
+      >
+        <div
+          className="sc-cLQEGU jONfbG"
+          color="#ff5722"
+          width={10}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            10%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bsbRJL kfmymT sc-progressbar"
+    >
+      <div
+        className="sc-cmthru ggqKXN"
+      >
+        <span
+          className="sc-cMhqgX glqian sc-progressbar-topLeftLabel"
+        >
+          90% Used
+        </span>
+        <span
+          className="sc-iuJeZd EnPoX sc-progressbar-toprightlabel"
+        >
+          100GB Total
+        </span>
+      </div>
+      <div
+        className="sc-hZSUBg ffhjsH sc-progressbarcontainer"
+        size="smaller"
+      >
+        <div
+          className="sc-cLQEGU eZgRBF"
+          color="#982803"
+          width={90}
+        >
+          <div
+            className="sc-gqPbQI gKFoAl"
+          >
+            90%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

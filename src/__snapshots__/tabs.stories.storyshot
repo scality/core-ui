@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Default Tabs 
+  </h3>
+  <div
+    className="sc-eLExRp ijcYAw sc-tabs"
+  >
+    <div
+      className="sc-cbkKFq fyugYc sc-tabs-bar"
+    >
+      <div
+        className="sc-krvtoX ecLhol sc-tabs-item"
+        onClick={[Function]}
+        selected={true}
+      >
+        <p
+          className="sc-fYiAbW cuIcGm sc-tabs-item-title"
+          selected={true}
+        >
+          Detail
+        </p>
+      </div>
+      <div
+        className="sc-krvtoX djSjeE sc-tabs-item"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-fYiAbW eyyfNd sc-tabs-item-title"
+          selected={false}
+        >
+          Pods
+        </p>
+      </div>
+      <div
+        className="sc-krvtoX djSjeE sc-tabs-item"
+        onClick={[Function]}
+        selected={false}
+      >
+        <p
+          className="sc-fYiAbW eyyfNd sc-tabs-item-title"
+          selected={false}
+        >
+          Volumes
+        </p>
+      </div>
+    </div>
+    <div
+      className="sc-fOKMvo jDazZw sc-tabs-item-content"
+    />
+  </div>
+</div>
+`;

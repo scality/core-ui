@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/CollapsiblePanel Default 1`] = `
+<div
+  className="sc-bwzfXH hyPwIk storybook-collapsiblepanel"
+>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Collapsed
+  </h3>
+  <div
+    className="sc-jWBwVP SVhoH sc-collapsiblepanel"
+  >
+    <div
+      className="sc-brqgnP dSitun sc-collapsiblepanel-header"
+      onClick={[Function]}
+    >
+      <div
+        className="sc-hSdWYo dsvTOM"
+      >
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          <i
+            className="fas fa-carrot"
+          />
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          banana
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          apple
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          grape
+        </div>
+      </div>
+      <div
+        className="sc-cvbbAY lbfFuJ"
+      >
+        <i
+          className="fas fa-angle-down"
+        />
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-htpNat kmOyGE"
+  >
+    Expanded
+  </h3>
+  <div
+    className="sc-jWBwVP SVhoH sc-collapsiblepanel"
+  >
+    <div
+      className="sc-brqgnP dSitun sc-collapsiblepanel-header"
+      onClick={[Function]}
+    >
+      <div
+        className="sc-hSdWYo dsvTOM"
+      >
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          <i
+            className="fas fa-carrot"
+          />
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          banana
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          apple
+        </div>
+        <div
+          className="sc-eHgmQL fxNlge"
+        >
+          grape
+        </div>
+      </div>
+      <div
+        className="sc-cvbbAY lbfFuJ"
+      >
+        <i
+          className="fas fa-angle-up"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-cMljjf hPrObX sc-collapsiblepanel-content"
+    >
+      orange
+    </div>
+  </div>
+</div>
+`;
