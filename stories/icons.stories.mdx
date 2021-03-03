@@ -1,0 +1,445 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Style/Icons" />
+
+## Icons
+
+
+### Style
+
+Icon style should be consistent.  
+The style is rather outlined.  
+If two options are possible when choosing an icon, choose the simpler one.  
+
+### Size
+
+Icone should have the size of the header/title font size
+
+### Icon set table
+
+<table>
+<thead>
+  <tr>
+    <th>Icon</th>
+    <th>Order</th>
+    <th>Category 1</th>
+    <th>Category 2</th>
+    <th>Name</th>
+    <th>Origin</th>
+    <th>FontAwesome name</th>
+    <th>FontAwesome code</th>
+    <th>Icon Style &amp; Prefix</th>
+    <th>FA free</th>
+    <th>use case</th>
+    <th>Comment</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><i class="fas fa-wallet"></i></td>
+    <td>1</td>
+    <td>Entities</td>
+    <td>-</td>
+    <td>Account</td>
+    <td>FA</td>
+    <td>Wallet</td>
+    <td><i class="fas fa-wallet"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>Hero, for account screen</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>2</td>
+    <td>Entities</td>
+    <td>-</td>
+    <td>Backend</td>
+    <td>custom - tbd</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>NA</td>
+    <td></td>
+    <td>tbd</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>3</td>
+    <td>Entities</td>
+    <td>-</td>
+    <td>Tape</td>
+    <td>custom - tbd</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>NA</td>
+    <td></td>
+    <td>tbd</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-server"></i></td>
+    <td>4</td>
+    <td>Entities</td>
+    <td>-</td>
+    <td>Server(xcore)/node(metal)</td>
+    <td>FA</td>
+    <td>Server</td>
+    <td><i class="fas fa-server"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-project-diagram"></i></td>
+    <td>5</td>
+    <td>Entities</td>
+    <td>metal</td>
+    <td>Network</td>
+    <td></td>
+    <td>Project-diagram</td>
+    <td><i class="fas fa-project-diagram"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>Used in metalk8s > in Global health card, &amp; in metalk8s dashboard</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-user-cog"></i></td>
+    <td>1</td>
+    <td>Menu</td>
+    <td>Top menu</td>
+    <td>User</td>
+    <td>FA</td>
+    <td>User-cog</td>
+    <td><i class="fas fa-user-cog"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>right of top navbar</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-bell"></i></td>
+    <td>2</td>
+    <td>Menu</td>
+    <td>Top menu</td>
+    <td>Alert</td>
+    <td>FA</td>
+    <td>Bell</td>
+    <td><i class="fas fa-bell"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-stopwatch"></i></td>
+    <td>1</td>
+    <td>Workflows</td>
+    <td>-</td>
+    <td>Expiration</td>
+    <td>FA</td>
+    <td>Stopwatch</td>
+    <td><i class="fas fa-stopwatch"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-coins"></i></td>
+    <td>2</td>
+    <td>Workflows</td>
+    <td>-</td>
+    <td>Replication</td>
+    <td>FA</td>
+    <td>Coins</td>
+    <td><i class="fas fa-coins"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-thermometer-empty"></i></td>
+    <td>3</td>
+    <td>Workflows</td>
+    <td>-</td>
+    <td>Transition</td>
+    <td>FA</td>
+    <td>thermometer-empty</td>
+    <td><i class="fas fa-thermometer-empty"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-reply"></i></td>
+    <td>4</td>
+    <td>Workflows</td>
+    <td>-</td>
+    <td>OOB</td>
+    <td>FA</td>
+    <td>reply</td>
+    <td><i class="fas fa-reply"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-chart-line"></i></td>
+    <td>1</td>
+    <td>Action icon</td>
+    <td>-</td>
+    <td>Metrics-Logs</td>
+    <td>FA</td>
+    <td>Chart-line</td>
+    <td><i class="fas fa-chart-line"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>Last column of Tables</td>
+    <td>not perfect - it's an outside link...</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-edit"></i></td>
+    <td>2</td>
+    <td>Action icon</td>
+    <td>-</td>
+    <td>Edit</td>
+    <td>FA</td>
+    <td>Edit</td>
+    <td><i class="fas fa-edit"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td>Sometimes without label</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-plus"></i></td>
+    <td>1</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Create/add</td>
+    <td>FA</td>
+    <td>Plus</td>
+    <td><i class="fas fa-plus"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>When creating a new entity</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-trash"></i></td>
+    <td>2</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Delete</td>
+    <td>FA</td>
+    <td>Trash</td>
+    <td><i class="fas fa-trash"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>When deleting an entity</td>
+    <td>critical button</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-save"></i></td>
+    <td>3</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Save </td>
+    <td>FA</td>
+    <td>Save</td>
+    <td><i class="fas fa-save"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>When saving changes on an entity</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-external-link-alt"></i></td>
+    <td>4</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>External-link</td>
+    <td>FA</td>
+    <td>External-link-alt</td>
+    <td><i class="fas fa-external-link-alt"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>When the link is opening an external link> new page, or new tab (with or without SSO) - Link to Grafana chart for instance</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-times"></i></td>
+    <td>5</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Close</td>
+    <td>FA</td>
+    <td>Times</td>
+    <td><i class="fas fa-times"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>For closing a window/modal</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-caret-down"></i></td>
+    <td>6</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Dropdown</td>
+    <td>FA</td>
+    <td>Caret-down</td>
+    <td><i class="fas fa-caret-down"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>For accessing to a drop-down</td>
+    <td>(not to mix with sort-down)</td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-search"></i></td>
+    <td>7</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Search</td>
+    <td>FA</td>
+    <td>Search</td>
+    <td><i class="fas fa-search"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>In the search bar</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-ellipsis-v"></i></td>
+    <td>8</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>More/additional actions</td>
+    <td>FA</td>
+    <td>Ellipsis-v</td>
+    <td><i class="fas fa-ellipsis-v"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-question-circle"></i></td>
+    <td>9</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Info</td>
+    <td>FA</td>
+    <td>Question-circle</td>
+    <td><i class="fas fa-question-circle"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>For tooltips</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-sync"></i></td>
+    <td>10</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Sync</td>
+    <td>FA</td>
+    <td>Sync</td>
+    <td><i class="fas fa-sync"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td>refreshing the Metrics, next to the time selector</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-file-export"></i></td>
+    <td>11</td>
+    <td>Button/action</td>
+    <td>-</td>
+    <td>Export</td>
+    <td>FA</td>
+    <td>File-export</td>
+    <td><i class="fas fa-file-export"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="far fa-clone"></i></td>
+    <td>12</td>
+    <td>Button/action</td>
+    <td></td>
+    <td>Copy</td>
+    <td>FA</td>
+    <td>Clone</td>
+    <td>&lt;i class="far fa-clone"&gt;&lt;/i&gt;</td>
+    <td>regular Style (far)</td>
+    <td>yes</td>
+    <td>small icon next to a field that could be copied</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-sort"></i></td>
+    <td>1</td>
+    <td>Table</td>
+    <td>Sorting</td>
+    <td>Sort</td>
+    <td>FA</td>
+    <td>Sort</td>
+    <td><i class="fas fa-sort"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-sort-up"></i></td>
+    <td>2</td>
+    <td>Table</td>
+    <td>Sorting</td>
+    <td>Sort-up</td>
+    <td>FA</td>
+    <td>Sort-up</td>
+    <td><i class="fas fa-sort-up"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-sort-down"></i></td>
+    <td>3</td>
+    <td>Table</td>
+    <td>Sorting</td>
+    <td>Sort-down</td>
+    <td>FA</td>
+    <td>Sort-down</td>
+    <td><i class="fas fa-sort-down"></i></td>
+    <td>solid Style (fas)</td>
+    <td>yes</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>1</td>
+    <td>Table</td>
+    <td>-</td>
+    <td>Not applicable/no value</td>
+    <td>Font</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>simple hyphen from Lato</td>
+  </tr>
+</tbody>
+</table>

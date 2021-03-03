@@ -24,3 +24,4 @@ export type Variant =
   | "healthy"
   | "warning"
   | "danger"
+  | "success";

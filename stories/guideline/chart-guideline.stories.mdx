@@ -1,0 +1,64 @@
+import { Meta, Story } from "@storybook/addon-docs/blocks";
+import { ChartExample } from "./mdxExampleComponents";
+import { SuccessBanner } from "../banner.stories";
+
+<Meta title="Guideline/Chart" />
+
+# Charts
+
+Used mostly for monitoring-related tasks.
+
+## UI
+
+### Tooltips
+
+Don’t depend too heavily on tooltips. They are as providing supplemental or expanded information, but shouldn’t be the only way a user can see the plotted value.
+
+### Grid lines
+
+Only use grid lines when it’s helpful. Possible to use only horizontal or vertical.
+
+### Elements
+
+- Title
+- Axis
+- Legend
+
+_produce an example WIP_
+
+## Type
+
+4 types for most cases: pie/donut, bar/column, line, or area.
+
+### Pie charts
+
+- No more than 6 categories
+- Values should be different enough (otherwise select Bar charts)
+- Should be a 100% total
+- Categories in the desc order
+
+_produce an example WIP_
+
+_(Currently, there is no Pie chart in the UI)_
+
+### Bar and column charts
+
+- should start at a baseline of zero.
+
+<ChartExample />
+
+### Line charts
+
+- No more than 5–7 different lines
+- avoid randomly chosen color (otherwise risk if contrast issues)
+
+Here, the colors for Get and List are too close.
+
+Components/Chart/LineChart
+
+Area charts
+
+- could be a single area, overlapping area, or stacked area
+- max 3-4 categories
+
+<SuccessBanner />
