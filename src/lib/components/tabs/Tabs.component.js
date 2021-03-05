@@ -35,7 +35,7 @@ const TabItem = styled.div`
   flex-shrink: 1;
   text-align: center;
   margin-right: 0.3rem;
-  background-color: ${(props) => getTheme(props).border};
+  background-color: ${(props) => getTheme(props).primary};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 
@@ -43,6 +43,7 @@ const TabItem = styled.div`
     return (
       !props.selected &&
       css`
+        background-color: ${(props) => getTheme(props).border};
         &:hover {
           cursor: pointer;
           background-color: ${props.activeTabColor || getTheme(props).primary};

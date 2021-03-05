@@ -16,7 +16,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       className="sc-cbkKFq fyugYc sc-tabs-bar"
     >
       <div
-        className="sc-krvtoX bziWca sc-tabs-item"
+        className="sc-krvtoX kvbabo sc-tabs-item"
         onClick={[Function]}
         selected={true}
       >
@@ -28,7 +28,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         </p>
       </div>
       <div
-        className="sc-krvtoX jMoYQM sc-tabs-item"
+        className="sc-krvtoX fzksTt sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
@@ -40,7 +40,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         </p>
       </div>
       <div
-        className="sc-krvtoX jMoYQM sc-tabs-item"
+        className="sc-krvtoX fzksTt sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
