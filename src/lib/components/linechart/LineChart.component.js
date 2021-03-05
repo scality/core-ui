@@ -17,6 +17,8 @@ type Props = {
   opacityEncodingConfig?: $PropertyType<Encoding<Field>, "opacity">,
   tooltipConfig?: $PropertyType<Encoding<Field>, "tooltip">,
   tooltipTheme?: "light" | "dark" | "custom",
+  history?: Object,
+  link?: string,
 };
 
 function LineChart({
@@ -34,6 +36,8 @@ function LineChart({
   opacityEncodingConfig,
   tooltipConfig,
   tooltipTheme,
+  history,
+  link,
   ...rest
 }: Props) {
   // hardcode the trendline configuration for tooltip
@@ -128,7 +132,13 @@ function LineChart({
   }
 
   return (
-    <VegaChart id={id} spec={spec} theme={tooltipTheme || "light"}></VegaChart>
+    <VegaChart
+      id={id}
+      spec={spec}
+      theme={tooltipTheme || "light"}
+      history={history}
+      link={link}
+    ></VegaChart>
   );
 }
 
