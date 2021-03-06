@@ -1,16 +1,17 @@
 //@flow
-import React from "react";
-import ProgressBar from "../src/lib/components/progressbar/ProgressBar.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import ProgressBar from '../src/lib/components/progressbar/ProgressBar.component';
+import { Wrapper, Title } from './common';
 
 export default {
-  title: "Components/Progress & loading/ProgressBar",
+  title: 'Components/Progress & loading/ProgressBar',
+  component: ProgressBar,
 };
 
 export const Default = () => {
   return (
     <Wrapper>
-      <div style={{ width: "260px" }}>
+      <div style={{ width: '260px' }}>
         <Title>Smaller</Title>
         <ProgressBar
           size="smaller"

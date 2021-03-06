@@ -1,39 +1,40 @@
 //@flow
-import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
-import { withKnobs, boolean } from "@storybook/addon-knobs";
-import LateralNavbarLayout from "../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component";
-import Loader from "../src/lib/components/loader/Loader.component";
+import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+import LateralNavbarLayout from '../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component';
+import Loader from '../src/lib/components/loader/Loader.component';
 
 const sideBarActions = [
   {
-    label: "Dashboard",
+    label: 'Dashboard',
     icon: <i className="fas fa-tachometer-alt" />,
-    onClick: action("dashboard clicked"),
+    onClick: action('dashboard clicked'),
     active: true,
-    "data-cy": "Dashboard",
+    'data-cy': 'Dashboard',
   },
   {
-    label: "Servers",
+    label: 'Servers',
     icon: <i className="fas fa-server" />,
-    onClick: action("server clicked"),
-    "data-cy": "Servers",
+    onClick: action('server clicked'),
+    'data-cy': 'Servers',
   },
   {
-    label: "Disks",
+    label: 'Disks',
     icon: <i className="fas fa-hdd" />,
-    onClick: action("disk clicked"),
-    "data-cy": "Disks",
+    onClick: action('disk clicked'),
+    'data-cy': 'Disks',
   },
 ];
 
 export default {
-  title: "Components/Navigation/LateralNavbarLayout",
+  title: 'Components/Navigation/LateralNavbarLayout',
+  component: LateralNavbarLayout,
   decorators: [withKnobs],
 };
 
 export const SidebarDocked = () => {
-  const expanded = boolean("Sidebar Expanded", false);
+  const expanded = boolean('Sidebar Expanded', false);
   const sidebar = {
     expanded,
     actions: sideBarActions,
@@ -63,7 +64,7 @@ export const SidebarWithToggle = () => {
   const sidebar = {
     expanded: true,
     actions: sideBarActions,
-    onToggleClick: action("toggle clicked"),
+    onToggleClick: action('toggle clicked'),
   };
   return (
     <LateralNavbarLayout sidebar={sidebar}>

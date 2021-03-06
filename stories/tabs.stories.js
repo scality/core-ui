@@ -1,28 +1,29 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
-import Tabs from "../src/lib/components/tabs/Tabs.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import Tabs from '../src/lib/components/tabs/Tabs.component';
+import { Wrapper, Title } from './common';
 
 const tabs = [
   {
     selected: true,
-    title: "Detail",
-    onClick: action("Detail clicked"),
+    title: 'Detail',
+    onClick: action('Detail clicked'),
   },
   {
     selected: false,
-    title: "Pods",
-    onClick: action("Pods clicked"),
+    title: 'Pods',
+    onClick: action('Pods clicked'),
   },
   {
     selected: false,
-    title: "Volumes",
-    onClick: action("Volumes clicked"),
+    title: 'Volumes',
+    onClick: action('Volumes clicked'),
   },
 ];
 
 export default {
-  title: "Components/Navigation/Tabs",
+  title: 'Components/Navigation/Tabs',
+  component: Tabs,
 };
 
 export const Default = () => {

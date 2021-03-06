@@ -1,13 +1,12 @@
 // @flow
-import React from "react";
-import { withKnobs } from "@storybook/addon-knobs";
-import { action } from "@storybook/addon-actions";
-import Button from "../src/lib/components/button/Button.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import Button from '../src/lib/components/button/Button.component';
+import { Wrapper, Title } from './common';
 
 export default {
-  title: "Components/Button",
-  decorators: [withKnobs],
+  title: 'Components/Button',
+  component: Button,
 };
 
 export const Default = () => {
@@ -28,21 +27,21 @@ export const Default = () => {
       <Button variant="danger" text="danger" />
 
       <Title>Button Outlined</Title>
-      <Button outlined text="Hello" onClick={action("Button Outlined Click")} />
+      <Button outlined text="Hello" onClick={action('Button Outlined Click')} />
 
       <Title>Button Disabled</Title>
-      <Button disabled text="Hello" onClick={action("Button Disabled Click")} />
+      <Button disabled text="Hello" onClick={action('Button Disabled Click')} />
       <Button
         variant="secondary"
         disabled
         text="secondary"
-        onClick={action("Button Disabled Click")}
+        onClick={action('Button Disabled Click')}
       />
       <Button
         variant="danger"
         disabled
         text="danger"
-        onClick={action("Button Disabled Click")}
+        onClick={action('Button Disabled Click')}
       />
       <Button
         inverted={true}

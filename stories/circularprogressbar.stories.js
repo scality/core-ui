@@ -1,10 +1,11 @@
 //@flow
-import React from "react";
-import CircularProgressBar from "../src/lib/components/circularprogressbar/CircularProgressBar.component";
-import { Wrapper, Title, Text } from "./common";
+import React from 'react';
+import CircularProgressBar from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
+import { Wrapper, Title, Text } from './common';
 
 export default {
-  title: "Components/Progress & loading/CircularProgressBar",
+  title: 'Components/Progress & loading/CircularProgressBar',
+  component: CircularProgressBar,
 };
 
 export const Default = () => {
@@ -35,7 +36,7 @@ export const Default = () => {
           y="45%"
           dominantBaseline="middle"
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: "700" }}
+          style={{ fontSize: '15px', fontWeight: '700' }}
         >
           4.9 PB
         </Text>

@@ -1,11 +1,12 @@
 //@flow
-import React from "react";
-import TextArea from "../src/lib/components/textarea/TextArea.component";
-import { Wrapper, Title } from "./common";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import TextArea from '../src/lib/components/textarea/TextArea.component';
+import { Wrapper, Title } from './common';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: "Components/Input/TextArea",
+  title: 'Components/Input/TextArea',
+  component: TextArea,
 };
 
 export const Default = () => {
@@ -15,9 +16,9 @@ export const Default = () => {
       <TextArea
         rows={10}
         cols={50}
-        id={"text"}
+        id={'text'}
         value="Add a note"
-        onChange={action("onChange")}
+        onChange={action('onChange')}
       />
 
       <Title>Text Area disabled</Title>
@@ -27,7 +28,7 @@ export const Default = () => {
         placeholder="Text area input"
         value=""
         disabled={true}
-        onChange={action("onChange")}
+        onChange={action('onChange')}
       />
     </Wrapper>
   );

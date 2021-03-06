@@ -1,92 +1,93 @@
 //@flow
-import React from "react";
-import Steppers from "../src/lib/components/steppers/Steppers.component";
-import { action } from "@storybook/addon-actions";
-import Button from "../src/lib/components/button/Button.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import Steppers from '../src/lib/components/steppers/Steppers.component';
+import { action } from '@storybook/addon-actions';
+import Button from '../src/lib/components/button/Button.component';
+import { Wrapper, Title } from './common';
 
 const steps = [
   {
-    title: "Node Registerd",
+    title: 'Node Registerd',
     content: (
       <Button
         size="small"
         text="Apply"
-        onClick={action("Button Apply Click")}
+        onClick={action('Button Apply Click')}
       />
     ),
-    "data-cy": "Node_Registerd",
+    'data-cy': 'Node_Registerd',
   },
   {
-    title: "Deploy Salt Minion on node",
+    title: 'Deploy Salt Minion on node',
     inProgress: false,
     content: (
       <Button
         size="small"
         text="Apply"
-        onClick={action("Button Apply Click")}
+        onClick={action('Button Apply Click')}
       />
     ),
-    "data-cy": "Deploy_Salt",
+    'data-cy': 'Deploy_Salt',
   },
   {
-    title: "Add node to Workload Plane",
+    title: 'Add node to Workload Plane',
     error: false,
     content: (
       <Button
         size="small"
         text="Apply"
-        onClick={action("Button Apply Click")}
+        onClick={action('Button Apply Click')}
       />
     ),
-    "data-cy": "Add_Node_WP",
+    'data-cy': 'Add_Node_WP',
   },
   {
-    title: "Add node to Control Plane",
+    title: 'Add node to Control Plane',
     content: (
       <Button
         size="small"
         text="Apply"
-        onClick={action("Button Apply Click")}
+        onClick={action('Button Apply Click')}
       />
     ),
-    "data-cy": "Add_Node_CP",
+    'data-cy': 'Add_Node_CP',
   },
   {
-    title: "Extend etcd cluster to node",
+    title: 'Extend etcd cluster to node',
     content: (
       <Button
         size="small"
         text="Apply"
-        onClick={action("Button Apply Click")}
+        onClick={action('Button Apply Click')}
       />
     ),
-    "data-cy": "Extend_Node",
+    'data-cy': 'Extend_Node',
   },
 ];
 
 const stepsWithProgress = [...steps];
 stepsWithProgress[1] = {
-  title: "Deploy Salt Minion on node",
+  title: 'Deploy Salt Minion on node',
   inProgress: true,
   content: (
-    <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
+    <Button size="small" text="Apply" onClick={action('Button Apply Click')} />
   ),
-  "data-cy": "Deploy_Salt",
+  'data-cy': 'Deploy_Salt',
 };
 
 const stepsWithError = [...steps];
 stepsWithError[2] = {
-  title: "Add node to Workload Plane",
+  title: 'Add node to Workload Plane',
   error: true,
   content: (
-    <Button size="small" text="Apply" onClick={action("Button Apply Click")} />
+    <Button size="small" text="Apply" onClick={action('Button Apply Click')} />
   ),
-  "data-cy": "Add_Node_WP",
+  'data-cy': 'Add_Node_WP',
 };
 
 export default {
-  title: "Components/Progress & loading/Steppers",
+  title: 'Components/Progress & loading/Steppers',
+  component: Steppers,
 };
 
 export const Default = () => {

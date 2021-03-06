@@ -1,46 +1,46 @@
 //@flow
-import React from "react";
-import BarChart from "../src/lib/components/barchart/BarChart.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import BarChart from '../src/lib/components/barchart/BarChart.component';
+import { Wrapper, Title } from './common';
 import {
   verticalStackedData,
   horizontalStackedData,
   barchartData,
-} from "./data/barchart";
+} from './data/barchart';
 
 // props for vertical stacked bar chart
-const idVerticalStacked = "vis_vertical_stacked";
+const idVerticalStacked = 'vis_vertical_stacked';
 const xAxisVerticalStacked = {
-  field: "xlabel",
-  type: "ordinal",
+  field: 'xlabel',
+  type: 'ordinal',
   title: null,
   axis: { labelAngle: 0 },
   sort: {
-    order: "ascending",
+    order: 'ascending',
   },
 };
 const yAxisVerticalStacked = {
-  aggregate: "count",
-  field: "*",
+  aggregate: 'count',
+  field: '*',
   title: null,
-  type: "quantitative",
+  type: 'quantitative',
   scale: {
     padding: 1,
   },
 };
 const colorVerticalStacked = {
-  field: "status",
-  type: "nominal",
+  field: 'status',
+  type: 'nominal',
   legend: {
-    direction: "horizontal",
-    orient: "top",
+    direction: 'horizontal',
+    orient: 'top',
     title: null,
-    symbolType: "circle",
+    symbolType: 'circle',
     columnPadding: 50,
   },
   scale: {
-    domain: ["2XX", "401", "404", "4XX", "503", "5XX"],
-    range: ["#4BE4E2", "#E45834", "#FEFA52", "#968BFF", "#BE2543", "#DC90F1"],
+    domain: ['2XX', '401', '404', '4XX', '503', '5XX'],
+    range: ['#4BE4E2', '#E45834', '#FEFA52', '#968BFF', '#BE2543', '#DC90F1'],
   },
 };
 const width = 800;
@@ -48,27 +48,28 @@ const width = 800;
 const barConfig = { cornerRadius: 8, size: 12 };
 
 // props for horizontal stacked bar chart
-const idHorizontalStacked = "vis_horizontal_stacked";
+const idHorizontalStacked = 'vis_horizontal_stacked';
 const xAxisHorizontalStacked = {
-  aggregate: "sum",
-  field: "yield",
-  type: "quantitative",
+  aggregate: 'sum',
+  field: 'yield',
+  type: 'quantitative',
 };
-const yAxisHorizontalStacked = { field: "variety", type: "nominal" };
-const colorHorizontalStacked = { field: "site", type: "nominal" };
+const yAxisHorizontalStacked = { field: 'variety', type: 'nominal' };
+const colorHorizontalStacked = { field: 'site', type: 'nominal' };
 
 // props for vertical bar chart
-const idVertical = "vis_vertical";
-const xAxisVertical = { field: "a", type: "ordinal" };
-const yAxisVertical = { field: "b", type: "quantitative" };
+const idVertical = 'vis_vertical';
+const xAxisVertical = { field: 'a', type: 'ordinal' };
+const yAxisVertical = { field: 'b', type: 'quantitative' };
 
 // props for horizontal bar chart
-const idHorizontal = "vis_horizontal";
-const xAxisHorizontal = { field: "b", type: "quantitative" };
-const yAxisHorizontal = { field: "a", type: "ordinal" };
+const idHorizontal = 'vis_horizontal';
+const xAxisHorizontal = { field: 'b', type: 'quantitative' };
+const yAxisHorizontal = { field: 'a', type: 'ordinal' };
 
 export default {
-  title: "Components/Chart/BarChart",
+  title: 'Components/Chart/BarChart',
+  component: BarChart,
 };
 
 export const Default = () => {

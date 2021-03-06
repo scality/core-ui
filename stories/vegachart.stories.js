@@ -1,72 +1,72 @@
 //@flow
-import React from "react";
-import VegaChart from "../src/lib/components/vegachart/VegaChart.component";
-import { data } from "./data/linechart";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import VegaChart from '../src/lib/components/vegachart/VegaChart.component';
+import { data } from './data/linechart';
+import { Wrapper, Title } from './common';
 
 const spec = {
   data: { values: data },
   encoding: {
     x: {
-      field: "time",
-      type: "temporal",
-      timeUnit: "yearmonthdatehoursminutes",
-      title: "time",
+      field: 'time',
+      type: 'temporal',
+      timeUnit: 'yearmonthdatehoursminutes',
+      title: 'time',
     },
     tooltip: [
       {
-        field: "time",
-        type: "temporal",
-        timeUnit: "yearmonthdatehoursminutes",
+        field: 'time',
+        type: 'temporal',
+        timeUnit: 'yearmonthdatehoursminutes',
       },
       {
-        field: "total_space",
-        type: "quantitative",
-        title: "TOTAL SPACE",
+        field: 'total_space',
+        type: 'quantitative',
+        title: 'TOTAL SPACE',
       },
       {
-        field: "used_space",
-        type: "quantitative",
-        title: "USED SPACE",
+        field: 'used_space',
+        type: 'quantitative',
+        title: 'USED SPACE',
       },
     ],
   },
   layer: [
     {
-      mark: { type: "line", color: "green" },
+      mark: { type: 'line', color: 'green' },
       encoding: {
         y: {
-          field: "total_space",
-          type: "quantitative",
-          title: "TOTAL SPACE (GB)",
+          field: 'total_space',
+          type: 'quantitative',
+          title: 'TOTAL SPACE (GB)',
         },
       },
     },
     {
-      mark: { type: "line", color: "orange" },
+      mark: { type: 'line', color: 'orange' },
       encoding: {
         y: {
-          field: "used_space",
-          type: "quantitative",
-          title: "USED SPACE (GB)",
+          field: 'used_space',
+          type: 'quantitative',
+          title: 'USED SPACE (GB)',
         },
       },
     },
     {
-      mark: "rule",
+      mark: 'rule',
       selection: {
         index: {
-          type: "single",
-          on: "mousemove",
-          encodings: ["x"],
+          type: 'single',
+          on: 'mousemove',
+          encodings: ['x'],
           nearest: true,
         },
       },
       encoding: {
         color: {
           condition: {
-            selection: { not: "index" },
-            value: "transparent",
+            selection: { not: 'index' },
+            value: 'transparent',
           },
         },
       },
@@ -74,10 +74,11 @@ const spec = {
   ],
 };
 
-const id = "vis";
+const id = 'vis';
 
 export default {
-  title: "Components/Chart/VegaChart",
+  title: 'Components/Chart/VegaChart',
+  component: VegaChart,
 };
 
 export const Default = () => {

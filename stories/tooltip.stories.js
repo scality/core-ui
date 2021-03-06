@@ -1,15 +1,16 @@
-import React from "react";
-import Tooltip from "../src/lib/components/tooltip/Tooltip.component";
-import Button from "../src/lib/components/button/Button.component";
-import { Wrapper, Title, SubTitle } from "./common";
+import React from 'react';
+import Tooltip from '../src/lib/components/tooltip/Tooltip.component';
+import Button from '../src/lib/components/button/Button.component';
+import { Wrapper, Title, SubTitle } from './common';
 
 export default {
-  title: "Components/Notification/Tooltip",
+  title: 'Components/Notification/Tooltip',
+  component: Tooltip,
 };
 
 export const Default = () => {
   return (
-    <Wrapper style={{ display: "flex", flexDirection: "column" }}>
+    <Wrapper style={{ display: 'flex', flexDirection: 'column' }}>
       <div>
         <Title>Default Tooltip</Title>
         <Tooltip overlay="Hellooooo">
@@ -23,7 +24,7 @@ export const Default = () => {
           <SubTitle>Hover here!</SubTitle>
         </Tooltip>
       </div>
-      <div style={{ marginLeft: "100px" }}>
+      <div style={{ marginLeft: '100px' }}>
         <Title>Tooltip left</Title>
         <Tooltip placement="left" overlay="Helloooooo">
           <SubTitle>Hover here!</SubTitle>
@@ -40,9 +41,9 @@ export const Default = () => {
         <Tooltip
           placement="right"
           overlayStyle={{
-            backgroundColor: "green",
-            fontSize: "20px",
-            width: "120px",
+            backgroundColor: 'green',
+            fontSize: '20px',
+            width: '120px',
           }}
           overlay="Helloooooo"
         >

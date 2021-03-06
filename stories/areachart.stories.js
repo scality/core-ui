@@ -1,44 +1,44 @@
 //@flow
-import React from "react";
-import AreaChart from "../src/lib/components/areachart/AreaChart.component";
-import { area_charts } from "./data/areachart";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import AreaChart from '../src/lib/components/areachart/AreaChart.component';
+import { area_charts } from './data/areachart';
+import { Wrapper, Title } from './common';
 
 const xAxis_area_chart = {
-  field: "time",
-  type: "temporal",
-  timeUnit: "yearmonthdatehoursminutes",
-  title: "time",
+  field: 'time',
+  type: 'temporal',
+  timeUnit: 'yearmonthdatehoursminutes',
+  title: 'time',
   axis: null,
 };
 const yAxis_area_chart = [
   {
-    field: "Bandwidth",
-    type: "quantitative",
-    color: "#968BFF",
+    field: 'Bandwidth',
+    type: 'quantitative',
+    color: '#968BFF',
     axis: { title: null, ticks: false, labels: false },
   },
   {
-    field: "Bandwidth",
-    type: "quantitative",
-    color: "#F6B288",
+    field: 'Bandwidth',
+    type: 'quantitative',
+    color: '#F6B288',
     axis: { title: null, ticks: false, labels: false },
   },
 ];
 const color_area_chart = {
-  field: "Average",
-  type: "nominal",
+  field: 'Average',
+  type: 'nominal',
   legend: {
-    direction: "horizontal",
-    orient: "bottom",
+    direction: 'horizontal',
+    orient: 'bottom',
     title: null,
     labelFontSize: 15,
     columnPadding: 50,
     symbolStrokeWidth: 5,
   },
-  domain: ["AvgIn", "AvgOut"],
+  domain: ['AvgIn', 'AvgOut'],
   scale: {
-    range: ["#968BFF", "#F6B288"],
+    range: ['#968BFF', '#F6B288'],
   },
 };
 const area = {
@@ -47,18 +47,18 @@ const area = {
       filter: "datum.Average==='AvgOut'",
     },
   ],
-  mark: { opacity: 0.3, type: "area" },
+  mark: { opacity: 0.3, type: 'area' },
   encoding: {
     x: {
-      field: "time",
-      type: "temporal",
-      timeUnit: "yearmonthdatehoursminutes",
-      title: "time",
+      field: 'time',
+      type: 'temporal',
+      timeUnit: 'yearmonthdatehoursminutes',
+      title: 'time',
       axis: null,
     },
     y: {
-      field: "Bandwidth",
-      type: "quantitative",
+      field: 'Bandwidth',
+      type: 'quantitative',
     },
     y2: {
       value: 0,
@@ -72,18 +72,18 @@ const area2 = {
       filter: "datum.Average==='AvgIn'",
     },
   ],
-  mark: { opacity: 0.3, type: "area" },
+  mark: { opacity: 0.3, type: 'area' },
   encoding: {
     x: {
-      field: "time",
-      type: "temporal",
-      timeUnit: "yearmonthdatehoursminutes",
-      title: "time",
+      field: 'time',
+      type: 'temporal',
+      timeUnit: 'yearmonthdatehoursminutes',
+      title: 'time',
       axis: null,
     },
     y: {
-      field: "Bandwidth",
-      type: "quantitative",
+      field: 'Bandwidth',
+      type: 'quantitative',
     },
     y2: {
       value: 0,
@@ -92,10 +92,11 @@ const area2 = {
 };
 const areas = [area, area2];
 
-const id_area_chart = "vis_area_chart";
+const id_area_chart = 'vis_area_chart';
 
 export default {
-  title: "Components/Chart/AreaChart",
+  title: 'Components/Chart/AreaChart',
+  component: AreaChart,
 };
 
 export const Default = () => {

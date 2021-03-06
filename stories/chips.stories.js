@@ -1,11 +1,12 @@
 //@flow
-import Chips from "../src/lib/components/chips/Chips.component";
-import React from "react";
-import { action } from "@storybook/addon-actions";
-import { Wrapper, Title } from "./common";
+import Chips from '../src/lib/components/chips/Chips.component';
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import { Wrapper, Title } from './common';
 
 export default {
-  title: "Components/Chips",
+  title: 'Components/Chips',
+  component: Chips,
 };
 
 export const Default = () => {
@@ -22,25 +23,25 @@ export const Default = () => {
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
         variant="base"
-        onClick={action("Clickable Chip")}
+        onClick={action('Clickable Chip')}
       />
       <Chips
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
         variant="healthy"
-        onClick={action("Clickable Chip")}
+        onClick={action('Clickable Chip')}
       />
       <Chips
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
         variant="warning"
-        onClick={action("Clickable Chip")}
+        onClick={action('Clickable Chip')}
       />
       <Chips
         text="Clickable Chip"
         icon={<i className="fas fa-star" />}
         variant="danger"
-        onClick={action("Clickable Chip")}
+        onClick={action('Clickable Chip')}
       />
 
       <Title>Deletable Chip</Title>
@@ -48,25 +49,25 @@ export const Default = () => {
         text="Deletable"
         icon={<i className="fas fa-star" />}
         variant="base"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         variant="healthy"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         variant="warning"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
       />
       <Chips
         text="Deletable"
         icon={<i className="fas fa-star" />}
         variant="danger"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
       />
 
       <Title>Different sizes</Title>
@@ -74,35 +75,35 @@ export const Default = () => {
         text="Smaller"
         icon={<i className="fas fa-star" />}
         variant="base"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
         size="smaller"
       />
       <Chips
         text="Small"
         icon={<i className="fas fa-star" />}
         variant="base"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
         size="small"
       />
       <Chips
         text="Base"
         icon={<i className="fas fa-star" />}
         variant="warning"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
         size="base"
       />
       <Chips
         text="Large"
         icon={<i className="fas fa-star" />}
         variant="healthy"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
         size="large"
       />
       <Chips
         text="Larger"
         icon={<i className="fas fa-star" />}
         variant="warning"
-        onRemove={action("Deletable Chip")}
+        onRemove={action('Deletable Chip')}
         size="larger"
       />
     </Wrapper>

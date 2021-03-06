@@ -1,9 +1,10 @@
-import React from "react";
-import Breadcrumb from "../src/lib/components/breadcrumb/Breadcrumb.component";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import Breadcrumb from '../src/lib/components/breadcrumb/Breadcrumb.component';
+import { Wrapper, Title } from './common';
 
 export default {
-  title: "Components/Navigation/Breadcrumb",
+  title: 'Components/Navigation/Breadcrumb',
+  component: Breadcrumb,
 };
 
 export const Default = () => {
@@ -18,12 +19,12 @@ export const Default = () => {
           <label href="nodes">nodes</label>,
           <a
             href="node"
-            title={"node_longlonglonglonglonglonglonglonglonglonglong"}
+            title={'node_longlonglonglonglonglonglonglonglonglonglong'}
           >
             node_longlonglonglonglonglonglonglonglonglonglong
           </a>,
           <a href="volumes">volumes</a>,
-          <label title={"volume_longlonglonglonglonglonglonglonglong"}>
+          <label title={'volume_longlonglonglonglonglonglonglonglong'}>
             volume_longlonglonglonglonglonglonglonglong
           </label>,
         ]}

@@ -1,48 +1,48 @@
 //@flow
-import React from "react";
-import StatusBar from "../src/lib/components/statusbar/StatusBar.component";
-import { data } from "./data/statusbar";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import StatusBar from '../src/lib/components/statusbar/StatusBar.component';
+import { data } from './data/statusbar';
+import { Wrapper, Title } from './common';
 
-const id = "vis";
+const id = 'vis';
 
 const title = {
-  text: "GLOBAL HEALTH",
-  anchor: "start",
-  color: "#a8b5c1",
+  text: 'GLOBAL HEALTH',
+  anchor: 'start',
+  color: '#a8b5c1',
 };
 
 const xAxis = {
-  timeUnit: "yearmonthdatehoursminutes",
-  field: "date",
-  type: "nominal",
+  timeUnit: 'yearmonthdatehoursminutes',
+  field: 'date',
+  type: 'nominal',
   title: null,
   axis: {
     // Refer to all the available time format: https://github.com/d3/d3-time-format#locale_format
-    format: "%d %b",
+    format: '%d %b',
     // Boolean value that determines whether the axis should include ticks.
     ticks: false,
     // Display the label when the new day starts
     labelExpr: "timeFormat(datum.value, '%H') == '00'? datum.label:''",
     labelAngle: -80,
-    labelColor: "#a8b5c1",
+    labelColor: '#a8b5c1',
   },
 };
 
 const yAxis = {
-  field: "symbol",
-  type: "nominal",
+  field: 'symbol',
+  type: 'nominal',
   title: null,
   axis: null,
 };
 
 const color = {
-  field: "status",
-  type: "quantitative",
+  field: 'status',
+  type: 'quantitative',
   title: null,
   // Set the color of the 3 statuss
   scale: {
-    range: ["#dc3545", "#fefa52", "#28a745"],
+    range: ['#dc3545', '#fefa52', '#28a745'],
   },
   // Disable the legend status bar
   legend: null,
@@ -69,24 +69,25 @@ const color = {
 
 const tooltip = [
   {
-    field: "date",
-    type: "temporal",
-    timeUnit: "yearmonthdatehoursminutes",
-    title: "Date and Time",
+    field: 'date',
+    type: 'temporal',
+    timeUnit: 'yearmonthdatehoursminutes',
+    title: 'Date and Time',
   },
-  { field: "alertNum", type: "nominal", title: "Number of alerts" },
-  { field: "alert", type: "nominal", title: "Alerts" },
+  { field: 'alertNum', type: 'nominal', title: 'Number of alerts' },
+  { field: 'alert', type: 'nominal', title: 'Alerts' },
 ];
 
 const text = {
-  field: "currentStatus",
-  type: "nominal",
+  field: 'currentStatus',
+  type: 'nominal',
   // The color of `Current Status` text
-  color: "#a8b5c1",
+  color: '#a8b5c1',
 };
 
 export default {
-  title: "Components/Chart/StatusBar",
+  title: 'Components/Chart/StatusBar',
+  component: StatusBar,
 };
 
 export const Default = () => {

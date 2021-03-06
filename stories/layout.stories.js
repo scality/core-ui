@@ -1,79 +1,80 @@
 //@flow
-import React, { useState, createElement } from "react";
-import Layout from "../src/lib/components/layout/Layout.component";
-import Loader from "../src/lib/components/loader/Loader.component";
-import { withKnobs, boolean } from "@storybook/addon-knobs";
-import { action } from "@storybook/addon-actions";
-import { addDecorator } from "@storybook/react";
+import React, { useState, createElement } from 'react';
+import Layout from '../src/lib/components/layout/Layout.component';
+import Loader from '../src/lib/components/loader/Loader.component';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+import { addDecorator } from '@storybook/react';
 
 addDecorator(createElement);
 
 const sideBarActions = [
   {
-    label: "Dashboard",
+    label: 'Dashboard',
     icon: <i className="fas fa-tachometer-alt" />,
-    onClick: action("dashboard clicked"),
+    onClick: action('dashboard clicked'),
     active: true,
-    "data-cy": "Dashboard",
+    'data-cy': 'Dashboard',
   },
   {
-    label: "Servers",
+    label: 'Servers',
     icon: <i className="fas fa-server" />,
-    onClick: action("server clicked"),
-    "data-cy": "Servers",
+    onClick: action('server clicked'),
+    'data-cy': 'Servers',
   },
   {
-    label: "Disks",
+    label: 'Disks',
     icon: <i className="fas fa-hdd" />,
-    onClick: action("disk clicked"),
-    "data-cy": "Disks",
+    onClick: action('disk clicked'),
+    'data-cy': 'Disks',
   },
 ];
 
 const rightActions = [
   {
-    type: "dropdown",
-    text: "FR",
+    type: 'dropdown',
+    text: 'FR',
     icon: <i className="fas fa-globe" />,
     items: [
       {
-        label: "English",
-        name: "EN",
-        onClick: action("English selected"),
+        label: 'English',
+        name: 'EN',
+        onClick: action('English selected'),
       },
     ],
   },
   {
-    type: "dropdown",
+    type: 'dropdown',
     icon: <i className="fas fa-th" />,
     items: [
-      { label: "Hyperdrive UI", onClick: action("Hyperdrive UI clicked") },
+      { label: 'Hyperdrive UI', onClick: action('Hyperdrive UI clicked') },
     ],
   },
   {
-    type: "dropdown",
+    type: 'dropdown',
     icon: <i className="fas fa-question-circle" />,
     items: [
-      { label: "About", onClick: action("About clicked") },
-      { label: "Documentation", onClick: action("Documentation clicked") },
-      { label: "Onboarding", onClick: action("Onboarding clicked") },
+      { label: 'About', onClick: action('About clicked') },
+      { label: 'Documentation', onClick: action('Documentation clicked') },
+      { label: 'Onboarding', onClick: action('Onboarding clicked') },
     ],
   },
   {
-    type: "dropdown",
-    text: "Carlito",
+    type: 'dropdown',
+    text: 'Carlito',
     icon: <i className="fas fa-user" />,
-    items: [{ label: "Log out", onClick: action("Logout clicked") }],
+    items: [{ label: 'Log out', onClick: action('Logout clicked') }],
   },
 ];
 
 export default {
-  title: "Components/Navigation/Layout",
+  title: 'Components/Navigation/Layout',
+  component: Layout,
   decorators: [withKnobs],
 };
 
 export const SidebarDocked = () => {
-  const expanded = boolean("Sidebar Expanded", false);
+  const expanded = boolean('Sidebar Expanded', false);
 
   const sidebar = {
     expanded,
@@ -81,8 +82,8 @@ export const SidebarDocked = () => {
   };
 
   const navbar = {
-    onToggleClick: action("toggle clicked"),
-    productName: "Harware UI",
+    onToggleClick: action('toggle clicked'),
+    productName: 'Harware UI',
     rightActions,
   };
 
@@ -100,8 +101,8 @@ export const SidebarExpanded = () => {
   };
 
   const navbar = {
-    onToggleClick: action("toggle clicked"),
-    productName: "Harware UI",
+    onToggleClick: action('toggle clicked'),
+    productName: 'Harware UI',
     rightActions,
   };
 
@@ -116,11 +117,11 @@ export const SidebarWithToggle = () => {
   const sidebar = {
     expanded: true,
     actions: sideBarActions,
-    onToggleClick: action("toggle clicked"),
+    onToggleClick: action('toggle clicked'),
   };
 
   const navbar = {
-    productName: "Harware UI",
+    productName: 'Harware UI',
     rightActions,
   };
 
@@ -141,7 +142,7 @@ export const HoverableSidebar = () => {
   };
 
   const navbar = {
-    productName: "Harware UI",
+    productName: 'Harware UI',
     rightActions,
   };
 

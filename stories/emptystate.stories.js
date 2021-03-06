@@ -1,10 +1,11 @@
 //@flow
-import React from "react";
-import Emptystate from "../src/lib/components/emptystate/Emptystate.component";
-import { Wrapper } from "./common";
+import React from 'react';
+import Emptystate from '../src/lib/components/emptystate/Emptystate.component';
+import { Wrapper } from './common';
 
 export default {
-  title: "Components/EmptyState",
+  title: 'Components/EmptyState',
+  component: Emptystate,
 };
 
 export const WithLink = () => {

@@ -1,29 +1,30 @@
 //@flow
-import React from "react";
-import Dropdown from "../src/lib/components/dropdown/Dropdown.component";
-import { action } from "@storybook/addon-actions";
-import { Wrapper, Title } from "./common";
+import React from 'react';
+import Dropdown from '../src/lib/components/dropdown/Dropdown.component';
+import { action } from '@storybook/addon-actions';
+import { Wrapper, Title } from './common';
 
 const items = [
   {
-    label: "About",
-    onClick: action("About clicked"),
-    "data-cy": "About",
+    label: 'About',
+    onClick: action('About clicked'),
+    'data-cy': 'About',
   },
   {
-    label: "Documentation",
-    onClick: action("Documentation clicked"),
-    "data-cy": "Documentation",
+    label: 'Documentation',
+    onClick: action('Documentation clicked'),
+    'data-cy': 'Documentation',
   },
   {
-    label: "Onboarding",
-    onClick: action("Onboarding clicked"),
-    "data-cy": "Onboarding",
+    label: 'Onboarding',
+    onClick: action('Onboarding clicked'),
+    'data-cy': 'Onboarding',
   },
 ];
 
 export default {
-  title: "Components/Dropdown",
+  title: 'Components/Dropdown',
+  component: Dropdown,
 };
 
 export const Default = () => {
