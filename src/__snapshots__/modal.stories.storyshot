@@ -2,24 +2,24 @@
 
 exports[`Storyshots Components/Notification/Modal Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-dqBHgY OGZSZ sc-modal"
+    className="sc-bXDlPE jlAsWn sc-modal"
   >
     <div
-      className="sc-gxMtzJ cVftnq sc-modal-content"
+      className="sc-eGCarw dfayLe sc-modal-content"
     >
       <div
-        className="sc-dfVpRl jssEbb sc-modal-header"
+        className="sc-ctaXAZ dYsVOU sc-modal-header"
       >
         <span
-          className="sc-gzOgki kTuuLR"
+          className="sc-dFJsGO gDAzYA"
         >
           Hello
         </span>
         <div
-          className="sc-kPVwWT huJXgW"
+          className="sc-euMpXR cjoeSH"
           onClick={[Function]}
         >
           <i
@@ -28,14 +28,14 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-iyvyFf kczwnX sc-modal-body"
+        className="sc-bsipQr eLjZia sc-modal-body"
       >
         <span>
           Do you want a cookie?
         </span>
       </div>
       <div
-        className="sc-hwwEjo PCffr sc-modal-footer"
+        className="sc-gInsOo dFExJH sc-modal-footer"
       >
         <div
           style={
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
           }
         >
           <button
-            className="sc-fjdhpX gIfOVE sc-button"
+            className="sc-bqyKva jRjpjl sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -54,13 +54,13 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   No
                 </span>
@@ -68,7 +68,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-fjdhpX OWegP sc-button"
+            className="sc-bqyKva bEwriQ sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -76,13 +76,13 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   Yes
                 </span>

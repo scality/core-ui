@@ -2,24 +2,24 @@
 
 exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-EHOje hDIogE sc-banner"
+    className="sc-jSgupP lpbSzY sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
     />
     <div
-      className="sc-bZQynM AMncx"
+      className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-htoDjs bvtSNe"
+        className="sc-fubCfw jmSQlc"
       >
         Error
       </div>
       <span
-        className="sc-gzVnrw hNBHHv"
+        className="sc-iBPRYJ iWUlck"
       >
         There is an error.
       </span>
@@ -30,24 +30,24 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
 
 exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-EHOje eArBHM sc-banner"
+    className="sc-jSgupP hXxpKg sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
     />
     <div
-      className="sc-bZQynM AMncx"
+      className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-htoDjs bvtSNe"
+        className="sc-fubCfw jmSQlc"
       >
         Success
       </div>
       <span
-        className="sc-gzVnrw hNBHHv"
+        className="sc-iBPRYJ iWUlck"
       >
         There is a success.
       </span>
@@ -58,24 +58,24 @@ exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
 
 exports[`Storyshots Components/Notification/Banner Warning Banner 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-EHOje bSKzDs sc-banner"
+    className="sc-jSgupP fkkIew sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
     />
     <div
-      className="sc-bZQynM AMncx"
+      className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-htoDjs bvtSNe"
+        className="sc-fubCfw jmSQlc"
       >
         Warning
       </div>
       <span
-        className="sc-gzVnrw hNBHHv"
+        className="sc-iBPRYJ iWUlck"
       >
         There is a warning.
       </span>

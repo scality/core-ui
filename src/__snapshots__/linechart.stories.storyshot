@@ -2,42 +2,42 @@
 
 exports[`Storyshots Components/Chart/LineChart Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vega-Lite line chart demo
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="vis"
   />
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vega-Lite line chart without axis
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="vis2"
   />
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vega-Lite forecast chart
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="vis_forecast_chart"
   />
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vega-Lite with strokeDash config, opacity config and custom Tooltip
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="id_strokedash"
   />
 </div>

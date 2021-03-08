@@ -2,28 +2,28 @@
 
 exports[`Storyshots Components/Button Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk storybook-button"
+  className="sc-gsTCUz dUzLYl storybook-button"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Default
   </h3>
   <button
-    className="sc-fjdhpX AYhIH sc-button"
+    className="sc-bqyKva kZELOW sc-button"
     disabled={false}
     size="smaller"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Smaller
         </span>
@@ -31,20 +31,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX fjyyDY sc-button"
+    className="sc-bqyKva cCYwKy sc-button"
     disabled={false}
     size="small"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Small
         </span>
@@ -52,7 +52,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX jmHrHD sc-button"
+    className="sc-bqyKva iTJbnG sc-button"
     data-cy="default_button"
     disabled={false}
     size="base"
@@ -60,13 +60,13 @@ exports[`Storyshots Components/Button Default 1`] = `
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           default
         </span>
@@ -74,20 +74,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX ihmnTh sc-button"
+    className="sc-bqyKva dKAgHb sc-button"
     disabled={false}
     size="large"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Large
         </span>
@@ -95,20 +95,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX bvOPjo sc-button"
+    className="sc-bqyKva lcpyWu sc-button"
     disabled={false}
     size="larger"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Larger
         </span>
@@ -116,25 +116,25 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Variant
   </h3>
   <button
-    className="sc-fjdhpX jmHrHD sc-button"
+    className="sc-bqyKva iTJbnG sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           base
         </span>
@@ -142,20 +142,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX evXvSq sc-button"
+    className="sc-bqyKva hKplzc sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           secondary
         </span>
@@ -163,20 +163,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX bJBwoW sc-button"
+    className="sc-bqyKva fttbeB sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           healthy
         </span>
@@ -184,20 +184,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX ggykJS sc-button"
+    className="sc-bqyKva bHFUnw sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           warning
         </span>
@@ -205,20 +205,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX fyNvpo sc-button"
+    className="sc-bqyKva gmmxKE sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           danger
         </span>
@@ -226,12 +226,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Outlined
   </h3>
   <button
-    className="sc-fjdhpX jyZTVK sc-button"
+    className="sc-bqyKva bjrIqZ sc-button"
     disabled={false}
     onClick={[Function]}
     size="base"
@@ -239,13 +239,13 @@ exports[`Storyshots Components/Button Default 1`] = `
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Hello
         </span>
@@ -253,12 +253,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Disabled
   </h3>
   <button
-    className="sc-fjdhpX kiaRSo sc-button"
+    className="sc-bqyKva bwSabE sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -266,13 +266,13 @@ exports[`Storyshots Components/Button Default 1`] = `
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Hello
         </span>
@@ -280,7 +280,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX dqaUnc sc-button"
+    className="sc-bqyKva gCXsyX sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -288,13 +288,13 @@ exports[`Storyshots Components/Button Default 1`] = `
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           secondary
         </span>
@@ -302,7 +302,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX jsbhaX sc-button"
+    className="sc-bqyKva elcSoi sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -310,13 +310,13 @@ exports[`Storyshots Components/Button Default 1`] = `
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           danger
         </span>
@@ -324,20 +324,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX iIKSBi sc-button"
+    className="sc-bqyKva cIBxjO sc-button"
     disabled={true}
     size="larger"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="larger"
         >
           <i
@@ -345,7 +345,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -353,45 +353,45 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Link
   </h3>
   <a
-    className="sc-chPdSV fdJMqc sc-button"
+    className="sc-fFubgz jqjXsW sc-button"
     disabled={false}
     href="/"
     size="base"
     title=""
   >
     <span
-      className="sc-cSHVUG jGeted"
+      className="sc-hBEYos jaVYGW"
     >
       Hello
     </span>
   </a>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Loading
   </h3>
   <button
-    className="sc-fjdhpX rkyxg sc-button"
+    className="sc-bqyKva ijLcwD sc-button"
     disabled={true}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <div
-        className="sc-gqjmRU cvSyVs sc-loader"
+        className="sc-iqHYGH gSBJUA sc-loader"
         color="#87929D"
         size="base"
       >
         <span
-          className="sc-jTzLTM hkxQjq"
+          className="sc-dQppl cbDpju"
         >
           <svg
             height="50"
@@ -513,7 +513,7 @@ exports[`Storyshots Components/Button Default 1`] = `
         className="sc-button-text"
       >
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -521,25 +521,25 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Button Text Icon
   </h3>
   <button
-    className="sc-fjdhpX AYhIH sc-button"
+    className="sc-bqyKva kZELOW sc-button"
     disabled={false}
     size="smaller"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG bzSlWL"
+          className="sc-kstrdz gLcDls"
           size="smaller"
         >
           <i
@@ -547,7 +547,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Smaller
         </span>
@@ -555,20 +555,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX fjyyDY sc-button"
+    className="sc-bqyKva cCYwKy sc-button"
     disabled={false}
     size="small"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG bzSlWL"
+          className="sc-kstrdz gLcDls"
           size="small"
         >
           <i
@@ -576,7 +576,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Small
         </span>
@@ -584,20 +584,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX jmHrHD sc-button"
+    className="sc-bqyKva iTJbnG sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG bzSlWL"
+          className="sc-kstrdz gLcDls"
           size="base"
         >
           <i
@@ -605,7 +605,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           default
         </span>
@@ -613,20 +613,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX ihmnTh sc-button"
+    className="sc-bqyKva dKAgHb sc-button"
     disabled={false}
     size="large"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG bzSlWL"
+          className="sc-kstrdz gLcDls"
           size="large"
         >
           <i
@@ -634,7 +634,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Large
         </span>
@@ -642,20 +642,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX bvOPjo sc-button"
+    className="sc-bqyKva lcpyWu sc-button"
     disabled={false}
     size="larger"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG bzSlWL"
+          className="sc-kstrdz gLcDls"
           size="larger"
         >
           <i
@@ -663,7 +663,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           Larger
         </span>
@@ -671,25 +671,25 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Icon Button
   </h3>
   <button
-    className="sc-fjdhpX AYhIH sc-button"
+    className="sc-bqyKva kZELOW sc-button"
     disabled={false}
     size="smaller"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="smaller"
         >
           <i
@@ -697,7 +697,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -705,20 +705,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX fjyyDY sc-button"
+    className="sc-bqyKva cCYwKy sc-button"
     disabled={false}
     size="small"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="small"
         >
           <i
@@ -726,7 +726,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -734,20 +734,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX jmHrHD sc-button"
+    className="sc-bqyKva iTJbnG sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="base"
         >
           <i
@@ -755,7 +755,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -763,20 +763,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX ihmnTh sc-button"
+    className="sc-bqyKva dKAgHb sc-button"
     disabled={false}
     size="large"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="large"
         >
           <i
@@ -784,7 +784,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -792,20 +792,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX bvOPjo sc-button"
+    className="sc-bqyKva lcpyWu sc-button"
     disabled={false}
     size="larger"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="larger"
         >
           <i
@@ -813,7 +813,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -821,25 +821,25 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Icon Button Inverted
   </h3>
   <button
-    className="sc-fjdhpX cbgZEz sc-button"
+    className="sc-bqyKva iDvvJB sc-button"
     disabled={false}
     size="smaller"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="smaller"
         >
           <i
@@ -847,7 +847,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -855,20 +855,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX xnnmy sc-button"
+    className="sc-bqyKva jIZbPl sc-button"
     disabled={false}
     size="small"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="small"
         >
           <i
@@ -876,7 +876,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -884,20 +884,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX hLKstG sc-button"
+    className="sc-bqyKva bzbetx sc-button"
     disabled={false}
     size="base"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="base"
         >
           <i
@@ -905,7 +905,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -913,20 +913,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX bohfKz sc-button"
+    className="sc-bqyKva boiKsk sc-button"
     disabled={false}
     size="large"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="large"
         >
           <i
@@ -934,7 +934,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>
@@ -942,20 +942,20 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-fjdhpX hsEgyx sc-button"
+    className="sc-bqyKva iKYrvF sc-button"
     disabled={false}
     size="larger"
     title=""
     type="button"
   >
     <span
-      className="sc-kAzzGY ebaOMy"
+      className="sc-fodVxV ckNcPt"
     >
       <span
         className="sc-button-text"
       >
         <span
-          className="sc-jzJRlG idGKfE"
+          className="sc-kstrdz hFNOsv"
           size="larger"
         >
           <i
@@ -963,7 +963,7 @@ exports[`Storyshots Components/Button Default 1`] = `
           />
         </span>
         <span
-          className="sc-cSHVUG jGeted"
+          className="sc-hBEYos jaVYGW"
         >
           
         </span>

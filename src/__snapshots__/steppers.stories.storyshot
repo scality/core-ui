@@ -2,24 +2,24 @@
 
 exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Default Steppers 
   </h3>
   <div
-    className="sc-GMQeP jXMCGy sc-steppers"
+    className="sc-fHYxKZ sc-steppers"
   >
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO eroBRX"
+          className="sc-flMoUE kfCLPv"
         >
           <span>
             <i
@@ -28,49 +28,49 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hFxJSi"
+          className="sc-irlOZD buBDUp"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO fieBtQ"
+          className="sc-flMoUE eDGRne"
         >
           <span>
             2
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-bXGyLb iuWlcD"
+          className="sc-iGctRS hdcPeC"
         >
           <button
-            className="sc-fjdhpX fjyyDY sc-button"
+            className="sc-bqyKva cCYwKy sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -78,13 +78,13 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   Apply
                 </span>
@@ -95,67 +95,67 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Workload Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             5
@@ -163,10 +163,10 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Extend etcd cluster to node
         </span>
@@ -174,21 +174,21 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Steppers with loading
   </h3>
   <div
-    className="sc-GMQeP jXMCGy sc-steppers"
+    className="sc-fHYxKZ sc-steppers"
   >
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO eroBRX"
+          className="sc-flMoUE kfCLPv"
         >
           <span>
             <i
@@ -197,35 +197,35 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hFxJSi"
+          className="sc-irlOZD buBDUp"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO fieBtQ"
+          className="sc-flMoUE eDGRne"
         >
           <div
-            className="sc-gqjmRU cvSyVs sc-loader"
+            className="sc-iqHYGH gSBJUA sc-loader"
             color="#87929D"
             size="base"
           >
             <span
-              className="sc-jTzLTM hkxQjq"
+              className="sc-dQppl cbDpju"
             >
               <svg
                 height="50"
@@ -345,22 +345,22 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           </div>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-bXGyLb iuWlcD"
+          className="sc-iGctRS hdcPeC"
         >
           <button
-            className="sc-fjdhpX fjyyDY sc-button"
+            className="sc-bqyKva cCYwKy sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -368,13 +368,13 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   Apply
                 </span>
@@ -385,67 +385,67 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Workload Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             5
@@ -453,10 +453,10 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Extend etcd cluster to node
         </span>
@@ -464,21 +464,21 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Steppers with error
   </h3>
   <div
-    className="sc-GMQeP jXMCGy sc-steppers"
+    className="sc-fHYxKZ sc-steppers"
   >
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO eroBRX"
+          className="sc-flMoUE kfCLPv"
         >
           <span>
             <i
@@ -487,27 +487,27 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hFxJSi"
+          className="sc-irlOZD buBDUp"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Node Registerd
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO eroBRX"
+          className="sc-flMoUE kfCLPv"
         >
           <span>
             <i
@@ -516,49 +516,49 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hFxJSi"
+          className="sc-irlOZD buBDUp"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Deploy Salt Minion on node
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO ipAnwI"
+          className="sc-flMoUE dIbYaS"
         >
           <span>
             3
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Workload Plane
         </span>
         <div
-          className="sc-bXGyLb iuWlcD"
+          className="sc-iGctRS hdcPeC"
         >
           <button
-            className="sc-fjdhpX fjyyDY sc-button"
+            className="sc-bqyKva cCYwKy sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -566,13 +566,13 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   Apply
                 </span>
@@ -583,40 +583,40 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             4
           </span>
         </div>
         <hr
-          className="sc-lkqHmb hdLmSw"
+          className="sc-irlOZD PngGR"
         />
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Add node to Control Plane
         </span>
       </div>
     </div>
     <div
-      className="sc-exAgwC bvHQGo"
+      className="sc-gyUeRy fqBXzL"
     >
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <div
-          className="sc-gojNiO bqhLnA"
+          className="sc-flMoUE jwihVj"
         >
           <span>
             5
@@ -624,10 +624,10 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-cQFLBn ffVKHL"
+        className="sc-gkdzZj hxbqaY"
       >
         <span
-          className="sc-daURTG kUUhXB"
+          className="sc-eWVKcp kpGNoS"
         >
           Extend etcd cluster to node
         </span>

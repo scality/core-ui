@@ -2,10 +2,10 @@
 
 exports[`Storyshots Components/Constrainedtext Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Constrained Text
   </h3>
@@ -18,15 +18,15 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     }
   >
     <div
-      className="sc-iRbamj eEYSMz"
+      className="sc-cBNfnY fdVsYI"
     >
       <div
-        className="sc-jAaTju fgnljC sc-tooltip"
+        className="sc-jJEJSO jHwXvj sc-tooltip"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-gPEVay fcTmWS sc-constrainedtext"
+          className="sc-gWHgXt lataRC sc-constrainedtext"
         >
           This is a long phrase
         </div>
@@ -34,7 +34,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     With the ability to customize the style of tooltip
   </h3>
@@ -47,15 +47,15 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     }
   >
     <div
-      className="sc-iRbamj eEYSMz"
+      className="sc-cBNfnY fdVsYI"
     >
       <div
-        className="sc-jAaTju fgnljC sc-tooltip"
+        className="sc-jJEJSO jHwXvj sc-tooltip"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-gPEVay fcTmWS sc-constrainedtext"
+          className="sc-gWHgXt lataRC sc-constrainedtext"
         >
           This is a long phrase
         </div>

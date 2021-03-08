@@ -2,10 +2,10 @@
 
 exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List
   </h3>
@@ -13,18 +13,18 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-esjQYD eDGSWu"
+        className="sc-dtTInj jdomna"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
+        className="sc-XhUPp bmFebH sc-multi-select-list-search"
       >
         <div
-          className="sc-frDJqD jLOKHY sc-select-container"
+          className="sc-higXBA eESVnP sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -131,7 +131,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX jmHrHD sc-button"
+          className="sc-bqyKva iTJbnG sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -139,13 +139,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="base"
               >
                 <i
@@ -153,7 +153,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -162,14 +162,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-kGXeez iCLyET sc-checkbox"
+            className="sc-idOhPF gHixSi sc-checkbox"
           >
             <input
               checked={true}
@@ -181,7 +181,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-fjdhpX hLKstG sc-button"
+            className="sc-bqyKva bzbetx sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -189,13 +189,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -203,7 +203,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -212,24 +212,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -237,13 +237,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -251,7 +251,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -261,14 +261,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-kGXeez lnmGHl sc-checkbox"
+            className="sc-idOhPF kSxlDv sc-checkbox"
           >
             <input
               checked={false}
@@ -280,7 +280,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-fjdhpX hLKstG sc-button"
+            className="sc-bqyKva bzbetx sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -288,13 +288,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -302,7 +302,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -311,24 +311,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -336,13 +336,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -350,7 +350,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -362,7 +362,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List without search
   </h3>
@@ -370,22 +370,22 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-esjQYD eDGSWu"
+        className="sc-dtTInj jdomna"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-kGXeez iCLyET sc-checkbox"
+            className="sc-idOhPF gHixSi sc-checkbox"
           >
             <input
               checked={true}
@@ -397,7 +397,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-fjdhpX hLKstG sc-button"
+            className="sc-bqyKva bzbetx sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -405,13 +405,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -419,7 +419,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -428,24 +428,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -453,13 +453,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -467,7 +467,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -477,14 +477,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-kGXeez lnmGHl sc-checkbox"
+            className="sc-idOhPF kSxlDv sc-checkbox"
           >
             <input
               checked={false}
@@ -496,7 +496,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-fjdhpX hLKstG sc-button"
+            className="sc-bqyKva bzbetx sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -504,13 +504,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -518,7 +518,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -527,24 +527,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -552,13 +552,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -566,7 +566,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -578,7 +578,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List without Favourite
   </h3>
@@ -586,18 +586,18 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-esjQYD eDGSWu"
+        className="sc-dtTInj jdomna"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
+        className="sc-XhUPp bmFebH sc-multi-select-list-search"
       >
         <div
-          className="sc-frDJqD jLOKHY sc-select-container"
+          className="sc-higXBA eESVnP sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -704,7 +704,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX jmHrHD sc-button"
+          className="sc-bqyKva iTJbnG sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -712,13 +712,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="base"
               >
                 <i
@@ -726,7 +726,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -735,14 +735,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={true}
-            className="sc-kGXeez iCLyET sc-checkbox"
+            className="sc-idOhPF gHixSi sc-checkbox"
           >
             <input
               checked={true}
@@ -755,24 +755,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -780,13 +780,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -794,7 +794,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -804,14 +804,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         >
           <label
             checked={false}
-            className="sc-kGXeez lnmGHl sc-checkbox"
+            className="sc-idOhPF kSxlDv sc-checkbox"
           >
             <input
               checked={false}
@@ -824,24 +824,24 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </label>
         </div>
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -849,13 +849,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -863,7 +863,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -875,7 +875,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List without Favourite and Selectbox
   </h3>
@@ -883,18 +883,18 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-esjQYD eDGSWu"
+        className="sc-dtTInj jdomna"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
+        className="sc-XhUPp bmFebH sc-multi-select-list-search"
       >
         <div
-          className="sc-frDJqD jLOKHY sc-select-container"
+          className="sc-higXBA eESVnP sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1001,7 +1001,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX jmHrHD sc-button"
+          className="sc-bqyKva iTJbnG sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1009,13 +1009,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="base"
               >
                 <i
@@ -1023,7 +1023,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -1032,30 +1032,30 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1063,13 +1063,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -1077,7 +1077,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -1087,30 +1087,30 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         >
           <button
-            className="sc-fjdhpX kWTEIy sc-button"
+            className="sc-bqyKva bMFvFs sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1118,13 +1118,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="base"
                 >
                   <i
@@ -1132,7 +1132,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -1144,7 +1144,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List without Remove Button, Favourite and Selectbox
   </h3>
@@ -1152,18 +1152,18 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-esjQYD eDGSWu"
+        className="sc-dtTInj jdomna"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
+        className="sc-XhUPp bmFebH sc-multi-select-list-search"
       >
         <div
-          className="sc-frDJqD jLOKHY sc-select-container"
+          className="sc-higXBA eESVnP sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1270,7 +1270,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX jmHrHD sc-button"
+          className="sc-bqyKva iTJbnG sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1278,13 +1278,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="base"
               >
                 <i
@@ -1292,7 +1292,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -1301,57 +1301,57 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         />
       </div>
     </div>
   </div>
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     MultiSelect List without Title, Remove Button, Favourite and Selectbox
   </h3>
@@ -1359,14 +1359,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-kfGgVZ cAXMEg sc-multi-select-list"
+      className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       
       <div
-        className="sc-eXEjpC ehuLUO sc-multi-select-list-search"
+        className="sc-XhUPp bmFebH sc-multi-select-list-search"
       >
         <div
-          className="sc-frDJqD jLOKHY sc-select-container"
+          className="sc-higXBA eESVnP sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1473,7 +1473,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-fjdhpX jmHrHD sc-button"
+          className="sc-bqyKva iTJbnG sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1481,13 +1481,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="base"
               >
                 <i
@@ -1495,7 +1495,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -1504,51 +1504,51 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             AWS
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Amazon
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-kIPQKe HZWav sc-multi-select-item"
+        className="sc-dkIXFM epnRdC sc-multi-select-item"
       >
         <div
-          className="sc-ibxdXY joluPq sc-multi-select-item-left"
+          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
         />
         <div
-          className="sc-RefOD bKIgpe sc-multi-select-item-center"
+          className="sc-tYoTV iypQOB sc-multi-select-item-center"
         >
           <span
-            className="sc-bwCtUz kNpCvH sc-multi-select-item-label"
+            className="sc-eHfQar dEbBxL sc-multi-select-item-label"
           >
             WM
           </span>
           <span
-            className="sc-hrWEMg fOsrtz sc-multi-select-item-description"
+            className="sc-hzMMCg sc-multi-select-item-description"
           >
             Walmart
           </span>
         </div>
         <div
-          className="sc-iQKALj iFRtTp sc-multi-select-item-right"
+          className="sc-biBrSq liLQyi sc-multi-select-item-right"
         />
       </div>
     </div>
