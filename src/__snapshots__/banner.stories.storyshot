@@ -28,6 +28,30 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Notification/Banner Playground 1`] = `
+<div
+  className="sc-jSgupP hXxpKg sc-banner"
+>
+  <i
+    className="fas fa-exclamation-triangle"
+  />
+  <div
+    className="sc-gKsewC ehdtkM"
+  >
+    <div
+      className="sc-fubCfw jmSQlc"
+    >
+      Man
+    </div>
+    <span
+      className="sc-iBPRYJ iWUlck"
+    >
+      There is a success
+    </span>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
 <div
   className="sc-gsTCUz dUzLYl"

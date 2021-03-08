@@ -6,7 +6,7 @@ import * as defaultTheme from "../../style/theme";
 import { getThemePropSelector, getThemeVariantSelector } from "../../utils";
 import type { Variant } from "../constants";
 
-type Props = {
+export type Props = {
   icon?: Object,
   title?: string,
   children: Node,

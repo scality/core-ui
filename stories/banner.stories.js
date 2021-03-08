@@ -1,11 +1,38 @@
 //@flow
 import React from 'react';
 import Banner from '../src/lib/components/banner/Banner.component';
+import type { Props } from '../src/lib/components/banner/Banner.component';
 import { Wrapper } from './common';
 
 export default {
   title: 'Components/Notification/Banner',
   component: Banner,
+  argTypes: {
+    children: {
+      control: {
+        disable: true,
+      },
+    },
+    variant: {
+      control: {
+        type: 'select',
+        options: [
+          'base',
+          'secondary',
+          'healthy',
+          'warning',
+          'danger',
+          'success',
+        ],
+      },
+    },
+    title: {},
+    icon: {
+      control: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const ErrorBanner = () => (
@@ -20,9 +47,6 @@ export const ErrorBanner = () => (
   </Wrapper>
 );
 
-ErrorBanner.args = {
-  variant: 'danger',
-};
 export const WarningBanner = () => (
   <Wrapper>
     <Banner
@@ -46,3 +70,14 @@ export const SuccessBanner = () => (
     </Banner>
   </Wrapper>
 );
+
+const Template = (args: Props) => <Banner {...args} />;
+
+export const Playground: { args?: Props } = Template.bind({});
+
+Playground.args = {
+  variant: 'success',
+  icon: <i className="fas fa-exclamation-triangle" />,
+  title: 'Man',
+  children: 'There is a success',
+};
