@@ -2,21 +2,21 @@
 
 exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 1`] = `
 <div
-  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
+  className="sc-jONnTn jIwPKP sc-lateralnavbarlayout"
 >
   <div
-    className="sc-ktHwxA kIsNqM"
+    className="sc-hlTvYk gZjpFN"
   >
     <div
-      className="sc-uJMKN dPpSFe"
+      className="sc-GqfZa deLbXA"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-bbmXgH jBPDrw sc-sidebar"
+        className="sc-fWSCIC kvsuhP sc-sidebar"
       >
         <button
-          className="sc-fjdhpX bvOPjo sc-button"
+          className="sc-bqyKva lcpyWu sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -24,13 +24,13 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
           type="button"
         >
           <span
-            className="sc-kAzzGY ebaOMy"
+            className="sc-fodVxV ckNcPt"
           >
             <span
               className="sc-button-text"
             >
               <span
-                className="sc-jzJRlG idGKfE"
+                className="sc-kstrdz hFNOsv"
                 size="larger"
               >
                 <i
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
                 />
               </span>
               <span
-                className="sc-cSHVUG jGeted"
+                className="sc-hBEYos jaVYGW"
               >
                 
               </span>
@@ -46,30 +46,30 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
           </span>
         </button>
         <div
-          className="sc-gGBfsJ jRrzul sc-sidebar-item"
+          className="sc-dwfUOf egTwPX sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-fYxtnH dPjAEX"
+            className="sc-jHVexB bKzHav"
           />
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-server"
@@ -77,13 +77,13 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
           </div>
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-hdd"
@@ -93,15 +93,15 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
       </div>
     </div>
     <div
-      className="sc-cIShpX EUShx main"
+      className="sc-eLgOdN esBcHq main"
     >
       <div
-        className="sc-gqjmRU kKEJsW sc-loader"
+        className="sc-iqHYGH iErTGX sc-loader"
         color="#87929D"
         size="massive"
       >
         <span
-          className="sc-jTzLTM hkxQjq"
+          className="sc-dQppl cbDpju"
         >
           <svg
             height="50"
@@ -227,44 +227,44 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
 exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Docked 1`] = `
 <div>
   <div
-    className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
+    className="sc-jONnTn jIwPKP sc-lateralnavbarlayout"
   >
     <div
-      className="sc-ktHwxA kIsNqM"
+      className="sc-hlTvYk gZjpFN"
     >
       <div
-        className="sc-uJMKN dPpSFe"
+        className="sc-GqfZa deLbXA"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-bbmXgH jBPDrw sc-sidebar"
+          className="sc-fWSCIC kvsuhP sc-sidebar"
         >
           <div
-            className="sc-gGBfsJ jRrzul sc-sidebar-item"
+            className="sc-dwfUOf egTwPX sc-sidebar-item"
             data-cy="Dashboard"
             onClick={[Function]}
             title="Dashboard"
           >
             <div
-              className="sc-tilXH bflczs"
+              className="sc-aemoO hANCoY"
             >
               <i
                 className="fas fa-tachometer-alt"
               />
             </div>
             <div
-              className="sc-fYxtnH dPjAEX"
+              className="sc-jHVexB bKzHav"
             />
           </div>
           <div
-            className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+            className="sc-dwfUOf hVoQQq sc-sidebar-item"
             data-cy="Servers"
             onClick={[Function]}
             title="Servers"
           >
             <div
-              className="sc-tilXH bflczs"
+              className="sc-aemoO hANCoY"
             >
               <i
                 className="fas fa-server"
@@ -272,13 +272,13 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Docked 1`]
             </div>
           </div>
           <div
-            className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+            className="sc-dwfUOf hVoQQq sc-sidebar-item"
             data-cy="Disks"
             onClick={[Function]}
             title="Disks"
           >
             <div
-              className="sc-tilXH bflczs"
+              className="sc-aemoO hANCoY"
             >
               <i
                 className="fas fa-hdd"
@@ -288,15 +288,15 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Docked 1`]
         </div>
       </div>
       <div
-        className="sc-cIShpX EUShx main"
+        className="sc-eLgOdN esBcHq main"
       >
         <div
-          className="sc-gqjmRU kKEJsW sc-loader"
+          className="sc-iqHYGH iErTGX sc-loader"
           color="#87929D"
           size="massive"
         >
           <span
-            className="sc-jTzLTM hkxQjq"
+            className="sc-dQppl cbDpju"
           >
             <svg
               height="50"
@@ -422,75 +422,75 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Docked 1`]
 
 exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Expanded 1`] = `
 <div
-  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
+  className="sc-jONnTn jIwPKP sc-lateralnavbarlayout"
 >
   <div
-    className="sc-ktHwxA kIsNqM"
+    className="sc-hlTvYk gZjpFN"
   >
     <div
-      className="sc-uJMKN kbGcMy"
+      className="sc-GqfZa jOrJEv"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-bbmXgH hTdRDq sc-sidebar"
+        className="sc-fWSCIC kjFTGg sc-sidebar"
       >
         <div
-          className="sc-gGBfsJ jRrzul sc-sidebar-item"
+          className="sc-dwfUOf egTwPX sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Dashboard
           </div>
           <div
-            className="sc-fYxtnH dPjAEX"
+            className="sc-jHVexB bKzHav"
           />
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Disks
           </div>
@@ -498,15 +498,15 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Expanded 1
       </div>
     </div>
     <div
-      className="sc-cIShpX EUShx main"
+      className="sc-eLgOdN esBcHq main"
     >
       <div
-        className="sc-gqjmRU kKEJsW sc-loader"
+        className="sc-iqHYGH iErTGX sc-loader"
         color="#87929D"
         size="massive"
       >
         <span
-          className="sc-jTzLTM hkxQjq"
+          className="sc-dQppl cbDpju"
         >
           <svg
             height="50"
@@ -631,24 +631,24 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Expanded 1
 
 exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggle 1`] = `
 <div
-  className="sc-hEsumM knjjPK sc-lateralnavbarlayout"
+  className="sc-jONnTn jIwPKP sc-lateralnavbarlayout"
 >
   <div
-    className="sc-ktHwxA kIsNqM"
+    className="sc-hlTvYk gZjpFN"
   >
     <div
-      className="sc-uJMKN kbGcMy"
+      className="sc-GqfZa jOrJEv"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-bbmXgH hTdRDq sc-sidebar"
+        className="sc-fWSCIC kjFTGg sc-sidebar"
       >
         <div
-          className="sc-tilXH bflczs"
+          className="sc-aemoO hANCoY"
         >
           <button
-            className="sc-fjdhpX bvOPjo sc-button"
+            className="sc-bqyKva lcpyWu sc-button"
             disabled={false}
             onClick={[Function]}
             size="larger"
@@ -656,13 +656,13 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
             type="button"
           >
             <span
-              className="sc-kAzzGY ebaOMy"
+              className="sc-fodVxV ckNcPt"
             >
               <span
                 className="sc-button-text"
               >
                 <span
-                  className="sc-jzJRlG idGKfE"
+                  className="sc-kstrdz hFNOsv"
                   size="larger"
                 >
                   <i
@@ -670,7 +670,7 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
                   />
                 </span>
                 <span
-                  className="sc-cSHVUG jGeted"
+                  className="sc-hBEYos jaVYGW"
                 >
                   
                 </span>
@@ -679,61 +679,61 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
           </button>
         </div>
         <div
-          className="sc-gGBfsJ jRrzul sc-sidebar-item"
+          className="sc-dwfUOf egTwPX sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Dashboard
           </div>
           <div
-            className="sc-fYxtnH dPjAEX"
+            className="sc-jHVexB bKzHav"
           />
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-gGBfsJ eWIkPb sc-sidebar-item"
+          className="sc-dwfUOf hVoQQq sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-tilXH bflczs"
+            className="sc-aemoO hANCoY"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-jnlKLf kzhJck"
+            className="sc-TmcTc ipaHtC"
           >
             Disks
           </div>
@@ -741,15 +741,15 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
       </div>
     </div>
     <div
-      className="sc-cIShpX EUShx main"
+      className="sc-eLgOdN esBcHq main"
     >
       <div
-        className="sc-gqjmRU kKEJsW sc-loader"
+        className="sc-iqHYGH iErTGX sc-loader"
         color="#87929D"
         size="massive"
       >
         <span
-          className="sc-jTzLTM hkxQjq"
+          className="sc-dQppl cbDpju"
         >
           <svg
             height="50"

@@ -2,24 +2,24 @@
 
 exports[`Storyshots Components/Chart/SparkLine Default 1`] = `
 <div
-  className="sc-bwzfXH hyPwIk"
+  className="sc-gsTCUz dUzLYl"
 >
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vege-Lite sparkline chart demo
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="vis"
   />
   <h3
-    className="sc-htpNat kmOyGE"
+    className="sc-dlfnbm dxKCyT"
   >
     Vege-Lite sparkline multi chart demo
   </h3>
   <div
-    className="sc-bdVaJa bDWFJH sc-vegachart"
+    className="sc-bdfBwQ sc-vegachart"
     id="multiVis"
   />
 </div>
