@@ -111,11 +111,11 @@ export const fontWeight = {
 };
 
 export const padding = {
-  smaller: "5px",
-  small: "10px",
-  base: "15px",
-  large: "20px",
-  larger: "30px",
+  smaller: '4px',
+  small: '8px',
+  base: '16px',
+  large: '20px',
+  larger: '24px',
 };
 
 // Svg size
