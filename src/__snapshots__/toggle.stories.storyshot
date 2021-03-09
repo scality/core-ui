@@ -8,7 +8,7 @@ exports[`Storyshots Components/Toggle Default 1`] = `
     className="sc-kiYtDG eMrDGU sc-toggle"
   >
     <label
-      className="sc-cKZHah dUsDWZ"
+      className="sc-cKZHah jeeBBo"
     >
       <input
         checked={false}
@@ -31,7 +31,7 @@ exports[`Storyshots Components/Toggle Default 1`] = `
     className="sc-kiYtDG eMrDGU sc-toggle"
   >
     <label
-      className="sc-cKZHah dUsDWZ"
+      className="sc-cKZHah jeeBBo"
     >
       <input
         checked={true}

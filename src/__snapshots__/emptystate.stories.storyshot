@@ -8,7 +8,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
     className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <div
         className="sc-bBrOnJ kslhCT"
@@ -19,7 +19,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
         className="sc-cTkwdZ jgiGzD"
@@ -30,7 +30,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
         className="sc-cTkwdZ jgiGzD"
@@ -89,7 +89,7 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
     className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <div
         className="sc-bBrOnJ kslhCT"
@@ -100,7 +100,7 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
         className="sc-cTkwdZ jgiGzD"
@@ -111,7 +111,7 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-jNMdTA idLPUw"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
         className="sc-cTkwdZ jgiGzD"

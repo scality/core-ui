@@ -20,7 +20,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -49,7 +49,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-ljRboo sc-jmhFOf ldcEPh jwTIaX"
+        className="sc-ljRboo sc-jmhFOf dsAZE pfBzm"
       >
         <span
           className="sc-fmlJLJ jPyQMN sc-progressbar-bottomleftlabel"
@@ -72,7 +72,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -101,7 +101,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-ljRboo sc-jmhFOf ldcEPh jwTIaX"
+        className="sc-ljRboo sc-jmhFOf dsAZE pfBzm"
       >
         <span
           className="sc-fmlJLJ jPyQMN sc-progressbar-bottomleftlabel"
@@ -124,7 +124,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -153,7 +153,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-ljRboo sc-jmhFOf ldcEPh jwTIaX"
+        className="sc-ljRboo sc-jmhFOf dsAZE pfBzm"
       >
         <span
           className="sc-fmlJLJ jPyQMN sc-progressbar-bottomleftlabel"
@@ -176,7 +176,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -205,7 +205,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-ljRboo sc-jmhFOf ldcEPh jwTIaX"
+        className="sc-ljRboo sc-jmhFOf dsAZE pfBzm"
       >
         <span
           className="sc-fmlJLJ jPyQMN sc-progressbar-bottomleftlabel"
@@ -228,7 +228,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -258,7 +258,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-ljRboo sc-jmhFOf ldcEPh jwTIaX"
+        className="sc-ljRboo sc-jmhFOf dsAZE pfBzm"
       >
         <span
           className="sc-fmlJLJ jPyQMN sc-progressbar-bottomleftlabel"
@@ -276,7 +276,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"
@@ -305,7 +305,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       className="sc-fXoxut sc-progressbar"
     >
       <div
-        className="sc-ljRboo ldcEPh"
+        className="sc-ljRboo dsAZE"
       >
         <span
           className="sc-jXktwP inffXm sc-progressbar-topLeftLabel"

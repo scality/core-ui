@@ -13,7 +13,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     className="sc-kfzAmx IljFH sc-circularprogressbar"
   >
     <span
-      className="sc-fKFyDc juaAKP"
+      className="sc-fKFyDc jxiMIy"
     >
       Total Capacity
     </span>
@@ -56,7 +56,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     className="sc-kfzAmx IljFH sc-circularprogressbar"
   >
     <span
-      className="sc-fKFyDc juaAKP"
+      className="sc-fKFyDc jxiMIy"
     >
       Total Capacity
     </span>

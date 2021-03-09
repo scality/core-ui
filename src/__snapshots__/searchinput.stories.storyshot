@@ -20,7 +20,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
       className="sc-cbDGPM gjnIXK sc-searchinput"
     >
       <div
-        className="sc-lcujXC csZzjs sc-input"
+        className="sc-lcujXC fvEOYM sc-input"
         type="text"
       >
         <div
@@ -75,7 +75,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-lcujXC csZzjs sc-input"
+        className="sc-lcujXC fvEOYM sc-input"
         type="text"
       >
         <div
@@ -128,7 +128,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
       className="sc-cbDGPM eXvaJY sc-searchinput"
     >
       <div
-        className="sc-lcujXC csZzjs sc-input"
+        className="sc-lcujXC fvEOYM sc-input"
         type="text"
       >
         <div
@@ -182,7 +182,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
       className="sc-cbDGPM eXvaJY sc-searchinput"
     >
       <div
-        className="sc-lcujXC csZzjs sc-input"
+        className="sc-lcujXC fvEOYM sc-input"
         type="text"
       >
         <div

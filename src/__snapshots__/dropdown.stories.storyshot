@@ -34,7 +34,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -67,7 +67,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -133,7 +133,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -166,7 +166,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -222,7 +222,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -260,7 +260,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         primary
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -293,7 +293,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         secondary
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -326,7 +326,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         healthy
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -359,7 +359,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         warning
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"
@@ -392,7 +392,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         danger
       </span>
       <span
-        className="sc-iUuytg kpljA-d"
+        className="sc-iUuytg kpKxJm"
       >
         <i
           className="fas fa-caret-down"

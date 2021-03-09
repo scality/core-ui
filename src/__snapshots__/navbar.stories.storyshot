@@ -134,7 +134,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
-        className="sc-dtwoBo dhFFXQ"
+        className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
         selected={true}
       >
@@ -143,7 +143,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -152,7 +152,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -161,7 +161,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -170,7 +170,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -410,7 +410,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
-        className="sc-dtwoBo dhFFXQ"
+        className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
         selected={true}
       >
@@ -419,7 +419,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -428,7 +428,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -437,7 +437,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -446,7 +446,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -656,7 +656,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
-        className="sc-dtwoBo dhFFXQ"
+        className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
         selected={true}
       >
@@ -665,7 +665,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -674,7 +674,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -683,7 +683,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -692,7 +692,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -923,7 +923,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
-        className="sc-dtwoBo dhFFXQ"
+        className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
         selected={true}
       >
@@ -932,7 +932,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -941,7 +941,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -950,7 +950,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -959,7 +959,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-dtwoBo jalIbW"
+        className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
         selected={false}
       >
@@ -1092,7 +1092,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
-        className="sc-dtwoBo sc-dacFzL dhFFXQ cIqgkt"
+        className="sc-dtwoBo sc-dacFzL jvVXwL kNoNju"
         selected={true}
       >
         <a
@@ -1102,7 +1102,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-dtwoBo sc-dacFzL jalIbW kdoKtB"
+        className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
       >
         <a
           href="/users"
@@ -1111,7 +1111,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-dtwoBo sc-dacFzL jalIbW kdoKtB"
+        className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
       >
         <a
           href="/policies"
@@ -1120,7 +1120,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-dtwoBo sc-dacFzL jalIbW kdoKtB"
+        className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
       >
         <a
           href="/buckets"
@@ -1129,7 +1129,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-dtwoBo sc-dacFzL jalIbW kdoKtB"
+        className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
       >
         <a
           href="/workflows"

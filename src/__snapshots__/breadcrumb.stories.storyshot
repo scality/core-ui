@@ -22,7 +22,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </label>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
@@ -54,7 +54,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
@@ -70,7 +70,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </label>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
@@ -87,7 +87,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
@@ -103,7 +103,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-kEjbxe fhYybu sc-breadcrumb_separator"
+      className="sc-kEjbxe TTJAs sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"

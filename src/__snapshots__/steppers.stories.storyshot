@@ -67,7 +67,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-iGctRS hdcPeC"
+          className="sc-iGctRS kQUNIn"
         >
           <button
             className="sc-bqyKva cCYwKy sc-button"
@@ -357,7 +357,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           Deploy Salt Minion on node
         </span>
         <div
-          className="sc-iGctRS hdcPeC"
+          className="sc-iGctRS kQUNIn"
         >
           <button
             className="sc-bqyKva cCYwKy sc-button"
@@ -555,7 +555,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           Add node to Workload Plane
         </span>
         <div
-          className="sc-iGctRS hdcPeC"
+          className="sc-iGctRS kQUNIn"
         >
           <button
             className="sc-bqyKva cCYwKy sc-button"

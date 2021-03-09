@@ -376,7 +376,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     Button Loading
   </h3>
   <button
-    className="sc-bqyKva ijLcwD sc-button"
+    className="sc-bqyKva ixLUty sc-button"
     disabled={true}
     size="base"
     title=""

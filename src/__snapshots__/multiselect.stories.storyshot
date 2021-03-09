@@ -16,12 +16,12 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
       className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-dtTInj jdomna"
+        className="sc-dtTInj kgRkqh"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-XhUPp bmFebH sc-multi-select-list-search"
+        className="sc-XhUPp kXrsRW sc-multi-select-list-search"
       >
         <div
           className="sc-higXBA eESVnP sc-select-container"
@@ -162,10 +162,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -226,7 +226,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -261,10 +261,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -325,7 +325,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -373,15 +373,15 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
       className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-dtTInj jdomna"
+        className="sc-dtTInj kgRkqh"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -442,7 +442,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -477,10 +477,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -541,7 +541,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -589,12 +589,12 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
       className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-dtTInj jdomna"
+        className="sc-dtTInj kgRkqh"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-XhUPp bmFebH sc-multi-select-list-search"
+        className="sc-XhUPp kXrsRW sc-multi-select-list-search"
       >
         <div
           className="sc-higXBA eESVnP sc-select-container"
@@ -735,10 +735,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={true}
@@ -769,7 +769,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -804,10 +804,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         >
           <label
             checked={false}
@@ -838,7 +838,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -886,12 +886,12 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
       className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-dtTInj jdomna"
+        className="sc-dtTInj kgRkqh"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-XhUPp bmFebH sc-multi-select-list-search"
+        className="sc-XhUPp kXrsRW sc-multi-select-list-search"
       >
         <div
           className="sc-higXBA eESVnP sc-select-container"
@@ -1032,10 +1032,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1052,7 +1052,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -1087,10 +1087,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1107,7 +1107,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         >
           <button
             className="sc-bqyKva bMFvFs sc-button"
@@ -1155,12 +1155,12 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
       className="sc-fHuLdG lgJurI sc-multi-select-list"
     >
       <h3
-        className="sc-dtTInj jdomna"
+        className="sc-dtTInj kgRkqh"
       >
         Destination Locations
       </h3>
       <div
-        className="sc-XhUPp bmFebH sc-multi-select-list-search"
+        className="sc-XhUPp kXrsRW sc-multi-select-list-search"
       >
         <div
           className="sc-higXBA eESVnP sc-select-container"
@@ -1301,10 +1301,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1321,14 +1321,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1345,7 +1345,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         />
       </div>
     </div>
@@ -1363,7 +1363,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     >
       
       <div
-        className="sc-XhUPp bmFebH sc-multi-select-list-search"
+        className="sc-XhUPp kXrsRW sc-multi-select-list-search"
       >
         <div
           className="sc-higXBA eESVnP sc-select-container"
@@ -1504,10 +1504,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1524,14 +1524,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         />
       </div>
       <div
-        className="sc-dkIXFM epnRdC sc-multi-select-item"
+        className="sc-dkIXFM jAfPmq sc-multi-select-item"
       >
         <div
-          className="sc-ikPAkQ iIupex sc-multi-select-item-left"
+          className="sc-ikPAkQ glgfEM sc-multi-select-item-left"
         />
         <div
           className="sc-tYoTV iypQOB sc-multi-select-item-center"
@@ -1548,7 +1548,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </span>
         </div>
         <div
-          className="sc-biBrSq liLQyi sc-multi-select-item-right"
+          className="sc-biBrSq limCoZ sc-multi-select-item-right"
         />
       </div>
     </div>

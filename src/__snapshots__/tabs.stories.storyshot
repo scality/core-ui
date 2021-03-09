@@ -10,7 +10,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
     Default Tabs 
   </h3>
   <div
-    className="sc-eWvPJL dYQZoF sc-tabs"
+    className="sc-eWvPJL dYDkXq sc-tabs"
   >
     <div
       className="sc-kUbhmq fCVnfX sc-tabs-bar"
@@ -21,7 +21,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={true}
       >
         <p
-          className="sc-jtHMlw lfWaUM sc-tabs-item-title"
+          className="sc-jtHMlw gxItvj sc-tabs-item-title"
           selected={true}
         >
           Detail
@@ -33,7 +33,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-jtHMlw dBLeDz sc-tabs-item-title"
+          className="sc-jtHMlw vwRUw sc-tabs-item-title"
           selected={false}
         >
           Pods
@@ -45,7 +45,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-jtHMlw dBLeDz sc-tabs-item-title"
+          className="sc-jtHMlw vwRUw sc-tabs-item-title"
           selected={false}
         >
           Volumes
@@ -53,7 +53,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-eltcbb jOaoFn sc-tabs-item-content"
+      className="sc-eltcbb eMJeny sc-tabs-item-content"
     />
   </div>
 </div>

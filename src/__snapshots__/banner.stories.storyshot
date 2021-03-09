@@ -5,7 +5,7 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-jSgupP lpbSzY sc-banner"
+    className="sc-jSgupP lhiIpA sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -14,12 +14,12 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
       className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-fubCfw jmSQlc"
+        className="sc-fubCfw fwuLbz"
       >
         Error
       </div>
       <span
-        className="sc-iBPRYJ iWUlck"
+        className="sc-iBPRYJ iXJrlv"
       >
         There is an error.
       </span>
@@ -30,7 +30,7 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
 
 exports[`Storyshots Components/Notification/Banner Playground 1`] = `
 <div
-  className="sc-jSgupP hXxpKg sc-banner"
+  className="sc-jSgupP grPkbY sc-banner"
 >
   <i
     className="fas fa-exclamation-triangle"
@@ -39,12 +39,12 @@ exports[`Storyshots Components/Notification/Banner Playground 1`] = `
     className="sc-gKsewC ehdtkM"
   >
     <div
-      className="sc-fubCfw jmSQlc"
+      className="sc-fubCfw fwuLbz"
     >
       Man
     </div>
     <span
-      className="sc-iBPRYJ iWUlck"
+      className="sc-iBPRYJ iXJrlv"
     >
       There is a success
     </span>
@@ -57,7 +57,7 @@ exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-jSgupP hXxpKg sc-banner"
+    className="sc-jSgupP grPkbY sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -66,12 +66,12 @@ exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
       className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-fubCfw jmSQlc"
+        className="sc-fubCfw fwuLbz"
       >
         Success
       </div>
       <span
-        className="sc-iBPRYJ iWUlck"
+        className="sc-iBPRYJ iXJrlv"
       >
         There is a success.
       </span>
@@ -85,7 +85,7 @@ exports[`Storyshots Components/Notification/Banner Warning Banner 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-jSgupP fkkIew sc-banner"
+    className="sc-jSgupP dTlNXc sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -94,12 +94,12 @@ exports[`Storyshots Components/Notification/Banner Warning Banner 1`] = `
       className="sc-gKsewC ehdtkM"
     >
       <div
-        className="sc-fubCfw jmSQlc"
+        className="sc-fubCfw fwuLbz"
       >
         Warning
       </div>
       <span
-        className="sc-iBPRYJ iWUlck"
+        className="sc-iBPRYJ iXJrlv"
       >
         There is a warning.
       </span>

@@ -23,7 +23,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe bMZeTv text"
+      className="sc-bkzZxe ktuikY text"
     >
       interested?
     </span>
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe bMZeTv text"
+      className="sc-bkzZxe ktuikY text"
     >
       interested?
     </span>
@@ -71,7 +71,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe bMZeTv text"
+      className="sc-bkzZxe ktuikY text"
     >
       interested?
     </span>
@@ -96,7 +96,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe bMZeTv text"
+      className="sc-bkzZxe ktuikY text"
     >
       interested?
     </span>

@@ -5,16 +5,16 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-bQdQlF bftRQM sc-notifications"
+    className="sc-bQdQlF hAJtRV sc-notifications"
   >
     <div
-      className="sc-kYrkKh kKRBTk sc-notification"
+      className="sc-kYrkKh ixFJIg sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -31,13 +31,13 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-kYrkKh fizWAK sc-notification"
+      className="sc-kYrkKh evqfrO sc-notification"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -55,15 +55,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-bQdQlF hZHrOv sc-notifications"
+    className="sc-bQdQlF eqXDDS sc-notifications"
   >
     <div
-      className="sc-kYrkKh loSrbx sc-notification"
+      className="sc-kYrkKh kZRxUt sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -80,12 +80,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-kYrkKh jVtbcw sc-notification"
+      className="sc-kYrkKh kTnqJY sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -108,15 +108,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-bQdQlF fUKSib sc-notifications"
+    className="sc-bQdQlF gvcCUm sc-notifications"
   >
     <div
-      className="sc-kYrkKh fbMNSi sc-notification"
+      className="sc-kYrkKh gFeDje sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -133,12 +133,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-kYrkKh jVtbcw sc-notification"
+      className="sc-kYrkKh kTnqJY sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -161,15 +161,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-bQdQlF lTLLg sc-notifications"
+    className="sc-bQdQlF dxzNCF sc-notifications"
   >
     <div
-      className="sc-kYrkKh loSrbx sc-notification"
+      className="sc-kYrkKh kZRxUt sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
@@ -186,12 +186,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-kYrkKh fbMNSi sc-notification"
+      className="sc-kYrkKh gFeDje sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-xyEjG hNEBWJ"
+        className="sc-xyEjG ehxNdL"
       >
         Hi
       </div>
