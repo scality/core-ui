@@ -134,8 +134,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
+        aria-selected={true}
         className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
+        role="tab"
         selected={true}
       >
         <span>
@@ -143,8 +145,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -152,8 +156,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -161,8 +167,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -170,8 +178,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -410,8 +420,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
+        aria-selected={true}
         className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
+        role="tab"
         selected={true}
       >
         <span>
@@ -419,8 +431,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -428,8 +442,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -437,8 +453,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -446,8 +464,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -656,8 +676,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
+        aria-selected={true}
         className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
+        role="tab"
         selected={true}
       >
         <span>
@@ -665,8 +687,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -674,8 +698,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -683,8 +709,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -692,8 +720,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -923,8 +953,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
+        aria-selected={true}
         className="sc-dtwoBo jvVXwL"
         onClick={[Function]}
+        role="tab"
         selected={true}
       >
         <span>
@@ -932,8 +964,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -941,8 +975,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -950,8 +986,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -959,8 +997,10 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </span>
       </div>
       <div
+        aria-selected={false}
         className="sc-dtwoBo dMxJXd"
         onClick={[Function]}
+        role="tab"
         selected={false}
       >
         <span>
@@ -1092,7 +1132,9 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-hOqqkJ dvoaWK"
     >
       <div
+        aria-selected={true}
         className="sc-dtwoBo sc-dacFzL jvVXwL kNoNju"
+        role="tab"
         selected={true}
       >
         <a
@@ -1103,6 +1145,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       </div>
       <div
         className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
+        role="tab"
       >
         <a
           href="/users"
@@ -1112,6 +1155,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       </div>
       <div
         className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
+        role="tab"
       >
         <a
           href="/policies"
@@ -1121,6 +1165,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       </div>
       <div
         className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
+        role="tab"
       >
         <a
           href="/buckets"
@@ -1130,6 +1175,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       </div>
       <div
         className="sc-dtwoBo sc-dacFzL dMxJXd gSuNGK"
+        role="tab"
       >
         <a
           href="/workflows"

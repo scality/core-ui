@@ -230,6 +230,8 @@ function NavBar({
             link ? (
               <TabLinkItem
                 selected={selected}
+                role="tab"
+                aria-selected={selected}
                 key={`navbar_tab_link_item_${index}`}
               >
                 {link}
@@ -237,7 +239,9 @@ function NavBar({
             ) : (
               <TabItem
                 onClick={onClick}
+                role="tab"
                 selected={selected}
+                aria-selected={selected}
                 key={`navbar_tab_item_${index}`}
               >
                 <span>{title}</span>
