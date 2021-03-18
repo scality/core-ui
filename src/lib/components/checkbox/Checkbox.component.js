@@ -1,8 +1,8 @@
 // @flow
-import React from "react";
-import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
 
 type Props = {
   label?: string,
@@ -48,7 +48,7 @@ const StyledCheckboxLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   padding-left: ${defaultTheme.padding.base};
   vertical-align: middle;
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 
 const StyledCheckbox = styled.label`
@@ -67,28 +67,28 @@ const StyledCheckbox = styled.label`
 
   ${(props) => {
     const { border, secondary } = getTheme(props);
-    const iconCheckedColor = props.checked ? "white" : "transparent";
+    const iconCheckedColor = props.checked ? 'white' : 'transparent';
 
     const checkBoxColor = props.checked ? secondary : border;
     const checkBoxColorHover = props.disabled ? checkBoxColor : secondary;
 
     return css`
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 0;
-        width: 18px;
-        height: 18px;
+        width: 12px;
+        height: 12px;
         border: 2px solid ${checkBoxColor};
         background: ${checkBoxColor};
         border-radius: 4px;
       }
       i {
         position: absolute;
-        top: 4px;
-        left: 4px;
-        font-size: 14px;
+        top: 3px;
+        left: 2px;
+        font-size: 12px;
         color: ${iconCheckedColor};
       }
 
@@ -100,7 +100,12 @@ const StyledCheckbox = styled.label`
     `;
   }}
 
+  span {
+    vertical-align: baseline;
+  }
+
   input {
+    margin: 0px;
     opacity: 0;
   }
 `;
