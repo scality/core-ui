@@ -11,7 +11,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   </h3>
   <label
     checked={true}
-    className="sc-idOhPF gHixSi sc-checkbox"
+    className="sc-idOhPF iflkte sc-checkbox"
   >
     <input
       checked={true}
@@ -35,7 +35,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-idOhPF kSxlDv sc-checkbox"
+    className="sc-idOhPF khiqer sc-checkbox"
   >
     <input
       checked={false}
@@ -58,7 +58,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   </h3>
   <label
     checked={false}
-    className="sc-idOhPF jJIINz sc-checkbox"
+    className="sc-idOhPF gpHiDj sc-checkbox"
     disabled={true}
   >
     <input
@@ -83,7 +83,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   </h3>
   <label
     checked={true}
-    className="sc-idOhPF eIdlzD sc-checkbox"
+    className="sc-idOhPF eryfGz sc-checkbox"
     disabled={true}
   >
     <input

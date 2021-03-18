@@ -5,13 +5,13 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-eggNIi fRKxUt sc-emptystate"
+    className="sc-cTkwdZ bCXJdz sc-emptystate"
   >
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <div
-        className="sc-bBrOnJ kslhCT"
+        className="sc-cOajty eUfaHQ"
       >
         <i
           className="fas fa-server"
@@ -19,10 +19,10 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <h3
-        className="sc-cTkwdZ jgiGzD"
+        className="sc-jNMdTA ehPSmm"
       >
         A list of 
         nodes
@@ -30,10 +30,10 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <h3
-        className="sc-cTkwdZ jgiGzD"
+        className="sc-jNMdTA ehPSmm"
       >
         There are no 
         nodes
@@ -44,7 +44,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-dOSReg YzaVf"
+      className="sc-bBrOnJ cHmQia"
     >
       <button
         className="sc-bqyKva jdKiEV sc-button"
@@ -86,13 +86,13 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-eggNIi fRKxUt sc-emptystate"
+    className="sc-cTkwdZ bCXJdz sc-emptystate"
   >
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <div
-        className="sc-bBrOnJ kslhCT"
+        className="sc-cOajty eUfaHQ"
       >
         <i
           className="fas fa-server"
@@ -100,10 +100,10 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <h3
-        className="sc-cTkwdZ jgiGzD"
+        className="sc-jNMdTA ehPSmm"
       >
         A list of 
         nodes
@@ -111,10 +111,10 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-jNMdTA ideqbN"
+      className="sc-dOSReg dApFRF"
     >
       <h3
-        className="sc-cTkwdZ jgiGzD"
+        className="sc-jNMdTA ehPSmm"
       >
         There are no 
         nodes

@@ -5,21 +5,21 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
   className="sc-gsTCUz dUzLYl"
 >
   <div
-    className="sc-bXDlPE jlAsWn sc-modal"
+    className="sc-eGCarw hMEqpJ sc-modal"
   >
     <div
-      className="sc-eGCarw dfayLe sc-modal-content"
+      className="sc-ctaXAZ UhImi sc-modal-content"
     >
       <div
-        className="sc-ctaXAZ ewmcrK sc-modal-header"
+        className="sc-dFJsGO kRubMw sc-modal-header"
       >
         <span
-          className="sc-dFJsGO gDAzYA"
+          className="sc-bsipQr dZQxQs"
         >
           Hello
         </span>
         <div
-          className="sc-euMpXR cjoeSH"
+          className="sc-fHuLdG ijBUIA"
           onClick={[Function]}
         >
           <i
@@ -28,14 +28,14 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-bsipQr iUDhfb sc-modal-body"
+        className="sc-gInsOo bYVNbP sc-modal-body"
       >
         <span>
           Do you want a cookie?
         </span>
       </div>
       <div
-        className="sc-gInsOo WqTNV sc-modal-footer"
+        className="sc-euMpXR kFkMXl sc-modal-footer"
       >
         <div
           style={

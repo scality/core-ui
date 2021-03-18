@@ -18,7 +18,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     }
   >
     <div
-      className="sc-cBNfnY fdVsYI"
+      className="sc-citwmv bohfpk"
     >
       <div
         className="sc-jJEJSO jHwXvj sc-tooltip"
@@ -26,7 +26,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-gWHgXt lataRC sc-constrainedtext"
+          className="sc-cBNfnY jWztWf sc-constrainedtext"
         >
           This is a long phrase
         </div>
@@ -47,7 +47,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     }
   >
     <div
-      className="sc-cBNfnY fdVsYI"
+      className="sc-citwmv bohfpk"
     >
       <div
         className="sc-jJEJSO jHwXvj sc-tooltip"
@@ -55,7 +55,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-gWHgXt lataRC sc-constrainedtext"
+          className="sc-cBNfnY jWztWf sc-constrainedtext"
         >
           This is a long phrase
         </div>
