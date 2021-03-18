@@ -1,14 +1,14 @@
 //@flow
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import type { Node } from "react";
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+import type { Node } from 'react';
+import * as defaultTheme from '../../style/theme';
+import { getTheme } from '../../utils';
 
-export const TOP = "top";
-export const BOTTOM = "bottom";
-export const LEFT = "left";
-export const RIGHT = "right";
+export const TOP = 'top';
+export const BOTTOM = 'bottom';
+export const LEFT = 'left';
+export const RIGHT = 'right';
 type Position = typeof TOP | typeof BOTTOM | typeof LEFT | typeof RIGHT;
 export type Props = {
   placement?: Position,
@@ -75,6 +75,10 @@ const TooltipOverLayContainer = styled.div`
   }};
 `;
 
+const TooltipText = styled.div`
+  width: 100%;
+`;
+
 function Tooltip({
   placement = TOP,
   overlayStyle,
@@ -96,7 +100,9 @@ function Tooltip({
           placement={placement}
           overlayStyle={overlayStyle}
         >
-          <div className="sc-tooltip-overlay-text">{overlay}</div>
+          <TooltipText className="sc-tooltip-overlay-text">
+            {overlay}
+          </TooltipText>
         </TooltipOverLayContainer>
       ) : null}
       {children}
