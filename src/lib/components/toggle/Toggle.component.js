@@ -1,8 +1,8 @@
 //@flow
-import React from "react";
-import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
 
 type Props = {
   toggle: boolean,
@@ -18,7 +18,7 @@ const ToggleContainer = styled.div`
 const Switch = styled.label`
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 24px;
   height: 24px;
   margin-right: ${defaultTheme.padding.small};
 
@@ -51,10 +51,10 @@ const Switch = styled.label`
 
       .sc-slider:before {
         position: absolute;
-        content: "";
-        height: 24px;
-        width: 24px;
-        top: -10px;
+        content: '';
+        height: 12px;
+        width: 12px;
+        top: -4px;
         background-color: ${defaultTheme.grayLight};
         transition: 0.5s;
         border-radius: 50%;
@@ -70,7 +70,7 @@ const Switch = styled.label`
       }
 
       input:checked + .sc-slider:before {
-        transform: translateX(26px);
+        transform: translateX(12px);
         background-color: ${secondary};
       }
     `;
@@ -79,7 +79,7 @@ const Switch = styled.label`
 
 const StyledSwitchLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
