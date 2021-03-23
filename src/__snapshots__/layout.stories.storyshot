@@ -2,7 +2,7 @@
 
 exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
 <div
-  className="sc-GTWni egcWdN sc-layout"
+  className="sc-GTWni iFmreO sc-layout"
 >
   <div
     className="sc-kIeTtH hxxmNk sc-navbar"
@@ -420,7 +420,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
 <div
-  className="sc-GTWni egcWdN sc-layout"
+  className="sc-GTWni iFmreO sc-layout"
 >
   <div
     className="sc-kIeTtH hxxmNk sc-navbar"
@@ -842,7 +842,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
 <div
-  className="sc-GTWni egcWdN sc-layout"
+  className="sc-GTWni iFmreO sc-layout"
 >
   <div
     className="sc-kIeTtH hxxmNk sc-navbar"
@@ -1279,7 +1279,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
 <div
-  className="sc-GTWni egcWdN sc-layout"
+  className="sc-GTWni iFmreO sc-layout"
 >
   <div
     className="sc-kIeTtH hxxmNk sc-navbar"
