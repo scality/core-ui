@@ -139,6 +139,19 @@ const themes = [
 </ThemeProvider>
 ```
 
+- To use the customised Scrollbar you need to wrap your app within the ScrollbarWrapper component :
+```javascript
+import { ScrollbarWrapper, Layout } from '@scality/core-ui';
+
+<ScrollbarWrapper>
+  <Layout sidebar={sidebar} navbar={navbar}>
+    ...
+  </Layout>
+  ...
+</ScrollbarWrapper>
+```
+
+
 ## Available Scripts
 
 In the project directory, you can run:
