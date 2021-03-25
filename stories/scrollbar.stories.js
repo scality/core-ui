@@ -11,7 +11,7 @@ export default {
 
 const Demo = styled.div`
   height: 200px;
-  overflow: scroll;
+  overflow: auto;
   color: white;
 `;
 
