@@ -17,6 +17,7 @@ const ScrollbarContainer = styled.div`
         // Chrome / Safari / Edge
         ::-webkit-scrollbar {
           width: 8px;
+          height: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -25,12 +26,12 @@ const ScrollbarContainer = styled.div`
 
         ::-webkit-scrollbar-thumb {
           width: 4px;
+          height: 4px;
           background: ${brand.border};
           border-radius: 4px;
           -webkit-border-radius: 4px;
           background-clip: padding-box;
-          border-left: 2px solid rgba(0, 0, 0, 0);
-          border-right: 2px solid rgba(0, 0, 0, 0);
+          border: 2px solid rgba(0, 0, 0, 0);
         }
 
         ::-webkit-scrollbar-button {
