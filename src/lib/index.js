@@ -35,7 +35,7 @@ import CircularProgressBar from './components/circularprogressbar/CircularProgre
 import AreaChart from './components/areachart/AreaChart.component';
 import CollapsiblePanel from './components/collapsiblepanel/CollapsiblePanel.component.js';
 import LateralNavbarLayout from './components/lateralnavbarlayout/LateralNavbarLayout.component';
-import StatusBar from './components/statusbar/StatusBar.component';
+import GlobalHealthBar from './components/globalhealthbar/GlobalHealthBar.component';
 import Healthselector from './components/healthselector/Healthselector.component';
 import ConstrainedText from './components/constrainedtext/Constrainedtext.component';
 import EmptyState from './components/emptystate/Emptystate.component';
@@ -76,7 +76,7 @@ export {
   AreaChart,
   CollapsiblePanel,
   LateralNavbarLayout,
-  StatusBar,
+  GlobalHealthBar,
   Healthselector,
   ConstrainedText,
   EmptyState,
