@@ -2,10 +2,10 @@
 
 exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     CloudProgressBar
   </h3>
@@ -18,7 +18,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-cxFLnm dqeAFY sc-cloudprogressbar"
+      className="sc-iwyYcG henefs sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-lmoMRL bFcxGh"
+        className="sc-cxFLnm eLwFsG"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -69,12 +69,12 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         }
       >
         <h3
-          className="sc-dlfnbm dxKCyT"
+          className="sc-gsTCUz iNyAAg"
         >
           30%
         </h3>
         <span
-          className="sc-hKgILt bLCYoF"
+          className="sc-dlfnbm dxKCyT"
         >
           of the quotas has been reached.
         </span>
@@ -90,7 +90,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-cxFLnm dqeAFY sc-cloudprogressbar"
+      className="sc-iwyYcG henefs sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -110,7 +110,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-lmoMRL eiuDfE"
+        className="sc-cxFLnm fTcnqT"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -141,12 +141,12 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         }
       >
         <h3
-          className="sc-dlfnbm dxKCyT"
+          className="sc-gsTCUz iNyAAg"
         >
           50%
         </h3>
         <span
-          className="sc-hKgILt bLCYoF"
+          className="sc-dlfnbm dxKCyT"
         >
           of the quotas has been reached
         </span>
@@ -162,7 +162,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-cxFLnm dqeAFY sc-cloudprogressbar"
+      className="sc-iwyYcG henefs sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -182,7 +182,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-lmoMRL fSWjKy"
+        className="sc-cxFLnm cGYhGh"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -213,12 +213,12 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         }
       >
         <h3
-          className="sc-dlfnbm dxKCyT"
+          className="sc-gsTCUz iNyAAg"
         >
           80%
         </h3>
         <span
-          className="sc-hKgILt bLCYoF"
+          className="sc-dlfnbm dxKCyT"
         >
           of the quotas has been reached
         </span>
@@ -234,7 +234,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-cxFLnm dqeAFY sc-cloudprogressbar"
+      className="sc-iwyYcG henefs sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -254,7 +254,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-lmoMRL fiPYuo"
+        className="sc-cxFLnm krAKPD"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -285,12 +285,12 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         }
       >
         <h3
-          className="sc-dlfnbm dxKCyT"
+          className="sc-gsTCUz iNyAAg"
         >
           70%
         </h3>
         <span
-          className="sc-hKgILt bLCYoF"
+          className="sc-dlfnbm dxKCyT"
         >
           of the quotas has been reached
         </span>

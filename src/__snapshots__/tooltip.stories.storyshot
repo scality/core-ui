@@ -2,21 +2,21 @@
 
 exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Default Tooltip
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
@@ -24,17 +24,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Tooltip right
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
@@ -48,17 +48,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
     }
   >
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Tooltip left
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
@@ -66,17 +66,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Tooltip bottom
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
@@ -84,17 +84,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Customize your tooltip style
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
@@ -102,30 +102,30 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Tooltip with button
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <button
-        className="sc-bqyKva cCYwKy sc-button"
+        className="sc-dQppl dDQpFl sc-button"
         disabled={false}
         size="small"
         title=""
         type="button"
       >
         <span
-          className="sc-fodVxV ckNcPt"
+          className="sc-hBEYos hgFzca"
         >
           <span
             className="sc-button-text"
           >
             <span
-              className="sc-hBEYos jaVYGW"
+              className="sc-kstrdz ZegCk"
             >
               Hover here
             </span>
@@ -136,17 +136,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       add icon in the overlay of tooltip
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         tooltip with icon
       </span>
@@ -154,17 +154,17 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
   </div>
   <div>
     <h3
-      className="sc-dlfnbm dxKCyT"
+      className="sc-gsTCUz iNyAAg"
     >
       Tooltip doesn't trigger
     </h3>
     <div
-      className="sc-jJEJSO jHwXvj sc-tooltip"
+      className="sc-iktFzd hojOeW sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <span
-        className="sc-hKgILt bLCYoF"
+        className="sc-dlfnbm dxKCyT"
       >
         Hover here!
       </span>
