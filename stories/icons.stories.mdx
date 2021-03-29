@@ -1,445 +1,92 @@
-import { Meta } from "@storybook/addon-docs/blocks";
+import ImageFile from './pictures/icon-design-system.png';
 
 <Meta title="Style/Icons" />
 
-## Icons
+# Icons
 
-
-### Style
+## Style
 
 Icon style should be consistent.  
 The style is rather outlined.  
-If two options are possible when choosing an icon, choose the simpler one.  
+If two options are possible when choosing an icon, choose the simpler one.
 
-### Size
+<img src={ImageFile} />
 
-Icone should have the size of the header/title font size
+## Size
 
-### Icon set table
+When next to a text, the icon and the text should have the same size.
 
-<table>
-<thead>
-  <tr>
-    <th>Icon</th>
-    <th>Order</th>
-    <th>Category 1</th>
-    <th>Category 2</th>
-    <th>Name</th>
-    <th>Origin</th>
-    <th>FontAwesome name</th>
-    <th>FontAwesome code</th>
-    <th>Icon Style &amp; Prefix</th>
-    <th>FA free</th>
-    <th>use case</th>
-    <th>Comment</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><i class="fas fa-wallet"></i></td>
-    <td>1</td>
-    <td>Entities</td>
-    <td>-</td>
-    <td>Account</td>
-    <td>FA</td>
-    <td>Wallet</td>
-    <td><i class="fas fa-wallet"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>Hero, for account screen</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>2</td>
-    <td>Entities</td>
-    <td>-</td>
-    <td>Backend</td>
-    <td>custom - tbd</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>NA</td>
-    <td></td>
-    <td>tbd</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>3</td>
-    <td>Entities</td>
-    <td>-</td>
-    <td>Tape</td>
-    <td>custom - tbd</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>NA</td>
-    <td></td>
-    <td>tbd</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-server"></i></td>
-    <td>4</td>
-    <td>Entities</td>
-    <td>-</td>
-    <td>Server(xcore)/node(metal)</td>
-    <td>FA</td>
-    <td>Server</td>
-    <td><i class="fas fa-server"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-project-diagram"></i></td>
-    <td>5</td>
-    <td>Entities</td>
-    <td>metal</td>
-    <td>Network</td>
-    <td></td>
-    <td>Project-diagram</td>
-    <td><i class="fas fa-project-diagram"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>Used in metalk8s > in Global health card, &amp; in metalk8s dashboard</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-user-cog"></i></td>
-    <td>1</td>
-    <td>Menu</td>
-    <td>Top menu</td>
-    <td>User</td>
-    <td>FA</td>
-    <td>User-cog</td>
-    <td><i class="fas fa-user-cog"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>right of top navbar</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-bell"></i></td>
-    <td>2</td>
-    <td>Menu</td>
-    <td>Top menu</td>
-    <td>Alert</td>
-    <td>FA</td>
-    <td>Bell</td>
-    <td><i class="fas fa-bell"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-stopwatch"></i></td>
-    <td>1</td>
-    <td>Workflows</td>
-    <td>-</td>
-    <td>Expiration</td>
-    <td>FA</td>
-    <td>Stopwatch</td>
-    <td><i class="fas fa-stopwatch"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-coins"></i></td>
-    <td>2</td>
-    <td>Workflows</td>
-    <td>-</td>
-    <td>Replication</td>
-    <td>FA</td>
-    <td>Coins</td>
-    <td><i class="fas fa-coins"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-thermometer-empty"></i></td>
-    <td>3</td>
-    <td>Workflows</td>
-    <td>-</td>
-    <td>Transition</td>
-    <td>FA</td>
-    <td>thermometer-empty</td>
-    <td><i class="fas fa-thermometer-empty"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-reply"></i></td>
-    <td>4</td>
-    <td>Workflows</td>
-    <td>-</td>
-    <td>OOB</td>
-    <td>FA</td>
-    <td>reply</td>
-    <td><i class="fas fa-reply"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-chart-line"></i></td>
-    <td>1</td>
-    <td>Action icon</td>
-    <td>-</td>
-    <td>Metrics-Logs</td>
-    <td>FA</td>
-    <td>Chart-line</td>
-    <td><i class="fas fa-chart-line"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>Last column of Tables</td>
-    <td>not perfect - it's an outside link...</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-edit"></i></td>
-    <td>2</td>
-    <td>Action icon</td>
-    <td>-</td>
-    <td>Edit</td>
-    <td>FA</td>
-    <td>Edit</td>
-    <td><i class="fas fa-edit"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td>Sometimes without label</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-plus"></i></td>
-    <td>1</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Create/add</td>
-    <td>FA</td>
-    <td>Plus</td>
-    <td><i class="fas fa-plus"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>When creating a new entity</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-trash"></i></td>
-    <td>2</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Delete</td>
-    <td>FA</td>
-    <td>Trash</td>
-    <td><i class="fas fa-trash"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>When deleting an entity</td>
-    <td>critical button</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-save"></i></td>
-    <td>3</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Save </td>
-    <td>FA</td>
-    <td>Save</td>
-    <td><i class="fas fa-save"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>When saving changes on an entity</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-external-link-alt"></i></td>
-    <td>4</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>External-link</td>
-    <td>FA</td>
-    <td>External-link-alt</td>
-    <td><i class="fas fa-external-link-alt"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>When the link is opening an external link> new page, or new tab (with or without SSO) - Link to Grafana chart for instance</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-times"></i></td>
-    <td>5</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Close</td>
-    <td>FA</td>
-    <td>Times</td>
-    <td><i class="fas fa-times"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>For closing a window/modal</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-caret-down"></i></td>
-    <td>6</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Dropdown</td>
-    <td>FA</td>
-    <td>Caret-down</td>
-    <td><i class="fas fa-caret-down"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>For accessing to a drop-down</td>
-    <td>(not to mix with sort-down)</td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-search"></i></td>
-    <td>7</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Search</td>
-    <td>FA</td>
-    <td>Search</td>
-    <td><i class="fas fa-search"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>In the search bar</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-ellipsis-v"></i></td>
-    <td>8</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>More/additional actions</td>
-    <td>FA</td>
-    <td>Ellipsis-v</td>
-    <td><i class="fas fa-ellipsis-v"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-question-circle"></i></td>
-    <td>9</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Info</td>
-    <td>FA</td>
-    <td>Question-circle</td>
-    <td><i class="fas fa-question-circle"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>For tooltips</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-sync"></i></td>
-    <td>10</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Sync</td>
-    <td>FA</td>
-    <td>Sync</td>
-    <td><i class="fas fa-sync"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td>refreshing the Metrics, next to the time selector</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-file-export"></i></td>
-    <td>11</td>
-    <td>Button/action</td>
-    <td>-</td>
-    <td>Export</td>
-    <td>FA</td>
-    <td>File-export</td>
-    <td><i class="fas fa-file-export"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="far fa-clone"></i></td>
-    <td>12</td>
-    <td>Button/action</td>
-    <td></td>
-    <td>Copy</td>
-    <td>FA</td>
-    <td>Clone</td>
-    <td>&lt;i class="far fa-clone"&gt;&lt;/i&gt;</td>
-    <td>regular Style (far)</td>
-    <td>yes</td>
-    <td>small icon next to a field that could be copied</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-sort"></i></td>
-    <td>1</td>
-    <td>Table</td>
-    <td>Sorting</td>
-    <td>Sort</td>
-    <td>FA</td>
-    <td>Sort</td>
-    <td><i class="fas fa-sort"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-sort-up"></i></td>
-    <td>2</td>
-    <td>Table</td>
-    <td>Sorting</td>
-    <td>Sort-up</td>
-    <td>FA</td>
-    <td>Sort-up</td>
-    <td><i class="fas fa-sort-up"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><i class="fas fa-sort-down"></i></td>
-    <td>3</td>
-    <td>Table</td>
-    <td>Sorting</td>
-    <td>Sort-down</td>
-    <td>FA</td>
-    <td>Sort-down</td>
-    <td><i class="fas fa-sort-down"></i></td>
-    <td>solid Style (fas)</td>
-    <td>yes</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>1</td>
-    <td>Table</td>
-    <td>-</td>
-    <td>Not applicable/no value</td>
-    <td>Font</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>simple hyphen from Lato</td>
-  </tr>
-</tbody>
-</table>
+## Icon set table
+
+|                        Icons                        | Name                 | Category      | Origin | FontAwesome name     | FontAwesome code                                | Icon Style & Prefix | FA free | Use case                                                |
+| :-------------------------------------------------: | -------------------- | ------------- | ------ | -------------------- | ----------------------------------------------- | ------------------- | ------- | ------------------------------------------------------- |
+|        <i className="fas fa-wallet fa-3x" />        | Account              | Entities      | FA     | wallet               | `<i className="fas fa-wallet" />`               | solid Style (fas)   | yes     | Hero                                                    |
+|    <i className="fas fa-network-wired fa-3x" />     | Backend              | Entities      | FA     | network-wired        | `<i className="fas fa-network-wired" />`        | solid Style (fas)   | yes     | Hero                                                    |
+|         <i className="fas fa-tape fa-3x" />         | Tape                 | Entities      | FA     | tape                 | `<i className="fas fa-tape" />`                 | solid Style (fas)   | yes     | Hero                                                    |
+|        <i className="fas fa-server fa-3x" />        | Node-backend         | Entities      | FA     | server               | `<i className="fas fa-server" />`               | solid Style (fas)   | yes     | Hero                                                    |
+|         <i className="fas fa-hdd fa-3x" />          | Volume-backend       | Entities      | FA     | hdd                  | `<i className="fas fa-hdd" />`                  | solid Style (fas)   | yes     | Hero                                                    |
+|       <i className="fas fa-database fa-3x" />       | Node-ptf             | Entities      | FA     | database             | `<i className="fas fa-database" />`             | solid Style (fas)   | yes     | Hero                                                    |
+|     <i className="fas fa-compact-disc fa-3x" />     | Volume-ptf           | Entities      | FA     | compact-disc         | `<i className="fas fa-compact-disc" />`         | solid Style (fas)   | yes     | Hero                                                    |
+|   <i className="fas fa-project-diagram fa-3x" />    | Network              | Entities      | FA     | project-diagram      | `<i className="fas fa-project-diagram" />`      | solid Style (fas)   | yes     | Hero                                                    |
+|    <i className="fas fa-glass-whiskey fa-3x" />     | Bucket               | Entities      | FA     | glass-whiskey        | `<i className="fas fa-glass-whiskey" />`        | solid Style (fas)   | yes     | Hero                                                    |
+|        <i className="far fa-cloud fa-3x" />         | Cloud-backend        | Entities      | FA     | cloud                | `<i className="far fa-cloud" />`                | regular Style (far) | NO      | Hero                                                    |
+|      <i className="fas fa-warehouse fa-3x" />       | Datacenter           | Entities      | FA     | warehouse            | `<i className="fas fa-warehouse" />`            | solid Style (fas)   | yes     | Hero                                                    |
+|       <i className="fas fa-user-cog fa-3x" />       | User                 | Menu          | FA     | user-cog             | `<i className="fas fa-user-cog" />`             | solid Style (fas)   | yes     | Top navbar                                              |
+|         <i className="fas fa-bell fa-3x" />         | Alert                | Menu          | FA     | bell                 | `<i className="fas fa-bell" />`                 | solid Style (fas)   | yes     |                                                         |
+|         <i className="fas fa-bars fa-3x" />         | Lat-menu             | Menu          | FA     | bars                 | `<i className="fas fa-bars" />`                 | solid Style (fas)   | yes     | Expanded version of lat navbar                          |
+|       <i className="fas fa-desktop fa-3x" />        | Dashboard            | Menu          | FA     | desktop              | `<i className="fas fa-desktop" />`              | solid Style (fas)   | yes     |                                                         |
+|      <i className="fas fa-stopwatch fa-3x" />       | Expiration           | Workflow      | FA     | stopwatch            | `<i className="fas fa-stopwatch" />`            | solid Style (fas)   | yes     |                                                         |
+|        <i className="fas fa-coins fa-3x" />         | Replication          | Workflow      | FA     | coins                | `<i className="fas fa-coins" />`                | solid Style (fas)   | yes     |                                                         |
+|  <i className="fas fa-thermometer-empty fa-3x" />   | Transition           | Workflow      | FA     | thermometer-empty    | `<i className="fas fa-thermometer-empty" />`    | solid Style (fas)   | yes     |                                                         |
+|        <i className="fas fa-reply fa-3x" />         | Discovery            | Workflow      | FA     | reply                | `<i className="fas fa-reply" />`                | solid Style (fas)   | yes     |                                                         |
+|      <i className="fas fa-chart-line fa-3x" />      | Metrics              | Action icon   | FA     | chart-line           | `<i className="fas fa-chart-line" />`           | solid Style (fas)   | yes     | Last column of Tables                                   |
+|       <i className="far fa-file-alt fa-3x" />       | Logs                 | Action icon   | FA     | file-alt             | `<i className="far fa-file-alt" />`             | regular Style (far) | yes     |                                                         |
+|         <i className="fas fa-edit fa-3x" />         | Edit                 | Action icon   | FA     | edit                 | `<i className="fas fa-edit" />`                 | solid Style (fas)   | yes     | Field editable                                          |
+|         <i className="fas fa-plus fa-3x" />         | Create-add           | Button-action | FA     | plus                 | `<i className="fas fa-plus" />`                 | solid Style (fas)   | yes     | New entity creation                                     |
+|        <i className="fas fa-trash fa-3x" />         | Delete               | Button-action | FA     | trash                | `<i className="fas fa-trash" />`                | solid Style (fas)   | yes     | Entity deletion                                         |
+|         <i className="fas fa-save fa-3x" />         | Save                 | Button-action | FA     | save                 | `<i className="fas fa-save" />`                 | solid Style (fas)   | yes     | Save changes on an entity                               |
+|  <i className="fas fa-external-link-alt fa-3x" />   | External-link        | Button-action | FA     | external-link-alt    | `<i className="fas fa-external-link-alt" />`    | solid Style (fas)   | yes     | Open an external link                                   |
+|        <i className="fas fa-times fa-3x" />         | Close                | Button-action | FA     | times                | `<i className="fas fa-times" />`                | solid Style (fas)   | yes     | Close a window/modal                                    |
+|      <i className="fas fa-caret-down fa-3x" />      | Dropdown             | Button-action | FA     | caret-down           | `<i className="fas fa-caret-down" />`           | solid Style (fas)   | yes     | Expand a drop-down                                      |
+|       <i className="fas fa-caret-up fa-3x" />       | Dropdown             | Button-action | FA     | caret-up             | `<i className="fas fa-caret-up" />`             | solid Style (fas)   | yes     | Dropdown expanded                                       |
+|        <i className="fas fa-search fa-3x" />        | Search               | Button-action | FA     | search               | `<i className="fas fa-search" />`               | solid Style (fas)   | yes     | Search bar                                              |
+|      <i className="fas fa-ellipsis-v fa-3x" />      | More                 | Button-action | FA     | ellipsis-v           | `<i className="fas fa-ellipsis-v" />`           | solid Style (fas)   | yes     | End of tables (not enough space to display all actions) |
+|   <i className="fas fa-question-circle fa-3x" />    | Info                 | Button-action | FA     | question-circle      | `<i className="fas fa-question-circle" />`      | solid Style (fas)   | yes     | Display tooltip info AND "About" (top menu)             |
+|         <i className="fas fa-sync fa-3x" />         | Sync                 | Button-action | FA     | sync                 | `<i className="fas fa-sync" />`                 | solid Style (fas)   | yes     | Refresh the metrics                                     |
+|     <i className="fas fa-file-export fa-3x" />      | Export               | Button-action | FA     | file-export          | `<i className="fas fa-file-export" />`          | solid Style (fas)   | yes     | Export the data in predefined format                    |
+|        <i className="far fa-clone fa-3x" />         | Copy                 | Button-action | FA     | clone                | `<i className="far fa-clone" />`                | regular Style (far) | yes     | Small icon next to a field that can be copied           |
+|     <i className="fas fa-file-upload fa-3x" />      | Upload               | Button-action | FA     | file-upload          | `<i className="fas fa-file-upload" />`          | solid Style (fas)   | yes     | Upload object                                           |
+|     <i className="fas fa-plus-square fa-3x" />      | Add-plus             | Button-action | FA     | plus-square          | `<i className="fas fa-plus-square" />`          | solid Style (fas)   | yes     | Add an item in a list                                   |
+|     <i className="fas fa-minus-square fa-3x" />     | Remove-minus         | Button-action | FA     | minus-square         | `<i className="fas fa-minus-square" />`         | solid Style (fas)   | yes     | Remove an item in a list                                |
+|         <i className="fas fa-sort fa-3x" />         | Sort                 | Table         | FA     | sort                 | `<i className="fas fa-sort" />`                 | solid Style (fas)   | yes     | Sort                                                    |
+|       <i className="fas fa-sort-up fa-3x" />        | Sort-up              | Table         | FA     | sort-up              | `<i className="fas fa-sort-up" />`              | solid Style (fas)   | yes     | Sort                                                    |
+|      <i className="fas fa-sort-down fa-3x" />       | Sort-down            | Table         | FA     | sort-down            | `<i className="fas fa-sort-down" />`            | solid Style (fas)   | yes     | Sort                                                    |
+|    <i className="fas fa-calendar-week fa-3x" />     | Calendar             | Pill          | FA     | calendar-week        | `<i className="fas fa-calendar-week" />`        | solid Style (fas)   | yes     | Metric over a period                                    |
+|       <i className="fas fa-arrow-up fa-3x" />       | Arrow-up             | Pill          | FA     | arrow-up             | `<i className="fas fa-arrow-up" />`             | solid Style (fas)   | yes     | Show an increase in trend                               |
+|      <i className="fas fa-arrow-down fa-3x" />      | Arrow-down           | Pill          | FA     | arrow-down           | `<i className="fas fa-arrow-down" />`           | solid Style (fas)   | yes     | Show a decrease in trend                                |
+|        <i className="far fa-folder fa-3x" />        | Folder               | Browsing      | FA     | folder               | `<i className="far fa-folder" />`               | regular Style (far) | yes     | Browsing                                                |
+|         <i className="far fa-file fa-3x" />         | File                 | Browsing      | FA     | file                 | `<i className="far fa-file" />`                 | regular Style (far) | yes     | Browsing                                                |
+|         <i className="fas fa-ban fa-3x" />          | Deletion-marker      | Browsing      | FA     | ban                  | `<i className="fas fa-ban" />`                  | solid Style (fas)   | yes     | Browsing - deletion markers on objects                  |
+|     <i className="fas fa-info-circle fa-3x" />      | Info-circle          | Status        | FA     | info-circle          | `<i className="fas fa-info-circle" />`          | solid Style (fas)   | yes     | Grey empty state-status (charts, tables)                |
+| <i className="fas fa-exclamation-triangle fa-3x" /> | Exclamation-triangle | Status        | FA     | exclamation-triangle | `<i className="fas fa-exclamation-triangle" />` | solid Style (fas)   | yes     | Yellow warning status (alerts list)                     |
+|  <i className="fas fa-exclamation-circle fa-3x" />  | Exclamation-circle   | Status        | FA     | exclamation-circle   | `<i className="fas fa-exclamation-circle" />`   | solid Style (fas)   | yes     | Red critical alerts                                     |
+|        <i className="fas fa-check fa-3x" />         | Check                | Status        | FA     | check                | `<i className="fas fa-check" />`                | solid Style (fas)   | yes     | Healthy status AND successful operation                 |
+|      <i className="fas fa-shield-alt fa-3x" />      | Protected            | Status        | FA     | shield-alt           | `<i className="fas fa-shield-alt" />`           | solid Style (fas)   | yes     | Extra protection status                                 |
+|     <i className="fas fa-chevron-left fa-3x" />     | Chevron-left         | Navigation    | FA     | chevron-left         | `<i className="fas fa-chevron-left" />`         | solid Style (fas)   | yes     | Expand tabs                                             |
+|    <i className="fas fa-chevron-right fa-3x" />     | Chevron-right        | Navigation    | FA     | chevron-right        | `<i className="fas fa-chevron-right" />`        | solid Style (fas)   | yes     | Expand tables                                           |
+|  <i className="fas fa-angle-double-right fa-3x" />  | Angle-double-right   | Status        | FA     | angle-double-right   | `<i className="fas fa-angle-double-right" />`   | solid Style (fas)   | yes     | Show an increase "From 1 value to another one"          |
+|       <i className="fas fa-language fa-3x" />       | Language             | Menu          | FA     | language             | `<i className="fas fa-language" />`             | solid Style (fas)   | yes     | Select the language in the top menu                     |
+|       <i className="fas fa-palette fa-3x" />        | Theme                | Menu          | FA     | palette              | `<i className="fas fa-palette" />`              | solid Style (fas)   | yes     | Select the theme in the top menu                        |
+|    <i className="fas fa-clipboard-list fa-3x" />    | Documentation        | Menu          | FA     | clipboard-list       | `<i className="fas fa-clipboard-list" />`       | solid Style (fas)   | yes     | Access to the documentation link                        |
+|       <i className="fas fa-comments fa-3x" />       | Support              | Menu          | FA     | comments             | `<i className="fas fa-comments" />`             | solid Style (fas)   | yes     | Access to the support link                              |
+|    <i className="fas fa-file-contract fa-3x" />     | EULA                 | Menu          | FA     | file-contract        | `<i className="fas fa-file-contract" />`        | solid Style (fas)   | yes     | Access to the "Terms of use" link                       |
+|     <i className="fas fa-sign-out-alt fa-3x" />     | Log-out              | Menu          | FA     | sign-out-alt         | `<i className="fas fa-sign-out-alt" />`         | solid Style (fas)   | yes     | Log out action                                          |
+|      <i className="far fa-hourglass fa-3x" />       | Hourglass            | Status        | FA     | hourglass            | `<i className="far fa-hourglass" />`            | regular Style (far) | ?       | Workflow delayed                                        |
+|        <i className="fas fa-pause fa-3x" />         | Pause                | Status        | FA     | pause                | `<i className="fas fa-pause" />`                | solid Style (fas)   | yes     | Workflow paused                                         |
+|     <i className="fas fa-level-up-alt fa-3x" />     | Upgrade              | Button-action | FA     | level-up-alt         | `<i className="fas fa-level-up-alt" />`         | solid Style (fas)   | yes     | Upgrade version                                         |
+|      <i className="fas fa-expand-alt fa-3x" />      | Expansion            | Button-action | FA     | expand-alt           | `<i className="fas fa-expand-alt" />`           | solid Style (fas)   | yes     | Expand with no rebalancing                              |
+|    <i className="fas fa-balance-scale fa-3x" />     | Rebalance            | Button-action | FA     | balance-scale        | `<i className="fas fa-balance-scale" />`        | solid Style (fas)   | yes     | Expand with rebalancing                                 |
+|       <i className="fas fa-hard-hat fa-3x" />       | Maintenance          | Button-action | FA     | hard-hat             | `<i className="fas fa-hard-hat" />`             | solid Style (fas)   | yes     | Switch to "maintenance mode"                            |
+|     <i className="fas fa-exchange-alt fa-3x" />     | Change-erasure       | Button-action | FA     | exchange-alt         | `<i className="fas fa-exchange-alt" />`         | solid Style (fas)   | yes     | Change erasure code level                               |
+|        <i className="fas fa-circle fa-3x" />        | Circle-health        | Status        | FA     | circle               | `<i className="fas-circle" />`                  | solid Style (fas)   | yes     | Display status (Healthy, Warning, Critical)             |
+|        <i className="far fa-circle fa-3x" />        | Circle-empty         | Status        | FA     | circle               | `<i className="far-circle" />`                  | regular Style (far) | yes     | Display empty health status                             |
