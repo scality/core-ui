@@ -42,16 +42,23 @@ function GlobalHealthBar({
   tooltipPosition = TOP,
 }: GlobalHealthProps) {
   const theme = useTheme();
-
+  // change the UTC time to current time zone
   const startTimeObject = convert2TimeObject(start);
   const endTimeObject = convert2TimeObject(end);
+
+  const trimAlerts = alerts.map((alert) => {
+    if (new Date(alert.startsAt) < new Date(start)) {
+      return { ...alert, startsAt: start };
+    }
+    return { ...alert };
+  });
 
   const spec = {
     width,
     height,
     data: {
       // trick: when there is no global alert, in order to display a green bar, we need to pass a non-empry array
-      values: !alerts.length ? [0] : alerts,
+      values: !alerts.length ? [0] : trimAlerts,
     },
     transform: [
       {
@@ -63,12 +70,12 @@ function GlobalHealthBar({
     layer: [
       // Paint the entire bar with green
       {
-        mark: { type: 'rect', cornerRadius: 15 },
+        mark: { type: 'rect', cornerRadius: 10 },
         encoding: { color: { value: theme.healthyLight } },
       },
       // Paint the timespan as x-axis
       {
-        mark: { type: 'rect', cursor: 'pointer' },
+        mark: { type: 'rect', cursor: 'pointer', cornerRadius: 10 },
         encoding: {
           x: {
             field: 'startsAt',
@@ -91,18 +98,19 @@ function GlobalHealthBar({
               domainWidth: 0,
               tickCount: 7,
               labelExpr:
-                "[timeFormat(datum.value, '%d'), timeFormat(datum.value, '%d') == '01' ? timeFormat(datum.value, '%b') : '']",
+                "[timeFormat(datum.value, '%d'), timeFormat(datum.value, '%d') == '01' || datum.index == 0 ? timeFormat(datum.value, '%b') : '']",
               labelColor: theme.textSecondary,
             },
           },
           x2: { field: 'endsAt' },
+          color: { value: theme.healthyLight },
         },
       },
       {
         mark: {
           type: 'rect',
           tooltip: true,
-          cornerRadius: 0,
+          cornerRadius: 10,
           cursor: 'pointer',
           clip: true,
         },
