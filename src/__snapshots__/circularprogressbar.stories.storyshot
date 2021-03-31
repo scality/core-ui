@@ -2,18 +2,18 @@
 
 exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     With Default Color
   </h3>
   <div
-    className="sc-kfzAmx IljFH sc-circularprogressbar"
+    className="sc-dmlrTW kwDnaA sc-circularprogressbar"
   >
     <span
-      className="sc-fKFyDc jxiMIy"
+      className="sc-kfzAmx cHkBzY"
     >
       Total Capacity
     </span>
@@ -22,14 +22,14 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
       width={150}
     >
       <circle
-        className="sc-iwyYcG iCIahW"
+        className="sc-bBXqnf iZFxIV"
         cx={75}
         cy={75}
         r={70}
         strokeWidth={10}
       />
       <circle
-        className="sc-bBXqnf dIxZQw"
+        className="sc-fKFyDc cXixBo"
         cx={75}
         cy={75}
         r={70}
@@ -37,7 +37,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         transform="rotate(-90 75  75)"
       />
       <text
-        className="sc-eCssSg dAsEiI sc-circularprogressbar-text"
+        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"
@@ -48,15 +48,15 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     </svg>
   </div>
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     With Custom Color
   </h3>
   <div
-    className="sc-kfzAmx IljFH sc-circularprogressbar"
+    className="sc-dmlrTW kwDnaA sc-circularprogressbar"
   >
     <span
-      className="sc-fKFyDc jxiMIy"
+      className="sc-kfzAmx cHkBzY"
     >
       Total Capacity
     </span>
@@ -65,14 +65,14 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
       width={110}
     >
       <circle
-        className="sc-iwyYcG iCIahW"
+        className="sc-bBXqnf iZFxIV"
         cx={55}
         cy={55}
         r={50}
         strokeWidth={10}
       />
       <circle
-        className="sc-bBXqnf JpIUy"
+        className="sc-fKFyDc iVpSWK"
         color="#00ff43"
         cx={55}
         cy={55}
@@ -81,7 +81,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         transform="rotate(-90 55  55)"
       />
       <text
-        className="sc-eCssSg dAsEiI sc-circularprogressbar-text"
+        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
         dominantBaseline="middle"
         style={
           Object {
@@ -96,7 +96,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         4.9 PB
       </text>
       <text
-        className="sc-eCssSg dAsEiI sc-circularprogressbar-text"
+        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"

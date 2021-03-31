@@ -2,15 +2,15 @@
 
 exports[`Storyshots Components/Chart/AreaChart Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Vege-Lite area chart
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis_area_chart"
   />
 </div>

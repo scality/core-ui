@@ -2,16 +2,16 @@
 
 exports[`Storyshots Components/Checkbox Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Checkbox checked
   </h3>
   <label
     checked={true}
-    className="sc-idOhPF iflkte sc-checkbox"
+    className="sc-bkzZxe ksGRRC sc-checkbox"
   >
     <input
       checked={true}
@@ -23,19 +23,19 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe ktuikY text"
+      className="sc-fFubgz kTNXQm text"
     >
       interested?
     </span>
   </label>
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Checkbox unchecked
   </h3>
   <label
     checked={false}
-    className="sc-idOhPF khiqer sc-checkbox"
+    className="sc-bkzZxe bnReLL sc-checkbox"
   >
     <input
       checked={false}
@@ -46,19 +46,19 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe ktuikY text"
+      className="sc-fFubgz kTNXQm text"
     >
       interested?
     </span>
   </label>
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Checkbox unchecked disabled
   </h3>
   <label
     checked={false}
-    className="sc-idOhPF gpHiDj sc-checkbox"
+    className="sc-bkzZxe gBDEMn sc-checkbox"
     disabled={true}
   >
     <input
@@ -71,19 +71,19 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe ktuikY text"
+      className="sc-fFubgz kTNXQm text"
     >
       interested?
     </span>
   </label>
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Checkbox checked disabled
   </h3>
   <label
     checked={true}
-    className="sc-idOhPF eryfGz sc-checkbox"
+    className="sc-bkzZxe hfNiZf sc-checkbox"
     disabled={true}
   >
     <input
@@ -96,7 +96,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       className="fas fa-check"
     />
     <span
-      className="sc-bkzZxe ktuikY text"
+      className="sc-fFubgz kTNXQm text"
     >
       interested?
     </span>

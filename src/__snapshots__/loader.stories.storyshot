@@ -6,12 +6,12 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-iqHYGH gSBJUA sc-loader"
+      className="sc-kEjbxe kicGPR sc-loader"
       color="#87929D"
       size="base"
     >
       <span
-        className="sc-dQppl cbDpju"
+        className="sc-crrsfI bkmyhs"
       >
         <svg
           height="50"
@@ -141,12 +141,12 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-iqHYGH gOrUsy sc-loader"
+      className="sc-kEjbxe hATnlX sc-loader"
       color="#87929D"
       size="large"
     >
       <span
-        className="sc-dQppl cbDpju"
+        className="sc-crrsfI bkmyhs"
       >
         <svg
           height="50"
@@ -276,12 +276,12 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-iqHYGH eUFvdz sc-loader"
+      className="sc-kEjbxe sSfdS sc-loader"
       color="#87929D"
       size="larger"
     >
       <span
-        className="sc-dQppl cbDpju"
+        className="sc-crrsfI bkmyhs"
       >
         <svg
           height="50"
@@ -411,12 +411,12 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-iqHYGH czLqbZ sc-loader"
+      className="sc-kEjbxe Hrwpo sc-loader"
       color="#87929D"
       size="huge"
     >
       <span
-        className="sc-dQppl cbDpju"
+        className="sc-crrsfI bkmyhs"
       >
         <svg
           height="50"
@@ -546,12 +546,12 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
     style={Object {}}
   >
     <div
-      className="sc-iqHYGH iErTGX sc-loader"
+      className="sc-kEjbxe ktYAhq sc-loader"
       color="#87929D"
       size="massive"
     >
       <span
-        className="sc-dQppl cbDpju"
+        className="sc-crrsfI bkmyhs"
       >
         <svg
           height="50"
@@ -682,15 +682,15 @@ exports[`Storyshots Components/Progress & loading/Loader Combinations 1`] = `
 
 exports[`Storyshots Components/Progress & loading/Loader With Dynamic Props 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-iqHYGH gSBJUA sc-loader"
+    className="sc-kEjbxe kicGPR sc-loader"
     color="#87929D"
     size="base"
   >
     <span
-      className="sc-dQppl cbDpju"
+      className="sc-crrsfI bkmyhs"
     >
       <svg
         height="50"
@@ -807,7 +807,7 @@ exports[`Storyshots Components/Progress & loading/Loader With Dynamic Props 1`] 
         </g>
       </svg>
       <span
-        className="sc-crrsfI dUUMaE"
+        className="sc-iqHYGH icalzd"
       >
          
         Loading

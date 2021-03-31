@@ -2,16 +2,16 @@
 
 exports[`Storyshots Components/EmptyState With Link 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cTkwdZ bCXJdz sc-emptystate"
+    className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <div
-        className="sc-cOajty eUfaHQ"
+        className="sc-bBrOnJ kslhCT"
       >
         <i
           className="fas fa-server"
@@ -19,10 +19,10 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
-        className="sc-jNMdTA ehPSmm"
+        className="sc-cTkwdZ jgiGzD"
       >
         A list of 
         nodes
@@ -30,10 +30,10 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
-        className="sc-jNMdTA ehPSmm"
+        className="sc-cTkwdZ jgiGzD"
       >
         There are no 
         nodes
@@ -44,10 +44,10 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-bBrOnJ cHmQia"
+      className="sc-dOSReg YzaVf"
     >
       <button
-        className="sc-bqyKva jdKiEV sc-button"
+        className="sc-dQppl jLhaey sc-button"
         disabled={false}
         onClick={[Function]}
         size="large"
@@ -55,13 +55,13 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
         type="button"
       >
         <span
-          className="sc-fodVxV ckNcPt"
+          className="sc-hBEYos hgFzca"
         >
           <span
             className="sc-button-text"
           >
             <span
-              className="sc-kstrdz gLcDls"
+              className="sc-bqyKva klTaQG"
               size="large"
             >
               <i
@@ -69,7 +69,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
               />
             </span>
             <span
-              className="sc-hBEYos jaVYGW"
+              className="sc-kstrdz ZegCk"
             >
               Create node
             </span>
@@ -83,16 +83,16 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
 
 exports[`Storyshots Components/EmptyState Without Link 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cTkwdZ bCXJdz sc-emptystate"
+    className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <div
-        className="sc-cOajty eUfaHQ"
+        className="sc-bBrOnJ kslhCT"
       >
         <i
           className="fas fa-server"
@@ -100,10 +100,10 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </div>
     </div>
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
-        className="sc-jNMdTA ehPSmm"
+        className="sc-cTkwdZ jgiGzD"
       >
         A list of 
         nodes
@@ -111,10 +111,10 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
       </h3>
     </div>
     <div
-      className="sc-dOSReg dApFRF"
+      className="sc-jNMdTA ideqbN"
     >
       <h3
-        className="sc-jNMdTA ehPSmm"
+        className="sc-cTkwdZ jgiGzD"
       >
         There are no 
         nodes

@@ -2,15 +2,15 @@
 
 exports[`Storyshots Components/Input/TextArea Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Text Area without label
   </h3>
   <textarea
-    className="sc-lcujXC higBKC sc-textarea"
+    className="sc-ehSCib gEDqjT sc-textarea"
     cols={50}
     id="text"
     onChange={[Function]}
@@ -18,12 +18,12 @@ exports[`Storyshots Components/Input/TextArea Default 1`] = `
     value="Add a note"
   />
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Text Area disabled
   </h3>
   <textarea
-    className="sc-lcujXC higBKC sc-textarea"
+    className="sc-ehSCib gEDqjT sc-textarea"
     cols={50}
     disabled={true}
     onChange={[Function]}

@@ -2,42 +2,42 @@
 
 exports[`Storyshots Components/Chart/BarChart Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Vertical Stacked Bar Chart Demo 
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis_vertical_stacked"
   />
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Horizontal Stacked Bar Chart Demo 
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis_horizontal_stacked"
   />
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Vertical Bar Chart Demo 
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis_vertical"
   />
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Horizontal Bar Chart Demo 
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis_horizontal"
   />
 </div>

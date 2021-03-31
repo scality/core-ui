@@ -2,15 +2,15 @@
 
 exports[`Storyshots Components/Chart/VegaChart Default 1`] = `
 <div
-  className="sc-gsTCUz dUzLYl"
+  className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-dlfnbm dxKCyT"
+    className="sc-gsTCUz iNyAAg"
   >
     Vega-Lite wrapper - need to specify the entire spec
   </h3>
   <div
-    className="sc-bdfBwQ sc-vegachart"
+    className="sc-vegachart"
     id="vis"
   />
 </div>
