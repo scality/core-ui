@@ -41,6 +41,8 @@ import ConstrainedText from './components/constrainedtext/Constrainedtext.compon
 import EmptyState from './components/emptystate/Emptystate.component';
 import EmptyTable from './components/emptytable/Emptytable.component';
 import ScrollbarWrapper from './components/scrollbarwrapper/ScrollbarWrapper.component';
+import ErrorPage404 from './components/error-pages/ErrorPage404.component';
+import ErrorPage500 from './components/error-pages/ErrorPage500.component';
 
 export {
   LOADER_SIZE,
@@ -82,4 +84,6 @@ export {
   EmptyState,
   EmptyTable,
   ScrollbarWrapper,
+  ErrorPage404,
+  ErrorPage500
 };
