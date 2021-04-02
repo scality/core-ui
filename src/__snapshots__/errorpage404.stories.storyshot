@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-cOajty hOsDRs sc-error-page404"
+  >
+    <div
+      className="sc-jgHCyG GHYGC"
+    >
+      <i
+        className="sc-gTgzIj cnnIkz fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-AzgDb jHwTwl"
+      >
+        Error: this page does not exist
+      </h2>
+    </div>
+    <div
+      className="sc-jgHCyG GHYGC"
+    >
+      <div
+        className="sc-khAkjo kePGAr"
+      >
+        <p
+          className="sc-hTZhsR iEVfKB"
+        >
+          It might be the wrong address or the page has moved.
+        </p>
+        <p
+          className="sc-hTZhsR iEVfKB"
+        >
+          You might check the url, or contact your admin if the error remains
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV bJCdTb sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Return Home
+      </span>
+    </a>
+  </div>
+</div>
+`;

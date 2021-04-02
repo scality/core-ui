@@ -5,10 +5,10 @@ exports[`Storyshots Components/Toggle Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-iIEYCM cFJsia sc-toggle"
+    className="sc-hYZPRl jrLppB sc-toggle"
   >
     <label
-      className="sc-gsBrbv HCskG"
+      className="sc-cHjxUU eBrfMz"
     >
       <input
         checked={false}
@@ -22,16 +22,16 @@ exports[`Storyshots Components/Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-aKZfe IuaBn text"
+      className="sc-JAcuL drDlzh text"
     >
       Airplane Mode
     </span>
   </div>
   <div
-    className="sc-iIEYCM cFJsia sc-toggle"
+    className="sc-hYZPRl jrLppB sc-toggle"
   >
     <label
-      className="sc-gsBrbv HCskG"
+      className="sc-cHjxUU eBrfMz"
     >
       <input
         checked={true}
@@ -45,7 +45,7 @@ exports[`Storyshots Components/Toggle Default 1`] = `
       />
     </label>
     <span
-      className="sc-aKZfe IuaBn text"
+      className="sc-JAcuL drDlzh text"
     >
       Airplane Mode
     </span>

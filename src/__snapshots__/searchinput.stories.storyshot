@@ -17,14 +17,14 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-gVgnHT frkvfV sc-searchinput"
+      className="sc-eltcbb eatTf sc-searchinput"
     >
       <div
-        className="sc-lcujXC fvEOYM sc-input"
+        className="sc-bTvRPi cMUvuU sc-input"
         type="text"
       >
         <div
-          className="sc-fbkhIv efjuAa sc-input-wrapper"
+          className="sc-dtwoBo tPVUn sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -40,7 +40,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-fWPcDo sc-fHYxKZ bVsqXZ kkrDbF"
+        className="sc-kiYtDG sc-cKZHah jyTYzU imXsww"
         disabled={false}
         onClick={[Function]}
       >
@@ -49,7 +49,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-fWPcDo sc-gyUeRy bVsqXZ hewCFq"
+        className="sc-kiYtDG sc-iIEYCM jyTYzU kqZHtF"
         onClick={[Function]}
       >
         <i
@@ -71,15 +71,15 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-gVgnHT frkvfV sc-searchinput"
+      className="sc-eltcbb eatTf sc-searchinput"
       data-cy="carlito_searchinput"
     >
       <div
-        className="sc-lcujXC fvEOYM sc-input"
+        className="sc-bTvRPi cMUvuU sc-input"
         type="text"
       >
         <div
-          className="sc-fbkhIv efjuAa sc-input-wrapper"
+          className="sc-dtwoBo tPVUn sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -94,7 +94,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-fWPcDo sc-fHYxKZ bVsqXZ kkrDbF"
+        className="sc-kiYtDG sc-cKZHah jyTYzU imXsww"
         disabled={false}
         onClick={[Function]}
       >
@@ -103,7 +103,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-fWPcDo sc-gyUeRy bVsqXZ hewCFq"
+        className="sc-kiYtDG sc-iIEYCM jyTYzU kqZHtF"
         onClick={[Function]}
       >
         <i
@@ -125,14 +125,14 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-gVgnHT kPjWzH sc-searchinput"
+      className="sc-eltcbb dbfxwh sc-searchinput"
     >
       <div
-        className="sc-lcujXC fvEOYM sc-input"
+        className="sc-bTvRPi cMUvuU sc-input"
         type="text"
       >
         <div
-          className="sc-fbkhIv efjuAa sc-input-wrapper"
+          className="sc-dtwoBo tPVUn sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -148,7 +148,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-fWPcDo sc-fHYxKZ kKoagH kkrDbF"
+        className="sc-kiYtDG sc-cKZHah bJzYIu imXsww"
         disabled={true}
         onClick={[Function]}
       >
@@ -157,7 +157,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-fWPcDo sc-gyUeRy bVsqXZ hewCFq"
+        className="sc-kiYtDG sc-iIEYCM jyTYzU kqZHtF"
         onClick={[Function]}
       >
         <i
@@ -179,14 +179,14 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
     }
   >
     <div
-      className="sc-gVgnHT kPjWzH sc-searchinput"
+      className="sc-eltcbb dbfxwh sc-searchinput"
     >
       <div
-        className="sc-lcujXC fvEOYM sc-input"
+        className="sc-bTvRPi cMUvuU sc-input"
         type="text"
       >
         <div
-          className="sc-fbkhIv efjuAa sc-input-wrapper"
+          className="sc-dtwoBo tPVUn sc-input-wrapper"
         >
           <input
             autoComplete="off"
@@ -202,7 +202,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         </div>
       </div>
       <button
-        className="sc-fWPcDo sc-fHYxKZ kKoagH kkrDbF"
+        className="sc-kiYtDG sc-cKZHah bJzYIu imXsww"
         disabled={true}
         onClick={[Function]}
       >
@@ -211,7 +211,7 @@ exports[`Storyshots Components/Input/SearchInput Default 1`] = `
         />
       </button>
       <button
-        className="sc-fWPcDo sc-gyUeRy bVsqXZ hewCFq"
+        className="sc-kiYtDG sc-iIEYCM jyTYzU kqZHtF"
         onClick={[Function]}
       >
         <i

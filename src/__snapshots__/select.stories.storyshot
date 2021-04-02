@@ -17,7 +17,7 @@ exports[`Storyshots Components/Selector/Select Default 1`] = `
     }
   >
     <div
-      className="sc-higXBA eESVnP sc-select-container"
+      className="sc-hlTvYk kezqK sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -142,7 +142,7 @@ exports[`Storyshots Components/Selector/Select Default 1`] = `
     }
   >
     <div
-      className="sc-higXBA eESVnP sc-select-container"
+      className="sc-hlTvYk kezqK sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
@@ -277,7 +277,7 @@ exports[`Storyshots Components/Selector/Select Default 1`] = `
     }
   >
     <div
-      className="sc-higXBA eESVnP sc-select-container"
+      className="sc-hlTvYk kezqK sc-select-container"
     >
       <div
         className="sc-select css-2b097c-container"
