@@ -19,22 +19,21 @@ import { Meta } from '@storybook/addon-docs/blocks';
 | EEE  | Weekday on 3 letters, first with uppercase | "Mon"   |
 | DD   | Day of the month with leading zero         | 08      |
 | MM   | Numerical month with leading zero          | 07      |
-| MMM  | Month abbreviation on 3 letters uppercase  | "JUL"   |
+| MMM  | Month abbreviation on 3 letters uppercase  | "Jul"   |
 | HH   | Hour [0-23]                                | 13      |
 | mm   | Minute with leading zero                   | 05      |
 | ss   | Second with leading zero                   | 06      |
 
 ### Format list
 
-| Alias   | code                     | Example                  | Length | Context                                              |
-| ------- | ------------------------ | ------------------------ | ------ | ---------------------------------------------------- |
-| Short#1 | DD MMM                   | 20 Jul                   | 5      | Chart time axis                                      |
-| Short#2 | DDMMM HH:mm              | 20JUL 09:00              | 11     | Limited space - Dense tables, charts                 |
-| Short#3 | YYYY-MM-DD               | 2020-07-20               | 10     |                                                      |
-| Mid#1   | EEE YYYY-MM-DD HH:mm     | Mon 2020-07-20 09:00     | 20     | Checking with agenda for day of the week             |
-| Mid#2   | YYYY-MM-DD HH:mm         | 2020-07-20 09:00         | 16     | No need of day of the week                           |
-| Mid#3   | YYYY-MM-DD HH:mm:ss      | 2020-07-20 09:00:00      | 19     | When the seconds are needed                          |
-| Full#1  | EEE MMM DD YYYY HH:mm:ss | Mon Jul 20 2020 09:00:00 | 24     | When a lot of space (hover) When precision is needed |
+| Alias   | code                     | Example                  | Length | Context                                                |
+| ------- | ------------------------ | ------------------------ | ------ | ------------------------------------------------------ |
+| Short#1 | DD MMM                   | 20 Jul                   | 5      | Chart time axis                                        |
+| Short#2 | DDMMM HH:mm              | 20Jul 09:00              | 11     | Limited space, year not needed                         |
+| Short#3 | YYYY-MM-DD               | 2020-07-20               | 10     | Tables                                                 |
+| Mid#1   | YYYY-MM-DD HH:mm         | 2020-07-20 09:00         | 16     | Tables (creation/modification dates)                   |
+| Mid#2   | YYYY-MM-DD HH:mm:ss      | 2020-07-20 09:00:00      | 19     | When the seconds are needed                            |
+| Full#1  | EEE MMM DD YYYY HH:mm:ss | Mon Jul 20 2020 09:00:00 | 24     | When a lot of space (hover) - When precision is needed |
 
 ### Remarks:
 
