@@ -22,6 +22,48 @@ const items = [
   },
 ];
 
+const itemsWithNested = [
+  {
+    label: 'Language',
+    submenuIcon: null,
+    submenuItems: [
+      {
+        label: 'French',
+        onClick: action('French clicked'),
+        'data-cy': 'French',
+      },
+      {
+        label: 'English',
+        onClick: action('English clicked'),
+        'data-cy': 'English',
+      },
+    ],
+    'data-cy': 'Language'
+  },
+  {
+    label: 'Theme',
+    submenuIcon: <i className="fas fa-star" />,
+    submenuItems: [
+      {
+        label: 'Light',
+        onClick: action('Light clicked'),
+        'data-cy': 'French',
+      },
+      {
+        label: 'Dark',
+        onClick: action('Dark clicked'),
+        'data-cy': 'Dark',
+      },
+    ],
+    'data-cy': 'Theme'
+  },
+  {
+    label: 'Support',
+    onClick: action('Support clicked'),
+    'data-cy': 'Support',
+  },
+]
+
 export default {
   title: 'Components/Dropdown',
   component: Dropdown,
@@ -102,6 +144,13 @@ export const Default = () => {
         variant="danger"
         text="danger"
       />
+
+      <Title>Dropdown with nested dropdowns</Title>
+        <Dropdown
+          text="Help"
+          icon={<i className="fas fa-star" />}
+          items={itemsWithNested}
+        />
     </Wrapper>
   );
 };
