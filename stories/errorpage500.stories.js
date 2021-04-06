@@ -24,3 +24,10 @@ export const WithSupportLink = () => {
   );
 };
 
+export const WithLocale = () => {
+  return (
+    <Wrapper>
+      <ErrorPage500 btnLink="/" supportLink="https://www.scality.com/support/" locale="fr"/>
+    </Wrapper>
+  );
+};

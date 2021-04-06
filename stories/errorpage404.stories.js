@@ -15,3 +15,11 @@ export const Default = () => {
     </Wrapper>
   );
 };
+
+export const WithLocale = () => {
+  return (
+    <Wrapper>
+      <ErrorPage404 btnLink="/" locale="fr"/>
+    </Wrapper>
+  );
+};
