@@ -1,6 +1,6 @@
 //@flow
-import React from "react";
-import VegaChart from "../vegachart/VegaChart.component.js";
+import React from 'react';
+import VegaChart from '../vegachart/VegaChart.component.js';
 
 type Props = {
   id: string,
@@ -9,21 +9,32 @@ type Props = {
   yAxis: Object,
   color?: Object,
   width?: number,
-  barConfig?: Object
+  height?: number,
+  barConfig?: Object,
 };
 
-function BarChart({ id, data, xAxis, yAxis, color, width, barConfig }: Props) {
+function BarChart({
+  id,
+  data,
+  xAxis,
+  yAxis,
+  color,
+  height = 200,
+  width = 800,
+  barConfig,
+}: Props) {
   const spec = {
-    mark: { type: "bar", ...barConfig },
+    mark: { type: 'bar', ...barConfig },
     width,
+    height,
     data: {
-      values: data
+      values: data,
     },
     encoding: {
       x: xAxis,
       y: yAxis,
-      color
-    }
+      color,
+    },
   };
 
   return <VegaChart id={id} spec={spec}></VegaChart>;
