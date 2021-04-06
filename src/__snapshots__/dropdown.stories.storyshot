@@ -400,5 +400,43 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
       </span>
     </div>
   </div>
+  <h3
+    className="sc-dlfnbm dxKCyT"
+  >
+    Dropdown with nested dropdowns
+  </h3>
+  <div
+    className="sc-jcVebW kKGLNj sc-dropdown"
+  >
+    <div
+      className="sc-eggNIi gJpqKz trigger"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      size="base"
+      tabIndex="0"
+    >
+      <span
+        className="sc-kstrdz gLcDls"
+        size="base"
+      >
+        <i
+          className="fas fa-star"
+        />
+      </span>
+      <span
+        className="sc-hBEYos jaVYGW sc-trigger-text"
+      >
+        Help
+      </span>
+      <span
+        className="sc-iBaPrD iJUtiN"
+      >
+        <i
+          className="fas fa-caret-down"
+        />
+      </span>
+    </div>
+  </div>
 </div>
 `;
