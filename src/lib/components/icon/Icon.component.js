@@ -1,7 +1,10 @@
-import React, { Suspense } from "react";
+// @flow
+import React, { Suspense } from 'react';
 import styled, { css } from 'styled-components';
+import { brand } from '../../style/theme';
 import { getTheme } from '../../utils';
 import Loader from '../loader/Loader.component';
+import type { SizeProp } from '@fortawesome/react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const iconTable = {
@@ -89,23 +92,17 @@ const IconStyled = styled(FontAwesomeIcon)`
 `;
 
 type Props = {
-  name: string,
-  size?: string,
-  color?: string,
+  name: $Keys<typeof iconTable>,
+  size?: SizeProp,
+  color?: $Keys<typeof brand>,
 };
 
 function getLazyStyledIcon(iconInfo) {
   const [iconType, iconClass] = iconInfo.split(' ');
   return React.lazy(async () => {
     try {
-      let icon = null;
-      if (iconType === "fas") {
-        icon = await import(`@fortawesome/free-solid-svg-icons/${iconClass}.js`);
-      } else if (iconType === "far") {
-        icon = await import(`@fortawesome/free-regular-svg-icons/${iconClass}.js`);
-      } else {
-        icon = await import(`@fortawesome/free-solid-svg-icons/${iconClass}.js`);
-      }
+      const fontAwesomeType = iconType === "far" ? "free-regular-svg-icons" : "free-solid-svg-icons";
+      const icon = await import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`);
       return { default: ({ color, size, ...rest }) => <IconStyled color={ color } icon={ icon[iconClass] } size={ size } { ...rest } /> }
     } catch {
       return null;
@@ -114,7 +111,7 @@ function getLazyStyledIcon(iconInfo) {
 }
 
 function Icon({
-  name = "Theme",
+  name,
   size = "1x",
   color = null,
   ...rest
@@ -122,7 +119,7 @@ function Icon({
   const iconClass = iconTable[name];
 
   if (!iconClass)
-    return null;
+    throw new Error(`${name}: is not a valid icon.`);
 
   const LazyStyledIcon = getLazyStyledIcon(iconClass);
 
