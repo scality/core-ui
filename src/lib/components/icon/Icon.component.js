@@ -17,7 +17,7 @@ export const iconTable = {
   "Volume-pdf": "fas faCompactDisc",
   "Network": "fas faProjectDiagram",
   "Bucket": "fas faGlassWhiskey",
-  "Cloud-backend": "far faCloud",
+  "Cloud-backend": "fas faCloud",
   "Datacenter": "fas faWarehouse",
   "User": "fas faUserCog",
   "Alert": "fas faBell",
