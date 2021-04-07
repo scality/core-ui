@@ -54,6 +54,75 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-laRPJI gnaLBS sc-error-page500"
+  >
+    <div
+      className="sc-nFpLZ gvQQYc"
+    >
+      <i
+        className="sc-higXBA hqnamb fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-iNqMTl cTvwmA"
+      >
+        Erreur inattendue
+      </h2>
+    </div>
+    <div
+      className="sc-nFpLZ gvQQYc"
+    >
+      <div
+        className="sc-jeGSBP gtqGta"
+      >
+        <p
+          className="sc-eJMQSu gldhqr"
+        >
+          Une erreur s'est produite et votre demande ne peut être complétée.
+        </p>
+        <p
+          className="sc-eJMQSu gldhqr"
+        >
+          Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
+        </p>
+        <p
+          className="sc-eJMQSu gldhqr"
+        >
+          Vous pouvez également contacter le 
+          <a
+            className="sc-ehSCib gOwmRK"
+            href="https://www.scality.com/support/"
+          >
+            support 
+            <i
+              className="fas fa-external-link-alt"
+            />
+          </a>
+           pour signaler ce problème.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV bJCdTb sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Retour à l'accueil
+      </span>
+    </a>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] = `
 <div
   className="sc-bdfBwQ gFQERV"
@@ -92,8 +161,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
         <p
           className="sc-eJMQSu gldhqr"
         >
-          You may also contact
-           
+          You may also contact 
           <a
             className="sc-ehSCib gOwmRK"
             href="https://www.scality.com/support/"
@@ -103,8 +171,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
               className="fas fa-external-link-alt"
             />
           </a>
-           
-          to report this issue.
+           to report this issue.
         </p>
       </div>
     </div>

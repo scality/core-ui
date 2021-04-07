@@ -33,7 +33,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
         <p
           className="sc-hTZhsR iEVfKB"
         >
-          You might check the url, or contact your admin if the error remains
+          You might check the url, or contact your admin if the error remains.
         </p>
       </div>
     </div>
@@ -48,6 +48,60 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
         className="sc-kstrdz ZegCk"
       >
         Return Home
+      </span>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-cOajty hOsDRs sc-error-page404"
+  >
+    <div
+      className="sc-jgHCyG GHYGC"
+    >
+      <i
+        className="sc-gTgzIj cnnIkz fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-AzgDb jHwTwl"
+      >
+        Erreur: cette page n'existe pas
+      </h2>
+    </div>
+    <div
+      className="sc-jgHCyG GHYGC"
+    >
+      <div
+        className="sc-khAkjo kePGAr"
+      >
+        <p
+          className="sc-hTZhsR iEVfKB"
+        >
+          Il se peut que ce soit une mauvaise adresse ou que la page ait été déplacée.
+        </p>
+        <p
+          className="sc-hTZhsR iEVfKB"
+        >
+          Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV bJCdTb sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Retour à l'accueil
       </span>
     </a>
   </div>
