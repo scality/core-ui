@@ -3,6 +3,7 @@ import React from 'react';
 import Dropdown from '../src/lib/components/dropdown/Dropdown.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper, Title } from './common';
+import type { Node } from 'react';
 
 const items = [
   {
@@ -25,7 +26,6 @@ const items = [
 const itemsWithNested = [
   {
     label: 'Language',
-    submenuIcon: null,
     submenuItems: [
       {
         label: 'French',
@@ -47,12 +47,18 @@ const itemsWithNested = [
       {
         label: 'Light',
         onClick: action('Light clicked'),
-        'data-cy': 'French',
+        'data-cy': 'Light',
       },
       {
         label: 'Dark',
         onClick: action('Dark clicked'),
         'data-cy': 'Dark',
+      },
+      {
+        label: 'External',
+        onClick: action('External clicked'),
+        iconExternal: <i className="fas fa-external-link-alt" />,
+        'data-cy': 'External',
       },
     ],
     'data-cy': 'Theme'

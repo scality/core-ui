@@ -1,13 +1,13 @@
 //@flow
-import React, { useState, useCallback, forwardRef } from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useCallback } from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
 import {
   ButtonStyled,
   ButtonIcon,
-  ButtonText
-} from "../button/Button.component";
-import * as defaultTheme from "../../style/theme";
+  ButtonText,
+} from '../button/Button.component';
+import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { getPositionDropdownMenu } from './utils';
 
@@ -15,25 +15,11 @@ export type Item = {
   label: string,
   name?: string,
   selected?: boolean,
-  onClick?: any => void,
+  onClick?: (SyntheticMouseEvent<HTMLDivElement>) => void,
+  iconExternal?: Node,
   submenuIcon?: Node,
-  submenuItems?: Array<Item>
+  submenuItems?: Array<Item>,
 };
-
-type DropdownTriggerContainerProps = {
-  isItem?: boolean,
-  dataIndex: number,
-  open?: boolean,
-  size?: string,
-  variant?: string,
-  title?: string,
-  onBlur: any => void,
-  onFocus: any => void,
-  onClick: any => void,
-  onMouseEnter: any => void,
-  onMouseLeave: any => void,
-  children: Node,
-}
 
 type Items = Array<Item>;
 type Props = {
@@ -46,7 +32,8 @@ type Props = {
   icon?: Node,
   caret?: boolean,
   dataIndex?: number,
-  onClick?: any => void,
+  iconExternal?: Node,
+  onClick?: (SyntheticMouseEvent<HTMLDivElement>) => void,
 };
 
 const DropdownStyled = styled.div`
@@ -59,6 +46,33 @@ const DropdownStyled = styled.div`
   }
 `;
 
+const DropdownMenuItemStyled = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${defaultTheme.padding.base};
+  box-sizing: border-box;
+  border-bottom: 1px solid ${getThemePropSelector('border')};
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: ${defaultTheme.fontSize.base};
+
+  &:last-child {
+    border-bottom: 0px;
+  }
+
+  ${css`
+    background-color: ${getThemePropSelector('primary')};
+    color: ${getThemePropSelector('textPrimary')};
+    &:hover {
+      background-color: ${getThemePropSelector('primaryDark2')};
+    }
+    &:active {
+      background-color: ${getThemePropSelector('primaryDark2')};
+    }
+  `};
+`;
+
 const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
@@ -66,121 +80,179 @@ const DropdownMenuStyled = styled.ul`
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
-
-  ${({ triggerSize, isItem, size, itemIndex = 0, nbItems}) => {
-    return getPositionDropdownMenu({ isItem, triggerSize, size, nbItems, itemIndex })
+  ${({ nbItems }) =>
+    nbItems > 0
+      ? css`
+          border: 1px solid ${getThemePropSelector('border')};
+        `
+      : css``};
+  ${({ triggerSize, isItem = false, size, itemIndex = 0, nbItems }) => {
+    return css`
+      ${getPositionDropdownMenu({
+        isItem,
+        triggerSize,
+        size,
+        nbItems,
+        itemIndex,
+      })}
+    `;
   }};
-`;
-
-const DropdownMenuItemStyled = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${defaultTheme.padding.base};
-  white-space: nowrap;
-  cursor: pointer;
-  font-size: ${defaultTheme.fontSize.base};
-
-  ${css`
-    background-color: ${getThemePropSelector("primary")};
-    color: ${getThemePropSelector("textPrimary")};
-    &:hover {
-      background-color: ${getThemePropSelector("primaryDark2")};
-    }
-    &:active {
-      background-color: ${getThemePropSelector("primaryDark2")};
-    }
-  `};
 `;
 
 const Caret = styled.span`
   margin-left: ${defaultTheme.padding.base};
 `;
 
-const TriggerStyled = ButtonStyled.withComponent("div");
+const TriggerStyled = ButtonStyled.withComponent('div');
 
-const DropdownTriggerContainer = forwardRef<DropdownTriggerContainerProps, Element>(({isItem, dataIndex, open, size , variant, title, onBlur, onFocus, onClick, onMouseEnter, onMouseLeave, children, ...rest}, ref) => {
-  return isItem ? (
+const DropdownAsAnItem = ({
+  items = [],
+  text,
+  icon = null,
+  size = 'base',
+  caret = true,
+  iconExternal = null,
+  dataIndex = null,
+  onClick = null,
+}: Props) => {
+  const [open, setOpen] = useState(false);
+  const [menuSize, setMenuSize] = useState();
+  const [triggerSize, setTriggerSize] = useState();
+  const [itemIndex, setItemIndex] = useState();
+
+  const refMenuCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setMenuSize(node.getBoundingClientRect());
+      }
+    },
+    [setMenuSize],
+  );
+
+  const refTriggerCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setTriggerSize(node.getBoundingClientRect());
+      }
+    },
+    [setTriggerSize],
+  );
+
+  return (
     <DropdownMenuItemStyled
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={(e) => {
+        setItemIndex(
+          e && e.currentTarget && e.currentTarget.getAttribute('data-index'),
+        );
+        setOpen(true);
+      }}
+      onMouseLeave={() => setOpen(false)}
       data-index={dataIndex}
       onClick={onClick}
-      ref={ref}
+      ref={refTriggerCallback}
     >
-      {children}
+      {icon && (
+        <ButtonIcon text={text} size={size}>
+          {icon}
+        </ButtonIcon>
+      )}
+      {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
+      {caret && items.length > 0 && (
+        <Caret>
+          <i className="fas fa-chevron-right" />
+        </Caret>
+      )}
+      {iconExternal && <ButtonIcon size={size}>{iconExternal}</ButtonIcon>}
+      {open && (
+        <DropdownMenuStyled
+          className="menu-item"
+          ref={refMenuCallback}
+          size={menuSize}
+          triggerSize={triggerSize}
+          itemIndex={itemIndex}
+          nbItems={items.length}
+          isItem
+        >
+          {items.map(
+            (
+              {
+                label,
+                onClick,
+                submenuIcon = null,
+                submenuItems = [],
+                iconExternal = null,
+              },
+              index,
+            ) => {
+              return (
+                <DropdownAsAnItem
+                  key={label}
+                  text={label}
+                  icon={submenuIcon}
+                  items={submenuItems}
+                  dataIndex={index}
+                  iconExternal={iconExternal}
+                  onClick={onClick}
+                />
+              );
+            },
+          )}
+        </DropdownMenuStyled>
+      )}
     </DropdownMenuItemStyled>
-  ) : (
-    <DropdownStyled
-      active={open}
-      variant={variant}
-      className="sc-dropdown"
-      {...rest}
-    >
-    <TriggerStyled
-      variant={variant}
-      size={size}
-      className="trigger"
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onClick={onClick}
-      tabIndex="0"
-      title={title}
-      ref={ref}
-    >
-      {children}
-    </TriggerStyled>
-    </DropdownStyled>
-  )
-})
+  );
+};
 
 function Dropdown({
-  isItem = false,
   items,
   text,
   icon,
-  size = "base",
-  variant = "base",
+  size = 'base',
+  variant = 'base',
   title,
   caret = true,
-  dataIndex = null,
   onClick = null,
   ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
-  const [itemIndex, setItemIndex] = useState()
 
-  const refMenuCallback = useCallback(node => {
-    if (node !== null) {
-      setMenuSize(node.getBoundingClientRect());
-    }
-  }, [setMenuSize]);
+  const refMenuCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setMenuSize(node.getBoundingClientRect());
+      }
+    },
+    [setMenuSize],
+  );
 
-  const refTriggerCallback = useCallback(node => {
-    if (node !== null) {
-      setTriggerSize(node.getBoundingClientRect());
-    }
-  }, [setTriggerSize]);
+  const refTriggerCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setTriggerSize(node.getBoundingClientRect());
+      }
+    },
+    [setTriggerSize],
+  );
 
   return (
-      <DropdownTriggerContainer
-        open={open}
-        isItem={isItem}
-        onMouseEnter={(e) => {
-          setItemIndex(e && e.target && e.target.getAttribute('data-index') || 0)
-          setOpen(true)
-        }}
-        onMouseLeave={() => setOpen(false)}
+    <DropdownStyled
+      active={open}
+      variant={variant}
+      className="sc-dropdown"
+      {...rest}
+    >
+      <TriggerStyled
         variant={variant}
         size={size}
+        className="trigger"
         onBlur={() => setOpen(!open)}
         onFocus={() => setOpen(!open)}
-        onClick={onClick ? onClick : event => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
+        tabIndex="0"
         title={title}
         ref={refTriggerCallback}
-        dataIndex={dataIndex}
         {...rest}
       >
         {icon && (
@@ -191,7 +263,7 @@ function Dropdown({
         {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
         {caret && items.length > 0 && (
           <Caret>
-            <i className={`fas fa-caret-${isItem ? 'right' : 'down'}`} />
+            <i className="fas fa-caret-down" />
           </Caret>
         )}
         {open && (
@@ -200,24 +272,36 @@ function Dropdown({
             ref={refMenuCallback}
             size={menuSize}
             triggerSize={triggerSize}
-            itemIndex={itemIndex}
             nbItems={items.length}
-            isItem={isItem}
           >
-            {items.map(({ label, onClick, submenuIcon = null, submenuItems = [], ...itemRest }, index) => {
-               return <Dropdown
-                 isItem
-                 key={label}
-                 text={label}
-                 icon={submenuIcon}
-                 items={submenuItems}
-                 dataIndex={index}
-                 onClick={onClick}
-               />
-            })}
+            {items.map(
+              (
+                {
+                  label,
+                  onClick,
+                  submenuIcon = null,
+                  submenuItems = [],
+                  iconExternal = null,
+                },
+                index,
+              ) => {
+                return (
+                  <DropdownAsAnItem
+                    key={label}
+                    text={label}
+                    icon={submenuIcon}
+                    items={submenuItems}
+                    dataIndex={index}
+                    iconExternal={iconExternal}
+                    onClick={onClick}
+                  />
+                );
+              },
+            )}
           </DropdownMenuStyled>
         )}
-      </DropdownTriggerContainer>
+      </TriggerStyled>
+    </DropdownStyled>
   );
 }
 
