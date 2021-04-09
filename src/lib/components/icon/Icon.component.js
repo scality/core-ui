@@ -105,7 +105,7 @@ function getLazyStyledIcon(iconInfo) {
       const icon = await import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`);
       return { default: ({ color, size, ...rest }) => <IconStyled color={ color } icon={ icon[iconClass] } size={ size } { ...rest } /> }
     } catch {
-      return null;
+      return { default: () => <Loader size="base" /> };
     }
   })
 }
