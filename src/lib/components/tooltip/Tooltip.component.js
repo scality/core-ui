@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import type { Node } from 'react';
 import * as defaultTheme from '../../style/theme';
-import { getTheme } from '../../utils';
+import { getTheme, getThemePropSelector } from '../../utils';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -30,6 +30,7 @@ const TooltipContainer = styled.div`
 const TooltipOverLayContainer = styled.div`
   display: flex;
   position: absolute;
+  border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
     (props && props.overlayStyle && props.overlayStyle.backgroundColor) ||
     getTheme(props).primaryDark2};
