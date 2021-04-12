@@ -13,6 +13,7 @@ inexact-spread =off
 
 [options]
 include_warnings=false
+module.ignore_non_literal_requires=true
 
 [strict]
 

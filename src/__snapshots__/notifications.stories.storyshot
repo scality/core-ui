@@ -5,16 +5,16 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-fWPcDo lkeMFs sc-notifications"
+    className="sc-fHYxKZ lnZcff sc-notifications"
   >
     <div
-      className="sc-httYMd iIpScg sc-notification"
+      className="sc-cbDGPM heuCQH sc-notification"
       data-cy="Carlito_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -22,7 +22,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Carlito. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -31,13 +31,13 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-httYMd bVhFim sc-notification"
+      className="sc-cbDGPM eDhonx sc-notification"
       data-cy="Patrick_notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -45,7 +45,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Patrick. I live at TOP_RIGHT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -55,15 +55,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-fWPcDo RhxkT sc-notifications"
+    className="sc-fHYxKZ gqiJaI sc-notifications"
   >
     <div
-      className="sc-httYMd hdBfBF sc-notification"
+      className="sc-cbDGPM fFRutq sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -71,7 +71,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Jordi. I live at TOP_LEFT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -80,12 +80,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-httYMd ciTjTk sc-notification"
+      className="sc-cbDGPM kKvnBT sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -93,12 +93,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Guidllaume. I live at TOP_LEFT
       </div>
       <div
-        className="sc-hjWSAi dcBdTv"
+        className="sc-gVgnHT bhRKVx"
         max={10000}
         value={0}
       />
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -108,15 +108,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-fWPcDo chvtrD sc-notifications"
+    className="sc-fHYxKZ gGykOw sc-notifications"
   >
     <div
-      className="sc-httYMd cviMpS sc-notification"
+      className="sc-cbDGPM gNFBeF sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -124,7 +124,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Teddy. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -133,12 +133,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-httYMd ciTjTk sc-notification"
+      className="sc-cbDGPM kKvnBT sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -146,12 +146,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Yanjin. I live at BOTTOM_LEFT
       </div>
       <div
-        className="sc-hjWSAi dcBdTv"
+        className="sc-gVgnHT bhRKVx"
         max={10000}
         value={0}
       />
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -161,15 +161,15 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-fWPcDo fGoBCA sc-notifications"
+    className="sc-fHYxKZ jhBbnz sc-notifications"
   >
     <div
-      className="sc-httYMd hdBfBF sc-notification"
+      className="sc-cbDGPM fFRutq sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -177,7 +177,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Charles. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
@@ -186,12 +186,12 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-httYMd cviMpS sc-notification"
+      className="sc-cbDGPM gNFBeF sc-notification"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-cbDGPM bHWJPd"
+        className="sc-hjWSAi jsbBdQ"
       >
         Hi
       </div>
@@ -199,7 +199,7 @@ exports[`Storyshots Components/Notification/Notifications Default 1`] = `
         I am Claude. I live at BOTTOM_RIGHT
       </div>
       <div
-        className="sc-gVgnHT hDsYDq"
+        className="sc-fWPcDo cYkTyj"
         onClick={[Function]}
       >
         <i
