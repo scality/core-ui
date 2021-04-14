@@ -82,6 +82,28 @@ export const defaultTheme = {
     border: '#313131',
     info: '#434343',
   },
+  darkRebrand: {
+    statusHealthy: '#0AADA6',
+    statusWarning: '#F8F32B',
+    statusCritical: '#E84855',
+    selectedActive: '#037AFF',
+    highlight: '#1A3C75',
+    border: '#313131',
+    buttonPrimary: '#2F4185',
+    buttonSecondary: '#595A78',
+    buttonDelete: '#3D0808',
+    infoPrimary: '#8E8EAC',
+    infoSecondary: '#333366',
+    backgroundLevel1: '#121219',
+    backgroundLevel2: '#323245',
+    backgroundLevel3: '#232331',
+    backgroundLevel4: '#171721',
+    textPrimary: '#FFFFFF',
+    textSecondary: '#EAEAEA',
+    textTertiary: '#B5B5B5',
+    textReverse: '#000000',
+    textLink: '#71AEFF',
+  },
 };
 export const brand = defaultTheme.dark;
 
