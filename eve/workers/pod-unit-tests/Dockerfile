@@ -6,7 +6,7 @@ ENV LANG=en_US.utf8
 
 WORKDIR /home/eve/workspace
 
-RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash -
 RUN yum install -y epel-release \
     && yum install -y gcc \
     make \
