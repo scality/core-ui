@@ -33,7 +33,7 @@ const TooltipOverLayContainer = styled.div`
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
     (props && props.overlayStyle && props.overlayStyle.backgroundColor) ||
-    getTheme(props).primaryDark2};
+    getTheme(props).backgroundLevel1};
   color: ${(props) =>
     (props && props.overlayStyle && props.overlayStyle.color) ||
     getTheme(props).textPrimary};
