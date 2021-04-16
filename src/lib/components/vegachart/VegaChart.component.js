@@ -45,10 +45,10 @@ function VegaChart({ id, spec, tooltipPosition = BOTTOM }: Props) {
       ? 'light'
       : 'custom'; // for the dark theme we use the `custom` defined in vega-tooltip-custom.css
   const currentBackgroundColor =
-    themeContext && themeContext.brand && themeContext.brand.primaryDark1;
-
+    themeContext && themeContext.brand && themeContext.brand.backgroundLevel4;
+  // the background color of the view
   const currentBackgroundColor2 =
-    themeContext && themeContext.brand && themeContext.brand.primaryDark2;
+    themeContext && themeContext.brand && themeContext.brand.backgroundLevel1;
 
   const brandText =
     themeContext && themeContext.brand && themeContext.brand.textPrimary;
