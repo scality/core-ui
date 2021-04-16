@@ -21,14 +21,14 @@ export const Default = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
               text="No"
-              size="small"
+              size="base"
               outlined
               onClick={action('No clicked')}
             />
             <Button
-              variant="secondary"
+              variant="buttonSecondary"
               text="Yes"
-              size="small"
+              size="base"
               onClick={action('Yes clicked')}
             />
           </div>

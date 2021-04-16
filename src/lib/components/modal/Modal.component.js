@@ -1,16 +1,16 @@
 //@flow
-import React from "react";
-import styled from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import type { Node } from "react";
-import { getThemePropSelector } from "../../utils";
+import React from 'react';
+import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import type { Node } from 'react';
+import { getThemePropSelector } from '../../utils';
 
 type Props = {
   isOpen: boolean,
   close: () => {},
   title: string,
   footer?: Node,
-  children: Node
+  children: Node,
 };
 
 const ModalContainer = styled.div`
@@ -29,8 +29,8 @@ const ModalContainer = styled.div`
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${getThemePropSelector("primary")};
-  color: ${getThemePropSelector("textPrimary")};
+  background-color: ${getThemePropSelector('backgroundLevel1')};
+  color: ${getThemePropSelector('textPrimary')};
   border-radius: 5px;
   overflow: hidden;
   min-width: 250px;
@@ -53,7 +53,7 @@ const ModalBody = styled.div`
 `;
 const ModalFooter = styled.div`
   padding: ${defaultTheme.padding.base} ${defaultTheme.padding.larger};
-  background-color: ${getThemePropSelector("primaryDark1")};
+  background-color: ${getThemePropSelector('backgroundLevel4')};
 `;
 
 const ModalClose = styled.div`
