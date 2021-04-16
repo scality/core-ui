@@ -105,7 +105,7 @@ export const defaultTheme = {
     textLink: '#71AEFF',
   },
 };
-export const brand = defaultTheme.dark;
+export const brand = defaultTheme.darkRebrand;
 
 //navbar
 export const navbarHeight = '47px';
