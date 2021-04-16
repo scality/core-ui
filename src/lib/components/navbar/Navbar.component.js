@@ -1,13 +1,13 @@
 //@flow
-import React from "react";
-import styled, { css } from "styled-components";
-import type { Node } from "react";
-import Logo from "../../icons/branding";
-import Dropdown from "../dropdown/Dropdown.component";
-import Button from "../button/Button.component";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
-import type { Item } from "../dropdown/Dropdown.component";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import type { Node } from 'react';
+import Logo from '../../icons/branding';
+import Dropdown from '../dropdown/Dropdown.component';
+import Button from '../button/Button.component';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
+import type { Item } from '../dropdown/Dropdown.component';
 
 type Action = {
   type: string,
@@ -35,13 +35,13 @@ const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${css`
-    background-color: ${getThemePropSelector("background")};
-    color: ${getThemePropSelector("textPrimary")};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
+    color: ${getThemePropSelector('textPrimary')};
     .fas,
     .sc-trigger-text {
-      color: ${getThemePropSelector("textPrimary")};
+      color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: 1px solid ${getThemePropSelector("primary")};
+    border-bottom: 1px solid ${getThemePropSelector('primary')};
   `}};
 `;
 
@@ -103,7 +103,7 @@ const TabLinkItem = styled(TabItem)`
   }
 
   a {
-    color: ${getThemePropSelector("textPrimary")};
+    color: ${getThemePropSelector('textPrimary')};
     text-decoration: none;
     padding: 12px ${defaultTheme.padding.base};
     box-sizing: border-box;
@@ -128,9 +128,9 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
-      background-color: ${getThemePropSelector("background")};
+      background-color: ${getThemePropSelector('background')};
       &:hover {
-        background-color: ${getThemePropSelector("backgroundBluer")};
+        background-color: ${getThemePropSelector('backgroundBluer')};
       }
       height: ${defaultTheme.navbarHeight};
       font-size: ${defaultTheme.fontSize.base};
@@ -142,9 +142,9 @@ const NavbarMenuItem = styled.div`
     border-radius: 0;
     height: ${defaultTheme.navbarHeight};
     font-size: ${defaultTheme.fontSize.base};
-    background-color: ${getThemePropSelector("background")};
+    background-color: ${getThemePropSelector('background')};
     &:hover {
-      background-color: ${getThemePropSelector("backgroundBluer")};
+      background-color: ${getThemePropSelector('backgroundBluer')};
     }
     width: ${defaultTheme.navbarItemWidth};
   }
@@ -168,7 +168,7 @@ const LogoContainer = styled.div`
 `;
 
 const getActionRenderer = ({ type, items = null, ...rest }, index) => {
-  if (type === "dropdown") {
+  if (type === 'dropdown') {
     return items ? (
       <Dropdown
         key={`navbar_right_action_${index}`}
@@ -179,7 +179,7 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
         {...rest}
       />
     ) : null;
-  } else if (type === "button") {
+  } else if (type === 'button') {
     return (
       <Button
         key={`navbar_right_action_${index}`}
