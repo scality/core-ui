@@ -11,8 +11,13 @@ import type { Size } from '../constants';
 type Props = {
   text?: string,
   size?: Size,
-  // For the moment, we need to make sure the variant exist in the color-palette, otherwise the error will occur
-  variant?: 'buttonPrimary' | 'buttonSecondary' | 'buttonDelete',
+  /* For the moment, we need to make sure the variant exist in the color-palette
+ Otherwise we will encounter the error: Passed an incorrect argument to a color function, please pass a string representation of a color. */
+  variant?:
+    | 'buttonPrimary'
+    | 'buttonSecondary'
+    | 'buttonDelete'
+    | 'backgroundLevel1',
   outlined?: boolean,
   inverted?: boolean,
   disabled?: boolean,
@@ -162,6 +167,21 @@ export const ButtonStyled = styled.button`
         color: ${brand.statusCritical};
         &:hover {
           background-color: ${brand.statusCritical};
+          border: 1px solid ${brand.infoPrimary};
+          color: ${brand.textPrimary};
+        }
+        /* &:active {
+          background-color: ${brand[props.variant]};
+          color: ${defaultTheme.blackLight};
+        } */
+      `;
+    } else {
+      return css`
+        background-color: ${brand.backgroundLevel1};
+        border: 1px solid ${brand.backgroundLevel1};
+        color: ${brand.statusCritical};
+        &:hover {
+          background-color: ${brand.backgroundLevel1};
           border: 1px solid ${brand.infoPrimary};
           color: ${brand.textPrimary};
         }

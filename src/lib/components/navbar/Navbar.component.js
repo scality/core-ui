@@ -173,7 +173,7 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
       <Dropdown
         key={`navbar_right_action_${index}`}
         size="larger"
-        variant="base"
+        variant="backgroundLevel1"
         items={items}
         caret={false}
         {...rest}
@@ -184,7 +184,7 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
       <Button
         key={`navbar_right_action_${index}`}
         size="larger"
-        variant="base"
+        variant="backgroundLevel1"
         {...rest}
       />
     );
@@ -207,7 +207,7 @@ function NavBar({
           <NavbarMenuItem onClick={onToggleClick}>
             <Button
               size="larger"
-              variant="base"
+              variant="backgroundLevel1"
               icon={<i className="fas fa-bars" />}
               title="Main Menu"
             />
