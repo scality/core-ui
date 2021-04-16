@@ -75,32 +75,14 @@ export const Default = () => {
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="base"
+        variant="buttonPrimary"
         text="primary"
       />
       <Dropdown
         icon={<i className="fas fa-star" />}
         items={items}
-        variant="secondary"
+        variant="buttonSecondary"
         text="secondary"
-      />
-      <Dropdown
-        icon={<i className="fas fa-star" />}
-        items={items}
-        variant="healthy"
-        text="healthy"
-      />
-      <Dropdown
-        icon={<i className="fas fa-star" />}
-        items={items}
-        variant="warning"
-        text="warning"
-      />
-      <Dropdown
-        icon={<i className="fas fa-star" />}
-        items={items}
-        variant="danger"
-        text="danger"
       />
     </Wrapper>
   );
