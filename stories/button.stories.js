@@ -22,6 +22,7 @@ export const Default = () => {
       <Button variant="buttonPrimary" text="buttonPrimary" />
       <Button variant="buttonSecondary" text="buttonSecondary" />
       <Button variant="buttonDelete" text="buttonDelete" />
+      <Button variant="backgroundLevel1" text="backgroundLevel1" />
       <Title>Button Outlined</Title>
       <Button outlined text="Hello" onClick={action('Button Outlined Click')} />
       <Title>Button Disabled</Title>
@@ -32,12 +33,12 @@ export const Default = () => {
         text="secondary"
         onClick={action('Button Disabled Click')}
       />
-      {/* <Button
-        variant="danger"
+      <Button
+        variant="buttonDelete"
         disabled
-        text="danger"
+        text="buttonDelete"
         onClick={action('Button Disabled Click')}
-      /> */}
+      />
       <Button
         inverted={true}
         size="larger"

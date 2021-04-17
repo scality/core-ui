@@ -11,13 +11,13 @@ import type { Size } from '../constants';
 type Props = {
   text?: string,
   size?: Size,
-  /* For the moment, we need to make sure the variant exist in the color-palette
+  /* We need to make sure the variant exist in the color-palette
  Otherwise we will encounter the error: Passed an incorrect argument to a color function, please pass a string representation of a color. */
   variant?:
     | 'buttonPrimary'
     | 'buttonSecondary'
     | 'buttonDelete'
-    | 'backgroundLevel1',
+    | 'backgroundLevel1', // this variant is for the button in navbar and sidebar
   outlined?: boolean,
   inverted?: boolean,
   disabled?: boolean,
@@ -122,17 +122,10 @@ export const ButtonStyled = styled.button`
           border-color: ${brand.infoPrimary};
           color: ${brand.textPrimary};
         }
-
-        &:active {
-          border-color: ${brand.secondaryDark1};
-          background-color: ${brand.secondaryDark2};
-          color: ${defaultTheme.white};
-        }
       `;
     } else if (props.variant === 'buttonPrimary') {
       return css`
         background-color: ${brand.buttonPrimary};
-        // to make sure when hovering the size of the button won't change
         border: 1px solid ${brand.buttonPrimary};
         color: ${brand.textPrimary};
         &:hover {
@@ -140,11 +133,6 @@ export const ButtonStyled = styled.button`
           outline: none;
           border: 1px solid ${brand.infoPrimary};
         }
-        // to remove the active state
-        /* &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.blackLight};
-        } */
       `;
     } else if (props.variant === 'buttonSecondary') {
       return css`
@@ -152,13 +140,9 @@ export const ButtonStyled = styled.button`
         border: 1px solid ${brand.buttonSecondary};
         color: ${brand.textPrimary};
         &:hover {
-          background-color: ${brand.buttonSecondary};
+          background-color: ${brand.infoPrimary};
           border: 1px solid ${brand.infoPrimary};
         }
-        /* &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.blackLight};
-        } */
       `;
     } else if (props.variant === 'buttonDelete') {
       return css`
@@ -170,10 +154,14 @@ export const ButtonStyled = styled.button`
           border: 1px solid ${brand.infoPrimary};
           color: ${brand.textPrimary};
         }
-        /* &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.blackLight};
-        } */
+      `;
+    } else if (props.variant === 'backgroundLevel1') {
+      return css`
+        background-color: ${brand.backgroundLevel1};
+        color: ${brand.textPrimary};
+        &:hover {
+          background-color: ${brand.highlight};
+        }
       `;
     } else {
       return css`
@@ -185,10 +173,6 @@ export const ButtonStyled = styled.button`
           border: 1px solid ${brand.infoPrimary};
           color: ${brand.textPrimary};
         }
-        /* &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.blackLight};
-        } */
       `;
     }
   }}
@@ -228,6 +212,7 @@ ${(props) => {
         &:hover{
           background-color: transparent;
           color: ${brandLight};
+          border: none;
         }
 
         &:active {
@@ -239,6 +224,7 @@ ${(props) => {
   `;
 }}
 `;
+
 export const ButtonIcon = styled.span`
   ${(props) =>
     props.text &&
