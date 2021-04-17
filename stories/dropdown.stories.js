@@ -84,6 +84,13 @@ export const Default = () => {
         variant="buttonSecondary"
         text="secondary"
       />
+      <Dropdown
+        icon={<i className="fas fa-user" />}
+        items={items}
+        variant="backgroundLevel1"
+        text="admin"
+        caret={false}
+      />
     </Wrapper>
   );
 };

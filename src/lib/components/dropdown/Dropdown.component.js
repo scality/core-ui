@@ -46,7 +46,7 @@ const DropdownMenuStyled = styled.ul`
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-
+  border-bottom: 0.3px solid ${getThemePropSelector('border')};
   ${(props) => {
     if (
       props.size &&
@@ -86,11 +86,14 @@ const DropdownMenuItemStyled = styled.li`
   ${css`
     background-color: ${getThemePropSelector('primary')};
     color: ${getThemePropSelector('textPrimary')};
+    border-top: 0.3px solid ${getThemePropSelector('border')};
+    border-left: 0.3px solid ${getThemePropSelector('border')};
+    border-right: 0.3px solid ${getThemePropSelector('border')};
     &:hover {
-      background-color: ${getThemePropSelector('primaryDark2')};
+      background-color: ${getThemePropSelector('highlight')};
     }
     &:active {
-      background-color: ${getThemePropSelector('primaryDark2')};
+      background-color: ${getThemePropSelector('highlight')};
     }
   `};
 `;
