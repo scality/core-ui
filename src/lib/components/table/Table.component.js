@@ -1,31 +1,31 @@
 //@flow
-import React from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
-import "react-virtualized/styles.css";
-import { lighten, ellipsis } from "polished";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
-import Dropdown from "../dropdown/Dropdown.component";
+import React from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
+import 'react-virtualized/styles.css';
+import { lighten, ellipsis } from 'polished';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
+import Dropdown from '../dropdown/Dropdown.component';
 import {
   Column,
   Table as VirtualizedTable,
-  AutoSizer
-} from "react-virtualized";
+  AutoSizer,
+} from 'react-virtualized';
 
 export type Props = {
   list: Array<any>,
   columns: Array<any>,
   disableHeader: boolean,
   headerHeight: number,
-  onHeaderClick?: any => void,
+  onHeaderClick?: (any) => void,
   onRowClick: ({ rowData: any }) => void,
   overscanRowCount?: number,
   rowHeight: number,
   onSort: ({ sortBy: string, sortDirection: string }) => void,
   sortBy: string,
   sortDirection: string,
-  noRowsRenderer?: any => Node
+  noRowsRenderer?: (any) => Node,
 };
 
 type HeaderProps = {
@@ -33,12 +33,12 @@ type HeaderProps = {
   label: string,
   sortBy: string,
   sortDirection: string,
-  disableSort: boolean
+  disableSort: boolean,
 };
 
 const TableContainer = styled.div`
   .ReactVirtualized__Table__Grid {
-    color: ${getThemePropSelector("textPrimary")};
+    color: ${getThemePropSelector('textPrimary')};
     &:focus {
       outline: none;
     }
@@ -61,9 +61,9 @@ const TableContainer = styled.div`
   }
 
   .ReactVirtualized__Table__headerRow {
-    background-color: ${getThemePropSelector("primary")};
-    border-bottom: 2px solid ${getThemePropSelector("borderLight")};
-    color: ${getThemePropSelector("textPrimary")};
+    background-color: ${getThemePropSelector('backgroundLevel3')};
+    border-bottom: 2px solid ${getThemePropSelector('borderLight')};
+    color: ${getThemePropSelector('textPrimary')};
 
     text-transform: none;
 
@@ -82,16 +82,16 @@ const TableContainer = styled.div`
     display: flex;
     align-items: center;
     overflow: visible !important;
-    color: ${getThemePropSelector("textPrimary")};
-    background-color: ${getThemePropSelector("primary")};
-    border-top: 1px solid ${getThemePropSelector("borderLight")};
-    border-bottom: 1px solid ${getThemePropSelector("borderLight")};
+    color: ${getThemePropSelector('textPrimary')};
+    background-color: ${getThemePropSelector('backgroundLevel3')};
+    border-top: 1px solid ${getThemePropSelector('borderLight')};
+    border-bottom: 1px solid ${getThemePropSelector('borderLight')};
     box-sizing: border-box;
     &:hover,
     &:focus {
-      background-color: ${getThemePropSelector("backgroundBluer")};
-      border-top: 1px solid ${getThemePropSelector("secondary")};
-      border-bottom: 1px solid ${getThemePropSelector("secondary")};
+      background-color: ${getThemePropSelector('highlight')};
+      border-top: 1px solid ${getThemePropSelector('secondary')};
+      border-bottom: 1px solid ${getThemePropSelector('secondary')};
       outline: none;
       cursor: pointer;
     }
@@ -115,10 +115,10 @@ const CellContainer = styled.div`
 
   .sc-dropdown .trigger {
     background-color: transparent;
-    color: ${getThemePropSelector("textPrimary")};
+    color: ${getThemePropSelector('textPrimary')};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
-      color: ${props => lighten(0.3, getTheme(props).primary).toString()};
+      color: ${(props) => lighten(0.3, getTheme(props).primary).toString()};
     }
   }
 `;
@@ -138,8 +138,8 @@ const HeaderSortIcon = styled.div`
   .fa-sort-up {
     position: absolute;
     color: ${defaultTheme.gray};
-    ${props => {
-      if (props.selected && props.sortDirection === "ASC") {
+    ${(props) => {
+      if (props.selected && props.sortDirection === 'ASC') {
         return css`
           color: ${getTheme(props).primary};
         `;
@@ -149,8 +149,8 @@ const HeaderSortIcon = styled.div`
 
   .fa-sort-down {
     color: ${defaultTheme.gray};
-    ${props => {
-      if (props.selected && props.sortDirection === "DESC") {
+    ${(props) => {
+      if (props.selected && props.sortDirection === 'DESC') {
         return css`
           color: ${getTheme(props).primary};
         `;
@@ -171,10 +171,10 @@ function Table({
   sortBy,
   sortDirection,
   list,
-  noRowsRenderer
+  noRowsRenderer,
 }: Props) {
   const _defaultNoRowsRenderer = () => {
-    return <div className={"sc-table-noRows"}>No rows</div>;
+    return <div className={'sc-table-noRows'}>No rows</div>;
   };
 
   const _headerRenderer = ({
@@ -182,7 +182,7 @@ function Table({
     label,
     sortBy,
     sortDirection,
-    disableSort
+    disableSort,
   }: HeaderProps) => {
     return (
       <HeaderContainer>
@@ -200,29 +200,29 @@ function Table({
     );
   };
   const _decorateDropdownActions = (actions, rowData) => {
-    return actions.map(action => {
+    return actions.map((action) => {
       return {
         ...action,
-        onClick: () => action.onClick(rowData)
+        onClick: () => action.onClick(rowData),
       };
     });
   };
 
   const rowGetter = ({ index }) => list[index];
   return (
-    <AutoSizer className="sc-table" style={{ height: "auto", width: "auto" }}>
+    <AutoSizer className="sc-table" style={{ height: 'auto', width: 'auto' }}>
       {({ height, width }) => (
         <TableContainer>
           <VirtualizedTable
             disableHeader={disableHeader}
-            headerClassName={"sc-table-header"}
+            headerClassName={'sc-table-header'}
             headerHeight={headerHeight}
             height={height}
             onHeaderClick={onHeaderClick}
             onRowClick={onRowClick}
             overscanRowCount={overscanRowCount || 5}
             noRowsRenderer={noRowsRenderer || _defaultNoRowsRenderer}
-            rowClassName={"sc-table-row"}
+            rowClassName={'sc-table-row'}
             rowHeight={rowHeight}
             rowGetter={rowGetter}
             rowCount={list.length}
@@ -231,7 +231,7 @@ function Table({
             sortDirection={sortDirection}
             width={width}
           >
-            {columns.map(column => (
+            {columns.map((column) => (
               <Column
                 key={column.dataKey}
                 width={column.width || 200}
@@ -240,7 +240,7 @@ function Table({
                 disableSort={column.disableSort}
                 label={column.label}
                 dataKey={column.dataKey}
-                className={"sc-table-column"}
+                className={'sc-table-column'}
                 cellRenderer={({ cellData, columnIndex, rowData }) => {
                   return (
                     <CellContainer
@@ -261,7 +261,7 @@ function Table({
                             icon={<i className="fas fa-ellipsis-v" />}
                             items={_decorateDropdownActions(
                               rowData.actions,
-                              rowData
+                              rowData,
                             )}
                             caret={false}
                           />
