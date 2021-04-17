@@ -72,6 +72,10 @@
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "polished": "3.4.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
