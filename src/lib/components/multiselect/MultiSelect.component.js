@@ -1,11 +1,11 @@
 //@flow
-import React from "react";
-import styled from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import CheckBox from "./../checkbox/Checkbox.component";
-import Button from "./../button/Button.component";
-import Select from "./../select/Select.component";
-import { getThemePropSelector } from "../../utils";
+import React from 'react';
+import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import CheckBox from './../checkbox/Checkbox.component';
+import Button from './../button/Button.component';
+import Select from './../select/Select.component';
+import { getThemePropSelector } from '../../utils';
 
 export type ItemProps = {
   selected?: boolean,
@@ -38,7 +38,7 @@ type MultiSelectProps = {
 };
 
 const MultiSelectContainer = styled.div`
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 
 const MultiSelectTitle = styled.h3`
@@ -105,16 +105,16 @@ function MultiSelectItem(props: ItemProps) {
   return (
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
-        {typeof selected === "boolean" && onSelect && (
+        {typeof selected === 'boolean' && onSelect && (
           <CheckBox
             checked={selected}
             onChange={(event) => onSelect(label, event)}
           />
         )}
-        {typeof isFavorite === "boolean" && onFavoriteClick && (
+        {typeof isFavorite === 'boolean' && onFavoriteClick && (
           <Button
             inverted={true}
-            icon={<i className={`${isFavorite ? "fas" : "far"} fa-star`} />}
+            icon={<i className={`${isFavorite ? 'fas' : 'far'} fa-star`} />}
             onClick={(event) => onFavoriteClick(label, event)}
           />
         )}
@@ -133,7 +133,7 @@ function MultiSelectItem(props: ItemProps) {
         {onItemRemove && (
           <Button
             inverted={true}
-            variant="danger"
+            variant="buttonDelete"
             onClick={(event) => onItemRemove(label, event)}
             icon={<i className="fas fa-trash" />}
           />
@@ -167,7 +167,7 @@ function MultiSelectSearch(props: SearchProps) {
 }
 
 function MultiSelectList({
-  title = "",
+  title = '',
   items = [],
   search,
   onItemRemove,

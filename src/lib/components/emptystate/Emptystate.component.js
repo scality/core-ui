@@ -1,9 +1,9 @@
 //@flow
-import React from "react";
-import Button from "../button/Button.component";
-import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
+import React from 'react';
+import Button from '../button/Button.component';
+import styled, { css } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getTheme } from '../../utils';
 
 type Props = {
   label: string,
@@ -78,7 +78,7 @@ function Emptystate(props: Props) {
       </EmptyStateRow>
       <EmptyStateRow>
         <BigText>
-          There are no {`${label}s`} created yet, let's create your first{" "}
+          There are no {`${label}s`} created yet, let's create your first{' '}
           {label}.
         </BigText>
       </EmptyStateRow>
@@ -89,7 +89,7 @@ function Emptystate(props: Props) {
             size="large"
             icon={<i className="fas fa-plus"></i>}
             type="button"
-            variant="secondary"
+            variant="buttonSecondary"
             onClick={() => history.push(link)}
           />
         </ActionWrapper>
