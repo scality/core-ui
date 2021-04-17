@@ -38,7 +38,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
       </div>
     </div>
     <a
-      className="sc-fodVxV bJCdTb sc-button"
+      className="sc-fodVxV afjAc sc-button"
       disabled={false}
       href="/"
       size="large"
@@ -107,7 +107,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
       </div>
     </div>
     <a
-      className="sc-fodVxV bJCdTb sc-button"
+      className="sc-fodVxV afjAc sc-button"
       disabled={false}
       href="/"
       size="large"
@@ -176,7 +176,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
       </div>
     </div>
     <a
-      className="sc-fodVxV bJCdTb sc-button"
+      className="sc-fodVxV afjAc sc-button"
       disabled={false}
       href="/"
       size="large"

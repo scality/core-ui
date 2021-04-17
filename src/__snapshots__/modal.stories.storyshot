@@ -8,7 +8,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
     className="sc-eHfQar dIwPWt sc-modal"
   >
     <div
-      className="sc-hzMMCg ddVmYZ sc-modal-content"
+      className="sc-hzMMCg hecAxA sc-modal-content"
     >
       <div
         className="sc-kYrkKh bhjWoT sc-modal-header"
@@ -35,7 +35,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-jGVbCA cPuXGZ sc-modal-footer"
+        className="sc-jGVbCA hyKfbc sc-modal-footer"
       >
         <div
           style={
@@ -46,10 +46,10 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
           }
         >
           <button
-            className="sc-dQppl lkukzS sc-button"
+            className="sc-dQppl jUBhAT sc-button"
             disabled={false}
             onClick={[Function]}
-            size="small"
+            size="base"
             title=""
             type="button"
           >
@@ -68,10 +68,10 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-dQppl dbiXPX sc-button"
+            className="sc-dQppl iHAjfJ sc-button"
             disabled={false}
             onClick={[Function]}
-            size="small"
+            size="base"
             title=""
             type="button"
           >

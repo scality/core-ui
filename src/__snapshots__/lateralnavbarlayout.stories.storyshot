@@ -16,7 +16,7 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
         className="sc-jQbIHB jSnLNi sc-sidebar"
       >
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -96,8 +96,8 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
       className="sc-ctaXAZ cbZiSQ main"
     >
       <div
-        className="sc-kEjbxe ktYAhq sc-loader"
-        color="#87929D"
+        className="sc-kEjbxe jGWVVt sc-loader"
+        color="#A14FBF"
         size="massive"
       >
         <span
@@ -291,8 +291,8 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Docked 1`]
         className="sc-ctaXAZ cbZiSQ main"
       >
         <div
-          className="sc-kEjbxe ktYAhq sc-loader"
-          color="#87929D"
+          className="sc-kEjbxe jGWVVt sc-loader"
+          color="#A14FBF"
           size="massive"
         >
           <span
@@ -501,8 +501,8 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar Expanded 1
       className="sc-ctaXAZ cbZiSQ main"
     >
       <div
-        className="sc-kEjbxe ktYAhq sc-loader"
-        color="#87929D"
+        className="sc-kEjbxe jGWVVt sc-loader"
+        color="#A14FBF"
         size="massive"
       >
         <span
@@ -648,7 +648,7 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
           className="sc-gsxnyZ hWxXMA"
         >
           <button
-            className="sc-dQppl ctPsRF sc-button"
+            className="sc-dQppl TXKZb sc-button"
             disabled={false}
             onClick={[Function]}
             size="larger"
@@ -744,8 +744,8 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
       className="sc-ctaXAZ cbZiSQ main"
     >
       <div
-        className="sc-kEjbxe ktYAhq sc-loader"
-        color="#87929D"
+        className="sc-kEjbxe jGWVVt sc-loader"
+        color="#A14FBF"
         size="massive"
       >
         <span

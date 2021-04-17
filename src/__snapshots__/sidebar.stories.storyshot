@@ -165,7 +165,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           className="sc-gsxnyZ hWxXMA"
         >
           <button
-            className="sc-dQppl ctPsRF sc-button"
+            className="sc-dQppl TXKZb sc-button"
             disabled={false}
             onClick={[Function]}
             size="larger"
@@ -274,7 +274,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
         className="sc-jQbIHB jSnLNi sc-sidebar"
       >
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"

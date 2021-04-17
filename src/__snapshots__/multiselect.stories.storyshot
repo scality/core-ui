@@ -131,7 +131,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ebkNMt sc-button"
+          className="sc-dQppl khPIDY sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -181,7 +181,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl hxKeQu sc-button"
+            className="sc-dQppl biNdLu sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -229,7 +229,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -280,7 +280,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl hxKeQu sc-button"
+            className="sc-dQppl biNdLu sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -328,7 +328,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -397,7 +397,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl hxKeQu sc-button"
+            className="sc-dQppl biNdLu sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -445,7 +445,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -496,7 +496,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl hxKeQu sc-button"
+            className="sc-dQppl biNdLu sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -544,7 +544,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -704,7 +704,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ebkNMt sc-button"
+          className="sc-dQppl khPIDY sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -772,7 +772,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -841,7 +841,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1001,7 +1001,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ebkNMt sc-button"
+          className="sc-dQppl khPIDY sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1055,7 +1055,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1110,7 +1110,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-jmhFOf htquGY sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl gIKFLn sc-button"
+            className="sc-dQppl ciooyz sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1270,7 +1270,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ebkNMt sc-button"
+          className="sc-dQppl khPIDY sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1473,7 +1473,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ebkNMt sc-button"
+          className="sc-dQppl khPIDY sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
