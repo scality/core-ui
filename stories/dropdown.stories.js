@@ -3,6 +3,7 @@ import React from 'react';
 import Dropdown from '../src/lib/components/dropdown/Dropdown.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper, Title } from './common';
+import type { Node } from 'react';
 
 const items = [
   {
@@ -21,6 +22,53 @@ const items = [
     'data-cy': 'Onboarding',
   },
 ];
+
+const itemsWithNested = [
+  {
+    label: 'Language',
+    submenuItems: [
+      {
+        label: 'French',
+        onClick: action('French clicked'),
+        'data-cy': 'French',
+      },
+      {
+        label: 'English',
+        onClick: action('English clicked'),
+        'data-cy': 'English',
+      },
+    ],
+    'data-cy': 'Language'
+  },
+  {
+    label: 'Theme',
+    submenuIcon: <i className="fas fa-star" />,
+    submenuItems: [
+      {
+        label: 'Light',
+        onClick: action('Light clicked'),
+        'data-cy': 'Light',
+      },
+      {
+        label: 'Dark',
+        onClick: action('Dark clicked'),
+        'data-cy': 'Dark',
+      },
+      {
+        label: 'External',
+        onClick: action('External clicked'),
+        iconExternal: <i className="fas fa-external-link-alt" />,
+        'data-cy': 'External',
+      },
+    ],
+    'data-cy': 'Theme'
+  },
+  {
+    label: 'Support',
+    onClick: action('Support clicked'),
+    'data-cy': 'Support',
+  },
+]
 
 export default {
   title: 'Components/Dropdown',
@@ -102,6 +150,13 @@ export const Default = () => {
         variant="danger"
         text="danger"
       />
+
+      <Title>Dropdown with nested dropdowns</Title>
+        <Dropdown
+          text="Help"
+          icon={<i className="fas fa-star" />}
+          items={itemsWithNested}
+        />
     </Wrapper>
   );
 };

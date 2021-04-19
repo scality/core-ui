@@ -1,30 +1,38 @@
 //@flow
-import React, { useState, useCallback } from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useCallback } from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
 import {
   ButtonStyled,
   ButtonIcon,
-  ButtonText
-} from "../button/Button.component";
-import * as defaultTheme from "../../style/theme";
-import { getThemePropSelector } from "../../utils";
+  ButtonText,
+} from '../button/Button.component';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
+import { getPositionDropdownMenu } from './utils';
 
 export type Item = {
   label: string,
   name?: string,
   selected?: boolean,
-  onClick: any => void
+  onClick?: (SyntheticMouseEvent<HTMLDivElement>) => void,
+  iconExternal?: Node,
+  submenuIcon?: Node,
+  submenuItems?: Array<Item>,
 };
+
 type Items = Array<Item>;
 type Props = {
+  isItem?: boolean,
   text?: string,
   size?: string,
   variant?: string,
   title?: string,
   items: Items,
   icon?: Node,
-  caret?: boolean
+  caret?: boolean,
+  iconExternal?: Node,
+  onClick?: (SyntheticMouseEvent<HTMLDivElement>) => void,
 };
 
 const DropdownStyled = styled.div`
@@ -37,95 +45,181 @@ const DropdownStyled = styled.div`
   }
 `;
 
-const DropdownMenuStyled = styled.ul`
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  border: 1px solid ${getThemePropSelector("primary")};
-  z-index: ${defaultTheme.zIndex.dropdown};
-  max-height: 200px;
-  min-width: 100%;
-  overflow: auto;
-
-  ${props => {
-    if (
-      props.size &&
-      props.triggerSize &&
-      props.triggerSize.x + props.size.width > window.innerWidth
-    ) {
-      return css`
-        right: 0;
-        top: 100%;
-      `;
-    } else if (
-      props.size &&
-      props.triggerSize &&
-      props.triggerSize.y + props.size.height > window.innerHeight
-    ) {
-      return css`
-        left: 0;
-        bottom: ${props.triggerSize.height + "px"};
-      `;
-    } else {
-      return css`
-        left: 0;
-        top: 100%;
-      `;
-    }
-  }};
-`;
-
 const DropdownMenuItemStyled = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: ${defaultTheme.padding.base};
+  box-sizing: border-box;
+  border-bottom: 1px solid ${getThemePropSelector('border')};
   white-space: nowrap;
   cursor: pointer;
   font-size: ${defaultTheme.fontSize.base};
 
+  &:last-child {
+    border-bottom: 0px;
+  }
+
   ${css`
-    background-color: ${getThemePropSelector("primary")};
-    color: ${getThemePropSelector("textPrimary")};
+    background-color: ${getThemePropSelector('primary')};
+    color: ${getThemePropSelector('textPrimary')};
     &:hover {
-      background-color: ${getThemePropSelector("primaryDark2")};
+      background-color: ${getThemePropSelector('primaryDark2')};
     }
     &:active {
-      background-color: ${getThemePropSelector("primaryDark2")};
+      background-color: ${getThemePropSelector('primaryDark2')};
     }
   `};
+`;
+
+const DropdownMenuStyled = styled.ul`
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: ${defaultTheme.zIndex.dropdown};
+  max-height: 200px;
+  min-width: 100%;
+  ${({ nbItems }) =>
+    nbItems > 0
+      ? css`
+          border: 1px solid ${getThemePropSelector('border')};
+        `
+      : css``};
+  ${({ triggerSize, isItem = false, size }) => {
+    return css`
+      ${getPositionDropdownMenu({
+        isItem,
+        triggerSize,
+        size,
+      })}
+    `;
+  }};
 `;
 
 const Caret = styled.span`
   margin-left: ${defaultTheme.padding.base};
 `;
 
-const TriggerStyled = ButtonStyled.withComponent("div");
+const TriggerStyled = ButtonStyled.withComponent('div');
+
+const DropdownAsAnItem = ({
+  items = [],
+  text,
+  icon = null,
+  size = 'base',
+  caret = true,
+  iconExternal = null,
+  onClick = null,
+}: Props) => {
+  const [open, setOpen] = useState(false);
+  const [menuSize, setMenuSize] = useState();
+  const [triggerSize, setTriggerSize] = useState();
+
+  const refMenuCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setMenuSize(node.getBoundingClientRect());
+      }
+    },
+    [setMenuSize],
+  );
+
+  const refTriggerCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setTriggerSize(node.getBoundingClientRect());
+      }
+    },
+    [setTriggerSize],
+  );
+
+  return (
+    <DropdownMenuItemStyled
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={onClick}
+      ref={refTriggerCallback}
+    >
+      {icon && (
+        <ButtonIcon text={text} size={size}>
+          {icon}
+        </ButtonIcon>
+      )}
+      {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
+      {caret && items.length > 0 && (
+        <Caret>
+          <i className="fas fa-chevron-right" />
+        </Caret>
+      )}
+      {iconExternal && <ButtonIcon size={size}>{iconExternal}</ButtonIcon>}
+      {open && (
+        <DropdownMenuStyled
+          className="menu-item"
+          ref={refMenuCallback}
+          size={menuSize}
+          triggerSize={triggerSize}
+          nbItems={items.length}
+          isItem
+        >
+          {items.map(
+            ({
+              label,
+              onClick,
+              submenuIcon = null,
+              submenuItems = [],
+              iconExternal = null,
+            }) => {
+              return (
+                <DropdownAsAnItem
+                  key={label}
+                  text={label}
+                  icon={submenuIcon}
+                  items={submenuItems}
+                  iconExternal={iconExternal}
+                  onClick={onClick}
+                />
+              );
+            },
+          )}
+        </DropdownMenuStyled>
+      )}
+    </DropdownMenuItemStyled>
+  );
+};
 
 function Dropdown({
   items,
   text,
   icon,
-  size = "base",
-  variant = "base",
+  size = 'base',
+  variant = 'base',
   title,
   caret = true,
+  onClick = null,
   ...rest
 }: Props) {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
 
-  const refMenuCallback = useCallback(node => {
-    if (node !== null) {
-      setMenuSize(node.getBoundingClientRect());
-    }
-  }, []);
+  const refMenuCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setMenuSize(node.getBoundingClientRect());
+      }
+    },
+    [setMenuSize],
+  );
 
-  const refTriggerCallback = useCallback(node => {
-    if (node !== null) {
-      setTriggerSize(node.getBoundingClientRect());
-    }
-  }, []);
+  const refTriggerCallback = useCallback(
+    (node) => {
+      if (node !== null) {
+        setTriggerSize(node.getBoundingClientRect());
+      }
+    },
+    [setTriggerSize],
+  );
 
   return (
     <DropdownStyled
@@ -140,10 +234,11 @@ function Dropdown({
         className="trigger"
         onBlur={() => setOpen(!open)}
         onFocus={() => setOpen(!open)}
-        onClick={event => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         tabIndex="0"
         title={title}
         ref={refTriggerCallback}
+        {...rest}
       >
         {icon && (
           <ButtonIcon text={text} size={size}>
@@ -151,7 +246,7 @@ function Dropdown({
           </ButtonIcon>
         )}
         {text && <ButtonText className="sc-trigger-text">{text}</ButtonText>}
-        {caret && (
+        {caret && items.length > 0 && (
           <Caret>
             <i className="fas fa-caret-down" />
           </Caret>
@@ -159,24 +254,31 @@ function Dropdown({
         {open && (
           <DropdownMenuStyled
             className="menu-item"
-            postion={"right"}
             ref={refMenuCallback}
             size={menuSize}
             triggerSize={triggerSize}
+            nbItems={items.length}
           >
-            {items.map(({ label, onClick, ...itemRest }) => {
-              return (
-                <DropdownMenuItemStyled
-                  className="menu-item-label"
-                  key={label}
-                  onClick={onClick}
-                  variant={variant}
-                  {...itemRest}
-                >
-                  {label}
-                </DropdownMenuItemStyled>
-              );
-            })}
+            {items.map(
+              ({
+                label,
+                onClick,
+                submenuIcon = null,
+                submenuItems = [],
+                iconExternal = null,
+              }) => {
+                return (
+                  <DropdownAsAnItem
+                    key={label}
+                    text={label}
+                    icon={submenuIcon}
+                    items={submenuItems}
+                    iconExternal={iconExternal}
+                    onClick={onClick}
+                  />
+                );
+              },
+            )}
           </DropdownMenuStyled>
         )}
       </TriggerStyled>
