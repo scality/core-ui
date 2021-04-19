@@ -33,13 +33,7 @@ export const getBorderCollisionDetection = (isItem, triggerSize, size) => {
   };
 };
 
-export const getPositionDropdownMenu = ({
-  isItem,
-  triggerSize,
-  size,
-  nbItems,
-  itemIndex,
-}) => {
+export const getPositionDropdownMenu = ({ isItem, triggerSize, size }) => {
   const {
     isTopHit,
     isRightHit,
@@ -51,22 +45,22 @@ export const getPositionDropdownMenu = ({
     if (isRightHit && isBottomHit) {
       return {
         right: `${size.width}px`,
-        bottom: `${-triggerSize.height * (itemIndex - nbItems + 1)}px`,
+        bottom: 0,
       };
     } else if ((isLeftHit && isBottomHit) || isBottomHit) {
       return {
         left: `${size.width}px`,
-        bottom: `${-triggerSize.height * (itemIndex - nbItems + 1)}px`,
+        bottom: 0,
       };
     } else if ((isTopHit && isRightHit) || isRightHit) {
       return {
         right: `${size.width}px`,
-        top: `${triggerSize.height * itemIndex}px`,
+        top: 0,
       };
     } else {
       return {
-        left: `${triggerSize.width}px`,
-        top: `${triggerSize.height * itemIndex}px`,
+        left: `${size?.width ?? triggerSize.width}px`,
+        top: 0,
       };
     }
   } else {

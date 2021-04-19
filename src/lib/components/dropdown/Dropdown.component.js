@@ -31,7 +31,6 @@ type Props = {
   items: Items,
   icon?: Node,
   caret?: boolean,
-  dataIndex?: number,
   iconExternal?: Node,
   onClick?: (SyntheticMouseEvent<HTMLDivElement>) => void,
 };
@@ -47,6 +46,7 @@ const DropdownStyled = styled.div`
 `;
 
 const DropdownMenuItemStyled = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,14 +86,12 @@ const DropdownMenuStyled = styled.ul`
           border: 1px solid ${getThemePropSelector('border')};
         `
       : css``};
-  ${({ triggerSize, isItem = false, size, itemIndex = 0, nbItems }) => {
+  ${({ triggerSize, isItem = false, size }) => {
     return css`
       ${getPositionDropdownMenu({
         isItem,
         triggerSize,
         size,
-        nbItems,
-        itemIndex,
       })}
     `;
   }};
@@ -112,13 +110,11 @@ const DropdownAsAnItem = ({
   size = 'base',
   caret = true,
   iconExternal = null,
-  dataIndex = null,
   onClick = null,
 }: Props) => {
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
-  const [itemIndex, setItemIndex] = useState();
 
   const refMenuCallback = useCallback(
     (node) => {
@@ -140,14 +136,8 @@ const DropdownAsAnItem = ({
 
   return (
     <DropdownMenuItemStyled
-      onMouseEnter={(e) => {
-        setItemIndex(
-          e && e.currentTarget && e.currentTarget.getAttribute('data-index'),
-        );
-        setOpen(true);
-      }}
+      onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
-      data-index={dataIndex}
       onClick={onClick}
       ref={refTriggerCallback}
     >
@@ -169,28 +159,23 @@ const DropdownAsAnItem = ({
           ref={refMenuCallback}
           size={menuSize}
           triggerSize={triggerSize}
-          itemIndex={itemIndex}
           nbItems={items.length}
           isItem
         >
           {items.map(
-            (
-              {
-                label,
-                onClick,
-                submenuIcon = null,
-                submenuItems = [],
-                iconExternal = null,
-              },
-              index,
-            ) => {
+            ({
+              label,
+              onClick,
+              submenuIcon = null,
+              submenuItems = [],
+              iconExternal = null,
+            }) => {
               return (
                 <DropdownAsAnItem
                   key={label}
                   text={label}
                   icon={submenuIcon}
                   items={submenuItems}
-                  dataIndex={index}
                   iconExternal={iconExternal}
                   onClick={onClick}
                 />
@@ -275,23 +260,19 @@ function Dropdown({
             nbItems={items.length}
           >
             {items.map(
-              (
-                {
-                  label,
-                  onClick,
-                  submenuIcon = null,
-                  submenuItems = [],
-                  iconExternal = null,
-                },
-                index,
-              ) => {
+              ({
+                label,
+                onClick,
+                submenuIcon = null,
+                submenuItems = [],
+                iconExternal = null,
+              }) => {
                 return (
                   <DropdownAsAnItem
                     key={label}
                     text={label}
                     icon={submenuIcon}
                     items={submenuItems}
-                    dataIndex={index}
                     iconExternal={iconExternal}
                     onClick={onClick}
                   />
