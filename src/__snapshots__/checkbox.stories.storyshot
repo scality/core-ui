@@ -13,14 +13,14 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
     checked={true}
     className="sc-bkzZxe ksGRRC sc-checkbox"
   >
+    <i
+      className="fas fa-check"
+    />
     <input
       checked={true}
       data-cy="checked_checkbox"
       onChange={[Function]}
       type="checkbox"
-    />
-    <i
-      className="fas fa-check"
     />
     <span
       className="sc-fFubgz kTNXQm text"
@@ -37,13 +37,13 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
     checked={false}
     className="sc-bkzZxe bnReLL sc-checkbox"
   >
+    <i
+      className="fas fa-check"
+    />
     <input
       checked={false}
       onChange={[Function]}
       type="checkbox"
-    />
-    <i
-      className="fas fa-check"
     />
     <span
       className="sc-fFubgz kTNXQm text"
@@ -61,14 +61,14 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
     className="sc-bkzZxe gBDEMn sc-checkbox"
     disabled={true}
   >
+    <i
+      className="fas fa-check"
+    />
     <input
       checked={false}
       disabled={true}
       onChange={[Function]}
       type="checkbox"
-    />
-    <i
-      className="fas fa-check"
     />
     <span
       className="sc-fFubgz kTNXQm text"
@@ -86,14 +86,14 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
     className="sc-bkzZxe hfNiZf sc-checkbox"
     disabled={true}
   >
+    <i
+      className="fas fa-check"
+    />
     <input
       checked={true}
       disabled={true}
       onChange={[Function]}
       type="checkbox"
-    />
-    <i
-      className="fas fa-check"
     />
     <span
       className="sc-fFubgz kTNXQm text"
