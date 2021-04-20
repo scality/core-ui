@@ -14,7 +14,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -89,7 +89,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Harware UI
         </h1>
@@ -466,7 +466,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -541,7 +541,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Harware UI
         </h1>
@@ -888,7 +888,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -963,7 +963,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Harware UI
         </h1>
@@ -1291,7 +1291,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -1366,7 +1366,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Harware UI
         </h1>
