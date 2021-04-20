@@ -153,14 +153,14 @@ const NavbarMenuItem = styled.div`
 const ProductNameSpan = styled.h1`
   text-transform: uppercase;
   font-size: ${defaultTheme.fontSize.larger};
-  padding: 0 15px;
+  padding: 0 16px;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 16px;
   svg {
     width: 100px;
     height: 30px;
