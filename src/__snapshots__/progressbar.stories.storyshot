@@ -138,7 +138,7 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         </span>
       </div>
       <div
-        className="sc-gkdzZj hJCcCH sc-progressbarcontainer"
+        className="sc-gkdzZj leLsOY sc-progressbarcontainer"
         size="large"
       >
         <div

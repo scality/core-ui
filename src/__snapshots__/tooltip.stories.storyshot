@@ -112,7 +112,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       onMouseLeave={[Function]}
     >
       <button
-        className="sc-dQppl dDQpFl sc-button"
+        className="sc-dQppl gmFhNU sc-button"
         disabled={false}
         size="small"
         title=""

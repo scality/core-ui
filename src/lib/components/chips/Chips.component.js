@@ -1,20 +1,25 @@
 //@flow
-import * as defaultTheme from "../../style/theme";
-import type { Variant, Size } from "../constants";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
-import Button from "../button/Button.component";
-import React from "react";
-import { lighten } from "polished";
-import { getTheme } from "../../utils";
+import * as defaultTheme from '../../style/theme';
+import type { Size } from '../constants';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
+import Button from '../button/Button.component';
+import React from 'react';
+import { lighten } from 'polished';
+import { getTheme } from '../../utils';
 
 type Props = {
   text: string,
-  variant?: Variant,
+  variant?:
+    | 'statusHealthy'
+    | 'statusWarning'
+    | 'statusCritical'
+    | 'infoPrimary'
+    | 'infoSecondary',
   icon?: Node,
-  onClick?: any => void,
-  onRemove?: any => void,
-  size?: Size
+  onClick?: (any) => void,
+  onRemove?: (any) => void,
+  size?: Size,
 };
 
 const ChipsContainer = styled.div`
@@ -26,9 +31,9 @@ const ChipsContainer = styled.div`
       color: ${defaultTheme.grayLight};
     }
   }
-  ${props => {
+  ${(props) => {
     switch (props.size) {
-      case "smaller":
+      case 'smaller':
         return css`
           border-radius: 10px;
           .sc-chips-icon {
@@ -37,7 +42,7 @@ const ChipsContainer = styled.div`
           }
         `;
 
-      case "small":
+      case 'small':
         return css`
           border-radius: 12px;
           .sc-chips-icon {
@@ -46,7 +51,7 @@ const ChipsContainer = styled.div`
           }
         `;
 
-      case "large":
+      case 'large':
         return css`
           border-radius: 14px;
           .sc-chips-icon {
@@ -55,7 +60,7 @@ const ChipsContainer = styled.div`
           }
         `;
 
-      case "larger":
+      case 'larger':
         return css`
           border-radius: 17px;
           .sc-chips-icon {
@@ -74,15 +79,14 @@ const ChipsContainer = styled.div`
         `;
     }
   }}
-${props => {
+${(props) => {
+  const brand = getTheme(props);
   return css`
-    ${props.variant === "warning"
-      ? `color: ${defaultTheme.blackLight};`
-      : `color: ${defaultTheme.white};`}
+    color: ${brand.textReverse};
   `;
 }}
 
-  ${props => {
+  ${(props) => {
     const brand = getTheme(props);
     const brandLight = lighten(0.1, brand[props.variant]).toString();
     return props.onClick
@@ -108,7 +112,7 @@ export const ChipsIcon = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props =>
+  background-color: ${(props) =>
     lighten(0.15, getTheme(props)[props.variant]).toString()};
 `;
 
@@ -116,16 +120,16 @@ export const ChipsText = styled.span`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: ${props => (props.icon || props.isRemovable ? "5px" : "5px 10px")};
+  padding: ${(props) => (props.icon || props.isRemovable ? '5px' : '5px 10px')};
 `;
 
 const Chips = ({
-  text = "",
-  variant = defaultTheme.brand.primary,
+  text = '',
+  variant = 'infoPrimary',
   icon = null,
   onClick,
   onRemove,
-  size = "base"
+  size = 'base',
 }: Props) => (
   <ChipsContainer
     className="sc-chips"

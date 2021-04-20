@@ -38,7 +38,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
       </div>
     </div>
     <a
-      className="sc-fodVxV bJCdTb sc-button"
+      className="sc-fodVxV afjAc sc-button"
       disabled={false}
       href="/"
       size="large"
@@ -92,7 +92,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
       </div>
     </div>
     <a
-      className="sc-fodVxV bJCdTb sc-button"
+      className="sc-fodVxV afjAc sc-button"
       disabled={false}
       href="/"
       size="large"

@@ -1,17 +1,23 @@
 // @flow
-import React from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
-import { lighten } from "polished";
-import { getTheme } from "../../utils";
-import * as defaultTheme from "../../style/theme";
-import Loader from "../loader/Loader.component";
-import type { Size, Variant } from "../constants";
+import React from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
+import { getTheme } from '../../utils';
+import * as defaultTheme from '../../style/theme';
+import Loader from '../loader/Loader.component';
+import type { Size } from '../constants';
 
 type Props = {
   text?: string,
   size?: Size,
-  variant?: Variant,
+  /* We need to make sure the variant exist in the color-palette
+ Otherwise we will encounter the error: Passed an incorrect argument to a color function, please pass a string representation of a color. */
+  variant?:
+    | 'buttonPrimary'
+    | 'buttonSecondary'
+    | 'buttonDelete'
+    | 'backgroundLevel1', // this variant is for the button in navbar and sidebar
   outlined?: boolean,
   inverted?: boolean,
   disabled?: boolean,
@@ -47,34 +53,35 @@ export const ButtonStyled = styled.button`
 
   ${(props) => {
     switch (props.size) {
-      case "smaller":
+      case 'smaller':
         return css`
           padding: 7px 14px;
           font-size: ${defaultTheme.fontSize.smaller};
           border-radius: 4px;
           height: 27px;
         `;
-      case "small":
+      case 'small':
         return css`
           padding: 8px 16px;
           font-size: ${defaultTheme.fontSize.small};
           border-radius: 5px;
           height: 30px;
         `;
-      case "large":
+      case 'large':
         return css`
           padding: 10px 20px;
           font-size: ${defaultTheme.fontSize.large};
           border-radius: 7px;
           height: 40px;
         `;
-      case "larger":
+      case 'larger':
         return css`
           padding: 11px 22px;
           font-size: ${defaultTheme.fontSize.larger};
           border-radius: 8px;
           height: 48px;
         `;
+      case 'base':
       default:
         return css`
           padding: 12px 16px;
@@ -87,7 +94,6 @@ export const ButtonStyled = styled.button`
 
   ${(props) => {
     const brand = getTheme(props);
-    const brandLight = lighten(0.1, brand[props.variant]).toString();
 
     if (props.isLoading) {
       return css`
@@ -107,48 +113,65 @@ export const ButtonStyled = styled.button`
       return css`
         border-width: 1px;
         border-style: solid;
-        border-color: ${brand.secondaryDark1};
-        background-color: ${brand.background};
-        color: ${brand.textPrimary};
+        border-color: ${brand.buttonSecondary};
+        // to be checked
+        background-color: ${brand.backgroundLevel1};
+        color: ${brand.textTertiary};
 
         &:hover {
-          border-color: ${brand.secondaryDark1};
-          background-color: ${brand.secondaryDark2};
-          color: ${defaultTheme.white};
-        }
-
-        &:active {
-          border-color: ${brand.secondaryDark1};
-          background-color: ${brand.secondaryDark2};
-          color: ${defaultTheme.white};
+          border-color: ${brand.infoPrimary};
+          color: ${brand.textPrimary};
         }
       `;
-    } else if (props.variant === "warning") {
+    } else if (props.variant === 'buttonPrimary') {
       return css`
-        background-color: ${brand[props.variant]};
-        color: ${defaultTheme.blackLight};
+        background-color: ${brand.buttonPrimary};
+        border: 1px solid ${brand.buttonPrimary};
+        color: ${brand.textPrimary};
         &:hover {
-          background-color: ${brandLight};
-          color: ${defaultTheme.blackLight};
+          background-color: ${brand.highlight};
+          outline: none;
+          border: 1px solid ${brand.infoPrimary};
         }
-        &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.blackLight};
+      `;
+    } else if (props.variant === 'buttonSecondary') {
+      return css`
+        background-color: ${brand.buttonSecondary};
+        border: 1px solid ${brand.buttonSecondary};
+        color: ${brand.textPrimary};
+        &:hover {
+          background-color: ${brand.infoPrimary};
+          border: 1px solid ${brand.infoPrimary};
+        }
+      `;
+    } else if (props.variant === 'buttonDelete') {
+      return css`
+        background-color: ${brand.buttonDelete};
+        border: 1px solid ${brand.buttonDelete};
+        color: ${brand.statusCritical};
+        &:hover {
+          background-color: ${brand.statusCritical};
+          border: 1px solid ${brand.infoPrimary};
+          color: ${brand.textPrimary};
+        }
+      `;
+    } else if (props.variant === 'backgroundLevel1') {
+      return css`
+        background-color: ${brand.backgroundLevel1};
+        color: ${brand.textPrimary};
+        &:hover {
+          background-color: ${brand.highlight};
         }
       `;
     } else {
       return css`
-        background-color: ${brand[props.variant]};
-        color: ${defaultTheme.white};
-
+        background-color: ${brand.backgroundLevel1};
+        border: 1px solid ${brand.backgroundLevel1};
+        color: ${brand.statusCritical};
         &:hover {
-          background-color: ${brandLight};
-          color: ${defaultTheme.white};
-        }
-
-        &:active {
-          background-color: ${brand[props.variant]};
-          color: ${defaultTheme.white};
+          background-color: ${brand.backgroundLevel1};
+          border: 1px solid ${brand.infoPrimary};
+          color: ${brand.textPrimary};
         }
       `;
     }
@@ -163,7 +186,7 @@ ${(props) => {
       ? `
           box-shadow: none;
           pointer-events: none;
-          opacity: 0.2;
+          opacity: 0.3;
           border-color: ${brandLighter};
           color: ${defaultTheme.white};
         `
@@ -189,6 +212,7 @@ ${(props) => {
         &:hover{
           background-color: transparent;
           color: ${brandLight};
+          border: none;
         }
 
         &:active {
@@ -200,6 +224,7 @@ ${(props) => {
   `;
 }}
 `;
+
 export const ButtonIcon = styled.span`
   ${(props) =>
     props.text &&
@@ -221,20 +246,20 @@ export const ButtonContent = styled.span`
   position: relative;
 `;
 
-const Anchor = ButtonStyled.withComponent("a");
+const Anchor = ButtonStyled.withComponent('a');
 
 function Button({
-  text = "",
-  href = "",
+  text = '',
+  href = '',
   icon = null,
-  size = "base",
-  variant = "base",
+  size = 'base',
+  variant = 'buttonPrimary',
   outlined = false,
   disabled = false,
   onClick,
-  title = "",
+  title = '',
   isLoading = false,
-  type = "button",
+  type = 'button',
   inverted = false,
   ...rest
 }: Props) {

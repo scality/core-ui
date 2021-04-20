@@ -82,6 +82,7 @@ export const defaultTheme = {
     border: '#313131',
     info: '#434343',
   },
+  // TODO: temporary merge `darkRebrand` and `dark` to avoid the UIs break.
   darkRebrand: {
     statusHealthy: '#0AADA6',
     statusWarning: '#F8F32B',
@@ -103,9 +104,28 @@ export const defaultTheme = {
     textTertiary: '#B5B5B5',
     textReverse: '#000000',
     textLink: '#71AEFF',
+    // degraded colors
+    alert: '#FFE508',
+    base: '#7B7B7B',
+    primary: '#1D1D1D',
+    primaryDark1: '#171717',
+    primaryDark2: '#0A0A0A',
+    secondary: '#0F7FFF',
+    secondaryDark1: '#1C3D59',
+    secondaryDark2: '#1C2E3F',
+    success: '#006F62',
+    healthy: '#30AC26',
+    healthyLight: '#69E44C',
+    warning: '#FFC10A',
+    danger: '#AA1D05',
+    critical: '#BE321F',
+    background: '#121212',
+    backgroundBluer: '#192A41',
+    borderLight: '#A5A5A5',
+    info: '#434343',
   },
 };
-export const brand = defaultTheme.dark;
+export const brand = defaultTheme.darkRebrand;
 
 //navbar
 export const navbarHeight = '47px';

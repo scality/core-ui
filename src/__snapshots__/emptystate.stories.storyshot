@@ -47,7 +47,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       className="sc-dOSReg YzaVf"
     >
       <button
-        className="sc-dQppl jLhaey sc-button"
+        className="sc-dQppl cyczWM sc-button"
         disabled={false}
         onClick={[Function]}
         size="large"

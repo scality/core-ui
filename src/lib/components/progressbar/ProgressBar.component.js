@@ -1,9 +1,9 @@
 //@flow
-import React from "react";
-import styled, { css } from "styled-components";
-import { getTheme, getThemePropSelector } from "../../utils";
-import * as defaultTheme from "../../style/theme";
-import type { Size } from "../constants";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { getTheme, getThemePropSelector } from '../../utils';
+import * as defaultTheme from '../../style/theme';
+import type { Size } from '../constants';
 
 export type ProgressBarProps = {
   percentage: number,
@@ -30,25 +30,25 @@ const ProgressBarContainer = styled.div`
 
   ${(props) => {
     switch (props.size) {
-      case "smaller":
+      case 'smaller':
         return css`
           height: 10px;
           font-size: ${defaultTheme.fontSize.smaller};
         `;
 
-      case "base":
+      case 'base':
         return css`
           height: 12px;
           font-size: ${defaultTheme.fontSize.small};
         `;
 
-      case "large":
+      case 'large':
         return css`
-          height: 15px;
+          height: 16px;
           font-size: ${defaultTheme.fontSize.base};
         `;
 
-      case "larger":
+      case 'larger':
         return css`
           height: 20px;
         `;
@@ -69,7 +69,7 @@ const ProgressBarContainer = styled.div`
     if (props.buildinLabel) {
       return css`     
      border: 1px solid;
-     border-color: ${getThemePropSelector("border")}};`;
+     border-color: ${getThemePropSelector('border')}};`;
     }
   }};
 `;
@@ -78,18 +78,18 @@ const TopLeftLabel = styled.span`
   display: inline-block;
   font-size: ${defaultTheme.fontSize.large};
   font-weight: ${defaultTheme.fontWeight.bold};
-  color: ${getThemePropSelector("textPrimary")}};
+  color: ${getThemePropSelector('textPrimary')}};
 `;
 
 const TopRightLabel = styled.span`
   display: inline-block;
   font-size: ${defaultTheme.fontSize.small};
-  color: ${getThemePropSelector("textPrimary")}};
+  color: ${getThemePropSelector('textPrimary')}};
 `;
 
 const BottomLabel = styled.span`
   display: inline-block; 
-  color: ${getThemePropSelector("textSecondary")}};
+  color: ${getThemePropSelector('textSecondary')}};
 `;
 
 const TopLabelsContainer = styled.div`
@@ -137,16 +137,16 @@ const FilledAreaContainer = styled.div`
 `;
 
 const BuildinLabel = styled.div`
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
   padding-left: 5px;
   white-space: nowrap;
 `;
 
 function ProgressBar({
   percentage = 50,
-  size = "base",
+  size = 'base',
   color,
-  backgroundColor = "#332C2C",
+  backgroundColor = '#332C2C',
   topLeftLabel,
   topRightLabel,
   bottomLeftLabel,

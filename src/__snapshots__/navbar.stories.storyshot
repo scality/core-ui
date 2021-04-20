@@ -6,7 +6,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     Navbar with toggle
   </h3>
   <div
-    className="sc-dFJsGO dkOnks sc-navbar"
+    className="sc-dFJsGO GAanD sc-navbar"
   >
     <div
       className="sc-bsipQr kniknr"
@@ -16,7 +16,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         onClick={[Function]}
       >
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -49,7 +49,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -124,7 +124,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Hardware UI
         </h1>
@@ -199,7 +199,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -225,7 +225,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -246,7 +246,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -264,7 +264,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -297,7 +297,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -326,7 +326,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     Navbar without toggle
   </h3>
   <div
-    className="sc-dFJsGO dkOnks sc-navbar"
+    className="sc-dFJsGO GAanD sc-navbar"
   >
     <div
       className="sc-bsipQr kniknr"
@@ -335,7 +335,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -410,7 +410,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Hardware UI
         </h1>
@@ -485,7 +485,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -511,7 +511,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -532,7 +532,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -550,7 +550,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -583,7 +583,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -612,7 +612,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     Navbar with customized logo
   </h3>
   <div
-    className="sc-dFJsGO dkOnks sc-navbar"
+    className="sc-dFJsGO GAanD sc-navbar"
   >
     <div
       className="sc-bsipQr kniknr"
@@ -622,7 +622,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         onClick={[Function]}
       >
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           size="larger"
           title="Main Menu"
@@ -655,7 +655,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <i
             className="fas fa-ring"
@@ -666,7 +666,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <h1
-          className="sc-dkIXFM blYPBZ"
+          className="sc-dkIXFM bZSTTi"
         >
           Hardware UI
         </h1>
@@ -741,7 +741,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -767,7 +767,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -788,7 +788,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -806,7 +806,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl ctPsRF sc-button"
+          className="sc-dQppl TXKZb sc-button"
           disabled={false}
           onClick={[Function]}
           size="larger"
@@ -839,7 +839,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -868,7 +868,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     Navbar with only tabs
   </h3>
   <div
-    className="sc-dFJsGO dkOnks sc-navbar"
+    className="sc-dFJsGO GAanD sc-navbar"
   >
     <div
       className="sc-bsipQr kniknr"
@@ -877,7 +877,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -1018,7 +1018,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1047,7 +1047,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     Navbar with only link tabs
   </h3>
   <div
-    className="sc-dFJsGO dkOnks sc-navbar"
+    className="sc-dFJsGO GAanD sc-navbar"
   >
     <div
       className="sc-bsipQr kniknr"
@@ -1056,7 +1056,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         className="sc-dtTInj ehqMUK"
       >
         <div
-          className="sc-XhUPp jNZgck sc-logo"
+          className="sc-XhUPp bxgzXn sc-logo"
         >
           <svg
             height="49"
@@ -1194,7 +1194,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
           className="sc-citwmv cZSRlS sc-dropdown"
         >
           <div
-            className="sc-iBaPrD bDMcNI trigger"
+            className="sc-iBaPrD caZTOy trigger"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

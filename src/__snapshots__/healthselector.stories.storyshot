@@ -13,7 +13,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-lcujXC fqOfWM sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-GqfZa ebkNMt fvumqG trigger"
+      className="sc-dQppl sc-GqfZa iHAjfJ kltcLr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
@@ -25,13 +25,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
           className="sc-fbkhIv pXAmM"
         >
           <span
-            className="sc-gGmIRh dfzaEC"
+            className="sc-gGmIRh kGyjus"
           />
           <span
-            className="sc-gGmIRh dnbYOs"
+            className="sc-gGmIRh lgZMik"
           />
           <span
-            className="sc-gGmIRh dRJUSX"
+            className="sc-gGmIRh cacKbm"
           />
         </span>
       </div>
@@ -60,7 +60,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-lcujXC fqOfWM sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-GqfZa gAXfRJ dBuFyq trigger"
+          className="sc-dQppl sc-GqfZa hQnMTF lhHICL trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="smaller"
@@ -72,13 +72,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
               className="sc-fbkhIv pXAmM"
             >
               <span
-                className="sc-gGmIRh dfzaEC"
+                className="sc-gGmIRh kGyjus"
               />
               <span
-                className="sc-gGmIRh dnbYOs"
+                className="sc-gGmIRh lgZMik"
               />
               <span
-                className="sc-gGmIRh dRJUSX"
+                className="sc-gGmIRh cacKbm"
               />
             </span>
           </div>
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-lcujXC fqOfWM sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-GqfZa dDQpFl hujbiq trigger"
+          className="sc-dQppl sc-GqfZa YKmql eVnhXX trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="small"
@@ -112,13 +112,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
               className="sc-fbkhIv pXAmM"
             >
               <span
-                className="sc-gGmIRh dfzaEC"
+                className="sc-gGmIRh kGyjus"
               />
               <span
-                className="sc-gGmIRh dnbYOs"
+                className="sc-gGmIRh lgZMik"
               />
               <span
-                className="sc-gGmIRh dRJUSX"
+                className="sc-gGmIRh cacKbm"
               />
             </span>
           </div>
@@ -140,7 +140,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-lcujXC fqOfWM sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-GqfZa ebkNMt fvumqG trigger"
+          className="sc-dQppl sc-GqfZa iHAjfJ kltcLr trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="base"
@@ -152,13 +152,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
               className="sc-fbkhIv pXAmM"
             >
               <span
-                className="sc-gGmIRh dfzaEC"
+                className="sc-gGmIRh kGyjus"
               />
               <span
-                className="sc-gGmIRh dnbYOs"
+                className="sc-gGmIRh lgZMik"
               />
               <span
-                className="sc-gGmIRh dRJUSX"
+                className="sc-gGmIRh cacKbm"
               />
             </span>
           </div>
@@ -184,7 +184,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-lcujXC fqOfWM sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-GqfZa kVQnZo gGCGJe trigger"
+          className="sc-dQppl sc-GqfZa cyczWM qfipP trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="large"
@@ -196,13 +196,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
               className="sc-fbkhIv pXAmM"
             >
               <span
-                className="sc-gGmIRh dfzaEC"
+                className="sc-gGmIRh kGyjus"
               />
               <span
-                className="sc-gGmIRh dnbYOs"
+                className="sc-gGmIRh lgZMik"
               />
               <span
-                className="sc-gGmIRh dRJUSX"
+                className="sc-gGmIRh cacKbm"
               />
             </span>
           </div>
@@ -224,7 +224,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-lcujXC fqOfWM sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-GqfZa ctPsRF fHpbnm trigger"
+          className="sc-dQppl sc-GqfZa kCBcnZ cmeQjH trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="larger"
@@ -236,13 +236,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
               className="sc-fbkhIv pXAmM"
             >
               <span
-                className="sc-gGmIRh dfzaEC"
+                className="sc-gGmIRh kGyjus"
               />
               <span
-                className="sc-gGmIRh dnbYOs"
+                className="sc-gGmIRh lgZMik"
               />
               <span
-                className="sc-gGmIRh dRJUSX"
+                className="sc-gGmIRh cacKbm"
               />
             </span>
           </div>
@@ -267,7 +267,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-lcujXC fqOfWM sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-GqfZa ebkNMt fvumqG trigger"
+      className="sc-dQppl sc-GqfZa iHAjfJ kltcLr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
@@ -279,13 +279,13 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
           className="sc-fbkhIv pXAmM"
         >
           <span
-            className="sc-gGmIRh dfzaEC"
+            className="sc-gGmIRh kGyjus"
           />
           <span
-            className="sc-gGmIRh dnbYOs"
+            className="sc-gGmIRh lgZMik"
           />
           <span
-            className="sc-gGmIRh dRJUSX"
+            className="sc-gGmIRh cacKbm"
           />
         </span>
       </div>

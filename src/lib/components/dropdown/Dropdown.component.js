@@ -1,20 +1,20 @@
 //@flow
-import React, { useState, useCallback } from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useCallback } from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
 import {
   ButtonStyled,
   ButtonIcon,
-  ButtonText
-} from "../button/Button.component";
-import * as defaultTheme from "../../style/theme";
-import { getThemePropSelector } from "../../utils";
+  ButtonText,
+} from '../button/Button.component';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 
 export type Item = {
   label: string,
   name?: string,
   selected?: boolean,
-  onClick: any => void
+  onClick: (any) => void,
 };
 type Items = Array<Item>;
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
   title?: string,
   items: Items,
   icon?: Node,
-  caret?: boolean
+  caret?: boolean,
 };
 
 const DropdownStyled = styled.div`
@@ -41,13 +41,13 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  border: 1px solid ${getThemePropSelector("primary")};
+  border: 1px solid ${getThemePropSelector('primary')};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-
-  ${props => {
+  border-bottom: 0.3px solid ${getThemePropSelector('border')};
+  ${(props) => {
     if (
       props.size &&
       props.triggerSize &&
@@ -64,7 +64,7 @@ const DropdownMenuStyled = styled.ul`
     ) {
       return css`
         left: 0;
-        bottom: ${props.triggerSize.height + "px"};
+        bottom: ${props.triggerSize.height + 'px'};
       `;
     } else {
       return css`
@@ -84,13 +84,16 @@ const DropdownMenuItemStyled = styled.li`
   font-size: ${defaultTheme.fontSize.base};
 
   ${css`
-    background-color: ${getThemePropSelector("primary")};
-    color: ${getThemePropSelector("textPrimary")};
+    background-color: ${getThemePropSelector('primary')};
+    color: ${getThemePropSelector('textPrimary')};
+    border-top: 0.3px solid ${getThemePropSelector('border')};
+    border-left: 0.3px solid ${getThemePropSelector('border')};
+    border-right: 0.3px solid ${getThemePropSelector('border')};
     &:hover {
-      background-color: ${getThemePropSelector("primaryDark2")};
+      background-color: ${getThemePropSelector('highlight')};
     }
     &:active {
-      background-color: ${getThemePropSelector("primaryDark2")};
+      background-color: ${getThemePropSelector('highlight')};
     }
   `};
 `;
@@ -99,14 +102,14 @@ const Caret = styled.span`
   margin-left: ${defaultTheme.padding.base};
 `;
 
-const TriggerStyled = ButtonStyled.withComponent("div");
+const TriggerStyled = ButtonStyled.withComponent('div');
 
 function Dropdown({
   items,
   text,
   icon,
-  size = "base",
-  variant = "base",
+  size = 'base',
+  variant = 'buttonSecondary',
   title,
   caret = true,
   ...rest
@@ -115,13 +118,13 @@ function Dropdown({
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
 
-  const refMenuCallback = useCallback(node => {
+  const refMenuCallback = useCallback((node) => {
     if (node !== null) {
       setMenuSize(node.getBoundingClientRect());
     }
   }, []);
 
-  const refTriggerCallback = useCallback(node => {
+  const refTriggerCallback = useCallback((node) => {
     if (node !== null) {
       setTriggerSize(node.getBoundingClientRect());
     }
@@ -140,7 +143,7 @@ function Dropdown({
         className="trigger"
         onBlur={() => setOpen(!open)}
         onFocus={() => setOpen(!open)}
-        onClick={event => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         tabIndex="0"
         title={title}
         ref={refTriggerCallback}
@@ -159,7 +162,7 @@ function Dropdown({
         {open && (
           <DropdownMenuStyled
             className="menu-item"
-            postion={"right"}
+            postion={'right'}
             ref={refMenuCallback}
             size={menuSize}
             triggerSize={triggerSize}

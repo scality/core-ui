@@ -1,12 +1,12 @@
 //@flow
-import React from "react";
-import styled, { css } from "styled-components";
-import type { Node } from "react";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import type { Node } from 'react';
 
-import { LOADER_SIZE as SIZE } from "../constants";
-import LoaderIcon from "../../icons/scality-loading";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import { LOADER_SIZE as SIZE } from '../constants';
+import LoaderIcon from '../../icons/scality-loading';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 
 type Props = {
   size?: string,
@@ -23,7 +23,7 @@ const LoaderContainer = styled.div`
       svg {
         height: ${defaultTheme.svgSize[props.size]};
         width: ${defaultTheme.svgSize[props.size]};
-        fill: ${getTheme(props).base};
+        fill: ${props.color};
       }
     `;
   }}
@@ -40,7 +40,7 @@ const LoaderContainer = styled.div`
 
 const LoaderText = styled.span`
   padding: 10px 0;
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 
 const LoaderTextDiv = styled.span`
@@ -51,7 +51,7 @@ const LoaderTextDiv = styled.span`
 
 function Loader({
   children,
-  color = defaultTheme.gray,
+  color = '#A14FBF',
   size = SIZE.large,
   centered = false,
   ...rest

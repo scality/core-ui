@@ -1,8 +1,8 @@
 //@flow
-import * as React from "react";
-import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getTheme } from '../../utils';
 
 // useDiv returns a div wrapper instead of tr more adapted to div based table (instead of tbody/thead/...)
 type Props = {
@@ -20,7 +20,7 @@ const EmptytableContainer = styled.tr`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background: ${brand.primary};
+      background: ${brand.backgroundLevel2};
       border-top: 1px solid ${brand.border};
     `;
   }}
@@ -36,7 +36,7 @@ const EmptytableContainerDiv = styled.div`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background: ${brand.primary};
+      background: ${brand.backgroundLevel2};
       border-top: 1px solid ${brand.border};
     `;
   }}
@@ -49,7 +49,7 @@ const EmptytableContent = styled.td`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background: ${brand.primary};
+      background: ${brand.backgroundLevel2};
       color: ${brand.textSecondary};
     `;
   }}
@@ -61,7 +61,7 @@ const EmptytableContentDiv = styled.div`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background: ${brand.primary};
+      background: ${brand.backgroundLevel2};
       color: ${brand.textSecondary};
     `;
   }}

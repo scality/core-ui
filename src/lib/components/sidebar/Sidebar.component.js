@@ -1,10 +1,10 @@
 //@flow
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import type { Node } from "react";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
-import Button from "../button/Button.component";
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+import type { Node } from 'react';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
+import Button from '../button/Button.component';
 
 type Item = {
   label: string,
@@ -84,9 +84,9 @@ const SidebarContainer = styled.div`
 
   .sc-button {
     border-radius: 0;
-    background-color: ${getThemePropSelector("primary")};
+    background-color: ${getThemePropSelector('primary')};
     &:hover {
-      background-color: ${getThemePropSelector("backgroundBluer")};
+      background-color: ${getThemePropSelector('backgroundBluer')};
     }
     height: ${defaultTheme.sidebarItemHeight};
     width: ${defaultTheme.sidebarWidth};
@@ -135,7 +135,7 @@ const MenuItemSelected = styled.div`
   width: 3px;
   height: 100%;
   right: 0;
-  background-color: ${getThemePropSelector("secondary")};
+  background-color: ${getThemePropSelector('secondary')};
 `;
 
 const MenuItemIcon = styled.div`
@@ -174,7 +174,7 @@ function Sidebar({
           <MenuItemIcon>
             <Button
               size="larger"
-              variant="base"
+              variant="backgroundLevel1"
               icon={<i className="fas fa-chevron-left" />}
               onClick={() => onToggleClick()}
             />
@@ -183,7 +183,7 @@ function Sidebar({
         {onToggleClick && !expanded && (
           <Button
             size="larger"
-            variant="base"
+            variant="backgroundLevel1"
             icon={<i className="fas fa-chevron-right" />}
             onClick={() => onToggleClick()}
           />
