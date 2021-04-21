@@ -2,11 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 import Button from '../button/Button.component';
 
 const ErrorPageContainer = styled.div`
-  background-color: ${getThemePropSelector('primaryDark1')};
+  background-color: ${getThemePropSelector('backgroundLevel1')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,13 +15,13 @@ const ErrorPageContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${getThemePropSelector('textPrimary')};
   margin: 0;
   margin-left: ${defaultTheme.padding.large};
 `;
 
 const Description = styled.div`
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${getThemePropSelector('textPrimary')};
   font-size: ${defaultTheme.fontSize.larger};
   text-align: center;
   padding: ${defaultTheme.padding.larger};
@@ -38,7 +38,7 @@ const Row = styled.div`
 `;
 
 const WarningIcon = styled.i`
-  color: ${defaultTheme.yellow};
+  color: ${getThemePropSelector('statusWarning')};
 `;
 
 const translations = {
@@ -66,6 +66,8 @@ type Props = {
 
 function ErrorPage404({ btnLink = '/', locale = 'en', ...rest }: Props) {
   if (!translations[locale]) locale = 'en';
+  // Ensure the locale formatting is consistent
+  locale = locale.toLowerCase();
 
   return (
     <ErrorPageContainer className="sc-error-page404" {...rest}>
