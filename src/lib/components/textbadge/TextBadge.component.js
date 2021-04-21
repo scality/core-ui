@@ -1,13 +1,13 @@
 //@flow
-import React from "react";
-import styled from "styled-components";
-import * as defaultTheme from "../../style/theme";
+import React from 'react';
+import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 
 const StyledTextBadge = styled.span`
-  background-color: ${props => getTheme(props)[props.variant]};
+  background-color: ${(props) => getTheme(props)[props.variant]};
   color: ${getThemePropSelector('textReverse')};
-  padding: 2px 0.6rem;
+  padding: 2px ${defaultTheme.padding.smaller};
   border-radius: 4px;
   font-size: 0.9rem;
   font-weight: ${defaultTheme.fontWeight.bold};
@@ -17,15 +17,26 @@ const StyledTextBadge = styled.span`
 type Props = {
   text: string,
   className?: string,
-  variant?: 'statusHealthy' | 'statusWarning' | 'statusCritical' | 'infoPrimary'| 'infoSecondary'
+  variant?:
+    | 'statusHealthy'
+    | 'statusWarning'
+    | 'statusCritical'
+    | 'infoPrimary'
+    | 'infoSecondary',
 };
 export default function TextBadge({
   text,
   variant = 'infoPrimary',
   className,
   ...rest
-} : Props) {
-  return <StyledTextBadge className={['sc-text-badge', className].join(' ')}  variant={ variant } { ...rest }>
-    { text }
-  </StyledTextBadge>
+}: Props) {
+  return (
+    <StyledTextBadge
+      className={['sc-text-badge', className].join(' ')}
+      variant={variant}
+      {...rest}
+    >
+      {text}
+    </StyledTextBadge>
+  );
 }
