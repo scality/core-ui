@@ -13,20 +13,23 @@ export const Default = () => {
     <Wrapper>
       <Title>Text Badges</Title>
       <TextBadge
+        text='0'
+      />
+      <TextBadge
         text='1'
-        variant='healthy'
+        variant='statusHealthy'
       />
       <TextBadge
         text='2'
-        variant='secondary'
+        variant='statusWarning'
       />
       <TextBadge
         text='3'
-        variant='base'
+        variant='statusCritical'
       />
       <TextBadge
         text='Badge'
-        variant='danger'
+        variant='infoSecondary'
       />
     </Wrapper>
   );

@@ -2,12 +2,11 @@
 import React from "react";
 import styled from "styled-components";
 import * as defaultTheme from "../../style/theme";
-import { getThemeVariantSelector, getThemePropSelector } from '../../utils';
-import type { Variant } from "../constants";
+import { getTheme, getThemePropSelector } from '../../utils';
 
 const StyledTextBadge = styled.span`
-  background-color: ${getThemeVariantSelector};
-  color: ${getThemePropSelector('textPrimary')};
+  background-color: ${props => getTheme(props)[props.variant]};
+  color: ${getThemePropSelector('textReverse')};
   padding: 2px 0.6rem;
   border-radius: 4px;
   font-size: 0.9rem;
@@ -17,14 +16,16 @@ const StyledTextBadge = styled.span`
 
 type Props = {
   text: string,
-  variant?: Variant,
+  className?: string,
+  variant?: 'statusHealthy' | 'statusWarning' | 'statusCritical' | 'infoPrimary'| 'infoSecondary'
 };
 export default function TextBadge({
   text,
-  variant,
+  variant = 'infoPrimary',
+  className,
   ...rest
 } : Props) {
-  return <StyledTextBadge className='sc-text-badge' variant={ variant } { ...rest }>
+  return <StyledTextBadge className={['sc-text-badge', className].join(' ')}  variant={ variant } { ...rest }>
     { text }
   </StyledTextBadge>
 }
