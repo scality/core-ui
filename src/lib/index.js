@@ -43,6 +43,7 @@ import EmptyTable from './components/emptytable/Emptytable.component';
 import ScrollbarWrapper from './components/scrollbarwrapper/ScrollbarWrapper.component';
 import ErrorPage404 from './components/error-pages/ErrorPage404.component';
 import ErrorPage500 from './components/error-pages/ErrorPage500.component';
+import ErrorPageAuth from './components/error-pages/ErrorPageAuth.component';
 //import Icon from './components/icon/Icon.component';
 
 export {
@@ -87,5 +88,6 @@ export {
   ScrollbarWrapper,
   ErrorPage404,
   ErrorPage500,
+  ErrorPageAuth,
   //Icon,
 };
