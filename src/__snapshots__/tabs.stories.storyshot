@@ -10,42 +10,42 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
     Default Tabs 
   </h3>
   <div
-    className="sc-jLiVlK dgRjuO sc-tabs"
+    className="sc-gHftXq hVokKY sc-tabs"
   >
     <div
-      className="sc-bUrJUP feCA-dl sc-tabs-bar"
+      className="sc-dkAroR ieLdmS sc-tabs-bar"
     >
       <div
-        className="sc-tkKAw frqUXt sc-tabs-item"
+        className="sc-jifIRw cdiuhG sc-tabs-item"
         onClick={[Function]}
         selected={true}
       >
         <p
-          className="sc-dRPiIx bvEnkl sc-tabs-item-title"
+          className="sc-hkwnrn CVfwt sc-tabs-item-title"
           selected={true}
         >
           Detail
         </p>
       </div>
       <div
-        className="sc-tkKAw Pduta sc-tabs-item"
+        className="sc-jifIRw dCohsF sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-dRPiIx ljZiXm sc-tabs-item-title"
+          className="sc-hkwnrn liVAAq sc-tabs-item-title"
           selected={false}
         >
           Pods
         </p>
       </div>
       <div
-        className="sc-tkKAw Pduta sc-tabs-item"
+        className="sc-jifIRw dCohsF sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-dRPiIx ljZiXm sc-tabs-item-title"
+          className="sc-hkwnrn liVAAq sc-tabs-item-title"
           selected={false}
         >
           Volumes
@@ -53,7 +53,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-hYZPRl hQOYUV sc-tabs-item-content"
+      className="sc-bSFVuW gVImIz sc-tabs-item-content"
     />
   </div>
 </div>

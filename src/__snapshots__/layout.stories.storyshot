@@ -2,19 +2,19 @@
 
 exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
 <div
-  className="sc-ikPAkQ jMWus sc-layout"
+  className="sc-dWdcrH fA-dMD sc-layout"
 >
   <div
-    className="sc-dFJsGO GAanD sc-navbar"
+    className="sc-XhUPp kVvsYV sc-navbar"
   >
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
-          className="sc-XhUPp bxgzXn sc-logo"
+          className="sc-xyEjG gWoSRH sc-logo"
         >
           <svg
             height="49"
@@ -86,20 +86,20 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
         </div>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <h1
-          className="sc-dkIXFM bZSTTi"
+          className="sc-kYrkKh kaeuwP"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -199,15 +199,15 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
     </div>
   </div>
   <div
-    className="sc-tYoTV fBGBqW"
+    className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-jUEnpm ddCqwe"
+      className="sc-eGCarw duzfGa"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-jQbIHB jSnLNi sc-sidebar"
+        className="sc-ctaXAZ jsTowt sc-sidebar"
       >
         <button
           className="sc-dQppl TXKZb sc-button"
@@ -240,30 +240,30 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
           </span>
         </button>
         <div
-          className="sc-fvhGYg dzZuUv sc-sidebar-item"
+          className="sc-dFJsGO gFTRHB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-GTWni gFgiiT"
+            className="sc-gInsOo ctKlhb"
           />
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-server"
@@ -271,13 +271,13 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-hdd"
@@ -287,7 +287,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
       </div>
     </div>
     <div
-      className="sc-biBrSq hoNOYo main"
+      className="sc-bQdQlF jvilxN main"
     >
       <div
         className="sc-kEjbxe jGWVVt sc-loader"
@@ -420,16 +420,16 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
 <div
-  className="sc-ikPAkQ jMWus sc-layout"
+  className="sc-dWdcrH fA-dMD sc-layout"
 >
   <div
-    className="sc-dFJsGO GAanD sc-navbar"
+    className="sc-XhUPp kVvsYV sc-navbar"
   >
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
         onClick={[Function]}
       >
         <button
@@ -463,10 +463,10 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
-          className="sc-XhUPp bxgzXn sc-logo"
+          className="sc-xyEjG gWoSRH sc-logo"
         >
           <svg
             height="49"
@@ -538,20 +538,20 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <h1
-          className="sc-dkIXFM bZSTTi"
+          className="sc-kYrkKh kaeuwP"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -651,41 +651,41 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
     </div>
   </div>
   <div
-    className="sc-tYoTV fBGBqW"
+    className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-jUEnpm ddCqwe"
+      className="sc-eGCarw duzfGa"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-jQbIHB jSnLNi sc-sidebar"
+        className="sc-ctaXAZ jsTowt sc-sidebar"
       >
         <div
-          className="sc-fvhGYg dzZuUv sc-sidebar-item"
+          className="sc-dFJsGO gFTRHB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-GTWni gFgiiT"
+            className="sc-gInsOo ctKlhb"
           />
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-server"
@@ -693,13 +693,13 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-hdd"
@@ -709,7 +709,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
       </div>
     </div>
     <div
-      className="sc-biBrSq hoNOYo main"
+      className="sc-bQdQlF jvilxN main"
     >
       <div
         className="sc-kEjbxe jGWVVt sc-loader"
@@ -842,16 +842,16 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
 <div
-  className="sc-ikPAkQ jMWus sc-layout"
+  className="sc-dWdcrH fA-dMD sc-layout"
 >
   <div
-    className="sc-dFJsGO GAanD sc-navbar"
+    className="sc-XhUPp kVvsYV sc-navbar"
   >
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
         onClick={[Function]}
       >
         <button
@@ -885,10 +885,10 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
-          className="sc-XhUPp bxgzXn sc-logo"
+          className="sc-xyEjG gWoSRH sc-logo"
         >
           <svg
             height="49"
@@ -960,20 +960,20 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <h1
-          className="sc-dkIXFM bZSTTi"
+          className="sc-kYrkKh kaeuwP"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -1073,72 +1073,72 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
     </div>
   </div>
   <div
-    className="sc-tYoTV fBGBqW"
+    className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-jUEnpm kVoEAx"
+      className="sc-eGCarw ePeNol"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-jQbIHB jBpfpR sc-sidebar"
+        className="sc-ctaXAZ bObdDu sc-sidebar"
       >
         <div
-          className="sc-fvhGYg dzZuUv sc-sidebar-item"
+          className="sc-dFJsGO gFTRHB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Dashboard
           </div>
           <div
-            className="sc-GTWni gFgiiT"
+            className="sc-gInsOo ctKlhb"
           />
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Disks
           </div>
@@ -1146,7 +1146,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
       </div>
     </div>
     <div
-      className="sc-biBrSq hoNOYo main"
+      className="sc-bQdQlF jvilxN main"
     >
       <div
         className="sc-kEjbxe jGWVVt sc-loader"
@@ -1279,19 +1279,19 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
 
 exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
 <div
-  className="sc-ikPAkQ jMWus sc-layout"
+  className="sc-dWdcrH fA-dMD sc-layout"
 >
   <div
-    className="sc-dFJsGO GAanD sc-navbar"
+    className="sc-XhUPp kVvsYV sc-navbar"
   >
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
-          className="sc-XhUPp bxgzXn sc-logo"
+          className="sc-xyEjG gWoSRH sc-logo"
         >
           <svg
             height="49"
@@ -1363,20 +1363,20 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
         </div>
       </div>
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <h1
-          className="sc-dkIXFM bZSTTi"
+          className="sc-kYrkKh kaeuwP"
         >
           Harware UI
         </h1>
       </div>
     </div>
     <div
-      className="sc-bsipQr kniknr"
+      className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-dtTInj ehqMUK"
+        className="sc-hzMMCg jXlhcl"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -1476,18 +1476,18 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
     </div>
   </div>
   <div
-    className="sc-tYoTV fBGBqW"
+    className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-jUEnpm kVoEAx"
+      className="sc-eGCarw ePeNol"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-jQbIHB jBpfpR sc-sidebar"
+        className="sc-ctaXAZ bObdDu sc-sidebar"
       >
         <div
-          className="sc-gsxnyZ hWxXMA"
+          className="sc-euMpXR bqzgdO"
         >
           <button
             className="sc-dQppl TXKZb sc-button"
@@ -1521,61 +1521,61 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
           </button>
         </div>
         <div
-          className="sc-fvhGYg dzZuUv sc-sidebar-item"
+          className="sc-dFJsGO gFTRHB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Dashboard
           </div>
           <div
-            className="sc-GTWni gFgiiT"
+            className="sc-gInsOo ctKlhb"
           />
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-fvhGYg cpuQnS sc-sidebar-item"
+          className="sc-dFJsGO fdWukA sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-gsxnyZ hWxXMA"
+            className="sc-euMpXR bqzgdO"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-fbNXWD ZQmie"
+            className="sc-bsipQr eaOukM"
           >
             Disks
           </div>
@@ -1583,7 +1583,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
       </div>
     </div>
     <div
-      className="sc-biBrSq hoNOYo main"
+      className="sc-bQdQlF jvilxN main"
     >
       <div
         className="sc-kEjbxe jGWVVt sc-loader"

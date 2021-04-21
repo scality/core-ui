@@ -5,13 +5,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI gnaLBS sc-error-page500"
+    className="sc-laRPJI eQJvc sc-error-page500"
   >
     <div
       className="sc-nFpLZ gvQQYc"
     >
       <i
-        className="sc-higXBA hqnamb fas fa-exclamation-triangle fa-2x"
+        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
       />
       <h2
         className="sc-iNqMTl cTvwmA"
@@ -59,13 +59,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI gnaLBS sc-error-page500"
+    className="sc-laRPJI eQJvc sc-error-page500"
   >
     <div
       className="sc-nFpLZ gvQQYc"
     >
       <i
-        className="sc-higXBA hqnamb fas fa-exclamation-triangle fa-2x"
+        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
       />
       <h2
         className="sc-iNqMTl cTvwmA"
@@ -94,7 +94,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
         >
           Vous pouvez également contacter le 
           <a
-            className="sc-ehSCib gOwmRK"
+            className="sc-ehSCib NhcT"
             href="https://www.scality.com/support/"
           >
             support 
@@ -128,13 +128,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI gnaLBS sc-error-page500"
+    className="sc-laRPJI eQJvc sc-error-page500"
   >
     <div
       className="sc-nFpLZ gvQQYc"
     >
       <i
-        className="sc-higXBA hqnamb fas fa-exclamation-triangle fa-2x"
+        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
       />
       <h2
         className="sc-iNqMTl cTvwmA"
@@ -163,7 +163,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
         >
           You may also contact 
           <a
-            className="sc-ehSCib gOwmRK"
+            className="sc-ehSCib NhcT"
             href="https://www.scality.com/support/"
           >
             support 

@@ -5,13 +5,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cOajty hOsDRs sc-error-page404"
+    className="sc-cOajty hQHLhu sc-error-page404"
   >
     <div
       className="sc-jgHCyG GHYGC"
     >
       <i
-        className="sc-gTgzIj cnnIkz fas fa-exclamation-triangle fa-2x"
+        className="sc-gTgzIj ggJSpO fas fa-exclamation-triangle fa-2x"
       />
       <h2
         className="sc-AzgDb jHwTwl"
@@ -59,13 +59,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cOajty hOsDRs sc-error-page404"
+    className="sc-cOajty hQHLhu sc-error-page404"
   >
     <div
       className="sc-jgHCyG GHYGC"
     >
       <i
-        className="sc-gTgzIj cnnIkz fas fa-exclamation-triangle fa-2x"
+        className="sc-gTgzIj ggJSpO fas fa-exclamation-triangle fa-2x"
       />
       <h2
         className="sc-AzgDb jHwTwl"

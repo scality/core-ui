@@ -17,47 +17,47 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       Smaller
     </h3>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gkdzZj OyKKG sc-progressbarcontainer"
+        className="sc-dwcuIR jkFzoe sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-kUbhmq chDAAO"
+          className="sc-gsBrbv fNtune"
           width={50}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-irlOZD sc-eWvPJL hxVPuQ lkLE"
+        className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -69,47 +69,47 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       Base
     </h3>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           Usage
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           50%
         </span>
       </div>
       <div
-        className="sc-gkdzZj jXKukH sc-progressbarcontainer"
+        className="sc-dwcuIR eCGnkD sc-progressbarcontainer"
         size="base"
       >
         <div
-          className="sc-kUbhmq chDAAO"
+          className="sc-gsBrbv fNtune"
           width={50}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-irlOZD sc-eWvPJL hxVPuQ lkLE"
+        className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
         >
           5.17TB STORED - 13TB USED
         </span>
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
         >
           12.9TB FREE - 25.83TB TOTAL
         </span>
@@ -121,47 +121,47 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       Large with animation
     </h3>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gkdzZj leLsOY sc-progressbarcontainer"
+        className="sc-dwcuIR fVhJlc sc-progressbarcontainer"
         size="large"
       >
         <div
-          className="sc-kUbhmq pRJOM"
+          className="sc-gsBrbv cMaeWo"
           width={50}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-irlOZD sc-eWvPJL hxVPuQ lkLE"
+        className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -173,47 +173,47 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       Larger
     </h3>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gkdzZj caRpYY sc-progressbarcontainer"
+        className="sc-dwcuIR hYvajc sc-progressbarcontainer"
         size="larger"
       >
         <div
-          className="sc-kUbhmq chDAAO"
+          className="sc-gsBrbv fNtune"
           width={50}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-irlOZD sc-eWvPJL hxVPuQ lkLE"
+        className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -225,76 +225,76 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       Different colors
     </h3>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           50%
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gkdzZj OyKKG sc-progressbarcontainer"
+        className="sc-dwcuIR jkFzoe sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-kUbhmq gPIeqa"
+          className="sc-gsBrbv gzttka"
           color="#2f67ac"
           width={50}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             50%
           </div>
         </div>
       </div>
       <div
-        className="sc-irlOZD sc-eWvPJL hxVPuQ lkLE"
+        className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-iGctRS ikWfuS sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
       </div>
     </div>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           10%
         </span>
       </div>
       <div
-        className="sc-gkdzZj OyKKG sc-progressbarcontainer"
+        className="sc-dwcuIR jkFzoe sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-kUbhmq iyERZL"
+          className="sc-gsBrbv fpfyTL"
           color="#ff5722"
           width={10}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             10%
           </div>
@@ -302,33 +302,33 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-gyUeRy sc-progressbar"
+      className="sc-kUbhmq sc-progressbar"
     >
       <div
-        className="sc-irlOZD hxVPuQ"
+        className="sc-cKZHah jdhORJ"
       >
         <span
-          className="sc-flMoUE iGRXhM sc-progressbar-topLeftLabel"
+          className="sc-jtHMlw iqJcCk sc-progressbar-topLeftLabel"
         >
           90% Used
         </span>
         <span
-          className="sc-eWVKcp dYnwwR sc-progressbar-toprightlabel"
+          className="sc-eltcbb kcMkjn sc-progressbar-toprightlabel"
         >
           100GB Total
         </span>
       </div>
       <div
-        className="sc-gkdzZj OyKKG sc-progressbarcontainer"
+        className="sc-dwcuIR jkFzoe sc-progressbarcontainer"
         size="smaller"
       >
         <div
-          className="sc-kUbhmq gHRzCZ"
+          className="sc-gsBrbv kPZlmR"
           color="#982803"
           width={90}
         >
           <div
-            className="sc-dwcuIR hRMsPj"
+            className="sc-aKZfe dJGLwO"
           >
             90%
           </div>

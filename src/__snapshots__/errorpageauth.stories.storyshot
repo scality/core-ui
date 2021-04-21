@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/ErrorPages/Auth Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-lcujXC ffFypL sc-error-pageauth"
+  >
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <i
+        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+      />
+      <h2
+        className="sc-gGmIRh WPrdl"
+      >
+        Authenticating...
+      </h2>
+    </div>
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <div
+        className="sc-clsHhM giUgiK"
+      >
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          The authentication is in progress.
+        </p>
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          If this message persist please try refreshing your page.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/Auth With Locale 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-lcujXC ffFypL sc-error-pageauth"
+  >
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <i
+        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+      />
+      <h2
+        className="sc-gGmIRh WPrdl"
+      >
+        Authentification
+      </h2>
+    </div>
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <div
+        className="sc-clsHhM giUgiK"
+      >
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          Authentification en cours.
+        </p>
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          Si ce message persiste, vous pouvez essayer d'actualiser cette page.
+        </p>
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          Vous pouvez également contacter le 
+          <a
+            className="sc-dwfUOf fFQJws"
+            href="https://www.scality.com/support/"
+          >
+            support 
+            <i
+              className="fas fa-external-link-alt"
+            />
+          </a>
+           pour signaler ce problème.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/Auth With Support Link 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-lcujXC ffFypL sc-error-pageauth"
+  >
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <i
+        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+      />
+      <h2
+        className="sc-gGmIRh WPrdl"
+      >
+        Authenticating...
+      </h2>
+    </div>
+    <div
+      className="sc-GqfZa cDBkfl"
+    >
+      <div
+        className="sc-clsHhM giUgiK"
+      >
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          The authentication is in progress.
+        </p>
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          If this message persist please try refreshing your page.
+        </p>
+        <p
+          className="sc-fbkhIv bvaRoK"
+        >
+          You may also contact 
+          <a
+            className="sc-dwfUOf fFQJws"
+            href="https://www.scality.com/support/"
+          >
+            support 
+            <i
+              className="fas fa-external-link-alt"
+            />
+          </a>
+           to report this issue.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
