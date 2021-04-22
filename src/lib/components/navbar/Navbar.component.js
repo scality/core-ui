@@ -92,7 +92,8 @@ const TabLinkItem = styled(TabItem)`
   ${(props) =>
     props.selected &&
     css`
-      border-bottom: 2px solid ${getTheme(props).secondary};
+      border-bottom: 2px solid ${getTheme(props).selectedActive};
+      color: ${getThemePropSelector('textPrimary')};
     `};
 
   // Disabling TabItem hover to move it to <a> instead
@@ -100,10 +101,11 @@ const TabLinkItem = styled(TabItem)`
     border-bottom: none;
     border-top: none;
     cursor: pointer;
+    background-color: ${getThemePropSelector('highlight')};
   }
 
   a {
-    color: ${getThemePropSelector('textPrimary')};
+    color: ${getThemePropSelector('textTertiary')};
     text-decoration: none;
     padding: 12px ${defaultTheme.padding.base};
     box-sizing: border-box;
@@ -119,6 +121,12 @@ const TabLinkItem = styled(TabItem)`
         }
       `;
     }}
+
+    ${(props) =>
+      props.selected &&
+      css`
+        color: ${getThemePropSelector('textPrimary')};
+      `};
   }
 `;
 
@@ -128,9 +136,9 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
-      background-color: ${getThemePropSelector('background')};
+      background-color: ${getThemePropSelector('backgroundLevel1')};
       &:hover {
-        background-color: ${getThemePropSelector('backgroundBluer')};
+        background-color: ${getThemePropSelector('highlight')};
       }
       height: ${defaultTheme.navbarHeight};
       font-size: ${defaultTheme.fontSize.base};
@@ -142,9 +150,9 @@ const NavbarMenuItem = styled.div`
     border-radius: 0;
     height: ${defaultTheme.navbarHeight};
     font-size: ${defaultTheme.fontSize.base};
-    background-color: ${getThemePropSelector('background')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     &:hover {
-      background-color: ${getThemePropSelector('backgroundBluer')};
+      background-color: ${getThemePropSelector('highlight')};
     }
     width: ${defaultTheme.navbarItemWidth};
   }
