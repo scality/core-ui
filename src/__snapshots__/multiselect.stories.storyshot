@@ -171,13 +171,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={true}
             className="sc-bkzZxe ksGRRC sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={true}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
           <button
@@ -270,13 +270,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={false}
             className="sc-bkzZxe bnReLL sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={false}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
           <button
@@ -387,13 +387,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={true}
             className="sc-bkzZxe ksGRRC sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={true}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
           <button
@@ -486,13 +486,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={false}
             className="sc-bkzZxe bnReLL sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={false}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
           <button
@@ -744,13 +744,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={true}
             className="sc-bkzZxe ksGRRC sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={true}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
         </div>
@@ -813,13 +813,13 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             checked={false}
             className="sc-bkzZxe bnReLL sc-checkbox"
           >
+            <i
+              className="fas fa-check"
+            />
             <input
               checked={false}
               onChange={[Function]}
               type="checkbox"
-            />
-            <i
-              className="fas fa-check"
             />
           </label>
         </div>

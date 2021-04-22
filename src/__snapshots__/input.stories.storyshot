@@ -151,15 +151,15 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
         checked={false}
         className="sc-bkzZxe bnReLL sc-checkbox"
       >
+        <i
+          className="fas fa-check"
+        />
         <input
           checked={false}
           id="id4"
           onChange={[Function]}
           type="checkbox"
           value="value"
-        />
-        <i
-          className="fas fa-check"
         />
       </label>
     </div>
@@ -186,15 +186,15 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
         checked={false}
         className="sc-bkzZxe bnReLL sc-checkbox"
       >
+        <i
+          className="fas fa-check"
+        />
         <input
           checked={false}
           id="id5"
           onChange={[Function]}
           type="checkbox"
           value="value"
-        />
-        <i
-          className="fas fa-check"
         />
       </label>
       <span

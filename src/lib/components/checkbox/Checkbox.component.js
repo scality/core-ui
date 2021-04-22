@@ -26,6 +26,7 @@ function Checkbox({
       disabled={disabled}
       className="sc-checkbox"
     >
+      <i className="fas fa-check" />
       <input
         type="checkbox"
         checked={checked}
@@ -34,7 +35,6 @@ function Checkbox({
         onChange={onChange}
         {...rest}
       />
-      <i className="fas fa-check" />
       {label && (
         <StyledCheckboxLabel className="text">{label}</StyledCheckboxLabel>
       )}
