@@ -12,7 +12,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
         onClick={[Function]}
       >
         <button
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -121,7 +121,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -193,7 +193,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -332,7 +332,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -407,7 +407,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -479,7 +479,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -618,7 +618,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
         onClick={[Function]}
       >
         <button
@@ -652,7 +652,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </button>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -663,7 +663,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -735,7 +735,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -874,7 +874,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -1012,7 +1012,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -1053,7 +1053,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -1133,7 +1133,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     >
       <div
         aria-selected={true}
-        className="sc-biBrSq sc-eHfQar ehRDsz dRHiEp"
+        className="sc-biBrSq sc-eHfQar ehRDsz hUKEZD"
         role="tab"
         selected={true}
       >
@@ -1144,7 +1144,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx gwSDKR"
+        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
         role="tab"
       >
         <a
@@ -1154,7 +1154,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx gwSDKR"
+        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
         role="tab"
       >
         <a
@@ -1164,7 +1164,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx gwSDKR"
+        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
         role="tab"
       >
         <a
@@ -1174,7 +1174,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx gwSDKR"
+        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
         role="tab"
       >
         <a
@@ -1188,7 +1188,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"

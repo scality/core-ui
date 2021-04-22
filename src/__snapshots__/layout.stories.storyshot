@@ -11,7 +11,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -86,7 +86,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -99,7 +99,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -202,12 +202,12 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
     className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-eGCarw duzfGa"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ jsTowt sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
         <button
           className="sc-dQppl TXKZb sc-button"
@@ -240,7 +240,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
           </span>
         </button>
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
@@ -253,11 +253,11 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
             />
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
@@ -271,7 +271,7 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
@@ -429,7 +429,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
         onClick={[Function]}
       >
         <button
@@ -463,7 +463,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         </button>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -538,7 +538,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -551,7 +551,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -654,15 +654,15 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
     className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-eGCarw duzfGa"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ jsTowt sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
@@ -675,11 +675,11 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
             />
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
@@ -693,7 +693,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Docked 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
@@ -851,7 +851,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
         onClick={[Function]}
       >
         <button
@@ -885,7 +885,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         </button>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -960,7 +960,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -973,7 +973,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -1076,15 +1076,15 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
     className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-eGCarw ePeNol"
+      className="sc-eGCarw kTIyNm"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ bObdDu sc-sidebar"
+        className="sc-ctaXAZ kTwauY sc-sidebar"
       >
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
@@ -1102,11 +1102,11 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
@@ -1125,7 +1125,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar Expanded 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
@@ -1288,7 +1288,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-xyEjG gWoSRH sc-logo"
@@ -1363,7 +1363,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
         </div>
       </div>
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <h1
           className="sc-kYrkKh kaeuwP"
@@ -1376,7 +1376,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
       className="sc-ikPAkQ IwTrt"
     >
       <div
-        className="sc-hzMMCg jXlhcl"
+        className="sc-hzMMCg lieRKd"
       >
         <div
           className="sc-citwmv cZSRlS sc-dropdown"
@@ -1479,12 +1479,12 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
     className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-eGCarw ePeNol"
+      className="sc-eGCarw kTIyNm"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ bObdDu sc-sidebar"
+        className="sc-ctaXAZ kTwauY sc-sidebar"
       >
         <div
           className="sc-euMpXR bqzgdO"
@@ -1521,7 +1521,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
           </button>
         </div>
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
           onClick={[Function]}
           title="Dashboard"
@@ -1539,11 +1539,11 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Servers"
           onClick={[Function]}
           title="Servers"
@@ -1562,7 +1562,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           data-cy="Disks"
           onClick={[Function]}
           title="Disks"
