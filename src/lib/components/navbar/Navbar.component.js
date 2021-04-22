@@ -126,6 +126,7 @@ const TabLinkItem = styled(TabItem)`
       props.selected &&
       css`
         color: ${getThemePropSelector('textPrimary')};
+        font-weight: bold;
       `};
   }
 `;
