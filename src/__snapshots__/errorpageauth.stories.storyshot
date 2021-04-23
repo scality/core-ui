@@ -26,11 +26,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth Default 1`] = `
         className="sc-clsHhM giUgiK"
       >
         <p
+          aria-label="authenticating"
           className="sc-fbkhIv bvaRoK"
         >
           The authentication is in progress.
         </p>
         <p
+          aria-label="if message persist please refresh"
           className="sc-fbkhIv bvaRoK"
         >
           If this message persist please try refreshing your page.
@@ -67,16 +69,19 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Locale 1`] = `
         className="sc-clsHhM giUgiK"
       >
         <p
+          aria-label="authenticating"
           className="sc-fbkhIv bvaRoK"
         >
           Authentification en cours.
         </p>
         <p
+          aria-label="if message persist please refresh"
           className="sc-fbkhIv bvaRoK"
         >
           Si ce message persiste, vous pouvez essayer d'actualiser cette page.
         </p>
         <p
+          aria-label="support link"
           className="sc-fbkhIv bvaRoK"
         >
           Vous pouvez également contacter le 
@@ -123,16 +128,19 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Support Link 1`] 
         className="sc-clsHhM giUgiK"
       >
         <p
+          aria-label="authenticating"
           className="sc-fbkhIv bvaRoK"
         >
           The authentication is in progress.
         </p>
         <p
+          aria-label="if message persist please refresh"
           className="sc-fbkhIv bvaRoK"
         >
           If this message persist please try refreshing your page.
         </p>
         <p
+          aria-label="support link"
           className="sc-fbkhIv bvaRoK"
         >
           You may also contact 

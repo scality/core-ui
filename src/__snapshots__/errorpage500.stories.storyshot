@@ -26,11 +26,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
         className="sc-jeGSBP gtqGta"
       >
         <p
+          aria-label="unexpected error"
           className="sc-eJMQSu gldhqr"
         >
           An error occured and your request cannot be completed.
         </p>
         <p
+          aria-label="check url or contact administrator"
           className="sc-eJMQSu gldhqr"
         >
           You might check the url, or contact your admin if the error remains.
@@ -80,16 +82,19 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
         className="sc-jeGSBP gtqGta"
       >
         <p
+          aria-label="unexpected error"
           className="sc-eJMQSu gldhqr"
         >
           Une erreur s'est produite et votre demande ne peut être complétée.
         </p>
         <p
+          aria-label="check url or contact administrator"
           className="sc-eJMQSu gldhqr"
         >
           Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
         </p>
         <p
+          aria-label="support link"
           className="sc-eJMQSu gldhqr"
         >
           Vous pouvez également contacter le 
@@ -149,16 +154,19 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
         className="sc-jeGSBP gtqGta"
       >
         <p
+          aria-label="unexpected error"
           className="sc-eJMQSu gldhqr"
         >
           An error occured and your request cannot be completed.
         </p>
         <p
+          aria-label="check url or contact administrator"
           className="sc-eJMQSu gldhqr"
         >
           You might check the url, or contact your admin if the error remains.
         </p>
         <p
+          aria-label="support link"
           className="sc-eJMQSu gldhqr"
         >
           You may also contact 

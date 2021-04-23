@@ -26,11 +26,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
         className="sc-khAkjo kePGAr"
       >
         <p
+          aria-label="page not found"
           className="sc-hTZhsR iEVfKB"
         >
           It might be the wrong address or the page has moved.
         </p>
         <p
+          aria-label="check url or contact administrator"
           className="sc-hTZhsR iEVfKB"
         >
           You might check the url, or contact your admin if the error remains.
@@ -80,11 +82,13 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
         className="sc-khAkjo kePGAr"
       >
         <p
+          aria-label="page not found"
           className="sc-hTZhsR iEVfKB"
         >
           Il se peut que ce soit une mauvaise adresse ou que la page ait été déplacée.
         </p>
         <p
+          aria-label="check url or contact administrator"
           className="sc-hTZhsR iEVfKB"
         >
           Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
