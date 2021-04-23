@@ -77,10 +77,10 @@ function ErrorPage404({ btnLink = '/', locale = 'en', ...rest }: Props) {
       </Row>
       <Row>
         <Description>
-          <DescriptionContent>
+          <DescriptionContent aria-label="page not found">
             {translations[locale].error_desc}
           </DescriptionContent>
-          <DescriptionContent>
+          <DescriptionContent aria-label="check url or contact administrator">
             {translations[locale].should_do}
           </DescriptionContent>
         </Description>
