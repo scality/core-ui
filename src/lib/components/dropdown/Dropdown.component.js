@@ -84,7 +84,7 @@ const DropdownMenuItemStyled = styled.li`
   font-size: ${defaultTheme.fontSize.base};
 
   ${css`
-    background-color: ${getThemePropSelector('primary')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     color: ${getThemePropSelector('textPrimary')};
     border-top: 0.3px solid ${getThemePropSelector('border')};
     border-left: 0.3px solid ${getThemePropSelector('border')};

@@ -13,15 +13,15 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw duzfGa"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ jsTowt sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
@@ -33,11 +33,11 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
             />
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
@@ -50,7 +50,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
@@ -76,15 +76,15 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw ePeNol"
+      className="sc-eGCarw kTIyNm"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ bObdDu sc-sidebar"
+        className="sc-ctaXAZ kTwauY sc-sidebar"
       >
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
@@ -101,11 +101,11 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
@@ -123,7 +123,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
@@ -154,12 +154,12 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw ePeNol"
+      className="sc-eGCarw kTIyNm"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ bObdDu sc-sidebar"
+        className="sc-ctaXAZ kTwauY sc-sidebar"
       >
         <div
           className="sc-euMpXR bqzgdO"
@@ -196,7 +196,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
@@ -213,11 +213,11 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
             Dashboard
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
@@ -235,7 +235,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
@@ -266,12 +266,12 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw duzfGa"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ jsTowt sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
         <button
           className="sc-dQppl TXKZb sc-button"
@@ -304,7 +304,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </span>
         </button>
         <div
-          className="sc-dFJsGO gFTRHB sc-sidebar-item"
+          className="sc-dFJsGO eUNvUB sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
@@ -316,11 +316,11 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
             />
           </div>
           <div
-            className="sc-gInsOo ctKlhb"
+            className="sc-gInsOo hLFNdJ"
           />
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
@@ -333,7 +333,7 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO fdWukA sc-sidebar-item"
+          className="sc-dFJsGO jgcupw sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >

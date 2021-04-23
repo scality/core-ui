@@ -23,9 +23,9 @@ export type Props = {
 const Wrapper = styled.div`
   flex-shrink: 0;
   ${(props) => {
-    const { background, textPrimary } = getTheme(props);
+    const { backgroundLevel1, textPrimary } = getTheme(props);
     return css`
-      background-color: ${background};
+      background-color: ${backgroundLevel1};
       color: ${textPrimary};
       .fas {
         color: ${textPrimary};
@@ -45,14 +45,14 @@ const Wrapper = styled.div`
   }}
 
   ${(props) => {
-    const { background } = getTheme(props);
+    const { backgroundLevel1 } = getTheme(props);
 
     if (props.hoverable && props.hovered && !props.expanded) {
       return css`
         .sc-sidebar {
           position: absolute;
           height: 100%;
-          background-color: ${background};
+          background-color: ${backgroundLevel1};
           z-index: ${defaultTheme.zIndex.sidebar};
         }
       `;
@@ -62,9 +62,9 @@ const Wrapper = styled.div`
 
 const SidebarContainer = styled.div`
   ${(props) => {
-    const { background } = getTheme(props);
+    const { backgroundLevel1 } = getTheme(props);
     return css`
-      background-color: ${background};
+      background-color: ${backgroundLevel1};
     `;
   }}
 
@@ -84,9 +84,9 @@ const SidebarContainer = styled.div`
 
   .sc-button {
     border-radius: 0;
-    background-color: ${getThemePropSelector('primary')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     &:hover {
-      background-color: ${getThemePropSelector('backgroundBluer')};
+      background-color: ${getThemePropSelector('highlight')};
     }
     height: ${defaultTheme.sidebarItemHeight};
     width: ${defaultTheme.sidebarWidth};
@@ -105,21 +105,21 @@ const SidebarItem = styled.div`
   }
 
   ${(props) => {
-    const { textPrimary, backgroundBluer } = getTheme(props);
+    const { textPrimary, highlight } = getTheme(props);
 
     return props.active
       ? css`
-          background-color: ${backgroundBluer};
+          background-color: ${highlight};
           color: ${textPrimary};
           cursor: default;
         `
       : css`
           &:hover {
-            background-color: ${backgroundBluer};
+            background-color: ${highlight};
             color: ${textPrimary};
           }
           &:active {
-            background-color: ${backgroundBluer};
+            background-color: ${highlight};
             color: ${textPrimary};
           }
         `;
@@ -130,12 +130,13 @@ const MenuItemText = styled.div`
   margin-right: ${defaultTheme.padding.large};
 `;
 
+// selected border-right
 const MenuItemSelected = styled.div`
   position: absolute;
   width: 3px;
   height: 100%;
   right: 0;
-  background-color: ${getThemePropSelector('secondary')};
+  background-color: ${getThemePropSelector('selectedActive')};
 `;
 
 const MenuItemIcon = styled.div`
