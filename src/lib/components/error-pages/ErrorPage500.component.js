@@ -92,14 +92,14 @@ function ErrorPage500({
       </Row>
       <Row>
         <Description>
-          <DescriptionContent aria-label="unexpected error">
+          <DescriptionContent>
             {translations[locale].error_desc}
           </DescriptionContent>
-          <DescriptionContent aria-label="check url or contact administrator">
+          <DescriptionContent>
             {translations[locale].should_do}
           </DescriptionContent>
           {supportLink && (
-            <DescriptionContent aria-label="support link">
+            <DescriptionContent>
               {translations[locale].may_also_contact}
               <Link href={supportLink}>
                 support <i className="fas fa-external-link-alt" />

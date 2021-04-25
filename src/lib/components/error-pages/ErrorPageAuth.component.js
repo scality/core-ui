@@ -81,14 +81,14 @@ function ErrorPageAuth({ supportLink = null, locale = 'en', ...rest }: Props) {
       </Row>
       <Row>
         <Description>
-          <DescriptionContent aria-label="authenticating">
+          <DescriptionContent>
             {translations[locale].error_desc}
           </DescriptionContent>
-          <DescriptionContent aria-label="if message persist please refresh">
+          <DescriptionContent>
             {translations[locale].should_do}
           </DescriptionContent>
           {supportLink && (
-            <DescriptionContent aria-label="support link">
+            <DescriptionContent>
               {translations[locale].may_also_contact}
               <Link href={supportLink}>
                 support <i className="fas fa-external-link-alt" />
