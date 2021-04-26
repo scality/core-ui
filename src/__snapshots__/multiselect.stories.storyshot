@@ -168,8 +168,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={null}
             checked={true}
-            className="sc-bkzZxe ksGRRC sc-checkbox"
+            className="sc-bkzZxe dvRoQo sc-checkbox"
+            tabIndex={null}
           >
             <i
               className="fas fa-check"
@@ -267,8 +269,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe bnReLL sc-checkbox"
+            className="sc-bkzZxe dTvEFR sc-checkbox"
+            tabIndex={0}
           >
             <i
               className="fas fa-check"
@@ -384,8 +388,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={null}
             checked={true}
-            className="sc-bkzZxe ksGRRC sc-checkbox"
+            className="sc-bkzZxe dvRoQo sc-checkbox"
+            tabIndex={null}
           >
             <i
               className="fas fa-check"
@@ -483,8 +489,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe bnReLL sc-checkbox"
+            className="sc-bkzZxe dTvEFR sc-checkbox"
+            tabIndex={0}
           >
             <i
               className="fas fa-check"
@@ -741,8 +749,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={null}
             checked={true}
-            className="sc-bkzZxe ksGRRC sc-checkbox"
+            className="sc-bkzZxe dvRoQo sc-checkbox"
+            tabIndex={null}
           >
             <i
               className="fas fa-check"
@@ -810,8 +820,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-gVgnHT kAGNnV sc-multi-select-item-left"
         >
           <label
+            aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe bnReLL sc-checkbox"
+            className="sc-bkzZxe dTvEFR sc-checkbox"
+            tabIndex={0}
           >
             <i
               className="fas fa-check"

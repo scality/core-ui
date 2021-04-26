@@ -148,8 +148,10 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
     >
       <label
+        aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe bnReLL sc-checkbox"
+        className="sc-bkzZxe dTvEFR sc-checkbox"
+        tabIndex={0}
       >
         <i
           className="fas fa-check"
@@ -183,8 +185,10 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
     >
       <label
+        aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe bnReLL sc-checkbox"
+        className="sc-bkzZxe dTvEFR sc-checkbox"
+        tabIndex={0}
       >
         <i
           className="fas fa-check"
