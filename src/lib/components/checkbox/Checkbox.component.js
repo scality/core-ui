@@ -20,10 +20,14 @@ function Checkbox({
   onChange,
   ...rest
 }: Props) {
+  const canBeFocused = !checked && !disabled;
+
   return (
     <StyledCheckbox
       checked={checked}
       disabled={disabled}
+      aria-pressed={canBeFocused ? true : null}
+      tabIndex={canBeFocused ? 0 : null}
       className="sc-checkbox"
     >
       <i className="fas fa-check" />
@@ -58,7 +62,7 @@ const StyledCheckbox = styled.label`
     return props.disabled
       ? css`
           cursor: default;
-          opacity: 0.5;
+          opacity: 0.3;
         `
       : css`
           cursor: pointer;
@@ -66,11 +70,27 @@ const StyledCheckbox = styled.label`
   }}
 
   ${(props) => {
-    const { border, secondary } = getTheme(props);
+    const { textTertiary, selectedActive, highlight, buttonPrimary } = getTheme(props);
     const iconCheckedColor = props.checked ? 'white' : 'transparent';
 
-    const checkBoxColor = props.checked ? secondary : border;
-    const checkBoxColorHover = props.disabled ? checkBoxColor : secondary;
+    const checkBoxFocusBorder = buttonPrimary;
+    const checkBoxFocusColor = props.checked ? selectedActive : null;
+
+    const checkBoxBorder = props.checked ? selectedActive : textTertiary;
+    let checkBoxColor = null;
+    if (props.checked)
+      checkBoxColor = selectedActive;
+    else if (props.disabled)
+      checkBoxColor = textTertiary;
+
+    let checkBoxColorHover = null;
+    let checkBoxColorBorderHover = null;
+    if (props.checked && !props.disabled)
+      checkBoxColorHover = checkBoxColorBorderHover = selectedActive;
+    else if (!props.checked && !props.disabled) {
+      checkBoxColorHover = highlight;
+      checkBoxColorBorderHover = selectedActive;
+    }
 
     return css`
       &:before {
@@ -80,7 +100,7 @@ const StyledCheckbox = styled.label`
         top: 0;
         width: 12px;
         height: 12px;
-        border: 2px solid ${checkBoxColor};
+        border: 2px solid ${checkBoxBorder};
         background: ${checkBoxColor};
         border-radius: 4px;
       }
@@ -94,7 +114,16 @@ const StyledCheckbox = styled.label`
 
       &:hover {
         &:before {
-          border-color: ${checkBoxColorHover};
+          background: ${checkBoxColorHover};
+          border-color: ${checkBoxColorBorderHover};
+        }
+      }
+      
+      &:focus {
+        outline: 0;
+        &:before {
+          background: ${checkBoxFocusColor};
+          border-color: ${checkBoxFocusBorder};
         }
       }
     `;
