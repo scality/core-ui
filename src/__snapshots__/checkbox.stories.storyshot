@@ -12,7 +12,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={true}
-    className="sc-bkzZxe dvRoQo sc-checkbox"
+    className="sc-bkzZxe bOzIBZ sc-checkbox"
     tabIndex={null}
   >
     <i
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={true}
     checked={false}
-    className="sc-bkzZxe dTvEFR sc-checkbox"
+    className="sc-bkzZxe djeBGE sc-checkbox"
     tabIndex={0}
   >
     <i
@@ -63,7 +63,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={false}
-    className="sc-bkzZxe eHxQRY sc-checkbox"
+    className="sc-bkzZxe iWMgmx sc-checkbox"
     disabled={true}
     tabIndex={null}
   >
@@ -90,7 +90,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={true}
-    className="sc-bkzZxe kCrjAb sc-checkbox"
+    className="sc-bkzZxe jMbwJu sc-checkbox"
     disabled={true}
     tabIndex={null}
   >

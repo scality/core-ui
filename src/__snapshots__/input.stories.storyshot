@@ -150,7 +150,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe dTvEFR sc-checkbox"
+        className="sc-bkzZxe djeBGE sc-checkbox"
         tabIndex={0}
       >
         <i
@@ -187,7 +187,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe dTvEFR sc-checkbox"
+        className="sc-bkzZxe djeBGE sc-checkbox"
         tabIndex={0}
       >
         <i
