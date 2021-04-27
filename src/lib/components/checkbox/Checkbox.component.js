@@ -134,6 +134,13 @@ const StyledCheckbox = styled.label`
   }
 
   input {
+    ${props => {
+      return props.disabled ? css`
+        cursor: default;
+      ` : css`
+        cursor: pointer;
+      `;  
+    }}
     margin: 0px;
     opacity: 0;
   }
