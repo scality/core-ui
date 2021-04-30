@@ -105,6 +105,7 @@ function VegaChart({ id, spec, tooltipPosition = BOTTOM }: Props) {
       ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor") are included with the embedded view.
       If the value is true, all action links will be shown and none if the value is false. */
       actions: false,
+      hover: true,
     })
       .then((result) => {
         vegaInstance.current = result;
