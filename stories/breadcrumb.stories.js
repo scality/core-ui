@@ -14,19 +14,14 @@ export const Default = () => {
       <Breadcrumb
         paths={[
           <a href="home">home</a>,
-          <label href="clusters">clusters</label>,
           <a href="cluster">cluster_1</a>,
-          <label href="nodes">nodes</label>,
           <a
             href="node"
             title={'node_longlonglonglonglonglonglonglonglonglonglong'}
           >
             node_longlonglonglonglonglonglonglonglonglonglong
           </a>,
-          <a href="volumes">volumes</a>,
-          <label title={'volume_longlonglonglonglonglonglonglonglong'}>
-            volume_longlonglonglonglonglonglonglonglong
-          </label>,
+          <label>volumes</label>,
         ]}
       />
     </Wrapper>

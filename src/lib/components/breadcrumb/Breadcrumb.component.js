@@ -25,36 +25,37 @@ const BreadcrumbItem = styled.li`
   ${ellipsis("250px")}
 
   ${(props) => {
-    const { textPrimary, secondary } = getTheme(props);
+    const { textPrimary, selectedActive, textLink } = getTheme(props);
     if (props.active) {
       return css`
-        font-weight: ${defaultTheme.fontWeight.bold};
-        a {
-          color: ${secondary};
+        * {
+          text-decoration: none;
+          color: ${textPrimary};
         }
-        color: ${secondary};
-        border-bottom: 2px solid ${secondary};
+        color: ${textPrimary};
       `;
     }
 
     return css`
-      a {
+      * {
         text-decoration: none;
-        color: ${textPrimary};
+        color: ${textLink};
       }
-      color: ${textPrimary};
+      color: ${textLink};
+      border-bottom: 2px solid transparent;
       &:hover {
-        a {
-          color: ${secondary};
+        * {
+          color: ${selectedActive};
         }
-        border-bottom: 2px solid ${secondary};
+        color: ${selectedActive};
+        border-bottom: 2px solid ${selectedActive};
       }
     `;
   }}
 `;
 const BreadcrumbSeparator = styled.li`
-  padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.base};
-  color: ${defaultTheme.grayLight};
+  padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
+  color: ${defaultTheme.brand.textTertiary};
   display: flex;
   align-items: center;
   font-size: ${defaultTheme.fontSize.small};
