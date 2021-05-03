@@ -13,7 +13,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
     className="sc-fubCfw gUlWvG sc-breadcrumb"
   >
     <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
+      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
     >
       <a
         href="home"
@@ -22,30 +22,14 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
+      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
-    >
-      <label
-        href="clusters"
-      >
-        clusters
-      </label>
-    </li>
-    <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
-    >
-      <i
-        className="fas fa-chevron-right"
-      />
-    </li>
-    <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
+      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
     >
       <a
         href="cluster"
@@ -54,30 +38,14 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
+      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
-    >
-      <label
-        href="nodes"
-      >
-        nodes
-      </label>
-    </li>
-    <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
-    >
-      <i
-        className="fas fa-chevron-right"
-      />
-    </li>
-    <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
+      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
     >
       <a
         href="node"
@@ -87,35 +55,17 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
+      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ debfJL sc-breadcrumb_item"
+      className="sc-pFZIQ bbbKxP sc-breadcrumb_item"
     >
-      <a
-        href="volumes"
-      >
+      <label>
         volumes
-      </a>
-    </li>
-    <li
-      className="sc-jrAGrp jCbtoL sc-breadcrumb_separator"
-    >
-      <i
-        className="fas fa-chevron-right"
-      />
-    </li>
-    <li
-      className="sc-pFZIQ fmXiyj sc-breadcrumb_item"
-    >
-      <label
-        title="volume_longlonglonglonglonglonglonglonglong"
-      >
-        volume_longlonglonglonglonglonglonglonglong
       </label>
     </li>
   </ol>
