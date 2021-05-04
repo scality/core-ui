@@ -34,7 +34,7 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Hoverable Sidebar 
                 size="larger"
               >
                 <i
-                  className="fas fa-chevron-right"
+                  className="fas fa-bars"
                 />
               </span>
               <span
@@ -637,47 +637,43 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
     className="sc-dtTInj heQCiE"
   >
     <div
-      className="sc-eGCarw kTIyNm"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ kTwauY sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
-        <div
-          className="sc-euMpXR bqzgdO"
+        <button
+          className="sc-dQppl TXKZb sc-button"
+          disabled={false}
+          onClick={[Function]}
+          size="larger"
+          title=""
+          type="button"
         >
-          <button
-            className="sc-dQppl TXKZb sc-button"
-            disabled={false}
-            onClick={[Function]}
-            size="larger"
-            title=""
-            type="button"
+          <span
+            className="sc-hBEYos hgFzca"
           >
             <span
-              className="sc-hBEYos hgFzca"
+              className="sc-button-text"
             >
               <span
-                className="sc-button-text"
+                className="sc-bqyKva osfTx"
+                size="larger"
               >
-                <span
-                  className="sc-bqyKva osfTx"
-                  size="larger"
-                >
-                  <i
-                    className="fas fa-chevron-left"
-                  />
-                </span>
-                <span
-                  className="sc-kstrdz ZegCk"
-                >
-                  
-                </span>
+                <i
+                  className="fas fa-bars"
+                />
+              </span>
+              <span
+                className="sc-kstrdz ZegCk"
+              >
+                
               </span>
             </span>
-          </button>
-        </div>
+          </span>
+        </button>
         <div
           className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
@@ -690,11 +686,6 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
             <i
               className="fas fa-tachometer-alt"
             />
-          </div>
-          <div
-            className="sc-bsipQr eaOukM"
-          >
-            Dashboard
           </div>
           <div
             className="sc-gInsOo hLFNdJ"
@@ -713,11 +704,6 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
               className="fas fa-server"
             />
           </div>
-          <div
-            className="sc-bsipQr eaOukM"
-          >
-            Servers
-          </div>
         </div>
         <div
           className="sc-dFJsGO jgcupw sc-sidebar-item"
@@ -731,11 +717,6 @@ exports[`Storyshots Components/Navigation/LateralNavbarLayout Sidebar With Toggl
             <i
               className="fas fa-hdd"
             />
-          </div>
-          <div
-            className="sc-bsipQr eaOukM"
-          >
-            Disks
           </div>
         </div>
       </div>
