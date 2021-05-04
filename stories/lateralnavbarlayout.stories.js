@@ -61,10 +61,11 @@ export const SidebarExpanded = () => {
 };
 
 export const SidebarWithToggle = () => {
+  const [expanded, setExpanded] = useState(false);
   const sidebar = {
-    expanded: true,
+    expanded: expanded,
     actions: sideBarActions,
-    onToggleClick: action('toggle clicked'),
+    onToggleClick: () => setExpanded(!expanded),
   };
   return (
     <LateralNavbarLayout sidebar={sidebar}>

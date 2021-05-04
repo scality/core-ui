@@ -176,8 +176,11 @@ function Sidebar({
             <Button
               size="larger"
               variant="backgroundLevel1"
-              icon={<i className="fas fa-chevron-left" />}
-              onClick={() => onToggleClick()}
+              icon={<i className="fas fa-bars" />}
+              onClick={() => {
+                onToggleClick();
+                setHovered(false);
+              }}
             />
           </MenuItemIcon>
         )}
@@ -185,7 +188,7 @@ function Sidebar({
           <Button
             size="larger"
             variant="backgroundLevel1"
-            icon={<i className="fas fa-chevron-right" />}
+            icon={<i className="fas fa-bars" />}
             onClick={() => onToggleClick()}
           />
         )}
