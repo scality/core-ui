@@ -10,7 +10,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-fbNXWD bWEXEC sc-input"
+    className="sc-fbNXWD ipZpCx sc-input"
   >
     <div
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
@@ -34,7 +34,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-fbNXWD bWEXEC sc-input"
+    className="sc-fbNXWD ipZpCx sc-input"
   >
     <label
       className="sc-GTWni jjACbR sc-input-label"
@@ -63,7 +63,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-fbNXWD bAwAcv sc-input"
+    className="sc-fbNXWD rBsTQ sc-input"
   >
     <label
       className="sc-GTWni jjACbR sc-input-label"
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     className="sc-hYAvag ejTYIn"
   >
     <div
-      className="sc-fbNXWD bAwAcv sc-input"
+      className="sc-fbNXWD rBsTQ sc-input"
     >
       <label
         className="sc-GTWni jjACbR sc-input-label"
@@ -135,7 +135,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-fbNXWD bWEXEC sc-input"
+    className="sc-fbNXWD ipZpCx sc-input"
     type="checkbox"
   >
     <label
@@ -150,7 +150,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe djeBGE sc-checkbox"
+        className="sc-bkzZxe knJWYt sc-checkbox"
         tabIndex={0}
       >
         <i
@@ -172,7 +172,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-fbNXWD bAwAcv sc-input"
+    className="sc-fbNXWD rBsTQ sc-input"
     type="checkbox"
   >
     <label
@@ -187,7 +187,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe djeBGE sc-checkbox"
+        className="sc-bkzZxe knJWYt sc-checkbox"
         tabIndex={0}
       >
         <i
@@ -214,7 +214,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-fbNXWD bWEXEC sc-input"
+    className="sc-fbNXWD ipZpCx sc-input"
     type="select"
   >
     <label
@@ -227,7 +227,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
     >
       <div
-        className="sc-jQbIHB itPugI sc-select-container"
+        className="sc-jQbIHB eXSslE sc-select-container"
       >
         <div
           className="sc-select css-2b097c-container"
@@ -348,7 +348,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Textarea Input
   </h3>
   <div
-    className="sc-fbNXWD bWEXEC sc-input"
+    className="sc-fbNXWD ipZpCx sc-input"
     type="textarea"
   >
     <label
@@ -361,7 +361,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
     >
       <textarea
-        className="sc-fvhGYg iYRSVk sc-textarea"
+        className="sc-fvhGYg xMJjH sc-textarea"
         cols={20}
         id="id7"
         onChange={[Function]}
@@ -377,7 +377,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-fbNXWD bAwAcv sc-input"
+    className="sc-fbNXWD rBsTQ sc-input"
     type="textarea"
   >
     <label
@@ -390,7 +390,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
       className="sc-bXDlPE dFwwKN sc-input-wrapper"
     >
       <textarea
-        className="sc-fvhGYg iYRSVk sc-textarea"
+        className="sc-fvhGYg xMJjH sc-textarea"
         cols={50}
         id="id7"
         onChange={[Function]}
@@ -411,7 +411,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Number Input (Max 100)
   </h3>
   <div
-    className="sc-fbNXWD XCWjI sc-input"
+    className="sc-fbNXWD hsnaeM sc-input"
     type="number"
   >
     <div

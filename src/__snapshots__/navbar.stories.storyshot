@@ -1133,7 +1133,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
     >
       <div
         aria-selected={true}
-        className="sc-biBrSq sc-eHfQar ehRDsz hUKEZD"
+        className="sc-biBrSq sc-eHfQar ehRDsz lfQtaC"
         role="tab"
         selected={true}
       >
@@ -1144,7 +1144,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
+        className="sc-biBrSq sc-eHfQar epbeLx ifnvBC"
         role="tab"
       >
         <a
@@ -1154,7 +1154,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
+        className="sc-biBrSq sc-eHfQar epbeLx ifnvBC"
         role="tab"
       >
         <a
@@ -1164,7 +1164,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
+        className="sc-biBrSq sc-eHfQar epbeLx ifnvBC"
         role="tab"
       >
         <a
@@ -1174,7 +1174,7 @@ exports[`Storyshots Components/Navigation/Navbar Default 1`] = `
         </a>
       </div>
       <div
-        className="sc-biBrSq sc-eHfQar epbeLx beqRwv"
+        className="sc-biBrSq sc-eHfQar epbeLx ifnvBC"
         role="tab"
       >
         <a

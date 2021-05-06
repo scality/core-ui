@@ -52,12 +52,12 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -104,12 +104,12 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomleftlabel"
         >
           5.17TB STORED - 13TB USED
         </span>
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomrightlabel"
         >
           12.9TB FREE - 25.83TB TOTAL
         </span>
@@ -156,12 +156,12 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -208,12 +208,12 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>
@@ -261,12 +261,12 @@ exports[`Storyshots Components/Progress & loading/ProgressBar Default 1`] = `
         className="sc-cKZHah sc-iIEYCM jdhORJ bZCUEQ"
       >
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomleftlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomleftlabel"
         >
           50GB Used
         </span>
         <span
-          className="sc-kiYtDG imKJqO sc-progressbar-bottomrightlabel"
+          className="sc-kiYtDG iAnkYd sc-progressbar-bottomrightlabel"
         >
           50GB Free
         </span>

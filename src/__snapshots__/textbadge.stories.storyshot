@@ -10,27 +10,27 @@ exports[`Storyshots Components/TextBadge Default 1`] = `
     Text Badges
   </h3>
   <span
-    className="sc-jvfriV jxCGxn sc-text-badge "
+    className="sc-gHftXq ijqVfM sc-text-badge "
   >
     0
   </span>
   <span
-    className="sc-jvfriV kleJqO sc-text-badge "
+    className="sc-gHftXq kBtgWB sc-text-badge "
   >
     1
   </span>
   <span
-    className="sc-jvfriV jPNgbm sc-text-badge "
+    className="sc-gHftXq heFRQl sc-text-badge "
   >
     2
   </span>
   <span
-    className="sc-jvfriV kWmaAI sc-text-badge "
+    className="sc-gHftXq hUDdUb sc-text-badge "
   >
     3
   </span>
   <span
-    className="sc-jvfriV hFVqHN sc-text-badge "
+    className="sc-gHftXq laEgwG sc-text-badge "
   >
     Badge
   </span>

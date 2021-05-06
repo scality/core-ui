@@ -210,7 +210,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     Button Outlined
   </h3>
   <button
-    className="sc-dQppl jUBhAT sc-button"
+    className="sc-dQppl gXqrYy sc-button"
     disabled={false}
     onClick={[Function]}
     size="base"
