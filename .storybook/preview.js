@@ -1,11 +1,10 @@
 import React from "react";
-import { addDecorator } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 
 import { defaultTheme } from "../src/lib/style/theme";
 
 const themes = {
-  dark: defaultTheme.dark,
+  darkRebrand: defaultTheme.darkRebrand,
   light: defaultTheme.light,
 };
 
@@ -13,11 +12,11 @@ export const globalTypes = {
   theme: {
     name: "Theme",
     description: "Global theme for components",
-    defaultValue: "dark",
+    defaultValue: "darkRebrand",
     toolbar: {
       icon: "circlehollow",
       // array of plain string values or MenuItem shape (see below)
-      items: ["light", "dark"],
+      items: ["light", "darkRebrand"],
     },
   },
 };

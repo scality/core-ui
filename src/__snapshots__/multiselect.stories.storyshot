@@ -24,7 +24,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB itPugI sc-select-container"
+          className="sc-jQbIHB eXSslE sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -271,7 +271,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           <label
             aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe djeBGE sc-checkbox"
+            className="sc-bkzZxe knJWYt sc-checkbox"
             tabIndex={0}
           >
             <i
@@ -491,7 +491,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           <label
             aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe djeBGE sc-checkbox"
+            className="sc-bkzZxe knJWYt sc-checkbox"
             tabIndex={0}
           >
             <i
@@ -605,7 +605,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB itPugI sc-select-container"
+          className="sc-jQbIHB eXSslE sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -822,7 +822,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           <label
             aria-pressed={true}
             checked={false}
-            className="sc-bkzZxe djeBGE sc-checkbox"
+            className="sc-bkzZxe knJWYt sc-checkbox"
             tabIndex={0}
           >
             <i
@@ -906,7 +906,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB itPugI sc-select-container"
+          className="sc-jQbIHB eXSslE sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1175,7 +1175,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB itPugI sc-select-container"
+          className="sc-jQbIHB eXSslE sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1378,7 +1378,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB itPugI sc-select-container"
+          className="sc-jQbIHB eXSslE sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"

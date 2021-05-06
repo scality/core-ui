@@ -38,7 +38,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={true}
     checked={false}
-    className="sc-bkzZxe djeBGE sc-checkbox"
+    className="sc-bkzZxe knJWYt sc-checkbox"
     tabIndex={0}
   >
     <i
@@ -63,7 +63,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={false}
-    className="sc-bkzZxe iWMgmx sc-checkbox"
+    className="sc-bkzZxe bTQxYV sc-checkbox"
     disabled={true}
     tabIndex={null}
   >

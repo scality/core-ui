@@ -5,7 +5,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eggNIi fRKxUt sc-emptystate"
+    className="sc-eggNIi hBicuy sc-emptystate"
   >
     <div
       className="sc-jNMdTA ideqbN"
@@ -86,7 +86,7 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eggNIi fRKxUt sc-emptystate"
+    className="sc-eggNIi hBicuy sc-emptystate"
   >
     <div
       className="sc-jNMdTA ideqbN"
