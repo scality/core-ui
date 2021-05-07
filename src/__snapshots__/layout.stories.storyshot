@@ -209,36 +209,40 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
       <div
         className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
-        <button
-          className="sc-dQppl TXKZb sc-button"
-          disabled={false}
-          onClick={[Function]}
-          size="larger"
-          title=""
-          type="button"
+        <div
+          className="sc-euMpXR bqzgdO"
         >
-          <span
-            className="sc-hBEYos hgFzca"
+          <button
+            className="sc-dQppl TXKZb sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="larger"
+            title=""
+            type="button"
           >
             <span
-              className="sc-button-text"
+              className="sc-hBEYos hgFzca"
             >
               <span
-                className="sc-bqyKva osfTx"
-                size="larger"
+                className="sc-button-text"
               >
-                <i
-                  className="fas fa-bars"
-                />
-              </span>
-              <span
-                className="sc-kstrdz ZegCk"
-              >
-                
+                <span
+                  className="sc-bqyKva osfTx"
+                  size="larger"
+                >
+                  <i
+                    className="fas fa-bars"
+                  />
+                </span>
+                <span
+                  className="sc-kstrdz ZegCk"
+                >
+                  
+                </span>
               </span>
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
         <div
           className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
@@ -1486,36 +1490,40 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
       <div
         className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
-        <button
-          className="sc-dQppl TXKZb sc-button"
-          disabled={false}
-          onClick={[Function]}
-          size="larger"
-          title=""
-          type="button"
+        <div
+          className="sc-euMpXR bqzgdO"
         >
-          <span
-            className="sc-hBEYos hgFzca"
+          <button
+            className="sc-dQppl TXKZb sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="larger"
+            title=""
+            type="button"
           >
             <span
-              className="sc-button-text"
+              className="sc-hBEYos hgFzca"
             >
               <span
-                className="sc-bqyKva osfTx"
-                size="larger"
+                className="sc-button-text"
               >
-                <i
-                  className="fas fa-bars"
-                />
-              </span>
-              <span
-                className="sc-kstrdz ZegCk"
-              >
-                
+                <span
+                  className="sc-bqyKva osfTx"
+                  size="larger"
+                >
+                  <i
+                    className="fas fa-bars"
+                  />
+                </span>
+                <span
+                  className="sc-kstrdz ZegCk"
+                >
+                  
+                </span>
               </span>
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
         <div
           className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
