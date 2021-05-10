@@ -5,7 +5,7 @@ exports[`Storyshots Components/Chart/GlobalHealthBar Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Global Health Component Demo
   </h3>
@@ -22,7 +22,7 @@ exports[`Storyshots Components/Chart/GlobalHealthBar Default 1`] = `
     />
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     No alert
   </h3>
@@ -39,7 +39,7 @@ exports[`Storyshots Components/Chart/GlobalHealthBar Default 1`] = `
     />
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Alert triggered earlier than the starting time
   </h3>
@@ -56,7 +56,7 @@ exports[`Storyshots Components/Chart/GlobalHealthBar Default 1`] = `
     />
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     First Label always includes the month label
   </h3>

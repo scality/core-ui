@@ -8,18 +8,18 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
     className="sc-fXoxut hlihWY sc-modal"
   >
     <div
-      className="sc-Fyfyc bWMDut sc-modal-content"
+      className="sc-Fyfyc knPYFR sc-modal-content"
     >
       <div
         className="sc-jXktwP kbLQnd sc-modal-header"
       >
         <span
-          className="sc-eFubAy eJaLpr"
+          className="sc-eFubAy koMxLo"
         >
           Hello
         </span>
         <div
-          className="sc-jmhFOf bTxDCw"
+          className="sc-jmhFOf hpFvbv"
           onClick={[Function]}
         >
           <i
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
           }
         >
           <button
-            className="sc-dQppl gXqrYy sc-button"
+            className="sc-dQppl eoCavo sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -68,7 +68,7 @@ exports[`Storyshots Components/Notification/Modal Default 1`] = `
             </span>
           </button>
           <button
-            className="sc-dQppl iHAjfJ sc-button"
+            className="sc-dQppl lcRckn sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"

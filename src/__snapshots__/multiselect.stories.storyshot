@@ -5,7 +5,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List
   </h3>
@@ -13,10 +13,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       <h3
-        className="sc-httYMd jorLLI"
+        className="sc-httYMd RjbZT"
       >
         Destination Locations
       </h3>
@@ -24,7 +24,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB eXSslE sc-select-container"
+          className="sc-jQbIHB hSIVXy sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -131,7 +131,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl khPIDY sc-button"
+          className="sc-dQppl cfMHkC sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -183,7 +183,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl biNdLu sc-button"
+            className="sc-dQppl kiKrbg sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -217,7 +217,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -231,7 +231,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -284,7 +284,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl biNdLu sc-button"
+            className="sc-dQppl kiKrbg sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -318,7 +318,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>
@@ -332,7 +332,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -366,7 +366,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List without search
   </h3>
@@ -374,10 +374,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       <h3
-        className="sc-httYMd jorLLI"
+        className="sc-httYMd RjbZT"
       >
         Destination Locations
       </h3>
@@ -403,7 +403,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl biNdLu sc-button"
+            className="sc-dQppl kiKrbg sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -437,7 +437,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -451,7 +451,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -504,7 +504,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
             />
           </label>
           <button
-            className="sc-dQppl biNdLu sc-button"
+            className="sc-dQppl kiKrbg sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -538,7 +538,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>
@@ -552,7 +552,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -586,7 +586,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List without Favourite
   </h3>
@@ -594,10 +594,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       <h3
-        className="sc-httYMd jorLLI"
+        className="sc-httYMd RjbZT"
       >
         Destination Locations
       </h3>
@@ -605,7 +605,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB eXSslE sc-select-container"
+          className="sc-jQbIHB hSIVXy sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -712,7 +712,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl khPIDY sc-button"
+          className="sc-dQppl cfMHkC sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -768,7 +768,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -782,7 +782,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -839,7 +839,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>
@@ -853,7 +853,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -887,7 +887,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List without Favourite and Selectbox
   </h3>
@@ -895,10 +895,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       <h3
-        className="sc-httYMd jorLLI"
+        className="sc-httYMd RjbZT"
       >
         Destination Locations
       </h3>
@@ -906,7 +906,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB eXSslE sc-select-container"
+          className="sc-jQbIHB hSIVXy sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1013,7 +1013,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl khPIDY sc-button"
+          className="sc-dQppl cfMHkC sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1053,7 +1053,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -1067,7 +1067,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1108,7 +1108,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>
@@ -1122,7 +1122,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fHYxKZ lhqsxa sc-multi-select-item-right"
         >
           <button
-            className="sc-dQppl ciooyz sc-button"
+            className="sc-dQppl hHQExp sc-button"
             disabled={false}
             onClick={[Function]}
             size="base"
@@ -1156,7 +1156,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List without Remove Button, Favourite and Selectbox
   </h3>
@@ -1164,10 +1164,10 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       <h3
-        className="sc-httYMd jorLLI"
+        className="sc-httYMd RjbZT"
       >
         Destination Locations
       </h3>
@@ -1175,7 +1175,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB eXSslE sc-select-container"
+          className="sc-jQbIHB hSIVXy sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1282,7 +1282,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl khPIDY sc-button"
+          className="sc-dQppl cfMHkC sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1322,7 +1322,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -1346,7 +1346,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>
@@ -1363,7 +1363,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     MultiSelect List without Title, Remove Button, Favourite and Selectbox
   </h3>
@@ -1371,14 +1371,14 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
     className="storybook-mutiselect-container"
   >
     <div
-      className="sc-dUrnRO kVoNqc sc-multi-select-list"
+      className="sc-dUrnRO hwpXY sc-multi-select-list"
     >
       
       <div
         className="sc-hjWSAi iXWFQp sc-multi-select-list-search"
       >
         <div
-          className="sc-jQbIHB eXSslE sc-select-container"
+          className="sc-jQbIHB hSIVXy sc-select-container"
         >
           <div
             className="sc-select css-2b097c-container"
@@ -1485,7 +1485,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           </div>
         </div>
         <button
-          className="sc-dQppl khPIDY sc-button"
+          className="sc-dQppl cfMHkC sc-button"
           disabled={false}
           onClick={[Function]}
           size="base"
@@ -1525,7 +1525,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             AWS
           </span>
@@ -1549,7 +1549,7 @@ exports[`Storyshots Components/Selector/MultiSelect Default 1`] = `
           className="sc-fWPcDo sAuxg sc-multi-select-item-center"
         >
           <span
-            className="sc-gyUeRy hTKbxr sc-multi-select-item-label"
+            className="sc-gyUeRy UjhWs sc-multi-select-item-label"
           >
             WM
           </span>

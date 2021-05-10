@@ -5,7 +5,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Default Tabs 
   </h3>
@@ -21,7 +21,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={true}
       >
         <p
-          className="sc-bSFVuW fQzqiK sc-tabs-item-title"
+          className="sc-bSFVuW kYvRQo sc-tabs-item-title"
           selected={true}
         >
           <span>
@@ -40,7 +40,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Users
@@ -52,7 +52,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Groups
@@ -64,7 +64,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Roles
@@ -76,7 +76,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Policies
@@ -88,7 +88,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Storage Location
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Properties
@@ -111,14 +111,14 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       className="sc-jvfriV fFTCLF sc-tabs-item-content"
     >
       <h3
-        className="sc-gsTCUz iNyAAg"
+        className="sc-gsTCUz jXevwc"
       >
         Content Here
       </h3>
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Customized Colors
   </h3>
@@ -134,7 +134,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={true}
       >
         <p
-          className="sc-bSFVuW fQzqiK sc-tabs-item-title"
+          className="sc-bSFVuW kYvRQo sc-tabs-item-title"
           selected={true}
         >
           <span>
@@ -153,7 +153,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Users
@@ -165,7 +165,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Groups
@@ -177,7 +177,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Roles
@@ -189,7 +189,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Policies
@@ -201,7 +201,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Storage Location
@@ -213,7 +213,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         selected={false}
       >
         <p
-          className="sc-bSFVuW efwCiZ sc-tabs-item-title"
+          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
           selected={false}
         >
           Properties
@@ -224,7 +224,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       className="sc-jvfriV eEltWm sc-tabs-item-content"
     >
       <h3
-        className="sc-gsTCUz iNyAAg"
+        className="sc-gsTCUz jXevwc"
       >
         Content Here
       </h3>

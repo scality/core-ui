@@ -5,7 +5,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eggNIi hBicuy sc-emptystate"
+    className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
       className="sc-jNMdTA ideqbN"
@@ -47,7 +47,7 @@ exports[`Storyshots Components/EmptyState With Link 1`] = `
       className="sc-dOSReg YzaVf"
     >
       <button
-        className="sc-dQppl cyczWM sc-button"
+        className="sc-dQppl ZagCn sc-button"
         disabled={false}
         onClick={[Function]}
         size="large"
@@ -86,7 +86,7 @@ exports[`Storyshots Components/EmptyState Without Link 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eggNIi hBicuy sc-emptystate"
+    className="sc-eggNIi fRKxUt sc-emptystate"
   >
     <div
       className="sc-jNMdTA ideqbN"

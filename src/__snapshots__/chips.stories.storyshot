@@ -5,12 +5,12 @@ exports[`Storyshots Components/Chips Default 1`] = `
   className="sc-bdfBwQ gFQERV storybook-chips"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Basic Chip
   </h3>
   <div
-    className="sc-idOhPF cNfdiD sc-chips"
+    className="sc-idOhPF goQbzN sc-chips"
     size="base"
   >
     <span
@@ -20,7 +20,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF cGjDPO sc-chips"
+    className="sc-idOhPF cTAbwI sc-chips"
     size="base"
   >
     <span
@@ -30,7 +30,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF dNYUPa sc-chips"
+    className="sc-idOhPF gWAvYA sc-chips"
     size="base"
   >
     <span
@@ -40,7 +40,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF dPIqXk sc-chips"
+    className="sc-idOhPF dFGKBC sc-chips"
     size="base"
   >
     <span
@@ -50,12 +50,12 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Clickable Chip
   </h3>
   <div
-    className="sc-idOhPF hRzTTA sc-chips"
+    className="sc-idOhPF jfEfCO sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -74,7 +74,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF JWcXN sc-chips"
+    className="sc-idOhPF eGAnsL sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -93,7 +93,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF gDUOTA sc-chips"
+    className="sc-idOhPF kltyHK sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -112,7 +112,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <div
-    className="sc-idOhPF lkVHzi sc-chips"
+    className="sc-idOhPF ixKCak sc-chips"
     onClick={[Function]}
     size="base"
   >
@@ -131,12 +131,12 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </span>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Deletable Chip
   </h3>
   <div
-    className="sc-idOhPF cNfdiD sc-chips"
+    className="sc-idOhPF goQbzN sc-chips"
     size="base"
   >
     <span
@@ -153,7 +153,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-dQppl biNdLu sc-chips-remove"
+      className="sc-dQppl kiKrbg sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -184,7 +184,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF cGjDPO sc-chips"
+    className="sc-idOhPF cTAbwI sc-chips"
     size="base"
   >
     <span
@@ -201,7 +201,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-dQppl biNdLu sc-chips-remove"
+      className="sc-dQppl kiKrbg sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -232,7 +232,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF dNYUPa sc-chips"
+    className="sc-idOhPF gWAvYA sc-chips"
     size="base"
   >
     <span
@@ -249,7 +249,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-dQppl biNdLu sc-chips-remove"
+      className="sc-dQppl kiKrbg sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -280,7 +280,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF dPIqXk sc-chips"
+    className="sc-idOhPF dFGKBC sc-chips"
     size="base"
   >
     <span
@@ -297,7 +297,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Deletable
     </span>
     <button
-      className="sc-dQppl biNdLu sc-chips-remove"
+      className="sc-dQppl kiKrbg sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -328,12 +328,12 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Different sizes
   </h3>
   <div
-    className="sc-idOhPF frRKJU sc-chips"
+    className="sc-idOhPF fWyiqb sc-chips"
     size="smaller"
   >
     <span
@@ -350,7 +350,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Smaller
     </span>
     <button
-      className="sc-dQppl bzmQge sc-chips-remove"
+      className="sc-dQppl bBXkQR sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="smaller"
@@ -381,7 +381,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF fTwzKl sc-chips"
+    className="sc-idOhPF doScgX sc-chips"
     size="small"
   >
     <span
@@ -398,7 +398,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Small
     </span>
     <button
-      className="sc-dQppl hMEKsm sc-chips-remove"
+      className="sc-dQppl dCygno sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="small"
@@ -429,7 +429,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF dNYUPa sc-chips"
+    className="sc-idOhPF gWAvYA sc-chips"
     size="base"
   >
     <span
@@ -446,7 +446,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Base
     </span>
     <button
-      className="sc-dQppl biNdLu sc-chips-remove"
+      className="sc-dQppl kiKrbg sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="base"
@@ -477,7 +477,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF fkNdMM sc-chips"
+    className="sc-idOhPF cuoxsP sc-chips"
     size="large"
   >
     <span
@@ -494,7 +494,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Large
     </span>
     <button
-      className="sc-dQppl cmnWpD sc-chips-remove"
+      className="sc-dQppl ibQsJM sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="large"
@@ -525,7 +525,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
     </button>
   </div>
   <div
-    className="sc-idOhPF bqDgjE sc-chips"
+    className="sc-idOhPF fBXnZU sc-chips"
     size="larger"
   >
     <span
@@ -542,7 +542,7 @@ exports[`Storyshots Components/Chips Default 1`] = `
       Larger
     </span>
     <button
-      className="sc-dQppl dmOQZm sc-chips-remove"
+      className="sc-dQppl lcmyie sc-chips-remove"
       disabled={false}
       onClick={[Function]}
       size="larger"

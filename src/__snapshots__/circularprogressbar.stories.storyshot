@@ -5,15 +5,15 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     With Default Color
   </h3>
   <div
-    className="sc-dmlrTW kwDnaA sc-circularprogressbar"
+    className="sc-dmlrTW kYgzhs sc-circularprogressbar"
   >
     <span
-      className="sc-kfzAmx cHkBzY"
+      className="sc-kfzAmx exhfpD"
     >
       Total Capacity
     </span>
@@ -37,7 +37,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         transform="rotate(-90 75  75)"
       />
       <text
-        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
+        className="sc-hKgILt gmmoer sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"
@@ -48,15 +48,15 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     </svg>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     With Custom Color
   </h3>
   <div
-    className="sc-dmlrTW kwDnaA sc-circularprogressbar"
+    className="sc-dmlrTW kYgzhs sc-circularprogressbar"
   >
     <span
-      className="sc-kfzAmx cHkBzY"
+      className="sc-kfzAmx exhfpD"
     >
       Total Capacity
     </span>
@@ -81,7 +81,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         transform="rotate(-90 55  55)"
       />
       <text
-        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
+        className="sc-hKgILt gmmoer sc-circularprogressbar-text"
         dominantBaseline="middle"
         style={
           Object {
@@ -96,7 +96,7 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
         4.9 PB
       </text>
       <text
-        className="sc-hKgILt jVqleL sc-circularprogressbar-text"
+        className="sc-hKgILt gmmoer sc-circularprogressbar-text"
         dominantBaseline="middle"
         textAnchor="middle"
         x="50%"

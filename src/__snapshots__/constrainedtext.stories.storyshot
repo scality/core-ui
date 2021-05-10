@@ -5,7 +5,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Constrained Text
   </h3>
@@ -34,7 +34,7 @@ exports[`Storyshots Components/Constrainedtext Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     With the ability to customize the style of tooltip
   </h3>

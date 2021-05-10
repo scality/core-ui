@@ -5,7 +5,7 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eCssSg iTLdDR sc-banner"
+    className="sc-eCssSg mucrf sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -30,7 +30,7 @@ exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
 
 exports[`Storyshots Components/Notification/Banner Playground 1`] = `
 <div
-  className="sc-eCssSg BCWFZ sc-banner"
+  className="sc-eCssSg iRuLbv sc-banner"
 >
   <i
     className="fas fa-exclamation-triangle"
@@ -57,7 +57,7 @@ exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eCssSg BCWFZ sc-banner"
+    className="sc-eCssSg iRuLbv sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"
@@ -85,7 +85,7 @@ exports[`Storyshots Components/Notification/Banner Warning Banner 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-eCssSg hOeTmF sc-banner"
+    className="sc-eCssSg inOfwX sc-banner"
   >
     <i
       className="fas fa-exclamation-triangle"

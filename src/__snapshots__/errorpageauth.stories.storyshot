@@ -11,10 +11,10 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth Default 1`] = `
       className="sc-GqfZa cDBkfl"
     >
       <i
-        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh WPrdl"
+        className="sc-gGmIRh lgzzDF"
       >
         Authenticating...
       </h2>
@@ -23,7 +23,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth Default 1`] = `
       className="sc-GqfZa cDBkfl"
     >
       <div
-        className="sc-clsHhM giUgiK"
+        className="sc-clsHhM iOtoRS"
       >
         <p
           className="sc-fbkhIv bvaRoK"
@@ -52,10 +52,10 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Locale 1`] = `
       className="sc-GqfZa cDBkfl"
     >
       <i
-        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh WPrdl"
+        className="sc-gGmIRh lgzzDF"
       >
         Authentification
       </h2>
@@ -64,7 +64,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Locale 1`] = `
       className="sc-GqfZa cDBkfl"
     >
       <div
-        className="sc-clsHhM giUgiK"
+        className="sc-clsHhM iOtoRS"
       >
         <p
           className="sc-fbkhIv bvaRoK"
@@ -108,10 +108,10 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Support Link 1`] 
       className="sc-GqfZa cDBkfl"
     >
       <i
-        className="sc-fWSCIC beOrEb fas fa-info-circle fa-2x"
+        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh WPrdl"
+        className="sc-gGmIRh lgzzDF"
       >
         Authenticating...
       </h2>
@@ -120,7 +120,7 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Support Link 1`] 
       className="sc-GqfZa cDBkfl"
     >
       <div
-        className="sc-clsHhM giUgiK"
+        className="sc-clsHhM iOtoRS"
       >
         <p
           className="sc-fbkhIv bvaRoK"

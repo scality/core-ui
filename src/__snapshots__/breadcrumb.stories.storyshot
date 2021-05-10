@@ -5,7 +5,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Default Breadcrumb 
   </h3>
@@ -13,7 +13,7 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
     className="sc-fubCfw gUlWvG sc-breadcrumb"
   >
     <li
-      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
+      className="sc-pFZIQ iPfFkL sc-breadcrumb_item"
     >
       <a
         href="home"
@@ -22,14 +22,14 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
+      className="sc-jrAGrp hsWhRb sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
+      className="sc-pFZIQ iPfFkL sc-breadcrumb_item"
     >
       <a
         href="cluster"
@@ -38,14 +38,14 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
+      className="sc-jrAGrp hsWhRb sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ eBPMpP sc-breadcrumb_item"
+      className="sc-pFZIQ iPfFkL sc-breadcrumb_item"
     >
       <a
         href="node"
@@ -55,14 +55,14 @@ exports[`Storyshots Components/Navigation/Breadcrumb Default 1`] = `
       </a>
     </li>
     <li
-      className="sc-jrAGrp iVmIdZ sc-breadcrumb_separator"
+      className="sc-jrAGrp hsWhRb sc-breadcrumb_separator"
     >
       <i
         className="fas fa-chevron-right"
       />
     </li>
     <li
-      className="sc-pFZIQ bbbKxP sc-breadcrumb_item"
+      className="sc-pFZIQ fZEzhH sc-breadcrumb_item"
     >
       <label>
         volumes

@@ -5,12 +5,12 @@ exports[`Storyshots Components/Button Default 1`] = `
   className="sc-bdfBwQ gFQERV storybook-button"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Default
   </h3>
   <button
-    className="sc-dQppl fyTqZg sc-button"
+    className="sc-dQppl eOmGaT sc-button"
     disabled={false}
     size="smaller"
     title=""
@@ -31,7 +31,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gmFhNU sc-button"
+    className="sc-dQppl cNAIFa sc-button"
     disabled={false}
     size="small"
     title=""
@@ -52,7 +52,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl khPIDY sc-button"
+    className="sc-dQppl cfMHkC sc-button"
     data-cy="default_button"
     disabled={false}
     size="base"
@@ -74,7 +74,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gtRCIV sc-button"
+    className="sc-dQppl hhEShW sc-button"
     disabled={false}
     size="large"
     title=""
@@ -95,7 +95,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gsehZQ sc-button"
+    className="sc-dQppl hFVBaQ sc-button"
     disabled={false}
     size="larger"
     title=""
@@ -116,12 +116,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Variant
   </h3>
   <button
-    className="sc-dQppl khPIDY sc-button"
+    className="sc-dQppl cfMHkC sc-button"
     disabled={false}
     size="base"
     title=""
@@ -142,7 +142,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl iHAjfJ sc-button"
+    className="sc-dQppl lcRckn sc-button"
     disabled={false}
     size="base"
     title=""
@@ -163,7 +163,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl ewEdOq sc-button"
+    className="sc-dQppl ghFoGc sc-button"
     disabled={false}
     size="base"
     title=""
@@ -184,7 +184,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl hwkZsf sc-button"
+    className="sc-dQppl jtgtJ sc-button"
     disabled={false}
     size="base"
     title=""
@@ -205,12 +205,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Outlined
   </h3>
   <button
-    className="sc-dQppl gXqrYy sc-button"
+    className="sc-dQppl eoCavo sc-button"
     disabled={false}
     onClick={[Function]}
     size="base"
@@ -232,12 +232,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Disabled
   </h3>
   <button
-    className="sc-dQppl ijRcfX sc-button"
+    className="sc-dQppl byboix sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -259,7 +259,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl hrrdev sc-button"
+    className="sc-dQppl hMCSbJ sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -281,7 +281,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl bwRbhX sc-button"
+    className="sc-dQppl kXGIBt sc-button"
     disabled={true}
     onClick={[Function]}
     size="base"
@@ -303,7 +303,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gLlses sc-button"
+    className="sc-dQppl kxLMtY sc-button"
     disabled={true}
     size="larger"
     title=""
@@ -332,12 +332,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Link
   </h3>
   <a
-    className="sc-fodVxV kECwbg sc-button"
+    className="sc-fodVxV liecnu sc-button"
     disabled={false}
     href="/"
     size="base"
@@ -350,12 +350,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </a>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Loading
   </h3>
   <button
-    className="sc-dQppl kDPRpI sc-button"
+    className="sc-dQppl gFcHxG sc-button"
     disabled={true}
     size="base"
     title=""
@@ -365,7 +365,7 @@ exports[`Storyshots Components/Button Default 1`] = `
       className="sc-hBEYos hgFzca"
     >
       <div
-        className="sc-kEjbxe hoxgpa sc-loader"
+        className="sc-kEjbxe hllpNU sc-loader"
         color="#A14FBF"
         size="base"
       >
@@ -500,12 +500,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Button Text Icon
   </h3>
   <button
-    className="sc-dQppl fyTqZg sc-button"
+    className="sc-dQppl eOmGaT sc-button"
     disabled={false}
     size="smaller"
     title=""
@@ -534,7 +534,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gmFhNU sc-button"
+    className="sc-dQppl cNAIFa sc-button"
     disabled={false}
     size="small"
     title=""
@@ -563,7 +563,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl khPIDY sc-button"
+    className="sc-dQppl cfMHkC sc-button"
     disabled={false}
     size="base"
     title=""
@@ -592,7 +592,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gtRCIV sc-button"
+    className="sc-dQppl hhEShW sc-button"
     disabled={false}
     size="large"
     title=""
@@ -621,7 +621,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gsehZQ sc-button"
+    className="sc-dQppl hFVBaQ sc-button"
     disabled={false}
     size="larger"
     title=""
@@ -650,12 +650,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Icon Button
   </h3>
   <button
-    className="sc-dQppl fyTqZg sc-button"
+    className="sc-dQppl eOmGaT sc-button"
     disabled={false}
     size="smaller"
     title=""
@@ -684,7 +684,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gmFhNU sc-button"
+    className="sc-dQppl cNAIFa sc-button"
     disabled={false}
     size="small"
     title=""
@@ -713,7 +713,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl khPIDY sc-button"
+    className="sc-dQppl cfMHkC sc-button"
     disabled={false}
     size="base"
     title=""
@@ -742,7 +742,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gtRCIV sc-button"
+    className="sc-dQppl hhEShW sc-button"
     disabled={false}
     size="large"
     title=""
@@ -771,7 +771,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl gsehZQ sc-button"
+    className="sc-dQppl hFVBaQ sc-button"
     disabled={false}
     size="larger"
     title=""
@@ -800,12 +800,12 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Icon Button Inverted
   </h3>
   <button
-    className="sc-dQppl bzmQge sc-button"
+    className="sc-dQppl bBXkQR sc-button"
     disabled={false}
     size="smaller"
     title=""
@@ -834,7 +834,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl hMEKsm sc-button"
+    className="sc-dQppl dCygno sc-button"
     disabled={false}
     size="small"
     title=""
@@ -863,7 +863,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl biNdLu sc-button"
+    className="sc-dQppl kiKrbg sc-button"
     disabled={false}
     size="base"
     title=""
@@ -892,7 +892,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl cmnWpD sc-button"
+    className="sc-dQppl ibQsJM sc-button"
     disabled={false}
     size="large"
     title=""
@@ -921,7 +921,7 @@ exports[`Storyshots Components/Button Default 1`] = `
     </span>
   </button>
   <button
-    className="sc-dQppl dmOQZm sc-button"
+    className="sc-dQppl lcmyie sc-button"
     disabled={false}
     size="larger"
     title=""

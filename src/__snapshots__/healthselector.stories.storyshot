@@ -5,7 +5,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Basic usage
   </h3>
@@ -13,7 +13,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-TmcTc kyjohe sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-hlTvYk iHAjfJ jpYxKF trigger"
+      className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
@@ -46,7 +46,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     </button>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Health Selector Sizes (Triggering StoryBook actions)
   </h3>
@@ -60,7 +60,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-TmcTc kyjohe sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk hQnMTF gIlKrR trigger"
+          className="sc-dQppl sc-hlTvYk bpqEBW cVpNoZ trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="smaller"
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-TmcTc kyjohe sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk YKmql BGnUx trigger"
+          className="sc-dQppl sc-hlTvYk iOeqYf crBGLx trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="small"
@@ -140,7 +140,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-TmcTc kyjohe sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk iHAjfJ jpYxKF trigger"
+          className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="base"
@@ -184,7 +184,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-TmcTc kyjohe sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk cyczWM cDHrGp trigger"
+          className="sc-dQppl sc-hlTvYk ZagCn llZRwt trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="large"
@@ -224,7 +224,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
         className="sc-TmcTc kyjohe sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk kCBcnZ fmkqOF trigger"
+          className="sc-dQppl sc-hlTvYk imFlVF gMUTkd trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="larger"
@@ -259,7 +259,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     With custom labels (Triggering StoryBook actions)
   </h3>
@@ -267,7 +267,7 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     className="sc-TmcTc kyjohe sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-hlTvYk iHAjfJ jpYxKF trigger"
+      className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"

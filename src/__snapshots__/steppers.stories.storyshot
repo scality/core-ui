@@ -5,7 +5,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Default Steppers 
   </h3>
@@ -35,7 +35,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Node Registerd
         </span>
@@ -62,7 +62,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Deploy Salt Minion on node
         </span>
@@ -70,7 +70,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-cHjxUU NDwoS"
         >
           <button
-            className="sc-dQppl gmFhNU sc-button"
+            className="sc-dQppl cNAIFa sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -115,7 +115,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Workload Plane
         </span>
@@ -142,7 +142,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Control Plane
         </span>
@@ -166,7 +166,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Extend etcd cluster to node
         </span>
@@ -174,7 +174,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Steppers with loading
   </h3>
@@ -204,7 +204,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Node Registerd
         </span>
@@ -220,7 +220,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-dRPiIx FMQgM"
         >
           <div
-            className="sc-kEjbxe hoxgpa sc-loader"
+            className="sc-kEjbxe hllpNU sc-loader"
             color="#A14FBF"
             size="base"
           >
@@ -352,7 +352,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Deploy Salt Minion on node
         </span>
@@ -360,7 +360,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-cHjxUU NDwoS"
         >
           <button
-            className="sc-dQppl gmFhNU sc-button"
+            className="sc-dQppl cNAIFa sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -405,7 +405,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Workload Plane
         </span>
@@ -432,7 +432,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Control Plane
         </span>
@@ -456,7 +456,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Extend etcd cluster to node
         </span>
@@ -464,7 +464,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
     </div>
   </div>
   <h3
-    className="sc-gsTCUz iNyAAg"
+    className="sc-gsTCUz jXevwc"
   >
     Steppers with error
   </h3>
@@ -494,7 +494,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Node Registerd
         </span>
@@ -523,7 +523,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Deploy Salt Minion on node
         </span>
@@ -550,7 +550,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Workload Plane
         </span>
@@ -558,7 +558,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
           className="sc-cHjxUU NDwoS"
         >
           <button
-            className="sc-dQppl gmFhNU sc-button"
+            className="sc-dQppl cNAIFa sc-button"
             disabled={false}
             onClick={[Function]}
             size="small"
@@ -603,7 +603,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Add node to Control Plane
         </span>
@@ -627,7 +627,7 @@ exports[`Storyshots Components/Progress & loading/Steppers Default 1`] = `
         className="sc-tkKAw kItnzo"
       >
         <span
-          className="sc-hYZPRl jMeJrP"
+          className="sc-hYZPRl crhSqP"
         >
           Extend etcd cluster to node
         </span>
