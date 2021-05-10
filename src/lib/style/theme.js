@@ -99,12 +99,12 @@ export const defaultTheme = {
     backgroundLevel2: '#323245',
     backgroundLevel3: '#232331',
     backgroundLevel4: '#171721',
-    textPrimary: '#FFFFFF',
-    textSecondary: '#EAEAEA',
-    textTertiary: '#B5B5B5',
+    textPrimary: '#EAEAEA',
+    textSecondary: '#B5B5B5',
+    textTertiary: '#B5B5B5', // deprecated color
     textReverse: '#000000',
     textLink: '#71AEFF',
-    // degraded colors
+    // deprecated colors
     alert: '#FFE508',
     base: '#7B7B7B',
     primary: '#1D1D1D',
@@ -136,13 +136,13 @@ export const sidebarItemHeight = '40px';
 export const sidebarWidth = '40px';
 
 export const fontSize = {
-  smaller: '10px',
-  small: '12px',
-  base: '14px',
-  large: '16px',
-  larger: '20px',
-  huge: '22px',
-  massive: '24px',
+  smaller: '0.71rem',
+  small: '0.85rem',
+  base: '1rem',
+  large: '1.14rem',
+  larger: '1.43rem',
+  huge: '1.57rem', // no use case for the moment
+  massive: '1.71rem', // no use case for the moment
 };
 
 export const fontWeight = {
