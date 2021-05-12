@@ -1,95 +1,99 @@
 //@flow
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getTheme } from '../../utils';
 
 type Props = {
   toggle: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
-  label: string,
+  label?: string,
 };
-const ToggleContainer = styled.div`
-  display: flex;
+
+const width = 20;
+const height = 10;
+
+const Switch = styled.label`
+  cursor: pointer;
+  & input {
+    width: 0;
+    height: 0;
+    margin: 0;
+    position: absolute;
+  }
+
+  & span {
+    display: block;
+    position: relative;
+    width: ${width}px;
+    height: ${height}px;
+    border-radius: ${width}px;
+    padding: 2px;
+    background-color: ${(props) =>
+  getTheme(props)[props.toggle ? 'selectedActive' : 'infoPrimary']};
+    transition: 0.4s;
+  }
+
+  & span:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    background-color: ${(props) =>
+  getTheme(props)[props.toggle ? 'selectedActive' : 'backgroundLevel1']};
+    border-radius: ${width}px;
+    transition: 0.4s;
+  }
+
+  & span:after {
+    content: '';
+    display: block;
+    width: ${height}px;
+    height: 100%;
+    background-color: ${(props) =>
+  getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
+    border-radius: 50%;
+    position: relative;
+    right: 0;
+    transition: 0.4s;
+  }
+
+  & input:checked + span:after {
+    right: calc(-100% + ${height}px);
+  }
+`;
+
+const ToggleContainer = styled.label`
+  display: inline-flex;
   align-items: center;
   position: relative;
 `;
 
-const Switch = styled.label`
-  position: relative;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: ${defaultTheme.padding.small};
-
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  ${(props) => {
-    const { secondary } = getTheme(props);
-    return css`
-      .sc-slider {
-        position: absolute;
-        cursor: pointer;
-        top: 10px;
-        left: 0;
-        right: 0;
-        background-color: ${defaultTheme.grayLight};
-        transition: 0.5s;
-        height: 4px;
-        border-radius: 4px;
-
-        &:hover {
-          &:before {
-            box-shadow: 0 0 3px ${defaultTheme.grayLight};
-          }
-        }
-      }
-
-      .sc-slider:before {
-        position: absolute;
-        content: '';
-        height: 12px;
-        width: 12px;
-        top: -4px;
-        background-color: ${defaultTheme.grayLight};
-        transition: 0.5s;
-        border-radius: 50%;
-      }
-
-      input:checked + .sc-slider {
-        background-color: ${secondary};
-        &:hover {
-          &:before {
-            box-shadow: 0 0 3px ${secondary};
-          }
-        }
-      }
-
-      input:checked + .sc-slider:before {
-        transform: translateX(12px);
-        background-color: ${secondary};
-      }
-    `;
-  }}
-`;
-
 const StyledSwitchLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
-  color: ${getThemePropSelector('textPrimary')};
+  margin-left: ${defaultTheme.padding.smaller};
+  font-size: ${defaultTheme.fontSize.base};
+  color: ${(props) =>
+  getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
   return (
     <ToggleContainer className="sc-toggle">
-      <Switch>
-        <input type="checkbox" checked={toggle} onChange={onChange} {...rest} />
-        <span className="sc-slider" />
+      <Switch toggle={toggle}>
+        <input
+          type="checkbox"
+          checked={toggle}
+          onChange={onChange}
+          {...rest}
+        />
+        <span className="sc-slider"/>
       </Switch>
-      <StyledSwitchLabel className="text">{label}</StyledSwitchLabel>
+      {label && (
+        <StyledSwitchLabel toggle={toggle} className="text">
+          {label}
+        </StyledSwitchLabel>
+      )}
     </ToggleContainer>
   );
 }
