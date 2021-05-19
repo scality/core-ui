@@ -178,8 +178,8 @@ function Sidebar({
               variant="backgroundLevel1"
               icon={<i className="fas fa-bars" />}
               onClick={() => {
-                onToggleClick();
                 setHovered(false);
+                onToggleClick();
               }}
             />
           </MenuItemIcon>
