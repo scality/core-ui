@@ -1,95 +1,92 @@
 //@flow
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getTheme } from '../../utils';
 
 type Props = {
   toggle: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
-  label: string,
+  label?: string,
 };
-const ToggleContainer = styled.div`
-  display: flex;
+const ToggleContainer = styled.label`
+  display: inline-flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 `;
 
 const Switch = styled.label`
+  cursor: pointer;
   position: relative;
-  display: inline-block;
   width: 24px;
-  height: 24px;
-  margin-right: ${defaultTheme.padding.small};
+  height: 14px;
+`;
 
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+const Slider = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${(props) => getTheme(props).backgroundLevel1};
+  border: 1px solid
+    ${(props) =>
+      getTheme(props)[props.toggle ? 'selectedActive' : 'infoPrimary']};
+  border-radius: 8px;
+  transition: 0.4s;
+  -moz-transform: rotate(0.02deg);
+  &:before {
+    border-radius: 100%;
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 10px;
+    left: 1px;
+    top: 1px;
+    background-color: ${(props) =>
+      getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
+    transition: 0.4s;
+    -moz-transform: rotate(0.02deg);
+  }
+`;
+
+const ToggleInput = styled.input`
+  &:checked + ${Slider} {
+    background-color: ${(props) => getTheme(props).selectedActive};
+  }
+  &:checked + ${Slider}:before {
+    transform: translateX(10px);
   }
 
-  ${(props) => {
-    const { secondary } = getTheme(props);
-    return css`
-      .sc-slider {
-        position: absolute;
-        cursor: pointer;
-        top: 10px;
-        left: 0;
-        right: 0;
-        background-color: ${defaultTheme.grayLight};
-        transition: 0.5s;
-        height: 4px;
-        border-radius: 4px;
-
-        &:hover {
-          &:before {
-            box-shadow: 0 0 3px ${defaultTheme.grayLight};
-          }
-        }
-      }
-
-      .sc-slider:before {
-        position: absolute;
-        content: '';
-        height: 12px;
-        width: 12px;
-        top: -4px;
-        background-color: ${defaultTheme.grayLight};
-        transition: 0.5s;
-        border-radius: 50%;
-      }
-
-      input:checked + .sc-slider {
-        background-color: ${secondary};
-        &:hover {
-          &:before {
-            box-shadow: 0 0 3px ${secondary};
-          }
-        }
-      }
-
-      input:checked + .sc-slider:before {
-        transform: translateX(12px);
-        background-color: ${secondary};
-      }
-    `;
-  }}
+  display: none;
 `;
 
 const StyledSwitchLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
-  color: ${getThemePropSelector('textPrimary')};
+  margin-left: ${defaultTheme.padding.smaller};
+  font-size: ${defaultTheme.fontSize.base};
+  color: ${(props) =>
+    getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
   return (
     <ToggleContainer className="sc-toggle">
       <Switch>
-        <input type="checkbox" checked={toggle} onChange={onChange} {...rest} />
-        <span className="sc-slider" />
+        <ToggleInput
+          type="checkbox"
+          checked={toggle}
+          onChange={onChange}
+          {...rest}
+        />
+        <Slider className="sc-slider" toggle={toggle} />
       </Switch>
-      <StyledSwitchLabel className="text">{label}</StyledSwitchLabel>
+      {label && (
+        <StyledSwitchLabel toggle={toggle} className="text">
+          {label}
+        </StyledSwitchLabel>
+      )}
     </ToggleContainer>
   );
 }

@@ -4,51 +4,58 @@ exports[`Storyshots Components/Toggle Default 1`] = `
 <div
   className="sc-bdfBwQ gFQERV"
 >
-  <div
-    className="sc-edoZmE esqODk sc-toggle"
+  <h3
+    className="sc-gsTCUz iNyAAg"
+  >
+    Basic toggle
+  </h3>
+  <label
+    className="sc-edoZmE kOyezC sc-toggle"
   >
     <label
-      className="sc-jlIkXa Fdezr"
+      className="sc-jlIkXa dTthbR"
     >
       <input
         checked={false}
+        className="sc-hYAvag iIlcMB"
         data-cy="default_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="sc-slider"
+        className="sc-iWRGeL kyXPVZ sc-slider"
       />
     </label>
-    <span
-      className="sc-iWRGeL kguAWy text"
-    >
-      Airplane Mode
-    </span>
-  </div>
-  <div
-    className="sc-edoZmE esqODk sc-toggle"
+  </label>
+  <h3
+    className="sc-gsTCUz iNyAAg"
+  >
+    Labelled toggle
+  </h3>
+  <label
+    className="sc-edoZmE kOyezC sc-toggle"
   >
     <label
-      className="sc-jlIkXa Fdezr"
+      className="sc-jlIkXa dTthbR"
     >
       <input
-        checked={true}
-        data-cy="custom_toggle"
+        checked={false}
+        className="sc-hYAvag iIlcMB"
+        data-cy="default_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="sc-slider"
+        className="sc-iWRGeL kyXPVZ sc-slider"
       />
     </label>
     <span
-      className="sc-iWRGeL kguAWy text"
+      className="sc-hJJQhR jfeInS text"
     >
       Airplane Mode
     </span>
-  </div>
+  </label>
 </div>
 `;

@@ -1,8 +1,7 @@
 //@flow
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import React, { useState } from 'react';
 import Toggle from '../src/lib/components/toggle/Toggle.component';
-import { Wrapper } from './common';
+import { Title, Wrapper } from './common';
 
 export default {
   title: 'Components/Toggle',
@@ -10,21 +9,23 @@ export default {
 };
 
 export const Default = () => {
+  const [toggle, setToggle] = useState(false);
   return (
     <Wrapper>
+      <Title>Basic toggle</Title>
       <Toggle
-        label="Airplane Mode"
-        onChange={action('toggle clicked')}
-        toggle={false}
+        onChange={() => setToggle(!toggle)}
+        toggle={toggle}
         name="toggle"
         data-cy="default_toggle"
       />
+      <Title>Labelled toggle</Title>
       <Toggle
         label="Airplane Mode"
-        onChange={action('toggle clicked')}
-        toggle={true}
+        onChange={() => setToggle(!toggle)}
+        toggle={toggle}
         name="toggle"
-        data-cy="custom_toggle"
+        data-cy="default_toggle"
       />
     </Wrapper>
   );
