@@ -1,10 +1,13 @@
 //@flow
-import React from 'react';
+import * as React from 'react';
+
 import styled from 'styled-components';
 
-export type Props = {
-  children: string,
-  status?: 'unknown' | 'healthy' | 'warning' | 'critical',
+type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
+
+type Props = {
+  children: React.Node | string,
+  status?: Status,
 };
 
 const BasicTextStyle = styled.span`
