@@ -152,12 +152,30 @@ export const fontWeight = {
   bold: '700',
 };
 
+/**
+ * @deprecated
+ */
 export const padding = {
   smaller: '4px',
   small: '8px',
   base: '16px',
   large: '20px',
   larger: '24px',
+};
+
+export const spacing = {
+  sp0: '0',
+  sp1: '0.071rem',
+  sp2: '0.143rem',
+  sp4: '0.286rem',
+  sp8: '0.571rem',
+  sp12: '0.857rem',
+  sp14: '1rem',
+  sp16: '1.143rem',
+  sp20: '1.429rem',
+  sp24: '1.714rem',
+  sp28: '2rem',
+  sp32: '2.286rem',
 };
 
 // Svg size
