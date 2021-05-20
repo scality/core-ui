@@ -46,6 +46,16 @@ import ErrorPage500 from './components/error-pages/ErrorPage500.component';
 import ErrorPageAuth from './components/error-pages/ErrorPageAuth.component';
 //import Icon from './components/icon/Icon.component';
 import TextBadge from './components/textbadge/TextBadge.component';
+import SpacedBox from './components/spacedbox/SpacedBox';
+import {
+  BasicText,
+  SecondaryText,
+  LargerText,
+  EmphaseText,
+  StatusText,
+  LargeText,
+  SmallerText,
+} from './components/text/Text.component';
 
 export {
   LOADER_SIZE,
@@ -92,4 +102,12 @@ export {
   ErrorPageAuth,
   //Icon,
   TextBadge,
+  BasicText,
+  SecondaryText,
+  LargerText,
+  EmphaseText,
+  StatusText,
+  LargeText,
+  SmallerText,
+  SpacedBox,
 };
