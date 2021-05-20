@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
 
@@ -28,6 +28,9 @@ export default {
 };
 
 export const Default = () => {
+  const [expandedWithToggle, setExpandedWithToggle] = useState(false);
+  const [expandedHoverable, setExpandedHoverable] = useState(false);
+
   return (
     <div>
       <h3>Sidebar docked</h3>
@@ -44,8 +47,8 @@ export const Default = () => {
       <div style={{ width: '150px' }}>
         <Sidebar
           actions={actions}
-          expanded
-          onToggleClick={action('toggle clicked')}
+          expanded={expandedWithToggle}
+          onToggleClick={() => setExpandedWithToggle(!expandedWithToggle)}
         />
       </div>
 
@@ -53,8 +56,9 @@ export const Default = () => {
       <div style={{ width: '150px' }}>
         <Sidebar
           actions={actions}
+          expanded={expandedHoverable}
           hoverable
-          onToggleClick={action('toggle clicked')}
+          onToggleClick={() => setExpandedHoverable(!expandedHoverable)}
         />
       </div>
     </div>

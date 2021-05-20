@@ -209,36 +209,40 @@ exports[`Storyshots Components/Navigation/Layout Hoverable Sidebar 1`] = `
       <div
         className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
-        <button
-          className="sc-dQppl TXKZb sc-button"
-          disabled={false}
-          onClick={[Function]}
-          size="larger"
-          title=""
-          type="button"
+        <div
+          className="sc-euMpXR bqzgdO"
         >
-          <span
-            className="sc-hBEYos hgFzca"
+          <button
+            className="sc-dQppl TXKZb sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="larger"
+            title=""
+            type="button"
           >
             <span
-              className="sc-button-text"
+              className="sc-hBEYos hgFzca"
             >
               <span
-                className="sc-bqyKva osfTx"
-                size="larger"
+                className="sc-button-text"
               >
-                <i
-                  className="fas fa-chevron-right"
-                />
-              </span>
-              <span
-                className="sc-kstrdz ZegCk"
-              >
-                
+                <span
+                  className="sc-bqyKva osfTx"
+                  size="larger"
+                >
+                  <i
+                    className="fas fa-bars"
+                  />
+                </span>
+                <span
+                  className="sc-kstrdz ZegCk"
+                >
+                  
+                </span>
               </span>
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
         <div
           className="sc-dFJsGO eUNvUB sc-sidebar-item"
           data-cy="Dashboard"
@@ -1479,12 +1483,12 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
     className="sc-jGVbCA fhpHXx"
   >
     <div
-      className="sc-eGCarw kTIyNm"
+      className="sc-eGCarw cnTMzh"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ kTwauY sc-sidebar"
+        className="sc-ctaXAZ fUdKdL sc-sidebar"
       >
         <div
           className="sc-euMpXR bqzgdO"
@@ -1508,7 +1512,7 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
                   size="larger"
                 >
                   <i
-                    className="fas fa-chevron-left"
+                    className="fas fa-bars"
                   />
                 </span>
                 <span
@@ -1534,11 +1538,6 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
             />
           </div>
           <div
-            className="sc-bsipQr eaOukM"
-          >
-            Dashboard
-          </div>
-          <div
             className="sc-gInsOo hLFNdJ"
           />
         </div>
@@ -1555,11 +1554,6 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
               className="fas fa-server"
             />
           </div>
-          <div
-            className="sc-bsipQr eaOukM"
-          >
-            Servers
-          </div>
         </div>
         <div
           className="sc-dFJsGO jgcupw sc-sidebar-item"
@@ -1573,11 +1567,6 @@ exports[`Storyshots Components/Navigation/Layout Sidebar With Toggle 1`] = `
             <i
               className="fas fa-hdd"
             />
-          </div>
-          <div
-            className="sc-bsipQr eaOukM"
-          >
-            Disks
           </div>
         </div>
       </div>

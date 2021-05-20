@@ -171,23 +171,18 @@ function Sidebar({
         hovered={hovered}
         {...rest}
       >
-        {onToggleClick && expanded && (
+        {onToggleClick && (
           <MenuItemIcon>
             <Button
               size="larger"
               variant="backgroundLevel1"
-              icon={<i className="fas fa-chevron-left" />}
-              onClick={() => onToggleClick()}
+              icon={<i className="fas fa-bars" />}
+              onClick={() => {
+                setHovered(false);
+                onToggleClick();
+              }}
             />
           </MenuItemIcon>
-        )}
-        {onToggleClick && !expanded && (
-          <Button
-            size="larger"
-            variant="backgroundLevel1"
-            icon={<i className="fas fa-chevron-right" />}
-            onClick={() => onToggleClick()}
-          />
         )}
         {actions.map(
           ({ active, label, onClick, icon = null, ...actionRest }, index) => {
