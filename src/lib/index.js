@@ -44,7 +44,6 @@ import ScrollbarWrapper from './components/scrollbarwrapper/ScrollbarWrapper.com
 import ErrorPage404 from './components/error-pages/ErrorPage404.component';
 import ErrorPage500 from './components/error-pages/ErrorPage500.component';
 import ErrorPageAuth from './components/error-pages/ErrorPageAuth.component';
-//import Icon from './components/icon/Icon.component';
 import TextBadge from './components/textbadge/TextBadge.component';
 import SpacedBox from './components/spacedbox/SpacedBox';
 import {
