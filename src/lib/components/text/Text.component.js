@@ -18,7 +18,10 @@ const BasicTextStyle = styled.span`
 `;
 
 const SecondaryTextStyle = styled(BasicTextStyle)`
-  color: ${(props) => props.theme.textSecondary};
+  color: ${(props) => {
+    console.log('core ui SecondaryTextStyle', props);
+    return props.theme.textSecondary;
+  }};
 `;
 
 const LargerTextStyle = styled(BasicTextStyle)`
