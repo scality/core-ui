@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 import styled from 'styled-components';
+import { getTheme } from '../../utils';
 
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 
@@ -11,14 +12,14 @@ type Props = {
 };
 
 const BasicTextStyle = styled.span`
-  color: ${(props) => props.theme.textPrimary};
+  color: ${(props) => getTheme(props).textPrimary};
   font-size: 1rem;
   line-height: 1.71rem;
   font-weight: 400;
 `;
 
 const SecondaryTextStyle = styled(BasicTextStyle)`
-  color: ${(props) => props.theme.textSecondary};
+  color: ${(props) => getTheme(props).textSecondary};
 `;
 
 const LargerTextStyle = styled(BasicTextStyle)`
@@ -31,7 +32,7 @@ const EmphaseTextStyle = styled(BasicTextStyle)`
 `;
 
 const StatusTextStyle = styled(BasicTextStyle)`
-  color: ${(props) => props.theme[`${props.statusColor}`]};
+  color: ${(props) => getTheme(props)[`${props.statusColor}`]};
 `;
 
 const LargetStyle = styled(BasicTextStyle)`
@@ -45,23 +46,23 @@ const SmallerTextStyle = styled(BasicTextStyle)`
   letter-spacing: 2%; // to be defined, percentage value is not valid
 `;
 
-export function BasicText({ children }: Props) {
-  return <BasicTextStyle>{children}</BasicTextStyle>;
+export function BasicText({ children, ...rest }: Props) {
+  return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
 }
 
-export function SecondaryText({ children }: Props) {
-  return <SecondaryTextStyle>{children}</SecondaryTextStyle>;
+export function SecondaryText({ children, ...rest }: Props) {
+  return <SecondaryTextStyle {...rest}>{children}</SecondaryTextStyle>;
 }
 
-export function LargerText({ children }: Props) {
-  return <LargerTextStyle>{children}</LargerTextStyle>;
+export function LargerText({ children, ...rest }: Props) {
+  return <LargerTextStyle {...rest}>{children}</LargerTextStyle>;
 }
 
-export function EmphaseText({ children }: Props) {
-  return <EmphaseTextStyle>{children}</EmphaseTextStyle>;
+export function EmphaseText({ children, ...rest }: Props) {
+  return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
 }
 
-export function StatusText({ children, status }: Props) {
+export function StatusText({ children, status, ...rest }: Props) {
   let statusColor;
   switch (status) {
     case 'healthy':
@@ -77,14 +78,16 @@ export function StatusText({ children, status }: Props) {
       statusColor = 'textSecondary';
   }
   return (
-    <StatusTextStyle statusColor={statusColor}>{children}</StatusTextStyle>
+    <StatusTextStyle statusColor={statusColor} {...rest}>
+      {children}
+    </StatusTextStyle>
   );
 }
 
-export function LargeText({ children }: Props) {
-  return <LargetStyle>{children}</LargetStyle>;
+export function LargeText({ children, ...rest }: Props) {
+  return <LargetStyle {...rest}>{children}</LargetStyle>;
 }
 
-export function SmallerText({ children }: Props) {
-  return <SmallerTextStyle>{children}</SmallerTextStyle>;
+export function SmallerText({ children, ...rest }: Props) {
+  return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
 }
