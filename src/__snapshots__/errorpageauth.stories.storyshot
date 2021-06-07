@@ -5,33 +5,33 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-lcujXC ffFypL sc-error-pageauth"
+    className="sc-fWSCIC cCOjbT sc-error-pageauth"
   >
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <i
-        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
+        className="sc-jONnTn eiuOmP fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh lgzzDF"
+        className="sc-dwfUOf fzTEna"
       >
         Authenticating...
       </h2>
     </div>
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <div
-        className="sc-clsHhM iOtoRS"
+        className="sc-TmcTc lcwSLq"
       >
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           The authentication is in progress.
         </p>
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           If this message persist please try refreshing your page.
         </p>
@@ -46,42 +46,42 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Locale 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-lcujXC ffFypL sc-error-pageauth"
+    className="sc-fWSCIC cCOjbT sc-error-pageauth"
   >
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <i
-        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
+        className="sc-jONnTn eiuOmP fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh lgzzDF"
+        className="sc-dwfUOf fzTEna"
       >
         Authentification
       </h2>
     </div>
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <div
-        className="sc-clsHhM iOtoRS"
+        className="sc-TmcTc lcwSLq"
       >
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           Authentification en cours.
         </p>
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           Si ce message persiste, vous pouvez essayer d'actualiser cette page.
         </p>
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           Vous pouvez également contacter le 
           <a
-            className="sc-dwfUOf fFQJws"
+            className="sc-hlTvYk kZoAaN"
             href="https://www.scality.com/support/"
           >
             support 
@@ -102,42 +102,42 @@ exports[`Storyshots Components/Navigation/ErrorPages/Auth With Support Link 1`] 
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-lcujXC ffFypL sc-error-pageauth"
+    className="sc-fWSCIC cCOjbT sc-error-pageauth"
   >
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <i
-        className="sc-fWSCIC fsvfTz fas fa-info-circle fa-2x"
+        className="sc-jONnTn eiuOmP fas fa-info-circle fa-2x"
       />
       <h2
-        className="sc-gGmIRh lgzzDF"
+        className="sc-dwfUOf fzTEna"
       >
         Authenticating...
       </h2>
     </div>
     <div
-      className="sc-GqfZa cDBkfl"
+      className="sc-aemoO kefQZX"
     >
       <div
-        className="sc-clsHhM iOtoRS"
+        className="sc-TmcTc lcwSLq"
       >
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           The authentication is in progress.
         </p>
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           If this message persist please try refreshing your page.
         </p>
         <p
-          className="sc-fbkhIv bvaRoK"
+          className="sc-jHVexB fJqmfB"
         >
           You may also contact 
           <a
-            className="sc-dwfUOf fFQJws"
+            className="sc-hlTvYk kZoAaN"
             href="https://www.scality.com/support/"
           >
             support 

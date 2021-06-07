@@ -10,10 +10,10 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     With Default Color
   </h3>
   <div
-    className="sc-dmlrTW kYgzhs sc-circularprogressbar"
+    className="sc-hHftDr chnybQ sc-circularprogressbar"
   >
     <span
-      className="sc-kfzAmx exhfpD"
+      className="sc-dmlrTW kJMIow"
     >
       Total Capacity
     </span>
@@ -22,14 +22,14 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
       width={150}
     >
       <circle
-        className="sc-bBXqnf iZFxIV"
+        className="sc-fKFyDc fteVHp"
         cx={75}
         cy={75}
         r={70}
         strokeWidth={10}
       />
       <circle
-        className="sc-fKFyDc cXixBo"
+        className="sc-kfzAmx gMqeim"
         cx={75}
         cy={75}
         r={70}
@@ -53,10 +53,10 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
     With Custom Color
   </h3>
   <div
-    className="sc-dmlrTW kYgzhs sc-circularprogressbar"
+    className="sc-hHftDr chnybQ sc-circularprogressbar"
   >
     <span
-      className="sc-kfzAmx exhfpD"
+      className="sc-dmlrTW kJMIow"
     >
       Total Capacity
     </span>
@@ -65,14 +65,14 @@ exports[`Storyshots Components/Progress & loading/CircularProgressBar Default 1`
       width={110}
     >
       <circle
-        className="sc-bBXqnf iZFxIV"
+        className="sc-fKFyDc fteVHp"
         cx={55}
         cy={55}
         r={50}
         strokeWidth={10}
       />
       <circle
-        className="sc-fKFyDc iVpSWK"
+        className="sc-kfzAmx kjxWtw"
         color="#00ff43"
         cx={55}
         cy={55}

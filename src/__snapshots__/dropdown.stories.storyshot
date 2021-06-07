@@ -10,10 +10,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     Dropdown with text/icon
   </h3>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD iwBSbL trigger"
+      className="sc-bBrOnJ csXkvO trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -34,7 +34,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -43,10 +43,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD dEaVxC trigger"
+      className="sc-bBrOnJ gelQwv trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -67,7 +67,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -76,10 +76,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD hSMrIO trigger"
+      className="sc-bBrOnJ kJQqTr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -100,7 +100,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -109,10 +109,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD kATsru trigger"
+      className="sc-bBrOnJ xHYPP trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -133,7 +133,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -142,10 +142,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD dYUCJs trigger"
+      className="sc-bBrOnJ fAnJgZ trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -166,7 +166,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -180,10 +180,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     Dropdown with icon
   </h3>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD hSMrIO trigger"
+      className="sc-bBrOnJ kJQqTr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -206,10 +206,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     Dropdown with text
   </h3>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD hSMrIO trigger"
+      className="sc-bBrOnJ kJQqTr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -222,7 +222,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         Help
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -236,10 +236,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     Dropdown with variant
   </h3>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD hCcinD trigger"
+      className="sc-bBrOnJ hyLMMC trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -260,7 +260,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         primary
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -269,10 +269,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD hSMrIO trigger"
+      className="sc-bBrOnJ kJQqTr trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -293,7 +293,7 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
         secondary
       </span>
       <span
-        className="sc-iUuytg kpKxJm"
+        className="sc-dOSReg dfzTCZ"
       >
         <i
           className="fas fa-caret-down"
@@ -302,10 +302,10 @@ exports[`Storyshots Components/Dropdown Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-citwmv cZSRlS sc-dropdown"
+    className="sc-eggNIi bjFJv sc-dropdown"
   >
     <div
-      className="sc-iBaPrD dFUBxU trigger"
+      className="sc-bBrOnJ bVBGSV trigger"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

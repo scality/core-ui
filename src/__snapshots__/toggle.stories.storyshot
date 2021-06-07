@@ -10,21 +10,21 @@ exports[`Storyshots Components/Toggle Default 1`] = `
     Basic toggle
   </h3>
   <label
-    className="sc-dkaWxM gaIZNe sc-toggle"
+    className="sc-ihnbgO jOyDwH sc-toggle"
   >
     <label
-      className="sc-cVkrFx lVPki"
+      className="sc-JooDp ezPUha"
     >
       <input
         checked={false}
-        className="sc-ksXhwv juxWAY"
+        className="sc-iumJyn ifTtsN"
         data-cy="default_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="sc-kHNMoK jUSRLv sc-slider"
+        className="sc-gGTGfU hTFkkf sc-slider"
       />
     </label>
   </label>
@@ -34,25 +34,25 @@ exports[`Storyshots Components/Toggle Default 1`] = `
     Labelled toggle
   </h3>
   <label
-    className="sc-dkaWxM gaIZNe sc-toggle"
+    className="sc-ihnbgO jOyDwH sc-toggle"
   >
     <label
-      className="sc-cVkrFx lVPki"
+      className="sc-JooDp ezPUha"
     >
       <input
         checked={false}
-        className="sc-ksXhwv juxWAY"
+        className="sc-iumJyn ifTtsN"
         data-cy="default_toggle"
         name="toggle"
         onChange={[Function]}
         type="checkbox"
       />
       <span
-        className="sc-kHNMoK jUSRLv sc-slider"
+        className="sc-gGTGfU hTFkkf sc-slider"
       />
     </label>
     <span
-      className="sc-gYhigD fqPrAr text"
+      className="sc-dcwrBW jmIuQA text"
     >
       Airplane Mode
     </span>

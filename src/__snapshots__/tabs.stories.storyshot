@@ -10,23 +10,23 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
     Default Tabs 
   </h3>
   <div
-    className="sc-hkwnrn kQJMDv sc-tabs "
+    className="sc-eishCr NTwDx sc-tabs "
   >
     <div
-      className="sc-dkAroR ivlklX sc-tabs-bar"
+      className="sc-hJJQhR ernaZZ sc-tabs-bar"
     >
       <div
-        className="sc-jifIRw hNgnxV sc-tabs-item"
+        className="sc-exiMuG gBUfzL sc-tabs-item"
         onClick={[Function]}
         selected={true}
       >
         <p
-          className="sc-bSFVuW kYvRQo sc-tabs-item-title"
+          className="sc-dkaWxM eeLsZT sc-tabs-item-title"
           selected={true}
         >
           <span>
             <span
-              className="sc-gHftXq kBtgWB sc-text-badge "
+              className="sc-hYAvag hZrPVZ sc-text-badge "
             >
               1
             </span>
@@ -35,72 +35,72 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Users
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Groups
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Roles
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Policies
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Storage Location
         </p>
       </div>
       <div
-        className="sc-jifIRw dfZjBb sc-tabs-item"
+        className="sc-exiMuG fhgjmV sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Properties
@@ -108,7 +108,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-jvfriV fFTCLF sc-tabs-item-content"
+      className="sc-cVkrFx kaKfVQ sc-tabs-item-content"
     >
       <h3
         className="sc-gsTCUz jXevwc"
@@ -123,23 +123,23 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
     Customized Colors
   </h3>
   <div
-    className="sc-hkwnrn nnbwG sc-tabs "
+    className="sc-eishCr csqIdU sc-tabs "
   >
     <div
-      className="sc-dkAroR ivlklX sc-tabs-bar"
+      className="sc-hJJQhR ernaZZ sc-tabs-bar"
     >
       <div
-        className="sc-jifIRw fAeLsZ sc-tabs-item"
+        className="sc-exiMuG cAvTXf sc-tabs-item"
         onClick={[Function]}
         selected={true}
       >
         <p
-          className="sc-bSFVuW kYvRQo sc-tabs-item-title"
+          className="sc-dkaWxM eeLsZT sc-tabs-item-title"
           selected={true}
         >
           <span>
             <span
-              className="sc-gHftXq kBtgWB sc-text-badge "
+              className="sc-hYAvag hZrPVZ sc-text-badge "
             >
               1
             </span>
@@ -148,72 +148,72 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Users
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Groups
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Roles
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Policies
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Storage Location
         </p>
       </div>
       <div
-        className="sc-jifIRw gXvxRG sc-tabs-item"
+        className="sc-exiMuG gACxKU sc-tabs-item"
         onClick={[Function]}
         selected={false}
       >
         <p
-          className="sc-bSFVuW fPrUKf sc-tabs-item-title"
+          className="sc-dkaWxM RmuQs sc-tabs-item-title"
           selected={false}
         >
           Properties
@@ -221,7 +221,7 @@ exports[`Storyshots Components/Navigation/Tabs Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-jvfriV eEltWm sc-tabs-item-content"
+      className="sc-cVkrFx jMzTbv sc-tabs-item-content"
     >
       <h3
         className="sc-gsTCUz jXevwc"

@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/SpacedBox Composition 1`] = `
+<div
+  className="sc-JAcuL gIEFXf"
+>
+  <span
+    className="sc-gHftXq bYLSsn sc-cHjxUU gVonJk"
+  >
+    Composition Example: Green background 
+    "&lt;/span&gt;"
+     with margin left
+  </span>
+  <p
+    className="sc-dkAroR feaLtl sc-cHjxUU glCgBS"
+  >
+    Bold 
+    "&lt;/p&gt;"
+     with my 14 and p 14
+  </p>
+  <p
+    className="sc-dkAroR feaLtl sc-cHjxUU dqnXFX"
+  >
+    <span
+      className="sc-gHftXq bYLSsn"
+    >
+      SpacedBox + React component + nested styled component
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Margin 1`] = `
+<div
+  className="sc-JAcuL gIEFXf"
+>
+  <div
+    className="sc-cHjxUU gBaIa-d"
+  >
+    Props m 0
+  </div>
+  <div
+    className="sc-cHjxUU YLdxL"
+  >
+    Props m 1
+  </div>
+  <div
+    className="sc-cHjxUU gcxJPD"
+  >
+    Props m 2
+  </div>
+  <div
+    className="sc-cHjxUU iyeKsd"
+  >
+    Props m 4 
+  </div>
+  <div
+    className="sc-cHjxUU eGRWu"
+  >
+    Props m 8
+  </div>
+  <div
+    className="sc-cHjxUU ccnPYv"
+  >
+    Props m 12
+  </div>
+  <div
+    className="sc-cHjxUU fECAPe"
+  >
+    Props m 14
+  </div>
+  <div
+    className="sc-cHjxUU eeThyq"
+  >
+    Props m 16
+  </div>
+  <div
+    className="sc-cHjxUU gbAUEX"
+  >
+    Props m 20
+  </div>
+  <div
+    className="sc-cHjxUU dhGCFV"
+  >
+    Props m 28
+  </div>
+  <div
+    className="sc-cHjxUU kfslsr"
+  >
+    Props m 32
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Mix 1`] = `
+<div
+  className="sc-JAcuL gIEFXf"
+>
+  <div
+    className="sc-cHjxUU kZJvdg"
+  >
+    Props pl 8, pt 12, mt 12
+  </div>
+  <div
+    className="sc-cHjxUU gTcFSi"
+  >
+    Props mx 24, py 32
+  </div>
+  <div
+    className="sc-cHjxUU bhKpOz"
+  >
+    Props ml 1, mt 2, mr 4, mb 8, pl 12, pt 14, pr 16, pb 24
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Padding 1`] = `
+<div
+  className="sc-JAcuL gIEFXf"
+>
+  <div
+    className="sc-cHjxUU kHAlVW"
+  >
+    Props p 0
+  </div>
+  <div
+    className="sc-cHjxUU hcbjwg"
+  >
+    Props p 1
+  </div>
+  <div
+    className="sc-cHjxUU dMxuFI"
+  >
+    Props p 2
+  </div>
+  <div
+    className="sc-cHjxUU fwkECu"
+  >
+    Props p 4 
+  </div>
+  <div
+    className="sc-cHjxUU fGjQwt"
+  >
+    Props p 8
+  </div>
+  <div
+    className="sc-cHjxUU dBKDpM"
+  >
+    Props p 12
+  </div>
+  <div
+    className="sc-cHjxUU bQNrZR"
+  >
+    Props p 14
+  </div>
+  <div
+    className="sc-cHjxUU jRAuRt"
+  >
+    Props p 16
+  </div>
+  <div
+    className="sc-cHjxUU kFbcbs"
+  >
+    Props p 20
+  </div>
+  <div
+    className="sc-cHjxUU jfDcBy"
+  >
+    Props p 28
+  </div>
+  <div
+    className="sc-cHjxUU dGwYbs"
+  >
+    Props p 32
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Playground 1`] = `
+<div
+  className="sc-JAcuL gIEFXf"
+>
+  <div
+    className="sc-cHjxUU iKeIJB"
+  >
+    Playground
+  </div>
+</div>
+`;

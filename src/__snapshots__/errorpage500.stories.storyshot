@@ -5,33 +5,33 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI eQJvc sc-error-page500"
+    className="sc-higXBA fqiill sc-error-page500"
   >
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <i
-        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
+        className="sc-fbkhIv jjYirT fas fa-exclamation-triangle fa-2x"
       />
       <h2
-        className="sc-iNqMTl dmFiVc"
+        className="sc-ehSCib dYJZVF"
       >
         Unexpected Error
       </h2>
     </div>
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <div
-        className="sc-jeGSBP drdfUi"
+        className="sc-lcujXC bTuGno"
       >
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           An error occured and your request cannot be completed.
         </p>
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           You might check the url, or contact your admin if the error remains.
         </p>
@@ -59,42 +59,42 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI eQJvc sc-error-page500"
+    className="sc-higXBA fqiill sc-error-page500"
   >
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <i
-        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
+        className="sc-fbkhIv jjYirT fas fa-exclamation-triangle fa-2x"
       />
       <h2
-        className="sc-iNqMTl dmFiVc"
+        className="sc-ehSCib dYJZVF"
       >
         Erreur inattendue
       </h2>
     </div>
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <div
-        className="sc-jeGSBP drdfUi"
+        className="sc-lcujXC bTuGno"
       >
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           Une erreur s'est produite et votre demande ne peut être complétée.
         </p>
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
         </p>
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           Vous pouvez également contacter le 
           <a
-            className="sc-ehSCib NhcT"
+            className="sc-GqfZa foABYa"
             href="https://www.scality.com/support/"
           >
             support 
@@ -128,42 +128,42 @@ exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] =
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-laRPJI eQJvc sc-error-page500"
+    className="sc-higXBA fqiill sc-error-page500"
   >
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <i
-        className="sc-higXBA dEsokC fas fa-exclamation-triangle fa-2x"
+        className="sc-fbkhIv jjYirT fas fa-exclamation-triangle fa-2x"
       />
       <h2
-        className="sc-iNqMTl dmFiVc"
+        className="sc-ehSCib dYJZVF"
       >
         Unexpected Error
       </h2>
     </div>
     <div
-      className="sc-nFpLZ gvQQYc"
+      className="sc-clsHhM kfZrdj"
     >
       <div
-        className="sc-jeGSBP drdfUi"
+        className="sc-lcujXC bTuGno"
       >
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           An error occured and your request cannot be completed.
         </p>
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           You might check the url, or contact your admin if the error remains.
         </p>
         <p
-          className="sc-eJMQSu gldhqr"
+          className="sc-gGmIRh beUVho"
         >
           You may also contact 
           <a
-            className="sc-ehSCib NhcT"
+            className="sc-GqfZa foABYa"
             href="https://www.scality.com/support/"
           >
             support 

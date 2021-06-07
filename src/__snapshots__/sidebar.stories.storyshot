@@ -13,36 +13,36 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw gYMRLh"
+      className="sc-euMpXR kLxkCj"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ fUdKdL sc-sidebar"
+        className="sc-fHuLdG hRlcle sc-sidebar"
       >
         <div
-          className="sc-dFJsGO qguEx sc-sidebar-item"
+          className="sc-dtTInj fDikZz sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-gInsOo hLFNdJ"
+            className="sc-XhUPp izrxiP"
           />
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-server"
@@ -50,12 +50,12 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-hdd"
@@ -76,66 +76,66 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw dpVyzK"
+      className="sc-euMpXR dyJtcc"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ kTwauY sc-sidebar"
+        className="sc-fHuLdG clrXFh sc-sidebar"
       >
         <div
-          className="sc-dFJsGO qguEx sc-sidebar-item"
+          className="sc-dtTInj fDikZz sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-bsipQr eaOukM"
+            className="sc-dkIXFM eOZZaa"
           >
             Dashboard
           </div>
           <div
-            className="sc-gInsOo hLFNdJ"
+            className="sc-XhUPp izrxiP"
           />
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-server"
             />
           </div>
           <div
-            className="sc-bsipQr eaOukM"
+            className="sc-dkIXFM eOZZaa"
           >
             Servers
           </div>
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-hdd"
             />
           </div>
           <div
-            className="sc-bsipQr eaOukM"
+            className="sc-dkIXFM eOZZaa"
           >
             Disks
           </div>
@@ -154,15 +154,15 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw gYMRLh"
+      className="sc-euMpXR kLxkCj"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ fUdKdL sc-sidebar"
+        className="sc-fHuLdG hRlcle sc-sidebar"
       >
         <div
-          className="sc-euMpXR bqzgdO"
+          className="sc-ikPAkQ bhepDw"
         >
           <button
             className="sc-dQppl dzJsiX sc-button"
@@ -196,28 +196,28 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-dFJsGO qguEx sc-sidebar-item"
+          className="sc-dtTInj fDikZz sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-gInsOo hLFNdJ"
+            className="sc-XhUPp izrxiP"
           />
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-server"
@@ -225,12 +225,12 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-hdd"
@@ -251,15 +251,15 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
     }
   >
     <div
-      className="sc-eGCarw gYMRLh"
+      className="sc-euMpXR kLxkCj"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-ctaXAZ fUdKdL sc-sidebar"
+        className="sc-fHuLdG hRlcle sc-sidebar"
       >
         <div
-          className="sc-euMpXR bqzgdO"
+          className="sc-ikPAkQ bhepDw"
         >
           <button
             className="sc-dQppl dzJsiX sc-button"
@@ -293,28 +293,28 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </button>
         </div>
         <div
-          className="sc-dFJsGO qguEx sc-sidebar-item"
+          className="sc-dtTInj fDikZz sc-sidebar-item"
           onClick={[Function]}
           title="Dashboard"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-tachometer-alt"
             />
           </div>
           <div
-            className="sc-gInsOo hLFNdJ"
+            className="sc-XhUPp izrxiP"
           />
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Servers"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-server"
@@ -322,12 +322,12 @@ exports[`Storyshots Components/Navigation/Sidebar Default 1`] = `
           </div>
         </div>
         <div
-          className="sc-dFJsGO jZeSvM sc-sidebar-item"
+          className="sc-dtTInj dtiMOq sc-sidebar-item"
           onClick={[Function]}
           title="Disks"
         >
           <div
-            className="sc-euMpXR bqzgdO"
+            className="sc-ikPAkQ bhepDw"
           >
             <i
               className="fas fa-hdd"

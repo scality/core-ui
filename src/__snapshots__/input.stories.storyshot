@@ -10,10 +10,10 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input without label
   </h3>
   <div
-    className="sc-fbNXWD eWbpLU sc-input"
+    className="sc-ctaXAZ jdlRXY sc-input"
   >
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -34,16 +34,16 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input with label
   </h3>
   <div
-    className="sc-fbNXWD eWbpLU sc-input"
+    className="sc-ctaXAZ jdlRXY sc-input"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id2"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -63,16 +63,16 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input with error
   </h3>
   <div
-    className="sc-fbNXWD hXYpWl sc-input"
+    className="sc-ctaXAZ bUypaF sc-input"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id3"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <input
         autoComplete="off"
@@ -85,7 +85,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
         value="value"
       />
       <span
-        className="sc-gsxnyZ hdOuHd sc-input-error"
+        className="sc-bsipQr kECIBH sc-input-error"
       >
         error
       </span>
@@ -97,19 +97,19 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Input with long error
   </h3>
   <div
-    className="sc-bGqQkm iLYGbI"
+    className="sc-ehsPrw cUkVIM"
   >
     <div
-      className="sc-fbNXWD hXYpWl sc-input"
+      className="sc-ctaXAZ bUypaF sc-input"
     >
       <label
-        className="sc-GTWni feZDYL sc-input-label"
+        className="sc-dFJsGO hztWuD sc-input-label"
         htmlFor="id3"
       >
         label
       </label>
       <div
-        className="sc-bXDlPE dFwwKN sc-input-wrapper"
+        className="sc-gInsOo jAjRwB sc-input-wrapper"
       >
         <input
           autoComplete="off"
@@ -122,7 +122,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
           value="value"
         />
         <span
-          className="sc-gsxnyZ hdOuHd sc-input-error"
+          className="sc-bsipQr kECIBH sc-input-error"
         >
           long error error error error error error error error error
         </span>
@@ -135,22 +135,22 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Checkbox Input
   </h3>
   <div
-    className="sc-fbNXWD eWbpLU sc-input"
+    className="sc-ctaXAZ jdlRXY sc-input"
     type="checkbox"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id4"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe knJWYt sc-checkbox"
+        className="sc-cxFLnm XvbkL sc-checkbox"
         tabIndex={0}
       >
         <i
@@ -172,22 +172,22 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Checkbox Input with error
   </h3>
   <div
-    className="sc-fbNXWD hXYpWl sc-input"
+    className="sc-ctaXAZ bUypaF sc-input"
     type="checkbox"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id5"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <label
         aria-pressed={true}
         checked={false}
-        className="sc-bkzZxe knJWYt sc-checkbox"
+        className="sc-cxFLnm XvbkL sc-checkbox"
         tabIndex={0}
       >
         <i
@@ -202,7 +202,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
         />
       </label>
       <span
-        className="sc-gsxnyZ hdOuHd sc-input-error"
+        className="sc-bsipQr kECIBH sc-input-error"
       >
         error
       </span>
@@ -214,20 +214,20 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Select Input
   </h3>
   <div
-    className="sc-fbNXWD eWbpLU sc-input"
+    className="sc-ctaXAZ jdlRXY sc-input"
     type="select"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id6"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <div
-        className="sc-jQbIHB hSIVXy sc-select-container"
+        className="sc-bXDlPE emfJwz sc-select-container"
       >
         <div
           className="sc-select css-2b097c-container"
@@ -348,20 +348,20 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Textarea Input
   </h3>
   <div
-    className="sc-fbNXWD eWbpLU sc-input"
+    className="sc-ctaXAZ jdlRXY sc-input"
     type="textarea"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id7"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <textarea
-        className="sc-fvhGYg iYRSVk sc-textarea"
+        className="sc-eGCarw kZuNZM sc-textarea"
         cols={20}
         id="id7"
         onChange={[Function]}
@@ -377,20 +377,20 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Textarea Input with error
   </h3>
   <div
-    className="sc-fbNXWD hXYpWl sc-input"
+    className="sc-ctaXAZ bUypaF sc-input"
     type="textarea"
   >
     <label
-      className="sc-GTWni feZDYL sc-input-label"
+      className="sc-dFJsGO hztWuD sc-input-label"
       htmlFor="id7"
     >
       label
     </label>
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <textarea
-        className="sc-fvhGYg iYRSVk sc-textarea"
+        className="sc-eGCarw kZuNZM sc-textarea"
         cols={50}
         id="id7"
         onChange={[Function]}
@@ -399,7 +399,7 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
         value="Hello"
       />
       <span
-        className="sc-gsxnyZ hdOuHd sc-input-error"
+        className="sc-bsipQr kECIBH sc-input-error"
       >
         error
       </span>
@@ -411,11 +411,11 @@ exports[`Storyshots Components/Input/Input Default 1`] = `
     Number Input (Max 100)
   </h3>
   <div
-    className="sc-fbNXWD ehWoLS sc-input"
+    className="sc-ctaXAZ GUSdi sc-input"
     type="number"
   >
     <div
-      className="sc-bXDlPE dFwwKN sc-input-wrapper"
+      className="sc-gInsOo jAjRwB sc-input-wrapper"
     >
       <div
         className="sc-number-input-wrapper"

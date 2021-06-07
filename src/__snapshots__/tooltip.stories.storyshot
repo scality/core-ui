@@ -11,7 +11,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Default Tooltip
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -29,7 +29,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Tooltip right
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -53,7 +53,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Tooltip left
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -71,7 +71,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Tooltip bottom
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -89,7 +89,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Customize your tooltip style
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -107,7 +107,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Tooltip with button
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -141,7 +141,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       add icon in the overlay of tooltip
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -159,7 +159,7 @@ exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
       Tooltip doesn't trigger
     </h3>
     <div
-      className="sc-iktFzd hojOeW sc-tooltip"
+      className="sc-citwmv ixjttq sc-tooltip"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >

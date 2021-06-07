@@ -12,7 +12,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={true}
-    className="sc-bkzZxe bOzIBZ sc-checkbox"
+    className="sc-cxFLnm bBwymz sc-checkbox"
     tabIndex={null}
   >
     <i
@@ -25,7 +25,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       type="checkbox"
     />
     <span
-      className="sc-fFubgz fyvPKp text"
+      className="sc-iwyYcG bqFcMN text"
     >
       interested?
     </span>
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={true}
     checked={false}
-    className="sc-bkzZxe knJWYt sc-checkbox"
+    className="sc-cxFLnm XvbkL sc-checkbox"
     tabIndex={0}
   >
     <i
@@ -50,7 +50,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       type="checkbox"
     />
     <span
-      className="sc-fFubgz fyvPKp text"
+      className="sc-iwyYcG bqFcMN text"
     >
       interested?
     </span>
@@ -63,7 +63,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={false}
-    className="sc-bkzZxe bTQxYV sc-checkbox"
+    className="sc-cxFLnm eoiMGH sc-checkbox"
     disabled={true}
     tabIndex={null}
   >
@@ -77,7 +77,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       type="checkbox"
     />
     <span
-      className="sc-fFubgz fyvPKp text"
+      className="sc-iwyYcG bqFcMN text"
     >
       interested?
     </span>
@@ -90,7 +90,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
   <label
     aria-pressed={null}
     checked={true}
-    className="sc-bkzZxe jMbwJu sc-checkbox"
+    className="sc-cxFLnm jUFxwU sc-checkbox"
     disabled={true}
     tabIndex={null}
   >
@@ -104,7 +104,7 @@ exports[`Storyshots Components/Checkbox Default 1`] = `
       type="checkbox"
     />
     <span
-      className="sc-fFubgz fyvPKp text"
+      className="sc-iwyYcG bqFcMN text"
     >
       interested?
     </span>

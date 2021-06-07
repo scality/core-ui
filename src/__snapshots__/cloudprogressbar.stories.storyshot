@@ -18,7 +18,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-iwyYcG henefs sc-cloudprogressbar"
+      className="sc-ezrdKe gsHJrN sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -38,7 +38,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-cxFLnm eLwFsG"
+        className="sc-bYEvPH bFscUc"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -90,7 +90,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-iwyYcG henefs sc-cloudprogressbar"
+      className="sc-ezrdKe gsHJrN sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -110,7 +110,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-cxFLnm fTcnqT"
+        className="sc-bYEvPH ldMXDl"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -162,7 +162,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-iwyYcG henefs sc-cloudprogressbar"
+      className="sc-ezrdKe gsHJrN sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -182,7 +182,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-cxFLnm cGYhGh"
+        className="sc-bYEvPH hlhsxP"
       >
         <svg
           enableBackground="new 0 0 72 72"
@@ -234,7 +234,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
     }
   >
     <div
-      className="sc-iwyYcG henefs sc-cloudprogressbar"
+      className="sc-ezrdKe gsHJrN sc-cloudprogressbar"
     >
       <svg
         enableBackground="new 0 0 72 72"
@@ -254,7 +254,7 @@ exports[`Storyshots Components/Progress & loading/CloudProgressBar Default 1`] =
         </g>
       </svg>
       <div
-        className="sc-cxFLnm krAKPD"
+        className="sc-bYEvPH hxMWZx"
       >
         <svg
           enableBackground="new 0 0 72 72"

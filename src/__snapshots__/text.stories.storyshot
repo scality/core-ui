@@ -2,7 +2,7 @@
 
 exports[`Storyshots Components/Text Basic Text 1`] = `
 <span
-  className="sc-edoZmE jtCxOe"
+  className="sc-kHNMoK kAwbqC"
 >
   basic text
 </span>
@@ -10,7 +10,7 @@ exports[`Storyshots Components/Text Basic Text 1`] = `
 
 exports[`Storyshots Components/Text Emphase Text 1`] = `
 <span
-  className="sc-edoZmE sc-hYAvag jtCxOe iFriQU"
+  className="sc-kHNMoK sc-bGqQkm kAwbqC lkpNrr"
 >
   emphase text
 </span>
@@ -18,7 +18,7 @@ exports[`Storyshots Components/Text Emphase Text 1`] = `
 
 exports[`Storyshots Components/Text Larger Text 1`] = `
 <span
-  className="sc-edoZmE sc-iWRGeL jtCxOe imgJwX"
+  className="sc-kHNMoK sc-gYhigD kAwbqC bcwsBR"
 >
   larger text
 </span>
@@ -26,7 +26,7 @@ exports[`Storyshots Components/Text Larger Text 1`] = `
 
 exports[`Storyshots Components/Text Secondary Text 1`] = `
 <span
-  className="sc-edoZmE sc-jlIkXa jtCxOe kcJFyy"
+  className="sc-kHNMoK sc-ksXhwv kAwbqC dskCSm"
 >
   secondary text
 </span>
@@ -41,7 +41,7 @@ exports[`Storyshots Components/Text Smaller Text 1`] = `
   }
 >
   <span
-    className="sc-edoZmE sc-eishCr jtCxOe wIAoX"
+    className="sc-kHNMoK sc-cjHJEj kAwbqC fcfyql"
   >
     smaller text
   </span>
@@ -52,28 +52,28 @@ exports[`Storyshots Components/Text Status Text 1`] = `
 Array [
   <div>
     <span
-      className="sc-edoZmE sc-hJJQhR jtCxOe gpbNM"
+      className="sc-kHNMoK sc-fxNNfJ kAwbqC jBLoDp"
     >
       healthy status text
     </span>
   </div>,
   <div>
     <span
-      className="sc-edoZmE sc-hJJQhR jtCxOe jtyAgc"
+      className="sc-kHNMoK sc-fxNNfJ kAwbqC cyCmEt"
     >
       warning status text
     </span>
   </div>,
   <div>
     <span
-      className="sc-edoZmE sc-hJJQhR jtCxOe htuMeG"
+      className="sc-kHNMoK sc-fxNNfJ kAwbqC iYJyAz"
     >
       critical status text
     </span>
   </div>,
   <div>
     <span
-      className="sc-edoZmE sc-hJJQhR jtCxOe cmmkUE"
+      className="sc-kHNMoK sc-fxNNfJ kAwbqC hCUAzZ"
     >
       unknown status text
     </span>

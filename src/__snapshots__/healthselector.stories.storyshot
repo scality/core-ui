@@ -10,33 +10,33 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     Basic usage
   </h3>
   <div
-    className="sc-TmcTc kyjohe sc-healthselector"
+    className="sc-eLgOdN ddDRag sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
+      className="sc-dQppl sc-dtwoBo lcRckn bEUSIc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
     >
       <div
-        className="sc-eLgOdN khzfp"
+        className="sc-dacFzL eSpJiU"
       >
         <span
-          className="sc-jONnTn ZivIz"
+          className="sc-hOqqkJ eOumsG"
         >
           <span
-            className="sc-jHVexB cwmoIF"
+            className="sc-bTvRPi cBABzJ"
           />
           <span
-            className="sc-jHVexB eglch"
+            className="sc-bTvRPi juxTl"
           />
           <span
-            className="sc-jHVexB hpfFjr"
+            className="sc-bTvRPi hutSav"
           />
         </span>
       </div>
       <div
-        className="sc-bTvRPi eutklP"
+        className="sc-jUEnpm FeLd"
       >
         All
       </div>
@@ -51,39 +51,39 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     Health Selector Sizes (Triggering StoryBook actions)
   </h3>
   <div
-    className="sc-dtwoBo kkmEIN"
+    className="sc-fbNXWD czBoot"
   >
     <div
-      className="sc-dacFzL bPEPso"
+      className="sc-GTWni eHDRbV"
     >
       <div
-        className="sc-TmcTc kyjohe sc-healthselector"
+        className="sc-eLgOdN ddDRag sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk bpqEBW cVpNoZ trigger"
+          className="sc-dQppl sc-dtwoBo bpqEBW cFKYWk trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="smaller"
         >
           <div
-            className="sc-eLgOdN khzfp"
+            className="sc-dacFzL eSpJiU"
           >
             <span
-              className="sc-jONnTn ZivIz"
+              className="sc-hOqqkJ eOumsG"
             >
               <span
-                className="sc-jHVexB cwmoIF"
+                className="sc-bTvRPi cBABzJ"
               />
               <span
-                className="sc-jHVexB eglch"
+                className="sc-bTvRPi juxTl"
               />
               <span
-                className="sc-jHVexB hpfFjr"
+                className="sc-bTvRPi hutSav"
               />
             </span>
           </div>
           <div
-            className="sc-bTvRPi eutklP"
+            className="sc-jUEnpm FeLd"
           >
             All
           </div>
@@ -94,36 +94,36 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-dacFzL bPEPso"
+      className="sc-GTWni eHDRbV"
     >
       <div
-        className="sc-TmcTc kyjohe sc-healthselector"
+        className="sc-eLgOdN ddDRag sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk iOeqYf crBGLx trigger"
+          className="sc-dQppl sc-dtwoBo iOeqYf jMrdmQ trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="small"
         >
           <div
-            className="sc-eLgOdN khzfp"
+            className="sc-dacFzL eSpJiU"
           >
             <span
-              className="sc-jONnTn ZivIz"
+              className="sc-hOqqkJ eOumsG"
             >
               <span
-                className="sc-jHVexB cwmoIF"
+                className="sc-bTvRPi cBABzJ"
               />
               <span
-                className="sc-jHVexB eglch"
+                className="sc-bTvRPi juxTl"
               />
               <span
-                className="sc-jHVexB hpfFjr"
+                className="sc-bTvRPi hutSav"
               />
             </span>
           </div>
           <div
-            className="sc-bTvRPi eutklP"
+            className="sc-jUEnpm FeLd"
           >
             All
           </div>
@@ -134,36 +134,36 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-dacFzL bPEPso"
+      className="sc-GTWni eHDRbV"
     >
       <div
-        className="sc-TmcTc kyjohe sc-healthselector"
+        className="sc-eLgOdN ddDRag sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
+          className="sc-dQppl sc-dtwoBo lcRckn bEUSIc trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="base"
         >
           <div
-            className="sc-eLgOdN khzfp"
+            className="sc-dacFzL eSpJiU"
           >
             <span
-              className="sc-jONnTn ZivIz"
+              className="sc-hOqqkJ eOumsG"
             >
               <span
-                className="sc-jHVexB cwmoIF"
+                className="sc-bTvRPi cBABzJ"
               />
               <span
-                className="sc-jHVexB eglch"
+                className="sc-bTvRPi juxTl"
               />
               <span
-                className="sc-jHVexB hpfFjr"
+                className="sc-bTvRPi hutSav"
               />
             </span>
           </div>
           <div
-            className="sc-bTvRPi eutklP"
+            className="sc-jUEnpm FeLd"
           >
             All
           </div>
@@ -175,39 +175,39 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     </div>
   </div>
   <div
-    className="sc-dtwoBo kkmEIN"
+    className="sc-fbNXWD czBoot"
   >
     <div
-      className="sc-dacFzL bPEPso"
+      className="sc-GTWni eHDRbV"
     >
       <div
-        className="sc-TmcTc kyjohe sc-healthselector"
+        className="sc-eLgOdN ddDRag sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk ZagCn llZRwt trigger"
+          className="sc-dQppl sc-dtwoBo ZagCn bsSpss trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="large"
         >
           <div
-            className="sc-eLgOdN khzfp"
+            className="sc-dacFzL eSpJiU"
           >
             <span
-              className="sc-jONnTn ZivIz"
+              className="sc-hOqqkJ eOumsG"
             >
               <span
-                className="sc-jHVexB cwmoIF"
+                className="sc-bTvRPi cBABzJ"
               />
               <span
-                className="sc-jHVexB eglch"
+                className="sc-bTvRPi juxTl"
               />
               <span
-                className="sc-jHVexB hpfFjr"
+                className="sc-bTvRPi hutSav"
               />
             </span>
           </div>
           <div
-            className="sc-bTvRPi eutklP"
+            className="sc-jUEnpm FeLd"
           >
             All
           </div>
@@ -218,36 +218,36 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-dacFzL bPEPso"
+      className="sc-GTWni eHDRbV"
     >
       <div
-        className="sc-TmcTc kyjohe sc-healthselector"
+        className="sc-eLgOdN ddDRag sc-healthselector"
       >
         <button
-          className="sc-dQppl sc-hlTvYk imFlVF gMUTkd trigger"
+          className="sc-dQppl sc-dtwoBo imFlVF dVGiWk trigger"
           onBlur={[Function]}
           onClick={[Function]}
           size="larger"
         >
           <div
-            className="sc-eLgOdN khzfp"
+            className="sc-dacFzL eSpJiU"
           >
             <span
-              className="sc-jONnTn ZivIz"
+              className="sc-hOqqkJ eOumsG"
             >
               <span
-                className="sc-jHVexB cwmoIF"
+                className="sc-bTvRPi cBABzJ"
               />
               <span
-                className="sc-jHVexB eglch"
+                className="sc-bTvRPi juxTl"
               />
               <span
-                className="sc-jHVexB hpfFjr"
+                className="sc-bTvRPi hutSav"
               />
             </span>
           </div>
           <div
-            className="sc-bTvRPi eutklP"
+            className="sc-jUEnpm FeLd"
           >
             All
           </div>
@@ -264,33 +264,33 @@ exports[`Storyshots Components/Selector/Healthselector Default 1`] = `
     With custom labels (Triggering StoryBook actions)
   </h3>
   <div
-    className="sc-TmcTc kyjohe sc-healthselector"
+    className="sc-eLgOdN ddDRag sc-healthselector"
   >
     <button
-      className="sc-dQppl sc-hlTvYk lcRckn dOQVDN trigger"
+      className="sc-dQppl sc-dtwoBo lcRckn bEUSIc trigger"
       onBlur={[Function]}
       onClick={[Function]}
       size="base"
     >
       <div
-        className="sc-eLgOdN khzfp"
+        className="sc-dacFzL eSpJiU"
       >
         <span
-          className="sc-jONnTn ZivIz"
+          className="sc-hOqqkJ eOumsG"
         >
           <span
-            className="sc-jHVexB cwmoIF"
+            className="sc-bTvRPi cBABzJ"
           />
           <span
-            className="sc-jHVexB eglch"
+            className="sc-bTvRPi juxTl"
           />
           <span
-            className="sc-jHVexB hpfFjr"
+            className="sc-bTvRPi hutSav"
           />
         </span>
       </div>
       <div
-        className="sc-bTvRPi eutklP"
+        className="sc-jUEnpm FeLd"
       >
         Custom1
       </div>

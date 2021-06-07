@@ -10,40 +10,40 @@ exports[`Storyshots Components/Navigation/CollapsiblePanel Default 1`] = `
     Collapsed
   </h3>
   <div
-    className="sc-ezrdKe eZzjqB sc-collapsiblepanel"
+    className="sc-hiSbYr tJeDZ sc-collapsiblepanel"
   >
     <div
-      className="sc-bYEvPH eJcLZI sc-collapsiblepanel-header"
+      className="sc-gWHgXt gnbEkL sc-collapsiblepanel-header"
       onClick={[Function]}
     >
       <div
-        className="sc-lmoMRL jjoAXq"
+        className="sc-kLgntA gEiFdw"
       >
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           <i
             className="fas fa-carrot"
           />
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           banana
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           apple
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           grape
         </div>
       </div>
       <div
-        className="sc-giIncl cwxOXA"
+        className="sc-jJEJSO bomFiR"
       >
         <i
           className="fas fa-angle-down"
@@ -57,40 +57,40 @@ exports[`Storyshots Components/Navigation/CollapsiblePanel Default 1`] = `
     Expanded
   </h3>
   <div
-    className="sc-ezrdKe eZzjqB sc-collapsiblepanel"
+    className="sc-hiSbYr tJeDZ sc-collapsiblepanel"
   >
     <div
-      className="sc-bYEvPH eJcLZI sc-collapsiblepanel-header"
+      className="sc-gWHgXt gnbEkL sc-collapsiblepanel-header"
       onClick={[Function]}
     >
       <div
-        className="sc-lmoMRL jjoAXq"
+        className="sc-kLgntA gEiFdw"
       >
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           <i
             className="fas fa-carrot"
           />
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           banana
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           apple
         </div>
         <div
-          className="sc-iJuUWI bDvYfs"
+          className="sc-iktFzd rxyQD"
         >
           grape
         </div>
       </div>
       <div
-        className="sc-giIncl cwxOXA"
+        className="sc-jJEJSO bomFiR"
       >
         <i
           className="fas fa-angle-up"
@@ -98,7 +98,7 @@ exports[`Storyshots Components/Navigation/CollapsiblePanel Default 1`] = `
       </div>
     </div>
     <div
-      className="sc-kLgntA khDEFF sc-collapsiblepanel-content"
+      className="sc-cBNfnY kWtRSU sc-collapsiblepanel-content"
     >
       orange
     </div>

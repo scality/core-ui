@@ -5,33 +5,33 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cOajty hQHLhu sc-error-page404"
+    className="sc-gTgzIj diMhbt sc-error-page404"
   >
     <div
-      className="sc-jgHCyG GHYGC"
+      className="sc-eJMQSu eKmyWr"
     >
       <i
-        className="sc-gTgzIj ggJSpO fas fa-exclamation-triangle fa-2x"
+        className="sc-nFpLZ GjXFB fas fa-exclamation-triangle fa-2x"
       />
       <h2
-        className="sc-AzgDb iBYBhB"
+        className="sc-laRPJI bCmSib"
       >
         Error: this page does not exist
       </h2>
     </div>
     <div
-      className="sc-jgHCyG GHYGC"
+      className="sc-eJMQSu eKmyWr"
     >
       <div
-        className="sc-khAkjo dfRcyv"
+        className="sc-iNqMTl dEmFSA"
       >
         <p
-          className="sc-hTZhsR iEVfKB"
+          className="sc-jeGSBP hUmgeT"
         >
           It might be the wrong address or the page has moved.
         </p>
         <p
-          className="sc-hTZhsR iEVfKB"
+          className="sc-jeGSBP hUmgeT"
         >
           You might check the url, or contact your admin if the error remains.
         </p>
@@ -59,33 +59,33 @@ exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
   className="sc-bdfBwQ gFQERV"
 >
   <div
-    className="sc-cOajty hQHLhu sc-error-page404"
+    className="sc-gTgzIj diMhbt sc-error-page404"
   >
     <div
-      className="sc-jgHCyG GHYGC"
+      className="sc-eJMQSu eKmyWr"
     >
       <i
-        className="sc-gTgzIj ggJSpO fas fa-exclamation-triangle fa-2x"
+        className="sc-nFpLZ GjXFB fas fa-exclamation-triangle fa-2x"
       />
       <h2
-        className="sc-AzgDb iBYBhB"
+        className="sc-laRPJI bCmSib"
       >
         Erreur: cette page n'existe pas
       </h2>
     </div>
     <div
-      className="sc-jgHCyG GHYGC"
+      className="sc-eJMQSu eKmyWr"
     >
       <div
-        className="sc-khAkjo dfRcyv"
+        className="sc-iNqMTl dEmFSA"
       >
         <p
-          className="sc-hTZhsR iEVfKB"
+          className="sc-jeGSBP hUmgeT"
         >
           Il se peut que ce soit une mauvaise adresse ou que la page ait été déplacée.
         </p>
         <p
-          className="sc-hTZhsR iEVfKB"
+          className="sc-jeGSBP hUmgeT"
         >
           Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
         </p>
