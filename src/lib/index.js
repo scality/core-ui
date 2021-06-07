@@ -55,6 +55,7 @@ import {
   LargeText,
   SmallerText,
 } from './components/text/Text.component';
+import Card from './components/card/Card.component';
 
 export {
   LOADER_SIZE,
@@ -109,4 +110,5 @@ export {
   LargeText,
   SmallerText,
   SpacedBox,
+  Card,
 };
