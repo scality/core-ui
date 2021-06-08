@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getTheme } from '../../utils';
 
 export const SortIncentive = styled.span`
   position: absolute;
@@ -14,6 +15,7 @@ export const TableHeader = styled.div`
   }
 `;
 
+// adapt the Styles with the design
 export const Styles = styled.div`
   padding: 1rem;
   table {
@@ -38,4 +40,28 @@ export const Styles = styled.div`
     }
   }
   color: white;
+`;
+
+export const TableRow = styled.tr`
+  height: 76px;
+  box-sizing: border-box;
+
+  &:hover,
+  &:focus {
+    background-color: ${(props) => getTheme(props).highlight};
+    outline: none;
+    cursor: pointer;
+  }
+
+  border-right: 4px solid
+    ${(props) =>
+      props.defaultSelectedValue ===
+      props.row.values[`${props.defaultSelectedKey}`]
+        ? getTheme(props).selectedActive
+        : getTheme(props).backgroundLevel2};
+  background-color: ${(props) =>
+    props.defaultSelectedValue ===
+    props.row.values[`${props.defaultSelectedKey}`]
+      ? getTheme(props).highlight
+      : getTheme(props).backgroundLevel2};
 `;

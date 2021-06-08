@@ -50,7 +50,12 @@ export const Default = () => {
   return (
     <Wrapper>
       <Styles>
-        <TableV2 columns={columns} data={data} defaultSortingKey={'health'} />
+        <TableV2
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          defaultSelectedKey={'firstName'}
+        />
       </Styles>
     </Wrapper>
   );
