@@ -11,10 +11,10 @@ export default {
 
 export const Default = () => {
   const data = [
-    { firstName: 'Sotiria', lastName: 'Vangelis', age: 30 },
-    { firstName: 'Stefania', lastName: 'Evgenios', age: 27 },
-    { firstName: 'Yohann', lastName: 'Rodolph', age: 27 },
-    { firstName: 'Ninette', lastName: 'Caroline', age: 31 },
+    { firstName: 'Sotiria', lastName: 'Vangelis', age: 30, health: 'healthy' },
+    { firstName: 'Stefania', lastName: 'Evgenios', age: 27, health: 'warning' },
+    { firstName: 'Yohann', lastName: 'Rodolph', age: 27, health: 'critical' },
+    { firstName: 'Ninette', lastName: 'Caroline', age: 31, health: 'healthy' },
   ];
 
   const columns = React.useMemo(
@@ -32,8 +32,8 @@ export const Default = () => {
         accessor: 'age',
       },
       {
-        Header: 'Visits',
-        accessor: 'visits',
+        Header: 'Health',
+        accessor: 'health',
       },
       {
         Header: 'Status',
@@ -46,10 +46,11 @@ export const Default = () => {
     ],
     [],
   );
+
   return (
     <Wrapper>
       <Styles>
-        <TableV2 columns={columns} data={data} />
+        <TableV2 columns={columns} data={data} defaultSortingKey={'health'} />
       </Styles>
     </Wrapper>
   );
