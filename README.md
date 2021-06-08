@@ -172,12 +172,6 @@ Run a full Flow check and prints the results.
 
 Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm test`
-
-Launch the test runner in the interactive watch mode. 
-It will generate test snapshots by using Storybook Storyshot add-on.
-You have to run all the tests and update all snapshots before each commit.
-
 ### `npm run build`
 
 Build the app for production to the `dist` folder.
@@ -211,7 +205,6 @@ You can use plop when you want to create a new react component. Plop generates c
 - Make sure that the component is themable (i.e support Dark/Light Mode)
 - Add storybook stories to cover all features 
 - Update `src/lib/index.js` to export the new component
-- Run `npm run test` to generate snapshot tests which are based on storybook stories
 - Run `npm run flow` and `npm run lint` to make sure no error occurs
 - Once all is done, create Pull Request for review
 - When your Pull Request is approved, we take care of the merge of the PR because we have an internal merge process.
