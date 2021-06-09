@@ -3,11 +3,16 @@ import React, { useContext } from 'react';
 import { useTable, useSortBy, useBlockLayout } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
-import { TableRow, HeadRow, TableBody } from './Tablestyle';
+import {
+  TableRow,
+  HeadRow,
+  TableBody,
+  TableHeader,
+  SortCaretWrapper,
+  SortIncentive,
+} from './Tablestyle';
 type SingleSelectionProps = {
   rowHeight: number,
-  defaultSelectedKey?: string,
-  defaultSelectedValue?: string,
   onRowSelected?: (dataRow) => void,
   children: (sortAndFilter: (DataRow[]) => DataRow[]) => Table.Row[],
 };
@@ -31,14 +36,17 @@ export type TableProps = {
 
 function SingleSelectionContent({
   rowHeight,
-  defaultSelectedKey,
-  defaultSelectedValue,
   onRowSelected,
   children,
 }: SingleSelectionProps) {
-  const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
-    TableContext,
-  );
+  const {
+    headerGroups,
+    getTableBodyProps,
+    prepareRow,
+    rows,
+    defaultSelectedKey,
+    defaultSelectedValue,
+  } = useContext(TableContext);
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
@@ -76,23 +84,31 @@ function SingleSelectionContent({
       <div className="thead">
         {headerGroups.map((headerGroup) => (
           <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
-            {headerGroup.headers.map((column) => (
-              <div {...column.getSortByToggleProps()} className="th">
-                {column.render('Header')}
-                {/* Add a sort direction indicator */}
-                <span>
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      <i className="fas fa-sort-down" />
+            {headerGroup.headers.map((column) => {
+              const headerStyleProps = column.getHeaderProps(
+                Object.assign(column.getSortByToggleProps(), {
+                  style: column.cellStyle,
+                }),
+              );
+              return (
+                <TableHeader {...headerStyleProps}>
+                  {column.render('Header')}
+                  <SortCaretWrapper>
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <i className="fas fa-sort-down" />
+                      ) : (
+                        <i className="fas fa-sort-up" />
+                      )
                     ) : (
-                      <i className="fas fa-sort-up" />
-                    )
-                  ) : (
-                    <i className="fas fa-sort" />
-                  )}
-                </span>
-              </div>
-            ))}
+                      <SortIncentive>
+                        <i className="fas fa-sort" />
+                      </SortIncentive>
+                    )}
+                  </SortCaretWrapper>
+                </TableHeader>
+              );
+            })}
           </HeadRow>
         ))}
       </div>
@@ -164,6 +180,8 @@ function Table({
         headerGroups,
         rows,
         prepareRow,
+        defaultSelectedKey,
+        defaultSelectedValue,
       }}
     >
       {/* we need to use <div/> because of the virtualized table  */}

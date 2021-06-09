@@ -5,7 +5,10 @@ export const SortIncentive = styled.span`
   position: absolute;
   display: none;
 `;
-
+export const SortCaretWrapper = styled.span`
+  padding-left: 1px;
+  position: absolute;
+`;
 export const TableHeader = styled.div`
   padding-bottom: 14px;
   &:hover {
