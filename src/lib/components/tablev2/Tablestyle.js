@@ -42,8 +42,15 @@ export const Styles = styled.div`
   color: white;
 `;
 
-export const TableRow = styled.tr`
-  height: 76px;
+export const HeadRow = styled.div`
+  width: 100%;
+  /* To display scroll bar on the table */
+  display: table;
+  table-layout: fixed;
+  border-bottom: 1px solid ${(props) => getTheme(props).backgroundLevel1};
+`;
+
+export const TableRow = styled(HeadRow)`
   box-sizing: border-box;
 
   &:hover,
@@ -64,4 +71,9 @@ export const TableRow = styled.tr`
     props.row.values[`${props.defaultSelectedKey}`]
       ? getTheme(props).highlight
       : getTheme(props).backgroundLevel2};
+`;
+
+export const TableBody = styled.div`
+  display: block;
+  height: calc(100vh - 48px);
 `;

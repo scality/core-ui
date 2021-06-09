@@ -1,8 +1,11 @@
 //@flow
 import React, { useContext } from 'react';
-import { useTable, useSortBy } from 'react-table';
-import { TableRow } from './Tablestyle';
+import { useTable, useSortBy, useBlockLayout } from 'react-table';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { FixedSizeList as List } from 'react-window';
+import { TableRow, HeadRow, TableBody } from './Tablestyle';
 type SingleSelectionProps = {
+  rowHeight: number,
   defaultSelectedKey?: string,
   defaultSelectedValue?: string,
   onRowSelected?: (dataRow) => void,
@@ -23,9 +26,11 @@ export type TableProps = {
     | 'backgroundLevel2'
     | 'backgroundLevel3'
     | 'backgroundLevel4',
+  rowHeight: number,
 };
 
 function SingleSelectionContent({
+  rowHeight,
   defaultSelectedKey,
   defaultSelectedValue,
   onRowSelected,
@@ -35,13 +40,44 @@ function SingleSelectionContent({
     TableContext,
   );
 
+  const RenderRow = React.useCallback(
+    ({ index, style }) => {
+      const row = rows[index];
+      prepareRow(row);
+
+      return (
+        <TableRow
+          {...row.getRowProps({
+            /* Note:
+            We need to pass the style property to the row component.
+            Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
+            style: { ...style },
+          })}
+          row={row}
+          defaultSelectedKey={defaultSelectedKey}
+          defaultSelectedValue={defaultSelectedValue}
+          className="tr"
+        >
+          {row.cells.map((cell) => {
+            return (
+              <div {...cell.getCellProps()} className="td">
+                {cell.render('Cell')}
+              </div>
+            );
+          })}
+        </TableRow>
+      );
+    },
+    [defaultSelectedKey, defaultSelectedValue, prepareRow, rows],
+  );
+
   return (
     <>
-      <thead>
+      <div className="thead">
         {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
             {headerGroup.headers.map((column) => (
-              <th {...column.getSortByToggleProps()}>
+              <div {...column.getSortByToggleProps()} className="th">
                 {column.render('Header')}
                 {/* Add a sort direction indicator */}
                 <span>
@@ -55,28 +91,25 @@ function SingleSelectionContent({
                     <i className="fas fa-sort" />
                   )}
                 </span>
-              </th>
+              </div>
             ))}
-          </tr>
+          </HeadRow>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <TableRow
-              {...row.getRowProps()}
-              row={row}
-              defaultSelectedKey={defaultSelectedKey}
-              defaultSelectedValue={defaultSelectedValue}
+      </div>
+      <TableBody {...getTableBodyProps()} className="tbody">
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              height={height}
+              itemCount={rows.length} // how many items we are going to render
+              itemSize={rowHeight} // height of each row in pixel
+              width={width} // should include the width of the scrollbar
             >
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-              })}
-            </TableRow>
-          );
-        })}
-      </tbody>
+              {RenderRow}
+            </List>
+          )}
+        </AutoSizer>
+      </TableBody>
     </>
   );
 }
@@ -92,6 +125,7 @@ function Table({
   //map the sortFunction in the columns to this sortTypes
   const sortTypes = {};
   // the default selection should be retrieved from URL which should be a part of the logic in Table
+  // hardcode for the moment
   let defaultSelectedValue = 'Yohann';
 
   // Use the state and functions returned from useTable to build your UI
@@ -118,6 +152,7 @@ function Table({
       sortTypes,
     },
     useSortBy,
+    useBlockLayout,
   );
 
   // Render the UI for your table
@@ -131,12 +166,14 @@ function Table({
         prepareRow,
       }}
     >
-      <table {...getTableProps()}>
+      {/* we need to use <div/> because of the virtualized table  */}
+      <div {...getTableProps()} className="table">
         <SingleSelectionContent
+          rowHeight={80}
           defaultSelectedKey={defaultSelectedKey}
           defaultSelectedValue={defaultSelectedValue}
         />
-      </table>
+      </div>
     </TableContext.Provider>
   );
 }
