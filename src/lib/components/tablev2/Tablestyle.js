@@ -65,13 +65,17 @@ export const TableRow = styled(HeadRow)`
 
   border-right: 4px solid
     ${(props) =>
-      props.defaultSelectedValue ===
-      props.row.values[`${props.defaultSelectedKey}`]
+      (props.defaultSelectedValue &&
+        props.defaultSelectedValue ===
+          props.row.values[`${props.defaultSelectedKey}`]) ||
+      props.row.isSelected
         ? getTheme(props).selectedActive
         : getTheme(props).backgroundLevel2};
   background-color: ${(props) =>
-    props.defaultSelectedValue ===
-    props.row.values[`${props.defaultSelectedKey}`]
+    (props.defaultSelectedValue &&
+      props.defaultSelectedValue ===
+        props.row.values[`${props.defaultSelectedKey}`]) ||
+    props.row.isSelected
       ? getTheme(props).highlight
       : getTheme(props).backgroundLevel2};
 `;

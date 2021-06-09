@@ -1,21 +1,8 @@
 //@flow
-import React, { useContext } from 'react';
-import { useTable, useSortBy, useBlockLayout } from 'react-table';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List } from 'react-window';
-import {
-  TableRow,
-  HeadRow,
-  TableBody,
-  TableHeader,
-  SortCaretWrapper,
-  SortIncentive,
-} from './Tablestyle';
-type SingleSelectionProps = {
-  rowHeight: number,
-  onRowSelected?: (dataRow) => void,
-  children: (sortAndFilter: (DataRow[]) => DataRow[]) => Table.Row[],
-};
+import React from 'react';
+import { useTable, useSortBy, useBlockLayout, useRowSelect } from 'react-table';
+import SingleSelectionContent from './SingleSelectionContent';
+import MultiSelectionContent from './MultiSelectionContent';
 export type TableProps = {
   columns: {
     Header: string,
@@ -24,7 +11,6 @@ export type TableProps = {
     collapsible?: boolean,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
-  defaultSelectedKey?: string,
   data: Array<Object>,
   separationLineVariant?:
     | 'backgroundLevel1'
@@ -32,116 +18,38 @@ export type TableProps = {
     | 'backgroundLevel3'
     | 'backgroundLevel4',
   rowHeight: number,
+  isMultiRowSelection?: false,
 };
 
-function SingleSelectionContent({
-  rowHeight,
-  onRowSelected,
-  children,
-}: SingleSelectionProps) {
-  const {
-    headerGroups,
-    getTableBodyProps,
-    prepareRow,
-    rows,
-    defaultSelectedKey,
-    defaultSelectedValue,
-  } = useContext(TableContext);
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
 
-  const RenderRow = React.useCallback(
-    ({ index, style }) => {
-      const row = rows[index];
-      prepareRow(row);
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
 
-      return (
-        <TableRow
-          {...row.getRowProps({
-            /* Note:
-            We need to pass the style property to the row component.
-            Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
-            style: { ...style },
-          })}
-          row={row}
-          defaultSelectedKey={defaultSelectedKey}
-          defaultSelectedValue={defaultSelectedValue}
-          className="tr"
-        >
-          {row.cells.map((cell) => {
-            return (
-              <div {...cell.getCellProps()} className="td">
-                {cell.render('Cell')}
-              </div>
-            );
-          })}
-        </TableRow>
-      );
-    },
-    [defaultSelectedKey, defaultSelectedValue, prepareRow, rows],
-  );
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  },
+);
 
-  return (
-    <>
-      <div className="thead">
-        {headerGroups.map((headerGroup) => (
-          <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
-            {headerGroup.headers.map((column) => {
-              const headerStyleProps = column.getHeaderProps(
-                Object.assign(column.getSortByToggleProps(), {
-                  style: column.cellStyle,
-                }),
-              );
-              return (
-                <TableHeader {...headerStyleProps}>
-                  {column.render('Header')}
-                  <SortCaretWrapper>
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <i className="fas fa-sort-down" />
-                      ) : (
-                        <i className="fas fa-sort-up" />
-                      )
-                    ) : (
-                      <SortIncentive>
-                        <i className="fas fa-sort" />
-                      </SortIncentive>
-                    )}
-                  </SortCaretWrapper>
-                </TableHeader>
-              );
-            })}
-          </HeadRow>
-        ))}
-      </div>
-      <TableBody {...getTableBodyProps()} className="tbody">
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              height={height}
-              itemCount={rows.length} // how many items we are going to render
-              itemSize={rowHeight} // height of each row in pixel
-              width={width} // should include the width of the scrollbar
-            >
-              {RenderRow}
-            </List>
-          )}
-        </AutoSizer>
-      </TableBody>
-    </>
-  );
-}
-
-const TableContext = React.createContext<null>(null);
+export const TableContext = React.createContext<null>(null);
 
 function Table({
   columns,
   data,
   defaultSortingKey,
-  defaultSelectedKey,
+  isMultiRowSelection = false,
 }: TableProps) {
   //map the sortFunction in the columns to this sortTypes
   const sortTypes = {};
-  // the default selection should be retrieved from URL which should be a part of the logic in Table
-  // hardcode for the moment
+  // we need to translate the row selection information in URL to the tr id
+  // this is the information we should get from URL
   let defaultSelectedValue = 'Yohann';
 
   // Use the state and functions returned from useTable to build your UI
@@ -151,6 +59,8 @@ function Table({
     headerGroups,
     rows,
     prepareRow,
+    selectedFlatRows,
+    state: { selectedRowIds },
   } = useTable(
     {
       columns,
@@ -169,6 +79,31 @@ function Table({
     },
     useSortBy,
     useBlockLayout,
+    useRowSelect,
+    (hooks) => {
+      isMultiRowSelection &&
+        hooks.visibleColumns.push((columns) => [
+          // Let's make a column for selection
+          {
+            id: 'selection',
+            // The header can use the table's getToggleAllRowsSelectedProps method
+            // to render a checkbox
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <div>
+                <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            ),
+            // The cell can use the individual row's getToggleRowSelectedProps method
+            // to the render a checkbox
+            Cell: ({ row }) => (
+              <div>
+                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              </div>
+            ),
+          },
+          ...columns,
+        ]);
+    },
   );
 
   // Render the UI for your table
@@ -180,17 +115,19 @@ function Table({
         headerGroups,
         rows,
         prepareRow,
-        defaultSelectedKey,
         defaultSelectedValue,
+        selectedRowIds,
+        selectedFlatRows,
       }}
     >
-      {/* we need to use <div/> because of the virtualized table  */}
+      {/* we need to use <div/> because of the virtualized table*/}
       <div {...getTableProps()} className="table">
         <SingleSelectionContent
           rowHeight={80}
-          defaultSelectedKey={defaultSelectedKey}
+          defaultSelectedKey={'firstName'}
           defaultSelectedValue={defaultSelectedValue}
         />
+        {/* <MultiSelectionContent rowHeight={80} /> */}
       </div>
     </TableContext.Provider>
   );
