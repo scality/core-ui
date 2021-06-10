@@ -15,21 +15,18 @@ import { TableContext } from './Tablev2.component';
 export type SingleSelectionProps = {
   rowHeight: number,
   onRowSelected?: (dataRow) => void,
-  children: (sortAndFilter: (DataRow[]) => DataRow[]) => Table.Row[],
+  defaultSelectedKey?: string,
 };
 
 export default function SingleSelectionContent({
   rowHeight,
   onRowSelected,
   defaultSelectedKey,
+  defaultSelectedValue,
 }: SingleSelectionProps) {
-  const {
-    headerGroups,
-    getTableBodyProps,
-    prepareRow,
-    rows,
-    defaultSelectedValue,
-  } = useContext(TableContext);
+  const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
+    TableContext,
+  );
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {

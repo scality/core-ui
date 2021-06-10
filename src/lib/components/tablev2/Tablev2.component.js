@@ -1,24 +1,29 @@
 //@flow
 import React from 'react';
-import { useTable, useSortBy, useBlockLayout, useRowSelect } from 'react-table';
-import SingleSelectionContent from './SingleSelectionContent';
-import MultiSelectionContent from './MultiSelectionContent';
+import {
+  useTable,
+  useSortBy,
+  useBlockLayout,
+  useRowSelect,
+  useExpanded,
+} from 'react-table';
 export type TableProps = {
   columns: {
     Header: string,
     accessor: string,
     sortFunction?: (a, b) => number,
-    collapsible?: boolean,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
-  data: Array<Object>,
+  data: [], // if the row is collapsible, then subRows
   separationLineVariant?:
     | 'backgroundLevel1'
     | 'backgroundLevel2'
     | 'backgroundLevel3'
     | 'backgroundLevel4',
   rowHeight: number,
-  isMultiRowSelection?: false,
+  isMultiRowSelection?: boolean,
+  isCollapsible?: boolean,
+  children: any,
 };
 
 const IndeterminateCheckbox = React.forwardRef(
@@ -44,13 +49,30 @@ function Table({
   columns,
   data,
   defaultSortingKey,
+  isCollapsible = false,
   isMultiRowSelection = false,
+  children,
+  ...rest
 }: TableProps) {
   //map the sortFunction in the columns to this sortTypes
+  //there are some default ones
   const sortTypes = {};
-  // we need to translate the row selection information in URL to the tr id
-  // this is the information we should get from URL
-  let defaultSelectedValue = 'Yohann';
+  const getRowId = (row, relativeIndex) => {
+    return row.instance;
+  };
+
+  const expandedIDs = {};
+  function deepSearchRowIDs(tree) {
+    for (var i = 0; i < tree.length; i++) {
+      if (tree[i].subRows && tree[i].subRows.length > 0) {
+        deepSearchRowIDs(tree[i].subRows);
+      }
+      if (tree[i].isExpanded) {
+        expandedIDs[getRowId(tree[i])] = true;
+      }
+    }
+    return expandedIDs;
+  }
 
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -65,6 +87,7 @@ function Table({
     {
       columns,
       data,
+      getRowId,
       initialState: {
         sortBy: [
           {
@@ -72,6 +95,12 @@ function Table({
             desc: false,
           },
         ],
+        // If a row's id is set to true in this object, that row will have an expanded state. For example, { '3': true }
+        expanded: deepSearchRowIDs(data),
+        // data.reduce(
+        //   (agg, item) => ({ ...agg, [getRowId(item)]: item.isExpanded }),
+        //   {}
+        // )
       },
       disableMultiSort: true,
       autoResetSortBy: false,
@@ -79,6 +108,7 @@ function Table({
     },
     useSortBy,
     useBlockLayout,
+    useExpanded,
     useRowSelect,
     (hooks) => {
       isMultiRowSelection &&
@@ -104,6 +134,48 @@ function Table({
           ...columns,
         ]);
     },
+    (hooks) => {
+      isCollapsible &&
+        hooks.visibleColumns.push((columns) => [
+          // Let's make a column for selection
+          {
+            // Build our expander column
+            id: 'expander', // Make sure it has an ID
+            Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
+              <span {...getToggleAllRowsExpandedProps()}>
+                {isAllRowsExpanded ? (
+                  <i className="fas fa-arrow-circle-down"></i>
+                ) : (
+                  <i className="fas fa-arrow-circle-right"></i>
+                )}
+              </span>
+            ),
+            Cell: ({ row }) => {
+              // Use the row.canExpand and row.getToggleRowExpandedProps prop getter
+              // to build the toggle for expanding a row
+              return row.canExpand ? (
+                <span
+                  {...row.getToggleRowExpandedProps({
+                    style: {
+                      // We can even use the row.depth property
+                      // and paddingLeft to indicate the depth
+                      // of the row
+                      paddingLeft: `${row.depth * 2}rem`,
+                    },
+                  })}
+                >
+                  {row.isExpanded ? (
+                    <i className="fas fa-arrow-circle-down"></i>
+                  ) : (
+                    <i className="fas fa-arrow-circle-right"></i>
+                  )}
+                </span>
+              ) : null;
+            },
+          },
+          ...columns,
+        ]);
+    },
   );
 
   // Render the UI for your table
@@ -115,19 +187,13 @@ function Table({
         headerGroups,
         rows,
         prepareRow,
-        defaultSelectedValue,
         selectedRowIds,
         selectedFlatRows,
       }}
     >
       {/* we need to use <div/> because of the virtualized table*/}
       <div {...getTableProps()} className="table">
-        <SingleSelectionContent
-          rowHeight={80}
-          defaultSelectedKey={'firstName'}
-          defaultSelectedValue={defaultSelectedValue}
-        />
-        {/* <MultiSelectionContent rowHeight={80} /> */}
+        {children}
       </div>
     </TableContext.Provider>
   );

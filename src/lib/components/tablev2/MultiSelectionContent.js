@@ -16,7 +16,6 @@ export type MultiSelectionProps = {
   rowHeight: number,
   defaultSelection: key[],
   onMultiSelectionChanged?: (DataRow[]) => void,
-  children: (sortAndFilter: (DataRow[]) => DataRow[]) => Table.Row[],
 };
 
 export default function MultiSelectionContent({
