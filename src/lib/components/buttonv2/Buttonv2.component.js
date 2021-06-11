@@ -11,7 +11,7 @@ import { spacing } from '../../style/theme.js';
 export type Props = {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline',
   disabled?: boolean,
-  onClick?: (any) => void,
+  onClick?: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
   icon?: Node,
   label?: string,
   tooltip?: TooltipProps,
@@ -123,7 +123,6 @@ export const ButtonStyled = styled.button`
           }
         `;
       default:
-        console.warn('Invalid button variant, please check the Storybook.');
     }
   }}
 
@@ -195,13 +194,15 @@ function Button({
   tooltip,
   ...rest
 }: Props) {
-  if (!icon && !label)
+  if (!icon && !label) {
     console.warn(
       'Please specify either icon or label prop for the button component.',
     );
+  }
 
-  if (icon && !tooltip)
+  if (!label && icon && !tooltip) {
     console.warn('Please specify the tooltip for the standalone icon button.');
+  }
 
   return (
     <Tooltip

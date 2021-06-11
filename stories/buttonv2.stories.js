@@ -13,7 +13,14 @@ export const Default = () => {
   return (
     <Wrapper className="storybook-button">
       <Title>Button default</Title>
-      <Button variant="primary" label="primary" />
+      <Button
+        variant="primary"
+        label="primary"
+        onClick={(e) => {
+          e.persist();
+          action('Button Click');
+        }}
+      />
       <Button variant="secondary" label="secondary" />
       <Button variant="danger" label="danger" />
       <Button variant="outline" label="outline" />
@@ -22,25 +29,21 @@ export const Default = () => {
         variant="primary"
         label="primary"
         icon={<i className="fas fa-arrow-right"></i>}
-        onClick={action('Button Click')}
       />
       <Button
         variant="secondary"
         label="secondary"
         icon={<i className="fas fa-arrow-right"></i>}
-        onClick={action('Button Click')}
       />
       <Button
         variant="danger"
         label="danger"
         icon={<i className="fas fa-arrow-right"></i>}
-        onClick={action('Button Click')}
       />
       <Button
         variant="outline"
         label="outline"
         icon={<i className="fas fa-arrow-right"></i>}
-        onClick={action('Button Click')}
       />
       <Title>Button disabled</Title>
       <Button
