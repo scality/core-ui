@@ -6,7 +6,10 @@ import {
   useBlockLayout,
   useRowSelect,
   useExpanded,
+  useFilters,
+  useGlobalFilter,
 } from 'react-table';
+import { DefaultColumnFilter } from './TableFilters.js';
 export type TableProps = {
   columns: {
     Header: string,
@@ -14,7 +17,7 @@ export type TableProps = {
     sortFunction?: (a, b) => number,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
-  data: [], // if the row is collapsible, then subRows
+  data: [],
   separationLineVariant?:
     | 'backgroundLevel1'
     | 'backgroundLevel2'
@@ -23,6 +26,7 @@ export type TableProps = {
   rowHeight: number,
   isMultiRowSelection?: boolean,
   isCollapsible?: boolean,
+  rowIDKey: string, // define which column represent the unique id of the table
   children: any,
 };
 
@@ -51,6 +55,7 @@ function Table({
   defaultSortingKey,
   isCollapsible = false,
   isMultiRowSelection = false,
+  rowIDKey,
   children,
   ...rest
 }: TableProps) {
@@ -58,7 +63,7 @@ function Table({
   //there are some default ones
   const sortTypes = {};
   const getRowId = (row, relativeIndex) => {
-    return row.instance;
+    return row[rowIDKey];
   };
 
   const expandedIDs = {};
@@ -74,6 +79,14 @@ function Table({
     return expandedIDs;
   }
 
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    [],
+  );
+
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -82,11 +95,15 @@ function Table({
     rows,
     prepareRow,
     selectedFlatRows,
-    state: { selectedRowIds },
+    state: { selectedRowIds, globalFilter },
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    setFilter,
   } = useTable(
     {
       columns,
       data,
+      defaultColumn,
       getRowId,
       initialState: {
         sortBy: [
@@ -106,8 +123,10 @@ function Table({
       autoResetSortBy: false,
       sortTypes,
     },
-    useSortBy,
     useBlockLayout,
+    useFilters,
+    useGlobalFilter,
+    useSortBy,
     useExpanded,
     useRowSelect,
     (hooks) => {
@@ -177,7 +196,7 @@ function Table({
         ]);
     },
   );
-
+  console.log('columns', columns);
   // Render the UI for your table
   return (
     <TableContext.Provider
@@ -189,6 +208,10 @@ function Table({
         prepareRow,
         selectedRowIds,
         selectedFlatRows,
+        preGlobalFilteredRows,
+        setGlobalFilter,
+        globalFilter,
+        setFilter,
       }}
     >
       {/* we need to use <div/> because of the virtualized table*/}

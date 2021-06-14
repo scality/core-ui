@@ -5,6 +5,10 @@ import { Styles } from '../src/lib/components/tablev2/Tablestyle';
 import { Wrapper } from './common';
 import SingleSelectionContent from '../src/lib/components/tablev2/SingleSelectionContent';
 import MultiSelectionContent from '../src/lib/components/tablev2/MultiSelectionContent';
+import {
+  GlobalFilter,
+  AddColumnFilter,
+} from '../src/lib/components/tablev2/TableFilters';
 
 export default {
   title: 'Components/V2/Table',
@@ -71,7 +75,10 @@ export const SingleSelection = () => {
           rowHeight={30}
           isCollapsible={false}
           isMultiRowSelection={false}
+          rowIDKey={'lastName'}
         >
+          <GlobalFilter />
+          <AddColumnFilter />
           <SingleSelectionContent
             rowHeight={80}
             defaultSelectedKey={'firstName'}
@@ -150,7 +157,6 @@ export const collapsible = () => {
       activesince: '2012-04-08 06:18:44',
       subRows: [
         {
-          // id: 0.0
           isExpanded: true,
           instance: 'Datacenter-1',
           name: 'PlatformServiceDegraded',
@@ -158,7 +164,6 @@ export const collapsible = () => {
           activesince: '2012-04-08 06:18:44',
           subRows: [
             {
-              // id: 0.0.0
               isExpanded: true,
               instance: 'Observability',
               name: 'ObservailityServicesDegraded',
@@ -166,7 +171,6 @@ export const collapsible = () => {
               activesince: '2021-04-08 06:15:44',
               subRows: [
                 {
-                  //id: 0.0.0.0
                   isExpanded: true,
                   instance: 'Loki Service',
                   name: 'LokiServiceDegraded',
@@ -178,7 +182,6 @@ export const collapsible = () => {
           ],
         },
         {
-          //id: 0.1
           instance: 'Datacenter-2',
           name: 'PlatformServicesDegraded',
           description: 'The Platform services are degraded',
@@ -220,6 +223,7 @@ export const collapsible = () => {
           defaultSortingKey={'health'}
           isCollapsible={true}
           isMultiRowSelection={false}
+          rowIDKey={'instance'}
         >
           <SingleSelectionContent
             rowHeight={60}

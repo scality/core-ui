@@ -74,6 +74,7 @@ export default function SingleSelectionContent({
               return (
                 <TableHeader {...headerStyleProps}>
                   {column.render('Header')}
+
                   <SortCaretWrapper>
                     {column.isSorted ? (
                       column.isSortedDesc ? (
