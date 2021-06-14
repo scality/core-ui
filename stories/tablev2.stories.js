@@ -139,6 +139,7 @@ export const MultiSelection = () => {
           rowHeight={30}
           isCollapsible={false}
           isMultiRowSelection={true}
+          rowIDKey={'lastName'}
         >
           <MultiSelectionContent rowHeight={80} />
         </TableV2>
