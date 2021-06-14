@@ -10,26 +10,18 @@ import {
   SortCaretWrapper,
   SortIncentive,
 } from './Tablestyle';
-import { TableContext, useTableProps } from './Tablev2.component';
+import { TableContext } from './Tablev2.component';
 
-export type MultiSelectionProps = {
+export type SimpleTableContentProps = {
   rowHeight: number,
-  defaultSelection: key[],
-  onMultiSelectionChanged?: (DataRow[]) => void,
 };
 
-export default function MultiSelectionContent({
+export default function SimpleTableConent({
   rowHeight,
-  onMultiSelectionChanged,
-}: MultiSelectionProps) {
-  const [
-    headerGroups,
-    getTableBodyProps,
-    prepareRow,
-    rows,
-    selectedRowIds,
-    selectedFlatRows,
-  ] = useTableProps();
+}: SimpleTableContentProps) {
+  const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
+    TableContext,
+  );
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
@@ -39,7 +31,6 @@ export default function MultiSelectionContent({
       return (
         <TableRow
           {...row.getRowProps({
-            onClick: () => onMultiSelectionChanged(selectedFlatRows),
             /* Note:
             We need to pass the style property to the row component.
             Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */

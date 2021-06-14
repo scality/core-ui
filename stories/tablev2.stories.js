@@ -1,10 +1,8 @@
 //@flow
 import React from 'react';
-import TableV2 from '../src/lib/components/tablev2/Tablev2.component';
+import Table from '../src/lib/components/tablev2/Tablev2.component';
 import { Styles } from '../src/lib/components/tablev2/Tablestyle';
 import { Wrapper } from './common';
-import SingleSelectionContent from '../src/lib/components/tablev2/SingleSelectionContent';
-import MultiSelectionContent from '../src/lib/components/tablev2/MultiSelectionContent';
 import {
   GlobalFilter,
   AddColumnFilter,
@@ -12,7 +10,72 @@ import {
 
 export default {
   title: 'Components/V2/Table',
-  component: TableV2,
+  component: Table,
+};
+
+export const SimpleContentTable = () => {
+  const data = [
+    {
+      firstName: 'Sotiria',
+      lastName: 'Vangelis',
+      age: 30,
+      health: 'healthy',
+    },
+    {
+      firstName: 'Stefania',
+      lastName: 'Evgenios',
+      age: 27,
+      health: 'warning',
+    },
+    {
+      firstName: 'Yohann',
+      lastName: 'Rodolph',
+      age: 27,
+      health: 'critical',
+    },
+    {
+      firstName: 'Ninette',
+      lastName: 'Caroline',
+      age: 31,
+      health: 'healthy',
+    },
+  ];
+
+  const columns = [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Health',
+      accessor: 'health',
+      sortType: 'health',
+    },
+  ];
+
+  return (
+    <Wrapper>
+      <Styles>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          rowHeight={30}
+          rowIDKey={'lastName'}
+        >
+          <Table.SimpleContent rowHeight={80} />
+        </Table>
+      </Styles>
+    </Wrapper>
+  );
 };
 
 export const SingleSelection = () => {
@@ -43,32 +106,29 @@ export const SingleSelection = () => {
     },
   ];
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'First Name',
-        accessor: 'firstName',
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName',
-      },
-      {
-        Header: 'Age',
-        accessor: 'age',
-      },
-      {
-        Header: 'Health',
-        accessor: 'health',
-      },
-    ],
-    [],
-  );
+  const columns = [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Health',
+      accessor: 'health',
+    },
+  ];
 
   return (
     <Wrapper>
       <Styles>
-        <TableV2
+        <Table
           columns={columns}
           data={data}
           defaultSortingKey={'health'}
@@ -79,12 +139,12 @@ export const SingleSelection = () => {
         >
           <GlobalFilter />
           <AddColumnFilter />
-          <SingleSelectionContent
+          <Table.SingleSelectionContent
             rowHeight={80}
             defaultSelectedKey={'firstName'}
             defaultSelectedValue={'Yohann'}
           />
-        </TableV2>
+        </Table>
       </Styles>
     </Wrapper>
   );
@@ -107,42 +167,38 @@ export const MultiSelection = () => {
     { firstName: 'Ninette', lastName: 'Caroline', age: 31, health: 'healthy' },
   ];
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'First Name',
-        accessor: 'firstName',
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName',
-      },
-      {
-        Header: 'Age',
-        accessor: 'age',
-      },
-      {
-        Header: 'Health',
-        accessor: 'health',
-      },
-    ],
-    [],
-  );
+  const columns = [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Health',
+      accessor: 'health',
+    },
+  ];
 
   return (
     <Wrapper>
       <Styles>
-        <TableV2
+        <Table
           columns={columns}
           data={data}
           defaultSortingKey={'health'}
-          rowHeight={30}
           isCollapsible={false}
           isMultiRowSelection={true}
           rowIDKey={'lastName'}
         >
-          <MultiSelectionContent rowHeight={80} />
-        </TableV2>
+          <Table.MultiSelectionContent rowHeight={80} />
+        </Table>
       </Styles>
     </Wrapper>
   );
@@ -193,32 +249,29 @@ export const collapsible = () => {
     },
   ];
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Instance',
-        accessor: 'instance',
-      },
-      {
-        Header: 'Name',
-        accessor: 'name',
-      },
-      {
-        Header: 'Description',
-        accessor: 'description',
-      },
-      {
-        Header: 'Active Since',
-        accessor: 'activesince',
-      },
-    ],
-    [],
-  );
+  const columns = [
+    {
+      Header: 'Instance',
+      accessor: 'instance',
+    },
+    {
+      Header: 'Name',
+      accessor: 'name',
+    },
+    {
+      Header: 'Description',
+      accessor: 'description',
+    },
+    {
+      Header: 'Active Since',
+      accessor: 'activesince',
+    },
+  ];
 
   return (
     <Wrapper>
       <Styles>
-        <TableV2
+        <Table
           columns={columns}
           data={data}
           defaultSortingKey={'health'}
@@ -226,12 +279,12 @@ export const collapsible = () => {
           isMultiRowSelection={false}
           rowIDKey={'instance'}
         >
-          <SingleSelectionContent
+          <Table.SingleSelectionContent
             rowHeight={60}
             defaultSelectedKey={'firstName'}
             defaultSelectedValue={'Yohann'}
           />
-        </TableV2>
+        </Table>
       </Styles>
     </Wrapper>
   );

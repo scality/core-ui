@@ -8,26 +8,39 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
+  getTableProps,
+  getTableBodyProps,
+  headerGroups,
+  rows,
+  prepareRow,
+  selectedRowIds,
+  selectedFlatRows,
+  preGlobalFilteredRows,
+  setGlobalFilter,
+  globalFilter,
+  setFilter,
 } from 'react-table';
+import SimpleContent from './SimpleContent';
+import SingleSelectionContent from './SingleSelectionContent';
+import MultiSelectionContent from './MultiSelectionContent';
 import { DefaultColumnFilter } from './TableFilters.js';
+import { compareHealth } from './TableUtil.js';
+
 export type TableProps = {
   columns: {
     Header: string,
     accessor: string,
-    sortFunction?: (a, b) => number,
+    sortType?:
+      | string
+      | ((rowA: any, rowB: any, columnId: string, desc: boolean) => number),
+    Cell?: (cellProps: any) => any,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
   data: [],
-  separationLineVariant?:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4',
-  rowHeight: number,
-  isMultiRowSelection?: boolean,
-  isCollapsible?: boolean,
   rowIDKey: string, // define which column represent the unique id of the table
   children: any,
+  isMultiRowSelection?: boolean,
+  isCollapsible?: boolean,
 };
 
 const IndeterminateCheckbox = React.forwardRef(
@@ -46,8 +59,20 @@ const IndeterminateCheckbox = React.forwardRef(
     );
   },
 );
-
-export const TableContext = React.createContext<null>(null);
+export type TableContextValue = {
+  getTableProps: getTableProps,
+  getTableBodyProps: getTableBodyProps,
+  headerGroups: headerGroups,
+  rows: rows,
+  prepareRow: prepareRow,
+  selectedRowIds: selectedRowIds,
+  selectedFlatRows: selectedFlatRows,
+  preGlobalFilteredRows: preGlobalFilteredRows,
+  setGlobalFilter: setGlobalFilter,
+  globalFilter: globalFilter,
+  setFilter: setFilter,
+};
+export const TableContext = React.createContext<TableContextValue>();
 
 function Table({
   columns,
@@ -59,9 +84,12 @@ function Table({
   children,
   ...rest
 }: TableProps) {
-  //map the sortFunction in the columns to this sortTypes
-  //there are some default ones
-  const sortTypes = {};
+  const sortTypes = {
+    health: (row1, row2) => {
+      return compareHealth(row2.values.health, row1.values.health);
+    },
+  };
+
   const getRowId = (row, relativeIndex) => {
     return row[rowIDKey];
   };
@@ -114,10 +142,6 @@ function Table({
         ],
         // If a row's id is set to true in this object, that row will have an expanded state. For example, { '3': true }
         expanded: deepSearchRowIDs(data),
-        // data.reduce(
-        //   (agg, item) => ({ ...agg, [getRowId(item)]: item.isExpanded }),
-        //   {}
-        // )
       },
       disableMultiSort: true,
       autoResetSortBy: false,
@@ -196,7 +220,7 @@ function Table({
         ]);
     },
   );
-  console.log('columns', columns);
+
   // Render the UI for your table
   return (
     <TableContext.Provider
@@ -222,4 +246,7 @@ function Table({
   );
 }
 
+Table.SimpleContent = SimpleContent;
+Table.SingleSelectionContent = SingleSelectionContent;
+Table.MultiSelectionContent = MultiSelectionContent;
 export default Table;

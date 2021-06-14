@@ -3,33 +3,22 @@ import React, { useContext } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 import {
-  TableRow,
   HeadRow,
   TableBody,
   TableHeader,
   SortCaretWrapper,
   SortIncentive,
 } from './Tablestyle';
-import { TableContext, useTableProps } from './Tablev2.component';
+import { TableContext } from './Tablev2.component';
 
-export type MultiSelectionProps = {
+export type SingleSelectionProps = {
   rowHeight: number,
-  defaultSelection: key[],
-  onMultiSelectionChanged?: (DataRow[]) => void,
 };
 
-export default function MultiSelectionContent({
-  rowHeight,
-  onMultiSelectionChanged,
-}: MultiSelectionProps) {
-  const [
-    headerGroups,
-    getTableBodyProps,
-    prepareRow,
-    rows,
-    selectedRowIds,
-    selectedFlatRows,
-  ] = useTableProps();
+export default function SimpleContent({ rowHeight }: SingleSelectionProps) {
+  const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
+    TableContext,
+  );
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
@@ -37,9 +26,8 @@ export default function MultiSelectionContent({
       prepareRow(row);
 
       return (
-        <TableRow
+        <div
           {...row.getRowProps({
-            onClick: () => onMultiSelectionChanged(selectedFlatRows),
             /* Note:
             We need to pass the style property to the row component.
             Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
@@ -55,7 +43,7 @@ export default function MultiSelectionContent({
               </div>
             );
           })}
-        </TableRow>
+        </div>
       );
     },
     [prepareRow, rows],
@@ -75,6 +63,7 @@ export default function MultiSelectionContent({
               return (
                 <TableHeader {...headerStyleProps}>
                   {column.render('Header')}
+
                   <SortCaretWrapper>
                     {column.isSorted ? (
                       column.isSortedDesc ? (
