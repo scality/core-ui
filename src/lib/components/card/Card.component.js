@@ -86,7 +86,8 @@ const StyledCard = styled.div`
         ],
       ).join(',');
       let opacity = 1;
-      if (props.colorStatus !== 'backgroundLevel4') opacity = 0.4;
+      if (props.colorStatus && props.colorStatus !== 'backgroundLevel4')
+        opacity = 0.4;
 
       return `background: rgba(${hexColor}, ${opacity});`;
     }}
