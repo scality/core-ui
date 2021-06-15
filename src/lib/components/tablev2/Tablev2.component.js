@@ -33,6 +33,7 @@ export type TableProps = {
     sortType?:
       | string
       | ((rowA: any, rowB: any, columnId: string, desc: boolean) => number),
+    cellStyle?: {},
     Cell?: (cellProps: any) => any,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here

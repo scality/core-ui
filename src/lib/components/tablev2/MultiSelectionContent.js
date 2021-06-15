@@ -10,26 +10,28 @@ import {
   SortCaretWrapper,
   SortIncentive,
 } from './Tablestyle';
-import { TableContext, useTableProps } from './Tablev2.component';
+import { TableContext } from './Tablev2.component';
 
 export type MultiSelectionProps = {
   rowHeight: number,
+  outerTableHeight: number, // in pixel, the sum of height outside the table, pass it to virtualized table to calculate the height of the table
   defaultSelection: key[],
   onMultiSelectionChanged?: (DataRow[]) => void,
 };
 
 export default function MultiSelectionContent({
   rowHeight,
+  outerTableHeight,
   onMultiSelectionChanged,
 }: MultiSelectionProps) {
-  const [
+  const {
     headerGroups,
     getTableBodyProps,
     prepareRow,
     rows,
     selectedRowIds,
     selectedFlatRows,
-  ] = useTableProps();
+  } = useContext(TableContext);
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
@@ -94,7 +96,11 @@ export default function MultiSelectionContent({
           </HeadRow>
         ))}
       </div>
-      <TableBody {...getTableBodyProps()} className="tbody">
+      <TableBody
+        {...getTableBodyProps()}
+        outerTableHeight={outerTableHeight}
+        className="tbody"
+      >
         <AutoSizer>
           {({ height, width }) => (
             <List

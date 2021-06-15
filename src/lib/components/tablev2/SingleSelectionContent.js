@@ -14,12 +14,14 @@ import { TableContext } from './Tablev2.component';
 
 export type SingleSelectionProps = {
   rowHeight: number,
+  outerTableHeight: number, // in pixel, the sum of height outside the table, pass it to virtualized table to calculate the height of the table
   onRowSelected?: (dataRow) => void,
   defaultSelectedKey?: string,
 };
 
 export default function SingleSelectionContent({
   rowHeight,
+  outerTableHeight,
   onRowSelected,
   defaultSelectedKey,
   defaultSelectedValue,
@@ -94,7 +96,11 @@ export default function SingleSelectionContent({
           </HeadRow>
         ))}
       </div>
-      <TableBody {...getTableBodyProps()} className="tbody">
+      <TableBody
+        {...getTableBodyProps()}
+        outerTableHeight={outerTableHeight}
+        className="tbody"
+      >
         <AutoSizer>
           {({ height, width }) => (
             <List

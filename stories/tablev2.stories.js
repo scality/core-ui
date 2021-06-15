@@ -53,6 +53,7 @@ export const SimpleContentTable = () => {
     {
       Header: 'Age',
       accessor: 'age',
+      cellStyle: { width: '50px' },
     },
     {
       Header: 'Health',
@@ -71,7 +72,7 @@ export const SimpleContentTable = () => {
           rowHeight={30}
           rowIDKey={'lastName'}
         >
-          <Table.SimpleContent rowHeight={80} />
+          <Table.SimpleContent rowHeight={80} outerTableHeight={48} />
         </Table>
       </Styles>
     </Wrapper>
@@ -141,6 +142,7 @@ export const SingleSelection = () => {
           <AddColumnFilter />
           <Table.SingleSelectionContent
             rowHeight={80}
+            outerTableHeight={48}
             defaultSelectedKey={'firstName'}
             defaultSelectedValue={'Yohann'}
           />
@@ -197,7 +199,7 @@ export const MultiSelection = () => {
           isMultiRowSelection={true}
           rowIDKey={'lastName'}
         >
-          <Table.MultiSelectionContent rowHeight={80} />
+          <Table.MultiSelectionContent rowHeight={80} outerTableHeight={48} />
         </Table>
       </Styles>
     </Wrapper>

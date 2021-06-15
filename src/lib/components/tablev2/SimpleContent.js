@@ -11,11 +11,16 @@ import {
 } from './Tablestyle';
 import { TableContext } from './Tablev2.component';
 
-export type SingleSelectionProps = {
+export type SimpleContentProps = {
   rowHeight: number,
+  outerTableHeight: number, // in pixel, the sum of height outside the table, pass it to virtualized table to calculate the height of the table
 };
 
-export default function SimpleContent({ rowHeight }: SingleSelectionProps) {
+export default function SimpleContent({
+  rowHeight,
+  outerTableHeight,
+}: SimpleContentProps) {
+  const scrollBarSize = 8;
   const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
     TableContext,
   );
@@ -37,8 +42,18 @@ export default function SimpleContent({ rowHeight }: SingleSelectionProps) {
           className="tr"
         >
           {row.cells.map((cell) => {
+            let cellProps = cell.getCellProps({
+              style: {
+                ...cell.column.cellStyle,
+                // Vertically center the text in cells.
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              },
+            });
+
             return (
-              <div {...cell.getCellProps()} className="td">
+              <div {...cellProps} className="td">
                 {cell.render('Cell')}
               </div>
             );
@@ -53,7 +68,13 @@ export default function SimpleContent({ rowHeight }: SingleSelectionProps) {
     <>
       <div className="thead">
         {headerGroups.map((headerGroup) => (
-          <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
+          <HeadRow
+            {...headerGroup.getHeaderGroupProps()}
+            style={{
+              display: 'flex',
+            }}
+            className="tr"
+          >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
@@ -83,14 +104,18 @@ export default function SimpleContent({ rowHeight }: SingleSelectionProps) {
           </HeadRow>
         ))}
       </div>
-      <TableBody {...getTableBodyProps()} className="tbody">
+      <TableBody
+        {...getTableBodyProps()}
+        className="tbody"
+        outerTableHeight={outerTableHeight}
+      >
         <AutoSizer>
           {({ height, width }) => (
             <List
               height={height}
               itemCount={rows.length} // how many items we are going to render
               itemSize={rowHeight} // height of each row in pixel
-              width={width} // should include the width of the scrollbar
+              width={width + scrollBarSize} // should include the width of the scrollbar
             >
               {RenderRow}
             </List>

@@ -46,16 +46,17 @@ export const Styles = styled.div`
 `;
 
 export const HeadRow = styled.div`
-  width: 100%;
   /* To display scroll bar on the table */
+  width: 100%;
   display: table;
   table-layout: fixed;
   border-bottom: 1px solid ${(props) => getTheme(props).backgroundLevel1};
+  cursor: pointer;
 `;
 
 export const TableRow = styled(HeadRow)`
   box-sizing: border-box;
-
+  width: 100%;
   &:hover,
   &:focus {
     background-color: ${(props) => getTheme(props).highlight};
@@ -82,5 +83,6 @@ export const TableRow = styled(HeadRow)`
 
 export const TableBody = styled.div`
   display: block;
-  height: calc(100vh - 48px);
+  --variable-height: ${(props) => props.outerTableHeight}px;
+  height: calc(100vh - var(--variable-height));
 `;
