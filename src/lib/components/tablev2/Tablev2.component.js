@@ -8,8 +8,6 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
-  getTableProps,
-  getTableBodyProps,
   headerGroups,
   rows,
   prepareRow,
@@ -19,31 +17,36 @@ import {
   setGlobalFilter,
   globalFilter,
   setFilter,
+  getRowId,
 } from 'react-table';
-import SimpleContent from './SimpleContent';
+import SingleSelectableContent from './SingleSelectableContent';
 import { compareHealth } from './TableUtil.js';
-
+import { TableWrapper } from './Tablestyle';
+export type DataRow = {
+  [key: string]: any,
+};
 export type TableProps = {
   columns: {
     Header: string,
     accessor: string,
     sortType?:
       | string
-      | ((rowA: any, rowB: any, columnId: string, desc: boolean) => number),
-    cellStyle?: { [key: string]: any },
-    Cell?: (cellProps: any) => any,
+      | ((
+          rowA: DataRow,
+          rowB: DataRow,
+          columnId: string,
+          desc: boolean,
+        ) => number),
+    cellStyle?: $Shape<CSSStyleDeclaration>,
+    Cell?: React.Node,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
-  data: { [key: string]: any }[],
-  rowIDKey: string, // define which column represent the unique id of the table
+  data: DataRow[],
   children: React.Node,
-  isMultiRowSelection?: boolean,
-  isCollapsible?: boolean,
+  getRowId?: getRowId,
 };
 
 export type TableContextValue = {
-  getTableProps: getTableProps,
-  getTableBodyProps: getTableBodyProps,
   headerGroups: headerGroups,
   rows: rows,
   prepareRow: prepareRow,
@@ -53,16 +56,24 @@ export type TableContextValue = {
   setGlobalFilter: setGlobalFilter,
   globalFilter: globalFilter,
   setFilter: setFilter,
+} | null;
+
+export const TableContext = React.createContext<TableContextValue>(null);
+export const useTableContext = () => {
+  const tableProps = React.useContext(TableContext);
+  if (!tableProps) {
+    throw new Error(
+      'The useTableContext hook can only be used within the <TableContext.Provider/>',
+    );
+  }
+  return tableProps;
 };
-export const TableContext = React.createContext<TableContextValue>({});
 
 function Table({
   columns,
   data,
   defaultSortingKey,
-  isCollapsible = false,
-  isMultiRowSelection = false,
-  rowIDKey,
+  getRowId,
   children,
   ...rest
 }: TableProps) {
@@ -72,14 +83,7 @@ function Table({
     },
   };
 
-  const getRowId = (row, relativeIndex) => {
-    return row[rowIDKey];
-  };
-
-  // Use the state and functions returned from useTable to build your UI
   const {
-    getTableProps,
-    getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
@@ -113,12 +117,9 @@ function Table({
     useRowSelect,
   );
 
-  // Render the UI for your table
   return (
     <TableContext.Provider
       value={{
-        getTableProps,
-        getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
@@ -130,13 +131,12 @@ function Table({
         setFilter,
       }}
     >
-      {/* we need to use <div/> because of the virtualized table*/}
-      <div {...getTableProps()} className="table">
+      <TableWrapper role="grid" className="table">
         {children}
-      </div>
+      </TableWrapper>
     </TableContext.Provider>
   );
 }
 
-Table.SimpleContent = SimpleContent;
+Table.SingleSelectableContent = SingleSelectableContent;
 export default Table;

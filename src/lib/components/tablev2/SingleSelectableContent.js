@@ -1,5 +1,5 @@
 //@flow
-import React, { useContext } from 'react';
+import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 import {
@@ -10,11 +10,19 @@ import {
   SortCaretWrapper,
   SortIncentive,
 } from './Tablestyle';
-import { TableContext } from './Tablev2.component';
+import { useTableContext } from './Tablev2.component';
+import { convertRemToPixels } from './TableUtil';
 
-export type SimpleContentProps = {
-  rowHeight: number,
-  outerTableHeight: number, //in pixel, the sum of height outside the table, pass it to virtualized table to calculate the height of the table
+export const tableRowHeight = {
+  // in rem unit
+  h32: '2.286',
+  h40: '2.858',
+  h48: '3.428',
+  h64: '4.572',
+};
+
+export type SingleSelectableContentProps = {
+  rowHeight: 'h32' | 'h40' | 'h48' | 'h64',
   separationLineVariant:
     | 'backgroundLevel1'
     | 'backgroundLevel2'
@@ -22,20 +30,30 @@ export type SimpleContentProps = {
     | 'backgroundLevel4',
 };
 
-export default function SimpleContent({
+export default function SingleSelectableContent({
   rowHeight,
-  outerTableHeight,
   separationLineVariant,
-}: SimpleContentProps) {
-  const { headerGroups, getTableBodyProps, prepareRow, rows } = useContext(
-    TableContext,
-  );
+}: SingleSelectableContentProps) {
+  if (['h32', 'h40', 'h48', 'h64'].indexOf(rowHeight) === -1) {
+    console.error('Invalid table row height defined.');
+  }
+  if (
+    [
+      'backgroundLevel1',
+      'backgroundLevel2',
+      'backgroundLevel3',
+      'backgroundLevel4',
+    ].indexOf(separationLineVariant) === -1
+  ) {
+    console.error('Invalid table seperation line color defined.');
+  }
+
+  const { headerGroups, prepareRow, rows } = useTableContext();
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
       const row = rows[index];
       prepareRow(row);
-
       return (
         <TableRow
           {...row.getRowProps({
@@ -57,6 +75,7 @@ export default function SimpleContent({
                 flexDirection: 'column',
                 justifyContent: 'center',
               },
+              role: 'gridcell',
             });
 
             return (
@@ -73,16 +92,9 @@ export default function SimpleContent({
 
   return (
     <>
-      <div className="thead">
+      <div className="thead" role="rowgroup">
         {headerGroups.map((headerGroup) => (
-          <HeadRow
-            {...headerGroup.getHeaderGroupProps()}
-            style={{
-              display: 'flex',
-            }}
-            separationLineVariant={separationLineVariant}
-            className="tr"
-          >
+          <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
@@ -90,7 +102,7 @@ export default function SimpleContent({
                 }),
               );
               return (
-                <TableHeader {...headerStyleProps}>
+                <TableHeader {...headerStyleProps} role="columnheader">
                   {column.render('Header')}
                   <SortCaretWrapper>
                     {column.isSorted ? (
@@ -111,17 +123,13 @@ export default function SimpleContent({
           </HeadRow>
         ))}
       </div>
-      <TableBody
-        {...getTableBodyProps()}
-        className="tbody"
-        outerTableHeight={outerTableHeight}
-      >
+      <TableBody role="rowgroup" className="tbody">
         <AutoSizer>
           {({ height, width }) => (
             <List
               height={height}
               itemCount={rows.length} // how many items we are going to render
-              itemSize={rowHeight} // height of each row in pixel
+              itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
               width={width}
             >
               {RenderRow}

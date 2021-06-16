@@ -23,26 +23,33 @@ export const TableHeader = styled.div`
 `;
 
 export const HeadRow = styled.div`
-  height: 32px;
+  height: 2.286rem;
   width: 100%;
-  display: table;
+  display: flex;
   table-layout: fixed;
-  border-bottom: 1px solid
-    ${(props) => getTheme(props)[props.separationLineVariant]};
   cursor: pointer;
   color: ${(props) => getTheme(props).textTertiary};
   font-weight: bold;
 `;
 
 export const TableRow = styled.div`
-  border-bottom: 1px solid
-    ${(props) => getTheme(props)[props.separationLineVariant]};
   color: ${(props) => getTheme(props).textTertiary};
+  border-top: 1px solid
+    ${(props) => getTheme(props)[props.separationLineVariant]};
+  :last-child {
+    border-bottom: 1px solid
+      ${(props) => getTheme(props)[props.separationLineVariant]};
+  }
   cursor: default;
 `;
 
 export const TableBody = styled.div`
   display: block;
-  --variable-height: ${(props) => props.outerTableHeight}px;
-  height: calc(100vh - var(--variable-height));
+  flex-grow: 1;
+`;
+
+export const TableWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;

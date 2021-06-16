@@ -62,18 +62,14 @@ export const SimpleContentTable = () => {
 
   return (
     <Wrapper>
-      <Table
-        columns={columns}
-        data={data}
-        defaultSortingKey={'health'}
-        rowIDKey={'lastName'}
-      >
-        <Table.SimpleContent
-          rowHeight={60}
-          outerTableHeight={30}
-          separationLineVariant="backgroundLevel3"
-        />
-      </Table>
+      <div style={{ height: '800px' }}>
+        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
     </Wrapper>
   );
 };
