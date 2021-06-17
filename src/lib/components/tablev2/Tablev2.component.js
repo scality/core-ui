@@ -8,15 +8,6 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
-  headerGroups,
-  rows,
-  prepareRow,
-  selectedRowIds,
-  selectedFlatRows,
-  preGlobalFilteredRows,
-  setGlobalFilter,
-  globalFilter,
-  setFilter,
   getRowId,
 } from 'react-table';
 import SingleSelectableContent from './SingleSelectableContent';
@@ -46,19 +37,8 @@ export type TableProps = {
   getRowId?: getRowId,
 };
 
-export type TableContextValue = {
-  headerGroups: headerGroups,
-  rows: rows,
-  prepareRow: prepareRow,
-  selectedRowIds: selectedRowIds,
-  selectedFlatRows: selectedFlatRows,
-  preGlobalFilteredRows: preGlobalFilteredRows,
-  setGlobalFilter: setGlobalFilter,
-  globalFilter: globalFilter,
-  setFilter: setFilter,
-} | null;
+const TableContext = React.createContext<any>(null);
 
-export const TableContext = React.createContext<TableContextValue>(null);
 export const useTableContext = () => {
   const tableProps = React.useContext(TableContext);
   if (!tableProps) {

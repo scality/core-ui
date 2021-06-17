@@ -9,9 +9,13 @@ import {
   TableHeader,
   SortCaretWrapper,
   SortIncentive,
+  TooltipContent,
+  UnknownIcon,
 } from './Tablestyle';
 import { useTableContext } from './Tablev2.component';
 import { convertRemToPixels } from './TableUtil';
+import { Row } from 'react-table'; // may not import the type correctly
+import Tooltip from '../tooltip/Tooltip.component.js';
 
 export const tableRowHeight = {
   // in rem unit
@@ -28,11 +32,21 @@ export type SingleSelectableContentProps = {
     | 'backgroundLevel2'
     | 'backgroundLevel3'
     | 'backgroundLevel4',
+  backgroundVariant:
+    | 'backgroundLevel1'
+    | 'backgroundLevel2'
+    | 'backgroundLevel3'
+    | 'backgroundLevel4',
+  selectedId?: string,
+  onRowSelected?: (row: Row) => void,
 };
 
 export default function SingleSelectableContent({
   rowHeight,
   separationLineVariant,
+  backgroundVariant,
+  selectedId,
+  onRowSelected,
 }: SingleSelectableContentProps) {
   if (['h32', 'h40', 'h48', 'h64'].indexOf(rowHeight) === -1) {
     console.error('Invalid table row height defined.');
@@ -47,9 +61,11 @@ export default function SingleSelectableContent({
   ) {
     console.error('Invalid table seperation line color defined.');
   }
+  if (selectedId && !onRowSelected) {
+    console.error('Please specify the onRowSelected function.');
+  }
 
   const { headerGroups, prepareRow, rows } = useTableContext();
-
   const RenderRow = React.useCallback(
     ({ index, style }) => {
       const row = rows[index];
@@ -61,9 +77,14 @@ export default function SingleSelectableContent({
             We need to pass the style property to the row component.
             Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
             style: { ...style },
+            onClick: () => {
+              if (onRowSelected) return onRowSelected(row);
+            },
           })}
           row={row}
           separationLineVariant={separationLineVariant}
+          backgroundVariant={backgroundVariant}
+          selectedId={selectedId}
           className="tr"
         >
           {row.cells.map((cell) => {
@@ -77,6 +98,18 @@ export default function SingleSelectableContent({
               },
               role: 'gridcell',
             });
+            if (cell.value === undefined) {
+              return (
+                <div {...cellProps} className="td">
+                  <Tooltip
+                    placement="top"
+                    overlay={<TooltipContent>unknown</TooltipContent>}
+                  >
+                    <UnknownIcon className="fas fa-minus"></UnknownIcon>
+                  </Tooltip>
+                </div>
+              );
+            }
 
             return (
               <div {...cellProps} className="td">
@@ -87,14 +120,21 @@ export default function SingleSelectableContent({
         </TableRow>
       );
     },
-    [prepareRow, rows, separationLineVariant],
+    [
+      rows,
+      prepareRow,
+      separationLineVariant,
+      backgroundVariant,
+      selectedId,
+      onRowSelected,
+    ],
   );
 
   return (
     <>
       <div className="thead" role="rowgroup">
         {headerGroups.map((headerGroup) => (
-          <HeadRow {...headerGroup.getHeaderGroupProps()} className="tr">
+          <HeadRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
@@ -103,20 +143,22 @@ export default function SingleSelectableContent({
               );
               return (
                 <TableHeader {...headerStyleProps} role="columnheader">
-                  {column.render('Header')}
-                  <SortCaretWrapper>
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <i className="fas fa-sort-down" />
+                  <div>
+                    {column.render('Header')}
+                    <SortCaretWrapper>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <i className="fas fa-sort-down" />
+                        ) : (
+                          <i className="fas fa-sort-up" />
+                        )
                       ) : (
-                        <i className="fas fa-sort-up" />
-                      )
-                    ) : (
-                      <SortIncentive>
-                        <i className="fas fa-sort" />
-                      </SortIncentive>
-                    )}
-                  </SortCaretWrapper>
+                        <SortIncentive>
+                          <i className="fas fa-sort" />
+                        </SortIncentive>
+                      )}
+                    </SortCaretWrapper>
+                  </div>
                 </TableHeader>
               );
             })}

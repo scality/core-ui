@@ -1,7 +1,8 @@
 //@flow
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 import Table from '../src/lib/components/tablev2/Tablev2.component';
-import { Wrapper } from './common';
+import { Wrapper, Title } from './common';
 
 export default {
   title: 'Components/V2/Table',
@@ -12,8 +13,8 @@ export const SimpleContentTable = () => {
   const data = [
     {
       firstName: 'Sotiria',
-      lastName: 'Vangelis',
-      age: 30,
+      lastName: 'Agathangelou',
+      age: undefined,
       health: 'healthy',
     },
     {
@@ -60,13 +61,36 @@ export const SimpleContentTable = () => {
     },
   ];
 
+  const getRowId = (row, relativeIndex) => {
+    return row.lastName + ' ' + row.firstName;
+  };
+
   return (
     <Wrapper>
-      <div style={{ height: '800px' }}>
+      <Title>Non Selectable Table</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
         <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table.SingleSelectableContent
+            rowHeight="h32"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+          />
+        </Table>
+      </div>
+      <Title>Single Selectable Table</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            selectedId={'Rodolph Yohann'}
+            onRowSelected={action('Table Row Clicked')}
           />
         </Table>
       </div>

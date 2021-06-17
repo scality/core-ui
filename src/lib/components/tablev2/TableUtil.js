@@ -33,7 +33,6 @@ export function compareHealth(
     : -1;
 }
 
-// Returns a number of the computed font-size, so in px for the root <html> element
 export function convertRemToPixels(rem) {
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
