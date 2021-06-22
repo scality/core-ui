@@ -176,6 +176,7 @@ export const spacing = {
   sp24: '1.714rem',
   sp28: '2rem',
   sp32: '2.286rem',
+  sp40: '2.857rem'
 };
 
 // Svg size
