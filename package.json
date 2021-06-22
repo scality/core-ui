@@ -60,6 +60,7 @@
     "jest-canvas-mock": "^2.3.1",
     "plop": "^2.4.0",
     "polished": "^3.4.1",
+    "pretty-bytes": "^5.6.0",
     "react": "^16.9.0",
     "react-debounce-input": "3.2.2",
     "react-dom": "^16.9.0",
@@ -78,6 +79,7 @@
   "peerDependencies": {
     "@fortawesome/fontawesome-free": "5.7.2",
     "polished": "3.4.1",
+    "pretty-bytes": "^5.6.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-debounce-input": "3.2.2",
