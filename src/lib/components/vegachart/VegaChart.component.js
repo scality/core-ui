@@ -2,7 +2,6 @@
 import React, { useEffect, useContext, useRef } from 'react';
 import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
-import { defaultTheme } from '../../style/theme.js';
 import { getThemePropSelector } from '../../utils';
 
 export const TOP = 'top';
@@ -12,6 +11,7 @@ type Props = {
   id: string,
   spec: Object,
   tooltipPosition?: Position,
+  theme?: 'light' | 'dark' | 'custom',
 };
 
 /* How to theme tooltip:
@@ -38,20 +38,28 @@ const VegaTooltipTheme = createGlobalStyle`
   }
 `;
 
-function VegaChart({ id, spec, tooltipPosition = BOTTOM }: Props) {
+function VegaChart({
+  id,
+  spec,
+  tooltipPosition = BOTTOM,
+  theme = 'light',
+}: Props) {
   const themeContext = useContext(ThemeContext);
-  const theme =
-    themeContext.alert && defaultTheme.light.alert === themeContext.alert
-      ? 'light'
-      : 'custom'; // for the dark theme we use the `custom` defined in vega-tooltip-custom.css
+
   const currentBackgroundColor =
-    themeContext && themeContext.brand && themeContext.brand.backgroundLevel4;
+    themeContext && themeContext.brand
+      ? themeContext.brand.backgroundLevel4
+      : themeContext.backgroundLevel4;
   // the background color of the view
   const currentBackgroundColor2 =
-    themeContext && themeContext.brand && themeContext.brand.backgroundLevel1;
+    themeContext && themeContext.brand
+      ? themeContext.brand.backgroundLevel1
+      : themeContext.backgroundLevel1;
 
   const brandText =
-    themeContext && themeContext.brand && themeContext.brand.textPrimary;
+    themeContext && themeContext.brand
+      ? themeContext.brand.textPrimary
+      : themeContext.textPrimary;
 
   const themeConfig = {
     config: {
