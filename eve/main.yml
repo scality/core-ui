@@ -1,5 +1,5 @@
 ---
-version: "0.2"
+version: '0.2'
 
 branches:
   user/*, feature/*, improvement/*, bugfix/*, w/*, q/*, hotfix/*, dependabot/*:
@@ -17,7 +17,7 @@ stages:
     steps:
       - Git: &git_pull
           name: git pull
-          repourl: "%(prop:git_reference)s"
+          repourl: '%(prop:git_reference)s'
           method: clobber
           retryFetch: true
           haltOnFailure: true
@@ -26,25 +26,6 @@ stages:
           workdir: build/core-ui
           command: >
             npm ci &&
-            npm run test -- -w 1 &&
             npm run flow &&
             npm run lint
-          haltOnFailure: false
-  post-merge:
-    simultaneous_builds: 1
-    worker: *worker_unit_tests
-    steps:
-      - Git: *git_pull
-      - ShellCommand:
-          name: Deploy storybook
-          workdir: build/core-ui
-          command: >
-            npm ci &&
-            npm run storybook:deploy -- --ci --host-token-env-variable=GITHUB_TOKEN
-          env:
-          # Our system gitconfig is setup to go through a gitcache service and
-          # as we're preforming write operations with git on this step, we don't want that the request
-          # go through the gitcache.
-            GIT_CONFIG_NOSYSTEM: "1"
-            GITHUB_TOKEN: '%(secret:github_token)s'
           haltOnFailure: false
