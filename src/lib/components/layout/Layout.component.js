@@ -18,7 +18,6 @@ type Props = {
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
 `;
 
 const ContentContainer = styled.div`
