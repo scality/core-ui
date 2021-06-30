@@ -23,7 +23,7 @@ const generateOptions = (n = 10) =>
     label: `Item ${index}`,
     value: index.toString(),
     disabled: index % 8 === 0,
-    icon: index % 5 === 0 ? <Icon name={"Check"}/> : null,
+    icon: index % 5 === 0 ? <Icon name={'Check'} /> : null,
   }));
 
 const optionsWithSearchBar = generateOptions(25);
@@ -51,11 +51,15 @@ export const Default = () => (
       <Title>Default Select</Title>
       <CustomSelect
         opts={defaultOptions}
-        defaultValue={optionsWithSearchBar[1].value}
+        defaultValue={defaultOptions[1].value}
         placeholder={'Custom placeholder...'}
       />
       <Title>Disabled Select</Title>
-      <CustomSelect disabled />
+      <CustomSelect
+        disabled
+        opts={defaultOptions}
+        defaultValue={defaultOptions[1].value}
+      />
       <Title>Without options</Title>
       <Select onChange={null} />
       <Title>With scrollbar (more than 4 items)</Title>
@@ -84,11 +88,16 @@ export const Rounded = () => (
       <CustomSelect
         variant="rounded"
         opts={defaultOptions}
-        defaultValue={optionsWithSearchBar[1].value}
+        defaultValue={defaultOptions[1].value}
         placeholder={'Custom placeholder...'}
       />
       <Title>Disabled Select</Title>
-      <CustomSelect variant="rounded" disabled />
+      <CustomSelect
+        variant="rounded"
+        disabled
+        opts={defaultOptions}
+        defaultValue={defaultOptions[1].value}
+      />
       <Title>Without options</Title>
       <Select variant="rounded" onChange={null} />
       <Title>With scrollbar (more than 4 items)</Title>

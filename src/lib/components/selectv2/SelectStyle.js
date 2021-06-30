@@ -38,7 +38,15 @@ const SelectStyle = styled(Select)`
     }
 
     &.sc-select__control--is-disabled {
+      pointer-events: auto;
+      cursor: not-allowed;
       opacity: 0.5;
+      
+      &:hover {
+        border: ${spacing.sp1} solid
+        ${({ isDefault }) =>
+          getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
+      }
     }
 
     &.sc-select__control--menu-is-open {
@@ -165,6 +173,7 @@ const SelectStyle = styled(Select)`
         height: ${({ isDefault }) => (isDefault ? spacing.sp32 : spacing.sp24)};
         display: flex;
         align-items: center;
+        justify-content: space-between;
         border: ${spacing.sp1} solid transparent;
         ${(props) =>
           props.isDefault &&
@@ -202,7 +211,7 @@ const SelectStyle = styled(Select)`
         }
 
         &.sc-select__option--is-disabled {
-          cursor: default;
+          cursor: not-allowed;
           opacity: 50%;
           background-color: ${getThemePropSelector('backgroundLevel2')};
           font-style: italic;
@@ -230,6 +239,11 @@ const SelectStyle = styled(Select)`
 
         .sc-highlighted-matching-text {
           color: ${getThemePropSelector('selectedActive')};
+        }
+        
+        .option-value-wrapper {
+          display: flex;
+          align-items: center;
         }
       }
     }

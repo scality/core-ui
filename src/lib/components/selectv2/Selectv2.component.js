@@ -87,14 +87,11 @@ const InternalOption = (props) => {
 
   return (
     <components.Option {...props} innerProps={innerProps}>
-      <div className="option-icon">
-        {props.data.icon || props.isDisabled ? (
-          <>
-            {props.isDisabled ? <i className="fas fa-ban" /> : props.data.icon}
-          </>
-        ) : null}
+      <div className="option-value-wrapper">
+        <div className="option-icon">{props.data.icon}</div>
+        {formatOptionLabel()}
       </div>
-      {formatOptionLabel()}
+      <div>{props.isDisabled && <i className="fas fa-ban" />}</div>
     </components.Option>
   );
 };
