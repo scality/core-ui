@@ -79,6 +79,7 @@ const SelectStyle = styled(Select)`
     }
 
     .sc-select__input {
+      ${({isDefault}) => isDefault && `margin-top: ${spacing.sp1};`}
       color: ${getThemePropSelector('textPrimary')};
 
       & > input {

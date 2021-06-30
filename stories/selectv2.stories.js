@@ -65,7 +65,10 @@ export const Default = () => (
       <Title>With scrollbar (more than 4 items)</Title>
       <CustomSelect opts={optionsWithoutSearchBar} />
       <Title>With scroll/search (more than 8 items)</Title>
-      <CustomSelect opts={optionsWithSearchBar} />
+      <CustomSelect
+        defaultValue={optionsWithSearchBar[1].value}
+        opts={optionsWithSearchBar}
+      />
       <div
         style={{
           display: 'flex',

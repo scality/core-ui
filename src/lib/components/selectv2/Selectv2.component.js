@@ -125,6 +125,9 @@ export type SelectProps = {
   className?: string,
 };
 
+// more/equal than NOPT_SEARCH options enable search
+const NOPT_SEARCH = 8;
+
 function SelectBox({
   placeholder = 'Select...',
   disabled = false,
@@ -136,7 +139,9 @@ function SelectBox({
   className,
   ...rest
 }: SelectProps) {
-  const [inputValue, setInputValue] = useState('');
+  const [searchSelection, setSearchSelection] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [customPlaceholder, setPlaceholder] = useState(placeholder);
   const [options, setOptions] = useState<Array<any> | null>(null);
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
@@ -175,17 +180,26 @@ function SelectBox({
     if (onChange) {
       onChange(option.value);
     }
-    setInputValue(option.label);
+    if (options && options.length > NOPT_SEARCH) {
+      setSearchSelection(option.value);
+      setPlaceholder(option.label);
+      setSearchValue(option.label);
+    }
   };
 
-  const handleSearchInput = (option, { action }) => {
-    if (
-      action === 'menu-close' ||
-      action === 'input-blur' ||
-      action === 'set-value'
-    ) {
-    } else {
-      setInputValue(option);
+  const handleSearchInput = (inputValue, { action }) => {
+    if (options && options.length > NOPT_SEARCH) {
+      if (action === 'menu-close') {
+        setSearchSelection(undefined);
+      }
+      if (action === 'input-blur' || action === 'set-value') {
+        if (searchValue) setPlaceholder(searchValue);
+        else setPlaceholder(placeholder);
+        setSearchValue(inputValue);
+      } else {
+        setSearchValue(inputValue);
+        if (inputValue.length === 0) setPlaceholder(placeholder);
+      }
     }
   };
 
@@ -198,15 +212,17 @@ function SelectBox({
             classNamePrefix="sc-select"
             name="sc-select"
             aria-label="select"
-            value={options.find((opt) => opt.value === value)}
+            value={
+              searchSelection || options.find((opt) => opt.value === value)
+            }
             defaultValue={options.find((opt) => opt.value === defaultValue)}
-            inputValue={options.length > 8 ? inputValue : undefined}
+            inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
             options={options}
             isDisabled={disabled}
-            placeholder={placeholder}
+            placeholder={customPlaceholder}
             menuPlacement="auto"
-            isSearchable={options.length > 8}
+            isSearchable={options.length > NOPT_SEARCH}
             components={{
               Input: Input,
               Option: InternalOption,
