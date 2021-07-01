@@ -22,7 +22,7 @@ const generateOptions = (n = 10) =>
   Array.from(new Array(n), (_, index) => ({
     label: `Item ${index}`,
     value: index.toString(),
-    disabled: index % 8 === 0,
+    disabled: index !== 0 && index % 8 === 0,
     icon: index % 5 === 0 ? <Icon name={'Check'} /> : null,
   }));
 

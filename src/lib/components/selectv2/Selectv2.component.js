@@ -80,13 +80,20 @@ const InternalOption = (props) => {
   const innerProps = {
     ...props.innerProps,
     ...props.data.optionProps,
+    // remove onMouseMove & onMouseOver so that options are not focused on hover
+    onMouseMove: undefined,
+    onMouseOver: undefined,
     role: 'option',
     'aria-disabled': props.isDisabled,
     'aria-selected': props.isSelected,
   };
 
   return (
-    <components.Option {...props} innerProps={innerProps}>
+    <components.Option
+      {...props}
+      innerProps={innerProps}
+      isFocused={props.isFocused && props.selectProps.keyboardFocusEnabled}
+    >
       <div className="option-value-wrapper">
         <div className="option-icon">{props.data.icon}</div>
         {formatOptionLabel()}
@@ -125,6 +132,14 @@ export type SelectProps = {
   className?: string,
 };
 
+type SelectOptionProps = {
+  value: string,
+  label: Node,
+  isDisabled: boolean,
+  icon?: Element<typeof Icon>,
+  optionProps: any,
+};
+
 // more/equal than NOPT_SEARCH options enable search
 const NOPT_SEARCH = 8;
 
@@ -139,15 +154,16 @@ function SelectBox({
   className,
   ...rest
 }: SelectProps) {
+  const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [customPlaceholder, setPlaceholder] = useState(placeholder);
-  const [options, setOptions] = useState<Array<any> | null>(null);
+  const [options, setOptions] = useState<Array<SelectOptionProps> | null>(null);
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
   const [selectRef, setSelectRef] = useState(null);
 
-  const childrenToOptions = useCallback((): Array<any> => {
+  const childrenToOptions = useCallback((): Array<SelectOptionProps> => {
     if (children) {
       return React.Children.toArray(children)
         .filter((child) => child.type === Option)
@@ -162,7 +178,7 @@ function SelectBox({
           return {
             value: value,
             label: children,
-            isDisabled: disabled,
+            isDisabled: disabled || false,
             icon: icon,
             optionProps: { ...rest },
           };
@@ -177,7 +193,7 @@ function SelectBox({
   }, [childrenToOptions]);
 
   const handleChange = (option) => {
-    if (onChange) {
+    if (onChange && typeof onChange === 'function') {
       onChange(option.value);
     }
     if (options && options.length > NOPT_SEARCH) {
@@ -218,6 +234,7 @@ function SelectBox({
             defaultValue={options.find((opt) => opt.value === defaultValue)}
             inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
+            keyboardFocusEnabled={keyboardFocusEnabled}
             options={options}
             isDisabled={disabled}
             placeholder={customPlaceholder}
@@ -237,14 +254,18 @@ function SelectBox({
             ref={(ref) => setSelectRef(ref)}
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
-            onKeyDown={(event) => {
+            onMenuClose={() => setKeyboardFocusEnabled(false)}
+            onKeyDown={(event: KeyboardEvent) => {
               if (
                 event &&
                 event.key === 'Enter' &&
                 selectRef &&
                 !selectRef.state.isOpen
-              )
+              ) {
                 selectRef.setState({ menuIsOpen: true });
+              } else {
+                setKeyboardFocusEnabled(true);
+              }
             }}
             {...rest}
           />
