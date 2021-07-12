@@ -201,10 +201,8 @@ describe('SelectV2', () => {
 
     // unselect option
     toggleSelect(container); // reopen select
-    expect(getByTestId('option0')).toHaveClass(
-      'sc-select__option--is-selected',
-      'sc-select__option--is-focused',
-    ); // should be focused on the selected option
+    expect(getByTestId('option0')).toHaveClass('sc-select__option--is-selected');
+    // should be focused on the selected option
     expect(getByTestId('option0')).toHaveAttribute('aria-selected', 'true');
     userEvent.click(getByTestId('option1')); // click on another option
     toBeClose(container); // selecting an option should close select

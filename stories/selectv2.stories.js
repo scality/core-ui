@@ -64,6 +64,8 @@ export const Default = () => (
       <Select onChange={null} />
       <Title>With scrollbar (more than 4 items)</Title>
       <CustomSelect opts={optionsWithoutSearchBar} />
+      <Title>1000 items</Title>
+      <CustomSelect opts={generateOptions(1000)} />
       <Title>With scroll/search (more than 8 items)</Title>
       <CustomSelect
         defaultValue={optionsWithSearchBar[1].value}
@@ -105,6 +107,8 @@ export const Rounded = () => (
       <Select variant="rounded" onChange={null} />
       <Title>With scrollbar (more than 4 items)</Title>
       <CustomSelect variant="rounded" opts={optionsWithoutSearchBar} />
+      <Title>1000 items</Title>
+      <CustomSelect variant="rounded" opts={generateOptions(1000)} />
       <Title>With scroll/search (more than 8 items)</Title>
       <CustomSelect variant="rounded" opts={optionsWithSearchBar} />
       <div

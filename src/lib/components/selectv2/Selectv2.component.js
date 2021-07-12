@@ -4,7 +4,8 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useCallback,
+  useMemo,
+  useRef,
 } from 'react';
 import type { Element } from 'react';
 import type { Node } from 'react';
@@ -158,12 +159,11 @@ function SelectBox({
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [customPlaceholder, setPlaceholder] = useState(placeholder);
-  const [options, setOptions] = useState<Array<SelectOptionProps> | null>(null);
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
-  const [selectRef, setSelectRef] = useState(null);
+  const selectRef = useRef<any>();
 
-  const childrenToOptions = useCallback((): Array<SelectOptionProps> => {
+  const options = useMemo((): Array<SelectOptionProps> => {
     if (children) {
       return React.Children.toArray(children)
         .filter((child) => child.type === Option)
@@ -187,10 +187,6 @@ function SelectBox({
       return [];
     }
   }, [children]);
-
-  useEffect(() => {
-    setOptions(childrenToOptions());
-  }, [childrenToOptions]);
 
   const handleChange = (option) => {
     if (onChange && typeof onChange === 'function') {
@@ -251,7 +247,7 @@ function SelectBox({
             isDefault={isDefaultVariant}
             onChange={handleChange}
             onInputChange={handleSearchInput}
-            ref={(ref) => setSelectRef(ref)}
+            ref={selectRef}
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
             onMenuClose={() => setKeyboardFocusEnabled(false)}
@@ -260,9 +256,9 @@ function SelectBox({
                 event &&
                 event.key === 'Enter' &&
                 selectRef &&
-                !selectRef.state.isOpen
+                !selectRef.current.state.isOpen
               ) {
-                selectRef.setState({ menuIsOpen: true });
+                selectRef.current.setState({ menuIsOpen: true });
               } else {
                 setKeyboardFocusEnabled(true);
               }
