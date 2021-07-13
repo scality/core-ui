@@ -56,6 +56,7 @@ import {
   SmallerText,
 } from './components/text/Text.component';
 import Card from './components/card/Card.component';
+import PrettyBytes from './components/prettybytes/PrettyBytes.component';
 
 export {
   LOADER_SIZE,
@@ -111,4 +112,5 @@ export {
   SmallerText,
   SpacedBox,
   Card,
+  PrettyBytes,
 };
