@@ -63,17 +63,22 @@ const InternalOption = (props) => {
   const formatOptionLabel = () => {
     const label = props.data.label;
     const inputValue = props.selectProps.inputValue;
-    const regex = new RegExp('(' + inputValue + ')', 'gi');
-    const match = label.match(regex);
+    const parts = label.split(new RegExp(`(${inputValue})`, 'gi'));
 
-    if (match && inputValue) {
-      const parts = label.split(match[0], 2);
-      const highlight = match[0];
+    if (inputValue) {
       return (
         <div>
-          <span>{parts[0]}</span>
-          <span className="sc-highlighted-matching-text">{highlight}</span>
-          <span>{parts[1]}</span>
+          {parts.map((part, i) => {
+            const highlightStyle =
+              part.toLowerCase() === inputValue.toLowerCase()
+                ? 'sc-highlighted-matching-text'
+                : '';
+            return (
+              <span key={i} className={highlightStyle}>
+                {part}
+              </span>
+            );
+          })}
         </div>
       );
     } else {
@@ -114,21 +119,69 @@ const Menu = (props) => {
   return <components.Menu {...props} />;
 };
 
-const MenuList = (props) => {
-  const { options, children, maxHeight, getValue } = props;
+const getScrollOffset = (
+  list,
+  index: number,
+  itemCount: number,
+  offset: number,
+): number => {
+  const { itemSize, height } = list.props;
+  const scrollOffset = list.state ? list.state.scrollOffset : 0;
+  const lastItemOffset = Math.max(0, itemCount * itemSize - height);
+  const maxOffset = Math.min(lastItemOffset, index * itemSize);
+  const minOffset = Math.max(0, index * itemSize - height + itemSize);
+  if (scrollOffset >= minOffset && scrollOffset <= maxOffset) {
+    return scrollOffset;
+  } else if (scrollOffset < minOffset) {
+    return minOffset === 0 ? minOffset : minOffset + offset;
+  } else {
+    return maxOffset === 0 ? maxOffset : maxOffset - offset;
+  }
+};
 
-  if (children.length > 4) {
-    const [value] = getValue();
-    const height = convertRemToPixels(
+const MenuList = (props) => {
+  const listRef = useRef();
+  const { children, getValue } = props;
+  const [selectedOption] = getValue();
+  const optionHeight =
+    convertRemToPixels(
       parseFloat(props.selectProps.isDefault ? spacing.sp32 : spacing.sp24),
     ) || 32;
-    const initialOffset = options.indexOf(value) * height - 3 * height;
+  let selectedIndex = 0;
+  let focusedIndex = 0;
+
+  if (children && children.length > 0) {
+    selectedIndex = children.findIndex(
+      (child) => child.props.data === selectedOption,
+    );
+    focusedIndex = props.focusedOption
+      ? children.findIndex((child) => child.props.data === props.focusedOption)
+      : selectedIndex;
+  }
+
+  const initialOffset = selectedIndex * optionHeight - 3 * optionHeight;
+
+  useEffect(() => {
+    if (listRef && listRef.current) {
+      listRef.current.scrollTo(
+        getScrollOffset(
+          listRef.current,
+          focusedIndex,
+          children.length,
+          optionHeight / 4,
+        ),
+      );
+    }
+  }, [children.length, focusedIndex, optionHeight]);
+
+  if (children.length > 4) {
     return (
       <List
+        ref={listRef}
         className="sc-select__menu-list"
-        height={maxHeight}
+        height={optionHeight * 4.5}
         itemCount={children.length}
-        itemSize={height}
+        itemSize={optionHeight}
         initialScrollOffset={initialOffset}
       >
         {({ index, style }) => {
