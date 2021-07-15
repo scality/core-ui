@@ -48,18 +48,22 @@ export default function SingleSelectableContent({
   selectedId,
   onRowSelected,
 }: SingleSelectableContentProps) {
-  if (['h32', 'h40', 'h48', 'h64'].indexOf(rowHeight) === -1) {
-    console.error('Invalid table row height defined.');
+  if (!['h32', 'h40', 'h48', 'h64'].includes(rowHeight)) {
+    console.error(
+      `Invalid rowHeight props, expected h32, h40, h48, or h64 but received ${rowHeight}`,
+    );
   }
   if (
-    [
+    ![
       'backgroundLevel1',
       'backgroundLevel2',
       'backgroundLevel3',
       'backgroundLevel4',
-    ].indexOf(separationLineVariant) === -1
+    ].includes(separationLineVariant)
   ) {
-    console.error('Invalid table seperation line color defined.');
+    console.error(
+      `Invalid separationLineVariant props, expected backgroundLevel1, backgroundLevel2, backgroundLevel3 or backgroundLevel4 but received ${separationLineVariant}`,
+    );
   }
   if (selectedId && !onRowSelected) {
     console.error('Please specify the onRowSelected function.');

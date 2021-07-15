@@ -9,12 +9,12 @@ export function compareHealth(
   status2: STATUS_WARNING | STATUS_CRITICAL | STATUS_NONE | STATUS_HEALTH,
 ): number {
   if (
-    [STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].indexOf(
+    ![STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].includes(
       status1,
-    ) === -1 ||
-    [STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].indexOf(
+    ) ||
+    ![STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].includes(
       status2,
-    ) === -1
+    )
   ) {
     console.error('Invalid health status');
     return;
