@@ -79,7 +79,7 @@ const SelectStyle = styled(Select)`
     }
 
     .sc-select__input {
-      ${({isDefault}) => isDefault && `margin-top: ${spacing.sp1};`}
+      ${({ isDefault }) => isDefault && `margin-top: ${spacing.sp1};`}
       color: ${getThemePropSelector('textPrimary')};
 
       & > input {
@@ -150,6 +150,7 @@ const SelectStyle = styled(Select)`
 
     .sc-select__menu-list {
       padding: 0;
+      overflow: hidden;
       ${({ isDefault }) =>
         isDefault
           ? `
@@ -168,6 +169,7 @@ const SelectStyle = styled(Select)`
         }
       }
 
+      div > .react-window-option > .sc-select__option,
       .sc-select__option {
         cursor: pointer;
         background-color: ${getThemePropSelector('backgroundLevel1')};
@@ -176,6 +178,7 @@ const SelectStyle = styled(Select)`
         align-items: center;
         justify-content: space-between;
         border: ${spacing.sp1} solid transparent;
+        border-radius: 0;
         ${(props) =>
           props.isDefault &&
           `border-bottom: ${spacing.sp1} solid ${getTheme(props).border};`}
@@ -185,18 +188,6 @@ const SelectStyle = styled(Select)`
         .option-icon {
           padding-right: ${spacing.sp4};
         }
-
-        ${({ isDefault }) =>
-          isDefault &&
-          `
-          &:first-of-type {
-            border-radius: ${spacing.sp4} ${spacing.sp4} 0 0;
-          }
-
-          &:last-of-type {
-            border-bottom: ${spacing.sp1} solid transparent;
-            border-radius: 0 0 ${spacing.sp4} ${spacing.sp4};
-          }`}
 
         &.sc-select__option--is-focused {
           ${({ isDefault }) =>
@@ -247,6 +238,22 @@ const SelectStyle = styled(Select)`
           align-items: center;
         }
       }
+      
+      
+        ${({ isDefault }) =>
+          isDefault &&
+          `
+          div > .react-window-option:first-of-type > .sc-select__option {
+          .sc-select__option:first-of-type {
+            border-radius: ${spacing.sp4} ${spacing.sp4} 0 0;
+          }
+
+          div > .react-window-option:last-of-type > .sc-select__option {
+          .sc-select__option:last-of-type {
+            border-bottom: ${spacing.sp1} solid transparent;
+            border-radius: 0 0 ${spacing.sp4} ${spacing.sp4};
+          }
+        `}
     }
   }
 `;

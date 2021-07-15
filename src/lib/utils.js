@@ -1,4 +1,4 @@
-import * as defaultTheme from "./style/theme";
+import * as defaultTheme from './style/theme';
 
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
 
@@ -29,11 +29,25 @@ export const hex2RGB = (str: string): [number, number, number] => {
     const value = Number.parseInt(long, 16);
     return [value >> 16, (value >> 8) & 0xff, value & 0xff];
   } else if (short) {
-    const [r, g, b] = Array.from(short, s => Number.parseInt(s, 16)).map(
-      n => (n << 4) | n,
+    const [r, g, b] = Array.from(short, (s) => Number.parseInt(s, 16)).map(
+      (n) => (n << 4) | n,
     );
     return [r, g, b];
   }
 
   throw new Error('Invalid hex string provided');
+};
+
+export const convertRemToPixels = (rem: number): number => {
+  if (
+    document.documentElement &&
+    rem &&
+    Number.isFinite(rem) &&
+    !Number.isNaN(rem)
+  ) {
+    return (
+      rem * parseFloat(getComputedStyle(document.documentElement).fontSize) || 0
+    );
+  }
+  return 0;
 };

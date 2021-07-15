@@ -13,6 +13,9 @@ import { ScrollbarWrapper } from '../../index';
 import { components } from 'react-select';
 import Icon from '../icon/Icon.component';
 import StyledSelect from './SelectStyle';
+import { FixedSizeList as List } from 'react-window';
+import { spacing } from '../../style/theme';
+import { convertRemToPixels } from '../../utils';
 
 const SelectContext = createContext<boolean>(false);
 
@@ -109,6 +112,37 @@ const Menu = (props) => {
     props.selectProps.setIsMenuBottom(props.placement === 'bottom');
   }, [props]);
   return <components.Menu {...props} />;
+};
+
+const MenuList = (props) => {
+  const { options, children, maxHeight, getValue } = props;
+
+  if (children.length > 4) {
+    const [value] = getValue();
+    const height = convertRemToPixels(
+      parseFloat(props.selectProps.isDefault ? spacing.sp32 : spacing.sp24),
+    ) || 32;
+    const initialOffset = options.indexOf(value) * height - 3 * height;
+    return (
+      <List
+        className="sc-select__menu-list"
+        height={maxHeight}
+        itemCount={children.length}
+        itemSize={height}
+        initialScrollOffset={initialOffset}
+      >
+        {({ index, style }) => {
+          return (
+            <div className="react-window-option" style={style}>
+              {children[index]}
+            </div>
+          );
+        }}
+      </List>
+    );
+  }
+
+  return <components.MenuList {...props}>{children}</components.MenuList>;
 };
 
 const ValueContainer = ({ children, ...props }) => {
@@ -240,6 +274,7 @@ function SelectBox({
               Input: Input,
               Option: InternalOption,
               Menu: Menu,
+              MenuList: MenuList,
               ValueContainer: ValueContainer,
               DropdownIndicator: DropdownIndicator,
               IndicatorSeparator: null,
