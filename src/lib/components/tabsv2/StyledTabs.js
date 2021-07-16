@@ -59,9 +59,6 @@ export const TabsContainer = styled.div`
   flex-direction: column;
   background-color: ${(props) =>
     props.tabLineColor || getTheme(props).backgroundLevel3};
-  * {
-    box-sizing: content-box;
-  }
 
   & ${TabItem} {
     display: flex;
