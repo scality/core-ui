@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Next Version Implementation Guides/Components/Navigation/Tabs" />
+
+
+## Implementation guidelines for next tabs component 
+
+It should use text basic  component to display the labels 
+The latest tabs should display the separation line at the end to mark the end of the tab
+
+Expected component API : 
+
+```
+<Tabs variant={backgroundLevel3|backgroundLevel4}>
+    <Tab path={string} label={} textBadge={} >{children}</Tab>
+    <Tab path={string} label={} textBadge={} >{children}</Tab>
+    <Tab path={string} label={} textBadge={} >{children}</Tab>
+</Tabs>
+```
+
+Tabs are based on react router and extends the current route architecture of the application with child routes.
+Each path is taken as a child path to the current router path.
+
+Tab size depend on the label, minimum size is 5rem.
+
+Scrollable tabs :
+ - When there is too much tabs we display an arrow on top of the latest tab 
+ - Click on this brings to the next "page" so for example if we have 10 tabs
+   but the available space only displays 5, clicking next arrows will display 6,7,8,9,10
+ - We display uncomplete tab label to show the possibility of scrolling
+ - The next "page" starts with the uncomplete tab
+
+Keyboard navigation : 
+ - arrow left/right with focus on one of the tabs should highlight/focus the next/prev tab
+ - space/enter trigger tab openning
+ - when the tabs are scrollable the next/prev button are not focusable, we use arrows to browse the tabs (same as material ui)
+
+Requirements  : 
+
+Badge component :
+
+```
+<TextBadge variant={} >{text}</TextBadge>
+```
+
+Extend TextEmphasis but check the line-height (it should not impact the component render arround)
