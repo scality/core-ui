@@ -8,7 +8,7 @@ const StyledScrollButton = styled.div`
   justify-content: center;
   align-items: center;
   width: ${defaultTheme.spacing.sp24};
-  z-index: ${defaultTheme.zIndex.overlay};
+  z-index: ${defaultTheme.zIndex.scrollbarButton};
   color: ${getThemePropSelector('textSecondary')};
   background-color: ${getThemePropSelector('backgroundLevel3')};
   box-shadow: 0px 0px ${defaultTheme.spacing.sp2} rgba(0, 0, 0, 0.75);

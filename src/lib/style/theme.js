@@ -176,7 +176,7 @@ export const spacing = {
   sp24: '1.714rem',
   sp28: '2rem',
   sp32: '2.286rem',
-  sp40: '2.857rem'
+  sp40: '2.857rem',
 };
 
 // Svg size
@@ -197,5 +197,6 @@ export const zIndex = {
   dropdown: 7000,
   nav: 500,
   sidebar: 100,
+  scrollbarButton: 2,
   base: 1,
 };
