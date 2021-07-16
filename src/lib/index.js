@@ -57,6 +57,7 @@ import {
 } from './components/text/Text.component';
 import Card from './components/card/Card.component';
 import PrettyBytes from './components/prettybytes/PrettyBytes.component';
+import Icon from './components/icon/Icon.component';
 
 export {
   LOADER_SIZE,
@@ -101,7 +102,7 @@ export {
   ErrorPage404,
   ErrorPage500,
   ErrorPageAuth,
-  //Icon,
+  Icon,
   TextBadge,
   BasicText,
   SecondaryText,

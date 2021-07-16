@@ -27,6 +27,7 @@ const ScrollbarContainer = styled.div`
         ::-webkit-scrollbar-thumb {
           width: 4px;
           height: 4px;
+          min-height: 20px;
           background: ${brand.border};
           border-radius: 4px;
           -webkit-border-radius: 4px;
