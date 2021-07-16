@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{1735:function(module,exports){console.log("Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com\nLicense - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\n")}}]);
+//# sourceMappingURL=20.180312678f250c2363c8.bundle.js.map
