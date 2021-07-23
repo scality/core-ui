@@ -217,6 +217,7 @@ function Button({
         label={label}
         icon={icon}
         onClick={onClick}
+        {...rest}
       >
         {icon && (
           <ButtonIcon label={label} aria-label={tooltip && tooltip.overlay}>
