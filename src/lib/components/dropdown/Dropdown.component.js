@@ -41,7 +41,7 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
-  border: 1px solid ${getThemePropSelector('primary')};
+  border: 1px solid ${getThemePropSelector('backgroundLevel1')};
   z-index: ${defaultTheme.zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;

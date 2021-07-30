@@ -1,10 +1,10 @@
 //@flow
-import React from "react";
-import styled, { css } from "styled-components";
-import type { Node } from "react";
-import * as defaultTheme from "../../style/theme";
-import Loader from "../loader/Loader.component";
-import { getTheme, getThemePropSelector } from "../../utils";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import type { Node } from 'react';
+import * as defaultTheme from '../../style/theme';
+import Loader from '../loader/Loader.component';
+import { getTheme, getThemePropSelector } from '../../utils';
 type StepProps = {
   title: Node,
   content: Node,
@@ -40,15 +40,15 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${(props) => {
-    const { danger, healthy, secondary } = getTheme(props);
+    const { statusCritical, statusHealthy, selectedActive } = getTheme(props);
     if (props.error) {
       return css`
-        background-color: ${danger};
+        background-color: ${statusCritical};
         color: ${defaultTheme.white};
       `;
     } else if (props.active) {
       return css`
-        background-color: ${secondary};
+        background-color: ${selectedActive};
         color: ${defaultTheme.white};
         svg {
           fill: ${defaultTheme.white};
@@ -56,7 +56,7 @@ const Circle = styled.div`
       `;
     } else if (props.completed) {
       return css`
-        background-color: ${healthy};
+        background-color: ${statusHealthy};
         color: ${defaultTheme.white};
       `;
     } else {
@@ -70,7 +70,7 @@ const Circle = styled.div`
 
 const StepHeader = styled.span`
   padding: 8px;
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 const StepContent = styled.div`
   padding: ${defaultTheme.padding.small};
@@ -84,7 +84,7 @@ const BottomBar = styled.hr`
   ${(props) => {
     if (props.completed) {
       return css`
-        border-left: 2px solid ${getTheme(props).healthy};
+        border-left: 2px solid ${getTheme(props).statusHealthy};
       `;
     } else {
       return css`

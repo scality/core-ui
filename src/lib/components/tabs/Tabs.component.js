@@ -1,9 +1,9 @@
 //@flow
-import React from "react";
-import styled from "styled-components";
-import type { Node } from "react";
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
+import React from 'react';
+import styled from 'styled-components';
+import type { Node } from 'react';
+import * as defaultTheme from '../../style/theme';
+import { getTheme } from '../../utils';
 
 type Item = {
   title: Node | string,
@@ -38,9 +38,14 @@ const TabItem = styled.div`
   border: 1px solid transparent;
 
   ${(props) => {
-    const { highlight, backgroundLevel3, backgroundLevel4, selectedActive } = getTheme(props); 
-    return (
-      props.selected ? `
+    const {
+      highlight,
+      backgroundLevel3,
+      backgroundLevel4,
+      selectedActive,
+    } = getTheme(props);
+    return props.selected
+      ? `
         background-color: ${props.activeTabColor || backgroundLevel4};
         &:after {
           content: "";
@@ -53,19 +58,20 @@ const TabItem = styled.div`
           height: 2px;
           width: 32px;
         }
-      ` : `
+      `
+      : `
         background-color: ${props.inactiveTabColor || backgroundLevel3};
         &:hover {
           cursor: pointer;
           border: 1px solid ${props.tabHoverColor || highlight};
         }
-      `
-    );
+      `;
   }}
 `;
 
 const TabsContainer = styled.div`
-  background-color: ${props => props.tabLineColor || getTheme(props).backgroundLevel3};
+  background-color: ${(props) =>
+    props.tabLineColor || getTheme(props).backgroundLevel3};
   margin: ${defaultTheme.padding.base} 0;
   padding-top: 2px;
   * {
@@ -78,7 +84,8 @@ const TabsContainer = styled.div`
 
   & ${TabItem} + ${TabItem}::before {
     content: "";
-    background: ${props => props.separatorColor || getTheme(props).infoSecondary};
+    background: ${(props) =>
+      props.separatorColor || getTheme(props).infoSecondary};
     position: absolute;
     bottom: 25%;
     left: 0;
@@ -94,13 +101,15 @@ const TabItemTitle = styled.p`
   font-weight: ${defaultTheme.fontWeight.bold};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  color: ${props => getTheme(props)[props.selected ? 'textPrimary' : 'textTertiary']};
+  color: ${(props) =>
+    getTheme(props)[props.selected ? 'textPrimary' : 'textSecondary']};
 `;
 
 const TabContent = styled.div`
   margin: 0;
   padding: ${defaultTheme.padding.larger};
-  background-color: ${props => props.tabContentColor || getTheme(props).backgroundLevel4};
+  background-color: ${(props) =>
+    props.tabContentColor || getTheme(props).backgroundLevel4};
 `;
 
 export default function Tab({
@@ -118,7 +127,7 @@ export default function Tab({
 }: Props) {
   return (
     <TabsContainer
-      className={["sc-tabs", className].join(" ")}
+      className={['sc-tabs', className].join(' ')}
       tabLineColor={tabLineColor}
       separatorColor={separatorColor}
       {...rest}
@@ -136,10 +145,7 @@ export default function Tab({
             activeTabColor={activeTabColor}
             activeTabSeparator={activeTabSeparator}
           >
-            <TabItemTitle
-              className="sc-tabs-item-title"
-              selected={selected}
-            >
+            <TabItemTitle className="sc-tabs-item-title" selected={selected}>
               {title}
             </TabItemTitle>
           </TabItem>

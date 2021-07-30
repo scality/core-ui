@@ -70,18 +70,21 @@ const StyledCheckbox = styled.label`
   }}
 
   ${(props) => {
-    const { textTertiary, selectedActive, highlight, buttonPrimary } = getTheme(props);
+    const {
+      textSecondary,
+      selectedActive,
+      highlight,
+      buttonPrimary,
+    } = getTheme(props);
     const iconCheckedColor = props.checked ? 'white' : 'transparent';
 
     const checkBoxFocusBorder = buttonPrimary;
     const checkBoxFocusColor = props.checked ? selectedActive : null;
 
-    const checkBoxBorder = props.checked ? selectedActive : textTertiary;
+    const checkBoxBorder = props.checked ? selectedActive : textSecondary;
     let checkBoxColor = null;
-    if (props.checked)
-      checkBoxColor = selectedActive;
-    else if (props.disabled)
-      checkBoxColor = textTertiary;
+    if (props.checked) checkBoxColor = selectedActive;
+    else if (props.disabled) checkBoxColor = textSecondary;
 
     let checkBoxColorHover = null;
     let checkBoxColorBorderHover = null;
@@ -118,7 +121,7 @@ const StyledCheckbox = styled.label`
           border-color: ${checkBoxColorBorderHover};
         }
       }
-      
+
       &:focus {
         outline: 0;
         &:before {
@@ -134,12 +137,14 @@ const StyledCheckbox = styled.label`
   }
 
   input {
-    ${props => {
-      return props.disabled ? css`
-        cursor: default;
-      ` : css`
-        cursor: pointer;
-      `;  
+    ${(props) => {
+      return props.disabled
+        ? css`
+            cursor: default;
+          `
+        : css`
+            cursor: pointer;
+          `;
     }}
     margin: 0px;
     opacity: 0;

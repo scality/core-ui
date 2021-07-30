@@ -1,10 +1,10 @@
 //@flow
-import React, { useState, useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
-import { darken } from "polished";
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
-import type { Variant } from "../constants";
+import React, { useState, useEffect, useRef } from 'react';
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemeNewStatusVariant } from '../../utils';
+import type { Variant } from '../constants';
 
 export type Props = {
   uid: string,
@@ -24,14 +24,18 @@ const NotificationContainer = styled.div`
 
   ${(props) => {
     switch (props.variant) {
-      case "warning":
+      case 'warning':
         return css`
-          background-color: ${getTheme(props)[props.variant || "primary"]};
+          background-color: ${getTheme(props)[
+            getThemeNewStatusVariant(props.variant) || 'backgroundLevel1'
+          ]};
           color: ${defaultTheme.black};
         `;
       default:
         return css`
-          background-color: ${getTheme(props)[props.variant || "primary"]};
+          background-color: ${getTheme(props)[
+            getThemeNewStatusVariant(props.variant) || 'backgroundLevel1'
+          ]};
           color: ${defaultTheme.white};
         `;
     }
@@ -50,7 +54,12 @@ const NotificationDismissProgress = styled.div`
   height: 5px;
   border-radius: 5px;
   ${(props) => {
-    const brandDark = darken(0.1, getTheme(props)[props.variant || "primary"]);
+    const brandDark = darken(
+      0.1,
+      getTheme(props)[
+        getThemeNewStatusVariant(props.variant) || 'backgroundLevel1'
+      ],
+    );
     return css`
       background-color: ${brandDark};
       width: ${(props.value / props.max) * 100}%;

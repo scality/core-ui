@@ -116,7 +116,7 @@ export const ButtonStyled = styled.button`
         border-color: ${brand.buttonSecondary};
         // to be checked
         background-color: ${brand.backgroundLevel1};
-        color: ${brand.textTertiary};
+        color: ${brand.textPrimary};
 
         &:hover {
           border-color: ${brand.infoPrimary};

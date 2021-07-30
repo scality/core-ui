@@ -1,18 +1,18 @@
 //@flow
-import React from "react";
-import styled, { css, keyframes } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import type { Node } from "react";
+import React from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import type { Node } from 'react';
 
 export type CloudProgressBarProps = {
   percentage: number,
   borderSize: string,
   cloudColor?: string,
   progressCloudColor?: string,
-  children: Node
+  children: Node,
 };
 
-const keyFrameCloud = props => {
+const keyFrameCloud = (props) => {
   return keyframes`
     from {
       height:100%
@@ -23,7 +23,7 @@ const keyFrameCloud = props => {
 };
 
 const Container = styled.div`
-  ${props => {
+  ${(props) => {
     return css`
       text-align: center;
       position: relative;
@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const ContainerProgress = styled.div`
-  ${props => {
+  ${(props) => {
     return css`
       animation-duration: 1s;
       animation-fill-mode: both;
@@ -90,10 +90,10 @@ const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
 
 const CloudProgressBar = ({
   percentage = 0,
-  borderSize = "2px",
-  cloudColor = defaultTheme.brand.healthyLight,
-  progressCloudColor = defaultTheme.brand.primaryDark2,
-  children
+  borderSize = '2px',
+  cloudColor = defaultTheme.brand.statusHealthy,
+  progressCloudColor = defaultTheme.brand.backgroundLevel1,
+  children,
 }: CloudProgressBarProps) => (
   <Container className="sc-cloudprogressbar">
     <Cloud strokeColor={progressCloudColor} borderSize={borderSize} />

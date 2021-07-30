@@ -1,21 +1,16 @@
 //@flow
 import * as defaultTheme from '../../style/theme';
-import type { Size } from '../constants';
+import type { Size, Variant } from '../constants';
 import type { Node } from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../button/Button.component';
 import React from 'react';
 import { lighten } from 'polished';
-import { getTheme } from '../../utils';
+import { getTheme, getThemeNewStatusVariant } from '../../utils';
 
 type Props = {
   text: string,
-  variant?:
-    | 'statusHealthy'
-    | 'statusWarning'
-    | 'statusCritical'
-    | 'infoPrimary'
-    | 'infoSecondary',
+  variant?: Variant,
   icon?: Node,
   onClick?: (any) => void,
   onRemove?: (any) => void,
@@ -88,21 +83,24 @@ ${(props) => {
 
   ${(props) => {
     const brand = getTheme(props);
-    const brandLight = lighten(0.1, brand[props.variant]).toString();
+    const brandLight = lighten(
+      0.1,
+      brand[getThemeNewStatusVariant(props.variant)],
+    ).toString();
     return props.onClick
       ? css`
-          background-color: ${brand[props.variant]};
+          background-color: ${brand[getThemeNewStatusVariant(props.variant)]};
           font-size: ${defaultTheme.fontSize[props.size]};
           &:hover {
             cursor: pointer;
             background-color: ${brandLight};
           }
           &:active {
-            background-color: ${brand[props.variant]};
+            background-color: ${brand[getThemeNewStatusVariant(props.variant)]};
           }
         `
       : css`
-          background-color: ${brand[props.variant]};
+          background-color: ${brand[getThemeNewStatusVariant(props.variant)]};
           font-size: ${defaultTheme.fontSize[props.size]};
         `;
   }}
@@ -113,7 +111,10 @@ export const ChipsIcon = styled.span`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    lighten(0.15, getTheme(props)[props.variant]).toString()};
+    lighten(
+      0.15,
+      getTheme(props)[getThemeNewStatusVariant(props.variant)],
+    ).toString()};
 `;
 
 export const ChipsText = styled.span`

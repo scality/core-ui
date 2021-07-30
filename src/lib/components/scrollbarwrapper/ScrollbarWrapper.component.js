@@ -21,20 +21,37 @@ const ScrollbarContainer = styled.div`
         }
 
         ::-webkit-scrollbar-track {
-          background: ${brand.primary};
+          background: ${brand.backgroundLevel1};
         }
 
         ::-webkit-scrollbar-thumb {
           width: 4px;
           height: 4px;
           min-height: 20px;
-          background: ${brand.border};
+          background: ${brand.buttonSecondary};
           border-radius: 4px;
           -webkit-border-radius: 4px;
           background-clip: padding-box;
           border: 2px solid rgba(0, 0, 0, 0);
         }
-
+        ::-webkit-scrollbar-thumb:hover {
+          width: 4px;
+          height: 4px;
+          background: ${brand.infoPrimary}80;
+          border-radius: 4px;
+          -webkit-border-radius: 4px;
+          background-clip: padding-box;
+          border: 2px solid rgba(0, 0, 0, 0);
+        }
+        ::-webkit-scrollbar-thumb:active {
+          width: 4px;
+          height: 4px;
+          background: ${brand.infoPrimary};
+          border-radius: 4px;
+          -webkit-border-radius: 4px;
+          background-clip: padding-box;
+          border: 2px solid rgba(0, 0, 0, 0);
+        }
         ::-webkit-scrollbar-button {
           width: 0;
           height: 0;
@@ -45,7 +62,7 @@ const ScrollbarContainer = styled.div`
         }
 
         // Firefox
-        scrollbar-color: ${brand.border} ${brand.primary};
+        scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel1};
         scrollbar-width: thin;
       }
     `;

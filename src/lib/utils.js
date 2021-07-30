@@ -38,6 +38,23 @@ export const hex2RGB = (str: string): [number, number, number] => {
   throw new Error('Invalid hex string provided');
 };
 
+// Converts old theme variants (danger, critical, healthy, ...) to new ones
+export const getThemeNewStatusVariant = (variant) => {
+  switch (variant) {
+    case 'success':
+    case 'healthy':
+    case 'healthyLight':
+      return 'statusHealthy';
+    case 'warning':
+      return 'statusWarning';
+    case 'danger':
+    case 'critical':
+      return 'statusCritical';
+    default:
+      return variant;
+  }
+};
+
 export const convertRemToPixels = (rem: number): number => {
   if (
     document.documentElement &&

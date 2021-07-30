@@ -46,7 +46,7 @@ const Slider = styled.span`
     left: 1px;
     top: 1px;
     background-color: ${(props) =>
-      getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
+      getTheme(props)[props.toggle ? 'textPrimary' : 'textSecondary']};
     transition: 0.4s;
     -moz-transform: rotate(0.02deg);
   }
@@ -67,7 +67,7 @@ const StyledSwitchLabel = styled.span`
   margin-left: ${defaultTheme.padding.smaller};
   font-size: ${defaultTheme.fontSize.base};
   color: ${(props) =>
-    getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
+    getTheme(props)[props.toggle ? 'textPrimary' : 'textSecondary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {

@@ -1,20 +1,20 @@
 //@flow
-import React from "react";
-import type { Node } from "react";
-import styled from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { mergeTheme } from "../../utils";
+import React from 'react';
+import type { Node } from 'react';
+import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { mergeTheme } from '../../utils';
 
 type Props = {
   expanded: boolean,
-  onHeaderClick: any => void,
+  onHeaderClick: (any) => void,
   children: Node,
-  headerItems: Array<Node>
+  headerItems: Array<Node>,
 };
 
 const ARROW = {
-  colapsed: "fas fa-angle-down",
-  expanded: "fas fa-angle-up"
+  colapsed: 'fas fa-angle-down',
+  expanded: 'fas fa-angle-up',
 };
 
 const HeaderText = styled.div`
@@ -37,9 +37,9 @@ const CollapsiblePanelContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).primaryDark2};
-  color: ${props => mergeTheme(props.theme, defaultTheme).textPrimary};
+  background-color: ${(props) =>
+    mergeTheme(props.theme, defaultTheme).backgroundLevel1};
+  color: ${(props) => mergeTheme(props.theme, defaultTheme).textPrimary};
 `;
 
 const HeaderContainer = styled.div`
@@ -50,16 +50,16 @@ const HeaderContainer = styled.div`
 
 const ExpandedContainer = styled.div`
   padding: ${defaultTheme.padding.base};
-  color: ${props => mergeTheme(props.theme, defaultTheme).textPrimary};
-  background-color: ${props =>
-    mergeTheme(props.theme, defaultTheme).primaryDark2};
+  color: ${(props) => mergeTheme(props.theme, defaultTheme).textPrimary};
+  background-color: ${(props) =>
+    mergeTheme(props.theme, defaultTheme).backgroundLevel1};
 `;
 
 function CollapsiblePanel({
   expanded = false,
   onHeaderClick,
   children,
-  headerItems = []
+  headerItems = [],
 }: Props) {
   return (
     <CollapsiblePanelContainer className="sc-collapsiblepanel">

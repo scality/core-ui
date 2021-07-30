@@ -1,11 +1,11 @@
 // @flow
-import React from "react";
-import type { Node } from "react";
-import styled, { css } from "styled-components";
-import { ellipsis } from "polished";
+import React from 'react';
+import type { Node } from 'react';
+import styled, { css } from 'styled-components';
+import { ellipsis } from 'polished';
 
-import * as defaultTheme from "../../style/theme";
-import { getTheme } from "../../utils";
+import * as defaultTheme from '../../style/theme';
+import { getTheme } from '../../utils';
 
 type Props = {
   paths: Array<Node>,
@@ -22,7 +22,7 @@ const BreadcrumbItem = styled.li`
   box-sizing: border-box;
   height: 100%;
   font-size: ${defaultTheme.fontSize.larger};
-  ${ellipsis("250px")}
+  ${ellipsis('250px')}
 
   ${(props) => {
     const { textPrimary, selectedActive, textLink } = getTheme(props);
@@ -55,7 +55,7 @@ const BreadcrumbItem = styled.li`
 `;
 const BreadcrumbSeparator = styled.li`
   padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
-  color: ${defaultTheme.brand.textTertiary};
+  color: ${defaultTheme.brand.textPrimary};
   display: flex;
   align-items: center;
   font-size: ${defaultTheme.fontSize.small};

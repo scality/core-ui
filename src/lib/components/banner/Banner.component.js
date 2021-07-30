@@ -1,29 +1,29 @@
 //@flow
-import React from "react";
-import type { Node } from "react";
-import styled from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getThemePropSelector, getThemeVariantSelector } from "../../utils";
-import type { Variant } from "../constants";
+import React from 'react';
+import type { Node } from 'react';
+import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector, getThemeVariantSelector } from '../../utils';
+import type { Variant } from '../constants';
 
 export type Props = {
   icon?: Object,
   title?: string,
   children: Node,
-  variant: Variant
+  variant: Variant,
 };
 
 const BannerContainer = styled.div`
   display: flex;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.small};
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 
   border: 1px solid;
   border-left: 5px solid;
   border-radius: 3px;
   border-color: ${getThemeVariantSelector()};
-  background-color: ${getThemePropSelector("primary")};
+  background-color: ${getThemePropSelector('backgroundLevel1')};
   i {
     display: flex;
     align-items: center;

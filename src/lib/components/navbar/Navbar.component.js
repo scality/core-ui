@@ -41,7 +41,7 @@ const NavbarContainer = styled.div`
     .sc-trigger-text {
       color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: 1px solid ${getThemePropSelector('primary')};
+    border-bottom: 1px solid ${getThemePropSelector('backgroundLevel2')};
   `}};
 `;
 
@@ -105,7 +105,7 @@ const TabLinkItem = styled(TabItem)`
   }
 
   a {
-    color: ${getThemePropSelector('textTertiary')};
+    color: ${getThemePropSelector('textSecondary')};
     text-decoration: none;
     padding: 12px ${defaultTheme.padding.base};
     box-sizing: border-box;

@@ -62,7 +62,7 @@ const TableContainer = styled.div`
 
   .ReactVirtualized__Table__headerRow {
     background-color: ${getThemePropSelector('backgroundLevel3')};
-    border-bottom: 2px solid ${getThemePropSelector('borderLight')};
+    border-bottom: 2px solid ${getThemePropSelector('border')};
     color: ${getThemePropSelector('textPrimary')};
 
     text-transform: none;
@@ -84,14 +84,14 @@ const TableContainer = styled.div`
     overflow: visible !important;
     color: ${getThemePropSelector('textPrimary')};
     background-color: ${getThemePropSelector('backgroundLevel3')};
-    border-top: 1px solid ${getThemePropSelector('borderLight')};
-    border-bottom: 1px solid ${getThemePropSelector('borderLight')};
+    border-top: 1px solid ${getThemePropSelector('border')};
+    border-bottom: 1px solid ${getThemePropSelector('border')};
     box-sizing: border-box;
     &:hover,
     &:focus {
       background-color: ${getThemePropSelector('highlight')};
-      border-top: 1px solid ${getThemePropSelector('secondary')};
-      border-bottom: 1px solid ${getThemePropSelector('secondary')};
+      border-top: 1px solid ${getThemePropSelector('backgroundLevel1')};
+      border-bottom: 1px solid ${getThemePropSelector('backgroundLevel1')};
       outline: none;
       cursor: pointer;
     }
@@ -118,7 +118,7 @@ const CellContainer = styled.div`
     color: ${getThemePropSelector('textPrimary')};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
-      color: ${(props) => lighten(0.3, getTheme(props).primary).toString()};
+      color: ${(props) => lighten(0.3, getTheme(props).textPrimary).toString()};
     }
   }
 `;
@@ -141,7 +141,7 @@ const HeaderSortIcon = styled.div`
     ${(props) => {
       if (props.selected && props.sortDirection === 'ASC') {
         return css`
-          color: ${getTheme(props).primary};
+          color: ${getTheme(props).textPrimary};
         `;
       }
     }}
@@ -152,7 +152,7 @@ const HeaderSortIcon = styled.div`
     ${(props) => {
       if (props.selected && props.sortDirection === 'DESC') {
         return css`
-          color: ${getTheme(props).primary};
+          color: ${getTheme(props).textPrimary};
         `;
       }
     }}

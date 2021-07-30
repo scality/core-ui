@@ -45,8 +45,8 @@ export const IconWrapper = styled.div`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background-color: ${brand.borderLight};
-      color: ${brand.background};
+      background-color: ${brand.border};
+      color: ${brand.backgroundLevel1};
     `;
   }}
 

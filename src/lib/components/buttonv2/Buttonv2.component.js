@@ -58,7 +58,7 @@ export const ButtonStyled = styled.button`
           }
           &:active:enabled {
             cursor: pointer;
-            color: ${brand.textTertiary};
+            color: ${brand.textSecondary};
             border: ${spacing.sp1} solid ${brand.infoSecondary};
           }
         `;
@@ -79,7 +79,7 @@ export const ButtonStyled = styled.button`
           }
           &:active:enabled {
             cursor: pointer;
-            color: ${brand.textTertiary};
+            color: ${brand.textSecondary};
             border: ${spacing.sp1} solid ${brand.buttonSecondary};
           }
         `;
@@ -105,7 +105,7 @@ export const ButtonStyled = styled.button`
         return css`
           border: ${spacing.sp1} solid ${brand.buttonSecondary};
           background-color: transparent;
-          color: ${brand.textTertiary};
+          color: ${brand.textSecondary};
           &:hover:enabled {
             cursor: pointer;
             border-color: ${brand.infoPrimary};
@@ -119,7 +119,7 @@ export const ButtonStyled = styled.button`
           &:active:enabled {
             cursor: pointer;
             border: ${spacing.sp1} solid ${brand.infoSecondary};
-            color: ${brand.textTertiary};
+            color: ${brand.textSecondary};
           }
         `;
       default:
@@ -158,7 +158,7 @@ export const ButtonStyled = styled.button`
         }
         &:active {
           cursor: pointer;
-          color: ${brand.textTertiary};
+          color: ${brand.textSecondary};
         }
         `
         : null}

@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import * as defaultTheme from "../../style/theme";
-import { getTheme, getThemePropSelector } from "../../utils";
+import styled, { css } from 'styled-components';
+import * as defaultTheme from '../../style/theme';
+import { getTheme, getThemePropSelector } from '../../utils';
 
 export const InputContainer = styled.div`
   display: inline-flex;
@@ -14,11 +14,16 @@ export const InputContainer = styled.div`
 
   input.sc-input-type {
     ${(props) => {
-      const { primaryDark2, danger, textSecondary, border } = getTheme(props);
+      const {
+        backgroundLevel1,
+        statusCritical,
+        textSecondary,
+        border,
+      } = getTheme(props);
       return css`
-        background-color: ${primaryDark2};
+        background-color: ${backgroundLevel1};
         color: ${textSecondary};
-        border: 1px solid ${props.error ? danger : border};
+        border: 1px solid ${props.error ? statusCritical : border};
       `;
     }};
     padding: 8px ${defaultTheme.padding.small};
@@ -28,13 +33,13 @@ export const InputContainer = styled.div`
   }
 
   input.sc-input-type:focus {
-    border-color: ${getThemePropSelector("secondary")};
+    border-color: ${getThemePropSelector('secondary')};
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 1px rgba(0, 126, 255, 0.1);
     outline: none;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     /* Adding a padding to make room for the custom absolute postionned arrows */
     padding-right: 20px;
     -moz-appearance: textfield; /*For FireFox*/
@@ -47,7 +52,7 @@ export const InputContainer = styled.div`
   }
 
   ${(props) => {
-    if (props.type === "number")
+    if (props.type === 'number')
       return css`
         .sc-input-wrapper {
           .sc-number-input-wrapper {
@@ -113,11 +118,11 @@ export const LabelStyle = styled.label`
   align-self: flex-start;
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.base};
-  color: ${getThemePropSelector("textPrimary")};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 
 export const InputErrorMessage = styled.span`
-  color: ${getThemePropSelector("danger")};
+  color: ${getThemePropSelector('danger')};
   margin: ${defaultTheme.padding.smaller} 0;
   font-size: ${defaultTheme.fontSize.small};
 `;

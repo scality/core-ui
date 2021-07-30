@@ -50,10 +50,10 @@ const TriggerStyled = styled(ButtonStyled)`
   background-color: ${getThemePropSelector('buttonSecondary')};
   color: ${getThemePropSelector('textPrimary')};
   &:hover {
-    background-color: ${getThemePropSelector('secondaryDark1')};
+    background-color: ${getThemePropSelector('backgroundLevel2')};
   }
   &:active {
-    background-color: ${getThemePropSelector('secondaryDark1')};
+    background-color: ${getThemePropSelector('backgroundLevel2')};
   }
   border-radius: 4px;
 
@@ -213,10 +213,10 @@ const HealthSelectorMenuItem = styled.li`
     background-color: ${getThemePropSelector('buttonSecondary')};
     color: ${getThemePropSelector('textPrimary')};
     &:hover {
-      background-color: ${getThemePropSelector('secondaryDark1')};
+      background-color: ${getThemePropSelector('backgroundLevel2')};
     }
     &:active {
-      background-color: ${getThemePropSelector('secondaryDark1')};
+      background-color: ${getThemePropSelector('backgroundLevel2')};
     }
   `};
 `;
