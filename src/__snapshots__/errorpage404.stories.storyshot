@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/ErrorPages/404 Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-jeGSBP dIkwYR sc-error-page404"
+  >
+    <div
+      className="sc-ehSCib hmtgWY"
+    >
+      <i
+        className="sc-lcujXC jAhMSI fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-eJMQSu gEBYmi"
+      >
+        Error: this page does not exist
+      </h2>
+    </div>
+    <div
+      className="sc-ehSCib hmtgWY"
+    >
+      <div
+        className="sc-nFpLZ fiAnll"
+      >
+        <p
+          className="sc-higXBA hCOWUr"
+        >
+          It might be the wrong address or the page has moved.
+        </p>
+        <p
+          className="sc-higXBA hCOWUr"
+        >
+          You might check the url, or contact your admin if the error remains.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV gdXFRf sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Return Home
+      </span>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/404 With Locale 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-jeGSBP dIkwYR sc-error-page404"
+  >
+    <div
+      className="sc-ehSCib hmtgWY"
+    >
+      <i
+        className="sc-lcujXC jAhMSI fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-eJMQSu gEBYmi"
+      >
+        Erreur: cette page n'existe pas
+      </h2>
+    </div>
+    <div
+      className="sc-ehSCib hmtgWY"
+    >
+      <div
+        className="sc-nFpLZ fiAnll"
+      >
+        <p
+          className="sc-higXBA hCOWUr"
+        >
+          Il se peut que ce soit une mauvaise adresse ou que la page ait été déplacée.
+        </p>
+        <p
+          className="sc-higXBA hCOWUr"
+        >
+          Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV gdXFRf sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Retour à l'accueil
+      </span>
+    </a>
+  </div>
+</div>
+`;

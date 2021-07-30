@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Navigation/ErrorPages/500 Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-gGmIRh kewOcC sc-error-page500"
+  >
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <i
+        className="sc-dwfUOf bEA-DEi fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-clsHhM hdOOuS"
+      >
+        Unexpected Error
+      </h2>
+    </div>
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <div
+        className="sc-fbkhIv kPfiXn"
+      >
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          An error occured and your request cannot be completed.
+        </p>
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          You might check the url, or contact your admin if the error remains.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV gdXFRf sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Return Home
+      </span>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/500 With Locale 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-gGmIRh kewOcC sc-error-page500"
+  >
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <i
+        className="sc-dwfUOf bEA-DEi fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-clsHhM hdOOuS"
+      >
+        Erreur inattendue
+      </h2>
+    </div>
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <div
+        className="sc-fbkhIv kPfiXn"
+      >
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          Une erreur s'est produite et votre demande ne peut être complétée.
+        </p>
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.
+        </p>
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          Vous pouvez également contacter le 
+          <a
+            className="sc-TmcTc jcpXLk"
+            href="https://www.scality.com/support/"
+          >
+            support 
+            <i
+              className="fas fa-external-link-alt"
+            />
+          </a>
+           pour signaler ce problème.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV gdXFRf sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Retour à l'accueil
+      </span>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Navigation/ErrorPages/500 With Support Link 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-gGmIRh kewOcC sc-error-page500"
+  >
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <i
+        className="sc-dwfUOf bEA-DEi fas fa-exclamation-triangle fa-2x"
+      />
+      <h2
+        className="sc-clsHhM hdOOuS"
+      >
+        Unexpected Error
+      </h2>
+    </div>
+    <div
+      className="sc-fWSCIC esCZjl"
+    >
+      <div
+        className="sc-fbkhIv kPfiXn"
+      >
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          An error occured and your request cannot be completed.
+        </p>
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          You might check the url, or contact your admin if the error remains.
+        </p>
+        <p
+          className="sc-GqfZa kCxezR"
+        >
+          You may also contact 
+          <a
+            className="sc-TmcTc jcpXLk"
+            href="https://www.scality.com/support/"
+          >
+            support 
+            <i
+              className="fas fa-external-link-alt"
+            />
+          </a>
+           to report this issue.
+        </p>
+      </div>
+    </div>
+    <a
+      className="sc-fodVxV gdXFRf sc-button"
+      disabled={false}
+      href="/"
+      size="large"
+      title=""
+    >
+      <span
+        className="sc-kstrdz ZegCk"
+      >
+        Return Home
+      </span>
+    </a>
+  </div>
+</div>
+`;

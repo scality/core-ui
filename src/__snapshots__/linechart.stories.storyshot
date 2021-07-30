@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Chart/LineChart Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Vega-Lite line chart demo
+  </h3>
+  <div
+    className="sc-vegachart"
+    id="vis"
+  />
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Vega-Lite line chart without axis
+  </h3>
+  <div
+    className="sc-vegachart"
+    id="vis2"
+  />
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Vega-Lite forecast chart
+  </h3>
+  <div
+    className="sc-vegachart"
+    id="vis_forecast_chart"
+  />
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Vega-Lite with strokeDash config, opacity config and custom Tooltip
+  </h3>
+  <div
+    className="sc-vegachart"
+    id="id_strokedash"
+  />
+</div>
+`;

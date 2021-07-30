@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Constrainedtext Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Constrained Text
+  </h3>
+  <div
+    style={
+      Object {
+        "color": "#0F7FFF",
+        "width": "100px",
+      }
+    }
+  >
+    <div
+      className="sc-jNMdTA kpxkWS"
+    >
+      <div
+        className="sc-fFubgz dylHja sc-tooltip"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="sc-cTkwdZ iYTXao sc-constrainedtext"
+        >
+          This is a long phrase
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    With the ability to customize the style of tooltip
+  </h3>
+  <div
+    style={
+      Object {
+        "color": "#0F7FFF",
+        "width": "100px",
+      }
+    }
+  >
+    <div
+      className="sc-jNMdTA kpxkWS"
+    >
+      <div
+        className="sc-fFubgz dylHja sc-tooltip"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="sc-cTkwdZ iYTXao sc-constrainedtext"
+        >
+          This is a long phrase
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

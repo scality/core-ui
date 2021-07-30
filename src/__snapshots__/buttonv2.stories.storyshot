@@ -1,0 +1,446 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/v2/Button Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi storybook-button"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Button default
+  </h3>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk ivkEgG sc-button"
+      label="primary"
+      onClick={[Function]}
+    >
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        primary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk dMLNLU sc-button"
+      label="secondary"
+    >
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        secondary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk chiGjD sc-button"
+      label="danger"
+    >
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        danger
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk gWWOtU sc-button"
+      label="outline"
+    >
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        outline
+      </span>
+    </button>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Button with icon
+  </h3>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk ivkEgG sc-button"
+      label="primary"
+    >
+      <span
+        className="sc-dmlrTW ghbIqT"
+        label="primary"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        primary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk dMLNLU sc-button"
+      label="secondary"
+    >
+      <span
+        className="sc-dmlrTW ghbIqT"
+        label="secondary"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        secondary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk chiGjD sc-button"
+      label="danger"
+    >
+      <span
+        className="sc-dmlrTW ghbIqT"
+        label="danger"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        danger
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk gWWOtU sc-button"
+      label="outline"
+    >
+      <span
+        className="sc-dmlrTW ghbIqT"
+        label="outline"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        outline
+      </span>
+    </button>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Button disabled
+  </h3>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk grZuMp sc-button"
+      disabled={true}
+      label="primary"
+    >
+      <span
+        aria-label="The button is disabled because of blabla..."
+        className="sc-dmlrTW ghbIqT"
+        label="primary"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        primary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk cXIchr sc-button"
+      disabled={true}
+      label="secondary"
+    >
+      <span
+        aria-label="The button is disabled because of blabla..."
+        className="sc-dmlrTW ghbIqT"
+        label="secondary"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        secondary
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk cjXjFY sc-button"
+      disabled={true}
+      label="danger"
+    >
+      <span
+        aria-label="The button is disabled because of blabla..."
+        className="sc-dmlrTW ghbIqT"
+        label="danger"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        danger
+      </span>
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk gtosBz sc-button"
+      disabled={true}
+      label="outline"
+      onClick={[Function]}
+    >
+      <span
+        aria-label="The button is disabled because of blabla..."
+        className="sc-dmlrTW ghbIqT"
+        label="outline"
+      >
+        <i
+          className="fas fa-arrow-right"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      >
+        outline
+      </span>
+    </button>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Ghost icon 
+  </h3>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk zloZ sc-button"
+    >
+      <span
+        aria-label="Refresh the metrics"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-sync"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk zloZ sc-button"
+    >
+      <span
+        aria-label="Export the data in predefined format"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-file-export"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk zloZ sc-button"
+    >
+      <span
+        aria-label="Metric over a period"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-calendar-week"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Icon button alway display a tooltip
+  </h3>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk ivkEgG sc-button"
+    >
+      <span
+        aria-label="Entity deletion"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-trash"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk dMLNLU sc-button"
+    >
+      <span
+        aria-label="Bound status"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-link"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk chiGjD sc-button"
+    >
+      <span
+        aria-label="Entity deletion"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-trash"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+  <div
+    className="sc-fFubgz dylHja sc-tooltip"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="sc-dIUggk gWWOtU sc-button"
+    >
+      <span
+        aria-label="Entity deletion"
+        className="sc-dmlrTW dETwjv"
+      >
+        <i
+          className="fas fa-trash"
+        />
+      </span>
+      <span
+        className="sc-hHftDr jIKedI"
+      />
+    </button>
+  </div>
+</div>
+`;

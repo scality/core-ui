@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Notification/Banner Error Banner 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-eCssSg gNvwKu sc-banner"
+  >
+    <i
+      className="fas fa-exclamation-triangle"
+    />
+    <div
+      className="sc-jSgupP ddDNyR"
+    >
+      <div
+        className="sc-iBPRYJ kSFWuu"
+      >
+        Error
+      </div>
+      <span
+        className="sc-gKsewC ytGHb"
+      >
+        There is an error.
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Notification/Banner Playground 1`] = `
+<div
+  className="sc-eCssSg gNvwKu sc-banner"
+>
+  <i
+    className="fas fa-exclamation-triangle"
+  />
+  <div
+    className="sc-jSgupP ddDNyR"
+  >
+    <div
+      className="sc-iBPRYJ kSFWuu"
+    >
+      Man
+    </div>
+    <span
+      className="sc-gKsewC ytGHb"
+    >
+      There is a success
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Notification/Banner Success Banner 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-eCssSg gNvwKu sc-banner"
+  >
+    <i
+      className="fas fa-exclamation-triangle"
+    />
+    <div
+      className="sc-jSgupP ddDNyR"
+    >
+      <div
+        className="sc-iBPRYJ kSFWuu"
+      >
+        Success
+      </div>
+      <span
+        className="sc-gKsewC ytGHb"
+      >
+        There is a success.
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/Notification/Banner Warning Banner 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div
+    className="sc-eCssSg gNvwKu sc-banner"
+  >
+    <i
+      className="fas fa-exclamation-triangle"
+    />
+    <div
+      className="sc-jSgupP ddDNyR"
+    >
+      <div
+        className="sc-iBPRYJ kSFWuu"
+      >
+        Warning
+      </div>
+      <span
+        className="sc-gKsewC ytGHb"
+      >
+        There is a warning.
+      </span>
+    </div>
+  </div>
+</div>
+`;

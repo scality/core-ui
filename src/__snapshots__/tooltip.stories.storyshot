@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Notification/Tooltip Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Default Tooltip
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Tooltip right
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "marginLeft": "100px",
+      }
+    }
+  >
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Tooltip left
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Tooltip bottom
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Customize your tooltip style
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Tooltip with button
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="sc-dQppl cNAIFa sc-button"
+        disabled={false}
+        size="small"
+        title=""
+        type="button"
+      >
+        <span
+          className="sc-hBEYos hgFzca"
+        >
+          <span
+            className="sc-button-text"
+          >
+            <span
+              className="sc-kstrdz ZegCk"
+            >
+              Hover here
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      add icon in the overlay of tooltip
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        tooltip with icon
+      </span>
+    </div>
+  </div>
+  <div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Tooltip doesn't trigger
+    </h3>
+    <div
+      className="sc-fFubgz dylHja sc-tooltip"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <span
+        className="sc-dlfnbm hsjuWP"
+      >
+        Hover here!
+      </span>
+    </div>
+  </div>
+</div>
+`;

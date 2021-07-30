@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Input/TextArea Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Text Area without label
+  </h3>
+  <textarea
+    className="sc-bsipQr kmeOKE sc-textarea"
+    cols={50}
+    id="text"
+    onChange={[Function]}
+    rows={10}
+    value="Add a note"
+  />
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Text Area disabled
+  </h3>
+  <textarea
+    className="sc-bsipQr kmeOKE sc-textarea"
+    cols={50}
+    disabled={true}
+    onChange={[Function]}
+    placeholder="Text area input"
+    rows={10}
+    value=""
+  />
+</div>
+`;

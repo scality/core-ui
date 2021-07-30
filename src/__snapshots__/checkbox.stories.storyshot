@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Checkbox Default 1`] = `
+<div
+  className="sc-bdfBwQ bXwVYi"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Checkbox checked
+  </h3>
+  <label
+    aria-pressed={null}
+    checked={true}
+    className="sc-kLgntA dDAMWa sc-checkbox"
+    tabIndex={null}
+  >
+    <i
+      className="fas fa-check"
+    />
+    <input
+      checked={true}
+      data-cy="checked_checkbox"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="sc-bYEvPH juMgqv text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Checkbox unchecked
+  </h3>
+  <label
+    aria-pressed={true}
+    checked={false}
+    className="sc-kLgntA bLfSly sc-checkbox"
+    tabIndex={0}
+  >
+    <i
+      className="fas fa-check"
+    />
+    <input
+      checked={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="sc-bYEvPH juMgqv text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Checkbox unchecked disabled
+  </h3>
+  <label
+    aria-pressed={null}
+    checked={false}
+    className="sc-kLgntA egVcAG sc-checkbox"
+    disabled={true}
+    tabIndex={null}
+  >
+    <i
+      className="fas fa-check"
+    />
+    <input
+      checked={false}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="sc-bYEvPH juMgqv text"
+    >
+      interested?
+    </span>
+  </label>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Checkbox checked disabled
+  </h3>
+  <label
+    aria-pressed={null}
+    checked={true}
+    className="sc-kLgntA cnNrvR sc-checkbox"
+    disabled={true}
+    tabIndex={null}
+  >
+    <i
+      className="fas fa-check"
+    />
+    <input
+      checked={true}
+      disabled={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="sc-bYEvPH juMgqv text"
+    >
+      interested?
+    </span>
+  </label>
+</div>
+`;

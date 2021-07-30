@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Text Basic Text 1`] = `
+<span
+  className="sc-bGqQkm emFrDx"
+>
+  basic text
+</span>
+`;
+
+exports[`Storyshots Components/Text Emphase Text 1`] = `
+<span
+  className="sc-bGqQkm sc-cjHJEj emFrDx cmcFSY"
+>
+  emphase text
+</span>
+`;
+
+exports[`Storyshots Components/Text Larger Text 1`] = `
+<span
+  className="sc-bGqQkm sc-fXvjs emFrDx dphtLw"
+>
+  larger text
+</span>
+`;
+
+exports[`Storyshots Components/Text Secondary Text 1`] = `
+<span
+  className="sc-bGqQkm sc-fxNNfJ emFrDx hCUAzZ"
+>
+  secondary text
+</span>
+`;
+
+exports[`Storyshots Components/Text Smaller Text 1`] = `
+<div
+  style={
+    Object {
+      "width": "100px",
+    }
+  }
+>
+  <span
+    className="sc-bGqQkm sc-gGTGfU emFrDx hrlcuF"
+  >
+    smaller text
+  </span>
+</div>
+`;
+
+exports[`Storyshots Components/Text Status Text 1`] = `
+Array [
+  <div>
+    <span
+      className="sc-bGqQkm sc-ihnbgO emFrDx hQpEwS"
+    >
+      healthy status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-bGqQkm sc-ihnbgO emFrDx kokvLO"
+    >
+      warning status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-bGqQkm sc-ihnbgO emFrDx aOwXI"
+    >
+      critical status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-bGqQkm sc-ihnbgO emFrDx femfya"
+    >
+      unknown status text
+    </span>
+  </div>,
+]
+`;
