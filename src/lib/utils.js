@@ -19,9 +19,6 @@ export const getThemePropSelector = (key) => (props) => {
   return getTheme(props)[key];
 };
 
-export const getThemeVariantSelector = () => (props) =>
-  getTheme(props)[props.variant];
-
 export const hex2RGB = (str: string): [number, number, number] => {
   const [, short, long] = String(str).match(RGB_HEX) || [];
 

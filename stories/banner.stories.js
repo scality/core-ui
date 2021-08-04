@@ -16,14 +16,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: [
-          'base',
-          'secondary',
-          'healthy',
-          'warning',
-          'danger',
-          'success',
-        ],
+        options: ['healthy', 'warning', 'danger', 'success'],
       },
     },
     title: {},

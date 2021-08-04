@@ -3,7 +3,11 @@ import React from 'react';
 import type { Node } from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector, getThemeVariantSelector } from '../../utils';
+import {
+  getThemeNewStatusVariant,
+  getThemePropSelector,
+  getTheme,
+} from '../../utils';
 import type { Variant } from '../constants';
 
 export type Props = {
@@ -22,13 +26,15 @@ const BannerContainer = styled.div`
   border: 1px solid;
   border-left: 5px solid;
   border-radius: 3px;
-  border-color: ${getThemeVariantSelector()};
+  border-color: ${(props) =>
+    getTheme(props)[getThemeNewStatusVariant(props.variant)]};
   background-color: ${getThemePropSelector('backgroundLevel1')};
   i {
     display: flex;
     align-items: center;
     margin-left: ${defaultTheme.padding.small};
-    color: ${getThemeVariantSelector()};
+    color: ${(props) =>
+      getTheme(props)[getThemeNewStatusVariant(props.variant)]};
   }
 `;
 
