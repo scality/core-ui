@@ -127,6 +127,16 @@ export const defaultTheme = {
 };
 export const brand = defaultTheme.darkRebrand;
 
+// LineChart colors
+export const lineColor1 = '#A14FBF';
+export const lineColor2 = '#BE9A40';
+export const lineColor3 = '#4BE4E2';
+export const lineColor4 = '#DC90F1';
+export const lineColor5 = '#E3FF73';
+export const lineColor6 = '#BE2543';
+export const lineColor7 = '#FD8144';
+export const lineColor8 = '#F6B187';
+
 //navbar
 export const navbarHeight = '47px';
 export const navbarItemWidth = '60px';
