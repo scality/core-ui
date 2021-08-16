@@ -41,6 +41,44 @@ const alerts = [
   },
 ];
 
+const alertsLast24h = [
+  {
+    id: '1',
+    severity: 'warning',
+    startsAt: '2021-02-01T07:00:00Z',
+    endsAt: '2021-02-01T08:00:00Z',
+    description: 'Global health warning',
+  },
+  {
+    id: '2',
+    severity: 'warning',
+    startsAt: '2021-02-01T12:00:00Z',
+    endsAt: '2021-02-01T15:00:00Z',
+    description: 'Global health warning',
+  },
+  {
+    id: '3',
+    severity: 'critical',
+    startsAt: '2021-02-01T16:00:00Z',
+    endsAt: '2021-02-01T18:00:00Z',
+    description: 'Global health critical',
+  },
+  {
+    id: '4',
+    severity: 'warning',
+    startsAt: '2021-02-01T19:00:00Z',
+    endsAt: '2021-02-01T20:00:00Z',
+    description: 'Global health warning',
+  },
+  {
+    id: '5',
+    severity: 'warning',
+    startsAt: '2021-02-01T10:00:00Z',
+    endsAt: '2021-02-01T20:00:00Z',
+    description: 'Global health warning',
+  },
+];
+
 const emptyAlert = [];
 const alertRetrieveBefore = [
   {
@@ -84,6 +122,9 @@ export default {
 const start = '2021-01-31T23:00:00Z'; // UTC time
 const end = '2021-02-06T23:00:00Z';
 
+const startLast24h = '2021-02-01T00:00:00Z';
+const endLast24h = '2021-02-02T00:00:00Z';
+
 const startNotFirstDay = '2021-02-23T23:00:00Z';
 const endNotFirstDay = '2021-03-01T23:00:00Z';
 
@@ -97,6 +138,15 @@ export const Default = () => {
           alerts={alerts}
           start={start}
           end={end}
+        />
+      </div>
+      <Title>Global Health Component - Last 24 hours</Title>
+      <div style={{ paddingTop: '50px' }}>
+        <GlobalHealthBar
+          id={'vis_globalhealth_24h'}
+          alerts={alertsLast24h}
+          start={startLast24h}
+          end={endLast24h}
         />
       </div>
       <Title>No alert</Title>
