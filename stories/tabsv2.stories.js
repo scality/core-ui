@@ -5,6 +5,7 @@ import { Wrapper, Title } from './common';
 import { BrowserRouter } from 'react-router-dom';
 import { brand, spacing } from '../src/lib/style/theme';
 import styled from 'styled-components';
+import { useLocation } from 'react-router';
 
 const Content = styled.div`
   padding: ${spacing.sp24};
@@ -51,22 +52,41 @@ const customTabStyle = {
   tabHoverColor: brand.statusHealthy,
 };
 
-export const Default = () => (
-  <Wrapper>
-    <BrowserRouter>
+const DefaultTabsDetails = () => {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+
+  const details = () => {
+    const tabName = query.get('tab');
+
+    if (tabName === 'group') {
+      return <Content>Group Content</Content>;
+    } else if (tabName === 'role @') {
+      return <Content>Roles Content</Content>;
+    } else if (tabName === '') {
+      return <Content>Policies Content</Content>;
+    }
+    return null;
+  };
+
+  return (
+    <>
+      <Title>
+        {location.pathname} / {location.search}
+      </Title>
       <Title>Default Tabs</Title>
       <Tabs>
         <Tab path="/iframe.html" label="Users">
           <Content>Users Content</Content>
         </Tab>
-        <Tab path="/path1" label="Groups">
-          <Content>Groups Content</Content>
+        <Tab path="/path1" query={{ tab: 'group' }} label="Groups">
+          {details()}
         </Tab>
-        <Tab path="/path2" label="Roles">
-          <Content>Roles Content</Content>
+        <Tab path="/path1" query={{ tab: 'role @' }} label="Roles">
+          {details()}
         </Tab>
-        <Tab path="/path3" label="Policies">
-          <Content>Policies Content</Content>
+        <Tab path="/path1" query={{ tab: '' }} label="Policies">
+          {details()}
         </Tab>
         <Tab path="/path4" label="Storage Location">
           <Content>Storage Location Content</Content>
@@ -80,14 +100,14 @@ export const Default = () => (
         <Tab path="/iframe.html" label="Users">
           <Content>Users Content</Content>
         </Tab>
-        <Tab path="/path1" label="Groups">
-          <Content>Groups Content</Content>
+        <Tab path="/path1" query={{ tab: 'group' }} label="Groups">
+          {details()}
         </Tab>
-        <Tab path="/path2" label="Roles">
-          <Content>Roles Content</Content>
+        <Tab path="/path1" query={{ tab: 'role @' }} label="Roles">
+          {details()}
         </Tab>
-        <Tab path="/path3" label="Policies">
-          <Content>Policies Content</Content>
+        <Tab path="/path1" query={{ tab: '' }} label="Policies">
+          {details()}
         </Tab>
         <Tab path="/path4" label="Storage Location">
           <Content>Storage Location Content</Content>
@@ -96,6 +116,14 @@ export const Default = () => (
           <Content>Properties Content</Content>
         </Tab>
       </Tabs>
+    </>
+  );
+};
+
+export const Default = () => (
+  <Wrapper>
+    <BrowserRouter>
+      <DefaultTabsDetails />
     </BrowserRouter>
   </Wrapper>
 );
