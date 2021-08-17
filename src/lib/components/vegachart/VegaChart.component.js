@@ -42,7 +42,7 @@ function VegaChart({
   id,
   spec,
   tooltipPosition = BOTTOM,
-  theme = 'light',
+  theme = 'custom',
 }: Props) {
   const themeContext = useContext(ThemeContext);
 

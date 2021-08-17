@@ -38,7 +38,7 @@ function GlobalHealthBar({
   start,
   end,
   height = 8,
-  width = 400,
+  width = 482,
   tooltipPosition = TOP,
 }: GlobalHealthProps) {
   const theme = useTheme();
@@ -70,12 +70,12 @@ function GlobalHealthBar({
     layer: [
       // Paint the entire bar with green
       {
-        mark: { type: 'rect', cornerRadius: 10 },
+        mark: { type: 'rect', cornerRadius: 6 },
         encoding: { color: { value: theme.healthyLight } },
       },
       // Paint the timespan as x-axis
       {
-        mark: { type: 'rect', cursor: 'pointer', cornerRadius: 10 },
+        mark: { type: 'rect', cursor: 'pointer', cornerRadius: 6 },
         encoding: {
           x: {
             field: 'startsAt',
@@ -92,13 +92,11 @@ function GlobalHealthBar({
               domain: [startTimeObject, endTimeObject],
             },
             axis: {
-              format: '%d %b',
+              format: '%d%b %H:%M',
               ticks: true,
               grid: false,
               domainWidth: 0,
               tickCount: 7,
-              labelExpr:
-                "[timeFormat(datum.value, '%d'), timeFormat(datum.value, '%d') == '01' || datum.index == 0 ? timeFormat(datum.value, '%b') : '']",
               labelColor: theme.textSecondary,
             },
           },
@@ -110,7 +108,7 @@ function GlobalHealthBar({
         mark: {
           type: 'rect',
           tooltip: true,
-          cornerRadius: 10,
+          cornerRadius: 6,
           cursor: 'pointer',
           clip: true,
         },
@@ -166,7 +164,6 @@ function GlobalHealthBar({
       className="sc-globalhealthbar"
       id={id}
       spec={spec}
-      theme={theme}
       tooltipPosition={tooltipPosition}
     ></VegaChart>
   );
