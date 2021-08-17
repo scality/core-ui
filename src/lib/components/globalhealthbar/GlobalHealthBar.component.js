@@ -71,7 +71,7 @@ function GlobalHealthBar({
       // Paint the entire bar with green
       {
         mark: { type: 'rect', cornerRadius: 6 },
-        encoding: { color: { value: theme.healthyLight } },
+        encoding: { color: { value: theme.statusHealthy } },
       },
       // Paint the timespan as x-axis
       {
@@ -101,7 +101,7 @@ function GlobalHealthBar({
             },
           },
           x2: { field: 'endsAt' },
-          color: { value: theme.healthyLight },
+          color: { value: theme.statusHealthy },
         },
       },
       {
@@ -131,7 +131,7 @@ function GlobalHealthBar({
             field: 'severity',
             type: 'nominal',
             title: 'null',
-            scale: { range: [theme.critical, theme.alert] },
+            scale: { range: [theme.statusCritical, theme.statusWarning] },
             legend: null,
           },
           tooltip: [
