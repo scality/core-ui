@@ -4,8 +4,13 @@ import type { Element, Node } from 'react';
 import TextBadge from '../textbadge/TextBadge.component';
 import { TabsContext } from './Tabsv2.component';
 
+export type Query = {
+  [key: string]: string,
+};
+
 export type TabProps = {
   path: string,
+  query?: Query,
   label: string,
   textBadge?: Element<typeof TextBadge>,
   children: Node,

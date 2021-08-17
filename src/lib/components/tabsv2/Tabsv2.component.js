@@ -1,5 +1,5 @@
 //@flow
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useCallback } from 'react';
 import type { Element, ChildrenArray } from 'react';
 import {
   TabBar,
@@ -14,7 +14,7 @@ import { matchPath, Route, Switch } from 'react-router';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
 import ScrollButton from './ScrollButton';
 import Tab from './Tab';
-import type { TabProps } from './Tab';
+import type { TabProps, Query } from './Tab';
 import useScrollingTabs from './useScrollingTabs';
 
 type TabsProps = {
@@ -46,27 +46,52 @@ function Tabs({
   const location = useLocation();
   const history = useHistory();
   const [selectedTabIndex, setSelectedTabIndex] = useState<?number>(null);
+  const queryURL = new URLSearchParams(location.search);
 
   const filteredTabsChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type === Tab,
   );
 
+  const matchQuery = useCallback(
+    (query: Query): boolean => {
+      for (const key of Object.keys(query)) {
+        if (
+          !(
+            queryURL.has(key) &&
+            decodeURIComponent(queryURL.get(key) || '') === query[key]
+          )
+        )
+          return false;
+      }
+      return true;
+    },
+    [queryURL],
+  );
+
+  const serialize = (query?: Query): string => {
+    return !query ? '' : '?' + new URLSearchParams(query).toString();
+  };
+
+  const getPushHistoryPath = (path: string, query?: Query): string =>
+    `${path}${serialize(query)}`;
+
   useEffect(() => {
     let hasSelectedTab = false;
     filteredTabsChildren.forEach((child, index) => {
-      const isSelected = !!matchPath(location.pathname, {
-        path: child.props.path,
-        exact: child.props.exact,
-        strict: child.props.strict,
-        sensitive: child.props.sensitive,
-      });
+      const isSelected =
+        !!matchPath(location.pathname, {
+          path: child.props.path,
+          exact: child.props.exact,
+          strict: child.props.strict,
+          sensitive: child.props.sensitive,
+        }) && (child.props.query ? matchQuery(child.props.query) : true);
       if (isSelected) {
         setSelectedTabIndex(index);
         hasSelectedTab = true;
       }
     });
     if (!hasSelectedTab) setSelectedTabIndex(null);
-  }, [location.pathname, filteredTabsChildren]);
+  }, [location.pathname, filteredTabsChildren, matchQuery]);
 
   const {
     scrollButtonEndRef,
@@ -83,6 +108,7 @@ function Tabs({
   const tabItems = filteredTabsChildren.map((child, index) => {
     const {
       path,
+      query,
       label,
       textBadge,
       children,
@@ -94,7 +120,7 @@ function Tabs({
         className={`sc-tabs-item ${isSelected ? 'selected' : ''}`}
         key={index}
         role="tab"
-        onClick={() => history.push(path)}
+        onClick={() => history.push(getPushHistoryPath(path, query))}
         selected={isSelected}
         tabHoverColor={tabHoverColor}
         inactiveTabColor={inactiveTabColor}
@@ -108,7 +134,7 @@ function Tabs({
             event.key === 'Spacebar'
           ) {
             event.preventDefault();
-            history.push(path);
+            history.push(getPushHistoryPath(path, query));
           }
         }}
         {...childRest}
