@@ -95,8 +95,8 @@ function GlobalHealthBar({
               format: '%d%b %H:%M',
               ticks: true,
               grid: false,
-              domainWidth: 0,
-              tickCount: 7,
+              tickCount: 5, //A desired number of ticks, for axes visualizing quantitative scales. The resulting number may be different so that values are “nice” (multiples of 2, 5, 10) and lie within the underlying scale’s range.
+              labelFlush: false, // Indicates if the first and last axis labels should be aligned flush with the scale range.
               labelColor: theme.textSecondary,
             },
           },
