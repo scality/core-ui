@@ -6,5 +6,18 @@ import Button from './components/buttonv2/Buttonv2.component';
 import Tabs, { Tab } from './components/tabsv2/Tabsv2.component';
 import Table from './components/tablev2/Tablev2.component';
 import LineTemporalChart from './components/linetemporalchart/LineTemporalChart.component';
+import {
+  MetricsTimeSpanProvider,
+  useMetricsTimeSpan,
+} from './components/linetemporalchart/MetricTimespanProvider.js';
 import { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
-export { Button, Tabs, Tab, Table, LineTemporalChart, SyncedCursorCharts };
+export {
+  Button,
+  Tabs,
+  Tab,
+  Table,
+  LineTemporalChart,
+  SyncedCursorCharts,
+  MetricsTimeSpanProvider,
+  useMetricsTimeSpan,
+};

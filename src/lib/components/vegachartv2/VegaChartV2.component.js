@@ -1,5 +1,5 @@
 //@flow
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useContext, useRef, useLayoutEffect } from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
@@ -10,7 +10,6 @@ export const TOP = 'top';
 export const BOTTOM = 'bottom';
 type Position = typeof TOP | typeof BOTTOM;
 type Props = {
-  id: string,
   spec: Object,
   tooltipPosition?: Position,
   theme?: 'light' | 'dark' | 'custom',
@@ -41,21 +40,16 @@ const VegaTooltipTheme = createGlobalStyle`
 `;
 
 function VegaChart({
-  id,
   spec,
   tooltipPosition = BOTTOM,
   theme = 'custom',
 }: Props) {
-  const useCursorContext = useCursorX();
+  // $FlowFixMe
+  const { cursorX, setCursorX } = useCursorX();
   const themeContext = useContext(ThemeContext);
-  const cursorX = useCursorX().cursorX;
 
-  const currentBackgroundColor =
-    themeContext && themeContext.brand
-      ? themeContext.brand.backgroundLevel4
-      : themeContext.backgroundLevel4;
   // the background color of the view
-  const currentBackgroundColor2 =
+  const seriesBackgroundColor =
     themeContext && themeContext.brand
       ? themeContext.brand.backgroundLevel1
       : themeContext.backgroundLevel1;
@@ -67,18 +61,18 @@ function VegaChart({
 
   const themeConfig = {
     config: {
-      background: currentBackgroundColor,
+      background: 'transparent',
       axis: {
         labelColor: brandText,
         titleColor: brandText,
         grid: false,
-        domainColor: currentBackgroundColor2,
+        domainColor: 'transparent',
       },
       title: {
         color: brandText,
         font: 'Lato',
       },
-      view: { stroke: 'transparent', fill: currentBackgroundColor2 },
+      view: { stroke: 'transparent', fill: seriesBackgroundColor },
       // the headers provide a title and labels for faceted plots.
       header: {
         labelColor: brandText,
@@ -88,19 +82,12 @@ function VegaChart({
         color: brandText,
         font: 'Lato',
       },
-      // the up, bottom trend line and verticle line when hover
-      rule: {
-        color: brandText,
-      },
-      legend: {
-        labelColor: brandText,
-        titleColor: brandText,
-      },
     },
   };
   const themedSpec = { ...spec, ...themeConfig };
 
   const vegaInstance = useRef<Result>();
+  const vegaDOMInstance = useRef<HTMLDivElement | null>(null);
 
   let tooltipOptions = { theme: theme };
   if (tooltipPosition === TOP) {
@@ -108,50 +95,54 @@ function VegaChart({
   }
 
   /* 
-  There are two useEffect():
+  useEffect() and useEffectLayout():
   The first effect will only render once, to initalize the chart and add the event lisener.
-  The second effect in charge of updating the chart when the `themedSpec` or `tooltipOptions` get updated.
+
+  The second useEffectLayout is in charge of updating the chart when the `themedSpec` or `tooltipOptions` get updated.
+  Note it's important to useEffectLayout for the performance. 
    */
   useEffect(() => {
     let isMounted = true;
-
-    vegaEmbed(`#${id}`, themedSpec, {
-      renderer: 'svg',
-      // Override the DEFAULT_OPTIONS https://github.com/vega/vega-tooltip/blob/master/src/defaults.ts
-      tooltip: tooltipOptions,
-      /* Determines if action links
+    // embed(el, spec[, opt]) the el can be a DOM element or CSS selector. https://github.com/vega/vega-embed
+    vegaDOMInstance &&
+      vegaDOMInstance.current &&
+      vegaEmbed(vegaDOMInstance.current, themedSpec, {
+        renderer: 'svg',
+        // Override the DEFAULT_OPTIONS https://github.com/vega/vega-tooltip/blob/master/src/defaults.ts
+        tooltip: tooltipOptions,
+        /* Determines if action links
       ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor") are included with the embedded view.
       If the value is true, all action links will be shown and none if the value is false. */
-      actions: false,
-    })
-      .then((result) => {
-        vegaInstance.current = result;
-        // result.view contains the Vega view
-        // get the current state of view: result.view.getState()
-        const view = result.view;
-
-        if (SyncedCursorChartsContext) {
-          view.addEventListener('mouseover', function (event, item) {
-            const currentTime =
-              item &&
-              item.datum &&
-              item.datum.datum &&
-              item.datum.datum.timestamp;
-            if (currentTime) {
-              useCursorContext.setCursorX(currentTime);
-            }
-          });
-          /*When the mouse leaves the chart area, set the cursorX to null*/
-          view.addEventListener('mouseleave', function (event, item) {
-            useCursorContext.setCursorX(null);
-          });
-        }
+        actions: false,
       })
-      .catch((...args) => {
-        if (isMounted) {
-          console.error(...args); // TODO: we should handle this with a retry or an error state of the component
-        }
-      });
+        .then((result) => {
+          vegaInstance.current = result;
+          // result.view contains the Vega view
+          // get the current state of view: result.view.getState()
+          const view = result.view;
+          console.log('view', view);
+          if (SyncedCursorChartsContext && view) {
+            view.addEventListener('mouseover', function (event, item) {
+              const currentTime =
+                item &&
+                item.datum &&
+                item.datum.datum &&
+                item.datum.datum.timestamp;
+              if (currentTime) {
+                setCursorX(currentTime);
+              }
+            });
+            /*When the mouse leaves the chart area, set the cursorX to null*/
+            view.addEventListener('mouseleave', function (event, item) {
+              setCursorX(0);
+            });
+          }
+        })
+        .catch((...args) => {
+          if (isMounted) {
+            console.error(...args); // TODO: we should handle this with a retry or an error state of the component
+          }
+        });
 
     return () => {
       isMounted = false;
@@ -160,18 +151,17 @@ function VegaChart({
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [vegaDOMInstance]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (vegaInstance.current) {
       const view = vegaInstance.current.view;
       let changeset = vega
         .changeset()
         .remove(() => true)
-        .insert(themedSpec.data.values);
+        .insert(themedSpec.data.values); // the data.values change will trigger the graph's repaint
       // For some reason source_0 is the default dataset name
       view.change('source_0', changeset).run();
-
       // when the mouse go out, we trigger the event to set cursorX to null
       if (
         !themedSpec.params.find((param) => param.name === 'cursorX').value ||
@@ -208,7 +198,7 @@ function VegaChart({
     vegaInstance,
   ]);
   return (
-    <div id={id} className="sc-vegachart">
+    <div className="sc-vegachart" ref={vegaDOMInstance}>
       <VegaTooltipTheme />
     </div>
   );

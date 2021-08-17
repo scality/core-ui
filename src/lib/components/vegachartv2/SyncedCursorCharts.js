@@ -1,21 +1,24 @@
 //@flow
 import React, { type Node, useState, createContext, useContext } from 'react';
 
-export const SyncedCursorChartsContext = createContext<any>(null);
+export const SyncedCursorChartsContext = createContext<{
+  cursorX: number,
+  setCursorX: (cursorX: number) => void,
+} | null>(null);
 
 export const useCursorX = (): ({
-  cursorX: Date,
-  setCursorX: (Date | null) => void,
-}) => {
+  cursorX: number,
+  setCursorX: (cursorX: number) => void,
+} | null) => {
   const contextValue = useContext(SyncedCursorChartsContext);
   if (contextValue === null) {
-    console.log("Can't use useCursorX() outside SyncedCursorCharts");
+    console.error("Can't use useCursorX() outside SyncedCursorCharts");
   }
   return contextValue;
 };
 
 export function SyncedCursorCharts({ children }: { children: Node }) {
-  const [cursorX, setCursorX] = useState(null);
+  const [cursorX, setCursorX] = useState(0);
 
   return (
     <SyncedCursorChartsContext.Provider value={{ cursorX, setCursorX }}>

@@ -1,71 +1,116 @@
 import {
   convert2VegaData,
   getUnitLabel,
-  getLegendLabelfromSeries,
+  addMissingDataPoint,
 } from './ChartUtil.js';
 
 const series = [
   {
-    label: 'node1',
-    instance: 'node1',
+    resource: 'node1',
     data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
+      [1627460232, '18.73333333333335'],
+      [1627460952, '18.73333333333335'],
     ],
+    getTooltipLabel: (metricPrefix, resource) => {
+      return resource;
+    },
   },
   {
-    label: 'node2',
-    instance: 'node2',
+    resource: 'node2',
     data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
+      [1627460232, '18.73333333333335'],
+      [1627460952, null],
     ],
+    getTooltipLabel: (metricPrefix, resource) => {
+      return resource;
+    },
   },
 ];
 
-const seriesReadWrite = [
+const seriesSymmetrical = [
   {
-    label: 'node1-read',
-    instance: 'node1',
+    metricPrefix: 'read',
+    resource: 'node1',
     data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
+      [1627460232, '18.73333333333335'],
+      [1627460952, '18.73333333333335'],
     ],
+    getTooltipLabel: (metricPrefix, resource) => {
+      return `${resource}-${metricPrefix}`;
+    },
   },
   {
-    label: 'node1-write',
-    instance: 'node1',
+    metricPrefix: 'write',
+    resource: 'node1',
     data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
+      [1627460232, '18.73333333333335'],
+      [1627460952, '18.73333333333335'],
     ],
-  },
-  {
-    label: 'node2-read',
-    instance: 'node2',
-    data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
-    ],
-  },
-  {
-    label: 'node2-write',
-    instance: 'node2',
-    data: [
-      { timestamp: 1627460232000, value: 18.73333333333335 },
-      { timestamp: 1627460952000, value: 18.73333333333335 },
-    ],
+    getTooltipLabel: (metricPrefix, resource) => {
+      return `${resource}-${metricPrefix}`;
+    },
   },
 ];
 
 it('converts the series to a flat data structure', () => {
   const result = convert2VegaData(series);
-  expect([
-    { timestamp: 1627460232000, label: 'node1', value: 18.73333333333335 },
-    { timestamp: 1627460952000, label: 'node1', value: 18.73333333333335 },
-    { timestamp: 1627460232000, label: 'node2', value: 18.73333333333335 },
-    { timestamp: 1627460952000, label: 'node2', value: 18.73333333333335 },
-  ]).toEqual(result);
+  expect(result).toEqual([
+    {
+      timestamp: 1627460232000,
+      label: 'node1',
+      value: 18.73333333333335,
+      isNegativeValue: false,
+    },
+    {
+      timestamp: 1627460952000,
+      label: 'node1',
+      value: 18.73333333333335,
+      isNegativeValue: false,
+    },
+    {
+      timestamp: 1627460232000,
+      label: 'node2',
+      value: 18.73333333333335,
+      isNegativeValue: false,
+    },
+    {
+      timestamp: 1627460952000,
+      label: 'node2',
+      value: null,
+      isNegativeValue: false,
+    },
+  ]);
+});
+
+it('converts the series to a flat data structure for symmetrical chart', () => {
+  const result = convert2VegaData(seriesSymmetrical);
+
+  expect(result).toEqual([
+    {
+      timestamp: 1627460232000,
+      label: 'node1-read',
+      value: 18.73333333333335,
+      isNegativeValue: true,
+    },
+    {
+      timestamp: 1627460952000,
+      label: 'node1-read',
+      value: 18.73333333333335,
+      isNegativeValue: true,
+    },
+    {
+      timestamp: 1627460232000,
+      label: 'node1-write',
+      value: 18.73333333333335,
+      isNegativeValue: false,
+    },
+    {
+      timestamp: 1627460952000,
+      label: 'node1-write',
+      value: 18.73333333333335,
+      isNegativeValue: false,
+    },
+  ]);
 });
 
 const unitRange = [
@@ -96,12 +141,91 @@ it('returns the unit label GiB/Sec', () => {
   expect(valueBase).toEqual(1024 * 1024 * 1024);
 });
 
-it('returns the array of legend labels', () => {
-  const legendsLabel = getLegendLabelfromSeries(series);
-  expect(legendsLabel).toEqual(['node1', 'node2']);
+// test for addMissingDataPoint function
+const originalValue = [
+  [0, 0],
+  [1, 1],
+  [2, 2],
+  [3, 3],
+  [4, 4],
+  [5, 5],
+  [6, 6],
+  [8, 8],
+  [9, 9],
+  [10, 10],
+];
+const startingTimeStamp = 0;
+const sampleDuration = 11;
+const sampleFrequency = 1;
+const newValues = [
+  [0, 0],
+  [1, 1],
+  [2, 2],
+  [3, 3],
+  [4, 4],
+  [5, 5],
+  [6, 6],
+  [7, null],
+  [8, 8],
+  [9, 9],
+  [10, 10],
+];
+it('should add missing data point with null', () => {
+  const result = addMissingDataPoint(
+    originalValue,
+    startingTimeStamp,
+    sampleDuration,
+    sampleFrequency,
+  );
+  expect(result).toEqual(newValues);
 });
 
-it('returns only the instance name', () => {
-  const legendsLabel = getLegendLabelfromSeries(seriesReadWrite);
-  expect(legendsLabel).toEqual(['node1', 'node2']);
+it('should return an empty array when the original dataset is empty', () => {
+  const result = addMissingDataPoint(
+    [],
+    startingTimeStamp,
+    sampleDuration,
+    sampleFrequency,
+  );
+  expect(result).toEqual([]);
+});
+
+it('should return an empty array when the starting timestamp is undefined', () => {
+  const result = addMissingDataPoint(
+    originalValue,
+    undefined,
+    sampleDuration,
+    sampleFrequency,
+  );
+  expect(result).toEqual([]);
+});
+
+it('should return an empty array when sample duration is less than or equal to zero', () => {
+  const result = addMissingDataPoint(
+    originalValue,
+    startingTimeStamp,
+    0,
+    sampleFrequency,
+  );
+  expect(result).toEqual([]);
+});
+
+it('should return an empty array when sample frequency is less than or equal to zero', () => {
+  const result = addMissingDataPoint(
+    originalValue,
+    startingTimeStamp,
+    sampleDuration,
+    -1,
+  );
+  expect(result).toEqual([]);
+});
+
+it('should return an empty array when sample frequency is undefined', () => {
+  const result = addMissingDataPoint(
+    originalValue,
+    startingTimeStamp,
+    sampleDuration,
+    undefined,
+  );
+  expect(result).toEqual([]);
 });
