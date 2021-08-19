@@ -77,6 +77,13 @@ const alertsLast24h = [
     endsAt: '2021-02-01T20:00:00Z',
     description: 'Global health warning',
   },
+  {
+    id: '6',
+    severity: 'unavailable',
+    startsAt: '2021-02-01T02:00:00Z',
+    endsAt: '2021-02-01T03:00:00Z',
+    description: 'unavailable',
+  },
 ];
 
 const emptyAlert = [];

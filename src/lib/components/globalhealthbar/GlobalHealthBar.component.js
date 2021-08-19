@@ -131,7 +131,10 @@ function GlobalHealthBar({
             field: 'severity',
             type: 'nominal',
             title: 'null',
-            scale: { range: [theme.statusCritical, theme.statusWarning] },
+            scale: { 
+              domain: ['critical','unavailable','warning'],
+              range: [theme.statusCritical, theme.textSecondary, theme.statusWarning] 
+            },
             legend: null,
           },
           tooltip: [
