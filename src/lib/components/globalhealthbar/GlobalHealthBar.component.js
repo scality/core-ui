@@ -67,15 +67,17 @@ function GlobalHealthBar({
         as: 'title',
       },
     ],
+    view: { cornerRadius: 6 },
+    config: { style: { cell: { stroke: 'transparent', strokeWidth: 0 } } },
     layer: [
       // Paint the entire bar with green
       {
-        mark: { type: 'rect', cornerRadius: 6 },
+        mark: { type: 'rect', clip: true },
         encoding: { color: { value: theme.statusHealthy } },
       },
       // Paint the timespan as x-axis
       {
-        mark: { type: 'rect', cursor: 'pointer', cornerRadius: 6 },
+        mark: { type: 'rect', cursor: 'pointer', clip: true },
         encoding: {
           x: {
             field: 'startsAt',
@@ -108,7 +110,6 @@ function GlobalHealthBar({
         mark: {
           type: 'rect',
           tooltip: true,
-          cornerRadius: 6,
           cursor: 'pointer',
           clip: true,
         },
@@ -131,9 +132,13 @@ function GlobalHealthBar({
             field: 'severity',
             type: 'nominal',
             title: 'null',
-            scale: { 
-              domain: ['critical','unavailable','warning'],
-              range: [theme.statusCritical, theme.textSecondary, theme.statusWarning] 
+            scale: {
+              domain: ['critical', 'unavailable', 'warning'],
+              range: [
+                theme.statusCritical,
+                theme.textSecondary,
+                theme.statusWarning,
+              ],
             },
             legend: null,
           },
