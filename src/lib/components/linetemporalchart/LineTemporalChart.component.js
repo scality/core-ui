@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useLayoutEffect } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { lighten, darken } from 'polished';
 import { expressionFunction } from 'vega';
@@ -24,7 +24,7 @@ import {
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
-import { BasicText } from '../text/Text.component.js';
+import { SmallerText } from '../text/Text.component.js';
 import Loader from '../loader/Loader.component';
 
 // some predefined values
@@ -154,7 +154,7 @@ function LineTemporalChart({
       console.error('Please provide at least one entry in unitRange.');
     }
   }
-
+  const vegaViewRef = useRef();
   const theme = useTheme();
   const { sampleFrequency, metricsTimeSpan } = useMetricsTimeSpan();
   //##### Data Transformation Start
@@ -181,25 +181,31 @@ function LineTemporalChart({
   }, [series, startingTimeStamp, metricsTimeSpan, sampleFrequency]);
 
   // 2. Change the data structure to a flat array which is required by Vega-lite
-  const vegaData = convert2VegaData(addedMissingDataPointSeries);
+  const vegaData = useMemo(() => {
+    return convert2VegaData(addedMissingDataPointSeries);
+  }, [addedMissingDataPointSeries]);
 
   // 3. Search for the biggest value in order to define the unit for the chart, if the unit is needed.
-  const maxValue = Math.max.apply(
-    Math,
-    vegaData.map(function (datum: {
-      timestamp: number,
-      label: string,
-      value: number | null,
-    }): number {
-      if (datum.value) {
-        return datum.value;
-      }
-      return 0;
-    }),
-  );
+  const maxValue = useMemo(() => {
+    return Math.max.apply(
+      Math,
+      vegaData.map(function (datum: {
+        timestamp: number,
+        label: string,
+        value: number | null,
+      }): number {
+        if (datum.value) {
+          return datum.value;
+        }
+        return 0;
+      }),
+    );
+  }, [vegaData]);
 
   // 4. Recompute the value base on the unit
-  const valueBase = unitRange ? getUnitLabel(unitRange, maxValue).valueBase : 1;
+  const valueBase = useMemo(() => {
+    return unitRange ? getUnitLabel(unitRange, maxValue).valueBase : 1;
+  }, [maxValue, unitRange]);
 
   const vegaDataWithUnit = unitRange
     ? convertDataBaseValue(vegaData, valueBase)
@@ -309,8 +315,8 @@ function LineTemporalChart({
       x: {
         datum: { expr: 'toDate(cursorX)' }, // convert the timestamp to Date object
       },
-      y: { datum: -Math.ceil(maxValue / valueBase) },
-      y2: { datum: Math.ceil(maxValue / valueBase) },
+      y: { expr: '-yAxisMaxValue' },
+      y2: { expr: 'yAxisMaxValue' },
       color: { value: theme.highlight, opacity: 0.3 },
       /* 
       According to the design, the vertical ruler should be hided when the mouse points out of the graph area. 
@@ -338,29 +344,26 @@ function LineTemporalChart({
     title: null,
   };
 
-  const yAxis = {
-    field: 'value',
-    type: 'quantitative',
-    axis: {
-      title: yAxisTitle ? yAxisTitle : ' ',
-      orient: 'right',
-      translate: -5, // translate both the x and y coordinates by 5 pixel
-      tickOffset: 5, // shift back the y translate to make sure the tick align with the 0 seperation line
-      labelPadding: 6,
-      labelFlush: true,
-    },
-    scale:
-      yAxisType === 'symmetrical'
-        ? {
-            domain: [
-              -Math.ceil(maxValue / valueBase),
-              Math.ceil(maxValue / valueBase),
-            ],
-          }
-        : yAxisType === 'percentage'
-        ? { domain: [0, 100] }
-        : undefined,
-  };
+  const yAxis = useMemo(() => {
+    return {
+      field: 'value',
+      type: 'quantitative',
+      axis: {
+        title: yAxisTitle ? yAxisTitle : ' ',
+        orient: 'right',
+        translate: -5, // translate both the x and y coordinates by 5 pixel
+        tickOffset: 5, // shift back the y translate to make sure the tick align with the 0 seperation line
+        labelPadding: 6,
+        labelFlush: true,
+      },
+      scale:
+        yAxisType === 'symmetrical'
+          ? { domain: [{ expr: '-yAxisMaxValue' }, { expr: 'yAxisMaxValue' }] }
+          : yAxisType === 'percentage'
+          ? { domain: [0, 100] }
+          : undefined,
+    };
+  }, [yAxisTitle, yAxisType]);
 
   const color = {
     field: 'label',
@@ -454,9 +457,17 @@ function LineTemporalChart({
       ),
     [tooltipLabels],
   );
+
+  // we need to retrieve the vega view in order to update the signal
+  useLayoutEffect(() => {
+    if (vegaViewRef.current && yAxisType === 'symmetrical') {
+      vegaViewRef.current
+        .signal('yAxisMaxValue', Math.ceil(maxValue / valueBase))
+        .run();
+    }
+  }, [maxValue, valueBase, vegaViewRef, yAxisType]);
   // $FlowFixMe
   const cursorX = useCursorX().cursorX;
-
   // the specification of the Vega-lite chart
   const spec = {
     data: { values: vegaSpecValues },
@@ -526,6 +537,10 @@ function LineTemporalChart({
 
   if (yAxisType === 'symmetrical') {
     spec.layer.push(seperationLine);
+    spec.params.push({
+      name: 'yAxisMaxValue',
+      value: Math.ceil(maxValue / valueBase),
+    });
   }
 
   const seriesNames = series
@@ -551,7 +566,12 @@ function LineTemporalChart({
         {isLoading && <Loader style={{ paddingLeft: `${spacing.sp4}` }} />}
       </ChartHeader>
       {/* When the chart is in loading status, we display the chart skeleton */}
-      <VegaChart key={seriesNames} spec={spec} theme={'custom'}></VegaChart>
+      <VegaChart
+        key={seriesNames}
+        spec={spec}
+        theme={'custom'}
+        ref={vegaViewRef}
+      ></VegaChart>
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
       {!isLegendHided && (
         <Legends>
@@ -559,7 +579,7 @@ function LineTemporalChart({
             return (
               <>
                 <LegendStroke lineColor={colorRange[index]}></LegendStroke>
-                <BasicText>{legend}</BasicText>
+                <SmallerText>{legend}</SmallerText>
               </>
             );
           })}

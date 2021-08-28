@@ -39,11 +39,10 @@ const VegaTooltipTheme = createGlobalStyle`
   }
 `;
 
-function VegaChart({
-  spec,
-  tooltipPosition = BOTTOM,
-  theme = 'custom',
-}: Props) {
+function VegaChart(
+  { spec, tooltipPosition = BOTTOM, theme = 'custom' }: Props,
+  ref?: { current: typeof vega.View | null },
+) {
   // $FlowFixMe
   const { cursorX, setCursorX } = useCursorX();
   const themeContext = useContext(ThemeContext);
@@ -120,7 +119,9 @@ function VegaChart({
           // result.view contains the Vega view
           // get the current state of view: result.view.getState()
           const view = result.view;
-          console.log('view', view);
+          if (ref) {
+            ref.current = view;
+          }
           if (SyncedCursorChartsContext && view) {
             view.addEventListener('mouseover', function (event, item) {
               const currentTime =
@@ -159,7 +160,7 @@ function VegaChart({
       let changeset = vega
         .changeset()
         .remove(() => true)
-        .insert(themedSpec.data.values); // the data.values change will trigger the graph's repaint
+        .insert(themedSpec.data.values); //only the data.values changes trigger the graph's repaint
       // For some reason source_0 is the default dataset name
       view.change('source_0', changeset).run();
       // when the mouse go out, we trigger the event to set cursorX to null
@@ -203,5 +204,5 @@ function VegaChart({
     </div>
   );
 }
-
-export default VegaChart;
+// $FlowFixMe
+export default React.forwardRef(VegaChart);

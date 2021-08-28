@@ -19,8 +19,8 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <MetricsTimeSpanProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <MetricsTimeSpanProvider>
           <SyncedCursorCharts>
             <LineTemporalChart
               title={'CPU Usage'}
@@ -38,8 +38,8 @@ export const Default = () => {
               startingTimeStamp={1629306229}
             />
           </SyncedCursorCharts>
-        </BrowserRouter>
-      </MetricsTimeSpanProvider>
+        </MetricsTimeSpanProvider>
+      </BrowserRouter>
     </Wrapper>
   );
 };

@@ -25,7 +25,7 @@ export const MetricsTimeSpanProvider = ({ children }: { children: Node }) => {
   const [sampleFrequency, setSampleFrequency] = useState(
     SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
   );
-  const urlSearchParams = new URLSearchParams(window.location.search);
+  const urlSearchParams = new URLSearchParams(useLocation().search);
   const queryTimeSpan = urlSearchParams.get('from');
 
   // Sync url timespan to local timespan
