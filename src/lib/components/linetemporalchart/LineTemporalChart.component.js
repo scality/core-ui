@@ -26,6 +26,7 @@ import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
 import { SmallerText } from '../text/Text.component.js';
 import Loader from '../loader/Loader.component';
+import { formatValue } from './tooltip/index.js';
 
 // some predefined values
 export const YAXIS_TITLE_READ_WRITE = 'write(+) / read(-)';
@@ -414,7 +415,7 @@ function LineTemporalChart({
               labelAngle: -50,
               labelColor: '#B5B5B5',
             },
-            title: 'Date',
+            title: 'title',
           },
         ],
       },
@@ -550,15 +551,19 @@ function LineTemporalChart({
     )
     .join(',');
 
+  const unitLabel = unitRange
+    ? getUnitLabel(unitRange, maxValue).unitLabel
+    : yAxisType === 'percentage'
+    ? '%'
+    : null;
+
   return (
     <LineTemporalChartWrapper>
       <ChartHeader>
-        {unitRange ? (
+        {unitLabel ? (
           <EmphaseText>
-            {title} ({getUnitLabel(unitRange, maxValue).unitLabel})
+            {title} ({unitLabel})
           </EmphaseText>
-        ) : yAxisType === 'percentage' ? (
-          <EmphaseText>{title} (%)</EmphaseText>
         ) : (
           // for the chart doesn't have title
           <EmphaseText>{title}</EmphaseText>
@@ -571,6 +576,15 @@ function LineTemporalChart({
         spec={spec}
         theme={'custom'}
         ref={vegaViewRef}
+        formatTooltip={useMemo(
+          () =>
+            formatValue(
+              series,
+              customizedColorRange.length ? customizedColorRange : colorRange,
+              unitLabel,
+            ),
+          [unitLabel, seriesNames],
+        )}
       ></VegaChart>
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
       {!isLegendHided && (

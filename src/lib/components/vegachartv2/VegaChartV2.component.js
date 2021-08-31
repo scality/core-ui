@@ -5,6 +5,7 @@ import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
 import { getThemePropSelector } from '../../utils';
 import { useCursorX, SyncedCursorChartsContext } from './SyncedCursorCharts';
+import { Handler } from 'vega-tooltip';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -13,6 +14,11 @@ type Props = {
   spec: Object,
   tooltipPosition?: Position,
   theme?: 'light' | 'dark' | 'custom',
+  formatTooltip?: (
+    value: any,
+    valueToHtml: (value: any) => string,
+    maxDepth: number,
+  ) => string,
 };
 
 /* How to theme tooltip:
@@ -40,7 +46,7 @@ const VegaTooltipTheme = createGlobalStyle`
 `;
 
 function VegaChart(
-  { spec, tooltipPosition = BOTTOM, theme = 'custom' }: Props,
+  { spec, tooltipPosition = BOTTOM, theme = 'custom', formatTooltip }: Props,
   ref?: { current: typeof vega.View | null },
 ) {
   // $FlowFixMe
@@ -88,11 +94,17 @@ function VegaChart(
   const vegaInstance = useRef<Result>();
   const vegaDOMInstance = useRef<HTMLDivElement | null>(null);
 
-  let tooltipOptions = { theme: theme };
+  let tooltipOptions = { theme: theme, formatTooltip: formatTooltip };
   if (tooltipPosition === TOP) {
-    tooltipOptions = { theme: theme, offsetX: -85, offsetY: -140 };
+    tooltipOptions = {
+      theme: theme,
+      offsetX: -85,
+      offsetY: -140,
+      formatTooltip: formatTooltip,
+    };
   }
 
+  const tooltipHandler = new Handler(tooltipOptions);
   /* 
   useEffect() and useEffectLayout():
   The first effect will only render once, to initalize the chart and add the event lisener.
@@ -108,7 +120,7 @@ function VegaChart(
       vegaEmbed(vegaDOMInstance.current, themedSpec, {
         renderer: 'svg',
         // Override the DEFAULT_OPTIONS https://github.com/vega/vega-tooltip/blob/master/src/defaults.ts
-        tooltip: tooltipOptions,
+        tooltip: tooltipHandler.call,
         /* Determines if action links
       ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor") are included with the embedded view.
       If the value is true, all action links will be shown and none if the value is false. */
@@ -122,6 +134,7 @@ function VegaChart(
           if (ref) {
             ref.current = view;
           }
+
           if (SyncedCursorChartsContext && view) {
             view.addEventListener('mouseover', function (event, item) {
               const currentTime =
@@ -153,6 +166,13 @@ function VegaChart(
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vegaDOMInstance]);
+
+  useLayoutEffect(() => {
+    if (vegaInstance.current) {
+      const view = vegaInstance.current.view;
+      view.tooltip(tooltipHandler.call);
+    }
+  }, [tooltipHandler, vegaInstance]);
 
   useLayoutEffect(() => {
     if (vegaInstance.current) {
