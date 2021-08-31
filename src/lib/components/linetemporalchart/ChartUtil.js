@@ -1,10 +1,10 @@
 //@flow
 import { type Series } from './LineTemporalChart.component.js';
-
+import { NAN_STRING } from '../constants.js';
 export type VegaData = {
   timestamp: number,
   label: string, // same as the tooltip label
-  value: number | null, // the value can be null, in order to not display the line during the downtime of the platform
+  value: number | 'NAN', // the "NAN" is used by the tooltip to display a dash for the data which are not exist.
   isNegativeValue: boolean, // if the metricPrefix is read and out, we need to convert the value to negative before assigning it to the vega-lite spec
 }[];
 
@@ -17,7 +17,8 @@ export function convert2VegaData(
       const obj = {
         timestamp: datum[0] * 1000, // convert to million second
         label: line.getTooltipLabel(line.metricPrefix, line.resource),
-        value: datum[1] ? Number(datum[1]) : null,
+        value:
+          datum[1] && datum[1] !== NAN_STRING ? Number(datum[1]) : NAN_STRING,
         isNegativeValue:
           line.metricPrefix === 'read' || line.metricPrefix === 'out',
       };
@@ -32,7 +33,7 @@ export function convertDataBaseValue(data: VegaData, base: number): VegaData {
   return data.map((datum) => {
     return {
       ...datum,
-      value: datum.value ? datum.value / base : null,
+      value: typeof datum.value === 'number' ? datum.value / base : NAN_STRING,
     };
   });
 }
@@ -91,7 +92,6 @@ export function addMissingDataPoint(
 ): [number, string | null][] {
   if (
     !orginalValues ||
-    orginalValues.length === 0 ||
     startingTimeStamp === undefined ||
     !sampleDuration ||
     !sampleFrequency ||
@@ -108,7 +108,7 @@ export function addMissingDataPoint(
 
   // initialize the array with all `null` value
   for (let i = 0; i < numberOfDataPoints; i++) {
-    newValues.push([samplingPointTime, null]);
+    newValues.push([samplingPointTime, NAN_STRING]);
     samplingPointTime += sampleFrequency;
   }
 
@@ -120,7 +120,6 @@ export function addMissingDataPoint(
       orginalValues[nextIndex] &&
       newValues[i][0] === orginalValues[nextIndex][0]
     ) {
-      // $FlowFixMe get flow error because assign a value to null
       newValues[i][1] = orginalValues[nextIndex][1];
       nextIndex++;
     }

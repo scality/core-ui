@@ -183,6 +183,18 @@ function VegaChart(
         .insert(themedSpec.data.values); //only the data.values changes trigger the graph's repaint
       // For some reason source_0 is the default dataset name
       view.change('source_0', changeset).run();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    // eslint-disable-next-line
+    JSON.stringify(themedSpec.data.values),
+    vegaInstance,
+  ]);
+
+  useLayoutEffect(() => {
+    if (vegaInstance.current) {
+      const view = vegaInstance.current.view;
+
       // when the mouse go out, we trigger the event to set cursorX to null
       if (
         !themedSpec.params.find((param) => param.name === 'cursorX').value ||
@@ -214,8 +226,6 @@ function VegaChart(
   }, [
     // eslint-disable-next-line
     JSON.stringify(themedSpec),
-    // eslint-disable-next-line
-    JSON.stringify(tooltipOptions),
     vegaInstance,
   ]);
   return (

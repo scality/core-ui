@@ -193,9 +193,9 @@ function LineTemporalChart({
       vegaData.map(function (datum: {
         timestamp: number,
         label: string,
-        value: number | null,
+        value: number | 'NAN',
       }): number {
-        if (datum.value) {
+        if (datum.value && typeof datum.value === 'number') {
           return datum.value;
         }
         return 0;
@@ -217,10 +217,14 @@ function LineTemporalChart({
     (data: {
       timestamp: number,
       label: string, // same as the tooltip label
-      value: number | null, // the value can be null, in order to not display the line during the downtime of the platform
+      value: number | 'NAN', // manually set it to a string. It's for the tooltip to display a hyphen for the data that don't exist
       isNegativeValue: boolean,
     }) => {
-      if (data.isNegativeValue && data.value) {
+      if (
+        data.isNegativeValue &&
+        data.value &&
+        typeof data.value === 'number'
+      ) {
         return { ...data, value: 0 - data.value };
       } else return { ...data };
     },

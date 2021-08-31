@@ -66,3 +66,5 @@ export const queryTimeSpansCodes = [
     frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   },
 ];
+
+export const NAN_STRING = 'NAN';
