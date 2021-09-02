@@ -53,8 +53,11 @@ const Legends = styled.div`
 
 const LegendStroke = styled.span`
   margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
-  height:${spacing.sp2};
-  background: ${(props) => props.isLineDashed ? `repeating-linear-gradient(to right,${props.lineColor} 0,${props.lineColor} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})` : props.lineColor};
+  height: ${spacing.sp2};
+  background: ${(props) =>
+    props.isLineDashed
+      ? `repeating-linear-gradient(to right,${props.lineColor} 0,${props.lineColor} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
+      : props.lineColor};
   width: ${spacing.sp8};
 `;
 
@@ -609,7 +612,14 @@ function LineTemporalChart({
           {legendLabels.map((legend, index) => {
             return (
               <>
-                <LegendStroke lineColor={colorRange[index]} isLineDashed={series[index].isLineDashed}></LegendStroke>
+                <LegendStroke
+                  lineColor={
+                    customizedColorRange.length
+                      ? customizedColorRange[index]
+                      : colorRange[index]
+                  }
+                  isLineDashed={series[index].isLineDashed}
+                ></LegendStroke>
                 <SmallerText>{legend}</SmallerText>
               </>
             );
