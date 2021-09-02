@@ -6,6 +6,7 @@ export type VegaData = {
   label: string, // same as the tooltip label
   value: number | 'NAN', // the "NAN" is used by the tooltip to display a dash for the data which are not exist.
   isNegativeValue: boolean, // if the metricPrefix is read and out, we need to convert the value to negative before assigning it to the vega-lite spec
+  isDashed: boolean,
 }[];
 
 export function convert2VegaData(
@@ -21,6 +22,7 @@ export function convert2VegaData(
           datum[1] && datum[1] !== NAN_STRING ? Number(datum[1]) : NAN_STRING,
         isNegativeValue:
           line.metricPrefix === 'read' || line.metricPrefix === 'out',
+        isDashed: line.isLineDashed || false,
       };
       flatArr.push(obj);
     });

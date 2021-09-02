@@ -77,6 +77,7 @@ export type Series = {
   getLegendLabel?: (metricPrefix?: string, resource?: string) => string, // get the legend label for each of the series
   color?: string, // optional color field to specify the color of the line
   metricPrefix?: string, // the name of the metric prefix with read, write, in, out
+  isLineDashed?: boolean, // to specify if the line is dash
 }[];
 
 export type LineChartProps = {
@@ -495,6 +496,7 @@ function LineTemporalChart({
         encoding: {
           x: xAxis,
           y: yAxis,
+          strokeDash: { field: 'isDashed', type: 'nominal', legend: null },
           color: yAxisType === 'symmetrical' ? colorDouble : color,
         },
         layer: [
