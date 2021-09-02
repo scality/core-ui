@@ -52,10 +52,10 @@ const Legends = styled.div`
 `;
 
 const LegendStroke = styled.span`
-  width: ${spacing.sp8}; //8px
-  height: ${spacing.sp4}; //4px
-  background-color: ${(props) => props.lineColor};
   margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
+  border: ${spacing.sp1} ${(props) => props.isLineDashed ? 'dashed' : 'solid'} ${(props) => props.lineColor};
+  width: ${spacing.sp8};
+  height:0;
 `;
 
 const ChartHeader = styled.div`
@@ -609,7 +609,7 @@ function LineTemporalChart({
           {legendLabels.map((legend, index) => {
             return (
               <>
-                <LegendStroke lineColor={colorRange[index]}></LegendStroke>
+                <LegendStroke lineColor={colorRange[index]} isLineDashed={series[index].isLineDashed}></LegendStroke>
                 <SmallerText>{legend}</SmallerText>
               </>
             );

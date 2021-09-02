@@ -1,6 +1,7 @@
 //@flow
 import { stringify } from 'vega-lite';
 import { isArray, isObject, isString } from 'vega-util';
+import { spacing } from '../../../style/theme';
 import type { Series } from '../LineTemporalChart.component';
 
 /**
@@ -53,7 +54,7 @@ export function formatValue(
             val = stringify(val, maxDepth);
           }
 
-          const colorIndex = series.findIndex(
+          const serieIndex = series.findIndex(
             (serie) =>
               serie.getTooltipLabel(serie.metricPrefix, serie.resource) === key,
           );
@@ -61,8 +62,8 @@ export function formatValue(
           content += `<tr>
             <td class="key">
                 ${
-                  colorIndex !== -1
-                    ? `<span style='background-color: ${colorRange[colorIndex]};width: 0.7rem;height: 0.14rem;display: inline-block;vertical-align: middle;'></span>`
+                  serieIndex !== -1
+                    ? `<span style='border: ${spacing.sp1} ${series[serieIndex].isLineDashed ? 'dashed' : 'solid'} ${colorRange[serieIndex]};width: ${spacing.sp8};height:0;display: inline-block;vertical-align: middle;'></span>`
                     : ''
                 }
                 ${valueToHtml(key)}:
