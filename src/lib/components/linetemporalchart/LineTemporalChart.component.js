@@ -496,8 +496,19 @@ function LineTemporalChart({
         encoding: {
           x: xAxis,
           y: yAxis,
-          strokeDash: { field: 'isDashed', type: 'nominal', legend: null },
+          strokeDash: {
+            field: 'isDashed',
+            type: 'nominal',
+            legend: null,
+          },
           color: yAxisType === 'symmetrical' ? colorDouble : color,
+          opacity: {
+            condition: {
+              test: 'datum.isDashed === true', // for the dashed line, set the opacity to 0.5
+              value: 0.5,
+            },
+            value: 1,
+          },
         },
         layer: [
           { mark: { type: 'line', strokeWidth: 1 } }, // the width of the line should be 1px
