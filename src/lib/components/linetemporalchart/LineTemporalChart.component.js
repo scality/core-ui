@@ -53,9 +53,9 @@ const Legends = styled.div`
 
 const LegendStroke = styled.span`
   margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
-  border: ${spacing.sp1} ${(props) => props.isLineDashed ? 'dashed' : 'solid'} ${(props) => props.lineColor};
+  height:${spacing.sp2};
+  background: ${(props) => props.isLineDashed ? `repeating-linear-gradient(to right,${props.lineColor} 0,${props.lineColor} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})` : props.lineColor};
   width: ${spacing.sp8};
-  height:0;
 `;
 
 const ChartHeader = styled.div`

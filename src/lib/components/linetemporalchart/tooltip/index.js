@@ -63,7 +63,13 @@ export function formatValue(
             <td class="key">
                 ${
                   serieIndex !== -1
-                    ? `<span style='border: ${spacing.sp1} ${series[serieIndex].isLineDashed ? 'dashed' : 'solid'} ${colorRange[serieIndex]};width: ${spacing.sp8};height:0;display: inline-block;vertical-align: middle;'></span>`
+                    ? `<span style='background: ${
+                        series[serieIndex].isLineDashed
+                          ? `repeating-linear-gradient(to right,${colorRange[serieIndex]} 0,${colorRange[serieIndex]} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
+                          : colorRange[serieIndex]
+                      };width: ${spacing.sp8};height:${
+                        spacing.sp2
+                      };display: inline-block;vertical-align: middle;'></span>`
                     : ''
                 }
                 ${valueToHtml(key)}:
