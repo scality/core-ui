@@ -503,6 +503,10 @@ function LineTemporalChart({
             field: 'isDashed',
             type: 'nominal',
             legend: null,
+            condition: {
+              test: 'datum.isDashed === true',
+              value: [4, 2], // Change the value here if the dash is not visible. https://vega.github.io/vega-lite/docs/mark.html#stroke
+            },
           },
           color: yAxisType === 'symmetrical' ? colorDouble : color,
           opacity: {
