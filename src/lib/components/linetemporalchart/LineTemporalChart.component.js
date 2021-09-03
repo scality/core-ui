@@ -539,7 +539,7 @@ function LineTemporalChart({
   };
 
   if (yAxisType === 'symmetrical') {
-    spec.layer.push(seperationLine);
+    spec.layer.unshift(seperationLine);
     spec.params.push({
       name: 'yAxisMaxValue',
       value: Math.ceil(maxValue / valueBase),
