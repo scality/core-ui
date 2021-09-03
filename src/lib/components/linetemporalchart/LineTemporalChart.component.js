@@ -267,17 +267,6 @@ function LineTemporalChart({
     return customizedColors;
   }, [series]);
 
-  // for the symmetrical graph, we want to have the same color for the series from the same resource
-  const doubleColorRange = [];
-  if (yAxisType === 'symmetrical') {
-    for (let i = 0; i < colorRange.length; i++) {
-      if (colorRange[i]) {
-        doubleColorRange.push(colorRange[i]);
-        doubleColorRange.push(colorRange[i]);
-      }
-    }
-  }
-
   const syncedVerticalRuler = {
     mark: 'rule',
     encoding: {
@@ -381,17 +370,6 @@ function LineTemporalChart({
       //if there is no customized color range, we will use the default the line colors
       range: customizedColorRange.length ? customizedColorRange : colorRange,
     },
-    legend: null,
-  };
-
-  const colorDouble = {
-    field: 'label',
-    type: 'nominal',
-    scale: {
-      range: doubleColorRange,
-    },
-    // handle the legends by our own, because of the limitation of vega-lite
-    // for the read/write, in/out graph, we only want to display the instance name in the legend. so the legends is not one-to-one mapping with lines
     legend: null,
   };
 
@@ -508,7 +486,7 @@ function LineTemporalChart({
               value: [4, 2], // Change the value here if the dash is not visible. https://vega.github.io/vega-lite/docs/mark.html#stroke
             },
           },
-          color: yAxisType === 'symmetrical' ? colorDouble : color,
+          color: color,
           opacity: {
             condition: {
               test: 'datum.isDashed === true', // for the dashed line, set the opacity to 0.5
