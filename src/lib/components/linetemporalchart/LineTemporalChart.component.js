@@ -593,7 +593,7 @@ function LineTemporalChart({
         <Legends>
           {legendLabels.map((legend, index) => {
             return (
-              <>
+              <div key={index}>
                 <LegendStroke
                   lineColor={
                     customizedColorRange.length
@@ -603,7 +603,7 @@ function LineTemporalChart({
                   isLineDashed={series[index].isLineDashed}
                 ></LegendStroke>
                 <SmallerText>{legend}</SmallerText>
-              </>
+              </div>
             );
           })}
         </Legends>
