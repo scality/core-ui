@@ -1,5 +1,5 @@
 //@flow
-import React, { useEffect, useContext, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useContext, useRef, useLayoutEffect, useMemo } from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
@@ -107,7 +107,7 @@ function VegaChart(
     };
   }
 
-  const tooltipHandler = new Handler(tooltipOptions);
+  const tooltipHandler = useMemo(() =>new Handler(tooltipOptions), [theme, formatTooltip]);
   /* 
   useEffect() and useEffectLayout():
   The first effect will only render once, to initalize the chart and add the event lisener.
