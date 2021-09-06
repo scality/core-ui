@@ -351,6 +351,7 @@ function LineTemporalChart({
         orient: 'right',
         translate: -5, // translate both the x and y coordinates by 5 pixel
         tickOffset: 5, // shift back the y translate to make sure the tick align with the 0 seperation line
+        labelBaseline: "middle",
         labelPadding: 6,
         labelFlush: true,
       },
