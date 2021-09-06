@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useRef, useLayoutEffect } from 'react';
+import React, { useMemo, useRef, useLayoutEffect, Fragment } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { lighten, darken } from 'polished';
 import { expressionFunction } from 'vega';
@@ -51,7 +51,7 @@ const Legends = styled.div`
   align-items: center;
 `;
 
-const LegendStroke = styled.span`
+const LegendStroke = styled.div`
   margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
   height: ${spacing.sp2};
   background: ${(props) =>
@@ -238,11 +238,11 @@ function LineTemporalChart({
   //for the usecase of read/write graph, we use the same legend for the same resource
   const legendLabels = useMemo(() => {
     const uniqueLabel = [];
-    series.map((line) => {
-      if (line.getLegendLabel) {
-        const legend = line.getLegendLabel(line.metricPrefix, line.resource);
+    series.map((serie, serieIndex) => {
+      if (serie.getLegendLabel) {
+        const legend = serie.getLegendLabel(serie.metricPrefix, serie.resource);
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
-          uniqueLabel.push(legend);
+          uniqueLabel.push({legend, serie, serieIndex});
         }
       }
     });
@@ -592,19 +592,19 @@ function LineTemporalChart({
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
       {!isLegendHided && (
         <Legends>
-          {legendLabels.map((legend, index) => {
+          {legendLabels.map(({legend,serie,serieIndex}, index) => {
             return (
-              <div key={index}>
+              <Fragment key={`${title}-${legend}-${index}`}>
                 <LegendStroke
                   lineColor={
                     customizedColorRange.length
-                      ? customizedColorRange[index]
-                      : colorRange[index]
+                      ? customizedColorRange[serieIndex]
+                      : colorRange[serieIndex]
                   }
-                  isLineDashed={series[index].isLineDashed}
+                  isLineDashed={serie.isLineDashed}
                 ></LegendStroke>
                 <SmallerText>{legend}</SmallerText>
-              </div>
+              </Fragment>
             );
           })}
         </Legends>
