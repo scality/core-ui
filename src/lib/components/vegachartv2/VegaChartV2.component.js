@@ -38,9 +38,12 @@ const VegaTooltipTheme = createGlobalStyle`
     border: 1px solid ${getThemePropSelector('border')};
     // customize the title
     h2 {
-      color: ${getThemePropSelector('textSecondary')};
+      color: ${getThemePropSelector('textPrimary')};
       margin-bottom: 10px;
       font-size: 12px;
+    }
+    table tr td.key {
+      color: ${getThemePropSelector('textSecondary')};
     }
   }
 `;

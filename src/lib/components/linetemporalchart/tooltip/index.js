@@ -60,21 +60,23 @@ export function formatValue(
           );
 
           content += `<tr>
-            <td class="key">
-                ${
-                  serieIndex !== -1
-                    ? `<span style='background: ${
-                        series[serieIndex].isLineDashed
-                          ? `repeating-linear-gradient(to right,${colorRange[serieIndex]} 0,${colorRange[serieIndex]} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
-                          : colorRange[serieIndex]
-                      };width: ${spacing.sp8};height:${
-                        spacing.sp2
-                      };display: inline-block;vertical-align: middle;'></span>`
-                    : ''
-                }
+            <td class="color">
+            ${
+              serieIndex !== -1
+                ? `<span style='background: ${
+                    series[serieIndex].isLineDashed
+                      ? `repeating-linear-gradient(to right,${colorRange[serieIndex]} 0,${colorRange[serieIndex]} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
+                      : colorRange[serieIndex]
+                  };width: ${spacing.sp8};height:${
+                    spacing.sp2
+                  };display: inline-block;vertical-align: middle;'></span>`
+                : ''
+            }
+            </td>
+            <td class="key" style="text-align: left;">
                 ${valueToHtml(key)}:
             </td>
-            <td class="value">
+            <td class="value" style="text-align: right;">
                 ${
                   val !== 'NaN'
                     ? `${valueToHtml(val)} ${unitLabel ? unitLabel : ''}`
