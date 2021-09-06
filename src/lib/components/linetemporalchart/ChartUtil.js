@@ -35,7 +35,10 @@ export function convertDataBaseValue(data: VegaData, base: number): VegaData {
   return data.map((datum) => {
     return {
       ...datum,
-      value: typeof datum.value === 'number' ? datum.value / base : NAN_STRING,
+      value:
+        typeof datum.value === 'number'
+          ? getRelativeValue(datum.value, base)
+          : NAN_STRING,
     };
   });
 }
@@ -128,3 +131,9 @@ export function addMissingDataPoint(
   }
   return newValues;
 }
+
+// get the value for the based value
+// TODO: We need to handle the negative value in the future
+export const getRelativeValue = (value: number, base: number) => {
+  return value / (base || 1);
+};

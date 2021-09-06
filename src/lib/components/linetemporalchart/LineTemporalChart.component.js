@@ -21,6 +21,7 @@ import {
   getUnitLabel,
   convertDataBaseValue,
   addMissingDataPoint,
+  getRelativeValue,
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
@@ -450,7 +451,10 @@ function LineTemporalChart({
   useLayoutEffect(() => {
     if (vegaViewRef.current && yAxisType === 'symmetrical') {
       vegaViewRef.current
-        .signal('yAxisMaxValue', Math.ceil(maxValue / valueBase))
+        .signal(
+          'yAxisMaxValue',
+          Math.ceil(getRelativeValue(maxValue, valueBase)),
+        )
         .run();
     }
   }, [maxValue, valueBase, vegaViewRef, yAxisType]);
@@ -548,7 +552,7 @@ function LineTemporalChart({
     spec.layer.unshift(seperationLine);
     spec.params.push({
       name: 'yAxisMaxValue',
-      value: Math.ceil(maxValue / valueBase),
+      value: Math.ceil(getRelativeValue(maxValue, valueBase)),
     });
   }
 
