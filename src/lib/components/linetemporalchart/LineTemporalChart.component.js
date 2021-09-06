@@ -499,8 +499,13 @@ function LineTemporalChart({
         layer: [
           { mark: { type: 'line', strokeWidth: 1 } }, // the width of the line should be 1px
           {
-            transform: [{ filter: { param: 'hover', empty: false } }],
             mark: 'point',
+            encoding: {
+              size: {
+                value: 0,
+                condition: { selection: 'hover', value: 10 },
+              },
+            }
           },
           yAxisType === 'percentage'
             ? {
