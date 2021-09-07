@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Text Basic Text 1`] = `
+<span
+  className="sc-DJfgX czDThd"
+>
+  basic text
+</span>
+`;
+
+exports[`Storyshots Components/Text Emphase Text 1`] = `
+<span
+  className="sc-DJfgX sc-hJxCPi czDThd gbusDs"
+>
+  emphase text
+</span>
+`;
+
+exports[`Storyshots Components/Text Larger Text 1`] = `
+<span
+  className="sc-DJfgX sc-gUUzQN czDThd brRkQr"
+>
+  larger text
+</span>
+`;
+
+exports[`Storyshots Components/Text Secondary Text 1`] = `
+<span
+  className="sc-DJfgX sc-dwqbIM czDThd jfMWBv"
+>
+  secondary text
+</span>
+`;
+
+exports[`Storyshots Components/Text Smaller Text 1`] = `
+<div
+  style={
+    Object {
+      "width": "100px",
+    }
+  }
+>
+  <span
+    className="sc-DJfgX sc-fTABeZ czDThd iqZxcj"
+  >
+    smaller text
+  </span>
+</div>
+`;
+
+exports[`Storyshots Components/Text Status Text 1`] = `
+Array [
+  <div>
+    <span
+      className="sc-DJfgX sc-licaXj czDThd hBedUS"
+    >
+      healthy status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-DJfgX sc-licaXj czDThd FbtEe"
+    >
+      warning status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-DJfgX sc-licaXj czDThd jgDUMU"
+    >
+      critical status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-DJfgX sc-licaXj czDThd qESPS"
+    >
+      unknown status text
+    </span>
+  </div>,
+]
+`;

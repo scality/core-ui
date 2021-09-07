@@ -7,6 +7,7 @@ import {
   EmphaseText,
   StatusText,
   SmallerText,
+  ChartTitleText,
 } from '../src/lib/components/text/Text.component';
 
 export default {
@@ -52,6 +53,14 @@ export const smallerText = () => {
   return (
     <div style={{ width: '100px' }}>
       <SmallerText>smaller text</SmallerText>
+    </div>
+  );
+};
+
+export const chartTitleText = () => {
+  return (
+    <div>
+      <ChartTitleText>chart title text</ChartTitleText>
     </div>
   );
 };

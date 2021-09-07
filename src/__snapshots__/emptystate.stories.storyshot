@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/EmptyState With Link 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-hTZhsR bSpaUN sc-emptystate"
+  >
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <div
+        className="sc-iNqMTl erHjGh"
+      >
+        <i
+          className="fas fa-server"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <h3
+        className="sc-jgHCyG jjfTdW"
+      >
+        A list of 
+        nodes
+         will appear here
+      </h3>
+    </div>
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <h3
+        className="sc-jgHCyG jjfTdW"
+      >
+        There are no 
+        nodes
+         created yet, let's create your first
+         
+        node
+        .
+      </h3>
+    </div>
+    <div
+      className="sc-laRPJI bxPScn"
+    >
+      <button
+        className="sc-dQppl ZagCn sc-button"
+        disabled={false}
+        onClick={[Function]}
+        size="large"
+        title=""
+        type="button"
+      >
+        <span
+          className="sc-hBEYos hgFzca"
+        >
+          <span
+            className="sc-button-text"
+          >
+            <span
+              className="sc-bqyKva klTaQG"
+              size="large"
+            >
+              <i
+                className="fas fa-plus"
+              />
+            </span>
+            <span
+              className="sc-kstrdz ZegCk"
+            >
+              Create node
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/EmptyState Without Link 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-hTZhsR bSpaUN sc-emptystate"
+  >
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <div
+        className="sc-iNqMTl erHjGh"
+      >
+        <i
+          className="fas fa-server"
+        />
+      </div>
+    </div>
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <h3
+        className="sc-jgHCyG jjfTdW"
+      >
+        A list of 
+        nodes
+         will appear here
+      </h3>
+    </div>
+    <div
+      className="sc-gTgzIj kYlAvk"
+    >
+      <h3
+        className="sc-jgHCyG jjfTdW"
+      >
+        There are no 
+        nodes
+         created yet, let's create your first
+         
+        node
+        .
+      </h3>
+    </div>
+  </div>
+</div>
+`;

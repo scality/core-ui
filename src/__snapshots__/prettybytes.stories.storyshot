@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/PrettyBytes Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Pretty Bytes
+  </h3>
+  <div
+    className="sc-aKZfe Sdzha"
+  >
+    <div>
+      <div>
+        1024
+        <br />
+        ---
+      </div>
+      <div>
+        1 KiB
+      </div>
+      <div>
+        1 MiB
+      </div>
+      <div>
+        1 GiB
+      </div>
+      <div>
+        1 TiB
+      </div>
+      <div>
+        1 PiB
+      </div>
+      <div>
+        1 EiB
+      </div>
+      <div>
+        1 ZiB
+      </div>
+      <div>
+        1 YiB
+      </div>
+      <div>
+        1 024 YiB
+      </div>
+    </div>
+    <div>
+      <div>
+        12783
+        <br />
+        ---
+      </div>
+      <div>
+        12 KiB
+      </div>
+      <div>
+        156 MiB
+      </div>
+      <div>
+        2 TiB
+      </div>
+      <div>
+        24 PiB
+      </div>
+      <div>
+        296 EiB
+      </div>
+      <div>
+        4 YiB
+      </div>
+      <div>
+        46 135 YiB
+      </div>
+      <div>
+        589 742 815 YiB
+      </div>
+      <div>
+        7 538 682 400 369 YiB
+      </div>
+    </div>
+    <div>
+      <div>
+        99
+        <br />
+        ---
+      </div>
+      <div>
+        99 B
+      </div>
+      <div>
+        10 KiB
+      </div>
+      <div>
+        948 KiB
+      </div>
+      <div>
+        92 MiB
+      </div>
+      <div>
+        9 GiB
+      </div>
+      <div>
+        877 GiB
+      </div>
+      <div>
+        85 TiB
+      </div>
+      <div>
+        8 PiB
+      </div>
+      <div>
+        811 PiB
+      </div>
+    </div>
+    <div>
+      <div>
+        1000
+        <br />
+        ---
+      </div>
+      <div>
+        1 000 B
+      </div>
+      <div>
+        977 KiB
+      </div>
+      <div>
+        954 MiB
+      </div>
+      <div>
+        931 GiB
+      </div>
+      <div>
+        909 TiB
+      </div>
+      <div>
+        888 PiB
+      </div>
+      <div>
+        867 EiB
+      </div>
+      <div>
+        847 ZiB
+      </div>
+      <div>
+        827 YiB
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Pretty Bytes with decimals
+  </h3>
+  <div
+    className="sc-aKZfe Sdzha"
+  >
+    <div>
+      <div>
+        1024
+        <br />
+        ---
+      </div>
+      <div>
+        1.00 KiB
+      </div>
+      <div>
+        1.00 MiB
+      </div>
+      <div>
+        1.00 GiB
+      </div>
+      <div>
+        1.00 TiB
+      </div>
+      <div>
+        1.00 PiB
+      </div>
+      <div>
+        1.00 EiB
+      </div>
+      <div>
+        1.00 ZiB
+      </div>
+      <div>
+        1.00 YiB
+      </div>
+      <div>
+        1 024.00 YiB
+      </div>
+    </div>
+    <div>
+      <div>
+        12783
+        <br />
+        ---
+      </div>
+      <div>
+        12.48 KiB
+      </div>
+      <div>
+        155.84 MiB
+      </div>
+      <div>
+        1.90 TiB
+      </div>
+      <div>
+        23.72 PiB
+      </div>
+      <div>
+        296.05 EiB
+      </div>
+      <div>
+        3.61 YiB
+      </div>
+      <div>
+        46 134.93 YiB
+      </div>
+      <div>
+        589 742 814.70 YiB
+      </div>
+      <div>
+        7 538 682 400 369.25 YiB
+      </div>
+    </div>
+    <div>
+      <div>
+        99
+        <br />
+        ---
+      </div>
+      <div>
+        99.00 B
+      </div>
+      <div>
+        9.57 KiB
+      </div>
+      <div>
+        947.56 KiB
+      </div>
+      <div>
+        91.61 MiB
+      </div>
+      <div>
+        8.86 GiB
+      </div>
+      <div>
+        876.82 GiB
+      </div>
+      <div>
+        84.77 TiB
+      </div>
+      <div>
+        8.20 PiB
+      </div>
+      <div>
+        811.37 PiB
+      </div>
+    </div>
+    <div>
+      <div>
+        1000
+        <br />
+        ---
+      </div>
+      <div>
+        1 000.00 B
+      </div>
+      <div>
+        976.56 KiB
+      </div>
+      <div>
+        953.67 MiB
+      </div>
+      <div>
+        931.32 GiB
+      </div>
+      <div>
+        909.49 TiB
+      </div>
+      <div>
+        888.18 PiB
+      </div>
+      <div>
+        867.36 EiB
+      </div>
+      <div>
+        847.03 ZiB
+      </div>
+      <div>
+        827.18 YiB
+      </div>
+    </div>
+  </div>
+</div>
+`;

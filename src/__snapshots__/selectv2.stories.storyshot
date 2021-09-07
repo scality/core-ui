@@ -1,0 +1,1283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/v2/Select Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV storybook-select"
+>
+  <div
+    className="sc-hRxedE eGqhxP"
+  >
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Default Select
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ iwIoBr sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container sc-select__value-container--has-value css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__single-value css-1uccc91-singleValue"
+              >
+                Item 1
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-11-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-chevron-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value="1"
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Disabled Select
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ iwIoBr sc-select sc-select--is-disabled css-14jk2my-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control sc-select__control--is-disabled css-1fhf3k1-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container sc-select__value-container--has-value css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__single-value sc-select__single-value--is-disabled css-107lb6w-singleValue"
+              >
+                Item 1
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={true}
+                id="react-select-12-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-ban"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Without options
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ iwIoBr sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-13-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-chevron-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      With scrollbar (more than 4 items)
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ iwIoBr sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-14-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-chevron-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      1000 items
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ eKyIRc sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <div
+                className="css-b8ldur-Input"
+              >
+                <div
+                  className="sc-select__input"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-expanded={false}
+                    aria-label="select"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    disabled={false}
+                    id="react-select-15-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    role="combobox"
+                    spellCheck="false"
+                    style={
+                      Object {
+                        "background": 0,
+                        "border": 0,
+                        "boxSizing": "content-box",
+                        "color": "inherit",
+                        "fontSize": "inherit",
+                        "label": "input",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "1px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style={
+                      Object {
+                        "height": 0,
+                        "left": 0,
+                        "overflow": "scroll",
+                        "position": "absolute",
+                        "top": 0,
+                        "visibility": "hidden",
+                        "whiteSpace": "pre",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-chevron-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      With scroll/search (more than 8 items)
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ eKyIRc sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container sc-select__value-container--has-value css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__single-value css-1uccc91-singleValue"
+              >
+                Item 1
+              </div>
+              <div
+                className="css-b8ldur-Input"
+              >
+                <div
+                  className="sc-select__input"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-expanded={false}
+                    aria-label="select"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    disabled={false}
+                    id="react-select-16-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    role="combobox"
+                    spellCheck="false"
+                    style={
+                      Object {
+                        "background": 0,
+                        "border": 0,
+                        "boxSizing": "content-box",
+                        "color": "inherit",
+                        "fontSize": "inherit",
+                        "label": "input",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "1px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style={
+                      Object {
+                        "height": 0,
+                        "left": 0,
+                        "overflow": "scroll",
+                        "position": "absolute",
+                        "top": 0,
+                        "visibility": "hidden",
+                        "whiteSpace": "pre",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-chevron-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value="1"
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flex": "1",
+          "flexDirection": "column",
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <h3
+        className="sc-gsTCUz jXevwc"
+      >
+        Not enough space at the bottom
+      </h3>
+      <div
+        className="sc-dRPiIx jkOZDO sc-scrollbar"
+      >
+        <div
+          className="sc-bTRMAZ eKyIRc sc-select css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            className="css-1f43avz-a11yText-A11yText"
+          />
+          <div
+            className="sc-select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="sc-select__value-container css-g1d714-ValueContainer"
+            >
+              <div>
+                <div
+                  className="sc-select__placeholder css-1wa3eu0-placeholder"
+                >
+                  Select...
+                </div>
+                <div
+                  className="css-b8ldur-Input"
+                >
+                  <div
+                    className="sc-select__input"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                      }
+                    }
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-expanded={false}
+                      aria-label="select"
+                      autoCapitalize="none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      disabled={false}
+                      id="react-select-17-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      role="combobox"
+                      spellCheck="false"
+                      style={
+                        Object {
+                          "background": 0,
+                          "border": 0,
+                          "boxSizing": "content-box",
+                          "color": "inherit",
+                          "fontSize": "inherit",
+                          "label": "input",
+                          "opacity": 1,
+                          "outline": 0,
+                          "padding": 0,
+                          "width": "1px",
+                        }
+                      }
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style={
+                        Object {
+                          "height": 0,
+                          "left": 0,
+                          "overflow": "scroll",
+                          "position": "absolute",
+                          "top": 0,
+                          "visibility": "hidden",
+                          "whiteSpace": "pre",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+            >
+              <div
+                aria-hidden="true"
+                className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <i
+                  className="fas fa-chevron-down"
+                />
+              </div>
+            </div>
+          </div>
+          <input
+            name="sc-select"
+            type="hidden"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/v2/Select Rounded 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-hRxedE eGqhxP"
+  >
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Default Select
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ jxIFpC sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container sc-select__value-container--has-value css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__single-value css-1uccc91-singleValue"
+              >
+                Item 1
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-18-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-caret-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value="1"
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Disabled Select
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ jxIFpC sc-select sc-select--is-disabled css-14jk2my-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control sc-select__control--is-disabled css-1fhf3k1-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container sc-select__value-container--has-value css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__single-value sc-select__single-value--is-disabled css-107lb6w-singleValue"
+              >
+                Item 1
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={true}
+                id="react-select-19-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-ban"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      Without options
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ eWYEvB sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-20-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-caret-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      With scrollbar (more than 4 items)
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ jxIFpC sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <input
+                aria-autocomplete="list"
+                aria-label="select"
+                className="css-wmatm6-dummyInput-DummyInput"
+                disabled={false}
+                id="react-select-21-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-caret-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      1000 items
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ hhKNAZ sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <div
+                className="css-b8ldur-Input"
+              >
+                <div
+                  className="sc-select__input"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-expanded={false}
+                    aria-label="select"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    disabled={false}
+                    id="react-select-22-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    role="combobox"
+                    spellCheck="false"
+                    style={
+                      Object {
+                        "background": 0,
+                        "border": 0,
+                        "boxSizing": "content-box",
+                        "color": "inherit",
+                        "fontSize": "inherit",
+                        "label": "input",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "1px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style={
+                      Object {
+                        "height": 0,
+                        "left": 0,
+                        "overflow": "scroll",
+                        "position": "absolute",
+                        "top": 0,
+                        "visibility": "hidden",
+                        "whiteSpace": "pre",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-caret-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <h3
+      className="sc-gsTCUz jXevwc"
+    >
+      With scroll/search (more than 8 items)
+    </h3>
+    <div
+      className="sc-dRPiIx jkOZDO sc-scrollbar"
+    >
+      <div
+        className="sc-bTRMAZ hhKNAZ sc-select css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="sc-select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="sc-select__value-container css-g1d714-ValueContainer"
+          >
+            <div>
+              <div
+                className="sc-select__placeholder css-1wa3eu0-placeholder"
+              >
+                Select...
+              </div>
+              <div
+                className="css-b8ldur-Input"
+              >
+                <div
+                  className="sc-select__input"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-expanded={false}
+                    aria-label="select"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    disabled={false}
+                    id="react-select-23-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    role="combobox"
+                    spellCheck="false"
+                    style={
+                      Object {
+                        "background": 0,
+                        "border": 0,
+                        "boxSizing": "content-box",
+                        "color": "inherit",
+                        "fontSize": "inherit",
+                        "label": "input",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "1px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style={
+                      Object {
+                        "height": 0,
+                        "left": 0,
+                        "overflow": "scroll",
+                        "position": "absolute",
+                        "top": 0,
+                        "visibility": "hidden",
+                        "whiteSpace": "pre",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+          >
+            <div
+              aria-hidden="true"
+              className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <i
+                className="fas fa-caret-down"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="sc-select"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flex": "1",
+          "flexDirection": "column",
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <h3
+        className="sc-gsTCUz jXevwc"
+      >
+        Not enough space at the bottom
+      </h3>
+      <div
+        className="sc-dRPiIx jkOZDO sc-scrollbar"
+      >
+        <div
+          className="sc-bTRMAZ hhKNAZ sc-select css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            className="css-1f43avz-a11yText-A11yText"
+          />
+          <div
+            className="sc-select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="sc-select__value-container css-g1d714-ValueContainer"
+            >
+              <div>
+                <div
+                  className="sc-select__placeholder css-1wa3eu0-placeholder"
+                >
+                  Select...
+                </div>
+                <div
+                  className="css-b8ldur-Input"
+                >
+                  <div
+                    className="sc-select__input"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                      }
+                    }
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-expanded={false}
+                      aria-label="select"
+                      autoCapitalize="none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      disabled={false}
+                      id="react-select-24-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      role="combobox"
+                      spellCheck="false"
+                      style={
+                        Object {
+                          "background": 0,
+                          "border": 0,
+                          "boxSizing": "content-box",
+                          "color": "inherit",
+                          "fontSize": "inherit",
+                          "label": "input",
+                          "opacity": 1,
+                          "outline": 0,
+                          "padding": 0,
+                          "width": "1px",
+                        }
+                      }
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style={
+                        Object {
+                          "height": 0,
+                          "left": 0,
+                          "overflow": "scroll",
+                          "position": "absolute",
+                          "top": 0,
+                          "visibility": "hidden",
+                          "whiteSpace": "pre",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-select__indicators css-1hb7zxy-IndicatorsContainer"
+            >
+              <div
+                aria-hidden="true"
+                className="sc-select__indicator sc-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <i
+                  className="fas fa-caret-down"
+                />
+              </div>
+            </div>
+          </div>
+          <input
+            name="sc-select"
+            type="hidden"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
