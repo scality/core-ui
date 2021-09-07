@@ -495,7 +495,7 @@ function LineTemporalChart({
           opacity: {
             condition: {
               test: 'datum.isDashed === true', // for the dashed line, set the opacity to 0.5
-              value: 0.5,
+              value: 0.6,
             },
             value: 1,
           },
