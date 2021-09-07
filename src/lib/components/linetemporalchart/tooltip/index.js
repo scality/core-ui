@@ -2,7 +2,7 @@
 import { stringify } from 'vega-lite';
 import { isArray, isObject, isString } from 'vega-util';
 import { spacing } from '../../../style/theme';
-import type { Series } from '../LineTemporalChart.component';
+import type { Serie } from '../LineTemporalChart.component';
 
 /**
  * Format the value to be shown in the tooltip.
@@ -11,7 +11,7 @@ import type { Series } from '../LineTemporalChart.component';
  * @param valueToHtml Function to convert a single cell value to an HTML string
  */
 export function formatValue(
-  series: Series,
+  series: Serie[],
   colorRange: string[],
   unitLabel: string | null,
 ) {

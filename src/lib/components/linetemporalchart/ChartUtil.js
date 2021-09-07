@@ -1,5 +1,5 @@
 //@flow
-import { type Series } from './LineTemporalChart.component.js';
+import { type Serie } from './LineTemporalChart.component.js';
 import { NAN_STRING } from '../constants.js';
 export type VegaData = {
   timestamp: number,
@@ -10,7 +10,7 @@ export type VegaData = {
 }[];
 
 export function convert2VegaData(
-  addedMissingDataPointSeries: Series,
+  addedMissingDataPointSeries: Serie[],
 ): VegaData {
   const flatArr = [];
   addedMissingDataPointSeries.forEach((line) => {

@@ -74,7 +74,7 @@ prometheusData => series => addMissingDataPoint(series.data, startTimeStamp, sam
 The data structure of multi-series chart using Vega-lite library
 https://vega.github.io/vega-lite/examples/interactive_multi_line_pivot_tooltip.html
 */
-export type Series = {
+export type Serie = {
   resource: string, // the name of the resource
   data: [number, string | null][], // the original data format from prometheus
   getTooltipLabel: (metricPrefix?: string, resource?: string) => string, // it's mandatory to display tooltip label in the tooltip
@@ -82,10 +82,10 @@ export type Series = {
   color?: string, // optional color field to specify the color of the line
   metricPrefix?: string, // the name of the metric prefix with read, write, in, out
   isLineDashed?: boolean, // to specify if the line is dash
-}[];
+};
 
 export type LineChartProps = {
-  series: Series,
+  series: Serie[],
   title: string,
   height: number,
   startingTimeStamp: number, // pass to addMissingDataPoint()
@@ -162,7 +162,7 @@ function LineTemporalChart({
   }
   const vegaViewRef = useRef();
   const theme = useTheme();
-  const { sampleFrequency, metricsTimeSpan } = useMetricsTimeSpan();
+  const { frequency, duration } = useMetricsTimeSpan();
   //##### Data Transformation Start
 
   /**
@@ -179,12 +179,12 @@ function LineTemporalChart({
         data: addMissingDataPoint(
           line.data,
           startingTimeStamp,
-          metricsTimeSpan,
-          sampleFrequency,
+          duration,
+          frequency,
         ),
       };
     });
-  }, [series, startingTimeStamp, metricsTimeSpan, sampleFrequency]);
+  }, [series, startingTimeStamp, duration, frequency]);
 
   // 2. Change the data structure to a flat array which is required by Vega-lite
   const vegaData = useMemo(() => {
@@ -243,7 +243,7 @@ function LineTemporalChart({
       if (serie.getLegendLabel) {
         const legend = serie.getLegendLabel(serie.metricPrefix, serie.resource);
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
-          uniqueLabel.push({legend, serie, serieIndex});
+          uniqueLabel.push({ legend, serie, serieIndex });
         }
       }
     });
@@ -352,7 +352,7 @@ function LineTemporalChart({
         orient: 'right',
         translate: -5, // translate both the x and y coordinates by 5 pixel
         tickOffset: 5, // shift back the y translate to make sure the tick align with the 0 seperation line
-        labelBaseline: "middle",
+        labelBaseline: 'middle',
         labelPadding: 6,
         labelFlush: true,
       },
@@ -509,7 +509,7 @@ function LineTemporalChart({
                 value: 0,
                 condition: { selection: 'hover', value: 10 },
               },
-            }
+            },
           },
           yAxisType === 'percentage'
             ? {
@@ -601,7 +601,7 @@ function LineTemporalChart({
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
       {!isLegendHided && (
         <Legends>
-          {legendLabels.map(({legend,serie,serieIndex}, index) => {
+          {legendLabels.map(({ legend, serie, serieIndex }, index) => {
             return (
               <Fragment key={`${title}-${legend}-${index}`}>
                 <LegendStroke
