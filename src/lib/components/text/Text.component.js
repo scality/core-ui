@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 import { getTheme } from '../../utils';
+import { spacing } from '../../style/theme.js';
 
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 
@@ -14,7 +15,7 @@ type Props = {
 const BasicTextStyle = styled.span`
   color: ${(props) => getTheme(props).textPrimary};
   font-size: 1rem;
-  line-height: 1.429rem;
+  line-height: ${spacing.sp20};
   font-weight: 400;
 `;
 
@@ -48,9 +49,7 @@ const SmallerTextStyle = styled(BasicTextStyle)`
 
 const ChartTitleTextStyle = styled(BasicTextStyle)`
   font-size: 1rem;
-  line-height: 1.429rem;
-  letter-spacing: 0.143rem;
-  font-weight: 400;
+  letter-spacing: ${spacing.sp2};
 `;
 
 export function BasicText({ children, ...rest }: Props) {
