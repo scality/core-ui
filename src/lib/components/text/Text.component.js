@@ -48,7 +48,6 @@ const SmallerTextStyle = styled(BasicTextStyle)`
 `;
 
 const ChartTitleTextStyle = styled(BasicTextStyle)`
-  font-size: 1rem;
   letter-spacing: ${spacing.sp2};
 `;
 
