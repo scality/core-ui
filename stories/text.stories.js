@@ -7,31 +7,60 @@ import {
   EmphaseText,
   StatusText,
   SmallerText,
+  ChartTitleText,
 } from '../src/lib/components/text/Text.component';
+import { Wrapper } from './common';
+import styled from 'styled-components';
+
+const TextWrapper = styled(Wrapper)`
+  min-height: 0;
+`;
 
 export default {
   title: 'Components/Text',
+  component: StatusText,
 };
 
-export const basicText = () => {
-  return <BasicText>basic text</BasicText>;
-};
-
-export const secondaryText = () => {
-  return <SecondaryText>secondary text</SecondaryText>;
-};
-
-export const largerText = () => {
-  return <LargerText>larger text</LargerText>;
-};
-
-export const emphaseText = () => {
-  return <EmphaseText>emphase text</EmphaseText>;
-};
-
-export const statusText = () => {
+// eslint-disable-next-line
+export const basicText = ({}: any) => {
   return (
-    <>
+    <TextWrapper>
+      <BasicText>basic text</BasicText>
+    </TextWrapper>
+  );
+};
+
+// eslint-disable-next-line
+export const secondaryText = ({}: any) => {
+  return (
+    <TextWrapper>
+      <SecondaryText>secondary text</SecondaryText>
+    </TextWrapper>
+  );
+};
+
+// eslint-disable-next-line
+export const largerText = ({}: any) => {
+  return (
+    <TextWrapper>
+      <LargerText>larger text</LargerText>
+    </TextWrapper>
+  );
+};
+
+// eslint-disable-next-line
+export const emphaseText = ({}: any) => {
+  return (
+    <TextWrapper>
+      <EmphaseText>emphase text</EmphaseText>
+    </TextWrapper>
+  );
+};
+
+// eslint-disable-next-line
+export const statusText = ({}: any) => {
+  return (
+    <TextWrapper>
       <div>
         <StatusText status="healthy">healthy status text</StatusText>
       </div>
@@ -41,17 +70,24 @@ export const statusText = () => {
       <div>
         <StatusText status="critical">critical status text</StatusText>
       </div>
-      <div>
-        <StatusText status="unknown">unknown status text</StatusText>
-      </div>
-    </>
+    </TextWrapper>
   );
 };
 
-export const smallerText = () => {
+// eslint-disable-next-line
+export const smallerText = ({}: any) => {
   return (
-    <div style={{ width: '100px' }}>
+    <TextWrapper>
       <SmallerText>smaller text</SmallerText>
-    </div>
+    </TextWrapper>
+  );
+};
+
+// eslint-disable-next-line
+export const chartTitleText = ({}: any) => {
+  return (
+    <TextWrapper>
+      <ChartTitleText>chart title text</ChartTitleText>
+    </TextWrapper>
   );
 };
