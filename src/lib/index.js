@@ -54,6 +54,7 @@ import {
   StatusText,
   LargeText,
   SmallerText,
+  ChartTitleText,
 } from './components/text/Text.component';
 import Card from './components/card/Card.component';
 import PrettyBytes from './components/prettybytes/PrettyBytes.component';
@@ -111,6 +112,7 @@ export {
   StatusText,
   LargeText,
   SmallerText,
+  ChartTitleText,
   SpacedBox,
   Card,
   PrettyBytes,

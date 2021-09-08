@@ -14,7 +14,7 @@ type Props = {
 const BasicTextStyle = styled.span`
   color: ${(props) => getTheme(props).textPrimary};
   font-size: 1rem;
-  line-height: 1.71rem;
+  line-height: 1.429rem;
   font-weight: 400;
 `;
 
@@ -44,6 +44,13 @@ const SmallerTextStyle = styled(BasicTextStyle)`
   font-size: 0.71rem;
   line-height: 1.4;
   letter-spacing: 2%; // to be defined, percentage value is not valid
+`;
+
+const ChartTitleTextStyle = styled(BasicTextStyle)`
+  font-size: 1rem;
+  line-height: 1.429rem;
+  letter-spacing: 0.143rem;
+  font-weight: 400;
 `;
 
 export function BasicText({ children, ...rest }: Props) {
@@ -90,4 +97,8 @@ export function LargeText({ children, ...rest }: Props) {
 
 export function SmallerText({ children, ...rest }: Props) {
   return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
+}
+
+export function ChartTitleText({ children, ...rest }: Props) {
+  return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
 }
