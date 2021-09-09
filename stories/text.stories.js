@@ -19,6 +19,14 @@ const TextWrapper = styled(Wrapper)`
 export default {
   title: 'Components/Text',
   component: StatusText,
+  argTypes: {
+    status: {
+      control: { disable: true },
+    },
+    children: {
+      control: { disable: true },
+    },
+  },
 };
 
 // eslint-disable-next-line
