@@ -1,5 +1,5 @@
 //@flow
-import { type Series } from './LineTemporalChart.component.js';
+import { type Serie } from './LineTemporalChart.component.js';
 import { NAN_STRING } from '../constants.js';
 export type VegaData = {
   timestamp: number,
@@ -10,7 +10,7 @@ export type VegaData = {
 }[];
 
 export function convert2VegaData(
-  addedMissingDataPointSeries: Series,
+  addedMissingDataPointSeries: Serie[],
 ): VegaData {
   const flatArr = [];
   addedMissingDataPointSeries.forEach((line) => {
@@ -35,7 +35,10 @@ export function convertDataBaseValue(data: VegaData, base: number): VegaData {
   return data.map((datum) => {
     return {
       ...datum,
-      value: typeof datum.value === 'number' ? datum.value / base : NAN_STRING,
+      value:
+        typeof datum.value === 'number'
+          ? getRelativeValue(datum.value, base)
+          : NAN_STRING,
     };
   });
 }
@@ -108,7 +111,7 @@ export function addMissingDataPoint(
   const numberOfDataPoints = sampleDuration / sampleFrequency;
   let samplingPointTime = startingTimeStamp;
 
-  // initialize the array with all `null` value
+  // initialize the array with all "NAN" value, in order for the tooltip to display dash(-)
   for (let i = 0; i < numberOfDataPoints; i++) {
     newValues.push([samplingPointTime, NAN_STRING]);
     samplingPointTime += sampleFrequency;
@@ -128,3 +131,9 @@ export function addMissingDataPoint(
   }
   return newValues;
 }
+
+// get the value for the based value
+// TODO: We need to handle the negative value in the future
+export const getRelativeValue = (value: number, base: number) => {
+  return value / (base || 1);
+};

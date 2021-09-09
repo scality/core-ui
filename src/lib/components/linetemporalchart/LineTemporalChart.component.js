@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useRef, useLayoutEffect } from 'react';
+import React, { useMemo, useRef, useLayoutEffect, Fragment } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { lighten, darken } from 'polished';
 import { expressionFunction } from 'vega';
@@ -21,6 +21,7 @@ import {
   getUnitLabel,
   convertDataBaseValue,
   addMissingDataPoint,
+  getRelativeValue,
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
@@ -51,7 +52,7 @@ const Legends = styled.div`
   align-items: center;
 `;
 
-const LegendStroke = styled.span`
+const LegendStroke = styled.div`
   margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
   height: ${spacing.sp2};
   background: ${(props) =>
@@ -73,7 +74,7 @@ prometheusData => series => addMissingDataPoint(series.data, startTimeStamp, sam
 The data structure of multi-series chart using Vega-lite library
 https://vega.github.io/vega-lite/examples/interactive_multi_line_pivot_tooltip.html
 */
-export type Series = {
+export type Serie = {
   resource: string, // the name of the resource
   data: [number, string | null][], // the original data format from prometheus
   getTooltipLabel: (metricPrefix?: string, resource?: string) => string, // it's mandatory to display tooltip label in the tooltip
@@ -81,10 +82,10 @@ export type Series = {
   color?: string, // optional color field to specify the color of the line
   metricPrefix?: string, // the name of the metric prefix with read, write, in, out
   isLineDashed?: boolean, // to specify if the line is dash
-}[];
+};
 
 export type LineChartProps = {
-  series: Series,
+  series: Serie[],
   title: string,
   height: number,
   startingTimeStamp: number, // pass to addMissingDataPoint()
@@ -161,7 +162,7 @@ function LineTemporalChart({
   }
   const vegaViewRef = useRef();
   const theme = useTheme();
-  const { sampleFrequency, metricsTimeSpan } = useMetricsTimeSpan();
+  const { frequency, duration } = useMetricsTimeSpan();
   //##### Data Transformation Start
 
   /**
@@ -178,12 +179,12 @@ function LineTemporalChart({
         data: addMissingDataPoint(
           line.data,
           startingTimeStamp,
-          metricsTimeSpan,
-          sampleFrequency,
+          duration,
+          frequency,
         ),
       };
     });
-  }, [series, startingTimeStamp, metricsTimeSpan, sampleFrequency]);
+  }, [series, startingTimeStamp, duration, frequency]);
 
   // 2. Change the data structure to a flat array which is required by Vega-lite
   const vegaData = useMemo(() => {
@@ -238,11 +239,11 @@ function LineTemporalChart({
   //for the usecase of read/write graph, we use the same legend for the same resource
   const legendLabels = useMemo(() => {
     const uniqueLabel = [];
-    series.map((line) => {
-      if (line.getLegendLabel) {
-        const legend = line.getLegendLabel(line.metricPrefix, line.resource);
+    series.map((serie, serieIndex) => {
+      if (serie.getLegendLabel) {
+        const legend = serie.getLegendLabel(serie.metricPrefix, serie.resource);
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
-          uniqueLabel.push(legend);
+          uniqueLabel.push({ legend, serie, serieIndex });
         }
       }
     });
@@ -266,17 +267,6 @@ function LineTemporalChart({
     });
     return customizedColors;
   }, [series]);
-
-  // for the symmetrical graph, we want to have the same color for the series from the same resource
-  const doubleColorRange = [];
-  if (yAxisType === 'symmetrical') {
-    for (let i = 0; i < colorRange.length; i++) {
-      if (colorRange[i]) {
-        doubleColorRange.push(colorRange[i]);
-        doubleColorRange.push(colorRange[i]);
-      }
-    }
-  }
 
   const syncedVerticalRuler = {
     mark: 'rule',
@@ -362,6 +352,7 @@ function LineTemporalChart({
         orient: 'right',
         translate: -5, // translate both the x and y coordinates by 5 pixel
         tickOffset: 5, // shift back the y translate to make sure the tick align with the 0 seperation line
+        labelBaseline: 'middle',
         labelPadding: 6,
         labelFlush: true,
       },
@@ -381,17 +372,6 @@ function LineTemporalChart({
       //if there is no customized color range, we will use the default the line colors
       range: customizedColorRange.length ? customizedColorRange : colorRange,
     },
-    legend: null,
-  };
-
-  const colorDouble = {
-    field: 'label',
-    type: 'nominal',
-    scale: {
-      range: doubleColorRange,
-    },
-    // handle the legends by our own, because of the limitation of vega-lite
-    // for the read/write, in/out graph, we only want to display the instance name in the legend. so the legends is not one-to-one mapping with lines
     legend: null,
   };
 
@@ -471,7 +451,10 @@ function LineTemporalChart({
   useLayoutEffect(() => {
     if (vegaViewRef.current && yAxisType === 'symmetrical') {
       vegaViewRef.current
-        .signal('yAxisMaxValue', Math.ceil(maxValue / valueBase))
+        .signal(
+          'yAxisMaxValue',
+          Math.ceil(getRelativeValue(maxValue, valueBase)),
+        )
         .run();
     }
   }, [maxValue, valueBase, vegaViewRef, yAxisType]);
@@ -508,11 +491,11 @@ function LineTemporalChart({
               value: [4, 2], // Change the value here if the dash is not visible. https://vega.github.io/vega-lite/docs/mark.html#stroke
             },
           },
-          color: yAxisType === 'symmetrical' ? colorDouble : color,
+          color: color,
           opacity: {
             condition: {
               test: 'datum.isDashed === true', // for the dashed line, set the opacity to 0.5
-              value: 0.5,
+              value: 0.6,
             },
             value: 1,
           },
@@ -520,8 +503,13 @@ function LineTemporalChart({
         layer: [
           { mark: { type: 'line', strokeWidth: 1 } }, // the width of the line should be 1px
           {
-            transform: [{ filter: { param: 'hover', empty: false } }],
             mark: 'point',
+            encoding: {
+              size: {
+                value: 0,
+                condition: { selection: 'hover', value: 10 },
+              },
+            },
           },
           yAxisType === 'percentage'
             ? {
@@ -561,10 +549,10 @@ function LineTemporalChart({
   };
 
   if (yAxisType === 'symmetrical') {
-    spec.layer.push(seperationLine);
+    spec.layer.unshift(seperationLine);
     spec.params.push({
       name: 'yAxisMaxValue',
-      value: Math.ceil(maxValue / valueBase),
+      value: Math.ceil(getRelativeValue(maxValue, valueBase)),
     });
   }
 
@@ -613,19 +601,19 @@ function LineTemporalChart({
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
       {!isLegendHided && (
         <Legends>
-          {legendLabels.map((legend, index) => {
+          {legendLabels.map(({ legend, serie, serieIndex }, index) => {
             return (
-              <>
+              <Fragment key={`${title}-${legend}-${index}`}>
                 <LegendStroke
                   lineColor={
                     customizedColorRange.length
-                      ? customizedColorRange[index]
-                      : colorRange[index]
+                      ? customizedColorRange[serieIndex]
+                      : colorRange[serieIndex]
                   }
-                  isLineDashed={series[index].isLineDashed}
+                  isLineDashed={serie.isLineDashed}
                 ></LegendStroke>
                 <SmallerText>{legend}</SmallerText>
-              </>
+              </Fragment>
             );
           })}
         </Legends>

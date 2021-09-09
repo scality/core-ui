@@ -27,5 +27,6 @@ stages:
           command: >
             npm ci &&
             npm run flow &&
+            npm run test &&
             npm run lint
           haltOnFailure: false

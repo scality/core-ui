@@ -33,7 +33,7 @@ export type Variant =
 export const QUERY_LAST_SEVEN_DAYS = 'now-7d';
 export const QUERY_LAST_TWENTY_FOUR_HOURS = 'now-24h';
 export const QUERY_LAST_ONE_HOUR = 'now-1h';
-// timespan
+// label in timespan selector
 export const LAST_SEVEN_DAYS = 'Last 7 days';
 export const LAST_TWENTY_FOUR_HOURS = 'Last 24 hours';
 export const LAST_ONE_HOUR = 'Last 1 hour';
@@ -45,23 +45,29 @@ export const SAMPLE_DURATION_LAST_ONE_HOUR = 60 * 60;
 export const SAMPLE_FREQUENCY_LAST_SEVEN_DAYS = 60 * 60;
 export const SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS = 720;
 export const SAMPLE_FREQUENCY_LAST_ONE_HOUR = 30;
+export type QueryTimeSpan = {
+  query: string, // the text in the query parameter
+  label: string, // the label display in the timespan selector
+  duration: number, // time span in second
+  frequency: number,
+};
 
-export const queryTimeSpansCodes = [
+export const queryTimeSpansCodes: QueryTimeSpan[] = [
   {
-    label: QUERY_LAST_SEVEN_DAYS,
-    value: LAST_SEVEN_DAYS,
+    query: QUERY_LAST_SEVEN_DAYS,
+    label: LAST_SEVEN_DAYS,
     duration: SAMPLE_DURATION_LAST_SEVEN_DAYS,
     frequency: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
   },
   {
-    label: QUERY_LAST_TWENTY_FOUR_HOURS,
-    value: LAST_TWENTY_FOUR_HOURS,
+    query: QUERY_LAST_TWENTY_FOUR_HOURS,
+    label: LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
     frequency: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
   },
   {
-    label: QUERY_LAST_ONE_HOUR,
-    value: LAST_ONE_HOUR,
+    query: QUERY_LAST_ONE_HOUR,
+    label: LAST_ONE_HOUR,
     duration: SAMPLE_DURATION_LAST_ONE_HOUR,
     frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   },

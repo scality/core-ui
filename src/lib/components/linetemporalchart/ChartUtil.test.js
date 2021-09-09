@@ -14,6 +14,7 @@ const series = [
     getTooltipLabel: (metricPrefix, resource) => {
       return resource;
     },
+    isLineDashed: false,
   },
   {
     resource: 'node2',
@@ -24,6 +25,7 @@ const series = [
     getTooltipLabel: (metricPrefix, resource) => {
       return resource;
     },
+    isLineDashed: false,
   },
 ];
 
@@ -38,6 +40,7 @@ const seriesSymmetrical = [
     getTooltipLabel: (metricPrefix, resource) => {
       return `${resource}-${metricPrefix}`;
     },
+    isLineDashed: false,
   },
   {
     metricPrefix: 'write',
@@ -49,6 +52,7 @@ const seriesSymmetrical = [
     getTooltipLabel: (metricPrefix, resource) => {
       return `${resource}-${metricPrefix}`;
     },
+    isLineDashed: false,
   },
 ];
 
@@ -60,24 +64,28 @@ it('converts the series to a flat data structure', () => {
       label: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
+      isDashed: false,
     },
     {
       timestamp: 1627460952000,
       label: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
+      isDashed: false,
     },
     {
       timestamp: 1627460232000,
       label: 'node2',
       value: 18.73333333333335,
       isNegativeValue: false,
+      isDashed: false,
     },
     {
       timestamp: 1627460952000,
       label: 'node2',
-      value: null,
+      value: 'NAN',
       isNegativeValue: false,
+      isDashed: false,
     },
   ]);
 });
@@ -91,40 +99,44 @@ it('converts the series to a flat data structure for symmetrical chart', () => {
       label: 'node1-read',
       value: 18.73333333333335,
       isNegativeValue: true,
+      isDashed: false,
     },
     {
       timestamp: 1627460952000,
       label: 'node1-read',
       value: 18.73333333333335,
       isNegativeValue: true,
+      isDashed: false,
     },
     {
       timestamp: 1627460232000,
       label: 'node1-write',
       value: 18.73333333333335,
       isNegativeValue: false,
+      isDashed: false,
     },
     {
       timestamp: 1627460952000,
       label: 'node1-write',
       value: 18.73333333333335,
       isNegativeValue: false,
+      isDashed: false,
     },
   ]);
 });
 
 const unitRange = [
-  { threshold: 1, label: 'B/Sec' },
+  { threshold: 0, label: 'B/Sec' },
   { threshold: 1024, label: 'KiB/Sec' },
   { threshold: 1024 * 1024, label: 'MiB/Sec' },
   { threshold: 1024 * 1024 * 1024, label: 'GiB/Sec' },
 ];
 
-it('returns the unit label B/Sec', () => {
+it('returns the unit label B/Sec with 0 as valueBase', () => {
   const maxValue = 1023;
   const { unitLabel, valueBase } = getUnitLabel(unitRange, maxValue);
   expect(unitLabel).toEqual('B/Sec');
-  expect(valueBase).toEqual(1);
+  expect(valueBase).toEqual(0);
 });
 
 it('returns the unit label KiB/Sec', () => {
@@ -165,7 +177,7 @@ const newValues = [
   [4, 4],
   [5, 5],
   [6, 6],
-  [7, null],
+  [7, 'NAN'],
   [8, 8],
   [9, 9],
   [10, 10],
@@ -180,14 +192,27 @@ it('should add missing data point with null', () => {
   expect(result).toEqual(newValues);
 });
 
-it('should return an empty array when the original dataset is empty', () => {
+// We manually add
+it('should return the array with string NAN when the original dataset is empty', () => {
   const result = addMissingDataPoint(
     [],
     startingTimeStamp,
     sampleDuration,
     sampleFrequency,
   );
-  expect(result).toEqual([]);
+  expect(result).toEqual([
+    [0, 'NAN'],
+    [1, 'NAN'],
+    [2, 'NAN'],
+    [3, 'NAN'],
+    [4, 'NAN'],
+    [5, 'NAN'],
+    [6, 'NAN'],
+    [7, 'NAN'],
+    [8, 'NAN'],
+    [9, 'NAN'],
+    [10, 'NAN'],
+  ]);
 });
 
 it('should return an empty array when the starting timestamp is undefined', () => {
