@@ -137,3 +137,10 @@ export function addMissingDataPoint(
 export const getRelativeValue = (value: number, base: number) => {
   return value / (base || 1);
 };
+
+// extract the labels from getTooltipLabel function to define the domain in color
+export const getColorDomains = (series: Serie[]): string[] => {
+  return series.map((serie) => {
+    return serie.getTooltipLabel(serie.metricPrefix, serie.resource);
+  });
+};
