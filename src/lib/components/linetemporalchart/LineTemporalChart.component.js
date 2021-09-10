@@ -22,6 +22,7 @@ import {
   convertDataBaseValue,
   addMissingDataPoint,
   getRelativeValue,
+  getColorDomains,
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
@@ -369,8 +370,8 @@ function LineTemporalChart({
     field: 'label',
     type: 'nominal',
     scale: {
-      //if there is no customized color range, we will use the default the line colors
-      range: customizedColorRange.length ? customizedColorRange : colorRange,
+      domain: getColorDomains(series), // the order of the domain should be the same as the order of colorRange, otherwise the colors will be assigned to the line base on the alphabetical order
+      range: customizedColorRange.length ? customizedColorRange : colorRange, //if there is no customized color range, we will use the default the line color
     },
     legend: null,
   };
