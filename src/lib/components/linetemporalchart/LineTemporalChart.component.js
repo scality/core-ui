@@ -340,6 +340,8 @@ function LineTemporalChart({
       labelColor: theme.textSecondary,
       labelFlush: 20,
       // TODO: labelFontSize is not responsiveness
+      labelSeparation: 12,
+      // The minimum separation that must be between label bounding boxes for them to be considered non-overlapping (default 0). This property is ignored if labelOverlap resolution is not enabled.
     },
     title: null,
   };
