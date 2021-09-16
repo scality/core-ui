@@ -18,6 +18,7 @@ export function convert2VegaData(
       const obj = {
         timestamp: datum[0] * 1000, // convert to million second
         label: line.getTooltipLabel(line.metricPrefix, line.resource),
+        resource: line.resource,
         value:
           datum[1] && datum[1] !== NAN_STRING ? Number(datum[1]) : NAN_STRING,
         isNegativeValue:

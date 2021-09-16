@@ -237,13 +237,29 @@ function LineTemporalChart({
   );
   //##### Data Transformation End
 
-  //for the usecase of read/write graph, we use the same legend for the same resource
+  const customizedColorRange = useMemo(() => {
+    const customizedColors = [];
+    series.map((line) => {
+      if (line.color) {
+        return customizedColors.push(line.color);
+      }
+    });
+    return customizedColors;
+  }, [series]);
+
+  // for the series with the same resource, the color of legend and tooltip should be the same.
   const legendLabels = useMemo(() => {
     const uniqueLabel = [];
-    series.map((serie, serieIndex) => {
+    series.forEach((serie, index) => {
       if (serie.getLegendLabel) {
         const legend = serie.getLegendLabel(serie.metricPrefix, serie.resource);
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
+          const serieIndex =
+            yAxisType === 'symmetrical' && !customizedColorRange.length
+              ? [...new Set(series.map((serie) => serie.resource))].findIndex(
+                  (serieResource) => serieResource === serie.resource,
+                )
+              : index;
           uniqueLabel.push({ legend, serie, serieIndex });
         }
       }
@@ -258,16 +274,6 @@ function LineTemporalChart({
       }),
     [series],
   );
-
-  const customizedColorRange = useMemo(() => {
-    const customizedColors = [];
-    series.map((line) => {
-      if (line.color) {
-        return customizedColors.push(line.color);
-      }
-    });
-    return customizedColors;
-  }, [series]);
 
   const syncedVerticalRuler = {
     mark: 'rule',
@@ -369,10 +375,16 @@ function LineTemporalChart({
   }, [yAxisTitle, yAxisType]);
 
   const color = {
-    field: 'label',
+    field:
+      yAxisType === 'symmetrical' && !customizedColorRange.length
+        ? 'resource'
+        : 'label',
     type: 'nominal',
     scale: {
-      domain: getColorDomains(series), // the order of the domain should be the same as the order of colorRange, otherwise the colors will be assigned to the line base on the alphabetical order
+      domain:
+        yAxisType === 'symmetrical' && !customizedColorRange.length
+          ? series.map((serie) => serie.resource)
+          : getColorDomains(series), // the order of the domain should be the same as the order of colorRange, otherwise the colors will be assigned to the line base on the alphabetical order: ;
       range: customizedColorRange.length ? customizedColorRange : colorRange, //if there is no customized color range, we will use the default the line color
     },
     legend: null,
@@ -595,8 +607,10 @@ function LineTemporalChart({
           () =>
             formatValue(
               series,
-              customizedColorRange.length ? customizedColorRange : colorRange,
+              customizedColorRange,
+              colorRange,
               unitLabel,
+              yAxisType,
             ),
           [unitLabel, seriesNames],
         )}

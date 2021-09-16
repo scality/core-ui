@@ -12,8 +12,10 @@ import type { Serie } from '../LineTemporalChart.component';
  */
 export function formatValue(
   series: Serie[],
+  customizedColorRange: string[],
   colorRange: string[],
   unitLabel: string | null,
+  yAxisType?: 'default' | 'percentage' | 'symmetrical',
 ) {
   return (
     value: any,
@@ -54,10 +56,28 @@ export function formatValue(
             val = stringify(val, maxDepth);
           }
 
-          const serieIndex = series.findIndex(
+          const currentSerie = series.find(
             (serie) =>
               serie.getTooltipLabel(serie.metricPrefix, serie.resource) === key,
           );
+
+          const currentSerieIndex = series.findIndex(
+            (serie) =>
+              serie.getTooltipLabel(serie.metricPrefix, serie.resource) === key,
+          );
+
+          const serieIndex =
+            yAxisType === 'symmetrical' && !customizedColorRange.length
+              ? [...new Set(series.map((serie) => serie.resource))].findIndex(
+                  (serieResource) =>
+                    serieResource ===
+                    (currentSerie ? currentSerie.resource : null),
+                )
+              : currentSerieIndex;
+
+          const serieColorRange = customizedColorRange.length
+            ? customizedColorRange
+            : colorRange;
 
           content += `<tr>
             <td class="color">
@@ -65,8 +85,8 @@ export function formatValue(
               serieIndex !== -1
                 ? `<span style='background: ${
                     series[serieIndex].isLineDashed
-                      ? `repeating-linear-gradient(to right,${colorRange[serieIndex]} 0,${colorRange[serieIndex]} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
-                      : colorRange[serieIndex]
+                      ? `repeating-linear-gradient(to right,${serieColorRange[serieIndex]} 0,${serieColorRange[serieIndex]} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
+                      : serieColorRange[serieIndex]
                   };width: ${spacing.sp8};height:${
                     spacing.sp2
                   };display: inline-block;vertical-align: middle;'></span>`
