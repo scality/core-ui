@@ -345,6 +345,7 @@ function LineTemporalChart({
       ticks: true,
       tickCount: 5,
       labelColor: theme.textSecondary,
+      labelBaseline: 'middle',
       labelFlush: 20,
       // TODO: labelFontSize is not responsiveness
       labelSeparation: 12,
