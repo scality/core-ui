@@ -62,6 +62,7 @@ it('converts the series to a flat data structure', () => {
     {
       timestamp: 1627460232000,
       label: 'node1',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
       isDashed: false,
@@ -69,6 +70,7 @@ it('converts the series to a flat data structure', () => {
     {
       timestamp: 1627460952000,
       label: 'node1',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
       isDashed: false,
@@ -76,6 +78,7 @@ it('converts the series to a flat data structure', () => {
     {
       timestamp: 1627460232000,
       label: 'node2',
+      resource: 'node2',
       value: 18.73333333333335,
       isNegativeValue: false,
       isDashed: false,
@@ -83,6 +86,7 @@ it('converts the series to a flat data structure', () => {
     {
       timestamp: 1627460952000,
       label: 'node2',
+      resource: 'node2',
       value: 'NAN',
       isNegativeValue: false,
       isDashed: false,
@@ -97,6 +101,7 @@ it('converts the series to a flat data structure for symmetrical chart', () => {
     {
       timestamp: 1627460232000,
       label: 'node1-read',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: true,
       isDashed: false,
@@ -104,6 +109,7 @@ it('converts the series to a flat data structure for symmetrical chart', () => {
     {
       timestamp: 1627460952000,
       label: 'node1-read',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: true,
       isDashed: false,
@@ -111,6 +117,7 @@ it('converts the series to a flat data structure for symmetrical chart', () => {
     {
       timestamp: 1627460232000,
       label: 'node1-write',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
       isDashed: false,
@@ -118,6 +125,7 @@ it('converts the series to a flat data structure for symmetrical chart', () => {
     {
       timestamp: 1627460952000,
       label: 'node1-write',
+      resource: 'node1',
       value: 18.73333333333335,
       isNegativeValue: false,
       isDashed: false,
