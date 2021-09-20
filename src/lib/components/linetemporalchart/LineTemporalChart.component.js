@@ -256,6 +256,7 @@ function LineTemporalChart({
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
           const serieIndex =
             yAxisType === 'symmetrical' && !customizedColorRange.length
+              // $FlowFixMe
               ? [...new Set(series.map((serie) => serie.resource))].findIndex(
                   (serieResource) => serieResource === serie.resource,
                 )

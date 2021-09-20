@@ -68,6 +68,7 @@ export function formatValue(
 
           const serieIndex =
             yAxisType === 'symmetrical' && !customizedColorRange.length
+              // $FlowFixMe
               ? [...new Set(series.map((serie) => serie.resource))].findIndex(
                   (serieResource) =>
                     serieResource ===
