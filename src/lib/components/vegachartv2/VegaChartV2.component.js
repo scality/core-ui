@@ -195,7 +195,7 @@ function VegaChart(
   ]);
 
   useLayoutEffect(() => {
-    if (vegaInstance.current) {
+    if (vegaInstance.current && themedSpec.params) {
       const view = vegaInstance.current.view;
 
       // when the mouse go out, we trigger the event to set cursorX to null

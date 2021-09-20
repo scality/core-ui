@@ -1,7 +1,8 @@
 //@flow
-import React from 'react';
-import VegaChart from '../vegachart/VegaChart.component.js';
+import React, { useMemo } from 'react';
+import VegaChart from '../vegachartv2/VegaChartV2.component.js';
 import { useTheme } from 'styled-components';
+import { formatValue } from './tooltip/index.js';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -169,12 +170,14 @@ function GlobalHealthBar({
       },
     ],
   };
+
   return (
     <VegaChart
       className="sc-globalhealthbar"
-      id={id}
       spec={spec}
+      theme={'custom'}
       tooltipPosition={tooltipPosition}
+      formatTooltip={useMemo(() => formatValue(), [])}
     ></VegaChart>
   );
 }
