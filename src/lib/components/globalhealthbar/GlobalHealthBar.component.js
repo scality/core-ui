@@ -22,20 +22,6 @@ export type GlobalHealthProps = {
   tooltipPosition?: Position,
 };
 
-function convert2TimeObject(time) {
-  // convert the date string to a date time definition object `{ date: number, month: number, year: number }`, which is required by vega-lite
-  const date = new Date(time);
-
-  return {
-    date: date.getDate(),
-    month: date.getMonth() + 1,
-    year: date.getFullYear(),
-    hours: date.getHours(),
-    minutes: date.getMinutes(),
-    seconds: date.getSeconds(),
-  };
-}
-
 function GlobalHealthBar({
   id,
   alerts,
@@ -46,9 +32,6 @@ function GlobalHealthBar({
   tooltipPosition = TOP,
 }: GlobalHealthProps) {
   const theme = useTheme();
-  // change the UTC time to current time zone
-  const startTimeObject = convert2TimeObject(start);
-  const endTimeObject = convert2TimeObject(end);
 
   const trimAlerts = alerts.map((alert) => {
     if (new Date(alert.startsAt) < new Date(start)) {
@@ -57,12 +40,17 @@ function GlobalHealthBar({
     return { ...alert };
   });
 
+  trimAlerts.unshift({
+    startsAt: start,
+    endsAt: end,
+    severity: 'healthy'
+  });
+
   const spec = {
     width,
     height,
     data: {
-      // trick: when there is no global alert, in order to display a green bar, we need to pass a non-empry array
-      values: !alerts.length ? [0] : trimAlerts,
+      values: trimAlerts,
     },
     transform: [
       {
@@ -88,15 +76,6 @@ function GlobalHealthBar({
             type: 'temporal',
             title: null,
             stack: null,
-            scale: {
-              /* 
-              We have warnings from console because of this known issue.
-              https://github.com/vega/vega-lite/issues/5733
-              Note that: A date time definition object
-              https://vega.github.io/vega-lite/docs/datetime.html 
-              */
-              domain: [startTimeObject, endTimeObject],
-            },
             axis: {
               format: '%d%b %H:%M',
               ticks: true,
@@ -136,8 +115,9 @@ function GlobalHealthBar({
             type: 'nominal',
             title: 'null',
             scale: {
-              domain: ['critical', 'unavailable', 'warning'],
+              domain: ['healthy', 'critical', 'unavailable', 'warning'],
               range: [
+                theme.statusHealthy,
                 theme.statusCritical,
                 theme.textSecondary,
                 theme.statusWarning,
