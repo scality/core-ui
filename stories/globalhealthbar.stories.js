@@ -51,27 +51,6 @@ const alertsLast24h = [
     description: 'Global health warning',
   },
   {
-    id: '2',
-    severity: 'warning',
-    startsAt: '2021-02-01T12:00:00Z',
-    endsAt: '2021-02-01T15:00:00Z',
-    description: 'Global health warning',
-  },
-  {
-    id: '3',
-    severity: 'critical',
-    startsAt: '2021-02-01T16:00:00Z',
-    endsAt: '2021-02-01T18:00:00Z',
-    description: 'Global health critical',
-  },
-  {
-    id: '4',
-    severity: 'warning',
-    startsAt: '2021-02-01T19:00:00Z',
-    endsAt: '2021-02-01T20:00:00Z',
-    description: 'Global health warning',
-  },
-  {
     id: '5',
     severity: 'warning',
     startsAt: '2021-02-01T10:00:00Z',
