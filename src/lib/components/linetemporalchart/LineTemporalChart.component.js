@@ -247,6 +247,9 @@ function LineTemporalChart({
     return customizedColors;
   }, [series]);
 
+  // $FlowFixMe
+  const seriesResources = [...new Set(series.map((serie) => serie.resource))];
+
   // for the series with the same resource, the color of legend and tooltip should be the same.
   const legendLabels = useMemo(() => {
     const uniqueLabel = [];
@@ -256,8 +259,7 @@ function LineTemporalChart({
         if (!uniqueLabel.find((uLabel) => uLabel === legend)) {
           const serieIndex =
             yAxisType === 'symmetrical' && !customizedColorRange.length
-              // $FlowFixMe
-              ? [...new Set(series.map((serie) => serie.resource))].findIndex(
+              ? seriesResources.findIndex(
                   (serieResource) => serieResource === serie.resource,
                 )
               : index;
@@ -375,18 +377,20 @@ function LineTemporalChart({
     };
   }, [yAxisTitle, yAxisType]);
 
+  const symmetricalColorRange =
+    yAxisType !== 'symmetrical'
+      ? colorRange
+      : series.map(
+          (serie) => colorRange[seriesResources.indexOf(serie.resource)],
+        );
   const color = {
-    field:
-      yAxisType === 'symmetrical' && !customizedColorRange.length
-        ? 'resource'
-        : 'label',
+    field: 'label',
     type: 'nominal',
     scale: {
-      domain:
-        yAxisType === 'symmetrical' && !customizedColorRange.length
-          ? series.map((serie) => serie.resource)
-          : getColorDomains(series), // the order of the domain should be the same as the order of colorRange, otherwise the colors will be assigned to the line base on the alphabetical order: ;
-      range: customizedColorRange.length ? customizedColorRange : colorRange, //if there is no customized color range, we will use the default the line color
+      domain: getColorDomains(series), // the order of the domain should be the same as the order of colorRange, otherwise the colors will be assigned to the line base on the alphabetical order: ;
+      range: customizedColorRange.length
+        ? customizedColorRange
+        : symmetricalColorRange, //if there is no customized color range, we will use the default the line color
     },
     legend: null,
   };
