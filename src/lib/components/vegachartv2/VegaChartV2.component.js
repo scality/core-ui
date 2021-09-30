@@ -232,7 +232,11 @@ function VegaChart(
     vegaInstance,
   ]);
   return (
-    <div className="sc-vegachart" ref={vegaDOMInstance}>
+    <div
+      className="sc-vegachart"
+      ref={vegaDOMInstance}
+      style={{ width: '100%' }}
+    >
       <VegaTooltipTheme />
     </div>
   );

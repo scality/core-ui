@@ -18,7 +18,6 @@ export type GlobalHealthProps = {
   start: string,
   end: string,
   height?: number,
-  width?: number,
   tooltipPosition?: Position,
 };
 
@@ -28,7 +27,6 @@ function GlobalHealthBar({
   start,
   end,
   height = 8,
-  width = 482,
   tooltipPosition = TOP,
 }: GlobalHealthProps) {
   const theme = useTheme();
@@ -47,7 +45,7 @@ function GlobalHealthBar({
   });
 
   const spec = {
-    width,
+    width: 'container',
     height,
     data: {
       values: trimAlerts,
