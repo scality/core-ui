@@ -15,7 +15,7 @@ import {
 } from '../../style/theme.js';
 import VegaChart from '../vegachartv2/VegaChartV2.component.js';
 import { useCursorX } from '../vegachartv2/SyncedCursorCharts';
-import { EmphaseText } from '../text/Text.component.js';
+import { ChartTitleText } from '../text/Text.component.js';
 import {
   convert2VegaData,
   getUnitLabel,
@@ -593,12 +593,12 @@ function LineTemporalChart({
     <LineTemporalChartWrapper>
       <ChartHeader>
         {unitLabel ? (
-          <EmphaseText>
+          <ChartTitleText>
             {title} ({unitLabel})
-          </EmphaseText>
+          </ChartTitleText>
         ) : (
           // for the chart doesn't have title
-          <EmphaseText>{title}</EmphaseText>
+          <ChartTitleText>{title}</ChartTitleText>
         )}
         {isLoading && <Loader style={{ paddingLeft: `${spacing.sp4}` }} />}
       </ChartHeader>
