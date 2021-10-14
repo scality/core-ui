@@ -78,6 +78,9 @@ export const iconTable = {
   "Change-erasure": "fas faExchangeAlt",
   "Circle-health": "fas faCircle",
   "Circle-empty": "far faCircle",
+  "Dot-circle": "fas faDotCircle",
+  "Check-circle": "fas faCheckCircle",
+  "Times-circle": "fas faTimesCircle",
 };
 
 const IconStyled = styled(FontAwesomeIcon)`

@@ -22,7 +22,10 @@ export const Default = () => {
       <Icon name={"Volume-pdf"} size={"8x"} color={"secondary"}/>
       <Icon name={"Network"} size={"9x"} color={"secondaryDark1"}/>
       <Icon name={"Bucket"} size={"10x"} color={"secondaryDark2"}/>
-
+      <Icon name={"Dot-circle"} color={"infoPrimary"}/>
+      <Icon name={"Check-circle"} color={"statusHealthy"}/>
+      <Icon name={"Exclamation-circle"} color={"statusWarning"}/>
+      <Icon name={"Times-circle"} color={"statusCritical"}/>
       <Title>All Icons</Title>
       { Object.keys(iconTable).map((key, index) => (
         <Icon key={index} name={key} size={"2x"} color={"secondary"}/>
