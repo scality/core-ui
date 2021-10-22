@@ -1,6 +1,6 @@
 //@flow
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 
@@ -13,19 +13,28 @@ const ToggleContainer = styled.label`
   display: inline-flex;
   align-items: center;
   position: relative;
-  cursor: pointer;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 `;
 
 const Switch = styled.label`
-  cursor: pointer;
   position: relative;
   width: 24px;
   height: 14px;
+  ${(props) => {
+    return css`
+      ${props.disabled
+        ? `
+          cursor: not-allowed;
+        `
+        : `
+          cursor: pointer;
+        `}
+    `;
+  }}
 `;
 
 const Slider = styled.span`
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
@@ -59,7 +68,6 @@ const ToggleInput = styled.input`
   &:checked + ${Slider}:before {
     transform: translateX(10px);
   }
-
   display: none;
 `;
 
@@ -72,8 +80,8 @@ const StyledSwitchLabel = styled.span`
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
   return (
-    <ToggleContainer className="sc-toggle">
-      <Switch>
+    <ToggleContainer className="sc-toggle" {...rest}>
+      <Switch {...rest}>
         <ToggleInput
           type="checkbox"
           checked={toggle}

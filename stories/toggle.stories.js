@@ -27,6 +27,15 @@ export const Default = () => {
         name="toggle"
         data-cy="default_toggle"
       />
+      <Title>Disabled toggle</Title>
+      <Toggle
+        label="Disabled toggle"
+        onChange={() => setToggle(!toggle)}
+        toggle={toggle}
+        name="toggle"
+        data-cy="disabled_toggle"
+        disabled={true}
+      />
     </Wrapper>
   );
 };
