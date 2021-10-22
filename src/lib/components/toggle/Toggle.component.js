@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
-
+import { spacing } from '../../style/theme.js';
 type Props = {
   toggle: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
@@ -18,8 +18,8 @@ const ToggleContainer = styled.label`
 
 const Switch = styled.label`
   position: relative;
-  width: 24px;
-  height: 14px;
+  width: ${spacing.sp24};
+  height: ${spacing.sp14};
   ${(props) => {
     return css`
       ${props.disabled
@@ -40,20 +40,20 @@ const Slider = styled.span`
   right: 0;
   bottom: 0;
   background-color: ${(props) => getTheme(props).backgroundLevel1};
-  border: 1px solid
+  border: ${spacing.sp1} solid
     ${(props) =>
       getTheme(props)[props.toggle ? 'selectedActive' : 'infoPrimary']};
-  border-radius: 8px;
+  border-radius: ${spacing.sp8};
   transition: 0.4s;
   -moz-transform: rotate(0.02deg);
   &:before {
     border-radius: 100%;
     position: absolute;
     content: '';
-    height: 10px;
-    width: 10px;
-    left: 1px;
-    top: 1px;
+    height: ${spacing.sp10};
+    width: ${spacing.sp10};
+    left: ${spacing.sp1};
+    top: ${spacing.sp1};
     background-color: ${(props) =>
       getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
     transition: 0.4s;
@@ -66,7 +66,7 @@ const ToggleInput = styled.input`
     background-color: ${(props) => getTheme(props).selectedActive};
   }
   &:checked + ${Slider}:before {
-    transform: translateX(10px);
+    transform: translateX(${spacing.sp10});
   }
   display: none;
 `;

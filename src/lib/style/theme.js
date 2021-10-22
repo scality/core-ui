@@ -179,6 +179,7 @@ export const spacing = {
   sp2: '0.143rem',
   sp4: '0.286rem',
   sp8: '0.571rem',
+  sp10: '0.71rem',
   sp12: '0.857rem',
   sp14: '1rem',
   sp16: '1.143rem',
