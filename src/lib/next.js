@@ -11,11 +11,13 @@ import {
   useMetricsTimeSpan,
 } from './components/linetemporalchart/MetricTimespanProvider.js';
 import { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
+import Select from './components/selectv2/Selectv2.component';
 export {
   Button,
   Tabs,
   Tab,
   Table,
+  Select,
   LineTemporalChart,
   SyncedCursorCharts,
   MetricsTimeSpanProvider,
