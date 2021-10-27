@@ -138,12 +138,12 @@ export const lineColor7 = '#FD8144';
 export const lineColor8 = '#F6B187';
 
 //navbar
-export const navbarHeight = '47px';
+export const navbarHeight = '2rem';
 export const navbarItemWidth = '60px';
 
 //sidebar
-export const sidebarItemHeight = '40px';
-export const sidebarWidth = '40px';
+export const sidebarItemHeight = '1.75rem';
+export const sidebarWidth = '1.75rem';
 
 export const fontSize = {
   smaller: '0.71rem',
