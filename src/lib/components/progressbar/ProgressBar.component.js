@@ -32,19 +32,19 @@ const ProgressBarContainer = styled.div`
     switch (props.size) {
       case 'smaller':
         return css`
-          height: 10px;
+          height: ${defaultTheme.fontSize.smaller};
           font-size: ${defaultTheme.fontSize.smaller};
         `;
 
       case 'base':
         return css`
-          height: 12px;
+          height: ${defaultTheme.fontSize.small};
           font-size: ${defaultTheme.fontSize.small};
         `;
 
       case 'large':
         return css`
-          height: 16px;
+          height: ${defaultTheme.fontSize.base};
           font-size: ${defaultTheme.fontSize.base};
         `;
 
@@ -55,7 +55,7 @@ const ProgressBarContainer = styled.div`
 
       default:
         return css`
-          height: 12px;
+          height: ${defaultTheme.fontSize.base};
           font-size: ${defaultTheme.fontSize.base};
         `;
     }

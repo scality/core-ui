@@ -137,14 +137,6 @@ export const lineColor6 = '#BE2543';
 export const lineColor7 = '#FD8144';
 export const lineColor8 = '#F6B187';
 
-//navbar
-export const navbarHeight = '47px';
-export const navbarItemWidth = '60px';
-
-//sidebar
-export const sidebarItemHeight = '40px';
-export const sidebarWidth = '40px';
-
 export const fontSize = {
   smaller: '0.71rem',
   small: '0.85rem',
@@ -211,3 +203,11 @@ export const zIndex = {
   scrollbarButton: 2,
   base: 1,
 };
+
+//navbar
+export const navbarHeight = spacing.sp28;
+export const navbarItemWidth = spacing.sp60;
+
+//sidebar
+export const sidebarItemHeight = spacing.sp40;
+export const sidebarWidth = spacing.sp40;
