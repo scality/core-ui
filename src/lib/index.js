@@ -16,7 +16,8 @@ import Modal from './components/modal/Modal.component';
 import Navbar from './components/navbar/Navbar.component';
 import Notifications from './components/notifications/Notifications.component';
 import SearchInput from './components/searchinput/SearchInput.component';
-import Select from './components/select/Select.component';
+// if not backward compatible, bump the version.
+import Select from './components/selectv2/Selectv2.component';
 import Sidebar from './components/sidebar/Sidebar.component';
 import Steppers from './components/steppers/Steppers.component';
 import Table from './components/table/Table.component';
