@@ -78,6 +78,9 @@ export const iconTable = {
   "Change-erasure": "fas faExchangeAlt",
   "Circle-health": "fas faCircle",
   "Circle-empty": "far faCircle",
+  "Dot-circle": "fas faDotCircle",
+  "Check-circle": "fas faCheckCircle",
+  "Times-circle": "fas faTimesCircle",
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
@@ -95,6 +98,7 @@ type Props = {
   name: $Keys<typeof iconTable>,
   size?: SizeProp,
   color?: $Keys<typeof brand>,
+  ariaLabel?: string,
 };
 
 function getLazyStyledIcon(iconInfo) {
@@ -103,9 +107,9 @@ function getLazyStyledIcon(iconInfo) {
     try {
       const fontAwesomeType = iconType === "far" ? "free-regular-svg-icons" : "free-solid-svg-icons";
       const icon = await import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`);
-      return { default: ({ color, size, ...rest }) => <IconStyled color={ color } icon={ icon[iconClass] } size={ size } { ...rest } /> }
+      return { default: ({ name, color, size, ariaLabel, ...rest }) => <IconStyled color={ color } icon={ icon[iconClass] } size={ size } aria-label={`${name} ${ariaLabel}`} { ...rest } /> }
     } catch {
-      return { default: () => <Loader size="base" /> };
+      return { default: ({ name, ariaLabel }) => <Loader size="base" aria-label={`${name} ${ariaLabel}`}/> };
     }
   })
 }
@@ -114,6 +118,7 @@ function Icon({
   name,
   size = "1x",
   color = null,
+  ariaLabel = "",
   ...rest
 }: Props) {
   const iconClass = iconTable[name];
@@ -124,8 +129,8 @@ function Icon({
   const LazyStyledIcon = getLazyStyledIcon(iconClass);
 
   return (
-    <Suspense fallback={<Loader size="base" />}>
-      <LazyStyledIcon color={ color } size={ size } { ...rest }/>
+    <Suspense fallback={<Loader size="base" aria-label={`${name} ${ariaLabel}`}/>}>
+      <LazyStyledIcon name={ name } color={ color } size={ size } ariaLabel={ ariaLabel } { ...rest }/>
     </Suspense>
   );
 }
