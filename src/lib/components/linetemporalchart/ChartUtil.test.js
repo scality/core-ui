@@ -175,7 +175,7 @@ const originalValue = [
   [10, 10],
 ];
 const startingTimeStamp = 0;
-const sampleDuration = 11;
+const sampleDuration = 10;
 const sampleFrequency = 1;
 const newValues = [
   [0, 0],
