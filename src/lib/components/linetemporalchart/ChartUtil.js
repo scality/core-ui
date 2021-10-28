@@ -109,7 +109,7 @@ export function addMissingDataPoint(
   }
 
   const newValues = [];
-  const numberOfDataPoints = sampleDuration / sampleFrequency;
+  const numberOfDataPoints = sampleDuration / sampleFrequency + 1;
   let samplingPointTime = startingTimeStamp;
 
   // initialize the array with all "NAN" value, in order for the tooltip to display dash(-)
