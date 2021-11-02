@@ -34,7 +34,13 @@ function BarChart({
     },
   };
 
-  return <VegaChart id={id} spec={spec}></VegaChart>;
+  return (
+    <VegaChart
+      key={`barchart-${id}-${data.length}`}
+      id={id}
+      spec={spec}
+    ></VegaChart>
+  );
 }
 
 export default BarChart;
