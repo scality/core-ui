@@ -1,14 +1,12 @@
 //@flow
 import React from 'react';
-import VegaChart from '../vegachart/VegaChart.component.js';
-
+import VegaChart from '../vegachartv2/VegaChartV2.component.js';
 type Props = {
   id: string,
   data: Array<Object>,
   xAxis: Object,
   yAxis: Object,
   color?: Object,
-  width?: number,
   height?: number,
   barConfig?: Object,
 };
@@ -20,12 +18,11 @@ function BarChart({
   yAxis,
   color,
   height = 200,
-  width = 800,
   barConfig,
 }: Props) {
   const spec = {
     mark: { type: 'bar', ...barConfig },
-    width,
+    width: 'container',
     height,
     data: {
       values: data,

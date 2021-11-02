@@ -7,6 +7,7 @@ import {
   horizontalStackedData,
   barchartData,
 } from './data/barchart';
+import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
 
 // props for vertical stacked bar chart
 const idVerticalStacked = 'vis_vertical_stacked';
@@ -75,38 +76,39 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <Title>Vertical Stacked Bar Chart Demo </Title>
-      <BarChart
-        id={idVerticalStacked}
-        data={verticalStackedData}
-        xAxis={xAxisVerticalStacked}
-        yAxis={yAxisVerticalStacked}
-        color={colorVerticalStacked}
-        width={width}
-        barConfig={barConfig}
-      />
-      <Title>Horizontal Stacked Bar Chart Demo </Title>
-      <BarChart
-        id={idHorizontalStacked}
-        data={horizontalStackedData}
-        xAxis={xAxisHorizontalStacked}
-        yAxis={yAxisHorizontalStacked}
-        color={colorHorizontalStacked}
-      />
-      <Title>Vertical Bar Chart Demo </Title>
-      <BarChart
-        id={idVertical}
-        data={barchartData}
-        xAxis={xAxisVertical}
-        yAxis={yAxisVertical}
-      />
-      <Title>Horizontal Bar Chart Demo </Title>
-      <BarChart
-        id={idHorizontal}
-        data={barchartData}
-        xAxis={xAxisHorizontal}
-        yAxis={yAxisHorizontal}
-      />
+      <SyncedCursorCharts>
+        <Title>Vertical Stacked Bar Chart Demo </Title>
+        <BarChart
+          id={idVerticalStacked}
+          data={verticalStackedData}
+          xAxis={xAxisVerticalStacked}
+          yAxis={yAxisVerticalStacked}
+          color={colorVerticalStacked}
+          barConfig={barConfig}
+        />
+        ><Title>Horizontal Stacked Bar Chart Demo </Title>
+        <BarChart
+          id={idHorizontalStacked}
+          data={horizontalStackedData}
+          xAxis={xAxisHorizontalStacked}
+          yAxis={yAxisHorizontalStacked}
+          color={colorHorizontalStacked}
+        />
+        <Title>Vertical Bar Chart Demo </Title>
+        <BarChart
+          id={idVertical}
+          data={barchartData}
+          xAxis={xAxisVertical}
+          yAxis={yAxisVertical}
+        />
+        <Title>Horizontal Bar Chart Demo </Title>
+        <BarChart
+          id={idHorizontal}
+          data={barchartData}
+          xAxis={xAxisHorizontal}
+          yAxis={yAxisHorizontal}
+        />
+      </SyncedCursorCharts>
     </Wrapper>
   );
 };
