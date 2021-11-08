@@ -81,6 +81,9 @@ export const iconTable = {
   "Dot-circle": "fas faDotCircle",
   "Check-circle": "fas faCheckCircle",
   "Times-circle": "fas faTimesCircle",
+  "Toolbox": "fas faToolbox",
+  "Cubes": "fas faCubes",
+  "File-alt": "fas faFilesAlt",
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
