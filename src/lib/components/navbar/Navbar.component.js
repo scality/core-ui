@@ -1,7 +1,7 @@
 //@flow
 import React from 'react';
 import styled, { css } from 'styled-components';
-import type { Node } from 'react';
+import type { Node, Element } from 'react';
 import Logo from '../../icons/branding';
 import Dropdown from '../dropdown/Dropdown.component';
 import Button from '../button/Button.component';
@@ -19,7 +19,7 @@ type Tab = {
   title?: string,
   selected?: boolean,
   onClick?: (any) => void,
-  link?: Node,
+  link?: Element<'a'>,
 };
 
 export type Props = {
@@ -41,7 +41,7 @@ const NavbarContainer = styled.div`
     .sc-trigger-text {
       color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: 1px solid ${getThemePropSelector('primary')};
+    border-bottom: ${defaultTheme.spacing.sp1} solid ${getThemePropSelector('primary')};
   `}};
 `;
 
@@ -56,6 +56,34 @@ const NavbarTabs = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  a {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    padding: 0 ${defaultTheme.spacing.sp16};
+    border-bottom: ${defaultTheme.spacing.sp2} solid transparent;
+    border-top: ${defaultTheme.spacing.sp2} solid transparent;
+    ${(props) => {
+      const { secondary, background, selectedActive } = getTheme(props);
+      return css`
+        color: ${getThemePropSelector('textTertiary')};
+        &:hover {
+          border-bottom-color: ${secondary};
+          background-color: ${getThemePropSelector('highlight')};
+        }
+        &.selected {
+          color: ${getThemePropSelector('textPrimary')};
+          font-weight: bold;
+          border-top-color: ${background};
+          border-bottom-color: ${selectedActive};
+        }
+      `;
+    }};
+  }
 `;
 
 const TabItem = styled.div`
@@ -64,14 +92,14 @@ const TabItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 ${defaultTheme.padding.base};
+  padding: 0 ${defaultTheme.spacing.sp16};
   ${(props) => {
     const { textPrimary, secondary, background } = getTheme(props);
     return css`
       color: ${textPrimary};
       &:hover {
-        border-bottom: 2px solid ${secondary};
-        border-top: 2px solid ${background};
+        border-bottom: ${defaultTheme.spacing.sp2} solid ${secondary};
+        border-top: ${defaultTheme.spacing.sp2} solid ${background};
         cursor: pointer;
       }
     `;
@@ -79,56 +107,9 @@ const TabItem = styled.div`
   ${(props) =>
     props.selected &&
     css`
-      border-top: 2px solid ${getTheme(props).background};
-      border-bottom: 2px solid ${getTheme(props).secondary};
+      border-top: ${defaultTheme.spacing.sp2} solid ${getTheme(props).background};
+      border-bottom: ${defaultTheme.spacing.sp2} solid ${getTheme(props).secondary};
     `};
-`;
-
-const TabLinkItem = styled(TabItem)`
-  padding: 0px;
-  border-bottom: 2px solid transparent;
-  border-top: 2px solid transparent;
-
-  ${(props) =>
-    props.selected &&
-    css`
-      border-bottom: 2px solid ${getTheme(props).selectedActive};
-      color: ${getThemePropSelector('textPrimary')};
-    `};
-
-  // Disabling TabItem hover to move it to <a> instead
-  &:hover {
-    border-bottom: none;
-    border-top: none;
-    cursor: pointer;
-    background-color: ${getThemePropSelector('highlight')};
-  }
-
-  a {
-    color: ${getThemePropSelector('textTertiary')};
-    text-decoration: none;
-    padding: 12px ${defaultTheme.padding.base};
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-
-    ${(props) => {
-      const { secondary } = getTheme(props);
-      return css`
-        &:hover {
-          border-bottom: 2px solid ${secondary};
-          border-top: 2px solid transparent;
-        }
-      `;
-    }}
-
-    ${(props) =>
-      props.selected &&
-      css`
-        color: ${getThemePropSelector('textPrimary')};
-        font-weight: bold;
-      `};
-  }
 `;
 
 const NavbarMenuItem = styled.div`
@@ -162,17 +143,17 @@ const NavbarMenuItem = styled.div`
 const ProductNameSpan = styled.h1`
   text-transform: uppercase;
   font-size: ${defaultTheme.fontSize.larger};
-  padding: 0 16px;
+  padding: 0 ${defaultTheme.spacing.sp16};
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 ${defaultTheme.spacing.sp16};
   svg {
-    width: 100px;
-    height: 30px;
+    width: 7.143rem;
+    height: 2.143rem;
   }
 `;
 
@@ -235,16 +216,16 @@ function NavBar({
       </NavbarMenu>
       {tabs.length ? (
         <NavbarTabs>
-          {tabs.map(({ link, title, selected, onClick }, index) =>
+          {tabs.map(({ link, title, selected, onClick }, index) => 
             link ? (
-              <TabLinkItem
-                selected={selected}
-                role="tab"
-                aria-selected={selected}
-                key={`navbar_tab_link_item_${index}`}
-              >
-                {link}
-              </TabLinkItem>
+              React.cloneElement(link,
+                {
+                  className: (selected ? "selected" : ""),
+                  "aria-selected": selected,
+                  role: "tab",
+                  key: `navbar_tab_item_${index}`
+                }
+              )
             ) : (
               <TabItem
                 onClick={onClick}

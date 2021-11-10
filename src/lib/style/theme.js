@@ -205,8 +205,8 @@ export const zIndex = {
 };
 
 //navbar
-export const navbarHeight = spacing.sp28;
-export const navbarItemWidth = spacing.sp60;
+export const navbarHeight = '3.357rem';
+export const navbarItemWidth = '4.286rem';
 
 //sidebar
 export const sidebarItemHeight = spacing.sp40;
