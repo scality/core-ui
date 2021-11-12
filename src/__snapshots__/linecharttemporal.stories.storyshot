@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/v2/LineTemporalChart Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-gkdzZj jGuUgx"
+  >
+    <div
+      className="sc-iGctRS gEhsiS"
+    >
+      <span
+        className="sc-httYMd sc-gVgnHT hhdlUi juikWY"
+      >
+        CPU Usage
+      </span>
+    </div>
+    <div
+      className="sc-vegachart"
+    />
+    <div
+      className="sc-flMoUE klCRRa"
+    >
+      <span
+        className="sc-eWVKcp jEwguf"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        bootstrap
+      </span>
+      <span
+        className="sc-eWVKcp eaVqZm"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        master-0
+      </span>
+      <span
+        className="sc-eWVKcp kqydEB"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        master-1
+      </span>
+      <span
+        className="sc-eWVKcp jDcGyk"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        worker-0
+      </span>
+      <span
+        className="sc-eWVKcp eVzIab"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        worker-1
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-gkdzZj jGuUgx"
+  >
+    <div
+      className="sc-iGctRS gEhsiS"
+    >
+      <span
+        className="sc-httYMd sc-gVgnHT hhdlUi juikWY"
+      >
+        IOPS
+      </span>
+    </div>
+    <div
+      className="sc-vegachart"
+    />
+    <div
+      className="sc-flMoUE klCRRa"
+    >
+      <span
+        className="sc-eWVKcp jEwguf"
+      />
+      <span
+        className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+      >
+        bootstrap
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Notification/Modal Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <div
+    className="sc-irlOZD enjdfy sc-modal"
+  >
+    <div
+      className="sc-eWvPJL hfWBgE sc-modal-content"
+    >
+      <div
+        className="sc-kUbhmq jQulhj sc-modal-header"
+      >
+        <span
+          className="sc-dwcuIR eOATmW"
+        >
+          Hello
+        </span>
+        <div
+          className="sc-kiYtDG kDfDnH"
+          onClick={[Function]}
+        >
+          <i
+            className="fas fa-times"
+          />
+        </div>
+      </div>
+      <div
+        className="sc-jtHMlw bTvEKo sc-modal-body"
+      >
+        <span>
+          Do you want a cookie?
+        </span>
+      </div>
+      <div
+        className="sc-eltcbb fOWNqZ sc-modal-footer"
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "space-between",
+            }
+          }
+        >
+          <button
+            className="sc-dQppl eoCavo sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="base"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-hBEYos hgFzca"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-kstrdz ZegCk"
+                >
+                  No
+                </span>
+              </span>
+            </span>
+          </button>
+          <button
+            className="sc-dQppl lcRckn sc-button"
+            disabled={false}
+            onClick={[Function]}
+            size="base"
+            title=""
+            type="button"
+          >
+            <span
+              className="sc-hBEYos hgFzca"
+            >
+              <span
+                className="sc-button-text"
+              >
+                <span
+                  className="sc-kstrdz ZegCk"
+                >
+                  Yes
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

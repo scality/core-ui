@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Text Basic Text 1`] = `
+<span
+  className="sc-httYMd hhdlUi"
+>
+  basic text
+</span>
+`;
+
+exports[`Storyshots Components/Text Emphase Text 1`] = `
+<span
+  className="sc-httYMd sc-gVgnHT hhdlUi juikWY"
+>
+  emphase text
+</span>
+`;
+
+exports[`Storyshots Components/Text Larger Text 1`] = `
+<span
+  className="sc-httYMd sc-hjWSAi hhdlUi bPKuCf"
+>
+  larger text
+</span>
+`;
+
+exports[`Storyshots Components/Text Secondary Text 1`] = `
+<span
+  className="sc-httYMd sc-cbDGPM hhdlUi jSybBE"
+>
+  secondary text
+</span>
+`;
+
+exports[`Storyshots Components/Text Smaller Text 1`] = `
+<div
+  style={
+    Object {
+      "width": "100px",
+    }
+  }
+>
+  <span
+    className="sc-httYMd sc-gyUeRy hhdlUi kzJFIs"
+  >
+    smaller text
+  </span>
+</div>
+`;
+
+exports[`Storyshots Components/Text Status Text 1`] = `
+Array [
+  <div>
+    <span
+      className="sc-httYMd sc-fWPcDo hhdlUi dbTjUG"
+    >
+      healthy status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-httYMd sc-fWPcDo hhdlUi xOEy"
+    >
+      warning status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-httYMd sc-fWPcDo hhdlUi cjodHw"
+    >
+      critical status text
+    </span>
+  </div>,
+  <div>
+    <span
+      className="sc-httYMd sc-fWPcDo hhdlUi bgGsfy"
+    >
+      unknown status text
+    </span>
+  </div>,
+]
+`;

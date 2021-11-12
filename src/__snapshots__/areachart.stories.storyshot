@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/Chart/AreaChart Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Vege-Lite area chart
+  </h3>
+  <div
+    className="sc-vegachart"
+    id="vis_area_chart"
+  />
+</div>
+`;

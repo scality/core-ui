@@ -11,6 +11,7 @@ import {
   dataLineChartV2,
   dataLineChartV2_readwrite,
 } from './data/linechart.js';
+import { defaultRenderTooltipSerie } from '../src/lib/components/linetemporalchart/tooltip';
 export default {
   title: 'Components/v2/LineTemporalChart',
   component: LineTemporalChart,
@@ -28,6 +29,12 @@ export const Default = () => {
               height={300}
               yAxisType={'default'}
               startingTimeStamp={1629306229}
+              renderTooltipSerie={(serie, tooltipData) => {
+                if (serie.key === 'bootstrap') {
+                  return defaultRenderTooltipSerie(serie) + '<tr><td colspan="3">This is the main node</td></tr>';  
+                }
+                return defaultRenderTooltipSerie(serie);
+              }}
             />
             <LineTemporalChart
               title={'IOPS'}

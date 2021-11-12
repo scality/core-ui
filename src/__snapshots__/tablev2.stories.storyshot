@@ -1,0 +1,338 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/V2/Table Simple Content Table 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Non Selectable Table
+  </h3>
+  <div
+    style={
+      Object {
+        "height": "300px",
+        "paddingTop": "20px",
+      }
+    }
+  >
+    <div
+      className="sc-bxniyx doLTHi table"
+      role="grid"
+    >
+      <div
+        className="thead"
+        role="rowgroup"
+      >
+        <div
+          className="sc-kGNybE cfBRcC"
+          role="row"
+          style={
+            Object {
+              "display": "flex",
+              "width": "600px",
+            }
+          }
+        >
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              First Name
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Last Name
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "50px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Age
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Health
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-jYCGvq eFQDoP tbody"
+        role="rowgroup"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Single Selectable Table
+  </h3>
+  <div
+    style={
+      Object {
+        "height": "300px",
+        "paddingTop": "20px",
+      }
+    }
+  >
+    <div
+      className="sc-bxniyx doLTHi table"
+      role="grid"
+    >
+      <div
+        className="thead"
+        role="rowgroup"
+      >
+        <div
+          className="sc-kGNybE cfBRcC"
+          role="row"
+          style={
+            Object {
+              "display": "flex",
+              "width": "600px",
+            }
+          }
+        >
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              First Name
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Last Name
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "50px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Age
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <span
+                  className="sc-clhSjD fKmcNK"
+                >
+                  <i
+                    className="fas fa-sort"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
+          <div
+            className="sc-cipWhh efaKC"
+            colSpan={1}
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "display": "inline-block",
+                "textAlign": "left",
+                "width": "150px",
+              }
+            }
+            title="Toggle SortBy"
+          >
+            <div>
+              Health
+              <span
+                className="sc-kJFuea bEFDzS"
+              >
+                <i
+                  className="fas fa-sort-up"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-jYCGvq eFQDoP tbody"
+        role="rowgroup"
+      >
+        <div
+          style={
+            Object {
+              "height": 0,
+              "overflow": "visible",
+              "width": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

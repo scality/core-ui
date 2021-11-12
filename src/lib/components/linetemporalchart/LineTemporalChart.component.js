@@ -95,6 +95,7 @@ export type LineChartProps = {
   isLegendHided?: boolean,
   yAxisType?: 'default' | 'percentage' | 'symmetrical',
   yAxisTitle?: string,
+  renderTooltipSerie?: ({color?: string, isLineDashed?: boolean, name: string, value: string, key: string }, tooltipData: any) => string
 };
 
 // Custom formatter to display negative value as an absolute value in read/write, in/out chart
@@ -141,6 +142,7 @@ function LineTemporalChart({
   isLegendHided = false,
   yAxisType = 'default',
   yAxisTitle,
+  renderTooltipSerie,
   ...rest
 }: LineChartProps) {
   // property validation
@@ -615,6 +617,7 @@ function LineTemporalChart({
               colorRange,
               unitLabel,
               yAxisType,
+              renderTooltipSerie
             ),
           [unitLabel, seriesNames],
         )}

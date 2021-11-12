@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/SpacedBox Composition 1`] = `
+<div
+  className="sc-fiKUUL gGBPKq"
+>
+  <span
+    className="sc-lgqmxq gIhVmF sc-BXqHe eOUMOP"
+  >
+    Composition Example: Green background 
+    "&lt;/span&gt;"
+     with margin left
+  </span>
+  <p
+    className="sc-hvagB jmvJDy sc-BXqHe dPsDmx"
+  >
+    Bold 
+    "&lt;/p&gt;"
+     with my 14 and p 14
+  </p>
+  <p
+    className="sc-hvagB jmvJDy sc-BXqHe gSzgNg"
+  >
+    <span
+      className="sc-lgqmxq gIhVmF"
+    >
+      SpacedBox + React component + nested styled component
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Margin 1`] = `
+<div
+  className="sc-fiKUUL gGBPKq"
+>
+  <div
+    className="sc-BXqHe fRAeiC"
+  >
+    Props m 0
+  </div>
+  <div
+    className="sc-BXqHe GCdtY"
+  >
+    Props m 1
+  </div>
+  <div
+    className="sc-BXqHe ktPRfQ"
+  >
+    Props m 2
+  </div>
+  <div
+    className="sc-BXqHe birNRO"
+  >
+    Props m 4 
+  </div>
+  <div
+    className="sc-BXqHe hjfrLN"
+  >
+    Props m 8
+  </div>
+  <div
+    className="sc-BXqHe jdirlM"
+  >
+    Props m 12
+  </div>
+  <div
+    className="sc-BXqHe hYgGSx"
+  >
+    Props m 14
+  </div>
+  <div
+    className="sc-BXqHe eFBvJZ"
+  >
+    Props m 16
+  </div>
+  <div
+    className="sc-BXqHe dHmTfc"
+  >
+    Props m 20
+  </div>
+  <div
+    className="sc-BXqHe fcnkjq"
+  >
+    Props m 28
+  </div>
+  <div
+    className="sc-BXqHe iJFEeM"
+  >
+    Props m 32
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Mix 1`] = `
+<div
+  className="sc-fiKUUL gGBPKq"
+>
+  <div
+    className="sc-BXqHe croren"
+  >
+    Props pl 8, pt 12, mt 12
+  </div>
+  <div
+    className="sc-BXqHe hUSZlR"
+  >
+    Props mx 24, py 32
+  </div>
+  <div
+    className="sc-BXqHe dHKCSM"
+  >
+    Props ml 1, mt 2, mr 4, mb 8, pl 12, pt 14, pr 16, pb 24
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Padding 1`] = `
+<div
+  className="sc-fiKUUL gGBPKq"
+>
+  <div
+    className="sc-BXqHe daStZh"
+  >
+    Props p 0
+  </div>
+  <div
+    className="sc-BXqHe cGwTWb"
+  >
+    Props p 1
+  </div>
+  <div
+    className="sc-BXqHe dggJWb"
+  >
+    Props p 2
+  </div>
+  <div
+    className="sc-BXqHe gdHyXh"
+  >
+    Props p 4 
+  </div>
+  <div
+    className="sc-BXqHe eFAVIC"
+  >
+    Props p 8
+  </div>
+  <div
+    className="sc-BXqHe kJfNQL"
+  >
+    Props p 12
+  </div>
+  <div
+    className="sc-BXqHe gsZIVC"
+  >
+    Props p 14
+  </div>
+  <div
+    className="sc-BXqHe gJSeyW"
+  >
+    Props p 16
+  </div>
+  <div
+    className="sc-BXqHe fwHirf"
+  >
+    Props p 20
+  </div>
+  <div
+    className="sc-BXqHe jVYJst"
+  >
+    Props p 28
+  </div>
+  <div
+    className="sc-BXqHe gcxElD"
+  >
+    Props p 32
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SpacedBox Playground 1`] = `
+<div
+  className="sc-fiKUUL gGBPKq"
+>
+  <div
+    className="sc-BXqHe VCFkW"
+  >
+    Playground
+  </div>
+</div>
+`;

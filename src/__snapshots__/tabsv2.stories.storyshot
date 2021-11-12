@@ -1,0 +1,1442 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/v2/Tabs Default 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    /
+     / 
+    
+  </h3>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Default Tabs
+  </h3>
+  <div
+    className="sc-fnlXYz hvplco sc-tabs "
+  >
+    <div
+      className="sc-fkubWd kGYvOR"
+    >
+      <div
+        className="sc-iuGMqu csTdyP"
+        onScroll={[Function]}
+      >
+        <div
+          className="sc-QplWO hbEhpq sc-tabs-bar"
+          onKeyDown={[Function]}
+          role="tablist"
+        >
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Users
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Groups
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Roles
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Policies
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Storage Location
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Properties
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-jcRDWI hrvFaX sc-tabs-item-content"
+    />
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Customized Tabs
+  </h3>
+  <div
+    className="sc-fnlXYz dZpkVR sc-tabs "
+  >
+    <div
+      className="sc-fkubWd kGYvOR"
+    >
+      <div
+        className="sc-iuGMqu csTdyP"
+        onScroll={[Function]}
+      >
+        <div
+          className="sc-QplWO hbEhpq sc-tabs-bar"
+          onKeyDown={[Function]}
+          role="tablist"
+        >
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Users
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Groups
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Roles
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Policies
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Storage Location
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe iyyueg sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Properties
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-jcRDWI jUdHsg sc-tabs-item-content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/v2/Tabs Scrollable Tabs 1`] = `
+<div
+  className="sc-bdfBwQ gFQERV"
+>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Default Tabs - scrollable 10 tabs
+  </h3>
+  <div
+    className="sc-fnlXYz hvplco sc-tabs "
+  >
+    <div
+      className="sc-fkubWd kGYvOR"
+    >
+      <div
+        className="sc-iuGMqu csTdyP"
+        onScroll={[Function]}
+      >
+        <div
+          className="sc-QplWO hbEhpq sc-tabs-bar"
+          onKeyDown={[Function]}
+          role="tablist"
+        >
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 0 Really long
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 1 Long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 2 Really long long long long long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 3 Hello
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 4 Metalk8s
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 5 ZENKO-UI
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 6
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 7
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 8
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 9
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-jcRDWI hrvFaX sc-tabs-item-content"
+    />
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Default Tabs - scrollable 20 tabs
+  </h3>
+  <div
+    className="sc-fnlXYz hvplco sc-tabs "
+  >
+    <div
+      className="sc-fkubWd kGYvOR"
+    >
+      <div
+        className="sc-iuGMqu csTdyP"
+        onScroll={[Function]}
+      >
+        <div
+          className="sc-QplWO hbEhpq sc-tabs-bar"
+          onKeyDown={[Function]}
+          role="tablist"
+        >
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 0 Really long
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 1 Long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 2 Really long long long long long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 3 Hello
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 4 Metalk8s
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 5 ZENKO-UI
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 6
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 7
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 8
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 9
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 10
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 11
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 12
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 13
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 14
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 15
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 16
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 17
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 18
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 19
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-jcRDWI hrvFaX sc-tabs-item-content"
+    />
+  </div>
+  <h3
+    className="sc-gsTCUz jXevwc"
+  >
+    Default Tabs - scrollable 35 tabs
+  </h3>
+  <div
+    className="sc-fnlXYz hvplco sc-tabs "
+  >
+    <div
+      className="sc-fkubWd kGYvOR"
+    >
+      <div
+        className="sc-iuGMqu csTdyP"
+        onScroll={[Function]}
+      >
+        <div
+          className="sc-QplWO hbEhpq sc-tabs-bar"
+          onKeyDown={[Function]}
+          role="tablist"
+        >
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 0 Really long
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 1 Long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 2 Really long long long long long
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 3 Hello
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 4 Metalk8s
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 5 ZENKO-UI
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 6
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 7
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 8
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 9
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 10
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 11
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 12
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 13
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 14
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 15
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 16
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 17
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 18
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 19
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 20
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 21
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 22
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 23
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 24
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 25
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 26
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 27
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 28
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 29
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 30
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 31
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 32
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 33
+            </span>
+            <span
+              className="sc-httYMd sc-gVgnHT hhdlUi juikWY sc-tabs-item-icon"
+            >
+              <span
+                className="sc-fTNIDv kCIrmP sc-text-badge "
+              >
+                0
+              </span>
+            </span>
+          </div>
+          <div
+            className="sc-jfJzZe eVWSWx sc-tabs-item "
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="tab"
+            selected={false}
+            tabIndex={-1}
+          >
+            <span
+              className="sc-httYMd sc-cbDGPM hhdlUi jSybBE sc-tabs-item-title"
+            >
+              Tab 34
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-jcRDWI hrvFaX sc-tabs-item-content"
+    />
+  </div>
+</div>
+`;
