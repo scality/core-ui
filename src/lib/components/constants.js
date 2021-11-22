@@ -74,3 +74,5 @@ export const queryTimeSpansCodes: QueryTimeSpan[] = [
 ];
 
 export const NAN_STRING = 'NAN';
+
+export type Status = 'unknown' | 'healthy' | 'warning' | 'critical';

@@ -59,6 +59,7 @@ import {
 import Card from './components/card/Card.component';
 import PrettyBytes from './components/prettybytes/PrettyBytes.component';
 import Icon from './components/icon/Icon.component';
+import StatusWrapper from './components/statuswrapper/Statuswrapper.component';
 
 export {
   LOADER_SIZE,
@@ -104,6 +105,7 @@ export {
   ErrorPage500,
   ErrorPageAuth,
   Icon,
+  StatusWrapper,
   TextBadge,
   BasicText,
   SecondaryText,
