@@ -1,5 +1,5 @@
 // @flow
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { brand } from '../../style/theme';
 import { getTheme } from '../../utils';
@@ -129,7 +129,7 @@ function Icon({
   if (!iconClass)
     throw new Error(`${name}: is not a valid icon.`);
 
-  const LazyStyledIcon = getLazyStyledIcon(iconClass);
+  const LazyStyledIcon = useMemo(() => getLazyStyledIcon(iconClass), [iconClass]);
 
   return (
     <Suspense fallback={<Loader size="base" aria-label={`${name} ${ariaLabel}`}/>}>
