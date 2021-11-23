@@ -50,7 +50,8 @@ const Wrapper = styled.div`
     if (props.hoverable && props.hovered && !props.expanded) {
       return css`
         .sc-sidebar {
-          position: absolute;
+          position: relative;
+          width: fit-content;
           height: 100%;
           background-color: ${backgroundLevel1};
           z-index: ${defaultTheme.zIndex.sidebar};
