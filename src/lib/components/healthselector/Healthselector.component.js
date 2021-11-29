@@ -15,6 +15,7 @@ type Items = Array<Item>;
 type Props = {
   size?: string,
   items: Items,
+  isOkHided?: boolean,
 };
 
 const HealthselectorContainer = styled.div`
@@ -222,7 +223,7 @@ const HealthSelectorMenuItem = styled.li`
 `;
 
 function Healthselector(props: Props) {
-  const { size, items, ...rest } = props;
+  const { size, items, isOkHided = false, ...rest } = props;
   const [open, setOpen] = useState(false);
   const [menuSize, setMenuSize] = useState();
   const [triggerSize, setTriggerSize] = useState();
@@ -288,7 +289,7 @@ function Healthselector(props: Props) {
                 <RightRowWrapper>{items[0].label || 'All'}</RightRowWrapper>
               </HealthSelectorMenuItem>
             )}
-            {!items[1].selected && (
+            {!items[1].selected && !isOkHided &&(
               <HealthSelectorMenuItem onClick={items[1].onClick}>
                 <LeftRowWrapper>{icons[1]}</LeftRowWrapper>
                 <RightRowWrapper>{items[1].label || 'Ok'}</RightRowWrapper>

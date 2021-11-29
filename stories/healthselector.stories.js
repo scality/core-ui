@@ -120,6 +120,9 @@ export const Default = () => {
 
       <Title>With custom labels (Triggering StoryBook actions)</Title>
       <Healthselector items={itemsCustomLabel} />
+
+      <Title>With the healthy items being hided</Title>
+      <Healthselector items={items} isOkHided />
     </Wrapper>
   );
 };
