@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
 import LineTemporalChart, {
@@ -11,12 +11,19 @@ import {
   dataLineChartV2,
   dataLineChartV2_readwrite,
 } from './data/linechart.js';
+import { defaultRenderTooltipSerie } from '../src/lib/components/linetemporalchart/tooltip';
 export default {
   title: 'Components/v2/LineTemporalChart',
   component: LineTemporalChart,
 };
 
 export const Default = () => {
+  const [tooltipText, setTooltipText] = useState('initial text');
+  useEffect(() => {
+    setInterval(() => {
+      setTooltipText('New text ' + new Date().toISOString());
+    }, 500);
+  }, []);
   return (
     <Wrapper>
       <BrowserRouter>
@@ -28,6 +35,26 @@ export const Default = () => {
               height={300}
               yAxisType={'default'}
               startingTimeStamp={1629306229}
+              helpText={<>
+                This charts represents lorem ipsum<br/>
+                This charts represents lorem ipsum<br/>
+                This charts represents lorem ipsum<br/>
+                This charts represents lorem ipsum<br/>
+                This charts represents lorem ipsum<br/>
+                This charts represents lorem ipsum<br/>
+              </>}
+              renderTooltipSerie={useCallback(
+                (serie, tooltipData) => {
+                  if (serie.key === 'bootstrap') {
+                    return (
+                      defaultRenderTooltipSerie(serie) +
+                      `<tr><td colspan="3">${tooltipText}</td></tr>`
+                    );
+                  }
+                  return defaultRenderTooltipSerie(serie);
+                },
+                [tooltipText],
+              )}
             />
             <LineTemporalChart
               title={'IOPS'}
