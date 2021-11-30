@@ -18,6 +18,12 @@
     "storybook:deploy": "storybook-to-ghpages"
   },
   "keywords": [],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@babel/cli": "7.6.0",
     "@babel/core": "7.6.0",
