@@ -1,11 +1,18 @@
 //@flow
-import React, { useEffect, useContext, useRef, useLayoutEffect, useMemo } from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useRef,
+  useLayoutEffect,
+  useMemo,
+} from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
 import { getThemePropSelector } from '../../utils';
 import { useCursorX, SyncedCursorChartsContext } from './SyncedCursorCharts';
 import { Handler } from 'vega-tooltip';
+import { TooltipHandlerWithPaint } from '../linetemporalchart/tooltip';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -14,6 +21,7 @@ type Props = {
   spec: Object,
   tooltipPosition?: Position,
   theme?: 'light' | 'dark' | 'custom',
+  onHover?: (dataPoint: any) => void,
   formatTooltip?: (
     value: any,
     valueToHtml: (value: any) => string,
@@ -29,6 +37,7 @@ const VegaTooltipTheme = createGlobalStyle`
     padding: 8px;
     position: fixed;
     z-index: 1000;
+    width: calc(100vw/6);
     font-family: 'Lato';
     font-size: 12px;
     border-radius: 3px;
@@ -42,6 +51,9 @@ const VegaTooltipTheme = createGlobalStyle`
       margin-bottom: 10px;
       font-size: 12px;
     }
+    table {
+      width: 100%;
+    }
     table tr td.key {
       color: ${getThemePropSelector('textSecondary')};
     }
@@ -49,7 +61,13 @@ const VegaTooltipTheme = createGlobalStyle`
 `;
 
 function VegaChart(
-  { spec, tooltipPosition = BOTTOM, theme = 'custom', formatTooltip }: Props,
+  {
+    spec,
+    tooltipPosition = BOTTOM,
+    theme = 'custom',
+    formatTooltip,
+    onHover,
+  }: Props,
   ref?: { current: typeof vega.View | null },
 ) {
   // $FlowFixMe
@@ -107,7 +125,10 @@ function VegaChart(
     };
   }
 
-  const tooltipHandler = useMemo(() =>new Handler(tooltipOptions), [theme, formatTooltip]);
+  const tooltipHandler = useMemo(
+    () => new TooltipHandlerWithPaint(tooltipOptions, onHover),
+    [theme],
+  );
   /* 
   useEffect() and useEffectLayout():
   The first effect will only render once, to initalize the chart and add the event lisener.
@@ -173,9 +194,12 @@ function VegaChart(
   useLayoutEffect(() => {
     if (vegaInstance.current) {
       const view = vegaInstance.current.view;
-      view.tooltip(tooltipHandler.call);
+      tooltipHandler.options.formatTooltip = formatTooltip;
+      tooltipHandler.onHover = onHover;
+      view.tooltip(tooltipHandler.call).run();
+      tooltipHandler.paint(); // to repaint the tooltip
     }
-  }, [tooltipHandler, vegaInstance]);
+  }, [formatTooltip, vegaInstance, onHover]);
 
   useLayoutEffect(() => {
     if (vegaInstance.current) {

@@ -139,6 +139,15 @@ export const getRelativeValue = (value: number, base: number) => {
   return value / (base || 1);
 };
 
+export const relativeDatumToOriginalDatum = <T>(datum: T, base: number): T => {
+  // $FlowFixMe
+  return Object.fromEntries(Object.entries(datum).map(([key, value]) => [key, getAbsoluteValue(value, base)]));
+}
+
+export const getAbsoluteValue = (relativeValue: number, base: number) => {
+  return relativeValue * (base || 1);
+};
+
 // extract the labels from getTooltipLabel function to define the domain in color
 export const getColorDomains = (series: Serie[]): string[] => {
   return series.map((serie) => {

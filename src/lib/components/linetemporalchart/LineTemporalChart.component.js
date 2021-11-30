@@ -1,5 +1,11 @@
 // @flow
-import React, { useMemo, useRef, useLayoutEffect, Fragment } from 'react';
+import React, {
+  useMemo,
+  useRef,
+  useLayoutEffect,
+  Fragment,
+  type Node,
+} from 'react';
 import styled, { useTheme } from 'styled-components';
 import { lighten, darken } from 'polished';
 import { expressionFunction } from 'vega';
@@ -23,12 +29,14 @@ import {
   addMissingDataPoint,
   getRelativeValue,
   getColorDomains,
+  relativeDatumToOriginalDatum,
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
 import { SmallerText } from '../text/Text.component.js';
 import Loader from '../loader/Loader.component';
 import { formatValue } from './tooltip/index.js';
+import TooltipComponent from '../tooltip/Tooltip.component';
 
 // some predefined values
 export const YAXIS_TITLE_READ_WRITE = 'write(+) / read(-)';
@@ -95,6 +103,19 @@ export type LineChartProps = {
   isLegendHided?: boolean,
   yAxisType?: 'default' | 'percentage' | 'symmetrical',
   yAxisTitle?: string,
+  helpText?: string | Node,
+  onHover?: (dataPoint: any) => void,
+  renderTooltipSerie?: (
+    {
+      color?: string,
+      isLineDashed?: boolean,
+      name: string,
+      value: string,
+      key: string,
+      unitLabel: string,
+    },
+    tooltipData: any,
+  ) => string,
 };
 
 // Custom formatter to display negative value as an absolute value in read/write, in/out chart
@@ -141,6 +162,9 @@ function LineTemporalChart({
   isLegendHided = false,
   yAxisType = 'default',
   yAxisTitle,
+  helpText,
+  renderTooltipSerie,
+  onHover,
   ...rest
 }: LineChartProps) {
   // property validation
@@ -343,7 +367,7 @@ function LineTemporalChart({
     type: 'temporal',
     axis: {
       // Refer to all the available time format: https://github.com/d3/d3-time-format#locale_format
-      format: '%d %b %H:%M',
+      format: '%d %b %H:%M:%S',
       ticks: true,
       tickCount: 5,
       labelColor: theme.textSecondary,
@@ -586,7 +610,7 @@ function LineTemporalChart({
     ? getUnitLabel(unitRange, maxValue).unitLabel
     : yAxisType === 'percentage'
     ? '%'
-    : null;
+    : '';
 
   return (
     <LineTemporalChartWrapper>
@@ -599,12 +623,42 @@ function LineTemporalChart({
           // for the chart doesn't have title
           <ChartTitleText>{title}</ChartTitleText>
         )}
+        {helpText && (
+          <TooltipComponent
+            placement="bottom-right"
+            overlay={
+              <SmallerText style={{ minWidth: '15rem', display: 'block' }}>
+                {helpText}
+              </SmallerText>
+            }
+          >
+            <i
+              className="fas fa-question-circle"
+              style={{ color: theme.buttonSecondary }}
+            ></i>
+          </TooltipComponent>
+        )}
         {isLoading && <Loader style={{ paddingLeft: `${spacing.sp4}` }} />}
       </ChartHeader>
       {/* When the chart is in loading status, we display the chart skeleton */}
       <VegaChart
         key={seriesNames}
         spec={spec}
+        onHover={(datum) => {
+          if (onHover) {
+            onHover({
+              ...datum,
+              metadata: {
+                unitLabel,
+                valueBase,
+              },
+              originalData: {
+                ...relativeDatumToOriginalDatum(datum, valueBase),
+                timestamp: datum.timestamp,
+              },
+            });
+          }
+        }}
         theme={'custom'}
         ref={vegaViewRef}
         formatTooltip={useMemo(
@@ -615,8 +669,9 @@ function LineTemporalChart({
               colorRange,
               unitLabel,
               yAxisType,
+              renderTooltipSerie,
             ),
-          [unitLabel, seriesNames],
+          [unitLabel, seriesNames, renderTooltipSerie],
         )}
       ></VegaChart>
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
