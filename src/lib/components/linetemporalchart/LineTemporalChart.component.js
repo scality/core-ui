@@ -367,7 +367,7 @@ function LineTemporalChart({
     type: 'temporal',
     axis: {
       // Refer to all the available time format: https://github.com/d3/d3-time-format#locale_format
-      format: '%d %b %H:%M:%S',
+      format: '%d %b %H:%M',
       ticks: true,
       tickCount: 5,
       labelColor: theme.textSecondary,
@@ -440,7 +440,7 @@ function LineTemporalChart({
             field: 'timestamp',
             type: 'temporal',
             axis: {
-              format: '%d %b %H:%M',
+              format: '%d %b %H:%M:%S',
               ticks: true,
               tickCount: 4,
               labelAngle: -50,
