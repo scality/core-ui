@@ -75,7 +75,7 @@ function GlobalHealthBar({
             title: null,
             stack: null,
             axis: {
-              format: '%d%b %H:%M',
+              format: '%d%b %H:%M:%S',
               ticks: true,
               tickCount: 5, //A desired number of ticks, for axes visualizing quantitative scales. The resulting number may be different so that values are “nice” (multiples of 2, 5, 10) and lie within the underlying scale’s range.
               labelFlush: 20,
