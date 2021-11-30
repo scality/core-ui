@@ -54,7 +54,7 @@ describe('HealthSelector', () => {
     expect(warningAction).toHaveBeenCalled();
  })
 
- test('it should display the default health selector without the ok item if the isOkHided on', () => { 
+ test('it should display the default health selector without the ok item if the isOkHidden on', () => { 
 
     const warningAction = jest.fn();
 
@@ -82,7 +82,7 @@ describe('HealthSelector', () => {
       ];
 
       // verify that the default text is displayed
-    const { getByText, queryByText } = render(<HealthSelector items={items} isOkHided />);
+    const { getByText, queryByText } = render(<HealthSelector items={items} isOkHidden />);
     const selectorText = getByText(/all/i);
     expect(selectorText).toBeInTheDocument();
 
