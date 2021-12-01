@@ -100,7 +100,7 @@ export type LineChartProps = {
   startingTimeStamp: number, // pass to addMissingDataPoint()
   unitRange?: { threshold: number, label: string }[],
   isLoading?: boolean, // if to display a loader next to the title
-  isLegendHided?: boolean,
+  isLegendHidden?: boolean,
   yAxisType?: 'default' | 'percentage' | 'symmetrical',
   yAxisTitle?: string,
   helpText?: string | Node,
@@ -159,7 +159,7 @@ function LineTemporalChart({
   startingTimeStamp,
   unitRange,
   isLoading = false,
-  isLegendHided = false,
+  isLegendHidden = false,
   yAxisType = 'default',
   yAxisTitle,
   helpText,
@@ -675,7 +675,7 @@ function LineTemporalChart({
         )}
       ></VegaChart>
       {/* if it's for read/write and in/out graph, we only display the legends for the instances. */}
-      {!isLegendHided && (
+      {!isLegendHidden && (
         <Legends>
           {legendLabels.map(({ legend, serie, serieIndex }, index) => {
             return (
