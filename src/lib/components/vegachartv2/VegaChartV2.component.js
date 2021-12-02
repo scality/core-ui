@@ -209,7 +209,13 @@ function VegaChart(
         .remove(() => true)
         .insert(themedSpec.data.values); //only the data.values changes trigger the graph's repaint
       // For some reason source_0 is the default dataset name
-      view.change('source_0', changeset).run();
+      view
+        .change('source_0', changeset)
+        .runAsync()
+        .then(() => {
+          // call resize() after the data is loaded to make sure the width is set correctly.
+          view.resize().runAsync();
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
