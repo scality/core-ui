@@ -7,9 +7,10 @@ import { getTheme, getThemePropSelector } from '../../utils';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
+export const BOTTOMRIGHT = 'bottom-right';
 export const LEFT = 'left';
 export const RIGHT = 'right';
-type Position = typeof TOP | typeof BOTTOM | typeof LEFT | typeof RIGHT;
+type Position = typeof TOP | typeof BOTTOM | typeof BOTTOMRIGHT | typeof LEFT | typeof RIGHT;
 export type Props = {
   placement?: Position,
   overlayStyle?: {
@@ -65,6 +66,11 @@ const TooltipOverLayContainer = styled.div`
           top: calc(100% + 10px);
           left: 50%;
           transform: translateX(-50%);
+        `;
+      case BOTTOMRIGHT:
+        return css`
+          top: calc(100% - 1rem);
+          left: calc(100% + 10px);
         `;
       default:
         return css`
