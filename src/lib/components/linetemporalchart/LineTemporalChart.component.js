@@ -30,6 +30,7 @@ import {
   getRelativeValue,
   getColorDomains,
   relativeDatumToOriginalDatum,
+  normlizeVegaFieldName,
 } from './ChartUtil.js';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
@@ -477,7 +478,7 @@ function LineTemporalChart({
           const res = [];
           tooltipLabels.forEach((label) => {
             res.push({
-              field: `${label.replace('.', '\\.')}`,
+              field: `${normlizeVegaFieldName(label)}`,
               type: 'quantitative',
               title: `${label}`,
               format: '.2f',
