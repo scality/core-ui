@@ -9,6 +9,14 @@ export type VegaData = {
   isDashed: boolean,
 }[];
 
+//Given a field containing dots ".", vega is interpreting this as an accessor
+//for nested objects, breaking then the internal mechnism to retrieve tooltip
+//data from the mouse position. We are fixing it by replacing the dots by a
+//well-known string that we expect no one would use to label a serie.
+export function normlizeVegaFieldName(fieldName: string) {
+  return fieldName.replace(/(\.)/g, 'VEGADOESNTSUPPORTDOTINFIELDNAME');
+}
+
 export function convert2VegaData(
   addedMissingDataPointSeries: Serie[],
 ): VegaData {
@@ -17,7 +25,7 @@ export function convert2VegaData(
     line.data.forEach((datum) => {
       const obj = {
         timestamp: datum[0] * 1000, // convert to million second
-        label: line.getTooltipLabel(line.metricPrefix, line.resource),
+        label: normlizeVegaFieldName(line.getTooltipLabel(line.metricPrefix, line.resource)),
         resource: line.resource,
         value:
           datum[1] && datum[1] !== NAN_STRING ? Number(datum[1]) : NAN_STRING,
