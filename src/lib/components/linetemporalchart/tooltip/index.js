@@ -51,7 +51,11 @@ export class TooltipHandlerWithPaint extends Handler {
   }
 
   newCall(handler: any, event: MouseEvent, item: any, value: any) {
-    if (this.onHover && JSON.stringify(value) !== JSON.stringify(this.value)) {
+    if (
+      item &&
+      this.onHover &&
+      JSON.stringify(value) !== JSON.stringify(this.value)
+    ) {
       this.onHover(item.datum.datum);
     }
     this.handler = handler;
