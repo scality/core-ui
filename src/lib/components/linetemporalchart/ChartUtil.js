@@ -150,6 +150,8 @@ export const getRelativeValue = (value: number, base: number) => {
 // extract the labels from getTooltipLabel function to define the domain in color
 export const getColorDomains = (series: Serie[]): string[] => {
   return series.map((serie) => {
-    return serie.getTooltipLabel(serie.metricPrefix, serie.resource);
+    return normlizeVegaFieldName(
+      serie.getTooltipLabel(serie.metricPrefix, serie.resource),
+    );
   });
 };
