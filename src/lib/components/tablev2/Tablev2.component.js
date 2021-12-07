@@ -1,5 +1,5 @@
 //@flow
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
   useTable,
   useSortBy,
@@ -54,6 +54,7 @@ function Table({
   getRowId,
   children,
   sortTypes,
+  globalFilter,
   ...rest
 }: TableProps) {
   sortTypes = {
@@ -68,7 +69,7 @@ function Table({
     rows,
     prepareRow,
     selectedFlatRows,
-    state: { selectedRowIds, globalFilter },
+    state: { selectedRowIds },
     preGlobalFilteredRows,
     setGlobalFilter,
     setFilter,
@@ -96,6 +97,10 @@ function Table({
     useExpanded,
     useRowSelect,
   );
+
+  useEffect(() => {
+    setGlobalFilter(globalFilter);
+  }, [globalFilter, setGlobalFilter]);
 
   return (
     <TableContext.Provider

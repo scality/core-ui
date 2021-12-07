@@ -94,6 +94,24 @@ export const SimpleContentTable = () => {
           />
         </Table>
       </div>
+      <Title>Table with globalFilter (ol)</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          globalFilter={'ol'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            selectedId={'Rodolph Yohann'}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
+      </div>
     </Wrapper>
   );
 };
