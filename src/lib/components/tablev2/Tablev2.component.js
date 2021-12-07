@@ -16,18 +16,15 @@ import { TableWrapper } from './Tablestyle';
 export type DataRow = {
   [key: string]: any,
 };
+export type SortType =
+  | string
+  | ((rowA: DataRow, rowB: DataRow, columnId: string, desc: boolean) => number);
+
 export type TableProps = {
   columns: {
     Header: string,
     accessor: string,
-    sortType?:
-      | string
-      | ((
-          rowA: DataRow,
-          rowB: DataRow,
-          columnId: string,
-          desc: boolean,
-        ) => number),
+    sortType?: SortType,
     cellStyle?: $Shape<CSSStyleDeclaration>,
     Cell?: React.Node,
   }[],
@@ -35,6 +32,7 @@ export type TableProps = {
   data: DataRow[],
   children: React.Node,
   getRowId?: getRowId,
+  sortTypes?: { [key: string]: SortType },
 };
 
 const TableContext = React.createContext<any>(null);
@@ -55,12 +53,14 @@ function Table({
   defaultSortingKey,
   getRowId,
   children,
+  sortTypes,
   ...rest
 }: TableProps) {
-  const sortTypes = {
+  sortTypes = {
     health: (row1, row2) => {
       return compareHealth(row2.values.health, row1.values.health);
     },
+    ...sortTypes,
   };
 
   const {
