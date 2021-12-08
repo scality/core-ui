@@ -1,5 +1,6 @@
 //@flow
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useEffect } from 'react';
 import {
   useTable,
   useSortBy,
@@ -33,6 +34,7 @@ export type TableProps = {
   children: React.Node,
   getRowId?: getRowId,
   sortTypes?: { [key: string]: SortType },
+  globalFilter?: string,
 };
 
 const TableContext = React.createContext<any>(null);
