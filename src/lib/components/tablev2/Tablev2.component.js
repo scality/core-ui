@@ -103,7 +103,7 @@ function Table({
 
   useEffect(() => {
     setGlobalFilter(globalFilter);
-  }, [globalFilter, setGlobalFilter]);
+  }, [globalFilter, setGlobalFilter, data]);
 
   return (
     <TableContext.Provider
