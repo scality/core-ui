@@ -1,5 +1,10 @@
-import initStoryshots from "@storybook/addon-storyshots";
+import {{properCase name}} from './{{properCase name}}.component';
+import React from 'react';
+import { render } from '@testing-library/react';
 
-initStoryshots({
-  configPath: "src/lib/components/{{lowerCase name}}/__snapshots__"
+describe('{{properCase name}}', () => {
+  test('default test', () => {
+    const { debug } = render(<{{properCase name}} />);
+    debug();
+  });
 });

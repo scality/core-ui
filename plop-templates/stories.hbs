@@ -1,13 +1,18 @@
 //@flow
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
 import {{properCase name}} from "../src/lib/components/{{lowerCase name}}/{{properCase name}}.component";
+import { Wrapper, Title } from './common';
 
-storiesOf("{{properCase name}}", module)
-  .add("Default", () => {
-    return (
-      <div>
-          <{{properCase name}} />
-      </div>
-    );
-  });
+export default {
+  title: 'Components/{{properCase name}}',
+  component: {{properCase name}},
+};
+
+export const Default = () => {
+  return (
+  <Wrapper>
+    <Title>Basic usage</Title>
+    <{{properCase name}} />
+  </Wrapper>
+  );
+};
