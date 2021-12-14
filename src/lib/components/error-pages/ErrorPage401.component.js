@@ -29,17 +29,15 @@ const translations = {
 };
 
 type Props = {
-  btnLink?: string,
   supportLink?: string,
   locale?: string,
-  history?: Object,
+  onReturnHomeClick?: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
 };
 
 function ErrorPage401({
-  btnLink = '/',
   supportLink = null,
   locale = 'en',
-  history,
+  onReturnHomeClick,
   ...rest
 }: Props) {
   if (!translations[locale]) locale = 'en';
@@ -69,11 +67,11 @@ function ErrorPage401({
         </Description>
       </Row>
 
-      {history && (
+      {onReturnHomeClick && (
         <Button
           label={translations[locale].return_home}
           variant="secondary"
-          onClick={() => history.push(btnLink)}
+          onClick={onReturnHomeClick}
         />
       )}
     </ErrorPageContainer>

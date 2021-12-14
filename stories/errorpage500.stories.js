@@ -11,7 +11,7 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPage500 btnLink="/"/>
+      <ErrorPage500 onReturnHomeClick={() => {}} />
     </Wrapper>
   );
 };
@@ -19,7 +19,10 @@ export const Default = () => {
 export const WithSupportLink = () => {
   return (
     <Wrapper>
-      <ErrorPage500 btnLink="/" supportLink="https://www.scality.com/support/"/>
+      <ErrorPage500
+        supportLink="https://www.scality.com/support/"
+        onReturnHomeClick={() => {}}
+      />
     </Wrapper>
   );
 };
@@ -27,7 +30,11 @@ export const WithSupportLink = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPage500 btnLink="/" supportLink="https://www.scality.com/support/" locale="fr"/>
+      <ErrorPage500
+        supportLink="https://www.scality.com/support/"
+        locale="fr"
+        onReturnHomeClick={() => {}}
+      />
     </Wrapper>
   );
 };

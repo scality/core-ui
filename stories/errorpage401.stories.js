@@ -12,9 +12,8 @@ export const Default = () => {
   return (
     <Wrapper>
       <ErrorPage401
-        btnLink="/"
         supportLink="https://www.scality.com/support/"
-        history={{ push: () => {} }}
+        onReturnHomeClick={() => {}}
       />
     </Wrapper>
   );
@@ -24,10 +23,9 @@ export const WithLocale = () => {
   return (
     <Wrapper>
       <ErrorPage401
-        btnLink="/"
         locale="fr"
         supportLink="https://www.scality.com/support/"
-        history={{ push: () => {} }}
+        onReturnHomeClick={() => {}}
       />
     </Wrapper>
   );

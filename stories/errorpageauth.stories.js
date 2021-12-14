@@ -11,7 +11,7 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPageAuth btnLink="/" />
+      <ErrorPageAuth onReturnHomeClick={() => {}} />
     </Wrapper>
   );
 };
@@ -20,8 +20,8 @@ export const WithSupportLink = () => {
   return (
     <Wrapper>
       <ErrorPageAuth
-        btnLink="/"
         supportLink="https://www.scality.com/support/"
+        onReturnHomeClick={() => {}}
       />
     </Wrapper>
   );
