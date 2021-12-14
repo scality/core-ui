@@ -11,7 +11,7 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPage404 btnLink="/"/>
+      <ErrorPage404 btnLink="/" history={{ push: () => {} }} />
     </Wrapper>
   );
 };
@@ -19,7 +19,7 @@ export const Default = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPage404 btnLink="/" locale="fr"/>
+      <ErrorPage404 btnLink="/" locale="fr" history={{ push: () => {} }} />
     </Wrapper>
   );
 };

@@ -1,50 +1,15 @@
 //@flow
 import React from 'react';
-import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
-import Button from '../button/Button.component';
-
-const ErrorPageContainer = styled.div`
-  background-color: ${getThemePropSelector('backgroundLevel1')};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-const Title = styled.h2`
-  color: ${getThemePropSelector('textPrimary')};
-  margin: 0;
-  margin-left: ${defaultTheme.padding.large};
-`;
-
-const Description = styled.div`
-  color: ${getThemePropSelector('textPrimary')};
-  font-size: ${defaultTheme.fontSize.larger};
-  text-align: center;
-  padding: ${defaultTheme.padding.larger};
-`;
-
-const DescriptionContent = styled.p`
-  margin: 0;
-  padding: ${defaultTheme.padding.smaller};
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const WarningIcon = styled.i`
-  color: ${getThemePropSelector('statusWarning')};
-`;
-
-const Link = styled.a`
-  color: ${getThemePropSelector('textLink')};
-  text-decoration: none;
-`;
+import {
+  ErrorPageContainer,
+  Row,
+  WarningIcon,
+  Title,
+  Description,
+  DescriptionContent,
+  Link,
+} from './ErrorPageStyle';
+import Button from '../buttonv2/Buttonv2.component';
 
 const translations = {
   en: {
@@ -72,12 +37,14 @@ type Props = {
   btnLink?: string,
   supportLink?: string,
   locale?: string,
+  history?: Object,
 };
 
 function ErrorPage500({
   btnLink = '/',
   supportLink = null,
   locale = 'en',
+  history,
   ...rest
 }: Props) {
   if (!translations[locale]) locale = 'en';
@@ -109,13 +76,13 @@ function ErrorPage500({
           )}
         </Description>
       </Row>
-      <Button
-        text={translations[locale].return_home}
-        size="large"
-        type="button"
-        variant="buttonSecondary"
-        href={btnLink}
-      />
+      {history && (
+        <Button
+          label={translations[locale].return_home}
+          variant="secondary"
+          onClick={() => history.push(btnLink)}
+        />
+      )}
     </ErrorPageContainer>
   );
 }
