@@ -11,7 +11,9 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPage404 btnLink="/"/>
+      <div style={{ height: '100vh' }}>
+        <ErrorPage404 onReturnHomeClick={() => {}} />
+      </div>
     </Wrapper>
   );
 };
@@ -19,7 +21,9 @@ export const Default = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPage404 btnLink="/" locale="fr"/>
+      <div style={{ height: '100vh' }}>
+        <ErrorPage404 locale="fr" onReturnHomeClick={() => {}} />
+      </div>
     </Wrapper>
   );
 };

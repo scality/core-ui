@@ -1,45 +1,14 @@
 //@flow
 import React from 'react';
-import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
-import Button from '../button/Button.component';
-
-const ErrorPageContainer = styled.div`
-  background-color: ${getThemePropSelector('backgroundLevel1')};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-const Title = styled.h2`
-  color: ${getThemePropSelector('textPrimary')};
-  margin: 0;
-  margin-left: ${defaultTheme.padding.large};
-`;
-
-const Description = styled.div`
-  color: ${getThemePropSelector('textPrimary')};
-  font-size: ${defaultTheme.fontSize.larger};
-  text-align: center;
-  padding: ${defaultTheme.padding.larger};
-`;
-
-const DescriptionContent = styled.p`
-  margin: 0;
-  padding: ${defaultTheme.padding.smaller};
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const WarningIcon = styled.i`
-  color: ${getThemePropSelector('statusWarning')};
-`;
+import {
+  ErrorPageContainer,
+  Row,
+  WarningIcon,
+  Title,
+  Description,
+  DescriptionContent,
+} from './ErrorPageStyle';
+import Button from '../buttonv2/Buttonv2.component';
 
 const translations = {
   en: {
@@ -60,11 +29,11 @@ const translations = {
 };
 
 type Props = {
-  btnLink?: string,
   locale?: string,
+  onReturnHomeClick?: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
 };
 
-function ErrorPage404({ btnLink = '/', locale = 'en', ...rest }: Props) {
+function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   if (!translations[locale]) locale = 'en';
   // Ensure the locale formatting is consistent
   locale = locale.toLowerCase();
@@ -85,13 +54,13 @@ function ErrorPage404({ btnLink = '/', locale = 'en', ...rest }: Props) {
           </DescriptionContent>
         </Description>
       </Row>
-      <Button
-        text={translations[locale].return_home}
-        size="large"
-        type="button"
-        variant="buttonSecondary"
-        href={btnLink}
-      />
+      {onReturnHomeClick && (
+        <Button
+          label={translations[locale].return_home}
+          variant="secondary"
+          onReturnHomeClick={onReturnHomeClick}
+        />
+      )}
     </ErrorPageContainer>
   );
 }

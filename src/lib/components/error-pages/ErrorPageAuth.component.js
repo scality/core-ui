@@ -1,49 +1,14 @@
 //@flow
 import React from 'react';
-import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
-
-const ErrorPageContainer = styled.div`
-  background-color: ${getThemePropSelector('backgroundLevel1')};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-const Title = styled.h2`
-  color: ${getThemePropSelector('textPrimary')};
-  margin: 0;
-  margin-left: ${defaultTheme.padding.large};
-`;
-
-const Description = styled.div`
-  color: ${getThemePropSelector('textPrimary')};
-  font-size: ${defaultTheme.fontSize.larger};
-  text-align: center;
-  padding: ${defaultTheme.padding.larger};
-`;
-
-const DescriptionContent = styled.p`
-  margin: 0;
-  padding: ${defaultTheme.padding.smaller};
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const InfoIcon = styled.i`
-  color: ${getThemePropSelector('textPrimary')};
-`;
-
-const Link = styled.a`
-  color: ${getThemePropSelector('textLink')};
-  text-decoration: none;
-`;
+import {
+  ErrorPageContainer,
+  Row,
+  InfoIcon,
+  Title,
+  Description,
+  DescriptionContent,
+  Link,
+} from './ErrorPageStyle';
 
 const translations = {
   en: {

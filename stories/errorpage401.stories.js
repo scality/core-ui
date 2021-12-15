@@ -1,28 +1,18 @@
 //@flow
 import React from 'react';
-import ErrorPageAuth from '../src/lib/components/error-pages/ErrorPageAuth.component';
+import ErrorPage401 from '../src/lib/components/error-pages/ErrorPage401.component';
 import { Wrapper } from './common';
 
 export default {
-  title: 'Components/Navigation/ErrorPages/Auth',
-  component: ErrorPageAuth,
+  title: 'Components/Navigation/ErrorPages/401',
+  component: ErrorPage401,
 };
 
 export const Default = () => {
   return (
     <Wrapper>
       <div style={{ height: '100vh' }}>
-        <ErrorPageAuth onReturnHomeClick={() => {}} />
-      </div>
-    </Wrapper>
-  );
-};
-
-export const WithSupportLink = () => {
-  return (
-    <Wrapper>
-      <div style={{ height: '100vh' }}>
-        <ErrorPageAuth
+        <ErrorPage401
           supportLink="https://www.scality.com/support/"
           onReturnHomeClick={() => {}}
         />
@@ -35,10 +25,10 @@ export const WithLocale = () => {
   return (
     <Wrapper>
       <div style={{ height: '100vh' }}>
-        <ErrorPageAuth
-          btnLink="/"
-          supportLink="https://www.scality.com/support/"
+        <ErrorPage401
           locale="fr"
+          supportLink="https://www.scality.com/support/"
+          onReturnHomeClick={() => {}}
         />
       </div>
     </Wrapper>

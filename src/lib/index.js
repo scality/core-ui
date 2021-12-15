@@ -41,6 +41,7 @@ import ConstrainedText from './components/constrainedtext/Constrainedtext.compon
 import EmptyState from './components/emptystate/Emptystate.component';
 import EmptyTable from './components/emptytable/Emptytable.component';
 import ScrollbarWrapper from './components/scrollbarwrapper/ScrollbarWrapper.component';
+import ErrorPage401 from './components/error-pages/ErrorPage401.component';
 import ErrorPage404 from './components/error-pages/ErrorPage404.component';
 import ErrorPage500 from './components/error-pages/ErrorPage500.component';
 import ErrorPageAuth from './components/error-pages/ErrorPageAuth.component';
@@ -101,6 +102,7 @@ export {
   EmptyState,
   EmptyTable,
   ScrollbarWrapper,
+  ErrorPage401,
   ErrorPage404,
   ErrorPage500,
   ErrorPageAuth,

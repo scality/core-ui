@@ -13,23 +13,18 @@ import Button from '../buttonv2/Buttonv2.component';
 
 const translations = {
   en: {
-    unexpected_error: 'Unexpected Error',
-    error_desc: 'An error occured and your request cannot be completed.',
-    should_do:
-      'You might check the url, or contact your admin if the error remains.',
-    return_home: 'Return Home',
-    may_also_contact: 'You may also contact ',
+    unexpected_error: 'Not authorized',
+    error_desc: `You don't have permission to view this page using the credentials that you supplied.`,
+    may_also_contact: 'You may contact ',
     to_report_issue: ' to report this issue.',
+    return_home: 'Return Home',
   },
   fr: {
-    unexpected_error: 'Erreur inattendue',
-    error_desc:
-      "Une erreur s'est produite et votre demande ne peut être complétée.",
-    should_do:
-      "Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.",
-    return_home: "Retour à l'accueil",
-    may_also_contact: 'Vous pouvez également contacter le ',
+    unexpected_error: `Vous n'êtes pas autorisé`,
+    error_desc: `Vous n'êtes pas autorisé à afficher cette page en utilisant les informations d'identification que vous avez fournies.`,
+    may_also_contact: 'Vous pouvez contacter le ',
     to_report_issue: ' pour signaler ce problème.',
+    return_home: "Retour à l'accueil",
   },
 };
 
@@ -39,7 +34,7 @@ type Props = {
   onReturnHomeClick?: (event: SyntheticMouseEvent<HTMLButtonElement>) => void,
 };
 
-function ErrorPage500({
+function ErrorPage401({
   supportLink = null,
   locale = 'en',
   onReturnHomeClick,
@@ -50,7 +45,7 @@ function ErrorPage500({
   locale = locale.toLowerCase();
 
   return (
-    <ErrorPageContainer className="sc-error-page500" {...rest}>
+    <ErrorPageContainer className="sc-error-page401" {...rest}>
       <Row>
         <WarningIcon className="fas fa-exclamation-triangle fa-2x" />
         <Title>{translations[locale].unexpected_error}</Title>
@@ -59,9 +54,6 @@ function ErrorPage500({
         <Description>
           <DescriptionContent>
             {translations[locale].error_desc}
-          </DescriptionContent>
-          <DescriptionContent>
-            {translations[locale].should_do}
           </DescriptionContent>
           {supportLink && (
             <DescriptionContent>
@@ -74,15 +66,16 @@ function ErrorPage500({
           )}
         </Description>
       </Row>
+
       {onReturnHomeClick && (
         <Button
           label={translations[locale].return_home}
           variant="secondary"
-          onReturnHomeClick={onReturnHomeClick}
+          onClick={onReturnHomeClick}
         />
       )}
     </ErrorPageContainer>
   );
 }
 
-export default ErrorPage500;
+export default ErrorPage401;
