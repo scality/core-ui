@@ -11,7 +11,9 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPage500 onReturnHomeClick={() => {}} />
+      <div style={{ height: '100vh' }}>
+        <ErrorPage500 onReturnHomeClick={() => {}} />
+      </div>
     </Wrapper>
   );
 };
@@ -19,10 +21,12 @@ export const Default = () => {
 export const WithSupportLink = () => {
   return (
     <Wrapper>
-      <ErrorPage500
-        supportLink="https://www.scality.com/support/"
-        onReturnHomeClick={() => {}}
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPage500
+          supportLink="https://www.scality.com/support/"
+          onReturnHomeClick={() => {}}
+        />
+      </div>
     </Wrapper>
   );
 };
@@ -30,11 +34,13 @@ export const WithSupportLink = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPage500
-        supportLink="https://www.scality.com/support/"
-        locale="fr"
-        onReturnHomeClick={() => {}}
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPage500
+          supportLink="https://www.scality.com/support/"
+          locale="fr"
+          onReturnHomeClick={() => {}}
+        />
+      </div>
     </Wrapper>
   );
 };

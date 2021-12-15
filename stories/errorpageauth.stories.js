@@ -11,7 +11,9 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPageAuth onReturnHomeClick={() => {}} />
+      <div style={{ height: '100vh' }}>
+        <ErrorPageAuth onReturnHomeClick={() => {}} />
+      </div>
     </Wrapper>
   );
 };
@@ -19,10 +21,12 @@ export const Default = () => {
 export const WithSupportLink = () => {
   return (
     <Wrapper>
-      <ErrorPageAuth
-        supportLink="https://www.scality.com/support/"
-        onReturnHomeClick={() => {}}
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPageAuth
+          supportLink="https://www.scality.com/support/"
+          onReturnHomeClick={() => {}}
+        />
+      </div>
     </Wrapper>
   );
 };
@@ -30,11 +34,13 @@ export const WithSupportLink = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPageAuth
-        btnLink="/"
-        supportLink="https://www.scality.com/support/"
-        locale="fr"
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPageAuth
+          btnLink="/"
+          supportLink="https://www.scality.com/support/"
+          locale="fr"
+        />
+      </div>
     </Wrapper>
   );
 };

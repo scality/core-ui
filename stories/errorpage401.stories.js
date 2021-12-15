@@ -11,10 +11,12 @@ export default {
 export const Default = () => {
   return (
     <Wrapper>
-      <ErrorPage401
-        supportLink="https://www.scality.com/support/"
-        onReturnHomeClick={() => {}}
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPage401
+          supportLink="https://www.scality.com/support/"
+          onReturnHomeClick={() => {}}
+        />
+      </div>
     </Wrapper>
   );
 };
@@ -22,11 +24,13 @@ export const Default = () => {
 export const WithLocale = () => {
   return (
     <Wrapper>
-      <ErrorPage401
-        locale="fr"
-        supportLink="https://www.scality.com/support/"
-        onReturnHomeClick={() => {}}
-      />
+      <div style={{ height: '100vh' }}>
+        <ErrorPage401
+          locale="fr"
+          supportLink="https://www.scality.com/support/"
+          onReturnHomeClick={() => {}}
+        />
+      </div>
     </Wrapper>
   );
 };
