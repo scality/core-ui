@@ -16,6 +16,7 @@ import { useTableContext } from './Tablev2.component';
 import { convertRemToPixels } from './TableUtil';
 import { Row } from 'react-table'; // may not import the type correctly
 import Tooltip from '../tooltip/Tooltip.component.js';
+import ConstrainedText from '../constrainedtext/Constrainedtext.component';
 
 export const tableRowHeight = {
   // in rem unit
@@ -117,7 +118,18 @@ export default function SingleSelectableContent({
 
             return (
               <div {...cellProps} className="td">
-                {cell.render('Cell')}
+                {
+                  // if cell.column.cell is defined that means we have a custom cell renderer
+                  // otherwise it should be just a string and we can use the constrainted text component
+                  !cell.column.cell && typeof cell.value === 'string' ? (
+                    <ConstrainedText
+                      text={cell.value}
+                      tooltipPlacement={index === 0 ? 'bottom' : 'top'}
+                    />
+                  ) : (
+                    cell.render('Cell')
+                  )
+                }
               </div>
             );
           })}
