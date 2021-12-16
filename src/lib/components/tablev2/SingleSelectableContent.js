@@ -106,7 +106,7 @@ export default function SingleSelectableContent({
               return (
                 <div {...cellProps} className="td">
                   <Tooltip
-                    placement="top"
+                    placement={index === 0 ? 'bottom' : 'top'}
                     overlay={<TooltipContent>unknown</TooltipContent>}
                   >
                     <UnknownIcon className="fas fa-minus"></UnknownIcon>
