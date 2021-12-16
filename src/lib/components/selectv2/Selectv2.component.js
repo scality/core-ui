@@ -25,16 +25,15 @@ const NOPT_SEARCH = 8;
 export type OptionProps = {
   disabled?: boolean,
   icon?: Element<typeof Icon>,
-  children: string,
+  children?: string | Node,
   value: string,
 };
 
 export function Option(_: OptionProps) {
   const context = useContext(SelectContext);
-
   if (!context)
     throw new Error('Option cannot be rendered outside the Select component');
-  return null;
+  return _.children;
 }
 
 const Input = (props) => {
@@ -216,7 +215,7 @@ const ValueContainer = ({ children, ...props }) => {
 export type SelectProps = {
   placeholder?: string,
   disabled?: boolean,
-  children: Node,
+  children?: Node,
   defaultValue?: string,
   value?: string,
   onChange: (newValue: string) => void,
@@ -265,7 +264,7 @@ function SelectBox({
           }: OptionProps = child.props;
           return {
             value: value,
-            label: children,
+            label: children || '',
             isDisabled: disabled || false,
             icon: icon,
             optionProps: { ...rest },
@@ -315,7 +314,7 @@ function SelectBox({
             value={
               searchSelection || options.find((opt) => opt.value === value)
             }
-            defaultValue={options.find((opt) => opt.value === defaultValue)}
+            defaultValue={defaultValue}
             inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
             keyboardFocusEnabled={keyboardFocusEnabled}

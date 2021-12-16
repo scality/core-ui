@@ -90,10 +90,9 @@ describe('SelectV2', () => {
   });
 
   test.each(variants)('should display default value', (variant) => {
+    const options = [{ value: 0, label: 'Label 0' }];
     const { container } = render(
-      <Select variant={variant} defaultValue="0">
-        <Option value="0">{'Label 0'}</Option>
-      </Select>,
+      <Select variant={variant} defaultValue={options[0]} options={options} />,
     );
 
     expect(container.querySelector('.sc-select__placeholder')).toBeNull();
@@ -201,7 +200,9 @@ describe('SelectV2', () => {
 
     // unselect option
     toggleSelect(container); // reopen select
-    expect(getByTestId('option0')).toHaveClass('sc-select__option--is-selected');
+    expect(getByTestId('option0')).toHaveClass(
+      'sc-select__option--is-selected',
+    );
     // should be focused on the selected option
     expect(getByTestId('option0')).toHaveAttribute('aria-selected', 'true');
     userEvent.click(getByTestId('option1')); // click on another option

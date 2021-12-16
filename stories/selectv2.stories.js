@@ -51,7 +51,7 @@ export const Default = () => (
       <Title>Default Select</Title>
       <CustomSelect
         opts={defaultOptions}
-        defaultValue={defaultOptions[1].value}
+        defaultValue={defaultOptions[1]}
         placeholder={'Custom placeholder...'}
       />
       <Title>Disabled Select</Title>
@@ -68,7 +68,7 @@ export const Default = () => (
       <CustomSelect opts={generateOptions(1000)} />
       <Title>With scroll/search (more than 8 items)</Title>
       <CustomSelect
-        defaultValue={optionsWithSearchBar[1].value}
+        defaultValue={optionsWithSearchBar[1]}
         opts={optionsWithSearchBar}
       />
       <div
@@ -93,7 +93,7 @@ export const Rounded = () => (
       <CustomSelect
         variant="rounded"
         opts={defaultOptions}
-        defaultValue={defaultOptions[1].value}
+        defaultValue={defaultOptions[1]}
         placeholder={'Custom placeholder...'}
       />
       <Title>Disabled Select</Title>
@@ -101,7 +101,7 @@ export const Rounded = () => (
         variant="rounded"
         disabled
         opts={defaultOptions}
-        defaultValue={defaultOptions[1].value}
+        defaultValue={defaultOptions[1]}
       />
       <Title>Without options</Title>
       <Select variant="rounded" onChange={null} />
