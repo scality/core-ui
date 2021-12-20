@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import React, { useMemo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 import {
@@ -49,6 +49,8 @@ export default function SingleSelectableContent({
   selectedId,
   onRowSelected,
 }: SingleSelectableContentProps) {
+  const [hasScrollbar, setHasScrollbar] = React.useState(false);
+
   if (!['h32', 'h40', 'h48', 'h64'].includes(rowHeight)) {
     console.error(
       `Invalid rowHeight props, expected h32, h40, h48, or h64 but received ${rowHeight}`,
@@ -100,6 +102,7 @@ export default function SingleSelectableContent({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
+                'flex-grow': 1,
               },
               role: 'gridcell',
             });
@@ -146,11 +149,28 @@ export default function SingleSelectableContent({
     ],
   );
 
+  const scrollbarWidth = useMemo(() => {
+    const scrollDiv = document.createElement('div');
+    scrollDiv.setAttribute(
+      'style',
+      'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
+    );
+    const body = document.body || {};
+    body.appendChild(scrollDiv);
+    const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    body.removeChild(scrollDiv);
+    return scrollbarWidth;
+  }, []);
+
   return (
     <>
       <div className="thead" role="rowgroup">
         {headerGroups.map((headerGroup) => (
-          <HeadRow {...headerGroup.getHeaderGroupProps()}>
+          <HeadRow
+            {...headerGroup.getHeaderGroupProps()}
+            hasScrollBar={hasScrollbar}
+            scrollBarWidth={scrollbarWidth}
+          >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
@@ -189,6 +209,15 @@ export default function SingleSelectableContent({
               itemCount={rows.length} // how many items we are going to render
               itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
               width={width}
+              onItemsRendered={({
+                visibleStartIndex,
+                visibleStopIndex,
+                overscanStopIndex,
+              }) => {
+                setHasScrollbar(
+                  visibleStartIndex - visibleStopIndex <= overscanStopIndex,
+                );
+              }}
             >
               {RenderRow}
             </List>

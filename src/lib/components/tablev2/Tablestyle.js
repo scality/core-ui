@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme.js';
 
+const borderSize = '4px';
+
 export const SortIncentive = styled.span`
   position: absolute;
   display: none;
@@ -26,7 +28,10 @@ export const TableHeader = styled.div`
 
 export const HeadRow = styled.div`
   height: 2.286rem;
-  width: 100% !important;
+  width: ${(props) =>
+    props.hasScrollBar
+      ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important;` // -4px for border
+      : '100% !important;'} 
   table-layout: fixed;
   cursor: pointer;
   color: ${(props) => getTheme(props).textPrimary};
@@ -62,11 +67,12 @@ export const TableRow = styled.div`
     if (props.selectedId && props.selectedId === props.row.id) {
       return css`
         background-color: ${(props) => getTheme(props).highlight};
-        border-right: 4px solid ${(props) => getTheme(props).selectedActive};
+        border-right: ${borderSize} solid
+          ${(props) => getTheme(props).selectedActive};
       `;
     } else {
       return css`
-        border-right: 4px solid
+        border-right: ${borderSize} solid
           ${(props) => getTheme(props)[props.backgroundVariant]};
       `;
     }
