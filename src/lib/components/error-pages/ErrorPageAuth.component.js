@@ -24,7 +24,7 @@ const translations = {
     should_do:
       "Si ce message persiste, vous pouvez essayer d'actualiser cette page.",
     may_also_contact: 'Vous pouvez également contacter le ',
-    to_report_issue: ' pour signaler ce problème.',
+    to_report_issue: ' pour signaler le problème.',
   },
 };
 

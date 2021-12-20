@@ -14,16 +14,16 @@ import Button from '../buttonv2/Buttonv2.component';
 const translations = {
   en: {
     unexpected_error: 'Not authorized',
-    error_desc: `You don't have permission to view this page using the credentials that you supplied.`,
-    may_also_contact: 'You may contact ',
+    error_desc: `You don't have permission to view this page using the credentials you have supplied.`,
+    may_also_contact: 'You can contact ',
     to_report_issue: ' to report this issue.',
     return_home: 'Return Home',
   },
   fr: {
-    unexpected_error: `Vous n'êtes pas autorisé`,
-    error_desc: `Vous n'êtes pas autorisé à afficher cette page en utilisant les informations d'identification que vous avez fournies.`,
+    unexpected_error: `Accès refusé`,
+    error_desc: `Les identifiants fournis ne vous permettent pas de consulter cette page.`,
     may_also_contact: 'Vous pouvez contacter le ',
-    to_report_issue: ' pour signaler ce problème.',
+    to_report_issue: ' pour signaler le problème.',
     return_home: "Retour à l'accueil",
   },
 };

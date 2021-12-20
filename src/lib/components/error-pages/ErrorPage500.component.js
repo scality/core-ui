@@ -29,7 +29,7 @@ const translations = {
       "Vous pouvez vérifier l'url, ou contacter votre administrateur si l'erreur persiste.",
     return_home: "Retour à l'accueil",
     may_also_contact: 'Vous pouvez également contacter le ',
-    to_report_issue: ' pour signaler ce problème.',
+    to_report_issue: ' pour signaler le problème.',
   },
 };
 
