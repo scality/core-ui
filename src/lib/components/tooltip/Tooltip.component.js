@@ -1,16 +1,39 @@
 //@flow
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import type { Node } from 'react';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
+import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
 export const BOTTOMRIGHT = 'bottom-right';
 export const LEFT = 'left';
+export const TOPSTART = 'top-start';
+export const TOPEND = 'top-end';
 export const RIGHT = 'right';
-type Position = typeof TOP | typeof BOTTOM | typeof BOTTOMRIGHT | typeof LEFT | typeof RIGHT;
+export const RIGHTSTART = 'right-start';
+export const RIGHTEND = 'right-end';
+export const BOTTOMEND = 'bottom-end';
+export const BOTTOMSTART = 'bottom-start';
+export const LEFTSTART = 'left-start';
+export const LEFTEND = 'left-end';
+
+type Position =
+  | typeof TOP
+  | typeof BOTTOM
+  | typeof BOTTOMRIGHT
+  | typeof LEFT
+  | typeof RIGHT
+  | typeof TOPSTART
+  | typeof TOPEND
+  | typeof RIGHTSTART
+  | typeof RIGHTEND
+  | typeof BOTTOMEND
+  | typeof BOTTOMSTART
+  | typeof LEFTEND
+  | typeof LEFTSTART;
 export type Props = {
   placement?: Position,
   overlayStyle?: {
@@ -30,6 +53,7 @@ const TooltipContainer = styled.div`
 
 const TooltipOverLayContainer = styled.div`
   display: flex;
+  opacity: 0;
   position: absolute;
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
@@ -47,38 +71,6 @@ const TooltipOverLayContainer = styled.div`
   text-align: center;
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
-  ${(props) => {
-    switch (props.placement) {
-      case LEFT:
-        return css`
-          right: calc(100% + 10px);
-          top: 50%;
-          transform: translateY(-50%);
-        `;
-      case RIGHT:
-        return css`
-          left: calc(100% + 10px);
-          top: 50%;
-          transform: translateY(-50%);
-        `;
-      case BOTTOM:
-        return css`
-          top: calc(100% + 10px);
-          left: 50%;
-          transform: translateX(-50%);
-        `;
-      case BOTTOMRIGHT:
-        return css`
-          top: calc(100% - 1rem);
-          left: calc(100% + 10px);
-        `;
-      default:
-        return css`
-          bottom: calc(100% + 10px);
-          left: 50%;
-          transform: translateX(-50%);
-        `;
-    }
   }};
 `;
 
@@ -91,9 +83,29 @@ function Tooltip({
   overlayStyle,
   children,
   overlay,
+  middleware = [offset(5), shift(), flip()],
   ...rest
 }: Props) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+
+  const tooltipRef = useRef(null);
+  const childrenRef = useRef(null);
+
+  useEffect(() => {
+    if (childrenRef.current && tooltipRef.current) {
+      computePosition(childrenRef.current, tooltipRef.current, {
+        placement,
+        middleware: [...middleware],
+      }).then(({ x, y }) => {
+        Object.assign(tooltipRef.current.style, {
+          opacity: 1, // we set opacity to 1 to make sure the tooltip is not displayed before the position is computed
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tooltipRef.current, childrenRef.current]);
 
   return (
     <TooltipContainer
@@ -103,6 +115,7 @@ function Tooltip({
     >
       {isTooltipVisible && overlay ? (
         <TooltipOverLayContainer
+          ref={tooltipRef}
           className="sc-tooltip-overlay"
           placement={placement}
           overlayStyle={overlayStyle}
@@ -112,7 +125,7 @@ function Tooltip({
           </TooltipText>
         </TooltipOverLayContainer>
       ) : null}
-      {children}
+      <div ref={childrenRef}>{children}</div>
     </TooltipContainer>
   );
 }
