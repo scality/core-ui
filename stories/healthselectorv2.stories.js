@@ -23,7 +23,6 @@ export const Default = () => {
       <Title>Basic usage</Title>
       <HealthSelectorWrapper>
         <Healthselector
-          optionsConfiguration={optionsDefaultConfiguration}
           onChange={(value) => {
             action(value);
           }}
@@ -37,25 +36,27 @@ export const Default = () => {
             action(value);
           }}
           label="alerts"
-          optionsConfiguration={{
-            healthy: {
-              ...optionsDefaultConfiguration.healthy,
-              label: 'any label',
-              shortLabel: 'short',
-            },
-            all: {
+          options={[
+            {
               ...optionsDefaultConfiguration.all,
               label: 'label all',
               shortLabel: 'all v2',
             },
-            warning: {
+            {
+              ...optionsDefaultConfiguration.healthy,
+              label: 'any label',
+              shortLabel: 'short',
+            },
+            {
               ...optionsDefaultConfiguration.warning,
               label: 'warning',
               shortLabel: 'careful',
               icon: <Icon name="Tape" />,
               value: 'myValue',
             },
-          }}
+            optionsDefaultConfiguration.critical,
+            optionsDefaultConfiguration.unknown,
+          ]}
         />
       </HealthSelectorWrapper>
 
@@ -65,13 +66,12 @@ export const Default = () => {
           onChange={(value) => {
             action(value);
           }}
-          optionsConfiguration={{
-            ...optionsDefaultConfiguration,
-            healthy: {
-              ...optionsDefaultConfiguration.healthy,
-              isHidden: true,
-            },
-          }}
+          options={[
+            optionsDefaultConfiguration.all,
+            optionsDefaultConfiguration.warning,
+            optionsDefaultConfiguration.critical,
+            optionsDefaultConfiguration.unknown,
+          ]}
         />
       </HealthSelectorWrapper>
     </Wrapper>

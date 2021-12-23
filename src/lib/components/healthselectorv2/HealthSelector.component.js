@@ -14,16 +14,15 @@ import {
   icons,
 } from './HealthSelector.style';
 
-type optionType = 'all' | 'healthy' | 'warning' | 'critical' | 'unknown';
-type optionValue = {
+type OptionType = 'all' | 'healthy' | 'warning' | 'critical' | 'unknown';
+type OptionValue = {
   shortLabel?: string,
-  isHidden?: boolean,
 } & OptionProps;
 
-type OptionsConfiguration = { [key: optionType | string]: optionValue };
+type OptionsConfiguration = { [key: OptionType]: OptionValue };
 
 type Props = {
-  optionsConfiguration?: OptionsConfiguration,
+  options?: OptionValue[],
   label?: string,
 } & SelectProps;
 
@@ -33,53 +32,46 @@ export const optionsDefaultConfiguration: OptionsConfiguration = {
     label: 'All healthy statuses',
     shortLabel: 'All',
     value: 'all',
-    isHidden: false,
   },
   healthy: {
     icon: icons.healthy,
     label: 'Healthy only',
     shortLabel: 'Healthy',
     value: 'healthy',
-    isHidden: false,
   },
   critical: {
     icon: icons.critical,
     label: 'Critical only',
     shortLabel: 'Critical',
     value: 'critical',
-    isHidden: false,
   },
   warning: {
     icon: icons.warning,
     label: 'Warning only',
     shortLabel: 'Warning',
     value: 'warning',
-    isHidden: false,
   },
   unknown: {
     icon: icons.unknown,
     label: 'Unknown only',
     shortLabel: 'Unknown',
     value: 'unknown',
-    disabled: false,
   },
 };
 
+export const defaultOptions: OptionValue[] = Object.keys(
+  optionsDefaultConfiguration,
+).map((key) => {
+  return optionsDefaultConfiguration[key];
+});
+
 function HealthSelectorv2(props: Props) {
   const {
-    optionsConfiguration = optionsDefaultConfiguration,
+    options = defaultOptions,
     label = 'Health',
     onChange,
     ...rest
   } = props;
-
-  const options = [];
-
-  Object.keys(optionsConfiguration).forEach((key) => {
-    if (!optionsConfiguration[key].isHidden) {
-      options.push(optionsConfiguration[key]);
-    }
-  });
 
   const SingleValue = (props) => {
     return (

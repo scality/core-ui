@@ -35,13 +35,12 @@ describe('HealthSelector', () => {
   it('should not display hidden options', () => {
     const { getByTestId, queryByText } = render(
       <HealthSelector
-        optionsConfiguration={{
-          ...optionsDefaultConfiguration,
-          healthy: {
-            ...optionsDefaultConfiguration.healthy,
-            isHidden: true,
-          },
-        }}
+        options={[
+          optionsDefaultConfiguration.all,
+          optionsDefaultConfiguration.warning,
+          optionsDefaultConfiguration.critical,
+          optionsDefaultConfiguration.unknown,
+        ]}
       />,
     );
 

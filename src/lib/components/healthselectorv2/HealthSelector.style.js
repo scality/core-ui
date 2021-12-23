@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Select from '../selectv2/Selectv2.component';
 import Icon from '../icon/Icon.component';
 import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 
 export const SingleValueWrapper = styled.div`
   color: ${defaultTheme.white};
@@ -14,29 +15,6 @@ export const SingleValueWrapper = styled.div`
   align-items: center;
   height: 100%;
   top: 0;
-`;
-
-export const CSSCircle = styled.span`
-  background-color: ${(props) => defaultTheme.brand[props.variant]};
-  border-radius: 50%;
-  display: flex;
-  width: 16px;
-  height: 16px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const ThreeCirclesWrapper = styled.span`
-  display: flex;
-  width: 34px;
-  justify-content: center;
-  ${CSSCircle}:first-child {
-    margin-right: -20%;
-  }
-  ${CSSCircle}:last-child {
-    margin-left: -20%;
-  }
-  height: 16px;
 `;
 
 export const ValueIcon = styled.span`
@@ -76,11 +54,10 @@ export const OptionLabel = styled.span`
 
 export const SelectStyle = styled(Select)`
   .sc-select__control {
-    background-color: ${defaultTheme.defaultTheme.darkRebrand.buttonSecondary};
+    background-color: ${getThemePropSelector('buttonSecondary')};
 
     &.sc-select__control--is-focused {
-      background-color: ${defaultTheme.defaultTheme.darkRebrand
-        .buttonSecondary};
+      background-color: ${getThemePropSelector('buttonSecondary')};
     }
     .sc-select__value-container {
       overflow: visible;
