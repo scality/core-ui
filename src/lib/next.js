@@ -12,6 +12,7 @@ import {
 } from './components/linetemporalchart/MetricTimespanProvider.js';
 import { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
 import Select from './components/selectv2/Selectv2.component';
+import Healthselector from './components/healthselectorv2/HealthSelector.component';
 export {
   Button,
   Tabs,
@@ -22,4 +23,5 @@ export {
   SyncedCursorCharts,
   MetricsTimeSpanProvider,
   useMetricsTimeSpan,
+  Healthselector,
 };
