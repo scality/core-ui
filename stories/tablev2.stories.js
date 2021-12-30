@@ -1,5 +1,5 @@
 //@flow
-import React, { useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Table from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
@@ -66,6 +66,10 @@ export const SimpleContentTable = () => {
   };
 
   const [value, setValue] = React.useState('');
+  const onChange = (value) => {
+    setValue(value);
+  };
+
   return (
     <Wrapper>
       <Title>Non Selectable Table</Title>
@@ -95,20 +99,21 @@ export const SimpleContentTable = () => {
           />
         </Table>
       </div>
-      <Title>Table with globalFilter</Title>
+      <Title>Table with Search</Title>
       <div style={{ height: '300px', paddingTop: '20px' }}>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={(evt) => setValue(evt.target.value)}
-        />
         <Table
           columns={columns}
           data={data}
           defaultSortingKey={'health'}
           getRowId={getRowId}
-          globalFilter={value}
         >
+          <div style={{ margin: '16px 0' }}>
+            <Table.Search
+              value={value}
+              onChange={onChange}
+              displayedName="peoples"
+            />
+          </div>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"

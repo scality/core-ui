@@ -12,6 +12,7 @@ import {
   getRowId,
 } from 'react-table';
 import SingleSelectableContent from './SingleSelectableContent';
+import Search from './Search';
 import { compareHealth } from './TableUtil.js';
 import { TableWrapper } from './Tablestyle';
 export type DataRow = {
@@ -66,6 +67,18 @@ function Table({
     ...sortTypes,
   };
 
+  const stringifyFilter = React.useMemo(() => {
+    return (rows, columnId, value) => {
+      const filteredRows = rows.filter((row) => {
+        // we stringify the object to make sure we can match the value
+        return JSON.stringify(row.values)
+          .toLowerCase()
+          .includes(value.toLowerCase());
+      });
+      return filteredRows;
+    };
+  }, []);
+
   const {
     headerGroups,
     rows,
@@ -92,6 +105,7 @@ function Table({
       disableMultiSort: true,
       autoResetSortBy: false,
       sortTypes,
+      globalFilter: stringifyFilter,
     },
     useBlockLayout,
     useFilters,
@@ -102,7 +116,9 @@ function Table({
   );
 
   useEffect(() => {
-    setGlobalFilter(globalFilter);
+    if (globalFilter != undefined) {
+      setGlobalFilter(globalFilter);
+    }
   }, [globalFilter, setGlobalFilter, data]);
 
   return (
@@ -128,4 +144,5 @@ function Table({
 }
 
 Table.SingleSelectableContent = SingleSelectableContent;
+Table.Search = Search;
 export default Table;
