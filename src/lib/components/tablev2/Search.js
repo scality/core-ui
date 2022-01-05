@@ -50,7 +50,7 @@ export default function TableSearch(props: SearchProps) {
     onChange,
     value = '',
     displayTotalOf = true,
-    displayedName = '',
+    displayedName,
     locale = 'en',
     ...rest
   } = props;
@@ -64,7 +64,7 @@ export default function TableSearch(props: SearchProps) {
 
   return (
     <SearchContainer>
-      {displayTotalOf && (
+      {displayedName && displayTotalOf && (
         <TextContainer>
           <span>{translations[locale].total} :</span>{' '}
           <ResultContainer>
