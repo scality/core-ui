@@ -6,11 +6,16 @@ import SearchInput from '../searchinput/SearchInput.component';
 import { BasicText } from '../text/Text.component';
 import { spacing } from '../../style/theme.js';
 
+export type DisplayedName = {
+  plural: string,
+  singular: string,
+};
+
 export type SearchProps = {
   onChange: (string) => void,
-  value: string,
+  value?: string,
   displayTotalOf?: boolean,
-  displayedName?: string,
+  displayedName?: DisplayedName,
   locale?: 'en' | 'fr',
 };
 
@@ -23,6 +28,10 @@ const TextContainer = styled(BasicText)`
   display: flex;
   flex-direction: column;
   margin-right: ${spacing.sp8};
+`;
+
+const ResultContainer = styled(BasicText)`
+  font-weight: bold;
 `;
 
 const translations = {
@@ -39,10 +48,11 @@ const translations = {
 export default function TableSearch(props: SearchProps) {
   const {
     onChange,
-    value,
+    value = '',
     displayTotalOf = true,
     displayedName = '',
     locale = 'en',
+    ...rest
   } = props;
   const { setGlobalFilter, rows } = useTableContext();
 
@@ -56,8 +66,13 @@ export default function TableSearch(props: SearchProps) {
     <SearchContainer>
       {displayTotalOf && (
         <TextContainer>
-          <span>{translations[locale].total} :</span> {totalDispayedRows}{' '}
-          {displayedName}
+          <span>{translations[locale].total} :</span>{' '}
+          <ResultContainer>
+            {totalDispayedRows}{' '}
+            {totalDispayedRows > 1
+              ? displayedName.plural
+              : displayedName.singular}
+          </ResultContainer>
         </TextContainer>
       )}
       <SearchInput
@@ -65,9 +80,12 @@ export default function TableSearch(props: SearchProps) {
         placeholder={translations[locale].search}
         disableToggle
         onChange={(evt) => {
-          //$FlowFixMe
-          onChange(evt.target.value);
+          if (typeof onChange === 'function') {
+            //$FlowFixMe
+            onChange(evt.target.value);
+          }
         }}
+        {...rest}
       />
     </SearchContainer>
   );
