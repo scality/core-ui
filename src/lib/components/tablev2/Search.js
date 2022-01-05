@@ -8,7 +8,7 @@ import { spacing } from '../../style/theme.js';
 
 export type SearchProps = {
   onChange: (string) => void,
-  value: string,
+  value?: string,
   displayTotalOf?: boolean,
   displayedName?: string,
   locale?: 'en' | 'fr',
@@ -25,6 +25,10 @@ const TextContainer = styled(BasicText)`
   margin-right: ${spacing.sp8};
 `;
 
+const ResultContainer = styled(BasicText)`
+  font-weight: bold;
+`;
+
 const translations = {
   en: {
     search: 'Search',
@@ -39,7 +43,7 @@ const translations = {
 export default function TableSearch(props: SearchProps) {
   const {
     onChange,
-    value,
+    value = '',
     displayTotalOf = true,
     displayedName = '',
     locale = 'en',
@@ -56,8 +60,10 @@ export default function TableSearch(props: SearchProps) {
     <SearchContainer>
       {displayTotalOf && (
         <TextContainer>
-          <span>{translations[locale].total} :</span> {totalDispayedRows}{' '}
-          {displayedName}
+          <span>{translations[locale].total} :</span>{' '}
+          <ResultContainer>
+            {totalDispayedRows} {displayedName}
+          </ResultContainer>
         </TextContainer>
       )}
       <SearchInput
@@ -65,8 +71,10 @@ export default function TableSearch(props: SearchProps) {
         placeholder={translations[locale].search}
         disableToggle
         onChange={(evt) => {
-          //$FlowFixMe
-          onChange(evt.target.value);
+          if (typeof onChange === 'function') {
+            //$FlowFixMe
+            onChange(evt.target.value);
+          }
         }}
       />
     </SearchContainer>

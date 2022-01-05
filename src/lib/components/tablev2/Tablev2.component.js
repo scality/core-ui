@@ -13,6 +13,7 @@ import {
 } from 'react-table';
 import SingleSelectableContent from './SingleSelectableContent';
 import Search from './Search';
+import SearchWithQueryParams from './SearchWithQueryParams';
 import { compareHealth } from './TableUtil.js';
 import { TableWrapper } from './Tablestyle';
 export type DataRow = {
@@ -73,7 +74,7 @@ function Table({
         // we stringify the object to make sure we can match the value
         return JSON.stringify(row.values)
           .toLowerCase()
-          .includes(value.toLowerCase());
+          .includes((value || '').toLowerCase());
       });
       return filteredRows;
     };
@@ -145,4 +146,5 @@ function Table({
 
 Table.SingleSelectableContent = SingleSelectableContent;
 Table.Search = Search;
+Table.SearcWithQueryParams = SearchWithQueryParams;
 export default Table;

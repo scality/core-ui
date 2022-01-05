@@ -3,6 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Table from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
 export default {
   title: 'Components/V2/Table',
@@ -65,9 +66,30 @@ export const SimpleContentTable = () => {
     return row.lastName + ' ' + row.firstName;
   };
 
-  const [value, setValue] = React.useState('');
-  const onChange = (value) => {
-    setValue(value);
+  const TableWithQueryParams = () => {
+    const location = useLocation();
+    return (
+      <>
+        <span style={{ color: 'white' }}>{location.search}</span>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+        >
+          <div style={{ margin: '16px 0' }}>
+            <Table.SearcWithQueryParams displayedName="peoples" />
+          </div>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            selectedId={'Rodolph Yohann'}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
+      </>
+    );
   };
 
   return (
@@ -101,27 +123,9 @@ export const SimpleContentTable = () => {
       </div>
       <Title>Table with Search</Title>
       <div style={{ height: '300px', paddingTop: '20px' }}>
-        <Table
-          columns={columns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-        >
-          <div style={{ margin: '16px 0' }}>
-            <Table.Search
-              value={value}
-              onChange={onChange}
-              displayedName="peoples"
-            />
-          </div>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            selectedId={'Rodolph Yohann'}
-            onRowSelected={action('Table Row Clicked')}
-          />
-        </Table>
+        <Router>
+          <TableWithQueryParams />
+        </Router>
       </div>
     </Wrapper>
   );
