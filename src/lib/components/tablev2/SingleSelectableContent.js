@@ -1,5 +1,5 @@
 //@flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List } from 'react-window';
 import {
@@ -50,6 +50,7 @@ export default function SingleSelectableContent({
   onRowSelected,
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
+  const outerRef = useRef(null);
 
   if (!['h32', 'h40', 'h48', 'h64'].includes(rowHeight)) {
     console.error(
@@ -102,7 +103,6 @@ export default function SingleSelectableContent({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                'flex-grow': 1,
               },
               role: 'gridcell',
             });
@@ -150,17 +150,19 @@ export default function SingleSelectableContent({
   );
 
   const scrollbarWidth = useMemo(() => {
-    const scrollDiv = document.createElement('div');
-    scrollDiv.setAttribute(
-      'style',
-      'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
-    );
-    const body = document.body || {};
-    body.appendChild(scrollDiv);
-    const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    body.removeChild(scrollDiv);
-    return scrollbarWidth;
-  }, []);
+    if (outerRef.current) {
+      const scrollDiv = document.createElement('div');
+      scrollDiv.setAttribute(
+        'style',
+        'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
+      );
+      outerRef.current.appendChild(scrollDiv);
+      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+      outerRef.current.removeChild(scrollDiv);
+      return scrollbarWidth;
+    }
+    return 0;
+  }, [outerRef.current]);
 
   return (
     <>
@@ -201,7 +203,7 @@ export default function SingleSelectableContent({
           </HeadRow>
         ))}
       </div>
-      <TableBody role="rowgroup" className="tbody">
+      <TableBody role="rowgroup" className="tbody" ref={outerRef}>
         <AutoSizer>
           {({ height, width }) => (
             <List
