@@ -1,11 +1,11 @@
 //@flow
-import React, { useState, useRef } from "react";
-import styled, { css } from "styled-components";
-import Input from "../input/Input.component";
-import * as defaultTheme from "../../style/theme";
-import { getThemePropSelector } from "../../utils";
+import React, { useState, useRef } from 'react';
+import styled, { css } from 'styled-components';
+import Input from '../input/Input.component';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 
-type Props = {
+export type Props = {
   placeholder?: string,
   value: string,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
@@ -18,10 +18,10 @@ const SearchInputContainer = styled.div`
 
   .sc-input {
     display: block;
-    input[type="text"] {
-      width: ${(props) => (props.docked ? "40px" : "100%")};
+    input[type='text'] {
+      width: ${(props) => (props.docked ? '40px' : '100%')};
       box-sizing: border-box;
-      padding-left: ${(props) => (props.docked ? "28px" : "40px")};
+      padding-left: ${(props) => (props.docked ? '28px' : '40px')};
       transition: width 0.2s ease-in-out;
     }
   }
@@ -35,7 +35,7 @@ const IconButton = styled.button`
   padding: 8px 12px;
   border-radius: 5px;
   font-size: ${defaultTheme.fontSize.base};
-  color: ${getThemePropSelector("textSecondary")};
+  color: ${getThemePropSelector('textSecondary')};
   background-color: transparent;
   ${(props) => {
     return (
@@ -43,7 +43,7 @@ const IconButton = styled.button`
       css`
         cursor: pointer;
         &:hover {
-          color: ${getThemePropSelector("secondary")};
+          color: ${getThemePropSelector('secondary')};
         }
       `
     );
@@ -56,7 +56,7 @@ const SearchIcon = styled(IconButton)`
 
 const ResetIcon = styled(IconButton)`
   right: 1px;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
 `;

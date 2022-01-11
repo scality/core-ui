@@ -79,7 +79,10 @@ export const SimpleContentTable = () => {
         >
           <div style={{ margin: '16px 0' }}>
             <Table.SearchWithQueryParams
-              displayedName={{ singular: 'people', plural: 'peoples' }}
+              displayedName={{
+                singular: 'person',
+                plural: 'persons',
+              }}
             />
           </div>
           <Table.SingleSelectableContent
