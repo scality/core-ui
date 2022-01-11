@@ -71,7 +71,7 @@ export default function TableSearch(props: SearchProps) {
             {totalDispayedRows}{' '}
             {totalDispayedRows > 1
               ? displayedName.plural
-              : displayedName.singular}
+              : totalDispayedRows === 1 && displayedName.singular}
           </ResultContainer>
         </TextContainer>
       )}
