@@ -30,7 +30,7 @@ export default function SearchWithQueryParams(props) {
       onChange={handleOnChange}
       value={value}
       onReset={() => {
-        setValue('');
+        handleOnChange('');
       }}
       {...rest}
     />
