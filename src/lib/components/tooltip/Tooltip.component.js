@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import type { Node } from 'react';
+// $FlowFixMe
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';

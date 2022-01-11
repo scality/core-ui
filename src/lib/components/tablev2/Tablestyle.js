@@ -101,3 +101,10 @@ export const UnknownIcon = styled.i`
   // Increase the height so that the users don't need to hover precisely on the hyphen.
   height: 70%;
 `;
+
+export const NoResult = styled.div`
+  color: ${(props) => getTheme(props).textSecondary};
+  padding-top: ${spacing.sp8};
+  border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
+  font-weight: bold;
+`;
