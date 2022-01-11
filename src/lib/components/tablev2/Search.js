@@ -54,13 +54,13 @@ export default function TableSearch(props: SearchProps) {
     locale = 'en',
     ...rest
   } = props;
-  const { setGlobalFilter, rows } = useTableContext();
+  const { setGlobalFilter, rows, preGlobalFilteredRows } = useTableContext();
 
   const totalDispayedRows = rows.length;
 
   React.useEffect(() => {
     setGlobalFilter(value);
-  }, [value, setGlobalFilter]);
+  }, [value, setGlobalFilter, preGlobalFilteredRows]);
 
   return (
     <SearchContainer>
