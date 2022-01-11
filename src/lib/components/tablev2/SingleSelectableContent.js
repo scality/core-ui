@@ -11,6 +11,7 @@ import {
   SortIncentive,
   TooltipContent,
   UnknownIcon,
+  NoResult,
 } from './Tablestyle';
 import { useTableContext } from './Tablev2.component';
 import { convertRemToPixels } from './TableUtil';
@@ -42,12 +43,22 @@ export type SingleSelectableContentProps = {
   onRowSelected?: (row: Row) => void,
 };
 
+const translations = {
+  en: {
+    noResult: 'No results found',
+  },
+  fr: {
+    noResult: `aucun résultat`,
+  },
+};
+
 export default function SingleSelectableContent({
   rowHeight,
   separationLineVariant,
   backgroundVariant,
   selectedId,
   onRowSelected,
+  locale = 'en',
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
   const outerRef = useRef(null);
@@ -74,6 +85,7 @@ export default function SingleSelectableContent({
   }
 
   const { headerGroups, prepareRow, rows } = useTableContext();
+
   const RenderRow = React.useCallback(
     ({ index, style }) => {
       const row = rows[index];
@@ -201,27 +213,33 @@ export default function SingleSelectableContent({
         ))}
       </div>
       <TableBody role="rowgroup" className="tbody" ref={outerRef}>
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              height={height}
-              itemCount={rows.length} // how many items we are going to render
-              itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-              width={width}
-              onItemsRendered={({
-                visibleStartIndex,
-                visibleStopIndex,
-                overscanStopIndex,
-              }) => {
-                setHasScrollbar(
-                  visibleStartIndex - visibleStopIndex <= overscanStopIndex,
-                );
-              }}
-            >
-              {RenderRow}
-            </List>
-          )}
-        </AutoSizer>
+        {rows.length === 0 ? (
+          <NoResult>{translations[locale].noResult}</NoResult>
+        ) : (
+          <AutoSizer>
+            {({ height, width }) => {
+              return (
+                <List
+                  height={height}
+                  itemCount={rows.length} // how many items we are going to render
+                  itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
+                  width={width}
+                  onItemsRendered={({
+                    visibleStartIndex,
+                    visibleStopIndex,
+                    overscanStopIndex,
+                  }) => {
+                    setHasScrollbar(
+                      visibleStartIndex - visibleStopIndex <= overscanStopIndex,
+                    );
+                  }}
+                >
+                  {RenderRow}
+                </List>
+              );
+            }}
+          </AutoSizer>
+        )}
       </TableBody>
     </>
   );
