@@ -117,7 +117,7 @@ function Table({
   );
 
   useEffect(() => {
-    if (globalFilter != undefined) {
+    if (globalFilter !== undefined && globalFilter !== null) {
       setGlobalFilter(globalFilter);
     }
   }, [globalFilter, setGlobalFilter, data]);

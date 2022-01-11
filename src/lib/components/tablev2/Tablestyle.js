@@ -106,5 +106,4 @@ export const NoResult = styled.div`
   color: ${(props) => getTheme(props).textSecondary};
   padding-top: ${spacing.sp8};
   border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
-  font-weight: bold;
 `;

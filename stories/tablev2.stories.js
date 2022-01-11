@@ -71,12 +71,7 @@ export const SimpleContentTable = () => {
     return (
       <>
         <span style={{ color: 'white' }}>{location.search}</span>
-        <Table
-          columns={columns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-        >
+        <Table columns={columns} data={data} defaultSortingKey={'health'}>
           <div style={{ margin: '16px 0' }}>
             <Table.SearchWithQueryParams
               displayedName={{
@@ -89,8 +84,6 @@ export const SimpleContentTable = () => {
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
             backgroundVariant="backgroundLevel1"
-            selectedId={'Rodolph Yohann'}
-            onRowSelected={action('Table Row Clicked')}
           />
         </Table>
       </>

@@ -122,10 +122,7 @@ export default function SingleSelectableContent({
             if (cell.value === undefined) {
               return (
                 <div {...cellProps} className="td">
-                  <Tooltip
-                    placement={index === 0 ? 'bottom' : 'top'}
-                    overlay={<TooltipContent>unknown</TooltipContent>}
-                  >
+                  <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
                     <UnknownIcon className="fas fa-minus"></UnknownIcon>
                   </Tooltip>
                 </div>
@@ -136,10 +133,7 @@ export default function SingleSelectableContent({
               <div {...cellProps} className="td">
                 {cell.column.Cell.name === 'defaultRenderer' &&
                 typeof cell.value === 'string' ? (
-                  <ConstrainedText
-                    text={cell.value}
-                    tooltipPlacement={index === 0 ? 'bottom' : 'top'}
-                  />
+                  <ConstrainedText text={cell.value} />
                 ) : (
                   cell.render('Cell')
                 )}
@@ -174,7 +168,7 @@ export default function SingleSelectableContent({
       return scrollbarWidth;
     }
     return 0;
-  }, [outerRef.current]);
+  }, [outerRef]);
 
   return (
     <>

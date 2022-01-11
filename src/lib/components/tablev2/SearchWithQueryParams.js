@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import Search, { SearchProps } from './Search';
 
@@ -13,7 +13,7 @@ export default function SearchWithQueryParams(props) {
   const history = useHistory();
   const params = new URLSearchParams(search);
   const initialValue = params.get(queryParams);
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = useState(initialValue);
 
   function handleOnChange(value) {
     const { onChange } = props;

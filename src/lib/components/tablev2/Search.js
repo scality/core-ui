@@ -2,7 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTableContext } from './Tablev2.component';
-import SearchInput, { Props } from '../searchinput/SearchInput.component';
+import SearchInput from '../searchinput/SearchInput.component';
+import type { Props } from '../searchinput/SearchInput.component';
 import { BasicText } from '../text/Text.component';
 import { spacing } from '../../style/theme.js';
 
@@ -65,14 +66,16 @@ export default function TableSearch(props: SearchProps) {
 
   return (
     <SearchContainer>
-      {displayedName && displayTotalOf && (
+      {displayTotalOf && (
         <TextContainer>
           <span>{translations[locale].total}</span>
           <ResultContainer>
             {totalDispayedRows}{' '}
-            {totalDispayedRows > 1
-              ? displayedName.plural
-              : totalDispayedRows === 1 && displayedName.singular}
+            {displayedName
+              ? totalDispayedRows > 1
+                ? displayedName.plural
+                : totalDispayedRows === 1 && displayedName.singular
+              : ''}
           </ResultContainer>
         </TextContainer>
       )}
