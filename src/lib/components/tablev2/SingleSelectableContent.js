@@ -168,7 +168,7 @@ export default function SingleSelectableContent({
       return scrollbarWidth;
     }
     return 0;
-  }, [outerRef]);
+  }, [outerRef.current]);
 
   return (
     <>
