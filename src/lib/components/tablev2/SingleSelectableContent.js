@@ -1,7 +1,7 @@
 //@flow
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useCallback, memo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList as List, areEqual } from 'react-window';
 import {
   HeadRow,
   TableRow,
@@ -42,6 +42,7 @@ export type SingleSelectableContentProps = {
   selectedId?: string,
   onRowSelected?: (row: Row) => void,
   locale?: 'en' | 'fr',
+  customItemKey?: (index: Number, data: any) => string,
 };
 
 const translations = {
@@ -53,13 +54,14 @@ const translations = {
   },
 };
 
-export default function SingleSelectableContent({
+export function SingleSelectableContent({
   rowHeight,
   separationLineVariant,
   backgroundVariant,
   selectedId,
   onRowSelected,
   locale = 'en',
+  customItemKey,
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
   const outerRef = useRef(null);
@@ -87,7 +89,7 @@ export default function SingleSelectableContent({
 
   const { headerGroups, prepareRow, rows } = useTableContext();
 
-  const RenderRow = React.useCallback(
+  const RenderRow = useCallback(
     ({ index, style }) => {
       const row = rows[index];
       prepareRow(row);
@@ -170,6 +172,14 @@ export default function SingleSelectableContent({
     return 0;
   }, [outerRef.current]);
 
+  function itemKey(index, data) {
+    if (typeOf(customItemKey) === 'function') {
+      return customItemKey(index, data);
+    }
+
+    return index;
+  }
+
   return (
     <>
       <div className="thead" role="rowgroup">
@@ -221,6 +231,7 @@ export default function SingleSelectableContent({
                   itemCount={rows.length} // how many items we are going to render
                   itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
                   width={width}
+                  itemKey={itemKey}
                   onItemsRendered={({
                     visibleStartIndex,
                     visibleStopIndex,
@@ -241,3 +252,5 @@ export default function SingleSelectableContent({
     </>
   );
 }
+
+export default memo(SingleSelectableContent, areEqual);
