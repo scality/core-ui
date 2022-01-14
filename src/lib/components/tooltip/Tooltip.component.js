@@ -92,6 +92,7 @@ function Tooltip({
   const tooltipRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    console.log({ child: childrenRef.current, tooltip: tooltipRef.current });
     if (childrenRef.current && tooltipRef.current) {
       computePosition(childrenRef.current, tooltipRef.current, {
         placement,
@@ -112,8 +113,14 @@ function Tooltip({
   return (
     <TooltipContainer
       className="sc-tooltip"
-      onMouseEnter={() => setIsTooltipVisible(true)}
-      onMouseLeave={() => setIsTooltipVisible(false)}
+      onMouseEnter={() => {
+        console.log('mouseEnter');
+        setIsTooltipVisible(true);
+      }}
+      onMouseLeave={() => {
+        console.log('mouseLeave');
+        setIsTooltipVisible(false);
+      }}
     >
       {isTooltipVisible && overlay ? (
         <TooltipOverLayContainer
