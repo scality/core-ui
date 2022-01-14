@@ -232,6 +232,7 @@ export function SingleSelectableContent({
                   itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
                   width={width}
                   itemKey={itemKey}
+                  itemData={rows}
                   onItemsRendered={({
                     visibleStartIndex,
                     visibleStopIndex,
