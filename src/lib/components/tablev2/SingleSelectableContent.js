@@ -173,7 +173,7 @@ export function SingleSelectableContent({
   }, [outerRef.current]);
 
   function itemKey(index, data) {
-    if (typeOf(customItemKey) === 'function') {
+    if (typeof customItemKey === 'function') {
       return customItemKey(index, data);
     }
 
