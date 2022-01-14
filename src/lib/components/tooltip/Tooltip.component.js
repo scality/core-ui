@@ -102,7 +102,13 @@ function Tooltip({
   });
 
   useEffect(() => {
-    console.log({ isHovering });
+    console.log({
+      isHovering,
+      isHoveringBis: document.querySelectorAll(':hover'),
+      isHoveringTer: Array.from(document.querySelectorAll(':hover')).includes(
+        childrenRef.current,
+      ),
+    });
     if (isHovering && !isTooltipVisible) {
       setIsTooltipVisible(!isTooltipVisible);
     }
