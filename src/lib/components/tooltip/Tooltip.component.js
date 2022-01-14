@@ -91,6 +91,7 @@ function Tooltip({
   const isHovering = Array.from(document.querySelectorAll(':hover')).includes(
     childrenRef.current,
   );
+  console.log({ isHovering });
   const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
 
   useEffect(() => {
