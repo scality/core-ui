@@ -1,11 +1,12 @@
 //@flow
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import type { Node } from 'react';
 // $FlowFixMe
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
+import { areEqual } from 'react-window';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -160,4 +161,4 @@ function Tooltip({
     </TooltipContainer>
   );
 }
-export default Tooltip;
+export default memo(Tooltip, areEqual);
