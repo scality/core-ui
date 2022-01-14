@@ -110,6 +110,7 @@ function Tooltip({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tooltipRef.current, childrenRef.current]);
 
+  console.log({ isTooltipVisible, overlay });
   return (
     <TooltipContainer
       className="sc-tooltip"
