@@ -86,10 +86,12 @@ function Tooltip({
   overlay,
   ...rest
 }: Props) {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-
   const childrenRef = useRef(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const isHovering = Array.from(document.querySelectorAll(':hover')).includes(
+    childrenRef.current,
+  );
+  const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
 
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
@@ -107,24 +109,30 @@ function Tooltip({
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tooltipRef.current, childrenRef.current]);
+  }, [tooltipRef.current, childrenRef.current, isHovering]);
 
   return (
     <TooltipContainer
       className="sc-tooltip"
-      onMouseEnter={() => setIsTooltipVisible(true)}
-      onMouseLeave={() => setIsTooltipVisible(false)}
+      onMouseEnter={() => {
+        setIsTooltipVisible(true);
+      }}
+      onMouseLeave={() => {
+        setIsTooltipVisible(false);
+      }}
     >
-      {isTooltipVisible && overlay ? (
+      {isTooltipVisible ? (
         <TooltipOverLayContainer
           ref={tooltipRef}
           className="sc-tooltip-overlay"
           placement={placement}
           overlayStyle={overlayStyle}
         >
-          <TooltipText className="sc-tooltip-overlay-text">
-            {overlay}
-          </TooltipText>
+          {overlay && (
+            <TooltipText className="sc-tooltip-overlay-text">
+              {overlay}
+            </TooltipText>
+          )}
         </TooltipOverLayContainer>
       ) : null}
       <div ref={childrenRef}>{children}</div>
