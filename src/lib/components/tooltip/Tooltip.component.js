@@ -91,8 +91,15 @@ function Tooltip({
   const isHovering = Array.from(document.querySelectorAll(':hover')).includes(
     childrenRef.current,
   );
-  console.log({ isHovering });
   const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
+
+  console.log({
+    isHovering,
+    isTooltipVisible,
+    childrenRef,
+    tooltipRef,
+    overlay,
+  });
 
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
@@ -110,7 +117,7 @@ function Tooltip({
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tooltipRef.current, childrenRef.current]);
+  }, [tooltipRef.current, childrenRef.current, isHovering]);
 
   return (
     <TooltipContainer
