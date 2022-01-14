@@ -89,71 +89,61 @@ export function SingleSelectableContent({
 
   const { headerGroups, prepareRow, rows } = useTableContext();
 
-  const RenderRow = useCallback(
-    ({ index, style }) => {
-      const row = rows[index];
-      prepareRow(row);
-      return (
-        <TableRow
-          {...row.getRowProps({
-            /* Note:
+  const RenderRow = memo(({ index, style }) => {
+    const row = rows[index];
+    prepareRow(row);
+    return (
+      <TableRow
+        {...row.getRowProps({
+          /* Note:
             We need to pass the style property to the row component.
             Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
-            style: { ...style },
-            onClick: () => {
-              if (onRowSelected) return onRowSelected(row);
+          style: { ...style },
+          onClick: () => {
+            if (onRowSelected) return onRowSelected(row);
+          },
+        })}
+        row={row}
+        separationLineVariant={separationLineVariant}
+        backgroundVariant={backgroundVariant}
+        selectedId={selectedId}
+        className="tr"
+      >
+        {row.cells.map((cell) => {
+          let cellProps = cell.getCellProps({
+            style: {
+              ...cell.column.cellStyle,
+              // Vertically center the text in cells.
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
             },
-          })}
-          row={row}
-          separationLineVariant={separationLineVariant}
-          backgroundVariant={backgroundVariant}
-          selectedId={selectedId}
-          className="tr"
-        >
-          {row.cells.map((cell) => {
-            let cellProps = cell.getCellProps({
-              style: {
-                ...cell.column.cellStyle,
-                // Vertically center the text in cells.
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              },
-              role: 'gridcell',
-            });
-            if (cell.value === undefined) {
-              return (
-                <div {...cellProps} className="td">
-                  <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
-                    <UnknownIcon className="fas fa-minus"></UnknownIcon>
-                  </Tooltip>
-                </div>
-              );
-            }
-
+            role: 'gridcell',
+          });
+          if (cell.value === undefined) {
             return (
               <div {...cellProps} className="td">
-                {cell.column.Cell.name === 'defaultRenderer' &&
-                typeof cell.value === 'string' ? (
-                  <ConstrainedText text={cell.value} />
-                ) : (
-                  cell.render('Cell')
-                )}
+                <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
+                  <UnknownIcon className="fas fa-minus"></UnknownIcon>
+                </Tooltip>
               </div>
             );
-          })}
-        </TableRow>
-      );
-    },
-    [
-      rows,
-      prepareRow,
-      separationLineVariant,
-      backgroundVariant,
-      selectedId,
-      onRowSelected,
-    ],
-  );
+          }
+
+          return (
+            <div {...cellProps} className="td">
+              {cell.column.Cell.name === 'defaultRenderer' &&
+              typeof cell.value === 'string' ? (
+                <ConstrainedText text={cell.value} />
+              ) : (
+                cell.render('Cell')
+              )}
+            </div>
+          );
+        })}
+      </TableRow>
+    );
+  }, areEqual);
 
   const scrollbarWidth = useMemo(() => {
     if (outerRef.current) {

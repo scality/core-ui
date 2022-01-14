@@ -94,27 +94,6 @@ function Tooltip({
   );
   const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
 
-  console.log({
-    isHovering,
-    isTooltipVisible,
-    childrenRef,
-    tooltipRef,
-    overlay,
-  });
-
-  useEffect(() => {
-    console.log({
-      isHovering,
-      isHoveringBis: document.querySelectorAll(':hover'),
-      isHoveringTer: Array.from(document.querySelectorAll(':hover')).includes(
-        childrenRef.current,
-      ),
-    });
-    if (isHovering && !isTooltipVisible) {
-      setIsTooltipVisible(!isTooltipVisible);
-    }
-  }, [isHovering, childrenRef.current, isTooltipVisible]);
-
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
       computePosition(childrenRef.current, tooltipRef.current, {
