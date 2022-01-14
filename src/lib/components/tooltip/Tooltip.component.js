@@ -102,6 +102,13 @@ function Tooltip({
   });
 
   useEffect(() => {
+    console.log({ isHovering });
+    if (isHovering && !isTooltipVisible) {
+      setIsTooltipVisible(!isTooltipVisible);
+    }
+  }, [isHovering, childrenRef.current, isTooltipVisible]);
+
+  useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
       computePosition(childrenRef.current, tooltipRef.current, {
         placement,
@@ -129,16 +136,18 @@ function Tooltip({
         setIsTooltipVisible(false);
       }}
     >
-      {isTooltipVisible && overlay ? (
+      {isTooltipVisible ? (
         <TooltipOverLayContainer
           ref={tooltipRef}
           className="sc-tooltip-overlay"
           placement={placement}
           overlayStyle={overlayStyle}
         >
-          <TooltipText className="sc-tooltip-overlay-text">
-            {overlay}
-          </TooltipText>
+          {overlay && (
+            <TooltipText className="sc-tooltip-overlay-text">
+              {overlay}
+            </TooltipText>
+          )}
         </TooltipOverLayContainer>
       ) : null}
       <div ref={childrenRef}>{children}</div>
