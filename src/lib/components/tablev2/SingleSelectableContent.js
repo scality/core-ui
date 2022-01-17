@@ -1,5 +1,5 @@
 //@flow
-import React, { useMemo, useRef, memo } from 'react';
+import React, { useCallback, memo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List, areEqual } from 'react-window';
 import {
@@ -64,7 +64,7 @@ export function SingleSelectableContent({
   customItemKey,
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
-  const outerRef = useRef(null);
+  const [scrollBarWidth, setScrollBarWidth] = React.useState(0);
 
   if (!['h32', 'h40', 'h48', 'h64'].includes(rowHeight)) {
     console.error(
@@ -145,22 +145,21 @@ export function SingleSelectableContent({
     );
   }, areEqual);
 
-  const scrollbarWidth = useMemo(() => {
-    if (outerRef.current) {
+  const handleScrollbarWidth = useCallback((node) => {
+    if (node) {
       const scrollDiv = document.createElement('div');
       scrollDiv.setAttribute(
         'style',
         'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
       );
       // $FlowFixMe
-      outerRef.current.appendChild(scrollDiv);
+      node.appendChild(scrollDiv);
       const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
       // $FlowFixMe
-      outerRef.current.removeChild(scrollDiv);
-      return scrollbarWidth;
+      node.removeChild(scrollDiv);
+      setScrollBarWidth(scrollbarWidth);
     }
-    return 0;
-  }, [outerRef.current]);
+  }, []);
 
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
@@ -177,7 +176,7 @@ export function SingleSelectableContent({
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
             hasScrollBar={hasScrollbar}
-            scrollBarWidth={scrollbarWidth}
+            scrollBarWidth={scrollBarWidth}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
@@ -209,7 +208,7 @@ export function SingleSelectableContent({
           </HeadRow>
         ))}
       </div>
-      <TableBody role="rowgroup" className="tbody" ref={outerRef}>
+      <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
         {rows.length === 0 ? (
           <NoResult>{translations[locale].noResult}</NoResult>
         ) : (
