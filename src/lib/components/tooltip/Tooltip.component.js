@@ -121,18 +121,16 @@ function Tooltip({
         setIsTooltipVisible(false);
       }}
     >
-      {isTooltipVisible ? (
+      {isTooltipVisible && overlay ? (
         <TooltipOverLayContainer
           ref={tooltipRef}
           className="sc-tooltip-overlay"
           placement={placement}
           overlayStyle={overlayStyle}
         >
-          {overlay && (
-            <TooltipText className="sc-tooltip-overlay-text">
-              {overlay}
-            </TooltipText>
-          )}
+          <TooltipText className="sc-tooltip-overlay-text">
+            {overlay}
+          </TooltipText>
         </TooltipOverLayContainer>
       ) : null}
       <div ref={childrenRef}>{children}</div>
