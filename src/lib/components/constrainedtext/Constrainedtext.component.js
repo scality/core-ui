@@ -8,7 +8,7 @@ type Props = {
   text: string,
   tooltipStyle?: $PropertyType<TooltipProps, 'overlayStyle'>,
   tooltipPlacement?: $PropertyType<TooltipProps, 'placement'>,
-  lineClamp?: Number,
+  lineClamp?: number,
 };
 
 // for lineClamp cf https://css-tricks.com/almanac/properties/l/line-clamp/
