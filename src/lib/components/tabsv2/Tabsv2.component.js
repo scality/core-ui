@@ -55,6 +55,10 @@ function Tabs({
   const matchQuery = useCallback(
     (query: Query): boolean => {
       for (const key of Object.keys(query)) {
+        // To support the case of {tab:null}
+        if (queryURL.get(key) === null && !query[key]) {
+          return true;
+        }
         if (
           !(
             queryURL.has(key) &&
@@ -69,7 +73,15 @@ function Tabs({
   );
 
   const serialize = (query?: Query): string => {
-    return !query ? '' : '?' + new URLSearchParams(query).toString();
+    if (!query) {
+      return '';
+    } else {
+      const o = Object.fromEntries(
+        Object.entries(query).filter(([_, v]) => v != null),
+      );
+      //$FlowFixMe
+      return '?' + new URLSearchParams(o).toString();
+    }
   };
 
   const getPushHistoryPath = (path: string, query?: Query): string =>

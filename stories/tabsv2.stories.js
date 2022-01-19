@@ -85,7 +85,7 @@ const DefaultTabsDetails = () => {
         <Tab path="/path1" query={{ tab: 'role @' }} label="Roles">
           {details()}
         </Tab>
-        <Tab path="/path1" query={{ tab: '' }} label="Policies">
+        <Tab path="/path1" query={{ tab: null }} label="Policies">
           {details()}
         </Tab>
         <Tab path="/path4" label="Storage Location">
@@ -106,7 +106,7 @@ const DefaultTabsDetails = () => {
         <Tab path="/path1" query={{ tab: 'role @' }} label="Roles">
           {details()}
         </Tab>
-        <Tab path="/path1" query={{ tab: '' }} label="Policies">
+        <Tab path="/path1" query={{ tab: null }} label="Policies">
           {details()}
         </Tab>
         <Tab path="/path4" label="Storage Location">
