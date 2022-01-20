@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Node } from 'react';
-import { navbarHeight } from '../../style/theme';
 import Navbar from '../navbar/Navbar.component';
 import type { Props as NavbarProps } from '../navbar/Navbar.component';
 import type { Props as SidebarProps } from '../sidebar/Sidebar.component';
@@ -18,13 +17,13 @@ type Props = {
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
-  // there is a 1px border between the navbar and the content
-  height: calc(100vh - ${navbarHeight} - 1px);
+  flex-grow: 1;
 `;
 
 const MainContent = styled.div`
