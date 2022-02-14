@@ -37,7 +37,7 @@ export type TableProps = {
   getRowId?: getRowId,
   sortTypes?: { [key: string]: SortType },
   globalFilter?: string,
-  onBottom?: (rowLength: Number) => void,
+  onBottom?: (rowLength: number) => void,
   onBottomOffset?: number,
 };
 

@@ -237,7 +237,7 @@ export function SingleSelectableContent({
                       visibleStartIndex - visibleStopIndex <= overscanStopIndex,
                     );
                     if (
-                      overscanStopIndex > rows.length - 1 - onBottomOffset &&
+                      overscanStopIndex >= rows.length - 1 - onBottomOffset &&
                       typeof onBottom === 'function'
                     ) {
                       onBottom(rows.length);
