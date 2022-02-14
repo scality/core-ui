@@ -29,7 +29,7 @@ export type TableProps = {
     accessor: string,
     sortType?: SortType,
     cellStyle?: $Shape<CSSStyleDeclaration>,
-    Cell?: React.Node,
+    Cell?: React.Node | ((props: any) => React.Node),
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
   data: DataRow[],
@@ -37,6 +37,8 @@ export type TableProps = {
   getRowId?: getRowId,
   sortTypes?: { [key: string]: SortType },
   globalFilter?: string,
+  onBottom?: (rowLength: Number) => void,
+  onBottomOffset?: number,
 };
 
 const TableContext = React.createContext<any>(null);
@@ -59,6 +61,8 @@ function Table({
   children,
   sortTypes,
   globalFilter,
+  onBottom,
+  onBottomOffset = 10,
   ...rest
 }: TableProps) {
   sortTypes = {
@@ -135,6 +139,8 @@ function Table({
         setGlobalFilter,
         globalFilter,
         setFilter,
+        onBottom,
+        onBottomOffset,
       }}
     >
       <TableWrapper role="grid" className="table">

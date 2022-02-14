@@ -211,3 +211,52 @@ export const asyncTable = () => {
     </Wrapper>
   );
 };
+
+export const onBottomCallback = () => {
+  const columns = [
+    {
+      Header: 'value',
+      accessor: 'value',
+      cellStyle: { textAlign: 'left' },
+    },
+  ];
+
+  const createData = (indexStart = 0) => {
+    const data = [];
+    for (let i = 0; i < 100; i++) {
+      data.push({
+        index: indexStart + i,
+        value: Math.floor(Math.random() * 1000),
+      });
+    }
+    return data;
+  };
+
+  const [randomData, setRandomData] = React.useState(createData());
+
+  const onBottom = () => {
+    action('onBottom');
+    setRandomData([...randomData, ...createData(randomData.length)]);
+  };
+
+  return (
+    <Wrapper>
+      <Title>async cell Table</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
+        <Table
+          columns={columns}
+          data={randomData}
+          onBottom={onBottom}
+          onBottomOffset={5}
+          defaultSortingKey={'value'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+          />
+        </Table>
+      </div>
+    </Wrapper>
+  );
+};

@@ -87,7 +87,13 @@ export function SingleSelectableContent({
     console.error('Please specify the onRowSelected function.');
   }
 
-  const { headerGroups, prepareRow, rows } = useTableContext();
+  const {
+    headerGroups,
+    prepareRow,
+    rows,
+    onBottom,
+    onBottomOffset,
+  } = useTableContext();
 
   const RenderRow = memo(({ index, style }) => {
     const row = rows[index];
@@ -230,6 +236,12 @@ export function SingleSelectableContent({
                     setHasScrollbar(
                       visibleStartIndex - visibleStopIndex <= overscanStopIndex,
                     );
+                    if (
+                      overscanStopIndex > rows.length - 1 - onBottomOffset &&
+                      typeof onBottom === 'function'
+                    ) {
+                      onBottom(rows.length);
+                    }
                   }}
                 >
                   {RenderRow}
