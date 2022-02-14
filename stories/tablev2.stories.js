@@ -10,34 +10,34 @@ export default {
   component: Table,
 };
 
-export const SimpleContentTable = () => {
-  const data = [
-    {
-      firstName: 'Sotiria',
-      lastName: 'Agathangelou',
-      age: undefined,
-      health: 'healthy',
-    },
-    {
-      firstName: 'Stefania',
-      lastName: 'Evgenios',
-      age: 27,
-      health: 'warning',
-    },
-    {
-      firstName: 'Yohann',
-      lastName: 'Rodolph',
-      age: 27,
-      health: 'critical',
-    },
-    {
-      firstName: 'Ninette',
-      lastName: 'Caroline',
-      age: 31,
-      health: 'healthy',
-    },
-  ];
+const data = [
+  {
+    firstName: 'Sotiria',
+    lastName: 'Agathangelou',
+    age: undefined,
+    health: 'healthy',
+  },
+  {
+    firstName: 'Stefania',
+    lastName: 'Evgenios',
+    age: 27,
+    health: 'warning',
+  },
+  {
+    firstName: 'Yohann',
+    lastName: 'Rodolph',
+    age: 27,
+    health: 'critical',
+  },
+  {
+    firstName: 'Ninette',
+    lastName: 'Caroline',
+    age: 31,
+    health: 'healthy',
+  },
+];
 
+export const SimpleContentTable = () => {
   const columns = [
     {
       Header: 'First Name',
@@ -124,6 +124,89 @@ export const SimpleContentTable = () => {
         <Router>
           <TableWithQueryParams />
         </Router>
+      </div>
+    </Wrapper>
+  );
+};
+
+export const asyncTable = () => {
+  function DataComponent({ data, loading, row, rowProps }) {
+    return loading ? (
+      <span>loading ...</span>
+    ) : (
+      <span> {`${row.values.firstName} ${data}`} </span>
+    );
+  }
+
+  function RowAsync({ row, rowProps }) {
+    const [loading, setLoading] = React.useState(true);
+    const [data, setData] = React.useState('');
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setData('loaded async');
+        setLoading(false);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }, []);
+
+    return (
+      <DataComponent
+        row={row}
+        rowProps={rowProps}
+        loading={loading}
+        data={data}
+      />
+    );
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const renderRowSubComponent = React.useCallback(
+    ({ row, rowProps }) => <RowAsync row={row} rowProps={rowProps} />,
+    [],
+  );
+
+  const columnAsync = [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+      cellStyle: { textAlign: 'left' },
+      Cell: renderRowSubComponent,
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+      cellStyle: { textAlign: 'left' },
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+      cellStyle: { width: '50px', textAlign: 'left' },
+    },
+    {
+      Header: 'Health',
+      accessor: 'health',
+      sortType: 'health',
+      cellStyle: { textAlign: 'left' },
+    },
+  ];
+
+  return (
+    <Wrapper>
+      <Title>async cell Table</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
+        <Table columns={columnAsync} data={data} defaultSortingKey={'health'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            selectedId={'Rodolph Yohann'}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
       </div>
     </Wrapper>
   );
