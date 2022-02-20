@@ -1,5 +1,5 @@
 //@flow
-import React, { useCallback, memo } from 'react';
+import React, { useCallback, memo, type Node } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List, areEqual } from 'react-window';
 import {
@@ -43,6 +43,8 @@ export type SingleSelectableContentProps = {
   onRowSelected?: (row: Row) => void,
   locale?: 'en' | 'fr',
   customItemKey?: (index: Number, data: any) => string,
+  isLoading?: boolean,
+  children?: (rows: Node) => Node,
 };
 
 const translations = {
@@ -62,6 +64,8 @@ export function SingleSelectableContent({
   onRowSelected,
   locale = 'en',
   customItemKey,
+  isLoading = false,
+  children,
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
   const [scrollBarWidth, setScrollBarWidth] = React.useState(0);
@@ -175,6 +179,40 @@ export function SingleSelectableContent({
     return index;
   }
 
+  const Rows = () => (
+    <AutoSizer>
+      {({ height, width }) => {
+        return (
+          <List
+            height={height}
+            itemCount={rows.length} // how many items we are going to render
+            itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
+            width={width}
+            itemKey={itemKey}
+            itemData={rows}
+            onItemsRendered={({
+              visibleStartIndex,
+              visibleStopIndex,
+              overscanStopIndex,
+            }) => {
+              setHasScrollbar(
+                visibleStartIndex - visibleStopIndex <= overscanStopIndex,
+              );
+              if (
+                overscanStopIndex >= rows.length - 1 - onBottomOffset &&
+                typeof onBottom === 'function'
+              ) {
+                onBottom(rows.length);
+              }
+            }}
+          >
+            {RenderRow}
+          </List>
+        );
+      }}
+    </AutoSizer>
+  );
+
   return (
     <>
       <div className="thead" role="rowgroup">
@@ -215,40 +253,13 @@ export function SingleSelectableContent({
         ))}
       </div>
       <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
-        {rows.length === 0 ? (
-          <NoResult>{translations[locale].noResult}</NoResult>
+        {typeof children === 'function' ? (
+          // $FlowFixMe
+          children(Rows)
+        ) : rows.length ? (
+          <Rows />
         ) : (
-          <AutoSizer>
-            {({ height, width }) => {
-              return (
-                <List
-                  height={height}
-                  itemCount={rows.length} // how many items we are going to render
-                  itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-                  width={width}
-                  itemKey={itemKey}
-                  itemData={rows}
-                  onItemsRendered={({
-                    visibleStartIndex,
-                    visibleStopIndex,
-                    overscanStopIndex,
-                  }) => {
-                    setHasScrollbar(
-                      visibleStartIndex - visibleStopIndex <= overscanStopIndex,
-                    );
-                    if (
-                      overscanStopIndex >= rows.length - 1 - onBottomOffset &&
-                      typeof onBottom === 'function'
-                    ) {
-                      onBottom(rows.length);
-                    }
-                  }}
-                >
-                  {RenderRow}
-                </List>
-              );
-            }}
-          </AutoSizer>
+          <NoResult>{translations[locale].noResult}</NoResult>
         )}
       </TableBody>
     </>
