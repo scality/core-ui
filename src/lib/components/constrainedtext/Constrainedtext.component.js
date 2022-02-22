@@ -1,9 +1,10 @@
 //@flow
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { Node } from 'react';
 import styled from 'styled-components';
 import Tooltip from '../tooltip/Tooltip.component.js';
 import type { Props as TooltipProps } from '../tooltip/Tooltip.component.js';
+
 type Props = {
   text: string,
   tooltipStyle?: $PropertyType<TooltipProps, 'overlayStyle'>,
@@ -26,7 +27,10 @@ const ConstrainedTextContainer = styled.div`
   -webkit-box-orient: vertical;
   `
       : `word-wrap: break-word;
-      white-space: nowrap;`}};
+      white-space: nowrap;`}
+}
+
+;
 `;
 
 const BlockTooltip = styled.div`
@@ -35,26 +39,50 @@ const BlockTooltip = styled.div`
   }
 `;
 
+function isEllipsisActive(element: HTMLDivElement) {
+  return element && element.offsetWidth < element.scrollWidth;
+}
+
+function getConstrainedTextContainer(constrainedTextRef, lineClamp, text) {
+  return (
+    <ConstrainedTextContainer
+      ref={constrainedTextRef}
+      className="sc-constrainedtext"
+      lineClamp={lineClamp}
+    >
+      {text}
+    </ConstrainedTextContainer>
+  );
+}
+
 function ConstrainedText({
   text,
   tooltipStyle,
   tooltipPlacement,
   lineClamp = 1,
 }: Props): Node {
+  const [displayToolTip, setDisplayToolTip] = useState(false);
+
+  const constrainedTextRef = useCallback(
+    (element) => {
+      element && setDisplayToolTip(isEllipsisActive(element) || lineClamp > 1);
+    },
+    [lineClamp],
+  );
+
   return (
     <BlockTooltip>
-      <Tooltip
-        overlay={text}
-        overlayStyle={tooltipStyle}
-        placement={tooltipPlacement}
-      >
-        <ConstrainedTextContainer
-          className="sc-constrainedtext"
-          lineClamp={lineClamp}
+      {displayToolTip ? (
+        <Tooltip
+          overlay={text}
+          overlayStyle={tooltipStyle}
+          placement={tooltipPlacement}
         >
-          {text}
-        </ConstrainedTextContainer>
-      </Tooltip>
+          {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+        </Tooltip>
+      ) : (
+        getConstrainedTextContainer(constrainedTextRef, lineClamp, text)
+      )}
     </BlockTooltip>
   );
 }

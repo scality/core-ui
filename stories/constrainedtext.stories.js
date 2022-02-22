@@ -22,6 +22,10 @@ export const Default = () => {
           text={'This is a long phrase'}
           tooltipStyle={{ width: '100px' }}
         />
+          <Constrainedtext
+              text={'This'}
+              tooltipStyle={{ width: '100px' }}
+          />
       </div>
       <Title>With the ability to customize the style of tooltip</Title>
       <div
