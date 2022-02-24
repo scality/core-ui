@@ -86,7 +86,13 @@ export const SimpleContentTable = () => {
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
             backgroundVariant="backgroundLevel1"
-          />
+            children={(Rows) => {
+              return (
+                // $FlowFixMe
+                <><Rows /></>
+              );
+            }}
+          ></Table.SingleSelectableContent>
         </Table>
       </>
     );
@@ -126,6 +132,22 @@ export const SimpleContentTable = () => {
         <Router>
           <TableWithQueryParams />
         </Router>
+      </div>
+      <Title>Empty table</Title>
+      <div style={{ height: '300px', paddingTop: '20px' }}>
+        <Table
+          columns={columns}
+          data={[]}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
       </div>
     </Wrapper>
   );
