@@ -30,6 +30,7 @@ export type TableProps = {
     sortType?: SortType,
     cellStyle?: $Shape<CSSStyleDeclaration>,
     Cell?: React.Node | ((props: any) => React.Node),
+    disableSortBy?: boolean,
   }[],
   defaultSortingKey: string, //we don't display the default sort key in the URL, so we need to specify here
   data: DataRow[],

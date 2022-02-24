@@ -48,6 +48,8 @@ export const SimpleContentTable = () => {
       Header: 'Last Name',
       accessor: 'lastName',
       cellStyle: { textAlign: 'left' },
+      // disable the sorting on this column
+      disableSortBy: true,
     },
     {
       Header: 'Age',

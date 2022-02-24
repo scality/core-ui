@@ -194,19 +194,21 @@ export function SingleSelectableContent({
                 <TableHeader {...headerStyleProps} role="columnheader">
                   <div>
                     {column.render('Header')}
-                    <SortCaretWrapper>
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <i className="fas fa-sort-down" />
+                    {!column.disableSortBy ? (
+                      <SortCaretWrapper>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <i className="fas fa-sort-down" />
+                          ) : (
+                            <i className="fas fa-sort-up" />
+                          )
                         ) : (
-                          <i className="fas fa-sort-up" />
-                        )
-                      ) : (
-                        <SortIncentive>
-                          <i className="fas fa-sort" />
-                        </SortIncentive>
-                      )}
-                    </SortCaretWrapper>
+                          <SortIncentive>
+                            <i className="fas fa-sort" />
+                          </SortIncentive>
+                        )}
+                      </SortCaretWrapper>
+                    ) : null}
                   </div>
                 </TableHeader>
               );
