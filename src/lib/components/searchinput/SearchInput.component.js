@@ -11,10 +11,22 @@ export type Props = {
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   onReset?: () => void,
   disableToggle: boolean,
+  disabled?: boolean,
 };
 
 const SearchInputContainer = styled.div`
   position: relative;
+
+  ${(props) => {
+    if (props.disabled) {
+      return css`
+        i {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+      `;
+    }
+  }}
 
   .sc-input {
     display: block;
@@ -67,6 +79,7 @@ function SearchInput({
   value,
   onChange,
   onReset,
+  disabled,
   ...rest
 }: Props) {
   const [docked, setDocked] = useState(!disableToggle);
@@ -90,7 +103,12 @@ function SearchInput({
   };
 
   return (
-    <SearchInputContainer className="sc-searchinput" docked={docked} {...rest}>
+    <SearchInputContainer
+      className="sc-searchinput"
+      disabled={disabled}
+      docked={docked}
+      {...rest}
+    >
       <Input
         minLength={1}
         debounceTimeout={300}
@@ -99,6 +117,7 @@ function SearchInput({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
         inputRef={myInputRef}
       />
       <SearchIcon onClick={toggle} disabled={!docked}>

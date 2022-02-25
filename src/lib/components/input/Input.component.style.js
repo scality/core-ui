@@ -4,11 +4,21 @@ import { getTheme, getThemePropSelector } from "../../utils";
 
 export const InputContainer = styled.div`
   display: inline-flex;
+  ${(props) => {
+    if (props.disabled) {
+      return css`
+        opacity: 0.3;
+        input, textarea, select, i {
+          cursor: not-allowed;
+        }
+      `;
+    }
+  }}
   .sc-checkbox {
     margin: ${defaultTheme.padding.smaller} 0;
   }
 
-  .sc-select {
+  &.sc-select {
     width: 200px;
   }
 

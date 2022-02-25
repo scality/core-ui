@@ -1,15 +1,15 @@
 //@flow
-import React, { useRef } from "react";
-import { DebounceInput } from "react-debounce-input";
-import Checkbox from "../checkbox/Checkbox.component";
-import Select from "../select/Select.component";
-import TextArea from "../textarea/TextArea.component";
+import React, { useRef } from 'react';
+import { DebounceInput } from 'react-debounce-input';
+import Checkbox from '../checkbox/Checkbox.component';
+import Select from '../select/Select.component';
+import TextArea from '../textarea/TextArea.component';
 import {
   InputContainer,
   LabelStyle,
   InputErrorMessage,
   InputWrapper,
-} from "./Input.component.style";
+} from './Input.component.style';
 
 export type Item = {
   label: string,
@@ -18,7 +18,7 @@ export type Item = {
 
 type Items = Array<Item>;
 
-type Props = {
+export type InputProps = {
   value: any,
   type?: string,
   label?: string,
@@ -28,6 +28,7 @@ type Props = {
   checked?: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   options?: Items,
+  disabled?: boolean,
   min?: string,
   max?: string,
 };
@@ -52,12 +53,12 @@ const InputRenderer = ({
      */
     const valuePropDescriptor = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
-      "value",
+      'value',
     );
     if (valuePropDescriptor && inputEl.current) {
       const nativeInputValueSetter = valuePropDescriptor.set;
       if (nativeInputValueSetter) {
-        if (e.target.dataset.core === "up")
+        if (e.target.dataset.core === 'up')
           nativeInputValueSetter.call(
             inputEl.current,
             max
@@ -76,7 +77,7 @@ const InputRenderer = ({
               : parseInt(value) - 1,
           );
       }
-      const event = new Event("input", { bubbles: true });
+      const event = new Event('input', { bubbles: true });
       inputEl.current.dispatchEvent(event);
     }
   };
@@ -146,16 +147,21 @@ const InputRenderer = ({
   else return input.text;
 };
 
-const Input = ({ label, id, error, type, ...rest }: Props) => {
+const Input = ({ label, id, error, type, disabled, ...rest }: InputProps) => {
   return (
-    <InputContainer className="sc-input" error={error} type={type}>
+    <InputContainer
+      className="sc-input"
+      disabled={disabled}
+      error={error}
+      type={type}
+    >
       {label && (
         <LabelStyle htmlFor={id} className="sc-input-label">
           {label}
         </LabelStyle>
       )}
       <InputWrapper className="sc-input-wrapper">
-        <InputRenderer id={id} type={type} {...rest} />
+        <InputRenderer id={id} type={type} disabled={disabled} {...rest} />
         {error && (
           <InputErrorMessage className="sc-input-error">
             {error}

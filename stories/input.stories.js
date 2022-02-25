@@ -29,6 +29,14 @@ const ExampleInput = () => {
         onChange={action('onChange')}
         data-cy="default_input"
       />
+      <Title>Input disabled</Title>
+      <Input
+        id="id1"
+        value="value"
+        disabled={true}
+        onChange={action('onChange')}
+        data-cy="default_input"
+      />
       <Title>Input with label</Title>
       <Input
         id="id2"
