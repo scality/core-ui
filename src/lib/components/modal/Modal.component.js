@@ -1,9 +1,10 @@
 //@flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import type { Node } from 'react';
 import { getThemePropSelector } from '../../utils';
+import ReactDom from 'react-dom';
 
 type Props = {
   isOpen: boolean,
@@ -65,22 +66,34 @@ const ModalClose = styled.div`
 `;
 
 const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
-  return isOpen ? (
-    <ModalContainer className="sc-modal" {...rest}>
-      <ModalContent className="sc-modal-content">
-        <ModalHeader className="sc-modal-header">
-          <ModalHeaderTitle>{title}</ModalHeaderTitle>
-          <ModalClose onClick={close}>
-            <i className="fas fa-times" />
-          </ModalClose>
-        </ModalHeader>
-        <ModalBody className="sc-modal-body">{children}</ModalBody>
-        {footer && (
-          <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
-        )}
-      </ModalContent>
-    </ModalContainer>
-  ) : null;
+  const modalContainer = document.createElement('div');
+
+  useEffect(() => {
+    document.body && document.body.appendChild(modalContainer);
+    return () => {
+      document.body && document.body.removeChild(modalContainer);
+    };
+  }, [modalContainer]);
+
+  return isOpen
+    ? ReactDom.createPortal(
+        <ModalContainer className="sc-modal" {...rest}>
+          <ModalContent className="sc-modal-content">
+            <ModalHeader className="sc-modal-header">
+              <ModalHeaderTitle>{title}</ModalHeaderTitle>
+              <ModalClose onClick={close}>
+                <i className="fas fa-times" />
+              </ModalClose>
+            </ModalHeader>
+            <ModalBody className="sc-modal-body">{children}</ModalBody>
+            {footer && (
+              <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
+            )}
+          </ModalContent>
+        </ModalContainer>,
+        modalContainer,
+      )
+    : null;
 };
 
 export default Modal;
