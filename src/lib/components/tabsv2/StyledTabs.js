@@ -15,7 +15,7 @@ export const TabItem = styled.div`
   border: ${spacing.sp1} solid transparent;
   min-width: 5rem;
 
-  &:focus-visible {
+  &:focus-within {
     outline: 0;
     position: relative;
     border: ${spacing.sp1} dashed ${getThemePropSelector('selectedActive')};
