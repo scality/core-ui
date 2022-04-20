@@ -9,7 +9,7 @@ type Props = {
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   label?: string,
 };
-const ToggleContainer = styled.label`
+const ToggleContainer = styled.span`
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -80,8 +80,8 @@ const StyledSwitchLabel = styled.span`
 
 function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
   return (
-    <ToggleContainer className="sc-toggle" {...rest}>
-      <Switch {...rest}>
+    <ToggleContainer className="sc-toggle">
+      <Switch>
         <ToggleInput
           type="checkbox"
           checked={toggle}
