@@ -15,10 +15,14 @@ export const TabItem = styled.div`
   border: ${spacing.sp1} solid transparent;
   min-width: 5rem;
 
-  &:focus-within {
+  &:focus-visible {
     outline: 0;
     position: relative;
     border: ${spacing.sp1} dashed ${getThemePropSelector('selectedActive')};
+  }
+
+  &:focus-within {
+    outline: 0;
   }
 
   ${(props) => {
