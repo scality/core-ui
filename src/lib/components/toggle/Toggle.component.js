@@ -8,6 +8,7 @@ type Props = {
   toggle: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   label?: string,
+  disabled?: boolean,
 };
 const ToggleContainer = styled.span`
   display: inline-flex;
