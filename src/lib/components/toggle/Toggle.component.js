@@ -8,6 +8,7 @@ type Props = {
   toggle: boolean,
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   label?: string,
+  disabled?: boolean,
 };
 const ToggleContainer = styled.span`
   display: inline-flex;
@@ -78,14 +79,15 @@ const StyledSwitchLabel = styled.span`
     getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
 `;
 
-function ToggleSwitch({ toggle, label, onChange, ...rest }: Props) {
+function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
   return (
-    <ToggleContainer className="sc-toggle">
+    <ToggleContainer className="sc-toggle" disabled={disabled}>
       <Switch>
         <ToggleInput
           type="checkbox"
           checked={toggle}
           onChange={onChange}
+          disabled={disabled}
           {...rest}
         />
         <Slider className="sc-slider" toggle={toggle} />
