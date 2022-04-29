@@ -69,7 +69,6 @@ const TooltipOverLayContainer = styled.div`
     (props && props.overlayStyle && props.overlayStyle.fontSize) ||
     defaultTheme.fontSize.small};
   width: ${(props) => props && props.overlayStyle && props.overlayStyle.width};
-  text-align: center;
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
   }};
