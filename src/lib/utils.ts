@@ -1,27 +1,16 @@
 import * as defaultTheme from './style/theme';
-
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
-
 export function mergeTheme(theme, defaultTheme) {
-  return theme
-    ? {
-        ...defaultTheme.brand,
-        ...theme,
-      }
-    : defaultTheme.brand;
+  return theme ? { ...defaultTheme.brand, ...theme } : defaultTheme.brand;
 }
-
 export const getTheme = (props) => {
   return mergeTheme(props.theme, defaultTheme);
 };
-
 export const getThemePropSelector = (key) => (props) => {
   return getTheme(props)[key];
 };
-
 export const getThemeVariantSelector = () => (props) =>
   getTheme(props)[props.variant];
-
 export const hex2RGB = (str: string): [number, number, number] => {
   const [, short, long] = String(str).match(RGB_HEX) || [];
 
@@ -37,7 +26,6 @@ export const hex2RGB = (str: string): [number, number, number] => {
 
   throw new Error('Invalid hex string provided');
 };
-
 export const convertRemToPixels = (rem: number): number => {
   if (
     document.documentElement &&
@@ -49,5 +37,6 @@ export const convertRemToPixels = (rem: number): number => {
       rem * parseFloat(getComputedStyle(document.documentElement).fontSize) || 0
     );
   }
+
   return 0;
 };

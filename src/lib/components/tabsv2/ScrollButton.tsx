@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
-
 const StyledScrollButton = styled.div`
   display: flex;
   justify-content: center;
@@ -23,12 +22,10 @@ const StyledScrollButton = styled.div`
       ${getThemePropSelector('infoPrimary')};
   }
 `;
-
 type Props = {
-  direction: 'left' | 'right',
-  onClick: (React.SyntheticEvent<HTMLDivElement>) => void,
+  direction: 'left' | 'right';
+  onClick: (arg0: React.SyntheticEvent<HTMLDivElement>) => void;
 };
-
 const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
   return (
     <StyledScrollButton direction={direction} onClick={onClick} ref={ref}>
@@ -36,5 +33,4 @@ const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
     </StyledScrollButton>
   );
 });
-
 export default ScrollButton;

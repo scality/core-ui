@@ -2,10 +2,17 @@ const STATUS_CRITICAL = 'critical';
 const STATUS_WARNING = 'warning';
 const STATUS_NONE = 'none';
 const STATUS_HEALTH = 'healthy';
+
+type StatusType =
+  | typeof STATUS_CRITICAL
+  | typeof STATUS_WARNING
+  | typeof STATUS_NONE
+  | typeof STATUS_HEALTH;
+
 // some common customized sortTypes
 export function compareHealth(
-  status1: STATUS_WARNING | STATUS_CRITICAL | STATUS_NONE | STATUS_HEALTH,
-  status2: STATUS_WARNING | STATUS_CRITICAL | STATUS_NONE | STATUS_HEALTH,
+  status1: StatusType,
+  status2: StatusType,
 ): number {
   if (
     ![STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].includes(

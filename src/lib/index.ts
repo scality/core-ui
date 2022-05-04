@@ -1,7 +1,5 @@
-//@flow
 import '@fortawesome/fontawesome-free/css/all.css';
 import './index.css';
-
 import Banner from './components/banner/Banner.component';
 import Breadcrumb from './components/breadcrumb/Breadcrumb.component';
 import Button from './components/button/Button.component';
@@ -61,7 +59,6 @@ import Card from './components/card/Card.component';
 import PrettyBytes from './components/prettybytes/PrettyBytes.component';
 import Icon from './components/icon/Icon.component';
 import StatusWrapper from './components/statuswrapper/Statuswrapper.component';
-
 export {
   LOADER_SIZE,
   Loader,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import type { Node } from 'react';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 type Item = {

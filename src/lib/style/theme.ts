@@ -10,12 +10,10 @@ export const turquoise = '#00B2A9';
 export const yellowOrange = '#F1B434';
 export const mediumOrange = '#FF8F1C';
 export const yellow = '#EFC93D';
-
 export const green = '#228F67';
 export const white = '#ffffff';
 export const black = '#000000';
 export const blackLight = '#313B44';
-
 export const blueDarkest = '#0F3554';
 export const blueDarker = '#144A75';
 export const blueDark = '#1F73B7';
@@ -23,7 +21,6 @@ export const blue = '#337FBD';
 export const blueLight = '#5293C7';
 export const blueLighter = '#ADCCE4';
 export const blueLightest = '#CEE2F2';
-
 export const grayDarkest = '#2F3941';
 export const grayDarker = '#49545C';
 export const grayDark = '#68737D';
@@ -31,7 +28,6 @@ export const gray = '#87929D';
 export const grayLight = '#C2C8CC';
 export const grayLighter = '#D8DCDE';
 export const grayLightest = '#E9EBED';
-
 // Export the default light & dark theme
 export const defaultTheme = {
   light: {
@@ -101,7 +97,8 @@ export const defaultTheme = {
     backgroundLevel4: '#171721',
     textPrimary: '#EAEAEA',
     textSecondary: '#B5B5B5',
-    textTertiary: '#B5B5B5', // deprecated color
+    textTertiary: '#B5B5B5',
+    // deprecated color
     textReverse: '#000000',
     textLink: '#71AEFF',
     // deprecated colors
@@ -126,7 +123,6 @@ export const defaultTheme = {
   },
 };
 export const brand = defaultTheme.darkRebrand;
-
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';
@@ -136,17 +132,16 @@ export const lineColor5 = '#E3FF73';
 export const lineColor6 = '#BE2543';
 export const lineColor7 = '#FD8144';
 export const lineColor8 = '#F6B187';
-
 export const fontSize = {
   smaller: '0.71rem',
   small: '0.85rem',
   base: '1rem',
   large: '1.14rem',
   larger: '1.43rem',
-  huge: '1.57rem', // no use case for the moment
+  huge: '1.57rem',
+  // no use case for the moment
   massive: '1.71rem', // no use case for the moment
 };
-
 export const space = [
   '0',
   '0.071rem',
@@ -163,7 +158,6 @@ export const space = [
   '2.286rem',
   '2.857rem',
 ];
-
 export const fontWeight = {
   light: '400',
   base: '400',
@@ -181,7 +175,6 @@ export const padding = {
   large: '20px',
   larger: '24px',
 };
-
 export const spacing = {
   sp0: space[0],
   sp1: space[1],
@@ -198,7 +191,6 @@ export const spacing = {
   sp32: space[12],
   sp40: space[13],
 };
-
 // Svg size
 export const svgSize = {
   smaller: '11px',
@@ -209,7 +201,6 @@ export const svgSize = {
   huge: '30px',
   massive: '40px',
 };
-
 export const zIndex = {
   tooltip: 9990,
   notification: 9000,
@@ -221,11 +212,9 @@ export const zIndex = {
   scrollbarButton: 2,
   base: 1,
 };
-
 //navbar
 export const navbarHeight = '3.357rem';
 export const navbarItemWidth = '4.286rem';
-
 //sidebar
 export const sidebarItemHeight = spacing.sp40;
 export const sidebarWidth = spacing.sp40;
