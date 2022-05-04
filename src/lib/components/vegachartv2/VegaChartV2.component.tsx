@@ -10,7 +10,6 @@ import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
 import { getThemePropSelector } from '../../utils';
 import { useCursorX, SyncedCursorChartsContext } from './SyncedCursorCharts';
-import { Handler } from 'vega-tooltip';
 import { TooltipHandlerWithPaint } from '../linetemporalchart/tooltip';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';

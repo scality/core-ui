@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 import { CoreUiThemeProvider } from '../src/lib/next';
 
 import { defaultTheme } from '../src/lib/style/theme';
