@@ -1,7 +1,7 @@
 //@flow
 import React from 'react';
 import Banner from '../src/lib/components/banner/Banner.component';
-import type { Props } from '../src/lib/components/banner/Banner.component';
+import { Props } from '../src/lib/components/banner/Banner.component';
 import { Wrapper } from './common';
 
 export default {

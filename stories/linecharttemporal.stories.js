@@ -5,7 +5,7 @@ import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCurs
 import LineTemporalChart, {
   YAXIS_TITLE_READ_WRITE,
 } from '../src/lib/components/linetemporalchart/LineTemporalChart.component';
-import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider.js';
+import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { Wrapper } from './common';
 import {
   dataLineChartV2,
@@ -35,14 +35,22 @@ export const Default = () => {
               height={300}
               yAxisType={'default'}
               startingTimeStamp={1629306229}
-              helpText={<>
-                This charts represents lorem ipsum<br/>
-                This charts represents lorem ipsum<br/>
-                This charts represents lorem ipsum<br/>
-                This charts represents lorem ipsum<br/>
-                This charts represents lorem ipsum<br/>
-                This charts represents lorem ipsum<br/>
-              </>}
+              helpText={
+                <>
+                  This charts represents lorem ipsum
+                  <br />
+                  This charts represents lorem ipsum
+                  <br />
+                  This charts represents lorem ipsum
+                  <br />
+                  This charts represents lorem ipsum
+                  <br />
+                  This charts represents lorem ipsum
+                  <br />
+                  This charts represents lorem ipsum
+                  <br />
+                </>
+              }
               renderTooltipSerie={useCallback(
                 (serie, tooltipData) => {
                   if (serie.key === 'bootstrap') {

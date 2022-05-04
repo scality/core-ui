@@ -1,6 +1,6 @@
 //@flow
 import { useContext } from 'react';
-import type { Element, Node } from 'react';
+import { Element, Node } from 'react';
 import TextBadge from '../textbadge/TextBadge.component';
 import { TabsContext } from './Tabsv2.component';
 

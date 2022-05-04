@@ -9,7 +9,7 @@ import LineTemporalChart from './components/linetemporalchart/LineTemporalChart.
 import {
   MetricsTimeSpanProvider,
   useMetricsTimeSpan,
-} from './components/linetemporalchart/MetricTimespanProvider.js';
+} from './components/linetemporalchart/MetricTimespanProvider';
 import { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
 import Select from './components/selectv2/Selectv2.component';
 import Healthselector from './components/healthselectorv2/HealthSelector.component';
