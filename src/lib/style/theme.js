@@ -147,6 +147,23 @@ export const fontSize = {
   massive: '1.71rem', // no use case for the moment
 };
 
+export const space = [
+  '0',
+  '0.071rem',
+  '0.143rem',
+  '0.286rem',
+  '0.571rem',
+  '0.71rem',
+  '0.857rem',
+  '1rem',
+  '1.143rem',
+  '1.429rem',
+  '1.714rem',
+  '2rem',
+  '2.286rem',
+  '2.857rem',
+];
+
 export const fontWeight = {
   light: '400',
   base: '400',
@@ -166,20 +183,20 @@ export const padding = {
 };
 
 export const spacing = {
-  sp0: '0',
-  sp1: '0.071rem',
-  sp2: '0.143rem',
-  sp4: '0.286rem',
-  sp8: '0.571rem',
-  sp10: '0.71rem',
-  sp12: '0.857rem',
-  sp14: '1rem',
-  sp16: '1.143rem',
-  sp20: '1.429rem',
-  sp24: '1.714rem',
-  sp28: '2rem',
-  sp32: '2.286rem',
-  sp40: '2.857rem',
+  sp0: space[0],
+  sp1: space[1],
+  sp2: space[2],
+  sp4: space[4],
+  sp8: space[5],
+  sp10: space[6],
+  sp12: space[7],
+  sp14: space[8],
+  sp16: space[9],
+  sp20: space[10],
+  sp24: space[11],
+  sp28: space[12],
+  sp32: space[13],
+  sp40: space[14],
 };
 
 // Svg size
@@ -192,6 +209,7 @@ export const svgSize = {
   huge: '30px',
   massive: '40px',
 };
+
 export const zIndex = {
   tooltip: 9990,
   notification: 9000,

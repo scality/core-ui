@@ -1,7 +1,8 @@
-import React from "react";
-import { ThemeProvider } from "styled-components";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { CoreUiThemeProvider } from '../src/lib/next';
 
-import { defaultTheme } from "../src/lib/style/theme";
+import { defaultTheme } from '../src/lib/style/theme';
 
 const themes = {
   darkRebrand: defaultTheme.darkRebrand,
@@ -10,23 +11,24 @@ const themes = {
 
 export const globalTypes = {
   theme: {
-    name: "Theme",
-    description: "Global theme for components",
-    defaultValue: "darkRebrand",
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'darkRebrand',
     toolbar: {
-      icon: "circlehollow",
+      icon: 'circlehollow',
       // array of plain string values or MenuItem shape (see below)
-      items: ["light", "darkRebrand"],
+      items: ['light', 'darkRebrand'],
     },
   },
 };
 
 const withThemeProvider = (Story, context) => {
   const theme = themes[context.globals.theme];
+  console.log('theme', theme);
   return (
-    <ThemeProvider theme={theme}>
+    <CoreUiThemeProvider theme={theme}>
       <Story {...context} />
-    </ThemeProvider>
+    </CoreUiThemeProvider>
   );
 };
 
@@ -36,24 +38,24 @@ export const parameters = {
   options: {
     storySort: {
       order: [
-        "Style",
-        ["Color", "Icons"],
-        "Components",
+        'Style',
+        ['Color', 'Icons'],
+        'Components',
         [
-          "Navigation",
-          "Button",
-          "Chips",
-          "Checkbox",
-          "Toggle",
-          "Dropdown",
-          "Input",
-          "Selector",
-          "Chart",
-          "Progress & loading",
-          "Table",
-          "Notification",
+          'Navigation',
+          'Button',
+          'Chips',
+          'Checkbox',
+          'Toggle',
+          'Dropdown',
+          'Input',
+          'Selector',
+          'Chart',
+          'Progress & loading',
+          'Table',
+          'Notification',
         ],
-        "Guideline",
+        'Guideline',
       ],
     },
   },

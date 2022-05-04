@@ -13,6 +13,9 @@ import {
 import { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
 import Select from './components/selectv2/Selectv2.component';
 import Healthselector from './components/healthselectorv2/HealthSelector.component';
+import CoreUiThemeProvider from './components/coreuithemeprovider/CoreUiThemeProvider';
+import Box from './components/box/Box';
+
 export {
   Button,
   Tabs,
@@ -24,4 +27,6 @@ export {
   MetricsTimeSpanProvider,
   useMetricsTimeSpan,
   Healthselector,
+  CoreUiThemeProvider,
+  Box,
 };
