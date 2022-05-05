@@ -26,6 +26,7 @@ export const Default = () => {
       <Icon name={"Check-circle"} color={"statusHealthy"}/>
       <Icon name={"Exclamation-circle"} color={"statusWarning"}/>
       <Icon name={"Times-circle"} color={"statusCritical"}/>
+      <Icon name={"Arrow-right"} color={"infoPrimary"}/>
       <Title>All Icons</Title>
       { Object.keys(iconTable).map((key, index) => (
         <Icon key={index} name={key} size={"2x"} color={"secondary"}/>

@@ -52,6 +52,7 @@ export const iconTable = {
   "Calendar": "fas faCalendarWeek",
   "Arrow-up": "fas faArrowUp",
   "Arrow-down": "fas faArrowDown",
+  "Arrow-right": "fas faArrowRight",
   "Folder": "far faFolder",
   "File": "far faFile",
   "Deletion-marker": "fas faBan",
