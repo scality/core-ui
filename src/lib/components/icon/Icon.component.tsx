@@ -6,6 +6,7 @@ import { getTheme } from '../../utils';
 import Loader from '../loader/Loader.component';
 import { SizeProp } from '@fortawesome/react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export const iconTable = {
   Account: 'fas faWallet',
   Backend: 'fas faNetworkWired',
@@ -51,6 +52,7 @@ export const iconTable = {
   Calendar: 'fas faCalendarWeek',
   'Arrow-up': 'fas faArrowUp',
   'Arrow-down': 'fas faArrowDown',
+  'Arrow-right': 'fas faArrowRight',
   Folder: 'far faFolder',
   File: 'far faFile',
   'Deletion-marker': 'fas faBan',
@@ -141,9 +143,10 @@ function Icon({
 }: Props) {
   const iconClass = iconTable[name];
   if (!iconClass) throw new Error(`${name}: is not a valid icon.`);
-  const LazyStyledIcon = useMemo(() => getLazyStyledIcon(iconClass), [
-    iconClass,
-  ]);
+  const LazyStyledIcon = useMemo(
+    () => getLazyStyledIcon(iconClass),
+    [iconClass],
+  );
   return (
     <Suspense
       fallback={<Loader size="base" aria-label={`${name} ${ariaLabel}`} />}
