@@ -8,8 +8,8 @@
   "mainSrc": "src/lib/index.js",
   "scripts": {
     "analyze": "source-map-explorer 'dist/*.js'",
-    "build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files && rimraf dist/**/*.test.js && rimraf dist/**/__snapshots__",
-    "build2": "rimraf dist && tsc",
+    "build2": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files && rimraf dist/**/*.test.js && rimraf dist/**/__snapshots__",
+    "build": "rimraf dist && tsc",
     "lint": "eslint src/* --ext .js --no-error-on-unmatched-pattern",
     "prepare": "npm run build",
     "plop": "plop",
