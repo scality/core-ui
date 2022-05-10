@@ -4,10 +4,8 @@
     "compilerOptions": {
       "module": "esnext",
       "declaration": true, // Generate d.ts files
-      // This compiler run should
-      // only output d.ts files
+      "allowSyntheticDefaultImports": true,
       "jsx": "react-jsx",
-      "emitDeclarationOnly": true,
       // Types should go into this directory.
       // Removing this would place the .d.ts files
       // next to the .js files
@@ -15,9 +13,11 @@
       // go to js file when using IDE functions like
       // "Go to Definition" in VSCode
       "declarationMap": true,
+      "lib": ["ESNext", "dom"],
       // https://stackoverflow.com/questions/51634361/how-to-force-tsc-to-ignore-node-modules-folder
       "types": [],
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "moduleResolution": "node",
     }
   }
   
