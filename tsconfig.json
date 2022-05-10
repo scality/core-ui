@@ -1,6 +1,6 @@
 {
     "include": ["src/**/*"],
-    "exclude": ["src/**/*.test.*"],
+    "exclude": ["src/**/*.test.*", "node_modules/*", "node_modules/@types/**/*"],
     "compilerOptions": {
       "module": "esnext",
       "declaration": true, // Generate d.ts files
@@ -14,7 +14,10 @@
       "outDir": "dist",
       // go to js file when using IDE functions like
       // "Go to Definition" in VSCode
-      "declarationMap": true
+      "declarationMap": true,
+      // https://stackoverflow.com/questions/51634361/how-to-force-tsc-to-ignore-node-modules-folder
+      "types": [],
+      "skipLibCheck": true
     }
   }
   
