@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
+
 type Props = {
   label?: string;
   value?: string;
@@ -50,7 +51,10 @@ const StyledCheckboxLabel = styled.span`
   vertical-align: middle;
   color: ${getThemePropSelector('textPrimary')};
 `;
-const StyledCheckbox = styled.label`
+const StyledCheckbox = styled.label<{
+  disabled?: boolean;
+  checked?: boolean;
+}>`
   position: relative;
   display: inline-block;
   ${(props) => {
@@ -65,9 +69,8 @@ const StyledCheckbox = styled.label`
   }}
 
   ${(props) => {
-    const { textTertiary, selectedActive, highlight, buttonPrimary } = getTheme(
-      props,
-    );
+    const { textTertiary, selectedActive, highlight, buttonPrimary } =
+      getTheme(props);
     const iconCheckedColor = props.checked ? 'white' : 'transparent';
     const checkBoxFocusBorder = buttonPrimary;
     const checkBoxFocusColor = props.checked ? selectedActive : null;
@@ -109,7 +112,7 @@ const StyledCheckbox = styled.label`
           border-color: ${checkBoxColorBorderHover};
         }
       }
-      
+
       &:focus {
         outline: 0;
         &:before {
@@ -128,11 +131,11 @@ const StyledCheckbox = styled.label`
     ${(props) => {
       return props.disabled
         ? css`
-        cursor: default;
-      `
+            cursor: default;
+          `
         : css`
-        cursor: pointer;
-      `;
+            cursor: pointer;
+          `;
     }}
     margin: 0px;
     opacity: 0;

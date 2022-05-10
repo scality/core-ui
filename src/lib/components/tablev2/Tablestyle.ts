@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';

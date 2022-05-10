@@ -1,5 +1,5 @@
-import React from 'react';
 import VegaChart from '../vegachart/VegaChart.component';
+
 type Props = {
   id: string;
   data: Array<Record<string, any>>;

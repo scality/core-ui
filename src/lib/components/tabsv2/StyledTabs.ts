@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { spacing } from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
@@ -24,12 +25,8 @@ export const TabItem = styled.div`
   }
 
   ${(props) => {
-    const {
-      highlight,
-      backgroundLevel3,
-      backgroundLevel4,
-      selectedActive,
-    } = getTheme(props);
+    const { highlight, backgroundLevel3, backgroundLevel4, selectedActive } =
+      getTheme(props);
     return props.selected
       ? `
         background-color: ${props.activeTabColor || backgroundLevel4};

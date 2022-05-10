@@ -1,4 +1,3 @@
-import React from 'react';
 import VegaChart from '../vegachartv2/VegaChartV2.component';
 type Props = {
   id: string;

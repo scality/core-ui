@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+// @ts-nocheck
+import { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import {

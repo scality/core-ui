@@ -54,7 +54,7 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
         <Button
           label={translations[locale].return_home}
           variant="secondary"
-          onReturnHomeClick={onReturnHomeClick}
+          onClick={onReturnHomeClick}
         />
       )}
     </ErrorPageContainer>

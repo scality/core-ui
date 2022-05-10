@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
+
 const StyledScrollButton = styled.div`
   display: flex;
   justify-content: center;
@@ -28,6 +29,7 @@ type Props = {
 };
 const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
   return (
+    // @ts-ignore
     <StyledScrollButton direction={direction} onClick={onClick} ref={ref}>
       <i className={`fas fa-chevron-${direction}`} />
     </StyledScrollButton>

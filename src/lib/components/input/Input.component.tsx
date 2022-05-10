@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useRef } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import Checkbox from '../checkbox/Checkbox.component';

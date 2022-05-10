@@ -1,4 +1,4 @@
-import { $Shape } from 'utility-types';
+// @ts-nocheck
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
@@ -9,8 +9,8 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
-  getRowId,
 } from 'react-table';
+
 import SingleSelectableContent from './SingleSelectableContent';
 import Search from './Search';
 import SearchWithQueryParams from './SearchWithQueryParams';
@@ -25,7 +25,7 @@ export type TableProps = {
     Header: string;
     accessor: string;
     sortType?: SortType;
-    cellStyle?: $Shape<CSSStyleDeclaration>;
+    cellStyle?: Partial<CSSStyleDeclaration>;
     Cell?: React.ReactNode | ((props: any) => React.ReactNode);
     disableSortBy?: boolean;
   }[];
@@ -33,7 +33,7 @@ export type TableProps = {
   //we don't display the default sort key in the URL, so we need to specify here
   data: DataRow[];
   children: React.ReactNode;
-  getRowId?: getRowId;
+  getRowId?: any;
   sortTypes?: Record<string, SortType>;
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;

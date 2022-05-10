@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { $PropertyType } from 'utility-types';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import Tooltip from '../tooltip/Tooltip.component';

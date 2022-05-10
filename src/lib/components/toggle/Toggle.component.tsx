@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
@@ -21,15 +22,13 @@ const Switch = styled.label`
   height: ${spacing.sp14};
   ${(props) => {
     return css`
-      ${
-        props.disabled
-          ? `
+      ${props.disabled
+        ? `
           cursor: not-allowed;
         `
-          : `
+        : `
           cursor: pointer;
-        `
-      }
+        `}
     `;
   }}
 `;

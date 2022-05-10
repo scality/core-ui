@@ -13,7 +13,10 @@ export const Title = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
-export const ProgressCircle = styled.circle`
+export const ProgressCircle = styled.circle<{
+  circumference: number;
+  percent: number;
+}>`
   stroke-dasharray: ${({ circumference }) => circumference};
   stroke-dashoffset: ${({ percent, circumference }) =>
     ((100 - percent) / 100) * circumference};
@@ -22,7 +25,7 @@ export const ProgressCircle = styled.circle`
   stroke-linecap: round;
   fill: none;
 `;
-export const BackgroundCircle = styled.circle`
+export const BackgroundCircle = styled.circle<{ backgroundColor: string }>`
   fill: none;
   stroke: ${(props) => props.backgroundColor || getTheme(props).primaryDark2};
   stroke-width: ${(props) => props.strokeWidth};

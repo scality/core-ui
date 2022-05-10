@@ -74,7 +74,7 @@ export default function TableSearch(props: SearchProps) {
         disableToggle
         onChange={(evt) => {
           if (typeof onChange === 'function') {
-            //$FlowFixMe
+            // @ts-ignore
             onChange(evt.target.value);
           }
         }}

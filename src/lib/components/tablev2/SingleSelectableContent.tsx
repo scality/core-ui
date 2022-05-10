@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useCallback, memo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List, areEqual } from 'react-window';
@@ -90,13 +91,8 @@ export function SingleSelectableContent({
     console.error('Please specify the onRowSelected function.');
   }
 
-  const {
-    headerGroups,
-    prepareRow,
-    rows,
-    onBottom,
-    onBottomOffset,
-  } = useTableContext();
+  const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
+    useTableContext();
   const RenderRow = memo(({ index, style }) => {
     const row = rows[index];
     prepareRow(row);

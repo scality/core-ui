@@ -1,4 +1,5 @@
-import React, { useMemo, useRef, useLayoutEffect, Fragment } from 'react';
+// @ts-nocheck
+import { useMemo, useRef, useLayoutEffect, Fragment } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { lighten, darken } from 'polished';
 import { expressionFunction } from 'vega';

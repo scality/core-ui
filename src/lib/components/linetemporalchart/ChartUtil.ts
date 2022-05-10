@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Serie } from './LineTemporalChart.component';
 import './LineTemporalChart.component';
 import { NAN_STRING } from '../constants';

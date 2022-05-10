@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import * as defaultTheme from '../../style/theme';
@@ -12,7 +12,7 @@ export type Props = {
   dismissAfter?: number;
   onDismiss?: (arg0: string) => void;
 };
-const NotificationContainer = styled.div`
+const NotificationContainer = styled.div<{ variant: Variant }>`
   position: relative;
   padding: ${defaultTheme.padding.base};
   margin-top: ${defaultTheme.padding.base};
@@ -39,7 +39,11 @@ const NotificationTitle = styled.div`
   padding: 0 ${defaultTheme.padding.base} ${defaultTheme.padding.smaller} 0;
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
-const NotificationDismissProgress = styled.div`
+const NotificationDismissProgress = styled.div<{
+  variant: Variant;
+  value: number;
+  max: number;
+}>`
   position: absolute;
   bottom: 0;
   left: 0;

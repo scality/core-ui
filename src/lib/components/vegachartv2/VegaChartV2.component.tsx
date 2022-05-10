@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {
   useEffect,
   useContext,
@@ -18,6 +19,7 @@ type Props = {
   spec: Record<string, any>;
   tooltipPosition?: Position;
   theme?: 'light' | 'dark' | 'custom';
+  id?: string;
   onHover?: (dataPoint: any) => void;
   formatTooltip?: (
     value: any,

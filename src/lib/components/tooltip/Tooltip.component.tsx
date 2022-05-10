@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+// @ts-nocheck
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-
-// @ts-expect-error
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
+
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 export const TOP = 'top';

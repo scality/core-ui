@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 import * as defaultTheme from '../../style/theme';
@@ -12,7 +11,7 @@ const BreadcrumbContainer = styled.ol`
   padding-left: 0;
   margin: 0;
 `;
-const BreadcrumbItem = styled.li`
+const BreadcrumbItem = styled.li<{ active: boolean }>`
   box-sizing: border-box;
   height: 100%;
   font-size: ${defaultTheme.fontSize.larger};

@@ -1,10 +1,10 @@
-import React from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import CheckBox from './../checkbox/Checkbox.component';
 import Button from './../button/Button.component';
 import Select from './../select/Select.component';
 import { getThemePropSelector } from '../../utils';
+
 export type ItemProps = {
   selected?: boolean;
   isFavorite?: boolean;
@@ -135,18 +135,13 @@ function MultiSelectItem(props: ItemProps) {
 }
 
 function MultiSelectSearch(props: SearchProps) {
-  const {
-    selectedOption,
-    options,
-    placeholder,
-    onSelect,
-    onAdd,
-    ...rest
-  } = props;
+  const { selectedOption, options, placeholder, onSelect, onAdd, ...rest } =
+    props;
   return (
     <MultiSelectSearchContainer className="sc-multi-select-list-search">
       <Select
         options={options}
+        // @ts-ignore
         onChange={onSelect}
         placeholder={placeholder}
         value={selectedOption}

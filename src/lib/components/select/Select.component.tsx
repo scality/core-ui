@@ -10,6 +10,7 @@ export type Item = {
 };
 type Items = Array<Item>;
 type Props = {
+  id?: any;
   options: Items;
   formatOptionLabel?: (arg0: any) => JSX.Element;
 };

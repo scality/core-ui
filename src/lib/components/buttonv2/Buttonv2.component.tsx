@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Tooltip from '../tooltip/Tooltip.component';
@@ -165,8 +166,6 @@ export const ButtonStyled = styled.button`
         : null}
     `;
   }}
-
-
 `;
 export const ButtonLabel = styled.span`
   display: inline-flex;

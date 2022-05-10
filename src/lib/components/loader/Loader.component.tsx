@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { LOADER_SIZE as SIZE } from '../constants';
@@ -11,7 +10,7 @@ type Props = {
   children?: JSX.Element;
   centered?: boolean;
 };
-const LoaderContainer = styled.div`
+const LoaderContainer = styled.div<{ size: string; centered: boolean }>`
   display: flex;
   ${(props) => {
     return css`

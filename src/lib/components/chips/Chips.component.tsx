@@ -1,8 +1,8 @@
+// @ts-check
 import * as defaultTheme from '../../style/theme';
-import { Size } from '../constants';
+import { Size, Variant } from '../constants';
 import styled, { css } from 'styled-components';
 import Button from '../button/Button.component';
-import React from 'react';
 import { lighten } from 'polished';
 import { getTheme } from '../../utils';
 type Props = {
@@ -18,7 +18,11 @@ type Props = {
   onRemove?: (arg0: any) => void;
   size?: Size;
 };
-const ChipsContainer = styled.div`
+const ChipsContainer = styled.div<{
+  size?: string;
+  variant?: any;
+  icon?: JSX.Element;
+}>`
   display: inline-flex;
   .sc-chips-remove {
     padding-right: 10px;
@@ -75,12 +79,12 @@ const ChipsContainer = styled.div`
         `;
     }
   }}
-${(props) => {
-  const brand = getTheme(props);
-  return css`
-    color: ${brand.textReverse};
-  `;
-}}
+  ${(props) => {
+    const brand = getTheme(props);
+    return css`
+      color: ${brand.textReverse};
+    `;
+  }}
 
   ${(props) => {
     const brand = getTheme(props);
@@ -103,14 +107,18 @@ ${(props) => {
         `;
   }}
 `;
-export const ChipsIcon = styled.span`
+export const ChipsIcon = styled.span<{
+  variant: any;
+  text: string;
+  size: Size;
+}>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
     lighten(0.15, getTheme(props)[props.variant]).toString()};
 `;
-export const ChipsText = styled.span`
+export const ChipsText = styled.span<{ icon: any; isRemovable: boolean }>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -147,6 +155,7 @@ const Chips = ({
     </ChipsText>
     {onRemove && (
       <Button
+        // @ts-ignore
         className="sc-chips-remove"
         size={size}
         inverted={true}

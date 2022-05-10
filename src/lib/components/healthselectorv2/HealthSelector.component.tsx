@@ -1,4 +1,4 @@
-import * as React from 'react';
+// @ts-nocheck
 import { components } from 'react-select';
 import { OptionProps } from '../selectv2/Selectv2.component';
 import { SelectProps } from '../selectv2/Selectv2.component';

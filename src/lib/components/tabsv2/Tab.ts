@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { Element, Node } from 'react';
 import TextBadge from '../textbadge/TextBadge.component';
 import { TabsContext } from './Tabsv2.component';
 export type Query = Record<string, string>;
@@ -7,8 +6,8 @@ export type TabProps = {
   path: string;
   query?: Query;
   label: string;
-  textBadge?: Element<typeof TextBadge>;
-  children: Node;
+  textBadge?: typeof TextBadge;
+  children: JSX.Element;
   className?: string;
   exact?: boolean;
   strict?: boolean;

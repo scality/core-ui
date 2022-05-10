@@ -1,4 +1,4 @@
-import React from 'react';
+// @ts-nocheck
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';

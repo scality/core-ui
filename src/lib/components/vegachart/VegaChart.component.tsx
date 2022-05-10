@@ -1,4 +1,5 @@
-import React, { useEffect, useContext, useRef } from 'react';
+// @ts-nocheck
+import { useEffect, useContext, useRef } from 'react';
 import vegaEmbed, { Result } from 'vega-embed';
 import { ThemeContext, createGlobalStyle } from 'styled-components';
 import { getThemePropSelector } from '../../utils';
@@ -10,6 +11,7 @@ type Props = {
   spec: Record<string, any>;
   tooltipPosition?: Position;
   theme?: 'light' | 'dark' | 'custom';
+  className?: string;
 };
 
 /* How to theme tooltip:

@@ -1,7 +1,7 @@
+// @ts-nocheck
 import { $PropertyType } from 'utility-types';
-import React from 'react';
 import VegaChart from '../vegachart/VegaChart.component';
-import { Encoding, Field } from 'vega-lite';
+import type { Encoding, Field } from 'vega-lite';
 type Props = {
   id: string;
   data: Array<Record<string, any>>;

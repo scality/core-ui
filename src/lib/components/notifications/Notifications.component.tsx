@@ -17,7 +17,7 @@ type Props = {
   notifications: Array<NotificationProps>;
   onDismiss: (arg0: string) => void;
 };
-const NotificationsContainer = styled.div`
+const NotificationsContainer = styled.div<{ position: Position }>`
   position: fixed;
   z-index: ${defaultTheme.zIndex.notification};
   margin: ${defaultTheme.padding.larger};

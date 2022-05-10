@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import Input from '../input/Input.component';

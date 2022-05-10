@@ -12,6 +12,7 @@ import {
   shadow,
   system,
 } from 'styled-system';
+
 const Box = styled.div`
   ${layout}
   ${flexbox}

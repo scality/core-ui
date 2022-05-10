@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, {
   createContext,
   useContext,
@@ -6,7 +7,6 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { Element } from 'react';
 import { ScrollbarWrapper } from '../../index';
 import { components } from 'react-select';
 import Icon from '../icon/Icon.component';
@@ -220,7 +220,7 @@ type SelectOptionProps = {
   value: string;
   label: JSX.Element;
   isDisabled: boolean;
-  icon?: Element<typeof Icon>;
+  icon?: typeof Icon;
   optionProps: any;
 };
 
@@ -247,13 +247,8 @@ function SelectBox({
       return React.Children.toArray(children)
         .filter((child) => child.type === Option)
         .map((child) => {
-          const {
-            value,
-            children,
-            disabled,
-            icon,
-            ...rest
-          }: OptionProps = child.props;
+          const { value, children, disabled, icon, ...rest }: OptionProps =
+            child.props;
           return {
             value: value,
             label: children || '',

@@ -1,10 +1,11 @@
-import { Node, HTMLProps } from 'react';
-import React, { createContext } from 'react';
+// @ts-nocheck
+import { HTMLProps } from 'react';
+import { createContext } from 'react';
 import styled from 'styled-components';
 import { getTheme, hex2RGB } from '../../utils';
-const CardContext = createContext();
+const CardContext = createContext(null);
 type CardElementProps = {
-  children: Node;
+  children: JSX.Element;
   className?: string;
 };
 

@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+// @ts-nocheck
+import { useMemo } from 'react';
 import VegaChart from '../vegachartv2/VegaChartV2.component';
 import { useTheme } from 'styled-components';
 import { formatValue } from './tooltip/index';

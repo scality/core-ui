@@ -1,13 +1,20 @@
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{
+  disabled: boolean;
+  error: string;
+  type: string;
+}>`
   display: inline-flex;
   ${(props) => {
     if (props.disabled) {
       return css`
         opacity: 0.3;
-        input, textarea, select, i {
+        input,
+        textarea,
+        select,
+        i {
           cursor: not-allowed;
         }
       `;
@@ -43,7 +50,7 @@ export const InputContainer = styled.div`
     outline: none;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     /* Adding a padding to make room for the custom absolute postionned arrows */
     padding-right: 20px;
     -moz-appearance: textfield; /*For FireFox*/

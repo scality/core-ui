@@ -74,7 +74,7 @@ function ErrorPage500({
         <Button
           label={translations[locale].return_home}
           variant="secondary"
-          onReturnHomeClick={onReturnHomeClick}
+          onClick={onReturnHomeClick}
         />
       )}
     </ErrorPageContainer>

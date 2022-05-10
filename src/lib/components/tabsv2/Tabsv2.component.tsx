@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { Element, ChildrenArray } from 'react';
 import {
@@ -42,9 +43,8 @@ function Tabs({
 }: TabsProps) {
   const location = useLocation();
   const history = useHistory();
-  const [selectedTabIndex, setSelectedTabIndex] = useState<
-    number | null | undefined
-  >(null);
+  const [selectedTabIndex, setSelectedTabIndex] =
+    useState<number | null | undefined>(null);
   const queryURL = new URLSearchParams(location.search);
   const filteredTabsChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type === Tab,
@@ -116,14 +116,8 @@ function Tabs({
     displayScroll,
   } = useScrollingTabs(selectedTabIndex);
   const tabItems = filteredTabsChildren.map((child, index) => {
-    const {
-      path,
-      query,
-      label,
-      textBadge,
-      children,
-      ...childRest
-    }: TabProps = child.props;
+    const { path, query, label, textBadge, children, ...childRest }: TabProps =
+      child.props;
     const isSelected = selectedTabIndex === index;
     return (
       <TabItem

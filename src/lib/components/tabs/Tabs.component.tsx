@@ -1,6 +1,5 @@
-import React from 'react';
+// @ts-nocheck
 import styled from 'styled-components';
-import type { Node } from 'react';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 type Item = {
@@ -33,12 +32,8 @@ const TabItem = styled.div`
   border: 1px solid transparent;
 
   ${(props) => {
-    const {
-      highlight,
-      backgroundLevel3,
-      backgroundLevel4,
-      selectedActive,
-    } = getTheme(props);
+    const { highlight, backgroundLevel3, backgroundLevel4, selectedActive } =
+      getTheme(props);
     return props.selected
       ? `
         background-color: ${props.activeTabColor || backgroundLevel4};

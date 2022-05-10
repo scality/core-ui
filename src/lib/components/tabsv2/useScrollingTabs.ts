@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
 The Tabs component uses a lot of the code from Material-UI Scrollable Tabs to have the same behavior as it.
 Here is the license of material-ui:
@@ -237,8 +238,8 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
           ((displayScroll.start && !displayScroll.end) ||
             (!displayScroll.start && displayScroll.end))
         ) {
-          nextScrollStart += scrollButtonEndRef.current.getBoundingClientRect()
-            .width;
+          nextScrollStart +=
+            scrollButtonEndRef.current.getBoundingClientRect().width;
         }
 
         scroll(nextScrollStart);
@@ -270,9 +271,10 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
       window.removeEventListener('resize', updateScrollButtonState);
     };
   }, [updateScrollButtonState]);
-  const handleTabsScroll = useMemo(() => () => updateScrollButtonState(), [
-    updateScrollButtonState,
-  ]);
+  const handleTabsScroll = useMemo(
+    () => () => updateScrollButtonState(),
+    [updateScrollButtonState],
+  );
   useEffect(() => {
     updateScrollButtonState();
   });

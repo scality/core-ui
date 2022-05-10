@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { stringify } from 'vega-lite';
 import { isArray, isObject, isString } from 'vega-util';
 

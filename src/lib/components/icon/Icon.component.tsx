@@ -1,11 +1,12 @@
-import { $Keys } from 'utility-types';
+// import { $Keys } from 'utility-types';
 import React, { Suspense, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { brand } from '../../style/theme';
 import { getTheme } from '../../utils';
 import Loader from '../loader/Loader.component';
-import { SizeProp } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
 export const iconTable = {
   Account: 'fas faWallet',
@@ -98,9 +99,9 @@ const IconStyled = styled(FontAwesomeIcon)`
   }}
 `;
 type Props = {
-  name: $Keys<typeof iconTable>;
+  name: keyof typeof iconTable;
   size?: SizeProp;
-  color?: $Keys<typeof brand>;
+  color?: keyof typeof brand;
   ariaLabel?: string;
 };
 

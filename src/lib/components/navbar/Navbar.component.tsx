@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Node, Element } from 'react';
 import Logo from '../../icons/branding';
 import Dropdown from '../dropdown/Dropdown.component';
 import Button from '../button/Button.component';
@@ -16,13 +15,13 @@ type Tab = {
   title?: string;
   selected?: boolean;
   onClick?: (arg0: any) => void;
-  link?: Element<'a'>;
+  link?: JSX.Element;
 };
 export type Props = {
   onToggleClick?: () => void;
   rightActions: Actions;
   productName?: string;
-  logo?: Node;
+  logo?: JSX.Element;
   tabs?: Array<Tab>;
 };
 const NavbarContainer = styled.div`
@@ -79,7 +78,7 @@ const NavbarTabs = styled.div`
     }};
   }
 `;
-const TabItem = styled.div`
+const TabItem = styled.div<{ selected: boolean }>`
   box-sizing: border-box;
   height: 100%;
   display: flex;

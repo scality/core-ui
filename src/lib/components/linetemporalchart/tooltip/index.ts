@@ -1,5 +1,5 @@
+// @ts-nocheck
 import { stringify } from 'vega-lite';
-// @ts-expect-error Options is defined as a typescript type and is not recongized by flow
 import { Options } from 'vega-tooltip';
 import { Handler } from 'vega-tooltip';
 import { isArray, isObject, isString } from 'vega-util';

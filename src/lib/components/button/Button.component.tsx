@@ -1,4 +1,5 @@
-import React from 'react';
+// @ts-nocheck
+// Legacy Button should not be use anymore
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import { getTheme } from '../../utils';
@@ -180,28 +181,28 @@ export const ButtonStyled = styled.button`
   }}
 
 ${(props) => {
-  const brand = getTheme(props);
-  const brandLighter = lighten(0.2, brand[props.variant]).toString();
-  return css`
-    ${props.disabled
-      ? `
+    const brand = getTheme(props);
+    const brandLighter = lighten(0.2, brand[props.variant]).toString();
+    return css`
+      ${props.disabled
+        ? `
           box-shadow: none;
           pointer-events: none;
           opacity: 0.3;
           border-color: ${brandLighter};
           color: ${defaultTheme.white};
         `
-      : null}
-  `;
-}}
+        : null}
+    `;
+  }}
 
 ${(props) => {
-  const brand = getTheme(props);
-  const brandLighter = lighten(0.2, brand[props.variant]).toString();
-  const brandLight = lighten(0.1, brand[props.variant]).toString();
-  return css`
-    ${!props.text && props.icon && props.inverted
-      ? `
+    const brand = getTheme(props);
+    const brandLighter = lighten(0.2, brand[props.variant]).toString();
+    const brandLight = lighten(0.1, brand[props.variant]).toString();
+    return css`
+      ${!props.text && props.icon && props.inverted
+        ? `
         padding: 0;
         height: auto;
         border: none;
@@ -219,9 +220,9 @@ ${(props) => {
           color: ${brandLighter};
         }
         `
-      : null}
-  `;
-}}
+        : null}
+    `;
+  }}
 `;
 export const ButtonIcon = styled.span`
   ${(props) =>
@@ -243,6 +244,11 @@ export const ButtonContent = styled.span`
 `;
 const Anchor = ButtonStyled.withComponent('a');
 
+/**
+ * @deprecated
+ * You should use ButtonV2 with
+ * import { Button } from '@scality/core-ui/dist/next';
+ */
 function Button({
   text = '',
   href = '',
