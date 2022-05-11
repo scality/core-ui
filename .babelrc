@@ -9,7 +9,9 @@
         }
       }
     ],
-    "@babel/preset-react",
-    "@babel/preset-flow"
+    ["@babel/preset-react", {
+      "runtime": "automatic"
+    }],
+    "@babel/preset-typescript"
   ]
 }
