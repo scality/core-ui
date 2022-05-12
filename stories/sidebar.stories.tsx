@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../src/lib/components/sidebar/Sidebar.component';
+import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
 const actions = [
   {

@@ -8,7 +8,7 @@ import {
   DescriptionContent,
   Link,
 } from './ErrorPageStyle';
-import Button from '../buttonv2/Buttonv2.component';
+import { Button } from '../buttonv2/Buttonv2.component';
 const translations = {
   en: {
     unexpected_error: 'Unexpected Error',
@@ -81,4 +81,4 @@ function ErrorPage500({
   );
 }
 
-export default ErrorPage500;
+export { ErrorPage500 };

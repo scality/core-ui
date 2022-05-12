@@ -55,4 +55,4 @@ function CircularProgressBar({
   );
 }
 
-export default CircularProgressBar;
+export { CircularProgressBar };

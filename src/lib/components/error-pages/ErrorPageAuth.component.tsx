@@ -63,4 +63,4 @@ function ErrorPageAuth({ supportLink = null, locale = 'en', ...rest }: Props) {
   );
 }
 
-export default ErrorPageAuth;
+export { ErrorPageAuth };

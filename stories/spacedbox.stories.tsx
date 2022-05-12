@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SpacedBox from '../src/lib/components/spacedbox/SpacedBox';
+import { SpacedBox } from '../src/lib/components/spacedbox/SpacedBox';
 import { Props } from '../src/lib/components/spacedbox/SpacedBox';
 const control = {
   control: {

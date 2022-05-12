@@ -76,4 +76,4 @@ function CollapsiblePanel({
   );
 }
 
-export default CollapsiblePanel;
+export { CollapsiblePanel };

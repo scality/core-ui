@@ -93,4 +93,4 @@ const Breadcrumb = ({ paths = [], ...rest }: Props) => {
   );
 };
 
-export default Breadcrumb;
+export { Breadcrumb };

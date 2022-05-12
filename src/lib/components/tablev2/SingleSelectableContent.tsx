@@ -18,8 +18,8 @@ import {
 import { useTableContext } from './Tablev2.component';
 import { convertRemToPixels } from './TableUtil';
 
-import Tooltip from '../tooltip/Tooltip.component';
-import ConstrainedText from '../constrainedtext/Constrainedtext.component';
+import { Tooltip } from '../tooltip/Tooltip.component';
+import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 export const tableRowHeight = {
   // in rem unit
   h32: '2.286',
@@ -261,4 +261,3 @@ export function SingleSelectableContent({
     </>
   );
 }
-export default SingleSelectableContent;

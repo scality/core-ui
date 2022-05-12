@@ -143,4 +143,4 @@ function VegaChart({
   );
 }
 
-export default VegaChart;
+export { VegaChart };

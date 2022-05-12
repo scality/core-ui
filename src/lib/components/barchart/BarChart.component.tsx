@@ -1,4 +1,4 @@
-import VegaChart from '../vegachartv2/VegaChartV2.component';
+import { VegaChart } from '../vegachartv2/VegaChartV2.component';
 type Props = {
   id: string;
   data: Array<Record<string, any>>;
@@ -43,4 +43,4 @@ function BarChart({
   );
 }
 
-export default BarChart;
+export { BarChart };

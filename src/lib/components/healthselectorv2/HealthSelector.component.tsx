@@ -1,6 +1,9 @@
 // @ts-nocheck
 import { components } from 'react-select';
+import styled from 'styled-components';
+import { getThemePropSelector } from '../../utils';
 import { OptionProps } from '../selectv2/Selectv2.component';
+import { Select } from '../selectv2/Selectv2.component';
 import { SelectProps } from '../selectv2/Selectv2.component';
 import {
   SingleValueWrapper,
@@ -8,7 +11,6 @@ import {
   OptionIcon,
   OptionWrapper,
   OptionLabel,
-  SelectStyle,
   ShortLabel,
   icons,
 } from './HealthSelector.style';
@@ -21,6 +23,26 @@ type Props = {
   options?: OptionValue[];
   label?: string;
 } & SelectProps;
+
+const SelectStyle = styled(Select)`
+  .sc-select__control {
+    background-color: ${getThemePropSelector('buttonSecondary')};
+
+    &.sc-select__control--is-focused {
+      background-color: ${getThemePropSelector('buttonSecondary')};
+    }
+    .sc-select__value-container {
+      overflow: visible;
+    }
+
+    &.sc-select__control--menu-is-open {
+      .sc-select__indicator {
+        transform: rotate(180deg);
+      }
+    }
+  }
+`;
+
 export const optionsDefaultConfiguration: OptionsConfiguration = {
   all: {
     icon: icons.all,
@@ -107,4 +129,4 @@ function HealthSelectorv2(props: Props) {
   );
 }
 
-export default HealthSelectorv2;
+export const Healthselector = HealthSelectorv2;

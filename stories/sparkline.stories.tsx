@@ -1,5 +1,5 @@
 import React from 'react';
-import SparkLine from '../src/lib/components/sparkline/SparkLine.component';
+import { Sparkline as SparkLine } from '../src/lib/components/sparkline/SparkLine.component';
 import { data, multiLineData } from './data/sparklinechart';
 import { Wrapper, Title } from './common';
 const xAxis = {

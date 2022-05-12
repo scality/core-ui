@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Select from 'react-select';
+import ReactSelect from 'react-select';
 
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
@@ -85,7 +85,7 @@ const defaultFormatOptionLabel = ({ label, ...rest }) => (
 function SelectBox({ options, formatOptionLabel, ...rest }: Props) {
   return (
     <SelectContainer className="sc-select-container">
-      <Select
+      <ReactSelect
         className="sc-select"
         classNamePrefix="sc-select"
         options={options}
@@ -96,4 +96,4 @@ function SelectBox({ options, formatOptionLabel, ...rest }: Props) {
   );
 }
 
-export default SelectBox;
+export const Select = SelectBox;

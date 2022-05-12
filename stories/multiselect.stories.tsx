@@ -1,5 +1,5 @@
 import React from 'react';
-import MultiSelect from '../src/lib/components/multiselect/MultiSelect.component';
+import { MultiSelect } from '../src/lib/components/multiselect/MultiSelect.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper, Title } from './common';
 const items = [

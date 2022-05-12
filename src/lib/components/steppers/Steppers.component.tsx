@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
-import Loader from '../loader/Loader.component';
+import { Loader } from '../loader/Loader.component';
 import { getTheme, getThemePropSelector } from '../../utils';
 type StepProps = {
   title: JSX.Element;
@@ -141,4 +141,4 @@ function Steppers({ steps, activeStep, ...rest }: Props) {
   );
 }
 
-export default Steppers;
+export { Steppers };

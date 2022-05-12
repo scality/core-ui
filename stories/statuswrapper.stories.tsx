@@ -1,8 +1,8 @@
 import React from 'react';
-import StatusWrapper from '../src/lib/components/statuswrapper/Statuswrapper.component';
+import { StatusWrapper } from '../src/lib/components/statuswrapper/Statuswrapper.component';
 import { Wrapper, Title } from './common';
 import styled from 'styled-components';
-import Icon from '../src/lib/components/icon/Icon.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 import {
   BasicText,
   SecondaryText,

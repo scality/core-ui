@@ -104,4 +104,4 @@ const CloudProgressBar = ({
   </Container>
 );
 
-export default CloudProgressBar;
+export { CloudProgressBar };

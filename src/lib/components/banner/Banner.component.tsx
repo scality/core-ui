@@ -54,4 +54,4 @@ function Banner({ icon, title, children, variant, ...rest }: Props) {
   );
 }
 
-export default Banner;
+export { Banner };

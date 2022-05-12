@@ -13,7 +13,7 @@ import {
   lineColor7,
   lineColor8,
 } from '../../style/theme';
-import VegaChart from '../vegachartv2/VegaChartV2.component';
+import { VegaChart } from '../vegachartv2/VegaChartV2.component';
 import { useCursorX } from '../vegachartv2/SyncedCursorCharts';
 import { ChartTitleText } from '../text/Text.component';
 import {
@@ -29,9 +29,9 @@ import {
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
 import { spacing } from '../../style/theme';
 import { SmallerText } from '../text/Text.component';
-import Loader from '../loader/Loader.component';
+import { Loader } from '../loader/Loader.component';
 import { formatValue } from './tooltip/index';
-import TooltipComponent from '../tooltip/Tooltip.component';
+import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 // some predefined values
 export const YAXIS_TITLE_READ_WRITE = 'write(+) / read(-)';
 export const YAXIS_TITLE_IN_OUT = 'in(+) / out(-)';
@@ -798,4 +798,4 @@ function LineTemporalChart({
   );
 }
 
-export default LineTemporalChart;
+export { LineTemporalChart };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from '../src/lib/components/select/Select.component';
+import { Select } from '../src/lib/components/select/Select.component';
 import { Wrapper, Title } from './common';
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,

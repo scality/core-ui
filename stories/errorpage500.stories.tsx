@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorPage500 from '../src/lib/components/error-pages/ErrorPage500.component';
+import { ErrorPage500 } from '../src/lib/components/error-pages/ErrorPage500.component';
 import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/ErrorPages/500',

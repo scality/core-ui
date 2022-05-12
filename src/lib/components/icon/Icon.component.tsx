@@ -3,8 +3,7 @@ import React, { Suspense, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { brand } from '../../style/theme';
 import { getTheme } from '../../utils';
-import Loader from '../loader/Loader.component';
-import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { Loader } from '../loader/Loader.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -163,4 +162,4 @@ function Icon({
   );
 }
 
-export default Icon;
+export { Icon };

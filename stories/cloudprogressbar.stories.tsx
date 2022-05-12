@@ -1,5 +1,5 @@
 import React from 'react';
-import CloudProgressBar from '../src/lib/components/cloudprogressbar/CloudProgressBar.component';
+import { CloudProgressBar } from '../src/lib/components/cloudprogressbar/CloudProgressBar.component';
 import { Wrapper, Title, SubTitle } from './common';
 export default {
   title: 'Components/Progress & loading/CloudProgressBar',

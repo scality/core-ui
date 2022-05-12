@@ -23,4 +23,4 @@ function PrettyBytes({ bytes, decimals = 0 }: Props): string {
     .replace(/kiB/g, 'KiB');
 }
 
-export default PrettyBytes;
+export { PrettyBytes };

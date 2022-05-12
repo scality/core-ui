@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../src/lib/components/dropdown/Dropdown.component';
+import { Dropdown } from '../src/lib/components/dropdown/Dropdown.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper, Title } from './common';
 const items = [

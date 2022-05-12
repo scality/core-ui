@@ -1,10 +1,11 @@
-import Select, {
+import {
+  Select,
   Option,
 } from '../src/lib/components/selectv2/Selectv2.component';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Wrapper, Title } from './common';
-import Icon from '../src/lib/components/icon/Icon.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
   title: 'Components/v2/Select',
   component: Select,

@@ -49,10 +49,10 @@ const ScrollbarContainer = styled.div`
   }}
 `;
 
-function Scrollbar({ children }: Props) {
+function ScrollbarWrapper({ children }: Props) {
   return (
     <ScrollbarContainer className="sc-scrollbar">{children}</ScrollbarContainer>
   );
 }
 
-export default Scrollbar;
+export { ScrollbarWrapper };

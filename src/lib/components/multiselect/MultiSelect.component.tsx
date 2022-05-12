@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import CheckBox from './../checkbox/Checkbox.component';
-import Button from './../button/Button.component';
-import Select from './../select/Select.component';
+import { Checkbox } from './../checkbox/Checkbox.component';
+import { Button } from './../button/Button.component';
+import { Select } from './../select/Select.component';
 import { getThemePropSelector } from '../../utils';
 
 export type ItemProps = {
@@ -97,7 +97,7 @@ function MultiSelectItem(props: ItemProps) {
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
         {typeof selected === 'boolean' && onSelect && (
-          <CheckBox
+          <Checkbox
             checked={selected}
             onChange={(event) => onSelect(label, event)}
           />
@@ -173,4 +173,4 @@ function MultiSelectList({
   );
 }
 
-export default MultiSelectList;
+export const MultiSelect = MultiSelectList;

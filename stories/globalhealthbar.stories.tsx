@@ -1,5 +1,5 @@
 import React from 'react';
-import GlobalHealthBar from '../src/lib/components/globalhealthbar/GlobalHealthBar.component';
+import { GlobalHealthBar } from '../src/lib/components/globalhealthbar/GlobalHealthBar.component';
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
 import { Wrapper, Title } from './common';
 const alerts = [

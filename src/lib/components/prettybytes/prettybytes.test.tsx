@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PrettyBytes from './PrettyBytes.component';
+import { PrettyBytes } from './PrettyBytes.component';
 describe('PrettyBytes', () => {
   test('simple/advanced bytes', () => {
     const cases = [

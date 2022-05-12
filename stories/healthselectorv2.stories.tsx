@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
-import Healthselector, {
+import {
+  Healthselector,
   optionsDefaultConfiguration,
 } from '../src/lib/components/healthselectorv2/HealthSelector.component';
 import { Wrapper, Title } from './common';
-import Icon from '../src/lib/components/icon/Icon.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
   title: 'Components/v2/Healthselector',
   component: Healthselector,

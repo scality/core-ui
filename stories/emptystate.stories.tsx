@@ -1,14 +1,14 @@
 import React from 'react';
-import Emptystate from '../src/lib/components/emptystate/Emptystate.component';
+import { EmptyState } from '../src/lib/components/emptystate/Emptystate.component';
 import { Wrapper } from './common';
 export default {
   title: 'Components/EmptyState',
-  component: Emptystate,
+  component: EmptyState,
 };
 export const WithLink = () => {
   return (
     <Wrapper>
-      <Emptystate
+      <EmptyState
         icon="fa-server"
         label="node"
         link=""
@@ -22,7 +22,7 @@ export const WithLink = () => {
 export const WithoutLink = () => {
   return (
     <Wrapper>
-      <Emptystate icon="fa-server" label="node" />
+      <EmptyState icon="fa-server" label="node" />
     </Wrapper>
   );
 };

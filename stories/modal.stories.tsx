@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Modal from '../src/lib/components/modal/Modal.component';
-import Button from '../src/lib/components/button/Button.component';
+import { Modal } from '../src/lib/components/modal/Modal.component';
+import { Button } from '../src/lib/components/button/Button.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
-import Table from '../src/lib/components/tablev2/Tablev2.component';
+import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 export default {
   title: 'Components/Notification/Modal',
   component: Modal,

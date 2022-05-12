@@ -59,7 +59,7 @@ const VegaTooltipTheme = createGlobalStyle`
   }
 `;
 
-function VegaChart(
+function VegaChartInternal(
   {
     spec,
     tooltipPosition = BOTTOM,
@@ -276,4 +276,4 @@ function VegaChart(
   );
 } // @ts-expect-error
 
-export default React.forwardRef(VegaChart);
+export const VegaChart = React.forwardRef(VegaChartInternal);

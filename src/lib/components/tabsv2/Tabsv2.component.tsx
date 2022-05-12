@@ -12,10 +12,10 @@ import {
 import { useHistory, useLocation } from 'react-router-dom';
 import { matchPath, Route, Switch } from 'react-router';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
-import ScrollButton from './ScrollButton';
-import Tab from './Tab';
+import { ScrollButton } from './ScrollButton';
+import { Tab } from './Tab';
 import { TabProps, Query } from './Tab';
-import useScrollingTabs from './useScrollingTabs';
+import { useScrollingTabs } from './useScrollingTabs';
 type TabsProps = {
   activeTabColor?: string;
   activeTabSeparator?: string;
@@ -213,5 +213,4 @@ function Tabs({
 
 Tabs.Tab = Tab;
 // re-export Tab
-export { Tab };
-export default Tabs;
+export { Tabs, Tab };

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Navbar from '../navbar/Navbar.component';
+import { Navbar } from '../navbar/Navbar.component';
 import { Props as NavbarProps } from '../navbar/Navbar.component';
 import { Props as SidebarProps } from '../sidebar/Sidebar.component';
-import Sidebar from '../sidebar/Sidebar.component';
+import { Sidebar } from '../sidebar/Sidebar.component';
 import { getThemePropSelector } from '../../utils';
 type Props = {
   navbar?: NavbarProps;
@@ -43,4 +43,4 @@ function Layout({ children, sidebar, navbar, navbarElement, ...rest }: Props) {
   );
 }
 
-export default Layout;
+export { Layout };

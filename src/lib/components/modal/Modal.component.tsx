@@ -88,4 +88,4 @@ const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
     : null;
 };
 
-export default Modal;
+export { Modal };

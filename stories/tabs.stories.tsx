@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TextBadge from '../src/lib/components/textbadge/TextBadge.component';
-import Tabs from '../src/lib/components/tabs/Tabs.component';
+import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
+import { Tabs } from '../src/lib/components/tabs/Tabs.component';
 import { Wrapper, Title } from './common';
 import { brand } from '../src/lib/style/theme';
 export default {

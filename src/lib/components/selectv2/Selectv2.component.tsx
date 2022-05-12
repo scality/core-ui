@@ -9,8 +9,8 @@ import React, {
 } from 'react';
 import { ScrollbarWrapper } from '../../index';
 import { components } from 'react-select';
-import Icon from '../icon/Icon.component';
-import StyledSelect from './SelectStyle';
+import { Icon } from '../icon/Icon.component';
+import { SelectStyle } from './SelectStyle';
 import { FixedSizeList as List } from 'react-window';
 import { spacing } from '../../style/theme';
 import { convertRemToPixels } from '../../utils';
@@ -295,7 +295,7 @@ function SelectBox({
     <SelectContext.Provider value={true}>
       <ScrollbarWrapper>
         {options && (
-          <StyledSelect
+          <SelectStyle
             className={['sc-select', className].join(' ')}
             classNamePrefix="sc-select"
             name="sc-select"
@@ -352,4 +352,4 @@ function SelectBox({
 }
 
 SelectBox.Option = Option;
-export default SelectBox;
+export const Select = SelectBox;

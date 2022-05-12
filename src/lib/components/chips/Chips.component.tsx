@@ -2,7 +2,7 @@
 import * as defaultTheme from '../../style/theme';
 import { Size, Variant } from '../constants';
 import styled, { css } from 'styled-components';
-import Button from '../button/Button.component';
+import { Button } from '../button/Button.component';
 import { lighten } from 'polished';
 import { getTheme } from '../../utils';
 type Props = {
@@ -166,4 +166,4 @@ const Chips = ({
   </ChipsContainer>
 );
 
-export default Chips;
+export { Chips };

@@ -1,7 +1,7 @@
 import React from 'react';
-import Steppers from '../src/lib/components/steppers/Steppers.component';
+import { Steppers } from '../src/lib/components/steppers/Steppers.component';
 import { action } from '@storybook/addon-actions';
-import Button from '../src/lib/components/button/Button.component';
+import { Button } from '../src/lib/components/button/Button.component';
 import { Wrapper, Title } from './common';
 const steps = [
   {

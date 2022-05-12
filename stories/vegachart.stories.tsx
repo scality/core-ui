@@ -1,5 +1,5 @@
 import React from 'react';
-import VegaChart from '../src/lib/components/vegachart/VegaChart.component';
+import { VegaChart } from '../src/lib/components/vegachart/VegaChart.component';
 import { data } from './data/linechart';
 import { Wrapper, Title } from './common';
 const spec = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Notifications from '../src/lib/components/notifications/Notifications.component';
+import { Notifications } from '../src/lib/components/notifications/Notifications.component';
 import { Wrapper } from './common';
 const trNotifications = [
   {

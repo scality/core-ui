@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Logo from '../../icons/branding';
-import Dropdown from '../dropdown/Dropdown.component';
-import Button from '../button/Button.component';
+import { Logo } from '../../icons/branding';
+import { Dropdown } from '../dropdown/Dropdown.component';
+import { Button } from '../button/Button.component';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 import { Item } from '../dropdown/Dropdown.component';
@@ -243,4 +243,4 @@ function NavBar({
   );
 }
 
-export default NavBar;
+export const Navbar = NavBar;

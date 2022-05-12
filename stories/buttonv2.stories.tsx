@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Button from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/v2/Button',

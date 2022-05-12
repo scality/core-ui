@@ -63,4 +63,4 @@ function StatusWrapper({ status, children }: Props) {
   );
 }
 
-export default StatusWrapper;
+export { StatusWrapper };

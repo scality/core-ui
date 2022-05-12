@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
-import Button from '../button/Button.component';
+import { Button } from '../button/Button.component';
 type Item = {
   label: string;
   onClick: (arg0: any) => void;
@@ -204,4 +204,4 @@ function Sidebar({
   );
 }
 
-export default Sidebar;
+export { Sidebar };

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useMemo } from 'react';
-import VegaChart from '../vegachartv2/VegaChartV2.component';
+import { VegaChart } from '../vegachartv2/VegaChartV2.component';
 import { useTheme } from 'styled-components';
 import { formatValue } from './tooltip/index';
 export const TOP = 'top';
@@ -198,4 +198,4 @@ function GlobalHealthBar({
   );
 }
 
-export default GlobalHealthBar;
+export { GlobalHealthBar };

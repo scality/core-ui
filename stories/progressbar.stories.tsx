@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from '../src/lib/components/progressbar/ProgressBar.component';
+import { ProgressBar } from '../src/lib/components/progressbar/ProgressBar.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Progress & loading/ProgressBar',

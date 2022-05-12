@@ -332,4 +332,4 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
   };
 };
 
-export default useScrollingTabs;
+export { useScrollingTabs };

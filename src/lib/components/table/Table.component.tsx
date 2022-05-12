@@ -5,7 +5,7 @@ import 'react-virtualized/styles.css';
 import { lighten, ellipsis } from 'polished';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
-import Dropdown from '../dropdown/Dropdown.component';
+import { Dropdown } from '../dropdown/Dropdown.component';
 import {
   Column,
   Table as VirtualizedTable,
@@ -151,6 +151,10 @@ const HeaderSortIcon = styled.div`
   }
 `;
 
+/**
+ * @deprecated
+ * Please use TableV2 with `import { Table } from '@scality/core-ui/dist/next';`
+ */
 function Table({
   columns,
   disableHeader,
@@ -276,4 +280,4 @@ function Table({
   );
 }
 
-export default Table;
+export { Table };

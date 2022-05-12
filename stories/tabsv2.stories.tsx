@@ -1,6 +1,6 @@
 import React from 'react';
-import TextBadge from '../src/lib/components/textbadge/TextBadge.component';
-import Tabs, { Tab } from '../src/lib/components/tabsv2/Tabsv2.component';
+import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
+import { Tabs, Tab } from '../src/lib/components/tabsv2/Tabsv2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter } from 'react-router-dom';
 import { brand, spacing } from '../src/lib/style/theme';

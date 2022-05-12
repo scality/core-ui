@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Toggle from '../src/lib/components/toggle/Toggle.component';
+import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Title, Wrapper } from './common';
 export default {
   title: 'Components/Toggle',

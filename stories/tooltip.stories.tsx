@@ -1,6 +1,6 @@
 import React from 'react';
-import Tooltip from '../src/lib/components/tooltip/Tooltip.component';
-import Button from '../src/lib/components/button/Button.component';
+import { Tooltip } from '../src/lib/components/tooltip/Tooltip.component';
+import { Button } from '../src/lib/components/button/Button.component';
 import { Wrapper, Title, SubTitle } from './common';
 export default {
   title: 'Components/Notification/Tooltip',

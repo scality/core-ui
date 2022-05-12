@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import TextBadge from '../textbadge/TextBadge.component';
+import { TextBadge } from '../textbadge/TextBadge.component';
 import { TabsContext } from './Tabsv2.component';
 export type Query = Record<string, string>;
 export type TabProps = {
@@ -24,4 +24,4 @@ function Tab(_: TabProps) {
   return null;
 }
 
-export default Tab;
+export { Tab };

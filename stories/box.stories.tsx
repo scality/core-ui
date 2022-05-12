@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Box from '../src/lib/components/box/Box';
+import { Box } from '../src/lib/components/box/Box';
 
 const info = {
   title: 'Components/Box',

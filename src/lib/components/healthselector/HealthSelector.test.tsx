@@ -1,4 +1,4 @@
-import HealthSelector from './Healthselector.component';
+import { Healthselector } from './Healthselector.component';
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 describe('HealthSelector', () => {
@@ -27,7 +27,7 @@ describe('HealthSelector', () => {
       },
     ];
     // verify that the default text is displayed
-    const { getByText, queryByText } = render(<HealthSelector items={items} />);
+    const { getByText, queryByText } = render(<Healthselector items={items} />);
     const selectorText = getByText(/all/i);
     expect(selectorText).toBeInTheDocument();
     // verify that the dropdown is not displayed
@@ -72,7 +72,7 @@ describe('HealthSelector', () => {
     ];
     // verify that the default text is displayed
     const { getByText, queryByText } = render(
-      <HealthSelector items={items} isOkHidden />,
+      <Healthselector items={items} isOkHidden />,
     );
     const selectorText = getByText(/all/i);
     expect(selectorText).toBeInTheDocument();

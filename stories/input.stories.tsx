@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../src/lib/components/input/Input.component';
+import { Input } from '../src/lib/components/input/Input.component';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 import { Wrapper, Title } from './common';

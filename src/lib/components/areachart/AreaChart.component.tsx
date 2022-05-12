@@ -1,4 +1,4 @@
-import VegaChart from '../vegachart/VegaChart.component';
+import { VegaChart } from '../vegachart/VegaChart.component';
 
 type Props = {
   id: string;
@@ -46,4 +46,4 @@ function AreaChart({
   return <VegaChart className="sc-areachart" id={id} spec={spec}></VegaChart>;
 }
 
-export default AreaChart;
+export { AreaChart };

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { LOADER_SIZE as SIZE } from '../constants';
-import LoaderIcon from '../../icons/scality-loading';
+import { LoaderIcon } from '../../icons/scality-loading';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 type Props = {
@@ -65,4 +65,4 @@ function Loader({
   );
 }
 
-export default Loader;
+export { Loader };

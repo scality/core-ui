@@ -97,4 +97,4 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
   );
 }
 
-export default ToggleSwitch;
+export const Toggle = ToggleSwitch;

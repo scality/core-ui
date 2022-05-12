@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from '../src/lib/components/banner/Banner.component';
+import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Props } from '../src/lib/components/banner/Banner.component';
 import { Wrapper } from './common';
 export default {

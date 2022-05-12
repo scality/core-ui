@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import Notification from './Notification.component';
+import { Notification } from './Notification.component';
 import { Props as NotificationProps } from './Notification.component';
 export const TOP_LEFT = 'tl';
 export const TOP_RIGHT = 'tr';
@@ -68,4 +68,4 @@ function Notifications({ position, notifications, onDismiss, ...rest }: Props) {
   );
 }
 
-export default Notifications;
+export { Notifications };

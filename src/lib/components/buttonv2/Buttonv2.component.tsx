@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Tooltip from '../tooltip/Tooltip.component';
+import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
@@ -228,4 +228,4 @@ function Button({
   );
 }
 
-export default Button;
+export { Button };

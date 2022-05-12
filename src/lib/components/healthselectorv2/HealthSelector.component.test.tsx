@@ -1,4 +1,5 @@
-import HealthSelector, {
+import {
+  Healthselector,
   optionsDefaultConfiguration,
 } from './HealthSelector.component';
 import React from 'react';
@@ -6,7 +7,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 describe('HealthSelector', () => {
   it('should display correctly without any props and select first option', () => {
-    const { getByTestId, getByText } = render(<HealthSelector />);
+    const { getByTestId, getByText } = render(<Healthselector />);
     expect(getByTestId('singleValueLabel')).toHaveTextContent(/Health/i);
     expect(getByTestId('singleValueShortLabel')).toHaveTextContent(/All/i);
     // open the menu
@@ -18,7 +19,7 @@ describe('HealthSelector', () => {
   it('should call the onChange function when it change', () => {
     const onChange = jest.fn();
     const { getByTestId, getByText } = render(
-      <HealthSelector onChange={onChange} />,
+      <Healthselector onChange={onChange} />,
     );
     const mainMenu = getByTestId('singleValueShortLabel');
     userEvent.click(mainMenu);
@@ -28,7 +29,7 @@ describe('HealthSelector', () => {
   });
   it('should not display hidden options', () => {
     const { getByTestId, queryByText } = render(
-      <HealthSelector
+      <Healthselector
         options={[
           optionsDefaultConfiguration.all,
           optionsDefaultConfiguration.warning,

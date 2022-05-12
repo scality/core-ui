@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ScrollbarWrapper from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
+import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Navigation/ScrollbarWrapper',

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
-import Loader from '../loader/Loader.component';
+import { Loader } from '../loader/Loader.component';
 import { Size } from '../constants';
 type Props = {
   text?: string;
@@ -313,4 +313,4 @@ function Button({
   );
 }
 
-export default Button;
+export { Button };

@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, { useRef } from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import Checkbox from '../checkbox/Checkbox.component';
-import Select from '../select/Select.component';
-import TextArea from '../textarea/TextArea.component';
+import { Checkbox } from '../checkbox/Checkbox.component';
+import { Select } from '../select/Select.component';
+import { TextArea } from '../textarea/TextArea.component';
 import {
   InputContainer,
   LabelStyle,
@@ -173,4 +173,4 @@ const Input = ({ label, id, error, type, disabled, ...rest }: InputProps) => {
   );
 };
 
-export default Input;
+export { Input };

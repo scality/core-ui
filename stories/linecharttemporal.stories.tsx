@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
-import LineTemporalChart, {
+import {
+  LineTemporalChart,
   YAXIS_TITLE_READ_WRITE,
 } from '../src/lib/components/linetemporalchart/LineTemporalChart.component';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';

@@ -62,7 +62,7 @@ const EmptytableContentDiv = styled.div`
   }}
 `;
 
-function Emptytable(props: Props) {
+function EmptyTable(props: Props) {
   if (props.useDiv)
     return (
       <EmptytableContainerDiv className="sc-emptytable">
@@ -76,4 +76,4 @@ function Emptytable(props: Props) {
   );
 }
 
-export default Emptytable;
+export { EmptyTable };

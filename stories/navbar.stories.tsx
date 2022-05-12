@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../src/lib/components/navbar/Navbar.component';
+import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from '@storybook/addon-actions';
 const tabs = [
   {

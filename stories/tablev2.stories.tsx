@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Table from '../src/lib/components/tablev2/Tablev2.component';
+import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 export default {

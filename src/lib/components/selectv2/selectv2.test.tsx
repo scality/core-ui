@@ -1,4 +1,4 @@
-import Select, { Option } from '../selectv2/Selectv2.component';
+import { Select, Option } from '../selectv2/Selectv2.component';
 import React, { useState } from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

@@ -21,7 +21,7 @@ type Props = {
     | 'infoPrimary'
     | 'infoSecondary';
 };
-export default function TextBadge({
+export function TextBadge({
   text,
   variant = 'infoPrimary',
   className,

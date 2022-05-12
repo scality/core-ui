@@ -1,9 +1,9 @@
 import React from 'react';
-import Constrainedtext from '../src/lib/components/constrainedtext/Constrainedtext.component';
+import { ConstrainedText } from '../src/lib/components/constrainedtext/Constrainedtext.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Constrainedtext',
-  component: Constrainedtext,
+  component: ConstrainedText,
 };
 export const Default = () => {
   return (
@@ -15,13 +15,13 @@ export const Default = () => {
           color: '#0F7FFF',
         }}
       >
-        <Constrainedtext
+        <ConstrainedText
           text={'This is a long phrase'}
           tooltipStyle={{
             width: '100px',
           }}
         />
-        <Constrainedtext
+        <ConstrainedText
           text={'This'}
           tooltipStyle={{
             width: '100px',
@@ -35,7 +35,7 @@ export const Default = () => {
           color: '#0F7FFF',
         }}
       >
-        <Constrainedtext
+        <ConstrainedText
           text={'This is a long phrase'}
           tooltipStyle={{
             width: '100px',
@@ -51,7 +51,7 @@ export const Default = () => {
           color: '#0F7FFF',
         }}
       >
-        <Constrainedtext
+        <ConstrainedText
           text={'This is a long phrase that should get into 2 lines'}
           tooltipStyle={{
             width: '100px',

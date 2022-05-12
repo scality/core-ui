@@ -45,29 +45,27 @@ type CSSField =
   | 'padding-left';
 const validValue = [0, 1, 2, 4, 8, 12, 14, 16, 20, 24, 28, 32];
 
-const createSpacingFn = (
-  propsName: PropsName,
-  spacingFields: Array<CSSField>,
-) => (props: Props) => {
-  if (!props[propsName] && props[propsName] !== 0) {
-    return null;
-  }
+const createSpacingFn =
+  (propsName: PropsName, spacingFields: Array<CSSField>) => (props: Props) => {
+    if (!props[propsName] && props[propsName] !== 0) {
+      return null;
+    }
 
-  let value: SpacingValue = props[propsName];
+    let value: SpacingValue = props[propsName];
 
-  if (!validValue.includes(value)) {
-    console.warn(
-      `'${propsName}' props should be a number in this list: ` +
-        '0, 1, 2, 4, 8, 12, 14, 16, 20, 24, 28, 32',
-    );
-    return null;
-  }
+    if (!validValue.includes(value)) {
+      console.warn(
+        `'${propsName}' props should be a number in this list: ` +
+          '0, 1, 2, 4, 8, 12, 14, 16, 20, 24, 28, 32',
+      );
+      return null;
+    }
 
-  const result = spacingFields
-    .map((param: CSSField) => `${param}: ${spacing[`sp${value}`]}`)
-    .join(';');
-  return result;
-};
+    const result = spacingFields
+      .map((param: CSSField) => `${param}: ${spacing[`sp${value}`]}`)
+      .join(';');
+    return result;
+  };
 
 const m = createSpacingFn('m', ['margin']);
 const mt = createSpacingFn('mt', ['margin-top']);
@@ -111,4 +109,4 @@ const SpacedBox = styled.div`
   ${px};
   ${py};
 `;
-export default SpacedBox;
+export { SpacedBox };

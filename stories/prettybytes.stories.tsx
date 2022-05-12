@@ -1,5 +1,5 @@
 import React from 'react';
-import PrettyBytes from '../src/lib/components/prettybytes/PrettyBytes.component';
+import { PrettyBytes } from '../src/lib/components/prettybytes/PrettyBytes.component';
 import { Wrapper, Title } from './common';
 import { getThemePropSelector } from '../src/lib/utils';
 import styled from 'styled-components';

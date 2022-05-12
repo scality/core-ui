@@ -44,7 +44,7 @@ function Checkbox({
   );
 }
 
-export default Checkbox;
+export { Checkbox };
 const StyledCheckboxLabel = styled.span`
   font-size: ${defaultTheme.fontSize.large};
   padding-left: ${defaultTheme.padding.base};

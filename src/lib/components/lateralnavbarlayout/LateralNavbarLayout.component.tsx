@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Props as SidebarProps } from '../sidebar/Sidebar.component';
-import Sidebar from '../sidebar/Sidebar.component';
+import { Sidebar } from '../sidebar/Sidebar.component';
 import { getThemePropSelector } from '../../utils';
 type Props = {
   sidebar: SidebarProps;
@@ -35,4 +35,4 @@ function LateralNavbarLayout({ children, sidebar, ...rest }: Props) {
   );
 }
 
-export default LateralNavbarLayout;
+export { LateralNavbarLayout };

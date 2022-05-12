@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card, {
+import {
+  Card,
   CardHeader,
   CardBody,
   CardBodyContainer,
 } from '../src/lib/components/card/Card.component';
-import CircularProgressBar from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
+import { CircularProgressBar } from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
 import { Text, Title, Wrapper } from './common';
 import { brand } from '../src/lib/style/theme';
 export default {

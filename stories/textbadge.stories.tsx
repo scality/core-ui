@@ -1,5 +1,5 @@
 import React from 'react';
-import TextBadge from '../src/lib/components/textbadge/TextBadge.component';
+import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/TextBadge',

@@ -1,4 +1,4 @@
-import Chips from '../src/lib/components/chips/Chips.component';
+import { Chips } from '../src/lib/components/chips/Chips.component';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Wrapper, Title } from './common';

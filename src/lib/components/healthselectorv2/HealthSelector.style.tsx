@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
-import Select from '../selectv2/Selectv2.component';
-import Icon from '../icon/Icon.component';
+import { Icon } from '../icon/Icon.component';
 import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
+
 export const SingleValueWrapper = styled.div`
   color: ${defaultTheme.white};
   margin-left: ${defaultTheme.spacing.sp2}
@@ -46,24 +44,7 @@ export const OptionLabel = styled.span`
   display: block;
 }
 `;
-export const SelectStyle = styled(Select)`
-  .sc-select__control {
-    background-color: ${getThemePropSelector('buttonSecondary')};
 
-    &.sc-select__control--is-focused {
-      background-color: ${getThemePropSelector('buttonSecondary')};
-    }
-    .sc-select__value-container {
-      overflow: visible;
-    }
-
-    &.sc-select__control--menu-is-open {
-      .sc-select__indicator {
-        transform: rotate(180deg);
-      }
-    }
-  }
-`;
 export const ShortLabel = styled.p`
   white-space: nowrap;
 `;

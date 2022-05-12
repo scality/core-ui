@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorPage401 from '../src/lib/components/error-pages/ErrorPage401.component';
+import { ErrorPage401 } from '../src/lib/components/error-pages/ErrorPage401.component';
 import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/ErrorPages/401',

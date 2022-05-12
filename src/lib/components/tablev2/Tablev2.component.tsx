@@ -11,9 +11,9 @@ import {
   useGlobalFilter,
 } from 'react-table';
 
-import SingleSelectableContent from './SingleSelectableContent';
-import Search from './Search';
-import SearchWithQueryParams from './SearchWithQueryParams';
+import { SingleSelectableContent } from './SingleSelectableContent';
+import { TableSearch as Search } from './Search';
+import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { compareHealth } from './TableUtil';
 import { TableWrapper } from './Tablestyle';
 export type DataRow = Record<string, any>;
@@ -148,4 +148,4 @@ function Table({
 Table.SingleSelectableContent = SingleSelectableContent;
 Table.Search = Search;
 Table.SearchWithQueryParams = SearchWithQueryParams;
-export default Table;
+export { Table };

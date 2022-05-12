@@ -3,7 +3,7 @@ import { $PropertyType } from 'utility-types';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-import Tooltip from '../tooltip/Tooltip.component';
+import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 
 type Props = {
@@ -84,4 +84,4 @@ function ConstrainedText({
   );
 }
 
-export default ConstrainedText;
+export { ConstrainedText };

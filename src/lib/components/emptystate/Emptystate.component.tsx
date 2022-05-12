@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../button/Button.component';
+import { Button } from '../button/Button.component';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
@@ -57,7 +57,7 @@ export const IconWrapper = styled.div`
   }
 `;
 
-function Emptystate(props: Props) {
+function EmptyState(props: Props) {
   const { icon, label, link, history } = props;
   return (
     <EmptystateContainer className="sc-emptystate">
@@ -91,4 +91,4 @@ function Emptystate(props: Props) {
   );
 }
 
-export default Emptystate;
+export { EmptyState };

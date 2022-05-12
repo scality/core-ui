@@ -8,7 +8,7 @@ import {
   DescriptionContent,
   Link,
 } from './ErrorPageStyle';
-import Button from '../buttonv2/Buttonv2.component';
+import { Button } from '../buttonv2/Buttonv2.component';
 const translations = {
   en: {
     unexpected_error: 'Not authorized',
@@ -74,4 +74,4 @@ function ErrorPage401({
   );
 }
 
-export default ErrorPage401;
+export { ErrorPage401 };

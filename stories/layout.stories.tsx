@@ -1,6 +1,6 @@
 import React, { useState, createElement } from 'react';
-import Layout from '../src/lib/components/layout/Layout.component';
-import Loader from '../src/lib/components/loader/Loader.component';
+import { Layout } from '../src/lib/components/layout/Layout.component';
+import { Loader } from '../src/lib/components/loader/Loader.component';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { addDecorator } from '@storybook/react';

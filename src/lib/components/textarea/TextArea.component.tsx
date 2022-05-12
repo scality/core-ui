@@ -51,4 +51,4 @@ function TextArea({
   );
 }
 
-export default TextArea;
+export { TextArea };

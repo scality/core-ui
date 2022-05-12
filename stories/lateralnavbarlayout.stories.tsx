@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import LateralNavbarLayout from '../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component';
-import Loader from '../src/lib/components/loader/Loader.component';
+import { LateralNavbarLayout } from '../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component';
+import { Loader } from '../src/lib/components/loader/Loader.component';
 const sideBarActions = [
   {
     label: 'Dashboard',

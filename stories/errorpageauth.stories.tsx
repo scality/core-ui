@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorPageAuth from '../src/lib/components/error-pages/ErrorPageAuth.component';
+import { ErrorPageAuth } from '../src/lib/components/error-pages/ErrorPageAuth.component';
 import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/ErrorPages/Auth',

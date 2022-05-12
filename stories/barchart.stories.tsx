@@ -1,5 +1,5 @@
 import React from 'react';
-import BarChart from '../src/lib/components/barchart/BarChart.component';
+import { BarChart } from '../src/lib/components/barchart/BarChart.component';
 import { Wrapper, Title } from './common';
 import {
   verticalStackedData,

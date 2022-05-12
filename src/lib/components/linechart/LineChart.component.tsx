@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { $PropertyType } from 'utility-types';
-import VegaChart from '../vegachart/VegaChart.component';
+import { VegaChart } from '../vegachart/VegaChart.component';
 import type { Encoding, Field } from 'vega-lite';
 type Props = {
   id: string;
@@ -149,4 +149,4 @@ function LineChart({
   );
 }
 
-export default LineChart;
+export { LineChart };

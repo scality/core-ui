@@ -98,7 +98,7 @@ const TabContent = styled.div`
   background-color: ${(props) =>
     props.tabContentColor || getTheme(props).backgroundLevel4};
 `;
-export default function Tab({
+export function Tabs({
   items,
   children,
   activeTabColor,

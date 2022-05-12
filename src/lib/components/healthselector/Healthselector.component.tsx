@@ -306,4 +306,4 @@ function Healthselector(props: Props) {
   );
 }
 
-export default Healthselector;
+export { Healthselector };

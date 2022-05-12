@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../src/lib/components/loader/Loader.component';
+import { Loader } from '../src/lib/components/loader/Loader.component';
 import { Wrapper } from './common';
 
 const info = {

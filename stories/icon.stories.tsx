@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon, { iconTable } from '../src/lib/components/icon/Icon.component';
+import { Icon, iconTable } from '../src/lib/components/icon/Icon.component';
 import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Icon',

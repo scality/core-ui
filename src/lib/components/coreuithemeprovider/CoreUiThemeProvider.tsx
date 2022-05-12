@@ -61,4 +61,4 @@ const CoreUiThemeProvider = ({ theme, children }: Props) => {
   return <ThemeProvider theme={newTheme}>{children}</ThemeProvider>;
 };
 
-export default CoreUiThemeProvider;
+export { CoreUiThemeProvider };

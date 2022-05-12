@@ -7,7 +7,7 @@ import {
   Description,
   DescriptionContent,
 } from './ErrorPageStyle';
-import Button from '../buttonv2/Buttonv2.component';
+import { Button } from '../buttonv2/Buttonv2.component';
 const translations = {
   en: {
     not_exist: 'Error: this page does not exist',
@@ -61,4 +61,4 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   );
 }
 
-export default ErrorPage404;
+export { ErrorPage404 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTableContext } from './Tablev2.component';
-import SearchInput from '../searchinput/SearchInput.component';
+import { SearchInput } from '../searchinput/SearchInput.component';
 import { Props } from '../searchinput/SearchInput.component';
 import { BasicText } from '../text/Text.component';
 import { spacing } from '../../style/theme';
@@ -39,7 +39,7 @@ const translations = {
     total: `Total : `,
   },
 };
-export default function TableSearch(props: SearchProps) {
+export function TableSearch(props: SearchProps) {
   const {
     onChange,
     value = '',

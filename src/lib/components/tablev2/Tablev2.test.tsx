@@ -1,4 +1,4 @@
-import Table from './Tablev2.component';
+import { Table } from './Tablev2.component';
 import React from 'react';
 import { render } from '@testing-library/react';
 jest.mock('./TableUtil', () => ({

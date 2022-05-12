@@ -26,12 +26,13 @@ const SelectStyle = styled(Select)`
     border-radius: ${({ isDefault }) =>
       isDefault ? spacing.sp4 : spacing.sp12};
     border: ${spacing.sp1} solid
-    ${({ isDefault }) =>
-      getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
+      ${({ isDefault }) =>
+        getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
 
     &:hover {
-      border: ${spacing.sp1} solid ${({ isDefault }) =>
-  getThemePropSelector(isDefault ? 'infoPrimary' : 'selectedActive')};
+      border: ${spacing.sp1} solid
+        ${({ isDefault }) =>
+          getThemePropSelector(isDefault ? 'infoPrimary' : 'selectedActive')};
       ${({ isDefault }) =>
         !isDefault && `background-color: ${getThemePropSelector('highlight')};`}
     }
@@ -40,11 +41,11 @@ const SelectStyle = styled(Select)`
       pointer-events: auto;
       cursor: not-allowed;
       opacity: 0.5;
-      
+
       &:hover {
         border: ${spacing.sp1} solid
-        ${({ isDefault }) =>
-          getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
+          ${({ isDefault }) =>
+            getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
       }
     }
 
@@ -95,7 +96,7 @@ const SelectStyle = styled(Select)`
     .sc-select__value-container {
       ${({ isDefault }) => !isDefault && `max-height: ${spacing.sp24};`}
       padding: 0;
-      
+
       input {
         overflow: hidden;
         white-space: nowrap;
@@ -122,8 +123,9 @@ const SelectStyle = styled(Select)`
   }
 
   .sc-select__menu {
-    border: ${spacing.sp1} solid ${({ isDefault }) =>
-  getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
+    border: ${spacing.sp1} solid
+      ${({ isDefault }) =>
+        getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
     ${(props) =>
       props.options &&
       props.options.length === 0 &&
@@ -233,17 +235,16 @@ const SelectStyle = styled(Select)`
         .sc-highlighted-matching-text {
           color: ${getThemePropSelector('selectedActive')};
         }
-        
+
         .option-value-wrapper {
           display: flex;
           align-items: center;
         }
       }
-      
-      
-        ${({ isDefault }) =>
-          isDefault &&
-          `
+
+      ${({ isDefault }) =>
+        isDefault &&
+        `
           div > .react-window-option:first-of-type > .sc-select__option {
           .sc-select__option:first-of-type {
             border-radius: ${spacing.sp4} ${spacing.sp4} 0 0;
@@ -258,4 +259,4 @@ const SelectStyle = styled(Select)`
     }
   }
 `;
-export default SelectStyle;
+export { SelectStyle };

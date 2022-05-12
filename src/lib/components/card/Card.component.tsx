@@ -123,7 +123,7 @@ type CardProps = {
   children: Node;
   className?: string;
 } & HTMLProps<HTMLDivElement>;
-export function Card({
+function Card({
   width = 'auto',
   height = 'auto',
   headerBackgroundColor = 'backgroundLevel4',
@@ -184,4 +184,4 @@ export function Card({
 Card.Header = CardHeader;
 Card.Body = CardBody;
 Card.BodyContainer = CardBodyContainer;
-export default Card;
+export { Card };

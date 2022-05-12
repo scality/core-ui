@@ -1,5 +1,4 @@
-import React from 'react';
-import VegaChart from '../vegachart/VegaChart.component';
+import { VegaChart } from '../vegachart/VegaChart.component';
 import * as defaultTheme from '../../style/theme';
 type Props = {
   id: string;
@@ -174,4 +173,4 @@ function SparkLine({
   return <VegaChart className="sc-sparkline" id={id} spec={spec}></VegaChart>;
 }
 
-export default SparkLine;
+export const Sparkline = SparkLine;

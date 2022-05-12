@@ -1,5 +1,5 @@
 import React from 'react';
-import TextArea from '../src/lib/components/textarea/TextArea.component';
+import { TextArea } from '../src/lib/components/textarea/TextArea.component';
 import { Wrapper, Title } from './common';
 import { action } from '@storybook/addon-actions';
 export default {

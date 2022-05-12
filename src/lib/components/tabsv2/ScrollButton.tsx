@@ -35,4 +35,4 @@ const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
     </StyledScrollButton>
   );
 });
-export default ScrollButton;
+export { ScrollButton };

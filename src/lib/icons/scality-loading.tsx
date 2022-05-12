@@ -115,4 +115,4 @@ const LoaderIcon = () => (
   </svg>
 );
 
-export default LoaderIcon;
+export { LoaderIcon };

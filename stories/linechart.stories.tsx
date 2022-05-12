@@ -1,5 +1,5 @@
 import React from 'react';
-import LineChart from '../src/lib/components/linechart/LineChart.component';
+import { LineChart } from '../src/lib/components/linechart/LineChart.component';
 import {
   data,
   data_graph_with_axis,

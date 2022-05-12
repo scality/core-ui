@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import Input from '../input/Input.component';
+import { Input } from '../input/Input.component';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 export type Props = {
@@ -126,4 +126,4 @@ function SearchInput({
   );
 }
 
-export default SearchInput;
+export { SearchInput };

@@ -1,5 +1,5 @@
 import React from 'react';
-import CircularProgressBar from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
+import { CircularProgressBar } from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
 import { Wrapper, Title, Text } from './common';
 export default {
   title: 'Components/Progress & loading/CircularProgressBar',
