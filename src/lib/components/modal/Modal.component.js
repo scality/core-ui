@@ -1,5 +1,5 @@
 //@flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import type { Node } from 'react';
@@ -66,12 +66,12 @@ const ModalClose = styled.div`
 `;
 
 const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
-  const modalContainer = document.createElement('div');
+  const modalContainer = useRef(document.createElement('div'));
 
   useEffect(() => {
-    document.body && document.body.appendChild(modalContainer);
+    document.body && document.body.appendChild(modalContainer.current);
     return () => {
-      document.body && document.body.removeChild(modalContainer);
+      document.body && document.body.removeChild(modalContainer.current);
     };
   }, [modalContainer]);
 
@@ -91,7 +91,7 @@ const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
             )}
           </ModalContent>
         </ModalContainer>,
-        modalContainer,
+        modalContainer.current,
       )
     : null;
 };
