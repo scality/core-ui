@@ -47,7 +47,7 @@ export const Default = () => (
   <Wrapper className="storybook-select">
     <SelectWrapper>
       <Title>Default Select</Title>
-      <CustomSelect
+      <Select
         opts={defaultOptions}
         defaultValue={defaultOptions[1]}
         placeholder={'Custom placeholder...'}
@@ -87,7 +87,7 @@ export const Rounded = () => (
   <Wrapper>
     <SelectWrapper>
       <Title>Default Select</Title>
-      <CustomSelect
+      <Select
         variant="rounded"
         opts={defaultOptions}
         defaultValue={defaultOptions[1]}

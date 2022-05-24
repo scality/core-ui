@@ -235,6 +235,11 @@ function SelectBox({
   className,
   ...rest
 }: SelectProps) {
+  if (defaultValue && value) {
+    console.error(
+      'The `defaultValue` will be overridden by the `value` if they are set at the same time.',
+    );
+  }
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -247,8 +252,13 @@ function SelectBox({
       return React.Children.toArray(children)
         .filter((child) => child.type === Option)
         .map((child) => {
-          const { value, children, disabled, icon, ...rest }: OptionProps =
-            child.props;
+          const {
+            value,
+            children,
+            disabled,
+            icon,
+            ...rest
+          }: OptionProps = child.props;
           return {
             value: value,
             label: children || '',
@@ -262,15 +272,15 @@ function SelectBox({
     }
   }, [children]);
 
-  const handleChange = (option) => {
+  const handleChange = (option: SelectOptionProps) => {
     if (onChange && typeof onChange === 'function') {
-      onChange(option.value);
+      onChange(option ? option.value : '');
     }
 
     if (options && options.length > NOPT_SEARCH) {
-      setSearchSelection(option.value);
-      setPlaceholder(option.label);
-      setSearchValue(option.label);
+      setSearchSelection(option ? option.value : '');
+      setPlaceholder(option ? option.label : '');
+      setSearchValue(option ? option.label : '');
     }
   };
 
@@ -290,6 +300,21 @@ function SelectBox({
       }
     }
   };
+
+  const isEmptyStringInOptions = options.find((option) => option.value === '');
+
+  // Force to reset the value
+  useEffect(() => {
+    if (
+      !defaultValue &&
+      !isEmptyStringInOptions &&
+      value === '' &&
+      selectRef.current &&
+      selectRef.current.select
+    ) {
+      selectRef.current.select.clearValue();
+    }
+  }, [value, selectRef, isEmptyStringInOptions]);
 
   return (
     <SelectContext.Provider value={true}>
