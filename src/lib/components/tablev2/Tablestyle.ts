@@ -73,6 +73,34 @@ export const TableRow = styled.div`
     }
   }}
 `;
+
+export const TableRowMultiSelectable = styled.div`
+  color: ${(props) => getTheme(props).textPrimary};
+  border-top: 1px solid
+    ${(props) => getTheme(props)[props.separationLineVariant]};
+  :last-child {
+    border-bottom: 1px solid
+      ${(props) => getTheme(props)[props.separationLineVariant]};
+  }
+  cursor: default;
+  box-sizing: border-box;
+
+  ${(props) => {
+    if (props.isSelected) {
+      return css`
+        background-color: ${(props) => getTheme(props).highlight};
+        border-right: ${borderSize} solid
+          ${(props) => getTheme(props).selectedActive};
+      `;
+    } else {
+      return css`
+        border-right: ${borderSize} solid
+          ${(props) => getTheme(props)[props.backgroundVariant]};
+      `;
+    }
+  }}
+`;
+
 export const TableBody = styled.div`
   display: block;
   flex-grow: 1;

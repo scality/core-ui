@@ -91,6 +91,8 @@ export function SingleSelectableContent({
     console.error('Please specify the onRowSelected function.');
   }
 
+  console.log('single selectedId', selectedId);
+
   const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
     useTableContext();
   const RenderRow = memo(({ index, style }) => {
@@ -156,10 +158,8 @@ export function SingleSelectableContent({
         'style',
         'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
       );
-      // $FlowFixMe
       node.appendChild(scrollDiv);
       const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      // $FlowFixMe
       node.removeChild(scrollDiv);
       setScrollBarWidth(scrollbarWidth);
     }
@@ -250,7 +250,7 @@ export function SingleSelectableContent({
         ))}
       </div>
       <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
-        {typeof children === 'function' ? ( // $FlowFixMe
+        {typeof children === 'function' ? (
           children(Rows)
         ) : rows.length ? (
           <Rows />

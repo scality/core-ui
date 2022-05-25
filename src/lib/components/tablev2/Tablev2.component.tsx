@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
@@ -16,6 +15,8 @@ import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { compareHealth } from './TableUtil';
 import { TableWrapper } from './Tablestyle';
+import { MultiSelectableContent } from './MultiSelectableContent';
+import { useCheckbox } from './useCheckbox';
 export type DataRow = Record<string, any>;
 export type SortType =
   | string
@@ -51,6 +52,23 @@ export const useTableContext = () => {
 
   return tableProps;
 };
+
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
+
+    useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  },
+);
 
 function Table({
   columns,
@@ -91,6 +109,9 @@ function Table({
     preGlobalFilteredRows,
     setGlobalFilter,
     setFilter,
+    visibleColumns,
+    setHiddenColumns,
+    ...restProps
   } = useTable(
     {
       columns,
@@ -103,6 +124,7 @@ function Table({
             desc: false,
           },
         ],
+        hiddenColumns: ['selection'],
       },
       disableMultiSort: true,
       autoResetSortBy: false,
@@ -115,7 +137,10 @@ function Table({
     useSortBy,
     useExpanded,
     useRowSelect,
+    useCheckbox,
   );
+
+  console.log('restProps', restProps);
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {
       setGlobalFilter(globalFilter);
@@ -136,6 +161,8 @@ function Table({
         setFilter,
         onBottom,
         onBottomOffset,
+        visibleColumns,
+        setHiddenColumns,
       }}
     >
       <TableWrapper role="grid" className="table">
@@ -146,6 +173,7 @@ function Table({
 }
 
 Table.SingleSelectableContent = SingleSelectableContent;
+Table.MultiSelectableContent = MultiSelectableContent;
 Table.Search = Search;
 Table.SearchWithQueryParams = SearchWithQueryParams;
 export { Table };
