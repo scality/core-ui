@@ -32,6 +32,22 @@ const optionsWithScrollSearchBar = generateOptions(10); // more than 8 options s
 
 const simpleOptions = generateOptions(4); // less than 5 options should not displays any scroll/search bar
 
+const SelectReset = (props) => {
+  const [value, setValue] = useState('default');
+
+  const handleChange = (value) => {
+    setValue(value);
+  };
+  return (
+    <>
+      <button onClick={() => setValue('')}>reset</button>
+      <Select value={value} onChange={handleChange} {...props}>
+        {props.children}
+      </Select>
+    </>
+  );
+};
+
 describe('SelectV2', () => {
   const toBeClose = (container) => {
     expect(container.getElementsByClassName('sc-select__option').length).toBe(
@@ -228,5 +244,14 @@ describe('SelectV2', () => {
     expect(getByTestId('option1')).not.toHaveClass(
       'sc-select__option--is-focused',
     );
+  });
+  test.each(variants)('should be able to reset the value', (variant) => {
+    const { container } = render(
+      <SelectReset variant={variant}>{simpleOptions}</SelectReset>,
+    );
+    userEvent.click(container.querySelector('button'));
+    expect(
+      container.querySelector('.sc-select__placeholder'),
+    ).toHaveTextContent('Select...');
   });
 });
