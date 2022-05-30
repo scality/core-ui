@@ -14,21 +14,6 @@ import {
 import { convertRemToPixels } from './TableUtil';
 import { useTableContext } from './Tablev2.component';
 
-const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef();
-  const resolvedRef = ref || defaultRef;
-
-  useEffect(() => {
-    resolvedRef.current.indeterminate = indeterminate;
-  }, [resolvedRef, indeterminate]);
-
-  return (
-    <>
-      <input type="checkbox" ref={resolvedRef} {...rest} />
-    </>
-  );
-});
-
 export const MultiSelectableContent = () => {
   const { headerGroups, prepareRow, rows, setHiddenColumns, selectedRowIds } =
     useTableContext();
