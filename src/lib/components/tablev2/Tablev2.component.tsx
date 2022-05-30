@@ -8,6 +8,8 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
+  SortByFn,
+  Column,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
@@ -17,25 +19,17 @@ import { compareHealth } from './TableUtil';
 import { TableWrapper } from './Tablestyle';
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { useCheckbox } from './useCheckbox';
+
 export type DataRow = Record<string, any>;
-export type SortType =
-  | string
-  | ((rowA: DataRow, rowB: DataRow, columnId: string, desc: boolean) => number);
+
 export type TableProps = {
-  columns: {
-    Header: string;
-    accessor: string;
-    sortType?: SortType;
-    cellStyle?: Partial<CSSStyleDeclaration>;
-    Cell?: React.ReactNode | ((props: any) => React.ReactNode);
-    disableSortBy?: boolean;
-  }[];
+  columns: Column<DataRow>[];
   defaultSortingKey: string;
-  //we don't display the default sort key in the URL, so we need to specify here
+  // We don't display the default sort key in the URL, so we need to specify here
   data: DataRow[];
-  children: React.ReactNode;
+  children: JSX.Element;
   getRowId?: any;
-  sortTypes?: Record<string, SortType>;
+  sortTypes?: Record<string, SortByFn<object>>;
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
@@ -52,23 +46,6 @@ export const useTableContext = () => {
 
   return tableProps;
 };
-
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef();
-    const resolvedRef = ref || defaultRef;
-
-    useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate;
-    }, [resolvedRef, indeterminate]);
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    );
-  },
-);
 
 function Table({
   columns,
@@ -140,7 +117,6 @@ function Table({
     useCheckbox,
   );
 
-  console.log('restProps', restProps);
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {
       setGlobalFilter(globalFilter);
@@ -161,7 +137,6 @@ function Table({
         setFilter,
         onBottom,
         onBottomOffset,
-        visibleColumns,
         setHiddenColumns,
       }}
     >

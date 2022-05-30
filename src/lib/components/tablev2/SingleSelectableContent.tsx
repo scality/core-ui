@@ -151,6 +151,7 @@ export function SingleSelectableContent({
       </TableRow>
     );
   }, areEqual);
+
   const handleScrollbarWidth = useCallback((node) => {
     if (node) {
       const scrollDiv = document.createElement('div');
