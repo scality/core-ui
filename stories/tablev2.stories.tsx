@@ -209,7 +209,9 @@ export const SimpleContentTable = () => {
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
             backgroundVariant="backgroundLevel1"
-            onRowSelected={action('Table Row Clicked')}
+            onMultiSelectionChanged={(rows) => {
+              console.log('Table.MultiSelectableContent selected row', rows);
+            }}
           />
         </Table>
       </div>

@@ -111,6 +111,7 @@ function Table({
     setFilter,
     visibleColumns,
     setHiddenColumns,
+    isAllRowsSelected,
     ...restProps
   } = useTable(
     {
@@ -161,6 +162,7 @@ function Table({
         onBottom,
         onBottomOffset,
         setHiddenColumns,
+        isAllRowsSelected,
       }}
     >
       <TableWrapper role="grid" className="table">

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useCallback, memo } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List, areEqual } from 'react-window';
@@ -72,8 +71,6 @@ export function SingleSelectableContent({
     console.error('Please specify the onRowSelected function.');
   }
 
-  console.log('single selectedId', selectedId);
-
   const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
     useTableContext();
   const RenderRow = memo(({ index, style }) => {
@@ -120,8 +117,8 @@ export function SingleSelectableContent({
 
           return (
             <div {...cellProps} className="td">
-              {cell.column.Cell.name === 'defaultRenderer' &&
-              typeof cell.value === 'string' ? (
+              {(cell.column.Cell as { name: string | undefined }).name ===
+                'defaultRenderer' && typeof cell.value === 'string' ? (
                 <ConstrainedText text={cell.value} />
               ) : (
                 cell.render('Cell')
