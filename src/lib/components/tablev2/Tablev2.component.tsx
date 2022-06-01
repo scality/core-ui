@@ -10,6 +10,10 @@ import {
   useGlobalFilter,
   SortByFn,
   Column,
+  Row,
+  HeaderGroup,
+  TableBodyPropGetter,
+  TableBodyProps,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
@@ -34,7 +38,26 @@ export type TableProps = {
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
 };
-const TableContext = React.createContext<any>(null);
+
+type TableContextType = {
+  headerGroups: HeaderGroup<object>[];
+  rows: Row<object>[];
+  prepareRow: (row: Row<object>) => void;
+  getTableBodyProps: (
+    propGetter?: TableBodyPropGetter<object>,
+  ) => TableBodyProps;
+  selectedRowIds: Record<string, boolean>;
+  selectedFlatRows: Row<object>[];
+  preGlobalFilteredRows: Row<object>[];
+  setGlobalFilter: (filterValue: any) => void;
+  globalFilter: any;
+  setFilter: (columnId: string, updater: any) => void;
+  onBottom?: (rowLength: number) => void;
+  onBottomOffset?: number;
+  setHiddenColumns: (param: string[]) => void;
+};
+const TableContext = React.createContext<TableContextType>(null);
+
 export const useTableContext = () => {
   const tableProps = React.useContext(TableContext);
 
@@ -66,7 +89,7 @@ function Table({
     ...sortTypes,
   };
   const stringifyFilter = React.useMemo(() => {
-    return (rows, columnId, value) => {
+    return (rows: Row<object>[], columnId: string, value) => {
       const filteredRows = rows.filter((row) => {
         // we stringify the object to make sure we can match the value
         return JSON.stringify(row.values)

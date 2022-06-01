@@ -22,7 +22,10 @@ export const TableHeader = styled.div`
     }
   }
 `;
-export const HeadRow = styled.div`
+export const HeadRow = styled.div<{
+  hasScrollBar: boolean;
+  scrollBarWidth: number;
+}>`
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
