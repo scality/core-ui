@@ -104,6 +104,11 @@ const translations = {
   },
 };
 
+type RenderType = {
+  index: number;
+  style: Record<string, string | number>;
+};
+
 export type MultiSelectableContentProps = {
   rowHeight: 'h32' | 'h40' | 'h48' | 'h64';
   separationLineVariant:
@@ -116,7 +121,7 @@ export type MultiSelectableContentProps = {
     | 'backgroundLevel2'
     | 'backgroundLevel3'
     | 'backgroundLevel4';
-  onRowSelected?: (row: Row) => void;
+  onMultiSelectionChanged: (rows: Row<object>[]) => void;
   locale?: 'en' | 'fr';
   customItemKey?: (index: Number, data: any) => string;
   isLoading?: boolean;
@@ -127,7 +132,7 @@ export const MultiSelectableContent = ({
   rowHeight,
   separationLineVariant,
   backgroundVariant,
-  onRowSelected,
+  onMultiSelectionChanged,
   locale = 'en',
   customItemKey,
   isLoading = false,
@@ -144,6 +149,7 @@ export const MultiSelectableContent = ({
     selectedRowIds,
     onBottom,
     onBottomOffset,
+    isAllRowsSelected,
   } = useTableContext();
 
   useEffect(() => {
@@ -164,23 +170,48 @@ export const MultiSelectableContent = ({
     }
   }, []);
 
-  const RenderRow = memo(({ index, style }) => {
+  const RenderRow = memo(({ index, style }: RenderType) => {
     const row = rows[index];
     prepareRow(row);
+
+    let rowProps = row.getRowProps({
+      /**
+       * Note:We need to pass the style property to the row component.
+       * Otherwise when we scroll down, the next rows are flashing
+       * because they are re-rendered in loop.
+       */
+      style: { ...style },
+    });
+
+    rowProps = {
+      ...rowProps,
+      ...{
+        onClick: () => {
+          let selectedRows = [];
+          if (row.isSelected) {
+            // we remove the item from the list
+            if (onMultiSelectionChanged) {
+              let keys = Object.keys(selectedRowIds);
+              selectedRows = rows.filter(
+                (row) => keys.includes(row.id) && rows[index].id !== row.id,
+              );
+              onMultiSelectionChanged(selectedRows);
+            }
+          } else {
+            // we add the new item from the list
+            let keys = Object.keys(selectedRowIds);
+            selectedRows = rows.filter((row) => keys.includes(row.id));
+            selectedRows = [...selectedRows, rows[index]];
+            onMultiSelectionChanged(selectedRows);
+          }
+          row.toggleRowSelected(!row.isSelected);
+        },
+      },
+    };
     return (
       <TableRowMultiSelectable
-        {...row.getRowProps({
-          /* Note:
-        We need to pass the style property to the row component.
-        Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
-          style: { ...style },
-          onClick: () => {
-            row.toggleRowSelected(!row.isSelected);
-            if (onRowSelected) return onRowSelected(row);
-          },
-        })}
+        {...rowProps}
         isSelected={row.isSelected}
-        row={row}
         separationLineVariant={separationLineVariant}
         backgroundVariant={backgroundVariant}
         className="tr"
@@ -198,7 +229,7 @@ export const MultiSelectableContent = ({
           });
 
           if (cell.column.id === 'selection') {
-            return <div {...cell.getCellProps()}>{cell.render('Cell')}</div>;
+            return <div {...cellProps}>{cell.render('Cell')}</div>;
           }
 
           if (cell.value === undefined) {
@@ -213,8 +244,9 @@ export const MultiSelectableContent = ({
 
           return (
             <div {...cellProps} className="td">
-              {cell.column.Cell.name === 'defaultRenderer' &&
-              typeof cell.value === 'string' ? (
+              {/* FIXME Patrick Need comment */}
+              {(cell.column.Cell as { name: string | undefined }).name ===
+                'defaultRenderer' && typeof cell.value === 'string' ? (
                 <ConstrainedText text={cell.value} />
               ) : (
                 cell.render('Cell')
@@ -225,6 +257,9 @@ export const MultiSelectableContent = ({
       </TableRowMultiSelectable>
     );
   }, areEqual);
+
+  // console.log('headerGroups', headerGroups);
+  // console.log('rows', rows);
 
   return (
     <>
@@ -244,7 +279,25 @@ export const MultiSelectableContent = ({
               return (
                 <TableHeader {...headerStyleProps} role="columnheader">
                   <div>
-                    {column.render('Header')}
+                    {column.id === 'selection' ? (
+                      <div
+                        onClick={() => {
+                          console.log('isAllRowsSelected', isAllRowsSelected);
+                          if (onMultiSelectionChanged) {
+                            if (isAllRowsSelected) {
+                              onMultiSelectionChanged([]);
+                            } else {
+                              onMultiSelectionChanged(rows);
+                            }
+                          }
+                        }}
+                      >
+                        {column.render('Header')}
+                      </div>
+                    ) : (
+                      column.render('Header')
+                    )}
+
                     {!column.disableSortBy ? (
                       <SortCaretWrapper>
                         {column.isSorted ? (

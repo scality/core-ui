@@ -77,7 +77,19 @@ export const TableRow = styled.div`
   }}
 `;
 
-export const TableRowMultiSelectable = styled.div`
+export const TableRowMultiSelectable = styled.div<{
+  isSelected: boolean;
+  separationLineVariant:
+    | 'backgroundLevel1'
+    | 'backgroundLevel2'
+    | 'backgroundLevel3'
+    | 'backgroundLevel4';
+  backgroundVariant:
+    | 'backgroundLevel1'
+    | 'backgroundLevel2'
+    | 'backgroundLevel3'
+    | 'backgroundLevel4';
+}>`
   color: ${(props) => getTheme(props).textPrimary};
   border-top: 1px solid
     ${(props) => getTheme(props)[props.separationLineVariant]};
@@ -85,8 +97,15 @@ export const TableRowMultiSelectable = styled.div`
     border-bottom: 1px solid
       ${(props) => getTheme(props)[props.separationLineVariant]};
   }
-  cursor: default;
+
   box-sizing: border-box;
+
+  &:hover,
+  &:focus {
+    background-color: ${(props) => getTheme(props).highlight};
+    outline: none;
+    cursor: pointer;
+  }
 
   ${(props) => {
     if (props.isSelected) {
