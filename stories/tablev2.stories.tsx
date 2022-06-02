@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { CellProps } from 'react-table';
 
-export default {
+const info = {
   title: 'Components/V2/Table',
   component: Table,
 };
+
+export default info;
 
 const data = [
   {
@@ -108,12 +111,7 @@ export const SimpleContentTable = () => {
             separationLineVariant="backgroundLevel3"
             backgroundVariant="backgroundLevel1"
             children={(Rows) => {
-              return (
-                // $FlowFixMe
-                <>
-                  <Rows />
-                </>
-              );
+              return <>{Rows}</>;
             }}
           ></Table.SingleSelectableContent>
         </Table>
@@ -219,7 +217,7 @@ export const SimpleContentTable = () => {
   );
 };
 export const asyncTable = () => {
-  function DataComponent({ data, loading, row, rowProps }) {
+  function DataComponent({ data, loading, row }) {
     return loading ? (
       <span>loading ...</span>
     ) : (
@@ -227,7 +225,7 @@ export const asyncTable = () => {
     );
   }
 
-  function RowAsync({ row, rowProps }) {
+  function RowAsync({ row }) {
     const [loading, setLoading] = React.useState(true);
     const [data, setData] = React.useState('');
     React.useEffect(() => {
@@ -239,19 +237,14 @@ export const asyncTable = () => {
         clearTimeout(timer);
       };
     }, []);
-    return (
-      <DataComponent
-        row={row}
-        rowProps={rowProps}
-        loading={loading}
-        data={data}
-      />
-    );
+    return <DataComponent row={row} loading={loading} data={data} />;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const renderRowSubComponent = React.useCallback(
-    ({ row, rowProps }) => <RowAsync row={row} rowProps={rowProps} />,
+    ({ row, ...rest }: CellProps<object>) => {
+      return <RowAsync row={row} />;
+    },
     [],
   );
   const columnAsync = [
@@ -287,6 +280,7 @@ export const asyncTable = () => {
       },
     },
   ];
+
   return (
     <Wrapper>
       <Title>async cell Table</Title>
@@ -309,7 +303,7 @@ export const asyncTable = () => {
     </Wrapper>
   );
 };
-export const onBottomCallback = () => {
+export const OnBottomCallback = () => {
   const columns = [
     {
       Header: 'value',
@@ -333,7 +327,7 @@ export const onBottomCallback = () => {
     return data;
   };
 
-  const [randomData, setRandomData] = React.useState(createData());
+  const [randomData, setRandomData] = useState(createData());
 
   const onBottom = () => {
     action('onBottom');

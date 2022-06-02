@@ -100,27 +100,6 @@ declare module 'react-table' {
       UseRowStateState<D>,
       UseSortByState<D> {}
 
-  export interface Test {
-    cellStyle?: object;
-  }
-
-  export interface ColumnInterface<
-    D extends Record<string, unknown> = Record<string, unknown>,
-  > extends UseFiltersColumnOptions<D>,
-      UseGlobalFiltersColumnOptions<D>,
-      UseGroupByColumnOptions<D>,
-      UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D>,
-      Test {}
-
-  export interface ColumnInstance<
-    D extends Record<string, unknown> = Record<string, unknown>,
-  > extends UseFiltersColumnProps<D>,
-      UseGroupByColumnProps<D>,
-      UseResizeColumnsColumnProps<D>,
-      UseSortByColumnProps<D>,
-      Test {}
-
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>,
     V = any,
@@ -133,4 +112,25 @@ declare module 'react-table' {
       UseGroupByRowProps<D>,
       UseRowSelectRowProps<D>,
       UseRowStateRowProps<D> {}
+
+  export interface ColumnInterface<
+    D extends Record<string, unknown> = Record<string, unknown>,
+  > extends UseFiltersColumnOptions<D>,
+      UseGlobalFiltersColumnOptions<D>,
+      UseGroupByColumnOptions<D>,
+      UseResizeColumnsColumnOptions<D>,
+      UseSortByColumnOptions<D> {}
+  // CoreUIColumn
+
+  export interface CoreUIColumn {
+    cellStyle?: object;
+    Cell?: (cellProps: Cell) => JSX.Element;
+  }
+  export interface ColumnInstance<
+    D extends Record<string, unknown> = Record<string, unknown>,
+  > extends UseFiltersColumnProps<D>,
+      UseGroupByColumnProps<D>,
+      UseResizeColumnsColumnProps<D>,
+      UseSortByColumnProps<D>,
+      CoreUIColumn {}
 }

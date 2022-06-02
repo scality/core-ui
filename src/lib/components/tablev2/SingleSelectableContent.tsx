@@ -1,8 +1,10 @@
-import React, { useCallback, memo } from 'react';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List, areEqual } from 'react-window';
+import React, { useCallback, memo, CSSProperties } from 'react';
+import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 
+import { Tooltip } from '../tooltip/Tooltip.component';
+import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
+import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   TableRow,
@@ -14,37 +16,25 @@ import {
   UnknownIcon,
   NoResult,
 } from './Tablestyle';
-import { useTableContext } from './Tablev2.component';
-import { convertRemToPixels } from './TableUtil';
+import {
+  TableHeightKeyType,
+  TableLocalType,
+  TableVariantType,
+  VirtualizedRows,
+} from './TableUtils';
 
-import { Tooltip } from '../tooltip/Tooltip.component';
-import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-export const tableRowHeight = {
-  // in rem unit
-  h32: '2.286',
-  h40: '2.858',
-  h48: '3.428',
-  h64: '4.572',
-};
 export type SingleSelectableContentProps = {
-  rowHeight: 'h32' | 'h40' | 'h48' | 'h64';
-  separationLineVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  backgroundVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  selectedId?: string;
+  rowHeight: TableHeightKeyType;
+  separationLineVariant: TableVariantType;
+  backgroundVariant: TableVariantType;
   onRowSelected?: (row: Row) => void;
-  locale?: 'en' | 'fr';
+  selectedId?: string;
+  locale?: TableLocalType;
   customItemKey?: (index: Number, data: any) => string;
   isLoading?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
+
 const translations = {
   en: {
     noResult: 'No results found',
@@ -53,15 +43,20 @@ const translations = {
     noResult: `Aucun résultat`,
   },
 };
+
+type RenderRowType = {
+  index: number;
+  style: CSSProperties;
+};
+
 export function SingleSelectableContent({
-  rowHeight,
-  separationLineVariant,
-  backgroundVariant,
+  rowHeight = 'h40',
+  separationLineVariant = 'backgroundLevel3',
+  backgroundVariant = 'backgroundLevel1',
+  locale = 'en',
   selectedId,
   onRowSelected,
-  locale = 'en',
   customItemKey,
-  isLoading = false,
   children,
 }: SingleSelectableContentProps) {
   const [hasScrollbar, setHasScrollbar] = React.useState(false);
@@ -73,21 +68,31 @@ export function SingleSelectableContent({
 
   const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
     useTableContext();
-  const RenderRow = memo(({ index, style }) => {
+  const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
     prepareRow(row);
+    let rowProps = row.getRowProps({
+      /**
+       * Note: We need to pass the style property to the row component.
+       * Otherwise when we scroll down, the next rows are flashing
+       * because they are re-rendered in loop.
+       */
+      style: { ...style },
+    });
+
+    rowProps = {
+      ...rowProps,
+      ...{
+        onClick: () => {
+          if (onRowSelected) return onRowSelected(row);
+        },
+      },
+    };
+
     return (
       <TableRow
-        {...row.getRowProps({
-          /* Note:
-        We need to pass the style property to the row component.
-        Otherwise when we scroll down, the next rows are flashing because they are re-rendered in loop. */
-          style: { ...style },
-          onClick: () => {
-            if (onRowSelected) return onRowSelected(row);
-          },
-        })}
-        row={row}
+        {...rowProps}
+        isSelected={row.isSelected}
         separationLineVariant={separationLineVariant}
         backgroundVariant={backgroundVariant}
         selectedId={selectedId}
@@ -152,41 +157,6 @@ export function SingleSelectableContent({
     return index;
   }
 
-  const Rows = () => (
-    <AutoSizer>
-      {({ height, width }) => {
-        return (
-          <List
-            height={height}
-            itemCount={rows.length} // how many items we are going to render
-            itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-            width={width}
-            itemKey={itemKey}
-            itemData={rows}
-            onItemsRendered={({
-              visibleStartIndex,
-              visibleStopIndex,
-              overscanStopIndex,
-            }) => {
-              setHasScrollbar(
-                visibleStartIndex - visibleStopIndex <= overscanStopIndex,
-              );
-
-              if (
-                overscanStopIndex >= rows.length - 1 - onBottomOffset &&
-                typeof onBottom === 'function'
-              ) {
-                onBottom(rows.length);
-              }
-            }}
-          >
-            {RenderRow}
-          </List>
-        );
-      }}
-    </AutoSizer>
-  );
-
   return (
     <>
       <div className="thead" role="rowgroup">
@@ -230,9 +200,27 @@ export function SingleSelectableContent({
       </div>
       <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
         {typeof children === 'function' ? (
-          children(Rows)
+          children(
+            <VirtualizedRows
+              rows={rows}
+              itemKey={itemKey}
+              rowHeight={rowHeight}
+              setHasScrollbar={setHasScrollbar}
+              onBottom={onBottom}
+              onBottomOffset={onBottomOffset}
+              RenderRow={RenderRow}
+            />,
+          )
         ) : rows.length ? (
-          <Rows />
+          <VirtualizedRows
+            rows={rows}
+            itemKey={itemKey}
+            rowHeight={rowHeight}
+            setHasScrollbar={setHasScrollbar}
+            onBottom={onBottom}
+            onBottomOffset={onBottomOffset}
+            RenderRow={RenderRow}
+          />
         ) : (
           <NoResult>{translations[locale].noResult}</NoResult>
         )}

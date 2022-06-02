@@ -1,4 +1,4 @@
-import { compareHealth } from './TableUtil';
+import { compareHealth } from './TableUtils';
 it('should return 0 for the equal status', () => {
   const result = compareHealth('healthy', 'healthy');
   expect(result).toEqual(0);

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import { TableSearch as Search, SearchProps } from './Search';
+
 export type SearchWithQueryParamsProps = {
   queryParams?: string;
 } & SearchProps;
+
 export function SearchWithQueryParams(props) {
   const { queryParams = 'search', onChange, ...rest } = props;
   const match = useRouteMatch();
