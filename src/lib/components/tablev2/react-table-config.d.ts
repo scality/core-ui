@@ -48,6 +48,7 @@ import {
   UseSortByState,
 } from 'react-table';
 
+// From: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-table
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 
@@ -99,20 +100,26 @@ declare module 'react-table' {
       UseRowStateState<D>,
       UseSortByState<D> {}
 
+  export interface Test {
+    cellStyle?: object;
+  }
+
   export interface ColumnInterface<
     D extends Record<string, unknown> = Record<string, unknown>,
   > extends UseFiltersColumnOptions<D>,
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D> {}
+      UseSortByColumnOptions<D>,
+      Test {}
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>,
   > extends UseFiltersColumnProps<D>,
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
-      UseSortByColumnProps<D> {}
+      UseSortByColumnProps<D>,
+      Test {}
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>,

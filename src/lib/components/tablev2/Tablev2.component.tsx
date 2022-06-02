@@ -55,6 +55,7 @@ type TableContextType = {
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   setHiddenColumns: (param: string[]) => void;
+  isAllRowsSelected?: boolean;
 };
 const TableContext = React.createContext<TableContextType>(null);
 
