@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  useRef,
-  useEffect,
-  memo,
-  useCallback,
-  useState,
-} from 'react';
+import { useEffect, memo, useCallback, useState } from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { FixedSizeList as List, areEqual } from 'react-window';
@@ -34,22 +27,14 @@ export const tableRowHeight = {
   h64: '4.572',
 };
 
-// duplicate
-function itemKey(index, data) {
-  if (typeof customItemKey === 'function') {
-    return customItemKey(index, data);
-  }
-
-  return index;
-}
-
 type VirtualizedRowsType = {
   rows: Row<object>[];
+  RenderRow: React.NamedExoticComponent<object>;
   rowHeight: 'h32' | 'h40' | 'h48' | 'h64';
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
+  itemKey?: (index: Number, data: any) => string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
-  RenderRow: React.NamedExoticComponent<object>;
 };
 
 const VirtualizedRows = ({
@@ -59,6 +44,7 @@ const VirtualizedRows = ({
   onBottom,
   onBottomOffset,
   RenderRow,
+  itemKey,
 }: VirtualizedRowsType) => (
   <AutoSizer>
     {({ height, width }) => {
@@ -110,18 +96,18 @@ type RenderType = {
 };
 
 export type MultiSelectableContentProps = {
-  rowHeight: 'h32' | 'h40' | 'h48' | 'h64';
-  separationLineVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  backgroundVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
   onMultiSelectionChanged: (rows: Row<object>[]) => void;
+  rowHeight?: 'h32' | 'h40' | 'h48' | 'h64';
+  separationLineVariant?:
+    | 'backgroundLevel1'
+    | 'backgroundLevel2'
+    | 'backgroundLevel3'
+    | 'backgroundLevel4';
+  backgroundVariant?:
+    | 'backgroundLevel1'
+    | 'backgroundLevel2'
+    | 'backgroundLevel3'
+    | 'backgroundLevel4';
   locale?: 'en' | 'fr';
   customItemKey?: (index: Number, data: any) => string;
   isLoading?: boolean;
@@ -129,13 +115,12 @@ export type MultiSelectableContentProps = {
 };
 
 export const MultiSelectableContent = ({
-  rowHeight,
-  separationLineVariant,
-  backgroundVariant,
   onMultiSelectionChanged,
+  rowHeight = 'h40',
+  separationLineVariant = 'backgroundLevel3',
+  backgroundVariant = 'backgroundLevel1',
   locale = 'en',
   customItemKey,
-  isLoading = false,
   children,
 }: MultiSelectableContentProps) => {
   const [hasScrollbar, setHasScrollbar] = useState(false);
@@ -155,6 +140,13 @@ export const MultiSelectableContent = ({
   useEffect(() => {
     setHiddenColumns([]);
   }, [setHiddenColumns]);
+
+  const itemKey = (index, data) => {
+    if (typeof customItemKey === 'function') {
+      return customItemKey(index, data);
+    }
+    return index;
+  };
 
   const handleScrollbarWidth = useCallback((node) => {
     if (node) {
@@ -208,6 +200,7 @@ export const MultiSelectableContent = ({
         },
       },
     };
+
     return (
       <TableRowMultiSelectable
         {...rowProps}
@@ -258,31 +251,28 @@ export const MultiSelectableContent = ({
     );
   }, areEqual);
 
-  // console.log('headerGroups', headerGroups);
-  // console.log('rows', rows);
-
   return (
     <>
       <div>
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            hasScrollBar={false}
-            scrollBarWidth={0}
+            hasScrollBar={hasScrollbar}
+            scrollBarWidth={scrollBarWidth}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
-                  style: column.cellStyle,
+                  style: column?.cellStyle,
                 }),
               );
+
               return (
                 <TableHeader {...headerStyleProps} role="columnheader">
                   <div>
                     {column.id === 'selection' ? (
                       <div
                         onClick={() => {
-                          console.log('isAllRowsSelected', isAllRowsSelected);
                           if (onMultiSelectionChanged) {
                             if (isAllRowsSelected) {
                               onMultiSelectionChanged([]);
@@ -326,6 +316,7 @@ export const MultiSelectableContent = ({
           children(
             <VirtualizedRows
               rows={rows}
+              itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
               onBottom={onBottom}
@@ -336,6 +327,7 @@ export const MultiSelectableContent = ({
         ) : rows.length ? (
           <VirtualizedRows
             rows={rows}
+            itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
             onBottom={onBottom}
