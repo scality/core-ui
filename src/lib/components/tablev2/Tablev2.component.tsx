@@ -14,24 +14,31 @@ import {
   HeaderGroup,
   TableBodyPropGetter,
   TableBodyProps,
+  Cell,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
-import { compareHealth } from './TableUtil';
+import { compareHealth } from './TableUtils';
 import { TableWrapper } from './Tablestyle';
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { useCheckbox } from './useCheckbox';
 
+export interface CoreUIColumn {
+  cellStyle?: object;
+  Cell?: (cellProps: Cell) => JSX.Element;
+}
+type ColumnTest = Column<CoreUIColumn>;
+
 export type DataRow = Record<string, any>;
 
 export type TableProps = {
-  columns: Column<DataRow>[];
+  columns: Array<Column>;
   defaultSortingKey: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DataRow[];
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
   getRowId?: any;
   sortTypes?: Record<string, SortByFn<object>>;
   globalFilter?: string;
@@ -89,8 +96,9 @@ function Table({
     },
     ...sortTypes,
   };
+
   const stringifyFilter = React.useMemo(() => {
-    return (rows: Row<object>[], columnId: string, value) => {
+    return (rows: Row<object>[], columnIds: string[], value) => {
       const filteredRows = rows.filter((row) => {
         // we stringify the object to make sure we can match the value
         return JSON.stringify(row.values)
@@ -100,6 +108,7 @@ function Table({
       return filteredRows;
     };
   }, []);
+
   const {
     headerGroups,
     rows,
@@ -110,10 +119,8 @@ function Table({
     preGlobalFilteredRows,
     setGlobalFilter,
     setFilter,
-    visibleColumns,
     setHiddenColumns,
     isAllRowsSelected,
-    ...restProps
   } = useTable(
     {
       columns,

@@ -2,6 +2,8 @@
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
+import { TableVariantType } from './TableUtils';
+
 const borderSize = '4px';
 export const SortIncentive = styled.span`
   position: absolute;
@@ -22,10 +24,13 @@ export const TableHeader = styled.div`
     }
   }
 `;
-export const HeadRow = styled.div<{
+
+type HeadRowType = {
   hasScrollBar: boolean;
   scrollBarWidth: number;
-}>`
+};
+
+export const HeadRow = styled.div<HeadRowType>`
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
@@ -36,7 +41,14 @@ export const HeadRow = styled.div<{
   color: ${(props) => getTheme(props).textPrimary};
   font-weight: bold;
 `;
-export const TableRow = styled.div`
+
+type TableRowType = {
+  isSelected: boolean;
+  selectedId: string;
+  separationLineVariant: TableVariantType;
+  backgroundVariant: TableVariantType;
+};
+export const TableRow = styled.div<TableRowType>`
   color: ${(props) => getTheme(props).textPrimary};
   border-top: 1px solid
     ${(props) => getTheme(props)[props.separationLineVariant]};
@@ -62,7 +74,7 @@ export const TableRow = styled.div`
   }}
 
   ${(props) => {
-    if (props.selectedId && props.selectedId === props.row.id) {
+    if (props.selectedId && props.isSelected) {
       return css`
         background-color: ${(props) => getTheme(props).highlight};
         border-right: ${borderSize} solid
@@ -77,19 +89,12 @@ export const TableRow = styled.div`
   }}
 `;
 
-export const TableRowMultiSelectable = styled.div<{
+type TableRowMultiSelectableType = {
   isSelected: boolean;
-  separationLineVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  backgroundVariant:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-}>`
+  separationLineVariant: TableVariantType;
+  backgroundVariant: TableVariantType;
+};
+export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => getTheme(props).textPrimary};
   border-top: 1px solid
     ${(props) => getTheme(props)[props.separationLineVariant]};

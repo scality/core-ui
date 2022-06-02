@@ -1,9 +1,10 @@
-import { useEffect, memo, useCallback, useState } from 'react';
+import { useEffect, memo, useCallback, useState, CSSProperties } from 'react';
 import { Row } from 'react-table';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List, areEqual } from 'react-window';
+import { areEqual } from 'react-window';
+
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
+import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   NoResult,
@@ -15,71 +16,12 @@ import {
   TooltipContent,
   UnknownIcon,
 } from './Tablestyle';
-import { convertRemToPixels } from './TableUtil';
-import { useTableContext } from './Tablev2.component';
-
-// duplicate
-export const tableRowHeight = {
-  // in rem unit
-  h32: '2.286',
-  h40: '2.858',
-  h48: '3.428',
-  h64: '4.572',
-};
-
-type VirtualizedRowsType = {
-  rows: Row<object>[];
-  RenderRow: React.NamedExoticComponent<object>;
-  rowHeight: 'h32' | 'h40' | 'h48' | 'h64';
-  setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
-  itemKey?: (index: Number, data: any) => string;
-  onBottom?: (rowLength: number) => void;
-  onBottomOffset?: number;
-};
-
-const VirtualizedRows = ({
-  rows,
-  rowHeight,
-  setHasScrollbar,
-  onBottom,
-  onBottomOffset,
-  RenderRow,
-  itemKey,
-}: VirtualizedRowsType) => (
-  <AutoSizer>
-    {({ height, width }) => {
-      return (
-        <List
-          height={height}
-          itemCount={rows.length} // how many items we are going to render
-          itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-          width={width}
-          itemKey={itemKey}
-          itemData={rows}
-          onItemsRendered={({
-            visibleStartIndex,
-            visibleStopIndex,
-            overscanStopIndex,
-          }) => {
-            setHasScrollbar(
-              visibleStartIndex - visibleStopIndex <= overscanStopIndex,
-            );
-
-            if (
-              onBottom &&
-              onBottomOffset != null &&
-              overscanStopIndex >= rows.length - 1 - onBottomOffset
-            ) {
-              onBottom(rows.length);
-            }
-          }}
-        >
-          {RenderRow}
-        </List>
-      );
-    }}
-  </AutoSizer>
-);
+import {
+  TableHeightKeyType,
+  TableLocalType,
+  TableVariantType,
+  VirtualizedRows,
+} from './TableUtils';
 
 const translations = {
   en: {
@@ -90,27 +32,18 @@ const translations = {
   },
 };
 
-type RenderType = {
+type RenderRowType = {
   index: number;
-  style: Record<string, string | number>;
+  style: CSSProperties;
 };
 
-export type MultiSelectableContentProps = {
+type MultiSelectableContentProps = {
   onMultiSelectionChanged: (rows: Row<object>[]) => void;
-  rowHeight?: 'h32' | 'h40' | 'h48' | 'h64';
-  separationLineVariant?:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  backgroundVariant?:
-    | 'backgroundLevel1'
-    | 'backgroundLevel2'
-    | 'backgroundLevel3'
-    | 'backgroundLevel4';
-  locale?: 'en' | 'fr';
+  rowHeight?: TableHeightKeyType;
+  separationLineVariant?: TableVariantType;
+  backgroundVariant?: TableVariantType;
+  locale?: TableLocalType;
   customItemKey?: (index: Number, data: any) => string;
-  isLoading?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
@@ -162,7 +95,7 @@ export const MultiSelectableContent = ({
     }
   }, []);
 
-  const RenderRow = memo(({ index, style }: RenderType) => {
+  const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
     prepareRow(row);
 

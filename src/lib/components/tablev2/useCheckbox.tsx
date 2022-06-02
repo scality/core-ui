@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useRef } from 'react';
-import { Hooks } from 'react-table';
+import { forwardRef, MutableRefObject, useEffect, useRef } from 'react';
+import { Hooks, TableToggleAllRowsSelectedProps } from 'react-table';
 import styled from 'styled-components';
 
 const CheckBoxContainer = styled.div`
@@ -10,12 +10,16 @@ const CheckBoxContainer = styled.div`
   width: 50px;
 `;
 
-const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef();
+const IndeterminateCheckbox = forwardRef<
+  HTMLInputElement,
+  TableToggleAllRowsSelectedProps
+>(({ indeterminate, ...rest }, ref) => {
+  const defaultRef = useRef<HTMLInputElement>();
   const resolvedRef = ref || defaultRef;
 
   useEffect(() => {
-    resolvedRef.current.indeterminate = indeterminate;
+    (resolvedRef as MutableRefObject<HTMLInputElement>).current.indeterminate =
+      indeterminate;
   }, [resolvedRef, indeterminate]);
 
   return (
@@ -28,23 +32,15 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
 export const useCheckbox = (hooks: Hooks<object>) => {
   hooks.visibleColumns.push((columns) => {
     return [
-      // Let's make a column for selection
       {
         id: 'selection',
-        // The header can use the table's getToggleAllRowsSelectedProps method
-        // to render a checkbox
-        // Header: ({ getToggleAllRowsSelectedProps }) => {
-        Header: (props) => {
+        Header: ({ getToggleAllRowsSelectedProps }) => {
           return (
             <CheckBoxContainer>
-              <IndeterminateCheckbox
-                {...props.getToggleAllRowsSelectedProps()}
-              />
+              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
             </CheckBoxContainer>
           );
         },
-        // The cell can use the individual row's getToggleRowSelectedProps method
-        // to the render a checkbox
         Cell: ({ row }) => {
           return (
             <CheckBoxContainer>
