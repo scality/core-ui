@@ -7,6 +7,7 @@ export const InputContainer = styled.div<{
   type: string;
 }>`
   display: inline-flex;
+  width: 100%;
   ${(props) => {
     if (props.disabled) {
       return css`
@@ -138,4 +139,5 @@ export const InputErrorMessage = styled.span`
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
