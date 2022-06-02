@@ -140,11 +140,12 @@ const InputRenderer = ({
         value={value}
         onChange={onChange}
         autoComplete="off"
+        type={type}
         {...rest}
       />
     ),
   };
-  if (type) return input[type];
+  if (type && input[type]) return input[type];
   else return input.text;
 };
 
