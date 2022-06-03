@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from 'react';
+import React, { forwardRef, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
@@ -7,10 +7,12 @@ type Props = {
   rows?: number;
   cols?: number;
   placeholder?: string;
-  value: string;
+  value?: string;
   disabled?: boolean;
-  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => void;
 };
+type RefType = HTMLTextAreaElement | null;
+
 const TextAreaContainer = styled.textarea`
   padding: ${defaultTheme.padding.small};
   border-radius: 4px;
@@ -28,27 +30,24 @@ const TextAreaContainer = styled.textarea`
   }}
 `;
 
-function TextArea({
-  value,
-  onChange,
+function TextAreaElement({
   rows = 3,
   cols = 20,
-  placeholder,
-  disabled,
   ...rest
-}: Props) {
+  }: Props,
+  ref: React.ForwardedRef<RefType>) {
+
   return (
     <TextAreaContainer
       className="sc-textarea"
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
       rows={rows}
       cols={cols}
-      disabled={disabled}
       {...rest}
-    ></TextAreaContainer>
+      ref={ref}
+    />
   );
 }
 
-export { TextArea };
+export const TextArea = forwardRef<RefType, Props>(TextAreaElement);
+
+export default { TextArea };
