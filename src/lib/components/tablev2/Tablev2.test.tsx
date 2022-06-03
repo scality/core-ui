@@ -2,8 +2,8 @@ import { Table } from './Tablev2.component';
 import React from 'react';
 import { render } from '@testing-library/react';
 
-jest.mock('./TableUtil', () => ({
-  ...jest.requireActual('./TableUtil'),
+jest.mock('./TableUtils', () => ({
+  ...jest.requireActual('./TableUtils'),
   // since convertRemToPixels rely on getComputedStyle(document.documentElement) which is not available in jest
   // we mock it
   convertRemToPixels: () => 12,
