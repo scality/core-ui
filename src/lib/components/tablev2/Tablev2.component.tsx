@@ -139,6 +139,7 @@ function Table({
       autoResetSortBy: false,
       sortTypes,
       globalFilter: stringifyFilter,
+      autoResetHiddenColumns: false,
     },
     useBlockLayout,
     useFilters,

@@ -31,7 +31,7 @@ const IndeterminateCheckbox = forwardRef<
 
 export const useCheckbox = (hooks: Hooks<object>) => {
   hooks.visibleColumns.push((columns) => {
-    return [
+    const test = [
       {
         id: 'selection',
         Header: ({ getToggleAllRowsSelectedProps }) => {
@@ -53,6 +53,8 @@ export const useCheckbox = (hooks: Hooks<object>) => {
       },
       ...columns,
     ];
+
+    return test;
   });
 };
 

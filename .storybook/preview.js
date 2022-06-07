@@ -23,7 +23,6 @@ export const globalTypes = {
 
 const withThemeProvider = (Story, context) => {
   const theme = themes[context.globals.theme];
-  console.log('theme', theme);
   return (
     <CoreUiThemeProvider theme={theme}>
       <Story {...context} />
