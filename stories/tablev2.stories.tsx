@@ -4,6 +4,12 @@ import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import { CellProps } from 'react-table';
+import { Box, Button } from '../src/lib/next';
+import styled from 'styled-components';
+
+const Flex = styled(Box)`
+  display: flex;
+`;
 
 const info = {
   title: 'Components/V2/Table',
@@ -357,6 +363,133 @@ export const OnBottomCallback = () => {
           />
         </Table>
       </div>
+    </Wrapper>
+  );
+};
+
+export const MultiTable = () => {
+  const [data1, setData1] = useState([
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+  ]);
+
+  const [data2, setData2] = useState([
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+  ]);
+  const columns2 = [
+    {
+      Header: 'Name',
+      accessor: 'name',
+    },
+    {
+      Header: 'Volume',
+      accessor: 'volume',
+    },
+    {
+      Header: 'Capacity',
+      accessor: 'capacity',
+    },
+  ];
+
+  const demo = () => {
+    setData1([
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+    ]);
+
+    setData2([
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '2Gi',
+      },
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+    ]);
+  };
+
+  return (
+    <Wrapper>
+      <Title>Several Multiselect</Title>
+      <Flex justifyContent="center" gap="2rem">
+        <Box width="500px" height="200px">
+          <Table columns={columns2} data={data1} defaultSortingKey="name">
+            <Table.MultiSelectableContent
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
+              }}
+            />
+          </Table>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          gap="1rem"
+        >
+          <Button
+            variant="secondary"
+            label=">"
+            onClick={() => {
+              demo();
+            }}
+          />
+          <Button
+            variant="secondary"
+            label="<"
+            onClick={() => {
+              demo();
+            }}
+          />
+        </Box>
+        <Box width="500px" height="200px">
+          <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
+            <Table.MultiSelectableContent
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
+              }}
+            />
+          </Table>
+        </Box>
+      </Flex>
     </Wrapper>
   );
 };
