@@ -120,7 +120,11 @@ const SearchInput = forwardRef(
           disabled={disabled}
           inputRef={(element) => {
             myInputRef.current = element;
-            forwardedRef.current = element;
+            if (typeof forwardedRef === 'function') {
+              forwardedRef(element);
+            } else if (forwardedRef) {
+              forwardedRef.current = element;
+            }
           }}
         />
         <SearchIcon onClick={toggle} disabled={!docked}>
