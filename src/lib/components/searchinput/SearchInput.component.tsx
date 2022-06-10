@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { Input } from '../input/Input.component';
 import * as defaultTheme from '../../style/theme';
@@ -68,62 +68,70 @@ const ResetIcon = styled(IconButton)`
   transition: opacity 0.5s ease-in-out;
 `;
 
-function SearchInput({
-  disableToggle,
-  placeholder,
-  value,
-  onChange,
-  onReset,
-  disabled,
-  ...rest
-}: Props) {
-  const [docked, setDocked] = useState(!disableToggle);
-  const myInputRef = useRef(null);
+const SearchInput = forwardRef(
+  (
+    {
+      disableToggle,
+      placeholder,
+      value,
+      onChange,
+      onReset,
+      disabled,
+      ...rest
+    }: Props,
+    forwardedRef,
+  ) => {
+    const [docked, setDocked] = useState(!disableToggle);
+    const myInputRef = useRef(null);
 
-  const toggle = () => {
-    if (!disableToggle) {
-      setDocked(!docked);
-      //$FlowFixMe
-      myInputRef.current.focus();
-    }
-  };
+    const toggle = () => {
+      if (!disableToggle) {
+        setDocked(!docked);
+        //$FlowFixMe
+        myInputRef.current.focus();
+      }
+    };
 
-  const reset = () => {
-    if (onReset) {
-      onReset();
-    }
+    const reset = () => {
+      if (onReset) {
+        onReset();
+      }
 
-    if (!disableToggle) {
-      setDocked(true);
-    }
-  };
+      if (!disableToggle) {
+        setDocked(true);
+      }
+    };
 
-  return (
-    <SearchInputContainer
-      className="sc-searchinput"
-      disabled={disabled}
-      docked={docked}
-      {...rest}
-    >
-      <Input
-        minLength={1}
-        debounceTimeout={300}
-        type="text"
-        name="search"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
+    return (
+      <SearchInputContainer
+        className="sc-searchinput"
         disabled={disabled}
-        inputRef={myInputRef}
-      />
-      <SearchIcon onClick={toggle} disabled={!docked}>
-        <i className="fas fa-search" />
-      </SearchIcon>
-      <ResetIcon onClick={reset} visible={value && !docked && onReset}>
-        <i className="fas fa-times-circle" />
-      </ResetIcon>
-    </SearchInputContainer>
-  );
-}
+        docked={docked}
+        {...rest}
+      >
+        <Input
+          minLength={1}
+          debounceTimeout={300}
+          type="text"
+          name="search"
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          inputRef={(element) => {
+            myInputRef.current = element;
+            forwardedRef.current = element;
+          }}
+        />
+        <SearchIcon onClick={toggle} disabled={!docked}>
+          <i className="fas fa-search" />
+        </SearchIcon>
+        <ResetIcon onClick={reset} visible={value && !docked && onReset}>
+          <i className="fas fa-times-circle" />
+        </ResetIcon>
+      </SearchInputContainer>
+    );
+  },
+);
 
 export { SearchInput };
