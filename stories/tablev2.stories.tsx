@@ -48,6 +48,7 @@ const data = [
     health: 'healthy',
   },
 ];
+
 export const SimpleContentTable = () => {
   const columns = [
     {
@@ -222,6 +223,7 @@ export const SimpleContentTable = () => {
     </Wrapper>
   );
 };
+
 export const asyncTable = () => {
   function DataComponent({ data, loading, row }) {
     return loading ? (

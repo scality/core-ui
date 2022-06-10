@@ -170,7 +170,12 @@ export const MultiSelectableContent = ({
 
           return (
             <div {...cellProps} className="td">
-              {/* FIXME Patrick Need comment */}
+              {/**
+               * react-table use function called `defaultRenderer` as
+               * default render.
+               * We use the name of the function to differentiate default
+               * implementation to our override in the column
+               */}
               {(cell.column.Cell as { name: string | undefined }).name ===
                 'defaultRenderer' && typeof cell.value === 'string' ? (
                 <ConstrainedText text={cell.value} />

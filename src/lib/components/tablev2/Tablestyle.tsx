@@ -31,6 +31,8 @@ type HeadRowType = {
 };
 
 export const HeadRow = styled.div<HeadRowType>`
+  display: flex;
+  align-items: center;
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
@@ -148,6 +150,8 @@ export const UnknownIcon = styled.i`
   height: 70%;
 `;
 export const NoResult = styled.div`
+  display: flex;
+  justify-content: center;
   color: ${(props) => getTheme(props).textSecondary};
   padding-top: ${spacing.sp8};
   border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
