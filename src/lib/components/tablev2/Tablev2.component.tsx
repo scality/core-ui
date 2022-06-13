@@ -25,12 +25,6 @@ import { TableWrapper } from './Tablestyle';
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { useCheckbox } from './useCheckbox';
 
-export interface CoreUIColumn {
-  cellStyle?: object;
-  Cell?: (cellProps: Cell) => JSX.Element;
-}
-type ColumnTest = Column<CoreUIColumn>;
-
 export type DataRow = Record<string, any>;
 
 export type TableProps = {
@@ -46,6 +40,8 @@ export type TableProps = {
   onBottomOffset?: number;
 };
 
+type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
+// FIXME To rewrite with Generics
 type TableContextType = {
   headerGroups: HeaderGroup<object>[];
   rows: Row<object>[];
@@ -61,7 +57,7 @@ type TableContextType = {
   setFilter: (columnId: string, updater: any) => void;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
-  setHiddenColumns: (param: string[]) => void;
+  setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
 };
 const TableContext = React.createContext<TableContextType>(null);

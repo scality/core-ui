@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
 import { TableVariantType } from './TableUtils';
+import { HeaderGroup } from 'react-table';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -156,3 +157,21 @@ export const NoResult = styled.div`
   padding-top: ${spacing.sp8};
   border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
 `;
+
+export const SortCaret = ({ column }: { column: HeaderGroup }) => {
+  return !column.disableSortBy ? (
+    <SortCaretWrapper>
+      {column.isSorted ? (
+        column.isSortedDesc ? (
+          <i className="fas fa-sort-down" />
+        ) : (
+          <i className="fas fa-sort-up" />
+        )
+      ) : (
+        <SortIncentive>
+          <i className="fas fa-sort" />
+        </SortIncentive>
+      )}
+    </SortCaretWrapper>
+  ) : null;
+};

@@ -10,16 +10,16 @@ import {
   TableRow,
   TableBody,
   TableHeader,
-  SortCaretWrapper,
-  SortIncentive,
   TooltipContent,
   UnknownIcon,
   NoResult,
+  SortCaret,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
   TableLocalType,
   TableVariantType,
+  useTableScrollbar,
   VirtualizedRows,
 } from './TableUtils';
 
@@ -59,9 +59,6 @@ export function SingleSelectableContent({
   customItemKey,
   children,
 }: SingleSelectableContentProps) {
-  const [hasScrollbar, setHasScrollbar] = React.useState(false);
-  const [scrollBarWidth, setScrollBarWidth] = React.useState(0);
-
   if (selectedId && !onRowSelected) {
     console.error('Please specify the onRowSelected function.');
   }
@@ -135,19 +132,12 @@ export function SingleSelectableContent({
     );
   }, areEqual);
 
-  const handleScrollbarWidth = useCallback((node) => {
-    if (node) {
-      const scrollDiv = document.createElement('div');
-      scrollDiv.setAttribute(
-        'style',
-        'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
-      );
-      node.appendChild(scrollDiv);
-      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      node.removeChild(scrollDiv);
-      setScrollBarWidth(scrollbarWidth);
-    }
-  }, []);
+  const {
+    hasScrollbar,
+    setHasScrollbar,
+    scrollBarWidth,
+    handleScrollbarWidth,
+  } = useTableScrollbar();
 
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
@@ -176,21 +166,7 @@ export function SingleSelectableContent({
                 <TableHeader {...headerStyleProps} role="columnheader">
                   <div>
                     {column.render('Header')}
-                    {!column.disableSortBy ? (
-                      <SortCaretWrapper>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <i className="fas fa-sort-down" />
-                          ) : (
-                            <i className="fas fa-sort-up" />
-                          )
-                        ) : (
-                          <SortIncentive>
-                            <i className="fas fa-sort" />
-                          </SortIncentive>
-                        )}
-                      </SortCaretWrapper>
-                    ) : null}
+                    <SortCaret column={column} />
                   </div>
                 </TableHeader>
               );

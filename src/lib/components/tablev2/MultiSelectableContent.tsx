@@ -1,4 +1,4 @@
-import { useEffect, memo, useCallback, useState, CSSProperties } from 'react';
+import { useEffect, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
 
@@ -8,8 +8,7 @@ import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   NoResult,
-  SortCaretWrapper,
-  SortIncentive,
+  SortCaret,
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
@@ -20,6 +19,7 @@ import {
   TableHeightKeyType,
   TableLocalType,
   TableVariantType,
+  useTableScrollbar,
   VirtualizedRows,
 } from './TableUtils';
 
@@ -47,6 +47,22 @@ type MultiSelectableContentProps = {
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
+/**
+ * FIXME Need to spend time to change the type to something like this
+ */
+
+// type MultiSelectableContentProps<ENTRY extends Record<string, any>> = {
+//   onMultiSelectionChanged: (rows: Row<ENTRY>[]) => void;
+//   rowHeight?: TableHeightKeyType;
+//   separationLineVariant?: TableVariantType;
+//   backgroundVariant?: TableVariantType;
+//   customItemKey?: (index: Number, data: ENTRY) => string;
+// } & ({
+//   locale: TableLocalType;
+// } | {
+//   children: (rows: JSX.Element) => JSX.Element;
+//   });
+
 export const MultiSelectableContent = ({
   onMultiSelectionChanged,
   rowHeight = 'h40',
@@ -56,9 +72,6 @@ export const MultiSelectableContent = ({
   customItemKey,
   children,
 }: MultiSelectableContentProps) => {
-  const [hasScrollbar, setHasScrollbar] = useState(false);
-  const [scrollBarWidth, setScrollBarWidth] = useState(0);
-
   const {
     headerGroups,
     prepareRow,
@@ -71,8 +84,17 @@ export const MultiSelectableContent = ({
   } = useTableContext();
 
   useEffect(() => {
-    setHiddenColumns([]);
+    setHiddenColumns((oldHiddenColumns) => {
+      return oldHiddenColumns.filter((column) => column !== 'selection');
+    });
   }, [setHiddenColumns]);
+
+  const {
+    hasScrollbar,
+    setHasScrollbar,
+    scrollBarWidth,
+    handleScrollbarWidth,
+  } = useTableScrollbar();
 
   const itemKey = (index, data) => {
     if (typeof customItemKey === 'function') {
@@ -80,20 +102,6 @@ export const MultiSelectableContent = ({
     }
     return index;
   };
-
-  const handleScrollbarWidth = useCallback((node) => {
-    if (node) {
-      const scrollDiv = document.createElement('div');
-      scrollDiv.setAttribute(
-        'style',
-        'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
-      );
-      node.appendChild(scrollDiv);
-      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      node.removeChild(scrollDiv);
-      setScrollBarWidth(scrollbarWidth);
-    }
-  }, []);
 
   const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
@@ -225,22 +233,7 @@ export const MultiSelectableContent = ({
                     ) : (
                       column.render('Header')
                     )}
-
-                    {!column.disableSortBy ? (
-                      <SortCaretWrapper>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <i className="fas fa-sort-down" />
-                          ) : (
-                            <i className="fas fa-sort-up" />
-                          )
-                        ) : (
-                          <SortIncentive>
-                            <i className="fas fa-sort" />
-                          </SortIncentive>
-                        )}
-                      </SortCaretWrapper>
-                    ) : null}
+                    <SortCaret column={column} />
                   </div>
                 </TableHeader>
               );
