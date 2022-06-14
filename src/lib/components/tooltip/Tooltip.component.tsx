@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
-
+import { debounce } from 'lodash';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 export const TOP = 'top';
@@ -85,6 +85,13 @@ function Tooltip({
     childrenRef.current,
   );
   const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
+
+  const debouncedHandleOnMouseEnter = debounce(() => setIsTooltipVisible(true), 500);
+
+  const handleOnMouseLeave = () => {
+    setIsTooltipVisible(false);
+    debouncedHandleOnMouseEnter.cancel();
+  }
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
       computePosition(childrenRef.current, tooltipRef.current, {
@@ -108,9 +115,7 @@ function Tooltip({
       onMouseEnter={() => {
         setIsTooltipVisible(true);
       }}
-      onMouseLeave={() => {
-        setIsTooltipVisible(false);
-      }}
+      onMouseLeave={handleOnMouseLeave}
     >
       {isTooltipVisible && overlay ? (
         <TooltipOverLayContainer
