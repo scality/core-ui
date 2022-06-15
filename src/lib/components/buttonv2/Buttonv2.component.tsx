@@ -11,7 +11,7 @@ export type Props = {
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: JSX.Element;
-  label?: string;
+  label?: string | JSX.Element;
   tooltip?: TooltipProps;
 };
 export const ButtonStyled = styled.button`
