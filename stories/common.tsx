@@ -15,16 +15,16 @@ const StyledSubTitle = styled.span`
 const StyledText = styled.text`
   fill: ${getThemePropSelector('textPrimary')};
 `;
-export const Wrapper = ({ children, className }) => {
+export const Wrapper = ({ children, className = '' }) => {
   return <StyledWrapper className={className}>{children}</StyledWrapper>;
 };
-export const Title = ({ children, className }) => {
+export const Title = ({ children, className = '' }) => {
   return <StyledTitle className={className}>{children}</StyledTitle>;
 };
-export const SubTitle = ({ children, className }) => {
+export const SubTitle = ({ children, className = '' }) => {
   return <StyledSubTitle className={className}>{children}</StyledSubTitle>;
 };
-export const Text = ({ children, className, ...rest }) => {
+export const Text = ({ children, className = '', ...rest }) => {
   return (
     <StyledText className={className} {...rest}>
       {children}
