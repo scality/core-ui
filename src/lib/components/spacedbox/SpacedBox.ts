@@ -83,6 +83,9 @@ const px = createSpacingFn('px', ['padding-left', 'padding-right']);
 const py = createSpacingFn('py', ['padding-top', 'padding-bottom']);
 
 /**
+ * @deprecated
+ * Please use Box with import { Box } from '@scality/core-ui/dist/next';
+ *
  * Most common use cases:
  *
  * `<SpacedBox m={14}><Component /></SpacedBox>`
