@@ -6,7 +6,7 @@
       "declaration": true, // Generate d.ts files
       "allowSyntheticDefaultImports": true, // Allow import React from 'react'
       "jsx": "react-jsx",
-      "target": "es2021",
+      "target": "es2019",
       "outDir": "dist",
       "declarationMap": true, // go to js file when using IDE functions like "Go to Definition" in VSCode
       "lib": ["ESNext", "dom"],
