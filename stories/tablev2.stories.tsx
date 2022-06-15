@@ -1,38 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
-export default {
+import { CellProps } from 'react-table';
+import { Box, Button } from '../src/lib/next';
+import styled from 'styled-components';
+
+const Flex = styled(Box)`
+  display: flex;
+`;
+
+const info = {
   title: 'Components/V2/Table',
   component: Table,
 };
+
+export default info;
+
 const data = [
   {
+    id: 1,
     firstName: 'Sotiria',
     lastName: 'Agathangelou',
     age: undefined,
     health: 'healthy',
   },
   {
+    id: 2,
     firstName: 'Stefania',
     lastName: 'Evgenios',
     age: 27,
     health: 'warning',
   },
   {
+    id: 3,
     firstName: 'Yohann',
     lastName: 'Rodolph',
     age: 27,
     health: 'critical',
   },
   {
+    id: 4,
     firstName: 'Ninette',
     lastName: 'Caroline',
     age: 31,
     health: 'healthy',
   },
 ];
+
 export const SimpleContentTable = () => {
   const columns = [
     {
@@ -102,12 +118,7 @@ export const SimpleContentTable = () => {
             separationLineVariant="backgroundLevel3"
             backgroundVariant="backgroundLevel1"
             children={(Rows) => {
-              return (
-                // $FlowFixMe
-                <>
-                  <Rows />
-                </>
-              );
+              return <>{Rows}</>;
             }}
           ></Table.SingleSelectableContent>
         </Table>
@@ -186,11 +197,35 @@ export const SimpleContentTable = () => {
           />
         </Table>
       </div>
+      <Title>MultiSelect</Title>
+      <div
+        style={{
+          height: '300px',
+          paddingTop: '20px',
+        }}
+      >
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+        >
+          <Table.MultiSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+            onMultiSelectionChanged={(rows) => {
+              console.log('Table.MultiSelectableContent selected row', rows);
+            }}
+          />
+        </Table>
+      </div>
     </Wrapper>
   );
 };
+
 export const asyncTable = () => {
-  function DataComponent({ data, loading, row, rowProps }) {
+  function DataComponent({ data, loading, row }) {
     return loading ? (
       <span>loading ...</span>
     ) : (
@@ -198,7 +233,7 @@ export const asyncTable = () => {
     );
   }
 
-  function RowAsync({ row, rowProps }) {
+  function RowAsync({ row }) {
     const [loading, setLoading] = React.useState(true);
     const [data, setData] = React.useState('');
     React.useEffect(() => {
@@ -210,19 +245,14 @@ export const asyncTable = () => {
         clearTimeout(timer);
       };
     }, []);
-    return (
-      <DataComponent
-        row={row}
-        rowProps={rowProps}
-        loading={loading}
-        data={data}
-      />
-    );
+    return <DataComponent row={row} loading={loading} data={data} />;
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const renderRowSubComponent = React.useCallback(
-    ({ row, rowProps }) => <RowAsync row={row} rowProps={rowProps} />,
+    ({ row, ...rest }: CellProps<object>) => {
+      return <RowAsync row={row} />;
+    },
     [],
   );
   const columnAsync = [
@@ -258,6 +288,7 @@ export const asyncTable = () => {
       },
     },
   ];
+
   return (
     <Wrapper>
       <Title>async cell Table</Title>
@@ -280,7 +311,7 @@ export const asyncTable = () => {
     </Wrapper>
   );
 };
-export const onBottomCallback = () => {
+export const OnBottomCallback = () => {
   const columns = [
     {
       Header: 'value',
@@ -304,7 +335,7 @@ export const onBottomCallback = () => {
     return data;
   };
 
-  const [randomData, setRandomData] = React.useState(createData());
+  const [randomData, setRandomData] = useState(createData());
 
   const onBottom = () => {
     action('onBottom');
@@ -334,6 +365,133 @@ export const onBottomCallback = () => {
           />
         </Table>
       </div>
+    </Wrapper>
+  );
+};
+
+export const MultiTable = () => {
+  const [data1, setData1] = useState([
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+  ]);
+
+  const [data2, setData2] = useState([
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+    {
+      name: 'test',
+      volume: 1,
+      capacity: '1Gi',
+    },
+  ]);
+  const columns2 = [
+    {
+      Header: 'Name',
+      accessor: 'name',
+    },
+    {
+      Header: 'Volume',
+      accessor: 'volume',
+    },
+    {
+      Header: 'Capacity',
+      accessor: 'capacity',
+    },
+  ];
+
+  const demo = () => {
+    setData1([
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+    ]);
+
+    setData2([
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '2Gi',
+      },
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
+    ]);
+  };
+
+  return (
+    <Wrapper>
+      <Title>Several Multiselect</Title>
+      <Flex justifyContent="center" gap="2rem">
+        <Box width="500px" height="200px">
+          <Table columns={columns2} data={data1} defaultSortingKey="name">
+            <Table.MultiSelectableContent
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
+              }}
+            />
+          </Table>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          gap="1rem"
+        >
+          <Button
+            variant="secondary"
+            label=">"
+            onClick={() => {
+              demo();
+            }}
+          />
+          <Button
+            variant="secondary"
+            label="<"
+            onClick={() => {
+              demo();
+            }}
+          />
+        </Box>
+        <Box width="500px" height="200px">
+          <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
+            <Table.MultiSelectableContent
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
+              }}
+            />
+          </Table>
+        </Box>
+      </Flex>
     </Wrapper>
   );
 };

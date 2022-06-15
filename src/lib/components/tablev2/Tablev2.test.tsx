@@ -1,18 +1,21 @@
 import { Table } from './Tablev2.component';
 import React from 'react';
 import { render } from '@testing-library/react';
-jest.mock('./TableUtil', () => ({
-  ...jest.requireActual('./TableUtil'),
+
+jest.mock('./TableUtils', () => ({
+  ...jest.requireActual('./TableUtils'),
   // since convertRemToPixels rely on getComputedStyle(document.documentElement) which is not available in jest
   // we mock it
   convertRemToPixels: () => 12,
 }));
+
 jest.mock('react-virtualized-auto-sizer', () => ({ children }) => {
   return children({
     height: 600,
     width: 600,
   });
 });
+
 const data = [
   {
     firstName: 'Sotiria',
@@ -58,14 +61,11 @@ const columns = [
     sortType: 'health',
   },
 ];
+
 describe('TableV2', () => {
   test('it should display all the data', async () => {
     const { getAllByRole } = render(
-      <div
-        style={{
-          height: '400px',
-        }}
-      >
+      <div>
         <Table columns={columns} data={data} defaultSortingKey={'health'}>
           <Table.SingleSelectableContent
             rowHeight="h40"
@@ -83,11 +83,7 @@ describe('TableV2', () => {
   });
   test('it should sort by defaultSortingKey', async () => {
     const { getAllByRole } = render(
-      <div
-        style={{
-          height: '400px',
-        }}
-      >
+      <div>
         <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h40"
@@ -105,11 +101,7 @@ describe('TableV2', () => {
   });
   test('it should filterGlobally', async () => {
     const { getAllByRole } = render(
-      <div
-        style={{
-          height: '400px',
-        }}
-      >
+      <div>
         <Table
           columns={columns}
           data={data}

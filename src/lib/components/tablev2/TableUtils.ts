@@ -37,6 +37,24 @@ export function compareHealth(
     ? 1
     : -1;
 }
+
 export function convertRemToPixels(rem) {
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
+export type TableLocalType = 'en' | 'fr';
+
+export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
+
+export type TableVariantType =
+  | 'backgroundLevel1'
+  | 'backgroundLevel2'
+  | 'backgroundLevel3'
+  | 'backgroundLevel4';
+
+// in rem unit
+export const tableRowHeight = {
+  h32: '2.286',
+  h40: '2.858',
+  h48: '3.428',
+  h64: '4.572',
+};

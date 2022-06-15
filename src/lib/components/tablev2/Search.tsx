@@ -5,17 +5,21 @@ import { SearchInput } from '../searchinput/SearchInput.component';
 import { Props } from '../searchinput/SearchInput.component';
 import { BasicText } from '../text/Text.component';
 import { spacing } from '../../style/theme';
+import { TableLocalType } from './TableUtils';
+
 export type DisplayedName = {
   plural: string;
   singular: string;
 };
+
 export type SearchProps = {
   onChange: (arg0: string) => void;
   value?: string;
   displayTotalOf?: boolean;
   displayedName?: DisplayedName;
-  locale?: 'en' | 'fr';
+  locale?: TableLocalType;
 } & Props;
+
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
@@ -39,6 +43,7 @@ const translations = {
     total: `Total : `,
   },
 };
+
 export function TableSearch(props: SearchProps) {
   const {
     onChange,

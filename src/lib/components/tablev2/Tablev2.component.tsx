@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
@@ -9,37 +8,60 @@ import {
   useExpanded,
   useFilters,
   useGlobalFilter,
+  SortByFn,
+  Column,
+  Row,
+  HeaderGroup,
+  TableBodyPropGetter,
+  TableBodyProps,
+  Cell,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
-import { compareHealth } from './TableUtil';
+import { compareHealth } from './TableUtils';
 import { TableWrapper } from './Tablestyle';
+import { MultiSelectableContent } from './MultiSelectableContent';
+import { useCheckbox } from './useCheckbox';
+
 export type DataRow = Record<string, any>;
-export type SortType =
-  | string
-  | ((rowA: DataRow, rowB: DataRow, columnId: string, desc: boolean) => number);
+
 export type TableProps = {
-  columns: {
-    Header: string;
-    accessor: string;
-    sortType?: SortType;
-    cellStyle?: Partial<CSSStyleDeclaration>;
-    Cell?: React.ReactNode | ((props: any) => React.ReactNode);
-    disableSortBy?: boolean;
-  }[];
+  columns: Array<Column>;
   defaultSortingKey: string;
-  //we don't display the default sort key in the URL, so we need to specify here
+  // We don't display the default sort key in the URL, so we need to specify here
   data: DataRow[];
-  children: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
   getRowId?: any;
-  sortTypes?: Record<string, SortType>;
+  sortTypes?: Record<string, SortByFn<object>>;
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
 };
-const TableContext = React.createContext<any>(null);
+
+type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
+// FIXME To rewrite with Generics
+type TableContextType = {
+  headerGroups: HeaderGroup<object>[];
+  rows: Row<object>[];
+  prepareRow: (row: Row<object>) => void;
+  getTableBodyProps: (
+    propGetter?: TableBodyPropGetter<object>,
+  ) => TableBodyProps;
+  selectedRowIds: Record<string, boolean>;
+  selectedFlatRows: Row<object>[];
+  preGlobalFilteredRows: Row<object>[];
+  setGlobalFilter: (filterValue: any) => void;
+  globalFilter: any;
+  setFilter: (columnId: string, updater: any) => void;
+  onBottom?: (rowLength: number) => void;
+  onBottomOffset?: number;
+  setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
+  isAllRowsSelected?: boolean;
+};
+const TableContext = React.createContext<TableContextType>(null);
+
 export const useTableContext = () => {
   const tableProps = React.useContext(TableContext);
 
@@ -70,8 +92,9 @@ function Table({
     },
     ...sortTypes,
   };
+
   const stringifyFilter = React.useMemo(() => {
-    return (rows, columnId, value) => {
+    return (rows: Row<object>[], columnIds: string[], value) => {
       const filteredRows = rows.filter((row) => {
         // we stringify the object to make sure we can match the value
         return JSON.stringify(row.values)
@@ -81,6 +104,7 @@ function Table({
       return filteredRows;
     };
   }, []);
+
   const {
     headerGroups,
     rows,
@@ -91,6 +115,8 @@ function Table({
     preGlobalFilteredRows,
     setGlobalFilter,
     setFilter,
+    setHiddenColumns,
+    isAllRowsSelected,
   } = useTable(
     {
       columns,
@@ -103,11 +129,13 @@ function Table({
             desc: false,
           },
         ],
+        hiddenColumns: ['selection'],
       },
       disableMultiSort: true,
       autoResetSortBy: false,
       sortTypes,
       globalFilter: stringifyFilter,
+      autoResetHiddenColumns: false,
     },
     useBlockLayout,
     useFilters,
@@ -115,7 +143,9 @@ function Table({
     useSortBy,
     useExpanded,
     useRowSelect,
+    useCheckbox,
   );
+
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {
       setGlobalFilter(globalFilter);
@@ -136,6 +166,8 @@ function Table({
         setFilter,
         onBottom,
         onBottomOffset,
+        setHiddenColumns,
+        isAllRowsSelected,
       }}
     >
       <TableWrapper role="grid" className="table">
@@ -146,6 +178,7 @@ function Table({
 }
 
 Table.SingleSelectableContent = SingleSelectableContent;
+Table.MultiSelectableContent = MultiSelectableContent;
 Table.Search = Search;
 Table.SearchWithQueryParams = SearchWithQueryParams;
 export { Table };
