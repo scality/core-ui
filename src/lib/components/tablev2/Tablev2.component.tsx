@@ -14,6 +14,7 @@ import {
   TableBodyPropGetter,
   TableBodyProps,
   CoreUIColumn,
+  Column,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
@@ -24,16 +25,14 @@ import { TableWrapper } from './Tablestyle';
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { useCheckbox } from './useCheckbox';
 
-export type DataRow = Record<string, any>;
-
-export type TableProps = {
-  columns: Array<CoreUIColumn>;
+export type TableProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+  columns: Array<CoreUIColumn<DATA_ROW>>;
   defaultSortingKey: string;
   // We don't display the default sort key in the URL, so we need to specify here
-  data: DataRow[];
+  data: DATA_ROW[];
   children: JSX.Element | JSX.Element[];
-  getRowId?: any;
-  sortTypes?: Record<string, SortByFn<object>>;
+  getRowId?: (originalRow: DATA_ROW, relativeIndex: number, parent?: Row<DATA_ROW>) => string;
+  sortTypes?: Record<string, SortByFn<DATA_ROW>>;
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
@@ -41,17 +40,17 @@ export type TableProps = {
 
 type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
 // FIXME To rewrite with Generics
-type TableContextType = {
-  headerGroups: HeaderGroup<object>[];
-  rows: Row<object>[];
-  prepareRow: (row: Row<object>) => void;
+type TableContextType<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+  headerGroups: HeaderGroup<DATA_ROW>[];
+  rows: Row<DATA_ROW>[];
+  prepareRow: (row: Row<DATA_ROW>) => void;
   getTableBodyProps: (
-    propGetter?: TableBodyPropGetter<object>,
+    propGetter?: TableBodyPropGetter<DATA_ROW>,
   ) => TableBodyProps;
   selectedRowIds: Record<string, boolean>;
-  selectedFlatRows: Row<object>[];
-  preGlobalFilteredRows: Row<object>[];
-  setGlobalFilter: (filterValue: any) => void;
+  selectedFlatRows: Row<DATA_ROW>[];
+  preGlobalFilteredRows: Row<DATA_ROW>[];
+  setGlobalFilter: (filterValue: DATA_ROW) => void;
   globalFilter: any;
   setFilter: (columnId: string, updater: any) => void;
   onBottom?: (rowLength: number) => void;
@@ -73,7 +72,7 @@ export const useTableContext = () => {
   return tableProps;
 };
 
-function Table({
+function Table<DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
   columns,
   data,
   defaultSortingKey,
@@ -84,7 +83,7 @@ function Table({
   onBottom,
   onBottomOffset = 10,
   ...rest
-}: TableProps) {
+}: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
       return compareHealth(row2.values.health, row1.values.health);
@@ -116,9 +115,9 @@ function Table({
     setFilter,
     setHiddenColumns,
     isAllRowsSelected,
-  } = useTable(
+  } = useTable<DATA_ROW>(
     {
-      columns,
+      columns: columns as Column<DATA_ROW>[],
       data,
       getRowId,
       initialState: {
@@ -133,6 +132,7 @@ function Table({
       disableMultiSort: true,
       autoResetSortBy: false,
       sortTypes,
+      //@ts-ignore TODO investigate why this type is not matching
       globalFilter: stringifyFilter,
       autoResetHiddenColumns: false,
     },
@@ -150,24 +150,27 @@ function Table({
       setGlobalFilter(globalFilter);
     }
   }, [globalFilter, setGlobalFilter, data]);
+
+  const contextValue: TableContextType<DATA_ROW> = {
+    headerGroups,
+    rows,
+    prepareRow,
+    getTableBodyProps,
+    selectedRowIds,
+    selectedFlatRows,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    globalFilter,
+    setFilter,
+    onBottom,
+    onBottomOffset,
+    setHiddenColumns,
+    isAllRowsSelected,
+  };
   return (
     <TableContext.Provider
-      value={{
-        headerGroups,
-        rows,
-        prepareRow,
-        getTableBodyProps,
-        selectedRowIds,
-        selectedFlatRows,
-        preGlobalFilteredRows,
-        setGlobalFilter,
-        globalFilter,
-        setFilter,
-        onBottom,
-        onBottomOffset,
-        setHiddenColumns,
-        isAllRowsSelected,
-      }}
+      //@ts-ignore
+      value={contextValue}
     >
       <TableWrapper role="grid" className="table">
         {children}
