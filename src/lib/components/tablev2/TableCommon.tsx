@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
+import { ComponentType, useCallback, useState } from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList as List, ListChildComponentProps, ListItemKeySelector } from 'react-window';
 import {
   convertRemToPixels,
   TableHeightKeyType,
@@ -10,10 +10,10 @@ import {
 
 type VirtualizedRowsType<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
   rows: Row<DATA_ROW>[];
-  RenderRow: React.NamedExoticComponent<DATA_ROW>;
+  RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   rowHeight: TableHeightKeyType;
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
-  itemKey?: (index: number, data: DATA_ROW) => string;
+  itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
 };
