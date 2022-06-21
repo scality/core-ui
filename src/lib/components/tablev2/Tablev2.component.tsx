@@ -9,12 +9,11 @@ import {
   useFilters,
   useGlobalFilter,
   SortByFn,
-  Column,
   Row,
   HeaderGroup,
   TableBodyPropGetter,
   TableBodyProps,
-  Cell,
+  CoreUIColumn,
 } from 'react-table';
 
 import { SingleSelectableContent } from './SingleSelectableContent';
@@ -28,7 +27,7 @@ import { useCheckbox } from './useCheckbox';
 export type DataRow = Record<string, any>;
 
 export type TableProps = {
-  columns: Array<Column>;
+  columns: Array<CoreUIColumn>;
   defaultSortingKey: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DataRow[];

@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -123,7 +124,7 @@ declare module 'react-table' {
   // CoreUIColumn
 
   export interface CoreUIColumn {
-    cellStyle?: object;
+    cellStyle?: CSSProperties<HTMLDivElement>;
     Cell?: (cellProps: Cell) => JSX.Element;
   }
   export interface ColumnInstance<
