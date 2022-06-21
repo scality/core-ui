@@ -50,7 +50,7 @@ type TableContextType<DATA_ROW extends Record<string, unknown> = Record<string, 
   selectedRowIds: Record<string, boolean>;
   selectedFlatRows: Row<DATA_ROW>[];
   preGlobalFilteredRows: Row<DATA_ROW>[];
-  setGlobalFilter: (filterValue: DATA_ROW) => void;
+  setGlobalFilter: (filterValue: string) => void;
   globalFilter: any;
   setFilter: (columnId: string, updater: any) => void;
   onBottom?: (rowLength: number) => void;

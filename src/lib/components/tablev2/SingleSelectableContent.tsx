@@ -1,4 +1,4 @@
-import React, { useCallback, memo, CSSProperties } from 'react';
+import { memo, CSSProperties } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 

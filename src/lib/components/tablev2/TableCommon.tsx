@@ -8,12 +8,12 @@ import {
   tableRowHeight,
 } from './TableUtils';
 
-type VirtualizedRowsType = {
-  rows: Row<object>[];
-  RenderRow: React.NamedExoticComponent<object>;
+type VirtualizedRowsType<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+  rows: Row<DATA_ROW>[];
+  RenderRow: React.NamedExoticComponent<DATA_ROW>;
   rowHeight: TableHeightKeyType;
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
-  itemKey?: (index: Number, data: any) => string;
+  itemKey?: (index: number, data: DATA_ROW) => string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
 };

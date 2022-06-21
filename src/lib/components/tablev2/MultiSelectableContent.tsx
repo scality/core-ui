@@ -36,13 +36,13 @@ type RenderRowType = {
   style: CSSProperties;
 };
 
-type MultiSelectableContentProps = {
-  onMultiSelectionChanged: (rows: Row<object>[]) => void;
+type MultiSelectableContentProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+  onMultiSelectionChanged: (rows: Row<DATA_ROW>[]) => void;
   rowHeight?: TableHeightKeyType;
   separationLineVariant?: TableVariantType;
   backgroundVariant?: TableVariantType;
   locale?: TableLocalType;
-  customItemKey?: (index: Number, data: any) => string;
+  customItemKey?: (index: number, data: DATA_ROW) => string;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
