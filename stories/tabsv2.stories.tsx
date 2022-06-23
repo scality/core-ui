@@ -175,3 +175,30 @@ export const ScrollableTabs = () => (
     </BrowserRouter>
   </Wrapper>
 );
+
+export const WithQueryParams = () => {
+  const obj = {search: 'test'}
+  return <Wrapper>
+  <BrowserRouter>
+    
+    <Tabs>
+    <Tab
+      path={'/path'}
+      label={`Tab 1`}
+      query={{...obj, tab: '1'}}
+      textBadge={<TextBadge text='test' />}
+      icon={<i className='fas fa-hat-cowboy' />}
+    >
+      <Content>Tab 1 content</Content>
+    </Tab>
+    <Tab
+      path={'/path'}
+      label={`Tab 2`}
+      query={{...obj, tab: '2'}}
+    >
+      <Content>Tab 2 content</Content>
+    </Tab>
+    </Tabs>
+  </BrowserRouter>
+</Wrapper>
+}

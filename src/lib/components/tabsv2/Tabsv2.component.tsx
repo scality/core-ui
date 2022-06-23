@@ -10,12 +10,15 @@ import {
   TabsScroller,
 } from './StyledTabs';
 import { useHistory, useLocation } from 'react-router-dom';
-import { matchPath, Route, Switch } from 'react-router';
+import { matchPath, Route } from 'react-router';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
 import { Tab } from './Tab';
 import { TabProps, Query } from './Tab';
 import { useScrollingTabs } from './useScrollingTabs';
+import { ButtonIcon } from '../buttonv2/Buttonv2.component';
+import styled from 'styled-components';
+import { getTheme } from '../../utils';
 type TabsProps = {
   activeTabColor?: string;
   activeTabSeparator?: string;
@@ -28,6 +31,10 @@ type TabsProps = {
   className?: string;
 };
 export const TabsContext = createContext<boolean>(false);
+
+const TabIcon = styled(ButtonIcon)`
+  color: ${props => getTheme(props).textSecondary};
+`
 
 function Tabs({
   activeTabColor,
@@ -49,6 +56,7 @@ function Tabs({
   const filteredTabsChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type === Tab,
   );
+
   const matchQuery = useCallback(
     (query: Query): boolean => {
       for (const key of Object.keys(query)) {
@@ -116,7 +124,7 @@ function Tabs({
     displayScroll,
   } = useScrollingTabs(selectedTabIndex);
   const tabItems = filteredTabsChildren.map((child, index) => {
-    const { path, query, label, textBadge, children, ...childRest }: TabProps =
+    const { path, query, label, textBadge, children, icon, ...childRest }: TabProps =
       child.props;
     const isSelected = selectedTabIndex === index;
     return (
@@ -143,6 +151,11 @@ function Tabs({
         }}
         {...childRest}
       >
+        {icon && (
+          <TabIcon label={label}>
+            {icon}
+          </TabIcon>
+        )}
         {isSelected ? (
           <BasicText className="sc-tabs-item-title">{label}</BasicText>
         ) : (
@@ -192,19 +205,22 @@ function Tabs({
           className="sc-tabs-item-content"
           tabContentColor={tabContentColor}
         >
-          <Switch>
-            {filteredTabsChildren.map((tab: Element<typeof Tab>, index) => (
-              <Route
-                exact={tab.props.exact}
-                sensitive={tab.props.sensitive}
-                strict={tab.props.strict}
-                key={index}
-                path={tab.props.path}
-              >
-                {tab.props.children}
-              </Route>
-            ))}
-          </Switch>
+          {filteredTabsChildren.map((tab: Element<typeof Tab>, index) => (
+            <Route
+              exact={tab.props.exact}
+              sensitive={tab.props.sensitive}
+              strict={tab.props.strict}
+              key={index}
+              path={tab.props.path}
+            >
+              {!tab.props.query ||
+              (tab.props.query && matchQuery(tab.props.query)) ? (
+                tab.props.children
+              ) : (
+                <></>
+              )}
+            </Route>
+          ))}
         </TabContent>
       </TabsContainer>
     </TabsContext.Provider>
