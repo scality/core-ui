@@ -43,6 +43,7 @@ type MultiSelectableContentProps<DATA_ROW extends Record<string, unknown> = Reco
   backgroundVariant?: TableVariantType;
   locale?: TableLocalType;
   customItemKey?: (index: number, data: DATA_ROW) => string;
+  hasScrollbar?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
@@ -69,6 +70,7 @@ export const MultiSelectableContent = ({
   backgroundVariant = 'backgroundLevel1',
   locale = 'en',
   customItemKey,
+  hasScrollbar: tableHasScrollbar,
   children,
 }: MultiSelectableContentProps) => {
   const {
@@ -249,6 +251,7 @@ export const MultiSelectableContent = ({
               itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
+              hasScrollbar={tableHasScrollbar}
               onBottom={onBottom}
               onBottomOffset={onBottomOffset}
               RenderRow={RenderRow}
@@ -260,6 +263,7 @@ export const MultiSelectableContent = ({
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
+            hasScrollbar={tableHasScrollbar}
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}
