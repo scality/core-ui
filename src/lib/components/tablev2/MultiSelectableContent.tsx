@@ -210,7 +210,7 @@ export const MultiSelectableContent = ({
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
-                  style: column?.cellStyle,
+                  style: { ...column?.cellStyle, position: 'relative' },
                 }),
               );
 
