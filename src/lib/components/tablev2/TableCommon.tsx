@@ -13,6 +13,7 @@ type VirtualizedRowsType<DATA_ROW extends Record<string, unknown> = Record<strin
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   rowHeight: TableHeightKeyType;
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
+  hasScrollbar?: boolean;
   itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
@@ -22,6 +23,7 @@ export const VirtualizedRows = ({
   rows,
   rowHeight,
   setHasScrollbar,
+  hasScrollbar,
   onBottom,
   onBottomOffset,
   RenderRow,
@@ -29,6 +31,7 @@ export const VirtualizedRows = ({
 }: VirtualizedRowsType) => (
   <AutoSizer>
     {({ height, width }) => {
+      const style = hasScrollbar === false ? { overflow: 'visible'} : null;
       return (
         <List
           height={height}
@@ -37,14 +40,17 @@ export const VirtualizedRows = ({
           width={width}
           itemKey={itemKey}
           itemData={rows}
+          style={style}
           onItemsRendered={({
             visibleStartIndex,
             visibleStopIndex,
             overscanStopIndex,
           }) => {
-            setHasScrollbar(
-              visibleStartIndex - visibleStopIndex <= overscanStopIndex,
-            );
+            if (hasScrollbar !== false) {
+              setHasScrollbar(
+                visibleStartIndex - visibleStopIndex <= overscanStopIndex,
+              );
+            }
 
             if (
               onBottom &&

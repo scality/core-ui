@@ -31,6 +31,7 @@ export type SingleSelectableContentProps = {
   locale?: TableLocalType;
   customItemKey?: (index: Number, data: any) => string;
   isLoading?: boolean;
+  hasScrollbar?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
@@ -56,6 +57,7 @@ export function SingleSelectableContent({
   selectedId,
   onRowSelected,
   customItemKey,
+  hasScrollbar: tableHasScrollbar,
   children,
 }: SingleSelectableContentProps) {
   if (selectedId && !onRowSelected) {
@@ -152,13 +154,13 @@ export function SingleSelectableContent({
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            hasScrollBar={hasScrollbar}
+            hasScrollBar={tableHasScrollbar ?? hasScrollbar}
             scrollBarWidth={scrollBarWidth}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
                 Object.assign(column.getSortByToggleProps(), {
-                  style: column.cellStyle,
+                  style: { ...column.cellStyle, position: 'relative' },
                 }),
               );
               return (
@@ -181,6 +183,7 @@ export function SingleSelectableContent({
               itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
+              hasScrollbar={tableHasScrollbar}
               onBottom={onBottom}
               onBottomOffset={onBottomOffset}
               RenderRow={RenderRow}
@@ -192,6 +195,7 @@ export function SingleSelectableContent({
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
+            hasScrollbar={tableHasScrollbar}
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}
