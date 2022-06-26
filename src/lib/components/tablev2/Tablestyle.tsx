@@ -38,7 +38,7 @@ export const HeadRow = styled.div<HeadRowType>`
   width: ${(props) =>
     props.hasScrollBar
       ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important;` // -4px for border
-      : '100% !important;'} 
+      : `calc(100% - ${borderSize} ) !important;`} 
   table-layout: fixed;
   cursor: pointer;
   color: ${(props) => getTheme(props).textPrimary};

@@ -48,7 +48,7 @@ export const VirtualizedRows = ({
           }) => {
             if (hasScrollbar !== false) {
               setHasScrollbar(
-                visibleStartIndex - visibleStopIndex <= overscanStopIndex,
+                visibleStopIndex - visibleStartIndex < overscanStopIndex,
               );
             }
 
