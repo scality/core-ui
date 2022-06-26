@@ -206,6 +206,7 @@ export const MultiSelectableContent = ({
             {...headerGroup.getHeaderGroupProps()}
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
+            rowHeight={rowHeight}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(

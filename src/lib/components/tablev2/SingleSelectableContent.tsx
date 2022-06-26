@@ -156,6 +156,7 @@ export function SingleSelectableContent({
             {...headerGroup.getHeaderGroupProps()}
             hasScrollBar={tableHasScrollbar ?? hasScrollbar}
             scrollBarWidth={scrollBarWidth}
+            rowHeight={rowHeight}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(

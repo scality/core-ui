@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
-import { TableVariantType } from './TableUtils';
+import { TableHeightKeyType, tableRowHeight, TableVariantType } from './TableUtils';
 import { HeaderGroup } from 'react-table';
 
 const borderSize = '4px';
@@ -29,6 +29,7 @@ export const TableHeader = styled.div`
 type HeadRowType = {
   hasScrollBar: boolean;
   scrollBarWidth: number;
+  rowHeight: TableHeightKeyType;
 };
 
 export const HeadRow = styled.div<HeadRowType>`
@@ -38,7 +39,8 @@ export const HeadRow = styled.div<HeadRowType>`
   width: ${(props) =>
     props.hasScrollBar
       ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important;` // -4px for border
-      : `calc(100% - ${borderSize} ) !important;`} 
+      : `calc(100% - ${borderSize} ) !important;`}
+  height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
   cursor: pointer;
   color: ${(props) => getTheme(props).textPrimary};
