@@ -119,12 +119,17 @@ export const MultiSelectableContent = <
           top: 0,
         });
       };
-
+      /*
+      We intentionally use _outerRef prop here despite the fact that it is 
+      internal use only and not typed, as it is the only way for us to access to the scrollable element
+      */
+      //@ts-expect-error
       (bodyRef.current._outerRef as HTMLDivElement).addEventListener(
         'scroll',
         listener,
       );
       return () => {
+        //@ts-expect-error
         bodyRef.current._outerRef.removeEventListener('scroll', listener);
       };
     }
