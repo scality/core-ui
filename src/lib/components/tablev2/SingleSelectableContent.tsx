@@ -21,6 +21,7 @@ import {
   TableVariantType,
 } from './TableUtils';
 import { useTableScrollbar, VirtualizedRows } from './TableCommon';
+import useSyncedScroll from './useSyncedScroll';
 
 export type SingleSelectableContentProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -143,35 +144,7 @@ export function SingleSelectableContent<
     handleScrollbarWidth,
   } = useTableScrollbar();
 
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const bodyRef = useRef<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
-  const currentHeadRef = !!headerRef.current;
-  const currentBodyRef = !!bodyRef.current;
-  useEffect(() => {
-    if (bodyRef.current && headerRef.current) {
-      const listener = (event: Event) => {
-        headerRef.current.scrollTo({
-          left: (event.target as HTMLDivElement).scrollLeft,
-          top: 0,
-        });
-      };
-
-      /*
-      We intentionally use _outerRef prop here despite the fact that it is 
-      internal use only and not typed, as it is the only way for us to access to the scrollable element
-      */
-      //@ts-expect-error
-      (bodyRef.current._outerRef as HTMLDivElement).addEventListener(
-        'scroll',
-        listener,
-      );
-      return () => {
-        //@ts-expect-error
-        bodyRef.current._outerRef.removeEventListener('scroll', listener);
-      };
-    }
-  }, [currentHeadRef, currentBodyRef]);
-
+  const { bodyRef, headerRef } = useSyncedScroll<DATA_ROW>();
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
       return customItemKey(index, data);
