@@ -25,13 +25,19 @@ import { TableWrapper } from './Tablestyle';
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { useCheckbox } from './useCheckbox';
 
-export type TableProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+export type TableProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
   columns: Array<CoreUIColumn<DATA_ROW>>;
   defaultSortingKey: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DATA_ROW[];
   children: JSX.Element | JSX.Element[];
-  getRowId?: (originalRow: DATA_ROW, relativeIndex: number, parent?: Row<DATA_ROW>) => string;
+  getRowId?: (
+    originalRow: DATA_ROW,
+    relativeIndex: number,
+    parent?: Row<DATA_ROW>,
+  ) => string;
   sortTypes?: Record<string, SortByFn<DATA_ROW>>;
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;
@@ -39,8 +45,10 @@ export type TableProps<DATA_ROW extends Record<string, unknown> = Record<string,
 };
 
 type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
-// FIXME To rewrite with Generics
-type TableContextType<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+
+type TableContextType<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
   headerGroups: HeaderGroup<DATA_ROW>[];
   rows: Row<DATA_ROW>[];
   prepareRow: (row: Row<DATA_ROW>) => void;
@@ -60,7 +68,9 @@ type TableContextType<DATA_ROW extends Record<string, unknown> = Record<string, 
 };
 const TableContext = React.createContext<TableContextType>(null);
 
-export const useTableContext = () => {
+export const useTableContext = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>() => {
   const tableProps = React.useContext(TableContext);
 
   if (!tableProps) {
@@ -69,10 +79,12 @@ export const useTableContext = () => {
     );
   }
 
-  return tableProps;
+  return tableProps as TableContextType<DATA_ROW>; //Todo figure out a way to transfer the type to the context provider
 };
 
-function Table<DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
+function Table<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
   columns,
   data,
   defaultSortingKey,

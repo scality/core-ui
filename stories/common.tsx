@@ -15,8 +15,12 @@ const StyledSubTitle = styled.span`
 const StyledText = styled.text`
   fill: ${getThemePropSelector('textPrimary')};
 `;
-export const Wrapper = ({ children, className = '' }) => {
-  return <StyledWrapper className={className}>{children}</StyledWrapper>;
+export const Wrapper = ({ children, className = '', style = {} }) => {
+  return (
+    <StyledWrapper className={className} style={style}>
+      {children}
+    </StyledWrapper>
+  );
 };
 export const Title = ({ children, className = '' }) => {
   return <StyledTitle className={className}>{children}</StyledTitle>;

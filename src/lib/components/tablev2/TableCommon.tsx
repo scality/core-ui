@@ -1,14 +1,21 @@
-import { ComponentType, useCallback, useState } from 'react';
+import { ComponentType, LegacyRef, useCallback, useState } from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import { FixedSizeList as List, ListChildComponentProps, ListItemKeySelector } from 'react-window';
+import {
+  FixedSizeList,
+  FixedSizeList as List,
+  ListChildComponentProps,
+  ListItemKeySelector,
+} from 'react-window';
 import {
   convertRemToPixels,
   TableHeightKeyType,
   tableRowHeight,
 } from './TableUtils';
 
-type VirtualizedRowsType<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+type VirtualizedRowsType<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
   rows: Row<DATA_ROW>[];
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   rowHeight: TableHeightKeyType;
@@ -17,21 +24,23 @@ type VirtualizedRowsType<DATA_ROW extends Record<string, unknown> = Record<strin
   itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
+  listRef?: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>>;
 };
 
-export const VirtualizedRows = ({
+export const VirtualizedRows = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
   rows,
   rowHeight,
   setHasScrollbar,
-  hasScrollbar,
   onBottom,
   onBottomOffset,
   RenderRow,
+  listRef,
   itemKey,
-}: VirtualizedRowsType) => (
+}: VirtualizedRowsType<DATA_ROW>) => (
   <AutoSizer>
     {({ height, width }) => {
-      const style = hasScrollbar === false ? { overflow: 'visible'} : null;
       return (
         <List
           height={height}
@@ -40,17 +49,15 @@ export const VirtualizedRows = ({
           width={width}
           itemKey={itemKey}
           itemData={rows}
-          style={style}
+          ref={listRef}
           onItemsRendered={({
             visibleStartIndex,
             visibleStopIndex,
             overscanStopIndex,
           }) => {
-            if (hasScrollbar !== false) {
-              setHasScrollbar(
-                visibleStopIndex - visibleStartIndex < overscanStopIndex,
-              );
-            }
+            setHasScrollbar(
+              visibleStopIndex - visibleStartIndex < overscanStopIndex,
+            );
 
             if (
               onBottom &&

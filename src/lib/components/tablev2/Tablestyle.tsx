@@ -45,6 +45,7 @@ export const HeadRow = styled.div<HeadRowType>`
   cursor: pointer;
   color: ${(props) => getTheme(props).textPrimary};
   font-weight: bold;
+  overflow: hidden;
 `;
 
 type TableRowType = {

@@ -1,6 +1,6 @@
-import { useEffect, memo, CSSProperties } from 'react';
+import { useEffect, memo, CSSProperties, useRef } from 'react';
 import { Row } from 'react-table';
-import { areEqual } from 'react-window';
+import { areEqual, FixedSizeList } from 'react-window';
 
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
@@ -36,7 +36,9 @@ type RenderRowType = {
   style: CSSProperties;
 };
 
-type MultiSelectableContentProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+type MultiSelectableContentProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
   onMultiSelectionChanged: (rows: Row<DATA_ROW>[]) => void;
   rowHeight?: TableHeightKeyType;
   separationLineVariant?: TableVariantType;
@@ -63,14 +65,15 @@ type MultiSelectableContentProps<DATA_ROW extends Record<string, unknown> = Reco
 //   children: (rows: JSX.Element) => JSX.Element;
 //   });
 
-export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
+export const MultiSelectableContent = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
   onMultiSelectionChanged,
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
   backgroundVariant = 'backgroundLevel1',
   locale = 'en',
   customItemKey,
-  hasScrollbar: tableHasScrollbar,
   children,
 }: MultiSelectableContentProps<DATA_ROW>) => {
   const {
@@ -82,7 +85,7 @@ export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> 
     onBottom,
     onBottomOffset,
     isAllRowsSelected,
-  } = useTableContext();
+  } = useTableContext<DATA_ROW>();
 
   useEffect(() => {
     setHiddenColumns((oldHiddenColumns) => {
@@ -103,6 +106,29 @@ export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> 
     }
     return index;
   };
+
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
+  const currentHeadRef = !!headerRef.current;
+  const currentBodyRef = !!bodyRef.current;
+  useEffect(() => {
+    if (bodyRef.current && headerRef.current) {
+      const listener = (event: Event) => {
+        headerRef.current.scrollTo({
+          left: (event.target as HTMLDivElement).scrollLeft,
+          top: 0,
+        });
+      };
+
+      (bodyRef.current._outerRef as HTMLDivElement).addEventListener(
+        'scroll',
+        listener,
+      );
+      return () => {
+        bodyRef.current._outerRef.removeEventListener('scroll', listener);
+      };
+    }
+  }, [currentHeadRef, currentBodyRef]);
 
   const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
@@ -207,6 +233,7 @@ export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> 
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
+            ref={headerRef}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
@@ -249,10 +276,12 @@ export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> 
           children(
             <VirtualizedRows
               rows={rows}
+              listRef={(node) => {
+                bodyRef.current = node;
+              }}
               itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
-              hasScrollbar={tableHasScrollbar}
               onBottom={onBottom}
               onBottomOffset={onBottomOffset}
               RenderRow={RenderRow}
@@ -261,10 +290,12 @@ export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> 
         ) : rows.length ? (
           <VirtualizedRows
             rows={rows}
+            listRef={(node) => {
+              bodyRef.current = node;
+            }}
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
-            hasScrollbar={tableHasScrollbar}
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}

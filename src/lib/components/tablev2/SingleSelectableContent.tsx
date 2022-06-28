@@ -1,5 +1,5 @@
-import { memo, CSSProperties } from 'react';
-import { areEqual } from 'react-window';
+import { memo, CSSProperties, useRef, useEffect, UIEvent } from 'react';
+import { areEqual, FixedSizeList } from 'react-window';
 import { Row } from 'react-table';
 
 import { Tooltip } from '../tooltip/Tooltip.component';
@@ -22,7 +22,9 @@ import {
 } from './TableUtils';
 import { useTableScrollbar, VirtualizedRows } from './TableCommon';
 
-export type SingleSelectableContentProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
+export type SingleSelectableContentProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
   rowHeight: TableHeightKeyType;
   separationLineVariant: TableVariantType;
   backgroundVariant: TableVariantType;
@@ -49,7 +51,9 @@ type RenderRowType = {
   style: CSSProperties;
 };
 
-export function SingleSelectableContent<DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
+export function SingleSelectableContent<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
   backgroundVariant = 'backgroundLevel1',
@@ -57,7 +61,6 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
   selectedId,
   onRowSelected,
   customItemKey,
-  hasScrollbar: tableHasScrollbar,
   children,
 }: SingleSelectableContentProps<DATA_ROW>) {
   if (selectedId && !onRowSelected) {
@@ -65,7 +68,7 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
   }
 
   const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
-    useTableContext();
+    useTableContext<DATA_ROW>();
   const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
     prepareRow(row);
@@ -140,6 +143,29 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
     handleScrollbarWidth,
   } = useTableScrollbar();
 
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
+  const currentHeadRef = !!headerRef.current;
+  const currentBodyRef = !!bodyRef.current;
+  useEffect(() => {
+    if (bodyRef.current && headerRef.current) {
+      const listener = (event: Event) => {
+        headerRef.current.scrollTo({
+          left: (event.target as HTMLDivElement).scrollLeft,
+          top: 0,
+        });
+      };
+
+      (bodyRef.current._outerRef as HTMLDivElement).addEventListener(
+        'scroll',
+        listener,
+      );
+      return () => {
+        bodyRef.current._outerRef.removeEventListener('scroll', listener);
+      };
+    }
+  }, [currentHeadRef, currentBodyRef]);
+
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
       return customItemKey(index, data);
@@ -154,7 +180,8 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            hasScrollBar={tableHasScrollbar ?? hasScrollbar}
+            ref={headerRef}
+            hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
           >
@@ -181,10 +208,12 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
           children(
             <VirtualizedRows
               rows={rows}
+              listRef={(node) => {
+                bodyRef.current = node;
+              }}
               itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
-              hasScrollbar={tableHasScrollbar}
               onBottom={onBottom}
               onBottomOffset={onBottomOffset}
               RenderRow={RenderRow}
@@ -193,10 +222,12 @@ export function SingleSelectableContent<DATA_ROW extends Record<string, unknown>
         ) : rows.length ? (
           <VirtualizedRows
             rows={rows}
+            listRef={(node) => {
+              bodyRef.current = node;
+            }}
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
-            hasScrollbar={tableHasScrollbar}
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}
