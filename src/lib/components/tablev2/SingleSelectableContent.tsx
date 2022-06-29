@@ -1,5 +1,5 @@
-import { memo, CSSProperties, useRef, useEffect, UIEvent } from 'react';
-import { areEqual, FixedSizeList } from 'react-window';
+import React, { memo, CSSProperties } from 'react';
+import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 
 import { Tooltip } from '../tooltip/Tooltip.component';
@@ -68,6 +68,7 @@ export function SingleSelectableContent<
     console.error('Please specify the onRowSelected function.');
   }
 
+  const { bodyRef, headerRef } = useSyncedScroll<DATA_ROW>();
   const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
     useTableContext<DATA_ROW>();
   const RenderRow = memo(({ index, style }: RenderRowType) => {
@@ -144,7 +145,6 @@ export function SingleSelectableContent<
     handleScrollbarWidth,
   } = useTableScrollbar();
 
-  const { bodyRef, headerRef } = useSyncedScroll<DATA_ROW>();
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
       return customItemKey(index, data);
@@ -163,6 +163,7 @@ export function SingleSelectableContent<
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
+            style={{ overflow: 'hidden' }}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(

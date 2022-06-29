@@ -7,8 +7,7 @@ export default function useSyncedScroll<
 >(): { headerRef: React.MutableRefObject<HTMLDivElement>, bodyRef: React.MutableRefObject<FixedSizeList<Row<DATA_ROW>[]>>}{
   const headerRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
-  const currentHeadRef = headerRef.current;
-  const currentBodyRef = bodyRef.current;
+
   useEffect(() => {
     if (bodyRef.current && headerRef.current) {
       const listener = (event: Event) => {
@@ -17,7 +16,6 @@ export default function useSyncedScroll<
           top: 0,
         });
       };
-
       /*
       We intentionally use _outerRef prop here despite the fact that it is 
       internal use only and not typed, as it is the only way for us to access to the scrollable element
@@ -27,12 +25,15 @@ export default function useSyncedScroll<
         'scroll',
         listener,
       );
+
       return () => {
-        //@ts-expect-error
-        bodyRef.current._outerRef.removeEventListener('scroll', listener);
+        if (bodyRef.current) {
+          //@ts-expect-error
+          bodyRef.current._outerRef.removeEventListener('scroll', listener);
+        }
       };
     }
-  }, [currentHeadRef, currentBodyRef]);
+  });
 
   return { headerRef, bodyRef };
 };
