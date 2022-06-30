@@ -152,14 +152,15 @@ export function SingleSelectableContent<
 
     return index;
   }
-
   return (
     <>
       <div className="thead" role="rowgroup">
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            ref={headerRef}
+            ref={(node) => {
+              headerRef(node);
+            }}
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
@@ -189,7 +190,7 @@ export function SingleSelectableContent<
             <VirtualizedRows
               rows={rows}
               listRef={(node) => {
-                bodyRef.current = node;
+                bodyRef(node);
               }}
               itemKey={itemKey}
               rowHeight={rowHeight}
@@ -203,7 +204,7 @@ export function SingleSelectableContent<
           <VirtualizedRows
             rows={rows}
             listRef={(node) => {
-              bodyRef.current = node;
+              bodyRef(node);
             }}
             itemKey={itemKey}
             rowHeight={rowHeight}

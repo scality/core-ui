@@ -213,7 +213,9 @@ export const MultiSelectableContent = <
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
-            ref={headerRef}
+            ref={(node) => {
+              headerRef(node);
+            }}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
@@ -257,7 +259,7 @@ export const MultiSelectableContent = <
             <VirtualizedRows
               rows={rows}
               listRef={(node) => {
-                bodyRef.current = node;
+                bodyRef(node);
               }}
               itemKey={itemKey}
               rowHeight={rowHeight}
@@ -271,7 +273,7 @@ export const MultiSelectableContent = <
           <VirtualizedRows
             rows={rows}
             listRef={(node) => {
-              bodyRef.current = node;
+              bodyRef(node);
             }}
             itemKey={itemKey}
             rowHeight={rowHeight}
