@@ -158,9 +158,7 @@ export function SingleSelectableContent<
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            ref={(node) => {
-              headerRef(node);
-            }}
+            ref={headerRef}
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
@@ -189,9 +187,7 @@ export function SingleSelectableContent<
           children(
             <VirtualizedRows
               rows={rows}
-              listRef={(node) => {
-                bodyRef(node);
-              }}
+              listRef={bodyRef}
               itemKey={itemKey}
               rowHeight={rowHeight}
               setHasScrollbar={setHasScrollbar}
@@ -203,9 +199,7 @@ export function SingleSelectableContent<
         ) : rows.length ? (
           <VirtualizedRows
             rows={rows}
-            listRef={(node) => {
-              bodyRef(node);
-            }}
+            listRef={bodyRef}
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
