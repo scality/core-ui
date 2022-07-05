@@ -50,7 +50,8 @@ export default function useSyncedScroll<
       );
 
       return () => {
-        if (tableBody) {
+        //@ts-expect-error
+        if (tableBody && tableBody._outerRef) {
           //@ts-expect-error
           tableBody._outerRef.removeEventListener('scroll', listener);
         }
