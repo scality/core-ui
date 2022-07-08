@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from '../src/lib/components/tooltip/Tooltip.component';
-import { Button } from '../src/lib/components/button/Button.component';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title, SubTitle } from './common';
 export default {
   title: 'Components/Notification/Tooltip',
@@ -59,9 +59,28 @@ export const Default = () => {
       </div>
       <div>
         <Title>Tooltip with button</Title>
-        <Tooltip placement="bottom" overlay="Helloooooo">
-          <Button size="small" text="Hover here" />
-        </Tooltip>
+        <Button
+          icon={<i className="fas fa-trash" />}
+          label=""
+          tooltip={{
+            placement: 'top',
+            overlay: `Hello, this is the button tooltip!`,
+            overlayStyle: { width: '8rem' },
+          }}
+        />
+      </div>
+      <div>
+        <Title>Tooltip with disabled button</Title>
+        <Button
+          disabled={true}
+          icon={<i className="fas fa-trash" />}
+          label=""
+          tooltip={{
+            placement: 'top',
+            overlay: `You can't delete it :(`,
+            overlayStyle: { width: '8rem' },
+          }}
+        />
       </div>
       <div>
         <Title>add icon in the overlay of tooltip</Title>
