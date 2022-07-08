@@ -95,7 +95,7 @@ export function SingleSelectableContent<
     return (
       <TableRow
         {...rowProps}
-        isSelected={row.isSelected}
+        isSelected={selectedId === row.id}
         separationLineVariant={separationLineVariant}
         backgroundVariant={backgroundVariant}
         selectedId={selectedId}
