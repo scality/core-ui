@@ -66,8 +66,8 @@ const TooltipOverLayContainer = styled.div`
   width: ${(props) => props && props.overlayStyle && props.overlayStyle.width};
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
-  }};
 `;
+
 const TooltipText = styled.div`
   width: 100%;
 `;
@@ -105,10 +105,10 @@ function Tooltip({
   return (
     <TooltipContainer
       className="sc-tooltip"
-      onMouseEnter={() => {
+      onPointerEnter={() => {
         setIsTooltipVisible(true);
       }}
-      onMouseLeave={() => {
+      onPointerLeave={() => {
         setIsTooltipVisible(false);
       }}
     >
