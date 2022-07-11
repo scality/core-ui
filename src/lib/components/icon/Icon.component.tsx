@@ -25,7 +25,7 @@ export const iconTable = {
   Dashboard: 'fas faDesktop',
   Expiration: 'fas faStopwatch',
   Replication: 'fas faCoins',
-  Transition: 'fas faThermometerEmpty',
+  Transition: 'fas faRocket',
   Discovery: 'fas faReply',
   Metrics: 'fas faChartLine',
   Edit: 'fas faEdit',
