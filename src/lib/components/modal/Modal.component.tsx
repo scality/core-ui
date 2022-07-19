@@ -64,7 +64,7 @@ const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
   const modalContainer = useRef(document.createElement('div'));
 
   useEffect(() => {
-    document.body && document.body.appendChild(modalContainer.current);
+    document.body && document.body.prepend(modalContainer.current);
     return () => {
       document.body && document.body.removeChild(modalContainer.current);
     };
