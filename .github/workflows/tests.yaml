@@ -11,7 +11,11 @@ on:
       - "q/**"
       - "hotfix/**"
       - "dependabot/**"
-
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'feature/bump-core-ui-version-to-**'
 
 jobs:
   tests:
