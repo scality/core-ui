@@ -16,6 +16,7 @@ jobs:
       - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
+        id: cpr
         with:
           token: ${{ secrets.GIT_ACCESS_TOKEN }}
           branch: feature/bump-core-ui-version-to-${{ env.nextVersion }}
@@ -23,11 +24,12 @@ jobs:
           title: Bump core-ui version to  ${{ env.nextVersion }}
           body: ''
       - uses: actions/github-script@v5
+        if: ${{ steps.cpr.outputs.pull-request-number }}
         with:
           github-token: ${{secrets.GIT_ACCESS_TOKEN}}
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: '${{ steps.cpr.outputs.pull-request-number }}',
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '/approve'
