@@ -17,7 +17,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
           branch: feature/bump-core-ui-version-to-${{ env.nextVersion }}
           commit-message: Bump core-ui version to  ${{ env.nextVersion }}
           title: Bump core-ui version to  ${{ env.nextVersion }}
