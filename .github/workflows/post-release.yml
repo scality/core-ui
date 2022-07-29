@@ -23,6 +23,7 @@ jobs:
           commit-message: Bump core-ui version to  ${{ env.nextVersion }}
           title: Bump core-ui version to  ${{ env.nextVersion }}
           body: ''
+          base: ${{ github.event.repository.default_branch }}
       - uses: actions/github-script@v5
         if: ${{ steps.cpr.outputs.pull-request-number }}
         with:
