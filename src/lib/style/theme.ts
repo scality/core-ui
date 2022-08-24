@@ -97,11 +97,11 @@ export const defaultTheme = {
     backgroundLevel4: '#171721',
     textPrimary: '#EAEAEA',
     textSecondary: '#B5B5B5',
-    textTertiary: '#B5B5B5',
-    // deprecated color
     textReverse: '#000000',
     textLink: '#71AEFF',
-    // deprecated colors
+    /**
+     * @deprecated colors
+     */
     alert: '#FFE508',
     base: '#7B7B7B',
     primary: '#1D1D1D',
@@ -120,6 +120,7 @@ export const defaultTheme = {
     backgroundBluer: '#192A41',
     borderLight: '#A5A5A5',
     info: '#434343',
+    textTertiary: '#B5B5B5',
   },
 };
 export const brand = defaultTheme.darkRebrand;
