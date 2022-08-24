@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useHistory, useRouteMatch } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { TableSearch as Search, SearchProps } from './Search';
 
 export type SearchWithQueryParamsProps = {
@@ -8,8 +8,7 @@ export type SearchWithQueryParamsProps = {
 
 export function SearchWithQueryParams(props) {
   const { queryParams = 'search', onChange, ...rest } = props;
-  const match = useRouteMatch();
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
   const history = useHistory();
   const params = new URLSearchParams(search);
   const initialValue = params.get(queryParams);
@@ -18,7 +17,7 @@ export function SearchWithQueryParams(props) {
   function handleOnChange(value) {
     const { onChange } = props;
     params.set(queryParams, value);
-    history.replace(`${match.url}?${params.toString()}`);
+    history.replace(`${pathname}?${params.toString()}`);
     setValue(value);
 
     if (typeof onChange === 'function') {
