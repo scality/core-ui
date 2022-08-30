@@ -20,7 +20,7 @@ const ITEMS_PER_SCROLL_WINDOW = 4;
 const NOPT_SEARCH = 8;
 export type OptionProps = {
   disabled?: boolean;
-  icon?: typeof Icon;
+  icon?: JSX.Element;
   children?: React.ReactNode;
   value: string;
 };
@@ -252,13 +252,8 @@ function SelectBox({
       return React.Children.toArray(children)
         .filter((child) => child.type === Option)
         .map((child) => {
-          const {
-            value,
-            children,
-            disabled,
-            icon,
-            ...rest
-          }: OptionProps = child.props;
+          const { value, children, disabled, icon, ...rest }: OptionProps =
+            child.props;
           return {
             value: value,
             label: children || '',
