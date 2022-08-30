@@ -21,7 +21,7 @@ const NOPT_SEARCH = 8;
 export type OptionProps = {
   disabled?: boolean;
   icon?: typeof Icon;
-  children?: string | JSX.Element;
+  children?: React.ReactNode;
   value: string;
 };
 export function Option(_: OptionProps) {
@@ -209,7 +209,7 @@ const ValueContainer = ({ children, ...props }) => {
 export type SelectProps = {
   placeholder?: string;
   disabled?: boolean;
-  children?: JSX.Element;
+  children?: React.ReactNode;
   defaultValue?: string;
   value?: string;
   onChange: (newValue: string) => void;
@@ -218,7 +218,7 @@ export type SelectProps = {
 };
 type SelectOptionProps = {
   value: string;
-  label: JSX.Element;
+  label: React.ReactNode;
   isDisabled: boolean;
   icon?: typeof Icon;
   optionProps: any;
