@@ -22,14 +22,14 @@ import {
 } from './TableUtils';
 import { useTableScrollbar, VirtualizedRows } from './TableCommon';
 
-export type SingleSelectableContentProps = {
+export type SingleSelectableContentProps<DATA_ROW extends Record<string, unknown> = Record<string, unknown>> = {
   rowHeight: TableHeightKeyType;
   separationLineVariant: TableVariantType;
   backgroundVariant: TableVariantType;
-  onRowSelected?: (row: Row) => void;
+  onRowSelected?: (row: Row<DATA_ROW>) => void;
   selectedId?: string;
   locale?: TableLocalType;
-  customItemKey?: (index: Number, data: any) => string;
+  customItemKey?: (index: Number, data: DATA_ROW) => string;
   isLoading?: boolean;
   hasScrollbar?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
@@ -49,7 +49,7 @@ type RenderRowType = {
   style: CSSProperties;
 };
 
-export function SingleSelectableContent({
+export function SingleSelectableContent<DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
   backgroundVariant = 'backgroundLevel1',
@@ -59,7 +59,7 @@ export function SingleSelectableContent({
   customItemKey,
   hasScrollbar: tableHasScrollbar,
   children,
-}: SingleSelectableContentProps) {
+}: SingleSelectableContentProps<DATA_ROW>) {
   if (selectedId && !onRowSelected) {
     console.error('Please specify the onRowSelected function.');
   }
