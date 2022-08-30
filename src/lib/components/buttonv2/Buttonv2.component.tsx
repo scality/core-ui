@@ -6,7 +6,7 @@ import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
-export type Props = {
+export type Props = React.HTMLProps<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -172,7 +172,7 @@ export const ButtonLabel = styled.span`
   justify-content: center;
   align-items: center;
 `;
-export const ButtonIcon = styled.span`
+export const ButtonIcon = styled.span<{ label: string }>`
   ${(props) =>
     props.label &&
     css`
