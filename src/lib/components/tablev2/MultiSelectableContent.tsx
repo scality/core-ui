@@ -63,7 +63,7 @@ type MultiSelectableContentProps<DATA_ROW extends Record<string, unknown> = Reco
 //   children: (rows: JSX.Element) => JSX.Element;
 //   });
 
-export const MultiSelectableContent = ({
+export const MultiSelectableContent = <DATA_ROW extends Record<string, unknown> = Record<string, unknown>>({
   onMultiSelectionChanged,
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
@@ -72,7 +72,7 @@ export const MultiSelectableContent = ({
   customItemKey,
   hasScrollbar: tableHasScrollbar,
   children,
-}: MultiSelectableContentProps) => {
+}: MultiSelectableContentProps<DATA_ROW>) => {
   const {
     headerGroups,
     prepareRow,
