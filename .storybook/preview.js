@@ -1,4 +1,5 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
 
 import { defaultTheme } from '../src/lib/style/theme';
@@ -24,9 +25,11 @@ export const globalTypes = {
 const withThemeProvider = (Story, context) => {
   const theme = themes[context.globals.theme];
   return (
-    <CoreUiThemeProvider theme={theme}>
-      <Story {...context} />
-    </CoreUiThemeProvider>
+    <QueryClientProvider client={new QueryClient()}>
+      <CoreUiThemeProvider theme={theme}>
+        <Story {...context} />
+      </CoreUiThemeProvider>
+    </QueryClientProvider>
   );
 };
 

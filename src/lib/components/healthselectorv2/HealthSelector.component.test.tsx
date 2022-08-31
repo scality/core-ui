@@ -5,9 +5,14 @@ import {
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from 'react-query';
 describe('HealthSelector', () => {
   it('should display correctly without any props and select first option', () => {
-    const { getByTestId, getByText } = render(<Healthselector />);
+    const { getByTestId, getByText } = render(
+      <QueryClientProvider client={new QueryClient()}>
+        <Healthselector />
+      </QueryClientProvider>,
+    );
     expect(getByTestId('singleValueLabel')).toHaveTextContent(/Health/i);
     expect(getByTestId('singleValueShortLabel')).toHaveTextContent(/All/i);
     // open the menu
@@ -19,7 +24,9 @@ describe('HealthSelector', () => {
   it('should call the onChange function when it change', () => {
     const onChange = jest.fn();
     const { getByTestId, getByText } = render(
-      <Healthselector onChange={onChange} />,
+      <QueryClientProvider client={new QueryClient()}>
+        <Healthselector onChange={onChange} />
+      </QueryClientProvider>,
     );
     const mainMenu = getByTestId('singleValueShortLabel');
     userEvent.click(mainMenu);
@@ -29,14 +36,16 @@ describe('HealthSelector', () => {
   });
   it('should not display hidden options', () => {
     const { getByTestId, queryByText } = render(
-      <Healthselector
-        options={[
-          optionsDefaultConfiguration.all,
-          optionsDefaultConfiguration.warning,
-          optionsDefaultConfiguration.critical,
-          optionsDefaultConfiguration.unknown,
-        ]}
-      />,
+      <QueryClientProvider client={new QueryClient()}>
+        <Healthselector
+          options={[
+            optionsDefaultConfiguration.all,
+            optionsDefaultConfiguration.warning,
+            optionsDefaultConfiguration.critical,
+            optionsDefaultConfiguration.unknown,
+          ]}
+        />
+      </QueryClientProvider>,
     );
     // open the menu
     const mainMenu = getByTestId('singleValueShortLabel');

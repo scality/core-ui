@@ -1,11 +1,18 @@
 // import { $Keys } from 'utility-types';
-import React, { Suspense, useMemo } from 'react';
+import React, {
+  HTMLProps,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import styled, { css } from 'styled-components';
 import { brand } from '../../style/theme';
 import { getTheme } from '../../utils';
 import { Loader } from '../loader/Loader.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { useQuery } from 'react-query';
 
 export const iconTable = {
   Account: 'fas faWallet',
@@ -104,6 +111,21 @@ type Props = {
   ariaLabel?: string;
 };
 
+const DelayedFallback = ({
+  children,
+  ...rest
+}: PropsWithChildren<HTMLProps<HTMLElement>>) => {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    let timeout = setTimeout(() => setShow(true), 300);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  return <i {...rest}>{show && children}</i>;
+};
+
 function getLazyStyledIcon(iconInfo) {
   const [iconType, iconClass] = iconInfo.split(' ');
   return React.lazy(async () => {
@@ -141,24 +163,60 @@ function Icon({
   ariaLabel = '',
   ...rest
 }: Props) {
-  const iconClass = iconTable[name];
-  if (!iconClass) throw new Error(`${name}: is not a valid icon.`);
-  const LazyStyledIcon = useMemo(
-    () => getLazyStyledIcon(iconClass),
-    [iconClass],
-  );
+  const iconInfo = iconTable[name];
+  if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
+
+  const { data, status } = useQuery({
+    queryKey: ['icon', name],
+    queryFn: async () => {
+      const [iconType, iconClass] = iconInfo.split(' ');
+      try {
+        const fontAwesomeType =
+          iconType === 'far'
+            ? 'free-regular-svg-icons'
+            : 'free-solid-svg-icons';
+        const icon = await import(
+          `@fortawesome/${fontAwesomeType}/${iconClass}.js`
+        );
+        return {
+          default: ({ name, color, size, ariaLabel, ...rest }) => (
+            <IconStyled
+              color={color}
+              icon={icon[iconClass]}
+              size={size}
+              aria-label={`${name} ${ariaLabel}`}
+              {...rest}
+            />
+          ),
+        };
+      } catch {
+        return {
+          default: ({ name, ariaLabel }) => (
+            <Loader size="base" aria-label={`${name} ${ariaLabel}`} />
+          ),
+        };
+      }
+    },
+  });
+
   return (
-    <Suspense
-      fallback={<Loader size="base" aria-label={`${name} ${ariaLabel}`} />}
-    >
-      <LazyStyledIcon
-        name={name}
-        color={color}
-        size={size}
-        ariaLabel={ariaLabel}
-        {...rest}
-      />
-    </Suspense>
+    <>
+      {(status === 'loading' || status === 'error') && (
+        <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
+          <Loader size="base" />
+        </DelayedFallback>
+      )}
+
+      {status === 'success' && (
+        <data.default
+          name={name}
+          color={color}
+          size={size}
+          ariaLabel={ariaLabel}
+          {...rest}
+        />
+      )}
+    </>
   );
 }
 
