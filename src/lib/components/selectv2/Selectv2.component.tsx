@@ -58,9 +58,12 @@ const DropdownIndicator = (props) => {
 
 const InternalOption = (props) => {
   const formatOptionLabel = () => {
-    const label = props.data.label;
+    const label: string = props.data.label;
     const inputValue = props.selectProps.inputValue;
-    const parts = label.split(new RegExp(`(${inputValue})`, 'gi'));
+    const parts = label
+      .split(inputValue)
+      .flatMap((item, index) => [inputValue, item])
+      .slice(1);
 
     if (inputValue) {
       return (
