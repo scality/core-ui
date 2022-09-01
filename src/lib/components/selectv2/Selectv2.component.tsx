@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, {
   createContext,
   useContext,
@@ -163,6 +162,7 @@ const MenuList = (props) => {
     selectedIndex * optionHeight - (ITEMS_PER_SCROLL_WINDOW - 1) * optionHeight;
   useEffect(() => {
     if (listRef && listRef.current) {
+      // @ts-ignore
       listRef.current.scrollTo(
         getScrollOffset(
           listRef.current,
@@ -176,6 +176,7 @@ const MenuList = (props) => {
 
   if (children.length > ITEMS_PER_SCROLL_WINDOW) {
     return (
+      // @ts-ignore
       <List
         ref={listRef}
         className="sc-select__menu-list"
@@ -215,6 +216,8 @@ export type SelectProps = {
   children?: React.ReactNode;
   defaultValue?: string;
   value?: string;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
   onChange: (newValue: string) => void;
   variant?: 'default' | 'rounded';
   className?: string;
@@ -223,7 +226,7 @@ type SelectOptionProps = {
   value: string;
   label: React.ReactNode;
   isDisabled: boolean;
-  icon?: typeof Icon;
+  icon?: ReturnType<typeof Icon>;
   optionProps: any;
 };
 
@@ -252,19 +255,23 @@ function SelectBox({
   const selectRef = useRef<any>();
   const options = useMemo((): Array<SelectOptionProps> => {
     if (children) {
-      return React.Children.toArray(children)
-        .filter((child) => child.type === Option)
-        .map((child) => {
-          const { value, children, disabled, icon, ...rest }: OptionProps =
-            child.props;
-          return {
-            value: value,
-            label: children || '',
-            isDisabled: disabled || false,
-            icon: icon,
-            optionProps: { ...rest },
-          };
-        });
+      return (
+        React.Children.toArray(children)
+          // @ts-ignore
+          .filter((child) => child.type === Option)
+          .map((child) => {
+            const { value, children, disabled, icon, ...rest }: OptionProps =
+              // @ts-ignore
+              child.props;
+            return {
+              value: value,
+              label: children || '',
+              isDisabled: disabled || false,
+              icon: icon,
+              optionProps: { ...rest },
+            };
+          })
+      );
     } else {
       return [];
     }
@@ -277,7 +284,9 @@ function SelectBox({
 
     if (options && options.length > NOPT_SEARCH) {
       setSearchSelection(option ? option.value : '');
+      // @ts-ignore
       setPlaceholder(option ? option.label : '');
+      // @ts-ignore
       setSearchValue(option ? option.label : '');
     }
   };
@@ -351,6 +360,8 @@ function SelectBox({
             ref={selectRef}
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
+            onBlur={rest.onBlur}
+            onFocus={rest.onFocus}
             onMenuClose={() => setKeyboardFocusEnabled(false)}
             onKeyDown={(event: KeyboardEvent) => {
               if (
