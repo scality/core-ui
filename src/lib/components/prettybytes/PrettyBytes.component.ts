@@ -6,7 +6,11 @@ type Props = {
 
 function PrettyBytes({ bytes, decimals = 0 }: Props): string {
   let fractionDigits = decimals;
-  if (!Number.isFinite(decimals) || (decimals !== undefined && decimals < 0))
+  if (
+    !Number.isFinite(decimals) ||
+    (decimals !== undefined && decimals < 0) ||
+    bytes < 1024
+  )
     fractionDigits = 0;
   if (!Number.isFinite(bytes) || !bytes || bytes < 0)
     return bytes === Infinity ||
@@ -15,6 +19,7 @@ function PrettyBytes({ bytes, decimals = 0 }: Props): string {
       ? '0 B'
       : '-';
   return prettyBytes(bytes, {
+    locale: 'en',
     binary: true,
     minimumFractionDigits: fractionDigits,
     maximumFractionDigits: fractionDigits,

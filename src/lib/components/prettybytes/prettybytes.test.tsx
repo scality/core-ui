@@ -90,12 +90,12 @@ describe('PrettyBytes', () => {
       {
         decimals: 1,
         bytes: 1,
-        prettyBytes: '1.0 B',
+        prettyBytes: '1 B',
       },
       {
         decimals: 3,
         bytes: 1,
-        prettyBytes: '1.000 B',
+        prettyBytes: '1 B',
       },
       {
         decimals: 3,
@@ -110,7 +110,7 @@ describe('PrettyBytes', () => {
       {
         decimals: 3,
         bytes: 3.12345,
-        prettyBytes: '3.123 B',
+        prettyBytes: '3 B',
       },
       {
         decimals: 4,
