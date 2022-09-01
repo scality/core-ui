@@ -1,28 +1,29 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
-  useTable,
-  useSortBy,
+  Column,
+  CoreUIColumn,
+  HeaderGroup,
+  Row,
+  SortByFn,
+  TableBodyPropGetter,
+  TableBodyProps,
   useBlockLayout,
-  useRowSelect,
   useExpanded,
   useFilters,
   useGlobalFilter,
-  SortByFn,
-  Row,
-  HeaderGroup,
-  TableBodyPropGetter,
-  TableBodyProps,
-  CoreUIColumn,
-  Column,
+  useRowSelect,
+  useSortBy,
+  useTable,
 } from 'react-table';
+import { useMemoCompare } from '../../hooks';
 
-import { SingleSelectableContent } from './SingleSelectableContent';
+import { MultiSelectableContent } from './MultiSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
-import { compareHealth } from './TableUtils';
+import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper } from './Tablestyle';
-import { MultiSelectableContent } from './MultiSelectableContent';
+import { compareHealth } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 
 export type TableProps<
@@ -42,6 +43,7 @@ export type TableProps<
   globalFilter?: string;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
+  allFilters?: { id: string; value: string }[];
 };
 
 type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
@@ -92,9 +94,9 @@ function Table<
   children,
   sortTypes,
   globalFilter,
+  allFilters,
   onBottom,
   onBottomOffset = 10,
-  ...rest
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -125,6 +127,7 @@ function Table<
     preGlobalFilteredRows,
     setGlobalFilter,
     setFilter,
+    setAllFilters,
     setHiddenColumns,
     isAllRowsSelected,
   } = useTable<DATA_ROW>(
@@ -162,6 +165,22 @@ function Table<
       setGlobalFilter(globalFilter);
     }
   }, [globalFilter, setGlobalFilter, data]);
+
+  const filters = useMemoCompare(
+    allFilters,
+    (previous, next) => JSON.stringify(previous) === JSON.stringify(next),
+  );
+
+  useEffect(() => {
+    if (!filters) {
+      setAllFilters([]);
+    } else {
+      const validFilters = filters.filter(
+        (filter) => filter.id && filter.value !== undefined,
+      );
+      setAllFilters(validFilters.length > 0 ? validFilters : []);
+    }
+  }, [filters, setAllFilters]);
 
   const contextValue: TableContextType<DATA_ROW> = {
     headerGroups,
