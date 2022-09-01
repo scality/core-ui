@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
@@ -7,7 +6,6 @@ import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
-export const BOTTOMRIGHT = 'bottom-right';
 export const LEFT = 'left';
 export const TOPSTART = 'top-start';
 export const TOPEND = 'top-end';
@@ -21,7 +19,6 @@ export const LEFTEND = 'left-end';
 type Position =
   | typeof TOP
   | typeof BOTTOM
-  | typeof BOTTOMRIGHT
   | typeof LEFT
   | typeof RIGHT
   | typeof TOPSTART
@@ -47,7 +44,15 @@ const TooltipContainer = styled.div`
   position: relative;
   display: inline-block;
 `;
-const TooltipOverLayContainer = styled.div`
+const TooltipOverLayContainer = styled.div<{
+  placement: Position;
+  overlayStyle?: {
+    backgroundColor?: string;
+    color?: string;
+    fontSize?: number | string;
+    width?: number | string;
+  };
+}>`
   display: flex;
   opacity: 0;
   position: absolute;
@@ -91,14 +96,14 @@ function Tooltip({
         placement,
         middleware: [offset(5), shift(), flip()],
       }).then(({ x, y }) => {
-        // flow doesn't understand that the ref is not null
-        // $FlowFixMe
-        Object.assign(tooltipRef.current.style, {
-          opacity: '1',
-          // we set opacity to 1 to make sure the tooltip is not displayed before the position is computed
-          left: `${x}px`,
-          top: `${y}px`,
-        });
+        if (tooltipRef.current) {
+          Object.assign(tooltipRef.current.style, {
+            opacity: '1',
+            // we set opacity to 1 to make sure the tooltip is not displayed before the position is computed
+            left: `${x}px`,
+            top: `${y}px`,
+          });
+        }
       });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tooltipRef.current, childrenRef.current, isHovering]);
