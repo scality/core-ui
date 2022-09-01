@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
-type Props = {
+type Props = React.HTMLProps<HTMLInputElement> & {
   toggle: boolean;
   onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
   label?: string;
