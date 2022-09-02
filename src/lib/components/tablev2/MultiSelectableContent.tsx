@@ -1,6 +1,6 @@
-import { useEffect, memo, CSSProperties, useRef } from 'react';
+import { useEffect, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
-import { areEqual, FixedSizeList } from 'react-window';
+import { areEqual } from 'react-window';
 
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
@@ -41,6 +41,8 @@ type MultiSelectableContentProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
   onMultiSelectionChanged: (rows: Row<DATA_ROW>[]) => void;
+  onSingleRowSelected?: (row: Row<DATA_ROW>) => void;
+  onToggleAll?: (selected: boolean) => void;
   rowHeight?: TableHeightKeyType;
   separationLineVariant?: TableVariantType;
   backgroundVariant?: TableVariantType;
@@ -70,6 +72,8 @@ export const MultiSelectableContent = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
   onMultiSelectionChanged,
+  onSingleRowSelected,
+  onToggleAll,
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
   backgroundVariant = 'backgroundLevel1',
@@ -145,6 +149,10 @@ export const MultiSelectableContent = <
             onMultiSelectionChanged(selectedRows);
           }
           row.toggleRowSelected(!row.isSelected);
+
+          if (onSingleRowSelected) {
+            onSingleRowSelected(row);
+          }
         },
       },
     };
@@ -227,7 +235,11 @@ export const MultiSelectableContent = <
                   <div>
                     {column.id === 'selection' ? (
                       <div
-                        onClick={() => {
+                        onClick={(event) => {
+                          const eventTarget = event.target as HTMLInputElement;
+                          if (onToggleAll) {
+                            onToggleAll(eventTarget.checked);
+                          }
                           if (onMultiSelectionChanged) {
                             if (isAllRowsSelected) {
                               onMultiSelectionChanged([]);

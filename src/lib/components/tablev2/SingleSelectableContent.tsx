@@ -96,6 +96,7 @@ export function SingleSelectableContent<
       <TableRow
         {...rowProps}
         isSelected={selectedId === row.id}
+        aria-selected={selectedId === row.id ? 'true' : 'false'}
         separationLineVariant={separationLineVariant}
         backgroundVariant={backgroundVariant}
         selectedId={selectedId}
