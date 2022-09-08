@@ -16,7 +16,7 @@ export const BOTTOMEND = 'bottom-end';
 export const BOTTOMSTART = 'bottom-start';
 export const LEFTSTART = 'left-start';
 export const LEFTEND = 'left-end';
-type Position =
+export type Position =
   | typeof TOP
   | typeof BOTTOM
   | typeof LEFT
@@ -37,8 +37,8 @@ export type Props = {
     fontSize?: string;
     width?: string;
   };
-  overlay?: JSX.Element;
-  children?: JSX.Element;
+  overlay?: React.ReactNode;
+  children?: React.ReactNode;
 };
 const TooltipContainer = styled.div`
   position: relative;

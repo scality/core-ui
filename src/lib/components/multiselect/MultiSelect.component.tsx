@@ -4,6 +4,7 @@ import { Checkbox } from './../checkbox/Checkbox.component';
 import { Button } from './../button/Button.component';
 import { Select } from './../select/Select.component';
 import { getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 
 export type ItemProps = {
   selected?: boolean;
@@ -56,6 +57,7 @@ const MultiSelectItemContainer = styled.div`
 `;
 const MultiSelectSearchContainer = styled.div`
   display: flex;
+  align-items: center;
   .sc-select-container {
     width: 100%;
   }
@@ -105,7 +107,7 @@ function MultiSelectItem(props: ItemProps) {
         {typeof isFavorite === 'boolean' && onFavoriteClick && (
           <Button
             inverted={true}
-            icon={<i className={`${isFavorite ? 'fas' : 'far'} fa-star`} />}
+            icon={<Icon name={isFavorite ? 'Star-filled' : 'Star-empty'} />}
             onClick={(event) => onFavoriteClick(label, event)}
           />
         )}
@@ -126,7 +128,7 @@ function MultiSelectItem(props: ItemProps) {
             inverted={true}
             variant="buttonDelete"
             onClick={(event) => onItemRemove(label, event)}
-            icon={<i className="fas fa-trash" />}
+            icon={<Icon name="Delete" />}
           />
         )}
       </MultiSelectItemRight>
@@ -147,7 +149,7 @@ function MultiSelectSearch(props: SearchProps) {
         value={selectedOption}
         {...rest}
       />
-      {onAdd && <Button onClick={onAdd} icon={<i className="fas fa-plus" />} />}
+      {onAdd && <Button onClick={onAdd} icon={<Icon name="Create-add" />} />}
     </MultiSelectSearchContainer>
   );
 }

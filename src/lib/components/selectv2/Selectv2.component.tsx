@@ -19,7 +19,7 @@ const ITEMS_PER_SCROLL_WINDOW = 4;
 const NOPT_SEARCH = 8;
 export type OptionProps = {
   disabled?: boolean;
-  icon?: JSX.Element;
+  icon?: React.ReactNode;
   children?: React.ReactNode;
   value: string;
 };
@@ -39,16 +39,29 @@ const Input = (props) => {
   return <components.Input {...props} {...ariaProps} />;
 };
 
+const selectDropdownIndicator = (
+  caretType: 'chevron' | 'caret',
+  indicatorDirection: 'up' | 'down',
+) => {
+  if (caretType === 'chevron') {
+    if (indicatorDirection === 'up') return 'Chevron-up';
+    else return 'Chevron-down';
+  } else {
+    if (indicatorDirection === 'up') return 'Dropdown-up';
+    else return 'Dropdown-down';
+  }
+};
+
 const DropdownIndicator = (props) => {
   const indicatorDirection = props.selectProps.menuIsOpen ? 'up' : 'down';
   const caretType = props.selectProps.isDefault ? 'chevron' : 'caret';
   return (
     <components.DropdownIndicator {...props}>
-      <i
-        className={
+      <Icon
+        name={
           props.isDisabled
-            ? 'fas fa-ban'
-            : `fas fa-${caretType}-${indicatorDirection}`
+            ? 'Deletion-marker'
+            : selectDropdownIndicator(caretType, indicatorDirection)
         }
       />
     </components.DropdownIndicator>
@@ -105,7 +118,7 @@ const InternalOption = (props) => {
         <div className="option-icon">{props.data.icon}</div>
         {formatOptionLabel()}
       </div>
-      <div>{props.isDisabled && <i className="fas fa-ban" />}</div>
+      <div>{props.isDisabled && <Icon name="Deletion-marker" />}</div>
     </components.Option>
   );
 };
@@ -226,7 +239,7 @@ type SelectOptionProps = {
   value: string;
   label: React.ReactNode;
   isDisabled: boolean;
-  icon?: ReturnType<typeof Icon>;
+  icon?: React.ReactNode;
   optionProps: any;
 };
 

@@ -26,25 +26,6 @@ type Theme = {
   textTertiary: string;
   textReverse: string;
   textLink: string;
-  // deprecated colors
-  alert: string;
-  base: string;
-  primary: string;
-  primaryDark1: string;
-  primaryDark2: string;
-  secondary: string;
-  secondaryDark1: string;
-  secondaryDark2: string;
-  success: string;
-  healthy: string;
-  healthyLight: string;
-  warning: string;
-  danger: string;
-  critical: string;
-  background: string;
-  backgroundBluer: string;
-  borderLight: string;
-  info: string;
 };
 type Props = {
   theme: Theme;

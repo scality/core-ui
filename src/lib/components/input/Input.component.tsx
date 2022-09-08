@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { Checkbox } from '../checkbox/Checkbox.component';
+import { Icon } from '../icon/Icon.component';
 import { Select } from '../select/Select.component';
 import { TextArea } from '../textarea/TextArea.component';
 import {
@@ -118,16 +119,12 @@ const InputRenderer = ({
           {...rest}
         />
         <div className="carets-wrapper">
-          <i
-            className="fas fa-caret-up"
-            data-core="up"
-            onClick={handleNumberClick}
-          ></i>
-          <i
-            className="fas fa-caret-down"
+          <Icon name="Dropdown-up" data-core="up" onClick={handleNumberClick} />
+          <Icon
+            name="Dropdown-down"
             data-core="down"
             onClick={handleNumberClick}
-          ></i>
+          />
         </div>
       </div>
     ),

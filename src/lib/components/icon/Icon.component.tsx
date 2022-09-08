@@ -1,9 +1,7 @@
-// import { $Keys } from 'utility-types';
 import React, {
   HTMLProps,
   PropsWithChildren,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import styled, { css } from 'styled-components';
@@ -27,6 +25,7 @@ export const iconTable = {
   'Cloud-backend': 'fas faCloud',
   Datacenter: 'fas faWarehouse',
   User: 'fas faUserCog',
+  Group: 'fas faUsers',
   Alert: 'fas faBell',
   'Lat-menu': 'fas faBars',
   Dashboard: 'fas faDesktop',
@@ -37,10 +36,13 @@ export const iconTable = {
   Metrics: 'fas faChartLine',
   Edit: 'fas faEdit',
   Logs: 'far faFileAlt',
+  Lock: 'fa faLock',
   'Create-add': 'fas faPlus',
   Delete: 'fas faTrash',
   Save: 'fas faSave',
   'External-link': 'fas faExternalLinkAlt',
+  Link: 'fas faLink',
+  Unlink: 'fas faUnlink',
   Close: 'fas faTimes',
   'Dropdown-down': 'fas faCaretDown',
   'Dropdown-up': 'fas faCaretUp',
@@ -50,6 +52,7 @@ export const iconTable = {
   Sync: 'fas faSync',
   Export: 'fas faFileExport',
   Copy: 'far faClone',
+  'Simple-upload': 'fas faUpload',
   Upload: 'fas faFileUpload',
   'Add-plus': 'fas faPlusSquare',
   'Remove-minus': 'fas faMinusSquare',
@@ -57,19 +60,27 @@ export const iconTable = {
   'Sort-up': 'fas faSortUp',
   'Sort-down': 'fas faSortDown',
   Calendar: 'fas faCalendarWeek',
+  'Calendar-minus': 'fas faCalendarMinus',
   'Arrow-up': 'fas faArrowUp',
   'Arrow-down': 'fas faArrowDown',
   'Arrow-right': 'fas faArrowRight',
+  'Arrow-left': 'fas faArrowLeft',
+  'Arrow-alt-circle-up': 'fas faArrowAltCircleUp',
   Folder: 'far faFolder',
   File: 'far faFile',
+  'File-invoice': 'fas faFileInvoice',
   'Deletion-marker': 'fas faBan',
+  'Map-marker': 'fas faMapMarkerAlt',
   'Info-circle': 'fas faInfoCircle',
   'Exclamation-triangle': 'fas faExclamationTriangle',
   'Exclamation-circle': 'fas faExclamationCircle',
+  Exclamation: 'fas faExclamation',
   Check: 'fas faCheck',
   Protected: 'fas faShieldAlt',
   'Chevron-left': 'fas faChevronLeft',
   'Chevron-right': 'fas faChevronRight',
+  'Chevron-down': 'fas faChevronDown',
+  'Chevron-up': 'fas faChevronUp',
   'Angle-double-right': 'fas faAngleDoubleRight',
   Language: 'fas faLanguage',
   Theme: 'fas faPalette',
@@ -79,24 +90,35 @@ export const iconTable = {
   'Log-out': 'fas faSignOutAlt',
   Hourglass: 'far faHourglass',
   Pause: 'fas faPause',
+  'Pause-circle': 'far faPauseCircle',
+  'Play-circle': 'far faPlayCircle',
   Upgrade: 'fas faLevelUpAlt',
   Expansion: 'fas faExpandAlt',
   Rebalance: 'fas faBalanceScale',
   Maintenance: 'fas faHardHat',
+  Role: 'fas faHatCowboy',
   'Change-erasure': 'fas faExchangeAlt',
   'Circle-health': 'fas faCircle',
   'Circle-empty': 'far faCircle',
+  'Star-filled': 'fas faStar',
+  'Star-empty': 'far faStar',
   'Dot-circle': 'fas faDotCircle',
   'Check-circle': 'fas faCheckCircle',
   'Times-circle': 'fas faTimesCircle',
   Toolbox: 'fas faToolbox',
   Cubes: 'fas faCubes',
   'File-alt': 'fas faFilesAlt',
+  Policy: 'fas faFileSignature',
+  Pen: 'fa faPen',
+  Pencil: 'fas faPencilAlt',
+  Eye: 'fas faEye',
+  Snowflake: 'fas faSnowflake',
+  key: 'fas faKey',
 };
+
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {
     const theme = getTheme(props);
-
     if (props.color && theme[props.color]) {
       return css`
         color: ${theme[props.color]};
@@ -104,11 +126,15 @@ const IconStyled = styled(FontAwesomeIcon)`
     }
   }}
 `;
+
+export type IconName = keyof typeof iconTable;
+export type IconColor = keyof typeof brand;
 type Props = {
-  name: keyof typeof iconTable;
+  name: IconName;
   size?: SizeProp;
-  color?: keyof typeof brand;
+  color?: IconColor;
   ariaLabel?: string;
+  onClick?: (event: Event) => void;
 };
 
 const DelayedFallback = ({
@@ -126,7 +152,7 @@ const DelayedFallback = ({
   return <i {...rest}>{show && children}</i>;
 };
 
-function getLazyStyledIcon(iconInfo) {
+function getLazyStyledIcon(iconInfo: string) {
   const [iconType, iconClass] = iconInfo.split(' ');
   return React.lazy(async () => {
     try {

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 type Props = {
   paths: Array<JSX.Element>;
 };
@@ -65,7 +66,7 @@ const withBreadcrumbSeparator = (lastIndex) => (acc, item, index) => {
           key={`sc-breadcrumb_separator_${index}`}
           className="sc-breadcrumb_separator"
         >
-          <i className="fas fa-chevron-right" />
+          <Icon name="Chevron-right" />
         </BreadcrumbSeparator>,
       ]
     : [...acc, item];

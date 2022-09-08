@@ -17,26 +17,24 @@ const TextAreaContainer = styled.textarea`
   padding: ${defaultTheme.padding.small};
   border-radius: 4px;
   ${(props) => {
-    const { border, textSecondary, primary, secondary } = getTheme(props);
+    const { border, textSecondary, backgroundLevel1, selectedActive } =
+      getTheme(props);
     return css`
       border-color: ${border};
       color: ${textSecondary};
-      background: ${primary};
+      background: ${backgroundLevel1};
       &:focus {
-        border-color: ${secondary};
+        border-color: ${selectedActive};
         outline: none;
       }
     `;
   }}
 `;
 
-function TextAreaElement({
-  rows = 3,
-  cols = 20,
-  ...rest
-  }: Props,
-  ref: React.ForwardedRef<RefType>) {
-
+function TextAreaElement(
+  { rows = 3, cols = 20, ...rest }: Props,
+  ref: React.ForwardedRef<RefType>,
+) {
   return (
     <TextAreaContainer
       className="sc-textarea"

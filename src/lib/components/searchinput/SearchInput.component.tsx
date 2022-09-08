@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { Input } from '../input/Input.component';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 export type Props = {
   placeholder?: string;
   value: string;
@@ -12,7 +13,7 @@ export type Props = {
   disableToggle: boolean;
   disabled?: boolean;
 };
-const SearchInputContainer = styled.div`
+const SearchInputContainer = styled.div<{ docked?: boolean }>`
   position: relative;
 
   ${(props) => {
@@ -47,12 +48,13 @@ const IconButton = styled.button`
   color: ${getThemePropSelector('textSecondary')};
   background-color: transparent;
   ${(props) => {
+    // TODO
     return (
       !props.disabled &&
       css`
         cursor: pointer;
         &:hover {
-          color: ${getThemePropSelector('secondary')};
+          color: ${getThemePropSelector('selectedActive')};
         }
       `
     );
@@ -87,7 +89,6 @@ const SearchInput = forwardRef(
     const toggle = () => {
       if (!disableToggle) {
         setDocked(!docked);
-        //$FlowFixMe
         myInputRef.current.focus();
       }
     };
@@ -128,10 +129,10 @@ const SearchInput = forwardRef(
           }}
         />
         <SearchIcon onClick={toggle} disabled={!docked}>
-          <i className="fas fa-search" />
+          <Icon name="Search" />
         </SearchIcon>
         <ResetIcon onClick={reset} visible={value && !docked && onReset}>
-          <i className="fas fa-times-circle" />
+          <Icon name="Times-circle" />
         </ResetIcon>
       </SearchInputContainer>
     );

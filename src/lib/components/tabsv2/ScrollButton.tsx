@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 
 const StyledScrollButton = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
   return (
     // @ts-ignore
     <StyledScrollButton direction={direction} onClick={onClick} ref={ref}>
-      <i className={`fas fa-chevron-${direction}`} />
+      <Icon name={`Chevron-${direction}`} />
     </StyledScrollButton>
   );
 });

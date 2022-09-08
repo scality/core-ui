@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 
 import { getTheme } from '../../utils';
 type Props = {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 };
+
 const ScrollbarContainer = styled.div`
   ${(props) => {
     const brand = getTheme(props);

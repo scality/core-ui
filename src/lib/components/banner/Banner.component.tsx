@@ -1,13 +1,12 @@
-// @ts-nocheck
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector, getThemeVariantSelector } from '../../utils';
 import { Variant } from '../constants';
 
 export type Props = {
-  icon?: Record<string, any>;
+  icon?: React.ReactNode;
   title?: string;
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   variant: Variant;
 };
 
@@ -21,7 +20,7 @@ const BannerContainer = styled.div<{ variant: Variant }>`
   border-left: 5px solid;
   border-radius: 3px;
   border-color: ${getThemeVariantSelector()};
-  background-color: ${getThemePropSelector('primary')};
+  background-color: ${getThemePropSelector('backgroundLevel1')};
   i {
     display: flex;
     align-items: center;

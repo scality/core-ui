@@ -6,6 +6,7 @@ import { Button } from '../button/Button.component';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 import { Item } from '../dropdown/Dropdown.component';
+import { Icon } from '../icon/Icon.component';
 type Action = {
   type: string;
   items?: Array<Item>;
@@ -36,7 +37,7 @@ const NavbarContainer = styled.div`
       color: ${getThemePropSelector('textPrimary')};
     }
     border-bottom: ${defaultTheme.spacing.sp1} solid
-      ${getThemePropSelector('primary')};
+      ${getThemePropSelector('backgroundLevel1')};
   `}};
 `;
 const NavbarMenu = styled.div`
@@ -190,7 +191,7 @@ function NavBar({
             <Button
               size="larger"
               variant="backgroundLevel1"
-              icon={<i className="fas fa-bars" />}
+              icon={<Icon name="Lat-menu" />}
               title="Main Menu"
             />
           </NavbarMenuItem>

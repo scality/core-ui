@@ -1,16 +1,16 @@
-//@flow
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import ReactDom from 'react-dom';
+import { Icon } from '../icon/Icon.component';
 type Props = {
   isOpen: boolean;
   close: () => {};
   title: string;
-  footer?: JSX.Element;
-  children: JSX.Element;
+  footer?: React.ReactNode;
+  children: React.ReactNode;
 };
 const ModalContainer = styled.div`
   position: fixed;
@@ -76,7 +76,7 @@ const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
             <ModalHeader className="sc-modal-header">
               <ModalHeaderTitle>{title}</ModalHeaderTitle>
               <ModalClose onClick={close}>
-                <i className="fas fa-times" />
+                <Icon name="Close" />
               </ModalClose>
             </ModalHeader>
             <ModalBody className="sc-modal-body">{children}</ModalBody>

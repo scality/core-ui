@@ -2,12 +2,12 @@ import React from 'react';
 import {
   ErrorPageContainer,
   Row,
-  WarningIcon,
   Title,
   Description,
   DescriptionContent,
 } from './ErrorPageStyle';
 import { Button } from '../buttonv2/Buttonv2.component';
+import { Icon } from '../icon/Icon.component';
 const translations = {
   en: {
     not_exist: 'Error: this page does not exist',
@@ -37,7 +37,7 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   return (
     <ErrorPageContainer className="sc-error-page404" {...rest}>
       <Row>
-        <WarningIcon className="fas fa-exclamation-triangle fa-2x" />
+        <Icon name="Exclamation-triangle" size="2x" color="statusWarning" />
         <Title>{translations[locale].not_exist}</Title>
       </Row>
       <Row>

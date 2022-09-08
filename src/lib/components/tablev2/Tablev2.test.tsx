@@ -1,6 +1,7 @@
 import { Table } from './Tablev2.component';
 import React from 'react';
 import { render } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -65,15 +66,17 @@ const columns = [
 describe('TableV2', () => {
   test('it should display all the data', async () => {
     const { getAllByRole } = render(
-      <div>
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>,
+      <QueryClientProvider client={new QueryClient()}>
+        <div>
+          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+      </QueryClientProvider>,
     );
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');
@@ -83,15 +86,17 @@ describe('TableV2', () => {
   });
   test('it should sort by defaultSortingKey', async () => {
     const { getAllByRole } = render(
-      <div>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>,
+      <QueryClientProvider client={new QueryClient()}>
+        <div>
+          <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+      </QueryClientProvider>,
     );
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');
@@ -101,20 +106,22 @@ describe('TableV2', () => {
   });
   test('it should filterGlobally', async () => {
     const { getAllByRole } = render(
-      <div>
-        <Table
-          columns={columns}
-          data={data}
-          defaultSortingKey={'firstName'}
-          globalFilter="an"
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>,
+      <QueryClientProvider client={new QueryClient()}>
+        <div>
+          <Table
+            columns={columns}
+            data={data}
+            defaultSortingKey={'firstName'}
+            globalFilter="an"
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+      </QueryClientProvider>,
     );
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');

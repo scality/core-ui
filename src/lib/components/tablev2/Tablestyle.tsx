@@ -1,9 +1,13 @@
-// @ts-nocheck
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
-import { TableHeightKeyType, tableRowHeight, TableVariantType } from './TableUtils';
+import {
+  TableHeightKeyType,
+  tableRowHeight,
+  TableVariantType,
+} from './TableUtils';
 import { HeaderGroup } from 'react-table';
+import { Icon } from '../icon/Icon.component';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -14,7 +18,7 @@ export const SortCaretWrapper = styled.span`
   padding-left: ${spacing.sp4};
   position: absolute;
 `;
-export const TableHeader = styled.div`
+export const TableHeader = styled.div<{ headerHeight?: number | string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,14 +86,13 @@ export const TableRow = styled.div<TableRowType>`
   ${(props) => {
     if (props.selectedId && props.isSelected) {
       return css`
-        background-color: ${(props) => getTheme(props).highlight};
-        border-right: ${borderSize} solid
-          ${(props) => getTheme(props).selectedActive};
+        background-color: ${getTheme(props).highlight};
+        border-right: ${borderSize} solid ${getTheme(props).selectedActive};
       `;
     } else {
+      const color = getTheme(props)[props.backgroundVariant];
       return css`
-        border-right: ${borderSize} solid
-          ${(props) => getTheme(props)[props.backgroundVariant]};
+        border-right: ${borderSize} solid ${color};
       `;
     }
   }}
@@ -122,13 +125,12 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
     if (props.isSelected) {
       return css`
         background-color: ${(props) => getTheme(props).highlight};
-        border-right: ${borderSize} solid
-          ${(props) => getTheme(props).selectedActive};
+        border-right: ${borderSize} solid ${getTheme(props).selectedActive};
       `;
     } else {
+      const color = getTheme(props)[props.backgroundVariant];
       return css`
-        border-right: ${borderSize} solid
-          ${(props) => getTheme(props)[props.backgroundVariant]};
+        border-right: ${borderSize} solid ${color};
       `;
     }
   }}
@@ -166,13 +168,13 @@ export const SortCaret = ({ column }: { column: HeaderGroup }) => {
     <SortCaretWrapper>
       {column.isSorted ? (
         column.isSortedDesc ? (
-          <i className="fas fa-sort-down" />
+          <Icon name="Sort-down" />
         ) : (
-          <i className="fas fa-sort-up" />
+          <Icon name="Sort-up" />
         )
       ) : (
         <SortIncentive>
-          <i className="fas fa-sort" />
+          <Icon name="Sort" />
         </SortIncentive>
       )}
     </SortCaretWrapper>

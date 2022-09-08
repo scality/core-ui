@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { getThemePropSelector } from '../../utils';
 import { ButtonStyled } from '../button/Button.component';
 import * as defaultTheme from '../../style/theme';
+import { Icon } from '../icon/Icon.component';
 export type Item = {
   label: string;
   selected?: boolean;
@@ -20,7 +21,7 @@ const HealthselectorContainer = styled.div`
   user-select: none;
   cursor: pointer;
 `;
-const CSSCircle = styled.span`
+const CSSCircle = styled.span<{ variant: keyof typeof defaultTheme.brand }>`
   background-color: ${(props) => defaultTheme.brand[props.variant]};
   border-radius: 50%;
   display: inline-block;
@@ -44,10 +45,10 @@ const TriggerStyled = styled(ButtonStyled)`
   background-color: ${getThemePropSelector('buttonSecondary')};
   color: ${getThemePropSelector('textPrimary')};
   &:hover {
-    background-color: ${getThemePropSelector('secondaryDark1')};
+    background-color: ${getThemePropSelector('highlight')};
   }
   &:active {
-    background-color: ${getThemePropSelector('secondaryDark1')};
+    background-color: ${getThemePropSelector('highlight')};
   }
   border-radius: 4px;
 
@@ -266,7 +267,7 @@ function Healthselector(props: Props) {
       >
         <LeftRowWrapper>{icons[selectedIndex]}</LeftRowWrapper>
         <RightRowWrapper>{(selected && selected.label) || ''}</RightRowWrapper>
-        <i className="fas fa-caret-down" />
+        <Icon name="Dropdown-down" />
         {open && (
           <HealthSelectorMenu
             ref={refMenuCallback}

@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
 `;
 const MainContent = styled.div`
   flex-grow: 1;
-  background-color: ${getThemePropSelector('background')};
+  background-color: ${getThemePropSelector('backgroundLevel1')};
 `;
 
 function LateralNavbarLayout({ children, sidebar, ...rest }: Props) {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*
 The Tabs component uses a lot of the code from Material-UI Scrollable Tabs to have the same behavior as it.
 Here is the license of material-ui:
@@ -154,7 +153,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
     const fullContainerSize = tabsListRef.current.clientWidth;
     const containerSize = tabsRef.current.clientWidth;
     let totalSize = 0;
-    const children = Array.from(tabsListRef.current.children);
+    const children: any = Array.from(tabsListRef.current.children);
 
     for (let i = 0; i < children.length; i += 1) {
       const tab = children[i];

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import styled, { css } from 'styled-components';
 import 'react-virtualized/styles.css';
 import { lighten, ellipsis } from 'polished';
@@ -11,6 +9,7 @@ import {
   Table as VirtualizedTable,
   AutoSizer,
 } from 'react-virtualized';
+import { Icon } from '../icon/Icon.component';
 export type Props = {
   list: Array<any>;
   columns: Array<any>;
@@ -29,7 +28,7 @@ type HeaderProps = {
   dataKey: string;
   label: string;
   sortBy: string;
-  sortDirection: string;
+  sortDirection: 'ASC' | 'DESC';
   disableSort: boolean;
 };
 const TableContainer = styled.div`
@@ -58,7 +57,7 @@ const TableContainer = styled.div`
 
   .ReactVirtualized__Table__headerRow {
     background-color: ${getThemePropSelector('backgroundLevel3')};
-    border-bottom: 2px solid ${getThemePropSelector('borderLight')};
+    border-bottom: 2px solid ${getThemePropSelector('backgroundLevel1')};
     color: ${getThemePropSelector('textPrimary')};
 
     text-transform: none;
@@ -80,14 +79,14 @@ const TableContainer = styled.div`
     overflow: visible !important;
     color: ${getThemePropSelector('textPrimary')};
     background-color: ${getThemePropSelector('backgroundLevel3')};
-    border-top: 1px solid ${getThemePropSelector('borderLight')};
-    border-bottom: 1px solid ${getThemePropSelector('borderLight')};
+    border-top: 1px solid ${getThemePropSelector('backgroundLevel1')};
+    border-bottom: 1px solid ${getThemePropSelector('backgroundLevel1')};
     box-sizing: border-box;
     &:hover,
     &:focus {
       background-color: ${getThemePropSelector('highlight')};
-      border-top: 1px solid ${getThemePropSelector('secondary')};
-      border-bottom: 1px solid ${getThemePropSelector('secondary')};
+      border-top: 1px solid ${getThemePropSelector('selectedActive')};
+      border-bottom: 1px solid ${getThemePropSelector('selectedActive')};
       outline: none;
       cursor: pointer;
     }
@@ -113,7 +112,10 @@ const CellContainer = styled.div`
     color: ${getThemePropSelector('textPrimary')};
     padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
     &:hover {
-      color: ${(props) => lighten(0.3, getTheme(props).primary).toString()};
+      color: ${(props) => {
+        const background = getThemePropSelector('backgroundLevel1')(props);
+        return lighten(0.3, background).toString();
+      }};
     }
   }
 `;
@@ -123,7 +125,10 @@ const CellContent = styled.span`
 const HeaderContainer = styled.div`
   display: flex;
 `;
-const HeaderSortIcon = styled.div`
+const HeaderSortIcon = styled.div<{
+  sortDirection: 'ASC' | 'DESC';
+  selected?: boolean;
+}>`
   position: relative;
   padding-left: ${defaultTheme.padding.small};
 
@@ -133,7 +138,7 @@ const HeaderSortIcon = styled.div`
     ${(props) => {
       if (props.selected && props.sortDirection === 'ASC') {
         return css`
-          color: ${getTheme(props).primary};
+          color: ${getThemePropSelector('backgroundLevel1')};
         `;
       }
     }}
@@ -144,7 +149,7 @@ const HeaderSortIcon = styled.div`
     ${(props) => {
       if (props.selected && props.sortDirection === 'DESC') {
         return css`
-          color: ${getTheme(props).primary};
+          color: ${getThemePropSelector('backgroundLevel1')};
         `;
       }
     }}
@@ -188,8 +193,8 @@ function Table({
             selected={sortBy === dataKey}
             sortDirection={sortDirection}
           >
-            <i className="fas fa-sort-up" />
-            <i className="fas fa-sort-down" />
+            <Icon name="Sort-up" />
+            <Icon name="Sort-down" />
           </HeaderSortIcon>
         )}
       </HeaderContainer>
@@ -259,7 +264,7 @@ function Table({
                         rowData.actions.length &&
                         columnIndex === columns.length - 1 && (
                           <Dropdown
-                            icon={<i className="fas fa-ellipsis-v" />}
+                            icon={<Icon name="More" />}
                             items={_decorateDropdownActions(
                               rowData.actions,
                               rowData,

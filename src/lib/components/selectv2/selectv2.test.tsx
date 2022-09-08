@@ -1,7 +1,17 @@
 import { Select, Option } from '../selectv2/Selectv2.component';
 import React, { useState } from 'react';
-import { render } from '@testing-library/react';
+import { render as testingRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Icon } from '../icon/Icon.component';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const render = (...args) => {
+  return testingRender(
+    <QueryClientProvider client={new QueryClient()}>
+      {args}
+    </QueryClientProvider>,
+  );
+};
 
 const generateOptionsData = (n: number) =>
   Array.from(new Array(n), (_, index) => ({
@@ -156,7 +166,7 @@ describe('SelectV2', () => {
         <Option
           data-testid="option2"
           value="1"
-          icon={<i className="fas fa-ban" />}
+          icon={<Icon name="Deletion-marker" />}
         >
           Label 2
         </Option>
@@ -169,7 +179,7 @@ describe('SelectV2', () => {
     );
     const icon = getByTestId('option2').querySelector('i');
     expect(icon).not.toBeNull();
-    expect(icon).toHaveClass('fas fa-ban');
+    expect(icon).toHaveAttribute('aria-label', 'Deletion-marker ');
   });
   test.each(variants)(
     '<Option/> component should throw if outside <Select/>',

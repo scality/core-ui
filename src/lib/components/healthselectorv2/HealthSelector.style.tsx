@@ -51,23 +51,13 @@ export const ShortLabel = styled.p`
 export const icons = {
   all: (
     <svg viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" height="16px">
-      <circle
-        cx="50"
-        cy="50"
-        r="50"
-        fill={defaultTheme.brand['statusHealthy']}
-      />
-      <circle
-        cx="75"
-        cy="50"
-        r="50"
-        fill={defaultTheme.brand['statusWarning']}
-      />
+      <circle cx="50" cy="50" r="50" fill={defaultTheme.brand.statusHealthy} />
+      <circle cx="75" cy="50" r="50" fill={defaultTheme.brand.statusWarning} />
       <circle
         cx="100"
         cy="50"
         r="50"
-        fill={defaultTheme.brand['statusCritical']}
+        fill={defaultTheme.brand.statusCritical}
       />
     </svg>
   ),

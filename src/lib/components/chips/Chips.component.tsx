@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { Button } from '../button/Button.component';
 import { lighten } from 'polished';
 import { getTheme } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 type Props = {
   text: string;
   variant?:
@@ -159,7 +160,7 @@ const Chips = ({
         className="sc-chips-remove"
         size={size}
         inverted={true}
-        icon={<i className="fas fa-times" />}
+        icon={<Icon name="Close" />}
         onClick={onRemove}
       />
     )}

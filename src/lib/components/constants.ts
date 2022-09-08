@@ -1,4 +1,4 @@
-export const LOADER_SIZE = {
+export const LOADER_SIZE: { [Key in Size]: Key } = {
   smaller: 'smaller',
   small: 'small',
   base: 'base',
@@ -16,14 +16,7 @@ export type Size =
   | 'huge'
   | 'massive';
 // Replace the "success" by "health", but keep the key in the color-palette for the moment.
-export type Variant =
-  | 'base'
-  | 'secondary'
-  | 'healthy'
-  | 'warning'
-  | 'danger'
-  | 'success'
-  | 'secondaryDark1';
+export type Variant = 'selected' | 'healthy' | 'warning' | 'danger';
 // metric chart
 // url query
 export const QUERY_LAST_SEVEN_DAYS = 'now-7d';

@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 
 type Props = {
   label?: string;
@@ -28,7 +29,7 @@ function Checkbox({
       tabIndex={canBeFocused ? 0 : null}
       className="sc-checkbox"
     >
-      <i className="fas fa-check" />
+      <Icon name="Check" />
       <input
         type="checkbox"
         checked={checked}
@@ -98,7 +99,7 @@ const StyledCheckbox = styled.label<{
         background: ${checkBoxColor};
         border-radius: 4px;
       }
-      i {
+      svg {
         position: absolute;
         top: 3px;
         left: 2px;

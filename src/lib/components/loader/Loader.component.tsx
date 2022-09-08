@@ -5,12 +5,15 @@ import { LoaderIcon } from '../../icons/scality-loading';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 type Props = {
-  size?: string;
+  size?: keyof typeof SIZE;
   color?: string;
   children?: JSX.Element;
   centered?: boolean;
 };
-const LoaderContainer = styled.div<{ size: string; centered: boolean }>`
+const LoaderContainer = styled.div<{
+  size: keyof typeof SIZE;
+  centered?: boolean;
+}>`
   display: flex;
   ${(props) => {
     return css`
