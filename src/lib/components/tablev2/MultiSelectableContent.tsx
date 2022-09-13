@@ -40,7 +40,7 @@ type RenderRowType = {
 type MultiSelectableContentProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
-  onMultiSelectionChanged: (rows: Row<DATA_ROW>[]) => void;
+  onMultiSelectionChanged?: (rows: Row<DATA_ROW>[]) => void;
   onSingleRowSelected?: (row: Row<DATA_ROW>) => void;
   onToggleAll?: (selected: boolean) => void;
   rowHeight?: TableHeightKeyType;
@@ -118,42 +118,39 @@ export const MultiSelectableContent = <
     const row = rows[index];
     prepareRow(row);
 
-    let rowProps = row.getRowProps({
-      /**
-       * Note:We need to pass the style property to the row component.
-       * Otherwise when we scroll down, the next rows are flashing
-       * because they are re-rendered in loop.
-       */
-      style: { ...style },
-    });
+    const rowProps = {
+      ...row.getRowProps({
+        /**
+         * Note:We need to pass the style property to the row component.
+         * Otherwise when we scroll down, the next rows are flashing
+         * because they are re-rendered in loop.
+         */
+        style: { ...style },
+      }),
+      onClick: () => {
+        if (onMultiSelectionChanged) {
+          const keys = Object.keys(selectedRowIds);
 
-    rowProps = {
-      ...rowProps,
-      ...{
-        onClick: () => {
-          let selectedRows = [];
           if (row.isSelected) {
             // we remove the item from the list
-            if (onMultiSelectionChanged) {
-              let keys = Object.keys(selectedRowIds);
-              selectedRows = rows.filter(
+            onMultiSelectionChanged(
+              rows.filter(
                 (row) => keys.includes(row.id) && rows[index].id !== row.id,
-              );
-              onMultiSelectionChanged(selectedRows);
-            }
+              ),
+            );
           } else {
             // we add the new item from the list
-            let keys = Object.keys(selectedRowIds);
-            selectedRows = rows.filter((row) => keys.includes(row.id));
-            selectedRows = [...selectedRows, rows[index]];
-            onMultiSelectionChanged(selectedRows);
+            onMultiSelectionChanged([
+              ...rows.filter((row) => keys.includes(row.id)),
+              rows[index],
+            ]);
           }
-          row.toggleRowSelected(!row.isSelected);
+        }
+        row.toggleRowSelected(!row.isSelected);
 
-          if (onSingleRowSelected) {
-            onSingleRowSelected(row);
-          }
-        },
+        if (onSingleRowSelected) {
+          onSingleRowSelected(row);
+        }
       },
     };
 
@@ -166,7 +163,7 @@ export const MultiSelectableContent = <
         className="tr"
       >
         {row.cells.map((cell) => {
-          let cellProps = cell.getCellProps({
+          const cellProps = cell.getCellProps({
             style: {
               ...cell.column.cellStyle,
               // Vertically center the text in cells.

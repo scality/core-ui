@@ -453,7 +453,12 @@ export const MultiTable = () => {
       <Title>Several Multiselect</Title>
       <Flex justifyContent="center" gap="2rem">
         <Box width="500px" height="200px">
-          <Table columns={columns2} data={data1} defaultSortingKey="name">
+          <Table
+            columns={columns2}
+            data={data1}
+            defaultSortingKey="name"
+            initiallySelectedRowsIds={new Set([0, 2])}
+          >
             <Table.MultiSelectableContent
               onMultiSelectionChanged={(rows) => {
                 console.log('Table.MultiSelectableContent selected row', rows);

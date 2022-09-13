@@ -4,6 +4,7 @@ import {
   Column,
   CoreUIColumn,
   HeaderGroup,
+  IdType,
   Row,
   SortByFn,
   TableBodyPropGetter,
@@ -44,6 +45,7 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
+  initiallySelectedRowsIds?: Set<string>;
 };
 
 type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
@@ -97,6 +99,7 @@ function Table<
   allFilters,
   onBottom,
   onBottomOffset = 10,
+  initiallySelectedRowsIds,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -116,6 +119,19 @@ function Table<
       return filteredRows;
     };
   }, []);
+
+  const formattedInitiallySelectedRows = React.useMemo(() => {
+    if (initiallySelectedRowsIds) {
+      return Array.from(initiallySelectedRowsIds).reduce(
+        (accumulatedValue, currentValue) => ({
+          ...accumulatedValue,
+          [currentValue]: true,
+        }),
+        {},
+      );
+    }
+    return {};
+  }, []) as Record<IdType<DATA_ROW>, boolean>;
 
   const {
     headerGroups,
@@ -142,6 +158,7 @@ function Table<
             desc: false,
           },
         ],
+        selectedRowIds: formattedInitiallySelectedRows,
         hiddenColumns: ['selection'],
       },
       disableMultiSort: true,
