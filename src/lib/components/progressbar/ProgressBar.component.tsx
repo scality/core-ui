@@ -1,4 +1,3 @@
-// @ts-nocheck
 import styled, { css } from 'styled-components';
 import { getTheme, getThemePropSelector } from '../../utils';
 import * as defaultTheme from '../../style/theme';
@@ -18,7 +17,11 @@ export type ProgressBarProps = {
   isAnimation?: boolean;
 };
 const Container = styled.div``;
-const ProgressBarContainer = styled.div`
+const ProgressBarContainer = styled.div<{
+  backgroundColor: string;
+  size: keyof typeof defaultTheme.fontSize;
+  buildinLabel?: string;
+}>`
   display: flex;
   border-radius: 4px;
   justify-content: space-between;
@@ -94,7 +97,10 @@ const BottomLabelsContainer = styled(TopLabelsContainer)`
   margin: ${defaultTheme.padding.smaller} 0 0 0;
   font-size: ${defaultTheme.fontSize.smaller};
 `;
-const FilledAreaContainer = styled.div`
+const FilledAreaContainer = styled.div<{
+  isAnimation?: boolean;
+  width: number;
+}>`
   display: flex;
   justify-content: flex-start;
   border-radius: 4px;
@@ -114,12 +120,12 @@ const FilledAreaContainer = styled.div`
       animation-fill-mode: both;
       animation-name: widthAnimation;
 
-      background-color: ${props.color || getTheme(props).secondary}
+      background-color: ${props.color || getTheme(props).selectedActive}
       width: ${props.width}%;
     `;
     } else {
       return css`
-        background-color: ${props.color || getTheme(props).secondary};
+        background-color: ${props.color || getTheme(props).selectedActive};
         width: ${props.width}%;
       `;
     }
@@ -135,7 +141,7 @@ function ProgressBar({
   percentage = 50,
   size = 'base',
   color,
-  backgroundColor = '#332C2C',
+  backgroundColor = defaultTheme.defaultTheme.darkRebrand.backgroundLevel2,
   topLeftLabel,
   topRightLabel,
   bottomLeftLabel,

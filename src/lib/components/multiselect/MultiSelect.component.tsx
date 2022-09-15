@@ -4,17 +4,15 @@ import { Checkbox } from './../checkbox/Checkbox.component';
 import { Button } from './../button/Button.component';
 import { Select } from './../select/Select.component';
 import { getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 
 export type ItemProps = {
   selected?: boolean;
-  isFavorite?: boolean;
   label: string;
   description?: string;
   onSelect?: (arg0: any, arg1: any) => void;
   //on checkbox click
   onItemRemove?: (arg0: any, arg1: any) => void;
-  //on item remove button click
-  onFavoriteClick?: (arg0: any, arg1: any) => void; // on Favorite icon click
 };
 export type OptionProps = {
   label: string;
@@ -56,6 +54,7 @@ const MultiSelectItemContainer = styled.div`
 `;
 const MultiSelectSearchContainer = styled.div`
   display: flex;
+  align-items: center;
   .sc-select-container {
     width: 100%;
   }
@@ -84,15 +83,7 @@ const MultiSelectItemLabel = styled.span`
 const MultiSelectItemDescription = styled.span``;
 
 function MultiSelectItem(props: ItemProps) {
-  const {
-    selected,
-    label,
-    description,
-    onItemRemove,
-    onSelect,
-    isFavorite,
-    onFavoriteClick,
-  } = props;
+  const { selected, label, description, onItemRemove, onSelect } = props;
   return (
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
@@ -100,13 +91,6 @@ function MultiSelectItem(props: ItemProps) {
           <Checkbox
             checked={selected}
             onChange={(event) => onSelect(label, event)}
-          />
-        )}
-        {typeof isFavorite === 'boolean' && onFavoriteClick && (
-          <Button
-            inverted={true}
-            icon={<i className={`${isFavorite ? 'fas' : 'far'} fa-star`} />}
-            onClick={(event) => onFavoriteClick(label, event)}
           />
         )}
       </MultiSelectItemLeft>
@@ -126,7 +110,7 @@ function MultiSelectItem(props: ItemProps) {
             inverted={true}
             variant="buttonDelete"
             onClick={(event) => onItemRemove(label, event)}
-            icon={<i className="fas fa-trash" />}
+            icon={<Icon name="Delete" />}
           />
         )}
       </MultiSelectItemRight>
@@ -135,19 +119,16 @@ function MultiSelectItem(props: ItemProps) {
 }
 
 function MultiSelectSearch(props: SearchProps) {
-  const { selectedOption, options, placeholder, onSelect, onAdd, ...rest } =
-    props;
+  const { selectedOption, onSelect, onAdd, ...rest } = props;
   return (
     <MultiSelectSearchContainer className="sc-multi-select-list-search">
       <Select
-        options={options}
         // @ts-ignore
         onChange={onSelect}
-        placeholder={placeholder}
         value={selectedOption}
         {...rest}
       />
-      {onAdd && <Button onClick={onAdd} icon={<i className="fas fa-plus" />} />}
+      {onAdd && <Button onClick={onAdd} icon={<Icon name="Create-add" />} />}
     </MultiSelectSearchContainer>
   );
 }

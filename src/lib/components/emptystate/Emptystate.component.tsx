@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button } from '../button/Button.component';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
+import { Button } from '../buttonv2/Buttonv2.component';
+import { Icon, IconName } from '../icon/Icon.component';
+import { LargeText } from '../text/Text.component';
 type Props = {
   label: string;
-  icon: string;
+  icon: IconName;
   link?: string;
   history?: Record<string, any>;
 };
@@ -21,10 +23,6 @@ const EmptystateContainer = styled.div`
   width: 100%;
   padding-top: 10%;
 `;
-export const BigText = styled.h3`
-  text-align: center;
-  margin: 0px;
-`;
 export const EmptyStateRow = styled.div`
   display: flex;
   justify-content: space-around;
@@ -38,8 +36,8 @@ export const IconWrapper = styled.div`
   ${(props) => {
     const brand = getTheme(props);
     return css`
-      background-color: ${brand.borderLight};
       color: ${brand.background};
+      border: 1px solid ${brand.infoPrimary};
     `;
   }}
 
@@ -49,12 +47,6 @@ export const IconWrapper = styled.div`
   border-radius: 100%;
   width: 150px;
   height: 150px;
-
-  i {
-    &.fas {
-      font-size: 4.5em;
-    }
-  }
 `;
 
 function EmptyState(props: Props) {
@@ -63,26 +55,25 @@ function EmptyState(props: Props) {
     <EmptystateContainer className="sc-emptystate">
       <EmptyStateRow>
         <IconWrapper>
-          <i className={`fas ${icon}`}></i>
+          <Icon name={icon} color="infoPrimary" size="5x" />
         </IconWrapper>
       </EmptyStateRow>
       <EmptyStateRow>
-        <BigText>A list of {`${label}s`} will appear here</BigText>
+        <LargeText>A list of {`${label}s`} will appear here.</LargeText>
       </EmptyStateRow>
       <EmptyStateRow>
-        <BigText>
+        <LargeText>
           There are no {`${label}s`} created yet, let's create your first{' '}
           {label}.
-        </BigText>
+        </LargeText>
       </EmptyStateRow>
       {history && (
         <ActionWrapper>
           <Button
-            text={`Create ${label}`}
-            size="large"
-            icon={<i className="fas fa-plus"></i>}
+            label={`Create ${label}`}
+            icon={<Icon name="Create-add" />}
             type="button"
-            variant="buttonSecondary"
+            variant="primary"
             onClick={() => history.push(link)}
           />
         </ActionWrapper>

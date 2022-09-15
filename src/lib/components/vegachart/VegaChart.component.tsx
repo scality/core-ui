@@ -27,7 +27,7 @@ const VegaTooltipTheme = createGlobalStyle`
     border-radius: 3px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     color: ${getThemePropSelector('textPrimary')};
-    background-color: ${getThemePropSelector('primaryDark2')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     border: 1px solid ${getThemePropSelector('border')};
     // customize the title
     h2 {

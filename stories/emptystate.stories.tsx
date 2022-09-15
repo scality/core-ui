@@ -9,8 +9,8 @@ export const WithLink = () => {
   return (
     <Wrapper>
       <EmptyState
-        icon="fa-server"
-        label="node"
+        icon="Node-backend"
+        label="Node"
         link=""
         history={{
           push: () => {},
@@ -22,7 +22,7 @@ export const WithLink = () => {
 export const WithoutLink = () => {
   return (
     <Wrapper>
-      <EmptyState icon="fa-server" label="node" />
+      <EmptyState icon="Node-backend" label="node" />
     </Wrapper>
   );
 };

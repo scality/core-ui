@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as React from 'react';
 import styled from 'styled-components';
 import { getTheme } from '../../utils';
@@ -24,7 +23,8 @@ const LargerTextStyle = styled(BasicTextStyle)`
 const EmphaseTextStyle = styled(BasicTextStyle)`
   font-weight: 700;
 `;
-const StatusTextStyle = styled(BasicTextStyle)`
+// TODO
+const StatusTextStyle = styled(BasicTextStyle)<{ statusColor: string }>`
   color: ${(props) => getTheme(props)[`${props.statusColor}`]};
 `;
 const LargetStyle = styled(BasicTextStyle)`
@@ -52,7 +52,7 @@ export function EmphaseText({ children, ...rest }: Props) {
   return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
 }
 export function StatusText({ children, status, ...rest }: Props) {
-  let statusColor;
+  let statusColor: string;
 
   switch (status) {
     case 'healthy':

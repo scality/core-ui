@@ -32,6 +32,7 @@ import { SmallerText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { formatValue } from './tooltip/index';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
+import { Icon } from '../icon/Icon.component';
 // some predefined values
 export const YAXIS_TITLE_READ_WRITE = 'write(+) / read(-)';
 export const YAXIS_TITLE_IN_OUT = 'in(+) / out(-)';
@@ -724,12 +725,7 @@ function LineTemporalChart({
               </SmallerText>
             }
           >
-            <i
-              className="fas fa-question-circle"
-              style={{
-                color: theme.buttonSecondary,
-              }}
-            ></i>
+            <Icon name="Info" color={theme.buttonSecondary} />
           </TooltipComponent>
         )}
         {isLoading && (

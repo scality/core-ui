@@ -10,8 +10,8 @@ export type Props = React.HTMLProps<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  icon?: JSX.Element;
-  label?: string | JSX.Element;
+  icon?: React.ReactNode;
+  label?: React.ReactNode;
   tooltip?: TooltipProps;
 };
 export const ButtonStyled = styled.button`

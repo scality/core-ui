@@ -2,13 +2,13 @@ import React from 'react';
 import {
   ErrorPageContainer,
   Row,
-  WarningIcon,
   Title,
   Description,
   DescriptionContent,
   Link,
 } from './ErrorPageStyle';
 import { Button } from '../buttonv2/Buttonv2.component';
+import { Icon } from '../icon/Icon.component';
 const translations = {
   en: {
     unexpected_error: 'Unexpected Error',
@@ -48,7 +48,7 @@ function ErrorPage500({
   return (
     <ErrorPageContainer className="sc-error-page500" {...rest}>
       <Row>
-        <WarningIcon className="fas fa-exclamation-triangle fa-2x" />
+        <Icon name="Exclamation-triangle" size="2x" color="statusWarning" />
         <Title>{translations[locale].unexpected_error}</Title>
       </Row>
       <Row>
@@ -63,7 +63,7 @@ function ErrorPage500({
             <DescriptionContent>
               {translations[locale].may_also_contact}
               <Link href={supportLink}>
-                support <i className="fas fa-external-link-alt" />
+                support <Icon name="External-link" />
               </Link>
               {translations[locale].to_report_issue}
             </DescriptionContent>

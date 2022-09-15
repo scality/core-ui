@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*
 The Tabs component uses a lot of the code from Material-UI Scrollable Tabs to have the same behavior as it.
 Here is the license of material-ui:
@@ -137,7 +136,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
   });
   const scrollButtonEndRef = useRef<HTMLDivElement | null | undefined>(null);
   const scrollButtonStartRef = useRef<HTMLDivElement | null | undefined>(null);
-  const tabsListRef = useRef<any>(null);
+  const tabsListRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<any>(null);
 
   const scroll = (scrollValue: number) => {

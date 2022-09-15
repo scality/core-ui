@@ -6,7 +6,6 @@ import { defaultTheme } from '../src/lib/style/theme';
 
 const themes = {
   darkRebrand: defaultTheme.darkRebrand,
-  light: defaultTheme.light,
 };
 
 export const globalTypes = {
@@ -17,7 +16,7 @@ export const globalTypes = {
     toolbar: {
       icon: 'circlehollow',
       // array of plain string values or MenuItem shape (see below)
-      items: ['light', 'darkRebrand'],
+      items: ['darkRebrand'],
     },
   },
 };

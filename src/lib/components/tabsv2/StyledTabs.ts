@@ -1,4 +1,3 @@
-// @ts-nocheck
 import styled from 'styled-components';
 import { spacing } from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
@@ -6,7 +5,13 @@ export const TabBar = styled.div`
   display: flex;
   height: ${spacing.sp40};
 `;
-export const TabItem = styled.div`
+export const TabItem = styled.div<{
+  selected?: boolean;
+  activeTabColor?: string;
+  activeTabSeparator?: string;
+  inactiveTabColor?: string;
+  tabHoverColor?: string;
+}>`
   display: flex;
   align-items: center;
   padding: 0 ${spacing.sp24} 0 ${spacing.sp24};
@@ -46,12 +51,15 @@ export const TabItem = styled.div`
         background-color: ${props.inactiveTabColor || backgroundLevel3};
         &:hover {
           cursor: pointer;
-          border: ${spacing.sp1} solid ${props.tabHoverColor || highlight};;
+          border: ${spacing.sp1} solid ${props.tabHoverColor || highlight};
         }
       `;
   }}
 `;
-export const TabsContainer = styled.div`
+export const TabsContainer = styled.div<{
+  tabLineColor?: string;
+  separatorColor: string;
+}>`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -76,7 +84,7 @@ export const TabsContainer = styled.div`
     margin-right: -1px;
   }
 }`;
-export const TabContent = styled.div`
+export const TabContent = styled.div<{ tabContentColor?: string }>`
   margin: 0;
   padding: 0;
   flex: 1;

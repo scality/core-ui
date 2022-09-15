@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { getTheme, getThemePropSelector } from '../../utils';
+import { Icon } from '../icon/Icon.component';
 type StepProps = {
   title: JSX.Element;
   content: JSX.Element;
@@ -36,16 +37,16 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${(props) => {
-    const { danger, healthy, secondary } = getTheme(props);
+    const { statusCritical, statusHealthy, selectedActive } = getTheme(props);
 
     if (props.error) {
       return css`
-        background-color: ${danger};
+        background-color: ${statusCritical};
         color: ${defaultTheme.white};
       `;
     } else if (props.active) {
       return css`
-        background-color: ${secondary};
+        background-color: ${selectedActive};
         color: ${defaultTheme.white};
         svg {
           fill: ${defaultTheme.white};
@@ -53,7 +54,7 @@ const Circle = styled.div`
       `;
     } else if (props.completed) {
       return css`
-        background-color: ${healthy};
+        background-color: ${statusHealthy};
         color: ${defaultTheme.white};
       `;
     } else {
@@ -80,7 +81,7 @@ const BottomBar = styled.hr`
   ${(props) => {
     if (props.completed) {
       return css`
-        border-left: 2px solid ${getTheme(props).healthy};
+        border-left: 2px solid ${getTheme(props).statusHealthy};
       `;
     } else {
       return css`
@@ -101,7 +102,7 @@ function Step(props: StepProps) {
     error,
     inProgress,
   } = props;
-  const circleContent = completed ? <i className="fas fa-check" /> : index + 1;
+  const circleContent = completed ? <Icon name="Check" /> : index + 1;
   return (
     <StepContainer>
       <Panel>

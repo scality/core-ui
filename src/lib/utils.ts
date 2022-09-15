@@ -1,16 +1,38 @@
 import * as defaultTheme from './style/theme';
+
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
+
 export function mergeTheme(theme, defaultTheme) {
   return theme ? { ...defaultTheme.brand, ...theme } : defaultTheme.brand;
 }
+
 export const getTheme = (props) => {
   return mergeTheme(props.theme, defaultTheme);
 };
-export const getThemePropSelector = (key) => (props) => {
-  return getTheme(props)[key];
+
+/** Ensure the consistency of colors between old and new colors */
+const variantMapping = {
+  healthy: 'statusHealthy',
+  warning: 'statusWarning',
+  danger: 'statusCritical',
+  selected: 'selectedActive',
 };
-export const getThemeVariantSelector = () => (props) =>
-  getTheme(props)[props.variant];
+
+/** Translates the old colors into new colors while keeping the same name.
+ * New names are also supported. */
+export const getThemePropSelector = (key) => (props) => {
+  const key_ = variantMapping[key] ?? key;
+  return getTheme(props)[key_];
+};
+
+/** Translates the old colors into new colors while keeping same name.
+ * New names are also supported. */
+export const getThemeVariantSelector = () => (props) => {
+  const theme = getTheme(props);
+  const key = variantMapping[props.variant] ?? props.variant;
+  return theme[key];
+};
+
 export const hex2RGB = (str: string): [number, number, number] => {
   const [, short, long] = String(str).match(RGB_HEX) || [];
 
@@ -26,6 +48,7 @@ export const hex2RGB = (str: string): [number, number, number] => {
 
   throw new Error('Invalid hex string provided');
 };
+
 export const convertRemToPixels = (rem: number): number => {
   if (
     document.documentElement &&

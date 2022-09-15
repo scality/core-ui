@@ -17,7 +17,7 @@ type Props = {
 const SelectContainer = styled.div`
   font-size: ${defaultTheme.fontSize.base};
   .sc-select__control {
-    background-color: ${getThemePropSelector('primaryDark2')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     border-radius: 4px;
     border: 1px solid ${getThemePropSelector('border')};
     height: auto;
@@ -27,7 +27,7 @@ const SelectContainer = styled.div`
       color: ${getThemePropSelector('textSecondary')};
     }
     &.sc-select__control--is-focused {
-      border-color: ${getThemePropSelector('secondary')};
+      border-color: ${getThemePropSelector('selectedActive')};
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
         0 0 0 1px rgba(0, 126, 255, 0.1);
       outline: none;
@@ -35,7 +35,7 @@ const SelectContainer = styled.div`
     .sc-select__indicator {
       color: ${getThemePropSelector('textSecondary')};
       &.sc-select__dropdown-indicator:hover {
-        color: ${getThemePropSelector('secondary')};
+        color: ${getThemePropSelector('selectedActive')};
       }
       &.sc-select__clear-indicator:hover {
         color: ${defaultTheme.gray};
@@ -44,32 +44,32 @@ const SelectContainer = styled.div`
     .sc-select__multi-value__remove {
       border-radius: 0;
       color: ${getThemePropSelector('textSecondary')};
-      background-color: ${getThemePropSelector('primaryDark1')};
+      background-color: ${getThemePropSelector('backgroundLevel4')};
       &:hover {
         color: ${defaultTheme.gray};
       }
     }
     .sc-select__multi-value__label {
       border-radius: 0;
-      color: ${getThemePropSelector('secondary')};
-      background-color: ${getThemePropSelector('primaryDark1')};
+      color: ${getThemePropSelector('selectedActive')};
+      background-color: ${getThemePropSelector('backgroundLevel4')};
       vertical-align: initial;
     }
   }
   .sc-select__menu {
-    background-color: ${getThemePropSelector('primary')};
+    background-color: ${getThemePropSelector('backgroundLevel1')};
     color: ${getThemePropSelector('textSecondary')};
-    border: 1px solid ${getThemePropSelector('secondary')};
+    border: 1px solid ${getThemePropSelector('selectedActive')};
     box-sizing: border-box;
     overflow: hidden;
     z-index: ${defaultTheme.zIndex.dropdown};
     .sc-select__option {
       &.sc-select__option--is-focused {
-        background-color: ${getThemePropSelector('primaryDark2')};
+        background-color: ${getThemePropSelector('backgroundLevel1')};
       }
       &.sc-select__option--is-selected {
-        background-color: ${getThemePropSelector('primary')};
-        color: ${getThemePropSelector('secondary')};
+        background-color: ${getThemePropSelector('backgroundLevel1')};
+        color: ${getThemePropSelector('selectedActive')};
         font-weight: ${defaultTheme.fontWeight.bold};
       }
     }

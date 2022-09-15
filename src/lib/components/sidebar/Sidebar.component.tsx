@@ -1,10 +1,10 @@
-// @ts-nocheck
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 import { Button } from '../button/Button.component';
+import { Icon } from '../icon/Icon.component';
 type Item = {
   label: string;
   onClick: (arg0: any) => void;
@@ -18,7 +18,12 @@ export type Props = {
   hoverable?: boolean;
   onToggleClick?: () => void;
 };
-const Wrapper = styled.div`
+export type WrapperProps = {
+  expanded?: boolean;
+  hoverable?: boolean;
+  hovered?: boolean;
+};
+const Wrapper = styled.div<WrapperProps>`
   flex-shrink: 0;
   ${(props) => {
     const { backgroundLevel1, textPrimary } = getTheme(props);
@@ -59,7 +64,7 @@ const Wrapper = styled.div`
     }
   }}
 `;
-const SidebarContainer = styled.div`
+const SidebarContainer = styled.div<WrapperProps>`
   ${(props) => {
     const { backgroundLevel1 } = getTheme(props);
     return css`
@@ -93,7 +98,7 @@ const SidebarContainer = styled.div`
     padding: 0px;
   }
 `;
-const SidebarItem = styled.div`
+const SidebarItem = styled.div<{ active?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -170,7 +175,7 @@ function Sidebar({
             <Button
               size="larger"
               variant="backgroundLevel1"
-              icon={<i className="fas fa-bars" />}
+              icon={<Icon name="Lat-menu" />}
               onClick={() => {
                 setHovered(false);
                 onToggleClick();
@@ -187,7 +192,6 @@ function Sidebar({
                 active={active}
                 title={label}
                 onClick={onClick}
-                expanded={expanded || (hoverable && hovered)}
                 {...actionRest}
               >
                 {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}

@@ -20,13 +20,14 @@ export const ProgressCircle = styled.circle<{
   stroke-dasharray: ${({ circumference }) => circumference};
   stroke-dashoffset: ${({ percent, circumference }) =>
     ((100 - percent) / 100) * circumference};
-  stroke: ${(props) => props.color || getTheme(props).healthyLight};
+  stroke: ${(props) => props.color || getTheme(props).statusHealthy};
   stroke-width: ${(props) => props.strokeWidth};
   stroke-linecap: round;
   fill: none;
 `;
 export const BackgroundCircle = styled.circle<{ backgroundColor: string }>`
   fill: none;
-  stroke: ${(props) => props.backgroundColor || getTheme(props).primaryDark2};
+  stroke: ${(props) =>
+    props.backgroundColor || getTheme(props).backgroundLevel1};
   stroke-width: ${(props) => props.strokeWidth};
 `;

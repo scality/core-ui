@@ -1,8 +1,8 @@
 import React from 'react';
+import { Icon } from '../icon/Icon.component';
 import {
   ErrorPageContainer,
   Row,
-  InfoIcon,
   Title,
   Description,
   DescriptionContent,
@@ -37,7 +37,7 @@ function ErrorPageAuth({ supportLink = null, locale = 'en', ...rest }: Props) {
   return (
     <ErrorPageContainer className="sc-error-pageauth" {...rest}>
       <Row>
-        <InfoIcon className="fas fa-info-circle fa-2x" />
+        <Icon name="Info-circle" size="2x" color="textPrimary" />
         <Title>{translations[locale].unexpected_error}</Title>
       </Row>
       <Row>
@@ -52,7 +52,7 @@ function ErrorPageAuth({ supportLink = null, locale = 'en', ...rest }: Props) {
             <DescriptionContent>
               {translations[locale].may_also_contact}
               <Link href={supportLink}>
-                support <i className="fas fa-external-link-alt" />
+                support <Icon name="External-link" />
               </Link>
               {translations[locale].to_report_issue}
             </DescriptionContent>

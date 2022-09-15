@@ -31,7 +31,7 @@ const BadgeStyled = styled(FontAwesomeIcon)`
   }}
 `;
 
-const getBadgeIcon = (status) => {
+const getBadgeIcon = (status: Status) => {
   switch (status) {
     case 'warning':
       return faExclamationCircle;

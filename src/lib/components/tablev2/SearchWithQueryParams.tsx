@@ -14,7 +14,7 @@ export function SearchWithQueryParams(props) {
   const initialValue = params.get(queryParams);
   const [value, setValue] = useState(initialValue);
 
-  function handleOnChange(value) {
+  function handleOnChange(value: string) {
     const { onChange } = props;
     params.set(queryParams, value);
     history.replace(`${pathname}?${params.toString()}`);

@@ -26,13 +26,7 @@ export const DescriptionContent = styled.p`
 `;
 export const Row = styled.div`
   display: flex;
-  align-items: baseline;
-`;
-export const WarningIcon = styled.i`
-  color: ${getThemePropSelector('statusWarning')};
-`;
-export const InfoIcon = styled.i`
-  color: ${getThemePropSelector('textPrimary')};
+  align-items: center;
 `;
 export const Link = styled.a`
   color: ${getThemePropSelector('textLink')};

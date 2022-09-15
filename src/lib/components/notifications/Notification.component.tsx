@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import * as defaultTheme from '../../style/theme';
-import { getTheme } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 import { Variant } from '../constants';
+import { logicalExpr } from 'vega-lite';
+import { Icon } from '../icon/Icon.component';
 export type Props = {
   uid: string;
   title: string;
@@ -20,16 +22,18 @@ const NotificationContainer = styled.div<{ variant: Variant }>`
   box-shadow: 0px 0px 3px ${defaultTheme.grayDarkest};
 
   ${(props) => {
+    const variant = props.variant ?? 'backgroundLevel1';
+    const background = getThemePropSelector(variant)(props);
     switch (props.variant) {
       case 'warning':
         return css`
-          background-color: ${getTheme(props)[props.variant || 'primary']};
+          background-color: ${background};
           color: ${defaultTheme.black};
         `;
 
       default:
         return css`
-          background-color: ${getTheme(props)[props.variant || 'primary']};
+          background-color: ${background};
           color: ${defaultTheme.white};
         `;
     }
@@ -50,7 +54,9 @@ const NotificationDismissProgress = styled.div<{
   height: 5px;
   border-radius: 5px;
   ${(props) => {
-    const brandDark = darken(0.1, getTheme(props)[props.variant || 'primary']);
+    const variant = props.variant || 'backgroundLevel1';
+    const background = getThemePropSelector(variant)(props);
+    const brandDark = darken(0.1, background);
     return css`
       background-color: ${brandDark};
       width: ${(props.value / props.max) * 100}%;
@@ -134,7 +140,7 @@ function Notification({
         />
       )}
       <NotificationClose onClick={dismiss}>
-        <i className="fas fa-times" />
+        <Icon name="Close" />
       </NotificationClose>
     </NotificationContainer>
   );

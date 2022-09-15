@@ -88,8 +88,8 @@ const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
 const CloudProgressBar = ({
   percentage = 0,
   borderSize = '2px',
-  cloudColor = defaultTheme.brand.healthyLight,
-  progressCloudColor = defaultTheme.brand.primaryDark2,
+  cloudColor = defaultTheme.brand.statusHealthy,
+  progressCloudColor = defaultTheme.brand.backgroundLevel1,
   children,
 }: CloudProgressBarProps) => (
   <Container className="sc-cloudprogressbar">

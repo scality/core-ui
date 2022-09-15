@@ -1,6 +1,7 @@
 import { Healthselector } from './Healthselector.component';
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 describe('HealthSelector', () => {
   test('it should display the default health selector', () => {
     const warningAction = jest.fn();
@@ -27,7 +28,11 @@ describe('HealthSelector', () => {
       },
     ];
     // verify that the default text is displayed
-    const { getByText, queryByText } = render(<Healthselector items={items} />);
+    const { getByText, queryByText } = render(
+      <QueryClientProvider client={new QueryClient()}>
+        <Healthselector items={items} />
+      </QueryClientProvider>,
+    );
     const selectorText = getByText(/all/i);
     expect(selectorText).toBeInTheDocument();
     // verify that the dropdown is not displayed
@@ -72,7 +77,9 @@ describe('HealthSelector', () => {
     ];
     // verify that the default text is displayed
     const { getByText, queryByText } = render(
-      <Healthselector items={items} isOkHidden />,
+      <QueryClientProvider client={new QueryClient()}>
+        <Healthselector items={items} isOkHidden />,
+      </QueryClientProvider>,
     );
     const selectorText = getByText(/all/i);
     expect(selectorText).toBeInTheDocument();

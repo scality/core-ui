@@ -30,11 +30,12 @@ export const InputContainer = styled.div<{
 
   input.sc-input-type {
     ${(props) => {
-      const { primaryDark2, danger, textSecondary, border } = getTheme(props);
+      const { backgroundLevel1, statusCritical, textSecondary, border } =
+        getTheme(props);
       return css`
-        background-color: ${primaryDark2};
+        background-color: ${backgroundLevel1};
         color: ${textSecondary};
-        border: 1px solid ${props.error ? danger : border};
+        border: 1px solid ${props.error ? statusCritical : border};
       `;
     }};
     padding: 8px ${defaultTheme.padding.small};
@@ -44,9 +45,7 @@ export const InputContainer = styled.div<{
   }
 
   input.sc-input-type:focus {
-    border-color: ${getThemePropSelector('secondary')};
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
-      0 0 0 1px rgba(0, 126, 255, 0.1);
+    border-color: ${getThemePropSelector('selectedActive')};
     outline: none;
   }
 
@@ -131,7 +130,7 @@ export const LabelStyle = styled.label`
   color: ${getThemePropSelector('textPrimary')};
 `;
 export const InputErrorMessage = styled.span`
-  color: ${getThemePropSelector('danger')};
+  color: ${getThemePropSelector('statusCritical')};
   margin: ${defaultTheme.padding.smaller} 0;
   font-size: ${defaultTheme.fontSize.small};
 `;

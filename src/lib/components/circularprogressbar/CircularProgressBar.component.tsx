@@ -38,7 +38,7 @@ function CircularProgressBar({
           backgroundColor={backgroundColor}
           r={radius}
           strokeWidth={strokeWidth}
-        ></BackgroundCircle>
+        />
         <ProgressCircle
           percent={percent}
           color={color}
@@ -48,7 +48,7 @@ function CircularProgressBar({
           r={radius}
           strokeWidth={strokeWidth}
           transform={`rotate(-90 ${centerPointCoordinate}  ${centerPointCoordinate})`} // To start at 0 o'clock
-        ></ProgressCircle>
+        />
         {children}
       </svg>
     </CircularProgressBarContainer>
