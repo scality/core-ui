@@ -30,12 +30,12 @@ export const InputContainer = styled.div<{
 
   input.sc-input-type {
     ${(props) => {
-      const { backgroundLevel1, danger, textSecondary, border } =
+      const { backgroundLevel1, statusCritical, textSecondary, border } =
         getTheme(props);
       return css`
         background-color: ${backgroundLevel1};
         color: ${textSecondary};
-        border: 1px solid ${props.error ? danger : border};
+        border: 1px solid ${props.error ? statusCritical : border};
       `;
     }};
     padding: 8px ${defaultTheme.padding.small};
