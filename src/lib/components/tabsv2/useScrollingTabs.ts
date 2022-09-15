@@ -136,7 +136,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
   });
   const scrollButtonEndRef = useRef<HTMLDivElement | null | undefined>(null);
   const scrollButtonStartRef = useRef<HTMLDivElement | null | undefined>(null);
-  const tabsListRef = useRef<any>(null);
+  const tabsListRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<any>(null);
 
   const scroll = (scrollValue: number) => {
@@ -153,7 +153,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
     const fullContainerSize = tabsListRef.current.clientWidth;
     const containerSize = tabsRef.current.clientWidth;
     let totalSize = 0;
-    const children: any = Array.from(tabsListRef.current.children);
+    const children = Array.from(tabsListRef.current.children);
 
     for (let i = 0; i < children.length; i += 1) {
       const tab = children[i];
