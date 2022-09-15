@@ -141,7 +141,7 @@ function ProgressBar({
   percentage = 50,
   size = 'base',
   color,
-  backgroundColor = defaultTheme.defaultTheme.dark.backgroundLevel2,
+  backgroundColor = defaultTheme.defaultTheme.darkRebrand.backgroundLevel2,
   topLeftLabel,
   topRightLabel,
   bottomLeftLabel,

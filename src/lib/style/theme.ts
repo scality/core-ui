@@ -29,7 +29,7 @@ export const grayLight = '#C2C8CC';
 export const grayLighter = '#D8DCDE';
 export const grayLightest = '#E9EBED';
 export const defaultTheme = {
-  dark: {
+  darkRebrand: {
     statusHealthy: '#0AADA6',
     statusWarning: '#F8F32B',
     statusCritical: '#E84855',
@@ -53,7 +53,7 @@ export const defaultTheme = {
   },
 };
 
-export const brand = defaultTheme.dark;
+export const brand = defaultTheme.darkRebrand;
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';

@@ -5,18 +5,18 @@ import { CoreUiThemeProvider } from '../src/lib/next';
 import { defaultTheme } from '../src/lib/style/theme';
 
 const themes = {
-  dark: defaultTheme.dark,
+  darkRebrand: defaultTheme.darkRebrand,
 };
 
 export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
-    defaultValue: 'dark',
+    defaultValue: 'darkRebrand',
     toolbar: {
       icon: 'circlehollow',
       // array of plain string values or MenuItem shape (see below)
-      items: ['dark'],
+      items: ['darkRebrand'],
     },
   },
 };
