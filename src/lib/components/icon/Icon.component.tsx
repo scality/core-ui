@@ -100,8 +100,6 @@ export const iconTable = {
   'Change-erasure': 'fas faExchangeAlt',
   'Circle-health': 'fas faCircle',
   'Circle-empty': 'far faCircle',
-  'Star-filled': 'fas faStar',
-  'Star-empty': 'far faStar',
   'Dot-circle': 'fas faDotCircle',
   'Check-circle': 'fas faCheckCircle',
   'Times-circle': 'fas faTimesCircle',

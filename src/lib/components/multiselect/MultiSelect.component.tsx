@@ -8,14 +8,11 @@ import { Icon } from '../icon/Icon.component';
 
 export type ItemProps = {
   selected?: boolean;
-  isFavorite?: boolean;
   label: string;
   description?: string;
   onSelect?: (arg0: any, arg1: any) => void;
   //on checkbox click
   onItemRemove?: (arg0: any, arg1: any) => void;
-  //on item remove button click
-  onFavoriteClick?: (arg0: any, arg1: any) => void; // on Favorite icon click
 };
 export type OptionProps = {
   label: string;
@@ -86,15 +83,7 @@ const MultiSelectItemLabel = styled.span`
 const MultiSelectItemDescription = styled.span``;
 
 function MultiSelectItem(props: ItemProps) {
-  const {
-    selected,
-    label,
-    description,
-    onItemRemove,
-    onSelect,
-    isFavorite,
-    onFavoriteClick,
-  } = props;
+  const { selected, label, description, onItemRemove, onSelect } = props;
   return (
     <MultiSelectItemContainer className="sc-multi-select-item">
       <MultiSelectItemLeft className="sc-multi-select-item-left">
@@ -102,13 +91,6 @@ function MultiSelectItem(props: ItemProps) {
           <Checkbox
             checked={selected}
             onChange={(event) => onSelect(label, event)}
-          />
-        )}
-        {typeof isFavorite === 'boolean' && onFavoriteClick && (
-          <Button
-            inverted={true}
-            icon={<Icon name={isFavorite ? 'Star-filled' : 'Star-empty'} />}
-            onClick={(event) => onFavoriteClick(label, event)}
           />
         )}
       </MultiSelectItemLeft>
@@ -137,15 +119,12 @@ function MultiSelectItem(props: ItemProps) {
 }
 
 function MultiSelectSearch(props: SearchProps) {
-  const { selectedOption, options, placeholder, onSelect, onAdd, ...rest } =
-    props;
+  const { selectedOption, onSelect, onAdd, ...rest } = props;
   return (
     <MultiSelectSearchContainer className="sc-multi-select-list-search">
       <Select
-        options={options}
         // @ts-ignore
         onChange={onSelect}
-        placeholder={placeholder}
         value={selectedOption}
         {...rest}
       />
