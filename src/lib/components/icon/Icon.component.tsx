@@ -24,6 +24,7 @@ export const iconTable = {
   Bucket: 'fas faGlassWhiskey',
   'Cloud-backend': 'fas faCloud',
   Datacenter: 'fas faWarehouse',
+  'Simple-user': 'fas faUser',
   User: 'fas faUserCog',
   Group: 'fas faUsers',
   Alert: 'fas faBell',
@@ -37,6 +38,7 @@ export const iconTable = {
   Edit: 'fas faEdit',
   Logs: 'far faFileAlt',
   Lock: 'fa faLock',
+  'Lock-open': 'fa faLockOpen',
   'Create-add': 'fas faPlus',
   Delete: 'fas faTrash',
   Save: 'fas faSave',
@@ -55,6 +57,7 @@ export const iconTable = {
   'Simple-upload': 'fas faUpload',
   Upload: 'fas faFileUpload',
   'Add-plus': 'fas faPlusSquare',
+  Minus: 'fas faMinus',
   'Remove-minus': 'fas faMinusSquare',
   Sort: 'fas faSort',
   'Sort-up': 'fas faSortUp',
@@ -81,6 +84,7 @@ export const iconTable = {
   'Chevron-right': 'fas faChevronRight',
   'Chevron-down': 'fas faChevronDown',
   'Chevron-up': 'fas faChevronUp',
+  'Angle-right': 'fas faAngleRight',
   'Angle-double-right': 'fas faAngleDoubleRight',
   Language: 'fas faLanguage',
   Theme: 'fas faPalette',
@@ -111,7 +115,8 @@ export const iconTable = {
   Pencil: 'fas faPencilAlt',
   Eye: 'fas faEye',
   Snowflake: 'fas faSnowflake',
-  key: 'fas faKey',
+  Key: 'fas faKey',
+  Filter: 'fas faFilter',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
