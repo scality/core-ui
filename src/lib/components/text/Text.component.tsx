@@ -36,6 +36,9 @@ const SmallerTextStyle = styled(BasicTextStyle)`
   line-height: 1.4;
   letter-spacing: 2%; // to be defined, percentage value is not valid
 `;
+const SmallerSecondaryTextStyle = styled(SmallerTextStyle)`
+  color: ${(props) => getTheme(props).textSecondary};
+`;
 const ChartTitleTextStyle = styled(BasicTextStyle)`
   letter-spacing: ${spacing.sp2};
 `;
@@ -83,6 +86,21 @@ export function LargeText({ children, ...rest }: Props) {
 export function SmallerText({ children, ...rest }: Props) {
   return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
 }
+export function SmallerSecondaryText({ children, ...rest }: Props) {
+  return <SmallerSecondaryTextStyle {...rest}>{children}</SmallerSecondaryTextStyle>;
+}
 export function ChartTitleText({ children, ...rest }: Props) {
   return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
 }
+export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
+  alignRight?: boolean;
+}>`
+  font-style: italic;
+  ${(props) =>
+    props.alignRight
+      ? `
+    text-align: right;
+    display: block;
+  `
+      : ''}
+`;
