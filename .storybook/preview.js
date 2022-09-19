@@ -38,6 +38,7 @@ export const parameters = {
   options: {
     storySort: {
       order: [
+        'Introduction',
         'Style',
         ['Color', 'Icons'],
         'Components',
