@@ -90,6 +90,7 @@ export const MultiSelectableContent = <
     onBottom,
     onBottomOffset,
     isAllRowsSelected,
+    toggleAllRowsSelected,
   } = useTableContext<DATA_ROW>();
 
   useEffect(() => {
@@ -97,6 +98,31 @@ export const MultiSelectableContent = <
       return oldHiddenColumns.filter((column) => column !== 'selection');
     });
   }, [setHiddenColumns]);
+
+  const handleMultipleSelectedRows = (
+    selectedRowIds,
+    rows,
+    currentRow,
+    currentRowIndex,
+  ) => {
+    const keys = Object.keys(selectedRowIds);
+
+    if (currentRow.isSelected) {
+      // we remove the item from the list
+      onMultiSelectionChanged(
+        rows.filter(
+          (row) => keys.includes(row.id) && rows[currentRowIndex].id !== row.id,
+        ),
+      );
+    } else {
+      // we add the new item from the list
+      onMultiSelectionChanged([
+        ...rows.filter((row) => keys.includes(row.id)),
+        rows[currentRowIndex],
+      ]);
+    }
+    currentRow.toggleRowSelected(!currentRow.isSelected);
+  };
 
   const {
     hasScrollbar,
@@ -127,31 +153,13 @@ export const MultiSelectableContent = <
          */
         style: { ...style },
       }),
-      onClick: () => {
-        if (onMultiSelectionChanged) {
-          const keys = Object.keys(selectedRowIds);
-
-          if (row.isSelected) {
-            // we remove the item from the list
-            onMultiSelectionChanged(
-              rows.filter(
-                (row) => keys.includes(row.id) && rows[index].id !== row.id,
-              ),
-            );
-          } else {
-            // we add the new item from the list
-            onMultiSelectionChanged([
-              ...rows.filter((row) => keys.includes(row.id)),
-              rows[index],
-            ]);
+      onClick: onSingleRowSelected
+        ? () => {
+            onSingleRowSelected(row);
+            toggleAllRowsSelected(false);
+            row.toggleRowSelected(true);
           }
-        }
-        row.toggleRowSelected(!row.isSelected);
-
-        if (onSingleRowSelected) {
-          onSingleRowSelected(row);
-        }
-      },
+        : () => handleMultipleSelectedRows(selectedRowIds, rows, row, index),
     };
 
     return (
@@ -175,7 +183,26 @@ export const MultiSelectableContent = <
           });
 
           if (cell.column.id === 'selection') {
-            return <div {...cellProps}>{cell.render('Cell')}</div>;
+            return (
+              <div
+                {...cellProps}
+                onClick={
+                  onSingleRowSelected
+                    ? (event) => {
+                        event.stopPropagation();
+                        handleMultipleSelectedRows(
+                          selectedRowIds,
+                          rows,
+                          row,
+                          index,
+                        );
+                      }
+                    : undefined
+                }
+              >
+                {cell.render('Cell')}
+              </div>
+            );
           }
 
           if (cell.value === undefined) {
