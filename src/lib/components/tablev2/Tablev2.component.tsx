@@ -69,6 +69,7 @@ type TableContextType<
   onBottomOffset?: number;
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
+  toggleAllRowsSelected: (value?: boolean) => void;
 };
 const TableContext = React.createContext<TableContextType>(null);
 
@@ -146,6 +147,7 @@ function Table<
     setAllFilters,
     setHiddenColumns,
     isAllRowsSelected,
+    toggleAllRowsSelected,
   } = useTable<DATA_ROW>(
     {
       columns: columns as Column<DATA_ROW>[],
@@ -214,6 +216,7 @@ function Table<
     onBottomOffset,
     setHiddenColumns,
     isAllRowsSelected,
+    toggleAllRowsSelected,
   };
   return (
     <TableContext.Provider
