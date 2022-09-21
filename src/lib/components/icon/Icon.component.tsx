@@ -231,7 +231,11 @@ function Icon({
   return (
     <>
       {(status === 'loading' || status === 'error') && (
-        <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
+        <DelayedFallback
+          aria-label={`${name} ${ariaLabel}`}
+          // @ts-ignore
+          onClick={rest.onClick}
+        >
           <Loader size="base" />
         </DelayedFallback>
       )}
