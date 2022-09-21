@@ -137,7 +137,6 @@ type Props = {
   size?: SizeProp;
   color?: IconColor;
   ariaLabel?: string;
-  onClick?: (event: Event) => void;
 };
 
 const DelayedFallback = ({
