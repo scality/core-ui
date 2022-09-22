@@ -252,19 +252,19 @@ const PageForm = ({
         <FixedHeader>
           <PaddedForHeaderAndFooterContent>
             <Text variant="Larger">{title}</Text>
+            <div>
+              {requireMode === 'partial' && (
+                <Text isEmphazed color="textSecondary">
+                  * are required fields
+                </Text>
+              )}
+            </div>
           </PaddedForHeaderAndFooterContent>
         </FixedHeader>
 
         <ScrollArea>
           <PaddedContent>
-            {banner}
-            {requireMode === 'partial' && (
-              <div style={{ paddingBottom: `${spacing.r24}` }}>
-                <Text isEmphazed color="textSecondary">
-                  * are required fields
-                </Text>
-              </div>
-            )}
+            <div style={{ paddingBottom: `${spacing.r16}` }}>{banner}</div>
             <Stack direction="vertical" withSeparators gap="r24">
               {Children.toArray(children)}
             </Stack>
