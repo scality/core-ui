@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
+import { defaultTheme } from '../../style/theme';
 import { getTheme } from '../../utils';
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
@@ -124,4 +125,45 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
     display: block;
   `
       : ''}
+`;
+
+export const Text = styled.span<{
+  variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger';
+  color?: keyof typeof defaultTheme.darkRebrand;
+  isEmphazed?: boolean;
+}>`
+  color: ${(props) => getTheme(props)[props.color || 'textPrimary']};
+  ${(props) =>
+    props.variant === 'Basic' || props.variant === 'ChartTitle'
+      ? `
+  font-size: 1rem;
+  line-height: ${spacing.r24};
+  `
+      : props.variant === 'Larger'
+      ? `
+  font-size: 1.43rem;
+  line-height: 1.5;
+      `
+      : props.variant === 'Smaller'
+      ? `
+  font-size: 0.71rem;
+  line-height: 1.4;
+  letter-spacing: 2%;// to be defined, percentage value is not valid
+      `
+      : `
+  font-size: 1rem;
+  line-height: ${spacing.r24};
+      `}
+
+  ${(props) =>
+    props.isEmphazed
+      ? `
+  font-weight: 700;
+      `
+      : `
+  font-weight: 400;
+      `}
+    
+  ${(props) =>
+    props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
 `;

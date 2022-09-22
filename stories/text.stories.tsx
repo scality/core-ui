@@ -7,9 +7,11 @@ import {
   StatusText,
   SmallerText,
   ChartTitleText,
+  Text,
 } from '../src/lib/components/text/Text.component';
 import { Wrapper } from './common';
 import styled from 'styled-components';
+import { Stack } from '../src/lib';
 const TextWrapper = styled(Wrapper)`
   min-height: 0;
 `;
@@ -90,6 +92,26 @@ export const chartTitleText = ({}: any) => {
   return (
     <TextWrapper>
       <ChartTitleText>chart title text</ChartTitleText>
+    </TextWrapper>
+  );
+};
+// eslint-disable-next-line
+export const ItsJustText = ({}) => {
+  return (
+    <TextWrapper>
+      <Stack direction="vertical">
+        <Text>Basic</Text>
+        <Text variant="Basic">Explicitely basic</Text>
+        <Text variant="ChartTitle">Chart title</Text>
+        <Text variant="Larger">Larger</Text>
+        <Text variant="Smaller">Smaller</Text>
+        <Text variant="Basic" color="textSecondary">
+          With secondary color
+        </Text>
+        <Text variant="Basic" color="textSecondary" isEmphazed>
+          With secondary color and emphazed
+        </Text>
+      </Stack>
     </TextWrapper>
   );
 };
