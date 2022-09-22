@@ -162,3 +162,21 @@ export const Text = styled.span<{
   ${(props) =>
     props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
 `;
+
+export const Link = styled.a`
+  font-size: 1rem;
+  line-height: ${spacing.r24};
+  color: ${(props) => getTheme(props).textLink};
+  cursor: pointer;
+  text-decoration-line: none;
+  width: fit-content;
+  &:hover {
+    text-decoration-line: underline;
+    color: ${(props) => getTheme(props).selectedActive};
+  }
+  // :focus-visible is the keyboard-only version of :focus
+  &:focus-visible {
+    outline: dashed ${spacing.r2} ${(props) => getTheme(props).selectedActive};
+    outline-offset: ${spacing.r2};
+  }
+`

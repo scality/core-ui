@@ -8,6 +8,7 @@ import {
   SmallerText,
   ChartTitleText,
   Text,
+  Link,
 } from '../src/lib/components/text/Text.component';
 import { Wrapper } from './common';
 import styled from 'styled-components';
@@ -96,7 +97,7 @@ export const chartTitleText = ({}: any) => {
   );
 };
 // eslint-disable-next-line
-export const ItsJustText = ({}) => {
+export const TextStory = ({}) => {
   return (
     <TextWrapper>
       <Stack direction="vertical">
@@ -111,6 +112,10 @@ export const ItsJustText = ({}) => {
         <Text variant="Basic" color="textSecondary" isEmphazed>
           With secondary color and emphazed
         </Text>
+        <Text variant="Smaller" color="statusCritical">
+          With status color
+        </Text>
+        <Link href='#'>Link</Link>
       </Stack>
     </TextWrapper>
   );
