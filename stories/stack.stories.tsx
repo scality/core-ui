@@ -14,7 +14,7 @@ export default {
   title: 'Components/Spacing Utils',
   component: Stack,
 };
-export const StackStory = () => {
+export const StackStory = ({}) => {
   return (
     <>
       <h2>Banner example</h2>
@@ -74,7 +74,7 @@ export const StackStory = () => {
   );
 };
 
-export const WrapStory = () => {
+export const WrapStory = ({}) => {
   return (
     <div
       style={{

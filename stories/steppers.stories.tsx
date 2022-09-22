@@ -84,7 +84,7 @@ export default {
   title: 'Components/Progress & loading/Steppers',
   component: Steppers,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Default Steppers </Title>

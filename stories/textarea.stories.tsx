@@ -6,7 +6,7 @@ export default {
   title: 'Components/Input/TextArea',
   component: TextArea,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Text Area without label</Title>

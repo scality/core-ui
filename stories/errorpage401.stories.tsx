@@ -5,7 +5,7 @@ export default {
   title: 'Components/Navigation/ErrorPages/401',
   component: ErrorPage401,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <div
@@ -21,7 +21,7 @@ export const Default = () => {
     </Wrapper>
   );
 };
-export const WithLocale = () => {
+export const WithLocale = ({}) => {
   return (
     <Wrapper>
       <div

@@ -6,7 +6,7 @@ export default {
   title: 'Components/Chips',
   component: Chips,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper className="storybook-chips">
       <Title>Basic Chip</Title>

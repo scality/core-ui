@@ -11,7 +11,7 @@ const Demo = styled.div`
   overflow: auto;
   color: white;
 `;
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Wrapper for custom scrollbar</Title>

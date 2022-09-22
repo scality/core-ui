@@ -35,7 +35,7 @@ export default {
   title: 'Components/Chart/SparkLine',
   component: SparkLine,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Vege-Lite sparkline chart demo</Title>

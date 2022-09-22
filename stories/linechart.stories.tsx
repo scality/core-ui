@@ -255,7 +255,7 @@ export default {
   title: 'Components/Chart/LineChart',
   component: LineChart,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Vega-Lite line chart demo</Title>

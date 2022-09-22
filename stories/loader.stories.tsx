@@ -10,7 +10,7 @@ export default info;
 
 const sizes = ['base', 'large', 'larger', 'huge', 'massive'];
 
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       {sizes.map((size) => (

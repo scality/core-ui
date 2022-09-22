@@ -18,7 +18,7 @@ const HighlightBorder = styled.div`
   }
 `;
 
-export const margin = () => {
+export const margin = ({}) => {
   return (
     <HighlightBorder>
       <Box m={0}>Props m 0 = 0</Box>
@@ -39,7 +39,7 @@ export const margin = () => {
     </HighlightBorder>
   );
 };
-export const font = () => {
+export const font = ({}) => {
   return (
     <HighlightBorder>
       <Box fontSize="smaller">Smaller font</Box>
@@ -52,7 +52,7 @@ export const font = () => {
     </HighlightBorder>
   );
 };
-export const position = () => {
+export const position = ({}) => {
   return (
     <HighlightBorder>
       <Box display="flex" justifyContent="space-between" fontSize="smaller">
@@ -91,7 +91,7 @@ export const position = () => {
     </HighlightBorder>
   );
 };
-export const colors = () => {
+export const colors = ({}) => {
   return (
     <HighlightBorder>
       <Box color="red">red</Box>

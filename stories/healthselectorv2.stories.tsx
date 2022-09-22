@@ -14,7 +14,7 @@ export default {
 const HealthSelectorWrapper = styled.div`
   width: 205px;
 `;
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Basic usage</Title>

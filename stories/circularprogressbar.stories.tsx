@@ -5,7 +5,7 @@ export default {
   title: 'Components/Progress & loading/CircularProgressBar',
   component: CircularProgressBar,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>With Default Color</Title>

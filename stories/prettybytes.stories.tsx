@@ -31,7 +31,7 @@ const generatePrettyBytes = (decimals) =>
     </div>
   ));
 
-export const Default = () => (
+export const Default = ({}) => (
   <Wrapper>
     <Title>Pretty Bytes</Title>
     <BytesWrapper>{generatePrettyBytes(0)}</BytesWrapper>

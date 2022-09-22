@@ -84,7 +84,7 @@ export default {
   component: Layout,
   decorators: [withKnobs],
 };
-export const SidebarDocked = () => {
+export const SidebarDocked = ({}) => {
   const expanded = boolean('Sidebar Expanded', false);
   const sidebar = {
     expanded,
@@ -101,7 +101,7 @@ export const SidebarDocked = () => {
     </Layout>
   );
 };
-export const SidebarExpanded = () => {
+export const SidebarExpanded = ({}) => {
   const sidebar = {
     expanded: true,
     actions: sideBarActions,
@@ -117,7 +117,7 @@ export const SidebarExpanded = () => {
     </Layout>
   );
 };
-export const SidebarWithToggle = () => {
+export const SidebarWithToggle = ({}) => {
   const [expanded, setExpanded] = useState(false);
   const sidebar = {
     expanded: expanded,
@@ -134,7 +134,7 @@ export const SidebarWithToggle = () => {
     </Layout>
   );
 };
-export const HoverableSidebar = () => {
+export const HoverableSidebar = ({}) => {
   const [expanded, setExpanded] = useState(false);
   const sidebar = {
     expanded: expanded,

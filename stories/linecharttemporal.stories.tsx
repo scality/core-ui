@@ -13,7 +13,7 @@ export default {
   title: 'Components/v2/LineTemporalChart',
   component: LineTemporalChart,
 };
-export const Default = () => {
+export const Default = ({}) => {
   const [tooltipText, setTooltipText] = useState('initial text');
   useEffect(() => {
     setInterval(() => {

@@ -3,13 +3,12 @@ import { action } from '@storybook/addon-actions';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title } from './common';
 import { CopyButton } from '../src/lib/next';
-//eslint-disable-next-line
+
 export default {
   title: 'Components/v2/Button',
   component: Button,
 };
 
-//eslint-disable-next-line
 export const Default = ({}) => {
   return (
     <Wrapper className="storybook-button">
@@ -180,7 +179,6 @@ export const Default = ({}) => {
   );
 };
 
-//eslint-disable-next-line
 export const CopyButtonStory = ({}) => {
   return <Wrapper className="storybook-button">
     <Title>Ghost: Without label</Title>

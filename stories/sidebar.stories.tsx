@@ -23,7 +23,7 @@ export default {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
 };
-export const Default = () => {
+export const Default = ({}) => {
   const [expandedWithToggle, setExpandedWithToggle] = useState(false);
   const [expandedHoverable, setExpandedHoverable] = useState(false);
   return (

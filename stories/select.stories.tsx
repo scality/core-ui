@@ -18,7 +18,7 @@ export default {
   title: 'Components/Selector/Select',
   component: Select,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Default</Title>

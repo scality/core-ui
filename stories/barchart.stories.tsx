@@ -89,7 +89,7 @@ export default {
   title: 'Components/Chart/BarChart',
   component: BarChart,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <SyncedCursorCharts>

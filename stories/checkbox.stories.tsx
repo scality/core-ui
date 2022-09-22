@@ -6,7 +6,7 @@ export default {
   title: 'Components/Checkbox',
   component: Checkbox,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Checkbox checked</Title>

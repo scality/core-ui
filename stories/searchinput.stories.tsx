@@ -6,7 +6,7 @@ export default {
   title: 'Components/Input/SearchInput',
   component: SearchInput,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Default</Title>

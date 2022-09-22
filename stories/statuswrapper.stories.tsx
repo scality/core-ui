@@ -19,7 +19,7 @@ export default {
   title: 'Components/StatusWrapper',
   component: StatusWrapper,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Status Wrapper</Title>

@@ -31,7 +31,7 @@ export default {
       },
     },
   },
-}; // eslint-disable-next-line
+}; 
 
 export const basicText = ({}: any) => {
   return (
@@ -40,7 +40,7 @@ export const basicText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const secondaryText = ({}: any) => {
   return (
     <TextWrapper>
@@ -48,7 +48,7 @@ export const secondaryText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const largerText = ({}: any) => {
   return (
     <TextWrapper>
@@ -56,7 +56,7 @@ export const largerText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const emphaseText = ({}: any) => {
   return (
     <TextWrapper>
@@ -64,7 +64,7 @@ export const emphaseText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const statusText = ({}: any) => {
   return (
     <TextWrapper>
@@ -80,7 +80,7 @@ export const statusText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const smallerText = ({}: any) => {
   return (
     <TextWrapper>
@@ -88,7 +88,7 @@ export const smallerText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const chartTitleText = ({}: any) => {
   return (
     <TextWrapper>
@@ -96,7 +96,7 @@ export const chartTitleText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const TextStory = ({}) => {
   return (
     <TextWrapper>

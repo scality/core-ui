@@ -8,7 +8,7 @@ export default {
   title: 'Components/Notification/Modal',
   component: Modal,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Modal
@@ -43,7 +43,7 @@ export const Default = () => {
   );
 };
 
-const Action = () => {
+const Action = ({}) => {
   const [displayed, setDisplayed] = useState(false);
   return (
     <>
@@ -83,7 +83,7 @@ const Action = () => {
   );
 };
 
-export const WithinTable = () => {
+export const WithinTable = ({}) => {
   const columns = [
     {
       Header: 'First Name',

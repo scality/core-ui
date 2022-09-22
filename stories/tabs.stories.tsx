@@ -7,7 +7,7 @@ export default {
   title: 'Components/Navigation/Tabs',
   component: Tabs,
 };
-export const Default = () => {
+export const Default = ({}) => {
   const [tabs, setTabs] = useState([
     {
       selected: true,

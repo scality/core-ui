@@ -5,7 +5,7 @@ export default {
   title: 'Components/Icon',
   component: Icon,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Customized Icons</Title>

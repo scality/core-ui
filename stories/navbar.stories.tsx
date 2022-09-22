@@ -108,7 +108,7 @@ export default {
   title: 'Components/Navigation/Navbar',
   component: Navbar,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <div>
       <h3>Navbar with toggle</h3>

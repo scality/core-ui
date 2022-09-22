@@ -18,7 +18,7 @@ export default {
   component: Form,
 };
 
-export const PageForm = () => {
+export const PageForm = ({}) => {
   return (
     <div
       style={{
@@ -160,7 +160,7 @@ export const PageForm = () => {
   );
 };
 
-export const AllRequiredPageForm = () => {
+export const AllRequiredPageForm = ({}) => {
   return (
     <div
       style={{
@@ -213,7 +213,7 @@ export const AllRequiredPageForm = () => {
   );
 };
 
-export const TabForm = () => {
+export const TabForm = ({}) => {
   return (
     <div
       style={{

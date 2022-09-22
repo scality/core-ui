@@ -5,7 +5,7 @@ export default {
   title: 'Components/TextBadge',
   component: TextBadge,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Text Badges</Title>

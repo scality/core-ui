@@ -9,7 +9,7 @@ const options = Array.from(new Array(1000), (_, index) => ({
   'data-cy': `Item_${index}`,
 }));
 
-const ExampleInput = () => {
+const ExampleInput = ({}) => {
   const CustomInput = styled.div`
     .sc-input-error {
       width: 200px;
@@ -131,6 +131,6 @@ export default {
   title: 'Components/Input/Input',
   component: Input,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return <ExampleInput />;
 };
