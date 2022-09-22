@@ -134,12 +134,7 @@ export const Text = styled.span<{
 }>`
   color: ${(props) => getTheme(props)[props.color || 'textPrimary']};
   ${(props) =>
-    props.variant === 'Basic' || props.variant === 'ChartTitle'
-      ? `
-  font-size: 1rem;
-  line-height: ${spacing.r24};
-  `
-      : props.variant === 'Larger'
+    props.variant === 'Larger'
       ? `
   font-size: 1.43rem;
   line-height: 1.5;

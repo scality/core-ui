@@ -11,7 +11,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Banner } from '../src/lib/components/banner/Banner.component';
-import { SmallerSecondaryText } from '../src/lib/components/text/Text.component';
+import { Text } from '../src/lib/components/text/Text.component';
 
 export default {
   title: 'Components/Form',
@@ -132,11 +132,10 @@ export const PageForm = () => {
                     />
                     <label htmlFor="locktype-governance">Governance</label>
                   </Stack>
-
-                  <SmallerSecondaryText>
+                  <Text isEmphazed color="textSecondary" variant="Smaller">
                     An user with a specific IAM permissions can overwrite/delete
                     protected object versions during the retention period.
-                  </SmallerSecondaryText>
+                  </Text>
                 </Stack>
                 <Stack>
                   <input
@@ -147,10 +146,10 @@ export const PageForm = () => {
                   />
                   <label htmlFor="locktype-compliance">Compliance</label>
                 </Stack>
-                <SmallerSecondaryText>
+                <Text isEmphazed color="textSecondary" variant="Smaller">
                   No one can overwrite protected object versions during the
                   retention period.
-                </SmallerSecondaryText>
+                </Text>
               </Stack>
             }
             required={true}

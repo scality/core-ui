@@ -16,13 +16,7 @@ import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
 import { IconHelp } from '../IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
-import {
-  BasicText,
-  EmphaseText,
-  GentleEmphaseSecondaryText,
-  LargerText,
-  SmallerEmphaseText,
-} from '../text/Text.component';
+import { Text } from '../text/Text.component';
 
 const DESCRIPTION_PREFIX = 'describe-';
 
@@ -148,11 +142,11 @@ const FormGroup = ({
         >
           <Stack>
             <label htmlFor={id} ref={labelRef}>
-              <BasicText>
+              <Text>
                 {label}
                 {requireMode !== 'all' && required && ' *'}
                 {requireMode === 'all' && !required && ' (optional)'}
-              </BasicText>
+              </Text>
             </label>
             {labelHelpTooltip && (
               <IconHelp
@@ -168,24 +162,33 @@ const FormGroup = ({
         >
           {content}
           {error ? (
-            <SmallerEmphaseText
+            <Text
+              variant="Smaller"
+              color="statusCritical"
+              isEmphazed
               id={`${DESCRIPTION_PREFIX}${id}`}
-              status="critical"
             >
               {error}
-            </SmallerEmphaseText>
+            </Text>
           ) : help ? (
             <div
               style={{
                 opacity: disabled ? 0.5 : 1,
               }}
             >
-              <SmallerEmphaseText id={`${DESCRIPTION_PREFIX}${id}`}>
+              <Text
+                variant="Smaller"
+                color="textSecondary"
+                isEmphazed
+                id={`${DESCRIPTION_PREFIX}${id}`}
+              >
                 {help}
-              </SmallerEmphaseText>
+              </Text>
             </div>
           ) : (
-            <SmallerEmphaseText>&nbsp;</SmallerEmphaseText>
+            <Text variant="Smaller" isEmphazed={true}>
+              &nbsp;
+            </Text>
           )}
         </Stack>
       </Box>
@@ -218,9 +221,9 @@ const FormSection = ({
         {title && (
           <Stack direction="horizontal" gap="r8">
             {icon && <Icon name={icon}></Icon>}
-            <EmphaseText>
+            <Text isEmphazed>
               {groupNotOptional ? `${title}` : `${title} (optional)`}
-            </EmphaseText>
+            </Text>
             {helpTooltip && (
               <IconHelp
                 tooltipMessage={helpTooltip}
@@ -248,7 +251,7 @@ const PageForm = ({
       <PageFormWrapper>
         <FixedHeader>
           <PaddedForHeaderAndFooterContent>
-            <LargerText>{title}</LargerText>
+            <Text variant="Larger">{title}</Text>
           </PaddedForHeaderAndFooterContent>
         </FixedHeader>
 
@@ -257,9 +260,9 @@ const PageForm = ({
             {banner}
             {requireMode === 'partial' && (
               <div style={{ paddingBottom: `${spacing.r24}` }}>
-                <GentleEmphaseSecondaryText>
+                <Text isEmphazed color="textSecondary">
                   * are required fields
-                </GentleEmphaseSecondaryText>
+                </Text>
               </div>
             )}
             <Stack direction="vertical" withSeparators gap="r24">
