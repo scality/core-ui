@@ -1,16 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { spacing } from '../../spacing';
 import { getTheme } from '../../utils';
-import { spacing } from '../../style/theme';
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
   children: React.ReactNode | string;
   status?: Status;
+  id?: string;
 };
 const BasicTextStyle = styled.span`
   color: ${(props) => getTheme(props).textPrimary};
   font-size: 1rem;
-  line-height: ${spacing.sp20};
+  line-height: ${spacing.r24};
   font-weight: 400;
 `;
 const SecondaryTextStyle = styled(BasicTextStyle)`
@@ -23,7 +24,6 @@ const LargerTextStyle = styled(BasicTextStyle)`
 const EmphaseTextStyle = styled(BasicTextStyle)`
   font-weight: 700;
 `;
-// TODO
 const StatusTextStyle = styled(BasicTextStyle)<{ statusColor: string }>`
   color: ${(props) => getTheme(props)[`${props.statusColor}`]};
 `;
@@ -39,22 +39,7 @@ const SmallerTextStyle = styled(BasicTextStyle)`
 const SmallerSecondaryTextStyle = styled(SmallerTextStyle)`
   color: ${(props) => getTheme(props).textSecondary};
 `;
-const ChartTitleTextStyle = styled(BasicTextStyle)`
-  letter-spacing: ${spacing.sp2};
-`;
-export function BasicText({ children, ...rest }: Props) {
-  return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
-}
-export function SecondaryText({ children, ...rest }: Props) {
-  return <SecondaryTextStyle {...rest}>{children}</SecondaryTextStyle>;
-}
-export function LargerText({ children, ...rest }: Props) {
-  return <LargerTextStyle {...rest}>{children}</LargerTextStyle>;
-}
-export function EmphaseText({ children, ...rest }: Props) {
-  return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
-}
-export function StatusText({ children, status, ...rest }: Props) {
+const getStatusColor = (status: Status) => {
   let statusColor: string;
 
   switch (status) {
@@ -73,7 +58,32 @@ export function StatusText({ children, status, ...rest }: Props) {
     default:
       statusColor = 'textSecondary';
   }
+  return statusColor;
+};
 
+export const SmallerEmphaseTextStyle = styled(SmallerTextStyle)<{
+  statusColor: string;
+}>`
+  font-weight: 700;
+  color: ${(props) => getTheme(props)[`${props.statusColor}`]};
+`;
+const ChartTitleTextStyle = styled(BasicTextStyle)`
+  letter-spacing: ${spacing.r2};
+`;
+export function BasicText({ children, ...rest }: Props) {
+  return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
+}
+export function SecondaryText({ children, ...rest }: Props) {
+  return <SecondaryTextStyle {...rest}>{children}</SecondaryTextStyle>;
+}
+export function LargerText({ children, ...rest }: Props) {
+  return <LargerTextStyle {...rest}>{children}</LargerTextStyle>;
+}
+export function EmphaseText({ children, ...rest }: Props) {
+  return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
+}
+export function StatusText({ children, status, ...rest }: Props) {
+  const statusColor = getStatusColor(status);
   return (
     <StatusTextStyle statusColor={statusColor} {...rest}>
       {children}
@@ -87,8 +97,19 @@ export function SmallerText({ children, ...rest }: Props) {
   return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
 }
 export function SmallerSecondaryText({ children, ...rest }: Props) {
-  return <SmallerSecondaryTextStyle {...rest}>{children}</SmallerSecondaryTextStyle>;
+  return (
+    <SmallerSecondaryTextStyle {...rest}>{children}</SmallerSecondaryTextStyle>
+  );
 }
+export function SmallerEmphaseText({ children, status, ...rest }: Props) {
+  const statusColor = getStatusColor(status);
+  return (
+    <SmallerEmphaseTextStyle statusColor={statusColor} {...rest}>
+      {children}
+    </SmallerEmphaseTextStyle>
+  );
+}
+
 export function ChartTitleText({ children, ...rest }: Props) {
   return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
 }

@@ -92,14 +92,12 @@ export const Stack = ({
   );
 };
 
-export const Wrap = ({children}: {children: ReactNode[];}) => {
-  return <Box display={'flex'} justifyContent="space-between">
-    {Children.map(children, (node) => {
-        return (
-          <>
-            {node}
-          </>
-        );
+export const Wrap = ({ children }: { children: ReactNode[] }) => {
+  return (
+    <Box display={'flex'} justifyContent="space-between">
+      {Children.map(children, (node) => {
+        return <>{node}</>;
       })}
-  </Box>;
+    </Box>
+  );
 };
