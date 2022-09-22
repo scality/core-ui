@@ -2,11 +2,15 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title } from './common';
+import { CopyButton } from '../src/lib/next';
+//eslint-disable-next-line
 export default {
   title: 'Components/v2/Button',
   component: Button,
 };
-export const Default = () => {
+
+//eslint-disable-next-line
+export const Default = ({}) => {
   return (
     <Wrapper className="storybook-button">
       <Title>Button default</Title>
@@ -175,3 +179,18 @@ export const Default = () => {
     </Wrapper>
   );
 };
+
+//eslint-disable-next-line
+export const CopyButtonStory = ({}) => {
+  return <Wrapper className="storybook-button">
+    <Title>Ghost: Without label</Title>
+    <CopyButton textToCopy='test' />
+    <Title>Ghost: With label</Title>
+    <CopyButton label='test' textToCopy='test' />
+
+    <Title>Outline: Without label</Title>
+    <CopyButton variant='outline' textToCopy='test' />
+    <Title>Outline: With label</Title>
+    <CopyButton variant='outline' label='test' textToCopy='test' />
+  </Wrapper>
+}
