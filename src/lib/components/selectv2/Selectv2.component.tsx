@@ -18,15 +18,18 @@ const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
 const NOPT_SEARCH = 8;
 export type OptionProps = {
+  title?: string;
   disabled?: boolean;
   icon?: React.ReactNode;
   children?: React.ReactNode;
   value: string;
 };
-export function Option(_: OptionProps) {
+export function Option(_: OptionProps): JSX.Element {
   const context = useContext(SelectContext);
   if (!context)
     throw new Error('Option cannot be rendered outside the Select component');
+  // Type checking does not support string, but it's supported by Option.
+  // @ts-ignore
   return _.children;
 }
 
@@ -224,6 +227,7 @@ const ValueContainer = ({ children, ...props }) => {
 };
 
 export type SelectProps = {
+  id: string;
   placeholder?: string;
   disabled?: boolean;
   children?: React.ReactNode;
