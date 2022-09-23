@@ -19,16 +19,18 @@ import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component
 import { Text } from '../text/Text.component';
 
 const DESCRIPTION_PREFIX = 'describe-';
+const maxWidthTooltip = { maxWidth: '20rem' };
 
 type FormProps = HTMLProps<HTMLFormElement> & {
-  layout: 'page' | 'tab';
   children: ReactNode | ReactNode[];
   requireMode?: 'all' | 'partial';
   leftActions?: ReactNode;
   rightActions?: ReactNode;
-  title?: string;
   banner?: ReactNode;
 };
+
+type PageFormProps = { layout: { kind: 'page'; title: string } } & FormProps;
+type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
 const PageFormWrapper = styled.form`
   display: flex;
@@ -63,16 +65,24 @@ const ScrollArea = styled(BasicPageLayout)`
   overflow-y: auto;
 `;
 
+const LabelContext =
+  createContext<{
+    maxLabelWidth: number;
+    setMaxLabelWidth: (setter: (value: number) => number) => void;
+  } | null>(null);
+
+const RequireModeContext = createContext<'all' | 'partial'>('partial');
+
 type ContentProps = {
   helper: string;
   error: string;
 };
 
 type FormGroupProps = {
-  direction: 'vertical' | 'horizontal';
   label: string;
   id: string;
   content: ReactElement<ContentProps>;
+  direction?: 'vertical' | 'horizontal';
   labelHelpTooltip?: string;
   help?: string;
   error?: string;
@@ -81,15 +91,8 @@ type FormGroupProps = {
   disabled?: boolean;
 };
 
-const LabelContext = createContext({
-  maxLabelWidth: 0,
-  setMaxLabelWidth: (setter: (value: number) => number) => {},
-});
-
-const RequireModeContext = createContext<'all' | 'partial'>('partial');
-
 const FormGroup = ({
-  direction,
+  direction = 'horizontal',
   label,
   id,
   labelHelpTooltip,
@@ -97,7 +100,7 @@ const FormGroup = ({
   help,
   error,
   required,
-  helpErrorPosition,
+  helpErrorPosition = 'right',
   disabled,
 }: FormGroupProps) => {
   const { maxLabelWidth, setMaxLabelWidth } = useContext(LabelContext);
@@ -118,25 +121,21 @@ const FormGroup = ({
   }, [labelRef]);
 
   const value = {
-    [id]: {
-      disabled: disabled || false,
-      error: error || null,
-    },
+    disabled: disabled || false,
+    error: error || null,
   };
 
   return (
     <FieldContext.Provider value={value}>
       <Box
-        display={'flex'}
+        display="flex"
         flexDirection={direction === 'horizontal' ? 'row' : 'column'}
-        alignItems={'baseline'}
+        alignItems="baseline"
         gap={direction === 'horizontal' ? spacing['r32'] : spacing['r4']}
       >
         <div
           style={{
-            width: `${
-              maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`
-            }`,
+            width: maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
             opacity: disabled ? 0.5 : 1,
           }}
         >
@@ -151,7 +150,7 @@ const FormGroup = ({
             {labelHelpTooltip && (
               <IconHelp
                 tooltipMessage={labelHelpTooltip}
-                overlayStyle={{ maxWidth: '20rem' }}
+                overlayStyle={maxWidthTooltip}
               />
             )}
           </Stack>
@@ -186,7 +185,7 @@ const FormGroup = ({
               </Text>
             </div>
           ) : (
-            <Text variant="Smaller" isEmphazed={true}>
+            <Text variant="Smaller" isEmphazed>
               &nbsp;
             </Text>
           )}
@@ -198,18 +197,18 @@ const FormGroup = ({
 
 type FormSectionProps = {
   children: ReactElement<FormGroupProps> | ReactElement<FormGroupProps>[];
-  title?: string;
-  icon?: IconName;
-  helpTooltip?: string;
+  title?: { name: string; icon?: IconName; helpTooltip?: string };
+  forceLabelWidth?: number;
 };
 
 const FormSection = ({
   children,
   title,
-  icon,
-  helpTooltip,
+  forceLabelWidth,
 }: FormSectionProps) => {
-  const [maxLabelWidth, setMaxLabelWidth] = useState(0);
+  const [maxLabelWidth, setMaxLabelWidth] = useState<number>(
+    forceLabelWidth || 0,
+  );
   //If all the formgroup are not required, add `(optional)` next to form section title.
   const groupNotOptional = Children.toArray(children).find(
     (child: ReactElement<FormGroupProps>) => child.props.required === true,
@@ -220,14 +219,14 @@ const FormSection = ({
       <Stack direction="vertical" gap="r12">
         {title && (
           <Stack direction="horizontal" gap="r8">
-            {icon && <Icon name={icon}></Icon>}
+            {title.icon && <Icon name={title.icon} />}
             <Text isEmphazed>
-              {groupNotOptional ? `${title}` : `${title} (optional)`}
+              {groupNotOptional ? `${title.name}` : `${title.name} (optional)`}
             </Text>
-            {helpTooltip && (
+            {title.helpTooltip && (
               <IconHelp
-                tooltipMessage={helpTooltip}
-                overlayStyle={{ maxWidth: '20rem' }}
+                tooltipMessage={title.helpTooltip}
+                overlayStyle={maxWidthTooltip}
               />
             )}
           </Stack>
@@ -239,19 +238,19 @@ const FormSection = ({
 };
 
 const PageForm = ({
-  title,
+  layout,
   leftActions,
   rightActions,
   children,
   banner,
-}: Omit<FormProps, 'layout'>) => {
+}: PageFormProps) => {
   const requireMode = useContext(RequireModeContext);
   return (
     <ScrollbarWrapper>
       <PageFormWrapper>
         <FixedHeader>
           <PaddedForHeaderAndFooterContent>
-            <Text variant="Larger">{title}</Text>
+            <Text variant="Larger">{layout.title}</Text>
             <div>
               {requireMode === 'partial' && (
                 <Text isEmphazed color="textSecondary">
@@ -289,7 +288,7 @@ const TabForm = ({
   rightActions,
   children,
   banner,
-}: Omit<FormProps, 'layout'>) => {
+}: TabFormProps) => {
   return (
     <ScrollbarWrapper>
       <PageFormWrapper>
@@ -315,13 +314,17 @@ const TabForm = ({
   );
 };
 
-const Form = ({ layout, requireMode, ...formProps }: FormProps) => {
+const Form = ({
+  layout,
+  requireMode,
+  ...formProps
+}: TabFormProps | PageFormProps) => {
   return (
     <RequireModeContext.Provider value={requireMode}>
-      {layout === 'page' ? (
-        <PageForm {...formProps}></PageForm>
+      {layout.kind === 'page' ? (
+        <PageForm layout={layout} {...formProps}></PageForm>
       ) : (
-        <TabForm {...formProps}></TabForm>
+        <TabForm layout={layout} {...formProps}></TabForm>
       )}
     </RequireModeContext.Provider>
   );
@@ -332,15 +335,15 @@ type FieldState = {
   disabled?: boolean;
   required?: boolean;
 };
-const FieldContext = createContext<null | Record<string, FieldState>>(null);
+const FieldContext = createContext<null | FieldState>(null);
 
-const useFieldContext = (id: string) => {
+const useFieldContext = () => {
   const fieldContext = useContext(FieldContext);
-  if (!fieldContext || !fieldContext[id]) {
+  if (!fieldContext) {
     return { isContextAvailable: false };
   }
 
-  return { ...fieldContext[id], isContextAvailable: true };
+  return { ...fieldContext, isContextAvailable: true };
 };
 
 export { Form, FormSection, FormGroup, useFieldContext, DESCRIPTION_PREFIX };

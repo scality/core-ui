@@ -14,3 +14,4 @@ export { Select } from './components/selectv2/Selectv2.component';
 export { Healthselector } from './components/healthselectorv2/HealthSelector.component';
 export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export { Box } from './components/box/Box';
+export { Input } from './components/inputv2/inputv2';

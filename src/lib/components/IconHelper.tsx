@@ -18,6 +18,6 @@ export const IconHelp = ({
     placement={placement}
     overlayStyle={overlayStyle}
   >
-    <Icon name="Info" color="buttonSecondary"></Icon>
+    <Icon name="Info" color="buttonSecondary" />
   </Tooltip>
 );

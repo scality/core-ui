@@ -85,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       isContextAvailable,
       disabled: disabledFromFieldContext,
       error: errorFromFieldContext,
-    } = useFieldContext(id);
+    } = useFieldContext();
     placeholder = placeholder ? `Example: ${placeholder}` : undefined;
 
     return (

@@ -28,8 +28,7 @@ export const PageForm = ({}) => {
       }}
     >
       <Form
-        title="My form"
-        layout="page"
+        layout={{ kind: 'page', title: 'My form' }}
         requireMode="partial"
         rightActions={
           <Stack gap={'r16'}>
@@ -47,21 +46,23 @@ export const PageForm = ({}) => {
             icon={<Icon name="Exclamation-triangle" />}
             title={'Error'}
           >
-            {'There is an error.'}
+            There is an error
           </Banner>
         }
       >
         <FormSection
-          title="First part entity data"
-          helpTooltip="Tooltip of the first entity"
-          icon="Search"
+          title={{
+            name: 'First part entity data',
+            helpTooltip: 'Tooltip of the first entity',
+            icon: 'Search',
+          }}
         >
           <FormGroup
             direction="vertical"
             label="Name"
             id="name"
             labelHelpTooltip="Name Tooltip"
-            content={<Input id={'name'}></Input>}
+            content={<Input id="name" />}
             help="Optional helper text"
             required
             disabled
@@ -71,16 +72,18 @@ export const PageForm = ({}) => {
             label="Email"
             id="email"
             labelHelpTooltip="Email Tooltip"
-            content={<Input id={'email'}></Input>}
+            content={<Input id="email" />}
             error="Invalid email format. Try with a better format."
             helpErrorPosition="right"
             required
           ></FormGroup>
         </FormSection>
         <FormSection
-          title="Second part entity data"
-          helpTooltip="Tooltip of the Second entity"
-          icon="Search"
+          title={{
+            name: 'Second part entity data',
+            helpTooltip: 'Tooltip of the Second entity',
+            icon: 'Search',
+          }}
         >
           <FormGroup
             direction="horizontal"
@@ -96,7 +99,7 @@ export const PageForm = ({}) => {
             label="Email"
             id="email1"
             labelHelpTooltip="Email Tooltip"
-            content={<Input value={''} onChange={() => {}} id="email1"></Input>}
+            content={<Input id="email1" />}
             error="Invalid email format. Try with a better format."
             helpErrorPosition="right"
             required={false}
@@ -106,10 +109,8 @@ export const PageForm = ({}) => {
             label="Email long long long"
             id="email-long1"
             labelHelpTooltip="Email Tooltip"
-            content={
-              <Input value={''} onChange={() => {}} id="email-long1"></Input>
-            }
-            help="toto"
+            content={<Input id="email-long1" />}
+            help="optional helper text"
             helpErrorPosition="bottom"
             required={false}
           ></FormGroup>
@@ -170,8 +171,7 @@ export const AllRequiredPageForm = ({}) => {
       }}
     >
       <Form
-        title="My form"
-        layout="page"
+        layout={{ kind: 'page', title: 'My form' }}
         requireMode="all"
         rightActions={
           <Stack gap={'r16'}>
@@ -185,16 +185,18 @@ export const AllRequiredPageForm = ({}) => {
         }
       >
         <FormSection
-          title="First part entity data"
-          helpTooltip="Tooltip of the first entity"
-          icon="Search"
+          title={{
+            name: 'First part entity data',
+            helpTooltip: 'Tooltip of the first entity',
+            icon: 'Search',
+          }}
         >
           <FormGroup
             direction="horizontal"
             label="Name"
             id="name"
             labelHelpTooltip="Name Tooltip"
-            content={<Input id={'name'}></Input>}
+            content={<Input id="name" />}
             help="Please type your name :)"
             required
           ></FormGroup>
@@ -203,7 +205,7 @@ export const AllRequiredPageForm = ({}) => {
             label="Email"
             id="email"
             labelHelpTooltip="Email Tooltip"
-            content={<Input id={'email'}></Input>}
+            content={<Input id="email" />}
             error="Invalid email format. Try with a better format."
             helpErrorPosition="right"
           ></FormGroup>
@@ -223,7 +225,7 @@ export const TabForm = ({}) => {
       }}
     >
       <Form
-        layout="tab"
+        layout={{ kind: 'tab' }}
         rightActions={
           <Stack gap={'r16'}>
             <Button variant="outline" label="Cancel" />
@@ -240,21 +242,23 @@ export const TabForm = ({}) => {
             icon={<Icon name="Exclamation-triangle" />}
             title={'Error'}
           >
-            {'There is an error.'}
+            There is an error
           </Banner>
         }
       >
         <FormSection
-          title="First part entity data"
-          helpTooltip="Tooltip of the first entity"
-          icon="Search"
+          title={{
+            name: 'First part entity data',
+            helpTooltip: 'Tooltip of the first entity',
+            icon: 'Search',
+          }}
         >
           <FormGroup
             direction="vertical"
             label="Name"
             id="name"
             labelHelpTooltip="Name Tooltip"
-            content={<Input value={''} onChange={() => {}} id={'name'}></Input>}
+            content={<Input id="name" />}
             help="Optional helper text"
             required
             disabled
@@ -264,25 +268,25 @@ export const TabForm = ({}) => {
             label="Email"
             id="email"
             labelHelpTooltip="Email Tooltip"
-            content={
-              <Input value={''} onChange={() => {}} id={'email'}></Input>
-            }
+            content={<Input id="email" />}
             error="Invalid email format. Try with a better format."
             helpErrorPosition="right"
             required
           ></FormGroup>
         </FormSection>
         <FormSection
-          title="Second part entity data"
-          helpTooltip="Tooltip of the Second entity"
-          icon="Search"
+          title={{
+            name: 'Second part entity data',
+            helpTooltip: 'Tooltip of the second entity',
+            icon: 'Search',
+          }}
         >
           <FormGroup
             direction="horizontal"
             label="Name"
             id="name1"
             labelHelpTooltip="Name Tooltip"
-            content={<Input id="name1" disabled></Input>}
+            content={<Input id="name1" disabled />}
             help="Optional helper text"
             required
           ></FormGroup>
@@ -291,7 +295,7 @@ export const TabForm = ({}) => {
             label="Email"
             id="email1"
             labelHelpTooltip="Email Tooltip"
-            content={<Input id="email1"></Input>}
+            content={<Input id="email1" />}
             error="Invalid email format. Try with a better format."
             helpErrorPosition="right"
             required
@@ -307,9 +311,9 @@ export const TabForm = ({}) => {
                 rightIcon="User"
                 id="email-long1"
                 placeholder="text"
-              ></Input>
+              />
             }
-            help="toto"
+            help="optional helper text"
             helpErrorPosition="bottom"
             required
           ></FormGroup>
