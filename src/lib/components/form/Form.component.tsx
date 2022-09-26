@@ -1,6 +1,7 @@
 import {
   Children,
   createContext,
+  forwardRef,
   HTMLProps,
   ReactElement,
   ReactNode,
@@ -21,7 +22,7 @@ import { Text } from '../text/Text.component';
 const DESCRIPTION_PREFIX = 'describe-';
 const maxWidthTooltip = { maxWidth: '20rem' };
 
-type FormProps = HTMLProps<HTMLFormElement> & {
+type FormProps = Omit<HTMLProps<HTMLFormElement>, 'ref' | 'as'> & {
   children: ReactNode | ReactNode[];
   requireMode?: 'all' | 'partial';
   leftActions?: ReactNode;
@@ -32,7 +33,7 @@ type FormProps = HTMLProps<HTMLFormElement> & {
 type PageFormProps = { layout: { kind: 'page'; title: string } } & FormProps;
 type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
-const PageFormWrapper = styled.form`
+const PageFormWrapper = styled.form<FormProps>`
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -237,98 +238,92 @@ const FormSection = ({
   );
 };
 
-const PageForm = ({
-  layout,
-  leftActions,
-  rightActions,
-  children,
-  banner,
-}: PageFormProps) => {
-  const requireMode = useContext(RequireModeContext);
-  return (
-    <ScrollbarWrapper>
-      <PageFormWrapper>
-        <FixedHeader>
-          <PaddedForHeaderAndFooterContent>
-            <Text variant="Larger">{layout.title}</Text>
-            <div>
-              {requireMode === 'partial' && (
-                <Text isEmphazed color="textSecondary">
-                  * are required fields
-                </Text>
-              )}
-            </div>
-          </PaddedForHeaderAndFooterContent>
-        </FixedHeader>
+const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
+  (
+    { layout, leftActions, rightActions, children, banner, ...formProps },
+    ref,
+  ) => {
+    const requireMode = useContext(RequireModeContext);
+    return (
+      <ScrollbarWrapper>
+        <PageFormWrapper {...formProps} ref={ref}>
+          <FixedHeader>
+            <PaddedForHeaderAndFooterContent>
+              <Text variant="Larger">{layout.title}</Text>
+              <div>
+                {requireMode === 'partial' && (
+                  <Text isEmphazed color="textSecondary">
+                    * are required fields
+                  </Text>
+                )}
+              </div>
+            </PaddedForHeaderAndFooterContent>
+          </FixedHeader>
 
-        <ScrollArea>
-          <PaddedContent>
-            <div style={{ paddingBottom: `${spacing.r16}` }}>{banner}</div>
-            <Stack direction="vertical" withSeparators gap="r24">
-              {Children.toArray(children)}
-            </Stack>
-          </PaddedContent>
-        </ScrollArea>
+          <ScrollArea>
+            <PaddedContent>
+              <div style={{ paddingBottom: `${spacing.r16}` }}>{banner}</div>
+              <Stack direction="vertical" withSeparators gap="r24">
+                {Children.toArray(children)}
+              </Stack>
+            </PaddedContent>
+          </ScrollArea>
 
-        <FixedFooter>
-          <PaddedForHeaderAndFooterContent>
-            <Wrap>
-              <div>{leftActions}</div>
-              <div>{rightActions}</div>
-            </Wrap>
-          </PaddedForHeaderAndFooterContent>
-        </FixedFooter>
-      </PageFormWrapper>
-    </ScrollbarWrapper>
-  );
-};
+          <FixedFooter>
+            <PaddedForHeaderAndFooterContent>
+              <Wrap>
+                <div>{leftActions}</div>
+                <div>{rightActions}</div>
+              </Wrap>
+            </PaddedForHeaderAndFooterContent>
+          </FixedFooter>
+        </PageFormWrapper>
+      </ScrollbarWrapper>
+    );
+  },
+);
 
-const TabForm = ({
-  leftActions,
-  rightActions,
-  children,
-  banner,
-}: TabFormProps) => {
-  return (
-    <ScrollbarWrapper>
-      <PageFormWrapper>
-        <FixedHeader>
-          <PaddedForHeaderAndFooterContent>
-            <Wrap>
-              <div>{leftActions}</div>
-              <div>{rightActions}</div>
-            </Wrap>
-          </PaddedForHeaderAndFooterContent>
-        </FixedHeader>
+const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
+  ({ leftActions, rightActions, children, banner, ...formProps }, ref) => {
+    return (
+      <ScrollbarWrapper>
+        <PageFormWrapper {...formProps} ref={ref}>
+          <FixedHeader>
+            <PaddedForHeaderAndFooterContent>
+              <Wrap>
+                <div>{leftActions}</div>
+                <div>{rightActions}</div>
+              </Wrap>
+            </PaddedForHeaderAndFooterContent>
+          </FixedHeader>
 
-        <ScrollArea>
-          {banner}
-          <PaddedContent>
-            <Stack direction="vertical" withSeparators gap="r24">
-              {Children.toArray(children)}
-            </Stack>
-          </PaddedContent>
-        </ScrollArea>
-      </PageFormWrapper>
-    </ScrollbarWrapper>
-  );
-};
+          <ScrollArea>
+            {banner}
+            <PaddedContent>
+              <Stack direction="vertical" withSeparators gap="r24">
+                {Children.toArray(children)}
+              </Stack>
+            </PaddedContent>
+          </ScrollArea>
+        </PageFormWrapper>
+      </ScrollbarWrapper>
+    );
+  },
+);
 
-const Form = ({
-  layout,
-  requireMode,
-  ...formProps
-}: TabFormProps | PageFormProps) => {
-  return (
-    <RequireModeContext.Provider value={requireMode}>
-      {layout.kind === 'page' ? (
-        <PageForm layout={layout} {...formProps}></PageForm>
-      ) : (
-        <TabForm layout={layout} {...formProps}></TabForm>
-      )}
-    </RequireModeContext.Provider>
-  );
-};
+const Form = forwardRef<HTMLFormElement, TabFormProps | PageFormProps>(
+  ({ layout, requireMode, ...formProps }, ref) => {
+    return (
+      <RequireModeContext.Provider value={requireMode}>
+        {layout.kind === 'page' ? (
+          <PageForm layout={layout} {...formProps} ref={ref}></PageForm>
+        ) : (
+          <TabForm layout={layout} {...formProps} ref={ref}></TabForm>
+        )}
+      </RequireModeContext.Provider>
+    );
+  },
+);
 
 type FieldState = {
   error?: string;
