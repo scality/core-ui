@@ -180,15 +180,23 @@ export const Default = ({}) => {
 };
 
 export const CopyButtonStory = ({}) => {
-  return <Wrapper className="storybook-button">
-    <Title>Ghost: Without label</Title>
-    <CopyButton textToCopy='test' />
-    <Title>Ghost: With label</Title>
-    <CopyButton label='test' textToCopy='test' />
+  return (
+    <Wrapper className="storybook-button">
+      <Title>Ghost: Without label</Title>
+      <CopyButton textToCopy="test" />
+      <Title>Ghost: With label</Title>
+      <CopyButton label="test" textToCopy="test" />
 
-    <Title>Outline: Without label</Title>
-    <CopyButton variant='outline' textToCopy='test' />
-    <Title>Outline: With label</Title>
-    <CopyButton variant='outline' label='test' textToCopy='test' />
-  </Wrapper>
-}
+      <Title>Outline: Without label</Title>
+      <CopyButton variant="outline" textToCopy="test" />
+      <Title>Outline: With label</Title>
+      <CopyButton variant="outline" label="test" textToCopy="test" />
+      <Title>Outline: With big label</Title>
+      <CopyButton
+        variant="outline"
+        label="Certificate"
+        textToCopy="Certificate"
+      />
+    </Wrapper>
+  );
+};

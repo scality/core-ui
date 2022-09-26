@@ -43,10 +43,17 @@ export const CopyButton = ({
   return (
     <Button
       variant={variant === 'outline' ? 'outline' : undefined}
+      style={{
+        minWidth:
+          //Just to make sure the width of the button stays the same when copied!
+          variant === 'outline'
+            ? (label ? label.length / 2 : 0) + 7 + 'rem'
+            : undefined,
+      }}
       label={
         variant === 'outline'
           ? copyStatus === COPY_STATE_SUCCESS
-            ? 'Copied !'
+            ? `Copied${label ? ' ' + label + '' : ''}!`
             : `Copy${label ? ' ' + label : ''}`
           : undefined
       }
