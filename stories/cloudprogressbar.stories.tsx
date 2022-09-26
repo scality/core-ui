@@ -5,7 +5,7 @@ export default {
   title: 'Components/Progress & loading/CloudProgressBar',
   component: CloudProgressBar,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>CloudProgressBar</Title>

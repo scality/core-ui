@@ -7,7 +7,7 @@ export default {
   title: 'Components/Navigation/CollapsiblePanel',
   component: CollapsiblePanel,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper className="storybook-collapsiblepanel">
       <Title>Collapsed</Title>

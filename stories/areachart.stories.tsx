@@ -107,7 +107,7 @@ export default {
   title: 'Components/Chart/AreaChart',
   component: AreaChart,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Vege-Lite area chart</Title>

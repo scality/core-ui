@@ -50,11 +50,11 @@ const customTabStyle = {
   tabHoverColor: brand.statusHealthy,
 };
 
-const DefaultTabsDetails = () => {
+const DefaultTabsDetails = ({}) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
 
-  const details = () => {
+  const details = ({}) => {
     const tabName = query.get('tab');
 
     if (tabName === 'group') {
@@ -155,7 +155,7 @@ const DefaultTabsDetails = () => {
   );
 };
 
-export const Default = () => (
+export const Default = ({}) => (
   <Wrapper>
     <BrowserRouter>
       <DefaultTabsDetails />
@@ -163,7 +163,7 @@ export const Default = () => (
   </Wrapper>
 );
 
-export const ScrollableTabs = () => (
+export const ScrollableTabs = ({}) => (
   <Wrapper>
     <BrowserRouter>
       <Title>Default Tabs - scrollable 10 tabs</Title>
@@ -176,7 +176,7 @@ export const ScrollableTabs = () => (
   </Wrapper>
 );
 
-export const WithQueryParams = () => {
+export const WithQueryParams = ({}) => {
   const obj = {search: 'test'}
   return <Wrapper>
   <BrowserRouter>

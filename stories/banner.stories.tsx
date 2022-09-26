@@ -33,7 +33,7 @@ export default {
     },
   },
 };
-export const ErrorBanner = () => (
+export const ErrorBanner = ({}) => (
   <Wrapper>
     <Banner
       variant="danger"
@@ -44,7 +44,7 @@ export const ErrorBanner = () => (
     </Banner>
   </Wrapper>
 );
-export const WarningBanner = () => (
+export const WarningBanner = ({}) => (
   <Wrapper>
     <Banner
       variant="warning"
@@ -55,7 +55,7 @@ export const WarningBanner = () => (
     </Banner>
   </Wrapper>
 );
-export const SuccessBanner = () => (
+export const SuccessBanner = ({}) => (
   <Wrapper>
     <Banner
       variant="healthy"

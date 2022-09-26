@@ -5,7 +5,7 @@ export default {
   title: 'Components/Navigation/Breadcrumb',
   component: Breadcrumb,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Default Breadcrumb </Title>

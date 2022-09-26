@@ -44,7 +44,7 @@ const barConfig = {
   cornerRadius: 8,
   size: 12,
 };
-export const ChartExample = () => (
+export const ChartExample = ({}) => (
   <BarChart
     id={idVerticalStacked}
     data={verticalStackedData}

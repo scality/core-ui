@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, CSSProperties } from 'react';
 import styled from 'styled-components';
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 
@@ -31,12 +31,7 @@ export type Position =
   | typeof LEFTSTART;
 export type Props = {
   placement?: Position;
-  overlayStyle?: {
-    backgroundColor?: string;
-    color?: string;
-    fontSize?: string;
-    width?: string;
-  };
+  overlayStyle?: CSSProperties;
   overlay?: React.ReactNode;
   children?: React.ReactNode;
 };
@@ -46,29 +41,23 @@ const TooltipContainer = styled.div`
 `;
 const TooltipOverLayContainer = styled.div<{
   placement: Position;
-  overlayStyle?: {
-    backgroundColor?: string;
-    color?: string;
-    fontSize?: number | string;
-    width?: number | string;
-  };
+  style?: CSSProperties;
 }>`
-  display: flex;
+  display: inline-block;
   opacity: 0;
   position: absolute;
+  width: max-content;
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
-    (props && props.overlayStyle && props.overlayStyle.backgroundColor) ||
+    (props && props.style && props.style.backgroundColor) ||
     getTheme(props).backgroundLevel1};
   color: ${(props) =>
-    (props && props.overlayStyle && props.overlayStyle.color) ||
-    getTheme(props).textPrimary};
+    (props && props.style && props.style.color) || getTheme(props).textPrimary};
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
   font-size: ${(props) =>
-    (props && props.overlayStyle && props.overlayStyle.fontSize) ||
+    (props && props.style && props.style.fontSize) ||
     defaultTheme.fontSize.small};
-  width: ${(props) => props && props.overlayStyle && props.overlayStyle.width};
   vertical-align: middle;
   padding: ${defaultTheme.padding.smaller};
 `;
@@ -122,7 +111,7 @@ function Tooltip({
           ref={tooltipRef}
           className="sc-tooltip-overlay"
           placement={placement}
-          overlayStyle={overlayStyle}
+          style={overlayStyle}
         >
           <TooltipText className="sc-tooltip-overlay-text">
             {overlay}

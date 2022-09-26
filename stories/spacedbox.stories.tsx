@@ -50,7 +50,7 @@ const DisplayTextComp = ({ text, ...rest }) => {
   );
 };
 
-export const margin = () => {
+export const margin = ({}) => {
   return (
     <HighlightBorder>
       <SpacedBox m={0}>Props m 0</SpacedBox>
@@ -67,7 +67,7 @@ export const margin = () => {
     </HighlightBorder>
   );
 };
-export const padding = () => {
+export const padding = ({}) => {
   return (
     <HighlightBorder>
       <SpacedBox p={0}>Props p 0</SpacedBox>
@@ -84,7 +84,7 @@ export const padding = () => {
     </HighlightBorder>
   );
 };
-export const mix = () => {
+export const mix = ({}) => {
   return (
     <HighlightBorder>
       <SpacedBox pl={8} pt={12} mt={12}>
@@ -99,7 +99,7 @@ export const mix = () => {
     </HighlightBorder>
   );
 };
-export const composition = () => {
+export const composition = ({}) => {
   return (
     <HighlightBorder>
       <SpacedBox as={GreenSpan} ml={16}>

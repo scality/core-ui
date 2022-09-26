@@ -5,7 +5,7 @@ export default {
   title: 'Components/Navigation/ErrorPages/Auth',
   component: ErrorPageAuth,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <div
@@ -18,7 +18,7 @@ export const Default = () => {
     </Wrapper>
   );
 };
-export const WithSupportLink = () => {
+export const WithSupportLink = ({}) => {
   return (
     <Wrapper>
       <div
@@ -34,7 +34,7 @@ export const WithSupportLink = () => {
     </Wrapper>
   );
 };
-export const WithLocale = () => {
+export const WithLocale = ({}) => {
   return (
     <Wrapper>
       <div

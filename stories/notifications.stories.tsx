@@ -66,7 +66,7 @@ export default {
   title: 'Components/Notification/Notifications',
   component: Notifications,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Notifications

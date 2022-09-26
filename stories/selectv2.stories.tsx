@@ -43,7 +43,7 @@ const CustomSelect = (props) => {
   );
 };
 
-export const Default = () => (
+export const Default = ({}) => (
   <Wrapper className="storybook-select">
     <SelectWrapper>
       <Title>Default Select</Title>
@@ -83,7 +83,7 @@ export const Default = () => (
     </SelectWrapper>
   </Wrapper>
 );
-export const Rounded = () => (
+export const Rounded = ({}) => (
   <Wrapper>
     <SelectWrapper>
       <Title>Default Select</Title>

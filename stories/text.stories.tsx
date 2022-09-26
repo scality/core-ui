@@ -7,9 +7,12 @@ import {
   StatusText,
   SmallerText,
   ChartTitleText,
+  Text,
+  Link,
 } from '../src/lib/components/text/Text.component';
 import { Wrapper } from './common';
 import styled from 'styled-components';
+import { Stack } from '../src/lib';
 const TextWrapper = styled(Wrapper)`
   min-height: 0;
 `;
@@ -28,7 +31,7 @@ export default {
       },
     },
   },
-}; // eslint-disable-next-line
+}; 
 
 export const basicText = ({}: any) => {
   return (
@@ -37,7 +40,7 @@ export const basicText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const secondaryText = ({}: any) => {
   return (
     <TextWrapper>
@@ -45,7 +48,7 @@ export const secondaryText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const largerText = ({}: any) => {
   return (
     <TextWrapper>
@@ -53,7 +56,7 @@ export const largerText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const emphaseText = ({}: any) => {
   return (
     <TextWrapper>
@@ -61,7 +64,7 @@ export const emphaseText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const statusText = ({}: any) => {
   return (
     <TextWrapper>
@@ -77,7 +80,7 @@ export const statusText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const smallerText = ({}: any) => {
   return (
     <TextWrapper>
@@ -85,11 +88,35 @@ export const smallerText = ({}: any) => {
     </TextWrapper>
   );
 };
-// eslint-disable-next-line
+
 export const chartTitleText = ({}: any) => {
   return (
     <TextWrapper>
       <ChartTitleText>chart title text</ChartTitleText>
+    </TextWrapper>
+  );
+};
+
+export const TextStory = ({}) => {
+  return (
+    <TextWrapper>
+      <Stack direction="vertical">
+        <Text>Basic</Text>
+        <Text variant="Basic">Explicitely basic</Text>
+        <Text variant="ChartTitle">Chart title</Text>
+        <Text variant="Larger">Larger</Text>
+        <Text variant="Smaller">Smaller</Text>
+        <Text variant="Basic" color="textSecondary">
+          With secondary color
+        </Text>
+        <Text variant="Basic" color="textSecondary" isEmphazed>
+          With secondary color and emphazed
+        </Text>
+        <Text variant="Smaller" color="statusCritical">
+          With status color
+        </Text>
+        <Link href='#'>Link</Link>
+      </Stack>
     </TextWrapper>
   );
 };

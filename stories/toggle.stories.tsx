@@ -5,7 +5,7 @@ export default {
   title: 'Components/Toggle',
   component: Toggle,
 };
-export const Default = () => {
+export const Default = ({}) =>=> {
   const [toggle, setToggle] = useState(false);
   return (
     <Wrapper>

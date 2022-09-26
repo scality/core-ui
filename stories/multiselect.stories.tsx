@@ -65,7 +65,7 @@ export default {
   title: 'Components/Selector/MultiSelect',
   component: MultiSelect,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>MultiSelect List</Title>

@@ -5,7 +5,7 @@ export default {
   title: 'Components/Constrainedtext',
   component: ConstrainedText,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Constrained Text</Title>

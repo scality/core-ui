@@ -5,7 +5,7 @@ export default {
   title: 'Components/Progress & loading/ProgressBar',
   component: ProgressBar,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <div

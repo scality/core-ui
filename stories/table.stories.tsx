@@ -114,7 +114,7 @@ const ContainerWithClassName = styled.div`
   }
 `;
 
-const _noRowsRenderer = () => {
+const _noRowsRenderer = ({}) => {
   return (
     <EmptyTable>
       <span>No rows available</span>
@@ -126,7 +126,7 @@ export default {
   title: 'Components/Table',
   component: Table,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper
       style={{
@@ -147,7 +147,7 @@ export const Default = () => {
     </Wrapper>
   );
 };
-export const WithRowActions = () => {
+export const WithRowActions = ({}) => {
   return (
     <Wrapper
       style={{
@@ -168,7 +168,7 @@ export const WithRowActions = () => {
     </Wrapper>
   );
 };
-export const ChangeColumnSize = () => {
+export const ChangeColumnSize = ({}) => {
   return (
     <Wrapper
       style={{
@@ -189,7 +189,7 @@ export const ChangeColumnSize = () => {
     </Wrapper>
   );
 };
-export const CenterAColumnWithCss = () => {
+export const CenterAColumnWithCss = ({}) => {
   return (
     <ContainerWithClassName>
       <ContainerWithClassName>
@@ -208,7 +208,7 @@ export const CenterAColumnWithCss = () => {
     </ContainerWithClassName>
   );
 };
-export const EmptyTableStory = () => {
+export const EmptyTableStory = ({}) => {
   return (
     <Wrapper
       style={{

@@ -29,7 +29,7 @@ export default {
   component: LateralNavbarLayout,
   decorators: [withKnobs],
 };
-export const SidebarDocked = () => {
+export const SidebarDocked = ({}) => {
   const expanded = boolean('Sidebar Expanded', false);
   const sidebar = {
     expanded,
@@ -43,7 +43,7 @@ export const SidebarDocked = () => {
     </div>
   );
 };
-export const SidebarExpanded = () => {
+export const SidebarExpanded = ({}) => {
   const sidebar = {
     expanded: true,
     actions: sideBarActions,
@@ -54,7 +54,7 @@ export const SidebarExpanded = () => {
     </LateralNavbarLayout>
   );
 };
-export const SidebarWithToggle = () => {
+export const SidebarWithToggle = ({}) => {
   const [expanded, setExpanded] = useState(false);
   const sidebar = {
     expanded: expanded,
@@ -67,7 +67,7 @@ export const SidebarWithToggle = () => {
     </LateralNavbarLayout>
   );
 };
-export const HoverableSidebar = () => {
+export const HoverableSidebar = ({}) => {
   const [expanded, setExpanded] = useState(false);
   const sidebar = {
     expanded: expanded,

@@ -14,7 +14,7 @@ export default {
   title: 'Components/Selector/Healthselector',
   component: Healthselector,
 };
-export const Default = () => {
+export const Default = ({}) => {
   const [selected, setSelected] = useState(0);
   action('All clicked');
   let items = [

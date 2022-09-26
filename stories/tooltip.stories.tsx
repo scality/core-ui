@@ -6,7 +6,7 @@ export default {
   title: 'Components/Notification/Tooltip',
   component: Tooltip,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper
       style={{

@@ -106,7 +106,7 @@ const startLast24h = '2021-02-01T00:00:00Z';
 const endLast24h = '2021-02-02T00:00:00Z';
 const startNotFirstDay = '2021-02-23T23:00:00Z';
 const endNotFirstDay = '2021-03-01T23:00:00Z';
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <div>
       <Wrapper>

@@ -49,7 +49,7 @@ const data = [
   },
 ];
 
-export const SimpleContentTable = () => {
+export const SimpleContentTable = ({}) => {
   const columns = [
     {
       Header: 'First Name',
@@ -89,7 +89,7 @@ export const SimpleContentTable = () => {
     return row.lastName + ' ' + row.firstName;
   };
 
-  const TableWithQueryParams = () => {
+  const TableWithQueryParams = ({}) => {
     const location = useLocation();
     return (
       <>
@@ -224,7 +224,7 @@ export const SimpleContentTable = () => {
   );
 };
 
-export const asyncTable = () => {
+export const asyncTable = ({}) => {
   function DataComponent({ data, loading, row }) {
     return loading ? (
       <span>loading ...</span>
@@ -248,7 +248,6 @@ export const asyncTable = () => {
     return <DataComponent row={row} loading={loading} data={data} />;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const renderRowSubComponent = React.useCallback(
     ({ row, ...rest }: CellProps<object>) => {
       return <RowAsync row={row} />;
@@ -311,7 +310,7 @@ export const asyncTable = () => {
     </Wrapper>
   );
 };
-export const OnBottomCallback = () => {
+export const OnBottomCallback = ({}) => {
   const columns = [
     {
       Header: 'value',
@@ -369,7 +368,7 @@ export const OnBottomCallback = () => {
   );
 };
 
-export const MultiTable = () => {
+export const MultiTable = ({}) => {
   const [data1, setData1] = useState([
     {
       name: 'test',
@@ -420,7 +419,7 @@ export const MultiTable = () => {
     },
   ];
 
-  const demo = () => {
+  const demo = ({}) => {
     setData1([
       {
         name: 'test',

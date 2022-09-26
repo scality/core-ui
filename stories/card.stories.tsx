@@ -44,7 +44,7 @@ const defaultPropsCard = {
   onClick: () => console.log('Clicked!'),
 };
 const statuses = ['healthy', 'warning', 'critical'];
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>
@@ -111,7 +111,7 @@ export const Default = () => {
     </Wrapper>
   );
 };
-export const Customized = () => {
+export const Customized = ({}) => {
   return (
     <Wrapper>
       <Title>No Header</Title>

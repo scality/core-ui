@@ -23,7 +23,7 @@ export default {
   title: 'Components/Dropdown',
   component: Dropdown,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper className="storybook-dropdown">
       <Title>Dropdown with text/icon</Title>

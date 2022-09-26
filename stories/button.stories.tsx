@@ -6,7 +6,7 @@ export default {
   title: 'Components/Button',
   component: Button,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper className="storybook-button">
       <Title>Button Default</Title>

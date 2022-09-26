@@ -86,7 +86,7 @@ export default {
   title: 'Components/Chart/VegaChart',
   component: VegaChart,
 };
-export const Default = () => {
+export const Default = ({}) => {
   return (
     <Wrapper>
       <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
