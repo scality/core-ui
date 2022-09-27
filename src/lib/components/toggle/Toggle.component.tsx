@@ -1,12 +1,12 @@
 // @ts-nocheck
-import React from 'react';
+import { ChangeEvent, HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
-type Props = React.HTMLProps<HTMLInputElement> & {
+type Props = HTMLProps<HTMLInputElement> & {
   toggle: boolean;
-  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   disabled?: boolean;
 };
