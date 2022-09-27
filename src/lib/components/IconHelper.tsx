@@ -1,9 +1,9 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { Icon } from './icon/Icon.component';
 import { Position, Tooltip } from './tooltip/Tooltip.component';
 
 type IconHelpProps = {
-  tooltipMessage: string;
+  tooltipMessage: ReactNode;
   placement?: Position;
   overlayStyle?: CSSProperties;
 };

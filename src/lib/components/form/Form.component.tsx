@@ -84,7 +84,7 @@ type FormGroupProps = {
   id: string;
   content: ReactElement<ContentProps>;
   direction?: 'vertical' | 'horizontal';
-  labelHelpTooltip?: string;
+  labelHelpTooltip?: ReactNode;
   help?: string;
   error?: string;
   required?: boolean;
