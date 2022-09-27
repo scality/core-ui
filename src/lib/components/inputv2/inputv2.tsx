@@ -34,7 +34,7 @@ const InputContainer = styled.div<{
   disabled: boolean;
   isContextAvailable: boolean;
 }>`
-  width: 13.875rem;
+  width: 21.875rem;
   height: ${spacing.r32};
   display: flex;
   align-items: center;
