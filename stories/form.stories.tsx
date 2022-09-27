@@ -28,7 +28,7 @@ export const PageForm = ({}) => {
       }}
     >
       <Form
-        layout={{ kind: 'page', title: 'My form' }}
+        layout={{ kind: 'page', title: 'My form', subTitle: 'The sub title' }}
         requireMode="partial"
         rightActions={
           <Stack gap={'r16'}>

@@ -30,7 +30,9 @@ type FormProps = Omit<HTMLProps<HTMLFormElement>, 'ref' | 'as'> & {
   banner?: ReactNode;
 };
 
-type PageFormProps = { layout: { kind: 'page'; title: string } } & FormProps;
+type PageFormProps = {
+  layout: { kind: 'page'; title: string; subTitle?: string };
+} & FormProps;
 type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
 const PageFormWrapper = styled.form<FormProps>`
@@ -43,6 +45,7 @@ const PageFormWrapper = styled.form<FormProps>`
 const BasicPageLayout = styled.div`
   margin: 0 auto;
   width: 45rem;
+  padding-right: ${spacing.f16};
 `;
 
 const FixedHeader = styled(BasicPageLayout)`
@@ -249,20 +252,37 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
         <PageFormWrapper {...formProps} ref={ref}>
           <FixedHeader>
             <PaddedForHeaderAndFooterContent>
-              <Text variant="Larger">{layout.title}</Text>
-              <div>
+              <Wrap>
+                <Stack direction="vertical">
+                  <Text variant="Larger">{layout.title}</Text>
+                  {layout.subTitle && (
+                    <Text variant="Large" isEmphazed>
+                      {layout.subTitle}
+                    </Text>
+                  )}
+                </Stack>
                 {requireMode === 'partial' && (
-                  <Text isEmphazed color="textSecondary">
+                  <Text
+                    color="textSecondary"
+                    variant="Smaller"
+                    style={{ alignSelf: 'flex-end' }}
+                  >
                     * are required fields
                   </Text>
                 )}
-              </div>
+              </Wrap>
             </PaddedForHeaderAndFooterContent>
           </FixedHeader>
 
           <ScrollArea>
             <PaddedContent>
-              <div style={{ paddingBottom: `${spacing.r16}` }}>{banner}</div>
+              <div
+                style={{
+                  paddingBottom: `${spacing.r16}`,
+                }}
+              >
+                {banner}
+              </div>
               <Stack direction="vertical" withSeparators gap="r24">
                 {Children.toArray(children)}
               </Stack>
