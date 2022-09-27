@@ -13,6 +13,7 @@ export const getTheme = (props) => {
 /** Ensure the consistency of colors between old and new colors */
 const variantMapping = {
   healthy: 'statusHealthy',
+  success: 'statusHealthy',
   warning: 'statusWarning',
   danger: 'statusCritical',
   selected: 'selectedActive',
