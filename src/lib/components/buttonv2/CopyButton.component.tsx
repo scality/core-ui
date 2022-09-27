@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '../icon/Icon.component';
-import { Button } from './Buttonv2.component';
+import { Button, Props } from './Buttonv2.component';
 
 export const COPY_STATE_IDLE = 'idle';
 export const COPY_STATE_SUCCESS = 'success';
@@ -34,14 +34,16 @@ export const CopyButton = ({
   label,
   textToCopy,
   variant,
+  ...props
 }: {
   label?: string;
   textToCopy: string;
   variant?: 'outline' | 'ghost';
-}) => {
+} & Props) => {
   const { copy, copyStatus } = useClipboard();
   return (
     <Button
+      {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
       style={{
         minWidth:
