@@ -131,6 +131,7 @@ export const Text = styled.span<{
   variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger' | 'Large';
   color?: keyof typeof defaultTheme.darkRebrand;
   isEmphazed?: boolean;
+  isGentleEmphazed?: boolean;
 }>`
   color: ${(props) => getTheme(props)[props.color || 'textPrimary']};
   ${(props) =>
@@ -163,6 +164,13 @@ export const Text = styled.span<{
       : `
   font-weight: 400;
       `}
+
+  ${(props) =>
+    props.isGentleEmphazed
+      ? `
+  font-style: italic;
+      `
+      : ``}
     
   ${(props) =>
     props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
