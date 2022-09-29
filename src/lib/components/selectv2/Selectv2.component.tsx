@@ -13,6 +13,7 @@ import { SelectStyle } from './SelectStyle';
 import { FixedSizeList as List } from 'react-window';
 import { spacing } from '../../style/theme';
 import { convertRemToPixels } from '../../utils';
+import { convertSizeToRem } from '../inputv2/inputv2';
 const SelectContext = createContext<boolean>(false);
 const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
@@ -237,6 +238,7 @@ export type SelectProps = {
   onBlur?: (event: FocusEvent) => void;
   onChange: (newValue: string) => void;
   variant?: 'default' | 'rounded';
+  size?: '1' | '2/3' | '2/4' | '1/3';
   className?: string;
 };
 type SelectOptionProps = {
@@ -256,6 +258,7 @@ function SelectBox({
   onChange,
   variant = 'default',
   className,
+  size = '1',
   ...rest
 }: SelectProps) {
   if (defaultValue && value) {
@@ -394,6 +397,7 @@ function SelectBox({
                 setKeyboardFocusEnabled(true);
               }
             }}
+            width={convertSizeToRem(size)}
             {...rest}
           />
         )}

@@ -4,7 +4,7 @@ import { spacing, fontWeight, fontSize, zIndex } from '../../style/theme';
 import { getThemePropSelector, getTheme } from '../../utils';
 const SelectStyle = styled(Select)`
   font-size: ${fontSize.base};
-  width: 23rem;
+  width: ${({ width }) => width};
   ${({ isDefault }) => !isDefault && `font-weight: ${fontWeight.bold};`}
   .sc-select__control {
     padding-left: ${({ isDefault }) =>
