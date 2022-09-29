@@ -140,11 +140,14 @@ const FormGroup = ({
         <div
           style={{
             width: maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
-            opacity: disabled ? 0.5 : 1,
           }}
         >
           <Stack>
-            <label htmlFor={id} ref={labelRef}>
+            <label
+              htmlFor={id}
+              ref={labelRef}
+              style={{ opacity: disabled ? 0.5 : 1 }}
+            >
               <Text>
                 {label}
                 {requireMode !== 'all' && required && ' *'}
