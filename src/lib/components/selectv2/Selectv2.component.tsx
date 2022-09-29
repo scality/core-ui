@@ -238,7 +238,7 @@ export type SelectProps = {
   onBlur?: (event: FocusEvent) => void;
   onChange: (newValue: string) => void;
   variant?: 'default' | 'rounded';
-  size?: '1' | '2/3' | '2/4' | '1/3';
+  size?: '1' | '2/3' | '1/2' | '1/3';
   className?: string;
 };
 type SelectOptionProps = {

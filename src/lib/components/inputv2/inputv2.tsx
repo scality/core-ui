@@ -6,6 +6,13 @@ import { Box } from '../box/Box';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
 
+export const convertSizeToRem = (size: '1' | '2/3' | '1/2' | '1/3') => {
+  if (size === '2/3') return '14rem';
+  else if (size === '1/3') return '6rem';
+  else if (size === '1/2') return '10rem';
+  else return '20.5rem';
+};
+
 const StyledInput = styled.input`
   ${(props) =>
     props.disabled &&
@@ -28,12 +35,6 @@ const StyledInput = styled.input`
     outline: none;
   }
 `;
-export const convertSizeToRem = (size: '1' | '2/3' | '2/4' | '1/3') => {
-  if (size === '2/3') return '14rem';
-  else if (size === '1/3') return '6rem';
-  else if (size === '2/4') return '10rem';
-  else return '20.5rem';
-};
 
 const InputContainer = styled.div<{
   hasError: boolean;
@@ -82,7 +83,7 @@ type Props = {
   id: string;
   leftIcon?: IconName;
   rightIcon?: IconName;
-  size?: '1' | '2/3' | '2/4' | '1/3';
+  size?: '1' | '2/3' | '1/2' | '1/3';
 } & HTMLProps<HTMLInputElement>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
