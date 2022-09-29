@@ -27,6 +27,7 @@ export const ButtonStyled = styled.button`
   text-decoration: none;
   border: none;
   text-decoration: none;
+  font-family: "Lato";
   font-weight: ${defaultTheme.fontWeight.base};
 
   padding: ${spacing.sp4} ${spacing.sp8};

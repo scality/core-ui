@@ -6,6 +6,13 @@ import { Box } from '../box/Box';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
 
+export const convertSizeToRem = (size: '1' | '2/3' | '1/2' | '1/3') => {
+  if (size === '2/3') return '14rem';
+  else if (size === '1/3') return '6rem';
+  else if (size === '1/2') return '10rem';
+  else return '20.5rem';
+};
+
 const StyledInput = styled.input`
   ${(props) =>
     props.disabled &&
@@ -33,8 +40,10 @@ const InputContainer = styled.div<{
   hasError: boolean;
   disabled: boolean;
   isContextAvailable: boolean;
+  width: string;
 }>`
-  width: 13.875rem;
+  width: ${(props) => props.width};
+  box-sizing: border-box;
   height: ${spacing.r32};
   display: flex;
   align-items: center;
@@ -74,11 +83,21 @@ type Props = {
   id: string;
   leftIcon?: IconName;
   rightIcon?: IconName;
+  size?: '1' | '2/3' | '1/2' | '1/3';
 } & HTMLProps<HTMLInputElement>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
-    { error, disabled, id, leftIcon, rightIcon, placeholder, ...inputProps },
+    {
+      error,
+      disabled,
+      id,
+      leftIcon,
+      rightIcon,
+      placeholder,
+      size,
+      ...inputProps
+    },
     ref,
   ) => {
     const {
@@ -97,6 +116,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           isContextAvailable={isContextAvailable}
           disabled={disabled || disabledFromFieldContext}
           hasError={!!(error || errorFromFieldContext)}
+          width={convertSizeToRem(size)}
         >
           <Box
             display={'flex'}

@@ -128,15 +128,21 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
 `;
 
 export const Text = styled.span<{
-  variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger';
+  variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger' | 'Large';
   color?: keyof typeof defaultTheme.darkRebrand;
   isEmphazed?: boolean;
+  isGentleEmphazed?: boolean;
 }>`
   color: ${(props) => getTheme(props)[props.color || 'textPrimary']};
   ${(props) =>
     props.variant === 'Larger'
       ? `
   font-size: 1.43rem;
+  line-height: 1.5;
+      `
+      : props.variant === 'Large'
+      ? `
+  font-size: 1.14rem;
   line-height: 1.5;
       `
       : props.variant === 'Smaller'
@@ -158,6 +164,13 @@ export const Text = styled.span<{
       : `
   font-weight: 400;
       `}
+
+  ${(props) =>
+    props.isGentleEmphazed
+      ? `
+  font-style: italic;
+      `
+      : ``}
     
   ${(props) =>
     props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
@@ -179,4 +192,4 @@ export const Link = styled.a`
     outline: dashed ${spacing.r2} ${(props) => getTheme(props).selectedActive};
     outline-offset: ${spacing.r2};
   }
-`
+`;
