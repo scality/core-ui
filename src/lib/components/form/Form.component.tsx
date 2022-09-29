@@ -269,6 +269,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
                     color="textSecondary"
                     variant="Smaller"
                     style={{ alignSelf: 'flex-end' }}
+                    isGentleEmphazed
                   >
                     * are required fields
                   </Text>
