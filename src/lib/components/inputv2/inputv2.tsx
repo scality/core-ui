@@ -42,6 +42,7 @@ const InputContainer = styled.div<{
   width: string;
 }>`
   width: ${(props) => props.width};
+  box-sizing: border-box;
   height: ${spacing.r32};
   display: flex;
   align-items: center;
