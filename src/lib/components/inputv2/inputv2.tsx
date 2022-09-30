@@ -15,6 +15,7 @@ export const convertSizeToRem = (size: '1' | '2/3' | '1/2' | '1/3') => {
 
 const StyledInput = styled.input`
   max-width: 100%;
+  font-family: 'Lato';
   ${(props) =>
     props.disabled &&
     `
@@ -29,6 +30,8 @@ const StyledInput = styled.input`
   line-height: ${spacing.r20};
   &:placeholder-shown {
     font-style: italic;
+  }
+  &::placeholder {
     color: ${(props) => getTheme(props).textSecondary};
   }
   &:focus {
@@ -44,8 +47,7 @@ const InputContainer = styled.div<{
   width: string;
 }>`
   width: ${(props) => props.width};
-  box-sizing: border-box;
-  height: ${spacing.r32};
+  height: 100%;
   display: flex;
   align-items: center;
   padding: 0 ${spacing.r8} 0 ${spacing.r8};
@@ -61,6 +63,8 @@ const InputContainer = styled.div<{
 `;
 
 const InputBorder = styled.div<{ disabled: boolean; hasError: boolean }>`
+  box-sizing: border-box;
+  height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
       props.hasError ? getTheme(props).statusCritical : getTheme(props).border};
