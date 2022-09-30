@@ -5,7 +5,7 @@ export default {
   title: 'Components/EmptyState',
   component: EmptyState,
 };
-export const WithLink = ({}) =>=> {
+export const WithLink = ({}) => {
   return (
     <Wrapper>
       <EmptyState
@@ -19,7 +19,7 @@ export const WithLink = ({}) =>=> {
     </Wrapper>
   );
 };
-export const WithoutLink = ({}) =>=> {
+export const WithoutLink = ({}) => {
   return (
     <Wrapper>
       <EmptyState icon="Node-backend" label="node" />

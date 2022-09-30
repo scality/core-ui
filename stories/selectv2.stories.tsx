@@ -43,6 +43,8 @@ const CustomSelect = (props) => {
   );
 };
 
+const thousandsOfOptions = generateOptions(1000);
+
 export const Default = ({}) => (
   <Wrapper className="storybook-select">
     <SelectWrapper>
@@ -63,7 +65,7 @@ export const Default = ({}) => (
       <Title>With scrollbar (more than 4 items)</Title>
       <CustomSelect opts={optionsWithoutSearchBar} />
       <Title>1000 items</Title>
-      <CustomSelect opts={generateOptions(1000)} />
+      <CustomSelect opts={thousandsOfOptions} />
       <Title>With scroll/search (more than 8 items)</Title>
       <CustomSelect
         defaultValue={optionsWithSearchBar[1]}
@@ -105,7 +107,7 @@ export const Rounded = ({}) => (
       <Title>With scrollbar (more than 4 items)</Title>
       <CustomSelect variant="rounded" opts={optionsWithoutSearchBar} />
       <Title>1000 items</Title>
-      <CustomSelect variant="rounded" opts={generateOptions(1000)} />
+      <CustomSelect variant="rounded" opts={thousandsOfOptions} />
       <Title>With scroll/search (more than 8 items)</Title>
       <CustomSelect variant="rounded" opts={optionsWithSearchBar} />
       <div
