@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 import styled from 'styled-components';
 import { spacing, Stack } from '../../spacing';
 import { getTheme } from '../../utils';
@@ -9,7 +9,7 @@ type Props = {
   value?: string;
   checked?: boolean;
   disabled?: boolean;
-  onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Checkbox = forwardRef<HTMLInputElement, Props>(({

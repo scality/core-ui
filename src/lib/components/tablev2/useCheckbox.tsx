@@ -1,6 +1,7 @@
 import { forwardRef, MutableRefObject, useEffect, useRef } from 'react';
 import { Hooks, TableToggleAllRowsSelectedProps } from 'react-table';
 import styled from 'styled-components';
+import { Checkbox } from '../checkbox/Checkbox.component';
 
 const CheckBoxContainer = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const IndeterminateCheckbox = forwardRef<
 
   return (
     <>
-      <input type="checkbox" ref={resolvedRef} {...rest} />
+      <Checkbox ref={resolvedRef} {...rest} />
     </>
   );
 });
