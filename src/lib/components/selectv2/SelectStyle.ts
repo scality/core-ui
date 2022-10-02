@@ -8,19 +8,16 @@ const SelectStyle = styled(Select)`
   font-size: ${fontSize.base};
   box-sizing: border-box;
   width: ${({ width }) => width};
+  ${({ isDefault }) =>
+    isDefault ? `height: ${spacing.r32}` : `height: ${spacing.r24}`};
+
   ${({ isDefault }) => !isDefault && `font-weight: ${fontWeight.bold};`}
   .sc-select__control {
+    ${({ isDefault }) =>
+      isDefault ? `min-height: ${spacing.r32}` : `min-height: ${spacing.r24}`};
     padding-left: ${({ isDefault }) => (isDefault ? spacing.r8 : spacing.r16)};
     cursor: pointer;
-    ${({ isDefault }) =>
-      isDefault
-        ? `
-      min-height: ${spacing.r32};
-      max-height: ${spacing.r32};`
-        : `
-      min-height: ${spacing.r24};
-      max-height: ${spacing.r24};
-    `}
+
     caret-color: ${({ isDefault }) =>
       getThemePropSelector(isDefault ? 'textSecondary' : 'textPrimary')};
     background-color: ${({ isDefault }) =>
