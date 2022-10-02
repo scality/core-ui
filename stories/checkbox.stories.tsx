@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Checkbox } from '../src/lib/components/checkbox/Checkbox.component';
 import { Wrapper, Title } from './common';
@@ -7,8 +7,25 @@ export default {
   component: Checkbox,
 };
 export const Default = ({}) => {
+  const checkboxRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (checkboxRef.current){
+      checkboxRef.current.indeterminate = true;
+    }
+  }, [checkboxRef])
   return (
     <Wrapper>
+      <Checkbox
+        label="interested?"
+        data-cy="checked_checkbox"
+      />
+      <Title>Checkbox indeterminate</Title>
+      <Checkbox
+        ref={checkboxRef}
+        label="interested?"
+        onChange={action('checkbox clicked')}
+        data-cy="checked_checkbox"
+      />
       <Title>Checkbox checked</Title>
       <Checkbox
         checked={true}

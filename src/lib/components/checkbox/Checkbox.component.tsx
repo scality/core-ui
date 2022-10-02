@@ -1,144 +1,126 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
-import { Icon } from '../icon/Icon.component';
+import React, { forwardRef } from 'react';
+import styled from 'styled-components';
+import { spacing, Stack } from '../../spacing';
+import { getTheme } from '../../utils';
+import { Text } from '../text/Text.component';
 
 type Props = {
   label?: string;
   value?: string;
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
-  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.SyntheticEvent<HTMLInputElement>) => void;
 };
 
-function Checkbox({
+const Checkbox = forwardRef<HTMLInputElement, Props>(({
   disabled,
   checked,
   label,
   value,
   onChange,
   ...rest
-}: Props) {
-  const canBeFocused = !checked && !disabled;
+}, ref) => {
   return (
     <StyledCheckbox
       checked={checked}
       disabled={disabled}
-      aria-pressed={canBeFocused ? true : null}
-      tabIndex={canBeFocused ? 0 : null}
       className="sc-checkbox"
     >
-      <Icon name="Check" />
+      <Stack>
       <input
         type="checkbox"
         checked={checked}
         disabled={disabled}
         value={value}
         onChange={onChange}
+        ref={ref}
         {...rest}
       />
       {label && (
-        <StyledCheckboxLabel className="text">{label}</StyledCheckboxLabel>
+        <Text>{label}</Text>
       )}
+      </Stack>
     </StyledCheckbox>
   );
-}
+});
 
 export { Checkbox };
-const StyledCheckboxLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
-  padding-left: ${defaultTheme.padding.base};
-  vertical-align: middle;
-  color: ${getThemePropSelector('textPrimary')};
-`;
+
 const StyledCheckbox = styled.label<{
   disabled?: boolean;
   checked?: boolean;
 }>`
-  position: relative;
-  display: inline-block;
-  ${(props) => {
-    return props.disabled
-      ? css`
-          cursor: default;
-          opacity: 0.3;
-        `
-      : css`
-          cursor: pointer;
-        `;
-  }}
+  /* Basic styling */
 
-  ${(props) => {
-    const { textTertiary, selectedActive, highlight, buttonPrimary } =
-      getTheme(props);
-    const iconCheckedColor = props.checked ? 'white' : 'transparent';
-    const checkBoxFocusBorder = buttonPrimary;
-    const checkBoxFocusColor = props.checked ? selectedActive : null;
-    const checkBoxBorder = props.checked ? selectedActive : textTertiary;
-    let checkBoxColor = null;
-    if (props.checked) checkBoxColor = selectedActive;
-    else if (props.disabled) checkBoxColor = textTertiary;
-    let checkBoxColorHover = null;
-    let checkBoxColorBorderHover = null;
-    if (props.checked && !props.disabled)
-      checkBoxColorHover = checkBoxColorBorderHover = selectedActive;
-    else if (!props.checked && !props.disabled) {
-      checkBoxColorHover = highlight;
-      checkBoxColorBorderHover = selectedActive;
-    }
-    return css`
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 12px;
-        height: 12px;
-        border: 2px solid ${checkBoxBorder};
-        background: ${checkBoxColor};
-        border-radius: 4px;
-      }
-      svg {
-        position: absolute;
-        top: 3px;
-        left: 2px;
-        font-size: 12px;
-        color: ${iconCheckedColor};
-      }
-
-      &:hover {
-        &:before {
-          background: ${checkBoxColorHover};
-          border-color: ${checkBoxColorBorderHover};
-        }
-      }
-
-      &:focus {
-        outline: 0;
-        &:before {
-          background: ${checkBoxFocusColor};
-          border-color: ${checkBoxFocusBorder};
-        }
-      }
-    `;
-  }}
-
-  span {
-    vertical-align: baseline;
+  [type=checkbox] {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: ${props => getTheme(props).textPrimary};
+    vertical-align: middle;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    outline: 0;
+    flex-grow: 0;
+    border-radius: ${spacing.r2};
+    background-color: ${props => getTheme(props).backgroundLevel1};
+    transition: background 300ms;
+    cursor: pointer;
   }
 
-  input {
-    ${(props) => {
-      return props.disabled
-        ? css`
-            cursor: default;
-          `
-        : css`
-            cursor: pointer;
-          `;
-    }}
-    margin: 0px;
-    opacity: 0;
+
+  /* Pseudo element for check styling */
+
+  [type=checkbox]::before {
+    content: "";
+    color: transparent;
+    display: block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    border: 0;
+    background-color: transparent;
+    background-size: contain;
+    box-shadow: inset 0 0 0 ${spacing.r1} ${props => getTheme(props).border};
+  }
+
+
+  /* Checked */
+
+  [type=checkbox]:checked {
+    background-color: ${props => getTheme(props).selectedActive};
+  }
+
+  [type=checkbox]:checked::before {
+    box-shadow: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+  }
+
+  /* Indeterminate */
+
+  [type=checkbox]:indeterminate::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='4' y1='11' x2='18' y2='11' style='stroke:%23fff;stroke-width:2'/%3E %3C/svg%3E");
+  }
+
+  /* Hover & focus */
+  [type=checkbox]:hover {
+    ${(props) =>
+      !props.disabled &&
+      `box-shadow: inset 0 0 0 ${spacing.r1} ${getTheme(props).infoPrimary};`}
+  }
+  [type=checkbox]:focus {
+    box-shadow: inset 0 0 0 ${spacing.r1} ${props => getTheme(props).infoPrimary};
+  }
+
+  [type=checkbox]:focus-visible:enabled {
+    outline: dashed ${spacing.r2} ${props => getTheme(props).selectedActive};
+    outline-offset: ${spacing.r2};
+  }
+
+  /* Disabled */
+
+  [type=checkbox]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
