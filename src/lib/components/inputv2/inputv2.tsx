@@ -44,9 +44,7 @@ const InputContainer = styled.div<{
   hasError: boolean;
   disabled: boolean;
   isContextAvailable: boolean;
-  width: string;
 }>`
-  width: ${(props) => props.width};
   height: 100%;
   display: flex;
   align-items: center;
@@ -62,8 +60,13 @@ const InputContainer = styled.div<{
   `}
 `;
 
-const InputBorder = styled.div<{ disabled: boolean; hasError: boolean }>`
+const InputBorder = styled.div<{
+  disabled: boolean;
+  hasError: boolean;
+  width: string;
+}>`
   box-sizing: border-box;
+  width: ${(props) => props.width};
   height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
@@ -116,12 +119,12 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <InputBorder
         disabled={disabled || disabledFromFieldContext}
         hasError={!!(error || errorFromFieldContext)}
+        width={convertSizeToRem(size)}
       >
         <InputContainer
           isContextAvailable={isContextAvailable}
           disabled={disabled || disabledFromFieldContext}
           hasError={!!(error || errorFromFieldContext)}
-          width={convertSizeToRem(size)}
         >
           <Box
             display={'flex'}
