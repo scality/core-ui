@@ -8,6 +8,7 @@ import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
 export type Props = React.HTMLProps<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
+  size?: 'default' | 'inline';
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
@@ -33,7 +34,7 @@ export const ButtonStyled = styled.button`
   padding: ${spacing.sp4} ${spacing.sp8};
   font-size: ${defaultTheme.fontSize.base};
   border-radius: ${spacing.sp4};
-  height: ${spacing.sp32};
+  height: ${props => props.size === "inline" ? spacing.r24 : spacing.r32};
 
   ${(props) => {
     const brand = getTheme(props);
@@ -186,6 +187,7 @@ export const ButtonIcon = styled.span<{ label: string }>`
 
 function Button({
   variant,
+  size,
   disabled,
   label,
   icon,
@@ -216,6 +218,7 @@ function Button({
         label={label}
         icon={icon}
         onClick={onClick}
+        size={size}
         {...rest}
       >
         {icon && (
