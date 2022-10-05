@@ -46,6 +46,7 @@ export const CopyButton = ({
       {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
       style={{
+        ...props.style,
         minWidth:
           //Just to make sure the width of the button stays the same when copied!
           variant === 'outline'
