@@ -6,6 +6,7 @@ import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
+import { spacing as newSpacing } from '../../spacing';
 export type Props = React.HTMLProps<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   size?: 'default' | 'inline';
@@ -15,7 +16,7 @@ export type Props = React.HTMLProps<HTMLButtonElement> & {
   label?: React.ReactNode;
   tooltip?: TooltipProps;
 };
-export const ButtonStyled = styled.button`
+export const ButtonStyled = styled.button<Props>`
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
@@ -28,13 +29,14 @@ export const ButtonStyled = styled.button`
   text-decoration: none;
   border: none;
   text-decoration: none;
-  font-family: "Lato";
+  font-family: 'Lato';
   font-weight: ${defaultTheme.fontWeight.base};
 
   padding: ${spacing.sp4} ${spacing.sp8};
   font-size: ${defaultTheme.fontSize.base};
   border-radius: ${spacing.sp4};
-  height: ${props => props.size === "inline" ? spacing.r24 : spacing.r32};
+  height: ${(props) =>
+    props.size === 'inline' ? newSpacing.r24 : newSpacing.r32};
 
   ${(props) => {
     const brand = getTheme(props);
@@ -207,7 +209,7 @@ function Button({
 
   return (
     <Tooltip
-      placement={tooltip && tooltip.placement}
+      placement={tooltip ? tooltip.placement : undefined}
       overlay={tooltip && tooltip.overlay}
       overlayStyle={tooltip && tooltip.overlayStyle}
     >
