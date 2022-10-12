@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
+import ReactDom from 'react-dom';
 import styled from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
-import ReactDom from 'react-dom';
 import { Icon } from '../icon/Icon.component';
+
 type Props = {
   isOpen: boolean;
-  close: () => {};
+  close: () => void;
   title: string;
   footer?: React.ReactNode;
   children: React.ReactNode;
