@@ -1,4 +1,4 @@
-import { Children, ReactNode } from 'react';
+import { Children, HTMLProps, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from './components/box/Box';
 import { getTheme } from './utils';
@@ -60,12 +60,13 @@ export const Stack = ({
   direction,
   withSeparators,
   children,
+  ...rest
 }: {
   gap?: keyof typeof spacing;
   direction?: 'vertical' | 'horizontal';
   withSeparators?: boolean;
   children: ReactNode[];
-}) => {
+} & Omit<HTMLProps<HTMLDivElement>, 'ref' | 'as'>) => {
   gap = gap || 'r8';
   direction = direction || 'horizontal';
 
@@ -77,6 +78,7 @@ export const Stack = ({
       flexDirection={direction === 'horizontal' ? 'row' : 'column'}
       alignItems={direction === 'horizontal' ? 'center' : 'normal'}
       gap={spacing[gap]}
+      {...rest}
     >
       {Children.map(children, (node, nodeIndex) => {
         return (
@@ -92,9 +94,15 @@ export const Stack = ({
   );
 };
 
-export const Wrap = ({ children }: { children: ReactNode[] }) => {
+export const Wrap = ({
+  children,
+  ...rest
+}: { children: ReactNode[] } & Omit<
+  HTMLProps<HTMLDivElement>,
+  'ref' | 'as'
+>) => {
   return (
-    <Box display={'flex'} justifyContent="space-between">
+    <Box display={'flex'} justifyContent="space-between" {...rest}>
       {Children.map(children, (node) => {
         return <>{node}</>;
       })}
