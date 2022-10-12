@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import {
   Column as TableColumn,
+  CellProps as TableCellProps,
   CoreUIColumn,
   HeaderGroup,
   IdType,
@@ -27,7 +28,18 @@ import { TableWrapper } from './Tablestyle';
 import { compareHealth } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 
-export type Column<T extends Record<string, unknown>> = CoreUIColumn<T>;
+type UpdateTableData<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  updateTableData?: <DATA_ROW_KEY extends keyof DATA_ROW>(
+    rowId: string,
+    columnName: DATA_ROW_KEY,
+    value: DATA_ROW[DATA_ROW_KEY],
+  ) => void;
+};
+export type Column<D extends Record<string, unknown>> = CoreUIColumn<D>;
+export type CellProps<D extends Record<string, unknown>, V = unknown> =
+  TableCellProps<D, V> & UpdateTableData<D>;
 
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -48,7 +60,8 @@ export type TableProps<
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
   initiallySelectedRowsIds?: Set<string>;
-};
+  //To call it from the Cell renderer to update the original data
+} & UpdateTableData<DATA_ROW>;
 
 type setHiddenColumnFuncType = (oldHidden: string[]) => string[];
 
@@ -103,6 +116,7 @@ function Table<
   onBottom,
   onBottomOffset = 10,
   initiallySelectedRowsIds,
+  updateTableData,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -171,6 +185,7 @@ function Table<
       //@ts-ignore TODO investigate why this type is not matching
       globalFilter: stringifyFilter,
       autoResetHiddenColumns: false,
+      updateTableData,
     },
     useBlockLayout,
     useFilters,
