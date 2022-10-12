@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
-  Column,
+  Column as TableColumn,
   CoreUIColumn,
   HeaderGroup,
   IdType,
@@ -26,6 +26,8 @@ import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper } from './Tablestyle';
 import { compareHealth } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
+
+export type Column<T extends Record<string, unknown>> = CoreUIColumn<T>;
 
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -150,7 +152,7 @@ function Table<
     toggleAllRowsSelected,
   } = useTable<DATA_ROW>(
     {
-      columns: columns as Column<DATA_ROW>[],
+      columns: columns as TableColumn<DATA_ROW>[],
       data,
       getRowId,
       initialState: {
