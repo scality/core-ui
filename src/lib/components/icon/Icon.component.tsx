@@ -117,7 +117,7 @@ export const iconTable = {
   Snowflake: 'fas faSnowflake',
   Key: 'fas faKey',
   Filter: 'fas faFilter',
-  Download: 'fas fa-download',
+  Download: 'fas faDownload',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
