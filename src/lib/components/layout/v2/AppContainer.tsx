@@ -1,5 +1,6 @@
-import React, { ReactElement } from 'react';
+import { HTMLProps, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
+import { ThemeColors } from '../../../style/theme';
 import { getTheme } from '../../../utils';
 
 const Container = styled.div`
@@ -13,16 +14,24 @@ const FillAvailableFlexBox = styled.div`
 `;
 
 const ContextWrapper = styled.div<{
-  background?: string;
+  background?: ThemeColors;
 }>`
-  background: ${(props) => props.background || 'initial'};
+  background: ${(props) =>
+    props.background ? getTheme(props)[props.background] : 'initial'};
   height: 3rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
 `;
 
-const ContextContainer = ({ children, background, ...rest }) => (
+const ContextContainer = ({
+  children,
+  background,
+  ...rest
+}: { background: ThemeColors } & Omit<
+  HTMLProps<HTMLDivElement>,
+  'ref' | 'as'
+>) => (
   <ContextWrapper background={background}>
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </ContextWrapper>
@@ -43,18 +52,37 @@ const OverallSummary = ({ children, ...rest }) => (
   </OverallSummaryContainer>
 );
 
-const MainContent = styled.div<{
+const MainContentContainer = styled.div<{
   hasPadding?: boolean;
-  background?: string;
+  background?: ThemeColors;
 }>`
   display: flex;
   flex: 1;
   padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
   background: ${(props) =>
-    props.background || getTheme(props)['backgroundLevel3']};
+    getTheme(props)[props.background || 'backgroundLevel3']};
 `;
 
-const MainContentContainer = styled.div<{
+const MainContent = ({
+  children,
+  hasPadding,
+  background,
+  ...rest
+}: {
+  children: ReactNode;
+  hasPadding?: boolean;
+  background?: ThemeColors;
+}) => (
+  <MainContentContainer hasPadding={hasPadding} background={background}>
+    <FillAvailableFlexBox
+      {...rest}
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
+      {children}
+    </FillAvailableFlexBox>
+  </MainContentContainer>
+);
+const AppChildrenContainer = styled.div<{
   hasPadding?: boolean;
 }>`
   flex: 1;
@@ -75,9 +103,9 @@ function AppContainer({
   return (
     <Container>
       {sidebarNavigation}
-      <MainContentContainer hasPadding={hasPadding}>
+      <AppChildrenContainer hasPadding={hasPadding}>
         {children}
-      </MainContentContainer>
+      </AppChildrenContainer>
     </Container>
   );
 }

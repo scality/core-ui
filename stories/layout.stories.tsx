@@ -106,7 +106,7 @@ export const Layout2Simplest = ({}) => {
       }
     >
       <AppContainer>
-        <AppContainer.ContextContainer background="#95ca20">
+        <AppContainer.ContextContainer background="backgroundLevel1">
           Context bar
         </AppContainer.ContextContainer>
         <AppContainer.OverallSummary>
@@ -127,13 +127,13 @@ export const Layout2SimplestWithMainContentPadding = ({}) => (
     }
   >
     <AppContainer>
-      <AppContainer.ContextContainer background="#95ca20">
+      <AppContainer.ContextContainer background="backgroundLevel1">
         Context bar
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
       </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="#ffcf75" hasPadding>
+      <AppContainer.MainContent background="statusCritical" hasPadding>
         Main content
       </AppContainer.MainContent>
     </AppContainer>
@@ -153,20 +153,20 @@ export const Layout2SimplestSidebar = ({}) => (
         <div style={{ background: '#fff3e8' }}>Sidebar navigation</div>
       }
     >
-      <AppContainer.ContextContainer background="#95ca20">
+      <AppContainer.ContextContainer background="backgroundLevel1">
         Context bar
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
       </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="#ffcf75">
+      <AppContainer.MainContent background="statusCritical">
         Main content
       </AppContainer.MainContent>
     </AppContainer>
   </Layout2>
 );
 
-export const Layout2TwoEqualPanelsWithPadding = ({}) => (
+export const Layout2TwoEqualPanelsWithPadding = () => (
   <Layout2
     headerNavigation={
       <HeaderComponent>
@@ -179,28 +179,30 @@ export const Layout2TwoEqualPanelsWithPadding = ({}) => (
         <div style={{ background: '#fff3e8' }}>Navigation</div>
       }
     >
-      <AppContainer.ContextContainer background="#95ca20">
+      <AppContainer.ContextContainer background="backgroundLevel1">
         Context bar
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
       </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="#ffcf75">
+      <AppContainer.MainContent>
         <TwoPanelLayout
-          leftPanel={
-            <div style={{ background: '#7171af' }}>Left Panel content</div>
-          }
-          rightPanel={
-            <div style={{ background: '#e6c92f' }}>Right panel content</div>
-          }
           panelsRatio="50-50"
+          leftPanel={{
+            children: <>Left Panel content</>,
+            background: 'backgroundLevel3',
+          }}
+          rightPanel={{
+            children: <>Right Panel content</>,
+            background: 'backgroundLevel4',
+          }}
         />
       </AppContainer.MainContent>
     </AppContainer>
   </Layout2>
 );
 
-export const Layout2TwoPanelsThirtySeventy = ({}) => (
+export const Layout2TwoPanelsThirtySeventy = () => (
   <Layout2
     headerNavigation={
       <HeaderComponent>
@@ -213,32 +215,30 @@ export const Layout2TwoPanelsThirtySeventy = ({}) => (
         <div style={{ background: '#fff3e8' }}>Navigation</div>
       }
     >
-      <AppContainer.ContextContainer background="#95ca20">
+      <AppContainer.ContextContainer background="backgroundLevel1">
         Context bar
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
       </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="#ffcf75">
+      <AppContainer.MainContent background="statusCritical">
         <TwoPanelLayout
-          leftPanel={
-            <div style={{ background: '#7171af' }}>
-              Left Panel content (with padding)
-            </div>
-          }
-          rightPanel={
-            <div style={{ background: '#e6c92f', flex: 1 }}>
-              Right panel content (element has flex: 1, thus the full width)
-            </div>
-          }
           panelsRatio="30-70"
+          leftPanel={{
+            children: <>Left Panel content</>,
+            background: 'backgroundLevel3',
+          }}
+          rightPanel={{
+            children: <>Right Panel content</>,
+            background: 'backgroundLevel4',
+          }}
         />
       </AppContainer.MainContent>
     </AppContainer>
   </Layout2>
 );
 
-export const Layout2TwoPanelsSeventyThirty = ({}) => (
+export const Layout2TwoPanelsSeventyThirty = () => (
   <Layout2
     headerNavigation={
       <HeaderComponent>
@@ -251,21 +251,23 @@ export const Layout2TwoPanelsSeventyThirty = ({}) => (
         <div style={{ background: '#fff3e8' }}>Navigation</div>
       }
     >
-      <AppContainer.ContextContainer background="#95ca20">
+      <AppContainer.ContextContainer background="backgroundLevel1">
         Context bar
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         <div>Overall summary (optional)</div>
       </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="#ffcf75">
+      <AppContainer.MainContent background="selectedActive">
         <TwoPanelLayout
           panelsRatio="70-30"
-          leftPanel={
-            <div style={{ background: '#7171af' }}>Left Panel content</div>
-          }
-          rightPanel={
-            <div style={{ background: '#e6c92f' }}>Right panel content</div>
-          }
+          leftPanel={{
+            children: <>Left Panel content</>,
+            background: 'backgroundLevel3',
+          }}
+          rightPanel={{
+            children: <>Right Panel content</>,
+            background: 'backgroundLevel4',
+          }}
         />
       </AppContainer.MainContent>
     </AppContainer>

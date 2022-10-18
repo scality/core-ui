@@ -1,5 +1,7 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
+import { ThemeColors } from '../../../style/theme';
+import { getTheme } from '../../../utils';
 
 interface Ratio {
   left: number;
@@ -26,13 +28,25 @@ const PanelsContainer = styled.div`
   flex: 1;
 `;
 
-const LeftPanel = styled.div<{ hasPadding?: boolean; flex?: number }>`
+const LeftPanel = styled.div<{
+  hasPadding?: boolean;
+  flex?: number;
+  background?: ThemeColors;
+}>`
   flex: ${(props) => props.flex || '0 auto'};
+  background: ${(props) =>
+    getTheme(props)[props.background || 'backgroundLevel3']};
   display: flex;
 `;
 
-const RightPanel = styled.div<{ hasPadding?: boolean; flex?: number }>`
+const RightPanel = styled.div<{
+  hasPadding?: boolean;
+  flex?: number;
+  background?: ThemeColors;
+}>`
   flex: ${(props) => props.flex || '0 auto'};
+  background: ${(props) =>
+    getTheme(props)[props.background || 'backgroundLevel4']};
   display: flex;
 `;
 
@@ -59,15 +73,25 @@ export const TwoPanelLayout = ({
   ...rest
 }: {
   panelsRatio: RatioString;
-  leftPanel: ReactElement;
-  rightPanel: ReactElement;
+  leftPanel: { children: ReactElement; background?: ThemeColors };
+  rightPanel: { children: ReactElement; background?: ThemeColors };
 }) => {
   const panelsObjectRatio = getPanelsObjectRation(panelsRatio);
 
   return (
     <PanelsContainer {...rest}>
-      <LeftPanel flex={panelsObjectRatio.left}>{leftPanel}</LeftPanel>
-      <RightPanel flex={panelsObjectRatio.right}>{rightPanel}</RightPanel>
+      <LeftPanel
+        flex={panelsObjectRatio.left}
+        background={leftPanel.background}
+      >
+        {leftPanel.children}
+      </LeftPanel>
+      <RightPanel
+        flex={panelsObjectRatio.right}
+        background={rightPanel.background}
+      >
+        {rightPanel.children}
+      </RightPanel>
     </PanelsContainer>
   );
 };

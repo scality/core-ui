@@ -54,6 +54,7 @@ export const defaultTheme = {
 };
 
 export const brand = defaultTheme.darkRebrand;
+export type ThemeColors = keyof typeof brand;
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';
