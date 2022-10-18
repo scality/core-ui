@@ -1,17 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
-
+import { spacing, Wrap } from '../../spacing';
 import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
+import { getTheme, getThemePropSelector } from '../../utils';
+import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
+import { Text } from '../text/Text.component';
 
 type Props = {
   isOpen: boolean;
-  close: () => void;
+  close?: () => void;
   title: string;
-  footer?: React.ReactNode;
-  children: React.ReactNode;
+  footer?: ReactNode;
+  children: ReactNode;
+  subTitle?: ReactNode;
 };
 const ModalContainer = styled.div`
   position: fixed;
@@ -38,30 +41,29 @@ const ModalContent = styled.div`
 `;
 const ModalHeader = styled.div`
   display: flex;
-  padding: ${defaultTheme.padding.base} ${defaultTheme.padding.larger};
-`;
-const ModalHeaderTitle = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
-  font-weight: ${defaultTheme.fontWeight.semibold};
-  flex-grow: 1;
-`;
-const ModalBody = styled.div`
-  padding: 0 ${defaultTheme.padding.larger};
-  flex-grow: 1;
-`;
-const ModalFooter = styled.div`
-  padding: ${defaultTheme.padding.base} ${defaultTheme.padding.larger};
-  background-color: ${getThemePropSelector('backgroundLevel4')};
-`;
-const ModalClose = styled.div`
-  font-size: ${defaultTheme.fontSize.large};
-  cursor: pointer;
-  &:hover {
-    color: ${defaultTheme.grayLight};
-  }
+  padding: ${spacing.r16};
+  background-color: ${(props) => getTheme(props).backgroundLevel3};
 `;
 
-const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
+const ModalBody = styled.div`
+  padding: ${spacing.r32};
+  flex-grow: 1;
+  background-color: ${(props) => getTheme(props).backgroundLevel4};
+`;
+const ModalFooter = styled.div`
+  padding: ${spacing.r16};
+  background-color: ${(props) => getTheme(props).backgroundLevel3};
+`;
+
+const Modal = ({
+  isOpen,
+  close,
+  title,
+  children,
+  footer,
+  subTitle,
+  ...rest
+}: Props) => {
   const modalContainer = useRef(document.createElement('div'));
 
   useEffect(() => {
@@ -75,10 +77,14 @@ const Modal = ({ isOpen, close, title, children, footer, ...rest }: Props) => {
         <ModalContainer className="sc-modal" {...rest}>
           <ModalContent className="sc-modal-content">
             <ModalHeader className="sc-modal-header">
-              <ModalHeaderTitle>{title}</ModalHeaderTitle>
-              <ModalClose onClick={close}>
-                <Icon name="Close" />
-              </ModalClose>
+              <Wrap style={{ flex: 1 }}>
+                <Text variant="Larger">{title}</Text>
+                {close ? (
+                  <Button icon={<Icon name="Close" />} onClick={close} />
+                ) : (
+                  <>{subTitle}</>
+                )}
+              </Wrap>
             </ModalHeader>
             <ModalBody className="sc-modal-body">{children}</ModalBody>
             {footer && (

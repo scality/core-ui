@@ -4,6 +4,8 @@ import { Button } from '../src/lib/components/button/Button.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
+import { IconHelp } from '../src/lib/components/IconHelper';
+import { Stack } from '../src/lib/spacing';
 export default {
   title: 'Components/Notification/Modal',
   component: Modal,
@@ -38,6 +40,52 @@ export const Default = ({}) => {
         }
       >
         <span>Do you want a cookie?</span>
+      </Modal>
+    </Wrapper>
+  );
+};
+
+export const CustomizeTitle = ({}) => {
+  return (
+    <Wrapper>
+      <Modal
+        isOpen={true}
+        title="Hello"
+        footer={
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Button
+              text="No"
+              size="base"
+              outlined
+              onClick={action('No clicked')}
+            />
+            <Button
+              variant="buttonSecondary"
+              text="Yes"
+              size="base"
+              onClick={action('Yes clicked')}
+            />
+          </div>
+        }
+        subTitle={
+          <Stack>
+            <>Step 1/2</>
+            <IconHelp
+              tooltipMessage={
+                <ul>
+                  <li>Hello, this is the tooltip of the modal</li>
+                </ul>
+              }
+            />
+          </Stack>
+        }
+      >
+        <span>Do you want some chocolate? :D</span>
       </Modal>
     </Wrapper>
   );
