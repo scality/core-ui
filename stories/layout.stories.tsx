@@ -1,9 +1,14 @@
 import React, { useState, createElement } from 'react';
 import { Layout } from '../src/lib/components/layout/Layout.component';
+import { Layout as Layout2 } from '../src/lib/components/layout/v2';
+import { TwoPanelLayout } from '../src/lib/components/layout/v2/panels';
+import { AppContainer } from '../src/lib/components/layout/v2/AppContainer';
 import { Loader } from '../src/lib/components/loader/Loader.component';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { addDecorator } from '@storybook/react';
+import styled from 'styled-components';
+
 addDecorator(createElement);
 const sideBarActions = [
   {
@@ -84,6 +89,189 @@ export default {
   component: Layout,
   decorators: [withKnobs],
 };
+
+const HeaderComponent = styled.div`
+  background: #ff9c54;
+  flex: 1;
+  color: black;
+}`;
+
+export const Layout2Simplest = ({}) => {
+  return (
+    <Layout2
+      headerNavigation={
+        <HeaderComponent>
+          <h3>Header navigation</h3>
+        </HeaderComponent>
+      }
+    >
+      <AppContainer>
+        <AppContainer.ContextContainer background="#95ca20">
+          Context bar
+        </AppContainer.ContextContainer>
+        <AppContainer.OverallSummary>
+          Overall summary (optional)
+        </AppContainer.OverallSummary>
+        <AppContainer.MainContent>Main content</AppContainer.MainContent>
+      </AppContainer>
+    </Layout2>
+  );
+};
+
+export const Layout2SimplestWithMainContentPadding = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer>
+      <AppContainer.ContextContainer background="#95ca20">
+        Context bar
+      </AppContainer.ContextContainer>
+      <AppContainer.OverallSummary>
+        Overall summary (optional)
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="#ffcf75" hasPadding>
+        Main content
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
+export const Layout2SimplestSidebar = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer
+      sidebarNavigation={
+        <div style={{ background: '#fff3e8' }}>Sidebar navigation</div>
+      }
+    >
+      <AppContainer.ContextContainer background="#95ca20">
+        Context bar
+      </AppContainer.ContextContainer>
+      <AppContainer.OverallSummary>
+        Overall summary (optional)
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="#ffcf75">
+        Main content
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
+export const Layout2TwoEqualPanelsWithPadding = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer
+      sidebarNavigation={
+        <div style={{ background: '#fff3e8' }}>Navigation</div>
+      }
+    >
+      <AppContainer.ContextContainer background="#95ca20">
+        Context bar
+      </AppContainer.ContextContainer>
+      <AppContainer.OverallSummary>
+        Overall summary (optional)
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="#ffcf75">
+        <TwoPanelLayout
+          leftPanel={
+            <div style={{ background: '#7171af' }}>Left Panel content</div>
+          }
+          rightPanel={
+            <div style={{ background: '#e6c92f' }}>Right panel content</div>
+          }
+          panelsRatio="50-50"
+        />
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
+export const Layout2TwoPanelsThirtySeventy = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer
+      sidebarNavigation={
+        <div style={{ background: '#fff3e8' }}>Navigation</div>
+      }
+    >
+      <AppContainer.ContextContainer background="#95ca20">
+        Context bar
+      </AppContainer.ContextContainer>
+      <AppContainer.OverallSummary>
+        Overall summary (optional)
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="#ffcf75">
+        <TwoPanelLayout
+          leftPanel={
+            <div style={{ background: '#7171af' }}>
+              Left Panel content (with padding)
+            </div>
+          }
+          rightPanel={
+            <div style={{ background: '#e6c92f', flex: 1 }}>
+              Right panel content (element has flex: 1, thus the full width)
+            </div>
+          }
+          panelsRatio="30-70"
+        />
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
+export const Layout2TwoPanelsSeventyThirty = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer
+      sidebarNavigation={
+        <div style={{ background: '#fff3e8' }}>Navigation</div>
+      }
+    >
+      <AppContainer.ContextContainer background="#95ca20">
+        Context bar
+      </AppContainer.ContextContainer>
+      <AppContainer.OverallSummary>
+        <div>Overall summary (optional)</div>
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="#ffcf75">
+        <TwoPanelLayout
+          panelsRatio="70-30"
+          leftPanel={
+            <div style={{ background: '#7171af' }}>Left Panel content</div>
+          }
+          rightPanel={
+            <div style={{ background: '#e6c92f' }}>Right panel content</div>
+          }
+        />
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
 export const SidebarDocked = ({}) => {
   const expanded = boolean('Sidebar Expanded', false);
   const sidebar = {

@@ -45,6 +45,9 @@ export { ErrorPage500 } from './components/error-pages/ErrorPage500.component';
 export { ErrorPageAuth } from './components/error-pages/ErrorPageAuth.component';
 export { TextBadge } from './components/textbadge/TextBadge.component';
 export { SpacedBox } from './components/spacedbox/SpacedBox';
+export { Layout as Layout2 } from './components/layout/v2';
+export { TwoPanelLayout } from './components/layout/v2/panels';
+export { AppContainer } from './components/layout/v2/AppContainer';
 export {
   BasicText,
   SecondaryText,
