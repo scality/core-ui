@@ -138,6 +138,7 @@ type Props = {
   size?: SizeProp;
   color?: IconColor;
   ariaLabel?: string;
+  withWrapper?: boolean;
 };
 
 const DelayedFallback = ({
@@ -185,13 +186,42 @@ function getLazyStyledIcon(iconInfo: string) {
   });
 }
 
-function Icon({
+export const IconWrapper = styled.div<{size: SizeProp}>`
+  ${(props) => {
+    const brand = getTheme(props);
+    return css`
+      color: ${brand.infoPrimary};
+      border: 1px solid ${brand.infoPrimary};
+      background: ${brand.backgroundLevel1};
+      ${props.size === 'lg' ? `
+        width: 2.5rem;
+        height: 2.5rem;
+      ` : props.size === 'sm' ? `
+        width: 1.75rem;
+        height: 1.75rem;
+      ` : props.size === 'xs' ? `
+        width: 1.5rem;
+        height: 1.5rem;
+      ` : `
+        width: ${ parseInt(props.size.replace('x', ''))*2 }rem;
+        height: ${ parseInt(props.size.replace('x', ''))*2 }rem;
+      `}
+    `;
+  }}
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+`;
+
+function NonWrappedIcon({
   name,
   size = '1x',
   color = null,
   ariaLabel = '',
   ...rest
-}: Props) {
+}: Omit<Props, 'withWrapper'>) {
   const iconInfo = iconTable[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
 
@@ -247,6 +277,14 @@ function Icon({
       )}
     </>
   );
+}
+
+function Icon({ withWrapper, ...props }: Props) {
+  if (withWrapper) {
+    return <IconWrapper size={props.size}><NonWrappedIcon {...props} /></IconWrapper>;
+  }
+
+  return <NonWrappedIcon {...props} />;
 }
 
 export { Icon };

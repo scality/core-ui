@@ -32,31 +32,13 @@ export const ActionWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-export const IconWrapper = styled.div`
-  ${(props) => {
-    const brand = getTheme(props);
-    return css`
-      color: ${brand.background};
-      border: 1px solid ${brand.infoPrimary};
-    `;
-  }}
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  width: 150px;
-  height: 150px;
-`;
 
 function EmptyState(props: Props) {
   const { icon, label, link, history } = props;
   return (
     <EmptystateContainer className="sc-emptystate">
       <EmptyStateRow>
-        <IconWrapper>
-          <Icon name={icon} color="infoPrimary" size="5x" />
-        </IconWrapper>
+        <Icon name={icon} color="infoPrimary" size="5x" withWrapper />
       </EmptyStateRow>
       <EmptyStateRow>
         <LargeText>A list of {`${label}s`} will appear here.</LargeText>
