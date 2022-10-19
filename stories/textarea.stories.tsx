@@ -33,6 +33,15 @@ export const Default = ({}) => {
         disabled={true}
         onChange={action('onChange')}
       />
+      <Title>Text Area disabled with content</Title>
+      <TextArea
+        rows={10}
+        cols={50}
+        placeholder="Text area input"
+        value="hello"
+        disabled={true}
+        onChange={action('onChange')}
+      />
     </Wrapper>
   );
 };
