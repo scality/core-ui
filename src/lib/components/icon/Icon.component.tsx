@@ -118,6 +118,7 @@ export const iconTable = {
   Key: 'fas faKey',
   Filter: 'fas faFilter',
   Download: 'fas faDownload',
+  Certificate: 'fas faCertificate',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
