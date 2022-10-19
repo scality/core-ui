@@ -56,7 +56,12 @@ const BasicPageLayout = styled.div<{ layoutKind: 'page' | 'tab' }>`
 `;
 
 const FixedHeader = styled(BasicPageLayout)`
-  border-bottom: 1px solid ${(props) => getTheme(props).border};
+  ${(props) =>
+    props.layoutKind === 'page'
+      ? `
+  border-bottom: 1px solid ${getTheme(props).border};
+  `
+      : ``}
 `;
 
 const FixedFooter = styled(BasicPageLayout)`
