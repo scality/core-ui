@@ -45,7 +45,7 @@ const TooltipOverLayContainer = styled.div<{
 }>`
   display: inline-block;
   opacity: 0;
-  position: absolute;
+  position: fixed;
   width: max-content;
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
