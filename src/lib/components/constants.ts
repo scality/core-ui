@@ -16,7 +16,7 @@ export type Size =
   | 'huge'
   | 'massive';
 // Replace the "success" by "health", but keep the key in the color-palette for the moment.
-export type Variant = 'selected' | 'healthy' | 'warning' | 'danger';
+export type Variant =  'base' | 'selected' | 'healthy' | 'warning' | 'danger';
 // metric chart
 // url query
 export const QUERY_LAST_SEVEN_DAYS = 'now-7d';
