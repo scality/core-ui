@@ -42,10 +42,17 @@ const PageFormWrapper = styled.form<FormProps>`
   height: 100%;
 `;
 
-const BasicPageLayout = styled.div`
+const BasicPageLayout = styled.div<{ layoutKind: 'page' | 'tab' }>`
   margin: 0 auto;
+  ${(props) =>
+    props.layoutKind === 'page'
+      ? `
   width: 45rem;
   padding-right: ${spacing.f16};
+  `
+      : `
+  width: 100%;
+  padding-bottom: ${spacing.r24};`}
 `;
 
 const FixedHeader = styled(BasicPageLayout)`
@@ -253,7 +260,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     return (
       <ScrollbarWrapper>
         <PageFormWrapper {...formProps} ref={ref}>
-          <FixedHeader>
+          <FixedHeader layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <Stack direction="vertical">
@@ -278,7 +285,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             </PaddedForHeaderAndFooterContent>
           </FixedHeader>
 
-          <ScrollArea>
+          <ScrollArea layoutKind="page">
             <PaddedContent>
               <div
                 style={{
@@ -293,7 +300,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             </PaddedContent>
           </ScrollArea>
 
-          <FixedFooter>
+          <FixedFooter layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <div>{leftActions}</div>
@@ -312,22 +319,20 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
     return (
       <ScrollbarWrapper>
         <PageFormWrapper {...formProps} ref={ref}>
-          <FixedHeader>
-            <PaddedForHeaderAndFooterContent>
-              <Wrap>
-                <div>{leftActions}</div>
-                <div>{rightActions}</div>
-              </Wrap>
-            </PaddedForHeaderAndFooterContent>
+          <FixedHeader layoutKind="tab">
+            <Wrap>
+              <div>{leftActions}</div>
+              <div>{rightActions}</div>
+            </Wrap>
           </FixedHeader>
 
-          <ScrollArea>
-            {banner}
-            <PaddedContent>
+          <ScrollArea layoutKind="tab">
+            <Stack direction="vertical" gap="r24">
+              {banner}
               <Stack direction="vertical" withSeparators gap="r24">
                 {Children.toArray(children)}
               </Stack>
-            </PaddedContent>
+            </Stack>
           </ScrollArea>
         </PageFormWrapper>
       </ScrollbarWrapper>
