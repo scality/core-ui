@@ -85,7 +85,7 @@ export const CustomizeTitle = ({}) => {
           </Stack>
         }
       >
-        <span>Do you want some chocolate? :D</span>
+        <div>Do you want some chocolate? :D</div>
       </Modal>
     </Wrapper>
   );

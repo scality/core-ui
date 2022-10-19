@@ -38,10 +38,11 @@ const ModalContent = styled.div`
   min-width: 250px;
   min-height: 150px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  max-height: calc(100vh - ${spacing.r24} - ${spacing.r24});
 `;
 const ModalHeader = styled.div`
   display: flex;
-  padding: ${spacing.r16};
+  padding: ${spacing.r16} ${spacing.r16} ${spacing.r16} ${spacing.r32};
   background-color: ${(props) => getTheme(props).backgroundLevel3};
 `;
 
@@ -49,6 +50,7 @@ const ModalBody = styled.div`
   padding: ${spacing.r32};
   flex-grow: 1;
   background-color: ${(props) => getTheme(props).backgroundLevel4};
+  overflow-y: scroll;
 `;
 const ModalFooter = styled.div`
   padding: ${spacing.r16};
