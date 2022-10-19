@@ -27,7 +27,7 @@ export const StackStory = ({}) => {
       >
         <Stack withSeparators={true} gap="r32">
           <Stack gap="r20">
-            <Icon name="Account" size="2x" color="infoPrimary" />
+            <Icon name="Account" size="2x" color="infoPrimary" withWrapper />
             <Stack direction="vertical" gap="r4">
               <LargerText>6 Accounts</LargerText>
               <SmallerSecondaryText>for this instance</SmallerSecondaryText>
