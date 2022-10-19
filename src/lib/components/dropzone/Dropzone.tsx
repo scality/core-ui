@@ -102,6 +102,8 @@ export function Dropzone({
                 icon={<Icon name="Close" />}
                 tooltip={{ overlay: 'Remove' }}
                 aria-label={`Remove ${acceptedFiles[0].name}`}
+                variant='secondary'
+                type='button'
                 onClick={() => {
                   console.log('hello');
                   removeFile(0);
@@ -112,10 +114,11 @@ export function Dropzone({
             <Stack direction="vertical">
               <Button
                 icon={
-                  variant === 'large' ? <Icon name="Add-plus" /> : undefined
+                  variant === 'large' ? <Icon name="Create-add" /> : undefined
                 }
+                variant='secondary'
+                type='button'
                 label={labels.buttonAddMoreLabel}
-                variant="primary"
                 onClick={onClick}
               />
               <FileList>
@@ -126,6 +129,7 @@ export function Dropzone({
                       icon={<Icon name="Close" />}
                       tooltip={{ overlay: 'Remove' }}
                       aria-label={`Remove ${file.name}`}
+                      type='button'
                       onClick={() => {
                         removeFile(index);
                       }}
@@ -146,10 +150,11 @@ export function Dropzone({
               {variant === 'large' && <Text>{labels.or}</Text>}
               <Button
                 icon={
-                  variant === 'large' ? <Icon name="Add-plus" /> : undefined
+                  variant === 'large' ? <Icon name="Create-add" /> : undefined
                 }
                 label={labels.buttonLabel}
-                variant="primary"
+                variant="secondary"
+                type='button'
                 onClick={onClick}
               />
             </Stack>
