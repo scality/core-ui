@@ -238,11 +238,7 @@ const FormSection = ({
       <Stack direction="vertical" gap="r12">
         {title && (
           <Stack direction="horizontal" gap="r8">
-            {title.icon && (
-              <Text>
-                <Icon name={title.icon} />
-              </Text>
-            )}
+            {title.icon && <Icon name={title.icon} color="textPrimary" />}
             <Text isEmphazed>
               {groupNotOptional ? `${title.name}` : `${title.name} (optional)`}
             </Text>
