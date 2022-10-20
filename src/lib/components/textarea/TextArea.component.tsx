@@ -10,7 +10,7 @@ const TextAreaContainer = styled.textarea`
   border-radius: 4px;
   resize: vertical;
   font-family: Courier New;
-  font-size: ${spacing.f10};
+  font-size: ${spacing.f14};
 
   ${(props) =>
     props.disabled &&

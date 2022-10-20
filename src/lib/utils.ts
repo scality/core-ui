@@ -17,6 +17,7 @@ const variantMapping = {
   warning: 'statusWarning',
   danger: 'statusCritical',
   selected: 'selectedActive',
+  base: 'infoPrimary',
 };
 
 /** Translates the old colors into new colors while keeping the same name.
