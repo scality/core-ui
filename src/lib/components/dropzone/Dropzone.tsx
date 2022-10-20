@@ -105,7 +105,6 @@ export function Dropzone({
                 variant='secondary'
                 type='button'
                 onClick={() => {
-                  console.log('hello');
                   removeFile(0);
                 }}
               />
