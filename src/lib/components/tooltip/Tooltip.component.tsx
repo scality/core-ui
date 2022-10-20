@@ -4,6 +4,7 @@ import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
+import { spacing } from '../../spacing';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
 export const LEFT = 'left';
@@ -59,11 +60,17 @@ const TooltipOverLayContainer = styled.div<{
     (props && props.style && props.style.fontSize) ||
     defaultTheme.fontSize.small};
   vertical-align: middle;
-  padding: ${defaultTheme.padding.smaller};
+  padding: ${spacing.r4} ${spacing.r8};
+  max-width: 40rem;
 `;
 
 const TooltipText = styled.div`
   width: 100%;
+  text-align: justify;
+  ul,
+  ol {
+    padding-inline-start: ${spacing.r16};
+  }
 `;
 
 function Tooltip({
