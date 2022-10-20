@@ -50,7 +50,7 @@ const ModalBody = styled.div`
   padding: ${spacing.r32};
   flex-grow: 1;
   background-color: ${(props) => getTheme(props).backgroundLevel4};
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 const ModalFooter = styled.div`
   padding: ${spacing.r16};
