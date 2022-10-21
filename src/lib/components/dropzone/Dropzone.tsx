@@ -59,8 +59,16 @@ export function Dropzone({
     useDropzone({
       ...dropzoneOptions,
       onDrop: (acceptedFiles, rejectedFiles, e) => {
+        const { multiple } = dropzoneOptions;
+
         setAcceptedFiles((alreadyAcceptedFiles) => {
-          const newAcceptedFiles = [...alreadyAcceptedFiles, ...acceptedFiles];
+          const singleFileAlreadyHasFile =
+            !multiple && alreadyAcceptedFiles.length === 1;
+
+          const newAcceptedFiles = singleFileAlreadyHasFile
+            ? alreadyAcceptedFiles
+            : [...alreadyAcceptedFiles, ...acceptedFiles];
+
           if (onChange) {
             onChange(newAcceptedFiles);
           }
@@ -102,8 +110,7 @@ export function Dropzone({
                 icon={<Icon name="Close" />}
                 tooltip={{ overlay: 'Remove' }}
                 aria-label={`Remove ${acceptedFiles[0].name}`}
-                variant='secondary'
-                type='button'
+                type="button"
                 onClick={() => {
                   removeFile(0);
                 }}
@@ -115,8 +122,8 @@ export function Dropzone({
                 icon={
                   variant === 'large' ? <Icon name="Create-add" /> : undefined
                 }
-                variant='secondary'
-                type='button'
+                variant="secondary"
+                type="button"
                 label={labels.buttonAddMoreLabel}
                 onClick={onClick}
               />
@@ -128,7 +135,7 @@ export function Dropzone({
                       icon={<Icon name="Close" />}
                       tooltip={{ overlay: 'Remove' }}
                       aria-label={`Remove ${file.name}`}
-                      type='button'
+                      type="button"
                       onClick={() => {
                         removeFile(index);
                       }}
@@ -153,7 +160,7 @@ export function Dropzone({
                 }
                 label={labels.buttonLabel}
                 variant="secondary"
-                type='button'
+                type="button"
                 onClick={onClick}
               />
             </Stack>
