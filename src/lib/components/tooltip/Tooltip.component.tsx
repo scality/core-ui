@@ -70,6 +70,8 @@ const TooltipText = styled.div`
   ul,
   ol {
     padding-inline-start: ${spacing.r16};
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 `;
 
