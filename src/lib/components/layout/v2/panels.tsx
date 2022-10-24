@@ -37,6 +37,7 @@ const LeftPanel = styled.div<{
   background: ${(props) =>
     getTheme(props)[props.background || 'backgroundLevel3']};
   display: flex;
+  min-width: 0;
 `;
 
 const RightPanel = styled.div<{
@@ -48,6 +49,7 @@ const RightPanel = styled.div<{
   background: ${(props) =>
     getTheme(props)[props.background || 'backgroundLevel4']};
   display: flex;
+  min-width: 0;
 `;
 
 type RatioString = '50-50' | '70-30' | '30-70';

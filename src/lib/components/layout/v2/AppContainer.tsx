@@ -1,4 +1,4 @@
-import { HTMLProps, ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ThemeColors } from '../../../style/theme';
 import { getTheme } from '../../../utils';
@@ -28,10 +28,10 @@ const ContextContainer = ({
   children,
   background,
   ...rest
-}: { background: ThemeColors } & Omit<
-  HTMLProps<HTMLDivElement>,
-  'ref' | 'as'
->) => (
+}: {
+  background?: ThemeColors;
+  children: ReactElement | ReactElement[];
+}) => (
   <ContextWrapper background={background}>
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </ContextWrapper>
@@ -73,13 +73,12 @@ const MainContent = ({
   hasPadding?: boolean;
   background?: ThemeColors;
 }) => (
-  <MainContentContainer hasPadding={hasPadding} background={background}>
-    <FillAvailableFlexBox
-      {...rest}
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
-      {children}
-    </FillAvailableFlexBox>
+  <MainContentContainer
+    hasPadding={hasPadding}
+    background={background}
+    {...rest}
+  >
+    {children}
   </MainContentContainer>
 );
 const AppChildrenContainer = styled.div<{
