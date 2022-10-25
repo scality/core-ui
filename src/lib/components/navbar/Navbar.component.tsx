@@ -119,6 +119,9 @@ const NavbarMenuItem = styled.div`
       height: ${defaultTheme.navbarHeight};
       font-size: ${defaultTheme.fontSize.base};
     }
+    .menu-item {
+      max-height: unset;
+    }
   }
 
   .sc-button {
