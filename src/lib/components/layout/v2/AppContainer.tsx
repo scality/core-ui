@@ -37,17 +37,24 @@ const ContextContainer = ({
   </ContextWrapper>
 );
 
-const OverallSummaryContainer = styled.div`
+const OverallSummaryContainer = styled.div<{ noPadding?: boolean }>`
   background: ${(props) => getTheme(props)['backgroundLevel2']};
   height: 6rem;
-  padding: 0 1rem;
+  padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
   box-sizing: border-box;
   display: flex;
   align-items: center;
 `;
 
-const OverallSummary = ({ children, ...rest }) => (
-  <OverallSummaryContainer>
+const OverallSummary = ({
+  children,
+  noPadding,
+  ...rest
+}: {
+  children: any;
+  noPadding?: boolean;
+}) => (
+  <OverallSummaryContainer noPadding={noPadding}>
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </OverallSummaryContainer>
 );

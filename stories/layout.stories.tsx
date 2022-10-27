@@ -113,7 +113,7 @@ export const Layout2Simplest = ({}) => {
         <AppContainer.ContextContainer background="backgroundLevel1">
           <>Context bar</>
         </AppContainer.ContextContainer>
-        <AppContainer.OverallSummary>
+        <AppContainer.OverallSummary noPadding>
           <Stack withSeparators={true} gap="r32">
             <Stack gap="r20">
               <Icon name="Account" size="2x" withWrapper />
