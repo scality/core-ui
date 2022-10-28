@@ -14,6 +14,8 @@ const FillAvailableFlexBox = styled.div`
   flex: 1;
 `;
 
+const sectionDistance = spacing.r2;
+
 const ContextWrapper = styled.div<{
   background?: ThemeColors;
 }>`
@@ -38,10 +40,15 @@ const ContextContainer = ({
   </ContextWrapper>
 );
 
-const OverallSummaryContainer = styled.div<{ noPadding?: boolean }>`
+const OverallSummaryContainer = styled.div<{
+  noPadding?: boolean;
+  noBottomMargin?: boolean;
+}>`
   background: ${(props) => getTheme(props)['backgroundLevel2']};
   height: 6rem;
   padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
+  margin-bottom: ${({ noBottomMargin }) =>
+    noBottomMargin ? '0' : sectionDistance};
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -50,12 +57,17 @@ const OverallSummaryContainer = styled.div<{ noPadding?: boolean }>`
 const OverallSummary = ({
   children,
   noPadding,
+  noBottomMargin,
   ...rest
 }: {
   children: any;
   noPadding?: boolean;
+  noBottomMargin?: boolean;
 }) => (
-  <OverallSummaryContainer noPadding={noPadding}>
+  <OverallSummaryContainer
+    noPadding={noPadding}
+    noBottomMargin={noBottomMargin}
+  >
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </OverallSummaryContainer>
 );
@@ -120,6 +132,6 @@ function AppContainer({
 AppContainer.ContextContainer = ContextContainer;
 AppContainer.OverallSummary = OverallSummary;
 AppContainer.MainContent = MainContent;
-AppContainer.sectionDistance = spacing.r2;
+AppContainer.sectionDistance = sectionDistance;
 
 export { AppContainer };

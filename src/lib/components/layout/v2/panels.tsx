@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { ThemeColors } from '../../../style/theme';
 import { getTheme } from '../../../utils';
+import { AppContainer } from './AppContainer';
 
 interface Ratio {
   left: number;
@@ -23,9 +24,10 @@ const FiftyFifty: Ratio = {
   right: 0.5,
 };
 
-const PanelsContainer = styled.div`
+const PanelsContainer = styled.div<{ noGap?: boolean }>`
   display: flex;
   flex: 1;
+  gap: ${({ noGap }) => (noGap ? 0 : AppContainer.sectionDistance)};
 `;
 
 const LeftPanel = styled.div<{
@@ -72,16 +74,18 @@ export const TwoPanelLayout = ({
   panelsRatio,
   leftPanel,
   rightPanel,
+  noGap,
   ...rest
 }: {
   panelsRatio: RatioString;
   leftPanel: { children: ReactElement; background?: ThemeColors };
   rightPanel: { children: ReactElement; background?: ThemeColors };
+  noGap?: boolean;
 }) => {
   const panelsObjectRatio = getPanelsObjectRation(panelsRatio);
 
   return (
-    <PanelsContainer {...rest}>
+    <PanelsContainer noGap={noGap} {...rest}>
       <LeftPanel
         flex={panelsObjectRatio.left}
         background={leftPanel.background}
