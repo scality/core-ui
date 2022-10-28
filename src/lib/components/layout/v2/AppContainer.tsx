@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
+import { spacing } from '../../../spacing';
 import { ThemeColors } from '../../../style/theme';
 import { getTheme } from '../../../utils';
 
@@ -119,5 +120,6 @@ function AppContainer({
 AppContainer.ContextContainer = ContextContainer;
 AppContainer.OverallSummary = OverallSummary;
 AppContainer.MainContent = MainContent;
+AppContainer.sectionDistance = spacing.r2;
 
 export { AppContainer };
