@@ -8,7 +8,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
-  overflow: auto;
 `;
 
 const FillAvailableFlexBox = styled.div`
@@ -115,13 +114,14 @@ function AppContainer({
   children,
   sidebarNavigation,
   hasPadding,
+  ...rest
 }: {
   children: ReactElement | ReactElement[];
   sidebarNavigation?: ReactElement;
   hasPadding?: boolean;
 }) {
   return (
-    <Container>
+    <Container {...rest}>
       {sidebarNavigation}
       <AppChildrenContainer hasPadding={hasPadding}>
         {children}
