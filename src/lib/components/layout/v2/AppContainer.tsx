@@ -82,6 +82,7 @@ const MainContentContainer = styled.div<{
   padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
   background: ${(props) =>
     getTheme(props)[props.background || 'backgroundLevel3']};
+  overflow: hidden;
 `;
 
 const MainContent = ({
