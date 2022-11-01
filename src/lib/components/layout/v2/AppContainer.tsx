@@ -8,6 +8,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+  overflow: hidden;
 `;
 
 const FillAvailableFlexBox = styled.div`
