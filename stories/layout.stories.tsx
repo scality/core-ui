@@ -111,39 +111,43 @@ export const Layout2Simplest = ({}) => {
     >
       <AppContainer>
         <AppContainer.ContextContainer background="backgroundLevel1">
-          Context bar
+          <>Context bar</>
         </AppContainer.ContextContainer>
-        <AppContainer.OverallSummary>
-        <Stack withSeparators={true} gap="r32">
-          <Stack gap="r20">
-            <Icon name="Account" size="2x" withWrapper />
+        <AppContainer.OverallSummary noPadding>
+          <Stack withSeparators={true} gap="r32">
+            <Stack gap="r20">
+              <Icon name="Account" size="2x" withWrapper />
+              <Stack direction="vertical" gap="r4">
+                <Text variant="Larger">6 Accounts</Text>
+                <Text variant="Smaller" color="textSecondary">
+                  for this instance
+                </Text>
+              </Stack>
+            </Stack>
+            <Stack gap="r32">
+              <Stack>
+                <Icon name={'Check-circle'} color={'statusHealthy'} />
+                <Text color="textSecondary">Replication</Text>
+              </Stack>
+              <Stack>
+                <Icon name={'Check-circle'} color={'statusHealthy'} />
+                <Text color="textSecondary">Expiration</Text>
+              </Stack>
+              <Stack>
+                <Icon name={'Check-circle'} color={'statusHealthy'} />
+                <Text color="textSecondary">Transition</Text>
+              </Stack>
+            </Stack>
             <Stack direction="vertical" gap="r4">
-              <Text variant='Larger'>6 Accounts</Text>
-              <Text variant='Smaller' color='textSecondary'>for this instance</Text>
+              <Stack gap="r4">
+                <Text isEmphazed>Active Alerts</Text>
+                <TextBadge text="0" variant="infoPrimary" />
+              </Stack>
+              <Text variant="Smaller" color="textSecondary">
+                No active alerts
+              </Text>
             </Stack>
           </Stack>
-          <Stack gap="r32">
-            <Stack>
-              <Icon name={'Check-circle'} color={'statusHealthy'} />
-              <Text color='textSecondary'>Replication</Text>
-            </Stack>
-            <Stack>
-              <Icon name={'Check-circle'} color={'statusHealthy'} />
-              <Text color='textSecondary'>Expiration</Text>
-            </Stack>
-            <Stack>
-              <Icon name={'Check-circle'} color={'statusHealthy'} />
-              <Text color='textSecondary'>Transition</Text>
-            </Stack>
-          </Stack>
-          <Stack direction="vertical" gap="r4">
-            <Stack gap="r4">
-              <Text isEmphazed>Active Alerts</Text>
-              <TextBadge text="0" variant="infoPrimary" />
-            </Stack>
-            <Text variant='Smaller' color='textSecondary'>No active alerts</Text>
-          </Stack>
-        </Stack>
         </AppContainer.OverallSummary>
         <AppContainer.MainContent>Main content</AppContainer.MainContent>
       </AppContainer>
@@ -161,7 +165,7 @@ export const Layout2SimplestWithMainContentPadding = ({}) => (
   >
     <AppContainer>
       <AppContainer.ContextContainer background="backgroundLevel1">
-        Context bar
+        <>Context bar</>
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
@@ -187,7 +191,7 @@ export const Layout2SimplestSidebar = ({}) => (
       }
     >
       <AppContainer.ContextContainer background="backgroundLevel1">
-        Context bar
+        <>Context bar</>
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
@@ -213,7 +217,7 @@ export const Layout2TwoEqualPanelsWithPadding = () => (
       }
     >
       <AppContainer.ContextContainer background="backgroundLevel1">
-        Context bar
+        <>Context bar</>
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
@@ -222,11 +226,11 @@ export const Layout2TwoEqualPanelsWithPadding = () => (
         <TwoPanelLayout
           panelsRatio="50-50"
           leftPanel={{
-            children: <>Left Panel content</>,
+            children: <div style={{ flex: 1 }}>Left Panel content</div>,
             background: 'backgroundLevel3',
           }}
           rightPanel={{
-            children: <>Right Panel content</>,
+            children: <div style={{ flex: 1 }}>Right Panel content</div>,
             background: 'backgroundLevel4',
           }}
         />
@@ -249,7 +253,7 @@ export const Layout2TwoPanelsThirtySeventy = () => (
       }
     >
       <AppContainer.ContextContainer background="backgroundLevel1">
-        Context bar
+        <>Context bar</>
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         Overall summary (optional)
@@ -258,11 +262,11 @@ export const Layout2TwoPanelsThirtySeventy = () => (
         <TwoPanelLayout
           panelsRatio="30-70"
           leftPanel={{
-            children: <>Left Panel content</>,
+            children: <div style={{ flex: 1 }}>Left Panel content</div>,
             background: 'backgroundLevel3',
           }}
           rightPanel={{
-            children: <>Right Panel content</>,
+            children: <div style={{ flex: 1 }}>Right Panel content</div>,
             background: 'backgroundLevel4',
           }}
         />
@@ -294,11 +298,11 @@ export const Layout2TwoPanelsSeventyThirty = () => (
         <TwoPanelLayout
           panelsRatio="70-30"
           leftPanel={{
-            children: <>Left Panel content</>,
+            children: <div style={{ flex: 1 }}>Left Panel content</div>,
             background: 'backgroundLevel3',
           }}
           rightPanel={{
-            children: <>Right Panel content</>,
+            children: <div style={{ flex: 1 }}>Right Panel content</div>,
             background: 'backgroundLevel4',
           }}
         />

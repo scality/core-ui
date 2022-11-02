@@ -1,5 +1,6 @@
-import { HTMLProps, ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
+import { spacing } from '../../../spacing';
 import { ThemeColors } from '../../../style/theme';
 import { getTheme } from '../../../utils';
 
@@ -7,11 +8,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+  overflow: hidden;
 `;
 
 const FillAvailableFlexBox = styled.div`
   flex: 1;
 `;
+
+const sectionDistance = spacing.r2;
 
 const ContextWrapper = styled.div<{
   background?: ThemeColors;
@@ -28,26 +32,43 @@ const ContextContainer = ({
   children,
   background,
   ...rest
-}: { background: ThemeColors } & Omit<
-  HTMLProps<HTMLDivElement>,
-  'ref' | 'as'
->) => (
+}: {
+  background?: ThemeColors;
+  children: ReactElement | ReactElement[];
+}) => (
   <ContextWrapper background={background}>
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </ContextWrapper>
 );
 
-const OverallSummaryContainer = styled.div`
+const OverallSummaryContainer = styled.div<{
+  noPadding?: boolean;
+  noBottomMargin?: boolean;
+}>`
   background: ${(props) => getTheme(props)['backgroundLevel2']};
   height: 6rem;
-  padding: 0 1rem;
+  padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
+  margin-bottom: ${({ noBottomMargin }) =>
+    noBottomMargin ? '0' : sectionDistance};
   box-sizing: border-box;
   display: flex;
   align-items: center;
 `;
 
-const OverallSummary = ({ children, ...rest }) => (
-  <OverallSummaryContainer>
+const OverallSummary = ({
+  children,
+  noPadding,
+  noBottomMargin,
+  ...rest
+}: {
+  children: any;
+  noPadding?: boolean;
+  noBottomMargin?: boolean;
+}) => (
+  <OverallSummaryContainer
+    noPadding={noPadding}
+    noBottomMargin={noBottomMargin}
+  >
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </OverallSummaryContainer>
 );
@@ -61,6 +82,7 @@ const MainContentContainer = styled.div<{
   padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
   background: ${(props) =>
     getTheme(props)[props.background || 'backgroundLevel3']};
+  overflow: hidden;
 `;
 
 const MainContent = ({
@@ -73,13 +95,12 @@ const MainContent = ({
   hasPadding?: boolean;
   background?: ThemeColors;
 }) => (
-  <MainContentContainer hasPadding={hasPadding} background={background}>
-    <FillAvailableFlexBox
-      {...rest}
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
-      {children}
-    </FillAvailableFlexBox>
+  <MainContentContainer
+    hasPadding={hasPadding}
+    background={background}
+    {...rest}
+  >
+    {children}
   </MainContentContainer>
 );
 const AppChildrenContainer = styled.div<{
@@ -95,13 +116,14 @@ function AppContainer({
   children,
   sidebarNavigation,
   hasPadding,
+  ...rest
 }: {
   children: ReactElement | ReactElement[];
   sidebarNavigation?: ReactElement;
   hasPadding?: boolean;
 }) {
   return (
-    <Container>
+    <Container {...rest}>
       {sidebarNavigation}
       <AppChildrenContainer hasPadding={hasPadding}>
         {children}
@@ -113,5 +135,6 @@ function AppContainer({
 AppContainer.ContextContainer = ContextContainer;
 AppContainer.OverallSummary = OverallSummary;
 AppContainer.MainContent = MainContent;
+AppContainer.sectionDistance = sectionDistance;
 
 export { AppContainer };

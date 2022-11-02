@@ -145,7 +145,7 @@ export const zIndex = {
   base: 1,
 };
 //navbar
-export const navbarHeight = '3.357rem';
+export const navbarHeight = '3rem';
 export const navbarItemWidth = '4.286rem';
 //sidebar
 export const sidebarItemHeight = spacing.sp40;

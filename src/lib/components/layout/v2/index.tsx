@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
+import { spacing } from '../../../spacing';
 import * as defaultTheme from '../../../style/theme';
 import { getTheme } from '../../../utils';
 
@@ -13,6 +14,7 @@ const LayoutContainer = styled.div`
 
 const Navigation = styled.div`
   height: ${defaultTheme.navbarHeight};
+  margin-bottom: ${spacing.r12};
 `;
 
 export function Layout({
