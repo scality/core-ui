@@ -22,7 +22,7 @@ const ContextWrapper = styled.div<{
 }>`
   background: ${(props) =>
     props.background ? getTheme(props)[props.background] : 'initial'};
-  height: 3rem;
+  height: 2.5rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
