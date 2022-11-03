@@ -177,6 +177,41 @@ export const Layout2SimplestWithMainContentPadding = ({}) => (
   </Layout2>
 );
 
+export const Layout2MainContentOnly = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer>
+      <AppContainer.MainContent background="statusCritical" hasTopMargin>
+        Main content
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
+export const Layout2OverallSummaryAndMainContent = ({}) => (
+  <Layout2
+    headerNavigation={
+      <HeaderComponent>
+        <h3>Header navigation</h3>
+      </HeaderComponent>
+    }
+  >
+    <AppContainer>
+      <AppContainer.OverallSummary hasTopMargin>
+        Overall summary (optional)
+      </AppContainer.OverallSummary>
+      <AppContainer.MainContent background="statusCritical">
+        Main content
+      </AppContainer.MainContent>
+    </AppContainer>
+  </Layout2>
+);
+
 export const Layout2SimplestSidebar = ({}) => (
   <Layout2
     headerNavigation={

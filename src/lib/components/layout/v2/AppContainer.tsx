@@ -43,6 +43,7 @@ const ContextContainer = ({
 
 const OverallSummaryContainer = styled.div<{
   noPadding?: boolean;
+  hasTopMargin?: boolean;
   noBottomMargin?: boolean;
 }>`
   background: ${(props) => getTheme(props)['backgroundLevel2']};
@@ -50,6 +51,7 @@ const OverallSummaryContainer = styled.div<{
   padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
   margin-bottom: ${({ noBottomMargin }) =>
     noBottomMargin ? '0' : sectionDistance};
+  margin-top: ${({ hasTopMargin }) => (hasTopMargin ? '1rem' : '0')};
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -59,15 +61,18 @@ const OverallSummary = ({
   children,
   noPadding,
   noBottomMargin,
+  hasTopMargin,
   ...rest
 }: {
   children: any;
   noPadding?: boolean;
   noBottomMargin?: boolean;
+  hasTopMargin?: boolean;
 }) => (
   <OverallSummaryContainer
     noPadding={noPadding}
     noBottomMargin={noBottomMargin}
+    hasTopMargin={hasTopMargin}
   >
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </OverallSummaryContainer>
@@ -75,11 +80,13 @@ const OverallSummary = ({
 
 const MainContentContainer = styled.div<{
   hasPadding?: boolean;
+  hasTopMargin?: boolean;
   background?: ThemeColors;
 }>`
   display: flex;
   flex: 1;
   padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
+  margin-top: ${({ hasTopMargin }) => (hasTopMargin ? '1rem' : '0')};
   background: ${(props) =>
     getTheme(props)[props.background || 'backgroundLevel3']};
   overflow: hidden;
@@ -89,14 +96,17 @@ const MainContent = ({
   children,
   hasPadding,
   background,
+  hasTopMargin,
   ...rest
 }: {
   children: ReactNode;
   hasPadding?: boolean;
+  hasTopMargin?: boolean;
   background?: ThemeColors;
 }) => (
   <MainContentContainer
     hasPadding={hasPadding}
+    hasTopMargin={hasTopMargin}
     background={background}
     {...rest}
   >
