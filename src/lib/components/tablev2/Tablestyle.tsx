@@ -145,6 +145,7 @@ export const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 `;
 export const TooltipContent = styled.div`
   color: ${(props) => getTheme(props).textSecondary};
