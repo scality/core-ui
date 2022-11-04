@@ -45,8 +45,10 @@ const OverallSummaryContainer = styled.div<{
   noPadding?: boolean;
   hasTopMargin?: boolean;
   noBottomMargin?: boolean;
+  background?: ThemeColors;
 }>`
-  background: ${(props) => getTheme(props)['backgroundLevel2']};
+  background: ${(props) =>
+    getTheme(props)[props.background || 'backgroundLevel2']};
   height: 6rem;
   padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
   margin-bottom: ${({ noBottomMargin }) =>
@@ -62,14 +64,17 @@ const OverallSummary = ({
   noPadding,
   noBottomMargin,
   hasTopMargin,
+  background,
   ...rest
 }: {
   children: any;
   noPadding?: boolean;
   noBottomMargin?: boolean;
   hasTopMargin?: boolean;
+  background?: ThemeColors;
 }) => (
   <OverallSummaryContainer
+    background={background}
     noPadding={noPadding}
     noBottomMargin={noBottomMargin}
     hasTopMargin={hasTopMargin}
