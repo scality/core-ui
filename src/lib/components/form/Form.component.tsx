@@ -264,7 +264,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     const requireMode = useContext(RequireModeContext);
     return (
       <ScrollbarWrapper>
-        <PageFormWrapper {...formProps} ref={ref}>
+        <PageFormWrapper {...formProps} noValidate ref={ref}>
           <FixedHeader layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
