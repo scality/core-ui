@@ -303,11 +303,7 @@ function SelectBox({
     }
 
     if (options && options.length > NOPT_SEARCH) {
-      setSearchSelection(option ? option.value : '');
-      // @ts-ignore
-      setPlaceholder(option ? option.label : '');
-      // @ts-ignore
-      setSearchValue(option ? option.label : '');
+      selectRef.current.blur();
     }
   };
 
