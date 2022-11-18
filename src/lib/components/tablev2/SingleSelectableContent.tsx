@@ -1,9 +1,8 @@
-import React, { memo, CSSProperties } from 'react';
+import React, { memo, CSSProperties, useEffect } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 
 import { Tooltip } from '../tooltip/Tooltip.component';
-import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
@@ -69,8 +68,19 @@ export function SingleSelectableContent<
   }
 
   const { bodyRef, headerRef } = useSyncedScroll<DATA_ROW>();
-  const { headerGroups, prepareRow, rows, onBottom, onBottomOffset } =
-    useTableContext<DATA_ROW>();
+  const {
+    headerGroups,
+    prepareRow,
+    rows,
+    onBottom,
+    onBottomOffset,
+    setRowHeight,
+  } = useTableContext<DATA_ROW>();
+
+  useEffect(() => {
+    setRowHeight(rowHeight);
+  }, [rowHeight, setRowHeight]);
+
   const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
     prepareRow(row);
@@ -126,12 +136,7 @@ export function SingleSelectableContent<
 
           return (
             <div {...cellProps} className="td">
-              {(cell.column.Cell as { name: string | undefined }).name ===
-                'defaultRenderer' && typeof cell.value === 'string' ? (
-                <ConstrainedText text={cell.value} />
-              ) : (
-                cell.render('Cell')
-              )}
+              {cell.render('Cell')}
             </div>
           );
         })}

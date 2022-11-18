@@ -61,12 +61,9 @@ function ConstrainedText({
   lineClamp = 1,
 }: Props): JSX.Element {
   const [displayToolTip, setDisplayToolTip] = useState(false);
-  const constrainedTextRef = useCallback(
-    (element) => {
-      element && setDisplayToolTip(isEllipsisActive(element) || lineClamp > 1);
-    },
-    [lineClamp],
-  );
+  const constrainedTextRef = useCallback((element) => {
+    element && setDisplayToolTip(isEllipsisActive(element));
+  }, []);
   return (
     <BlockTooltip>
       {displayToolTip ? (

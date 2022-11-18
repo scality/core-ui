@@ -21,7 +21,7 @@ export default info;
 const data = [
   {
     id: 1,
-    firstName: 'Sotiria',
+    firstName: 'Sotiria-long-long-long-long-long',
     lastName: 'Agathangelou',
     age: undefined,
     health: 'healthy',

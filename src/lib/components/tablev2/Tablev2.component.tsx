@@ -17,15 +17,18 @@ import {
   useRowSelect,
   useSortBy,
   useTable,
+  defaultColumn,
 } from 'react-table';
 import { useMemoCompare } from '../../hooks';
+import { Box } from '../box/Box';
+import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper } from './Tablestyle';
-import { compareHealth } from './TableUtils';
+import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 
 type UpdateTableData<
@@ -74,6 +77,8 @@ type TableContextType<
   getTableBodyProps: (
     propGetter?: TableBodyPropGetter<DATA_ROW>,
   ) => TableBodyProps;
+  rowHeight: TableHeightKeyType;
+  setRowHeight: (rowHeight: TableHeightKeyType) => void;
   selectedRowIds: Record<string, boolean>;
   selectedFlatRows: Row<DATA_ROW>[];
   preGlobalFilteredRows: Row<DATA_ROW>[];
@@ -101,7 +106,25 @@ export const useTableContext = <
 
   return tableProps as TableContextType<DATA_ROW>; //Todo figure out a way to transfer the type to the context provider
 };
+const DefaultRenderer = ({ value }) => {
+  const { rowHeight } = useTableContext();
 
+  if (typeof value === 'string') {
+    const lineClamp =
+      rowHeight === 'h32'
+        ? 1
+        : rowHeight === 'h40' || rowHeight === 'h48'
+        ? 2
+        : 3;
+    return (
+      <Box mr={4}>
+        <ConstrainedText text={value} lineClamp={lineClamp} />
+      </Box>
+    );
+  }
+
+  return value;
+};
 function Table<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -150,6 +173,8 @@ function Table<
     return {};
   }, []) as Record<IdType<DATA_ROW>, boolean>;
 
+  const [rowHeight, setRowHeight] = React.useState<TableHeightKeyType>('h40');
+
   const {
     headerGroups,
     rows,
@@ -166,6 +191,10 @@ function Table<
     toggleAllRowsSelected,
   } = useTable<DATA_ROW>(
     {
+      defaultColumn: {
+        ...(defaultColumn as TableColumn<DATA_ROW>),
+        Cell: DefaultRenderer,
+      },
       columns: columns as TableColumn<DATA_ROW>[],
       data,
       getRowId,
@@ -227,6 +256,8 @@ function Table<
     selectedFlatRows,
     preGlobalFilteredRows,
     setGlobalFilter,
+    rowHeight,
+    setRowHeight,
     globalFilter,
     setFilter,
     onBottom,

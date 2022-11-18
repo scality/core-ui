@@ -53,8 +53,8 @@ export type TableVariantType =
 
 // in rem unit
 export const tableRowHeight = {
-  h32: '2.286',
-  h40: '2.858',
-  h48: '3.428',
-  h64: '4.572',
+  h32: '2.286', //1 line
+  h40: '2.858', //2 line
+  h48: '3.428', //2 line
+  h64: '4.572', //3 line
 };

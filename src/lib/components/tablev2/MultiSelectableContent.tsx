@@ -2,7 +2,6 @@ import { useEffect, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
 
-import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { useTableContext } from './Tablev2.component';
 import {
@@ -85,6 +84,7 @@ export const MultiSelectableContent = <
     headerGroups,
     prepareRow,
     rows,
+    setRowHeight,
     setHiddenColumns,
     selectedRowIds,
     onBottom,
@@ -92,6 +92,10 @@ export const MultiSelectableContent = <
     isAllRowsSelected,
     toggleAllRowsSelected,
   } = useTableContext<DATA_ROW>();
+
+  useEffect(() => {
+    setRowHeight(rowHeight);
+  }, [rowHeight, setRowHeight]);
 
   useEffect(() => {
     setHiddenColumns((oldHiddenColumns) => {
@@ -217,18 +221,7 @@ export const MultiSelectableContent = <
 
           return (
             <div {...cellProps} className="td">
-              {/**
-               * react-table use function called `defaultRenderer` as
-               * default render.
-               * We use the name of the function to differentiate default
-               * implementation to our override in the column
-               */}
-              {(cell.column.Cell as { name: string | undefined }).name ===
-                'defaultRenderer' && typeof cell.value === 'string' ? (
-                <ConstrainedText text={cell.value} />
-              ) : (
-                cell.render('Cell')
-              )}
+              {cell.render('Cell')}
             </div>
           );
         })}
