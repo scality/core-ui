@@ -22,7 +22,10 @@ import { Text } from '../text/Text.component';
 const DESCRIPTION_PREFIX = 'describe-';
 const maxWidthTooltip = { maxWidth: '20rem' };
 
-type FormProps = Omit<HTMLProps<HTMLFormElement>, 'ref' | 'as'> & {
+type FormProps = Omit<
+  HTMLProps<HTMLFormElement>,
+  'ref' | 'as' | 'noValidate' | 'formNoValidate'
+> & {
   children: ReactNode | ReactNode[];
   requireMode?: 'all' | 'partial';
   leftActions?: ReactNode;
@@ -323,7 +326,7 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
   ({ leftActions, rightActions, children, banner, ...formProps }, ref) => {
     return (
       <ScrollbarWrapper>
-        <PageFormWrapper {...formProps} ref={ref}>
+        <PageFormWrapper {...formProps} noValidate ref={ref}>
           <FixedHeader layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
