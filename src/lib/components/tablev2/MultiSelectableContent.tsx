@@ -1,4 +1,3 @@
-//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import { useEffect, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
@@ -108,19 +107,22 @@ export const MultiSelectableContent = <
   ) => {
     const keys = Object.keys(selectedRowIds);
 
-    if (currentRow.isSelected) {
-      // we remove the item from the list
-      onMultiSelectionChanged(
-        rows.filter(
-          (row) => keys.includes(row.id) && rows[currentRowIndex].id !== row.id,
-        ),
-      );
-    } else {
-      // we add the new item from the list
-      onMultiSelectionChanged([
-        ...rows.filter((row) => keys.includes(row.id)),
-        rows[currentRowIndex],
-      ]);
+    if (onMultiSelectionChanged) {
+      if (currentRow.isSelected) {
+        // we remove the item from the list
+        onMultiSelectionChanged(
+          rows.filter(
+            (row) =>
+              keys.includes(row.id) && rows[currentRowIndex].id !== row.id,
+          ),
+        );
+      } else {
+        // we add the new item from the list
+        onMultiSelectionChanged([
+          ...rows.filter((row) => keys.includes(row.id)),
+          rows[currentRowIndex],
+        ]);
+      }
     }
     currentRow.toggleRowSelected(!currentRow.isSelected);
   };

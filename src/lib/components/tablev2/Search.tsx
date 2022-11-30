@@ -18,7 +18,7 @@ export type SearchProps = {
   displayTotalOf?: boolean;
   displayedName?: DisplayedName;
   locale?: TableLocalType;
-} & Props;
+} & Omit<Props, 'disableToggle'>;
 
 const SearchContainer = styled.div`
   display: flex;

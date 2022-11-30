@@ -4,7 +4,6 @@ import { darken } from 'polished';
 import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Variant } from '../constants';
-import { logicalExpr } from 'vega-lite';
 import { Icon } from '../icon/Icon.component';
 export type Props = {
   uid: string;
@@ -14,7 +13,7 @@ export type Props = {
   dismissAfter?: number;
   onDismiss?: (arg0: string) => void;
 };
-const NotificationContainer = styled.div<{ variant: Variant }>`
+const NotificationContainer = styled.div<{ variant?: Variant }>`
   position: relative;
   padding: ${defaultTheme.padding.base};
   margin-top: ${defaultTheme.padding.base};
@@ -44,7 +43,7 @@ const NotificationTitle = styled.div`
   font-weight: ${defaultTheme.fontWeight.bold};
 `;
 const NotificationDismissProgress = styled.div<{
-  variant: Variant;
+  variant?: Variant;
   value: number;
   max: number;
 }>`
@@ -85,7 +84,7 @@ function Notification({
   ...rest
 }: Props) {
   const [dismissProgress, setDismissProgress] = useState(0);
-  const [timerId, setTimerId] = useState(null);
+  const [timerId, setTimerId] = useState<number | undefined>(undefined);
   const dismissProgressRef = useRef(dismissProgress);
   dismissProgressRef.current = dismissProgress;
   useEffect(() => {
@@ -94,7 +93,7 @@ function Notification({
 
   const clearTimer = () => {
     if (dismissAfter) {
-      setTimerId(null);
+      setTimerId(undefined);
       clearTimeout(timerId);
     }
   };
@@ -105,6 +104,7 @@ function Notification({
         dismiss();
       } else if (!timerId) {
         setTimerId(
+          //@ts-ignore node typing detected here instead of Dom one
           setTimeout(() => {
             setDismissProgress(dismissProgressRef.current + 1000);
             resumeTimer();

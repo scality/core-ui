@@ -13,7 +13,7 @@ type StatusType =
 export function compareHealth(
   status1: StatusType,
   status2: StatusType,
-): number {
+): number | undefined {
   if (
     ![STATUS_WARNING, STATUS_CRITICAL, STATUS_NONE, STATUS_HEALTH].includes(
       status1,

@@ -51,6 +51,7 @@ const createSpacingFn =
       return null;
     }
 
+    //@ts-ignore -- this is ensured below
     let value: SpacingValue = props[propsName];
 
     if (!validValue.includes(value)) {

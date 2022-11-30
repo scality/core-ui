@@ -6,7 +6,7 @@ import { Box } from '../box/Box';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
 
-export const convertSizeToRem = (size: '1' | '2/3' | '1/2' | '1/3') => {
+export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   if (size === '2/3') return '14rem';
   else if (size === '1/3') return '6rem';
   else if (size === '1/2') return '10rem';
@@ -117,13 +117,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(
 
     return (
       <InputBorder
-        disabled={disabled || disabledFromFieldContext}
+        disabled={!!(disabled || disabledFromFieldContext)}
         hasError={!!(error || errorFromFieldContext)}
         width={convertSizeToRem(size)}
       >
         <InputContainer
           isContextAvailable={isContextAvailable}
-          disabled={disabled || disabledFromFieldContext}
+          disabled={!!(disabled || disabledFromFieldContext)}
           hasError={!!(error || errorFromFieldContext)}
         >
           <Box

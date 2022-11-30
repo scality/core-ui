@@ -8,7 +8,8 @@ export default function useSyncedScroll<
   headerRef: (element: HTMLDivElement) => void;
   bodyRef: (tableBody: FixedSizeList<Row<DATA_ROW>[]>) => void;
 } {
-  const [listener, setListener] = useState<(event: Event) => void | null>(null);
+  const [listener, setListener] =
+    useState<((event: Event) => void) | null>(null);
   const [tableBody, setTableBody] =
     useState<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
 

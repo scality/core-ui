@@ -40,7 +40,7 @@ const SmallerTextStyle = styled(BasicTextStyle)`
 const SmallerSecondaryTextStyle = styled(SmallerTextStyle)`
   color: ${(props) => getTheme(props).textSecondary};
 `;
-const getStatusColor = (status: Status) => {
+const getStatusColor = (status?: Status) => {
   let statusColor: string;
 
   switch (status) {

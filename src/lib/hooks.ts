@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 
 export function useMemoCompare<T>(
   next: T,
-  compare: (previous: T, next: T) => boolean,
+  compare: (previous: T | null, next: T) => boolean,
 ) {
   // Ref for storing previous value
-  const previousRef = useRef<T>();
+  const previousRef = useRef<T | null>(null);
   const previous = previousRef.current;
 
   // Pass previous and next value to compare function

@@ -33,7 +33,7 @@ function easeInOutSin(time: number): number {
 function animate(property: string, element: any, to: number): () => void {
   const duration = 1000; // standard
 
-  let start = null;
+  let start: number | null = null;
   const from = element[property];
   let cancelled = false;
 
@@ -150,6 +150,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
   };
 
   const getScrollSize = (isStart = false) => {
+    if (!tabsListRef.current) return 0;
     const fullContainerSize = tabsListRef.current.clientWidth;
     const containerSize = tabsRef.current.clientWidth;
     let totalSize = 0;
@@ -203,7 +204,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
 
     let selectedTabMeta;
 
-    if (tabsNode) {
+    if (tabsNode && tabsListRef.current && selectedTabIndex) {
       const children = tabsListRef.current.children;
 
       if (children.length > 0) {
@@ -286,9 +287,9 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
     const list = tabsListRef.current;
     const ownerDocument = (list && list.ownerDocument) || document;
     const currentFocus = ownerDocument.activeElement;
-    const role = currentFocus.getAttribute('role');
+    const role = currentFocus?.getAttribute('role');
 
-    if (role !== 'tab') {
+    if (role !== 'tab' || !list) {
       return;
     }
 

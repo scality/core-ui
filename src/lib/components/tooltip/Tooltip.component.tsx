@@ -82,11 +82,13 @@ function Tooltip({
   overlay,
   ...rest
 }: Props) {
-  const childrenRef = useRef(null);
+  const childrenRef = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
-  const isHovering = Array.from(document.querySelectorAll(':hover')).includes(
-    childrenRef.current,
-  );
+  const isHovering = childrenRef.current
+    ? Array.from(document.querySelectorAll(':hover')).includes(
+        childrenRef.current,
+      )
+    : false;
   const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {

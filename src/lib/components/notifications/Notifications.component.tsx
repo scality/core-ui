@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
 import { Notification } from './Notification.component';
@@ -17,7 +16,7 @@ type Props = {
   notifications: Array<NotificationProps>;
   onDismiss: (arg0: string) => void;
 };
-const NotificationsContainer = styled.div<{ position: Position }>`
+const NotificationsContainer = styled.div<{ position?: Position }>`
   position: fixed;
   z-index: ${defaultTheme.zIndex.notification};
   margin: ${defaultTheme.padding.larger};

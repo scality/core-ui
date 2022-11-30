@@ -10,7 +10,7 @@ import { ScrollbarWrapper } from '../../index';
 import { components } from 'react-select';
 import { Icon } from '../icon/Icon.component';
 import { SelectStyle } from './SelectStyle';
-import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList, FixedSizeList as List } from 'react-window';
 import { spacing } from '../../style/theme';
 import { convertRemToPixels } from '../../utils';
 import { convertSizeToRem } from '../inputv2/inputv2';
@@ -156,7 +156,7 @@ const getScrollOffset = (
 };
 
 const MenuList = (props) => {
-  const listRef = useRef();
+  const listRef = useRef<FixedSizeList<any> | null>(null);
   const { children, getValue } = props;
   const [selectedOption] = getValue();
   const optionHeight =
@@ -310,7 +310,7 @@ function SelectBox({
   const handleSearchInput = (inputValue, { action }) => {
     if (options && options.length > NOPT_SEARCH) {
       if (action === 'menu-close') {
-        setSearchSelection(undefined);
+        setSearchSelection('');
       }
 
       if (action === 'input-blur' || action === 'set-value') {

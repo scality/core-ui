@@ -1,4 +1,3 @@
-//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import { forwardRef, MutableRefObject, useEffect, useRef } from 'react';
 import { Hooks, TableToggleAllRowsSelectedProps } from 'react-table';
 import styled from 'styled-components';
@@ -16,12 +15,12 @@ const IndeterminateCheckbox = forwardRef<
   HTMLInputElement,
   TableToggleAllRowsSelectedProps
 >(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef<HTMLInputElement>();
+  const defaultRef = useRef<HTMLInputElement | null>(null);
   const resolvedRef = ref || defaultRef;
 
   useEffect(() => {
     (resolvedRef as MutableRefObject<HTMLInputElement>).current.indeterminate =
-      indeterminate;
+      !!indeterminate;
   }, [resolvedRef, indeterminate]);
 
   return (

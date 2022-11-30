@@ -1,4 +1,3 @@
-//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
@@ -55,7 +54,7 @@ export const HeadRow = styled.div<HeadRowType>`
 
 type TableRowType = {
   isSelected: boolean;
-  selectedId: string;
+  selectedId?: string;
   separationLineVariant: TableVariantType;
   backgroundVariant: TableVariantType;
 };
@@ -164,7 +163,13 @@ export const NoResult = styled.div`
   border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
 `;
 
-export const SortCaret = ({ column }: { column: HeaderGroup }) => {
+export const SortCaret = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
+  column,
+}: {
+  column: HeaderGroup<DATA_ROW>;
+}) => {
   return !column.disableSortBy ? (
     <SortCaretWrapper>
       {column.isSorted ? (

@@ -1,4 +1,3 @@
-//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
@@ -64,7 +63,7 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
-  initiallySelectedRowsIds?: Set<string>;
+  initiallySelectedRowsIds?: Set<string | number>;
   //To call it from the Cell renderer to update the original data
 } & UpdateTableData<DATA_ROW>;
 
@@ -93,7 +92,7 @@ type TableContextType<
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
 };
-const TableContext = React.createContext<TableContextType>(null);
+const TableContext = React.createContext<TableContextType | null>(null);
 
 export const useTableContext = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -160,7 +159,7 @@ function Table<
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
-      return compareHealth(row2.values.health, row1.values.health);
+      return compareHealth(row2.values.health, row1.values.health) || 0;
     },
     ...sortTypes,
   };
@@ -250,7 +249,8 @@ function Table<
 
   const filters = useMemoCompare(
     allFilters,
-    (previous, next) => JSON.stringify(previous) === JSON.stringify(next),
+    (previous, next) =>
+      !previous || JSON.stringify(previous) === JSON.stringify(next),
   );
 
   useEffect(() => {

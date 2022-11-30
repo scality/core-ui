@@ -66,7 +66,9 @@ declare module 'react-table' {
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D>,
-      CoreUIColumn<D> {}
+      CoreUIColumn<D> {
+    cellStyle?: CSSProperties;
+  }
 
   export interface CoreUIUseTableOptions<D extends object>
     extends UseTableOptions<D> {

@@ -25,7 +25,7 @@ export const ProgressCircle = styled.circle<{
   stroke-linecap: round;
   fill: none;
 `;
-export const BackgroundCircle = styled.circle<{ backgroundColor: string }>`
+export const BackgroundCircle = styled.circle<{ backgroundColor?: string }>`
   fill: none;
   stroke: ${(props) =>
     props.backgroundColor || getTheme(props).backgroundLevel1};
