@@ -2,8 +2,6 @@ import { CSSProperties } from 'react';
 
 // From: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-table
 declare module 'react-table' {
-  // take this file as-is, or comment out the sections that don't apply to your plugin configuration
-
   export interface Hooks<D extends object = {}>
     extends UseExpandedHooks<D>,
       UseGroupByHooks<D>,
@@ -65,8 +63,7 @@ declare module 'react-table' {
     extends UseFiltersColumnProps<D>,
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
-      UseSortByColumnProps<D>,
-      CoreUIColumn<D> {
+      UseSortByColumnProps<D> {
     cellStyle?: CSSProperties;
   }
 

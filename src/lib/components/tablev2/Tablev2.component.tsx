@@ -1,3 +1,4 @@
+/// <reference path="react-table-config.ts" />
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
