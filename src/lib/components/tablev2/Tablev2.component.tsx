@@ -48,7 +48,7 @@ export type CellProps<D extends Record<string, unknown>, V = unknown> =
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
-  columns: Array<CoreUIColumn<DATA_ROW>>;
+  columns: Array<Column<DATA_ROW>>;
   defaultSortingKey: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DATA_ROW[];
@@ -107,18 +107,24 @@ export const useTableContext = <
 
   return tableProps as TableContextType<DATA_ROW>; //Todo figure out a way to transfer the type to the context provider
 };
+
+export const EmptyCell = () => {
+  return (
+    <Box mr={4}>
+      <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
+        <UnknownIcon className="fas fa-minus"></UnknownIcon>
+      </Tooltip>
+    </Box>
+  );
+};
+
 const DefaultRenderer = ({ value }) => {
   const { rowHeight } = useTableContext();
 
-  if (!value) {
-    return (
-      <Box mr={4}>
-        <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
-          <UnknownIcon className="fas fa-minus"></UnknownIcon>
-        </Tooltip>
-      </Box>
-    );
+  if (!value && value !== 0) {
+    return <EmptyCell />;
   }
+
   if (typeof value === 'string') {
     const lineClamp =
       rowHeight === 'h32'

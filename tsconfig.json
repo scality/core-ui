@@ -13,6 +13,9 @@
       "types": [], // https://stackoverflow.com/questions/51634361/how-to-force-tsc-to-ignore-node-modules-folder
       "skipLibCheck": true, // does not check types in node_modules
       "moduleResolution": "node",
+      "paths": {
+        "*": ["./types/*.d.ts"]
+      }, 
     }
   }
   
