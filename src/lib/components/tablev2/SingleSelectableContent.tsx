@@ -1,3 +1,4 @@
+//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import { memo, CSSProperties, useEffect } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';

@@ -1,3 +1,4 @@
+//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';

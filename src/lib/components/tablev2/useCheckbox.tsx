@@ -1,3 +1,4 @@
+//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import { forwardRef, MutableRefObject, useEffect, useRef } from 'react';
 import { Hooks, TableToggleAllRowsSelectedProps } from 'react-table';
 import styled from 'styled-components';

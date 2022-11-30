@@ -1,3 +1,4 @@
+//@ts-nocheck --- Check why our react-table typing overrides are not taken in account
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
