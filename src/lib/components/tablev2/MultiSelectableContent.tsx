@@ -1,8 +1,6 @@
 import { useEffect, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
-
-import { Tooltip } from '../tooltip/Tooltip.component';
 import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
@@ -11,8 +9,6 @@ import {
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
-  TooltipContent,
-  UnknownIcon,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
@@ -205,16 +201,6 @@ export const MultiSelectableContent = <
                 }
               >
                 {cell.render('Cell')}
-              </div>
-            );
-          }
-
-          if (cell.value === undefined) {
-            return (
-              <div {...cellProps} className="td">
-                <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
-                  <UnknownIcon className="fas fa-minus"></UnknownIcon>
-                </Tooltip>
               </div>
             );
           }

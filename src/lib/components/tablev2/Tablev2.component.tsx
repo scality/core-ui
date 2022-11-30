@@ -22,12 +22,13 @@ import {
 import { useMemoCompare } from '../../hooks';
 import { Box } from '../box/Box';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
+import { Tooltip } from '../tooltip/Tooltip.component';
 
 import { MultiSelectableContent } from './MultiSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
-import { TableWrapper } from './Tablestyle';
+import { TableWrapper, TooltipContent, UnknownIcon } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 
@@ -109,6 +110,15 @@ export const useTableContext = <
 const DefaultRenderer = ({ value }) => {
   const { rowHeight } = useTableContext();
 
+  if (!value) {
+    return (
+      <Box mr={4}>
+        <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
+          <UnknownIcon className="fas fa-minus"></UnknownIcon>
+        </Tooltip>
+      </Box>
+    );
+  }
   if (typeof value === 'string') {
     const lineClamp =
       rowHeight === 'h32'
