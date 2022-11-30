@@ -1,16 +1,12 @@
-import React, { memo, CSSProperties, useEffect } from 'react';
+import { memo, CSSProperties, useEffect } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';
-
-import { Tooltip } from '../tooltip/Tooltip.component';
 import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   TableRow,
   TableBody,
   TableHeader,
-  TooltipContent,
-  UnknownIcon,
   NoResult,
   SortCaret,
 } from './Tablestyle';
@@ -123,16 +119,6 @@ export function SingleSelectableContent<
             },
             role: 'gridcell',
           });
-
-          if (cell.value === undefined) {
-            return (
-              <div {...cellProps} className="td">
-                <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
-                  <UnknownIcon className="fas fa-minus"></UnknownIcon>
-                </Tooltip>
-              </div>
-            );
-          }
 
           return (
             <div {...cellProps} className="td">
