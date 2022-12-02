@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef, ChangeEvent } from 'react';
+import { useState, useRef, forwardRef, ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { Input } from '../input/Input.component';
 import * as defaultTheme from '../../style/theme';
@@ -12,7 +12,10 @@ export type Props = {
   disableToggle: boolean;
   disabled?: boolean;
 };
-const SearchInputContainer = styled.div<{ docked?: boolean }>`
+const SearchInputContainer = styled.div<{
+  docked?: boolean;
+  disabled?: boolean;
+}>`
   position: relative;
 
   ${(props) => {
@@ -62,7 +65,7 @@ const IconButton = styled.button`
 const SearchIcon = styled(IconButton)`
   left: 1px;
 `;
-const ResetIcon = styled(IconButton)`
+const ResetIcon = styled(IconButton)<{ visible?: boolean }>`
   right: 1px;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.visible ? 1 : 0)};
@@ -83,12 +86,14 @@ const SearchInput = forwardRef(
     forwardedRef,
   ) => {
     const [docked, setDocked] = useState(!disableToggle);
-    const myInputRef = useRef(null);
+    const myInputRef = useRef<HTMLInputElement | null>(null);
 
     const toggle = () => {
       if (!disableToggle) {
         setDocked(!docked);
-        myInputRef.current.focus();
+        if (myInputRef.current) {
+          myInputRef.current.focus();
+        }
       }
     };
 
@@ -110,8 +115,7 @@ const SearchInput = forwardRef(
         {...rest}
       >
         <Input
-          minLength={1}
-          debounceTimeout={300}
+          min={'1'}
           type="text"
           aria-label="search"
           name="search"
@@ -131,7 +135,7 @@ const SearchInput = forwardRef(
         <SearchIcon onClick={toggle} disabled={!docked}>
           <Icon name="Search" />
         </SearchIcon>
-        <ResetIcon onClick={reset} visible={value && !docked && onReset}>
+        <ResetIcon onClick={reset} visible={!!value && !docked && !!onReset}>
           <Icon name="Times-circle" />
         </ResetIcon>
       </SearchInputContainer>

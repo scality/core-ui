@@ -1,6 +1,6 @@
 // @ts-nocheck
-import React, { useRef } from 'react';
-import { DebounceInput } from 'react-debounce-input';
+import { ChangeEvent, HTMLAttributes, HTMLProps, useRef } from 'react';
+import { DebounceInput, DebounceInputProps } from 'react-debounce-input';
 import { Checkbox } from '../checkbox/Checkbox.component';
 import { Icon } from '../icon/Icon.component';
 import { Select } from '../select/Select.component';
@@ -24,12 +24,13 @@ export type InputProps = {
   error?: string;
   id?: string;
   checked?: boolean;
-  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   options?: Items;
   disabled?: boolean;
   min?: string;
   max?: string;
-};
+} & HTMLProps<HTMLInputElement> &
+  DebounceInputProps<HTMLInputElement, HTMLAttributes<HTMLInputElement>>;
 
 const InputRenderer = ({
   type,
