@@ -50,7 +50,7 @@ export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
   columns: Array<Column<DATA_ROW>>;
-  defaultSortingKey: string;
+  defaultSortingKey?: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DATA_ROW[];
   children: JSX.Element | JSX.Element[];
@@ -216,12 +216,14 @@ function Table<
       data,
       getRowId,
       initialState: {
-        sortBy: [
-          {
-            id: defaultSortingKey,
-            desc: false,
-          },
-        ],
+        sortBy: defaultSortingKey
+          ? [
+              {
+                id: defaultSortingKey,
+                desc: false,
+              },
+            ]
+          : [],
         selectedRowIds: formattedInitiallySelectedRows,
         hiddenColumns: ['selection'],
       },
