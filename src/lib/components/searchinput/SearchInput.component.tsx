@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState, useRef, forwardRef, ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { Input } from '../input/Input.component';
 import * as defaultTheme from '../../style/theme';
@@ -8,7 +7,7 @@ import { Icon } from '../icon/Icon.component';
 export type Props = {
   placeholder?: string;
   value: string;
-  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onReset?: () => void;
   disableToggle: boolean;
   disabled?: boolean;
@@ -114,6 +113,7 @@ const SearchInput = forwardRef(
           minLength={1}
           debounceTimeout={300}
           type="text"
+          aria-label="search"
           name="search"
           placeholder={placeholder}
           value={value}
