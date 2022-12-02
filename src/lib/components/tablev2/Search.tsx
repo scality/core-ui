@@ -4,8 +4,8 @@ import { useTableContext } from './Tablev2.component';
 import { SearchInput } from '../searchinput/SearchInput.component';
 import { Props } from '../searchinput/SearchInput.component';
 import { BasicText } from '../text/Text.component';
-import { spacing } from '../../style/theme';
 import { TableLocalType } from './TableUtils';
+import { TableItemCount } from './Tablestyle';
 
 export type DisplayedName = {
   plural: string;
@@ -24,12 +24,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-const TextContainer = styled(BasicText)`
-  display: flex;
-  flex-direction: column;
-  margin-right: ${spacing.sp8};
-  min-width: 70px;
-`;
+
 const ResultContainer = styled(BasicText)`
   font-weight: bold;
 `;
@@ -61,7 +56,7 @@ export function TableSearch(props: SearchProps) {
   return (
     <SearchContainer>
       {displayTotalOf && (
-        <TextContainer>
+        <TableItemCount>
           <span>{translations[locale].total}</span>
           <ResultContainer>
             {totalDispayedRows}{' '}
@@ -71,7 +66,7 @@ export function TableSearch(props: SearchProps) {
                 : totalDispayedRows === 1 && displayedName.singular
               : ''}
           </ResultContainer>
-        </TextContainer>
+        </TableItemCount>
       )}
       <SearchInput
         value={value}

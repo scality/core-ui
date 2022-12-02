@@ -8,6 +8,7 @@ import {
 } from './TableUtils';
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
+import { BasicText } from '../text/Text.component';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -186,3 +187,10 @@ export const SortCaret = <
     </SortCaretWrapper>
   ) : null;
 };
+
+export const TableItemCount = styled(BasicText)`
+  display: flex;
+  flex-direction: column;
+  margin-right: ${spacing.sp8};
+  min-width: 4.3rem;
+`;
