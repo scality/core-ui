@@ -15,12 +15,12 @@ const IndeterminateCheckbox = forwardRef<
   HTMLInputElement,
   TableToggleAllRowsSelectedProps
 >(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef<HTMLInputElement>();
+  const defaultRef = useRef<HTMLInputElement | null>(null);
   const resolvedRef = ref || defaultRef;
 
   useEffect(() => {
     (resolvedRef as MutableRefObject<HTMLInputElement>).current.indeterminate =
-      indeterminate;
+      !!indeterminate;
   }, [resolvedRef, indeterminate]);
 
   return (

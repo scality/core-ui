@@ -1,6 +1,6 @@
 import { Children, HTMLProps, ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from './components/box/Box';
+import { Box, BoxComponentProps } from './components/box/Box';
 import { getTheme } from './utils';
 
 export const spacing = {
@@ -97,10 +97,8 @@ export const Stack = ({
 export const Wrap = ({
   children,
   ...rest
-}: { children: ReactNode[] } & Omit<
-  HTMLProps<HTMLDivElement>,
-  'ref' | 'as'
->) => {
+}: { children: ReactNode[] } & Omit<HTMLProps<HTMLDivElement>, 'ref' | 'as'> &
+  BoxComponentProps) => {
   return (
     <Box display={'flex'} justifyContent="space-between" {...rest}>
       {Children.map(children, (node) => {

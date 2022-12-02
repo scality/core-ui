@@ -107,19 +107,22 @@ export const MultiSelectableContent = <
   ) => {
     const keys = Object.keys(selectedRowIds);
 
-    if (currentRow.isSelected) {
-      // we remove the item from the list
-      onMultiSelectionChanged(
-        rows.filter(
-          (row) => keys.includes(row.id) && rows[currentRowIndex].id !== row.id,
-        ),
-      );
-    } else {
-      // we add the new item from the list
-      onMultiSelectionChanged([
-        ...rows.filter((row) => keys.includes(row.id)),
-        rows[currentRowIndex],
-      ]);
+    if (onMultiSelectionChanged) {
+      if (currentRow.isSelected) {
+        // we remove the item from the list
+        onMultiSelectionChanged(
+          rows.filter(
+            (row) =>
+              keys.includes(row.id) && rows[currentRowIndex].id !== row.id,
+          ),
+        );
+      } else {
+        // we add the new item from the list
+        onMultiSelectionChanged([
+          ...rows.filter((row) => keys.includes(row.id)),
+          rows[currentRowIndex],
+        ]);
+      }
     }
     currentRow.toggleRowSelected(!currentRow.isSelected);
   };

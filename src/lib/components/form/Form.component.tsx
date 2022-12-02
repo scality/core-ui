@@ -3,6 +3,7 @@ import {
   createContext,
   forwardRef,
   HTMLProps,
+  isValidElement,
   ReactElement,
   ReactNode,
   useContext,
@@ -122,9 +123,15 @@ const FormGroup = ({
   helpErrorPosition = 'right',
   disabled,
 }: FormGroupProps) => {
-  const { maxLabelWidth, setMaxLabelWidth } = useContext(LabelContext);
-  const requireMode = useContext(RequireModeContext);
+  const ctxt = useContext(LabelContext);
 
+  if (!ctxt) {
+    //intentionaly breaking rules of hooks here
+    throw new Error('FormGroup cannot be used outside of Form');
+  }
+
+  const { maxLabelWidth, setMaxLabelWidth } = ctxt;
+  const requireMode = useContext(RequireModeContext);
   const labelRef = useRef<HTMLLabelElement | null>(null);
   useEffect(() => {
     if (labelRef.current) {
@@ -141,7 +148,7 @@ const FormGroup = ({
 
   const value = {
     disabled: disabled || false,
-    error: error || null,
+    error: error || undefined,
   };
 
   return (
@@ -232,8 +239,8 @@ const FormSection = ({
     forceLabelWidth || 0,
   );
   //If all the formgroup are not required, add `(optional)` next to form section title.
-  const groupNotOptional = Children.toArray(children).find(
-    (child: ReactElement<FormGroupProps>) => child.props.required === true,
+  const groupNotOptional = Children.toArray(children).find((child) =>
+    isValidElement(child) ? child.props.required === true : false,
   );
 
   return (
@@ -351,7 +358,7 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
 const Form = forwardRef<HTMLFormElement, TabFormProps | PageFormProps>(
   ({ layout, requireMode, ...formProps }, ref) => {
     return (
-      <RequireModeContext.Provider value={requireMode}>
+      <RequireModeContext.Provider value={requireMode || 'partial'}>
         {layout.kind === 'page' ? (
           <PageForm layout={layout} {...formProps} ref={ref}></PageForm>
         ) : (

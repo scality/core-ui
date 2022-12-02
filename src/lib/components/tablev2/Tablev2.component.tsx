@@ -1,3 +1,4 @@
+/// <reference path="react-table-config.ts" />
 import * as React from 'react';
 import { useEffect } from 'react';
 import {
@@ -48,8 +49,8 @@ export type CellProps<D extends Record<string, unknown>, V = unknown> =
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
-  columns: Array<CoreUIColumn<DATA_ROW>>;
-  defaultSortingKey: string;
+  columns: Array<Column<DATA_ROW>>;
+  defaultSortingKey?: string;
   // We don't display the default sort key in the URL, so we need to specify here
   data: DATA_ROW[];
   children: JSX.Element | JSX.Element[];
@@ -63,7 +64,7 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
-  initiallySelectedRowsIds?: Set<string>;
+  initiallySelectedRowsIds?: Set<string | number>;
   //To call it from the Cell renderer to update the original data
 } & UpdateTableData<DATA_ROW>;
 
@@ -92,7 +93,7 @@ type TableContextType<
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
 };
-const TableContext = React.createContext<TableContextType>(null);
+const TableContext = React.createContext<TableContextType | null>(null);
 
 export const useTableContext = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -107,18 +108,24 @@ export const useTableContext = <
 
   return tableProps as TableContextType<DATA_ROW>; //Todo figure out a way to transfer the type to the context provider
 };
+
+export const EmptyCell = () => {
+  return (
+    <Box mr={4}>
+      <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
+        <UnknownIcon className="fas fa-minus"></UnknownIcon>
+      </Tooltip>
+    </Box>
+  );
+};
+
 const DefaultRenderer = ({ value }) => {
   const { rowHeight } = useTableContext();
 
-  if (!value) {
-    return (
-      <Box mr={4}>
-        <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
-          <UnknownIcon className="fas fa-minus"></UnknownIcon>
-        </Tooltip>
-      </Box>
-    );
+  if (!value && value !== 0) {
+    return <EmptyCell />;
   }
+
   if (typeof value === 'string') {
     const lineClamp =
       rowHeight === 'h32'
@@ -153,7 +160,7 @@ function Table<
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
-      return compareHealth(row2.values.health, row1.values.health);
+      return compareHealth(row2.values.health, row1.values.health) || 0;
     },
     ...sortTypes,
   };
@@ -209,12 +216,14 @@ function Table<
       data,
       getRowId,
       initialState: {
-        sortBy: [
-          {
-            id: defaultSortingKey,
-            desc: false,
-          },
-        ],
+        sortBy: defaultSortingKey
+          ? [
+              {
+                id: defaultSortingKey,
+                desc: false,
+              },
+            ]
+          : [],
         selectedRowIds: formattedInitiallySelectedRows,
         hiddenColumns: ['selection'],
       },
@@ -243,7 +252,8 @@ function Table<
 
   const filters = useMemoCompare(
     allFilters,
-    (previous, next) => JSON.stringify(previous) === JSON.stringify(next),
+    (previous, next) =>
+      !previous || JSON.stringify(previous) === JSON.stringify(next),
   );
 
   useEffect(() => {

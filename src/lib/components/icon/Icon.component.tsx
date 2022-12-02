@@ -187,25 +187,31 @@ function getLazyStyledIcon(iconInfo: string) {
   });
 }
 
-export const IconWrapper = styled.div<{size: SizeProp}>`
+export const IconWrapper = styled.div<{ size: SizeProp }>`
   ${(props) => {
     const brand = getTheme(props);
     return css`
       color: ${brand.infoPrimary};
       border: 1px solid ${brand.infoPrimary};
       background: ${brand.backgroundLevel1};
-      ${props.size === 'lg' ? `
+      ${props.size === 'lg'
+        ? `
         width: 2.5rem;
         height: 2.5rem;
-      ` : props.size === 'sm' ? `
+      `
+        : props.size === 'sm'
+        ? `
         width: 1.75rem;
         height: 1.75rem;
-      ` : props.size === 'xs' ? `
+      `
+        : props.size === 'xs'
+        ? `
         width: 1.5rem;
         height: 1.5rem;
-      ` : `
-        width: ${ parseInt(props.size.replace('x', ''))*2 }rem;
-        height: ${ parseInt(props.size.replace('x', ''))*2 }rem;
+      `
+        : `
+        width: ${parseInt(props.size.replace('x', '')) * 2}rem;
+        height: ${parseInt(props.size.replace('x', '')) * 2}rem;
       `}
     `;
   }}
@@ -219,7 +225,7 @@ export const IconWrapper = styled.div<{size: SizeProp}>`
 function NonWrappedIcon({
   name,
   size = '1x',
-  color = null,
+  color = undefined,
   ariaLabel = '',
   ...rest
 }: Omit<Props, 'withWrapper'>) {
@@ -282,7 +288,11 @@ function NonWrappedIcon({
 
 function Icon({ withWrapper, ...props }: Props) {
   if (withWrapper) {
-    return <IconWrapper size={props.size}><NonWrappedIcon {...props} /></IconWrapper>;
+    return (
+      <IconWrapper size={props.size || '1x'}>
+        <NonWrappedIcon {...props} />
+      </IconWrapper>
+    );
   }
 
   return <NonWrappedIcon {...props} />;

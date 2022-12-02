@@ -37,7 +37,7 @@ type Props = {
 };
 
 function ErrorPage500({
-  supportLink = null,
+  supportLink = undefined,
   locale = 'en',
   onReturnHomeClick,
   ...rest

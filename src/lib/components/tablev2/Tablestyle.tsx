@@ -8,6 +8,7 @@ import {
 } from './TableUtils';
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
+import { BasicText } from '../text/Text.component';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -54,7 +55,7 @@ export const HeadRow = styled.div<HeadRowType>`
 
 type TableRowType = {
   isSelected: boolean;
-  selectedId: string;
+  selectedId?: string;
   separationLineVariant: TableVariantType;
   backgroundVariant: TableVariantType;
 };
@@ -164,7 +165,13 @@ export const NoResult = styled.div`
   border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
 `;
 
-export const SortCaret = ({ column }: { column: HeaderGroup }) => {
+export const SortCaret = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
+  column,
+}: {
+  column: HeaderGroup<DATA_ROW>;
+}) => {
   return !column.disableSortBy ? (
     <SortCaretWrapper>
       {column.isSorted ? (
@@ -181,3 +188,10 @@ export const SortCaret = ({ column }: { column: HeaderGroup }) => {
     </SortCaretWrapper>
   ) : null;
 };
+
+export const TableItemCount = styled(BasicText)`
+  display: flex;
+  flex-direction: column;
+  margin-right: ${spacing.sp8};
+  min-width: 4.3rem;
+`;

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Table } from '../src/lib/components/tablev2/Tablev2.component';
+import {
+  Column,
+  EmptyCell,
+  Table,
+} from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
-import { CellProps } from 'react-table';
+import { CellProps, Row } from 'react-table';
 import { Box, Button } from '../src/lib/next';
 import styled from 'styled-components';
 
@@ -18,7 +22,7 @@ const info = {
 
 export default info;
 
-const data = [
+const data: Entry[] = [
   {
     id: 1,
     firstName: 'Sotiria-long-long-long-long-long',
@@ -49,13 +53,25 @@ const data = [
   },
 ];
 
+type Entry = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  age?: number;
+  health: string;
+};
+
 export const SimpleContentTable = ({}) => {
-  const columns = [
+  const columns: Column<Entry>[] = [
     {
       Header: 'First Name',
       accessor: 'firstName',
       cellStyle: {
         textAlign: 'left',
+      },
+      Cell: ({ value }) => {
+        if (value) return <>{value}</>;
+        return <EmptyCell />;
       },
     },
     {
@@ -85,7 +101,7 @@ export const SimpleContentTable = ({}) => {
     },
   ];
 
-  const getRowId = (row, relativeIndex) => {
+  const getRowId = (row: Entry, relativeIndex: number) => {
     return row.lastName + ' ' + row.firstName;
   };
 
@@ -225,7 +241,15 @@ export const SimpleContentTable = ({}) => {
 };
 
 export const asyncTable = ({}) => {
-  function DataComponent({ data, loading, row }) {
+  function DataComponent({
+    data,
+    loading,
+    row,
+  }: {
+    row: Row<Entry>;
+    loading: boolean;
+    data: string;
+  }) {
     return loading ? (
       <span>loading ...</span>
     ) : (
@@ -233,7 +257,7 @@ export const asyncTable = ({}) => {
     );
   }
 
-  function RowAsync({ row }) {
+  function RowAsync({ row }: { row: Row<Entry> }) {
     const [loading, setLoading] = React.useState(true);
     const [data, setData] = React.useState('');
     React.useEffect(() => {
@@ -249,12 +273,12 @@ export const asyncTable = ({}) => {
   }
 
   const renderRowSubComponent = React.useCallback(
-    ({ row, ...rest }: CellProps<object>) => {
+    ({ row, ...rest }: CellProps<Entry>) => {
       return <RowAsync row={row} />;
     },
     [],
   );
-  const columnAsync = [
+  const columnAsync: Column<Entry>[] = [
     {
       Header: 'First Name',
       accessor: 'firstName',
@@ -311,7 +335,7 @@ export const asyncTable = ({}) => {
   );
 };
 export const OnBottomCallback = ({}) => {
-  const columns = [
+  const columns: Column<{ index: number; value: number }>[] = [
     {
       Header: 'value',
       accessor: 'value',
@@ -322,7 +346,7 @@ export const OnBottomCallback = ({}) => {
   ];
 
   const createData = (indexStart = 0) => {
-    const data = [];
+    const data: { index: number; value: number }[] = [];
 
     for (let i = 0; i < 100; i++) {
       data.push({
@@ -404,7 +428,7 @@ export const MultiTable = ({}) => {
       capacity: '1Gi',
     },
   ]);
-  const columns2 = [
+  const columns2: Column<typeof data2[number]>[] = [
     {
       Header: 'Name',
       accessor: 'name',
@@ -419,7 +443,7 @@ export const MultiTable = ({}) => {
     },
   ];
 
-  const demo = ({}) => {
+  const demo = () => {
     setData1([
       {
         name: 'test',

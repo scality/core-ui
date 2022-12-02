@@ -5,6 +5,7 @@ type Props = {
 };
 
 function PrettyBytes({ bytes, decimals = 0 }: Props): string {
+  if (bytes === undefined) return '-';
   let fractionDigits = decimals;
   if (
     !Number.isFinite(decimals) ||

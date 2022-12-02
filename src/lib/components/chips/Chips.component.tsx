@@ -1,6 +1,6 @@
 // @ts-check
 import * as defaultTheme from '../../style/theme';
-import { Size, Variant } from '../constants';
+import { Size } from '../constants';
 import styled, { css } from 'styled-components';
 import { Button } from '../button/Button.component';
 import { lighten } from 'polished';
@@ -93,7 +93,7 @@ const ChipsContainer = styled.div<{
     return props.onClick
       ? css`
           background-color: ${brand[props.variant]};
-          font-size: ${defaultTheme.fontSize[props.size]};
+          font-size: ${defaultTheme.fontSize[props.size || 'base']};
           &:hover {
             cursor: pointer;
             background-color: ${brandLight};
@@ -104,7 +104,7 @@ const ChipsContainer = styled.div<{
         `
       : css`
           background-color: ${brand[props.variant]};
-          font-size: ${defaultTheme.fontSize[props.size]};
+          font-size: ${defaultTheme.fontSize[props.size || 'base']};
         `;
   }}
 `;
@@ -129,7 +129,7 @@ export const ChipsText = styled.span<{ icon: any; isRemovable: boolean }>`
 const Chips = ({
   text = '',
   variant = 'infoPrimary',
-  icon = null,
+  icon = undefined,
   onClick,
   onRemove,
   size = 'base',

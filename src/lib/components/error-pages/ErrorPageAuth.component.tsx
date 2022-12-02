@@ -30,7 +30,11 @@ type Props = {
   locale?: string;
 };
 
-function ErrorPageAuth({ supportLink = null, locale = 'en', ...rest }: Props) {
+function ErrorPageAuth({
+  supportLink = undefined,
+  locale = 'en',
+  ...rest
+}: Props) {
   if (!translations[locale]) locale = 'en';
   // Ensure the locale formatting is consistent
   locale = locale.toLowerCase();

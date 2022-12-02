@@ -224,7 +224,7 @@ function NavBar({
               <TabItem
                 onClick={onClick}
                 role="tab"
-                selected={selected}
+                selected={!!selected}
                 aria-selected={selected}
                 key={`navbar_tab_item_${index}`}
               >
@@ -238,6 +238,7 @@ function NavBar({
         <NavbarMenu>
           <NavbarMenuItem>
             {rightActions.map((action, index) =>
+              //@ts-ignore too costly to type this one now
               getActionRenderer(action, index),
             )}
           </NavbarMenuItem>

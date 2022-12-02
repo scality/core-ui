@@ -1,18 +1,17 @@
 {
-    "include": ["src/**/*"],
-    "exclude": ["src/**/*.test.*", "node_modules/*", "node_modules/@types/**/*"],
-    "compilerOptions": {
-      "module": "esnext",
-      "declaration": true, // Generate d.ts files
-      "allowSyntheticDefaultImports": true, // Allow import React from 'react'
-      "jsx": "react-jsx",
-      "target": "es2019",
-      "outDir": "dist",
-      "declarationMap": true, // go to js file when using IDE functions like "Go to Definition" in VSCode
-      "lib": ["ESNext", "dom"],
-      "types": [], // https://stackoverflow.com/questions/51634361/how-to-force-tsc-to-ignore-node-modules-folder
-      "skipLibCheck": true, // does not check types in node_modules
-      "moduleResolution": "node",
-    }
+  "exclude": ["src/**/*.test.*", "stories/*", "dist/**/*"],
+  "compilerOptions": {
+    "module": "esnext",
+    "declaration": true, // Generate d.ts files
+    "allowSyntheticDefaultImports": true, // Allow import React from 'react'
+    "jsx": "react-jsx",
+    "target": "es2019",
+    "outDir": "dist",
+    "declarationMap": true, // go to js file when using IDE functions like "Go to Definition" in VSCode
+    "lib": ["ESNext", "dom"],
+    "skipLibCheck": true, // does not check types in node_modules
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": false //For now it is too costly to enable this one
   }
-  
+}

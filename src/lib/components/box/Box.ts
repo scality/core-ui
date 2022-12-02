@@ -25,7 +25,7 @@ import type {
   ShadowProps,
 } from 'styled-system';
 
-type BoxComponentProps = LayoutProps &
+export type BoxComponentProps = LayoutProps &
   FlexboxProps &
   GridProps &
   SpaceProps &

@@ -5,6 +5,7 @@
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "mainSrc": "src/lib/index.js",
   "scripts": {
     "analyze": "source-map-explorer 'dist/*.js'",

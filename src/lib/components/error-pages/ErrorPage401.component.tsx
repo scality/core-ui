@@ -32,7 +32,7 @@ type Props = {
 };
 
 function ErrorPage401({
-  supportLink = null,
+  supportLink = undefined,
   locale = 'en',
   onReturnHomeClick,
   ...rest
