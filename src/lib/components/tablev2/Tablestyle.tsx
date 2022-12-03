@@ -188,10 +188,3 @@ export const SortCaret = <
     </SortCaretWrapper>
   ) : null;
 };
-
-export const TableItemCount = styled(BasicText)`
-  display: flex;
-  flex-direction: column;
-  margin-right: ${spacing.sp8};
-  min-width: 4.3rem;
-`;
