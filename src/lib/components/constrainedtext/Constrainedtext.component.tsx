@@ -22,7 +22,6 @@ const ConstrainedTextContainer = styled.div`
   ${(props) =>
     props.lineClamp > 1
       ? `
-  display: -webkit-box;
   -webkit-line-clamp: ${props.lineClamp};
   -webkit-box-orient: vertical;
   `
