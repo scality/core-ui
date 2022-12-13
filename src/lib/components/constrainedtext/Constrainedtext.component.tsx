@@ -7,7 +7,7 @@ import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 
 type Props = {
-  text: string | number;
+  text: string | number | JSX.Element | JSX.Element[];
   tooltipStyle?: $PropertyType<TooltipProps, 'overlayStyle'>;
   tooltipPlacement?: $PropertyType<TooltipProps, 'placement'>;
   lineClamp?: number;

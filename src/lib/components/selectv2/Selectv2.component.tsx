@@ -11,9 +11,10 @@ import { components } from 'react-select';
 import { Icon } from '../icon/Icon.component';
 import { SelectStyle } from './SelectStyle';
 import { FixedSizeList, FixedSizeList as List } from 'react-window';
-import { spacing } from '../../style/theme';
 import { convertRemToPixels } from '../../utils';
+import { spacing } from '../../spacing';
 import { convertSizeToRem } from '../inputv2/inputv2';
+import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 const SelectContext = createContext<boolean>(false);
 const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
@@ -72,7 +73,7 @@ const DropdownIndicator = (props) => {
   );
 };
 
-const InternalOption = (props) => {
+const InternalOption = (width, isDefaultVariant) => (props) => {
   const formatOptionLabel = () => {
     const label: string = props.data.label;
     const inputValue = props.selectProps.inputValue;
@@ -81,10 +82,16 @@ const InternalOption = (props) => {
       .flatMap((item, index) => [inputValue, item])
       .slice(1);
 
+    const reducedWidth = `${parseFloat(width.replace('rem')) - 2}rem`;
+
     if (inputValue) {
       return (
-        <div>
-          {parts.map((part, i) => {
+        <ConstrainedText
+          lineClamp={isDefaultVariant ? 2 : 1}
+          tooltipStyle={{
+            width: reducedWidth,
+          }}
+          text={parts.map((part, i) => {
             const highlightStyle =
               part.toLowerCase() === inputValue.toLowerCase()
                 ? 'sc-highlighted-matching-text'
@@ -95,10 +102,18 @@ const InternalOption = (props) => {
               </span>
             );
           })}
-        </div>
+        />
       );
     } else {
-      return <span>{label}</span>;
+      return (
+        <ConstrainedText
+          lineClamp={isDefaultVariant ? 2 : 1}
+          tooltipStyle={{
+            width: reducedWidth,
+          }}
+          text={label}
+        />
+      );
     }
   };
 
@@ -161,7 +176,7 @@ const MenuList = (props) => {
   const [selectedOption] = getValue();
   const optionHeight =
     convertRemToPixels(
-      parseFloat(props.selectProps.isDefault ? spacing.sp32 : spacing.sp24),
+      parseFloat(props.selectProps.isDefault ? spacing.r40 : spacing.r24),
     ) || 32;
   let selectedIndex = 0;
   let focusedIndex = 0;
@@ -362,7 +377,7 @@ function SelectBox({
             isSearchable={options.length > NOPT_SEARCH}
             components={{
               Input: Input,
-              Option: InternalOption,
+              Option: InternalOption(convertSizeToRem(size), isDefaultVariant),
               Menu: Menu,
               MenuList: MenuList,
               ValueContainer: ValueContainer,

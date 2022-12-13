@@ -175,7 +175,7 @@ const SelectStyle = styled(Select)`
       .sc-select__option {
         cursor: pointer;
         background-color: ${getThemePropSelector('backgroundLevel1')};
-        height: ${({ isDefault }) => (isDefault ? spacing.r32 : spacing.r24)};
+        height: ${({ isDefault }) => (isDefault ? spacing.r40 : spacing.r24)};
         display: flex;
         align-items: center;
         justify-content: space-between;
