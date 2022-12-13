@@ -17,6 +17,9 @@ import {
 } from './TableUtils';
 import { useTableScrollbar, VirtualizedRows } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
+import { Box } from '../box/Box';
+import { Loader } from '../loader/Loader.component';
+import { spacing } from '../../spacing';
 
 const translations = {
   en: {
@@ -44,6 +47,7 @@ type MultiSelectableContentProps<
   locale?: TableLocalType;
   customItemKey?: (index: number, data: DATA_ROW) => string;
   hasScrollbar?: boolean;
+  isLoadingMoreItems?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
@@ -74,6 +78,7 @@ export const MultiSelectableContent = <
   backgroundVariant = 'backgroundLevel1',
   locale = 'en',
   customItemKey,
+  isLoadingMoreItems,
   children,
 }: MultiSelectableContentProps<DATA_ROW>) => {
   const {
@@ -298,6 +303,16 @@ export const MultiSelectableContent = <
           <NoResult>{translations[locale].noResult}</NoResult>
         )}
       </TableBody>
+      {isLoadingMoreItems && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          marginTop={spacing.r16}
+          marginBottom={spacing.r16}
+        >
+          <Loader size="large" />
+        </Box>
+      )}
     </>
   );
 };
