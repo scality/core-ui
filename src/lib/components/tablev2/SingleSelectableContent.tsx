@@ -17,6 +17,9 @@ import {
 } from './TableUtils';
 import { useTableScrollbar, VirtualizedRows } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
+import { Loader } from '../loader/Loader.component';
+import { Box } from '../box/Box';
+import { spacing } from '../../spacing';
 
 export type SingleSelectableContentProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -28,8 +31,8 @@ export type SingleSelectableContentProps<
   selectedId?: string;
   locale?: TableLocalType;
   customItemKey?: (index: Number, data: DATA_ROW) => string;
-  isLoading?: boolean;
   hasScrollbar?: boolean;
+  isLoadingMoreItems?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
 };
 
@@ -55,6 +58,7 @@ export function SingleSelectableContent<
   backgroundVariant = 'backgroundLevel1',
   locale = 'en',
   selectedId,
+  isLoadingMoreItems,
   onRowSelected,
   customItemKey,
   children,
@@ -203,6 +207,16 @@ export function SingleSelectableContent<
           <NoResult>{translations[locale].noResult}</NoResult>
         )}
       </TableBody>
+      {isLoadingMoreItems && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          marginTop={spacing.r16}
+          marginBottom={spacing.r16}
+        >
+          <Loader size="large" />
+        </Box>
+      )}
     </>
   );
 }
