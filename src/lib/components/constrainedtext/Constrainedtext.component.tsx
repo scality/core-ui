@@ -25,6 +25,7 @@ const ConstrainedTextContainer = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: ${props.lineClamp};
   -webkit-box-orient: vertical;
+  overflow-wrap: break-word;
   `
       : `word-wrap: break-word;
       white-space: nowrap;`}
@@ -39,7 +40,11 @@ const BlockTooltip = styled.div`
 `;
 
 function isEllipsisActive(element: HTMLDivElement) {
-  return element && element.offsetWidth < element.scrollWidth;
+  return (
+    element &&
+    (element.offsetWidth < element.scrollWidth ||
+      element.offsetHeight < element.scrollHeight)
+  );
 }
 
 function getConstrainedTextContainer(constrainedTextRef, lineClamp, text) {
