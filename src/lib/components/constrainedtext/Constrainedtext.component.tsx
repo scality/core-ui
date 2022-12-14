@@ -27,13 +27,14 @@ const ConstrainedTextContainer = styled.div`
   -webkit-box-orient: vertical;
   overflow-wrap: break-word;
   `
-      : `word-wrap: break-word;
+      : `overflow-wrap: break-word;
       white-space: nowrap;`}
 }
 
 ;
 `;
 const BlockTooltip = styled.div`
+  width: stretch;
   & > .sc-tooltip {
     display: block;
   }

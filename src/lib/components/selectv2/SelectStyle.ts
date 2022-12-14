@@ -184,8 +184,7 @@ const SelectStyle = styled(Select)`
         ${(props) =>
           props.isDefault &&
           `border-bottom: ${spacing.r1} solid ${getTheme(props).border};`}
-        padding: ${spacing.r4} ${spacing.r8} ${spacing.r4}
-          ${({ isDefault }) => (isDefault ? spacing.r8 : spacing.r16)};
+        padding-left: 0;
 
         .option-icon {
           padding-right: ${spacing.r4};
@@ -238,6 +237,8 @@ const SelectStyle = styled(Select)`
         .option-value-wrapper {
           display: flex;
           align-items: center;
+          width: stretch;
+          padding: ${spacing.r4} ${spacing.r8} ${spacing.r4} ${spacing.r16};
         }
       }
 
