@@ -1,5 +1,5 @@
-import { ElementType, useState } from 'react';
-import { Table } from '../../components/tablev2/Tablev2.component';
+import { ComponentType, useState } from 'react';
+import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
 import { useMutation, UseMutationOptions } from 'react-query';
 import { AttachmentOperation, AttachmentAction } from './AttachmentTypes';
@@ -32,7 +32,7 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
   resourceName: string;
   resourceType: RESOURCE_TYPE;
   redirectUrl: string;
-  EntityIcon: ElementType<{ type: ENTITY_TYPE }>;
+  EntityIcon: ComponentType<{ type: ENTITY_TYPE | RESOURCE_TYPE }>;
 }) {
   const history = useHistory();
 
@@ -118,7 +118,12 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
 
   function AttachmentList() {
     const theme = useTheme();
-    const columns = [
+    const columns: Column<{
+      action: AttachmentAction;
+      type: ENTITY_TYPE;
+      entityName: string;
+      id: string;
+    }>[] = [
       {
         Header: 'Action',
         accessor: 'action',
@@ -131,7 +136,7 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
               <Icon name="Link" /> Attach
             </span>
           ) : (
-            <Box color={theme.brand.statusCritical}>
+            <Box color={theme.statusCritical}>
               <Icon name="Unlink" /> Detach
             </Box>
           );

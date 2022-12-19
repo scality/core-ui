@@ -55,7 +55,7 @@ const MenuContainer = styled.ul<{
   isOpen: boolean;
   searchInputIsFocused: boolean;
 }>`
-  background-color: ${(props) => props.theme.brand.backgroundLevel1};
+  background-color: ${(props) => props.theme.backgroundLevel1};
   background-clip: content-box;
   padding: 0;
   list-style: none;
@@ -73,18 +73,18 @@ const MenuContainer = styled.ul<{
       border-top-right-radius: 0;
       border-bottom-right-radius: 4px;
       border-bottom-left-radius: 4px;
-      border: 1px solid ${props.theme.brand.selectedActive};
+      border: 1px solid ${props.theme.selectedActive};
   `
       : props.searchInputIsFocused
-      ? `border-bottom: 1px solid ${props.theme.brand.selectedActive};`
+      ? `border-bottom: 1px solid ${props.theme.selectedActive};`
       : ''}
   border-top: 0;
   li {
     padding: ${spacing.r8};
     cursor: pointer;
-    border-top: 1px solid ${(props) => props.theme.brand.backgroundLevel2};
+    border-top: 1px solid ${(props) => props.theme.backgroundLevel2};
     &[aria-selected='true'] {
-      background: ${(props) => props.theme.brand.highlight};
+      background: ${(props) => props.theme.highlight};
     }
   }
 `;
@@ -110,12 +110,12 @@ const StyledSearchInput = styled(SearchInput)`
 
 const AttachmentTableContainer = styled.div`
   height: 80%;
-  background: ${(props) => props.theme.brand.backgroundLevel3};
+  background: ${(props) => props.theme.backgroundLevel3};
   padding: ${spacing.r24};
 `;
 
 const StyledTable = styled.div`
-  background: ${(props) => props.theme.brand.backgroundLevel4};
+  background: ${(props) => props.theme.backgroundLevel4};
   height: 100%;
 `;
 
@@ -496,7 +496,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 row: { original: AttachableEntity<ENTITY_TYPE> };
               }) => (
                 <Button
-                  //@ts-expect-error TODO core-ui typing seems incorrect
                   size="inline"
                   onClick={() => {
                     dispatch({
