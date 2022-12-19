@@ -11,7 +11,7 @@ import { Text } from '../text/Text.component';
 type Props = {
   isOpen: boolean;
   close?: () => void;
-  title: string;
+  title: ReactNode;
   footer?: ReactNode;
   children: ReactNode;
   subTitle?: ReactNode;

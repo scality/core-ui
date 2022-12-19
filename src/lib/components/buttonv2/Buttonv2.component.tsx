@@ -7,7 +7,7 @@ import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
 import { spacing as newSpacing } from '../../spacing';
-export type Props = React.HTMLProps<HTMLButtonElement> & {
+export type Props = Omit<React.HTMLProps<HTMLButtonElement>, 'size'> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   size?: 'default' | 'inline';
   disabled?: boolean;
