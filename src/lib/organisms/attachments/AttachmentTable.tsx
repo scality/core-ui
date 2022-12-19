@@ -108,11 +108,7 @@ const StyledSearchInput = styled(SearchInput)`
   }
 `;
 
-const AttachmentTableContainer = styled.div`
-  height: 80%;
-  background: ${(props) => props.theme.backgroundLevel3};
-  padding: ${spacing.r24};
-`;
+const AttachmentTableContainer = styled.div``;
 
 const StyledTable = styled.div`
   background: ${(props) => props.theme.backgroundLevel4};
