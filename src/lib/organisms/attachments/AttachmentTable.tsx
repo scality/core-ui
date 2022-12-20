@@ -304,7 +304,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   useMemo(() => {
     if (
       initiallyAttachedEntitiesStatus === 'success' &&
-      !(
+      (!(
         attachmentsOperations
           .map(
             (op) =>
@@ -317,7 +317,8 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           )
           .reduce((agg, curr) => agg && curr, true) &&
         attachmentsOperations.length === initialAttachmentOperations.length
-      )
+      ) ||
+        attachmentsOperations.length === 0)
     ) {
       dispatch({
         action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES,
