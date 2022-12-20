@@ -448,7 +448,14 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             </li>
           ))}
         {isOpen && filteredEntities.status === 'loading' && (
-          <li>Searching...</li>
+          <li>
+            <Text>Searching...</Text>
+          </li>
+        )}
+        {isOpen && filteredEntities.status === 'error' && (
+          <li>
+            <Text color="statusCritical">An error occured while searching</Text>
+          </li>
         )}
         {isOpen &&
           filteredEntities.status === 'success' &&
