@@ -479,8 +479,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               Header: 'Name',
               accessor: 'name',
               cellStyle: {
-                minWidth: '20rem',
-                marginLeft: '3rem',
+                flex: 0.8,
               },
               Cell: ({
                 value,
@@ -523,7 +522,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               Header: 'Attachment status',
               accessor: 'isPending',
               cellStyle: {
-                minWidth: '20rem',
+                flex: 0.8,
               },
               Cell: ({ value }: { value?: boolean }) => {
                 return value ? <>Pending</> : <>Attached</>;
@@ -534,7 +533,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               accessor: 'action',
               cellStyle: {
                 textAlign: 'right',
-                minWidth: '10rem',
+                flex: '1',
                 marginLeft: 'auto',
                 marginRight: '0.5rem',
               },
@@ -578,15 +577,20 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             {(rows) => (
               <>
                 {initiallyAttachedEntitiesStatus === 'idle' ||
-                  (initiallyAttachedEntitiesStatus === 'error' && (
-                    <CenterredSecondaryText>
-                      <Loader /> Loading {entityName.plural}...
-                    </CenterredSecondaryText>
-                  ))}
-                {desiredAttachedEntities.length === 0 && (
+                initiallyAttachedEntitiesStatus === 'loading' ? (
                   <CenterredSecondaryText>
-                    No {entityName.plural} attached
+                    <Loader /> Loading {entityName.plural}...
                   </CenterredSecondaryText>
+                ) : initiallyAttachedEntitiesStatus === 'error' ? (
+                  <CenterredSecondaryText>
+                    Failed to load {entityName.plural}
+                  </CenterredSecondaryText>
+                ) : (
+                  desiredAttachedEntities.length === 0 && (
+                    <CenterredSecondaryText>
+                      No {entityName.plural} attached
+                    </CenterredSecondaryText>
+                  )
                 )}
                 {desiredAttachedEntities.length > 0 && rows}
               </>
