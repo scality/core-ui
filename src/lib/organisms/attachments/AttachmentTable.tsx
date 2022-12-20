@@ -309,25 +309,16 @@ export const AttachmentTable = <ENTITY_TYPE,>({
     onAttachmentsOperationsChanged(attachmentsOperations);
   }, [onAttachmentsOperationsChanged, attachmentsOperations]);
 
+  const previousInitiallyAttachedEntitiesStatus = useRef(
+    initiallyAttachedEntitiesStatus,
+  );
   useMemo(() => {
     if (
       initiallyAttachedEntitiesStatus === 'success' &&
-      (!(
-        attachmentsOperations
-          .map(
-            (op) =>
-              !!initialAttachmentOperations.find(
-                (iop) =>
-                  iop.action === op.action &&
-                  iop.entity.id === op.entity.id &&
-                  iop.entity.type === op.entity.type,
-              ),
-          )
-          .reduce((agg, curr) => agg && curr, true) &&
-        attachmentsOperations.length === initialAttachmentOperations.length
-      ) ||
-        attachmentsOperations.length === 0)
+      previousInitiallyAttachedEntitiesStatus.current !==
+        initiallyAttachedEntitiesStatus
     ) {
+      previousInitiallyAttachedEntitiesStatus.current = 'success';
       dispatch({
         action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES,
         entities: [
@@ -344,7 +335,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
     initiallyAttachedEntitiesStatus,
     initiallyAttachedEntities,
     initialAttachmentOperations,
-    attachmentsOperations,
     convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
     convertInitiallyAttachementOperationsToDesiredAttachedEntities,
   ]);
