@@ -1,4 +1,11 @@
-import { useCallback, useMemo, useReducer, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import { useCombobox, UseComboboxStateChange } from 'downshift';
 import { Box, Button, Table } from '../../next';
 
@@ -166,139 +173,143 @@ export const AttachmentTable = <ENTITY_TYPE,>({
       },
       [],
     );
-  const [{ desiredAttachedEntities }, dispatch] = useReducer(
-    (
-      state: {
-        desiredAttachedEntities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
-        attachmentsOperations: AttachmentOperation<ENTITY_TYPE>[];
-      },
-      action:
-        | {
-            action: AttachmentAction.ADD;
-            entity: AttachableEntity<ENTITY_TYPE>;
-          }
-        | {
-            action: AttachmentAction.REMOVE;
-            entity: AttachableEntity<ENTITY_TYPE>;
-          }
-        | {
-            action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES;
-            entities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
-          },
-    ) => {
-      switch (action.action) {
-        case AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES:
-          return {
-            desiredAttachedEntities: action.entities,
-            attachmentsOperations: initialAttachmentOperations,
-          };
-        case AttachmentAction.ADD:
-          if (
-            !state.desiredAttachedEntities.find(
-              (entity) => entity.id === action.entity.id,
-            )
-          ) {
-            const newAttachmentsOperations = [...state.attachmentsOperations];
-            const existingOperationIndexOnThisEntity =
-              state.attachmentsOperations.findIndex(
-                (operation) => operation.entity.id === action.entity.id,
-              );
-            //When ADD, we check if it's already exist in operations. If so, we delete the previous operation and not proceed to the ADD.
-            if (
-              existingOperationIndexOnThisEntity !== -1 &&
-              state.attachmentsOperations[existingOperationIndexOnThisEntity]
-                .action === AttachmentAction.REMOVE
-            ) {
-              newAttachmentsOperations.splice(
-                existingOperationIndexOnThisEntity,
-                1,
-              );
-              const newState = {
-                ...state,
-                desiredAttachedEntities: [
-                  { ...action.entity },
-                  ...state.desiredAttachedEntities,
-                ],
-                attachmentsOperations: [...newAttachmentsOperations],
-              };
-              onAttachmentsOperationsChanged(newState.attachmentsOperations);
-              return newState;
-            } else {
-              const newState = {
-                ...state,
-                desiredAttachedEntities: [
-                  { ...action.entity, isPending: true },
-                  ...state.desiredAttachedEntities,
-                ],
-                attachmentsOperations: [...newAttachmentsOperations, action],
-              };
-              onAttachmentsOperationsChanged(newState.attachmentsOperations);
-              return newState;
+  const [{ desiredAttachedEntities, attachmentsOperations }, dispatch] =
+    useReducer(
+      (
+        state: {
+          desiredAttachedEntities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
+          attachmentsOperations: AttachmentOperation<ENTITY_TYPE>[];
+        },
+        action:
+          | {
+              action: AttachmentAction.ADD;
+              entity: AttachableEntity<ENTITY_TYPE>;
             }
-          }
-          break;
-        case AttachmentAction.REMOVE:
-          if (
-            state.desiredAttachedEntities.find(
-              (entity) => entity.id === action.entity.id,
-            )
-          ) {
-            const newDesiredAttachedEntities = [
-              ...state.desiredAttachedEntities,
-            ];
-            newDesiredAttachedEntities.splice(
-              state.desiredAttachedEntities.findIndex(
-                (entity) => entity.id === action.entity.id,
-              ),
-              1,
-            );
-            const newAttachmentsOperations = [...state.attachmentsOperations];
-            const existingOperationIndexOnThisEntity =
-              state.attachmentsOperations.findIndex(
-                (operation) => operation.entity.id === action.entity.id,
-              );
-            if (
-              existingOperationIndexOnThisEntity !== -1 &&
-              state.attachmentsOperations[existingOperationIndexOnThisEntity]
-                .action === AttachmentAction.ADD
-            ) {
-              newAttachmentsOperations.splice(
-                existingOperationIndexOnThisEntity,
-                1,
-              );
-            } else if (
-              existingOperationIndexOnThisEntity !== -1 &&
-              state.attachmentsOperations[existingOperationIndexOnThisEntity]
-                .action === AttachmentAction.REMOVE
-            ) {
-              return state;
-            } else {
-              newAttachmentsOperations.push(action);
+          | {
+              action: AttachmentAction.REMOVE;
+              entity: AttachableEntity<ENTITY_TYPE>;
             }
-            const newState = {
-              ...state,
-              desiredAttachedEntities: newDesiredAttachedEntities,
-              attachmentsOperations: newAttachmentsOperations,
+          | {
+              action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES;
+              entities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
+            },
+      ) => {
+        switch (action.action) {
+          case AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES:
+            return {
+              desiredAttachedEntities: action.entities,
+              attachmentsOperations: initialAttachmentOperations,
             };
-            onAttachmentsOperationsChanged(newState.attachmentsOperations);
-            return newState;
-          }
-          break;
-      }
-      return state;
-    },
-    {
-      desiredAttachedEntities: [
-        ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
-          initiallyAttachedEntities,
-        ),
-        ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
-          initialAttachmentOperations,
-        ),
-      ],
-      attachmentsOperations: initialAttachmentOperations,
-    },
-  );
+          case AttachmentAction.ADD:
+            if (
+              !state.desiredAttachedEntities.find(
+                (entity) => entity.id === action.entity.id,
+              )
+            ) {
+              const newAttachmentsOperations = [...state.attachmentsOperations];
+              const existingOperationIndexOnThisEntity =
+                state.attachmentsOperations.findIndex(
+                  (operation) => operation.entity.id === action.entity.id,
+                );
+              //When ADD, we check if it's already exist in operations. If so, we delete the previous operation and not proceed to the ADD.
+              if (
+                existingOperationIndexOnThisEntity !== -1 &&
+                state.attachmentsOperations[existingOperationIndexOnThisEntity]
+                  .action === AttachmentAction.REMOVE
+              ) {
+                newAttachmentsOperations.splice(
+                  existingOperationIndexOnThisEntity,
+                  1,
+                );
+                const newState = {
+                  ...state,
+                  desiredAttachedEntities: [
+                    { ...action.entity },
+                    ...state.desiredAttachedEntities,
+                  ],
+                  attachmentsOperations: [...newAttachmentsOperations],
+                };
+
+                return newState;
+              } else {
+                const newState = {
+                  ...state,
+                  desiredAttachedEntities: [
+                    { ...action.entity, isPending: true },
+                    ...state.desiredAttachedEntities,
+                  ],
+                  attachmentsOperations: [...newAttachmentsOperations, action],
+                };
+
+                return newState;
+              }
+            }
+            break;
+          case AttachmentAction.REMOVE:
+            if (
+              state.desiredAttachedEntities.find(
+                (entity) => entity.id === action.entity.id,
+              )
+            ) {
+              const newDesiredAttachedEntities = [
+                ...state.desiredAttachedEntities,
+              ];
+              newDesiredAttachedEntities.splice(
+                state.desiredAttachedEntities.findIndex(
+                  (entity) => entity.id === action.entity.id,
+                ),
+                1,
+              );
+              const newAttachmentsOperations = [...state.attachmentsOperations];
+              const existingOperationIndexOnThisEntity =
+                state.attachmentsOperations.findIndex(
+                  (operation) => operation.entity.id === action.entity.id,
+                );
+              if (
+                existingOperationIndexOnThisEntity !== -1 &&
+                state.attachmentsOperations[existingOperationIndexOnThisEntity]
+                  .action === AttachmentAction.ADD
+              ) {
+                newAttachmentsOperations.splice(
+                  existingOperationIndexOnThisEntity,
+                  1,
+                );
+              } else if (
+                existingOperationIndexOnThisEntity !== -1 &&
+                state.attachmentsOperations[existingOperationIndexOnThisEntity]
+                  .action === AttachmentAction.REMOVE
+              ) {
+                return state;
+              } else {
+                newAttachmentsOperations.push(action);
+              }
+              const newState = {
+                ...state,
+                desiredAttachedEntities: newDesiredAttachedEntities,
+                attachmentsOperations: newAttachmentsOperations,
+              };
+              return newState;
+            }
+            break;
+        }
+        return state;
+      },
+      {
+        desiredAttachedEntities: [
+          ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
+            initiallyAttachedEntities,
+          ),
+          ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
+            initialAttachmentOperations,
+          ),
+        ],
+        attachmentsOperations: initialAttachmentOperations,
+      },
+    );
+
+  useEffect(() => {
+    onAttachmentsOperationsChanged(attachmentsOperations);
+  }, [onAttachmentsOperationsChanged, attachmentsOperations]);
 
   useMemo(() => {
     if (initiallyAttachedEntitiesStatus === 'success') {
@@ -317,6 +328,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   }, [
     initiallyAttachedEntitiesStatus,
     initiallyAttachedEntities,
+    initialAttachmentOperations,
     convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
     convertInitiallyAttachementOperationsToDesiredAttachedEntities,
   ]);
