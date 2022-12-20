@@ -26,6 +26,7 @@ type AttachableEntityWithPendingStatus<ENTITY_TYPE> = {
 
 export type AttachmentTableProps<ENTITY_TYPE> = {
   initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[];
+  initiallyAttachedEntitiesStatus: 'idle' | 'loading' | 'success' | 'error';
   initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[];
   entityName: { plural: string; singular: string };
   getNameQuery?: (
@@ -122,6 +123,7 @@ const CenterredSecondaryText = styled(SecondaryText)`
 
 export const AttachmentTable = <ENTITY_TYPE,>({
   initiallyAttachedEntities,
+  initiallyAttachedEntitiesStatus,
   initialAttachmentOperations,
   onAttachmentsOperationsChanged,
   entityName,
@@ -132,6 +134,36 @@ export const AttachmentTable = <ENTITY_TYPE,>({
 }: AttachmentTableProps<ENTITY_TYPE>) => {
   //Desired attached entities and onAttachmentsOperationsChanged handling
 
+  const convertInitiallyAttachedEntitiesToDesiredAttachedEntities = useCallback(
+    (initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[]) => {
+      return initiallyAttachedEntities
+        .filter(
+          (attachedEntities) =>
+            !initialAttachmentOperations.find(
+              (op) => op.entity.id === attachedEntities.id,
+            ),
+        )
+        .map((entity) => ({
+          ...entity,
+          isPending: false,
+          action: null,
+        }));
+    },
+    [initialAttachmentOperations],
+  );
+  const convertInitiallyAttachementOperationsToDesiredAttachedEntities =
+    useCallback(
+      (initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[]) => {
+        return initialAttachmentOperations
+          .filter((op) => op.action !== AttachmentAction.REMOVE)
+          .map((op) => ({
+            ...op.entity,
+            isPending: true,
+            action: op.action,
+          }));
+      },
+      [],
+    );
   const [{ desiredAttachedEntities }, dispatch] = useReducer(
     (
       state: {
@@ -146,9 +178,18 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         | {
             action: AttachmentAction.REMOVE;
             entity: AttachableEntity<ENTITY_TYPE>;
+          }
+        | {
+            action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES;
+            entities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
           },
     ) => {
       switch (action.action) {
+        case AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES:
+          return {
+            desiredAttachedEntities: action.entities,
+            attachmentsOperations: initialAttachmentOperations,
+          };
         case AttachmentAction.ADD:
           if (
             !state.desiredAttachedEntities.find(
@@ -246,29 +287,38 @@ export const AttachmentTable = <ENTITY_TYPE,>({
     },
     {
       desiredAttachedEntities: [
-        ...initiallyAttachedEntities
-          .filter(
-            (attachedEntities) =>
-              !initialAttachmentOperations.find(
-                (op) => op.entity.id === attachedEntities.id,
-              ),
-          )
-          .map((entity) => ({
-            ...entity,
-            isPending: false,
-            action: null,
-          })),
-        ...initialAttachmentOperations
-          .filter((op) => op.action !== AttachmentAction.REMOVE)
-          .map((op) => ({
-            ...op.entity,
-            isPending: true,
-            action: op.action,
-          })),
+        ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
+          initiallyAttachedEntities,
+        ),
+        ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
+          initialAttachmentOperations,
+        ),
       ],
       attachmentsOperations: initialAttachmentOperations,
     },
   );
+
+  useMemo(() => {
+    if (initiallyAttachedEntitiesStatus === 'success') {
+      dispatch({
+        action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES,
+        entities: [
+          ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
+            initiallyAttachedEntities,
+          ),
+          ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
+            initialAttachmentOperations,
+          ),
+        ],
+      });
+    }
+  }, [
+    initiallyAttachedEntitiesStatus,
+    initialAttachmentOperations,
+    initiallyAttachedEntities,
+    convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
+    convertInitiallyAttachementOperationsToDesiredAttachedEntities,
+  ]);
 
   const resetRef = useRef<() => void | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);

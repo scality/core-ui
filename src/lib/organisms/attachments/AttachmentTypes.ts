@@ -8,6 +8,7 @@ export type AttachableEntity<ENTITY_TYPE> = {
 export enum AttachmentAction {
   ADD,
   REMOVE,
+  RESET_DESIRED_ATTACHED_ENTITIES,
 }
 
 export type AttachmentOperation<ENTITY_TYPE> = {
