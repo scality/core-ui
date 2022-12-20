@@ -1,11 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useMemo, useReducer, useRef, useState } from 'react';
 import { useCombobox, UseComboboxStateChange } from 'downshift';
 import { Box, Button, Table } from '../../next';
 
@@ -229,7 +222,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                   ],
                   attachmentsOperations: [...newAttachmentsOperations],
                 };
-
+                onAttachmentsOperationsChanged(newState.attachmentsOperations);
                 return newState;
               } else {
                 const newState = {
@@ -240,7 +233,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                   ],
                   attachmentsOperations: [...newAttachmentsOperations, action],
                 };
-
+                onAttachmentsOperationsChanged(newState.attachmentsOperations);
                 return newState;
               }
             }
@@ -288,6 +281,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 desiredAttachedEntities: newDesiredAttachedEntities,
                 attachmentsOperations: newAttachmentsOperations,
               };
+              onAttachmentsOperationsChanged(newState.attachmentsOperations);
               return newState;
             }
             break;
@@ -307,12 +301,24 @@ export const AttachmentTable = <ENTITY_TYPE,>({
       },
     );
 
-  useEffect(() => {
-    onAttachmentsOperationsChanged(attachmentsOperations);
-  }, [onAttachmentsOperationsChanged, attachmentsOperations]);
-
   useMemo(() => {
-    if (initiallyAttachedEntitiesStatus === 'success') {
+    if (
+      initiallyAttachedEntitiesStatus === 'success' &&
+      !(
+        attachmentsOperations
+          .map(
+            (op) =>
+              !!initialAttachmentOperations.find(
+                (iop) =>
+                  iop.action === op.action &&
+                  iop.entity.id === op.entity.id &&
+                  iop.entity.type === op.entity.type,
+              ),
+          )
+          .reduce((agg, curr) => agg && curr, true) &&
+        attachmentsOperations.length === initialAttachmentOperations.length
+      )
+    ) {
       dispatch({
         action: AttachmentAction.RESET_DESIRED_ATTACHED_ENTITIES,
         entities: [
@@ -329,6 +335,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
     initiallyAttachedEntitiesStatus,
     initiallyAttachedEntities,
     initialAttachmentOperations,
+    attachmentsOperations,
     convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
     convertInitiallyAttachementOperationsToDesiredAttachedEntities,
   ]);
