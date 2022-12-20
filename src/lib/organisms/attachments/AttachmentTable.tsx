@@ -1,4 +1,11 @@
-import { useCallback, useMemo, useReducer, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import { useCombobox, UseComboboxStateChange } from 'downshift';
 import { Box, Button, Table } from '../../next';
 
@@ -222,7 +229,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                   ],
                   attachmentsOperations: [...newAttachmentsOperations],
                 };
-                onAttachmentsOperationsChanged(newState.attachmentsOperations);
                 return newState;
               } else {
                 const newState = {
@@ -233,7 +239,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                   ],
                   attachmentsOperations: [...newAttachmentsOperations, action],
                 };
-                onAttachmentsOperationsChanged(newState.attachmentsOperations);
                 return newState;
               }
             }
@@ -281,7 +286,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 desiredAttachedEntities: newDesiredAttachedEntities,
                 attachmentsOperations: newAttachmentsOperations,
               };
-              onAttachmentsOperationsChanged(newState.attachmentsOperations);
               return newState;
             }
             break;
@@ -300,6 +304,10 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         attachmentsOperations: initialAttachmentOperations,
       },
     );
+
+  useEffect(() => {
+    onAttachmentsOperationsChanged(attachmentsOperations);
+  }, [onAttachmentsOperationsChanged, attachmentsOperations]);
 
   useMemo(() => {
     if (
