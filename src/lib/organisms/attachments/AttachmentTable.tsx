@@ -109,7 +109,9 @@ const StyledSearchInput = styled(SearchInput)`
   }
 `;
 
-const AttachmentTableContainer = styled.div``;
+const AttachmentTableContainer = styled.div`
+  height: 100%;
+`;
 
 const StyledTable = styled.div`
   background: ${(props) => props.theme.backgroundLevel4};
@@ -425,7 +427,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           filteredEntities.status === 'success' &&
           filteredEntities.data?.entities.map((item, index) => (
             <li key={`${item.id}${index}`} {...getItemProps({ item, index })}>
-              {item.name}
+              <Text>{item.name}</Text>
             </li>
           ))}
         {isOpen &&
@@ -575,6 +577,12 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           >
             {(rows) => (
               <>
+                {initiallyAttachedEntitiesStatus === 'idle' ||
+                  (initiallyAttachedEntitiesStatus === 'error' && (
+                    <CenterredSecondaryText>
+                      <Loader /> Loading {entityName.plural}...
+                    </CenterredSecondaryText>
+                  ))}
                 {desiredAttachedEntities.length === 0 && (
                   <CenterredSecondaryText>
                     No {entityName.plural} attached
