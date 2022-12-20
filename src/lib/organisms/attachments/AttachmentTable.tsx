@@ -316,7 +316,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
     }
   }, [
     initiallyAttachedEntitiesStatus,
-    initialAttachmentOperations,
     initiallyAttachedEntities,
     convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
     convertInitiallyAttachementOperationsToDesiredAttachedEntities,
@@ -430,9 +429,9 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               <Text>{item.name}</Text>
             </li>
           ))}
-        {isOpen &&
-          filteredEntities.status === 'loading' &&
-          filteredEntities.data?.entities.length === 0 && <li>Searching...</li>}
+        {isOpen && filteredEntities.status === 'loading' && (
+          <li>Searching...</li>
+        )}
         {isOpen &&
           filteredEntities.status === 'success' &&
           (filteredEntities.data?.number || 0) >
@@ -578,9 +577,9 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               <>
                 {initiallyAttachedEntitiesStatus === 'idle' ||
                 initiallyAttachedEntitiesStatus === 'loading' ? (
-                  <CenterredSecondaryText>
-                    <Loader /> Loading {entityName.plural}...
-                  </CenterredSecondaryText>
+                  <Loader centered>
+                    <>Loading {entityName.plural}...</>
+                  </Loader>
                 ) : initiallyAttachedEntitiesStatus === 'error' ? (
                   <CenterredSecondaryText>
                     Failed to load {entityName.plural}
