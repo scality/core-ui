@@ -602,9 +602,11 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               <>
                 {initiallyAttachedEntitiesStatus === 'idle' ||
                 initiallyAttachedEntitiesStatus === 'loading' ? (
-                  <Loader centered>
-                    <>Loading {entityName.plural}...</>
-                  </Loader>
+                  <Box ml="auto" mr="auto">
+                    <Loader>
+                      <>Loading {entityName.plural}...</>
+                    </Loader>
+                  </Box>
                 ) : initiallyAttachedEntitiesStatus === 'error' ? (
                   <CenterredSecondaryText>
                     Failed to load {entityName.plural}
