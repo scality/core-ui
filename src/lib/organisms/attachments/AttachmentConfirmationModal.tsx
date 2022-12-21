@@ -77,9 +77,19 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
             [attachmentOperationFlat.id]: 'Waiting for confirmation',
           };
         });
-        attachmentMutation.mutate({
-          ...attachmentOperationFlat,
-        });
+        attachmentMutation.mutate(
+          {
+            ...attachmentOperationFlat,
+          },
+          {
+            onSettled: (_, error, flatEntity) => {
+              setAttachmentOperationsStatuses((statuses) => ({
+                ...statuses,
+                [flatEntity.id]: error ? 'Error' : 'Success',
+              }));
+            },
+          },
+        );
       }
     });
   };
@@ -227,20 +237,18 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
 
   return (
     <>
-      <Box display="flex" justifyContent="flex-end" gap={8}>
-        <Button
-          label="Cancel"
-          variant="outline"
-          onClick={() => history.push(redirectUrl)}
-        />
-        <Button
-          icon={<Icon name="Save" />}
-          label="Save"
-          onClick={() => setIsModalOpen(true)}
-          variant="primary"
-          disabled={attachmentOperations.length === 0}
-        />
-      </Box>
+      <Button
+        label="Cancel"
+        variant="outline"
+        onClick={() => history.push(redirectUrl)}
+      />
+      <Button
+        icon={<Icon name="Save" />}
+        label="Save"
+        onClick={() => setIsModalOpen(true)}
+        variant="primary"
+        disabled={attachmentOperations.length === 0}
+      />
 
       <Modal
         close={handleClose}
