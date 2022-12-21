@@ -10,13 +10,15 @@ import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
 type AttachmentStatus = 'Waiting for confirmation' | 'Error' | 'Success';
 
 //The entity is the "thing" you want to attach to the resource, sorry about the naming :(
-function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
+export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
   attachmentOperations,
   getAttachmentMutationOptions,
   resourceType,
   resourceName,
   redirectUrl,
   EntityIcon,
+  cancelButtonDisabled,
+  onCancel,
 }: {
   attachmentOperations: AttachmentOperation<ENTITY_TYPE>[];
   getAttachmentMutationOptions: () => UseMutationOptions<
@@ -33,6 +35,8 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
   resourceType: RESOURCE_TYPE;
   redirectUrl: string;
   EntityIcon: ComponentType<{ type: ENTITY_TYPE | RESOURCE_TYPE }>;
+  cancelButtonDisabled?: boolean;
+  onCancel?: () => void;
 }) {
   const history = useHistory();
 
@@ -117,7 +121,10 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
             <Button
               icon={<Icon name="Arrow-right" />}
               variant="primary"
-              onClick={() => history.push(redirectUrl)}
+              onClick={() => {
+                handleClose();
+                history.push(redirectUrl);
+              }}
               label="Exit"
             />
           )}
@@ -240,7 +247,11 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
       <Button
         label="Cancel"
         variant="outline"
-        onClick={() => history.push(redirectUrl)}
+        disabled={cancelButtonDisabled}
+        onClick={() => {
+          if (onCancel) onCancel();
+          history.push(redirectUrl);
+        }}
       />
       <Button
         icon={<Icon name="Save" />}
@@ -268,5 +279,3 @@ function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
     </>
   );
 }
-
-export default AttachmentConfirmationModal;
