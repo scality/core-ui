@@ -15,6 +15,7 @@ type Props = {
   footer?: ReactNode;
   children: ReactNode;
   subTitle?: ReactNode;
+  role?: 'dialog' | 'alertdialog';
 };
 const ModalContainer = styled.div`
   position: fixed;
@@ -64,6 +65,7 @@ const Modal = ({
   children,
   footer,
   subTitle,
+  role = 'dialog',
   ...rest
 }: Props) => {
   const modalContainer = useRef(document.createElement('div'));
@@ -76,11 +78,20 @@ const Modal = ({
   }, [modalContainer]);
   return isOpen
     ? ReactDom.createPortal(
-        <ModalContainer className="sc-modal" {...rest}>
+        <ModalContainer
+          className="sc-modal"
+          role={role}
+          aria-modal="true"
+          aria-labelledby="dialog_label"
+          aria-describedby="dialog_desc"
+          {...rest}
+        >
           <ModalContent className="sc-modal-content">
             <ModalHeader className="sc-modal-header">
               <Wrap style={{ flex: 1 }}>
-                <Text variant="Larger">{title}</Text>
+                <Text variant="Larger" id="dialog_label">
+                  {title}
+                </Text>
                 {close ? (
                   <Button icon={<Icon name="Close" />} onClick={close} />
                 ) : (
@@ -88,7 +99,9 @@ const Modal = ({
                 )}
               </Wrap>
             </ModalHeader>
-            <ModalBody className="sc-modal-body">{children}</ModalBody>
+            <ModalBody className="sc-modal-body" id="dialog_desc">
+              {children}
+            </ModalBody>
             {footer && (
               <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
             )}
