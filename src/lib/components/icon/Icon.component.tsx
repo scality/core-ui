@@ -114,6 +114,7 @@ export const iconTable = {
   Pen: 'fa faPen',
   Pencil: 'fas faPencilAlt',
   Eye: 'fas faEye',
+  EyeSlash: 'fas faEyeSlash',
   Snowflake: 'fas faSnowflake',
   Key: 'fas faKey',
   Filter: 'fas faFilter',
