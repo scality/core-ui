@@ -228,12 +228,14 @@ type FormSectionProps = {
   children: ReactElement<FormGroupProps> | ReactElement<FormGroupProps>[];
   title?: { name: string; icon?: IconName; helpTooltip?: string };
   forceLabelWidth?: number;
+  rightActions?: ReactNode;
 };
 
 const FormSection = ({
   children,
   title,
   forceLabelWidth,
+  rightActions,
 }: FormSectionProps) => {
   const [maxLabelWidth, setMaxLabelWidth] = useState<number>(
     forceLabelWidth || 0,
@@ -247,18 +249,23 @@ const FormSection = ({
     <LabelContext.Provider value={{ maxLabelWidth, setMaxLabelWidth }}>
       <Stack direction="vertical" gap="r12">
         {title && (
-          <Stack direction="horizontal" gap="r8">
-            {title.icon && <Icon name={title.icon} color="textPrimary" />}
-            <Text isEmphazed>
-              {groupNotOptional ? `${title.name}` : `${title.name} (optional)`}
-            </Text>
-            {title.helpTooltip && (
-              <IconHelp
-                tooltipMessage={title.helpTooltip}
-                overlayStyle={maxWidthTooltip}
-              />
-            )}
-          </Stack>
+          <Wrap>
+            <Stack direction="horizontal" gap="r8">
+              {title.icon && <Icon name={title.icon} color="textPrimary" />}
+              <Text isEmphazed>
+                {groupNotOptional
+                  ? `${title.name}`
+                  : `${title.name} (optional)`}
+              </Text>
+              {title.helpTooltip && (
+                <IconHelp
+                  tooltipMessage={title.helpTooltip}
+                  overlayStyle={maxWidthTooltip}
+                />
+              )}
+            </Stack>
+            <div>{rightActions}</div>
+          </Wrap>
         )}
         {children}
       </Stack>
