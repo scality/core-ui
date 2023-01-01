@@ -1,25 +1,27 @@
-// @ts-nocheck
-import { ChangeEvent, HTMLProps } from 'react';
+import { ChangeEvent, HTMLProps, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
-type Props = HTMLProps<HTMLInputElement> & {
+import { LABEL_PREFIX, useFieldContext } from '../form/Form.component';
+import { Stack } from '../../spacing';
+import { Text } from '../text/Text.component';
+type Props = Omit<HTMLProps<HTMLInputElement>, 'ref' | 'as'> & {
   toggle: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   disabled?: boolean;
 };
-const ToggleContainer = styled.span`
+const ToggleContainer = styled.span<{ disabled?: boolean }>`
   display: inline-flex;
   align-items: center;
   position: relative;
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 `;
-const Switch = styled.label`
+const Switch = styled.label<{ disabled?: boolean }>`
   position: relative;
   width: ${spacing.sp24};
   height: ${spacing.sp14};
+  align-self: center;
   ${(props) => {
     return css`
       ${props.disabled
@@ -32,12 +34,9 @@ const Switch = styled.label`
     `;
   }}
 `;
-const Slider = styled.span`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+const Slider = styled.div<{ toggle?: boolean }>`
+  width: 100%;
+  height: 1rem;
   background-color: ${(props) => getTheme(props).backgroundLevel1};
   border: ${spacing.sp1} solid
     ${(props) =>
@@ -51,8 +50,8 @@ const Slider = styled.span`
     content: '';
     height: ${spacing.sp10};
     width: ${spacing.sp10};
-    left: ${spacing.sp1};
-    top: ${spacing.sp1};
+    left: 3px;
+    top: 3.5px;
     background-color: ${(props) =>
       getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
     transition: 0.4s;
@@ -68,32 +67,61 @@ const ToggleInput = styled.input`
   }
   display: none;
 `;
-const StyledSwitchLabel = styled.span`
-  margin-left: ${defaultTheme.padding.smaller};
-  font-size: ${defaultTheme.fontSize.base};
+const StyledSwitchLabel = styled.label<{ toggle?: boolean }>`
   color: ${(props) =>
     getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
+  const { isContextAvailable } = useFieldContext();
+  const checkboxRef = useRef<HTMLInputElement | null>(null);
+
   return (
-    <ToggleContainer className="sc-toggle" disabled={disabled}>
-      <Switch>
-        <ToggleInput
-          type="checkbox"
-          checked={toggle}
-          onChange={onChange}
-          disabled={disabled}
-          {...rest}
-        />
-        <Slider className="sc-slider" toggle={toggle} />
-      </Switch>
-      {label && (
-        <StyledSwitchLabel toggle={toggle} className="text">
-          {label}
-        </StyledSwitchLabel>
-      )}
-    </ToggleContainer>
+    <StyledSwitchLabel
+      toggle={toggle}
+      className="text"
+      id={`${rest['id']}-label`}
+      htmlFor={rest['id']}
+    >
+      <ToggleContainer className="sc-toggle" disabled={disabled}>
+        <Stack gap={'r8'} style={{ alignItems: 'baseline' }}>
+          <Switch
+            htmlFor={rest['id']}
+            role="checkbox"
+            aria-checked={toggle}
+            tabIndex={disabled ? -1 : 0}
+            aria-disabled={disabled}
+            disabled={disabled}
+            onKeyDown={(e) => {
+              if (e.code === 'Space' || e.code === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+
+                checkboxRef.current && checkboxRef.current.click();
+              }
+            }}
+            aria-labelledby={
+              label
+                ? `${rest['id']}-label`
+                : isContextAvailable
+                ? `${LABEL_PREFIX}${rest['id']}`
+                : undefined
+            }
+          >
+            <ToggleInput
+              type="checkbox"
+              checked={toggle}
+              onChange={onChange}
+              disabled={disabled}
+              ref={checkboxRef}
+              {...rest}
+            />
+            <Slider className="sc-slider" toggle={toggle} />
+          </Switch>
+          {label && <Text>{label}</Text>}
+        </Stack>
+      </ToggleContainer>
+    </StyledSwitchLabel>
   );
 }
 
