@@ -21,6 +21,7 @@ import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component
 import { Text } from '../text/Text.component';
 
 const DESCRIPTION_PREFIX = 'describe-';
+const LABEL_PREFIX = 'label-';
 const maxWidthTooltip = { maxWidth: '20rem' };
 
 type FormProps = Omit<
@@ -167,6 +168,7 @@ const FormGroup = ({
           <Stack>
             <label
               htmlFor={id}
+              id={`${LABEL_PREFIX}${id}`}
               ref={labelRef}
               style={{ opacity: disabled ? 0.5 : 1 }}
             >
@@ -392,4 +394,11 @@ const useFieldContext = () => {
   return { ...fieldContext, isContextAvailable: true };
 };
 
-export { Form, FormSection, FormGroup, useFieldContext, DESCRIPTION_PREFIX };
+export {
+  Form,
+  FormSection,
+  FormGroup,
+  useFieldContext,
+  DESCRIPTION_PREFIX,
+  LABEL_PREFIX,
+};
