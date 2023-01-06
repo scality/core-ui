@@ -109,10 +109,16 @@ export const useTableContext = <
   return tableProps as TableContextType<DATA_ROW>; //Todo figure out a way to transfer the type to the context provider
 };
 
-export const EmptyCell = () => {
+export const EmptyCell = ({
+  tooltipContent,
+}: {
+  tooltipContent?: string | JSX.Element;
+}) => {
   return (
     <Box mr={4}>
-      <Tooltip overlay={<TooltipContent>unknown</TooltipContent>}>
+      <Tooltip
+        overlay={<TooltipContent>{tooltipContent || 'unknown'}</TooltipContent>}
+      >
         <UnknownIcon className="fas fa-minus"></UnknownIcon>
       </Tooltip>
     </Box>
