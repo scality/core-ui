@@ -207,13 +207,14 @@ export const AttachmentTable = <ENTITY_TYPE,>({
 
   //Desired attached entities and onAttachmentsOperationsChanged handling
   const convertInitiallyAttachedEntitiesToDesiredAttachedEntities = useCallback(
-    (initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[]) => {
+    (
+      initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
+      operations: AttachmentOperation<ENTITY_TYPE>[] = initialAttachmentOperations,
+    ) => {
       return initiallyAttachedEntities
         .filter(
           (attachedEntities) =>
-            !initialAttachmentOperations.find(
-              (op) => op.entity.id === attachedEntities.id,
-            ),
+            !operations.find((op) => op.entity.id === attachedEntities.id),
         )
         .map((entity) => ({
           ...entity,
@@ -255,13 +256,14 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           | {
               action: 'RESET_DESIRED_ATTACHED_ENTITIES';
               entities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
+              operations: AttachmentOperation<ENTITY_TYPE>[];
             },
       ) => {
         switch (action.action) {
           case 'RESET_DESIRED_ATTACHED_ENTITIES':
             return {
               desiredAttachedEntities: action.entities,
-              attachmentsOperations: initialAttachmentOperations,
+              attachmentsOperations: action.operations,
             };
           case AttachmentAction.ADD:
             if (
@@ -392,6 +394,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             initialAttachmentOperations,
           ),
         ],
+        operations: initialAttachmentOperations,
       });
     } else {
       previousInitiallyAttachedEntitiesStatus.current =
@@ -406,35 +409,30 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   ]);
 
   useEffect(() => {
-    if (
-      initiallyAttachedEntitiesStatus === 'success' &&
-      !exposedAttachmentContext.resetAttachmentTable
-    ) {
-      privateAttachmentContext.setResetAttachementTable(() => {
-        return (
-          initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
-          initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[],
-        ) => {
-          dispatch({
-            action: 'RESET_DESIRED_ATTACHED_ENTITIES',
-            entities: [
-              ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
-                initiallyAttachedEntities,
-              ),
-              ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
-                initialAttachmentOperations,
-              ),
-            ],
-          });
-        };
-      });
-    }
+    privateAttachmentContext.setResetAttachementTable(() => {
+      return (
+        newlyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
+        newAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[],
+      ) => {
+        dispatch({
+          action: 'RESET_DESIRED_ATTACHED_ENTITIES',
+          entities: [
+            ...convertInitiallyAttachedEntitiesToDesiredAttachedEntities(
+              newlyAttachedEntities,
+              newAttachmentOperations,
+            ),
+            ...convertInitiallyAttachementOperationsToDesiredAttachedEntities(
+              newAttachmentOperations,
+            ),
+          ],
+          operations: newAttachmentOperations,
+        });
+      };
+    });
   }, [
-    privateAttachmentContext,
     convertInitiallyAttachedEntitiesToDesiredAttachedEntities,
     convertInitiallyAttachementOperationsToDesiredAttachedEntities,
-    initiallyAttachedEntitiesStatus,
-    exposedAttachmentContext,
+    dispatch,
   ]);
 
   const resetRef = useRef<() => void | null>(null);
