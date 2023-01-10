@@ -120,6 +120,7 @@ export const iconTable = {
   Filter: 'fas faFilter',
   Download: 'fas faDownload',
   Certificate: 'fas faCertificate',
+  Redo: 'fas faRedoAlt',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
