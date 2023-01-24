@@ -13,6 +13,9 @@ const Container = styled.div`
 
 const FillAvailableFlexBox = styled.div`
   flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 const sectionDistance = spacing.r2;
@@ -40,9 +43,7 @@ const ContextContainer = ({
   children: ReactElement | ReactElement[];
 }) => (
   <ContextWrapper background={background}>
-    <FillAvailableFlexBox style={{ width: '100%' }} {...rest}>
-      {children}
-    </FillAvailableFlexBox>
+    <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </ContextWrapper>
 );
 
