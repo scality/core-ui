@@ -131,6 +131,7 @@ const AppChildrenContainer = styled.div<{
   flex-direction: column;
   padding: ${(props) => (props.hasPadding ? '0 1rem' : 'initial')};
   width: 100%;
+  box-sizing: border-box;
 `;
 
 function AppContainer({
