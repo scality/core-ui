@@ -10,7 +10,7 @@ import { addDecorator } from '@storybook/react';
 import styled from 'styled-components';
 import { Stack } from '../src/lib/spacing';
 import { Icon } from '../src/lib/components/icon/Icon.component';
-import { Text } from '../src/lib/components/text/Text.component';
+import { Link, Text } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
@@ -208,40 +208,40 @@ export const Layout2OverallSummaryAndMainContent = () => (
         <AppContainer.ContextContainer background="backgroundLevel1">
           <Breadcrumb
             paths={[
-              <a href="home">home</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a
+              <Link href="home">home</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link
                 href="node"
                 title={'node_longlonglonglonglonglonglonglonglonglonglong'}
               >
                 node_longlonglonglonglonglonglonglonglonglonglong
-              </a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <a href="cluster">cluster_1</a>,
-              <label>volumes</label>,
+              </Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Link href="cluster">cluster_1</Link>,
+              <Text>volumes</Text>,
             ]}
           />
         </AppContainer.ContextContainer>
