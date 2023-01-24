@@ -163,6 +163,7 @@ const FormGroup = ({
         <div
           style={{
             width: maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
+            flex: 'none',
           }}
         >
           <Stack>
@@ -189,6 +190,7 @@ const FormGroup = ({
         <Stack
           direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
           gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
+          style={{ overflow: 'hidden' }}
         >
           {content}
           {error ? (
