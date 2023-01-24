@@ -11,12 +11,14 @@ const BreadcrumbContainer = styled.ol`
   list-style-type: none;
   padding-left: 0;
   margin: 0;
+  overflow-y: auto;
 `;
 const BreadcrumbItem = styled.li<{ active: boolean }>`
   box-sizing: border-box;
   height: 100%;
   font-size: ${defaultTheme.fontSize.larger};
   ${ellipsis('250px')}
+  min-width: 3rem;
 
   ${(props) => {
     const { textPrimary, selectedActive, textLink } = getTheme(props);

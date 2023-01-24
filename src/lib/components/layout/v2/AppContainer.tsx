@@ -28,6 +28,7 @@ const ContextWrapper = styled.div<{
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 const ContextContainer = ({
@@ -39,7 +40,9 @@ const ContextContainer = ({
   children: ReactElement | ReactElement[];
 }) => (
   <ContextWrapper background={background}>
-    <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
+    <FillAvailableFlexBox style={{ width: '100%' }} {...rest}>
+      {children}
+    </FillAvailableFlexBox>
   </ContextWrapper>
 );
 
@@ -127,6 +130,7 @@ const AppChildrenContainer = styled.div<{
   display: flex;
   flex-direction: column;
   padding: ${(props) => (props.hasPadding ? '0 1rem' : 'initial')};
+  width: 100%;
 `;
 
 function AppContainer({

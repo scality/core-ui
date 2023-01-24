@@ -12,6 +12,8 @@ import { Stack } from '../src/lib/spacing';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Text } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
+import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
+import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
 
 addDecorator(createElement);
 const sideBarActions = [
@@ -193,7 +195,7 @@ export const Layout2MainContentOnly = ({}) => (
   </Layout2>
 );
 
-export const Layout2OverallSummaryAndMainContent = ({}) => (
+export const Layout2OverallSummaryAndMainContent = () => (
   <Layout2
     headerNavigation={
       <HeaderComponent>
@@ -201,14 +203,56 @@ export const Layout2OverallSummaryAndMainContent = ({}) => (
       </HeaderComponent>
     }
   >
-    <AppContainer>
-      <AppContainer.OverallSummary hasTopMargin>
-        Overall summary (optional)
-      </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="statusCritical">
-        Main content
-      </AppContainer.MainContent>
-    </AppContainer>
+    <ScrollbarWrapper>
+      <AppContainer>
+        <AppContainer.ContextContainer background="backgroundLevel1">
+          <Breadcrumb
+            paths={[
+              <a href="home">home</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a
+                href="node"
+                title={'node_longlonglonglonglonglonglonglonglonglonglong'}
+              >
+                node_longlonglonglonglonglonglonglonglonglonglong
+              </a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <a href="cluster">cluster_1</a>,
+              <label>volumes</label>,
+            ]}
+          />
+        </AppContainer.ContextContainer>
+        <AppContainer.OverallSummary hasTopMargin>
+          Overall summary (optional)
+        </AppContainer.OverallSummary>
+        <AppContainer.MainContent background="statusCritical">
+          Main content
+        </AppContainer.MainContent>
+      </AppContainer>
+    </ScrollbarWrapper>
   </Layout2>
 );
 
@@ -324,7 +368,7 @@ export const Layout2TwoPanelsSeventyThirty = () => (
       }
     >
       <AppContainer.ContextContainer background="backgroundLevel1">
-        Context bar
+        <>Context bar</>
       </AppContainer.ContextContainer>
       <AppContainer.OverallSummary>
         <div>Overall summary (optional)</div>
