@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from '@storybook/addon-actions';
+import { Link } from '../src/lib/components/text/Text.component';
+import { Stack } from '../src/lib/spacing';
 const tabs = [
   {
     selected: true,
@@ -86,6 +88,15 @@ const rightActions = [
         onClick: action('Onboarding clicked'),
       },
     ],
+  },
+  {
+    type: 'custom',
+    render: () => (
+      <Stack>
+        <i className="fas fa-exclamation-circle" />{' '}
+        <Link>New version available</Link>
+      </Stack>
+    ),
   },
   {
     type: 'button',

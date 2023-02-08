@@ -173,6 +173,8 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
         {...rest}
       />
     );
+  } else if (type === 'custom') {
+    return <rest.render key={`navbar_right_action_${index}`} />;
   }
 
   return null;
