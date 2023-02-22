@@ -15,6 +15,7 @@ const BannerContainer = styled.div<{ variant: Variant }>`
   padding: ${defaultTheme.padding.small};
   font-size: ${defaultTheme.fontSize.small};
   color: ${getThemePropSelector('textPrimary')};
+  align-items: center;
 
   border: 1px solid;
   border-left: 5px solid;
