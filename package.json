@@ -88,7 +88,7 @@
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
     "typescript": "^4.6.4",
-    "vega": "^5.17.3",
+    "vega": "^5.23.0",
     "vega-embed": "^6.0.0",
     "vega-lite": "^5.0.0",
     "vega-tooltip": "^0.27.0"
@@ -115,7 +115,7 @@
     "react-window": "^1.8.6",
     "styled-components": "^4.1.2",
     "styled-system": "^5.1.5",
-    "vega": "^5.17.3",
+    "vega": "^5.23.0",
     "vega-embed": "^6.0.0",
     "vega-lite": "^5.0.0",
     "vega-tooltip": "^0.27.0"
