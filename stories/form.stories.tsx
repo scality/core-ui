@@ -12,6 +12,7 @@ import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Text } from '../src/lib/components/text/Text.component';
+import { Select } from '../src/lib/components/selectv2/Selectv2.component';
 
 export default {
   title: 'Components/Form',
@@ -155,6 +156,24 @@ export const PageForm = ({}) => {
             }
             required={true}
           ></FormGroup>
+          <FormGroup
+            id="value-example"
+            label="Choose a value"
+            helpErrorPosition="bottom"
+            required
+            content={
+              <Select
+                id="value-example"
+                placeholder="Select an option..."
+                onChange={() => {}}
+                value={'value-1'}
+              >
+                <Select.Option value={'value-1'}>Value 1</Select.Option>
+                <Select.Option value={'value-2'}>Value 2</Select.Option>
+                <Select.Option value={'value-3'}>Value 3</Select.Option>
+              </Select>
+            }
+          />
         </FormSection>
       </Form>
     </div>

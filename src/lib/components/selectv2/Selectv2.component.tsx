@@ -274,6 +274,7 @@ function SelectBox({
   variant = 'default',
   className,
   size = '1',
+  id,
   ...rest
 }: SelectProps) {
   if (defaultValue && value) {
@@ -359,10 +360,10 @@ function SelectBox({
       <ScrollbarWrapper>
         {options && (
           <SelectStyle
+            inputId={id}
             className={['sc-select', className].join(' ')}
             classNamePrefix="sc-select"
             name="sc-select"
-            aria-label="select"
             value={
               searchSelection || options.find((opt) => opt.value === value)
             }
