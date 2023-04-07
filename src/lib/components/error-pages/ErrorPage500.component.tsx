@@ -34,12 +34,14 @@ type Props = {
   supportLink?: string;
   locale?: string;
   onReturnHomeClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  errorMessage?: { en: string; fr: string };
 };
 
 function ErrorPage500({
   supportLink = undefined,
   locale = 'en',
   onReturnHomeClick,
+  errorMessage,
   ...rest
 }: Props) {
   if (!translations[locale]) locale = 'en';
@@ -54,7 +56,9 @@ function ErrorPage500({
       <Row>
         <Description>
           <DescriptionContent>
-            {translations[locale].error_desc}
+            {errorMessage
+              ? errorMessage[locale]
+              : translations[locale].error_desc}
           </DescriptionContent>
           <DescriptionContent>
             {translations[locale].should_do}

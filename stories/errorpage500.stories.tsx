@@ -51,3 +51,24 @@ export const WithLocale = ({}) => {
     </Wrapper>
   );
 };
+export const CustomerizedError = ({}) => {
+  return (
+    <Wrapper>
+      <div
+        style={{
+          height: '100vh',
+        }}
+      >
+        <ErrorPage500
+          supportLink="https://www.scality.com/support/"
+          locale="en"
+          onReturnHomeClick={() => {}}
+          errorMessage={{
+            en: 'Failed to log you in, this might be due to time synchronization between the browser and the server.',
+            fr: `Impossible de vous connecter, cela peut être dû à la synchronisation de l'heure entre le navigateur et le serveur.`,
+          }}
+        />
+      </div>
+    </Wrapper>
+  );
+};
