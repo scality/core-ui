@@ -15,6 +15,12 @@ export const TIME_SECOND_FORMATER = Intl.DateTimeFormat('en-GB', {
   second: '2-digit',
 });
 
+export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
+  hour12: false,
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -44,6 +50,10 @@ export const FormattedDateTime = ({
   switch (format) {
     case 'date':
       return <>{DATE_FORMATER.format(value)}</>;
+    case 'date-time':
+      return (
+        <>{DATE_FORMATER.format(value) + ' ' + TIME_FORMATER.format(value)}</>
+      );
     case 'date-time-second':
       return (
         <>
@@ -52,6 +62,10 @@ export const FormattedDateTime = ({
             TIME_SECOND_FORMATER.format(value)}
         </>
       );
+    case 'time':
+      return <>{TIME_FORMATER.format(value)}</>;
+    case 'time-second':
+      return <>{TIME_SECOND_FORMATER.format(value)}</>;
     case 'relative':
       const now = new Date();
       const monthDiff = getDateDaysDiff(value, now, 'months');

@@ -15,7 +15,7 @@ describe('FormatttedDateTime', () => {
     expect(screen.getByText('2022-10-01')).toBeInTheDocument();
   });
 
-  it('should display the date time in the expected format', () => {
+  it('should display the date time second in the expected format', () => {
     //S
     render(
       <FormattedDateTime
@@ -25,6 +25,42 @@ describe('FormatttedDateTime', () => {
     );
     //V
     expect(screen.getByText('2022-10-01 00:00:00')).toBeInTheDocument();
+  });
+
+  it('should display the date time in the expected format', () => {
+    //S
+    render(
+      <FormattedDateTime
+        format="date-time"
+        value={new Date('2022-10-01T00:00:00Z')}
+      />,
+    );
+    //V
+    expect(screen.getByText('2022-10-01 00:00')).toBeInTheDocument();
+  });
+
+  it('should display the time second in the expected format', () => {
+    //S
+    render(
+      <FormattedDateTime
+        format="time-second"
+        value={new Date('2022-10-01T00:00:00Z')}
+      />,
+    );
+    //V
+    expect(screen.getByText('00:00:00')).toBeInTheDocument();
+  });
+
+  it('should display the time in the expected format', () => {
+    //S
+    render(
+      <FormattedDateTime
+        format="time"
+        value={new Date('2022-10-01T00:00:00Z')}
+      />,
+    );
+    //V
+    expect(screen.getByText('00:00')).toBeInTheDocument();
   });
 
   it('should display a relative date with the right format when the date occured few seconds before', async () => {
