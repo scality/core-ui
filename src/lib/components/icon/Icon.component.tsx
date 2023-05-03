@@ -30,6 +30,7 @@ export const iconTable = {
   Alert: 'fas faBell',
   'Lat-menu': 'fas faBars',
   Dashboard: 'fas faDesktop',
+  Workflow: 'fas faRoute',
   Expiration: 'fas faStopwatch',
   Replication: 'fas faCoins',
   Transition: 'fas faRocket',
