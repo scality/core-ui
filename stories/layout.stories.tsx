@@ -375,7 +375,7 @@ export const Layout2TwoPanelsSeventyThirty = () => (
       </AppContainer.OverallSummary>
       <AppContainer.MainContent background="selectedActive">
         <TwoPanelLayout
-          panelsRatio="70-30"
+          panelsRatio="65-35"
           leftPanel={{
             children: <div style={{ flex: 1 }}>Left Panel content</div>,
             background: 'backgroundLevel3',
