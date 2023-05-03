@@ -14,10 +14,15 @@ const ThirtySeventy: Ratio = {
   right: 0.7,
 };
 
-const SeventyThirty: Ratio = {
-  left: 0.7,
-  right: 0.3,
+const SixtyFiveThirtyFive: Ratio = {
+  left: 0.65,
+  right: 0.35,
 };
+
+// const SeventyThirty: Ratio = {
+//   left: 0.7,
+//   right: 0.3,
+// };
 
 const FiftyFifty: Ratio = {
   left: 0.5,
@@ -54,14 +59,14 @@ const RightPanel = styled.div<{
   min-width: 0;
 `;
 
-type RatioString = '50-50' | '70-30' | '30-70';
+type RatioString = '50-50' | '65-35' | '30-70';
 
 function getPanelsObjectRation(ratio: RatioString) {
   if (ratio === '50-50') {
     return FiftyFifty;
   }
-  if (ratio === '70-30') {
-    return SeventyThirty;
+  if (ratio === '65-35') {
+    return SixtyFiveThirtyFive;
   }
   if (ratio === '30-70') {
     return ThirtySeventy;
