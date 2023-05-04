@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useMemo,
   useRef,
 } from 'react';
 import { ScrollbarWrapper } from '../../index';
@@ -15,7 +14,7 @@ import { convertRemToPixels } from '../../utils';
 import { spacing } from '../../spacing';
 import { convertSizeToRem } from '../inputv2/inputv2';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-const SelectContext = createContext<boolean>(false);
+
 const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
 const NOPT_SEARCH = 8;
@@ -26,13 +25,54 @@ export type OptionProps = {
   children?: React.ReactNode;
   value: string;
 };
-export function Option(_: OptionProps): JSX.Element {
-  const context = useContext(SelectContext);
-  if (!context)
+const usePreviousValue = (value) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
+function useOptions() {
+  const optionContext = useContext(OptionContext);
+  if (!optionContext)
+    throw new Error(
+      'useOptions cannot be rendered outside the Select component',
+    );
+  return Object.values(optionContext.options);
+}
+
+export function Option({
+  value,
+  children,
+  disabled,
+  icon,
+  ...rest
+}: OptionProps): JSX.Element {
+  const optionContext = useContext(OptionContext);
+  if (!optionContext)
     throw new Error('Option cannot be rendered outside the Select component');
-  // Type checking does not support string, but it's supported by Option.
-  // @ts-ignore
-  return _.children;
+
+  const prevValue = usePreviousValue(value);
+
+  useEffect(() => {
+    if (prevValue && prevValue !== value) {
+      optionContext.unregister(prevValue);
+    }
+    optionContext.register({
+      value: value,
+      label: children || '',
+      isDisabled: disabled || false,
+      icon: icon,
+      optionProps: { ...rest },
+    });
+    return () => {
+      optionContext.unregister(value);
+    };
+    //eslint-disable-next-line react-hooks/exhaustive-deps --  optionContext is mutable
+  }, [children, disabled, icon, value, prevValue]);
+
+  return <></>;
 }
 
 const Input = (props) => {
@@ -264,10 +304,44 @@ type SelectOptionProps = {
   optionProps: any;
 };
 
+const OptionContext =
+  createContext<{
+    options: Record<string, SelectOptionProps>;
+    register: (option: SelectOptionProps) => void;
+    unregister: (value: string) => void;
+  } | null>(null);
+
+function SelectWithOptionContext(props: SelectProps) {
+  const [options, setOptions] = useState<Record<string, SelectOptionProps>>({});
+
+  const register = (option: SelectOptionProps) => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      [option.value]: option,
+    }));
+  };
+
+  const unregister = (value: string) => {
+    setOptions((prevOptions) => {
+      const { [value]: _, ...rest } = prevOptions;
+      return rest;
+    });
+  };
+
+  return (
+    <OptionContext.Provider value={{ options, register, unregister }}>
+      <>
+        <SelectBox {...props} />
+        {props.children}
+      </>
+    </OptionContext.Provider>
+  );
+}
+
 function SelectBox({
   placeholder = 'Select...',
   disabled = false,
-  children,
+
   defaultValue,
   value,
   onChange,
@@ -289,29 +363,8 @@ function SelectBox({
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
   const selectRef = useRef<any>();
-  const options = useMemo((): Array<SelectOptionProps> => {
-    if (children) {
-      return (
-        React.Children.toArray(children)
-          // @ts-ignore
-          .filter((child) => child.type === Option)
-          .map((child) => {
-            const { value, children, disabled, icon, ...rest }: OptionProps =
-              // @ts-ignore
-              child.props;
-            return {
-              value: value,
-              label: children || '',
-              isDisabled: disabled || false,
-              icon: icon,
-              optionProps: { ...rest },
-            };
-          })
-      );
-    } else {
-      return [];
-    }
-  }, [children]);
+
+  const options = useOptions();
 
   const handleChange = (option: SelectOptionProps) => {
     if (onChange && typeof onChange === 'function') {
@@ -356,8 +409,8 @@ function SelectBox({
   }, [value, selectRef, isEmptyStringInOptions]);
 
   return (
-    <SelectContext.Provider value={true}>
-      <ScrollbarWrapper>
+    <ScrollbarWrapper>
+      <>
         {options && (
           <SelectStyle
             inputId={id}
@@ -413,10 +466,10 @@ function SelectBox({
             {...rest}
           />
         )}
-      </ScrollbarWrapper>
-    </SelectContext.Provider>
+      </>
+    </ScrollbarWrapper>
   );
 }
 
-SelectBox.Option = Option;
-export const Select = SelectBox;
+SelectWithOptionContext.Option = Option;
+export const Select = SelectWithOptionContext;
