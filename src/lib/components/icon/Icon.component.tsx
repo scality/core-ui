@@ -75,6 +75,7 @@ export const iconTable = {
   'File-invoice': 'fas faFileInvoice',
   'Deletion-marker': 'fas faBan',
   'Map-marker': 'fas faMapMarkerAlt',
+  Location: 'fas faMapMarkerAlt',
   'Info-circle': 'fas faInfoCircle',
   'Exclamation-triangle': 'fas faExclamationTriangle',
   'Exclamation-circle': 'fas faExclamationCircle',
