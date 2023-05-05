@@ -185,11 +185,10 @@ export const Link = styled.a`
   width: fit-content;
   &:hover {
     text-decoration-line: underline;
-    color: ${(props) => getTheme(props).selectedActive};
   }
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {
-    outline: dashed ${spacing.r2} ${(props) => getTheme(props).selectedActive};
+    outline: dashed ${spacing.r2} ${(props) => getTheme(props).textLink};
     outline-offset: ${spacing.r2};
   }
 `;
