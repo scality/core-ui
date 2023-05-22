@@ -112,11 +112,13 @@ export const useTableContext = <
 
 export const EmptyCell = ({
   tooltipContent,
+  mr = 4,
 }: {
   tooltipContent?: string | JSX.Element;
+  mr?: number;
 }) => {
   return (
-    <Box mr={4}>
+    <Box mr={mr}>
       <Tooltip
         overlay={<TooltipContent>{tooltipContent || 'unknown'}</TooltipContent>}
       >
