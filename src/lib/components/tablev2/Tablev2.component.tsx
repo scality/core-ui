@@ -29,9 +29,10 @@ import { MultiSelectableContent } from './MultiSelectableContent';
 import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
-import { TableWrapper, TooltipContent, UnknownIcon } from './Tablestyle';
+import { TableWrapper, TooltipContent } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
+import { Icon } from '../icon/Icon.component';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -119,7 +120,7 @@ export const EmptyCell = ({
       <Tooltip
         overlay={<TooltipContent>{tooltipContent || 'unknown'}</TooltipContent>}
       >
-        <UnknownIcon className="fas fa-minus"></UnknownIcon>
+        <Icon name="Minus" />
       </Tooltip>
     </Box>
   );

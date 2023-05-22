@@ -8,7 +8,6 @@ import {
 } from './TableUtils';
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
-import { BasicText } from '../text/Text.component';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -153,10 +152,7 @@ export const TooltipContent = styled.div`
   font-weight: bold;
   min-width: 60px;
 `;
-export const UnknownIcon = styled.i`
-  // Increase the height so that the users don't need to hover precisely on the hyphen.
-  height: 70%;
-`;
+
 export const NoResult = styled.div`
   display: flex;
   justify-content: center;
