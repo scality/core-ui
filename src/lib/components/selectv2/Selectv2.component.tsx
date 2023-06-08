@@ -367,8 +367,9 @@ function SelectBox({
   const options = useOptions();
 
   const handleChange = (option: SelectOptionProps) => {
-    if (onChange && typeof onChange === 'function') {
-      onChange(option ? option.value : '');
+    const newValue = option ? option.value : '';
+    if (onChange && typeof onChange === 'function' && newValue !== value) {
+      onChange(newValue);
     }
 
     if (options && options.length > NOPT_SEARCH) {
