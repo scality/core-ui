@@ -264,4 +264,14 @@ describe('SelectV2', () => {
       container.querySelector('.sc-select__placeholder'),
     ).toHaveTextContent('Select...');
   });
+
+  it('should not trigger onChange when defaultValue is empty string', () => {
+    const onChange = jest.fn();
+    render(
+      <Select value={''} onChange={onChange}>
+        <Option value="test">test</Option>
+      </Select>,
+    );
+    expect(onChange).toBeCalledTimes(0);
+  });
 });
