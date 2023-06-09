@@ -123,6 +123,7 @@ export const iconTable = {
   Download: 'fas faDownload',
   Certificate: 'fas faCertificate',
   Redo: 'fas faRedoAlt',
+  Eraser: 'fas faEraser',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
