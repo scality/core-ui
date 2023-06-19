@@ -68,7 +68,7 @@ function Tabs({
         if (
           !(
             queryURL.has(key) &&
-            decodeURIComponent(queryURL.get(key) || '') === query[key]
+            queryURL.get(key) === query[key]
           )
         )
           return false;
