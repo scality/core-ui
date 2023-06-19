@@ -2,22 +2,42 @@ import React, { forwardRef, HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { getTheme } from '../../utils';
-type Props = Omit<HTMLProps<HTMLTextAreaElement>, 'as'>;
+
+type TextAreaVariant = 'code' | 'text';
+type Props =
+  | Omit<HTMLProps<HTMLTextAreaElement>, 'as'> & { variant?: TextAreaVariant };
 type RefType = HTMLTextAreaElement | null;
 
-const TextAreaContainer = styled.textarea`
+const TextAreaContainer = styled.textarea<{
+  variant: TextAreaVariant;
+  width?: string | number;
+  height?: string | number;
+}>`
   padding: ${spacing.r12} ${spacing.r8};
   border-radius: 4px;
   resize: vertical;
-  font-family: Courier New;
+  font-family: ${(props) =>
+    props.variant === 'code' ? 'Courier New' : 'Lato'};
   font-size: ${spacing.f14};
 
   ${(props) =>
     props.disabled &&
-    `
-  opacity: 0.5;
-  cursor: not-allowed;
-  `}
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
+
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `}
+
+  ${(props) =>
+    props.height &&
+    css`
+      height: ${props.height};
+    `}
 
   &:placeholder-shown {
     font-style: italic;
@@ -49,14 +69,28 @@ const TextAreaContainer = styled.textarea`
 `;
 
 function TextAreaElement(
-  { rows = 3, cols = 20, ...rest }: Props,
+  { rows = 3, cols = 20, width, height, variant = 'code', ...rest }: Props,
   ref: React.ForwardedRef<RefType>,
 ) {
+  if (width || height) {
+    return (
+      <TextAreaContainer
+        className="sc-textarea"
+        width={width}
+        height={height}
+        variant={variant}
+        {...rest}
+        ref={ref}
+      />
+    );
+  }
+
   return (
     <TextAreaContainer
       className="sc-textarea"
       rows={rows}
       cols={cols}
+      variant={variant}
       {...rest}
       ref={ref}
     />
@@ -64,5 +98,3 @@ function TextAreaElement(
 }
 
 export const TextArea = forwardRef<RefType, Props>(TextAreaElement);
-
-export default { TextArea };
