@@ -162,36 +162,6 @@ const DelayedFallback = ({
   return <i {...rest}>{show && children}</i>;
 };
 
-function getLazyStyledIcon(iconInfo: string) {
-  const [iconType, iconClass] = iconInfo.split(' ');
-  return React.lazy(async () => {
-    try {
-      const fontAwesomeType =
-        iconType === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons';
-      const icon = await import(
-        `@fortawesome/${fontAwesomeType}/${iconClass}.js`
-      );
-      return {
-        default: ({ name, color, size, ariaLabel, ...rest }) => (
-          <IconStyled
-            color={color}
-            icon={icon[iconClass]}
-            size={size}
-            aria-label={`${name} ${ariaLabel}`}
-            {...rest}
-          />
-        ),
-      };
-    } catch {
-      return {
-        default: ({ name, ariaLabel }) => (
-          <Loader size="base" aria-label={`${name} ${ariaLabel}`} />
-        ),
-      };
-    }
-  });
-}
-
 export const IconWrapper = styled.div<{ size: SizeProp }>`
   ${(props) => {
     const brand = getTheme(props);
