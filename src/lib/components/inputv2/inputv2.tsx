@@ -1,4 +1,4 @@
-import { forwardRef, HTMLProps } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { getTheme } from '../../utils';
@@ -92,7 +92,7 @@ type Props = {
   leftIcon?: IconName;
   rightIcon?: IconName;
   size?: '1' | '2/3' | '1/2' | '1/3';
-} & HTMLProps<HTMLInputElement>;
+} & InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
@@ -135,7 +135,6 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           >
             {leftIcon && <SelfCenterredIcon name={leftIcon} />}
             <StyledInput
-              //@ts-expect-error
               ref={ref}
               disabled={disabled || disabledFromFieldContext}
               aria-invalid={!!(error || errorFromFieldContext)}

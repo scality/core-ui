@@ -1,4 +1,4 @@
-import { Children, HTMLProps, ReactNode } from 'react';
+import { Children, HTMLAttributes, HTMLProps, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box, BoxComponentProps } from './components/box/Box';
 import { getTheme } from './utils';
@@ -66,7 +66,7 @@ export const Stack = ({
   direction?: 'vertical' | 'horizontal';
   withSeparators?: boolean;
   children: ReactNode[];
-} & Omit<HTMLProps<HTMLDivElement>, 'ref' | 'as'>) => {
+} & HTMLAttributes<HTMLDivElement>) => {
   gap = gap || 'r8';
   direction = direction || 'horizontal';
 

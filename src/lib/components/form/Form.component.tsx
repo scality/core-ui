@@ -1,8 +1,8 @@
 import {
   Children,
   createContext,
+  FormHTMLAttributes,
   forwardRef,
-  HTMLProps,
   isValidElement,
   ReactElement,
   ReactNode,
@@ -25,8 +25,8 @@ const LABEL_PREFIX = 'label-';
 const maxWidthTooltip = { maxWidth: '20rem' };
 
 type FormProps = Omit<
-  HTMLProps<HTMLFormElement>,
-  'ref' | 'as' | 'noValidate' | 'formNoValidate'
+  FormHTMLAttributes<HTMLFormElement>,
+  'noValidate' | 'formNoValidate'
 > & {
   children: ReactNode | ReactNode[];
   requireMode?: 'all' | 'partial';

@@ -1,11 +1,18 @@
-import React, { CSSProperties, forwardRef, HTMLProps } from 'react';
+import React, {
+  CSSProperties,
+  forwardRef,
+  TextareaHTMLAttributes,
+} from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { getTheme } from '../../utils';
 
 type TextAreaVariant = 'code' | 'text';
-type Props =
-  | Omit<HTMLProps<HTMLTextAreaElement>, 'as'> & { variant?: TextAreaVariant };
+type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  variant?: TextAreaVariant;
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
+};
 type RefType = HTMLTextAreaElement | null;
 
 const TextAreaContainer = styled.textarea<{

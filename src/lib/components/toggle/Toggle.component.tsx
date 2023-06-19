@@ -1,11 +1,12 @@
-import { ChangeEvent, HTMLProps, useRef } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { getTheme } from '../../utils';
 import { spacing } from '../../style/theme';
 import { LABEL_PREFIX, useFieldContext } from '../form/Form.component';
 import { Stack } from '../../spacing';
 import { Text } from '../text/Text.component';
-type Props = Omit<HTMLProps<HTMLInputElement>, 'ref' | 'as'> & {
+
+type Props = InputHTMLAttributes<HTMLInputElement> & {
   toggle: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;

@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
@@ -7,7 +6,10 @@ import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
 import { spacing as newSpacing } from '../../spacing';
-export type Props = Omit<React.HTMLProps<HTMLButtonElement>, 'size'> & {
+export type Props = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'size' | 'label'
+> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   size?: 'default' | 'inline';
   disabled?: boolean;
@@ -176,7 +178,7 @@ export const ButtonLabel = styled.span`
   justify-content: center;
   align-items: center;
 `;
-export const ButtonIcon = styled.span<{ label: string }>`
+export const ButtonIcon = styled.span<{ label: React.ReactNode }>`
   ${(props) =>
     props.label &&
     css`
@@ -223,12 +225,23 @@ function Button({
         size={size}
         {...rest}
       >
-        {icon && (
-          <ButtonIcon label={label} aria-label={tooltip && tooltip.overlay}>
-            {icon}
-          </ButtonIcon>
-        )}
-        <ButtonLabel>{label}</ButtonLabel>
+        <>
+          {icon && (
+            <ButtonIcon
+              label={label}
+              aria-label={
+                tooltip &&
+                tooltip.overlay &&
+                typeof tooltip.overlay === 'string'
+                  ? tooltip.overlay
+                  : undefined
+              }
+            >
+              {icon}
+            </ButtonIcon>
+          )}
+          <ButtonLabel>{label}</ButtonLabel>
+        </>
       </ButtonStyled>
     </Tooltip>
   );
