@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLProps } from 'react';
+import React, { CSSProperties, forwardRef, HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { getTheme } from '../../utils';
@@ -10,8 +10,8 @@ type RefType = HTMLTextAreaElement | null;
 
 const TextAreaContainer = styled.textarea<{
   variant: TextAreaVariant;
-  width?: string | number;
-  height?: string | number;
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
 }>`
   padding: ${spacing.r12} ${spacing.r8};
   border-radius: 4px;
