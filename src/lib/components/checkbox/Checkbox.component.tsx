@@ -43,6 +43,7 @@ const StyledCheckbox = styled.label<{
   disabled?: boolean;
   checked?: boolean;
 }>`
+  ${(props) => (props.disabled ? 'opacity: 0.5;' : '')}
   /* Basic styling */
 
   [type='checkbox'] {
@@ -121,7 +122,7 @@ const StyledCheckbox = styled.label<{
   /* Disabled */
 
   [type='checkbox']:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    background-color: ${(props) => getTheme(props).textSecondary};
   }
 `;
