@@ -121,7 +121,12 @@ const StyledCheckbox = styled.label<{
 
   /* Disabled */
 
-  [type='checkbox']:disabled {
+  [type='checkbox']:checked:disabled {
+    cursor: not-allowed;
+    background-color: ${(props) => getTheme(props).selectedActive};
+  }
+
+  [type='checkbox']:not(:checked):disabled {
     cursor: not-allowed;
     background-color: ${(props) => getTheme(props).textSecondary};
   }
