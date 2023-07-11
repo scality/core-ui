@@ -9,8 +9,13 @@ import {
   TabsContainer,
   TabsScroller,
 } from './StyledTabs';
-import { useHistory, useLocation } from 'react-router-dom';
-import { matchPath, Route } from 'react-router';
+import {
+  useHistory,
+  useLocation,
+  useRouteMatch,
+  matchPath,
+  Route,
+} from 'react-router-dom';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
 import { Tab } from './Tab';
@@ -33,8 +38,8 @@ type TabsProps = {
 export const TabsContext = createContext<boolean>(false);
 
 const TabIcon = styled(ButtonIcon)`
-  color: ${props => getTheme(props).textSecondary};
-`
+  color: ${(props) => getTheme(props).textSecondary};
+`;
 
 function Tabs({
   activeTabColor,
@@ -50,6 +55,7 @@ function Tabs({
 }: TabsProps) {
   const location = useLocation();
   const history = useHistory();
+  const { url } = useRouteMatch();
   const [selectedTabIndex, setSelectedTabIndex] =
     useState<number | null | undefined>(null);
   const queryURL = new URLSearchParams(location.search);
@@ -65,12 +71,7 @@ function Tabs({
           return true;
         }
 
-        if (
-          !(
-            queryURL.has(key) &&
-            queryURL.get(key) === query[key]
-          )
-        )
+        if (!(queryURL.has(key) && queryURL.get(key) === query[key]))
           return false;
       }
 
@@ -91,15 +92,21 @@ function Tabs({
     }
   };
 
-  const getPushHistoryPath = (path: string, query?: Query): string =>
-    `${path}${serialize(query)}`;
+  const getPushHistoryPath = (path: string, query?: Query): string => {
+    if (path.startsWith('/')) {
+      return `${path}${serialize(query)}`;
+    }
+    return `${url}/${path}${serialize(query)}`;
+  };
 
   useEffect(() => {
     let hasSelectedTab = false;
     filteredTabsChildren.forEach((child, index) => {
       const isSelected =
         !!matchPath(location.pathname, {
-          path: child.props.path,
+          path: child.props.path.startsWith('/')
+            ? child.props.path
+            : url + '/' + child.props.path,
           exact: child.props.exact,
           strict: child.props.strict,
           sensitive: child.props.sensitive,
@@ -124,8 +131,15 @@ function Tabs({
     displayScroll,
   } = useScrollingTabs(selectedTabIndex);
   const tabItems = filteredTabsChildren.map((child, index) => {
-    const { path, query, label, textBadge, children, icon, ...childRest }: TabProps =
-      child.props;
+    const {
+      path,
+      query,
+      label,
+      textBadge,
+      children,
+      icon,
+      ...childRest
+    }: TabProps = child.props;
     const isSelected = selectedTabIndex === index;
     return (
       <TabItem
@@ -151,11 +165,7 @@ function Tabs({
         }}
         {...childRest}
       >
-        {icon && (
-          <TabIcon label={label}>
-            {icon}
-          </TabIcon>
-        )}
+        {icon && <TabIcon label={label}>{icon}</TabIcon>}
         {isSelected ? (
           <BasicText className="sc-tabs-item-title">{label}</BasicText>
         ) : (
@@ -211,7 +221,11 @@ function Tabs({
               sensitive={tab.props.sensitive}
               strict={tab.props.strict}
               key={index}
-              path={tab.props.path}
+              path={
+                tab.props.path.startsWith('/')
+                  ? tab.props.path
+                  : url + '/' + tab.props.path
+              }
             >
               {!tab.props.query ||
               (tab.props.query && matchQuery(tab.props.query)) ? (
