@@ -15,6 +15,7 @@ import { useCombobox, UseComboboxStateChange } from 'downshift';
 import { Box, Button, Table } from '../../next';
 
 import {
+  ConstrainedText,
   Icon,
   Loader,
   SearchInput,
@@ -596,10 +597,11 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         <Table
           columns={[
             {
-              Header: 'Name',
+              Header: <Box flex={1.5}>Name</Box>,
               accessor: 'name',
               cellStyle: {
-                flex: 0.8,
+                flex: 1.5,
+                marginRight: '1.5rem',
               },
               Cell: ({
                 value,
@@ -616,7 +618,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 });
 
                 if (value) {
-                  return <>{value}</>;
+                  return <ConstrainedText text={value} lineClamp={2} />;
                 }
                 if (status === 'error') {
                   return (
@@ -632,28 +634,28 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                   if (!asyncName) {
                     return <EmptyCell />;
                   }
-                  return <>{asyncName}</>;
+                  return <ConstrainedText text={asyncName} lineClamp={2} />;
                 }
 
                 return <EmptyCell />;
               },
             },
             {
-              Header: 'Attachment status',
+              Header: <Box flex={0.5}>Attachment status</Box>,
               accessor: 'isPending',
               cellStyle: {
-                flex: 0.8,
+                flex: 0.5,
               },
               Cell: ({ value }: { value?: boolean }) => {
                 return value ? <>Pending</> : <>Attached</>;
               },
             },
             {
-              Header: '',
+              Header: <Box flex={0.5} />,
               accessor: 'action',
               cellStyle: {
                 textAlign: 'right',
-                flex: '1',
+                flex: 0.5,
                 marginLeft: 'auto',
                 marginRight: '0.5rem',
               },
