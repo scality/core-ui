@@ -35,7 +35,7 @@ export const defaultTheme = {
     statusCritical: '#E84855',
     selectedActive: '#037AFF',
     highlight: '#1A3C75',
-    border: '#313131',
+    border: '#4A4A4A',
     buttonPrimary: '#2F4185',
     buttonSecondary: '#595A78',
     buttonDelete: '#3D0808',
