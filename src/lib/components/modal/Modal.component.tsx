@@ -93,7 +93,13 @@ const Modal = ({
                   {title}
                 </Text>
                 {close ? (
-                  <Button icon={<Icon name="Close" />} onClick={close} />
+                  <Button
+                    icon={<Icon name="Close" />}
+                    onClick={close}
+                    tooltip={{
+                      overlay: 'Close modal',
+                    }}
+                  />
                 ) : (
                   <>{subTitle}</>
                 )}
