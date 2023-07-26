@@ -28,6 +28,7 @@ export const iconTable = {
   User: 'fas faUserCog',
   Group: 'fas faUsers',
   Alert: 'fas faBell',
+  Bell: 'far faBell',
   'Lat-menu': 'fas faBars',
   Dashboard: 'fas faDesktop',
   Workflow: 'fas faRoute',
