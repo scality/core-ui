@@ -1,4 +1,4 @@
-import {
+import React, {
   Children,
   createContext,
   FormHTMLAttributes,
@@ -36,7 +36,12 @@ type FormProps = Omit<
 };
 
 type PageFormProps = {
-  layout: { kind: 'page'; title: string; subTitle?: string };
+  layout: {
+    kind: 'page';
+    title: string;
+    subTitle?: string;
+    icon?: IconName;
+  };
 } & FormProps;
 type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
@@ -289,7 +294,12 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <Stack direction="vertical">
-                  <Text variant="Larger">{layout.title}</Text>
+                  <Text variant="Larger">
+                    {layout.icon && (
+                      <Icon name={layout.icon} color="textSecondary" />
+                    )}{' '}
+                    {layout.title}
+                  </Text>
                   {layout.subTitle && (
                     <Text variant="Large" isEmphazed>
                       {layout.subTitle}

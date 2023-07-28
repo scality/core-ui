@@ -7,7 +7,7 @@ import React from 'react';
 import { brand } from '../src/lib/style/theme';
 import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
-import { Icon } from '../src/lib/components/icon/Icon.component';
+import { Icon, IconName } from '../src/lib/components/icon/Icon.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Banner } from '../src/lib/components/banner/Banner.component';
@@ -19,7 +19,16 @@ export default {
   component: Form,
 };
 
-export const PageForm = ({}) => {
+export const PageForm = ({
+  layout,
+}: {
+  layout?: {
+    kind: 'page';
+    title: string;
+    subTitle?: string;
+    icon?: IconName;
+  };
+}) => {
   return (
     <div
       style={{
@@ -29,7 +38,13 @@ export const PageForm = ({}) => {
       }}
     >
       <Form
-        layout={{ kind: 'page', title: 'My form', subTitle: 'The sub title' }}
+        layout={
+          layout || {
+            kind: 'page',
+            title: 'My form',
+            subTitle: 'The sub title',
+          }
+        }
         requireMode="partial"
         rightActions={
           <Stack gap={'r16'}>
@@ -339,5 +354,18 @@ export const TabForm = ({}) => {
         </FormSection>
       </Form>
     </div>
+  );
+};
+
+export const PageFormWithIcon = ({}) => {
+  return (
+    <PageForm
+      layout={{
+        kind: 'page',
+        title: 'My form with icon',
+        subTitle: 'The sub title',
+        icon: 'Search',
+      }}
+    />
   );
 };
