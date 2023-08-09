@@ -15,7 +15,7 @@ const BytesWrapper = styled.div`
   }
 `;
 
-const generatePrettyBytes = (decimals) =>
+const generatePrettyBytes = (decimals: number, unit?: 'iB' | 'B') =>
   [1024, 12783, 99, 1000].map((bytes, index) => (
     <div key={index}>
       <div>
@@ -25,7 +25,11 @@ const generatePrettyBytes = (decimals) =>
       </div>
       {Array.from(new Array(9)).map((_, index) => (
         <div key={index}>
-          <PrettyBytes decimals={decimals} bytes={Math.pow(bytes, index + 1)} />
+          <PrettyBytes
+            decimals={decimals}
+            bytes={Math.pow(bytes, index + 1)}
+            unit={unit || 'iB'}
+          />
         </div>
       ))}
     </div>
@@ -37,5 +41,9 @@ export const Default = ({}) => (
     <BytesWrapper>{generatePrettyBytes(0)}</BytesWrapper>
     <Title>Pretty Bytes with decimals</Title>
     <BytesWrapper>{generatePrettyBytes(2)}</BytesWrapper>
+    <Title>Pretty Bytes with Decimal Base</Title>
+    <BytesWrapper>
+      <BytesWrapper>{generatePrettyBytes(2, 'B')}</BytesWrapper>
+    </BytesWrapper>
   </Wrapper>
 );

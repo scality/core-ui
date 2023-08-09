@@ -2,9 +2,10 @@ import prettyBytes from 'pretty-bytes';
 type Props = {
   bytes?: number | null;
   decimals?: number | null;
+  unit?: 'iB' | 'B';
 };
 
-function PrettyBytes({ bytes, decimals = 0 }: Props) {
+function PrettyBytes({ bytes, decimals = 0, unit = 'iB' }: Props) {
   if (bytes === undefined || bytes === null) return <>-</>;
   let fractionDigits = decimals;
   if (
@@ -25,7 +26,7 @@ function PrettyBytes({ bytes, decimals = 0 }: Props) {
     <>
       {prettyBytes(bytes, {
         locale: 'en',
-        binary: true,
+        binary: unit === 'iB',
         minimumFractionDigits: fractionDigits ?? undefined,
         maximumFractionDigits: fractionDigits ?? undefined,
       })
