@@ -8,5 +8,5 @@ export function getDateDaysDiff(
   const diff = Temporal.Duration.from({
     milliseconds: endDate.getTime() - startDate.getTime(),
   }).total({ unit: unit, relativeTo: startDate.toISOString() });
-  return diff > 0 ? Math.floor(diff) : Math.ceil(diff);
+  return diff > 0 ? Math.floor(diff) : Math.round(diff);
 }
