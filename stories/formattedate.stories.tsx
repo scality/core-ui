@@ -31,6 +31,24 @@ export const FormattedDate = ({}) => {
               </td>
             </tr>
           ))}
+          <tr>
+            <td>relative past</td>
+            <td>
+              <FormattedDateTime
+                format={'relative'}
+                value={new Date(new Date().setMonth(now.getMonth() - 10))}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>relative future</td>
+            <td>
+              <FormattedDateTime
+                format={'relative'}
+                value={new Date(new Date().setMonth(now.getMonth() + 10))}
+              />
+            </td>
+          </tr>
         </tbody>
       </table>
     </>
