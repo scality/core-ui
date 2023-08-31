@@ -170,9 +170,9 @@ describe('FormatttedDateTime', () => {
       />,
     );
     //V
-    expect(screen.getByText('1 month ago')).toBeInTheDocument();
+    expect(screen.getByText('32 days ago')).toBeInTheDocument();
     //E
-    await userEvent.hover(screen.getByText('1 month ago'));
+    await userEvent.hover(screen.getByText('32 days ago'));
     //V
     expect(screen.getByText('2022-09-08 11:57:26')).toBeInTheDocument();
   });
@@ -189,9 +189,9 @@ describe('FormatttedDateTime', () => {
       />,
     );
     //V
-    expect(screen.getByText('2 months ago')).toBeInTheDocument();
+    expect(screen.getByText('63 days ago')).toBeInTheDocument();
     //E
-    await userEvent.hover(screen.getByText('2 months ago'));
+    await userEvent.hover(screen.getByText('63 days ago'));
     //V
     expect(screen.getByText('2022-08-08 11:57:26')).toBeInTheDocument();
   });
@@ -208,9 +208,9 @@ describe('FormatttedDateTime', () => {
       />,
     );
     //V
-    expect(screen.getByText('in 2 months')).toBeInTheDocument();
+    expect(screen.getByText('in 63 days')).toBeInTheDocument();
     //E
-    await userEvent.hover(screen.getByText('in 2 months'));
+    await userEvent.hover(screen.getByText('in 63 days'));
     //V
     expect(screen.getByText('2022-12-12 11:57:26')).toBeInTheDocument();
   });

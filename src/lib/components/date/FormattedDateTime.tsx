@@ -69,8 +69,9 @@ export const FormattedDateTime = ({
     case 'relative':
       const now = new Date();
       const monthDiff = getDateDaysDiff(value, now, 'months');
+      const dayDiff = getDateDaysDiff(value, now, 'days');
 
-      if (monthDiff !== 0) {
+      if (monthDiff !== 0 && Math.abs(dayDiff) > 90) {
         return (
           <Tooltip
             overlay={
@@ -87,7 +88,6 @@ export const FormattedDateTime = ({
         );
       }
 
-      const dayDiff = getDateDaysDiff(value, now, 'days');
       if (dayDiff !== 0) {
         return (
           <Tooltip
