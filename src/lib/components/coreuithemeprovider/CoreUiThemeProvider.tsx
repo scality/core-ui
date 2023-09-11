@@ -7,8 +7,11 @@ import { space, fontSize } from '../../style/theme';
  */
 type Theme = {
   statusHealthy: string;
+  statusHealthyRGB: string;
   statusWarning: string;
+  statusWarningRGB: string;
   statusCritical: string;
+  statusCriticalRGB: string;
   selectedActive: string;
   highlight: string;
   border: string;

@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   HTMLProps,
   PropsWithChildren,
   useEffect,
@@ -145,7 +146,7 @@ export type IconColor = keyof typeof brand;
 type Props = {
   name: IconName;
   size?: SizeProp;
-  color?: IconColor;
+  color?: IconColor | CSSProperties['color'];
   ariaLabel?: string;
   withWrapper?: boolean;
 };

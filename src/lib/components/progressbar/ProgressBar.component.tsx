@@ -4,7 +4,7 @@ import * as defaultTheme from '../../style/theme';
 import { Size } from '../constants';
 export type ProgressBarProps = {
   percentage: number;
-  size?: Size;
+  size?: Size | 'custom';
   color?: string;
   // The color of unfill bar
   backgroundColor?: string;
@@ -15,12 +15,14 @@ export type ProgressBarProps = {
   buildinLabel?: string;
   // The animation to full the progress bar
   isAnimation?: boolean;
+  height?: React.CSSProperties['height'];
 };
 const Container = styled.div``;
 const ProgressBarContainer = styled.div<{
   backgroundColor: string;
-  size: keyof typeof defaultTheme.fontSize;
+  size: keyof typeof defaultTheme.fontSize | 'custom';
   buildinLabel?: string;
+  height?: React.CSSProperties['height'];
 }>`
   display: flex;
   border-radius: 4px;
@@ -52,6 +54,11 @@ const ProgressBarContainer = styled.div<{
           height: 20px;
         `;
 
+      case 'custom':
+        return css`
+          height: ${props.height};
+          font-size: ${props.height};
+        `;
       default:
         return css`
           height: ${defaultTheme.fontSize.base};
@@ -148,6 +155,7 @@ function ProgressBar({
   bottomRightLabel,
   buildinLabel,
   isAnimation = false,
+  height,
   ...rest
 }: ProgressBarProps) {
   return (
@@ -171,6 +179,7 @@ function ProgressBar({
         size={size}
         buildinLabel={buildinLabel}
         backgroundColor={backgroundColor}
+        height={height}
       >
         <FilledAreaContainer
           color={color}

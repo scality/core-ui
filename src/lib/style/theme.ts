@@ -31,8 +31,11 @@ export const grayLightest = '#E9EBED';
 export const defaultTheme = {
   darkRebrand: {
     statusHealthy: '#0AADA6',
+    statusHealthyRGB: '10,173,166',
     statusWarning: '#F8F32B',
+    statusWarningRGB: '248,243,43',
     statusCritical: '#E84855',
+    statusCriticalRGB: '232,72,85',
     selectedActive: '#037AFF',
     highlight: '#1A3C75',
     border: '#4A4A4A',
