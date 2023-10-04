@@ -35,27 +35,29 @@ export default {
   title: 'Components/Chart/SparkLine',
   component: SparkLine,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Vege-Lite sparkline chart demo</Title>
-      <SparkLine
-        id={id}
-        data={data}
-        xAxis={xAxis}
-        yAxis={yAxis}
-        title={'OPERATIONS PER SECONDS'}
-        row={row}
-        lineConfig={lineConfig}
-      />
-      <Title>Vege-Lite sparkline multi chart demo</Title>
-      <SparkLine
-        id={id_multi}
-        data={multiLineData}
-        xAxis={xAxis}
-        yAxis={yAxis}
-        row={row}
-      />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Vege-Lite sparkline chart demo</Title>
+        <SparkLine
+          id={id}
+          data={data}
+          xAxis={xAxis}
+          yAxis={yAxis}
+          title={'OPERATIONS PER SECONDS'}
+          row={row}
+          lineConfig={lineConfig}
+        />
+        <Title>Vege-Lite sparkline multi chart demo</Title>
+        <SparkLine
+          id={id_multi}
+          data={multiLineData}
+          xAxis={xAxis}
+          yAxis={yAxis}
+          row={row}
+        />
+      </Wrapper>
+    );
+  },
 };

@@ -65,60 +65,62 @@ export default {
   title: 'Components/Selector/MultiSelect',
   component: MultiSelect,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>MultiSelect List</Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect
-          title="Destination Locations"
-          items={items}
-          search={search}
-          onItemRemove={action('onItemRemove clicked')}
-        />
-      </div>
-      <Title>MultiSelect List without search</Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect
-          title="Destination Locations"
-          items={items}
-          onItemRemove={action('onItemRemove clicked')}
-        />
-      </div>
-      <Title>MultiSelect List without Favourite</Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect
-          title="Destination Locations"
-          items={itemsWithoutFavourite}
-          search={search}
-          onItemRemove={action('onItemRemove clicked')}
-        />
-      </div>
-      <Title>MultiSelect List without Favourite and Selectbox</Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect
-          title="Destination Locations"
-          items={itemsWithoutCheckboxFavourite}
-          search={search}
-          onItemRemove={action('onItemRemove clicked')}
-        />
-      </div>
-      <Title>
-        MultiSelect List without Remove Button, Favourite and Selectbox
-      </Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect
-          title="Destination Locations"
-          items={itemsWithoutCheckboxFavourite}
-          search={search}
-        />
-      </div>
-      <Title>
-        MultiSelect List without Title, Remove Button, Favourite and Selectbox
-      </Title>
-      <div className="storybook-mutiselect-container">
-        <MultiSelect items={itemsWithoutCheckboxFavourite} search={search} />
-      </div>
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>MultiSelect List</Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect
+            title="Destination Locations"
+            items={items}
+            search={search}
+            onItemRemove={action('onItemRemove clicked')}
+          />
+        </div>
+        <Title>MultiSelect List without search</Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect
+            title="Destination Locations"
+            items={items}
+            onItemRemove={action('onItemRemove clicked')}
+          />
+        </div>
+        <Title>MultiSelect List without Favourite</Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect
+            title="Destination Locations"
+            items={itemsWithoutFavourite}
+            search={search}
+            onItemRemove={action('onItemRemove clicked')}
+          />
+        </div>
+        <Title>MultiSelect List without Favourite and Selectbox</Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect
+            title="Destination Locations"
+            items={itemsWithoutCheckboxFavourite}
+            search={search}
+            onItemRemove={action('onItemRemove clicked')}
+          />
+        </div>
+        <Title>
+          MultiSelect List without Remove Button, Favourite and Selectbox
+        </Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect
+            title="Destination Locations"
+            items={itemsWithoutCheckboxFavourite}
+            search={search}
+          />
+        </div>
+        <Title>
+          MultiSelect List without Title, Remove Button, Favourite and Selectbox
+        </Title>
+        <div className="storybook-mutiselect-container">
+          <MultiSelect items={itemsWithoutCheckboxFavourite} search={search} />
+        </div>
+      </Wrapper>
+    );
+  },
 };

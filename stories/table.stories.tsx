@@ -126,73 +126,60 @@ export default {
   title: 'Components/Table',
   component: Table,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper
-      style={{
-        height: '100vh',
-      }}
-    >
-      <Table
-        list={list}
-        columns={columns}
-        disableHeader={false}
-        headerHeight={40}
-        rowHeight={40}
-        sortBy={'first_name'}
-        sortDirection={'ASC'}
-        onSort={action('Sort Clicked')}
-        onRowClick={action('Row Clicked')}
-      />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper
+        style={{
+          height: '100vh',
+        }}
+      >
+        <Table
+          list={list}
+          columns={columns}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={'first_name'}
+          sortDirection={'ASC'}
+          onSort={action('Sort Clicked')}
+          onRowClick={action('Row Clicked')}
+        />
+      </Wrapper>
+    );
+  },
 };
-export const WithRowActions = ({}) => {
-  return (
-    <Wrapper
-      style={{
-        height: '100vh',
-      }}
-    >
-      <Table
-        list={listWithActions}
-        columns={columns}
-        disableHeader={false}
-        headerHeight={40}
-        rowHeight={40}
-        sortBy={'first_name'}
-        sortDirection={'ASC'}
-        onSort={action('Sort Clicked')}
-        onRowClick={action('Row Clicked')}
-      />
-    </Wrapper>
-  );
+export const WithRowActions = {
+  render: ({}) => {
+    return (
+      <Wrapper
+        style={{
+          height: '100vh',
+        }}
+      >
+        <Table
+          list={listWithActions}
+          columns={columns}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={'first_name'}
+          sortDirection={'ASC'}
+          onSort={action('Sort Clicked')}
+          onRowClick={action('Row Clicked')}
+        />
+      </Wrapper>
+    );
+  },
 };
-export const ChangeColumnSize = ({}) => {
-  return (
-    <Wrapper
-      style={{
-        height: '100vh',
-      }}
-    >
-      <Table
-        list={listWithActions}
-        columns={columnsChangeSize}
-        disableHeader={false}
-        headerHeight={40}
-        rowHeight={40}
-        sortBy={'first_name'}
-        sortDirection={'ASC'}
-        onSort={action('Sort Clicked')}
-        onRowClick={action('Row Clicked')}
-      />
-    </Wrapper>
-  );
-};
-export const CenterAColumnWithCss = ({}) => {
-  return (
-    <ContainerWithClassName>
-      <ContainerWithClassName>
+export const ChangeColumnSize = {
+  render: ({}) => {
+    return (
+      <Wrapper
+        style={{
+          height: '100vh',
+        }}
+      >
         <Table
           list={listWithActions}
           columns={columnsChangeSize}
@@ -204,29 +191,52 @@ export const CenterAColumnWithCss = ({}) => {
           onSort={action('Sort Clicked')}
           onRowClick={action('Row Clicked')}
         />
-      </ContainerWithClassName>
-    </ContainerWithClassName>
-  );
+      </Wrapper>
+    );
+  },
 };
-export const EmptyTableStory = ({}) => {
-  return (
-    <Wrapper
-      style={{
-        height: '100vh',
-      }}
-    >
-      <Table
-        list={[]}
-        columns={columns}
-        disableHeader={false}
-        headerHeight={40}
-        rowHeight={40}
-        sortBy={'last_name'}
-        sortDirection={'DESC'}
-        onSort={action('Sort Clicked')}
-        onRowClick={action('Row Clicked')}
-        noRowsRenderer={_noRowsRenderer}
-      />
-    </Wrapper>
-  );
+export const CenterAColumnWithCss = {
+  render: ({}) => {
+    return (
+      <ContainerWithClassName>
+        <ContainerWithClassName>
+          <Table
+            list={listWithActions}
+            columns={columnsChangeSize}
+            disableHeader={false}
+            headerHeight={40}
+            rowHeight={40}
+            sortBy={'first_name'}
+            sortDirection={'ASC'}
+            onSort={action('Sort Clicked')}
+            onRowClick={action('Row Clicked')}
+          />
+        </ContainerWithClassName>
+      </ContainerWithClassName>
+    );
+  },
+};
+export const EmptyTableStory = {
+  render: ({}) => {
+    return (
+      <Wrapper
+        style={{
+          height: '100vh',
+        }}
+      >
+        <Table
+          list={[]}
+          columns={columns}
+          disableHeader={false}
+          headerHeight={40}
+          rowHeight={40}
+          sortBy={'last_name'}
+          sortDirection={'DESC'}
+          onSort={action('Sort Clicked')}
+          onRowClick={action('Row Clicked')}
+          noRowsRenderer={_noRowsRenderer}
+        />
+      </Wrapper>
+    );
+  },
 };

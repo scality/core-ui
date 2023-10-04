@@ -5,24 +5,28 @@ export default {
   title: 'Components/EmptyState',
   component: EmptyState,
 };
-export const WithLink = ({}) => {
-  return (
-    <Wrapper>
-      <EmptyState
-        icon="Node-backend"
-        label="Node"
-        link=""
-        history={{
-          push: () => {},
-        }}
-      />
-    </Wrapper>
-  );
+export const WithLink = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <EmptyState
+          icon="Node-backend"
+          label="Node"
+          link=""
+          history={{
+            push: () => {},
+          }}
+        />
+      </Wrapper>
+    );
+  },
 };
-export const WithoutLink = ({}) => {
-  return (
-    <Wrapper>
-      <EmptyState icon="Node-backend" label="node" />
-    </Wrapper>
-  );
+export const WithoutLink = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <EmptyState icon="Node-backend" label="node" />
+      </Wrapper>
+    );
+  },
 };

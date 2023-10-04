@@ -5,49 +5,55 @@ export default {
   title: 'Components/Navigation/ErrorPages/Auth',
   component: ErrorPageAuth,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '100vh',
-        }}
-      >
-        <ErrorPageAuth onReturnHomeClick={() => {}} />
-      </div>
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <div
+          style={{
+            height: '100vh',
+          }}
+        >
+          <ErrorPageAuth onReturnHomeClick={() => {}} />
+        </div>
+      </Wrapper>
+    );
+  },
 };
-export const WithSupportLink = ({}) => {
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '100vh',
-        }}
-      >
-        <ErrorPageAuth
-          supportLink="https://www.scality.com/support/"
-          onReturnHomeClick={() => {}}
-        />
-      </div>
-    </Wrapper>
-  );
+export const WithSupportLink = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <div
+          style={{
+            height: '100vh',
+          }}
+        >
+          <ErrorPageAuth
+            supportLink="https://www.scality.com/support/"
+            onReturnHomeClick={() => {}}
+          />
+        </div>
+      </Wrapper>
+    );
+  },
 };
-export const WithLocale = ({}) => {
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '100vh',
-        }}
-      >
-        <ErrorPageAuth
-          btnLink="/"
-          supportLink="https://www.scality.com/support/"
-          locale="fr"
-        />
-      </div>
-    </Wrapper>
-  );
+export const WithLocale = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <div
+          style={{
+            height: '100vh',
+          }}
+        >
+          <ErrorPageAuth
+            btnLink="/"
+            supportLink="https://www.scality.com/support/"
+            locale="fr"
+          />
+        </div>
+      </Wrapper>
+    );
+  },
 };

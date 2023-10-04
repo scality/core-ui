@@ -8,14 +8,16 @@ export default {
   title: 'Components/v2/SelectInput',
 };
 
-export const Default = ({}) => (
-  <Wrapper className="storybook-select">
-    <Stack>
-      <Input id="input" placeholder="Select..."></Input>
-      <Select id="select" onChange={console.log}>
-        <Select.Option value="option1">label-option1</Select.Option>
-        <Select.Option value="option2">label-option2</Select.Option>
-      </Select>
-    </Stack>
-  </Wrapper>
-);
+export const Default = {
+  render: ({}) => (
+    <Wrapper className="storybook-select">
+      <Stack>
+        <Input id="input" placeholder="Select..."></Input>
+        <Select id="select" onChange={console.log}>
+          <Select.Option value="option1">label-option1</Select.Option>
+          <Select.Option value="option2">label-option2</Select.Option>
+        </Select>
+      </Stack>
+    </Wrapper>
+  ),
+};

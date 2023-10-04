@@ -255,59 +255,61 @@ export default {
   title: 'Components/Chart/LineChart',
   component: LineChart,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Vega-Lite line chart demo</Title>
-      <LineChart
-        id={id}
-        data={data}
-        xAxis={xAxis}
-        yAxis={yAxis}
-        width={1000}
-        tooltip={true}
-      />
-      <Title>Vega-Lite line chart without axis</Title>
-      <LineChart
-        id={id_without_axis}
-        data={data_graph_with_axis}
-        xAxis={xAxis_without_axis}
-        yAxis={yAxis_without_axis}
-        width={800}
-        color={color}
-        tooltip={false}
-        lineConfig={lineConfig}
-      />
-      <Title>Vega-Lite forecast chart</Title>
-      <LineChart
-        id={id_forecast_chart}
-        data={forecast_data}
-        xAxis={xAxis_forecast_chart}
-        yAxis={yAxis_forecast_chart}
-        tooltip={false}
-        width={300}
-        height={150}
-        lineConfig={lineConfig_forecast_chart}
-        displayTrendLine={true}
-      />
-      <Title>
-        Vega-Lite with strokeDash config, opacity config and custom Tooltip
-      </Title>
-      <LineChart
-        id={'id_strokedash'}
-        data={in_out_data}
-        xAxis={xAxis_inout_chart}
-        yAxis={yAxis_inout_chart}
-        color={color_inout_chart}
-        tooltip={true}
-        width={800}
-        height={250}
-        lineConfig={lineConfigInOut}
-        strokeDashEncodingConfig={strokeDashConfig_inout}
-        opacityEncodingConfig={opacityConfig_inout}
-        tooltipConfig={tooltipConfigInOut}
-        tooltipTheme={'dark'}
-      />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Vega-Lite line chart demo</Title>
+        <LineChart
+          id={id}
+          data={data}
+          xAxis={xAxis}
+          yAxis={yAxis}
+          width={1000}
+          tooltip={true}
+        />
+        <Title>Vega-Lite line chart without axis</Title>
+        <LineChart
+          id={id_without_axis}
+          data={data_graph_with_axis}
+          xAxis={xAxis_without_axis}
+          yAxis={yAxis_without_axis}
+          width={800}
+          color={color}
+          tooltip={false}
+          lineConfig={lineConfig}
+        />
+        <Title>Vega-Lite forecast chart</Title>
+        <LineChart
+          id={id_forecast_chart}
+          data={forecast_data}
+          xAxis={xAxis_forecast_chart}
+          yAxis={yAxis_forecast_chart}
+          tooltip={false}
+          width={300}
+          height={150}
+          lineConfig={lineConfig_forecast_chart}
+          displayTrendLine={true}
+        />
+        <Title>
+          Vega-Lite with strokeDash config, opacity config and custom Tooltip
+        </Title>
+        <LineChart
+          id={'id_strokedash'}
+          data={in_out_data}
+          xAxis={xAxis_inout_chart}
+          yAxis={yAxis_inout_chart}
+          color={color_inout_chart}
+          tooltip={true}
+          width={800}
+          height={250}
+          lineConfig={lineConfigInOut}
+          strokeDashEncodingConfig={strokeDashConfig_inout}
+          opacityEncodingConfig={opacityConfig_inout}
+          tooltipConfig={tooltipConfigInOut}
+          tooltipTheme={'dark'}
+        />
+      </Wrapper>
+    );
+  },
 };

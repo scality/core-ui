@@ -131,6 +131,8 @@ export default {
   title: 'Components/Input/Input',
   component: Input,
 };
-export const Default = ({}) => {
-  return <ExampleInput />;
+export const Default = {
+  render: ({}) => {
+    return <ExampleInput />;
+  },
 };

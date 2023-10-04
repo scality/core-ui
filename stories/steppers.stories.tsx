@@ -84,15 +84,17 @@ export default {
   title: 'Components/Progress & loading/Steppers',
   component: Steppers,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Default Steppers </Title>
-      <Steppers steps={steps} activeStep={1} />
-      <Title>Steppers with loading</Title>
-      <Steppers steps={stepsWithProgress} activeStep={1} />
-      <Title>Steppers with error</Title>
-      <Steppers steps={stepsWithError} activeStep={2} />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Default Steppers </Title>
+        <Steppers steps={steps} activeStep={1} />
+        <Title>Steppers with loading</Title>
+        <Steppers steps={stepsWithProgress} activeStep={1} />
+        <Title>Steppers with error</Title>
+        <Steppers steps={stepsWithError} activeStep={2} />
+      </Wrapper>
+    );
+  },
 };

@@ -10,85 +10,89 @@ export default {
   title: 'Components/Notification/Modal',
   component: Modal,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Modal
-        close={action('close clicked')}
-        isOpen={true}
-        title="Hello"
-        footer={
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Button
-              text="No"
-              size="base"
-              outlined
-              onClick={action('No clicked')}
-            />
-            <Button
-              variant="buttonSecondary"
-              text="Yes"
-              size="base"
-              onClick={action('Yes clicked')}
-            />
-          </div>
-        }
-      >
-        <span>Do you want a cookie?</span>
-      </Modal>
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Modal
+          close={action('close clicked')}
+          isOpen={true}
+          title="Hello"
+          footer={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Button
+                text="No"
+                size="base"
+                outlined
+                onClick={action('No clicked')}
+              />
+              <Button
+                variant="buttonSecondary"
+                text="Yes"
+                size="base"
+                onClick={action('Yes clicked')}
+              />
+            </div>
+          }
+        >
+          <span>Do you want a cookie?</span>
+        </Modal>
+      </Wrapper>
+    );
+  },
 };
 
-export const CustomizeTitle = ({}) => {
-  return (
-    <Wrapper>
-      <Modal
-        isOpen={true}
-        title="Hello"
-        footer={
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Button
-              text="No"
-              size="base"
-              outlined
-              onClick={action('No clicked')}
-            />
-            <Button
-              variant="buttonSecondary"
-              text="Yes"
-              size="base"
-              onClick={action('Yes clicked')}
-            />
-          </div>
-        }
-        subTitle={
-          <Stack>
-            <>Step 1/2</>
-            <IconHelp
-              tooltipMessage={
-                <ul>
-                  <li>Hello, this is the tooltip of the modal</li>
-                </ul>
-              }
-            />
-          </Stack>
-        }
-      >
-        <div>Do you want some chocolate? :D</div>
-      </Modal>
-    </Wrapper>
-  );
+export const CustomizeTitle = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Modal
+          isOpen={true}
+          title="Hello"
+          footer={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Button
+                text="No"
+                size="base"
+                outlined
+                onClick={action('No clicked')}
+              />
+              <Button
+                variant="buttonSecondary"
+                text="Yes"
+                size="base"
+                onClick={action('Yes clicked')}
+              />
+            </div>
+          }
+          subTitle={
+            <Stack>
+              <>Step 1/2</>
+              <IconHelp
+                tooltipMessage={
+                  <ul>
+                    <li>Hello, this is the tooltip of the modal</li>
+                  </ul>
+                }
+              />
+            </Stack>
+          }
+        >
+          <div>Do you want some chocolate? :D</div>
+        </Modal>
+      </Wrapper>
+    );
+  },
 };
 
 const Action = ({}) => {
@@ -131,65 +135,67 @@ const Action = ({}) => {
   );
 };
 
-export const WithinTable = ({}) => {
-  const columns = [
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-      cellStyle: {
-        textAlign: 'left',
+export const WithinTable = {
+  render: ({}) => {
+    const columns = [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        cellStyle: {
+          textAlign: 'left',
+        },
       },
-    },
-    {
-      Header: 'Actions',
-      accessor: 'health',
-      Cell: Action,
-      // disable the sorting on this column
-      disableSortBy: true,
-    },
-  ];
-  const data = [
-    {
-      firstName: 'Sotiria',
-      lastName: 'Agathangelou',
-      age: undefined,
-      health: 'healthy',
-    },
-    {
-      firstName: 'Stefania',
-      lastName: 'Evgenios',
-      age: 27,
-      health: 'warning',
-    },
-    {
-      firstName: 'Yohann',
-      lastName: 'Rodolph',
-      age: 27,
-      health: 'critical',
-    },
-    {
-      firstName: 'Ninette',
-      lastName: 'Caroline',
-      age: 31,
-      health: 'healthy',
-    },
-  ];
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>
-    </Wrapper>
-  );
+      {
+        Header: 'Actions',
+        accessor: 'health',
+        Cell: Action,
+        // disable the sorting on this column
+        disableSortBy: true,
+      },
+    ];
+    const data = [
+      {
+        firstName: 'Sotiria',
+        lastName: 'Agathangelou',
+        age: undefined,
+        health: 'healthy',
+      },
+      {
+        firstName: 'Stefania',
+        lastName: 'Evgenios',
+        age: 27,
+        health: 'warning',
+      },
+      {
+        firstName: 'Yohann',
+        lastName: 'Rodolph',
+        age: 27,
+        health: 'critical',
+      },
+      {
+        firstName: 'Ninette',
+        lastName: 'Caroline',
+        age: 31,
+        health: 'healthy',
+      },
+    ];
+    return (
+      <Wrapper>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+            <Table.SingleSelectableContent
+              rowHeight="h32"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+      </Wrapper>
+    );
+  },
 };

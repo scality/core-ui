@@ -10,14 +10,16 @@ export default info;
 
 const sizes = ['base', 'large', 'larger', 'huge', 'massive'];
 
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      {sizes.map((size) => (
-        <Loader key={size} size={size}>
-          Loader
-        </Loader>
-      ))}
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        {sizes.map((size) => (
+          <Loader key={size} size={size}>
+            Loader
+          </Loader>
+        ))}
+      </Wrapper>
+    );
+  },
 };

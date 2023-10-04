@@ -86,11 +86,13 @@ export default {
   title: 'Components/Chart/VegaChart',
   component: VegaChart,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
-      <VegaChart id={id} spec={spec} />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
+        <VegaChart id={id} spec={spec} />
+      </Wrapper>
+    );
+  },
 };

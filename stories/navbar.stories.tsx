@@ -119,35 +119,37 @@ export default {
   title: 'Components/Navigation/Navbar',
   component: Navbar,
 };
-export const Default = ({}) => {
-  return (
-    <div>
-      <h3>Navbar with toggle</h3>
-      <Navbar
-        onToggleClick={action('toggle clicked')}
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        tabs={tabs}
-      />
-      <h3>Navbar without toggle</h3>
-      <Navbar
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        tabs={tabs}
-      />
-      <h3>Navbar with customized logo</h3>
-      <Navbar
-        onToggleClick={action('toggle clicked')}
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        logo={<i className="fas fa-ring" />}
-        tabs={tabs}
-      />
-      <h3>Navbar with only tabs</h3>
-      <Navbar rightActions={[rightActions[4]]} tabs={tabs} />
+export const Default = {
+  render: ({}) => {
+    return (
+      <div>
+        <h3>Navbar with toggle</h3>
+        <Navbar
+          onToggleClick={action('toggle clicked')}
+          productName={'Hardware UI'}
+          rightActions={rightActions}
+          tabs={tabs}
+        />
+        <h3>Navbar without toggle</h3>
+        <Navbar
+          productName={'Hardware UI'}
+          rightActions={rightActions}
+          tabs={tabs}
+        />
+        <h3>Navbar with customized logo</h3>
+        <Navbar
+          onToggleClick={action('toggle clicked')}
+          productName={'Hardware UI'}
+          rightActions={rightActions}
+          logo={<i className="fas fa-ring" />}
+          tabs={tabs}
+        />
+        <h3>Navbar with only tabs</h3>
+        <Navbar rightActions={[rightActions[4]]} tabs={tabs} />
 
-      <h3>Navbar with only link tabs</h3>
-      <Navbar rightActions={[rightActions[4]]} tabs={linkTabs} />
-    </div>
-  );
+        <h3>Navbar with only link tabs</h3>
+        <Navbar rightActions={[rightActions[4]]} tabs={linkTabs} />
+      </div>
+    );
+  },
 };

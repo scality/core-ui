@@ -6,101 +6,103 @@ export default {
   title: 'Components/Notification/Tooltip',
   component: Tooltip,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <div>
-        <Title>Default Tooltip</Title>
-        <Tooltip overlay="Hellooooo">
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-
-      <div>
-        <Title>Tooltip right</Title>
-        <Tooltip placement="right" overlay="Helloooooo">
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-      <div
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper
         style={{
-          marginLeft: '100px',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <Title>Tooltip left</Title>
-        <Tooltip placement="left" overlay="Helloooooo">
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-      <div>
-        <Title>Tooltip bottom</Title>
-        <Tooltip placement="bottom" overlay="Helloooooo">
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-      <div>
-        <Title>Customize your tooltip style</Title>
-        <Tooltip
-          placement="right"
-          overlayStyle={{
-            backgroundColor: 'green',
-            fontSize: '20px',
-            width: '120px',
+        <div>
+          <Title>Default Tooltip</Title>
+          <Tooltip overlay="Hellooooo">
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+
+        <div>
+          <Title>Tooltip right</Title>
+          <Tooltip placement="right" overlay="Helloooooo">
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+        <div
+          style={{
+            marginLeft: '100px',
           }}
-          overlay="Helloooooo"
         >
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-      <div>
-        <Title>Tooltip with button</Title>
-        <Button
-          icon={<i className="fas fa-trash" />}
-          label=""
-          tooltip={{
-            placement: 'top',
-            overlay: `Hello, this is the button tooltip!`,
-            overlayStyle: { width: '8rem' },
-          }}
-        />
-      </div>
-      <div>
-        <Title>Tooltip with disabled button</Title>
-        <Button
-          disabled={true}
-          icon={<i className="fas fa-trash" />}
-          label=""
-          tooltip={{
-            placement: 'top',
-            overlay: `You can't delete it :(`,
-            overlayStyle: { width: '8rem' },
-          }}
-        />
-      </div>
-      <div>
-        <Title>add icon in the overlay of tooltip</Title>
-        <Tooltip
-          placement="bottom"
-          overlay={
-            <div>
-              <i className="far fa-smile"></i>Helloooooooo
-            </div>
-          }
-        >
-          <SubTitle>tooltip with icon</SubTitle>
-        </Tooltip>
-      </div>
-      <div>
-        <Title>Tooltip doesn't trigger</Title>
-        <Tooltip placement="bottom">
-          <SubTitle>Hover here!</SubTitle>
-        </Tooltip>
-      </div>
-    </Wrapper>
-  );
+          <Title>Tooltip left</Title>
+          <Tooltip placement="left" overlay="Helloooooo">
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+        <div>
+          <Title>Tooltip bottom</Title>
+          <Tooltip placement="bottom" overlay="Helloooooo">
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+        <div>
+          <Title>Customize your tooltip style</Title>
+          <Tooltip
+            placement="right"
+            overlayStyle={{
+              backgroundColor: 'green',
+              fontSize: '20px',
+              width: '120px',
+            }}
+            overlay="Helloooooo"
+          >
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+        <div>
+          <Title>Tooltip with button</Title>
+          <Button
+            icon={<i className="fas fa-trash" />}
+            label=""
+            tooltip={{
+              placement: 'top',
+              overlay: `Hello, this is the button tooltip!`,
+              overlayStyle: { width: '8rem' },
+            }}
+          />
+        </div>
+        <div>
+          <Title>Tooltip with disabled button</Title>
+          <Button
+            disabled={true}
+            icon={<i className="fas fa-trash" />}
+            label=""
+            tooltip={{
+              placement: 'top',
+              overlay: `You can't delete it :(`,
+              overlayStyle: { width: '8rem' },
+            }}
+          />
+        </div>
+        <div>
+          <Title>add icon in the overlay of tooltip</Title>
+          <Tooltip
+            placement="bottom"
+            overlay={
+              <div>
+                <i className="far fa-smile"></i>Helloooooooo
+              </div>
+            }
+          >
+            <SubTitle>tooltip with icon</SubTitle>
+          </Tooltip>
+        </div>
+        <div>
+          <Title>Tooltip doesn't trigger</Title>
+          <Tooltip placement="bottom">
+            <SubTitle>Hover here!</SubTitle>
+          </Tooltip>
+        </div>
+      </Wrapper>
+    );
+  },
 };

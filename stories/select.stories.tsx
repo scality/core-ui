@@ -18,56 +18,58 @@ export default {
   title: 'Components/Selector/Select',
   component: Select,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Default</Title>
-      <div
-        style={{
-          width: '200px',
-        }}
-      >
-        <Select
-          name="default_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          value=""
-        />
-      </div>
-      <Title>Default with custom formatOptionLabel</Title>
-      <div
-        style={{
-          width: '200px',
-        }}
-      >
-        <Select
-          name="default_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          value={options[0]}
-          formatOptionLabel={customFormatOptionLabel}
-        />
-      </div>
-      <Title>Multi Select</Title>
-      <div
-        style={{
-          width: '400px',
-        }}
-      >
-        <Select
-          name="multi_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          isMulti={true}
-          value={[options[0], options[1]]}
-        />
-      </div>
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Default</Title>
+        <div
+          style={{
+            width: '200px',
+          }}
+        >
+          <Select
+            name="default_select"
+            options={options}
+            onChange={(e) => console.log(e)}
+            placeholder="Select an item..."
+            noOptionsMessage={() => 'Not found'}
+            value=""
+          />
+        </div>
+        <Title>Default with custom formatOptionLabel</Title>
+        <div
+          style={{
+            width: '200px',
+          }}
+        >
+          <Select
+            name="default_select"
+            options={options}
+            onChange={(e) => console.log(e)}
+            placeholder="Select an item..."
+            noOptionsMessage={() => 'Not found'}
+            value={options[0]}
+            formatOptionLabel={customFormatOptionLabel}
+          />
+        </div>
+        <Title>Multi Select</Title>
+        <div
+          style={{
+            width: '400px',
+          }}
+        >
+          <Select
+            name="multi_select"
+            options={options}
+            onChange={(e) => console.log(e)}
+            placeholder="Select an item..."
+            noOptionsMessage={() => 'Not found'}
+            isMulti={true}
+            value={[options[0], options[1]]}
+          />
+        </div>
+      </Wrapper>
+    );
+  },
 };

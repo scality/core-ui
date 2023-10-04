@@ -102,8 +102,65 @@ const HeaderComponent = styled.div`
   color: black;
 }`;
 
-export const Layout2Simplest = ({}) => {
-  return (
+export const Layout2Simplest = {
+  render: ({}) => {
+    return (
+      <Layout2
+        headerNavigation={
+          <HeaderComponent>
+            <h3>Header navigation</h3>
+          </HeaderComponent>
+        }
+      >
+        <AppContainer>
+          <AppContainer.ContextContainer background="backgroundLevel1">
+            <>Context bar</>
+          </AppContainer.ContextContainer>
+          <AppContainer.OverallSummary noPadding>
+            <Stack withSeparators={true} gap="r32">
+              <Stack gap="r20">
+                <Icon name="Account" size="2x" withWrapper />
+                <Stack direction="vertical" gap="r4">
+                  <Text variant="Larger">6 Accounts</Text>
+                  <Text variant="Smaller" color="textSecondary">
+                    for this instance
+                  </Text>
+                </Stack>
+              </Stack>
+              <Stack gap="r32">
+                <Stack>
+                  <Icon name={'Check-circle'} color={'statusHealthy'} />
+                  <Text color="textSecondary">Replication</Text>
+                </Stack>
+                <Stack>
+                  <Icon name={'Check-circle'} color={'statusHealthy'} />
+                  <Text color="textSecondary">Expiration</Text>
+                </Stack>
+                <Stack>
+                  <Icon name={'Check-circle'} color={'statusHealthy'} />
+                  <Text color="textSecondary">Transition</Text>
+                </Stack>
+              </Stack>
+              <Stack direction="vertical" gap="r4">
+                <Stack gap="r4">
+                  <Text isEmphazed>Active Alerts</Text>
+                  <TextBadge text="0" variant="infoPrimary" />
+                </Stack>
+                <Text variant="Smaller" color="textSecondary">
+                  No active alerts
+                </Text>
+              </Stack>
+            </Stack>
+          </AppContainer.OverallSummary>
+          <AppContainer.MainContent>Main content</AppContainer.MainContent>
+        </AppContainer>
+      </Layout2>
+    );
+  },
+};
+
+export const Layout2SimplestWithMainContentPadding = {
+  render: ({}) => (
     <Layout2
       headerNavigation={
         <HeaderComponent>
@@ -115,85 +172,34 @@ export const Layout2Simplest = ({}) => {
         <AppContainer.ContextContainer background="backgroundLevel1">
           <>Context bar</>
         </AppContainer.ContextContainer>
-        <AppContainer.OverallSummary noPadding>
-          <Stack withSeparators={true} gap="r32">
-            <Stack gap="r20">
-              <Icon name="Account" size="2x" withWrapper />
-              <Stack direction="vertical" gap="r4">
-                <Text variant="Larger">6 Accounts</Text>
-                <Text variant="Smaller" color="textSecondary">
-                  for this instance
-                </Text>
-              </Stack>
-            </Stack>
-            <Stack gap="r32">
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Replication</Text>
-              </Stack>
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Expiration</Text>
-              </Stack>
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Transition</Text>
-              </Stack>
-            </Stack>
-            <Stack direction="vertical" gap="r4">
-              <Stack gap="r4">
-                <Text isEmphazed>Active Alerts</Text>
-                <TextBadge text="0" variant="infoPrimary" />
-              </Stack>
-              <Text variant="Smaller" color="textSecondary">
-                No active alerts
-              </Text>
-            </Stack>
-          </Stack>
+        <AppContainer.OverallSummary>
+          Overall summary (optional)
         </AppContainer.OverallSummary>
-        <AppContainer.MainContent>Main content</AppContainer.MainContent>
+        <AppContainer.MainContent background="statusCritical" hasPadding>
+          Main content
+        </AppContainer.MainContent>
       </AppContainer>
     </Layout2>
-  );
+  ),
 };
 
-export const Layout2SimplestWithMainContentPadding = ({}) => (
-  <Layout2
-    headerNavigation={
-      <HeaderComponent>
-        <h3>Header navigation</h3>
-      </HeaderComponent>
-    }
-  >
-    <AppContainer>
-      <AppContainer.ContextContainer background="backgroundLevel1">
-        <>Context bar</>
-      </AppContainer.ContextContainer>
-      <AppContainer.OverallSummary>
-        Overall summary (optional)
-      </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="statusCritical" hasPadding>
-        Main content
-      </AppContainer.MainContent>
-    </AppContainer>
-  </Layout2>
-);
-
-export const Layout2MainContentOnly = ({}) => (
-  <Layout2
-    headerNavigation={
-      <HeaderComponent>
-        <h3>Header navigation</h3>
-      </HeaderComponent>
-    }
-  >
-    <AppContainer>
-      <AppContainer.MainContent background="statusCritical" hasTopMargin>
-        Main content
-      </AppContainer.MainContent>
-    </AppContainer>
-  </Layout2>
-);
+export const Layout2MainContentOnly = {
+  render: ({}) => (
+    <Layout2
+      headerNavigation={
+        <HeaderComponent>
+          <h3>Header navigation</h3>
+        </HeaderComponent>
+      }
+    >
+      <AppContainer>
+        <AppContainer.MainContent background="statusCritical" hasTopMargin>
+          Main content
+        </AppContainer.MainContent>
+      </AppContainer>
+    </Layout2>
+  ),
+};
 
 export const Layout2OverallSummaryAndMainContent = () => (
   <Layout2
@@ -256,31 +262,33 @@ export const Layout2OverallSummaryAndMainContent = () => (
   </Layout2>
 );
 
-export const Layout2SimplestSidebar = ({}) => (
-  <Layout2
-    headerNavigation={
-      <HeaderComponent>
-        <h3>Header navigation</h3>
-      </HeaderComponent>
-    }
-  >
-    <AppContainer
-      sidebarNavigation={
-        <div style={{ background: '#fff3e8' }}>Sidebar navigation</div>
+export const Layout2SimplestSidebar = {
+  render: ({}) => (
+    <Layout2
+      headerNavigation={
+        <HeaderComponent>
+          <h3>Header navigation</h3>
+        </HeaderComponent>
       }
     >
-      <AppContainer.ContextContainer background="backgroundLevel1">
-        <>Context bar</>
-      </AppContainer.ContextContainer>
-      <AppContainer.OverallSummary>
-        Overall summary (optional)
-      </AppContainer.OverallSummary>
-      <AppContainer.MainContent background="statusCritical">
-        Main content
-      </AppContainer.MainContent>
-    </AppContainer>
-  </Layout2>
-);
+      <AppContainer
+        sidebarNavigation={
+          <div style={{ background: '#fff3e8' }}>Sidebar navigation</div>
+        }
+      >
+        <AppContainer.ContextContainer background="backgroundLevel1">
+          <>Context bar</>
+        </AppContainer.ContextContainer>
+        <AppContainer.OverallSummary>
+          Overall summary (optional)
+        </AppContainer.OverallSummary>
+        <AppContainer.MainContent background="statusCritical">
+          Main content
+        </AppContainer.MainContent>
+      </AppContainer>
+    </Layout2>
+  ),
+};
 
 export const Layout2TwoEqualPanelsWithPadding = () => (
   <Layout2
@@ -390,71 +398,79 @@ export const Layout2TwoPanelsSeventyThirty = () => (
   </Layout2>
 );
 
-export const SidebarDocked = ({}) => {
-  const expanded = boolean('Sidebar Expanded', false);
-  const sidebar = {
-    expanded,
-    actions: sideBarActions,
-  };
-  const navbar = {
-    onToggleClick: action('toggle clicked'),
-    productName: 'Harware UI',
-    rightActions,
-  };
-  return (
-    <Layout sidebar={sidebar} navbar={navbar}>
-      <Loader size="massive" />
-    </Layout>
-  );
+export const SidebarDocked = {
+  render: ({}) => {
+    const expanded = boolean('Sidebar Expanded', false);
+    const sidebar = {
+      expanded,
+      actions: sideBarActions,
+    };
+    const navbar = {
+      onToggleClick: action('toggle clicked'),
+      productName: 'Harware UI',
+      rightActions,
+    };
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  },
 };
-export const SidebarExpanded = ({}) => {
-  const sidebar = {
-    expanded: true,
-    actions: sideBarActions,
-  };
-  const navbar = {
-    onToggleClick: action('toggle clicked'),
-    productName: 'Harware UI',
-    rightActions,
-  };
-  return (
-    <Layout sidebar={sidebar} navbar={navbar}>
-      <Loader size="massive" />
-    </Layout>
-  );
+export const SidebarExpanded = {
+  render: ({}) => {
+    const sidebar = {
+      expanded: true,
+      actions: sideBarActions,
+    };
+    const navbar = {
+      onToggleClick: action('toggle clicked'),
+      productName: 'Harware UI',
+      rightActions,
+    };
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  },
 };
-export const SidebarWithToggle = ({}) => {
-  const [expanded, setExpanded] = useState(false);
-  const sidebar = {
-    expanded: expanded,
-    actions: sideBarActions,
-    onToggleClick: () => setExpanded(!expanded),
-  };
-  const navbar = {
-    productName: 'Harware UI',
-    rightActions,
-  };
-  return (
-    <Layout sidebar={sidebar} navbar={navbar}>
-      <Loader size="massive" />
-    </Layout>
-  );
+export const SidebarWithToggle = {
+  render: ({}) => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
+    };
+    const navbar = {
+      productName: 'Harware UI',
+      rightActions,
+    };
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  },
 };
-export const HoverableSidebar = ({}) => {
-  const [expanded, setExpanded] = useState(false);
-  const sidebar = {
-    expanded: expanded,
-    hoverable: true,
-    actions: sideBarActions,
-    onToggleClick: () => setExpanded(!expanded),
-  };
-  const navbar = {
-    productName: 'Harware UI',
-    rightActions,
-  };
-  return (
-    <Layout sidebar={sidebar} navbar={navbar}>
-      <Loader size="massive" />
-    </Layout>
-  );
+export const HoverableSidebar = {
+  render: ({}) => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      hoverable: true,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
+    };
+    const navbar = {
+      productName: 'Harware UI',
+      rightActions,
+    };
+    return (
+      <Layout sidebar={sidebar} navbar={navbar}>
+        <Loader size="massive" />
+      </Layout>
+    );
+  },
 };

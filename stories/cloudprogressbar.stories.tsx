@@ -5,110 +5,112 @@ export default {
   title: 'Components/Progress & loading/CloudProgressBar',
   component: CloudProgressBar,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>CloudProgressBar</Title>
-      <div
-        style={{
-          width: '300px',
-          margin: '20px 0 20px 0',
-        }}
-      >
-        <CloudProgressBar
-          percentage={30}
-          borderSize="1.5px"
-          cloudColor="yellow"
-          progressCloudColor="blue"
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>CloudProgressBar</Title>
+        <div
+          style={{
+            width: '300px',
+            margin: '20px 0 20px 0',
+          }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-            }}
+          <CloudProgressBar
+            percentage={30}
+            borderSize="1.5px"
+            cloudColor="yellow"
+            progressCloudColor="blue"
           >
-            <Title>30%</Title>
-            <SubTitle>of the quotas has been reached.</SubTitle>
-          </div>
-        </CloudProgressBar>
-      </div>
-      <div
-        style={{
-          width: '400px',
-          margin: '20px 0 20px 0',
-        }}
-      >
-        <CloudProgressBar
-          percentage={50}
-          borderSize="1.5px"
-          cloudColor="#ccc"
-          progressCloudColor="#000"
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%,-50%)',
+              }}
+            >
+              <Title>30%</Title>
+              <SubTitle>of the quotas has been reached.</SubTitle>
+            </div>
+          </CloudProgressBar>
+        </div>
+        <div
+          style={{
+            width: '400px',
+            margin: '20px 0 20px 0',
+          }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-            }}
+          <CloudProgressBar
+            percentage={50}
+            borderSize="1.5px"
+            cloudColor="#ccc"
+            progressCloudColor="#000"
           >
-            <Title>50%</Title>
-            <SubTitle>of the quotas has been reached</SubTitle>
-          </div>
-        </CloudProgressBar>
-      </div>
-      <div
-        style={{
-          width: '500px',
-          margin: '20px 0 20px 0',
-        }}
-      >
-        <CloudProgressBar
-          percentage={80}
-          borderSize="2px"
-          cloudColor="#3d383a"
-          progressCloudColor="#83d136"
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%,-50%)',
+              }}
+            >
+              <Title>50%</Title>
+              <SubTitle>of the quotas has been reached</SubTitle>
+            </div>
+          </CloudProgressBar>
+        </div>
+        <div
+          style={{
+            width: '500px',
+            margin: '20px 0 20px 0',
+          }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-            }}
+          <CloudProgressBar
+            percentage={80}
+            borderSize="2px"
+            cloudColor="#3d383a"
+            progressCloudColor="#83d136"
           >
-            <Title>80%</Title>
-            <SubTitle>of the quotas has been reached</SubTitle>
-          </div>
-        </CloudProgressBar>
-      </div>
-      <div
-        style={{
-          width: '600px',
-          margin: '20px 0 20px 0',
-        }}
-      >
-        <CloudProgressBar
-          percentage={70}
-          borderSize="2px"
-          cloudColor="#BDFFB0"
-          progressCloudColor="#A3FFCB"
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%,-50%)',
+              }}
+            >
+              <Title>80%</Title>
+              <SubTitle>of the quotas has been reached</SubTitle>
+            </div>
+          </CloudProgressBar>
+        </div>
+        <div
+          style={{
+            width: '600px',
+            margin: '20px 0 20px 0',
+          }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-            }}
+          <CloudProgressBar
+            percentage={70}
+            borderSize="2px"
+            cloudColor="#BDFFB0"
+            progressCloudColor="#A3FFCB"
           >
-            <Title>70%</Title>
-            <SubTitle>of the quotas has been reached</SubTitle>
-          </div>
-        </CloudProgressBar>
-      </div>
-    </Wrapper>
-  );
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%,-50%)',
+              }}
+            >
+              <Title>70%</Title>
+              <SubTitle>of the quotas has been reached</SubTitle>
+            </div>
+          </CloudProgressBar>
+        </div>
+      </Wrapper>
+    );
+  },
 };

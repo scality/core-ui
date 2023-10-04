@@ -66,28 +66,30 @@ export default {
   title: 'Components/Notification/Notifications',
   component: Notifications,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Notifications
-        notifications={trNotifications}
-        onDismiss={action('onDismiss')}
-      />
-      <Notifications
-        position="tl"
-        notifications={tlNotifications}
-        onDismiss={action('onDismiss')}
-      />
-      <Notifications
-        position="bl"
-        notifications={blNotifications}
-        onDismiss={action('onDismiss')}
-      />
-      <Notifications
-        position="br"
-        notifications={brNotifications}
-        onDismiss={action('onDismiss')}
-      />
-    </Wrapper>
-  );
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Notifications
+          notifications={trNotifications}
+          onDismiss={action('onDismiss')}
+        />
+        <Notifications
+          position="tl"
+          notifications={tlNotifications}
+          onDismiss={action('onDismiss')}
+        />
+        <Notifications
+          position="bl"
+          notifications={blNotifications}
+          onDismiss={action('onDismiss')}
+        />
+        <Notifications
+          position="br"
+          notifications={brNotifications}
+          onDismiss={action('onDismiss')}
+        />
+      </Wrapper>
+    );
+  },
 };

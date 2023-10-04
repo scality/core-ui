@@ -7,24 +7,26 @@ export default {
   title: 'Components/Navigation/CollapsiblePanel',
   component: CollapsiblePanel,
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper className="storybook-collapsiblepanel">
-      <Title>Collapsed</Title>
-      <CollapsiblePanel
-        expanded={false}
-        headerItems={items}
-        onHeaderClick={action('Expand panel')}
-        children="orange"
-      />
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper className="storybook-collapsiblepanel">
+        <Title>Collapsed</Title>
+        <CollapsiblePanel
+          expanded={false}
+          headerItems={items}
+          onHeaderClick={action('Expand panel')}
+          children="orange"
+        />
 
-      <Title>Expanded</Title>
-      <CollapsiblePanel
-        headerItems={items}
-        expanded={true}
-        onHeaderClick={action('Colapse panel')}
-        children="orange"
-      />
-    </Wrapper>
-  );
+        <Title>Expanded</Title>
+        <CollapsiblePanel
+          headerItems={items}
+          expanded={true}
+          onHeaderClick={action('Colapse panel')}
+          children="orange"
+        />
+      </Wrapper>
+    );
+  },
 };
