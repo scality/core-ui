@@ -14,8 +14,9 @@ export default {
 const HealthSelectorWrapper = styled.div`
   width: 205px;
 `;
+  
 export const Default = {
-  render: ({}) => {
+  render: () => {
     return (
       <Wrapper>
         <Title>Basic usage</Title>
@@ -23,8 +24,7 @@ export const Default = {
           <Healthselector
             onChange={(value) => {
               action(value);
-            }}
-          />
+            } } id={'basic'}          />
         </HealthSelectorWrapper>
 
         <Title>changing labels</Title>
@@ -63,14 +63,14 @@ export const Default = {
           <Healthselector
             onChange={(value) => {
               action(value);
-            }}
+            } }
+            id={'hiddenoptions'} 
             options={[
               optionsDefaultConfiguration.all,
               optionsDefaultConfiguration.warning,
               optionsDefaultConfiguration.critical,
               optionsDefaultConfiguration.unknown,
-            ]}
-          />
+            ]}          />
         </HealthSelectorWrapper>
       </Wrapper>
     );

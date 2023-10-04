@@ -134,4 +134,5 @@ const Template = (args: Props) => (
 
 export const Playground = {
   render: Template,
+  argTypes:{m: {options:[2,4,8,16],control: {type:'radio'}}},
 };

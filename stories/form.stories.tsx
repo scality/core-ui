@@ -20,7 +20,6 @@ export default {
 };
 
 
-
 export const PageForm = {
   render: ({layout}) => {
     return (

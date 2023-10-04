@@ -6,7 +6,7 @@ import { AppContainer } from '../src/lib/components/layout/v2/AppContainer';
 import { Loader } from '../src/lib/components/loader/Loader.component';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import { addDecorator } from '@storybook/react';
+//import { addDecorator } from '@storybook/react';
 import styled from 'styled-components';
 import { Stack } from '../src/lib/spacing';
 import { Icon } from '../src/lib/components/icon/Icon.component';
@@ -15,7 +15,10 @@ import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
 
-addDecorator(createElement);
+// addDecorator(createElement); 
+// addDecorator is deprecated, and removed from storybook/react
+// use export const decorators = []
+
 const sideBarActions = [
   {
     label: 'Dashboard',
@@ -96,6 +99,9 @@ export default {
   decorators: [withKnobs],
 };
 
+
+
+
 const HeaderComponent = styled.div`
   background: #ff9c54;
   flex: 1;
@@ -103,7 +109,7 @@ const HeaderComponent = styled.div`
 }`;
 
 export const Layout2Simplest = {
-  render: ({}) => {
+  render: () => {
     return (
       <Layout2
         headerNavigation={
@@ -201,7 +207,8 @@ export const Layout2MainContentOnly = {
   ),
 };
 
-export const Layout2OverallSummaryAndMainContent = () => (
+export const Layout2OverallSummaryAndMainContent = {
+  render: () => (
   <Layout2
     headerNavigation={
       <HeaderComponent>
@@ -260,7 +267,7 @@ export const Layout2OverallSummaryAndMainContent = () => (
       </AppContainer>
     </ScrollbarWrapper>
   </Layout2>
-);
+)};
 
 export const Layout2SimplestSidebar = {
   render: ({}) => (
