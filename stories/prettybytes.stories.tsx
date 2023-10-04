@@ -35,15 +35,17 @@ const generatePrettyBytes = (decimals: number, unit?: 'iB' | 'B') =>
     </div>
   ));
 
-export const Default = ({}) => (
-  <Wrapper>
-    <Title>Pretty Bytes</Title>
-    <BytesWrapper>{generatePrettyBytes(0)}</BytesWrapper>
-    <Title>Pretty Bytes with decimals</Title>
-    <BytesWrapper>{generatePrettyBytes(2)}</BytesWrapper>
-    <Title>Pretty Bytes with Decimal Base</Title>
-    <BytesWrapper>
-      <BytesWrapper>{generatePrettyBytes(2, 'B')}</BytesWrapper>
-    </BytesWrapper>
-  </Wrapper>
-);
+export const Default = {
+  render: ({}) => (
+    <Wrapper>
+      <Title>Pretty Bytes</Title>
+      <BytesWrapper>{generatePrettyBytes(0)}</BytesWrapper>
+      <Title>Pretty Bytes with decimals</Title>
+      <BytesWrapper>{generatePrettyBytes(2)}</BytesWrapper>
+      <Title>Pretty Bytes with Decimal Base</Title>
+      <BytesWrapper>
+        <BytesWrapper>{generatePrettyBytes(2, 'B')}</BytesWrapper>
+      </BytesWrapper>
+    </Wrapper>
+  ),
+};

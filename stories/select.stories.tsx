@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from '../src/lib/components/select/Select.component';
 import { Wrapper, Title } from './common';
-const options = Array.from(new Array(1000), (_, index) => ({
+const options = Array.from(new Array(100), (_, index) => ({
   label: `Item ${index}`,
   value: index,
   title: `Item ${index}`,
@@ -17,57 +17,37 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 export default {
   title: 'Components/Selector/Select',
   component: Select,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  argTypes: {
+    options: {
+      description: 'Array of objects with label, title and value properties',
+      control: false,
+    },
+    isMulti: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Default</Title>
-      <div
-        style={{
-          width: '200px',
-        }}
-      >
-        <Select
-          name="default_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          value=""
-        />
-      </div>
-      <Title>Default with custom formatOptionLabel</Title>
-      <div
-        style={{
-          width: '200px',
-        }}
-      >
-        <Select
-          name="default_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          value={options[0]}
-          formatOptionLabel={customFormatOptionLabel}
-        />
-      </div>
-      <Title>Multi Select</Title>
-      <div
-        style={{
-          width: '400px',
-        }}
-      >
-        <Select
-          name="multi_select"
-          options={options}
-          onChange={(e) => console.log(e)}
-          placeholder="Select an item..."
-          noOptionsMessage={() => 'Not found'}
-          isMulti={true}
-          value={[options[0], options[1]]}
-        />
-      </div>
-    </Wrapper>
-  );
+
+export const Playground = {
+  args: {
+    options,
+  },
+};
+
+export const WithCustomLabel = {
+  args: {
+    options,
+    formatOptionLabel: customFormatOptionLabel,
+  },
+};
+
+export const MultiSelect = {
+  args: {
+    options,
+    isMulti: true,
+    value: [options[0], options[1]],
+  },
 };

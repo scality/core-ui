@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { LateralNavbarLayout } from '../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component';
 import { Loader } from '../src/lib/components/loader/Loader.component';
+
+import {
+  DefaultSidebar,
+  ExpandedSidebar,
+  HoverableSidebar,
+} from './sidebar.stories';
+
 const sideBarActions = [
   {
     label: 'Dashboard',
@@ -24,60 +30,98 @@ const sideBarActions = [
     'data-cy': 'Disks',
   },
 ];
+
 export default {
   title: 'Components/Navigation/LateralNavbarLayout',
   component: LateralNavbarLayout,
-  decorators: [withKnobs],
+  args: {
+    children: <Loader size="massive" />,
+  },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
-export const SidebarDocked = ({}) => {
-  const expanded = boolean('Sidebar Expanded', false);
-  const sidebar = {
-    expanded,
-    actions: sideBarActions,
-  };
-  return (
-    <div>
+
+export const Default = {
+  args: {
+    sidebar: {
+      ...DefaultSidebar,
+      actions: sideBarActions,
+    },
+  },
+};
+
+export const WithExpandedSidebar = {
+  args: {
+    sidebar: {
+      actions: sideBarActions,
+      ...ExpandedSidebar.args,
+    },
+  },
+};
+
+export const SidebarWithToggle = {
+  render: ({}) => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
+    };
+    return (
       <LateralNavbarLayout sidebar={sidebar}>
         <Loader size="massive" />
       </LateralNavbarLayout>
-    </div>
-  );
+    );
+  },
 };
-export const SidebarExpanded = ({}) => {
-  const sidebar = {
-    expanded: true,
-    actions: sideBarActions,
-  };
-  return (
-    <LateralNavbarLayout sidebar={sidebar}>
-      <Loader size="massive" />
-    </LateralNavbarLayout>
-  );
+
+export const WithHoverableSidebar = {
+  args: {
+    sidebar: {
+      ...HoverableSidebar.args,
+      actions: sideBarActions,
+    },
+  },
 };
-export const SidebarWithToggle = ({}) => {
-  const [expanded, setExpanded] = useState(false);
-  const sidebar = {
-    expanded: expanded,
-    actions: sideBarActions,
-    onToggleClick: () => setExpanded(!expanded),
-  };
-  return (
-    <LateralNavbarLayout sidebar={sidebar}>
-      <Loader size="massive" />
-    </LateralNavbarLayout>
-  );
+
+/*
+export const SidebarExpanded = {
+  args:{
+    sidebar:{
+      expanded:true,
+      actions:sideBarActions,
+    }
+  }
+}
+
+export const SidebarWithToggle = {
+  render: ({}) => {
+    const [expanded, setExpanded] = useState(false);
+    const sidebar = {
+      expanded: expanded,
+      actions: sideBarActions,
+      onToggleClick: () => setExpanded(!expanded),
+    };
+    return (
+      <LateralNavbarLayout sidebar={sidebar}>
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
+  },
 };
-export const HoverableSidebar = ({}) => {
-  const [expanded, setExpanded] = useState(false);
-  const sidebar = {
-    expanded: expanded,
-    hoverable: true,
-    actions: sideBarActions,
-    onToggleClick: () => setExpanded(!expanded),
-  };
-  return (
-    <LateralNavbarLayout sidebar={sidebar}>
-      <Loader size="massive" />
-    </LateralNavbarLayout>
-  );
+
+export const HoverableSidebar = {
+  args:{
+    sidebar: {
+      expanded:false,
+      hoverable:true,
+      actions:sideBarActions
+    }
+  }
 };
+*/

@@ -5,6 +5,7 @@ const StyledWrapper = styled.div`
   padding: 30px;
   min-height: 100vh;
   background-color: ${getThemePropSelector('backgroundLevel1')};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 const StyledTitle = styled.h3`
   color: ${getThemePropSelector('textPrimary')};

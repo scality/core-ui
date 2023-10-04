@@ -91,11 +91,10 @@ const ScrollArea = styled(BasicPageLayout)`
   overflow-y: auto;
 `;
 
-const LabelContext =
-  createContext<{
-    maxLabelWidth: number;
-    setMaxLabelWidth: (setter: (value: number) => number) => void;
-  } | null>(null);
+const LabelContext = createContext<{
+  maxLabelWidth: number;
+  setMaxLabelWidth: (setter: (value: number) => number) => void;
+} | null>(null);
 
 const RequireModeContext = createContext<'all' | 'partial'>('partial');
 

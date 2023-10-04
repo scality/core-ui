@@ -95,94 +95,77 @@ const alertTriggerNotFirstDay = [
     description: 'Global health warning',
   },
 ];
-export default {
-  title: 'Components/Chart/GlobalHealthBar',
-  component: GlobalHealthBar,
-};
-const start = '2021-01-31T23:00:00Z'; // UTC time
 
+const start = '2021-01-31T23:00:00Z'; // UTC time
 const end = '2021-02-06T23:00:00Z';
 const startLast24h = '2021-02-01T00:00:00Z';
 const endLast24h = '2021-02-02T00:00:00Z';
 const startNotFirstDay = '2021-02-23T23:00:00Z';
 const endNotFirstDay = '2021-03-01T23:00:00Z';
-export const Default = ({}) => {
-  return (
-    <div>
-      <Wrapper>
-        <SyncedCursorCharts>
-          <Title>Global Health Component Demo</Title>
-          <div
-            style={{
-              paddingTop: '50px',
-              width: '500px',
-            }}
-          >
-            <GlobalHealthBar
-              id={'vis_globalhealth'}
-              alerts={alerts}
-              start={start}
-              end={end}
-            />
-          </div>
-          <Title>Global Health Component - Last 24 hours</Title>
-          <div
-            style={{
-              paddingTop: '50px',
-              width: '500px',
-            }}
-          >
-            <GlobalHealthBar
-              id={'vis_globalhealth_24h'}
-              alerts={alertsLast24h}
-              start={startLast24h}
-              end={endLast24h}
-            />
-          </div>
-          <Title>No alert</Title>
-          <div
-            style={{
-              paddingTop: '30px',
-              width: '500px',
-            }}
-          >
-            <GlobalHealthBar
-              id={'vis_globalhealth_empty'}
-              alerts={emptyAlert}
-              start={start}
-              end={end}
-            />
-          </div>
-          <Title>Alert triggered earlier than the starting time</Title>
-          <div
-            style={{
-              paddingTop: '30px',
-              width: '500px',
-            }}
-          >
-            <GlobalHealthBar
-              id={'vis_globalhealth_alert_retrieve_before'}
-              alerts={alertRetrieveBefore}
-              start={start}
-              end={end}
-            />
-          </div>
-          <Title>First Label always includes the month label</Title>
-          <div
-            style={{
-              paddingTop: '30px',
-              width: '500px',
-            }}
-          >
-            <GlobalHealthBar
-              id={'vis_globalhealth_display_month_1st_label'}
-              alerts={alertTriggerNotFirstDay}
-              start={startNotFirstDay}
-              end={endNotFirstDay}
-            />
-          </div>
-        </SyncedCursorCharts>
+
+export default {
+  title: 'Components/Chart/GlobalHealthBar',
+  component: GlobalHealthBar,
+  decorators: [
+    (story) => (
+      <Wrapper
+        style={{ minHeight: '50vh', display: 'flex', alignItems: 'center' }}
+      >
+        <div style={{ width: '500px' }}>
+          <SyncedCursorCharts>{story()}</SyncedCursorCharts>
+        </div>
       </Wrapper>
-    </div>
-  );
+    ),
+  ],
+  args: {
+    start,
+    end,
+  },
+  argTypes: {
+    start: {
+      control: 'date',
+    },
+    end: {
+      control: 'date',
+    },
+  },
+};
+
+export const GlobalHealthComponentDemo = {
+  args: {
+    id: 'vis_globalhealth',
+    alerts,
+  },
+};
+
+export const GlobalHealthLast24Hours = {
+  args: {
+    id: 'vis_globalhealth_24h',
+    alerts: alertsLast24h,
+    start: startLast24h,
+    end: endLast24h,
+  },
+};
+export const GlobalHealthEmpty = {
+  args: {
+    id: 'vis_globalhealth_empty',
+    alerts: emptyAlert,
+  },
+};
+
+export const AlertTriggeredEarlierThanTheStartingTime = {
+  args: {
+    id: 'vis_globalhealth_alert_retrieve_before',
+    alerts: alertRetrieveBefore,
+  },
+};
+
+export const FirstLabel = {
+  name: 'First Label always includes the month label',
+  args: {
+    id: 'vis_globalhealth_display_month_1st_label',
+    alerts: alertTriggerNotFirstDay,
+    start: startNotFirstDay,
+    end: endNotFirstDay,
+  },
 };

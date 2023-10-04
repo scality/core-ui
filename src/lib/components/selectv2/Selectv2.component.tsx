@@ -304,12 +304,11 @@ type SelectOptionProps = {
   optionProps: any;
 };
 
-const OptionContext =
-  createContext<{
-    options: Record<string, SelectOptionProps>;
-    register: (option: SelectOptionProps) => void;
-    unregister: (value: string) => void;
-  } | null>(null);
+const OptionContext = createContext<{
+  options: Record<string, SelectOptionProps>;
+  register: (option: SelectOptionProps) => void;
+  unregister: (value: string) => void;
+} | null>(null);
 
 function SelectWithOptionContext(props: SelectProps) {
   const [options, setOptions] = useState<Record<string, SelectOptionProps>>({});

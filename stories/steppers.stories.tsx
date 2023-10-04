@@ -1,27 +1,27 @@
 import React from 'react';
 import { Steppers } from '../src/lib/components/steppers/Steppers.component';
 import { action } from '@storybook/addon-actions';
-import { Button } from '../src/lib/components/button/Button.component';
-import { Wrapper, Title } from './common';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Wrapper } from './common';
 const steps = [
   {
-    title: 'Node Registerd',
+    title: 'Node Registered',
     content: (
       <Button
-        size="small"
-        text="Apply"
+        variant="secondary"
+        label="Apply"
         onClick={action('Button Apply Click')}
       />
     ),
-    'data-cy': 'Node_Registerd',
+    'data-cy': 'Node_Registered',
   },
   {
     title: 'Deploy Salt Minion on node',
     inProgress: false,
     content: (
       <Button
-        size="small"
-        text="Apply"
+        label="Apply"
+        variant="secondary"
         onClick={action('Button Apply Click')}
       />
     ),
@@ -32,8 +32,8 @@ const steps = [
     error: false,
     content: (
       <Button
-        size="small"
-        text="Apply"
+        label="Apply"
+        variant="secondary"
         onClick={action('Button Apply Click')}
       />
     ),
@@ -43,8 +43,8 @@ const steps = [
     title: 'Add node to Control Plane',
     content: (
       <Button
-        size="small"
-        text="Apply"
+        label="Apply"
+        variant="secondary"
         onClick={action('Button Apply Click')}
       />
     ),
@@ -54,8 +54,8 @@ const steps = [
     title: 'Extend etcd cluster to node',
     content: (
       <Button
-        size="small"
-        text="Apply"
+        label="Apply"
+        variant="secondary"
         onClick={action('Button Apply Click')}
       />
     ),
@@ -67,7 +67,11 @@ stepsWithProgress[1] = {
   title: 'Deploy Salt Minion on node',
   inProgress: true,
   content: (
-    <Button size="small" text="Apply" onClick={action('Button Apply Click')} />
+    <Button
+      label="Apply"
+      variant="secondary"
+      onClick={action('Button Apply Click')}
+    />
   ),
   'data-cy': 'Deploy_Salt',
 };
@@ -76,23 +80,37 @@ stepsWithError[2] = {
   title: 'Add node to Workload Plane',
   error: true,
   content: (
-    <Button size="small" text="Apply" onClick={action('Button Apply Click')} />
+    <Button
+      label="Apply"
+      variant="secondary"
+      onClick={action('Button Apply Click')}
+    />
   ),
   'data-cy': 'Add_Node_WP',
 };
 export default {
   title: 'Components/Progress & loading/Steppers',
   component: Steppers,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Default Steppers </Title>
-      <Steppers steps={steps} activeStep={1} />
-      <Title>Steppers with loading</Title>
-      <Steppers steps={stepsWithProgress} activeStep={1} />
-      <Title>Steppers with error</Title>
-      <Steppers steps={stepsWithError} activeStep={2} />
-    </Wrapper>
-  );
+
+export const DefaultSteppers = {
+  args: {
+    steps,
+    activeStep: 1,
+  },
+};
+
+export const SteppersWithLoading = {
+  args: {
+    steps: stepsWithProgress,
+    activeStep: 1,
+  },
+};
+
+export const SteppersWithError = {
+  args: {
+    steps: stepsWithError,
+    activeStep: 2,
+  },
 };

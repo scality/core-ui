@@ -4,30 +4,17 @@ import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/ErrorPages/404',
   component: ErrorPage404,
+  decorators: [
+    (story) => <Wrapper style={{ height: '100vh' }}>{story()}</Wrapper>,
+  ],
+  args: {
+    onReturnHomeClick: () => {},
+  },
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '100vh',
-        }}
-      >
-        <ErrorPage404 onReturnHomeClick={() => {}} />
-      </div>
-    </Wrapper>
-  );
-};
-export const WithLocale = ({}) => {
-  return (
-    <Wrapper>
-      <div
-        style={{
-          height: '100vh',
-        }}
-      >
-        <ErrorPage404 locale="fr" onReturnHomeClick={() => {}} />
-      </div>
-    </Wrapper>
-  );
+export const Default = {};
+
+export const WithLocale = {
+  args: {
+    locale: 'fr',
+  },
 };

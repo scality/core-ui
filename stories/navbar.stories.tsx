@@ -3,6 +3,7 @@ import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from '@storybook/addon-actions';
 import { Link } from '../src/lib/components/text/Text.component';
 import { Stack } from '../src/lib/spacing';
+
 const tabs = [
   {
     selected: true,
@@ -115,39 +116,40 @@ const rightActions = [
     ],
   },
 ];
+
 export default {
   title: 'Components/Navigation/Navbar',
   component: Navbar,
+  args: {
+    productName: 'Hardware UI',
+    rightActions,
+    tabs,
+  },
 };
-export const Default = ({}) => {
-  return (
-    <div>
-      <h3>Navbar with toggle</h3>
-      <Navbar
-        onToggleClick={action('toggle clicked')}
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        tabs={tabs}
-      />
-      <h3>Navbar without toggle</h3>
-      <Navbar
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        tabs={tabs}
-      />
-      <h3>Navbar with customized logo</h3>
-      <Navbar
-        onToggleClick={action('toggle clicked')}
-        productName={'Hardware UI'}
-        rightActions={rightActions}
-        logo={<i className="fas fa-ring" />}
-        tabs={tabs}
-      />
-      <h3>Navbar with only tabs</h3>
-      <Navbar rightActions={[rightActions[4]]} tabs={tabs} />
 
-      <h3>Navbar with only link tabs</h3>
-      <Navbar rightActions={[rightActions[4]]} tabs={linkTabs} />
-    </div>
-  );
+export const BasicNavbar = {};
+
+export const NavbarWithToggle = {
+  args: {
+    onToggleClick: action('toggle clicked'),
+  },
+};
+
+export const NavbarWithCustomizedLogo = {
+  args: {
+    logo: <i className="fas fa-ring" />,
+  },
+};
+
+export const NavbarWithOnlyTabs = {
+  args: {
+    rightActions: [rightActions[4]],
+  },
+};
+
+export const NavbarWithOnlyLinkTabs = {
+  args: {
+    rightActions: [rightActions[4]],
+    tabs: linkTabs,
+  },
 };

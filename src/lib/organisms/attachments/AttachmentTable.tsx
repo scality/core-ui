@@ -136,24 +136,22 @@ const CenterredSecondaryText = styled(SecondaryText)`
   text-align: center;
 `;
 
-const PrivateAttachmentContext =
-  createContext<{
-    setResetAttachementTable: Dispatch<
-      SetStateAction<
-        (
-          initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
-          initialAttachmentOperations: AttachmentOperation<any>[],
-        ) => void
-      >
-    >;
-  } | null>(null);
-const AttachmentContext =
-  createContext<{
-    resetAttachmentTable: (
-      initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
-      initialAttachmentOperations: AttachmentOperation<any>[],
-    ) => void;
-  } | null>(null);
+const PrivateAttachmentContext = createContext<{
+  setResetAttachementTable: Dispatch<
+    SetStateAction<
+      (
+        initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
+        initialAttachmentOperations: AttachmentOperation<any>[],
+      ) => void
+    >
+  >;
+} | null>(null);
+const AttachmentContext = createContext<{
+  resetAttachmentTable: (
+    initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
+    initialAttachmentOperations: AttachmentOperation<any>[],
+  ) => void;
+} | null>(null);
 
 export const AttachmentProvider = <ENTITY_TYPE extends unknown>({
   children,

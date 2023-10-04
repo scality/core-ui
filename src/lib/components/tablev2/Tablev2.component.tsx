@@ -44,8 +44,10 @@ type UpdateTableData<
   ) => void;
 };
 export type Column<D extends Record<string, unknown>> = CoreUIColumn<D>;
-export type CellProps<D extends Record<string, unknown>, V = unknown> =
-  TableCellProps<D, V> & UpdateTableData<D>;
+export type CellProps<
+  D extends Record<string, unknown>,
+  V = unknown,
+> = TableCellProps<D, V> & UpdateTableData<D>;
 
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,

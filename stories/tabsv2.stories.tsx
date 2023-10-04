@@ -155,50 +155,53 @@ const DefaultTabsDetails = ({}) => {
   );
 };
 
-export const Default = ({}) => (
-  <Wrapper>
-    <BrowserRouter>
-      <DefaultTabsDetails />
-    </BrowserRouter>
-  </Wrapper>
-);
+export const Default = {
+  render: ({}) => (
+    <Wrapper>
+      <BrowserRouter>
+        <DefaultTabsDetails />
+      </BrowserRouter>
+    </Wrapper>
+  ),
+};
 
-export const ScrollableTabs = ({}) => (
-  <Wrapper>
-    <BrowserRouter>
-      <Title>Default Tabs - scrollable 10 tabs</Title>
-      <Tabs>{generateTab(10, 10)}</Tabs>
-      <Title>Default Tabs - scrollable 20 tabs</Title>
-      <Tabs>{generateTab(20, 10)}</Tabs>
-      <Title>Default Tabs - scrollable 35 tabs</Title>
-      <Tabs>{generateTab(35, 10)}</Tabs>
-    </BrowserRouter>
-  </Wrapper>
-);
+export const ScrollableTabs = {
+  render: ({}) => (
+    <Wrapper>
+      <BrowserRouter>
+        <Title>Default Tabs - scrollable 10 tabs</Title>
+        <Tabs>{generateTab(10, 10)}</Tabs>
+        <Title>Default Tabs - scrollable 20 tabs</Title>
+        <Tabs>{generateTab(20, 10)}</Tabs>
+        <Title>Default Tabs - scrollable 35 tabs</Title>
+        <Tabs>{generateTab(35, 10)}</Tabs>
+      </BrowserRouter>
+    </Wrapper>
+  ),
+};
 
-export const WithQueryParams = ({}) => {
-  const obj = {search: 'test'}
-  return <Wrapper>
-  <BrowserRouter>
-    
-    <Tabs>
-    <Tab
-      path={'/path'}
-      label={`Tab 1`}
-      query={{...obj, tab: '1'}}
-      textBadge={<TextBadge text='test' />}
-      icon={<i className='fas fa-hat-cowboy' />}
-    >
-      <Content>Tab 1 content</Content>
-    </Tab>
-    <Tab
-      path={'/path'}
-      label={`Tab 2`}
-      query={{...obj, tab: '2'}}
-    >
-      <Content>Tab 2 content</Content>
-    </Tab>
-    </Tabs>
-  </BrowserRouter>
-</Wrapper>
-}
+export const WithQueryParams = {
+  render: ({}) => {
+    const obj = { search: 'test' };
+    return (
+      <Wrapper>
+        <BrowserRouter>
+          <Tabs>
+            <Tab
+              path={'/path'}
+              label={`Tab 1`}
+              query={{ ...obj, tab: '1' }}
+              textBadge={<TextBadge text="test" />}
+              icon={<i className="fas fa-hat-cowboy" />}
+            >
+              <Content>Tab 1 content</Content>
+            </Tab>
+            <Tab path={'/path'} label={`Tab 2`} query={{ ...obj, tab: '2' }}>
+              <Content>Tab 2 content</Content>
+            </Tab>
+          </Tabs>
+        </BrowserRouter>
+      </Wrapper>
+    );
+  },
+};

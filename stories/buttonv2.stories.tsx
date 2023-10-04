@@ -7,196 +7,162 @@ import { CopyButton } from '../src/lib/next';
 export default {
   title: 'Components/v2/Button',
   component: Button,
+  decorators: [
+    (story) => <Wrapper className="storybook-button">{story()}</Wrapper>,
+  ],
+  args: {
+    onClick: action('Button clicked'),
+  },
 };
 
-export const Default = ({}) => {
-  return (
-    <Wrapper className="storybook-button">
-      <Title>Button default</Title>
-      <Button
-        variant="primary"
-        label="primary"
-        onClick={(e) => {
-          e.persist();
-          action('Button Click');
-        }}
-      />
-      <Button variant="secondary" label="secondary" />
-      <Button variant="danger" label="danger" />
-      <Button variant="outline" label="outline" />
-      <Title>Button with icon</Title>
-      <Button
-        variant="primary"
-        label="primary"
-        icon={<i className="fas fa-arrow-right"></i>}
-      />
-      <Button
-        variant="secondary"
-        label="secondary"
-        icon={<i className="fas fa-arrow-right"></i>}
-      />
-      <Button
-        variant="danger"
-        label="danger"
-        icon={<i className="fas fa-arrow-right"></i>}
-      />
-      <Button
-        variant="outline"
-        label="outline"
-        icon={<i className="fas fa-arrow-right"></i>}
-      />
-      <Title>Button disabled</Title>
-      <Button
-        variant="primary"
-        disabled
-        label="primary"
-        icon={<i className="fas fa-arrow-right"></i>}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'The button is disabled because of blabla...',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="secondary"
-        disabled
-        label="secondary"
-        icon={<i className="fas fa-arrow-right"></i>}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'The button is disabled because of blabla...',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="danger"
-        disabled
-        label="danger"
-        icon={<i className="fas fa-arrow-right"></i>}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'The button is disabled because of blabla...',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="outline"
-        disabled
-        label="outline"
-        icon={<i className="fas fa-arrow-right"></i>}
-        onClick={action('Button Disabled Click')}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'The button is disabled because of blabla...',
-          placement: 'top',
-        }}
-      />
-      <Title>Ghost icon </Title>
-      <Button
-        icon={<i className="fas fa-sync" />}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'Refresh the metrics',
-          placement: 'top',
-        }}
-      />
-      <Button
-        icon={<i className="fas fa-file-export" />}
-        tooltip={{
-          overlayStyle: {
-            width: '120px',
-          },
-          overlay: 'Export the data in predefined format',
-          placement: 'top',
-        }}
-      />
-      <Button
-        icon={<i className="fas fa-calendar-week" />}
-        tooltip={{
-          overlayStyle: {
-            width: '120px',
-          },
-          overlay: 'Metric over a period',
-          placement: 'top',
-        }}
-      />
-      <Title>Icon button alway display a tooltip</Title>
-      <Button
-        variant="primary"
-        icon={<i className="fas fa-trash" />}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'Entity deletion',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="secondary"
-        icon={<i className="fas fa-link" />}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'Bound status',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="danger"
-        icon={<i className="fas fa-trash" />}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'Entity deletion',
-          placement: 'top',
-        }}
-      />
-      <Button
-        variant="outline"
-        icon={<i className="fas fa-trash" />}
-        tooltip={{
-          overlayStyle: {
-            width: '80px',
-          },
-          overlay: 'Entity deletion',
-          placement: 'top',
-        }}
-      />
-    </Wrapper>
-  );
+export const Playground = {
+  args: {
+    label: 'Playground',
+  },
 };
 
-export const CopyButtonStory = ({}) => {
-  return (
-    <Wrapper className="storybook-button">
-      <Title>Ghost: Without label</Title>
-      <CopyButton textToCopy="test" />
-      <Title>Ghost: With label</Title>
-      <CopyButton label="test" textToCopy="test" />
+export const DefaultButtons = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Button variant="primary" label="primary" {...args} />
+        <Button variant="secondary" label="secondary" {...args} />
+        <Button variant="danger" label="danger" {...args} />
+        <Button variant="outline" label="outline" {...args} />
+      </>
+    );
+  },
+};
 
-      <Title>Outline: Without label</Title>
-      <CopyButton variant="outline" textToCopy="test" />
-      <Title>Outline: With label</Title>
-      <CopyButton variant="outline" label="test" textToCopy="test" />
-      <Title>Outline: With big label</Title>
-      <CopyButton
-        variant="outline"
-        label="Certificate"
-        textToCopy="Certificate"
-      />
-    </Wrapper>
-  );
+export const ButtonsWithIcon = {
+  ...DefaultButtons,
+  args: {
+    icon: <i className="fas fa-arrow-right"></i>,
+  },
+};
+
+export const ButtonDisabled = {
+  ...ButtonsWithIcon,
+  args: {
+    disabled: true,
+    tooltip: {
+      overlayStyle: {
+        width: '80px',
+      },
+      overlay: 'The button is disabled because of blabla...',
+      placement: 'top',
+    },
+  },
+};
+
+export const IconButtonWithTooltip = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Button {...args} />
+        <Button
+          variant="secondary"
+          icon={<i className="fas fa-link" />}
+          tooltip={{
+            overlayStyle: {
+              width: '80px',
+            },
+            overlay: 'Bound status',
+            placement: 'top',
+          }}
+        />
+        <Button {...args} variant="danger" />
+        <Button {...args} variant="outline" />
+      </>
+    );
+  },
+  args: {
+    variant: 'primary',
+    icon: <i className="fas fa-trash" />,
+    tooltip: {
+      overlayStyle: {
+        width: '80px',
+      },
+      overlay: 'Entity deletion',
+      placement: 'top',
+    },
+  },
+};
+
+export const GhostButtons = {
+  render: () => {
+    return (
+      <>
+        <Button
+          icon={<i className="fas fa-sync" />}
+          tooltip={{
+            overlayStyle: {
+              width: '80px',
+            },
+            overlay: 'Refresh the metrics',
+            placement: 'top',
+          }}
+        />
+        <Button
+          icon={<i className="fas fa-file-export" />}
+          tooltip={{
+            overlayStyle: {
+              width: '120px',
+            },
+            overlay: 'Export the data in predefined format',
+            placement: 'top',
+          }}
+        />
+        <Button
+          icon={<i className="fas fa-calendar-week" />}
+          tooltip={{
+            overlayStyle: {
+              width: '120px',
+            },
+            overlay: 'Metric over a period',
+            placement: 'top',
+          }}
+        />
+      </>
+    );
+  },
+};
+
+export const CopyButtons = {
+  render: (args) => <CopyButton {...args}></CopyButton>,
+  args: {
+    textToCopy: 'test',
+  },
+};
+export const CopyButtonsWithLabel = {
+  ...CopyButtons,
+  args: {
+    ...CopyButtons.args,
+    label: 'Test',
+  },
+};
+
+export const OutlinedCopyButton = {
+  ...CopyButtons,
+  args: {
+    ...CopyButtons.args,
+    variant: 'outline',
+  },
+};
+
+export const OutlinedCopyButtonWithLabel = {
+  ...OutlinedCopyButton,
+  args: {
+    ...OutlinedCopyButton.args,
+    label: 'Test',
+  },
+};
+
+export const OutlinedCopyButtonWithBigLabel = {
+  ...OutlinedCopyButton,
+  args: {
+    ...OutlinedCopyButton.args,
+    label: 'Certificate',
+    textToCopy: 'Certificate',
+  },
 };

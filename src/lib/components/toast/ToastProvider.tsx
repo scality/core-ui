@@ -7,8 +7,9 @@ export interface ToastContextType {
   showToast: (toastProps: ToastContextState) => void;
 }
 
-export const ToastContext =
-  createContext<ToastContextType | undefined>(undefined);
+export const ToastContext = createContext<ToastContextType | undefined>(
+  undefined,
+);
 
 interface ToastProviderProps {
   children: ReactNode;

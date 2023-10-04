@@ -18,74 +18,93 @@ const PreviewWrapper = styled(Wrapper)`
 export default {
   title: 'Components/StatusWrapper',
   component: StatusWrapper,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  args: {
+    children: <Icon name={'Network'} color={'statusHealthy'} />,
+  },
 };
-export const Default = ({}) => {
-  return (
-    <Wrapper>
-      <Title>Status Wrapper</Title>
 
-      <PreviewWrapper>
-        <BasicText>
-          <StatusWrapper status="healthy">
-            <Icon name={'Network'} color={'statusHealthy'} />
-          </StatusWrapper>
-          This is a text
-        </BasicText>
-      </PreviewWrapper>
+export const Playground = {};
 
-      <PreviewWrapper>
-        <SecondaryText>
-          <StatusWrapper status="unknown">
-            <Icon name={'Network'} color={'infoPrimary'} />
-          </StatusWrapper>
-          This is a text
-        </SecondaryText>
-      </PreviewWrapper>
+export const Statuses = {
+  render: () => {
+    return (
+      <StatusWrapper status="healthy">
+        <Icon name={'Network'} size="3x" color={'statusHealthy'} />
+      </StatusWrapper>
+    );
+  },
+};
 
-      <PreviewWrapper>
-        <LargerText>
-          <StatusWrapper status="warning">
-            <Icon name={'Network'} color={'statusWarning'} />
-          </StatusWrapper>
-          This is a text
-        </LargerText>
-      </PreviewWrapper>
+export const Default = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Status Wrapper</Title>
 
-      <PreviewWrapper>
-        <EmphaseText>
-          <StatusWrapper status="critical">
-            <Icon name={'Network'} color={'statusCritical'} />
-          </StatusWrapper>
-          This is a text
-        </EmphaseText>
-      </PreviewWrapper>
+        <PreviewWrapper>
+          <BasicText>
+            <StatusWrapper status="healthy">
+              <Icon name={'Network'} color={'statusHealthy'} />
+            </StatusWrapper>
+            This is a text
+          </BasicText>
+        </PreviewWrapper>
 
-      <PreviewWrapper>
-        <StatusText>
-          <StatusWrapper status="unknown">
-            <Icon name={'Node-backend'} color={'infoPrimary'} />
-          </StatusWrapper>
-          This is a text
-        </StatusText>
-      </PreviewWrapper>
+        <PreviewWrapper>
+          <SecondaryText>
+            <StatusWrapper status="unknown">
+              <Icon name={'Network'} color={'infoPrimary'} />
+            </StatusWrapper>
+            This is a text
+          </SecondaryText>
+        </PreviewWrapper>
 
-      <PreviewWrapper>
-        <SmallerText>
-          <StatusWrapper status="warning">
-            <Icon name={'Volume-backend'} color={'statusWarning'} />
-          </StatusWrapper>
-          This is a text
-        </SmallerText>
-      </PreviewWrapper>
+        <PreviewWrapper>
+          <LargerText>
+            <StatusWrapper status="warning">
+              <Icon name={'Network'} color={'statusWarning'} />
+            </StatusWrapper>
+            This is a text
+          </LargerText>
+        </PreviewWrapper>
 
-      <PreviewWrapper>
-        <ChartTitleText>
-          <StatusWrapper status="critical">
-            <Icon name={'Toolbox'} color={'statusCritical'} />
-          </StatusWrapper>
-          This is a text
-        </ChartTitleText>
-      </PreviewWrapper>
-    </Wrapper>
-  );
+        <PreviewWrapper>
+          <EmphaseText>
+            <StatusWrapper status="critical">
+              <Icon name={'Network'} color={'statusCritical'} />
+            </StatusWrapper>
+            This is a text
+          </EmphaseText>
+        </PreviewWrapper>
+
+        <PreviewWrapper>
+          <StatusText>
+            <StatusWrapper status="unknown">
+              <Icon name={'Node-backend'} color={'infoPrimary'} />
+            </StatusWrapper>
+            This is a text
+          </StatusText>
+        </PreviewWrapper>
+
+        <PreviewWrapper>
+          <SmallerText>
+            <StatusWrapper status="warning">
+              <Icon name={'Volume-backend'} color={'statusWarning'} />
+            </StatusWrapper>
+            This is a text
+          </SmallerText>
+        </PreviewWrapper>
+
+        <PreviewWrapper>
+          <ChartTitleText>
+            <StatusWrapper status="critical">
+              <Icon name={'Toolbox'} color={'statusCritical'} />
+            </StatusWrapper>
+            This is a text
+          </ChartTitleText>
+        </PreviewWrapper>
+      </Wrapper>
+    );
+  },
 };

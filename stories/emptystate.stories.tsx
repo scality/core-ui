@@ -4,25 +4,20 @@ import { Wrapper } from './common';
 export default {
   title: 'Components/EmptyState',
   component: EmptyState,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  args: {
+    icon: 'Node-backend',
+    label: 'Node',
+  },
 };
-export const WithLink = ({}) => {
-  return (
-    <Wrapper>
-      <EmptyState
-        icon="Node-backend"
-        label="Node"
-        link=""
-        history={{
-          push: () => {},
-        }}
-      />
-    </Wrapper>
-  );
-};
-export const WithoutLink = ({}) => {
-  return (
-    <Wrapper>
-      <EmptyState icon="Node-backend" label="node" />
-    </Wrapper>
-  );
+
+export const Default = {};
+
+export const WithLink = {
+  args: {
+    link: '',
+    history: {
+      push: () => {},
+    },
+  },
 };

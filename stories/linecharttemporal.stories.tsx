@@ -12,66 +12,77 @@ import { defaultRenderTooltipSerie } from '../src/lib/components/linetemporalcha
 export default {
   title: 'Components/v2/LineTemporalChart',
   component: LineTemporalChart,
+  decorators: [
+    (story) => (
+      <Wrapper>
+        <BrowserRouter>
+          <MetricsTimeSpanProvider>
+            <SyncedCursorCharts>{story()}</SyncedCursorCharts>
+          </MetricsTimeSpanProvider>
+        </BrowserRouter>
+      </Wrapper>
+    ),
+  ],
+  args: {
+    heigth: 300,
+    startingTimeStamp: 1629306229,
+  },
 };
-export const Default = ({}) => {
-  const [tooltipText, setTooltipText] = useState('initial text');
-  useEffect(() => {
-    setInterval(() => {
-      setTooltipText('New text ' + new Date().toISOString());
-    }, 500);
-  }, []);
-  return (
-    <Wrapper>
-      <BrowserRouter>
-        <MetricsTimeSpanProvider>
-          <SyncedCursorCharts>
-            <LineTemporalChart
-              title={'CPU Usage'}
-              series={dataLineChartV2}
-              height={300}
-              yAxisType={'default'}
-              startingTimeStamp={1629306229}
-              helpText={
-                <>
-                  This charts represents lorem ipsum
-                  <br />
-                  This charts represents lorem ipsum
-                  <br />
-                  This charts represents lorem ipsum
-                  <br />
-                  This charts represents lorem ipsum
-                  <br />
-                  This charts represents lorem ipsum
-                  <br />
-                  This charts represents lorem ipsum
-                  <br />
-                </>
-              }
-              renderTooltipSerie={useCallback(
-                (serie, tooltipData) => {
-                  if (serie.key === 'bootstrap') {
-                    return (
-                      defaultRenderTooltipSerie(serie) +
-                      `<tr><td colspan="3">${tooltipText}</td></tr>`
-                    );
-                  }
 
-                  return defaultRenderTooltipSerie(serie);
-                },
-                [tooltipText],
-              )}
-            />
-            <LineTemporalChart
-              title={'IOPS'}
-              series={dataLineChartV2_readwrite}
-              height={300}
-              yAxisType={'symmetrical'}
-              yAxisTitle={YAXIS_TITLE_READ_WRITE}
-              startingTimeStamp={1629306229}
-            />
-          </SyncedCursorCharts>
-        </MetricsTimeSpanProvider>
-      </BrowserRouter>
-    </Wrapper>
-  );
+export const CPUUsage = {
+  render: (args) => {
+    const [tooltipText, setTooltipText] = useState('initial text');
+    useEffect(() => {
+      setInterval(() => {
+        setTooltipText('New text ' + new Date().toISOString());
+      }, 500);
+    }, []);
+    return (
+      <LineTemporalChart
+        renderTooltipSerie={useCallback(
+          (serie, tooltipData) => {
+            if (serie.key === 'bootstrap') {
+              return (
+                defaultRenderTooltipSerie(serie) +
+                `<tr><td colspan="3">${tooltipText}</td></tr>`
+              );
+            }
+            return defaultRenderTooltipSerie(serie);
+          },
+          [tooltipText],
+        )}
+        {...args}
+      />
+    );
+  },
+  args: {
+    title: 'CPU Usage',
+    yAxisType: 'default',
+    series: dataLineChartV2,
+    helpText: (
+      <>
+        This charts represents lorem ipsum
+        <br />
+        This charts represents lorem ipsum
+        <br />
+        This charts represents lorem ipsum
+        <br />
+        This charts represents lorem ipsum
+        <br />
+        This charts represents lorem ipsum
+        <br />
+        This charts represents lorem ipsum
+        <br />
+      </>
+    ),
+  },
+};
+
+export const IOPS = {
+  args: {
+    title: 'IOPS',
+    series: dataLineChartV2_readwrite,
+    yAxisTitle: YAXIS_TITLE_READ_WRITE,
+    yAxisType: 'symmetrical',
+  },
 };

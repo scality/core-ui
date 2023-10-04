@@ -56,8 +56,9 @@ function Tabs({
   const location = useLocation();
   const history = useHistory();
   const { url } = useRouteMatch();
-  const [selectedTabIndex, setSelectedTabIndex] =
-    useState<number | null | undefined>(null);
+  const [selectedTabIndex, setSelectedTabIndex] = useState<
+    number | null | undefined
+  >(null);
   const queryURL = new URLSearchParams(location.search);
   const filteredTabsChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type === Tab,

@@ -61,390 +61,351 @@ type Entry = {
   health: string;
 };
 
-export const SimpleContentTable = ({}) => {
-  const columns: Column<Entry>[] = [
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-      cellStyle: {
-        textAlign: 'left',
+export const SimpleContentTable = {
+  render: ({}) => {
+    const columns: Column<Entry>[] = [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        cellStyle: {
+          textAlign: 'left',
+        },
+        Cell: ({ value }) => {
+          if (value) return <>{value}</>;
+          return <EmptyCell />;
+        },
       },
-      Cell: ({ value }) => {
-        if (value) return <>{value}</>;
-        return <EmptyCell />;
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        cellStyle: {
+          textAlign: 'left',
+        },
+        // disable the sorting on this column
+        disableSortBy: true,
       },
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName',
-      cellStyle: {
-        textAlign: 'left',
+      {
+        Header: 'Age',
+        accessor: 'age',
+        cellStyle: {
+          width: '50px',
+          textAlign: 'left',
+        },
       },
-      // disable the sorting on this column
-      disableSortBy: true,
-    },
-    {
-      Header: 'Age',
-      accessor: 'age',
-      cellStyle: {
-        width: '50px',
-        textAlign: 'left',
+      {
+        Header: 'Health',
+        accessor: 'health',
+        sortType: 'health',
+        cellStyle: {
+          textAlign: 'left',
+        },
       },
-    },
-    {
-      Header: 'Health',
-      accessor: 'health',
-      sortType: 'health',
-      cellStyle: {
-        textAlign: 'left',
-      },
-    },
-  ];
+    ];
 
-  const getRowId = (row: Entry, relativeIndex: number) => {
-    return row.lastName + ' ' + row.firstName;
-  };
+    const getRowId = (row: Entry, relativeIndex: number) => {
+      return row.lastName + ' ' + row.firstName;
+    };
 
-  const TableWithQueryParams = ({}) => {
-    const location = useLocation();
+    const TableWithQueryParams = ({}) => {
+      const location = useLocation();
+      return (
+        <>
+          <span
+            style={{
+              color: 'white',
+            }}
+          >
+            {location.search}
+          </span>
+          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+            <div
+              style={{
+                margin: '16px 0',
+              }}
+            >
+              <Table.SearchWithQueryParams
+                displayedName={{
+                  singular: 'person',
+                  plural: 'persons',
+                }}
+              />
+            </div>
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+              children={(Rows) => {
+                return <>{Rows}</>;
+              }}
+            ></Table.SingleSelectableContent>
+          </Table>
+        </>
+      );
+    };
+
     return (
-      <>
-        <span
+      <Wrapper>
+        <Title>Non Selectable Table</Title>
+        <div
           style={{
-            color: 'white',
+            height: '300px',
+            paddingTop: '20px',
           }}
         >
-          {location.search}
-        </span>
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
-          <div
-            style={{
-              margin: '16px 0',
-            }}
+          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+            <Table.SingleSelectableContent
+              rowHeight="h32"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+        <Title>Single Selectable Table</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Table
+            columns={columns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
           >
-            <Table.SearchWithQueryParams
-              displayedName={{
-                singular: 'person',
-                plural: 'persons',
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+              selectedId={'Rodolph Yohann'}
+              onRowSelected={action('Table Row Clicked')}
+            />
+          </Table>
+        </div>
+        <Title>Table with Search</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Router>
+            <TableWithQueryParams />
+          </Router>
+        </div>
+        <Title>Empty table</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Table
+            columns={columns}
+            data={[]}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+              onRowSelected={action('Table Row Clicked')}
+            />
+          </Table>
+        </div>
+        <Title>MultiSelect</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Table
+            columns={columns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+          >
+            <Table.MultiSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
               }}
             />
-          </div>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            children={(Rows) => {
-              return <>{Rows}</>;
-            }}
-          ></Table.SingleSelectableContent>
-        </Table>
-      </>
+          </Table>
+        </div>
+      </Wrapper>
     );
-  };
-
-  return (
-    <Wrapper>
-      <Title>Non Selectable Table</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>
-      <Title>Single Selectable Table</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table
-          columns={columns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            selectedId={'Rodolph Yohann'}
-            onRowSelected={action('Table Row Clicked')}
-          />
-        </Table>
-      </div>
-      <Title>Table with Search</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Router>
-          <TableWithQueryParams />
-        </Router>
-      </div>
-      <Title>Empty table</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table
-          columns={columns}
-          data={[]}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            onRowSelected={action('Table Row Clicked')}
-          />
-        </Table>
-      </div>
-      <Title>MultiSelect</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table
-          columns={columns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-        >
-          <Table.MultiSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            onMultiSelectionChanged={(rows) => {
-              console.log('Table.MultiSelectableContent selected row', rows);
-            }}
-          />
-        </Table>
-      </div>
-    </Wrapper>
-  );
+  },
 };
 
-export const asyncTable = ({}) => {
-  function DataComponent({
-    data,
-    loading,
-    row,
-  }: {
-    row: Row<Entry>;
-    loading: boolean;
-    data: string;
-  }) {
-    return loading ? (
-      <span>loading ...</span>
-    ) : (
-      <span> {`${row.values.firstName} ${data}`} </span>
-    );
-  }
-
-  function RowAsync({ row }: { row: Row<Entry> }) {
-    const [loading, setLoading] = React.useState(true);
-    const [data, setData] = React.useState('');
-    React.useEffect(() => {
-      const timer = setTimeout(() => {
-        setData('loaded async');
-        setLoading(false);
-      }, 1000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }, []);
-    return <DataComponent row={row} loading={loading} data={data} />;
-  }
-
-  const renderRowSubComponent = React.useCallback(
-    ({ row, ...rest }: CellProps<Entry>) => {
-      return <RowAsync row={row} />;
-    },
-    [],
-  );
-  const columnAsync: Column<Entry>[] = [
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-      cellStyle: {
-        textAlign: 'left',
-      },
-      Cell: renderRowSubComponent,
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName',
-      cellStyle: {
-        textAlign: 'left',
-      },
-    },
-    {
-      Header: 'Age',
-      accessor: 'age',
-      cellStyle: {
-        width: '50px',
-        textAlign: 'left',
-      },
-    },
-    {
-      Header: 'Health',
-      accessor: 'health',
-      sortType: 'health',
-      cellStyle: {
-        textAlign: 'left',
-      },
-    },
-  ];
-
-  return (
-    <Wrapper>
-      <Title>async cell Table</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table columns={columnAsync} data={data} defaultSortingKey={'health'}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-            selectedId={'Rodolph Yohann'}
-            onRowSelected={action('Table Row Clicked')}
-          />
-        </Table>
-      </div>
-    </Wrapper>
-  );
-};
-export const OnBottomCallback = ({}) => {
-  const columns: Column<{ index: number; value: number }>[] = [
-    {
-      Header: 'value',
-      accessor: 'value',
-      cellStyle: {
-        textAlign: 'left',
-      },
-    },
-  ];
-
-  const createData = (indexStart = 0) => {
-    const data: { index: number; value: number }[] = [];
-
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        index: indexStart + i,
-        value: Math.floor(Math.random() * 1000),
-      });
+export const asyncTable = {
+  render: ({}) => {
+    function DataComponent({
+      data,
+      loading,
+      row,
+    }: {
+      row: Row<Entry>;
+      loading: boolean;
+      data: string;
+    }) {
+      return loading ? (
+        <span>loading ...</span>
+      ) : (
+        <span> {`${row.values.firstName} ${data}`} </span>
+      );
     }
 
-    return data;
-  };
+    function RowAsync({ row }: { row: Row<Entry> }) {
+      const [loading, setLoading] = React.useState(true);
+      const [data, setData] = React.useState('');
+      React.useEffect(() => {
+        const timer = setTimeout(() => {
+          setData('loaded async');
+          setLoading(false);
+        }, 1000);
+        return () => {
+          clearTimeout(timer);
+        };
+      }, []);
+      return <DataComponent row={row} loading={loading} data={data} />;
+    }
 
-  const [randomData, setRandomData] = useState(createData());
+    const renderRowSubComponent = React.useCallback(
+      ({ row, ...rest }: CellProps<Entry>) => {
+        return <RowAsync row={row} />;
+      },
+      [],
+    );
+    const columnAsync: Column<Entry>[] = [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        cellStyle: {
+          textAlign: 'left',
+        },
+        Cell: renderRowSubComponent,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        cellStyle: {
+          textAlign: 'left',
+        },
+      },
+      {
+        Header: 'Age',
+        accessor: 'age',
+        cellStyle: {
+          width: '50px',
+          textAlign: 'left',
+        },
+      },
+      {
+        Header: 'Health',
+        accessor: 'health',
+        sortType: 'health',
+        cellStyle: {
+          textAlign: 'left',
+        },
+      },
+    ];
 
-  const onBottom = () => {
-    action('onBottom');
-    setRandomData([...randomData, ...createData(randomData.length)]);
-  };
-
-  return (
-    <Wrapper>
-      <Title>async cell Table</Title>
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
-        <Table
-          columns={columns}
-          data={randomData}
-          onBottom={onBottom}
-          onBottomOffset={5}
-          defaultSortingKey={'value'}
+    return (
+      <Wrapper>
+        <Title>async cell Table</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
         >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
-          />
-        </Table>
-      </div>
-    </Wrapper>
-  );
+          <Table columns={columnAsync} data={data} defaultSortingKey={'health'}>
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+              selectedId={'Rodolph Yohann'}
+              onRowSelected={action('Table Row Clicked')}
+            />
+          </Table>
+        </div>
+      </Wrapper>
+    );
+  },
+};
+export const OnBottomCallback = {
+  render: ({}) => {
+    const columns: Column<{ index: number; value: number }>[] = [
+      {
+        Header: 'value',
+        accessor: 'value',
+        cellStyle: {
+          textAlign: 'left',
+        },
+      },
+    ];
+
+    const createData = (indexStart = 0) => {
+      const data: { index: number; value: number }[] = [];
+
+      for (let i = 0; i < 100; i++) {
+        data.push({
+          index: indexStart + i,
+          value: Math.floor(Math.random() * 1000),
+        });
+      }
+
+      return data;
+    };
+
+    const [randomData, setRandomData] = useState(createData());
+
+    const onBottom = () => {
+      action('onBottom');
+      setRandomData([...randomData, ...createData(randomData.length)]);
+    };
+
+    return (
+      <Wrapper>
+        <Title>async cell Table</Title>
+        <div
+          style={{
+            height: '300px',
+            paddingTop: '20px',
+          }}
+        >
+          <Table
+            columns={columns}
+            data={randomData}
+            onBottom={onBottom}
+            onBottomOffset={5}
+            defaultSortingKey={'value'}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              backgroundVariant="backgroundLevel1"
+            />
+          </Table>
+        </div>
+      </Wrapper>
+    );
+  },
 };
 
-export const MultiTable = ({}) => {
-  const [data1, setData1] = useState([
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-  ]);
-
-  const [data2, setData2] = useState([
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-    {
-      name: 'test',
-      volume: 1,
-      capacity: '1Gi',
-    },
-  ]);
-  const columns2: Column<typeof data2[number]>[] = [
-    {
-      Header: 'Name',
-      accessor: 'name',
-    },
-    {
-      Header: 'Volume',
-      accessor: 'volume',
-    },
-    {
-      Header: 'Capacity',
-      accessor: 'capacity',
-    },
-  ];
-
-  const demo = () => {
-    setData1([
+export const MultiTable = {
+  render: ({}) => {
+    const [data1, setData1] = useState([
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
+      },
       {
         name: 'test',
         volume: 1,
@@ -457,11 +418,16 @@ export const MultiTable = ({}) => {
       },
     ]);
 
-    setData2([
+    const [data2, setData2] = useState([
       {
         name: 'test',
         volume: 1,
-        capacity: '2Gi',
+        capacity: '1Gi',
+      },
+      {
+        name: 'test',
+        volume: 1,
+        capacity: '1Gi',
       },
       {
         name: 'test',
@@ -469,57 +435,105 @@ export const MultiTable = ({}) => {
         capacity: '1Gi',
       },
     ]);
-  };
+    const columns2: Column<(typeof data2)[number]>[] = [
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Volume',
+        accessor: 'volume',
+      },
+      {
+        Header: 'Capacity',
+        accessor: 'capacity',
+      },
+    ];
 
-  return (
-    <Wrapper>
-      <Title>Several Multiselect</Title>
-      <Flex justifyContent="center" gap="2rem">
-        <Box width="500px" height="200px">
-          <Table
-            columns={columns2}
-            data={data1}
-            defaultSortingKey="name"
-            initiallySelectedRowsIds={new Set([0, 2])}
+    const demo = () => {
+      setData1([
+        {
+          name: 'test',
+          volume: 1,
+          capacity: '1Gi',
+        },
+        {
+          name: 'test',
+          volume: 1,
+          capacity: '1Gi',
+        },
+      ]);
+
+      setData2([
+        {
+          name: 'test',
+          volume: 1,
+          capacity: '2Gi',
+        },
+        {
+          name: 'test',
+          volume: 1,
+          capacity: '1Gi',
+        },
+      ]);
+    };
+
+    return (
+      <Wrapper>
+        <Title>Several Multiselect</Title>
+        <Flex justifyContent="center" gap="2rem">
+          <Box width="500px" height="200px">
+            <Table
+              columns={columns2}
+              data={data1}
+              defaultSortingKey="name"
+              initiallySelectedRowsIds={new Set([0, 2])}
+            >
+              <Table.MultiSelectableContent
+                onMultiSelectionChanged={(rows) => {
+                  console.log(
+                    'Table.MultiSelectableContent selected row',
+                    rows,
+                  );
+                }}
+              />
+            </Table>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            gap="1rem"
           >
-            <Table.MultiSelectableContent
-              onMultiSelectionChanged={(rows) => {
-                console.log('Table.MultiSelectableContent selected row', rows);
+            <Button
+              variant="secondary"
+              label=">"
+              onClick={() => {
+                demo();
               }}
             />
-          </Table>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          gap="1rem"
-        >
-          <Button
-            variant="secondary"
-            label=">"
-            onClick={() => {
-              demo();
-            }}
-          />
-          <Button
-            variant="secondary"
-            label="<"
-            onClick={() => {
-              demo();
-            }}
-          />
-        </Box>
-        <Box width="500px" height="200px">
-          <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
-            <Table.MultiSelectableContent
-              onMultiSelectionChanged={(rows) => {
-                console.log('Table.MultiSelectableContent selected row', rows);
+            <Button
+              variant="secondary"
+              label="<"
+              onClick={() => {
+                demo();
               }}
             />
-          </Table>
-        </Box>
-      </Flex>
-    </Wrapper>
-  );
+          </Box>
+          <Box width="500px" height="200px">
+            <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
+              <Table.MultiSelectableContent
+                onMultiSelectionChanged={(rows) => {
+                  console.log(
+                    'Table.MultiSelectableContent selected row',
+                    rows,
+                  );
+                }}
+              />
+            </Table>
+          </Box>
+        </Flex>
+      </Wrapper>
+    );
+  },
 };

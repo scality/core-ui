@@ -1,10 +1,13 @@
 module.exports = {
-  stories: ['../stories/**/*.stories.@(ts|tsx|mdx)'],
+  stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))'],
+
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
-    '@storybook/addon-knobs',
+    // '@storybook/addon-knobs',
+    '@storybook/addon-mdx-gfm'
   ],
+
   webpackFinal: async (config, { configType }) => {
     // Resolve error when webpack-ing storybook:
     // Can't import the named export 'Children' from non EcmaScript module (only
@@ -17,4 +20,12 @@ module.exports = {
 
     return config;
   },
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
+  },
+
+  docs: {
+    autodocs: true
+  }
 };
