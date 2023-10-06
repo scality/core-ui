@@ -5,6 +5,7 @@ import { Box } from '../src/lib/components/box/Box';
 const info = {
   title: 'Components/Box',
   component: Box,
+  decorators: [story => <HighlightBorder>{story()}</HighlightBorder>]
 };
 
 export default info;
@@ -21,7 +22,7 @@ const HighlightBorder = styled.div`
 export const margin = {
   render: ({}) => {
     return (
-      <HighlightBorder>
+      <>
         <Box m={0}>Props m 0 = 0</Box>
         <Box m={1}>Props m 1 = 0.071rem </Box>
         <Box m={2}>Props m 2 = 0.143rem </Box>
@@ -36,8 +37,10 @@ export const margin = {
         <Box m={11}>Props m 11 = 2rem</Box>
         <Box m={12}>Props m 12 = 2.286rem</Box>
         <Box m={13}>Props m 13 = 2.857rem</Box>
-        <Box m={14}>Props m 13 = 14px</Box>
-      </HighlightBorder>
+        <Box m={14}>Props m 14 = 14px</Box>
+      </>
+        
+   
     );
   },
 };
