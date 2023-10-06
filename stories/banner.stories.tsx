@@ -3,9 +3,15 @@ import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Props } from '../src/lib/components/banner/Banner.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Wrapper } from './common';
+import { Component, StoryProps } from '@storybook/blocks';
+import { StoryFn, StoryObj } from '@storybook/react';
+
+
 export default {
   title: 'Components/Notification/Banner',
   component: Banner,
+  decorators: [(story:Component) => <Wrapper>{story()}</Wrapper>],
+  args:{icon:<Icon name='Exclamation-triangle'></Icon>},
   argTypes: {
     children: {
       control: {
@@ -15,17 +21,10 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: [
-          'base',
-          'secondary',
-          'healthy',
-          'warning',
-          'danger',
-          'success',
-        ],
+        disable:true
       },
     },
-    title: {},
+    title: {control: { disable:true}},
     icon: {
       control: {
         disable: true,
@@ -34,55 +33,38 @@ export default {
   },
 };
 
-export const ErrorBanner = {
-  render: ({}) => (
-    <Wrapper>
-      <Banner
-        variant="danger"
-        icon={<Icon name="Exclamation-triangle" />}
-        title={'Error'}
-      >
-        {'There is an error.'}
-      </Banner>
-    </Wrapper>
-  ),
+
+export const SuccessBanner = {
+  args:{
+    variant:"success",
+        title:'Success',
+        children:"There is a success",
+  },
 };
 
 export const WarningBanner = {
-  render: ({}) => (
-    <Wrapper>
-      <Banner
-        variant="warning"
-        icon={<Icon name="Exclamation-triangle" />}
-        title={'Warning'}
-      >
-        {'There is a warning.'}
-      </Banner>
-    </Wrapper>
-  ),
-};
-
-export const SuccessBanner = {
-  render: ({}) => (
-    <Wrapper>
-      <Banner
-        variant="healthy"
-        icon={<Icon name="Exclamation-triangle" />}
-        title={'Success'}
-      >
-        {'There is a success.'}
-      </Banner>
-    </Wrapper>
-  ),
-};
-
-export const Playground: {
-  args?: Props;
-} = {
-  args: {
-    variant: 'healthy',
-    icon: <Icon name="Exclamation-triangle" />,
-    title: 'Man',
-    children: 'There is a success',
+  args:{
+    variant:"warning",
+    title:'Warning',
+    children:"There is a warning",
   },
+};
+export const ErrorBanner = {
+  args:{
+    variant:"danger",
+    title:'Error',
+    children:"There is an error",
+  },
+};
+
+export const Playground = {
+  args:{
+    ...SuccessBanner.args,
+    title: "Testing playground"
+  },
+  argTypes:{
+    variant:{control: {disable:false}},
+    title:{control: {disable:false}},
+    children:{control: {disable:false}},
+  }
 };
