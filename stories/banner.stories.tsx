@@ -10,7 +10,7 @@ import { StoryFn, StoryObj } from '@storybook/react';
 export default {
   title: 'Components/Notification/Banner',
   component: Banner,
-  decorators: [(story:Component) => <Wrapper>{story()}</Wrapper>],
+  decorators: [(story:Component) => <Wrapper >{story()}</Wrapper>],
   args:{icon:<Icon name='Exclamation-triangle'></Icon>},
   argTypes: {
     children: {

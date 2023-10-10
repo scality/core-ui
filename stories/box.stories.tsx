@@ -47,7 +47,7 @@ export const margin = {
 export const font = {
   render: ({}) => {
     return (
-      <HighlightBorder>
+      <>
         <Box fontSize="smaller">Smaller font</Box>
         <Box fontSize="small">Small font</Box>
         <Box fontSize="base">Base font</Box>
@@ -55,7 +55,9 @@ export const font = {
         <Box fontSize="larger">larger font</Box>
         <Box fontSize="huge">huge font</Box>
         <Box fontSize="massive">massive font</Box>
-      </HighlightBorder>
+      </>
+        
+      
     );
   },
 };
