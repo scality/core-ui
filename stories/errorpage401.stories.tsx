@@ -4,41 +4,19 @@ import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/ErrorPages/401',
   component: ErrorPage401,
+  decorators:[(story) => (
+    <Wrapper style={{height:"100vh"}}>
+        {story()}
+    </Wrapper>) ],
+  args:{
+    supportLink:"https://www.scality.com/support/",
+    onReturnHomeClick:() => {}
+  }
 };
-export const Default = {
-  render: ({}) => {
-    return (
-      <Wrapper>
-        <div
-          style={{
-            height: '100vh',
-          }}
-        >
-          <ErrorPage401
-            supportLink="https://www.scality.com/support/"
-            onReturnHomeClick={() => {}}
-          />
-        </div>
-      </Wrapper>
-    );
-  },
-};
+export const Default = {};
+
 export const WithLocale = {
-  render: ({}) => {
-    return (
-      <Wrapper>
-        <div
-          style={{
-            height: '100vh',
-          }}
-        >
-          <ErrorPage401
-            locale="fr"
-            supportLink="https://www.scality.com/support/"
-            onReturnHomeClick={() => {}}
-          />
-        </div>
-      </Wrapper>
-    );
-  },
+  args:{
+    locale:"fr"
+  }
 };
