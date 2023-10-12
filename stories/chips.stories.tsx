@@ -56,12 +56,12 @@ export const DeletableChips = {
 export const DifferentsSizeChips = {
   render:(args) => {
     return (
-    <>
-    <Chips text="Smaller" size='smaller' {...args} />
-    <Chips text="Small" size='small'  {...args} />
-    <Chips text="Base" size='base'  {...args} />
-    <Chips text="Large" size='large'  {...args} />
-    <Chips text="Larger" size='larger'  {...args} />
+      <>
+       <Chips text="Smaller" size='smaller' {...args} />
+       <Chips text="Small" size='small'  {...args} />
+       <Chips text="Base" size='base'  {...args} />
+       <Chips text="Large" size='large'  {...args} />
+       <Chips text="Larger" size='larger'  {...args} />
     </>
     )
    
