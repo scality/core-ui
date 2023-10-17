@@ -1,17 +1,15 @@
 import React from 'react';
 import { Banner } from '../src/lib/components/banner/Banner.component';
-import { Props } from '../src/lib/components/banner/Banner.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Wrapper } from './common';
-import { Component, StoryProps } from '@storybook/blocks';
-import { StoryFn, StoryObj } from '@storybook/react';
-
 
 export default {
   title: 'Components/Notification/Banner',
   component: Banner,
-  decorators: [(story:Component) => <Wrapper >{story()}</Wrapper>],
-  args:{icon:<Icon name='Exclamation-triangle'></Icon>},
+  decorators: [(story) => <Wrapper >{story()}</Wrapper>],
+  args:{
+    icon: <Icon name='Exclamation-triangle'/>
+  },
   argTypes: {
     children: {
       control: {
@@ -33,6 +31,25 @@ export default {
   },
 };
 
+export const Playground = {
+  args:{
+    variant: 'success',
+    children:"Some text explaining what happened",
+  },
+  argTypes:{
+    variant:{control: {disable:false}},
+    title:{control: {disable:false}},
+    children:{control: {disable:false}},
+    icon:{control:{disable:false}},
+  }
+};
+
+export const Default = {
+  args:{
+    children: 'There is an alert',
+    variant:"success",
+  }
+}
 
 export const SuccessBanner = {
   args:{
@@ -55,16 +72,4 @@ export const ErrorBanner = {
     title:'Error',
     children:"There is an error",
   },
-};
-
-export const Playground = {
-  args:{
-    ...SuccessBanner.args,
-    title: "Testing playground"
-  },
-  argTypes:{
-    variant:{control: {disable:false}},
-    title:{control: {disable:false}},
-    children:{control: {disable:false}},
-  }
 };

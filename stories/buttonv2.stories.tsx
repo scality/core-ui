@@ -8,7 +8,7 @@ export default {
   title: 'Components/v2/Button',
   component: Button,
   decorators:[(story) => (
-    <Wrapper className="storybook-button" style={{minHeight:'20vh', padding:'3rem'}}>
+    <Wrapper className="storybook-button">
         {story()}
     </Wrapper>) ],
 };

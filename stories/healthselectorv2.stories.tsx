@@ -10,69 +10,57 @@ import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
   title: 'Components/v2/Healthselector',
   component: Healthselector,
-};
+  decorators:[(story) => (
+    <Wrapper style={{minHeight:"40vh"}}>
+        <HealthSelectorWrapper>
+        {story()}
+      </HealthSelectorWrapper>
+    </Wrapper>) ],
+  args:{
+    onChange:(value) => action(value),
+  }
+}
 const HealthSelectorWrapper = styled.div`
   width: 205px;
 `;
-  
-export const Default = {
-  render: () => {
-    return (
-      <Wrapper>
-        <Title>Basic usage</Title>
-        <HealthSelectorWrapper>
-          <Healthselector
-            onChange={(value) => {
-              action(value);
-            } } id={'basic'}          />
-        </HealthSelectorWrapper>
 
-        <Title>changing labels</Title>
-        <HealthSelectorWrapper>
-          <Healthselector
-            onChange={(value) => {
-              action(value);
-            }}
-            label="alerts"
-            options={[
-              {
-                ...optionsDefaultConfiguration.all,
-                label: 'label all',
-                shortLabel: 'all v2',
-              },
-              {
-                ...optionsDefaultConfiguration.healthy,
-                label: 'any label',
-                shortLabel: 'short',
-              },
-              {
-                ...optionsDefaultConfiguration.warning,
-                label: 'warning',
-                shortLabel: 'careful',
-                icon: <Icon name="Tape" />,
-                value: 'myValue',
-              },
-              optionsDefaultConfiguration.critical,
-              optionsDefaultConfiguration.unknown,
-            ]}
-          />
-        </HealthSelectorWrapper>
+export const Basic = {}
 
-        <Title>hidding options</Title>
-        <HealthSelectorWrapper>
-          <Healthselector
-            onChange={(value) => {
-              action(value);
-            } }
-            id={'hiddenoptions'} 
-            options={[
-              optionsDefaultConfiguration.all,
-              optionsDefaultConfiguration.warning,
-              optionsDefaultConfiguration.critical,
-              optionsDefaultConfiguration.unknown,
-            ]}          />
-        </HealthSelectorWrapper>
-      </Wrapper>
-    );
-  },
-};
+export const ChangingLabels = {
+  args:{
+    label:"Alerts",
+    options:[
+      {
+        ...optionsDefaultConfiguration.all,
+        label: 'label all',
+        shortLabel: 'all v2',
+      },
+      {
+        ...optionsDefaultConfiguration.healthy,
+        label: 'any label',
+        shortLabel: 'short',
+      },
+      {
+        ...optionsDefaultConfiguration.warning,
+        label: 'warning',
+        shortLabel: 'careful',
+        icon: <Icon name="Tape" />,
+        value: 'myValue',
+      },
+      optionsDefaultConfiguration.critical,
+      optionsDefaultConfiguration.unknown,
+    ]
+  }
+}
+
+export const HiddingOptions = {
+  args:{
+    id:'hiddenoptions',
+    options:[
+      optionsDefaultConfiguration.all,
+      optionsDefaultConfiguration.warning,
+      optionsDefaultConfiguration.critical,
+      optionsDefaultConfiguration.unknown,
+    ],
+  }
+}
