@@ -144,6 +144,7 @@
     }
   },
   "dependencies": {
-    "@floating-ui/dom": "^0.1.10"
+    "@floating-ui/dom": "^0.1.10",
+    "@storybook/preview-api": "^7.4.6"
   }
 }

@@ -4,7 +4,7 @@ module.exports = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
-    '@storybook/addon-knobs',
+    // '@storybook/addon-knobs',
     '@storybook/addon-mdx-gfm'
   ],
 
