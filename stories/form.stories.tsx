@@ -7,7 +7,7 @@ import React from 'react';
 import { brand } from '../src/lib/style/theme';
 import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
-import { Icon, IconName } from '../src/lib/components/icon/Icon.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Banner } from '../src/lib/components/banner/Banner.component';
@@ -19,9 +19,8 @@ export default {
   component: Form,
 };
 
-
 export const PageForm = {
-  render: ({layout}) => {
+  render: ({layout,requireMode}) => {
     return (
       <div
         style={{
@@ -38,7 +37,7 @@ export const PageForm = {
               subTitle: 'The sub title',
             }
           }
-          requireMode="partial"
+          requireMode={requireMode}
           rightActions={
             <Stack gap={'r16'}>
               <Button variant="outline" label="Cancel" />
@@ -190,176 +189,27 @@ export const PageForm = {
       </div>
     );
   },
+  args:{
+    requireMode:"partial"
+  }
 };
 
 export const AllRequiredPageForm = {
-  render: ({}) => {
-    return (
-      <div
-        style={{
-          height: '800px',
-          background: brand.backgroundLevel4,
-          color: brand.textPrimary,
-        }}
-      >
-        <Form
-          layout={{ kind: 'page', title: 'My form' }}
-          requireMode="all"
-          rightActions={
-            <Stack gap={'r16'}>
-              <Button variant="outline" label="Cancel" />
-              <Button
-                variant="primary"
-                label="Save"
-                icon={<Icon name="Save" />}
-              />
-            </Stack>
-          }
-        >
-          <FormSection
-            title={{
-              name: 'First part entity data',
-              helpTooltip: 'Tooltip of the first entity',
-              icon: 'Search',
-            }}
-          >
-            <FormGroup
-              direction="horizontal"
-              label="Name"
-              id="name"
-              labelHelpTooltip="Name Tooltip"
-              content={<Input id="name" />}
-              help="Please type your name :)"
-              required
-            ></FormGroup>
-            <FormGroup
-              direction="horizontal"
-              label="Email"
-              id="email"
-              labelHelpTooltip="Email Tooltip"
-              content={<Input id="email" />}
-              error="Invalid email format. Try with a better format."
-              helpErrorPosition="right"
-            ></FormGroup>
-          </FormSection>
-        </Form>
-      </div>
-    );
-  },
+  ...PageForm,
+  args:{
+    requireMode:"all"
+  }
 
 };
 
 export const TabForm = {
-  render: ({}) => {
-    return (
-      <div
-        style={{
-          height: '800px',
-          background: brand.backgroundLevel1,
-          color: brand.textPrimary,
-        }}
-      >
-        <Form
-          layout={{ kind: 'tab' }}
-          rightActions={
-            <Stack gap={'r16'}>
-              <Button variant="outline" label="Cancel" />
-              <Button
-                variant="primary"
-                label="Save"
-                icon={<Icon name="Save" />}
-              />
-            </Stack>
-          }
-          banner={
-            <Banner
-              variant="danger"
-              icon={<Icon name="Exclamation-triangle" />}
-              title={'Error'}
-            >
-              There is an error
-            </Banner>
-          }
-        >
-          <FormSection
-            title={{
-              name: 'First part entity data',
-              helpTooltip: 'Tooltip of the first entity',
-              icon: 'Search',
-            }}
-          >
-            <FormGroup
-              direction="vertical"
-              label="Name"
-              id="name"
-              labelHelpTooltip="Name Tooltip"
-              content={<Input id="name" />}
-              help="Optional helper text"
-              required
-              disabled
-            ></FormGroup>
-            <FormGroup
-              direction="horizontal"
-              label="Email"
-              id="email"
-              labelHelpTooltip="Email Tooltip"
-              content={<Input id="email" />}
-              error="Invalid email format. Try with a better format."
-              helpErrorPosition="right"
-              required
-            ></FormGroup>
-          </FormSection>
-          <FormSection
-            title={{
-              name: 'Second part entity data',
-              helpTooltip: 'Tooltip of the second entity',
-              icon: 'Search',
-            }}
-          >
-            <FormGroup
-              direction="horizontal"
-              label="Name"
-              id="name1"
-              labelHelpTooltip="Name Tooltip"
-              content={<Input id="name1" disabled />}
-              help="Optional helper text"
-              required
-            ></FormGroup>
-            <FormGroup
-              direction="horizontal"
-              label="Email"
-              id="email1"
-              labelHelpTooltip="Email Tooltip"
-              content={<Input id="email1" />}
-              error="Invalid email format. Try with a better format."
-              helpErrorPosition="right"
-              required
-            ></FormGroup>
-            <FormGroup
-              direction="horizontal"
-              label="Email long long long"
-              id="email-long1"
-              labelHelpTooltip="Email Tooltip"
-              content={
-                <Input
-                  leftIcon="Account"
-                  rightIcon="User"
-                  id="email-long1"
-                  placeholder="text"
-                />
-              }
-              help="optional helper text"
-              helpErrorPosition="bottom"
-              required
-            ></FormGroup>
-          </FormSection>
-        </Form>
-      </div>
-    );
-  },
+  ...PageForm,
+  args:{
+    layout:{
+      kind:"tab"
+    }
+  }
 };
-
-
 
 export const PageFormWithIcon = {
   ...PageForm,

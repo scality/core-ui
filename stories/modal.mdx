@@ -1,0 +1,17 @@
+import { Meta, Story, Canvas, Controls, Stories } from '@storybook/blocks';
+import { Modal } from '../src/lib/components/modal/Modal.component.tsx';
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories} />
+
+<Canvas of={ModalStories.SimpleModal} />
+
+<Controls of={ModalStories.SimpleModal} />
+
+#### With a customize Title
+
+<Story of={ModalStories.CustomizeTitle} />
+
+#### Inside a Table
+
+<Story of={ModalStories.WithinTable} />

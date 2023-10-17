@@ -1,15 +1,83 @@
 import React, { useState } from 'react';
 import { Modal } from '../src/lib/components/modal/Modal.component';
-import { Button } from '../src/lib/components/button/Button.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { IconHelp } from '../src/lib/components/IconHelper';
 import { Stack } from '../src/lib/spacing';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { useArgs } from '@storybook/preview-api';
+
 export default {
   title: 'Components/Notification/Modal',
   component: Modal,
+  decorators:[story => (
+    <Wrapper style={{minHeight:'10vh'}} >
+    {story()}
+    </Wrapper>
+  )],
 };
+
+export const SimpleModal = {
+  render:(args) => {
+    const [{isOpen},updateArgs] = useArgs()
+    return (
+      <>
+        <Button onClick={() => updateArgs({ isOpen: true })} label={"Show Modal"} />
+        <Modal
+          close={() => updateArgs({ isOpen: false })} 
+          isOpen={isOpen}
+          footer={<div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Button
+              label="No"
+              size="default"
+              variant='outline'
+              onClick={() => updateArgs({ isOpen: false })}
+            />
+            <Button
+              variant="secondary"
+              label="Yes"
+              size="inline"
+              onClick={action('Yes clicked')}
+            />
+          </div>} 
+          {...args} 
+        />
+      </>
+    )
+  },
+  args:{
+    title:"Hello",
+    children:<span>Do you want a cookie?</span>,
+  }
+}
+
+export const CustomizeTitle = {
+  ...SimpleModal,
+  args:{
+    close:null,
+    title:"Hello there",
+    children:<span>Do you want a cookie?</span>,
+    subTitle:<Stack>
+    <>Step 1/2</>
+    <IconHelp
+      tooltipMessage={
+        <ul>
+          <li>Hello, this is the tooltip of the modal</li>
+        </ul>
+      }
+    />
+  </Stack>,
+  
+  },
+}
+
+/*
 export const Default = {
   render: ({}) => {
     return (
@@ -62,14 +130,14 @@ export const CustomizeTitle = {
               }}
             >
               <Button
-                text="No"
-                size="base"
-                outlined
+                label="No"
+                size="default"
+                variant='outline'
                 onClick={action('No clicked')}
               />
               <Button
-                variant="buttonSecondary"
-                text="Yes"
+                variant="secondary"
+                label="Yes"
                 size="base"
                 onClick={action('Yes clicked')}
               />
@@ -94,19 +162,21 @@ export const CustomizeTitle = {
     );
   },
 };
+*/
 
-const Action = ({}) => {
+const Action = {
+  render:({}) => {
   const [displayed, setDisplayed] = useState(false);
   return (
     <>
       <Button
-        text={'Show modal'}
+        label={'Show modal'}
         onClick={() => setDisplayed((disp) => !disp)}
       />
       <Modal
-        close={action('close clicked')}
+        close={() => setDisplayed((disp) => !disp)}
         isOpen={displayed}
-        title="Hello"
+        title="Hello Table"
         footer={
           <div
             style={{
@@ -115,15 +185,13 @@ const Action = ({}) => {
             }}
           >
             <Button
-              text="No"
-              size="base"
-              outlined
+              label="No"
+              variant='outline'
               onClick={action('No clicked')}
             />
             <Button
-              variant="buttonSecondary"
-              text="Yes"
-              size="base"
+              variant="secondary"
+              label="Yes"
               onClick={action('Yes clicked')}
             />
           </div>
@@ -132,11 +200,12 @@ const Action = ({}) => {
         <span>Do you want a cookie?</span>
       </Modal>
     </>
-  );
+  )
+  }
 };
 
 export const WithinTable = {
-  render: ({}) => {
+  render: (args) => {
     const columns = [
       {
         Header: 'First Name',
@@ -148,7 +217,7 @@ export const WithinTable = {
       {
         Header: 'Actions',
         accessor: 'health',
-        Cell: Action,
+        Cell:Action.render,
         // disable the sorting on this column
         disableSortBy: true,
       },

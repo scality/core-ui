@@ -1,0 +1,31 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Controls,
+  IconGallery,
+  IconItem,
+  Stories,
+} from '@storybook/blocks';
+import { Icon } from '../src/lib/components/icon/Icon.component';
+import * as IconStories from './icon.stories';
+
+<Meta of={IconStories} />
+
+# Icons
+
+<Canvas>
+  <Story of={IconStories.Playground} />
+</Canvas>
+<Controls of={IconStories.Playground} />
+
+<Canvas withSource="none">
+  <Story of={IconStories.Size} />
+  <Story of={IconStories.Statuses} />
+</Canvas>
+
+<Canvas withSource="none">
+  <Story of={IconStories.Statuses} />
+</Canvas>
+
+<Story of={IconStories.Statuses} />
