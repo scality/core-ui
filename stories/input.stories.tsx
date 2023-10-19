@@ -1,13 +1,64 @@
 import React, { useState } from 'react';
 import { Input } from '../src/lib/components/input/Input.component';
+import { Input as InputV2} from '../src/lib/components/inputv2/inputv2'
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 import { Wrapper, Title } from './common';
+
+const sizes = ["1/3","1/2","2/3","1"]
+export default {
+  title:'Components/Input/Input',
+  component:InputV2,
+  decorators:[story => <Wrapper  >{story()}</Wrapper>],
+  argTypes:{
+    size:{
+      options:sizes
+    }
+  }
+}
+
+export const Default ={}
+
+export const WithPlaceholder = {
+  args:{
+    placeholder:'Some text'
+  }
+}
+
+export const SizeScale = {
+  render:(args) => {
+    return sizes.map(size => <InputV2 size={size} {...args} ></InputV2>)
+  },
+  args:{
+    placeholder:"Some text"
+  }
+}
+
+export const WithIcons = {
+  render:({leftIcon,rightIcon,...args}) => {
+    return (
+      <div>
+        <InputV2 id='ileft' leftIcon={leftIcon} {...args} />
+        <InputV2 id='iright' rightIcon={rightIcon} {...args} />
+        <InputV2 id='iboth' rightIcon={rightIcon} leftIcon={leftIcon} {...args}/>
+      </div>
+    )
+  },
+  args:{
+    leftIcon:"Backend",
+    rightIcon:"Delete",
+    placeholder:'Some text'
+  }
+}
+
+ 
+/*
 const options = Array.from(new Array(1000), (_, index) => ({
   label: `Item ${index}`,
   value: index,
   'data-cy': `Item_${index}`,
 }));
+
 
 const ExampleInput = ({}) => {
   const CustomInput = styled.div`
@@ -136,3 +187,4 @@ export const Default = {
     return <ExampleInput />;
   },
 };
+*/

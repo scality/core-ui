@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions';
 import { Notifications } from '../src/lib/components/notifications/Notifications.component';
 import { Props } from '../src/lib/components/notifications/Notification.component';
 import { Wrapper } from './common';
-import { Canvas,Docs } from '@storybook/blocks';
 
 const trNotifications:Array<Props> = [
   {
@@ -11,13 +10,13 @@ const trNotifications:Array<Props> = [
     title: 'Hi',
     message: 'I am Carlito. I live at TOP_RIGHT',
     variant: 'base',
-    'data-cy': 'Carlito_notification',
+    // 'data-cy': 'Carlito_notification',
   },
   {
     uid: '2',
     title: 'Hi',
     message: 'I am Patrick. I live at TOP_RIGHT',
-    'data-cy': 'Patrick_notification',
+    // 'data-cy': 'Patrick_notification',
   },
 ];
 const tlNotifications:Array<Props> = [
@@ -173,8 +172,7 @@ export const MultipleNotificationsWithVariants = {
 }
 
 export const Default = {
-  render: (args) => {
-    
+  render: ({}) => {
     return (
       <Wrapper>
         <Notifications

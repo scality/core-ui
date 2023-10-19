@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
 import { StoryObj } from '@storybook/react';
+
 const actions = [
   {
     label: 'Dashboard',
