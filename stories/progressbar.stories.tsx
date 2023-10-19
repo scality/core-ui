@@ -4,7 +4,67 @@ import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Progress & loading/ProgressBar',
   component: ProgressBar,
+  decorators:[story => (
+  <Wrapper>
+    <div style={{ width: '260px'}}>
+      {story()}
+    </div>
+  </Wrapper>)],
+  args:{
+    percentage:50,
+    buildinLabel:"50%",
+    backgroundColor:"#87929D", 
+  },
+  argTypes:{
+    color:{
+      control:{
+        type:'color'
+      }
+    },
+    backgroundColor:{
+      control:{
+        type:'color'
+      }
+    }
+  }
 };
+
+export const Basic = {}
+
+const sizes = ["smaller","small","base","large","larger"]
+export const Scale = {
+  render:(args) => {
+    return sizes.map(size => {
+      return <div style={{padding:'2rem'}}><ProgressBar size={size} topLeftLabel={size} {...args} /></div>
+    })
+  }
+}
+
+export const WithInfos = {
+  args:{
+    topLeftLabel:"Usage",
+    topRightLabel:"50%",
+    bottomLeftLabel:"5.17TB STORED - 13TB USED",
+    bottomRightLabel:"12.9TB FREE - 25.83TB TOTAL"
+  }
+}
+
+export const WithAnimation = {
+  args:{
+    isAnimation:true
+  }
+}
+
+export const DiffrentColors = {
+  render:(args) => (
+    <div style={{display:"flex",flexDirection:'column',height:'10rem' ,justifyContent:"space-between"}} >
+      <ProgressBar color="#2f67ac" {...args} />
+      <ProgressBar color="#ff5722" {...args} percentage={70} buildinLabel='70%'  />
+      <ProgressBar color="#982803" {...args} percentage={90} buildinLabel='90%'  />
+    </div>
+  ),
+}
+
 export const Default = {
   render: ({}) => {
     return (
@@ -12,7 +72,7 @@ export const Default = {
         <div
           style={{
             width: '260px',
-          }}
+          }}  
         >
           <Title>Smaller</Title>
           <ProgressBar

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
+import { StoryObj } from '@storybook/react';
 const actions = [
   {
     label: 'Dashboard',
@@ -19,10 +20,42 @@ const actions = [
     onClick: action('disk clicked'),
   },
 ];
+
 export default {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
+  args:{
+    actions,
+  }
 };
+
+export const DockedSidebar:StoryObj = {}
+
+export const ExpandedSidebar = {
+  args:{
+    expanded:true
+  }
+}
+
+export const SidebarWithToggle = {
+  render:(args) => {
+    const [expandedWithToggle, setExpandedWithToggle] = useState(false);
+    return (
+      <Sidebar
+        expanded={expandedWithToggle}
+        onToggleClick={() => setExpandedWithToggle(!expandedWithToggle)}
+        {...args}/>
+    )
+  },
+}
+
+export const HoverableSidebar = {
+  args:{
+    hoverable:true
+  }
+}
+
+/*
 export const Default = {
   render: ({}) => {
     const [expandedWithToggle, setExpandedWithToggle] = useState(false);
@@ -77,3 +110,4 @@ export const Default = {
     );
   },
 };
+*/

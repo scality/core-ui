@@ -11,7 +11,16 @@ export default {
     <Wrapper className="storybook-button">
         {story()}
     </Wrapper>) ],
+    args:{
+      onClick:action('Button clicked')
+    }
 };
+
+export const Playground = {
+  args:{
+    label:"Playground",
+  }
+}
 
 export const DefaultButtons = {
   render:({...args}) => {

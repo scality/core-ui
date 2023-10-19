@@ -1,8 +1,11 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Notifications } from '../src/lib/components/notifications/Notifications.component';
+import { Props } from '../src/lib/components/notifications/Notification.component';
 import { Wrapper } from './common';
-const trNotifications = [
+import { Canvas,Docs } from '@storybook/blocks';
+
+const trNotifications:Array<Props> = [
   {
     uid: '1',
     title: 'Hi',
@@ -14,11 +17,10 @@ const trNotifications = [
     uid: '2',
     title: 'Hi',
     message: 'I am Patrick. I live at TOP_RIGHT',
-    variant: 'secondary',
     'data-cy': 'Patrick_notification',
   },
 ];
-const tlNotifications = [
+const tlNotifications:Array<Props> = [
   {
     uid: '3',
     title: 'Hi',
@@ -33,7 +35,7 @@ const tlNotifications = [
     dismissAfter: 10000,
   },
 ];
-const blNotifications = [
+const blNotifications:Array<Props> = [
   {
     uid: '5',
     title: 'Hi',
@@ -48,7 +50,7 @@ const blNotifications = [
     dismissAfter: 10000,
   },
 ];
-const brNotifications = [
+const brNotifications:Array<Props> = [
   {
     uid: '7',
     title: 'Hi',
@@ -65,9 +67,114 @@ const brNotifications = [
 export default {
   title: 'Components/Notification/Notifications',
   component: Notifications,
+  decorators:[story => <Wrapper>{story()}</Wrapper>]
 };
+
+const basic:Props = {
+  uid: "1",
+  title:'Notification Title'
+}
+
+export const Basic = {
+  args:{
+    notifications:[basic]
+  }
+}
+
+export const WithMessage ={
+  args: {
+    notifications:[
+      {
+        uid:'1',
+        title:"HI!",
+        message:"This is a notifiaction with a message"
+      }
+    ]
+  }
+}
+
+export const WithTimer = {
+  args:{
+    notifications:[
+      {
+        uid:'1',
+        title:"Hi !",
+        variant:"success",
+        message: 'This is a notification with a timer',
+        dismissAfter: 10000,
+      }
+    ]
+  },
+  parameters:{
+    docs:{
+      canvas:{
+        withToolbar:true,
+
+      }
+    }
+  }
+}
+
+export const DifferentPosition = {
+  ...Basic,
+  args:{
+    notifications:[
+      {
+        uid:'1',
+        title:'Hi',
+        message:'This is a notification living in the Top Left corner'
+      }
+    ],
+    position:'tl'
+  },
+  parameters:{
+    docs:{
+      canvas:{
+        sourceState:"none"
+      }
+    }
+  }
+}
+
+export const MultipleNotificationsWithVariants = {
+  args:{
+    notifications:[
+      {
+        uid:'0',
+        title:"Hi !",
+        message: "This is notification doesn't have a background",
+      },
+      {
+        uid:'1',
+        title:"Hi !",
+        message: 'This is a base variant notification',
+        variant:'base'
+      },
+      {
+        uid:'2',
+        title:"Hi !",
+        message: 'This is a warning variant notification',
+        variant:'warning'
+      },
+      {
+        uid:'3',
+        title:"Hi !",
+        message: 'This is a danger variant notification',
+        variant:'danger'
+      },
+      {
+        uid:'4',
+        title:"Hi !",
+        message: 'This is a healthy variant notification',
+        variant:'healthy'
+      }
+    ]
+  }
+}
+
 export const Default = {
-  render: ({}) => {
+  render: (args) => {
+    
     return (
       <Wrapper>
         <Notifications
