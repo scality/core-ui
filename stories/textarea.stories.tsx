@@ -5,7 +5,15 @@ import { TextArea } from '../src/lib';
 export default {
   title: 'Components/Input/TextArea',
   component: TextArea,
+  argTypes: {
+    value: {
+      type: 'string',
+    },
+  },
 };
+
+export const Playground = {};
+
 export const Default = {
   render: ({}) => {
     return (

@@ -2,10 +2,55 @@ import React from 'react';
 import { Tooltip } from '../src/lib/components/tooltip/Tooltip.component';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title, SubTitle } from './common';
+
+const options = [
+  'top',
+  'bottom',
+  'left',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom-end',
+  'bottom-start',
+  'left-start',
+  'left-end',
+];
+
 export default {
   title: 'Components/Notification/Tooltip',
   component: Tooltip,
 };
+export const Playground = {
+  render: (args) => {
+    return (
+      <Wrapper
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Tooltip overlay="You can play with me" {...args}>
+          <SubTitle>
+            Hover here <br />
+            to see <br /> the tooltip !
+          </SubTitle>
+        </Tooltip>
+      </Wrapper>
+    );
+  },
+  argTypes: {
+    placement: {
+      options,
+      control: {
+        type: 'select',
+      },
+    },
+  },
+};
+
 export const Default = {
   render: ({}) => {
     return (

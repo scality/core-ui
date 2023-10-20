@@ -4,6 +4,19 @@ import { Title, Wrapper } from './common';
 export default {
   title: 'Components/Toggle',
   component: Toggle,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+};
+export const Playground = {};
+export const LabelledToggle = {
+  args: {
+    label: 'Airplane mode',
+  },
+};
+export const DisabledToggle = {
+  args: {
+    label: 'Disabled Toggle',
+    disabled: true,
+  },
 };
 export const Default = {
   render: ({}) => {

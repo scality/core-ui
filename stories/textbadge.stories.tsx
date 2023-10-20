@@ -5,6 +5,12 @@ export default {
   title: 'Components/TextBadge',
   component: TextBadge,
 };
+
+export const Playground = {
+  args: {
+    text: 'Test me',
+  },
+};
 export const Default = {
   render: ({}) => {
     return (

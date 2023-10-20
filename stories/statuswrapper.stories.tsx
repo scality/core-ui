@@ -20,21 +20,11 @@ export default {
   component: StatusWrapper,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
-    children: <Icon name={'Network'} color={'statusHealthy'} />,
+    children: <Icon name={'Network'} color={'statusWarning'} />,
   },
 };
 
 export const Playground = {};
-
-export const Statuses = {
-  render: () => {
-    return (
-      <StatusWrapper status="healthy">
-        <Icon name={'Network'} size="3x" color={'statusHealthy'} />
-      </StatusWrapper>
-    );
-  },
-};
 
 export const Default = {
   render: ({}) => {

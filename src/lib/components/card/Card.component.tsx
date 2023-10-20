@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getTheme, hex2RGB } from '../../utils';
 const CardContext = createContext(null);
 type CardElementProps = {
-  children: JSX.Element;
+  children: React.ReactNode;
   className?: string;
 };
 
@@ -135,7 +135,7 @@ function Card({
   children,
   className,
   ...rest
-}: CardProps): Node {
+}: CardProps) {
   let colorStatus = null;
 
   if (status) {
