@@ -17,6 +17,7 @@
     "plop": "plop",
     "test": "jest",
     "storybook": "storybook dev -p 3000",
+    "build-storybook": "storybook build",
     "storybook:deploy": "storybook-to-ghpages"
   },
   "keywords": [],
@@ -148,6 +149,5 @@
     "@floating-ui/dom": "^0.1.10",
     "framer-motion": "^4.1.17",
     "@storybook/preview-api": "^7.5.1"
-
   }
 }
