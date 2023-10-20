@@ -12,7 +12,7 @@ import { Link, Text } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
-import { DockedSidebar } from './sidebar.stories';
+import { DefaultSidebar } from './sidebar.stories';
 import { Meta } from '@storybook/react';
 
 const sideBarActions = [
@@ -492,7 +492,7 @@ export const SidebarDocked = {
   args:{
     sidebar:{
       ...meta.args?.sidebar,
-      ...DockedSidebar.args,
+      ...DefaultSidebar.args,
     },
     navbar:{
       ...meta.args?.navbar,

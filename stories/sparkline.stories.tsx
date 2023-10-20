@@ -34,7 +34,29 @@ const lineConfig = {
 export default {
   title: 'Components/Chart/SparkLine',
   component: SparkLine,
+  args:{
+    xAxis,
+    yAxis,
+    row,
+  }
 };
+
+export const ChartDemo= {
+  args:{
+    id,
+    data,
+    title:"OPERATIONS BY SECONDS",
+    lineConfig
+  }
+}
+
+export const MultiChartDmeo = {
+  args:{
+    id:id_multi,
+    data:multiLineData,
+  }
+}
+
 export const Default = {
   render: ({}) => {
     return (

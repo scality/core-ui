@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { LateralNavbarLayout } from '../src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component';
 import { Loader } from '../src/lib/components/loader/Loader.component';
 
-import {DockedSidebar,ExpandedSidebar,HoverableSidebar} from './sidebar.stories';
+import {DefaultSidebar,ExpandedSidebar,HoverableSidebar} from './sidebar.stories';
 
 const sideBarActions = [
   {
@@ -45,7 +45,7 @@ export default {
 export const Default = {
   args:{
     sidebar:{
-      ...DockedSidebar,
+      ...DefaultSidebar,
       actions:sideBarActions
     }
   }
