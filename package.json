@@ -17,6 +17,7 @@
     "plop": "plop",
     "test": "jest",
     "storybook": "storybook dev -p 3000",
+    "build-storybook": "storybook build",
     "storybook:deploy": "storybook-to-ghpages"
   },
   "keywords": [],
