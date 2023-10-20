@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
 import { StoryObj } from '@storybook/react';
+import { Wrapper } from './common';
 
 const actions = [
   {
@@ -25,12 +26,13 @@ const actions = [
 export default {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
+  decorators:[story => <Wrapper>{story()}</Wrapper>],
   args:{
     actions,
   }
 };
 
-export const DockedSidebar:StoryObj = {}
+export const DefaultSidebar:StoryObj = {}
 
 export const ExpandedSidebar = {
   args:{
