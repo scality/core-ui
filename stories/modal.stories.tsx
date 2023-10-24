@@ -19,6 +19,7 @@ export default {
 export const SimpleModal = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
+    console.log('simple modal args', args);
     return (
       <>
         <Button
