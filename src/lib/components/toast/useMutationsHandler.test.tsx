@@ -10,7 +10,7 @@ const mockUseToast = useToast as jest.MockedFunction<typeof useToast>;
 
 const mutationResultMock = {
   context: undefined,
-  data: [],
+  data: ['mockData'],
   failureCount: 0,
   error: null,
   mutate: jest.fn(),
@@ -56,7 +56,7 @@ describe('useMutationsHandler', () => {
       },
       name: 'mutation3',
     },
-  ];
+  ] as const;
 
   const messageDescriptionBuilder = jest.fn(() => 'message');
 
@@ -129,7 +129,7 @@ describe('useMutationsHandler', () => {
         },
         name: 'mutation4',
       },
-    ];
+    ] as const;
 
     const { waitFor } = renderHook(() =>
       useMutationsHandler({

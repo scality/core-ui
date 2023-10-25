@@ -43,9 +43,9 @@ declare type MutationsResults<
   ? [...Result, GetResults<Head>]
   : T extends [infer Head, ...infer Tail]
   ? MutationsResults<[...Tail], [...Result, GetResults<Head>], [...Depth, 1]>
-  : T extends MutationConfig<MinimalMutationResult<infer TData, infer TError>>[]
-  ? MutationConfig<MinimalMutationResult<TData, TError>>[]
-  : MutationConfig<MinimalMutationResult<unknown, unknown>>[];
+  : unknown[] extends T
+  ? T
+  : never;
 
 enum DescriptionBuilderStatus {
   Success = 'success',
@@ -120,7 +120,7 @@ export const useMutationsHandler = <
   const mutations = [
     mainMutation,
     ...(dependantMutations ? dependantMutations : []),
-  ];
+  ] as MutationConfig<MinimalMutationResult<unknown, unknown>>[];
 
   const handleMutationsCompletion = useCallback(async () => {
     const results = await Promise.all(mutations.map((m) => m.mutation));
