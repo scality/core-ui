@@ -1,7 +1,11 @@
 import { Chips } from '../src/lib/components/chips/Chips.component';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
+import { Icon, iconTable } from '../src/lib/components/icon/Icon.component';
+
+const icons = Object.keys(iconTable);
+
 export default {
   title: 'Components/Chips',
   component: Chips,
@@ -15,14 +19,27 @@ export default {
       </Wrapper>
     ),
   ],
+  argTypes: {
+    icon: {
+      options: icons,
+    },
+  },
 };
 
 const Template = {
-  render: ({ variant, text, ...args }) => {
+  render: ({ variant, text, icon, ...args }) => {
     return (
       <>
         {variant.map((status) => {
-          return <Chips variant={status} text={text} {...args} />;
+          return (
+            <Chips
+              key={status}
+              variant={status}
+              icon={icon && <Icon name={icon}></Icon>}
+              text={text}
+              {...args}
+            />
+          );
         })}
       </>
     );
@@ -38,6 +55,17 @@ const Template = {
   },
 };
 
+export const Playground = {
+  render: ({ icon, text, ...args }) => {
+    return (
+      <Chips icon={icon && <Icon name={icon}></Icon>} text={text} {...args} />
+    );
+  },
+  args: {
+    text: 'Playground',
+  },
+};
+
 export const BasicChips = {
   ...Template,
 };
@@ -47,8 +75,8 @@ export const ClickableChips = {
   args: {
     ...Template.args,
     text: 'Clickable Chip',
-    icon: <i className="fas fa-star" />,
-    onClick: () => action('Clickable Chip'),
+    icon: 'Check',
+    onClick: action('Clickable Chip'),
   },
 };
 
@@ -56,8 +84,8 @@ export const DeletableChips = {
   ...Template,
   args: {
     ...Template.args,
-    icon: <i className="fas fa-star" />,
-    onRemove: () => action('Deletable Chip'),
+    icon: 'Delete',
+    onRemove: action('Deletable Chip'),
     text: 'Deletable',
   },
 };
@@ -78,108 +106,5 @@ export const DifferentsSizeChips = {
     variant: 'statusHealthy',
     icon: <i className="fas fa-star" />,
     onClick: action('Clickable Chip'),
-  },
-};
-
-export const Default = {
-  render: ({}) => {
-    return (
-      <Wrapper className="storybook-chips">
-        <Title>Basic Chip</Title>
-        <Chips text="Basic Chip" variant="infoPrimary" />
-        <Chips text="Basic Chip" variant="statusHealthy" />
-        <Chips text="Basic Chip" variant="statusWarning" />
-        <Chips text="Basic Chip" variant="statusCritical" />
-
-        <Title>Clickable Chip</Title>
-        <Chips
-          text="Clickable Chip"
-          icon={<i className="fas fa-star" />}
-          variant="infoPrimary"
-          onClick={action('Clickable Chip')}
-        />
-        <Chips
-          text="Clickable Chip"
-          icon={<i className="fas fa-star" />}
-          variant="statusHealthy"
-          onClick={action('Clickable Chip')}
-        />
-        <Chips
-          text="Clickable Chip"
-          icon={<i className="fas fa-star" />}
-          variant="statusWarning"
-          onClick={action('Clickable Chip')}
-        />
-        <Chips
-          text="Clickable Chip"
-          icon={<i className="fas fa-star" />}
-          variant="statusCritical"
-          onClick={action('Clickable Chip')}
-        />
-
-        <Title>Deletable Chip</Title>
-        <Chips
-          text="Deletable"
-          icon={<i className="fas fa-star" />}
-          variant="infoPrimary"
-          onRemove={action('Deletable Chip')}
-        />
-        <Chips
-          text="Deletable"
-          icon={<i className="fas fa-star" />}
-          variant="statusHealthy"
-          onRemove={action('Deletable Chip')}
-        />
-        <Chips
-          text="Deletable"
-          icon={<i className="fas fa-star" />}
-          variant="statusWarning"
-          onRemove={action('Deletable Chip')}
-        />
-        <Chips
-          text="Deletable"
-          icon={<i className="fas fa-star" />}
-          variant="statusCritical"
-          onRemove={action('Deletable Chip')}
-        />
-
-        <Title>Different sizes</Title>
-        <Chips
-          text="Smaller"
-          icon={<i className="fas fa-star" />}
-          variant="infoPrimary"
-          onRemove={action('Deletable Chip')}
-          size="smaller"
-        />
-        <Chips
-          text="Small"
-          icon={<i className="fas fa-star" />}
-          variant="infoPrimary"
-          onRemove={action('Deletable Chip')}
-          size="small"
-        />
-        <Chips
-          text="Base"
-          icon={<i className="fas fa-star" />}
-          variant="statusWarning"
-          onRemove={action('Deletable Chip')}
-          size="base"
-        />
-        <Chips
-          text="Large"
-          icon={<i className="fas fa-star" />}
-          variant="statusHealthy"
-          onRemove={action('Deletable Chip')}
-          size="large"
-        />
-        <Chips
-          text="Larger"
-          icon={<i className="fas fa-star" />}
-          variant="statusWarning"
-          onRemove={action('Deletable Chip')}
-          size="larger"
-        />
-      </Wrapper>
-    );
   },
 };
