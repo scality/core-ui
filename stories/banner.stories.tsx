@@ -32,7 +32,12 @@ export const Playground = {
   args: {
     variant: 'base',
     children: 'Some text explaining what happened',
-    title: 'Playground',
+  },
+  argTypes: {
+    variant: { control: { disable: false } },
+    title: { control: { disable: false } },
+    children: { control: { disable: false } },
+    icon: { control: { disable: false } },
   },
 };
 
