@@ -5,68 +5,67 @@ import { TextArea } from '../src/lib';
 export default {
   title: 'Components/Input/TextArea',
   component: TextArea,
+  args: {
+    onChange: action('onChange'),
+    name: 'TextArea',
+  },
   argTypes: {
+    name: {
+      table: {
+        disable: true,
+      },
+    },
     value: {
       type: 'string',
+    },
+    width: {
+      type: 'string',
+    },
+    rows: {
+      type: 'number',
+    },
+    cols: {
+      type: 'number',
     },
   },
 };
 
 export const Playground = {};
 
-export const Default = {
-  render: ({}) => {
-    return (
-      <Wrapper>
-        <Title>Text Area without label</Title>
-        <TextArea
-          rows={10}
-          cols={50}
-          id={'text'}
-          value="Add a note"
-          onChange={action('onChange')}
-        />
-        <Title>Text Area change value</Title>
-        <TextArea
-          rows={10}
-          cols={50}
-          id={'text'}
-          onChange={action('onChange')}
-        />
-        <Title>Text Area disabled</Title>
-        <TextArea
-          rows={10}
-          cols={50}
-          placeholder="Text area input"
-          value=""
-          disabled={true}
-          onChange={action('onChange')}
-        />
-        <Title>Text Area disabled with content</Title>
-        <TextArea
-          rows={10}
-          cols={50}
-          placeholder="Text area input"
-          value="hello"
-          disabled={true}
-          onChange={action('onChange')}
-        />
+export const DefaultTextArea = {
+  args: {
+    value: 'Some text',
+  },
+};
 
-        <Title>My test with width set</Title>
-        <TextArea
-          width="200px"
-          value="hello"
-          placeholder="Text area input"
-          onChange={action('onChange')}
-        />
-        <Title>My test with width and variant set</Title>
-        <TextArea
-          width="200px"
-          variant="text"
-          placeholder="Text area input"
-          onChange={action('onChange')}
-        />
-      </Wrapper>
-    );
+export const TextVariantTextArea = {
+  args: {
+    variant: 'text',
+    value: 'Text area with "text" variant',
+  },
+};
+
+export const DisabledTextArea = {
+  args: {
+    placeholder: 'This text area is disabled',
+    disabled: true,
+  },
+};
+
+export const WithWidthSet = {
+  args: {
+    placeholder: 'Text Area input',
+    width: '300px',
+  },
+};
+
+/**
+ * The size of the textarea can also be set with 'rows' and 'cols' props
+ */
+export const RowsAndColsSet = {
+  args: {
+    rows: 20,
+    cols: 40,
+    placeholder: 'With rows = 20 and cols = 40',
   },
 };
