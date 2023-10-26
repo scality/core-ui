@@ -4,11 +4,14 @@ import {
 } from '../src/lib/components/selectv2/Selectv2.component';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
   title: 'Components/v2/Select',
   component: Select,
+  decorators: [
+    (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
+  ],
 };
 const SelectWrapper = styled.div`
   max-width: 300px;
@@ -28,9 +31,10 @@ const generateOptions = (n = 10) =>
 const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
 const defaultOptions = generateOptions(4);
+const thousandsOfOptions = generateOptions(1000);
 
 const CustomSelect = (props) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('');
   return (
     <Select value={value} onChange={(value) => setValue(value)} {...props}>
       {props.opts &&
@@ -43,88 +47,72 @@ const CustomSelect = (props) => {
   );
 };
 
-const thousandsOfOptions = generateOptions(1000);
-
-export const Default = {
-  render: ({}) => (
-    <Wrapper className="storybook-select">
-      <SelectWrapper>
-        <Title>Default Select</Title>
-        <Select
-          opts={defaultOptions}
-          defaultValue={defaultOptions[1]}
-          placeholder={'Custom placeholder...'}
-        />
-        <Title>Disabled Select</Title>
-        <CustomSelect
-          disabled
-          opts={defaultOptions}
-          defaultValue={defaultOptions[1].value}
-        />
-        <Title>Without options</Title>
-        <Select onChange={null} />
-        <Title>With scrollbar (more than 4 items)</Title>
-        <CustomSelect opts={optionsWithoutSearchBar} />
-        <Title>1000 items</Title>
-        <CustomSelect opts={thousandsOfOptions} />
-        <Title>With scroll/search (more than 8 items)</Title>
-        <CustomSelect
-          defaultValue={optionsWithSearchBar[1]}
-          opts={optionsWithSearchBar}
-        />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            flex: '1',
-            flexDirection: 'column',
-          }}
-        >
-          <Title>Not enough space at the bottom</Title>
-          <CustomSelect opts={optionsWithSearchBar} />
-        </div>
-      </SelectWrapper>
-    </Wrapper>
-  ),
+export const Playground = {
+  args: {
+    options: defaultOptions,
+    placeholder: 'Playground',
+  },
 };
-export const Rounded = {
-  render: ({}) => (
-    <Wrapper>
-      <SelectWrapper>
-        <Title>Default Select</Title>
-        <Select
-          variant="rounded"
-          opts={defaultOptions}
-          defaultValue={defaultOptions[1]}
-          placeholder={'Custom placeholder...'}
-        />
-        <Title>Disabled Select</Title>
-        <CustomSelect
-          variant="rounded"
-          disabled
-          opts={defaultOptions}
-          defaultValue={defaultOptions[1]}
-        />
-        <Title>Without options</Title>
-        <Select variant="rounded" onChange={null} />
-        <Title>With scrollbar (more than 4 items)</Title>
-        <CustomSelect variant="rounded" opts={optionsWithoutSearchBar} />
-        <Title>1000 items</Title>
-        <CustomSelect variant="rounded" opts={thousandsOfOptions} />
-        <Title>With scroll/search (more than 8 items)</Title>
-        <CustomSelect variant="rounded" opts={optionsWithSearchBar} />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            flex: '1',
-            flexDirection: 'column',
-          }}
-        >
-          <Title>Not enough space at the bottom</Title>
-          <CustomSelect variant="rounded" opts={optionsWithSearchBar} />
-        </div>
-      </SelectWrapper>
-    </Wrapper>
+
+export const WithoutOptions = {
+  args: {
+    options: [{}],
+    placeholder: 'No options',
+  },
+};
+
+export const DisabledSelect = {
+  args: {
+    disabled: true,
+    defaultValue: defaultOptions[1].value,
+  },
+};
+
+export const WithScollbar = {
+  name: 'More than 4 items',
+  args: {
+    options: optionsWithoutSearchBar,
+  },
+};
+
+export const WithSearchBar = {
+  render: (args) => {
+    return <CustomSelect {...args} />;
+  },
+  args: {
+    opts: optionsWithSearchBar,
+  },
+};
+
+export const LotsOfOptions = {
+  ...WithSearchBar,
+  args: {
+    opts: thousandsOfOptions,
+  },
+};
+
+export const NotEnoughPlaceAtTheBottom = {
+  render: (args) => (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        height: '100vh',
+        flex: '1',
+        flexDirection: 'column',
+      }}
+    >
+      <CustomSelect {...args}></CustomSelect>
+    </div>
   ),
+  args: {
+    options: optionsWithSearchBar,
+  },
+};
+
+export const RoundedVariant = {
+  args: {
+    variant: 'rounded',
+    options: defaultOptions,
+  },
 };
