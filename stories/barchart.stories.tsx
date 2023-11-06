@@ -123,6 +123,13 @@ export default {
       </Wrapper>
     ),
   ],
+  argTypes: {
+    data: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const verticalStackedChart = {
