@@ -11,7 +11,8 @@ import { Text, Wrapper } from './common';
 import { brand } from '../src/lib/style/theme';
 import { action } from '@storybook/addon-actions';
 
-const colors = Object.keys(brand);
+// RGB color in theme provoke an error, excludes from control options
+const colors = Object.keys(brand).filter((color) => !/RGB/.test(color));
 
 export default {
   title: 'Components/Card',
