@@ -2,6 +2,15 @@ import { iconTable } from "../src/lib/components/icon/Icon.component";
 
 export const iconOptions = Object.keys(iconTable);
 
+
+export const variantsOptions = [
+  'buttonPrimary',
+  'buttonSecondary',
+  'buttonDelete',
+  'backgroundLevel1',
+];
+export const sizesOptions = ['smaller', 'small', 'base', 'large', 'larger'];
+
 export const placementOptions = [
     'top',
     'bottom',

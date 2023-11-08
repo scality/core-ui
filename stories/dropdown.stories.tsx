@@ -2,6 +2,12 @@ import React from 'react';
 import { Dropdown } from '../src/lib/components/dropdown/Dropdown.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
+import { Icon } from '../src/lib';
+import {
+  iconOptions,
+  sizesOptions as sizes,
+  variantsOptions as variants,
+} from './controls';
 
 const items = [
   {
@@ -20,14 +26,6 @@ const items = [
     'data-cy': 'Onboarding',
   },
 ];
-
-const variants = [
-  'buttonPrimary',
-  'buttonSecondary',
-  'buttonDelete',
-  'backgroundLevel1',
-];
-const sizes = ['smaller', 'small', 'base', 'large', 'larger'];
 
 export default {
   title: 'Components/Dropdown',
@@ -51,6 +49,9 @@ export default {
     items,
   },
   argTypes: {
+    icon: {
+      options: iconOptions,
+    },
     size: {
       options: sizes,
       control: {
@@ -64,6 +65,13 @@ export default {
       },
     },
   },
+  render: ({ icon, items, ...args }) => (
+    <Dropdown
+      items={items}
+      icon={icon && <Icon name={icon}></Icon>}
+      {...args}
+    />
+  ),
 };
 
 export const Playground = {
@@ -93,11 +101,20 @@ export const DropdownWithTextAndIcon = {
 };
 
 export const DropdownVariant = {
-  render: (args) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
         {variants.map((variant, i) => {
-          return <Dropdown key={i} text="Help" variant={variant} {...args} />;
+          return (
+            <Dropdown
+              key={i}
+              items={items}
+              icon={icon && <Icon name={icon}></Icon>}
+              text="Help"
+              variant={variant}
+              {...args}
+            />
+          );
         })}
       </>
     );
@@ -105,11 +122,20 @@ export const DropdownVariant = {
 };
 
 export const DifferentSizes = {
-  render: (args) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
         {sizes.map((size, i) => {
-          return <Dropdown key={i} text="Help" size={size} {...args} />;
+          return (
+            <Dropdown
+              key={i}
+              items={items}
+              icon={icon && <Icon name={icon}></Icon>}
+              text="Help"
+              size={size}
+              {...args}
+            />
+          );
         })}
       </>
     );

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Banner } from '../src/lib/components/banner/Banner.component';
-import { Icon, iconTable } from '../src/lib/components/icon/Icon.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Wrapper } from './common';
-
-const icons = Object.keys(iconTable);
+import { iconOptions } from './controls';
 
 export default {
   title: 'Components/Notification/Banner',
@@ -14,7 +13,7 @@ export default {
   },
   argTypes: {
     icon: {
-      options: icons,
+      options: iconOptions,
     },
   },
 };
