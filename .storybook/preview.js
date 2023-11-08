@@ -1,8 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
-
-import { defaultTheme } from '../src/lib/style/theme';
+import { defaultTheme,brand } from '../src/lib/style/theme';
 
 const themes = {
   darkRebrand: defaultTheme.darkRebrand,
@@ -35,6 +34,14 @@ const withThemeProvider = (Story, context) => {
 export const decorators = [withThemeProvider];
 
 export const parameters = {
+  controls:{
+    //All props with color in name will automatically have a control 'color'
+    //with colors presets to theme colors
+    presetColors: Object.values(brand),
+    matchers:{
+      color: /color/i
+    }
+  },
   options: {
     storySort: {
       order: [
