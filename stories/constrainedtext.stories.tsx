@@ -1,6 +1,7 @@
 import React from 'react';
 import { ConstrainedText } from '../src/lib/components/constrainedtext/Constrainedtext.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
+import { placementOptions } from './controls';
 export default {
   title: 'Components/Constrained Text',
   component: ConstrainedText,
@@ -20,20 +21,7 @@ export default {
   ],
   argTypes: {
     tooltipPlacement: {
-      options: [
-        'top',
-        'bottom',
-        'left',
-        'right',
-        'top-start',
-        'top-end',
-        'right-start',
-        'right-end',
-        'bottom-end',
-        'bottom-start',
-        'left-start',
-        'left-end',
-      ],
+      options: placementOptions,
     },
   },
 };

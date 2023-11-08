@@ -2,9 +2,8 @@ import { Chips } from '../src/lib/components/chips/Chips.component';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
-import { Icon, iconTable } from '../src/lib/components/icon/Icon.component';
-
-export const iconOptions = Object.keys(iconTable);
+import { Icon } from '../src/lib/components/icon/Icon.component';
+import { iconOptions } from './controls';
 
 export default {
   title: 'Components/Chips',

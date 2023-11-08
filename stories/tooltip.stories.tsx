@@ -2,31 +2,14 @@ import React from 'react';
 import { Tooltip } from '../src/lib/components/tooltip/Tooltip.component';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper, Title, SubTitle } from './common';
-
-const options = [
-  'top',
-  'bottom',
-  'left',
-  'top-start',
-  'top-end',
-  'right',
-  'right-start',
-  'right-end',
-  'bottom-end',
-  'bottom-start',
-  'left-start',
-  'left-end',
-];
+import { placementOptions } from './controls';
 
 export default {
   title: 'Components/Notification/Tooltip',
   component: Tooltip,
   argTypes: {
     placement: {
-      options,
-      control: {
-        type: 'select',
-      },
+      options: placementOptions,
     },
   },
 };

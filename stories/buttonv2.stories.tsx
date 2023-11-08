@@ -1,8 +1,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
-import { Wrapper, Title } from './common';
+import {
+  Button,
+  Props,
+} from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Wrapper } from './common';
 import { CopyButton } from '../src/lib/next';
+import { Icon } from '../src/lib';
+import { iconOptions } from './controls';
+import { tooltipArgTypes } from './controls';
 
 export default {
   title: 'Components/v2/Button',
@@ -13,6 +19,30 @@ export default {
   args: {
     onClick: action('Button clicked'),
   },
+  argTypes: {
+    ...tooltipArgTypes,
+    icon: { options: iconOptions },
+  },
+  render: ({
+    // defines new args to have control over tooltip properties
+    tooltipOverlay,
+    tooltipPlacement,
+    tooltipOverlayStyle,
+    icon,
+    ...args
+  }) => {
+    const props: Props = { ...args };
+    // define tootltip with the new args
+    props.tooltip = {
+      overlay: tooltipOverlay,
+      placement: tooltipPlacement,
+      overlayStyle: tooltipOverlayStyle,
+    };
+
+    return (
+      <Button icon={icon && <Icon name={icon}></Icon>} {...props}></Button>
+    );
+  },
 };
 
 export const Playground = {
@@ -22,13 +52,33 @@ export const Playground = {
 };
 
 export const DefaultButtons = {
-  render: ({ ...args }) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
-        <Button variant="primary" label="primary" {...args} />
-        <Button variant="secondary" label="secondary" {...args} />
-        <Button variant="danger" label="danger" {...args} />
-        <Button variant="outline" label="outline" {...args} />
+        <Button
+          variant="primary"
+          label="primary"
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+        />
+        <Button
+          variant="secondary"
+          label="secondary"
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+        />
+        <Button
+          variant="danger"
+          label="danger"
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+        />
+        <Button
+          variant="outline"
+          label="outline"
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+        />
       </>
     );
   },
@@ -56,10 +106,10 @@ export const ButtonDisabled = {
 };
 
 export const IconButtonWithTooltip = {
-  render: ({ ...args }) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
-        <Button {...args} />
+        <Button icon={icon && <Icon name={icon}></Icon>} {...args} />
         <Button
           variant="secondary"
           icon={<i className="fas fa-link" />}
@@ -71,14 +121,22 @@ export const IconButtonWithTooltip = {
             placement: 'top',
           }}
         />
-        <Button {...args} variant="danger" />
-        <Button {...args} variant="outline" />
+        <Button
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+          variant="danger"
+        />
+        <Button
+          icon={icon && <Icon name={icon}></Icon>}
+          {...args}
+          variant="outline"
+        />
       </>
     );
   },
   args: {
     variant: 'primary',
-    icon: <i className="fas fa-trash" />,
+    icon: 'Delete',
     tooltip: {
       overlayStyle: {
         width: '80px',
@@ -127,11 +185,37 @@ export const GhostButtons = {
     );
   },
 };
-
 export const CopyButtons = {
-  render: (args) => <CopyButton {...args}></CopyButton>,
+  render: ({ ...args }) => <CopyButton {...args}></CopyButton>,
   args: {
     textToCopy: 'test',
+  },
+  argTypes: {
+    icon: {
+      table: {
+        disable: true,
+      },
+    },
+    tooltipPlacement: {
+      table: {
+        disable: true,
+      },
+    },
+    tooltip: {
+      table: {
+        disable: true,
+      },
+    },
+    tooltipOverlay: {
+      table: {
+        disable: true,
+      },
+    },
+    tooltipOverlayStyle: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 export const CopyButtonsWithLabel = {
