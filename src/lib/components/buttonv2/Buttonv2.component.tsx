@@ -16,7 +16,7 @@ export type Props = Omit<
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   label?: React.ReactNode;
-  tooltip?: TooltipProps;
+  tooltip?: Omit<TooltipProps, 'children'>;
 };
 export const ButtonStyled = styled.button<Props>`
   -webkit-appearance: none;
