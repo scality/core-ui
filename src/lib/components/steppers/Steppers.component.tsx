@@ -6,8 +6,8 @@ import { Loader } from '../loader/Loader.component';
 import { getTheme, getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 type StepProps = {
-  title: JSX.Element;
-  content: JSX.Element;
+  title: React.ReactNode;
+  content?: React.ReactNode;
   active?: boolean;
   completed?: boolean;
   isLast?: boolean;

@@ -69,3 +69,4 @@ export { Dropzone } from './components/dropzone/Dropzone';
 export { Toast } from './components/toast/Toast.component';
 export { ToastProvider, useToast } from './components/toast/ToastProvider';
 export { useMutationsHandler } from './components/toast/useMutationsHandler';
+export { Stepper } from './components/steppers/Stepper.component';
