@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
 import { Icon, iconTable } from '../src/lib/components/icon/Icon.component';
 
-const icons = Object.keys(iconTable);
+export const iconOptions = Object.keys(iconTable);
 
 export default {
   title: 'Components/Chips',
@@ -21,7 +21,7 @@ export default {
   ],
   argTypes: {
     icon: {
-      options: icons,
+      options: iconOptions,
     },
   },
 };
