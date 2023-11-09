@@ -13,14 +13,46 @@ import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Text } from '../src/lib/components/text/Text.component';
 import { Select } from '../src/lib/components/selectv2/Selectv2.component';
+import { iconOptions } from './controls';
 
 export default {
   title: 'Components/Form',
   component: Form,
+  args: {
+    kind: 'page',
+    title: 'My Form',
+    subTitle: 'Some Subtitle',
+  },
+  argTypes: {
+    kind: {
+      options: ['page', 'tab'],
+      control: { type: 'radio' },
+    },
+    icon: {
+      options: iconOptions,
+      control: {
+        type: 'select',
+      },
+    },
+    title: {
+      control: 'text',
+      if: { arg: 'kind', eq: 'page' },
+    },
+    subTitle: {
+      control: 'text',
+      if: { arg: 'kind', eq: 'page' },
+    },
+  },
 };
 
 export const PageForm = {
-  render: ({ layout, requireMode }) => {
+  render: ({ kind, title, subTitle, icon, requireMode }) => {
+    const layout = {
+      kind,
+      title,
+      subTitle,
+      icon,
+    };
     return (
       <div
         style={{
@@ -30,13 +62,7 @@ export const PageForm = {
         }}
       >
         <Form
-          layout={
-            layout || {
-              kind: 'page',
-              title: 'My form',
-              subTitle: 'The sub title',
-            }
-          }
+          layout={layout}
           requireMode={requireMode}
           rightActions={
             <Stack gap={'r16'}>
