@@ -249,8 +249,6 @@ const Action = {
 export const WithinTable = {
   render: (args) => {
     const toto = useArgs();
-    console.log('toto', toto);
-    console.log('tqtq', args);
 
     const columns = [
       {
