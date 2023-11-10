@@ -170,7 +170,6 @@ export const CustomizeTitle = {
 
 const Demo = (myargs, args) => () => {
   const [{ isOpen }, updateArgs] = myargs;
-  console.log('demo args', args);
   return (
     <>
       <Button
