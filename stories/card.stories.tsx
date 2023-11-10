@@ -7,8 +7,13 @@ import {
   CardBodyContainer,
 } from '../src/lib/components/card/Card.component';
 import { CircularProgressBar } from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
-import { Text, Title, Wrapper } from './common';
+import { Text, Wrapper } from './common';
 import { brand } from '../src/lib/style/theme';
+import { action } from '@storybook/addon-actions';
+
+// RGB color in theme provoke an error, excludes from control options
+const colors = Object.keys(brand).filter((color) => !/RGB/.test(color));
+
 export default {
   title: 'Components/Card',
   component: Card,
@@ -20,10 +25,21 @@ export default {
     ),
   ],
   argTypes: {
+    status: {
+      options: ['healthy', 'warning', 'critical'],
+    },
     onClick: {
       description: 'Click handler',
     },
     children: { table: { disable: true } },
+    headerBackgroundColor: {
+      control: { type: 'select' },
+      options: colors,
+    },
+    bodyBackgroundColor: {
+      options: colors,
+      control: { type: 'select' },
+    },
   },
 };
 const Row = styled.div`
@@ -54,16 +70,31 @@ const defaultBody = (
 const defaultPropsCard = {
   width: '160px',
   height: '140px',
-  onClick: () => console.log('Clicked!'),
+  onClick: action('Card Clicked'),
 };
 const statuses = ['healthy', 'warning', 'critical'];
+
+export const Playground = {
+  args: {
+    ...defaultPropsCard,
+    children: [
+      <CardHeader>
+        <div>RINGXcore</div>
+      </CardHeader>,
+      <CardBodyContainer>
+        <CardBody>{defaultBody}</CardBody>
+      </CardBodyContainer>,
+    ],
+    status: undefined,
+  },
+};
 
 export const NormalCards = {
   render: (args) => {
     return (
       <Row>
         {statuses.map((status) => (
-          <Card key={status} status={status} {...args} />
+          <Card status={status} {...args} />
         ))}
       </Row>
     );

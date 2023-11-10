@@ -106,36 +106,17 @@ const id_area_chart = 'vis_area_chart';
 export default {
   title: 'Components/Chart/AreaChart',
   component: AreaChart,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };
-/*
-export const Default = {
-  args: {
-    id:id_area_chart,
-    data:area_charts,
-    xAxis:xAxis_area_chart,
-    yAxis:yAxis_area_chart,
-    color:color_area_chart,
-    areas,
-    width: 800,
-  }
-}
-*/
 
 export const Default = {
-  render: ({}) => {
-    return (
-      <Wrapper style={{ padding: '5rem' }}>
-        <Title>Vege-Lite area chart</Title>
-        <AreaChart
-          id={id_area_chart}
-          data={area_charts}
-          xAxis={xAxis_area_chart}
-          yAxis={yAxis_area_chart}
-          color={color_area_chart}
-          areas={areas}
-          width={800}
-        />
-      </Wrapper>
-    );
+  args: {
+    id: id_area_chart,
+    data: area_charts,
+    xAxis: xAxis_area_chart,
+    yAxis: yAxis_area_chart,
+    color: color_area_chart,
+    areas,
+    width: 800,
   },
 };

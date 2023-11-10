@@ -1,40 +1,46 @@
 import React, { useState } from 'react';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
-import { Title, Wrapper } from './common';
+import { Wrapper } from './common';
+import { useArgs } from '@storybook/preview-api';
 export default {
   title: 'Components/Toggle',
   component: Toggle,
+  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  args: {
+    name: 'toggle',
+  },
 };
-export const Default = {
-  render: ({}) => {
+export const Playground = {
+  render: (args) => {
+    const [{ toggle }, updateArgs] = useArgs();
+    return (
+      <Toggle
+        toggle={toggle}
+        onChange={() => updateArgs({ toggle: !toggle })}
+        {...args}
+      />
+    );
+  },
+  args: {
+    label: 'Playground',
+  },
+};
+export const LabelledToggle = {
+  render: (args) => {
     const [toggle, setToggle] = useState(false);
     return (
-      <Wrapper>
-        <Title>Basic toggle</Title>
-        <Toggle
-          onChange={() => setToggle(!toggle)}
-          toggle={toggle}
-          name="toggle"
-          data-cy="default_toggle"
-        />
-        <Title>Labelled toggle</Title>
-        <Toggle
-          label="Airplane Mode"
-          onChange={() => setToggle(!toggle)}
-          toggle={toggle}
-          name="toggle"
-          data-cy="default_toggle"
-        />
-        <Title>Disabled toggle</Title>
-        <Toggle
-          label="Disabled toggle"
-          onChange={() => setToggle(!toggle)}
-          toggle={toggle}
-          name="toggle"
-          data-cy="disabled_toggle"
-          disabled={true}
-        />
-      </Wrapper>
+      <Toggle toggle={toggle} onChange={() => setToggle(!toggle)} {...args} />
     );
+  },
+  args: {
+    label: 'Airplane mode',
+  },
+};
+export const DisabledToggle = {
+  ...Playground,
+  args: {
+    label: 'Disabled Toggle',
+    disabled: true,
+    toggle: false,
   },
 };

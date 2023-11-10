@@ -26,7 +26,15 @@ const actions = [
 export default {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  decorators: [
+    (story) => {
+      return (
+        <Wrapper style={{ padding: '0' }}>
+          <div style={{ width: '130px' }}>{story()}</div>
+        </Wrapper>
+      );
+    },
+  ],
   args: {
     actions,
   },
@@ -58,60 +66,3 @@ export const HoverableSidebar = {
     hoverable: true,
   },
 };
-
-/*
-export const Default = {
-  render: ({}) => {
-    const [expandedWithToggle, setExpandedWithToggle] = useState(false);
-    const [expandedHoverable, setExpandedHoverable] = useState(false);
-    return (
-      <div>
-        <h3>Sidebar docked</h3>
-        <div
-          style={{
-            width: '55px',
-          }}
-        >
-          <Sidebar actions={actions} />
-        </div>
-
-        <h3>Sidebar expanded</h3>
-        <div
-          style={{
-            width: '150px',
-          }}
-        >
-          <Sidebar expanded actions={actions} />
-        </div>
-
-        <h3>Sidebar with toggle</h3>
-        <div
-          style={{
-            width: '150px',
-          }}
-        >
-          <Sidebar
-            actions={actions}
-            expanded={expandedWithToggle}
-            onToggleClick={() => setExpandedWithToggle(!expandedWithToggle)}
-          />
-        </div>
-
-        <h3>Hoverable Sidebar</h3>
-        <div
-          style={{
-            width: '150px',
-          }}
-        >
-          <Sidebar
-            actions={actions}
-            expanded={expandedHoverable}
-            hoverable
-            onToggleClick={() => setExpandedHoverable(!expandedHoverable)}
-          />
-        </div>
-      </div>
-    );
-  },
-};
-*/

@@ -168,6 +168,44 @@ export const CustomizeTitle = {
 };
 */
 
+const Demo = (myargs, args) => () => {
+  const [{ isOpen }, updateArgs] = myargs;
+  return (
+    <>
+      <Button
+        onClick={() => updateArgs({ isOpen: true })}
+        label={'Show Modal'}
+      />
+      <Modal
+        close={() => updateArgs({ isOpen: false })}
+        isOpen={isOpen}
+        footer={
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Button
+              label="No"
+              size="default"
+              variant="outline"
+              onClick={() => updateArgs({ isOpen: false })}
+            />
+            <Button
+              variant="secondary"
+              label="Yes"
+              size="inline"
+              onClick={action('Yes clicked')}
+            />
+          </div>
+        }
+        {...args}
+      />
+    </>
+  );
+};
+
 const Action = {
   render: ({}) => {
     const [displayed, setDisplayed] = useState(false);
@@ -210,6 +248,8 @@ const Action = {
 
 export const WithinTable = {
   render: (args) => {
+    const myArgs = useArgs();
+
     const columns = [
       {
         Header: 'First Name',
@@ -221,7 +261,7 @@ export const WithinTable = {
       {
         Header: 'Actions',
         accessor: 'health',
-        Cell: Action.render,
+        Cell: Demo(myArgs, args),
         // disable the sorting on this column
         disableSortBy: true,
       },
@@ -270,5 +310,9 @@ export const WithinTable = {
         </div>
       </Wrapper>
     );
+  },
+  args: {
+    title: 'Hello',
+    children: <span>Do you want a cookie?</span>,
   },
 };

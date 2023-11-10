@@ -87,11 +87,11 @@ export default {
   component: VegaChart,
 };
 export const Default = {
-  render: ({}) => {
+  render: (args) => {
     return (
       <Wrapper>
         <Title>Vega-Lite wrapper - need to specify the entire spec</Title>
-        <VegaChart id={id} spec={spec} />
+        <VegaChart id={id} spec={spec} {...args} />
       </Wrapper>
     );
   },
