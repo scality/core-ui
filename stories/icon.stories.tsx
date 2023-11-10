@@ -9,6 +9,13 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 export default {
   title: 'Components/Icon',
   component: Icon,
+  argTypes: {
+    color: {
+      control: {
+        type: 'color',
+      },
+    },
+  },
 };
 
 /**
