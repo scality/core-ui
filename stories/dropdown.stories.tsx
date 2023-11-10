@@ -96,7 +96,7 @@ export const DropdownWithIcon = {
 export const DropdownWithTextAndIcon = {
   args: {
     text: 'Help',
-    icon: <i className="fas fa-star" />,
+    icon: 'Info-circle',
   },
 };
 
@@ -142,6 +142,6 @@ export const DifferentSizes = {
   },
   args: {
     text: 'Help',
-    icon: <i className="fas fa-star" />,
+    icon: 'Info-circle',
   },
 };
