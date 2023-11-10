@@ -24,6 +24,7 @@ export default {
     subTitle: 'Some Subtitle',
   },
   argTypes: {
+    layout: { control: false },
     kind: {
       options: ['page', 'tab'],
       control: { type: 'radio' },
@@ -33,6 +34,7 @@ export default {
       control: {
         type: 'select',
       },
+      if: { arg: 'kind', eq: 'page' },
     },
     title: {
       control: 'text',
