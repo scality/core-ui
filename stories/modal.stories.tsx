@@ -248,7 +248,7 @@ const Action = {
 
 export const WithinTable = {
   render: (args) => {
-    const toto = useArgs();
+    const myArgs = useArgs();
 
     const columns = [
       {
@@ -261,8 +261,7 @@ export const WithinTable = {
       {
         Header: 'Actions',
         accessor: 'health',
-        // Cell: <div>toto</div>,
-        Cell: Demo(toto, args),
+        Cell: Demo(myArgs, args),
         // disable the sorting on this column
         disableSortBy: true,
       },
