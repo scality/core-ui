@@ -9,7 +9,15 @@ import {
 import { Steppers } from './Steppers.component';
 import { Box } from '../box/Box';
 
-const StepperContext = createContext<StepperContextType | null>(null);
+declare global {
+  interface Window {
+    StepperContext: React.Context<StepperContextType | null>;
+  }
+}
+
+if (!window.StepperContext) {
+  window.StepperContext = createContext<StepperContextType | null>(null);
+}
 
 export const useStepper = <
   T extends any[],
@@ -31,7 +39,7 @@ export const useStepper = <
         prev: (props: ExctractProps<T[PrevIndex]>) => void;
       }
     : Record<string, unknown>) => {
-  const context = useContext(StepperContext);
+  const context = useContext(window.StepperContext);
 
   if (context === null) {
     throw new Error('Cannot use useStepper outside of Stepper');
@@ -63,7 +71,7 @@ export const Stepper = <T extends any[]>({
   const { Component } = steps[currentStep];
 
   return (
-    <StepperContext.Provider value={{ next, prev }}>
+    <window.StepperContext.Provider value={{ next, prev }}>
       <Box display={'flex'} gap={32} padding={32}>
         <Steppers
           activeStep={currentStep}
@@ -75,6 +83,6 @@ export const Stepper = <T extends any[]>({
         />
         <Component {...stepProps} />
       </Box>
-    </StepperContext.Provider>
+    </window.StepperContext.Provider>
   );
 };
