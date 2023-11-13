@@ -22,6 +22,15 @@ export default {
   args: {
     children: <Icon name={'Network'} color={'statusWarning'} />,
   },
+  argTypes: {
+    children: {
+      control: false,
+      description: 'The element to apply the status to',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+  },
 };
 
 export const Playground = {};
