@@ -164,6 +164,7 @@ function Toast({
           <Button
             icon={<Icon name="Close" size="lg" color="textSecondary" />}
             onClick={params?.onClose}
+            aria-label="Close"
           />
         </Box>
       </motion.div>
