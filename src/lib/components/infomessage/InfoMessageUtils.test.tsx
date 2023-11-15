@@ -12,7 +12,7 @@ describe('useComputeBackgroundColor', () => {
     const Component = () => {
       const { containerRef, backgroundColor } = useComputeBackgroundColor();
       SUT(backgroundColor);
-      return <div ref={containerRef}>{backgroundColor}</div>;
+      return <div ref={containerRef}></div>;
     };
     render(
       <CoreUiThemeProvider theme={defaultTheme.darkRebrand}>
@@ -33,7 +33,7 @@ describe('useComputeBackgroundColor', () => {
         <div
           style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel2 }}
         >
-          <div ref={containerRef}>{backgroundColor}</div>
+          <div ref={containerRef}></div>
         </div>
       );
     };
@@ -56,7 +56,7 @@ describe('useComputeBackgroundColor', () => {
           style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel2 }}
         >
           <div>
-            <div ref={containerRef}>{backgroundColor}</div>
+            <div ref={containerRef}></div>
           </div>
         </div>
       );
@@ -80,7 +80,7 @@ describe('useComputeBackgroundColor', () => {
           style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel3 }}
         >
           <div>
-            <div ref={containerRef}>{backgroundColor}</div>
+            <div ref={containerRef}></div>
           </div>
         </div>
       );
