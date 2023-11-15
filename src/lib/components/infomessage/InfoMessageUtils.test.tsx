@@ -4,10 +4,13 @@ import { useComputeBackgroundColor } from './InfoMessageUtils';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
+import { a } from '@storybook/preview-api/dist/hooks-655fa363';
 
 describe('useComputeBackgroundColor', () => {
   const SUT = jest.fn();
-
+  afterEach(() => {
+    SUT.mockClear();
+  });
   it('should return backgroundlevel2 by default', () => {
     //S
     const Component = () => {
