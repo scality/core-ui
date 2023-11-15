@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useLayoutEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { spacing, Wrap } from '../../spacing';
@@ -70,7 +70,7 @@ const Modal = ({
 }: Props) => {
   const modalContainer = useRef(document.createElement('div'));
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body && document.body.prepend(modalContainer.current);
     return () => {
       document.body && document.body.removeChild(modalContainer.current);
