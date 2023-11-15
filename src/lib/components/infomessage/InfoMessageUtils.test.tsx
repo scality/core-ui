@@ -6,9 +6,10 @@ import '@testing-library/jest-dom';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 
 describe('useComputeBackgroundColor', () => {
+  const SUT = jest.fn();
+
   it('should return backgroundlevel2 by default', () => {
     //S
-    const SUT = jest.fn();
     const Component = () => {
       const { containerRef, backgroundColor } = useComputeBackgroundColor();
       SUT(backgroundColor);
@@ -25,7 +26,6 @@ describe('useComputeBackgroundColor', () => {
 
   it('should return backgroundlevel3 if parent element backgroundColor is level 2', () => {
     //S
-    const SUT = jest.fn();
     const Component = () => {
       const { containerRef, backgroundColor } = useComputeBackgroundColor();
       SUT(backgroundColor);
@@ -47,7 +47,6 @@ describe('useComputeBackgroundColor', () => {
   });
   it('should return backgroundlevel3 if parent of parent element backgroundColor is level 2', () => {
     //S
-    const SUT = jest.fn();
     const Component = () => {
       const { containerRef, backgroundColor } = useComputeBackgroundColor();
       SUT(backgroundColor);
@@ -71,7 +70,6 @@ describe('useComputeBackgroundColor', () => {
   });
   it('should return backgroundlevel2 if parent of parent element backgroundColor is level 3', () => {
     //S
-    const SUT = jest.fn();
     const Component = () => {
       const { containerRef, backgroundColor } = useComputeBackgroundColor();
       SUT(backgroundColor);
