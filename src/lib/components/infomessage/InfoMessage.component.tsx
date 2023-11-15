@@ -1,12 +1,8 @@
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { Link, Text } from '../text/Text.component';
 import { Icon } from '../icon/Icon.component';
 import { defaultTheme } from '../../style/theme';
-import { useEffect, useRef, useState } from 'react';
-import {
-  getBackgroundColor,
-  useComputeBackgroundColor,
-} from './InfoMessageUtils';
+import { useComputeBackgroundColor } from './InfoMessageUtils';
 
 type Props = {
   title: string;
@@ -30,9 +26,6 @@ const TitleContainer = styled.div`
 `;
 
 function InfoMessage({ title, content, link }: Props) {
-  // function, get parentElement background color if rgba(0,0,0,0) get to parentElement until
-  // found a rgb(X,X,X) then check if backgroundColorLevel2 -> yes bgCLevel3 else bgCLevel2
-  //window.getComptutedStyle(element.parentElement)['background-color']
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
 
   return (
