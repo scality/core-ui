@@ -3,7 +3,6 @@ import {
   Option,
 } from '../src/lib/components/selectv2/Selectv2.component';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
@@ -13,12 +12,6 @@ export default {
     (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
   ],
 };
-const SelectWrapper = styled.div`
-  max-width: 300px;
-  min-height: 100vh;
-  flex-direction: column;
-  display: flex;
-`;
 
 const generateOptions = (n = 10) =>
   Array.from(new Array(n), (_, index) => ({

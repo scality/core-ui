@@ -16,7 +16,7 @@ const PreviewWrapper = styled(Wrapper)`
   min-height: 0;
 `;
 export default {
-  title: 'Components/StatusWrapper',
+  title: 'Components/Data Display/StatusWrapper',
   component: StatusWrapper,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

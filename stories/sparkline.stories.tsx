@@ -32,7 +32,7 @@ const lineConfig = {
   interpolate: 'monotone',
 };
 export default {
-  title: 'Components/Chart/SparkLine',
+  title: 'Components/Data Display/Charts/SparkLine',
   component: SparkLine,
   args: {
     xAxis,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart } from '../src/lib/components/areachart/AreaChart.component';
 import { area_charts } from './data/areachart';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 const xAxis_area_chart = {
   field: 'time',
   type: 'temporal',
@@ -104,7 +104,7 @@ const area2 = {
 const areas = [area, area2];
 const id_area_chart = 'vis_area_chart';
 export default {
-  title: 'Components/Chart/AreaChart',
+  title: 'Components/Data Display/Charts/Area Chart',
   component: AreaChart,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };

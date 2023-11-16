@@ -17,7 +17,7 @@ const TextWrapper = styled(Wrapper)`
   min-height: 0;
 `;
 export default {
-  title: 'Components/Text',
+  title: 'Components/Styling/Text',
   component: StatusText,
   argTypes: {
     status: {

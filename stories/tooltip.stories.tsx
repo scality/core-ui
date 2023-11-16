@@ -5,7 +5,7 @@ import { Wrapper, Title, SubTitle } from './common';
 import { placementOptions } from './controls';
 
 export default {
-  title: 'Components/Notification/Tooltip',
+  title: 'Components/Feedback/Tooltip',
   component: Tooltip,
   argTypes: {
     placement: {

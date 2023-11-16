@@ -64,7 +64,7 @@ const brNotifications: Array<Props> = [
   },
 ];
 export default {
-  title: 'Components/Notification/Notifications',
+  title: 'Components/Feedback/Notifications',
   component: Notifications,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };

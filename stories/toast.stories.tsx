@@ -9,7 +9,7 @@ import {
 } from '../src/lib/components/toast/Toast.component';
 
 export default {
-  title: 'Components/Toast',
+  title: 'Components/Feedback/Toast',
   component: Toast,
   tags: ['autodocs'],
   argTypes: {

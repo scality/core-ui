@@ -15,7 +15,7 @@ import { action } from '@storybook/addon-actions';
 const colors = Object.keys(brand).filter((color) => !/RGB/.test(color));
 
 export default {
-  title: 'Components/Card',
+  title: 'Components/Data Display/Card',
   component: Card,
   decorators: [
     (story) => (

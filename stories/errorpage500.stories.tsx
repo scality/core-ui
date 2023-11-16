@@ -3,7 +3,7 @@ import { ErrorPage500 } from '../src/lib/components/error-pages/ErrorPage500.com
 import { Wrapper } from './common';
 import { localeArgtype } from './controls';
 export default {
-  title: 'Components/Navigation/ErrorPages/500',
+  title: 'Components/Navigation/Error Pages/500',
   component: ErrorPage500,
   decorators: [
     (story) => <Wrapper style={{ height: '100vh' }}>{story()}</Wrapper>,

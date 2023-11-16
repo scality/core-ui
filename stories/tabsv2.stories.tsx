@@ -11,7 +11,7 @@ const Content = styled.div`
   color: ${(props) => props.theme.textPrimary};
 `;
 export default {
-  title: 'Components/v2/Tabs',
+  title: 'Components/Navigation/v2/Tabs',
   component: Tabs,
   decorators: [
     (story) => (

@@ -252,7 +252,7 @@ const tooltipConfigInOut = {
   },
 };
 export default {
-  title: 'Components/Chart/LineChart',
+  title: 'Components/Data Display/Charts/LineChart',
   component: LineChart,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

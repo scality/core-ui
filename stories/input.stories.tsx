@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Input } from '../src/lib/components/input/Input.component';
+import React from 'react';
 import { Input as InputV2 } from '../src/lib/components/inputv2/inputv2';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 
 const sizes = ['1/3', '1/2', '2/3', '1'];
 
@@ -13,7 +12,7 @@ const InputWrapper = styled.div`
 `;
 
 export default {
-  title: 'Components/Input/Input',
+  title: 'Components/Inputs/Input',
   component: InputV2,
   decorators: [
     (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,

@@ -28,7 +28,7 @@ const items = [
 ];
 
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/Navigation/Dropdown',
   component: Dropdown,
   decorators: [
     (story) => (

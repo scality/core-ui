@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Checkbox } from '../src/lib/components/checkbox/Checkbox.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Inputs/Checkbox',
   component: Checkbox,
   decorators: [
     (story) => (

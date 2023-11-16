@@ -1,9 +1,7 @@
-import React from 'react';
-import { Wrapper, Title } from './common';
 import { action } from '@storybook/addon-actions';
 import { TextArea } from '../src/lib';
 export default {
-  title: 'Components/Input/TextArea',
+  title: 'Components/Inputs/TextArea',
   component: TextArea,
   args: {
     onChange: action('onChange'),

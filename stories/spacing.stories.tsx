@@ -11,7 +11,7 @@ import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { brand } from '../src/lib/style/theme';
 
 export default {
-  title: 'Components/Spacing Utils',
+  title: 'Components/Styling/Spacing Utils',
   component: Stack,
 };
 
