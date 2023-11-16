@@ -1,7 +1,8 @@
-import { Meta, Story, Canvas } from '@storybook/blocks';
+import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
 import { Button } from '../../src/lib/components/button/Button.component';
+import * as ButtonStories from '../buttonv2.stories';
 
-<Meta title="Guideline/Button" />
+<Meta title="Button" of={ButtonStories} />
 
 # Button
 
@@ -10,10 +11,6 @@ import { Button } from '../../src/lib/components/button/Button.component';
 - Only 1 size is used - Height: 32px
 - Border-radius: 3px
 - Minimum width: 80px
-
-{/* <Story id="components-button--size" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
-
-{/* <Story id="components-button--size" /> */}
 
 |         | px  |
 | ------- | --- |
@@ -32,78 +29,7 @@ Button’s label measurement:
 - Horizontal padding of 16px
 - Space between icon & label: 8px
 
-## Type
-
-### Primary
-
-Used for the main action. It appears once within a group of buttons. For example, “Continue” in a form.
-
-> Color: #055DFF - secondary
-
-### Secondary/base
-
-{/* <Button variant="base" text="base"></Button> */}
-
-Use for the secondary action within a group of buttons.
-
-### Tertiary
-
-<div>
-  <Button outlined text="base" />
-</div>
-
-Dismissive action, such as the cancel button.
-
-```css
-color: #313131; /*border*/
-```
-
-### Links
-
-_to add_
-
-## States
-
-_to produce_
-
-### Disabled button
-
-Disabled state only if an action on the current screen can enable it (action possibility).
-
-## Placement
-
-- Primary buttons placed on the right of a group.
-- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
-
-Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
-
-### Button spacing
-
-- Horizontal spacing: 16px
-- Vertical spacing: 12px
-- Space between 2 buttons: 24px - when there is no space constraint
-
-## Icon & label on buttons
-
-### Which icon
-
-Every button gets a label.\
-Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
-Universally understood icons work well (ie. print, close, play/pause, save).\
-Use standard icons when their use matches their meaning, or at least the user's intent.\
-Avoid creating new icons for every action, especially infrequently used ones.\
-Avoid using an icon alone in a button, with no label.
-
-### Placement
-
-If icon + label, then the icon is placed on the left side.\
-Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
-
-### Size
-
-The icon should be (approximately) the same height as the text, or a lot bigger.
-
-### Explicit button label
+## Explicit button label
 
 Button labels should be as short and clear as possible and should describe the action the button performs.\
 Use one or two words if possible. Remove most prepositions and articles (a, an, the).
@@ -129,3 +55,83 @@ Don't:
 - Use icons only.
 - Use punctuation.
 - Write “Click here.”
+
+## Type
+
+### Primary
+
+Used for the main action. It appears once within a group of buttons. For example, “Continue” in a form.
+
+<Story of={ButtonStories.Primary} />
+
+### Secondary/base
+
+Use for the secondary action within a group of buttons.
+
+<Story of={ButtonStories.Secondary} />
+
+### Tertiary
+
+Dismissive action, such as the cancel button.
+
+<Story of={ButtonStories.Tertiary} />
+<Canvas of={ButtonStories.Tertiary} withToolbar />
+
+### Links
+
+_to add_
+
+## States
+
+_to produce_
+
+### Disabled button
+
+Disabled state only if an action on the current screen can enable it (action possibility).
+
+<Story of={ButtonStories.ButtonDisabled} />
+
+## Placement
+
+- Primary buttons placed on the right of a group.
+- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
+
+Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
+
+<Story of={ButtonStories.SimpleForm} />
+
+### Button spacing
+
+- Horizontal spacing: 16px
+- Vertical spacing: 12px
+- Space between 2 buttons: 24px - when there is no space constraint
+
+## Icon on buttons
+
+### Which icon
+
+Every button gets a label.\
+Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
+Universally understood icons work well (ie. print, close, play/pause, save).\
+Use standard icons when their use matches their meaning, or at least the user's intent.\
+Avoid creating new icons for every action, especially infrequently used ones.\
+Avoid using an icon alone in a button, with no label.
+
+### Placement
+
+If icon + label, then the icon is placed on the left side.\
+Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
+
+### Size
+
+The icon should be (approximately) the same height as the text, or a lot bigger.
+
+<Story of={ButtonStories.ButtonsWithIcon} />
+
+<Story of={ButtonStories.IconButtonWithTooltip} />
+
+### Playground
+
+<Canvas of={ButtonStories.Playground} />
+
+<Controls of={ButtonStories.Playground} />

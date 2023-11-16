@@ -6,14 +6,19 @@ import {
 } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper } from './common';
 import { CopyButton } from '../src/lib/next';
-import { Icon } from '../src/lib';
+
 import { tooltipArgTypes, iconArgType } from './controls';
+import { Form, Icon, Input, Stack } from '../src/lib';
 
 export default {
   title: 'Components/v2/Button',
   component: Button,
   decorators: [
-    (story) => <Wrapper className="storybook-button">{story()}</Wrapper>,
+    (story) => (
+      <Wrapper className="storybook-button" style={{ height: 'auto' }}>
+        {story()}
+      </Wrapper>
+    ),
   ],
   args: {
     onClick: action('Button clicked'),
@@ -83,10 +88,49 @@ export const DefaultButtons = {
   },
 };
 
+export const Primary = {
+  args: {
+    variant: 'primary',
+    label: 'Primary',
+  },
+};
+
+export const Secondary = {
+  args: {
+    variant: 'secondary',
+    label: 'Secondary',
+  },
+};
+
+export const Tertiary = {
+  args: {
+    variant: 'outline',
+    label: 'Tertiary',
+  },
+};
+
+export const SimpleForm = {
+  render: ({ ...args }) => {
+    return (
+      <Form
+        layout={{ kind: 'page', title: 'Simple Form' }}
+        rightActions={
+          <Stack gap={'r16'}>
+            <Button variant="outline" label="Cancel" />
+            <Button variant="primary" label="Save" />
+          </Stack>
+        }
+      >
+        <Input name="name" label="Name" value="" onChange={() => {}} />
+      </Form>
+    );
+  },
+};
+
 export const ButtonsWithIcon = {
   ...DefaultButtons,
   args: {
-    icon: <i className="fas fa-arrow-right"></i>,
+    icon: <Icon name="Sync"></Icon>,
   },
 };
 
