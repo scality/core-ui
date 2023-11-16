@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
-import { StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { Wrapper } from './common';
+import { useArgs } from '@storybook/preview-api';
+
+type Story = StoryObj<typeof Sidebar>;
 
 const actions = [
   {
@@ -23,7 +26,7 @@ const actions = [
   },
 ];
 
-export default {
+const meta: Meta<typeof Sidebar> = {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
   decorators: [
@@ -39,29 +42,30 @@ export default {
     actions,
   },
 };
+export default meta;
 
-export const DefaultSidebar: StoryObj = {};
+export const DefaultSidebar: Story = {};
 
-export const ExpandedSidebar = {
+export const ExpandedSidebar: Story = {
   args: {
     expanded: true,
   },
 };
 
-export const SidebarWithToggle = {
+export const SidebarWithToggle: Story = {
   render: (args) => {
-    const [expandedWithToggle, setExpandedWithToggle] = useState(false);
+    const [{ expanded }, updateArgs] = useArgs();
     return (
       <Sidebar
-        expanded={expandedWithToggle}
-        onToggleClick={() => setExpandedWithToggle(!expandedWithToggle)}
+        expanded={expanded}
+        onToggleClick={() => updateArgs({ expanded: !expanded })}
         {...args}
       />
     );
   },
 };
 
-export const HoverableSidebar = {
+export const HoverableSidebar: Story = {
   args: {
     hoverable: true,
   },
