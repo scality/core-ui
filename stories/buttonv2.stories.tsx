@@ -7,8 +7,7 @@ import {
 import { Wrapper } from './common';
 import { CopyButton } from '../src/lib/next';
 import { Icon } from '../src/lib';
-import { iconOptions } from './controls';
-import { tooltipArgTypes } from './controls';
+import { tooltipArgTypes, iconArgType } from './controls';
 
 export default {
   title: 'Components/v2/Button',
@@ -21,7 +20,7 @@ export default {
   },
   argTypes: {
     ...tooltipArgTypes,
-    icon: { options: iconOptions },
+    icon: iconArgType,
   },
   render: ({
     // defines new args to have control over tooltip properties

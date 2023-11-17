@@ -2,6 +2,11 @@ import { iconTable } from "../src/lib/components/icon/Icon.component";
 
 export const iconOptions = Object.keys(iconTable);
 
+export const iconArgType = {
+  control: { type: 'select' },
+  options: iconOptions,
+  description: 'Icon to display in the button',
+};
 
 export const variantsOptions = [
   'buttonPrimary',
