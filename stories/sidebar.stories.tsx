@@ -6,6 +6,7 @@ import { Wrapper } from './common';
 import { useArgs } from '@storybook/preview-api';
 
 type Story = StoryObj<typeof Sidebar>;
+import { LateralNavbarLayout, Loader } from '../src/lib';
 
 const actions = [
   {
@@ -70,3 +71,13 @@ export const HoverableSidebar: Story = {
     hoverable: true,
   },
 };
+
+// export const SidebarInLayout = {
+//   render: ({ children, ...args }) => {
+//     return <LateralNavbarLayout>{children}</LateralNavbarLayout>;
+//   },
+//   args: {
+//     children: <Loader size="massive" />,
+//     actions,
+//   },
+// };

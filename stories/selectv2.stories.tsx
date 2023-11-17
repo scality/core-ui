@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
-  title: 'Components/v2/Select',
+  title: 'Components/Inputs/v2/Select',
   component: Select,
   decorators: [
     (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
