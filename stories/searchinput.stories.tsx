@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { SearchInput } from '../src/lib/components/searchinput/SearchInput.component';
 import { Wrapper, Title } from './common';
 export default {
-  title: 'Components/Inputs/SearchInput',
+  title: 'Components/Deprecated/SearchInput',
   component: SearchInput,
 };
 export const Default = {

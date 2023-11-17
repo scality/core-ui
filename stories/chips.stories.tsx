@@ -6,7 +6,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';
 import { iconOptions } from './controls';
 
 export default {
-  title: 'Components/Chips',
+  title: 'Components/Deprecated/Chips',
   component: Chips,
   decorators: [
     (story) => (

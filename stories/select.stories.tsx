@@ -15,7 +15,7 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 );
 
 export default {
-  title: 'Components/Inputs/Selector/Select',
+  title: 'Components/Deprecated/Selector/Select',
   component: Select,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   argTypes: {

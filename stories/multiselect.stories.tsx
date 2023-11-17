@@ -62,7 +62,7 @@ const search = {
   selectedOption: null,
 };
 export default {
-  title: 'Components/Inputs/Selector/MultiSelect',
+  title: 'Components/Deprecated/Selector/MultiSelect',
   component: MultiSelect,
 };
 export const Default = {
