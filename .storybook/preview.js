@@ -37,7 +37,6 @@ export const parameters = {
   controls:{
     //All props with color in name will automatically have a control 'color'
     //with colors presets to theme colors, possible to have the color name from theme in control
-    // presetColors: Object.values(brand),
     presetColors: Object.entries(brand).map(color => {return {color: color[1],title:color[0] }}),
     matchers:{
       color: /color/i
