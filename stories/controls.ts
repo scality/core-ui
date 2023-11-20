@@ -2,6 +2,12 @@ import { iconTable } from "../src/lib/components/icon/Icon.component";
 
 export const iconOptions = Object.keys(iconTable);
 
+export const localeArgtype = {
+  control: { type: 'radio' },
+  options: ['en', 'fr'],
+  description: 'Set language for the component',
+};
+
 export const iconArgType = {
   control: { type: 'select' },
   options: iconOptions,

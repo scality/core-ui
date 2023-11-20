@@ -1,6 +1,7 @@
 import React from 'react';
 import { ErrorPage500 } from '../src/lib/components/error-pages/ErrorPage500.component';
 import { Wrapper } from './common';
+import { localeArgtype } from './controls';
 export default {
   title: 'Components/Navigation/ErrorPages/500',
   component: ErrorPage500,
@@ -11,10 +12,7 @@ export default {
     onReturnHomeClick: () => {},
   },
   argTypes: {
-    locale: {
-      options: ['en', 'fr'],
-      control: { type: 'radio' },
-    },
+    locale: localeArgtype,
     errorMessage: {
       control: {
         type: 'object',

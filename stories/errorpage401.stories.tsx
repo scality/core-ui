@@ -1,6 +1,7 @@
 import React from 'react';
 import { ErrorPage401 } from '../src/lib/components/error-pages/ErrorPage401.component';
 import { Wrapper } from './common';
+import { localeArgtype } from './controls';
 export default {
   title: 'Components/Navigation/ErrorPages/401',
   component: ErrorPage401,
@@ -10,6 +11,9 @@ export default {
   args: {
     supportLink: 'https://www.scality.com/support/',
     onReturnHomeClick: () => {},
+  },
+  argTypes: {
+    locale: localeArgtype,
   },
 };
 export const Default = {};

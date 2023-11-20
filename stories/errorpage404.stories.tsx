@@ -1,6 +1,7 @@
 import React from 'react';
 import { ErrorPage404 } from '../src/lib/components/error-pages/ErrorPage404.component';
 import { Wrapper } from './common';
+import { localeArgtype } from './controls';
 export default {
   title: 'Components/Navigation/ErrorPages/404',
   component: ErrorPage404,
@@ -9,6 +10,9 @@ export default {
   ],
   args: {
     onReturnHomeClick: () => {},
+  },
+  argTypes: {
+    locale: localeArgtype,
   },
 };
 export const Default = {};
