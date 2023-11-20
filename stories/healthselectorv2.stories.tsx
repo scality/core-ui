@@ -8,7 +8,7 @@ import {
 import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
-  title: 'Components/v2/Healthselector',
+  title: 'Components/Healthselector',
   component: Healthselector,
   decorators: [
     (story) => (

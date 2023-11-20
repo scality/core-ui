@@ -11,7 +11,7 @@ import { tooltipArgTypes, iconArgType } from './controls';
 import { Form, Icon, Input, Stack } from '../src/lib';
 
 export default {
-  title: 'Components/v2/Button',
+  title: 'Components/Button',
   component: Button,
   decorators: [
     (story) => (
