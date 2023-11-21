@@ -153,7 +153,7 @@ export const IconButtonWithTooltip = {
         <Button {...args} />
         <Button
           variant="secondary"
-          icon={<i className="fas fa-link" />}
+          icon={<Icon name="Save"></Icon>}
           tooltip={{
             overlayStyle: {
               width: '80px',
