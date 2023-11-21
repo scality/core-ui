@@ -1,19 +1,19 @@
+import React from 'react';
+import { Banner } from '../src/lib/components/banner/Banner.component';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import {
   Form,
   FormGroup,
   FormSection,
 } from '../src/lib/components/form/Form.component';
-import React from 'react';
-import { brand } from '../src/lib/style/theme';
-import { Stack } from '../src/lib/spacing';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
-import { Toggle } from '../src/lib/components/toggle/Toggle.component';
-import { Banner } from '../src/lib/components/banner/Banner.component';
-import { Text } from '../src/lib/components/text/Text.component';
 import { Select } from '../src/lib/components/selectv2/Selectv2.component';
-import { iconOptions } from './controls';
+import { Text } from '../src/lib/components/text/Text.component';
+import { Toggle } from '../src/lib/components/toggle/Toggle.component';
+import { Stack } from '../src/lib/spacing';
+import { brand } from '../src/lib/style/theme';
+import { iconArgType } from './controls';
 
 export default {
   title: 'Templates/Form',
@@ -24,17 +24,24 @@ export default {
     subTitle: 'Some Subtitle',
   },
   argTypes: {
-    layout: { control: false },
+    layout: {
+      control: false,
+      description:
+        'Control the layout of the form, it is an object containing "kind", "title", "subTitle" and "icon", if the kind is "page" the title and subTitle are required',
+      table: {
+        type: {
+          summary:
+            'Object{kind: "page" | "tab", title: string, subTitle: string, icon: Element}',
+        },
+      },
+    },
     kind: {
       options: ['page', 'tab'],
       control: { type: 'radio' },
     },
     icon: {
-      options: iconOptions,
-      control: {
-        type: 'select',
-      },
       if: { arg: 'kind', eq: 'page' },
+      ...iconArgType,
     },
     title: {
       control: 'text',
