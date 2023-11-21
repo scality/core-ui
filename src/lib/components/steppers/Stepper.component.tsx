@@ -72,7 +72,7 @@ export const Stepper = <T extends any[]>({
 
   return (
     <window.StepperContext.Provider value={{ next, prev }}>
-      <Box display={'flex'} gap={32} padding={32}>
+      <Box display={'flex'} gap={32} padding={16} flex={1}>
         <Steppers
           activeStep={currentStep}
           steps={steps.map((step) => {
