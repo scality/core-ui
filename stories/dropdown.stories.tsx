@@ -1,10 +1,10 @@
-import React from 'react';
-import { Dropdown } from '../src/lib/components/dropdown/Dropdown.component';
 import { action } from '@storybook/addon-actions';
-import { Wrapper } from './common';
+import React from 'react';
 import { Icon } from '../src/lib';
+import { Dropdown } from '../src/lib/components/dropdown/Dropdown.component';
+import { Wrapper } from './common';
 import {
-  iconOptions,
+  iconArgType,
   sizesOptions as sizes,
   variantsOptions as variants,
 } from './controls';
@@ -49,9 +49,7 @@ export default {
     items,
   },
   argTypes: {
-    icon: {
-      options: iconOptions,
-    },
+    icon: iconArgType,
     size: {
       options: sizes,
       control: {
