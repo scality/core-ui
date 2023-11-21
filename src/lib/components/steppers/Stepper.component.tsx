@@ -1,44 +1,22 @@
+/// <reference path="./Stepper.component.d.ts" />
 import { createContext, useContext, useState } from 'react';
-import {
-  Add,
-  ExctractProps,
-  StepperContextType,
-  Steps,
-  Subtract,
-} from './types';
 import { Steppers } from './Steppers.component';
 import { Box } from '../box/Box';
-
+export interface StepperContextType {
+  next: (props: Record<string, unknown>) => void;
+  prev: (props: Record<string, unknown>) => void;
+}
 declare global {
   interface Window {
     StepperContext: React.Context<StepperContextType | null>;
   }
 }
-
 if (!window.StepperContext) {
   window.StepperContext = createContext<StepperContextType | null>(null);
 }
 
-export const useStepper = <
-  T extends any[],
-  StepIndex extends number,
-  NextIndex = Add<StepIndex, 1>,
-  PrevIndex = Subtract<StepIndex, 1>,
->(
-  index: StepIndex,
-  steps: readonly [...Steps<T>],
-): (NextIndex extends number
-  ? {
-      next: (props: ExctractProps<T[NextIndex]>) => void;
-    }
-  : Record<string, unknown>) &
-  (PrevIndex extends -1
-    ? Record<string, unknown>
-    : PrevIndex extends number
-    ? {
-        prev: (props: ExctractProps<T[PrevIndex]>) => void;
-      }
-    : Record<string, unknown>) => {
+//@ts-ignore
+export const useStepper: UseStepper = (index, steps) => {
   const context = useContext(window.StepperContext);
 
   if (context === null) {
@@ -46,17 +24,12 @@ export const useStepper = <
   }
   const { next, prev } = context;
 
-  //@ts-expect-error generic type
   return { next, prev };
 };
 
-export const Stepper = <T extends any[]>({
-  steps,
-}: {
-  steps: readonly [...Steps<T>];
-}) => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-  const [stepProps, setStepProps] = useState<Record<string, unknown>>({});
+export const Stepper: Stepper = ({ steps }) => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [stepProps, setStepProps] = useState({});
 
   const next = (props: Record<string, unknown>) => {
     setCurrentStep(currentStep + 1);
@@ -69,9 +42,10 @@ export const Stepper = <T extends any[]>({
   };
 
   const { Component } = steps[currentStep];
+  const StepperContext = window.StepperContext;
 
   return (
-    <window.StepperContext.Provider value={{ next, prev }}>
+    <StepperContext.Provider value={{ next, prev }}>
       <Box display={'flex'} gap={32} padding={32}>
         <Steppers
           activeStep={currentStep}
@@ -83,6 +57,6 @@ export const Stepper = <T extends any[]>({
         />
         <Component {...stepProps} />
       </Box>
-    </window.StepperContext.Provider>
+    </StepperContext.Provider>
   );
 };
