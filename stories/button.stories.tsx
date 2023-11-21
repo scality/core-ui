@@ -1,17 +1,12 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  Button,
-  Props,
-} from '../src/lib/components/buttonv2/Buttonv2.component';
-import { Wrapper } from './common';
-import { CopyButton } from '../src/lib/next';
-
-import { tooltipArgTypes, iconArgType } from './controls';
+import React from 'react';
 import { Form, Icon, Input, Stack } from '../src/lib';
 import { StoryObj } from '@storybook/react';
 import { Position } from '../src/lib/components/tooltip/Tooltip.component';
 import { CSSProperties } from 'styled-components';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { CopyButton } from '../src/lib/next';
+import { Wrapper } from './common';
 
 export default {
   title: 'Components/Button',
@@ -26,29 +21,42 @@ export default {
   args: {
     onClick: action('Button clicked'),
   },
-  argTypes: {
-    ...tooltipArgTypes,
-    icon: iconArgType,
+  render: ({ icon, ...args }) => {
+    return <Button {...args} icon={icon && <Icon name={icon} />} />;
   },
-  render: ({
-    // defines new args to have control over tooltip properties
-    tooltipOverlay,
-    tooltipPlacement,
-    tooltipOverlayStyle,
-    icon,
-    ...args
-  }) => {
-    const props: Props = { ...args };
-    // define tootltip with the new args
-    props.tooltip = {
-      overlay: tooltipOverlay,
-      placement: tooltipPlacement,
-      overlayStyle: tooltipOverlayStyle,
-    };
-
-    return (
-      <Button icon={icon && <Icon name={icon}></Icon>} {...props}></Button>
-    );
+  argTypes: {
+    onClick: {
+      description: 'Function called on click',
+    },
+    variant: {
+      description: 'Button variant',
+    },
+    icon: {
+      description: 'Icon to display on the button',
+      options: [
+        'Save',
+        'Exclamation-triangle',
+        'Arrow-right',
+        'Link',
+        'Copy',
+        'Sync',
+      ],
+      type: 'select',
+    },
+  },
+  parameters: {
+    docs: {
+      canvas: {
+        additionalActions: [
+          {
+            title: 'Open in GitHub',
+            onClick: () => {
+              window.open('https://github.com/scality/core-ui', '_blank');
+            },
+          },
+        ],
+      },
+    },
   },
 };
 
@@ -59,33 +67,13 @@ export const Playground = {
 };
 
 export const DefaultButtons = {
-  render: ({ icon, ...args }) => {
+  render: ({ ...args }) => {
     return (
       <>
-        <Button
-          variant="primary"
-          label="primary"
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-        />
-        <Button
-          variant="secondary"
-          label="secondary"
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-        />
-        <Button
-          variant="danger"
-          label="danger"
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-        />
-        <Button
-          variant="outline"
-          label="outline"
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-        />
+        <Button variant="primary" label="primary" {...args} />
+        <Button variant="secondary" label="secondary" {...args} />
+        <Button variant="danger" label="danger" {...args} />
+        <Button variant="outline" label="outline" {...args} />
       </>
     );
   },
@@ -105,10 +93,17 @@ export const Secondary = {
   },
 };
 
-export const Tertiary = {
+export const Outline = {
   args: {
     variant: 'outline',
-    label: 'Tertiary',
+    label: 'Outline',
+  },
+};
+
+export const Danger = {
+  args: {
+    variant: 'danger',
+    label: 'Danger',
   },
 };
 
@@ -152,10 +147,10 @@ export const ButtonDisabled = {
 };
 
 export const IconButtonWithTooltip = {
-  render: ({ icon, ...args }) => {
+  render: ({ ...args }) => {
     return (
       <>
-        <Button icon={icon && <Icon name={icon}></Icon>} {...args} />
+        <Button {...args} />
         <Button
           variant="secondary"
           icon={<i className="fas fa-link" />}
@@ -167,22 +162,14 @@ export const IconButtonWithTooltip = {
             placement: 'top',
           }}
         />
-        <Button
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-          variant="danger"
-        />
-        <Button
-          icon={icon && <Icon name={icon}></Icon>}
-          {...args}
-          variant="outline"
-        />
+        <Button {...args} variant="danger" />
+        <Button {...args} variant="outline" />
       </>
     );
   },
   args: {
     variant: 'primary',
-    icon: 'Delete',
+    icon: <i className="fas fa-trash" />,
     tooltip: {
       overlayStyle: {
         width: '80px',
@@ -231,6 +218,7 @@ export const GhostButtons = {
     );
   },
 };
+<<<<<<< HEAD:stories/buttonv2.stories.tsx
 export const CopyButtons: StoryObj<
   Props & {
     label?: string;
@@ -242,35 +230,13 @@ export const CopyButtons: StoryObj<
   }
 > = {
   render: ({ ...args }) => <CopyButton {...args}></CopyButton>,
+=======
+
+export const CopyButtons = {
+  render: (args) => <CopyButton {...args}></CopyButton>,
+>>>>>>> 0ccedd8 (change name of button story, change name of button doc to match story and overwrite autodocs):stories/button.stories.tsx
   args: {
     textToCopy: 'test',
-  },
-  argTypes: {
-    icon: {
-      table: {
-        disable: true,
-      },
-    },
-    tooltipPlacement: {
-      table: {
-        disable: true,
-      },
-    },
-    tooltip: {
-      table: {
-        disable: true,
-      },
-    },
-    tooltipOverlay: {
-      table: {
-        disable: true,
-      },
-    },
-    tooltipOverlayStyle: {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 export const CopyButtonsWithLabel = {

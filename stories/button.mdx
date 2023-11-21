@@ -1,0 +1,149 @@
+import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+
+import * as ButtonStories from './button.stories';
+
+<Meta title="Button" of={ButtonStories} />
+
+# Button
+
+Button are used to trigger an action or event when clicked.
+
+## Size & style
+
+### Style
+
+- Only 1 size is used - Height: 2rem
+- Border-radius: 3px
+- Minimum width: 5rem
+
+{/* if different sizes, add story with different the different and their size in rem */}
+
+### Padding
+
+Button’s label measurement:
+
+- Line height: 1.25rem
+- Vertical padding: 0.5rem
+- Horizontal padding of 1rem
+- Space between icon & label: 0.5rem
+
+### Button spacing
+
+- Horizontal spacing: 1rem
+- Vertical spacing: 0.75rem
+- Space between 2 buttons: 1.5rem - when there is no space constraint
+
+## Explicit button label
+
+Button labels should be as short and clear as possible and should describe the action the button performs.\
+Use one or two words if possible. Remove most prepositions and articles (a, an, the).
+
+Examples: Cancel, Close, Create, Delete, Edit, Learn more, Review, Save, Study, View scores, etc.
+
+Since buttons are action points for the user, button text should also be actionable. \
+Stick to using verbs (Complete, Start/Finish, Search) or a simple verb + noun combination for buttons (Next Page, Submit Post, Learn More). \
+Whichever labeling method you choose, maintain consistency across all of your buttons.
+
+- Use sentence case.
+- Capitalize proper nouns.
+- Use specific action-oriented text for CTAs.
+
+{/* Examples: Add Volume, Create Account, Go to Dashboard, Reset Password, Send Reset link, Sign in, etc. */}
+
+<div style={{ display: 'flex', justifyContent:"space-around" }}>
+  <ul>
+    Do
+    <li>Check for consistent use across the UI</li>
+    <li>Reserve enough space for translation to other languages</li>
+    <li>Avoid excessive use of exclamation points (!)</li>
+  </ul>
+
+  <ul>
+    Don't
+    <li>Use icons only</li>
+    <li>Use punctuation</li>
+    <li>Write “Click here”</li>
+  </ul>
+</div>
+
+## Type
+
+Buttons have a set of predefined defined variations to use in different context
+
+<Story of={ButtonStories.DefaultButtons} />
+
+### Primary
+
+Used for the main action. It appears once within a group of buttons. For example, “Continue” in a form.
+
+<Story of={ButtonStories.Primary} />
+
+### Secondary
+
+Use for the secondary action within a group of buttons.
+
+<Story of={ButtonStories.Secondary} />
+
+### Outline
+
+Dismissive action, such as the cancel button.
+
+<Story of={ButtonStories.Outline} />
+
+### Danger
+
+Use for critical action, typically delete actions
+
+<Story of={ButtonStories.Danger} />
+
+### Links
+
+_to add_
+
+## States
+
+### Disabled button
+
+Disabled state only if an action on the current screen can enable it (action possibility).
+
+<Story of={ButtonStories.ButtonDisabled} />
+
+## Group of Button
+
+- Primary buttons placed on the right of a group.
+- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
+
+Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
+
+<Story of={ButtonStories.SimpleForm} />
+
+## Icon on buttons
+
+Every button gets a label.\
+Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
+Universally understood icons work well (ie. print, close, play/pause, save).\
+Use standard icons when their use matches their meaning, or at least the user's intent.\
+Avoid creating new icons for every action, especially infrequently used ones.\
+Avoid using an icon alone in a button, with no label.
+
+### Placement
+
+If icon + label, then the icon is placed on the left side.\
+Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
+
+<Story of={ButtonStories.ButtonsWithIcon} />
+
+<Story of={ButtonStories.IconButtonWithTooltip} />
+
+### Size
+
+The icon should be (approximately) the same height as the text, or a lot bigger.
+
+**Example**
+
+### Playground
+
+<Canvas of={ButtonStories.Playground} withSource />
+
+<Controls of={ButtonStories.Playground} />

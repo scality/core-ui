@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { getThemePropSelector } from '../src/lib/utils';
 const StyledWrapper = styled.div`
   padding: 30px;
-  height: 30vh;
   background-color: ${getThemePropSelector('backgroundLevel1')};
   color: ${getThemePropSelector('textPrimary')};
 `;
