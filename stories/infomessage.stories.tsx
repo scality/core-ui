@@ -30,17 +30,11 @@ export const Playground: StoryObj<
           padding: '1rem',
         }}
       >
-        <div
-          style={{
-            padding: '1rem',
-          }}
-        >
-          <InfoMessage
-            title="What to do with this key?"
-            content="This key is needed by the Veeam repository to access ARTESCA for data backup."
-            link="test"
-          />
-        </div>
+        <InfoMessage
+          title="What to do with this key?"
+          content="This key is needed to access your data backup."
+          link={args.link}
+        />
       </div>
     );
   },
