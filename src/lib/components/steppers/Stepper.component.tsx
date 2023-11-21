@@ -55,33 +55,33 @@ export const Stepper = <T extends any[]>({
 }: {
   steps: readonly [...Steps<T>];
 }) => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-  const [stepProps, setStepProps] = useState<Record<string, unknown>>({});
+  const [stepProps, setStepProps] = useState<{
+    step: number;
+    props: Record<string, unknown>;
+  }>({ step: 0, props: {} });
 
   const next = (props: Record<string, unknown>) => {
-    setCurrentStep(currentStep + 1);
-    setStepProps(props);
+    setStepProps({ step: stepProps.step + 1, props });
   };
 
   const prev = (props: Record<string, unknown>) => {
-    setCurrentStep(currentStep - 1);
-    setStepProps(props);
+    setStepProps({ step: stepProps.step - 1, props });
   };
 
-  const { Component } = steps[currentStep];
+  const { Component } = steps[stepProps.step];
 
   return (
     <window.StepperContext.Provider value={{ next, prev }}>
       <Box display={'flex'} gap={32} padding={16} flex={1}>
         <Steppers
-          activeStep={currentStep}
+          activeStep={stepProps.step}
           steps={steps.map((step) => {
             return {
               title: step.label,
             };
           })}
         />
-        <Component {...stepProps} />
+        <Component {...stepProps.props} />
       </Box>
     </window.StepperContext.Provider>
   );
