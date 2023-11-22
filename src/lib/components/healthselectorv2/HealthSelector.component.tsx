@@ -8,11 +8,9 @@ import {
   SelectProps,
 } from '../selectv2/Selectv2.component';
 
-type OptionType = 'all' | 'healthy' | 'warning' | 'critical' | 'unknown';
 type OptionValue = {
   label?: string;
 } & OptionProps;
-type OptionsConfiguration = Record<OptionType, OptionValue>;
 type Props = {
   options?: OptionValue[];
 } & SelectProps;
@@ -36,8 +34,8 @@ const SelectStyle = styled(Select)`
   }
 `;
 
-export const optionsDefaultConfiguration: OptionsConfiguration = {
-  all: {
+export const defaultOptions = [
+  {
     icon: (
       <svg
         viewBox="0 0 150 100"
@@ -64,35 +62,38 @@ export const optionsDefaultConfiguration: OptionsConfiguration = {
         />
       </svg>
     ),
-    label: 'All healthy statuses',
+    label: 'All Status',
     value: 'all',
   },
-  healthy: {
-    icon: <Icon name={'Check-circle'} color={'statusHealthy'} size={'lg'} />,
-    label: 'Healthy only',
+  {
+    icon: <Icon name="Check-circle" color="statusHealthy" size="lg" />,
+    label: 'Healthy',
     value: 'healthy',
   },
-  critical: {
-    icon: <Icon name={'Times-circle'} color={'statusCritical'} size={'lg'} />,
-    label: 'Critical only',
-    value: 'critical',
-  },
-  warning: {
-    icon: (
-      <Icon name={'Exclamation-circle'} color={'statusWarning'} size={'lg'} />
-    ),
-    label: 'Warning only',
+  {
+    icon: <Icon name="Exclamation-circle" color="statusWarning" size="lg" />,
+    label: 'Warning',
     value: 'warning',
   },
-  unknown: {
-    icon: <Icon name={'Info'} color={'infoPrimary'} size={'lg'} />,
-    label: 'Unknown only',
+  {
+    icon: <Icon name="Times-circle" color="statusCritical" size="lg" />,
+    label: 'Critical',
+    value: 'critical',
+  },
+  {
+    icon: <Icon name="Info" color="infoPrimary" size="lg" />,
+    label: 'Unknown',
     value: 'unknown',
   },
+] as const;
+
+export const optionsDefaultConfiguration = {
+  all: defaultOptions[0],
+  healthy: defaultOptions[1],
+  warning: defaultOptions[2],
+  critical: defaultOptions[3],
+  unknown: defaultOptions[4],
 };
-export const defaultOptions: OptionValue[] = Object.keys(
-  optionsDefaultConfiguration,
-).map((key) => optionsDefaultConfiguration[key]);
 
 function HealthSelectorv2(props: Props) {
   const { options = defaultOptions, value, ...selectRest } = props;

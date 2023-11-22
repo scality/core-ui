@@ -17,7 +17,7 @@ describe('HealthSelector', () => {
 
     // open the menu
     userEvent.click(input);
-    const healthyOption = getByText(/healthy only/i);
+    const healthyOption = getByText(/healthy/i);
     expect(healthyOption).toBeInTheDocument();
   });
   it('should call the onChange function when it change', () => {
@@ -52,7 +52,7 @@ describe('HealthSelector', () => {
     // open the menu
     const input = screen.getByRole('textbox');
     userEvent.click(input);
-    const healthyOption = queryByText(/healthy only/i);
+    const healthyOption = queryByText(/healthy/i);
     expect(healthyOption).not.toBeInTheDocument();
   });
 });
