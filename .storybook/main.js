@@ -1,10 +1,9 @@
 module.exports = {
-  stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))'],
+  stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))', '../src/**/**/*.@(mdx|stories.@(ts|tsx))'],
 
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
-    // '@storybook/addon-knobs',
     '@storybook/addon-mdx-gfm'
   ],
 
