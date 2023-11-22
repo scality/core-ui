@@ -15,7 +15,8 @@ if (!window.StepperContext) {
   window.StepperContext = createContext<StepperContextType | null>(null);
 }
 
-export const useStepper = (index, steps) => {
+//@ts-ignore
+export const useStepper: UseStepper = (index, steps) => {
   const context = useContext(window.StepperContext);
 
   if (context === null) {
@@ -26,7 +27,7 @@ export const useStepper = (index, steps) => {
   return { next, prev };
 };
 
-export const Stepper = ({ steps }) => {
+export const Stepper: Stepper = ({ steps }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [stepProps, setStepProps] = useState({});
 

@@ -39,30 +39,32 @@ export type Subtract<
 > = BuildTuple<A> extends [...infer U, ...BuildTuple<B>] ? Length<U> : -1;
 export type ExctractProps<T> = T extends Step<infer Props> ? Props : never;
 
-export declare const useStepper: <
-  T extends any[],
-  StepIndex extends number,
-  NextIndex = Add<StepIndex, 1>,
-  PrevIndex = Subtract<StepIndex, 1>,
->(
-  index: StepIndex,
-  steps: readonly [...Steps<T>],
-) => (NextIndex extends number
-  ? {
-      next: (props: ExctractProps<T[NextIndex]>) => void;
-    }
-  : Record<string, unknown>) &
-  (PrevIndex extends -1
-    ? Record<string, unknown>
-    : PrevIndex extends number
+declare global {
+  export declare type UseStepper = <
+    T extends any[],
+    StepIndex extends number,
+    NextIndex = Add<StepIndex, 1>,
+    PrevIndex = Subtract<StepIndex, 1>,
+  >(
+    index: StepIndex,
+    steps: readonly [...Steps<T>],
+  ) => (NextIndex extends number
     ? {
-        prev: (props: ExctractProps<T[PrevIndex]>) => void;
+        next: (props: ExctractProps<T[NextIndex]>) => void;
       }
-    : Record<string, unknown>);
-export declare const Stepper: <T extends any[]>({
-  steps,
-}: {
-  steps: readonly [...Steps<T>];
-}) => JSX.Element;
-export {};
+    : Record<string, unknown>) &
+    (PrevIndex extends -1
+      ? Record<string, unknown>
+      : PrevIndex extends number
+      ? {
+          prev: (props: ExctractProps<T[PrevIndex]>) => void;
+        }
+      : Record<string, unknown>);
+  export declare type Stepper = <T extends any[]>({
+    steps,
+  }: {
+    steps: readonly [...Steps<T>];
+  }) => JSX.Element;
+  export {};
+}
 //# sourceMappingURL=Stepper.component.d.ts.map
