@@ -12,6 +12,7 @@
     "skipLibCheck": true, // does not check types in node_modules
     "moduleResolution": "node",
     "strict": true,
+    "strictFunctionTypes": true,
     "noImplicitAny": false //For now it is too costly to enable this one
   }
 }
