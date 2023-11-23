@@ -1,9 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, Text } from '../text/Text.component';
-import { Icon } from '../icon/Icon.component';
-import { defaultTheme } from '../../style/theme';
-import { useComputeBackgroundColor } from './InfoMessageUtils';
 import { Stack } from '../../spacing';
+import { defaultTheme } from '../../style/theme';
+import { Icon } from '../icon/Icon.component';
+import { Link, Text } from '../text/Text.component';
+import { useComputeBackgroundColor } from './InfoMessageUtils';
 
 type Props = {
   title: string | React.ReactNode;
@@ -23,11 +24,21 @@ const InfoMessageContainer = styled.div`
 
 function InfoMessage({ title, content, link }: Props) {
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
+  const [infoMessageWidth, setInfoMessageWidth] = useState(0);
+
+  useEffect(() => {
+    if (containerRef?.current?.parentElement) {
+      setInfoMessageWidth(containerRef.current.parentElement.clientWidth);
+    }
+  }, [containerRef]);
 
   return (
     <InfoMessageContainer
       ref={containerRef}
-      style={{ backgroundColor: backgroundColor }}
+      style={{
+        backgroundColor: backgroundColor,
+        width: `${infoMessageWidth}px`,
+      }}
     >
       <Stack>
         <Icon

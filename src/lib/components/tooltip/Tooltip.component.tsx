@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect, CSSProperties } from 'react';
+import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 import styled from 'styled-components';
 import { computePosition, offset, shift, flip } from '@floating-ui/dom';
-
 import * as defaultTheme from '../../style/theme';
 import { getTheme, getThemePropSelector } from '../../utils';
 import { spacing } from '../../spacing';
