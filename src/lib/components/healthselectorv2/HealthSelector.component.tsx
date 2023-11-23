@@ -1,27 +1,18 @@
-// @ts-nocheck
-import { components } from 'react-select';
 import styled from 'styled-components';
+import * as defaultTheme from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
-import { OptionProps } from '../selectv2/Selectv2.component';
-import { Select } from '../selectv2/Selectv2.component';
-import { SelectProps } from '../selectv2/Selectv2.component';
+import { Icon } from '../icon/Icon.component';
 import {
-  SingleValueWrapper,
-  ValueIcon,
-  OptionIcon,
-  OptionWrapper,
-  OptionLabel,
-  ShortLabel,
-  icons,
-} from './HealthSelector.style';
-type OptionType = 'all' | 'healthy' | 'warning' | 'critical' | 'unknown';
+  OptionProps,
+  Select,
+  SelectProps,
+} from '../selectv2/Selectv2.component';
+
 type OptionValue = {
-  shortLabel?: string;
+  label?: string;
 } & OptionProps;
-type OptionsConfiguration = Record<OptionType, OptionValue>;
 type Props = {
   options?: OptionValue[];
-  label?: string;
 } & SelectProps;
 
 const SelectStyle = styled(Select)`
@@ -43,90 +34,84 @@ const SelectStyle = styled(Select)`
   }
 `;
 
-export const optionsDefaultConfiguration: OptionsConfiguration = {
-  all: {
-    icon: icons.all,
-    label: 'All healthy statuses',
-    shortLabel: 'All',
+export const defaultOptions = [
+  {
+    icon: (
+      <svg
+        viewBox="0 0 150 100"
+        xmlns="http://www.w3.org/2000/svg"
+        height="16px"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="50"
+          fill={defaultTheme.brand.statusHealthy}
+        />
+        <circle
+          cx="75"
+          cy="50"
+          r="50"
+          fill={defaultTheme.brand.statusWarning}
+        />
+        <circle
+          cx="100"
+          cy="50"
+          r="50"
+          fill={defaultTheme.brand.statusCritical}
+        />
+      </svg>
+    ),
+    label: 'All Status',
     value: 'all',
   },
-  healthy: {
-    icon: icons.healthy,
-    label: 'Healthy only',
-    shortLabel: 'Healthy',
+  {
+    icon: <Icon name="Check-circle" color="statusHealthy" size="lg" />,
+    label: 'Healthy',
     value: 'healthy',
   },
-  critical: {
-    icon: icons.critical,
-    label: 'Critical only',
-    shortLabel: 'Critical',
-    value: 'critical',
-  },
-  warning: {
-    icon: icons.warning,
-    label: 'Warning only',
-    shortLabel: 'Warning',
+  {
+    icon: <Icon name="Exclamation-circle" color="statusWarning" size="lg" />,
+    label: 'Warning',
     value: 'warning',
   },
-  unknown: {
-    icon: icons.unknown,
-    label: 'Unknown only',
-    shortLabel: 'Unknown',
+  {
+    icon: <Icon name="Times-circle" color="statusCritical" size="lg" />,
+    label: 'Critical',
+    value: 'critical',
+  },
+  {
+    icon: <Icon name="Info" color="infoPrimary" size="lg" />,
+    label: 'Unknown',
     value: 'unknown',
   },
+] as const;
+
+export const optionsDefaultConfiguration = {
+  all: defaultOptions[0],
+  healthy: defaultOptions[1],
+  warning: defaultOptions[2],
+  critical: defaultOptions[3],
+  unknown: defaultOptions[4],
 };
-export const defaultOptions: OptionValue[] = Object.keys(
-  optionsDefaultConfiguration,
-).map((key) => {
-  return optionsDefaultConfiguration[key];
-});
 
 function HealthSelectorv2(props: Props) {
-  const {
-    options = defaultOptions,
-    label = 'Health',
-    onChange,
-    ...rest
-  } = props;
+  const { options = defaultOptions, value, ...selectRest } = props;
 
-  const SingleValue = (props) => {
-    return (
-      <SingleValueWrapper>
-        <p data-testid="singleValueLabel">{label}</p>{' '}
-        <ValueIcon>{props.data.icon}</ValueIcon>
-        <ShortLabel data-testid="singleValueShortLabel">
-          {props.data.shortLabel}
-        </ShortLabel>
-      </SingleValueWrapper>
-    );
-  };
-
-  const CustomOption = (props) => {
-    return (
-      <components.Option
-        {...props}
-        isFocused={props.isFocused && props.selectProps.keyboardFocusEnabled}
-      >
-        <OptionWrapper>
-          <OptionIcon>{props.data.icon}</OptionIcon>
-          <OptionLabel>{props.data.label}</OptionLabel>
-        </OptionWrapper>
-      </components.Option>
-    );
-  };
+  let selectValue = value ?? options[0].value;
 
   return (
-    <SelectStyle
-      components={{
-        SingleValue,
-        Option: CustomOption,
-      }}
-      onChange={onChange}
-      defaultValue={options[0]}
-      options={options}
-      {...rest}
-    />
+    <SelectStyle {...selectRest} value={selectValue}>
+      {options.map((option, index) => {
+        const { ...optionRest } = option;
+        return (
+          <Select.Option key={index} {...optionRest}>
+            {option.label}
+          </Select.Option>
+        );
+      })}
+    </SelectStyle>
   );
 }
 
-export const Healthselector = HealthSelectorv2;
+export const HealthSelector = HealthSelectorv2;
