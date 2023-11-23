@@ -1,12 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
-import { Form, Icon, Input, Stack } from '../src/lib';
-import { StoryObj } from '@storybook/react';
-import { Position } from '../src/lib/components/tooltip/Tooltip.component';
-import { CSSProperties } from 'styled-components';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
-import { CopyButton } from '../src/lib/next';
-import { Wrapper } from './common';
+import { Form, FormSection, Icon, Input, Stack, Tooltip } from '../../src/lib';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+import { Wrapper } from '../common';
 
 export default {
   title: 'Components/Button',
@@ -112,6 +108,7 @@ export const SimpleForm = {
     return (
       <Form
         layout={{ kind: 'page', title: 'Simple Form' }}
+        requireMode="all"
         rightActions={
           <Stack gap={'r16'}>
             <Button variant="outline" label="Cancel" />
@@ -119,8 +116,31 @@ export const SimpleForm = {
           </Stack>
         }
       >
-        <Input name="name" label="Name" value="" onChange={() => {}} />
+        <FormSection>
+          <Input
+            name="firstname"
+            label="Firstname"
+            value=""
+            onChange={() => {}}
+          />
+          <Input name="surname" label="Surname" value="" onChange={() => {}} />
+        </FormSection>
+        <FormSection>
+          <Input name="email" label="Email" value="" onChange={() => {}} />
+          <Input name="phone" label="Phone" value="" onChange={() => {}} />
+        </FormSection>
       </Form>
+    );
+  },
+};
+
+export const ButtonSizes = {
+  render: ({ ...args }) => {
+    return (
+      <>
+        <Button variant="primary" label="Default" size="default" {...args} />
+        <Button variant="primary" label="Inline" size="inline" {...args} />
+      </>
     );
   },
 };
@@ -153,7 +173,7 @@ export const IconButtonWithTooltip = {
         <Button {...args} />
         <Button
           variant="secondary"
-          icon={<Icon name="Save"></Icon>}
+          icon={<Icon name="Sync"></Icon>}
           tooltip={{
             overlayStyle: {
               width: '80px',
@@ -169,7 +189,7 @@ export const IconButtonWithTooltip = {
   },
   args: {
     variant: 'primary',
-    icon: <i className="fas fa-trash" />,
+    icon: <Icon name="Delete"></Icon>,
     tooltip: {
       overlayStyle: {
         width: '80px',

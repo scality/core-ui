@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
 import * as ButtonStories from './button.stories';
 
@@ -7,7 +7,9 @@ import * as ButtonStories from './button.stories';
 
 # Button
 
-Button are used to trigger an action or event when clicked.
+      <Canvas of={ButtonStories.IconButtonWithTooltip} sourceState='none' />
+
+Buttons are used to trigger an action or event when clicked.
 
 ## Size & style
 
@@ -34,7 +36,7 @@ Button’s label measurement:
 - Vertical spacing: 0.75rem
 - Space between 2 buttons: 1.5rem - when there is no space constraint
 
-## Explicit button label
+## Usage
 
 Button labels should be as short and clear as possible and should describe the action the button performs.\
 Use one or two words if possible. Remove most prepositions and articles (a, an, the).
@@ -67,31 +69,36 @@ Whichever labeling method you choose, maintain consistency across all of your bu
   </ul>
 </div>
 
-## Type
+## Variations
 
-Buttons have a set of predefined defined variations to use in different context
+The button can be modify in different way to match its usage
+
+### Variant
+
+Buttons have a set of predefined variants to use in different context
 
 <Story of={ButtonStories.DefaultButtons} />
 
-### Primary
+#### Primary
 
-Used for the main action. It appears once within a group of buttons. For example, “Continue” in a form.
+Used for the main action. It appears once within a group of buttons (or even a screen).  
+For example, “Continue” in a form.
 
 <Story of={ButtonStories.Primary} />
 
-### Secondary
+#### Secondary
 
 Use for the secondary action within a group of buttons.
 
 <Story of={ButtonStories.Secondary} />
 
-### Outline
+#### Outline
 
 Dismissive action, such as the cancel button.
 
 <Story of={ButtonStories.Outline} />
 
-### Danger
+#### Danger
 
 Use for critical action, typically delete actions
 
@@ -101,9 +108,17 @@ Use for critical action, typically delete actions
 
 _to add_
 
-## States
+### Size
 
-### Disabled button
+Only 2 size are available for the button component : default and inline
+
+_Usecases of the different sizes ?_
+
+<Story of={ButtonStories.ButtonSizes} />
+
+### States
+
+#### Disabled button
 
 Disabled state only if an action on the current screen can enable it (action possibility).
 
@@ -125,7 +140,7 @@ Icons are optional and mainly used to show how buttons are different, to aid mem
 Universally understood icons work well (ie. print, close, play/pause, save).\
 Use standard icons when their use matches their meaning, or at least the user's intent.\
 Avoid creating new icons for every action, especially infrequently used ones.\
-Avoid using an icon alone in a button, with no label.
+Avoid using an icon alone in a button. If no label is provide, then use a tooltip
 
 ### Placement
 
@@ -136,7 +151,7 @@ Seeing the icon first help users to scan the page more easily, except for few ca
 
 Avoid using an icon without label, used Universally understood icons such as Save or Delete.
 
-<Story of={ButtonStories.IconButtonWithTooltip} />
+<Canvas of={ButtonStories.IconButtonWithTooltip} />
 
 ### Size
 
@@ -145,11 +160,32 @@ The icon should be (approximately) the same height as the text, or a lot bigger.
 
 ### Ghost Buttons
 
-Purpose ?
+Ghost buttons are subtle and contribute to a minimalist interface design.  
+They are low-emphasis, making them ideal for non-primary actions in UIs.  
+They're also effective in space-limited areas like tables or key-value lists.
+
+| Do                                              | Don't                                                                                                        |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Ensure tooltips are included for clarity        | Confuse them with non-interactive elements like descriptive icons or status indicators                       |
+| Use them for secondary or less crucial actions. | Opt for them over Outline buttons, which are more visibly recognizable as buttons.                           |
+|                                                 | Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs). |
+
+| Do                                                                                                                | Don't                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Ensure tooltips are included for clarity</li><li>Use them for secondary or less crucial actions</li></ul> | <ul><li>Confuse them with non-interactive elements like descriptive icons or status indicators</li><li>Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs)</li></ul> |
+
+Do:
+
+- Ensure tooltips are included for clarity.
+- Use them for secondary or less crucial actions.
+
+Don't:
+
+- Confuse them with non-interactive elements like descriptive icons or status indicators.
+- Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs).
+- Opt for them over Outline buttons, which are more visibly recognizable as buttons.
 
 <Story of={ButtonStories.GhostButtons} />
-
-_Example_
 
 ### Playground
 
