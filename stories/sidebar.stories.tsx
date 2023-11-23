@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
-import { Wrapper } from './common';
 import { useArgs } from '@storybook/preview-api';
+import { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
+import { LateralNavbarLayout, Loader } from '../src/lib';
+import { Sidebar } from '../src/lib/components/sidebar/Sidebar.component';
 
 type Story = StoryObj<typeof Sidebar>;
 
@@ -29,17 +29,11 @@ const actions = [
 const meta: Meta<typeof Sidebar> = {
   title: 'Components/Navigation/Sidebar',
   component: Sidebar,
-  decorators: [
-    (story) => {
-      return (
-        <Wrapper style={{ padding: '0' }}>
-          <div style={{ width: '130px' }}>{story()}</div>
-        </Wrapper>
-      );
-    },
-  ],
   args: {
     actions,
+  },
+  parameters: {
+    layout: 'fullscreen',
   },
 };
 export default meta;
@@ -68,5 +62,34 @@ export const SidebarWithToggle: Story = {
 export const HoverableSidebar: Story = {
   args: {
     hoverable: true,
+  },
+};
+
+export const SidebarInLayout: StoryObj<typeof Sidebar> = {
+  render: (args) => {
+    return (
+      <LateralNavbarLayout sidebar={{ ...args }}>
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
+  },
+};
+
+export const SidebarinLayoutWithToggle: Story = {
+  render: (args) => {
+    const [expandedWithToggle, setExpandedWithToggle] = useState(false);
+    return (
+      <LateralNavbarLayout
+        sidebar={{
+          expanded: expandedWithToggle,
+          onToggleClick: () => {
+            setExpandedWithToggle(!expandedWithToggle);
+          },
+          ...args,
+        }}
+      >
+        <Loader size="massive" />
+      </LateralNavbarLayout>
+    );
   },
 };

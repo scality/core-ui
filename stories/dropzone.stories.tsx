@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dropzone } from '../src/lib/components/dropzone/Dropzone';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 export default {
-  title: 'Components/Dropzone',
+  title: 'Components/Inputs/Dropzone',
   component: Dropzone,
   decorators: [
     (story) => <Wrapper style={{ minHeight: '10vh' }}>{story()}</Wrapper>,

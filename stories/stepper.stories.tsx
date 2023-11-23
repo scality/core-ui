@@ -108,7 +108,7 @@ enum StepIndexes {
 
 const meta: Meta<typeof Stepper> = {
   tags: ['autodocs'],
-  title: 'Components/Stepper',
+  title: 'Components/Progress & loading/Stepper',
   component: Stepper,
 };
 export default meta;

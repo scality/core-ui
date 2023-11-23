@@ -3,7 +3,7 @@ import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Wrapper } from './common';
 import { useArgs } from '@storybook/preview-api';
 export default {
-  title: 'Components/Toggle',
+  title: 'Components/Inputs/Toggle',
   component: Toggle,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

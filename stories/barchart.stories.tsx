@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart } from '../src/lib/components/barchart/BarChart.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 import {
   verticalStackedData,
   horizontalStackedData,
@@ -9,7 +9,6 @@ import {
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
 
 import { Component } from '@storybook/blocks';
-import { minHeight } from 'styled-system';
 
 const width = 800;
 // the size control the size of each small item of the bar
@@ -112,7 +111,7 @@ const horizontalBarChartArgs = {
 };
 
 export default {
-  title: 'Components/Chart/BarChart',
+  title: 'Components/Data Display/Charts/BarChart',
   component: BarChart,
   decorators: [
     (story: Component) => (

@@ -3,7 +3,7 @@ import { ErrorPage404 } from '../src/lib/components/error-pages/ErrorPage404.com
 import { Wrapper } from './common';
 import { localeArgtype } from './controls';
 export default {
-  title: 'Components/Navigation/ErrorPages/404',
+  title: 'Components/Navigation/Error Pages/404',
   component: ErrorPage404,
   decorators: [
     (story) => <Wrapper style={{ height: '100vh' }}>{story()}</Wrapper>,

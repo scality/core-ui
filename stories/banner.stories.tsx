@@ -5,7 +5,7 @@ import { Wrapper } from './common';
 import { iconOptions } from './controls';
 
 export default {
-  title: 'Components/Notification/Banner',
+  title: 'Components/Feedback/Banner',
   component: Banner,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

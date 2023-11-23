@@ -1,6 +1,6 @@
 import React from 'react';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 export default {
   title: 'Components/Navigation/Breadcrumb',
   component: Breadcrumb,

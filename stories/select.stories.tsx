@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select } from '../src/lib/components/select/Select.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 const options = Array.from(new Array(100), (_, index) => ({
   label: `Item ${index}`,
   value: index,
@@ -15,7 +15,7 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 );
 
 export default {
-  title: 'Components/Selector/Select',
+  title: 'Components/Deprecated/Selector/Select',
   component: Select,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   argTypes: {

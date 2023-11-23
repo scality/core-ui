@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { Layout } from '../src/lib/components/layout/Layout.component';
+import React from 'react';
 import { Layout as Layout2 } from '../src/lib/components/layout/v2';
 import { TwoPanelLayout } from '../src/lib/components/layout/v2/panels';
 import { AppContainer } from '../src/lib/components/layout/v2/AppContainer';
-import { Loader } from '../src/lib/components/loader/Loader.component';
-import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 import { Stack } from '../src/lib/spacing';
 import { Icon } from '../src/lib/components/icon/Icon.component';
@@ -12,99 +9,10 @@ import { Link, Text } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
-import { DefaultSidebar } from './sidebar.stories';
 import { Meta } from '@storybook/react';
 
-const sideBarActions = [
-  {
-    label: 'Dashboard',
-    icon: <i className="fas fa-tachometer-alt" />,
-    onClick: action('dashboard clicked'),
-    active: true,
-    'data-cy': 'Dashboard',
-  },
-  {
-    label: 'Servers',
-    icon: <i className="fas fa-server" />,
-    onClick: action('server clicked'),
-    'data-cy': 'Servers',
-  },
-  {
-    label: 'Disks',
-    icon: <i className="fas fa-hdd" />,
-    onClick: action('disk clicked'),
-    'data-cy': 'Disks',
-  },
-];
-const rightActions = [
-  {
-    type: 'dropdown',
-    text: 'FR',
-    icon: <i className="fas fa-globe" />,
-    items: [
-      {
-        label: 'English',
-        name: 'EN',
-        onClick: action('English selected'),
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    icon: <i className="fas fa-th" />,
-    items: [
-      {
-        label: 'Hyperdrive UI',
-        onClick: action('Hyperdrive UI clicked'),
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    icon: <i className="fas fa-question-circle" />,
-    items: [
-      {
-        label: 'About',
-        onClick: action('About clicked'),
-      },
-      {
-        label: 'Documentation',
-        onClick: action('Documentation clicked'),
-      },
-      {
-        label: 'Onboarding',
-        onClick: action('Onboarding clicked'),
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    text: 'Carlito',
-    icon: <i className="fas fa-user" />,
-    items: [
-      {
-        label: 'Log out',
-        onClick: action('Logout clicked'),
-      },
-    ],
-  },
-];
-// const  meta: Meta<typeof Layout> = {
-//   title: 'Components/Navigation/Layout',
-//   component: Layout,
-//   args:{
-//     sidebar:{
-//       actions: sideBarActions,
-//     },
-//     navbar:{
-//       productName: 'Harware UI',
-//       rightActions,
-//     }
-//   }
-// };
-
 const meta: Meta<typeof Layout2> = {
-  title: 'Components/Navigation/Layout',
+  title: 'Templates/Layout',
   component: Layout2,
   args: {},
 };

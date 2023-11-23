@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from '../src/lib/components/modal/Modal.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
@@ -9,7 +9,7 @@ import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { useArgs } from '@storybook/preview-api';
 
 export default {
-  title: 'Components/Notification/Modal',
+  title: 'Components/Feedback/Modal',
   component: Modal,
   decorators: [
     (story) => <Wrapper style={{ minHeight: '10vh' }}>{story()}</Wrapper>,
@@ -81,93 +81,6 @@ export const CustomizeTitle = {
   },
 };
 
-/*
-export const Default = {
-  render: ({}) => {
-    return (
-      <Wrapper>
-        <Modal
-          close={action('close clicked')}
-          isOpen={true}
-          title="Hello"
-          footer={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Button
-                text="No"
-                size="base"
-                outlined
-                onClick={action('No clicked')}
-              />
-              <Button
-                variant="buttonSecondary"
-                text="Yes"
-                size="base"
-                onClick={action('Yes clicked')}
-              />
-            </div>
-          }
-        >
-          <span>Do you want a cookie?</span>
-        </Modal>
-      </Wrapper>
-    );
-  },
-};
-
-export const CustomizeTitle = {
-  render: ({}) => {
-    return (
-      <Wrapper>
-        <Modal
-          isOpen={true}
-          title="Hello"
-          footer={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Button
-                label="No"
-                size="default"
-                variant='outline'
-                onClick={action('No clicked')}
-              />
-              <Button
-                variant="secondary"
-                label="Yes"
-                size="base"
-                onClick={action('Yes clicked')}
-              />
-            </div>
-          }
-          subTitle={
-            <Stack>
-              <>Step 1/2</>
-              <IconHelp
-                tooltipMessage={
-                  <ul>
-                    <li>Hello, this is the tooltip of the modal</li>
-                  </ul>
-                }
-              />
-            </Stack>
-          }
-        >
-          <div>Do you want some chocolate? :D</div>
-        </Modal>
-      </Wrapper>
-    );
-  },
-};
-*/
-
 const Demo = (myargs, args) => () => {
   const [{ isOpen }, updateArgs] = myargs;
   return (
@@ -204,46 +117,6 @@ const Demo = (myargs, args) => () => {
       />
     </>
   );
-};
-
-const Action = {
-  render: ({}) => {
-    const [displayed, setDisplayed] = useState(false);
-    return (
-      <>
-        <Button
-          label={'Show modal'}
-          onClick={() => setDisplayed((disp) => !disp)}
-        />
-        <Modal
-          close={() => setDisplayed((disp) => !disp)}
-          isOpen={displayed}
-          title="Hello Table"
-          footer={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Button
-                label="No"
-                variant="outline"
-                onClick={action('No clicked')}
-              />
-              <Button
-                variant="secondary"
-                label="Yes"
-                onClick={action('Yes clicked')}
-              />
-            </div>
-          }
-        >
-          <span>Do you want a cookie?</span>
-        </Modal>
-      </>
-    );
-  },
 };
 
 export const WithinTable = {

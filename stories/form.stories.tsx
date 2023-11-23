@@ -16,7 +16,7 @@ import { Select } from '../src/lib/components/selectv2/Selectv2.component';
 import { iconOptions } from './controls';
 
 export default {
-  title: 'Components/Form',
+  title: 'Templates/Form',
   component: Form,
   args: {
     kind: 'page',

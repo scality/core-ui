@@ -83,7 +83,7 @@ const spec = {
 };
 const id = 'vis';
 export default {
-  title: 'Components/Chart/VegaChart',
+  title: 'Components/Data Display/Charts/VegaChart',
   component: VegaChart,
 };
 export const Default = {

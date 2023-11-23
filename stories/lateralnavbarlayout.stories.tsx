@@ -32,7 +32,7 @@ const sideBarActions = [
 ];
 
 export default {
-  title: 'Components/Navigation/LateralNavbarLayout',
+  title: 'Templates/LateralNavbarLayout',
   component: LateralNavbarLayout,
   args: {
     children: <Loader size="massive" />,

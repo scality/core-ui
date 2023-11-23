@@ -1,10 +1,10 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Title, Wrapper } from './common';
+import { Wrapper } from './common';
 import { CollapsiblePanel } from '../src/lib/components/collapsiblepanel/CollapsiblePanel.component';
 const items = [<i className="fas fa-carrot" />, 'banana', 'apple', 'grape'];
 export default {
-  title: 'Components/Navigation/CollapsiblePanel',
+  title: 'Components/Deprecated/Navigation/CollapsiblePanel',
   component: CollapsiblePanel,
   decorators: [
     (story) => (

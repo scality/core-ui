@@ -1,7 +1,7 @@
 import React from 'react';
 import { GlobalHealthBar } from '../src/lib/components/globalhealthbar/GlobalHealthBar.component';
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 const alerts = [
   {
     id: '1',
@@ -104,7 +104,7 @@ const startNotFirstDay = '2021-02-23T23:00:00Z';
 const endNotFirstDay = '2021-03-01T23:00:00Z';
 
 export default {
-  title: 'Components/Chart/GlobalHealthBar',
+  title: 'Components/Data Display/Charts/GlobalHealthBar',
   component: GlobalHealthBar,
   decorators: [
     (story) => (

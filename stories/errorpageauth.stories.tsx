@@ -3,7 +3,7 @@ import { ErrorPageAuth } from '../src/lib/components/error-pages/ErrorPageAuth.c
 import { Wrapper } from './common';
 import { localeArgtype } from './controls';
 export default {
-  title: 'Components/Navigation/ErrorPages/Auth',
+  title: 'Components/Navigation/Error Pages/Auth',
   component: ErrorPageAuth,
   decorators: [
     (story) => <Wrapper style={{ height: '100vh' }}>{story()}</Wrapper>,

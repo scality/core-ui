@@ -19,7 +19,7 @@ const SelectWrapper = styled.div`
 `;
 
 export default {
-  title: 'Components/v2/SelectInput',
+  title: 'Components/Inputs/v2/SelectInput',
   component: Select,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

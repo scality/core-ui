@@ -1,21 +1,18 @@
-import { Meta, Story, Canvas } from '@storybook/blocks';
-import {Button} from '../../src/lib/components/button/Button.component';
+import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
+import { Button } from '../../src/lib/components/button/Button.component';
+import * as ButtonStories from '../buttonv2.stories';
 
-<Meta title="Guideline/Button"/>
+<Meta title="Button" of={ButtonStories} />
 
 # Button
 
 ## Size & style
 
-*   Only 1 size is used - Height: 32px
-*   Border-radius: 3px
-*   Minimum width: 80px
+- Only 1 size is used - Height: 32px
+- Border-radius: 3px
+- Minimum width: 80px
 
-{/* <Story id="components-button--size" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
-
-{/*<Story id="components-button--size" /> */}
-
-|     | px  |
+|         | px  |
 | ------- | --- |
 | Smaller | 24  |
 | Small   | 28  |
@@ -27,10 +24,37 @@ import {Button} from '../../src/lib/components/button/Button.component';
 
 Button’s label measurement:
 
-*   Line height: 20px
-*   Vertical padding: 8px
-*   Horizontal padding of 16px
-*   Space between icon & label: 8px
+- Line height: 20px
+- Vertical padding: 8px
+- Horizontal padding of 16px
+- Space between icon & label: 8px
+
+## Explicit button label
+
+Button labels should be as short and clear as possible and should describe the action the button performs.\
+Use one or two words if possible. Remove most prepositions and articles (a, an, the).
+
+Examples: Cancel, Close, Create, Delete, Edit, Learn more, Review, Save, Study, View scores, etc.
+
+Since buttons are action points for the user, button text should also be actionable. Stick to using verbs (Complete, Start/Finish, Search) or a simple verb + noun combination for buttons (Next Page, Submit Post, Learn More). Whichever labeling method you choose, maintain consistency across all of your buttons.
+
+- Use sentence case.
+- Capitalize proper nouns.
+- Use specific action-oriented text for CTAs.
+
+Examples: Add Volume, Create Account, Go to Dashboard, Reset Password, Send Reset link, Sign in, etc.
+
+Be sure to:
+
+- Check for consistent use across the UI.
+- Reserve enough space for translation to other languages.
+- Avoid excessive use of exclamation points (!).
+
+Don't:
+
+- Use icons only.
+- Use punctuation.
+- Write “Click here.”
 
 ## Type
 
@@ -38,52 +62,51 @@ Button’s label measurement:
 
 Used for the main action. It appears once within a group of buttons. For example, “Continue” in a form.
 
-> Color: #055DFF - secondary
+<Story of={ButtonStories.Primary} />
 
 ### Secondary/base
 
-{/* <Button variant="base" text="base"></Button> */}
-
 Use for the secondary action within a group of buttons.
+
+<Story of={ButtonStories.Secondary} />
 
 ### Tertiary
 
-<div>
-  <Button outlined text="base" />
-</div>
-
 Dismissive action, such as the cancel button.
 
-```css
-color: #313131; /*border*/
-```
+<Story of={ButtonStories.Tertiary} />
+<Canvas of={ButtonStories.Tertiary} withToolbar />
 
 ### Links
 
-*to add*
+_to add_
 
 ## States
 
-*to produce*
+_to produce_
 
 ### Disabled button
 
 Disabled state only if an action on the current screen can enable it (action possibility).
 
+<Story of={ButtonStories.ButtonDisabled} />
+
 ## Placement
 
-*   Primary buttons placed on the right of a group.
-*   Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
+- Primary buttons placed on the right of a group.
+- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
 
 Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
 
+<Story of={ButtonStories.SimpleForm} />
+
 ### Button spacing
 
-*   Horizontal spacing: 16px
-*   Vertical spacing: 12px
-*   Space between 2 buttons: 24px - when there is no space constraint
+- Horizontal spacing: 16px
+- Vertical spacing: 12px
+- Space between 2 buttons: 24px - when there is no space constraint
 
-## Icon & label on buttons
+## Icon on buttons
 
 ### Which icon
 
@@ -103,29 +126,12 @@ Seeing the icon first help users to scan the page more easily, except for few ca
 
 The icon should be (approximately) the same height as the text, or a lot bigger.
 
-### Explicit button label
+<Story of={ButtonStories.ButtonsWithIcon} />
 
-Button labels should be as short and clear as possible and should describe the action the button performs.\
-Use one or two words if possible. Remove most prepositions and articles (a, an, the).
+<Story of={ButtonStories.IconButtonWithTooltip} />
 
-Examples: Cancel, Close, Create, Delete, Edit, Learn more, Review, Save, Study, View scores, etc.
+### Playground
 
-Since buttons are action points for the user, button text should also be actionable. Stick to using verbs (Complete, Start/Finish, Search) or a simple verb + noun combination for buttons (Next Page, Submit Post, Learn More). Whichever labeling method you choose, maintain consistency across all of your buttons.
+<Canvas of={ButtonStories.Playground} />
 
-*   Use sentence case.
-*   Capitalize proper nouns.
-*   Use specific action-oriented text for CTAs.
-
-Examples: Add Volume, Create Account, Go to Dashboard, Reset Password, Send Reset link, Sign in, etc.
-
-Be sure to:
-
-*   Check for consistent use across the UI.
-*   Reserve enough space for translation to other languages.
-*   Avoid excessive use of exclamation points (!).
-
-Don't:
-
-*   Use icons only.
-*   Use punctuation.
-*   Write “Click here.”
+<Controls of={ButtonStories.Playground} />

@@ -11,7 +11,7 @@ export {
 } from './components/linetemporalchart/MetricTimespanProvider';
 export { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
 export { Select } from './components/selectv2/Selectv2.component';
-export { Healthselector } from './components/healthselectorv2/HealthSelector.component';
+export { HealthSelector } from './components/healthselectorv2/HealthSelector.component';
 export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';

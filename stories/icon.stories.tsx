@@ -18,10 +18,6 @@ export default {
   },
 };
 
-/**
- * #### Subtitle
- * This is the description
- * */
 export const Playground = {
   args: {
     name: 'Exclamation-triangle',

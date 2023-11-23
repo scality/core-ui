@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Box } from '../src/lib/components/box/Box';
 
 const info = {
-  title: 'Components/Box',
+  title: 'Components/Styling/Box',
   component: Box,
   decorators: [(story) => <HighlightBorder>{story()}</HighlightBorder>],
 };
