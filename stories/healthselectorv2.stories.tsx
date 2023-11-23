@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import {
-  Healthselector,
+  HealthSelector,
   optionsDefaultConfiguration,
 } from '../src/lib/components/healthselectorv2/HealthSelector.component';
-import { Wrapper, Title } from './common';
+import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 export default {
   title: 'Components/v2/Healthselector',
-  component: Healthselector,
+  component: HealthSelector,
   decorators: [
     (story) => (
       <Wrapper style={{ minHeight: '40vh' }}>
@@ -25,26 +25,32 @@ const HealthSelectorWrapper = styled.div`
   width: 205px;
 `;
 
-export const Basic = {};
+export const Playground = {
+  args: {
+    id: 'playground',
+  },
+  argTypes: {
+    value: {
+      options: ['all', 'warning', 'critical', 'unknown'],
+      control: 'select',
+    },
+  },
+};
 
 export const ChangingLabels = {
   args: {
-    label: 'Alerts',
     options: [
       {
         ...optionsDefaultConfiguration.all,
         label: 'label all',
-        shortLabel: 'all v2',
       },
       {
         ...optionsDefaultConfiguration.healthy,
         label: 'any label',
-        shortLabel: 'short',
       },
       {
         ...optionsDefaultConfiguration.warning,
         label: 'warning',
-        shortLabel: 'careful',
         icon: <Icon name="Tape" />,
         value: 'myValue',
       },

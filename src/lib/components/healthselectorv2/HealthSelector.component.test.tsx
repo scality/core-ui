@@ -1,43 +1,44 @@
 import {
-  Healthselector,
+  HealthSelector,
   optionsDefaultConfiguration,
 } from './HealthSelector.component';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from 'react-query';
 describe('HealthSelector', () => {
   it('should display correctly without any props and select first option', () => {
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <QueryClientProvider client={new QueryClient()}>
-        <Healthselector />
+        <HealthSelector id="health" onChange={() => {}} />
       </QueryClientProvider>,
     );
-    expect(getByTestId('singleValueLabel')).toHaveTextContent(/Health/i);
-    expect(getByTestId('singleValueShortLabel')).toHaveTextContent(/All/i);
+    const input = screen.getByRole('textbox');
+
     // open the menu
-    const mainMenu = getByTestId('singleValueShortLabel');
-    userEvent.click(mainMenu);
-    const healthyOption = getByText(/healthy only/i);
+    userEvent.click(input);
+    const healthyOption = getByText(/healthy/i);
     expect(healthyOption).toBeInTheDocument();
   });
   it('should call the onChange function when it change', () => {
     const onChange = jest.fn();
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <QueryClientProvider client={new QueryClient()}>
-        <Healthselector onChange={onChange} />
+        <HealthSelector id="health" onChange={onChange} />
       </QueryClientProvider>,
     );
-    const mainMenu = getByTestId('singleValueShortLabel');
-    userEvent.click(mainMenu);
+    const input = screen.getByRole('textbox');
+    userEvent.click(input);
     const warningOption = getByText(/warning/i);
     userEvent.click(warningOption);
     expect(onChange).toHaveBeenCalledWith('warning');
   });
   it('should not display hidden options', () => {
-    const { getByTestId, queryByText } = render(
+    const { queryByText } = render(
       <QueryClientProvider client={new QueryClient()}>
-        <Healthselector
+        <HealthSelector
+          id="health"
+          onChange={() => {}}
           options={[
             optionsDefaultConfiguration.all,
             optionsDefaultConfiguration.warning,
@@ -47,10 +48,11 @@ describe('HealthSelector', () => {
         />
       </QueryClientProvider>,
     );
+
     // open the menu
-    const mainMenu = getByTestId('singleValueShortLabel');
-    userEvent.click(mainMenu);
-    const healthyOption = queryByText(/healthy only/i);
+    const input = screen.getByRole('textbox');
+    userEvent.click(input);
+    const healthyOption = queryByText(/healthy/i);
     expect(healthyOption).not.toBeInTheDocument();
   });
 });
