@@ -21,7 +21,7 @@ const InfoMessageContainer = styled.div`
   color: white;
 `;
 
-function InfoMessage({ title, content, link }: Props) {
+export const InfoMessage = ({ title, content, link }: Props) => {
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
 
   return (
@@ -45,6 +45,4 @@ function InfoMessage({ title, content, link }: Props) {
       )}
     </InfoMessageContainer>
   );
-}
-
-export default InfoMessage;
+};
