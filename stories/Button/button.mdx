@@ -7,19 +7,15 @@ import * as ButtonStories from './button.stories';
 
 # Button
 
-      <Canvas of={ButtonStories.IconButtonWithTooltip} sourceState='none' />
-
 Buttons are used to trigger an action or event when clicked.
 
 ## Size & style
 
 ### Style
 
-- Only 1 size is used - Height: 2rem
+- Height: 2rem
 - Border-radius: 3px
 - Minimum width: 5rem
-
-{/* if different sizes, add story with different the different and their size in rem */}
 
 ### Padding
 
@@ -53,21 +49,11 @@ Whichever labeling method you choose, maintain consistency across all of your bu
 
 {/* Examples: Add Volume, Create Account, Go to Dashboard, Reset Password, Send Reset link, Sign in, etc. */}
 
-<div style={{ display: 'flex', justifyContent:"space-around" }}>
-  <ul>
-    Do
-    <li>Check for consistent use across the UI</li>
-    <li>Reserve enough space for translation to other languages</li>
-    <li>Avoid excessive use of exclamation points (!)</li>
-  </ul>
-
-  <ul>
-    Don't
-    <li>Use icons only</li>
-    <li>Use punctuation</li>
-    <li>Write “Click here”</li>
-  </ul>
-</div>
+| Do                                                      | Don't              |
+| ------------------------------------------------------- | ------------------ |
+| Check for consistent use across the UI                  | Use icons only     |
+| Reserve enough space for translation to other languages | Use punctuation    |
+| Avoid excessive use of exclamation points (!)           | Write “Click here” |
 
 ## Variations
 
@@ -140,11 +126,12 @@ Icons are optional and mainly used to show how buttons are different, to aid mem
 Universally understood icons work well (ie. print, close, play/pause, save).\
 Use standard icons when their use matches their meaning, or at least the user's intent.\
 Avoid creating new icons for every action, especially infrequently used ones.\
-Avoid using an icon alone in a button. If no label is provide, then use a tooltip
+Avoid using an icon alone in a button. If no label is provide, then use a tooltip.
 
 ### Placement
 
 When use with a label, the icon is placed on the left side.\
+The icon should be (approximately) the same height as the text.  
 Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
 
 <Story of={ButtonStories.ButtonsWithIcon} />
@@ -153,12 +140,7 @@ Avoid using an icon without label, used Universally understood icons such as Sav
 
 <Canvas of={ButtonStories.IconButtonWithTooltip} />
 
-### Size
-
-The icon should be (approximately) the same height as the text, or a lot bigger.
-? _Example_
-
-### Ghost Buttons
+## Ghost Buttons
 
 Ghost buttons are subtle and contribute to a minimalist interface design.  
 They are low-emphasis, making them ideal for non-primary actions in UIs.  
