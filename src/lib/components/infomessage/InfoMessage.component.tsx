@@ -1,9 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
-import { Link, Text } from '../text/Text.component';
-import { Icon } from '../icon/Icon.component';
-import { defaultTheme } from '../../style/theme';
-import { useComputeBackgroundColor } from './InfoMessageUtils';
 import { Stack } from '../../spacing';
+import { defaultTheme } from '../../style/theme';
+import { Icon } from '../icon/Icon.component';
+import { Link, Text } from '../text/Text.component';
+import { useComputeBackgroundColor } from './InfoMessageUtils';
 
 type Props = {
   title: string | React.ReactNode;
