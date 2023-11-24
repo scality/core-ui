@@ -37,7 +37,9 @@ export const InfoMessage = ({ title, content, link }: Props) => {
         />
         {typeof title === 'string' ? <Text isEmphazed>{title}</Text> : title}
       </Stack>
-      <Text color="textSecondary">{content}</Text>
+      <Text color="textSecondary" isGentleEmphazed>
+        {content}
+      </Text>
       {link && (
         <Link href={link} target="_blank" style={{ alignSelf: 'flex-end' }}>
           More infos <Icon name="External-link"></Icon>
