@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import React from 'react';
-import { Form, FormSection, Icon, Input, Stack, Tooltip } from './../src/lib';
-import { Button } from './../src/lib/components/buttonv2/Buttonv2.component';
-import { Wrapper } from './common';
 import { Canvas } from '@storybook/blocks';
+import React from 'react';
+import { Form, FormSection, Icon, Input, Stack } from '../src/lib';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Wrapper } from './common';
 
 export default {
   title: 'Components/Button',
