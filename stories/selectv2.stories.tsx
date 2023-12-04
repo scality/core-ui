@@ -1,87 +1,89 @@
-import {
-  Select,
-  Option,
-} from '../src/lib/components/selectv2/Selectv2.component';
-import React, { useState } from 'react';
-import { Wrapper } from './common';
+import React from 'react';
+import styled from 'styled-components';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Modal } from '../src/lib/components/modal/Modal.component';
+import { Select } from '../src/lib/components/selectv2/Selectv2.component';
+import { Wrapper } from './common';
+
 export default {
-  title: 'Components/Inputs/v2/Select',
+  title: 'Components/Inputs/Select',
   component: Select,
   decorators: [
     (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
   ],
 };
+const sizes = ['1/3', '1/2', '2/3', '1'];
+
+const SelectWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 const generateOptions = (n = 10) =>
-  Array.from(new Array(n), (_, index) => ({
-    label: `Item ${index}`,
-    value: index.toString(),
-    disabled: index !== 0 && index % 8 === 0,
-    icon: index % 5 === 0 ? <Icon name={'Check'} /> : null,
-  }));
+  Array.from(new Array(n), (_, index) => (
+    <Select.Option
+      value={`Option${index}`}
+      disabled={index !== 0 && index % 8 === 0}
+      icon={index % 5 === 0 ? <Icon name={'Check'} /> : null}
+    >{`Label-option ${index}`}</Select.Option>
+  ));
 
 const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
 const defaultOptions = generateOptions(4);
 const thousandsOfOptions = generateOptions(1000);
 
-const CustomSelect = (props) => {
-  const [value, setValue] = useState('');
-  return (
-    <Select value={value} onChange={(value) => setValue(value)} {...props}>
-      {props.opts &&
-        props.opts.map((o, i) => (
-          <Option key={i} value={o.value} {...o}>
-            {o.label}
-          </Option>
-        ))}
-    </Select>
-  );
-};
-
 export const Playground = {
   args: {
-    options: defaultOptions,
+    children: defaultOptions,
     placeholder: 'Playground',
   },
 };
 
 export const WithoutOptions = {
   args: {
-    options: [{}],
+    options: [],
     placeholder: 'No options',
   },
 };
 
 export const DisabledSelect = {
   args: {
-    disabled: true,
-    defaultValue: defaultOptions[1].value,
+    // disabled: true,
+    defaultValue: defaultOptions[0].props.value,
+    children: defaultOptions,
   },
 };
 
 export const WithScollbar = {
   name: 'More than 4 items',
   args: {
-    options: optionsWithoutSearchBar,
+    children: optionsWithoutSearchBar,
   },
 };
 
 export const WithSearchBar = {
-  render: (args) => {
-    return <CustomSelect {...args} />;
-  },
   args: {
-    opts: optionsWithSearchBar,
+    children: optionsWithSearchBar,
   },
 };
 
 export const LotsOfOptions = {
-  ...WithSearchBar,
   args: {
-    opts: thousandsOfOptions,
+    children: thousandsOfOptions,
+  },
+};
+
+export const DifferentSizes = {
+  render: (args) => (
+    <SelectWrapper>
+      {sizes.map((size) => (
+        <Select size={size} {...args}></Select>
+      ))}
+    </SelectWrapper>
+  ),
+  args: {
+    children: defaultOptions,
   },
 };
 
@@ -96,28 +98,21 @@ export const NotEnoughPlaceAtTheBottom = {
         flexDirection: 'column',
       }}
     >
-      <CustomSelect {...args}></CustomSelect>
+      <Select {...args}></Select>
     </div>
   ),
   args: {
-    options: optionsWithSearchBar,
-  },
-};
-
-export const RoundedVariant = {
-  args: {
-    variant: 'rounded',
-    options: defaultOptions,
+    children: optionsWithSearchBar,
   },
 };
 
 export const InsideModal = {
   render: (args) => (
     <Modal isOpen title="select">
-      <CustomSelect menuPosition="fixed" {...args}></CustomSelect>
+      <Select menuPosition="fixed" {...args}></Select>
     </Modal>
   ),
   args: {
-    options: optionsWithoutSearchBar,
+    children: optionsWithoutSearchBar,
   },
 };
