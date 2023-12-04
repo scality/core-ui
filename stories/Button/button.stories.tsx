@@ -3,6 +3,7 @@ import React from 'react';
 import { Form, FormSection, Icon, Input, Stack, Tooltip } from '../../src/lib';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper } from '../common';
+import { Canvas } from '@storybook/blocks';
 
 export default {
   title: 'Components/Button',
@@ -18,6 +19,7 @@ export default {
     onClick: action('Button clicked'),
   },
   render: ({ icon, ...args }) => {
+    console.log('canvas', <Canvas />);
     return <Button {...args} icon={icon && <Icon name={icon} />} />;
   },
   argTypes: {

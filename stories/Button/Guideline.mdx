@@ -1,11 +1,23 @@
-import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+  Unstyled,
+  Source,
+} from '@storybook/blocks';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
 import * as ButtonStories from './button.stories';
 
-<Meta title="Button" of={ButtonStories} />
+<Meta title="Guideline" of={ButtonStories} />
 
 # Button
+
+<Unstyled>
+  <Canvas of={ButtonStories.IconButtonWithTooltip} sourceState="none" />
+</Unstyled>
 
 Buttons are used to trigger an action or event when clicked.
 
@@ -139,6 +151,10 @@ Seeing the icon first help users to scan the page more easily, except for few ca
 Avoid using an icon without label, used Universally understood icons such as Save or Delete.
 
 <Canvas of={ButtonStories.IconButtonWithTooltip} />
+
+<Unstyled>
+  <Story of={ButtonStories.IconButtonWithTooltip} />
+</Unstyled>
 
 ## Ghost Buttons
 
