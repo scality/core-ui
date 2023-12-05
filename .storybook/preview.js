@@ -31,6 +31,9 @@ const withThemeProvider = (Story, context) => {
 export const decorators = [withThemeProvider];
 
 export const parameters = {
+  docs:{
+      toc: true
+  },
   controls:{
     //All props with color in name will automatically have a control 'color'
     //with colors presets to theme colors, possible to have the color name from theme in control
