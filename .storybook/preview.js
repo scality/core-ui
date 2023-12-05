@@ -32,7 +32,8 @@ export const decorators = [withThemeProvider];
 
 export const parameters = {
   docs:{
-      toc: true
+      toc : {headingSelector: 'h2,h3',
+      title: "Table of Contents"},
   },
   controls:{
     //All props with color in name will automatically have a control 'color'
