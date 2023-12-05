@@ -16,7 +16,7 @@ const Flex = styled(Box)`
 `;
 
 const info = {
-  title: 'Components/Data Display/V2/Table',
+  title: 'Components/Data Display/Table',
   component: Table,
 };
 
