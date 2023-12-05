@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from '../src/lib/components/icon/Icon.component';
-import { Modal } from '../src/lib/components/modal/Modal.component';
-import { Select } from '../src/lib/components/selectv2/Selectv2.component';
-import { Wrapper } from './common';
+import { Icon } from '../../src/lib/components/icon/Icon.component';
+import { Modal } from '../../src/lib/components/modal/Modal.component';
+import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
+import { Wrapper } from '../common';
 
 export default {
   title: 'Components/Inputs/Select',

@@ -7,17 +7,13 @@ import {
   Unstyled,
   Source,
 } from '@storybook/blocks';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
 import * as ButtonStories from './button.stories';
 
-<Meta title="Guideline" of={ButtonStories} />
+<Meta of={ButtonStories} />
 
 # Button
-
-<Unstyled>
-  <Canvas of={ButtonStories.IconButtonWithTooltip} sourceState="none" />
-</Unstyled>
 
 Buttons are used to trigger an action or event when clicked.
 
