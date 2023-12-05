@@ -90,7 +90,7 @@ const Template = (args: Omit<ToastProps, 'open' | 'onClose'>) => {
       ? 'Check-circle'
       : 'Info-circle';
   return (
-    <>
+    <div style={{ height: '30vh' }}>
       {!open && (
         <Button label={'Open my custom toast'} onClick={() => setOpen(true)} />
       )}
@@ -100,54 +100,39 @@ const Template = (args: Omit<ToastProps, 'open' | 'onClose'>) => {
         icon={<Icon name={iconName} color={color} />}
         {...args}
       />
-    </>
-  );
-};
-
-export const SimpleToast = ({}) => {
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  return (
-    <div>
-      {!open && <Button label={'Open simple toast'} onClick={handleClick} />}
-      <Toast
-        open={open}
-        message={<BasicText>{"I'm a toast"}</BasicText>}
-        onClose={() => setOpen(false)}
-        status="info"
-      />
     </div>
   );
 };
 
-export const ToastWithProgressBar = ({}) => {
-  const [open, setOpen] = useState(false);
+export const SimpleToast = {
+  render: (args) => {
+    const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+    const handleClick = () => {
+      setOpen(true);
+    };
 
-  return (
-    <div>
-      {!open && (
-        <Button
-          label={'Open toast with a progress bar'}
-          onClick={handleClick}
+    return (
+      <div style={{ height: '30vh' }}>
+        {!open && <Button label={'Open simple toast'} onClick={handleClick} />}
+        <Toast
+          open={open}
+          message={<BasicText>{"I'm a toast"}</BasicText>}
+          onClose={() => setOpen(false)}
+          status="info"
+          {...args}
         />
-      )}
-      <Toast
-        open={open}
-        message={<BasicText>{"I'm a toast with a progress bar"}</BasicText>}
-        onClose={() => setOpen(false)}
-        status="info"
-        withProgressBar
-      />
-    </div>
-  );
+      </div>
+    );
+  },
+};
+
+export const ToastWithProgressBar = {
+  ...SimpleToast,
+  args: {
+    message: <BasicText>{"I'm a toast with a progress bar"}</BasicText>,
+    withProgressBar: true,
+  },
 };
 
 export const CustomToast: {
