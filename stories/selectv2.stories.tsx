@@ -17,15 +17,16 @@ const sizes = ['1/3', '1/2', '2/3', '1'];
 const SelectWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  height: 15rem;
 `;
 
 const generateOptions = (n = 10) =>
   Array.from(new Array(n), (_, index) => (
     <Select.Option
-      value={`Option${index}`}
+      value={`Option${index + 1}`}
       disabled={index !== 0 && index % 8 === 0}
       icon={index % 5 === 0 ? <Icon name={'Check'} /> : null}
-    >{`Label-option ${index}`}</Select.Option>
+    >{`Option ${index + 1}`}</Select.Option>
   ));
 
 const optionsWithSearchBar = generateOptions(25);
@@ -55,7 +56,7 @@ export const DisabledSelect = {
   },
 };
 
-export const WithScollbar = {
+export const WithScrollbar = {
   name: 'More than 4 items',
   args: {
     children: optionsWithoutSearchBar,
