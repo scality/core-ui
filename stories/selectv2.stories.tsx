@@ -5,6 +5,7 @@ import {
 import React, { useState } from 'react';
 import { Wrapper } from './common';
 import { Icon } from '../src/lib/components/icon/Icon.component';
+import { Modal } from '../src/lib/components/modal/Modal.component';
 export default {
   title: 'Components/Inputs/v2/Select',
   component: Select,
@@ -107,5 +108,16 @@ export const RoundedVariant = {
   args: {
     variant: 'rounded',
     options: defaultOptions,
+  },
+};
+
+export const InsideModal = {
+  render: (args) => (
+    <Modal isOpen title="select">
+      <CustomSelect menuPosition="fixed" {...args}></CustomSelect>
+    </Modal>
+  ),
+  args: {
+    options: optionsWithoutSearchBar,
   },
 };

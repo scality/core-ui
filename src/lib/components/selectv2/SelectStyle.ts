@@ -122,6 +122,7 @@ const SelectStyle = styled(Select)`
   }
 
   .sc-select__menu {
+    width: ${({ width }) => width};
     border: ${spacing.r1} solid
       ${({ isDefault }) =>
         getThemePropSelector(isDefault ? 'border' : 'selectedActive')};

@@ -295,6 +295,7 @@ export type SelectProps = {
   variant?: 'default' | 'rounded';
   size?: '1' | '2/3' | '1/2' | '1/3';
   className?: string;
+  menuPosition?: 'fixed' | 'absolute';
 };
 type SelectOptionProps = {
   value: string;
