@@ -51,6 +51,7 @@ export const parameters = {
         'Guidelines',
         'Templates',
         'Components',
+        ['Navigation', 'Data Display', 'Inputs', 'Feedback', 'Progress & loading', 'Styling', 'Deprecated']
         
       ],
     },
