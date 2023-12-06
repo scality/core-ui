@@ -95,7 +95,6 @@ function Tooltip({
         placement,
         middleware: [offset(5), shift(), flip()],
       }).then(({ x, y }) => {
-        console.log('cdc', x, y);
         if (tooltipRef.current) {
           Object.assign(tooltipRef.current.style, {
             opacity: '1',

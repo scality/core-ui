@@ -19,7 +19,6 @@ export default {
     onClick: action('Button clicked'),
   },
   render: ({ icon, ...args }) => {
-    console.log('canvas', <Canvas />);
     return <Button {...args} icon={icon && <Icon name={icon} />} />;
   },
   argTypes: {
