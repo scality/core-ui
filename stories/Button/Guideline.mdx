@@ -15,7 +15,7 @@ import * as ButtonStories from './button.stories';
 
 # Button
 
-Buttons are used to trigger an action or event when clicked.
+Buttons are used to trigger an action or event when activated.
 
 ## Size & style
 
@@ -51,23 +51,24 @@ Since buttons are action points for the user, button text should also be actiona
 Stick to using verbs (Complete, Start/Finish, Search) or a simple verb + noun combination for buttons (Next Page, Submit Post, Learn More). \
 Whichever labeling method you choose, maintain consistency across all of your buttons.
 
-| Do                                                      | Don't                                     |
-| ------------------------------------------------------- | ----------------------------------------- |
-| Use sentence case                                       | Use icons only                            |
-| Use specific action-oriented text for CTAs              | Use punctuation or exclamation points (!) |
-| Capitalize proper nouns                                 | Write “Click here”                        |
-| Check for consistent use across the UI                  |                                           |
-| Reserve enough space for translation to other languages |                                           |
+| Do                                                      | Don't                                    |
+| ------------------------------------------------------- | ---------------------------------------- |
+| Use sentence case                                       | Use icons only                           |
+| Use specific action-oriented text for CTAs              | Use punctuation or exclamation marks (!) |
+| Capitalize proper nouns                                 | Write “Click here”                       |
+| Check for consistent use across the UI                  |                                          |
+| Reserve enough space for translation to other languages |                                          |
 
 ## Variations
 
-The button can be modify in different way to match its usage
+The button can be modified in different way to match its usage
 
 ### Variant
 
 Buttons have a set of predefined variants to use in different context
 
 <Story of={ButtonStories.DefaultButtons} />
+<br />
 
 #### Primary
 
@@ -142,11 +143,7 @@ Seeing the icon first help users to scan the page more easily, except for few ca
 
 Avoid using an icon without label, used Universally understood icons such as Save or Delete.
 
-<Canvas of={ButtonStories.IconButtonWithTooltip} />
-
-<Unstyled>
-  <Story of={ButtonStories.IconButtonWithTooltip} />
-</Unstyled>
+<Canvas of={ButtonStories.IconButtonWithTooltip} layout="fullscreen" />
 
 ## Ghost Buttons
 
