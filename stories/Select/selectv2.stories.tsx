@@ -23,6 +23,7 @@ const SelectWrapper = styled.div`
 const generateOptions = (n = 10) =>
   Array.from(new Array(n), (_, index) => (
     <Select.Option
+      key={index}
       value={`Option${index + 1}`}
       disabled={index !== 0 && index % 8 === 0}
       icon={index % 5 === 0 ? <Icon name={'Check'} /> : null}
@@ -79,7 +80,7 @@ export const DifferentSizes = {
   render: (args) => (
     <SelectWrapper>
       {sizes.map((size) => (
-        <Select size={size} {...args}></Select>
+        <Select key={size} size={size} {...args}></Select>
       ))}
     </SelectWrapper>
   ),
