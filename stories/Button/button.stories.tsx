@@ -1,5 +1,4 @@
 import { action } from '@storybook/addon-actions';
-import { Canvas } from '@storybook/blocks';
 import React from 'react';
 import { Form, FormSection, Icon, Input, Stack } from '../../src/lib';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
@@ -234,6 +233,29 @@ export const GhostButtons = {
             overlay: 'Metric over a period',
             placement: 'top',
           }}
+        />
+      </>
+    );
+  },
+};
+
+export const LinkButton = {
+  render: (args) => {
+    return (
+      <>
+        <Button
+          label="Link"
+          {...args}
+          variant="primary"
+          onClick={() => window.open('/')}
+        />
+        <Button
+          label="External Link"
+          icon={<Icon name="External-link"></Icon>}
+          variant="primary"
+          onClick={() =>
+            window.open('https://en.wikipedia.org/wiki/Button_(computing)')
+          }
         />
       </>
     );
