@@ -86,7 +86,7 @@ export const DropdownWithText = {
 
 export const DropdownWithIcon = {
   args: {
-    icon: <i className="fas fa-star" />,
+    icon: 'Folder',
     caret: false,
   },
 };

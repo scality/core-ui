@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas, Primary, Controls } from '@storybook/blocks';
+
+import * as Stories from './infomessage.stories.tsx';
+
+<Meta title="Guideline" of={Stories} />
+
+# InfoMessage
+
+This component provides complementary information to the user to help him understand what to do.
+A link can be added for more information.
+
+## Style
+
+## Usage
+
+It is used only for non critical information.
+It is typically used in forms or in modal to help the user.
+
+<Controls of={Stories.Default} />
+
+## Variations
+
+### Background
+
+This component automatically adapts its background to contrast with its parent element.
+
+<Story of={Stories.WithDifferentBackground} />
+
+## Playground
+
+<Canvas of={Stories.Playground} layout="fullscreen" />
+<Controls of={Stories.Playground} />
