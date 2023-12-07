@@ -90,7 +90,7 @@ export const defaultTheme: Record<ThemeName, CoreUITheme> = {
     statusCriticalRGB: '232, 72, 85, 1',
     selectedActive: '#2196F3',
     highlight: '#1A3C75',
-    border: '#4A4A4A',
+    border: '#313131',
     buttonPrimary: '#2E67AB',
     buttonSecondary: '#434343',
     buttonDelete: '#8D1616',
@@ -106,9 +106,6 @@ export const defaultTheme: Record<ThemeName, CoreUITheme> = {
     textReverse: '#000000',
     textLink: '#71AEFF',
   },
-  // ring9dark
-  // ring9light
-  // ring10dark...
 };
 
 export const brand = defaultTheme.darkRebrand;
