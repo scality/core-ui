@@ -28,7 +28,34 @@ export const gray = '#87929D';
 export const grayLight = '#C2C8CC';
 export const grayLighter = '#D8DCDE';
 export const grayLightest = '#E9EBED';
-export const defaultTheme = {
+
+export type CoreUITheme = {
+  statusHealthy: string;
+  statusHealthyRGB: string;
+  statusWarning: string;
+  statusWarningRGB: string;
+  statusCritical: string;
+  statusCriticalRGB: string;
+  selectedActive: string;
+  highlight: string;
+  border: string;
+  buttonPrimary: string;
+  buttonSecondary: string;
+  buttonDelete: string;
+  infoPrimary: string;
+  infoSecondary: string;
+  backgroundLevel1: string;
+  backgroundLevel2: string;
+  backgroundLevel3: string;
+  backgroundLevel4: string;
+  textPrimary: string;
+  textSecondary: string;
+  textTertiary: string;
+  textReverse: string;
+  textLink: string;
+};
+type ThemeName = 'darkRebrand' | 'ring9dark';
+export const defaultTheme: Record<ThemeName, CoreUITheme> = {
   darkRebrand: {
     statusHealthy: '#0AADA6',
     statusHealthyRGB: '10,173,166',
@@ -54,10 +81,38 @@ export const defaultTheme = {
     textReverse: '#000000',
     textLink: '#71AEFF',
   },
+  ring9dark: {
+    statusHealthy: '#2BAB51',
+    statusHealthyRGB: '43, 171, 81',
+    statusWarning: '#FC8A32',
+    statusWarningRGB: '252, 138, 50',
+    statusCritical: '#E84855',
+    statusCriticalRGB: '232, 72, 85, 1',
+    selectedActive: '#2196F3',
+    highlight: '#1A3C75',
+    border: '#4A4A4A',
+    buttonPrimary: '#2E67AB',
+    buttonSecondary: '#434343',
+    buttonDelete: '#8D1616',
+    infoPrimary: '#76828F',
+    infoSecondary: '#2C3238',
+    backgroundLevel1: '#151313',
+    backgroundLevel2: '#221D1D',
+    backgroundLevel3: '#1B1D1F',
+    backgroundLevel4: '#1B1B27',
+    textPrimary: '#EAEAEA',
+    textSecondary: '#A4ACB4',
+    textTertiary: '#DFDFDF',
+    textReverse: '#000000',
+    textLink: '#71AEFF',
+  },
+  // ring9dark
+  // ring9light
+  // ring10dark...
 };
 
 export const brand = defaultTheme.darkRebrand;
-export type ThemeColors = keyof typeof brand;
+export type ThemeColors = keyof CoreUITheme;
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';
