@@ -1,8 +1,6 @@
 import 'styled-components';
-import { defaultTheme } from '../src/lib/style/theme';
-
-type Theme = typeof defaultTheme.darkRebrand;
+import { CoreUITheme } from '../src/lib/style/theme';
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends Theme {}
+  export interface DefaultTheme extends CoreUITheme {}
 }

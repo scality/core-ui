@@ -54,8 +54,9 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
-type ThemeName = 'darkRebrand' | 'ring9dark';
-export const defaultTheme: Record<ThemeName, CoreUITheme> = {
+export type CoreUIThemeName = 'darkRebrand' | 'ring9dark';
+
+export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
   darkRebrand: {
     statusHealthy: '#0AADA6',
     statusHealthyRGB: '10,173,166',
@@ -83,11 +84,11 @@ export const defaultTheme: Record<ThemeName, CoreUITheme> = {
   },
   ring9dark: {
     statusHealthy: '#2BAB51',
-    statusHealthyRGB: '43, 171, 81',
+    statusHealthyRGB: '43,171,81',
     statusWarning: '#FC8A32',
-    statusWarningRGB: '252, 138, 50',
+    statusWarningRGB: '252,138,50',
     statusCritical: '#E84855',
-    statusCriticalRGB: '232, 72, 85, 1',
+    statusCriticalRGB: '232,72,85,1',
     selectedActive: '#2196F3',
     highlight: '#1A3C75',
     border: '#313131',
@@ -107,6 +108,15 @@ export const defaultTheme: Record<ThemeName, CoreUITheme> = {
     textLink: '#71AEFF',
   },
 };
+
+/**
+ * @deprecated
+ *
+ * Please use coreUIAvailableThemes instead, the label is more explicit.
+ *
+ * import { coreUIAvailableThemes } from '@scality/core-ui/dist/style/theme';
+ */
+export const defaultTheme = coreUIAvailableThemes;
 
 export const brand = defaultTheme.darkRebrand;
 export type ThemeColors = keyof CoreUITheme;
