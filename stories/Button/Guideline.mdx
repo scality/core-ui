@@ -43,21 +43,15 @@ Button’s label measurement:
 ## Usage
 
 Button labels should be as short and clear as possible and should describe the action the button performs.\
-Use one or two words if possible. Remove most prepositions and articles (a, an, the).
 
-Examples: Cancel, Close, Create, Delete, Edit, Learn more, Review, Save, Study, View scores, etc.
-
-Since buttons are action points for the user, button text should also be actionable. \
-Stick to using verbs (Complete, Start/Finish, Search) or a simple verb + noun combination for buttons (Next Page, Submit Post, Learn More). \
-Whichever labeling method you choose, maintain consistency across all of your buttons.
-
-| Do                                                      | Don't                                    |
-| ------------------------------------------------------- | ---------------------------------------- |
-| Use sentence case                                       | Use icons only                           |
-| Use specific action-oriented text for CTAs              | Use punctuation or exclamation marks (!) |
-| Capitalize proper nouns                                 | Write “Click here”                       |
-| Check for consistent use across the UI                  |                                          |
-| Reserve enough space for translation to other languages |                                          |
+- Use one or two words if possible,
+- Remove most prepositions and articles (a, an, the).
+- Examples: Cancel, Close, Create, Delete, Edit, Learn More, Review, Save, Study, View Scores, etc.,
+- Stick to using verbs (Complete, Start, Finish, Search) or a simple verb + noun combination for buttons (Next page, Submit post, Learn more),
+- Capitalize the noun after the verb (Create Folder, Create Node, Edit Location).
+- Maintain labelling method consistency across all of your buttons,
+- Don't use punctuation or exclamation marks (!),
+- And, most importantly, don't write "Click here".
 
 ## Variations
 
@@ -72,26 +66,28 @@ Buttons have a set of predefined variants to use in different context
 
 #### Primary
 
-Used for the main action. It appears once within a group of buttons (or even a screen).  
+Used for the main action. It should only appear once within a group of buttons (or even a screen).
 For example, “Continue” in a form.
 
 <Story of={ButtonStories.Primary} />
 
 #### Secondary
 
-Use for the secondary action within a group of buttons.
+Used for a secondary action within a group of buttons.
 
 <Story of={ButtonStories.Secondary} />
 
 #### Outline
 
-Dismissive action, such as the cancel button.
+Used for low-emphasis action, as an alternative to Primary or Secondary buttons.
+It's suitable for dismissive action, such as the "Cancel" button.
 
 <Story of={ButtonStories.Outline} />
 
 #### Danger
 
-Use for critical action, typically delete actions
+Used for critical action, typically delete actions.
+Actions triggered by such button often require additional validation, as the critical action cannot be undone.
 
 <Story of={ButtonStories.Danger} />
 
@@ -102,10 +98,10 @@ When the link send to another site, use the "External-link-alt" icon.
 
 ### Size
 
-Only 2 size are available for the button component : default and inline
+Only 2 sizes are available for the button component : default and inline.
 
 Inline size is use for constraint spaces, like in tables or in key/values sections.
-On all others cases, use the default size
+On all others cases, use the default size.
 
 <Story of={ButtonStories.ButtonSizes} />
 
@@ -113,7 +109,9 @@ On all others cases, use the default size
 
 #### Disabled button
 
-Disabled state only if an action on the current screen can enable it (action possibility).
+When the action linked to a button is not possible, the button should be visually disabled rather than
+removed from the interface for consistent user interaction.
+A hovering tooltip must be provided to explain the reason behind the button's disabled condition.
 
 <Story of={ButtonStories.ButtonDisabled} />
 
@@ -143,8 +141,6 @@ Seeing the icon first help users to scan the page more easily, except for few ca
 
 <Story of={ButtonStories.ButtonsWithIcon} />
 
-Avoid using an icon without label, used Universally understood icons such as Save or Delete.
-
 <Canvas of={ButtonStories.IconButtonWithTooltip} layout="fullscreen" />
 
 ## Ghost Buttons
@@ -153,11 +149,11 @@ Ghost buttons are subtle and contribute to a minimalist interface design.
 They are low-emphasis, making them ideal for non-primary actions in UIs.  
 They're also effective in space-limited areas like tables or key-value lists.
 
-| Do                                              | Don't                                                                                                        |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Ensure tooltips are included for clarity        | Confuse them with non-interactive elements like descriptive icons or status indicators                       |
-| Use them for secondary or less crucial actions. | Opt for them over Outline buttons, which are more visibly recognizable as buttons.                           |
-|                                                 | Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs). |
+- Ensure tooltips are included for clarity
+- Don't confuse them with non-interactive elements like descriptive icons or status indicators
+- Use them for secondary or less crucial actions.
+- Don't opt for them over Outline buttons, which are more visibly recognizable as buttons.
+- Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs).
 
 <Story of={ButtonStories.GhostButtons} />
 

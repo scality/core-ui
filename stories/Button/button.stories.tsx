@@ -1,8 +1,18 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
-import { Form, FormSection, Icon, Input, Stack } from '../../src/lib';
+import {
+  Form,
+  FormGroup,
+  FormSection,
+  Icon,
+  Stack,
+  Text,
+  Toggle,
+} from '../../src/lib';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Wrapper } from '../common';
+import { Input, Select } from '../../src/lib/next';
+import { brand } from '../../src/lib/style/theme';
 
 export default {
   title: 'Components/Button',
@@ -106,30 +116,51 @@ export const Danger = {
 export const SimpleForm = {
   render: ({ ...args }) => {
     return (
-      <Form
-        layout={{ kind: 'page', title: 'Simple Form' }}
-        requireMode="all"
-        rightActions={
-          <Stack gap={'r16'}>
-            <Button variant="outline" label="Cancel" />
-            <Button variant="primary" label="Save" />
-          </Stack>
-        }
+      <div
+        style={{
+          background: brand.backgroundLevel4,
+          color: brand.textPrimary,
+        }}
       >
-        <FormSection>
-          <Input
-            name="firstname"
-            label="Firstname"
-            value=""
-            onChange={() => {}}
-          />
-          <Input name="surname" label="Surname" value="" onChange={() => {}} />
-        </FormSection>
-        <FormSection>
-          <Input name="email" label="Email" value="" onChange={() => {}} />
-          <Input name="phone" label="Phone" value="" onChange={() => {}} />
-        </FormSection>
-      </Form>
+        <Form
+          layout={{ kind: 'page', title: 'Simple Form', icon: 'Search' }}
+          rightActions={
+            <Stack gap={'r16'}>
+              <Button variant="outline" label="Cancel" />
+              <Button
+                variant="primary"
+                label="Save"
+                icon={<Icon name="Save" />}
+              />
+            </Stack>
+          }
+        >
+          <FormSection
+            title={{
+              name: 'First part entity data',
+              helpTooltip: 'Tooltip of the first entity',
+              icon: 'Search',
+            }}
+          >
+            <FormGroup
+              direction="vertical"
+              label="Name"
+              id="name"
+              labelHelpTooltip="Name Tooltip"
+              content={<Input id="name" />}
+              required
+            ></FormGroup>
+            <FormGroup
+              direction="horizontal"
+              label="Email"
+              id="email"
+              labelHelpTooltip="Email Tooltip"
+              content={<Input id="email" />}
+              required
+            ></FormGroup>
+          </FormSection>
+        </Form>
+      </div>
     );
   },
 };
