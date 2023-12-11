@@ -51,7 +51,7 @@ export const WithoutOptions = {
 
 export const DisabledSelect = {
   args: {
-    // disabled: true,
+    disabled: true,
     defaultValue: defaultOptions[0].props.value,
     children: defaultOptions,
   },

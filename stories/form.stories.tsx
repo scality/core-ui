@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import {
@@ -62,6 +62,7 @@ export const PageForm = {
       subTitle,
       icon,
     };
+    const [toggle, setToggle] = useState(true);
     return (
       <div
         style={{
@@ -86,7 +87,7 @@ export const PageForm = {
           banner={
             <Banner
               variant="danger"
-              icon={<Icon name="Exclamation-triangle" />}
+              icon={<Icon name="Exclamation-circle" />}
               title={'Error'}
             >
               There is an error
@@ -134,7 +135,13 @@ export const PageForm = {
               id="name1"
               labelHelpTooltip="Name Tooltip"
               content={
-                <Toggle onChange={() => {}} toggle={true} name="toggle" />
+                <Toggle
+                  onChange={() => {
+                    setToggle(!toggle);
+                  }}
+                  toggle={toggle}
+                  name="toggle"
+                />
               }
               help="Optional helper text"
               required={false}
