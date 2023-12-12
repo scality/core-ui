@@ -1,11 +1,8 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
-import { defaultTheme,brand } from '../src/lib/style/theme';
+import { brand, coreUIAvailableThemes} from '../src/lib/style/theme';
 
-const themes = {
-  darkRebrand: defaultTheme.darkRebrand,
-};
 
 export const globalTypes = {
   theme: {
@@ -15,13 +12,13 @@ export const globalTypes = {
     toolbar: {
       icon: 'circlehollow',
       // array of plain string values or MenuItem shape (see below)
-      items: ['darkRebrand'],
+      items: Object.keys(coreUIAvailableThemes),
     },
   },
 };
 
 const withThemeProvider = (Story, context) => {
-  const theme = themes[context.globals.theme];
+  const theme = coreUIAvailableThemes[context.globals.theme];
   return (
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
