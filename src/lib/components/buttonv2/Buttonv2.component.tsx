@@ -1,11 +1,8 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { Tooltip } from '../tooltip/Tooltip.component';
-import { Props as TooltipProps } from '../tooltip/Tooltip.component';
-
-import * as defaultTheme from '../../style/theme';
-import { spacing } from '../../style/theme';
-import { spacing as newSpacing } from '../../spacing';
+import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
+import { fontSize, fontWeight } from '../../style/theme';
+import { spacing } from '../../spacing';
 export type Props = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'size' | 'label'
@@ -32,13 +29,12 @@ export const ButtonStyled = styled.button<Props>`
   border: none;
   text-decoration: none;
   font-family: 'Lato';
-  font-weight: ${defaultTheme.fontWeight.base};
+  font-weight: ${fontWeight.base};
 
-  padding: ${spacing.sp4} ${spacing.sp8};
-  font-size: ${defaultTheme.fontSize.base};
-  border-radius: ${spacing.sp4};
-  height: ${(props) =>
-    props.size === 'inline' ? newSpacing.r24 : newSpacing.r32};
+  padding: ${spacing.r4} ${spacing.r8};
+  font-size: ${fontSize.base};
+  border-radius: ${spacing.r4};
+  height: ${(props) => (props.size === 'inline' ? spacing.r24 : spacing.r32)};
 
   ${(props) => {
     const brand = props.theme;
@@ -47,70 +43,70 @@ export const ButtonStyled = styled.button<Props>`
       case 'primary':
         return css`
           background-color: ${brand.buttonPrimary};
-          border: ${spacing.sp1} solid ${brand.buttonPrimary};
+          border: ${spacing.r1} solid ${brand.buttonPrimary};
           color: ${brand.textSecondary};
           &:hover:enabled {
             cursor: pointer;
-            border: ${spacing.sp1} solid ${brand.infoPrimary};
+            border: ${spacing.r1} solid ${brand.infoPrimary};
             color: ${brand.textPrimary};
           }
           // :focus-visible is the keyboard-only version of :focus
           &:focus-visible:enabled {
-            outline: dashed ${spacing.sp2} ${brand.selectedActive};
-            outline-offset: ${spacing.sp2};
+            outline: dashed ${spacing.r2} ${brand.selectedActive};
+            outline-offset: ${spacing.r2};
             color: ${brand.textPrimary};
           }
           &:active:enabled {
             cursor: pointer;
             color: ${brand.textTertiary};
-            border: ${spacing.sp1} solid ${brand.infoSecondary};
+            border: ${spacing.r1} solid ${brand.infoSecondary};
           }
         `;
 
       case 'secondary':
         return css`
           background-color: ${brand.buttonSecondary};
-          border: ${spacing.sp1} solid ${brand.buttonSecondary};
+          border: ${spacing.r1} solid ${brand.buttonSecondary};
           color: ${brand.textSecondary};
           &:hover:enabled {
             cursor: pointer;
-            border: ${spacing.sp1} solid ${brand.infoPrimary};
+            border: ${spacing.r1} solid ${brand.infoPrimary};
             color: ${brand.textPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.sp2} ${brand.selectedActive};
-            outline-offset: ${spacing.sp2};
+            outline: dashed ${spacing.r2} ${brand.selectedActive};
+            outline-offset: ${spacing.r2};
             color: ${brand.textPrimary};
           }
           &:active:enabled {
             cursor: pointer;
             color: ${brand.textTertiary};
-            border: ${spacing.sp1} solid ${brand.buttonSecondary};
+            border: ${spacing.r1} solid ${brand.buttonSecondary};
           }
         `;
 
       case 'danger':
         return css`
           background-color: ${brand.buttonDelete};
-          border: ${spacing.sp1} solid ${brand.buttonDelete};
+          border: ${spacing.r1} solid ${brand.buttonDelete};
           color: ${brand.statusCritical};
           &:hover:enabled {
             cursor: pointer;
-            border: ${spacing.sp1} solid ${brand.infoPrimary};
+            border: ${spacing.r1} solid ${brand.infoPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.sp2} ${brand.selectedActive};
-            outline-offset: ${spacing.sp2};
+            outline: dashed ${spacing.r2} ${brand.selectedActive};
+            outline-offset: ${spacing.r2};
           }
           &:active:enabled {
             cursor: pointer;
-            border: ${spacing.sp1} solid ${brand.infoSecondary};
+            border: ${spacing.r1} solid ${brand.infoSecondary};
           }
         `;
 
       case 'outline':
         return css`
-          border: ${spacing.sp1} solid ${brand.buttonSecondary};
+          border: ${spacing.r1} solid ${brand.buttonSecondary};
           background-color: transparent;
           color: ${brand.textTertiary};
           &:hover:enabled {
@@ -119,13 +115,13 @@ export const ButtonStyled = styled.button<Props>`
             color: ${brand.textPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.sp2} ${brand.selectedActive};
-            outline-offset: ${spacing.sp2};
+            outline: dashed ${spacing.r2} ${brand.selectedActive};
+            outline-offset: ${spacing.r2};
             border-color: ${brand.buttonSecondary};
           }
           &:active:enabled {
             cursor: pointer;
-            border: ${spacing.sp1} solid ${brand.infoSecondary};
+            border: ${spacing.r1} solid ${brand.infoSecondary};
             color: ${brand.textTertiary};
           }
         `;
@@ -162,7 +158,7 @@ export const ButtonStyled = styled.button<Props>`
           color: ${brand.textPrimary};
         }
         &:focus-visible:enabled {
-          outline: dashed ${spacing.sp2} ${brand.selectedActive};
+          outline: dashed ${spacing.r2} ${brand.selectedActive};
         }
         &:active {
           cursor: pointer;
@@ -182,7 +178,7 @@ export const ButtonIcon = styled.span<{ label: React.ReactNode }>`
   ${(props) =>
     props.label &&
     css`
-      padding-right: ${spacing.sp8};
+      padding-right: ${spacing.r8};
       display: inline-flex;
       justify-content: center;
       align-items: center;

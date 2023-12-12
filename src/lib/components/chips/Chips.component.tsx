@@ -1,9 +1,8 @@
-// @ts-check
-import * as defaultTheme from '../../style/theme';
-import { Size } from '../constants';
-import styled, { css } from 'styled-components';
-import { Button } from '../button/Button.component';
 import { lighten } from 'polished';
+import styled, { css } from 'styled-components';
+import { fontSize, grayLight, white } from '../../style/theme';
+import { Button } from '../button/Button.component';
+import { Size } from '../constants';
 
 import { Icon } from '../icon/Icon.component';
 type Props = {
@@ -27,9 +26,9 @@ const ChipsContainer = styled.div<{
   display: inline-flex;
   .sc-chips-remove {
     padding-right: 10px;
-    color: ${defaultTheme.white};
+    color: ${white};
     &:hover {
-      color: ${defaultTheme.grayLight};
+      color: ${grayLight};
     }
   }
   ${(props) => {
@@ -93,7 +92,7 @@ const ChipsContainer = styled.div<{
     return props.onClick
       ? css`
           background-color: ${brand[props.variant]};
-          font-size: ${defaultTheme.fontSize[props.size || 'base']};
+          font-size: ${fontSize[props.size || 'base']};
           &:hover {
             cursor: pointer;
             background-color: ${brandLight};
@@ -104,7 +103,7 @@ const ChipsContainer = styled.div<{
         `
       : css`
           background-color: ${brand[props.variant]};
-          font-size: ${defaultTheme.fontSize[props.size || 'base']};
+          font-size: ${fontSize[props.size || 'base']};
         `;
   }}
 `;

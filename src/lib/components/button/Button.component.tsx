@@ -1,10 +1,11 @@
 // @ts-nocheck
 // Legacy Button should not be use anymore
-import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
-import * as defaultTheme from '../../style/theme';
-import { Loader } from '../loader/Loader.component';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
+import { fontSize, fontWeight, white } from '../../style/theme';
 import { Size } from '../constants';
+import { Loader } from '../loader/Loader.component';
 type Props = {
   text?: string;
   size?: Size;
@@ -40,7 +41,7 @@ export const ButtonStyled = styled.button`
   text-decoration: none;
   border: none;
   text-decoration: none;
-  font-weight: ${defaultTheme.fontWeight.base};
+  font-weight: ${fontWeight.base};
 
   &:hover,
   &:focus,
@@ -54,7 +55,7 @@ export const ButtonStyled = styled.button`
       case 'smaller':
         return css`
           padding: 7px 14px;
-          font-size: ${defaultTheme.fontSize.smaller};
+          font-size: ${fontSize.smaller};
           border-radius: 4px;
           height: 27px;
         `;
@@ -62,7 +63,7 @@ export const ButtonStyled = styled.button`
       case 'small':
         return css`
           padding: 8px 16px;
-          font-size: ${defaultTheme.fontSize.small};
+          font-size: ${fontSize.small};
           border-radius: 5px;
           height: 30px;
         `;
@@ -70,7 +71,7 @@ export const ButtonStyled = styled.button`
       case 'large':
         return css`
           padding: 10px 20px;
-          font-size: ${defaultTheme.fontSize.large};
+          font-size: ${fontSize.large};
           border-radius: 7px;
           height: 40px;
         `;
@@ -78,7 +79,7 @@ export const ButtonStyled = styled.button`
       case 'larger':
         return css`
           padding: 11px 22px;
-          font-size: ${defaultTheme.fontSize.larger};
+          font-size: ${fontSize.larger};
           border-radius: 8px;
           height: 48px;
         `;
@@ -87,7 +88,7 @@ export const ButtonStyled = styled.button`
       default:
         return css`
           padding: 12px 16px;
-          font-size: ${defaultTheme.fontSize.base};
+          font-size: ${fontSize.base};
           border-radius: 6px;
           height: 32px;
         `;
@@ -100,7 +101,7 @@ export const ButtonStyled = styled.button`
         > span {
           display: flex;
           .sc-loader {
-            margin: 0px ${defaultTheme.padding.smaller};
+            margin: 0px ${spacing.r4};
             svg {
               fill: ${props.theme.textPrimary} !important;
             }
@@ -186,7 +187,7 @@ ${(props) => {
           pointer-events: none;
           opacity: 0.3;
           border-color: ${brandLighter};
-          color: ${defaultTheme.white};
+          color: ${white};
         `
         : null}
     `;

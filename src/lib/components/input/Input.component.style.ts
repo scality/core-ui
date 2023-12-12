@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontSize } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 export const InputContainer = styled.div<{
   disabled: boolean;
@@ -21,7 +22,7 @@ export const InputContainer = styled.div<{
     }
   }}
   .sc-checkbox {
-    margin: ${defaultTheme.padding.smaller} 0;
+    margin: ${spacing.r4} 0;
   }
 
   &.sc-select {
@@ -38,8 +39,8 @@ export const InputContainer = styled.div<{
         border: 1px solid ${props.error ? statusCritical : border};
       `;
     }};
-    padding: 8px ${defaultTheme.padding.small};
-    font-size: ${defaultTheme.fontSize.base};
+    padding: 8px ${spacing.r8};
+    font-size: ${fontSize.base};
     display: block;
     border-radius: 4px;
   }
@@ -79,7 +80,7 @@ export const InputContainer = styled.div<{
               `;
             }};
             position: absolute;
-            right: ${defaultTheme.padding.smaller};
+            right: ${spacing.r4};
             top: 50%;
             transform: translate(-50%, -50%);
 
@@ -125,14 +126,14 @@ export const InputContainer = styled.div<{
 `;
 export const LabelStyle = styled.label`
   align-self: flex-start;
-  padding: ${defaultTheme.padding.small};
-  font-size: ${defaultTheme.fontSize.base};
+  padding: ${spacing.r8};
+  font-size: ${fontSize.base};
   color: ${getThemePropSelector('textPrimary')};
 `;
 export const InputErrorMessage = styled.span`
   color: ${getThemePropSelector('statusCritical')};
-  margin: ${defaultTheme.padding.smaller} 0;
-  font-size: ${defaultTheme.fontSize.small};
+  margin: ${spacing.r4} 0;
+  font-size: ${fontSize.small};
 `;
 export const InputWrapper = styled.div`
   display: flex;

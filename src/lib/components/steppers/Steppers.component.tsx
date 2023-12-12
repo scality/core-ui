@@ -1,7 +1,6 @@
-// @ts-nocheck
 import styled, { css } from 'styled-components';
-
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { gray, white } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import { Loader } from '../loader/Loader.component';
@@ -46,25 +45,25 @@ const Circle = styled.div`
     if (props.error) {
       return css`
         background-color: ${statusCritical};
-        color: ${defaultTheme.white};
+        color: ${white};
       `;
     } else if (props.active) {
       return css`
         background-color: ${selectedActive};
-        color: ${defaultTheme.white};
+        color: ${white};
         svg {
-          fill: ${defaultTheme.white};
+          fill: ${white};
         }
       `;
     } else if (props.completed) {
       return css`
         background-color: ${statusHealthy};
-        color: ${defaultTheme.white};
+        color: ${white};
       `;
     } else {
       return css`
-        background-color: ${getThemePropSelector('buttonSecondary')};
-        color: ${defaultTheme.white};
+        background-color: ${gray};
+        color: ${white};
       `;
     }
   }};
@@ -77,7 +76,7 @@ const StepHeader = styled.span`
       : getThemePropSelector('textSecondary')};
 `;
 const StepContent = styled.div`
-  padding: ${defaultTheme.padding.small};
+  padding: ${spacing.r8};
 `;
 const BottomBar = styled.hr`
   flex-grow: 1;
@@ -92,7 +91,7 @@ const BottomBar = styled.hr`
       `;
     } else {
       return css`
-        border-left: 2px solid ${defaultTheme.gray};
+        border-left: 2px solid ${gray};
       `;
     }
   }};

@@ -1,7 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
-import styled, { css } from 'styled-components';
 import { darken } from 'polished';
-import * as defaultTheme from '../../style/theme';
+import { useEffect, useRef, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
+import {
+  fontWeight,
+  grayDarkest,
+  black,
+  white,
+  grayLightest,
+} from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Variant } from '../constants';
 import { Icon } from '../icon/Icon.component';
@@ -15,10 +22,10 @@ export type Props = {
 };
 const NotificationContainer = styled.div<{ variant?: Variant }>`
   position: relative;
-  padding: ${defaultTheme.padding.base};
-  margin-top: ${defaultTheme.padding.base};
+  padding: ${spacing.r16};
+  margin-top: ${spacing.r16};
   border-radius: 5px;
-  box-shadow: 0px 0px 3px ${defaultTheme.grayDarkest};
+  box-shadow: 0px 0px 3px ${grayDarkest};
 
   ${(props) => {
     const variant = props.variant ?? 'backgroundLevel1';
@@ -27,20 +34,20 @@ const NotificationContainer = styled.div<{ variant?: Variant }>`
       case 'warning':
         return css`
           background-color: ${background};
-          color: ${defaultTheme.black};
+          color: ${black};
         `;
 
       default:
         return css`
           background-color: ${background};
-          color: ${defaultTheme.white};
+          color: ${white};
         `;
     }
   }}
 `;
 const NotificationTitle = styled.div`
-  padding: 0 ${defaultTheme.padding.base} ${defaultTheme.padding.smaller} 0;
-  font-weight: ${defaultTheme.fontWeight.bold};
+  padding: 0 ${spacing.r16} ${spacing.r4} 0;
+  font-weight: ${fontWeight.bold};
 `;
 const NotificationDismissProgress = styled.div<{
   variant?: Variant;
@@ -70,7 +77,7 @@ const NotificationClose = styled.div`
   right: 15px;
   cursor: pointer;
   &:hover {
-    color: ${defaultTheme.grayLightest};
+    color: ${grayLightest};
   }
 `;
 

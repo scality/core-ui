@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { zIndex } from '../../style/theme';
+import { spacing } from '../../spacing';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 
@@ -8,20 +9,19 @@ const StyledScrollButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${defaultTheme.spacing.sp24};
-  z-index: ${defaultTheme.zIndex.scrollbarButton};
+  width: ${spacing.r24};
+  z-index: ${zIndex.scrollbarButton};
   color: ${getThemePropSelector('textSecondary')};
   background-color: ${getThemePropSelector('backgroundLevel3')};
-  box-shadow: 0px 0px ${defaultTheme.spacing.sp2} rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px ${spacing.r2} rgba(0, 0, 0, 0.75);
   box-sizing: border-box;
-  border: ${defaultTheme.spacing.sp1} solid transparent;
+  border: ${spacing.r1} solid transparent;
   cursor: pointer;
 
   &:hover {
-    border-radius: ${defaultTheme.spacing.sp2};
+    border-radius: ${spacing.r2};
     box-shadow: none;
-    border: ${defaultTheme.spacing.sp1} solid
-      ${getThemePropSelector('infoPrimary')};
+    border: ${spacing.r1} solid ${getThemePropSelector('infoPrimary')};
   }
 `;
 type Props = {

@@ -1,5 +1,5 @@
 import { VegaChart } from '../vegachart/VegaChart.component';
-import * as defaultTheme from '../../style/theme';
+import { yellowOrange, green } from '../../style/theme';
 type Props = {
   id: string;
   title?: string;
@@ -26,8 +26,8 @@ function SparkLine({
   row,
   lineConfig,
   sparkLineColor,
-  upTrendColor = defaultTheme.yellowOrange,
-  bottomTrendColor = defaultTheme.green,
+  upTrendColor = yellowOrange,
+  bottomTrendColor = green,
 }: Props) {
   const spec = {
     title: {

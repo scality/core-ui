@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { Checkbox } from './../checkbox/Checkbox.component';
-import { Button } from './../button/Button.component';
-import { Select } from './../select/Select.component';
+import { spacing } from '../../spacing';
+import { fontSize, fontWeight } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { Button } from './../button/Button.component';
+import { Checkbox } from './../checkbox/Checkbox.component';
+import { Select } from './../select/Select.component';
 
 export type ItemProps = {
   selected?: boolean;
@@ -37,14 +38,14 @@ const MultiSelectContainer = styled.div`
   color: ${getThemePropSelector('textPrimary')};
 `;
 const MultiSelectTitle = styled.h3`
-  padding: ${defaultTheme.padding.base} 0;
+  padding: ${spacing.r16} 0;
   margin: 0;
-  font-weight: ${defaultTheme.fontWeight.bold};
-  font-size: ${defaultTheme.fontSize.large};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.large};
 `;
 const MultiSelectItemContainer = styled.div`
-  margin: ${defaultTheme.padding.smaller} 0;
-  padding: ${defaultTheme.padding.small} 0;
+  margin: ${spacing.r4} 0;
+  padding: ${spacing.r8} 0;
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
@@ -59,13 +60,13 @@ const MultiSelectSearchContainer = styled.div`
     width: 100%;
   }
   .sc-button {
-    margin: 0 ${defaultTheme.padding.small};
+    margin: 0 ${spacing.r8};
   }
 `;
 const MultiSelectItemLeft = styled.div`
   .sc-checkbox,
   .sc-button {
-    margin: 0 ${defaultTheme.padding.small};
+    margin: 0 ${spacing.r8};
   }
 `;
 const MultiSelectItemCenter = styled.div`
@@ -75,10 +76,10 @@ const MultiSelectItemCenter = styled.div`
   justify-content: space-between;
 `;
 const MultiSelectItemRight = styled.div`
-  padding: 0 ${defaultTheme.padding.base};
+  padding: 0 ${spacing.r16};
 `;
 const MultiSelectItemLabel = styled.span`
-  font-size: ${defaultTheme.fontSize.large};
+  font-size: ${fontSize.large};
 `;
 const MultiSelectItemDescription = styled.span``;
 

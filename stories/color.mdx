@@ -1,50 +1,139 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
 
-
-import { defaultTheme } from '../src/lib/style/theme';
+import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 <Meta title="Style/Colors" />
 
 # Colors
 
 <ColorPalette>
-  <ColorItem title="dark.statusHealthy" colors={[defaultTheme.darkRebrand.statusHealthy]} />
+  <ColorItem title="dark.statusHealthy" colors={[coreUIAvailableThemes.darkRebrand.statusHealthy]} />
 
-  <ColorItem title="dark.statusWarning" colors={[defaultTheme.darkRebrand.statusWarning]} />
+{' '}
 
-  <ColorItem title="dark.statusCritical" colors={[defaultTheme.darkRebrand.statusCritical]} />
+<ColorItem
+  title="dark.statusWarning"
+  colors={[coreUIAvailableThemes.darkRebrand.statusWarning]}
+/>
 
-  <ColorItem title="dark.selectedActive" colors={[defaultTheme.darkRebrand.selectedActive]} />
+{' '}
 
-  <ColorItem title="dark.highlight" colors={[defaultTheme.darkRebrand.highlight]} />
+<ColorItem
+  title="dark.statusCritical"
+  colors={[coreUIAvailableThemes.darkRebrand.statusCritical]}
+/>
 
-  <ColorItem title="dark.border" colors={[defaultTheme.darkRebrand.border]} />
+{' '}
 
-  <ColorItem title="dark.buttonPrimary" colors={[defaultTheme.darkRebrand.buttonPrimary]} />
+<ColorItem
+  title="dark.selectedActive"
+  colors={[coreUIAvailableThemes.darkRebrand.selectedActive]}
+/>
 
-  <ColorItem title="dark.buttonSecondary" colors={[defaultTheme.darkRebrand.buttonSecondary]} />
+{' '}
 
-  <ColorItem title="dark.buttonDelete" colors={[defaultTheme.darkRebrand.buttonDelete]} />
+<ColorItem
+  title="dark.highlight"
+  colors={[coreUIAvailableThemes.darkRebrand.highlight]}
+/>
 
-  <ColorItem title="dark.infoPrimary" colors={[defaultTheme.darkRebrand.infoPrimary]} />
+{' '}
 
-  <ColorItem title="dark.infoSecondary" colors={[defaultTheme.darkRebrand.infoSecondary]} />
+<ColorItem
+  title="dark.border"
+  colors={[coreUIAvailableThemes.darkRebrand.border]}
+/>
 
-  <ColorItem title="dark.backgroundLevel1" colors={[defaultTheme.darkRebrand.backgroundLevel1]} />
+{' '}
 
-  <ColorItem title="dark.backgroundLevel2" colors={[defaultTheme.darkRebrand.backgroundLevel2]} />
+<ColorItem
+  title="dark.buttonPrimary"
+  colors={[coreUIAvailableThemes.darkRebrand.buttonPrimary]}
+/>
 
-  <ColorItem title="dark.backgroundLevel3" colors={[defaultTheme.darkRebrand.backgroundLevel3]} />
+{' '}
 
-  <ColorItem title="dark.backgroundLevel4" colors={[defaultTheme.darkRebrand.backgroundLevel4]} />
+<ColorItem
+  title="dark.buttonSecondary"
+  colors={[coreUIAvailableThemes.darkRebrand.buttonSecondary]}
+/>
 
-  <ColorItem title="dark.textPrimary" colors={[defaultTheme.darkRebrand.textPrimary]} />
+{' '}
 
-  <ColorItem title="dark.textSecondary" colors={[defaultTheme.darkRebrand.textSecondary]} />
+<ColorItem
+  title="dark.buttonDelete"
+  colors={[coreUIAvailableThemes.darkRebrand.buttonDelete]}
+/>
 
-  <ColorItem title="dark.textTertiary" colors={[defaultTheme.darkRebrand.textTertiary]} />
+{' '}
 
-  <ColorItem title="dark.textReverse" colors={[defaultTheme.darkRebrand.textReverse]} />
+<ColorItem
+  title="dark.infoPrimary"
+  colors={[coreUIAvailableThemes.darkRebrand.infoPrimary]}
+/>
 
-  <ColorItem title="dark.textLink" colors={[defaultTheme.darkRebrand.textLink]} />
+{' '}
+
+<ColorItem
+  title="dark.infoSecondary"
+  colors={[coreUIAvailableThemes.darkRebrand.infoSecondary]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.backgroundLevel1"
+  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel1]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.backgroundLevel2"
+  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel2]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.backgroundLevel3"
+  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel3]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.backgroundLevel4"
+  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel4]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.textPrimary"
+  colors={[coreUIAvailableThemes.darkRebrand.textPrimary]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.textSecondary"
+  colors={[coreUIAvailableThemes.darkRebrand.textSecondary]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.textTertiary"
+  colors={[coreUIAvailableThemes.darkRebrand.textTertiary]}
+/>
+
+{' '}
+
+<ColorItem
+  title="dark.textReverse"
+  colors={[coreUIAvailableThemes.darkRebrand.textReverse]}
+/>
+
+  <ColorItem title="dark.textLink" colors={[coreUIAvailableThemes.darkRebrand.textLink]} />
 </ColorPalette>

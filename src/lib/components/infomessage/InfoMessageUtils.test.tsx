@@ -1,10 +1,9 @@
-import { defaultTheme } from '../../style/theme';
-import React from 'react';
-import { useComputeBackgroundColor } from './InfoMessageUtils';
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
+import React from 'react';
+import { coreUIAvailableThemes } from '../../style/theme';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
-import { a } from '@storybook/preview-api/dist/hooks-655fa363';
+import { useComputeBackgroundColor } from './InfoMessageUtils';
 
 describe('useComputeBackgroundColor', () => {
   const SUT = jest.fn();
@@ -19,12 +18,14 @@ describe('useComputeBackgroundColor', () => {
       return <div ref={containerRef}></div>;
     };
     render(
-      <CoreUiThemeProvider theme={defaultTheme.darkRebrand}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
         <Component />
       </CoreUiThemeProvider>,
     );
     //V
-    expect(SUT).toHaveBeenCalledWith(defaultTheme.darkRebrand.backgroundLevel2);
+    expect(SUT).toHaveBeenCalledWith(
+      coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+    );
   });
 
   it('should return backgroundlevel3 if parent element backgroundColor is level 2', () => {
@@ -34,19 +35,23 @@ describe('useComputeBackgroundColor', () => {
       SUT(backgroundColor);
       return (
         <div
-          style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel2 }}
+          style={{
+            backgroundColor: coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+          }}
         >
           <div ref={containerRef}></div>
         </div>
       );
     };
     render(
-      <CoreUiThemeProvider theme={defaultTheme.darkRebrand}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
         <Component />
       </CoreUiThemeProvider>,
     );
     //V
-    expect(SUT).toHaveBeenCalledWith(defaultTheme.darkRebrand.backgroundLevel3);
+    expect(SUT).toHaveBeenCalledWith(
+      coreUIAvailableThemes.darkRebrand.backgroundLevel3,
+    );
   });
   it('should return backgroundlevel3 if parent of parent element backgroundColor is level 2', () => {
     //S
@@ -55,7 +60,9 @@ describe('useComputeBackgroundColor', () => {
       SUT(backgroundColor);
       return (
         <div
-          style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel2 }}
+          style={{
+            backgroundColor: coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+          }}
         >
           <div>
             <div ref={containerRef}></div>
@@ -64,12 +71,14 @@ describe('useComputeBackgroundColor', () => {
       );
     };
     render(
-      <CoreUiThemeProvider theme={defaultTheme.darkRebrand}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
         <Component />
       </CoreUiThemeProvider>,
     );
     //V
-    expect(SUT).toHaveBeenCalledWith(defaultTheme.darkRebrand.backgroundLevel3);
+    expect(SUT).toHaveBeenCalledWith(
+      coreUIAvailableThemes.darkRebrand.backgroundLevel3,
+    );
   });
   it('should return backgroundlevel2 if parent of parent element backgroundColor is level 3', () => {
     //S
@@ -78,7 +87,9 @@ describe('useComputeBackgroundColor', () => {
       SUT(backgroundColor);
       return (
         <div
-          style={{ backgroundColor: defaultTheme.darkRebrand.backgroundLevel3 }}
+          style={{
+            backgroundColor: coreUIAvailableThemes.darkRebrand.backgroundLevel3,
+          }}
         >
           <div>
             <div ref={containerRef}></div>
@@ -87,11 +98,13 @@ describe('useComputeBackgroundColor', () => {
       );
     };
     render(
-      <CoreUiThemeProvider theme={defaultTheme.darkRebrand}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
         <Component />
       </CoreUiThemeProvider>,
     );
     //V
-    expect(SUT).toHaveBeenCalledWith(defaultTheme.darkRebrand.backgroundLevel2);
+    expect(SUT).toHaveBeenCalledWith(
+      coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+    );
   });
 });

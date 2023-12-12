@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { Notification } from './Notification.component';
-import { Props as NotificationProps } from './Notification.component';
+import { spacing } from '../../spacing';
+import { zIndex } from '../../style/theme';
+import {
+  Notification,
+  Props as NotificationProps,
+} from './Notification.component';
 export const TOP_LEFT = 'tl';
 export const TOP_RIGHT = 'tr';
 export const BOTTOM_LEFT = 'bl';
@@ -18,8 +21,8 @@ type Props = {
 };
 const NotificationsContainer = styled.div<{ position?: Position }>`
   position: fixed;
-  z-index: ${defaultTheme.zIndex.notification};
-  margin: ${defaultTheme.padding.larger};
+  z-index: ${zIndex.notification};
+  margin: ${spacing.r24};
   ${(props) => {
     switch (props.position) {
       case TOP_LEFT:

@@ -1,8 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
 import ReactSelect from 'react-select';
+import styled from 'styled-components';
 
-import * as defaultTheme from '../../style/theme';
+import { fontSize, fontWeight, gray, zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 export type Item = {
   label: string;
@@ -15,7 +14,7 @@ type Props = {
   formatOptionLabel?: (arg0: any) => JSX.Element;
 };
 const SelectContainer = styled.div`
-  font-size: ${defaultTheme.fontSize.base};
+  font-size: ${fontSize.base};
   .sc-select__control {
     background-color: ${getThemePropSelector('backgroundLevel1')};
     border-radius: 4px;
@@ -38,7 +37,7 @@ const SelectContainer = styled.div`
         color: ${getThemePropSelector('selectedActive')};
       }
       &.sc-select__clear-indicator:hover {
-        color: ${defaultTheme.gray};
+        color: ${gray};
       }
     }
     .sc-select__multi-value__remove {
@@ -46,7 +45,7 @@ const SelectContainer = styled.div`
       color: ${getThemePropSelector('textSecondary')};
       background-color: ${getThemePropSelector('backgroundLevel4')};
       &:hover {
-        color: ${defaultTheme.gray};
+        color: ${gray};
       }
     }
     .sc-select__multi-value__label {
@@ -62,7 +61,7 @@ const SelectContainer = styled.div`
     border: 1px solid ${getThemePropSelector('selectedActive')};
     box-sizing: border-box;
     overflow: hidden;
-    z-index: ${defaultTheme.zIndex.dropdown};
+    z-index: ${zIndex.dropdown};
     .sc-select__option {
       &.sc-select__option--is-focused {
         background-color: ${getThemePropSelector('backgroundLevel1')};
@@ -70,7 +69,7 @@ const SelectContainer = styled.div`
       &.sc-select__option--is-selected {
         background-color: ${getThemePropSelector('backgroundLevel1')};
         color: ${getThemePropSelector('selectedActive')};
-        font-weight: ${defaultTheme.fontWeight.bold};
+        font-weight: ${fontWeight.bold};
       }
     }
   }

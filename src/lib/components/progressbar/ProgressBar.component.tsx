@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontSize, fontWeight, coreUIAvailableThemes } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Size } from '../constants';
 export type ProgressBarProps = {
@@ -20,7 +21,7 @@ export type ProgressBarProps = {
 const Container = styled.div``;
 const ProgressBarContainer = styled.div<{
   backgroundColor: string;
-  size: keyof typeof defaultTheme.fontSize | 'custom';
+  size: keyof typeof fontSize | 'custom';
   buildinLabel?: string;
   height?: React.CSSProperties['height'];
 }>`
@@ -33,20 +34,20 @@ const ProgressBarContainer = styled.div<{
     switch (props.size) {
       case 'smaller':
         return css`
-          height: ${defaultTheme.fontSize.smaller};
-          font-size: ${defaultTheme.fontSize.smaller};
+          height: ${fontSize.smaller};
+          font-size: ${fontSize.smaller};
         `;
 
       case 'base':
         return css`
-          height: ${defaultTheme.fontSize.small};
-          font-size: ${defaultTheme.fontSize.small};
+          height: ${fontSize.small};
+          font-size: ${fontSize.small};
         `;
 
       case 'large':
         return css`
-          height: ${defaultTheme.fontSize.base};
-          font-size: ${defaultTheme.fontSize.base};
+          height: ${fontSize.base};
+          font-size: ${fontSize.base};
         `;
 
       case 'larger':
@@ -61,8 +62,8 @@ const ProgressBarContainer = styled.div<{
         `;
       default:
         return css`
-          height: ${defaultTheme.fontSize.base};
-          font-size: ${defaultTheme.fontSize.base};
+          height: ${fontSize.base};
+          font-size: ${fontSize.base};
         `;
     }
   }};
@@ -73,36 +74,37 @@ const ProgressBarContainer = styled.div<{
   /* Add the border for the progress bar when there is label inside.*/
   ${(props) => {
     if (props.buildinLabel) {
-      return css`     
-     border: 1px solid;
-     border-color: ${getThemePropSelector('border')}};`;
+      return css`
+        border: 1px solid;
+        border-color: ${getThemePropSelector('border')};
+      `;
     }
   }};
 `;
 const TopLeftLabel = styled.span`
   display: inline-block;
-  font-size: ${defaultTheme.fontSize.large};
-  font-weight: ${defaultTheme.fontWeight.bold};
-  color: ${getThemePropSelector('textPrimary')}};
+  font-size: ${fontSize.large};
+  font-weight: ${fontWeight.bold};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 const TopRightLabel = styled.span`
   display: inline-block;
-  font-size: ${defaultTheme.fontSize.small};
-  color: ${getThemePropSelector('textPrimary')}};
+  font-size: ${fontSize.small};
+  color: ${getThemePropSelector('textPrimary')};
 `;
 const BottomLabel = styled.span`
-  display: inline-block; 
-  color: ${getThemePropSelector('textSecondary')}};
+  display: inline-block;
+  color: ${getThemePropSelector('textSecondary')};
 `;
 const TopLabelsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 ${defaultTheme.padding.smaller} 0;
+  margin: 0 0 ${spacing.r4} 0;
 `;
 const BottomLabelsContainer = styled(TopLabelsContainer)`
-  margin: ${defaultTheme.padding.smaller} 0 0 0;
-  font-size: ${defaultTheme.fontSize.smaller};
+  margin: ${spacing.r4} 0 0 0;
+  font-size: ${fontSize.smaller};
 `;
 const FilledAreaContainer = styled.div<{
   isAnimation?: boolean;
@@ -148,7 +150,7 @@ function ProgressBar({
   percentage = 50,
   size = 'base',
   color,
-  backgroundColor = defaultTheme.defaultTheme.darkRebrand.backgroundLevel2,
+  backgroundColor = coreUIAvailableThemes.darkRebrand.backgroundLevel2,
   topLeftLabel,
   topRightLabel,
   bottomLeftLabel,

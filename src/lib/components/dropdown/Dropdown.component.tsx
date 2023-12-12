@@ -7,7 +7,9 @@ import {
   ButtonIcon,
   ButtonText,
 } from '../button/Button.component';
-import * as defaultTheme from '../../style/theme';
+import { zIndex } from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontSize } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 export type Item = {
@@ -40,7 +42,7 @@ const DropdownMenuStyled = styled.ul`
   margin: 0;
   padding: 0;
   border: 1px solid ${getThemePropSelector('backgroundLevel1')};
-  z-index: ${defaultTheme.zIndex.dropdown};
+  z-index: ${zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
@@ -75,10 +77,10 @@ const DropdownMenuStyled = styled.ul`
 const DropdownMenuItemStyled = styled.li`
   display: flex;
   align-items: center;
-  padding: ${defaultTheme.padding.base};
+  padding: ${spacing.r16};
   white-space: nowrap;
   cursor: pointer;
-  font-size: ${defaultTheme.fontSize.base};
+  font-size: ${fontSize.base};
 
   ${css`
     background-color: ${getThemePropSelector('backgroundLevel1')};
@@ -95,7 +97,7 @@ const DropdownMenuItemStyled = styled.li`
   `};
 `;
 const Caret = styled.span`
-  margin-left: ${defaultTheme.padding.base};
+  margin-left: ${spacing.r16};
 `;
 const TriggerStyled = ButtonStyled.withComponent('div');
 

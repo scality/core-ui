@@ -1,7 +1,6 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
 
+import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
@@ -26,7 +25,7 @@ const EmptystateContainer = styled.div`
 export const EmptyStateRow = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-bottom: ${defaultTheme.padding.larger};
+  margin-bottom: ${spacing.r24};
 `;
 export const ActionWrapper = styled.div`
   display: flex;

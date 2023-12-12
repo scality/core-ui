@@ -3,7 +3,7 @@ import { CSSProperties, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { spacing } from '../../spacing';
-import * as defaultTheme from '../../style/theme';
+import { fontSize, zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
@@ -54,11 +54,10 @@ const TooltipOverLayContainer = styled.div<{
     props.theme.backgroundLevel1};
   color: ${(props) =>
     (props && props.style && props.style.color) || props.theme.textPrimary};
-  z-index: ${defaultTheme.zIndex.tooltip};
+  z-index: ${zIndex.tooltip};
   border-radius: 4px;
   font-size: ${(props) =>
-    (props && props.style && props.style.fontSize) ||
-    defaultTheme.fontSize.small};
+    (props && props.style && props.style.fontSize) || fontSize.small};
   vertical-align: middle;
   padding: ${spacing.r4} ${spacing.r8};
   max-width: 40rem;

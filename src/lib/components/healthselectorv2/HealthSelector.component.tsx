@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { coreUIAvailableThemes } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import {
@@ -46,19 +46,19 @@ export const defaultOptions = [
           cx="50"
           cy="50"
           r="50"
-          fill={defaultTheme.brand.statusHealthy}
+          fill={coreUIAvailableThemes.darkRebrand.statusHealthy}
         />
         <circle
           cx="75"
           cy="50"
           r="50"
-          fill={defaultTheme.brand.statusWarning}
+          fill={coreUIAvailableThemes.darkRebrand.statusWarning}
         />
         <circle
           cx="100"
           cy="50"
           r="50"
-          fill={defaultTheme.brand.statusCritical}
+          fill={coreUIAvailableThemes.darkRebrand.statusCritical}
         />
       </svg>
     ),

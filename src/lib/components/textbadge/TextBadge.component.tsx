@@ -1,15 +1,16 @@
 // @ts-nocheck
 import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontWeight } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 const StyledTextBadge = styled.span`
   background-color: ${(props) => props.theme[props.variant]};
   color: ${getThemePropSelector('textReverse')};
-  padding: 2px ${defaultTheme.padding.smaller};
+  padding: 2px ${spacing.r4};
   border-radius: 4px;
   font-size: 0.9rem;
-  font-weight: ${defaultTheme.fontWeight.bold};
-  margin: 0 ${defaultTheme.padding.smaller} 0 ${defaultTheme.padding.smaller};
+  font-weight: ${fontWeight.bold};
+  margin: 0 ${spacing.r4} 0 ${spacing.r4};
 `;
 type Props = {
   text: string;

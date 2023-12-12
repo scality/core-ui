@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
-import * as defaultTheme from '../../style/theme';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
+import { fontSize } from '../../style/theme';
 import { Icon } from '../icon/Icon.component';
 type Props = {
   paths: Array<JSX.Element>;
@@ -15,7 +16,7 @@ const BreadcrumbContainer = styled.ol`
 const BreadcrumbItem = styled.li<{ active: boolean }>`
   box-sizing: border-box;
   height: 100%;
-  font-size: ${defaultTheme.fontSize.larger};
+  font-size: ${fontSize.larger};
   ${ellipsis('250px')}
   min-width: 3rem;
 
@@ -50,11 +51,13 @@ const BreadcrumbItem = styled.li<{ active: boolean }>`
   }}
 `;
 const BreadcrumbSeparator = styled.li`
-  padding: ${defaultTheme.padding.smaller} ${defaultTheme.padding.small};
-  color: ${defaultTheme.brand.textTertiary};
-  display: flex;
-  align-items: center;
-  font-size: ${defaultTheme.fontSize.small};
+  ${(props) => css`
+    color: ${props.theme.textTertiary};
+    padding: ${spacing.r4} ${spacing.r8};
+    display: flex;
+    align-items: center;
+    font-size: ${fontSize.small};
+  `}
 `;
 
 const withBreadcrumbSeparator = (lastIndex) => (acc, item, index) => {

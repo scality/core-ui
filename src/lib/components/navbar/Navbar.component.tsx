@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontSize, navbarHeight, navbarItemWidth } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Button } from '../button/Button.component';
 import { Dropdown, Item } from '../dropdown/Dropdown.component';
@@ -25,7 +26,7 @@ export type Props = {
   tabs?: Array<Tab>;
 };
 const NavbarContainer = styled.div`
-  height: ${defaultTheme.navbarHeight};
+  height: ${navbarHeight};
   display: flex;
   justify-content: space-between;
   ${css`
@@ -35,9 +36,9 @@ const NavbarContainer = styled.div`
     .sc-trigger-text {
       color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: ${defaultTheme.spacing.sp1} solid
+    border-bottom: ${spacing.r1} solid
       ${getThemePropSelector('backgroundLevel1')};
-  `}};
+  `};
 `;
 const NavbarMenu = styled.div`
   display: flex;
@@ -57,21 +58,19 @@ const NavbarTabs = styled.div`
     align-items: center;
     text-decoration: none;
     height: 100%;
-    padding: 0 ${defaultTheme.spacing.sp16};
-    border-bottom: ${defaultTheme.spacing.sp2} solid transparent;
-    border-top: ${defaultTheme.spacing.sp2} solid transparent;
+    padding: 0 ${spacing.r16};
+    border-bottom: ${spacing.r2} solid transparent;
+    border-top: ${spacing.r2} solid transparent;
     ${(props) => {
-      const { secondary, background, selectedActive } = props.theme;
+      const { selectedActive } = props.theme;
       return css`
         color: ${getThemePropSelector('textTertiary')};
         &:hover {
-          border-bottom-color: ${secondary};
           background-color: ${getThemePropSelector('highlight')};
         }
         &.selected {
           color: ${getThemePropSelector('textPrimary')};
           font-weight: bold;
-          border-top-color: ${background};
           border-bottom-color: ${selectedActive};
         }
       `;
@@ -84,14 +83,14 @@ const TabItem = styled.div<{ selected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 ${defaultTheme.spacing.sp16};
+  padding: 0 ${spacing.r16};
   ${(props) => {
-    const { textPrimary, secondary, background } = props.theme;
+    const { textPrimary } = props.theme;
     return css`
       color: ${textPrimary};
       &:hover {
-        border-bottom: ${defaultTheme.spacing.sp2} solid ${secondary};
-        border-top: ${defaultTheme.spacing.sp2} solid ${background};
+        border-bottom: ${spacing.r2} solid;
+        border-top: ${spacing.r2} solid;
         cursor: pointer;
       }
     `;
@@ -99,8 +98,8 @@ const TabItem = styled.div<{ selected: boolean }>`
   ${(props) =>
     props.selected &&
     css`
-      border-top: ${defaultTheme.spacing.sp2} solid ${props.theme.background};
-      border-bottom: ${defaultTheme.spacing.sp2} solid ${props.theme.secondary};
+      border-top: ${spacing.r2} solid;
+      border-bottom: ${spacing.r2} solid;
     `};
 `;
 const NavbarMenuItem = styled.div`
@@ -113,8 +112,8 @@ const NavbarMenuItem = styled.div`
       &:hover {
         background-color: ${getThemePropSelector('highlight')};
       }
-      height: ${defaultTheme.navbarHeight};
-      font-size: ${defaultTheme.fontSize.base};
+      height: ${navbarHeight};
+      font-size: ${fontSize.base};
     }
     .menu-item {
       max-height: unset;
@@ -124,25 +123,25 @@ const NavbarMenuItem = styled.div`
   .sc-button {
     margin: 0;
     border-radius: 0;
-    height: ${defaultTheme.navbarHeight};
-    font-size: ${defaultTheme.fontSize.base};
+    height: ${navbarHeight};
+    font-size: ${fontSize.base};
     background-color: ${getThemePropSelector('backgroundLevel1')};
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
-    width: ${defaultTheme.navbarItemWidth};
+    width: ${navbarItemWidth};
   }
 `;
 const ProductNameSpan = styled.h1`
   text-transform: uppercase;
-  font-size: ${defaultTheme.fontSize.larger};
-  padding: 0 ${defaultTheme.spacing.sp16};
+  font-size: ${fontSize.larger};
+  padding: 0 ${spacing.r16};
 `;
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 ${defaultTheme.spacing.sp16};
+  padding: 0 ${spacing.r16};
   svg {
     width: 7.143rem;
     height: 2.143rem;

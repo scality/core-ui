@@ -1,7 +1,7 @@
 import React from 'react';
 import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
 import { Wrapper } from './common';
-import { defaultTheme } from '../src/lib/style/theme';
+import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import { Meta, StoryObj } from '@storybook/react';
 
 type Story = StoryObj<typeof InfoMessage>;
@@ -42,10 +42,10 @@ export const Playground: StoryObj<
       description: 'Background color of the parent element',
       options: ['Level1', 'Level2', 'Level3', 'Level4'],
       mapping: {
-        Level1: defaultTheme.darkRebrand.backgroundLevel1,
-        Level2: defaultTheme.darkRebrand.backgroundLevel2,
-        Level3: defaultTheme.darkRebrand.backgroundLevel3,
-        Level4: defaultTheme.darkRebrand.backgroundLevel4,
+        Level1: coreUIAvailableThemes.darkRebrand.backgroundLevel1,
+        Level2: coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+        Level3: coreUIAvailableThemes.darkRebrand.backgroundLevel3,
+        Level4: coreUIAvailableThemes.darkRebrand.backgroundLevel4,
       },
       control: {
         type: 'radio',
@@ -83,7 +83,7 @@ export const WithDifferentBackground: Story = {
         <div
           style={{
             height: '10rem',
-            backgroundColor: defaultTheme.darkRebrand.backgroundLevel3,
+            backgroundColor: coreUIAvailableThemes.darkRebrand.backgroundLevel3,
             padding: '1rem',
           }}
         >
@@ -92,7 +92,7 @@ export const WithDifferentBackground: Story = {
         <div
           style={{
             height: '10rem',
-            backgroundColor: defaultTheme.darkRebrand.backgroundLevel2,
+            backgroundColor: coreUIAvailableThemes.darkRebrand.backgroundLevel2,
             padding: '1rem',
           }}
         >

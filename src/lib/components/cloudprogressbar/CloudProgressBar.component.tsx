@@ -1,7 +1,5 @@
-// @ts-nocheck
 import styled, { css, keyframes } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-
+import { coreUIAvailableThemes } from '../../style/theme';
 export type CloudProgressBarProps = {
   percentage: number;
   borderSize: string;
@@ -88,8 +86,8 @@ const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
 const CloudProgressBar = ({
   percentage = 0,
   borderSize = '2px',
-  cloudColor = defaultTheme.brand.statusHealthy,
-  progressCloudColor = defaultTheme.brand.backgroundLevel1,
+  cloudColor = coreUIAvailableThemes.darkRebrand.statusHealthy,
+  progressCloudColor = coreUIAvailableThemes.darkRebrand.backgroundLevel1,
   children,
 }: CloudProgressBarProps) => (
   <Container className="sc-cloudprogressbar">

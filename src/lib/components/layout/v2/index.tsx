@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import * as defaultTheme from '../../../style/theme';
+import { navbarHeight } from '../../../style/theme';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const LayoutContainer = styled.div`
 `;
 
 const Navigation = styled.div`
-  height: ${defaultTheme.navbarHeight};
+  height: ${navbarHeight};
 `;
 
 export function Layout({

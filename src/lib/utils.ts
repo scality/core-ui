@@ -1,5 +1,3 @@
-import * as defaultTheme from './style/theme';
-
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
 
 /** Ensure the consistency of colors between old and new colors */

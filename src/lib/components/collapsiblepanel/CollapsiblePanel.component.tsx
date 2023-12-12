@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
+import { fontSize } from '../../style/theme';
 import { Icon } from '../icon/Icon.component';
 type Props = {
   expanded: boolean;
@@ -17,13 +18,13 @@ const HeaderText = styled.div`
   flex-grow: 1;
 `;
 const HeaderItem = styled.div`
-  margin-right: ${defaultTheme.padding.base};
+  margin-right: ${spacing.r16};
   display: flex;
   flex-grow: 1;
 `;
 const HeaderIcon = styled.div`
-  font-size: ${defaultTheme.fontSize.larger};
-  margin: 0 ${defaultTheme.padding.base};
+  font-size: ${fontSize.larger};
+  margin: 0 ${spacing.r16};
 `;
 const CollapsiblePanelContainer = styled.div`
   display: flex;
@@ -35,10 +36,10 @@ const CollapsiblePanelContainer = styled.div`
 const HeaderContainer = styled.div`
   display: flex;
   cursor: pointer;
-  padding: ${defaultTheme.padding.base};
+  padding: ${spacing.r16};
 `;
 const ExpandedContainer = styled.div`
-  padding: ${defaultTheme.padding.base};
+  padding: ${spacing.r16};
   color: ${(props) => props.theme.textPrimary};
   background-color: ${(props) => props.theme.backgroundLevel1};
 `;

@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import * as defaultTheme from '../../style/theme';
-import { getThemePropSelector, getThemeVariantSelector } from '../../utils';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
+import { fontSize, fontWeight } from '../../style/theme';
+import { getThemeVariantSelector } from '../../utils';
 import { Variant } from '../constants';
 
 export type Props = {
@@ -11,23 +12,24 @@ export type Props = {
 };
 
 const BannerContainer = styled.div<{ variant: Variant }>`
-  display: flex;
-  padding: ${defaultTheme.padding.small};
-  font-size: ${defaultTheme.fontSize.small};
-  color: ${getThemePropSelector('textPrimary')};
-  align-items: center;
-
-  border: 1px solid;
-  border-left: 5px solid;
-  border-radius: 3px;
-  border-color: ${getThemeVariantSelector()};
-  background-color: ${getThemePropSelector('backgroundLevel1')};
-  i {
+  ${(props) => css`
+    color: ${props.theme.textPrimary};
+    background-color: ${props.theme.backgroundLevel1};
     display: flex;
+    padding: ${spacing.r8};
     align-items: center;
-    margin-left: ${defaultTheme.padding.small};
-    color: ${getThemeVariantSelector()};
-  }
+    font-size: ${fontSize.small};
+    border: 1px solid;
+    border-left: 5px solid;
+    border-radius: 3px;
+    border-color: ${getThemeVariantSelector()};
+    i {
+      display: flex;
+      align-items: center;
+      margin-left: ${spacing.r8};
+      color: ${getThemeVariantSelector()};
+    }
+  `}
 `;
 
 const TextContainer = styled.div`
@@ -35,11 +37,11 @@ const TextContainer = styled.div`
   flex-direction: column;
 `;
 const Text = styled.span`
-  margin-left: ${defaultTheme.padding.base};
+  margin-left: ${spacing.r16};
 `;
 const Title = styled.div`
-  margin-left: ${defaultTheme.padding.base};
-  font-weight: ${defaultTheme.fontWeight.bold};
+  margin-left: ${spacing.r16};
+  font-weight: ${fontWeight.bold};
 `;
 
 function Banner({ icon, title, children, variant, ...rest }: Props) {

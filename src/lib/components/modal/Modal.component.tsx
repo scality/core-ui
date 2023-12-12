@@ -2,7 +2,7 @@ import { ReactNode, useLayoutEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { Wrap, spacing } from '../../spacing';
-import * as defaultTheme from '../../style/theme';
+import { zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
@@ -27,7 +27,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: ${defaultTheme.zIndex.modal};
+  z-index: ${zIndex.modal};
 `;
 const ModalContent = styled.div`
   display: flex;

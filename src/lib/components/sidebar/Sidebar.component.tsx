@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import * as defaultTheme from '../../style/theme';
+import {
+  fontSize,
+  zIndex,
+  sidebarWidth,
+  sidebarItemHeight,
+} from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Button } from '../button/Button.component';
 import { Icon } from '../icon/Icon.component';
+import { spacing } from '../../spacing';
 type Item = {
   label: string;
   onClick: (arg0: any) => void;
@@ -44,7 +50,7 @@ const Wrapper = styled.div<WrapperProps>`
     }
 
     return css`
-      width: ${defaultTheme.sidebarWidth};
+      width: ${sidebarWidth};
     `;
   }}
 
@@ -58,7 +64,7 @@ const Wrapper = styled.div<WrapperProps>`
           width: fit-content;
           height: 100%;
           background-color: ${backgroundLevel1};
-          z-index: ${defaultTheme.zIndex.sidebar};
+          z-index: ${zIndex.sidebar};
         }
       `;
     }
@@ -83,7 +89,7 @@ const SidebarContainer = styled.div<WrapperProps>`
     }
 
     return css`
-      width: ${defaultTheme.sidebarWidth};
+      width: ${sidebarWidth};
     `;
   }}
 
@@ -93,8 +99,8 @@ const SidebarContainer = styled.div<WrapperProps>`
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
-    height: ${defaultTheme.sidebarItemHeight};
-    width: ${defaultTheme.sidebarWidth};
+    height: ${sidebarItemHeight};
+    width: ${sidebarWidth};
     padding: 0px;
   }
 `;
@@ -105,7 +111,7 @@ const SidebarItem = styled.div<{ active?: boolean }>`
   cursor: pointer;
   justify-content: flex-start;
   .fas {
-    font-size: ${defaultTheme.fontSize.larger};
+    font-size: ${fontSize.larger};
   }
 
   ${(props) => {
@@ -129,7 +135,7 @@ const SidebarItem = styled.div<{ active?: boolean }>`
   }}
 `;
 const MenuItemText = styled.div`
-  margin-right: ${defaultTheme.padding.large};
+  margin-right: ${spacing.r20};
 `;
 // selected border-right
 const MenuItemSelected = styled.div`
@@ -140,11 +146,11 @@ const MenuItemSelected = styled.div`
   background-color: ${getThemePropSelector('selectedActive')};
 `;
 const MenuItemIcon = styled.div`
-  width: ${defaultTheme.sidebarWidth};
+  width: ${sidebarWidth};
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${defaultTheme.sidebarItemHeight};
+  height: ${sidebarItemHeight};
 `;
 
 function Sidebar({

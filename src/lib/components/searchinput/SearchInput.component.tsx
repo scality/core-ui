@@ -1,9 +1,9 @@
-import { useState, useRef, forwardRef, ChangeEvent } from 'react';
+import { ChangeEvent, forwardRef, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Input } from '../input/Input.component';
-import * as defaultTheme from '../../style/theme';
+import { fontSize } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { Input } from '../input/Input.component';
 export type Props = {
   placeholder?: string;
   value: string;
@@ -46,7 +46,7 @@ const IconButton = styled.button`
   top: 1px;
   padding: 8px 12px;
   border-radius: 5px;
-  font-size: ${defaultTheme.fontSize.base};
+  font-size: ${fontSize.base};
   color: ${getThemePropSelector('textSecondary')};
   background-color: transparent;
   ${(props) => {

@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
-import { LOADER_SIZE as SIZE } from '../constants';
 import { LoaderIcon } from '../../icons/scality-loading';
-import * as defaultTheme from '../../style/theme';
+import { fontSize, svgSize } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
+import { LOADER_SIZE as SIZE } from '../constants';
 type Props = {
   size?: keyof typeof SIZE;
   color?: string;
@@ -17,10 +17,10 @@ const LoaderContainer = styled.div<{
   display: flex;
   ${(props) => {
     return css`
-      font-size: ${defaultTheme.fontSize[props.size]};
+      font-size: ${fontSize[props.size]};
       svg {
-        height: ${defaultTheme.svgSize[props.size]};
-        width: ${defaultTheme.svgSize[props.size]};
+        height: ${svgSize[props.size]};
+        width: ${svgSize[props.size]};
         fill: ${props.color};
       }
     `;

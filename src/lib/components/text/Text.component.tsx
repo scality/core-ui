@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
-import { defaultTheme } from '../../style/theme';
+import { CoreUITheme } from '../../style/theme';
 
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
@@ -129,7 +129,7 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
 
 export const Text = styled.span<{
   variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger' | 'Large';
-  color?: keyof typeof defaultTheme.darkRebrand;
+  color?: CoreUITheme;
   isEmphazed?: boolean;
   isGentleEmphazed?: boolean;
 }>`

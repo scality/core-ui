@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import * as defaultTheme from '../../style/theme';
+import { spacing } from '../../spacing';
 
 // useDiv returns a div wrapper instead of tr more adapted to div based table (instead of tbody/thead/...)
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 const EmptytableContainer = styled.tr`
   width: 100%;
-  padding: ${defaultTheme.padding.large};
+  padding: ${spacing.r20};
   box-sizing: border-box;
   display: table;
   table-layout: fixed;
@@ -25,7 +25,7 @@ const EmptytableContainer = styled.tr`
 `;
 const EmptytableContainerDiv = styled.div`
   width: 100%;
-  padding: ${defaultTheme.padding.large};
+  padding: ${spacing.r20};
   box-sizing: border-box;
   display: table;
   table-layout: fixed;
