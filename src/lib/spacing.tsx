@@ -1,7 +1,6 @@
 import { Children, HTMLAttributes, HTMLProps, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box, BoxComponentProps } from './components/box/Box';
-import { getTheme } from './utils';
 
 export const spacing = {
   r1: '0.0625rem',
@@ -37,13 +36,13 @@ export const spacing = {
 const HSeparator = styled.div`
   min-height: ${spacing.r40};
   min-width: ${spacing.r2};
-  background: ${(props) => getTheme(props).backgroundLevel1};
+  background: ${(props) => props.theme.backgroundLevel1};
 `;
 
 const VSeparator = styled.div`
   height: 1px;
   width: ${spacing.r24};
-  background: ${(props) => getTheme(props).border};
+  background: ${(props) => props.theme.border};
 `;
 
 const Separator = ({ type }: { type?: 'vertical' | 'horizontal' }) => {

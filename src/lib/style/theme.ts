@@ -118,7 +118,9 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
  */
 export const defaultTheme = coreUIAvailableThemes;
 
-export const brand = defaultTheme.darkRebrand;
+// Why use this and not directly coreUIAvailableThemes.darkRebrand ?
+export const brand = coreUIAvailableThemes.darkRebrand;
+
 export type ThemeColors = keyof CoreUITheme;
 // LineChart colors
 export const lineColor1 = '#A14FBF';
@@ -139,6 +141,12 @@ export const fontSize = {
   // no use case for the moment
   massive: '1.71rem', // no use case for the moment
 };
+
+/**
+ * @deprecated
+ *
+ * use import { spacing } from '@scality/core-ui/dist/spacing';
+ */
 export const space = [
   '0',
   '0.071rem',
@@ -164,6 +172,14 @@ export const fontWeight = {
 
 /**
  * @deprecated
+ *
+ * Use spacing instead \
+ * smaller : sp4 \
+ * small : sp8 \
+ * base : sp16 \
+ * large : sp20 \
+ * larger : sp24 \
+ *
  */
 export const padding = {
   smaller: '4px',
@@ -172,6 +188,12 @@ export const padding = {
   large: '20px',
   larger: '24px',
 };
+
+/**
+ * @deprecated
+ * use import { spacing } from '@scality/core-ui/dist/spacing';
+ *
+ */
 export const spacing = {
   sp0: space[0],
   sp1: space[1],

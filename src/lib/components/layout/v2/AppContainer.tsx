@@ -2,7 +2,6 @@ import { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../../spacing';
 import { ThemeColors } from '../../../style/theme';
-import { getTheme } from '../../../utils';
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +23,7 @@ const ContextWrapper = styled.div<{
   background?: ThemeColors;
 }>`
   background: ${(props) =>
-    props.background ? getTheme(props)[props.background] : 'initial'};
+    props.background ? props.theme[props.background] : 'initial'};
   height: 2.5rem;
   min-height: 2.5rem;
   max-height: 2.5rem;
@@ -53,8 +52,7 @@ const OverallSummaryContainer = styled.div<{
   noBottomMargin?: boolean;
   background?: ThemeColors;
 }>`
-  background: ${(props) =>
-    getTheme(props)[props.background || 'backgroundLevel2']};
+  background: ${(props) => props.theme[props.background || 'backgroundLevel2']};
   height: 6rem;
   padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
   margin-bottom: ${({ noBottomMargin }) =>
@@ -98,8 +96,7 @@ const MainContentContainer = styled.div<{
   flex: 1;
   padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
   margin-top: ${({ hasTopMargin }) => (hasTopMargin ? '1rem' : '0')};
-  background: ${(props) =>
-    getTheme(props)[props.background || 'backgroundLevel3']};
+  background: ${(props) => props.theme[props.background || 'backgroundLevel3']};
   overflow: hidden;
 `;
 

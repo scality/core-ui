@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { ThemeColors } from '../../../style/theme';
-import { getTheme } from '../../../utils';
 import { AppContainer } from './AppContainer';
 
 interface Ratio {
@@ -41,8 +40,7 @@ const LeftPanel = styled.div<{
   background?: ThemeColors;
 }>`
   flex: ${(props) => props.flex || '0 auto'};
-  background: ${(props) =>
-    getTheme(props)[props.background || 'backgroundLevel3']};
+  background: ${(props) => props.theme[props.background || 'backgroundLevel3']};
   display: flex;
   min-width: 0;
 `;
@@ -53,8 +51,7 @@ const RightPanel = styled.div<{
   background?: ThemeColors;
 }>`
   flex: ${(props) => props.flex || '0 auto'};
-  background: ${(props) =>
-    getTheme(props)[props.background || 'backgroundLevel4']};
+  background: ${(props) => props.theme[props.background || 'backgroundLevel4']};
   display: flex;
   min-width: 0;
 `;

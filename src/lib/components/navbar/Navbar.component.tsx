@@ -1,11 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
-import { Dropdown } from '../dropdown/Dropdown.component';
-import { Button } from '../button/Button.component';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
-import { Item } from '../dropdown/Dropdown.component';
+import { getThemePropSelector } from '../../utils';
+import { Button } from '../button/Button.component';
+import { Dropdown, Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
 type Action = {
   type: string;
@@ -62,7 +61,7 @@ const NavbarTabs = styled.div`
     border-bottom: ${defaultTheme.spacing.sp2} solid transparent;
     border-top: ${defaultTheme.spacing.sp2} solid transparent;
     ${(props) => {
-      const { secondary, background, selectedActive } = getTheme(props);
+      const { secondary, background, selectedActive } = props.theme;
       return css`
         color: ${getThemePropSelector('textTertiary')};
         &:hover {
@@ -87,7 +86,7 @@ const TabItem = styled.div<{ selected: boolean }>`
   align-items: center;
   padding: 0 ${defaultTheme.spacing.sp16};
   ${(props) => {
-    const { textPrimary, secondary, background } = getTheme(props);
+    const { textPrimary, secondary, background } = props.theme;
     return css`
       color: ${textPrimary};
       &:hover {
@@ -100,10 +99,8 @@ const TabItem = styled.div<{ selected: boolean }>`
   ${(props) =>
     props.selected &&
     css`
-      border-top: ${defaultTheme.spacing.sp2} solid
-        ${getTheme(props).background};
-      border-bottom: ${defaultTheme.spacing.sp2} solid
-        ${getTheme(props).secondary};
+      border-top: ${defaultTheme.spacing.sp2} solid ${props.theme.background};
+      border-bottom: ${defaultTheme.spacing.sp2} solid ${props.theme.secondary};
     `};
 `;
 const NavbarMenuItem = styled.div`

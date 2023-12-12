@@ -1,7 +1,7 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
-import { getTheme } from '../../utils';
+
 import { Box } from '../box/Box';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
@@ -21,9 +21,9 @@ const StyledInput = styled.input`
     `
   cursor: not-allowed;
   `}
-  background: ${(props) => getTheme(props).backgroundLevel1};
+  background: ${(props) => props.theme.backgroundLevel1};
   font-size: 1rem;
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${(props) => props.theme.textPrimary};
   border: 0;
   flex: 1;
   border-radius: ${spacing.r4};
@@ -32,7 +32,7 @@ const StyledInput = styled.input`
     font-style: italic;
   }
   &::placeholder {
-    color: ${(props) => getTheme(props).textSecondary};
+    color: ${(props) => props.theme.textSecondary};
   }
   &:focus {
     border: 0;
@@ -49,7 +49,7 @@ const InputContainer = styled.div<{
   display: flex;
   align-items: center;
   padding: 0 ${spacing.r8} 0 ${spacing.r8};
-  background: ${(props) => getTheme(props).backgroundLevel1};
+  background: ${(props) => props.theme.backgroundLevel1};
   border-radius: ${spacing.r4};
   ${(props) =>
     props.isContextAvailable &&
@@ -70,15 +70,15 @@ const InputBorder = styled.div<{
   height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
-      props.hasError ? getTheme(props).statusCritical : getTheme(props).border};
+      props.hasError ? props.theme.statusCritical : props.theme.border};
   border-radius: ${spacing.r4};
   &:hover {
     ${(props) =>
       !props.disabled &&
-      `border: ${spacing.r1} solid ${getTheme(props).infoPrimary};`}
+      `border: ${spacing.r1} solid ${props.theme.infoPrimary};`}
   }
   &:focus-within {
-    border: ${spacing.r1} solid ${(props) => getTheme(props).infoPrimary};
+    border: ${spacing.r1} solid ${(props) => props.theme.infoPrimary};
   }
 `;
 

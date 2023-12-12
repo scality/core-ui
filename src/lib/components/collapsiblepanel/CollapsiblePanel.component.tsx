@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { mergeTheme } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 type Props = {
   expanded: boolean;
@@ -30,9 +29,8 @@ const CollapsiblePanelContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-color: ${(props) =>
-    mergeTheme(props.theme, defaultTheme).backgroundLevel1};
-  color: ${(props) => mergeTheme(props.theme, defaultTheme).textPrimary};
+  background-color: ${(props) => props.theme.backgroundLevel1};
+  color: ${(props) => props.theme.textPrimary};
 `;
 const HeaderContainer = styled.div`
   display: flex;
@@ -41,9 +39,8 @@ const HeaderContainer = styled.div`
 `;
 const ExpandedContainer = styled.div`
   padding: ${defaultTheme.padding.base};
-  color: ${(props) => mergeTheme(props.theme, defaultTheme).textPrimary};
-  background-color: ${(props) =>
-    mergeTheme(props.theme, defaultTheme).backgroundLevel1};
+  color: ${(props) => props.theme.textPrimary};
+  background-color: ${(props) => props.theme.backgroundLevel1};
 `;
 
 function CollapsiblePanel({

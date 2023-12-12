@@ -1,8 +1,7 @@
-// @ts-nocheck
 import { HTMLProps } from 'react';
 import { createContext } from 'react';
 import styled from 'styled-components';
-import { getTheme, hex2RGB } from '../../utils';
+import { hex2RGB } from '../../utils';
 const CardContext = createContext(null);
 type CardElementProps = {
   children: React.ReactNode;
@@ -47,7 +46,7 @@ const StyledCardHeader = styled.div`
 StyledCardHeader.displayName = 'CardHeader';
 const StyledCardBody = styled.div`
   padding: 0.7rem 0;
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${(props) => props.theme.textPrimary};
 `;
 StyledCardBody.displayName = 'CardBody';
 const StyledCardBodyContainer = styled.div`
@@ -60,14 +59,23 @@ StyledCardBodyContainer.displayName = 'CardBodyContainer';
 export const CardHeader = withCompoundCheck(StyledCardHeader);
 export const CardBody = withCompoundCheck(StyledCardBody);
 export const CardBodyContainer = withCompoundCheck(StyledCardBodyContainer);
-const StyledCard = styled.div`
+
+const StyledCard = styled.div<{
+  width: string;
+  height: string;
+  headerBackgroundColor: string;
+  bodyBackgroundColor: string;
+  colorStatus?: string;
+  activeBorderColor: string;
+  disabled: boolean;
+}>`
   border-radius: 3px;
   display: flex;
   flex-flow: column;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background: ${(props) =>
-    getTheme(props)[props.bodyBackgroundColor || 'backgroundLevel3']};
+    props.theme[props.bodyBackgroundColor || 'backgroundLevel3']};
 
   ${StyledCardBody} {
     opacity: ${(props) => (props.disabled ? '0.2' : '1')};
@@ -75,10 +83,10 @@ const StyledCard = styled.div`
 
   ${StyledCardHeader} {
     border-radius: 2px;
-    color: ${(props) => getTheme(props).textPrimary};
+    color: ${(props) => props.theme.textPrimary};
     ${(props) => {
       const hexColor = hex2RGB(
-        getTheme(props)[
+        props.theme[
           props.colorStatus || props.headerBackgroundColor || 'backgroundLevel4'
         ],
       ).join(',');
@@ -96,11 +104,11 @@ const StyledCard = styled.div`
       cursor: pointer;
 
       &:hover {
-        box-shadow: 0 0 0 2px ${getTheme(props).highlight};
+        box-shadow: 0 0 0 2px ${props.theme.highlight};
       }
 
       &:focus {
-        outline: 2px solid ${getTheme(props).buttonSecondary};
+        outline: 2px solid ${props.theme.buttonSecondary};
         outline-offset: 2px;
       }
     `
@@ -108,7 +116,7 @@ const StyledCard = styled.div`
 
   &.active {
     box-shadow: 0 0 0 1px
-      ${(props) => getTheme(props)[props.activeBorderColor || 'selectedActive']};
+      ${(props) => props.theme[props.activeBorderColor || 'selectedActive']};
   }
 `;
 type CardProps = {
@@ -136,7 +144,7 @@ function Card({
   className,
   ...rest
 }: CardProps) {
-  let colorStatus = null;
+  let colorStatus: string | null = null;
 
   if (status) {
     colorStatus =

@@ -1,9 +1,9 @@
 import { ReactNode, useLayoutEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
-import { spacing, Wrap } from '../../spacing';
+import { Wrap, spacing } from '../../spacing';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
@@ -44,18 +44,18 @@ const ModalContent = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   padding: ${spacing.r16} ${spacing.r16} ${spacing.r16} ${spacing.r32};
-  background-color: ${(props) => getTheme(props).backgroundLevel3};
+  background-color: ${(props) => props.theme.backgroundLevel3};
 `;
 
 const ModalBody = styled.div`
   padding: ${spacing.r32};
   flex-grow: 1;
-  background-color: ${(props) => getTheme(props).backgroundLevel4};
+  background-color: ${(props) => props.theme.backgroundLevel4};
   overflow-y: auto;
 `;
 const ModalFooter = styled.div`
   padding: ${spacing.r16};
-  background-color: ${(props) => getTheme(props).backgroundLevel3};
+  background-color: ${(props) => props.theme.backgroundLevel3};
 `;
 
 const Modal = ({

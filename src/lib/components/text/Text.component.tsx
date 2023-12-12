@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { defaultTheme } from '../../style/theme';
-import { getTheme } from '../../utils';
+
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
   children: React.ReactNode | string;
@@ -10,13 +10,13 @@ type Props = {
   id?: string;
 };
 const BasicTextStyle = styled.span`
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${(props) => props.theme.textPrimary};
   font-size: 1rem;
   line-height: ${spacing.r24};
   font-weight: 400;
 `;
 const SecondaryTextStyle = styled(BasicTextStyle)`
-  color: ${(props) => getTheme(props).textSecondary};
+  color: ${(props) => props.theme.textSecondary};
 `;
 const LargerTextStyle = styled(BasicTextStyle)`
   font-size: 1.43rem;
@@ -26,7 +26,7 @@ const EmphaseTextStyle = styled(BasicTextStyle)`
   font-weight: 700;
 `;
 const StatusTextStyle = styled(BasicTextStyle)<{ statusColor: string }>`
-  color: ${(props) => getTheme(props)[`${props.statusColor}`]};
+  color: ${(props) => props.theme[`${props.statusColor}`]};
 `;
 const LargetStyle = styled(BasicTextStyle)`
   font-size: 1.14rem;
@@ -38,7 +38,7 @@ const SmallerTextStyle = styled(BasicTextStyle)`
   letter-spacing: 2%; // to be defined, percentage value is not valid
 `;
 const SmallerSecondaryTextStyle = styled(SmallerTextStyle)`
-  color: ${(props) => getTheme(props).textSecondary};
+  color: ${(props) => props.theme.textSecondary};
 `;
 const getStatusColor = (status?: Status) => {
   let statusColor: string;
@@ -66,7 +66,7 @@ export const SmallerEmphaseTextStyle = styled(SmallerTextStyle)<{
   statusColor: string;
 }>`
   font-weight: 700;
-  color: ${(props) => getTheme(props)[`${props.statusColor}`]};
+  color: ${(props) => props.theme[`${props.statusColor}`]};
 `;
 const ChartTitleTextStyle = styled(BasicTextStyle)`
   letter-spacing: ${spacing.r2};
@@ -133,7 +133,7 @@ export const Text = styled.span<{
   isEmphazed?: boolean;
   isGentleEmphazed?: boolean;
 }>`
-  color: ${(props) => getTheme(props)[props.color || 'textPrimary']};
+  color: ${(props) => props.theme[props.color || 'textPrimary']};
   ${(props) =>
     props.variant === 'Larger'
       ? `
@@ -179,7 +179,7 @@ export const Text = styled.span<{
 export const Link = styled.a`
   font-size: 1rem;
   line-height: ${spacing.r24};
-  color: ${(props) => getTheme(props).textLink};
+  color: ${(props) => props.theme.textLink};
   cursor: pointer;
   text-decoration-line: none;
   width: fit-content;
@@ -188,7 +188,7 @@ export const Link = styled.a`
   }
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {
-    outline: dashed ${spacing.r2} ${(props) => getTheme(props).textLink};
+    outline: dashed ${spacing.r2} ${(props) => props.theme.textLink};
     outline-offset: ${spacing.r2};
   }
 `;

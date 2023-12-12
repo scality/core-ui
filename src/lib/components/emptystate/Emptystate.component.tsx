@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme } from '../../utils';
+
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
@@ -13,7 +13,7 @@ type Props = {
 };
 const EmptystateContainer = styled.div`
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
     return css`
       color: ${brand.textSecondary};
     `;

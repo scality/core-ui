@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import styled, { css } from 'styled-components';
 import { brand } from '../../style/theme';
-import { getTheme } from '../../utils';
+
 import { Loader } from '../loader/Loader.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
@@ -132,7 +132,7 @@ export const iconTable = {
 
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {
-    const theme = getTheme(props);
+    const theme = props.theme;
     if (props.color && theme[props.color]) {
       return css`
         color: ${theme[props.color]};
@@ -168,7 +168,7 @@ const DelayedFallback = ({
 
 export const IconWrapper = styled.div<{ size: SizeProp }>`
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
     return css`
       color: ${brand.infoPrimary};
       border: 1px solid ${brand.infoPrimary};

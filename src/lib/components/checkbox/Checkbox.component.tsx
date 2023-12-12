@@ -1,7 +1,7 @@
 import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
 import { spacing, Stack } from '../../spacing';
-import { getTheme } from '../../utils';
+
 import { Text } from '../text/Text.component';
 
 type Props = {
@@ -49,7 +49,7 @@ const StyledCheckbox = styled.label<{
   [type='checkbox'] {
     width: 0.75rem;
     height: 0.75rem;
-    color: ${(props) => getTheme(props).textPrimary};
+    color: ${(props) => props.theme.textPrimary};
     vertical-align: middle;
     -webkit-appearance: none;
     background: none;
@@ -57,7 +57,7 @@ const StyledCheckbox = styled.label<{
     outline: 0;
     flex-grow: 0;
     border-radius: ${spacing.r2};
-    background-color: ${(props) => getTheme(props).backgroundLevel1};
+    background-color: ${(props) => props.theme.backgroundLevel1};
     transition: background 300ms;
     cursor: pointer;
   }
@@ -75,13 +75,13 @@ const StyledCheckbox = styled.label<{
     background-color: transparent;
     background-size: contain;
     box-shadow: inset 0 0 0 ${spacing.r1}
-      ${(props) => getTheme(props).textSecondary};
+      ${(props) => props.theme.textSecondary};
   }
 
   /* Checked */
 
   [type='checkbox']:checked {
-    background-color: ${(props) => getTheme(props).selectedActive};
+    background-color: ${(props) => props.theme.selectedActive};
   }
 
   [type='checkbox']:checked::before {
@@ -95,27 +95,25 @@ const StyledCheckbox = styled.label<{
 
   [type='checkbox']:indeterminate::before {
     box-shadow: inset 0 0 0 ${spacing.r1}
-      ${(props) => getTheme(props).selectedActive};
-    background-color: ${(props) => getTheme(props).highlight};
+      ${(props) => props.theme.selectedActive};
+    background-color: ${(props) => props.theme.highlight};
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='6' y1='12' x2='20' y2='12' style='stroke:%23fff;stroke-width:4'/%3E %3C/svg%3E");
   }
 
   /* Hover & focus */
   [type='checkbox']:hover {
     ${(props) =>
-      !props.disabled && `background-color: ${getTheme(props).highlight};`}
+      !props.disabled && `background-color: ${props.theme.highlight};`}
   }
 
   [type='checkbox']:hover::before {
     ${(props) =>
       !props.disabled &&
-      `box-shadow: inset 0 0 0 ${spacing.r1} ${
-        getTheme(props).selectedActive
-      };`}
+      `box-shadow: inset 0 0 0 ${spacing.r1} ${props.theme.selectedActive};`}
   }
 
   [type='checkbox']:focus-visible:enabled {
-    outline: dashed ${spacing.r2} ${(props) => getTheme(props).selectedActive};
+    outline: dashed ${spacing.r2} ${(props) => props.theme.selectedActive};
     outline-offset: ${spacing.r2};
   }
 
@@ -123,11 +121,11 @@ const StyledCheckbox = styled.label<{
 
   [type='checkbox']:checked:disabled {
     cursor: not-allowed;
-    background-color: ${(props) => getTheme(props).selectedActive};
+    background-color: ${(props) => props.theme.selectedActive};
   }
 
   [type='checkbox']:not(:checked):disabled {
     cursor: not-allowed;
-    background-color: ${(props) => getTheme(props).textSecondary};
+    background-color: ${(props) => props.theme.textSecondary};
   }
 `;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { getTheme } from '../../utils';
+
 import { Status } from '../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,7 +17,7 @@ const BadgeWrapper = styled.span`
 `;
 const BadgeStyled = styled(FontAwesomeIcon)`
   ${(props) => {
-    const theme = getTheme(props);
+    const theme = props.theme;
     return css`
       background: ${theme.backgroundLevel1};
       border-radius: 50%;

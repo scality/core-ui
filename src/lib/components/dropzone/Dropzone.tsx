@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import styled from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
-import { getTheme } from '../../utils';
+
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
@@ -15,8 +15,8 @@ const DropzoneContainer = styled.div<{
   border: ${spacing.f2} dashed
     ${(props) =>
       !props.isDragActive
-        ? getTheme(props).textSecondary
-        : getTheme(props).selectedActive};
+        ? props.theme.textSecondary
+        : props.theme.selectedActive};
   box-sizing: border-box;
   display: flex;
   ${(props) => (props.variant === 'large' ? `text-align: center;` : ``)}
@@ -31,7 +31,7 @@ const FileList = styled.div`
 const FileListItem = styled(Wrap)`
   align-items: baseline;
   &:hover {
-    background: ${(props) => getTheme(props).selectedActive};
+    background: ${(props) => props.theme.selectedActive};
   }
 `;
 

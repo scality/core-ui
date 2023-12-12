@@ -5,7 +5,6 @@ import React, {
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
-import { getTheme } from '../../utils';
 
 type TextAreaVariant = 'code' | 'text';
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -50,19 +49,19 @@ const TextAreaContainer = styled.textarea<{
     font-style: italic;
   }
   &::placeholder {
-    color: ${(props) => getTheme(props).textSecondary};
+    color: ${(props) => props.theme.textSecondary};
   }
   &:hover {
     ${(props) =>
       !props.disabled &&
-      `border: ${spacing.r1} solid ${getTheme(props).infoPrimary};`}
+      `border: ${spacing.r1} solid ${props.theme.infoPrimary};`}
   }
   &:focus {
-    border: ${spacing.r1} solid ${(props) => getTheme(props).infoPrimary};
+    border: ${spacing.r1} solid ${(props) => props.theme.infoPrimary};
   }
   ${(props) => {
     const { border, textSecondary, backgroundLevel1, selectedActive } =
-      getTheme(props);
+      props.theme;
     return css`
       border-color: ${border};
       color: ${textSecondary};

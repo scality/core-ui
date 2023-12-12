@@ -14,6 +14,8 @@ const CoreUiThemeProvider = ({ theme, children }: Props) => {
     fontSizes: fontSize,
     colors: { ...theme },
   };
+
+  console.log('newTheme', newTheme);
   return <ThemeProvider theme={newTheme}>{children}</ThemeProvider>;
 };
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 import { Button } from '../button/Button.component';
 import { Icon } from '../icon/Icon.component';
 type Item = {
@@ -26,7 +26,7 @@ export type WrapperProps = {
 const Wrapper = styled.div<WrapperProps>`
   flex-shrink: 0;
   ${(props) => {
-    const { backgroundLevel1, textPrimary } = getTheme(props);
+    const { backgroundLevel1, textPrimary } = props.theme;
     return css`
       background-color: ${backgroundLevel1};
       color: ${textPrimary};
@@ -49,7 +49,7 @@ const Wrapper = styled.div<WrapperProps>`
   }}
 
   ${(props) => {
-    const { backgroundLevel1 } = getTheme(props);
+    const { backgroundLevel1 } = props.theme;
 
     if (props.hoverable && props.hovered && !props.expanded) {
       return css`
@@ -66,7 +66,7 @@ const Wrapper = styled.div<WrapperProps>`
 `;
 const SidebarContainer = styled.div<WrapperProps>`
   ${(props) => {
-    const { backgroundLevel1 } = getTheme(props);
+    const { backgroundLevel1 } = props.theme;
     return css`
       background-color: ${backgroundLevel1};
     `;
@@ -109,7 +109,7 @@ const SidebarItem = styled.div<{ active?: boolean }>`
   }
 
   ${(props) => {
-    const { textPrimary, highlight } = getTheme(props);
+    const { textPrimary, highlight } = props.theme;
     return props.active
       ? css`
           background-color: ${highlight};

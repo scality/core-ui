@@ -4,7 +4,7 @@ import { Size } from '../constants';
 import styled, { css } from 'styled-components';
 import { Button } from '../button/Button.component';
 import { lighten } from 'polished';
-import { getTheme } from '../../utils';
+
 import { Icon } from '../icon/Icon.component';
 type Props = {
   text: string;
@@ -81,14 +81,14 @@ const ChipsContainer = styled.div<{
     }
   }}
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
     return css`
       color: ${brand.textReverse};
     `;
   }}
 
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
     const brandLight = lighten(0.1, brand[props.variant]).toString();
     return props.onClick
       ? css`
@@ -117,7 +117,7 @@ export const ChipsIcon = styled.span<{
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    lighten(0.15, getTheme(props)[props.variant]).toString()};
+    lighten(0.15, props.theme[props.variant]).toString()};
 `;
 export const ChipsText = styled.span<{ icon: any; isRemovable: boolean }>`
   display: inline-flex;

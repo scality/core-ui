@@ -1,14 +1,13 @@
 import React from 'react';
 import styled, { createGlobalStyle, css } from 'styled-components';
 
-import { getTheme } from '../../utils';
 type Props = {
   children: React.ReactNode;
 };
 
 const GlobalStyle = createGlobalStyle`
 ${(props) => {
-  const brand = getTheme(props);
+  const brand = props.theme;
   return css`
     // Custom scrollbar
     * {

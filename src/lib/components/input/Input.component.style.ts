@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 export const InputContainer = styled.div<{
   disabled: boolean;
   error: string;
@@ -31,7 +31,7 @@ export const InputContainer = styled.div<{
   input.sc-input-type {
     ${(props) => {
       const { backgroundLevel1, statusCritical, textSecondary, border } =
-        getTheme(props);
+        props.theme;
       return css`
         background-color: ${backgroundLevel1};
         color: ${textSecondary};
@@ -73,7 +73,7 @@ export const InputContainer = styled.div<{
             display: flex;
             flex-direction: column;
             ${(props) => {
-              const { textSecondary } = getTheme(props);
+              const { textSecondary } = props.theme;
               return css`
                 color: ${textSecondary};
               `;

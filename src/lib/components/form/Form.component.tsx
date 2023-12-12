@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
-import { convertRemToPixels, getTheme } from '../../utils';
+import { convertRemToPixels } from '../../utils';
 import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
 import { IconHelp } from '../IconHelper';
@@ -69,13 +69,13 @@ const FixedHeader = styled(BasicPageLayout)`
   ${(props) =>
     props.layoutKind === 'page'
       ? `
-  border-bottom: 1px solid ${getTheme(props).border};
+  border-bottom: 1px solid ${props.theme.border};
   `
       : ``}
 `;
 
 const FixedFooter = styled(BasicPageLayout)`
-  border-top: 1px solid ${(props) => getTheme(props).border};
+  border-top: 1px solid ${(props) => props.theme.border};
 `;
 
 const PaddedContent = styled.div`

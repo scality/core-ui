@@ -23,7 +23,7 @@ import { TabProps, Query } from './Tab';
 import { useScrollingTabs } from './useScrollingTabs';
 import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import styled from 'styled-components';
-import { getTheme } from '../../utils';
+
 type TabsProps = {
   activeTabColor?: string;
   activeTabSeparator?: string;
@@ -38,7 +38,7 @@ type TabsProps = {
 export const TabsContext = createContext<boolean>(false);
 
 const TabIcon = styled(ButtonIcon)`
-  color: ${(props) => getTheme(props).textSecondary};
+  color: ${(props) => props.theme.textSecondary};
 `;
 
 function Tabs({

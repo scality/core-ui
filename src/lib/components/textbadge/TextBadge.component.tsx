@@ -1,9 +1,9 @@
 // @ts-nocheck
 import styled from 'styled-components';
 import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 const StyledTextBadge = styled.span`
-  background-color: ${(props) => getTheme(props)[props.variant]};
+  background-color: ${(props) => props.theme[props.variant]};
   color: ${getThemePropSelector('textReverse')};
   padding: 2px ${defaultTheme.padding.smaller};
   border-radius: 4px;

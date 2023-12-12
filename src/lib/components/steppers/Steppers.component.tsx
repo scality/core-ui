@@ -2,9 +2,9 @@
 import styled, { css } from 'styled-components';
 
 import * as defaultTheme from '../../style/theme';
-import { Loader } from '../loader/Loader.component';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { Loader } from '../loader/Loader.component';
 type StepProps = {
   title: React.ReactNode;
   content?: React.ReactNode;
@@ -41,7 +41,7 @@ const Circle = styled.div`
   border-radius: 50%;
 
   ${(props) => {
-    const { statusCritical, statusHealthy, selectedActive } = getTheme(props);
+    const { statusCritical, statusHealthy, selectedActive } = props.theme;
 
     if (props.error) {
       return css`
@@ -88,7 +88,7 @@ const BottomBar = styled.hr`
   ${(props) => {
     if (props.completed) {
       return css`
-        border-left: 2px solid ${getTheme(props).statusHealthy};
+        border-left: 2px solid ${props.theme.statusHealthy};
       `;
     } else {
       return css`

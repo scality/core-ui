@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 import * as defaultTheme from '../../style/theme';
-import { getTheme } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 type Props = {
   paths: Array<JSX.Element>;
@@ -21,7 +20,7 @@ const BreadcrumbItem = styled.li<{ active: boolean }>`
   min-width: 3rem;
 
   ${(props) => {
-    const { textPrimary, selectedActive, textLink } = getTheme(props);
+    const { textPrimary, selectedActive, textLink } = props.theme;
 
     if (props.active) {
       return css`

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { spacing } from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
+import { getThemePropSelector } from '../../utils';
 export const TabBar = styled.div`
   display: flex;
   height: ${spacing.sp40};
@@ -31,7 +31,7 @@ export const TabItem = styled.div<{
 
   ${(props) => {
     const { highlight, backgroundLevel3, backgroundLevel4, selectedActive } =
-      getTheme(props);
+      props.theme;
     return props.selected
       ? `
         background-color: ${props.activeTabColor || backgroundLevel4};
@@ -64,7 +64,7 @@ export const TabsContainer = styled.div<{
   display: flex;
   flex-direction: column;
   background-color: ${(props) =>
-    props.tabLineColor || getTheme(props).backgroundLevel3};
+    props.tabLineColor || props.theme.backgroundLevel3};
 
   & ${TabItem} {
     display: flex;
@@ -74,8 +74,7 @@ export const TabsContainer = styled.div<{
 
   & ${TabItem}::before {
     content: "";
-    background: ${(props) =>
-      props.separatorColor || getTheme(props).infoSecondary};
+    background: ${(props) => props.separatorColor || props.theme.infoSecondary};
     position: absolute;
     bottom: 25%;
     right: 0;
@@ -89,7 +88,7 @@ export const TabContent = styled.div<{ tabContentColor?: string }>`
   padding: 0;
   flex: 1;
   background-color: ${(props) =>
-    props.tabContentColor || getTheme(props).backgroundLevel4};
+    props.tabContentColor || props.theme.backgroundLevel4};
 `;
 export const ScrollableContainer = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { getTheme } from '../../utils';
+
 import { spacing } from '../../style/theme';
 import {
   TableHeightKeyType,
@@ -47,7 +47,7 @@ export const HeadRow = styled.div<HeadRowType>`
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
   cursor: pointer;
-  color: ${(props) => getTheme(props).textPrimary};
+  color: ${(props) => props.theme.textPrimary};
   font-weight: bold;
   overflow: hidden;
 `;
@@ -59,12 +59,11 @@ type TableRowType = {
   backgroundVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
-  color: ${(props) => getTheme(props).textPrimary};
-  border-top: 1px solid
-    ${(props) => getTheme(props)[props.separationLineVariant]};
+  color: ${(props) => props.theme.textPrimary};
+  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
   :last-child {
     border-bottom: 1px solid
-      ${(props) => getTheme(props)[props.separationLineVariant]};
+      ${(props) => props.theme[props.separationLineVariant]};
   }
   cursor: default;
   box-sizing: border-box;
@@ -75,7 +74,7 @@ export const TableRow = styled.div<TableRowType>`
       return css`
         &:hover,
         &:focus {
-          background-color: ${(props) => getTheme(props).highlight};
+          background-color: ${(props) => props.theme.highlight};
           outline: none;
           cursor: pointer;
         }
@@ -86,11 +85,11 @@ export const TableRow = styled.div<TableRowType>`
   ${(props) => {
     if (props.selectedId && props.isSelected) {
       return css`
-        background-color: ${getTheme(props).highlight};
-        border-right: ${borderSize} solid ${getTheme(props).selectedActive};
+        background-color: ${props.theme.highlight};
+        border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
     } else {
-      const color = getTheme(props)[props.backgroundVariant];
+      const color = props.theme[props.backgroundVariant];
       return css`
         border-right: ${borderSize} solid ${color};
       `;
@@ -104,19 +103,18 @@ type TableRowMultiSelectableType = {
   backgroundVariant: TableVariantType;
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
-  color: ${(props) => getTheme(props).textPrimary};
-  border-top: 1px solid
-    ${(props) => getTheme(props)[props.separationLineVariant]};
+  color: ${(props) => props.theme.textPrimary};
+  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
   :last-child {
     border-bottom: 1px solid
-      ${(props) => getTheme(props)[props.separationLineVariant]};
+      ${(props) => props.theme[props.separationLineVariant]};
   }
 
   box-sizing: border-box;
 
   &:hover,
   &:focus {
-    background-color: ${(props) => getTheme(props).highlight};
+    background-color: ${(props) => props.theme.highlight};
     outline: none;
     cursor: pointer;
   }
@@ -124,11 +122,11 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   ${(props) => {
     if (props.isSelected) {
       return css`
-        background-color: ${(props) => getTheme(props).highlight};
-        border-right: ${borderSize} solid ${getTheme(props).selectedActive};
+        background-color: ${(props) => props.theme.highlight};
+        border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
     } else {
-      const color = getTheme(props)[props.backgroundVariant];
+      const color = props.theme[props.backgroundVariant];
       return css`
         border-right: ${borderSize} solid ${color};
       `;
@@ -148,7 +146,7 @@ export const TableWrapper = styled.div`
   width: 100%;
 `;
 export const TooltipContent = styled.div`
-  color: ${(props) => getTheme(props).textSecondary};
+  color: ${(props) => props.theme.textSecondary};
   font-weight: bold;
   min-width: 60px;
 `;
@@ -156,9 +154,9 @@ export const TooltipContent = styled.div`
 export const NoResult = styled.div`
   display: flex;
   justify-content: center;
-  color: ${(props) => getTheme(props).textSecondary};
+  color: ${(props) => props.theme.textSecondary};
   padding-top: ${spacing.sp8};
-  border-top: 1px solid ${(props) => getTheme(props).backgroundLevel3};
+  border-top: 1px solid ${(props) => props.theme.backgroundLevel3};
 `;
 
 export const SortCaret = <

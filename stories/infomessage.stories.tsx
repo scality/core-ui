@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoMessage from '../src/lib/components/infomessage/InfoMessage.component';
+import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
 import { Wrapper } from './common';
 import { defaultTheme } from '../src/lib/style/theme';
 import { Meta, StoryObj } from '@storybook/react';

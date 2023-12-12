@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import Select from 'react-select';
-import { fontWeight, fontSize, zIndex } from '../../style/theme';
-import { getThemePropSelector, getTheme } from '../../utils';
+import styled from 'styled-components';
 import { spacing } from '../../spacing';
+import { fontSize, fontWeight, zIndex } from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 
 const SelectStyle = styled(Select)`
   font-size: ${fontSize.base};
@@ -51,14 +51,14 @@ const SelectStyle = styled(Select)`
     &.sc-select__control--menu-is-open {
       ${(props) =>
         props.isDefault
-          ? `background-color: ${getTheme(props).backgroundLevel1};`
+          ? `background-color: ${props.theme.backgroundLevel1};`
           : `
             border-radius: ${
               props.isMenuBottom
                 ? `${spacing.r12} ${spacing.r12} 0 0`
                 : `0 0 ${spacing.r12} ${spacing.r12}`
             };
-            background-color: ${getTheme(props).selectedActive} !important;
+            background-color: ${props.theme.selectedActive} !important;
       `}
     }
 
@@ -68,10 +68,10 @@ const SelectStyle = styled(Select)`
       }
       ${(props) =>
         props.isDefault
-          ? `border-color: ${getTheme(props).infoPrimary};`
+          ? `border-color: ${props.theme.infoPrimary};`
           : `
-             border-color: ${getTheme(props).selectedActive};
-             background-color: ${getTheme(props).highlight};
+             border-color: ${props.theme.selectedActive};
+             background-color: ${props.theme.highlight};
       `}
       box-shadow: none;
       outline: none;
@@ -184,7 +184,7 @@ const SelectStyle = styled(Select)`
         border-radius: 0;
         ${(props) =>
           props.isDefault &&
-          `border-bottom: ${spacing.r1} solid ${getTheme(props).border};`}
+          `border-bottom: ${spacing.r1} solid ${props.theme.border};`}
         padding-left: 0;
 
         .option-icon {

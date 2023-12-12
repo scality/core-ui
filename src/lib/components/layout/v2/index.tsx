@@ -1,14 +1,13 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import * as defaultTheme from '../../../style/theme';
-import { getTheme } from '../../../utils';
 
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-  background: ${(props) => getTheme(props)['backgroundLevel1']};
+  background: ${(props) => props.theme['backgroundLevel1']};
 `;
 
 const Navigation = styled.div`

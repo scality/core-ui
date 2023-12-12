@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect, CSSProperties } from 'react';
+import { computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { computePosition, offset, shift, flip } from '@floating-ui/dom';
 
-import * as defaultTheme from '../../style/theme';
-import { getTheme, getThemePropSelector } from '../../utils';
 import { spacing } from '../../spacing';
+import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
 export const LEFT = 'left';
@@ -51,9 +51,9 @@ const TooltipOverLayContainer = styled.div<{
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
     (props && props.style && props.style.backgroundColor) ||
-    getTheme(props).backgroundLevel1};
+    props.theme.backgroundLevel1};
   color: ${(props) =>
-    (props && props.style && props.style.color) || getTheme(props).textPrimary};
+    (props && props.style && props.style.color) || props.theme.textPrimary};
   z-index: ${defaultTheme.zIndex.tooltip};
   border-radius: 4px;
   font-size: ${(props) =>

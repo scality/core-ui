@@ -2,14 +2,6 @@ import * as defaultTheme from './style/theme';
 
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
 
-export function mergeTheme(theme, defaultTheme) {
-  return theme ? { ...defaultTheme.brand, ...theme } : defaultTheme.brand;
-}
-
-export const getTheme = (props) => {
-  return mergeTheme(props.theme, defaultTheme);
-};
-
 /** Ensure the consistency of colors between old and new colors */
 const variantMapping = {
   healthy: 'statusHealthy',
@@ -24,13 +16,13 @@ const variantMapping = {
  * New names are also supported. */
 export const getThemePropSelector = (key) => (props) => {
   const key_ = variantMapping[key] ?? key;
-  return getTheme(props)[key_];
+  return props.theme[key_];
 };
 
 /** Translates the old colors into new colors while keeping same name.
  * New names are also supported. */
 export const getThemeVariantSelector = () => (props) => {
-  const theme = getTheme(props);
+  const theme = props.theme;
   const key = variantMapping[props.variant] ?? props.variant;
   return theme[key];
 };

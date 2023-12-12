@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
-import { getTheme } from '../../utils';
+
 import * as defaultTheme from '../../style/theme';
 import { spacing } from '../../style/theme';
 import { spacing as newSpacing } from '../../spacing';
@@ -41,7 +41,7 @@ export const ButtonStyled = styled.button<Props>`
     props.size === 'inline' ? newSpacing.r24 : newSpacing.r32};
 
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
 
     switch (props.variant) {
       case 'primary':
@@ -148,7 +148,7 @@ export const ButtonStyled = styled.button<Props>`
 
 
   ${(props) => {
-    const brand = getTheme(props);
+    const brand = props.theme;
     return css`
       ${props.icon && !props.label && !props.variant
         ? `

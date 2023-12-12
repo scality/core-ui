@@ -1,6 +1,6 @@
 import { ChangeEvent, InputHTMLAttributes, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { getTheme } from '../../utils';
+
 import { spacing } from '../../style/theme';
 import { LABEL_PREFIX, useFieldContext } from '../form/Form.component';
 import { Stack } from '../../spacing';
@@ -38,10 +38,9 @@ const Switch = styled.label<{ disabled?: boolean }>`
 const Slider = styled.div<{ toggle?: boolean }>`
   width: 100%;
   height: 1rem;
-  background-color: ${(props) => getTheme(props).backgroundLevel1};
+  background-color: ${(props) => props.theme.backgroundLevel1};
   border: ${spacing.sp1} solid
-    ${(props) =>
-      getTheme(props)[props.toggle ? 'selectedActive' : 'infoPrimary']};
+    ${(props) => props.theme[props.toggle ? 'selectedActive' : 'infoPrimary']};
   border-radius: ${spacing.sp8};
   transition: 0.4s;
   -moz-transform: rotate(0.02deg);
@@ -54,14 +53,14 @@ const Slider = styled.div<{ toggle?: boolean }>`
     left: 3px;
     top: 3.5px;
     background-color: ${(props) =>
-      getTheme(props)[props.toggle ? 'textSecondary' : 'textTertiary']};
+      props.theme[props.toggle ? 'textSecondary' : 'textTertiary']};
     transition: 0.4s;
     -moz-transform: rotate(0.02deg);
   }
 `;
 const ToggleInput = styled.input`
   &:checked + ${Slider} {
-    background-color: ${(props) => getTheme(props).selectedActive};
+    background-color: ${(props) => props.theme.selectedActive};
   }
   &:checked + ${Slider}:before {
     transform: translateX(${spacing.sp10});
@@ -70,7 +69,7 @@ const ToggleInput = styled.input`
 `;
 const StyledSwitchLabel = styled.label<{ toggle?: boolean }>`
   color: ${(props) =>
-    getTheme(props)[props.toggle ? 'textPrimary' : 'textTertiary']};
+    props.theme[props.toggle ? 'textPrimary' : 'textTertiary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {

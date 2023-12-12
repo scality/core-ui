@@ -2,7 +2,6 @@
 // Legacy Button should not be use anymore
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
-import { getTheme } from '../../utils';
 import * as defaultTheme from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { Size } from '../constants';
@@ -96,8 +95,6 @@ export const ButtonStyled = styled.button`
   }}
 
   ${(props) => {
-    const brand = getTheme(props);
-
     if (props.isLoading) {
       return css`
         > span {
@@ -105,7 +102,7 @@ export const ButtonStyled = styled.button`
           .sc-loader {
             margin: 0px ${defaultTheme.padding.smaller};
             svg {
-              fill: ${brand.textPrimary} !important;
+              fill: ${props.theme.textPrimary} !important;
             }
           }
         }
@@ -116,73 +113,72 @@ export const ButtonStyled = styled.button`
       return css`
         border-width: 1px;
         border-style: solid;
-        border-color: ${brand.buttonSecondary};
+        border-color: ${props.theme.buttonSecondary};
         // to be checked
-        background-color: ${brand.backgroundLevel1};
-        color: ${brand.textTertiary};
+        background-color: ${props.theme.backgroundLevel1};
+        color: ${props.theme.textTertiary};
 
         &:hover {
-          border-color: ${brand.infoPrimary};
-          color: ${brand.textPrimary};
+          border-color: ${props.theme.infoPrimary};
+          color: ${props.theme.textPrimary};
         }
       `;
     } else if (props.variant === 'buttonPrimary') {
       return css`
-        background-color: ${brand.buttonPrimary};
-        border: 1px solid ${brand.buttonPrimary};
-        color: ${brand.textPrimary};
+        background-color: ${props.theme.buttonPrimary};
+        border: 1px solid ${props.theme.buttonPrimary};
+        color: ${props.theme.textPrimary};
         &:hover {
-          background-color: ${brand.highlight};
+          background-color: ${props.theme.highlight};
           outline: none;
-          border: 1px solid ${brand.infoPrimary};
+          border: 1px solid ${props.theme.infoPrimary};
         }
       `;
     } else if (props.variant === 'buttonSecondary') {
       return css`
-        background-color: ${brand.buttonSecondary};
-        border: 1px solid ${brand.buttonSecondary};
-        color: ${brand.textPrimary};
+        background-color: ${props.theme.buttonSecondary};
+        border: 1px solid ${props.theme.buttonSecondary};
+        color: ${props.theme.textPrimary};
         &:hover {
-          background-color: ${brand.infoPrimary};
-          border: 1px solid ${brand.infoPrimary};
+          background-color: ${props.theme.infoPrimary};
+          border: 1px solid ${props.theme.infoPrimary};
         }
       `;
     } else if (props.variant === 'buttonDelete') {
       return css`
-        background-color: ${brand.buttonDelete};
-        border: 1px solid ${brand.buttonDelete};
-        color: ${brand.statusCritical};
+        background-color: ${props.theme.buttonDelete};
+        border: 1px solid ${props.theme.buttonDelete};
+        color: ${props.theme.statusCritical};
         &:hover {
-          background-color: ${brand.statusCritical};
-          border: 1px solid ${brand.infoPrimary};
-          color: ${brand.textPrimary};
+          background-color: ${props.theme.statusCritical};
+          border: 1px solid ${props.theme.infoPrimary};
+          color: ${props.theme.textPrimary};
         }
       `;
     } else if (props.variant === 'backgroundLevel1') {
       return css`
-        background-color: ${brand.backgroundLevel1};
-        color: ${brand.textPrimary};
+        background-color: ${props.theme.backgroundLevel1};
+        color: ${props.theme.textPrimary};
         &:hover {
-          background-color: ${brand.highlight};
+          background-color: ${props.theme.highlight};
         }
       `;
     } else {
       return css`
-        background-color: ${brand.backgroundLevel1};
-        border: 1px solid ${brand.backgroundLevel1};
-        color: ${brand.statusCritical};
+        background-color: ${props.theme.backgroundLevel1};
+        border: 1px solid ${props.theme.backgroundLevel1};
+        color: ${props.theme.statusCritical};
         &:hover {
-          background-color: ${brand.backgroundLevel1};
-          border: 1px solid ${brand.infoPrimary};
-          color: ${brand.textPrimary};
+          background-color: ${props.theme.backgroundLevel1};
+          border: 1px solid ${props.theme.infoPrimary};
+          color: ${props.theme.textPrimary};
         }
       `;
     }
   }}
 
 ${(props) => {
-    const brand = getTheme(props);
-    const brandLighter = lighten(0.2, brand[props.variant]).toString();
+    const brandLighter = lighten(0.2, props.theme[props.variant]).toString();
     return css`
       ${props.disabled
         ? `
@@ -197,9 +193,8 @@ ${(props) => {
   }}
 
 ${(props) => {
-    const brand = getTheme(props);
-    const brandLighter = lighten(0.2, brand[props.variant]).toString();
-    const brandLight = lighten(0.1, brand[props.variant]).toString();
+    const brandLighter = lighten(0.2, props.theme[props.variant]).toString();
+    const brandLight = lighten(0.1, props.theme[props.variant]).toString();
     return css`
       ${!props.text && props.icon && props.inverted
         ? `
@@ -207,7 +202,7 @@ ${(props) => {
         height: auto;
         border: none;
         background-color: transparent;
-        color: ${props.disabled ? brandLight : brand[props.variant]};
+        color: ${props.disabled ? brandLight : props.theme[props.variant]};
 
         &:hover{
           background-color: transparent;

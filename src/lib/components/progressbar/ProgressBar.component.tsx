@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { getTheme, getThemePropSelector } from '../../utils';
 import * as defaultTheme from '../../style/theme';
+import { getThemePropSelector } from '../../utils';
 import { Size } from '../constants';
 export type ProgressBarProps = {
   percentage: number;
@@ -127,12 +127,12 @@ const FilledAreaContainer = styled.div<{
       animation-fill-mode: both;
       animation-name: widthAnimation;
 
-      background-color: ${props.color || getTheme(props).selectedActive}
+      background-color: ${props.color || props.theme.selectedActive}
       width: ${props.width}%;
     `;
     } else {
       return css`
-        background-color: ${props.color || getTheme(props).selectedActive};
+        background-color: ${props.color || props.theme.selectedActive};
         width: ${props.width}%;
       `;
     }

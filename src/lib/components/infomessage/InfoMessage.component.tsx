@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Stack } from '../../spacing';
-import { defaultTheme } from '../../style/theme';
 import { Icon } from '../icon/Icon.component';
 import { Link, Text } from '../text/Text.component';
 import { useComputeBackgroundColor } from './InfoMessageUtils';
@@ -13,7 +12,7 @@ type Props = {
 };
 
 const InfoMessageContainer = styled.div`
-  background-color: ${defaultTheme.darkRebrand.backgroundLevel2};
+  background-color: ${(props) => props.theme.backgroundLevel2};
   border-radius: 3px;
   padding: 0.5rem;
   display: flex;
@@ -24,6 +23,7 @@ const InfoMessageContainer = styled.div`
 
 export const InfoMessage = ({ title, content, link }: Props) => {
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
+  const theme = useTheme();
 
   return (
     <InfoMessageContainer
@@ -31,11 +31,7 @@ export const InfoMessage = ({ title, content, link }: Props) => {
       style={{ backgroundColor: backgroundColor }}
     >
       <Stack>
-        <Icon
-          name="Info-circle"
-          color={defaultTheme.darkRebrand.infoPrimary}
-          size="lg"
-        />
+        <Icon name="Info-circle" color={theme.infoPrimary} size="lg" />
         {typeof title === 'string' ? <Text isEmphazed>{title}</Text> : title}
       </Stack>
       <Text color="textSecondary" isGentleEmphazed>
