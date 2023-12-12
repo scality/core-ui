@@ -31,7 +31,11 @@ const Panel = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Circle = styled.div`
+const Circle = styled.div<{
+  error?: boolean;
+  completed?: boolean;
+  active?: boolean;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +82,7 @@ const StepHeader = styled.span`
 const StepContent = styled.div`
   padding: ${spacing.r8};
 `;
-const BottomBar = styled.hr`
+const BottomBar = styled.hr<{ completed?: boolean }>`
   flex-grow: 1;
   margin: 0;
   border: none;
@@ -104,7 +108,7 @@ function Step(props: StepProps) {
     active,
     completed,
     isLast,
-    index,
+    index = 0,
     error,
     inProgress,
   } = props;
@@ -123,9 +127,7 @@ function Step(props: StepProps) {
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
       <Panel>
-        <StepHeader completed={completed} active={active}>
-          {title}
-        </StepHeader>
+        <StepHeader>{title}</StepHeader>
         {active && <StepContent>{content}</StepContent>}
       </Panel>
     </StepContainer>

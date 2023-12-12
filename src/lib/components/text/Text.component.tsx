@@ -129,7 +129,7 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
 
 export const Text = styled.span<{
   variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger' | 'Large';
-  color?: CoreUITheme;
+  color?: keyof CoreUITheme;
   isEmphazed?: boolean;
   isGentleEmphazed?: boolean;
 }>`

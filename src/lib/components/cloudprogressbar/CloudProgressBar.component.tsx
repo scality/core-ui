@@ -26,7 +26,7 @@ const Container = styled.div`
     `;
   }}
 `;
-const ContainerProgress = styled.div`
+const ContainerProgress = styled.div<{ percentage: number }>`
   ${(props) => {
     return css`
       animation-duration: 1s;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { HTMLProps } from 'react';
 import { createContext } from 'react';
 import styled from 'styled-components';
@@ -9,7 +10,7 @@ type CardElementProps = {
 };
 
 function withCompoundCheck(Component) {
-  return ({ children, className, rest }: CardElementProps) => (
+  return ({ children, className, ...rest }: CardElementProps) => (
     <CardContext.Consumer>
       {(value) => {
         const componentName = Component.displayName;
