@@ -59,7 +59,7 @@ const Circle = styled.div`
       `;
     } else {
       return css`
-        background-color: ${defaultTheme.gray};
+        background-color: ${getThemePropSelector('buttonSecondary')};
         color: ${defaultTheme.white};
       `;
     }
@@ -67,7 +67,10 @@ const Circle = styled.div`
 `;
 const StepHeader = styled.span`
   padding: 8px;
-  color: ${getThemePropSelector('textPrimary')};
+  color: ${(props) =>
+    props.active
+      ? getThemePropSelector('textPrimary')
+      : getThemePropSelector('textSecondary')};
 `;
 const StepContent = styled.div`
   padding: ${defaultTheme.padding.small};
@@ -76,7 +79,7 @@ const BottomBar = styled.hr`
   flex-grow: 1;
   margin: 0;
   border: none;
-  margin: 2px 14px;
+  margin: 4px 14px;
 
   ${(props) => {
     if (props.completed) {
@@ -103,6 +106,7 @@ function Step(props: StepProps) {
     inProgress,
   } = props;
   const circleContent = completed ? <Icon name="Check" /> : index + 1;
+
   return (
     <StepContainer>
       <Panel>
@@ -116,7 +120,9 @@ function Step(props: StepProps) {
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
       <Panel>
-        <StepHeader completed={completed}>{title}</StepHeader>
+        <StepHeader completed={completed} active={active}>
+          {title}
+        </StepHeader>
         {active && <StepContent>{content}</StepContent>}
       </Panel>
     </StepContainer>
