@@ -23,6 +23,7 @@ const SteppersContainer = styled.div``;
 const StepContainer = styled.div`
   display: flex;
   min-height: 50px;
+  min-width: 20rem;
 `;
 const Panel = styled.div`
   display: flex;
