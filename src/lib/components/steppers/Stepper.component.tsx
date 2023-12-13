@@ -46,7 +46,7 @@ export const Stepper: Stepper = ({ steps }) => {
 
   return (
     <StepperContext.Provider value={{ next, prev }}>
-      <Box display="flex" gap={32} padding={16} flex={1} height="100%">
+      <Box display="flex" gap={32} flex={1} height="100%">
         <Steppers
           activeStep={stepProps.step}
           steps={steps.map((step) => {

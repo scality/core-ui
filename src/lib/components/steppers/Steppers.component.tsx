@@ -19,7 +19,10 @@ type Props = {
   steps: Array<StepProps>;
   activeStep: number;
 };
-const SteppersContainer = styled.div``;
+const SteppersContainer = styled.div`
+  padding-top: 4rem;
+  padding-left: 2rem;
+`;
 const StepContainer = styled.div`
   display: flex;
   min-height: 50px;
