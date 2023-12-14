@@ -54,7 +54,13 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
-export type CoreUIThemeName = 'darkRebrand' | 'ring9dark';
+
+export const coreUIAvailableThemesNames = [
+  'darkRebrand',
+  'artescaLight',
+  'ring9dark',
+] as const;
+export type CoreUIThemeName = (typeof coreUIAvailableThemesNames)[number];
 
 export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
   darkRebrand: {
@@ -75,12 +81,37 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     backgroundLevel1: '#121219',
     backgroundLevel2: '#323245',
     backgroundLevel3: '#232331',
-    backgroundLevel4: '#171721',
+    backgroundLevel4: '#1B1B27',
     textPrimary: '#EAEAEA',
     textSecondary: '#B5B5B5',
     textTertiary: '#DFDFDF',
     textReverse: '#000000',
     textLink: '#71AEFF',
+  },
+  artescaLight: {
+    statusHealthy: '#009E93',
+    statusHealthyRGB: '43,171,81',
+    statusWarning: '#E77B00',
+    statusWarningRGB: '252,138,50',
+    statusCritical: '#C10004',
+    statusCriticalRGB: '232,72,85,1',
+    selectedActive: '#90D0FF',
+    highlight: '#E3F2FD',
+    border: '#999999',
+    buttonPrimary: '#9DA6EC',
+    buttonSecondary: '#CACFE3',
+    buttonDelete: '#FFCDD2',
+    infoPrimary: '#5C486D',
+    infoSecondary: '#EBE3F1',
+    backgroundLevel1: '#F9F9FB',
+    backgroundLevel2: '#F3F3F5',
+    backgroundLevel3: '#EAEAEC',
+    backgroundLevel4: '#FAFAF8',
+    textPrimary: '#101010',
+    textSecondary: '#515170',
+    textTertiary: '#DFDFDF', // TO CHECK
+    textReverse: '#EAEAEA',
+    textLink: '#1349C5',
   },
   ring9dark: {
     statusHealthy: '#2BAB51',
