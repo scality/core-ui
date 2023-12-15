@@ -72,7 +72,7 @@ const Circle = styled.div<{
     }
   }};
 `;
-const StepHeader = styled.span`
+const StepHeader = styled.span<{ active: boolean }>`
   padding: 8px;
   color: ${(props) =>
     props.active
