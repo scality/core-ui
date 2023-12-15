@@ -44,7 +44,8 @@ const Circle = styled.div<{
   border-radius: 50%;
 
   ${(props) => {
-    const { statusCritical, statusHealthy, selectedActive } = props.theme;
+    const { statusCritical, statusHealthy, selectedActive, buttonSecondary } =
+      props.theme;
 
     if (props.error) {
       return css`
@@ -66,13 +67,13 @@ const Circle = styled.div<{
       `;
     } else {
       return css`
-        background-color: ${gray};
+        background-color: ${buttonSecondary};
         color: ${white};
       `;
     }
   }};
 `;
-const StepHeader = styled.span<{ active: boolean }>`
+const StepHeader = styled.span<{ active?: boolean }>`
   padding: 8px;
   color: ${(props) =>
     props.active
@@ -127,7 +128,7 @@ function Step(props: StepProps) {
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
       <Panel>
-        <StepHeader>{title}</StepHeader>
+        <StepHeader active={active}>{title}</StepHeader>
         {active && <StepContent>{content}</StepContent>}
       </Panel>
     </StepContainer>
