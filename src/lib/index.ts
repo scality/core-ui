@@ -72,3 +72,4 @@ export { ToastProvider, useToast } from './components/toast/ToastProvider';
 export { useMutationsHandler } from './components/toast/useMutationsHandler';
 export { Stepper } from './components/steppers/Stepper.component';
 export { InfoMessage } from './components/infomessage/InfoMessage.component';
+export { InputList } from './components/inputlist/InputList.component';
