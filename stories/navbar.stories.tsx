@@ -8,6 +8,7 @@ const tabs = [
   {
     selected: true,
     title: 'Groups',
+    link: <a href="/groups">Groups</a>,
     onClick: action('Groups clicked'),
   },
   {

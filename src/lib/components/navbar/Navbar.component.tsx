@@ -21,7 +21,6 @@ type Tab = {
 export type Props = {
   onToggleClick?: () => void;
   rightActions: Actions;
-  productName?: string;
   logo?: JSX.Element;
   tabs?: Array<Tab>;
 };
@@ -64,7 +63,7 @@ const NavbarTabs = styled.div`
     ${(props) => {
       const { selectedActive } = props.theme;
       return css`
-        color: ${getThemePropSelector('textTertiary')};
+        color: ${getThemePropSelector('textPrimary')};
         &:hover {
           background-color: ${getThemePropSelector('highlight')};
         }
@@ -132,11 +131,7 @@ const NavbarMenuItem = styled.div`
     width: ${navbarItemWidth};
   }
 `;
-const ProductNameSpan = styled.h1`
-  text-transform: uppercase;
-  font-size: ${fontSize.larger};
-  padding: 0 ${spacing.r16};
-`;
+
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -178,7 +173,6 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
 
 function NavBar({
   onToggleClick,
-  productName,
   logo,
   tabs = [],
   rightActions = [],
@@ -202,16 +196,11 @@ function NavBar({
             {logo ? logo : <Logo />}
           </LogoContainer>
         </NavbarMenuItem>
-        {productName && (
-          <NavbarMenuItem>
-            <ProductNameSpan>{productName}</ProductNameSpan>
-          </NavbarMenuItem>
-        )}
       </NavbarMenu>
       {tabs.length ? (
         <NavbarTabs>
-          {tabs.map(({ link, title, selected, onClick }, index) =>
-            link ? (
+          {tabs.map(({ link, title, selected, onClick }, index) => {
+            return link ? (
               React.cloneElement(link, {
                 className: selected ? 'selected' : '',
                 'aria-selected': selected,
@@ -228,8 +217,8 @@ function NavBar({
               >
                 <span>{title}</span>
               </TabItem>
-            ),
-          )}
+            );
+          })}
         </NavbarTabs>
       ) : null}
       {rightActions.length ? (

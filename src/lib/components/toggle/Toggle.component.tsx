@@ -53,7 +53,7 @@ const Slider = styled.div<{ toggle?: boolean }>`
     left: 3px;
     top: 3.5px;
     background-color: ${(props) =>
-      props.theme[props.toggle ? 'textSecondary' : 'textTertiary']};
+      props.theme[props.toggle ? 'textSecondary' : 'textPrimary']};
     transition: 0.4s;
     -moz-transform: rotate(0.02deg);
   }
@@ -69,7 +69,7 @@ const ToggleInput = styled.input`
 `;
 const StyledSwitchLabel = styled.label<{ toggle?: boolean }>`
   color: ${(props) =>
-    props.theme[props.toggle ? 'textPrimary' : 'textTertiary']};
+    props.theme[props.toggle ? 'textPrimary' : 'textPrimary']};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {

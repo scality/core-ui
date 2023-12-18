@@ -51,7 +51,7 @@ const Row = styled.div`
 const defaultBody = (
   <CircularProgressBar
     color={brand.buttonSecondary}
-    backgroundColor={brand.textTertiary}
+    backgroundColor={brand.textPrimary}
     radius={30}
     strokeWidth={5}
     percent={60}

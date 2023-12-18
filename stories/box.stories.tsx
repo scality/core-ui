@@ -107,7 +107,6 @@ export const colors = {
           textPrimary with background color at backgroundLevel2
         </Box>
         <Box color="textSecondary">textSecondary</Box>
-        <Box color="textTertiary">textTertiary</Box>
         <Box color="textLink">textLink</Box>
       </HighlightBorder>
     );

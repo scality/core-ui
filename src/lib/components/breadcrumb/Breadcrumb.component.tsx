@@ -52,7 +52,7 @@ const BreadcrumbItem = styled.li<{ active: boolean }>`
 `;
 const BreadcrumbSeparator = styled.li`
   ${(props) => css`
-    color: ${props.theme.textTertiary};
+    color: ${props.theme.textPrimary};
     padding: ${spacing.r4} ${spacing.r8};
     display: flex;
     align-items: center;

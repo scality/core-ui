@@ -58,7 +58,7 @@ export const ButtonStyled = styled.button<Props>`
           }
           &:active:enabled {
             cursor: pointer;
-            color: ${brand.textTertiary};
+            color: ${brand.textPrimary};
             border: ${spacing.r1} solid ${brand.infoSecondary};
           }
         `;
@@ -80,7 +80,7 @@ export const ButtonStyled = styled.button<Props>`
           }
           &:active:enabled {
             cursor: pointer;
-            color: ${brand.textTertiary};
+            color: ${brand.textPrimary};
             border: ${spacing.r1} solid ${brand.buttonSecondary};
           }
         `;
@@ -108,7 +108,7 @@ export const ButtonStyled = styled.button<Props>`
         return css`
           border: ${spacing.r1} solid ${brand.buttonSecondary};
           background-color: transparent;
-          color: ${brand.textTertiary};
+          color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
             border-color: ${brand.infoPrimary};
@@ -122,7 +122,7 @@ export const ButtonStyled = styled.button<Props>`
           &:active:enabled {
             cursor: pointer;
             border: ${spacing.r1} solid ${brand.infoSecondary};
-            color: ${brand.textTertiary};
+            color: ${brand.textPrimary};
           }
         `;
 
@@ -162,7 +162,7 @@ export const ButtonStyled = styled.button<Props>`
         }
         &:active {
           cursor: pointer;
-          color: ${brand.textTertiary};
+          color: ${brand.textPrimary};
         }
         `
         : null}
