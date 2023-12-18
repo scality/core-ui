@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { coreUIAvailableThemes } from '../../style/theme';
+import styled, { useTheme } from 'styled-components';
+
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import {
@@ -34,34 +34,20 @@ const SelectStyle = styled(Select)`
   }
 `;
 
+export const AllStatusIcon = () => {
+  const theme = useTheme();
+  return (
+    <svg viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" height="16px">
+      <circle cx="50" cy="50" r="50" fill={theme.statusHealthy} />
+      <circle cx="75" cy="50" r="50" fill={theme.statusWarning} />
+      <circle cx="100" cy="50" r="50" fill={theme.statusCritical} />
+    </svg>
+  );
+};
+
 export const defaultOptions = [
   {
-    icon: (
-      <svg
-        viewBox="0 0 150 100"
-        xmlns="http://www.w3.org/2000/svg"
-        height="16px"
-      >
-        <circle
-          cx="50"
-          cy="50"
-          r="50"
-          fill={coreUIAvailableThemes.darkRebrand.statusHealthy}
-        />
-        <circle
-          cx="75"
-          cy="50"
-          r="50"
-          fill={coreUIAvailableThemes.darkRebrand.statusWarning}
-        />
-        <circle
-          cx="100"
-          cy="50"
-          r="50"
-          fill={coreUIAvailableThemes.darkRebrand.statusCritical}
-        />
-      </svg>
-    ),
+    icon: <AllStatusIcon />,
     label: 'All Status',
     value: 'all',
   },

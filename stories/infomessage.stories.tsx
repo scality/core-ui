@@ -1,10 +1,9 @@
 import React from 'react';
 import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
 import { Wrapper } from './common';
-import { coreUIAvailableThemes } from '../src/lib/style/theme';
-import { useArgs } from '@storybook/preview-api';
 import { Meta, StoryObj } from '@storybook/react';
 import { useTheme } from 'styled-components';
+import { CoreUITheme } from '../src/lib/style/theme';
 
 type Story = StoryObj<typeof InfoMessage>;
 
@@ -17,10 +16,13 @@ const meta: Meta<typeof InfoMessage> = {
 export default meta;
 
 export const Playground: StoryObj<
-  React.ComponentProps<typeof InfoMessage> & { backgroundColor?: string }
+  React.ComponentProps<typeof InfoMessage> & {
+    backgroundColor: keyof CoreUITheme;
+  }
 > = {
   render: ({ backgroundColor, ...args }) => {
     const theme = useTheme();
+
     return (
       <div
         style={{
