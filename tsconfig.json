@@ -1,5 +1,5 @@
 {
-  "exclude": ["src/**/*.test.*", "dist/**/*"],
+  "exclude": ["src/**/*.test.*","stories/*", "dist/**/*"],
   "compilerOptions": {
     "module": "esnext",
     "declaration": true, // Generate d.ts files
