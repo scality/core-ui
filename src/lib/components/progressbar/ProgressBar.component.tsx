@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { spacing } from '../../spacing';
-import { fontSize, fontWeight, coreUIAvailableThemes } from '../../style/theme';
+import { fontSize, fontWeight } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Size } from '../constants';
 export type ProgressBarProps = {
@@ -150,7 +150,7 @@ function ProgressBar({
   percentage = 50,
   size = 'base',
   color,
-  backgroundColor = coreUIAvailableThemes.darkRebrand.backgroundLevel2,
+  backgroundColor,
   topLeftLabel,
   topRightLabel,
   bottomLeftLabel,
@@ -160,6 +160,10 @@ function ProgressBar({
   height,
   ...rest
 }: ProgressBarProps) {
+  const theme = useTheme();
+  if (!backgroundColor) {
+    backgroundColor = theme.backgroundLevel2;
+  }
   return (
     <Container className="sc-progressbar" {...rest}>
       {(topLeftLabel || topRightLabel) && (
