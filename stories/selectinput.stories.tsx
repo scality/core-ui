@@ -4,6 +4,7 @@ import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Select } from '../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from './common';
 import styled from 'styled-components';
+import { Meta } from '@storybook/react';
 
 const options = Array.from(new Array(10), (_, index) => (
   <Select.Option
@@ -18,7 +19,7 @@ const SelectWrapper = styled.div`
   justify-content: space-around;
 `;
 
-export default {
+const meta: Meta<typeof Select> = {
   title: 'Components/Inputs/v2/SelectInput',
   component: Select,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
@@ -31,6 +32,7 @@ export default {
     },
   },
 };
+export default meta;
 
 export const Playground = {};
 

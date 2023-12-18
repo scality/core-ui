@@ -9,6 +9,9 @@ import { CopyButton } from '../src/lib/next';
 
 import { tooltipArgTypes, iconArgType } from './controls';
 import { Form, Icon, Input, Stack } from '../src/lib';
+import { StoryObj } from '@storybook/react';
+import { Position } from '../src/lib/components/tooltip/Tooltip.component';
+import { CSSProperties } from 'styled-components';
 
 export default {
   title: 'Components/Button',
@@ -228,7 +231,16 @@ export const GhostButtons = {
     );
   },
 };
-export const CopyButtons = {
+export const CopyButtons: StoryObj<
+  Props & {
+    label?: string;
+    textToCopy: string;
+    variant?: 'outline' | 'ghost';
+    tooltipPlacement: Position;
+    tooltipOverlay: React.ReactNode;
+    tooltipOverlayStyle: CSSProperties;
+  }
+> = {
   render: ({ ...args }) => <CopyButton {...args}></CopyButton>,
   args: {
     textToCopy: 'test',
