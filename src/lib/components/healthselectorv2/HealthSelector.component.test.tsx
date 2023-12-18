@@ -6,12 +6,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { getWrapper } from '../../testUtils';
 describe('HealthSelector', () => {
   it('should display correctly without any props and select first option', () => {
+    const { Wrapper } = getWrapper();
     const { getByText } = render(
-      <QueryClientProvider client={new QueryClient()}>
+      <Wrapper>
         <HealthSelector id="health" onChange={() => {}} />
-      </QueryClientProvider>,
+      </Wrapper>,
     );
     const input = screen.getByRole('textbox');
 
@@ -21,11 +23,12 @@ describe('HealthSelector', () => {
     expect(healthyOption).toBeInTheDocument();
   });
   it('should call the onChange function when it change', () => {
+    const { Wrapper } = getWrapper();
     const onChange = jest.fn();
     const { getByText } = render(
-      <QueryClientProvider client={new QueryClient()}>
+      <Wrapper>
         <HealthSelector id="health" onChange={onChange} />
-      </QueryClientProvider>,
+      </Wrapper>,
     );
     const input = screen.getByRole('textbox');
     userEvent.click(input);
@@ -34,8 +37,9 @@ describe('HealthSelector', () => {
     expect(onChange).toHaveBeenCalledWith('warning');
   });
   it('should not display hidden options', () => {
+    const { Wrapper } = getWrapper();
     const { queryByText } = render(
-      <QueryClientProvider client={new QueryClient()}>
+      <Wrapper>
         <HealthSelector
           id="health"
           onChange={() => {}}
@@ -46,7 +50,7 @@ describe('HealthSelector', () => {
             optionsDefaultConfiguration.unknown,
           ]}
         />
-      </QueryClientProvider>,
+      </Wrapper>,
     );
 
     // open the menu
