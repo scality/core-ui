@@ -67,7 +67,7 @@ export const CopyButton = ({
           }
         />
       }
-      disabled={copyStatus === COPY_STATE_SUCCESS}
+      disabled={copyStatus === COPY_STATE_SUCCESS || props.disabled}
       onClick={() => copy(textToCopy)}
       type="button"
       tooltip={

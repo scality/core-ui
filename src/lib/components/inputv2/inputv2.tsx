@@ -86,12 +86,14 @@ const SelfCenterredIcon = styled(Icon)`
   align-self: center;
 `;
 
+type InputSize = '1' | '2/3' | '1/2' | '1/3';
+
 type Props = {
   error?: string;
   id: string;
   leftIcon?: IconName;
   rightIcon?: IconName;
-  size?: '1' | '2/3' | '1/2' | '1/3';
+  inputSize?: InputSize;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
@@ -103,7 +105,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       leftIcon,
       rightIcon,
       placeholder,
-      size,
+      inputSize,
       ...inputProps
     },
     ref,
@@ -119,7 +121,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <InputBorder
         disabled={!!(disabled || disabledFromFieldContext)}
         hasError={!!(error || errorFromFieldContext)}
-        width={convertSizeToRem(size)}
+        width={convertSizeToRem(inputSize)}
       >
         <InputContainer
           isContextAvailable={isContextAvailable}
