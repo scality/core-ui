@@ -62,7 +62,7 @@ export const AddButton = ({
         name={`addbtn${index}`}
         id={`addbtn${index}`}
         onClick={onClickFn}
-        aria-label="Add"
+        aria-label={`Add${index}`}
         tooltip={{
           overlay: 'Add',
           placement: 'top',
@@ -97,7 +97,7 @@ export const SubButton = ({
       variant="danger"
       type="button"
       disabled={isDisabled}
-      aria-label="Remove"
+      aria-label={`Remove${index}`}
       name={`delbtn${index}`}
       id={`delbtn${index}`}
       onClick={() => deleteEntry(index)}
