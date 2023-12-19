@@ -11,7 +11,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { convertRemToPixels } from '../../utils';
 import { Box } from '../box/Box';
@@ -114,6 +114,7 @@ type FormGroupProps = {
   required?: boolean;
   helpErrorPosition?: 'right' | 'bottom';
   disabled?: boolean;
+  contentStyle?: CSSProperties;
 };
 
 const FormGroup = ({
@@ -127,6 +128,7 @@ const FormGroup = ({
   required,
   helpErrorPosition = 'right',
   disabled,
+  contentStyle,
 }: FormGroupProps) => {
   const ctxt = useContext(LabelContext);
 
@@ -195,7 +197,7 @@ const FormGroup = ({
           direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
           gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
         >
-          {content}
+          <div style={contentStyle}>{content}</div>
           {error ? (
             <Text
               variant="Smaller"
