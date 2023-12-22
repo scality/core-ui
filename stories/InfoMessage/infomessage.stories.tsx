@@ -3,7 +3,7 @@ import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.co
 import { Wrapper } from '../common';
 import { Meta, StoryObj } from '@storybook/react';
 import { useTheme } from 'styled-components';
-import { CoreUITheme } from '../src/lib/style/theme';
+import { CoreUITheme } from '../../src/lib/style/theme';
 
 type Story = StoryObj<typeof InfoMessage>;
 
