@@ -1,8 +1,9 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
-import { fontSize, fontWeight } from '../../style/theme';
 import { spacing } from '../../spacing';
+import { fontSize, fontWeight } from '../../style/theme';
+import { Loader } from '../loader/Loader.component';
+import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
 export type Props = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'size' | 'label'
@@ -14,10 +15,12 @@ export type Props = Omit<
   icon?: React.ReactNode;
   label?: React.ReactNode;
   tooltip?: Omit<TooltipProps, 'children'>;
+  isLoading?: boolean;
 };
 export const ButtonStyled = styled.button<Props>`
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   position: relative;
   display: inline-flex;
   user-select: none;
@@ -35,7 +38,6 @@ export const ButtonStyled = styled.button<Props>`
   font-size: ${fontSize.base};
   border-radius: ${spacing.r4};
   height: ${(props) => (props.size === 'inline' ? spacing.r24 : spacing.r32)};
-
   ${(props) => {
     const brand = props.theme;
 
@@ -185,6 +187,21 @@ export const ButtonIcon = styled.span<{ label: React.ReactNode }>`
     `}
 `;
 
+export const ButtonLoader = styled(Loader)<{ label; variant }>`
+  ${(props) => {
+    return css`
+      margin-right: ${props.label ? spacing.r8 : '0'};
+      svg {
+        fill: ${props.variant === 'danger'
+          ? props.theme.statusCritical
+          : props.variant === 'outline'
+          ? props.theme.textPrimary
+          : props.theme.textSecondary};
+      }
+    `;
+  }}
+`;
+
 function Button({
   variant,
   size,
@@ -193,6 +210,7 @@ function Button({
   icon,
   onClick,
   tooltip,
+  isLoading,
   ...rest
 }: Props) {
   if (!icon && !label) {
@@ -214,7 +232,7 @@ function Button({
       <ButtonStyled
         className="sc-button"
         variant={variant}
-        disabled={disabled}
+        disabled={isLoading || disabled}
         label={label}
         icon={icon}
         onClick={onClick}
@@ -222,19 +240,25 @@ function Button({
         {...rest}
       >
         <>
-          {icon && (
-            <ButtonIcon
-              label={label}
-              aria-label={
-                tooltip &&
-                tooltip.overlay &&
-                typeof tooltip.overlay === 'string'
-                  ? tooltip.overlay
-                  : undefined
-              }
-            >
-              {icon}
-            </ButtonIcon>
+          {icon &&
+            (isLoading ? (
+              <ButtonLoader size="small" variant={variant} label={label} />
+            ) : (
+              <ButtonIcon
+                label={label}
+                aria-label={
+                  tooltip &&
+                  tooltip.overlay &&
+                  typeof tooltip.overlay === 'string'
+                    ? tooltip.overlay
+                    : undefined
+                }
+              >
+                {icon}
+              </ButtonIcon>
+            ))}
+          {!icon && isLoading && (
+            <ButtonLoader size="small" variant={variant} label={label} />
           )}
           <ButtonLabel>{label}</ButtonLabel>
         </>
