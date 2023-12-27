@@ -197,6 +197,13 @@ export const ButtonDisabled = {
   },
 };
 
+export const ButtonLoading = {
+  ...ButtonsWithIcon,
+  args: {
+    isLoading: true,
+  },
+};
+
 export const IconButtonWithTooltip = {
   render: ({ ...args }) => {
     return (
