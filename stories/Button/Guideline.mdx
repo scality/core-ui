@@ -107,13 +107,19 @@ On all others cases, use the default size.
 
 ### States
 
-#### Disabled button
+#### Disabled state
 
-When the action linked to a button is not possible, the button should be visually disabled rather than
-removed from the interface for consistent user interaction.
-A hovering tooltip must be provided to explain the reason behind the button's disabled condition.
+Clicks on the button should trigger no action, and the cursor should display a "not-allowed" indicator. \
+A tooltip explaining the reason for the button’s disabled state should appear on hover.
 
 <Story of={ButtonStories.ButtonDisabled} />
+
+#### Loading State
+
+Display a spinner animation within the button. \
+Disable any interactions during the loading process.
+
+<Story of={ButtonStories.ButtonLoading} />
 
 ## Group of Button
 
@@ -126,6 +132,8 @@ Align button groups with the container's right side by default; however, based o
 
 ## Icon on buttons
 
+### Usage
+
 Every button gets a label.\
 Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
 Universally understood icons work well (ie. print, close, play/pause, save).\
@@ -135,13 +143,21 @@ Avoid using an icon alone in a button. If no label is provided, then use a toolt
 
 ### Placement
 
-When use with a label, the icon is placed on the left side.\
-The icon should be (approximately) the same height as the text.  
+Icons are to be positioned only on the left side of the text.\
+Icons should be vertically center-aligned with the text.\
+The icon should be (approximately) the same height as the text.\
 Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
 
 <Story of={ButtonStories.ButtonsWithIcon} />
 
 <Canvas of={ButtonStories.IconButtonWithTooltip} layout="fullscreen" />
+
+### Accessibility
+
+- Icons in Button Design: \
+  Easily recognizable icons help with the quick recognition of a button’s function. If the icon is not clear enough, it loses its purpose, so in such cases, avoid using icons.
+- Aria Labels: \
+  Providing descriptive labels for screen readers is really helpful, especially for buttons that use icons only.
 
 ## Ghost Buttons
 
