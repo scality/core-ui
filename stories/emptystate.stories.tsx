@@ -4,7 +4,6 @@ import { Wrapper } from './common';
 export default {
   title: 'Components/Data Display/EmptyState',
   component: EmptyState,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
     icon: 'Node-backend',
     label: 'Node',

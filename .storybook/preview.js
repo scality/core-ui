@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
 import { brand, coreUIAvailableThemes} from '../src/lib/style/theme';
+import { Wrapper } from '../stories/common';
 
 
 export const globalTypes = {
@@ -19,10 +20,16 @@ export const globalTypes = {
 
 const withThemeProvider = (Story, context) => {
   const theme = coreUIAvailableThemes[context.globals.theme];
+  const {viewMode} = context
   return (
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
-        <Story {...context} />
+        {/* Wrapper to make the stories take the full screen but not in docs */}
+        <div style={viewMode === 'story' ? {height: 100 + 'vh' }: null}>
+          <Wrapper>
+            <Story {...context} />
+          </Wrapper>
+        </div>
       </CoreUiThemeProvider>
     </QueryClientProvider>
   );
@@ -31,6 +38,7 @@ const withThemeProvider = (Story, context) => {
 export const decorators = [withThemeProvider];
 
 export const parameters = {
+  layout: 'fullscreen',
   docs:{
       toc : {headingSelector: 'h2,h3',
       title: "Table of Contents"},

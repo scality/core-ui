@@ -6,7 +6,6 @@ import { Size } from '../src/lib/components/constants';
 const info = {
   title: 'Components/Progress & loading/Loader',
   component: Loader,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
     size: 'base',
     children: 'Loading',

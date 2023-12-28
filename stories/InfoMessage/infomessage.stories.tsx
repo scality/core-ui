@@ -1,8 +1,7 @@
-import React from 'react';
-import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.component';
-import { Wrapper } from '../common';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { useTheme } from 'styled-components';
+import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.component';
 import { CoreUITheme } from '../../src/lib/style/theme';
 
 type Story = StoryObj<typeof InfoMessage>;
@@ -10,7 +9,6 @@ type Story = StoryObj<typeof InfoMessage>;
 const meta: Meta<typeof InfoMessage> = {
   title: 'Components/InfoMessage',
   component: InfoMessage,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   argTypes: {
     title: {
       description: 'Title of the info message',
