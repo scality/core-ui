@@ -1,18 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
-import {
-  Form,
-  FormGroup,
-  FormSection,
-  Icon,
-  Stack,
-  Text,
-  Toggle,
-} from '../../src/lib';
+import { Form, FormGroup, FormSection, Icon, Stack } from '../../src/lib';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
-import { Wrapper } from '../common';
-import { Input, Select } from '../../src/lib/next';
+import { Input } from '../../src/lib/next';
 import { brand } from '../../src/lib/style/theme';
+import { iconArgType } from '../controls';
+import { Wrapper } from '../common';
 
 export default {
   title: 'Components/Button',
@@ -37,18 +30,7 @@ export default {
     variant: {
       description: 'Button variant',
     },
-    icon: {
-      description: 'Icon to display on the button',
-      options: [
-        'Save',
-        'Exclamation-triangle',
-        'Arrow-right',
-        'Link',
-        'Copy',
-        'Sync',
-      ],
-      type: 'select',
-    },
+    icon: iconArgType,
   },
   parameters: {
     docs: {
@@ -73,13 +55,33 @@ export const Playground = {
 };
 
 export const DefaultButtons = {
-  render: ({ ...args }) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
-        <Button variant="primary" label="primary" {...args} />
-        <Button variant="secondary" label="secondary" {...args} />
-        <Button variant="danger" label="danger" {...args} />
-        <Button variant="outline" label="outline" {...args} />
+        <Button
+          variant="primary"
+          label="primary"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
+        <Button
+          variant="secondary"
+          label="secondary"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
+        <Button
+          variant="danger"
+          label="danger"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
+        <Button
+          variant="outline"
+          label="outline"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
       </>
     );
   },
@@ -114,7 +116,7 @@ export const Danger = {
 };
 
 export const SimpleForm = {
-  render: ({ ...args }) => {
+  render: ({ args }) => {
     return (
       <div
         style={{
@@ -166,11 +168,23 @@ export const SimpleForm = {
 };
 
 export const ButtonSizes = {
-  render: ({ ...args }) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
-        <Button variant="primary" label="Default" size="default" {...args} />
-        <Button variant="primary" label="Inline" size="inline" {...args} />
+        <Button
+          variant="primary"
+          label="Default"
+          size="default"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
+        <Button
+          variant="primary"
+          label="Inline"
+          size="inline"
+          icon={icon && <Icon name={icon} />}
+          {...args}
+        />
       </>
     );
   },
@@ -179,7 +193,7 @@ export const ButtonSizes = {
 export const ButtonsWithIcon = {
   ...DefaultButtons,
   args: {
-    icon: <Icon name="Sync"></Icon>,
+    icon: 'Save',
   },
 };
 
@@ -208,7 +222,7 @@ export const IconButtonWithTooltip = {
   render: ({ ...args }) => {
     return (
       <>
-        <Button {...args} />
+        <Button icon={<Icon name="Delete"></Icon>} {...args} />
         <Button
           variant="secondary"
           icon={<Icon name="Sync"></Icon>}
@@ -220,8 +234,13 @@ export const IconButtonWithTooltip = {
             placement: 'top',
           }}
         />
-        <Button {...args} variant="danger" />
-        <Button {...args} variant="outline" />
+
+        <Button {...args} icon={<Icon name="Delete"></Icon>} variant="danger" />
+        <Button
+          {...args}
+          icon={<Icon name="Delete"></Icon>}
+          variant="outline"
+        />
       </>
     );
   },
@@ -278,11 +297,12 @@ export const GhostButtons = {
 };
 
 export const LinkButton = {
-  render: (args) => {
+  render: ({ icon, ...args }) => {
     return (
       <>
         <Button
           label="Link"
+          icon={icon === 'External-link' && <Icon name="External-link"></Icon>}
           {...args}
           variant="primary"
           onClick={() => window.open('/')}
@@ -297,5 +317,13 @@ export const LinkButton = {
         />
       </>
     );
+  },
+  argTypes: {
+    icon: {
+      description:
+        'Use the icon External-link to indicate that the button will redirect outside the UI',
+      control: 'radio',
+      options: ['External-link', 'No icon'],
+    },
   },
 };
