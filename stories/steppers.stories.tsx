@@ -91,7 +91,6 @@ stepsWithError[2] = {
 export default {
   title: 'Components/Progress & loading/Steppers',
   component: Steppers,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };
 
 export const DefaultSteppers = {

@@ -13,13 +13,7 @@ const Content = styled.div`
 export default {
   title: 'Components/Navigation/Tabs',
   component: Tabs,
-  decorators: [
-    (story) => (
-      <Wrapper>
-        <BrowserRouter>{story()}</BrowserRouter>
-      </Wrapper>
-    ),
-  ],
+  decorators: [(story) => <BrowserRouter>{story()}</BrowserRouter>],
   argTypes: {
     activeTabSeparator: {
       control: {

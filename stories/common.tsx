@@ -4,7 +4,7 @@ import { getThemePropSelector } from '../src/lib/utils';
 const StyledWrapper = styled.div`
   padding: 3rem;
   height: 100%;
-  background-color: ${getThemePropSelector('backgroundLevel1')};
+  background-color: ${(props) => props.theme.backgroundLevel1};
   color: ${getThemePropSelector('textPrimary')};
 `;
 const StyledTitle = styled.h3`
