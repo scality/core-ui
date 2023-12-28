@@ -19,10 +19,15 @@ export const globalTypes = {
 
 const withThemeProvider = (Story, context) => {
   const theme = coreUIAvailableThemes[context.globals.theme];
+  const {viewMode} = context;
+
   return (
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
+        {/* Wrapper to make the stories take the full screen but not in docs */}
+        <div style={viewMode === 'story' ? {height: 100 + 'vh' }: null}>
         <Story {...context} />
+        </div>
       </CoreUiThemeProvider>
     </QueryClientProvider>
   );
@@ -31,6 +36,7 @@ const withThemeProvider = (Story, context) => {
 export const decorators = [withThemeProvider];
 
 export const parameters = {
+  layout: 'fullscreen',
   docs:{
       toc : {headingSelector: 'h2,h3',
       title: "Table of Contents"},

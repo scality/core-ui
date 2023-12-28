@@ -1,10 +1,14 @@
-module.exports = {
-  stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))', '../src/**/**/*.@(mdx|stories.@(ts|tsx))'],
-
+import type { StorybookConfig } from '@storybook/react-webpack5';
+const config: StorybookConfig = {
+  stories: [
+    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
+    '../src/**/**/*.@(mdx|stories.@(ts|tsx))',
+  ],
+  staticDirs: ['./public'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
-    '@storybook/addon-mdx-gfm'
+    '@storybook/addon-mdx-gfm',
   ],
 
   webpackFinal: async (config, { configType }) => {
@@ -21,11 +25,13 @@ module.exports = {
   },
   framework: {
     name: '@storybook/react-webpack5',
-    options: {}
+    options: {},
   },
 
   docs: {
     autodocs: true,
     defaultName: 'Stories',
-  }
+  },
 };
+
+export default config;
