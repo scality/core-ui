@@ -18,11 +18,7 @@ export default {
   title: 'Components/Button',
   component: Button,
   decorators: [
-    (story) => (
-      <Wrapper className="storybook-button" style={{ height: 'auto' }}>
-        {story()}
-      </Wrapper>
-    ),
+    (story) => <Wrapper className="storybook-button">{story()}</Wrapper>,
   ],
   args: {
     onClick: action('Button clicked'),
