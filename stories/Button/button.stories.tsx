@@ -5,14 +5,11 @@ import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Input } from '../../src/lib/next';
 import { brand } from '../../src/lib/style/theme';
 import { iconArgType } from '../controls';
-import { Wrapper } from '../common';
 
 export default {
   title: 'Components/Button',
   component: Button,
-  decorators: [
-    (story) => <Wrapper className="storybook-button">{story()}</Wrapper>,
-  ],
+  decorators: [(story) => <div className="storybook-button">{story()}</div>],
   args: {
     onClick: action('Button clicked'),
   },
@@ -196,7 +193,7 @@ export const ButtonLoading = {
 export const IconButtonWithTooltip = {
   render: ({ ...args }) => {
     return (
-      <div style={{ height: '5rem' }}>
+      <>
         <Button icon={<Icon name="Delete"></Icon>} {...args} />
         <Button
           variant="secondary"
@@ -216,7 +213,7 @@ export const IconButtonWithTooltip = {
           icon={<Icon name="Delete"></Icon>}
           variant="outline"
         />
-      </div>
+      </>
     );
   },
   args: {
