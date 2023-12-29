@@ -1,7 +1,6 @@
 import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
 import { spacing } from '../../spacing';
 import { fontSize, zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
@@ -104,8 +103,8 @@ function Tooltip({
           });
         }
       });
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tooltipRef.current, childrenRef.current, isHovering]);
+    }
+  }, [tooltipRef.current, childrenRef.current, isHovering, isTooltipVisible]);
   return (
     <TooltipContainer
       className="sc-tooltip"
