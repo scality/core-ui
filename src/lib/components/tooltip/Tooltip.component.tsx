@@ -82,12 +82,8 @@ function Tooltip({
 }: Props) {
   const childrenRef = useRef<HTMLDivElement | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
-  const isHovering = childrenRef.current
-    ? Array.from(document.querySelectorAll(':hover')).includes(
-        childrenRef.current,
-      )
-    : false;
-  const [isTooltipVisible, setIsTooltipVisible] = useState(isHovering);
+
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   useEffect(() => {
     if (childrenRef.current && tooltipRef.current) {
       computePosition(childrenRef.current, tooltipRef.current, {
@@ -104,7 +100,7 @@ function Tooltip({
         }
       });
     }
-  }, [tooltipRef.current, childrenRef.current, isHovering, isTooltipVisible]);
+  }, [tooltipRef.current, childrenRef.current, isTooltipVisible]);
   return (
     <TooltipContainer
       className="sc-tooltip"
