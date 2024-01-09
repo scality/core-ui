@@ -33,6 +33,7 @@ const StyledInput = styled.input`
   }
   &::placeholder {
     color: ${(props) => props.theme.textSecondary};
+    opacity: 0.5;
   }
   &:focus {
     border: 0;
