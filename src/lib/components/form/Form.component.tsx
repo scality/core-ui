@@ -50,6 +50,7 @@ const PageFormWrapper = styled.form<FormProps>`
   flex-direction: column;
   align-items: stretch;
   height: 100%;
+  background-color: ${(props) => props.theme.backgroundLevel4};
 `;
 
 const BasicPageLayout = styled.div<{ layoutKind: 'page' | 'tab' }>`
