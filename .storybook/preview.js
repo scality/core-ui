@@ -11,8 +11,8 @@ export const globalTypes = {
     description: 'Global theme for components',
     defaultValue: 'darkRebrand',
     toolbar: {
-      title: 'Theme',
-      dynamicTitle: true,
+      title: 'Preview Theme',
+      dynamicTitle: false,
       // array of plain string values or MenuItem shape (see below)
       items: [{ value: 'darkRebrand', title: 'Dark', icon: 'moon' }, { value: 'artescaLight', title: 'Light', icon: 'sun' }],
     },
