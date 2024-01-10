@@ -7,7 +7,7 @@ export default create({
   fontCode: 'monospace',
 
   brandTitle: 'Core UI',
-  brandUrl: 'https://github.com/scality/core-ui',
-  brandImage: '/scality-logo-without-text.png',
-  brandTarget: '_blank',
+  brandUrl: '/',
+  brandImage: '/logo-core-ui.png',
+  brandTarget: '_self',
 });
