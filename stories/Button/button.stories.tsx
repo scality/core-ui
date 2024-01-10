@@ -32,20 +32,6 @@ export default {
     },
     icon: iconArgType,
   },
-  parameters: {
-    docs: {
-      canvas: {
-        additionalActions: [
-          {
-            title: 'Open in GitHub',
-            onClick: () => {
-              window.open('https://github.com/scality/core-ui', '_blank');
-            },
-          },
-        ],
-      },
-    },
-  },
 };
 
 export const Playground = {
@@ -214,7 +200,7 @@ export const ButtonLoading = {
 export const IconButtonWithTooltip = {
   render: ({ ...args }) => {
     return (
-      <>
+      <div style={{ height: '5rem' }}>
         <Button icon={<Icon name="Delete"></Icon>} {...args} />
         <Button
           variant="secondary"
@@ -234,7 +220,7 @@ export const IconButtonWithTooltip = {
           icon={<Icon name="Delete"></Icon>}
           variant="outline"
         />
-      </>
+      </div>
     );
   },
   args: {
