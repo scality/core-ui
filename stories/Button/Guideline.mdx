@@ -61,7 +61,7 @@ The button can be modified in different way to match its usage.
 
 Buttons have a set of predefined variants to use in different context.
 
-<Story of={ButtonStories.DefaultButtons} />
+<Canvas layout="fullscreen" of={ButtonStories.DefaultButtons} />
 <br />
 
 #### Primary
@@ -69,27 +69,27 @@ Buttons have a set of predefined variants to use in different context.
 Used for the main action. It should only appear once within a group of buttons (or even a screen).
 For example, “Continue” in a form.
 
-<Story of={ButtonStories.Primary} />
+<Canvas of={ButtonStories.Primary} layout="fullscreen" />
 
 #### Secondary
 
 Used for a secondary action within a group of buttons.
 
-<Story of={ButtonStories.Secondary} />
+<Canvas layout="fullscreen" of={ButtonStories.Secondary} />
 
 #### Outline
 
 Used for low-emphasis action, as an alternative to Primary or Secondary buttons.
 It's suitable for dismissive action, such as the "Cancel" button.
 
-<Story of={ButtonStories.Outline} />
+<Canvas layout="fullscreen" of={ButtonStories.Outline} />
 
 #### Danger
 
 Used for critical action, typically delete actions.
 Actions triggered by such button often require additional validation, as the critical action cannot be undone.
 
-<Story of={ButtonStories.Danger} />
+<Canvas layout="fullscreen" of={ButtonStories.Danger} />
 
 ### Links
 
@@ -103,7 +103,7 @@ Only 2 sizes are available for the button component : default and inline.
 Inline size is use for constraint spaces, like in tables or in key/values sections.
 On all others cases, use the default size.
 
-<Story of={ButtonStories.ButtonSizes} />
+<Canvas layout="fullscreen" of={ButtonStories.ButtonSizes} />
 
 ### States
 
@@ -112,14 +112,18 @@ On all others cases, use the default size.
 Clicks on the button should trigger no action, and the cursor should display a "not-allowed" indicator. \
 A tooltip explaining the reason for the button’s disabled state should appear on hover.
 
-<Story of={ButtonStories.ButtonDisabled} />
+<Canvas layout="fullscreen" of={ButtonStories.ButtonDisabled} />
 
 #### Loading State
 
 Display a spinner animation within the button. \
 Disable any interactions during the loading process.
 
-<Story of={ButtonStories.ButtonLoading} />
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.ButtonLoading}
+
+/>
 
 ## Group of Button
 
@@ -128,7 +132,7 @@ Disable any interactions during the loading process.
 
 Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
 
-<Story of={ButtonStories.SimpleForm} />
+<Canvas layout="fullscreen" of={ButtonStories.SimpleForm} sourceState="none" />
 
 ## Icon on buttons
 
@@ -148,9 +152,17 @@ Icons should be vertically center-aligned with the text.\
 The icon should be (approximately) the same height as the text.\
 Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
 
-<Story of={ButtonStories.ButtonsWithIcon} />
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.ButtonsWithIcon}
+  sourceState="none"
+/>
 
-<Canvas of={ButtonStories.IconButtonWithTooltip} layout="fullscreen" />
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.IconButtonWithTooltip}
+  sourceState="none"
+/>
 
 ### Accessibility
 
@@ -171,10 +183,14 @@ They're also effective in space-limited areas like tables or key-value lists.
 - Don't opt for them over Outline buttons, which are more visibly recognizable as buttons.
 - Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs).
 
-<Story of={ButtonStories.GhostButtons} />
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.GhostButtons}
+  sourceState="none"
+/>
 
 ### Playground
 
-<Canvas of={ButtonStories.Playground} withSource />
+<Canvas of={ButtonStories.Playground} withSource layout="fullscreen" />
 
 <Controls of={ButtonStories.Playground} />
