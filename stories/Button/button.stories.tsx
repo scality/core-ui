@@ -118,51 +118,44 @@ export const Danger = {
 export const SimpleForm = {
   render: ({ args }) => {
     return (
-      <div
-        style={{
-          background: brand.backgroundLevel4,
-          color: brand.textPrimary,
-        }}
+      <Form
+        layout={{ kind: 'page', title: 'Simple Form', icon: 'Search' }}
+        rightActions={
+          <Stack gap={'r16'}>
+            <Button variant="outline" label="Cancel" />
+            <Button
+              variant="primary"
+              label="Save"
+              icon={<Icon name="Save" />}
+            />
+          </Stack>
+        }
       >
-        <Form
-          layout={{ kind: 'page', title: 'Simple Form', icon: 'Search' }}
-          rightActions={
-            <Stack gap={'r16'}>
-              <Button variant="outline" label="Cancel" />
-              <Button
-                variant="primary"
-                label="Save"
-                icon={<Icon name="Save" />}
-              />
-            </Stack>
-          }
+        <FormSection
+          title={{
+            name: 'First part entity data',
+            helpTooltip: 'Tooltip of the first entity',
+            icon: 'Search',
+          }}
         >
-          <FormSection
-            title={{
-              name: 'First part entity data',
-              helpTooltip: 'Tooltip of the first entity',
-              icon: 'Search',
-            }}
-          >
-            <FormGroup
-              direction="vertical"
-              label="Name"
-              id="name"
-              labelHelpTooltip="Name Tooltip"
-              content={<Input id="name" />}
-              required
-            ></FormGroup>
-            <FormGroup
-              direction="horizontal"
-              label="Email"
-              id="email"
-              labelHelpTooltip="Email Tooltip"
-              content={<Input id="email" />}
-              required
-            ></FormGroup>
-          </FormSection>
-        </Form>
-      </div>
+          <FormGroup
+            direction="vertical"
+            label="Name"
+            id="name"
+            labelHelpTooltip="Name Tooltip"
+            content={<Input id="name" />}
+            required
+          ></FormGroup>
+          <FormGroup
+            direction="horizontal"
+            label="Email"
+            id="email"
+            labelHelpTooltip="Email Tooltip"
+            content={<Input id="email" />}
+            required
+          ></FormGroup>
+        </FormSection>
+      </Form>
     );
   },
 };
