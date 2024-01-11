@@ -23,8 +23,6 @@ Checkboxes are used to select one or multiple options in a list.
 
 ### Padding
 
-### Checkbox spacing
-
 ## Usage
 
 <Canvas of={CheckboxStories.DefaultCheckbox} layout="fullscreen" />
@@ -45,11 +43,12 @@ layout="fullscreen"
 
 ### Indeterminate State
 
-Usecase ?
+Apart from checked and unchecked, checkboxes can have a third state : indeterminate.
+When a checkbox has children checkboxes, this state indicates that some of the children boxes are checked.
 
-<Canvas of={CheckboxStories.IndeterminateCheckbox} layout="fullscreen" />
+<Canvas of={CheckboxStories.IndeterminateUseCase} layout="fullscreen" />
 
 ### Playground
 
-<Canvas of={CheckboxStories.Playground} layout="fullscreen" />
-<Controls of={CheckboxStories.Playground} />
+<Canvas of={CheckboxStories.DefaultCheckbox} layout="fullscreen" />
+<Controls of={CheckboxStories.DefaultCheckbox} />
