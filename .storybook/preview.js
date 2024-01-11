@@ -58,6 +58,7 @@ export const parameters = {
     matchers: {
       color: /color/i,
     },
+    exclude: ['data-cy'],
   },
   options: {
     storySort: {
