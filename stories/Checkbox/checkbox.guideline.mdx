@@ -1,0 +1,55 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+  Unstyled,
+  Source,
+} from '@storybook/blocks';
+import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
+
+import * as CheckboxStories from './checkbox.stories';
+
+<Meta of={CheckboxStories} name="Guideline" />
+
+# Checkbox
+
+Checkboxes are used to select one or multiple options in a list.
+
+## Size & style
+
+### Style
+
+### Padding
+
+### Checkbox spacing
+
+## Usage
+
+<Canvas of={CheckboxStories.DefaultCheckbox} layout="fullscreen" />
+
+## State Variations
+
+### Checked State
+
+<Canvas of={CheckboxStories.CheckedCheckbox} layout="fullscreen" />
+
+### Disabled state
+
+<Canvas
+  of={CheckboxStories.DisabledCheckboxes}
+
+layout="fullscreen"
+/>
+
+### Indeterminate State
+
+Usecase ?
+
+<Canvas of={CheckboxStories.IndeterminateCheckbox} layout="fullscreen" />
+
+### Playground
+
+<Canvas of={CheckboxStories.Playground} layout="fullscreen" />
+<Controls of={CheckboxStories.Playground} />
