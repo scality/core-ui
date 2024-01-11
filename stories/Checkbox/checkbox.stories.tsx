@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { ComponentProps, useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
 import { Wrapper } from '../common';
@@ -26,7 +26,9 @@ export default meta;
 
 export const DefaultCheckbox: CheckboxStory = {};
 
-export const IndeterminateCheckbox: CheckboxStory = {
+export const IndeterminateCheckbox: StoryObj<
+  ComponentProps<typeof Checkbox> & { 'data-cy': string }
+> = {
   render: (args) => {
     const checkboxRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
@@ -36,15 +38,17 @@ export const IndeterminateCheckbox: CheckboxStory = {
     }, [checkboxRef]);
     return <Checkbox ref={checkboxRef} {...args} />;
   },
-  // args: {
-  //   'data-cy': 'checked_checkbox',
-  // },
+  args: {
+    'data-cy': 'checked_checkbox',
+  },
 };
 
-export const CheckedCheckbox: CheckboxStory = {
+export const CheckedCheckbox: StoryObj<
+  ComponentProps<typeof Checkbox> & { 'data-cy': string }
+> = {
   args: {
     checked: true,
-    // 'data-cy': 'checked_checkbox',
+    'data-cy': 'checked_checkbox',
   },
 };
 
@@ -54,16 +58,28 @@ export const UncheckedCheckbox: CheckboxStory = {
   },
 };
 
+export const DisabledCheckboxes: CheckboxStory = {
+  render: () => {
+    return (
+      <>
+        <Checkbox disabled checked label="Disabled & checked " />
+        <Checkbox disabled label="Disabled & unchecked" />
+      </>
+    );
+  },
+};
+
 export const DisabledCheckedCheckbox: CheckboxStory = {
   args: {
     checked: true,
     disabled: true,
   },
 };
-
 export const DisabledUncheckedCheckbox: CheckboxStory = {
   args: {
     checked: false,
     disabled: true,
   },
 };
+
+export const Playground: CheckboxStory = {};
