@@ -1,8 +1,10 @@
-import React, { ComponentProps, useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
-import { Wrapper } from '../common';
 import { Meta, StoryObj } from '@storybook/react';
+import React, { ComponentProps, useEffect, useRef } from 'react';
+import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
+import { Column } from '../../src/lib/components/tablev2/Tablev2.component';
+import { Box, Table } from '../../src/lib/next';
+import { Wrapper } from '../common';
 
 type CheckboxStory = StoryObj<typeof Checkbox>;
 
@@ -11,9 +13,7 @@ const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
   decorators: [
     (story) => (
-      <Wrapper style={{ minHeight: '10vh', padding: '3rem' }}>
-        {story()}
-      </Wrapper>
+      <Wrapper style={{ minHeight: '5vh', padding: '2rem' }}>{story()}</Wrapper>
     ),
   ],
   args: {
@@ -82,4 +82,53 @@ export const DisabledUncheckedCheckbox: CheckboxStory = {
   },
 };
 
-export const Playground: CheckboxStory = {};
+export const IndeterminateUseCase = {
+  render: ({}) => {
+    const data = [
+      {
+        name: 'test 1',
+        volume: 1,
+        capacity: '1Gi',
+      },
+      {
+        name: 'test 2',
+        volume: 1,
+        capacity: '1Gi',
+      },
+      {
+        name: 'test 2',
+        volume: 1,
+        capacity: '1Gi',
+      },
+    ];
+
+    const columns: Column<(typeof data)[number]>[] = [
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Volume',
+        accessor: 'volume',
+      },
+      {
+        Header: 'Capacity',
+        accessor: 'capacity',
+      },
+    ];
+
+    return (
+      <Wrapper>
+        <Box width="500px" height="200px">
+          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+            <Table.MultiSelectableContent
+              onMultiSelectionChanged={(rows) => {
+                console.log('Table.MultiSelectableContent selected row', rows);
+              }}
+            />
+          </Table>
+        </Box>
+      </Wrapper>
+    );
+  },
+};
