@@ -32,6 +32,10 @@ const config: StorybookConfig = {
     autodocs: true,
     defaultName: 'Stories',
   },
+  managerHead: (head) => `
+  ${head}
+  <link rel="icon" href="/favicon.ico" />
+`,
 };
 
 export default config;
