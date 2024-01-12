@@ -1,132 +1,31 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
-
+import { CopyButton } from '../src/lib/components/buttonv2/CopyButton.component.tsx';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 <Meta title="Style/Colors" />
 
 # Colors
 
+## Dark Theme
+
 <ColorPalette>
-  <ColorItem title="dark.statusHealthy" colors={[coreUIAvailableThemes.darkRebrand.statusHealthy]} />
+  {
+    Object.entries(coreUIAvailableThemes.darkRebrand).map(([key, value]) => {
+    if (!/RGB/.test(key)) return <ColorItem title={key} colors={[value]}/>;
+    })
 
-{' '}
+}
 
-<ColorItem
-  title="dark.statusWarning"
-  colors={[coreUIAvailableThemes.darkRebrand.statusWarning]}
-/>
+</ColorPalette>
 
-{' '}
+## Light Theme
 
-<ColorItem
-  title="dark.statusCritical"
-  colors={[coreUIAvailableThemes.darkRebrand.statusCritical]}
-/>
+<ColorPalette>
+  {
+    Object.entries(coreUIAvailableThemes.artescaLight).map(([key, value]) => {
+    if (!/RGB/.test(key)) return <ColorItem title={key} colors={[value]}/>;
+    })
 
-{' '}
+}
 
-<ColorItem
-  title="dark.selectedActive"
-  colors={[coreUIAvailableThemes.darkRebrand.selectedActive]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.highlight"
-  colors={[coreUIAvailableThemes.darkRebrand.highlight]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.border"
-  colors={[coreUIAvailableThemes.darkRebrand.border]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.buttonPrimary"
-  colors={[coreUIAvailableThemes.darkRebrand.buttonPrimary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.buttonSecondary"
-  colors={[coreUIAvailableThemes.darkRebrand.buttonSecondary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.buttonDelete"
-  colors={[coreUIAvailableThemes.darkRebrand.buttonDelete]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.infoPrimary"
-  colors={[coreUIAvailableThemes.darkRebrand.infoPrimary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.infoSecondary"
-  colors={[coreUIAvailableThemes.darkRebrand.infoSecondary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.backgroundLevel1"
-  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel1]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.backgroundLevel2"
-  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel2]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.backgroundLevel3"
-  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel3]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.backgroundLevel4"
-  colors={[coreUIAvailableThemes.darkRebrand.backgroundLevel4]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.textPrimary"
-  colors={[coreUIAvailableThemes.darkRebrand.textPrimary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.textSecondary"
-  colors={[coreUIAvailableThemes.darkRebrand.textSecondary]}
-/>
-
-{' '}
-
-<ColorItem
-  title="dark.textReverse"
-  colors={[coreUIAvailableThemes.darkRebrand.textReverse]}
-/>
-
-  <ColorItem title="dark.textLink" colors={[coreUIAvailableThemes.darkRebrand.textLink]} />
 </ColorPalette>
