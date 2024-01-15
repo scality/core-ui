@@ -88,7 +88,9 @@ declare type DescriptionBuilders<
 
 type Props<MainMutationType, T extends any[]> = {
   mainMutation: MutationConfig<MainMutationType>;
-  dependantMutations?: readonly [...MutationsResults<T>];
+  dependantMutations?:
+    | readonly [...MutationsResults<T>]
+    | MutationConfig<MinimalMutationResult<unknown, unknown>>[];
   messageDescriptionBuilder: (
     mutations: T extends []
       ? [GetDescriptionBuilder<MainMutationType>]
