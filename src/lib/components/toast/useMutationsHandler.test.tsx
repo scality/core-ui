@@ -60,7 +60,7 @@ describe('useMutationsHandler', () => {
 
   const messageDescriptionBuilder = jest.fn(() => 'message');
 
-  it('should call onPrimarySuccess when a primary mutation succeeds', async () => {
+  it('should call onMainMutationSuccess when a primary mutation succeeds', async () => {
     const showToast = jest.fn();
     const onMainMutationSuccess = jest.fn();
 
@@ -146,6 +146,92 @@ describe('useMutationsHandler', () => {
           status: 'error',
           message: 'message',
         });
+      });
+    });
+  });
+
+  it('should call onAllSuccess when all mutations succeeds', async () => {
+    const showToast = jest.fn();
+    const otherMutations = [
+      {
+        mutation: {
+          isLoading: false,
+          isSuccess: true,
+          isError: false,
+          isIdle: false,
+          status: 'success',
+          ...mutationResultMock,
+        },
+        name: 'mutation2',
+      },
+    ] as const;
+    const onAllMutationsSuccess = jest.fn();
+
+    mockUseToast.mockImplementation(() => ({
+      showToast,
+    }));
+
+    const { waitFor } = renderHook(() =>
+      useMutationsHandler({
+        mainMutation,
+        dependantMutations: otherMutations,
+        messageDescriptionBuilder,
+        onAllMutationsSuccess,
+      }),
+    );
+
+    await act(async () => {
+      await waitFor(() => {
+        expect(onAllMutationsSuccess).toHaveBeenCalled();
+      });
+    });
+  });
+
+  it('should not call onAllSuccess when all mutations failed', async () => {
+    const showToast = jest.fn();
+    const firstMutation = {
+      mutation: {
+        isError: true,
+        isIdle: false,
+        isLoading: false,
+        isPaused: false,
+        isSuccess: false,
+        status: 'error',
+        ...mutationResultMock,
+      },
+      name: 'mutation1',
+    };
+    const otherMutations = [
+      {
+        mutation: {
+          isLoading: false,
+          isSuccess: false,
+          isError: true,
+          isIdle: false,
+          status: 'error',
+          ...mutationResultMock,
+        },
+        name: 'mutation2',
+      },
+    ] as const;
+    const onAllMutationsSuccess = jest.fn();
+
+    mockUseToast.mockImplementation(() => ({
+      showToast,
+    }));
+
+    const { waitFor } = renderHook(() =>
+      useMutationsHandler({
+        mainMutation: firstMutation,
+        dependantMutations: otherMutations,
+        messageDescriptionBuilder,
+        onAllMutationsSuccess,
+      }),
+    );
+
+    await act(async () => {
+      await waitFor(() => {
+        expect(onAllMutationsSuccess).not.toHaveBeenCalled();
       });
     });
   });

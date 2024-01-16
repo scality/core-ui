@@ -77,12 +77,14 @@ type Props<MainMutationType, T extends any[]> = {
       ? [GetDescriptionBuilder<MainMutationType>]
       : [GetDescriptionBuilder<MainMutationType>, ...DescriptionBuilders<T>],
   ) => ReactNode;
-  onMainMutationSuccess?: () => void;
   toastProps?: Pick<
     ToastContextState,
     'style' | 'autoDismiss' | 'position' | 'duration' | 'withProgressBar'
   >;
-};
+} & (
+  | { onMainMutationSuccess?: () => void; onAllMutationsSuccess?: never }
+  | { onAllMutationsSuccess?: () => void; onMainMutationSuccess?: never }
+);
 
 type MinimalMutationResult<TData, TError> = Pick<
   UseMutationResult<TData, TError, unknown, unknown>,
@@ -96,8 +98,8 @@ export const useMutationsHandler = <
   mainMutation,
   dependantMutations,
   messageDescriptionBuilder,
-  onMainMutationSuccess,
   toastProps,
+  ...rest
 }: Props<MainMutationType, T>) => {
   const { showToast } = useToast();
   const mutations = [
@@ -139,7 +141,9 @@ export const useMutationsHandler = <
 
     if (loadingMutations.length === 0) {
       if (errorMutations.length > 0) {
-        onMainMutationSuccess?.();
+        if (mainMutation.mutation?.isSuccess) {
+          'onMainMutationSuccess' in rest && rest?.onMainMutationSuccess?.();
+        }
         showToast({
           open: true,
           status: 'error',
@@ -148,7 +152,10 @@ export const useMutationsHandler = <
         });
         return;
       } else if (successMutations.length > 0) {
-        onMainMutationSuccess?.();
+        'onMainMutationSuccess' in rest && rest?.onMainMutationSuccess?.();
+        if (successMutations.length === mutations.length) {
+          'onAllMutationsSuccess' in rest && rest?.onAllMutationsSuccess?.();
+        }
         showToast({
           open: true,
           status: 'success',
