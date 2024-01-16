@@ -7,8 +7,6 @@ export type MutationConfig<T> = {
   name: string;
 };
 
-declare type MAXIMUM_DEPTH = 20;
-
 declare type GetResults<T> = T extends MutationConfig<
   MinimalMutationResult<infer TData, infer TError>
 >
@@ -30,19 +28,12 @@ declare type GetDescriptionBuilder<T> = T extends MutationConfig<
 /**
  * MutationResults reducer recursively maps type param to results
  */
-
-declare type MutationsResults<
-  T extends any[],
-  Result extends any[] = [],
-  Depth extends ReadonlyArray<number> = [],
-> = Depth['length'] extends MAXIMUM_DEPTH
-  ? MutationConfig<MinimalMutationResult<unknown, unknown>>[]
-  : T extends []
+declare type MutationsResults<T extends unknown[]> = T extends []
   ? []
-  : T extends [infer Head]
-  ? [...Result, GetResults<Head>]
   : T extends [infer Head, ...infer Tail]
-  ? MutationsResults<[...Tail], [...Result, GetResults<Head>], [...Depth, 1]>
+  ? [GetResults<Head>, ...MutationsResults<Tail>]
+  : T extends [infer Head]
+  ? [GetResults<Head>]
   : unknown[] extends T
   ? T
   : never;
@@ -59,22 +50,12 @@ type DescriptionBuilder<Data = unknown, Error = unknown> = {
   name: string;
 };
 
-declare type DescriptionBuilders<
-  T extends any[],
-  Result extends any[] = [],
-  Depth extends ReadonlyArray<number> = [],
-> = Depth['length'] extends MAXIMUM_DEPTH
-  ? DescriptionBuilder<unknown, unknown>[]
-  : T extends []
+declare type DescriptionBuilders<T extends any[]> = T extends []
   ? []
-  : T extends [infer Head]
-  ? [...Result, GetDescriptionBuilder<Head>]
   : T extends [infer Head, ...infer Tail]
-  ? DescriptionBuilders<
-      [...Tail],
-      [...Result, GetDescriptionBuilder<Head>],
-      [...Depth, 1]
-    >
+  ? [GetDescriptionBuilder<Head>, ...DescriptionBuilders<Tail>]
+  : T extends [infer Head]
+  ? [GetDescriptionBuilder<Head>]
   : T extends UseMutationOptions<
       infer TMutationFnData,
       infer TError,
