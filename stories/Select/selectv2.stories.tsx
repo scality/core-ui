@@ -45,11 +45,13 @@ const optionsWithDisabledWithoutMessage = optionsWithSearchBar.map(
   },
 );
 const optionsWithDisabledWithMessage = optionsWithDisabledWithoutMessage.map(
-  (option) => {
-    React.cloneElement(option, {
-      disabledReason: 'This option is disabled for some reason',
-    });
-
+  (option, index) => {
+    if (index % 3 === 0) {
+      return React.cloneElement(option, {
+        disabled: true,
+        disabledReason: "This option can't be selected for some reason",
+      });
+    }
     return option;
   },
 );
