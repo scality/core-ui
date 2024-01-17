@@ -25,7 +25,6 @@ const generateOptions = (n = 10) =>
     <Select.Option
       key={index}
       value={`Option${index + 1}`}
-      disabled={index !== 0 && index % 8 === 0}
       icon={index % 5 === 0 ? <Icon name={'Check'} /> : null}
     >{`Option ${index + 1}`}</Select.Option>
   ));
@@ -34,7 +33,15 @@ const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
 const defaultOptions = generateOptions(4);
 const thousandsOfOptions = generateOptions(1000);
-
+const optionsWithDisabled = optionsWithSearchBar.map((option, index) => {
+  if (index % 3 === 0) {
+    return React.cloneElement(option, {
+      disabled: true,
+      disabledReason: 'This option is disabled for some reason',
+    });
+  }
+  return option;
+});
 export const Playground = {
   args: {
     children: defaultOptions,
@@ -73,6 +80,12 @@ export const WithSearchBar = {
 export const LotsOfOptions = {
   args: {
     children: thousandsOfOptions,
+  },
+};
+
+export const WithDisabledOptions = {
+  args: {
+    children: optionsWithDisabled,
   },
 };
 
