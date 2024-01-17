@@ -4,15 +4,19 @@ import { Icon } from '../../src/lib/components/icon/Icon.component';
 import { Modal } from '../../src/lib/components/modal/Modal.component';
 import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from '../common';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+type SelectStory = StoryObj<typeof Select>;
+const meta: Meta<typeof Select> = {
   title: 'Components/Inputs/Select',
   component: Select,
   decorators: [
     (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
   ],
 };
-const sizes = ['1/3', '1/2', '2/3', '1'];
+
+export default meta;
+const sizes = ['1/3', '1/2', '2/3', '1'] as const;
 
 const SelectWrapper = styled.div`
   display: flex;
@@ -56,21 +60,21 @@ const optionsWithDisabledWithMessage = optionsWithDisabledWithoutMessage.map(
   },
 );
 
-export const Playground = {
+export const Playground: SelectStory = {
   args: {
     children: defaultOptions,
     placeholder: 'Playground',
   },
 };
 
-export const WithoutOptions = {
+export const WithoutOptions: SelectStory = {
   args: {
-    options: [],
+    children: [],
     placeholder: 'No options',
   },
 };
 
-export const DisabledSelect = {
+export const DisabledSelect: SelectStory = {
   args: {
     disabled: true,
     defaultValue: defaultOptions[0].props.value,
@@ -78,37 +82,37 @@ export const DisabledSelect = {
   },
 };
 
-export const WithScrollbar = {
+export const WithScrollbar: SelectStory = {
   name: 'More than 4 items',
   args: {
     children: optionsWithoutSearchBar,
   },
 };
 
-export const WithSearchBar = {
+export const WithSearchBar: SelectStory = {
   args: {
     children: optionsWithSearchBar,
   },
 };
 
-export const LotsOfOptions = {
+export const LotsOfOptions: SelectStory = {
   args: {
     children: thousandsOfOptions,
   },
 };
-export const WithDisabledOptionsWithoutMessage = {
+export const WithDisabledOptionsWithoutMessage: SelectStory = {
   args: {
     children: optionsWithDisabledWithoutMessage,
   },
 };
 
-export const WithDisabledOptionsAndMessage = {
+export const WithDisabledOptionsAndMessage: SelectStory = {
   args: {
     children: optionsWithDisabledWithMessage,
   },
 };
 
-export const DifferentSizes = {
+export const DifferentSizes: SelectStory = {
   render: (args) => (
     <SelectWrapper>
       {sizes.map((size) => (
@@ -121,7 +125,7 @@ export const DifferentSizes = {
   },
 };
 
-export const NotEnoughPlaceAtTheBottom = {
+export const NotEnoughPlaceAtTheBottom: SelectStory = {
   render: (args) => (
     <div
       style={{
@@ -138,7 +142,7 @@ export const NotEnoughPlaceAtTheBottom = {
   },
 };
 
-export const InsideModal = {
+export const InsideModal: SelectStory = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
