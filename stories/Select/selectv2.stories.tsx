@@ -102,18 +102,21 @@ export const LotsOfOptions: SelectStory = {
   },
 };
 export const WithDisabledOptionsWithoutMessage: SelectStory = {
+  name: 'Options disabled',
   args: {
     children: optionsWithDisabledWithoutMessage,
   },
 };
 
 export const WithDisabledOptionsWithMessage: SelectStory = {
+  name: 'Options disabled with message',
   args: {
     children: optionsWithDisabledWithMessage,
   },
 };
 
 export const DifferentSizes: SelectStory = {
+  name: 'Sizes',
   render: (args) => (
     <SelectWrapper>
       {sizes.map((size) => (
@@ -123,23 +126,6 @@ export const DifferentSizes: SelectStory = {
   ),
   args: {
     children: defaultOptions,
-  },
-};
-
-export const NotEnoughPlaceAtTheBottom: SelectStory = {
-  render: (args) => (
-    <div
-      style={{
-        display: 'flex',
-        height: '100%',
-        alignItems: 'flex-end',
-      }}
-    >
-      <Select {...args}></Select>
-    </div>
-  ),
-  args: {
-    children: optionsWithSearchBar,
   },
 };
 
@@ -160,5 +146,24 @@ export const InsideModal: SelectStory = {
   },
   args: {
     children: optionsWithoutSearchBar,
+  },
+};
+
+export const NotEnoughPlaceAtTheBottom: SelectStory = {
+  name: 'Menu open at the top',
+  render: (args) => (
+    <div
+      style={{
+        display: 'flex',
+        minHeight: '12rem',
+        height: '100%',
+        alignItems: 'flex-end',
+      }}
+    >
+      <Select {...args}></Select>
+    </div>
+  ),
+  args: {
+    children: optionsWithSearchBar,
   },
 };
