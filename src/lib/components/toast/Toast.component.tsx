@@ -40,7 +40,7 @@ export const useGetBackgroundColor = (status: string) => {
   }
 };
 
-const useGetRgbBackgroundColor = (status: string) => {
+export const useGetRgbBackgroundColor = (status: string) => {
   const theme = useTheme();
   switch (status) {
     case 'success':
@@ -67,7 +67,7 @@ const defaultIconName = (status: string) => {
   }
 };
 
-const DefaultIcon = ({ status }: { status: string }) => {
+export const DefaultIcon = ({ status }: { status: string }) => {
   const color = useGetBackgroundColor(status);
   const iconName = defaultIconName(status);
 
@@ -81,9 +81,7 @@ const IconContainer = styled.div<{ bgColor: string }>`
   align-self: stretch;
   border-radius: 4px 0px 0px 4px;
   display: flex;
-  gap: 16px;
   justify-content: center;
-  position: relative;
   width: 32px;
   background-color: ${(props) => props.bgColor};
 `;
@@ -94,9 +92,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex: 1;
   flex-grow: 1;
-  gap: 8px;
-  padding: 0px 16px;
-  position: relative;
+  padding: 4px 8px 4px 8px;
 `;
 
 function Toast({
