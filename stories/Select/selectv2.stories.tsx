@@ -9,15 +9,16 @@ export default {
   title: 'Components/Inputs/Select',
   component: Select,
   decorators: [
-    (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
+    (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
   ],
 };
 const sizes = ['1/3', '1/2', '2/3', '1'];
 
 const SelectWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  height: 15rem;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 `;
 
 const generateOptions = (n = 10) =>
@@ -33,15 +34,26 @@ const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
 const defaultOptions = generateOptions(4);
 const thousandsOfOptions = generateOptions(1000);
-const optionsWithDisabled = optionsWithSearchBar.map((option, index) => {
-  if (index % 3 === 0) {
-    return React.cloneElement(option, {
-      disabled: true,
+const optionsWithDisabledWithoutMessage = optionsWithSearchBar.map(
+  (option, index) => {
+    if (index % 3 === 0) {
+      return React.cloneElement(option, {
+        disabled: true,
+      });
+    }
+    return option;
+  },
+);
+const optionsWithDisabledWithMessage = optionsWithDisabledWithoutMessage.map(
+  (option) => {
+    React.cloneElement(option, {
       disabledReason: 'This option is disabled for some reason',
     });
-  }
-  return option;
-});
+
+    return option;
+  },
+);
+
 export const Playground = {
   args: {
     children: defaultOptions,
@@ -82,10 +94,15 @@ export const LotsOfOptions = {
     children: thousandsOfOptions,
   },
 };
-
-export const WithDisabledOptions = {
+export const WithDisabledOptionsWithoutMessage = {
   args: {
-    children: optionsWithDisabled,
+    children: optionsWithDisabledWithoutMessage,
+  },
+};
+
+export const WithDisabledOptionsAndMessage = {
+  args: {
+    children: optionsWithDisabledWithMessage,
   },
 };
 
@@ -107,10 +124,8 @@ export const NotEnoughPlaceAtTheBottom = {
     <div
       style={{
         display: 'flex',
-        justifyContent: 'flex-end',
-        height: '100vh',
-        flex: '1',
-        flexDirection: 'column',
+        height: '100%',
+        alignItems: 'flex-end',
       }}
     >
       <Select {...args}></Select>
@@ -137,6 +152,6 @@ export const InsideModal = {
     );
   },
   args: {
-    options: optionsWithoutSearchBar,
+    children: optionsWithoutSearchBar,
   },
 };

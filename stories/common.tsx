@@ -6,6 +6,7 @@ const StyledWrapper = styled.div`
   height: 100%;
   background-color: ${(props) => props.theme.backgroundLevel1};
   color: ${(props) => props.theme.textPrimary};
+  box-sizing: border-box;
 `;
 const StyledTitle = styled.h3`
   color: ${getThemePropSelector('textPrimary')};
