@@ -21,6 +21,7 @@ const sizes = ['1/3', '1/2', '2/3', '1'] as const;
 const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 20rem;
   height: 100%;
   justify-content: space-between;
 `;
