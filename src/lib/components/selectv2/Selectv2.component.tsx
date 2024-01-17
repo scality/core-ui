@@ -24,7 +24,7 @@ export type OptionProps = {
   icon?: React.ReactNode;
   children?: React.ReactNode;
   value: string;
-  disabledReason?: string;
+  disabledReason?: React.ReactNode;
 };
 const usePreviousValue = (value) => {
   const ref = useRef(null);
@@ -314,7 +314,7 @@ type SelectOptionProps = {
   isDisabled: boolean;
   icon?: React.ReactNode;
   optionProps: any;
-  disabledReason?: string;
+  disabledReason?: React.ReactNode;
 };
 
 const OptionContext = createContext<{
