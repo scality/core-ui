@@ -106,7 +106,7 @@ export const WithDisabledOptionsWithoutMessage: SelectStory = {
   },
 };
 
-export const WithDisabledOptionsAndMessage: SelectStory = {
+export const WithDisabledOptionsWithMessage: SelectStory = {
   args: {
     children: optionsWithDisabledWithMessage,
   },
