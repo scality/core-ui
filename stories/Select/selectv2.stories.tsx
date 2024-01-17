@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../src/lib/components/icon/Icon.component';
 import { Modal } from '../../src/lib/components/modal/Modal.component';
@@ -109,12 +109,21 @@ export const NotEnoughPlaceAtTheBottom = {
 };
 
 export const InsideModal = {
-  render: (args) => (
-    <Modal isOpen title="select">
-      <Select menuPosition="fixed" {...args}></Select>
-    </Modal>
-  ),
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <button onClick={() => setIsOpen(true)}>Open modal</button>
+
+        {isOpen && (
+          <Modal isOpen title="select" close={() => setIsOpen(false)}>
+            <Select menuPosition="fixed" {...args}></Select>
+          </Modal>
+        )}
+      </>
+    );
+  },
   args: {
-    children: optionsWithoutSearchBar,
+    options: optionsWithoutSearchBar,
   },
 };
