@@ -1,210 +1,171 @@
-# Welcome to Scality core-ui
+# Welcome to Scality Core-UI
 
-This project is a React stateless components library containing all common React components, [Styled-components](https://www.styled-components.com/)' components, layouts, icons and themes for all Scality UI projects. 
+Core-UI is a component library containing all components, layouts, icons and themes used for all Scality UI projects. \
+This project is built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), and styled with [styled-components](https://styled-components.com/).
 
-Components are also themable by using the [styled-components' theming concept](https://www.styled-components.com/docs/advanced).
+## Getting started
 
-## What are stateless Components?
-
-Stateless Components just receive an input as props and return an output as JSX: ```(props) => JSX```. The input, only if available in form of props, shapes the rendered output. These kind of components don't manage state and don't have any side-effects (e.g. accessing the browser's local storage).
-
-Examples:
-
-- Stateless/Presentational/Dumb component:
-```javascript
-const BooksList = ({books}) => {
- return (
-   <ul>
-     {books.map(book => {
-       return <li>{book}</li>
-     })}
-   </ul>
- )
-}
-```
-
-- Stateful/Container/Smart component:
-```javascript
-import React, { useState, useEffect } from 'react';
-
-const BooksList = (props) => {
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-        setBooks(['Harry Potter', 'Star Wars']);
-    }, []);
-
-    return (
-    <ul>
-        {books.map(book => {
-        return <li>{book}</li>
-        })}
-    </ul>
-    )
-}
-
-```
-
-## How to use it
+### Installation
 
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
+
 ```json
  "@scality/core-ui": "github:scality/core-ui.git",
 ```
 
 - ```@scality/core-ui```requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
+
 ```json
-    "@fortawesome/fontawesome-free": "5.7.2",
+    "@fortawesome/fontawesome-free": "^5.10.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@js-temporal/polyfill": "^0.4.4",
     "polished": "3.4.1",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-debounce-input": "3.2.0",
-    "react-virtualized": "9.21.0",
-    "react-select": "3.0.3",
+    "pretty-bytes": "^5.6.0",
+    "react": "^17.0.2",
+    "react-debounce-input": "3.2.2",
+    "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.3",
+    "react-query": "^3.34.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-select": "4.3.1",
+    "react-table": "^7.7.0",
+    "react-virtualized": "9.22.3",
+    "react-virtualized-auto-sizer": "^1.0.5",
+    "react-window": "^1.8.6",
     "styled-components": "^4.1.2",
-    "vega": "^5.7.3",
+    "styled-system": "^5.1.5",
+    "vega": "^5.17.3",
     "vega-embed": "^6.0.0",
-    "vega-lite": "^4.0.0-beta.10"
+    "vega-lite": "^5.0.0",
+    "vega-tooltip": "^0.27.0"
 ```
 
-- Run ```npm install``` to install dependencies
+- Install the dependencies :
 
-- Import a component (e.g. Layout). You can wrap your component in a styled-components'```ThemeProvider``` to override its [default theme](https://github.com/scality/core-ui/blob/6f5a7946e7086e08883a8fe48182598ce8a476e5/src/lib/style/theme.js#L34) by defining your own theme like below.
-```javascript
+```sh
+npm install
+```
+
+### Usage
+
+- Import a component from ```@scality/core-ui/dist/next'``` or ```@scality/core-ui```
+
+- Use props to change its appearance and behaviour
+
+```jsx
+import { Button } from '@scality/core-ui/dist/next';
+import { Icon } from '@scality/core-ui';
+
+<Button variant="primary" onClick={handleClick} label="Save" icon={<Icon name="Save" />} />
+
+```
+
+To learn more about the available components, you can read the [documentation](https://scality.github.io/core-ui/)
+
+### Theming
+
+Components are themable by using the [styled-components theming concept](https://www.styled-components.com/docs/advanced). \
+Wrap your app in a ```ThemeProvider``` and provide it a theme.
+The theme needs to be defined as below :
+
+```jsx
 
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '@scality/core-ui';
-import '@fortawesome/fontawesome-free/css/all.css';
 
-const themes = [
-  {
-    name: "Light Theme",
-    brand: {
-      alert: "#A39300",
-      base: "#607080",
-      primary: "#FAF9FB",
-      primaryDark1: "#F7F6F9",
-      primaryDark2: "#EDEAF0",
-      secondary: "#037AFF",
-      secondaryDark1: "#1C3D59",
-      secondaryDark2: "#1C2E3F",
-      success: "#006F62",
-      healthy: "#24871D",
-      healthyLight: "#33A919",
-      warning: "#946F00",
-      danger: "#AA1D05",
-      critical: "#BE321F",
-      background: "#ffffff",
-      backgroundBluer: "#ECF4FF",
-      textPrimary: "#313B44",
-      textSecondary: "#8593A0",
-      textTertiary: "#A7B6C3",
-      borderLight: "#EBEBEB",
-      border: "#A5A5A5",
-      info: "#8C8C8C"
-    }
+const theme = {
+    statusHealthy: '#0AADA6',
+    statusHealthyRGB: '10,173,166',
+    statusWarning: '#F8F32B',
+    statusWarningRGB: '248,243,43',
+    statusCritical: '#E84855',
+    statusCriticalRGB: '232,72,85',
+    selectedActive: '#037AFF',
+    highlight: '#1A3C75',
+    border: '#4A4A4A',
+    buttonPrimary: '#2F4185',
+    buttonSecondary: '#595A78',
+    buttonDelete: '#3D0808',
+    infoPrimary: '#8E8EAC',
+    infoSecondary: '#333366',
+    backgroundLevel1: '#121219',
+    backgroundLevel2: '#323245',
+    backgroundLevel3: '#232331',
+    backgroundLevel4: '#1B1B27',
+    textPrimary: '#EAEAEA',
+    textSecondary: '#B5B5B5',
+    textTertiary: '#DFDFDF',
+    textReverse: '#000000',
+    textLink: '#71AEFF',
   },
-  {
-    name: "Dark Theme",
-    brand: {
-      alert: "#FFE508",
-      base: "#7B7B7B",
-      primary: "#1D1D1D",
-      primaryDark1: "#171717",
-      primaryDark2: "#0A0A0A",
-      secondary: "#055DFF",
-      secondaryDark1: "#1C3D59",
-      secondaryDark2: "#1C2E3F",
-      success: "#006F62",
-      healthy: "#30AC26",
-      healthyLight: "#69E44C",
-      warning: "#FFC10A",
-      danger: "#AA1D05",
-      critical: "#BE321F",
-      background: "#121212",
-      backgroundBluer: "#192A41",
-      textPrimary: "#FFFFFF",
-      textSecondary: "#B5B5B5",
-      textTertiary: "#DFDFDF",
-      borderLight: "#A5A5A5",
-      border: "#313131",
-      info: "#434343"
-    }
-  }
-];
 
 <ThemeProvider theme={theme}>
     <Layout sidebar={sidebar} navbar={navbar}>
         ...
     </Layout>
 </ThemeProvider>
+
 ```
-
-- To use the customised Scrollbar you need to wrap your app within the ScrollbarWrapper component :
-```javascript
-import { ScrollbarWrapper, Layout } from '@scality/core-ui';
-
-<ScrollbarWrapper>
-  <Layout sidebar={sidebar} navbar={navbar}>
-    ...
-  </Layout>
-  ...
-</ScrollbarWrapper>
-```
-
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm install`
+```sh
+npm install
+```
 
 Install all project dependencies.
 
-### `npm prepare`
+<br />
+
+```sh
+npm prepare
+```
 
 Run `npm run build` script when installing `@scality/core-ui` in the consuming projects.
 
-### `npm run flow`
+<br />
+
+```sh
+npm run flow
+```
 
 Run a full Flow check and prints the results.
 
-### `npm run lint`
+<br />
+
+```sh
+npm run lint
+```
 
 Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm run build`
+<br />
+
+```sh
+npm run build
+```
 
 Build the app for production to the `dist` folder.
 In this folder, you will find all components, icons and themes.
 
-### `npm run storybook`
+<br />
+
+```sh
+npm run storybook
+```
 
 Launch Storybook to test all the components on the `http://localhost:3000`.
 
+<br />
 
-### `npm run storybook:deploy`
-
-Build the Storybook and deploy the Storybook to the [ui-core GitHub Pages](https://scality.github.io/core-ui/).
-
-### `npm run plop`
-
-You can use plop when you want to create a new react component. Plop generates component template files.
-```
-✔  ++ /src/lib/components/menuitem/MenuItem.component.js
-✔  ++ /src/lib/components/menuitem/MenuItem.component.test.js
-✔  ++ /src/lib/components/menuitem/__snapshots__/config.js
-✔  ++ /stories/menuitem.js
+```sh
+npm run storybook:deploy
 ```
 
-## How to contribute
-
-### Create a new component
-
-- Run `npm run plop` to generate component template files
-- Update these template files to add features
-- Make sure that the component is themable (i.e support Dark/Light Mode)
-- Add storybook stories to cover all features 
-- Update `src/lib/index.js` to export the new component
-- Run `npm run flow` and `npm run lint` to make sure no error occurs
-- Once all is done, create Pull Request for review
-- When your Pull Request is approved, we take care of the merge of the PR because we have an internal merge process.
+Build and deploy the Storybook to the [ui-core GitHub Pages](https://scality.github.io/core-ui/).
