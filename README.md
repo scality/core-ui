@@ -1,7 +1,8 @@
 # Welcome to Scality Core-UI
 
 Core-UI is a component library containing all components, layouts, icons and themes used for all Scality UI projects. \
-This project is built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), and styled with [styled-components](https://styled-components.com/).
+
+<br/>
 
 ## Getting started
 
@@ -10,7 +11,7 @@ This project is built with [React](https://react.dev/) and [TypeScript](https://
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
 
 ```json
- "@scality/core-ui": "github:scality/core-ui.git",
+  "@scality/core-ui": "github:scality/core-ui#0.113.0",
 ```
 
 - ```@scality/core-ui```requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
@@ -50,6 +51,8 @@ This project is built with [React](https://react.dev/) and [TypeScript](https://
 npm install
 ```
 
+<br/>
+
 ### Usage
 
 - Import a component from ```@scality/core-ui/dist/next'``` or ```@scality/core-ui```
@@ -66,44 +69,20 @@ import { Icon } from '@scality/core-ui';
 
 To learn more about the available components, you can read the [documentation](https://scality.github.io/core-ui/)
 
+<br/>
+
 ### Theming
 
 Components are themable by using the [styled-components theming concept](https://www.styled-components.com/docs/advanced). \
-Wrap your app in a ```ThemeProvider``` and provide it a theme.
-The theme needs to be defined as below :
+Wrap your app in a ```ThemeProvider``` and provide it a theme :
 
 ```jsx
 
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '@scality/core-ui';
+import { coreUIAvailableThemes as themes } from '@scality/core-ui/dist/style/theme';
 
-const theme = {
-    statusHealthy: '#0AADA6',
-    statusHealthyRGB: '10,173,166',
-    statusWarning: '#F8F32B',
-    statusWarningRGB: '248,243,43',
-    statusCritical: '#E84855',
-    statusCriticalRGB: '232,72,85',
-    selectedActive: '#037AFF',
-    highlight: '#1A3C75',
-    border: '#4A4A4A',
-    buttonPrimary: '#2F4185',
-    buttonSecondary: '#595A78',
-    buttonDelete: '#3D0808',
-    infoPrimary: '#8E8EAC',
-    infoSecondary: '#333366',
-    backgroundLevel1: '#121219',
-    backgroundLevel2: '#323245',
-    backgroundLevel3: '#232331',
-    backgroundLevel4: '#1B1B27',
-    textPrimary: '#EAEAEA',
-    textSecondary: '#B5B5B5',
-    textTertiary: '#DFDFDF',
-    textReverse: '#000000',
-    textLink: '#71AEFF',
-  },
-
-<ThemeProvider theme={theme}>
+<ThemeProvider theme={themes.darkRebrand}>
     <Layout sidebar={sidebar} navbar={navbar}>
         ...
     </Layout>
@@ -111,33 +90,91 @@ const theme = {
 
 ```
 
+There is 2 default theme available in Core-UI : you can find them [here](https://github.com/scality/core-ui/pull/684#:~:text=https%3A//github.com/scality/core%2Dui/blob/development/1.0/src/lib/style/theme.ts)
+
+<br/>
+
+You can also modify or create a new theme, in this case make sure to respect this type :
+
+```tsx
+
+export type CoreUITheme = {
+  statusHealthy: string;
+  statusHealthyRGB: string;
+  statusWarning: string;
+  statusWarningRGB: string;
+  statusCritical: string;
+  statusCriticalRGB: string;
+  selectedActive: string;
+  highlight: string;
+  border: string;
+  buttonPrimary: string;
+  buttonSecondary: string;
+  buttonDelete: string;
+  infoPrimary: string;
+  infoSecondary: string;
+  backgroundLevel1: string;
+  backgroundLevel2: string;
+  backgroundLevel3: string;
+  backgroundLevel4: string;
+  textPrimary: string;
+  textSecondary: string;
+  textTertiary: string;
+  textReverse: string;
+  textLink: string;
+};
+
+```
+
+<br />
+
+## Development
+
+This project is built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), and styled with [styled-components](https://styled-components.com/).
+
+### Creating a new component
+
+use storybook to help with dev
+
+#### Lint
+
+```sh
+npm run lint
+```
+
+Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
+
+#### Test
+
+Build tests with [jest](https://jestjs.io/) to test edge cases
+
+```sh
+npm run test
+```
+
+Template
+
+#### Documentation
+
+Core-UI uses [storybook](https://storybook.js.org/) for its documentation.
+New folder with guidelines file in mdx, stories files with stories showing every uses cases and state variations.
+
+Template for guideline and stories
+
+```sh
+npm run storybook
+```
+
+Launch Storybook to test all the components on the `http://localhost:3000`.
+
+### Release process
+
+Releases are madedusing Github Actions.
+In Core-UI repo lick on releases then on new draft release
+
 ## Available Scripts
 
 In the project directory, you can run:
-
-```sh
-npm install
-```
-
-Install all project dependencies.
-
-<br />
-
-```sh
-npm prepare
-```
-
-Run `npm run build` script when installing `@scality/core-ui` in the consuming projects.
-
-<br />
-
-```sh
-npm run flow
-```
-
-Run a full Flow check and prints the results.
-
-<br />
 
 ```sh
 npm run lint
@@ -146,26 +183,9 @@ npm run lint
 Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
 
 <br />
-
 ```sh
 npm run build
 ```
 
 Build the app for production to the `dist` folder.
 In this folder, you will find all components, icons and themes.
-
-<br />
-
-```sh
-npm run storybook
-```
-
-Launch Storybook to test all the components on the `http://localhost:3000`.
-
-<br />
-
-```sh
-npm run storybook:deploy
-```
-
-Build and deploy the Storybook to the [ui-core GitHub Pages](https://scality.github.io/core-ui/).
