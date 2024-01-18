@@ -94,8 +94,8 @@ type Props = {
   id: string;
   leftIcon?: IconName;
   rightIcon?: IconName;
-  inputSize?: InputSize;
-} & InputHTMLAttributes<HTMLInputElement>;
+  size?: InputSize;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
@@ -106,7 +106,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       leftIcon,
       rightIcon,
       placeholder,
-      inputSize,
+      size,
       ...inputProps
     },
     ref,
@@ -122,7 +122,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       <InputBorder
         disabled={!!(disabled || disabledFromFieldContext)}
         hasError={!!(error || errorFromFieldContext)}
-        width={convertSizeToRem(inputSize)}
+        width={convertSizeToRem(size)}
       >
         <InputContainer
           isContextAvailable={isContextAvailable}

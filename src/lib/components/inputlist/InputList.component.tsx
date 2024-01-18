@@ -4,7 +4,7 @@ import { Box } from '../box/Box';
 import { Input } from '../inputv2/inputv2';
 import { AddButton, SubButton } from './InputButtons';
 
-export type InputListProps<T> = HTMLProps<HTMLInputElement> & {
+export type InputListProps<T> = Omit<HTMLProps<HTMLInputElement>, 'size'> & {
   ref: RefCallBack;
   min?: string | number;
   max?: string | number;
@@ -64,7 +64,7 @@ function InternalInputList<
           <Input
             id={`${name}[${index}]`}
             aria-label={`${name}${index}`}
-            inputSize={'1/2'}
+            size="1/2"
             value={val}
             onChange={(evt) => {
               const tempValues = [...value];
