@@ -1,20 +1,20 @@
 # Welcome to Scality Core-UI
 
-Core-UI is a component library containing all components, layouts, icons and themes used for all Scality UI projects. \
-
-<br/>
+Core-UI is a component library containing all components, layouts, icons and themes used for all Scality UI projects.
 
 ## Getting started
 
 ### Installation
 
+#### Manual installation
+
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
 
-```json
-  "@scality/core-ui": "github:scality/core-ui#0.113.0",
-```
+  ```json
+    "@scality/core-ui": "github:scality/core-ui#0.113.0",
+  ```
 
-- ```@scality/core-ui```requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
+- ```@scality/core-ui``` requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
 
 ```json
     "@fortawesome/fontawesome-free": "^5.10.2",
@@ -51,8 +51,6 @@ Core-UI is a component library containing all components, layouts, icons and the
 npm install
 ```
 
-<br/>
-
 ### Usage
 
 - Import a component from ```@scality/core-ui/dist/next'``` or ```@scality/core-ui```
@@ -69,12 +67,10 @@ import { Icon } from '@scality/core-ui';
 
 To learn more about the available components, you can read the [documentation](https://scality.github.io/core-ui/)
 
-<br/>
-
 ### Theming
 
 Components are themable by using the [styled-components theming concept](https://www.styled-components.com/docs/advanced). \
-Wrap your app in a ```ThemeProvider``` and provide it a theme :
+Wrap your app in a `ThemeProvider` and provide it a theme :
 
 ```jsx
 
@@ -94,7 +90,7 @@ There is 2 default theme available in Core-UI : you can find them [here](https:/
 
 <br/>
 
-You can also modify or create a new theme, in this case make sure to respect this type :
+You can also modify or create a new theme. In this case make sure to respect this type :
 
 ```tsx
 
@@ -132,57 +128,69 @@ export type CoreUITheme = {
 
 This project is built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), and styled with [styled-components](https://styled-components.com/).
 
+Project structure :
+
+```text
+- src/
+  - lib/
+    - components/
+      - MyComponent/
+        - MyComponent.component.tsx
+        - MyComponent.test.tsx
+- stories/
+  - MyComponent/
+    - mycomponent.stories.tsx
+    - mycomponent.guideline.mdx
+```
+
 ### Creating a new component
 
-use storybook to help with dev
-
-#### Lint
-
-```sh
-npm run lint
-```
-
-Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
-
-#### Test
-
-Build tests with [jest](https://jestjs.io/) to test edge cases
-
-```sh
-npm run test
-```
-
-Template
-
-#### Documentation
-
-Core-UI uses [storybook](https://storybook.js.org/) for its documentation.
-New folder with guidelines file in mdx, stories files with stories showing every uses cases and state variations.
-
-Template for guideline and stories
+When creating a new component, you can use storybook to help with the development.
+Write a [story](https://storybook.js.org/docs/get-started/whats-a-story) with your component and launch storybook :
 
 ```sh
 npm run storybook
 ```
 
-Launch Storybook to test all the components on the `http://localhost:3000`.
+Storybook will be launched on `http://localhost:3000`.
 
-### Release process
+After creating or updating a component, make sure to lint, test and document your code :
 
-Releases are madedusing Github Actions.
-In Core-UI repo lick on releases then on new draft release
+#### Lint
 
-## Available Scripts
-
-In the project directory, you can run:
+To make sure your code is correctly lint, run :
 
 ```sh
 npm run lint
 ```
 
-Run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
+It will run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
 
-<br />
+#### Test
+
+Build tests with [jest](https://jestjs.io/) and run them with :
+
+```sh
+npm run test
+```
+
+#### Documentation
+
+Core-UI uses [storybook](https://storybook.js.org/) for its documentation. \
+Illustrate use cases and state variations with [stories](https://storybook.js.org/docs/writing-stories).
+
+### Release process
+
+In the Core-UI repo, follow these steps :
+
+1. Click on `Releases` then `Draft a new release`
+2. In the select menu `Choose a tag` : Create a new tag (the current tag increment by 1).
+3. You can now `Generate release notes` : it will add all the PR infos since the last release. \
+You can add details if necessary.
+4. `Publish release`
+
+### Build
+
 ```sh
 npm run build
 ```
