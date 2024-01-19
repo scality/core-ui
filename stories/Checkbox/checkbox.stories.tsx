@@ -118,17 +118,15 @@ export const IndeterminateUseCase = {
     ];
 
     return (
-      <Wrapper>
-        <Box width="500px" height="200px">
-          <Table columns={columns} data={data} defaultSortingKey={'health'}>
-            <Table.MultiSelectableContent
-              onMultiSelectionChanged={(rows) => {
-                console.log('Table.MultiSelectableContent selected row', rows);
-              }}
-            />
-          </Table>
-        </Box>
-      </Wrapper>
+      <Box width="500px" height="200px">
+        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table.MultiSelectableContent
+            onMultiSelectionChanged={(rows) => {
+              console.log('Table.MultiSelectableContent selected row', rows);
+            }}
+          />
+        </Table>
+      </Box>
     );
   },
 };
