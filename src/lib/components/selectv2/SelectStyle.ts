@@ -227,6 +227,7 @@ const SelectStyle = styled(Select)`
             width: ${spacing.r4};
           }
           background-color: ${getThemePropSelector('highlight')};
+          color: ${(props) => props.theme.textPrimary};
         }
 
         &.sc-select__option--is-disabled:hover {
