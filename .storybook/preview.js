@@ -14,7 +14,7 @@ export const globalTypes = {
       title: 'Preview Theme',
       dynamicTitle: false,
       // array of plain string values or MenuItem shape (see below)
-      items: [{ value: 'darkRebrand', title: 'Dark', icon: 'moon' }, { value: 'artescaLight', title: 'Light', icon: 'sun' }],
+      items: [{ value: 'darkRebrand', title: 'Dark', icon: 'moon' }, { value: 'artescaLight', title: 'Light', icon: 'sun' }, {value: 'ring9dark', title: 'Ring Dark', icon: 'moon'}],
     },
   },
 };
