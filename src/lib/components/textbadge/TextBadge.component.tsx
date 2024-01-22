@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontWeight } from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
+
 const StyledTextBadge = styled.span`
   ${({ theme, variant }) => `
       background-color: ${theme[variant]};
