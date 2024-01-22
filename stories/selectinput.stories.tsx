@@ -20,7 +20,7 @@ const SelectWrapper = styled.div`
 `;
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Inputs/v2/SelectInput',
+  title: 'Components/Inputs/SelectInput',
   component: Select,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {

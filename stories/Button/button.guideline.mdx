@@ -1,0 +1,197 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+  Unstyled,
+  Source,
+  Title,
+} from '@storybook/blocks';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+
+import * as ButtonStories from './button.stories';
+
+<Meta of={ButtonStories} name="Guideline" />
+
+# Button
+
+Buttons are used to trigger an action or event when activated.
+
+## Size & style
+
+### Style
+
+- Height: 2rem
+- Border-radius: 3px
+- Minimum width: 5rem
+
+### Padding
+
+Button’s label measurement:
+
+- Line height: 1.25rem
+- Vertical padding: 0.5rem
+- Horizontal padding of 1rem
+- Space between icon & label: 0.5rem
+
+### Button spacing
+
+- Horizontal spacing: 1rem
+- Vertical spacing: 0.75rem
+- Space between 2 buttons: 1.5rem - when there is no space constraint
+
+## Usage
+
+Button labels should be as short and clear as possible and should describe the action the button performs.\
+
+- Use one or two words if possible,
+- Remove most prepositions and articles (a, an, the).
+- Examples: Cancel, Close, Create, Delete, Edit, Learn More, Review, Save, Study, View Scores, etc.,
+- Stick to using verbs (Complete, Start, Finish, Search) or a simple verb + noun combination for buttons (Next page, Submit post, Learn more),
+- Capitalize the noun after the verb (Create Folder, Create Node, Edit Location).
+- Maintain labelling method consistency across all of your buttons,
+- Don't use punctuation or exclamation marks (!),
+- And, most importantly, don't write "Click here".
+
+## Variations
+
+The button can be modified in different way to match its usage.
+
+### Variant
+
+Buttons have a set of predefined variants to use in different context.
+
+<Canvas layout="fullscreen" of={ButtonStories.DefaultButtons} />
+<br />
+
+#### Primary
+
+Used for the main action. It should only appear once within a group of buttons (or even a screen).
+For example, “Continue” in a form.
+
+<Canvas of={ButtonStories.Primary} layout="fullscreen" />
+
+#### Secondary
+
+Used for a secondary action within a group of buttons.
+
+<Canvas layout="fullscreen" of={ButtonStories.Secondary} />
+
+#### Outline
+
+Used for low-emphasis action, as an alternative to Primary or Secondary buttons.
+It's suitable for dismissive action, such as the "Cancel" button.
+
+<Canvas layout="fullscreen" of={ButtonStories.Outline} />
+
+#### Danger
+
+Used for critical action, typically delete actions.
+Actions triggered by such button often require additional validation, as the critical action cannot be undone.
+
+<Canvas layout="fullscreen" of={ButtonStories.Danger} />
+
+### Links
+
+The Button component can be used as a link to another element of the UI.
+When the link send to another site, use the "External-link-alt" icon.
+
+### Size
+
+Only 2 sizes are available for the button component : default and inline.
+
+Inline size is use for constraint spaces, like in tables or in key/values sections.
+On all others cases, use the default size.
+
+<Canvas layout="fullscreen" of={ButtonStories.ButtonSizes} />
+
+### States
+
+#### Disabled state
+
+Clicks on the button should trigger no action, and the cursor should display a "not-allowed" indicator. \
+A tooltip explaining the reason for the button’s disabled state should appear on hover.
+
+<Canvas layout="fullscreen" of={ButtonStories.ButtonDisabled} />
+
+#### Loading State
+
+Display a spinner animation within the button. \
+Disable any interactions during the loading process.
+
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.ButtonLoading}
+
+/>
+
+## Group of Button
+
+- Primary buttons placed on the right of a group.
+- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
+
+Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
+
+<Canvas layout="fullscreen" of={ButtonStories.SimpleForm} sourceState="none" />
+
+## Icon on buttons
+
+### Usage
+
+Every button gets a label.\
+Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
+Universally understood icons work well (ie. print, close, play/pause, save).\
+Use standard icons when their use matches their meaning, or at least the user's intent.\
+Avoid creating new icons for every action, especially infrequently used ones.\
+Avoid using an icon alone in a button. If no label is provided, then use a tooltip.
+
+### Placement
+
+Icons are to be positioned only on the left side of the text.\
+Icons should be vertically center-aligned with the text.\
+The icon should be (approximately) the same height as the text.\
+Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
+
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.ButtonsWithIcon}
+  sourceState="none"
+/>
+
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.IconButtonWithTooltip}
+  sourceState="none"
+/>
+
+### Accessibility
+
+- Icons in Button Design: \
+  Easily recognizable icons help with the quick recognition of a button’s function. If the icon is not clear enough, it loses its purpose, so in such cases, avoid using icons.
+- Aria Labels: \
+  Providing descriptive labels for screen readers is really helpful, especially for buttons that use icons only.
+
+## Ghost Buttons
+
+Ghost buttons are subtle and contribute to a minimalist interface design.  
+They are low-emphasis, making them ideal for non-primary actions in UIs.  
+They're also effective in space-limited areas like tables or key-value lists.
+
+- Ensure tooltips are included for clarity
+- Don't confuse them with non-interactive elements like descriptive icons or status indicators
+- Use them for secondary or less crucial actions.
+- Don't opt for them over Outline buttons, which are more visibly recognizable as buttons.
+- Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs).
+
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.GhostButtons}
+  sourceState="none"
+/>
+
+### Playground
+
+<Canvas of={ButtonStories.Playground} layout="fullscreen" />
+
+<Controls of={ButtonStories.Playground} />

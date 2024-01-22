@@ -1,9 +1,9 @@
-import { Chips } from '../src/lib/components/chips/Chips.component';
-import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Wrapper } from './common';
+import React from 'react';
+import { Chips } from '../src/lib/components/chips/Chips.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
-import { iconOptions } from './controls';
+import { Wrapper } from './common';
+import { iconArgType } from './controls';
 
 export default {
   title: 'Components/Deprecated/Chips',
@@ -19,9 +19,7 @@ export default {
     ),
   ],
   argTypes: {
-    icon: {
-      options: iconOptions,
-    },
+    icon: iconArgType,
   },
 };
 

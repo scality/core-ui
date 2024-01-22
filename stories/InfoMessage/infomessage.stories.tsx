@@ -1,16 +1,31 @@
-import React from 'react';
-import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
-import { Wrapper } from './common';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { useTheme } from 'styled-components';
-import { CoreUITheme } from '../src/lib/style/theme';
+import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.component';
+import { CoreUITheme } from '../../src/lib/style/theme';
 
 type Story = StoryObj<typeof InfoMessage>;
 
 const meta: Meta<typeof InfoMessage> = {
   title: 'Components/InfoMessage',
   component: InfoMessage,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
+  argTypes: {
+    title: {
+      description: 'Title of the info message',
+      control: {
+        type: 'text',
+      },
+    },
+    content: {
+      description: 'Content of the info message',
+      control: {
+        type: 'text',
+      },
+    },
+    link: {
+      description: 'Link to an external resource',
+    },
+  },
 };
 
 export default meta;
@@ -30,19 +45,13 @@ export const Playground: StoryObj<
           padding: '1rem',
         }}
       >
-        <div
-          style={{
-            padding: '1rem',
-          }}
-        >
-          <InfoMessage
-            title="What to do with this key?"
-            content="This key is needed by the Veeam repository to access ARTESCA for data backup."
-            link="test"
-          />
-        </div>
+        <InfoMessage {...args} />
       </div>
     );
+  },
+  args: {
+    title: 'Title for the provided info',
+    content: 'Some text that will help the user to understand what to do',
   },
   argTypes: {
     backgroundColor: {
@@ -71,7 +80,7 @@ export const Default: Story = {
 export const WithLink: Story = {
   args: {
     ...Default.args,
-    link: 'toDocs',
+    link: '',
   },
 };
 

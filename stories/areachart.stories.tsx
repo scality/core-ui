@@ -106,7 +106,6 @@ const id_area_chart = 'vis_area_chart';
 export default {
   title: 'Components/Data Display/Charts/Area Chart',
   component: AreaChart,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
 };
 
 export const Default = {

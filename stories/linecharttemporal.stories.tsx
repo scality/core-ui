@@ -10,7 +10,7 @@ import { Wrapper } from './common';
 import { dataLineChartV2, dataLineChartV2_readwrite } from './data/linechart';
 import { defaultRenderTooltipSerie } from '../src/lib/components/linetemporalchart/tooltip';
 export default {
-  title: 'Components/Data Display/Charts/v2/LineTemporalChart',
+  title: 'Components/Data Display/Charts/LineTemporalChart',
   component: LineTemporalChart,
   decorators: [
     (story) => (

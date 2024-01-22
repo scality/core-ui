@@ -4,13 +4,7 @@ import { Wrapper, Title } from './common';
 export default {
   title: 'Components/Progress & loading/ProgressBar',
   component: ProgressBar,
-  decorators: [
-    (story) => (
-      <Wrapper>
-        <div style={{ width: '260px' }}>{story()}</div>
-      </Wrapper>
-    ),
-  ],
+  decorators: [(story) => <div style={{ width: '260px' }}>{story()}</div>],
   args: {
     percentage: 50,
     buildinLabel: '50%',

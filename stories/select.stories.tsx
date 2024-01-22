@@ -17,7 +17,6 @@ const customFormatOptionLabel = ({ value, label, ...rest }) => (
 export default {
   title: 'Components/Deprecated/Selector/Select',
   component: Select,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   argTypes: {
     options: {
       description: 'Array of objects with label, title and value properties',

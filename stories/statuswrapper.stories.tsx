@@ -18,7 +18,6 @@ const PreviewWrapper = styled(Wrapper)`
 export default {
   title: 'Components/Data Display/StatusWrapper',
   component: StatusWrapper,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
     children: <Icon name={'Network'} color={'statusWarning'} />,
   },

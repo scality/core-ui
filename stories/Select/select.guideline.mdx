@@ -1,0 +1,73 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+  Unstyled,
+  Source,
+} from '@storybook/blocks';
+import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
+
+import * as SelectStories from './selectv2.stories';
+
+<Meta title="Guideline" of={SelectStories} />
+
+# Select
+
+## Size & Style
+
+## Usage
+
+Use the select component to allow the user to choose between defined options.
+You can use icons to differentiates the different options; in this case, all labels should have icons.
+
+## Variations
+
+The select component come with multiple props allowing customization and adaptation to various scenarios.
+
+### Size variations
+
+By default the Select component width is 20.5rem .
+You can reduce its size by defining the 'size' props to two third, half or one third of the default size :
+
+<Story of={SelectStories.DifferentSizes} />
+
+### Options number
+
+Depending on the number of options provided to the select, different features will be automatically enabled.
+
+#### No option
+
+When no option are provided, a clear information will be given to the user
+
+<Story of={SelectStories.WithoutOptions} />
+
+#### Scrollbar:
+
+When the number of options exceeds four, a scrollbar appears, allowing users to scroll through the available options.
+
+<Story of={SelectStories.WithScrollbar} />
+
+#### Searchbar:
+
+If the number of options is greater than eight,
+a search bar is automatically added, enabling users to quickly find and select options.
+
+<Story of={SelectStories.WithSearchBar} />
+
+### Disable state
+
+The Select component can be easily disabled, preventing user interaction.
+This is useful in scenarios where user input is not allowed or required
+
+<Story of={SelectStories.DisabledSelect} />
+
+### Dropdown Placement
+
+In cases where there is limited space at the bottom of the viewport,
+the dropdown menu intelligently opens toward the top to ensure visibility and usability.
+
+<Unstyled>
+  <Story of={SelectStories.NotEnoughPlaceAtTheBottom} />
+</Unstyled>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Banner } from '../src/lib/components/banner/Banner.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Wrapper } from './common';
-import { iconOptions } from './controls';
+import { iconArgType } from './controls';
 
 export default {
   title: 'Components/Feedback/Banner',
@@ -12,9 +12,7 @@ export default {
     icon: 'Exclamation-triangle',
   },
   argTypes: {
-    icon: {
-      options: iconOptions,
-    },
+    icon: iconArgType,
   },
 };
 

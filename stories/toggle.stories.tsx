@@ -5,7 +5,6 @@ import { useArgs } from '@storybook/preview-api';
 export default {
   title: 'Components/Inputs/Toggle',
   component: Toggle,
-  decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
     name: 'toggle',
   },
