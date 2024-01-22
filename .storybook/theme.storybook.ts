@@ -7,7 +7,7 @@ export default create({
   fontCode: 'monospace',
 
   brandTitle: 'Core UI',
-  brandUrl: '/',
-  brandImage: '/logo-core-ui.png',
+  brandUrl: './',
+  brandImage: './logo-core-ui.png',
   brandTarget: '_self',
 });
