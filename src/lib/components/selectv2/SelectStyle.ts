@@ -171,6 +171,9 @@ const SelectStyle = styled(Select)`
             )};
         }
       }
+      .sc-tooltip {
+        width: 100%;
+      }
 
       div > .react-window-option > .sc-select__option,
       .sc-select__option {

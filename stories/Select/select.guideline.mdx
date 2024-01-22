@@ -11,7 +11,7 @@ import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 
 import * as SelectStories from './selectv2.stories';
 
-<Meta title="Guideline" of={SelectStories} />
+<Meta name="Guideline" of={SelectStories} />
 
 # Select
 
@@ -58,16 +58,34 @@ a search bar is automatically added, enabling users to quickly find and select o
 
 ### Disable state
 
+#### Select
+
 The Select component can be easily disabled, preventing user interaction.
 This is useful in scenarios where user input is not allowed or required
 
 <Story of={SelectStories.DisabledSelect} />
 
+#### Options
+
+The Option component can also be disabled, preventing its selection by the user.
+
+<Canvas
+  of={SelectStories.WithDisabledOptionsWithoutMessage}
+  sourceState="hidden"
+  layout="fullscreen"
+/>
+
+You can also give more information to the user by adding a disabledReason prop to Option.
+
+<Canvas
+  of={SelectStories.WithDisabledOptionsWithMessage}
+  sourceState="hidden"
+  layout="fullscreen"
+/>
+
 ### Dropdown Placement
 
 In cases where there is limited space at the bottom of the viewport,
-the dropdown menu intelligently opens toward the top to ensure visibility and usability.
+the dropdown menu opens toward the top to ensure visibility and usability.
 
-<Unstyled>
-  <Story of={SelectStories.NotEnoughPlaceAtTheBottom} />
-</Unstyled>
+<Canvas of={SelectStories.NotEnoughPlaceAtTheBottom} sourceState="hidden" />

@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { ScrollbarWrapper } from '../../index';
+import { ScrollbarWrapper, Tooltip } from '../../index';
 import { components } from 'react-select';
 import { Icon } from '../icon/Icon.component';
 import { SelectStyle } from './SelectStyle';
@@ -24,6 +24,7 @@ export type OptionProps = {
   icon?: React.ReactNode;
   children?: React.ReactNode;
   value: string;
+  disabledReason?: React.ReactNode;
 };
 const usePreviousValue = (value) => {
   const ref = useRef(null);
@@ -47,6 +48,7 @@ export function Option({
   children,
   disabled,
   icon,
+  disabledReason,
   ...rest
 }: OptionProps): JSX.Element {
   const optionContext = useContext(OptionContext);
@@ -64,6 +66,7 @@ export function Option({
       label: children || '',
       isDisabled: disabled || false,
       icon: icon,
+      disabledReason: disabledReason,
       optionProps: { ...rest },
     });
     return () => {
@@ -168,17 +171,23 @@ const InternalOption = (width, isDefaultVariant) => (props) => {
     'aria-selected': props.isSelected,
   };
   return (
-    <components.Option
-      {...props}
-      innerProps={innerProps}
-      isFocused={props.isFocused && props.selectProps.keyboardFocusEnabled}
+    <Tooltip
+      overlay={props.data.isDisabled && props.data.disabledReason}
+      placement="right"
+      overlayStyle={{ marginLeft: '0.5rem', maxWidth: '15rem' }}
     >
-      <div className="option-value-wrapper">
-        <div className="option-icon">{props.data.icon}</div>
-        {formatOptionLabel()}
-      </div>
-      <div>{props.isDisabled && <Icon name="Deletion-marker" />}</div>
-    </components.Option>
+      <components.Option
+        {...props}
+        innerProps={innerProps}
+        isFocused={props.isFocused && props.selectProps.keyboardFocusEnabled}
+      >
+        <div className="option-value-wrapper">
+          <div className="option-icon">{props.data.icon}</div>
+          {formatOptionLabel()}
+        </div>
+        <div>{props.isDisabled && <Icon name="Deletion-marker" />}</div>
+      </components.Option>
+    </Tooltip>
   );
 };
 
@@ -256,6 +265,8 @@ const MenuList = (props) => {
         itemCount={children.length}
         itemSize={optionHeight}
         initialScrollOffset={initialOffset}
+        // css prop willChange used by react-window causes display issues with tooltip
+        style={{ willChange: undefined }}
       >
         {({ index, style }) => {
           return (
@@ -303,6 +314,7 @@ type SelectOptionProps = {
   isDisabled: boolean;
   icon?: React.ReactNode;
   optionProps: any;
+  disabledReason?: React.ReactNode;
 };
 
 const OptionContext = createContext<{
@@ -341,7 +353,6 @@ function SelectWithOptionContext(props: SelectProps) {
 function SelectBox({
   placeholder = 'Select...',
   disabled = false,
-
   defaultValue,
   value,
   onChange,

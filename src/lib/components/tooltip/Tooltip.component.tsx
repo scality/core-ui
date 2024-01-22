@@ -64,12 +64,17 @@ const TooltipOverLayContainer = styled.div<{
 
 const TooltipText = styled.div`
   width: 100%;
-  text-align: justify;
   ul,
   ol {
     padding-inline-start: ${spacing.r16};
     margin-block-start: 0;
     margin-block-end: 0;
+  }
+  li {
+    margin-bottom: ${spacing.r8};
+  }
+  li:last-child {
+    margin-bottom: 0;
   }
 `;
 

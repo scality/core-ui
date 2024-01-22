@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../../src/lib/components/icon/Icon.component';
 import { Modal } from '../../src/lib/components/modal/Modal.component';
 import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from '../common';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+type SelectStory = StoryObj<typeof Select>;
+const meta: Meta<typeof Select> = {
   title: 'Components/Inputs/Select',
   component: Select,
   decorators: [
-    (story) => <Wrapper className="storybook-select">{story()}</Wrapper>,
+    (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
   ],
 };
-const sizes = ['1/3', '1/2', '2/3', '1'];
+
+export default meta;
+const sizes = ['1/3', '1/2', '2/3', '1'] as const;
 
 const SelectWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  height: 15rem;
+  flex-direction: column;
+  min-height: 20rem;
+  height: 100%;
+  justify-content: space-between;
 `;
 
 const generateOptions = (n = 10) =>
@@ -25,7 +31,6 @@ const generateOptions = (n = 10) =>
     <Select.Option
       key={index}
       value={`Option${index + 1}`}
-      disabled={index !== 0 && index % 8 === 0}
       icon={index % 5 === 0 ? <Icon name={'Check'} /> : null}
     >{`Option ${index + 1}`}</Select.Option>
   ));
@@ -34,22 +39,43 @@ const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
 const defaultOptions = generateOptions(4);
 const thousandsOfOptions = generateOptions(1000);
+const optionsWithDisabledWithoutMessage = optionsWithSearchBar.map(
+  (option, index) => {
+    if (index % 3 === 0) {
+      return React.cloneElement(option, {
+        disabled: true,
+      });
+    }
+    return option;
+  },
+);
+const optionsWithDisabledWithMessage = optionsWithDisabledWithoutMessage.map(
+  (option, index) => {
+    if (index % 3 === 0) {
+      return React.cloneElement(option, {
+        disabled: true,
+        disabledReason: "This option can't be selected for some reason",
+      });
+    }
+    return option;
+  },
+);
 
-export const Playground = {
+export const Playground: SelectStory = {
   args: {
     children: defaultOptions,
     placeholder: 'Playground',
   },
 };
 
-export const WithoutOptions = {
+export const WithoutOptions: SelectStory = {
   args: {
-    options: [],
+    children: [],
     placeholder: 'No options',
   },
 };
 
-export const DisabledSelect = {
+export const DisabledSelect: SelectStory = {
   args: {
     disabled: true,
     defaultValue: defaultOptions[0].props.value,
@@ -57,26 +83,40 @@ export const DisabledSelect = {
   },
 };
 
-export const WithScrollbar = {
+export const WithScrollbar: SelectStory = {
   name: 'More than 4 items',
   args: {
     children: optionsWithoutSearchBar,
   },
 };
 
-export const WithSearchBar = {
+export const WithSearchBar: SelectStory = {
   args: {
     children: optionsWithSearchBar,
   },
 };
 
-export const LotsOfOptions = {
+export const LotsOfOptions: SelectStory = {
   args: {
     children: thousandsOfOptions,
   },
 };
+export const WithDisabledOptionsWithoutMessage: SelectStory = {
+  name: 'Options disabled',
+  args: {
+    children: optionsWithDisabledWithoutMessage,
+  },
+};
 
-export const DifferentSizes = {
+export const WithDisabledOptionsWithMessage: SelectStory = {
+  name: 'Options disabled with message',
+  args: {
+    children: optionsWithDisabledWithMessage,
+  },
+};
+
+export const DifferentSizes: SelectStory = {
+  name: 'Sizes',
   render: (args) => (
     <SelectWrapper>
       {sizes.map((size) => (
@@ -89,15 +129,35 @@ export const DifferentSizes = {
   },
 };
 
-export const NotEnoughPlaceAtTheBottom = {
+export const InsideModal: SelectStory = {
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <button onClick={() => setIsOpen(true)}>Open modal</button>
+
+        {isOpen && (
+          <Modal isOpen title="select" close={() => setIsOpen(false)}>
+            <Select menuPosition="fixed" {...args}></Select>
+          </Modal>
+        )}
+      </>
+    );
+  },
+  args: {
+    children: optionsWithoutSearchBar,
+  },
+};
+
+export const NotEnoughPlaceAtTheBottom: SelectStory = {
+  name: 'Menu open at the top',
   render: (args) => (
     <div
       style={{
         display: 'flex',
-        justifyContent: 'flex-end',
-        height: '100vh',
-        flex: '1',
-        flexDirection: 'column',
+        minHeight: '12rem',
+        height: '100%',
+        alignItems: 'flex-end',
       }}
     >
       <Select {...args}></Select>
@@ -105,16 +165,5 @@ export const NotEnoughPlaceAtTheBottom = {
   ),
   args: {
     children: optionsWithSearchBar,
-  },
-};
-
-export const InsideModal = {
-  render: (args) => (
-    <Modal isOpen title="select">
-      <Select menuPosition="fixed" {...args}></Select>
-    </Modal>
-  ),
-  args: {
-    children: optionsWithoutSearchBar,
   },
 };
