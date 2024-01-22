@@ -6,7 +6,7 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 # Colors
 
-## Dark Theme
+## Artesca Dark
 
 <ColorPalette>
   {
@@ -18,11 +18,23 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 </ColorPalette>
 
-## Light Theme
+## Artesca Light
 
 <ColorPalette>
   {
     Object.entries(coreUIAvailableThemes.artescaLight).map(([key, value]) => {
+    if (!/RGB/.test(key)) return <ColorItem title={key} colors={[value]}/>;
+    })
+
+}
+
+</ColorPalette>
+
+## Ring Dark
+
+<ColorPalette>
+  {
+    Object.entries(coreUIAvailableThemes.ring9dark).map(([key, value]) => {
     if (!/RGB/.test(key)) return <ColorItem title={key} colors={[value]}/>;
     })
 
