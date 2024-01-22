@@ -38,6 +38,7 @@ export default {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          padding: '0',
         }}
         className="storybook-dropdown"
       >
