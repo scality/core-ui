@@ -3,13 +3,11 @@ import React from 'react';
 import { Form, FormGroup, FormSection, Icon, Stack } from '../../src/lib';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Input } from '../../src/lib/next';
-import { brand } from '../../src/lib/style/theme';
 import { iconArgType } from '../controls';
 
 export default {
   title: 'Components/Button',
   component: Button,
-  decorators: [(story) => <div className="storybook-button">{story()}</div>],
   args: {
     onClick: action('Button clicked'),
   },
@@ -36,7 +34,7 @@ export const Playground = {
 export const DefaultButtons = {
   render: ({ icon, ...args }) => {
     return (
-      <>
+      <Stack gap="r32">
         <Button
           variant="primary"
           label="primary"
@@ -61,7 +59,7 @@ export const DefaultButtons = {
           icon={icon && <Icon name={icon} />}
           {...args}
         />
-      </>
+      </Stack>
     );
   },
 };
@@ -100,7 +98,7 @@ export const SimpleForm = {
       <Form
         layout={{ kind: 'page', title: 'Simple Form', icon: 'Search' }}
         rightActions={
-          <Stack gap={'r16'}>
+          <Stack gap={'r24'}>
             <Button variant="outline" label="Cancel" />
             <Button
               variant="primary"
@@ -142,7 +140,7 @@ export const SimpleForm = {
 export const ButtonSizes = {
   render: ({ icon, ...args }) => {
     return (
-      <>
+      <Stack gap="r32">
         <Button
           variant="primary"
           label="Default"
@@ -157,7 +155,7 @@ export const ButtonSizes = {
           icon={icon && <Icon name={icon} />}
           {...args}
         />
-      </>
+      </Stack>
     );
   },
 };
@@ -175,9 +173,9 @@ export const ButtonDisabled = {
     disabled: true,
     tooltip: {
       overlayStyle: {
-        width: '80px',
+        width: '120px',
       },
-      overlay: 'The button is disabled because of blabla...',
+      overlay: 'The button is disabled',
       placement: 'top',
     },
   },
@@ -193,7 +191,7 @@ export const ButtonLoading = {
 export const IconButtonWithTooltip = {
   render: ({ ...args }) => {
     return (
-      <>
+      <Stack gap="r32" style={{ height: '5rem' }}>
         <Button icon={<Icon name="Delete"></Icon>} {...args} />
         <Button
           variant="secondary"
@@ -213,7 +211,7 @@ export const IconButtonWithTooltip = {
           icon={<Icon name="Delete"></Icon>}
           variant="outline"
         />
-      </>
+      </Stack>
     );
   },
   args: {
@@ -232,7 +230,7 @@ export const IconButtonWithTooltip = {
 export const GhostButtons = {
   render: () => {
     return (
-      <>
+      <Stack gap="r32">
         <Button
           icon={<i className="fas fa-sync" />}
           tooltip={{
@@ -263,7 +261,7 @@ export const GhostButtons = {
             placement: 'top',
           }}
         />
-      </>
+      </Stack>
     );
   },
 };
@@ -271,7 +269,7 @@ export const GhostButtons = {
 export const LinkButton = {
   render: ({ icon, ...args }) => {
     return (
-      <>
+      <Stack gap="r32">
         <Button
           label="Link"
           icon={icon === 'External-link' && <Icon name="External-link"></Icon>}
@@ -287,7 +285,7 @@ export const LinkButton = {
             window.open('https://en.wikipedia.org/wiki/Button_(computing)')
           }
         />
-      </>
+      </Stack>
     );
   },
   argTypes: {
