@@ -9,7 +9,6 @@ export default {
 const Demo = styled.div`
   height: 200px;
   overflow: auto;
-  color: white;
 `;
 export const Default = {
   render: ({}) => {
