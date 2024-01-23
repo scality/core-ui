@@ -15,25 +15,29 @@ import * as CheckboxStories from './checkbox.stories';
 
 # Checkbox
 
-Checkboxes are used to select one or multiple options in a list.
-
-## Size & style
-
-### Style
-
-### Padding
+Checkboxes are used to select one or more options in a list.
 
 ## Usage
 
-<Canvas of={CheckboxStories.DefaultCheckbox} layout="fullscreen" />
+A tick/check indicates that the element is selected. \
+Unlike the radio element it is possible to select more than one option.
+
+<Canvas of={CheckboxStories.ChoiceCheckbox} layout="fullscreen" />
 
 ## State Variations
 
-### Checked State
+### Indeterminate State
 
-<Canvas of={CheckboxStories.CheckedCheckbox} layout="fullscreen" />
+Apart from checked and unchecked, checkboxes can be in a third state : indeterminate. \
+When a checkbox has sub-options checkboxes, this state indicates that some of the sub-options are checked. \
+Clicking on the main checkbox select or unselect all the sub-options boxes.
+
+<Canvas of={CheckboxStories.IndeterminateUseCase} layout="fullscreen" />
 
 ### Disabled state
+
+Checkboxes can be disabled, making it impossible to change the box state. \
+A not-allowed cursor inform the user about the unavaibility of the action.
 
 <Canvas
   of={CheckboxStories.DisabledCheckboxes}
@@ -41,14 +45,7 @@ Checkboxes are used to select one or multiple options in a list.
 layout="fullscreen"
 />
 
-### Indeterminate State
-
-Apart from checked and unchecked, checkboxes can have a third state : indeterminate.
-When a checkbox has children checkboxes, this state indicates that some of the children boxes are checked.
-
-<Canvas of={CheckboxStories.IndeterminateUseCase} layout="fullscreen" />
-
 ### Playground
 
-<Canvas of={CheckboxStories.DefaultCheckbox} layout="fullscreen" />
-<Controls of={CheckboxStories.DefaultCheckbox} />
+<Canvas of={CheckboxStories.Playground} layout="fullscreen" />
+<Controls of={CheckboxStories.Playground} />
