@@ -36,14 +36,18 @@ const NotificationContainer = styled.div<{ variant?: Variant }>`
           background-color: ${background};
           color: ${black};
         `;
-
+      case undefined:
+        return css`
+          background-color: ${background};
+          color: ${props.theme.textPrimary};
+        `;
       default:
         return css`
           background-color: ${background};
           color: ${white};
         `;
     }
-  }}
+  }};
 `;
 const NotificationTitle = styled.div`
   padding: 0 ${spacing.r16} ${spacing.r4} 0;
