@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal } from '../src/lib/components/modal/Modal.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
@@ -109,7 +109,7 @@ const Demo = (myargs, args) => () => {
               variant="secondary"
               label="Yes"
               size="inline"
-              onClick={action('Yes clicked')}
+              onClick={() => updateArgs({ isOpen: false })}
             />
           </div>
         }
@@ -132,6 +132,13 @@ export const WithinTable = {
         },
       },
       {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        cellStyle: {
+          textAlign: 'left',
+        },
+      },
+      {
         Header: 'Actions',
         accessor: 'health',
         Cell: Demo(myArgs, args),
@@ -143,45 +150,24 @@ export const WithinTable = {
       {
         firstName: 'Sotiria',
         lastName: 'Agathangelou',
-        age: undefined,
-        health: 'healthy',
-      },
-      {
-        firstName: 'Stefania',
-        lastName: 'Evgenios',
-        age: 27,
-        health: 'warning',
-      },
-      {
-        firstName: 'Yohann',
-        lastName: 'Rodolph',
-        age: 27,
-        health: 'critical',
-      },
-      {
-        firstName: 'Ninette',
-        lastName: 'Caroline',
-        age: 31,
         health: 'healthy',
       },
     ];
     return (
-      <Wrapper>
-        <div
-          style={{
-            height: '300px',
-            paddingTop: '20px',
-          }}
-        >
-          <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
-            <Table.SingleSelectableContent
-              rowHeight="h32"
-              separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
-            />
-          </Table>
-        </div>
-      </Wrapper>
+      <div
+        style={{
+          height: '300px',
+          paddingTop: '20px',
+        }}
+      >
+        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+          <Table.SingleSelectableContent
+            rowHeight="h32"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+          />
+        </Table>
+      </div>
     );
   },
   args: {
