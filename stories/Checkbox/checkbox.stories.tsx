@@ -11,20 +11,28 @@ type CheckboxStory = StoryObj<typeof Checkbox>;
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Inputs/Checkbox',
   component: Checkbox,
-  decorators: [
-    (story) => (
-      <Wrapper style={{ minHeight: '5vh', padding: '2rem' }}>{story()}</Wrapper>
-    ),
-  ],
   args: {
-    label: 'interrested ?',
+    label: 'interested ?',
     onChange: action('Checkbox clicked'),
   },
 };
 
 export default meta;
 
-export const DefaultCheckbox: CheckboxStory = {};
+export const Playground: CheckboxStory = {};
+
+export const ChoiceCheckbox: CheckboxStory = {
+  render: () => {
+    return (
+      <>
+        What are you interested in ?
+        <Checkbox label="Sport" />
+        <Checkbox label="Music" />
+        <Checkbox label="Drawing" />
+      </>
+    );
+  },
+};
 
 export const IndeterminateCheckbox: StoryObj<
   ComponentProps<typeof Checkbox> & { 'data-cy': string }
@@ -121,9 +129,7 @@ export const IndeterminateUseCase = {
       <Box width="500px" height="200px">
         <Table columns={columns} data={data} defaultSortingKey={'health'}>
           <Table.MultiSelectableContent
-            onMultiSelectionChanged={(rows) => {
-              console.log('Table.MultiSelectableContent selected row', rows);
-            }}
+            onMultiSelectionChanged={action('Selection changed')}
           />
         </Table>
       </Box>
