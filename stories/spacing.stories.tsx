@@ -1,14 +1,14 @@
 import React from 'react';
-import { spacing, Stack, Wrap } from '../src/lib/spacing';
+import { useTheme } from 'styled-components';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import {
-  SecondaryText,
-  LargerText,
   EmphaseText,
+  LargerText,
+  SecondaryText,
   SmallerSecondaryText,
 } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
-import { brand } from '../src/lib/style/theme';
+import { spacing, Stack, Wrap } from '../src/lib/spacing';
 
 export default {
   title: 'Components/Styling/Spacing Utils',
@@ -26,12 +26,13 @@ export const Playground = {
 
 export const StackStory = {
   render: ({}) => {
+    const theme = useTheme();
     return (
       <>
         <h2>Banner example</h2>
         <div
           style={{
-            background: brand.backgroundLevel2,
+            background: theme.backgroundLevel2,
             padding: spacing.r8,
             paddingLeft: spacing.r36,
           }}
@@ -71,7 +72,7 @@ export const StackStory = {
         <h2>Vertical divided example</h2>
         <div
           style={{
-            background: brand.backgroundLevel4,
+            background: theme.backgroundLevel4,
             padding: spacing.r8,
             paddingLeft: spacing.r36,
           }}
@@ -88,12 +89,13 @@ export const StackStory = {
 
 export const WrapStory = {
   render: ({}) => {
+    const theme = useTheme();
     return (
       <div
         style={{
-          background: brand.backgroundLevel2,
+          background: theme.backgroundLevel2,
           padding: spacing.r8,
-          color: brand.textPrimary,
+          color: theme.textPrimary,
         }}
       >
         <Wrap>
