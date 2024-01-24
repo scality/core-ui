@@ -35,3 +35,18 @@ jobs:
               repo: context.repo.repo,
               body: '/approve'
             })
+  publish-npm:
+    runs-on: ubuntu-latest
+    environment: npmjs
+    steps:
+      - uses: actions/checkout@v3
+      # Setup .npmrc file to publish to npmjs.org
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
