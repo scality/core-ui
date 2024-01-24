@@ -153,8 +153,9 @@
     "framer-motion": "^4.1.17",
     "react-hook-form": "^7.49.2"
   },
-  "homepage": "https://github.com/scality/core-ui",
+  "homepage": "https://scality.github.io/core-ui/",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": "https://github.com/scality/core-ui.git"
 }
