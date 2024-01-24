@@ -10,11 +10,11 @@ Core-UI is a component library containing all components, layouts, icons and the
 
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
 
-  ```json
-    "@scality/core-ui": "github:scality/core-ui#0.113.0",
-  ```
+```json
+    "@scality/core-ui": "github:scality/core-ui#0.114.0",
+```
 
-- ```@scality/core-ui``` requires some peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
+- ```@scality/core-ui``` requires the peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
 
 ```json
     "@fortawesome/fontawesome-free": "^5.10.2",
@@ -128,25 +128,82 @@ export type CoreUITheme = {
 
 This project is built with [React](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), and styled with [styled-components](https://styled-components.com/).
 
-Project structure :
+To start contributing to core-ui, clone the repository :
+
+```sh
+git clone git@github.com:scality/core-ui.git
+```
+
+then install the dependancies :
+
+```sh
+npm install
+```
+
+### Create a new branch
+
+Give your branch an explicit name with the reference to the Jira ticket or issue if it exists, and prefix it with :
+
+- feature/ for new component or major component update : `feature/TICKET-123-some-feature`
+- improvement/ for code improvement, component update : `improvement/TICKET-456-some-improvement`
+- bugfix/ for bug related issue : `bugfix/TICKET-789-some-bug`
+
+Use :
+
+```sh
+git checkout -b <branch-name>
+```
+
+### Creating a new component
+
+Create a new folder in `src/lib/components` for the component file and test file.
+Depending on your component, it can be useful to create more files for the style, hooks, or utility functions that are necessary for your component. It will make the code more readable and easier to maintain.
+
+Create a new folder in `stories` for the documentation files.
+
+You should end with something like below :
 
 ```text
 - src/
   - lib/
     - components/
-      - MyComponent/
-        - MyComponent.component.tsx
-        - MyComponent.test.tsx
+      - example/
+        - Example.component.tsx
+        - Example.test.tsx
 - stories/
-  - MyComponent/
-    - mycomponent.stories.tsx
-    - mycomponent.guideline.mdx
+  - example/
+    - example.stories.tsx
+    - example.guideline.mdx
 ```
 
-### Creating a new component
+Expose your component in `src/lib/index.ts`.
+When creating a new version of an existing component, expose it in `src/lib/next.ts` instead to avoid conflict.
 
-When creating a new component, you can use storybook to help with the development.
-Write a [story](https://storybook.js.org/docs/get-started/whats-a-story) with your component and launch storybook :
+### Use Storybook
+
+You can use storybook to help with the development.
+Storybook helps to test and vizualize component in isolation.
+If it doesn't exist, write a [story](https://storybook.js.org/docs/get-started/whats-a-story) for the component :
+
+```jsx
+// in stories/example/example.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { Example } from '../src/lib/components/example/Example.component.tsx';
+
+const meta: Meta<typeof Example> = {
+  component: Example,
+};
+
+export default meta;
+type Story = StoryObj<typeof Example>;
+
+export const Default: Story = {
+  render: () => <Example />,
+};
+
+```
+
+then launch storybook :
 
 ```sh
 npm run storybook
@@ -154,9 +211,7 @@ npm run storybook
 
 Storybook will be launched on `http://localhost:3000`.
 
-After creating or updating a component, make sure to lint, test and document your code :
-
-#### Lint
+### Lint
 
 To make sure your code is correctly lint, run :
 
@@ -166,28 +221,70 @@ npm run lint
 
 It will run ESLint by using `eslint-config-react-app` which is a shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).
 
-#### Test
+### Test
 
-Build tests with [jest](https://jestjs.io/) and run them with :
+Build tests with [jest](https://jestjs.io/)
+
+Make sure to write tests that cover all cases, then you can run all tests with :
 
 ```sh
 npm run test
 ```
 
-#### Documentation
+or run a specific test with :
+
+```sh
+npm run test Example.test.tsx
+```
+
+### Documentation
 
 Core-UI uses [storybook](https://storybook.js.org/) for its documentation. \
 Illustrate use cases and state variations with [stories](https://storybook.js.org/docs/writing-stories).
+All stories should be type.
 
-### Release process
+If possible create or update the component guideline.
+This guideline is an MDX file containing details about the component usage and is illustrated with the stories write in stories.tsx file.
 
+```txt
+// in example.guideline.mdx
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as ExampleStories from './Example.stories';
+
+<Meta of={ExampleStories} />
+
+# Example Component
+
+An Example component is used for example.
+
+<Canvas of={ExampleStories.Default} />
+
+```
+
+### Pull request
+
+Push your code on the repository
+
+```sh
+git push origin <branch-name>
+```
+
+then create a `Pull Request`.
+Pull request needs to be approved by at least one reviewer.
+After your PR is approved you can comment `/approve`  
+
+### Release
+
+After merging one or more PR in Core-UI, it is possible to plublish a new release.
 In the Core-UI repo, follow these steps :
 
-1. Click on `Releases` then `Draft a new release`
+1. Go on `Releases` then `Draft a new release`
 2. In the select menu `Choose a tag` : Create a new tag (the current tag increment by 1).
 3. You can now `Generate release notes` : it will add all the PR infos since the last release. \
 You can add details if necessary.
 4. `Publish release`
+5. It will create a PR that need to be approved.
 
 ### Build
 
