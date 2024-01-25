@@ -11,7 +11,7 @@ Core-UI is a component library containing all components, layouts, icons and the
 - Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
 
 ```json
-    "@scality/core-ui": "github:scality/core-ui#0.114.0",
+    "@scality/core-ui": "0.115.0",
 ```
 
 - ```@scality/core-ui``` requires the peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
