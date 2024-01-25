@@ -33,12 +33,6 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@fortawesome/fontawesome-free": "^5.10.2",
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-regular-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
-    "@js-temporal/polyfill": "^0.4.3",
     "@storybook/addon-actions": "^7.6.6",
     "@storybook/addon-essentials": "^7.6.6",
     "@storybook/addon-links": "^7.6.6",
@@ -79,33 +73,31 @@
     "jest": "^26.6.3",
     "jest-canvas-mock": "^2.3.1",
     "plop": "^2.4.0",
-    "polished": "^3.4.1",
-    "pretty-bytes": "^5.6.0",
-    "react": "^17.0.2",
-    "react-debounce-input": "3.2.5",
-    "react-dom": "^17.0.2",
-    "react-dropzone": "^14.2.3",
-    "react-query": "^3.34.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-select": "4.3.1",
-    "react-table": "^7.7.0",
-    "react-virtualized": "^9.22.3",
-    "react-virtualized-auto-sizer": "^1.0.5",
-    "react-window": "^1.8.6",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.0",
     "source-map-explorer": "^2.0.1",
     "storybook": "^7.6.6",
-    "styled-components": "^5.2.1",
-    "styled-system": "^5.1.5",
-    "typescript": "^5.3.2",
-    "vega": "^5.17.3",
-    "vega-embed": "^6.0.0",
-    "vega-lite": "^5.0.0",
-    "vega-tooltip": "^0.27.0"
+    "typescript": "^5.3.2"
   },
-  "peerDependencies": {
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
+    "transform": {
+      "^.+\\.[tj]sx?$": "babel-jest",
+      "^.+\\.mdx?$": "@storybook/addon-docs/jest-transform-mdx"
+    }
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^0.1.10",
+    "@storybook/preview-api": "^7.6.6",
+    "framer-motion": "^4.1.17",
+    "react-hook-form": "^7.49.2",
     "@fortawesome/fontawesome-free": "^5.10.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
@@ -126,32 +118,12 @@
     "react-virtualized": "9.22.3",
     "react-virtualized-auto-sizer": "^1.0.5",
     "react-window": "^1.8.6",
-    "styled-components": "^4.1.2",
+    "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
     "vega": "^5.17.3",
     "vega-embed": "^6.0.0",
     "vega-lite": "^5.0.0",
     "vega-tooltip": "^0.27.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "transform": {
-      "^.+\\.[tj]sx?$": "babel-jest",
-      "^.+\\.mdx?$": "@storybook/addon-docs/jest-transform-mdx"
-    }
-  },
-  "dependencies": {
-    "@floating-ui/dom": "^0.1.10",
-    "@storybook/preview-api": "^7.6.6",
-    "framer-motion": "^4.1.17",
-    "react-hook-form": "^7.49.2"
   },
   "homepage": "https://scality.github.io/core-ui/",
   "publishConfig": {
