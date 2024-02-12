@@ -87,7 +87,13 @@ const StyledCheckbox = styled.label<{
 
   [type='checkbox']:checked::before {
     box-shadow: none;
-    background-image: url('data:image/svg+xml,%3Csvg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M3 6.68646L5.0671 9L9 3" stroke="%23fff" stroke-width="1.5"/%3E %3C/svg%3E');
+    background-image: url('data:image/svg+xml,%3Csvg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M3 6.68646L5.0671 9L9 3" stroke="${(
+      props,
+    ) =>
+      props.theme.textPrimary.replace(
+        '#',
+        '%23',
+      )}" stroke-width="1.5"/%3E %3C/svg%3E');
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -98,7 +104,13 @@ const StyledCheckbox = styled.label<{
     box-shadow: inset 0 0 0 ${spacing.r1}
       ${(props) => props.theme.selectedActive};
     background-color: ${(props) => props.theme.highlight};
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='6' y1='12' x2='20' y2='12' style='stroke:%23fff;stroke-width:4'/%3E %3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='6' y1='12' x2='20' y2='12' style='stroke:${(
+      props,
+    ) =>
+      props.theme.textPrimary.replace(
+        '#',
+        '%23',
+      )};stroke-width:4'/%3E %3C/svg%3E");
   }
 
   /* Hover & focus */
