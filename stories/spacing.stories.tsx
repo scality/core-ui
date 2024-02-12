@@ -41,30 +41,30 @@ export const StackStory = {
             <Stack gap="r20">
               <Icon name="Account" size="2x" color="infoPrimary" withWrapper />
               <Stack direction="vertical" gap="r4">
-                <LargerText>6 Accounts</LargerText>
-                <SmallerSecondaryText>for this instance</SmallerSecondaryText>
+                <LargerText>Title</LargerText>
+                <SmallerSecondaryText>Subtitle</SmallerSecondaryText>
               </Stack>
             </Stack>
             <Stack gap="r32">
               <Stack>
                 <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <SecondaryText>Replication</SecondaryText>
+                <SecondaryText>Status 1</SecondaryText>
               </Stack>
               <Stack>
                 <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <SecondaryText>Expiration</SecondaryText>
+                <SecondaryText>Status 2</SecondaryText>
               </Stack>
               <Stack>
                 <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <SecondaryText>Transition</SecondaryText>
+                <SecondaryText>Status 3</SecondaryText>
               </Stack>
             </Stack>
             <Stack direction="vertical" gap="r4">
               <Stack gap="r4">
-                <EmphaseText>Active Alerts</EmphaseText>
+                <EmphaseText>Alerts</EmphaseText>
                 <TextBadge text="0" variant="infoPrimary" />
               </Stack>
-              <SmallerSecondaryText>No active alerts</SmallerSecondaryText>
+              <SmallerSecondaryText>No alerts</SmallerSecondaryText>
             </Stack>
           </Stack>
         </div>
