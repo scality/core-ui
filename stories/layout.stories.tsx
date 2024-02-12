@@ -24,55 +24,6 @@ const HeaderComponent = styled.div`
   color: black;
 `;
 
-export const Layout2SimplestV2 = {
-  args: {
-    children: (
-      <AppContainer>
-        <AppContainer.ContextContainer background="backgroundLevel1">
-          <>Context bar</>
-        </AppContainer.ContextContainer>
-        <AppContainer.OverallSummary noPadding>
-          <Stack withSeparators={true} gap="r32">
-            <Stack gap="r20">
-              <Icon name="Account" size="2x" withWrapper />
-              <Stack direction="vertical" gap="r4">
-                <Text variant="Larger">6 Accounts</Text>
-                <Text variant="Smaller" color="textSecondary">
-                  for this instance
-                </Text>
-              </Stack>
-            </Stack>
-            <Stack gap="r32">
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Replication</Text>
-              </Stack>
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Expiration</Text>
-              </Stack>
-              <Stack>
-                <Icon name={'Check-circle'} color={'statusHealthy'} />
-                <Text color="textSecondary">Transition</Text>
-              </Stack>
-            </Stack>
-            <Stack direction="vertical" gap="r4">
-              <Stack gap="r4">
-                <Text isEmphazed>Active Alerts</Text>
-                <TextBadge text="0" variant="infoPrimary" />
-              </Stack>
-              <Text variant="Smaller" color="textSecondary">
-                No active alerts
-              </Text>
-            </Stack>
-          </Stack>
-        </AppContainer.OverallSummary>
-        <AppContainer.MainContent>Main content</AppContainer.MainContent>
-      </AppContainer>
-    ),
-  },
-};
-
 export const Layout2Simplest = {
   render: () => {
     return (
