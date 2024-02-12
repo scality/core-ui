@@ -22,7 +22,7 @@ const HeaderComponent = styled.div`
   background: #ff9c54;
   flex: 1;
   color: black;
-}`;
+`;
 
 export const Layout2SimplestV2 = {
   args: {
@@ -78,9 +78,9 @@ export const Layout2Simplest = {
     return (
       <Layout2
         headerNavigation={
-          // <HeaderComponent>
-          <h3>Header navigation</h3>
-          // </HeaderComponent>
+          <HeaderComponent>
+            <h3>Header navigation</h3>
+          </HeaderComponent>
         }
       >
         <AppContainer>
@@ -92,33 +92,33 @@ export const Layout2Simplest = {
               <Stack gap="r20">
                 <Icon name="Account" size="2x" withWrapper />
                 <Stack direction="vertical" gap="r4">
-                  <Text variant="Larger">6 Accounts</Text>
+                  <Text variant="Larger">Title</Text>
                   <Text variant="Smaller" color="textSecondary">
-                    for this instance
+                    subtitle
                   </Text>
                 </Stack>
               </Stack>
               <Stack gap="r32">
                 <Stack>
                   <Icon name={'Check-circle'} color={'statusHealthy'} />
-                  <Text color="textSecondary">Replication</Text>
+                  <Text color="textSecondary">Status 1</Text>
                 </Stack>
                 <Stack>
                   <Icon name={'Check-circle'} color={'statusHealthy'} />
-                  <Text color="textSecondary">Expiration</Text>
+                  <Text color="textSecondary">Status 2</Text>
                 </Stack>
                 <Stack>
                   <Icon name={'Check-circle'} color={'statusHealthy'} />
-                  <Text color="textSecondary">Transition</Text>
+                  <Text color="textSecondary">Status 3</Text>
                 </Stack>
               </Stack>
               <Stack direction="vertical" gap="r4">
                 <Stack gap="r4">
-                  <Text isEmphazed>Active Alerts</Text>
+                  <Text isEmphazed>Alerts</Text>
                   <TextBadge text="0" variant="infoPrimary" />
                 </Stack>
                 <Text variant="Smaller" color="textSecondary">
-                  No active alerts
+                  No alerts
                 </Text>
               </Stack>
             </Stack>
