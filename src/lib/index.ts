@@ -6,7 +6,6 @@ export { Button } from './components/button/Button.component';
 export { Checkbox } from './components/checkbox/Checkbox.component';
 export { Chips } from './components/chips/Chips.component';
 export { Dropdown } from './components/dropdown/Dropdown.component';
-export { Input } from './components/input/Input.component';
 export { LOADER_SIZE } from './components/constants';
 export { Layout } from './components/layout/Layout.component';
 export { Loader } from './components/loader/Loader.component';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { SearchInput } from '../src/lib/components/searchinput/SearchInput.component';
 import { Wrapper, Title } from './common';
@@ -80,6 +80,26 @@ export const Default = {
             disableToggle={true}
           />
         </div>
+      </Wrapper>
+    );
+  },
+};
+export const Debounce = {
+  render: (args) => {
+    const [value, setValue] = useState('');
+    console.log('args', args);
+    console.log('value', value);
+    return (
+      <Wrapper>
+        <SearchInput
+          value={value}
+          disableToggle
+          onReset={action('on input reset')}
+          onChange={(e) => {
+            setValue(e.target.value);
+            action('debounce')(`${e.target} changed`);
+          }}
+        />
       </Wrapper>
     );
   },

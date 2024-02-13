@@ -1,9 +1,8 @@
-import { ChangeEvent, forwardRef, useRef, useState } from 'react';
+import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { fontSize } from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
-import { Input } from '../input/Input.component';
+import { Input, InputSize, convertSizeToRem } from '../inputv2/inputv2';
+import { Button } from '../buttonv2/Buttonv2.component';
 export type Props = {
   placeholder?: string;
   value: string;
@@ -11,12 +10,16 @@ export type Props = {
   onReset?: () => void;
   disableToggle: boolean;
   disabled?: boolean;
+  id?: string;
+  size?: InputSize;
 };
 const SearchInputContainer = styled.div<{
   docked?: boolean;
   disabled?: boolean;
+  width: string;
 }>`
   position: relative;
+  width: ${(props) => props.width};
 
   ${(props) => {
     if (props.disabled) {
@@ -29,47 +32,16 @@ const SearchInputContainer = styled.div<{
     }
   }}
 
-  .sc-input {
-    display: block;
-    input[type='text'] {
-      width: ${(props) => (props.docked ? '40px' : '100%')};
-      box-sizing: border-box;
-      padding-left: ${(props) => (props.docked ? '28px' : '40px')};
-      transition: width 0.2s ease-in-out;
-    }
+  //hide the default clear button in chrome
+  .search-box::-webkit-search-cancel-button {
+    display: none;
   }
 `;
-const IconButton = styled.button`
+
+const ClearButton = styled.div`
   position: absolute;
-  border: none;
-  outline: none;
-  top: 1px;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: ${fontSize.base};
-  color: ${getThemePropSelector('textSecondary')};
-  background-color: transparent;
-  ${(props) => {
-    // TODO
-    return (
-      !props.disabled &&
-      css`
-        cursor: pointer;
-        &:hover {
-          color: ${getThemePropSelector('selectedActive')};
-        }
-      `
-    );
-  }};
-`;
-const SearchIcon = styled(IconButton)`
-  left: 1px;
-`;
-const ResetIcon = styled(IconButton)<{ visible?: boolean }>`
   right: 1px;
-  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transition: opacity 0.5s ease-in-out;
+  top: 1px;
 `;
 
 const SearchInput = forwardRef(
@@ -81,49 +53,63 @@ const SearchInput = forwardRef(
       onChange,
       onReset,
       disabled,
+      id,
+      size,
       ...rest
     }: Props,
     forwardedRef,
   ) => {
-    const [docked, setDocked] = useState(!disableToggle);
     const myInputRef = useRef<HTMLInputElement | null>(null);
+    const debounce = useRef<NodeJS.Timeout | null>(null);
+    const [debouncedValue, setDebouncedValue] = useState(value);
 
-    const toggle = () => {
-      if (!disableToggle) {
-        setDocked(!docked);
-        if (myInputRef.current) {
-          myInputRef.current.focus();
+    useEffect(() => {
+      return () => {
+        if (debounce.current) {
+          clearTimeout(debounce.current);
         }
-      }
-    };
+      };
+    }, []);
 
     const reset = () => {
+      setDebouncedValue('');
       if (onReset) {
         onReset();
       }
+    };
 
-      if (!disableToggle) {
-        setDocked(true);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setDebouncedValue(e.target.value);
+      if (debounce.current) {
+        clearTimeout(debounce.current);
       }
+
+      debounce.current = setTimeout(() => {
+        onChange(e);
+      }, 300);
     };
 
     return (
       <SearchInputContainer
         className="sc-searchinput"
         disabled={disabled}
-        docked={docked}
+        width={convertSizeToRem(size)}
         {...rest}
       >
         <Input
           min={'1'}
-          type="text"
+          id={id || 'search'}
+          type="search"
           aria-label="search"
           name="search"
           placeholder={placeholder}
-          value={value}
-          onChange={onChange}
+          value={debouncedValue}
+          onChange={handleChange}
+          onReset={reset}
+          leftIcon="Search"
+          className="search-box"
           disabled={disabled}
-          inputRef={(element) => {
+          ref={(element) => {
             myInputRef.current = element;
             if (typeof forwardedRef === 'function') {
               forwardedRef(element);
@@ -132,12 +118,15 @@ const SearchInput = forwardRef(
             }
           }}
         />
-        <SearchIcon onClick={toggle} disabled={!docked}>
-          <Icon name="Search" />
-        </SearchIcon>
-        <ResetIcon onClick={reset} visible={!!value && !docked && !!onReset}>
-          <Icon name="Times-circle" />
-        </ResetIcon>
+        {debouncedValue && (
+          <ClearButton className="close-icon">
+            <Button
+              icon={<Icon name="Close" />}
+              tooltip={{ overlay: 'Reset' }}
+              onClick={reset}
+            />
+          </ClearButton>
+        )}
       </SearchInputContainer>
     );
   },

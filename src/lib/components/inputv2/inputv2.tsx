@@ -87,7 +87,7 @@ const SelfCenterredIcon = styled(Icon)`
   align-self: center;
 `;
 
-type InputSize = '1' | '2/3' | '1/2' | '1/3';
+export type InputSize = '1' | '2/3' | '1/2' | '1/3';
 
 export type InputProps = {
   error?: string;
