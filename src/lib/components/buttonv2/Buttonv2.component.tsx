@@ -53,7 +53,7 @@ export const ButtonStyled = styled.button<Props>`
         return css`
           background-color: ${brand.buttonPrimary};
           border: ${spacing.r1} solid ${brand.buttonPrimary};
-          color: ${brand.textSecondary};
+          color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
             border: ${spacing.r1} solid ${brand.infoPrimary};
@@ -75,7 +75,7 @@ export const ButtonStyled = styled.button<Props>`
         return css`
           background-color: ${brand.buttonSecondary};
           border: ${spacing.r1} solid ${brand.buttonSecondary};
-          color: ${brand.textSecondary};
+          color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
             border: ${spacing.r1} solid ${brand.infoPrimary};
