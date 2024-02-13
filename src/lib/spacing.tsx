@@ -36,7 +36,7 @@ export const spacing = {
 const HSeparator = styled.div`
   min-height: ${spacing.r40};
   min-width: ${spacing.r2};
-  background: ${(props) => props.theme.backgroundLevel1};
+  background: ${(props) => props.theme.border};
 `;
 
 const VSeparator = styled.div`
