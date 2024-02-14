@@ -19,7 +19,7 @@ export const Playground = {
   render: (args) => (
     <Stack {...args}>
       <Icon name="Account" size="2x" color="infoPrimary" withWrapper />
-      <LargerText>6 Accounts</LargerText>
+      <LargerText>My Title</LargerText>
     </Stack>
   ),
 };
