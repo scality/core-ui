@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useRef } from 'react';
+import { ReactNode, useEffect, useLayoutEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 import { Wrap, spacing } from '../../spacing';
@@ -76,6 +76,24 @@ const Modal = ({
       document.body && document.body.removeChild(modalContainer.current);
     };
   }, [modalContainer]);
+
+  useEffect(() => {
+    if (isOpen) {
+      //Auto focus the modal when it opens
+      modalContainer.current.setAttribute('tabindex', '0');
+      modalContainer.current.focus();
+      //Listen to esc key to close the modal
+      const handleEsc = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          close && close();
+        }
+      };
+      document.addEventListener('keydown', handleEsc);
+      return () => {
+        document.removeEventListener('keydown', handleEsc);
+      };
+    }
+  }, [isOpen]);
   return isOpen
     ? ReactDom.createPortal(
         <ModalContainer
