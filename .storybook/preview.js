@@ -50,7 +50,8 @@ export const parameters = {
     presetColors: Object.entries(brand).map(color => {return {color: color[1],title:color[0] }}),
     matchers:{
       color: /color/i
-    }
+    },
+    exclude: ['data-cy']
   },
   options: {
     storySort: {
