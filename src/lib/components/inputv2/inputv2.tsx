@@ -89,7 +89,7 @@ const SelfCenterredIcon = styled(Icon)`
 
 type InputSize = '1' | '2/3' | '1/2' | '1/3';
 
-type Props = {
+export type InputProps = {
   error?: string;
   id: string;
   leftIcon?: IconName;
@@ -97,7 +97,7 @@ type Props = {
   size?: InputSize;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       error,
