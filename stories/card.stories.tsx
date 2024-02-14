@@ -17,13 +17,6 @@ const colors = Object.keys(brand).filter((color) => !/RGB/.test(color));
 export default {
   title: 'Components/Data Display/Card',
   component: Card,
-  decorators: [
-    (story) => (
-      <Wrapper style={{ minHeight: '10vh', padding: '3rem' }}>
-        {story()}
-      </Wrapper>
-    ),
-  ],
   argTypes: {
     status: {
       options: ['healthy', 'warning', 'critical'],
@@ -79,7 +72,7 @@ export const Playground = {
     ...defaultPropsCard,
     children: [
       <CardHeader>
-        <div>RINGXcore</div>
+        <div>Capacity usage</div>
       </CardHeader>,
       <CardBodyContainer>
         <CardBody>{defaultBody}</CardBody>
@@ -103,7 +96,7 @@ export const NormalCards = {
     ...defaultPropsCard,
     children: [
       <CardHeader>
-        <div>RINGXcore</div>
+        <div>Capacity usage</div>
       </CardHeader>,
       <CardBodyContainer>
         <CardBody>{defaultBody}</CardBody>
@@ -154,7 +147,7 @@ export const NoBody = {
     status: 'critical',
     children: (
       <CardHeader>
-        <div>RINGXcore</div>
+        <div>Capacity usage</div>
       </CardHeader>
     ),
   },
@@ -174,7 +167,7 @@ export const MultipleBodies = {
     status: 'critical',
     children: [
       <CardHeader>
-        <div>RINGXcore</div>
+        <div>Capacity usage</div>
       </CardHeader>,
       <CardBodyContainer>
         <CardBody>{defaultBody}</CardBody>
