@@ -4,6 +4,13 @@ import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
+
+export const FocusVisibleStyle = css`
+  outline: dashed ${spacing.r2} ${(props) => props.theme.selectedActive};
+  outline-offset: ${spacing.r2};
+  z-index: 1000;
+`;
+
 export type Props = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'size' | 'label'
@@ -54,8 +61,7 @@ export const ButtonStyled = styled.button<Props>`
           }
           // :focus-visible is the keyboard-only version of :focus
           &:focus-visible:enabled {
-            outline: dashed ${spacing.r2} ${brand.selectedActive};
-            outline-offset: ${spacing.r2};
+            ${FocusVisibleStyle}
             color: ${brand.textPrimary};
           }
           &:active:enabled {
@@ -76,8 +82,7 @@ export const ButtonStyled = styled.button<Props>`
             color: ${brand.textPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.r2} ${brand.selectedActive};
-            outline-offset: ${spacing.r2};
+            ${FocusVisibleStyle}
             color: ${brand.textPrimary};
           }
           &:active:enabled {
@@ -97,8 +102,7 @@ export const ButtonStyled = styled.button<Props>`
             border: ${spacing.r1} solid ${brand.infoPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.r2} ${brand.selectedActive};
-            outline-offset: ${spacing.r2};
+            ${FocusVisibleStyle}s
           }
           &:active:enabled {
             cursor: pointer;
@@ -117,8 +121,7 @@ export const ButtonStyled = styled.button<Props>`
             color: ${brand.textPrimary};
           }
           &:focus-visible:enabled {
-            outline: dashed ${spacing.r2} ${brand.selectedActive};
-            outline-offset: ${spacing.r2};
+            ${FocusVisibleStyle}
             border-color: ${brand.buttonSecondary};
           }
           &:active:enabled {

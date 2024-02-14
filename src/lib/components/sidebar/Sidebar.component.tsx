@@ -11,6 +11,7 @@ import { getThemePropSelector } from '../../utils';
 import { Button } from '../button/Button.component';
 import { Icon } from '../icon/Icon.component';
 import { spacing } from '../../spacing';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 type Item = {
   label: string;
   onClick: (arg0: any) => void;
@@ -99,6 +100,9 @@ const SidebarContainer = styled.div<WrapperProps>`
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
+    &:focus-visible {
+      ${FocusVisibleStyle}
+    }
     height: ${sidebarItemHeight};
     width: ${sidebarWidth};
     padding: 0px;
@@ -121,11 +125,17 @@ const SidebarItem = styled.div<{ active?: boolean }>`
           background-color: ${highlight};
           color: ${textPrimary};
           cursor: default;
+          &:focus-visible {
+            ${FocusVisibleStyle}
+          }
         `
       : css`
           &:hover {
             background-color: ${highlight};
             color: ${textPrimary};
+          }
+          &:focus-visible {
+            ${FocusVisibleStyle}
           }
           &:active {
             background-color: ${highlight};
@@ -198,6 +208,7 @@ function Sidebar({
                 active={active}
                 title={label}
                 onClick={onClick}
+                tabIndex={0}
                 {...actionRest}
               >
                 {!!icon && <MenuItemIcon>{icon}</MenuItemIcon>}

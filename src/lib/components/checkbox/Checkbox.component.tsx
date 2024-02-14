@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { spacing, Stack } from '../../spacing';
 
 import { Text } from '../text/Text.component';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
 type Props = {
   label?: string;
@@ -113,8 +114,7 @@ const StyledCheckbox = styled.label<{
   }
 
   [type='checkbox']:focus-visible:enabled {
-    outline: dashed ${spacing.r2} ${(props) => props.theme.selectedActive};
-    outline-offset: ${spacing.r2};
+    ${FocusVisibleStyle}
   }
 
   /* Disabled */

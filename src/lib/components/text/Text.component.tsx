@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { CoreUITheme } from '../../style/theme';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
@@ -188,7 +189,6 @@ export const Link = styled.a`
   }
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {
-    outline: dashed ${spacing.r2} ${(props) => props.theme.textLink};
-    outline-offset: ${spacing.r2};
+    ${FocusVisibleStyle}
   }
 `;

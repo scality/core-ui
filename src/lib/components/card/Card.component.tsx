@@ -3,6 +3,7 @@ import { HTMLProps } from 'react';
 import { createContext } from 'react';
 import styled from 'styled-components';
 import { hex2RGB } from '../../utils';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 const CardContext = createContext(null);
 type CardElementProps = {
   children: React.ReactNode;
@@ -109,8 +110,7 @@ const StyledCard = styled.div<{
       }
 
       &:focus {
-        outline: 2px solid ${props.theme.buttonSecondary};
-        outline-offset: 2px;
+        ${FocusVisibleStyle}
       }
     `
       : ''};
