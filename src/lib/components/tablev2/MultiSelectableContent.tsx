@@ -242,7 +242,23 @@ export const MultiSelectableContent = <
               );
 
               return (
-                <TableHeader {...headerStyleProps} role="columnheader">
+                <TableHeader
+                  {...headerStyleProps}
+                  role="columnheader"
+                  tabIndex={!column.disableSortBy ? 0 : undefined}
+                  onKeyDown={(event) => {
+                    if (
+                      !column.disableSortBy &&
+                      (event.key === ' ' ||
+                        event.key === 'Enter' ||
+                        event.key === 'Spacebar')
+                    ) {
+                      event.preventDefault();
+                      // @ts-expect-error - getSortByToggleProps is joined to getHeaderProps
+                      headerStyleProps.onClick(event);
+                    }
+                  }}
+                >
                   <div>
                     {column.id === 'selection' ? (
                       <div

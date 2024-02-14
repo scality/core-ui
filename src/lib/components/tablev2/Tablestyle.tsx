@@ -8,6 +8,7 @@ import {
 } from './TableUtils';
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -18,15 +19,25 @@ export const SortCaretWrapper = styled.span`
   padding-left: ${spacing.sp4};
   position: absolute;
 `;
-export const TableHeader = styled.div<{ headerHeight?: number | string }>`
+export const TableHeader = styled.div<{
+  headerHeight?: number | string;
+  tabIndex: number | undefined;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: ${(props) => props.headerHeight};
+  cursor: ${(props) =>
+    props.tabIndex !== undefined && props.tabIndex >= 0
+      ? 'pointer'
+      : 'default'};
   &:hover {
     ${SortIncentive} {
       display: block;
     }
+  }
+  &:focus-visible {
+    ${FocusVisibleStyle}
   }
 `;
 
@@ -46,7 +57,6 @@ export const HeadRow = styled.div<HeadRowType>`
       : `calc(100% - ${borderSize} ) !important;`}
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
-  cursor: pointer;
   color: ${(props) => props.theme.textPrimary};
   font-weight: bold;
   overflow: hidden;
@@ -77,6 +87,9 @@ export const TableRow = styled.div<TableRowType>`
           background-color: ${(props) => props.theme.highlight};
           outline: none;
           cursor: pointer;
+        }
+        &:focus-visible {
+          ${FocusVisibleStyle}
         }
       `;
     }

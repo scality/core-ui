@@ -99,6 +99,18 @@ export function SingleSelectableContent<
         onClick: () => {
           if (onRowSelected) return onRowSelected(row);
         },
+        tabIndex: onRowSelected ? 0 : undefined,
+        onKeyDown: (event) => {
+          if (
+            onRowSelected &&
+            (event.key === ' ' ||
+              event.key === 'Enter' ||
+              event.key === 'Spacebar')
+          ) {
+            event.preventDefault();
+            onRowSelected(row);
+          }
+        },
       },
     };
 
@@ -167,7 +179,23 @@ export function SingleSelectableContent<
                 }),
               );
               return (
-                <TableHeader {...headerStyleProps} role="columnheader">
+                <TableHeader
+                  {...headerStyleProps}
+                  role="columnheader"
+                  tabIndex={!column.disableSortBy ? 0 : undefined}
+                  onKeyDown={(event) => {
+                    if (
+                      !column.disableSortBy &&
+                      (event.key === ' ' ||
+                        event.key === 'Enter' ||
+                        event.key === 'Spacebar')
+                    ) {
+                      event.preventDefault();
+                      // @ts-expect-error - getSortByToggleProps is joined to getHeaderProps
+                      headerStyleProps.onClick(event);
+                    }
+                  }}
+                >
                   <div>
                     {column.render('Header')}
                     <SortCaret column={column} />
