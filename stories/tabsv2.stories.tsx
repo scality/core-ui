@@ -28,8 +28,6 @@ const messages = [
   'Long',
   'Really long long long long long',
   'Hello',
-  'Metalk8s',
-  'ZENKO-UI',
 ];
 
 const generateTab = (n = 10, selectedIndex = 0) => {
