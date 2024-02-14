@@ -12,6 +12,8 @@ import { spacing } from '../../spacing';
 import { fontSize } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { useSelect } from 'downshift';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 export type Item = {
   label: string;
   name?: string;
@@ -41,38 +43,14 @@ const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
   padding: 0;
+  top: 50px;
   border: 1px solid ${getThemePropSelector('backgroundLevel1')};
   z-index: ${zIndex.dropdown};
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
   border-bottom: 0.3px solid ${getThemePropSelector('border')};
-  ${(props) => {
-    if (
-      props.size &&
-      props.triggerSize &&
-      props.triggerSize.x + props.size.width > window.innerWidth
-    ) {
-      return css`
-        right: 0;
-        top: 100%;
-      `;
-    } else if (
-      props.size &&
-      props.triggerSize &&
-      props.triggerSize.y + props.size.height > window.innerHeight
-    ) {
-      return css`
-        left: 0;
-        bottom: ${props.triggerSize.height + 'px'};
-      `;
-    } else {
-      return css`
-        left: 0;
-        top: 100%;
-      `;
-    }
-  }};
+  display: ${(props) => (props.isOpen ? 'auto' : 'none')};
 `;
 const DropdownMenuItemStyled = styled.li`
   display: flex;
@@ -81,25 +59,36 @@ const DropdownMenuItemStyled = styled.li`
   white-space: nowrap;
   cursor: pointer;
   font-size: ${fontSize.base};
+  ${(props) => {
+    console.log(props.isSelected);
+    return props.isSelected
+      ? `background-color: ${props.theme.highlight};`
+      : `background-color: ${props.theme.backgroundLevel1};`;
+  }}
 
-  ${css`
-    background-color: ${getThemePropSelector('backgroundLevel1')};
-    color: ${getThemePropSelector('textPrimary')};
-    border-top: 0.3px solid ${getThemePropSelector('border')};
-    border-left: 0.3px solid ${getThemePropSelector('border')};
-    border-right: 0.3px solid ${getThemePropSelector('border')};
-    &:hover {
-      background-color: ${getThemePropSelector('highlight')};
-    }
-    &:active {
-      background-color: ${getThemePropSelector('highlight')};
-    }
-  `};
+  color: ${getThemePropSelector('textPrimary')};
+  border-top: 0.3px solid ${getThemePropSelector('border')};
+  border-left: 0.3px solid ${getThemePropSelector('border')};
+  border-right: 0.3px solid ${getThemePropSelector('border')};
+
+  &:hover {
+    background-color: ${getThemePropSelector('highlight')};
+  }
+  &:active {
+    background-color: ${getThemePropSelector('highlight')};
+  }
 `;
 const Caret = styled.span`
   margin-left: ${spacing.r16};
 `;
-const TriggerStyled = ButtonStyled.withComponent('div');
+const Trigger = ButtonStyled.withComponent('div');
+const TriggerStyled = styled(Trigger)`
+  // :focus-visible is the keyboard-only version of :focus
+  &:focus-visible {
+    ${FocusVisibleStyle}
+    color: ${(props) => props.theme.textPrimary};
+  }
+`;
 
 function Dropdown({
   items,
@@ -111,19 +100,16 @@ function Dropdown({
   caret = true,
   ...rest
 }: Props) {
-  const [open, setOpen] = useState(false);
-  const [menuSize, setMenuSize] = useState();
-  const [triggerSize, setTriggerSize] = useState();
-  const refMenuCallback = useCallback((node) => {
-    if (node !== null) {
-      setMenuSize(node.getBoundingClientRect());
-    }
-  }, []);
-  const refTriggerCallback = useCallback((node) => {
-    if (node !== null) {
-      setTriggerSize(node.getBoundingClientRect());
-    }
-  }, []);
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getMenuProps,
+    getItemProps,
+    highlightedIndex,
+  } = useSelect({
+    items,
+    itemToString: (item) => item?.label || '',
+  });
   return (
     <DropdownStyled
       active={open}
@@ -135,12 +121,8 @@ function Dropdown({
         variant={variant}
         size={size}
         className="trigger"
-        onBlur={() => setOpen(!open)}
-        onFocus={() => setOpen(!open)}
-        onClick={(event) => event.stopPropagation()}
-        tabIndex="0"
         title={title}
-        ref={refTriggerCallback}
+        {...getToggleButtonProps()}
       >
         {icon && (
           <ButtonIcon text={text} size={size}>
@@ -153,29 +135,31 @@ function Dropdown({
             <Icon name="Dropdown-down" />
           </Caret>
         )}
-        {open && (
-          <DropdownMenuStyled
-            className="menu-item"
-            postion={'right'}
-            ref={refMenuCallback}
-            size={menuSize}
-            triggerSize={triggerSize}
-          >
-            {items.map(({ label, onClick, ...itemRest }) => {
-              return (
-                <DropdownMenuItemStyled
-                  className="menu-item-label"
-                  key={label}
-                  onClick={onClick}
-                  variant={variant}
-                  {...itemRest}
-                >
-                  {label}
-                </DropdownMenuItemStyled>
-              );
-            })}
-          </DropdownMenuStyled>
-        )}
+
+        <DropdownMenuStyled
+          className="menu-item"
+          isOpen={isOpen}
+          {...getMenuProps()}
+        >
+          {items.map((item, index) => {
+            return (
+              <DropdownMenuItemStyled
+                className="menu-item-label"
+                key={item.label}
+                variant={item.variant}
+                {...item}
+                {...getItemProps({
+                  item,
+                  index,
+                  onClick: item.onClick,
+                })}
+                isSelected={index === highlightedIndex}
+              >
+                {item.label}
+              </DropdownMenuItemStyled>
+            );
+          })}
+        </DropdownMenuStyled>
       </TriggerStyled>
     </DropdownStyled>
   );
