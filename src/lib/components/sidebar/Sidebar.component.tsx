@@ -208,6 +208,16 @@ function Sidebar({
                 active={active}
                 title={label}
                 onClick={onClick}
+                onKeyDown={(event) => {
+                  if (
+                    event.key === ' ' ||
+                    event.key === 'Enter' ||
+                    event.key === 'Spacebar'
+                  ) {
+                    event.preventDefault();
+                    onClick(event);
+                  }
+                }}
                 tabIndex={0}
                 {...actionRest}
               >
