@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Link } from '../src/lib/components/text/Text.component';
 import { InlineInput } from '../src/lib';
 import { Stack } from '../src/lib/spacing';
+import { Logo } from '../src/lib/icons/branding-logo';
 
 const tabs = [
   {
@@ -86,8 +87,8 @@ const rightActions = [
     icon: <i className="fas fa-th" />,
     items: [
       {
-        label: 'Hyperdrive UI',
-        onClick: action('Hyperdrive UI clicked'),
+        label: 'App 1',
+        onClick: action('App 1 clicked'),
       },
     ],
   },
@@ -143,6 +144,7 @@ export default {
     productName: 'Hardware UI',
     rightActions,
     tabs,
+    logo: <Logo />,
   },
 };
 
