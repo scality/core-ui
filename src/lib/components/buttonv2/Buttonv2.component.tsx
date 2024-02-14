@@ -102,7 +102,7 @@ export const ButtonStyled = styled.button<Props>`
             border: ${spacing.r1} solid ${brand.infoPrimary};
           }
           &:focus-visible:enabled {
-            ${FocusVisibleStyle}s
+            ${FocusVisibleStyle}
           }
           &:active:enabled {
             cursor: pointer;
