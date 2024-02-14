@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
 import { fontSize, navbarHeight, navbarItemWidth } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
-import { Button } from '../button/Button.component';
 import { Dropdown, Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
+import { Button, FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 type Action = {
   type: string;
   items?: Array<Item>;
@@ -17,6 +17,7 @@ type Tab = {
   selected?: boolean;
   onClick?: (arg0: any) => void;
   link?: JSX.Element;
+  render?: JSX.Element;
 };
 export type Props = {
   onToggleClick?: () => void;
@@ -35,8 +36,7 @@ const NavbarContainer = styled.div`
     .sc-trigger-text {
       color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: ${spacing.r1} solid
-      ${getThemePropSelector('backgroundLevel1')};
+    border-bottom: 0.5px solid ${(props) => props.theme.backgroundLevel3};
   `};
 `;
 const NavbarMenu = styled.div`
@@ -72,6 +72,11 @@ const NavbarTabs = styled.div`
           font-weight: bold;
           border-bottom-color: ${selectedActive};
         }
+        // :focus-visible is the keyboard-only version of :focus
+        &:focus-visible {
+          ${FocusVisibleStyle}
+          color: ${props.theme.textPrimary};
+        }
       `;
     }};
   }
@@ -91,6 +96,11 @@ const TabItem = styled.div<{ selected: boolean }>`
         border-bottom: ${spacing.r2} solid;
         border-top: ${spacing.r2} solid;
         cursor: pointer;
+      }
+      // :focus-visible is the keyboard-only version of :focus
+      &:focus-visible {
+        ${FocusVisibleStyle}
+        color: ${props.theme.textPrimary};
       }
     `;
   }};
@@ -128,6 +138,11 @@ const NavbarMenuItem = styled.div`
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
+    // :focus-visible is the keyboard-only version of :focus
+    &:focus-visible {
+      ${FocusVisibleStyle}
+      color: ${(props) => props.theme.textPrimary};
+    }
     width: ${navbarItemWidth};
   }
 `;
@@ -156,14 +171,7 @@ const getActionRenderer = ({ type, items = null, ...rest }, index) => {
       />
     ) : null;
   } else if (type === 'button') {
-    return (
-      <Button
-        key={`navbar_right_action_${index}`}
-        size="larger"
-        variant="backgroundLevel1"
-        {...rest}
-      />
-    );
+    return <Button key={`navbar_right_action_${index}`} {...rest} />;
   } else if (type === 'custom') {
     return <rest.render key={`navbar_right_action_${index}`} />;
   }
@@ -183,12 +191,7 @@ function NavBar({
       <NavbarMenu>
         {onToggleClick && (
           <NavbarMenuItem onClick={onToggleClick}>
-            <Button
-              size="larger"
-              variant="backgroundLevel1"
-              icon={<Icon name="Lat-menu" />}
-              title="Main Menu"
-            />
+            <Button icon={<Icon name="Lat-menu" />} title="Main Menu" />
           </NavbarMenuItem>
         )}
         <NavbarMenuItem>
@@ -199,7 +202,12 @@ function NavBar({
       </NavbarMenu>
       {tabs.length ? (
         <NavbarTabs>
-          {tabs.map(({ link, title, selected, onClick }, index) => {
+          {tabs.map(({ link, title, selected, onClick, render }, index) => {
+            if (render) {
+              return (
+                <Fragment key={`navbar_tab_item_${index}`}>{render}</Fragment>
+              );
+            }
             return link ? (
               React.cloneElement(link, {
                 className: selected ? 'selected' : '',
