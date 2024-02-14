@@ -2,9 +2,23 @@ import React from 'react';
 import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from '@storybook/addon-actions';
 import { Link } from '../src/lib/components/text/Text.component';
+import { InlineInput } from '../src/lib';
 import { Stack } from '../src/lib/spacing';
 
 const tabs = [
+  {
+    render: (
+      <InlineInput
+        id="instanceName"
+        changeMutation={{
+          isLoading: false,
+          mutate: () => {},
+        }}
+        defaultValue="My instance"
+        maxLength={14}
+      />
+    ),
+  },
   {
     selected: true,
     title: 'Groups',
@@ -14,21 +28,25 @@ const tabs = [
   {
     selected: false,
     title: 'Users',
+    link: <a href="/users">Users</a>,
     onClick: action('Users clicked'),
   },
   {
     selected: false,
     title: 'Policies',
+    link: <a href="/policies">Policies</a>,
     onClick: action('Policies clicked'),
   },
   {
     selected: false,
     title: 'Buckets',
+    link: <a href="/buckets">Buckets</a>,
     onClick: action('Buckets clicked'),
   },
   {
     selected: false,
     title: 'Workflows',
+    link: <a href="/workflows">Workflows</a>,
     onClick: action('Workflows clicked'),
   },
 ];

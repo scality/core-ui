@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { HTMLProps } from 'react';
 import { createContext } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { hex2RGB } from '../../utils';
+import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 const CardContext = createContext(null);
 type CardElementProps = {
   children: React.ReactNode;
@@ -101,18 +102,17 @@ const StyledCard = styled.div<{
 
   ${(props) =>
     props.onClick && !props.disabled
-      ? `
-      cursor: pointer;
+      ? css`
+          cursor: pointer;
 
-      &:hover {
-        box-shadow: 0 0 0 2px ${props.theme.highlight};
-      }
+          &:hover {
+            box-shadow: 0 0 0 2px ${props.theme.highlight};
+          }
 
-      &:focus {
-        outline: 2px solid ${props.theme.buttonSecondary};
-        outline-offset: 2px;
-      }
-    `
+          &:focus {
+            ${FocusVisibleStyle}
+          }
+        `
       : ''};
 
   &.active {
