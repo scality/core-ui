@@ -123,7 +123,7 @@ export const InlineInput = ({
                 <Stack>
                   <Button
                     label="Cancel"
-                    variant="secondary"
+                    variant="outline"
                     onClick={() => setIsConfirmationModalOpened(false)}
                   />
                   <Button
