@@ -1,8 +1,6 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
-
-import { Box } from '../box/Box';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
 
@@ -13,8 +11,9 @@ export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   else return '20.5rem';
 };
 
-const StyledInput = styled.input`
-  max-width: 100%;
+const StyledInput = styled.input<{ hasIcon: boolean }>`
+  max-width: calc(100% - 1rem - ${spacing.f8});
+
   font-family: 'Lato';
   ${(props) =>
     props.disabled &&
@@ -49,6 +48,7 @@ const InputContainer = styled.div<{
   height: 100%;
   display: flex;
   align-items: center;
+  gap: ${spacing.f8};
   padding: 0 ${spacing.r8} 0 ${spacing.r8};
   background: ${(props) => props.theme.backgroundLevel1};
   border-radius: ${spacing.r4};
@@ -130,25 +130,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={!!(disabled || disabledFromFieldContext)}
           hasError={!!(error || errorFromFieldContext)}
         >
-          <Box
-            display={'flex'}
-            flexDirection={'row'}
-            alignItems={'baseline'}
-            width="100%"
-            gap={spacing['f8']}
-          >
-            {leftIcon && <SelfCenterredIcon name={leftIcon} />}
-            <StyledInput
-              ref={ref}
-              disabled={disabled || disabledFromFieldContext}
-              aria-invalid={!!(error || errorFromFieldContext)}
-              aria-describedby={`${DESCRIPTION_PREFIX}${id}`}
-              id={id}
-              {...inputProps}
-              placeholder={placeholder}
-            />
-            {rightIcon && <SelfCenterredIcon name={rightIcon} />}
-          </Box>
+          {leftIcon && <SelfCenterredIcon name={leftIcon} />}
+          <StyledInput
+            ref={ref}
+            disabled={disabled || disabledFromFieldContext}
+            aria-invalid={!!(error || errorFromFieldContext)}
+            aria-describedby={`${DESCRIPTION_PREFIX}${id}`}
+            hasIcon={leftIcon || rightIcon ? true : false}
+            id={id}
+            {...inputProps}
+            placeholder={placeholder}
+          />
+          {rightIcon && <SelfCenterredIcon name={rightIcon} />}
         </InputContainer>
       </InputBorder>
     );

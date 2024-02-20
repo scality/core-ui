@@ -1,8 +1,9 @@
 import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Icon } from '../icon/Icon.component';
-import { Input, InputSize, convertSizeToRem } from '../inputv2/inputv2';
+import { Input, InputSize } from '../inputv2/inputv2';
 import { Button } from '../buttonv2/Buttonv2.component';
+import { spacing } from '../../spacing';
 export type Props = {
   placeholder?: string;
   value: string;
@@ -16,10 +17,12 @@ export type Props = {
 const SearchInputContainer = styled.div<{
   docked?: boolean;
   disabled?: boolean;
-  width: string;
 }>`
   position: relative;
-  width: ${(props) => props.width};
+  width: max-content;
+  input {
+    max-width: calc(100% - 1rem - ${spacing.f8} - 1rem);
+  }
 
   ${(props) => {
     if (props.disabled) {
@@ -41,7 +44,7 @@ const SearchInputContainer = styled.div<{
 const ClearButton = styled.div`
   position: absolute;
   right: 1px;
-  top: 1px;
+  top: 0px;
 `;
 
 const SearchInput = forwardRef(
@@ -93,7 +96,6 @@ const SearchInput = forwardRef(
       <SearchInputContainer
         className="sc-searchinput"
         disabled={disabled}
-        width={convertSizeToRem(size)}
         {...rest}
       >
         <Input
@@ -106,6 +108,7 @@ const SearchInput = forwardRef(
           value={debouncedValue}
           onChange={handleChange}
           onReset={reset}
+          size={size}
           leftIcon="Search"
           className="search-box"
           disabled={disabled}
