@@ -53,8 +53,8 @@ export const HeadRow = styled.div<HeadRowType>`
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
-      ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important;` // -4px for border
-      : `calc(100% - ${borderSize} ) !important;`}
+      ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important` // -4px for border
+      : `calc(100% - ${borderSize} ) !important`};
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};
