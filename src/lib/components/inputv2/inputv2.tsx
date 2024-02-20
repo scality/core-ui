@@ -85,6 +85,7 @@ const InputBorder = styled.div<{
 
 const SelfCenterredIcon = styled(Icon)`
   align-self: center;
+  color: ${(props) => props.theme.textPrimary};
 `;
 
 export type InputSize = '1' | '2/3' | '1/2' | '1/3';
