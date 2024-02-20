@@ -99,6 +99,7 @@ export function TableSearch(props: SearchProps) {
         value={value}
         placeholder={translations[locale].search}
         disableToggle
+        size="1/2"
         onChange={(evt) => {
           if (typeof onChange === 'function') {
             // @ts-ignore
