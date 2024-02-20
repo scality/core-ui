@@ -6,7 +6,11 @@ import {
   Table,
 } from '../src/lib/components/tablev2/Tablev2.component';
 import { Wrapper, Title } from './common';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter,
+  BrowserRouter as Router,
+  useLocation,
+} from 'react-router-dom';
 import { CellProps, Row } from 'react-table';
 import { Box, Button } from '../src/lib/next';
 import styled from 'styled-components';
@@ -324,15 +328,24 @@ export const asyncTable = {
             paddingTop: '20px',
           }}
         >
-          <Table columns={columnAsync} data={data} defaultSortingKey={'health'}>
-            <Table.SingleSelectableContent
-              rowHeight="h40"
-              separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
-              selectedId={'Rodolph Yohann'}
-              onRowSelected={action('Table Row Clicked')}
-            />
-          </Table>
+          <BrowserRouter>
+            <Table
+              columns={columnAsync}
+              data={data}
+              defaultSortingKey={'health'}
+            >
+              <Table.SearchWithQueryParams
+                displayedName={{ singular: 'user', plural: 'users' }}
+              ></Table.SearchWithQueryParams>
+              <Table.SingleSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+                backgroundVariant="backgroundLevel1"
+                selectedId={'Rodolph Yohann'}
+                onRowSelected={action('Table Row Clicked')}
+              />
+            </Table>
+          </BrowserRouter>
         </div>
       </Wrapper>
     );
