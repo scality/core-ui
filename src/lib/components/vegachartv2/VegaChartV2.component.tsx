@@ -188,7 +188,7 @@ function VegaChartInternal(
         vegaInstance.current.view.finalize();
       }
     }; // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vegaDOMInstance]);
+  }, [vegaDOMInstance, currentTheme]);
 
   useLayoutEffect(() => {
     if (vegaInstance.current) {
