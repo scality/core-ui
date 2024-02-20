@@ -97,6 +97,7 @@ const SidebarContainer = styled.div<WrapperProps>`
   .sc-button {
     border-radius: 0;
     background-color: ${(props) => props.theme.backgroundLevel1};
+    color: ${(props) => props.theme.textPrimary};
     &:hover {
       background-color: ${(props) => props.theme.highlight};
     }
