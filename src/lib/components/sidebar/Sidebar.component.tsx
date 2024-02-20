@@ -7,8 +7,7 @@ import {
   sidebarWidth,
   sidebarItemHeight,
 } from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
-import { Button } from '../button/Button.component';
+import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
 import { spacing } from '../../spacing';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
@@ -42,7 +41,8 @@ const Wrapper = styled.div<WrapperProps>`
       }
     `;
   }}
-
+  margin-top: 1px;
+  border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
   ${(props) => {
     if (props.expanded) {
       return css`
@@ -96,9 +96,9 @@ const SidebarContainer = styled.div<WrapperProps>`
 
   .sc-button {
     border-radius: 0;
-    background-color: ${getThemePropSelector('backgroundLevel1')};
+    background-color: ${(props) => props.theme.backgroundLevel1};
     &:hover {
-      background-color: ${getThemePropSelector('highlight')};
+      background-color: ${(props) => props.theme.highlight};
     }
     &:focus-visible {
       ${FocusVisibleStyle}
@@ -153,7 +153,7 @@ const MenuItemSelected = styled.div`
   width: 3px;
   height: 100%;
   right: 0;
-  background-color: ${getThemePropSelector('selectedActive')};
+  background-color: ${(props) => props.theme.selectedActive};
 `;
 const MenuItemIcon = styled.div`
   width: ${sidebarWidth};
@@ -189,9 +189,7 @@ function Sidebar({
         {onToggleClick && (
           <MenuItemIcon>
             <Button
-              size="larger"
-              variant="backgroundLevel1"
-              icon={<Icon name="Lat-menu" />}
+              icon={<Icon size="lg" name="Lat-menu" />}
               onClick={() => {
                 setHovered(false);
                 onToggleClick();
