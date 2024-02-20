@@ -1,15 +1,8 @@
 // @ts-nocheck
-import React, {
-  useEffect,
-  useContext,
-  useRef,
-  useLayoutEffect,
-  useMemo,
-} from 'react';
+import React, { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
-import { ThemeContext, createGlobalStyle } from 'styled-components';
-import { getThemePropSelector } from '../../utils';
+import { createGlobalStyle, css, useTheme } from 'styled-components';
 import { useCursorX, SyncedCursorChartsContext } from './SyncedCursorCharts';
 import { TooltipHandlerWithPaint } from '../linetemporalchart/tooltip';
 export const TOP = 'top';
@@ -33,29 +26,35 @@ https://github.com/vega/vega-tooltip/blob/master/docs/customizing_your_tooltip.m
 */
 const VegaTooltipTheme = createGlobalStyle`
   #vg-tooltip-element.vg-tooltip.custom-theme {
-    padding: 8px;
-    position: fixed;
-    z-index: 1000;
-    width: calc(100vw/6);
-    font-family: 'Lato';
-    font-size: 12px;
-    border-radius: 3px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    color: ${getThemePropSelector('textPrimary')};
-    background-color: ${getThemePropSelector('backgroundLevel1')};
-    border: 1px solid ${getThemePropSelector('border')};
-    // customize the title
-    h2 {
-      color: ${getThemePropSelector('textPrimary')};
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
-    table {
-      width: 100%;
-    }
-    table tr td.key {
-      color: ${getThemePropSelector('textSecondary')};
-    }
+    ${(props) => {
+      const { theme } = props;
+      return css`
+        padding: 8px;
+        position: fixed;
+        z-index: 1000;
+        width: calc(100vw / 6);
+        font-family: 'Lato';
+        font-size: 12px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        color: ${theme.textPrimary};
+        background-color: ${theme.backgroundLevel1};
+        border: 1px solid ${theme.border};
+        // customize the title
+        h2 {
+          color: ${theme.textPrimary};
+          margin-bottom: 10px;
+          font-size: 12px;
+        }
+        table {
+          width: 100%;
+        }
+        table tr td.key {
+          color: ${theme.textSecondary};
+        }
+      `;
+    }}
+    
   }
 `;
 
@@ -73,41 +72,35 @@ function VegaChartInternal(
 ) {
   // $FlowFixMe
   const { cursorX, setCursorX } = useCursorX();
-  const themeContext = useContext(ThemeContext);
-  // the background color of the view
-  const seriesBackgroundColor =
-    themeContext && themeContext.brand
-      ? themeContext.brand.backgroundLevel1
-      : themeContext.backgroundLevel1;
-  const brandText =
-    themeContext && themeContext.brand
-      ? themeContext.brand.textPrimary
-      : themeContext.textPrimary;
+  const currentTheme = useTheme();
   const themeConfig = {
     config: {
-      background: 'transparent',
+      background: currentTheme.backgroundLevel1,
       axis: {
-        labelColor: brandText,
-        titleColor: brandText,
+        labelColor: currentTheme.textSecondary,
+        titleColor: currentTheme.textSecondary,
         grid: false,
         domainColor: 'transparent',
       },
       title: {
-        color: brandText,
+        color: currentTheme.buttonDelete,
         font: 'Lato',
       },
       view: {
         stroke: 'transparent',
-        fill: seriesBackgroundColor,
+        fill: currentTheme.backgroundLevel1,
       },
       // the headers provide a title and labels for faceted plots.
       header: {
-        labelColor: brandText,
+        labelColor: currentTheme.textPrimary,
       },
       // the label of max/min
       text: {
-        color: brandText,
+        color: currentTheme.textPrimary,
         font: 'Lato',
+      },
+      legend: {
+        labelColor: currentTheme.textSecondary,
       },
     },
   };
@@ -196,6 +189,7 @@ function VegaChartInternal(
       }
     }; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vegaDOMInstance]);
+
   useLayoutEffect(() => {
     if (vegaInstance.current) {
       const view = vegaInstance.current.view;
@@ -205,6 +199,7 @@ function VegaChartInternal(
       tooltipHandler.paint(); // to repaint the tooltip
     }
   }, [formatTooltip, vegaInstance, onHover]);
+
   useLayoutEffect(() => {
     if (vegaInstance.current) {
       const view = vegaInstance.current.view;
@@ -227,6 +222,7 @@ function VegaChartInternal(
     JSON.stringify(themedSpec.data.values),
     vegaInstance,
   ]);
+
   useLayoutEffect(() => {
     if (vegaInstance.current && themedSpec.params) {
       const view = vegaInstance.current.view;
@@ -269,6 +265,7 @@ function VegaChartInternal(
       ref={vegaDOMInstance}
       style={{
         width: '100%',
+        border: `${currentTheme.backgroundLevel3} 1px solid`,
       }}
     >
       <VegaTooltipTheme />
