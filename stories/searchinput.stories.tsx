@@ -87,8 +87,6 @@ export const Default = {
 export const Debounce = {
   render: (args) => {
     const [value, setValue] = useState('');
-    console.log('args', args);
-    console.log('value', value);
     return (
       <Wrapper>
         <SearchInput
