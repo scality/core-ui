@@ -90,6 +90,7 @@ export const Debounce = {
     return (
       <Wrapper>
         <SearchInput
+          placeholder="Search"
           value={value}
           disableToggle
           onReset={action('on input reset')}
@@ -97,6 +98,7 @@ export const Debounce = {
             setValue(e.target.value);
             action('debounce')(`${e.target} changed`);
           }}
+          {...args}
         />
       </Wrapper>
     );
