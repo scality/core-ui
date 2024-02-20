@@ -23,7 +23,7 @@ export type SearchProps = {
   displayedName: DisplayedName;
   locale?: TableLocalType;
   totalCount?: number;
-} & Omit<Props, 'disableToggle'>;
+} & Omit<Props, 'disableToggle' | 'onChange'>;
 
 const SearchContainer = styled.div`
   display: flex;

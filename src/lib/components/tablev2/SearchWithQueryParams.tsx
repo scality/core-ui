@@ -4,14 +4,15 @@ import { TableSearch as Search, SearchProps } from './Search';
 
 export type SearchWithQueryParamsProps = {
   queryParams?: string;
-} & SearchProps;
+} & Omit<SearchProps, 'onChange' | 'value'> &
+  Partial<Pick<SearchProps, 'onChange'>>;
 
-export function SearchWithQueryParams(props) {
+export function SearchWithQueryParams(props: SearchWithQueryParamsProps) {
   const { queryParams = 'search', onChange, ...rest } = props;
   const { search, pathname } = useLocation();
   const history = useHistory();
   const params = new URLSearchParams(search);
-  const initialValue = params.get(queryParams);
+  const initialValue = params.get(queryParams) || '';
   const [value, setValue] = useState(initialValue);
 
   function handleOnChange(value: string) {
