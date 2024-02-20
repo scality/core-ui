@@ -2,7 +2,6 @@
 import { HTMLProps } from 'react';
 import { createContext } from 'react';
 import styled, { css } from 'styled-components';
-import { hex2RGB } from '../../utils';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 const CardContext = createContext(null);
 type CardElementProps = {
@@ -42,7 +41,8 @@ function withCompoundCheck(Component) {
 
 const StyledCardHeader = styled.div`
   padding: 0.7rem;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   font-weight: bold;
 `;
 StyledCardHeader.displayName = 'CardHeader';
@@ -76,27 +76,18 @@ const StyledCard = styled.div<{
   flex-flow: column;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background: ${(props) =>
-    props.theme[props.bodyBackgroundColor || 'backgroundLevel3']};
-
+  background: ${(props) => props.theme[props.bodyBackgroundColor]};
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
   ${StyledCardBody} {
     opacity: ${(props) => (props.disabled ? '0.2' : '1')};
   }
 
   ${StyledCardHeader} {
-    border-radius: 2px;
     color: ${(props) => props.theme.textPrimary};
-    ${(props) => {
-      const hexColor = hex2RGB(
-        props.theme[
-          props.colorStatus || props.headerBackgroundColor || 'backgroundLevel4'
-        ],
-      ).join(',');
-      let opacity = 1;
-      if (props.colorStatus && props.colorStatus !== 'backgroundLevel4')
-        opacity = 0.4;
-      return `background: rgba(${hexColor}, ${opacity});`;
-    }}
+    background: ${(props) =>
+      props.theme[props.colorStatus || props.headerBackgroundColor]};
+    opacity: ${(props) =>
+      props.colorStatus && props.colorStatus !== 'backgroundLevel4' ? 0.4 : 1};
     ${(props) => props.disabled && 'opacity: 0.3;'}
   }
 
@@ -129,13 +120,13 @@ type CardProps = {
   onClick?: () => void;
   active?: boolean;
   disabled?: boolean;
-  children: Node;
+  children: React.ReactNode;
   className?: string;
 } & HTMLProps<HTMLDivElement>;
 function Card({
   width = 'auto',
   height = 'auto',
-  headerBackgroundColor = 'backgroundLevel4',
+  headerBackgroundColor = 'buttonSecondary',
   bodyBackgroundColor = 'backgroundLevel3',
   status = null,
   onClick = null,
