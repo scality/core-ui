@@ -60,7 +60,6 @@ const DropdownMenuItemStyled = styled.li`
   cursor: pointer;
   font-size: ${fontSize.base};
   ${(props) => {
-    console.log(props.isSelected);
     return props.isSelected
       ? `background-color: ${props.theme.highlight};`
       : `background-color: ${props.theme.backgroundLevel1};`;
