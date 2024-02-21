@@ -12,7 +12,8 @@ export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
 };
 
 const StyledInput = styled.input<{ hasIcon: boolean }>`
-  max-width: calc(100% - 1rem - ${spacing.f8});
+  max-width: ${(props) =>
+    props.hasIcon ? `calc(100% - 1rem - ${spacing.f8})` : '100%'};
 
   font-family: 'Lato';
   ${(props) =>
@@ -136,7 +137,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled || disabledFromFieldContext}
             aria-invalid={!!(error || errorFromFieldContext)}
             aria-describedby={`${DESCRIPTION_PREFIX}${id}`}
-            hasIcon={leftIcon || rightIcon ? true : false}
+            hasIcon={!!(leftIcon || rightIcon)}
             id={id}
             {...inputProps}
             placeholder={placeholder}
