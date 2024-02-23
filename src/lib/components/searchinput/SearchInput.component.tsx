@@ -20,8 +20,13 @@ const SearchInputContainer = styled.div<{
 }>`
   position: relative;
   width: max-content;
-  input {
+
+  input[value] {
     max-width: calc(100% - 1rem - ${spacing.f8} - 1rem);
+  }
+
+  input[value=''] {
+    max-width: calc(100% - 1rem - ${spacing.f8});
   }
 
   ${(props) => {
