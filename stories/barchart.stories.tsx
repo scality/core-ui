@@ -114,13 +114,7 @@ export default {
   title: 'Components/Data Display/Charts/BarChart',
   component: BarChart,
   decorators: [
-    (story: Component) => (
-      <Wrapper
-        style={{ minHeight: '30vh', padding: '3rem', backgroundColor: 'white' }}
-      >
-        <SyncedCursorCharts>{story()}</SyncedCursorCharts>
-      </Wrapper>
-    ),
+    (story: Component) => <SyncedCursorCharts>{story()}</SyncedCursorCharts>,
   ],
   argTypes: {
     data: {

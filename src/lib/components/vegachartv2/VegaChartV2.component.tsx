@@ -75,7 +75,7 @@ function VegaChartInternal(
   const currentTheme = useTheme();
   const themeConfig = {
     config: {
-      background: currentTheme.backgroundLevel1,
+      background: 'transparent',
       axis: {
         labelColor: currentTheme.textSecondary,
         titleColor: currentTheme.textSecondary,
@@ -87,7 +87,8 @@ function VegaChartInternal(
         font: 'Lato',
       },
       view: {
-        stroke: 'transparent',
+        stroke: currentTheme.border,
+        strokeWidth: 0.5,
         fill: currentTheme.backgroundLevel1,
       },
       // the headers provide a title and labels for faceted plots.
@@ -265,7 +266,6 @@ function VegaChartInternal(
       ref={vegaDOMInstance}
       style={{
         width: '100%',
-        border: `${currentTheme.backgroundLevel3} 1px solid`,
       }}
     >
       <VegaTooltipTheme />
