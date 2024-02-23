@@ -27,7 +27,7 @@ import {
   normlizeVegaFieldName,
 } from './ChartUtil';
 import { useMetricsTimeSpan } from './MetricTimespanProvider';
-import { spacing } from '../../style/theme';
+import { spacing } from '../../spacing';
 import { SmallerText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { formatValue } from './tooltip/index';
@@ -68,13 +68,13 @@ const Legends = styled.div`
   align-items: center;
 `;
 const LegendStroke = styled.div`
-  margin: 0 ${spacing.sp8} 0 ${spacing.sp16};
-  height: ${spacing.sp2};
+  margin: 0 ${spacing.r8} 0 ${spacing.r16};
+  height: ${spacing.r2};
   background: ${(props) =>
     props.isLineDashed
-      ? `repeating-linear-gradient(to right,${props.lineColor} 0,${props.lineColor} ${spacing.sp1},transparent ${spacing.sp1},transparent ${spacing.sp2})`
+      ? `repeating-linear-gradient(to right,${props.lineColor} 0,${props.lineColor} ${spacing.r1},transparent ${spacing.r1},transparent ${spacing.r2})`
       : props.lineColor};
-  width: ${spacing.sp8};
+  width: ${spacing.r8};
 `;
 const ChartHeader = styled.div`
   display: flex;
@@ -731,7 +731,7 @@ function LineTemporalChart({
         {isLoading && (
           <Loader
             style={{
-              paddingLeft: `${spacing.sp4}`,
+              paddingLeft: `${spacing.r4}`,
             }}
           />
         )}
