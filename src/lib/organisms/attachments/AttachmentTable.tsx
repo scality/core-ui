@@ -595,7 +595,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         <Table
           columns={[
             {
-              Header: <Box flex={1.5}>Name</Box>,
+              Header: 'Name',
               accessor: 'name',
               cellStyle: {
                 flex: 1.5,
@@ -639,7 +639,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               },
             },
             {
-              Header: <Box flex={0.5}>Attachment status</Box>,
+              Header: 'Attachment',
               accessor: 'isPending',
               cellStyle: {
                 flex: 0.5,
