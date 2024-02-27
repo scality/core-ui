@@ -5,7 +5,7 @@ import {
   EmptyCell,
   Table,
 } from '../src/lib/components/tablev2/Tablev2.component';
-import { Wrapper, Title } from './common';
+import { Title } from './common';
 import {
   BrowserRouter,
   BrowserRouter as Router,
@@ -146,7 +146,7 @@ export const SimpleContentTable = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>Non Selectable Table</Title>
         <div
           style={{
@@ -239,7 +239,7 @@ export const SimpleContentTable = {
             />
           </Table>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -318,7 +318,7 @@ export const asyncTable = {
     ];
 
     return (
-      <Wrapper>
+      <>
         <Title>async cell Table</Title>
         <div
           style={{
@@ -345,7 +345,7 @@ export const asyncTable = {
             </Table>
           </BrowserRouter>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -382,7 +382,7 @@ export const OnBottomCallback = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>async cell Table</Title>
         <div
           style={{
@@ -404,7 +404,7 @@ export const OnBottomCallback = {
             />
           </Table>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -490,7 +490,7 @@ export const MultiTable = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>Several Multiselect</Title>
         <Flex justifyContent="center" gap="2rem">
           <Box width="500px" height="200px">
@@ -544,7 +544,7 @@ export const MultiTable = {
             </Table>
           </Box>
         </Flex>
-      </Wrapper>
+      </>
     );
   },
 };
