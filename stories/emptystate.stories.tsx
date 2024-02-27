@@ -1,6 +1,5 @@
-import React from 'react';
 import { EmptyState } from '../src/lib/components/emptystate/Emptystate.component';
-import { Wrapper } from './common';
+
 export default {
   title: 'Components/Data Display/EmptyState',
   component: EmptyState,
