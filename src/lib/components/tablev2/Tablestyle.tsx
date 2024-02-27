@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { spacing } from '../../style/theme';
+// import { spacing } from '../../style/theme';
 import {
   TableHeightKeyType,
   tableRowHeight,
@@ -9,6 +9,7 @@ import {
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+import { spacing } from '../../spacing';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -16,7 +17,7 @@ export const SortIncentive = styled.span`
   display: none;
 `;
 export const SortCaretWrapper = styled.span`
-  padding-left: ${spacing.sp4};
+  padding-left: ${spacing.r4};
   position: absolute;
 `;
 export const TableHeader = styled.div<{
@@ -45,6 +46,7 @@ type HeadRowType = {
   hasScrollBar: boolean;
   scrollBarWidth: number;
   rowHeight: TableHeightKeyType;
+  separationLineVariant: TableVariantType;
 };
 
 export const HeadRow = styled.div<HeadRowType>`
@@ -60,6 +62,8 @@ export const HeadRow = styled.div<HeadRowType>`
   color: ${(props) => props.theme.textPrimary};
   font-weight: bold;
   overflow: hidden;
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
 `;
 
 type TableRowType = {
@@ -70,11 +74,8 @@ type TableRowType = {
 };
 export const TableRow = styled.div<TableRowType>`
   color: ${(props) => props.theme.textPrimary};
-  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
-  :last-child {
-    border-bottom: 1px solid
-      ${(props) => props.theme[props.separationLineVariant]};
-  }
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
   cursor: default;
   box-sizing: border-box;
 
@@ -117,11 +118,8 @@ type TableRowMultiSelectableType = {
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
-  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
-  :last-child {
-    border-bottom: 1px solid
-      ${(props) => props.theme[props.separationLineVariant]};
-  }
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
 
   box-sizing: border-box;
 
@@ -168,8 +166,8 @@ export const NoResult = styled.div`
   display: flex;
   justify-content: center;
   color: ${(props) => props.theme.textSecondary};
-  padding-top: ${spacing.sp8};
-  border-top: 1px solid ${(props) => props.theme.backgroundLevel3};
+  padding-top: ${spacing.r8};
+  /* border-top: 1px solid ${(props) => props.theme.backgroundLevel3}; */
 `;
 
 export const SortCaret = <
