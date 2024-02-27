@@ -232,6 +232,7 @@ export const MultiSelectableContent = <
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
+            separationLineVariant={separationLineVariant}
             ref={headerRef}
           >
             {headerGroup.headers.map((column) => {

@@ -167,6 +167,7 @@ export function SingleSelectableContent<
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
             ref={headerRef}
+            separationLineVariant={separationLineVariant}
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
