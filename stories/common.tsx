@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
       background-color: ${theme[style?.backgroundColor || 'backgroundLevel3']};
       color: ${theme.textPrimary};
       box-sizing: border-box;
+      overflow: scroll;
     `;
   }}
 `;
