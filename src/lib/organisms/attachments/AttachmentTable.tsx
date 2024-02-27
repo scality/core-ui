@@ -707,7 +707,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                     <p></p>
                   </Wrap>
                 ) : initiallyAttachedEntitiesStatus === 'error' ? (
-                  <Stack>
+                  <Stack style={{ justifyContent: 'center' }}>
                     <Icon name="Exclamation-circle" color="statusWarning" />
                     <Text color="textSecondary">
                       Failed to load attachments {entityName.plural}
