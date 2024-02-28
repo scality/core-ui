@@ -12,6 +12,7 @@ import { Stack, Wrap } from '../../spacing';
 
 const UnderlinedText = styled(Text)`
   text-decoration-line: underline;
+  text-underline-offset: 4px;
   text-decoration-style: dashed;
   cursor: text;
 `;
