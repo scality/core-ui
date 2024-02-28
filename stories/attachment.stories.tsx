@@ -1,54 +1,80 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 import {
-  AttachableEntity,
-  AttachmentAction,
-  AttachmentOperation,
-} from '../src/lib/organisms/attachments/AttachmentTypes';
-import {
   AttachmentProvider,
   AttachmentTable,
   useAttachmentOperations,
 } from '../src/lib/organisms/attachments/AttachmentTable';
 
+import { Box } from '../src/lib/next';
+import { useTheme } from 'styled-components';
+import { CoreUITheme } from '../src/lib/style/theme';
+
 export default {
   title: 'Components/AttachmentTable',
   component: AttachmentTable,
-  decorators: [
-    (Story) => (
-      <AttachmentProvider>
-        <Story />
-      </AttachmentProvider>
-    ),
-  ],
-  render: ({ args }) => {
+};
+
+export const Playground = {
+  render: () => {
+    const theme = useTheme();
     return (
-      <AttachmentTable
-        entityName={{ plural: 'groups', singular: 'group' }}
-        filteredEntities={{
-          status: 'success',
-          data: {
-            number: 1,
-            entities: [{ name: 'test', id: 'test', type: 'GROUP' }],
-          },
-        }}
-        initialAttachmentOperations={[]}
-        onEntitySearchChange={action('onEntitySearchChange')}
-        searchEntityPlaceholder="Search group by name"
-        initiallyAttachedEntities={[
-          { name: 'test', id: 'test', type: 'GROUP' },
-        ]}
-        initiallyAttachedEntitiesStatus={'success'}
-        onAttachmentsOperationsChanged={() => {
-          console.log('changed');
-        }}
-      />
+      <Box
+        style={{ height: '100%', backgroundColor: theme.backgroundLevel4 }}
+        p={'2rem'}
+      >
+        <AttachmentProvider>
+          <AttachmentTable
+            entityName={{ plural: 'users', singular: 'user' }}
+            filteredEntities={{
+              status: 'success',
+              data: {
+                number: 1,
+                entities: [{ name: 'User A', id: 'test', type: 'USER' }],
+              },
+            }}
+            initialAttachmentOperations={[]}
+            onEntitySearchChange={action('onEntitySearchChange')}
+            searchEntityPlaceholder="Search user by name"
+            initiallyAttachedEntities={[
+              { name: 'User A', id: 'test', type: 'USER' },
+            ]}
+            initiallyAttachedEntitiesStatus={'success'}
+            onAttachmentsOperationsChanged={() => {
+              console.log('changed');
+            }}
+          />
+        </AttachmentProvider>
+      </Box>
     );
   },
 };
 
-export const Playground = {
-  args: {
-    label: 'Playground',
+export const FailToLoad = {
+  render: () => {
+    const theme = useTheme();
+    return (
+      <Box
+        style={{ height: '100%', backgroundColor: theme.backgroundLevel4 }}
+        p={'2rem'}
+      >
+        <AttachmentProvider>
+          <AttachmentTable
+            entityName={{ plural: 'users', singular: 'user' }}
+            filteredEntities={{
+              status: 'error',
+            }}
+            initialAttachmentOperations={[]}
+            onEntitySearchChange={action('onEntitySearchChange')}
+            searchEntityPlaceholder="Search user by name"
+            initiallyAttachedEntities={[]}
+            initiallyAttachedEntitiesStatus={'error'}
+            onAttachmentsOperationsChanged={() => {
+              console.log('changed');
+            }}
+          />
+        </AttachmentProvider>
+      </Box>
+    );
   },
 };
