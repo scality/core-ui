@@ -28,10 +28,7 @@ const ConstrainedTextContainer = styled.div`
   overflow-wrap: break-word;
   `
       : `overflow-wrap: break-word;
-      white-space: nowrap;`}
-}
-
-;
+      white-space: nowrap;`};
 `;
 const BlockTooltip = styled.div`
   width: stretch;
