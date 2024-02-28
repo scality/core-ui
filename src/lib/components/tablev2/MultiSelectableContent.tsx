@@ -317,7 +317,9 @@ export const MultiSelectableContent = <
             RenderRow={RenderRow}
           />
         ) : (
-          <NoResult>{translations[locale].noResult}</NoResult>
+          <NoResult rowHeight={rowHeight}>
+            {translations[locale].noResult}
+          </NoResult>
         )}
       </TableBody>
       {isLoadingMoreItems && (
