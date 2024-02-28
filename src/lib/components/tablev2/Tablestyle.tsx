@@ -162,12 +162,12 @@ export const TooltipContent = styled.div`
   min-width: 60px;
 `;
 
-export const NoResult = styled.div`
+export const NoResult = styled.div<{ rowHeight: TableHeightKeyType }>`
   display: flex;
   justify-content: center;
   color: ${(props) => props.theme.textSecondary};
+  height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   padding-top: ${spacing.r8};
-  /* border-top: 1px solid ${(props) => props.theme.backgroundLevel3}; */
 `;
 
 export const SortCaret = <
