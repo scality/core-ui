@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -66,6 +66,7 @@ const Wrapper = styled.div<WrapperProps>`
           height: 100%;
           background-color: ${backgroundLevel1};
           z-index: ${zIndex.sidebar};
+          border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
         }
       `;
     }
