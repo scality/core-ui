@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { TableSearch as Search, SearchProps } from './Search';

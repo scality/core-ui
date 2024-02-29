@@ -1,3 +1,4 @@
+import React from 'react';
 import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Icon } from '../icon/Icon.component';
