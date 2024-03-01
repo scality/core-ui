@@ -10,6 +10,7 @@ import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
+import { Box } from '../box/Box';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -162,12 +163,13 @@ export const TooltipContent = styled.div`
   min-width: 60px;
 `;
 
-export const NoResult = styled.div<{ rowHeight: TableHeightKeyType }>`
+export const NoResult = styled(Box)<{ rowHeight: TableHeightKeyType }>`
   display: flex;
   justify-content: center;
+  align-items: center;
   color: ${(props) => props.theme.textSecondary};
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
-  padding-top: ${spacing.r8};
+  gap: ${spacing.r8};
 `;
 
 export const SortCaret = <
