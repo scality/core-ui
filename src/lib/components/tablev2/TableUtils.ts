@@ -63,7 +63,7 @@ type TableMessagesType = 'error' | 'loading' | 'noResult';
 
 export const translatedMessages = (
   type: TableMessagesType,
-  entity:
+  entityName:
     | {
         en: { singular: string; plural: string };
         fr: { singular: string; plural: string };
@@ -74,25 +74,29 @@ export const translatedMessages = (
   if (type === 'error') {
     if (locale === 'fr') {
       return `Erreur lors du chargement des ${
-        entity ? entity.fr.plural : 'données'
+        entityName ? entityName.fr.plural : 'données'
       }, veuillez rafraîchir la page.`;
     }
     return `An error occured while loading ${
-      entity ? ` the ${entity.en.plural}` : 'data'
+      entityName ? ` the ${entityName.en.plural}` : 'data'
     }, please refresh the
     page.`;
   }
   if (type === 'loading') {
     if (locale === 'fr') {
-      return `Chargement des ${entity ? entity[locale].plural : 'données'}...`;
+      return `Chargement des ${
+        entityName ? entityName[locale].plural : 'données'
+      }...`;
     }
-    return `Loading ${entity ? entity.en.plural : 'data'}...`;
+    return `Loading ${entityName ? entityName.en.plural : 'data'}...`;
   }
   if (type === 'noResult') {
     if (locale === 'fr') {
-      return `Aucun ${entity ? entity[locale].singular : 'résultat'} trouvé`;
+      return `Aucun ${
+        entityName ? entityName[locale].singular : 'résultat'
+      } trouvé`;
     }
-    return `No ${entity ? entity.en.plural : 'results'} found`;
+    return `No ${entityName ? entityName.en.plural : 'results'} found`;
   }
 
   return '';

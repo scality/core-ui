@@ -68,7 +68,7 @@ export type TableProps<
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
   status?: 'idle' | 'loading' | 'error' | 'success';
-  entity?: {
+  entityName?: {
     en: { singular: string; plural: string };
     fr: { singular: string; plural: string };
   };
@@ -101,7 +101,7 @@ type TableContextType<
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
   status?: 'idle' | 'loading' | 'error' | 'success';
-  entity?: {
+  entityName?: {
     en: { singular: string; plural: string };
     fr: { singular: string; plural: string };
   };
@@ -179,7 +179,7 @@ function Table<
   initiallySelectedRowsIds,
   updateTableData,
   status,
-  entity,
+  entityName,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -309,7 +309,7 @@ function Table<
     isAllRowsSelected,
     toggleAllRowsSelected,
     status,
-    entity,
+    entityName,
   };
   return (
     <TableContext.Provider
