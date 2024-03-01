@@ -613,7 +613,7 @@ export const ErrorTable = {
           defaultSortingKey={'health'}
           getRowId={getRowId}
           status="error"
-          entity={{
+          entityName={{
             en: { singular: 'user', plural: 'users' },
             fr: { singular: 'utilisateur', plural: 'utilisateurs' },
           }}

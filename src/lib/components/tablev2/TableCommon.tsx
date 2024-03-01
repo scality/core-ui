@@ -129,7 +129,7 @@ export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({ locale, children, customItemKey, RenderRow }: TableRowsProps<DATA_ROW>) {
   const { setHasScrollbar } = useTableScrollbar();
-  const { rows, status, entity, rowHeight, onBottom, onBottomOffset } =
+  const { rows, status, entityName, rowHeight, onBottom, onBottomOffset } =
     useTableContext();
   const { bodyRef } = useSyncedScroll();
 
@@ -146,7 +146,7 @@ export function TableRows<
       <NoResult rowHeight={rowHeight}>
         <Loader />
         <Text color="textSecondary">
-          {translatedMessages('loading', entity, locale)}
+          {translatedMessages('loading', entityName, locale)}
         </Text>
       </NoResult>
     );
@@ -156,7 +156,7 @@ export function TableRows<
       <NoResult rowHeight={rowHeight}>
         <Icon name="Exclamation-circle" color="statusWarning" />
         <Text color="textSecondary">
-          {translatedMessages('error', entity, locale)}
+          {translatedMessages('error', entityName, locale)}
         </Text>
       </NoResult>
     );
@@ -191,7 +191,7 @@ export function TableRows<
     } else {
       return (
         <NoResult rowHeight={rowHeight}>
-          {translatedMessages('noResult', entity, locale)}
+          {translatedMessages('noResult', entityName, locale)}
         </NoResult>
       );
     }
