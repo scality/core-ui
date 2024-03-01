@@ -3,12 +3,10 @@ import React from 'react';
 import {
   AttachmentProvider,
   AttachmentTable,
-  useAttachmentOperations,
 } from '../src/lib/organisms/attachments/AttachmentTable';
 
 import { Box } from '../src/lib/next';
 import { useTheme } from 'styled-components';
-import { CoreUITheme } from '../src/lib/style/theme';
 
 export default {
   title: 'Components/AttachmentTable',
