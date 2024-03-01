@@ -228,6 +228,7 @@ export const SimpleContentTable = {
             data={data}
             defaultSortingKey={'health'}
             getRowId={getRowId}
+            status="loading"
           >
             <Table.MultiSelectableContent
               rowHeight="h40"
@@ -577,5 +578,54 @@ export const EmptyTable = {
         'backgroundLevel4',
       ],
     },
+  },
+};
+
+export const LoadingTable = {
+  render: ({}) => {
+    return (
+      <Box width="500px" height="200px">
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          status="loading"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+          />
+        </Table>
+      </Box>
+    );
+  },
+};
+
+export const ErrorTable = {
+  render: ({}) => {
+    return (
+      <Box width="50rem" height="200px">
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          status="error"
+          entity={{
+            en: { singular: 'user', plural: 'users' },
+            fr: { singular: 'utilisateur', plural: 'utilisateurs' },
+          }}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel4"
+            backgroundVariant="backgroundLevel1"
+            locale="en"
+          />
+        </Table>
+      </Box>
+    );
   },
 };
