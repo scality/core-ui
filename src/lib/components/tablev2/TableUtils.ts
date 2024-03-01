@@ -58,3 +58,42 @@ export const tableRowHeight = {
   h48: '3.428', //2 line
   h64: '4.572', //3 line
 };
+
+type TableMessagesType = 'error' | 'loading' | 'noResult';
+
+export const translatedMessages = (
+  type: TableMessagesType,
+  entity:
+    | {
+        en: { singular: string; plural: string };
+        fr: { singular: string; plural: string };
+      }
+    | undefined,
+  locale?: TableLocalType,
+) => {
+  if (type === 'error') {
+    if (locale === 'fr') {
+      return `Erreur lors du chargement des ${
+        entity ? entity.fr.plural : 'données'
+      }, veuillez rafraîchir la page.`;
+    }
+    return `An error occured while loading ${
+      entity ? ` the ${entity.en.plural}` : 'data'
+    }, please refresh the
+    page.`;
+  }
+  if (type === 'loading') {
+    if (locale === 'fr') {
+      return `Chargement des ${entity ? entity[locale].plural : 'données'}...`;
+    }
+    return `Loading ${entity ? entity.en.plural : 'data'}...`;
+  }
+  if (type === 'noResult') {
+    if (locale === 'fr') {
+      return `Aucun ${entity ? entity[locale].singular : 'résultat'} trouvé`;
+    }
+    return `No ${entity ? entity.en.plural : 'results'} found`;
+  }
+
+  return '';
+};
