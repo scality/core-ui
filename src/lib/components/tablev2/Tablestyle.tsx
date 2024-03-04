@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-
-// import { spacing } from '../../style/theme';
 import {
   TableHeightKeyType,
   tableRowHeight,
@@ -53,6 +51,7 @@ type HeadRowType = {
 export const HeadRow = styled.div<HeadRowType>`
   display: flex;
   align-items: center;
+  gap: ${spacing.r16};
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
@@ -75,6 +74,7 @@ type TableRowType = {
 };
 export const TableRow = styled.div<TableRowType>`
   color: ${(props) => props.theme.textPrimary};
+  gap: ${spacing.r16};
   border-bottom: 1px solid
     ${(props) => props.theme[props.separationLineVariant]};
   cursor: default;
