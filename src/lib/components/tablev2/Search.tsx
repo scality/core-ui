@@ -15,12 +15,6 @@ export type DisplayedName = {
 export type SearchProps = {
   onChange: (arg0: string) => void;
   value?: string;
-  /**
-   * @deprecated
-   * All the Table should display the Total Number of Entity.
-   */
-  displayTotalOf?: boolean;
-  displayedName: DisplayedName;
   locale?: TableLocalType;
   totalCount?: number;
 } & Omit<Props, 'disableToggle' | 'onChange'>;
@@ -72,29 +66,25 @@ export const TableItemCount = ({
 };
 
 export function TableSearch(props: SearchProps) {
+  const { onChange, value = '', locale = 'en', totalCount, ...rest } = props;
   const {
-    onChange,
-    value = '',
-    displayTotalOf = true,
-    displayedName,
-    locale = 'en',
-    totalCount,
-    ...rest
-  } = props;
-  const { setGlobalFilter, rows, preGlobalFilteredRows } = useTableContext();
+    setGlobalFilter,
+    rows,
+    preGlobalFilteredRows,
+    entityName = { en: { singular: 'result', plural: 'results' } },
+  } = useTableContext();
   const totalDispayedRows = totalCount ? totalCount : rows.length;
   React.useEffect(() => {
     setGlobalFilter(value);
   }, [value, setGlobalFilter, preGlobalFilteredRows]);
   return (
     <SearchContainer>
-      {displayTotalOf && (
-        <TableItemCount
-          entity={displayedName}
-          count={totalDispayedRows}
-          locale={locale}
-        ></TableItemCount>
-      )}
+      <TableItemCount
+        entity={entityName[locale] || entityName.en}
+        count={totalDispayedRows}
+        locale={locale}
+      ></TableItemCount>
+
       <SearchInput
         value={value}
         placeholder={translations[locale].search}
@@ -102,7 +92,6 @@ export function TableSearch(props: SearchProps) {
         size="1"
         onChange={(evt) => {
           if (typeof onChange === 'function') {
-            // @ts-ignore
             onChange(evt.target.value);
           }
         }}
