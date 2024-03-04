@@ -70,7 +70,7 @@ export type TableProps<
   status?: 'idle' | 'loading' | 'error' | 'success';
   entityName?: {
     en: { singular: string; plural: string };
-    fr: { singular: string; plural: string };
+    fr?: { singular: string; plural: string };
   };
   initiallySelectedRowsIds?: Set<string | number>;
   //To call it from the Cell renderer to update the original data
@@ -103,7 +103,7 @@ type TableContextType<
   status?: 'idle' | 'loading' | 'error' | 'success';
   entityName?: {
     en: { singular: string; plural: string };
-    fr: { singular: string; plural: string };
+    fr?: { singular: string; plural: string };
   };
 };
 const TableContext = React.createContext<TableContextType | null>(null);
