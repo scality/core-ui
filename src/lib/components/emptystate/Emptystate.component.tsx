@@ -4,23 +4,27 @@ import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
+import { CoreUITheme } from '../../style/theme';
 type Props = {
   listedResource: string;
   icon: IconName;
   link?: string;
   history?: Record<string, any>;
+  backgroundColor?: keyof CoreUITheme;
   /**
    * The resource to create before browsing the listed resource
    * Only used when resource to create is different from listed resource
    */
   resourceToCreate?: string;
-  secondLine?: string;
 };
-const EmptystateContainer = styled.div`
+const EmptystateContainer = styled.div<{ backgroundColor?: keyof CoreUITheme }>`
   ${(props) => {
-    const brand = props.theme;
+    const { theme, backgroundColor } = props;
     return css`
-      color: ${brand.textSecondary};
+      color: ${theme.textSecondary};
+      background-color: ${backgroundColor
+        ? theme[backgroundColor]
+        : 'transparent'};
     `;
   }}
   display: flex;
@@ -39,10 +43,19 @@ export const ActionWrapper = styled.div`
 `;
 
 function EmptyState(props: Props) {
-  const { icon, listedResource, link, history, resourceToCreate, secondLine } =
-    props;
+  const {
+    icon,
+    listedResource,
+    link,
+    history,
+    resourceToCreate,
+    backgroundColor,
+  } = props;
   return (
-    <EmptystateContainer className="sc-emptystate">
+    <EmptystateContainer
+      className="sc-emptystate"
+      backgroundColor={backgroundColor}
+    >
       <EmptyStateRow>
         <Icon name={icon} color="infoPrimary" size="5x" withWrapper />
       </EmptyStateRow>
