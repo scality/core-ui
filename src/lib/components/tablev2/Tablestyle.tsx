@@ -49,14 +49,18 @@ type HeadRowType = {
 };
 
 export const HeadRow = styled.div<HeadRowType>`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: ${spacing.r16};
   height: 2.286rem;
-  width: ${(props) =>
+  width: 100%;
+  // TO DO : check how we want to handle the scrollbar, for now it's on top of the border
+  // this calc doesn't work with the scrollbar and change nothing
+  /* width: ${(props) =>
     props.hasScrollBar
       ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important` // -4px for border
-      : `calc(100% - ${borderSize} ) !important`};
+      : `calc(100% - ${borderSize} ) !important`}; */
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};
@@ -64,6 +68,8 @@ export const HeadRow = styled.div<HeadRowType>`
   overflow: hidden;
   border-bottom: 1px solid
     ${(props) => props.theme[props.separationLineVariant]};
+  padding-right: ${borderSize};
+  padding-left: ${spacing.r16};
 `;
 
 type TableRowType = {
@@ -78,6 +84,8 @@ export const TableRow = styled.div<TableRowType>`
     ${(props) => props.theme[props.separationLineVariant]};
   cursor: default;
   box-sizing: border-box;
+  padding-left: ${spacing.r16};
+  padding-right: ${borderSize};
 
   // single selectable case
   ${(props) => {
@@ -102,10 +110,6 @@ export const TableRow = styled.div<TableRowType>`
         background-color: ${props.theme.highlight};
         border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
-    } else {
-      return css`
-        padding-right: ${borderSize};
-      `;
     }
   }}
 `;
@@ -118,16 +122,7 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
   border-bottom: 1px solid
     ${(props) => props.theme[props.separationLineVariant]};
-
   box-sizing: border-box;
-
-  &:hover,
-  &:focus {
-    background-color: ${(props) => props.theme.highlight};
-    outline: none;
-    cursor: pointer;
-  }
-
   ${(props) => {
     if (props.isSelected) {
       return css`
@@ -136,9 +131,18 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
       `;
     }
   }}
+  padding-right: ${borderSize};
+  padding-left: ${spacing.r16};
+  &:hover,
+  &:focus {
+    background-color: ${(props) => props.theme.highlight};
+    outline: none;
+    cursor: pointer;
+  }
 `;
 
 export const TableBody = styled.div`
+  box-sizing: border-box;
   display: block;
   flex-grow: 1;
   height: 100%;
