@@ -72,7 +72,6 @@ describe('TableV2', () => {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
             />
           </Table>
         </div>
@@ -92,7 +91,6 @@ describe('TableV2', () => {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
             />
           </Table>
         </div>
@@ -117,7 +115,6 @@ describe('TableV2', () => {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
             />
           </Table>
         </div>

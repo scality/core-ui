@@ -70,7 +70,6 @@ type TableRowType = {
   isSelected: boolean;
   selectedId?: string;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
   color: ${(props) => props.theme.textPrimary};
@@ -104,9 +103,8 @@ export const TableRow = styled.div<TableRowType>`
         border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
     } else {
-      const color = props.theme[props.backgroundVariant];
       return css`
-        border-right: ${borderSize} solid ${color};
+        padding-right: ${borderSize};
       `;
     }
   }}
@@ -115,7 +113,6 @@ export const TableRow = styled.div<TableRowType>`
 type TableRowMultiSelectableType = {
   isSelected: boolean;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
@@ -136,11 +133,6 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
       return css`
         background-color: ${(props) => props.theme.highlight};
         border-right: ${borderSize} solid ${props.theme.selectedActive};
-      `;
-    } else {
-      const color = props.theme[props.backgroundVariant];
-      return css`
-        border-right: ${borderSize} solid ${color};
       `;
     }
   }}
