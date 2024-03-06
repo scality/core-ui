@@ -25,7 +25,7 @@ export type SingleSelectableContentProps<
 > = {
   rowHeight: TableHeightKeyType;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
+
   onRowSelected?: (row: Row<DATA_ROW>) => void;
   selectedId?: string;
   locale?: TableLocalType;
@@ -40,7 +40,7 @@ export function SingleSelectableContent<
 >({
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
-  backgroundVariant = 'backgroundLevel1',
+
   locale = 'en',
   selectedId,
   isLoadingMoreItems,
@@ -99,7 +99,6 @@ export function SingleSelectableContent<
         isSelected={selectedId === row.id}
         aria-selected={selectedId === row.id ? 'true' : 'false'}
         separationLineVariant={separationLineVariant}
-        backgroundVariant={backgroundVariant}
         selectedId={selectedId}
         className="tr"
       >

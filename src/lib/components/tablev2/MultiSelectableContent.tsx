@@ -28,7 +28,7 @@ type MultiSelectableContentProps<
   onToggleAll?: (selected: boolean) => void;
   rowHeight?: TableHeightKeyType;
   separationLineVariant?: TableVariantType;
-  backgroundVariant?: TableVariantType;
+
   locale?: TableLocalType;
   customItemKey?: (index: number, data: DATA_ROW) => string;
   hasScrollbar?: boolean;
@@ -44,7 +44,6 @@ type MultiSelectableContentProps<
 //   onMultiSelectionChanged: (rows: Row<ENTRY>[]) => void;
 //   rowHeight?: TableHeightKeyType;
 //   separationLineVariant?: TableVariantType;
-//   backgroundVariant?: TableVariantType;
 //   customItemKey?: (index: Number, data: ENTRY) => string;
 // } & ({
 //   locale: TableLocalType;
@@ -60,7 +59,7 @@ export const MultiSelectableContent = <
   onToggleAll,
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
-  backgroundVariant = 'backgroundLevel1',
+
   locale = 'en',
   customItemKey,
   isLoadingMoreItems,
@@ -147,7 +146,6 @@ export const MultiSelectableContent = <
         {...rowProps}
         isSelected={row.isSelected}
         separationLineVariant={separationLineVariant}
-        backgroundVariant={backgroundVariant}
         className="tr"
       >
         {row.cells.map((cell) => {
