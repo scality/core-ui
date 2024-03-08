@@ -10,7 +10,6 @@ export const useComputeBackgroundColor = () => {
   useEffect(() => {
     containerRef.current &&
       setBackgroundColor(getBackgroundColor(containerRef.current, theme));
-    console.log('containerRef.current', containerRef.current);
   }, [containerRef, theme]);
 
   return {
