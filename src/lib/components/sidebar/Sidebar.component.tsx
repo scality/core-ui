@@ -41,7 +41,6 @@ const Wrapper = styled.div<WrapperProps>`
       }
     `;
   }}
-  margin-top: 1px;
   border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
   ${(props) => {
     if (props.expanded) {
