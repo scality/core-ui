@@ -30,6 +30,7 @@ export type WrapperProps = {
   hovered?: boolean;
 };
 const Wrapper = styled.div<WrapperProps>`
+  margin-top: 1px;
   flex-shrink: 0;
   ${(props) => {
     const { backgroundLevel1, textPrimary } = props.theme;
