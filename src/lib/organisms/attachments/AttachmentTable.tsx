@@ -105,7 +105,7 @@ const MenuContainer = styled.ul<{
 `;
 
 const SearchBoxContainer = styled.div`
-  margin-bottom: ${spacing.r24};
+  padding: ${spacing.r16};
 `;
 
 const StyledSearchInput = styled(SearchInput)`
