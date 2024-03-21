@@ -75,8 +75,8 @@ export const translatedMessages = (
         entityName?.fr?.plural || 'données'
       }, veuillez rafraîchir la page.`;
     }
-    return `An error occured while loading ${
-      entityName ? ` the ${entityName.en.plural}` : 'data'
+    return `An error occurred while loading ${
+      entityName ? `the ${entityName.en.plural}` : 'data'
     }, please refresh the
     page.`;
   }
