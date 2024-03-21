@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { spacing } from '../../style/theme';
+
 import { getThemePropSelector } from '../../utils';
+import { spacing } from '../../spacing';
+
 export const TabBar = styled.div`
   display: flex;
-  height: ${spacing.sp40};
+  height: ${spacing.r40};
 `;
 export const TabItem = styled.div<{
   selected?: boolean;
@@ -14,15 +16,15 @@ export const TabItem = styled.div<{
 }>`
   display: flex;
   align-items: center;
-  padding: 0 ${spacing.sp24} 0 ${spacing.sp24};
-  border-radius: ${spacing.sp4} ${spacing.sp4} 0 0;
-  border: ${spacing.sp1} solid transparent;
+  padding: 0 ${spacing.r24} 0 ${spacing.r24};
+  border-radius: ${spacing.r4} ${spacing.r4} 0 0;
+  border: ${spacing.r1} solid transparent;
   min-width: 5rem;
 
   &:focus-visible {
     outline: 0;
     position: relative;
-    border: ${spacing.sp1} dashed ${getThemePropSelector('selectedActive')};
+    border: ${spacing.r1} dashed ${getThemePropSelector('selectedActive')};
   }
 
   &:focus-within {
@@ -39,19 +41,19 @@ export const TabItem = styled.div<{
           content: "";
           background: ${props.activeTabSeparator || selectedActive};
           position: absolute;
-          border-radius: ${spacing.sp2} ${spacing.sp2} 0 0;
+          border-radius: ${spacing.r2} ${spacing.r2} 0 0;
           bottom: 0;
           right: 0;
-          left: calc(50% - ${spacing.sp16});
-          height: ${spacing.sp2};
-          width: ${spacing.sp32};
+          left: calc(50% - ${spacing.r16});
+          height: ${spacing.r2};
+          width: ${spacing.r32};
         }
       `
       : `
         background-color: ${props.inactiveTabColor || backgroundLevel3};
         &:hover {
           cursor: pointer;
-          border: ${spacing.sp1} solid ${props.tabHoverColor || highlight};
+          border: ${spacing.r1} solid ${props.tabHoverColor || highlight};
         }
       `;
   }}
@@ -73,16 +75,16 @@ export const TabsContainer = styled.div<{
   }
 
   & ${TabItem}::before {
-    content: "";
+    content: '';
     background: ${(props) => props.separatorColor || props.theme.infoSecondary};
     position: absolute;
     bottom: 25%;
     right: 0;
-    height: ${spacing.sp16};
+    height: ${spacing.r16};
     width: 1px;
     margin-right: -1px;
   }
-}`;
+`;
 export const TabContent = styled.div<{ tabContentColor?: string }>`
   margin: 0;
   padding: 0;
