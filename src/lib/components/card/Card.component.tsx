@@ -3,6 +3,7 @@ import { HTMLProps } from 'react';
 import { createContext } from 'react';
 import styled, { css } from 'styled-components';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+import { hex2RGB } from '../../utils';
 const CardContext = createContext(null);
 type CardElementProps = {
   children: React.ReactNode;
@@ -85,9 +86,10 @@ const StyledCard = styled.div<{
   ${StyledCardHeader} {
     color: ${(props) => props.theme.textPrimary};
     background: ${(props) =>
-      props.theme[props.colorStatus || props.headerBackgroundColor]};
-    opacity: ${(props) =>
-      props.colorStatus && props.colorStatus !== 'backgroundLevel4' ? 0.4 : 1};
+      props.colorStatus
+        ? `rgba(${hex2RGB(props.theme[props.colorStatus]).join(',')}, 0.7)`
+        : props.theme[props.headerBackgroundColor]};
+
     ${(props) => props.disabled && 'opacity: 0.3;'}
   }
 
@@ -140,9 +142,8 @@ function Card({
 
   if (status) {
     colorStatus =
-      status === 'healthy'
-        ? 'backgroundLevel4'
-        : 'status' + status.replace(/^\w/, (c) => c.toUpperCase());
+      status != 'healthy' &&
+      'status' + status.replace(/^\w/, (c) => c.toUpperCase());
   }
 
   return (
