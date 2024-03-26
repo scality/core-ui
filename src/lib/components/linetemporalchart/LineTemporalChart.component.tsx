@@ -327,8 +327,7 @@ function LineTemporalChart({
         //https://vega.github.io/vega-lite/docs/datetime.html
       },
       color: {
-        value: theme.highlight,
-        opacity: 0.3,
+        value: theme.selectedActive,
       },
 
       /* 

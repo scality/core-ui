@@ -83,7 +83,7 @@ function VegaChartInternal(
         domainColor: 'transparent',
       },
       title: {
-        color: currentTheme.buttonDelete,
+        color: currentTheme.textPrimary,
         font: 'Lato',
       },
       view: {
