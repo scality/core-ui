@@ -1,12 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getThemePropSelector } from '../src/lib/utils';
 const StyledWrapper = styled.div`
-  padding: 3rem;
-  height: 100%;
-  background-color: ${(props) => props.theme.backgroundLevel1};
-  color: ${(props) => props.theme.textPrimary};
-  box-sizing: border-box;
+  ${(props) => {
+    const { style, theme } = props;
+    return css`
+      padding: 3rem;
+      height: 100%;
+      background-color: ${theme[style?.backgroundColor || 'backgroundLevel3']};
+      color: ${theme.textPrimary};
+      box-sizing: border-box;
+      overflow: scroll;
+    `;
+  }}
 `;
 const StyledTitle = styled.h3`
   color: ${getThemePropSelector('textPrimary')};

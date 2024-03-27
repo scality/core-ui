@@ -5,7 +5,7 @@ import {
   EmptyCell,
   Table,
 } from '../src/lib/components/tablev2/Tablev2.component';
-import { Wrapper, Title } from './common';
+import { Title } from './common';
 import {
   BrowserRouter,
   BrowserRouter as Router,
@@ -65,51 +65,49 @@ type Entry = {
   health: string;
 };
 
+const columns: Column<Entry>[] = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    cellStyle: {
+      textAlign: 'left',
+    },
+    Cell: ({ value }) => {
+      if (value) return <>{value}</>;
+      return <EmptyCell />;
+    },
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    cellStyle: {
+      textAlign: 'left',
+    },
+    // disable the sorting on this column
+    disableSortBy: true,
+  },
+  {
+    Header: 'Age',
+    accessor: 'age',
+    cellStyle: {
+      width: '50px',
+      textAlign: 'left',
+    },
+  },
+  {
+    Header: 'Health',
+    accessor: 'health',
+    sortType: 'health',
+    cellStyle: {
+      textAlign: 'left',
+    },
+  },
+];
+const getRowId = (row: Entry, relativeIndex: number) => {
+  return row.lastName + ' ' + row.firstName;
+};
 export const SimpleContentTable = {
   render: ({}) => {
-    const columns: Column<Entry>[] = [
-      {
-        Header: 'First Name',
-        accessor: 'firstName',
-        cellStyle: {
-          textAlign: 'left',
-        },
-        Cell: ({ value }) => {
-          if (value) return <>{value}</>;
-          return <EmptyCell />;
-        },
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName',
-        cellStyle: {
-          textAlign: 'left',
-        },
-        // disable the sorting on this column
-        disableSortBy: true,
-      },
-      {
-        Header: 'Age',
-        accessor: 'age',
-        cellStyle: {
-          width: '50px',
-          textAlign: 'left',
-        },
-      },
-      {
-        Header: 'Health',
-        accessor: 'health',
-        sortType: 'health',
-        cellStyle: {
-          textAlign: 'left',
-        },
-      },
-    ];
-
-    const getRowId = (row: Entry, relativeIndex: number) => {
-      return row.lastName + ' ' + row.firstName;
-    };
-
     const TableWithQueryParams = ({}) => {
       const location = useLocation();
       return (
@@ -148,7 +146,7 @@ export const SimpleContentTable = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>Non Selectable Table</Title>
         <div
           style={{
@@ -230,6 +228,7 @@ export const SimpleContentTable = {
             data={data}
             defaultSortingKey={'health'}
             getRowId={getRowId}
+            status="loading"
           >
             <Table.MultiSelectableContent
               rowHeight="h40"
@@ -241,7 +240,7 @@ export const SimpleContentTable = {
             />
           </Table>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -320,7 +319,7 @@ export const asyncTable = {
     ];
 
     return (
-      <Wrapper>
+      <>
         <Title>async cell Table</Title>
         <div
           style={{
@@ -347,7 +346,7 @@ export const asyncTable = {
             </Table>
           </BrowserRouter>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -384,7 +383,7 @@ export const OnBottomCallback = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>async cell Table</Title>
         <div
           style={{
@@ -406,7 +405,7 @@ export const OnBottomCallback = {
             />
           </Table>
         </div>
-      </Wrapper>
+      </>
     );
   },
 };
@@ -492,7 +491,7 @@ export const MultiTable = {
     };
 
     return (
-      <Wrapper>
+      <>
         <Title>Several Multiselect</Title>
         <Flex justifyContent="center" gap="2rem">
           <Box width="500px" height="200px">
@@ -546,7 +545,87 @@ export const MultiTable = {
             </Table>
           </Box>
         </Flex>
-      </Wrapper>
+      </>
+    );
+  },
+};
+
+export const EmptyTable = {
+  render: (args) => {
+    const { background } = args;
+    return (
+      <Table columns={columns} data={[]} defaultSortingKey={'firstName'}>
+        <Table.SingleSelectableContent
+          rowHeight="h40"
+          separationLineVariant={background}
+          backgroundVariant="backgroundLevel1"
+          onRowSelected={action('Table Row Clicked')}
+        />
+      </Table>
+    );
+  },
+  argTypes: {
+    background: {
+      control: {
+        type: 'select',
+        description: 'Background color',
+        defaultValue: 'backgroundLevel3',
+      },
+      options: [
+        'backgroundLevel1',
+        'backgroundLevel2',
+        'backgroundLevel3',
+        'backgroundLevel4',
+      ],
+    },
+  },
+};
+
+export const LoadingTable = {
+  render: ({}) => {
+    return (
+      <Box width="500px" height="200px">
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          status="loading"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            backgroundVariant="backgroundLevel1"
+          />
+        </Table>
+      </Box>
+    );
+  },
+};
+
+export const ErrorTable = {
+  render: ({}) => {
+    return (
+      <Box width="50rem" height="200px">
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          status="error"
+          entityName={{
+            en: { singular: 'user', plural: 'users' },
+            fr: { singular: 'utilisateur', plural: 'utilisateurs' },
+          }}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel4"
+            backgroundVariant="backgroundLevel1"
+            locale="en"
+          />
+        </Table>
+      </Box>
     );
   },
 };

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Modal } from '../src/lib/components/modal/Modal.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
@@ -164,7 +163,6 @@ export const WithinTable = {
           <Table.SingleSelectableContent
             rowHeight="h32"
             separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
           />
         </Table>
       </div>

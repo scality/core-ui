@@ -4,17 +4,27 @@ import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
+import { CoreUITheme } from '../../style/theme';
 type Props = {
-  label: string;
+  listedResource: string;
   icon: IconName;
   link?: string;
   history?: Record<string, any>;
+  backgroundColor?: keyof CoreUITheme;
+  /**
+   * The resource to create before browsing the listed resource
+   * Only used when resource to create is different from listed resource
+   */
+  resourceToCreate?: string;
 };
-const EmptystateContainer = styled.div`
+const EmptystateContainer = styled.div<{ backgroundColor?: keyof CoreUITheme }>`
   ${(props) => {
-    const brand = props.theme;
+    const { theme, backgroundColor } = props;
     return css`
-      color: ${brand.textSecondary};
+      color: ${theme.textSecondary};
+      background-color: ${backgroundColor
+        ? theme[backgroundColor]
+        : 'transparent'};
     `;
   }}
   display: flex;
@@ -33,25 +43,36 @@ export const ActionWrapper = styled.div`
 `;
 
 function EmptyState(props: Props) {
-  const { icon, label, link, history } = props;
+  const {
+    icon,
+    listedResource,
+    link,
+    history,
+    resourceToCreate,
+    backgroundColor,
+  } = props;
   return (
-    <EmptystateContainer className="sc-emptystate">
+    <EmptystateContainer
+      className="sc-emptystate"
+      backgroundColor={backgroundColor}
+    >
       <EmptyStateRow>
         <Icon name={icon} color="infoPrimary" size="5x" withWrapper />
       </EmptyStateRow>
       <EmptyStateRow>
-        <LargeText>A list of {`${label}s`} will appear here.</LargeText>
+        <LargeText>{`A list of ${listedResource}s will appear here.`}</LargeText>
       </EmptyStateRow>
       <EmptyStateRow>
         <LargeText>
-          There are no {`${label}s`} created yet, let's create your first{' '}
-          {label}.
+          {!resourceToCreate
+            ? `There are no ${listedResource}s created yet, let's create your first ${listedResource}.`
+            : `Before browsing your ${listedResource}s, create your first ${resourceToCreate}.`}
         </LargeText>
       </EmptyStateRow>
       {history && (
         <ActionWrapper>
           <Button
-            label={`Create ${label}`}
+            label={`Create ${resourceToCreate || listedResource}`}
             icon={<Icon name="Create-add" />}
             type="button"
             variant="primary"

@@ -67,6 +67,11 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
+  status?: 'idle' | 'loading' | 'error' | 'success';
+  entityName?: {
+    en: { singular: string; plural: string };
+    fr?: { singular: string; plural: string };
+  };
   initiallySelectedRowsIds?: Set<string | number>;
   //To call it from the Cell renderer to update the original data
 } & UpdateTableData<DATA_ROW>;
@@ -95,6 +100,11 @@ type TableContextType<
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
+  status?: 'idle' | 'loading' | 'error' | 'success';
+  entityName?: {
+    en: { singular: string; plural: string };
+    fr?: { singular: string; plural: string };
+  };
 };
 const TableContext = React.createContext<TableContextType | null>(null);
 
@@ -168,6 +178,8 @@ function Table<
   onBottomOffset = 10,
   initiallySelectedRowsIds,
   updateTableData,
+  status,
+  entityName,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -296,6 +308,8 @@ function Table<
     setHiddenColumns,
     isAllRowsSelected,
     toggleAllRowsSelected,
+    status,
+    entityName,
   };
   return (
     <TableContext.Provider

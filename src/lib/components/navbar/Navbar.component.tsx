@@ -37,6 +37,7 @@ const NavbarContainer = styled.div`
       color: ${getThemePropSelector('textPrimary')};
     }
     border-bottom: 0.5px solid ${(props) => props.theme.backgroundLevel3};
+    box-sizing: border-box;
   `};
 `;
 const NavbarMenu = styled.div`
