@@ -204,6 +204,7 @@ export const MultiSelectableContent = <
             rowHeight={rowHeight}
             separationLineVariant={separationLineVariant}
             ref={headerRef}
+            style={{ overflow: 'hidden' }}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
