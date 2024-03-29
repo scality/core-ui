@@ -117,6 +117,7 @@ type TableRowMultiSelectableType = {
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
+  gap: ${spacing.r16};
   border-bottom: 1px solid
     ${(props) => props.theme[props.separationLineVariant]};
   box-sizing: border-box;
