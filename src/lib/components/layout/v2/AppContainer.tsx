@@ -53,7 +53,7 @@ const OverallSummaryContainer = styled.div<{
   background?: ThemeColors;
 }>`
   background: ${(props) => props.theme[props.background || 'backgroundLevel2']};
-  height: 6rem;
+  min-height: 6rem;
   padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
   margin-bottom: ${({ noBottomMargin }) =>
     noBottomMargin ? '0' : sectionDistance};
