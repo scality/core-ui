@@ -1,19 +1,38 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import React, { ComponentProps, useEffect, useRef } from 'react';
-import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
+import {
+  Checkbox,
+  Props,
+} from '../../src/lib/components/checkbox/Checkbox.component';
 import { Column } from '../../src/lib/components/tablev2/Tablev2.component';
-import { Box, Table } from '../../src/lib/next';
-import { Wrapper } from '../common';
+import { Box, Input, Table } from '../../src/lib/next';
+import { Form, FormGroup, FormSection } from '../../src/lib';
 
-type CheckboxStory = StoryObj<typeof Checkbox>;
+type CheckboxStory = StoryObj<Props>;
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<Props> = {
   title: 'Components/Inputs/Checkbox',
   component: Checkbox,
   args: {
     label: 'interested ?',
     onChange: action('Checkbox clicked'),
+  },
+  argTypes: {
+    onChange: {
+      description:
+        'Function to be called when the checkbox is clicked, optional',
+    },
+    label: { control: 'text', description: 'Label of the checkbox, optional' },
+    checked: {
+      control: 'boolean',
+      description: 'Control if the checkbox is checked, optional',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Control if the checkbox is disabled, optional',
+    },
+    value: { control: 'text' },
   },
 };
 
@@ -30,6 +49,22 @@ export const ChoiceCheckbox: CheckboxStory = {
         <Checkbox label="Music" />
         <Checkbox label="Drawing" />
       </>
+    );
+  },
+};
+
+export const OptionCheckbox: CheckboxStory = {
+  render: () => {
+    return (
+      <Form layout={{ kind: 'tab' }}>
+        <FormSection>
+          <FormGroup
+            id="check"
+            label="Enable this option ?"
+            content={<Checkbox />}
+          ></FormGroup>
+        </FormSection>
+      </Form>
     );
   },
 };

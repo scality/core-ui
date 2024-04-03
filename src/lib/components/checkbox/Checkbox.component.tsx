@@ -5,7 +5,7 @@ import { spacing, Stack } from '../../spacing';
 import { Text } from '../text/Text.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
-type Props = {
+export type Props = {
   label?: string;
   value?: string;
   checked?: boolean;
@@ -53,6 +53,8 @@ const StyledCheckbox = styled.label<{
     color: ${(props) => props.theme.textPrimary};
     vertical-align: middle;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: none;
     border: 0;
     outline: 0;
