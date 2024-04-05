@@ -6,7 +6,10 @@ import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
 import { CoreUITheme } from '../../style/theme';
 type Props = {
-  listedResource: string;
+  listedResource: {
+    singular: string;
+    plural: string;
+  };
   icon: IconName;
   link?: string;
   history?: Record<string, any>;
@@ -60,19 +63,19 @@ function EmptyState(props: Props) {
         <Icon name={icon} color="infoPrimary" size="5x" withWrapper />
       </EmptyStateRow>
       <EmptyStateRow>
-        <LargeText>{`A list of ${listedResource}s will appear here.`}</LargeText>
+        <LargeText>{`A list of ${listedResource.plural} will appear here.`}</LargeText>
       </EmptyStateRow>
       <EmptyStateRow>
         <LargeText>
           {!resourceToCreate
-            ? `There are no ${listedResource}s created yet, let's create your first ${listedResource}.`
-            : `Before browsing your ${listedResource}s, create your first ${resourceToCreate}.`}
+            ? `There are no ${listedResource.plural} created yet, let's create your first ${listedResource.singular}.`
+            : `Before browsing your ${listedResource.plural}, create your first ${resourceToCreate}.`}
         </LargeText>
       </EmptyStateRow>
       {history && (
         <ActionWrapper>
           <Button
-            label={`Create ${resourceToCreate || listedResource}`}
+            label={`Create ${resourceToCreate || listedResource.singular}`}
             icon={<Icon name="Create-add" />}
             type="button"
             variant="primary"
