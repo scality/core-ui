@@ -54,13 +54,10 @@ export const HeadRow = styled.div<HeadRowType>`
   align-items: center;
   gap: ${spacing.r16};
   height: 2.286rem;
-  width: 100%;
-  // TO DO : check how we want to handle the scrollbar, for now it's on top of the border
-  // this calc doesn't work with the scrollbar and change nothing
-  /* width: ${(props) =>
+  width: ${(props) =>
     props.hasScrollBar
       ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important` // -4px for border
-      : `calc(100% - ${borderSize} ) !important`}; */
+      : `calc(100% - ${borderSize} ) !important`};
   height: ${(props) => tableRowHeight[props.rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};
