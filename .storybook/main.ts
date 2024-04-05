@@ -1,6 +1,9 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 const config: StorybookConfig = {
-  stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))'],
+  stories: [
+    '../stories/**/*.@(mdx|stories.@(ts|tsx))',
+    '../stories/***/**/*.@(mdx|stories.@(ts|tsx))',
+  ],
   staticDirs: ['./public'],
   addons: [
     '@storybook/addon-essentials',
@@ -8,7 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-mdx-gfm',
   ],
 
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     // Resolve error when webpack-ing storybook:
     // Can't import the named export 'Children' from non EcmaScript module (only
     // default export is available)
