@@ -39,6 +39,7 @@ const Circle = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+  line-height: 30px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -74,14 +75,15 @@ const Circle = styled.div<{
   }};
 `;
 const StepHeader = styled.span<{ active?: boolean }>`
-  padding: 8px;
+  margin-left: ${spacing.r8};
+  line-height: 30px;
   color: ${(props) =>
     props.active
       ? getThemePropSelector('textPrimary')
       : getThemePropSelector('textSecondary')};
 `;
 const StepContent = styled.div`
-  padding: ${spacing.r8};
+  padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r8};
 `;
 const BottomBar = styled.hr<{ completed?: boolean }>`
   flex-grow: 1;
@@ -128,7 +130,15 @@ function Step(props: StepProps) {
         {!isLast && <BottomBar completed={completed} />}
       </Panel>
       <Panel>
-        <StepHeader active={active}>{title}</StepHeader>
+        <div
+          style={{
+            height: '30px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <StepHeader active={active}>{title}</StepHeader>
+        </div>
         {active && <StepContent>{content}</StepContent>}
       </Panel>
     </StepContainer>
