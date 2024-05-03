@@ -1,8 +1,7 @@
 import { Bar, BarChart, XAxis, YAxis, Tooltip } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
-import './ghbstyle.css';
-import { Stack, Wrap, spacing } from '../../spacing';
+import { Wrap, spacing } from '../../spacing';
 
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import {
@@ -11,8 +10,6 @@ import {
   TIME_FORMATER,
 } from '../date/FormattedDateTime';
 import { useHistoryAlert } from './HistoryProvider';
-
-import { Text } from '../text/Text.component';
 
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
