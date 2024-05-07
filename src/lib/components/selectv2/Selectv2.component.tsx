@@ -79,12 +79,7 @@ export function Option({
 }
 
 const Input = (props) => {
-  const ariaProps = {
-    role: props.selectProps.isSearchable ? 'combobox' : 'listbox',
-    'aria-expanded': props.selectProps.menuIsOpen,
-    'aria-autocomplete': 'list',
-  };
-  return <components.Input {...props} {...ariaProps} />;
+  return <components.Input {...props} />;
 };
 
 const selectDropdownIndicator = (
@@ -285,8 +280,17 @@ const MenuList = (props) => {
 const ValueContainer = ({ children, ...props }) => {
   const selectedOption = props.selectProps.selectedOption;
   const icon = selectedOption ? selectedOption.icon : null;
+  const ariaProps = {
+    innerProps: {
+      role: props.selectProps.isSearchable ? 'combobox' : 'listbox',
+      'aria-expanded': props.selectProps.menuIsOpen,
+      'aria-autocomplete': 'list',
+      'aria-label': props.selectProps.placeholder,
+    },
+  };
+
   return (
-    <components.ValueContainer {...props}>
+    <components.ValueContainer {...props} {...ariaProps}>
       {icon ? <div className="value-container-icon">{icon}</div> : null}
       <div>{children}</div>
     </components.ValueContainer>
