@@ -1,11 +1,16 @@
-import { Select, Option } from '../selectv2/Selectv2.component';
-import React, { useState } from 'react';
-import { render as testingRender } from '@testing-library/react';
+import {
+  screen,
+  render as testingRender,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Icon } from '../icon/Icon.component';
+import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { debug } from 'jest-preview';
+import { Icon } from '../icon/Icon.component';
+import { Option, Select } from '../selectv2/Selectv2.component';
 
-const render = (...args) => {
+const render = (args) => {
   return testingRender(
     <QueryClientProvider client={new QueryClient()}>
       {args}
@@ -273,5 +278,188 @@ describe('SelectV2', () => {
       </Select>,
     );
     expect(onChange).toBeCalledTimes(0);
+  });
+
+  it('should select with the right selector', async () => {
+    const accounts = [
+      {
+        name: 'Account 1',
+      },
+      {
+        name: 'Account 2',
+      },
+    ];
+
+    const MyWrapper = () => {
+      const [value, setValue] = useState('');
+      return (
+        <Select
+          id="select-account"
+          value={value}
+          onChange={(accountName) => {
+            setValue(accountName);
+          }}
+          size="1/2"
+          placeholder="Select Account"
+        >
+          {accounts.map((account) => (
+            <Select.Option key={`${account.name}`} value={account.name}>
+              {account.name}
+            </Select.Option>
+          ))}
+        </Select>
+      );
+    };
+
+    render(<MyWrapper />);
+
+    // If you only have one select, you can use the role, otherwise, you should use the label
+    // screen.getByLabelText(/select account/i)
+    // In a normal select, we should have a label span attach to it.
+    // It's not our case here, so it makes thing difficult to select the right select
+    // I workaround this by using setting the aria-label to the select container (cf: test below)
+    const singleSelect = screen.getByRole('listbox');
+    await userEvent.click(singleSelect);
+
+    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+  });
+
+  it('should be testable if we have several select', async () => {
+    const MyWrapperWith2Select = () => {
+      const [value, setValue] = useState('');
+      const [value2, setValue2] = useState('');
+      const accounts = [
+        {
+          name: 'Account 1',
+        },
+        {
+          name: 'Account 2',
+        },
+      ];
+      const users = [
+        {
+          name: 'User 1',
+        },
+        {
+          name: 'User 2',
+        },
+      ];
+      return (
+        <div>
+          <Select
+            id="select-account"
+            value={value}
+            onChange={(accountName) => {
+              setValue(accountName);
+            }}
+            size="1/2"
+            placeholder="Select Account"
+          >
+            {accounts.map((account) => (
+              <Select.Option key={`${account.name}`} value={account.name}>
+                {account.name}
+              </Select.Option>
+            ))}
+          </Select>
+          <Select
+            id="select-user"
+            value={value2}
+            onChange={(accountName) => {
+              setValue2(accountName);
+            }}
+            size="1/2"
+            placeholder="Select User"
+          >
+            {users.map((user) => (
+              <Select.Option key={`${user.name}`} value={user.name}>
+                {user.name}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+      );
+    };
+
+    render(<MyWrapperWith2Select />);
+
+    await userEvent.click(screen.getByLabelText(/select account/i));
+
+    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+
+    await userEvent.click(screen.getByLabelText(/select user/i));
+
+    await userEvent.click(screen.getByRole('option', { name: /user 1/i }));
+  });
+
+  it('should be testable even if we have several select with the same value, the placeholder should be different', async () => {
+    const MyWrapperWith2Select = () => {
+      const [value, setValue] = useState('');
+      const [value2, setValue2] = useState('');
+      const accounts = [
+        {
+          name: 'Account 1',
+        },
+        {
+          name: 'Account 2',
+        },
+      ];
+      const accounts2 = [
+        {
+          name: 'Account 1',
+        },
+        {
+          name: 'Account 2',
+        },
+      ];
+      return (
+        <div style={{ display: 'flex' }}>
+          <Select
+            id="select-account"
+            value={value}
+            onChange={(accountName) => {
+              setValue(accountName);
+            }}
+            size="1/2"
+            placeholder="Select Account"
+          >
+            {accounts.map((account) => (
+              <Select.Option key={`${account.name}`} value={account.name}>
+                {account.name}
+              </Select.Option>
+            ))}
+          </Select>
+          <Select
+            id="select-account2"
+            value={value2}
+            onChange={(accountName) => {
+              setValue2(accountName);
+            }}
+            size="1"
+            placeholder="Select Second Account"
+          >
+            {accounts2.map((user) => (
+              <Select.Option key={`${user.name}`} value={user.name}>
+                {user.name}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+      );
+    };
+
+    render(<MyWrapperWith2Select />);
+
+    await userEvent.click(screen.getByLabelText(/select account/i));
+    await userEvent.click(screen.getByLabelText(/Select Second Account/i));
+
+    /**
+     * This is possible because only 1 select can be open at a time
+     * If for some reason, you have multiple select open at the same time, you can select the select by its label
+     * and check the option from it parent like this :
+     * const select = screen.getByLabelText(/select account/i);
+     * const selectContainer = select?.parentElement?.parentElement;
+     * const option = within(selectContainer).getByRole('option', { name: /account 1/i });
+     */
+    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
   });
 });

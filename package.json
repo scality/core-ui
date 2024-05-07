@@ -18,7 +18,8 @@
     "test": "jest",
     "storybook": "storybook dev -p 3000",
     "build-storybook": "storybook build",
-    "storybook:deploy": "storybook-to-ghpages"
+    "storybook:deploy": "storybook-to-ghpages",
+    "preview": "jest-preview"
   },
   "keywords": [],
   "browserslist": [
@@ -71,6 +72,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-canvas-mock": "^2.3.1",
+    "jest-preview": "^0.3.1",
     "plop": "^2.4.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.0",
@@ -101,10 +103,10 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@js-temporal/polyfill": "^0.4.4",
     "@storybook/preview-api": "^7.6.17",
+    "downshift": "^7.0.5",
     "framer-motion": "^4.1.17",
     "polished": "3.4.1",
     "pretty-bytes": "^5.6.0",
-    "downshift": "^7.0.5",
     "react": "^17.0.2",
     "react-debounce-input": "3.2.2",
     "react-dom": "^17.0.2",
