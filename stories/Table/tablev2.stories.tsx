@@ -6,21 +6,13 @@ import {
   Table,
   TableProps,
 } from '../../src/lib/components/tablev2/Tablev2.component';
-import { Title } from '../common';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CellProps, Row } from 'react-table';
 import { Box, Button } from '../../src/lib/next';
-
 import { Stack, Wrap } from '../../src/lib';
-import {
-  SingleSelectableContentProps,
-  SingleSelectableContent,
-} from '../../src/lib/components/tablev2/SingleSelectableContent';
+import { SingleSelectableContentProps } from '../../src/lib/components/tablev2/SingleSelectableContent';
 import { useArgs } from '@storybook/preview-api';
 import styled from 'styled-components';
-import { SearchWithQueryParams } from '../../src/lib/components/tablev2/SearchWithQueryParams';
-import { MultiSelectableContent } from '../../src/lib/components/tablev2/MultiSelectableContent';
-import { TableSearch } from '../../src/lib/components/tablev2/Search';
 
 const StyledBox = styled(Box)`
   height: 150px;
@@ -287,6 +279,7 @@ export const TableWithSearchQueryParams: Story = {
 
 export const TableWithEntityName: Story = {
   render: (args) => {
+    const [{ selectedId }, updateArgs] = useArgs();
     return (
       <Table
         columns={columns}
@@ -302,6 +295,11 @@ export const TableWithEntityName: Story = {
           locale={args.locale}
           rowHeight="h40"
           separationLineVariant="backgroundLevel3"
+          selectedId={selectedId}
+          onRowSelected={(row) => {
+            action('Table Row Clicked')(row);
+            updateArgs({ selectedId: row.id });
+          }}
         />
       </Table>
     );
@@ -466,6 +464,8 @@ export const MultiSelectTable = {
     );
   },
 };
+
+/* ---------------------------- Multi Table --------------------------- */
 
 export const MultiTable: Story = {
   render: () => {
