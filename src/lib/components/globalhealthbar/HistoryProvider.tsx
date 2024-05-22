@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 type HistoryAlertContextType = {
-  selectedDate: number | undefined;
+  selectedDate: number;
   setSelectedDate: (date: number) => void;
 };
 export const HistoryAlertContext = createContext<
@@ -9,9 +9,7 @@ export const HistoryAlertContext = createContext<
 >(undefined);
 
 export const HistoryAlertProvider = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState<number | undefined>(
-    undefined,
-  );
+  const [selectedDate, setSelectedDate] = useState<number>(0);
   return (
     <HistoryAlertContext.Provider value={{ selectedDate, setSelectedDate }}>
       {children}
