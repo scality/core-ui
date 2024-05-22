@@ -10,7 +10,6 @@ import {
 } from '../../src/lib/components/globalhealthbar/HistoryProvider';
 import {
   DATE_FORMATER,
-  TIME_FORMATER,
   TIME_SECOND_FORMATER,
 } from '../../src/lib/components/date/FormattedDateTime';
 
@@ -23,7 +22,11 @@ const meta: Meta<GlobalHealthProps> = {
 export default meta;
 
 const start = '2021-01-31T23:00:00Z'; // UTC time
-const start2 = '2021-01-31T23:00:00';
+const start2 = '2021-01-30T23:00:00';
+const startLast24h = '2021-02-01T00:00:00';
+const endLast24h = '2021-02-02T00:00:00';
+const startLastHour = '2021-02-01T00:00:00';
+const endLastHour = '2021-02-01T01:00:00';
 const end2 = '2021-02-06T23:00:00';
 const end = '2021-02-06T23:00:00Z';
 const alerts = [
@@ -31,14 +34,14 @@ const alerts = [
     id: '1',
     severity: 'warning',
     startsAt: '2021-02-01T07:00:00Z',
-    endsAt: '2021-02-01T21:00:00Z',
+    endsAt: '2021-02-02T01:00:00Z',
     description: 'Global health warning',
   },
   {
     id: '2',
     severity: 'warning',
     startsAt: '2021-02-01T23:00:00Z',
-    endsAt: '2021-02-02T23:00:00Z',
+    endsAt: '2021-02-02T22:00:00Z',
     description: 'Global health warning',
   },
   {
@@ -62,6 +65,13 @@ const alerts = [
     endsAt: '2021-02-07T00:00:00Z',
     description: 'Global health warning',
   },
+  {
+    id: '6',
+    severity: 'warning',
+    startsAt: '2021-01-30T23:40:00Z',
+    endsAt: '2021-01-31T23:59:00Z',
+    description: 'Global health warning',
+  },
 ];
 
 export const Default: Story = {
@@ -72,7 +82,7 @@ export const Default: Story = {
   },
 };
 
-const InputDate = () => {
+const InputDate = ({ start, end }) => {
   const history = useHistoryAlert();
   if (history.selectedDate !== null) {
     const handleChange = (e) => {
@@ -81,8 +91,8 @@ const InputDate = () => {
 
     return (
       <input
-        min={start2}
-        max={end2}
+        min={start}
+        max={end}
         type="datetime-local"
         value={
           DATE_FORMATER.format(history.selectedDate) +
@@ -97,13 +107,63 @@ const InputDate = () => {
   return <></>;
 };
 
-export const WithSelectedDate: Story = {
+export const WithSelectedDate24h: Story = {
   render: () => {
     return (
-      <HistoryAlertProvider>
-        <GlobalHealthBar start={start} end={end} alerts={alerts} id="1" />
-        <InputDate />
-      </HistoryAlertProvider>
+      <>
+        <HistoryAlertProvider>
+          <GlobalHealthBar
+            start={startLast24h}
+            end={endLast24h}
+            alerts={alerts}
+            id="1"
+          />
+          <InputDate start={startLast24h} end={endLast24h} />
+        </HistoryAlertProvider>
+        <GlobalHealthBar
+          start={startLast24h}
+          end={endLast24h}
+          alerts={alerts}
+          id="2"
+        />
+      </>
+    );
+  },
+};
+export const WithSelectedDateWeek: Story = {
+  render: () => {
+    return (
+      <>
+        <HistoryAlertProvider>
+          <GlobalHealthBar start={start2} end={end2} alerts={alerts} id="1" />
+          <InputDate start={start2} end={end2} />
+        </HistoryAlertProvider>
+        <GlobalHealthBar start={start2} end={end2} alerts={alerts} id="2" />
+      </>
+    );
+  },
+};
+
+export const WithSelectedDateHour: Story = {
+  render: () => {
+    return (
+      <>
+        <HistoryAlertProvider>
+          <GlobalHealthBar
+            start={startLastHour}
+            end={endLastHour}
+            alerts={alerts}
+            id="1"
+          />
+          <InputDate start={startLastHour} end={endLastHour} />
+        </HistoryAlertProvider>
+        <GlobalHealthBar
+          start={startLastHour}
+          end={endLastHour}
+          alerts={alerts}
+          id="2"
+        />
+      </>
     );
   },
 };
