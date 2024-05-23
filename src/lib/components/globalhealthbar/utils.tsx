@@ -12,12 +12,11 @@ const oneDay = 24 * oneHour;
 export const setHistoryTooltipPosition = (
   startDate: number,
   endDate: number,
-  popover: HTMLDivElement,
-  selectedDate: number | null,
-): string => {
-  if (selectedDate && popover) {
+  selectedDate: number | undefined,
+): string | null => {
+  if (selectedDate) {
     const width = ((selectedDate - startDate) / (endDate - startDate)) * 600;
-    const leftPosition = width - popover.offsetWidth / 2;
+    const leftPosition = width - 132 / 2;
     return `auto auto -4px ${leftPosition}px`;
   }
   return 'auto';

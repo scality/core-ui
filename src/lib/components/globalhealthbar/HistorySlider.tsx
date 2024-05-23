@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import { FormattedDateTime, Icon, spacing } from '../../index';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
@@ -23,9 +22,7 @@ const StyledRange = styled.input`
   position: absolute;
   z-index: 10;
   height: 16px;
-  :focus-visible::-webkit-slider-thumb {
-    ${FocusVisibleStyle}
-  }
+
   /*==============================*/
   /* cursor                       */
   /*==============================*/
@@ -45,6 +42,12 @@ const StyledRange = styled.input`
     background-color: ${(props) => props.theme.selectedActive};
     border: none;
   }
+  :focus-visible::-webkit-slider-thumb {
+    ${FocusVisibleStyle}
+  }
+  :focus-visible::-moz-range-thumb {
+    ${FocusVisibleStyle}
+  }
 `;
 
 const HistoryContainer = styled.div`
@@ -52,9 +55,9 @@ const HistoryContainer = styled.div`
   position: relative;
 `;
 
-const HistoryTooltipContainer = styled.div<{ inset: string }>`
+const HistoryTooltipContainer = styled.div<{ inset }>`
   position: absolute;
-  display: flex;
+  display: ${(props) => (props.inset ? 'flex' : 'none')};
   inset: ${(props) => props.inset};
   align-items: center;
   flex-direction: column;
@@ -68,38 +71,47 @@ const HistoryTooltip = styled.div`
       padding: ${spacing.r4} ${spacing.r8};
       white-space: 'nowrap';
       border: 1px solid ${theme.border};
-      border-radius: '4px';
+      border-radius: 4px;
+      width: 116px;
       color: ${theme.textSecondary};
     `;
   }}
 `;
+type HistorySliderProps = {
+  start: string;
+  end: string;
+  startDate: number;
+  endDate: number;
+};
 
-export const HistoryAlertSlider = ({ start, end, startDate, endDate }) => {
+export const HistoryAlertSlider = ({
+  start,
+  end,
+  startDate,
+  endDate,
+}: HistorySliderProps) => {
   const history = useHistoryAlert();
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const [tooltipPosition, setTooltipPosition] = useState('auto');
-  useEffect(() => {
-    if (popoverRef.current) {
-      setTooltipPosition(
-        setHistoryTooltipPosition(
-          startDate,
-          endDate,
-          popoverRef.current,
-          history.selectedDate,
-        ),
-      );
-    }
-  }, [history.selectedDate, startDate, endDate, popoverRef.current]);
 
-  if (!history.selectedDate) {
+  if (history.selectedDate === null) {
     return null;
   }
+  // check in 1hour range : bug with input date going from 1:00 to 0:00
+  if (history.selectedDate > endDate) {
+    history.setSelectedDate(endDate);
+  }
+  if (history.selectedDate < startDate) {
+    history.setSelectedDate(startDate);
+  }
+
   return (
     <HistoryContainer id="history-slider">
       <HistoryTooltipContainer
         id="history-tooltip"
-        ref={popoverRef}
-        inset={tooltipPosition}
+        inset={setHistoryTooltipPosition(
+          startDate,
+          endDate,
+          history.selectedDate,
+        )}
       >
         <HistoryTooltip>
           <FormattedDateTime
@@ -119,10 +131,6 @@ export const HistoryAlertSlider = ({ start, end, startDate, endDate }) => {
         step={getStep(startDate, endDate)}
         value={history.selectedDate}
         onChange={(e) => {
-          if (e.target.valueAsNumber > endDate)
-            history.setSelectedDate(endDate);
-          if (e.target.valueAsNumber < startDate)
-            history.setSelectedDate(startDate);
           history.setSelectedDate(+e.target.value);
         }}
       />

@@ -81,7 +81,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       style={{
         padding: 60,
         position: 'relative',
-        width: barWidth,
+        width: '100%',
       }}
     >
       <HistoryAlertSlider
