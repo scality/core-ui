@@ -3,6 +3,7 @@ import { FormattedDateTime, Icon, spacing } from '../../index';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { useHistoryAlert } from './HistoryProvider';
 import { getStep, setHistoryTooltipPosition } from './utils';
+import { useEffect } from 'react';
 
 const StyledRange = styled.input`
   width: 600px;
@@ -92,15 +93,20 @@ export const HistoryAlertSlider = ({
 }: HistorySliderProps) => {
   const history = useHistoryAlert();
 
+  // check in 1hour range : bug with input date going from 1:00 to 0:00
+  useEffect(() => {
+    if (history.selectedDate != null) {
+      if (history.selectedDate > endDate) {
+        history.setSelectedDate(endDate);
+      }
+      if (history.selectedDate < startDate) {
+        history.setSelectedDate(startDate);
+      }
+    }
+  }, [history.selectedDate, startDate, endDate]);
+
   if (history.selectedDate === null) {
     return null;
-  }
-  // check in 1hour range : bug with input date going from 1:00 to 0:00
-  if (history.selectedDate > endDate) {
-    history.setSelectedDate(endDate);
-  }
-  if (history.selectedDate < startDate) {
-    history.setSelectedDate(startDate);
   }
 
   return (
