@@ -9,7 +9,7 @@ export const HistoryAlertContext = createContext<
 >(undefined);
 
 export const HistoryAlertProvider = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState<number>(0);
+  const [selectedDate, setSelectedDate] = useState<number>(Date.now());
   return (
     <HistoryAlertContext.Provider value={{ selectedDate, setSelectedDate }}>
       {children}
