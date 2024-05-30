@@ -165,6 +165,7 @@ function Toast({
             icon={<Icon name="Close" size="lg" color="textSecondary" />}
             onClick={params?.onClose}
             aria-label="Close"
+            tooltip={{ overlay: 'Close', placement: 'top' }}
           />
         </Box>
       </motion.div>
