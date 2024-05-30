@@ -1,0 +1,121 @@
+# useMutationsHandler
+
+The `useMutationsHandler` hook is a powerful utility designed to manage and handle the results of multiple mutations using `react-query`.
+It provides a unified way to handle success and error states, display toast notifications,
+and manage side effects after mutation completions.
+
+## Usage
+
+```jsx
+import { useMutationsHandler } from '@scality/core-ui';
+import { Button } from '@scality/core-ui/dist/next';
+import { useMutation } from 'react-query';
+
+function useMainMutation() {
+  return useMutation({
+    mutationFn: () => {
+      return Promise.resolve('mainMutation');
+    },
+  });
+}
+
+function useDependantMutation() {
+  return useMutation({
+    mutationFn: () => {
+      return Promise.resolve('dependantMutation');
+    },
+  });
+}
+
+export const ExampleComponent = () => {
+  const useMainM = useMainMutation();
+  const useDependantM = useDependantMutation();
+  const { mutate: mainMutate } = useMainM;
+  const { mutate: dependantMutate } = useDependantM;
+
+  const mainMutation = {
+    mutation: useMainM,
+    name: 'mainMutation',
+  };
+
+  const dependantMutations = [
+    {
+      mutation: useDependantM,
+      name: 'depandantMutation',
+    },
+  ];
+
+  useMutationsHandler({
+    mainMutation,
+    dependantMutations,
+    messageDescriptionBuilder: (mutations) => {
+      const mutationsStatus = mutations.map(({ status }) => status);
+      const mutationsAllSuccess = mutationsStatus.every(
+        (status) => status === 'success',
+      );
+
+      if (mutationsAllSuccess) {
+        return `All mutations were successful`;
+      } else {
+        return `Some mutations failed`;
+      }
+    },
+    onAllMutationsSuccess: () => {
+      // do something after success of all mutations
+    },
+  });
+
+  const handleClick = () => {
+    mainMutate(null, {
+      onSuccess: () => dependantMutate(),
+    });
+  };
+
+  return (
+    <Button label={'Click me'} onClick={() => handleClick()} type="button" />
+  );
+};
+```
+
+## Props
+
+### `mainMutation`
+
+- Type: MutationConfig
+- Description: The primary mutation that needs to be executed and monitored
+
+For more information on useMutation, see [here](https://tanstack.com/query/latest/docs/framework/react/reference/useMutation)
+
+### `messageDescriptionBuilder`
+
+- Type: () => React Node
+- Description: Define the element that will be rendered inside the toast
+
+### `dependentMutations`
+
+- Type: MutationConfig[]
+- Description: The secondary mutations that need to be executed and monitored after the success of the main mutation
+- Optional
+
+### `toastProps`
+
+- Type: Pick<
+  ToastContextState,
+  'style' | 'autoDismiss' | 'position' | 'duration' | 'withProgressBar'
+  >
+- Description: Props from the `Toast` component, allow the customization of the toast displayed by `useMutationsHandler`
+- Optional
+
+For more information on toastProps, see [here](?path=/docs/components-feedback-toast--stories)
+
+### onMainMutationSuccess
+
+- Type: () => void
+- Description: The callback to call after the main mutation succeeded
+- Optional
+
+### onAllMutationsSuccess
+
+- Type: () => void
+- Description: The callback to call after all the mutations succeeded
+- Optional
