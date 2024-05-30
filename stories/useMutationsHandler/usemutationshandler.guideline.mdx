@@ -1,0 +1,156 @@
+import * as Stories from './usemutationshandler.stories';
+import { Meta, Controls, Story, Canvas, Source } from '@storybook/blocks';
+
+<Meta name="Guideline" of={Stories} />
+
+# useMutationsHandler
+
+useMutationsHandler is a hook to simplify the handling of mutations and the display of feedback to the user.
+It provide a way to define a callback to call on success and a toast to display after the fail or success of a mutation.
+It also allows to define a single toast and callback for multiple related mutations instead of managing each mutation individually.
+
+## Properties
+
+<Controls of={Stories.Default} />
+
+## Required properties
+
+Only two properties are required to use this hook : mainMutation ans messageDescriptionBuilder.
+Like all other hook, it should be called at the top of your component.
+
+### mainMutation
+
+The mainMutation object contains two properties : name and mutation.
+
+mutation is the call of useMutation hook from react-query, see here from more information about this hook.
+The result should at least contain these properties from the hook :
+
+- data: data returned on success
+- error: error message on error
+- isError: boolean;
+- isIdle: boolean;
+- isLoading: boolean;
+- isSuccess: boolean;
+
+### messageDescriptionBuilder
+
+The messageDescriptionBuilder takes as parameters an array of mutations and returns a React Node.
+This array is composed of objects derived from mainMutation result and the eventual result of the mutations from dependentMutation array.
+
+This allows the rendering of a single message on success or failure, even when there are multiple mutations.
+As the return type is a React node it is possible to display simple message as well as more complex and detailed message.
+
+### Minimal Example
+
+```jsx
+const mainMutation = useMutation({});
+useMutationsHandler({
+  mainMutation: {
+    mutation: mainMutation,
+    name: 'Main Mutation',
+  },
+  messageDescriptionBuilder: (mutations) => {
+    const mutationsStatus = mutations.map(({ status }) => status);
+    const mutationsAllSuccess = mutationsStatus.every(
+      (status) => status === 'success',
+    );
+    if (mutationsAllSuccess) {
+      return `All mutations were successful`;
+    } else {
+      return `One or more mutations failed`;
+    }
+  },
+});
+```
+
+It is then possible to call the mutation with :
+
+```jsx
+const { mutate } = mainMutation;
+const handleClick = () => {
+  mutate();
+};
+```
+
+Click on the button below to see the hook in action:
+
+<Canvas of={Stories.MainMutationSuccess} sourceState={'none'} />
+
+## Optional properties
+
+### dependentMutations
+
+The dependent mutations is an optional property containing an array of mutations that should be called
+only after the main mutation succeed.
+The type of the mutation is the same as mainMutation.
+
+<details>
+  <summary>Show example :</summary>
+
+<Canvas of={Stories.CustomMessageDescriptionBuilder} sourceState={'none'} />
+
+```jsx
+useMutationsHandler({
+  mainMutation: { mutation: mainMutation, name: 'Main Mutation' },
+  dependantMutations,
+  messageDescriptionBuilder: (mutations) => {
+    console.log('mutations', mutations);
+
+    const mutationsStatus = mutations.map(({ status }) => status);
+    const mutationsAllSuccess = mutationsStatus.every(
+      (status) => status === 'success',
+    );
+
+    if (mutationsAllSuccess) {
+      return `All mutations were successful`;
+    } else {
+      const failedMutations = mutations.filter(
+        (mutation) => mutation.status === 'error',
+      );
+      return (
+        <div style={{ padding: spacing.r8 }}>
+          You can adapt this text to provide more info to the user <br />
+          For example with a list of the failed mutations:
+          <ul>
+            {failedMutations.map((mutation) => (
+              <li key={mutation.name}>
+                {mutation.name} failed: {mutation.error}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  },
+  toastProps: {
+    style: { width: '40rem' },
+  },
+});
+```
+
+</details>
+
+### Toast props
+
+The toastProps parameter is an object containing a selection of Toast props (for more info on Toast component, see [here](?path=/docs/components-feedback-toast--stories)).
+This allows the customization of the toast properties :
+
+<Canvas of={Stories.CustomToastStyle} sourceState="none" />
+<Controls of={Stories.CustomToastStyle} />
+
+### Callbacks
+
+There are 2 possible callbacks for the useMutationshandlers hook : onMainMutationSuccess and onAllMutationSuccess.
+It is not possible to call both, only one callback should be chosen depending on the wanted behaviour.
+
+```jsx
+onMainMutationSuccess: () => {
+  // your code here
+};
+```
+
+```jsx
+onAllMutationsSuccess: () => {
+  // your code here
+};
+```

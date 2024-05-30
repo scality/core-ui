@@ -86,7 +86,7 @@ type Props<MainMutationType, T extends any[]> = {
   | { onAllMutationsSuccess?: () => void; onMainMutationSuccess?: never }
 );
 
-type MinimalMutationResult<TData, TError> = Pick<
+export type MinimalMutationResult<TData, TError> = Pick<
   UseMutationResult<TData, TError, unknown, unknown>,
   'isError' | 'isIdle' | 'isSuccess' | 'isLoading' | 'error' | 'data'
 >;
