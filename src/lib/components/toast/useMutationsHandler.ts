@@ -122,7 +122,9 @@ export const useMutationsHandler = <
 
     const mainMutationDesc: GetDescriptionBuilder<MainMutationType> = {
       data: mainMutation.mutation?.data,
-      status: DescriptionBuilderStatus.Success,
+      status: mainMutation.mutation?.isSuccess
+        ? DescriptionBuilderStatus.Success
+        : DescriptionBuilderStatus.Error,
       name: mainMutation.name,
     } as GetDescriptionBuilder<MainMutationType>;
     const descriptionBuilders = [
