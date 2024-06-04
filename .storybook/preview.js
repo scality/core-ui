@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
 import { brand, coreUIAvailableThemes } from '../src/lib/style/theme';
 import { Wrapper } from '../stories/common';
-import { ToastProvider } from '../src/lib';
+import { ScrollbarWrapper, ToastProvider } from '../src/lib';
 
 export const globalTypes = {
   theme: {
@@ -12,27 +12,47 @@ export const globalTypes = {
     defaultValue: 'darkRebrand',
     toolbar: {
       title: 'Preview Theme',
-      dynamicTitle: false,
+      dynamicTitle: true,
       // array of plain string values or MenuItem shape (see below)
       items: [
-        { value: 'darkRebrand', title: 'Dark', icon: 'moon' },
-        { value: 'artescaLight', title: 'Light', icon: 'sun' },
-        { value: 'ring9dark', title: 'Ring Dark', icon: 'moon' },
+        { value: 'darkRebrand', title: ' A-Dark', icon: 'moon' },
+        { value: 'artescaLight', title: 'A-Light', icon: 'sun' },
+        { value: 'ring9dark', title: 'R-Dark', icon: 'moon' },
       ],
     },
   },
+  background: {
+    name: 'Background Level',
+    description: 'Background for the wrapper',
+    toolbar: {
+      title: 'Background Level',
+      items: [
+        { value: 'backgroundLevel1', title: 'backgroundLevel 1' },
+        { value: 'backgroundLevel2', title: 'backgroundLevel 2' },
+        { value: 'backgroundLevel3', title: 'backgroundLevel 3' },
+        { value: 'backgroundLevel4', title: 'backgroundLevel 4' },
+      ],
+      dynamicTitle: true,
+    },
+  },
 };
-
 const withThemeProvider = (Story, context) => {
   const theme = coreUIAvailableThemes[context.globals.theme];
+  const { background } = context.globals;
   const { viewMode } = context;
   return (
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
         {/* Wrapper to make the stories take the full screen but not in docs */}
-        <div style={viewMode === 'story' ? { height: 100 + 'vh' } : null}>
+        <div
+          style={
+            viewMode === 'story'
+              ? { height: 100 + 'vh', overflow: 'scroll' }
+              : null
+          }
+        >
           <ToastProvider>
-            <Wrapper>
+            <Wrapper style={{ backgroundColor: background }}>
               <Story {...context} />
             </Wrapper>
           </ToastProvider>

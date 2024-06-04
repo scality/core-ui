@@ -236,9 +236,7 @@ export const AllRequiredPageForm = {
 export const TabForm = {
   ...PageForm,
   args: {
-    layout: {
-      kind: 'tab',
-    },
+    kind: 'tab',
   },
 };
 

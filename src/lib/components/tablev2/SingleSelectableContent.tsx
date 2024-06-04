@@ -1,4 +1,4 @@
-import { memo, CSSProperties, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 import { useTableContext } from './Tablev2.component';
@@ -7,7 +7,6 @@ import {
   TableRow,
   TableBody,
   TableHeader,
-  NoResult,
   SortCaret,
 } from './Tablestyle';
 import {
@@ -15,7 +14,7 @@ import {
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { useTableScrollbar, VirtualizedRows } from './TableCommon';
+import { RenderRowType, TableRows, useTableScrollbar } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
@@ -26,28 +25,14 @@ export type SingleSelectableContentProps<
 > = {
   rowHeight: TableHeightKeyType;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
+
   onRowSelected?: (row: Row<DATA_ROW>) => void;
   selectedId?: string;
   locale?: TableLocalType;
-  customItemKey?: (index: Number, data: DATA_ROW) => string;
+  customItemKey?: (index: number, data: DATA_ROW) => string;
   hasScrollbar?: boolean;
   isLoadingMoreItems?: boolean;
-  children?: (rows: JSX.Element) => JSX.Element;
-};
-
-const translations = {
-  en: {
-    noResult: 'No results found',
-  },
-  fr: {
-    noResult: `Aucun résultat`,
-  },
-};
-
-type RenderRowType = {
-  index: number;
-  style: CSSProperties;
+  children?: (rows: React.JSX.Element) => React.JSX.Element;
 };
 
 export function SingleSelectableContent<
@@ -55,7 +40,7 @@ export function SingleSelectableContent<
 >({
   rowHeight = 'h40',
   separationLineVariant = 'backgroundLevel3',
-  backgroundVariant = 'backgroundLevel1',
+
   locale = 'en',
   selectedId,
   isLoadingMoreItems,
@@ -67,15 +52,9 @@ export function SingleSelectableContent<
     console.error('Please specify the onRowSelected function.');
   }
 
-  const { bodyRef, headerRef } = useSyncedScroll<DATA_ROW>();
-  const {
-    headerGroups,
-    prepareRow,
-    rows,
-    onBottom,
-    onBottomOffset,
-    setRowHeight,
-  } = useTableContext<DATA_ROW>();
+  const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const { headerGroups, prepareRow, rows, setRowHeight } =
+    useTableContext<DATA_ROW>();
 
   useEffect(() => {
     setRowHeight(rowHeight);
@@ -120,7 +99,6 @@ export function SingleSelectableContent<
         isSelected={selectedId === row.id}
         aria-selected={selectedId === row.id ? 'true' : 'false'}
         separationLineVariant={separationLineVariant}
-        backgroundVariant={backgroundVariant}
         selectedId={selectedId}
         className="tr"
       >
@@ -146,20 +124,9 @@ export function SingleSelectableContent<
     );
   }, areEqual);
 
-  const {
-    hasScrollbar,
-    setHasScrollbar,
-    scrollBarWidth,
-    handleScrollbarWidth,
-  } = useTableScrollbar();
+  const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
+    useTableScrollbar();
 
-  function itemKey(index, data) {
-    if (typeof customItemKey === 'function') {
-      return customItemKey(index, data);
-    }
-
-    return index;
-  }
   return (
     <>
       <div className="thead" role="rowgroup">
@@ -167,6 +134,7 @@ export function SingleSelectableContent<
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
             ref={headerRef}
+            separationLineVariant={separationLineVariant}
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
@@ -207,33 +175,12 @@ export function SingleSelectableContent<
         ))}
       </div>
       <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
-        {typeof children === 'function' ? (
-          children(
-            <VirtualizedRows
-              rows={rows}
-              listRef={bodyRef}
-              itemKey={itemKey}
-              rowHeight={rowHeight}
-              setHasScrollbar={setHasScrollbar}
-              onBottom={onBottom}
-              onBottomOffset={onBottomOffset}
-              RenderRow={RenderRow}
-            />,
-          )
-        ) : rows.length ? (
-          <VirtualizedRows
-            rows={rows}
-            listRef={bodyRef}
-            itemKey={itemKey}
-            rowHeight={rowHeight}
-            setHasScrollbar={setHasScrollbar}
-            onBottom={onBottom}
-            onBottomOffset={onBottomOffset}
-            RenderRow={RenderRow}
-          />
-        ) : (
-          <NoResult>{translations[locale].noResult}</NoResult>
-        )}
+        <TableRows
+          locale={locale}
+          children={children}
+          customItemKey={customItemKey}
+          RenderRow={RenderRow}
+        />
       </TableBody>
       {isLoadingMoreItems && (
         <Box

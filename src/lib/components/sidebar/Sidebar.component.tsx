@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -30,6 +30,7 @@ export type WrapperProps = {
   hovered?: boolean;
 };
 const Wrapper = styled.div<WrapperProps>`
+  margin-top: 1px;
   flex-shrink: 0;
   ${(props) => {
     const { backgroundLevel1, textPrimary } = props.theme;
@@ -41,7 +42,6 @@ const Wrapper = styled.div<WrapperProps>`
       }
     `;
   }}
-  margin-top: 1px;
   border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
   ${(props) => {
     if (props.expanded) {
@@ -66,6 +66,7 @@ const Wrapper = styled.div<WrapperProps>`
           height: 100%;
           background-color: ${backgroundLevel1};
           z-index: ${zIndex.sidebar};
+          border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
         }
       `;
     }

@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-
-import { spacing } from '../../style/theme';
 import {
   TableHeightKeyType,
   tableRowHeight,
@@ -9,6 +7,8 @@ import {
 import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+import { spacing } from '../../spacing';
+import { Box } from '../box/Box';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -16,7 +16,7 @@ export const SortIncentive = styled.span`
   display: none;
 `;
 export const SortCaretWrapper = styled.span`
-  padding-left: ${spacing.sp4};
+  padding-left: ${spacing.r4};
   position: absolute;
 `;
 export const TableHeader = styled.div<{
@@ -45,11 +45,14 @@ type HeadRowType = {
   hasScrollBar: boolean;
   scrollBarWidth: number;
   rowHeight: TableHeightKeyType;
+  separationLineVariant: TableVariantType;
 };
 
 export const HeadRow = styled.div<HeadRowType>`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
+  gap: ${spacing.r16};
   height: 2.286rem;
   width: ${(props) =>
     props.hasScrollBar
@@ -60,23 +63,26 @@ export const HeadRow = styled.div<HeadRowType>`
   color: ${(props) => props.theme.textPrimary};
   font-weight: bold;
   overflow: hidden;
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
+  padding-right: ${borderSize};
+  padding-left: ${spacing.r16};
 `;
 
 type TableRowType = {
   isSelected: boolean;
   selectedId?: string;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
   color: ${(props) => props.theme.textPrimary};
-  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
-  :last-child {
-    border-bottom: 1px solid
-      ${(props) => props.theme[props.separationLineVariant]};
-  }
+  gap: ${spacing.r16};
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
   cursor: default;
   box-sizing: border-box;
+  padding-left: ${spacing.r16};
+  padding-right: ${borderSize};
 
   // single selectable case
   ${(props) => {
@@ -101,11 +107,6 @@ export const TableRow = styled.div<TableRowType>`
         background-color: ${props.theme.highlight};
         border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
-    } else {
-      const color = props.theme[props.backgroundVariant];
-      return css`
-        border-right: ${borderSize} solid ${color};
-      `;
     }
   }}
 `;
@@ -113,41 +114,32 @@ export const TableRow = styled.div<TableRowType>`
 type TableRowMultiSelectableType = {
   isSelected: boolean;
   separationLineVariant: TableVariantType;
-  backgroundVariant: TableVariantType;
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
-  border-top: 1px solid ${(props) => props.theme[props.separationLineVariant]};
-  :last-child {
-    border-bottom: 1px solid
-      ${(props) => props.theme[props.separationLineVariant]};
-  }
-
+  border-bottom: 1px solid
+    ${(props) => props.theme[props.separationLineVariant]};
   box-sizing: border-box;
-
-  &:hover,
-  &:focus {
-    background-color: ${(props) => props.theme.highlight};
-    outline: none;
-    cursor: pointer;
-  }
-
   ${(props) => {
     if (props.isSelected) {
       return css`
         background-color: ${(props) => props.theme.highlight};
         border-right: ${borderSize} solid ${props.theme.selectedActive};
       `;
-    } else {
-      const color = props.theme[props.backgroundVariant];
-      return css`
-        border-right: ${borderSize} solid ${color};
-      `;
     }
   }}
+  padding-right: ${borderSize};
+  padding-left: ${spacing.r16};
+  &:hover,
+  &:focus {
+    background-color: ${(props) => props.theme.highlight};
+    outline: none;
+    cursor: pointer;
+  }
 `;
 
 export const TableBody = styled.div`
+  box-sizing: border-box;
   display: block;
   flex-grow: 1;
   height: 100%;
@@ -164,12 +156,13 @@ export const TooltipContent = styled.div`
   min-width: 60px;
 `;
 
-export const NoResult = styled.div`
+export const NoResult = styled(Box)<{ rowHeight: TableHeightKeyType }>`
   display: flex;
   justify-content: center;
+  align-items: center;
   color: ${(props) => props.theme.textSecondary};
-  padding-top: ${spacing.sp8};
-  border-top: 1px solid ${(props) => props.theme.backgroundLevel3};
+  height: ${(props) => tableRowHeight[props.rowHeight]}rem;
+  gap: ${spacing.r8};
 `;
 
 export const SortCaret = <

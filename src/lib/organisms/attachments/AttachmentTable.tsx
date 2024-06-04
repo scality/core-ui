@@ -32,6 +32,7 @@ import {
 } from './AttachmentTypes';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { EmptyCell } from '../../components/tablev2/Tablev2.component';
+import { tableRowHeight } from '../../components/tablev2/TableUtils';
 
 type AttachableEntityWithPendingStatus<ENTITY_TYPE> = {
   isPending?: boolean;
@@ -104,11 +105,7 @@ const MenuContainer = styled.ul<{
 `;
 
 const SearchBoxContainer = styled.div`
-  margin-bottom: ${spacing.r24};
-  width: 78%;
-  .sc-tooltip {
-    width: 100%;
-  }
+  padding: ${spacing.r16};
 `;
 
 const StyledSearchInput = styled(SearchInput)`
@@ -134,6 +131,7 @@ const StyledTable = styled.div`
 const CenterredSecondaryText = styled(SecondaryText)`
   display: block;
   text-align: center;
+  line-height: ${tableRowHeight[rowHeight]}rem;
 `;
 
 const PrivateAttachmentContext = createContext<{
@@ -477,8 +475,12 @@ export const AttachmentTable = <ENTITY_TYPE,>({
       <SearchBoxContainer
         {...{
           ref: (element) => {
-            if (element) {
-              setSearchWidth(element.getBoundingClientRect().width - 2 + 'px');
+            if (element?.firstElementChild) {
+              setSearchWidth(
+                element.firstElementChild.getBoundingClientRect().width -
+                  2 +
+                  'px',
+              );
             }
           },
         }}
@@ -489,7 +491,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               <>We failed to load the entities, hence search is disabled</>
             }
           >
-            <Box display="flex" alignItems="center" width="100%" gap={8}>
+            <Stack>
               <StyledSearchInput
                 placeholder={searchEntityPlaceholder}
                 {...getInputProps({
@@ -508,7 +510,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 disabled={filteredEntities.status === 'error'}
               />
               <Loader />
-            </Box>
+            </Stack>
           </Tooltip>
         ) : (
           <StyledSearchInput
@@ -595,7 +597,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         <Table
           columns={[
             {
-              Header: <Box flex={1.5}>Name</Box>,
+              Header: 'Name',
               accessor: 'name',
               cellStyle: {
                 flex: 1.5,
@@ -639,7 +641,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               },
             },
             {
-              Header: <Box flex={0.5}>Attachment status</Box>,
+              Header: 'Attachment',
               accessor: 'isPending',
               cellStyle: {
                 flex: 0.5,
@@ -690,7 +692,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           defaultSortingKey="name"
         >
           <Table.SingleSelectableContent
-            backgroundVariant="backgroundLevel4"
             rowHeight={rowHeight}
             separationLineVariant="backgroundLevel2"
           >
@@ -698,7 +699,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               <>
                 {initiallyAttachedEntitiesStatus === 'idle' ||
                 initiallyAttachedEntitiesStatus === 'loading' ? (
-                  <Wrap>
+                  <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
                     <p></p>
                     <Stack>
                       <Loader />
@@ -707,9 +708,17 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                     <p></p>
                   </Wrap>
                 ) : initiallyAttachedEntitiesStatus === 'error' ? (
-                  <CenterredSecondaryText>
-                    Failed to load {entityName.plural}
-                  </CenterredSecondaryText>
+                  <Stack
+                    style={{
+                      justifyContent: 'center',
+                      height: `${tableRowHeight[rowHeight]}rem`,
+                    }}
+                  >
+                    <Icon name="Exclamation-circle" color="statusWarning" />
+                    <Text color="textSecondary">
+                      Failed to load attached {entityName.plural}.
+                    </Text>
+                  </Stack>
                 ) : (
                   desiredAttachedEntities.length === 0 && (
                     <CenterredSecondaryText>

@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import styled, { css } from 'styled-components';
-import { brand } from '../../style/theme';
+import { CoreUITheme } from '../../style/theme';
 
 import { Loader } from '../loader/Loader.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -142,7 +142,7 @@ const IconStyled = styled(FontAwesomeIcon)`
 `;
 
 export type IconName = keyof typeof iconTable;
-export type IconColor = keyof typeof brand;
+export type IconColor = keyof CoreUITheme;
 type Props = {
   name: IconName;
   size?: SizeProp;
