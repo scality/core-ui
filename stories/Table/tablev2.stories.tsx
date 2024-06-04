@@ -447,6 +447,19 @@ export const OnBottomCallback: Story = {
   },
 };
 
+export const WithSeparationLine: Story = {
+  render: () => {
+    return (
+      <Table columns={columns} data={data} defaultSortingKey={'health'}>
+        <Table.SingleSelectableContent
+          rowHeight="h40"
+          separationLineVariant="backgroundLevel2"
+        />
+      </Table>
+    );
+  },
+};
+
 /* ---------------------------- MultiSelect Table --------------------------- */
 
 export const MultiSelectTable = {
