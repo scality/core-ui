@@ -26,7 +26,9 @@ export default {
         });
       },
     });
-    return <InlineInput {...args} changeMutation={changeMutation} />;
+    return (
+      <InlineInput id={args.id} {...args} changeMutation={changeMutation} />
+    );
   },
 };
 

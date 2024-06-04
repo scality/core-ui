@@ -159,6 +159,7 @@ export const WithinTable = {
           paddingTop: '20px',
         }}
       >
+        {/* @ts-expect-error */}
         <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h32"
