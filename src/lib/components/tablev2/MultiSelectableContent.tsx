@@ -1,7 +1,15 @@
-import { useEffect, memo, CSSProperties } from 'react';
+import { memo, useEffect } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
-import { useTableContext } from './Tablev2.component';
+import { spacing } from '../../spacing';
+import { Box } from '../box/Box';
+import { Loader } from '../loader/Loader.component';
+import { RenderRowType, TableRows, useTableScrollbar } from './TableCommon';
+import {
+  TableHeightKeyType,
+  TableLocalType,
+  TableVariantType,
+} from './TableUtils';
 import {
   HeadRow,
   SortCaret,
@@ -9,16 +17,8 @@ import {
   TableHeader,
   TableRowMultiSelectable,
 } from './Tablestyle';
-import {
-  TableHeightKeyType,
-  TableLocalType,
-  TableVariantType,
-} from './TableUtils';
-import { RenderRowType, TableRows, useTableScrollbar } from './TableCommon';
+import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
-import { Box } from '../box/Box';
-import { Loader } from '../loader/Loader.component';
-import { spacing } from '../../spacing';
 
 type MultiSelectableContentProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -204,7 +204,7 @@ export const MultiSelectableContent = <
             rowHeight={rowHeight}
             separationLineVariant={separationLineVariant}
             ref={headerRef}
-            style={{ overflow: 'hidden' }}
+            style={{}}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(
