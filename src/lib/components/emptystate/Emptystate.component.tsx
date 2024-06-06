@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
-
 import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
 import { CoreUITheme } from '../../style/theme';
 import { useHistory } from 'react-router';
-type Props = {
+
+export type Props = {
   listedResource: {
     singular: string;
     plural: string;
