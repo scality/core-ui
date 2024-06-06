@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components';
-
 import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
 import { CoreUITheme } from '../../style/theme';
-type Props = {
+import { useHistory } from 'react-router';
+
+export type Props = {
   listedResource: {
     singular: string;
     plural: string;
   };
   icon: IconName;
   link?: string;
-  history?: Record<string, any>;
   backgroundColor?: keyof CoreUITheme;
   /**
    * The resource to create before browsing the listed resource
@@ -46,14 +46,9 @@ export const ActionWrapper = styled.div`
 `;
 
 function EmptyState(props: Props) {
-  const {
-    icon,
-    listedResource,
-    link,
-    history,
-    resourceToCreate,
-    backgroundColor,
-  } = props;
+  const { icon, listedResource, link, resourceToCreate, backgroundColor } =
+    props;
+  const history = useHistory();
   return (
     <EmptystateContainer
       className="sc-emptystate"
@@ -72,7 +67,7 @@ function EmptyState(props: Props) {
             : `Before browsing your ${listedResource.plural}, create your first ${resourceToCreate}.`}
         </LargeText>
       </EmptyStateRow>
-      {history && (
+      {link && (
         <ActionWrapper>
           <Button
             label={`Create ${resourceToCreate || listedResource.singular}`}

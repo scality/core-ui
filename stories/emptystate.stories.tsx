@@ -1,21 +1,28 @@
-import { EmptyState } from '../src/lib/components/emptystate/Emptystate.component';
+import { Meta, StoryObj } from '@storybook/react';
+import {
+  EmptyState,
+  Props,
+} from '../src/lib/components/emptystate/Emptystate.component';
+type Story = StoryObj<Props>;
 
-export default {
+const meta: Meta<Props> = {
   title: 'Components/Data Display/EmptyState',
   component: EmptyState,
   args: {
     icon: 'Node-backend',
-    label: 'Node',
+    listedResource: {
+      singular: 'resource',
+      plural: 'resources',
+    },
   },
 };
 
-export const Default = {};
+export default meta;
 
-export const WithLink = {
+export const Default: Story = {};
+
+export const WithLink: Story = {
   args: {
     link: '',
-    history: {
-      push: () => {},
-    },
   },
 };
