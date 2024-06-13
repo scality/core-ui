@@ -128,6 +128,9 @@ export const iconTable = {
   Eraser: 'fas faEraser',
   'ID-card': 'fas faIdCard',
   Setting: 'fas faCog', //TODO: Rename to Gear in FA v6 <i class="fa-sharp fa-solid fa-gear"></i>
+  Desktop: 'fas faDesktop',
+  Globe: 'fas faGlobe',
+  Satellite: 'fas faSatelliteDish',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
