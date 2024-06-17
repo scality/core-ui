@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontWeight } from '../../style/theme';
@@ -27,7 +28,7 @@ type Props = {
   text: string;
   className?: string;
   variant?: TextBadgeVariant;
-};
+} & React.HTMLAttributes<HTMLSpanElement>;
 export function TextBadge({
   text,
   variant = 'infoPrimary',
