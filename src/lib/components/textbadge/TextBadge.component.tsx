@@ -1,9 +1,16 @@
-// @ts-nocheck
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontWeight } from '../../style/theme';
 
-const StyledTextBadge = styled.span`
+type TextBadgeVariant =
+  | 'statusHealthy'
+  | 'statusWarning'
+  | 'statusCritical'
+  | 'infoPrimary'
+  | 'infoSecondary'
+  | 'selectedActive';
+
+const StyledTextBadge = styled.span<{ variant: TextBadgeVariant }>`
   ${({ theme, variant }) => `
       background-color: ${theme[variant]};
       color: ${
@@ -19,12 +26,7 @@ const StyledTextBadge = styled.span`
 type Props = {
   text: string;
   className?: string;
-  variant?:
-    | 'statusHealthy'
-    | 'statusWarning'
-    | 'statusCritical'
-    | 'infoPrimary'
-    | 'infoSecondary';
+  variant?: TextBadgeVariant;
 };
 export function TextBadge({
   text,
