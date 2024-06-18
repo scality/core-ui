@@ -14,6 +14,7 @@ export type Props = {
   disabled?: boolean;
   id?: string;
   size?: InputSize;
+  autoComplete?: 'on' | 'off';
 };
 const SearchInputContainer = styled.div<{
   docked?: boolean;
@@ -64,6 +65,7 @@ const SearchInput = forwardRef(
       disabled,
       id,
       size,
+      autoComplete = 'on',
       ...rest
     }: Props,
     forwardedRef,
@@ -105,6 +107,7 @@ const SearchInput = forwardRef(
         {...rest}
       >
         <Input
+          autoComplete={autoComplete}
           min={'1'}
           id={id || 'search'}
           type="search"
