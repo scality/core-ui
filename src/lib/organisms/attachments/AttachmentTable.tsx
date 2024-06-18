@@ -102,6 +102,7 @@ const MenuContainer = styled.ul<{
 `;
 
 const SearchBoxContainer = styled.div`
+  position: relative;
   padding: ${spacing.r16};
 `;
 
