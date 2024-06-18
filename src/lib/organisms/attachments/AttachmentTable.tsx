@@ -77,10 +77,7 @@ const MenuContainer = styled.ul<{
   position: absolute;
   width: ${(props) => props.width};
   z-index: 1;
-  margin-top: -1.7rem;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-right: 0;
+  margin: 0;
   ${(props) =>
     props.isOpen
       ? `
@@ -493,6 +490,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           >
             <Stack>
               <StyledSearchInput
+                autoComplete="off"
                 placeholder={searchEntityPlaceholder}
                 {...getInputProps({
                   ref: (element) => {
@@ -514,6 +512,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
           </Tooltip>
         ) : (
           <StyledSearchInput
+            autoComplete="off"
             placeholder={searchEntityPlaceholder}
             {...getInputProps({
               ref: (element) => {
@@ -530,69 +529,72 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             disableToggle
           />
         )}
+        <MenuContainer
+          {...getMenuProps()}
+          width={searchWidth}
+          isOpen={isOpen}
+          searchInputIsFocused={searchInputIsFocused}
+        >
+          {isOpen &&
+            filteredEntities.status === 'success' &&
+            filteredEntities.data?.entities.map((item, index) => (
+              <li key={`${item.id}${index}`} {...getItemProps({ item, index })}>
+                <Text>{item.name}</Text>
+              </li>
+            ))}
+          {isOpen && filteredEntities.status === 'loading' && (
+            <li>
+              <Text>Searching...</Text>
+            </li>
+          )}
+          {isOpen && filteredEntities.status === 'error' && (
+            <li>
+              <Text color="statusCritical">
+                An error occured while searching
+              </Text>
+            </li>
+          )}
+          {isOpen &&
+            filteredEntities.status === 'success' &&
+            (filteredEntities.data?.number || 0) >
+              filteredEntities.data?.entities.length && (
+              <li>
+                <Text
+                  isGentleEmphazed={true}
+                  color="textSecondary"
+                  style={{ textAlign: 'right' }}
+                >
+                  There{' '}
+                  {(filteredEntities.data?.number || 0) -
+                    filteredEntities.data?.entities.length ===
+                  1
+                    ? 'is'
+                    : 'are'}{' '}
+                  {(filteredEntities.data?.number || 0) -
+                    filteredEntities.data?.entities.length}{' '}
+                  more{' '}
+                  {(filteredEntities.data?.number || 0) -
+                    filteredEntities.data?.entities.length ===
+                  1
+                    ? entityName.singular
+                    : entityName.plural}{' '}
+                  matching your search. Suggestion: try more specific search
+                  expression.
+                </Text>
+              </li>
+            )}
+          {isOpen &&
+            filteredEntities.status === 'success' &&
+            filteredEntities.data?.entities.length === 0 && (
+              <li>
+                <Text isGentleEmphazed={true} color="textSecondary">
+                  No {entityName.plural} found matching your search.
+                </Text>
+              </li>
+            )}
+        </MenuContainer>
       </SearchBoxContainer>
-      <MenuContainer
-        {...getMenuProps()}
-        width={searchWidth}
-        isOpen={isOpen}
-        searchInputIsFocused={searchInputIsFocused}
-      >
-        {isOpen &&
-          filteredEntities.status === 'success' &&
-          filteredEntities.data?.entities.map((item, index) => (
-            <li key={`${item.id}${index}`} {...getItemProps({ item, index })}>
-              <Text>{item.name}</Text>
-            </li>
-          ))}
-        {isOpen && filteredEntities.status === 'loading' && (
-          <li>
-            <Text>Searching...</Text>
-          </li>
-        )}
-        {isOpen && filteredEntities.status === 'error' && (
-          <li>
-            <Text color="statusCritical">An error occured while searching</Text>
-          </li>
-        )}
-        {isOpen &&
-          filteredEntities.status === 'success' &&
-          (filteredEntities.data?.number || 0) >
-            filteredEntities.data?.entities.length && (
-            <li>
-              <Text
-                isGentleEmphazed={true}
-                color="textSecondary"
-                style={{ textAlign: 'right' }}
-              >
-                There{' '}
-                {(filteredEntities.data?.number || 0) -
-                  filteredEntities.data?.entities.length ===
-                1
-                  ? 'is'
-                  : 'are'}{' '}
-                {(filteredEntities.data?.number || 0) -
-                  filteredEntities.data?.entities.length}{' '}
-                more{' '}
-                {(filteredEntities.data?.number || 0) -
-                  filteredEntities.data?.entities.length ===
-                1
-                  ? entityName.singular
-                  : entityName.plural}{' '}
-                matching your search. Suggestion: try more specific search
-                expression.
-              </Text>
-            </li>
-          )}
-        {isOpen &&
-          filteredEntities.status === 'success' &&
-          filteredEntities.data?.entities.length === 0 && (
-            <li>
-              <Text isGentleEmphazed={true} color="textSecondary">
-                No {entityName.plural} found matching your search.
-              </Text>
-            </li>
-          )}
-      </MenuContainer>
+
       <StyledTable>
         <Table
           columns={[

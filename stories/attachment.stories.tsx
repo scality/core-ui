@@ -28,7 +28,11 @@ export const Playground = {
               status: 'success',
               data: {
                 number: 1,
-                entities: [{ name: 'User A', id: 'test', type: 'USER' }],
+                entities: [
+                  { name: 'User A', id: 'test', type: 'USER' },
+                  { name: 'User B', id: 'test', type: 'USER' },
+                  { name: 'User C', id: 'test', type: 'USER' },
+                ],
               },
             }}
             initialAttachmentOperations={[]}
