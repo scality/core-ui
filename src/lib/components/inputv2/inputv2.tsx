@@ -39,6 +39,14 @@ const StyledInput = styled.input<{ hasIcon: boolean }>`
     border: 0;
     outline: none;
   }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: ${(props) => props.theme.textPrimary};
+    -webkit-background-clip: text;
+    caret-color: ${(props) => props.theme.textPrimary};
+  }
 `;
 
 const InputContainer = styled.div<{
