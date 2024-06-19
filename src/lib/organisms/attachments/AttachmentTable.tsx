@@ -106,23 +106,18 @@ const SearchBoxContainer = styled.div`
   padding: ${spacing.r16};
 `;
 
-const StyledSearchInput = styled(SearchInput)`
+const StyledSearchInput = styled(SearchInput)<{ searchInputIsFocused }>`
   flex-grow: 1;
-  .sc-input-type:focus {
-    border-bottom: 0;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 0;
+
+  & > div:focus-within {
+    border-color: ${(props) => props.theme.selectedActive};
     border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
   }
 `;
 
 const AttachmentTableContainer = styled.div`
-  height: 100%;
-`;
-
-const StyledTable = styled.div`
-  background: ${(props) => props.theme.backgroundLevel4};
   height: 100%;
 `;
 
@@ -528,6 +523,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
               setSearchInputIsFocused(false);
             }}
             disableToggle
+            searchInputIsFocused={searchInputIsFocused}
           />
         )}
         <MenuContainer
@@ -596,145 +592,141 @@ export const AttachmentTable = <ENTITY_TYPE,>({
         </MenuContainer>
       </SearchBoxContainer>
 
-      <StyledTable>
-        <Table
-          columns={[
-            {
-              Header: 'Name',
-              accessor: 'name',
-              cellStyle: {
-                flex: 1.5,
-                marginRight: '1.5rem',
-              },
-              Cell: ({
-                value,
-                row: { original: entity },
-              }: {
-                value: string;
-                row: { original: AttachableEntity<ENTITY_TYPE> };
-              }) => {
-                const { data: asyncName, status } = useQuery({
-                  ...(getNameQuery
-                    ? getNameQuery(entity)
-                    : { queryKey: ['fakeQuery'], queryFn: () => value }),
-                  enabled: !value,
-                });
+      <Table
+        columns={[
+          {
+            Header: 'Name',
+            accessor: 'name',
+            cellStyle: {
+              flex: 1.5,
+              marginRight: '1.5rem',
+            },
+            Cell: ({
+              value,
+              row: { original: entity },
+            }: {
+              value: string;
+              row: { original: AttachableEntity<ENTITY_TYPE> };
+            }) => {
+              const { data: asyncName, status } = useQuery({
+                ...(getNameQuery
+                  ? getNameQuery(entity)
+                  : { queryKey: ['fakeQuery'], queryFn: () => value }),
+                enabled: !value,
+              });
 
-                if (value) {
-                  return <ConstrainedText text={value} lineClamp={2} />;
+              if (value) {
+                return <ConstrainedText text={value} lineClamp={2} />;
+              }
+              if (status === 'error') {
+                return (
+                  <>An error occured while loading {entityName.singular} name</>
+                );
+              }
+              if (status === 'loading' || status === 'idle') {
+                return <>Loading...</>;
+              }
+              if (status === 'success') {
+                if (!asyncName) {
+                  return <EmptyCell />;
                 }
-                if (status === 'error') {
-                  return (
-                    <>
-                      An error occured while loading {entityName.singular} name
-                    </>
-                  );
-                }
-                if (status === 'loading' || status === 'idle') {
-                  return <>Loading...</>;
-                }
-                if (status === 'success') {
-                  if (!asyncName) {
-                    return <EmptyCell />;
-                  }
-                  return <ConstrainedText text={asyncName} lineClamp={2} />;
-                }
+                return <ConstrainedText text={asyncName} lineClamp={2} />;
+              }
 
-                return <EmptyCell />;
-              },
+              return <EmptyCell />;
             },
-            {
-              Header: 'Attachment',
-              accessor: 'isPending',
-              cellStyle: {
-                flex: 0.5,
-              },
-              Cell: ({ value }: { value?: boolean }) => {
-                return value ? <>Pending</> : <>Attached</>;
-              },
+          },
+          {
+            Header: 'Attachment',
+            accessor: 'isPending',
+            cellStyle: {
+              flex: 0.5,
             },
-            {
-              Header: <Box flex={0.5} />,
-              accessor: 'action',
-              cellStyle: {
-                textAlign: 'right',
-                flex: 0.5,
-                marginLeft: 'auto',
-                marginRight: '0.5rem',
-              },
-              Cell: ({
-                row: { original: entity },
-              }: {
-                row: { original: AttachableEntity<ENTITY_TYPE> };
-              }) => (
-                <Button
-                  size="inline"
-                  onClick={() => {
-                    dispatch({
-                      action: AttachmentAction.REMOVE,
-                      entity: {
-                        name: entity.name,
-                        id: entity.id,
-                        type: entity.type,
-                      },
-                    });
-                  }}
-                  icon={<Icon name="Close" />}
-                  label="Remove"
-                  variant="danger"
-                  disabled={!!entity.disableDetach}
-                />
-              ),
+            Cell: ({ value }: { value?: boolean }) => {
+              return value ? <>Pending</> : <>Attached</>;
             },
-          ]}
-          data={desiredAttachedEntities.map((entity) => ({
-            ...entity,
-            isPending: entity.isPending || false,
-            action: null,
-          }))}
-          defaultSortingKey="name"
+          },
+          {
+            Header: <Box flex={0.5} />,
+            accessor: 'action',
+            cellStyle: {
+              textAlign: 'right',
+              flex: 0.5,
+              marginLeft: 'auto',
+              marginRight: '0.5rem',
+            },
+            Cell: ({
+              row: { original: entity },
+            }: {
+              row: { original: AttachableEntity<ENTITY_TYPE> };
+            }) => (
+              <Button
+                size="inline"
+                onClick={() => {
+                  dispatch({
+                    action: AttachmentAction.REMOVE,
+                    entity: {
+                      name: entity.name,
+                      id: entity.id,
+                      type: entity.type,
+                    },
+                  });
+                }}
+                icon={<Icon name="Close" />}
+                label="Remove"
+                variant="danger"
+                disabled={!!entity.disableDetach}
+              />
+            ),
+          },
+        ]}
+        data={desiredAttachedEntities.map((entity) => ({
+          ...entity,
+          isPending: entity.isPending || false,
+          action: null,
+        }))}
+        defaultSortingKey="name"
+      >
+        <Table.SingleSelectableContent
+          rowHeight={rowHeight}
+          separationLineVariant="backgroundLevel2"
         >
-          <Table.SingleSelectableContent
-            rowHeight={rowHeight}
-            separationLineVariant="backgroundLevel2"
-          >
-            {(rows) => (
-              <>
-                {initiallyAttachedEntitiesStatus === 'idle' ||
-                initiallyAttachedEntitiesStatus === 'loading' ? (
-                  <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
-                    <p></p>
-                    <Stack>
-                      <Loader />
-                      <Text>Loading {entityName.plural}...</Text>
-                    </Stack>
-                    <p></p>
-                  </Wrap>
-                ) : initiallyAttachedEntitiesStatus === 'error' ? (
-                  <Stack
-                    style={{
-                      justifyContent: 'center',
-                      height: `${tableRowHeight[rowHeight]}rem`,
-                    }}
-                  >
-                    <Icon name="Exclamation-circle" color="statusWarning" />
-                    <Text color="textSecondary">
-                      Failed to load attached {entityName.plural}.
-                    </Text>
+          {(rows) => (
+            <>
+              {initiallyAttachedEntitiesStatus === 'idle' ||
+              initiallyAttachedEntitiesStatus === 'loading' ? (
+                <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
+                  <p></p>
+                  <Stack>
+                    <Loader />
+                    <Text>Loading {entityName.plural}...</Text>
                   </Stack>
-                ) : (
-                  desiredAttachedEntities.length === 0 && (
-                    <CenterredSecondaryText>
-                      No {entityName.plural} attached
-                    </CenterredSecondaryText>
-                  )
-                )}
-                {desiredAttachedEntities.length > 0 && rows}
-              </>
-            )}
-          </Table.SingleSelectableContent>
-        </Table>
-      </StyledTable>
+                  <p></p>
+                </Wrap>
+              ) : initiallyAttachedEntitiesStatus === 'error' ? (
+                <Stack
+                  style={{
+                    justifyContent: 'center',
+                    height: `${tableRowHeight[rowHeight]}rem`,
+                  }}
+                >
+                  <Icon name="Exclamation-circle" color="statusWarning" />
+                  <Text color="textSecondary">
+                    Failed to load attached {entityName.plural}.
+                  </Text>
+                </Stack>
+              ) : (
+                desiredAttachedEntities.length === 0 && (
+                  <CenterredSecondaryText>
+                    No {entityName.plural} attached
+                  </CenterredSecondaryText>
+                )
+              )}
+              {desiredAttachedEntities.length > 0 && rows}
+            </>
+          )}
+        </Table.SingleSelectableContent>
+      </Table>
     </AttachmentTableContainer>
   );
 };
