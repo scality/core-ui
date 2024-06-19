@@ -86,8 +86,10 @@ export const TabsContainer = styled.div<{
   }
 `;
 export const TabContent = styled.div<{ tabContentColor?: string }>`
+  height: calc(100% - ${spacing.r40});
   margin: 0;
   padding: 0;
+  display: flex;
   flex: 1;
   background-color: ${(props) =>
     props.tabContentColor || props.theme.backgroundLevel4};
