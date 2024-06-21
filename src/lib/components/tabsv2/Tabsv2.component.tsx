@@ -34,7 +34,7 @@ type TabsProps = {
   tabHoverColor?: string;
   children: ChildrenArray<Element<typeof Tab>>;
   className?: string;
-  withOverallSummary: boolean;
+  withOverallSummary?: boolean;
 };
 export const TabsContext = createContext<boolean>(false);
 
