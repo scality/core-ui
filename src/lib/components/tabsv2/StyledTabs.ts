@@ -60,7 +60,7 @@ export const TabsContainer = styled.div<{
   tabLineColor?: string;
   separatorColor: string;
 }>`
-  height: 100%;
+  height: calc(100% - 6.125rem);
   width: 100%;
   display: flex;
   flex-direction: column;
