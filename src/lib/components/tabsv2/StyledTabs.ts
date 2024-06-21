@@ -59,8 +59,11 @@ export const TabItem = styled.div<{
 export const TabsContainer = styled.div<{
   tabLineColor?: string;
   separatorColor: string;
+  withOverallSummary?: boolean;
 }>`
-  height: calc(100% - 6.125rem);
+  height: ${(props) =>
+    // Overall summary is 6rem + 0.125rem for gap
+    props.withOverallSummary ? 'calc(100% - 6.125rem)' : '100%'};
   width: 100%;
   display: flex;
   flex-direction: column;
