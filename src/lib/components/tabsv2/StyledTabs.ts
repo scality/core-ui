@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-
-import { getThemePropSelector } from '../../utils';
 import { spacing } from '../../spacing';
 
 export const TabBar = styled.div`
@@ -24,7 +22,7 @@ export const TabItem = styled.div<{
   &:focus-visible {
     outline: 0;
     position: relative;
-    border: ${spacing.r1} dashed ${getThemePropSelector('selectedActive')};
+    border: ${spacing.r1} dashed ${(props) => props.theme.selectedActive};
   }
 
   &:focus-within {
@@ -63,6 +61,7 @@ export const TabsContainer = styled.div<{
   separatorColor: string;
 }>`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: ${(props) =>
@@ -88,7 +87,11 @@ export const TabsContainer = styled.div<{
 export const TabContent = styled.div<{ tabContentColor?: string }>`
   margin: 0;
   padding: 0;
-  flex: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
   background-color: ${(props) =>
     props.tabContentColor || props.theme.backgroundLevel4};
 `;
