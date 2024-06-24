@@ -34,7 +34,6 @@ type TabsProps = {
   tabHoverColor?: string;
   children: ChildrenArray<Element<typeof Tab>>;
   className?: string;
-  withOverallSummary?: boolean;
 };
 export const TabsContext = createContext<boolean>(false);
 
@@ -52,7 +51,6 @@ function Tabs({
   tabHoverColor,
   children,
   className,
-  withOverallSummary,
   ...rest
 }: TabsProps) {
   const location = useLocation();
@@ -184,7 +182,6 @@ function Tabs({
     <TabsContext.Provider value={true}>
       <TabsContainer
         style={{ containerType: 'inline-size' }}
-        withOverallSummary={withOverallSummary}
         className={['sc-tabs', className].join(' ')}
         tabLineColor={tabLineColor}
         separatorColor={separatorColor}
