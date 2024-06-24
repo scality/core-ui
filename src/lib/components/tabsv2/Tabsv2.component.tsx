@@ -181,7 +181,7 @@ function Tabs({
   return (
     <TabsContext.Provider value={true}>
       <TabsContainer
-        style={{ containerType: 'inline-size' }}
+        style={{ containerType: 'size' }}
         className={['sc-tabs', className].join(' ')}
         tabLineColor={tabLineColor}
         separatorColor={separatorColor}
