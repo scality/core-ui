@@ -59,6 +59,7 @@ function Tabs({
   const [selectedTabIndex, setSelectedTabIndex] = useState<
     number | null | undefined
   >(null);
+  const [withoutPadding, setWithoutPadding] = useState();
   const queryURL = new URLSearchParams(location.search);
   const filteredTabsChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type === Tab,
@@ -115,6 +116,7 @@ function Tabs({
 
       if (isSelected) {
         setSelectedTabIndex(index);
+        setWithoutPadding(child.props.withoutPadding);
         hasSelectedTab = true;
       }
     });
@@ -216,6 +218,7 @@ function Tabs({
         <TabContent
           className="sc-tabs-item-content"
           tabContentColor={tabContentColor}
+          withoutPadding={withoutPadding}
         >
           {filteredTabsChildren.map((tab: Element<typeof Tab>, index) => (
             <Route

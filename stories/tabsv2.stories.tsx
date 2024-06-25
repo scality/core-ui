@@ -80,7 +80,7 @@ const DefaultTabsDetails = (props) => {
         {location.pathname} / {location.search}
       </Title>
       <Tabs {...props}>
-        <Tab path="/iframe.html" label="Users">
+        <Tab path="/iframe.html" label="Users" withoutPadding>
           <Content>Users Content</Content>
         </Tab>
         <Tab
@@ -98,6 +98,7 @@ const DefaultTabsDetails = (props) => {
             tab: 'role @',
           }}
           label="Roles"
+          withoutPadding
         >
           {details()}
         </Tab>

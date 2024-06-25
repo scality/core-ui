@@ -84,9 +84,12 @@ export const TabsContainer = styled.div<{
     margin-right: -1px;
   }
 `;
-export const TabContent = styled.div<{ tabContentColor?: string }>`
+export const TabContent = styled.div<{
+  tabContentColor?: string;
+  withoutPadding?: boolean;
+}>`
   margin: 0;
-  padding: 0;
+  padding: ${(props) => (props.withoutPadding ? '0' : spacing.r16)};
   display: block;
   width: 100%;
   height: 100%;

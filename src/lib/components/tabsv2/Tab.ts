@@ -12,6 +12,7 @@ export type TabProps = {
   exact?: boolean;
   strict?: boolean;
   sensitive?: boolean;
+  withoutPadding?: boolean;
 };
 
 function Tab(_: TabProps) {
