@@ -5,15 +5,23 @@ import { Wrapper, Title } from './common';
 import { BrowserRouter } from 'react-router-dom';
 import { brand, spacing } from '../src/lib/style/theme';
 import styled from 'styled-components';
-import { useLocation } from 'react-router';
+import { MemoryRouter, Route, useLocation } from 'react-router';
+
 const Content = styled.div`
   padding: ${spacing.sp24};
   color: ${(props) => props.theme.textPrimary};
+  height: 100%;
 `;
 export default {
   title: 'Components/Navigation/Tabs',
   component: Tabs,
-  decorators: [(story) => <BrowserRouter>{story()}</BrowserRouter>],
+  decorators: [
+    (story) => (
+      <BrowserRouter>
+        <Wrapper style={{ minHeight: '30rem' }}>{story()}</Wrapper>
+      </BrowserRouter>
+    ),
+  ],
   argTypes: {
     activeTabSeparator: {
       control: {
@@ -79,44 +87,52 @@ const DefaultTabsDetails = (props) => {
       <Title>
         {location.pathname} / {location.search}
       </Title>
-      <Tabs {...props}>
-        <Tab path="/iframe.html" label="Users">
-          <Content>Users Content</Content>
-        </Tab>
-        <Tab
-          path="/path1"
-          query={{
-            tab: 'group',
-          }}
-          label="Groups"
-        >
-          {details()}
-        </Tab>
-        <Tab
-          path="/path1"
-          query={{
-            tab: 'role @',
-          }}
-          label="Roles"
-        >
-          {details()}
-        </Tab>
-        <Tab
-          path="/path1"
-          query={{
-            tab: 'policies',
-          }}
-          label="Policies"
-        >
-          {details()}
-        </Tab>
-        <Tab path="/path4" label="Storage Location">
-          <Content>Storage Location Content</Content>
-        </Tab>
-        <Tab path="/path5" label="Properties">
-          <Content>Properties Content</Content>
-        </Tab>
-      </Tabs>
+      <MemoryRouter initialEntries={['/path?tab=group']} initialIndex={0}>
+        <Route
+          path="/:path?"
+          render={() => (
+            <Tabs {...props}>
+              <Tab path="/path" label="Users" withoutPadding>
+                <Content>Users Content</Content>
+              </Tab>
+              <Tab
+                path="/path1"
+                query={{
+                  tab: 'group',
+                }}
+                label="Groups"
+              >
+                {details()}
+              </Tab>
+              <Tab
+                path="/path1"
+                query={{
+                  tab: 'role',
+                }}
+                label="Roles"
+                withoutPadding
+              >
+                <Content>Roles content</Content>
+              </Tab>
+              <Tab
+                path="/path1"
+                query={{
+                  tab: 'policies',
+                }}
+                label="Policies"
+              >
+                <Content>Policies content</Content>
+              </Tab>
+              <Tab path="/path4" label="Storage Location">
+                <Content>Storage Location Content</Content>
+              </Tab>
+              <Tab path="/path5" label="Properties">
+                <Content>Properties Content</Content>
+              </Tab>
+            </Tabs>
+          )}
+        />
+      </MemoryRouter>
     </>
   );
 };

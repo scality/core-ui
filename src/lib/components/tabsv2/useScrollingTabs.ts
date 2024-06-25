@@ -283,7 +283,7 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
     scrollSelectedIntoView();
   }, [scrollSelectedIntoView, selectedTabIndex]);
 
-  const handleKeyDown = (event: KeyboardEvent) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const list = tabsListRef.current;
     const ownerDocument = (list && list.ownerDocument) || document;
     const currentFocus = ownerDocument.activeElement;

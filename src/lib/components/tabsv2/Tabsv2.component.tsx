@@ -1,6 +1,10 @@
-// @ts-nocheck
-import React, { createContext, useEffect, useState, useCallback } from 'react';
-import { Element, ChildrenArray } from 'react';
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  ReactElement,
+} from 'react';
 import {
   TabBar,
   ScrollableContainer,
@@ -15,6 +19,7 @@ import {
   useRouteMatch,
   matchPath,
   Route,
+  Switch,
 } from 'react-router-dom';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
@@ -32,7 +37,7 @@ type TabsProps = {
   tabContentColor?: string;
   separatorColor?: string;
   tabHoverColor?: string;
-  children: ChildrenArray<Element<typeof Tab>>;
+  children: ReactElement<TabProps>[];
   className?: string;
 };
 export const TabsContext = createContext<boolean>(false);
@@ -60,9 +65,11 @@ function Tabs({
     number | null | undefined
   >(null);
   const queryURL = new URLSearchParams(location.search);
-  const filteredTabsChildren = React.Children.toArray(children).filter(
+  const filteredTabsChildren: ReactElement<TabProps>[] = React.Children.toArray(
+    children,
+  ).filter(
     (child) => React.isValidElement(child) && child.type === Tab,
-  );
+  ) as ReactElement<TabProps>[];
 
   const matchQuery = useCallback(
     (query: Query): boolean => {
@@ -168,18 +175,17 @@ function Tabs({
       >
         {icon && <TabIcon label={label}>{icon}</TabIcon>}
         {isSelected ? (
-          <BasicText className="sc-tabs-item-title">{label}</BasicText>
+          <BasicText>{label}</BasicText>
         ) : (
-          <SecondaryText className="sc-tabs-item-title">{label}</SecondaryText>
+          <SecondaryText>{label}</SecondaryText>
         )}
-        {textBadge && (
-          <EmphaseText className="sc-tabs-item-icon">{textBadge}</EmphaseText>
-        )}
+        {textBadge && <EmphaseText>{textBadge}</EmphaseText>}
       </TabItem>
     );
   });
   return (
     <TabsContext.Provider value={true}>
+      {/*@ts-expect-error containerType is not yet a valid prop for react */}
       <TabsContainer
         style={{ containerType: 'size' }}
         className={['sc-tabs', className].join(' ')}
@@ -213,31 +219,33 @@ function Tabs({
             />
           )}
         </ScrollableContainer>
-        <TabContent
-          className="sc-tabs-item-content"
-          tabContentColor={tabContentColor}
-        >
-          {filteredTabsChildren.map((tab: Element<typeof Tab>, index) => (
-            <Route
-              exact={tab.props.exact}
-              sensitive={tab.props.sensitive}
-              strict={tab.props.strict}
-              key={index}
-              path={
-                tab.props.path.startsWith('/')
-                  ? tab.props.path
-                  : url + '/' + tab.props.path
-              }
-            >
-              {!tab.props.query ||
-              (tab.props.query && matchQuery(tab.props.query)) ? (
-                tab.props.children
-              ) : (
-                <></>
-              )}
-            </Route>
-          ))}
-        </TabContent>
+
+        {filteredTabsChildren.map((tab, index) => (
+          <Route
+            exact={tab.props.exact}
+            sensitive={tab.props.sensitive}
+            strict={tab.props.strict}
+            path={
+              tab.props.path.startsWith('/')
+                ? tab.props.path
+                : url + '/' + tab.props.path
+            }
+            key={index}
+          >
+            {!tab.props.query ||
+            (tab.props.query && matchQuery(tab.props.query)) ? (
+              <TabContent
+                className="sc-tabs-item-content"
+                tabContentColor={tabContentColor}
+                withoutPadding={tab.props.withoutPadding}
+              >
+                {tab.props.children}
+              </TabContent>
+            ) : (
+              <></>
+            )}
+          </Route>
+        ))}
       </TabsContainer>
     </TabsContext.Provider>
   );
