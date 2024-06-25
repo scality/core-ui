@@ -219,34 +219,33 @@ function Tabs({
             />
           )}
         </ScrollableContainer>
-        <Switch>
-          {filteredTabsChildren.map((tab, index) => (
-            <Route
-              exact={tab.props.exact}
-              sensitive={tab.props.sensitive}
-              strict={tab.props.strict}
-              path={
-                tab.props.path.startsWith('/')
-                  ? tab.props.path
-                  : url + '/' + tab.props.path
-              }
-              key={index}
-            >
+
+        {filteredTabsChildren.map((tab, index) => (
+          <Route
+            exact={tab.props.exact}
+            sensitive={tab.props.sensitive}
+            strict={tab.props.strict}
+            path={
+              tab.props.path.startsWith('/')
+                ? tab.props.path
+                : url + '/' + tab.props.path
+            }
+            key={index}
+          >
+            {!tab.props.query ||
+            (tab.props.query && matchQuery(tab.props.query)) ? (
               <TabContent
                 className="sc-tabs-item-content"
                 tabContentColor={tabContentColor}
                 withoutPadding={tab.props.withoutPadding}
               >
-                {!tab.props.query ||
-                (tab.props.query && matchQuery(tab.props.query)) ? (
-                  tab.props.children
-                ) : (
-                  <></>
-                )}
+                {tab.props.children}
               </TabContent>
-            </Route>
-          ))}
-        </Switch>
+            ) : (
+              <></>
+            )}
+          </Route>
+        ))}
       </TabsContainer>
     </TabsContext.Provider>
   );
