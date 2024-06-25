@@ -19,6 +19,7 @@ import {
   useRouteMatch,
   matchPath,
   Route,
+  Switch,
 } from 'react-router-dom';
 import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
@@ -218,32 +219,34 @@ function Tabs({
             />
           )}
         </ScrollableContainer>
-        {filteredTabsChildren.map((tab, index) => (
-          <Route
-            exact={tab.props.exact}
-            sensitive={tab.props.sensitive}
-            strict={tab.props.strict}
-            path={
-              tab.props.path.startsWith('/')
-                ? tab.props.path
-                : url + '/' + tab.props.path
-            }
-            key={index}
-          >
-            <TabContent
-              className="sc-tabs-item-content"
-              tabContentColor={tabContentColor}
-              withoutPadding={tab.props.withoutPadding}
+        <Switch>
+          {filteredTabsChildren.map((tab, index) => (
+            <Route
+              exact={tab.props.exact}
+              sensitive={tab.props.sensitive}
+              strict={tab.props.strict}
+              path={
+                tab.props.path.startsWith('/')
+                  ? tab.props.path
+                  : url + '/' + tab.props.path
+              }
+              key={index}
             >
-              {!tab.props.query ||
-              (tab.props.query && matchQuery(tab.props.query)) ? (
-                tab.props.children
-              ) : (
-                <></>
-              )}
-            </TabContent>
-          </Route>
-        ))}
+              <TabContent
+                className="sc-tabs-item-content"
+                tabContentColor={tabContentColor}
+                withoutPadding={tab.props.withoutPadding}
+              >
+                {!tab.props.query ||
+                (tab.props.query && matchQuery(tab.props.query)) ? (
+                  tab.props.children
+                ) : (
+                  <></>
+                )}
+              </TabContent>
+            </Route>
+          ))}
+        </Switch>
       </TabsContainer>
     </TabsContext.Provider>
   );
