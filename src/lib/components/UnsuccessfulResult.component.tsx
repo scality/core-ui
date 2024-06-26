@@ -8,7 +8,7 @@ import {
   translatedMessages,
 } from './tablev2/TableUtils';
 import { Text } from './text/Text.component';
-import { Box } from '../next';
+import { Box } from './box/Box';
 import { spacing } from '../spacing';
 
 const NoResult = styled(Box)<{ height: number | string }>`
