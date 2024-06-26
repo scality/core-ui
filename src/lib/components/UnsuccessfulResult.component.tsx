@@ -11,7 +11,7 @@ import { Text } from './text/Text.component';
 import { Box } from '../next';
 import { spacing } from '../spacing';
 
-export const NoResult = styled(Box)<{ height?: number | string }>`
+const NoResult = styled(Box)<{ height: number | string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,9 +27,8 @@ export type UnsuccessfulResultProps = {
   };
   locale?: TableLocalType;
   status: 'error' | 'loading' | 'idle' | 'noResult';
-  heightInRem?: number | string;
 } & (
-  | { rowHeight?: TableHeightKeyType; heightInRem?: never }
+  | { rowHeight: TableHeightKeyType; heightInRem?: never }
   | { rowHeight?: never; heightInRem?: number | string }
 );
 
