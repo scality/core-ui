@@ -9,18 +9,14 @@ import {
 } from 'react-window';
 import {
   convertRemToPixels,
-  translatedMessages,
   TableHeightKeyType,
   TableLocalType,
   tableRowHeight,
 } from './TableUtils';
 import { useTableContext } from './Tablev2.component';
-import { NoResult } from './Tablestyle';
-import { Loader } from '../loader/Loader.component';
-import { Text } from '../text/Text.component';
-import { Icon } from '../icon/Icon.component';
 import useSyncedScroll from './useSyncedScroll';
 import { CSSProperties } from 'styled-components';
+import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
 
 type VirtualizedRowsType<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -141,26 +137,17 @@ export function TableRows<
     return index;
   }
 
-  if (status === 'idle' || status === 'loading') {
+  if (status === 'idle' || status === 'loading' || status === 'error') {
     return (
-      <NoResult rowHeight={rowHeight}>
-        <Loader />
-        <Text color="textSecondary">
-          {translatedMessages('loading', entityName, locale)}
-        </Text>
-      </NoResult>
+      <UnsuccessfulResult
+        name={entityName}
+        status={status}
+        locale={locale}
+        rowHeight={rowHeight}
+      />
     );
   }
-  if (status === 'error') {
-    return (
-      <NoResult rowHeight={rowHeight}>
-        <Icon name="Exclamation-circle" color="statusWarning" />
-        <Text color="textSecondary">
-          {translatedMessages('error', entityName, locale)}
-        </Text>
-      </NoResult>
-    );
-  }
+
   if (status === 'success' || status === undefined) {
     if (typeof children === 'function') {
       return children(
@@ -189,11 +176,7 @@ export function TableRows<
         />
       );
     } else {
-      return (
-        <NoResult rowHeight={rowHeight}>
-          {translatedMessages('noResult', entityName, locale)}
-        </NoResult>
-      );
+      return <UnsuccessfulResult name={entityName} status="noResult" />;
     }
   }
 
