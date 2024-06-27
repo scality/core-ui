@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Props, Toggle } from '../src/lib/components/toggle/Toggle.component';
+import {
+  Props,
+  Toggle,
+} from '../../src/lib/components/toggle/Toggle.component';
 import { useArgs } from '@storybook/preview-api';
 import { Meta, StoryObj } from '@storybook/react';
 
