@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { SearchInput } from '../src/lib/components/searchinput/SearchInput.component';
-import { Wrapper, Title } from './common';
+import { SearchInput } from '../../src/lib/components/searchinput/SearchInput.component';
+import { Wrapper, Title } from '../common';
 export default {
   title: 'Components/Inputs/SearchInput',
   component: SearchInput,
@@ -84,19 +84,17 @@ export const Debounce = {
   render: (args) => {
     const [value, setValue] = useState('');
     return (
-      <Wrapper>
-        <SearchInput
-          placeholder="Search"
-          value={value}
-          disableToggle
-          onReset={action('on input reset')}
-          onChange={(e) => {
-            setValue(e.target.value);
-            action('debounce')(`${e.target} changed`);
-          }}
-          {...args}
-        />
-      </Wrapper>
+      <SearchInput
+        placeholder="Search"
+        value={value}
+        disableToggle
+        onReset={action('on input reset')}
+        onChange={(e) => {
+          setValue(e.target.value);
+          action('debounce')(`${e.target} changed`);
+        }}
+        {...args}
+      />
     );
   },
 };
