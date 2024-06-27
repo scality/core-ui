@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { Toggle } from '../src/lib/components/toggle/Toggle.component';
-import { Wrapper } from './common';
+import { Props, Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { useArgs } from '@storybook/preview-api';
-export default {
+import { Meta, StoryObj } from '@storybook/react';
+
+type Story = StoryObj<Props>;
+const meta: Meta = {
   title: 'Components/Inputs/Toggle',
   component: Toggle,
   args: {
     name: 'toggle',
   },
 };
-export const Playground = {
+export default meta;
+
+export const Playground: Story = {
   render: (args) => {
-    const [{ toggle }, updateArgs] = useArgs();
+    const [{ toggle }, updateArgs] = useArgs<{ toggle: boolean }>();
     return (
       <Toggle
-        toggle={toggle}
-        onChange={() => updateArgs({ toggle: !toggle })}
         {...args}
+        onChange={() => updateArgs({ toggle: !toggle })}
+        toggle={toggle}
       />
     );
   },
@@ -24,18 +28,18 @@ export const Playground = {
     label: 'Playground',
   },
 };
-export const LabelledToggle = {
+export const LabelledToggle: Story = {
   render: (args) => {
     const [toggle, setToggle] = useState(false);
     return (
-      <Toggle toggle={toggle} onChange={() => setToggle(!toggle)} {...args} />
+      <Toggle {...args} toggle={toggle} onChange={() => setToggle(!toggle)} />
     );
   },
   args: {
     label: 'Airplane mode',
   },
 };
-export const DisabledToggle = {
+export const DisabledToggle: Story = {
   ...Playground,
   args: {
     label: 'Disabled Toggle',
