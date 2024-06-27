@@ -1,12 +1,11 @@
 import { ChangeEvent, InputHTMLAttributes, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
-import { spacing } from '../../style/theme';
 import { LABEL_PREFIX, useFieldContext } from '../form/Form.component';
-import { Stack } from '../../spacing';
+import { Stack, spacing } from '../../spacing';
 import { Text } from '../text/Text.component';
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+export type Props = InputHTMLAttributes<HTMLInputElement> & {
   toggle: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
@@ -20,8 +19,7 @@ const ToggleContainer = styled.span<{ disabled?: boolean }>`
 `;
 const Switch = styled.label<{ disabled?: boolean }>`
   position: relative;
-  width: ${spacing.sp24};
-  height: ${spacing.sp14};
+  width: ${spacing.r24};
   align-self: center;
   ${(props) => {
     return css`
@@ -39,23 +37,22 @@ const Slider = styled.div<{ toggle?: boolean }>`
   width: 100%;
   height: 1rem;
   background-color: ${(props) => props.theme.backgroundLevel1};
-  border: ${spacing.sp1} solid
+  border: ${spacing.r1} solid
     ${(props) => props.theme[props.toggle ? 'selectedActive' : 'infoPrimary']};
-  border-radius: ${spacing.sp8};
+  border-radius: ${spacing.r8};
   transition: 0.4s;
-  -moz-transform: rotate(0.02deg);
+
   &:before {
     border-radius: 100%;
     position: absolute;
     content: '';
-    height: ${spacing.sp10};
-    width: ${spacing.sp10};
+    height: ${spacing.r10};
+    width: ${spacing.r10};
     left: 3px;
     top: 3.5px;
     background-color: ${(props) =>
       props.theme[props.toggle ? 'textSecondary' : 'textPrimary']};
     transition: 0.4s;
-    -moz-transform: rotate(0.02deg);
   }
 `;
 const ToggleInput = styled.input`
@@ -63,7 +60,7 @@ const ToggleInput = styled.input`
     background-color: ${(props) => props.theme.selectedActive};
   }
   &:checked + ${Slider}:before {
-    transform: translateX(${spacing.sp10});
+    transform: translateX(${spacing.r10});
   }
   display: none;
 `;
