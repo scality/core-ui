@@ -21,7 +21,7 @@ export const Default = {
             placeholder="Search server..."
             onChange={action('on input change')}
             onReset={action('on input reset')}
-            disableToggle={false}
+            autoComplete="off"
           />
         </div>
         <Title>Disabled</Title>
@@ -36,7 +36,6 @@ export const Default = {
             placeholder="Search server..."
             onChange={action('on input change')}
             onReset={action('on input reset')}
-            disableToggle={true}
           />
         </div>
         <Title>Search Input filled</Title>
@@ -49,7 +48,6 @@ export const Default = {
             value="carlito"
             onChange={action('on input change')}
             onReset={action('on input reset')}
-            disableToggle={false}
             data-cy="carlito_searchinput"
           />
         </div>
@@ -64,7 +62,6 @@ export const Default = {
             placeholder="Search and Filter…"
             onChange={action('on input change')}
             onReset={action('on input reset')}
-            disableToggle={true}
           />
         </div>
         <Title>Disable the default toggle undefined onReset action</Title>
@@ -77,7 +74,6 @@ export const Default = {
             value=""
             placeholder="Search and Filter…"
             onChange={action('on input change')}
-            disableToggle={true}
           />
         </div>
       </Wrapper>
