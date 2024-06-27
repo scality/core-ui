@@ -58,7 +58,7 @@ export const TabItem = styled.div<{
 `;
 export const TabsContainer = styled.div<{
   tabLineColor?: string;
-  separatorColor: string;
+  separatorColor?: string;
 }>`
   height: 100%;
   width: 100%;
