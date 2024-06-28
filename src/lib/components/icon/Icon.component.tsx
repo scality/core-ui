@@ -75,6 +75,7 @@ export const iconTable = {
   Folder: 'far faFolder',
   File: 'far faFile',
   'File-invoice': 'fas faFileInvoice',
+  License: 'fas faFileInvoice',
   'Deletion-marker': 'fas faBan',
   'Map-marker': 'fas faMapMarkerAlt',
   Location: 'fas faMapMarkerAlt',
@@ -133,6 +134,7 @@ export const iconTable = {
   Satellite: 'fas faSatelliteDish',
   LightMode: 'fas faSun',
   DarkMode: 'fas faMoon',
+  News: 'fas faBullhorn',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
