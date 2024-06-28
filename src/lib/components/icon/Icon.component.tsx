@@ -131,6 +131,8 @@ export const iconTable = {
   Desktop: 'fas faDesktop',
   Globe: 'fas faGlobe',
   Satellite: 'fas faSatelliteDish',
+  LightMode: 'fas faSun',
+  DarkMode: 'fas faMoon',
 };
 
 const IconStyled = styled(FontAwesomeIcon)`
