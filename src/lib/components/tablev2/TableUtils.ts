@@ -59,7 +59,7 @@ export const tableRowHeight = {
   h64: '4.572', //3 line
 };
 
-type TableMessagesType = 'error' | 'loading' | 'noResult';
+type TableMessagesType = 'error' | 'loading' | 'idle' | 'noResult';
 
 export const translatedMessages = (
   type: TableMessagesType,
@@ -80,7 +80,7 @@ export const translatedMessages = (
     }, please refresh the
     page.`;
   }
-  if (type === 'loading') {
+  if (type === 'loading' || type === 'idle') {
     if (locale === 'fr') {
       return `Chargement des ${entityName?.fr?.plural || 'données'}...`;
     }

@@ -70,6 +70,8 @@ const columns: Column<Entry>[] = [
     Header: 'First Name',
     accessor: 'firstName',
     cellStyle: {
+      width: 'unset',
+      flex: 2,
       textAlign: 'left',
     },
     Cell: ({ value }) => {
@@ -81,6 +83,8 @@ const columns: Column<Entry>[] = [
     Header: 'Last Name',
     accessor: 'lastName',
     cellStyle: {
+      width: 'unset',
+      flex: 2,
       textAlign: 'left',
     },
     // disable the sorting on this column
@@ -90,7 +94,8 @@ const columns: Column<Entry>[] = [
     Header: 'Age',
     accessor: 'age',
     cellStyle: {
-      width: '50px',
+      width: 'unset',
+      flex: 1,
       textAlign: 'left',
     },
   },
@@ -99,6 +104,8 @@ const columns: Column<Entry>[] = [
     accessor: 'health',
     sortType: 'health',
     cellStyle: {
+      width: 'unset',
+      flex: 1,
       textAlign: 'left',
     },
   },
@@ -119,26 +126,27 @@ export const SimpleContentTable = {
           >
             {location.search}
           </span>
-          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table
+            columns={columns}
+            data={data}
+            defaultSortingKey={'health'}
+            entityName={{
+              en: {
+                singular: 'user',
+                plural: 'users',
+              },
+            }}
+          >
             <div
               style={{
                 margin: '16px 0',
               }}
             >
-              <Table.SearchWithQueryParams
-                displayedName={{
-                  singular: 'person',
-                  plural: 'persons',
-                }}
-              />
+              <Table.SearchWithQueryParams />
             </div>
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
-              children={(Rows) => {
-                return <>{Rows}</>;
-              }}
             ></Table.SingleSelectableContent>
           </Table>
         </>
@@ -158,7 +166,6 @@ export const SimpleContentTable = {
             <Table.SingleSelectableContent
               rowHeight="h32"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
             />
           </Table>
         </div>
@@ -178,7 +185,6 @@ export const SimpleContentTable = {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
               selectedId={'Rodolph Yohann'}
               onRowSelected={action('Table Row Clicked')}
             />
@@ -211,7 +217,6 @@ export const SimpleContentTable = {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
               onRowSelected={action('Table Row Clicked')}
             />
           </Table>
@@ -233,7 +238,6 @@ export const SimpleContentTable = {
             <Table.MultiSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
               onMultiSelectionChanged={(rows) => {
                 console.log('Table.MultiSelectableContent selected row', rows);
               }}
@@ -290,6 +294,8 @@ export const asyncTable = {
         accessor: 'firstName',
         cellStyle: {
           textAlign: 'left',
+          width: 'unset',
+          flex: 1,
         },
         Cell: renderRowSubComponent,
       },
@@ -298,14 +304,17 @@ export const asyncTable = {
         accessor: 'lastName',
         cellStyle: {
           textAlign: 'left',
+          width: 'unset',
+          flex: 1,
         },
       },
       {
         Header: 'Age',
         accessor: 'age',
         cellStyle: {
-          width: '50px',
           textAlign: 'left',
+          width: 'unset',
+          flex: 0.5,
         },
       },
       {
@@ -314,6 +323,8 @@ export const asyncTable = {
         sortType: 'health',
         cellStyle: {
           textAlign: 'left',
+          width: 'unset',
+          flex: 1,
         },
       },
     ];
@@ -333,13 +344,10 @@ export const asyncTable = {
               data={data}
               defaultSortingKey={'health'}
             >
-              <Table.SearchWithQueryParams
-                displayedName={{ singular: 'user', plural: 'users' }}
-              ></Table.SearchWithQueryParams>
+              <Table.SearchWithQueryParams></Table.SearchWithQueryParams>
               <Table.SingleSelectableContent
                 rowHeight="h40"
                 separationLineVariant="backgroundLevel3"
-                backgroundVariant="backgroundLevel1"
                 selectedId={'Rodolph Yohann'}
                 onRowSelected={action('Table Row Clicked')}
               />
@@ -401,7 +409,6 @@ export const OnBottomCallback = {
             <Table.SingleSelectableContent
               rowHeight="h40"
               separationLineVariant="backgroundLevel3"
-              backgroundVariant="backgroundLevel1"
             />
           </Table>
         </div>
@@ -554,14 +561,15 @@ export const EmptyTable = {
   render: (args) => {
     const { background } = args;
     return (
-      <Table columns={columns} data={[]} defaultSortingKey={'firstName'}>
-        <Table.SingleSelectableContent
-          rowHeight="h40"
-          separationLineVariant={background}
-          backgroundVariant="backgroundLevel1"
-          onRowSelected={action('Table Row Clicked')}
-        />
-      </Table>
+      <Box width="500px" height="200px">
+        <Table columns={columns} data={[]} defaultSortingKey={'firstName'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant={background}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
+      </Box>
     );
   },
   argTypes: {
@@ -595,7 +603,6 @@ export const LoadingTable = {
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
-            backgroundVariant="backgroundLevel1"
           />
         </Table>
       </Box>
@@ -621,7 +628,6 @@ export const ErrorTable = {
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel4"
-            backgroundVariant="backgroundLevel1"
             locale="en"
           />
         </Table>

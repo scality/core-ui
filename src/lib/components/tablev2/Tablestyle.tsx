@@ -156,15 +156,6 @@ export const TooltipContent = styled.div`
   min-width: 60px;
 `;
 
-export const NoResult = styled(Box)<{ rowHeight: TableHeightKeyType }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${(props) => props.theme.textSecondary};
-  height: ${(props) => tableRowHeight[props.rowHeight]}rem;
-  gap: ${spacing.r8};
-`;
-
 export const SortCaret = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
