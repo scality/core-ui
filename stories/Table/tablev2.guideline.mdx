@@ -1,0 +1,90 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+  Unstyled,
+  Source,
+} from '@storybook/blocks';
+
+import * as TableStories from './tablev2.stories.tsx';
+
+<Meta name="Guideline" of={TableStories} />
+
+# Table
+
+Table is a powerful tool to display, filter and sort data.
+
+## Usage
+
+The Table needs only 2 props "columns" and "data" and either SingleSelectableContent or MultiSelectableContent as children to display.
+
+<Controls of={TableStories.Playground} include={['data', 'columns']} />
+
+### SingleSelectableContent
+
+#### Basic Table
+
+Using the SingleSelectTable without passing the selectedId and onRowSelected props will render a simple table.
+
+<Canvas of={TableStories.SimpleTable} layout="fullscreen" />
+
+#### Single Selectable Table
+
+Use this table when you want to have the possibility to select only one element of the table.
+This allow, for example, to display more details or editing the selected row.
+
+<Canvas of={TableStories.SingleSelectTable} layout="fullscreen" />
+
+### Multi Selectable Content
+
+Possibility to select one or more element of the table, with the possibility to select all elements with the checkbox on Header.
+
+<Canvas of={TableStories.MultiSelectTable} layout="fullscreen" />
+
+### Search input
+
+The table component has a build-in search input. This subcomponent exist in 2 variations.  
+A standard search input and a search input using query params.
+Both allow to search elements from the Table and display the number of corresponding elements.
+
+<Canvas of={TableStories.TableWithSearch} layout="fullscreen" />
+
+<Canvas of={TableStories.TableWithSearchQueryParams} layout="fullscreen" />
+
+## Variations
+
+The Table component also accepts some optionnal props allowing for more customization.
+
+### Style Variations
+
+The Table component has no background and will take the color of its parent element.
+It is however possible to change the line color thanks to the SeparationLineColor props
+
+<Canvas of={TableStories.WithSeparationLine} layout="fullscreen" />
+
+### Status Variations
+
+The Table can take a status prop indicating the status of the data when fetched or queried.
+The status accept 4 values 'loading' or 'idle', 'error', and 'success'.
+'success' status allow the display of the data fed to the Table.
+If the status is not defined then the Table behaves as if the status is 'success'.
+If there is no data the Table will display an empty state :
+
+<Canvas layout="fullscreen" of={TableStories.TableStatus} />
+
+### Entity name
+
+You can pass an entityName props to table containing singular and plural for each define locale (currently english and french).
+This entityName will be used by the search input and for the status messages.
+
+<Canvas layout="fullscreen" of={TableStories.TableWithEntityName} />
+<Controls of={TableStories.TableWithEntityName} include={['locale']} />
+
+## Playground
+
+This is a playground allowing to build and test the component.
+
+<Canvas of={TableStories.Playground} layout="fullscreen" />
+<Controls of={TableStories.Playground} />

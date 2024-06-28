@@ -39,7 +39,7 @@ export const InfoMessage = ({ title, content, link }: Props) => {
       </Text>
       {link && (
         <Link href={link} target="_blank" style={{ alignSelf: 'flex-end' }}>
-          More infos <Icon name="External-link"></Icon>
+          More info <Icon name="External-link"></Icon>
         </Link>
       )}
     </InfoMessageContainer>

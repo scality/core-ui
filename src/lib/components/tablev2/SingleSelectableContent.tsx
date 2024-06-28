@@ -138,7 +138,7 @@ export function SingleSelectableContent<
             hasScrollBar={hasScrollbar}
             scrollBarWidth={scrollBarWidth}
             rowHeight={rowHeight}
-            style={{ overflow: 'hidden' }}
+            style={{}}
           >
             {headerGroup.headers.map((column) => {
               const headerStyleProps = column.getHeaderProps(

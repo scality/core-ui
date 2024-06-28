@@ -11,6 +11,7 @@ const tabs = [
     render: (
       <InlineInput
         id="instanceName"
+        // @ts-ignore
         changeMutation={{
           isLoading: false,
           mutate: () => {},

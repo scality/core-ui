@@ -51,7 +51,6 @@ export const ChartExample = ({}) => (
     xAxis={xAxisVerticalStacked}
     yAxis={yAxisVerticalStacked}
     color={colorVerticalStacked}
-    width={width}
     barConfig={barConfig}
   />
 );

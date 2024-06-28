@@ -78,30 +78,39 @@ export default {
   },
 };
 
-const Template = (args: Omit<ToastProps, 'open' | 'onClose'>) => {
-  const [open, setOpen] = useState(false);
-  const color = useGetBackgroundColor(args.status || 'info');
-  const iconName =
-    args.status === 'error'
-      ? 'Times-circle'
-      : args.status === 'warning'
-      ? 'Exclamation-circle'
-      : args.status === 'success'
-      ? 'Check-circle'
-      : 'Info-circle';
-  return (
-    <div style={{ height: '30vh' }}>
-      {!open && (
-        <Button label={'Open my custom toast'} onClick={() => setOpen(true)} />
-      )}
-      <Toast
-        open={open}
-        onClose={() => setOpen(false)}
-        icon={<Icon name={iconName} color={color} />}
-        {...args}
-      />
-    </div>
-  );
+export const CustomToast = {
+  render: (args) => {
+    const [open, setOpen] = useState(false);
+    const color = useGetBackgroundColor(args.status || 'info');
+    const iconName =
+      args.status === 'error'
+        ? 'Times-circle'
+        : args.status === 'warning'
+        ? 'Exclamation-circle'
+        : args.status === 'success'
+        ? 'Check-circle'
+        : 'Info-circle';
+    return (
+      <div style={{ height: '30vh' }}>
+        {!open && (
+          <Button
+            label={'Open my custom toast'}
+            onClick={() => setOpen(true)}
+          />
+        )}
+        <Toast
+          open={open}
+          onClose={() => setOpen(false)}
+          icon={<Icon name={iconName} color={color} />}
+          {...args}
+        />
+      </div>
+    );
+  },
+  args: {
+    message: <BasicText>{"I'm a custom toast"}</BasicText>,
+    status: 'info',
+  },
 };
 
 export const SimpleToast = {
@@ -133,12 +142,4 @@ export const ToastWithProgressBar = {
     message: <BasicText>{"I'm a toast with a progress bar"}</BasicText>,
     withProgressBar: true,
   },
-};
-
-export const CustomToast: {
-  args?: Omit<ToastProps, 'open' | 'onClose'>;
-} = Template.bind({});
-CustomToast.args = {
-  message: <BasicText>{"I'm a custom toast"}</BasicText>,
-  status: 'info',
 };
