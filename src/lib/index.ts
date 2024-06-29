@@ -1,5 +1,3 @@
-import '@fortawesome/fontawesome-free/css/all.css';
-import './index.css';
 export { Banner } from './components/banner/Banner.component';
 export { Breadcrumb } from './components/breadcrumb/Breadcrumb.component';
 export { Button } from './components/button/Button.component';
