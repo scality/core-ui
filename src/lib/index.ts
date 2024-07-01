@@ -71,3 +71,4 @@ export { Stepper } from './components/steppers/Stepper.component';
 export { InfoMessage } from './components/infomessage/InfoMessage.component';
 export { InputList } from './components/inputlist/InputList.component';
 export { InlineInput } from './components/inlineinput/InlineInput';
+export { UnsuccessfulResult } from './components/UnsuccessfulResult.component';
