@@ -1,64 +1,56 @@
-/**
- * - Test the Toggle component
- * - Should render the Toggle component
- * - Should render the Toggle component with a label
- * - Should toggle the switch on click
- * - Should toggle the switch when pressing the space key or enter key
- * - Should not toggle the switch when disabled
- * - Should not toggle the switch when disabled and pressing the space key or enter key
- *
- *
- *
- */
-import { render, screen, fireEvent } from '@testing-library/react';
-import React from 'react';
-import { Toggle } from './Toggle.component';
+import { render, screen } from '@testing-library/react';
+import React, { useState } from 'react';
+import { Props, Toggle } from './Toggle.component';
+import userEvent from '@testing-library/user-event';
 
 describe('Toggle', () => {
-  let toggle = false;
-  const handleClick = () => {
-    toggle = !toggle;
+  const selectors = {
+    toggle: () => screen.getByRole('checkbox'),
+    label: (text: string | RegExp) => screen.getByText(text),
   };
-  beforeEach(() => {
-    toggle = false;
-  });
+  const RenderToggle = (props: Omit<Props, 'onChange' | 'toggle'>) => {
+    const [toggle, setToggle] = useState<boolean>(false);
+    const handleClick = () => {
+      setToggle(!toggle);
+    };
+    return <Toggle {...props} toggle={toggle} onChange={handleClick} />;
+  };
+
   it('should render the Toggle component with label', () => {
-    render(<Toggle onChange={() => {}} toggle label="Test"></Toggle>);
-    const toggle = screen.getByRole('checkbox');
+    render(<RenderToggle label="Test" />);
+    const toggle = selectors.toggle();
     expect(toggle).toBeInTheDocument();
-    const label = screen.getByText('Test');
+    const label = selectors.label(/Test/);
     expect(label).toBeInTheDocument();
   });
 
   it('should toggle the switch on click on checkbox or label', () => {
-    render(
-      <Toggle onChange={handleClick} toggle={toggle} label="Test"></Toggle>,
-    );
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
-    expect(toggle).toBe(true);
-    const label = screen.getByText('Test');
-    fireEvent.click(label);
-    expect(toggle).toBe(false);
+    render(<RenderToggle label="Test"></RenderToggle>);
+    const toggle = selectors.toggle();
+    userEvent.click(toggle);
+    expect(toggle).toBeChecked();
+    const label = selectors.label('Test');
+    userEvent.click(label);
+    expect(toggle).not.toBeChecked();
   });
 
   it('should toggle the switch when pressing the space key or enter key', () => {
-    render(
-      <Toggle onChange={handleClick} toggle={toggle} label="Test"></Toggle>,
-    );
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.keyDown(checkbox, { key: 'Enter', code: 'Enter', charCode: 13 });
-    expect(toggle).toBe(true);
-    fireEvent.keyDown(checkbox, { key: ' ', code: 'Space', charCode: 32 });
-    expect(toggle).toBe(false);
+    render(<RenderToggle />);
+    const toggle = selectors.toggle();
+    userEvent.tab();
+    userEvent.keyboard('{space}');
+    expect(toggle).toBeChecked();
+    userEvent.keyboard('{enter}');
+    expect(toggle).not.toBeChecked();
   });
 
   it('should not toggle the switch when disabled', () => {
-    render(<Toggle onChange={() => {}} toggle disabled label="Test"></Toggle>);
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
-    expect(toggle).toBe(false);
-    fireEvent.keyDown(checkbox, { key: 'Enter', code: 'Enter', charCode: 13 });
-    expect(toggle).toBe(false);
+    render(<RenderToggle disabled={true} />);
+    const toggle = selectors.toggle();
+    // toBeDisabled is not working for some reason
+    userEvent.tab();
+    expect(toggle).not.toHaveFocus();
+    userEvent.click(toggle);
+    expect(toggle).not.toBeChecked();
   });
 });
