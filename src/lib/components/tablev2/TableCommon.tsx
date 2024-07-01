@@ -147,21 +147,30 @@ export function TableRows<
       />
     );
   }
-
   if (status === 'success' || status === undefined) {
     if (typeof children === 'function') {
-      return children(
-        <VirtualizedRows
-          rows={rows}
-          listRef={bodyRef}
-          itemKey={itemKey}
-          rowHeight={rowHeight}
-          setHasScrollbar={setHasScrollbar}
-          onBottom={onBottom}
-          onBottomOffset={onBottomOffset}
-          RenderRow={RenderRow}
-        />,
-      );
+      if (rows.length) {
+        return children(
+          <VirtualizedRows
+            rows={rows}
+            listRef={bodyRef}
+            itemKey={itemKey}
+            rowHeight={rowHeight}
+            setHasScrollbar={setHasScrollbar}
+            onBottom={onBottom}
+            onBottomOffset={onBottomOffset}
+            RenderRow={RenderRow}
+          />,
+        );
+      } else {
+        return children(
+          <UnsuccessfulResult
+            rowHeight={rowHeight}
+            name={entityName}
+            status="noResult"
+          />,
+        );
+      }
     } else if (rows.length) {
       return (
         <VirtualizedRows
@@ -176,7 +185,13 @@ export function TableRows<
         />
       );
     } else {
-      return <UnsuccessfulResult name={entityName} status="noResult" />;
+      return (
+        <UnsuccessfulResult
+          rowHeight={rowHeight}
+          name={entityName}
+          status="noResult"
+        />
+      );
     }
   }
 
