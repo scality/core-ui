@@ -11,7 +11,7 @@ import { Text } from './text/Text.component';
 import { Box } from './box/Box';
 import { spacing } from '../spacing';
 
-const NoResult = styled(Box)<{ height: number | string }>`
+export const NoResult = styled(Box)<{ height: number | string }>`
   display: flex;
   justify-content: center;
   align-items: center;
