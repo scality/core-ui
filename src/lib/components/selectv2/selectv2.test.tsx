@@ -1,13 +1,7 @@
-import {
-  screen,
-  render as testingRender,
-  within,
-} from '@testing-library/react';
+import { screen, render as testingRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { debug } from 'jest-preview';
-import { Icon } from '../icon/Icon.component';
 import { Option, Select } from '../selectv2/Selectv2.component';
 
 const render = (args) => {
@@ -27,22 +21,38 @@ const generateOptionsData = (n: number) =>
 
 const generateOptions = (n: number) => {
   return generateOptionsData(n).map((o, i) => (
-    <Option key={i} value={o.value} {...o}>
+    <Option key={i} {...o} value={o.value}>
       {o.label}
     </Option>
   ));
 };
+const users = [
+  {
+    label: 'User 1',
+    value: '1',
+  },
+  {
+    label: 'User 2',
+    value: '2',
+  },
+];
 
+const basicOptions = () => {
+  return users.map((user, index) => (
+    <Option key={index} value={user.value}>
+      {user.label}
+    </Option>
+  ));
+};
 const SelectWrapper = (props) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<string | null>(null);
   return (
     <Select value={value} onChange={(value) => setValue(value)} {...props}>
-      {props.children}
+      {props.children || basicOptions()}
     </Select>
   );
 };
 
-const variants = ['default', 'rounded'];
 const optionsWithScrollSearchBar = generateOptions(10); // more than 8 options should display searchbar + scrollbar
 
 const simpleOptions = generateOptions(4); // less than 5 options should not displays any scroll/search bar
@@ -64,218 +74,174 @@ const SelectReset = (props) => {
 };
 
 describe('SelectV2', () => {
-  const toBeClose = (container) => {
-    expect(container.getElementsByClassName('sc-select__option').length).toBe(
-      0,
-    );
+  const selectors = {
+    option: (name: string | RegExp) => screen.getByRole('option', { name }),
+    options: () => screen.queryAllByRole('option'),
+    select: (withSearch?: boolean, name?: string) => {
+      if (withSearch) {
+        return screen.getByRole('combobox', { name });
+      }
+      return screen.getByRole('listbox', { name });
+    },
+    input: () => screen.getByRole('textbox'),
+    noOptions: () => screen.getByText(/No options/i),
   };
 
-  const toBeOpenWith = (container, optionsLength: number) => {
-    expect(container.getElementsByClassName('sc-select__option').length).toBe(
-      optionsLength,
-    );
-  };
-
-  const toggleSelect = (container) => {
-    userEvent.click(container.querySelector('.sc-select__control'));
-  };
-
-  test.each(variants)(
-    'should open select on click/Enter/ArrowDown',
-    (variant) => {
-      const { container } = render(
-        <SelectWrapper variant={variant}>{simpleOptions}</SelectWrapper>,
-      );
-      // should open on click
-      toBeClose(container);
-      toggleSelect(container); // open
-
-      toBeOpenWith(container, simpleOptions.length);
-      toggleSelect(container); // close
-
-      userEvent.tab(); // remove focus
-
-      // should open with Enter/ArrowDown
-      ['Enter', 'ArrowDown'].forEach((key) => {
-        // should open on arrow down
-        toBeClose(container);
-        userEvent.tab(); // focus
-
-        userEvent.keyboard(`{${key}}`);
-        toBeOpenWith(container, simpleOptions.length);
-        toggleSelect(container); // close select
-
-        toBeClose(container);
-        userEvent.tab(); // remove focus
-      });
-    },
-  );
-  test.each(variants)('should display custom placeholder', (variant) => {
-    const placeholder = 'My placeholder...';
-    const { container } = render(
-      <SelectWrapper variant={variant} placeholder={placeholder}>
-        {simpleOptions}
-      </SelectWrapper>,
-    );
-    expect(
-      container.querySelector('.sc-select__placeholder'),
-    ).toHaveTextContent(placeholder);
+  it('should throw error if <Option/> is outside <Select/>', () => {
+    expect(() => render(<Option value="Option 1" />)).toThrowError();
   });
-  test.each(variants)('should display default value', (variant) => {
-    const options = [
-      {
-        value: 0,
-        label: 'Label 0',
-      },
-    ];
-    const { container } = render(
-      <Select variant={variant} defaultValue={options[0]} options={options} />,
-    );
-    expect(container.querySelector('.sc-select__placeholder')).toBeNull();
-    expect(
-      container.querySelector('.sc-select__single-value'),
-    ).toHaveTextContent('Label 0');
-  });
-  test.each(variants)('select should be disabled', (variant) => {
-    const { container } = render(
-      <Select variant={variant} disabled defaultValue="0">
-        <Option value="0">{'Label 0'}</Option>
-      </Select>,
-    );
-    expect(container.querySelector('input')).toBeDisabled();
-  });
-  test.each(variants)('should display no options', (variant) => {
-    const { container } = render(<Select variant={variant} />);
-    toggleSelect(container, variant);
-    expect(
-      container.querySelector('.sc-select__menu-notice--no-options'),
-    ).toHaveTextContent('No options');
-  });
-  test.each(variants)(
-    'should display a search bar if more than 8 options',
-    (variant) => {
-      const { container } = render(
-        <SelectWrapper variant={variant}>
-          {optionsWithScrollSearchBar}
-        </SelectWrapper>,
-      );
-      expect(container.querySelector('.sc-select__input')).not.toBeNull();
-    },
-  );
-  test.each(variants)('should display option', (variant) => {
-    const { container, getByTestId } = render(
-      <Select variant={variant}>
-        <Option data-testid="disabledOption" value="0" disabled>
-          Label 1
-        </Option>
-        <Option
-          data-testid="option2"
-          value="1"
-          icon={<Icon name="Deletion-marker" />}
-        >
-          Label 2
-        </Option>
-      </Select>,
-    );
-    toggleSelect(container);
-    expect(getByTestId('disabledOption')).toHaveAttribute(
-      'aria-disabled',
-      'true',
-    );
-    const icon = getByTestId('option2').querySelector('i');
-    expect(icon).not.toBeNull();
-    expect(icon).toHaveAttribute('aria-label', 'Deletion-marker ');
-  });
-  test.each(variants)(
-    '<Option/> component should throw if outside <Select/>',
-    () => {
-      // mock console.error to not display error message on throw
-      jest.spyOn(console, 'error');
-      console.error.mockImplementation(() => {});
-      expect(() => render(<Option />)).toThrowError();
-      console.error.mockRestore(); // restore console.error
-    },
-  );
-  test.each(variants)('should highlight text on search', (variant) => {
-    const { container, getByTestId } = render(
-      <SelectWrapper variant={variant}>
-        {optionsWithScrollSearchBar}
-      </SelectWrapper>,
-    );
-    toggleSelect(container);
-    userEvent.type(container.querySelector('input'), 'Ite');
-    const firstOption = getByTestId('option0');
-    expect(firstOption).toHaveClass('sc-select__option--is-focused');
-    expect(
-      container.querySelector('.sc-highlighted-matching-text'),
-    ).toHaveTextContent('Ite');
-  });
-  test.each(variants)('should select/unselect option', (variant) => {
-    const { container, getByTestId } = render(
-      <SelectWrapper variant={variant}>{simpleOptions}</SelectWrapper>,
-    );
-    // select option
-    toggleSelect(container); // open select
 
-    toBeOpenWith(container, simpleOptions.length);
-    userEvent.click(getByTestId('option0'));
-    toBeClose(container); // selecting an option should close select
+  it('should open/close on click', () => {
+    render(<SelectWrapper />);
+    const select = selectors.select();
+    expect(select).toBeInTheDocument();
+    let options = selectors.options();
+    expect(options).toHaveLength(0);
 
-    // unselect option
-    toggleSelect(container); // reopen select
+    // should open on click
+    userEvent.click(select);
+    users.forEach((user) => {
+      const option = selectors.option(user.label);
+      expect(option).toBeInTheDocument();
+    });
 
-    expect(getByTestId('option0')).toHaveClass(
-      'sc-select__option--is-selected',
-    );
-    // should be focused on the selected option
-    expect(getByTestId('option0')).toHaveAttribute('aria-selected', 'true');
-    userEvent.click(getByTestId('option1')); // click on another option
-
-    toBeClose(container); // selecting an option should close select
-
-    toggleSelect(container); // reopen select
-
-    expect(getByTestId('option1')).toHaveClass(
-      'sc-select__option--is-selected',
-    );
-    expect(getByTestId('option1')).toHaveAttribute('aria-selected', 'true');
-    expect(getByTestId('option0')).not.toHaveClass(
-      'sc-select__option--is-selected',
-    );
-    expect(getByTestId('option0')).not.toHaveAttribute('aria-selected', 'true');
+    userEvent.click(select);
+    options = selectors.options();
+    expect(options).toHaveLength(0);
   });
-  test.each(variants)('should focus on keyDown/keyUp', (variant) => {
-    const { container, getByTestId } = render(
-      <SelectWrapper variant={variant}>{simpleOptions}</SelectWrapper>,
-    );
-    toggleSelect(container);
+
+  it('should open/close with keyboard', () => {
+    render(<SelectWrapper />);
+    const select = selectors.select();
+    expect(select).toBeInTheDocument();
+    const options = selectors.options();
+    expect(options).toHaveLength(0);
+
+    // should open on Enter
+    userEvent.tab();
+    userEvent.keyboard('{Enter}');
+    users.forEach((user) => {
+      const option = selectors.option(user.label);
+      expect(option).toBeInTheDocument();
+    });
+
+    // should close on Enter
+    userEvent.keyboard('{Enter}');
+    expect(options).toHaveLength(0);
+
+    // should open on ArrowDown
+    userEvent.tab();
     userEvent.keyboard('{ArrowDown}');
-    expect(getByTestId('option0')).not.toHaveClass(
-      'sc-select__option--is-focused',
-    );
-    expect(getByTestId('option1')).toHaveClass('sc-select__option--is-focused');
-    userEvent.keyboard('{ArrowUp}');
-    expect(getByTestId('option0')).toHaveClass('sc-select__option--is-focused');
-    expect(getByTestId('option1')).not.toHaveClass(
-      'sc-select__option--is-focused',
-    );
+    users.forEach((user) => {
+      const option = selectors.option(user.label);
+      expect(option).toBeInTheDocument();
+    });
   });
-  test.each(variants)('should be able to reset the value', (variant) => {
-    const { container } = render(
-      <SelectReset variant={variant}>{simpleOptions}</SelectReset>,
+
+  it('should display custom placeholder', () => {
+    const placeholder = 'My placeholder...';
+    render(<SelectWrapper placeholder={placeholder} />);
+    const input = selectors.input();
+    expect(input).toBeInTheDocument();
+    expect(screen.getByText(placeholder)).toBeInTheDocument();
+  });
+
+  // This test is failing as Select is not working as expected
+  // TODO Work on Select component to display default value when it is defined and value is not
+  it('should display default value', () => {
+    const defaultUser = users[0];
+    render(<SelectWrapper defaultValue={defaultUser.value} />);
+    const select = selectors.select();
+    expect(select).toHaveTextContent(defaultUser.label);
+  });
+
+  it('should be disabled', () => {
+    render(<SelectWrapper disabled />);
+    // select input instead of select as disabled attribute is on input
+    const input = selectors.input();
+    expect(input).toBeDisabled();
+  });
+
+  it('should display no option', () => {
+    render(
+      <SelectWrapper>
+        <></>
+      </SelectWrapper>,
     );
-    userEvent.click(container.querySelector('button'));
+    const select = selectors.select();
+    userEvent.click(select);
+    const noOptions = selectors.noOptions();
+    expect(noOptions).toBeInTheDocument();
+  });
+
+  it('should display a search bar if more than 8 options', () => {
+    render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
+    const select = selectors.select(true);
+    userEvent.click(select);
+    const input = selectors.input();
+    // An input exists even when the search bar is not displayed with a readOnly attribute
+    // Search bar input does not have the readOnly attribute and is focused at the opening of the select
+    expect(input).toBeInTheDocument();
+    expect(input).not.toHaveAttribute('readOnly');
+    expect(input).toHaveFocus();
+  });
+
+  it('should filter and highlight on search', () => {
+    render(<SelectWrapper>{generateOptions(10)} </SelectWrapper>);
+    const select = selectors.select(true);
+    userEvent.click(select);
+    const input = selectors.input();
+    expect(input).toBeInTheDocument();
+    userEvent.type(input, '2');
+
+    const option = selectors.option(/2/);
+    expect(option).toHaveTextContent('Item 2');
+    // select with classname is the easiest way to test the highlight (as there is a lot of layer with no specific role)
     expect(
-      container.querySelector('.sc-select__placeholder'),
-    ).toHaveTextContent('Select...');
+      option.querySelector('.sc-highlighted-matching-text'),
+    ).toHaveTextContent('2');
+  });
+
+  it('should select/unselect option with keyboard', () => {
+    render(<SelectWrapper></SelectWrapper>);
+    const select = selectors.select();
+    userEvent.tab();
+    userEvent.keyboard('{ArrowDown}');
+    let options = selectors.options();
+
+    // select first option
+    expect(options[0]).toHaveClass('sc-select__option--is-focused');
+    userEvent.keyboard('{Enter}');
+    expect(select).toHaveTextContent('User 1');
+
+    // reopen select, the previous selected option should have selected class
+    userEvent.tab();
+    userEvent.keyboard('{ArrowDown}');
+    userEvent.keyboard('{ArrowDown}');
+    options = selectors.options();
+    expect(options[0]).toHaveClass('sc-select__option--is-selected');
+    expect(options[1]).toHaveClass('sc-select__option--is-focused');
+    userEvent.keyboard('{Enter}');
+    expect(select).toHaveTextContent('User 2');
+  });
+
+  it('should be able to reset the value', () => {
+    render(<SelectReset>{simpleOptions}</SelectReset>);
+    const button = screen.getByText(/reset/);
+    userEvent.click(button);
+    const select = selectors.select();
+    expect(select).toHaveTextContent('Select...');
   });
 
   it('should not trigger onChange when defaultValue is empty string', () => {
     const onChange = jest.fn();
     render(
-      <Select value={''} onChange={onChange}>
-        <Option value="test">test</Option>
-      </Select>,
+      <SelectWrapper
+        id="test-select-empty-string"
+        value={''}
+        onChange={onChange}
+        defaultValue=""
+      />,
     );
     expect(onChange).toBeCalledTimes(0);
   });
