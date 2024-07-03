@@ -302,7 +302,6 @@ export type SelectProps = {
   placeholder?: string;
   disabled?: boolean;
   children?: React.ReactNode;
-  defaultValue?: string;
   value?: string;
   onFocus?: (event: FocusEvent) => void;
   onBlur?: (event: FocusEvent) => void;
@@ -357,7 +356,6 @@ function SelectWithOptionContext(props: SelectProps) {
 function SelectBox({
   placeholder = 'Select...',
   disabled = false,
-  defaultValue,
   value,
   onChange,
   variant = 'default',
@@ -366,11 +364,6 @@ function SelectBox({
   id,
   ...rest
 }: SelectProps) {
-  if (defaultValue && value) {
-    console.error(
-      'The `defaultValue` will be overridden by the `value` if they are set at the same time.',
-    );
-  }
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -414,7 +407,6 @@ function SelectBox({
   // Force to reset the value
   useEffect(() => {
     if (
-      !defaultValue &&
       !isEmptyStringInOptions &&
       value === '' &&
       selectRef.current &&
@@ -436,7 +428,6 @@ function SelectBox({
             value={
               searchSelection || options.find((opt) => opt.value === value)
             }
-            defaultValue={defaultValue}
             inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
             keyboardFocusEnabled={keyboardFocusEnabled}

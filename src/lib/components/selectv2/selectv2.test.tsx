@@ -146,15 +146,6 @@ describe('SelectV2', () => {
     expect(screen.getByText(placeholder)).toBeInTheDocument();
   });
 
-  // This test is failing as Select is not working as expected
-  // TODO Work on Select component to display default value when it is defined and value is not
-  it('should display default value', () => {
-    const defaultUser = users[0];
-    render(<SelectWrapper defaultValue={defaultUser.value} />);
-    const select = selectors.select();
-    expect(select).toHaveTextContent(defaultUser.label);
-  });
-
   it('should be disabled', () => {
     render(<SelectWrapper disabled />);
     // select input instead of select as disabled attribute is on input
