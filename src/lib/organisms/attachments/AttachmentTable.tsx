@@ -594,7 +594,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
                 onBlur={() => {
                   setSearchInputIsFocused(false);
                 }}
-                disableToggle
                 disabled={filteredEntities.status === 'error'}
               />
               <Loader />
@@ -616,7 +615,6 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             onBlur={() => {
               setSearchInputIsFocused(false);
             }}
-            disableToggle
             searchInputIsFocused={searchInputIsFocused}
           />
         )}

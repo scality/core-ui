@@ -87,7 +87,6 @@ export const Debounce = {
       <SearchInput
         placeholder="Search"
         value={value}
-        disableToggle
         onReset={action('on input reset')}
         onChange={(e) => {
           setValue(e.target.value);
