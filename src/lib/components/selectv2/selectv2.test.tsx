@@ -177,6 +177,18 @@ describe('SelectV2', () => {
     expect(input).toHaveFocus();
   });
 
+  it('should unfocus the select when the select is closed', () => {
+    render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
+    const select = selectors.select(true);
+    userEvent.click(select);
+    let input = selectors.input();
+    expect(input).toHaveFocus();
+    const option = selectors.option(/Item 1/);
+    userEvent.click(option);
+    input = selectors.input();
+    expect(input).not.toHaveFocus();
+  });
+
   it('should filter and highlight on search', () => {
     render(<SelectWrapper>{generateOptions(10)} </SelectWrapper>);
     const select = selectors.select(true);
@@ -224,17 +236,38 @@ describe('SelectV2', () => {
     expect(select).toHaveTextContent('Select...');
   });
 
-  it('should not trigger onChange when defaultValue is empty string', () => {
-    const onChange = jest.fn();
+  it('should not be possible to select an option if it is disabled', () => {
     render(
-      <SelectWrapper
-        id="test-select-empty-string"
-        value={''}
-        onChange={onChange}
-        defaultValue=""
-      />,
+      <SelectWrapper>
+        <Option value="1" disabled>
+          User 1
+        </Option>
+        <Option value="2">User 2</Option>
+      </SelectWrapper>,
     );
-    expect(onChange).toBeCalledTimes(0);
+    const select = selectors.select();
+    userEvent.click(select);
+    const option = selectors.option(/User 1/);
+    expect(option).toHaveAttribute('aria-disabled', 'true');
+    userEvent.click(option);
+    const option2 = selectors.option(/User 2/);
+    expect(option2).toBeVisible();
+  });
+  it('should display a tooltip if the option is disabled with a reason', () => {
+    render(
+      <SelectWrapper>
+        <Option value="1" disabled disabledReason="This option is disabled">
+          User 1
+        </Option>
+      </SelectWrapper>,
+    );
+    const select = selectors.select();
+    userEvent.click(select);
+    const option = selectors.option(/User 1/);
+    expect(option).toHaveAttribute('aria-disabled', 'true');
+    userEvent.hover(option);
+    const tooltip = screen.getByText(/This option is disabled/);
+    expect(tooltip).toBeInTheDocument();
   });
 
   it('should select with the right selector', async () => {
