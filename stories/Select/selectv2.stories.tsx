@@ -5,6 +5,7 @@ import { Modal } from '../../src/lib/components/modal/Modal.component';
 import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from '../common';
 import { Meta, StoryObj } from '@storybook/react';
+import { useArgs } from '@storybook/preview-api';
 
 type SelectStory = StoryObj<typeof Select>;
 const meta: Meta<typeof Select> = {
@@ -165,5 +166,29 @@ export const NotEnoughPlaceAtTheBottom: SelectStory = {
   ),
   args: {
     children: optionsWithSearchBar,
+  },
+};
+
+export const WithDefaultValue: SelectStory = {
+  render: (args) => {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+      <div>
+        <Select
+          {...args}
+          onChange={(value) => updateArgs({ value })}
+          value={value}
+        ></Select>
+
+        <h2>Selected value</h2>
+        <p>{value}</p>
+      </div>
+    );
+  },
+  args: {
+    value: undefined,
+    placeholder: 'Select an option',
+    children: defaultOptions,
+    defaultValue: defaultOptions[0].props.value,
   },
 };
