@@ -1,3 +1,5 @@
+name: Automatically bump core-ui version
+
 on:
   release:
     types:
