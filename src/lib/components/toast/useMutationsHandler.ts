@@ -41,6 +41,7 @@ declare type MutationsResults<T extends unknown[]> = T extends []
 enum DescriptionBuilderStatus {
   Success = 'success',
   Error = 'error',
+  Idle = 'idle',
 }
 
 type DescriptionBuilder<Data = unknown, Error = unknown> = {
@@ -124,6 +125,8 @@ export const useMutationsHandler = <
       data: mainMutation.mutation?.data,
       status: mainMutation.mutation?.isSuccess
         ? DescriptionBuilderStatus.Success
+        : mainMutation.mutation?.isIdle
+        ? DescriptionBuilderStatus.Idle
         : DescriptionBuilderStatus.Error,
       name: mainMutation.name,
     } as GetDescriptionBuilder<MainMutationType>;
@@ -131,9 +134,11 @@ export const useMutationsHandler = <
       mainMutationDesc,
       ...((dependantMutations?.map(({ mutation, name }) => ({
         data: mutation.data,
-        error: mutation.isError && mutation.error,
+        error: mutation.isError ? mutation.error : null,
         status: mutation.isSuccess
           ? DescriptionBuilderStatus.Success
+          : mutation.isIdle
+          ? DescriptionBuilderStatus.Idle
           : DescriptionBuilderStatus.Error,
         name,
       })) as DescriptionBuilders<T>) || ([] as DescriptionBuilders<T>)),
