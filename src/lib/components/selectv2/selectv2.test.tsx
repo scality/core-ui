@@ -26,36 +26,18 @@ const generateOptions = (n: number) => {
     </Option>
   ));
 };
-const users = [
-  {
-    label: 'User 1',
-    value: '1',
-  },
-  {
-    label: 'User 2',
-    value: '2',
-  },
-];
+const optionsWithScrollSearchBar = generateOptions(10); // more than 8 options should display searchbar + scrollbar
 
-const basicOptions = () => {
-  return users.map((user, index) => (
-    <Option key={index} value={user.value}>
-      {user.label}
-    </Option>
-  ));
-};
+const simpleOptions = generateOptions(4); // less than 5 options should not displays any scroll/search bar
+
 const SelectWrapper = (props) => {
   const [value, setValue] = useState<string | null>(null);
   return (
     <Select value={value} onChange={(value) => setValue(value)} {...props}>
-      {props.children || basicOptions()}
+      {props.children || simpleOptions}
     </Select>
   );
 };
-
-const optionsWithScrollSearchBar = generateOptions(10); // more than 8 options should display searchbar + scrollbar
-
-const simpleOptions = generateOptions(4); // less than 5 options should not displays any scroll/search bar
 
 const SelectReset = (props) => {
   const [value, setValue] = useState('default');
@@ -85,6 +67,7 @@ describe('SelectV2', () => {
     },
     input: () => screen.getByRole('textbox'),
     noOptions: () => screen.getByText(/No options/i),
+    highlightedText: () => screen.getByRole('mark'),
   };
 
   it('should throw error if <Option/> is outside <Select/>', () => {
@@ -100,8 +83,8 @@ describe('SelectV2', () => {
 
     // should open on click
     userEvent.click(select);
-    users.forEach((user) => {
-      const option = selectors.option(user.label);
+    simpleOptions.forEach((opt) => {
+      const option = selectors.option(opt.props.label);
       expect(option).toBeInTheDocument();
     });
 
@@ -120,8 +103,8 @@ describe('SelectV2', () => {
     // should open on Enter
     userEvent.tab();
     userEvent.keyboard('{Enter}');
-    users.forEach((user) => {
-      const option = selectors.option(user.label);
+    simpleOptions.forEach((opt) => {
+      const option = selectors.option(opt.props.label);
       expect(option).toBeInTheDocument();
     });
 
@@ -132,8 +115,8 @@ describe('SelectV2', () => {
     // should open on ArrowDown
     userEvent.tab();
     userEvent.keyboard('{ArrowDown}');
-    users.forEach((user) => {
-      const option = selectors.option(user.label);
+    simpleOptions.forEach((opt) => {
+      const option = selectors.option(opt.props.label);
       expect(option).toBeInTheDocument();
     });
   });
@@ -141,16 +124,24 @@ describe('SelectV2', () => {
   it('should display custom placeholder', () => {
     const placeholder = 'My placeholder...';
     render(<SelectWrapper placeholder={placeholder} />);
-    const input = selectors.input();
-    expect(input).toBeInTheDocument();
     expect(screen.getByText(placeholder)).toBeInTheDocument();
   });
 
   it('should be disabled', () => {
-    render(<SelectWrapper disabled />);
-    // select input instead of select as disabled attribute is on input
+    render(
+      <SelectWrapper value="1" disabled={true}>
+        {simpleOptions}
+      </SelectWrapper>,
+    );
+    userEvent.tab();
+    const select = selectors.select();
+    expect(select).not.toHaveFocus();
+    // use input instead of select because select will still trigger the open/close action
+    // despite select container not being clickable and input being disabled
     const input = selectors.input();
-    expect(input).toBeDisabled();
+    userEvent.click(input);
+    const options = selectors.options();
+    expect(options).toHaveLength(0);
   });
 
   it('should display no option', () => {
@@ -165,19 +156,21 @@ describe('SelectV2', () => {
     expect(noOptions).toBeInTheDocument();
   });
 
-  it('should display a search bar if more than 8 options', () => {
+  it('should filter and highlight on search', () => {
     render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
     const select = selectors.select(true);
     userEvent.click(select);
     const input = selectors.input();
-    // An input exists even when the search bar is not displayed with a readOnly attribute
-    // Search bar input does not have the readOnly attribute and is focused at the opening of the select
-    expect(input).toBeInTheDocument();
-    expect(input).not.toHaveAttribute('readOnly');
-    expect(input).toHaveFocus();
+
+    userEvent.type(input, '2');
+    const options = selectors.options();
+    expect(options).toHaveLength(1);
+    const searchedText = selectors.highlightedText();
+    expect(searchedText).toHaveTextContent('2');
+    expect(searchedText).toHaveClass('sc-highlighted-matching-text');
   });
 
-  it('should unfocus the select when the select is closed', () => {
+  it('should unfocus the search input when the select is closed', () => {
     render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
     const select = selectors.select(true);
     userEvent.click(select);
@@ -189,24 +182,22 @@ describe('SelectV2', () => {
     expect(input).not.toHaveFocus();
   });
 
-  it('should filter and highlight on search', () => {
-    render(<SelectWrapper>{generateOptions(10)} </SelectWrapper>);
+  it('should be possible to use searchbar when option is selected', () => {
+    render(
+      <SelectWrapper value="1">{optionsWithScrollSearchBar}</SelectWrapper>,
+    );
+    expect(screen.getByText(/Item 1/)).toBeVisible();
     const select = selectors.select(true);
     userEvent.click(select);
     const input = selectors.input();
-    expect(input).toBeInTheDocument();
     userEvent.type(input, '2');
-
-    const option = selectors.option(/2/);
-    expect(option).toHaveTextContent('Item 2');
-    // select with classname is the easiest way to test the highlight (as there is a lot of layer with no specific role)
-    expect(
-      option.querySelector('.sc-highlighted-matching-text'),
-    ).toHaveTextContent('2');
+    expect(screen.queryByText(/Item 1/)).not.toBeInTheDocument();
+    const options = selectors.options();
+    expect(options).toHaveLength(1);
   });
 
   it('should select/unselect option with keyboard', () => {
-    render(<SelectWrapper></SelectWrapper>);
+    render(<SelectWrapper />);
     const select = selectors.select();
     userEvent.tab();
     userEvent.keyboard('{ArrowDown}');
@@ -215,7 +206,7 @@ describe('SelectV2', () => {
     // select first option
     expect(options[0]).toHaveClass('sc-select__option--is-focused');
     userEvent.keyboard('{Enter}');
-    expect(select).toHaveTextContent('User 1');
+    expect(select).toHaveTextContent('Item 0');
 
     // reopen select, the previous selected option should have selected class
     userEvent.tab();
@@ -225,7 +216,20 @@ describe('SelectV2', () => {
     expect(options[0]).toHaveClass('sc-select__option--is-selected');
     expect(options[1]).toHaveClass('sc-select__option--is-focused');
     userEvent.keyboard('{Enter}');
-    expect(select).toHaveTextContent('User 2');
+    expect(select).toHaveTextContent('Item 1');
+  });
+
+  it('should scroll to selected value when opening select', () => {
+    render(
+      <SelectWrapper value={optionsWithScrollSearchBar[9].props.value}>
+        {optionsWithScrollSearchBar}
+      </SelectWrapper>,
+    );
+    const select = selectors.select(true);
+    userEvent.click(select);
+    const option = selectors.option(/Item 9/);
+    expect(screen.queryByRole('option', { name: /Item 1/i })).toBeNull();
+    expect(option).toBeVisible();
   });
 
   it('should be able to reset the value', () => {
@@ -240,30 +244,31 @@ describe('SelectV2', () => {
     render(
       <SelectWrapper>
         <Option value="1" disabled>
-          User 1
+          Item 1
         </Option>
-        <Option value="2">User 2</Option>
+        <Option value="2">Item 2</Option>
       </SelectWrapper>,
     );
     const select = selectors.select();
     userEvent.click(select);
-    const option = selectors.option(/User 1/);
-    expect(option).toHaveAttribute('aria-disabled', 'true');
+    const option = selectors.option(/Item 1/);
+
     userEvent.click(option);
-    const option2 = selectors.option(/User 2/);
+    const option2 = selectors.option(/Item 2/);
     expect(option2).toBeVisible();
   });
+
   it('should display a tooltip if the option is disabled with a reason', () => {
     render(
       <SelectWrapper>
         <Option value="1" disabled disabledReason="This option is disabled">
-          User 1
+          Item 1
         </Option>
       </SelectWrapper>,
     );
     const select = selectors.select();
     userEvent.click(select);
-    const option = selectors.option(/User 1/);
+    const option = selectors.option(/Item 1/);
     expect(option).toHaveAttribute('aria-disabled', 'true');
     userEvent.hover(option);
     const tooltip = screen.getByText(/This option is disabled/);
