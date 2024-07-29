@@ -17,7 +17,6 @@ const SearchInputRender = (props: Props) => {
 describe('SearchInput', () => {
   const selectors = {
     searchInput: () => screen.getByRole('searchbox'),
-    //? queryBy is used to avoid the error when the element is not found
     clearButton: () => screen.queryByRole('button'),
   };
   it('should render the SearchInput component', () => {
@@ -86,8 +85,4 @@ describe('SearchInput', () => {
     expect(onReset).toHaveBeenCalled();
     expect(searchInput).toHaveValue('');
   });
-
-  // ? Should we test the autocomplete prop? (It is a browser feature so should be no)
-  // ? Should the clear button be hidden/disabled when the input is disabled?
-  // ? And should the text be greyed out?
 });
