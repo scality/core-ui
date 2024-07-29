@@ -135,7 +135,11 @@ const InternalOption = (width, isDefaultVariant) => (props) => {
                 ? 'sc-highlighted-matching-text'
                 : '';
             return (
-              <span key={i} className={highlightStyle}>
+              <span
+                role={highlightStyle ? 'mark' : undefined}
+                key={i}
+                className={highlightStyle}
+              >
                 {part}
               </span>
             );
@@ -238,7 +242,6 @@ const MenuList = (props) => {
     selectedIndex * optionHeight - (ITEMS_PER_SCROLL_WINDOW - 1) * optionHeight;
   useEffect(() => {
     if (listRef && listRef.current) {
-      // @ts-ignore
       listRef.current.scrollTo(
         getScrollOffset(
           listRef.current,
@@ -282,6 +285,7 @@ const ValueContainer = ({ children, ...props }) => {
   const icon = selectedOption ? selectedOption.icon : null;
   const ariaProps = {
     innerProps: {
+      disabled: true,
       role: props.selectProps.isSearchable ? 'combobox' : 'listbox',
       'aria-expanded': props.selectProps.menuIsOpen,
       'aria-autocomplete': 'list',
@@ -309,6 +313,7 @@ export type SelectProps = {
   variant?: 'default' | 'rounded';
   size?: '1' | '2/3' | '1/2' | '1/3';
   className?: string;
+  /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
 };
 type SelectOptionProps = {
