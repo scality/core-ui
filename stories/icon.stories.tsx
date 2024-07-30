@@ -3,6 +3,7 @@ import {
   Icon,
   iconTable,
   IconName,
+  customIcons,
 } from '../src/lib/components/icon/Icon.component';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -132,14 +133,16 @@ export const AllIcons = {
         <td>Name</td>
       </thead>
       <tbody>
-        {(Object.keys(iconTable) as IconName[]).map((key, index) => (
-          <tr key={key}>
-            <td style={{ paddingRight: '2rem' }}>
-              <Icon key={index} name={key} size={'2x'} />
-            </td>
-            <td>{key}</td>
-          </tr>
-        ))}
+        {(Object.keys({ ...iconTable, ...customIcons }) as IconName[]).map(
+          (key, index) => (
+            <tr key={key}>
+              <td style={{ paddingRight: '2rem' }}>
+                <Icon key={index} name={key} size={'2x'} />
+              </td>
+              <td>{key}</td>
+            </tr>
+          ),
+        )}
       </tbody>
     </table>
   ),
