@@ -137,7 +137,7 @@ export const iconTable = {
   News: 'fas faBullhorn',
 };
 
-const customIcons = {
+export const customIcons = {
   'Remote-user': ({ ariaLabel, color, size }) => (
     <svg
       viewBox="0 0 19 17"
