@@ -137,6 +137,27 @@ export const iconTable = {
   News: 'fas faBullhorn',
 };
 
+const customIcons = {
+  'Remote-user': ({ ariaLabel, color, size }) => (
+    <svg
+      viewBox="0 0 19 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={'svg-inline--fa ' + (size ? `fa-${size}` : '')}
+      aria-label={ariaLabel}
+    >
+      <path
+        d="M16.5902 0.5C17.4071 0.5 18.0984 1.1875 18.0984 2V12C18.0984 12.8438 17.4071 13.5 16.5902 13.5H10.5574L11.0601 15H13.3224C13.7309 15 14.0765 15.3438 14.0765 15.75C14.0765 16.1875 13.7309 16.5 13.3224 16.5H4.77596C4.33607 16.5 4.02186 16.1875 4.02186 15.75C4.02186 15.3438 4.33607 15 4.77596 15H7.03825L7.54098 13.5H1.5082C0.659836 13.5 0 12.8438 0 12V2C0 1.1875 0.659836 0.5 1.5082 0.5H16.5902ZM16.0874 11.5V2.5H2.01093V11.5H16.0874Z"
+        fill={color || 'currentcolor'}
+      />
+      <path
+        d="M9.18043 7.97631C8.0165 7.97631 7.08207 7.01268 7.08207 5.81237C7.08207 4.62897 8.0165 3.64844 9.18043 3.64844C10.328 3.64844 11.2788 4.62897 11.2788 5.81237C11.2788 7.01268 10.328 7.97631 9.18043 7.97631ZM10.6394 8.51729C11.8526 8.51729 12.8526 9.54854 12.8526 10.7996V11.4927C12.8526 11.9492 12.4919 12.3042 12.0657 12.3042H6.29519C5.85256 12.3042 5.5083 11.9492 5.5083 11.4927V10.7996C5.5083 9.54854 6.49191 8.51729 7.70502 8.51729H7.98371C8.34437 8.70325 8.7542 8.78778 9.18043 8.78778C9.60666 8.78778 10.0001 8.70325 10.3608 8.51729H10.6394Z"
+        fill={color || 'currentcolor'}
+      />
+    </svg>
+  ),
+};
+
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {
     const theme = props.theme;
@@ -148,7 +169,7 @@ const IconStyled = styled(FontAwesomeIcon)`
   }}
 `;
 
-export type IconName = keyof typeof iconTable;
+export type IconName = keyof typeof iconTable | keyof typeof customIcons;
 export type IconColor = keyof CoreUITheme;
 type Props = {
   name: IconName;
@@ -215,12 +236,17 @@ function NonWrappedIcon({
   ariaLabel = '',
   ...rest
 }: Omit<Props, 'withWrapper'>) {
-  const iconInfo = iconTable[name];
+  const iconInfo = iconTable[name] || customIcons[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
 
   const { data, status } = useQuery({
     queryKey: ['icon', name],
     queryFn: async () => {
+      if (customIcons[name]) {
+        return {
+          default: customIcons[name],
+        };
+      }
       const [iconType, iconClass] = iconInfo.split(' ');
       try {
         const fontAwesomeType =
