@@ -26,9 +26,12 @@ const ConstrainedTextContainer = styled.div`
   -webkit-line-clamp: ${props.lineClamp};
   -webkit-box-orient: vertical;
   overflow-wrap: break-word;
+  word-break: break-all;
   `
       : `overflow-wrap: break-word;
-      white-space: nowrap;`};
+      white-space: nowrap;
+      word-break: break-all;
+      `};
 `;
 const BlockTooltip = styled.div`
   width: stretch;
