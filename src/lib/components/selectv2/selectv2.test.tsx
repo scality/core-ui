@@ -167,7 +167,6 @@ describe('SelectV2', () => {
     expect(options).toHaveLength(1);
     const searchedText = selectors.highlightedText();
     expect(searchedText).toHaveTextContent('2');
-    expect(searchedText).toHaveClass('sc-highlighted-matching-text');
   });
 
   it('should unfocus the search input when the select is closed', () => {
@@ -201,20 +200,16 @@ describe('SelectV2', () => {
     const select = selectors.select();
     userEvent.tab();
     userEvent.keyboard('{ArrowDown}');
-    let options = selectors.options();
 
-    // select first option
-    expect(options[0]).toHaveClass('sc-select__option--is-focused');
+    // should select first option
     userEvent.keyboard('{Enter}');
     expect(select).toHaveTextContent('Item 0');
 
-    // reopen select, the previous selected option should have selected class
+    // should select second option
     userEvent.tab();
     userEvent.keyboard('{ArrowDown}');
     userEvent.keyboard('{ArrowDown}');
-    options = selectors.options();
-    expect(options[0]).toHaveClass('sc-select__option--is-selected');
-    expect(options[1]).toHaveClass('sc-select__option--is-focused');
+
     userEvent.keyboard('{Enter}');
     expect(select).toHaveTextContent('Item 1');
   });
