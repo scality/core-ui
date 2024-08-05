@@ -17,7 +17,7 @@ export type SearchProps = {
   value?: string;
   locale?: TableLocalType;
   totalCount?: number;
-} & Omit<Props, 'disableToggle' | 'onChange'>;
+} & Omit<Props, 'onChange'>;
 
 const SearchContainer = styled.div`
   display: flex;
@@ -88,7 +88,6 @@ export function TableSearch(props: SearchProps) {
       <SearchInput
         value={value}
         placeholder={translations[locale].search}
-        disableToggle
         size="1"
         onChange={(evt) => {
           if (typeof onChange === 'function') {

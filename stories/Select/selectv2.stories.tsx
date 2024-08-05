@@ -5,14 +5,15 @@ import { Modal } from '../../src/lib/components/modal/Modal.component';
 import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from '../common';
 import { Meta, StoryObj } from '@storybook/react';
+import { useArgs } from '@storybook/preview-api';
 
 type SelectStory = StoryObj<typeof Select>;
 const meta: Meta<typeof Select> = {
   title: 'Components/Inputs/Select',
   component: Select,
-  decorators: [
-    (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
-  ],
+  // decorators: [
+  //   (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
+  // ],
 };
 
 export default meta;
@@ -37,7 +38,7 @@ const generateOptions = (n = 10) =>
 
 const optionsWithSearchBar = generateOptions(25);
 const optionsWithoutSearchBar = generateOptions(7);
-const defaultOptions = generateOptions(4);
+const defaultOptions = generateOptions(5);
 const thousandsOfOptions = generateOptions(1000);
 const optionsWithDisabledWithoutMessage = optionsWithSearchBar.map(
   (option, index) => {
@@ -78,7 +79,6 @@ export const WithoutOptions: SelectStory = {
 export const DisabledSelect: SelectStory = {
   args: {
     disabled: true,
-    defaultValue: defaultOptions[0].props.value,
     children: defaultOptions,
   },
 };
@@ -165,5 +165,23 @@ export const NotEnoughPlaceAtTheBottom: SelectStory = {
   ),
   args: {
     children: optionsWithSearchBar,
+  },
+};
+
+export const WithDefaultValue: SelectStory = {
+  render: (args) => {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+      <Select
+        {...args}
+        onChange={(value) => updateArgs({ value })}
+        value={value}
+      ></Select>
+    );
+  },
+  args: {
+    value: defaultOptions[0].props.value,
+    placeholder: 'Select an option',
+    children: defaultOptions,
   },
 };

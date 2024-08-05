@@ -135,7 +135,11 @@ const InternalOption = (width, isDefaultVariant) => (props) => {
                 ? 'sc-highlighted-matching-text'
                 : '';
             return (
-              <span key={i} className={highlightStyle}>
+              <span
+                role={highlightStyle ? 'mark' : undefined}
+                key={i}
+                className={highlightStyle}
+              >
                 {part}
               </span>
             );
@@ -238,7 +242,6 @@ const MenuList = (props) => {
     selectedIndex * optionHeight - (ITEMS_PER_SCROLL_WINDOW - 1) * optionHeight;
   useEffect(() => {
     if (listRef && listRef.current) {
-      // @ts-ignore
       listRef.current.scrollTo(
         getScrollOffset(
           listRef.current,
@@ -282,6 +285,7 @@ const ValueContainer = ({ children, ...props }) => {
   const icon = selectedOption ? selectedOption.icon : null;
   const ariaProps = {
     innerProps: {
+      disabled: true,
       role: props.selectProps.isSearchable ? 'combobox' : 'listbox',
       'aria-expanded': props.selectProps.menuIsOpen,
       'aria-autocomplete': 'list',
@@ -302,7 +306,6 @@ export type SelectProps = {
   placeholder?: string;
   disabled?: boolean;
   children?: React.ReactNode;
-  defaultValue?: string;
   value?: string;
   onFocus?: (event: FocusEvent) => void;
   onBlur?: (event: FocusEvent) => void;
@@ -310,6 +313,7 @@ export type SelectProps = {
   variant?: 'default' | 'rounded';
   size?: '1' | '2/3' | '1/2' | '1/3';
   className?: string;
+  /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
 };
 type SelectOptionProps = {
@@ -357,7 +361,6 @@ function SelectWithOptionContext(props: SelectProps) {
 function SelectBox({
   placeholder = 'Select...',
   disabled = false,
-  defaultValue,
   value,
   onChange,
   variant = 'default',
@@ -366,11 +369,6 @@ function SelectBox({
   id,
   ...rest
 }: SelectProps) {
-  if (defaultValue && value) {
-    console.error(
-      'The `defaultValue` will be overridden by the `value` if they are set at the same time.',
-    );
-  }
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -414,7 +412,6 @@ function SelectBox({
   // Force to reset the value
   useEffect(() => {
     if (
-      !defaultValue &&
       !isEmptyStringInOptions &&
       value === '' &&
       selectRef.current &&
@@ -436,7 +433,6 @@ function SelectBox({
             value={
               searchSelection || options.find((opt) => opt.value === value)
             }
-            defaultValue={defaultValue}
             inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
             keyboardFocusEnabled={keyboardFocusEnabled}

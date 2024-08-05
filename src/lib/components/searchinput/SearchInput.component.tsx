@@ -10,7 +10,6 @@ export type Props = {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onReset?: () => void;
-  disableToggle: boolean;
   disabled?: boolean;
   id?: string;
   size?: InputSize;
@@ -57,7 +56,6 @@ const ClearButton = styled.div`
 const SearchInput = forwardRef(
   (
     {
-      disableToggle,
       placeholder,
       value,
       onChange,
