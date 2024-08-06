@@ -105,6 +105,10 @@ type TableContextType<
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
   };
+  syncScrollListener: ((event: Event) => void) | null;
+  setSyncScrollListener: (listener: (event: Event) => void) => void;
+  setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
+  hasScrollbar?: boolean;
 };
 const TableContext = React.createContext<TableContextType | null>(null);
 
@@ -215,6 +219,12 @@ function Table<
 
   const [rowHeight, setRowHeight] = React.useState<TableHeightKeyType>('h40');
 
+  const [syncScrollListener, setSyncScrollListener] = React.useState<
+    ((event: Event) => void) | null
+  >(null);
+
+  const [hasScrollbar, setHasScrollbar] = React.useState<boolean>(false);
+
   const {
     headerGroups,
     rows,
@@ -310,6 +320,10 @@ function Table<
     toggleAllRowsSelected,
     status,
     entityName,
+    syncScrollListener,
+    setSyncScrollListener,
+    setHasScrollbar,
+    hasScrollbar,
   };
   return (
     <TableContext.Provider

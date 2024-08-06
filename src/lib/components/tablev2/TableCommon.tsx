@@ -44,14 +44,14 @@ export const VirtualizedRows = <
   listRef,
   itemKey,
 }: VirtualizedRowsType<DATA_ROW>) => (
-  <AutoSizer>
-    {({ height, width }) => {
+  <AutoSizer disableWidth>
+    {({ height }) => {
       return (
         <List
-          height={height}
+          height={height - 1}
           itemCount={rows.length} // how many items we are going to render
           itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-          width={width}
+          width={'100%'}
           itemKey={itemKey}
           itemData={rows}
           ref={listRef}
@@ -81,7 +81,7 @@ export const VirtualizedRows = <
 );
 
 export const useTableScrollbar = () => {
-  const [hasScrollbar, setHasScrollbar] = useState(false);
+  const { hasScrollbar, setHasScrollbar } = useTableContext();
   const [scrollBarWidth, setScrollBarWidth] = useState(0);
 
   const handleScrollbarWidth = useCallback((node) => {

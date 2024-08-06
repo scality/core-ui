@@ -42,7 +42,7 @@ export const TableHeader = styled.div<{
 `;
 
 type HeadRowType = {
-  hasScrollBar: boolean;
+  hasScrollBar?: boolean;
   scrollBarWidth: number;
   rowHeight: TableHeightKeyType;
   separationLineVariant: TableVariantType;

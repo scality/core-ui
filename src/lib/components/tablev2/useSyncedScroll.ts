@@ -1,64 +1,66 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Row } from 'react-table';
 import { FixedSizeList } from 'react-window';
+import { useTableContext } from './Tablev2.component';
 
 export default function useSyncedScroll<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >(): {
   headerRef: (element: HTMLDivElement) => void;
-  bodyRef: (tableBody: FixedSizeList<Row<DATA_ROW>[]>) => void;
+  bodyRef: React.RefObject<FixedSizeList<Row<DATA_ROW>[]>>;
 } {
-  const [listener, setListener] =
-    useState<((event: Event) => void) | null>(null);
-  const [tableBody, setTableBody] =
-    useState<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
+  const { syncScrollListener, setSyncScrollListener } = useTableContext();
 
   const headerRef = useCallback(
     (element: HTMLDivElement) => {
+      console.log('elementaire', element);
       if (element) {
         const callback = (event: Event) => {
           if (element && event) {
+            console.log('element', element);
             element.scrollTo({
               left: (event.target as HTMLDivElement).scrollLeft,
               top: 0,
             });
           }
         };
-        if (!listener) {
-          setListener(() => {
+        if (!syncScrollListener) {
+          console.log('setSyncScrollListener', setSyncScrollListener);
+          setSyncScrollListener(() => {
+            console.log('callback', callback);
             return callback;
           });
         }
       }
     },
-    [listener],
+    [syncScrollListener],
   );
 
-  const bodyRef = useCallback((tableBody: FixedSizeList<Row<DATA_ROW>[]>) => {
-    setTableBody(tableBody);
-  }, []);
+  const bodyRef = useRef<FixedSizeList<Row<DATA_ROW>[]> | null>(null);
 
   useEffect(() => {
-    if (tableBody && listener) {
+    if (bodyRef.current && syncScrollListener) {
       /*
       We intentionally use _outerRef prop here despite the fact that it is 
       internal use only and not typed, as it is the only way for us to access to the scrollable element
       */
       //@ts-expect-error
-      (tableBody._outerRef as HTMLDivElement).addEventListener(
+      (bodyRef.current._outerRef as HTMLDivElement).addEventListener(
         'scroll',
-        listener,
+        syncScrollListener,
       );
-
-      return () => {
-        //@ts-expect-error
-        if (tableBody && tableBody._outerRef) {
-          //@ts-expect-error
-          tableBody._outerRef.removeEventListener('scroll', listener);
-        }
-      };
     }
-  }, [tableBody, listener]);
+    return () => {
+      //@ts-expect-error
+      if (bodyRef.current && bodyRef.current._outerRef) {
+        //@ts-expect-error
+        bodyRef.current._outerRef.removeEventListener(
+          'scroll',
+          syncScrollListener,
+        );
+      }
+    };
+  }, [bodyRef.current, syncScrollListener]);
 
   return { headerRef, bodyRef };
 }
