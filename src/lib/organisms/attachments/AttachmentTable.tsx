@@ -38,27 +38,36 @@ type AttachableEntityWithPendingStatus<ENTITY_TYPE> = {
   isPending?: boolean;
 } & AttachableEntity<ENTITY_TYPE>;
 
-export type AttachmentTableProps<ENTITY_TYPE> = {
-  initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[];
+export type AttachmentTableProps<
+  ENTITY_TYPE,
+  ENTITY extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE, ENTITY>[];
   initiallyAttachedEntitiesStatus: 'idle' | 'loading' | 'success' | 'error';
-  initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[];
+  initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[];
   entityName: { plural: string; singular: string };
   getNameQuery?: (
-    entity: AttachableEntity<ENTITY_TYPE>,
+    entity: AttachableEntity<ENTITY_TYPE, ENTITY>,
   ) => UseQueryOptions<unknown, unknown, string>;
   searchEntityPlaceholder: string;
   onAttachmentsOperationsChanged: (
-    attachmentOperations: AttachmentOperation<ENTITY_TYPE>[],
+    attachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
   ) => void;
   filteredEntities:
     | { status: 'idle' }
     | {
         status: 'loading' | 'error';
-        data?: { number: number; entities: AttachableEntity<ENTITY_TYPE>[] };
+        data?: {
+          number: number;
+          entities: AttachableEntity<ENTITY_TYPE, ENTITY>[];
+        };
       }
     | {
         status: 'success';
-        data: { number: number; entities: AttachableEntity<ENTITY_TYPE>[] };
+        data: {
+          number: number;
+          entities: AttachableEntity<ENTITY_TYPE, ENTITY>[];
+        };
       };
   onEntitySearchChange: (search?: string) => void;
 };
@@ -131,31 +140,34 @@ const PrivateAttachmentContext = createContext<{
   setResetAttachementTable: Dispatch<
     SetStateAction<
       (
-        initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
-        initialAttachmentOperations: AttachmentOperation<any>[],
+        initiallyAttachedEntities: AttachableEntity<any, any>[], //Deliberately using any here because we can't use generics
+        initialAttachmentOperations: AttachmentOperation<any, any>[],
       ) => void
     >
   >;
 } | null>(null);
 const AttachmentContext = createContext<{
   resetAttachmentTable: (
-    initiallyAttachedEntities: AttachableEntity<any>[], //Deliberately using any here because we can't use generics
-    initialAttachmentOperations: AttachmentOperation<any>[],
+    initiallyAttachedEntities: AttachableEntity<any, any>[], //Deliberately using any here because we can't use generics
+    initialAttachmentOperations: AttachmentOperation<any, any>[],
   ) => void;
 } | null>(null);
 
-export const AttachmentProvider = <ENTITY_TYPE extends unknown>({
+export const AttachmentProvider = <
+  ENTITY_TYPE extends unknown,
+  ENTITY extends Record<string, unknown> = Record<string, unknown>,
+>({
   children,
 }: PropsWithChildren<{}>) => {
   const [resetAttachmentTable, setResetAttachementTable] = useState<
     (
-      initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
-      initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[],
+      initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE, ENTITY>[],
+      initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
     ) => void
   >(
     (
-      _: AttachableEntity<ENTITY_TYPE>[],
-      __: AttachmentOperation<ENTITY_TYPE>[],
+      _: AttachableEntity<ENTITY_TYPE, ENTITY>[],
+      __: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
     ) => {},
   );
   return (
@@ -177,7 +189,10 @@ export const useAttachmentOperations = () => {
   return ctx;
 };
 
-export const AttachmentTable = <ENTITY_TYPE,>({
+export const AttachmentTable = <
+  ENTITY_TYPE,
+  ENTITY extends Record<string, unknown> = Record<string, unknown>,
+>({
   initiallyAttachedEntities,
   initiallyAttachedEntitiesStatus,
   initialAttachmentOperations,
@@ -187,7 +202,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   getNameQuery,
   filteredEntities,
   onEntitySearchChange,
-}: AttachmentTableProps<ENTITY_TYPE>) => {
+}: AttachmentTableProps<ENTITY_TYPE, ENTITY>) => {
   const privateAttachmentContext = useContext(PrivateAttachmentContext);
   const exposedAttachmentContext = useContext(AttachmentContext);
 
@@ -198,8 +213,11 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   //Desired attached entities and onAttachmentsOperationsChanged handling
   const convertInitiallyAttachedEntitiesToDesiredAttachedEntities = useCallback(
     (
-      initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
-      operations: AttachmentOperation<ENTITY_TYPE>[] = initialAttachmentOperations,
+      initiallyAttachedEntities: AttachableEntity<ENTITY_TYPE, ENTITY>[],
+      operations: AttachmentOperation<
+        ENTITY_TYPE,
+        ENTITY
+      >[] = initialAttachmentOperations,
     ) => {
       return initiallyAttachedEntities
         .filter(
@@ -216,7 +234,9 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   );
   const convertInitiallyAttachementOperationsToDesiredAttachedEntities =
     useCallback(
-      (initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[]) => {
+      (
+        initialAttachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
+      ) => {
         return initialAttachmentOperations
           .filter((op) => op.action !== AttachmentAction.REMOVE)
           .map((op) => ({
@@ -232,21 +252,21 @@ export const AttachmentTable = <ENTITY_TYPE,>({
       (
         state: {
           desiredAttachedEntities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
-          attachmentsOperations: AttachmentOperation<ENTITY_TYPE>[];
+          attachmentsOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[];
         },
         action:
           | {
               action: AttachmentAction.ADD;
-              entity: AttachableEntity<ENTITY_TYPE>;
+              entity: AttachableEntity<ENTITY_TYPE, ENTITY>;
             }
           | {
               action: AttachmentAction.REMOVE;
-              entity: AttachableEntity<ENTITY_TYPE>;
+              entity: AttachableEntity<ENTITY_TYPE, ENTITY>;
             }
           | {
               action: 'RESET_DESIRED_ATTACHED_ENTITIES';
               entities: AttachableEntityWithPendingStatus<ENTITY_TYPE>[];
-              operations: AttachmentOperation<ENTITY_TYPE>[];
+              operations: AttachmentOperation<ENTITY_TYPE, ENTITY>[];
             },
       ) => {
         switch (action.action) {
@@ -401,8 +421,8 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   useEffect(() => {
     privateAttachmentContext.setResetAttachementTable(() => {
       return (
-        newlyAttachedEntities: AttachableEntity<ENTITY_TYPE>[],
-        newAttachmentOperations: AttachmentOperation<ENTITY_TYPE>[],
+        newlyAttachedEntities: AttachableEntity<ENTITY_TYPE, ENTITY>[],
+        newAttachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
       ) => {
         dispatch({
           action: 'RESET_DESIRED_ATTACHED_ENTITIES',
@@ -429,7 +449,11 @@ export const AttachmentTable = <ENTITY_TYPE,>({
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const onSelectedItemChange = useCallback(
-    (onChangeParams: UseComboboxStateChange<AttachableEntity<ENTITY_TYPE>>) => {
+    (
+      onChangeParams: UseComboboxStateChange<
+        AttachableEntity<ENTITY_TYPE, ENTITY>
+      >,
+    ) => {
       if (onChangeParams.selectedItem) {
         dispatch({
           action: AttachmentAction.ADD,
@@ -478,7 +502,7 @@ export const AttachmentTable = <ENTITY_TYPE,>({
             row: { original: entity },
           }: {
             value: string;
-            row: { original: AttachableEntity<ENTITY_TYPE> };
+            row: { original: AttachableEntity<ENTITY_TYPE, ENTITY> };
           }) => {
             const { data: asyncName, status } = useQuery({
               ...(getNameQuery

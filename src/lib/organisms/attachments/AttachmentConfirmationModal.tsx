@@ -10,7 +10,11 @@ import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
 type AttachmentStatus = 'Waiting for confirmation' | 'Error' | 'Success';
 
 //The entity is the "thing" you want to attach to the resource, sorry about the naming :(
-export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
+export function AttachmentConfirmationModal<
+  ENTITY_TYPE,
+  RESOURCE_TYPE,
+  ENTITY extends Record<string, unknown> = Record<string, unknown>,
+>({
   attachmentOperations,
   getAttachmentMutationOptions,
   resourceType,
@@ -21,7 +25,7 @@ export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
   onCancel,
   onExit,
 }: {
-  attachmentOperations: AttachmentOperation<ENTITY_TYPE>[];
+  attachmentOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[];
   getAttachmentMutationOptions: () => UseMutationOptions<
     unknown,
     unknown,
@@ -30,6 +34,7 @@ export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
       type: ENTITY_TYPE;
       entityName: string;
       id: string;
+      completeEntity?: ENTITY;
     }
   >;
   resourceName: string;
@@ -39,8 +44,8 @@ export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
   cancelButtonDisabled?: boolean;
   onCancel?: () => void;
   onExit?: (
-    successfullOperations: AttachmentOperation<ENTITY_TYPE>[],
-    failedOperations: AttachmentOperation<ENTITY_TYPE>[],
+    successfullOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
+    failedOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
   ) => void;
 }) {
   const history = useHistory();
@@ -70,12 +75,13 @@ export function AttachmentConfirmationModal<ENTITY_TYPE, RESOURCE_TYPE>({
     entityName: string;
     id: string;
   }[] = attachmentOperations.map(
-    (attachmentOperation: AttachmentOperation<ENTITY_TYPE>) => {
+    (attachmentOperation: AttachmentOperation<ENTITY_TYPE, ENTITY>) => {
       return {
         action: attachmentOperation.action,
         type: attachmentOperation.entity.type,
         entityName: attachmentOperation.entity.name,
         id: attachmentOperation.entity.id,
+        completeEntity: attachmentOperation.entity.completeEntity,
       };
     },
   );
