@@ -127,12 +127,6 @@ export function SingleSelectableContent<
   const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
     useTableScrollbar();
 
-  console.log('hasScrollbar', {
-    hasScrollbar,
-    scrollBarWidth,
-    handleScrollbarWidth,
-  });
-
   return (
     <>
       <div className="thead" role="rowgroup">

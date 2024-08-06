@@ -13,11 +13,9 @@ export default function useSyncedScroll<
 
   const headerRef = useCallback(
     (element: HTMLDivElement) => {
-      console.log('elementaire', element);
       if (element) {
         const callback = (event: Event) => {
           if (element && event) {
-            console.log('element', element);
             element.scrollTo({
               left: (event.target as HTMLDivElement).scrollLeft,
               top: 0,
@@ -25,9 +23,7 @@ export default function useSyncedScroll<
           }
         };
         if (!syncScrollListener) {
-          console.log('setSyncScrollListener', setSyncScrollListener);
           setSyncScrollListener(() => {
-            console.log('callback', callback);
             return callback;
           });
         }
