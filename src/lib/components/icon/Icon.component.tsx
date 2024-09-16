@@ -202,6 +202,8 @@ type Props = {
   color?: IconColor | CSSProperties['color'];
   ariaLabel?: string;
   withWrapper?: boolean;
+  style?: CSSProperties;
+  onClick?: () => void;
 };
 
 const DelayedFallback = ({
