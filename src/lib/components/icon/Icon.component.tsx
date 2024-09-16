@@ -114,7 +114,6 @@ export const iconTable = {
   'Times-circle': 'fas faTimesCircle',
   Toolbox: 'fas faToolbox',
   Cubes: 'fas faCubes',
-  'File-alt': 'fas faFilesAlt',
   Policy: 'fas faFileSignature',
   Pen: 'fa faPen',
   Pencil: 'fas faPencilAlt',
