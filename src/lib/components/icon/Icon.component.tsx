@@ -135,6 +135,7 @@ export const iconTable = {
   DarkMode: 'fas faMoon',
   News: 'fas faBullhorn',
   Ring: 'fas faRing',
+  Stop: 'fas faStop',
 };
 
 const getColor = (color: string | undefined): string => {
