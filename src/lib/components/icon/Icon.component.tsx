@@ -136,6 +136,7 @@ export const iconTable = {
   News: 'fas faBullhorn',
   Ring: 'fas faRing',
   Stop: 'fas faStop',
+  Play: 'fas faPlay',
 };
 
 const getColor = (color: string | undefined): string => {
