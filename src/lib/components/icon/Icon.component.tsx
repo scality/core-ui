@@ -204,7 +204,7 @@ type Props = {
   ariaLabel?: string;
   withWrapper?: boolean;
   style?: CSSProperties;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
 };
 
 const DelayedFallback = ({
