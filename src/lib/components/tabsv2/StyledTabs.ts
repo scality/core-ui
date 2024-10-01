@@ -62,7 +62,7 @@ export const TabsContainer = styled.div<{
 }>`
   height: 100%;
   width: 100%;
-  contain: 'layout';
+  contain: layout;
   display: flex;
   flex-direction: column;
   background-color: ${(props) =>
