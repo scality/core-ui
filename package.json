@@ -121,6 +121,7 @@
     "react-virtualized": "9.22.3",
     "react-virtualized-auto-sizer": "^1.0.24",
     "react-window": "^1.8.6",
+    "recharts": "^2.12.2",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
     "vega": "^5.17.3",

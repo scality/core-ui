@@ -1,7 +1,9 @@
 import React from 'react';
-import { GlobalHealthBar } from '../src/lib/components/globalhealthbar/GlobalHealthBar.component';
+import { GlobalHealthBar } from '../src/lib/components/globalhealthbar/GlobalHealthBarRecharts.component';
+import { GlobalHealthBar as VegaGlobalHealthBar } from '../src/lib/components/globalhealthbar/GlobalHealthBar.component';
 import { SyncedCursorCharts } from '../src/lib/components/vegachartv2/SyncedCursorCharts';
 import { Wrapper } from './common';
+import { Stack } from '../src/lib/spacing';
 const alerts = [
   {
     id: '1',
@@ -34,8 +36,15 @@ const alerts = [
   {
     id: '5',
     severity: 'warning',
-    startsAt: '2021-02-06T12:00:00Z',
+    startsAt: '2021-02-06T10:00:00Z',
     endsAt: '2021-02-06T20:00:00Z',
+    description: 'Global health warning',
+  },
+  {
+    id: '6',
+    severity: 'warning',
+    startsAt: '2021-02-06T12:00:00Z',
+    endsAt: '2021-02-06T22:30:00Z',
     description: 'Global health warning',
   },
 ];
@@ -105,13 +114,18 @@ const endNotFirstDay = '2021-03-01T23:00:00Z';
 
 export default {
   title: 'Components/Data Display/Charts/GlobalHealthBar',
-  component: GlobalHealthBar,
+  component: (props) => (
+    <Stack direction="vertical">
+      <GlobalHealthBar {...props} />
+      <VegaGlobalHealthBar {...props} />
+    </Stack>
+  ),
   decorators: [
     (story) => (
       <Wrapper
         style={{ minHeight: '50vh', display: 'flex', alignItems: 'center' }}
       >
-        <div style={{ width: '500px' }}>
+        <div style={{ width: '500px', height: '400px' }}>
           <SyncedCursorCharts>{story()}</SyncedCursorCharts>
         </div>
       </Wrapper>
