@@ -12,6 +12,7 @@ export type AccordionProps = {
   title: string;
   id: string;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 const AccordionHeader = styled.button`
@@ -24,29 +25,35 @@ const AccordionHeader = styled.button`
   cursor: pointer;
   background-color: transparent;
   color: ${(props) => props.theme.textPrimary};
-  padding: ${spacing.r8};
+  padding: ${spacing.r4};
   width: 100%;
 `;
-const AccordionContent = styled.div<{ height: string }>`
+const AccordionContainer = styled.div<{
+  isOpen: boolean;
+  computedHeight: string;
+}>`
   overflow: hidden;
-  background-color: ${(props) => props.theme.backgroundLevel1};
-  height: ${(props) => props.height};
-  transition: height 0.3s ease-in;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  height: ${(props) => props.computedHeight};
+  transition: height 0.3s ease-in, opacity 0.3s ease-in, visibility 0.3s;
+  visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
 const Wrapper = styled.div`
   padding: ${spacing.r16};
+  background-color: ${(props) => props.theme.backgroundLevel2};
   padding-left: ${spacing.r24};
+  border-radius: ${spacing.r4};
 `;
 
-const Accordion = ({ title, id, children }: AccordionProps) => {
+export const Accordion = ({ title, id, style, children }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const handleToggleContent = () => {
     setIsOpen((prev) => !prev);
   };
   const calcContentHeight = () => {
-    if (contentRef.current && isOpen) {
-      const height = contentRef.current.scrollHeight;
+    if (containerRef.current && isOpen) {
+      const height = containerRef.current.scrollHeight;
       return height + 'px';
     } else return '0px';
   };
@@ -55,7 +62,7 @@ const Accordion = ({ title, id, children }: AccordionProps) => {
     <Box style={{ width: '100%' }}>
       <h3 style={{ margin: 0 }}>
         <AccordionHeader
-          id="panelButton"
+          id={`Accordion header ${id}`}
           onClick={handleToggleContent}
           aria-controls={id}
           aria-expanded={isOpen}
@@ -76,17 +83,16 @@ const Accordion = ({ title, id, children }: AccordionProps) => {
         </AccordionHeader>
       </h3>
 
-      <AccordionContent
-        ref={contentRef}
-        height={calcContentHeight()}
+      <AccordionContainer
+        ref={containerRef}
+        computedHeight={calcContentHeight()}
+        isOpen={isOpen}
         id={id}
-        aria-labelledby="panelButton"
+        aria-labelledby={`Accordion header ${id}`}
         role="region"
       >
-        <Wrapper>{children}</Wrapper>
-      </AccordionContent>
+        <Wrapper style={style}>{children}</Wrapper>
+      </AccordionContainer>
     </Box>
   );
 };
-
-export default Accordion;
