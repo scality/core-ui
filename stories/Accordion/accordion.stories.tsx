@@ -4,7 +4,7 @@ import React from 'react';
 import {
   Accordion,
   AccordionProps,
-} from '../../src/lib/components/accordion/accordion.component';
+} from '../../src/lib/components/accordion/Accordion.component';
 import { Stack } from '../../src/lib/spacing';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
