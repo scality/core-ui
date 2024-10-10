@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
+import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
 import { Icon } from '../icon/Icon.component';
-import { spacing, Stack } from '../../spacing';
 
 import styled from 'styled-components';
 
@@ -30,11 +30,9 @@ const AccordionHeader = styled.button`
 `;
 const AccordionContainer = styled.div<{
   isOpen: boolean;
-  computedHeight: string;
 }>`
   overflow: hidden;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  height: ${(props) => props.computedHeight};
   transition: height 0.3s ease-in, opacity 0.3s ease-in, visibility 0.3s;
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
@@ -44,22 +42,16 @@ const Wrapper = styled.div`
 
 export const Accordion = ({ title, id, style, children }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+
   const handleToggleContent = () => {
     setIsOpen((prev) => !prev);
   };
-  const calcContentHeight = () => {
-    if (containerRef.current && isOpen) {
-      const height = containerRef.current.scrollHeight;
-      return height + 'px';
-    } else return '0px';
-  };
 
   return (
-    <Box style={{ width: '100%' }}>
+    <Box style={{ width: '100%', height: 'auto' }}>
       <h3 style={{ margin: 0 }}>
         <AccordionHeader
-          id={`Accordion header ${id}`}
+          id={`Accordion-header-${id}`}
           onClick={handleToggleContent}
           aria-controls={id}
           aria-expanded={isOpen}
@@ -82,11 +74,16 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
       </h3>
 
       <AccordionContainer
-        ref={containerRef}
-        computedHeight={calcContentHeight()}
+        ref={(element) => {
+          if (isOpen) {
+            element?.style.setProperty('height', element.scrollHeight + 'px');
+          } else {
+            element?.style.setProperty('height', '0px');
+          }
+        }}
         isOpen={isOpen}
         id={id}
-        aria-labelledby={`Accordion header ${id}`}
+        aria-labelledby={`Accordion-header-${id}`}
         role="region"
       >
         <Wrapper style={style}>{children}</Wrapper>
