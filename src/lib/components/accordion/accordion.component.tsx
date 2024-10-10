@@ -39,10 +39,7 @@ const AccordionContainer = styled.div<{
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
 const Wrapper = styled.div`
-  padding: ${spacing.r16};
-  background-color: ${(props) => props.theme.backgroundLevel2};
-  padding-left: ${spacing.r24};
-  border-radius: ${spacing.r4};
+  padding-block: ${spacing.r8};
 `;
 
 export const Accordion = ({ title, id, style, children }: AccordionProps) => {
@@ -70,15 +67,16 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
             (e.key === 'Enter' || e.key === ' ') && handleToggleContent
           }
         >
-          <Stack direction="horizontal" gap="r10">
+          <Stack direction="horizontal" gap="r8">
             <Icon
-              name="Chevron-left"
+              name="Chevron-up"
+              size="lg"
               style={{
-                transform: isOpen ? 'rotate(90deg)' : 'rotate(270deg)',
+                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
                 transition: 'transform 0.3s ease-in',
               }}
             />
-            <Text>{title}</Text>
+            <Text isEmphazed>{title}</Text>
           </Stack>
         </AccordionHeader>
       </h3>
