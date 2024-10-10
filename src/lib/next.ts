@@ -15,3 +15,4 @@ export { HealthSelector } from './components/healthselectorv2/HealthSelector.com
 export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';
+export { Accordion } from './components/accordion/accordion.component';
