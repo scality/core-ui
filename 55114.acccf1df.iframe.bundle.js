@@ -1,0 +1,1 @@
+(self.webpackChunk_scality_core_ui=self.webpackChunk_scality_core_ui||[]).push([[55114],{"./node_modules/@fortawesome/fontawesome-free/attribution.js":()=>{console.log("Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com\nLicense - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\n")}}]);
