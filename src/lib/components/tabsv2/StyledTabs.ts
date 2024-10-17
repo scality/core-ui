@@ -93,7 +93,7 @@ export const TabContent = styled.div<{
   padding: ${(props) => (props.withoutPadding ? '0' : spacing.r16)};
   display: block;
   width: 100%;
-  height: 100%;
+  height: calc(100% - ${spacing.r40});
   box-sizing: border-box;
   background-color: ${(props) =>
     props.tabContentColor || props.theme.backgroundLevel4};
