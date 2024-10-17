@@ -134,6 +134,7 @@ function Toast({
       ref={ref}
       role="status"
       aria-live="polite"
+      aria-labelledby={`${status}_toast`}
       style={{
         position: 'fixed',
         ...(style || positionStyle),
