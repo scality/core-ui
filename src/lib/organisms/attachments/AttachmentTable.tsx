@@ -97,8 +97,8 @@ const MenuContainer = styled.ul<{
       border: 1px solid ${props.theme.selectedActive};
   `
       : props.searchInputIsFocused
-      ? `border-bottom: 1px solid ${props.theme.selectedActive};`
-      : ''}
+        ? `border-bottom: 1px solid ${props.theme.selectedActive};`
+        : ''}
   border-top: 0;
   li {
     padding: ${spacing.r8};
@@ -497,6 +497,7 @@ export const AttachmentTable = <
             flex: 1.5,
             marginRight: '1.5rem',
           },
+          //@ts-expect-error
           Cell: ({
             value,
             row: { original: entity },

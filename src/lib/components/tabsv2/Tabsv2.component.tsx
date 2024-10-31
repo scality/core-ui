@@ -186,7 +186,6 @@ function Tabs({
   return (
     <TabsContext.Provider value={true}>
       <TabsContainer
-        // @ts-expect-error containerType is not yet a valid prop for react
         style={{ containerType: 'size' }}
         className={['sc-tabs', className].join(' ')}
         tabLineColor={tabLineColor}
