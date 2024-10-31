@@ -20,13 +20,11 @@ const AccordionHeader = styled.button`
   -moz-appearance: none;
   appearance: none;
   border: none;
-  gap: ${spacing.r8};
   width: 100%;
   cursor: pointer;
   background-color: transparent;
   color: ${(props) => props.theme.textPrimary};
-  padding: ${spacing.r4};
-  width: 100%;
+  padding: 0;
 `;
 const AccordionContainer = styled.div<{
   isOpen: boolean;
@@ -40,7 +38,7 @@ const AccordionContainer = styled.div<{
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
 const Wrapper = styled.div`
-  padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r16};
+  padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r20};
 `;
 
 export const Accordion = ({ title, id, style, children }: AccordionProps) => {
