@@ -2,11 +2,23 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 const config: StorybookConfig = {
   stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))'],
   staticDirs: ['./public'],
+
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
     '@storybook/addon-mdx-gfm',
+    '@storybook/addon-webpack5-compiler-swc',
+    '@chromatic-com/storybook',
   ],
+  swc: (config, options) => ({
+    jsc: {
+      transform: {
+        react: {
+          runtime: 'automatic',
+        },
+      },
+    },
+  }),
 
   webpackFinal: async (config, { configType }) => {
     // Resolve error when webpack-ing storybook:
@@ -20,19 +32,24 @@ const config: StorybookConfig = {
 
     return config;
   },
+
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
   },
 
   docs: {
-    autodocs: true,
     defaultName: 'Stories',
   },
+
   managerHead: (head) => `
   ${head}
   <link rel="icon" href="/favicon.ico" />
 `,
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
 };
 
 export default config;

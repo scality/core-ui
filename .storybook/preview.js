@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
 import { brand, coreUIAvailableThemes } from '../src/lib/style/theme';
 import { Wrapper } from '../stories/common';
-import { ScrollbarWrapper, ToastProvider } from '../src/lib';
+import { ToastProvider } from '../src/lib';
 
 export const globalTypes = {
   theme: {
@@ -101,3 +101,4 @@ export const parameters = {
     },
   },
 };
+export const tags = ['autodocs'];
