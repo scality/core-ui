@@ -33,17 +33,25 @@ const AccordionContainer = styled.div<{
 }>`
   overflow: hidden;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  transition: height 0.3s ease-in, opacity 0.3s ease-in, visibility 0.3s;
+  transition:
+    height 0.3s ease-in,
+    opacity 0.3s ease-in,
+    visibility 0.3s;
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
 const Wrapper = styled.div`
-  padding-block: ${spacing.r8};
+  padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r16};
 `;
 
 export const Accordion = ({ title, id, style, children }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggleContent = () => {
+  const handleToggleContent = (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    e.preventDefault();
     setIsOpen((prev) => !prev);
   };
 

@@ -1,12 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-
+import { useTheme } from 'styled-components';
 import {
   Accordion,
   AccordionProps,
 } from '../../src/lib/components/accordion/Accordion.component';
-import { Stack } from '../../src/lib/spacing';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+import { spacing, Stack } from '../../src/lib/spacing';
+import { margin } from 'styled-system';
+import { Text } from '../../src/lib';
 
 type AccordionStory = StoryObj<AccordionProps>;
 
@@ -59,7 +61,29 @@ export const Stacked: AccordionStory = {
     <Stack direction="vertical" gap="r8">
       <Accordion {...args} />
       <Accordion {...args} />
-      <Accordion {...args} style={{ backgroundColor: 'grey' }} />
+      <Accordion {...args} />
     </Stack>
   ),
+};
+
+export const WithCustomStyle: AccordionStory = {
+  render: (args) => {
+    const { title } = args;
+    const theme = useTheme();
+    console.log(theme);
+    const style = {
+      backgroundColor: theme.statusHealthy,
+      borderRadius: spacing.r4,
+      padding: spacing.r16,
+      margin: spacing.r8,
+    };
+    return (
+      <Accordion {...args} style={style} title={title}>
+        <Text>The container of this accordion has a custom style</Text>
+      </Accordion>
+    );
+  },
+  args: {
+    title: 'Accordion with custom style',
+  },
 };
