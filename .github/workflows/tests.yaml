@@ -3,14 +3,14 @@ name: basic tests
 on:
   push:
     branches:
-      - "user/**"
-      - "feature/**"
-      - "improvement/**"
-      - "bugfix/**"
-      - "w/**"
-      - "q/**"
-      - "hotfix/**"
-      - "dependabot/**"
+      - 'user/**'
+      - 'feature/**'
+      - 'improvement/**'
+      - 'bugfix/**'
+      - 'w/**'
+      - 'q/**'
+      - 'hotfix/**'
+      - 'dependabot/**'
   pull_request:
     types:
       - opened
@@ -22,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: 20
       - run: npm ci
       - run: npm run test
       - run: npm run lint
