@@ -51,7 +51,6 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
       | React.MouseEvent<HTMLButtonElement>
       | React.KeyboardEvent<HTMLButtonElement>,
   ) => {
-    e.preventDefault();
     setIsOpen((prev) => !prev);
   };
 
@@ -59,6 +58,7 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
     <Box style={{ width: '100%', height: 'auto' }}>
       <h3 style={{ margin: 0 }}>
         <AccordionHeader
+          type="button"
           id={`Accordion-header-${id}`}
           onClick={handleToggleContent}
           aria-controls={id}
