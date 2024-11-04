@@ -7,7 +7,6 @@ import {
 } from '../../src/lib/components/accordion/Accordion.component';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { spacing, Stack } from '../../src/lib/spacing';
-import { margin } from 'styled-system';
 import { Text } from '../../src/lib';
 
 type AccordionStory = StoryObj<AccordionProps>;
@@ -70,7 +69,7 @@ export const WithCustomStyle: AccordionStory = {
   render: (args) => {
     const { title } = args;
     const theme = useTheme();
-    console.log(theme);
+
     const style = {
       backgroundColor: theme.statusHealthy,
       borderRadius: spacing.r4,
