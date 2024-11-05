@@ -15,6 +15,11 @@ export type AccordionProps = {
   style?: React.CSSProperties;
 };
 
+const AccordionContainer = styled(Box)`
+  width: 100%;
+  height: auto;
+`;
+
 const AccordionHeader = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -25,8 +30,9 @@ const AccordionHeader = styled.button`
   background-color: transparent;
   color: ${(props) => props.theme.textPrimary};
   padding: 0;
+  font-family: 'Lato';
 `;
-const AccordionContainer = styled.div<{
+const AccordionContent = styled.div<{
   isOpen: boolean;
 }>`
   overflow: hidden;
@@ -38,7 +44,7 @@ const AccordionContainer = styled.div<{
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
 `;
 const Wrapper = styled.div`
-  padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r20};
+  padding: ${spacing.r8} 0 ${spacing.r8} 0;
 `;
 
 export const Accordion = ({ title, id, style, children }: AccordionProps) => {
@@ -53,7 +59,7 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
   };
 
   return (
-    <Box style={{ width: '100%', height: 'auto' }}>
+    <AccordionContainer>
       <h3 style={{ margin: 0 }}>
         <AccordionHeader
           type="button"
@@ -79,7 +85,7 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
         </AccordionHeader>
       </h3>
 
-      <AccordionContainer
+      <AccordionContent
         ref={(element) => {
           if (isOpen) {
             element?.style.setProperty('height', element.scrollHeight + 'px');
@@ -93,7 +99,7 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
         role="region"
       >
         <Wrapper style={style}>{children}</Wrapper>
-      </AccordionContainer>
-    </Box>
+      </AccordionContent>
+    </AccordionContainer>
   );
 };
