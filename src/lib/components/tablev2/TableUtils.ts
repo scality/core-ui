@@ -1,7 +1,8 @@
-const STATUS_CRITICAL = 'critical';
-const STATUS_WARNING = 'warning';
-const STATUS_NONE = 'none';
-const STATUS_HEALTH = 'healthy';
+export const STATUS_CRITICAL = 'critical';
+export const STATUS_WARNING = 'warning';
+export const STATUS_NONE = 'none';
+export const STATUS_HEALTH = 'healthy';
+export const STATUS_UNKNOWN = 'unknown';
 
 type StatusType =
   | typeof STATUS_CRITICAL
@@ -34,8 +35,8 @@ export function compareHealth(
   return weights[status1] === weights[status2]
     ? 0
     : weights[status1] > weights[status2]
-    ? 1
-    : -1;
+      ? 1
+      : -1;
 }
 
 export function convertRemToPixels(rem) {
