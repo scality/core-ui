@@ -64,10 +64,20 @@ export const queryTimeSpansCodes: QueryTimeSpan[] = [
   },
 ];
 export const NAN_STRING = 'NAN';
+
+export const STATUS_CRITICAL = 'critical';
+export const STATUS_WARNING = 'warning';
+export const STATUS_SUCCESS = 'success';
+export const STATUS_HEALTHY = 'healthy';
+export const STATUS_INFO = 'info';
+export const STATUS_UNKNOWN = 'unknown';
+export const STATUS_NONE = 'none';
+
 export type Status =
   | 'none'
   | 'unknown'
   | 'info'
   | 'healthy'
+  | 'success'
   | 'warning'
   | 'critical';

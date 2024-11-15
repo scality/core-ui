@@ -1,7 +1,13 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
-import { Status } from '../constants';
+import {
+  Status,
+  STATUS_CRITICAL,
+  STATUS_HEALTHY,
+  STATUS_UNKNOWN,
+  STATUS_WARNING,
+} from '../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faQuestionCircle,
@@ -33,16 +39,15 @@ const BadgeStyled = styled(FontAwesomeIcon)`
 
 const getBadgeIcon = (status: Status) => {
   switch (status) {
-    case 'warning':
+    case STATUS_WARNING:
       return faExclamationCircle;
 
-    case 'critical':
+    case STATUS_CRITICAL:
       return faTimesCircle;
 
-    case 'unknown':
+    case STATUS_UNKNOWN:
       return faQuestionCircle;
 
-    case 'healthy':
     default:
       return null;
   }
