@@ -16,7 +16,7 @@ export type Size =
   | 'huge'
   | 'massive';
 // Replace the "success" by "health", but keep the key in the color-palette for the moment.
-export type Variant =  'base' | 'selected' | 'healthy' | 'warning' | 'danger';
+export type Variant = 'base' | 'selected' | 'healthy' | 'warning' | 'danger';
 // metric chart
 // url query
 export const QUERY_LAST_SEVEN_DAYS = 'now-7d';
@@ -64,4 +64,10 @@ export const queryTimeSpansCodes: QueryTimeSpan[] = [
   },
 ];
 export const NAN_STRING = 'NAN';
-export type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
+export type Status =
+  | 'none'
+  | 'unknown'
+  | 'info'
+  | 'healthy'
+  | 'warning'
+  | 'critical';
