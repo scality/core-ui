@@ -1,33 +1,31 @@
 import React, {
   createContext,
+  ReactElement,
+  useCallback,
   useEffect,
   useState,
-  useCallback,
-  ReactElement,
 } from 'react';
 import {
-  TabBar,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
+import styled from 'styled-components';
+import { ButtonIcon } from '../buttonv2/Buttonv2.component';
+import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
+import { ScrollButton } from './ScrollButton';
+import {
   ScrollableContainer,
+  TabBar,
   TabContent,
   TabItem,
   TabsContainer,
   TabsScroller,
 } from './StyledTabs';
-import {
-  useHistory,
-  useLocation,
-  useRouteMatch,
-  matchPath,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import { SecondaryText, BasicText, EmphaseText } from '../text/Text.component';
-import { ScrollButton } from './ScrollButton';
-import { Tab } from './Tab';
-import { TabProps, Query } from './Tab';
+import { Query, Tab, TabProps } from './Tab';
 import { useScrollingTabs } from './useScrollingTabs';
-import { ButtonIcon } from '../buttonv2/Buttonv2.component';
-import styled from 'styled-components';
 
 type TabsProps = {
   activeTabColor?: string;
@@ -59,8 +57,8 @@ function Tabs({
   ...rest
 }: TabsProps) {
   const location = useLocation();
-  const history = useHistory();
-  const { url } = useRouteMatch();
+  const navigate = useNavigate();
+  const url = location.pathname;
   const [selectedTabIndex, setSelectedTabIndex] = useState<
     number | null | undefined
   >(null);
@@ -101,24 +99,26 @@ function Tabs({
   };
 
   const getPushHistoryPath = (path: string, query?: Query): string => {
+    const sanitizedSegment = path.replace(/^\/+/, '');
+    const replaceUrl = location.pathname.replace(/[^/]+$/, sanitizedSegment);
+
     if (path.startsWith('/')) {
-      return `${path}${serialize(query)}`;
+      return `${replaceUrl}${serialize(query)}`;
     }
-    return `${url}/${path}${serialize(query)}`;
+
+    return `${replaceUrl}/${path}${serialize(query)}`;
   };
 
   useEffect(() => {
     let hasSelectedTab = false;
     filteredTabsChildren.forEach((child, index) => {
+      const fullPath = child.props.path.startsWith('/')
+        ? child.props.path
+        : url + '/' + child.props.path;
+
       const isSelected =
-        !!matchPath(location.pathname, {
-          path: child.props.path.startsWith('/')
-            ? child.props.path
-            : url + '/' + child.props.path,
-          exact: child.props.exact,
-          strict: child.props.strict,
-          sensitive: child.props.sensitive,
-        }) && (child.props.query ? matchQuery(child.props.query) : true);
+        location.pathname.match(new RegExp(`^${fullPath}$`, 'i')) &&
+        (child.props.query ? matchQuery(child.props.query) : true);
 
       if (isSelected) {
         setSelectedTabIndex(index);
@@ -127,6 +127,7 @@ function Tabs({
     });
     if (!hasSelectedTab) setSelectedTabIndex(null);
   }, [location.pathname, filteredTabsChildren, matchQuery]);
+
   const {
     scrollButtonEndRef,
     scrollButtonStartRef,
@@ -149,12 +150,13 @@ function Tabs({
       ...childRest
     }: TabProps = child.props;
     const isSelected = selectedTabIndex === index;
+    const realPath = `/${path.split('/').pop()}`;
     return (
       <TabItem
         className={`sc-tabs-item ${isSelected ? 'selected' : ''}`}
         key={index}
         role="tab"
-        onClick={() => history.push(getPushHistoryPath(path, query))}
+        onClick={() => navigate(getPushHistoryPath(realPath, query))}
         selected={isSelected}
         tabHoverColor={tabHoverColor}
         inactiveTabColor={inactiveTabColor}
@@ -168,7 +170,7 @@ function Tabs({
             event.key === 'Spacebar'
           ) {
             event.preventDefault();
-            history.push(getPushHistoryPath(path, query));
+            navigate(getPushHistoryPath(realPath, query));
           }
         }}
         {...childRest}
@@ -218,33 +220,29 @@ function Tabs({
             />
           )}
         </ScrollableContainer>
-
-        {filteredTabsChildren.map((tab, index) => (
-          <Route
-            exact={tab.props.exact}
-            sensitive={tab.props.sensitive}
-            strict={tab.props.strict}
-            path={
-              tab.props.path.startsWith('/')
-                ? tab.props.path
-                : url + '/' + tab.props.path
-            }
-            key={index}
-          >
-            {!tab.props.query ||
-            (tab.props.query && matchQuery(tab.props.query)) ? (
-              <TabContent
-                className="sc-tabs-item-content"
-                tabContentColor={tabContentColor}
-                withoutPadding={tab.props.withoutPadding}
-              >
-                {tab.props.children}
-              </TabContent>
-            ) : (
-              <></>
-            )}
-          </Route>
-        ))}
+        <Routes>
+          {filteredTabsChildren.map((tab, index) => {
+            const path = tab.props.path.split('/').pop();
+            return (
+              <Route
+                key={index}
+                path={`/${path}`}
+                element={
+                  <>
+                    <TabContent
+                      className="sc-tabs-item-content"
+                      tabContentColor={tabContentColor}
+                      withoutPadding={tab.props.withoutPadding}
+                    >
+                      {tab.props.children}
+                    </TabContent>
+                    <Outlet />
+                  </>
+                }
+              />
+            );
+          })}
+        </Routes>
       </TabsContainer>
     </TabsContext.Provider>
   );
@@ -252,4 +250,4 @@ function Tabs({
 
 Tabs.Tab = Tab;
 // re-export Tab
-export { Tabs, Tab };
+export { Tab, Tabs };

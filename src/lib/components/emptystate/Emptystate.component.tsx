@@ -4,7 +4,7 @@ import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon, IconName } from '../icon/Icon.component';
 import { LargeText } from '../text/Text.component';
 import { CoreUITheme } from '../../style/theme';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export type Props = {
   listedResource: {
@@ -48,7 +48,7 @@ export const ActionWrapper = styled.div`
 function EmptyState(props: Props) {
   const { icon, listedResource, link, resourceToCreate, backgroundColor } =
     props;
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <EmptystateContainer
       className="sc-emptystate"
@@ -74,7 +74,7 @@ function EmptyState(props: Props) {
             icon={<Icon name="Create-add" />}
             type="button"
             variant="primary"
-            onClick={() => history.push(link)}
+            onClick={() => navigate(link)}
           />
         </ActionWrapper>
       )}

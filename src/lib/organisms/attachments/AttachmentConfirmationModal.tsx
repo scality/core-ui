@@ -1,11 +1,11 @@
 import { ComponentType, useState } from 'react';
+import { useMutation, UseMutationOptions } from 'react-query';
+import { useNavigate } from 'react-router';
+import { useTheme } from 'styled-components';
+import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
 import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
-import { useMutation, UseMutationOptions } from 'react-query';
-import { AttachmentOperation, AttachmentAction } from './AttachmentTypes';
-import { useTheme } from 'styled-components';
-import { useHistory } from 'react-router';
-import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
+import { AttachmentAction, AttachmentOperation } from './AttachmentTypes';
 
 type AttachmentStatus = 'Waiting for confirmation' | 'Error' | 'Success';
 
@@ -40,7 +40,9 @@ export function AttachmentConfirmationModal<
   resourceName: string;
   resourceType: RESOURCE_TYPE;
   redirectUrl: string;
-  EntityIcon: ComponentType<{ type: ENTITY_TYPE | RESOURCE_TYPE }>;
+  EntityIcon: ComponentType<
+    React.PropsWithChildren<{ type: ENTITY_TYPE | RESOURCE_TYPE }>
+  >;
   cancelButtonDisabled?: boolean;
   onCancel?: () => void;
   onExit?: (
@@ -48,7 +50,7 @@ export function AttachmentConfirmationModal<
     failedOperations: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
   ) => void;
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -133,7 +135,7 @@ export function AttachmentConfirmationModal<
       onExit(successfulOperations, failedOperations);
     }
     handleClose();
-    history.push(redirectUrl);
+    navigate(redirectUrl);
   };
   const modalFooter = () => {
     return (
@@ -282,7 +284,7 @@ export function AttachmentConfirmationModal<
         disabled={cancelButtonDisabled}
         onClick={() => {
           if (onCancel) onCancel();
-          history.push(redirectUrl);
+          navigate(redirectUrl);
         }}
       />
       <Button

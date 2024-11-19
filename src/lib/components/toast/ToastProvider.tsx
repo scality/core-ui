@@ -14,7 +14,7 @@ export const ToastContext = createContext<ToastContextType | undefined>(
 interface ToastProviderProps {
   children: ReactNode;
 }
-export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
+export const ToastProvider: React.FC<React.PropsWithChildren<ToastProviderProps>> = ({ children }) => {
   const [toastProps, setToastProps] = useState<ToastContextState | null>(null);
 
   const showToast = (toastProps: ToastContextState) => {

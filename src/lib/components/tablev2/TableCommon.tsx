@@ -22,7 +22,9 @@ type VirtualizedRowsType<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
   rows: Row<DATA_ROW>[];
-  RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
+  RenderRow: ComponentType<
+    React.PropsWithChildren<ListChildComponentProps<Row<DATA_ROW>[]>>
+  >;
   rowHeight: TableHeightKeyType;
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
   hasScrollbar?: boolean;

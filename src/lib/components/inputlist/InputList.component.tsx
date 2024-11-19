@@ -5,7 +5,7 @@ import { Input } from '../inputv2/inputv2';
 import { AddButton, SubButton } from './InputButtons';
 
 export type InputListProps<T> = Omit<HTMLProps<HTMLInputElement>, 'size'> & {
-  ref: RefCallBack;
+  ref?: RefCallBack;
   min?: string | number;
   max?: string | number;
   maxLength?: number;

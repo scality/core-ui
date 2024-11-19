@@ -1,19 +1,19 @@
-import React from 'react';
-import { useEffect, useState, createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { QueryTimeSpan, queryTimeSpansCodes } from '../constants';
 import { useLocation } from 'react-router-dom';
-import { QueryTimeSpan } from '../constants';
-import { queryTimeSpansCodes } from '../constants';
 export const MetricsTimeSpanContext = createContext<QueryTimeSpan | null>(null);
 export const MetricsTimeSpanProvider = ({
   children,
+  location,
 }: {
   children: JSX.Element;
+  location?: ReturnType<typeof useLocation>;
 }) => {
   // the default timespan is the last 24h
   const [queryTimeSpanCode, setQueryTimeSpanCode] = useState(
     queryTimeSpansCodes[1],
   );
-  const urlSearchParams = new URLSearchParams(useLocation().search);
+  const urlSearchParams = new URLSearchParams(location?.search);
   const queryTimeSpan = urlSearchParams.get('from');
   // Sync url timespan to local timespan
   useEffect(() => {
