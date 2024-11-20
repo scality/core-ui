@@ -1,9 +1,9 @@
-import { computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
+import { useFloating, useHover, useInteractions } from '@floating-ui/react';
 export const TOP = 'top';
 export const BOTTOM = 'bottom';
 export const LEFT = 'left';
@@ -40,11 +40,9 @@ const TooltipContainer = styled.div`
   display: inline-block;
 `;
 const TooltipOverLayContainer = styled.div<{
-  placement: Position;
   style?: CSSProperties;
 }>`
   display: inline-block;
-  opacity: 0;
   position: fixed;
   width: max-content;
   border: 1px solid ${getThemePropSelector('border')};
@@ -85,51 +83,41 @@ function Tooltip({
   overlay,
   ...rest
 }: Props) {
-  const childrenRef = useRef<HTMLDivElement | null>(null);
-  const tooltipRef = useRef<HTMLDivElement | null>(null);
-
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  useEffect(() => {
-    if (childrenRef.current && tooltipRef.current) {
-      computePosition(childrenRef.current, tooltipRef.current, {
-        placement,
-        middleware: [offset(5), shift(), flip()],
-      }).then(({ x, y }) => {
-        if (tooltipRef.current) {
-          Object.assign(tooltipRef.current.style, {
-            opacity: '1',
-            // we set opacity to 1 to make sure the tooltip is not displayed before the position is computed
-            left: `${x}px`,
-            top: `${y}px`,
-          });
-        }
-      });
-    }
-  }, [tooltipRef.current, childrenRef.current, isTooltipVisible]);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isTooltipVisible,
+    onOpenChange: setIsTooltipVisible,
+    placement: placement,
+  });
+
+  const hover = useHover(context);
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
   return (
-    <TooltipContainer
-      className="sc-tooltip"
-      onPointerEnter={() => {
-        setIsTooltipVisible(true);
-      }}
-      onPointerLeave={() => {
-        setIsTooltipVisible(false);
-      }}
-    >
-      {isTooltipVisible && overlay ? (
-        <TooltipOverLayContainer
-          ref={tooltipRef}
-          className="sc-tooltip-overlay"
-          placement={placement}
+    <>
+      <TooltipContainer className="sc-tooltip">
+        {isTooltipVisible && overlay ? (
+          <TooltipOverLayContainer
+            className="sc-tooltip-overlay"
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            <TooltipText className="sc-tooltip-overlay-text">
+              {overlay}
+            </TooltipText>
+          </TooltipOverLayContainer>
+        ) : null}
+        <div
           style={overlayStyle}
+          ref={refs.setReference}
+          {...getReferenceProps()}
         >
-          <TooltipText className="sc-tooltip-overlay-text">
-            {overlay}
-          </TooltipText>
-        </TooltipOverLayContainer>
-      ) : null}
-      <div ref={childrenRef}>{children}</div>
-    </TooltipContainer>
+          {children}
+        </div>
+      </TooltipContainer>
+    </>
   );
 }
 
