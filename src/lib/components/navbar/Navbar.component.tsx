@@ -37,6 +37,7 @@ const NavbarContainer = styled.div`
       color: ${getThemePropSelector('textPrimary')};
     }
     box-sizing: border-box;
+    border-bottom: 0.5px solid ${(props) => props.theme.backgroundLevel2};
   `};
 `;
 const NavbarMenu = styled.div`
@@ -121,7 +122,7 @@ const NavbarMenuItem = styled.div`
       &:hover {
         background-color: ${getThemePropSelector('highlight')};
       }
-      height: ${navbarHeight};
+      height: auto;
       font-size: ${fontSize.base};
     }
     .menu-item {
