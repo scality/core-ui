@@ -1,7 +1,6 @@
 // @ts-nocheck
-import { useState, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-
 import {
   ButtonStyled,
   ButtonIcon,
@@ -14,6 +13,14 @@ import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import { useSelect } from 'downshift';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+import { flip, offset, Placement, shift } from '@floating-ui/dom';
+import { useFloating, useInteractions, autoUpdate } from '@floating-ui/react';
+
+// use of floating-ui/react ?
+// Oui : ça permet de faciliter le float -> pourra etre utilisé pour d'autres composants ; éviter useEffect et une couche de complexité utilisant floating-ui/dom
+
+// NON : utilisation d'une bibliothèque externe
+
 export type Item = {
   label: string;
   name?: string;
@@ -29,6 +36,7 @@ type Props = {
   items: Items;
   icon?: JSX.Element;
   caret?: boolean;
+  placement?: Placement;
 };
 const DropdownStyled = styled.div`
   position: relative;
@@ -39,6 +47,13 @@ const DropdownStyled = styled.div`
     border-radius: 0;
   }
 `;
+
+// ------------------- replace first 4 lines with floatin-ui --------------
+// position: absolute;
+// margin: 0;
+// padding: 0;
+// top: 50px;
+
 const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
@@ -49,9 +64,10 @@ const DropdownMenuStyled = styled.ul`
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-  border-bottom: 0.3px solid ${getThemePropSelector('border')};
   display: ${(props) => (props.isOpen ? 'auto' : 'none')};
 `;
+// border-bottom: 0.3px solid ${getThemePropSelector('border')};
+
 const DropdownMenuItemStyled = styled.li`
   display: flex;
   align-items: center;
@@ -97,6 +113,7 @@ function Dropdown({
   variant = 'buttonSecondary',
   title,
   caret = true,
+  placement = 'bottom',
   ...rest
 }: Props) {
   const {
@@ -109,12 +126,23 @@ function Dropdown({
     items,
     itemToString: (item) => item?.label || '',
   });
+
+  const { refs, floatingStyles } = useFloating({
+    // open: isOpen,
+    middleware: [offset(10), flip(), shift()],
+    placement: placement,
+    whileElementsMounted: autoUpdate,
+  });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions();
+
   return (
     <DropdownStyled
-      active={open}
+      // active={open}
       variant={variant}
       className="sc-dropdown"
       {...rest}
+      ref={refs.setReference}
     >
       <TriggerStyled
         variant={variant}
@@ -122,6 +150,7 @@ function Dropdown({
         className="trigger"
         title={title}
         {...getToggleButtonProps()}
+        {...getReferenceProps()}
       >
         {icon && (
           <ButtonIcon text={text} size={size}>
@@ -134,32 +163,33 @@ function Dropdown({
             <Icon name="Dropdown-down" />
           </Caret>
         )}
-
-        <DropdownMenuStyled
-          className="menu-item"
-          isOpen={isOpen}
-          {...getMenuProps()}
-        >
-          {items.map((item, index) => {
-            return (
-              <DropdownMenuItemStyled
-                className="menu-item-label"
-                key={item.label}
-                variant={item.variant}
-                {...item}
-                {...getItemProps({
-                  item,
-                  index,
-                  onClick: item.onClick,
-                })}
-                isSelected={index === highlightedIndex}
-              >
-                {item.label}
-              </DropdownMenuItemStyled>
-            );
-          })}
-        </DropdownMenuStyled>
       </TriggerStyled>
+      <DropdownMenuStyled
+        className="menu-item"
+        isOpen={isOpen}
+        style={floatingStyles}
+        {...getFloatingProps()}
+        {...getMenuProps({ ref: refs.setFloating })}
+      >
+        {items.map((item, index) => {
+          return (
+            <DropdownMenuItemStyled
+              className="menu-item-label"
+              key={item.label}
+              variant={item.variant}
+              {...item}
+              {...getItemProps({
+                item,
+                index,
+                onClick: item.onClick,
+              })}
+              isSelected={index === highlightedIndex}
+            >
+              {item.label}
+            </DropdownMenuItemStyled>
+          );
+        })}
+      </DropdownMenuStyled>
     </DropdownStyled>
   );
 }

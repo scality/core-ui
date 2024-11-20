@@ -36,7 +36,6 @@ const NavbarContainer = styled.div`
     .sc-trigger-text {
       color: ${getThemePropSelector('textPrimary')};
     }
-    border-bottom: 0.5px solid ${(props) => props.theme.backgroundLevel3};
     box-sizing: border-box;
   `};
 `;
