@@ -115,7 +115,6 @@ function Dropdown({
   });
 
   const { refs, floatingStyles } = useFloating({
-    // open: isOpen,
     middleware: [offset(10), flip(), shift()],
     placement: placement,
     whileElementsMounted: autoUpdate,
