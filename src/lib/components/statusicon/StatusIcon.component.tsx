@@ -1,34 +1,51 @@
 import { Icon, IconName } from '../icon/Icon.component';
-
 import {
   STATUS_WARNING,
   STATUS_CRITICAL,
-  STATUS_HEALTH,
-} from '../tablev2/TableUtils';
+  STATUS_HEALTHY,
+} from '../../components/constants';
+import { CoreUITheme } from '../../style/theme';
+import { Loader } from '../loader/Loader.component';
 
-export enum StatusCluster {
+export enum Status {
   HEALTHY = 'healthy',
   WARNING = 'warning',
   CRITICAL = 'critical',
   UNKNOWN = 'unknown',
+  LOADING = 'loading',
 }
 
-export const StatusIcon = ({ status }: { status: StatusCluster }) => {
-  const icon: { status: string; name: IconName } = (() => {
-    switch (status) {
-      case STATUS_HEALTH:
-        return { status: 'statusHealthy', name: 'Check-circle' };
+export const StatusIcon = ({ status }: { status: Status }) => {
+  if (status === 'loading') {
+    return <Loader />;
+  }
+  const icon: { color: keyof CoreUITheme; name: IconName; label: string } =
+    (() => {
+      switch (status) {
+        case STATUS_HEALTHY:
+          return {
+            color: 'statusHealthy',
+            name: 'Check-circle',
+            label: 'Healthy',
+          };
 
-      case STATUS_WARNING:
-        return { status: 'statusWarning', name: 'Times-circle' };
+        case STATUS_WARNING:
+          return {
+            color: 'statusWarning',
+            name: 'Times-circle',
+            label: 'Warning',
+          };
 
-      case STATUS_CRITICAL:
-        return { status: 'statusCritical', name: 'Times-circle' };
+        case STATUS_CRITICAL:
+          return {
+            color: 'statusCritical',
+            name: 'Times-circle',
+            label: 'Critical',
+          };
+        default:
+          return { color: 'textTertiary', name: 'Info', label: 'Info' };
+      }
+    })();
 
-      default:
-        return { status: 'textTertiary', name: 'Info' };
-    }
-  })();
-
-  return <Icon color={icon.status} name={icon.name} />;
+  return <Icon color={icon.color} name={icon.name} />;
 };
