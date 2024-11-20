@@ -1,6 +1,5 @@
 // @ts-nocheck
-import { useState, useRef, useCallback, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   ButtonStyled,
   ButtonIcon,
@@ -15,11 +14,6 @@ import { useSelect } from 'downshift';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { flip, offset, Placement, shift } from '@floating-ui/dom';
 import { useFloating, useInteractions, autoUpdate } from '@floating-ui/react';
-
-// use of floating-ui/react ?
-// Oui : ça permet de faciliter le float -> pourra etre utilisé pour d'autres composants ; éviter useEffect et une couche de complexité utilisant floating-ui/dom
-
-// NON : utilisation d'une bibliothèque externe
 
 export type Item = {
   label: string;
@@ -48,12 +42,6 @@ const DropdownStyled = styled.div`
   }
 `;
 
-// ------------------- replace first 4 lines with floatin-ui --------------
-// position: absolute;
-// margin: 0;
-// padding: 0;
-// top: 50px;
-
 const DropdownMenuStyled = styled.ul`
   position: absolute;
   margin: 0;
@@ -66,7 +54,6 @@ const DropdownMenuStyled = styled.ul`
   overflow: auto;
   display: ${(props) => (props.isOpen ? 'auto' : 'none')};
 `;
-// border-bottom: 0.3px solid ${getThemePropSelector('border')};
 
 const DropdownMenuItemStyled = styled.li`
   display: flex;
@@ -138,7 +125,6 @@ function Dropdown({
 
   return (
     <DropdownStyled
-      // active={open}
       variant={variant}
       className="sc-dropdown"
       {...rest}
