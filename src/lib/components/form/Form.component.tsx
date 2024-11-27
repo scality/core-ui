@@ -16,7 +16,7 @@ import { spacing, Stack, Wrap } from '../../spacing';
 import { convertRemToPixels } from '../../utils';
 import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
-import { IconHelp } from '../IconHelper';
+import { IconHelp } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { Text } from '../text/Text.component';
 
