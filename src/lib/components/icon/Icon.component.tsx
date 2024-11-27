@@ -285,7 +285,7 @@ function NonWrappedIcon({
           color={color}
           size={size}
           ariaLabel={ariaLabel}
-          title={title || name}
+          title={title}
           {...rest}
         />
       )}
