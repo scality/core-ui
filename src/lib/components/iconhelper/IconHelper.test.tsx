@@ -5,15 +5,15 @@ import { getWrapper } from '../../testUtils';
 import userEvent from '@testing-library/user-event';
 import { IconHelp } from './IconHelper';
 
-describe('Icon', () => {
+describe('IconHelper', () => {
   const selectors = {
-    icon: () => screen.getByRole('img', { name: /Info/i }),
+    icon: () => screen.getByRole('img'),
   };
   const renderIcon = (tooltipMessage: React.ReactNode) => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <IconHelp tooltipMessage={tooltipMessage} />
+        <IconHelp tooltipMessage={tooltipMessage} title="Info" />
       </Wrapper>,
     );
   };
@@ -41,12 +41,12 @@ describe('Icon', () => {
       <Wrapper>
         <IconHelp
           tooltipMessage={'This is a tooltip'}
-          title="Info Helper testing"
+          title="Info Helper Testing"
         />
       </Wrapper>,
     );
     await waitFor(() => {
-      expect(screen.getByLabelText('Info Helper testing')).toBeInTheDocument();
+      expect(screen.getByLabelText('Info Helper Testing')).toBeInTheDocument();
     });
   });
 });
