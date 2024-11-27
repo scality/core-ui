@@ -2,7 +2,7 @@ import { Modal } from '../src/lib/components/modal/Modal.component';
 import { action } from '@storybook/addon-actions';
 import { Wrapper } from './common';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
-import { IconHelp } from '../src/lib/components/IconHelper';
+import { IconHelp } from '../src/lib/components/iconhelper/IconHelper';
 import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { useArgs } from '@storybook/preview-api';

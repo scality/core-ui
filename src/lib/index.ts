@@ -72,7 +72,7 @@ export { Stack, Wrap, spacing } from './spacing';
 export { Form, FormSection, FormGroup } from './components/form/Form.component';
 export { FormattedDateTime } from './components/date/FormattedDateTime';
 export { getDateDaysDiff } from './components/date/dateDiffer';
-export { IconHelp } from './components/IconHelper';
+export { IconHelp } from './components/iconhelper/IconHelper';
 export { Dropzone } from './components/dropzone/Dropzone';
 export { Toast } from './components/toast/Toast.component';
 export { ToastProvider, useToast } from './components/toast/ToastProvider';

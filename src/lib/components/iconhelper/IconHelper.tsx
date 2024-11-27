@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
-import { Icon } from './icon/Icon.component';
-import { Position, Tooltip } from './tooltip/Tooltip.component';
+import { Icon } from '../icon/Icon.component';
+import { Position, Tooltip } from '../tooltip/Tooltip.component';
 
 type IconHelpProps = {
   tooltipMessage: ReactNode;
