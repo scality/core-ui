@@ -35,4 +35,18 @@ describe('Icon', () => {
       expect(screen.getByText(tooltipMessage)).toBeVisible();
     });
   });
+  it('should be able to change accessible label with title', async () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <IconHelp
+          tooltipMessage={'This is a tooltip'}
+          title="Info Helper testing"
+        />
+      </Wrapper>,
+    );
+    await waitFor(() => {
+      expect(screen.getByLabelText('Info Helper testing')).toBeInTheDocument();
+    });
+  });
 });

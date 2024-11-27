@@ -6,18 +6,20 @@ type IconHelpProps = {
   tooltipMessage: ReactNode;
   placement?: Position;
   overlayStyle?: CSSProperties;
+  title?: string;
 };
 
 export const IconHelp = ({
   tooltipMessage,
   overlayStyle,
   placement = 'right',
+  title,
 }: IconHelpProps) => (
   <Tooltip
     overlay={tooltipMessage}
     placement={placement}
     overlayStyle={overlayStyle}
   >
-    <Icon name="Info" color="buttonSecondary" />
+    <Icon name="Info" color="buttonSecondary" title={title} />
   </Tooltip>
 );
