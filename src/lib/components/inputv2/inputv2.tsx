@@ -1,5 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
@@ -62,12 +62,12 @@ const InputContainer = styled.div<{
   background: ${(props) => props.theme.backgroundLevel1};
   border-radius: ${spacing.r4};
   ${(props) =>
-    props.isContextAvailable &&
-    props.disabled &&
-    `
-  opacity: 0.5;
-  cursor: not-allowed;
-  `}
+    props.disabled
+      ? css`
+          opacity: 0.5;
+          cursor: not-allowed;
+        `
+      : ''}
 `;
 
 const InputBorder = styled.div<{
