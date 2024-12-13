@@ -327,16 +327,14 @@ function Table<
     hasScrollbar,
   };
   return (
-    <BrowserRouter>
-      <TableContext.Provider
-        //@ts-ignore
-        value={contextValue}
-      >
-        <TableWrapper role="grid" className="table">
-          {children}
-        </TableWrapper>
-      </TableContext.Provider>
-    </BrowserRouter>
+    <TableContext.Provider
+      //@ts-ignore
+      value={contextValue}
+    >
+      <TableWrapper role="grid" className="table">
+        {children}
+      </TableWrapper>
+    </TableContext.Provider>
   );
 }
 

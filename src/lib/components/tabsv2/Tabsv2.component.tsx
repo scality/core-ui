@@ -187,67 +187,65 @@ function Tabs({
     );
   });
   return (
-    <BrowserRouter>
-      <TabsContext.Provider value={true}>
-        <TabsContainer
-          style={{ containerType: 'size' }}
-          className={['sc-tabs', className].join(' ')}
-          tabLineColor={tabLineColor}
-          separatorColor={separatorColor}
-          {...rest}
-        >
-          <ScrollableContainer>
-            {displayScroll.start && (
-              <ScrollButton
-                ref={scrollButtonStartRef}
-                direction="left"
-                onClick={handleStartScrollClick}
+    <TabsContext.Provider value={true}>
+      <TabsContainer
+        style={{ containerType: 'size' }}
+        className={['sc-tabs', className].join(' ')}
+        tabLineColor={tabLineColor}
+        separatorColor={separatorColor}
+        {...rest}
+      >
+        <ScrollableContainer>
+          {displayScroll.start && (
+            <ScrollButton
+              ref={scrollButtonStartRef}
+              direction="left"
+              onClick={handleStartScrollClick}
+            />
+          )}
+          <TabsScroller ref={tabsRef} onScroll={handleTabsScroll}>
+            <TabBar
+              onKeyDown={handleKeyDown}
+              ref={tabsListRef}
+              className="sc-tabs-bar"
+              role="tablist"
+            >
+              {tabItems}
+            </TabBar>
+          </TabsScroller>
+          {displayScroll.end && (
+            <ScrollButton
+              ref={scrollButtonEndRef}
+              direction="right"
+              onClick={handleEndScrollClick}
+            />
+          )}
+        </ScrollableContainer>
+        <Routes>
+          {filteredTabsChildren.map((tab, index) => {
+            const path = tab.props.path.split('/').pop();
+            return (
+              <Route
+                key={index}
+                path={`/${path}`}
+                element={
+                  <>
+                    <TabContent
+                      className="sc-tabs-item-content"
+                      tabContentColor={tabContentColor}
+                      withoutPadding={tab.props.withoutPadding}
+                    >
+                      {tab.props.children}
+                    </TabContent>
+                    <Outlet />
+                  </>
+                }
               />
-            )}
-            <TabsScroller ref={tabsRef} onScroll={handleTabsScroll}>
-              <TabBar
-                onKeyDown={handleKeyDown}
-                ref={tabsListRef}
-                className="sc-tabs-bar"
-                role="tablist"
-              >
-                {tabItems}
-              </TabBar>
-            </TabsScroller>
-            {displayScroll.end && (
-              <ScrollButton
-                ref={scrollButtonEndRef}
-                direction="right"
-                onClick={handleEndScrollClick}
-              />
-            )}
-          </ScrollableContainer>
-          <Routes>
-            {filteredTabsChildren.map((tab, index) => {
-              const path = tab.props.path.split('/').pop();
-              return (
-                <Route
-                  key={index}
-                  path={`/${path}`}
-                  element={
-                    <>
-                      <TabContent
-                        className="sc-tabs-item-content"
-                        tabContentColor={tabContentColor}
-                        withoutPadding={tab.props.withoutPadding}
-                      >
-                        {tab.props.children}
-                      </TabContent>
-                      <Outlet />
-                    </>
-                  }
-                />
-              );
-            })}
-          </Routes>
-        </TabsContainer>
-      </TabsContext.Provider>
-    </BrowserRouter>
+            );
+          })}
+        </Routes>
+      </TabsContainer>
+    </TabsContext.Provider>
   );
 }
 
