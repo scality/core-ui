@@ -33,6 +33,7 @@ import { TableWrapper, TooltipContent } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import { Icon } from '../icon/Icon.component';
+import { BrowserRouter } from 'react-router-dom';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -156,8 +157,8 @@ const DefaultRenderer = ({ value }) => {
       rowHeight === 'h32'
         ? 1
         : rowHeight === 'h40' || rowHeight === 'h48'
-        ? 2
-        : 3;
+          ? 2
+          : 3;
     return (
       <Box mr={4}>
         <ConstrainedText text={value} lineClamp={lineClamp} />
@@ -326,14 +327,16 @@ function Table<
     hasScrollbar,
   };
   return (
-    <TableContext.Provider
-      //@ts-ignore
-      value={contextValue}
-    >
-      <TableWrapper role="grid" className="table">
-        {children}
-      </TableWrapper>
-    </TableContext.Provider>
+    <BrowserRouter>
+      <TableContext.Provider
+        //@ts-ignore
+        value={contextValue}
+      >
+        <TableWrapper role="grid" className="table">
+          {children}
+        </TableWrapper>
+      </TableContext.Provider>
+    </BrowserRouter>
   );
 }
 
