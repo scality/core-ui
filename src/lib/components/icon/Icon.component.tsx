@@ -137,6 +137,7 @@ export const iconTable = {
   Ring: 'fas faRing',
   Stop: 'fas faStop',
   Play: 'fas faPlay',
+  Mail: 'fas faEnvelope',
 };
 
 export const customIcons = {
