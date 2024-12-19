@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import {
-  BrowserRouter,
+  matchPath,
   Outlet,
   Route,
   Routes,
@@ -113,13 +113,13 @@ function Tabs({
   useEffect(() => {
     let hasSelectedTab = false;
     filteredTabsChildren.forEach((child, index) => {
-      const fullPath = child.props.path.startsWith('/')
-        ? child.props.path
-        : url + '/' + child.props.path;
-
       const isSelected =
-        location.pathname.match(new RegExp(`^${fullPath}$`, 'i')) &&
-        (child.props.query ? matchQuery(child.props.query) : true);
+        !!matchPath(
+          location.pathname,
+          child.props.path.startsWith('/')
+            ? child.props.path
+            : url + '/' + child.props.path,
+        ) && (child.props.query ? matchQuery(child.props.query) : true);
 
       if (isSelected) {
         setSelectedTabIndex(index);
@@ -224,10 +224,13 @@ function Tabs({
         <Routes>
           {filteredTabsChildren.map((tab, index) => {
             const path = tab.props.path.split('/').pop();
+
             return (
               <Route
                 key={index}
-                path={`/${path}`}
+                path={
+                  tab.props.path.startsWith('/') ? '/' + path : url + '/' + path
+                }
                 element={
                   <>
                     <TabContent
