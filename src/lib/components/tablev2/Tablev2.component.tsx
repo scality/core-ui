@@ -33,7 +33,6 @@ import { TableWrapper, TooltipContent } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import { Icon } from '../icon/Icon.component';
-import { BrowserRouter } from 'react-router-dom';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,

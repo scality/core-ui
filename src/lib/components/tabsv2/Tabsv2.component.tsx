@@ -12,7 +12,7 @@ import {
   Routes,
   useLocation,
   useNavigate,
-} from 'react-router-dom';
+} from 'react-router';
 import styled from 'styled-components';
 import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';

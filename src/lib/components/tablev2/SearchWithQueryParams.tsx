@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 import { TableSearch as Search, SearchProps } from './Search';
 
 export type SearchWithQueryParamsProps = {

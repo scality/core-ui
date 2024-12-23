@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { QueryTimeSpan, queryTimeSpansCodes } from '../constants';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 export const MetricsTimeSpanContext = createContext<QueryTimeSpan | null>(null);
 export const MetricsTimeSpanProvider = ({
   children,
