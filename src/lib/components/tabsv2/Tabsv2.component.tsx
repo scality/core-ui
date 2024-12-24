@@ -12,6 +12,7 @@ import {
   Routes,
   useLocation,
   useNavigate,
+  useRoutes,
 } from 'react-router';
 import styled from 'styled-components';
 import { ButtonIcon } from '../buttonv2/Buttonv2.component';
@@ -115,10 +116,10 @@ function Tabs({
     filteredTabsChildren.forEach((child, index) => {
       const isSelected =
         !!matchPath(
-          location.pathname,
-          child.props.path.startsWith('/')
+          (child.props.path.startsWith('/')
             ? child.props.path
-            : url + '/' + child.props.path,
+            : url + '/' + child.props.path) + '*',
+          location.pathname,
         ) && (child.props.query ? matchQuery(child.props.query) : true);
 
       if (isSelected) {
@@ -140,6 +141,7 @@ function Tabs({
     handleKeyDown,
     displayScroll,
   } = useScrollingTabs(selectedTabIndex);
+
   const tabItems = filteredTabsChildren.map((child, index) => {
     const {
       path,
@@ -224,6 +226,10 @@ function Tabs({
         <Routes>
           {filteredTabsChildren.map((tab, index) => {
             const path = tab.props.path.split('/').pop();
+
+            if (tab.props.query && !matchQuery(tab.props.query)) {
+              return <></>;
+            }
 
             return (
               <Route
