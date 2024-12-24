@@ -108,7 +108,7 @@ function Tabs({
       return `${replaceUrl}${serialize(query)}`;
     }
 
-    return `${replaceUrl}/${path}${serialize(query)}`;
+    return `${path}${serialize(query)}`;
   };
 
   useEffect(() => {
@@ -153,7 +153,7 @@ function Tabs({
       ...childRest
     }: TabProps = child.props;
     const isSelected = selectedTabIndex === index;
-    const realPath = `/${path.split('/').pop()}`;
+    const realPath = path.startsWith('/') ? `/${path.split('/').pop()}` : path;
     return (
       <TabItem
         className={`sc-tabs-item ${isSelected ? 'selected' : ''}`}
@@ -235,7 +235,7 @@ function Tabs({
               <Route
                 key={index}
                 path={
-                  tab.props.path.startsWith('/') ? '/' + path : url + '/' + path
+                  tab.props.path.startsWith('/') ? '/' + path : path
                 }
                 element={
                   <>
