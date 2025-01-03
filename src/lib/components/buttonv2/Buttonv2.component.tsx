@@ -40,10 +40,10 @@ export const ButtonStyled = styled.button<Props>`
   text-decoration: none;
   font-family: 'Lato';
   font-weight: ${fontWeight.base};
-
   padding: ${spacing.r4} ${spacing.r8};
   font-size: ${fontSize.base};
   border-radius: ${spacing.r4};
+  white-space: nowrap;
   height: ${(props) => (props.size === 'inline' ? spacing.r24 : spacing.r32)};
   ${(props) => {
     const brand = props.theme;
@@ -198,8 +198,8 @@ export const ButtonLoader = styled(Loader)<{ label; variant }>`
         fill: ${props.variant === 'danger'
           ? props.theme.statusCritical
           : props.variant === 'outline'
-          ? props.theme.textPrimary
-          : props.theme.textSecondary};
+            ? props.theme.textPrimary
+            : props.theme.textSecondary};
       }
     `;
   }}
