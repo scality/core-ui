@@ -50,6 +50,7 @@ const TextAreaContainer = styled.textarea<{
   }
   &::placeholder {
     color: ${(props) => props.theme.textSecondary};
+    opacity: 0.5;
   }
   &:hover {
     ${(props) =>
