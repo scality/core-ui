@@ -8,25 +8,17 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
-import { useMemo, Fragment, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { useMetricsTimeSpan } from '../linetemporalchart/MetricTimespanProvider';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
-import { lighten } from 'polished';
 import {
   fontSize,
   fontWeight,
-  lineColor1,
-  lineColor2,
-  lineColor3,
-  lineColor4,
-  lineColor5,
-  lineColor6,
-  lineColor7,
-  lineColor8,
+  lineTimeSeriesColorRange,
 } from '../../style/theme';
-import { ChartTitleText, SmallerText } from '../text/Text.component';
+import { ChartTitleText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { spacing } from '../../spacing';
 import { getUnitLabel } from '../linetemporalchart/ChartUtil';
@@ -42,31 +34,6 @@ const ChartHeader = styled.div`
   display: flex;
   align-items: center;
 `;
-
-const Legends = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const LegendStroke = styled.div<{ lineColor: string }>`
-  margin: 0 ${spacing.r8} 0 ${spacing.r16};
-  height: ${spacing.r2};
-  background: ${(props) => props.lineColor};
-  width: ${spacing.r8};
-`;
-// Color range for series
-const colorRange = [
-  lineColor1,
-  lineColor2,
-  lineColor3,
-  lineColor4,
-  lineColor5,
-  lineColor6,
-  lineColor7,
-  lineColor8,
-  lighten(0.3, lineColor1),
-  lighten(0.3, lineColor2),
-];
 
 const TooltipContainer = styled.div`
   background-color: ${(props) => props.theme.backgroundLevel1};
@@ -162,11 +129,8 @@ export type LineChartProps = (
     label: string;
   }[];
   isLoading?: boolean;
-  isLegendHidden?: boolean;
   yAxisTitle?: string;
   helpText?: string;
-  onHover?: (payload: any) => void;
-  lineColor?: string;
 };
 
 const CustomTooltip = ({
@@ -247,12 +211,9 @@ export function LineTimeSerieChart({
   startingTimeStamp,
   unitRange,
   isLoading = false,
-  isLegendHidden = false,
   yAxisType = 'default',
   yAxisTitle,
   helpText,
-  onHover,
-  lineColor,
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
@@ -405,9 +366,10 @@ export function LineTimeSerieChart({
       {} as Record<string, Serie[]>,
     );
 
-    // Assign colors to unique resources
+    // Todo: The color will be assigned through the context.
     Object.keys(groups).forEach((resource, index) => {
-      const color = colorRange[index % colorRange.length];
+      const color =
+        lineTimeSeriesColorRange[index % lineTimeSeriesColorRange.length];
       mapping[resource] = color;
     });
 
@@ -523,27 +485,6 @@ export function LineTimeSerieChart({
           )}
         </LineChart>
       </ResponsiveContainer>
-      {!isLegendHidden && (
-        <Legends>
-          {Object.entries(groupedSeries).map(([resource, resourceSeries]) => {
-            // Take the first series for this resource to get the legend label
-            const firstSerie = resourceSeries[0];
-            return (
-              <Fragment key={`${title}-${resource}`}>
-                <LegendStroke
-                  lineColor={firstSerie.color || colorMapping[resource]}
-                />
-                <SmallerText>
-                  {firstSerie.getLegendLabel?.(
-                    firstSerie.metricPrefix,
-                    resource,
-                  )}
-                </SmallerText>
-              </Fragment>
-            );
-          })}
-        </Legends>
-      )}
     </LineTemporalChartWrapper>
   );
 }
