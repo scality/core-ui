@@ -27,6 +27,26 @@ export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
   minute: '2-digit',
 });
 
+export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
+  'en-GB',
+  {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  },
+);
+
+export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -34,7 +54,9 @@ type FormattedDateTimeProps = {
     | 'date-time-second'
     | 'time'
     | 'time-second'
-    | 'relative';
+    | 'relative'
+    | 'day-month-abbreviated-hour-minute'
+    | 'day-month-abbreviated-hour-minute-second';
   value: Date;
 };
 
@@ -149,7 +171,19 @@ export const FormattedDateTime = ({
           few seconds ago
         </Tooltip>
       );
-    //TO FINISH
+    case 'day-month-abbreviated-hour-minute':
+      return (
+        <>{DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(value).replace(',', '')}</>
+      );
+    case 'day-month-abbreviated-hour-minute-second':
+      return (
+        <>
+          {DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND.format(value).replace(
+            ',',
+            '',
+          )}
+        </>
+      );
     default:
       return <></>;
   }

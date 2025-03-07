@@ -214,4 +214,28 @@ describe('FormatttedDateTime', () => {
     //V
     expect(screen.getByText('2022-12-12 11:57:26')).toBeInTheDocument();
   });
+
+  it('should display the date in the expected format of the xaxis tick in the chart', () => {
+    //S
+    render(
+      <FormattedDateTime
+        format="day-month-abbreviated-hour-minute"
+        value={new Date('2022-10-06T18:33:00Z')}
+      />,
+    );
+    //V
+    expect(screen.getByText('6 Oct 18:33')).toBeInTheDocument();
+  });
+
+  it('should display the date in the expected format of date in the chart', () => {
+    //S
+    render(
+      <FormattedDateTime
+        format="day-month-abbreviated-hour-minute-second"
+        value={new Date('2022-10-06T18:33:00Z')}
+      />,
+    );
+    //V
+    expect(screen.getByText('6 Oct 18:33:00')).toBeInTheDocument();
+  });
 });
