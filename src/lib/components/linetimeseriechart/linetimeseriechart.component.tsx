@@ -18,10 +18,16 @@ import {
   fontWeight,
   lineTimeSeriesColorRange,
 } from '../../style/theme';
-import { ChartTitleText } from '../text/Text.component';
+import { ChartTitleText, SmallerText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { spacing } from '../../spacing';
 import { getUnitLabel } from '../linetemporalchart/ChartUtil';
+import { Icon } from '../icon/Icon.component';
+import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
+import {
+  DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
+  FormattedDateTime,
+} from '../date/FormattedDateTime';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -168,16 +174,10 @@ const CustomTooltip = ({
   return (
     <TooltipContainer>
       <TooltipTime>
-        {new Date(label)
-          .toLocaleString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false,
-          })
-          .replace(',', '')}
+        <FormattedDateTime
+          format="day-month-abbreviated-hour-minute-second"
+          value={new Date(label)}
+        />
       </TooltipTime>
       {sortedPayload.map((entry, index) => (
         <TooltipValue key={index}>
@@ -187,9 +187,7 @@ const CustomTooltip = ({
             <TooltipInstanceValue>
               {isNaN(Number(entry.value))
                 ? '-'
-                : typeof entry.value === 'number'
-                  ? `${Math.round(entry.value * 100) / 100}${unitLabel}`
-                  : `${Number(entry.value).toFixed(2)}${unitLabel}`}
+                : `${Number(entry.value).toFixed(2)}${unitLabel}`}
             </TooltipInstanceValue>
           </TooltipContent>
         </TooltipValue>
@@ -262,7 +260,8 @@ export function LineTimeSerieChart({
           }));
 
     // 2. Convert directly to Recharts format
-    const rechartsData: Record<
+    // Initialize an object to hold data points by timestamp
+    const dataPointsByTime: Record<
       number,
       { timestamp: number } & Record<string, string | number | null>
     > = {};
@@ -278,17 +277,17 @@ export function LineTimeSerieChart({
         const timestamp =
           typeof point[0] === 'number' ? point[0] * 1000 : Number(point[0]);
         const value = point[1];
-
-        if (!rechartsData[timestamp]) {
-          rechartsData[timestamp] = { timestamp };
+        // Initialize this timestamp if it doesn't exist
+        if (!dataPointsByTime[timestamp]) {
+          dataPointsByTime[timestamp] = { timestamp };
         }
-
-        rechartsData[timestamp][label] = value;
+        // Add this metric's value to the data point, and convert the value to a number if it's a string
+        dataPointsByTime[timestamp][label] =
+          typeof value === 'string' ? Number(value) : value;
       });
     });
-
     // Convert object to array for Recharts
-    return Object.values(rechartsData).sort(
+    return Object.values(dataPointsByTime).sort(
       (
         a: { timestamp: number } & Record<string, string | number | null>,
         b: { timestamp: number } & Record<string, string | number | null>,
@@ -320,9 +319,14 @@ export function LineTimeSerieChart({
     return exactEvenTicks;
   }, [chartData]);
 
-  const { topValue, unitLabel } = useMemo(() => {
-    if (yAxisType === 'percentage') return { topValue: 100, unitLabel: '%' };
-    if (!unitRange || !chartData.length) return { topValue: 0, unitLabel: '' };
+  // 3. Transform the data base on the valuebase
+  const { topValue, unitLabel, rechartsData } = useMemo(() => {
+    if (yAxisType === 'percentage')
+      return {
+        topValue: 100,
+        unitLabel: '%',
+        rechartsData: chartData,
+      };
 
     const values = chartData.flatMap((dataPoint) =>
       Object.entries(dataPoint)
@@ -338,12 +342,22 @@ export function LineTimeSerieChart({
     const top = Math.abs(Math.max(...values));
     const bottom = Math.abs(Math.min(...values));
     const maxValue = Math.max(top, bottom);
-    const roundedMax = Math.ceil(maxValue / 10) * 10;
 
-    return {
-      topValue: roundedMax,
-      unitLabel: getUnitLabel(unitRange, maxValue).unitLabel,
-    };
+    const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
+
+    const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
+
+    const rechartsData = chartData.map((dataPoint) => {
+      const normalizedDataPoint = { ...dataPoint };
+      Object.entries(dataPoint).forEach(([key, value]) => {
+        if (key !== 'timestamp' && typeof value === 'number') {
+          normalizedDataPoint[key] = value / valueBase;
+        }
+      });
+      return normalizedDataPoint;
+    });
+
+    return { topValue, unitLabel, rechartsData };
   }, [chartData, yAxisType, unitRange]);
 
   // Group series by resource and create color mapping
@@ -383,14 +397,7 @@ export function LineTimeSerieChart({
   const formatTime = useMemo(
     () => (timestamp: number) => {
       const date = new Date(timestamp);
-      return date
-        .toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          hour: '2-digit',
-          minute: '2-digit',
-        })
-        .replace(',', '');
+      return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
     },
     [],
   );
@@ -401,11 +408,19 @@ export function LineTimeSerieChart({
         <ChartTitleText>
           {title} {unitLabel && `(${unitLabel})`}
         </ChartTitleText>
+        {helpText && (
+          <TooltipComponent
+            placement={'right'}
+            overlay={<SmallerText>{helpText}</SmallerText>}
+          >
+            <Icon name="Info" color={theme.buttonSecondary} />
+          </TooltipComponent>
+        )}
         {isLoading && <Loader />}
       </ChartHeader>
       <ResponsiveContainer width="100%" height={height}>
         <LineChart
-          data={chartData}
+          data={rechartsData}
           ref={chartRef}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           aria-label={`Time series chart for ${title}`}

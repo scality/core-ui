@@ -32,7 +32,6 @@ const meta: Meta<typeof LineTimeSerieChart> = {
     startingTimeStamp: { control: 'number' },
     unitRange: { control: 'object' },
     isLoading: { control: 'boolean' },
-    isLegendHidden: { control: 'boolean' },
     yAxisType: {
       control: 'select',
       options: ['default', 'percentage', 'symmetrical'],
@@ -44,7 +43,6 @@ const meta: Meta<typeof LineTimeSerieChart> = {
 export default meta;
 type Story = StoryObj<typeof ChartWithProviders>;
 
-// The Prometheus dataset converted for use with LineTemporalChartV2
 const prometheusData = [
   [1740405600, '47.554166666666674'],
   [1740406320, '53.00833333333337'],
@@ -293,6 +291,68 @@ const prometheusData4 = [
   [1740492000, '185.90'],
 ];
 
+const prometheusData5 = [
+  [1740405600, '12850.45'],
+  [1740406320, '21780.92'],
+  [1740407760, '8320.15'],
+  [1740408480, '16420.78'],
+  [1740409200, '21950.34'],
+  [1740409920, '9280.67'],
+  [1740410640, '18605.89'],
+  [1740411360, '12450.23'],
+  [1740412080, '21308.56'],
+  [1740412800, '18808.90'],
+  [1740413520, '15305.67'],
+  [1740414240, '24550.45'],
+  [1740415680, '10205.89'],
+  [1740416400, '19208.90'],
+  [1740417120, '24802.34'],
+  [1740417840, '13402.56'],
+  [1740418560, '21450.78'],
+  [1740419280, '18220.34'],
+  [1740420000, '26608.90'],
+  [1740420720, '19380.45'],
+  [1740421440, '23350.67'],
+  [1740422160, '19920.45'],
+  [1740422880, '15480.23'],
+  [1740423600, '28580.90'],
+  [1740467520, '17280.45'],
+  [1740468240, '24750.67'],
+  [1740468960, '18420.34'],
+  [1740469680, '23480.90'],
+  [1740470400, '19850.67'],
+  [1740471120, '27320.45'],
+  [1740471840, '19720.34'],
+  [1740472560, '24405.67'],
+  [1740473280, '18502.89'],
+  [1740474000, '27908.45'],
+  [1740474720, '16205.67'],
+  [1740475440, '23602.34'],
+  [1740476160, '19305.89'],
+  [1740476880, '24450.67'],
+  [1740477600, '18858.90'],
+  [1740478320, '26492.34'],
+  [1740479040, '19588.90'],
+  [1740479760, '28288.45'],
+  [1740480480, '19765.67'],
+  [1740481200, '23398.90'],
+  [1740481920, '19492.34'],
+  [1740482640, '25929.45'],
+  [1740483360, '18329.67'],
+  [1740484080, '24659.89'],
+  [1740484800, '19459.23'],
+  [1740485520, '27559.67'],
+  [1740486240, '18259.89'],
+  [1740486960, '25689.90'],
+  [1740487680, '19959.34'],
+  [1740488400, '28359.67'],
+  [1740489120, '19489.90'],
+  [1740489840, '26429.34'],
+  [1740490560, '19729.45'],
+  [1740491280, '28289.67'],
+  [1740492000, '19859.90'],
+];
+
 export const PercentageChartExample: Story = {
   args: {
     series: [
@@ -307,16 +367,16 @@ export const PercentageChartExample: Story = {
     title: 'CPU Usage',
     height: 200,
     startingTimeStamp: prometheusData[0][0],
-    unitRange: [{ value: 1, unitLabel: '%' }],
     isLoading: false,
     isLegendHidden: false,
+    helpText: 'This is the help text',
     yAxisType: 'percentage',
     yAxisTitle: '',
   },
 };
 const UNIT_RANGE_BS = [
   {
-    threshold: 0,
+    threshold: 1,
     label: 'B/s',
   },
   {
@@ -380,5 +440,23 @@ export const SymmetricalAxisExample: Story = {
     isLegendHidden: false,
     yAxisType: 'symmetrical',
     yAxisTitle: 'in(+)/out(-)',
+  },
+};
+export const AutoUnitChartExample: Story = {
+  args: {
+    series: [
+      {
+        data: prometheusData5,
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        metricPrefix: 'instance:10.160.122.207:9100',
+        getTooltipLabel: (prefix, resource) => `${resource}`,
+        getLegendLabel: (prefix, resource) => `${resource}`,
+      },
+    ],
+    title: 'Disk Throughput',
+    startingTimeStamp: prometheusData5[0][0],
+    height: 200,
+    unitRange: UNIT_RANGE_BS,
+    yAxisType: 'default',
   },
 };
