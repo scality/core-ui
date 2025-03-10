@@ -28,6 +28,8 @@ import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
 } from '../date/FormattedDateTime';
+import { useSyncedCursorChart, useChartTooltip } from './context';
+import { v1 as uuidv1 } from 'uuid';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -202,6 +204,7 @@ const isSymmetricalSeries = (
   return 'above' in series && 'below' in series;
 };
 
+// Later on we will have projection chart which the future part will be doted line.
 export function LineTimeSerieChart({
   series,
   title,
@@ -216,7 +219,9 @@ export function LineTimeSerieChart({
 }: LineChartProps) {
   const theme = useTheme();
   const { frequency, duration } = useMetricsTimeSpan();
-  const chartRef = useRef(null);
+  const { syncId } = useSyncedCursorChart();
+  const chartId = useRef(uuidv1());
+  const { activeChartId, setActiveChartId } = useChartTooltip();
 
   const chartData = useMemo(() => {
     // 1. Add missing data points
@@ -421,9 +426,16 @@ export function LineTimeSerieChart({
       <ResponsiveContainer width="100%" height={height}>
         <LineChart
           data={rechartsData}
-          ref={chartRef}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           aria-label={`Time series chart for ${title}`}
+          // the chart with the same syncId will be synced
+          syncId={syncId}
+          onMouseMove={() => {
+            setActiveChartId(chartId.current);
+          }}
+          onMouseLeave={() => {
+            setActiveChartId(null);
+          }}
         >
           <CartesianGrid
             vertical={true}
@@ -474,7 +486,14 @@ export function LineTimeSerieChart({
             }}
             tickFormatter={(value) => Math.round(value).toString()}
           />
-          <Tooltip content={<CustomTooltip unitLabel={unitLabel} />} />
+
+          <Tooltip
+            wrapperStyle={{
+              display: activeChartId === chartId.current ? 'block' : 'none',
+            }}
+            content={<CustomTooltip unitLabel={unitLabel} />}
+          />
+
           {/* Add horizontal line at y=0 for symmetrical charts */}
           {yAxisType === 'symmetrical' && (
             <ReferenceLine y={0} stroke={theme.border} isFront={false} />

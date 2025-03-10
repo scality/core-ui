@@ -2,11 +2,19 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
+import {
+  ChartSyncProvider,
+  ChartTooltipProvider,
+} from '../src/lib/components/linetimeseriechart/context';
 
 const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
-      <LineTimeSerieChart {...props} />
+      <ChartTooltipProvider>
+        <ChartSyncProvider syncId={'metrics'}>
+          <LineTimeSerieChart {...props} />
+        </ChartSyncProvider>
+      </ChartTooltipProvider>
     </MetricsTimeSpanProvider>
   );
 };
