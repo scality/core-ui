@@ -8,16 +8,12 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { useMetricsTimeSpan } from '../linetemporalchart/MetricTimespanProvider';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
-import {
-  fontSize,
-  fontWeight,
-  lineTimeSeriesColorRange,
-} from '../../style/theme';
+import { fontSize, fontWeight } from '../../style/theme';
 import { ChartTitleText, SmallerText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { spacing } from '../../spacing';
@@ -28,7 +24,11 @@ import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
 } from '../date/FormattedDateTime';
-import { useSyncedCursorChart, useChartTooltip } from './context';
+import {
+  useSyncedCursorChart,
+  useChartTooltip,
+  useChartColor,
+} from './context';
 import { v1 as uuidv1 } from 'uuid';
 
 const LineTemporalChartWrapper = styled.div`
@@ -222,6 +222,7 @@ export function LineTimeSerieChart({
   const { syncId } = useSyncedCursorChart();
   const chartId = useRef(uuidv1());
   const { activeChartId, setActiveChartId } = useChartTooltip();
+  const { resourceColorMapping, setResourceColorMapping } = useChartColor();
 
   const chartData = useMemo(() => {
     // 1. Add missing data points
@@ -365,9 +366,8 @@ export function LineTimeSerieChart({
     return { topValue, unitLabel, rechartsData };
   }, [chartData, yAxisType, unitRange]);
 
-  // Group series by resource and create color mapping
-  const { colorMapping, groupedSeries } = useMemo(() => {
-    const mapping: Record<string, string> = {};
+  // Group series by resource
+  const { groupedSeries } = useMemo(() => {
     const allSeries = isSymmetricalSeries(series)
       ? [...series.above, ...series.below]
       : (series as Serie[]);
@@ -385,18 +385,13 @@ export function LineTimeSerieChart({
       {} as Record<string, Serie[]>,
     );
 
-    // Todo: The color will be assigned through the context.
-    Object.keys(groups).forEach((resource, index) => {
-      const color =
-        lineTimeSeriesColorRange[index % lineTimeSeriesColorRange.length];
-      mapping[resource] = color;
-    });
-
-    return {
-      colorMapping: mapping,
-      groupedSeries: groups,
-    };
+    return { groupedSeries: groups };
   }, [series]);
+
+  useEffect(() => {
+    const resources = Object.keys(groupedSeries);
+    resources.forEach(setResourceColorMapping);
+  }, [groupedSeries, setResourceColorMapping]);
 
   // Format time for display the tick in the x axis
   const formatTime = useMemo(
@@ -511,7 +506,7 @@ export function LineTimeSerieChart({
                   key={`${title}-${resource}-${serieIndex}`}
                   type="monotone"
                   dataKey={label}
-                  stroke={serie.color || colorMapping[resource]}
+                  stroke={serie.color || resourceColorMapping.get(resource)}
                   dot={false}
                 />
               );

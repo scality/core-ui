@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
 import {
+  ChartColorProvider,
   ChartSyncProvider,
   ChartTooltipProvider,
 } from '../src/lib/components/linetimeseriechart/context';
@@ -11,9 +12,11 @@ const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
       <ChartTooltipProvider>
-        <ChartSyncProvider syncId={'metrics'}>
-          <LineTimeSerieChart {...props} />
-        </ChartSyncProvider>
+        <ChartColorProvider>
+          <ChartSyncProvider syncId={'metrics'}>
+            <LineTimeSerieChart {...props} />
+          </ChartSyncProvider>
+        </ChartColorProvider>
       </ChartTooltipProvider>
     </MetricsTimeSpanProvider>
   );
