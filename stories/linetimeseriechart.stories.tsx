@@ -2,22 +2,17 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
-import {
-  ChartColorProvider,
-  ChartSyncProvider,
-  ChartTooltipProvider,
-} from '../src/lib/components/linetimeseriechart/context';
+import { ChartColorProvider } from '../src/lib/components/linetimeseriechart/ChartColorProvider';
+import { ChartSyncCursorProvider } from '../src/lib/components/linetimeseriechart/ChartSyncCursorProvider';
 
 const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
-      <ChartTooltipProvider>
-        <ChartColorProvider>
-          <ChartSyncProvider syncId={'metrics'}>
-            <LineTimeSerieChart {...props} />
-          </ChartSyncProvider>
-        </ChartColorProvider>
-      </ChartTooltipProvider>
+      <ChartColorProvider>
+        <ChartSyncCursorProvider syncId={'metrics'}>
+          <LineTimeSerieChart {...props} />
+        </ChartSyncCursorProvider>
+      </ChartColorProvider>
     </MetricsTimeSpanProvider>
   );
 };

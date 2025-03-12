@@ -24,12 +24,9 @@ import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
 } from '../date/FormattedDateTime';
-import {
-  useSyncedCursorChart,
-  useChartTooltip,
-  useChartColor,
-} from './context';
 import { v1 as uuidv1 } from 'uuid';
+import { useChartSyncedCursor } from './ChartSyncCursorProvider';
+import { useChartColor } from './ChartColorProvider';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -219,9 +216,8 @@ export function LineTimeSerieChart({
 }: LineChartProps) {
   const theme = useTheme();
   const { frequency, duration } = useMetricsTimeSpan();
-  const { syncId } = useSyncedCursorChart();
+  const { syncId, activeChartId, setActiveChartId } = useChartSyncedCursor();
   const chartId = useRef(uuidv1());
-  const { activeChartId, setActiveChartId } = useChartTooltip();
   const { resourceColorMapping, setResourceColorMapping } = useChartColor();
 
   const chartData = useMemo(() => {
@@ -483,6 +479,10 @@ export function LineTimeSerieChart({
           />
 
           <Tooltip
+            cursor={{
+              stroke: theme.selectedActive,
+              strokeWidth: 1,
+            }}
             wrapperStyle={{
               display: activeChartId === chartId.current ? 'block' : 'none',
             }}
