@@ -2,15 +2,20 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
+import { LineTimeSerieLegends } from '../src/lib/components/linetimeseriechart/Legends';
 import { ChartColorProvider } from '../src/lib/components/linetimeseriechart/ChartColorProvider';
 import { ChartSyncCursorProvider } from '../src/lib/components/linetimeseriechart/ChartSyncCursorProvider';
+import { ChartLegendProvider } from '../src/lib/components/linetimeseriechart/ChartLegendProvider';
 
 const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
       <ChartColorProvider>
         <ChartSyncCursorProvider syncId={'metrics'}>
-          <LineTimeSerieChart {...props} />
+          <ChartLegendProvider>
+            <LineTimeSerieChart {...props} />
+            <LineTimeSerieLegends />
+          </ChartLegendProvider>
         </ChartSyncCursorProvider>
       </ChartColorProvider>
     </MetricsTimeSpanProvider>

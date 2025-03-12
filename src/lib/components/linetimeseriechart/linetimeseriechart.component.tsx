@@ -27,6 +27,7 @@ import {
 import { v1 as uuidv1 } from 'uuid';
 import { useChartSyncedCursor } from './ChartSyncCursorProvider';
 import { useChartColor } from './ChartColorProvider';
+import { useChartLegend } from './ChartLegendProvider';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -219,6 +220,7 @@ export function LineTimeSerieChart({
   const { syncId, activeChartId, setActiveChartId } = useChartSyncedCursor();
   const chartId = useRef(uuidv1());
   const { resourceColorMapping, setResourceColorMapping } = useChartColor();
+  const { focusedResource } = useChartLegend();
 
   const chartData = useMemo(() => {
     // 1. Add missing data points
@@ -362,7 +364,7 @@ export function LineTimeSerieChart({
     return { topValue, unitLabel, rechartsData };
   }, [chartData, yAxisType, unitRange]);
 
-  // Group series by resource
+  // Group series by resource and filter based on legend
   const { groupedSeries } = useMemo(() => {
     const allSeries = isSymmetricalSeries(series)
       ? [...series.above, ...series.below]
@@ -381,8 +383,17 @@ export function LineTimeSerieChart({
       {} as Record<string, Serie[]>,
     );
 
-    return { groupedSeries: groups };
-  }, [series]);
+    // Apply filtering based on focusedResource
+    const filteredGroups = !focusedResource
+      ? groups // Return all resources if no resource is focused
+      : Object.fromEntries(
+          Object.entries(groups).filter(
+            ([resource]) => resource === focusedResource,
+          ),
+        );
+
+    return { groupedSeries: filteredGroups };
+  }, [series, focusedResource]);
 
   useEffect(() => {
     const resources = Object.keys(groupedSeries);
