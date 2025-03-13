@@ -27,7 +27,7 @@ import {
 import { v1 as uuidv1 } from 'uuid';
 import { useChartSyncedCursor } from './ChartSyncCursorProvider';
 import { useChartColor } from './ChartColorProvider';
-import { useChartLegend } from './ChartLegendProvider';
+import { ResourceStats, useChartLegend } from './ChartLegendProvider';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -220,14 +220,28 @@ export function LineTimeSerieChart({
   const { syncId, activeChartId, setActiveChartId } = useChartSyncedCursor();
   const chartId = useRef(uuidv1());
   const { resourceColorMapping, setResourceColorMapping } = useChartColor();
-  const { focusedResource } = useChartLegend();
+  const { focusedResource, setResourceStatistics } = useChartLegend();
 
-  const chartData = useMemo(() => {
-    // 1. Add missing data points
-    const normalizedSeries =
-      yAxisType === 'symmetrical' && isSymmetricalSeries(series)
+  const { chartData, resourceValues } = useMemo(() => {
+    // 1. Filter series based on selected resource on the legend
+    const filteredSeries = focusedResource
+      ? isSymmetricalSeries(series)
         ? {
-            above: series.above.map((line) => ({
+            above: series.above.filter(
+              (item) => item.resource === focusedResource,
+            ),
+            below: series.below.filter(
+              (item) => item.resource === focusedResource,
+            ),
+          }
+        : series.filter((item) => item.resource === focusedResource)
+      : series;
+
+    // 2. Add missing data points
+    const normalizedSeries =
+      yAxisType === 'symmetrical' && isSymmetricalSeries(filteredSeries)
+        ? {
+            above: filteredSeries.above.map((line) => ({
               ...line,
               data: addMissingDataPoint(
                 line.data,
@@ -237,7 +251,7 @@ export function LineTimeSerieChart({
               ),
             })),
             // Convert positive values to negative values
-            below: series.below.map((line) => ({
+            below: filteredSeries.below.map((line) => ({
               ...line,
               data: addMissingDataPoint(
                 line.data,
@@ -253,7 +267,7 @@ export function LineTimeSerieChart({
               ),
             })),
           }
-        : (series as Serie[]).map((line) => ({
+        : (filteredSeries as Serie[]).map((line) => ({
             ...line,
             data: addMissingDataPoint(
               line.data,
@@ -263,12 +277,14 @@ export function LineTimeSerieChart({
             ),
           }));
 
-    // 2. Convert directly to Recharts format
+    // 3. Convert directly to Recharts format
     // Initialize an object to hold data points by timestamp
     const dataPointsByTime: Record<
       number,
       { timestamp: number } & Record<string, string | number | null>
     > = {};
+    const resourceValues: Record<string, number[]> = {};
+
     const seriesToProcess =
       yAxisType === 'symmetrical' && isSymmetricalSeries(normalizedSeries)
         ? [...normalizedSeries.above, ...normalizedSeries.below]
@@ -286,18 +302,38 @@ export function LineTimeSerieChart({
           dataPointsByTime[timestamp] = { timestamp };
         }
         // Add this metric's value to the data point, and convert the value to a number if it's a string
-        dataPointsByTime[timestamp][label] =
-          typeof value === 'string' ? Number(value) : value;
+        const numValue = typeof value === 'string' ? Number(value) : value;
+        dataPointsByTime[timestamp][label] = numValue;
+
+        // Initialize array for this resource if needed
+        if (serie.resource && !resourceValues[serie.resource]) {
+          resourceValues[serie.resource] = [];
+        }
+        // Add value to resourceValues for statistics
+        if (serie.resource && numValue !== null && !isNaN(numValue)) {
+          resourceValues[serie.resource].push(numValue);
+        }
       });
     });
+
     // Convert object to array for Recharts
-    return Object.values(dataPointsByTime).sort(
-      (
-        a: { timestamp: number } & Record<string, string | number | null>,
-        b: { timestamp: number } & Record<string, string | number | null>,
-      ) => (a.timestamp as number) - (b.timestamp as number),
-    );
-  }, [series, startingTimeStamp, duration, frequency, yAxisType]);
+    return {
+      chartData: Object.values(dataPointsByTime).sort(
+        (
+          a: { timestamp: number } & Record<string, string | number | null>,
+          b: { timestamp: number } & Record<string, string | number | null>,
+        ) => (a.timestamp as number) - (b.timestamp as number),
+      ),
+      resourceValues,
+    };
+  }, [
+    startingTimeStamp,
+    duration,
+    frequency,
+    yAxisType,
+    focusedResource,
+    series,
+  ]);
 
   // Calculate 5 perfectly evenly spaced ticks
   const xAxisTicks = useMemo(() => {
@@ -323,13 +359,14 @@ export function LineTimeSerieChart({
     return exactEvenTicks;
   }, [chartData]);
 
-  // 3. Transform the data base on the valuebase
-  const { topValue, unitLabel, rechartsData } = useMemo(() => {
+  // 4. Transform the data base on the valuebase
+  const { topValue, unitLabel, rechartsData, valueBase } = useMemo(() => {
     if (yAxisType === 'percentage')
       return {
         topValue: 100,
         unitLabel: '%',
         rechartsData: chartData,
+        valueBase: 1,
       };
 
     const values = chartData.flatMap((dataPoint) =>
@@ -361,8 +398,30 @@ export function LineTimeSerieChart({
       return normalizedDataPoint;
     });
 
-    return { topValue, unitLabel, rechartsData };
+    return {
+      topValue,
+      unitLabel,
+      rechartsData,
+      valueBase: valueBase,
+    };
   }, [chartData, yAxisType, unitRange]);
+
+  // Calculate statistics for each resource
+  useEffect(() => {
+    if (yAxisType === 'symmetrical') return;
+    const resourceStatistics: Record<string, ResourceStats> = {};
+    Object.entries(resourceValues).forEach(([resource, values]) => {
+      const min = Math.min(...values);
+      const mean = values.reduce((acc, val) => acc + val, 0) / values.length;
+      const max = Math.max(...values);
+      resourceStatistics[resource] = {
+        min: `${(min / valueBase).toFixed(2)}${unitLabel}`,
+        mean: `${(mean / valueBase).toFixed(2)}${unitLabel}`,
+        max: `${(max / valueBase).toFixed(2)}${unitLabel}`,
+      };
+    });
+    setResourceStatistics(resourceStatistics);
+  }, [resourceValues, setResourceStatistics, valueBase, unitLabel, yAxisType]);
 
   // Group series by resource and filter based on legend
   const { groupedSeries } = useMemo(() => {

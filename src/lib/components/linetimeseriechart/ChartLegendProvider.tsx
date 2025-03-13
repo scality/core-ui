@@ -1,12 +1,23 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-type FocusContextType = {
+export type ResourceStats = {
+  min: string;
+  mean: string;
+  max: string;
+};
+
+type ChartLegendContextType = {
   focusedResource: string | null;
   setFocusedResource: (resource: string | null) => void;
+  resourceStatistics: Record<string, ResourceStats>;
+  setResourceStatistics: (statistics: Record<string, ResourceStats>) => void;
 };
-const ChartLegendContext = createContext<FocusContextType>({
+
+const ChartLegendContext = createContext<ChartLegendContextType>({
   focusedResource: null,
   setFocusedResource: () => {},
+  resourceStatistics: {},
+  setResourceStatistics: () => {},
 });
 
 export function useChartLegend() {
@@ -19,11 +30,17 @@ export function useChartLegend() {
 
 export const ChartLegendProvider = ({ children }: { children: ReactNode }) => {
   const [focusedResource, setFocusedResource] = useState<string | null>(null);
+  const [resourceStatistics, setResourceStatistics] = useState<
+    Record<string, ResourceStats>
+  >({});
+
   return (
     <ChartLegendContext.Provider
       value={{
         focusedResource,
         setFocusedResource,
+        resourceStatistics,
+        setResourceStatistics,
       }}
     >
       {children}
