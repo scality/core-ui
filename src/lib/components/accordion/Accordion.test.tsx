@@ -12,13 +12,14 @@ describe('Accordion', () => {
   };
   const renderAccordion = () => {
     const queryClient = new QueryClient();
-    render(
+    const { rerender } = render(
       <QueryClientProvider client={queryClient}>
         <Accordion title="Advanced Testings" id="test-accordion">
           <div>Test content</div>
         </Accordion>
       </QueryClientProvider>,
     );
+    return { rerender };
   };
   it('should render the Accordion component with title and content', () => {
     renderAccordion();
@@ -48,5 +49,25 @@ describe('Accordion', () => {
     expect(accordionContent).toBeVisible();
     userEvent.keyboard('{space}');
     expect(accordionContent).not.toBeVisible();
+  });
+
+  it('should update content when children prop changes', () => {
+    const { rerender } = renderAccordion();
+    const accordionToggle = selectors.accordionToggle();
+    userEvent.click(accordionToggle);
+    
+    expect(screen.getByText(/Test content/i)).toBeVisible();
+    
+    const queryClient = new QueryClient();
+    rerender(
+      <QueryClientProvider client={queryClient}>
+        <Accordion title="Advanced Testings" id="test-accordion">
+          <div>Updated content</div>
+        </Accordion>
+      </QueryClientProvider>
+    );
+    
+    expect(screen.getByText(/Updated content/i)).toBeVisible();
+    expect(screen.queryByText(/Test content/i)).not.toBeInTheDocument();
   });
 });

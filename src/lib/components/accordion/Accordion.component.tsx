@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -13,14 +13,23 @@ export type AccordionProps = {
   id: string;
   children: React.ReactNode;
   style?: React.CSSProperties;
+  open?: boolean;
 };
 
 const AccordionContainer = styled(Box)`
   width: 100%;
   height: auto;
+  ${({ theme }) =>
+    `
+    border: 0.5px solid ${theme.border};
+    border-radius: 4px;
+    padding: ${spacing.r16};
+  `}
 `;
 
-const AccordionHeader = styled.button`
+const AccordionHeader = styled.button<{
+  isOpen?: boolean;
+}>`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -31,7 +40,15 @@ const AccordionHeader = styled.button`
   color: ${(props) => props.theme.textPrimary};
   padding: 0;
   font-family: 'Lato';
+  ${({ isOpen, theme }) =>
+    isOpen &&
+    `
+    border-bottom: 0.5px solid ${theme.border};
+    padding-bottom: ${spacing.r16};
+    margin-bottom: ${spacing.r8};
+  `}
 `;
+
 const AccordionContent = styled.div<{
   isOpen: boolean;
 }>`
@@ -47,8 +64,18 @@ const Wrapper = styled.div`
   padding: ${spacing.r8} 0 ${spacing.r8} 0;
 `;
 
-export const Accordion = ({ title, id, style, children }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Accordion = ({
+  title,
+  id,
+  style,
+  children,
+  open = false,
+}: AccordionProps) => {
+  const [isOpen, setIsOpen] = useState(open);
+
+  useMemo(() => {
+    setIsOpen(open);
+  }, [open]);
 
   const handleToggleContent = (
     e:
@@ -62,6 +89,7 @@ export const Accordion = ({ title, id, style, children }: AccordionProps) => {
     <AccordionContainer>
       <h3 style={{ margin: 0 }}>
         <AccordionHeader
+          isOpen={isOpen}
           type="button"
           id={`Accordion-header-${id}`}
           onClick={handleToggleContent}
