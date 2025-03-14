@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion } from './Accordion.component';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -10,16 +10,15 @@ describe('Accordion', () => {
     accordionContainer: () => screen.getByRole('region'),
     accordionContent: () => screen.queryByText(/Test content/i),
   };
-  const renderAccordion = () => {
+  const renderAccordion = (open = false) => {
     const queryClient = new QueryClient();
-    const { rerender } = render(
+    render(
       <QueryClientProvider client={queryClient}>
-        <Accordion title="Advanced Testings" id="test-accordion">
+        <Accordion title="Advanced Testings" id="test-accordion" open={open}>
           <div>Test content</div>
         </Accordion>
       </QueryClientProvider>,
     );
-    return { rerender };
   };
   it('should render the Accordion component with title and content', () => {
     renderAccordion();
@@ -51,23 +50,33 @@ describe('Accordion', () => {
     expect(accordionContent).not.toBeVisible();
   });
 
-  it('should update content when children prop changes', () => {
-    const { rerender } = renderAccordion();
-    const accordionToggle = selectors.accordionToggle();
-    userEvent.click(accordionToggle);
-    
-    expect(screen.getByText(/Test content/i)).toBeVisible();
-    
+  it('should toggle the content when open prop changes', () => {
     const queryClient = new QueryClient();
-    rerender(
+    const TestWrapper = () => {
+      const [isOpen, setisOpen] = useState(false);
+      return (
+        <>
+          <button onClick={() => setisOpen(!isOpen)}>Test button</button>
+          <Accordion
+            title="Advanced Testings"
+            id="test-accordion"
+            open={isOpen}
+          >
+            <div>Test content</div>
+          </Accordion>
+        </>
+      );
+    };
+
+    render(
       <QueryClientProvider client={queryClient}>
-        <Accordion title="Advanced Testings" id="test-accordion">
-          <div>Updated content</div>
-        </Accordion>
-      </QueryClientProvider>
+        <TestWrapper />
+      </QueryClientProvider>,
     );
-    
-    expect(screen.getByText(/Updated content/i)).toBeVisible();
-    expect(screen.queryByText(/Test content/i)).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('button', { name: /Test button/i }));
+    expect(selectors.accordionContent()).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button', { name: /Test button/i }));
+    expect(selectors.accordionContent()).not.toBeVisible();
   });
 });
