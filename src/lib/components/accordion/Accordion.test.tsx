@@ -10,15 +10,18 @@ describe('Accordion', () => {
     accordionContainer: () => screen.getByRole('region'),
     accordionContent: () => screen.queryByText(/Test content/i),
   };
-  const renderAccordion = (open = false) => {
+  const SUT = ({ open = false }) => {
     const queryClient = new QueryClient();
-    render(
+    return (
       <QueryClientProvider client={queryClient}>
         <Accordion title="Advanced Testings" id="test-accordion" open={open}>
           <div>Test content</div>
         </Accordion>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
+  };
+  const renderAccordion = (open = false) => {
+    render(<SUT open={open} />);
   };
   it('should render the Accordion component with title and content', () => {
     renderAccordion();
@@ -57,13 +60,7 @@ describe('Accordion', () => {
       return (
         <>
           <button onClick={() => setisOpen(!isOpen)}>Test button</button>
-          <Accordion
-            title="Advanced Testings"
-            id="test-accordion"
-            open={isOpen}
-          >
-            <div>Test content</div>
-          </Accordion>
+          <SUT open={isOpen} />
         </>
       );
     };
