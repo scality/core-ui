@@ -14,6 +14,7 @@ export type AccordionProps = {
   children: React.ReactNode;
   style?: React.CSSProperties;
   open?: boolean;
+  isEmphazed?: boolean;
 };
 
 const AccordionContainer = styled(Box)`
@@ -70,6 +71,7 @@ export const Accordion = ({
   style,
   children,
   open = false,
+  isEmphazed = true,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(open);
 
@@ -104,11 +106,11 @@ export const Accordion = ({
               name="Chevron-up"
               size="lg"
               style={{
-                transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+                transform: isOpen ? 'rotate(180deg)' : 'rotate(90deg)',
                 transition: 'transform 0.3s ease-in',
               }}
             />
-            <Text isEmphazed>{title}</Text>
+            <Text isEmphazed={isEmphazed}>{title}</Text>
           </Stack>
         </AccordionHeader>
       </h3>
