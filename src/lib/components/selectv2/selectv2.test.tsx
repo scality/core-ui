@@ -1,8 +1,8 @@
 import { screen, render as testingRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Option, Select } from '../selectv2/Selectv2.component';
+import { Option, Select, SelectRef } from '../selectv2/Selectv2.component';
 
 const render = (args) => {
   return testingRender(
@@ -451,5 +451,159 @@ describe('SelectV2', () => {
      * const option = within(selectContainer).getByRole('option', { name: /account 1/i });
      */
     await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+  });
+
+  describe('Ref API', () => {
+    it('should expose focus method via ref', async () => {
+      const RefTestComponent = () => {
+        const selectRef = useRef<SelectRef>(null);
+        const [value, setValue] = useState<string>('');
+
+        return (
+          <div>
+            <button onClick={() => selectRef.current?.focus()}>Focus</button>
+            <Select
+              id="ref-test"
+              value={value}
+              onChange={(value) => setValue(value)}
+              ref={selectRef}
+              placeholder="Select with ref"
+            >
+              {simpleOptions}
+            </Select>
+          </div>
+        );
+      };
+
+      render(<RefTestComponent />);
+      expect(selectors.input()).not.toHaveFocus();
+
+      userEvent.click(screen.getByRole('button', { name: /Focus/i }));
+      expect(selectors.input()).toHaveFocus();
+    });
+
+    it('should expose openMenu and closeMenu methods via ref', async () => {
+      const RefTestComponent = () => {
+        const selectRef = useRef<SelectRef>(null);
+        const [value, setValue] = useState<string>('');
+
+        return (
+          <div>
+            <button onClick={() => selectRef.current?.openMenu()}>
+              Open Menu
+            </button>
+            <button onClick={() => selectRef.current?.closeMenu()}>
+              Close Menu
+            </button>
+            <Select
+              id="ref-test"
+              value={value}
+              onChange={(value) => setValue(value)}
+              ref={selectRef}
+              placeholder="Select with ref"
+            >
+              {simpleOptions}
+            </Select>
+          </div>
+        );
+      };
+
+      render(<RefTestComponent />);
+      expect(selectors.options()).toHaveLength(0);
+
+      userEvent.click(screen.getByRole('button', { name: /Open Menu/i }));
+      expect(selectors.options().length).toBeGreaterThan(0);
+      simpleOptions.forEach((opt) => {
+        const option = selectors.option(opt.props.label);
+        expect(option).toBeInTheDocument();
+      });
+
+      userEvent.click(screen.getByRole('button', { name: /Close Menu/i }));
+      expect(selectors.options()).toHaveLength(0);
+    });
+
+    it('should expose setValue and clearValue methods via ref', async () => {
+      const handleChange = jest.fn();
+
+      const RefTestComponent = () => {
+        const [value, setValue] = useState('');
+        const selectRef = useRef<SelectRef>(null);
+
+        return (
+          <div>
+            <button
+              onClick={() => {
+                selectRef.current?.setValue('0');
+                setValue('0');
+              }}
+            >
+              Set Value
+            </button>
+            <button
+              onClick={() => {
+                selectRef.current?.clearValue();
+                setValue('');
+              }}
+            >
+              Clear
+            </button>
+            <Select
+              id="ref-test"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+                handleChange(newValue);
+              }}
+              ref={selectRef}
+              placeholder="Select with ref"
+            >
+              {simpleOptions}
+            </Select>
+          </div>
+        );
+      };
+
+      render(<RefTestComponent />);
+
+      const select = selectors.select();
+      expect(select).toHaveTextContent('Select with ref');
+
+      userEvent.click(screen.getByRole('button', { name: /Set Value/i }));
+      expect(select).toHaveTextContent('Item 0');
+
+      userEvent.click(screen.getByRole('button', { name: /Clear/i }));
+      expect(select).toHaveTextContent('Select with ref');
+    });
+
+    it('should expose blur method via ref', async () => {
+      const RefTestComponent = () => {
+        const selectRef = useRef<SelectRef>(null);
+        const [value, setValue] = useState<string>('');
+
+        return (
+          <div>
+            <button onClick={() => selectRef.current?.focus()}>Focus</button>
+            <button onClick={() => selectRef.current?.blur()}>Blur</button>
+            <Select
+              id="ref-test"
+              value={value}
+              onChange={(value) => setValue(value)}
+              ref={selectRef}
+              placeholder="Select with ref"
+            >
+              {simpleOptions}
+            </Select>
+          </div>
+        );
+      };
+
+      render(<RefTestComponent />);
+
+      userEvent.click(screen.getByRole('button', { name: /Focus/i }));
+      expect(selectors.input()).toHaveFocus();
+
+      userEvent.click(screen.getByRole('button', { name: /Blur/i }));
+      expect(selectors.input()).not.toHaveFocus();
+    });
   });
 });

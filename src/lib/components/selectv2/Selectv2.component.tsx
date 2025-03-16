@@ -4,9 +4,13 @@ import React, {
   useState,
   useEffect,
   useRef,
+  forwardRef,
+  ForwardRefExoticComponent,
+  RefAttributes,
+  useImperativeHandle,
 } from 'react';
 import { ScrollbarWrapper, Tooltip } from '../../index';
-import { components } from 'react-select';
+import { components, SelectInstance } from 'react-select';
 import { Icon } from '../icon/Icon.component';
 import { SelectStyle } from './SelectStyle';
 import { FixedSizeList, FixedSizeList as List } from 'react-window';
@@ -300,6 +304,15 @@ const ValueContainer = ({ children, ...props }) => {
     </components.ValueContainer>
   );
 };
+export interface SelectRef {
+  select: SelectInstance<any> | null;
+  focus: () => void;
+  blur: () => void;
+  openMenu: () => void;
+  closeMenu: () => void;
+  setValue: (value: string) => void;
+  clearValue: () => void;
+}
 
 export type SelectProps = {
   id: string;
@@ -316,6 +329,7 @@ export type SelectProps = {
   /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
 };
+
 type SelectOptionProps = {
   value: string;
   label: React.ReactNode;
@@ -325,38 +339,17 @@ type SelectOptionProps = {
   disabledReason?: React.ReactNode;
 };
 
+type SelectComponentType = ForwardRefExoticComponent<
+  SelectProps & RefAttributes<SelectRef>
+> & {
+  Option: typeof Option;
+};
+
 const OptionContext = createContext<{
   options: Record<string, SelectOptionProps>;
   register: (option: SelectOptionProps) => void;
   unregister: (value: string) => void;
 } | null>(null);
-
-function SelectWithOptionContext(props: SelectProps) {
-  const [options, setOptions] = useState<Record<string, SelectOptionProps>>({});
-
-  const register = (option: SelectOptionProps) => {
-    setOptions((prevOptions) => ({
-      ...prevOptions,
-      [option.value]: option,
-    }));
-  };
-
-  const unregister = (value: string) => {
-    setOptions((prevOptions) => {
-      const { [value]: _, ...rest } = prevOptions;
-      return rest;
-    });
-  };
-
-  return (
-    <OptionContext.Provider value={{ options, register, unregister }}>
-      <>
-        <SelectBox {...props} />
-        {props.children}
-      </>
-    </OptionContext.Provider>
-  );
-}
 
 function SelectBox({
   placeholder = 'Select...',
@@ -367,15 +360,57 @@ function SelectBox({
   className,
   size = '1',
   id,
+  selectRef,
   ...rest
-}: SelectProps) {
+}: SelectProps & { selectRef?: React.Ref<SelectRef> }) {
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [customPlaceholder, setPlaceholder] = useState(placeholder);
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
-  const selectRef = useRef<any>();
+  const internalSelectRef = useRef<any>(null);
+
+  useImperativeHandle(
+    selectRef,
+    () => ({
+      focus: () => {
+        if (internalSelectRef.current) {
+          internalSelectRef.current.focus();
+        }
+      },
+      blur: () => {
+        if (internalSelectRef.current) {
+          internalSelectRef.current.blur();
+        }
+      },
+      select: internalSelectRef.current,
+      openMenu: () => {
+        if (internalSelectRef.current) {
+          internalSelectRef.current.setState({ menuIsOpen: true });
+        }
+      },
+      closeMenu: () => {
+        if (internalSelectRef.current) {
+          internalSelectRef.current.setState({ menuIsOpen: false });
+        }
+      },
+      setValue: (newValue: string) => {
+        if (internalSelectRef.current) {
+          const option = options.find((opt) => opt.value === newValue);
+          if (option) {
+            internalSelectRef.current.select.setValue(option);
+          }
+        }
+      },
+      clearValue: () => {
+        if (internalSelectRef.current && internalSelectRef.current.select) {
+          internalSelectRef.current.select.clearValue();
+        }
+      },
+    }),
+    [internalSelectRef],
+  );
 
   const options = useOptions();
 
@@ -385,8 +420,8 @@ function SelectBox({
       onChange(newValue);
     }
 
-    if (options && options.length > NOPT_SEARCH) {
-      selectRef.current.blur();
+    if (options && options.length > NOPT_SEARCH && internalSelectRef.current) {
+      internalSelectRef.current.blur();
     }
   };
 
@@ -414,12 +449,12 @@ function SelectBox({
     if (
       !isEmptyStringInOptions &&
       value === '' &&
-      selectRef.current &&
-      selectRef.current.select
+      internalSelectRef.current &&
+      internalSelectRef.current.select
     ) {
-      selectRef.current.select.clearValue();
+      internalSelectRef.current.select.clearValue();
     }
-  }, [value, selectRef, isEmptyStringInOptions]);
+  }, [value, isEmptyStringInOptions]);
 
   return (
     <ScrollbarWrapper>
@@ -454,7 +489,7 @@ function SelectBox({
             ITEMS_PER_SCROLL_WINDOW={ITEMS_PER_SCROLL_WINDOW}
             onChange={handleChange}
             onInputChange={handleSearchInput}
-            ref={selectRef}
+            ref={internalSelectRef}
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
             onBlur={rest.onBlur}
@@ -464,10 +499,10 @@ function SelectBox({
               if (
                 event &&
                 event.key === 'Enter' &&
-                selectRef &&
-                !selectRef.current.state.isOpen
+                internalSelectRef.current &&
+                !internalSelectRef.current.state.isOpen
               ) {
-                selectRef.current.setState({
+                internalSelectRef.current.setState({
                   menuIsOpen: true,
                 });
               } else {
@@ -483,5 +518,37 @@ function SelectBox({
   );
 }
 
+const SelectWithOptionContext = forwardRef<SelectRef, SelectProps>(
+  (props, ref) => {
+    const [options, setOptions] = useState<Record<string, SelectOptionProps>>(
+      {},
+    );
+
+    const register = (option: SelectOptionProps) => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        [option.value]: option,
+      }));
+    };
+
+    const unregister = (value: string) => {
+      setOptions((prevOptions) => {
+        const { [value]: _, ...rest } = prevOptions;
+        return rest;
+      });
+    };
+
+    return (
+      <OptionContext.Provider value={{ options, register, unregister }}>
+        <>
+          <SelectBox {...props} selectRef={ref} />
+          {props.children}
+        </>
+      </OptionContext.Provider>
+    );
+  },
+) as SelectComponentType;
+
+SelectWithOptionContext.displayName = 'Select';
 SelectWithOptionContext.Option = Option;
 export const Select = SelectWithOptionContext;
