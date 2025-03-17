@@ -20,12 +20,10 @@ export type AccordionProps = {
 const AccordionContainer = styled(Box)`
   width: 100%;
   height: auto;
-  ${({ theme }) =>
-    `
-    border: 0.5px solid ${theme.border};
-    border-radius: 4px;
-    padding: ${spacing.r16};
-  `}
+  padding: ${spacing.r16};
+  border-radius: 4px;
+  box-sizing: border-box;
+  ${({ theme }) => `border: 0.5px solid ${theme.border};`}
 `;
 
 const AccordionHeader = styled.button<{
