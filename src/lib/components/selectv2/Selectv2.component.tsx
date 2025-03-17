@@ -10,7 +10,12 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import { ScrollbarWrapper, Tooltip } from '../../index';
-import { components, SelectInstance } from 'react-select';
+import {
+  components,
+  GroupTypeBase,
+  OptionTypeBase,
+  ValueContainerProps,
+} from 'react-select';
 import { Icon } from '../icon/Icon.component';
 import { SelectStyle } from './SelectStyle';
 import { FixedSizeList, FixedSizeList as List } from 'react-window';
@@ -18,6 +23,7 @@ import { convertRemToPixels } from '../../utils';
 import { spacing } from '../../spacing';
 import { convertSizeToRem } from '../inputv2/inputv2';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
+import ReactSelect from 'react-select/src/Select';
 
 const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
@@ -284,7 +290,14 @@ const MenuList = (props) => {
   return <components.MenuList {...props}>{children}</components.MenuList>;
 };
 
-const ValueContainer = ({ children, ...props }) => {
+const ValueContainer = <
+  OptionType extends OptionTypeBase,
+  IsMulti extends boolean,
+  GroupType extends GroupTypeBase<OptionType>,
+>({
+  children,
+  ...props
+}: ValueContainerProps<OptionType, IsMulti, GroupType>) => {
   const selectedOption = props.selectProps.selectedOption;
   const icon = selectedOption ? selectedOption.icon : null;
   const ariaProps = {
@@ -304,8 +317,12 @@ const ValueContainer = ({ children, ...props }) => {
     </components.ValueContainer>
   );
 };
-export interface SelectRef {
-  select: SelectInstance<any> | null;
+export interface SelectRef<
+  OptionType extends OptionTypeBase,
+  IsMulti extends boolean,
+  GroupType extends GroupTypeBase<OptionType>,
+> {
+  select: ReactSelect<OptionType, IsMulti, GroupType> | null;
   focus: () => void;
   blur: () => void;
   openMenu: () => void;
@@ -339,8 +356,12 @@ type SelectOptionProps = {
   disabledReason?: React.ReactNode;
 };
 
-type SelectComponentType = ForwardRefExoticComponent<
-  SelectProps & RefAttributes<SelectRef>
+type SelectComponentType<
+  OptionType extends OptionTypeBase,
+  IsMulti extends boolean,
+  GroupType extends GroupTypeBase<OptionType>,
+> = ForwardRefExoticComponent<
+  SelectProps & RefAttributes<SelectRef<OptionType, IsMulti, GroupType>>
 > & {
   Option: typeof Option;
 };
@@ -351,7 +372,11 @@ const OptionContext = createContext<{
   unregister: (value: string) => void;
 } | null>(null);
 
-function SelectBox({
+function SelectBox<
+  OptionType extends OptionTypeBase,
+  IsMulti extends boolean,
+  GroupType extends GroupTypeBase<OptionType>,
+>({
   placeholder = 'Select...',
   disabled = false,
   value,
@@ -362,14 +387,25 @@ function SelectBox({
   id,
   selectRef,
   ...rest
-}: SelectProps & { selectRef?: React.Ref<SelectRef> }) {
+}: SelectProps & {
+  selectRef?: React.Ref<SelectRef<OptionType, IsMulti, GroupType>>;
+}) {
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [customPlaceholder, setPlaceholder] = useState(placeholder);
   const isDefaultVariant = variant === 'default';
   const [isMenuBottom, setIsMenuBottom] = useState(true);
-  const internalSelectRef = useRef<any>(null);
+  const internalSelectRef = useRef<
+    ReactSelect<OptionType, IsMulti, GroupType> & {
+      setState: (state: { menuIsOpen: boolean }) => void;
+      state: { isOpen: boolean };
+      select: {
+        setValue: (option: SelectOptionProps) => void;
+        clearValue: () => void;
+      };
+    }
+  >(null);
 
   useImperativeHandle(
     selectRef,
@@ -518,36 +554,39 @@ function SelectBox({
   );
 }
 
-const SelectWithOptionContext = forwardRef<SelectRef, SelectProps>(
-  (props, ref) => {
-    const [options, setOptions] = useState<Record<string, SelectOptionProps>>(
-      {},
-    );
+const SelectWithOptionContext = forwardRef<
+  SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>,
+  SelectProps
+>((props, ref) => {
+  const [options, setOptions] = useState<Record<string, SelectOptionProps>>({});
 
-    const register = (option: SelectOptionProps) => {
-      setOptions((prevOptions) => ({
-        ...prevOptions,
-        [option.value]: option,
-      }));
-    };
+  const register = (option: SelectOptionProps) => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      [option.value]: option,
+    }));
+  };
 
-    const unregister = (value: string) => {
-      setOptions((prevOptions) => {
-        const { [value]: _, ...rest } = prevOptions;
-        return rest;
-      });
-    };
+  const unregister = (value: string) => {
+    setOptions((prevOptions) => {
+      const { [value]: _, ...rest } = prevOptions;
+      return rest;
+    });
+  };
 
-    return (
-      <OptionContext.Provider value={{ options, register, unregister }}>
-        <>
-          <SelectBox {...props} selectRef={ref} />
-          {props.children}
-        </>
-      </OptionContext.Provider>
-    );
-  },
-) as SelectComponentType;
+  return (
+    <OptionContext.Provider value={{ options, register, unregister }}>
+      <>
+        <SelectBox {...props} selectRef={ref} />
+        {props.children}
+      </>
+    </OptionContext.Provider>
+  );
+}) as SelectComponentType<
+  OptionTypeBase,
+  boolean,
+  GroupTypeBase<OptionTypeBase>
+>;
 
 SelectWithOptionContext.displayName = 'Select';
 SelectWithOptionContext.Option = Option;
