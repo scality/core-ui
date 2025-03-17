@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: row;
   flex: 1;
   overflow: hidden;
+  color: ${(props) => props.theme.textPrimary};
 `;
 
 const FillAvailableFlexBox = styled.div`
