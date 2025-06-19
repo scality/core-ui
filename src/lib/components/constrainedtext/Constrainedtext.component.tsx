@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
+import { Text } from '../text/Text.component';
 
 type Props = {
   text: string | number | JSX.Element | JSX.Element[];
@@ -81,10 +82,14 @@ function ConstrainedText({
           overlayStyle={tooltipStyle}
           placement={tooltipPlacement}
         >
-          {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+          <Text>
+            {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+          </Text>
         </Tooltip>
       ) : (
-        getConstrainedTextContainer(constrainedTextRef, lineClamp, text)
+        <Text>
+          {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+        </Text>
       )}
     </BlockTooltip>
   );
