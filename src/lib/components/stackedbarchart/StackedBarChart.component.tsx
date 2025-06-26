@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -12,14 +12,18 @@ import {
 import styled, { useTheme } from 'styled-components';
 import { ConstrainedText, spacing, Wrap } from '../..';
 import { Text } from '../text/Text.component';
-import StackedBarTooltip from './StackedBarTooltip.component';
 import StackedBarLegend from './StackedBarLegend.component';
-import {
-  getMaxValueByType,
-  getRoundReferenceValue,
-  sumDataValues,
-  KeysByType,
-} from './utils';
+import StackedBarTooltip from './StackedBarTooltip.component';
+import { useChartData } from './useChartData';
+import { getMaxValueByType, getRoundReferenceValue } from './utils';
+
+const CHART_CONSTANTS = {
+  BAR_SIZE: 8,
+  MARGIN: { top: 16, bottom: 24 },
+  TICK_COUNT: 1,
+  MIN_VALUE: 0,
+  TICK_WIDTH_OFFSET: 5,
+} as const;
 
 export type DataSchema = {
   /** The key in the data object that represents the X-axis values */
@@ -89,7 +93,8 @@ const CustomTick = ({
 }: CustomTickProps) => {
   const theme = useTheme();
 
-  const tickWidth = width / visibleTicksCount - 5;
+  const tickWidth =
+    width / visibleTicksCount - CHART_CONSTANTS.TICK_WIDTH_OFFSET;
   const centerX = x - tickWidth / 2;
 
   return (
@@ -152,55 +157,21 @@ const StackedBarChart = ({
   title,
   rightContent,
   yUnit,
-  style,
+  style = {
+    width: '100%',
+    height: '100%',
+  },
 }: StackedBarChartProps) => {
   const theme = useTheme();
-  const [selectedLegend, setSelectedLegend] = useState<string>();
   const [hoveredValue, setHoveredValue] = useState<string>();
 
-  const minValue = 0;
-
-  /* ------------------------------- Filter Data ------------------------------ */
-
-  // Filter data by type
-  const keysByType: KeysByType = useMemo(() => {
-    const result: KeysByType = {};
-    dataSchema.yValues.forEach(({ key, type }) => {
-      // Use type or 'default' if type is undefined
-      const typeKey = type || 'default';
-      if (!result[typeKey]) {
-        result[typeKey] = [];
-      }
-      result[typeKey].push(key);
-    });
-    return result;
-  }, [dataSchema.yValues]);
-
-  /* --------------------------- Filter Data to Display by Type -------------------------- */
-
-  const filteredDataToDisplay = useMemo(
-    () =>
-      dataSchema.yValues.filter((yValue) =>
-        typeToDisplay ? yValue.type === typeToDisplay : true,
-      ),
-    [dataSchema.yValues, typeToDisplay],
-  );
-
-  /* -------------------------------- Sort Data ------------------------------- */
-
-  const sortedData = useMemo(() => {
-    if (!sortBy) return data;
-
-    return data.toSorted((a, b) => {
-      const aSum = sumDataValues(a, keysByType, typeToDisplay, selectedLegend);
-      const bSum = sumDataValues(b, keysByType, typeToDisplay, selectedLegend);
-      if (sortBy === 'asc') {
-        return aSum - bSum;
-      } else {
-        return bSum - aSum;
-      }
-    });
-  }, [data, keysByType, sortBy, typeToDisplay, selectedLegend]);
+  const {
+    keysByType,
+    filteredDataToDisplay,
+    sortedData,
+    setSelectedLegend,
+    selectedLegend,
+  } = useChartData(data, dataSchema, typeToDisplay, sortBy);
 
   /* -------------------------- Reference Line Value -------------------------- */
 
@@ -237,15 +208,15 @@ const StackedBarChart = ({
         <BarChart
           data={chartData}
           margin={{
-            top: 16,
-            bottom: 24,
+            top: CHART_CONSTANTS.MARGIN.top,
+            bottom: CHART_CONSTANTS.MARGIN.bottom,
           }}
           accessibilityLayer
         >
           <YAxis
             unit={yUnit}
-            tickCount={1}
-            domain={[minValue, referenceLineValue]}
+            tickCount={CHART_CONSTANTS.TICK_COUNT}
+            domain={[CHART_CONSTANTS.MIN_VALUE, referenceLineValue]}
             tickFormatter={(value) => value.toFixed(0)}
             axisLine={false}
             tick={{
@@ -277,34 +248,21 @@ const StackedBarChart = ({
               />
             }
           />
-          {filteredDataToDisplay.map((yValue) => {
-            if (selectedLegend) {
-              if (yValue.key === selectedLegend) {
-                return (
-                  <Bar
-                    barSize={8}
-                    key={yValue.key}
-                    dataKey={yValue.key}
-                    stackId={yValue.type || 'default'}
-                    fill={yValue.color}
-                  />
-                );
-              }
-              return null;
-            } else {
-              return (
-                <Bar
-                  key={yValue.key}
-                  barSize={8}
-                  dataKey={yValue.key}
-                  stackId={yValue.type || 'default'}
-                  fill={yValue.color}
-                  onMouseOver={() => setHoveredValue(yValue.key)}
-                  onMouseLeave={() => setHoveredValue(undefined)}
-                ></Bar>
-              );
-            }
-          })}
+          {filteredDataToDisplay
+            .filter(
+              (yValue) => !selectedLegend || yValue.key === selectedLegend,
+            )
+            .map((yValue) => (
+              <Bar
+                key={yValue.key}
+                barSize={CHART_CONSTANTS.BAR_SIZE}
+                dataKey={yValue.key}
+                stackId={yValue.type || 'default'}
+                fill={yValue.color}
+                onMouseOver={() => setHoveredValue(yValue.key)}
+                onMouseLeave={() => setHoveredValue(undefined)}
+              />
+            ))}
           {/* X Axis
           Put it here to avoid the tooltip to be displayed under the bar
           SVG paint object in order, on top of previous elements
