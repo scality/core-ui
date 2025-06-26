@@ -76,6 +76,17 @@ export const getMaxValueByType = (
 };
 
 /**
+ * Get the maximum value from pre-calculated sums
+ */
+export const getMaxValueFromPreCalculatedSums = (
+  dataWithSums: Array<Record<string, number | string> & { _sum: number }>,
+): number => {
+  if (!Array.isArray(dataWithSums) || dataWithSums.length === 0) return 0;
+
+  return Math.max(...dataWithSums.map((item) => item._sum));
+};
+
+/**
  * Calculate a nice round number for the reference line
  */
 export const getRoundReferenceValue = (value: number): number => {

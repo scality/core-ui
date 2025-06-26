@@ -1,6 +1,11 @@
 import { DataSchema } from './StackedBarChart.component';
 import { useState, useMemo } from 'react';
-import { KeysByType, sumDataValues } from './utils';
+import {
+  getMaxValueFromPreCalculatedSums,
+  getRoundReferenceValue,
+  KeysByType,
+  sumDataValues,
+} from './utils';
 
 export const useChartData = (
   data: Array<{ [key: string]: number | string }>,
@@ -31,19 +36,32 @@ export const useChartData = (
     [dataSchema.yValues, typeToDisplay],
   );
 
+  // Pre-calculate sums for all data points to avoid recalculating during sort
+  const dataWithSums = useMemo(() => {
+    return data.map((item) => ({
+      ...item,
+      _sum: sumDataValues(item, keysByType, typeToDisplay, selectedLegend),
+    }));
+  }, [data, keysByType, typeToDisplay, selectedLegend]);
+
   const sortedData = useMemo(() => {
     if (!sortBy) return data;
 
-    return data.toSorted((a, b) => {
-      const aSum = sumDataValues(a, keysByType, typeToDisplay, selectedLegend);
-      const bSum = sumDataValues(b, keysByType, typeToDisplay, selectedLegend);
-      if (sortBy === 'asc') {
-        return aSum - bSum;
-      } else {
-        return bSum - aSum;
-      }
-    });
-  }, [data, keysByType, sortBy, typeToDisplay, selectedLegend]);
+    return dataWithSums
+      .toSorted((a, b) => {
+        if (sortBy === 'asc') {
+          return a._sum - b._sum;
+        } else {
+          return b._sum - a._sum;
+        }
+      })
+      .map(({ _sum, ...item }) => item); // Remove the _sum property
+  }, [dataWithSums, sortBy, data]);
+
+  const referenceLineValue = useMemo(() => {
+    const maxValue = getMaxValueFromPreCalculatedSums(dataWithSums);
+    return getRoundReferenceValue(maxValue);
+  }, [dataWithSums]);
 
   return {
     keysByType,
@@ -51,5 +69,6 @@ export const useChartData = (
     sortedData,
     setSelectedLegend,
     selectedLegend,
+    referenceLineValue,
   };
 };

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -15,7 +15,6 @@ import { Text } from '../text/Text.component';
 import StackedBarLegend from './StackedBarLegend.component';
 import StackedBarTooltip from './StackedBarTooltip.component';
 import { useChartData } from './useChartData';
-import { getMaxValueByType, getRoundReferenceValue } from './utils';
 
 const CHART_CONSTANTS = {
   BAR_SIZE: 8,
@@ -53,7 +52,7 @@ export type StackedBarChartProps = {
   /** Filter to display only data series of a specific type */
   typeToDisplay?: string;
   /** Sort the bars by their total values ('asc' for ascending, 'desc' for descending) */
-  sortBy?: 'asc' | 'desc';
+  sortBy?: 'asc' | 'desc' | undefined;
   /** Additional content to display in the top-right area of the chart */
   rightContent?: React.ReactNode;
   /** Unit to display after Y-axis values (e.g., " TB", " IOPS") */
@@ -107,6 +106,7 @@ const CustomTick = ({
     >
       <ConstrainedText
         text={String(payload.value)}
+        centered
         tooltipStyle={{
           backgroundColor: theme.backgroundLevel1,
           padding: spacing.r10,
@@ -166,31 +166,13 @@ const StackedBarChart = ({
   const [hoveredValue, setHoveredValue] = useState<string>();
 
   const {
-    keysByType,
     filteredDataToDisplay,
     sortedData,
+
     setSelectedLegend,
     selectedLegend,
+    referenceLineValue,
   } = useChartData(data, dataSchema, typeToDisplay, sortBy);
-
-  /* -------------------------- Reference Line Value -------------------------- */
-
-  const maxValue = useMemo(
-    () => getMaxValueByType(data, keysByType, typeToDisplay, selectedLegend),
-    [data, keysByType, typeToDisplay, selectedLegend],
-  );
-
-  const referenceLineValue = useMemo(
-    () => getRoundReferenceValue(maxValue),
-    [maxValue],
-  );
-
-  // Memoize the final data to use in the chart
-  const chartData = useMemo(() => {
-    return sortBy ? sortedData : data;
-  }, [sortBy, sortedData, data]);
-
-  /* ------------------------------ - ------------------------------ */
 
   return (
     <ChartContainer
@@ -206,7 +188,7 @@ const StackedBarChart = ({
       </Wrap>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={chartData}
+          data={sortedData}
           margin={{
             top: CHART_CONSTANTS.MARGIN.top,
             bottom: CHART_CONSTANTS.MARGIN.bottom,
