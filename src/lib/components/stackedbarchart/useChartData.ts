@@ -1,5 +1,5 @@
 import { DataSchema } from './StackedBarChart.component';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   getMaxValueFromPreCalculatedSums,
   getRoundReferenceValue,
@@ -28,13 +28,32 @@ export const useChartData = (
     return result;
   }, [dataSchema.yValues]);
 
-  const filteredDataToDisplay = useMemo(
+  const filteredLegendItems = useMemo(
     () =>
       dataSchema.yValues.filter((yValue) =>
         typeToDisplay ? yValue.type === typeToDisplay : true,
       ),
     [dataSchema.yValues, typeToDisplay],
   );
+  const filteredDataSchemaToDisplay = useMemo(
+    () =>
+      filteredLegendItems.filter((yValue) => {
+        if (selectedLegend) {
+          return yValue.key === selectedLegend;
+        }
+        return true;
+      }),
+    [filteredLegendItems, selectedLegend],
+  );
+
+  useEffect(() => {
+    if (
+      selectedLegend &&
+      !filteredLegendItems.some((yValue) => yValue.key === selectedLegend)
+    ) {
+      setSelectedLegend(undefined);
+    }
+  }, [filteredLegendItems, selectedLegend, setSelectedLegend]);
 
   // Pre-calculate sums for all data points to avoid recalculating during sort
   const dataWithSums = useMemo(() => {
@@ -64,8 +83,8 @@ export const useChartData = (
   }, [dataWithSums]);
 
   return {
-    keysByType,
-    filteredDataToDisplay,
+    filteredDataSchemaToDisplay,
+    filteredLegendItems,
     sortedData,
     setSelectedLegend,
     selectedLegend,

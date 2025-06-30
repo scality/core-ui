@@ -166,9 +166,9 @@ const StackedBarChart = ({
   const [hoveredValue, setHoveredValue] = useState<string>();
 
   const {
-    filteredDataToDisplay,
+    filteredDataSchemaToDisplay,
+    filteredLegendItems,
     sortedData,
-
     setSelectedLegend,
     selectedLegend,
     referenceLineValue,
@@ -186,9 +186,13 @@ const StackedBarChart = ({
         </Text>
         {rightContent}
       </Wrap>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width={300} height={200}>
         <BarChart
           data={sortedData}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
           margin={{
             top: CHART_CONSTANTS.MARGIN.top,
             bottom: CHART_CONSTANTS.MARGIN.bottom,
@@ -196,6 +200,7 @@ const StackedBarChart = ({
           accessibilityLayer
         >
           <YAxis
+            dataKey={dataSchema.xValueKey}
             unit={yUnit}
             tickCount={CHART_CONSTANTS.TICK_COUNT}
             domain={[CHART_CONSTANTS.MIN_VALUE, referenceLineValue]}
@@ -226,25 +231,21 @@ const StackedBarChart = ({
               <StackedBarLegend
                 selectedLegend={selectedLegend}
                 setSelectedLegend={setSelectedLegend}
-                dataToDisplay={filteredDataToDisplay}
+                dataToDisplay={filteredLegendItems}
               />
             }
           />
-          {filteredDataToDisplay
-            .filter(
-              (yValue) => !selectedLegend || yValue.key === selectedLegend,
-            )
-            .map((yValue) => (
-              <Bar
-                key={yValue.key}
-                barSize={CHART_CONSTANTS.BAR_SIZE}
-                dataKey={yValue.key}
-                stackId={yValue.type || 'default'}
-                fill={yValue.color}
-                onMouseOver={() => setHoveredValue(yValue.key)}
-                onMouseLeave={() => setHoveredValue(undefined)}
-              />
-            ))}
+          {filteredDataSchemaToDisplay.map((yValue) => (
+            <Bar
+              key={yValue.key}
+              barSize={CHART_CONSTANTS.BAR_SIZE}
+              dataKey={yValue.key}
+              stackId={yValue.type || 'default'}
+              fill={yValue.color}
+              onMouseOver={() => setHoveredValue(yValue.key)}
+              onMouseLeave={() => setHoveredValue(undefined)}
+            />
+          ))}
           {/* X Axis
           Put it here to avoid the tooltip to be displayed under the bar
           SVG paint object in order, on top of previous elements
@@ -268,4 +269,4 @@ const StackedBarChart = ({
   );
 };
 
-export default StackedBarChart;
+export { StackedBarChart };
