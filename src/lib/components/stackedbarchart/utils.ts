@@ -8,7 +8,7 @@ const getNumericValue = (
   key: string,
 ): number => {
   const value = item[key];
-  return typeof value === 'number' && !isNaN(value) ? value : 0;
+  return typeof value === 'number' ? value : Number(value) || 0;
 };
 
 /**

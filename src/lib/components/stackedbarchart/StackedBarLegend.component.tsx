@@ -55,6 +55,7 @@ const StackedBarLegend = ({
         return (
           <LegendItem
             key={yValue.key}
+            type="button"
             isSelected={selectedLegend === yValue.key}
             onClick={() => handleLegendClick(yValue.key)}
             aria-pressed={selectedLegend === yValue.key}
