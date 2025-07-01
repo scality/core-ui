@@ -1,16 +1,22 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
-import StackedBarChart from '../src/lib/components/stackedbarchart/StackedBarChart.component';
+import { StackedBarChart } from '../src/lib/components/stackedbarchart/StackedBarChart.component';
 
-import { Wrap } from '../src/lib';
+import { Stack, Wrap } from '../src/lib';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Wrapper } from './common';
 
 type Story = StoryObj<typeof StackedBarChart>;
 
 const meta: Meta<typeof StackedBarChart> = {
   title: 'Components/Data Display/Charts/StackedBarChart',
   component: StackedBarChart,
+  decorators: [
+    (story) => (
+      <Wrapper style={{ height: '100vh', width: '100vw' }}>{story()}</Wrapper>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },
@@ -31,11 +37,11 @@ const sampleData = [
 export const Playground: Story = {
   render: () => {
     return (
-      <div style={{ width: '800px', height: '600px' }}>
+      <div style={{ width: '850px', height: '600px' }}>
         <StackedBarChart
           data={sampleData}
           title="Stacked Bar Chart"
-          style={{ width: '50%', height: '50%' }}
+          rightContent={<Button label="Test" />}
           dataSchema={{
             xValueKey: 'date',
             yValues: [
@@ -66,20 +72,19 @@ const volumeCapacityData = [
 export const VolumeCapacity: Story = {
   render: () => {
     return (
-      <div style={{ width: '800px', height: '600px' }}>
-        <StackedBarChart
-          data={volumeCapacityData}
-          title="Volume Storage Capacity"
-          dataSchema={{
-            xValueKey: 'volume',
-            yValues: [
-              { key: 'used', color: '#346774', label: 'Used Capacity' },
-              { key: 'free', color: '#8fd3e6', label: 'Free Capacity' },
-            ],
-          }}
-          yUnit=" TB"
-        />
-      </div>
+      <StackedBarChart
+        style={{ width: '500px', height: '300px' }}
+        data={volumeCapacityData}
+        title="Volume Storage Capacity"
+        dataSchema={{
+          xValueKey: 'volume',
+          yValues: [
+            { key: 'used', color: '#346774', label: 'Used Capacity' },
+            { key: 'free', color: '#8fd3e6', label: 'Free Capacity' },
+          ],
+        }}
+        yUnit=" TB"
+      />
     );
   },
 };
@@ -107,33 +112,30 @@ export const VolumePerformance: Story = {
     };
 
     return (
-      <div style={{ width: '800px', height: '600px' }}>
-        <Wrap
-          gap="r16"
-          justifyContent="flex-end"
-          style={{ marginBottom: '16px' }}
-        >
+      <StackedBarChart
+        data={volumePerformanceData}
+        style={{
+          width: '80%',
+          height: '80%',
+        }}
+        rightContent={
           <Button
             onClick={toggleSortOrder}
             variant="outline"
             label={sortOrder === 'asc' ? 'Ascending' : 'Descending'}
           ></Button>
-          <></>
-        </Wrap>
-        <StackedBarChart
-          data={volumePerformanceData}
-          title="Volume I/O Performance"
-          dataSchema={{
-            xValueKey: 'volume',
-            yValues: [
-              { key: 'read', color: '#6abe39', label: 'Read IOPS' },
-              { key: 'write', color: '#f5a623', label: 'Write IOPS' },
-            ],
-          }}
-          sortBy={sortOrder}
-          yUnit=" IOPS"
-        />
-      </div>
+        }
+        title="Volume I/O Performance"
+        dataSchema={{
+          xValueKey: 'volume',
+          yValues: [
+            { key: 'read', color: '#6abe39', label: 'Read IOPS' },
+            { key: 'write', color: '#f5a623', label: 'Write IOPS' },
+          ],
+        }}
+        sortBy={sortOrder}
+        yUnit=" IOPS"
+      />
     );
   },
 };
@@ -258,6 +260,74 @@ export const ResourceAllocation: Story = {
           yUnit="%"
         />
       </div>
+    );
+  },
+};
+export const MultiChart: Story = {
+  render: () => {
+    return (
+      <Stack
+        direction="vertical"
+        gap="r16"
+        style={{ width: '100%', height: '100%' }}
+      >
+        <StackedBarChart
+          data={sampleData}
+          title="Stacked Bar Chart"
+          dataSchema={{
+            xValueKey: 'date',
+            yValues: [
+              { key: 'value1', color: '#0AADA6', label: 'Success' },
+              { key: 'value2', color: '#E84855', label: 'Failure' },
+            ],
+          }}
+        />
+        <StackedBarChart
+          data={sampleData}
+          title="Stacked Bar Chart"
+          dataSchema={{
+            xValueKey: 'date',
+            yValues: [
+              { key: 'value1', color: '#0AADA6', label: 'Success' },
+              { key: 'value2', color: '#E84855', label: 'Failure' },
+            ],
+          }}
+        />
+        <StackedBarChart
+          data={sampleData}
+          title="Stacked Bar Chart"
+          dataSchema={{
+            xValueKey: 'date',
+            yValues: [
+              { key: 'value1', color: '#0AADA6', label: 'Success' },
+              { key: 'value2', color: '#E84855', label: 'Failure' },
+            ],
+          }}
+        />
+      </Stack>
+    );
+  },
+};
+
+export const NoData: Story = {
+  render: () => {
+    return (
+      <StackedBarChart
+        title="No Data"
+        data={[]}
+        dataSchema={{ xValueKey: '', yValues: [] }}
+      />
+    );
+  },
+};
+
+export const NoDataSchema: Story = {
+  render: () => {
+    return (
+      <StackedBarChart
+        data={sampleData}
+        dataSchema={{ xValueKey: '', yValues: [] }}
+      />
     );
   },
 };
