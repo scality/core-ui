@@ -6,6 +6,22 @@ import { StackedBarChart } from './StackedBarChart.component';
 import { debug } from 'jest-preview';
 import { getWrapper } from '../../testUtils';
 
+// Mock the ResponsiveContainer to fix the issue with the chart not being rendered and making the tests fail
+jest.mock('recharts', () => {
+  const OriginalResponsiveContainerModule = jest.requireActual('recharts');
+
+  return {
+    ...OriginalResponsiveContainerModule,
+    ResponsiveContainer: ({ height, children }) => (
+      <OriginalResponsiveContainerModule.ResponsiveContainer
+        width={800}
+        height={300}
+      >
+        {children}
+      </OriginalResponsiveContainerModule.ResponsiveContainer>
+    ),
+  };
+});
 const simpleData = [
   {
     x: '2020',
@@ -45,20 +61,32 @@ const typedData = [
   },
 ];
 
+const mockDataSchema = {
+  xValueKey: 'date',
+  yValues: [
+    { key: 'value1', color: '#0AADA6', label: 'Success' },
+    { key: 'value2', color: '#E84855', label: 'Failure' },
+  ],
+};
+
+const mockData = [
+  { date: 'Mon', value1: 30, value2: 20 },
+  { date: 'Tue', value1: 45, value2: 25 },
+];
+
 describe('StackedBarChart', () => {
   const chartStyle = {
     width: '400px',
     height: '300px',
   };
-
+  const { Wrapper } = getWrapper();
   describe('Basic Rendering', () => {
     beforeEach(() => {
       // Clear any potential state
       jest.clearAllMocks();
     });
-    it('should render with simple data', async () => {
-      const { Wrapper } = getWrapper();
 
+    it('should render with simple data', async () => {
       render(
         <Wrapper>
           <StackedBarChart
@@ -228,5 +256,94 @@ describe('StackedBarChart', () => {
       expect(screen.getByText('Delete')).toBeInTheDocument();
       expect(screen.queryByText('Test')).not.toBeInTheDocument();
     });
+  });
+  it('should render error when data is invalid', () => {
+    render(
+      <Wrapper>
+        <StackedBarChart
+          // @ts-expect-error - This is a test case for invalid data
+          data={{ data: 'invalid' }}
+          dataSchema={mockDataSchema}
+          title="Test Chart"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Chart')).toBeInTheDocument();
+    expect(screen.getByText('No data available')).toBeInTheDocument();
+  });
+  it('should render error when data is undefined', () => {
+    const { Wrapper } = getWrapper();
+
+    render(
+      <Wrapper>
+        <StackedBarChart
+          data={undefined as any}
+          dataSchema={mockDataSchema}
+          title="Test Chart"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Chart')).toBeInTheDocument();
+    expect(screen.getByText('No data available')).toBeInTheDocument();
+  });
+
+  it('should render error when data is empty array', () => {
+    const { Wrapper } = getWrapper();
+
+    render(
+      <Wrapper>
+        <StackedBarChart
+          data={[]}
+          dataSchema={mockDataSchema}
+          title="Test Chart"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Chart')).toBeInTheDocument();
+    expect(screen.getByText('No data available')).toBeInTheDocument();
+  });
+
+  it('should render error when dataSchema is invalid', () => {
+    const { Wrapper } = getWrapper();
+
+    render(
+      <Wrapper>
+        <StackedBarChart
+          data={mockData}
+          dataSchema={{} as any}
+          title="Test Chart"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Chart')).toBeInTheDocument();
+    expect(
+      screen.getByText('An error occurred while rendering the chart'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('An error occurred while rendering the chart'),
+    ).toBeInTheDocument();
+  });
+
+  it('should render error when dataSchema has empty yValues', () => {
+    const { Wrapper } = getWrapper();
+
+    render(
+      <Wrapper>
+        <StackedBarChart
+          data={mockData}
+          dataSchema={{ ...mockDataSchema, yValues: [] }}
+          title="Test Chart"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Chart')).toBeInTheDocument();
+    expect(
+      screen.getByText('An error occurred while rendering the chart'),
+    ).toBeInTheDocument();
   });
 });

@@ -65,8 +65,10 @@ const ChartContainer = styled.div<{
   style?: React.CSSProperties;
 }>`
   background-color: ${(props) => props.theme.backgroundLevel1};
-  padding: ${spacing.r32};
+  padding: ${spacing.r16} 0 ${spacing.r16} ${spacing.r16};
   border-radius: ${spacing.r8};
+  min-height: 12rem;
+  min-width: 22rem;
 
   & .recharts-surface {
     overflow: visible;
@@ -149,6 +151,30 @@ const CustomTick = ({
  * />
  * ```
  */
+const ChartContainerWrapper = ({
+  children,
+  title,
+  rightContent,
+  style,
+}: {
+  children: React.ReactNode;
+  title?: string;
+  rightContent?: React.ReactNode;
+  style?: React.CSSProperties;
+}) => {
+  return (
+    <ChartContainer role="figure" aria-label={`${title}`} style={style}>
+      <Wrap justifyContent="space-between">
+        <Text variant="Large" isEmphazed color="textPrimary">
+          {title}
+        </Text>
+        {rightContent}
+      </Wrap>
+      {children}
+    </ChartContainer>
+  );
+};
+
 const StackedBarChart = ({
   data,
   dataSchema,
@@ -165,6 +191,64 @@ const StackedBarChart = ({
   const theme = useTheme();
   const [hoveredValue, setHoveredValue] = useState<string>();
 
+  const isDataValid = data && Array.isArray(data) && data.length > 0;
+
+  const isDataSchemaValid =
+    dataSchema &&
+    Array.isArray(dataSchema.yValues) &&
+    dataSchema.yValues.length > 0;
+
+  const chartData = useChartData(
+    isDataValid && isDataSchemaValid ? data : [],
+    isDataSchemaValid ? dataSchema : { xValueKey: '', yValues: [] },
+    typeToDisplay,
+    sortBy,
+  );
+
+  if (!isDataValid) {
+    return (
+      <ChartContainerWrapper
+        title={title}
+        rightContent={rightContent}
+        style={style}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <Text>No data available</Text>
+        </div>
+      </ChartContainerWrapper>
+    );
+  }
+
+  if (!isDataSchemaValid) {
+    return (
+      <ChartContainerWrapper
+        title={title}
+        rightContent={rightContent}
+        style={style}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <Text>An error occurred while rendering the chart</Text>
+        </div>
+      </ChartContainerWrapper>
+    );
+  }
+
   const {
     filteredDataSchemaToDisplay,
     filteredLegendItems,
@@ -172,26 +256,20 @@ const StackedBarChart = ({
     setSelectedLegend,
     selectedLegend,
     referenceLineValue,
-  } = useChartData(data, dataSchema, typeToDisplay, sortBy);
+  } = chartData;
 
   return (
-    <ChartContainer
-      role="figure"
-      aria-label={`${title || 'Stacked bar chart'}`}
+    <ChartContainerWrapper
+      title={title}
+      rightContent={rightContent}
       style={style}
     >
-      <Wrap justifyContent="space-between">
-        <Text variant="Large" isEmphazed color="textPrimary">
-          {title}
-        </Text>
-        {rightContent}
-      </Wrap>
-      <ResponsiveContainer width={300} height={200}>
+      <ResponsiveContainer>
         <BarChart
           data={sortedData}
           style={{
-            width: '100%',
-            height: '100%',
+            minHeight: '12rem',
+            minWidth: '22rem',
           }}
           margin={{
             top: CHART_CONSTANTS.MARGIN.top,
@@ -235,21 +313,23 @@ const StackedBarChart = ({
               />
             }
           />
-          {filteredDataSchemaToDisplay.map((yValue) => (
-            <Bar
-              key={yValue.key}
-              barSize={CHART_CONSTANTS.BAR_SIZE}
-              dataKey={yValue.key}
-              stackId={yValue.type || 'default'}
-              fill={yValue.color}
-              onMouseOver={() => setHoveredValue(yValue.key)}
-              onMouseLeave={() => setHoveredValue(undefined)}
-            />
-          ))}
+          {data.length > 0 &&
+            filteredDataSchemaToDisplay.map((yValue) => (
+              <Bar
+                key={yValue.key}
+                barSize={CHART_CONSTANTS.BAR_SIZE}
+                dataKey={yValue.key}
+                stackId={yValue.type || 'default'}
+                fill={yValue.color}
+                onMouseOver={() => setHoveredValue(yValue.key)}
+                onMouseLeave={() => setHoveredValue(undefined)}
+              />
+            ))}
           {/* X Axis
           Put it here to avoid the tooltip to be displayed under the bar
           SVG paint object in order, on top of previous elements
           */}
+
           <XAxis
             tick={(props) => <CustomTick {...props} />}
             dataKey={dataSchema.xValueKey}
@@ -265,7 +345,7 @@ const StackedBarChart = ({
           />
         </BarChart>
       </ResponsiveContainer>
-    </ChartContainer>
+    </ChartContainerWrapper>
   );
 };
 
