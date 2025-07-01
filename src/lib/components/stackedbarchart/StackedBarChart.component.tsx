@@ -65,7 +65,7 @@ const ChartContainer = styled.div<{
   style?: React.CSSProperties;
 }>`
   background-color: ${(props) => props.theme.backgroundLevel1};
-  padding: ${spacing.r16} 0 ${spacing.r16} ${spacing.r16};
+  padding: ${spacing.r32} ${spacing.r16} ${spacing.r32} ${spacing.r16};
   border-radius: ${spacing.r8};
   min-height: 12rem;
   min-width: 22rem;
@@ -164,7 +164,10 @@ const ChartContainerWrapper = ({
 }) => {
   return (
     <ChartContainer role="figure" aria-label={`${title}`} style={style}>
-      <Wrap justifyContent="space-between">
+      <Wrap
+        justifyContent="space-between"
+        style={{ marginBottom: spacing.r16 }}
+      >
         <Text variant="Large" isEmphazed color="textPrimary">
           {title}
         </Text>

@@ -16,6 +16,7 @@ const LegendContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: ${spacing.r10};
+  margin-top: ${spacing.r16};
   width: 100%;
   height: fit-content;
 `;
