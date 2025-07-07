@@ -12,6 +12,7 @@ type Props = {
   tooltipStyle?: $PropertyType<TooltipProps, 'overlayStyle'>;
   tooltipPlacement?: $PropertyType<TooltipProps, 'placement'>;
   lineClamp?: number;
+  centered?: boolean;
 };
 // for lineClamp cf https://css-tricks.com/almanac/properties/l/line-clamp/
 // it should work on all major navigator, despite the --webkit prefix
@@ -19,6 +20,7 @@ type Props = {
 const ConstrainedTextContainer = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: ${(props) => (props.centered ? 'center' : 'left')};
 
   ${(props) =>
     props.lineClamp > 1
@@ -49,12 +51,18 @@ function isEllipsisActive(element: HTMLDivElement) {
   );
 }
 
-function getConstrainedTextContainer(constrainedTextRef, lineClamp, text) {
+function getConstrainedTextContainer(
+  constrainedTextRef,
+  lineClamp,
+  text,
+  centered,
+) {
   return (
     <ConstrainedTextContainer
       ref={constrainedTextRef}
       className="sc-constrainedtext"
       lineClamp={lineClamp}
+      centered={centered}
     >
       {text}
     </ConstrainedTextContainer>
@@ -66,6 +74,7 @@ function ConstrainedText({
   tooltipStyle,
   tooltipPlacement,
   lineClamp = 1,
+  centered = false,
 }: Props): JSX.Element {
   const [displayToolTip, setDisplayToolTip] = useState(false);
   const constrainedTextRef = useCallback(
@@ -83,12 +92,22 @@ function ConstrainedText({
           placement={tooltipPlacement}
         >
           <Text>
-            {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+            {getConstrainedTextContainer(
+              constrainedTextRef,
+              lineClamp,
+              text,
+              centered,
+            )}
           </Text>
         </Tooltip>
       ) : (
         <Text>
-          {getConstrainedTextContainer(constrainedTextRef, lineClamp, text)}
+          {getConstrainedTextContainer(
+            constrainedTextRef,
+            lineClamp,
+            text,
+            centered,
+          )}
         </Text>
       )}
     </BlockTooltip>

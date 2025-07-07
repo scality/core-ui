@@ -49,3 +49,82 @@ export const Playground: Story = {
     return <Barchart type="category" bars={exampleData} />;
   },
 };
+
+const timeData7Days: BarchartProps['bars'] = [
+  {
+    label: 'Success',
+    data: [
+      // 7 days ago
+      [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
+      // 6 days ago
+      [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
+      // 5 days ago
+      [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
+      // 4 days ago
+      [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
+      // 3 days ago
+      [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
+      // 2 days ago
+      [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
+      // 1 day ago
+      [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
+    ],
+    color: 'green',
+  },
+  {
+    label: 'Failed',
+    data: [
+      // 7 days ago
+      [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
+      // 6 days ago
+      [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
+      // 5 days ago
+      [Date.now() - 5 * 24 * 60 * 60 * 1000, 2],
+      // 4 days ago
+      [Date.now() - 4 * 24 * 60 * 60 * 1000, 12],
+      // 3 days ago
+      [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
+      // 2 days ago
+      [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
+      // 1 day ago
+      [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
+    ],
+    color: 'red',
+  },
+];
+
+export const Time7Days: Story = {
+  render: () => {
+    return (
+      <Barchart
+        type={{
+          type: 'time',
+          timeRange: {
+            startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
+            endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+          },
+        }}
+        bars={timeData7Days}
+      />
+    );
+  },
+};
+
+export const Time7DaysSmallWidth: Story = {
+  render: () => {
+    return (
+      <div style={{ width: '300px' }}>
+        <Barchart
+          type={{
+            type: 'time',
+            timeRange: {
+              startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
+              endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+            },
+          }}
+          bars={timeData7Days}
+        />
+      </div>
+    );
+  },
+};
