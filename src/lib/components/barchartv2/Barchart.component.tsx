@@ -2,6 +2,7 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { spacing } from '../../spacing';
 import { useTheme } from 'styled-components';
+import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
 
 type TimeType = {
   type: 'time';
@@ -46,30 +47,35 @@ export type BarchartProps = {
 /**
  * Converts prometheus data to recharts data format
  * @param bars - The bars to convert
+ * @param type - The chart type (category or time)
  * @returns Recharts data format
  * @example
+ * // Category data
  * const bars = [
  *   { label: 'Success', data: [['category1', 2], ['category2', 4], ['category3', 6]], color: 'green' },
  *   { label: 'Failed', data: [['category1', 8], ['category2', 10], ['category3', 12]], color: 'red' },
  * ];
- * const result= prometheusDataToChartData(bars);
+ * const result = formatPrometheusDataToChartData(bars, 'category');
  * result.data = [
  *   { category: 'category1', success: 2, failed: 8 },
  *   { category: 'category2', success: 4, failed: 10 },
  *   { category: 'category3', success: 6, failed: 12 },
  * ];
- * result.rechartsBars = [{
- *   dataKey: 'success',
- *   color: 'green',
- * }, {
- *   dataKey: 'failed',
- *   color: 'red',
- * }]
  *
- *
+ * // Time data
+ * const bars = [
+ *   { label: 'Success', data: [[timestamp, 2], [timestamp, 1]], color: 'green' },
+ *   { label: 'Failed', data: [[timestamp, 3], [timestamp, 0]], color: 'red' },
+ * ];
+ * const result = formatPrometheusDataToChartData(bars, { type: 'time', timeRange: {...} });
+ * result.data = [
+ *   { category: 'Mon Jan 01', success: 2, failed: 3 },
+ *   { category: 'Tue Jan 02', success: 1, failed: 0 },
+ * ];
  */
 export const formatPrometheusDataToChartData = (
   bars: BarchartProps['bars'],
+  type: BarchartProps['type'],
 ): {
   data: {
     [key: string]: string | number;
@@ -90,10 +96,24 @@ export const formatPrometheusDataToChartData = (
     { [key: string]: string | number }
   >();
 
+  const formatCategory = (key: string | number): string => {
+    if (type === 'category') {
+      return String(key);
+    } else if (type.type === 'time') {
+      return DAY_MONTH_FORMATER.format(new Date(key as number)).replace(
+        /[ ,]/g,
+        '',
+      );
+    }
+    return String(key);
+  };
+
   bars.forEach((bar) => {
     const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
 
-    bar.data.forEach(([category, value]) => {
+    bar.data.forEach(([key, value]) => {
+      const category = formatCategory(key);
+
       if (!categoryMap.has(category)) {
         categoryMap.set(category, { category });
       }
@@ -103,128 +123,11 @@ export const formatPrometheusDataToChartData = (
     });
   });
 
-  // Convert map to array
   const data = Array.from(categoryMap.values());
 
   return {
     rechartsBars,
     data,
-  };
-};
-/**
- * Converts prometheus data to recharts data format
- * @param bars - The bars to convert
- * @returns Recharts data format
- * @example
- * const bars = [
- *   { label: 'Success', data: [[timestamp, 2], [timestamp, 1], [timestamp, 0], [timestamp, 1], [timestamp, 2], ...], color: 'green' },
- *   { label: 'Failed', data: [[timestamp, 3], [timestamp, 0], [timestamp, 1], [timestamp, 2], [timestamp, 3], ...], color: 'red' },
- * ];
- * const result= formatTimeDataToChartData(bars, {
- *   startTimestamp: 1715145600000,
- *   endTimestamp: 1715750400000,
- * });
- * result.data = [
- *   { category: 'Mon01Sep', success: 2, failed: 8 },
- *   { category: 'Tue02Sep', success: 4, failed: 10 },
- *   { category: 'Wed03Sep', success: 6, failed: 12 },
- *   { category: 'Thu04Sep', success: 8, failed: 14 },
- *   { category: 'Fri05Sep', success: 10, failed: 16 },
- *   { category: 'Sat06Sep', success: 12, failed: 18 },
- *   { category: 'Sun07Sep', success: 14, failed: 20 },
- * ];
- * result.rechartsBars = [{
- *   dataKey: 'success',
- *   color: 'green',
- * }, {
- *   dataKey: 'failed',
- *   color: 'red',
- * }]
- *
- *
- */
-export const formatTimeDataToChartData = (
-  bars: BarchartProps['bars'],
-  timeRange: {
-    startTimestamp: number;
-    endTimestamp: number;
-  },
-): {
-  data: {
-    category: string;
-    [key: string]: string | number;
-  }[];
-  rechartsBars: {
-    dataKey: string;
-    fill: string;
-  }[];
-} => {
-  const rechartsBars = bars.map((bar) => ({
-    dataKey: bar.label.toLowerCase().replace(/\s+/g, ''),
-    fill: bar.color,
-  }));
-
-  // Create a map to collect data by day
-  const dayMap = new Map<
-    string,
-    { category: string; [key: string]: string | number }
-  >();
-
-  // Helper function to format timestamp to day key and category label
-  const formatTimestampToDay = (timestamp: number) => {
-    const date = new Date(timestamp);
-    const dayKey = date.toISOString().split('T')[0]; // YYYY-MM-DD format for grouping
-    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const monthNames = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    const dayName = dayNames[date.getDay()];
-    const dayNumber = date.getDate().toString().padStart(2, '0');
-    const monthName = monthNames[date.getMonth()];
-
-    return {
-      dayKey,
-      category: `${dayName}${dayNumber}${monthName}`,
-    };
-  };
-
-  // Process each bar's data
-  bars.forEach((bar) => {
-    const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
-
-    bar.data.forEach(([timestamp, value]) => {
-      const { dayKey, category } = formatTimestampToDay(timestamp as number);
-
-      if (!dayMap.has(dayKey)) {
-        dayMap.set(dayKey, { category });
-      }
-
-      const existingData = dayMap.get(dayKey)!;
-      // Set value for the day (no summing needed since there's only one per day)
-      existingData[dataKey] = value;
-    });
-  });
-
-  // Convert map to array and sort by date
-  const data = Array.from(dayMap.entries())
-    .sort(([a], [b]) => a.localeCompare(b)) // Sort by dayKey (YYYY-MM-DD)
-    .map(([, dayData]) => dayData);
-
-  return {
-    data,
-    rechartsBars,
   };
 };
 
@@ -249,7 +152,6 @@ const CustomTick = ({
   width,
 }: CustomTickProps) => {
   const theme = useTheme();
-
   const tickWidth =
     width / visibleTicksCount - CHART_CONSTANTS.TICK_WIDTH_OFFSET;
   const centerX = x - tickWidth / 2;
@@ -279,12 +181,7 @@ const CustomTick = ({
 const Barchart = (props: BarchartProps) => {
   const { height = 300, bars, type = 'category' } = props;
   const theme = useTheme();
-  const { data, rechartsBars } =
-    type === 'category'
-      ? formatPrometheusDataToChartData(bars)
-      : type.type === 'time'
-        ? formatTimeDataToChartData(bars, type.timeRange)
-        : { data: [], rechartsBars: [] };
+  const { data, rechartsBars } = formatPrometheusDataToChartData(bars, type);
 
   return (
     <ResponsiveContainer width="100%" height={height}>

@@ -55,7 +55,7 @@ const timeData7Days: BarchartProps['bars'] = [
     label: 'Success',
     data: [
       // 7 days ago
-      [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
+      [Date.now() - 7 * 24 * 60 * 60 * 1000 + 12, 15],
       // 6 days ago
       [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
       // 5 days ago

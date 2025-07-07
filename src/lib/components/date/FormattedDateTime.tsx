@@ -8,6 +8,12 @@ export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   hour12: false,
 });
 
+export const DAY_MONTH_FORMATER = Intl.DateTimeFormat('en-GB', {
+  weekday: 'short',
+  day: '2-digit',
+  month: 'short',
+});
+
 export const TIME_SECOND_FORMATER = Intl.DateTimeFormat('en-GB', {
   hour12: false,
   hour: '2-digit',
