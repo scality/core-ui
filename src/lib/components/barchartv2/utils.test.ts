@@ -112,7 +112,7 @@ describe('Barchart Utils', () => {
         expect(result.data[0].success).toBe(10);
       });
 
-      it.skip('should fill missing days with zeros', () => {
+      it('should fill missing days with zeros', () => {
         const bars = [
           {
             label: 'Success',

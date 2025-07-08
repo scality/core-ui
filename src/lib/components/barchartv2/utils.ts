@@ -26,6 +26,7 @@ export const getMinValue = (data: { [key: string]: string | number }[]) => {
   });
   return Math.min(...values);
 };
+
 export const getMaxValue = (data: { [key: string]: string | number }[]) => {
   const values = data.map((item) => {
     //filter out the category key
@@ -36,6 +37,35 @@ export const getMaxValue = (data: { [key: string]: string | number }[]) => {
   });
   return Math.max(...values);
 };
+
+/**
+ * Generates all days between start and end timestamps (inclusive)
+ * @param startTimestamp - Start timestamp in milliseconds
+ * @param endTimestamp - End timestamp in milliseconds
+ * @returns Array of timestamps for each day at midnight
+ */
+const generateDayTimestamps = (
+  startTimestamp: number,
+  endTimestamp: number,
+): number[] => {
+  const dayTimestamps: number[] = [];
+  const startDate = new Date(startTimestamp);
+  const endDate = new Date(endTimestamp);
+
+  // Set to midnight to ensure consistent day boundaries
+  startDate.setHours(0, 0, 0, 0);
+  endDate.setHours(0, 0, 0, 0);
+
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    dayTimestamps.push(currentDate.getTime());
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dayTimestamps;
+};
+
 /**
  * Converts prometheus data to recharts data format
  * @param bars - The bars to convert
@@ -100,6 +130,27 @@ export const formatPrometheusDataToChartData = (
     return String(key);
   };
 
+  // If type is time with timeRange, generate all days in the range to fill in the gaps
+  if (type !== 'category' && type.type === 'time') {
+    const allDayTimestamps = generateDayTimestamps(
+      type.timeRange.startTimestamp,
+      type.timeRange.endTimestamp,
+    );
+
+    // Initialize all days with zeros for all bars
+    allDayTimestamps.forEach((timestamp) => {
+      const category = formatCategory(timestamp);
+      const initialData: { [key: string]: string | number } = { category };
+      // Initialize all bar data keys with 0
+      rechartsBars.forEach((bar) => {
+        initialData[bar.dataKey] = 0;
+      });
+
+      categoryMap.set(category, initialData);
+    });
+  }
+
+  // Process actual data from bars
   bars.forEach((bar) => {
     const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
 

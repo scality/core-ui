@@ -80,7 +80,7 @@ describe('Barchart', () => {
     expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
     expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
   });
-  it.skip('should render when there are missing data in the time range', async () => {
+  it('should render when there are missing data in the time range', async () => {
     const bars = [
       {
         label: 'Success',
