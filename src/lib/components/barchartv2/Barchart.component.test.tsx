@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import Barchart, { BarchartProps } from './Barchart.component';
 
 import { getWrapper } from '../../testUtils';
+import { debug } from 'jest-preview';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -85,6 +86,7 @@ describe('Barchart', () => {
       expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
     });
   });
+
   describe('Time data', () => {
     it('should render the chart with correct starting days even if the data is missing', async () => {
       const { Wrapper } = getWrapper();
@@ -229,6 +231,7 @@ describe('Barchart', () => {
       expect(screen.getByText('12:00')).toBeInTheDocument();
     });
   });
+
   describe('Reference line', () => {
     it('should render with reference line', () => {
       const { Wrapper } = getWrapper();
@@ -240,7 +243,8 @@ describe('Barchart', () => {
       expect(screen.getByText('50')).toBeInTheDocument();
     });
   });
-  describe.skip('Unit range', () => {
+
+  describe('Unit range', () => {
     it('should render with reference line and unit range', () => {
       const testUnitRange: BarchartProps['unitRange'] = [
         {
@@ -269,7 +273,7 @@ describe('Barchart', () => {
       expect(screen.getByText('kB')).toBeInTheDocument();
     });
 
-    it('should render with the unit range', () => {
+    it('should render with the unit label', () => {
       const testBars: BarchartProps['bars'] = [
         {
           label: 'Success',
@@ -298,7 +302,8 @@ describe('Barchart', () => {
           <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
         </Wrapper>,
       );
-      expect(screen.getByText('kB')).toBeInTheDocument();
+      // Two elements with the text "10 kB" rendered
+      expect(screen.getAllByText(/10 kB/i)).toHaveLength(2);
     });
   });
 });

@@ -138,22 +138,20 @@ export const Time7DaysSmallWidth: Story = {
     );
   },
 };
-const timeDataWithMissingData: BarchartProps['bars'] = [
+const timeData7DaysWithMissingData: BarchartProps['bars'] = [
   {
     label: 'Success',
     data: [
       // 7 days ago
       [Date.now() - 7 * 24 * 60 * 60 * 1000 + 12, 15],
       // 6 days ago
-      [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
       // 5 days ago
       [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
       // 4 days ago
-
+      [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
       // 3 days ago
-      [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
       // 2 days ago
-
+      [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
       // 1 day ago
       [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
     ],
@@ -165,11 +163,9 @@ const timeDataWithMissingData: BarchartProps['bars'] = [
       // 7 days ago
       [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
       // 6 days ago
-      [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
       // 5 days ago
-
+      [Date.now() - 5 * 24 * 60 * 60 * 1000, 1],
       // 4 days ago
-
       // 3 days ago
       [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
       // 2 days ago
@@ -197,7 +193,7 @@ export const Time7DaysWithMissingData: Story = {
             interval: 24 * 60 * 60 * 1000,
           },
         }}
-        bars={timeDataWithMissingData}
+        bars={timeData7DaysWithMissingData}
       />
     );
   },
@@ -280,6 +276,84 @@ export const TimeLast24Hours: Story = {
           },
         }}
         bars={timeDataLast24Hours}
+      />
+    );
+  },
+};
+
+const capacityData: BarchartProps['bars'] = [
+  {
+    label: 'Free',
+    data: [
+      ['category1', 2000000],
+      ['category2', 4000000],
+      ['category3', 6000000],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Used',
+    data: [
+      ['category1', 8000000],
+      ['category2', 10000000],
+      ['category3', 12000000],
+    ],
+    color: 'lightblue',
+  },
+];
+
+const categoryDataWithMissingData: BarchartProps['bars'] = [
+  {
+    label: 'Free',
+    data: [
+      ['category1', 20],
+      ['category2', 40],
+      ['category4', 80],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Used',
+    data: [
+      ['category1', 80],
+      ['category2', 100],
+      ['category3', 120],
+      ['category4', 120],
+    ],
+    color: 'lightblue',
+  },
+];
+
+export const CategoryWithMissingData: Story = {
+  render: () => {
+    return <Barchart type="category" bars={categoryDataWithMissingData} />;
+  },
+};
+
+export const CapacityWithUnitRange: Story = {
+  render: () => {
+    return (
+      <Barchart
+        type="category"
+        bars={capacityData}
+        unitRange={[
+          {
+            threshold: 0,
+            label: 'B',
+          },
+          {
+            threshold: 1024,
+            label: 'KiB',
+          },
+          {
+            threshold: 1024 * 1024,
+            label: 'MiB',
+          },
+          {
+            threshold: 1024 * 1024 * 1024,
+            label: 'GiB',
+          },
+        ]}
       />
     );
   },

@@ -1,7 +1,9 @@
 import {
+  computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
   getMaxValue,
   getRoundReferenceValue,
+  UnitRange,
 } from './utils';
 
 describe('getRoundReferenceValue', () => {
@@ -214,6 +216,37 @@ describe('formatPrometheusDataToChartData', () => {
         { category: 'Fri05Jul', success: 10 },
         { category: 'Sat06Jul', success: 20 },
         { category: 'Sun07Jul', success: 30 },
+      ]);
+    });
+  });
+  describe('computeUnitLabelAndRoundReferenceValue', () => {
+    it('should compute the unit label and round reference value correctly', () => {
+      const data = [
+        {
+          category: 'category1',
+          success: 1680,
+        },
+      ];
+      const maxValue = 1680;
+      const unitRange: UnitRange = [
+        {
+          threshold: 1000,
+          label: 'kB',
+        },
+      ];
+      const result = computeUnitLabelAndRoundReferenceValue(
+        data,
+        maxValue,
+        unitRange,
+      );
+      console.log(result);
+      expect(result.unitLabel).toBe('kB');
+      expect(result.roundReferenceValue).toBe(10);
+      expect(result.rechartsData).toEqual([
+        {
+          category: 'category1',
+          success: 1.68,
+        },
       ]);
     });
   });
