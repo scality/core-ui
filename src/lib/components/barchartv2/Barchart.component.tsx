@@ -1,8 +1,19 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  ReferenceLine,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { spacing } from '../../spacing';
-import { useTheme } from 'styled-components';
-import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
+import styled, { useTheme } from 'styled-components';
+import {
+  formatPrometheusDataToChartData,
+  getMaxValue,
+  getRoundReferenceValue,
+} from './utils';
 
 type TimeType = {
   type: 'time';
@@ -42,93 +53,6 @@ export type BarchartProps = {
   rightTitle?: React.ReactNode;
   height?: number;
   loading?: boolean;
-};
-
-/**
- * Converts prometheus data to recharts data format
- * @param bars - The bars to convert
- * @param type - The chart type (category or time)
- * @returns Recharts data format
- * @example
- * // Category data
- * const bars = [
- *   { label: 'Success', data: [['category1', 2], ['category2', 4], ['category3', 6]], color: 'green' },
- *   { label: 'Failed', data: [['category1', 8], ['category2', 10], ['category3', 12]], color: 'red' },
- * ];
- * const result = formatPrometheusDataToChartData(bars, 'category');
- * result.data = [
- *   { category: 'category1', success: 2, failed: 8 },
- *   { category: 'category2', success: 4, failed: 10 },
- *   { category: 'category3', success: 6, failed: 12 },
- * ];
- *
- * // Time data
- * const bars = [
- *   { label: 'Success', data: [[timestamp, 2], [timestamp, 1]], color: 'green' },
- *   { label: 'Failed', data: [[timestamp, 3], [timestamp, 0]], color: 'red' },
- * ];
- * const result = formatPrometheusDataToChartData(bars, { type: 'time', timeRange: {...} });
- * result.data = [
- *   { category: 'Mon Jan 01', success: 2, failed: 3 },
- *   { category: 'Tue Jan 02', success: 1, failed: 0 },
- * ];
- */
-export const formatPrometheusDataToChartData = (
-  bars: BarchartProps['bars'],
-  type: BarchartProps['type'],
-): {
-  data: {
-    [key: string]: string | number;
-  }[];
-  rechartsBars: {
-    dataKey: string;
-    fill: string;
-  }[];
-} => {
-  const rechartsBars = bars.map((bar) => ({
-    dataKey: bar.label.toLowerCase().replace(/\s+/g, ''),
-    fill: bar.color,
-  }));
-
-  // Create a map to collect all unique categories/keys
-  const categoryMap = new Map<
-    string | number,
-    { [key: string]: string | number }
-  >();
-
-  const formatCategory = (key: string | number): string => {
-    if (type === 'category') {
-      return String(key);
-    } else if (type.type === 'time') {
-      return DAY_MONTH_FORMATER.format(new Date(key as number)).replace(
-        /[ ,]/g,
-        '',
-      );
-    }
-    return String(key);
-  };
-
-  bars.forEach((bar) => {
-    const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
-
-    bar.data.forEach(([key, value]) => {
-      const category = formatCategory(key);
-
-      if (!categoryMap.has(category)) {
-        categoryMap.set(category, { category });
-      }
-
-      const existingData = categoryMap.get(category)!;
-      existingData[dataKey] = value;
-    });
-  });
-
-  const data = Array.from(categoryMap.values());
-
-  return {
-    rechartsBars,
-    data,
-  };
 };
 
 const CHART_CONSTANTS = {
@@ -178,20 +102,34 @@ const CustomTick = ({
     </foreignObject>
   );
 };
+
+const StyledResponsiveContainer = styled(ResponsiveContainer)`
+  // Avoid tooltip over constrained text to be cut off
+  & .recharts-surface {
+    overflow: visible;
+  }
+`;
+
 const Barchart = (props: BarchartProps) => {
-  const { height = 300, bars, type = 'category' } = props;
   const theme = useTheme();
+
+  const { height = 300, bars, type = 'category' } = props;
+
   const { data, rechartsBars } = formatPrometheusDataToChartData(bars, type);
 
+  const maxValue = getMaxValue(data);
+  const roundReferenceValue = getRoundReferenceValue(maxValue);
+
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data}>
+    <StyledResponsiveContainer width="100%" height={height}>
+      <BarChart data={data} accessibilityLayer>
         {rechartsBars.map((bar) => (
           <Bar key={bar.dataKey} dataKey={bar.dataKey} fill={bar.fill} />
         ))}
 
         <YAxis
           tickCount={1}
+          domain={[0, roundReferenceValue]}
           tickFormatter={(value) => value.toFixed(0)}
           axisLine={false}
           tick={{
@@ -203,12 +141,13 @@ const Barchart = (props: BarchartProps) => {
           }}
           orientation="right"
         />
-
+        <ReferenceLine y={roundReferenceValue} fill={theme.textSecondary} />
         <XAxis
           dataKey="category"
           tick={(props) => <CustomTick {...props} />}
           type="category"
           interval={0}
+          allowDataOverflow={true}
           tickLine={{
             stroke: theme.textSecondary,
           }}
@@ -217,7 +156,7 @@ const Barchart = (props: BarchartProps) => {
           }}
         />
       </BarChart>
-    </ResponsiveContainer>
+    </StyledResponsiveContainer>
   );
 };
 
