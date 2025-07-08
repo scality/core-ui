@@ -11,9 +11,10 @@ import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { spacing } from '../../spacing';
 import styled, { useTheme } from 'styled-components';
 import {
+  computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
   getMaxValue,
-  getRoundReferenceValue,
+  UnitRange,
 } from './utils';
 import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
 
@@ -29,11 +30,6 @@ type Point = {
   key: string | number;
   values: { label: string; value: number }[];
 };
-
-type UnitRange = {
-  threshold: number;
-  label: string;
-}[];
 
 export type BarchartProps = {
   type: 'category' | TimeType;
@@ -116,15 +112,17 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
 const Barchart = (props: BarchartProps) => {
   const theme = useTheme();
 
-  const { height = 300, bars, type = 'category' } = props;
+  const { height = 200, bars, type = 'category', unitRange } = props;
 
   const { data, rechartsBars } = formatPrometheusDataToChartData(bars, type);
   const maxValue = getMaxValue(data);
-  const roundReferenceValue = getRoundReferenceValue(maxValue);
+
+  const { unitLabel, roundReferenceValue, rechartsData } =
+    computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
 
   return (
     <StyledResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} accessibilityLayer>
+      <BarChart data={rechartsData} accessibilityLayer>
         {rechartsBars.map((bar) => (
           <Bar
             key={bar.dataKey}
@@ -136,6 +134,8 @@ const Barchart = (props: BarchartProps) => {
 
         <YAxis
           tickCount={1}
+          // Add a non-breaking space between the unit and the value
+          unit={`\u00A0${unitLabel}`}
           domain={[0, roundReferenceValue]}
           tickFormatter={(value) => value.toFixed(0)}
           axisLine={false}

@@ -216,3 +216,82 @@ export const formatPrometheusDataToChartData = (
     data,
   };
 };
+export type UnitRange = {
+  threshold: number;
+  label: string;
+}[];
+
+export const computeUnitLabelAndRoundReferenceValue = (
+  data: any,
+  maxValue: number,
+  unitRange: UnitRange | undefined,
+) => {
+  if (!unitRange) {
+    const roundReferenceValue = getRoundReferenceValue(maxValue);
+    return { unitLabel: '', roundReferenceValue, rechartsData: data };
+  }
+  const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
+  const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
+  const roundReferenceValue = getRoundReferenceValue(topValue);
+  const rechartsData = data.map((dataPoint) => {
+    const normalizedDataPoint = { ...dataPoint };
+    Object.entries(dataPoint).forEach(([key, value]) => {
+      if (key !== 'category' && typeof value === 'number') {
+        normalizedDataPoint[key] = value / valueBase;
+      }
+    });
+    return normalizedDataPoint;
+  });
+  return { unitLabel, roundReferenceValue, rechartsData };
+};
+
+/**
+ * Return the unit label base on the current dataset, and the valueBase which is used to convert the data
+ * @param {any} unitRange
+ * @param {any} maxValue the maximum value among the data set
+ * @returns {any}
+ */
+export function getUnitLabel(
+  unitRange: {
+    threshold: number;
+    label: string;
+  }[],
+  maxValue: number,
+): {
+  valueBase: number;
+  unitLabel: string;
+} {
+  // first sort the unitRange
+  unitRange.sort(
+    (
+      unitA: {
+        threshold: number;
+        label: string;
+      },
+      unitB: {
+        threshold: number;
+        label: string;
+      },
+    ) => {
+      return unitA.threshold - unitB.threshold;
+    },
+  );
+  let index = unitRange.findIndex((range) => range.threshold > maxValue);
+
+  // last unit
+  if (index === -1) {
+    index = unitRange.length;
+  }
+
+  if (index === 0) {
+    return {
+      valueBase: unitRange[index].threshold,
+      unitLabel: unitRange[index].label,
+    };
+  }
+
+  return {
+    valueBase: unitRange[index - 1].threshold,
+    unitLabel: unitRange[index - 1].label,
+  };
+}
