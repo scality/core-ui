@@ -88,16 +88,9 @@ const formatTimestamp = (timestamp: number, interval: number): string => {
   } else if (interval === 24 * 60 * 60 * 1000) {
     // Daily or longer intervals - use day format
     return DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
-  } else if (interval >= 60 * 60 * 1000) {
-    // Hourly intervals - use hour format
-    const hours = TIME_FORMATER.format(date);
-    const day = DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
-    return `${day} ${hours}`;
   } else if (interval >= 60 * 1000) {
-    // Minute intervals - use minute format
-    const hours = TIME_FORMATER.format(date);
-    const day = DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
-    return `${day} ${hours}`;
+    //Handle hourly and minute intervals - use minute format
+    return TIME_FORMATER.format(date);
   } else {
     // Second intervals or less - use full timestamp
     return date.toISOString();

@@ -224,9 +224,9 @@ describe('Barchart', () => {
         </Wrapper>,
       );
 
-      expect(screen.getByText('Fri05Jul 10:00')).toBeInTheDocument();
-      expect(screen.getByText('Fri05Jul 11:00')).toBeInTheDocument();
-      expect(screen.getByText('Fri05Jul 12:00')).toBeInTheDocument();
+      expect(screen.getByText('10:00')).toBeInTheDocument();
+      expect(screen.getByText('11:00')).toBeInTheDocument();
+      expect(screen.getByText('12:00')).toBeInTheDocument();
     });
   });
   describe('Reference line', () => {

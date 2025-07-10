@@ -153,8 +153,8 @@ describe('formatPrometheusDataToChartData', () => {
       });
 
       expect(result.data).toEqual([
-        { category: 'Fri05Jul 10:00', success: 10 },
-        { category: 'Fri05Jul 11:00', success: 20 },
+        { category: '10:00', success: 10 },
+        { category: '11:00', success: 20 },
       ]);
     });
 
