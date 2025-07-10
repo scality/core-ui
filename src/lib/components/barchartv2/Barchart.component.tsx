@@ -16,7 +16,6 @@ import {
   getMaxValue,
   UnitRange,
 } from './utils';
-import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
 
 export type TimeType = {
   type: 'time';

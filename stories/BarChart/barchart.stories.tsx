@@ -358,3 +358,33 @@ export const CapacityWithUnitRange: Story = {
     );
   },
 };
+
+const testUnitRange: BarchartProps['unitRange'] = [
+  {
+    threshold: 1000,
+    label: 'kB',
+  },
+  {
+    threshold: 0,
+    label: 'B',
+  },
+];
+const testBars: BarchartProps['bars'] = [
+  {
+    label: 'Success',
+    data: [
+      ['category1', 500],
+      ['category2', 560],
+      ['category3', 640],
+    ],
+    color: 'green',
+  },
+];
+
+export const CategoryWithUnitRange: Story = {
+  render: () => {
+    return (
+      <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
+    );
+  },
+};

@@ -1,4 +1,4 @@
-import { BarchartProps, TimeType } from './Barchart.component';
+import { BarchartProps } from './Barchart.component';
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 
 export const getRoundReferenceValue = (value: number): number => {
@@ -230,6 +230,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
     const roundReferenceValue = getRoundReferenceValue(maxValue);
     return { unitLabel: '', roundReferenceValue, rechartsData: data };
   }
+
   const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
   const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
   const roundReferenceValue = getRoundReferenceValue(topValue);
@@ -291,7 +292,8 @@ export function getUnitLabel(
   }
 
   return {
-    valueBase: unitRange[index - 1].threshold,
+    // if the threshold is 0, we use 1 as the value base to avoid division by 0
+    valueBase: unitRange[index - 1].threshold || 1,
     unitLabel: unitRange[index - 1].label,
   };
 }

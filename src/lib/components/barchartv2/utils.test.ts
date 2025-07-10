@@ -239,7 +239,7 @@ describe('formatPrometheusDataToChartData', () => {
         maxValue,
         unitRange,
       );
-      console.log(result);
+
       expect(result.unitLabel).toBe('kB');
       expect(result.roundReferenceValue).toBe(10);
       expect(result.rechartsData).toEqual([

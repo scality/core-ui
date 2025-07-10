@@ -1,9 +1,7 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
 import Barchart, { BarchartProps } from './Barchart.component';
-
 import { getWrapper } from '../../testUtils';
-import { debug } from 'jest-preview';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -245,11 +243,15 @@ describe('Barchart', () => {
   });
 
   describe('Unit range', () => {
-    it('should render with reference line and unit range', () => {
+    it('should render with reference line and unit range', async () => {
       const testUnitRange: BarchartProps['unitRange'] = [
         {
           threshold: 1000,
           label: 'kB',
+        },
+        {
+          threshold: 0,
+          label: 'B',
         },
       ];
       const testBars: BarchartProps['bars'] = [
@@ -269,8 +271,12 @@ describe('Barchart', () => {
           <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
         </Wrapper>,
       );
-      expect(screen.getByText('1000')).toBeInTheDocument();
-      expect(screen.getByText('kB')).toBeInTheDocument();
+
+      await waitFor(() => {
+        // 1000 B is the reference value, 2 elements with the text "1000 B" rendered by recharts
+        const referenceValue = screen.getAllByText(/1000 B/i);
+        expect(referenceValue).toHaveLength(2);
+      });
     });
 
     it('should render with the unit label', () => {
