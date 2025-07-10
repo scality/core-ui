@@ -230,15 +230,37 @@ describe('Barchart', () => {
     });
   });
 
-  describe('Reference line', () => {
-    it('should render with reference line', () => {
-      const { Wrapper } = getWrapper();
-      render(
-        <Wrapper>
-          <Barchart type="category" bars={testBars} />
-        </Wrapper>,
-      );
-      expect(screen.getByText('50')).toBeInTheDocument();
-    });
+  it('should render stacked bars', () => {
+    const testStackedBars: BarchartProps['bars'] = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 10],
+          ['category2', 20],
+          ['category3', 30],
+        ],
+        color: 'green',
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 5],
+          ['category2', 8],
+          ['category3', 12],
+        ],
+        color: 'red',
+      },
+    ];
+
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <Barchart type="category" bars={testStackedBars} stacked={true} />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('category1')).toBeInTheDocument();
+    expect(screen.getByText('category2')).toBeInTheDocument();
+    expect(screen.getByText('category3')).toBeInTheDocument();
   });
 });

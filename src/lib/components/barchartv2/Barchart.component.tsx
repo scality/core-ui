@@ -13,7 +13,7 @@ import styled, { useTheme } from 'styled-components';
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
-  getMaxValue,
+  getMaxBarValue,
   UnitRange,
 } from './utils';
 
@@ -111,10 +111,15 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
 const Barchart = (props: BarchartProps) => {
   const theme = useTheme();
 
-  const { height = 200, bars, type = 'category', unitRange } = props;
+  const { height = 200, bars, type = 'category', unitRange, stacked } = props;
 
-  const { data, rechartsBars } = formatPrometheusDataToChartData(bars, type);
-  const maxValue = getMaxValue(data);
+  const { data, rechartsBars } = formatPrometheusDataToChartData(
+    bars,
+    type,
+    stacked,
+  );
+
+  const maxValue = getMaxBarValue(data, stacked);
 
   const { unitLabel, roundReferenceValue, rechartsData } =
     computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
@@ -128,6 +133,7 @@ const Barchart = (props: BarchartProps) => {
             dataKey={bar.dataKey}
             fill={bar.fill}
             minPointSize={3}
+            stackId={stacked ? 'stacked' : undefined}
           />
         ))}
 

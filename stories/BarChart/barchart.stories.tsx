@@ -329,13 +329,33 @@ export const CategoryWithMissingData: Story = {
     return <Barchart type="category" bars={categoryDataWithMissingData} />;
   },
 };
+const capacityDataWithUnitRange: BarchartProps['bars'] = [
+  {
+    label: 'Free',
+    data: [
+      ['category1', 2000000],
+      ['category2', 4000000],
+      ['category3', 6000000],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Used',
+    data: [
+      ['category1', 8000000],
+      ['category2', 10000000],
+      ['category3', 12000000],
+    ],
+    color: 'lightblue',
+  },
+];
 
 export const CapacityWithUnitRange: Story = {
   render: () => {
     return (
       <Barchart
         type="category"
-        bars={capacityData}
+        bars={capacityDataWithUnitRange}
         unitRange={[
           {
             threshold: 0,
@@ -386,5 +406,32 @@ export const CategoryWithUnitRange: Story = {
     return (
       <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
     );
+  },
+};
+
+const stackedData: BarchartProps['bars'] = [
+  {
+    label: 'Success',
+    data: [
+      ['category1', 20],
+      ['category2', 24],
+      ['category3', 26],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Failed',
+    data: [
+      ['category1', 8],
+      ['category2', 10],
+      ['category3', 25],
+    ],
+    color: 'lightblue',
+  },
+];
+
+export const Stacked: Story = {
+  render: () => {
+    return <Barchart type="category" bars={stackedData} stacked />;
   },
 };

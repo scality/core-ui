@@ -27,12 +27,28 @@ export const getMinValue = (data: { [key: string]: string | number }[]) => {
   return Math.min(...values);
 };
 
-export const getMaxValue = (data: { [key: string]: string | number }[]) => {
+export const getMaxBarValue = (
+  data: { [key: string]: string | number }[],
+  stacked?: boolean,
+) => {
   const values = data.map((item) => {
+    // If stacked, we need to filter out category and sum the values in the same object
+    if (stacked) {
+      // Get objects keys except category
+      const filterOutCategory = Object.keys(item).filter(
+        (key) => key !== 'category',
+      );
+      // Sum the values in the same object (corresponding to one bar) based on the keys
+      const sumValues = filterOutCategory.reduce((acc, curr) => {
+        return acc + Number(item[curr]);
+      }, 0);
+      return sumValues;
+    }
     //filter out the category key
     const numberValues = Object.keys(item)
       .filter((key) => key !== 'category')
       .map((key) => Number(item[key]));
+    // Get the max value among the values in the object (corresponding to one bar)
     return Math.max(...numberValues);
   });
   return Math.max(...values);
@@ -122,6 +138,7 @@ const findRangeForTimestamp = (
 export const formatPrometheusDataToChartData = (
   bars: BarchartProps['bars'],
   type: BarchartProps['type'],
+  stacked?: boolean,
 ): {
   data: {
     [key: string]: string | number;
@@ -131,7 +148,7 @@ export const formatPrometheusDataToChartData = (
     fill: string;
   }[];
 } => {
-  const rechartsBars = bars.map((bar) => ({
+  let rechartsBars = bars.map((bar) => ({
     dataKey: bar.label.toLowerCase().replace(/\s+/g, ''),
     fill: bar.color,
   }));
@@ -210,6 +227,27 @@ export const formatPrometheusDataToChartData = (
 
   // Convert map to array (order is preserved for time ranges)
   const data = Array.from(categoryMap.values());
+
+  // Sort bars by their average values in descending order when stacked
+  // This ensures the largest bars appear at the bottom of the stack
+  if (stacked) {
+    const barAverages = rechartsBars.map((bar) => {
+      const values = data
+        .map((item) => Number(item[bar.dataKey]) || 0)
+        .filter((value) => !isNaN(value));
+      const average =
+        values.length > 0
+          ? values.reduce((a, b) => a + b, 0) / values.length
+          : 0;
+      return { ...bar, average };
+    });
+
+    // Sort by average in descending order (largest first, which will be at bottom in stack)
+    barAverages.sort((a, b) => b.average - a.average);
+
+    // Remove the average property and keep only the bar data
+    rechartsBars = barAverages.map(({ average, ...bar }) => bar);
+  }
 
   return {
     rechartsBars,

@@ -1,7 +1,9 @@
+import { BarchartProps } from './Barchart.component';
+
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
-  getMaxValue,
+  getMaxBarValue,
   getRoundReferenceValue,
   UnitRange,
 } from './utils';
@@ -25,19 +27,28 @@ describe('getRoundReferenceValue', () => {
   });
 });
 
-describe('getMaxValue', () => {
+describe('getMaxBarValue', () => {
   it('should return the maximum value from chart data', () => {
     const data = [
       { category: 'A', value1: 10, value2: 5 },
       { category: 'B', value1: 20, value2: 15 },
       { category: 'C', value1: 8, value2: 25 },
     ];
-    expect(getMaxValue(data)).toBe(25);
+    expect(getMaxBarValue(data)).toBe(25);
   });
 
   it('should handle single value data', () => {
     const data = [{ category: 'A', value: 42 }];
-    expect(getMaxValue(data)).toBe(42);
+    expect(getMaxBarValue(data)).toBe(42);
+  });
+
+  it('should return the maximum value from stacked data', () => {
+    const data = [
+      { category: 'A', value1: 10, value2: 5 },
+      { category: 'B', value1: 20, value2: 15 },
+      { category: 'C', value1: 8, value2: 25 },
+    ];
+    expect(getMaxBarValue(data, true)).toBe(35);
   });
 });
 
@@ -217,6 +228,74 @@ describe('formatPrometheusDataToChartData', () => {
         { category: 'Sat06Jul', success: 20 },
         { category: 'Sun07Jul', success: 30 },
       ]);
+    });
+
+    describe('Stacked Bar Sorting', () => {
+      it('should sort bars by average values in descending order when stacked is true', () => {
+        const bars: BarchartProps['bars'] = [
+          {
+            label: 'Small Bar',
+            data: [
+              ['category1', 5],
+              ['category2', 10],
+              ['category3', 15],
+            ],
+            color: 'blue',
+          },
+          {
+            label: 'Large Bar',
+            data: [
+              ['category1', 50],
+              ['category2', 60],
+              ['category3', 70],
+            ],
+            color: 'red',
+          },
+          {
+            label: 'Medium Bar',
+            data: [
+              ['category1', 20],
+              ['category2', 25],
+              ['category3', 30],
+            ],
+            color: 'green',
+          },
+        ];
+        const type: BarchartProps['type'] = 'category';
+        const result = formatPrometheusDataToChartData(bars, type, true);
+
+        // Bars should be sorted by average in descending order (largest first)
+        expect(result.rechartsBars[0].dataKey).toBe('largebar'); // Average: 60
+        expect(result.rechartsBars[1].dataKey).toBe('mediumbar'); // Average: 25
+        expect(result.rechartsBars[2].dataKey).toBe('smallbar'); // Average: 10
+      });
+
+      it('should not sort bars when stacked is false or undefined', () => {
+        const bars: BarchartProps['bars'] = [
+          {
+            label: 'Small Bar',
+            data: [
+              ['category1', 5],
+              ['category2', 10],
+            ],
+            color: 'blue',
+          },
+          {
+            label: 'Large Bar',
+            data: [
+              ['category1', 50],
+              ['category2', 60],
+            ],
+            color: 'red',
+          },
+        ];
+        const type: BarchartProps['type'] = 'category';
+        const result = formatPrometheusDataToChartData(bars, type, false);
+
+        // Bars should maintain original order
+        expect(result.rechartsBars[0].dataKey).toBe('smallbar');
+        expect(result.rechartsBars[1].dataKey).toBe('largebar');
+      });
     });
   });
   describe('computeUnitLabelAndRoundReferenceValue', () => {
