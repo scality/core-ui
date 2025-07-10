@@ -1,8 +1,7 @@
-import { getRoles, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import Barchart, { BarchartProps } from './Barchart.component';
 import { getWrapper } from '../../testUtils';
-import { debug } from 'jest-preview';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
