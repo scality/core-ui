@@ -23,7 +23,7 @@ const meta: Meta<typeof Barchart> = {
 
 export default meta;
 
-const exampleData: BarchartProps['bars'] = [
+const exampleData = [
   {
     label: 'Success',
     data: [
@@ -42,7 +42,7 @@ const exampleData: BarchartProps['bars'] = [
     ],
     color: 'red',
   },
-];
+] as const;
 
 export const Playground: Story = {
   render: () => {
@@ -50,7 +50,7 @@ export const Playground: Story = {
   },
 };
 
-const timeData7Days: BarchartProps['bars'] = [
+const timeData7Days = [
   {
     label: 'Success',
     data: [
@@ -91,7 +91,7 @@ const timeData7Days: BarchartProps['bars'] = [
     ],
     color: 'red',
   },
-];
+] as const;
 
 export const Time7Days: Story = {
   render: () => {
@@ -138,7 +138,7 @@ export const Time7DaysSmallWidth: Story = {
     );
   },
 };
-const timeData7DaysWithMissingData: BarchartProps['bars'] = [
+const timeData7DaysWithMissingData = [
   {
     label: 'Success',
     data: [
@@ -175,7 +175,7 @@ const timeData7DaysWithMissingData: BarchartProps['bars'] = [
     ],
     color: 'red',
   },
-];
+] as const;
 
 export const Time7DaysWithMissingData: Story = {
   render: () => {
@@ -199,7 +199,7 @@ export const Time7DaysWithMissingData: Story = {
   },
 };
 
-const timeDataLast24Hours: BarchartProps['bars'] = [
+const timeDataLast24Hours = [
   {
     label: 'Success',
     data: [
@@ -260,7 +260,7 @@ const timeDataLast24Hours: BarchartProps['bars'] = [
     ],
     color: 'red',
   },
-];
+] as const;
 
 export const TimeLast24Hours: Story = {
   render: () => {
@@ -281,7 +281,7 @@ export const TimeLast24Hours: Story = {
   },
 };
 
-const capacityData: BarchartProps['bars'] = [
+const capacityData = [
   {
     label: 'Free',
     data: [
@@ -300,9 +300,9 @@ const capacityData: BarchartProps['bars'] = [
     ],
     color: 'lightblue',
   },
-];
+] as const;
 
-const categoryDataWithMissingData: BarchartProps['bars'] = [
+const categoryDataWithMissingData = [
   {
     label: 'Free',
     data: [
@@ -322,14 +322,14 @@ const categoryDataWithMissingData: BarchartProps['bars'] = [
     ],
     color: 'lightblue',
   },
-];
+] as const;
 
 export const CategoryWithMissingData: Story = {
   render: () => {
     return <Barchart type="category" bars={categoryDataWithMissingData} />;
   },
 };
-const capacityDataWithUnitRange: BarchartProps['bars'] = [
+const capacityDataWithUnitRange = [
   {
     label: 'Free',
     data: [
@@ -348,7 +348,7 @@ const capacityDataWithUnitRange: BarchartProps['bars'] = [
     ],
     color: 'lightblue',
   },
-];
+] as const;
 
 export const CapacityWithUnitRange: Story = {
   render: () => {
@@ -379,7 +379,7 @@ export const CapacityWithUnitRange: Story = {
   },
 };
 
-const testUnitRange: BarchartProps['unitRange'] = [
+const testUnitRange: BarchartProps<typeof testBars>['unitRange'] = [
   {
     threshold: 1000,
     label: 'kB',
@@ -389,7 +389,13 @@ const testUnitRange: BarchartProps['unitRange'] = [
     label: 'B',
   },
 ];
-const testBars: BarchartProps['bars'] = [
+const testBars: BarchartProps<
+  {
+    label: 'Success';
+    data: [string, number][];
+    color: string;
+  }[]
+>['bars'] = [
   {
     label: 'Success',
     data: [
@@ -409,13 +415,19 @@ export const CategoryWithUnitRange: Story = {
   },
 };
 
-const stackedData: BarchartProps['bars'] = [
+const stackedData: BarchartProps<
+  {
+    label: 'Success' | 'Failed';
+    data: [string, number][];
+    color: string;
+  }[]
+>['bars'] = [
   {
     label: 'Success',
     data: [
-      ['category1', 20],
-      ['category2', 24],
-      ['category3', 26],
+      ['category1', 25],
+      ['category2', 72],
+      ['category3', 52],
     ],
     color: 'blue',
   },
@@ -433,5 +445,43 @@ const stackedData: BarchartProps['bars'] = [
 export const Stacked: Story = {
   render: () => {
     return <Barchart type="category" bars={stackedData} stacked />;
+  },
+};
+
+const defaultSortData = [
+  {
+    label: 'Success',
+    data: [
+      ['category1', 25],
+      ['category2', 72],
+      ['category3', 52],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Failed',
+    data: [
+      ['category1', 8],
+      ['category2', 10],
+      ['category3', 25],
+    ],
+    color: 'lightblue',
+  },
+] as const;
+
+export const DefaultSort: Story = {
+  render: () => {
+    return (
+      <Barchart
+        type="category"
+        bars={defaultSortData}
+        defaultSort={(pointA, pointB) => {
+          const valueA = pointA.Failed;
+          const valueB = pointB['Success'];
+          const diff = valueB - valueA;
+          return diff > 0 ? 1 : diff < 0 ? -1 : 0;
+        }}
+      />
+    );
   },
 };

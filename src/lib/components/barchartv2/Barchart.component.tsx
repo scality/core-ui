@@ -25,24 +25,28 @@ export type TimeType = {
     interval: number;
   };
 };
-type Point = {
+export type Point = {
   key: string | number;
   values: { label: string; value: number }[];
 };
 
-export type BarchartProps = {
+export type BarchartProps<
+  T extends readonly {
+    readonly label: string;
+    readonly data: readonly (readonly [number | string, number | string])[];
+    readonly color: string;
+  }[],
+> = {
   type: 'category' | TimeType;
-  bars: {
-    label: string;
-    data: [number | string, number | string][];
-    color: string;
-  }[];
+  bars: T;
   tooltip?: (currentPoint: {
     key: string | number;
     values: { label: string; value: number; isHovered: boolean }[];
   }) => React.ReactNode;
-  defaultSort?: (pointA: Point, pointB: Point) => 1 | -1 | 0;
-
+  defaultSort?: (
+    pointA: Record<T[number]['label'], number> & { category: string | number },
+    pointB: Record<T[number]['label'], number> & { category: string | number },
+  ) => 1 | -1 | 0;
   unitRange?: UnitRange;
   helpTooltip?: string;
   stacked?: boolean;
@@ -108,15 +112,31 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
   }
 `;
 
-const Barchart = (props: BarchartProps) => {
+const Barchart = <
+  T extends readonly {
+    readonly label: string;
+    readonly data: readonly (readonly [number | string, number | string])[];
+    readonly color: string;
+  }[],
+>(
+  props: BarchartProps<T>,
+) => {
   const theme = useTheme();
 
-  const { height = 200, bars, type = 'category', unitRange, stacked } = props;
+  const {
+    height = 200,
+    bars,
+    type = 'category',
+    unitRange,
+    stacked,
+    defaultSort,
+  } = props;
 
   const { data, rechartsBars } = formatPrometheusDataToChartData(
     bars,
     type,
     stacked,
+    defaultSort,
   );
 
   const maxValue = getMaxBarValue(data, stacked);
