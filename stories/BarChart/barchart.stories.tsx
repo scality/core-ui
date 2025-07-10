@@ -54,8 +54,8 @@ const timeData7Days: BarchartProps['bars'] = [
   {
     label: 'Success',
     data: [
-      // 7 days ago
-      [Date.now() - 7 * 24 * 60 * 60 * 1000 + 12, 15],
+      // 7 days ago - aligned to the exact timestamp that generateTimestamps will create
+      [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
       // 6 days ago
       [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
       // 5 days ago
@@ -100,8 +100,13 @@ export const Time7Days: Story = {
         type={{
           type: 'time',
           timeRange: {
-            startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
-            endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+            startTimestamp:
+              new Date(Date.now()).setHours(0, 0, 0, 0) -
+              7 * 24 * 60 * 60 * 1000,
+            endTimestamp:
+              new Date(Date.now()).setHours(0, 0, 0, 0) -
+              1 * 24 * 60 * 60 * 1000,
+            interval: 24 * 60 * 60 * 1000,
           },
         }}
         bars={timeData7Days}
@@ -118,13 +123,164 @@ export const Time7DaysSmallWidth: Story = {
           type={{
             type: 'time',
             timeRange: {
-              startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
-              endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+              startTimestamp:
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                7 * 24 * 60 * 60 * 1000,
+              endTimestamp:
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                1 * 24 * 60 * 60 * 1000,
+              interval: 24 * 60 * 60 * 1000,
             },
           }}
           bars={timeData7Days}
         />
       </div>
+    );
+  },
+};
+const timeDataWithMissingData: BarchartProps['bars'] = [
+  {
+    label: 'Success',
+    data: [
+      // 7 days ago
+      [Date.now() - 7 * 24 * 60 * 60 * 1000 + 12, 15],
+      // 6 days ago
+      [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
+      // 5 days ago
+      [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
+      // 4 days ago
+
+      // 3 days ago
+      [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
+      // 2 days ago
+
+      // 1 day ago
+      [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
+    ],
+    color: 'green',
+  },
+  {
+    label: 'Failed',
+    data: [
+      // 7 days ago
+      [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
+      // 6 days ago
+      [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
+      // 5 days ago
+
+      // 4 days ago
+
+      // 3 days ago
+      [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
+      // 2 days ago
+      [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
+      // 1 day ago
+      [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
+    ],
+    color: 'red',
+  },
+];
+
+export const Time7DaysWithMissingData: Story = {
+  render: () => {
+    return (
+      <Barchart
+        type={{
+          type: 'time',
+          timeRange: {
+            startTimestamp:
+              new Date(Date.now()).setHours(0, 0, 0, 0) -
+              7 * 24 * 60 * 60 * 1000,
+            endTimestamp:
+              new Date(Date.now()).setHours(0, 0, 0, 0) -
+              1 * 24 * 60 * 60 * 1000,
+            interval: 24 * 60 * 60 * 1000,
+          },
+        }}
+        bars={timeDataWithMissingData}
+      />
+    );
+  },
+};
+
+const timeDataLast24Hours: BarchartProps['bars'] = [
+  {
+    label: 'Success',
+    data: [
+      [Date.now() - 24 * 60 * 60 * 1000, 15],
+      [Date.now() - 23 * 60 * 60 * 1000, 12],
+      [Date.now() - 22 * 60 * 60 * 1000, 30],
+      [Date.now() - 21 * 60 * 60 * 1000, 20],
+      [Date.now() - 20 * 60 * 60 * 1000, 25],
+      [Date.now() - 19 * 60 * 60 * 1000, 18],
+      [Date.now() - 18 * 60 * 60 * 1000, 32],
+      [Date.now() - 17 * 60 * 60 * 1000, 19],
+      [Date.now() - 16 * 60 * 60 * 1000, 10],
+      [Date.now() - 15 * 60 * 60 * 1000, 11],
+      [Date.now() - 14 * 60 * 60 * 1000, 12],
+      [Date.now() - 13 * 60 * 60 * 1000, 13],
+      [Date.now() - 12 * 60 * 60 * 1000, 11],
+      [Date.now() - 11 * 60 * 60 * 1000, 17],
+      [Date.now() - 10 * 60 * 60 * 1000, 16],
+      [Date.now() - 9 * 60 * 60 * 1000, 13],
+      [Date.now() - 8 * 60 * 60 * 1000, 15],
+      [Date.now() - 7 * 60 * 60 * 1000, 16],
+      [Date.now() - 6 * 60 * 60 * 1000, 17],
+      [Date.now() - 5 * 60 * 60 * 1000, 18],
+      [Date.now() - 4 * 60 * 60 * 1000, 19],
+      [Date.now() - 3 * 60 * 60 * 1000, 20],
+      [Date.now() - 2 * 60 * 60 * 1000, 21],
+      [Date.now() - 1 * 60 * 60 * 1000, 22],
+    ],
+    color: 'green',
+  },
+  {
+    label: 'Failed',
+    data: [
+      [Date.now() - 24 * 60 * 60 * 1000, 5],
+      [Date.now() - 23 * 60 * 60 * 1000, 8],
+      [Date.now() - 22 * 60 * 60 * 1000, 2],
+      [Date.now() - 21 * 60 * 60 * 1000, 12],
+      [Date.now() - 20 * 60 * 60 * 1000, 6],
+      [Date.now() - 19 * 60 * 60 * 1000, 9],
+      [Date.now() - 18 * 60 * 60 * 1000, 7],
+      [Date.now() - 17 * 60 * 60 * 1000, 1],
+      [Date.now() - 16 * 60 * 60 * 1000, 1],
+      [Date.now() - 15 * 60 * 60 * 1000, 2],
+      [Date.now() - 14 * 60 * 60 * 1000, 4],
+      [Date.now() - 13 * 60 * 60 * 1000, 2],
+      [Date.now() - 12 * 60 * 60 * 1000, 3],
+      [Date.now() - 11 * 60 * 60 * 1000, 1],
+      [Date.now() - 10 * 60 * 60 * 1000, 1],
+      [Date.now() - 9 * 60 * 60 * 1000, 1],
+      [Date.now() - 8 * 60 * 60 * 1000, 1],
+      [Date.now() - 7 * 60 * 60 * 1000, 1],
+      [Date.now() - 6 * 60 * 60 * 1000, 1],
+      [Date.now() - 5 * 60 * 60 * 1000, 1],
+      [Date.now() - 4 * 60 * 60 * 1000, 5],
+      [Date.now() - 3 * 60 * 60 * 1000, 3],
+      [Date.now() - 2 * 60 * 60 * 1000, 2],
+      [Date.now() - 1 * 60 * 60 * 1000, 1],
+    ],
+    color: 'red',
+  },
+];
+
+export const TimeLast24Hours: Story = {
+  render: () => {
+    return (
+      <Barchart
+        type={{
+          type: 'time',
+          timeRange: {
+            startTimestamp:
+              new Date(Date.now()).setMinutes(0, 0, 0) - 24 * 60 * 60 * 1000,
+            endTimestamp: new Date(Date.now()).setMinutes(0, 0, 0),
+            interval: 60 * 60 * 1000,
+          },
+        }}
+        bars={timeDataLast24Hours}
+      />
     );
   },
 };

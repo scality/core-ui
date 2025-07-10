@@ -3,6 +3,7 @@ import {
   BarChart,
   ReferenceLine,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -14,12 +15,14 @@ import {
   getMaxValue,
   getRoundReferenceValue,
 } from './utils';
+import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
 
-type TimeType = {
+export type TimeType = {
   type: 'time';
   timeRange: {
     startTimestamp: number;
     endTimestamp: number;
+    interval: number;
   };
 };
 type Point = {
@@ -116,7 +119,6 @@ const Barchart = (props: BarchartProps) => {
   const { height = 300, bars, type = 'category' } = props;
 
   const { data, rechartsBars } = formatPrometheusDataToChartData(bars, type);
-
   const maxValue = getMaxValue(data);
   const roundReferenceValue = getRoundReferenceValue(maxValue);
 
@@ -124,7 +126,12 @@ const Barchart = (props: BarchartProps) => {
     <StyledResponsiveContainer width="100%" height={height}>
       <BarChart data={data} accessibilityLayer>
         {rechartsBars.map((bar) => (
-          <Bar key={bar.dataKey} dataKey={bar.dataKey} fill={bar.fill} />
+          <Bar
+            key={bar.dataKey}
+            dataKey={bar.dataKey}
+            fill={bar.fill}
+            minPointSize={3}
+          />
         ))}
 
         <YAxis
@@ -155,6 +162,7 @@ const Barchart = (props: BarchartProps) => {
             stroke: theme.textSecondary,
           }}
         />
+        <Tooltip />
       </BarChart>
     </StyledResponsiveContainer>
   );

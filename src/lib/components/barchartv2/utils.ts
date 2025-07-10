@@ -1,5 +1,5 @@
-import { BarchartProps } from './Barchart.component';
-import { DAY_MONTH_FORMATER } from '../date/FormattedDateTime';
+import { BarchartProps, TimeType } from './Barchart.component';
+import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -39,31 +39,85 @@ export const getMaxValue = (data: { [key: string]: string | number }[]) => {
 };
 
 /**
- * Generates all days between start and end timestamps (inclusive)
+ * Generates time ranges between start and end timestamps based on the given interval
  * @param startTimestamp - Start timestamp in milliseconds
  * @param endTimestamp - End timestamp in milliseconds
- * @returns Array of timestamps for each day at midnight
+ * @param interval - Interval in milliseconds
+ * @returns Array of time ranges with start and end properties
  */
-const generateDayTimestamps = (
+const generateTimeRanges = (
   startTimestamp: number,
   endTimestamp: number,
-): number[] => {
-  const dayTimestamps: number[] = [];
-  const startDate = new Date(startTimestamp);
-  const endDate = new Date(endTimestamp);
-
-  // Set to midnight to ensure consistent day boundaries
-  startDate.setHours(0, 0, 0, 0);
-  endDate.setHours(0, 0, 0, 0);
-
-  const currentDate = new Date(startDate);
-
-  while (currentDate <= endDate) {
-    dayTimestamps.push(currentDate.getTime());
-    currentDate.setDate(currentDate.getDate() + 1);
+  interval: number,
+): { start: number; end: number }[] => {
+  const ranges: { start: number; end: number }[] = [];
+  if (!startTimestamp || !endTimestamp || !interval) {
+    return ranges;
   }
 
-  return dayTimestamps;
+  let currentTimestamp = startTimestamp;
+  while (currentTimestamp <= endTimestamp) {
+    const rangeEnd = currentTimestamp + interval;
+
+    ranges.push({
+      start: currentTimestamp,
+      end: rangeEnd,
+    });
+
+    currentTimestamp += interval;
+  }
+
+  return ranges;
+};
+
+/**
+ * Formats a timestamp based on the interval
+ * @param timestamp - Timestamp in milliseconds
+ * @param interval - Interval in milliseconds
+ * @returns Formatted string
+ */
+const formatTimestamp = (timestamp: number, interval: number): string => {
+  const date = new Date(timestamp);
+
+  if (interval > 24 * 60 * 60 * 1000) {
+    return (
+      DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '') +
+      ' ' +
+      TIME_FORMATER.format(date)
+    );
+  } else if (interval === 24 * 60 * 60 * 1000) {
+    // Daily or longer intervals - use day format
+    return DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
+  } else if (interval >= 60 * 60 * 1000) {
+    // Hourly intervals - use hour format
+    const hours = TIME_FORMATER.format(date);
+    const day = DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
+    return `${day} ${hours}`;
+  } else if (interval >= 60 * 1000) {
+    // Minute intervals - use minute format
+    const hours = TIME_FORMATER.format(date);
+    const day = DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
+    return `${day} ${hours}`;
+  } else {
+    // Second intervals or less - use full timestamp
+    return date.toISOString();
+  }
+};
+
+/**
+ * Finds the time range that contains the given timestamp
+ * @param timestamp - Data point timestamp
+ * @param ranges - Array of time ranges
+ * @returns The range that contains the timestamp, or null if not found
+ */
+const findRangeForTimestamp = (
+  timestamp: number,
+  ranges: { start: number; end: number }[],
+): { start: number; end: number } | null => {
+  return (
+    ranges.find((range) => timestamp >= range.start && timestamp < range.end) ||
+    null
+  );
 };
 
 /**
@@ -71,29 +125,6 @@ const generateDayTimestamps = (
  * @param bars - The bars to convert
  * @param type - The chart type (category or time)
  * @returns Recharts data format
- * @example
- * Category data:
- * const bars = [
- *   { label: 'Success', data: [['category1', 2], ['category2', 4], ['category3', 6]], color: 'green' },
- *   { label: 'Failed', data: [['category1', 8], ['category2', 10], ['category3', 12]], color: 'red' },
- * ];
- * const result = formatPrometheusDataToChartData(bars, 'category');
- * result.data = [
- *   { category: 'category1', success: 2, failed: 8 },
- *   { category: 'category2', success: 4, failed: 10 },
- *   { category: 'category3', success: 6, failed: 12 },
- * ];
- *
- * Time data:
- * const bars = [
- *   { label: 'Success', data: [[timestamp, 2], [timestamp, 1]], color: 'green' },
- *   { label: 'Failed', data: [[timestamp, 3], [timestamp, 0]], color: 'red' },
- * ];
- * const result = formatPrometheusDataToChartData(bars, { type: 'time', timeRange: {...} });
- * result.data = [
- *   { category: 'Mon Jan 01', success: 2, failed: 3 },
- *   { category: 'Tue Jan 02', success: 1, failed: 0 },
- * ];
  */
 export const formatPrometheusDataToChartData = (
   bars: BarchartProps['bars'],
@@ -112,60 +143,79 @@ export const formatPrometheusDataToChartData = (
     fill: bar.color,
   }));
 
-  // Create a map to collect all unique categories/keys
+  // Create a map to collect all unique categories/ranges
   const categoryMap = new Map<
     string | number,
     { [key: string]: string | number }
   >();
 
-  const formatCategory = (key: string | number): string => {
-    if (type === 'category') {
-      return String(key);
-    } else if (type.type === 'time') {
-      return DAY_MONTH_FORMATER.format(new Date(key as number)).replace(
-        /[ ,]/g,
-        '',
-      );
-    }
-    return String(key);
-  };
-
-  // If type is time with timeRange, generate all days in the range to fill in the gaps
+  // For time data, generate all time ranges
   if (type !== 'category' && type.type === 'time') {
-    const allDayTimestamps = generateDayTimestamps(
+    const timeRanges = generateTimeRanges(
       type.timeRange.startTimestamp,
       type.timeRange.endTimestamp,
+      type.timeRange.interval,
     );
 
-    // Initialize all days with zeros for all bars
-    allDayTimestamps.forEach((timestamp) => {
-      const category = formatCategory(timestamp);
-      const initialData: { [key: string]: string | number } = { category };
-      // Initialize all bar data keys with 0
+    // Initialize all ranges with zeros for all bars
+    timeRanges.forEach((range) => {
+      const categoryDisplay = formatTimestamp(
+        range.start,
+        type.timeRange.interval,
+      );
+      const initialData: { [key: string]: string | number } = {
+        category: categoryDisplay,
+      };
       rechartsBars.forEach((bar) => {
         initialData[bar.dataKey] = 0;
       });
 
-      categoryMap.set(category, initialData);
+      categoryMap.set(range.start, initialData);
+    });
+
+    // Process actual data from bars
+    bars.forEach((bar) => {
+      const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
+
+      bar.data.forEach(([timestamp, value]) => {
+        // Find which range this timestamp belongs to
+        const range = findRangeForTimestamp(timestamp as number, timeRanges);
+
+        // If the range is found, update the value for the data key
+        // If multiple data points fall in same range, last value is used
+        if (range) {
+          const existingData = categoryMap.get(range.start)!;
+          existingData[dataKey] = value;
+        }
+      });
+    });
+  } else {
+    // Handle category data
+    bars.forEach((bar) => {
+      const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
+
+      bar.data.forEach(([key, value]) => {
+        const categoryKey = String(key);
+
+        // Check if category exists, if not create it
+        if (!categoryMap.has(categoryKey)) {
+          const newData: { [key: string]: string | number } = {
+            category: categoryKey,
+          };
+          // Initialize all bar data keys with 0
+          rechartsBars.forEach((bar) => {
+            newData[bar.dataKey] = 0;
+          });
+          categoryMap.set(categoryKey, newData);
+        }
+
+        const existingData = categoryMap.get(categoryKey)!;
+        existingData[dataKey] = value;
+      });
     });
   }
 
-  // Process actual data from bars
-  bars.forEach((bar) => {
-    const dataKey = bar.label.toLowerCase().replace(/\s+/g, '');
-
-    bar.data.forEach(([key, value]) => {
-      const category = formatCategory(key);
-
-      if (!categoryMap.has(category)) {
-        categoryMap.set(category, { category });
-      }
-
-      const existingData = categoryMap.get(category)!;
-      existingData[dataKey] = value;
-    });
-  });
-
+  // Convert map to array (order is preserved for time ranges)
   const data = Array.from(categoryMap.values());
 
   return {

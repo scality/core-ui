@@ -4,6 +4,8 @@ import Barchart, { BarchartProps } from './Barchart.component';
 
 import { getWrapper } from '../../testUtils';
 
+const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 // Only mock ResponsiveContainer since it requires actual DOM measurements
 jest.mock('recharts', () => {
   const OriginalResponsiveContainerModule = jest.requireActual('recharts');
@@ -47,147 +49,256 @@ const testTimeBars: BarchartProps['bars'] = [
 ];
 
 describe('Barchart', () => {
-  it('should render the Barchart component with category data', async () => {
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart type="category" bars={testBars} />
-      </Wrapper>,
-    );
+  describe('Basic rendering', () => {
+    it('should render the Barchart component with category data', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type="category" bars={testBars} />
+        </Wrapper>,
+      );
 
-    expect(screen.getByText('category1')).toBeInTheDocument();
-    expect(screen.getByText('category2')).toBeInTheDocument();
-    expect(screen.getByText('category3')).toBeInTheDocument();
-  });
-  it('should render the Barchart component with time data', async () => {
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart
-          type={{
-            type: 'time',
-            timeRange: {
-              startTimestamp: new Date('2024-07-05').getTime(),
-              endTimestamp: new Date('2024-07-07').getTime(),
-            },
-          }}
-          bars={testTimeBars}
-        />
-      </Wrapper>,
-    );
+      expect(screen.getByText('category1')).toBeInTheDocument();
+      expect(screen.getByText('category2')).toBeInTheDocument();
+      expect(screen.getByText('category3')).toBeInTheDocument();
+    });
+    it('should render the Barchart component with time data', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart
+            type={{
+              type: 'time',
+              timeRange: {
+                startTimestamp: new Date('2024-07-05').getTime(),
+                endTimestamp: new Date('2024-07-07').getTime(),
+                interval: ONE_DAY_IN_MILLISECONDS,
+              },
+            }}
+            bars={testTimeBars}
+          />
+        </Wrapper>,
+      );
 
-    expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
-    expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
-    expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
-  });
-  it('should render when there are missing data in the time range', async () => {
-    const bars = [
-      {
-        label: 'Success',
-        data: [
-          [new Date('2024-07-05').getTime(), 10], // Friday
-          [new Date('2024-07-08').getTime(), 15], // Monday
-        ] as [number, number][],
-        color: 'green',
-      },
-      {
-        label: 'Failed',
-        data: [
-          [new Date('2024-07-05').getTime(), 2], // Friday
-          [new Date('2024-07-08').getTime(), 3], // Monday
-        ] as [number, number][],
-        color: 'red',
-      },
-    ];
-
-    const type: BarchartProps['type'] = {
-      type: 'time',
-      timeRange: {
-        startTimestamp: new Date('2024-07-05').getTime(),
-        endTimestamp: new Date('2024-07-08').getTime(),
-      },
-    };
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart type={type} bars={bars} />
-      </Wrapper>,
-    );
-
-    // Check that all days are present
-    await waitFor(() => {
       expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
       expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
       expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
-      expect(screen.getByText('Mon08Jul')).toBeInTheDocument();
     });
   });
-  it('should render with reference line', () => {
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart type="category" bars={testBars} />
-      </Wrapper>,
-    );
-    expect(screen.getByText('50')).toBeInTheDocument();
-  });
-  it.skip('should render with reference line and unit range', () => {
-    const testUnitRange: BarchartProps['unitRange'] = [
-      {
-        threshold: 1000,
-        label: 'kB',
-      },
-    ];
-    const testBars: BarchartProps['bars'] = [
-      {
-        label: 'Success',
-        data: [
-          ['category1', 200],
-          ['category2', 560],
-          ['category3', 640],
-        ],
-        color: 'green',
-      },
-    ];
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
-      </Wrapper>,
-    );
-    expect(screen.getByText('1000')).toBeInTheDocument();
-    expect(screen.getByText('kB')).toBeInTheDocument();
-  });
+  describe('Time data', () => {
+    it('should render the chart with correct starting days even if the data is missing', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart
+            type={{
+              type: 'time',
+              timeRange: {
+                startTimestamp: new Date('2024-07-03').getTime(),
+                endTimestamp: new Date('2024-07-07').getTime(),
+                interval: ONE_DAY_IN_MILLISECONDS,
+              },
+            }}
+            // data starts on 2024-07-05
+            bars={testTimeBars}
+          />
+        </Wrapper>,
+      );
+      expect(screen.getByText('Wed03Jul')).toBeInTheDocument();
+      expect(screen.getByText('Thu04Jul')).toBeInTheDocument();
+      expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
+      expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
+      expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
+    });
+    it('should render when there are missing data in the time range', async () => {
+      const bars = [
+        {
+          label: 'Success',
+          data: [
+            [new Date('2024-07-05').getTime(), 10], // Friday
+            [new Date('2024-07-08').getTime(), 15], // Monday
+          ] as [number, number][],
+          color: 'green',
+        },
+        {
+          label: 'Failed',
+          data: [
+            [new Date('2024-07-05').getTime(), 2], // Friday
+            [new Date('2024-07-08').getTime(), 3], // Monday
+          ] as [number, number][],
+          color: 'red',
+        },
+      ];
 
-  it.skip('should render with the unit range', () => {
-    const testBars: BarchartProps['bars'] = [
-      {
-        label: 'Success',
-        data: [
-          ['category1', 2220],
-          ['category2', 2500],
-          ['category3', 3000],
-        ],
-        color: 'green',
-      },
-    ];
+      const type: BarchartProps['type'] = {
+        type: 'time',
+        timeRange: {
+          startTimestamp: new Date('2024-07-05').getTime(),
+          endTimestamp: new Date('2024-07-08').getTime(),
+          interval: ONE_DAY_IN_MILLISECONDS,
+        },
+      };
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type={type} bars={bars} />
+        </Wrapper>,
+      );
 
-    const testUnitRange: BarchartProps['unitRange'] = [
-      {
-        threshold: 1000,
-        label: 'kB',
-      },
-      {
-        threshold: 1000000,
-        label: 'MB',
-      },
-    ];
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
-      </Wrapper>,
-    );
-    expect(screen.getByText('kB')).toBeInTheDocument();
+      // Check that all days are present
+      await waitFor(() => {
+        expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
+        expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
+        expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
+        expect(screen.getByText('Mon08Jul')).toBeInTheDocument();
+      });
+    });
+    it('should render for a specific time range', async () => {
+      // 7 days data from 2024-07-05 to 2024-07-11
+      const testTimeBars: BarchartProps['bars'] = [
+        {
+          label: 'Success',
+          data: [
+            [new Date('2024-07-05').getTime(), 10],
+            [new Date('2024-07-06').getTime(), 10],
+            [new Date('2024-07-07').getTime(), 10],
+            [new Date('2024-07-08').getTime(), 10],
+            [new Date('2024-07-09').getTime(), 10],
+            [new Date('2024-07-10').getTime(), 10],
+            [new Date('2024-07-11').getTime(), 10],
+          ],
+          color: 'green',
+        },
+      ];
+
+      const type: BarchartProps['type'] = {
+        type: 'time',
+        timeRange: {
+          startTimestamp: new Date('2024-07-05').getTime(),
+          endTimestamp: new Date('2024-07-11').getTime(),
+          interval: ONE_DAY_IN_MILLISECONDS,
+        },
+      };
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type={type} bars={testTimeBars} />
+        </Wrapper>,
+      );
+      await waitFor(() => {
+        expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
+        expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
+        expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
+        expect(screen.getByText('Mon08Jul')).toBeInTheDocument();
+        expect(screen.getByText('Tue09Jul')).toBeInTheDocument();
+        expect(screen.getByText('Wed10Jul')).toBeInTheDocument();
+        expect(screen.getByText('Thu11Jul')).toBeInTheDocument();
+      });
+    });
+    it('should render the Barchart component with hourly intervals', async () => {
+      const testHourlyBars: BarchartProps['bars'] = [
+        {
+          label: 'Success',
+          data: [
+            [new Date('2024-07-05T10:00:00').getTime(), 10],
+            [new Date('2024-07-05T12:00:00').getTime(), 20],
+          ],
+          color: 'green',
+        },
+      ];
+
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart
+            type={{
+              type: 'time',
+              timeRange: {
+                startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
+                endTimestamp: new Date('2024-07-05T12:00:00').getTime(),
+                interval: ONE_HOUR_IN_MILLISECONDS,
+              },
+            }}
+            bars={testHourlyBars}
+          />
+        </Wrapper>,
+      );
+
+      expect(screen.getByText('Fri05Jul 10:00')).toBeInTheDocument();
+      expect(screen.getByText('Fri05Jul 11:00')).toBeInTheDocument();
+      expect(screen.getByText('Fri05Jul 12:00')).toBeInTheDocument();
+    });
+  });
+  describe('Reference line', () => {
+    it('should render with reference line', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type="category" bars={testBars} />
+        </Wrapper>,
+      );
+      expect(screen.getByText('50')).toBeInTheDocument();
+    });
+  });
+  describe.skip('Unit range', () => {
+    it('should render with reference line and unit range', () => {
+      const testUnitRange: BarchartProps['unitRange'] = [
+        {
+          threshold: 1000,
+          label: 'kB',
+        },
+      ];
+      const testBars: BarchartProps['bars'] = [
+        {
+          label: 'Success',
+          data: [
+            ['category1', 200],
+            ['category2', 560],
+            ['category3', 640],
+          ],
+          color: 'green',
+        },
+      ];
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
+        </Wrapper>,
+      );
+      expect(screen.getByText('1000')).toBeInTheDocument();
+      expect(screen.getByText('kB')).toBeInTheDocument();
+    });
+
+    it('should render with the unit range', () => {
+      const testBars: BarchartProps['bars'] = [
+        {
+          label: 'Success',
+          data: [
+            ['category1', 2220],
+            ['category2', 2500],
+            ['category3', 3000],
+          ],
+          color: 'green',
+        },
+      ];
+
+      const testUnitRange: BarchartProps['unitRange'] = [
+        {
+          threshold: 1000,
+          label: 'kB',
+        },
+        {
+          threshold: 1000000,
+          label: 'MB',
+        },
+      ];
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
+        </Wrapper>,
+      );
+      expect(screen.getByText('kB')).toBeInTheDocument();
+    });
   });
 });
