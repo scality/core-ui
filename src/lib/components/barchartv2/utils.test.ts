@@ -220,7 +220,7 @@ describe('formatPrometheusDataToChartData', () => {
     });
   });
   describe('computeUnitLabelAndRoundReferenceValue', () => {
-    it('should compute the unit label and round reference value correctly', () => {
+    it('should compute the unit label and round reference value correctly when reaching threshold', () => {
       const data = [
         {
           category: 'category1',
@@ -247,6 +247,36 @@ describe('formatPrometheusDataToChartData', () => {
           category: 'category1',
           success: 1.68,
         },
+      ]);
+    });
+    it('should compute the unit label and round reference value correctly when threshold is 0', () => {
+      const data = [
+        {
+          category: 'category1',
+          success: 680,
+        },
+      ];
+      const maxValue = 680;
+      const unitRange: UnitRange = [
+        {
+          threshold: 0,
+          label: 'B',
+        },
+        {
+          threshold: 1000,
+          label: 'kB',
+        },
+      ];
+      const result = computeUnitLabelAndRoundReferenceValue(
+        data,
+        maxValue,
+        unitRange,
+      );
+
+      expect(result.unitLabel).toBe('B');
+      expect(result.roundReferenceValue).toBe(1000);
+      expect(result.rechartsData).toEqual([
+        { category: 'category1', success: 680 },
       ]);
     });
   });

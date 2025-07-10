@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { getRoles, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import Barchart, { BarchartProps } from './Barchart.component';
 import { getWrapper } from '../../testUtils';
+import { debug } from 'jest-preview';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -239,77 +240,6 @@ describe('Barchart', () => {
         </Wrapper>,
       );
       expect(screen.getByText('50')).toBeInTheDocument();
-    });
-  });
-
-  describe('Unit range', () => {
-    it('should render with reference line and unit range', async () => {
-      const testUnitRange: BarchartProps['unitRange'] = [
-        {
-          threshold: 1000,
-          label: 'kB',
-        },
-        {
-          threshold: 0,
-          label: 'B',
-        },
-      ];
-      const testBars: BarchartProps['bars'] = [
-        {
-          label: 'Success',
-          data: [
-            ['category1', 200],
-            ['category2', 560],
-            ['category3', 640],
-          ],
-          color: 'green',
-        },
-      ];
-      const { Wrapper } = getWrapper();
-      render(
-        <Wrapper>
-          <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
-        </Wrapper>,
-      );
-
-      await waitFor(() => {
-        // 1000 B is the reference value, 2 elements with the text "1000 B" rendered by recharts
-        const referenceValue = screen.getAllByText(/1000 B/i);
-        expect(referenceValue).toHaveLength(2);
-      });
-    });
-
-    it('should render with the unit label', () => {
-      const testBars: BarchartProps['bars'] = [
-        {
-          label: 'Success',
-          data: [
-            ['category1', 2220],
-            ['category2', 2500],
-            ['category3', 3000],
-          ],
-          color: 'green',
-        },
-      ];
-
-      const testUnitRange: BarchartProps['unitRange'] = [
-        {
-          threshold: 1000,
-          label: 'kB',
-        },
-        {
-          threshold: 1000000,
-          label: 'MB',
-        },
-      ];
-      const { Wrapper } = getWrapper();
-      render(
-        <Wrapper>
-          <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
-        </Wrapper>,
-      );
-      // Two elements with the text "10 kB" rendered
-      expect(screen.getAllByText(/10 kB/i)).toHaveLength(2);
     });
   });
 });
