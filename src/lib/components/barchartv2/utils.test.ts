@@ -230,170 +230,151 @@ describe('formatPrometheusDataToChartData', () => {
         { category: 'Sun07Jul', success: 30 },
       ]);
     });
+  });
+  describe('Stacked Bar Sorting', () => {
+    const bars: BarchartProps['bars'] = [
+      {
+        label: 'Small Bar',
+        data: [
+          ['category1', 5],
+          ['category2', 10],
+          ['category3', 15],
+        ],
+        color: 'blue',
+      },
+      {
+        label: 'Large Bar',
+        data: [
+          ['category1', 50],
+          ['category2', 60],
+          ['category3', 70],
+        ],
+        color: 'red',
+      },
+      {
+        label: 'Medium Bar',
+        data: [
+          ['category1', 20],
+          ['category2', 25],
+          ['category3', 30],
+        ],
+        color: 'green',
+      },
+    ];
+    const type: BarchartProps['type'] = 'category';
+    it('should sort bars by average values in descending order when stacked is true', () => {
+      const result = formatPrometheusDataToChartData(bars, type, true);
 
-    describe('Stacked Bar Sorting', () => {
-      it('should sort bars by average values in descending order when stacked is true', () => {
-        const bars: BarchartProps['bars'] = [
-          {
-            label: 'Small Bar',
-            data: [
-              ['category1', 5],
-              ['category2', 10],
-              ['category3', 15],
-            ],
-            color: 'blue',
-          },
-          {
-            label: 'Large Bar',
-            data: [
-              ['category1', 50],
-              ['category2', 60],
-              ['category3', 70],
-            ],
-            color: 'red',
-          },
-          {
-            label: 'Medium Bar',
-            data: [
-              ['category1', 20],
-              ['category2', 25],
-              ['category3', 30],
-            ],
-            color: 'green',
-          },
-        ];
-        const type: BarchartProps['type'] = 'category';
-        const result = formatPrometheusDataToChartData(bars, type, true);
+      // Bars should be sorted by average in descending order (largest first)
+      expect(result.rechartsBars[0].dataKey).toBe('largebar'); // Average: 60
+      expect(result.rechartsBars[1].dataKey).toBe('mediumbar'); // Average: 25
+      expect(result.rechartsBars[2].dataKey).toBe('smallbar'); // Average: 10
+    });
 
-        // Bars should be sorted by average in descending order (largest first)
-        expect(result.rechartsBars[0].dataKey).toBe('largebar'); // Average: 60
-        expect(result.rechartsBars[1].dataKey).toBe('mediumbar'); // Average: 25
-        expect(result.rechartsBars[2].dataKey).toBe('smallbar'); // Average: 10
-      });
+    it('should not sort bars when stacked is false or undefined', () => {
+      const result = formatPrometheusDataToChartData(bars, type, false);
 
-      it('should not sort bars when stacked is false or undefined', () => {
-        const bars: BarchartProps['bars'] = [
-          {
-            label: 'Small Bar',
-            data: [
-              ['category1', 5],
-              ['category2', 10],
-            ],
-            color: 'blue',
-          },
-          {
-            label: 'Large Bar',
-            data: [
-              ['category1', 50],
-              ['category2', 60],
-            ],
-            color: 'red',
-          },
-        ];
-        const type: BarchartProps['type'] = 'category';
-        const result = formatPrometheusDataToChartData(bars, type, false);
-
-        // Bars should maintain original order
-        expect(result.rechartsBars[0].dataKey).toBe('smallbar');
-        expect(result.rechartsBars[1].dataKey).toBe('largebar');
-      });
+      // Bars should maintain original order
+      expect(result.rechartsBars[0].dataKey).toBe('smallbar');
+      expect(result.rechartsBars[1].dataKey).toBe('largebar');
     });
   });
-  describe('computeUnitLabelAndRoundReferenceValue', () => {
-    it('should compute the unit label and round reference value correctly when reaching threshold', () => {
-      const data = [
-        {
-          category: 'category1',
-          success: 1680,
-        },
-      ];
-      const maxValue = 1680;
-      const unitRange: UnitRange = [
-        {
-          threshold: 1000,
-          label: 'kB',
-        },
-      ];
-      const result = computeUnitLabelAndRoundReferenceValue(
-        data,
-        maxValue,
-        unitRange,
-      );
+});
 
-      expect(result.unitLabel).toBe('kB');
-      expect(result.roundReferenceValue).toBe(10);
-      expect(result.rechartsData).toEqual([
-        {
-          category: 'category1',
-          success: 1.68,
-        },
-      ]);
-    });
-    it('should compute the unit label and round reference value correctly when threshold is 0', () => {
-      const data = [
-        {
-          category: 'category1',
-          success: 680,
-        },
-      ];
-      const maxValue = 680;
-      const unitRange: UnitRange = [
-        {
-          threshold: 0,
-          label: 'B',
-        },
-        {
-          threshold: 1000,
-          label: 'kB',
-        },
-      ];
-      const result = computeUnitLabelAndRoundReferenceValue(
-        data,
-        maxValue,
-        unitRange,
-      );
+describe('computeUnitLabelAndRoundReferenceValue', () => {
+  it('should compute the unit label and round reference value correctly when reaching threshold', () => {
+    const data = [
+      {
+        category: 'category1',
+        success: 1680,
+      },
+    ];
+    const maxValue = 1680;
+    const unitRange: UnitRange = [
+      {
+        threshold: 1000,
+        label: 'kB',
+      },
+    ];
+    const result = computeUnitLabelAndRoundReferenceValue(
+      data,
+      maxValue,
+      unitRange,
+    );
 
-      expect(result.unitLabel).toBe('B');
-      expect(result.roundReferenceValue).toBe(1000);
-      expect(result.rechartsData).toEqual([
-        { category: 'category1', success: 680 },
-      ]);
-    });
+    expect(result.unitLabel).toBe('kB');
+    expect(result.roundReferenceValue).toBe(10);
+    expect(result.rechartsData).toEqual([
+      {
+        category: 'category1',
+        success: 1.68,
+      },
+    ]);
   });
-  describe('sortStackedBars', () => {
-    const bars = [
+  it('should compute the unit label and round reference value correctly when threshold is 0', () => {
+    const data = [
+      {
+        category: 'category1',
+        success: 680,
+      },
+    ];
+    const maxValue = 680;
+    const unitRange: UnitRange = [
+      {
+        threshold: 0,
+        label: 'B',
+      },
+      {
+        threshold: 1000,
+        label: 'kB',
+      },
+    ];
+    const result = computeUnitLabelAndRoundReferenceValue(
+      data,
+      maxValue,
+      unitRange,
+    );
+
+    expect(result.unitLabel).toBe('B');
+    expect(result.roundReferenceValue).toBe(1000);
+    expect(result.rechartsData).toEqual([
+      { category: 'category1', success: 680 },
+    ]);
+  });
+});
+describe('sortStackedBars', () => {
+  const bars = [
+    { dataKey: 'bar1', fill: 'blue' },
+    { dataKey: 'bar2', fill: 'red' },
+    { dataKey: 'bar3', fill: 'green' },
+  ];
+  const data = [
+    { bar1: 10, bar2: 20, bar3: 30 },
+    { bar1: 40, bar2: 50, bar3: 60 },
+    { bar1: 70, bar2: 80, bar3: 90 },
+  ];
+  it('should sort bars by average values in descending order when stacked is true', () => {
+    const result = sortStackedBars(bars, data, true);
+    expect(result).toEqual([
+      { dataKey: 'bar3', fill: 'green' },
+      { dataKey: 'bar2', fill: 'red' },
+      { dataKey: 'bar1', fill: 'blue' },
+    ]);
+  });
+  it('should not sort bars when stacked is false', () => {
+    const result = sortStackedBars(bars, data, false);
+    expect(result).toEqual([
       { dataKey: 'bar1', fill: 'blue' },
       { dataKey: 'bar2', fill: 'red' },
       { dataKey: 'bar3', fill: 'green' },
-    ];
-    const data = [
-      { bar1: 10, bar2: 20, bar3: 30 },
-      { bar1: 40, bar2: 50, bar3: 60 },
-      { bar1: 70, bar2: 80, bar3: 90 },
-    ];
-    it('should sort bars by average values in descending order when stacked is true', () => {
-      const result = sortStackedBars(bars, data, true);
-      expect(result).toEqual([
-        { dataKey: 'bar3', fill: 'green' },
-        { dataKey: 'bar2', fill: 'red' },
-        { dataKey: 'bar1', fill: 'blue' },
-      ]);
-    });
-    it('should not sort bars when stacked is false', () => {
-      const result = sortStackedBars(bars, data, false);
-      expect(result).toEqual([
-        { dataKey: 'bar1', fill: 'blue' },
-        { dataKey: 'bar2', fill: 'red' },
-        { dataKey: 'bar3', fill: 'green' },
-      ]);
-    });
-    it('should not sort bars when stacked is undefined', () => {
-      const result = sortStackedBars(bars, data, undefined);
-      expect(result).toEqual([
-        { dataKey: 'bar1', fill: 'blue' },
-        { dataKey: 'bar2', fill: 'red' },
-        { dataKey: 'bar3', fill: 'green' },
-      ]);
-    });
+    ]);
+  });
+  it('should not sort bars when stacked is undefined', () => {
+    const result = sortStackedBars(bars, data, undefined);
+    expect(result).toEqual([
+      { dataKey: 'bar1', fill: 'blue' },
+      { dataKey: 'bar2', fill: 'red' },
+      { dataKey: 'bar3', fill: 'green' },
+    ]);
   });
 });
