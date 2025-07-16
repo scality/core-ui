@@ -5,6 +5,7 @@ import {
   formatPrometheusDataToChartData,
   getMaxBarValue,
   getRoundReferenceValue,
+  sortStackedBars,
   UnitRange,
 } from './utils';
 
@@ -356,6 +357,42 @@ describe('formatPrometheusDataToChartData', () => {
       expect(result.roundReferenceValue).toBe(1000);
       expect(result.rechartsData).toEqual([
         { category: 'category1', success: 680 },
+      ]);
+    });
+  });
+  describe('sortStackedBars', () => {
+    const bars = [
+      { dataKey: 'bar1', fill: 'blue' },
+      { dataKey: 'bar2', fill: 'red' },
+      { dataKey: 'bar3', fill: 'green' },
+    ];
+    const data = [
+      { bar1: 10, bar2: 20, bar3: 30 },
+      { bar1: 40, bar2: 50, bar3: 60 },
+      { bar1: 70, bar2: 80, bar3: 90 },
+    ];
+    it('should sort bars by average values in descending order when stacked is true', () => {
+      const result = sortStackedBars(bars, data, true);
+      expect(result).toEqual([
+        { dataKey: 'bar3', fill: 'green' },
+        { dataKey: 'bar2', fill: 'red' },
+        { dataKey: 'bar1', fill: 'blue' },
+      ]);
+    });
+    it('should not sort bars when stacked is false', () => {
+      const result = sortStackedBars(bars, data, false);
+      expect(result).toEqual([
+        { dataKey: 'bar1', fill: 'blue' },
+        { dataKey: 'bar2', fill: 'red' },
+        { dataKey: 'bar3', fill: 'green' },
+      ]);
+    });
+    it('should not sort bars when stacked is undefined', () => {
+      const result = sortStackedBars(bars, data, undefined);
+      expect(result).toEqual([
+        { dataKey: 'bar1', fill: 'blue' },
+        { dataKey: 'bar2', fill: 'red' },
+        { dataKey: 'bar3', fill: 'green' },
       ]);
     });
   });

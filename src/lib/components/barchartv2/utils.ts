@@ -228,26 +228,8 @@ export const formatPrometheusDataToChartData = (
   // Convert map to array (order is preserved for time ranges)
   const data = Array.from(categoryMap.values());
 
-  // Sort bars by their average values in descending order when stacked
-  // This ensures the largest bars appear at the bottom of the stack
-  if (stacked) {
-    const barAverages = rechartsBars.map((bar) => {
-      const values = data
-        .map((item) => Number(item[bar.dataKey]) || 0)
-        .filter((value) => !isNaN(value));
-      const average =
-        values.length > 0
-          ? values.reduce((a, b) => a + b, 0) / values.length
-          : 0;
-      return { ...bar, average };
-    });
-
-    // Sort by average in descending order (largest first, which will be at bottom in stack)
-    barAverages.sort((a, b) => b.average - a.average);
-
-    // Remove the average property and keep only the bar data
-    rechartsBars = barAverages.map(({ average, ...bar }) => bar);
-  }
+  // Sort stacked bars
+  rechartsBars = sortStackedBars(rechartsBars, data, stacked);
 
   return {
     rechartsBars,
@@ -335,3 +317,33 @@ export function getUnitLabel(
     unitLabel: unitRange[index - 1].label,
   };
 }
+
+// Sort stacked bars by their average values in descending order
+// This ensures the largest bars appear at the bottom of the stack
+export const sortStackedBars = (
+  rechartsBars: {
+    dataKey: string;
+    fill: string;
+  }[],
+  data: {
+    [key: string]: string | number;
+  }[],
+  stacked?: boolean,
+) => {
+  if (!stacked) {
+    return rechartsBars;
+  }
+  const barAverages = rechartsBars.map((bar) => {
+    const values = data
+      .map((item) => Number(item[bar.dataKey]) || 0)
+      .filter((value) => !isNaN(value));
+    const average =
+      values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+    return { ...bar, average };
+  });
+
+  // Sort by average in descending order (largest first, which will be at bottom in stack)
+  barAverages.sort((a, b) => b.average - a.average);
+  // Remove the average property and keep only the bar data
+  return barAverages.map(({ average, ...bar }) => bar);
+};
