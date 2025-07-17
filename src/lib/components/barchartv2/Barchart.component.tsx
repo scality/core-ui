@@ -30,13 +30,13 @@ export type Point = {
   values: { label: string; value: number }[];
 };
 
-export type BarchartProps<
-  T extends readonly {
-    readonly label: string;
-    readonly data: readonly (readonly [number | string, number | string])[];
-    readonly color: string;
-  }[],
-> = {
+export type BarchartBars = readonly {
+  readonly label: string;
+  readonly data: readonly (readonly [number | string, number | string])[];
+  readonly color: string;
+}[];
+
+export type BarchartProps<T extends BarchartBars> = {
   type: 'category' | TimeType;
   bars: T;
   tooltip?: (currentPoint: {

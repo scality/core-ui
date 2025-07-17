@@ -1,4 +1,4 @@
-import { BarchartProps } from './Barchart.component';
+import { BarchartProps, BarchartBars } from './Barchart.component';
 
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 
@@ -136,13 +136,7 @@ const findRangeForTimestamp = (
  * @param type - The chart type (category or time)
  * @returns Recharts data format
  */
-export const formatPrometheusDataToChartData = <
-  T extends readonly {
-    readonly label: string;
-    readonly data: readonly (readonly [number | string, number | string])[];
-    readonly color: string;
-  }[],
->(
+export const formatPrometheusDataToChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
   stacked?: boolean,
