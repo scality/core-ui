@@ -1,5 +1,3 @@
-import { BarchartProps } from './Barchart.component';
-
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
@@ -78,12 +76,12 @@ describe('formatPrometheusDataToChartData', () => {
       const result = formatPrometheusDataToChartData(bars, 'category');
 
       expect(result.data).toEqual([
-        { category: 'category1', success: 10, failed: 5 },
-        { category: 'category2', success: 20, failed: 15 },
+        { category: 'category1', Success: 10, Failed: 5 },
+        { category: 'category2', Success: 20, Failed: 15 },
       ]);
       expect(result.rechartsBars).toEqual([
-        { dataKey: 'success', fill: 'green' },
-        { dataKey: 'failed', fill: 'red' },
+        { dataKey: 'Success', fill: 'green' },
+        { dataKey: 'Failed', fill: 'red' },
       ]);
     });
   });
@@ -111,8 +109,8 @@ describe('formatPrometheusDataToChartData', () => {
       });
 
       expect(result.data).toEqual([
-        { category: 'Fri05Jul', success: 10 },
-        { category: 'Sat06Jul', success: 20 },
+        { category: 'Fri05Jul', Success: 10 },
+        { category: 'Sat06Jul', Success: 20 },
       ]);
     });
 
@@ -139,9 +137,9 @@ describe('formatPrometheusDataToChartData', () => {
       });
 
       expect(result.data).toEqual([
-        { category: 'Fri05Jul', success: 10 },
-        { category: 'Sat06Jul', success: 0 }, // Missing data filled with 0
-        { category: 'Sun07Jul', success: 30 },
+        { category: 'Fri05Jul', Success: 10 },
+        { category: 'Sat06Jul', Success: 0 }, // Missing data filled with 0
+        { category: 'Sun07Jul', Success: 30 },
       ]);
     });
 
@@ -167,8 +165,8 @@ describe('formatPrometheusDataToChartData', () => {
       });
 
       expect(result.data).toEqual([
-        { category: '10:00', success: 10 },
-        { category: '11:00', success: 20 },
+        { category: '10:00', Success: 10 },
+        { category: '11:00', Success: 20 },
       ]);
     });
 
@@ -195,8 +193,8 @@ describe('formatPrometheusDataToChartData', () => {
       });
 
       expect(result.data).toEqual([
-        { category: 'Fri05Jul', success: 25 }, // Last value for July 5th
-        { category: 'Sat06Jul', success: 15 }, // July 6th value
+        { category: 'Fri05Jul', Success: 25 }, // Last value for July 5th
+        { category: 'Sat06Jul', Success: 15 }, // July 6th value
       ]);
     });
 
@@ -225,14 +223,14 @@ describe('formatPrometheusDataToChartData', () => {
 
       // Should be in chronological order regardless of input order
       expect(result.data).toEqual([
-        { category: 'Fri05Jul', success: 10 },
-        { category: 'Sat06Jul', success: 20 },
-        { category: 'Sun07Jul', success: 30 },
+        { category: 'Fri05Jul', Success: 10 },
+        { category: 'Sat06Jul', Success: 20 },
+        { category: 'Sun07Jul', Success: 30 },
       ]);
     });
   });
   describe('Stacked Bar Sorting', () => {
-    const bars: BarchartProps['bars'] = [
+    const bars = [
       {
         label: 'Small Bar',
         data: [
@@ -260,24 +258,55 @@ describe('formatPrometheusDataToChartData', () => {
         ],
         color: 'green',
       },
-    ];
-    const type: BarchartProps['type'] = 'category';
+    ] as const;
+    const type = 'category';
     it('should sort bars by average values in descending order when stacked is true', () => {
       const result = formatPrometheusDataToChartData(bars, type, true);
 
       // Bars should be sorted by average in descending order (largest first)
-      expect(result.rechartsBars[0].dataKey).toBe('largebar'); // Average: 60
-      expect(result.rechartsBars[1].dataKey).toBe('mediumbar'); // Average: 25
-      expect(result.rechartsBars[2].dataKey).toBe('smallbar'); // Average: 10
+      expect(result.rechartsBars[0].dataKey).toBe('Large Bar'); // Average: 60
+      expect(result.rechartsBars[1].dataKey).toBe('Medium Bar'); // Average: 25
+      expect(result.rechartsBars[2].dataKey).toBe('Small Bar'); // Average: 10
     });
 
     it('should not sort bars when stacked is false or undefined', () => {
       const result = formatPrometheusDataToChartData(bars, type, false);
 
       // Bars should maintain original order
-      expect(result.rechartsBars[0].dataKey).toBe('smallbar');
-      expect(result.rechartsBars[1].dataKey).toBe('largebar');
+      expect(result.rechartsBars[0].dataKey).toBe('Small Bar');
+      expect(result.rechartsBars[1].dataKey).toBe('Large Bar');
+      expect(result.rechartsBars[2].dataKey).toBe('Medium Bar');
     });
+  });
+
+  it('should call defaultSort when provided', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 50],
+          ['category2', 20],
+          ['category3', 30],
+          ['category4', 40],
+        ],
+        color: 'green',
+      },
+    ] as const;
+    const type = 'category';
+    const result = formatPrometheusDataToChartData(
+      bars,
+      type,
+      false,
+      (pointA, pointB) => {
+        return pointA.Success - pointB.Success > 0 ? 1 : -1;
+      },
+    );
+    const data = result.data;
+
+    expect(data[0].category).toBe('category2');
+    expect(data[1].category).toBe('category3');
+    expect(data[2].category).toBe('category4');
+    expect(data[3].category).toBe('category1');
   });
 });
 
@@ -342,6 +371,7 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     ]);
   });
 });
+
 describe('sortStackedBars', () => {
   const bars = [
     { dataKey: 'bar1', fill: 'blue' },

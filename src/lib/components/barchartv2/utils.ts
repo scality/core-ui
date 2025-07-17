@@ -1,4 +1,4 @@
-import { BarchartProps, Point } from './Barchart.component';
+import { BarchartProps } from './Barchart.component';
 
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 

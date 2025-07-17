@@ -1,11 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import Barchart, { BarchartProps, Point } from './Barchart.component';
+import Barchart from './Barchart.component';
 import { getWrapper } from '../../testUtils';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
-// Only mock ResponsiveContainer since it requires actual DOM measurements
+
+// Mock ResponsiveContainer to test the Barchart component
 jest.mock('recharts', () => {
   const OriginalResponsiveContainerModule = jest.requireActual('recharts');
 
@@ -23,7 +24,7 @@ jest.mock('recharts', () => {
   };
 });
 
-const testBars: BarchartProps['bars'] = [
+const testBars = [
   {
     label: 'Success',
     data: [
@@ -33,9 +34,9 @@ const testBars: BarchartProps['bars'] = [
     ],
     color: 'green',
   },
-];
+] as const;
 
-const testTimeBars: BarchartProps['bars'] = [
+const testTimeBars = [
   {
     label: 'Success',
     data: [
@@ -45,7 +46,7 @@ const testTimeBars: BarchartProps['bars'] = [
     ],
     color: 'green',
   },
-];
+] as const;
 
 describe('Barchart', () => {
   describe('Basic rendering', () => {
@@ -130,8 +131,8 @@ describe('Barchart', () => {
         },
       ];
 
-      const type: BarchartProps['type'] = {
-        type: 'time',
+      const type = {
+        type: 'time' as const,
         timeRange: {
           startTimestamp: new Date('2024-07-05').getTime(),
           endTimestamp: new Date('2024-07-08').getTime(),
@@ -155,7 +156,7 @@ describe('Barchart', () => {
     });
     it('should render for a specific time range', async () => {
       // 7 days data from 2024-07-05 to 2024-07-11
-      const testTimeBars: BarchartProps['bars'] = [
+      const testTimeBars = [
         {
           label: 'Success',
           data: [
@@ -169,10 +170,10 @@ describe('Barchart', () => {
           ],
           color: 'green',
         },
-      ];
+      ] as const;
 
-      const type: BarchartProps['type'] = {
-        type: 'time',
+      const type = {
+        type: 'time' as const,
         timeRange: {
           startTimestamp: new Date('2024-07-05').getTime(),
           endTimestamp: new Date('2024-07-11').getTime(),
@@ -196,7 +197,7 @@ describe('Barchart', () => {
       });
     });
     it('should render the Barchart component with hourly intervals', async () => {
-      const testHourlyBars: BarchartProps['bars'] = [
+      const testHourlyBars = [
         {
           label: 'Success',
           data: [
@@ -205,7 +206,7 @@ describe('Barchart', () => {
           ],
           color: 'green',
         },
-      ];
+      ] as const;
 
       const { Wrapper } = getWrapper();
       render(
@@ -231,7 +232,7 @@ describe('Barchart', () => {
   });
 
   it('should render stacked bars', () => {
-    const testStackedBars: BarchartProps['bars'] = [
+    const testStackedBars = [
       {
         label: 'Success',
         data: [
@@ -250,7 +251,7 @@ describe('Barchart', () => {
         ],
         color: 'red',
       },
-    ];
+    ] as const;
 
     const { Wrapper } = getWrapper();
     render(
@@ -265,24 +266,17 @@ describe('Barchart', () => {
   });
 
   it('should sort categories using defaultSort function', () => {
-    const testBars: BarchartProps['bars'] = [
+    const testBars = [
       {
         label: 'Success',
         data: [
-          ['category3', 30],
           ['category1', 10],
           ['category2', 20],
+          ['category3', 30],
         ],
         color: 'green',
       },
-    ];
-
-    // Sort by total value in descending order
-    const sortByValueDesc = (pointA: Point, pointB: Point) => {
-      const totalA = pointA.values.reduce((sum, v) => sum + v.value, 0);
-      const totalB = pointB.values.reduce((sum, v) => sum + v.value, 0);
-      return totalB - totalA > 0 ? 1 : totalB - totalA < 0 ? -1 : 0;
-    };
+    ] as const;
 
     const { Wrapper } = getWrapper();
     render(
@@ -290,7 +284,11 @@ describe('Barchart', () => {
         <Barchart
           type="category"
           bars={testBars}
-          defaultSort={sortByValueDesc}
+          defaultSort={(pointA, pointB) => {
+            const valueA = pointA.Success;
+            const valueB = pointB.Success;
+            return valueB - valueA > 0 ? 1 : valueB - valueA < 0 ? -1 : 0;
+          }}
         />
       </Wrapper>,
     );
