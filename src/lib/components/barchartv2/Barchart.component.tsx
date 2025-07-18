@@ -10,7 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { spacing } from '../../spacing';
+import { spacing, Stack, Wrap } from '../../spacing';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import {
   computeUnitLabelAndRoundReferenceValue,
@@ -19,6 +19,10 @@ import {
   renderTooltipContent,
   UnitRange,
 } from './utils';
+import { Text } from '../text/Text.component';
+import { IconHelp } from '../iconhelper/IconHelper';
+import { Loader } from '../loader/Loader.component';
+import { Box } from '../box/Box';
 
 export type TimeType = {
   type: 'time';
@@ -61,7 +65,7 @@ export type BarchartProps<T extends BarchartBars> = {
   secondaryTitle?: string;
   rightTitle?: React.ReactNode;
   height?: number;
-  loading?: boolean;
+  isLoading?: boolean;
 };
 
 const CHART_CONSTANTS = {
@@ -119,6 +123,50 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
   }
 `;
 
+const ChartHeader = ({
+  title,
+  secondaryTitle,
+  helpTooltip,
+  rightTitle,
+}: {
+  title?: string;
+  secondaryTitle?: string;
+  helpTooltip?: string;
+  rightTitle?: React.ReactNode;
+}) => {
+  return (
+    <Wrap>
+      <Stack gap="r4">
+        <Text variant="Large" isEmphazed>
+          {title}
+        </Text>
+        {helpTooltip && (
+          <IconHelp tooltipMessage={helpTooltip} title={helpTooltip} />
+        )}
+
+        {secondaryTitle && (
+          <Text
+            color="textSecondary"
+            style={{
+              marginLeft: spacing.r8,
+            }}
+          >
+            {secondaryTitle}
+          </Text>
+        )}
+      </Stack>
+
+      {rightTitle && <Text>{rightTitle}</Text>}
+    </Wrap>
+  );
+};
+
+const ChartContainer = styled(Stack)`
+  background-color: ${({ theme }) => theme.backgroundLevel4};
+  padding: ${spacing.r16};
+  border-radius: ${spacing.r8};
+`;
+
 const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
   const [hoveredValue, setHoveredValue] = useState<string | undefined>();
@@ -131,6 +179,11 @@ const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     stacked,
     defaultSort,
     tooltip,
+    title,
+    secondaryTitle,
+    helpTooltip,
+    rightTitle,
+    isLoading,
   } = props;
 
   const { data, rechartsBars } = formatPrometheusDataToChartData(
@@ -146,65 +199,80 @@ const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
 
   return (
-    <StyledResponsiveContainer width="100%" height={height}>
-      <BarChart
-        data={rechartsData}
-        accessibilityLayer
-        style={{
-          backgroundColor: theme.backgroundLevel1,
-        }}
-      >
-        {rechartsBars.map((bar) => (
-          <Bar
-            key={bar.dataKey}
-            dataKey={bar.dataKey}
-            fill={bar.fill}
-            minPointSize={3}
-            stackId={stacked ? 'stacked' : undefined}
-            onMouseOver={() => setHoveredValue(bar.dataKey)}
-            onMouseLeave={() => setHoveredValue(undefined)}
-          />
-        ))}
+    <ChartContainer direction="vertical" gap="r16">
+      <ChartHeader
+        title={title}
+        secondaryTitle={secondaryTitle}
+        helpTooltip={helpTooltip}
+        rightTitle={rightTitle}
+      />
+      {isLoading ? (
+        <Box
+          height={height}
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex',
+          }}
+        >
+          <Loader size="larger" children={<Text>Loading Chart Data...</Text>} />
+        </Box>
+      ) : (
+        <StyledResponsiveContainer width="100%" height={height}>
+          <BarChart data={rechartsData} accessibilityLayer maxBarSize={12}>
+            {rechartsBars.map((bar) => (
+              <Bar
+                key={bar.dataKey}
+                dataKey={bar.dataKey}
+                fill={bar.fill}
+                minPointSize={3}
+                stackId={stacked ? 'stacked' : undefined}
+                onMouseOver={() => setHoveredValue(bar.dataKey)}
+                onMouseLeave={() => setHoveredValue(undefined)}
+              />
+            ))}
 
-        <YAxis
-          tickCount={1}
-          unit={` ${unitLabel}`}
-          domain={[0, roundReferenceValue]}
-          tickFormatter={(value) => value.toFixed(0)}
-          axisLine={false}
-          tick={{
-            fill: theme.textSecondary,
-          }}
-          tickLine={false}
-          label={{
-            fill: theme.textSecondary,
-          }}
-          orientation="right"
-        />
+            <YAxis
+              tickCount={1}
+              unit={` ${unitLabel}`}
+              domain={[0, roundReferenceValue]}
+              tickFormatter={(value) => value.toFixed(0)}
+              axisLine={false}
+              tick={{
+                fill: theme.textSecondary,
+              }}
+              tickLine={false}
+              label={{
+                fill: theme.textSecondary,
+              }}
+              orientation="right"
+            />
 
-        <ReferenceLine y={roundReferenceValue} fill={theme.textSecondary} />
-        <XAxis
-          dataKey="category"
-          tick={(props) => <CustomTick {...props} />}
-          type="category"
-          interval={0}
-          allowDataOverflow={true}
-          tickLine={{
-            stroke: theme.textSecondary,
-          }}
-          axisLine={{
-            stroke: theme.textSecondary,
-          }}
-        />
+            <ReferenceLine y={roundReferenceValue} fill={theme.textSecondary} />
+            <XAxis
+              dataKey="category"
+              tick={(props) => <CustomTick {...props} />}
+              type="category"
+              interval={0}
+              allowDataOverflow={true}
+              tickLine={{
+                stroke: theme.textSecondary,
+              }}
+              axisLine={{
+                stroke: theme.textSecondary,
+              }}
+            />
 
-        <Tooltip
-          content={(props: TooltipContentProps<number, string>) =>
-            renderTooltipContent(props, tooltip, hoveredValue)
-          }
-          cursor={false}
-        />
-      </BarChart>
-    </StyledResponsiveContainer>
+            <Tooltip
+              content={(props: TooltipContentProps<number, string>) =>
+                renderTooltipContent(props, tooltip, hoveredValue)
+              }
+              cursor={false}
+            />
+          </BarChart>
+        </StyledResponsiveContainer>
+      )}
+    </ChartContainer>
   );
 };
 

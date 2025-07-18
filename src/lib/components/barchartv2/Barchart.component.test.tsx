@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import Barchart from './Barchart.component';
 import { getWrapper } from '../../testUtils';
+import Barchart from './Barchart.component';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -298,5 +298,37 @@ describe('Barchart', () => {
     expect(categories[0]).toHaveTextContent('category3'); // 30 (highest)
     expect(categories[1]).toHaveTextContent('category2'); // 20 (middle)
     expect(categories[2]).toHaveTextContent('category1'); // 10 (lowest)
+  });
+
+  it('should render the Barchart component with loading state', () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <Barchart type="category" bars={[]} isLoading />
+      </Wrapper>,
+    );
+    expect(screen.getByText('Loading Chart Data...')).toBeInTheDocument();
+  });
+  it('should render header with title, secondary title, right title and help tooltip', async () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <Barchart
+          type="category"
+          bars={[]}
+          title="Test Title"
+          secondaryTitle="Test Secondary Title"
+          rightTitle="Test Right Title"
+          helpTooltip="Test Help Tooltip"
+        />
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Test Title')).toBeInTheDocument();
+    expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
+    expect(screen.getByText('Test Right Title')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByLabelText('Test Help Tooltip')).toBeInTheDocument();
+    });
   });
 });

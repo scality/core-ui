@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import Barchart, {
   BarchartProps,
   BarchartSortFn,
@@ -10,6 +10,7 @@ import { Text } from '../../src/lib/components/text/Text.component';
 import { Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
 type Story = StoryObj<typeof Barchart>;
 
@@ -588,6 +589,103 @@ export const TimeTypeWithCustomTooltip: Story = {
         }}
         bars={timeData7Days}
         tooltip={customTooltip}
+      />
+    );
+  },
+};
+
+export const WithHeader: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 9],
+          ['category2', 7],
+          ['category3', 10],
+          ['category4', 16],
+          ['category5', 12],
+          ['category6', 11],
+          ['category7', 8],
+        ],
+        color: theme.statusHealthy,
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 0],
+          ['category2', 3],
+          ['category3', 1],
+          ['category4', 1],
+          ['category5', 0],
+          ['category6', 2],
+          ['category7', 0],
+        ],
+        color: theme.statusCritical,
+      },
+    ] as const;
+    return (
+      <Barchart
+        type="category"
+        bars={exampleData}
+        title="Barchart"
+        secondaryTitle="Secondary Title"
+        helpTooltip="Help Tooltip"
+        rightTitle={<Text>Right Title</Text>}
+      />
+    );
+  },
+};
+const exampleData = [
+  {
+    label: 'Success',
+    data: [
+      ['category1', 10],
+      ['category2', 20],
+      ['category3', 30],
+    ],
+    color: 'blue',
+  },
+  {
+    label: 'Failed',
+    data: [
+      ['category1', 10],
+      ['category2', 20],
+      ['category3', 30],
+    ],
+    color: 'red',
+  },
+] as const;
+export const Loading: Story = {
+  render: () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState<
+      BarchartProps<typeof exampleData>['bars'] | undefined
+    >(undefined);
+
+    return (
+      <Barchart
+        type="category"
+        title="Loading BarChart"
+        helpTooltip="Click on the button to load or unload data"
+        secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
+        rightTitle={
+          <Button
+            label={isLoading ? 'Load data' : 'Fake loading data'}
+            onClick={() => {
+              setIsLoading(!isLoading);
+              if (isLoading) {
+                setData(exampleData);
+              } else {
+                setData(undefined);
+              }
+            }}
+          />
+        }
+        bars={data || []}
+        isLoading={isLoading}
+        height={200}
       />
     );
   },
