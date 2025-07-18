@@ -1,19 +1,22 @@
+import { useState } from 'react';
 import {
   Bar,
   BarChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
+  TooltipContentProps,
   XAxis,
   YAxis,
 } from 'recharts';
-import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-import { spacing } from '../../spacing';
 import styled, { useTheme } from 'styled-components';
+import { spacing } from '../../spacing';
+import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
   getMaxBarValue,
+  renderTooltipContent,
   UnitRange,
 } from './utils';
 
@@ -36,17 +39,21 @@ export type BarchartBars = readonly {
   readonly color: string;
 }[];
 
+export type BarchartTooltipFn<T extends BarchartBars> = (currentPoint: {
+  category: string | number;
+  values: { label: T[number]['label']; value: number; isHovered: boolean }[];
+}) => React.ReactNode;
+
+export type BarchartSortFn<T extends BarchartBars> = (
+  pointA: Record<T[number]['label'], number> & { category: string | number },
+  pointB: Record<T[number]['label'], number> & { category: string | number },
+) => 1 | -1 | 0;
+
 export type BarchartProps<T extends BarchartBars> = {
   type: 'category' | TimeType;
   bars: T;
-  tooltip?: (currentPoint: {
-    key: string | number;
-    values: { label: string; value: number; isHovered: boolean }[];
-  }) => React.ReactNode;
-  defaultSort?: (
-    pointA: Record<T[number]['label'], number> & { category: string | number },
-    pointB: Record<T[number]['label'], number> & { category: string | number },
-  ) => 1 | -1 | 0;
+  tooltip?: BarchartTooltipFn<T>;
+  defaultSort?: BarchartSortFn<T>;
   unitRange?: UnitRange;
   helpTooltip?: string;
   stacked?: boolean;
@@ -112,16 +119,9 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
   }
 `;
 
-const Barchart = <
-  T extends readonly {
-    readonly label: string;
-    readonly data: readonly (readonly [number | string, number | string])[];
-    readonly color: string;
-  }[],
->(
-  props: BarchartProps<T>,
-) => {
+const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
+  const [hoveredValue, setHoveredValue] = useState<string | undefined>();
 
   const {
     height = 200,
@@ -130,6 +130,7 @@ const Barchart = <
     unitRange,
     stacked,
     defaultSort,
+    tooltip,
   } = props;
 
   const { data, rechartsBars } = formatPrometheusDataToChartData(
@@ -146,7 +147,13 @@ const Barchart = <
 
   return (
     <StyledResponsiveContainer width="100%" height={height}>
-      <BarChart data={rechartsData} accessibilityLayer>
+      <BarChart
+        data={rechartsData}
+        accessibilityLayer
+        style={{
+          backgroundColor: theme.backgroundLevel1,
+        }}
+      >
         {rechartsBars.map((bar) => (
           <Bar
             key={bar.dataKey}
@@ -154,13 +161,14 @@ const Barchart = <
             fill={bar.fill}
             minPointSize={3}
             stackId={stacked ? 'stacked' : undefined}
+            onMouseOver={() => setHoveredValue(bar.dataKey)}
+            onMouseLeave={() => setHoveredValue(undefined)}
           />
         ))}
 
         <YAxis
           tickCount={1}
-          // Add a non-breaking space between the unit and the value
-          unit={`\u00A0${unitLabel}`}
+          unit={` ${unitLabel}`}
           domain={[0, roundReferenceValue]}
           tickFormatter={(value) => value.toFixed(0)}
           axisLine={false}
@@ -173,6 +181,7 @@ const Barchart = <
           }}
           orientation="right"
         />
+
         <ReferenceLine y={roundReferenceValue} fill={theme.textSecondary} />
         <XAxis
           dataKey="category"
@@ -187,7 +196,13 @@ const Barchart = <
             stroke: theme.textSecondary,
           }}
         />
-        <Tooltip />
+
+        <Tooltip
+          content={(props: TooltipContentProps<number, string>) =>
+            renderTooltipContent(props, tooltip, hoveredValue)
+          }
+          cursor={false}
+        />
       </BarChart>
     </StyledResponsiveContainer>
   );

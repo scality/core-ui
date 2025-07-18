@@ -2,8 +2,13 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Barchart, {
   BarchartProps,
+  BarchartSortFn,
+  BarchartTooltipFn,
 } from '../../src/lib/components/barchartv2/Barchart.component';
-
+import { useTheme } from 'styled-components';
+import { Text } from '../../src/lib/components/text/Text.component';
+import { Stack, Wrap } from '../../src/lib/spacing';
+import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
 
 type Story = StoryObj<typeof Barchart>;
@@ -23,29 +28,29 @@ const meta: Meta<typeof Barchart> = {
 
 export default meta;
 
-const exampleData = [
-  {
-    label: 'Success',
-    data: [
-      ['category1', 2],
-      ['category2', 4],
-      ['category3', 6],
-    ],
-    color: 'green',
-  },
-  {
-    label: 'Failed',
-    data: [
-      ['category1', 8],
-      ['category2', 10],
-      ['category3', 12],
-    ],
-    color: 'red',
-  },
-] as const;
-
 export const Playground: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 2],
+          ['category2', 4],
+          ['category3', 6],
+        ],
+        color: theme.statusHealthy,
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 8],
+          ['category2', 10],
+          ['category3', 12],
+        ],
+        color: theme.statusCritical,
+      },
+    ] as const;
     return <Barchart type="category" bars={exampleData} />;
   },
 };
@@ -281,27 +286,6 @@ export const TimeLast24Hours: Story = {
   },
 };
 
-const capacityData = [
-  {
-    label: 'Free',
-    data: [
-      ['category1', 2000000],
-      ['category2', 4000000],
-      ['category3', 6000000],
-    ],
-    color: 'blue',
-  },
-  {
-    label: 'Used',
-    data: [
-      ['category1', 8000000],
-      ['category2', 10000000],
-      ['category3', 12000000],
-    ],
-    color: 'lightblue',
-  },
-] as const;
-
 const categoryDataWithMissingData = [
   {
     label: 'Free',
@@ -379,42 +363,6 @@ export const CapacityWithUnitRange: Story = {
   },
 };
 
-const testUnitRange: BarchartProps<typeof testBars>['unitRange'] = [
-  {
-    threshold: 1000,
-    label: 'kB',
-  },
-  {
-    threshold: 0,
-    label: 'B',
-  },
-];
-const testBars: BarchartProps<
-  {
-    label: 'Success';
-    data: [string, number][];
-    color: string;
-  }[]
->['bars'] = [
-  {
-    label: 'Success',
-    data: [
-      ['category1', 500],
-      ['category2', 560],
-      ['category3', 640],
-    ],
-    color: 'green',
-  },
-];
-
-export const CategoryWithUnitRange: Story = {
-  render: () => {
-    return (
-      <Barchart type="category" bars={testBars} unitRange={testUnitRange} />
-    );
-  },
-};
-
 const stackedData: BarchartProps<
   {
     label: 'Success' | 'Failed';
@@ -448,39 +396,198 @@ export const Stacked: Story = {
   },
 };
 
-const defaultSortData = [
-  {
-    label: 'Success',
-    data: [
-      ['category1', 25],
-      ['category2', 72],
-      ['category3', 52],
-    ],
-    color: 'blue',
-  },
-  {
-    label: 'Failed',
-    data: [
-      ['category1', 8],
-      ['category2', 10],
-      ['category3', 25],
-    ],
-    color: 'lightblue',
-  },
-] as const;
-
 export const DefaultSort: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const defaultSortData = [
+      {
+        label: 'Success',
+        data: [
+          ['AZ', 15],
+          ['BB', 10],
+          ['CC', 25],
+          ['DD', 18],
+          ['AA', 22],
+          ['EE', 15],
+        ],
+        color: theme.statusHealthy,
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['AZ', 8],
+          ['BB', 1],
+          ['CC', 3],
+          ['DD', 1],
+          ['AA', 5],
+          ['EE', 5],
+        ],
+        color: theme.statusCritical,
+      },
+    ] as const;
+    const customSort: BarchartSortFn<typeof defaultSortData> = (
+      pointA,
+      pointB,
+    ) => {
+      const totalA = pointA.Success + pointA.Failed;
+      const totalB = pointB.Success + pointB.Failed;
+      return totalA - totalB > 0 ? -1 : totalA - totalB < 0 ? 1 : 0; // Descending order
+    };
     return (
       <Barchart
         type="category"
+        stacked
         bars={defaultSortData}
-        defaultSort={(pointA, pointB) => {
-          const valueA = pointA.Failed;
-          const valueB = pointB['Success'];
-          const diff = valueB - valueA;
-          return diff > 0 ? 1 : diff < 0 ? -1 : 0;
+        defaultSort={customSort}
+      />
+    );
+  },
+};
+
+export const WithCustomTooltip: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 2],
+          ['category2', 4],
+          ['category3', 6],
+        ],
+        color: theme.statusHealthy,
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 8],
+          ['category2', 10],
+          ['category3', 12],
+        ],
+        color: theme.statusCritical,
+      },
+    ] as const;
+    const customTooltip: BarchartTooltipFn<typeof exampleData> = (pointA) => {
+      return (
+        <Stack
+          direction="vertical"
+          gap="r4"
+          style={{
+            width: '150px',
+            backgroundColor: 'black',
+            padding: '10px',
+            borderRadius: '10px',
+            color: 'white',
+          }}
+        >
+          <Text style={{ textAlign: 'center', color: 'white' }}>
+            {pointA.category}
+          </Text>
+          {pointA.values.map((point) => (
+            <Text
+              key={point.label}
+              isEmphazed={point.isHovered}
+              style={{
+                color: point.isHovered ? 'yellow' : 'white',
+              }}
+            >
+              <Wrap>
+                <span>{point.label}:</span>
+                <span>{point.value}</span>
+              </Wrap>
+            </Text>
+          ))}
+        </Stack>
+      );
+    };
+    return (
+      <Stack direction="vertical" gap="r16">
+        <Text variant="Large">External Tooltip & Sort Functions</Text>
+        <Text variant="Basic" color="textSecondary">
+          Tooltip and sort functions defined outside with full type safety
+        </Text>
+        <Barchart
+          type="category"
+          bars={exampleData}
+          tooltip={customTooltip}
+          height={300}
+        />
+      </Stack>
+    );
+  },
+};
+
+export const TimeTypeWithCustomTooltip: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const timeData7Days = [
+      {
+        label: 'Success',
+        data: [
+          // 7 days ago - aligned to the exact timestamp that generateTimestamps will create
+          [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
+          // 6 days ago
+          [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
+          // 5 days ago
+          [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
+          // 4 days ago
+          [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
+          // 3 days ago
+          [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
+          // 2 days ago
+          [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
+          // 1 day ago
+          [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
+        ],
+        color: theme.statusHealthy,
+      },
+      {
+        label: 'Failed',
+        data: [
+          // 7 days ago
+          [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
+          // 6 days ago
+          [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
+          // 5 days ago
+          [Date.now() - 5 * 24 * 60 * 60 * 1000, 2],
+          // 4 days ago
+          [Date.now() - 4 * 24 * 60 * 60 * 1000, 12],
+          // 3 days ago
+          [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
+          // 2 days ago
+          [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
+          // 1 day ago
+          [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
+        ],
+        color: theme.statusCritical,
+      },
+    ] as const;
+    const customTooltip: BarchartTooltipFn<typeof timeData7Days> = (pointA) => {
+      return (
+        <Stack direction="vertical" gap="r4">
+          <Text variant="Large">{pointA.category}</Text>
+          {pointA.values.map((point) => {
+            return (
+              <Text key={point.label}>
+                {point.label}: {point.value}
+              </Text>
+            );
+          })}
+        </Stack>
+      );
+    };
+    return (
+      <Barchart
+        type={{
+          type: 'time',
+          timeRange: {
+            startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
+            endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+            interval: 24 * 60 * 60 * 1000,
+          },
         }}
+        bars={timeData7Days}
+        tooltip={customTooltip}
       />
     );
   },

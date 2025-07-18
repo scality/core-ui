@@ -1,6 +1,11 @@
-import { BarchartProps, BarchartBars } from './Barchart.component';
+import {
+  BarchartProps,
+  BarchartBars,
+  BarchartTooltipFn,
+} from './Barchart.component';
 
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
+import { TooltipContentProps } from 'recharts';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -377,4 +382,33 @@ export const sortStackedBars = (
   barAverages.sort((a, b) => b.average - a.average);
   // Remove the average property and keep only the bar data
   return barAverages.map(({ average, ...bar }) => bar);
+};
+
+export const renderTooltipContent = <T extends BarchartBars>(
+  props: TooltipContentProps<number, string>,
+  tooltip: BarchartTooltipFn<T> | undefined,
+  hoveredValue: string | undefined,
+) => {
+  const { active, payload, label } = props;
+
+  if (!active || !payload || !payload.length || !tooltip) {
+    return null;
+  }
+
+  const tooltipValues: {
+    label: T[number]['label'];
+    value: number;
+    isHovered: boolean;
+  }[] = payload.map((item) => ({
+    label: item.name,
+    value: item.value,
+    isHovered: item.name === hoveredValue,
+  }));
+
+  const currentPoint = {
+    category: label as string | number,
+    values: tooltipValues,
+  };
+
+  return tooltip(currentPoint);
 };
