@@ -3,6 +3,7 @@ import {
   formatPrometheusDataToChartData,
   getMaxBarValue,
   getRoundReferenceValue,
+  renderTooltipContent,
   sortStackedBars,
   UnitRange,
 } from './utils';
@@ -406,5 +407,52 @@ describe('sortStackedBars', () => {
       { dataKey: 'bar2', fill: 'red' },
       { dataKey: 'bar3', fill: 'green' },
     ]);
+  });
+});
+
+describe('renderTooltipContent', () => {
+  it('should return null when active is false', () => {
+    const props = {
+      active: false,
+      payload: [],
+      label: 'test',
+      coordinate: { x: 0, y: 0 },
+      accessibilityLayer: false,
+    };
+    const result = renderTooltipContent(props, undefined, undefined);
+    expect(result).toBeNull();
+  });
+
+  it('should return null when tooltip is undefined', () => {
+    const props = {
+      active: true,
+      payload: [{ name: 'test', value: 10 }],
+      label: 'test',
+      coordinate: { x: 0, y: 0 },
+      accessibilityLayer: false,
+    };
+    const result = renderTooltipContent(props, undefined, 'test');
+    expect(result).toBeNull();
+  });
+  it('should call tooltip with the correct props', () => {
+    const tooltip = jest.fn();
+    const props = {
+      active: true,
+      payload: [
+        { name: 'Success', value: 10 },
+        { name: 'Failed', value: 20 },
+      ],
+      label: 'Test',
+      coordinate: { x: 0, y: 0 },
+      accessibilityLayer: false,
+    };
+    const result = renderTooltipContent(props, tooltip, 'Success');
+    expect(tooltip).toHaveBeenCalledWith({
+      category: 'Test',
+      values: [
+        { label: 'Success', value: 10, isHovered: true },
+        { label: 'Failed', value: 20, isHovered: false },
+      ],
+    });
   });
 });

@@ -391,7 +391,7 @@ export const renderTooltipContent = <T extends BarchartBars>(
 ) => {
   const { active, payload, label } = props;
 
-  if (!active || !payload || !payload.length || !tooltip) {
+  if (!active || !tooltip) {
     return null;
   }
 
