@@ -16,3 +16,8 @@ export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThem
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';
 export { Accordion } from './components/accordion/Accordion.component';
+export {
+  Barchart,
+  BarchartSortFn,
+  BarchartTooltipFn,
+} from './components/barchartv2/Barchart.component';

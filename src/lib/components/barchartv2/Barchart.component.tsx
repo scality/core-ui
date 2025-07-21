@@ -12,17 +12,20 @@ import {
 import styled, { useTheme } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-import {
-  computeUnitLabelAndRoundReferenceValue,
-  formatPrometheusDataToChartData,
-  getMaxBarValue,
-  renderTooltipContent,
-  UnitRange,
-} from './utils';
+import { renderTooltipContent, useChartData, UnitRange } from './utils';
 import { Text } from '../text/Text.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
+
+const CHART_CONSTANTS = {
+  TICK_WIDTH_OFFSET: 5,
+  MAX_BAR_SIZE: 12,
+  MIN_POINT_SIZE: 3,
+  DEFAULT_HEIGHT: 200,
+} as const;
+
+/* ---------------------------------- TYPE ---------------------------------- */
 
 export type TimeType = {
   type: 'time';
@@ -68,9 +71,6 @@ export type BarchartProps<T extends BarchartBars> = {
   isLoading?: boolean;
 };
 
-const CHART_CONSTANTS = {
-  TICK_WIDTH_OFFSET: 5,
-} as const;
 interface CustomTickProps {
   x: number;
   y: number;
@@ -80,6 +80,8 @@ interface CustomTickProps {
   visibleTicksCount: number;
   width: number;
 }
+
+/* ---------------------------------- COMPONENTS ---------------------------------- */
 
 const CustomTick = ({
   x,
@@ -167,12 +169,29 @@ const ChartContainer = styled(Stack)`
   border-radius: ${spacing.r8};
 `;
 
-const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
+const Loading = ({ height }: { height: number }) => {
+  return (
+    <Box
+      height={height}
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+      }}
+    >
+      <Loader size="larger" children={<Text>Loading Chart Data...</Text>} />
+    </Box>
+  );
+};
+
+/* ---------------------------------- MAIN COMPONENT ---------------------------------- */
+
+export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
   const [hoveredValue, setHoveredValue] = useState<string | undefined>();
 
   const {
-    height = 200,
+    height = CHART_CONSTANTS.DEFAULT_HEIGHT,
     bars,
     type = 'category',
     unitRange,
@@ -186,17 +205,8 @@ const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     isLoading,
   } = props;
 
-  const { data, rechartsBars } = formatPrometheusDataToChartData(
-    bars,
-    type,
-    stacked,
-    defaultSort,
-  );
-
-  const maxValue = getMaxBarValue(data, stacked);
-
-  const { unitLabel, roundReferenceValue, rechartsData } =
-    computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
+  const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
+    useChartData(bars, type, stacked, defaultSort, unitRange);
 
   return (
     <ChartContainer direction="vertical" gap="r16">
@@ -207,25 +217,20 @@ const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         rightTitle={rightTitle}
       />
       {isLoading ? (
-        <Box
-          height={height}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            display: 'flex',
-          }}
-        >
-          <Loader size="larger" children={<Text>Loading Chart Data...</Text>} />
-        </Box>
+        <Loading height={height} />
       ) : (
         <StyledResponsiveContainer width="100%" height={height}>
-          <BarChart data={rechartsData} accessibilityLayer maxBarSize={12}>
+          <BarChart
+            data={rechartsData}
+            accessibilityLayer
+            maxBarSize={CHART_CONSTANTS.MAX_BAR_SIZE}
+          >
             {rechartsBars.map((bar) => (
               <Bar
                 key={bar.dataKey}
                 dataKey={bar.dataKey}
                 fill={bar.fill}
-                minPointSize={3}
+                minPointSize={CHART_CONSTANTS.MIN_POINT_SIZE}
                 stackId={stacked ? 'stacked' : undefined}
                 onMouseOver={() => setHoveredValue(bar.dataKey)}
                 onMouseLeave={() => setHoveredValue(undefined)}
@@ -275,5 +280,3 @@ const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     </ChartContainer>
   );
 };
-
-export default Barchart;

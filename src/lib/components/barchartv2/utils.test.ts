@@ -446,7 +446,7 @@ describe('renderTooltipContent', () => {
       coordinate: { x: 0, y: 0 },
       accessibilityLayer: false,
     };
-    const result = renderTooltipContent(props, tooltip, 'Success');
+    renderTooltipContent(props, tooltip, 'Success');
     expect(tooltip).toHaveBeenCalledWith({
       category: 'Test',
       values: [

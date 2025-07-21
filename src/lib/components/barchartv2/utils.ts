@@ -412,3 +412,30 @@ export const renderTooltipContent = <T extends BarchartBars>(
 
   return tooltip(currentPoint);
 };
+
+export const useChartData = <T extends BarchartBars>(
+  bars: T,
+  type: BarchartProps<T>['type'],
+  stacked?: boolean,
+  defaultSort?: BarchartProps<T>['defaultSort'],
+  unitRange?: UnitRange,
+) => {
+  const { data, rechartsBars } = formatPrometheusDataToChartData(
+    bars,
+    type,
+    stacked,
+    defaultSort,
+  );
+
+  const maxValue = getMaxBarValue(data, stacked);
+
+  const { unitLabel, roundReferenceValue, rechartsData } =
+    computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
+
+  return {
+    rechartsBars,
+    unitLabel,
+    roundReferenceValue,
+    rechartsData,
+  };
+};

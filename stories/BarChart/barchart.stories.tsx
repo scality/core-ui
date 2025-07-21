@@ -1,16 +1,17 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import Barchart, {
+import { useTheme } from 'styled-components';
+import {
+  Barchart,
   BarchartProps,
   BarchartSortFn,
   BarchartTooltipFn,
 } from '../../src/lib/components/barchartv2/Barchart.component';
-import { useTheme } from 'styled-components';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
 import { Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
-import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 
 type Story = StoryObj<typeof Barchart>;
 
