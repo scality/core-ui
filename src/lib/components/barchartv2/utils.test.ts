@@ -1,3 +1,4 @@
+import { coreUIAvailableThemes } from '../../style/theme';
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
@@ -7,6 +8,8 @@ import {
   sortStackedBars,
   UnitRange,
 } from './utils';
+
+const mockTheme = coreUIAvailableThemes.darkRebrand;
 
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values', () => {
@@ -74,7 +77,11 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, 'category');
+      const result = formatPrometheusDataToChartData(
+        bars,
+        'category',
+        mockTheme,
+      );
 
       expect(result.data).toEqual([
         { category: 'category1', Success: 10, Failed: 5 },
@@ -100,14 +107,19 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, {
-        type: 'time',
-        timeRange: {
-          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-          endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
-          interval: 24 * 60 * 60 * 1000, // 1 day
+      const result = formatPrometheusDataToChartData(
+        bars,
+        {
+          type: 'time',
+          timeRange: {
+            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+            endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+            interval: 24 * 60 * 60 * 1000, // 1 day
+          },
         },
-      });
+        mockTheme,
+        false,
+      );
 
       expect(result.data).toEqual([
         { category: 'Fri05Jul', Success: 10 },
@@ -128,14 +140,19 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, {
-        type: 'time',
-        timeRange: {
-          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-          endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
-          interval: 24 * 60 * 60 * 1000, // 1 day
+      const result = formatPrometheusDataToChartData(
+        bars,
+        {
+          type: 'time',
+          timeRange: {
+            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+            endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+            interval: 24 * 60 * 60 * 1000, // 1 day
+          },
         },
-      });
+        mockTheme,
+        false,
+      );
 
       expect(result.data).toEqual([
         { category: 'Fri05Jul', Success: 10 },
@@ -156,14 +173,19 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, {
-        type: 'time',
-        timeRange: {
-          startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
-          endTimestamp: new Date('2024-07-05T11:00:00').getTime(),
-          interval: 60 * 60 * 1000, // 1 hour
+      const result = formatPrometheusDataToChartData(
+        bars,
+        {
+          type: 'time',
+          timeRange: {
+            startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
+            endTimestamp: new Date('2024-07-05T11:00:00').getTime(),
+            interval: 60 * 60 * 1000, // 1 hour
+          },
         },
-      });
+        mockTheme,
+        false,
+      );
 
       expect(result.data).toEqual([
         { category: '10:00', Success: 10 },
@@ -184,14 +206,19 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, {
-        type: 'time',
-        timeRange: {
-          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-          endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
-          interval: 24 * 60 * 60 * 1000, // 1 day
+      const result = formatPrometheusDataToChartData(
+        bars,
+        {
+          type: 'time',
+          timeRange: {
+            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+            endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+            interval: 24 * 60 * 60 * 1000, // 1 day
+          },
         },
-      });
+        mockTheme,
+        false,
+      );
 
       expect(result.data).toEqual([
         { category: 'Fri05Jul', Success: 25 }, // Last value for July 5th
@@ -213,14 +240,19 @@ describe('formatPrometheusDataToChartData', () => {
         },
       ];
 
-      const result = formatPrometheusDataToChartData(bars, {
-        type: 'time',
-        timeRange: {
-          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-          endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
-          interval: 24 * 60 * 60 * 1000, // 1 day
+      const result = formatPrometheusDataToChartData(
+        bars,
+        {
+          type: 'time',
+          timeRange: {
+            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+            endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+            interval: 24 * 60 * 60 * 1000, // 1 day
+          },
         },
-      });
+        mockTheme,
+        false,
+      );
 
       // Should be in chronological order regardless of input order
       expect(result.data).toEqual([
@@ -262,7 +294,12 @@ describe('formatPrometheusDataToChartData', () => {
     ] as const;
     const type = 'category';
     it('should sort bars by average values in descending order when stacked is true', () => {
-      const result = formatPrometheusDataToChartData(bars, type, true);
+      const result = formatPrometheusDataToChartData(
+        bars,
+        type,
+        mockTheme,
+        true,
+      );
 
       // Bars should be sorted by average in descending order (largest first)
       expect(result.rechartsBars[0].dataKey).toBe('Large Bar'); // Average: 60
@@ -271,7 +308,12 @@ describe('formatPrometheusDataToChartData', () => {
     });
 
     it('should not sort bars when stacked is false or undefined', () => {
-      const result = formatPrometheusDataToChartData(bars, type, false);
+      const result = formatPrometheusDataToChartData(
+        bars,
+        type,
+        mockTheme,
+        false,
+      );
 
       // Bars should maintain original order
       expect(result.rechartsBars[0].dataKey).toBe('Small Bar');
@@ -297,6 +339,7 @@ describe('formatPrometheusDataToChartData', () => {
     const result = formatPrometheusDataToChartData(
       bars,
       type,
+      mockTheme,
       false,
       (pointA, pointB) => {
         return pointA.Success - pointB.Success > 0 ? 1 : -1;
@@ -308,6 +351,24 @@ describe('formatPrometheusDataToChartData', () => {
     expect(data[1].category).toBe('category3');
     expect(data[2].category).toBe('category4');
     expect(data[3].category).toBe('category1');
+  });
+  it('should use status colors when colorSet is status', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [['category1', 50]],
+        color: '#000000',
+      },
+    ] as const;
+    const result = formatPrometheusDataToChartData(
+      bars,
+      'category',
+      mockTheme,
+      false,
+      undefined,
+      'status',
+    );
+    expect(result.rechartsBars[0].fill).toBe('#000000');
   });
 });
 
