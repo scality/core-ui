@@ -6,6 +6,18 @@ import {
 
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
+import { useTheme } from 'styled-components';
+import { CoreUITheme } from '../../style/theme';
+
+const BarchartDefaultColors = [
+  '#A14FBF',
+  '#BE9A40',
+  '#4BE4E2',
+  '#245A83',
+  '#E3FF73',
+  '#BE2543',
+  '#FD8144',
+];
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -144,16 +156,30 @@ const findRangeForTimestamp = (
 export const formatPrometheusDataToChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
+  theme: CoreUITheme,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
+  colorSet?: 'default' | 'status',
 ): {
   data: { [key: string]: string | number }[];
   rechartsBars: { dataKey: string; fill: string }[];
 } => {
-  let rechartsBars = bars.map((bar) => ({
-    dataKey: bar.label,
-    fill: bar.color,
-  }));
+  let rechartsBars = bars.map((bar, index) => {
+    let fill = bar.color;
+
+    if (!fill && colorSet === 'status') {
+      if (bar.label.match(/Success|Healthy/gi)) fill = theme.statusHealthy;
+      else if (bar.label.match(/Fail|Critical/gi)) fill = theme.statusCritical;
+      else if (bar.label.match(/Warning/gi)) fill = theme.statusWarning;
+    }
+
+    if (!fill) fill = BarchartDefaultColors[index];
+
+    return {
+      dataKey: bar.label,
+      fill,
+    };
+  });
 
   // Create a map to collect all unique categories/ranges
   const categoryMap = new Map<
@@ -419,12 +445,16 @@ export const useChartData = <T extends BarchartBars>(
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
+  colorSet?: 'default' | 'status',
 ) => {
+  const theme = useTheme();
   const { data, rechartsBars } = formatPrometheusDataToChartData(
     bars,
     type,
+    theme,
     stacked,
     defaultSort,
+    colorSet,
   );
 
   const maxValue = getMaxBarValue(data, stacked);

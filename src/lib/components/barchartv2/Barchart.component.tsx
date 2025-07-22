@@ -43,7 +43,7 @@ export type Point = {
 export type BarchartBars = readonly {
   readonly label: string;
   readonly data: readonly (readonly [number | string, number | string])[];
-  readonly color: string;
+  readonly color?: string;
 }[];
 
 export type BarchartTooltipFn<T extends BarchartBars> = (currentPoint: {
@@ -69,6 +69,7 @@ export type BarchartProps<T extends BarchartBars> = {
   rightTitle?: React.ReactNode;
   height?: number;
   isLoading?: boolean;
+  colorSet?: 'default' | 'status';
 };
 
 interface CustomTickProps {
@@ -203,10 +204,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     helpTooltip,
     rightTitle,
     isLoading,
+    colorSet,
   } = props;
 
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
-    useChartData(bars, type, stacked, defaultSort, unitRange);
+    useChartData(bars, type, stacked, defaultSort, unitRange, colorSet);
 
   return (
     <ChartContainer direction="vertical" gap="r16">

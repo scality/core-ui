@@ -691,3 +691,42 @@ export const Loading: Story = {
     );
   },
 };
+
+export const StatusColors: Story = {
+  render: () => {
+    const statusData = [
+      {
+        label: 'Success Rate',
+        data: [
+          ['API', 95],
+          ['Database', 87],
+          ['Queue', 92],
+        ],
+      },
+      {
+        label: 'Failed Requests',
+        data: [
+          ['API', 5],
+          ['Database', 13],
+          ['Queue', 8],
+        ],
+      },
+      {
+        label: 'Warning Events',
+        data: [
+          ['API', 2],
+          ['Database', 4],
+          ['Queue', 1],
+        ],
+      },
+    ] as const;
+    return (
+      <Barchart
+        type="category"
+        bars={statusData}
+        colorSet="status"
+        title="System Health Metrics"
+      />
+    );
+  },
+};
