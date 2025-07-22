@@ -1,4 +1,3 @@
-import { coreUIAvailableThemes } from '../../style/theme';
 import {
   computeUnitLabelAndRoundReferenceValue,
   formatPrometheusDataToChartData,
@@ -8,8 +7,6 @@ import {
   sortStackedBars,
   UnitRange,
 } from './utils';
-
-const mockTheme = coreUIAvailableThemes.darkRebrand;
 
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values', () => {
@@ -65,7 +62,6 @@ describe('formatPrometheusDataToChartData', () => {
             ['category1', 10],
             ['category2', 20],
           ] as [string, number][],
-          color: 'green',
         },
         {
           label: 'Failed',
@@ -73,23 +69,21 @@ describe('formatPrometheusDataToChartData', () => {
             ['category1', 5],
             ['category2', 15],
           ] as [string, number][],
-          color: 'red',
         },
       ];
 
-      const result = formatPrometheusDataToChartData(
-        bars,
-        'category',
-        mockTheme,
-      );
+      const result = formatPrometheusDataToChartData(bars, 'category', {
+        Success: 'lineColor1',
+        Failed: 'lineColor2',
+      });
 
       expect(result.data).toEqual([
         { category: 'category1', Success: 10, Failed: 5 },
         { category: 'category2', Success: 20, Failed: 15 },
       ]);
       expect(result.rechartsBars).toEqual([
-        { dataKey: 'Success', fill: 'green' },
-        { dataKey: 'Failed', fill: 'red' },
+        { dataKey: 'Success', fill: 'lineColor1' },
+        { dataKey: 'Failed', fill: 'lineColor2' },
       ]);
     });
   });
@@ -103,7 +97,6 @@ describe('formatPrometheusDataToChartData', () => {
             [new Date('2024-07-05T00:00:00').getTime(), 10],
             [new Date('2024-07-06T00:00:00').getTime(), 20],
           ] as [number, number][],
-          color: 'green',
         },
       ];
 
@@ -117,7 +110,10 @@ describe('formatPrometheusDataToChartData', () => {
             interval: 24 * 60 * 60 * 1000, // 1 day
           },
         },
-        mockTheme,
+        {
+          Success: 'lineColor1',
+          Failed: 'lineColor2',
+        },
         false,
       );
 
@@ -136,7 +132,6 @@ describe('formatPrometheusDataToChartData', () => {
             // Missing July 6th
             [new Date('2024-07-07T00:00:00').getTime(), 30],
           ] as [number, number][],
-          color: 'green',
         },
       ];
 
@@ -150,7 +145,9 @@ describe('formatPrometheusDataToChartData', () => {
             interval: 24 * 60 * 60 * 1000, // 1 day
           },
         },
-        mockTheme,
+        {
+          Success: 'lineColor1',
+        },
         false,
       );
 
@@ -169,7 +166,6 @@ describe('formatPrometheusDataToChartData', () => {
             [new Date('2024-07-05T10:00:00').getTime(), 10],
             [new Date('2024-07-05T11:00:00').getTime(), 20],
           ] as [number, number][],
-          color: 'green',
         },
       ];
 
@@ -183,7 +179,9 @@ describe('formatPrometheusDataToChartData', () => {
             interval: 60 * 60 * 1000, // 1 hour
           },
         },
-        mockTheme,
+        {
+          Success: 'lineColor1',
+        },
         false,
       );
 
@@ -202,7 +200,6 @@ describe('formatPrometheusDataToChartData', () => {
             [new Date('2024-07-05T14:45:00').getTime(), 25], // 2:45 PM (should overwrite 8:30 AM)
             [new Date('2024-07-06T09:15:00').getTime(), 15], // Next day
           ] as [number, number][],
-          color: 'green',
         },
       ];
 
@@ -216,7 +213,9 @@ describe('formatPrometheusDataToChartData', () => {
             interval: 24 * 60 * 60 * 1000, // 1 day
           },
         },
-        mockTheme,
+        {
+          Success: 'lineColor1',
+        },
         false,
       );
 
@@ -236,7 +235,6 @@ describe('formatPrometheusDataToChartData', () => {
             [new Date('2024-07-05T08:00:00').getTime(), 10], // July 5th (earliest)
             [new Date('2024-07-06T14:00:00').getTime(), 20], // July 6th (middle)
           ] as [number, number][],
-          color: 'green',
         },
       ];
 
@@ -250,7 +248,9 @@ describe('formatPrometheusDataToChartData', () => {
             interval: 24 * 60 * 60 * 1000, // 1 day
           },
         },
-        mockTheme,
+        {
+          Success: 'lineColor1',
+        },
         false,
       );
 
@@ -271,7 +271,6 @@ describe('formatPrometheusDataToChartData', () => {
           ['category2', 10],
           ['category3', 15],
         ],
-        color: 'blue',
       },
       {
         label: 'Large Bar',
@@ -280,7 +279,6 @@ describe('formatPrometheusDataToChartData', () => {
           ['category2', 60],
           ['category3', 70],
         ],
-        color: 'red',
       },
       {
         label: 'Medium Bar',
@@ -289,7 +287,6 @@ describe('formatPrometheusDataToChartData', () => {
           ['category2', 25],
           ['category3', 30],
         ],
-        color: 'green',
       },
     ] as const;
     const type = 'category';
@@ -297,7 +294,11 @@ describe('formatPrometheusDataToChartData', () => {
       const result = formatPrometheusDataToChartData(
         bars,
         type,
-        mockTheme,
+        {
+          'Small Bar': 'lineColor1',
+          'Large Bar': 'lineColor2',
+          'Medium Bar': 'lineColor3',
+        },
         true,
       );
 
@@ -311,7 +312,11 @@ describe('formatPrometheusDataToChartData', () => {
       const result = formatPrometheusDataToChartData(
         bars,
         type,
-        mockTheme,
+        {
+          'Small Bar': 'lineColor1',
+          'Large Bar': 'lineColor2',
+          'Medium Bar': 'lineColor3',
+        },
         false,
       );
 
@@ -332,14 +337,15 @@ describe('formatPrometheusDataToChartData', () => {
           ['category3', 30],
           ['category4', 40],
         ],
-        color: 'green',
       },
     ] as const;
     const type = 'category';
     const result = formatPrometheusDataToChartData(
       bars,
       type,
-      mockTheme,
+      {
+        Success: 'lineColor1',
+      },
       false,
       (pointA, pointB) => {
         return pointA.Success - pointB.Success > 0 ? 1 : -1;
@@ -357,18 +363,18 @@ describe('formatPrometheusDataToChartData', () => {
       {
         label: 'Success',
         data: [['category1', 50]],
-        color: '#000000',
       },
     ] as const;
     const result = formatPrometheusDataToChartData(
       bars,
       'category',
-      mockTheme,
+      {
+        Success: 'lineColor1',
+      },
       false,
       undefined,
-      'status',
     );
-    expect(result.rechartsBars[0].fill).toBe('#000000');
+    expect(result.rechartsBars[0].fill).toBe('lineColor1');
   });
 });
 

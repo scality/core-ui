@@ -175,14 +175,14 @@ export const lineColor8 = '#F6B187';
 export type ChartColors = keyof typeof chartColors;
 
 export const chartColors = {
-  lineColor1: '#A14FBF',
-  lineColor2: '#BE9A40',
-  lineColor3: '#4BE4E2',
-  lineColor4: '#245A83',
-  lineColor5: '#E3FF73',
-  lineColor6: '#BE2543',
-  lineColor7: '#FD8144',
-  lineColor8: '#F6B187',
+  lineColor1,
+  lineColor2,
+  lineColor3,
+  lineColor4,
+  lineColor5,
+  lineColor6,
+  lineColor7,
+  lineColor8,
 };
 
 export const fontSize = {

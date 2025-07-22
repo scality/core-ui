@@ -54,7 +54,13 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart type="category" bars={testBars} />
+          <Barchart
+            type="category"
+            bars={testBars}
+            colorSet={{
+              Success: 'lineColor1',
+            }}
+          />
         </Wrapper>,
       );
 
@@ -76,6 +82,9 @@ describe('Barchart', () => {
               },
             }}
             bars={testTimeBars}
+            colorSet={{
+              Success: 'lineColor1',
+            }}
           />
         </Wrapper>,
       );
@@ -102,6 +111,9 @@ describe('Barchart', () => {
             }}
             // data starts on 2024-07-05
             bars={testTimeBars}
+            colorSet={{
+              Success: 'lineColor1',
+            }}
           />
         </Wrapper>,
       );
@@ -129,7 +141,7 @@ describe('Barchart', () => {
           ] as [number, number][],
           color: 'red',
         },
-      ];
+      ] as const;
 
       const type = {
         type: 'time' as const,
@@ -142,7 +154,14 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart type={type} bars={bars} />
+          <Barchart
+            type={type}
+            bars={bars}
+            colorSet={{
+              Success: 'lineColor1',
+              Failed: 'lineColor2',
+            }}
+          />
         </Wrapper>,
       );
 
@@ -183,7 +202,13 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart type={type} bars={testTimeBars} />
+          <Barchart
+            type={type}
+            bars={testTimeBars}
+            colorSet={{
+              Success: 'lineColor1',
+            }}
+          />
         </Wrapper>,
       );
       await waitFor(() => {
@@ -221,6 +246,9 @@ describe('Barchart', () => {
               },
             }}
             bars={testHourlyBars}
+            colorSet={{
+              Success: 'lineColor1',
+            }}
           />
         </Wrapper>,
       );
@@ -256,7 +284,15 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart type="category" bars={testStackedBars} stacked={true} />
+        <Barchart
+          type="category"
+          bars={testStackedBars}
+          stacked={true}
+          colorSet={{
+            Success: 'lineColor1',
+            Failed: 'lineColor2',
+          }}
+        />
       </Wrapper>,
     );
 
@@ -289,6 +325,9 @@ describe('Barchart', () => {
             const valueB = pointB.Success;
             return valueB - valueA > 0 ? 1 : valueB - valueA < 0 ? -1 : 0;
           }}
+          colorSet={{
+            Success: 'lineColor1',
+          }}
         />
       </Wrapper>,
     );
@@ -304,7 +343,14 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart type="category" bars={[]} isLoading />
+        <Barchart
+          type="category"
+          bars={[]}
+          isLoading
+          colorSet={{
+            Success: 'lineColor1',
+          }}
+        />
       </Wrapper>,
     );
     expect(screen.getByText('Loading Chart Data...')).toBeInTheDocument();
@@ -320,6 +366,9 @@ describe('Barchart', () => {
           secondaryTitle="Test Secondary Title"
           rightTitle="Test Right Title"
           helpTooltip="Test Help Tooltip"
+          colorSet={{
+            Success: 'lineColor1',
+          }}
         />
       </Wrapper>,
     );

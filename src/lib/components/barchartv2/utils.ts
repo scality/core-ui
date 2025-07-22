@@ -3,21 +3,9 @@ import {
   BarchartBars,
   BarchartTooltipFn,
 } from './Barchart.component';
-
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
-import { useTheme } from 'styled-components';
-import { CoreUITheme } from '../../style/theme';
-
-const BarchartDefaultColors = [
-  '#A14FBF',
-  '#BE9A40',
-  '#4BE4E2',
-  '#245A83',
-  '#E3FF73',
-  '#BE2543',
-  '#FD8144',
-];
+import { ChartColors } from '../../style/theme';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -156,28 +144,17 @@ const findRangeForTimestamp = (
 export const formatPrometheusDataToChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
-  theme: CoreUITheme,
+  colorSet: Record<T[number]['label'], ChartColors | (string & {})>,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
-  colorSet?: 'default' | 'status',
 ): {
   data: { [key: string]: string | number }[];
   rechartsBars: { dataKey: string; fill: string }[];
 } => {
-  let rechartsBars = bars.map((bar, index) => {
-    let fill = bar.color;
-
-    if (!fill && colorSet === 'status') {
-      if (bar.label.match(/Success|Healthy/gi)) fill = theme.statusHealthy;
-      else if (bar.label.match(/Fail|Critical/gi)) fill = theme.statusCritical;
-      else if (bar.label.match(/Warning/gi)) fill = theme.statusWarning;
-    }
-
-    if (!fill) fill = BarchartDefaultColors[index];
-
+  let rechartsBars = bars.map((bar) => {
     return {
       dataKey: bar.label,
-      fill,
+      fill: colorSet[bar.label],
     };
   });
 
@@ -298,6 +275,7 @@ export const formatPrometheusDataToChartData = <T extends BarchartBars>(
     data,
   };
 };
+
 export type UnitRange = {
   threshold: number;
   label: string;
@@ -442,19 +420,17 @@ export const renderTooltipContent = <T extends BarchartBars>(
 export const useChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
+  colorSet: Record<T[number]['label'], ChartColors | (string & {})>,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
-  colorSet?: 'default' | 'status',
 ) => {
-  const theme = useTheme();
   const { data, rechartsBars } = formatPrometheusDataToChartData(
     bars,
     type,
-    theme,
+    colorSet,
     stacked,
     defaultSort,
-    colorSet,
   );
 
   const maxValue = getMaxBarValue(data, stacked);

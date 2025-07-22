@@ -17,7 +17,7 @@ import { Text } from '../text/Text.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
-import { chartColors, ChartColors, CoreUITheme } from '../../style/theme';
+import { chartColors, ChartColors } from '../../style/theme';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,

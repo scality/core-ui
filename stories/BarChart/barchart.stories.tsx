@@ -10,7 +10,12 @@ import {
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
 import { Stack, Wrap } from '../../src/lib/spacing';
-import { CoreUITheme } from '../../src/lib/style/theme';
+import {
+  CoreUITheme,
+  lineColor1,
+  lineColor2,
+  lineColor3,
+} from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
 
 type Story = StoryObj<typeof Barchart>;
@@ -41,7 +46,6 @@ export const Playground: Story = {
           ['category2', 4],
           ['category3', 6],
         ],
-        color: theme.statusHealthy,
       },
       {
         label: 'Failed',
@@ -50,10 +54,18 @@ export const Playground: Story = {
           ['category2', 10],
           ['category3', 12],
         ],
-        color: theme.statusCritical,
       },
     ] as const;
-    return <Barchart type="category" bars={exampleData} />;
+    return (
+      <Barchart
+        type="category"
+        bars={exampleData}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
+      />
+    );
   },
 };
 
@@ -76,7 +88,6 @@ const timeData7Days = [
       // 1 day ago
       [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
     ],
-    color: 'green',
   },
   {
     label: 'Failed',
@@ -96,12 +107,12 @@ const timeData7Days = [
       // 1 day ago
       [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
     ],
-    color: 'red',
   },
 ] as const;
 
 export const Time7Days: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     return (
       <Barchart
         type={{
@@ -117,6 +128,10 @@ export const Time7Days: Story = {
           },
         }}
         bars={timeData7Days}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -124,6 +139,7 @@ export const Time7Days: Story = {
 
 export const Time7DaysSmallWidth: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     return (
       <div style={{ width: '300px' }}>
         <Barchart
@@ -140,6 +156,10 @@ export const Time7DaysSmallWidth: Story = {
             },
           }}
           bars={timeData7Days}
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+          }}
         />
       </div>
     );
@@ -162,7 +182,6 @@ const timeData7DaysWithMissingData = [
       // 1 day ago
       [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
     ],
-    color: 'green',
   },
   {
     label: 'Failed',
@@ -180,12 +199,12 @@ const timeData7DaysWithMissingData = [
       // 1 day ago
       [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
     ],
-    color: 'red',
   },
 ] as const;
 
 export const Time7DaysWithMissingData: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     return (
       <Barchart
         type={{
@@ -201,6 +220,10 @@ export const Time7DaysWithMissingData: Story = {
           },
         }}
         bars={timeData7DaysWithMissingData}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -235,7 +258,6 @@ const timeDataLast24Hours = [
       [Date.now() - 2 * 60 * 60 * 1000, 21],
       [Date.now() - 1 * 60 * 60 * 1000, 22],
     ],
-    color: 'green',
   },
   {
     label: 'Failed',
@@ -265,12 +287,12 @@ const timeDataLast24Hours = [
       [Date.now() - 2 * 60 * 60 * 1000, 2],
       [Date.now() - 1 * 60 * 60 * 1000, 1],
     ],
-    color: 'red',
   },
 ] as const;
 
 export const TimeLast24Hours: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     return (
       <Barchart
         type={{
@@ -283,6 +305,10 @@ export const TimeLast24Hours: Story = {
           },
         }}
         bars={timeDataLast24Hours}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -296,7 +322,6 @@ const categoryDataWithMissingData = [
       ['category2', 40],
       ['category4', 80],
     ],
-    color: 'blue',
   },
   {
     label: 'Used',
@@ -306,13 +331,21 @@ const categoryDataWithMissingData = [
       ['category3', 120],
       ['category4', 120],
     ],
-    color: 'lightblue',
   },
 ] as const;
 
 export const CategoryWithMissingData: Story = {
   render: () => {
-    return <Barchart type="category" bars={categoryDataWithMissingData} />;
+    return (
+      <Barchart
+        type="category"
+        bars={categoryDataWithMissingData}
+        colorSet={{
+          Free: 'lineColor1',
+          Used: 'lineColor2',
+        }}
+      />
+    );
   },
 };
 const capacityDataWithUnitRange = [
@@ -323,7 +356,6 @@ const capacityDataWithUnitRange = [
       ['category2', 4000000],
       ['category3', 6000000],
     ],
-    color: 'blue',
   },
   {
     label: 'Used',
@@ -332,12 +364,12 @@ const capacityDataWithUnitRange = [
       ['category2', 10000000],
       ['category3', 12000000],
     ],
-    color: 'lightblue',
   },
 ] as const;
 
 export const CapacityWithUnitRange: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     return (
       <Barchart
         type="category"
@@ -360,6 +392,10 @@ export const CapacityWithUnitRange: Story = {
             label: 'GiB',
           },
         ]}
+        colorSet={{
+          Free: theme.selectedActive,
+          Used: theme.infoSecondary,
+        }}
       />
     );
   },
@@ -369,7 +405,6 @@ const stackedData: BarchartProps<
   {
     label: 'Success' | 'Failed';
     data: [string, number][];
-    color: string;
   }[]
 >['bars'] = [
   {
@@ -379,7 +414,6 @@ const stackedData: BarchartProps<
       ['category2', 72],
       ['category3', 52],
     ],
-    color: 'blue',
   },
   {
     label: 'Failed',
@@ -388,13 +422,23 @@ const stackedData: BarchartProps<
       ['category2', 10],
       ['category3', 25],
     ],
-    color: 'lightblue',
   },
 ];
 
 export const Stacked: Story = {
   render: () => {
-    return <Barchart type="category" bars={stackedData} stacked />;
+    const theme = useTheme() as CoreUITheme;
+    return (
+      <Barchart
+        type="category"
+        bars={stackedData}
+        stacked
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
+      />
+    );
   },
 };
 
@@ -412,7 +456,6 @@ export const DefaultSort: Story = {
           ['AA', 22],
           ['EE', 15],
         ],
-        color: theme.statusHealthy,
       },
       {
         label: 'Failed',
@@ -424,7 +467,6 @@ export const DefaultSort: Story = {
           ['AA', 5],
           ['EE', 5],
         ],
-        color: theme.statusCritical,
       },
     ] as const;
     const customSort: BarchartSortFn<typeof defaultSortData> = (
@@ -441,6 +483,10 @@ export const DefaultSort: Story = {
         stacked
         bars={defaultSortData}
         defaultSort={customSort}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -457,7 +503,6 @@ export const WithCustomTooltip: Story = {
           ['category2', 4],
           ['category3', 6],
         ],
-        color: theme.statusHealthy,
       },
       {
         label: 'Failed',
@@ -466,7 +511,6 @@ export const WithCustomTooltip: Story = {
           ['category2', 10],
           ['category3', 12],
         ],
-        color: theme.statusCritical,
       },
     ] as const;
     const customTooltip: BarchartTooltipFn<typeof exampleData> = (pointA) => {
@@ -513,6 +557,10 @@ export const WithCustomTooltip: Story = {
           bars={exampleData}
           tooltip={customTooltip}
           height={300}
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+          }}
         />
       </Stack>
     );
@@ -541,7 +589,6 @@ export const TimeTypeWithCustomTooltip: Story = {
           // 1 day ago
           [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
         ],
-        color: theme.statusHealthy,
       },
       {
         label: 'Failed',
@@ -561,7 +608,6 @@ export const TimeTypeWithCustomTooltip: Story = {
           // 1 day ago
           [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
         ],
-        color: theme.statusCritical,
       },
     ] as const;
     const customTooltip: BarchartTooltipFn<typeof timeData7Days> = (pointA) => {
@@ -590,6 +636,10 @@ export const TimeTypeWithCustomTooltip: Story = {
         }}
         bars={timeData7Days}
         tooltip={customTooltip}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -610,7 +660,6 @@ export const WithHeader: Story = {
           ['category6', 11],
           ['category7', 8],
         ],
-        color: theme.statusHealthy,
       },
       {
         label: 'Failed',
@@ -623,7 +672,6 @@ export const WithHeader: Story = {
           ['category6', 2],
           ['category7', 0],
         ],
-        color: theme.statusCritical,
       },
     ] as const;
     return (
@@ -634,6 +682,10 @@ export const WithHeader: Story = {
         secondaryTitle="Secondary Title"
         helpTooltip="Help Tooltip"
         rightTitle={<Text>Right Title</Text>}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -646,7 +698,6 @@ const exampleData = [
       ['category2', 20],
       ['category3', 30],
     ],
-    color: 'blue',
   },
   {
     label: 'Failed',
@@ -655,11 +706,11 @@ const exampleData = [
       ['category2', 20],
       ['category3', 30],
     ],
-    color: 'red',
   },
 ] as const;
 export const Loading: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<
       BarchartProps<typeof exampleData>['bars'] | undefined
@@ -687,6 +738,10 @@ export const Loading: Story = {
         bars={data || []}
         isLoading={isLoading}
         height={200}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
       />
     );
   },
@@ -694,6 +749,7 @@ export const Loading: Story = {
 
 export const StatusColors: Story = {
   render: () => {
+    const theme = useTheme() as CoreUITheme;
     const statusData = [
       {
         label: 'Success Rate',
@@ -724,7 +780,11 @@ export const StatusColors: Story = {
       <Barchart
         type="category"
         bars={statusData}
-        colorSet="status"
+        colorSet={{
+          'Success Rate': 'lineColor1',
+          'Failed Requests': theme.statusCritical,
+          'Warning Events': theme.statusWarning,
+        }}
         title="System Health Metrics"
       />
     );
