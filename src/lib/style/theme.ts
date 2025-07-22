@@ -149,10 +149,19 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
  */
 export const defaultTheme = coreUIAvailableThemes;
 
-// Why use this and not directly coreUIAvailableThemes.darkRebrand ?
+/**
+ * @deprecated
+ * Instead should use useTheme()
+ * import { useTheme } from 'styled-components';
+ * const theme = useTheme();
+ * e.g: color={theme.statusHealthy}
+ *
+ */
+
 export const brand = coreUIAvailableThemes.darkRebrand;
 
 export type ThemeColors = keyof CoreUITheme;
+
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';
@@ -162,6 +171,20 @@ export const lineColor5 = '#E3FF73';
 export const lineColor6 = '#BE2543';
 export const lineColor7 = '#FD8144';
 export const lineColor8 = '#F6B187';
+
+export type ChartColors = keyof typeof chartColors;
+
+export const chartColors = {
+  lineColor1: '#A14FBF',
+  lineColor2: '#BE9A40',
+  lineColor3: '#4BE4E2',
+  lineColor4: '#245A83',
+  lineColor5: '#E3FF73',
+  lineColor6: '#BE2543',
+  lineColor7: '#FD8144',
+  lineColor8: '#F6B187',
+};
+
 export const fontSize = {
   smaller: '0.71rem',
   small: '0.85rem',

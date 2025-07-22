@@ -17,6 +17,7 @@ import { Text } from '../text/Text.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
+import { chartColors, ChartColors, CoreUITheme } from '../../style/theme';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
@@ -43,7 +44,6 @@ export type Point = {
 export type BarchartBars = readonly {
   readonly label: string;
   readonly data: readonly (readonly [number | string, number | string])[];
-  readonly color?: string;
 }[];
 
 export type BarchartTooltipFn<T extends BarchartBars> = (currentPoint: {
@@ -59,6 +59,7 @@ export type BarchartSortFn<T extends BarchartBars> = (
 export type BarchartProps<T extends BarchartBars> = {
   type: 'category' | TimeType;
   bars: T;
+  colorSet: Record<T[number]['label'], ChartColors | (string & {})>;
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
   unitRange?: UnitRange;
@@ -69,7 +70,6 @@ export type BarchartProps<T extends BarchartBars> = {
   rightTitle?: React.ReactNode;
   height?: number;
   isLoading?: boolean;
-  colorSet?: 'default' | 'status';
 };
 
 interface CustomTickProps {
@@ -195,6 +195,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     height = CHART_CONSTANTS.DEFAULT_HEIGHT,
     bars,
     type = 'category',
+    colorSet,
     unitRange,
     stacked,
     defaultSort,
@@ -204,11 +205,10 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     helpTooltip,
     rightTitle,
     isLoading,
-    colorSet,
   } = props;
 
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
-    useChartData(bars, type, stacked, defaultSort, unitRange, colorSet);
+    useChartData(bars, type, colorSet, stacked, defaultSort, unitRange);
 
   return (
     <ChartContainer direction="vertical" gap="r16">
@@ -227,17 +227,20 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             accessibilityLayer
             maxBarSize={CHART_CONSTANTS.MAX_BAR_SIZE}
           >
-            {rechartsBars.map((bar) => (
-              <Bar
-                key={bar.dataKey}
-                dataKey={bar.dataKey}
-                fill={bar.fill}
-                minPointSize={CHART_CONSTANTS.MIN_POINT_SIZE}
-                stackId={stacked ? 'stacked' : undefined}
-                onMouseOver={() => setHoveredValue(bar.dataKey)}
-                onMouseLeave={() => setHoveredValue(undefined)}
-              />
-            ))}
+            {rechartsBars.map((bar) => {
+              const { fill, dataKey } = bar;
+              return (
+                <Bar
+                  key={dataKey}
+                  dataKey={dataKey}
+                  fill={chartColors[fill] || fill}
+                  minPointSize={CHART_CONSTANTS.MIN_POINT_SIZE}
+                  stackId={stacked ? 'stacked' : undefined}
+                  onMouseOver={() => setHoveredValue(dataKey)}
+                  onMouseLeave={() => setHoveredValue(undefined)}
+                />
+              );
+            })}
 
             <YAxis
               tickCount={1}
