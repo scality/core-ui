@@ -137,34 +137,6 @@ export const Time7Days: Story = {
   },
 };
 
-export const Time7DaysSmallWidth: Story = {
-  render: () => {
-    const theme = useTheme() as CoreUITheme;
-    return (
-      <div style={{ width: '300px' }}>
-        <Barchart
-          type={{
-            type: 'time',
-            timeRange: {
-              startTimestamp:
-                new Date(Date.now()).setHours(0, 0, 0, 0) -
-                7 * 24 * 60 * 60 * 1000,
-              endTimestamp:
-                new Date(Date.now()).setHours(0, 0, 0, 0) -
-                1 * 24 * 60 * 60 * 1000,
-              interval: 24 * 60 * 60 * 1000,
-            },
-          }}
-          bars={timeData7Days}
-          colorSet={{
-            Success: theme.statusHealthy,
-            Failed: theme.statusCritical,
-          }}
-        />
-      </div>
-    );
-  },
-};
 const timeData7DaysWithMissingData = [
   {
     label: 'Success',
@@ -314,40 +286,6 @@ export const TimeLast24Hours: Story = {
   },
 };
 
-const categoryDataWithMissingData = [
-  {
-    label: 'Free',
-    data: [
-      ['category1', 20],
-      ['category2', 40],
-      ['category4', 80],
-    ],
-  },
-  {
-    label: 'Used',
-    data: [
-      ['category1', 80],
-      ['category2', 100],
-      ['category3', 120],
-      ['category4', 120],
-    ],
-  },
-] as const;
-
-export const CategoryWithMissingData: Story = {
-  render: () => {
-    return (
-      <Barchart
-        type="category"
-        bars={categoryDataWithMissingData}
-        colorSet={{
-          Free: 'lineColor1',
-          Used: 'lineColor2',
-        }}
-      />
-    );
-  },
-};
 const capacityDataWithUnitRange = [
   {
     label: 'Free',
@@ -567,129 +505,6 @@ export const WithCustomTooltip: Story = {
   },
 };
 
-export const TimeTypeWithCustomTooltip: Story = {
-  render: () => {
-    const theme = useTheme() as CoreUITheme;
-    const timeData7Days = [
-      {
-        label: 'Success',
-        data: [
-          // 7 days ago - aligned to the exact timestamp that generateTimestamps will create
-          [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
-          // 6 days ago
-          [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
-          // 5 days ago
-          [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
-          // 4 days ago
-          [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
-          // 3 days ago
-          [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
-          // 2 days ago
-          [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
-          // 1 day ago
-          [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
-        ],
-      },
-      {
-        label: 'Failed',
-        data: [
-          // 7 days ago
-          [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
-          // 6 days ago
-          [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
-          // 5 days ago
-          [Date.now() - 5 * 24 * 60 * 60 * 1000, 2],
-          // 4 days ago
-          [Date.now() - 4 * 24 * 60 * 60 * 1000, 12],
-          // 3 days ago
-          [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
-          // 2 days ago
-          [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
-          // 1 day ago
-          [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
-        ],
-      },
-    ] as const;
-    const customTooltip: BarchartTooltipFn<typeof timeData7Days> = (pointA) => {
-      return (
-        <Stack direction="vertical" gap="r4">
-          <Text variant="Large">{pointA.category}</Text>
-          {pointA.values.map((point) => {
-            return (
-              <Text key={point.label}>
-                {point.label}: {point.value}
-              </Text>
-            );
-          })}
-        </Stack>
-      );
-    };
-    return (
-      <Barchart
-        type={{
-          type: 'time',
-          timeRange: {
-            startTimestamp: Date.now() - 7 * 24 * 60 * 60 * 1000,
-            endTimestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
-            interval: 24 * 60 * 60 * 1000,
-          },
-        }}
-        bars={timeData7Days}
-        tooltip={customTooltip}
-        colorSet={{
-          Success: theme.statusHealthy,
-          Failed: theme.statusCritical,
-        }}
-      />
-    );
-  },
-};
-
-export const WithHeader: Story = {
-  render: () => {
-    const theme = useTheme() as CoreUITheme;
-    const exampleData = [
-      {
-        label: 'Success',
-        data: [
-          ['category1', 9],
-          ['category2', 7],
-          ['category3', 10],
-          ['category4', 16],
-          ['category5', 12],
-          ['category6', 11],
-          ['category7', 8],
-        ],
-      },
-      {
-        label: 'Failed',
-        data: [
-          ['category1', 0],
-          ['category2', 3],
-          ['category3', 1],
-          ['category4', 1],
-          ['category5', 0],
-          ['category6', 2],
-          ['category7', 0],
-        ],
-      },
-    ] as const;
-    return (
-      <Barchart
-        type="category"
-        bars={exampleData}
-        title="Barchart"
-        secondaryTitle="Secondary Title"
-        helpTooltip="Help Tooltip"
-        rightTitle={<Text>Right Title</Text>}
-        colorSet={{
-          Success: theme.statusHealthy,
-          Failed: theme.statusCritical,
-        }}
-      />
-    );
-  },
-};
 const exampleData = [
   {
     label: 'Success',
@@ -708,44 +523,6 @@ const exampleData = [
     ],
   },
 ] as const;
-export const Loading: Story = {
-  render: () => {
-    const theme = useTheme() as CoreUITheme;
-    const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState<
-      BarchartProps<typeof exampleData>['bars'] | undefined
-    >(undefined);
-
-    return (
-      <Barchart
-        type="category"
-        title="Loading BarChart"
-        helpTooltip="Click on the button to load or unload data"
-        secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
-        rightTitle={
-          <Button
-            label={isLoading ? 'Load data' : 'Fake loading data'}
-            onClick={() => {
-              setIsLoading(!isLoading);
-              if (isLoading) {
-                setData(exampleData);
-              } else {
-                setData(undefined);
-              }
-            }}
-          />
-        }
-        bars={data || []}
-        isLoading={isLoading}
-        height={200}
-        colorSet={{
-          Success: theme.statusHealthy,
-          Failed: theme.statusCritical,
-        }}
-      />
-    );
-  },
-};
 
 export const StatusColors: Story = {
   render: () => {
@@ -792,34 +569,39 @@ export const StatusColors: Story = {
   },
 };
 
-export const DefaultColors: Story = {
+export const CompleteExample: Story = {
   render: () => {
-    const exampleData = [
-      {
-        label: 'Success',
-        data: [
-          ['category1', 10],
-          ['category2', 20],
-          ['category3', 30],
-        ],
-      },
-      {
-        label: 'Failed',
-        data: [
-          ['category1', 10],
-          ['category2', 20],
-          ['category3', 30],
-        ],
-        color: 'red',
-      },
-    ] as const;
+    const theme = useTheme() as CoreUITheme;
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState<
+      BarchartProps<typeof exampleData>['bars'] | undefined
+    >(undefined);
+
     return (
       <Barchart
         type="category"
-        bars={exampleData}
+        title="Loading BarChart"
+        helpTooltip="Click on the button to load or unload data"
+        secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
+        rightTitle={
+          <Button
+            label={isLoading ? 'Load data' : 'Fake loading data'}
+            onClick={() => {
+              setIsLoading(!isLoading);
+              if (isLoading) {
+                setData(exampleData);
+              } else {
+                setData(undefined);
+              }
+            }}
+          />
+        }
+        bars={data || []}
+        isLoading={isLoading}
+        height={200}
         colorSet={{
-          Success: 'lineColor3',
-          Failed: 'blue',
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
         }}
       />
     );
