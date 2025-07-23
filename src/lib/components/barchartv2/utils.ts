@@ -5,7 +5,7 @@ import {
 } from './Barchart.component';
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
-import { ChartColors } from '../../style/theme';
+import { chartColors, ChartColors } from '../../style/theme';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -21,16 +21,6 @@ export const getRoundReferenceValue = (value: number): number => {
   if (normalized <= 2.5) return 2.5 * magnitude;
   if (normalized <= 5) return 5 * magnitude;
   return 10 * magnitude;
-};
-
-export const getMinValue = (data: { [key: string]: string | number }[]) => {
-  const values = data.map((item) => {
-    const numberValues = Object.keys(item)
-      .filter((key) => key !== 'category')
-      .map((key) => Number(item[key]));
-    return Math.min(...numberValues);
-  });
-  return Math.min(...values);
 };
 
 export const getMaxBarValue = (
@@ -136,12 +126,159 @@ const findRangeForTimestamp = (
 };
 
 /**
+ * Transforms time-based data into chart format
+ */
+export const transformTimeData = <T extends BarchartBars>(
+  bars: T,
+  type: {
+    type: 'time';
+    timeRange: {
+      startTimestamp: number;
+      endTimestamp: number;
+      interval: number;
+    };
+  },
+  barDataKeys: string[],
+) => {
+  const timeRanges = generateTimeRanges(
+    type.timeRange.startTimestamp,
+    type.timeRange.endTimestamp,
+    type.timeRange.interval,
+  );
+
+  const categoryMap = new Map<
+    string | number,
+    { [key: string]: string | number }
+  >();
+
+  // Initialize all ranges with zeros
+  timeRanges.forEach((range) => {
+    const categoryDisplay = formatTimestamp(
+      range.start,
+      type.timeRange.interval,
+    );
+    const initialData: { [key: string]: string | number } = {
+      category: categoryDisplay,
+    };
+    barDataKeys.forEach((dataKey) => {
+      initialData[dataKey] = 0;
+    });
+    categoryMap.set(range.start, initialData);
+  });
+
+  // Populate with actual data
+  bars.forEach((bar) => {
+    bar.data.forEach(([timestamp, value]) => {
+      const range = findRangeForTimestamp(timestamp as number, timeRanges);
+      if (range) {
+        const existingData = categoryMap.get(range.start)!;
+        existingData[bar.label] = value;
+      }
+    });
+  });
+
+  return Array.from(categoryMap.values());
+};
+
+/**
+ * Transforms category-based data into chart format
+ */
+export const transformCategoryData = <T extends BarchartBars>(
+  bars: T,
+  barDataKeys: string[],
+) => {
+  const categoryMap = new Map<
+    string | number,
+    { [key: string]: string | number }
+  >();
+
+  bars.forEach((bar) => {
+    bar.data.forEach(([key, value]) => {
+      const categoryKey = String(key);
+
+      if (!categoryMap.has(categoryKey)) {
+        const newData: { [key: string]: string | number } = {
+          category: categoryKey,
+        };
+        barDataKeys.forEach((dataKey) => {
+          newData[dataKey] = 0;
+        });
+        categoryMap.set(categoryKey, newData);
+      }
+
+      const existingData = categoryMap.get(categoryKey)!;
+      existingData[bar.label] = value;
+    });
+  });
+
+  return Array.from(categoryMap.values());
+};
+
+/**
+ * Applies custom sorting to chart data
+ */
+export const applySortingToData = <T extends BarchartBars>(
+  data: { [key: string]: string | number }[],
+  barDataKeys: string[],
+  defaultSort: BarchartProps<T>['defaultSort'],
+) => {
+  const points = data.map((item) => {
+    const point: any = { category: item.category };
+    barDataKeys.forEach((dataKey) => {
+      point[dataKey] = Number(item[dataKey]) || 0;
+    });
+    return point;
+  });
+
+  points.sort(defaultSort);
+
+  return points.map((point) => {
+    const dataItem: { [key: string]: string | number } = {
+      category: point.category,
+    };
+    barDataKeys.forEach((dataKey) => {
+      dataItem[dataKey] = point[dataKey];
+    });
+    return dataItem;
+  });
+};
+
+const getRechartsBarsAndBarDataKeys = (
+  bars: BarchartBars,
+  colorSet: Record<BarchartBars[number]['label'], ChartColors | (string & {})>,
+  stacked?: boolean,
+) => {
+  const rechartsBars: { dataKey: string; fill: string; stackId?: string }[] =
+    [];
+  const barDataKeys: string[] = [];
+
+  bars.forEach((bar) => {
+    const colorName = colorSet[bar.label];
+    const rechartsBar = {
+      dataKey: bar.label,
+      fill: chartColors[colorName] || colorName,
+      stackId: stacked ? 'stacked' : undefined,
+    };
+
+    rechartsBars.push(rechartsBar);
+    barDataKeys.push(bar.label);
+  });
+
+  return {
+    rechartsBars,
+    barDataKeys,
+  };
+};
+
+/**
  * Converts prometheus data to recharts data format
  * @param bars - The bars to convert
  * @param type - The chart type (category or time)
  * @returns Recharts data format
  */
-export const formatPrometheusDataToChartData = <T extends BarchartBars>(
+export const formatPrometheusDataToRechartsDataAndBars = <
+  T extends BarchartBars,
+>(
   bars: T,
   type: BarchartProps<T>['type'],
   colorSet: Record<T[number]['label'], ChartColors | (string & {})>,
@@ -149,129 +286,27 @@ export const formatPrometheusDataToChartData = <T extends BarchartBars>(
   defaultSort?: BarchartProps<T>['defaultSort'],
 ): {
   data: { [key: string]: string | number }[];
-  rechartsBars: { dataKey: string; fill: string }[];
+  rechartsBars: { dataKey: string; fill: string; stackId?: string }[];
 } => {
-  let rechartsBars = bars.map((bar) => {
-    return {
-      dataKey: bar.label,
-      fill: colorSet[bar.label],
-    };
-  });
+  const { rechartsBars, barDataKeys } = getRechartsBarsAndBarDataKeys(
+    bars,
+    colorSet,
+    stacked,
+  );
 
-  // Create a map to collect all unique categories/ranges
-  const categoryMap = new Map<
-    string | number,
-    { [key: string]: string | number }
-  >();
+  let data =
+    type !== 'category' && type.type === 'time'
+      ? transformTimeData(bars, type, barDataKeys)
+      : transformCategoryData(bars, barDataKeys);
 
-  // For time data, generate all time ranges
-  if (type !== 'category' && type.type === 'time') {
-    const timeRanges = generateTimeRanges(
-      type.timeRange.startTimestamp,
-      type.timeRange.endTimestamp,
-      type.timeRange.interval,
-    );
-
-    // Initialize all ranges with zeros for all bars
-    timeRanges.forEach((range) => {
-      const categoryDisplay = formatTimestamp(
-        range.start,
-        type.timeRange.interval,
-      );
-      const initialData: { [key: string]: string | number } = {
-        category: categoryDisplay,
-      };
-      rechartsBars.forEach((bar) => {
-        initialData[bar.dataKey] = 0;
-      });
-
-      categoryMap.set(range.start, initialData);
-    });
-
-    // Process actual data from bars
-    bars.forEach((bar) => {
-      const dataKey = bar.label;
-
-      bar.data.forEach(([timestamp, value]) => {
-        // Find which range this timestamp belongs to
-        const range = findRangeForTimestamp(timestamp as number, timeRanges);
-
-        // If the range is found, update the value for the data key
-        // If multiple data points fall in same range, last value is used
-        if (range) {
-          const existingData = categoryMap.get(range.start)!;
-          existingData[dataKey] = value;
-        }
-      });
-    });
-  } else {
-    // Handle category data
-    bars.forEach((bar) => {
-      const dataKey = bar.label;
-
-      bar.data.forEach(([key, value]) => {
-        const categoryKey = String(key);
-
-        // Check if category exists, if not create it
-        if (!categoryMap.has(categoryKey)) {
-          const newData: { [key: string]: string | number } = {
-            category: categoryKey,
-          };
-          // Initialize all bar data keys with 0
-          rechartsBars.forEach((bar) => {
-            newData[bar.dataKey] = 0;
-          });
-          categoryMap.set(categoryKey, newData);
-        }
-
-        const existingData = categoryMap.get(categoryKey)!;
-        existingData[dataKey] = value;
-      });
-    });
-  }
-
-  // Convert map to array (order is preserved for time ranges)
-  let data = Array.from(categoryMap.values());
-
-  // Apply custom sorting for category data only
   if (type === 'category' && defaultSort) {
-    // Convert data to the new record format for sorting
-    const points = data.map((item) => {
-      const point: Record<T[number]['label'], number> & {
-        category: string | number;
-      } = {
-        category: item.category,
-      } as any;
-
-      rechartsBars.forEach((bar) => {
-        (point as any)[bar.dataKey] = Number(item[bar.dataKey]) || 0;
-      });
-
-      return point;
-    });
-
-    // Sort using the provided function
-    points.sort((pointA, pointB) => {
-      return defaultSort(pointA, pointB);
-    });
-
-    // Convert back to data format
-    data = points.map((point) => {
-      const dataItem: { [key: string]: string | number } = {
-        category: point.category,
-      };
-      rechartsBars.forEach((bar) => {
-        dataItem[bar.dataKey] = (point as any)[bar.dataKey];
-      });
-      return dataItem;
-    });
+    data = applySortingToData(data, barDataKeys, defaultSort);
   }
 
-  // Sort stacked bars
-  rechartsBars = sortStackedBars(rechartsBars, data, stacked);
+  const sortedRechartsBars = sortStackedBars(rechartsBars, data, stacked);
 
   return {
-    rechartsBars,
+    rechartsBars: sortedRechartsBars,
     data,
   };
 };
@@ -364,6 +399,7 @@ export const sortStackedBars = (
   rechartsBars: {
     dataKey: string;
     fill: string;
+    stackId?: string;
   }[],
   data: {
     [key: string]: string | number;
@@ -425,7 +461,7 @@ export const useChartData = <T extends BarchartBars>(
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
 ) => {
-  const { data, rechartsBars } = formatPrometheusDataToChartData(
+  const { data, rechartsBars } = formatPrometheusDataToRechartsDataAndBars(
     bars,
     type,
     colorSet,

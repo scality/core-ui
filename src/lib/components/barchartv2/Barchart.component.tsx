@@ -228,14 +228,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             maxBarSize={CHART_CONSTANTS.MAX_BAR_SIZE}
           >
             {rechartsBars.map((bar) => {
-              const { fill, dataKey } = bar;
+              const { fill, dataKey, stackId } = bar;
               return (
                 <Bar
                   key={dataKey}
                   dataKey={dataKey}
                   fill={chartColors[fill] || fill}
                   minPointSize={CHART_CONSTANTS.MIN_POINT_SIZE}
-                  stackId={stacked ? 'stacked' : undefined}
+                  stackId={stackId}
                   onMouseOver={() => setHoveredValue(dataKey)}
                   onMouseLeave={() => setHoveredValue(undefined)}
                 />

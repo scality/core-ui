@@ -1,12 +1,490 @@
+import { coreUIAvailableThemes } from '../../style/theme';
 import {
+  applySortingToData,
   computeUnitLabelAndRoundReferenceValue,
-  formatPrometheusDataToChartData,
+  formatPrometheusDataToRechartsDataAndBars,
   getMaxBarValue,
   getRoundReferenceValue,
   renderTooltipContent,
   sortStackedBars,
+  transformCategoryData,
+  transformTimeData,
   UnitRange,
 } from './utils';
+
+// Mock theme object for tests
+const mockTheme = {
+  statusHealthy: '#00D100',
+  statusHealthyRGB: '0, 209, 0',
+  statusCritical: '#D10000',
+  statusCriticalRGB: '209, 0, 0',
+  statusWarning: '#FFA500',
+  statusWarningRGB: '255, 165, 0',
+  selectedActive: '#337FBD',
+  highlight: '#337FBD',
+  border: '#C2C8CC',
+  buttonPrimary: '#337FBD',
+  buttonSecondary: '#68737D',
+  buttonDelete: '#EF3340',
+  infoPrimary: '#337FBD',
+  infoSecondary: '#68737D',
+  backgroundLevel1: '#ffffff',
+  backgroundLevel2: '#F9FAFB',
+  backgroundLevel3: '#E9EBED',
+  backgroundLevel4: '#D8DCDE',
+  textPrimary: '#2F3941',
+  textSecondary: '#68737D',
+  textTertiary: '#87929D',
+  textReverse: '#ffffff',
+  textLink: '#337FBD',
+} as const;
+
+describe('transformTimeData', () => {
+  it('should transform time data with daily intervals', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          [new Date('2024-07-05T00:00:00').getTime(), 10],
+          [new Date('2024-07-06T00:00:00').getTime(), 20],
+        ] as [number, number][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        interval: 24 * 60 * 60 * 1000, // 1 day
+      },
+    };
+
+    const barDataKeys = ['Success'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'Fri05Jul', Success: 10 },
+      { category: 'Sat06Jul', Success: 20 },
+    ]);
+  });
+
+  it('should create empty time slots when data is missing', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          [new Date('2024-07-05T00:00:00').getTime(), 10],
+          // Missing July 6th
+          [new Date('2024-07-07T00:00:00').getTime(), 30],
+        ] as [number, number][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+        endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+        interval: 24 * 60 * 60 * 1000, // 1 day
+      },
+    };
+
+    const barDataKeys = ['Success'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'Fri05Jul', Success: 10 },
+      { category: 'Sat06Jul', Success: 0 }, // Missing data filled with 0
+      { category: 'Sun07Jul', Success: 30 },
+    ]);
+  });
+
+  it('should handle hourly intervals correctly', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          [new Date('2024-07-05T10:00:00').getTime(), 10],
+          [new Date('2024-07-05T11:00:00').getTime(), 20],
+        ] as [number, number][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
+        endTimestamp: new Date('2024-07-05T11:00:00').getTime(),
+        interval: 60 * 60 * 1000, // 1 hour
+      },
+    };
+
+    const barDataKeys = ['Success'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    expect(result).toEqual([
+      { category: '10:00', Success: 10 },
+      { category: '11:00', Success: 20 },
+    ]);
+  });
+
+  it('should use latest value when multiple events occur in same time period', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          [new Date('2024-07-05T08:30:00').getTime(), 10], // 8:30 AM
+          [new Date('2024-07-05T14:45:00').getTime(), 25], // 2:45 PM (should overwrite 8:30 AM)
+          [new Date('2024-07-06T09:15:00').getTime(), 15], // Next day
+        ] as [number, number][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        interval: 24 * 60 * 60 * 1000, // 1 day
+      },
+    };
+
+    const barDataKeys = ['Success'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'Fri05Jul', Success: 25 }, // Last value for July 5th
+      { category: 'Sat06Jul', Success: 15 }, // July 6th value
+    ]);
+  });
+
+  it('should preserve chronological order regardless of input order', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          // Data points added out of chronological order
+          [new Date('2024-07-07T10:00:00').getTime(), 30], // July 7th (latest)
+          [new Date('2024-07-05T08:00:00').getTime(), 10], // July 5th (earliest)
+          [new Date('2024-07-06T14:00:00').getTime(), 20], // July 6th (middle)
+        ] as [number, number][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+        endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+        interval: 24 * 60 * 60 * 1000, // 1 day
+      },
+    };
+
+    const barDataKeys = ['Success'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    // Should be in chronological order regardless of input order
+    expect(result).toEqual([
+      { category: 'Fri05Jul', Success: 10 },
+      { category: 'Sat06Jul', Success: 20 },
+      { category: 'Sun07Jul', Success: 30 },
+    ]);
+  });
+
+  it('should display multiple metrics with different time coverage', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [[new Date('2024-07-05T00:00:00').getTime(), 10]] as [
+          number,
+          number,
+        ][],
+      },
+      {
+        label: 'Failed',
+        data: [[new Date('2024-07-06T00:00:00').getTime(), 5]] as [
+          number,
+          number,
+        ][],
+      },
+    ];
+
+    const type = {
+      type: 'time' as const,
+      timeRange: {
+        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        interval: 24 * 60 * 60 * 1000, // 1 day
+      },
+    };
+
+    const barDataKeys = ['Success', 'Failed'];
+
+    const result = transformTimeData(bars, type, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'Fri05Jul', Success: 10, Failed: 0 },
+      { category: 'Sat06Jul', Success: 0, Failed: 5 },
+    ]);
+  });
+});
+
+describe('transformCategoryData', () => {
+  it('should transform basic category data correctly', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 10],
+          ['category2', 20],
+        ] as [string, number][],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 5],
+          ['category2', 15],
+        ] as [string, number][],
+      },
+    ];
+
+    const barDataKeys = ['Success', 'Failed'];
+
+    const result = transformCategoryData(bars, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'category1', Success: 10, Failed: 5 },
+      { category: 'category2', Success: 20, Failed: 15 },
+    ]);
+  });
+
+  it('should show zero for categories missing in specific metrics', () => {
+    const bars = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 10],
+          ['category3', 30],
+        ] as [string, number][],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category2', 20],
+          ['category3', 40],
+        ] as [string, number][],
+      },
+    ];
+
+    const barDataKeys = ['Success', 'Failed'];
+
+    const result = transformCategoryData(bars, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'category1', Success: 10, Failed: 0 }, // Failed missing, filled with 0
+      { category: 'category3', Success: 30, Failed: 40 }, // Appears in both bars
+      { category: 'category2', Success: 0, Failed: 20 }, // Success missing, filled with 0
+    ]);
+  });
+
+  it('should handle single bar data', () => {
+    const bars = [
+      {
+        label: 'Metric',
+        data: [
+          ['A', 100],
+          ['B', 200],
+          ['C', 300],
+        ] as [string, number][],
+      },
+    ];
+
+    const barDataKeys = ['Metric'];
+
+    const result = transformCategoryData(bars, barDataKeys);
+
+    expect(result).toEqual([
+      { category: 'A', Metric: 100 },
+      { category: 'B', Metric: 200 },
+      { category: 'C', Metric: 300 },
+    ]);
+  });
+
+  it('should convert category keys to strings', () => {
+    const bars = [
+      {
+        label: 'Count',
+        data: [
+          [123, 10], // Number key
+          ['text', 20], // String key
+          [null, 30], // Null key
+        ] as [any, number][],
+      },
+    ];
+
+    const barDataKeys = ['Count'];
+
+    const result = transformCategoryData(bars, barDataKeys);
+
+    expect(result).toEqual([
+      { category: '123', Count: 10 },
+      { category: 'text', Count: 20 },
+      { category: 'null', Count: 30 },
+    ]);
+  });
+
+  it('should handle empty data gracefully', () => {
+    const bars = [
+      {
+        label: 'Empty',
+        data: [] as [string, number][],
+      },
+    ];
+
+    const barDataKeys = ['Empty'];
+
+    const result = transformCategoryData(bars, barDataKeys);
+
+    expect(result).toEqual([]);
+  });
+});
+
+describe('applySortingToData', () => {
+  it('should apply custom sorting function to data', () => {
+    const data = [
+      { category: 'category1', Success: 50 },
+      { category: 'category2', Success: 20 },
+      { category: 'category3', Success: 30 },
+      { category: 'category4', Success: 40 },
+    ];
+
+    const barDataKeys = ['Success'];
+
+    // Sort by Success value ascending
+    const defaultSort = (pointA: any, pointB: any) => {
+      return pointA.Success - pointB.Success > 0 ? 1 : -1;
+    };
+
+    const result = applySortingToData(data, barDataKeys, defaultSort);
+
+    expect(result).toEqual([
+      { category: 'category2', Success: 20 },
+      { category: 'category3', Success: 30 },
+      { category: 'category4', Success: 40 },
+      { category: 'category1', Success: 50 },
+    ]);
+  });
+
+  it('should sort categories based on combined metric values', () => {
+    const data = [
+      { category: 'A', Bar1: 10, Bar2: 50 },
+      { category: 'B', Bar1: 30, Bar2: 20 },
+      { category: 'C', Bar1: 20, Bar2: 40 },
+    ];
+
+    const barDataKeys = ['Bar1', 'Bar2'];
+
+    // Sort by sum of Bar1 and Bar2
+    const defaultSort = (pointA: any, pointB: any) => {
+      const sumA = pointA.Bar1 + pointA.Bar2;
+      const sumB = pointB.Bar1 + pointB.Bar2;
+      return sumA < sumB ? -1 : sumA > sumB ? 1 : 0;
+    };
+
+    const result = applySortingToData(data, barDataKeys, defaultSort);
+
+    expect(result).toEqual([
+      { category: 'B', Bar1: 30, Bar2: 20 }, // Sum: 50
+      { category: 'A', Bar1: 10, Bar2: 50 }, // Sum: 60
+      { category: 'C', Bar1: 20, Bar2: 40 }, // Sum: 60
+    ]);
+  });
+
+  it('should sort text numbers as numeric values', () => {
+    const data = [
+      { category: 'A', Value: '100' },
+      { category: 'B', Value: '50' },
+      { category: 'C', Value: '75' },
+    ];
+
+    const barDataKeys = ['Value'];
+
+    // Sort by numeric value descending
+    const defaultSort = (pointA: any, pointB: any) => {
+      return pointB.Value > pointA.Value
+        ? 1
+        : pointB.Value < pointA.Value
+          ? -1
+          : 0;
+    };
+
+    const result = applySortingToData(data, barDataKeys, defaultSort);
+
+    expect(result).toEqual([
+      { category: 'A', Value: 100 }, // Converted to number and sorted
+      { category: 'C', Value: 75 },
+      { category: 'B', Value: 50 },
+    ]);
+  });
+
+  it('should treat invalid data as zero when sorting', () => {
+    const data = [
+      { category: 'A', Value: 30 },
+      { category: 'B', Value: 0 }, // Test with 0 value
+      { category: 'C', Value: 'NaN' }, // String that will become NaN
+      { category: 'D', Value: 10 },
+    ];
+
+    const barDataKeys = ['Value'];
+
+    // Sort by value ascending
+    const defaultSort = (pointA: any, pointB: any) => {
+      return pointA.Value < pointB.Value
+        ? -1
+        : pointA.Value > pointB.Value
+          ? 1
+          : 0;
+    };
+
+    const result = applySortingToData(data, barDataKeys, defaultSort);
+
+    expect(result).toEqual([
+      { category: 'B', Value: 0 }, // 0 value
+      { category: 'C', Value: 0 }, // 'NaN' converted to 0 (NaN becomes 0)
+      { category: 'D', Value: 10 },
+      { category: 'A', Value: 30 },
+    ]);
+  });
+
+  it('should preserve category data during sorting', () => {
+    const data = [
+      { category: 'Category Z', Metric: 1 },
+      { category: 'Category A', Metric: 3 },
+      { category: 'Category M', Metric: 2 },
+    ];
+
+    const barDataKeys = ['Metric'];
+
+    // Sort by category name alphabetically
+    const defaultSort = (pointA: any, pointB: any) => {
+      return pointA.category.localeCompare(pointB.category);
+    };
+
+    const result = applySortingToData(data, barDataKeys, defaultSort);
+
+    expect(result).toEqual([
+      { category: 'Category A', Metric: 3 },
+      { category: 'Category M', Metric: 2 },
+      { category: 'Category Z', Metric: 1 },
+    ]);
+  });
+});
 
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values', () => {
@@ -52,329 +530,121 @@ describe('getMaxBarValue', () => {
   });
 });
 
-describe('formatPrometheusDataToChartData', () => {
-  describe('category data', () => {
-    it('should format category data correctly', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            ['category1', 10],
-            ['category2', 20],
-          ] as [string, number][],
-        },
-        {
-          label: 'Failed',
-          data: [
-            ['category1', 5],
-            ['category2', 15],
-          ] as [string, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(bars, 'category', {
-        Success: 'lineColor1',
-        Failed: 'lineColor2',
-      });
-
-      expect(result.data).toEqual([
-        { category: 'category1', Success: 10, Failed: 5 },
-        { category: 'category2', Success: 20, Failed: 15 },
-      ]);
-      expect(result.rechartsBars).toEqual([
-        { dataKey: 'Success', fill: 'lineColor1' },
-        { dataKey: 'Failed', fill: 'lineColor2' },
-      ]);
-    });
-  });
-
-  describe('time data', () => {
-    it('should format time data correctly with daily intervals', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            [new Date('2024-07-05T00:00:00').getTime(), 10],
-            [new Date('2024-07-06T00:00:00').getTime(), 20],
-          ] as [number, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(
-        bars,
-        {
-          type: 'time',
-          timeRange: {
-            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-            endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
-            interval: 24 * 60 * 60 * 1000, // 1 day
-          },
-        },
-        {
-          Success: 'lineColor1',
-          Failed: 'lineColor2',
-        },
-        false,
-      );
-
-      expect(result.data).toEqual([
-        { category: 'Fri05Jul', Success: 10 },
-        { category: 'Sat06Jul', Success: 20 },
-      ]);
-    });
-
-    it('should handle missing data points by filling with zeros', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            [new Date('2024-07-05T00:00:00').getTime(), 10],
-            // Missing July 6th
-            [new Date('2024-07-07T00:00:00').getTime(), 30],
-          ] as [number, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(
-        bars,
-        {
-          type: 'time',
-          timeRange: {
-            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-            endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
-            interval: 24 * 60 * 60 * 1000, // 1 day
-          },
-        },
-        {
-          Success: 'lineColor1',
-        },
-        false,
-      );
-
-      expect(result.data).toEqual([
-        { category: 'Fri05Jul', Success: 10 },
-        { category: 'Sat06Jul', Success: 0 }, // Missing data filled with 0
-        { category: 'Sun07Jul', Success: 30 },
-      ]);
-    });
-
-    it('should handle hourly intervals correctly', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            [new Date('2024-07-05T10:00:00').getTime(), 10],
-            [new Date('2024-07-05T11:00:00').getTime(), 20],
-          ] as [number, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(
-        bars,
-        {
-          type: 'time',
-          timeRange: {
-            startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
-            endTimestamp: new Date('2024-07-05T11:00:00').getTime(),
-            interval: 60 * 60 * 1000, // 1 hour
-          },
-        },
-        {
-          Success: 'lineColor1',
-        },
-        false,
-      );
-
-      expect(result.data).toEqual([
-        { category: '10:00', Success: 10 },
-        { category: '11:00', Success: 20 },
-      ]);
-    });
-
-    it('should handle data points that fall within the same time range', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            [new Date('2024-07-05T08:30:00').getTime(), 10], // 8:30 AM
-            [new Date('2024-07-05T14:45:00').getTime(), 25], // 2:45 PM (should overwrite 8:30 AM)
-            [new Date('2024-07-06T09:15:00').getTime(), 15], // Next day
-          ] as [number, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(
-        bars,
-        {
-          type: 'time',
-          timeRange: {
-            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-            endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
-            interval: 24 * 60 * 60 * 1000, // 1 day
-          },
-        },
-        {
-          Success: 'lineColor1',
-        },
-        false,
-      );
-
-      expect(result.data).toEqual([
-        { category: 'Fri05Jul', Success: 25 }, // Last value for July 5th
-        { category: 'Sat06Jul', Success: 15 }, // July 6th value
-      ]);
-    });
-
-    it('should preserve chronological order of time ranges', () => {
-      const bars = [
-        {
-          label: 'Success',
-          data: [
-            // Data points added out of chronological order
-            [new Date('2024-07-07T10:00:00').getTime(), 30], // July 7th (latest)
-            [new Date('2024-07-05T08:00:00').getTime(), 10], // July 5th (earliest)
-            [new Date('2024-07-06T14:00:00').getTime(), 20], // July 6th (middle)
-          ] as [number, number][],
-        },
-      ];
-
-      const result = formatPrometheusDataToChartData(
-        bars,
-        {
-          type: 'time',
-          timeRange: {
-            startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-            endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
-            interval: 24 * 60 * 60 * 1000, // 1 day
-          },
-        },
-        {
-          Success: 'lineColor1',
-        },
-        false,
-      );
-
-      // Should be in chronological order regardless of input order
-      expect(result.data).toEqual([
-        { category: 'Fri05Jul', Success: 10 },
-        { category: 'Sat06Jul', Success: 20 },
-        { category: 'Sun07Jul', Success: 30 },
-      ]);
-    });
-  });
-  describe('Stacked Bar Sorting', () => {
-    const bars = [
-      {
-        label: 'Small Bar',
-        data: [
-          ['category1', 5],
-          ['category2', 10],
-          ['category3', 15],
-        ],
-      },
-      {
-        label: 'Large Bar',
-        data: [
-          ['category1', 50],
-          ['category2', 60],
-          ['category3', 70],
-        ],
-      },
-      {
-        label: 'Medium Bar',
-        data: [
-          ['category1', 20],
-          ['category2', 25],
-          ['category3', 30],
-        ],
-      },
-    ] as const;
-    const type = 'category';
-    it('should sort bars by average values in descending order when stacked is true', () => {
-      const result = formatPrometheusDataToChartData(
-        bars,
-        type,
-        {
-          'Small Bar': 'lineColor1',
-          'Large Bar': 'lineColor2',
-          'Medium Bar': 'lineColor3',
-        },
-        true,
-      );
-
-      // Bars should be sorted by average in descending order (largest first)
-      expect(result.rechartsBars[0].dataKey).toBe('Large Bar'); // Average: 60
-      expect(result.rechartsBars[1].dataKey).toBe('Medium Bar'); // Average: 25
-      expect(result.rechartsBars[2].dataKey).toBe('Small Bar'); // Average: 10
-    });
-
-    it('should not sort bars when stacked is false or undefined', () => {
-      const result = formatPrometheusDataToChartData(
-        bars,
-        type,
-        {
-          'Small Bar': 'lineColor1',
-          'Large Bar': 'lineColor2',
-          'Medium Bar': 'lineColor3',
-        },
-        false,
-      );
-
-      // Bars should maintain original order
-      expect(result.rechartsBars[0].dataKey).toBe('Small Bar');
-      expect(result.rechartsBars[1].dataKey).toBe('Large Bar');
-      expect(result.rechartsBars[2].dataKey).toBe('Medium Bar');
-    });
-  });
-
-  it('should call defaultSort when provided', () => {
+describe('formatPrometheusDataToRechartsDataAndBars', () => {
+  it('should format category data correctly', () => {
     const bars = [
       {
         label: 'Success',
         data: [
-          ['category1', 50],
-          ['category2', 20],
-          ['category3', 30],
-          ['category4', 40],
-        ],
+          ['A', 10],
+          ['B', 20],
+        ] as [string, number][],
+        color: 'green',
       },
-    ] as const;
-    const type = 'category';
-    const result = formatPrometheusDataToChartData(
-      bars,
-      type,
       {
-        Success: 'lineColor1',
+        label: 'Failed',
+        data: [
+          ['A', 5],
+          ['B', 15],
+        ] as [string, number][],
+        color: 'red',
       },
-      false,
-      (pointA, pointB) => {
-        return pointA.Success - pointB.Success > 0 ? 1 : -1;
-      },
-    );
-    const data = result.data;
+    ];
 
-    expect(data[0].category).toBe('category2');
-    expect(data[1].category).toBe('category3');
-    expect(data[2].category).toBe('category4');
-    expect(data[3].category).toBe('category1');
-  });
-  it('should use status colors when colorSet is status', () => {
-    const bars = [
-      {
-        label: 'Success',
-        data: [['category1', 50]],
-      },
-    ] as const;
-    const result = formatPrometheusDataToChartData(
+    const result = formatPrometheusDataToRechartsDataAndBars(
       bars,
       'category',
       {
-        Success: 'lineColor1',
+        Success: coreUIAvailableThemes.darkRebrand.statusHealthy,
+        Failed: coreUIAvailableThemes.darkRebrand.statusCritical,
+      },
+      true, // stacked
+    );
+
+    // Should integrate: data transformation + color formatting + stacked sorting
+    expect(result.data).toEqual([
+      { category: 'A', Success: 10, Failed: 5 },
+      { category: 'B', Success: 20, Failed: 15 },
+    ]);
+    expect(result.rechartsBars).toEqual([
+      { dataKey: 'Success', fill: '#0AADA6', stackId: 'stacked' }, // statusHealthy = '#0AADA6'
+      { dataKey: 'Failed', fill: '#E84855', stackId: 'stacked' }, // statusCritical = '#E84855'
+    ]);
+  });
+
+  it('should format time data correctly', () => {
+    const bars = [
+      {
+        label: 'Success Count',
+        data: [[new Date('2024-07-05T00:00:00').getTime(), 10]] as [
+          number,
+          number,
+        ][],
+      },
+      {
+        label: 'Failed Count',
+        data: [[new Date('2024-07-05T00:00:00').getTime(), 5]] as [
+          number,
+          number,
+        ][],
+      },
+    ];
+
+    const result = formatPrometheusDataToRechartsDataAndBars(
+      bars,
+      {
+        type: 'time',
+        timeRange: {
+          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+          endTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+          interval: 24 * 60 * 60 * 1000,
+        },
+      },
+      {
+        'Success Count': 'lineColor3',
+        'Failed Count': 'blue',
       },
       false,
       undefined,
     );
-    expect(result.rechartsBars[0].fill).toBe('lineColor1');
+
+    // Should integrate: time transformation + status color assignment
+    expect(result.data).toEqual([
+      { category: 'Fri05Jul', 'Success Count': 10, 'Failed Count': 5 },
+    ]);
+    expect(result.rechartsBars).toEqual([
+      { dataKey: 'Success Count', fill: '#4BE4E2' }, // lineColor3
+      { dataKey: 'Failed Count', fill: 'blue' }, // blue
+    ]);
+  });
+
+  it('should integrate custom sorting with category data', () => {
+    const bars = [
+      {
+        label: 'Value',
+        data: [
+          ['C', 30],
+          ['A', 10],
+          ['B', 20],
+        ] as [string, number][],
+      },
+    ];
+
+    const result = formatPrometheusDataToRechartsDataAndBars(
+      bars,
+      'category',
+      mockTheme,
+      false,
+      (pointA, pointB) => {
+        // Sort alphabetically by category
+        return String(pointA.category).localeCompare(
+          String(pointB.category),
+        ) as -1 | 0 | 1;
+      },
+    );
+
+    // Should integrate: category transformation + custom sorting
+    expect(result.data.map((item) => item.category)).toEqual(['A', 'B', 'C']);
   });
 });
 

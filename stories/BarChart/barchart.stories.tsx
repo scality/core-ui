@@ -780,12 +780,47 @@ export const StatusColors: Story = {
       <Barchart
         type="category"
         bars={statusData}
+        stacked
         colorSet={{
-          'Success Rate': 'lineColor1',
+          'Success Rate': theme.statusHealthy,
           'Failed Requests': theme.statusCritical,
           'Warning Events': theme.statusWarning,
         }}
         title="System Health Metrics"
+      />
+    );
+  },
+};
+
+export const DefaultColors: Story = {
+  render: () => {
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 10],
+          ['category2', 20],
+          ['category3', 30],
+        ],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 10],
+          ['category2', 20],
+          ['category3', 30],
+        ],
+        color: 'red',
+      },
+    ] as const;
+    return (
+      <Barchart
+        type="category"
+        bars={exampleData}
+        colorSet={{
+          Success: 'lineColor3',
+          Failed: 'blue',
+        }}
       />
     );
   },
