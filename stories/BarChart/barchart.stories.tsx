@@ -574,9 +574,41 @@ export const CompleteExample: Story = {
     const theme = useTheme() as CoreUITheme;
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState<
-      BarchartProps<typeof exampleData>['bars'] | undefined
+      BarchartProps<typeof data>['bars'] | undefined
     >(undefined);
-
+    const customTooltip: BarchartTooltipFn<typeof data> = (pointA) => {
+      return (
+        <Stack
+          direction="vertical"
+          gap="r4"
+          style={{
+            width: '150px',
+            backgroundColor: 'black',
+            padding: '10px',
+            borderRadius: '10px',
+            color: 'white',
+          }}
+        >
+          <Text style={{ textAlign: 'center', color: 'white' }}>
+            {pointA.category}
+          </Text>
+          {pointA.values.map((point) => (
+            <Text
+              key={point.label}
+              isEmphazed={point.isHovered}
+              style={{
+                fontWeight: point.isHovered ? 'bold' : 'normal',
+              }}
+            >
+              <Wrap>
+                <span>{point.label}:</span>
+                <span>{point.value}</span>
+              </Wrap>
+            </Text>
+          ))}
+        </Stack>
+      );
+    };
     return (
       <Barchart
         type="category"
@@ -597,6 +629,7 @@ export const CompleteExample: Story = {
           />
         }
         bars={data || []}
+        tooltip={customTooltip}
         isLoading={isLoading}
         height={200}
         colorSet={{

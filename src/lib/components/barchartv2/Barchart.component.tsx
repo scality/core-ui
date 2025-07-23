@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   Bar,
   BarChart,
+  CartesianGrid,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -227,6 +228,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             accessibilityLayer
             maxBarSize={CHART_CONSTANTS.MAX_BAR_SIZE}
           >
+            <CartesianGrid
+              vertical={false}
+              horizontal={false}
+              fill={theme.backgroundLevel1}
+            />
             {rechartsBars.map((bar) => {
               const { fill, dataKey, stackId } = bar;
               return (
