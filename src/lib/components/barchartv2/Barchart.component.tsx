@@ -25,6 +25,12 @@ const CHART_CONSTANTS = {
   BAR_SIZE: 12,
   MIN_POINT_SIZE: 1,
   DEFAULT_HEIGHT: 200,
+  CHART_MARGIN: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
 } as const;
 
 /* ---------------------------------- TYPE ---------------------------------- */
@@ -224,12 +230,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             accessibilityLayer
             barSize={CHART_CONSTANTS.BAR_SIZE}
             height={height}
-            margin={{
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-            }}
+            margin={CHART_CONSTANTS.CHART_MARGIN}
           >
             <CartesianGrid
               vertical={false}
