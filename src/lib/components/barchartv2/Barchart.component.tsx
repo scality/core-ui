@@ -12,18 +12,18 @@ import {
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
+import { chartColors, ChartColors, fontSize } from '../../style/theme';
+import { Box } from '../box/Box';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-import { renderTooltipContent, useChartData, UnitRange } from './utils';
-import { Text } from '../text/Text.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
-import { Box } from '../box/Box';
-import { chartColors, ChartColors } from '../../style/theme';
+import { Text } from '../text/Text.component';
+import { renderTooltipContent, UnitRange, useChartData } from './utils';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
-  MAX_BAR_SIZE: 12,
-  MIN_POINT_SIZE: 3,
+  BAR_SIZE: 12,
+  MIN_POINT_SIZE: 1,
   DEFAULT_HEIGHT: 200,
 } as const;
 
@@ -106,7 +106,11 @@ const CustomTick = ({
       overflow="visible"
     >
       <ConstrainedText
-        text={String(payload.value)}
+        text={
+          <Text variant="Smaller" color="textSecondary">
+            {String(payload.value)}
+          </Text>
+        }
         centered
         tooltipStyle={{
           backgroundColor: theme.backgroundLevel1,
@@ -141,9 +145,7 @@ const ChartHeader = ({
   return (
     <Wrap>
       <Stack gap="r4">
-        <Text variant="Large" isEmphazed>
-          {title}
-        </Text>
+        <Text variant="ChartTitle">{title}</Text>
         {helpTooltip && (
           <IconHelp tooltipMessage={helpTooltip} title={helpTooltip} />
         )}
@@ -164,12 +166,6 @@ const ChartHeader = ({
     </Wrap>
   );
 };
-
-const ChartContainer = styled(Stack)`
-  background-color: ${({ theme }) => theme.backgroundLevel4};
-  padding: ${spacing.r16};
-  border-radius: ${spacing.r8};
-`;
 
 const Loading = ({ height }: { height: number }) => {
   return (
@@ -212,7 +208,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     useChartData(bars, type, colorSet, stacked, defaultSort, unitRange);
 
   return (
-    <ChartContainer direction="vertical" gap="r16">
+    <Stack direction="vertical" gap="r8">
       <ChartHeader
         title={title}
         secondaryTitle={secondaryTitle}
@@ -226,7 +222,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
           <BarChart
             data={rechartsData}
             accessibilityLayer
-            maxBarSize={CHART_CONSTANTS.MAX_BAR_SIZE}
+            barSize={CHART_CONSTANTS.BAR_SIZE}
+            height={height}
+            margin={{
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+            }}
           >
             <CartesianGrid
               vertical={false}
@@ -252,10 +255,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               tickCount={1}
               unit={` ${unitLabel}`}
               domain={[0, roundReferenceValue]}
-              tickFormatter={(value) => value.toFixed(0)}
+              tickFormatter={
+                (value) =>
+                  new Intl.NumberFormat('fr-FR').format(value.toFixed(0)) // Add a space as thousand separator
+              }
               axisLine={false}
               tick={{
                 fill: theme.textSecondary,
+                fontSize: fontSize.smaller,
               }}
               tickLine={false}
               label={{
@@ -264,7 +271,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               orientation="right"
             />
 
-            <ReferenceLine y={roundReferenceValue} fill={theme.textSecondary} />
+            <ReferenceLine
+              y={roundReferenceValue}
+              fill={theme.border}
+              strokeWidth={0.5} // Reduce stroke width to make it less visible
+            />
             <XAxis
               dataKey="category"
               tick={(props) => <CustomTick {...props} />}
@@ -288,6 +299,6 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
           </BarChart>
         </StyledResponsiveContainer>
       )}
-    </ChartContainer>
+    </Stack>
   );
 };
