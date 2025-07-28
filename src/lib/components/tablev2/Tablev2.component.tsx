@@ -33,6 +33,7 @@ import { TableWrapper, TooltipContent } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import { Icon } from '../icon/Icon.component';
+import { TableSync } from './TableSync';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -341,4 +342,5 @@ Table.SingleSelectableContent = SingleSelectableContent;
 Table.MultiSelectableContent = MultiSelectableContent;
 Table.Search = Search;
 Table.SearchWithQueryParams = SearchWithQueryParams;
+Table.Sync = TableSync;
 export { Table };

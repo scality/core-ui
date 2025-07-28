@@ -635,3 +635,44 @@ export const ErrorTable = {
     );
   },
 };
+
+export const TableWithSyncButton = {
+  render: ({}) => {
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    const handleSync = () => {
+      action('Sync button clicked')();
+      setIsLoading(true);
+
+      // Simulate loading for 2 seconds
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    };
+
+    return (
+      <Box>
+        <Title>Table with Sync Button</Title>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={2}
+        >
+          <Box>Total: {data.length} items</Box>
+          <Table.Sync
+            onSync={handleSync}
+            loading={isLoading}
+            tooltipOverlay="Synchronize table data"
+          />
+        </Box>
+        <Table columns={columns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </Box>
+    );
+  },
+};
