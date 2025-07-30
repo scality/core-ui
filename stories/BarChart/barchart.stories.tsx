@@ -9,7 +9,7 @@ import {
 } from '../../src/lib/components/barchartv2/Barchart.component';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
-import { Stack, Wrap } from '../../src/lib/spacing';
+import { spacing, Stack, Wrap } from '../../src/lib/spacing';
 import {
   CoreUITheme,
   lineColor1,
@@ -509,17 +509,17 @@ const exampleData = [
   {
     label: 'Success',
     data: [
-      ['category1', 10],
-      ['category2', 20],
-      ['category3', 30],
+      ['category1', 1000000],
+      ['category2', 2000000],
+      ['category3', 3000000],
     ],
   },
   {
     label: 'Failed',
     data: [
-      ['category1', 10],
-      ['category2', 20],
-      ['category3', 30],
+      ['category1', 1000000],
+      ['category2', 2000000],
+      ['category3', 3000000],
     ],
   },
 ] as const;
@@ -610,33 +610,42 @@ export const CompleteExample: Story = {
       );
     };
     return (
-      <Barchart
-        type="category"
-        title="Loading BarChart"
-        helpTooltip="Click on the button to load or unload data"
-        secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
-        rightTitle={
-          <Button
-            label={isLoading ? 'Load data' : 'Fake loading data'}
-            onClick={() => {
-              setIsLoading(!isLoading);
-              if (isLoading) {
-                setData(exampleData);
-              } else {
-                setData(undefined);
-              }
-            }}
-          />
-        }
-        bars={data || []}
-        tooltip={customTooltip}
-        isLoading={isLoading}
-        height={200}
-        colorSet={{
-          Success: theme.statusHealthy,
-          Failed: theme.statusCritical,
+      <div
+        style={{
+          width: '50%',
+          padding: spacing.r16,
+          borderRadius: spacing.r8,
+          backgroundColor: theme.backgroundLevel2,
         }}
-      />
+      >
+        <Barchart
+          type="category"
+          title="Loading BarChart"
+          helpTooltip="Click on the button to load or unload data"
+          secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
+          rightTitle={
+            <Button
+              label={isLoading ? 'Load data' : 'Fake loading data'}
+              onClick={() => {
+                setIsLoading(!isLoading);
+                if (isLoading) {
+                  setData(exampleData);
+                } else {
+                  setData(undefined);
+                }
+              }}
+            />
+          }
+          bars={data || []}
+          tooltip={customTooltip}
+          isLoading={isLoading}
+          height={200}
+          colorSet={{
+            Success: 'lineColor1',
+            Failed: 'lineColor2',
+          }}
+        />
+      </div>
     );
   },
 };
