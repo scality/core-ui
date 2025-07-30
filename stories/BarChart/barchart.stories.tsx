@@ -74,38 +74,38 @@ const timeData7Days = [
     label: 'Success',
     data: [
       // 7 days ago - aligned to the exact timestamp that generateTimestamps will create
-      [Date.now() - 7 * 24 * 60 * 60 * 1000, 15],
+      [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 15],
       // 6 days ago
-      [Date.now() - 6 * 24 * 60 * 60 * 1000, 12],
+      [new Date(Date.now() - 6 * 24 * 60 * 60 * 1000), 12],
       // 5 days ago
-      [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
+      [new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), 30],
       // 4 days ago
-      [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
+      [new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), 20],
       // 3 days ago
-      [Date.now() - 3 * 24 * 60 * 60 * 1000, 25],
+      [new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), 25],
       // 2 days ago
-      [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
+      [new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), 18],
       // 1 day ago
-      [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
+      [new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), 32],
     ],
   },
   {
     label: 'Failed',
     data: [
       // 7 days ago
-      [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
+      [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 5],
       // 6 days ago
-      [Date.now() - 6 * 24 * 60 * 60 * 1000, 8],
+      [new Date(Date.now() - 6 * 24 * 60 * 60 * 1000), 8],
       // 5 days ago
-      [Date.now() - 5 * 24 * 60 * 60 * 1000, 2],
+      [new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), 2],
       // 4 days ago
-      [Date.now() - 4 * 24 * 60 * 60 * 1000, 12],
+      [new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), 12],
       // 3 days ago
-      [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
+      [new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), 6],
       // 2 days ago
-      [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
+      [new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), 9],
       // 1 day ago
-      [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
+      [new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), 7],
     ],
   },
 ] as const;
@@ -118,12 +118,14 @@ export const Time7Days: Story = {
         type={{
           type: 'time',
           timeRange: {
-            startTimestamp:
+            startDate: new Date(
               new Date(Date.now()).setHours(0, 0, 0, 0) -
-              7 * 24 * 60 * 60 * 1000,
-            endTimestamp:
+                7 * 24 * 60 * 60 * 1000,
+            ),
+            endDate: new Date(
               new Date(Date.now()).setHours(0, 0, 0, 0) -
-              1 * 24 * 60 * 60 * 1000,
+                1 * 24 * 60 * 60 * 1000,
+            ),
             interval: 24 * 60 * 60 * 1000,
           },
         }}
@@ -142,34 +144,33 @@ const timeData7DaysWithMissingData = [
     label: 'Success',
     data: [
       // 7 days ago
-      [Date.now() - 7 * 24 * 60 * 60 * 1000 + 12, 15],
-      // 6 days ago
+      [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 12), 15],
       // 5 days ago
-      [Date.now() - 5 * 24 * 60 * 60 * 1000, 30],
+      [new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), 30],
       // 4 days ago
-      [Date.now() - 4 * 24 * 60 * 60 * 1000, 20],
+      [new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), 20],
       // 3 days ago
       // 2 days ago
-      [Date.now() - 2 * 24 * 60 * 60 * 1000, 18],
+      [new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), 18],
       // 1 day ago
-      [Date.now() - 1 * 24 * 60 * 60 * 1000, 32],
+      [new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), 32],
     ],
   },
   {
     label: 'Failed',
     data: [
       // 7 days ago
-      [Date.now() - 7 * 24 * 60 * 60 * 1000, 5],
+      [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), 5],
       // 6 days ago
       // 5 days ago
-      [Date.now() - 5 * 24 * 60 * 60 * 1000, 1],
+      [new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), 1],
       // 4 days ago
       // 3 days ago
-      [Date.now() - 3 * 24 * 60 * 60 * 1000, 6],
+      [new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), 6],
       // 2 days ago
-      [Date.now() - 2 * 24 * 60 * 60 * 1000, 9],
+      [new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), 9],
       // 1 day ago
-      [Date.now() - 1 * 24 * 60 * 60 * 1000, 7],
+      [new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), 7],
     ],
   },
 ] as const;
@@ -182,12 +183,14 @@ export const Time7DaysWithMissingData: Story = {
         type={{
           type: 'time',
           timeRange: {
-            startTimestamp:
+            startDate: new Date(
               new Date(Date.now()).setHours(0, 0, 0, 0) -
-              7 * 24 * 60 * 60 * 1000,
-            endTimestamp:
+                7 * 24 * 60 * 60 * 1000,
+            ),
+            endDate: new Date(
               new Date(Date.now()).setHours(0, 0, 0, 0) -
-              1 * 24 * 60 * 60 * 1000,
+                1 * 24 * 60 * 60 * 1000,
+            ),
             interval: 24 * 60 * 60 * 1000,
           },
         }}
@@ -205,59 +208,59 @@ const timeDataLast24Hours = [
   {
     label: 'Success',
     data: [
-      [Date.now() - 24 * 60 * 60 * 1000, 15],
-      [Date.now() - 23 * 60 * 60 * 1000, 12],
-      [Date.now() - 22 * 60 * 60 * 1000, 30],
-      [Date.now() - 21 * 60 * 60 * 1000, 20],
-      [Date.now() - 20 * 60 * 60 * 1000, 25],
-      [Date.now() - 19 * 60 * 60 * 1000, 18],
-      [Date.now() - 18 * 60 * 60 * 1000, 32],
-      [Date.now() - 17 * 60 * 60 * 1000, 19],
-      [Date.now() - 16 * 60 * 60 * 1000, 10],
-      [Date.now() - 15 * 60 * 60 * 1000, 11],
-      [Date.now() - 14 * 60 * 60 * 1000, 12],
-      [Date.now() - 13 * 60 * 60 * 1000, 13],
-      [Date.now() - 12 * 60 * 60 * 1000, 11],
-      [Date.now() - 11 * 60 * 60 * 1000, 17],
-      [Date.now() - 10 * 60 * 60 * 1000, 16],
-      [Date.now() - 9 * 60 * 60 * 1000, 13],
-      [Date.now() - 8 * 60 * 60 * 1000, 15],
-      [Date.now() - 7 * 60 * 60 * 1000, 16],
-      [Date.now() - 6 * 60 * 60 * 1000, 17],
-      [Date.now() - 5 * 60 * 60 * 1000, 18],
-      [Date.now() - 4 * 60 * 60 * 1000, 19],
-      [Date.now() - 3 * 60 * 60 * 1000, 20],
-      [Date.now() - 2 * 60 * 60 * 1000, 21],
-      [Date.now() - 1 * 60 * 60 * 1000, 22],
+      [new Date(Date.now() - 24 * 60 * 60 * 1000), 15],
+      [new Date(Date.now() - 23 * 60 * 60 * 1000), 12],
+      [new Date(Date.now() - 22 * 60 * 60 * 1000), 30],
+      [new Date(Date.now() - 21 * 60 * 60 * 1000), 20],
+      [new Date(Date.now() - 20 * 60 * 60 * 1000), 25],
+      [new Date(Date.now() - 19 * 60 * 60 * 1000), 18],
+      [new Date(Date.now() - 18 * 60 * 60 * 1000), 32],
+      [new Date(Date.now() - 17 * 60 * 60 * 1000), 19],
+      [new Date(Date.now() - 16 * 60 * 60 * 1000), 10],
+      [new Date(Date.now() - 15 * 60 * 60 * 1000), 11],
+      [new Date(Date.now() - 14 * 60 * 60 * 1000), 12],
+      [new Date(Date.now() - 13 * 60 * 60 * 1000), 13],
+      [new Date(Date.now() - 12 * 60 * 60 * 1000), 11],
+      [new Date(Date.now() - 11 * 60 * 60 * 1000), 17],
+      [new Date(Date.now() - 10 * 60 * 60 * 1000), 16],
+      [new Date(Date.now() - 9 * 60 * 60 * 1000), 13],
+      [new Date(Date.now() - 8 * 60 * 60 * 1000), 15],
+      [new Date(Date.now() - 7 * 60 * 60 * 1000), 16],
+      [new Date(Date.now() - 6 * 60 * 60 * 1000), 17],
+      [new Date(Date.now() - 5 * 60 * 60 * 1000), 18],
+      [new Date(Date.now() - 4 * 60 * 60 * 1000), 19],
+      [new Date(Date.now() - 3 * 60 * 60 * 1000), 20],
+      [new Date(Date.now() - 2 * 60 * 60 * 1000), 21],
+      [new Date(Date.now() - 1 * 60 * 60 * 1000), 22],
     ],
   },
   {
     label: 'Failed',
     data: [
-      [Date.now() - 24 * 60 * 60 * 1000, 5],
-      [Date.now() - 23 * 60 * 60 * 1000, 8],
-      [Date.now() - 22 * 60 * 60 * 1000, 2],
-      [Date.now() - 21 * 60 * 60 * 1000, 12],
-      [Date.now() - 20 * 60 * 60 * 1000, 6],
-      [Date.now() - 19 * 60 * 60 * 1000, 9],
-      [Date.now() - 18 * 60 * 60 * 1000, 7],
-      [Date.now() - 17 * 60 * 60 * 1000, 1],
-      [Date.now() - 16 * 60 * 60 * 1000, 1],
-      [Date.now() - 15 * 60 * 60 * 1000, 2],
-      [Date.now() - 14 * 60 * 60 * 1000, 4],
-      [Date.now() - 13 * 60 * 60 * 1000, 2],
-      [Date.now() - 12 * 60 * 60 * 1000, 3],
-      [Date.now() - 11 * 60 * 60 * 1000, 1],
-      [Date.now() - 10 * 60 * 60 * 1000, 1],
-      [Date.now() - 9 * 60 * 60 * 1000, 1],
-      [Date.now() - 8 * 60 * 60 * 1000, 1],
-      [Date.now() - 7 * 60 * 60 * 1000, 1],
-      [Date.now() - 6 * 60 * 60 * 1000, 1],
-      [Date.now() - 5 * 60 * 60 * 1000, 1],
-      [Date.now() - 4 * 60 * 60 * 1000, 5],
-      [Date.now() - 3 * 60 * 60 * 1000, 3],
-      [Date.now() - 2 * 60 * 60 * 1000, 2],
-      [Date.now() - 1 * 60 * 60 * 1000, 1],
+      [new Date(Date.now() - 24 * 60 * 60 * 1000), 5],
+      [new Date(Date.now() - 23 * 60 * 60 * 1000), 8],
+      [new Date(Date.now() - 22 * 60 * 60 * 1000), 2],
+      [new Date(Date.now() - 21 * 60 * 60 * 1000), 12],
+      [new Date(Date.now() - 20 * 60 * 60 * 1000), 6],
+      [new Date(Date.now() - 19 * 60 * 60 * 1000), 9],
+      [new Date(Date.now() - 18 * 60 * 60 * 1000), 7],
+      [new Date(Date.now() - 17 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 16 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 15 * 60 * 60 * 1000), 2],
+      [new Date(Date.now() - 14 * 60 * 60 * 1000), 4],
+      [new Date(Date.now() - 13 * 60 * 60 * 1000), 2],
+      [new Date(Date.now() - 12 * 60 * 60 * 1000), 3],
+      [new Date(Date.now() - 11 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 10 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 9 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 8 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 7 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 6 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 5 * 60 * 60 * 1000), 1],
+      [new Date(Date.now() - 4 * 60 * 60 * 1000), 5],
+      [new Date(Date.now() - 3 * 60 * 60 * 1000), 3],
+      [new Date(Date.now() - 2 * 60 * 60 * 1000), 2],
+      [new Date(Date.now() - 1 * 60 * 60 * 1000), 1],
     ],
   },
 ] as const;
@@ -270,9 +273,10 @@ export const TimeLast24Hours: Story = {
         type={{
           type: 'time',
           timeRange: {
-            startTimestamp:
+            startDate: new Date(
               new Date(Date.now()).setMinutes(0, 0, 0) - 24 * 60 * 60 * 1000,
-            endTimestamp: new Date(Date.now()).setMinutes(0, 0, 0),
+            ),
+            endDate: new Date(new Date(Date.now()).setMinutes(0, 0, 0)),
             interval: 60 * 60 * 1000,
           },
         }}

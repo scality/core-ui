@@ -51,46 +51,44 @@ export const getMaxBarValue = (
 };
 
 /**
- * Generates time ranges between start and end timestamps based on the given interval
- * @param startTimestamp - Start timestamp in milliseconds
- * @param endTimestamp - End timestamp in milliseconds
+ * Generates time ranges between start and end dates based on the given interval
+ * @param startDate - Start date
+ * @param endDate - End date
  * @param interval - Interval in milliseconds
- * @returns Array of time ranges with start and end properties
+ * @returns Array of time ranges with start and end properties as Date objects
  */
 const generateTimeRanges = (
-  startTimestamp: number,
-  endTimestamp: number,
+  startDate: Date,
+  endDate: Date,
   interval: number,
-): { start: number; end: number }[] => {
-  const ranges: { start: number; end: number }[] = [];
-  if (!startTimestamp || !endTimestamp || !interval) {
+): { start: Date; end: Date }[] => {
+  const ranges: { start: Date; end: Date }[] = [];
+  if (!startDate || !endDate || !interval) {
     return ranges;
   }
 
-  let currentTimestamp = startTimestamp;
-  while (currentTimestamp <= endTimestamp) {
-    const rangeEnd = currentTimestamp + interval;
+  let currentDate = new Date(startDate.getTime());
+  while (currentDate.getTime() <= endDate.getTime()) {
+    const rangeEnd = new Date(currentDate.getTime() + interval);
 
     ranges.push({
-      start: currentTimestamp,
+      start: new Date(currentDate.getTime()),
       end: rangeEnd,
     });
 
-    currentTimestamp += interval;
+    currentDate = new Date(currentDate.getTime() + interval);
   }
 
   return ranges;
 };
 
 /**
- * Formats a timestamp based on the interval
- * @param timestamp - Timestamp in milliseconds
+ * Formats a date based on the interval
+ * @param date - Date object
  * @param interval - Interval in milliseconds
  * @returns Formatted string
  */
-const formatTimestamp = (timestamp: number, interval: number): string => {
-  const date = new Date(timestamp);
-
+const formatDate = (date: Date, interval: number): string => {
   if (interval > 24 * 60 * 60 * 1000) {
     return (
       DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '') +
@@ -110,18 +108,21 @@ const formatTimestamp = (timestamp: number, interval: number): string => {
 };
 
 /**
- * Finds the time range that contains the given timestamp
- * @param timestamp - Data point timestamp
+ * Finds the time range that contains the given date
+ * @param date - Data point date
  * @param ranges - Array of time ranges
- * @returns The range that contains the timestamp, or null if not found
+ * @returns The range that contains the date, or null if not found
  */
-const findRangeForTimestamp = (
-  timestamp: number,
-  ranges: { start: number; end: number }[],
-): { start: number; end: number } | null => {
+const findRangeForDate = (
+  date: Date,
+  ranges: { start: Date; end: Date }[],
+): { start: Date; end: Date } | null => {
+  const timestamp = date.getTime();
   return (
-    ranges.find((range) => timestamp >= range.start && timestamp < range.end) ||
-    null
+    ranges.find(
+      (range) =>
+        timestamp >= range.start.getTime() && timestamp < range.end.getTime(),
+    ) || null
   );
 };
 
@@ -133,16 +134,16 @@ export const transformTimeData = <T extends BarchartBars>(
   type: {
     type: 'time';
     timeRange: {
-      startTimestamp: number;
-      endTimestamp: number;
+      startDate: Date;
+      endDate: Date;
       interval: number;
     };
   },
   barDataKeys: string[],
 ) => {
   const timeRanges = generateTimeRanges(
-    type.timeRange.startTimestamp,
-    type.timeRange.endTimestamp,
+    type.timeRange.startDate,
+    type.timeRange.endDate,
     type.timeRange.interval,
   );
 
@@ -153,25 +154,27 @@ export const transformTimeData = <T extends BarchartBars>(
 
   // Initialize all ranges with zeros
   timeRanges.forEach((range) => {
-    const categoryDisplay = formatTimestamp(
-      range.start,
-      type.timeRange.interval,
-    );
+    const categoryDisplay = formatDate(range.start, type.timeRange.interval);
     const initialData: { [key: string]: string | number } = {
       category: categoryDisplay,
     };
     barDataKeys.forEach((dataKey) => {
       initialData[dataKey] = 0;
     });
-    categoryMap.set(range.start, initialData);
+    categoryMap.set(range.start.getTime(), initialData);
   });
 
   // Populate with actual data
   bars.forEach((bar) => {
-    bar.data.forEach(([timestamp, value]) => {
-      const range = findRangeForTimestamp(timestamp as number, timeRanges);
+    bar.data.forEach(([dateValue, value]) => {
+      // Convert to Date if it's not already a Date object
+      const date =
+        dateValue instanceof Date
+          ? dateValue
+          : new Date(dateValue as string | number);
+      const range = findRangeForDate(date, timeRanges);
       if (range) {
-        const existingData = categoryMap.get(range.start)!;
+        const existingData = categoryMap.get(range.start.getTime())!;
         existingData[bar.label] = value;
       }
     });

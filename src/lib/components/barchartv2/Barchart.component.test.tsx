@@ -40,9 +40,9 @@ const testTimeBars = [
   {
     label: 'Success',
     data: [
-      [new Date('2024-07-05').getTime(), 10],
-      [new Date('2024-07-06').getTime(), 20],
-      [new Date('2024-07-07').getTime(), 30],
+      [new Date('2024-07-05'), 10],
+      [new Date('2024-07-06'), 20],
+      [new Date('2024-07-07'), 30],
     ],
     color: 'green',
   },
@@ -76,8 +76,8 @@ describe('Barchart', () => {
             type={{
               type: 'time',
               timeRange: {
-                startTimestamp: new Date('2024-07-05').getTime(),
-                endTimestamp: new Date('2024-07-07').getTime(),
+                startDate: new Date('2024-07-05'),
+                endDate: new Date('2024-07-07'),
                 interval: ONE_DAY_IN_MILLISECONDS,
               },
             }}
@@ -104,8 +104,8 @@ describe('Barchart', () => {
             type={{
               type: 'time',
               timeRange: {
-                startTimestamp: new Date('2024-07-03').getTime(),
-                endTimestamp: new Date('2024-07-07').getTime(),
+                startDate: new Date('2024-07-03'),
+                endDate: new Date('2024-07-07'),
                 interval: ONE_DAY_IN_MILLISECONDS,
               },
             }}
@@ -128,17 +128,17 @@ describe('Barchart', () => {
         {
           label: 'Success',
           data: [
-            [new Date('2024-07-05').getTime(), 10], // Friday
-            [new Date('2024-07-08').getTime(), 15], // Monday
-          ] as [number, number][],
+            [new Date('2024-07-05'), 10], // Friday
+            [new Date('2024-07-08'), 15], // Monday
+          ] as [Date, number][],
           color: 'green',
         },
         {
           label: 'Failed',
           data: [
-            [new Date('2024-07-05').getTime(), 2], // Friday
-            [new Date('2024-07-08').getTime(), 3], // Monday
-          ] as [number, number][],
+            [new Date('2024-07-05'), 2], // Friday
+            [new Date('2024-07-08'), 3], // Monday
+          ] as [Date, number][],
           color: 'red',
         },
       ] as const;
@@ -146,8 +146,8 @@ describe('Barchart', () => {
       const type = {
         type: 'time' as const,
         timeRange: {
-          startTimestamp: new Date('2024-07-05').getTime(),
-          endTimestamp: new Date('2024-07-08').getTime(),
+          startDate: new Date('2024-07-05'),
+          endDate: new Date('2024-07-08'),
           interval: ONE_DAY_IN_MILLISECONDS,
         },
       };
@@ -179,13 +179,13 @@ describe('Barchart', () => {
         {
           label: 'Success',
           data: [
-            [new Date('2024-07-05').getTime(), 10],
-            [new Date('2024-07-06').getTime(), 10],
-            [new Date('2024-07-07').getTime(), 10],
-            [new Date('2024-07-08').getTime(), 10],
-            [new Date('2024-07-09').getTime(), 10],
-            [new Date('2024-07-10').getTime(), 10],
-            [new Date('2024-07-11').getTime(), 10],
+            [new Date('2024-07-05'), 10],
+            [new Date('2024-07-06'), 10],
+            [new Date('2024-07-07'), 10],
+            [new Date('2024-07-08'), 10],
+            [new Date('2024-07-09'), 10],
+            [new Date('2024-07-10'), 10],
+            [new Date('2024-07-11'), 10],
           ],
           color: 'green',
         },
@@ -194,8 +194,8 @@ describe('Barchart', () => {
       const type = {
         type: 'time' as const,
         timeRange: {
-          startTimestamp: new Date('2024-07-05').getTime(),
-          endTimestamp: new Date('2024-07-11').getTime(),
+          startDate: new Date('2024-07-05'),
+          endDate: new Date('2024-07-11'),
           interval: ONE_DAY_IN_MILLISECONDS,
         },
       };
@@ -226,8 +226,8 @@ describe('Barchart', () => {
         {
           label: 'Success',
           data: [
-            [new Date('2024-07-05T10:00:00').getTime(), 10],
-            [new Date('2024-07-05T12:00:00').getTime(), 20],
+            [new Date('2024-07-05T10:00:00'), 10],
+            [new Date('2024-07-05T12:00:00'), 20],
           ],
           color: 'green',
         },
@@ -240,8 +240,8 @@ describe('Barchart', () => {
             type={{
               type: 'time',
               timeRange: {
-                startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
-                endTimestamp: new Date('2024-07-05T12:00:00').getTime(),
+                startDate: new Date('2024-07-05T10:00:00'),
+                endDate: new Date('2024-07-05T12:00:00'),
                 interval: ONE_HOUR_IN_MILLISECONDS,
               },
             }}

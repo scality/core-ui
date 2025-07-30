@@ -45,17 +45,17 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T00:00:00').getTime(), 10],
-          [new Date('2024-07-06T00:00:00').getTime(), 20],
-        ] as [number, number][],
+          [new Date('2024-07-05T00:00:00'), 10],
+          [new Date('2024-07-06T00:00:00'), 20],
+        ] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        startDate: new Date('2024-07-05T00:00:00'),
+        endDate: new Date('2024-07-06T00:00:00'),
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -75,18 +75,18 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T00:00:00').getTime(), 10],
+          [new Date('2024-07-05T00:00:00'), 10],
           // Missing July 6th
-          [new Date('2024-07-07T00:00:00').getTime(), 30],
-        ] as [number, number][],
+          [new Date('2024-07-07T00:00:00'), 30],
+        ] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-        endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+        startDate: new Date('2024-07-05T00:00:00'),
+        endDate: new Date('2024-07-07T00:00:00'),
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -107,17 +107,17 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T10:00:00').getTime(), 10],
-          [new Date('2024-07-05T11:00:00').getTime(), 20],
-        ] as [number, number][],
+          [new Date('2024-07-05T10:00:00'), 10],
+          [new Date('2024-07-05T11:00:00'), 20],
+        ] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T10:00:00').getTime(),
-        endTimestamp: new Date('2024-07-05T11:00:00').getTime(),
+        startDate: new Date('2024-07-05T10:00:00'),
+        endDate: new Date('2024-07-05T11:00:00'),
         interval: 60 * 60 * 1000, // 1 hour
       },
     };
@@ -137,18 +137,18 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T08:30:00').getTime(), 10], // 8:30 AM
-          [new Date('2024-07-05T14:45:00').getTime(), 25], // 2:45 PM (should overwrite 8:30 AM)
-          [new Date('2024-07-06T09:15:00').getTime(), 15], // Next day
-        ] as [number, number][],
+          [new Date('2024-07-05T08:30:00'), 10], // 8:30 AM
+          [new Date('2024-07-05T14:45:00'), 25], // 2:45 PM (should overwrite 8:30 AM)
+          [new Date('2024-07-06T09:15:00'), 15], // Next day
+        ] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        startDate: new Date('2024-07-05T00:00:00'),
+        endDate: new Date('2024-07-06T00:00:00'),
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -168,19 +168,18 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          // Data points added out of chronological order
-          [new Date('2024-07-07T10:00:00').getTime(), 30], // July 7th (latest)
-          [new Date('2024-07-05T08:00:00').getTime(), 10], // July 5th (earliest)
-          [new Date('2024-07-06T14:00:00').getTime(), 20], // July 6th (middle)
-        ] as [number, number][],
+          [new Date('2024-07-07T10:00:00'), 30], // July 7th (latest)
+          [new Date('2024-07-05T08:00:00'), 10], // July 5th (earliest)
+          [new Date('2024-07-06T14:00:00'), 20], // July 6th (middle)
+        ] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-        endTimestamp: new Date('2024-07-07T00:00:00').getTime(),
+        startDate: new Date('2024-07-05T00:00:00'),
+        endDate: new Date('2024-07-07T00:00:00'),
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -201,25 +200,19 @@ describe('transformTimeData', () => {
     const bars = [
       {
         label: 'Success',
-        data: [[new Date('2024-07-05T00:00:00').getTime(), 10]] as [
-          number,
-          number,
-        ][],
+        data: [[new Date('2024-07-05T00:00:00'), 10]] as [Date, number][],
       },
       {
         label: 'Failed',
-        data: [[new Date('2024-07-06T00:00:00').getTime(), 5]] as [
-          number,
-          number,
-        ][],
+        data: [[new Date('2024-07-06T00:00:00'), 5]] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-        endTimestamp: new Date('2024-07-06T00:00:00').getTime(),
+        startDate: new Date('2024-07-05T00:00:00'),
+        endDate: new Date('2024-07-06T00:00:00'),
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -576,17 +569,11 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
     const bars = [
       {
         label: 'Success Count',
-        data: [[new Date('2024-07-05T00:00:00').getTime(), 10]] as [
-          number,
-          number,
-        ][],
+        data: [[new Date('2024-07-05T00:00:00'), 10]] as [Date, number][],
       },
       {
         label: 'Failed Count',
-        data: [[new Date('2024-07-05T00:00:00').getTime(), 5]] as [
-          number,
-          number,
-        ][],
+        data: [[new Date('2024-07-05T00:00:00'), 5]] as [Date, number][],
       },
     ];
 
@@ -595,8 +582,8 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
       {
         type: 'time',
         timeRange: {
-          startTimestamp: new Date('2024-07-05T00:00:00').getTime(),
-          endTimestamp: new Date('2024-07-05T00:00:00').getTime(),
+          startDate: new Date('2024-07-05T00:00:00'),
+          endDate: new Date('2024-07-05T00:00:00'),
           interval: 24 * 60 * 60 * 1000,
         },
       },
