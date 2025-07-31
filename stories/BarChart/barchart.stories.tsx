@@ -10,12 +10,7 @@ import {
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
 import { spacing, Stack, Wrap } from '../../src/lib/spacing';
-import {
-  CoreUITheme,
-  lineColor1,
-  lineColor2,
-  lineColor3,
-} from '../../src/lib/style/theme';
+import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
 
 type Story = StoryObj<typeof Barchart>;
