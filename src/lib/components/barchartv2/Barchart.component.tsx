@@ -38,8 +38,8 @@ const CHART_CONSTANTS = {
 export type TimeType = {
   type: 'time';
   timeRange: {
-    startTimestamp: number;
-    endTimestamp: number;
+    startDate: Date;
+    endDate: Date;
     interval: number;
   };
 };
@@ -50,7 +50,11 @@ export type Point = {
 
 export type BarchartBars = readonly {
   readonly label: string;
-  readonly data: readonly (readonly [number | string, number | string])[];
+  /**
+   * When using a time type, the data should be an array of [Date, value]
+   * so use Date instead of timestamp for transformation data in format fn
+   */
+  readonly data: readonly (readonly [string | Date, number | string])[];
 }[];
 
 export type BarchartTooltipFn<T extends BarchartBars> = (currentPoint: {
