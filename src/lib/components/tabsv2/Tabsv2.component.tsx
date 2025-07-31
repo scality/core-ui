@@ -1,9 +1,11 @@
-import React, {
+import {
   createContext,
   ReactElement,
   useCallback,
   useEffect,
   useState,
+  Children,
+  isValidElement,
 } from 'react';
 import {
   matchPath,
@@ -65,10 +67,10 @@ function Tabs({
     number | null | undefined
   >(null);
   const queryURL = new URLSearchParams(location.search);
-  const filteredTabsChildren: ReactElement<TabProps>[] = React.Children.toArray(
+  const filteredTabsChildren: ReactElement<TabProps>[] = Children.toArray(
     children,
   ).filter(
-    (child) => React.isValidElement(child) && child.type === Tab,
+    (child) => isValidElement(child) && child.type === Tab,
   ) as ReactElement<TabProps>[];
 
   const matchQuery = useCallback(
@@ -234,9 +236,7 @@ function Tabs({
             return (
               <Route
                 key={index}
-                path={
-                  tab.props.path.startsWith('/') ? '/' + path : path
-                }
+                path={tab.props.path.startsWith('/') ? '/' + path : path}
                 element={
                   <>
                     <TabContent

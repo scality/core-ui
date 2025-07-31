@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext } from 'react';
 export const SyncedCursorChartsContext = createContext<{
   cursorX: number;
   setCursorX: (cursorX: number) => void;

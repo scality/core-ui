@@ -1,7 +1,8 @@
-import React, {
+import {
   CSSProperties,
   forwardRef,
   TextareaHTMLAttributes,
+  ForwardedRef,
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
@@ -77,7 +78,7 @@ const TextAreaContainer = styled.textarea<{
 
 function TextAreaElement(
   { rows = 3, cols = 20, width, height, variant = 'code', ...rest }: Props,
-  ref: React.ForwardedRef<RefType>,
+  ref: ForwardedRef<RefType>,
 ) {
   if (width || height) {
     return (

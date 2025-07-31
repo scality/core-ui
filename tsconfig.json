@@ -1,5 +1,5 @@
 {
-  "exclude": ["src/**/*.test.*","stories/*", "dist/**/*"],
+  "exclude": ["src/**/*.test.*", "stories/*", "dist/**/*"],
   "compilerOptions": {
     "module": "esnext",
     "declaration": true, // Generate d.ts files
@@ -13,6 +13,9 @@
     "moduleResolution": "node",
     "strict": true,
     "strictFunctionTypes": true,
-    "noImplicitAny": false //For now it is too costly to enable this one
+    "noImplicitAny": false, //For now it is too costly to enable this one
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   }
 }

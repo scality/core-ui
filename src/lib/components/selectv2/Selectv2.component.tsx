@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useState,
@@ -8,6 +8,8 @@ import React, {
   ForwardRefExoticComponent,
   RefAttributes,
   useImperativeHandle,
+  ReactNode,
+  Ref,
 } from 'react';
 import { ScrollbarWrapper, Tooltip } from '../../index';
 import {
@@ -31,10 +33,10 @@ const NOPT_SEARCH = 8;
 export type OptionProps = {
   title?: string;
   disabled?: boolean;
-  icon?: React.ReactNode;
-  children?: React.ReactNode;
+  icon?: ReactNode;
+  children?: ReactNode;
   value: string;
-  disabledReason?: React.ReactNode;
+  disabledReason?: ReactNode;
 };
 const usePreviousValue = (value) => {
   const ref = useRef(null);
@@ -335,7 +337,7 @@ export type SelectProps = {
   id: string;
   placeholder?: string;
   disabled?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
   value?: string;
   onFocus?: (event: FocusEvent) => void;
   onBlur?: (event: FocusEvent) => void;
@@ -349,11 +351,11 @@ export type SelectProps = {
 
 type SelectOptionProps = {
   value: string;
-  label: React.ReactNode;
+  label: ReactNode;
   isDisabled: boolean;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   optionProps: any;
-  disabledReason?: React.ReactNode;
+  disabledReason?: ReactNode;
 };
 
 type SelectComponentType<
@@ -388,7 +390,7 @@ function SelectBox<
   selectRef,
   ...rest
 }: SelectProps & {
-  selectRef?: React.Ref<SelectRef<OptionType, IsMulti, GroupType>>;
+  selectRef?: Ref<SelectRef<OptionType, IsMulti, GroupType>>;
 }) {
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');

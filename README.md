@@ -8,13 +8,13 @@ Core-UI is a component library containing all components, layouts, icons and the
 
 #### Manual installation
 
-- Add ```@scality/core-ui``` in the ```package.json```'s dependencies of your project.
+- Add `@scality/core-ui` in the `package.json`'s dependencies of your project.
 
 ```json
     "@scality/core-ui": "0.115.0",
 ```
 
-- ```@scality/core-ui``` requires the peerDependencies below. Make sure that you have them in the ```package.json```'s dependencies.
+- `@scality/core-ui` requires the peerDependencies below. Make sure that you have them in the `package.json`'s dependencies.
 
 ```json
     "@fortawesome/fontawesome-free": "^5.10.2",
@@ -53,7 +53,7 @@ npm install
 
 ### Usage
 
-- Import a component from ```@scality/core-ui/dist/next'``` or ```@scality/core-ui```
+- Import a component from `@scality/core-ui/dist/next'` or `@scality/core-ui`
 
 - Use props to change its appearance and behaviour
 
@@ -61,8 +61,12 @@ npm install
 import { Button } from '@scality/core-ui/dist/next';
 import { Icon } from '@scality/core-ui';
 
-<Button variant="primary" onClick={handleClick} label="Save" icon={<Icon name="Save" />} />
-
+<Button
+  variant="primary"
+  onClick={handleClick}
+  label="Save"
+  icon={<Icon name="Save" />}
+/>;
 ```
 
 To learn more about the available components, you can read the [documentation](https://scality.github.io/core-ui/)
@@ -73,17 +77,15 @@ Components are themable by using the [styled-components theming concept](https:/
 Wrap your app in a `ThemeProvider` and provide it a theme :
 
 ```jsx
-
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '@scality/core-ui';
 import { coreUIAvailableThemes as themes } from '@scality/core-ui/dist/style/theme';
 
 <ThemeProvider theme={themes.darkRebrand}>
-    <Layout sidebar={sidebar} navbar={navbar}>
-        ...
-    </Layout>
-</ThemeProvider>
-
+  <Layout sidebar={sidebar} navbar={navbar}>
+    ...
+  </Layout>
+</ThemeProvider>;
 ```
 
 There is 2 default theme available in Core-UI : you can find them [here](https://github.com/scality/core-ui/pull/684#:~:text=https%3A//github.com/scality/core%2Dui/blob/development/1.0/src/lib/style/theme.ts)
@@ -93,7 +95,6 @@ There is 2 default theme available in Core-UI : you can find them [here](https:/
 You can also modify or create a new theme. In this case make sure to respect this type :
 
 ```tsx
-
 export type CoreUITheme = {
   statusHealthy: string;
   statusHealthyRGB: string;
@@ -119,7 +120,6 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
-
 ```
 
 <br />
@@ -272,7 +272,7 @@ git push origin <branch-name>
 
 then create a `Pull Request`.
 Pull request needs to be approved by at least one reviewer.
-After your PR is approved you can comment `/approve`  
+After your PR is approved you can comment `/approve`
 
 ### Release
 
@@ -282,7 +282,7 @@ In the Core-UI repo, follow these steps :
 1. Go on `Releases` then `Draft a new release`
 2. In the select menu `Choose a tag` : Create a new tag (the current tag increment by 1).
 3. You can now `Generate release notes` : it will add all the PR infos since the last release. \
-You can add details if necessary.
+   You can add details if necessary.
 4. `Publish release`
 5. It will create a PR that need to be approved.
 
