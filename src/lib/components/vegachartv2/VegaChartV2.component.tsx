@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
+import { useEffect, useRef, useLayoutEffect, useMemo, forwardRef } from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
 import { createGlobalStyle, css, useTheme } from 'styled-components';
@@ -273,4 +273,4 @@ function VegaChartInternal(
   );
 } // @ts-expect-error
 
-export const VegaChart = React.forwardRef(VegaChartInternal);
+export const VegaChart = forwardRef(VegaChartInternal);
