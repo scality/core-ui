@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { ThemeColors } from '../../../style/theme';
 import { AppContainer } from './AppContainer';

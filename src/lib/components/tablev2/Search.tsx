@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useTableContext } from './Tablev2.component';
 import { SearchInput } from '../searchinput/SearchInput.component';
 import { Props } from '../searchinput/SearchInput.component';
@@ -74,7 +74,7 @@ export function TableSearch(props: SearchProps) {
     entityName = { en: { singular: 'result', plural: 'results' } },
   } = useTableContext();
   const totalDispayedRows = totalCount ? totalCount : rows.length;
-  React.useEffect(() => {
+  useEffect(() => {
     setGlobalFilter(value);
   }, [value, setGlobalFilter, preGlobalFilteredRows]);
   return (

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { zIndex } from '../../style/theme';
 import { spacing } from '../../spacing';

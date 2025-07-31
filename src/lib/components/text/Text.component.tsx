@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { CoreUITheme } from '../../style/theme';
@@ -142,17 +141,17 @@ export const Text = styled.span<{
   line-height: 1.5;
       `
       : props.variant === 'Large'
-      ? `
+        ? `
   font-size: 1.14rem;
   line-height: 1.5;
       `
-      : props.variant === 'Smaller'
-      ? `
+        : props.variant === 'Smaller'
+          ? `
   font-size: 0.71rem;
   line-height: 1.4;
   letter-spacing: 2%;// to be defined, percentage value is not valid
       `
-      : `
+          : `
   font-size: 1rem;
   line-height: ${spacing.r24};
       `}

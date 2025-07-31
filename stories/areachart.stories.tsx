@@ -1,4 +1,3 @@
-import React from 'react';
 import { AreaChart } from '../src/lib/components/areachart/AreaChart.component';
 import { area_charts } from './data/areachart';
 import { Wrapper } from './common';

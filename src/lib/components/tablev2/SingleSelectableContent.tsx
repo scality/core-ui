@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { areEqual } from 'react-window';
 import { Row } from 'react-table';
 import { useTableContext } from './Tablev2.component';
@@ -32,7 +32,7 @@ export type SingleSelectableContentProps<
   customItemKey?: (index: number, data: DATA_ROW) => string;
   hasScrollbar?: boolean;
   isLoadingMoreItems?: boolean;
-  children?: (rows: React.JSX.Element) => React.JSX.Element;
+  children?: (rows: JSX.Element) => JSX.Element;
 };
 
 export function SingleSelectableContent<

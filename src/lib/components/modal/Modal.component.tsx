@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useLayoutEffect, useRef } from 'react';
-import ReactDom from 'react-dom';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { Wrap, spacing } from '../../spacing';
 import { zIndex } from '../../style/theme';
@@ -95,7 +95,7 @@ const Modal = ({
     }
   }, [isOpen]);
   return isOpen
-    ? ReactDom.createPortal(
+    ? createPortal(
         <ModalContainer
           className="sc-modal"
           role={role}

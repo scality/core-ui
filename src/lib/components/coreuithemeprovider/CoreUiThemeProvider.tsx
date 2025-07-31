@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { space, fontSize, CoreUITheme } from '../../style/theme';
 

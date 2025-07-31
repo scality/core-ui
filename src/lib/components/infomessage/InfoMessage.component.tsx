@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import { Stack } from '../../spacing';
 import { Icon } from '../icon/Icon.component';

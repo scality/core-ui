@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';

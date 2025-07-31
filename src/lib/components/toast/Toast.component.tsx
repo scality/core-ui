@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { ReactNode, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { Box } from '../box/Box';
 import { Button } from '../buttonv2/Buttonv2.component';

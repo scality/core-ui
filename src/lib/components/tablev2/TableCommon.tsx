@@ -1,4 +1,4 @@
-import React, { ComponentType, LegacyRef, useCallback, useState } from 'react';
+import { ComponentType, LegacyRef, useCallback, useState } from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { Props as SidebarProps } from '../sidebar/Sidebar.component';

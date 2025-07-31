@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';

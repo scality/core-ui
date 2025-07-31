@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
+import { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
 import * as vega from 'vega';
 import vegaEmbed, { Result } from 'vega-embed';
 import { createGlobalStyle, css, useTheme } from 'styled-components';
