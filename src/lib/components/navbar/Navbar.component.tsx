@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { cloneElement, Fragment } from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
@@ -210,7 +210,7 @@ function NavBar({
               );
             }
             return link ? (
-              React.cloneElement(link, {
+              cloneElement(link, {
                 className: selected ? 'selected' : '',
                 'aria-selected': selected,
                 role: 'tab',

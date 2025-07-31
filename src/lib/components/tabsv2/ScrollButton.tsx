@@ -3,6 +3,7 @@ import { zIndex } from '../../style/theme';
 import { spacing } from '../../spacing';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { forwardRef } from 'react';
 
 const StyledScrollButton = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ type Props = {
   direction: 'left' | 'right';
   onClick: (arg0: React.SyntheticEvent<HTMLDivElement>) => void;
 };
-const ScrollButton = React.forwardRef(({ direction, onClick }: Props, ref) => {
+const ScrollButton = forwardRef(({ direction, onClick }: Props, ref) => {
   return (
     // @ts-ignore
     <StyledScrollButton direction={direction} onClick={onClick} ref={ref}>

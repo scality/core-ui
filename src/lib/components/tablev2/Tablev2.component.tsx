@@ -1,6 +1,6 @@
 /// <reference path="react-table-config.ts" />
 
-import { useEffect } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import {
   Column as TableColumn,
   CellProps as TableCellProps,
@@ -111,12 +111,12 @@ type TableContextType<
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
   hasScrollbar?: boolean;
 };
-const TableContext = React.createContext<TableContextType | null>(null);
+const TableContext = createContext<TableContextType | null>(null);
 
 export const useTableContext = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >() => {
-  const tableProps = React.useContext(TableContext);
+  const tableProps = useContext(TableContext);
 
   if (!tableProps) {
     throw new Error(
@@ -193,7 +193,7 @@ function Table<
     ...sortTypes,
   };
 
-  const stringifyFilter = React.useMemo(() => {
+  const stringifyFilter = useMemo(() => {
     return (rows: Row<object>[], columnIds: string[], value) => {
       const filteredRows = rows.filter((row) => {
         // we stringify the object to make sure we can match the value
@@ -205,7 +205,7 @@ function Table<
     };
   }, []);
 
-  const formattedInitiallySelectedRows = React.useMemo(() => {
+  const formattedInitiallySelectedRows = useMemo(() => {
     if (initiallySelectedRowsIds) {
       return Array.from(initiallySelectedRowsIds).reduce(
         (accumulatedValue, currentValue) => ({
@@ -218,13 +218,13 @@ function Table<
     return {};
   }, []) as Record<IdType<DATA_ROW>, boolean>;
 
-  const [rowHeight, setRowHeight] = React.useState<TableHeightKeyType>('h40');
+  const [rowHeight, setRowHeight] = useState<TableHeightKeyType>('h40');
 
-  const [syncScrollListener, setSyncScrollListener] = React.useState<
+  const [syncScrollListener, setSyncScrollListener] = useState<
     ((event: Event) => void) | null
   >(null);
 
-  const [hasScrollbar, setHasScrollbar] = React.useState<boolean>(false);
+  const [hasScrollbar, setHasScrollbar] = useState<boolean>(false);
 
   const {
     headerGroups,
