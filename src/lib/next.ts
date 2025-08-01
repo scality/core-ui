@@ -21,3 +21,4 @@ export {
   BarchartSortFn,
   BarchartTooltipFn,
 } from './components/barchartv2/Barchart.component';
+export { ChartLegendWrapper } from './components/chartlegend/ChartLegendWrapper';
