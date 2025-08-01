@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { chartColors, ChartColors } from '../../style/theme';
+import { ChartColors } from '../../style/theme';
 
 export type ChartLegendState = {
   selectedResources: string[];
@@ -37,14 +37,17 @@ export const ChartLegendWrapper = ({
   };
 
   const getColor = (resource: string) => {
-    const colorName = colorSet[resource];
-    if (!colorName) return undefined;
-
-    // Convert ChartColors to actual color values
-    return chartColors[colorName as ChartColors] || (colorName as string);
+    const color = colorSet[resource];
+    if (!color) {
+      console.warn(
+        `ChartLegendWrapper: No color defined for resource "${resource}"`,
+      );
+      return undefined;
+    }
+    return color;
   };
 
-  const legendState: ChartLegendState = {
+  const chartLegendState = {
     selectedResources,
     addSelectedResource,
     removeSelectedResource,
@@ -53,7 +56,7 @@ export const ChartLegendWrapper = ({
   };
 
   return (
-    <ChartLegendContext.Provider value={legendState}>
+    <ChartLegendContext.Provider value={chartLegendState}>
       {children}
     </ChartLegendContext.Provider>
   );
