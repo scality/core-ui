@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { getWrapper } from '../../testUtils';
 import { Barchart } from './Barchart.component';
+import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -48,19 +49,19 @@ const testTimeBars = [
   },
 ] as const;
 
+const testColorSet = {
+  Success: 'lineColor1',
+};
+
 describe('Barchart', () => {
   describe('Basic rendering', () => {
     it('should render the Barchart component with category data', async () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type="category"
-            bars={testBars}
-            colorSet={{
-              Success: 'lineColor1',
-            }}
-          />
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart type="category" bars={testBars} />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
 
@@ -72,20 +73,19 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type={{
-              type: 'time',
-              timeRange: {
-                startDate: new Date('2024-07-05'),
-                endDate: new Date('2024-07-07'),
-                interval: ONE_DAY_IN_MILLISECONDS,
-              },
-            }}
-            bars={testTimeBars}
-            colorSet={{
-              Success: 'lineColor1',
-            }}
-          />
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart
+              type={{
+                type: 'time',
+                timeRange: {
+                  startDate: new Date('2024-07-05'),
+                  endDate: new Date('2024-07-07'),
+                  interval: ONE_DAY_IN_MILLISECONDS,
+                },
+              }}
+              bars={testTimeBars}
+            />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
 
@@ -100,21 +100,20 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type={{
-              type: 'time',
-              timeRange: {
-                startDate: new Date('2024-07-03'),
-                endDate: new Date('2024-07-07'),
-                interval: ONE_DAY_IN_MILLISECONDS,
-              },
-            }}
-            // data starts on 2024-07-05
-            bars={testTimeBars}
-            colorSet={{
-              Success: 'lineColor1',
-            }}
-          />
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart
+              type={{
+                type: 'time',
+                timeRange: {
+                  startDate: new Date('2024-07-03'),
+                  endDate: new Date('2024-07-07'),
+                  interval: ONE_DAY_IN_MILLISECONDS,
+                },
+              }}
+              // data starts on 2024-07-05
+              bars={testTimeBars}
+            />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
       expect(screen.getByText('Wed03Jul')).toBeInTheDocument();
@@ -154,14 +153,14 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type={type}
-            bars={bars}
+          <ChartLegendWrapper
             colorSet={{
               Success: 'lineColor1',
               Failed: 'lineColor2',
             }}
-          />
+          >
+            <Barchart type={type} bars={bars} />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
 
@@ -202,13 +201,9 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type={type}
-            bars={testTimeBars}
-            colorSet={{
-              Success: 'lineColor1',
-            }}
-          />
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart type={type} bars={testTimeBars} />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
       await waitFor(() => {
@@ -236,20 +231,19 @@ describe('Barchart', () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
-          <Barchart
-            type={{
-              type: 'time',
-              timeRange: {
-                startDate: new Date('2024-07-05T10:00:00'),
-                endDate: new Date('2024-07-05T12:00:00'),
-                interval: ONE_HOUR_IN_MILLISECONDS,
-              },
-            }}
-            bars={testHourlyBars}
-            colorSet={{
-              Success: 'lineColor1',
-            }}
-          />
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart
+              type={{
+                type: 'time',
+                timeRange: {
+                  startDate: new Date('2024-07-05T10:00:00'),
+                  endDate: new Date('2024-07-05T12:00:00'),
+                  interval: ONE_HOUR_IN_MILLISECONDS,
+                },
+              }}
+              bars={testHourlyBars}
+            />
+          </ChartLegendWrapper>
         </Wrapper>,
       );
 
@@ -284,15 +278,9 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart
-          type="category"
-          bars={testStackedBars}
-          stacked={true}
-          colorSet={{
-            Success: 'lineColor1',
-            Failed: 'lineColor2',
-          }}
-        />
+        <ChartLegendWrapper colorSet={testColorSet}>
+          <Barchart type="category" bars={testStackedBars} stacked={true} />
+        </ChartLegendWrapper>
       </Wrapper>,
     );
 
@@ -317,18 +305,17 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart
-          type="category"
-          bars={testBars}
-          defaultSort={(pointA, pointB) => {
-            const valueA = pointA.Success;
-            const valueB = pointB.Success;
-            return valueB - valueA > 0 ? 1 : valueB - valueA < 0 ? -1 : 0;
-          }}
-          colorSet={{
-            Success: 'lineColor1',
-          }}
-        />
+        <ChartLegendWrapper colorSet={testColorSet}>
+          <Barchart
+            type="category"
+            bars={testBars}
+            defaultSort={(pointA, pointB) => {
+              const valueA = pointA.Success;
+              const valueB = pointB.Success;
+              return valueB - valueA > 0 ? 1 : valueB - valueA < 0 ? -1 : 0;
+            }}
+          />
+        </ChartLegendWrapper>
       </Wrapper>,
     );
 
@@ -343,14 +330,9 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart
-          type="category"
-          bars={[]}
-          isLoading
-          colorSet={{
-            Success: 'lineColor1',
-          }}
-        />
+        <ChartLegendWrapper colorSet={testColorSet}>
+          <Barchart type="category" bars={[]} isLoading />
+        </ChartLegendWrapper>
       </Wrapper>,
     );
     expect(screen.getByText('Loading Chart Data...')).toBeInTheDocument();
@@ -359,17 +341,16 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <Barchart
-          type="category"
-          bars={[]}
-          title="Test Title"
-          secondaryTitle="Test Secondary Title"
-          rightTitle="Test Right Title"
-          helpTooltip="Test Help Tooltip"
-          colorSet={{
-            Success: 'lineColor1',
-          }}
-        />
+        <ChartLegendWrapper colorSet={testColorSet}>
+          <Barchart
+            type="category"
+            bars={[]}
+            title="Test Title"
+            secondaryTitle="Test Secondary Title"
+            rightTitle="Test Right Title"
+            helpTooltip="Test Help Tooltip"
+          />
+        </ChartLegendWrapper>
       </Wrapper>,
     );
 

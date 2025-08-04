@@ -19,6 +19,7 @@ import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
 import { renderTooltipContent, UnitRange, useChartData } from './utils';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
@@ -70,7 +71,6 @@ export type BarchartSortFn<T extends BarchartBars> = (
 export type BarchartProps<T extends BarchartBars> = {
   type: 'category' | TimeType;
   bars: T;
-  colorSet: Record<T[number]['label'], ChartColors | (string & {})>;
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
   unitRange?: UnitRange;
@@ -196,13 +196,13 @@ const Loading = ({ height }: { height: number }) => {
 
 export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
+  const { getColor } = useChartLegend();
   const [hoveredValue, setHoveredValue] = useState<string | undefined>();
 
   const {
     height = CHART_CONSTANTS.DEFAULT_HEIGHT,
     bars,
     type = 'category',
-    colorSet,
     unitRange,
     stacked,
     defaultSort,
@@ -213,6 +213,18 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     rightTitle,
     isLoading,
   } = props;
+
+  // Create colorSet from ChartLegendWrapper
+  const colorSet = bars.reduce(
+    (acc, bar) => {
+      const color = getColor(bar.label);
+      if (color) {
+        acc[bar.label] = color;
+      }
+      return acc;
+    },
+    {} as Record<string, ChartColors | string>,
+  );
 
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
     useChartData(bars, type, colorSet, stacked, defaultSort, unitRange);

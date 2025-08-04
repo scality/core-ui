@@ -248,7 +248,7 @@ export const applySortingToData = <T extends BarchartBars>(
 
 const getRechartsBarsAndBarDataKeys = (
   bars: BarchartBars,
-  colorSet: Record<BarchartBars[number]['label'], ChartColors | (string & {})>,
+  colorSet: Record<string, ChartColors | string>,
   stacked?: boolean,
 ) => {
   const rechartsBars: { dataKey: string; fill: string; stackId?: string }[] =
@@ -284,7 +284,7 @@ export const formatPrometheusDataToRechartsDataAndBars = <
 >(
   bars: T,
   type: BarchartProps<T>['type'],
-  colorSet: Record<T[number]['label'], ChartColors | (string & {})>,
+  colorSet: Record<string, ChartColors | string>,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
 ): {
@@ -459,7 +459,7 @@ export const renderTooltipContent = <T extends BarchartBars>(
 export const useChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
-  colorSet: Record<T[number]['label'], ChartColors | (string & {})>,
+  colorSet: Record<string, ChartColors | string>,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,

@@ -12,6 +12,7 @@ import { Text } from '../../src/lib/components/text/Text.component';
 import { spacing, Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
+import { ChartLegendWrapper } from '../../src/lib/components/chartlegend/ChartLegendWrapper';
 
 type Story = StoryObj<typeof Barchart>;
 
@@ -52,14 +53,14 @@ export const Playground: Story = {
       },
     ] as const;
     return (
-      <Barchart
-        type="category"
-        bars={exampleData}
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart type="category" bars={exampleData} />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -109,27 +110,30 @@ export const Time7Days: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
     return (
-      <Barchart
-        type={{
-          type: 'time',
-          timeRange: {
-            startDate: new Date(
-              new Date(Date.now()).setHours(0, 0, 0, 0) -
-                7 * 24 * 60 * 60 * 1000,
-            ),
-            endDate: new Date(
-              new Date(Date.now()).setHours(0, 0, 0, 0) -
-                1 * 24 * 60 * 60 * 1000,
-            ),
-            interval: 24 * 60 * 60 * 1000,
-          },
-        }}
-        bars={timeData7Days}
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart
+          type={{
+            type: 'time',
+            timeRange: {
+              startDate: new Date(
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                  7 * 24 * 60 * 60 * 1000,
+              ),
+              endDate: new Date(
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                  1 * 24 * 60 * 60 * 1000,
+              ),
+              interval: 24 * 60 * 60 * 1000,
+            },
+          }}
+          bars={timeData7Days}
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -174,27 +178,30 @@ export const Time7DaysWithMissingData: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
     return (
-      <Barchart
-        type={{
-          type: 'time',
-          timeRange: {
-            startDate: new Date(
-              new Date(Date.now()).setHours(0, 0, 0, 0) -
-                7 * 24 * 60 * 60 * 1000,
-            ),
-            endDate: new Date(
-              new Date(Date.now()).setHours(0, 0, 0, 0) -
-                1 * 24 * 60 * 60 * 1000,
-            ),
-            interval: 24 * 60 * 60 * 1000,
-          },
-        }}
-        bars={timeData7DaysWithMissingData}
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart
+          type={{
+            type: 'time',
+            timeRange: {
+              startDate: new Date(
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                  7 * 24 * 60 * 60 * 1000,
+              ),
+              endDate: new Date(
+                new Date(Date.now()).setHours(0, 0, 0, 0) -
+                  1 * 24 * 60 * 60 * 1000,
+              ),
+              interval: 24 * 60 * 60 * 1000,
+            },
+          }}
+          bars={timeData7DaysWithMissingData}
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -264,23 +271,26 @@ export const TimeLast24Hours: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
     return (
-      <Barchart
-        type={{
-          type: 'time',
-          timeRange: {
-            startDate: new Date(
-              new Date(Date.now()).setMinutes(0, 0, 0) - 24 * 60 * 60 * 1000,
-            ),
-            endDate: new Date(new Date(Date.now()).setMinutes(0, 0, 0)),
-            interval: 60 * 60 * 1000,
-          },
-        }}
-        bars={timeDataLast24Hours}
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart
+          type={{
+            type: 'time',
+            timeRange: {
+              startDate: new Date(
+                new Date(Date.now()).setMinutes(0, 0, 0) - 24 * 60 * 60 * 1000,
+              ),
+              endDate: new Date(new Date(Date.now()).setMinutes(0, 0, 0)),
+              interval: 60 * 60 * 1000,
+            },
+          }}
+          bars={timeDataLast24Hours}
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -308,32 +318,35 @@ export const CapacityWithUnitRange: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
     return (
-      <Barchart
-        type="category"
-        bars={capacityDataWithUnitRange}
-        unitRange={[
-          {
-            threshold: 0,
-            label: 'B',
-          },
-          {
-            threshold: 1024,
-            label: 'KiB',
-          },
-          {
-            threshold: 1024 * 1024,
-            label: 'MiB',
-          },
-          {
-            threshold: 1024 * 1024 * 1024,
-            label: 'GiB',
-          },
-        ]}
+      <ChartLegendWrapper
         colorSet={{
           Free: theme.selectedActive,
           Used: theme.infoSecondary,
         }}
-      />
+      >
+        <Barchart
+          type="category"
+          bars={capacityDataWithUnitRange}
+          unitRange={[
+            {
+              threshold: 0,
+              label: 'B',
+            },
+            {
+              threshold: 1024,
+              label: 'KiB',
+            },
+            {
+              threshold: 1024 * 1024,
+              label: 'MiB',
+            },
+            {
+              threshold: 1024 * 1024 * 1024,
+              label: 'GiB',
+            },
+          ]}
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -366,15 +379,14 @@ export const Stacked: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
     return (
-      <Barchart
-        type="category"
-        bars={stackedData}
-        stacked
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart type="category" bars={stackedData} stacked />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -415,16 +427,19 @@ export const DefaultSort: Story = {
       return totalA - totalB > 0 ? -1 : totalA - totalB < 0 ? 1 : 0; // Descending order
     };
     return (
-      <Barchart
-        type="category"
-        stacked
-        bars={defaultSortData}
-        defaultSort={customSort}
+      <ChartLegendWrapper
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
-      />
+      >
+        <Barchart
+          type="category"
+          stacked
+          bars={defaultSortData}
+          defaultSort={customSort}
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -489,16 +504,19 @@ export const WithCustomTooltip: Story = {
         <Text variant="Basic" color="textSecondary">
           Tooltip and sort functions defined outside with full type safety
         </Text>
-        <Barchart
-          type="category"
-          bars={exampleData}
-          tooltip={customTooltip}
-          height={300}
+        <ChartLegendWrapper
           colorSet={{
             Success: theme.statusHealthy,
             Failed: theme.statusCritical,
           }}
-        />
+        >
+          <Barchart
+            type="category"
+            bars={exampleData}
+            tooltip={customTooltip}
+            height={300}
+          />
+        </ChartLegendWrapper>
       </Stack>
     );
   },
@@ -553,17 +571,20 @@ export const StatusColors: Story = {
       },
     ] as const;
     return (
-      <Barchart
-        type="category"
-        bars={statusData}
-        stacked
+      <ChartLegendWrapper
         colorSet={{
           'Success Rate': theme.statusHealthy,
           'Failed Requests': theme.statusCritical,
           'Warning Events': theme.statusWarning,
         }}
-        title="System Health Metrics"
-      />
+      >
+        <Barchart
+          type="category"
+          bars={statusData}
+          stacked
+          title="System Health Metrics"
+        />
+      </ChartLegendWrapper>
     );
   },
 };
@@ -617,33 +638,36 @@ export const CompleteExample: Story = {
           backgroundColor: theme.backgroundLevel2,
         }}
       >
-        <Barchart
-          type="category"
-          title="Loading BarChart"
-          helpTooltip="Click on the button to load or unload data"
-          secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
-          rightTitle={
-            <Button
-              label={isLoading ? 'Load data' : 'Fake loading data'}
-              onClick={() => {
-                setIsLoading(!isLoading);
-                if (isLoading) {
-                  setData(exampleData);
-                } else {
-                  setData(undefined);
-                }
-              }}
-            />
-          }
-          bars={data || []}
-          tooltip={customTooltip}
-          isLoading={isLoading}
-          height={200}
+        <ChartLegendWrapper
           colorSet={{
             Success: 'lineColor1',
             Failed: 'lineColor2',
           }}
-        />
+        >
+          <Barchart
+            type="category"
+            title="Loading BarChart"
+            helpTooltip="Click on the button to load or unload data"
+            secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
+            rightTitle={
+              <Button
+                label={isLoading ? 'Load data' : 'Fake loading data'}
+                onClick={() => {
+                  setIsLoading(!isLoading);
+                  if (isLoading) {
+                    setData(exampleData);
+                  } else {
+                    setData(undefined);
+                  }
+                }}
+              />
+            }
+            bars={data || []}
+            tooltip={customTooltip}
+            isLoading={isLoading}
+            height={200}
+          />
+        </ChartLegendWrapper>
       </div>
     );
   },
