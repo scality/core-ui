@@ -7,6 +7,7 @@ export type ChartLegendState = {
   removeSelectedResource: (resource: string) => void;
   isSelected: (resource: string) => boolean;
   getColor: (resource: string) => string | undefined;
+  listResources: () => string[];
 };
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
@@ -47,12 +48,17 @@ export const ChartLegendWrapper = ({
     return color;
   };
 
+  const listResources = () => {
+    return Object.keys(colorSet);
+  };
+
   const chartLegendState = {
     selectedResources,
     addSelectedResource,
     removeSelectedResource,
     isSelected,
     getColor,
+    listResources,
   };
 
   return (

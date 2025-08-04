@@ -13,6 +13,7 @@ import { spacing, Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
 import { ChartLegendWrapper } from '../../src/lib/components/chartlegend/ChartLegendWrapper';
+import { ChartLegend } from '../../src/lib/components/chartlegend/ChartLegend';
 
 type Story = StoryObj<typeof Barchart>;
 
@@ -59,7 +60,10 @@ export const Playground: Story = {
           Failed: theme.statusCritical,
         }}
       >
-        <Barchart type="category" bars={exampleData} />
+        <Stack direction="vertical" gap="r16">
+          <Barchart type="category" bars={exampleData} />
+          <ChartLegend shape="rectangle" direction="horizontal" />
+        </Stack>
       </ChartLegendWrapper>
     );
   },
@@ -116,23 +120,26 @@ export const Time7Days: Story = {
           Failed: theme.statusCritical,
         }}
       >
-        <Barchart
-          type={{
-            type: 'time',
-            timeRange: {
-              startDate: new Date(
-                new Date(Date.now()).setHours(0, 0, 0, 0) -
-                  7 * 24 * 60 * 60 * 1000,
-              ),
-              endDate: new Date(
-                new Date(Date.now()).setHours(0, 0, 0, 0) -
-                  1 * 24 * 60 * 60 * 1000,
-              ),
-              interval: 24 * 60 * 60 * 1000,
-            },
-          }}
-          bars={timeData7Days}
-        />
+        <Stack direction="vertical" gap="r16">
+          <Barchart
+            type={{
+              type: 'time',
+              timeRange: {
+                startDate: new Date(
+                  new Date(Date.now()).setHours(0, 0, 0, 0) -
+                    7 * 24 * 60 * 60 * 1000,
+                ),
+                endDate: new Date(
+                  new Date(Date.now()).setHours(0, 0, 0, 0) -
+                    1 * 24 * 60 * 60 * 1000,
+                ),
+                interval: 24 * 60 * 60 * 1000,
+              },
+            }}
+            bars={timeData7Days}
+          />
+          <ChartLegend shape="line" />
+        </Stack>
       </ChartLegendWrapper>
     );
   },
@@ -385,7 +392,10 @@ export const Stacked: Story = {
           Failed: theme.statusCritical,
         }}
       >
-        <Barchart type="category" bars={stackedData} stacked />
+        <Stack direction="vertical" gap="r16">
+          <Barchart type="category" bars={stackedData} stacked />
+          <ChartLegend shape="rectangle" />
+        </Stack>
       </ChartLegendWrapper>
     );
   },
@@ -510,12 +520,15 @@ export const WithCustomTooltip: Story = {
             Failed: theme.statusCritical,
           }}
         >
-          <Barchart
-            type="category"
-            bars={exampleData}
-            tooltip={customTooltip}
-            height={300}
-          />
+          <Stack direction="vertical" gap="r16">
+            <Barchart
+              type="category"
+              bars={exampleData}
+              tooltip={customTooltip}
+              height={300}
+            />
+            <ChartLegend shape="line" />
+          </Stack>
         </ChartLegendWrapper>
       </Stack>
     );
@@ -578,13 +591,81 @@ export const StatusColors: Story = {
           'Warning Events': theme.statusWarning,
         }}
       >
-        <Barchart
-          type="category"
-          bars={statusData}
-          stacked
-          title="System Health Metrics"
-        />
+        <Stack direction="vertical" gap="r16">
+          <Barchart
+            type="category"
+            bars={statusData}
+            stacked
+            title="System Health Metrics"
+          />
+          <ChartLegend shape="rectangle" />
+        </Stack>
       </ChartLegendWrapper>
+    );
+  },
+};
+
+export const LegendShapes: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 25],
+          ['category2', 40],
+          ['category3', 35],
+        ],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 15],
+          ['category2', 20],
+          ['category3', 18],
+        ],
+      },
+      {
+        label: 'Warning',
+        data: [
+          ['category1', 8],
+          ['category2', 12],
+          ['category3', 10],
+        ],
+      },
+    ] as const;
+    return (
+      <Stack direction="vertical" gap="r24">
+        <Text variant="Large">Legend Shapes</Text>
+
+        <ChartLegendWrapper
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+            Warning: theme.statusWarning,
+          }}
+        >
+          <Stack direction="vertical" gap="r16">
+            <Barchart
+              type="category"
+              bars={exampleData}
+              height={200}
+              title="Horizontal Rectangle Legend"
+            />
+            <ChartLegend shape="rectangle" />
+          </Stack>
+
+          <Stack direction="vertical" gap="r16">
+            <Barchart
+              type="category"
+              bars={exampleData}
+              height={200}
+              title="Vertical Line Legend"
+            />
+            <ChartLegend shape="line" direction="vertical" />
+          </Stack>
+        </ChartLegendWrapper>
+      </Stack>
     );
   },
 };
@@ -667,6 +748,7 @@ export const CompleteExample: Story = {
             isLoading={isLoading}
             height={200}
           />
+          <ChartLegend shape="rectangle" direction="horizontal" />
         </ChartLegendWrapper>
       </div>
     );
