@@ -170,9 +170,12 @@ export const AttachmentProvider = <
       __: AttachmentOperation<ENTITY_TYPE, ENTITY>[],
     ) => {},
   );
+  const privateContextValue = useMemo(() => ({ setResetAttachementTable }), []);
+  const attachmentContextValue = useMemo(() => ({ resetAttachmentTable }), [resetAttachmentTable]);
+
   return (
-    <PrivateAttachmentContext.Provider value={{ setResetAttachementTable }}>
-      <AttachmentContext.Provider value={{ resetAttachmentTable }}>
+    <PrivateAttachmentContext.Provider value={privateContextValue}>
+      <AttachmentContext.Provider value={attachmentContextValue}>
         {children}
       </AttachmentContext.Provider>
     </PrivateAttachmentContext.Provider>
