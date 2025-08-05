@@ -10,6 +10,8 @@ import {
   useImperativeHandle,
   ReactNode,
   Ref,
+  useMemo,
+  useCallback,
 } from 'react';
 import { ScrollbarWrapper, Tooltip } from '../../index';
 import {
@@ -562,22 +564,28 @@ const SelectWithOptionContext = forwardRef<
 >((props, ref) => {
   const [options, setOptions] = useState<Record<string, SelectOptionProps>>({});
 
-  const register = (option: SelectOptionProps) => {
+  const register = useCallback((option: SelectOptionProps) => {
     setOptions((prevOptions) => ({
       ...prevOptions,
       [option.value]: option,
     }));
-  };
+  }, []);
 
-  const unregister = (value: string) => {
+  const unregister = useCallback((value: string) => {
     setOptions((prevOptions) => {
       const { [value]: _, ...rest } = prevOptions;
       return rest;
     });
-  };
+  }, []);
+
+  const contextValue = useMemo(() => ({
+    options, 
+    register, 
+    unregister
+  }), [options, register, unregister]);
 
   return (
-    <OptionContext.Provider value={{ options, register, unregister }}>
+    <OptionContext.Provider value={contextValue}>
       <>
         <SelectBox {...props} selectRef={ref} />
         {props.children}
