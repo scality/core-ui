@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useMemo, useCallback } from 'react';
 export const SyncedCursorChartsContext = createContext<{
   cursorX: number;
   setCursorX: (cursorX: number) => void;
@@ -17,13 +17,11 @@ export const useCursorX = (): {
 };
 export function SyncedCursorCharts({ children }: { children: JSX.Element }) {
   const [cursorX, setCursorX] = useState(0);
+
+  const contextValue = useMemo(() => ({cursorX, setCursorX}), [cursorX]);
+
   return (
-    <SyncedCursorChartsContext.Provider
-      value={{
-        cursorX,
-        setCursorX,
-      }}
-    >
+    <SyncedCursorChartsContext.Provider value={contextValue}>
       {children}
     </SyncedCursorChartsContext.Provider>
   );
