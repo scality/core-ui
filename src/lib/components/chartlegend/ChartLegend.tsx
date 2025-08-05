@@ -17,11 +17,17 @@ const Legend = styled.div<{ direction: 'horizontal' | 'vertical' }>`
   flex-wrap: wrap;
 `;
 
-const LegendItem = styled.div<{ disabled?: boolean }>`
+const LegendItem = styled.div<{ disabled?: boolean; selected?: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ selected, disabled }) => (disabled ? 0.5 : selected ? 1 : 0.7)};
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  }
 `;
 
 const LegendShape = styled.div<{
@@ -56,16 +62,39 @@ export const ChartLegend = ({
   disabled = false,
   direction = 'horizontal',
 }: ChartLegendProps) => {
-  const { listResources, getColor } = useChartLegend();
+  const {
+    listResources,
+    getColor,
+    isSelected,
+    addSelectedResource,
+    removeSelectedResource,
+  } = useChartLegend();
 
   const resources = listResources();
+
+  const handleLegendClick = (resource: string) => {
+    if (disabled) return;
+
+    if (isSelected(resource)) {
+      removeSelectedResource(resource);
+    } else {
+      addSelectedResource(resource);
+    }
+  };
 
   return (
     <Legend direction={direction}>
       {resources.map((resource) => {
         const color = getColor(resource);
+        const selected = isSelected(resource);
+
         return (
-          <LegendItem key={resource} disabled={disabled}>
+          <LegendItem
+            key={resource}
+            disabled={disabled}
+            selected={selected}
+            onClick={() => handleLegendClick(resource)}
+          >
             <LegendShape
               color={color}
               shape={shape}
