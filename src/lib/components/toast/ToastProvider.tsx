@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { Toast, ToastProps } from './Toast.component';
 
 export type ToastContextState = Omit<ToastProps, 'onClose'>;
@@ -14,20 +14,27 @@ export const ToastContext = createContext<ToastContextType | undefined>(
 interface ToastProviderProps {
   children: ReactNode;
 }
+
 export const ToastProvider: React.FC<
   React.PropsWithChildren<ToastProviderProps>
 > = ({ children }) => {
   const [toastProps, setToastProps] = useState<ToastContextState | null>(null);
 
-  const showToast = (toastProps: ToastContextState) => {
-    setToastProps(toastProps);
-  };
+  const toastCtxValue = useMemo(
+    () => ({ showToast: setToastProps }),
+    [],
+  );
+
+  const closeToast = useCallback(
+    () => setToastProps(null),
+    []
+  );
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={toastCtxValue}>
       {children}
       {toastProps && (
-        <Toast {...toastProps} onClose={() => setToastProps(null)} />
+        <Toast {...toastProps} onClose={closeToast} />
       )}
     </ToastContext.Provider>
   );
@@ -38,5 +45,6 @@ export const useToast = () => {
   if (!context) {
     throw new Error('useToast must be used within a ToastProvider');
   }
+
   return context;
 };
