@@ -2,6 +2,7 @@ import { coreUIAvailableThemes } from '../../style/theme';
 import {
   applySortingToData,
   computeUnitLabelAndRoundReferenceValue,
+  filterChartDataAndBarsByLegendSelection,
   formatPrometheusDataToRechartsDataAndBars,
   getMaxBarValue,
   getRoundReferenceValue,
@@ -778,5 +779,121 @@ describe('renderTooltipContent', () => {
         { label: 'Failed', value: 20, isHovered: false },
       ],
     });
+  });
+});
+
+describe('filterChartDataAndBarsByLegendSelection', () => {
+  const mockChartData = [
+    { category: 'Jan', Success: 10, Failed: 5, Warning: 3, Pending: 2 },
+    { category: 'Feb', Success: 20, Failed: 8, Warning: 6, Pending: 4 },
+    { category: 'Mar', Success: 15, Failed: 12, Warning: 9, Pending: 7 },
+  ];
+
+  const mockRechartsBars = [
+    { dataKey: 'Success', fill: '#00D100', stackId: undefined },
+    { dataKey: 'Failed', fill: '#D10000', stackId: undefined },
+    { dataKey: 'Warning', fill: '#FFA500', stackId: 'stacked' },
+    { dataKey: 'Pending', fill: '#337FBD', stackId: 'stacked' },
+  ];
+
+  it('should return all data and bars when no resources are selected (empty array)', () => {
+    const result = filterChartDataAndBarsByLegendSelection(
+      mockChartData,
+      mockRechartsBars,
+      [],
+    );
+
+    expect(result.filteredData).toEqual(mockChartData);
+    expect(result.filteredRechartsBars).toEqual(mockRechartsBars);
+    expect(result.filteredData).toHaveLength(3);
+    expect(result.filteredRechartsBars).toHaveLength(4);
+    // Verify all properties are preserved
+    expect(Object.keys(result.filteredData[0])).toEqual([
+      'category',
+      'Success',
+      'Failed',
+      'Warning',
+      'Pending',
+    ]);
+  });
+
+  it('should return only selected resources in both data and bars when resources are selected', () => {
+    const selectedResources = ['Success', 'Warning'];
+    const result = filterChartDataAndBarsByLegendSelection(
+      mockChartData,
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result.filteredData).toHaveLength(3);
+    expect(result.filteredData).toEqual([
+      { category: 'Jan', Success: 10, Warning: 3 },
+      { category: 'Feb', Success: 20, Warning: 6 },
+      { category: 'Mar', Success: 15, Warning: 9 },
+    ]);
+
+    expect(result.filteredRechartsBars).toHaveLength(2);
+    expect(result.filteredRechartsBars).toEqual([
+      { dataKey: 'Success', fill: '#00D100', stackId: undefined },
+      { dataKey: 'Warning', fill: '#FFA500', stackId: 'stacked' },
+    ]);
+  });
+
+  it('should return single resource when only one resource is selected', () => {
+    const selectedResources = ['Failed'];
+    const result = filterChartDataAndBarsByLegendSelection(
+      mockChartData,
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result.filteredData).toHaveLength(3);
+    expect(result.filteredData).toEqual([
+      { category: 'Jan', Failed: 5 },
+      { category: 'Feb', Failed: 8 },
+      { category: 'Mar', Failed: 12 },
+    ]);
+
+    expect(result.filteredRechartsBars).toHaveLength(1);
+    expect(result.filteredRechartsBars).toEqual([
+      { dataKey: 'Failed', fill: '#D10000', stackId: undefined },
+    ]);
+  });
+
+  it('should handle empty data array', () => {
+    const result = filterChartDataAndBarsByLegendSelection(
+      [],
+      mockRechartsBars,
+      ['Success'],
+    );
+
+    expect(result.filteredData).toEqual([]);
+    expect(result.filteredRechartsBars).toHaveLength(1);
+    expect(result.filteredRechartsBars).toEqual([
+      { dataKey: 'Success', fill: '#00D100', stackId: undefined },
+    ]);
+  });
+
+  it('should preserve order of selected resources based on data object keys', () => {
+    const selectedResources = ['Pending', 'Success', 'Failed']; // Different order
+    const result = filterChartDataAndBarsByLegendSelection(
+      mockChartData,
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    // Should maintain the order they appear in selectedResources
+    expect(Object.keys(result.filteredData[0])).toEqual([
+      'category',
+      'Pending',
+      'Success',
+      'Failed',
+    ]);
+
+    // Should maintain original bar order regardless of selection order
+    expect(result.filteredRechartsBars).toHaveLength(3);
+    expect(result.filteredRechartsBars[0].dataKey).toBe('Success');
+    expect(result.filteredRechartsBars[1].dataKey).toBe('Failed');
+    expect(result.filteredRechartsBars[2].dataKey).toBe('Pending');
   });
 });

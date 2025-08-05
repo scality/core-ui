@@ -6,6 +6,7 @@ import {
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../style/theme';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -456,6 +457,44 @@ export const renderTooltipContent = <T extends BarchartBars>(
   return tooltip(currentPoint);
 };
 
+/**
+ * Filters both chart data and recharts bars to only include selected resources from legend
+ * @param data - Array of chart data objects with category and resource values
+ * @param rechartsBars - Array of recharts bar configurations
+ * @param selectedResources - Array of selected resource names
+ * @returns Object containing filtered data and recharts bars
+ */
+export const filterChartDataAndBarsByLegendSelection = (
+  data: { [key: string]: string | number }[],
+  rechartsBars: { dataKey: string; fill: string; stackId?: string }[],
+  selectedResources: string[],
+) => {
+  // If no resources are selected, show all data and bars (default behavior)
+  if (selectedResources.length === 0) {
+    return { filteredData: data, filteredRechartsBars: rechartsBars };
+  }
+
+  // Filter recharts bars
+  const filteredRechartsBars = rechartsBars.filter((bar) =>
+    selectedResources.includes(bar.dataKey),
+  );
+
+  // Filter data to only include selected resources
+  const filteredData = data.map((item) => {
+    const filteredItem: { [key: string]: string | number } = {
+      category: item.category,
+    };
+    selectedResources.forEach((resource) => {
+      if (resource in item) {
+        filteredItem[resource] = item[resource];
+      }
+    });
+    return filteredItem;
+  });
+
+  return { filteredData, filteredRechartsBars };
+};
+
 export const useChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
@@ -464,6 +503,7 @@ export const useChartData = <T extends BarchartBars>(
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
 ) => {
+  const { selectedResources } = useChartLegend();
   const { data, rechartsBars } = formatPrometheusDataToRechartsDataAndBars(
     bars,
     type,
@@ -472,13 +512,21 @@ export const useChartData = <T extends BarchartBars>(
     defaultSort,
   );
 
-  const maxValue = getMaxBarValue(data, stacked);
+  // Filter both data and bars to only include selected resources for accurate maxValue calculation
+  const { filteredData, filteredRechartsBars } =
+    filterChartDataAndBarsByLegendSelection(
+      data,
+      rechartsBars,
+      selectedResources,
+    );
+
+  const maxValue = getMaxBarValue(filteredData, stacked);
 
   const { unitLabel, roundReferenceValue, rechartsData } =
-    computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
+    computeUnitLabelAndRoundReferenceValue(filteredData, maxValue, unitRange);
 
   return {
-    rechartsBars,
+    rechartsBars: filteredRechartsBars,
     unitLabel,
     roundReferenceValue,
     rechartsData,
