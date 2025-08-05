@@ -654,7 +654,14 @@ export const LegendShapes: Story = {
             />
             <ChartLegend shape="rectangle" />
           </Stack>
-
+        </ChartLegendWrapper>
+        <ChartLegendWrapper
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+            Warning: theme.statusWarning,
+          }}
+        >
           <Stack direction="vertical" gap="r16">
             <Barchart
               type="category"
@@ -670,6 +677,65 @@ export const LegendShapes: Story = {
   },
 };
 
+export const BarchartsWithSingleLegend: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const exampleData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 25],
+          ['category2', 40],
+          ['category3', 35],
+        ],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 15],
+          ['category2', 20],
+          ['category3', 18],
+        ],
+      },
+      {
+        label: 'Warning',
+        data: [
+          ['category1', 8],
+          ['category2', 12],
+          ['category3', 10],
+        ],
+      },
+    ] as const;
+    return (
+      <Stack direction="vertical" gap="r24">
+        <Text variant="Large">Barcharts with Single Shared Legend</Text>
+
+        <ChartLegendWrapper
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+            Warning: theme.statusWarning,
+          }}
+        >
+          <Barchart
+            type="category"
+            bars={exampleData}
+            height={200}
+            title="Barchart 1"
+          />
+
+          <Barchart
+            type="category"
+            bars={exampleData}
+            height={200}
+            title="Barchart 2"
+          />
+          <ChartLegend shape="rectangle" />
+        </ChartLegendWrapper>
+      </Stack>
+    );
+  },
+};
 export const CompleteExample: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
