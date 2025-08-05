@@ -2,6 +2,7 @@ import { coreUIAvailableThemes } from '../../style/theme';
 import {
   applySortingToData,
   computeUnitLabelAndRoundReferenceValue,
+  filterBarsByLegendSelection,
   formatPrometheusDataToRechartsDataAndBars,
   getMaxBarValue,
   getRoundReferenceValue,
@@ -778,5 +779,79 @@ describe('renderTooltipContent', () => {
         { label: 'Failed', value: 20, isHovered: false },
       ],
     });
+  });
+});
+
+describe('filterBarsByLegendSelection', () => {
+  const mockRechartsBars = [
+    { dataKey: 'Success', fill: '#00D100', stackId: undefined },
+    { dataKey: 'Failed', fill: '#D10000', stackId: undefined },
+    { dataKey: 'Warning', fill: '#FFA500', stackId: 'stacked' },
+    { dataKey: 'Pending', fill: '#337FBD', stackId: 'stacked' },
+  ];
+
+  it('should return all bars when no resources are selected (empty array)', () => {
+    const result = filterBarsByLegendSelection(mockRechartsBars, []);
+
+    expect(result).toEqual(mockRechartsBars);
+    expect(result).toHaveLength(4);
+  });
+
+  it('should return only selected bars when resources are selected', () => {
+    const selectedResources = ['Success', 'Warning'];
+    const result = filterBarsByLegendSelection(
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result).toHaveLength(2);
+    expect(result).toEqual([
+      { dataKey: 'Success', fill: '#00D100', stackId: undefined },
+      { dataKey: 'Warning', fill: '#FFA500', stackId: 'stacked' },
+    ]);
+  });
+
+  it('should return single bar when only one resource is selected', () => {
+    const selectedResources = ['Failed'];
+    const result = filterBarsByLegendSelection(
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result).toHaveLength(1);
+    expect(result).toEqual([
+      { dataKey: 'Failed', fill: '#D10000', stackId: undefined },
+    ]);
+  });
+
+  it('should preserve order of bars from original array', () => {
+    const selectedResources = ['Pending', 'Success']; // Reverse order from original
+    const result = filterBarsByLegendSelection(
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result).toHaveLength(2);
+    // Should maintain original order: Success comes before Pending in mockRechartsBars
+    expect(result[0].dataKey).toBe('Success');
+    expect(result[1].dataKey).toBe('Pending');
+  });
+
+  it('should preserve all bar properties when filtering', () => {
+    const selectedResources = ['Warning'];
+    const result = filterBarsByLegendSelection(
+      mockRechartsBars,
+      selectedResources,
+    );
+
+    expect(result[0]).toEqual({
+      dataKey: 'Warning',
+      fill: '#FFA500',
+      stackId: 'stacked',
+    });
+    // Ensure all properties are preserved
+    expect(Object.keys(result[0])).toContain('dataKey');
+    expect(Object.keys(result[0])).toContain('fill');
+    expect(Object.keys(result[0])).toContain('stackId');
   });
 });

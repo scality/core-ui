@@ -6,6 +6,7 @@ import {
 import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../style/theme';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 10; // Default for zero or negative values
@@ -456,6 +457,22 @@ export const renderTooltipContent = <T extends BarchartBars>(
   return tooltip(currentPoint);
 };
 
+/**
+ * Filters recharts bars based on selected resources from legend
+ * @param rechartsBars - Array of recharts bar configurations
+ * @param selectedResources - Array of selected resource names
+ * @returns Filtered array of recharts bars
+ */
+export const filterBarsByLegendSelection = (
+  rechartsBars: { dataKey: string; fill: string; stackId?: string }[],
+  selectedResources: string[],
+) => {
+  // If no resources are selected, show all bars (default behavior)
+  return selectedResources.length > 0
+    ? rechartsBars.filter((bar) => selectedResources.includes(bar.dataKey))
+    : rechartsBars;
+};
+
 export const useChartData = <T extends BarchartBars>(
   bars: T,
   type: BarchartProps<T>['type'],
@@ -464,6 +481,7 @@ export const useChartData = <T extends BarchartBars>(
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
 ) => {
+  const { selectedResources } = useChartLegend();
   const { data, rechartsBars } = formatPrometheusDataToRechartsDataAndBars(
     bars,
     type,
@@ -472,13 +490,18 @@ export const useChartData = <T extends BarchartBars>(
     defaultSort,
   );
 
+  const selectedRechartsBars = filterBarsByLegendSelection(
+    rechartsBars,
+    selectedResources,
+  );
+
   const maxValue = getMaxBarValue(data, stacked);
 
   const { unitLabel, roundReferenceValue, rechartsData } =
     computeUnitLabelAndRoundReferenceValue(data, maxValue, unitRange);
 
   return {
-    rechartsBars,
+    rechartsBars: selectedRechartsBars,
     unitLabel,
     roundReferenceValue,
     rechartsData,
