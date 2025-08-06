@@ -1,5 +1,5 @@
 /// <reference path="./Stepper.component.d.ts" />
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { Steppers } from './Steppers.component';
 import { Box } from '../box/Box';
 export interface StepperContextType {
@@ -33,19 +33,21 @@ export const Stepper: Stepper = ({ steps }) => {
     props: Record<string, unknown>;
   }>({ step: 0, props: {} });
 
-  const next = (props: Record<string, unknown>) => {
-    setStepProps({ step: stepProps.step + 1, props });
-  };
+  const next = useCallback((props: Record<string, unknown>) => {
+    setStepProps(current => ({ step: current.step + 1, props }));
+  }, []);
 
-  const prev = (props: Record<string, unknown>) => {
-    setStepProps({ step: stepProps.step - 1, props });
-  };
+  const prev = useCallback((props: Record<string, unknown>) => {
+    setStepProps(current => ({ step: current.step - 1, props }));
+  }, []);
 
   const { Component } = steps[stepProps.step];
   const StepperContext = window.StepperContext;
 
+  const stepperValue = useMemo(() => ({ next, prev }), [next, prev]);
+
   return (
-    <StepperContext.Provider value={{ next, prev }}>
+    <StepperContext.Provider value={stepperValue}>
       <Box display="flex" gap={32} flex={1} height="100%">
         <Steppers
           activeStep={stepProps.step}
