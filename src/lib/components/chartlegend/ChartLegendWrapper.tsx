@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react';
 import { ChartColors } from '../../style/theme';
 
 export type ChartLegendState = {
@@ -23,21 +23,21 @@ export const ChartLegendWrapper = ({
 }: ChartLegendWrapperProps) => {
   const [selectedResources, setSelectedResources] = useState<string[]>([]);
 
-  const addSelectedResource = (resource: string) => {
+  const addSelectedResource = useCallback((resource: string) => {
     setSelectedResources((prev) =>
       prev.includes(resource) ? prev : [...prev, resource],
     );
-  };
+  }, []);
 
-  const removeSelectedResource = (resource: string) => {
+  const removeSelectedResource = useCallback((resource: string) => {
     setSelectedResources((prev) => prev.filter((r) => r !== resource));
-  };
+  }, []);
 
-  const isSelected = (resource: string) => {
+  const isSelected = useCallback((resource: string) => {
     return selectedResources.includes(resource);
-  };
+  }, [selectedResources]);
 
-  const getColor = (resource: string) => {
+  const getColor = useCallback((resource: string) => {
     const color = colorSet[resource];
     if (!color) {
       console.warn(
@@ -46,20 +46,27 @@ export const ChartLegendWrapper = ({
       return undefined;
     }
     return color;
-  };
+  }, [colorSet]);
 
-  const listResources = () => {
+  const listResources = useCallback(() => {
     return Object.keys(colorSet);
-  };
+  }, [colorSet]);
 
-  const chartLegendState = {
+  const chartLegendState = useMemo(() => ({
     selectedResources,
     addSelectedResource,
     removeSelectedResource,
     isSelected,
     getColor,
     listResources,
-  };
+  }), [
+    selectedResources,
+    addSelectedResource,
+    removeSelectedResource,
+    isSelected,
+    getColor,
+    listResources,
+  ]);
 
   return (
     <ChartLegendContext.Provider value={chartLegendState}>
