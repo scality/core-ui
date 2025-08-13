@@ -1,15 +1,10 @@
 import { screen, render as testingRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState, useRef } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Option, Select, SelectRef } from '../selectv2/Selectv2.component';
 
 const render = (args) => {
-  return testingRender(
-    <QueryClientProvider client={new QueryClient()}>
-      {args}
-    </QueryClientProvider>,
-  );
+  return testingRender(args);
 };
 
 const generateOptionsData = (n: number) =>

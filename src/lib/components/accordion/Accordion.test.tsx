@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Accordion } from './Accordion.component';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 describe('Accordion', () => {
   const selectors = {
@@ -11,13 +10,10 @@ describe('Accordion', () => {
     accordionContent: () => screen.queryByText(/Test content/i),
   };
   const SUT = ({ open = false }) => {
-    const queryClient = new QueryClient();
     return (
-      <QueryClientProvider client={queryClient}>
-        <Accordion title="Advanced Testings" id="test-accordion" open={open}>
-          <div>Test content</div>
-        </Accordion>
-      </QueryClientProvider>
+      <Accordion title="Advanced Testings" id="test-accordion" open={open}>
+        <div>Test content</div>
+      </Accordion>
     );
   };
   const renderAccordion = (open = false) => {
@@ -54,7 +50,6 @@ describe('Accordion', () => {
   });
 
   it('should toggle the content when open prop changes', () => {
-    const queryClient = new QueryClient();
     const TestWrapper = () => {
       const [isOpen, setisOpen] = useState(false);
       return (
@@ -65,11 +60,7 @@ describe('Accordion', () => {
       );
     };
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <TestWrapper />
-      </QueryClientProvider>,
-    );
+    render(<TestWrapper />);
 
     userEvent.click(screen.getByRole('button', { name: /Test button/i }));
     expect(selectors.accordionContent()).toBeInTheDocument();

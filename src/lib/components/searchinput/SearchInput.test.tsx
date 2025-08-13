@@ -1,16 +1,11 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { SearchInput, Props } from './SearchInput.component';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import userEvent from '@testing-library/user-event';
-
-const queryClient = new QueryClient();
 
 const SearchInputRender = (props: Props) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SearchInput {...props} />
-    </QueryClientProvider>
+    <SearchInput {...props} />
   );
 };
 

@@ -2,23 +2,20 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { InputList, InputListProps } from './InputList.component';
 import { FormSection } from '../form/Form.component';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 describe('InputList', () => {
   const onChangeMock = jest.fn();
 
   const renderInputList = (props: InputListProps<string[]>) => {
     render(
-      <QueryClientProvider client={new QueryClient()}>
-        <FormSection>
-          <InputList
-            placeholder="Input list Test"
-            onChange={onChangeMock}
-            value={props.value}
-            name="inputListTest"
-          />
-        </FormSection>
-      </QueryClientProvider>,
+      <FormSection>
+        <InputList
+          placeholder="Input list Test"
+          onChange={onChangeMock}
+          value={props.value}
+          name="inputListTest"
+        />
+      </FormSection>
     );
   };
 

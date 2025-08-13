@@ -5,7 +5,6 @@ import {
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { getWrapper } from '../../testUtils';
 describe('HealthSelector', () => {
   it('should display correctly without any props and select first option', () => {
