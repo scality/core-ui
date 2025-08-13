@@ -7,11 +7,13 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useQuery } from 'react-query';
 import styled, { css } from 'styled-components';
 import { CoreUITheme } from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { RemoteGroup, RemoteUser } from './CustomsIcons';
+
+// Module-level cache for imported icons
+const iconCache: Record<string, any> = {};
 
 export const iconTable = {
   Account: 'fas faWallet',
@@ -141,10 +143,10 @@ export const iconTable = {
 };
 
 export const customIcons = {
-  'Remote-user': ({ ariaLabel, color, size }) => (
+  'Remote-user': ({ 'aria-label': ariaLabel, color, size }) => (
     <RemoteUser ariaLabel={ariaLabel} color={color} size={size} />
   ),
-  'Remote-group': ({ ariaLabel, color, size }) => (
+  'Remote-group': ({ 'aria-label': ariaLabel, color, size }) => (
     <RemoteGroup ariaLabel={ariaLabel} color={color} size={size} />
   ),
 };
@@ -169,7 +171,7 @@ type Props = {
   ariaLabel?: string;
   withWrapper?: boolean;
   style?: CSSProperties;
-  onClick?: (event: MouseEvent) => void;
+  onClick?: (event: React.MouseEvent) => void;
   title?: string;
 };
 
@@ -226,7 +228,7 @@ export const IconWrapper = styled.div<{ size: SizeProp }>`
 function NonWrappedIcon({
   name,
   size = '1x',
-  color = undefined,
+  color,
   ariaLabel = '',
   title,
   ...rest
@@ -234,63 +236,49 @@ function NonWrappedIcon({
   const iconInfo = iconTable[name] || customIcons[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
 
-  const { data, status } = useQuery({
-    queryKey: ['icon', name],
-    queryFn: async () => {
-      if (customIcons[name]) {
-        return {
-          default: customIcons[name],
-        };
-      }
-      const [iconType, iconClass] = iconInfo.split(' ');
-      try {
-        const fontAwesomeType =
-          iconType === 'far'
-            ? 'free-regular-svg-icons'
-            : 'free-solid-svg-icons';
-        const icon = await import(
-          `@fortawesome/${fontAwesomeType}/${iconClass}.js`
-        );
-        return {
-          default: ({ name, color, size, ariaLabel, ...rest }) => (
-            <IconStyled
-              color={color}
-              icon={icon[iconClass]}
-              size={size}
-              aria-label={`${name} ${ariaLabel}`}
-              {...rest}
-            />
-          ),
-        };
-      } catch {
-        return {
-          default: ({ name, ariaLabel }) => (
-            <Loader size="base" aria-label={`${name} ${ariaLabel}`} />
-          ),
-        };
-      }
-    },
-  });
+  // Loaded fortawesome icon if not a custom icon
+  const [icon, setIcon] = useState();
 
+  useEffect(() => {
+    if (customIcons[name]) {
+      return;
+    }
+
+    const [iconType, iconClass] = iconInfo.split(' ');
+    const fontAwesomeType = iconType === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons';
+    const cacheKey = `${fontAwesomeType}/${iconClass}`;
+    if (iconCache[cacheKey]) {
+      setIcon(iconCache[cacheKey]);
+      return () => setIcon(undefined);
+    }
+
+    // Handle FontAwesome icons with dynamic import
+    import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`)
+      .then((module) => {
+        setIcon(module[iconClass]);
+        iconCache[cacheKey] = module[iconClass];
+      });
+    return () => setIcon(undefined);
+  }, [name, iconInfo]);
+
+  if (!icon && !customIcons[name]) {
+    return (
+      <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
+        <Loader size="base" />
+      </DelayedFallback>
+    );
+  }
+
+  const IconComponent = customIcons[name] ?? IconStyled;
   return (
-    <>
-      {(status === 'loading' || status === 'error') && (
-        <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
-          <Loader size="base" />
-        </DelayedFallback>
-      )}
-
-      {status === 'success' && (
-        <data.default
-          name={name}
-          color={color}
-          size={size}
-          ariaLabel={ariaLabel}
-          title={title}
-          {...rest}
-        />
-      )}
-    </>
+    <IconComponent
+      color={color}
+      icon={icon}
+      size={size}
+      title={title}
+      aria-label={`${name} ${ariaLabel}`}
+      {...rest}
+      />
   );
 }
 
