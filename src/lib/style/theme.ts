@@ -1,3 +1,4 @@
+import { lighten, darken } from 'polished';
 //== Colors
 export const hotPink = '#E40046';
 export const pink = '#EB4962';
@@ -291,3 +292,31 @@ export const navbarItemWidth = '4.286rem';
 //sidebar
 export const sidebarItemHeight = spacing.sp40;
 export const sidebarWidth = spacing.sp40;
+
+// We use 8 main color from the palette and decline them (lighter/ darker) when we have more than 8 datasets
+export const lineTimeSeriesColorRange = [
+  lineColor1,
+  lineColor2,
+  lineColor3,
+  lineColor4,
+  lineColor5,
+  lineColor6,
+  lineColor7,
+  lineColor8,
+  lighten(0.3, lineColor1),
+  lighten(0.3, lineColor2),
+  lighten(0.3, lineColor3),
+  lighten(0.3, lineColor4),
+  lighten(0.3, lineColor5),
+  lighten(0.3, lineColor6),
+  lighten(0.3, lineColor7),
+  lighten(0.3, lineColor8),
+  darken(0.2, lineColor1),
+  darken(0.2, lineColor2),
+  darken(0.2, lineColor3),
+  darken(0.2, lineColor4),
+  darken(0.3, lineColor5),
+  darken(0.3, lineColor6),
+  darken(0.3, lineColor7),
+  darken(0.3, lineColor8),
+];
