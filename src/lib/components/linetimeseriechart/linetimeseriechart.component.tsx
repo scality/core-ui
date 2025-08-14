@@ -477,7 +477,7 @@ export function LineTimeSerieChart({
           <Tooltip content={<CustomTooltip unitLabel={unitLabel} />} />
           {/* Add horizontal line at y=0 for symmetrical charts */}
           {yAxisType === 'symmetrical' && (
-            <ReferenceLine y={0} stroke={theme.border} isFront={false} />
+            <ReferenceLine y={0} stroke={theme.border} />
           )}
 
           {/* Chart lines */}
