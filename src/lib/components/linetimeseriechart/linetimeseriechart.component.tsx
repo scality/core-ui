@@ -13,11 +13,8 @@ import { useTheme } from 'styled-components';
 import { useMetricsTimeSpan } from '../linetemporalchart/MetricTimespanProvider';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
-import {
-  fontSize,
-  fontWeight,
-  lineTimeSeriesColorRange,
-} from '../../style/theme';
+import { fontSize, fontWeight } from '../../style/theme';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 import { ChartTitleText, SmallerText } from '../text/Text.component';
 import { Loader } from '../loader/Loader.component';
 import { spacing } from '../../spacing';
@@ -101,8 +98,6 @@ export type Serie = {
   getTooltipLabel: (metricPrefix?: string, resource?: string) => string;
   // get the legend label for each of the series
   getLegendLabel?: (metricPrefix?: string, resource?: string) => string;
-  // optional color field to specify the color of the line
-  color?: string;
   // the name of the metric prefix with read, write, in, out
   metricPrefix?: string;
   // to specify if the line is dash
@@ -216,6 +211,7 @@ export function LineTimeSerieChart({
 }: LineChartProps) {
   const theme = useTheme();
   const { frequency, duration } = useMetricsTimeSpan();
+  const { getColor } = useChartLegend();
   const chartRef = useRef(null);
 
   const chartData = useMemo(() => {
@@ -380,18 +376,21 @@ export function LineTimeSerieChart({
       {} as Record<string, Serie[]>,
     );
 
-    // Todo: The color will be assigned through the context.
-    Object.keys(groups).forEach((resource, index) => {
-      const color =
-        lineTimeSeriesColorRange[index % lineTimeSeriesColorRange.length];
-      mapping[resource] = color;
+    // Get colors from the ChartLegend context
+    Object.keys(groups).forEach((resource) => {
+      const color = getColor(resource);
+      if (color) {
+        mapping[resource] = color;
+      } else {
+        console.warn(`Color not defined for resource: ${resource}`);
+      }
     });
 
     return {
       colorMapping: mapping,
       groupedSeries: groups,
     };
-  }, [series]);
+  }, [series, getColor]);
 
   // Format time for display the tick in the x axis
   const formatTime = useMemo(
@@ -492,7 +491,7 @@ export function LineTimeSerieChart({
                   key={`${title}-${resource}-${serieIndex}`}
                   type="monotone"
                   dataKey={label}
-                  stroke={serie.color || colorMapping[resource]}
+                  stroke={colorMapping[resource]}
                   dot={false}
                 />
               );

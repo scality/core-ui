@@ -2,15 +2,43 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
+import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegendWrapper';
+import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
+import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
 
 const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
-      <LineTimeSerieChart {...props} />
+      <ChartLegendWrapper
+        colorSet={{
+          'ip-10-160-122-207.eu-north-1.compute.internal':
+            lineTimeSeriesColorRange[0],
+        }}
+      >
+        <LineTimeSerieChart {...props} />
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>
     </MetricsTimeSpanProvider>
   );
 };
 
+const ChartWithProviders2 = (props) => {
+  return (
+    <MetricsTimeSpanProvider>
+      <ChartLegendWrapper
+        colorSet={{
+          'ip-10-160-122-207.eu-north-1.compute.internal':
+            lineTimeSeriesColorRange[0],
+          'ip-10-160-122-207.eu-north-2.compute.internal':
+            lineTimeSeriesColorRange[1],
+        }}
+      >
+        <LineTimeSerieChart {...props} />
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    </MetricsTimeSpanProvider>
+  );
+};
 const meta: Meta<typeof LineTimeSerieChart> = {
   title: 'Components/Data Display/Charts/LineTimeSerieChart',
   component: ChartWithProviders,
@@ -397,6 +425,7 @@ const UNIT_RANGE_BS = [
   },
 ];
 export const SymmetricalAxisExample: Story = {
+  render: (args) => <ChartWithProviders2 {...args} />,
   args: {
     series: {
       above: [
