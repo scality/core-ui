@@ -96,8 +96,6 @@ export type Serie = {
   data: [number, string | null][];
   // it's mandatory to display tooltip label in the tooltip
   getTooltipLabel: (metricPrefix?: string, resource?: string) => string;
-  // get the legend label for each of the series
-  getLegendLabel?: (metricPrefix?: string, resource?: string) => string;
   // the name of the metric prefix with read, write, in, out
   metricPrefix?: string;
   // to specify if the line is dash
