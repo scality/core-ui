@@ -1,6 +1,6 @@
 import { Table } from './Tablev2.component';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -74,6 +74,8 @@ describe('TableV2', () => {
         </Table>
       </div>
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');
     expect(rows[4]).toHaveTextContent(/Ninette/i);
@@ -91,6 +93,8 @@ describe('TableV2', () => {
         </Table>
       </div>
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');
     expect(rows[1]).toHaveTextContent(/ninette/i);
@@ -113,6 +117,8 @@ describe('TableV2', () => {
         </Table>
       </div>
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
     // we check that the table is displaying all the data
     const rows = getAllByRole('row');
     expect(rows[1]).toHaveTextContent(/an/i); //first name yoh-an-n

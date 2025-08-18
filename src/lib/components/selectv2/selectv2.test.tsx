@@ -1,4 +1,4 @@
-import { screen, render as testingRender } from '@testing-library/react';
+import { act, screen, render as testingRender, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState, useRef } from 'react';
 import { Option, Select, SelectRef } from '../selectv2/Selectv2.component';
@@ -69,27 +69,29 @@ describe('SelectV2', () => {
     expect(() => render(<Option value="Option 1" />)).toThrowError();
   });
 
-  it('should open/close on click', () => {
+  it('should open/close on click', async () => {
     render(<SelectWrapper />);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select();
     expect(select).toBeInTheDocument();
     let options = selectors.options();
     expect(options).toHaveLength(0);
 
     // should open on click
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     simpleOptions.forEach((opt) => {
       const option = selectors.option(opt.props.label);
       expect(option).toBeInTheDocument();
     });
 
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     options = selectors.options();
     expect(options).toHaveLength(0);
   });
 
-  it('should open/close with keyboard', () => {
+  it('should open/close with keyboard', async () => {
     render(<SelectWrapper />);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select();
     expect(select).toBeInTheDocument();
     const options = selectors.options();
@@ -97,7 +99,7 @@ describe('SelectV2', () => {
 
     // should open on Enter
     userEvent.tab();
-    userEvent.keyboard('{Enter}');
+    await act(() => userEvent.keyboard('{Enter}'));
     simpleOptions.forEach((opt) => {
       const option = selectors.option(opt.props.label);
       expect(option).toBeInTheDocument();
@@ -116,13 +118,14 @@ describe('SelectV2', () => {
     });
   });
 
-  it('should display custom placeholder', () => {
+  it('should display custom placeholder', async () => {
     const placeholder = 'My placeholder...';
     render(<SelectWrapper placeholder={placeholder} />);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     expect(screen.getByText(placeholder)).toBeInTheDocument();
   });
 
-  it('should be disabled', () => {
+  it('should be disabled', async () => {
     render(
       <SelectWrapper value="1" disabled={true}>
         {simpleOptions}
@@ -134,27 +137,29 @@ describe('SelectV2', () => {
     // use input instead of select because select will still trigger the open/close action
     // despite select container not being clickable and input being disabled
     const input = selectors.input();
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     const options = selectors.options();
     expect(options).toHaveLength(0);
   });
 
-  it('should display no option', () => {
+  it('should display no option', async () => {
     render(
       <SelectWrapper>
         <></>
       </SelectWrapper>,
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select();
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const noOptions = selectors.noOptions();
     expect(noOptions).toBeInTheDocument();
   });
 
-  it('should filter and highlight on search', () => {
+  it('should filter and highlight on search', async () => {
     render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select(true);
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const input = selectors.input();
 
     userEvent.type(input, '2');
@@ -164,25 +169,26 @@ describe('SelectV2', () => {
     expect(searchedText).toHaveTextContent('2');
   });
 
-  it('should unfocus the search input when the select is closed', () => {
+  it('should unfocus the search input when the select is closed', async () => {
     render(<SelectWrapper>{optionsWithScrollSearchBar} </SelectWrapper>);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select(true);
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     let input = selectors.input();
     expect(input).toHaveFocus();
     const option = selectors.option(/Item 1/);
-    userEvent.click(option);
+    await act(() => userEvent.click(option));
     input = selectors.input();
     expect(input).not.toHaveFocus();
   });
 
-  it('should be possible to use searchbar when option is selected', () => {
+  it('should be possible to use searchbar when option is selected', async () => {
     render(
       <SelectWrapper value="1">{optionsWithScrollSearchBar}</SelectWrapper>,
     );
     expect(screen.getByText(/Item 1/)).toBeVisible();
     const select = selectors.select(true);
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const input = selectors.input();
     userEvent.type(input, '2');
     expect(screen.queryByText(/Item 1/)).not.toBeInTheDocument();
@@ -190,47 +196,48 @@ describe('SelectV2', () => {
     expect(options).toHaveLength(1);
   });
 
-  it('should select/unselect option with keyboard', () => {
+  it('should select/unselect option with keyboard', async () => {
     render(<SelectWrapper />);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
     const select = selectors.select();
     userEvent.tab();
-    userEvent.keyboard('{ArrowDown}');
+    act(() => userEvent.keyboard('{ArrowDown}'));
 
     // should select first option
-    userEvent.keyboard('{Enter}');
+    await act(() => userEvent.keyboard('{Enter}'));
     expect(select).toHaveTextContent('Item 0');
 
     // should select second option
     userEvent.tab();
-    userEvent.keyboard('{ArrowDown}');
-    userEvent.keyboard('{ArrowDown}');
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
 
-    userEvent.keyboard('{Enter}');
+    await act(() => userEvent.keyboard('{Enter}'));
     expect(select).toHaveTextContent('Item 1');
   });
 
-  it('should scroll to selected value when opening select', () => {
+  it('should scroll to selected value when opening select', async () => {
     render(
       <SelectWrapper value={optionsWithScrollSearchBar[9].props.value}>
         {optionsWithScrollSearchBar}
       </SelectWrapper>,
     );
     const select = selectors.select(true);
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const option = selectors.option(/Item 9/);
     expect(screen.queryByRole('option', { name: /Item 1/i })).toBeNull();
     expect(option).toBeVisible();
   });
 
-  it('should be able to reset the value', () => {
+  it('should be able to reset the value', async () => {
     render(<SelectReset>{simpleOptions}</SelectReset>);
     const button = screen.getByText(/reset/);
-    userEvent.click(button);
+    await act(() => userEvent.click(button));
     const select = selectors.select();
     expect(select).toHaveTextContent('Select...');
   });
 
-  it('should not be possible to select an option if it is disabled', () => {
+  it('should not be possible to select an option if it is disabled', async () => {
     render(
       <SelectWrapper>
         <Option value="1" disabled>
@@ -240,15 +247,15 @@ describe('SelectV2', () => {
       </SelectWrapper>,
     );
     const select = selectors.select();
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const option = selectors.option(/Item 1/);
 
-    userEvent.click(option);
+    await act(() => userEvent.click(option));
     const option2 = selectors.option(/Item 2/);
     expect(option2).toBeVisible();
   });
 
-  it('should display a tooltip if the option is disabled with a reason', () => {
+  it('should display a tooltip if the option is disabled with a reason', async () => {
     render(
       <SelectWrapper>
         <Option value="1" disabled disabledReason="This option is disabled">
@@ -257,10 +264,10 @@ describe('SelectV2', () => {
       </SelectWrapper>,
     );
     const select = selectors.select();
-    userEvent.click(select);
+    await act(() => userEvent.click(select));
     const option = selectors.option(/Item 1/);
     expect(option).toHaveAttribute('aria-disabled', 'true');
-    userEvent.hover(option);
+    await act(() => userEvent.hover(option));
     const tooltip = screen.getByText(/This option is disabled/);
     expect(tooltip).toBeInTheDocument();
   });
@@ -304,9 +311,9 @@ describe('SelectV2', () => {
     // It's not our case here, so it makes thing difficult to select the right select
     // I workaround this by using setting the aria-label to the select container (cf: test below)
     const singleSelect = screen.getByRole('listbox');
-    await userEvent.click(singleSelect);
+    await act(() => userEvent.click(singleSelect));
 
-    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
   });
 
   it('should be testable if we have several select', async () => {
@@ -367,13 +374,13 @@ describe('SelectV2', () => {
 
     render(<MyWrapperWith2Select />);
 
-    await userEvent.click(screen.getByLabelText(/select account/i));
+    await act(() => userEvent.click(screen.getByLabelText(/select account/i)));
 
-    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
 
-    await userEvent.click(screen.getByLabelText(/select user/i));
+    await act(() => userEvent.click(screen.getByLabelText(/select user/i)));
 
-    await userEvent.click(screen.getByRole('option', { name: /user 1/i }));
+    await act(() => userEvent.click(screen.getByRole('option', { name: /user 1/i })));
   });
 
   it('should be testable even if we have several select with the same value, the placeholder should be different', async () => {
@@ -434,8 +441,8 @@ describe('SelectV2', () => {
 
     render(<MyWrapperWith2Select />);
 
-    await userEvent.click(screen.getByLabelText(/select account/i));
-    await userEvent.click(screen.getByLabelText(/Select Second Account/i));
+    await act(() => userEvent.click(screen.getByLabelText(/select account/i)));
+    await act(() => userEvent.click(screen.getByLabelText(/Select Second Account/i)));
 
     /**
      * This is possible because only 1 select can be open at a time
@@ -445,7 +452,7 @@ describe('SelectV2', () => {
      * const selectContainer = select?.parentElement?.parentElement;
      * const option = within(selectContainer).getByRole('option', { name: /account 1/i });
      */
-    await userEvent.click(screen.getByRole('option', { name: /account 1/i }));
+    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
   });
 
   describe('Ref API', () => {
@@ -473,7 +480,7 @@ describe('SelectV2', () => {
       render(<RefTestComponent />);
       expect(selectors.input()).not.toHaveFocus();
 
-      userEvent.click(screen.getByRole('button', { name: /Focus/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Focus/i })));
       expect(selectors.input()).toHaveFocus();
     });
 
@@ -506,14 +513,14 @@ describe('SelectV2', () => {
       render(<RefTestComponent />);
       expect(selectors.options()).toHaveLength(0);
 
-      userEvent.click(screen.getByRole('button', { name: /Open Menu/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Open Menu/i })));
       expect(selectors.options().length).toBeGreaterThan(0);
       simpleOptions.forEach((opt) => {
         const option = selectors.option(opt.props.label);
         expect(option).toBeInTheDocument();
       });
 
-      userEvent.click(screen.getByRole('button', { name: /Close Menu/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Close Menu/i })));
       expect(selectors.options()).toHaveLength(0);
     });
 
@@ -560,13 +567,16 @@ describe('SelectV2', () => {
 
       render(<RefTestComponent />);
 
-      const select = selectors.select();
+      let select;
+      await act(() => {
+        select = selectors.select();
+      });
       expect(select).toHaveTextContent('Select with ref');
 
-      userEvent.click(screen.getByRole('button', { name: /Set Value/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Set Value/i })));
       expect(select).toHaveTextContent('Item 0');
 
-      userEvent.click(screen.getByRole('button', { name: /Clear/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Clear/i })));
       expect(select).toHaveTextContent('Select with ref');
     });
 
@@ -594,10 +604,10 @@ describe('SelectV2', () => {
 
       render(<RefTestComponent />);
 
-      userEvent.click(screen.getByRole('button', { name: /Focus/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Focus/i })));
       expect(selectors.input()).toHaveFocus();
 
-      userEvent.click(screen.getByRole('button', { name: /Blur/i }));
+      await act(() => userEvent.click(screen.getByRole('button', { name: /Blur/i })));
       expect(selectors.input()).not.toHaveFocus();
     });
   });

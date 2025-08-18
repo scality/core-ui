@@ -14,8 +14,9 @@ describe('SearchInput', () => {
     searchInput: () => screen.getByRole('searchbox'),
     clearButton: () => screen.queryByRole('button'),
   };
-  it('should render the SearchInput component', () => {
+  it('should render the SearchInput component', async () => {
     render(<SearchInputRender value="" onChange={() => {}} />);
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
     const searchInput = selectors.searchInput();
     expect(searchInput).toBeInTheDocument();

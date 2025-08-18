@@ -1,26 +1,28 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { TableSync } from './TableSync';
 
 describe('TableSync', () => {
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const onSync = jest.fn();
     render(
       <TableSync onSync={onSync} />
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
   });
 
-  it('should call onSync when clicked', () => {
+  it('should call onSync when clicked', async () => {
     const onSync = jest.fn();
     render(
       <TableSync onSync={onSync} />
     );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
     const button = screen.getByRole('button');
-    fireEvent.click(button);
+    await act(() => fireEvent.click(button));
     expect(onSync).toHaveBeenCalledTimes(1);
   });
 });

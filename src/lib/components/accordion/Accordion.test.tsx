@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Accordion } from './Accordion.component';
 import userEvent from '@testing-library/user-event';
@@ -19,8 +19,9 @@ describe('Accordion', () => {
   const renderAccordion = (open = false) => {
     render(<SUT open={open} />);
   };
-  it('should render the Accordion component with title and content', () => {
+  it('should render the Accordion component with title and content', async () => {
     renderAccordion();
+    await waitFor(() => screen.findByRole('img', { hidden: true }));
 
     const accordionToggle = selectors.accordionToggle();
     expect(accordionToggle).toBeInTheDocument();

@@ -3,17 +3,18 @@ import {
   optionsDefaultConfiguration,
 } from './HealthSelector.component';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getWrapper } from '../../testUtils';
 describe('HealthSelector', () => {
-  it('should display correctly without any props and select first option', () => {
+  it('should display correctly without any props and select first option', async () => {
     const { Wrapper } = getWrapper();
     const { getByText } = render(
       <Wrapper>
         <HealthSelector id="health" onChange={() => {}} />
       </Wrapper>,
     );
+    await waitFor(() => screen.findByRole('img', { hidden: true }));
     const input = screen.getByRole('textbox');
 
     // open the menu

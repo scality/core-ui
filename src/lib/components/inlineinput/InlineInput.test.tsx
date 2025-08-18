@@ -7,6 +7,7 @@ import {
 } from 'react-query';
 import { ToastProvider } from '../toast/ToastProvider';
 import {
+  act,
   render,
   screen,
   waitFor,
@@ -68,17 +69,18 @@ describe('InlineInput', () => {
         </ChangeMutationProvider>,
         { wrapper: Wrapper },
       );
+      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
       //E
       /// First focus the edit button
       await userEvent.tab();
       /// Then press enter to edit the input
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await userEvent.type(document.activeElement, 'new value');
+      await act(() => userEvent.type(document.activeElement, 'new value'));
       /// Then press enter to confirm the new value
-      await userEvent.keyboard('{enter}');
-      await waitForElementToBeRemoved(() => screen.getByRole('textbox'));
+      await act(() => userEvent.keyboard('{enter}'));
+      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
 
       //V
       expect(mock).toHaveBeenCalledWith('testnew value');
@@ -105,24 +107,23 @@ describe('InlineInput', () => {
         </ChangeMutationProvider>,
         { wrapper: Wrapper },
       );
+      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
       //E
       /// First focus the edit button
       await userEvent.tab();
       /// Then press enter to edit the input
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await userEvent.type(document.activeElement, 'new value');
+      await act(() => userEvent.type(document.activeElement, 'new value'));
       /// Then press enter to confirm the new value
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Expect the confirmation modal to be opened
-      await waitFor(() =>
-        expect(selectors.confirmationModal()).toBeInTheDocument(),
-      );
+      expect(selectors.confirmationModal()).toBeInTheDocument()
       /// Click the confirm button
-      await userEvent.click(screen.getByRole('button', { name: /confirm/i }));
-      /// Wait for modal to be closed
-      await waitForElementToBeRemoved(() => selectors.confirmationModal());
+      await act(() => userEvent.click(screen.getByRole('button', { name: /confirm/i })));
+      /// modal should be closed
+      expect(screen.queryByRole('dialog', { name: /Confirm/i })).not.toBeInTheDocument();
 
       //V
       expect(mock).toHaveBeenCalledWith('testnew value');
@@ -147,16 +148,17 @@ describe('InlineInput', () => {
         </ChangeMutationProvider>,
         { wrapper: Wrapper },
       );
+      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
       //E
       /// First focus the edit button
       await userEvent.tab();
       /// Then press enter to edit the input
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await userEvent.type(document.activeElement, 'new value');
+      await act(() => userEvent.type(document.activeElement, 'new value'));
       /// Then press escape to cancel the new value
-      await userEvent.keyboard('{esc}');
+      await act(() => userEvent.keyboard('{esc}'));
 
       //V
       expect(mock).not.toHaveBeenCalled();
@@ -181,16 +183,17 @@ describe('InlineInput', () => {
         </ChangeMutationProvider>,
         { wrapper: Wrapper },
       );
+      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
       //E
       /// First focus the edit button
       await userEvent.tab();
       /// Then press enter to edit the input
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await userEvent.type(document.activeElement, 'new value');
+      await act(() => userEvent.type(document.activeElement, 'new value'));
       /// Then press enter to confirm the new value
-      await userEvent.keyboard('{enter}');
+      await act(() => userEvent.keyboard('{enter}'));
       /// Expect the confirmation modal to be opened
       await waitFor(() =>
         expect(selectors.confirmationModal()).toBeInTheDocument(),
