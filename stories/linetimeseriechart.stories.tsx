@@ -2,15 +2,43 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { MetricsTimeSpanProvider } from '../src/lib/components/linetemporalchart/MetricTimespanProvider';
 import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
+import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegendWrapper';
+import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
+import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
 
 const ChartWithProviders = (props) => {
   return (
     <MetricsTimeSpanProvider>
-      <LineTimeSerieChart {...props} />
+      <ChartLegendWrapper
+        colorSet={{
+          'ip-10-160-122-207.eu-north-1.compute.internal':
+            lineTimeSeriesColorRange[0],
+        }}
+      >
+        <LineTimeSerieChart {...props} />
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>
     </MetricsTimeSpanProvider>
   );
 };
 
+const ChartWithProviders2 = (props) => {
+  return (
+    <MetricsTimeSpanProvider>
+      <ChartLegendWrapper
+        colorSet={{
+          'ip-10-160-122-207.eu-north-1.compute.internal':
+            lineTimeSeriesColorRange[0],
+          'ip-10-160-122-207.eu-north-2.compute.internal':
+            lineTimeSeriesColorRange[1],
+        }}
+      >
+        <LineTimeSerieChart {...props} />
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    </MetricsTimeSpanProvider>
+  );
+};
 const meta: Meta<typeof LineTimeSerieChart> = {
   title: 'Components/Data Display/Charts/LineTimeSerieChart',
   component: ChartWithProviders,
@@ -361,7 +389,6 @@ export const PercentageChartExample: Story = {
         resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
         metricPrefix: 'instance:10.160.122.207:9100',
         getTooltipLabel: (prefix, resource) => `${resource}`,
-        getLegendLabel: (prefix, resource) => `${resource}`,
       },
     ],
     title: 'CPU Usage',
@@ -397,6 +424,7 @@ const UNIT_RANGE_BS = [
   },
 ];
 export const SymmetricalAxisExample: Story = {
+  render: (args) => <ChartWithProviders2 {...args} />,
   args: {
     series: {
       above: [
@@ -405,14 +433,12 @@ export const SymmetricalAxisExample: Story = {
           resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
           metricPrefix: 'in',
           getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
-          getLegendLabel: (prefix, resource) => `${resource}}`,
         },
         {
           data: prometheusData2,
           resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
           metricPrefix: 'in',
           getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
-          getLegendLabel: (prefix, resource) => `${resource}}`,
         },
       ],
       below: [
@@ -421,14 +447,12 @@ export const SymmetricalAxisExample: Story = {
           resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
           metricPrefix: 'out',
           getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
-          getLegendLabel: (prefix, resource) => `${resource}`,
         },
         {
           data: prometheusData4,
           resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
           metricPrefix: 'out',
           getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
-          getLegendLabel: (prefix, resource) => `${resource}`,
         },
       ],
     },
@@ -450,7 +474,6 @@ export const AutoUnitChartExample: Story = {
         resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
         metricPrefix: 'instance:10.160.122.207:9100',
         getTooltipLabel: (prefix, resource) => `${resource}`,
-        getLegendLabel: (prefix, resource) => `${resource}`,
       },
     ],
     title: 'Disk Throughput',
