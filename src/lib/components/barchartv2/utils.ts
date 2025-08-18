@@ -28,6 +28,11 @@ export const getMaxBarValue = (
   data: { [key: string]: string | number }[],
   stacked?: boolean,
 ) => {
+  // Handle empty data gracefully
+  if (data.length === 0) {
+    return 0;
+  }
+
   const values = data.map((item) => {
     // If stacked, we need to filter out category and sum the values in the same object
     if (stacked) {
@@ -46,9 +51,9 @@ export const getMaxBarValue = (
       .filter((key) => key !== 'category')
       .map((key) => Number(item[key]));
     // Get the max value among the values in the object (corresponding to one bar)
-    return Math.max(...numberValues);
+    return Math.max(...numberValues, 0); // Ensure we don't get -Infinity
   });
-  return Math.max(...values);
+  return Math.max(...values, 0); // Ensure we don't get -Infinity
 };
 
 /**

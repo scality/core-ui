@@ -70,7 +70,7 @@ export type BarchartSortFn<T extends BarchartBars> = (
 
 export type BarchartProps<T extends BarchartBars> = {
   type: 'category' | TimeType;
-  bars: T;
+  bars?: T;
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
   unitRange?: UnitRange;
@@ -214,8 +214,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     isLoading,
   } = props;
 
+  // Handle undefined bars by providing empty array default
+  const safeBars = bars || [];
+
   // Create colorSet from ChartLegendWrapper
-  const colorSet = bars.reduce(
+  const colorSet = safeBars.reduce(
     (acc, bar) => {
       const color = getColor(bar.label);
       if (color) {
@@ -226,8 +229,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     {} as Record<string, ChartColors | string>,
   );
 
+  // Auto-detect loading state when bars is undefined or explicitly loading
+  const shouldShowLoading = isLoading || !bars;
+
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
-    useChartData(bars, type, colorSet, stacked, defaultSort, unitRange);
+    useChartData(safeBars, type, colorSet, stacked, defaultSort, unitRange);
 
   return (
     <Stack direction="vertical" gap="r8">
@@ -237,7 +243,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         helpTooltip={helpTooltip}
         rightTitle={rightTitle}
       />
-      {isLoading ? (
+      {shouldShowLoading ? (
         <Loading height={height} />
       ) : (
         <StyledResponsiveContainer width="100%" height={height}>
