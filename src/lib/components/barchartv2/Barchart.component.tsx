@@ -215,7 +215,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   } = props;
 
   // Create colorSet from ChartLegendWrapper
-  const colorSet = bars.reduce(
+
+  const colorSet = bars?.reduce(
     (acc, bar) => {
       const color = getColor(bar.label);
       if (color) {
