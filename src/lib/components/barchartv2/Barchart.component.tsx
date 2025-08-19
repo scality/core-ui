@@ -214,11 +214,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     isLoading,
   } = props;
 
-  // Handle undefined bars by providing empty array default
-  const safeBars = bars || [];
-
   // Create colorSet from ChartLegendWrapper
-  const colorSet = safeBars.reduce(
+  const colorSet = bars?.reduce(
     (acc, bar) => {
       const color = getColor(bar.label);
       if (color) {
@@ -233,7 +230,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const shouldShowLoading = isLoading || !bars;
 
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
-    useChartData(safeBars, type, colorSet, stacked, defaultSort, unitRange);
+    useChartData(
+      bars || [],
+      type,
+      colorSet || {},
+      stacked,
+      defaultSort,
+      unitRange,
+    );
 
   return (
     <Stack direction="vertical" gap="r8">
