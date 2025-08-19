@@ -32,11 +32,6 @@ export const getMaxBarValue = (
   data: { [key: string]: string | number }[],
   stacked?: boolean,
 ) => {
-  // Handle undefined or empty data
-  if (!data || data.length === 0) {
-    return 0;
-  }
-
   const values = data.map((item) => {
     // If stacked, we need to filter out category and sum the values in the same object
     if (stacked) {
@@ -73,9 +68,6 @@ const generateTimeRanges = (
   interval: number,
 ): { start: Date; end: Date }[] => {
   const ranges: { start: Date; end: Date }[] = [];
-  if (!startDate || !endDate || !interval) {
-    return ranges;
-  }
 
   let currentDate = new Date(startDate.getTime());
   while (currentDate.getTime() <= endDate.getTime()) {
@@ -339,7 +331,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
     return { unitLabel: '', roundReferenceValue, rechartsData: data };
   }
 
-  const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
+  const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
   const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
   const roundReferenceValue = getRoundReferenceValue(topValue);
   const rechartsData = data.map((dataPoint) => {
