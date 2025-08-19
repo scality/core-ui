@@ -93,6 +93,43 @@ describe('Barchart', () => {
       expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
       expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
     });
+    it('should render the Barchart component with error state', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart type="category" bars={[]} isError />
+          </ChartLegendWrapper>
+        </Wrapper>,
+      );
+      expect(
+        screen.getByText('Chart data is not available'),
+      ).toBeInTheDocument();
+    });
+    it('should render the Barchart component with loading state', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart type="category" bars={[]} isLoading />
+          </ChartLegendWrapper>
+        </Wrapper>,
+      );
+      expect(screen.getByText('Loading Chart Data...')).toBeInTheDocument();
+    });
+    it('should render the Barchart component with undefined bars', async () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart type="category" bars={undefined} />
+          </ChartLegendWrapper>
+        </Wrapper>,
+      );
+      expect(
+        screen.getByText('Chart data is not available'),
+      ).toBeInTheDocument();
+    });
   });
 
   describe('Time data', () => {

@@ -243,9 +243,6 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     {} as Record<string, ChartColors | string>,
   );
 
-  // Auto-detect loading state when bars is undefined or explicitly loading
-  const shouldShowLoading = isLoading || !bars;
-
   const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
     useChartData(
       bars || [],
@@ -264,9 +261,9 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         helpTooltip={helpTooltip}
         rightTitle={rightTitle}
       />
-      {isError ? (
+      {isError || (!bars && !isLoading) ? (
         <Error height={height} />
-      ) : shouldShowLoading ? (
+      ) : isLoading ? (
         <Loading height={height} />
       ) : (
         <StyledResponsiveContainer width="100%" height={height}>
