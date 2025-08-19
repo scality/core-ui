@@ -18,10 +18,14 @@ export const getRoundReferenceValue = (value: number): number => {
   const normalized = value / magnitude;
 
   // Round to nice numbers based on normalized value
-  if (normalized <= 1) return magnitude;
-  if (normalized <= 2.5) return 2.5 * magnitude;
-  if (normalized <= 5) return 5 * magnitude;
-  return 10 * magnitude;
+  let result: number;
+  if (normalized <= 1) result = magnitude;
+  else if (normalized <= 2.5) result = 2.5 * magnitude;
+  else if (normalized <= 5) result = 5 * magnitude;
+  else result = 10 * magnitude;
+
+  // Ensure minimum value of 5 for better chart appearance
+  return Math.max(result, 5);
 };
 
 export const getMaxBarValue = (
