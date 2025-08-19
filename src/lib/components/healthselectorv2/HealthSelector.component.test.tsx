@@ -2,7 +2,7 @@ import {
   HealthSelector,
   optionsDefaultConfiguration,
 } from './HealthSelector.component';
-import React from 'react';
+import { act } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getWrapper } from '../../testUtils';
@@ -18,11 +18,11 @@ describe('HealthSelector', () => {
     const input = screen.getByRole('textbox');
 
     // open the menu
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     const healthyOption = getByText(/healthy/i);
     expect(healthyOption).toBeInTheDocument();
   });
-  it('should call the onChange function when it change', () => {
+  it('should call the onChange function when it change', async () => {
     const { Wrapper } = getWrapper();
     const onChange = jest.fn();
     const { getByText } = render(
@@ -31,12 +31,12 @@ describe('HealthSelector', () => {
       </Wrapper>,
     );
     const input = screen.getByRole('textbox');
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     const warningOption = getByText(/warning/i);
-    userEvent.click(warningOption);
+    await act(() => userEvent.click(warningOption));
     expect(onChange).toHaveBeenCalledWith('warning');
   });
-  it('should not display hidden options', () => {
+  it('should not display hidden options', async () => {
     const { Wrapper } = getWrapper();
     const { queryByText } = render(
       <Wrapper>
@@ -55,7 +55,7 @@ describe('HealthSelector', () => {
 
     // open the menu
     const input = screen.getByRole('textbox');
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     const healthyOption = queryByText(/healthy/i);
     expect(healthyOption).not.toBeInTheDocument();
   });

@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
 import { getWrapper } from '../../testUtils';
 import { Barchart } from './Barchart.component';
 import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
@@ -15,7 +14,7 @@ jest.mock('recharts', () => {
     ...OriginalResponsiveContainerModule,
     ResponsiveContainer: ({ height, children }) => (
       <OriginalResponsiveContainerModule.ResponsiveContainer
-        width={800}
+        aspect={3}
         height={300}
         data-testid="responsive-container"
       >
@@ -278,7 +277,7 @@ describe('Barchart', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <ChartLegendWrapper colorSet={testColorSet}>
+        <ChartLegendWrapper colorSet={{ ...testColorSet, Failed: 'red' }}>
           <Barchart type="category" bars={testStackedBars} stacked={true} />
         </ChartLegendWrapper>
       </Wrapper>,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { InputList, InputListProps } from './InputList.component';
 import { FormSection } from '../form/Form.component';
@@ -6,7 +5,7 @@ import { FormSection } from '../form/Form.component';
 describe('InputList', () => {
   const onChangeMock = jest.fn();
 
-  const renderInputList = (props: InputListProps<string[]>) => {
+  const renderInputList = (props: InputListProps<string>) => {
     render(
       <FormSection>
         <InputList

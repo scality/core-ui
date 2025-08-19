@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import React from 'react';
 import { coreUIAvailableThemes } from '../../style/theme';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { useComputeBackgroundColor } from './InfoMessageUtils';

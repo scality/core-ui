@@ -1,12 +1,11 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
 import { TableSync } from './TableSync';
 
 describe('TableSync', () => {
   it('should render correctly', async () => {
     const onSync = jest.fn();
     render(
-      <TableSync onSync={onSync} />
+      <TableSync onSync={onSync} tooltipOverlay='sync' />
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -17,7 +16,7 @@ describe('TableSync', () => {
   it('should call onSync when clicked', async () => {
     const onSync = jest.fn();
     render(
-      <TableSync onSync={onSync} />
+      <TableSync onSync={onSync} tooltipOverlay='sync' />
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 

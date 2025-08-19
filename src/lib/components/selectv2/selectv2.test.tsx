@@ -2,6 +2,7 @@ import { act, screen, render as testingRender, waitFor } from '@testing-library/
 import userEvent from '@testing-library/user-event';
 import React, { useState, useRef } from 'react';
 import { Option, Select, SelectRef } from '../selectv2/Selectv2.component';
+import { GroupTypeBase, OptionTypeBase } from 'react-select';
 
 const render = (args) => {
   return testingRender(args);
@@ -66,7 +67,10 @@ describe('SelectV2', () => {
   };
 
   it('should throw error if <Option/> is outside <Select/>', () => {
+    // mock console.error as this is the only way to silent expected error thrown by the component
+    const consoleErrorFn = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
     expect(() => render(<Option value="Option 1" />)).toThrowError();
+    consoleErrorFn.mockRestore();
   });
 
   it('should open/close on click', async () => {
@@ -458,7 +462,7 @@ describe('SelectV2', () => {
   describe('Ref API', () => {
     it('should expose focus method via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef>(null);
+        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
         const [value, setValue] = useState<string>('');
 
         return (
@@ -486,7 +490,7 @@ describe('SelectV2', () => {
 
     it('should expose openMenu and closeMenu methods via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef>(null);
+        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
         const [value, setValue] = useState<string>('');
 
         return (
@@ -529,7 +533,7 @@ describe('SelectV2', () => {
 
       const RefTestComponent = () => {
         const [value, setValue] = useState('');
-        const selectRef = useRef<SelectRef>(null);
+        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
 
         return (
           <div>
@@ -582,7 +586,7 @@ describe('SelectV2', () => {
 
     it('should expose blur method via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef>(null);
+        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
         const [value, setValue] = useState<string>('');
 
         return (

@@ -9,9 +9,12 @@ it('should return -1 or 1 to sort the status', () => {
   expect(result).toEqual(1);
   expect(result2).toEqual(-1);
 });
-it('should return undefine for the unknown status', () => {
-  const result = compareHealth('invalidStatus', 'healthy');
-  const result2 = compareHealth('none', 'invalidStatus');
+it('should return undefined for the unknown status', () => {
+  const consoleErrorMockHandle = jest.spyOn(console, 'error').mockImplementation(() => {});
+  const result = compareHealth('invalidStatus' as any, 'healthy');
+  const result2 = compareHealth('none', 'invalidStatus' as any);
+  expect(consoleErrorMockHandle).toHaveBeenCalled();
+  consoleErrorMockHandle.mockRestore();
   expect(result).toEqual(undefined);
   expect(result2).toEqual(undefined);
 });

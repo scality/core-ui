@@ -1,5 +1,4 @@
-import { Table } from './Tablev2.component';
-import React from 'react';
+import { Table, TableProps } from './Tablev2.component';
 import { render, screen, waitFor } from '@testing-library/react';
 
 jest.mock('./TableUtils', () => ({
@@ -42,7 +41,7 @@ const data = [
     health: 'healthy',
   },
 ];
-const columns = [
+const columns: TableProps['columns'] = [
   {
     Header: 'First Name',
     accessor: 'firstName',

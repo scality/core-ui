@@ -3,7 +3,8 @@ import {
   getUnitLabel,
   addMissingDataPoint,
 } from './ChartUtil';
-const series = [
+import { Serie } from './LineTemporalChart.component';
+const series: Serie[] = [
   {
     resource: 'node1',
     data: [
@@ -11,7 +12,7 @@ const series = [
       [1627460952, '18.73333333333335'],
     ],
     getTooltipLabel: (metricPrefix, resource) => {
-      return resource;
+      return `${resource}`;
     },
     isLineDashed: false,
   },
@@ -22,12 +23,12 @@ const series = [
       [1627460952, null],
     ],
     getTooltipLabel: (metricPrefix, resource) => {
-      return resource;
+      return `${resource}`;
     },
     isLineDashed: false,
   },
 ];
-const seriesSymmetrical = [
+const seriesSymmetrical: Serie[] = [
   {
     metricPrefix: 'read',
     resource: 'node1',

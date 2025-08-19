@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Props, Toggle } from './Toggle.component';
 import userEvent from '@testing-library/user-event';
 

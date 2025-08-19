@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import {
   QueryClient,
   QueryClientProvider,
@@ -11,7 +11,6 @@ import {
   render,
   screen,
   waitFor,
-  waitForElementToBeRemoved,
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -77,9 +76,10 @@ describe('InlineInput', () => {
       /// Then press enter to edit the input
       await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await act(() => userEvent.type(document.activeElement, 'new value'));
+      await act(() => userEvent.type(document.activeElement!, 'new value'));
       /// Then press enter to confirm the new value
       await act(() => userEvent.keyboard('{enter}'));
+      await waitFor(() => screen.findByText('testnew value'));
       expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
 
       //V
@@ -115,13 +115,16 @@ describe('InlineInput', () => {
       /// Then press enter to edit the input
       await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await act(() => userEvent.type(document.activeElement, 'new value'));
+      await act(() => userEvent.type(document.activeElement!, 'new value'));
       /// Then press enter to confirm the new value
+      
       await act(() => userEvent.keyboard('{enter}'));
+      await waitFor(() => screen.findByRole('dialog', { name: /Confirm/i }));
       /// Expect the confirmation modal to be opened
       expect(selectors.confirmationModal()).toBeInTheDocument()
       /// Click the confirm button
       await act(() => userEvent.click(screen.getByRole('button', { name: /confirm/i })));
+
       /// modal should be closed
       expect(screen.queryByRole('dialog', { name: /Confirm/i })).not.toBeInTheDocument();
 
@@ -156,7 +159,7 @@ describe('InlineInput', () => {
       /// Then press enter to edit the input
       await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await act(() => userEvent.type(document.activeElement, 'new value'));
+      await act(() => userEvent.type(document.activeElement!, 'new value'));
       /// Then press escape to cancel the new value
       await act(() => userEvent.keyboard('{esc}'));
 
@@ -191,7 +194,7 @@ describe('InlineInput', () => {
       /// Then press enter to edit the input
       await act(() => userEvent.keyboard('{enter}'));
       /// Then type a new value
-      await act(() => userEvent.type(document.activeElement, 'new value'));
+      await act(() => userEvent.type(document.activeElement!, 'new value'));
       /// Then press enter to confirm the new value
       await act(() => userEvent.keyboard('{enter}'));
       /// Expect the confirmation modal to be opened
@@ -208,7 +211,7 @@ describe('InlineInput', () => {
       //V
       expect(mock).not.toHaveBeenCalled();
       expect(screen.getByRole('textbox')).toBeInTheDocument();
-      expect(screen.getByRole('textbox').value).toBe('testnew value');
+      expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('testnew value');
     });
   });
 });
