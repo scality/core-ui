@@ -24,7 +24,7 @@ import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
   BAR_SIZE: 12,
-  MIN_POINT_SIZE: 1,
+  MIN_POINT_SIZE: 3,
   DEFAULT_HEIGHT: 200,
   CHART_MARGIN: {
     left: 0,
@@ -81,6 +81,7 @@ export type BarchartProps<T extends BarchartBars> = {
   rightTitle?: React.ReactNode;
   height?: number;
   isLoading?: boolean;
+  isError?: boolean;
 };
 
 interface CustomTickProps {
@@ -177,6 +178,21 @@ const ChartHeader = ({
   );
 };
 
+const Error = ({ height }: { height: number }) => {
+  return (
+    <Box
+      height={height}
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+      }}
+    >
+      <Text>Chart data is not available</Text>
+    </Box>
+  );
+};
+
 const Loading = ({ height }: { height: number }) => {
   return (
     <Box
@@ -212,6 +228,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     helpTooltip,
     rightTitle,
     isLoading,
+    isError,
   } = props;
 
   // Create colorSet from ChartLegendWrapper
@@ -247,7 +264,9 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         helpTooltip={helpTooltip}
         rightTitle={rightTitle}
       />
-      {shouldShowLoading ? (
+      {isError ? (
+        <Error height={height} />
+      ) : shouldShowLoading ? (
         <Loading height={height} />
       ) : (
         <StyledResponsiveContainer width="100%" height={height}>
@@ -270,7 +289,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                   key={dataKey}
                   dataKey={dataKey}
                   fill={chartColors[fill] || fill}
-                  minPointSize={CHART_CONSTANTS.MIN_POINT_SIZE}
+                  minPointSize={stacked ? 0 : CHART_CONSTANTS.MIN_POINT_SIZE}
                   stackId={stackId}
                   onMouseOver={() => setHoveredValue(dataKey)}
                   onMouseLeave={() => setHoveredValue(undefined)}

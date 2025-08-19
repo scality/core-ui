@@ -360,7 +360,7 @@ export const CapacityWithUnitRange: Story = {
 
 const stackedData: BarchartProps<
   {
-    label: 'Success' | 'Failed';
+    label: 'Success' | 'Failed' | 'Warning';
     data: [string, number][];
   }[]
 >['bars'] = [
@@ -375,9 +375,17 @@ const stackedData: BarchartProps<
   {
     label: 'Failed',
     data: [
-      ['category1', 8],
-      ['category2', 10],
-      ['category3', 25],
+      ['category1', 0],
+      ['category2', 0],
+      ['category3', 0],
+    ],
+  },
+  {
+    label: 'Warning',
+    data: [
+      ['category1', 0],
+      ['category2', 0],
+      ['category3', 0],
     ],
   },
 ];
@@ -390,6 +398,7 @@ export const Stacked: Story = {
         colorSet={{
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
+          Warning: theme.statusWarning,
         }}
       >
         <Stack direction="vertical" gap="r16">
@@ -736,6 +745,30 @@ export const BarchartsWithSingleLegend: Story = {
     );
   },
 };
+
+export const ErrorState: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    return (
+      <ChartLegendWrapper
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
+      >
+        <Barchart
+          type="category"
+          bars={[]}
+          isError
+          title="Error State"
+          helpTooltip="This chart data could not be loaded"
+        />
+        <ChartLegend shape="rectangle" />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
 export const CompleteExample: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
