@@ -32,8 +32,8 @@ export const getMaxBarValue = (
   data: { [key: string]: string | number }[],
   stacked?: boolean,
 ) => {
-  // Handle empty data gracefully
-  if (data.length === 0) {
+  // Handle undefined or empty data
+  if (!data || data.length === 0) {
     return 0;
   }
 
@@ -57,7 +57,7 @@ export const getMaxBarValue = (
     // Get the max value among the values in the object (corresponding to one bar)
     return Math.max(...numberValues, 0); // Ensure we don't get -Infinity
   });
-  return Math.max(...values, 0); // Ensure we don't get -Infinity
+  return Math.max(...values, 0);
 };
 
 /**
