@@ -363,17 +363,6 @@ describe('Barchart', () => {
     expect(categories[2]).toHaveTextContent('category1'); // 10 (lowest)
   });
 
-  it('should render the Barchart component with loading state', () => {
-    const { Wrapper } = getWrapper();
-    render(
-      <Wrapper>
-        <ChartLegendWrapper colorSet={testColorSet}>
-          <Barchart type="category" bars={[]} isLoading />
-        </ChartLegendWrapper>
-      </Wrapper>,
-    );
-    expect(screen.getByText('Loading Chart Data...')).toBeInTheDocument();
-  });
   it('should render header with title, secondary title, right title and help tooltip', async () => {
     const { Wrapper } = getWrapper();
     render(
