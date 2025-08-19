@@ -15,7 +15,6 @@
     "strictFunctionTypes": true,
     "noImplicitAny": false, //For now it is too costly to enable this one
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   }
 }

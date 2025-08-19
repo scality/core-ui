@@ -136,7 +136,7 @@ export const Time7Days: Story = {
                 interval: 24 * 60 * 60 * 1000,
               },
             }}
-            bars={undefined}
+            bars={timeData7Days}
           />
           <ChartLegend shape="line" />
         </Stack>
