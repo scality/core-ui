@@ -18,7 +18,12 @@ import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
-import { renderTooltipContent, UnitRange, useChartData } from './utils';
+import {
+  formatDate,
+  renderTooltipContent,
+  UnitRange,
+  useChartData,
+} from './utils';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 const CHART_CONSTANTS = {
@@ -99,6 +104,7 @@ interface CustomTickProps {
   };
   visibleTicksCount: number;
   width: number;
+  type: TimeType;
 }
 
 /* ---------------------------------- COMPONENTS ---------------------------------- */
@@ -109,6 +115,7 @@ const CustomTick = ({
   payload,
   visibleTicksCount,
   width,
+  type,
 }: CustomTickProps) => {
   const theme = useTheme();
   const tickWidth =
@@ -126,7 +133,9 @@ const CustomTick = ({
       <ConstrainedText
         text={
           <Text variant="Smaller" color="textSecondary">
-            {String(payload.value)}
+            {type.type === 'time'
+              ? formatDate(new Date(payload.value), type.timeRange.interval)
+              : String(payload.value)}
           </Text>
         }
         centered
@@ -330,7 +339,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             />
             <XAxis
               dataKey="category"
-              tick={(props) => <CustomTick {...props} />}
+              tick={(props) => <CustomTick {...props} type={type} />}
               type="category"
               interval={0}
               allowDataOverflow={true}
