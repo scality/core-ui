@@ -109,7 +109,7 @@ export const InlineInput = ({
               }}
               variant="primary"
               type="submit"
-              isLoading={changeMutation.isLoading}
+              isLoading={changeMutation.isPending}
             />
           </Stack>
         </form>
@@ -129,7 +129,7 @@ export const InlineInput = ({
                   <Button
                     label="Confirm"
                     variant="primary"
-                    isLoading={changeMutation.isLoading}
+                    isLoading={changeMutation.isPending}
                     onClick={() => {
                       changeMutation.mutate(watch(), {
                         onSuccess: () => {

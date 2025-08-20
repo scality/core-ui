@@ -89,7 +89,7 @@ type Props<MainMutationType, T extends any[]> = {
 
 export type MinimalMutationResult<TData, TError> = Pick<
   UseMutationResult<TData, TError, unknown, unknown>,
-  'isError' | 'isIdle' | 'isSuccess' | 'isLoading' | 'error' | 'data'
+  'isError' | 'isIdle' | 'isSuccess' | 'isPending' | 'error' | 'data'
 >;
 
 export const useMutationsHandler = <
@@ -112,7 +112,7 @@ export const useMutationsHandler = <
     const results = await Promise.all(mutations.map((m) => m.mutation));
 
     const loadingMutations = mutations.filter(
-      (_, index) => results[index].isLoading,
+      (_, index) => results[index].isPending,
     );
     const successMutations = mutations.filter(
       (_, index) => results[index].isSuccess,

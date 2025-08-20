@@ -24,7 +24,7 @@ describe('useMutationsHandler', () => {
     mutation: {
       isError: false,
       isIdle: false,
-      isLoading: false,
+      isPending: false,
       isPaused: false,
       isSuccess: true,
       status: 'success',
@@ -36,7 +36,7 @@ describe('useMutationsHandler', () => {
   const dependantMutations = [
     {
       mutation: {
-        isLoading: false,
+        isPending: false,
         isSuccess: true,
         isError: false,
         isIdle: false,
@@ -47,7 +47,7 @@ describe('useMutationsHandler', () => {
     },
     {
       mutation: {
-        isLoading: false,
+        isPending: false,
         isSuccess: false,
         isError: false,
         isIdle: true,
@@ -120,7 +120,7 @@ describe('useMutationsHandler', () => {
     const mutationsWithError = [
       {
         mutation: {
-          isLoading: false,
+          isPending: false,
           isSuccess: false,
           isIdle: false,
           isError: true,
@@ -155,7 +155,7 @@ describe('useMutationsHandler', () => {
     const otherMutations = [
       {
         mutation: {
-          isLoading: false,
+          isPending: false,
           isSuccess: true,
           isError: false,
           isIdle: false,
@@ -193,7 +193,7 @@ describe('useMutationsHandler', () => {
       mutation: {
         isError: true,
         isIdle: false,
-        isLoading: false,
+        isPending: false,
         isPaused: false,
         isSuccess: false,
         status: 'error',
@@ -204,7 +204,7 @@ describe('useMutationsHandler', () => {
     const otherMutations = [
       {
         mutation: {
-          isLoading: false,
+          isPending: false,
           isSuccess: false,
           isError: true,
           isIdle: false,

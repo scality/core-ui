@@ -150,7 +150,7 @@ export function AttachmentConfirmationModal<
                 variant="primary"
                 onClick={attach}
                 label="Confirm"
-                disabled={attachmentMutation.isLoading}
+                disabled={attachmentMutation.isPending}
               />
             </Stack>
           ) : (
