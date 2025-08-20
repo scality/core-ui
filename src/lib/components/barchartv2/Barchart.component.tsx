@@ -76,6 +76,13 @@ export type BarchartProps<T extends BarchartBars> = {
   unitRange?: UnitRange;
   helpTooltip?: string;
   stacked?: boolean;
+  /**
+   * Sort the bars by default or by legend order
+   * legend will sort the bars by the order of the colorSet property of the ChartLegendWrapper component
+   * default will sort the bars by average values in descending order (biggest values will be at bottom)
+   * @default 'default'
+   */
+  stackedBarSort?: 'default' | 'legend';
   title?: string;
   secondaryTitle?: string;
   rightTitle?: React.ReactNode;
@@ -221,6 +228,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     type = 'category',
     unitRange,
     stacked,
+    stackedBarSort = 'default',
     defaultSort,
     tooltip,
     title,
@@ -251,6 +259,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
       stacked,
       defaultSort,
       unitRange,
+      stackedBarSort,
     );
 
   return (

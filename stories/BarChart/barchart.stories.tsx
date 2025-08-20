@@ -769,6 +769,64 @@ export const ErrorState: Story = {
   },
 };
 
+export const StackedBarSort: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const [sort, setSort] = useState<'default' | 'legend'>('default');
+    const statusesData = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 100],
+          ['category2', 80],
+          ['category3', 50],
+        ],
+      },
+      {
+        label: 'Warning',
+        data: [
+          ['category1', 10],
+          ['category2', 20],
+          ['category3', 30],
+        ],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 30],
+          ['category2', 40],
+          ['category3', 50],
+        ],
+      },
+    ] as const;
+    return (
+      <ChartLegendWrapper
+        colorSet={{
+          Success: theme.statusHealthy,
+          Warning: theme.statusWarning,
+          Failed: theme.statusCritical,
+        }}
+      >
+        <Barchart
+          type="category"
+          bars={statusesData}
+          stacked
+          stackedBarSort={sort}
+          title="Stacked Bar Chart"
+          helpTooltip="This chart data could not be loaded"
+          rightTitle={
+            <Button
+              label={sort === 'default' ? 'Sort by Legend' : 'Sort by Default'}
+              onClick={() => setSort(sort === 'default' ? 'legend' : 'default')}
+            />
+          }
+        />
+        <ChartLegend shape="rectangle" />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
 export const CompleteExample: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
