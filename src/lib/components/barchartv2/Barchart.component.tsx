@@ -76,6 +76,7 @@ export type BarchartProps<T extends BarchartBars> = {
   unitRange?: UnitRange;
   helpTooltip?: string;
   stacked?: boolean;
+  stackedBarSort?: 'default' | 'legend';
   title?: string;
   secondaryTitle?: string;
   rightTitle?: React.ReactNode;
@@ -221,6 +222,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     type = 'category',
     unitRange,
     stacked,
+    stackedBarSort = 'default',
     defaultSort,
     tooltip,
     title,
@@ -251,6 +253,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
       stacked,
       defaultSort,
       unitRange,
+      stackedBarSort,
     );
 
   return (

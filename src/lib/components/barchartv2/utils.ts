@@ -289,6 +289,7 @@ export const formatPrometheusDataToRechartsDataAndBars = <
   colorSet: Record<string, ChartColors | string>,
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
+  legendOrder?: string[],
 ): {
   data: { [key: string]: string | number }[];
   rechartsBars: { dataKey: string; fill: string; stackId?: string }[];
@@ -308,7 +309,12 @@ export const formatPrometheusDataToRechartsDataAndBars = <
     data = applySortingToData(data, barDataKeys, defaultSort);
   }
 
-  const sortedRechartsBars = sortStackedBars(rechartsBars, data, stacked);
+  const sortedRechartsBars = sortStackedBars(
+    rechartsBars,
+    data,
+    stacked,
+    legendOrder,
+  );
 
   return {
     rechartsBars: sortedRechartsBars,
@@ -398,8 +404,8 @@ export function getUnitLabel(
   };
 }
 
-// Sort stacked bars by their average values in descending order
-// This ensures the largest bars appear at the bottom of the stack
+// Sort stacked bars by their average values in descending order or by legend order
+// This ensures the largest bars appear at the bottom of the stack (default) or follow legend order
 export const sortStackedBars = (
   rechartsBars: {
     dataKey: string;
@@ -410,10 +416,33 @@ export const sortStackedBars = (
     [key: string]: string | number;
   }[],
   stacked?: boolean,
+  legendOrder?: string[],
 ) => {
   if (!stacked) {
     return rechartsBars;
   }
+
+  // If legend order is provided, sort by legend order
+  if (legendOrder && legendOrder.length > 0) {
+    return rechartsBars.sort((a, b) => {
+      const indexA = legendOrder.indexOf(a.dataKey);
+      const indexB = legendOrder.indexOf(b.dataKey);
+
+      // If both items are in legend order, sort by their position
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+
+      // If only one item is in legend order, prioritize it
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+
+      // If neither is in legend order, maintain original order
+      return 0;
+    });
+  }
+
+  // Default behavior: sort by average values
   const barAverages = rechartsBars.map((bar) => {
     const values = data
       .map((item) => Number(item[bar.dataKey]) || 0)
@@ -503,14 +532,20 @@ export const useChartData = <T extends BarchartBars>(
   stacked?: boolean,
   defaultSort?: BarchartProps<T>['defaultSort'],
   unitRange?: UnitRange,
+  stackedBarSort?: 'default' | 'legend',
 ) => {
-  const { selectedResources } = useChartLegend();
+  const { selectedResources, listResources } = useChartLegend();
+
+  // Get legend order when stackedBarSort is 'legend'
+  const legendOrder = stackedBarSort === 'legend' ? listResources() : undefined;
+
   const { data, rechartsBars } = formatPrometheusDataToRechartsDataAndBars(
     bars,
     type,
     colorSet,
     stacked,
     defaultSort,
+    legendOrder,
   );
 
   // Filter both data and bars to only include selected resources for accurate maxValue calculation

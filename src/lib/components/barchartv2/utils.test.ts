@@ -717,6 +717,14 @@ describe('sortStackedBars', () => {
       { dataKey: 'bar1', fill: 'blue' },
     ]);
   });
+  it('should sort bars by legend order when stacked is true and legendOrder is provided', () => {
+    const result = sortStackedBars(bars, data, true, ['bar3', 'bar2', 'bar1']);
+    expect(result).toEqual([
+      { dataKey: 'bar3', fill: 'green' },
+      { dataKey: 'bar2', fill: 'red' },
+      { dataKey: 'bar1', fill: 'blue' },
+    ]);
+  });
   it('should not sort bars when stacked is false', () => {
     const result = sortStackedBars(bars, data, false);
     expect(result).toEqual([
