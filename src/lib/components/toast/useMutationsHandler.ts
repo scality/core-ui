@@ -1,5 +1,5 @@
 import { ReactNode, useCallback, useEffect } from 'react';
-import { UseMutationOptions, UseMutationResult } from 'react-query';
+import { UseMutationOptions, UseMutationResult } from '@tanstack/react-query';
 import { ToastContextState, useToast } from './ToastProvider';
 
 export type MutationConfig<T> = {

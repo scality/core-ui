@@ -4,7 +4,7 @@ import {
   QueryClientProvider,
   useMutation,
   UseMutationResult,
-} from 'react-query';
+} from '@tanstack/react-query';
 import { ToastProvider } from '../toast/ToastProvider';
 import {
   act,

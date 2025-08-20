@@ -30,7 +30,7 @@ import {
   AttachmentOperation,
   AttachmentAction,
 } from './AttachmentTypes';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { EmptyCell } from '../../components/tablev2/Tablev2.component';
 import { tableRowHeight } from '../../components/tablev2/TableUtils';
 

@@ -5,7 +5,7 @@ import { Input, InputProps } from '../inputv2/inputv2';
 import { Modal } from '../modal/Modal.component';
 import { useToast } from '../toast/ToastProvider';
 import { useForm } from 'react-hook-form';
-import { UseMutationResult } from 'react-query';
+import { UseMutationResult } from '@tanstack/react-query';
 import { Text } from '../text/Text.component';
 import { useState } from 'react';
 import { Stack, Wrap } from '../../spacing';

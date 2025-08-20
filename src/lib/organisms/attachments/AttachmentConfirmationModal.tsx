@@ -1,5 +1,5 @@
 import { ComponentType, useState } from 'react';
-import { useMutation, UseMutationOptions } from 'react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
 import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
