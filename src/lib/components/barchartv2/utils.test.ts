@@ -482,8 +482,8 @@ describe('applySortingToData', () => {
 
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values', () => {
-    expect(getRoundReferenceValue(1)).toBe(1);
-    expect(getRoundReferenceValue(2)).toBe(2.5);
+    expect(getRoundReferenceValue(1)).toBe(5);
+    expect(getRoundReferenceValue(2)).toBe(5);
     expect(getRoundReferenceValue(3)).toBe(5);
     expect(getRoundReferenceValue(7)).toBe(10);
     expect(getRoundReferenceValue(15)).toBe(25);

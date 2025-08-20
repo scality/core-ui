@@ -18,10 +18,14 @@ export const getRoundReferenceValue = (value: number): number => {
   const normalized = value / magnitude;
 
   // Round to nice numbers based on normalized value
-  if (normalized <= 1) return magnitude;
-  if (normalized <= 2.5) return 2.5 * magnitude;
-  if (normalized <= 5) return 5 * magnitude;
-  return 10 * magnitude;
+  let result: number;
+  if (normalized <= 1) result = magnitude;
+  else if (normalized <= 2.5) result = 2.5 * magnitude;
+  else if (normalized <= 5) result = 5 * magnitude;
+  else result = 10 * magnitude;
+
+  // Ensure minimum value of 5 for better chart appearance
+  return Math.max(result, 5);
 };
 
 export const getMaxBarValue = (
@@ -46,9 +50,9 @@ export const getMaxBarValue = (
       .filter((key) => key !== 'category')
       .map((key) => Number(item[key]));
     // Get the max value among the values in the object (corresponding to one bar)
-    return Math.max(...numberValues);
+    return Math.max(...numberValues, 0); // Ensure we don't get -Infinity
   });
-  return Math.max(...values);
+  return Math.max(...values, 0);
 };
 
 /**
@@ -64,9 +68,6 @@ const generateTimeRanges = (
   interval: number,
 ): { start: Date; end: Date }[] => {
   const ranges: { start: Date; end: Date }[] = [];
-  if (!startDate || !endDate || !interval) {
-    return ranges;
-  }
 
   let currentDate = new Date(startDate.getTime());
   while (currentDate.getTime() <= endDate.getTime()) {
@@ -330,7 +331,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
     return { unitLabel: '', roundReferenceValue, rechartsData: data };
   }
 
-  const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
+  const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
   const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
   const roundReferenceValue = getRoundReferenceValue(topValue);
   const rechartsData = data.map((dataPoint) => {
