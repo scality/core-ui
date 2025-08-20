@@ -424,7 +424,7 @@ export const sortStackedBars = (
 
   // If legend order is provided, sort by legend order
   if (legendOrder && legendOrder.length > 0) {
-    return rechartsBars.sort((a, b) => {
+    return [...rechartsBars].sort((a, b) => {
       const indexA = legendOrder.indexOf(a.dataKey);
       const indexB = legendOrder.indexOf(b.dataKey);
 
