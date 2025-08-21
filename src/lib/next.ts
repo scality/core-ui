@@ -23,3 +23,4 @@ export {
 } from './components/barchartv2/Barchart.component';
 export { ChartLegendWrapper } from './components/chartlegend/ChartLegendWrapper';
 export { ChartLegend } from './components/chartlegend/ChartLegend';
+export { LineTimeSerieChart } from './components/linetimeseriechart/linetimeseriechart.component';
