@@ -79,7 +79,7 @@ export type BarchartProps<T extends BarchartBars> = {
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
   unitRange?: UnitRange;
-  helpTooltip?: string;
+  helpTooltip?: React.ReactNode;
   stacked?: boolean;
   /**
    * Sort the bars by default or by legend order
@@ -166,16 +166,14 @@ const ChartHeader = ({
 }: {
   title?: string;
   secondaryTitle?: string;
-  helpTooltip?: string;
+  helpTooltip?: React.ReactNode;
   rightTitle?: React.ReactNode;
 }) => {
   return (
     <Wrap>
       <Stack gap="r4">
         <Text variant="ChartTitle">{title}</Text>
-        {helpTooltip && (
-          <IconHelp tooltipMessage={helpTooltip} title={helpTooltip} />
-        )}
+        {helpTooltip && <IconHelp tooltipMessage={helpTooltip} />}
 
         {secondaryTitle && (
           <Text
