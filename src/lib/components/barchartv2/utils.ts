@@ -90,7 +90,7 @@ const generateTimeRanges = (
  * @param interval - Interval in milliseconds
  * @returns Formatted string
  */
-const formatDate = (date: Date, interval: number): string => {
+export const formatDate = (date: Date, interval: number): string => {
   if (interval > 24 * 60 * 60 * 1000) {
     return (
       DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '') +
@@ -156,7 +156,8 @@ export const transformTimeData = <T extends BarchartBars>(
 
   // Initialize all ranges with zeros
   timeRanges.forEach((range) => {
-    const categoryDisplay = formatDate(range.start, type.timeRange.interval);
+    // const categoryDisplay = formatDate(range.start, type.timeRange.interval);
+    const categoryDisplay = range.start.getTime();
     const initialData: { [key: string]: string | number } = {
       category: categoryDisplay,
     };

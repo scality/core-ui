@@ -13,6 +13,21 @@ import {
   UnitRange,
 } from './utils';
 
+// Test date constants to avoid repetition
+const TEST_DATES = {
+  JULY_5_2024: new Date('2024-07-05T00:00:00'),
+  JULY_6_2024: new Date('2024-07-06T00:00:00'),
+  JULY_7_2024: new Date('2024-07-07T00:00:00'),
+  JULY_5_10AM: new Date('2024-07-05T10:00:00'),
+  JULY_5_11AM: new Date('2024-07-05T11:00:00'),
+  JULY_5_8_30AM: new Date('2024-07-05T08:30:00'),
+  JULY_5_2_45PM: new Date('2024-07-05T14:45:00'),
+  JULY_6_9_15AM: new Date('2024-07-06T09:15:00'),
+  JULY_5_8AM: new Date('2024-07-05T08:00:00'),
+  JULY_6_2PM: new Date('2024-07-06T14:00:00'),
+  JULY_7_10AM: new Date('2024-07-07T10:00:00'),
+} as const;
+
 // Mock theme object for tests
 const mockTheme = {
   statusHealthy: '#00D100',
@@ -46,8 +61,8 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T00:00:00'), 10],
-          [new Date('2024-07-06T00:00:00'), 20],
+          [TEST_DATES.JULY_5_2024, 10],
+          [TEST_DATES.JULY_6_2024, 20],
         ] as [Date, number][],
       },
     ];
@@ -55,8 +70,8 @@ describe('transformTimeData', () => {
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T00:00:00'),
-        endDate: new Date('2024-07-06T00:00:00'),
+        startDate: TEST_DATES.JULY_5_2024,
+        endDate: TEST_DATES.JULY_6_2024,
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -66,8 +81,8 @@ describe('transformTimeData', () => {
     const result = transformTimeData(bars, type, barDataKeys);
 
     expect(result).toEqual([
-      { category: 'Fri05Jul', Success: 10 },
-      { category: 'Sat06Jul', Success: 20 },
+      { category: TEST_DATES.JULY_5_2024.valueOf(), Success: 10 },
+      { category: TEST_DATES.JULY_6_2024.valueOf(), Success: 20 },
     ]);
   });
 
@@ -76,9 +91,9 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T00:00:00'), 10],
+          [TEST_DATES.JULY_5_2024, 10],
           // Missing July 6th
-          [new Date('2024-07-07T00:00:00'), 30],
+          [TEST_DATES.JULY_7_2024, 30],
         ] as [Date, number][],
       },
     ];
@@ -86,8 +101,8 @@ describe('transformTimeData', () => {
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T00:00:00'),
-        endDate: new Date('2024-07-07T00:00:00'),
+        startDate: TEST_DATES.JULY_5_2024,
+        endDate: TEST_DATES.JULY_7_2024,
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -97,9 +112,9 @@ describe('transformTimeData', () => {
     const result = transformTimeData(bars, type, barDataKeys);
 
     expect(result).toEqual([
-      { category: 'Fri05Jul', Success: 10 },
-      { category: 'Sat06Jul', Success: 0 }, // Missing data filled with 0
-      { category: 'Sun07Jul', Success: 30 },
+      { category: TEST_DATES.JULY_5_2024.valueOf(), Success: 10 },
+      { category: TEST_DATES.JULY_6_2024.valueOf(), Success: 0 }, // Missing data filled with 0
+      { category: TEST_DATES.JULY_7_2024.valueOf(), Success: 30 },
     ]);
   });
 
@@ -108,8 +123,8 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T10:00:00'), 10],
-          [new Date('2024-07-05T11:00:00'), 20],
+          [TEST_DATES.JULY_5_10AM, 10],
+          [TEST_DATES.JULY_5_11AM, 20],
         ] as [Date, number][],
       },
     ];
@@ -117,8 +132,8 @@ describe('transformTimeData', () => {
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T10:00:00'),
-        endDate: new Date('2024-07-05T11:00:00'),
+        startDate: TEST_DATES.JULY_5_10AM,
+        endDate: TEST_DATES.JULY_5_11AM,
         interval: 60 * 60 * 1000, // 1 hour
       },
     };
@@ -128,8 +143,8 @@ describe('transformTimeData', () => {
     const result = transformTimeData(bars, type, barDataKeys);
 
     expect(result).toEqual([
-      { category: '10:00', Success: 10 },
-      { category: '11:00', Success: 20 },
+      { category: TEST_DATES.JULY_5_10AM.valueOf(), Success: 10 },
+      { category: TEST_DATES.JULY_5_11AM.valueOf(), Success: 20 },
     ]);
   });
 
@@ -138,9 +153,9 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-05T08:30:00'), 10], // 8:30 AM
-          [new Date('2024-07-05T14:45:00'), 25], // 2:45 PM (should overwrite 8:30 AM)
-          [new Date('2024-07-06T09:15:00'), 15], // Next day
+          [TEST_DATES.JULY_5_8_30AM, 10], // 8:30 AM
+          [TEST_DATES.JULY_5_2_45PM, 25], // 2:45 PM (should overwrite 8:30 AM)
+          [TEST_DATES.JULY_6_9_15AM, 15], // Next day
         ] as [Date, number][],
       },
     ];
@@ -148,8 +163,8 @@ describe('transformTimeData', () => {
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T00:00:00'),
-        endDate: new Date('2024-07-06T00:00:00'),
+        startDate: TEST_DATES.JULY_5_2024,
+        endDate: TEST_DATES.JULY_6_2024,
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -159,8 +174,8 @@ describe('transformTimeData', () => {
     const result = transformTimeData(bars, type, barDataKeys);
 
     expect(result).toEqual([
-      { category: 'Fri05Jul', Success: 25 }, // Last value for July 5th
-      { category: 'Sat06Jul', Success: 15 }, // July 6th value
+      { category: TEST_DATES.JULY_5_2024.valueOf(), Success: 25 }, // Last value for July 5th
+      { category: TEST_DATES.JULY_6_2024.valueOf(), Success: 15 }, // July 6th value
     ]);
   });
 
@@ -169,9 +184,9 @@ describe('transformTimeData', () => {
       {
         label: 'Success',
         data: [
-          [new Date('2024-07-07T10:00:00'), 30], // July 7th (latest)
-          [new Date('2024-07-05T08:00:00'), 10], // July 5th (earliest)
-          [new Date('2024-07-06T14:00:00'), 20], // July 6th (middle)
+          [TEST_DATES.JULY_7_10AM, 30], // July 7th (latest)
+          [TEST_DATES.JULY_5_8AM, 10], // July 5th (earliest)
+          [TEST_DATES.JULY_6_2PM, 20], // July 6th (middle)
         ] as [Date, number][],
       },
     ];
@@ -179,8 +194,8 @@ describe('transformTimeData', () => {
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T00:00:00'),
-        endDate: new Date('2024-07-07T00:00:00'),
+        startDate: TEST_DATES.JULY_5_2024,
+        endDate: TEST_DATES.JULY_7_2024,
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -191,9 +206,9 @@ describe('transformTimeData', () => {
 
     // Should be in chronological order regardless of input order
     expect(result).toEqual([
-      { category: 'Fri05Jul', Success: 10 },
-      { category: 'Sat06Jul', Success: 20 },
-      { category: 'Sun07Jul', Success: 30 },
+      { category: TEST_DATES.JULY_5_2024.valueOf(), Success: 10 },
+      { category: TEST_DATES.JULY_6_2024.valueOf(), Success: 20 },
+      { category: TEST_DATES.JULY_7_2024.valueOf(), Success: 30 },
     ]);
   });
 
@@ -201,19 +216,19 @@ describe('transformTimeData', () => {
     const bars = [
       {
         label: 'Success',
-        data: [[new Date('2024-07-05T00:00:00'), 10]] as [Date, number][],
+        data: [[TEST_DATES.JULY_5_2024, 10]] as [Date, number][],
       },
       {
         label: 'Failed',
-        data: [[new Date('2024-07-06T00:00:00'), 5]] as [Date, number][],
+        data: [[TEST_DATES.JULY_6_2024, 5]] as [Date, number][],
       },
     ];
 
     const type = {
       type: 'time' as const,
       timeRange: {
-        startDate: new Date('2024-07-05T00:00:00'),
-        endDate: new Date('2024-07-06T00:00:00'),
+        startDate: TEST_DATES.JULY_5_2024,
+        endDate: TEST_DATES.JULY_6_2024,
         interval: 24 * 60 * 60 * 1000, // 1 day
       },
     };
@@ -223,8 +238,16 @@ describe('transformTimeData', () => {
     const result = transformTimeData(bars, type, barDataKeys);
 
     expect(result).toEqual([
-      { category: 'Fri05Jul', Success: 10, Failed: 0 },
-      { category: 'Sat06Jul', Success: 0, Failed: 5 },
+      {
+        category: TEST_DATES.JULY_5_2024.valueOf(),
+        Success: 10,
+        Failed: 0,
+      },
+      {
+        category: TEST_DATES.JULY_6_2024.valueOf(),
+        Success: 0,
+        Failed: 5,
+      },
     ]);
   });
 });
@@ -570,11 +593,11 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
     const bars = [
       {
         label: 'Success Count',
-        data: [[new Date('2024-07-05T00:00:00'), 10]] as [Date, number][],
+        data: [[TEST_DATES.JULY_5_2024, 10]] as [Date, number][],
       },
       {
         label: 'Failed Count',
-        data: [[new Date('2024-07-05T00:00:00'), 5]] as [Date, number][],
+        data: [[TEST_DATES.JULY_5_2024, 5]] as [Date, number][],
       },
     ];
 
@@ -583,8 +606,8 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
       {
         type: 'time',
         timeRange: {
-          startDate: new Date('2024-07-05T00:00:00'),
-          endDate: new Date('2024-07-05T00:00:00'),
+          startDate: TEST_DATES.JULY_5_2024,
+          endDate: TEST_DATES.JULY_5_2024,
           interval: 24 * 60 * 60 * 1000,
         },
       },
@@ -598,7 +621,11 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
 
     // Should integrate: time transformation + status color assignment
     expect(result.data).toEqual([
-      { category: 'Fri05Jul', 'Success Count': 10, 'Failed Count': 5 },
+      {
+        category: TEST_DATES.JULY_5_2024.valueOf(),
+        'Success Count': 10,
+        'Failed Count': 5,
+      },
     ]);
     expect(result.rechartsBars).toEqual([
       { dataKey: 'Success Count', fill: '#4BE4E2' }, // lineColor3

@@ -362,7 +362,7 @@ describe('Barchart', () => {
     expect(categories[2]).toHaveTextContent('category1'); // 10 (lowest)
   });
 
-  it('should render header with title, secondary title, right title and help tooltip', async () => {
+  it('should render header with title, secondary title, right title and helpIcon', async () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
@@ -382,8 +382,6 @@ describe('Barchart', () => {
     expect(screen.getByText('Test Title')).toBeInTheDocument();
     expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
     expect(screen.getByText('Test Right Title')).toBeInTheDocument();
-    await waitFor(() => {
-      expect(screen.getByLabelText('Test Help Tooltip')).toBeInTheDocument();
-    });
+    expect(screen.getByLabelText('Info')).toBeInTheDocument();
   });
 });
