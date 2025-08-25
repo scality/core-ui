@@ -37,7 +37,7 @@ const CHART_CONSTANTS = {
     top: 0,
     bottom: 0,
   },
-} as const;
+};
 
 /* ---------------------------------- TYPE ---------------------------------- */
 
@@ -131,8 +131,9 @@ const CustomTick = ({
       overflow="visible"
     >
       <ConstrainedText
+        color="textSecondary"
         text={
-          <Text variant="Smaller" color="textSecondary">
+          <Text variant="Smaller">
             {type.type === 'time'
               ? formatDate(new Date(payload.value), type.timeRange.interval)
               : String(payload.value)}
