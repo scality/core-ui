@@ -18,7 +18,10 @@ const Legend = styled.div<{ direction: 'horizontal' | 'vertical' }>`
   flex-wrap: wrap;
 `;
 
-const LegendItem = styled.div<{ disabled?: boolean; selected?: boolean }>`
+export const LegendItem = styled.div<{
+  disabled?: boolean;
+  selected?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -31,7 +34,7 @@ const LegendItem = styled.div<{ disabled?: boolean; selected?: boolean }>`
   }
 `;
 
-const LegendShape = styled.div<{
+export const LegendShape = styled.div<{
   color?: string;
   shape: 'line' | 'rectangle';
   chartColors: Record<string, string>;
