@@ -3,7 +3,6 @@ import {
   BarchartBars,
   BarchartTooltipFn,
 } from './Barchart.component';
-import { DAY_MONTH_FORMATER, TIME_FORMATER } from '../date/FormattedDateTime';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../style/theme';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
@@ -85,31 +84,6 @@ const generateTimeRanges = (
 };
 
 /**
- * Formats a date based on the interval
- * @param date - Date object
- * @param interval - Interval in milliseconds
- * @returns Formatted string
- */
-export const formatDate = (date: Date, interval: number): string => {
-  if (interval > 24 * 60 * 60 * 1000) {
-    return (
-      DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '') +
-      ' ' +
-      TIME_FORMATER.format(date)
-    );
-  } else if (interval === 24 * 60 * 60 * 1000) {
-    // Daily or longer intervals - use day format
-    return DAY_MONTH_FORMATER.format(date).replace(/[ ,]/g, '');
-  } else if (interval >= 60 * 1000) {
-    //Handle hourly and minute intervals - use minute format
-    return TIME_FORMATER.format(date);
-  } else {
-    // Second intervals or less - use full timestamp
-    return date.toISOString();
-  }
-};
-
-/**
  * Finds the time range that contains the given date
  * @param date - Data point date
  * @param ranges - Array of time ranges
@@ -149,10 +123,7 @@ export const transformTimeData = <T extends BarchartBars>(
     type.timeRange.interval,
   );
 
-  const categoryMap = new Map<
-    string | number,
-    { [key: string]: string | number }
-  >();
+  const categoryMap = new Map<number, { [key: string]: string | number }>();
 
   // Initialize all ranges with zeros
   timeRanges.forEach((range) => {

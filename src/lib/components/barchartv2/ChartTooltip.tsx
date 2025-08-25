@@ -4,6 +4,7 @@ import { Text } from '../text/Text.component';
 import { BarchartBars } from './Barchart.component';
 import { fontSize, fontWeight } from '../../style/theme';
 import { LegendShape } from '../chartlegend/ChartLegend';
+import { FormattedDateTime } from '../date/FormattedDateTime';
 
 export const ChartTooltipContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundLevel1};
@@ -42,14 +43,14 @@ export const ChartTooltip = <T extends BarchartBars>({
   return (
     <ChartTooltipContainer>
       <Text isEmphazed>
-        {type === 'time'
-          ? new Date(currentPoint.category).toLocaleDateString('en-GB', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })
-          : currentPoint.category}
+        {type === 'time' ? (
+          <FormattedDateTime
+            format="long-date"
+            value={new Date(currentPoint.category)}
+          />
+        ) : (
+          currentPoint.category
+        )}
       </Text>
       <Stack direction="vertical" gap="r8" style={{ width: '100%' }}>
         {currentPoint.values.map((value) => {

@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { getWrapper } from '../../testUtils';
-import { Barchart } from './Barchart.component';
+import { Barchart, CustomTick, formatDate } from './Barchart.component';
 import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
+import React from 'react';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -383,5 +384,102 @@ describe('Barchart', () => {
     expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
     expect(screen.getByText('Test Right Title')).toBeInTheDocument();
     expect(screen.getByLabelText('Info')).toBeInTheDocument();
+  });
+  describe('formatDate', () => {
+    it('should render the CustomTick component with over a day interval', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <CustomTick
+            type={{
+              type: 'time',
+              timeRange: {
+                startDate: new Date('2024-07-05'),
+                endDate: new Date('2024-07-07'),
+                interval: 2 * ONE_DAY_IN_MILLISECONDS,
+              },
+            }}
+            x={100}
+            y={100}
+            payload={{ value: new Date('2024-07-05T10:00:00').getTime() }}
+            visibleTicksCount={10}
+            width={100}
+          />
+        </Wrapper>,
+      );
+      expect(screen.getByText('Fri05Jul 10:00')).toBeInTheDocument();
+    });
+
+    it('should render the CustomTick component with day format', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <CustomTick
+            type={{
+              type: 'time',
+              timeRange: {
+                startDate: new Date('2024-07-05'),
+                endDate: new Date('2024-07-07'),
+                interval: ONE_DAY_IN_MILLISECONDS,
+              },
+            }}
+            x={100}
+            y={100}
+            payload={{ value: new Date('2024-07-05T10:00:00').getTime() }}
+            visibleTicksCount={10}
+            width={100}
+          />
+        </Wrapper>,
+      );
+      expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
+    });
+    it('should render the CustomTick component with hour format', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <CustomTick
+            type={{
+              type: 'time',
+              timeRange: {
+                startDate: new Date('2024-07-05'),
+                endDate: new Date('2024-07-07'),
+                interval: ONE_HOUR_IN_MILLISECONDS,
+              },
+            }}
+            x={100}
+            y={100}
+            payload={{ value: new Date('2024-07-05T10:00:00').getTime() }}
+            visibleTicksCount={10}
+            width={100}
+          />
+        </Wrapper>,
+      );
+      expect(screen.getByText('10:00')).toBeInTheDocument();
+    });
+    it('should render the CustomTick component with minute format', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <CustomTick
+            type={{
+              type: 'time',
+              timeRange: {
+                startDate: new Date('2024-07-05'),
+                endDate: new Date('2024-07-07'),
+                interval: 1000 * 30,
+              },
+            }}
+            x={100}
+            y={100}
+            payload={{ value: new Date('2024-07-05T10:00:00').getTime() }}
+            visibleTicksCount={10}
+            width={100}
+          />
+        </Wrapper>,
+      );
+      expect(
+        screen.getByText(new Date('2024-07-05T10:00:00').getTime()),
+      ).toBeInTheDocument();
+    });
   });
 });

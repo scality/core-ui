@@ -1,6 +1,13 @@
 import { getDateDaysDiff } from './dateDiffer';
 import { Tooltip } from '../tooltip/Tooltip.component';
 
+export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
 export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   year: 'numeric',
   month: '2-digit',
@@ -56,7 +63,10 @@ type FormattedDateTimeProps = {
     | 'time-second'
     | 'relative'
     | 'day-month-abbreviated-hour-minute'
-    | 'day-month-abbreviated-hour-minute-second';
+    | 'day-month-abbreviated-hour-minute-second'
+    | 'long-date'
+    | 'chart-date';
+
   value: Date;
 };
 
@@ -184,6 +194,10 @@ export const FormattedDateTime = ({
           )}
         </>
       );
+    case 'long-date':
+      return <>{LONG_DATE_FORMATER.format(value)}</>;
+    case 'chart-date':
+      return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
     default:
       return <></>;
   }

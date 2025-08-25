@@ -18,13 +18,9 @@ import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
-import {
-  formatDate,
-  renderTooltipContent,
-  UnitRange,
-  useChartData,
-} from './utils';
+import { renderTooltipContent, UnitRange, useChartData } from './utils';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
+import { FormattedDateTime } from '../date/FormattedDateTime';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
@@ -100,7 +96,7 @@ interface CustomTickProps {
   x: number;
   y: number;
   payload: {
-    value: string | number;
+    value: number;
   };
   visibleTicksCount: number;
   width: number;
@@ -109,7 +105,38 @@ interface CustomTickProps {
 
 /* ---------------------------------- COMPONENTS ---------------------------------- */
 
-const CustomTick = ({
+/**
+ * Formats a date based on the interval
+ * @param timestamp - Timestamp
+ * @param interval - Interval in milliseconds
+ * @returns Formatted string
+ */
+export const formatDate = (
+  timestamp: number,
+  interval: number,
+): React.ReactNode => {
+  const date = new Date(timestamp);
+  // More than 24 hours interval - use day and time format
+  if (interval > 24 * 60 * 60 * 1000) {
+    return (
+      <>
+        <FormattedDateTime format="chart-date" value={date} />{' '}
+        <FormattedDateTime format="time" value={date} />
+      </>
+    );
+  } else if (interval === 24 * 60 * 60 * 1000) {
+    // Daily interval - use day format
+    return <FormattedDateTime format="chart-date" value={date} />;
+  } else if (interval >= 60 * 1000) {
+    //Hourly and minute intervals - use minute format
+    return <FormattedDateTime format="time" value={date} />;
+  } else {
+    // minute interval or less - use full timestamp
+    return timestamp;
+  }
+};
+
+export const CustomTick = ({
   x,
   y,
   payload,
@@ -135,7 +162,7 @@ const CustomTick = ({
         text={
           <Text variant="Smaller">
             {type.type === 'time'
-              ? formatDate(new Date(payload.value), type.timeRange.interval)
+              ? formatDate(payload.value, type.timeRange.interval)
               : String(payload.value)}
           </Text>
         }
