@@ -156,10 +156,8 @@ export const transformTimeData = <T extends BarchartBars>(
 
   // Initialize all ranges with zeros
   timeRanges.forEach((range) => {
-    // const categoryDisplay = formatDate(range.start, type.timeRange.interval);
-    const categoryDisplay = range.start.getTime();
     const initialData: { [key: string]: string | number } = {
-      category: categoryDisplay,
+      category: range.start.getTime(),
     };
     barDataKeys.forEach((dataKey) => {
       initialData[dataKey] = 0;
