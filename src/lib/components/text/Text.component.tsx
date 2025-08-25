@@ -133,7 +133,7 @@ export const Text = styled.span<{
   isEmphazed?: boolean;
   isGentleEmphazed?: boolean;
 }>`
-  color: ${(props) => props.theme[props.color || 'textPrimary']};
+  ${(props) => props.color && `color: ${props.theme[props.color]};`}
   ${(props) =>
     props.variant === 'Larger'
       ? `

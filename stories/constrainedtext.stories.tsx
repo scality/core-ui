@@ -2,6 +2,7 @@ import React from 'react';
 import { ConstrainedText } from '../src/lib/components/constrainedtext/Constrainedtext.component';
 import { Wrapper } from './common';
 import { placementOptions } from './controls';
+import { Text } from '../src/lib/components/text/Text.component';
 export default {
   title: 'Components/Constrained Text',
   component: ConstrainedText,
@@ -34,10 +35,12 @@ export const Default = {
 };
 
 export const CustomizedTooltip = {
+  ...Default,
   args: {
-    text: 'This is a long phrase',
+    text: <Text>This is a long long phrase</Text>,
     tooltipStyle: { width: '100px', color: 'lightblue' },
     tooltipPlacement: 'right',
+    color: 'statusCritical',
   },
 };
 

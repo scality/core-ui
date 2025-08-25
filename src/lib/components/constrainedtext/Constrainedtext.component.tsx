@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 import { Text } from '../text/Text.component';
+import { CoreUITheme } from '../../style/theme';
 
 type Props = {
   text: string | number | JSX.Element | JSX.Element[];
@@ -13,6 +14,7 @@ type Props = {
   tooltipPlacement?: $PropertyType<TooltipProps, 'placement'>;
   lineClamp?: number;
   centered?: boolean;
+  color?: keyof CoreUITheme;
 };
 // for lineClamp cf https://css-tricks.com/almanac/properties/l/line-clamp/
 // it should work on all major navigator, despite the --webkit prefix
@@ -74,6 +76,7 @@ function ConstrainedText({
   tooltipStyle,
   tooltipPlacement,
   lineClamp = 1,
+  color,
   centered = false,
 }: Props): JSX.Element {
   const [displayToolTip, setDisplayToolTip] = useState(false);
@@ -91,7 +94,7 @@ function ConstrainedText({
           overlayStyle={tooltipStyle}
           placement={tooltipPlacement}
         >
-          <Text>
+          <Text color={color}>
             {getConstrainedTextContainer(
               constrainedTextRef,
               lineClamp,
@@ -101,7 +104,7 @@ function ConstrainedText({
           </Text>
         </Tooltip>
       ) : (
-        <Text>
+        <Text color={color}>
           {getConstrainedTextContainer(
             constrainedTextRef,
             lineClamp,
