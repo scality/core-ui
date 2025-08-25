@@ -21,6 +21,7 @@ export {
   BarchartSortFn,
   BarchartTooltipFn,
 } from './components/barchartv2/Barchart.component';
+export { ChartTooltip } from './components/barchartv2/ChartTooltip';
 export { ChartLegendWrapper } from './components/chartlegend/ChartLegendWrapper';
 export { ChartLegend } from './components/chartlegend/ChartLegend';
 export { LineTimeSerieChart } from './components/linetimeseriechart/linetimeseriechart.component';
