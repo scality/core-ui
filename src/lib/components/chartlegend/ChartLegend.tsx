@@ -72,21 +72,51 @@ export const ChartLegend = ({
     isSelected,
     addSelectedResource,
     removeSelectedResource,
+    selectAllResources,
+    getAllResourcesCount,
+    getSelectedCount,
+    selectOnlyResource,
   } = useChartLegend();
 
   const resources = listResources();
 
   const handleLegendClick = useCallback(
-    (resource: string) => {
+    (resource: string, event: React.MouseEvent) => {
       if (disabled) return;
 
-      if (isSelected(resource)) {
-        removeSelectedResource(resource);
+      const isModifierClick = event.metaKey || event.ctrlKey;
+      const itemIsSelected = isSelected(resource);
+
+      if (isModifierClick) {
+        if (itemIsSelected) {
+          if (getSelectedCount() === 1) {
+            selectAllResources();
+          } else {
+            removeSelectedResource(resource);
+          }
+        } else {
+          addSelectedResource(resource);
+        }
       } else {
-        addSelectedResource(resource);
+        if (getSelectedCount() === getAllResourcesCount()) {
+          selectOnlyResource(resource);
+        } else if (itemIsSelected) {
+          selectAllResources();
+        } else {
+          selectOnlyResource(resource);
+        }
       }
     },
-    [disabled, isSelected, addSelectedResource, removeSelectedResource],
+    [
+      disabled,
+      isSelected,
+      addSelectedResource,
+      removeSelectedResource,
+      selectAllResources,
+      selectOnlyResource,
+      getAllResourcesCount,
+      getSelectedCount,
+    ],
   );
 
   return (
@@ -100,7 +130,8 @@ export const ChartLegend = ({
             key={resource}
             disabled={disabled}
             selected={selected}
-            onClick={() => handleLegendClick(resource)}
+            aria-label={`${resource} ${selected ? 'selected' : 'not selected'}`}
+            onClick={(event) => handleLegendClick(resource, event)}
           >
             <LegendShape
               color={color}
