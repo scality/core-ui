@@ -43,6 +43,7 @@ export type QueryTimeSpan = {
   // time span in second
   frequency: number;
 };
+// @deprecated
 export const queryTimeSpansCodes: QueryTimeSpan[] = [
   {
     query: QUERY_LAST_SEVEN_DAYS,
@@ -63,6 +64,30 @@ export const queryTimeSpansCodes: QueryTimeSpan[] = [
     frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   },
 ];
+
+// Predefined timespan configurations for easy chart setup
+// Use these to get consistent frequency/duration pairs for common time ranges
+export const TIMESPAN_CONFIGS = {
+  LAST_1H: {
+    frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+    duration: SAMPLE_DURATION_LAST_ONE_HOUR,
+    label: LAST_ONE_HOUR,
+    query: QUERY_LAST_ONE_HOUR,
+  },
+  LAST_24H: {
+    frequency: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    label: LAST_TWENTY_FOUR_HOURS,
+    query: QUERY_LAST_TWENTY_FOUR_HOURS,
+  },
+  LAST_7D: {
+    frequency: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
+    duration: SAMPLE_DURATION_LAST_SEVEN_DAYS,
+    label: LAST_SEVEN_DAYS,
+    query: QUERY_LAST_SEVEN_DAYS,
+  },
+} as const;
+
 export const NAN_STRING = 'NAN';
 
 export const STATUS_CRITICAL = 'critical';

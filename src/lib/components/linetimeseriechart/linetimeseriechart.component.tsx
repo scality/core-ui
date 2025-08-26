@@ -10,7 +10,6 @@ import {
 } from 'recharts';
 import { useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
-import { useMetricsTimeSpan } from '../linetemporalchart/MetricTimespanProvider';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
 import { fontSize, fontWeight } from '../../style/theme';
@@ -123,6 +122,8 @@ export type LineChartProps = (
   title: string;
   height: number;
   startingTimeStamp: number;
+  frequency: number;
+  duration: number;
   unitRange?: {
     threshold: number;
     label: string;
@@ -200,6 +201,8 @@ export function LineTimeSerieChart({
   title,
   height,
   startingTimeStamp,
+  frequency,
+  duration,
   unitRange,
   isLoading = false,
   yAxisType = 'default',
@@ -208,7 +211,6 @@ export function LineTimeSerieChart({
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
-  const { frequency, duration } = useMetricsTimeSpan();
   const { getColor } = useChartLegend();
   const chartRef = useRef(null);
 
