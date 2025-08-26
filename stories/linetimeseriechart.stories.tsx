@@ -395,7 +395,7 @@ export const PercentageChartExample: Story = {
     helpText: 'This is the help text',
     yAxisType: 'percentage',
     yAxisTitle: '',
-    frequency: TIMESPAN_CONFIGS.LAST_24H.frequency,
+    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
     duration: TIMESPAN_CONFIGS.LAST_24H.duration,
   },
 };
@@ -462,7 +462,7 @@ export const SymmetricalAxisExample: Story = {
     isLegendHidden: false,
     yAxisType: 'symmetrical',
     yAxisTitle: 'in(+)/out(-)',
-    frequency: TIMESPAN_CONFIGS.LAST_24H.frequency,
+    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
     duration: TIMESPAN_CONFIGS.LAST_24H.duration,
   },
 };
@@ -481,7 +481,7 @@ export const AutoUnitChartExample: Story = {
     height: 200,
     unitRange: UNIT_RANGE_BS,
     yAxisType: 'default',
-    frequency: TIMESPAN_CONFIGS.LAST_24H.frequency,
+    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
     duration: TIMESPAN_CONFIGS.LAST_24H.duration,
   },
 };

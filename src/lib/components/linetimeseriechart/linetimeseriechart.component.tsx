@@ -122,7 +122,7 @@ export type LineChartProps = (
   title: string;
   height: number;
   startingTimeStamp: number;
-  frequency: number;
+  interval: number;
   duration: number;
   unitRange?: {
     threshold: number;
@@ -201,7 +201,7 @@ export function LineTimeSerieChart({
   title,
   height,
   startingTimeStamp,
-  frequency,
+  interval,
   duration,
   unitRange,
   isLoading = false,
@@ -225,7 +225,7 @@ export function LineTimeSerieChart({
                 line.data,
                 startingTimeStamp,
                 duration,
-                frequency,
+                interval,
               ),
             })),
             // Convert positive values to negative values
@@ -235,7 +235,7 @@ export function LineTimeSerieChart({
                 line.data,
                 startingTimeStamp,
                 duration,
-                frequency,
+                interval,
               ).map(
                 ([timestamp, value]) =>
                   [timestamp, value === null ? null : `-${Number(value)}`] as [
@@ -251,7 +251,7 @@ export function LineTimeSerieChart({
               line.data,
               startingTimeStamp,
               duration,
-              frequency,
+              interval,
             ),
           }));
 
@@ -289,7 +289,7 @@ export function LineTimeSerieChart({
         b: { timestamp: number } & Record<string, string | number | null>,
       ) => (a.timestamp as number) - (b.timestamp as number),
     );
-  }, [series, startingTimeStamp, duration, frequency, yAxisType]);
+  }, [series, startingTimeStamp, duration, interval, yAxisType]);
 
   // Calculate 5 perfectly evenly spaced ticks
   const xAxisTicks = useMemo(() => {
