@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { Box } from '../box/Box';
@@ -99,6 +98,31 @@ const ContentContainer = styled.div`
   position: relative;
 `;
 
+const FadingToast = styled.div`
+  align-items: flex-end;
+  background-color: ${props => props.theme.backgroundLevel1};
+  border: 1px solid ${props => props.theme.border};
+  box-shadow: 0px 4px 10px 4px #000;
+  display: flex;
+  border-radius: 4px;
+  position: relative;
+
+  @keyframes toastEnter {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const ToastEnter = styled(FadingToast)`
+  animation: toastEnter 0.3s ease forwards;
+`;
+
 function Toast({
   open,
   message,
@@ -123,7 +147,6 @@ function Toast({
 
   const bgColor = useGetBackgroundColor(status);
   const rgbBgColor = useGetRgbBackgroundColor(status);
-  const theme = useTheme();
 
   if (!open) {
     return null;
@@ -141,22 +164,7 @@ function Toast({
         width,
       }}
     >
-      <motion.div
-        key="toast"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          alignItems: 'flex-end',
-          backgroundColor: theme.backgroundLevel1,
-          border: `1px solid ${theme.border}`,
-          boxShadow: '0px 4px 10px 4px #000',
-          display: 'flex',
-          borderRadius: '4px',
-          position: 'relative',
-        }}
-      >
+      <ToastEnter>
         <IconContainer bgColor={rgbBgColor}>{icon}</IconContainer>
         <ContentContainer>
           <BasicText>{message}</BasicText>
@@ -169,7 +177,7 @@ function Toast({
             tooltip={{ overlay: 'Close', placement: 'top' }}
           />
         </Box>
-      </motion.div>
+      </ToastEnter>
       {withProgressBar && (
         <DurationBasedProgressBar
           duration={autoDismiss ? duration : null}
