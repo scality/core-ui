@@ -133,7 +133,10 @@ function MultiSelectSearch(props: SearchProps) {
     </MultiSelectSearchContainer>
   );
 }
-
+/**
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 function MultiSelectList({
   title = '',
   items = [],

@@ -9,6 +9,11 @@ type Props = {
   barConfig?: Record<string, any>;
 };
 
+/**
+ * @deprecated Use Barchart v2 instead
+ * @example import { Barchart } from '@scality/core-ui/dist/next';
+
+ */
 function BarChart({
   id,
   data,

@@ -125,6 +125,10 @@ export const ChipsText = styled.span<{ icon: any; isRemovable: boolean }>`
   padding: ${(props) => (props.icon || props.isRemovable ? '5px' : '5px 10px')};
 `;
 
+/**
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 const Chips = ({
   text = '',
   variant = 'infoPrimary',

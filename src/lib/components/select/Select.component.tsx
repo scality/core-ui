@@ -27,7 +27,8 @@ const SelectContainer = styled.div`
     }
     &.sc-select__control--is-focused {
       border-color: ${getThemePropSelector('selectedActive')};
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      box-shadow:
+        inset 0 1px 1px rgba(0, 0, 0, 0.075),
         0 0 0 1px rgba(0, 126, 255, 0.1);
       outline: none;
     }
@@ -81,6 +82,10 @@ const defaultFormatOptionLabel = ({ label, ...rest }) => (
   </div>
 );
 
+/**
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 function SelectBox({ options, formatOptionLabel, ...rest }: Props) {
   return (
     <SelectContainer className="sc-select-container">

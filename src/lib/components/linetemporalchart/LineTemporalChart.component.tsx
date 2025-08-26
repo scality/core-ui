@@ -165,6 +165,10 @@ const colorRange = [
 ];
 
 // Note: we need to make sure the start time and end timefor the prometheus query between the series are the same.
+/**
+ * @deprecated Use LineTimeSerieChart instead
+ * @example import { LineTimeSerieChart } from '@scality/core-ui/dist/next';
+ */
 function LineTemporalChart({
   series,
   title,
@@ -451,10 +455,10 @@ function LineTemporalChart({
               ],
             }
           : yAxisType === 'percentage'
-          ? {
-              domain: [0, 100],
-            }
-          : undefined,
+            ? {
+                domain: [0, 100],
+              }
+            : undefined,
     };
   }, [yAxisTitle, yAxisType]);
   const symmetricalColorRange =
@@ -652,15 +656,15 @@ function LineTemporalChart({
                 },
               }
             : yAxisType === 'symmetrical'
-            ? {
-                // for symmetrical chart we manually draw the line from minValue to maxValue
-                ...syncedVerticalRuler,
-                encoding: {
-                  ...syncedVerticalRuler.encoding,
-                  ...syncedVerticalRulerSymmetrical.encoding,
-                },
-              }
-            : syncedVerticalRuler,
+              ? {
+                  // for symmetrical chart we manually draw the line from minValue to maxValue
+                  ...syncedVerticalRuler,
+                  encoding: {
+                    ...syncedVerticalRuler.encoding,
+                    ...syncedVerticalRulerSymmetrical.encoding,
+                  },
+                }
+              : syncedVerticalRuler,
         ],
       },
       tooltipConfig,
@@ -698,8 +702,8 @@ function LineTemporalChart({
   const unitLabel = unitRange
     ? getUnitLabel(unitRange, maxValue).unitLabel
     : yAxisType === 'percentage'
-    ? '%'
-    : '';
+      ? '%'
+      : '';
   return (
     <LineTemporalChartWrapper>
       <ChartHeader>

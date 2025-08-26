@@ -83,6 +83,10 @@ const CloudProgress = ({ strokeColor, percentage, borderSize }) => (
   </ContainerProgress>
 );
 
+/**
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 const CloudProgressBar = ({
   percentage = 0,
   borderSize = '2px',

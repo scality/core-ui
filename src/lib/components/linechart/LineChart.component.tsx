@@ -19,6 +19,11 @@ type Props = {
   tooltipTheme?: 'light' | 'dark' | 'custom';
 };
 
+/**
+ * LineChart component
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 function LineChart({
   id,
   data,

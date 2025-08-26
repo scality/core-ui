@@ -44,6 +44,10 @@ const ExpandedContainer = styled.div`
   background-color: ${(props) => props.theme.backgroundLevel1};
 `;
 
+/**
+ * @deprecated
+ * Not use anywhere, can be removed
+ */
 function CollapsiblePanel({
   expanded = false,
   onHeaderClick,

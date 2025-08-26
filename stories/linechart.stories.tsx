@@ -6,7 +6,7 @@ import {
   forecast_data,
   in_out_data,
 } from './data/linechart';
-import { Wrapper, Title } from './common';
+
 const xAxis = {
   field: 'time',
   type: 'temporal',
@@ -252,7 +252,7 @@ const tooltipConfigInOut = {
   },
 };
 export default {
-  title: 'Components/Data Display/Charts/LineChart',
+  title: 'Components/Deprecated/Charts/LineChart',
   component: LineChart,
   args: {
     width: 800,
