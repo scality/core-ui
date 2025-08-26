@@ -40,53 +40,39 @@ export type QueryTimeSpan = {
   label: string;
   // the label display in the timespan selector
   duration: number;
+  // time difference between two samples in second
+  interval: number;
   // time span in second
+  /** @deprecated Use `interval` instead */
   frequency: number;
 };
-// @deprecated
+
 export const queryTimeSpansCodes: QueryTimeSpan[] = [
   {
     query: QUERY_LAST_SEVEN_DAYS,
     label: LAST_SEVEN_DAYS,
     duration: SAMPLE_DURATION_LAST_SEVEN_DAYS,
+    interval: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
   },
   {
     query: QUERY_LAST_TWENTY_FOUR_HOURS,
     label: LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
   },
   {
     query: QUERY_LAST_ONE_HOUR,
     label: LAST_ONE_HOUR,
     duration: SAMPLE_DURATION_LAST_ONE_HOUR,
+    interval: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   },
 ];
-
-// Predefined timespan configurations for easy chart setup
-// Use these to get consistent frequency/duration pairs for common time ranges
-export const TIMESPAN_CONFIGS = {
-  LAST_1H: {
-    interval: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
-    duration: SAMPLE_DURATION_LAST_ONE_HOUR,
-    label: LAST_ONE_HOUR,
-    query: QUERY_LAST_ONE_HOUR,
-  },
-  LAST_24H: {
-    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
-    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-    label: LAST_TWENTY_FOUR_HOURS,
-    query: QUERY_LAST_TWENTY_FOUR_HOURS,
-  },
-  LAST_7D: {
-    interval: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
-    duration: SAMPLE_DURATION_LAST_SEVEN_DAYS,
-    label: LAST_SEVEN_DAYS,
-    query: QUERY_LAST_SEVEN_DAYS,
-  },
-} as const;
 
 export const NAN_STRING = 'NAN';
 

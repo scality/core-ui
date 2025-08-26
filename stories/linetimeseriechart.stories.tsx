@@ -4,7 +4,10 @@ import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/lin
 import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegendWrapper';
 import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
 import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
-import { TIMESPAN_CONFIGS } from '../src/lib/components/constants';
+import {
+  SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+  SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+} from '../src/lib/components/constants';
 
 const ChartWithProviders = (props) => {
   return (
@@ -395,8 +398,8 @@ export const PercentageChartExample: Story = {
     helpText: 'This is the help text',
     yAxisType: 'percentage',
     yAxisTitle: '',
-    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
-    duration: TIMESPAN_CONFIGS.LAST_24H.duration,
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   },
 };
 const UNIT_RANGE_BS = [
@@ -462,8 +465,8 @@ export const SymmetricalAxisExample: Story = {
     isLegendHidden: false,
     yAxisType: 'symmetrical',
     yAxisTitle: 'in(+)/out(-)',
-    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
-    duration: TIMESPAN_CONFIGS.LAST_24H.duration,
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   },
 };
 export const AutoUnitChartExample: Story = {
@@ -481,7 +484,7 @@ export const AutoUnitChartExample: Story = {
     height: 200,
     unitRange: UNIT_RANGE_BS,
     yAxisType: 'default',
-    interval: TIMESPAN_CONFIGS.LAST_24H.interval,
-    duration: TIMESPAN_CONFIGS.LAST_24H.duration,
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   },
 };
