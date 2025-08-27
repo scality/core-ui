@@ -14,32 +14,47 @@ describe('ChartLegend', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-
-  describe('Initial State', () => {
-    it('should render all legend items', () => {
-      render(
-        <ChartLegendWrapper colorSet={colorSet}>
-          <ChartLegend shape="line" />
-        </ChartLegendWrapper>,
-      );
-      expect(screen.getByText('CPU')).toBeInTheDocument();
-      expect(screen.getByText('Memory')).toBeInTheDocument();
-      expect(screen.getByText('Disk')).toBeInTheDocument();
-    });
-
-    it('should have all items selected by default', () => {
-      render(
-        <ChartLegendWrapper colorSet={colorSet}>
-          <ChartLegend shape="line" />
-        </ChartLegendWrapper>,
-      );
-
-      expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
-      expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
-      expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
-    });
+  it('should render all legend items', () => {
+    render(
+      <ChartLegendWrapper colorSet={colorSet}>
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>,
+    );
+    expect(screen.getByText('CPU')).toBeInTheDocument();
+    expect(screen.getByText('Memory')).toBeInTheDocument();
+    expect(screen.getByText('Disk')).toBeInTheDocument();
   });
 
+  it('should have all items selected by default', () => {
+    render(
+      <ChartLegendWrapper colorSet={colorSet}>
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>,
+    );
+
+    expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
+  });
+  it('should not respond to clicks when disabled', () => {
+    render(
+      <ChartLegendWrapper colorSet={colorSet}>
+        <ChartLegend shape="line" disabled />
+      </ChartLegendWrapper>,
+    );
+
+    userEvent.click(screen.getByText('CPU'));
+    // If disabled, should not select any items
+    expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Memory'), { metaKey: true });
+    // If disabled, should not select any items
+    expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
+    expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
+  });
   describe('Normal Click Behavior', () => {
     it('should select only clicked item when all are selected', () => {
       render(
@@ -199,19 +214,5 @@ describe('ChartLegend', () => {
       expect(screen.getByLabelText('Memory not selected')).toBeInTheDocument();
       expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
     });
-  });
-
-  it('should not respond to clicks when disabled', () => {
-    render(
-      <ChartLegendWrapper colorSet={colorSet}>
-        <ChartLegend shape="line" disabled />
-      </ChartLegendWrapper>,
-    );
-
-    userEvent.click(screen.getByText('CPU'));
-    userEvent.click(screen.getByText('Memory'), { metaKey: true });
-
-    expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
-    expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
   });
 });
