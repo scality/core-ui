@@ -15,6 +15,12 @@ type Props = {
   bottomTrendColor?: string;
 };
 
+/**
+ *
+ * @deprecated
+ * Not used anymore can be removed
+ *
+ */
 function SparkLine({
   id,
   title,

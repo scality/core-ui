@@ -11,6 +11,11 @@ type Props = {
   height?: number;
 };
 
+/**
+ *
+ * @deprecated
+ * Not used anymore can be removed
+ */
 function AreaChart({
   id,
   data,

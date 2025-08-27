@@ -38,6 +38,14 @@ const VegaTooltipTheme = createGlobalStyle`
   }
 `;
 
+/**
+ *
+ *
+ * @deprecated
+ * Component used by SparkLine.component.tsx, AreaChart.component.tsx
+ * Only used by these components, can be removed
+ *
+ */
 function VegaChart({
   id,
   spec,
