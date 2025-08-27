@@ -40,29 +40,40 @@ export type QueryTimeSpan = {
   label: string;
   // the label display in the timespan selector
   duration: number;
+  // time difference between two samples in second
+  interval: number;
   // time span in second
+  /** @deprecated Use `interval` instead */
   frequency: number;
 };
+
 export const queryTimeSpansCodes: QueryTimeSpan[] = [
   {
     query: QUERY_LAST_SEVEN_DAYS,
     label: LAST_SEVEN_DAYS,
     duration: SAMPLE_DURATION_LAST_SEVEN_DAYS,
+    interval: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
   },
   {
     query: QUERY_LAST_TWENTY_FOUR_HOURS,
     label: LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
   },
   {
     query: QUERY_LAST_ONE_HOUR,
     label: LAST_ONE_HOUR,
     duration: SAMPLE_DURATION_LAST_ONE_HOUR,
+    interval: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+    /** @deprecated Use `interval` instead */
     frequency: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   },
 ];
+
 export const NAN_STRING = 'NAN';
 
 export const STATUS_CRITICAL = 'critical';

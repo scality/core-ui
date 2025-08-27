@@ -10,7 +10,6 @@ import {
 } from 'recharts';
 import { useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
-import { useMetricsTimeSpan } from '../linetemporalchart/MetricTimespanProvider';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
 import { fontSize, fontWeight } from '../../style/theme';
@@ -123,6 +122,8 @@ export type LineChartProps = (
   title: string;
   height: number;
   startingTimeStamp: number;
+  interval: number;
+  duration: number;
   unitRange?: {
     threshold: number;
     label: string;
@@ -200,6 +201,8 @@ export function LineTimeSerieChart({
   title,
   height,
   startingTimeStamp,
+  interval,
+  duration,
   unitRange,
   isLoading = false,
   yAxisType = 'default',
@@ -208,7 +211,6 @@ export function LineTimeSerieChart({
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
-  const { frequency, duration } = useMetricsTimeSpan();
   const { getColor } = useChartLegend();
   const chartRef = useRef(null);
 
@@ -223,7 +225,7 @@ export function LineTimeSerieChart({
                 line.data,
                 startingTimeStamp,
                 duration,
-                frequency,
+                interval,
               ),
             })),
             // Convert positive values to negative values
@@ -233,7 +235,7 @@ export function LineTimeSerieChart({
                 line.data,
                 startingTimeStamp,
                 duration,
-                frequency,
+                interval,
               ).map(
                 ([timestamp, value]) =>
                   [timestamp, value === null ? null : `-${Number(value)}`] as [
@@ -249,7 +251,7 @@ export function LineTimeSerieChart({
               line.data,
               startingTimeStamp,
               duration,
-              frequency,
+              interval,
             ),
           }));
 
@@ -287,7 +289,7 @@ export function LineTimeSerieChart({
         b: { timestamp: number } & Record<string, string | number | null>,
       ) => (a.timestamp as number) - (b.timestamp as number),
     );
-  }, [series, startingTimeStamp, duration, frequency, yAxisType]);
+  }, [series, startingTimeStamp, duration, interval, yAxisType]);
 
   // Calculate 5 perfectly evenly spaced ticks
   const xAxisTicks = useMemo(() => {
