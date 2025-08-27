@@ -109,6 +109,7 @@ export function getUnitLabel(
 
 /**
  * This function manually adds the missing data points with `null` value caused by downtime of the VMs
+ * Missing data points are only added when the gap between consecutive data points is bigger than 2 intervals
  *
  * @param {array} orginalValues - The array of the data points are already sorted according to the time series
  * @param {number} startingTimeStamp - The starting timestamp in seconds
@@ -134,27 +135,37 @@ export function addMissingDataPoint(
     return [];
   }
 
-  const newValues = [];
-  const numberOfDataPoints = sampleDuration / sampleFrequency + 1;
-  let samplingPointTime = startingTimeStamp;
-
-  // initialize the array with all "NAN" value, in order for the tooltip to display dash(-)
-  for (let i = 0; i < numberOfDataPoints; i++) {
-    newValues.push([samplingPointTime, NAN_STRING]);
-    samplingPointTime += sampleFrequency;
+  // If there are no original values, return empty array
+  if (orginalValues.length === 0) {
+    return [];
   }
 
-  // copy the existing data points from `orginalValue` array to `newValues`
-  if (newValues.length === 0) return [];
-  let nextIndex = 0;
+  const newValues: [number, string | null][] = [];
 
-  for (let i = 0; i < newValues.length; i++) {
-    if (
-      orginalValues[nextIndex] &&
-      newValues[i][0] === orginalValues[nextIndex][0]
-    ) {
-      newValues[i][1] = orginalValues[nextIndex][1];
-      nextIndex++;
+  for (let i = 0; i < orginalValues.length; i++) {
+    // Always add the current data point
+    newValues.push(orginalValues[i]);
+
+    // Check if this is not the last data point
+    if (i < orginalValues.length - 1) {
+      const currentTimestamp = orginalValues[i][0];
+      const nextTimestamp = orginalValues[i + 1][0];
+      const gap = nextTimestamp - currentTimestamp;
+
+      // Only add missing data points if gap is bigger than 2 intervals
+      if (gap >= 2 * sampleFrequency) {
+        // Calculate how many missing points to add
+        const missingIntervals = Math.floor(gap / sampleFrequency) - 1;
+
+        // Add missing data points with NAN_STRING
+        for (let j = 1; j <= missingIntervals; j++) {
+          const missingTimestamp = currentTimestamp + j * sampleFrequency;
+          // Only add if the missing timestamp is before the next actual data point
+          if (missingTimestamp < nextTimestamp) {
+            newValues.push([missingTimestamp, NAN_STRING]);
+          }
+        }
+      }
     }
   }
 

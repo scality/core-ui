@@ -380,6 +380,31 @@ const prometheusData5 = [
   [1740492000, '19859.90'],
 ];
 
+// Data with irregular intervals but gaps under 2 intervals (less than 24 minutes)
+// Sample frequency is 720 seconds (12 minutes), so 2 intervals = 1440 seconds (24 minutes)
+const irregularIntervalData = [
+  [1740405600, '47.55'], // Base timestamp
+  [1740406200, '53.01'], // +600 seconds (10 minutes) - under 2 intervals
+  [1740407100, '40.19'], // +900 seconds (15 minutes) - under 2 intervals
+  [1740408000, '59.19'], // +900 seconds (15 minutes) - under 2 intervals
+  [1740409100, '62.50'], // +1100 seconds (18.3 minutes) - under 2 intervals
+  [1740410300, '57.45'], // +1200 seconds (20 minutes) - under 2 intervals
+  [1740411000, '45.19'], // +700 seconds (11.7 minutes) - under 2 intervals
+  [1740412200, '58.62'], // +1200 seconds (20 minutes) - under 2 intervals
+  [1740413000, '53.08'], // +800 seconds (13.3 minutes) - under 2 intervals
+  [1740414300, '64.91'], // +1300 seconds (21.7 minutes) - under 2 intervals
+  [1740415100, '81.23'], // +800 seconds (13.3 minutes) - under 2 intervals
+  [1740416400, '64.82'], // +1300 seconds (21.7 minutes) - under 2 intervals
+  [1740417200, '67.17'], // +800 seconds (13.3 minutes) - under 2 intervals
+  [1740418500, '55.23'], // +1300 seconds (21.7 minutes) - under 2 intervals
+  [1740419400, '47.92'], // +900 seconds (15 minutes) - under 2 intervals
+  [1740420600, '72.11'], // +1200 seconds (20 minutes) - under 2 intervals
+  [1740421500, '61.91'], // +900 seconds (15 minutes) - under 2 intervals
+  [1740422700, '51.07'], // +1200 seconds (20 minutes) - under 2 intervals
+  [1740423800, '39.50'], // +1100 seconds (18.3 minutes) - under 2 intervals
+  [1740424900, '46.92'], // +1100 seconds (18.3 minutes) - under 2 intervals
+];
+
 export const PercentageChartExample: Story = {
   args: {
     series: [
@@ -484,6 +509,30 @@ export const AutoUnitChartExample: Story = {
     height: 200,
     unitRange: UNIT_RANGE_BS,
     yAxisType: 'default',
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+  },
+};
+
+export const IrregularIntervalsExample: Story = {
+  args: {
+    series: [
+      {
+        data: irregularIntervalData,
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        metricPrefix: 'instance:10.160.122.207:9100',
+        getTooltipLabel: (prefix, resource) => `${resource}`,
+      },
+    ],
+    title: 'Irregular intervals data',
+    height: 200,
+    startingTimeStamp: irregularIntervalData[0][0],
+    isLoading: false,
+    isLegendHidden: false,
+    helpText:
+      'Data points with irregular timestamps, but all gaps are less than 2 intervals (24 minutes). No missing data points are added.',
+    yAxisType: 'percentage',
+    yAxisTitle: '',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   },

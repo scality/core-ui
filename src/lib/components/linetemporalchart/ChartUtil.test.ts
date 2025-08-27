@@ -165,33 +165,33 @@ it('returns the unit label GiB/Sec', () => {
   expect(valueBase).toEqual(1024 * 1024 * 1024);
 });
 // test for addMissingDataPoint function
-const originalValue = [
-  [0, 0],
-  [1, 1],
-  [2, 2],
-  [3, 3],
-  [4, 4],
-  [5, 5],
-  [6, 6],
-  [8, 8],
-  [9, 9],
-  [10, 10],
+const originalValue: [number, string | null][] = [
+  [0, '0'],
+  [1, '1'],
+  [2, '2'],
+  [3, '3'],
+  [4, '4'],
+  [5, '5'],
+  [6, '6'],
+  [8, '8'],
+  [9, '9'],
+  [10, '10'],
 ];
 const startingTimeStamp = 0;
 const sampleDuration = 10;
 const sampleFrequency = 1;
 const newValues = [
-  [0, 0],
-  [1, 1],
-  [2, 2],
-  [3, 3],
-  [4, 4],
-  [5, 5],
-  [6, 6],
+  [0, '0'],
+  [1, '1'],
+  [2, '2'],
+  [3, '3'],
+  [4, '4'],
+  [5, '5'],
+  [6, '6'],
   [7, 'NAN'],
-  [8, 8],
-  [9, 9],
-  [10, 10],
+  [8, '8'],
+  [9, '9'],
+  [10, '10'],
 ];
 it('should add missing data point with null', () => {
   const result = addMissingDataPoint(
@@ -210,24 +210,12 @@ it('should return the array with string NAN when the original dataset is empty',
     sampleDuration,
     sampleFrequency,
   );
-  expect(result).toEqual([
-    [0, 'NAN'],
-    [1, 'NAN'],
-    [2, 'NAN'],
-    [3, 'NAN'],
-    [4, 'NAN'],
-    [5, 'NAN'],
-    [6, 'NAN'],
-    [7, 'NAN'],
-    [8, 'NAN'],
-    [9, 'NAN'],
-    [10, 'NAN'],
-  ]);
+  expect(result).toEqual([]);
 });
 it('should return an empty array when the starting timestamp is undefined', () => {
   const result = addMissingDataPoint(
     originalValue,
-    undefined,
+    undefined as any,
     sampleDuration,
     sampleFrequency,
   );
@@ -256,7 +244,7 @@ it('should return an empty array when sample frequency is undefined', () => {
     originalValue,
     startingTimeStamp,
     sampleDuration,
-    undefined,
+    undefined as any,
   );
   expect(result).toEqual([]);
 });
