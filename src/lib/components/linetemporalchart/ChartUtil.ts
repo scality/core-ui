@@ -151,16 +151,13 @@ export function addMissingDataPoint(
     const nextTimestamp = orginalValues[i + 1][0];
     const gap = nextTimestamp - currentTimestamp;
 
-    // Only add missing data points if gap is bigger than 2 intervals
-    if (gap >= 2 * sampleInterval) {
-      // Calculate how many missing points to add
-      const missingIntervals = Math.floor(gap / sampleInterval) - 1;
+    // Calculate how many missing points to add
+    const missingIntervals = Math.floor(gap / sampleInterval) - 1;
 
-      // Add missing data points with NAN_STRING
-      for (let j = 1; j <= missingIntervals; j++) {
-        const missingTimestamp = currentTimestamp + j * sampleInterval;
-        newValues.push([missingTimestamp, NAN_STRING]);
-      }
+    // Add missing data points with NAN_STRING (only executes if missingIntervals > 0)
+    for (let j = 1; j <= missingIntervals; j++) {
+      const missingTimestamp = currentTimestamp + j * sampleInterval;
+      newValues.push([missingTimestamp, NAN_STRING]);
     }
   }
 
