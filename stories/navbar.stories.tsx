@@ -11,6 +11,7 @@ const tabs = [
     render: (
       <InlineInput
         id="instanceName"
+        // @ts-ignore
         changeMutation={{
           isLoading: false,
           mutate: () => {},
@@ -172,5 +173,107 @@ export const NavbarWithOnlyLinkTabs = {
   args: {
     rightActions: [rightActions[4]],
     tabs: linkTabs,
+  },
+};
+
+export const NavbarDropdownShowcase = {
+  args: {
+    rightActions: [
+      {
+        type: 'dropdown',
+        text: 'Language',
+        variant: 'secondary',
+        size: 'default',
+        items: [
+          {
+            label: 'English',
+            name: 'EN',
+            onClick: action('English selected'),
+          },
+          {
+            label: 'Français',
+            name: 'FR',
+            onClick: action('French selected'),
+          },
+          {
+            label: 'Español',
+            name: 'ES',
+            onClick: action('Spanish selected'),
+          },
+        ],
+      },
+      {
+        type: 'dropdown',
+        text: 'Help',
+        icon: <i className="fas fa-question-circle" />,
+        variant: 'outline',
+        size: 'default',
+        items: [
+          {
+            label: 'Documentation',
+            onClick: action('Documentation clicked'),
+          },
+          {
+            label: 'Tutorials',
+            onClick: action('Tutorials clicked'),
+          },
+          {
+            label: 'Contact Support',
+            onClick: action('Contact Support clicked'),
+          },
+          {
+            label: 'Release Notes',
+            onClick: action('Release Notes clicked'),
+          },
+        ],
+      },
+      {
+        type: 'dropdown',
+        icon: <i className="fas fa-user" />,
+        variant: 'primary',
+        size: 'default',
+        caret: false,
+        items: [
+          {
+            label: 'Profile Settings',
+            onClick: action('Profile clicked'),
+          },
+          {
+            label: 'Preferences',
+            onClick: action('Preferences clicked'),
+          },
+          {
+            label: 'API Keys',
+            onClick: action('API Keys clicked'),
+          },
+          {
+            label: 'Log out',
+            onClick: action('Logout clicked'),
+          },
+        ],
+      },
+    ],
+    tabs: [
+      {
+        selected: true,
+        title: 'Dashboard',
+        link: <a href="/dashboard">Dashboard</a>,
+        onClick: action('Dashboard clicked'),
+      },
+      {
+        selected: false,
+        title: 'Analytics',
+        link: <a href="/analytics">Analytics</a>,
+        onClick: action('Analytics clicked'),
+      },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'This story showcases different dropdown variants within the navbar. The dropdowns use the new ButtonV2 styling with variants: secondary, outline, and primary. Notice how the different variants provide visual hierarchy and the icon-only dropdown uses caret: false for a cleaner look.',
+      },
+    },
   },
 };

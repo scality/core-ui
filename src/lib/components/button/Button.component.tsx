@@ -242,7 +242,7 @@ const Anchor = ButtonStyled.withComponent('a');
 
 /**
  * @deprecated
- * Used only in MultiSelect.component.tsx, can be removed
+ * Used only in Dropdown.component.tsx, can be removed after refactoring
  * You should use ButtonV2 with
  * @example import { Button } from '@scality/core-ui/dist/next';
  */
