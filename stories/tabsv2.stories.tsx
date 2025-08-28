@@ -5,7 +5,7 @@ import { Wrapper, Title } from './common';
 import { BrowserRouter } from 'react-router-dom';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import styled from 'styled-components';
-import { MemoryRouter, Route, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import { spacing } from '../src/lib';
 
 const Content = styled.div`
@@ -88,49 +88,46 @@ const DefaultTabsDetails = (props) => {
       <Title>
         {location.pathname} / {location.search}
       </Title>
-      <MemoryRouter initialEntries={['/path?tab=group']} initialIndex={0}>
-        <Route path="/:path?">
-          <Tabs {...props}>
-            <Tab path="/path" label="Users" withoutPadding>
-              <Content>Users Content</Content>
-            </Tab>
-            <Tab
-              path="/path1"
-              query={{
-                tab: 'group',
-              }}
-              label="Groups"
-            >
-              {details()}
-            </Tab>
-            <Tab
-              path="/path1"
-              query={{
-                tab: 'role',
-              }}
-              label="Roles"
-              withoutPadding
-            >
-              <Content>Roles content</Content>
-            </Tab>
-            <Tab
-              path="/path1"
-              query={{
-                tab: 'policies',
-              }}
-              label="Policies"
-            >
-              <Content>Policies content</Content>
-            </Tab>
-            <Tab path="/path4" label="Storage Location">
-              <Content>Storage Location Content</Content>
-            </Tab>
-            <Tab path="/path5" label="Properties">
-              <Content>Properties Content</Content>
-            </Tab>
-          </Tabs>
-        </Route>
-      </MemoryRouter>
+
+      <Tabs {...props}>
+        <Tab path="/path" label="Users" withoutPadding>
+          <Content>Users Content</Content>
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'group',
+          }}
+          label="Groups"
+        >
+          {details()}
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'role',
+          }}
+          label="Roles"
+          withoutPadding
+        >
+          <Content>Roles content</Content>
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'policies',
+          }}
+          label="Policies"
+        >
+          <Content>Policies content</Content>
+        </Tab>
+        <Tab path="/path4" label="Storage Location">
+          <Content>Storage Location Content</Content>
+        </Tab>
+        <Tab path="/path5" label="Properties">
+          <Content>Properties Content</Content>
+        </Tab>
+      </Tabs>
     </>
   );
 };
