@@ -118,11 +118,11 @@ export function getUnitLabel(
  *
  */
 export function addMissingDataPoint(
-  orginalValues: [number, string | null][],
+  orginalValues: [number, number | string | null][],
   startingTimeStamp?: number,
   sampleDuration?: number,
   sampleInterval?: number,
-): [number, string | null][] {
+): [number, number | string | null][] {
   if (
     !orginalValues ||
     startingTimeStamp === undefined ||
@@ -140,7 +140,7 @@ export function addMissingDataPoint(
     return [];
   }
 
-  const newValues: [number, string | null][] = [];
+  const newValues: [number, number | string | null][] = [];
 
   // Process all but the last element
   for (let i = 0; i < orginalValues.length - 1; i++) {

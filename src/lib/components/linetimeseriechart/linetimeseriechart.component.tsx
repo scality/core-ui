@@ -91,8 +91,8 @@ const TooltipInstanceValue = styled.div`
 export type Serie = {
   // the name of the resource
   resource: string;
-  // the original data format from prometheus
-  data: [number, string | null][];
+  // the original data format from prometheus, extend the value to include number type.
+  data: [number, number | string | null][];
   // it's mandatory to display tooltip label in the tooltip
   getTooltipLabel: (metricPrefix?: string, resource?: string) => string;
   // the name of the metric prefix with read, write, in, out
@@ -259,7 +259,7 @@ export function LineTimeSerieChart({
     // Initialize an object to hold data points by timestamp
     const dataPointsByTime: Record<
       number,
-      { timestamp: number } & Record<string, string | number | null>
+      { timestamp: number } & Record<string, number | null>
     > = {};
     const seriesToProcess =
       yAxisType === 'symmetrical' && isSymmetricalSeries(normalizedSeries)
@@ -285,8 +285,8 @@ export function LineTimeSerieChart({
     // Convert object to array for Recharts
     return Object.values(dataPointsByTime).sort(
       (
-        a: { timestamp: number } & Record<string, string | number | null>,
-        b: { timestamp: number } & Record<string, string | number | null>,
+        a: { timestamp: number } & Record<string, number | null>,
+        b: { timestamp: number } & Record<string, number | null>,
       ) => (a.timestamp as number) - (b.timestamp as number),
     );
   }, [series, startingTimeStamp, duration, interval, yAxisType]);

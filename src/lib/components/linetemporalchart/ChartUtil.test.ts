@@ -165,7 +165,7 @@ it('returns the unit label GiB/Sec', () => {
   expect(valueBase).toEqual(1024 * 1024 * 1024);
 });
 // test for addMissingDataPoint function
-const originalValue: [number, string | null][] = [
+const originalValue: [number, number | string | null][] = [
   [0, '0'],
   [1, '1'],
   [2, '2'],
