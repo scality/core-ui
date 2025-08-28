@@ -142,7 +142,15 @@ export const iconTable = {
   Mail: 'fas faEnvelope',
 };
 
-export const customIcons = {
+type IconProps = {
+  'aria-label'?: string;
+  color?: string;
+  size?: string;
+  icon?: string;
+  title?: string;
+};
+
+export const customIcons: Record<string, ((props: IconProps) => JSX.Element) & { displayName?: string }> = {
   'Remote-user': ({ 'aria-label': ariaLabel, color, size }) => (
     <RemoteUser ariaLabel={ariaLabel} color={color} size={size} />
   ),
@@ -150,6 +158,9 @@ export const customIcons = {
     <RemoteGroup ariaLabel={ariaLabel} color={color} size={size} />
   ),
 };
+
+customIcons['Remote-user'].displayName = 'RemoteUser';
+customIcons['Remote-group'].displayName = 'RemoteGroup';
 
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {

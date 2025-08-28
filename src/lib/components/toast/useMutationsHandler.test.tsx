@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useToast } from './ToastProvider';
 import { useMutationsHandler } from './useMutationsHandler';
 
@@ -68,7 +68,7 @@ describe('useMutationsHandler', () => {
       showToast,
     }));
 
-    const { waitFor } = renderHook(() =>
+    renderHook(() =>
       useMutationsHandler({
         mainMutation,
         dependantMutations,
@@ -77,10 +77,8 @@ describe('useMutationsHandler', () => {
       }),
     );
 
-    await act(async () => {
-      await waitFor(() => {
-        expect(onMainMutationSuccess).toHaveBeenCalled();
-      });
+    await waitFor(() => {
+      expect(onMainMutationSuccess).toHaveBeenCalled();
     });
   });
 
@@ -91,7 +89,7 @@ describe('useMutationsHandler', () => {
       showToast,
     }));
 
-    const { waitFor } = renderHook(() =>
+    renderHook(() =>
       useMutationsHandler({
         mainMutation,
         dependantMutations,
@@ -99,13 +97,11 @@ describe('useMutationsHandler', () => {
       }),
     );
 
-    await act(async () => {
-      await waitFor(() => {
-        expect(showToast).toHaveBeenCalledWith({
-          open: true,
-          status: 'success',
-          message: 'message',
-        });
+    await waitFor(() => {
+      expect(showToast).toHaveBeenCalledWith({
+        open: true,
+        status: 'success',
+        message: 'message',
       });
     });
   });
@@ -131,7 +127,7 @@ describe('useMutationsHandler', () => {
       },
     ] as const;
 
-    const { waitFor } = renderHook(() =>
+    renderHook(() =>
       useMutationsHandler({
         mainMutation,
         dependantMutations: mutationsWithError,
@@ -139,13 +135,11 @@ describe('useMutationsHandler', () => {
       }),
     );
 
-    await act(async () => {
-      await waitFor(() => {
-        expect(showToast).toHaveBeenCalledWith({
-          open: true,
-          status: 'error',
-          message: 'message',
-        });
+    await waitFor(() => {
+      expect(showToast).toHaveBeenCalledWith({
+        open: true,
+        status: 'error',
+        message: 'message',
       });
     });
   });
@@ -171,7 +165,7 @@ describe('useMutationsHandler', () => {
       showToast,
     }));
 
-    const { waitFor } = renderHook(() =>
+    renderHook(() =>
       useMutationsHandler({
         mainMutation,
         dependantMutations: otherMutations,
@@ -180,10 +174,8 @@ describe('useMutationsHandler', () => {
       }),
     );
 
-    await act(async () => {
-      await waitFor(() => {
-        expect(onAllMutationsSuccess).toHaveBeenCalled();
-      });
+    await waitFor(() => {
+      expect(onAllMutationsSuccess).toHaveBeenCalled();
     });
   });
 
@@ -220,7 +212,7 @@ describe('useMutationsHandler', () => {
       showToast,
     }));
 
-    const { waitFor } = renderHook(() =>
+    renderHook(() =>
       useMutationsHandler({
         mainMutation: firstMutation,
         dependantMutations: otherMutations,
@@ -229,10 +221,8 @@ describe('useMutationsHandler', () => {
       }),
     );
 
-    await act(async () => {
-      await waitFor(() => {
-        expect(onAllMutationsSuccess).not.toHaveBeenCalled();
-      });
+    await waitFor(() => {
+      expect(onAllMutationsSuccess).not.toHaveBeenCalled();
     });
   });
 });

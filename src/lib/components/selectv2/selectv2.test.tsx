@@ -69,7 +69,7 @@ describe('SelectV2', () => {
   it('should throw error if <Option/> is outside <Select/>', () => {
     // mock console.error as this is the only way to silent expected error thrown by the component
     const consoleErrorFn = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-    expect(() => render(<Option value="Option 1" />)).toThrowError();
+    expect(() => render(<Option value="Option 1" />)).toThrow();
     consoleErrorFn.mockRestore();
   });
 
