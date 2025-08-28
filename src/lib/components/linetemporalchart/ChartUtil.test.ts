@@ -215,7 +215,7 @@ it('should return the array with string NAN when the original dataset is empty',
 it('should return an empty array when the starting timestamp is undefined', () => {
   const result = addMissingDataPoint(
     originalValue,
-    undefined as any,
+    undefined,
     sampleDuration,
     sampleFrequency,
   );
@@ -244,7 +244,7 @@ it('should return an empty array when sample frequency is undefined', () => {
     originalValue,
     startingTimeStamp,
     sampleDuration,
-    undefined as any,
+    undefined,
   );
   expect(result).toEqual([]);
 });

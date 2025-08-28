@@ -114,23 +114,23 @@ export function getUnitLabel(
  * @param {array} orginalValues - The array of the data points are already sorted according to the time series
  * @param {number} startingTimeStamp - The starting timestamp in seconds
  * @param {number} sampleDuration - The time span value in seconds
- * @param {number} sampleFrequency - The time difference between two data points in seconds
+ * @param {number} sampleInterval - The time difference between two data points in seconds
  *
  */
 export function addMissingDataPoint(
   orginalValues: [number, string | null][],
-  startingTimeStamp: number,
-  sampleDuration: number,
-  sampleFrequency: number,
+  startingTimeStamp?: number,
+  sampleDuration?: number,
+  sampleInterval?: number,
 ): [number, string | null][] {
   if (
     !orginalValues ||
     startingTimeStamp === undefined ||
     !sampleDuration ||
-    !sampleFrequency ||
+    !sampleInterval ||
     startingTimeStamp < 0 ||
     sampleDuration <= 0 ||
-    sampleFrequency <= 0
+    sampleInterval <= 0
   ) {
     return [];
   }
@@ -142,32 +142,30 @@ export function addMissingDataPoint(
 
   const newValues: [number, string | null][] = [];
 
-  for (let i = 0; i < orginalValues.length; i++) {
+  // Process all but the last element
+  for (let i = 0; i < orginalValues.length - 1; i++) {
     // Always add the current data point
     newValues.push(orginalValues[i]);
 
-    // Check if this is not the last data point
-    if (i < orginalValues.length - 1) {
-      const currentTimestamp = orginalValues[i][0];
-      const nextTimestamp = orginalValues[i + 1][0];
-      const gap = nextTimestamp - currentTimestamp;
+    const currentTimestamp = orginalValues[i][0];
+    const nextTimestamp = orginalValues[i + 1][0];
+    const gap = nextTimestamp - currentTimestamp;
 
-      // Only add missing data points if gap is bigger than 2 intervals
-      if (gap >= 2 * sampleFrequency) {
-        // Calculate how many missing points to add
-        const missingIntervals = Math.floor(gap / sampleFrequency) - 1;
+    // Only add missing data points if gap is bigger than 2 intervals
+    if (gap >= 2 * sampleInterval) {
+      // Calculate how many missing points to add
+      const missingIntervals = Math.floor(gap / sampleInterval) - 1;
 
-        // Add missing data points with NAN_STRING
-        for (let j = 1; j <= missingIntervals; j++) {
-          const missingTimestamp = currentTimestamp + j * sampleFrequency;
-          // Only add if the missing timestamp is before the next actual data point
-          if (missingTimestamp < nextTimestamp) {
-            newValues.push([missingTimestamp, NAN_STRING]);
-          }
-        }
+      // Add missing data points with NAN_STRING
+      for (let j = 1; j <= missingIntervals; j++) {
+        const missingTimestamp = currentTimestamp + j * sampleInterval;
+        newValues.push([missingTimestamp, NAN_STRING]);
       }
     }
   }
+
+  // Add the last element
+  newValues.push(orginalValues[orginalValues.length - 1]);
 
   return newValues;
 }
