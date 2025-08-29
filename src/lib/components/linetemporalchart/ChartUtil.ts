@@ -72,6 +72,12 @@ export function getUnitLabel(
   valueBase: number;
   unitLabel: string;
 } {
+  if (!unitRange || unitRange.length === 0) {
+    return {
+      valueBase: 1,
+      unitLabel: '',
+    };
+  }
   // first sort the unitRange
   unitRange.sort(
     (
