@@ -109,54 +109,60 @@ export function getUnitLabel(
 
 /**
  * This function manually adds the missing data points with `null` value caused by downtime of the VMs
+ * Missing data points are only added when the gap between consecutive data points is bigger than 2 intervals
  *
  * @param {array} orginalValues - The array of the data points are already sorted according to the time series
  * @param {number} startingTimeStamp - The starting timestamp in seconds
  * @param {number} sampleDuration - The time span value in seconds
- * @param {number} sampleFrequency - The time difference between two data points in seconds
+ * @param {number} sampleInterval - The time difference between two data points in seconds
  *
  */
 export function addMissingDataPoint(
-  orginalValues: [number, string | null][],
-  startingTimeStamp: number,
-  sampleDuration: number,
-  sampleFrequency: number,
-): [number, string | null][] {
+  orginalValues: [number, number | string | null][],
+  startingTimeStamp?: number,
+  sampleDuration?: number,
+  sampleInterval?: number,
+): [number, number | string | null][] {
   if (
     !orginalValues ||
     startingTimeStamp === undefined ||
     !sampleDuration ||
-    !sampleFrequency ||
+    !sampleInterval ||
     startingTimeStamp < 0 ||
     sampleDuration <= 0 ||
-    sampleFrequency <= 0
+    sampleInterval <= 0
   ) {
     return [];
   }
 
-  const newValues = [];
-  const numberOfDataPoints = sampleDuration / sampleFrequency + 1;
-  let samplingPointTime = startingTimeStamp;
-
-  // initialize the array with all "NAN" value, in order for the tooltip to display dash(-)
-  for (let i = 0; i < numberOfDataPoints; i++) {
-    newValues.push([samplingPointTime, NAN_STRING]);
-    samplingPointTime += sampleFrequency;
+  // If there are no original values, return empty array
+  if (orginalValues.length === 0) {
+    return [];
   }
 
-  // copy the existing data points from `orginalValue` array to `newValues`
-  if (newValues.length === 0) return [];
-  let nextIndex = 0;
+  const newValues: [number, number | string | null][] = [];
 
-  for (let i = 0; i < newValues.length; i++) {
-    if (
-      orginalValues[nextIndex] &&
-      newValues[i][0] === orginalValues[nextIndex][0]
-    ) {
-      newValues[i][1] = orginalValues[nextIndex][1];
-      nextIndex++;
+  // Process all but the last element
+  for (let i = 0; i < orginalValues.length - 1; i++) {
+    // Always add the current data point
+    newValues.push(orginalValues[i]);
+
+    const currentTimestamp = orginalValues[i][0];
+    const nextTimestamp = orginalValues[i + 1][0];
+    const gap = nextTimestamp - currentTimestamp;
+
+    // Calculate how many missing points to add
+    const missingIntervals = Math.floor(gap / sampleInterval) - 1;
+
+    // Add missing data points with NAN_STRING (only executes if missingIntervals > 0)
+    for (let j = 1; j <= missingIntervals; j++) {
+      const missingTimestamp = currentTimestamp + j * sampleInterval;
+      newValues.push([missingTimestamp, NAN_STRING]);
     }
   }
+
+  // Add the last element
+  newValues.push(orginalValues[orginalValues.length - 1]);
 
   return newValues;
 }
