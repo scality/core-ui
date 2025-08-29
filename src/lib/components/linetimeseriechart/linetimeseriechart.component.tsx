@@ -493,6 +493,7 @@ export function LineTimeSerieChart({
                   dataKey={label}
                   stroke={colorMapping[resource]}
                   dot={false}
+                  isAnimationActive={false}
                 />
               );
             }),
