@@ -17,8 +17,7 @@ export type ChartLegendState = {
   isSelected: (resource: string) => boolean;
   getColor: (resource: string) => string | undefined;
   listResources: () => string[];
-  getAllResourcesCount: () => number;
-  getSelectedCount: () => number;
+  isOnlyOneSelected: () => boolean;
 };
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
@@ -54,14 +53,9 @@ export const ChartLegendWrapper = ({
     setSelectedResources([resource]);
   }, []);
 
-  const getAllResourcesCount = useCallback(() => {
-    return allResources.length;
-  }, [allResources]);
-
-  const getSelectedCount = useCallback(() => {
-    return selectedResources.length;
+  const isOnlyOneSelected = useCallback(() => {
+    return selectedResources.length === 1;
   }, [selectedResources]);
-
   const isSelected = useCallback(
     (resource: string) => {
       return selectedResources.includes(resource);
@@ -97,8 +91,7 @@ export const ChartLegendWrapper = ({
       isSelected,
       getColor,
       listResources,
-      getAllResourcesCount,
-      getSelectedCount,
+      isOnlyOneSelected,
     }),
     [
       selectedResources,
@@ -109,8 +102,7 @@ export const ChartLegendWrapper = ({
       isSelected,
       getColor,
       listResources,
-      getAllResourcesCount,
-      getSelectedCount,
+      isOnlyOneSelected,
     ],
   );
 

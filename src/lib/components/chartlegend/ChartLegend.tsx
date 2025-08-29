@@ -73,9 +73,8 @@ export const ChartLegend = ({
     addSelectedResource,
     removeSelectedResource,
     selectAllResources,
-    getAllResourcesCount,
-    getSelectedCount,
     selectOnlyResource,
+    isOnlyOneSelected,
   } = useChartLegend();
 
   const resources = listResources();
@@ -89,7 +88,7 @@ export const ChartLegend = ({
 
       if (isModifierClick) {
         if (itemIsSelected) {
-          if (getSelectedCount() === 1) {
+          if (isOnlyOneSelected()) {
             selectAllResources();
           } else {
             removeSelectedResource(resource);
@@ -97,14 +96,10 @@ export const ChartLegend = ({
         } else {
           addSelectedResource(resource);
         }
+      } else if (itemIsSelected && isOnlyOneSelected()) {
+        selectAllResources();
       } else {
-        if (getSelectedCount() === getAllResourcesCount()) {
-          selectOnlyResource(resource);
-        } else if (itemIsSelected) {
-          selectAllResources();
-        } else {
-          selectOnlyResource(resource);
-        }
+        selectOnlyResource(resource);
       }
     },
     [
@@ -114,8 +109,7 @@ export const ChartLegend = ({
       removeSelectedResource,
       selectAllResources,
       selectOnlyResource,
-      getAllResourcesCount,
-      getSelectedCount,
+      isOnlyOneSelected,
     ],
   );
 

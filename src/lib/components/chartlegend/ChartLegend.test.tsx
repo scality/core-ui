@@ -214,5 +214,22 @@ describe('ChartLegend', () => {
       expect(screen.getByLabelText('Memory not selected')).toBeInTheDocument();
       expect(screen.getByLabelText('Disk selected')).toBeInTheDocument();
     });
+    it('should select one item when clicking on selected item and other items are selected', () => {
+      render(
+        <ChartLegendWrapper colorSet={colorSet}>
+          <ChartLegend shape="line" />
+        </ChartLegendWrapper>,
+      );
+      userEvent.click(screen.getByText('CPU'));
+      userEvent.click(screen.getByText('Memory'), { metaKey: true });
+
+      expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
+      expect(screen.getByLabelText('Memory selected')).toBeInTheDocument();
+      expect(screen.getByLabelText('Disk not selected')).toBeInTheDocument();
+      userEvent.click(screen.getByText('CPU'));
+      expect(screen.getByLabelText('CPU selected')).toBeInTheDocument();
+      expect(screen.getByLabelText('Memory not selected')).toBeInTheDocument();
+      expect(screen.getByLabelText('Disk not selected')).toBeInTheDocument();
+    });
   });
 });
