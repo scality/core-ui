@@ -54,6 +54,12 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   hour12: false,
 });
 
+export const LONG_TERM_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
+  year: '2-digit',
+  month: 'short',
+  day: 'numeric',
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -65,7 +71,8 @@ type FormattedDateTimeProps = {
     | 'day-month-abbreviated-hour-minute'
     | 'day-month-abbreviated-hour-minute-second'
     | 'long-date'
-    | 'chart-date';
+    | 'chart-date'
+    | 'long-term-date';
 
   value: Date;
 };
@@ -198,6 +205,8 @@ export const FormattedDateTime = ({
       return <>{LONG_DATE_FORMATER.format(value)}</>;
     case 'chart-date':
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
+    case 'long-term-date':
+      return <>{LONG_TERM_DATE_FORMATER.format(value).toUpperCase()}</>;
     default:
       return <></>;
   }

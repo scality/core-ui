@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
@@ -23,6 +23,7 @@ import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
+  LONG_TERM_DATE_FORMATER,
 } from '../date/FormattedDateTime';
 
 const LineTemporalChartWrapper = styled.div`
@@ -129,6 +130,7 @@ export type LineChartProps = (
     label: string;
   }[];
   isLoading?: boolean;
+  xAxisFormat?: 'default' | 'long-term';
   yAxisTitle?: string;
   helpText?: string;
 };
@@ -205,6 +207,7 @@ export function LineTimeSerieChart({
   duration,
   unitRange,
   isLoading = false,
+  xAxisFormat = 'default',
   yAxisType = 'default',
   yAxisTitle,
   helpText,
@@ -393,12 +396,14 @@ export function LineTimeSerieChart({
   }, [series, getColor]);
 
   // Format time for display the tick in the x axis
-  const formatTime = useMemo(
-    () => (timestamp: number) => {
+  const formatXAxisLabel = useCallback(
+    (timestamp: number) => {
       const date = new Date(timestamp);
-      return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
+      return xAxisFormat === 'long-term'
+        ? LONG_TERM_DATE_FORMATER.format(date).toUpperCase()
+        : DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
     },
-    [],
+    [xAxisFormat],
   );
 
   return (
@@ -438,7 +443,7 @@ export function LineTimeSerieChart({
             type="number"
             domain={['dataMin', 'dataMax']}
             ticks={xAxisTicks}
-            tickFormatter={formatTime}
+            tickFormatter={formatXAxisLabel}
             tickCount={5}
             tick={{
               fill: theme.textSecondary,
