@@ -242,8 +242,9 @@ const Anchor = ButtonStyled.withComponent('a');
 
 /**
  * @deprecated
+ * Used only in Dropdown.component.tsx, can be removed after refactoring
  * You should use ButtonV2 with
- * import { Button } from '@scality/core-ui/dist/next';
+ * @example import { Button } from '@scality/core-ui/dist/next';
  */
 function Button({
   text = '',

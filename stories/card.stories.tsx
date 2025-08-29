@@ -7,12 +7,14 @@ import {
   CardBodyContainer,
 } from '../src/lib/components/card/Card.component';
 import { CircularProgressBar } from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
-import { Text, Wrapper } from './common';
-import { brand } from '../src/lib/style/theme';
+import { Text } from './common';
+import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import { action } from '@storybook/addon-actions';
 
 // RGB color in theme provoke an error, excludes from control options
-const colors = Object.keys(brand).filter((color) => !/RGB/.test(color));
+const colors = Object.keys(coreUIAvailableThemes.darkRebrand).filter(
+  (color) => !/RGB/.test(color),
+);
 
 export default {
   title: 'Components/Data Display/Card',
@@ -43,8 +45,8 @@ const Row = styled.div`
 `;
 const defaultBody = (
   <CircularProgressBar
-    color={brand.buttonSecondary}
-    backgroundColor={brand.textPrimary}
+    color={coreUIAvailableThemes.darkRebrand.buttonSecondary}
+    backgroundColor={coreUIAvailableThemes.darkRebrand.textPrimary}
     radius={30}
     strokeWidth={5}
     percent={60}

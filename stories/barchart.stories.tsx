@@ -111,7 +111,7 @@ const horizontalBarChartArgs = {
 };
 
 export default {
-  title: 'Components/Data Display/Charts/BarChart',
+  title: 'Components/Deprecated/Charts/BarChart',
   component: BarChart,
   decorators: [
     (story: Component) => <SyncedCursorCharts>{story()}</SyncedCursorCharts>,

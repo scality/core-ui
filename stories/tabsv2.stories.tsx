@@ -3,12 +3,13 @@ import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Tabs, Tab } from '../src/lib/components/tabsv2/Tabsv2.component';
 import { Wrapper, Title } from './common';
 import { BrowserRouter } from 'react-router-dom';
-import { brand, spacing } from '../src/lib/style/theme';
+import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import styled from 'styled-components';
-import { MemoryRouter, Route, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
+import { spacing } from '../src/lib';
 
 const Content = styled.div`
-  padding: ${spacing.sp24};
+  padding: ${spacing.r24};
   color: ${(props) => props.theme.textPrimary};
   height: 100%;
 `;
@@ -55,13 +56,13 @@ const generateTab = (n = 10, selectedIndex = 0) => {
 };
 
 const customTabStyle = {
-  activeTabColor: brand.selectedActive,
-  activeTabSeparator: brand.statusHealthy,
-  tabLineColor: brand.backgroundLevel3,
-  inactiveTabColor: brand.highlight,
-  tabContentColor: brand.buttonPrimary,
-  separatorColor: brand.statusCritical,
-  tabHoverColor: brand.statusHealthy,
+  activeTabColor: coreUIAvailableThemes.darkRebrand.selectedActive,
+  activeTabSeparator: coreUIAvailableThemes.darkRebrand.statusHealthy,
+  tabLineColor: coreUIAvailableThemes.darkRebrand.backgroundLevel3,
+  inactiveTabColor: coreUIAvailableThemes.darkRebrand.highlight,
+  tabContentColor: coreUIAvailableThemes.darkRebrand.buttonPrimary,
+  separatorColor: coreUIAvailableThemes.darkRebrand.statusCritical,
+  tabHoverColor: coreUIAvailableThemes.darkRebrand.statusHealthy,
 };
 
 const DefaultTabsDetails = (props) => {
@@ -87,52 +88,46 @@ const DefaultTabsDetails = (props) => {
       <Title>
         {location.pathname} / {location.search}
       </Title>
-      <MemoryRouter initialEntries={['/path?tab=group']} initialIndex={0}>
-        <Route
-          path="/:path?"
-          render={() => (
-            <Tabs {...props}>
-              <Tab path="/path" label="Users" withoutPadding>
-                <Content>Users Content</Content>
-              </Tab>
-              <Tab
-                path="/path1"
-                query={{
-                  tab: 'group',
-                }}
-                label="Groups"
-              >
-                {details()}
-              </Tab>
-              <Tab
-                path="/path1"
-                query={{
-                  tab: 'role',
-                }}
-                label="Roles"
-                withoutPadding
-              >
-                <Content>Roles content</Content>
-              </Tab>
-              <Tab
-                path="/path1"
-                query={{
-                  tab: 'policies',
-                }}
-                label="Policies"
-              >
-                <Content>Policies content</Content>
-              </Tab>
-              <Tab path="/path4" label="Storage Location">
-                <Content>Storage Location Content</Content>
-              </Tab>
-              <Tab path="/path5" label="Properties">
-                <Content>Properties Content</Content>
-              </Tab>
-            </Tabs>
-          )}
-        />
-      </MemoryRouter>
+
+      <Tabs {...props}>
+        <Tab path="/path" label="Users" withoutPadding>
+          <Content>Users Content</Content>
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'group',
+          }}
+          label="Groups"
+        >
+          {details()}
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'role',
+          }}
+          label="Roles"
+          withoutPadding
+        >
+          <Content>Roles content</Content>
+        </Tab>
+        <Tab
+          path="/path1"
+          query={{
+            tab: 'policies',
+          }}
+          label="Policies"
+        >
+          <Content>Policies content</Content>
+        </Tab>
+        <Tab path="/path4" label="Storage Location">
+          <Content>Storage Location Content</Content>
+        </Tab>
+        <Tab path="/path5" label="Properties">
+          <Content>Properties Content</Content>
+        </Tab>
+      </Tabs>
     </>
   );
 };

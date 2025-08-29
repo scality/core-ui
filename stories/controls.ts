@@ -1,23 +1,23 @@
-import { iconTable } from "../src/lib/components/icon/Icon.component";
+import { iconTable } from '../src/lib/components/icon/Icon.component';
 
 export const iconOptions = Object.keys(iconTable);
 
 export const sizesOptions = ['smaller', 'small', 'base', 'large', 'larger'];
 
 export const placementOptions = [
-    'top',
-    'bottom',
-    'left',
-    'top-start',
-    'top-end',
-    'right',
-    'right-start',
-    'right-end',
-    'bottom-end',
-    'bottom-start',
-    'left-start',
-    'left-end',
-  ];
+  'top',
+  'bottom',
+  'left',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom-end',
+  'bottom-start',
+  'left-start',
+  'left-end',
+];
 export const localeArgtype = {
   control: { type: 'radio' },
   options: ['en', 'fr'],
@@ -40,9 +40,8 @@ export const variantsOptions = [
   'backgroundLevel1',
 ];
 
-
-export const tooltipArgTypes =  {
-    tooltip: {
+export const tooltipArgTypes = {
+  tooltip: {
     description:
       "Object with 'overlay','placement' and 'overlayStyle' properties",
     control: false,
@@ -53,7 +52,7 @@ export const tooltipArgTypes =  {
     options: placementOptions,
   },
   tooltipOverlayStyle: {
-    control:'object',
+    control: 'object',
     description: 'Object of CSS properties',
-  }}
-
+  },
+};
