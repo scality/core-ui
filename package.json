@@ -84,7 +84,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.3",
-    "@floating-ui/react": "^0.26.28",
+    "@floating-ui/react": "^0.27.15",
     "@fortawesome/fontawesome-free": "^5.10.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
