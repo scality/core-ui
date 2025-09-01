@@ -60,7 +60,7 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type="category" bars={testBars} />
+            <Barchart type={{ type: 'category' }} bars={testBars} />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -98,7 +98,7 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type="category" bars={[]} isError />
+            <Barchart type={{ type: 'category' }} bars={[]} isError />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -111,7 +111,7 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type="category" bars={[]} isLoading />
+            <Barchart type={{ type: 'category' }} bars={[]} isLoading />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -122,7 +122,7 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type="category" bars={undefined} />
+            <Barchart type={{ type: 'category' }} bars={undefined} />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -316,7 +316,11 @@ describe('Barchart', () => {
     render(
       <Wrapper>
         <ChartLegendWrapper colorSet={{ ...testColorSet, Failed: 'red' }}>
-          <Barchart type="category" bars={testStackedBars} stacked={true} />
+          <Barchart
+            type={{ type: 'category' }}
+            bars={testStackedBars}
+            stacked={true}
+          />
         </ChartLegendWrapper>
       </Wrapper>,
     );
@@ -344,7 +348,7 @@ describe('Barchart', () => {
       <Wrapper>
         <ChartLegendWrapper colorSet={testColorSet}>
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             bars={testBars}
             defaultSort={(pointA, pointB) => {
               const valueA = pointA.Success;
@@ -369,7 +373,7 @@ describe('Barchart', () => {
       <Wrapper>
         <ChartLegendWrapper colorSet={testColorSet}>
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             bars={[]}
             title="Test Title"
             secondaryTitle="Test Secondary Title"

@@ -61,7 +61,7 @@ export const Playground: Story = {
         }}
       >
         <Stack direction="vertical" gap="r16">
-          <Barchart type="category" bars={exampleData} />
+          <Barchart type={{ type: 'category' }} bars={exampleData} />
           <ChartLegend shape="rectangle" direction="horizontal" />
         </Stack>
       </ChartLegendWrapper>
@@ -332,7 +332,7 @@ export const CapacityWithUnitRange: Story = {
         }}
       >
         <Barchart
-          type="category"
+          type={{ type: 'category' }}
           bars={capacityDataWithUnitRange}
           unitRange={[
             {
@@ -402,7 +402,7 @@ export const Stacked: Story = {
         }}
       >
         <Stack direction="vertical" gap="r16">
-          <Barchart type="category" bars={stackedData} stacked />
+          <Barchart type={{ type: 'category' }} bars={stackedData} stacked />
           <ChartLegend shape="rectangle" />
         </Stack>
       </ChartLegendWrapper>
@@ -453,7 +453,7 @@ export const DefaultSort: Story = {
         }}
       >
         <Barchart
-          type="category"
+          type={{ type: 'category' }}
           stacked
           bars={defaultSortData}
           defaultSort={customSort}
@@ -531,7 +531,7 @@ export const WithCustomTooltip: Story = {
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
-              type="category"
+              type={{ type: 'category' }}
               bars={exampleData}
               tooltip={customTooltip}
               height={300}
@@ -602,7 +602,7 @@ export const StatusColors: Story = {
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             bars={statusData}
             stacked
             title="System Health Metrics"
@@ -656,7 +656,7 @@ export const LegendShapes: Story = {
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
-              type="category"
+              type={{ type: 'category' }}
               bars={exampleData}
               height={200}
               title="Horizontal Rectangle Legend"
@@ -673,7 +673,7 @@ export const LegendShapes: Story = {
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
-              type="category"
+              type={{ type: 'category' }}
               bars={exampleData}
               height={200}
               title="Vertical Line Legend"
@@ -727,14 +727,14 @@ export const BarchartsWithSingleLegend: Story = {
           }}
         >
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             bars={exampleData}
             height={200}
             title="Barchart 1"
           />
 
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             bars={exampleData}
             height={200}
             title="Barchart 2"
@@ -757,7 +757,7 @@ export const ErrorState: Story = {
         }}
       >
         <Barchart
-          type="category"
+          type={{ type: 'category' }}
           bars={[]}
           isError
           title="Error State"
@@ -808,7 +808,7 @@ export const StackedBarSort: Story = {
         }}
       >
         <Barchart
-          type="category"
+          type={{ type: 'category' }}
           bars={statusesData}
           stacked
           stackedBarSort={sort}
@@ -883,7 +883,7 @@ export const CompleteExample: Story = {
           }}
         >
           <Barchart
-            type="category"
+            type={{ type: 'category' }}
             title="Loading BarChart"
             helpTooltip="Click on the button to load or unload data"
             secondaryTitle={isLoading ? 'Loading...' : 'Loaded data'}
@@ -906,6 +906,45 @@ export const CompleteExample: Story = {
             height={200}
           />
           <ChartLegend shape="rectangle" direction="horizontal" />
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
+export const Histogram: Story = {
+  render: () => {
+    const histogramData = [
+      {
+        label: 'Success',
+        data: [
+          ['0-10', 1],
+          ['10-20', 5],
+          ['20-30', 15],
+          ['30-40', 40],
+          ['40-50', 45],
+          ['50-60', 50],
+          ['60-70', 40],
+          ['70-80', 15],
+          ['80-90', 5],
+          ['90-100', 1],
+        ],
+      },
+    ] as const;
+    const theme = useTheme() as CoreUITheme;
+    return (
+      <div style={{ width: '50%', padding: spacing.r16 }}>
+        <ChartLegendWrapper
+          colorSet={{
+            Success: theme.statusHealthy,
+            Failed: theme.statusCritical,
+          }}
+        >
+          <Barchart
+            type={{ type: 'category', gap: 0 }}
+            bars={histogramData}
+            title="Histogram"
+          />
         </ChartLegendWrapper>
       </div>
     );

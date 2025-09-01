@@ -271,11 +271,11 @@ export const formatPrometheusDataToRechartsDataAndBars = <
   );
 
   let data =
-    type !== 'category' && type.type === 'time'
+    type.type !== 'category' && type.type === 'time'
       ? transformTimeData(bars, type, barDataKeys)
       : transformCategoryData(bars, barDataKeys);
 
-  if (type === 'category' && defaultSort) {
+  if (type.type === 'category' && defaultSort) {
     data = applySortingToData(data, barDataKeys, defaultSort);
   }
 

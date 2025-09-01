@@ -570,7 +570,7 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
 
     const result = formatPrometheusDataToRechartsDataAndBars(
       bars,
-      'category',
+      { type: 'category' },
       {
         Success: coreUIAvailableThemes.darkRebrand.statusHealthy,
         Failed: coreUIAvailableThemes.darkRebrand.statusCritical,
@@ -647,7 +647,7 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
 
     const result = formatPrometheusDataToRechartsDataAndBars(
       bars,
-      'category',
+      { type: 'category' },
       mockTheme,
       false,
       (pointA, pointB) => {

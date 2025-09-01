@@ -45,6 +45,11 @@ export type TimeType = {
     interval: number;
   };
 };
+
+export type CategoryType = {
+  type: 'category';
+  gap?: number;
+};
 export type Point = {
   key: string | number;
   values: { label: string; value: number }[];
@@ -70,7 +75,7 @@ export type BarchartSortFn<T extends BarchartBars> = (
 ) => 1 | -1 | 0;
 
 export type BarchartProps<T extends BarchartBars> = {
-  type: 'category' | TimeType;
+  type: CategoryType | TimeType;
   bars?: T;
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
@@ -260,7 +265,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const {
     height = CHART_CONSTANTS.DEFAULT_HEIGHT,
     bars,
-    type = 'category',
+    type = { type: 'category' },
     unitRange,
     stacked,
     stackedBarSort = 'default',
@@ -314,9 +319,16 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
           <BarChart
             data={rechartsData}
             accessibilityLayer
-            barSize={CHART_CONSTANTS.BAR_SIZE}
+            barSize={
+              type.type === 'category'
+                ? type.gap === 0
+                  ? undefined
+                  : CHART_CONSTANTS.BAR_SIZE
+                : CHART_CONSTANTS.BAR_SIZE
+            }
             height={height}
             margin={CHART_CONSTANTS.CHART_MARGIN}
+            barCategoryGap={type.type === 'category' ? type.gap : undefined}
           >
             <CartesianGrid
               vertical={false}
