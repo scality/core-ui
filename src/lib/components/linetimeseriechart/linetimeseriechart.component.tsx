@@ -130,7 +130,7 @@ export type LineChartProps = (
     label: string;
   }[];
   isLoading?: boolean;
-  xAxisFormat?: 'default' | 'long-term';
+  xAxisFormat?: 'with-time' | 'long-term';
   yAxisTitle?: string;
   helpText?: string;
 };
@@ -207,7 +207,7 @@ export function LineTimeSerieChart({
   duration,
   unitRange,
   isLoading = false,
-  xAxisFormat = 'default',
+  xAxisFormat = 'with-time',
   yAxisType = 'default',
   yAxisTitle,
   helpText,
@@ -399,9 +399,11 @@ export function LineTimeSerieChart({
   const formatXAxisLabel = useCallback(
     (timestamp: number) => {
       const date = new Date(timestamp);
-      return xAxisFormat === 'long-term'
-        ? LONG_TERM_DATE_FORMATER.format(date).toUpperCase()
-        : DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
+      return xAxisFormat === 'with-time'
+        ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
+        : xAxisFormat === 'long-term'
+          ? LONG_TERM_DATE_FORMATER.format(date)
+          : '';
     },
     [xAxisFormat],
   );

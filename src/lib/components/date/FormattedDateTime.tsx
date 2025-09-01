@@ -54,10 +54,10 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   hour12: false,
 });
 
-export const LONG_TERM_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
-  year: '2-digit',
-  month: 'short',
-  day: 'numeric',
+export const LONG_TERM_DATE_FORMATER = Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
 });
 
 type FormattedDateTimeProps = {

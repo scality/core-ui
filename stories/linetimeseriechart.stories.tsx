@@ -64,6 +64,10 @@ const meta: Meta<typeof LineTimeSerieChart> = {
       options: ['default', 'percentage', 'symmetrical'],
     },
     yAxisTitle: { control: 'text' },
+    xAxisFormat: {
+      control: 'select',
+      options: ['with-time', 'long-term'],
+    },
   },
 };
 
@@ -425,6 +429,7 @@ export const PercentageChartExample: Story = {
     yAxisTitle: '',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    xAxisFormat: 'long-term',
   },
 };
 const UNIT_RANGE_BS = [
