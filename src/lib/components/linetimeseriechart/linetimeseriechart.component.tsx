@@ -23,7 +23,7 @@ import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
-  LONG_TERM_DATE_FORMATER,
+  YEAR_MONTH_DAY_FORMATTER,
 } from '../date/FormattedDateTime';
 
 const LineTemporalChartWrapper = styled.div`
@@ -413,7 +413,7 @@ export function LineTimeSerieChart({
       return timeFormat === 'date-time'
         ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
         : timeFormat === 'date'
-          ? LONG_TERM_DATE_FORMATER.format(date)
+          ? YEAR_MONTH_DAY_FORMATTER.format(date)
           : '';
     },
     [timeFormat],
