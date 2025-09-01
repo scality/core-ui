@@ -130,7 +130,12 @@ export type LineChartProps = (
     label: string;
   }[];
   isLoading?: boolean;
-  xAxisFormat?: 'with-time' | 'long-term';
+  /**
+   * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
+   * If you want to display the date only, you can set it to 'date' which is like 2025-09-01
+   * This will affect the format of the tooltip as well
+   */
+  timeFormat?: 'date-time' | 'date';
   yAxisTitle?: string;
   helpText?: string;
 };
@@ -140,6 +145,7 @@ const CustomTooltip = ({
   payload,
   label,
   unitLabel,
+  timeFormat,
 }: {
   active?: boolean;
   payload?: Array<{
@@ -150,6 +156,7 @@ const CustomTooltip = ({
   }>;
   label?: string;
   unitLabel?: string;
+  timeFormat?: 'date-time' | 'date';
 }) => {
   if (!active || !payload || !payload.length || !label) return null;
   // We can't use the default itemSorter method because it's a custom tooltip.
@@ -171,7 +178,11 @@ const CustomTooltip = ({
     <TooltipContainer>
       <TooltipTime>
         <FormattedDateTime
-          format="day-month-abbreviated-hour-minute-second"
+          format={
+            timeFormat === 'date-time'
+              ? 'day-month-abbreviated-hour-minute-second'
+              : 'long-date'
+          }
           value={new Date(label)}
         />
       </TooltipTime>
@@ -207,7 +218,7 @@ export function LineTimeSerieChart({
   duration,
   unitRange,
   isLoading = false,
-  xAxisFormat = 'with-time',
+  timeFormat = 'date-time',
   yAxisType = 'default',
   yAxisTitle,
   helpText,
@@ -399,13 +410,13 @@ export function LineTimeSerieChart({
   const formatXAxisLabel = useCallback(
     (timestamp: number) => {
       const date = new Date(timestamp);
-      return xAxisFormat === 'with-time'
+      return timeFormat === 'date-time'
         ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
-        : xAxisFormat === 'long-term'
+        : timeFormat === 'date'
           ? LONG_TERM_DATE_FORMATER.format(date)
           : '';
     },
-    [xAxisFormat],
+    [timeFormat],
   );
 
   return (
@@ -480,7 +491,11 @@ export function LineTimeSerieChart({
             }}
             tickFormatter={(value) => Math.round(value).toString()}
           />
-          <Tooltip content={<CustomTooltip unitLabel={unitLabel} />} />
+          <Tooltip
+            content={
+              <CustomTooltip unitLabel={unitLabel} timeFormat={timeFormat} />
+            }
+          />
           {/* Add horizontal line at y=0 for symmetrical charts */}
           {yAxisType === 'symmetrical' && (
             <ReferenceLine y={0} stroke={theme.border} />

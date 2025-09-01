@@ -64,9 +64,9 @@ const meta: Meta<typeof LineTimeSerieChart> = {
       options: ['default', 'percentage', 'symmetrical'],
     },
     yAxisTitle: { control: 'text' },
-    xAxisFormat: {
+    timeFormat: {
       control: 'select',
-      options: ['with-time', 'long-term'],
+      options: ['date-time', 'date'],
     },
   },
 };
@@ -409,6 +409,74 @@ const irregularIntervalData = [
   [1740424900, '46.92'], // +1100 seconds (18.3 minutes) - under 2 intervals
 ];
 
+// Data spanning several months - multi-month dataset
+const longTermPrometheusData: [number, string][] = [
+  // January 2025
+  [1735689600, '42.15'], // Jan 1, 2025
+  [1735776000, '38.92'], // Jan 2, 2025
+  [1735862400, '55.33'], // Jan 3, 2025
+  [1735948800, '67.88'], // Jan 4, 2025
+  [1736035200, '44.21'], // Jan 5, 2025
+  [1736121600, '72.15'], // Jan 6, 2025
+  [1736208000, '39.67'], // Jan 7, 2025
+  [1736294400, '58.44'], // Jan 8, 2025
+  [1736380800, '63.92'], // Jan 9, 2025
+  [1736467200, '41.33'], // Jan 10, 2025
+  [1736553600, '76.88'], // Jan 11, 2025
+  [1736640000, '52.15'], // Jan 12, 2025
+  [1736726400, '48.67'], // Jan 13, 2025
+  [1736812800, '69.33'], // Jan 14, 2025
+  [1736899200, '35.88'], // Jan 15, 2025
+  // February 2025
+  [1738368000, '81.15'], // Feb 1, 2025
+  [1738454400, '47.67'], // Feb 2, 2025
+  [1738540800, '54.33'], // Feb 3, 2025
+  [1738627200, '62.88'], // Feb 4, 2025
+  [1738713600, '38.15'], // Feb 5, 2025
+  [1738800000, '73.67'], // Feb 6, 2025
+  [1738886400, '45.33'], // Feb 7, 2025
+  [1738972800, '59.88'], // Feb 8, 2025
+  [1739059200, '51.15'], // Feb 9, 2025
+  [1739145600, '66.67'], // Feb 10, 2025
+  [1739232000, '43.33'], // Feb 11, 2025
+  [1739318400, '78.88'], // Feb 12, 2025
+  [1739404800, '36.15'], // Feb 13, 2025
+  [1739491200, '64.67'], // Feb 14, 2025
+  [1739577600, '49.33'], // Feb 15, 2025
+  // March 2025
+  [1740787200, '71.88'], // Mar 1, 2025
+  [1740873600, '42.15'], // Mar 2, 2025
+  [1740960000, '57.67'], // Mar 3, 2025
+  [1741046400, '68.33'], // Mar 4, 2025
+  [1741132800, '34.88'], // Mar 5, 2025
+  [1741219200, '75.15'], // Mar 6, 2025
+  [1741305600, '48.67'], // Mar 7, 2025
+  [1741392000, '53.33'], // Mar 8, 2025
+  [1741478400, '61.88'], // Mar 9, 2025
+  [1741564800, '37.15'], // Mar 10, 2025
+  [1741651200, '74.67'], // Mar 11, 2025
+  [1741737600, '44.33'], // Mar 12, 2025
+  [1741824000, '58.88'], // Mar 13, 2025
+  [1741910400, '52.15'], // Mar 14, 2025
+  [1741996800, '67.67'], // Mar 15, 2025
+  // April 2025
+  [1743465600, '41.33'], // Apr 1, 2025
+  [1743552000, '76.88'], // Apr 2, 2025
+  [1743638400, '35.15'], // Apr 3, 2025
+  [1743724800, '63.67'], // Apr 4, 2025
+  [1743811200, '50.33'], // Apr 5, 2025
+  [1743897600, '72.88'], // Apr 6, 2025
+  [1743984000, '39.15'], // Apr 7, 2025
+  [1744070400, '56.67'], // Apr 8, 2025
+  [1744156800, '65.33'], // Apr 9, 2025
+  [1744243200, '33.88'], // Apr 10, 2025
+  [1744329600, '77.15'], // Apr 11, 2025
+  [1744416000, '46.67'], // Apr 12, 2025
+  [1744502400, '54.33'], // Apr 13, 2025
+  [1744588800, '60.88'], // Apr 14, 2025
+  [1744675200, '49.22'], // Apr 15, 2025
+];
+
 export const PercentageChartExample: Story = {
   args: {
     series: [
@@ -429,7 +497,7 @@ export const PercentageChartExample: Story = {
     yAxisTitle: '',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-    xAxisFormat: 'long-term',
+    xAxisFormat: 'date-time',
   },
 };
 const UNIT_RANGE_BS = [
@@ -540,5 +608,29 @@ export const IrregularIntervalsExample: Story = {
     yAxisTitle: '',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+  },
+};
+
+export const DateFormatExample: Story = {
+  args: {
+    series: [
+      {
+        data: longTermPrometheusData,
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        metricPrefix: 'instance:10.160.122.207:9100',
+        getTooltipLabel: (prefix, resource) => `${resource}`,
+      },
+    ],
+    title: 'Long term data',
+    height: 200,
+    startingTimeStamp: longTermPrometheusData[0][0],
+    isLoading: false,
+    isLegendHidden: false,
+    helpText: 'This is the help text',
+    interval: 60 * 60 * 24, // 1 day
+    duration:
+      longTermPrometheusData[longTermPrometheusData.length - 1][0] -
+      longTermPrometheusData[0][0],
+    timeFormat: 'date',
   },
 };

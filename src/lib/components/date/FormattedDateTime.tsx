@@ -206,7 +206,7 @@ export const FormattedDateTime = ({
     case 'chart-date':
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
     case 'long-term-date':
-      return <>{LONG_TERM_DATE_FORMATER.format(value).toUpperCase()}</>;
+      return <>{LONG_TERM_DATE_FORMATER.format(value)}</>;
     default:
       return <></>;
   }
