@@ -937,7 +937,6 @@ export const Histogram: Story = {
         <ChartLegendWrapper
           colorSet={{
             Success: theme.statusHealthy,
-            Failed: theme.statusCritical,
           }}
         >
           <Barchart
@@ -945,6 +944,7 @@ export const Histogram: Story = {
             bars={histogramData}
             title="Histogram"
           />
+          <ChartLegend shape="rectangle" />
         </ChartLegendWrapper>
       </div>
     );

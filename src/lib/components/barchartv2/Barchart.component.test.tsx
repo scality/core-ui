@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { getWrapper } from '../../testUtils';
-import { Barchart, CustomTick, formatDate } from './Barchart.component';
+import { Barchart, CustomTick } from './Barchart.component';
 import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
 import React from 'react';
 

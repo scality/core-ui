@@ -428,35 +428,6 @@ export const sortStackedBars = (
   return barAverages.map(({ average, ...bar }) => bar);
 };
 
-export const renderTooltipContent = <T extends BarchartBars>(
-  props: TooltipContentProps<number, string>,
-  tooltip: BarchartTooltipFn<T> | undefined,
-  hoveredValue: string | undefined,
-) => {
-  const { active, payload, label } = props;
-
-  if (!active || !tooltip) {
-    return null;
-  }
-
-  const tooltipValues: {
-    label: T[number]['label'];
-    value: number;
-    isHovered: boolean;
-  }[] = payload.map((item) => ({
-    label: item.name,
-    value: item.value,
-    isHovered: item.name === hoveredValue,
-  }));
-
-  const currentPoint = {
-    category: label as string | number,
-    values: tooltipValues,
-  };
-
-  return tooltip(currentPoint);
-};
-
 /**
  * Filters both chart data and recharts bars to only include selected resources from legend
  * @param data - Array of chart data objects with category and resource values
@@ -536,5 +507,27 @@ export const useChartData = <T extends BarchartBars>(
     unitLabel,
     roundReferenceValue,
     rechartsData,
+  };
+};
+
+export const getCurrentPoint = <T extends BarchartBars>(
+  props: TooltipContentProps<number, string>,
+  hoveredValue: string | undefined,
+) => {
+  const { payload, label } = props;
+
+  const tooltipValues: {
+    label: T[number]['label'];
+    value: number;
+    isHovered: boolean;
+  }[] = payload.map((item) => ({
+    label: item.name,
+    value: item.value,
+    isHovered: item.name === hoveredValue,
+  }));
+
+  return {
+    category: label as string | number,
+    values: tooltipValues,
   };
 };
