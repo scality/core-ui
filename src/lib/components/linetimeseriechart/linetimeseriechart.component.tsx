@@ -493,6 +493,8 @@ export function LineTimeSerieChart({
               fontSize: fontSize.smaller,
             }}
             tickFormatter={(value) => Math.round(value).toString()}
+            tickCount={5}
+            interval={'preserveStartEnd'}
           />
           <Tooltip
             content={
