@@ -8,7 +8,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
@@ -23,6 +23,7 @@ import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
+  YEAR_MONTH_DAY_FORMATTER,
 } from '../date/FormattedDateTime';
 
 const LineTemporalChartWrapper = styled.div`
@@ -129,6 +130,12 @@ export type LineChartProps = (
     label: string;
   }[];
   isLoading?: boolean;
+  /**
+   * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
+   * If you want to display the date only, you can set it to 'date' which is like 2025-09-01
+   * This will affect the format of the tooltip as well
+   */
+  timeFormat?: 'date-time' | 'date';
   yAxisTitle?: string;
   helpText?: string;
 };
@@ -138,6 +145,7 @@ const CustomTooltip = ({
   payload,
   label,
   unitLabel,
+  timeFormat,
 }: {
   active?: boolean;
   payload?: Array<{
@@ -148,6 +156,7 @@ const CustomTooltip = ({
   }>;
   label?: string;
   unitLabel?: string;
+  timeFormat?: 'date-time' | 'date';
 }) => {
   if (!active || !payload || !payload.length || !label) return null;
   // We can't use the default itemSorter method because it's a custom tooltip.
@@ -169,7 +178,11 @@ const CustomTooltip = ({
     <TooltipContainer>
       <TooltipTime>
         <FormattedDateTime
-          format="day-month-abbreviated-hour-minute-second"
+          format={
+            timeFormat === 'date-time'
+              ? 'day-month-abbreviated-hour-minute-second'
+              : 'long-date'
+          }
           value={new Date(label)}
         />
       </TooltipTime>
@@ -205,6 +218,7 @@ export function LineTimeSerieChart({
   duration,
   unitRange,
   isLoading = false,
+  timeFormat = 'date-time',
   yAxisType = 'default',
   yAxisTitle,
   helpText,
@@ -393,12 +407,16 @@ export function LineTimeSerieChart({
   }, [series, getColor]);
 
   // Format time for display the tick in the x axis
-  const formatTime = useMemo(
-    () => (timestamp: number) => {
+  const formatXAxisLabel = useCallback(
+    (timestamp: number) => {
       const date = new Date(timestamp);
-      return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
+      return timeFormat === 'date-time'
+        ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
+        : timeFormat === 'date'
+          ? YEAR_MONTH_DAY_FORMATTER.format(date)
+          : '';
     },
-    [],
+    [timeFormat],
   );
 
   return (
@@ -438,7 +456,7 @@ export function LineTimeSerieChart({
             type="number"
             domain={['dataMin', 'dataMax']}
             ticks={xAxisTicks}
-            tickFormatter={formatTime}
+            tickFormatter={formatXAxisLabel}
             tickCount={5}
             tick={{
               fill: theme.textSecondary,
@@ -473,7 +491,11 @@ export function LineTimeSerieChart({
             }}
             tickFormatter={(value) => Math.round(value).toString()}
           />
-          <Tooltip content={<CustomTooltip unitLabel={unitLabel} />} />
+          <Tooltip
+            content={
+              <CustomTooltip unitLabel={unitLabel} timeFormat={timeFormat} />
+            }
+          />
           {/* Add horizontal line at y=0 for symmetrical charts */}
           {yAxisType === 'symmetrical' && (
             <ReferenceLine y={0} stroke={theme.border} />

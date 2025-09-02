@@ -54,6 +54,16 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   hour12: false,
 });
 
+/**
+ * @description Year month day formatter, without time. Used for describing long term date.
+ * @example 2025-01-01
+ */
+export const YEAR_MONTH_DAY_FORMATTER = Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -65,7 +75,8 @@ type FormattedDateTimeProps = {
     | 'day-month-abbreviated-hour-minute'
     | 'day-month-abbreviated-hour-minute-second'
     | 'long-date'
-    | 'chart-date';
+    | 'chart-date'
+    | 'year-month-day';
 
   value: Date;
 };
@@ -198,6 +209,8 @@ export const FormattedDateTime = ({
       return <>{LONG_DATE_FORMATER.format(value)}</>;
     case 'chart-date':
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
+    case 'year-month-day':
+      return <>{YEAR_MONTH_DAY_FORMATTER.format(value)}</>;
     default:
       return <></>;
   }
