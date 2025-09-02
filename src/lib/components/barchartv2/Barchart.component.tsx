@@ -14,13 +14,14 @@ import styled, { useTheme } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { chartColors, ChartColors, fontSize } from '../../style/theme';
 import { Box } from '../box/Box';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
+import { FormattedDateTime } from '../date/FormattedDateTime';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
-import { renderTooltipContent, UnitRange, useChartData } from './utils';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { FormattedDateTime } from '../date/FormattedDateTime';
+import { ChartTooltip } from './ChartTooltip';
+import { UnitRange, useChartData } from './utils';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 5,
@@ -344,6 +345,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                   fill={chartColors[fill] || fill}
                   minPointSize={stacked ? 0 : CHART_CONSTANTS.MIN_POINT_SIZE}
                   stackId={stackId}
+                  isAnimationActive={false}
                   onMouseOver={() => setHoveredValue(dataKey)}
                   onMouseLeave={() => setHoveredValue(undefined)}
                 />
@@ -390,9 +392,15 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             />
 
             <Tooltip
-              content={(props: TooltipContentProps<number, string>) =>
-                renderTooltipContent(props, tooltip, hoveredValue)
-              }
+              content={(props: TooltipContentProps<number, string>) => (
+                <ChartTooltip
+                  type={type}
+                  colorSet={colorSet}
+                  tooltipProps={props}
+                  hoveredValue={hoveredValue}
+                  tooltip={tooltip}
+                />
+              )}
               cursor={false}
             />
           </BarChart>

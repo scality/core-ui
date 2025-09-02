@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { Text } from '../text/Text.component';
-import { BarchartBars } from './Barchart.component';
+import {
+  BarchartBars,
+  BarchartTooltipFn,
+  CategoryType,
+  TimeType,
+} from './Barchart.component';
 import { fontSize, fontWeight } from '../../style/theme';
 import { LegendShape } from '../chartlegend/ChartLegend';
 import { FormattedDateTime } from '../date/FormattedDateTime';
+import { TooltipContentProps } from 'recharts';
+import { getCurrentPoint } from './utils';
 
 export const ChartTooltipContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundLevel1};
@@ -30,24 +37,45 @@ export const ChartTooltipItem = styled.div<{ isHovered: boolean }>`
 
 export const ChartTooltip = <T extends BarchartBars>({
   type,
-  currentPoint,
+  tooltipProps,
   colorSet,
+  hoveredValue,
+  tooltip,
 }: {
-  type: 'time' | 'category';
-  currentPoint: {
-    category: string | number;
-    values: { label: T[number]['label']; value: number; isHovered: boolean }[];
-  };
-  colorSet: Record<string, string>;
+  type: TimeType | CategoryType;
+  tooltipProps: TooltipContentProps<number, string>;
+  colorSet?: Record<string, string>;
+  hoveredValue: string | undefined;
+  tooltip?: BarchartTooltipFn<T>;
 }) => {
+  const { active } = tooltipProps;
+
+  if (!active) {
+    return null;
+  }
+
+  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue);
+  if (tooltip) {
+    return tooltip(currentPoint);
+  }
+
   return (
     <ChartTooltipContainer>
       <Text isEmphazed>
-        {type === 'time' ? (
-          <FormattedDateTime
-            format="long-date"
-            value={new Date(currentPoint.category)}
-          />
+        {type.type === 'time' ? (
+          <>
+            <FormattedDateTime
+              format="long-date"
+              value={new Date(currentPoint.category)}
+            />{' '}
+            {type.type === 'time' &&
+              type.timeRange.interval < 24 * 60 * 60 * 1000 && (
+                <FormattedDateTime
+                  format="time"
+                  value={new Date(currentPoint.category)}
+                />
+              )}
+          </>
         ) : (
           currentPoint.category
         )}
@@ -55,13 +83,15 @@ export const ChartTooltip = <T extends BarchartBars>({
       <Stack direction="vertical" gap="r8" style={{ width: '100%' }}>
         {currentPoint.values.map((value) => {
           return (
-            <Wrap key={value.label}>
+            <Wrap key={value.label} gap={spacing.r32}>
               <ChartTooltipItem isHovered={value.isHovered}>
-                <LegendShape
-                  color={colorSet[value.label as keyof typeof colorSet]}
-                  shape="rectangle"
-                  chartColors={colorSet}
-                />
+                {colorSet && (
+                  <LegendShape
+                    color={colorSet[value.label as keyof typeof colorSet]}
+                    shape="rectangle"
+                    chartColors={colorSet}
+                  />
+                )}
                 {value.label}
               </ChartTooltipItem>
               <ChartTooltipItem isHovered={value.isHovered}>

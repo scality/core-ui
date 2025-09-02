@@ -4,9 +4,9 @@ import {
   computeUnitLabelAndRoundReferenceValue,
   filterChartDataAndBarsByLegendSelection,
   formatPrometheusDataToRechartsDataAndBars,
+  getCurrentPoint,
   getMaxBarValue,
   getRoundReferenceValue,
-  renderTooltipContent,
   sortStackedBars,
   transformCategoryData,
   transformTimeData,
@@ -770,53 +770,38 @@ describe('sortStackedBars', () => {
   });
 });
 
-describe('renderTooltipContent', () => {
-  it('should return null when active is false', () => {
-    const props = {
-      active: false,
-      payload: [],
-      label: 'test',
-      coordinate: { x: 0, y: 0 },
-      accessibilityLayer: false,
-    };
-    const result = renderTooltipContent(props, undefined, undefined);
-    expect(result).toBeNull();
-  });
-
-  it('should return null when tooltip is undefined', () => {
-    const props = {
-      active: true,
-      payload: [{ name: 'test', value: 10 }],
-      label: 'test',
-      coordinate: { x: 0, y: 0 },
-      accessibilityLayer: false,
-    };
-    const result = renderTooltipContent(props, undefined, 'test');
-    expect(result).toBeNull();
-  });
-  it('should call tooltip with the correct props', () => {
-    const tooltip = jest.fn();
-    const props = {
-      active: true,
-      payload: [
-        { name: 'Success', value: 10 },
-        { name: 'Failed', value: 20 },
-      ],
-      label: 'Test',
-      coordinate: { x: 0, y: 0 },
-      accessibilityLayer: false,
-    };
-    renderTooltipContent(props, tooltip, 'Success');
-    expect(tooltip).toHaveBeenCalledWith({
+describe('getCurrentPoint', () => {
+  it('should return the current point', () => {
+    const result = getCurrentPoint(
+      {
+        payload: [{ name: 'Success', value: 10 }],
+        label: 'Test',
+        coordinate: { x: 10, y: 10 },
+        active: true,
+        accessibilityLayer: false,
+      },
+      'Success',
+    );
+    expect(result).toEqual({
       category: 'Test',
-      values: [
-        { label: 'Success', value: 10, isHovered: true },
-        { label: 'Failed', value: 20, isHovered: false },
-      ],
+      values: [{ label: 'Success', value: 10, isHovered: true }],
+    });
+    const result2 = getCurrentPoint(
+      {
+        payload: [{ name: 'Success', value: 10 }],
+        label: 'Test',
+        coordinate: { x: 10, y: 10 },
+        active: true,
+        accessibilityLayer: false,
+      },
+      'Failed',
+    );
+    expect(result2).toEqual({
+      category: 'Test',
+      values: [{ label: 'Success', value: 10, isHovered: false }],
     });
   });
 });
-
 describe('filterChartDataAndBarsByLegendSelection', () => {
   const mockChartData = [
     { category: 'Jan', Success: 10, Failed: 5, Warning: 3, Pending: 2 },

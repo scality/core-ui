@@ -1,8 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { getWrapper } from '../../testUtils';
-import { Barchart, CustomTick, formatDate } from './Barchart.component';
+import { Barchart, CustomTick } from './Barchart.component';
 import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
 import React from 'react';
+import * as ChartTooltip from './ChartTooltip';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
