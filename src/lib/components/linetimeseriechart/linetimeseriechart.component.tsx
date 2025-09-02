@@ -305,7 +305,7 @@ export function LineTimeSerieChart({
     );
   }, [series, startingTimeStamp, duration, interval, yAxisType]);
 
-  // Calculate 5 perfectly evenly spaced ticks
+  // Calculate evenly spaced ticks that avoid the very beginning and end
   const xAxisTicks = useMemo(() => {
     if (!chartData || chartData.length === 0) return [];
 
@@ -313,20 +313,23 @@ export function LineTimeSerieChart({
     const minTimestamp = Math.min(...timestamps);
     const maxTimestamp = Math.max(...timestamps);
 
-    // Calculate 5 perfectly evenly spaced ticks
     const timeRange = maxTimestamp - minTimestamp;
-    const interval = timeRange / 4; // 4 intervals create 5 points
+    // Add padding to avoid labels at the very edges (10% padding on each side)
+    const padding = timeRange * 0.1;
+    const paddedStart = minTimestamp + padding;
+    const paddedEnd = maxTimestamp - padding;
+    const paddedRange = paddedEnd - paddedStart;
 
-    const exactEvenTicks = [
-      minTimestamp,
-      minTimestamp + interval,
-      minTimestamp + interval * 2,
-      minTimestamp + interval * 3,
-      maxTimestamp,
-    ];
+    // Create 5 evenly spaced ticks within the padded range
+    const numTicks = 5;
+    const tickInterval = paddedRange / (numTicks - 1);
 
-    // Return perfectly even ticks (guaranteed to be evenly divided)
-    return exactEvenTicks;
+    const evenlySpacedTicks = Array.from(
+      { length: numTicks },
+      (_, index) => paddedStart + index * tickInterval,
+    );
+
+    return evenlySpacedTicks;
   }, [chartData]);
 
   // 3. Transform the data base on the valuebase
