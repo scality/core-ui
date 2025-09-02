@@ -319,7 +319,7 @@ describe('Barchart', () => {
           <Barchart
             type={{ type: 'category' }}
             bars={testStackedBars}
-            stacked={true}
+            stacked
           />
         </ChartLegendWrapper>
       </Wrapper>,

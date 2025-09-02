@@ -950,3 +950,59 @@ export const Histogram: Story = {
     );
   },
 };
+
+export const StackedHistogram: Story = {
+  render: () => {
+    const histogramData = [
+      {
+        label: 'Test 1',
+        data: [
+          ['0-10', 1],
+          ['10-20', 5],
+          ['20-30', 15],
+          ['30-40', 40],
+          ['40-50', 45],
+          ['50-60', 50],
+          ['60-70', 40],
+          ['70-80', 15],
+          ['80-90', 5],
+          ['90-100', 1],
+        ],
+      },
+      {
+        label: 'Test 2',
+        data: [
+          ['0-10', 1],
+          ['10-20', 2],
+          ['20-30', 4],
+          ['30-40', 4],
+          ['40-50', 5],
+          ['50-60', 6],
+          ['60-70', 6],
+          ['70-80', 3],
+          ['80-90', 2],
+          ['90-100', 1],
+        ],
+      },
+    ] as const;
+    const theme = useTheme() as CoreUITheme;
+    return (
+      <div style={{ width: '50%', padding: spacing.r16 }}>
+        <ChartLegendWrapper
+          colorSet={{
+            'Test 1': theme.statusHealthy,
+            'Test 2': theme.statusWarning,
+          }}
+        >
+          <Barchart
+            type={{ type: 'category', gap: 0 }}
+            bars={histogramData}
+            title="Stacked Histogram"
+            stacked
+          />
+          <ChartLegend shape="rectangle" />
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
