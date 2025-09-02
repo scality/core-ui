@@ -25,6 +25,7 @@ import {
   FormattedDateTime,
   YEAR_MONTH_DAY_FORMATTER,
 } from '../date/FormattedDateTime';
+import { Box } from '../box/Box';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -429,12 +430,14 @@ export function LineTimeSerieChart({
           {title} {unitLabel && `(${unitLabel})`}
         </ChartTitleText>
         {helpText && (
-          <TooltipComponent
-            placement={'right'}
-            overlay={<SmallerText>{helpText}</SmallerText>}
-          >
-            <Icon name="Info" color={theme.buttonSecondary} />
-          </TooltipComponent>
+          <Box ml={spacing.r4}>
+            <TooltipComponent
+              placement={'right'}
+              overlay={<SmallerText>{helpText}</SmallerText>}
+            >
+              <Icon name="Info" color={theme.buttonSecondary} />
+            </TooltipComponent>
+          </Box>
         )}
         {isLoading && <Loader />}
       </ChartHeader>
