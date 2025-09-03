@@ -24,6 +24,7 @@ import {
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
   FormattedDateTime,
   YEAR_MONTH_DAY_FORMATTER,
+  MONTH_DAY_FORMATTER,
 } from '../date/FormattedDateTime';
 import { Box } from '../box/Box';
 
@@ -414,13 +415,33 @@ export function LineTimeSerieChart({
   const formatXAxisLabel = useCallback(
     (timestamp: number) => {
       const date = new Date(timestamp);
-      return timeFormat === 'date-time'
-        ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
-        : timeFormat === 'date'
-          ? YEAR_MONTH_DAY_FORMATTER.format(date)
-          : '';
+
+      if (timeFormat === 'date-time') {
+        return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
+      } else if (timeFormat === 'date') {
+        // Calculate the time range to determine format
+        if (chartData && chartData.length > 0) {
+          const timestamps = chartData.map((d) => d.timestamp);
+          const minTimestamp = Math.min(...timestamps);
+          const maxTimestamp = Math.max(...timestamps);
+          const timeRangeSeconds = maxTimestamp - minTimestamp;
+
+          const oneYearSeconds = 366 * 24 * 60 * 60;
+
+          // If time range is greater than 1 year, use YYYY-MM-DD format
+          // Otherwise, use MM-DD format
+          return timeRangeSeconds > oneYearSeconds
+            ? YEAR_MONTH_DAY_FORMATTER.format(date)
+            : MONTH_DAY_FORMATTER.format(date);
+        }
+
+        // Fallback to YYYY-MM-DD format if chartData is not available
+        return YEAR_MONTH_DAY_FORMATTER.format(date);
+      }
+
+      return '';
     },
-    [timeFormat],
+    [timeFormat, chartData],
   );
 
   return (

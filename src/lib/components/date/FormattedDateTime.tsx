@@ -64,6 +64,15 @@ export const YEAR_MONTH_DAY_FORMATTER = Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 });
 
+/**
+ * @description Month day formatter, without year. Used for short term date ranges.
+ * @example 01-15
+ */
+export const MONTH_DAY_FORMATTER = Intl.DateTimeFormat('en-CA', {
+  month: '2-digit',
+  day: '2-digit',
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -76,7 +85,8 @@ type FormattedDateTimeProps = {
     | 'day-month-abbreviated-hour-minute-second'
     | 'long-date'
     | 'chart-date'
-    | 'year-month-day';
+    | 'year-month-day'
+    | 'month-day';
 
   value: Date;
 };
@@ -211,6 +221,8 @@ export const FormattedDateTime = ({
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
     case 'year-month-day':
       return <>{YEAR_MONTH_DAY_FORMATTER.format(value)}</>;
+    case 'month-day':
+      return <>{MONTH_DAY_FORMATTER.format(value)}</>;
     default:
       return <></>;
   }
