@@ -8,6 +8,16 @@ export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
 });
 
+/**
+ * @description Long date formatter, without weekday.
+ * @example 01 September 2025
+ */
+export const LONG_DATE_FORMATER_WITHOUT_WEEKDAY = Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+});
+
 export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   year: 'numeric',
   month: '2-digit',
@@ -84,6 +94,7 @@ type FormattedDateTimeProps = {
     | 'day-month-abbreviated-hour-minute'
     | 'day-month-abbreviated-hour-minute-second'
     | 'long-date'
+    | 'long-date-without-weekday'
     | 'chart-date'
     | 'year-month-day'
     | 'month-day';
@@ -217,6 +228,8 @@ export const FormattedDateTime = ({
       );
     case 'long-date':
       return <>{LONG_DATE_FORMATER.format(value)}</>;
+    case 'long-date-without-weekday':
+      return <>{LONG_DATE_FORMATER_WITHOUT_WEEKDAY.format(value)}</>;
     case 'chart-date':
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
     case 'year-month-day':

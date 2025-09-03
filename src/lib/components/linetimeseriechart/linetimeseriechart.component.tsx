@@ -183,7 +183,7 @@ const CustomTooltip = ({
           format={
             timeFormat === 'date-time'
               ? 'day-month-abbreviated-hour-minute-second'
-              : 'long-date'
+              : 'long-date-without-weekday'
           }
           value={new Date(label)}
         />
