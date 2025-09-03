@@ -1,113 +1,148 @@
-import { Bar, BarChart, XAxis, YAxis, Tooltip, Rectangle } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Rectangle,
+  ResponsiveContainer,
+  BarProps,
+} from 'recharts';
 import { useTheme } from 'styled-components';
-import { useEffect, useState } from 'react';
-import { useHistoryAlert } from './HistoryProvider';
-import { getDataListOptions, getRadius, getTickFormatter } from './utils';
-import { HistoryAlertSlider } from './HistorySlider';
+import { useState, useMemo, useCallback } from 'react';
+import { getTickFormatter, getTicks } from './utils';
 import { CustomTooltip } from './CustomTooltip';
+import { RectRadius } from 'recharts/types/shape/Rectangle';
 
-export type GlobalHealthProps = {
+export interface Alert {
+  description: string;
+  startsAt: string;
+  endsAt: string;
+  severity: 'warning' | 'critical';
+}
+
+export interface GlobalHealthProps {
   id: string;
-  alerts: {
-    description: string;
-    startsAt: string;
-    endsAt: string;
-    severity: string;
-  }[];
-  start: string;
-  end: string;
-};
-const barWidth = 600; // width of the bar chart
+  alerts: Alert[];
+  start: Date;
+  end: Date;
+  width: number;
+}
 
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
-  const history = useHistoryAlert();
-  const [tooltipData, setTooltipData] = useState(null);
+  const [tooltipData, setTooltipData] = useState<Alert | null>(null);
   const theme = useTheme();
+  const startTimestamp = new Date(start).getTime();
+  const endTimestamp = new Date(end).getTime();
 
-  useEffect(() => {
-    if (history.selectedDate === 0) {
-      history.setSelectedDate(endDate);
-    }
+  const data = useMemo(
+    () => [
+      {
+        start: startTimestamp,
+        end: endTimestamp,
+        range: [startTimestamp, endTimestamp],
+        ...alerts.reduce((acc, alert, index) => {
+          // Use alert index with severity to create unique keys
+          // To use for the bars dataKey
+          // Bars format is: dataKey: [startTimestamp, endTimestamp]
+          const uniqueKey = `${alert.severity}_${index}`;
+
+          acc[uniqueKey] = [
+            new Date(alert.startsAt).getTime(),
+            new Date(alert.endsAt).getTime(),
+          ];
+          // Add the alert to the data for the tooltip
+          acc[`alert_${uniqueKey}`] = {
+            ...alert,
+          };
+
+          return acc;
+        }, {}),
+
+        id,
+      },
+    ],
+    [alerts, startTimestamp, endTimestamp, id],
+  );
+
+  // Separate keys for warning, critical, and unavailable to map to the different bars
+  const { warningKeys, criticalKeys, unavailableKeys } = useMemo(() => {
+    const dataKeys = Object.keys(data[0]);
+    return {
+      warningKeys: dataKeys.filter((key) => key.startsWith('warning')),
+      criticalKeys: dataKeys.filter((key) => key.startsWith('critical')),
+      unavailableKeys: dataKeys.filter((key) => key.startsWith('unavailable')),
+    };
+  }, [data]);
+
+  // Render the bars
+  const rectangleRenderer = useCallback(
+    (props: any, key: string) => {
+      const { x, background } = props;
+      // background is the bar representing healthy status
+      // background starts at 5, takes all the width of the chart
+      let startX = background.x;
+      const width = background.width;
+
+      // get the start and end of the alert
+      const alertStartTimestamp = props[key][0];
+      const alertEndTimestamp = props[key][1];
+
+      // Calculate the relative size of the alert bar
+      // Cut the alert bar at the start and end of the chart
+      const start = Math.max(alertStartTimestamp, startTimestamp);
+      const end = Math.min(alertEndTimestamp, endTimestamp);
+      const relativeSize = (end - start) / (endTimestamp - startTimestamp);
+      if (alertStartTimestamp > startTimestamp) {
+        startX = x;
+      }
+      // width of the bar is the relative size of the alert
+      const rectWidth = relativeSize * width;
+
+      const RADIUS_SIZE = 5;
+      const EDGE_THRESHOLD = 10;
+
+      // Add radius when the bar is at the start or end of the chart
+      // So we don't have a sharp edge when bar edge are rounded
+      const leftRadius = x < EDGE_THRESHOLD ? RADIUS_SIZE : 0;
+      const rightRadius =
+        x + rectWidth >= width - EDGE_THRESHOLD ? RADIUS_SIZE : 0;
+      const radius = [leftRadius, rightRadius, rightRadius, leftRadius];
+      return (
+        <Rectangle
+          {...props}
+          x={startX}
+          width={rectWidth}
+          radius={radius as RectRadius}
+        ></Rectangle>
+      );
+    },
+    [startTimestamp, endTimestamp],
+  );
+
+  const handlePointerEnter = useCallback(
+    (key: string) => {
+      setTooltipData(data[0][`alert_${key}`]);
+    },
+    [data],
+  );
+
+  const handlePointerLeave = useCallback(() => {
+    setTooltipData(null);
   }, []);
 
-  const startDate = new Date(start).getTime();
-  const endDate = new Date(end).getTime();
-
-  const data = [
-    {
-      start: startDate,
-      end: endDate,
-      range: [startDate, endDate],
-      ...alerts.reduce((acc, alert, index) => {
-        const key = `${alert.severity}${index}`;
-        acc['range' + key] = [
-          new Date(alert.startsAt).getTime(),
-          new Date(alert.endsAt).getTime(),
-        ];
-        acc[`${key}Severity`] = alert.severity;
-        acc[`${key}Description`] = alert.description;
-        return acc;
-      }, {}),
-      id,
-    },
-  ];
-  const warningKeys = Object.keys(data[0]).filter((key) =>
-    key.startsWith('rangewarning'),
-  );
-  const criticalKeys = Object.keys(data[0]).filter((key) =>
-    key.startsWith('rangecritical'),
-  );
-
-  const rectangleRenderer = (props, key) => {
-    const { x, y, height, fill } = props;
-
-    const start = props[key][0] < startDate ? startDate : props[key][0];
-    const end = props[key][1] > endDate ? endDate : props[key][1];
-    const relativeSize = (end - start) / (endDate - startDate);
-    return (
-      <Rectangle
-        x={x < 0 ? 0 : x}
-        y={y}
-        width={relativeSize * barWidth}
-        height={height}
-        fill={fill}
-        radius={getRadius(start, end, startDate, endDate)}
-      ></Rectangle>
-    );
-  };
-
   return (
-    <div
-      style={{
-        padding: 60,
-        position: 'relative',
-        width: '100%',
-      }}
-    >
-      <HistoryAlertSlider
-        start={start}
-        end={end}
-        startDate={startDate}
-        endDate={endDate}
-      />
-
-      <BarChart
-        width={barWidth}
-        height={60}
-        data={data}
-        layout="vertical"
-        margin={{ left: 0, right: 0, bottom: 10 }}
-        maxBarSize={barWidth}
-      >
+    <ResponsiveContainer width={'100%'} height={50}>
+      <BarChart data={data} layout="vertical" barSize={8} accessibilityLayer>
         <XAxis
           allowDataOverflow={true}
           dataKey="start"
           type="number"
-          domain={[new Date(start).getTime(), new Date(end).getTime()]}
-          tickSize={8}
+          domain={[startTimestamp, endTimestamp]}
+          tickSize={5}
           minTickGap={0}
           interval={0}
-          ticks={getDataListOptions(startDate, endDate)}
+          ticks={getTicks(startTimestamp, endTimestamp)}
           tick={(props) => {
             const { x, y, payload } = props;
             return (
@@ -121,8 +156,8 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
                   fontSize={11}
                 >
                   {getTickFormatter(
-                    startDate,
-                    endDate,
+                    startTimestamp,
+                    endTimestamp,
                     new Date(payload.value),
                   )}
                 </text>
@@ -132,41 +167,55 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
           tickLine={{ stroke: theme.textSecondary }}
           axisLine={false}
         />
-        {!history.selectedDate && (
-          <Tooltip
-            allowEscapeViewBox={{ x: true, y: true }}
-            offset={20}
-            isAnimationActive={false}
-            cursor={false}
-            content={<CustomTooltip tooltipData={tooltipData}></CustomTooltip>}
-          />
-        )}
+
+        <Tooltip
+          allowEscapeViewBox={{ x: true, y: true }}
+          offset={20}
+          isAnimationActive={false}
+          cursor={false}
+          content={<CustomTooltip tooltipData={tooltipData}></CustomTooltip>}
+        />
 
         <YAxis yAxisId={'background'} type="category" hide />
+
         <YAxis yAxisId="clip" type="category" hide></YAxis>
-        {[...criticalKeys, ...warningKeys].map((key) => (
+        {[...criticalKeys, ...warningKeys, ...unavailableKeys].map((key) => (
           <YAxis key={`yAxis${key}`} yAxisId={key} type="category" hide />
         ))}
 
         <Bar
           dataKey="range"
           fill={theme.statusHealthy}
-          radius={15}
+          radius={5}
           yAxisId="background"
           isAnimationActive={false}
         />
+
+        {unavailableKeys.map((key) => (
+          <Bar
+            dataKey={key}
+            yAxisId={key}
+            key={key}
+            fill={theme.textSecondary}
+            shape={(props) => rectangleRenderer(props, key)}
+            onPointerEnter={() => {
+              handlePointerEnter(key);
+            }}
+            onPointerLeave={() => handlePointerLeave()}
+          />
+        ))}
 
         {warningKeys.map((key) => (
           <Bar
             dataKey={key}
             yAxisId={key}
             key={key}
-            onPointerEnter={(e) => {
-              setTooltipData(e.tooltipPayload);
+            onPointerEnter={() => {
+              handlePointerEnter(key);
             }}
-            onPointerLeave={() => setTooltipData(null)}
+            onPointerLeave={() => handlePointerLeave()}
             fill={theme.statusWarning}
-            shape={(props) => rectangleRenderer(props, key)}
+            shape={(props: BarProps) => rectangleRenderer(props, key)}
           ></Bar>
         ))}
 
@@ -176,15 +225,14 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
             yAxisId={key}
             key={key}
             fill={theme.statusCritical}
-            radius={15}
-            onPointerEnter={(e) => {
-              setTooltipData(e.tooltipPayload);
+            onPointerEnter={() => {
+              handlePointerEnter(key);
             }}
-            onPointerLeave={() => setTooltipData(null)}
-            shape={(props) => rectangleRenderer(props, key)}
+            onPointerLeave={() => handlePointerLeave()}
+            shape={(props: BarProps) => rectangleRenderer(props, key)}
           />
         ))}
       </BarChart>
-    </div>
+    </ResponsiveContainer>
   );
 }
