@@ -20,13 +20,9 @@ import { spacing } from '../../spacing';
 import { getUnitLabel } from '../linetemporalchart/ChartUtil';
 import { Icon } from '../icon/Icon.component';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
-import {
-  DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
-  FormattedDateTime,
-  YEAR_MONTH_DAY_FORMATTER,
-  MONTH_DAY_FORMATTER,
-} from '../date/FormattedDateTime';
+import { FormattedDateTime } from '../date/FormattedDateTime';
 import { Box } from '../box/Box';
+import { formatXAxisLabel } from './utils';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -412,35 +408,8 @@ export function LineTimeSerieChart({
   }, [series, getColor]);
 
   // Format time for display the tick in the x axis
-  const formatXAxisLabel = useCallback(
-    (timestamp: number) => {
-      const date = new Date(timestamp);
-
-      if (timeFormat === 'date-time') {
-        return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
-      } else if (timeFormat === 'date') {
-        // Calculate the time range to determine format
-        if (chartData && chartData.length > 0) {
-          const timestamps = chartData.map((d) => d.timestamp);
-          const minTimestamp = Math.min(...timestamps);
-          const maxTimestamp = Math.max(...timestamps);
-          const timeRangeSeconds = maxTimestamp - minTimestamp;
-
-          const oneYearSeconds = 366 * 24 * 60 * 60;
-
-          // If time range is greater than 1 year, use YYYY-MM-DD format
-          // Otherwise, use MM-DD format
-          return timeRangeSeconds > oneYearSeconds
-            ? YEAR_MONTH_DAY_FORMATTER.format(date)
-            : MONTH_DAY_FORMATTER.format(date);
-        }
-
-        // Fallback to YYYY-MM-DD format if chartData is not available
-        return YEAR_MONTH_DAY_FORMATTER.format(date);
-      }
-
-      return '';
-    },
+  const formatXAxisLabelCallback = useCallback(
+    (timestamp: number) => formatXAxisLabel(timestamp, timeFormat, chartData),
     [timeFormat, chartData],
   );
 
@@ -483,7 +452,7 @@ export function LineTimeSerieChart({
             type="number"
             domain={['dataMin', 'dataMax']}
             ticks={xAxisTicks}
-            tickFormatter={formatXAxisLabel}
+            tickFormatter={formatXAxisLabelCallback}
             tickCount={5}
             tick={{
               fill: theme.textSecondary,
