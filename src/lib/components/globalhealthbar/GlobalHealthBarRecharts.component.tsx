@@ -14,6 +14,16 @@ import { getTickFormatter, getTicks } from './utils';
 import { CustomTooltip } from './CustomTooltip';
 import { RectRadius } from 'recharts/types/shape/Rectangle';
 
+const RADIUS_SIZE = 5;
+const EDGE_THRESHOLD = 10;
+const CHART_HEIGHT = 50;
+const BAR_SIZE = 8;
+const TICK_SIZE = 5;
+const TOOLTIP_OFFSET = 20;
+const FONT_SIZE = 11;
+const TEXT_DY_OFFSET = 12;
+const TICK_INTERVAL = 0;
+
 export interface Alert {
   description: string;
   startsAt: string;
@@ -42,8 +52,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         end: endTimestamp,
         range: [startTimestamp, endTimestamp],
         ...alerts.reduce((acc, alert, index) => {
-          // Use alert index with severity to create unique keys
-          // To use for the bars dataKey
+          // Use alert index with severity to create unique keys for bars dataKey
           // Bars format is: dataKey: [startTimestamp, endTimestamp]
           const uniqueKey = `${alert.severity}_${index}`;
 
@@ -99,9 +108,6 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       // width of the bar is the relative size of the alert
       const rectWidth = relativeSize * width;
 
-      const RADIUS_SIZE = 5;
-      const EDGE_THRESHOLD = 10;
-
       // Add radius when the bar is at the start or end of the chart
       // So we don't have a sharp edge when bar edge are rounded
       const leftRadius = x < EDGE_THRESHOLD ? RADIUS_SIZE : 0;
@@ -132,16 +138,21 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   }, []);
 
   return (
-    <ResponsiveContainer width={'100%'} height={50}>
-      <BarChart data={data} layout="vertical" barSize={8} accessibilityLayer>
+    <ResponsiveContainer width={'100%'} height={CHART_HEIGHT}>
+      <BarChart
+        data={data}
+        layout="vertical"
+        barSize={BAR_SIZE}
+        accessibilityLayer
+      >
         <XAxis
           allowDataOverflow={true}
           dataKey="start"
           type="number"
           domain={[startTimestamp, endTimestamp]}
-          tickSize={5}
+          tickSize={TICK_SIZE}
           minTickGap={0}
-          interval={0}
+          interval={TICK_INTERVAL}
           ticks={getTicks(startTimestamp, endTimestamp)}
           tick={(props) => {
             const { x, y, payload } = props;
@@ -150,10 +161,10 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
                 <text
                   x={0}
                   y={0}
-                  dy={12}
+                  dy={TEXT_DY_OFFSET}
                   textAnchor={'middle'}
                   fill={theme.textSecondary}
-                  fontSize={11}
+                  fontSize={FONT_SIZE}
                 >
                   {getTickFormatter(
                     startTimestamp,
@@ -170,7 +181,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
 
         <Tooltip
           allowEscapeViewBox={{ x: true, y: true }}
-          offset={20}
+          offset={TOOLTIP_OFFSET}
           isAnimationActive={false}
           cursor={false}
           content={<CustomTooltip tooltipData={tooltipData}></CustomTooltip>}
@@ -186,7 +197,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         <Bar
           dataKey="range"
           fill={theme.statusHealthy}
-          radius={5}
+          radius={RADIUS_SIZE}
           yAxisId="background"
           isAnimationActive={false}
         />
@@ -197,7 +208,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
             yAxisId={key}
             key={key}
             fill={theme.textSecondary}
-            shape={(props) => rectangleRenderer(props, key)}
+            shape={(props: BarProps) => rectangleRenderer(props, key)}
             onPointerEnter={() => {
               handlePointerEnter(key);
             }}
