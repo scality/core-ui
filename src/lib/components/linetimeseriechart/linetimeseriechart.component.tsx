@@ -59,6 +59,8 @@ const TooltipValue = styled.div`
   color: ${(props) => props.theme.textSecondary};
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const TooltipLegend = styled.div<{ color: string }>`
@@ -70,21 +72,23 @@ const TooltipLegend = styled.div<{ color: string }>`
   margin-top: 8px;
 `;
 
-const TooltipContent = styled.div`
+const TooltipLeftGroup = styled.div`
   display: flex;
+  align-items: flex-start;
   min-width: 0;
   flex: 1;
 `;
 
 const TooltipName = styled.div`
-  margin-right: 4px;
   word-wrap: break-word;
   word-break: break-word;
-  justify-content: flex-start;
+  flex: 1;
 `;
 
 const TooltipInstanceValue = styled.div`
-  justify-content: flex-end;
+  margin-left: 16px;
+  flex-shrink: 0;
+  text-align: right;
 `;
 
 export type Serie = {
@@ -186,15 +190,15 @@ const CustomTooltip = ({
       </TooltipTime>
       {sortedPayload.map((entry, index) => (
         <TooltipValue key={index}>
-          <TooltipLegend color={entry.color} />
-          <TooltipContent>
+          <TooltipLeftGroup>
+            <TooltipLegend color={entry.color} />
             <TooltipName>{entry.name}</TooltipName>
-            <TooltipInstanceValue>
-              {isNaN(Number(entry.value))
-                ? '-'
-                : `${Number(entry.value).toFixed(2)}${unitLabel}`}
-            </TooltipInstanceValue>
-          </TooltipContent>
+          </TooltipLeftGroup>
+          <TooltipInstanceValue>
+            {isNaN(Number(entry.value))
+              ? '-'
+              : `${Number(entry.value).toFixed(2)} ${unitLabel}`}
+          </TooltipInstanceValue>
         </TooltipValue>
       ))}
     </TooltipContainer>
