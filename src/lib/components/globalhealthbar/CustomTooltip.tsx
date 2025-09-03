@@ -1,53 +1,48 @@
-import { useEffect, useRef, useState } from 'react';
+import { TooltipContentProps } from 'recharts';
 import styled, { css, useTheme } from 'styled-components';
 import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../index';
 import { Alert } from './GlobalHealthBarRecharts.component';
 
 interface CustomTooltipProps {
   tooltipData: Alert | null;
-  coordinate?: { x: number; y: number };
+  tooltipProps: TooltipContentProps<number, string>;
 }
 
-const TooltipContainer = styled.div<{
-  tooltipInset: { top: number; left: number };
-}>`
+const TooltipContainer = styled.div`
   ${(props) => {
     const theme = useTheme();
+
     return css`
       border: 1px solid ${theme.border};
       width: 20rem;
       color: ${theme.textSecondary};
       background-color: ${theme.backgroundLevel1};
       border-radius: 4px;
-      position: absolute;
-      inset: ${props.tooltipInset.top}px auto auto ${props.tooltipInset.left}px;
       padding: ${spacing.r8};
     `;
   }}
 `;
 
 export const CustomTooltip = (props: CustomTooltipProps) => {
-  const { tooltipData, coordinate } = props;
+  const { tooltipData } = props;
 
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const [tooltipInset, setTooltipInset] = useState({ top: 0, left: 0 });
+  // useEffect(() => {
+  //   if (tooltipRef.current && coordinate) {
+  //     // left and top < 0 = tooltip is out of the screen
+  //     // right or bottom > window.innerWidth or window.innerheight = tooltip is out of the screen
 
-  useEffect(() => {
-    if (tooltipRef.current && coordinate) {
-      // left and top < 0 = tooltip is out of the screen
-      // right or bottom > window.innerWidth or window.innerheight = tooltip is out of the screen
-
-      setTooltipInset({
-        left: coordinate.x - tooltipRef.current.offsetWidth / 2,
-        top: coordinate.y + 20,
-      });
-    }
-  }, [coordinate]);
+  //     // we subtract the width of the tooltip from the x coordinate to center the tooltip
+  //     setTooltipInset({
+  //       left: coordinate.x - tooltipRef.current.offsetWidth / 2,
+  //       top: coordinate.y + 20,
+  //     });
+  //   }
+  // }, [coordinate, tooltipRef]);
   if (tooltipData) {
     const { description, startsAt, endsAt, severity } = tooltipData;
 
     return (
-      <TooltipContainer ref={tooltipRef} tooltipInset={tooltipInset}>
+      <TooltipContainer>
         <Stack direction="vertical" gap="r8">
           <Wrap>
             <Text variant="Small">Severity</Text>

@@ -1,27 +1,19 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import {
   Bar,
   BarChart,
   BarProps,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
+  TooltipContentProps,
   YAxis,
 } from 'recharts';
 import { useTheme } from 'styled-components';
 import { AlertBar, createAlertBarRenderer } from './AlertBar';
 import { CustomTooltip } from './CustomTooltip';
 import { Alert, useHealthBarData } from './useHealthBarData';
-import { getTickFormatter, getTicks } from './utils';
-
-const RADIUS_SIZE = 5;
-const CHART_HEIGHT = 50;
-const BAR_SIZE = 8;
-const TICK_SIZE = 5;
-const TOOLTIP_OFFSET = 20;
-const FONT_SIZE = 11;
-const TEXT_DY_OFFSET = 12;
-const TICK_INTERVAL = 0;
+import { HealthBarXAxis } from './HealthBarXAxis';
+import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE, TOOLTIP_OFFSET } from './utils';
 
 export interface GlobalHealthProps {
   id: string;
@@ -82,46 +74,28 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         barSize={BAR_SIZE}
         accessibilityLayer
       >
-        <XAxis
-          allowDataOverflow={true}
-          dataKey="start"
-          type="number"
-          domain={[startTimestamp, endTimestamp]}
-          tickSize={TICK_SIZE}
-          minTickGap={0}
-          interval={TICK_INTERVAL}
-          ticks={getTicks(startTimestamp, endTimestamp)}
-          tick={(props) => {
-            const { x, y, payload } = props;
-            return (
-              <g transform={`translate(${x},${y})`} overflow={'visible'}>
-                <text
-                  x={0}
-                  y={0}
-                  dy={TEXT_DY_OFFSET}
-                  textAnchor={'middle'}
-                  fill={theme.textSecondary}
-                  fontSize={FONT_SIZE}
-                >
-                  {getTickFormatter(
-                    startTimestamp,
-                    endTimestamp,
-                    new Date(payload.value),
-                  )}
-                </text>
-              </g>
-            );
-          }}
-          tickLine={{ stroke: theme.textSecondary }}
-          axisLine={false}
+        <HealthBarXAxis
+          startTimestamp={startTimestamp}
+          endTimestamp={endTimestamp}
         />
 
         <Tooltip
           allowEscapeViewBox={{ x: true, y: true }}
-          offset={TOOLTIP_OFFSET}
           isAnimationActive={false}
-          cursor={false}
-          content={<CustomTooltip tooltipData={tooltipData} />}
+          content={(props: TooltipContentProps<number, string>) => {
+            return (
+              <CustomTooltip tooltipData={tooltipData} tooltipProps={props} />
+            );
+          }}
+          shared={false}
+          wrapperStyle={{
+            zIndex: 9999,
+            pointerEvents: 'none',
+          }}
+          contentStyle={{
+            zIndex: 9999,
+            position: 'fixed', // This might help in some cases
+          }}
         />
 
         {/* YAxis for the Background healthy bar */}

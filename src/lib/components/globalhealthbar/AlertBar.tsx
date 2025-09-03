@@ -1,7 +1,6 @@
 import { Bar, BarProps, Rectangle } from 'recharts';
 import { RectRadius } from 'recharts/types/shape/Rectangle';
-const RADIUS_SIZE = 5;
-const EDGE_THRESHOLD = 10;
+import { RADIUS_SIZE, EDGE_THRESHOLD } from './utils';
 interface AlertBarProps {
   dataKey: string;
   yAxisId: string;
@@ -22,7 +21,6 @@ export const AlertBar = ({
   <Bar
     dataKey={dataKey}
     yAxisId={yAxisId}
-    key={dataKey}
     fill={fill}
     shape={shape}
     onPointerEnter={onPointerEnter}
