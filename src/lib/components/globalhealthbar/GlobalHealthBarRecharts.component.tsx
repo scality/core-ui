@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useRef } from 'react';
 import {
   Bar,
   BarChart,
@@ -10,21 +10,22 @@ import {
 } from 'recharts';
 import { useTheme } from 'styled-components';
 import { AlertBar, createAlertBarRenderer } from './AlertBar';
-import { CustomTooltip } from './CustomTooltip';
+import { CustomTooltipPortal } from './CustomTooltipPortal';
 import { Alert, useHealthBarData } from './useHealthBarData';
 import { HealthBarXAxis } from './HealthBarXAxis';
-import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE, TOOLTIP_OFFSET } from './utils';
+import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE } from './utils';
+import { CustomTooltip } from './CustomTooltip';
 
 export interface GlobalHealthProps {
   id: string;
   alerts: Alert[];
   start: Date;
   end: Date;
-  width: number;
 }
 
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const [tooltipData, setTooltipData] = useState<Alert | null>(null);
+  const chartContainerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const startTimestamp = new Date(start).getTime();
   const endTimestamp = new Date(end).getTime();
@@ -67,7 +68,11 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   }, [unavailableKeys, warningKeys, criticalKeys, theme]);
 
   return (
-    <ResponsiveContainer width={'100%'} height={CHART_HEIGHT}>
+    <ResponsiveContainer
+      width={'100%'}
+      height={CHART_HEIGHT}
+      ref={chartContainerRef}
+    >
       <BarChart
         data={data}
         layout="vertical"
@@ -82,19 +87,15 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         <Tooltip
           allowEscapeViewBox={{ x: true, y: true }}
           isAnimationActive={false}
+          shared={false}
           content={(props: TooltipContentProps<number, string>) => {
             return (
-              <CustomTooltip tooltipData={tooltipData} tooltipProps={props} />
+              <CustomTooltipPortal
+                tooltipData={tooltipData}
+                tooltipProps={props}
+                chartContainerRef={chartContainerRef}
+              />
             );
-          }}
-          shared={false}
-          wrapperStyle={{
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-          contentStyle={{
-            zIndex: 9999,
-            position: 'fixed', // This might help in some cases
           }}
         />
 
