@@ -21,7 +21,7 @@ const TooltipContainer = styled.div<{
 
     return css`
       border: 1px solid ${theme.border};
-      width: 20rem;
+      width: 24rem;
       z-index: ${zIndex.tooltip};
       color: ${theme.textSecondary};
       background-color: ${theme.backgroundLevel1};
@@ -97,26 +97,32 @@ export const CustomTooltipPortal = (props: CustomTooltipPortalProps) => {
     <TooltipContainer ref={tooltipRef} tooltipPosition={tooltipPosition}>
       <Stack direction="vertical" gap="r8">
         <Wrap>
-          <Text variant="Small">Severity</Text>
-          <Text color="textPrimary" variant="Small">
+          <Text variant="Smaller">Severity</Text>
+          <Text color="textPrimary" variant="Smaller">
             {severity}
           </Text>
         </Wrap>
         <Wrap>
-          <Text variant="Small">Start</Text>
-          <Text color="textPrimary" variant="Small">
+          <Text variant="Smaller">Start</Text>
+          <Text color="textPrimary" variant="Smaller">
             <FormattedDateTime format="date-time" value={new Date(startsAt)} />
           </Text>
         </Wrap>
         <Wrap>
-          <Text variant="Small">End</Text>
-          <Text color="textPrimary" variant="Small">
+          <Text variant="Smaller">End</Text>
+          <Text color="textPrimary" variant="Smaller">
             <FormattedDateTime format="date-time" value={new Date(endsAt)} />
           </Text>
         </Wrap>
         <Wrap>
-          <Text variant="Small">Description</Text>
-          <Text color="textPrimary" variant="Small">
+          <Text variant="Smaller" style={{ paddingRight: spacing.r32 }}>
+            Description
+          </Text>
+          <Text
+            color="textPrimary"
+            variant="Smaller"
+            style={{ whiteSpace: 'wrap', textAlign: 'justify' }}
+          >
             {description}
           </Text>
         </Wrap>

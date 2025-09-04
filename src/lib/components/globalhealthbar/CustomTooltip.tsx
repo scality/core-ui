@@ -2,13 +2,16 @@ import { TooltipContentProps } from 'recharts';
 import styled, { css, useTheme } from 'styled-components';
 import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../index';
 import { Alert } from './GlobalHealthBarRecharts.component';
+import { useEffect, useRef, useState } from 'react';
 
 interface CustomTooltipProps {
   tooltipData: Alert | null;
   tooltipProps: TooltipContentProps<number, string>;
 }
 
-const TooltipContainer = styled.div`
+const TooltipContainer = styled.div<{
+  tooltipInset: { left: number; top: number };
+}>`
   ${(props) => {
     const theme = useTheme();
 
@@ -19,30 +22,66 @@ const TooltipContainer = styled.div`
       background-color: ${theme.backgroundLevel1};
       border-radius: 4px;
       padding: ${spacing.r8};
+      position: fixed;
+      top: ${props.tooltipInset.top}px;
+      left: ${props.tooltipInset.left}px;
     `;
   }}
 `;
 
 export const CustomTooltip = (props: CustomTooltipProps) => {
-  const { tooltipData } = props;
+  const { tooltipData, tooltipProps } = props;
+  const { coordinate } = tooltipProps;
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [tooltipInset, setTooltipInset] = useState({
+    left: 0,
+    top: 0,
+  });
 
-  // useEffect(() => {
-  //   if (tooltipRef.current && coordinate) {
-  //     // left and top < 0 = tooltip is out of the screen
-  //     // right or bottom > window.innerWidth or window.innerheight = tooltip is out of the screen
+  useEffect(() => {
+    if (tooltipRef.current && coordinate) {
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
 
-  //     // we subtract the width of the tooltip from the x coordinate to center the tooltip
-  //     setTooltipInset({
-  //       left: coordinate.x - tooltipRef.current.offsetWidth / 2,
-  //       top: coordinate.y + 20,
-  //     });
-  //   }
-  // }, [coordinate, tooltipRef]);
+      const MARGIN = 10;
+      const TOOLTIP_OFFSET = 30;
+
+      // Calculate initial position (centered horizontally, offset vertically)
+      let left = coordinate.x - tooltipRect.width / 2;
+      let top = coordinate.y + TOOLTIP_OFFSET;
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Horizontal boundary adjustments
+      if (left < MARGIN) {
+        left = MARGIN;
+      } else if (left + tooltipRect.width > viewportWidth - MARGIN) {
+        left = viewportWidth - tooltipRect.width - MARGIN;
+      }
+
+      // Vertical boundary adjustments - prefer showing below if enough space
+      if (top + tooltipRect.height > viewportHeight - MARGIN) {
+        const topPosition = coordinate.y - tooltipRect.height - MARGIN;
+        if (topPosition >= MARGIN) {
+          top = topPosition;
+        } else {
+          // If can't fit above either, keep below but adjust to fit
+          top = viewportHeight - tooltipRect.height - MARGIN;
+        }
+      }
+
+      // Final safety check to ensure tooltip is never off-screen
+      if (top < MARGIN) {
+        top = MARGIN;
+      }
+
+      setTooltipInset({ left, top });
+    }
+  }, [coordinate, tooltipRef]);
   if (tooltipData) {
     const { description, startsAt, endsAt, severity } = tooltipData;
-
     return (
-      <TooltipContainer>
+      <TooltipContainer ref={tooltipRef} tooltipInset={tooltipInset}>
         <Stack direction="vertical" gap="r8">
           <Wrap>
             <Text variant="Small">Severity</Text>

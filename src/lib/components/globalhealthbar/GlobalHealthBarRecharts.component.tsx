@@ -10,11 +10,11 @@ import {
 } from 'recharts';
 import { useTheme } from 'styled-components';
 import { AlertBar, createAlertBarRenderer } from './AlertBar';
-import { CustomTooltipPortal } from './CustomTooltipPortal';
+
 import { Alert, useHealthBarData } from './useHealthBarData';
 import { HealthBarXAxis } from './HealthBarXAxis';
 import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE } from './utils';
-import { CustomTooltip } from './CustomTooltip';
+import { CustomTooltipPortal } from './CustomTooltipPortal';
 
 export interface GlobalHealthProps {
   id: string;
@@ -72,12 +72,14 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       width={'100%'}
       height={CHART_HEIGHT}
       ref={chartContainerRef}
+      style={{ contain: 'layout', position: 'relative' }}
     >
       <BarChart
         data={data}
         layout="vertical"
         barSize={BAR_SIZE}
         accessibilityLayer
+        margin={{ left: 24, right: 24, bottom: 4, top: 4 }}
       >
         <HealthBarXAxis
           startTimestamp={startTimestamp}
@@ -88,6 +90,10 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
           allowEscapeViewBox={{ x: true, y: true }}
           isAnimationActive={false}
           shared={false}
+          wrapperStyle={{
+            width: '20rem',
+            position: 'fixed',
+          }}
           content={(props: TooltipContentProps<number, string>) => {
             return (
               <CustomTooltipPortal
@@ -103,7 +109,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         <YAxis yAxisId={'background'} type="category" hide />
 
         {/* Generate YAxis for all alert keys */}
-        {allAlertBars.map(({ key, fill }) => (
+        {allAlertBars.map(({ key }) => (
           <YAxis key={`yAxis${key}`} yAxisId={key} type="category" hide />
         ))}
 

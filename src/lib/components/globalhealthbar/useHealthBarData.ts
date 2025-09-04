@@ -13,13 +13,26 @@ export const useHealthBarData = (
   endTimestamp: number,
   id: string,
 ) => {
+  // Filter alerts to only include alerts that are within the start and end timestamp
+  const filteredAlerts = useMemo(
+    () =>
+      alerts.filter(
+        (alert) =>
+          (new Date(alert.endsAt).getTime() >= startTimestamp &&
+            new Date(alert.startsAt).getTime() <= endTimestamp) ||
+          (new Date(alert.startsAt).getTime() <= endTimestamp &&
+            new Date(alert.endsAt).getTime() >= startTimestamp),
+      ),
+    [alerts, startTimestamp, endTimestamp],
+  );
+
   const data = useMemo(
     () => [
       {
         start: startTimestamp,
         end: endTimestamp,
         range: [startTimestamp, endTimestamp],
-        ...alerts.reduce((acc, alert, index) => {
+        ...filteredAlerts.reduce((acc, alert, index) => {
           // Use alert index with severity to create unique keys for bars dataKey
           // Bars format is: dataKey: [startTimestamp, endTimestamp]
           const uniqueKey = `${alert.severity}_${index}`;
@@ -38,7 +51,7 @@ export const useHealthBarData = (
         id,
       },
     ],
-    [alerts, startTimestamp, endTimestamp, id],
+    [filteredAlerts, startTimestamp, endTimestamp, id],
   );
 
   // Separate keys for warning, critical, and unavailable to map to the different bars

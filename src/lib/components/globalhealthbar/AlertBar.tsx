@@ -1,6 +1,6 @@
 import { Bar, BarProps, Rectangle } from 'recharts';
 import { RectRadius } from 'recharts/types/shape/Rectangle';
-import { RADIUS_SIZE, EDGE_THRESHOLD } from './utils';
+import { getRectangleProps } from './utils';
 interface AlertBarProps {
   dataKey: string;
   yAxisId: string;
@@ -33,27 +33,12 @@ export const createAlertBarRenderer = (
   endTimestamp: number,
 ) => {
   return (props: any, key: string) => {
-    const { x, background } = props;
-    let startX = background.x;
-    const width = background.width;
-
-    const alertStartTimestamp = props[key][0];
-    const alertEndTimestamp = props[key][1];
-
-    const start = Math.max(alertStartTimestamp, startTimestamp);
-    const end = Math.min(alertEndTimestamp, endTimestamp);
-    const relativeSize = (end - start) / (endTimestamp - startTimestamp);
-
-    if (alertStartTimestamp > startTimestamp) {
-      startX = x;
-    }
-
-    const rectWidth = relativeSize * width;
-    const leftRadius = x < EDGE_THRESHOLD ? RADIUS_SIZE : 0;
-    const rightRadius =
-      x + rectWidth >= width - EDGE_THRESHOLD ? RADIUS_SIZE : 0;
-    const radius = [leftRadius, rightRadius, rightRadius, leftRadius];
-
+    const { radius, rectWidth, startX } = getRectangleProps(
+      props,
+      key,
+      startTimestamp,
+      endTimestamp,
+    );
     return (
       <Rectangle
         {...props}
