@@ -56,6 +56,10 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
   },
 );
 
+/**
+ * @description Day month abbreviated hour minute formatter, without second.
+ * @example 15 Sept 14:30
+ */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'short',

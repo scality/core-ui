@@ -1,21 +1,25 @@
 import { formatXAxisLabel } from './utils';
 
+const createChartData = (startDate: Date, endDate: Date) => [
+  { timestamp: startDate.getTime() },
+  { timestamp: endDate.getTime() },
+];
+
 describe('formatXAxisLabel', () => {
   const mockTimestamp = new Date('2025-09-15T14:30:00Z').getTime();
 
   describe('date-time format', () => {
     it('should format timestamp with day-month-abbreviated-hour-minute format', () => {
-      const result = formatXAxisLabel(mockTimestamp, 'date-time');
+      const chartData = createChartData(
+        new Date('2022-01-01'),
+        new Date('2022-01-02'),
+      );
+      const result = formatXAxisLabel(mockTimestamp, 'date-time', chartData);
       expect(result).toBe('15 Sept 14:30');
     });
   });
 
   describe('date format', () => {
-    const createChartData = (startDate: Date, endDate: Date) => [
-      { timestamp: startDate.getTime() },
-      { timestamp: endDate.getTime() },
-    ];
-
     it('should use YYYY-MM-DD format for time ranges greater than 1 year', () => {
       const startDate = new Date('2022-01-01');
       const endDate = new Date('2024-01-01'); // More than 1 year
