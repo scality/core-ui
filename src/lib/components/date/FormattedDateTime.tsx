@@ -8,6 +8,16 @@ export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
 });
 
+/**
+ * @description Long date formatter, without weekday.
+ * @example 01 September 2025
+ */
+export const LONG_DATE_FORMATER_WITHOUT_WEEKDAY = Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+});
+
 export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   year: 'numeric',
   month: '2-digit',
@@ -46,6 +56,10 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
   },
 );
 
+/**
+ * @description Day month abbreviated hour minute formatter, without second.
+ * @example 15 Sept 14:30
+ */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'short',
@@ -64,6 +78,15 @@ export const YEAR_MONTH_DAY_FORMATTER = Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 });
 
+/**
+ * @description Month day formatter, without year. Used for short term date ranges.
+ * @example 01-15
+ */
+export const MONTH_DAY_FORMATTER = Intl.DateTimeFormat('en-CA', {
+  month: '2-digit',
+  day: '2-digit',
+});
+
 type FormattedDateTimeProps = {
   format:
     | 'date'
@@ -75,8 +98,10 @@ type FormattedDateTimeProps = {
     | 'day-month-abbreviated-hour-minute'
     | 'day-month-abbreviated-hour-minute-second'
     | 'long-date'
+    | 'long-date-without-weekday'
     | 'chart-date'
-    | 'year-month-day';
+    | 'year-month-day'
+    | 'month-day';
 
   value: Date;
 };
@@ -207,10 +232,14 @@ export const FormattedDateTime = ({
       );
     case 'long-date':
       return <>{LONG_DATE_FORMATER.format(value)}</>;
+    case 'long-date-without-weekday':
+      return <>{LONG_DATE_FORMATER_WITHOUT_WEEKDAY.format(value)}</>;
     case 'chart-date':
       return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
     case 'year-month-day':
       return <>{YEAR_MONTH_DAY_FORMATTER.format(value)}</>;
+    case 'month-day':
+      return <>{MONTH_DAY_FORMATTER.format(value)}</>;
     default:
       return <></>;
   }

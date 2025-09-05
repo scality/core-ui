@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
+import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
@@ -20,11 +21,15 @@ import { spacing } from '../../spacing';
 import { getUnitLabel } from '../linetemporalchart/ChartUtil';
 import { Icon } from '../icon/Icon.component';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
-import {
-  DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
-  FormattedDateTime,
-  YEAR_MONTH_DAY_FORMATTER,
-} from '../date/FormattedDateTime';
+import { FormattedDateTime } from '../date/FormattedDateTime';
+import { Box } from '../box/Box';
+import { formatXAxisLabel } from './utils';
+
+type TooltipPayload = Payload<number, string> & {
+  value: number;
+  name: string;
+  color: string;
+};
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -61,6 +66,8 @@ const TooltipValue = styled.div`
   color: ${(props) => props.theme.textSecondary};
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const TooltipLegend = styled.div<{ color: string }>`
@@ -72,21 +79,23 @@ const TooltipLegend = styled.div<{ color: string }>`
   margin-top: 8px;
 `;
 
-const TooltipContent = styled.div`
+const TooltipLeftGroup = styled.div`
   display: flex;
+  align-items: flex-start;
   min-width: 0;
   flex: 1;
 `;
 
 const TooltipName = styled.div`
-  margin-right: 4px;
   word-wrap: break-word;
   word-break: break-word;
-  justify-content: flex-start;
+  flex: 1;
 `;
 
 const TooltipInstanceValue = styled.div`
-  justify-content: flex-end;
+  margin-left: 16px;
+  flex-shrink: 0;
+  text-align: right;
 `;
 
 export type Serie = {
@@ -148,12 +157,7 @@ const CustomTooltip = ({
   timeFormat,
 }: {
   active?: boolean;
-  payload?: Array<{
-    value: number;
-    name: string;
-    color: string;
-    dataKey: string;
-  }>;
+  payload?: Array<TooltipPayload>;
   label?: string;
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
@@ -162,8 +166,8 @@ const CustomTooltip = ({
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
   const sortedPayload = [...payload].sort((a, b) => {
-    const aValue = Number(a.value);
-    const bValue = Number(b.value);
+    const aValue = a.value;
+    const bValue = b.value;
 
     if (aValue >= 0 && bValue >= 0) {
       return bValue - aValue; // Higher positive values first
@@ -181,22 +185,22 @@ const CustomTooltip = ({
           format={
             timeFormat === 'date-time'
               ? 'day-month-abbreviated-hour-minute-second'
-              : 'long-date'
+              : 'long-date-without-weekday'
           }
           value={new Date(label)}
         />
       </TooltipTime>
       {sortedPayload.map((entry, index) => (
         <TooltipValue key={index}>
-          <TooltipLegend color={entry.color} />
-          <TooltipContent>
+          <TooltipLeftGroup>
+            <TooltipLegend color={entry.color} />
             <TooltipName>{entry.name}</TooltipName>
-            <TooltipInstanceValue>
-              {isNaN(Number(entry.value))
-                ? '-'
-                : `${Number(entry.value).toFixed(2)}${unitLabel}`}
-            </TooltipInstanceValue>
-          </TooltipContent>
+          </TooltipLeftGroup>
+          <TooltipInstanceValue>
+            {!Number.isFinite(entry.value)
+              ? '-'
+              : `${entry.value.toFixed(2)} ${unitLabel}`}
+          </TooltipInstanceValue>
         </TooltipValue>
       ))}
     </TooltipContainer>
@@ -410,16 +414,9 @@ export function LineTimeSerieChart({
   }, [series, getColor]);
 
   // Format time for display the tick in the x axis
-  const formatXAxisLabel = useCallback(
-    (timestamp: number) => {
-      const date = new Date(timestamp);
-      return timeFormat === 'date-time'
-        ? DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '')
-        : timeFormat === 'date'
-          ? YEAR_MONTH_DAY_FORMATTER.format(date)
-          : '';
-    },
-    [timeFormat],
+  const formatXAxisLabelCallback = useCallback(
+    (timestamp: number) => formatXAxisLabel(timestamp, timeFormat, chartData),
+    [timeFormat, chartData],
   );
 
   return (
@@ -429,12 +426,14 @@ export function LineTimeSerieChart({
           {title} {unitLabel && `(${unitLabel})`}
         </ChartTitleText>
         {helpText && (
-          <TooltipComponent
-            placement={'right'}
-            overlay={<SmallerText>{helpText}</SmallerText>}
-          >
-            <Icon name="Info" color={theme.buttonSecondary} />
-          </TooltipComponent>
+          <Box ml={spacing.r4}>
+            <TooltipComponent
+              placement={'right'}
+              overlay={<SmallerText>{helpText}</SmallerText>}
+            >
+              <Icon name="Info" color={theme.buttonSecondary} />
+            </TooltipComponent>
+          </Box>
         )}
         {isLoading && <Loader />}
       </ChartHeader>
@@ -459,7 +458,7 @@ export function LineTimeSerieChart({
             type="number"
             domain={['dataMin', 'dataMax']}
             ticks={xAxisTicks}
-            tickFormatter={formatXAxisLabel}
+            tickFormatter={formatXAxisLabelCallback}
             tickCount={5}
             tick={{
               fill: theme.textSecondary,
@@ -493,6 +492,8 @@ export function LineTimeSerieChart({
               fontSize: fontSize.smaller,
             }}
             tickFormatter={(value) => Math.round(value).toString()}
+            tickCount={5}
+            interval={'preserveStartEnd'}
           />
           <Tooltip
             content={
