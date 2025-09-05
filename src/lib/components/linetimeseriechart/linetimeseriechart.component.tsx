@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
+import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
@@ -23,6 +24,12 @@ import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { FormattedDateTime } from '../date/FormattedDateTime';
 import { Box } from '../box/Box';
 import { formatXAxisLabel } from './utils';
+
+type TooltipPayload = Payload<number, string> & {
+  value: number;
+  name: string;
+  color: string;
+};
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -150,12 +157,7 @@ const CustomTooltip = ({
   timeFormat,
 }: {
   active?: boolean;
-  payload?: Array<{
-    value: number;
-    name: string;
-    color: string;
-    dataKey: string;
-  }>;
+  payload?: Array<TooltipPayload>;
   label?: string;
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
@@ -164,8 +166,8 @@ const CustomTooltip = ({
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
   const sortedPayload = [...payload].sort((a, b) => {
-    const aValue = Number(a.value);
-    const bValue = Number(b.value);
+    const aValue = a.value;
+    const bValue = b.value;
 
     if (aValue >= 0 && bValue >= 0) {
       return bValue - aValue; // Higher positive values first
@@ -195,9 +197,9 @@ const CustomTooltip = ({
             <TooltipName>{entry.name}</TooltipName>
           </TooltipLeftGroup>
           <TooltipInstanceValue>
-            {isNaN(Number(entry.value))
+            {!Number.isFinite(entry.value)
               ? '-'
-              : `${Number(entry.value).toFixed(2)} ${unitLabel}`}
+              : `${entry.value.toFixed(2)} ${unitLabel}`}
           </TooltipInstanceValue>
         </TooltipValue>
       ))}
