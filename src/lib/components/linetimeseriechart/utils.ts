@@ -31,14 +31,13 @@ export const formatXAxisLabel = (
   }
   if (timeFormat === 'date-time') {
     return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
-  } else {
-    const timestamps = chartData.map((d) => d.timestamp);
-    const minTimestamp = Math.min(...timestamps);
-    const maxTimestamp = Math.max(...timestamps);
-    const timeRangeMilliseconds = maxTimestamp - minTimestamp;
-
-    return timeRangeMilliseconds >= ONE_YEAR_MILLISECONDS
-      ? YEAR_MONTH_DAY_FORMATTER.format(date)
-      : MONTH_DAY_FORMATTER.format(date);
   }
+  const timestamps = chartData.map((d) => d.timestamp);
+  const minTimestamp = Math.min(...timestamps);
+  const maxTimestamp = Math.max(...timestamps);
+  const timeRangeMilliseconds = maxTimestamp - minTimestamp;
+
+  return timeRangeMilliseconds >= ONE_YEAR_MILLISECONDS
+    ? YEAR_MONTH_DAY_FORMATTER.format(date)
+    : MONTH_DAY_FORMATTER.format(date);
 };
