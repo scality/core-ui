@@ -24,6 +24,7 @@ export const AlertBar = ({
     shape={shape}
     onPointerEnter={onPointerEnter}
     onPointerLeave={onPointerLeave}
+    isAnimationActive={false}
   />
 );
 
