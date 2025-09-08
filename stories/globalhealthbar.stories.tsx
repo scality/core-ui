@@ -84,7 +84,7 @@ const alertRetrieveBefore = [
     id: '2',
     severity: 'critical',
     startsAt: '2021-02-05T23:00:00Z',
-    endsAt: '2021-02-06T21:00:00Z',
+    endsAt: '2021-02-07T00:00:00Z',
     description: 'Global health warning',
   },
 ];
@@ -134,6 +134,7 @@ export default {
   args: {
     start,
     end,
+    width: 500,
   },
   argTypes: {
     start: {
@@ -149,6 +150,7 @@ export const GlobalHealthComponentDemo = {
   args: {
     id: 'vis_globalhealth',
     alerts,
+    width: 500,
   },
 };
 
@@ -158,12 +160,14 @@ export const GlobalHealthLast24Hours = {
     alerts: alertsLast24h,
     start: startLast24h,
     end: endLast24h,
+    width: 500,
   },
 };
 export const GlobalHealthEmpty = {
   args: {
     id: 'vis_globalhealth_empty',
     alerts: emptyAlert,
+    width: 500,
   },
 };
 
@@ -171,6 +175,7 @@ export const AlertTriggeredEarlierThanTheStartingTime = {
   args: {
     id: 'vis_globalhealth_alert_retrieve_before',
     alerts: alertRetrieveBefore,
+    width: 500,
   },
 };
 
@@ -181,5 +186,6 @@ export const FirstLabel = {
     alerts: alertTriggerNotFirstDay,
     start: startNotFirstDay,
     end: endNotFirstDay,
+    width: 500,
   },
 };
