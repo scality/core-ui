@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -9,12 +9,11 @@ import {
   YAxis,
 } from 'recharts';
 import { useTheme } from 'styled-components';
-import { AlertBar, createAlertBarRenderer } from './AlertBar';
-
+import { AlertBar, createAlertBarRenderer } from './components/AlertBar';
+import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
+import { HealthBarXAxis } from './components/HealthBarXAxis';
+import { CHART_CONFIG } from './healthBarUtils';
 import { Alert, useHealthBarData } from './useHealthBarData';
-import { HealthBarXAxis } from './HealthBarXAxis';
-import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE } from './utils';
-import { GlobalHealthBarTooltip } from './GlobalHealthBarTooltip';
 
 export interface GlobalHealthProps {
   id: string;
@@ -70,16 +69,16 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   return (
     <ResponsiveContainer
       width={'100%'}
-      height={CHART_HEIGHT}
+      height={CHART_CONFIG.CHART_HEIGHT}
       ref={chartContainerRef}
       style={{ contain: 'layout', position: 'relative' }}
     >
       <BarChart
         data={data}
         layout="vertical"
-        barSize={BAR_SIZE}
+        barSize={CHART_CONFIG.BAR_SIZE}
         accessibilityLayer
-        margin={{ left: 24, right: 24, bottom: 4, top: 4 }}
+        margin={CHART_CONFIG.MARGINS}
       >
         <HealthBarXAxis
           startTimestamp={startTimestamp}
@@ -117,7 +116,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
         <Bar
           dataKey="range"
           fill={theme.statusHealthy}
-          radius={RADIUS_SIZE}
+          radius={CHART_CONFIG.RADIUS_SIZE}
           yAxisId="background"
           isAnimationActive={false}
         />

@@ -1,10 +1,11 @@
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
-import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../index';
-import { Alert } from './GlobalHealthBarRecharts.component';
+import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../../index';
+import { Alert } from '../GlobalHealthBarRecharts.component';
 import { TooltipContentProps } from 'recharts';
-import { zIndex } from '../../style/theme';
+import { zIndex } from '../../../style/theme';
 
 interface GlobalHealthBarTooltipProps {
   tooltipData: Alert | null;

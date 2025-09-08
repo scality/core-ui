@@ -1,6 +1,5 @@
 import { Bar, BarProps, Rectangle } from 'recharts';
-import { RectRadius } from 'recharts/types/shape/Rectangle';
-import { getRectangleProps } from './utils';
+import { getRectangleProps } from '../healthBarUtils';
 interface AlertBarProps {
   dataKey: string;
   yAxisId: string;
@@ -33,19 +32,12 @@ export const createAlertBarRenderer = (
   endTimestamp: number,
 ) => {
   return (props: any, key: string) => {
-    const { radius, rectWidth, startX } = getRectangleProps(
+    const { rectWidth, startX } = getRectangleProps(
       props,
       key,
       startTimestamp,
       endTimestamp,
     );
-    return (
-      <Rectangle
-        {...props}
-        x={startX}
-        width={rectWidth}
-        radius={radius as RectRadius}
-      />
-    );
+    return <Rectangle {...props} x={startX} width={rectWidth} />;
   };
 };
