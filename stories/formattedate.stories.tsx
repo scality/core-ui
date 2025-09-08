@@ -24,6 +24,13 @@ export const FormattedDate = {
               'time' as const,
               'time-second' as const,
               'relative' as const,
+              'day-month-abbreviated-hour-minute' as const,
+              'day-month-abbreviated-hour-minute-second' as const,
+              'long-date' as const,
+              'long-date-without-weekday' as const,
+              'chart-date' as const,
+              'year-month-day' as const,
+              'month-day' as const,
             ].map((format) => (
               <tr key={format}>
                 <td>{format}</td>

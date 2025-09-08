@@ -1,6 +1,10 @@
 import { getDateDaysDiff } from './dateDiffer';
 import { Tooltip } from '../tooltip/Tooltip.component';
 
+/**
+ * @description Long date formatter, with weekday, year, month and day. Used for describing long term date.
+ * @example Wednesday 6 October 2025
+ */
 export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
   weekday: 'long',
   year: 'numeric',
@@ -18,6 +22,10 @@ export const LONG_DATE_FORMATER_WITHOUT_WEEKDAY = Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
 });
 
+/**
+ * @description Date formatter, with year, month and day. Used for describing long term date.
+ * @example 2025-01-01
+ */
 export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   year: 'numeric',
   month: '2-digit',
@@ -25,12 +33,20 @@ export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
   hour12: false,
 });
 
+/**
+ * @description Day month formatter, with weekday, day and month. Used for describing long term date.
+ * @example Wed 6 Oct
+ */
 export const DAY_MONTH_FORMATER = Intl.DateTimeFormat('en-GB', {
   weekday: 'short',
   day: '2-digit',
   month: 'short',
 });
 
+/**
+ * @description Time formatter, with hour, minute and second. Used for describing long term date.
+ * @example 18:33:00
+ */
 export const TIME_SECOND_FORMATER = Intl.DateTimeFormat('en-GB', {
   hour12: false,
   hour: '2-digit',
@@ -38,12 +54,20 @@ export const TIME_SECOND_FORMATER = Intl.DateTimeFormat('en-GB', {
   second: '2-digit',
 });
 
+/**
+ * @description Time formatter, with hour and minute. Used for describing long term date.
+ * @example 18:33
+ */
 export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
   hour12: false,
   hour: '2-digit',
   minute: '2-digit',
 });
 
+/**
+ * @description Day month abbreviated hour minute second formatter. Used for describing long term date.
+ * @example 6 Oct 18:33:00
+ */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
   'en-GB',
   {
@@ -57,8 +81,8 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
 );
 
 /**
- * @description Day month abbreviated hour minute formatter, without second.
- * @example 15 Sept 14:30
+ * @description Day month abbreviated hour minute formatter. Used for describing long term date.
+ * @example 6 Oct 18:33
  */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -117,6 +141,21 @@ const isItFutureOrIsItPast = (
   }
 };
 
+/**
+ * @description Formats the date and time according to the format specified.
+ * @example
+ * date: '2025-01-01'
+ * 'date-time': '2025-01-01 00:00'
+ * 'date-time-second': '2025-01-01 00:00:00'
+ * time: '00:00'
+ * 'time-second': '00:00:00'
+ * relative: '1 month ago'
+ * 'day-month-abbreviated-hour-minute': '6 Oct 18:33'
+ * 'day-month-abbreviated-hour-minute-second': '6 Oct 18:33:00'
+ * 'long-date': 'Wednesday 6 October 2025'
+ * 'chart-date': '6 Oct'
+ * 'year-month-day': '2025-10-06'
+ */
 export const FormattedDateTime = ({
   format,
   value,
@@ -219,15 +258,19 @@ export const FormattedDateTime = ({
       );
     case 'day-month-abbreviated-hour-minute':
       return (
-        <>{DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(value).replace(',', '')}</>
+        <>
+          {DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(value)
+            .replace(',', '')
+            .replace(/Sept/g, 'Sep')}
+        </>
       );
     case 'day-month-abbreviated-hour-minute-second':
       return (
         <>
-          {DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND.format(value).replace(
-            ',',
-            '',
-          )}
+          {DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND.format(value)
+            .replace(',', '')
+            // replace Sept with Sep to keep 3 letter month
+            .replace(/Sept/g, 'Sep')}
         </>
       );
     case 'long-date':
@@ -235,7 +278,14 @@ export const FormattedDateTime = ({
     case 'long-date-without-weekday':
       return <>{LONG_DATE_FORMATER_WITHOUT_WEEKDAY.format(value)}</>;
     case 'chart-date':
-      return <>{DAY_MONTH_FORMATER.format(value).replace(/[ ,]/g, '')}</>;
+      return (
+        <>
+          {DAY_MONTH_FORMATER.format(value)
+            .replace(/[ ,]/g, '')
+            // replace Sept with Sep to keep 3 letter month
+            .replace(/Sept/g, 'Sep')}
+        </>
+      );
     case 'year-month-day':
       return <>{YEAR_MONTH_DAY_FORMATTER.format(value)}</>;
     case 'month-day':
