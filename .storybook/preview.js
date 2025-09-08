@@ -18,6 +18,7 @@ export const globalTypes = {
         { value: 'darkRebrand', title: ' A-Dark', icon: 'moon' },
         { value: 'artescaLight', title: 'A-Light', icon: 'sun' },
         { value: 'ring9dark', title: 'R-Dark', icon: 'moon' },
+        { value: 'G-Dark', title: 'G-Dark', icon: 'moon' },
       ],
     },
   },

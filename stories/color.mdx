@@ -41,3 +41,15 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 }
 
 </ColorPalette>
+
+## G-Dark
+
+<ColorPalette>
+  {
+    Object.entries(coreUIAvailableThemes['G-Dark']).map(([key, value]) => {
+    if (!/RGB/.test(key)) return <ColorItem title={key} colors={[value]}/>;
+    })
+
+}
+
+</ColorPalette>

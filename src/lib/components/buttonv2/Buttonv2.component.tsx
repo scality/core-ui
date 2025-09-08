@@ -51,8 +51,10 @@ export const ButtonStyled = styled.button<Props>`
     switch (props.variant) {
       case 'primary':
         return css`
-          background-color: ${brand.buttonPrimary};
-          border: ${spacing.r1} solid ${brand.buttonPrimary};
+          background: ${brand.buttonPrimary};
+          background-clip: padding-box, border-box;
+          border: ${spacing.r1} solid transparent;
+          border-color: ${brand.buttonPrimary};
           color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
@@ -73,8 +75,10 @@ export const ButtonStyled = styled.button<Props>`
 
       case 'secondary':
         return css`
-          background-color: ${brand.buttonSecondary};
-          border: ${spacing.r1} solid ${brand.buttonSecondary};
+          background: ${brand.buttonSecondary};
+          background-clip: padding-box, border-box;
+          border: ${spacing.r1} solid transparent;
+          border-color: ${brand.buttonSecondary};
           color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
@@ -88,7 +92,8 @@ export const ButtonStyled = styled.button<Props>`
           &:active:enabled {
             cursor: pointer;
             color: ${brand.textPrimary};
-            border: ${spacing.r1} solid ${brand.buttonSecondary};
+            border: ${spacing.r1} solid transparent;
+            border-color: ${brand.buttonSecondary};
           }
         `;
 
@@ -112,13 +117,18 @@ export const ButtonStyled = styled.button<Props>`
 
       case 'outline':
         return css`
-          border: ${spacing.r1} solid ${brand.buttonSecondary};
+          border: ${spacing.r1} solid transparent;
+          border-color: ${brand.buttonSecondary};
           background-color: transparent;
           color: ${brand.textPrimary};
           &:hover:enabled {
             cursor: pointer;
             border-color: ${brand.infoPrimary};
             color: ${brand.textPrimary};
+
+            &::before {
+              background-image: ${brand.buttonPrimary};
+            }
           }
           &:focus-visible:enabled {
             ${FocusVisibleStyle}
@@ -128,6 +138,17 @@ export const ButtonStyled = styled.button<Props>`
             cursor: pointer;
             border: ${spacing.r1} solid ${brand.infoSecondary};
             color: ${brand.textPrimary};
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: ${spacing.r1};
+            background-image: ${brand.buttonSecondary};
+            border-radius: inherit;
+            mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+            mask-composite: exclude;
+            pointer-events: none;
           }
         `;
 
