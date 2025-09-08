@@ -14,7 +14,7 @@ import { AlertBar, createAlertBarRenderer } from './AlertBar';
 import { Alert, useHealthBarData } from './useHealthBarData';
 import { HealthBarXAxis } from './HealthBarXAxis';
 import { RADIUS_SIZE, CHART_HEIGHT, BAR_SIZE } from './utils';
-import { CustomTooltipPortal } from './CustomTooltipPortal';
+import { GlobalHealthBarTooltip } from './GlobalHealthBarTooltip';
 
 export interface GlobalHealthProps {
   id: string;
@@ -96,7 +96,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
           }}
           content={(props: TooltipContentProps<number, string>) => {
             return (
-              <CustomTooltipPortal
+              <GlobalHealthBarTooltip
                 tooltipData={tooltipData}
                 tooltipProps={props}
                 chartContainerRef={chartContainerRef}

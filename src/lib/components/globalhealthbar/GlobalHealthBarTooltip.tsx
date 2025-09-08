@@ -6,7 +6,7 @@ import { Alert } from './GlobalHealthBarRecharts.component';
 import { TooltipContentProps } from 'recharts';
 import { zIndex } from '../../style/theme';
 
-interface CustomTooltipPortalProps {
+interface GlobalHealthBarTooltipProps {
   tooltipData: Alert | null;
   coordinate?: { x: number; y: number };
   tooltipProps: TooltipContentProps<number, string>;
@@ -36,7 +36,7 @@ const TooltipContainer = styled.div<{
   }}
 `;
 
-export const CustomTooltipPortal = (props: CustomTooltipPortalProps) => {
+export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
   const { tooltipData, tooltipProps, chartContainerRef } = props;
   const { coordinate } = tooltipProps;
 
