@@ -123,6 +123,25 @@ export const Layout2MainContentOnly = {
   ),
 };
 
+export const Layout2TransparentBackground = {
+  render: () => (
+    <Layout2
+      variant='transparent'
+      headerNavigation={
+        <HeaderComponent>
+          <h3>Header navigation</h3>
+        </HeaderComponent>
+      }
+    >
+      <AppContainer>
+        <AppContainer.MainContent hasTopMargin>
+          Main content
+        </AppContainer.MainContent>
+      </AppContainer>
+    </Layout2>
+  ),
+};
+
 export const Layout2OverallSummaryAndMainContent = {
   render: () => (
     <Layout2
