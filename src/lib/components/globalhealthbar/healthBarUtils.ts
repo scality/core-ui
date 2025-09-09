@@ -14,7 +14,7 @@ export const CHART_CONFIG = {
   FONT_SIZE: fontSize.smaller,
   TEXT_DY_OFFSET: 12,
   TICK_INTERVAL: 0,
-  MARGINS: { left: 24, right: 24, bottom: 4, top: 4 },
+  MARGINS: { left: 28, right: 28, bottom: 4, top: 4 },
 } as const;
 
 export const TIME_CONSTANTS = {
@@ -90,7 +90,7 @@ export const getEdgeMargin = (
   isDaySpan: boolean,
 ): number => {
   if (isDaySpan && totalTicks === 5) {
-    return index === 0 ? -12 : index === totalTicks - 1 ? 12 : 0;
+    return index === 0 ? -8 : index === totalTicks - 1 ? 8 : 0;
   }
   return 0;
 };
