@@ -90,7 +90,7 @@ export const getEdgeMargin = (
   isDaySpan: boolean,
 ): number => {
   if (isDaySpan && totalTicks === 5) {
-    return index === 0 ? -8 : index === totalTicks - 1 ? 8 : 0;
+    return index === 0 ? -12 : index === totalTicks - 1 ? 12 : 0;
   }
   return 0;
 };
