@@ -149,7 +149,15 @@ export function addMissingDataPoint(
   const newValues: [number, number | string | null][] = [];
 
   // Process all but the last element
+
   for (let i = 0; i < orginalValues.length - 1; i++) {
+    if (
+      orginalValues[i][0] < startingTimeStamp ||
+      orginalValues[i][0] > startingTimeStamp + sampleDuration
+    ) {
+      continue;
+    }
+
     // Always add the current data point
     newValues.push(orginalValues[i]);
 
