@@ -27,7 +27,7 @@ export const TIME_CONSTANTS = {
 } as const;
 
 export const LABEL_CONFIG = {
-  MIN_SPACE_PER_TICK: 60,
+  MIN_SPACE_PER_TICK: 80,
   MODULO_CONFIG: {
     [TIME_CONSTANTS.ONE_WEEK]: 2,
     [TIME_CONSTANTS.ONE_DAY]: 3,
