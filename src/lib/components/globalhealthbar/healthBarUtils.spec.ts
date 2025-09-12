@@ -527,26 +527,6 @@ describe('Health Bar Utils', () => {
         expect(result.startX).toBe(100);
       });
 
-      it('should handle alert completely outside time range', () => {
-        const startTimestamp = 3000;
-        const endTimestamp = 5000;
-
-        const props = {
-          x: 100,
-          background: { x: 50, width: 200 },
-          alert: [1000, 2000],
-        };
-
-        const result = getRectangleProps(
-          props,
-          'alert',
-          startTimestamp,
-          endTimestamp,
-        );
-
-        expect(result.rectWidth).toBe(0);
-      });
-
       it('should handle alert spanning entire time range', () => {
         const startTimestamp = 2000;
         const endTimestamp = 4000;

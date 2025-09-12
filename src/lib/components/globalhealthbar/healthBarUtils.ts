@@ -185,14 +185,6 @@ export const getRectangleProps = (
   const alertStartTimestamp = props[key][0];
   const alertEndTimestamp = props[key][1];
 
-  // Check if alert is completely outside the time range
-  if (
-    alertEndTimestamp <= startTimestamp ||
-    alertStartTimestamp >= endTimestamp
-  ) {
-    return { rectWidth: 0, startX };
-  }
-
   const start = Math.max(alertStartTimestamp, startTimestamp);
   const end = Math.min(alertEndTimestamp, endTimestamp);
   const relativeSize = (end - start) / (endTimestamp - startTimestamp);
