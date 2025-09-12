@@ -158,7 +158,7 @@ export const calculateLabelVisibility = (
   if (span === TIME_CONSTANTS.ONE_HOUR) {
     return (
       (endTimestamp % (15 * 60 * 1000) === 0 && index % 2 === 0) ||
-      index % 2 === 0
+      index % 3 === 0
     );
   }
 
