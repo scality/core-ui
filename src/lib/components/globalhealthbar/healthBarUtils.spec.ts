@@ -1,7 +1,5 @@
 import {
-  CHART_CONFIG,
   TIME_CONSTANTS,
-  LABEL_CONFIG,
   calculateSevenDayTicks,
   calculateDayTicks,
   calculateHourTicks,
@@ -148,6 +146,14 @@ describe('Health Bar Utils', () => {
         const ticks = getTicks(startTimestamp, endTimestamp);
         expect(ticks.length).toBe(5);
       });
+
+      it('should return empty array for unsupported time spans', () => {
+        const startTimestamp = new Date('2023-12-07T12:00:00Z').getTime();
+        const endTimestamp = startTimestamp + 2 * TIME_CONSTANTS.ONE_HOUR;
+
+        const ticks = getTicks(startTimestamp, endTimestamp);
+        expect(ticks).toEqual([]);
+      });
     });
   });
 
@@ -241,6 +247,9 @@ describe('Health Bar Utils', () => {
         expect(shouldShowTickLabel(config)).toBe(false);
 
         config.tickIndex = 2;
+        expect(shouldShowTickLabel(config)).toBe(false);
+
+        config.tickIndex = 3;
         expect(shouldShowTickLabel(config)).toBe(true);
       });
 
@@ -375,6 +384,15 @@ describe('Health Bar Utils', () => {
             totalTicks,
             span,
             2,
+            endTimestamp,
+          ),
+        ).toBe(false);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            3,
             endTimestamp,
           ),
         ).toBe(true);

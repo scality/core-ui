@@ -31,7 +31,7 @@ export const LABEL_CONFIG = {
   MODULO_CONFIG: {
     [TIME_CONSTANTS.ONE_WEEK]: 2,
     [TIME_CONSTANTS.ONE_DAY]: 3,
-    [TIME_CONSTANTS.ONE_HOUR]: 2,
+    [TIME_CONSTANTS.ONE_HOUR]: 3,
   },
 } as const;
 
@@ -184,6 +184,14 @@ export const getRectangleProps = (
 
   const alertStartTimestamp = props[key][0];
   const alertEndTimestamp = props[key][1];
+
+  // Check if alert is completely outside the time range
+  if (
+    alertEndTimestamp <= startTimestamp ||
+    alertStartTimestamp >= endTimestamp
+  ) {
+    return { rectWidth: 0, startX };
+  }
 
   const start = Math.max(alertStartTimestamp, startTimestamp);
   const end = Math.min(alertEndTimestamp, endTimestamp);
