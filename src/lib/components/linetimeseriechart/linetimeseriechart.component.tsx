@@ -9,7 +9,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
@@ -139,6 +139,7 @@ export type LineChartProps = (
     label: string;
   }[];
   syncId?: string;
+  syncTooltips?: boolean;
   isLoading?: boolean;
   /**
    * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
@@ -156,14 +157,17 @@ const CustomTooltip = ({
   label,
   unitLabel,
   timeFormat,
+  isChartActive,
 }: {
   active?: boolean;
   payload?: Array<TooltipPayload>;
   label?: string;
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
+  isChartActive?: boolean;
 }) => {
-  if (!active || !payload || !payload.length || !label) return null;
+  if (!active || !payload || !payload.length || !label || !isChartActive)
+    return null;
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
   const sortedPayload = [...payload].sort((a, b) => {
@@ -228,11 +232,17 @@ export function LineTimeSerieChart({
   yAxisTitle,
   helpText,
   syncId,
+
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
   const { getColor, selectedResources } = useChartLegend();
   const chartRef = useRef(null);
+  const [isChartHovered, setIsChartHovered] = useState(false);
+  const [isChartFocused, setIsChartFocused] = useState(false);
+
+  // Chart is considered "active" if hovered or focused (for keyboard nav)
+  const isChartActive = isChartHovered || isChartFocused;
 
   const chartData = useMemo(() => {
     // 1. Add missing data points
@@ -441,96 +451,109 @@ export function LineTimeSerieChart({
         )}
         {isLoading && <Loader />}
       </ChartHeader>
-      <ResponsiveContainer width="100%" height={height}>
-        <LineChart
-          data={rechartsData}
-          ref={chartRef}
-          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          aria-label={`Time series chart for ${title}`}
-          syncId={syncId}
-        >
-          <CartesianGrid
-            vertical={true}
-            horizontal={true}
-            verticalPoints={[0]}
-            horizontalPoints={[0]}
-            stroke={theme.border}
-            fill={theme.backgroundLevel4}
-            strokeWidth={1}
-          />
-          <XAxis
-            dataKey="timestamp"
-            type="number"
-            domain={['dataMin', 'dataMax']}
-            ticks={xAxisTicks}
-            tickFormatter={formatXAxisLabelCallback}
-            tickCount={5}
-            tick={{
-              fill: theme.textSecondary,
-              fontSize: fontSize.smaller,
-            }}
-            axisLine={{ stroke: theme.border }}
-          />
-          <YAxis
-            orientation="right"
-            allowDataOverflow={false}
-            label={{
-              value: yAxisTitle,
-              angle: 90,
-              position: 'insideRight',
-              style: {
-                textAnchor: 'middle',
+      <div
+        onFocus={() => setIsChartFocused(true)}
+        onBlur={() => setIsChartFocused(false)}
+        onFocusCapture={() => setIsChartFocused(true)}
+        onBlurCapture={() => setIsChartFocused(false)}
+      >
+        <ResponsiveContainer width="100%" height={height}>
+          <LineChart
+            data={rechartsData}
+            ref={chartRef}
+            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+            aria-label={`Time series chart for ${title}`}
+            syncId={syncId}
+            onMouseEnter={() => setIsChartHovered(true)}
+            onMouseLeave={() => setIsChartHovered(false)}
+          >
+            <CartesianGrid
+              vertical={true}
+              horizontal={true}
+              verticalPoints={[0]}
+              horizontalPoints={[0]}
+              stroke={theme.border}
+              fill={theme.backgroundLevel4}
+              strokeWidth={1}
+            />
+            <XAxis
+              dataKey="timestamp"
+              type="number"
+              domain={['dataMin', 'dataMax']}
+              ticks={xAxisTicks}
+              tickFormatter={formatXAxisLabelCallback}
+              tickCount={5}
+              tick={{
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
-              },
-            }}
-            domain={
-              yAxisType === 'percentage'
-                ? [0, 100]
-                : yAxisType === 'symmetrical'
-                  ? [-topValue, topValue]
-                  : [0, topValue]
-            }
-            axisLine={{ stroke: theme.border }}
-            tick={{
-              fill: theme.textSecondary,
-              fontSize: fontSize.smaller,
-            }}
-            tickFormatter={(value) => Math.round(value).toString()}
-            tickCount={5}
-            interval={'preserveStartEnd'}
-          />
-          <Tooltip
-            content={
-              <CustomTooltip unitLabel={unitLabel} timeFormat={timeFormat} />
-            }
-          />
-          {/* Add horizontal line at y=0 for symmetrical charts */}
-          {yAxisType === 'symmetrical' && (
-            <ReferenceLine y={0} stroke={theme.border} />
-          )}
-
-          {/* Chart lines */}
-          {Object.entries(groupedSeries).map(([resource, resourceSeries]) =>
-            resourceSeries.map((serie, serieIndex) => {
-              const label = serie.getTooltipLabel(
-                serie.metricPrefix,
-                serie.resource,
-              );
-              return (
-                <Line
-                  key={`${title}-${resource}-${serieIndex}`}
-                  type="monotone"
-                  dataKey={label}
-                  stroke={colorMapping[resource]}
-                  dot={false}
-                  isAnimationActive={false}
+              }}
+              axisLine={{ stroke: theme.border }}
+            />
+            <YAxis
+              orientation="right"
+              allowDataOverflow={false}
+              label={{
+                value: yAxisTitle,
+                angle: 90,
+                position: 'insideRight',
+                style: {
+                  textAnchor: 'middle',
+                  fill: theme.textSecondary,
+                  fontSize: fontSize.smaller,
+                },
+              }}
+              domain={
+                yAxisType === 'percentage'
+                  ? [0, 100]
+                  : yAxisType === 'symmetrical'
+                    ? [-topValue, topValue]
+                    : [0, topValue]
+              }
+              axisLine={{ stroke: theme.border }}
+              tick={{
+                fill: theme.textSecondary,
+                fontSize: fontSize.smaller,
+              }}
+              tickFormatter={(value) => Math.round(value).toString()}
+              tickCount={5}
+              interval={'preserveStartEnd'}
+            />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  unitLabel={unitLabel}
+                  timeFormat={timeFormat}
+                  isChartActive={isChartActive}
                 />
-              );
-            }),
-          )}
-        </LineChart>
-      </ResponsiveContainer>
+              }
+            />
+            {/* Add horizontal line at y=0 for symmetrical charts */}
+            {yAxisType === 'symmetrical' && (
+              <ReferenceLine y={0} stroke={theme.border} />
+            )}
+
+            {/* Chart lines */}
+            {Object.entries(groupedSeries).map(([resource, resourceSeries]) =>
+              resourceSeries.map((serie, serieIndex) => {
+                const label = serie.getTooltipLabel(
+                  serie.metricPrefix,
+                  serie.resource,
+                );
+                return (
+                  <Line
+                    key={`${title}-${resource}-${serieIndex}`}
+                    type="monotone"
+                    dataKey={label}
+                    stroke={colorMapping[resource]}
+                    dot={false}
+                    isAnimationActive={false}
+                  />
+                );
+              }),
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </LineTemporalChartWrapper>
   );
 }

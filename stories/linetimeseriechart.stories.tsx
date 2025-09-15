@@ -648,6 +648,7 @@ export const SyncIdExample: Story = {
       >
         <LineTimeSerieChart
           syncId="sync-id"
+          syncTooltips={true}
           series={{
             above: [
               {
@@ -691,6 +692,7 @@ export const SyncIdExample: Story = {
 
         <LineTimeSerieChart
           syncId="sync-id"
+          syncTooltips={true}
           series={{
             above: [
               {
