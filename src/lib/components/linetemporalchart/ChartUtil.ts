@@ -148,8 +148,16 @@ export function addMissingDataPoint(
 
   const newValues: [number, number | string | null][] = [];
 
-  // Process all but the last element
+  // add missing data points for the starting time
+  for (
+    let i = startingTimeStamp;
+    i < orginalValues[0][0];
+    i += sampleInterval
+  ) {
+    newValues.push([i, NAN_STRING]);
+  }
 
+  // Process all but the last element
   for (let i = 0; i < orginalValues.length - 1; i++) {
     if (
       orginalValues[i][0] < startingTimeStamp ||
@@ -178,8 +186,18 @@ export function addMissingDataPoint(
   // Add the last element
   newValues.push(orginalValues[orginalValues.length - 1]);
 
+  // add missing data points for the ending time
+  for (
+    let i = orginalValues[orginalValues.length - 1][0] + sampleInterval;
+    i < startingTimeStamp + sampleDuration;
+    i += sampleInterval
+  ) {
+    newValues.push([i, NAN_STRING]);
+  }
+
   return newValues;
 }
+
 // get the value for the based value
 // TODO: We need to handle the negative value in the future
 export const getRelativeValue = (value: number, base: number) => {
