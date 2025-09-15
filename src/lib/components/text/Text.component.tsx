@@ -3,6 +3,13 @@ import { spacing } from '../../spacing';
 import { CoreUITheme } from '../../style/theme';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
+export type TextVariant =
+  | 'ChartTitle'
+  | 'Basic'
+  | 'Smaller'
+  | 'Larger'
+  | 'Large';
+
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
   children: React.ReactNode | string;
@@ -128,7 +135,7 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
 `;
 
 export const Text = styled.span<{
-  variant?: 'ChartTitle' | 'Basic' | 'Smaller' | 'Larger' | 'Large';
+  variant?: TextVariant;
   color?: keyof CoreUITheme;
   isEmphazed?: boolean;
   isGentleEmphazed?: boolean;
