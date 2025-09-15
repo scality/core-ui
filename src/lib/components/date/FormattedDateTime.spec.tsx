@@ -224,7 +224,7 @@ describe('FormatttedDateTime', () => {
       />,
     );
     //V
-    expect(screen.getByText('6 Oct 18:33')).toBeInTheDocument();
+    expect(screen.getByText('06 Oct 18:33')).toBeInTheDocument();
   });
 
   it('should display the date in the expected format of date in the chart', () => {
@@ -236,6 +236,6 @@ describe('FormatttedDateTime', () => {
       />,
     );
     //V
-    expect(screen.getByText('6 Oct 18:33:00')).toBeInTheDocument();
+    expect(screen.getByText('06 Oct 18:33:00')).toBeInTheDocument();
   });
 });
