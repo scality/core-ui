@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { LineTimeSerieChart } from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
+import {
+  LineTimeSerieChart,
+  Serie,
+} from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
 import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegendWrapper';
 import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
 import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
@@ -8,6 +11,7 @@ import {
   SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
 } from '../src/lib/components/constants';
+import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 
 const ChartWithProviders = (props) => {
   return (

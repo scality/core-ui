@@ -113,15 +113,15 @@ export type Serie = {
 
 type NonSymmetricalChartSerie = {
   yAxisType?: 'default' | 'percentage';
-  series: Serie[];
+  series: Serie[] | undefined;
 };
 
 // The symmetrical chart props are used to display two series on the same chart, such as in/out, write/read
 type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
   series: {
-    above: Serie[];
-    below: Serie[];
+    above: Serie[] | undefined;
+    below: Serie[] | undefined;
   };
 };
 
@@ -212,7 +212,7 @@ const CustomTooltip = ({
 };
 
 const isSymmetricalSeries = (
-  series: Serie[] | { above: Serie[]; below: Serie[] },
+  series: Serie[] | { above: Serie[] | undefined; below: Serie[] | undefined },
 ): series is { above: Serie[]; below: Serie[] } => {
   return 'above' in series && 'below' in series;
 };
@@ -240,6 +240,21 @@ export function LineTimeSerieChart({
   const [isChartActive, setIsChartActive] = useState(false);
 
   const chartData = useMemo(() => {
+    // Guard against empty/undefined series data
+    if (!series || (Array.isArray(series) && series.length === 0)) {
+      return [];
+    }
+
+    // Handle symmetrical series with empty above/below arrays
+    if (isSymmetricalSeries(series)) {
+      if (
+        (!series.above || series.above.length === 0) &&
+        (!series.below || series.below.length === 0)
+      ) {
+        return [];
+      }
+    }
+
     // 1. Add missing data points
     const normalizedSeries =
       yAxisType === 'symmetrical' && isSymmetricalSeries(series)
@@ -363,6 +378,15 @@ export function LineTimeSerieChart({
         .filter((value): value is number => value !== null),
     );
 
+    // Guard against empty values array
+    if (values.length === 0) {
+      return {
+        topValue: 100, // Default value for empty charts
+        unitLabel: '',
+        rechartsData: [],
+      };
+    }
+
     const top = Math.abs(Math.max(...values));
     const bottom = Math.abs(Math.min(...values));
     const maxValue = Math.max(top, bottom);
@@ -387,8 +411,14 @@ export function LineTimeSerieChart({
   // Group series by resource and create color mapping
   const { colorMapping, groupedSeries } = useMemo(() => {
     const mapping: Record<string, string> = {};
+
+    // Guard against empty/undefined series
+    if (!series) {
+      return { colorMapping: mapping, groupedSeries: {} };
+    }
+
     const allSeries = isSymmetricalSeries(series)
-      ? [...series.above, ...series.below]
+      ? [...(series.above || []), ...(series.below || [])]
       : (series as Serie[]);
 
     // Group series by resource
