@@ -24,13 +24,13 @@ import { ChartTooltip } from './ChartTooltip';
 import { UnitRange, useChartData } from './utils';
 
 const CHART_CONSTANTS = {
-  TICK_WIDTH_OFFSET: 5,
+  TICK_WIDTH_OFFSET: 4,
   BAR_SIZE: 12,
   MIN_POINT_SIZE: 3,
   DEFAULT_HEIGHT: 200,
   CHART_MARGIN: {
     left: 0,
-    right: 0,
+    right: -10,
     top: 0,
     bottom: 0,
   },
