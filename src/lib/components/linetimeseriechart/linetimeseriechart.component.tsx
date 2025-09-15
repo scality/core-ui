@@ -138,6 +138,7 @@ export type LineChartProps = (
     threshold: number;
     label: string;
   }[];
+  syncId?: string;
   isLoading?: boolean;
   /**
    * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
@@ -226,6 +227,7 @@ export function LineTimeSerieChart({
   yAxisType = 'default',
   yAxisTitle,
   helpText,
+  syncId,
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
@@ -445,6 +447,7 @@ export function LineTimeSerieChart({
           ref={chartRef}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           aria-label={`Time series chart for ${title}`}
+          syncId={syncId}
         >
           <CartesianGrid
             vertical={true}

@@ -634,3 +634,86 @@ export const DateFormatExample: Story = {
     timeFormat: 'date',
   },
 };
+
+export const SyncIdExample: Story = {
+  render: () => {
+    return (
+      <ChartLegendWrapper
+        colorSet={{
+          'ip-10-160-122-207.eu-north-1.compute.internal':
+            lineTimeSeriesColorRange[0],
+          'ip-10-160-122-207.eu-north-2.compute.internal':
+            lineTimeSeriesColorRange[1],
+        }}
+      >
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={{
+            above: [
+              {
+                data: prometheusData as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+                metricPrefix: 'in',
+                getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+              },
+              {
+                data: prometheusData2 as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
+                metricPrefix: 'in',
+                getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+              },
+            ],
+            below: [
+              {
+                data: prometheusData3 as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+                metricPrefix: 'out',
+                getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+              },
+              {
+                data: prometheusData4 as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
+                metricPrefix: 'out',
+                getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+              },
+            ],
+          }}
+          title="ControlPlane Bandwidth"
+          height={200}
+          startingTimeStamp={Number(prometheusData[0][0])}
+          unitRange={UNIT_RANGE_BS}
+          isLoading={false}
+          yAxisType={'symmetrical'}
+          yAxisTitle={'in(+)/out(-)'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={{
+            above: [
+              {
+                data: prometheusData2 as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+                metricPrefix: 'in',
+                getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+              },
+            ],
+            below: [],
+          }}
+          title="ControlPlane Bandwidth 2"
+          height={200}
+          startingTimeStamp={Number(prometheusData2[0][0])}
+          unitRange={UNIT_RANGE_BS}
+          isLoading={false}
+          yAxisType={'symmetrical'}
+          yAxisTitle={'in(+)/out(-)'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    );
+  },
+};
