@@ -27,7 +27,7 @@ describe('ChartTooltip', () => {
     successValue: () => screen.queryByText(SUCCESS_VALUE),
     failed: () => screen.queryByText(/Failed/),
     failedValue: () => screen.queryByText(FAILED_VALUE),
-    date: () => screen.queryByText(/Monday, 1 July 2024/),
+    date: () => screen.queryByText(/Monday, 01 July 2024/),
     time: () => screen.queryByText(/00:00/),
   };
   it('should render the ChartTooltip component', () => {
