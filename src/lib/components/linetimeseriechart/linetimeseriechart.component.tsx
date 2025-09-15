@@ -229,7 +229,7 @@ export function LineTimeSerieChart({
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
-  const { getColor } = useChartLegend();
+  const { getColor, selectedResources } = useChartLegend();
   const chartRef = useRef(null);
 
   const chartData = useMemo(() => {
@@ -385,17 +385,19 @@ export function LineTimeSerieChart({
       : (series as Serie[]);
 
     // Group series by resource
-    const groups = allSeries.reduce(
-      (acc, serie) => {
-        const key = serie.resource;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-        acc[key].push(serie);
-        return acc;
-      },
-      {} as Record<string, Serie[]>,
-    );
+    const groups = allSeries
+      .filter((serie) => selectedResources.includes(serie.resource))
+      .reduce(
+        (acc, serie) => {
+          const key = serie.resource;
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+          acc[key].push(serie);
+          return acc;
+        },
+        {} as Record<string, Serie[]>,
+      );
 
     // Get colors from the ChartLegend context
     Object.keys(groups).forEach((resource) => {
@@ -411,7 +413,7 @@ export function LineTimeSerieChart({
       colorMapping: mapping,
       groupedSeries: groups,
     };
-  }, [series, getColor]);
+  }, [series, getColor, selectedResources]);
 
   // Format time for display the tick in the x axis
   const formatXAxisLabelCallback = useCallback(
