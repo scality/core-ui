@@ -9,7 +9,7 @@ export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
-  day: 'numeric',
+  day: '2-digit',
 });
 
 /**
@@ -71,7 +71,7 @@ export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
   'en-GB',
   {
-    day: 'numeric',
+    day: '2-digit',
     month: 'short',
     hour: '2-digit',
     minute: '2-digit',
@@ -85,7 +85,7 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
  * @example 6 Oct 18:33
  */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
-  day: 'numeric',
+  day: '2-digit',
   month: 'short',
   hour: '2-digit',
   minute: '2-digit',
