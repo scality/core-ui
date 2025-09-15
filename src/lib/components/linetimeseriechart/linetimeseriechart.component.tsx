@@ -139,7 +139,6 @@ export type LineChartProps = (
     label: string;
   }[];
   syncId?: string;
-  syncTooltips?: boolean;
   isLoading?: boolean;
   /**
    * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
@@ -232,17 +231,13 @@ export function LineTimeSerieChart({
   yAxisTitle,
   helpText,
   syncId,
-
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
   const { getColor, selectedResources } = useChartLegend();
   const chartRef = useRef(null);
-  const [isChartHovered, setIsChartHovered] = useState(false);
-  const [isChartFocused, setIsChartFocused] = useState(false);
 
-  // Chart is considered "active" if hovered or focused (for keyboard nav)
-  const isChartActive = isChartHovered || isChartFocused;
+  const [isChartActive, setIsChartActive] = useState(false);
 
   const chartData = useMemo(() => {
     // 1. Add missing data points
@@ -452,10 +447,10 @@ export function LineTimeSerieChart({
         {isLoading && <Loader />}
       </ChartHeader>
       <div
-        onFocus={() => setIsChartFocused(true)}
-        onBlur={() => setIsChartFocused(false)}
-        onFocusCapture={() => setIsChartFocused(true)}
-        onBlurCapture={() => setIsChartFocused(false)}
+        onFocus={() => setIsChartActive(true)}
+        onBlur={() => setIsChartActive(false)}
+        onFocusCapture={() => setIsChartActive(true)}
+        onBlurCapture={() => setIsChartActive(false)}
       >
         <ResponsiveContainer width="100%" height={height}>
           <LineChart
@@ -464,8 +459,8 @@ export function LineTimeSerieChart({
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
             aria-label={`Time series chart for ${title}`}
             syncId={syncId}
-            onMouseEnter={() => setIsChartHovered(true)}
-            onMouseLeave={() => setIsChartHovered(false)}
+            onMouseEnter={() => setIsChartActive(true)}
+            onMouseLeave={() => setIsChartActive(false)}
           >
             <CartesianGrid
               vertical={true}
