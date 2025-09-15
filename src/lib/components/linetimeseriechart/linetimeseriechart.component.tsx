@@ -119,10 +119,12 @@ type NonSymmetricalChartSerie = {
 // The symmetrical chart props are used to display two series on the same chart, such as in/out, write/read
 type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
-  series: {
-    above: Serie[] | undefined;
-    below: Serie[] | undefined;
-  };
+  series:
+    | {
+        above: Serie[] | undefined;
+        below: Serie[] | undefined;
+      }
+    | undefined;
 };
 
 export type LineChartProps = (
@@ -259,31 +261,35 @@ export function LineTimeSerieChart({
     const normalizedSeries =
       yAxisType === 'symmetrical' && isSymmetricalSeries(series)
         ? {
-            above: series.above.map((line) => ({
-              ...line,
-              data: addMissingDataPoint(
-                line.data,
-                startingTimeStamp,
-                duration,
-                interval,
-              ),
-            })),
+            above: series.above
+              ? series.above.map((line) => ({
+                  ...line,
+                  data: addMissingDataPoint(
+                    line.data,
+                    startingTimeStamp,
+                    duration,
+                    interval,
+                  ),
+                }))
+              : [],
             // Convert positive values to negative values
-            below: series.below.map((line) => ({
-              ...line,
-              data: addMissingDataPoint(
-                line.data,
-                startingTimeStamp,
-                duration,
-                interval,
-              ).map(
-                ([timestamp, value]) =>
-                  [timestamp, value === null ? null : `-${Number(value)}`] as [
-                    number,
-                    string | null,
-                  ],
-              ),
-            })),
+            below: series.below
+              ? series.below.map((line) => ({
+                  ...line,
+                  data: addMissingDataPoint(
+                    line.data,
+                    startingTimeStamp,
+                    duration,
+                    interval,
+                  ).map(
+                    ([timestamp, value]) =>
+                      [
+                        timestamp,
+                        value === null ? null : `-${Number(value)}`,
+                      ] as [number, string | null],
+                  ),
+                }))
+              : [],
           }
         : (series as Serie[]).map((line) => ({
             ...line,
