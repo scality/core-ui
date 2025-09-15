@@ -238,4 +238,29 @@ describe('FormatttedDateTime', () => {
     //V
     expect(screen.getByText('06 Oct 18:33:00')).toBeInTheDocument();
   });
+  it('should display 3 letter month for September date', () => {
+    //S
+    render(
+      <>
+        <FormattedDateTime
+          format="day-month-abbreviated-hour-minute"
+          value={new Date('2022-09-06T18:33:00Z')}
+        />
+        <FormattedDateTime
+          format="day-month-abbreviated-hour-minute-second"
+          value={new Date('2022-09-06T18:33:00Z')}
+        />
+
+        <FormattedDateTime
+          format="chart-date"
+          value={new Date('2022-09-06T18:33:00Z')}
+        />
+      </>,
+    );
+    //V
+    expect(screen.getByText(/06 Sep 18:33/)).toBeInTheDocument();
+    expect(screen.getByText(/06 Sep 18:33:00/)).toBeInTheDocument();
+    expect(screen.getByText(/Tue06Sep/)).toBeInTheDocument();
+    expect(screen.queryByText(/Sept/)).not.toBeInTheDocument();
+  });
 });
