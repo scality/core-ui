@@ -118,6 +118,7 @@ export const ButtonStyled = styled.button<Props>`
       case 'outline':
         return css`
           border: ${spacing.r1} solid transparent;
+          border-color: ${brand.border}; // fallback for linear-gradient button themes
           border-color: ${brand.buttonSecondary};
           background-color: transparent;
           color: ${brand.textPrimary};
@@ -144,7 +145,6 @@ export const ButtonStyled = styled.button<Props>`
             position: absolute;
             inset: 0;
             padding: ${spacing.r1};
-            background-image: ${brand.buttonSecondary};
             border-radius: inherit;
             mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
             mask-composite: exclude;

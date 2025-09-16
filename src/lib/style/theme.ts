@@ -150,7 +150,7 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     selectedActive: '#037AFF',
     highlight: '#1A3C75',
     border: '#4A4A4A',
-    buttonPrimary: 'linear-gradient(130deg, #9355E7 0%, #2E4AA3 100%)',
+    buttonPrimary: 'linear-gradient(130deg, #9355E7 0%, #2E4AA3 60%)',
     buttonSecondary: 'linear-gradient(130deg, #595A78 0%, #44455F 100%)',
     buttonDelete: '#3D0808',
     infoPrimary: '#8E8EAC',
