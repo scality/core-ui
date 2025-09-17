@@ -1,35 +1,30 @@
 import {
+  CartesianGrid,
   Line,
   LineChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
+  TooltipContentProps,
   XAxis,
   YAxis,
-  CartesianGrid,
 } from 'recharts';
-import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useTheme } from 'styled-components';
-import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
-import styled from 'styled-components';
-import { fontSize, fontWeight } from '../../style/theme';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { ChartTitleText, SmallerText } from '../text/Text.component';
-import { Loader } from '../loader/Loader.component';
+import styled, { useTheme } from 'styled-components';
 import { spacing } from '../../spacing';
-import { getUnitLabel } from '../linetemporalchart/ChartUtil';
-import { Icon } from '../icon/Icon.component';
-import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
-import { FormattedDateTime } from '../date/FormattedDateTime';
+import { fontSize, fontWeight } from '../../style/theme';
 import { Box } from '../box/Box';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
+import { FormattedDateTime } from '../date/FormattedDateTime';
+import { Icon } from '../icon/Icon.component';
+import {
+  addMissingDataPoint,
+  getUnitLabel,
+} from '../linetemporalchart/ChartUtil';
+import { Loader } from '../loader/Loader.component';
+import { ChartTitleText, SmallerText } from '../text/Text.component';
+import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { formatXAxisLabel } from './utils';
-
-type TooltipPayload = Payload<number, string> & {
-  value: number;
-  name: string;
-  color: string;
-};
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -43,7 +38,7 @@ const ChartHeader = styled.div`
   align-items: center;
 `;
 
-const TooltipContainer = styled.div`
+export const TooltipContainer = styled.div`
   background-color: ${(props) => props.theme.backgroundLevel1};
   padding: ${spacing.r8};
   border: 1px solid ${(props) => props.theme.border};
@@ -52,7 +47,7 @@ const TooltipContainer = styled.div`
   max-width: 250px;
 `;
 
-const TooltipTime = styled.div`
+export const TooltipTime = styled.div`
   margin-bottom: ${spacing.r8};
   color: ${(props) => props.theme.textPrimary};
   font-size: ${fontSize.smaller};
@@ -150,25 +145,38 @@ export type LineChartProps = (
   timeFormat?: 'date-time' | 'date';
   yAxisTitle?: string;
   helpText?: string;
+  renderTooltip?: (
+    tooltipProps: TooltipContentProps<number, string>,
+    unitLabel?: string,
+    timeFormat?: 'date-time' | 'date',
+  ) => React.ReactNode;
 };
 
 const CustomTooltip = ({
-  active,
-  payload,
-  label,
   unitLabel,
   timeFormat,
   isChartActive,
+  tooltipProps,
+  renderTooltip,
 }: {
-  active?: boolean;
-  payload?: Array<TooltipPayload>;
-  label?: string;
+  tooltipProps: TooltipContentProps<number, string>;
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
   isChartActive?: boolean;
+  renderTooltip?: (
+    tooltipProps: TooltipContentProps<number, string>,
+    unitLabel?: string,
+    timeFormat?: 'date-time' | 'date',
+  ) => React.ReactNode;
 }) => {
+  const { active, payload, label, ...rest } = tooltipProps;
+
   if (!active || !payload || !payload.length || !label || !isChartActive)
     return null;
+
+  if (renderTooltip) {
+    return renderTooltip(tooltipProps, unitLabel, timeFormat);
+  }
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
   const sortedPayload = [...payload].sort((a, b) => {
@@ -233,6 +241,7 @@ export function LineTimeSerieChart({
   yAxisTitle,
   helpText,
   syncId,
+  renderTooltip,
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
@@ -550,13 +559,15 @@ export function LineTimeSerieChart({
               interval={'preserveStartEnd'}
             />
             <Tooltip
-              content={
+              content={(props: TooltipContentProps<number, string>) => (
                 <CustomTooltip
                   unitLabel={unitLabel}
                   timeFormat={timeFormat}
+                  renderTooltip={renderTooltip}
+                  tooltipProps={props}
                   isChartActive={isChartActive}
                 />
-              }
+              )}
             />
             {/* Add horizontal line at y=0 for symmetrical charts */}
             {yAxisType === 'symmetrical' && (

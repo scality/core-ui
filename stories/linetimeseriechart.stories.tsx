@@ -721,3 +721,29 @@ export const SyncIdExample: Story = {
     );
   },
 };
+export const CustomTooltipExample: Story = {
+  args: {
+    series: [
+      {
+        data: prometheusData,
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        metricPrefix: 'instance:10.160.122.207:9100',
+        getTooltipLabel: (prefix, resource) => `${resource}`,
+      },
+    ],
+    title: 'CPU Usage',
+    height: 200,
+    startingTimeStamp: prometheusData[0][0],
+    isLoading: false,
+    isLegendHidden: false,
+    helpText: 'This is the help text',
+    yAxisType: 'percentage',
+    yAxisTitle: '',
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    timeFormat: 'date-time',
+    renderTooltip: (props) => {
+      return <div>Custom Tooltip</div>;
+    },
+  },
+};
