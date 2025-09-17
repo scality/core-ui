@@ -743,7 +743,6 @@ export const CustomTooltipExample: Story = {
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
     timeFormat: 'date-time',
     renderTooltip: (props) => {
-      console.log('DEBUG props', props);
       return <div>Custom Tooltip</div>;
     },
   },

@@ -1,28 +1,29 @@
 import {
+  CartesianGrid,
   Line,
   LineChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
+  TooltipContentProps,
   XAxis,
   YAxis,
-  CartesianGrid,
-  TooltipContentProps,
 } from 'recharts';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useTheme } from 'styled-components';
-import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
-import styled from 'styled-components';
-import { fontSize, fontWeight } from '../../style/theme';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { ChartTitleText, SmallerText } from '../text/Text.component';
-import { Loader } from '../loader/Loader.component';
+import styled, { useTheme } from 'styled-components';
 import { spacing } from '../../spacing';
-import { getUnitLabel } from '../linetemporalchart/ChartUtil';
-import { Icon } from '../icon/Icon.component';
-import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
-import { FormattedDateTime } from '../date/FormattedDateTime';
+import { fontSize, fontWeight } from '../../style/theme';
 import { Box } from '../box/Box';
+import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
+import { FormattedDateTime } from '../date/FormattedDateTime';
+import { Icon } from '../icon/Icon.component';
+import {
+  addMissingDataPoint,
+  getUnitLabel,
+} from '../linetemporalchart/ChartUtil';
+import { Loader } from '../loader/Loader.component';
+import { ChartTitleText, SmallerText } from '../text/Text.component';
+import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { formatXAxisLabel } from './utils';
 
 const LineTemporalChartWrapper = styled.div`
@@ -144,7 +145,7 @@ export type LineChartProps = (
   timeFormat?: 'date-time' | 'date';
   yAxisTitle?: string;
   helpText?: string;
-  renderTooltip: (
+  renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
     timeFormat?: 'date-time' | 'date',
@@ -162,7 +163,7 @@ const CustomTooltip = ({
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
   isChartActive?: boolean;
-  renderTooltip: (
+  renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
     timeFormat?: 'date-time' | 'date',
