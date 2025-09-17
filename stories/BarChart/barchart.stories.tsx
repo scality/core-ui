@@ -987,7 +987,13 @@ export const StackedHistogram: Story = {
     ] as const;
     const theme = useTheme() as CoreUITheme;
     return (
-      <div style={{ width: '50%', padding: spacing.r16 }}>
+      <div
+        style={{
+          width: '50%',
+          padding: spacing.r16,
+          backgroundColor: theme.backgroundLevel2,
+        }}
+      >
         <ChartLegendWrapper
           colorSet={{
             'Test 1': theme.statusHealthy,

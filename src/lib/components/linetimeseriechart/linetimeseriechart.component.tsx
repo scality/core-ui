@@ -9,7 +9,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import type { Payload } from 'recharts/types/component/DefaultTooltipContent';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { addMissingDataPoint } from '../linetemporalchart/ChartUtil';
 import styled from 'styled-components';
@@ -113,16 +113,18 @@ export type Serie = {
 
 type NonSymmetricalChartSerie = {
   yAxisType?: 'default' | 'percentage';
-  series: Serie[];
+  series: Serie[] | undefined;
 };
 
 // The symmetrical chart props are used to display two series on the same chart, such as in/out, write/read
 type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
-  series: {
-    above: Serie[];
-    below: Serie[];
-  };
+  series:
+    | {
+        above: Serie[] | undefined;
+        below: Serie[] | undefined;
+      }
+    | undefined;
 };
 
 export type LineChartProps = (
@@ -138,6 +140,7 @@ export type LineChartProps = (
     threshold: number;
     label: string;
   }[];
+  syncId?: string;
   isLoading?: boolean;
   /**
    * The format of the x axis, default is 'date-time' which is like 01 Sep 16:00
@@ -155,14 +158,17 @@ const CustomTooltip = ({
   label,
   unitLabel,
   timeFormat,
+  isChartActive,
 }: {
   active?: boolean;
   payload?: Array<TooltipPayload>;
   label?: string;
   unitLabel?: string;
   timeFormat?: 'date-time' | 'date';
+  isChartActive?: boolean;
 }) => {
-  if (!active || !payload || !payload.length || !label) return null;
+  if (!active || !payload || !payload.length || !label || !isChartActive)
+    return null;
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
   const sortedPayload = [...payload].sort((a, b) => {
@@ -208,7 +214,7 @@ const CustomTooltip = ({
 };
 
 const isSymmetricalSeries = (
-  series: Serie[] | { above: Serie[]; below: Serie[] },
+  series: Serie[] | { above: Serie[] | undefined; below: Serie[] | undefined },
 ): series is { above: Serie[]; below: Serie[] } => {
   return 'above' in series && 'below' in series;
 };
@@ -226,42 +232,64 @@ export function LineTimeSerieChart({
   yAxisType = 'default',
   yAxisTitle,
   helpText,
+  syncId,
   ...rest
 }: LineChartProps) {
   const theme = useTheme();
-  const { getColor } = useChartLegend();
+  const { getColor, selectedResources } = useChartLegend();
   const chartRef = useRef(null);
 
+  const [isChartActive, setIsChartActive] = useState(false);
+
   const chartData = useMemo(() => {
+    // Guard against empty/undefined series data
+    if (!series || (Array.isArray(series) && series.length === 0)) {
+      return [];
+    }
+
+    // Handle symmetrical series with empty above/below arrays
+    if (isSymmetricalSeries(series)) {
+      if (
+        (!series.above || series.above.length === 0) &&
+        (!series.below || series.below.length === 0)
+      ) {
+        return [];
+      }
+    }
+
     // 1. Add missing data points
     const normalizedSeries =
       yAxisType === 'symmetrical' && isSymmetricalSeries(series)
         ? {
-            above: series.above.map((line) => ({
-              ...line,
-              data: addMissingDataPoint(
-                line.data,
-                startingTimeStamp,
-                duration,
-                interval,
-              ),
-            })),
+            above: series.above
+              ? series.above.map((line) => ({
+                  ...line,
+                  data: addMissingDataPoint(
+                    line.data,
+                    startingTimeStamp,
+                    duration,
+                    interval,
+                  ),
+                }))
+              : [],
             // Convert positive values to negative values
-            below: series.below.map((line) => ({
-              ...line,
-              data: addMissingDataPoint(
-                line.data,
-                startingTimeStamp,
-                duration,
-                interval,
-              ).map(
-                ([timestamp, value]) =>
-                  [timestamp, value === null ? null : `-${Number(value)}`] as [
-                    number,
-                    string | null,
-                  ],
-              ),
-            })),
+            below: series.below
+              ? series.below.map((line) => ({
+                  ...line,
+                  data: addMissingDataPoint(
+                    line.data,
+                    startingTimeStamp,
+                    duration,
+                    interval,
+                  ).map(
+                    ([timestamp, value]) =>
+                      [
+                        timestamp,
+                        value === null ? null : `-${Number(value)}`,
+                      ] as [number, string | null],
+                  ),
+                }))
+              : [],
           }
         : (series as Serie[]).map((line) => ({
             ...line,
@@ -356,6 +384,15 @@ export function LineTimeSerieChart({
         .filter((value): value is number => value !== null),
     );
 
+    // Guard against empty values array
+    if (values.length === 0) {
+      return {
+        topValue: 100, // Default value for empty charts
+        unitLabel: '',
+        rechartsData: [],
+      };
+    }
+
     const top = Math.abs(Math.max(...values));
     const bottom = Math.abs(Math.min(...values));
     const maxValue = Math.max(top, bottom);
@@ -380,22 +417,30 @@ export function LineTimeSerieChart({
   // Group series by resource and create color mapping
   const { colorMapping, groupedSeries } = useMemo(() => {
     const mapping: Record<string, string> = {};
+
+    // Guard against empty/undefined series
+    if (!series) {
+      return { colorMapping: mapping, groupedSeries: {} };
+    }
+
     const allSeries = isSymmetricalSeries(series)
-      ? [...series.above, ...series.below]
+      ? [...(series.above || []), ...(series.below || [])]
       : (series as Serie[]);
 
     // Group series by resource
-    const groups = allSeries.reduce(
-      (acc, serie) => {
-        const key = serie.resource;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-        acc[key].push(serie);
-        return acc;
-      },
-      {} as Record<string, Serie[]>,
-    );
+    const groups = allSeries
+      .filter((serie) => selectedResources.includes(serie.resource))
+      .reduce(
+        (acc, serie) => {
+          const key = serie.resource;
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+          acc[key].push(serie);
+          return acc;
+        },
+        {} as Record<string, Serie[]>,
+      );
 
     // Get colors from the ChartLegend context
     Object.keys(groups).forEach((resource) => {
@@ -411,7 +456,7 @@ export function LineTimeSerieChart({
       colorMapping: mapping,
       groupedSeries: groups,
     };
-  }, [series, getColor]);
+  }, [series, getColor, selectedResources]);
 
   // Format time for display the tick in the x axis
   const formatXAxisLabelCallback = useCallback(
@@ -437,95 +482,109 @@ export function LineTimeSerieChart({
         )}
         {isLoading && <Loader />}
       </ChartHeader>
-      <ResponsiveContainer width="100%" height={height}>
-        <LineChart
-          data={rechartsData}
-          ref={chartRef}
-          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          aria-label={`Time series chart for ${title}`}
-        >
-          <CartesianGrid
-            vertical={true}
-            horizontal={true}
-            verticalPoints={[0]}
-            horizontalPoints={[0]}
-            stroke={theme.border}
-            fill={theme.backgroundLevel4}
-            strokeWidth={1}
-          />
-          <XAxis
-            dataKey="timestamp"
-            type="number"
-            domain={['dataMin', 'dataMax']}
-            ticks={xAxisTicks}
-            tickFormatter={formatXAxisLabelCallback}
-            tickCount={5}
-            tick={{
-              fill: theme.textSecondary,
-              fontSize: fontSize.smaller,
-            }}
-            axisLine={{ stroke: theme.border }}
-          />
-          <YAxis
-            orientation="right"
-            allowDataOverflow={false}
-            label={{
-              value: yAxisTitle,
-              angle: 90,
-              position: 'insideRight',
-              style: {
-                textAnchor: 'middle',
+      <div
+        onFocus={() => setIsChartActive(true)}
+        onBlur={() => setIsChartActive(false)}
+        onFocusCapture={() => setIsChartActive(true)}
+        onBlurCapture={() => setIsChartActive(false)}
+      >
+        <ResponsiveContainer width="100%" height={height}>
+          <LineChart
+            data={rechartsData}
+            ref={chartRef}
+            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+            aria-label={`Time series chart for ${title}`}
+            syncId={syncId}
+            onMouseEnter={() => setIsChartActive(true)}
+            onMouseLeave={() => setIsChartActive(false)}
+          >
+            <CartesianGrid
+              vertical={true}
+              horizontal={true}
+              verticalPoints={[0]}
+              horizontalPoints={[0]}
+              stroke={theme.border}
+              fill={theme.backgroundLevel4}
+              strokeWidth={1}
+            />
+            <XAxis
+              dataKey="timestamp"
+              type="number"
+              domain={['dataMin', 'dataMax']}
+              ticks={xAxisTicks}
+              tickFormatter={formatXAxisLabelCallback}
+              tickCount={5}
+              tick={{
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
-              },
-            }}
-            domain={
-              yAxisType === 'percentage'
-                ? [0, 100]
-                : yAxisType === 'symmetrical'
-                  ? [-topValue, topValue]
-                  : [0, topValue]
-            }
-            axisLine={{ stroke: theme.border }}
-            tick={{
-              fill: theme.textSecondary,
-              fontSize: fontSize.smaller,
-            }}
-            tickFormatter={(value) => Math.round(value).toString()}
-            tickCount={5}
-            interval={'preserveStartEnd'}
-          />
-          <Tooltip
-            content={
-              <CustomTooltip unitLabel={unitLabel} timeFormat={timeFormat} />
-            }
-          />
-          {/* Add horizontal line at y=0 for symmetrical charts */}
-          {yAxisType === 'symmetrical' && (
-            <ReferenceLine y={0} stroke={theme.border} />
-          )}
-
-          {/* Chart lines */}
-          {Object.entries(groupedSeries).map(([resource, resourceSeries]) =>
-            resourceSeries.map((serie, serieIndex) => {
-              const label = serie.getTooltipLabel(
-                serie.metricPrefix,
-                serie.resource,
-              );
-              return (
-                <Line
-                  key={`${title}-${resource}-${serieIndex}`}
-                  type="monotone"
-                  dataKey={label}
-                  stroke={colorMapping[resource]}
-                  dot={false}
-                  isAnimationActive={false}
+              }}
+              axisLine={{ stroke: theme.border }}
+            />
+            <YAxis
+              orientation="right"
+              allowDataOverflow={false}
+              label={{
+                value: yAxisTitle,
+                angle: 90,
+                position: 'insideRight',
+                style: {
+                  textAnchor: 'middle',
+                  fill: theme.textSecondary,
+                  fontSize: fontSize.smaller,
+                },
+              }}
+              domain={
+                yAxisType === 'percentage'
+                  ? [0, 100]
+                  : yAxisType === 'symmetrical'
+                    ? [-topValue, topValue]
+                    : [0, topValue]
+              }
+              axisLine={{ stroke: theme.border }}
+              tick={{
+                fill: theme.textSecondary,
+                fontSize: fontSize.smaller,
+              }}
+              tickFormatter={(value) => Math.round(value).toString()}
+              tickCount={5}
+              interval={'preserveStartEnd'}
+            />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  unitLabel={unitLabel}
+                  timeFormat={timeFormat}
+                  isChartActive={isChartActive}
                 />
-              );
-            }),
-          )}
-        </LineChart>
-      </ResponsiveContainer>
+              }
+            />
+            {/* Add horizontal line at y=0 for symmetrical charts */}
+            {yAxisType === 'symmetrical' && (
+              <ReferenceLine y={0} stroke={theme.border} />
+            )}
+
+            {/* Chart lines */}
+            {Object.entries(groupedSeries).map(([resource, resourceSeries]) =>
+              resourceSeries.map((serie, serieIndex) => {
+                const label = serie.getTooltipLabel(
+                  serie.metricPrefix,
+                  serie.resource,
+                );
+                return (
+                  <Line
+                    key={`${title}-${resource}-${serieIndex}`}
+                    type="monotone"
+                    dataKey={label}
+                    stroke={colorMapping[resource]}
+                    dot={false}
+                    isAnimationActive={false}
+                  />
+                );
+              }),
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </LineTemporalChartWrapper>
   );
 }
