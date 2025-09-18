@@ -27,7 +27,8 @@ describe('ChartTooltip', () => {
     successValue: () => screen.queryByText(SUCCESS_VALUE),
     failed: () => screen.queryByText(/Failed/),
     failedValue: () => screen.queryByText(FAILED_VALUE),
-    date: () => screen.queryByText(/01 Jul/),
+    longDate: () => screen.queryByText(/01 July 2024/),
+    date: () => screen.queryByText(/\b01 Jul\b/),
     time: () => screen.queryByText(/00:00:00/),
   };
   it('should render the BarchartTooltip component', () => {
@@ -84,13 +85,12 @@ describe('ChartTooltip', () => {
         hoveredValue="Success"
       />,
     );
-
     expect(selectors.success()).toBeInTheDocument();
     expect(selectors.successValue()).toBeInTheDocument();
     expect(selectors.failed()).toBeInTheDocument();
     expect(selectors.failedValue()).toBeInTheDocument();
-
-    expect(selectors.date()).toBeInTheDocument();
+    expect(selectors.date()).not.toBeInTheDocument();
+    expect(selectors.longDate()).toBeInTheDocument();
     expect(selectors.time()).not.toBeInTheDocument();
   });
   it('should render time tooltip when type is time and interval is one hour', () => {
@@ -114,6 +114,7 @@ describe('ChartTooltip', () => {
     expect(selectors.failed()).toBeInTheDocument();
     expect(selectors.failedValue()).toBeInTheDocument();
     expect(selectors.date()).toBeInTheDocument();
+    expect(selectors.longDate()).not.toBeInTheDocument();
     expect(selectors.time()).toBeInTheDocument();
   });
   it('should render with correctly formatted values when unitLabel is provided', () => {

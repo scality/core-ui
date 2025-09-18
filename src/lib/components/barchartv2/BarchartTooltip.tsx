@@ -68,14 +68,16 @@ export const BarchartTooltip = <T extends BarchartBars>({
           );
 
           const formattedValue = Number.isInteger(value.value)
-            ? `${value.value} ${unitLabel}`
-            : value.value.toFixed(2) + ` ${unitLabel}`;
-
+            ? `${value.value}`
+            : value.value.toFixed(2);
+          const valueWithUnit = unitLabel
+            ? `${formattedValue} ${unitLabel}`
+            : formattedValue;
           return (
             <ChartTooltipItem
               key={value.label}
               label={value.label}
-              value={formattedValue}
+              value={valueWithUnit}
               isHovered={value.isHovered}
               legendIcon={legendIcon}
             />
