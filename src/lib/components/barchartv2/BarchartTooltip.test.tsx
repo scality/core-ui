@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ChartTooltip } from './ChartTooltip';
+import { BarchartTooltip } from './BarchartTooltip';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -30,9 +30,9 @@ describe('ChartTooltip', () => {
     date: () => screen.queryByText(/Monday, 01 July 2024/),
     time: () => screen.queryByText(/00:00/),
   };
-  it('should render the ChartTooltip component', () => {
+  it('should render the BarchartTooltip component', () => {
     render(
-      <ChartTooltip
+      <BarchartTooltip
         type={{ type: 'category' }}
         tooltipProps={testTooltipProps}
         hoveredValue="Success"
@@ -47,7 +47,7 @@ describe('ChartTooltip', () => {
   });
   it('should render tooltip when tooltip is provided', () => {
     render(
-      <ChartTooltip
+      <BarchartTooltip
         type={{ type: 'category' }}
         tooltipProps={testTooltipProps}
         hoveredValue="Success"
@@ -58,7 +58,7 @@ describe('ChartTooltip', () => {
   });
   it('should not render tooltip when tooltipProps is not active', () => {
     render(
-      <ChartTooltip
+      <BarchartTooltip
         type={{ type: 'category' }}
         tooltipProps={{ ...testTooltipProps, active: false }}
         hoveredValue="Success"
@@ -71,7 +71,7 @@ describe('ChartTooltip', () => {
     // timestamp for Mon Jul 01 2024 00:00:00 GMT+0000 (Coordinated Universal Time)
     const label = date;
     render(
-      <ChartTooltip
+      <BarchartTooltip
         type={{
           type: 'time',
           timeRange: {
@@ -96,7 +96,7 @@ describe('ChartTooltip', () => {
   it('should render time tooltip when type is time and interval is one hour', () => {
     const label = date;
     render(
-      <ChartTooltip
+      <BarchartTooltip
         type={{
           type: 'time',
           timeRange: {

@@ -12,7 +12,7 @@ import {
 import { useCallback, useMemo, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { spacing } from '../../spacing';
-import { fontSize, fontWeight } from '../../style/theme';
+import { fontSize } from '../../style/theme';
 import { Box } from '../box/Box';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 import { FormattedDateTime } from '../date/FormattedDateTime';
@@ -25,6 +25,13 @@ import { Loader } from '../loader/Loader.component';
 import { ChartTitleText, SmallerText } from '../text/Text.component';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { formatXAxisLabel } from './utils';
+import {
+  ChartTooltipContainer,
+  ChartTooltipItem,
+  ChartTooltipHeader,
+  ChartTooltipItemsContainer,
+} from '../charttooltip/ChartTooltip';
+import { LegendShape } from '../chartlegend/ChartLegend';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -36,61 +43,6 @@ const LineTemporalChartWrapper = styled.div`
 const ChartHeader = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const TooltipContainer = styled.div`
-  background-color: ${(props) => props.theme.backgroundLevel1};
-  padding: ${spacing.r8};
-  border: 1px solid ${(props) => props.theme.border};
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 250px;
-`;
-
-export const TooltipTime = styled.div`
-  margin-bottom: ${spacing.r8};
-  color: ${(props) => props.theme.textPrimary};
-  font-size: ${fontSize.smaller};
-  font-weight: ${fontWeight.bold};
-  text-align: center;
-`;
-
-const TooltipValue = styled.div`
-  font-size: ${fontSize.smaller};
-  margin-top: 4px;
-  color: ${(props) => props.theme.textSecondary};
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const TooltipLegend = styled.div<{ color: string }>`
-  width: 12px;
-  height: 3px;
-  background-color: ${(props) => props.color};
-  margin-right: 8px;
-  flex-shrink: 0;
-  margin-top: 8px;
-`;
-
-const TooltipLeftGroup = styled.div`
-  display: flex;
-  align-items: flex-start;
-  min-width: 0;
-  flex: 1;
-`;
-
-const TooltipName = styled.div`
-  word-wrap: break-word;
-  word-break: break-word;
-  flex: 1;
-`;
-
-const TooltipInstanceValue = styled.div`
-  margin-left: 16px;
-  flex-shrink: 0;
-  text-align: right;
 `;
 
 export type Serie = {
@@ -152,7 +104,7 @@ export type LineChartProps = (
   ) => React.ReactNode;
 };
 
-const CustomTooltip = ({
+const LineTimeSerieChartTooltip = ({
   unitLabel,
   timeFormat,
   isChartActive,
@@ -169,7 +121,7 @@ const CustomTooltip = ({
     timeFormat?: 'date-time' | 'date',
   ) => React.ReactNode;
 }) => {
-  const { active, payload, label, ...rest } = tooltipProps;
+  const { active, payload, label } = tooltipProps;
 
   if (!active || !payload || !payload.length || !label || !isChartActive)
     return null;
@@ -193,8 +145,8 @@ const CustomTooltip = ({
   });
 
   return (
-    <TooltipContainer>
-      <TooltipTime>
+    <ChartTooltipContainer>
+      <ChartTooltipHeader>
         <FormattedDateTime
           format={
             timeFormat === 'date-time'
@@ -203,21 +155,32 @@ const CustomTooltip = ({
           }
           value={new Date(label)}
         />
-      </TooltipTime>
-      {sortedPayload.map((entry, index) => (
-        <TooltipValue key={index}>
-          <TooltipLeftGroup>
-            <TooltipLegend color={entry.color} />
-            <TooltipName>{entry.name}</TooltipName>
-          </TooltipLeftGroup>
-          <TooltipInstanceValue>
-            {!Number.isFinite(entry.value)
-              ? '-'
-              : `${entry.value.toFixed(2)} ${unitLabel}`}
-          </TooltipInstanceValue>
-        </TooltipValue>
-      ))}
-    </TooltipContainer>
+      </ChartTooltipHeader>
+      <ChartTooltipItemsContainer>
+        {sortedPayload.map((entry, index) => {
+          const legendIcon = (
+            <LegendShape
+              color={entry.color}
+              shape="line"
+              chartColors={{ [entry.color]: entry.color }}
+            />
+          );
+
+          const formattedValue = !Number.isFinite(entry.value)
+            ? '-'
+            : `${entry.value.toFixed(2)} ${unitLabel}`;
+
+          return (
+            <ChartTooltipItem
+              key={index}
+              label={entry.name}
+              value={formattedValue}
+              legendIcon={legendIcon}
+            />
+          );
+        })}
+      </ChartTooltipItemsContainer>
+    </ChartTooltipContainer>
   );
 };
 
@@ -560,7 +523,7 @@ export function LineTimeSerieChart({
             />
             <Tooltip
               content={(props: TooltipContentProps<number, string>) => (
-                <CustomTooltip
+                <LineTimeSerieChartTooltip
                   unitLabel={unitLabel}
                   timeFormat={timeFormat}
                   renderTooltip={renderTooltip}

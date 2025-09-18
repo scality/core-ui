@@ -20,7 +20,7 @@ import { FormattedDateTime } from '../date/FormattedDateTime';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
-import { ChartTooltip } from './ChartTooltip';
+import { BarchartTooltip } from './BarchartTooltip';
 import { UnitRange, useChartData } from './utils';
 
 const CHART_CONSTANTS = {
@@ -393,7 +393,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
             <Tooltip
               content={(props: TooltipContentProps<number, string>) => (
-                <ChartTooltip
+                <BarchartTooltip
                   type={type}
                   colorSet={colorSet}
                   tooltipProps={props}

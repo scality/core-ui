@@ -21,11 +21,17 @@ export {
   BarchartSortFn,
   BarchartTooltipFn,
 } from './components/barchartv2/Barchart.component';
-export { ChartTooltip } from './components/barchartv2/ChartTooltip';
+export { BarchartTooltip } from './components/barchartv2/BarchartTooltip';
 export {
   ChartLegendWrapper,
   useChartId,
 } from './components/chartlegend/ChartLegendWrapper';
 export { ChartLegend } from './components/chartlegend/ChartLegend';
 export { LineTimeSerieChart } from './components/linetimeseriechart/linetimeseriechart.component';
+export {
+  ChartTooltipContainer,
+  ChartTooltipItem,
+  ChartTooltipHeader,
+  ChartTooltipItemsContainer,
+} from './components/charttooltip/ChartTooltip';
 export { CoreUITheme } from './style/theme';
