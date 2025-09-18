@@ -27,8 +27,8 @@ describe('ChartTooltip', () => {
     successValue: () => screen.queryByText(SUCCESS_VALUE),
     failed: () => screen.queryByText(/Failed/),
     failedValue: () => screen.queryByText(FAILED_VALUE),
-    date: () => screen.queryByText(/Monday, 01 July 2024/),
-    time: () => screen.queryByText(/00:00/),
+    date: () => screen.queryByText(/01 Jul/),
+    time: () => screen.queryByText(/00:00:00/),
   };
   it('should render the BarchartTooltip component', () => {
     render(
@@ -115,5 +115,27 @@ describe('ChartTooltip', () => {
     expect(selectors.failedValue()).toBeInTheDocument();
     expect(selectors.date()).toBeInTheDocument();
     expect(selectors.time()).toBeInTheDocument();
+  });
+  it('should render with correctly formatted values when unitLabel is provided', () => {
+    const FREE_VALUE = 123.456789;
+    const USED_VALUE = 20;
+    const tooltipProps = {
+      ...testTooltipProps,
+      payload: [
+        { name: 'Free', value: FREE_VALUE },
+        { name: 'Used', value: USED_VALUE },
+      ],
+    };
+    render(
+      <BarchartTooltip
+        type={{ type: 'category' }}
+        tooltipProps={tooltipProps}
+        hoveredValue="Success"
+        unitLabel="kB"
+      />,
+    );
+
+    expect(screen.getByText('123.46 kB')).toBeInTheDocument();
+    expect(screen.getByText('20 kB')).toBeInTheDocument();
   });
 });

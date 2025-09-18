@@ -399,6 +399,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                   tooltipProps={props}
                   hoveredValue={hoveredValue}
                   tooltip={tooltip}
+                  unitLabel={unitLabel}
                 />
               )}
               cursor={false}

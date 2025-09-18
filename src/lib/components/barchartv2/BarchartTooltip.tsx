@@ -21,12 +21,14 @@ export const BarchartTooltip = <T extends BarchartBars>({
   colorSet,
   hoveredValue,
   tooltip,
+  unitLabel,
 }: {
   type: TimeType | CategoryType;
   tooltipProps: TooltipContentProps<number, string>;
   colorSet?: Record<string, string>;
   hoveredValue: string | undefined;
   tooltip?: BarchartTooltipFn<T>;
+  unitLabel?: string;
 }) => {
   const { active } = tooltipProps;
 
@@ -65,10 +67,9 @@ export const BarchartTooltip = <T extends BarchartBars>({
             />
           );
 
-          const formattedValue =
-            typeof value.value === 'number'
-              ? value.value.toFixed(2)
-              : value.value;
+          const formattedValue = Number.isInteger(value.value)
+            ? `${value.value} ${unitLabel}`
+            : value.value.toFixed(2) + ` ${unitLabel}`;
 
           return (
             <ChartTooltipItem
