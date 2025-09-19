@@ -110,6 +110,7 @@ const LineTimeSerieChartTooltip = ({
   isChartActive,
   tooltipProps,
   renderTooltip,
+  hoveredValue,
 }: {
   tooltipProps: TooltipContentProps<number, string>;
   unitLabel?: string;
@@ -120,6 +121,7 @@ const LineTimeSerieChartTooltip = ({
     unitLabel?: string,
     timeFormat?: 'date-time' | 'date',
   ) => React.ReactNode;
+  hoveredValue?: string;
 }) => {
   const { active, payload, label } = tooltipProps;
 
@@ -166,6 +168,8 @@ const LineTimeSerieChartTooltip = ({
             />
           );
 
+          const isHovered = entry.name === hoveredValue;
+
           const formattedValue = !Number.isFinite(entry.value)
             ? '-'
             : `${entry.value.toFixed(2)} ${unitLabel}`;
@@ -176,6 +180,7 @@ const LineTimeSerieChartTooltip = ({
               label={entry.name}
               value={formattedValue}
               legendIcon={legendIcon}
+              isHovered={isHovered}
             />
           );
         })}
@@ -212,7 +217,9 @@ export function LineTimeSerieChart({
   const chartRef = useRef(null);
 
   const [isChartActive, setIsChartActive] = useState(false);
-
+  const [hoveredValue, setHoveredValue] = useState<string | undefined>(
+    undefined,
+  );
   const chartData = useMemo(() => {
     // Guard against empty/undefined series data
     if (!series || (Array.isArray(series) && series.length === 0)) {
@@ -529,6 +536,7 @@ export function LineTimeSerieChart({
                   renderTooltip={renderTooltip}
                   tooltipProps={props}
                   isChartActive={isChartActive}
+                  hoveredValue={hoveredValue}
                 />
               )}
             />
@@ -552,6 +560,8 @@ export function LineTimeSerieChart({
                     stroke={colorMapping[resource]}
                     dot={false}
                     isAnimationActive={false}
+                    onMouseEnter={() => setHoveredValue(label)}
+                    onMouseLeave={() => setHoveredValue(undefined)}
                   />
                 );
               }),
