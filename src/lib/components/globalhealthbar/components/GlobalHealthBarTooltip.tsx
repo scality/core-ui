@@ -1,7 +1,14 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
+import {
+  useFloating,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+} from '@floating-ui/react';
 import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../../index';
 import { Alert } from '../GlobalHealthBarRecharts.component';
 import { TooltipContentProps } from 'recharts';
@@ -14,9 +21,7 @@ interface GlobalHealthBarTooltipProps {
   chartContainerRef: React.RefObject<HTMLDivElement>;
 }
 
-const TooltipContainer = styled.div<{
-  tooltipPosition: { top: number; left: number };
-}>`
+const TooltipContainer = styled.div`
   ${(props) => {
     const theme = useTheme();
 
@@ -26,9 +31,6 @@ const TooltipContainer = styled.div<{
       z-index: ${zIndex.tooltip};
       color: ${theme.textSecondary};
       background-color: ${theme.backgroundLevel1};
-      position: fixed;
-      top: ${props.tooltipPosition.top}px;
-      left: ${props.tooltipPosition.left}px;
       border-radius: 4px;
       padding: ${spacing.r8};
       pointer-events: none;
@@ -41,52 +43,36 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
   const { tooltipData, tooltipProps, chartContainerRef } = props;
   const { coordinate } = tooltipProps;
 
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const [tooltipPosition, setTooltipPosition] = useState({
-    top: -9999,
-    left: -9999,
+  const [virtualElement, setVirtualElement] = useState<any>(null);
+
+  const { refs, floatingStyles } = useFloating({
+    elements: {
+      reference: virtualElement,
+    },
+    placement: 'bottom',
+    middleware: [offset(20), flip(), shift({ padding: 10 })],
+    whileElementsMounted: autoUpdate,
   });
 
+  // Create virtual element from coordinate
   useEffect(() => {
-    if (tooltipRef.current && coordinate && chartContainerRef.current) {
+    if (coordinate && chartContainerRef.current) {
       const chartRect = chartContainerRef.current.getBoundingClientRect();
-      const tooltipRect = tooltipRef.current.getBoundingClientRect();
 
-      const MARGIN = 10;
-      const TOOLTIP_OFFSET = 20;
-
-      // Calculate initial position (centered horizontally, offset vertically)
-      let left = chartRect.left + coordinate.x - tooltipRect.width / 2;
-      let top = chartRect.top + coordinate.y + TOOLTIP_OFFSET;
-
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      // Horizontal boundary adjustments
-      if (left < MARGIN) {
-        left = MARGIN;
-      } else if (left + tooltipRect.width > viewportWidth - MARGIN) {
-        left = viewportWidth - tooltipRect.width - MARGIN;
-      }
-
-      // Vertical boundary adjustments - prefer showing above if not enough space below
-      if (top + tooltipRect.height > viewportHeight - MARGIN) {
-        const topPosition =
-          chartRect.top + coordinate.y - tooltipRect.height - MARGIN;
-        if (topPosition >= MARGIN) {
-          top = topPosition;
-        } else {
-          // If can't fit above either, keep below but adjust to fit
-          top = viewportHeight - tooltipRect.height - MARGIN;
-        }
-      }
-
-      // Final safety check to ensure tooltip is never off-screen
-      if (top < MARGIN) {
-        top = MARGIN;
-      }
-
-      setTooltipPosition({ left, top });
+      setVirtualElement({
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: chartRect.left + coordinate.x,
+            y: chartRect.top + coordinate.y,
+            left: chartRect.left + coordinate.x,
+            top: chartRect.top + coordinate.y,
+            right: chartRect.left + coordinate.x,
+            bottom: chartRect.top + coordinate.y,
+          };
+        },
+      });
     }
   }, [coordinate, chartContainerRef]);
 
@@ -95,7 +81,7 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
   const { description, startsAt, endsAt, severity } = tooltipData;
 
   const tooltipContent = (
-    <TooltipContainer ref={tooltipRef} tooltipPosition={tooltipPosition}>
+    <TooltipContainer ref={refs.setFloating} style={floatingStyles}>
       <Stack direction="vertical" gap="r8">
         <Wrap>
           <Text variant="Smaller">Severity</Text>
