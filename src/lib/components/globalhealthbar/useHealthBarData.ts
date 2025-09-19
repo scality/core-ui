@@ -26,43 +26,49 @@ export const useHealthBarData = (
     [alerts, startTimestamp, endTimestamp],
   );
 
-  const data = useMemo(
-    () => [
+  // Create chart data and alerts map separately
+  const { chartData, alertsMap, alertKeys } = useMemo(() => {
+    const alertBars = {};
+    const alertsMapData = {};
+
+    filteredAlerts.forEach((alert, index) => {
+      // Use alert index with severity to create unique keys for bars dataKey
+      // Bars format is: dataKey: [startTimestamp, endTimestamp]
+      const uniqueKey = `${alert.severity}_${index}`;
+
+      alertBars[uniqueKey] = [
+        new Date(alert.startsAt).getTime(),
+        new Date(alert.endsAt).getTime(),
+      ];
+
+      // Store alert data separately for tooltip access
+      alertsMapData[uniqueKey] = {
+        ...alert,
+      };
+    });
+
+    // Chart data - ready for BarChart (as array)
+    const chartDataArray = [
       {
-        start: startTimestamp,
-        end: endTimestamp,
         range: [startTimestamp, endTimestamp],
-        ...filteredAlerts.reduce((acc, alert, index) => {
-          // Use alert index with severity to create unique keys for bars dataKey
-          // Bars format is: dataKey: [startTimestamp, endTimestamp]
-          const uniqueKey = `${alert.severity}_${index}`;
-
-          acc[uniqueKey] = [
-            new Date(alert.startsAt).getTime(),
-            new Date(alert.endsAt).getTime(),
-          ];
-          // Add the alert to the data for the tooltip
-          acc[`alert_${uniqueKey}`] = {
-            ...alert,
-          };
-
-          return acc;
-        }, {}),
-        id,
+        ...alertBars,
       },
-    ],
-    [filteredAlerts, startTimestamp, endTimestamp, id],
-  );
+    ];
 
-  // Separate keys for warning, critical, and unavailable to map to the different bars
-  const alertKeys = useMemo(() => {
-    const dataKeys = Object.keys(data[0]);
-    return {
-      warningKeys: dataKeys.filter((key) => key.startsWith('warning')),
-      criticalKeys: dataKeys.filter((key) => key.startsWith('critical')),
-      unavailableKeys: dataKeys.filter((key) => key.startsWith('unavailable')),
+    // Alert keys for bar rendering
+    const allKeys = Object.keys(alertBars);
+    const alertKeysData = {
+      warningKeys: allKeys.filter((key) => key.startsWith('warning')),
+      criticalKeys: allKeys.filter((key) => key.startsWith('critical')),
+      unavailableKeys: allKeys.filter((key) => key.startsWith('unavailable')),
     };
-  }, [data]);
 
-  return { data, alertKeys };
+    return {
+      chartData: chartDataArray,
+      alertsMap: alertsMapData,
+      alertKeys: alertKeysData,
+    };
+  }, [filteredAlerts, startTimestamp, endTimestamp]);
+
+  return { chartData, alertsMap, alertKeys };
 };

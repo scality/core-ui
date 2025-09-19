@@ -29,7 +29,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const startTimestamp = new Date(start).getTime();
   const endTimestamp = new Date(end).getTime();
 
-  const { data, alertKeys } = useHealthBarData(
+  const { chartData, alertsMap, alertKeys } = useHealthBarData(
     alerts,
     startTimestamp,
     endTimestamp,
@@ -43,9 +43,9 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
 
   const handlePointerEnter = useCallback(
     (key: string) => {
-      setTooltipData(data[0][`alert_${key}`]);
+      setTooltipData(alertsMap[key]);
     },
-    [data],
+    [alertsMap],
   );
 
   const handlePointerLeave = useCallback(() => {
@@ -74,7 +74,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       style={{ contain: 'layout', position: 'relative' }}
     >
       <BarChart
-        data={data}
+        data={chartData}
         layout="vertical"
         barSize={CHART_CONFIG.BAR_SIZE}
         accessibilityLayer

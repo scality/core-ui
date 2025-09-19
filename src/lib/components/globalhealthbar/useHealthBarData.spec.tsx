@@ -42,8 +42,8 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('critical_0');
-      expect(result.current.data[0]).toHaveProperty('warning_1');
+      expect(result.current.chartData[0]).toHaveProperty('critical_0');
+      expect(result.current.chartData[0]).toHaveProperty('warning_1');
       expect(result.current.alertKeys.criticalKeys).toContain('critical_0');
       expect(result.current.alertKeys.warningKeys).toContain('warning_1');
     });
@@ -66,7 +66,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('critical_0');
+      expect(result.current.chartData[0]).toHaveProperty('critical_0');
       expect(result.current.alertKeys.criticalKeys).toContain('critical_0');
     });
 
@@ -88,7 +88,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('warning_0');
+      expect(result.current.chartData[0]).toHaveProperty('warning_0');
       expect(result.current.alertKeys.warningKeys).toContain('warning_0');
     });
 
@@ -110,7 +110,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('critical_0');
+      expect(result.current.chartData[0]).toHaveProperty('critical_0');
       expect(result.current.alertKeys.criticalKeys).toContain('critical_0');
     });
 
@@ -132,7 +132,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).not.toHaveProperty('warning_0');
+      expect(result.current.chartData[0]).not.toHaveProperty('warning_0');
       expect(result.current.alertKeys.warningKeys).toHaveLength(0);
     });
 
@@ -154,7 +154,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).not.toHaveProperty('critical_0');
+      expect(result.current.chartData[0]).not.toHaveProperty('critical_0');
       expect(result.current.alertKeys.criticalKeys).toHaveLength(0);
     });
   });
@@ -178,11 +178,8 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      const data = result.current.data[0];
-      expect(data.start).toBe(mockTimestamp.start);
-      expect(data.end).toBe(mockTimestamp.end);
+      const data = result.current.chartData[0];
       expect(data.range).toEqual([mockTimestamp.start, mockTimestamp.end]);
-      expect(data.id).toBe('test-id');
     });
 
     it('should create correct alert data keys with timestamps', () => {
@@ -203,7 +200,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      const data = result.current.data[0];
+      const data = result.current.chartData[0];
       const expectedStartTime = new Date('2023-12-01T02:00:00Z').getTime();
       const expectedEndTime = new Date('2023-12-01T04:00:00Z').getTime();
 
@@ -229,8 +226,7 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      const data = result.current.data[0];
-      expect(data['alert_warning_0']).toEqual({
+      expect(result.current.alertsMap['warning_0']).toEqual({
         description: 'Test warning',
         severity: 'warning',
         startsAt: '2023-12-01T02:00:00Z',
@@ -266,13 +262,13 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      const data = result.current.data[0];
+      const data = result.current.chartData[0];
       expect(data).toHaveProperty('warning_0');
       expect(data).toHaveProperty('critical_1');
       expect(data).toHaveProperty('warning_2');
-      expect(data).toHaveProperty('alert_warning_0');
-      expect(data).toHaveProperty('alert_critical_1');
-      expect(data).toHaveProperty('alert_warning_2');
+      expect(result.current.alertsMap).toHaveProperty('warning_0');
+      expect(result.current.alertsMap).toHaveProperty('critical_1');
+      expect(result.current.alertsMap).toHaveProperty('warning_2');
     });
   });
 
@@ -423,10 +419,8 @@ describe('useHealthBarData', () => {
         useHealthBarData([], mockTimestamp.start, mockTimestamp.end, 'test-id'),
       );
 
-      const data = result.current.data[0];
-      expect(data.start).toBe(mockTimestamp.start);
-      expect(data.end).toBe(mockTimestamp.end);
-      expect(data.id).toBe('test-id');
+      const data = result.current.chartData[0];
+      expect(data.range).toEqual([mockTimestamp.start, mockTimestamp.end]);
       expect(result.current.alertKeys.warningKeys).toEqual([]);
       expect(result.current.alertKeys.criticalKeys).toEqual([]);
       expect(result.current.alertKeys.unavailableKeys).toEqual([]);
@@ -455,8 +449,8 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('warning_0');
-      expect(result.current.data[0]).toHaveProperty('critical_1');
+      expect(result.current.chartData[0]).toHaveProperty('warning_0');
+      expect(result.current.chartData[0]).toHaveProperty('critical_1');
       expect(result.current.alertKeys.warningKeys).toContain('warning_0');
       expect(result.current.alertKeys.criticalKeys).toContain('critical_1');
     });
@@ -484,8 +478,8 @@ describe('useHealthBarData', () => {
         ),
       );
 
-      expect(result.current.data[0]).toHaveProperty('warning_0');
-      expect(result.current.data[0]).toHaveProperty('critical_1');
+      expect(result.current.chartData[0]).toHaveProperty('warning_0');
+      expect(result.current.chartData[0]).toHaveProperty('critical_1');
       expect(result.current.alertKeys.warningKeys).toContain('warning_0');
       expect(result.current.alertKeys.criticalKeys).toContain('critical_1');
     });
