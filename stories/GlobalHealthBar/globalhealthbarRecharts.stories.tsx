@@ -137,38 +137,6 @@ export const WithSelectedDateWeek: Story = {
   },
 };
 
-//     return (
-//       <Stack>
-//         <Dropdown
-//           icon={<Icon name="Calendar-minus" />}
-//           items={metricsTimeSpanDropdownItems}
-//           size="small"
-//           variant="backgroundLevel1"
-//         />
-//         <GlobalHealthBar
-//           startDate={startDate}
-//           endDate={endDate}
-//           alerts={alerts}
-//           id="1"
-//         />
-//       </Stack>
-//     );
-//   },
-// };
-// export const WithSelectedDateWeek: Story = {
-//   render: () => {
-//     return (
-//       <>
-//         <HistoryAlertProvider>
-//           <GlobalHealthBar start={start2} end={end2} alerts={alerts} id="1" />
-//           <InputDate start={start2} end={end2} />
-//         </HistoryAlertProvider>
-//         <GlobalHealthBar start={start2} end={end2} alerts={alerts} id="2" />
-//       </>
-//     );
-//   },
-// };
-
 export const Hour: Story = {
   render: () => {
     return (
@@ -184,55 +152,3 @@ export const Hour: Story = {
     );
   },
 };
-
-// export const WithSelectedDate24h: Story = {
-//   render: () => {
-//     const [duration, setDuration] = useState(SAMPLE_DURATION_LAST_SEVEN_DAYS);
-//     const metricsTimeSpanItems = [
-//       { label: LAST_SEVEN_DAYS, duration: SAMPLE_DURATION_LAST_SEVEN_DAYS },
-//       {
-//         label: LAST_TWENTY_FOUR_HOURS,
-//         duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-//       },
-//       { label: LAST_ONE_HOUR, duration: SAMPLE_DURATION_LAST_ONE_HOUR },
-//     ];
-//     const metricsTimeSpanDropdownItems = metricsTimeSpanItems.map((option) => ({
-//       label: option.label,
-//       onClick: () => {
-//         setDuration(option.duration);
-//       },
-//       selected: false,
-//       name: option.label,
-//     }));
-
-//     const startDate =
-//       duration === SAMPLE_DURATION_LAST_SEVEN_DAYS
-//         ? new Date(start)
-//         : duration === SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS
-//           ? new Date(startLast24h)
-//           : new Date(startLastHour);
-//     const endDate =
-//       duration === SAMPLE_DURATION_LAST_SEVEN_DAYS
-//         ? new Date(end)
-//         : duration === SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS
-//           ? new Date(endLast24h)
-//           : new Date(endLastHour);
-
-//     return (
-//       <Stack>
-//         <Dropdown
-//           icon={<Icon name="Calendar-minus" />}
-//           items={metricsTimeSpanDropdownItems}
-//           size="small"
-//           variant="backgroundLevel1"
-//         />
-//         <GlobalHealthBar
-//           startDate={startDate}
-//           endDate={endDate}
-//           alerts={alerts}
-//           id="1"
-//         />
-//       </Stack>
-//     );
-//   },
-// };
