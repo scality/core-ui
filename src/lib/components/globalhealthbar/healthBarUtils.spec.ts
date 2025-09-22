@@ -7,6 +7,9 @@ import {
   getEdgeMargin,
   calculateLabelVisibility,
   calculateAlertPosition,
+  getNavigationAction,
+  calculateNavigationIndex,
+  getNavigationStateUpdate,
 } from './healthBarUtils';
 
 describe('Health Bar Utils', () => {
@@ -560,6 +563,138 @@ describe('Health Bar Utils', () => {
         expect(result.width).toBe(expectedWidth);
         expect(result.startX).toBe(expectedStartX);
         expect(result.relativeSize).toBe(expectedRelativeSize);
+      });
+    });
+  });
+
+  describe('Keyboard Navigation Utils', () => {
+    describe('getNavigationAction', () => {
+      it('should map arrow keys to navigation actions', () => {
+        expect(getNavigationAction('ArrowLeft')).toBe('previous');
+        expect(getNavigationAction('ArrowUp')).toBe('previous');
+        expect(getNavigationAction('ArrowRight')).toBe('next');
+        expect(getNavigationAction('ArrowDown')).toBe('next');
+      });
+
+      it('should map Home and End keys', () => {
+        expect(getNavigationAction('Home')).toBe('first');
+        expect(getNavigationAction('End')).toBe('last');
+      });
+
+      it('should map Escape key', () => {
+        expect(getNavigationAction('Escape')).toBe('escape');
+      });
+
+      it('should return null for unmapped keys', () => {
+        expect(getNavigationAction('Enter')).toBe(null);
+        expect(getNavigationAction('Space')).toBe(null);
+        expect(getNavigationAction('Tab')).toBe(null);
+      });
+    });
+
+    describe('calculateNavigationIndex', () => {
+      const arrayLength = 5;
+
+      it('should handle previous navigation', () => {
+        expect(calculateNavigationIndex('previous', 2, arrayLength)).toBe(1);
+        expect(calculateNavigationIndex('previous', 0, arrayLength)).toBe(4); // wraps to end
+      });
+
+      it('should handle next navigation', () => {
+        expect(calculateNavigationIndex('next', 2, arrayLength)).toBe(3);
+        expect(calculateNavigationIndex('next', 4, arrayLength)).toBe(0); // wraps to start
+      });
+
+      it('should handle first navigation', () => {
+        expect(calculateNavigationIndex('first', 3, arrayLength)).toBe(0);
+      });
+
+      it('should handle last navigation', () => {
+        expect(calculateNavigationIndex('last', 1, arrayLength)).toBe(4);
+      });
+
+      it('should handle escape navigation', () => {
+        expect(calculateNavigationIndex('escape', 2, arrayLength)).toBe(-1);
+      });
+
+      it('should return -1 for empty array', () => {
+        expect(calculateNavigationIndex('next', 0, 0)).toBe(-1);
+        expect(calculateNavigationIndex('previous', 0, 0)).toBe(-1);
+      });
+
+      it('should handle single item array', () => {
+        expect(calculateNavigationIndex('next', 0, 1)).toBe(0);
+        expect(calculateNavigationIndex('previous', 0, 1)).toBe(0);
+        expect(calculateNavigationIndex('first', 0, 1)).toBe(0);
+        expect(calculateNavigationIndex('last', 0, 1)).toBe(0);
+      });
+    });
+
+    describe('getNavigationStateUpdate', () => {
+      const mockAlerts = [
+        { id: 1, name: 'Alert 1' },
+        { id: 2, name: 'Alert 2' },
+        { id: 3, name: 'Alert 3' },
+      ];
+
+      it('should return correct state for next navigation', () => {
+        const result = getNavigationStateUpdate('next', 0, mockAlerts);
+
+        expect(result.newIndex).toBe(1);
+        expect(result.selectedAlert).toEqual(mockAlerts[1]);
+        expect(result.shouldActivateKeyboard).toBe(true);
+      });
+
+      it('should return correct state for previous navigation', () => {
+        const result = getNavigationStateUpdate('previous', 2, mockAlerts);
+
+        expect(result.newIndex).toBe(1);
+        expect(result.selectedAlert).toEqual(mockAlerts[1]);
+        expect(result.shouldActivateKeyboard).toBe(true);
+      });
+
+      it('should return correct state for first navigation', () => {
+        const result = getNavigationStateUpdate('first', 2, mockAlerts);
+
+        expect(result.newIndex).toBe(0);
+        expect(result.selectedAlert).toEqual(mockAlerts[0]);
+        expect(result.shouldActivateKeyboard).toBe(true);
+      });
+
+      it('should return correct state for last navigation', () => {
+        const result = getNavigationStateUpdate('last', 0, mockAlerts);
+
+        expect(result.newIndex).toBe(2);
+        expect(result.selectedAlert).toEqual(mockAlerts[2]);
+        expect(result.shouldActivateKeyboard).toBe(true);
+      });
+
+      it('should return correct state for escape navigation', () => {
+        const result = getNavigationStateUpdate('escape', 1, mockAlerts);
+
+        expect(result.newIndex).toBe(-1);
+        expect(result.selectedAlert).toBe(null);
+        expect(result.shouldActivateKeyboard).toBe(false);
+      });
+
+      it('should handle empty array', () => {
+        const result = getNavigationStateUpdate('next', 0, []);
+
+        expect(result.newIndex).toBe(-1);
+        expect(result.selectedAlert).toBe(null);
+        expect(result.shouldActivateKeyboard).toBe(true);
+      });
+
+      it('should handle wrapping navigation', () => {
+        // Next from last index should wrap to first
+        const nextResult = getNavigationStateUpdate('next', 2, mockAlerts);
+        expect(nextResult.newIndex).toBe(0);
+        expect(nextResult.selectedAlert).toEqual(mockAlerts[0]);
+
+        // Previous from first index should wrap to last
+        const prevResult = getNavigationStateUpdate('previous', 0, mockAlerts);
+        expect(prevResult.newIndex).toBe(2);
+        expect(prevResult.selectedAlert).toEqual(mockAlerts[2]);
       });
     });
   });

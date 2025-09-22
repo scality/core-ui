@@ -10,7 +10,11 @@ import {
 import styled, { useTheme } from 'styled-components';
 import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
 import { HealthBarXAxis } from './components/HealthBarXAxis';
-import { CHART_CONFIG } from './healthBarUtils';
+import {
+  CHART_CONFIG,
+  getNavigationAction,
+  getNavigationStateUpdate,
+} from './healthBarUtils';
 import { Alert, useHealthBarData } from './useHealthBarData';
 
 export interface GlobalHealthProps {
@@ -65,59 +69,22 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (allAlertKeys.length === 0) return;
+      const action = getNavigationAction(event.key);
+      if (!action || allAlertKeys.length === 0) return;
 
-      switch (event.key) {
-        case 'ArrowLeft':
-        case 'ArrowUp':
-          event.preventDefault();
-          setKeyboardActive(true);
-          setFocusedAlertIndex((prevIndex) => {
-            const newIndex =
-              prevIndex <= 0 ? allAlertKeys.length - 1 : prevIndex - 1;
-            setTooltipData(allAlertKeys[newIndex]);
-            return newIndex;
-          });
-          break;
+      event.preventDefault();
 
-        case 'ArrowRight':
-        case 'ArrowDown':
-          event.preventDefault();
-          setKeyboardActive(true);
-          setFocusedAlertIndex((prevIndex) => {
-            const newIndex =
-              prevIndex >= allAlertKeys.length - 1 ? 0 : prevIndex + 1;
-            setTooltipData(allAlertKeys[newIndex]);
-            return newIndex;
-          });
-          break;
+      const update = getNavigationStateUpdate(
+        action,
+        focusedAlertIndex,
+        allAlertKeys,
+      );
 
-        case 'Home':
-          event.preventDefault();
-          setKeyboardActive(true);
-          setFocusedAlertIndex(0);
-          setTooltipData(allAlertKeys[0]);
-          break;
-
-        case 'End':
-          event.preventDefault();
-          setKeyboardActive(true);
-          setFocusedAlertIndex(allAlertKeys.length - 1);
-          setTooltipData(allAlertKeys[allAlertKeys.length - 1]);
-          break;
-
-        case 'Escape':
-          event.preventDefault();
-          setKeyboardActive(false);
-          setFocusedAlertIndex(-1);
-          setTooltipData(null);
-          break;
-
-        default:
-          break;
-      }
+      setFocusedAlertIndex(update.newIndex);
+      setTooltipData(update.selectedAlert);
+      setKeyboardActive(update.shouldActivateKeyboard);
     },
-    [allAlertKeys],
+    [allAlertKeys, focusedAlertIndex],
   );
 
   // Handle focus events
@@ -185,8 +152,6 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
               position: 'fixed',
             }}
             content={(props: TooltipContentProps<number, string>) => {
-              // For keyboard navigation, calculate the actual bar position
-
               return (
                 <GlobalHealthBarTooltip
                   tooltipData={tooltipData}

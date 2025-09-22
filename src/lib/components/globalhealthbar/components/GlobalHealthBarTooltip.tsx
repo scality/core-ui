@@ -53,7 +53,6 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
     endTimestamp = 0,
   } = props;
   const { coordinate } = tooltipProps;
-
   const [virtualElement, setVirtualElement] = useState<any>(null);
 
   const { refs, floatingStyles } = useFloating({

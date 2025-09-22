@@ -196,6 +196,92 @@ export const calculateAlertPosition = (
 };
 
 // =============================================================================
+// KEYBOARD NAVIGATION UTILS
+// =============================================================================
+
+export type NavigationAction =
+  | 'previous'
+  | 'next'
+  | 'first'
+  | 'last'
+  | 'escape';
+
+export interface NavigationState {
+  newIndex: number;
+  selectedAlert: any | null;
+  shouldActivateKeyboard: boolean;
+}
+
+/**
+ * Maps keyboard events to navigation actions
+ */
+export const getNavigationAction = (key: string): NavigationAction | null => {
+  switch (key) {
+    case 'ArrowLeft':
+    case 'ArrowUp':
+      return 'previous';
+    case 'ArrowRight':
+    case 'ArrowDown':
+      return 'next';
+    case 'Home':
+      return 'first';
+    case 'End':
+      return 'last';
+    case 'Escape':
+      return 'escape';
+    default:
+      return null;
+  }
+};
+
+/**
+ * Calculates new index based on navigation action
+ */
+export const calculateNavigationIndex = (
+  action: NavigationAction,
+  currentIndex: number,
+  arrayLength: number,
+): number => {
+  if (arrayLength === 0) return -1;
+
+  switch (action) {
+    case 'previous':
+      return currentIndex <= 0 ? arrayLength - 1 : currentIndex - 1;
+    case 'next':
+      return currentIndex >= arrayLength - 1 ? 0 : currentIndex + 1;
+    case 'first':
+      return 0;
+    case 'last':
+      return arrayLength - 1;
+    case 'escape':
+      return -1;
+    default:
+      return currentIndex;
+  }
+};
+
+/**
+ * Gets complete navigation state update for a given action
+ */
+export const getNavigationStateUpdate = <T>(
+  action: NavigationAction,
+  currentIndex: number,
+  alerts: T[],
+): NavigationState => {
+  const newIndex = calculateNavigationIndex(
+    action,
+    currentIndex,
+    alerts.length,
+  );
+
+  return {
+    newIndex,
+    selectedAlert: newIndex >= 0 ? alerts[newIndex] : null,
+    shouldActivateKeyboard: action !== 'escape',
+  };
+};
+
+// =============================================================================
 // TOOLTIP UTILS
 // =============================================================================
 
