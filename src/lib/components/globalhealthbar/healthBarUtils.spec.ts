@@ -6,8 +6,7 @@ import {
   getTicks,
   getEdgeMargin,
   calculateLabelVisibility,
-  getRectangleProps,
-  LabelVisibilityConfig,
+  calculateAlertPosition,
 } from './healthBarUtils';
 
 describe('Health Bar Utils', () => {
@@ -435,98 +434,132 @@ describe('Health Bar Utils', () => {
     });
   });
 
-  describe('Rectangle Properties', () => {
-    describe('getRectangleProps', () => {
-      it('should calculate rectangle properties for alert within time range', () => {
-        const startTimestamp = 1000;
-        const endTimestamp = 5000;
-        const timeRange = endTimestamp - startTimestamp;
+  describe('Alert Position Calculations', () => {
+    describe('calculateAlertPosition', () => {
+      it('should calculate position for alert within time range', () => {
+        const alertStartTimestamp = 2000;
+        const alertEndTimestamp = 3000;
+        const chartStartTimestamp = 1000;
+        const chartEndTimestamp = 5000;
+        const availableWidth = 200;
+        const baseX = 50;
 
-        const props = {
-          x: 100,
-          background: { x: 50, width: 200 },
-          alert: [2000, 3000],
-        };
-
-        const result = getRectangleProps(
-          props,
-          'alert',
-          startTimestamp,
-          endTimestamp,
+        const result = calculateAlertPosition(
+          alertStartTimestamp,
+          alertEndTimestamp,
+          chartStartTimestamp,
+          chartEndTimestamp,
+          availableWidth,
+          baseX,
         );
 
-        const expectedRelativeSize = (3000 - 2000) / timeRange;
+        const expectedRelativeSize = (3000 - 2000) / (5000 - 1000);
         const expectedWidth = expectedRelativeSize * 200;
+        const expectedStartX = 50 + ((2000 - 1000) / (5000 - 1000)) * 200;
 
-        expect(result.rectWidth).toBe(expectedWidth);
-        expect(result.startX).toBe(100);
+        expect(result.width).toBe(expectedWidth);
+        expect(result.startX).toBe(expectedStartX);
+        expect(result.relativeSize).toBe(expectedRelativeSize);
       });
 
       it('should handle alert starting before time range', () => {
-        const startTimestamp = 2000;
-        const endTimestamp = 5000;
+        const alertStartTimestamp = 1000;
+        const alertEndTimestamp = 3000;
+        const chartStartTimestamp = 2000;
+        const chartEndTimestamp = 5000;
+        const availableWidth = 200;
+        const baseX = 50;
 
-        const props = {
-          x: 100,
-          background: { x: 50, width: 200 },
-          alert: [1000, 3000],
-        };
-
-        const result = getRectangleProps(
-          props,
-          'alert',
-          startTimestamp,
-          endTimestamp,
+        const result = calculateAlertPosition(
+          alertStartTimestamp,
+          alertEndTimestamp,
+          chartStartTimestamp,
+          chartEndTimestamp,
+          availableWidth,
+          baseX,
         );
 
         const expectedRelativeSize = (3000 - 2000) / (5000 - 2000);
         const expectedWidth = expectedRelativeSize * 200;
+        const expectedStartX = 50; // baseX since alert starts before chart range
 
-        expect(result.rectWidth).toBe(expectedWidth);
-        expect(result.startX).toBe(50);
+        expect(result.width).toBe(expectedWidth);
+        expect(result.startX).toBe(expectedStartX);
+        expect(result.relativeSize).toBe(expectedRelativeSize);
       });
 
       it('should handle alert ending after time range', () => {
-        const startTimestamp = 1000;
-        const endTimestamp = 4000;
+        const alertStartTimestamp = 2500;
+        const alertEndTimestamp = 6000;
+        const chartStartTimestamp = 1000;
+        const chartEndTimestamp = 4000;
+        const availableWidth = 200;
+        const baseX = 50;
 
-        const props = {
-          background: { x: 50, width: 200 },
-          alert: [2500, 6000],
-        };
-
-        const result = getRectangleProps(
-          props,
-          'alert',
-          startTimestamp,
-          endTimestamp,
+        const result = calculateAlertPosition(
+          alertStartTimestamp,
+          alertEndTimestamp,
+          chartStartTimestamp,
+          chartEndTimestamp,
+          availableWidth,
+          baseX,
         );
 
         const expectedRelativeSize = (4000 - 2500) / (4000 - 1000);
         const expectedWidth = expectedRelativeSize * 200;
+        const expectedStartX = 50 + ((2500 - 1000) / (4000 - 1000)) * 200;
 
-        expect(result.rectWidth).toBe(expectedWidth);
-        expect(result.startX).toBe(150);
+        expect(result.width).toBe(expectedWidth);
+        expect(result.startX).toBe(expectedStartX);
+        expect(result.relativeSize).toBe(expectedRelativeSize);
       });
 
       it('should handle alert spanning entire time range', () => {
-        const startTimestamp = 2000;
-        const endTimestamp = 4000;
+        const alertStartTimestamp = 1000;
+        const alertEndTimestamp = 5000;
+        const chartStartTimestamp = 2000;
+        const chartEndTimestamp = 4000;
+        const availableWidth = 200;
+        const baseX = 50;
 
-        const props = {
-          background: { x: 50, width: 200 },
-          alert: [1000, 5000],
-        };
-
-        const result = getRectangleProps(
-          props,
-          'alert',
-          startTimestamp,
-          endTimestamp,
+        const result = calculateAlertPosition(
+          alertStartTimestamp,
+          alertEndTimestamp,
+          chartStartTimestamp,
+          chartEndTimestamp,
+          availableWidth,
+          baseX,
         );
 
-        expect(result.rectWidth).toBe(200);
-        expect(result.startX).toBe(50);
+        const expectedStartX = 50; // baseX since alert starts before chart range
+
+        expect(result.width).toBe(200);
+        expect(result.startX).toBe(expectedStartX);
+        expect(result.relativeSize).toBe(1);
+      });
+
+      it('should work with default baseX of 0', () => {
+        const alertStartTimestamp = 2000;
+        const alertEndTimestamp = 3000;
+        const chartStartTimestamp = 1000;
+        const chartEndTimestamp = 5000;
+        const availableWidth = 200;
+
+        const result = calculateAlertPosition(
+          alertStartTimestamp,
+          alertEndTimestamp,
+          chartStartTimestamp,
+          chartEndTimestamp,
+          availableWidth,
+        );
+
+        const expectedRelativeSize = (3000 - 2000) / (5000 - 1000);
+        const expectedWidth = expectedRelativeSize * 200;
+        const expectedStartX = 0 + ((2000 - 1000) / (5000 - 1000)) * 200;
+
+        expect(result.width).toBe(expectedWidth);
+        expect(result.startX).toBe(expectedStartX);
+        expect(result.relativeSize).toBe(expectedRelativeSize);
       });
     });
   });

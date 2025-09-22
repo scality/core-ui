@@ -43,19 +43,25 @@ const endLastHour = '2021-02-01T01:00:00Z';
 
 const alerts = [
   {
+    id: '0',
+    severity: 'unavailable',
+    startsAt: '2021-02-01T00:00:00Z',
+    endsAt: '2021-02-01T01:00:00Z',
+    description: 'Global health unavailable',
+  },
+  {
     id: '1',
-    severity: 'warning',
+    severity: 'critical',
     startsAt: '2021-02-01T11:00:00Z',
-    endsAt: '2021-02-02T01:00:00Z',
-    description: 'Global health warning',
+    endsAt: '2021-02-02T11:00:00Z',
+    description: 'Global health critical',
   },
   {
     id: '2',
     severity: 'warning',
     startsAt: '2021-02-01T23:00:00Z',
     endsAt: '2021-02-02T22:00:00Z',
-    description:
-      'Global health warning Long descritpion so it takes more space. Add more text to see how it wraps.',
+    description: 'Global health warning',
   },
   {
     severity: 'critical',
@@ -106,7 +112,7 @@ export const Default: Story = {
   },
 };
 
-export const WithSelectedDate24h: Story = {
+export const Last24Hours: Story = {
   render: () => {
     return (
       <div style={{ width: '350px', height: '1000px', overflow: 'hidden' }}>
@@ -121,23 +127,8 @@ export const WithSelectedDate24h: Story = {
     );
   },
 };
-export const WithSelectedDateWeek: Story = {
-  render: () => {
-    return (
-      <div style={{ width: '400px', height: '1000px', overflow: 'hidden' }}>
-        <div style={{ width: '400px', height: '400px' }} />
-        <GlobalHealthBar
-          start={new Date(start2)}
-          end={new Date(end2)}
-          alerts={alerts as Alert[]}
-          id="1"
-        />
-      </div>
-    );
-  },
-};
 
-export const Hour: Story = {
+export const LastHour: Story = {
   render: () => {
     return (
       <div style={{ width: '250px', height: '1000px', overflow: 'hidden' }}>

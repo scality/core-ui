@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { AlertBar, createAlertBarRenderer } from './components/AlertBar';
+import { AlertBar } from './components/AlertBar';
 import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
 import { HealthBarXAxis } from './components/HealthBarXAxis';
 import { CHART_CONFIG } from './healthBarUtils';
@@ -40,11 +40,6 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
     startTimestamp,
     endTimestamp,
     id,
-  );
-
-  const alertBarRenderer = useMemo(
-    () => createAlertBarRenderer(startTimestamp, endTimestamp),
-    [startTimestamp, endTimestamp],
   );
 
   const handlePointerEnter = useCallback(
@@ -226,14 +221,13 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
 
           {/* Alert bars */}
           {allAlertBars.map(({ key, fill }) => (
-            <AlertBar
-              key={key}
+            <Bar
               dataKey={key}
               yAxisId={key}
               fill={fill}
-              shape={(props: BarProps) => alertBarRenderer(props, key)}
               onPointerEnter={() => handlePointerEnter(key)}
               onPointerLeave={() => handlePointerLeave()}
+              isAnimationActive={false}
             />
           ))}
         </BarChart>

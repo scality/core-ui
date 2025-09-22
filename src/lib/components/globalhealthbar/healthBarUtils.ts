@@ -195,34 +195,6 @@ export const calculateAlertPosition = (
   return { startX, width, relativeSize };
 };
 
-/**
- * Calculates rectangle properties for alert bars
- */
-export const getRectangleProps = (
-  props: any,
-  key: string,
-  startTimestamp: number,
-  endTimestamp: number,
-) => {
-  const { background } = props;
-  const width = background.width;
-
-  const alertStartTimestamp = props[key][0];
-  const alertEndTimestamp = props[key][1];
-
-  // Use shared calculation with background.x as baseX (includes margins)
-  const { startX, width: rectWidth } = calculateAlertPosition(
-    alertStartTimestamp,
-    alertEndTimestamp,
-    startTimestamp,
-    endTimestamp,
-    width,
-    background.x, // This is the key! background.x includes chart margins
-  );
-
-  return { rectWidth, startX };
-};
-
 // =============================================================================
 // TOOLTIP UTILS
 // =============================================================================
