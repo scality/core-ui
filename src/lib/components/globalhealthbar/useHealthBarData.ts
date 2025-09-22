@@ -28,8 +28,8 @@ export const useHealthBarData = (
 
   // Create chart data and alerts map separately
   const { chartData, alertsMap, alertKeys } = useMemo(() => {
-    const alertBars = {};
-    const alertsMapData = {};
+    const alertBars: Record<string, [number, number]> = {};
+    const alertsMapData: Record<string, Alert> = {};
 
     filteredAlerts.forEach((alert, index) => {
       // Use alert index with severity to create unique keys for bars dataKey

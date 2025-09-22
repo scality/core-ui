@@ -45,7 +45,7 @@ const alerts = [
   {
     id: '1',
     severity: 'warning',
-    startsAt: '2021-02-01T07:00:00Z',
+    startsAt: '2021-02-01T11:00:00Z',
     endsAt: '2021-02-02T01:00:00Z',
     description: 'Global health warning',
   },

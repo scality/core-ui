@@ -123,13 +123,6 @@ export interface LabelVisibilityConfig {
   totalTicks: number;
 }
 
-export const shouldShowTickLabel = (config: LabelVisibilityConfig): boolean => {
-  if (config.hasEnoughSpace) return true;
-
-  const moduloValue = LABEL_CONFIG.MODULO_CONFIG[config.timeSpan];
-  return moduloValue ? config.tickIndex % moduloValue === 0 : false;
-};
-
 export const calculateLabelVisibility = (
   chartWidth: number,
   totalTicks: number,
@@ -149,17 +142,21 @@ export const calculateLabelVisibility = (
   }
 
   if (span === TIME_CONSTANTS.ONE_DAY) {
-    return (
-      index % 3 === 0 ||
-      (endTimestamp % (60 * 60 * 1000) === 0 && index % 2 === 0)
-    );
+    const isRoundHour = endTimestamp % (60 * 60 * 1000) === 0;
+    const roundHourInterval = index % 2 === 0;
+    const defaultInterval = index % 3 === 0;
+    const result = isRoundHour ? roundHourInterval : defaultInterval;
+
+    return result;
   }
 
   if (span === TIME_CONSTANTS.ONE_HOUR) {
-    return (
-      (endTimestamp % (15 * 60 * 1000) === 0 && index % 2 === 0) ||
-      index % 3 === 0
-    );
+    const isRound15Minute = endTimestamp % (15 * 60 * 1000) === 0;
+    const round15MinuteInterval = index % 2 === 0;
+    const defaultInterval = index % 3 === 0;
+    const result = isRound15Minute ? round15MinuteInterval : defaultInterval;
+
+    return result;
   }
 
   return false;
@@ -170,6 +167,35 @@ export const calculateLabelVisibility = (
 // =============================================================================
 
 /**
+ * Core calculation for alert positioning within a time range
+ */
+export const calculateAlertPosition = (
+  alertStartTimestamp: number,
+  alertEndTimestamp: number,
+  chartStartTimestamp: number,
+  chartEndTimestamp: number,
+  availableWidth: number,
+  baseX: number = 0,
+) => {
+  const start = Math.max(alertStartTimestamp, chartStartTimestamp);
+  const end = Math.min(alertEndTimestamp, chartEndTimestamp);
+  const totalTimeSpan = chartEndTimestamp - chartStartTimestamp;
+  const relativeSize = (end - start) / totalTimeSpan;
+
+  // Calculate start position relative to baseX
+  let startX = baseX;
+  if (alertStartTimestamp > chartStartTimestamp) {
+    const alertStartRelative =
+      (alertStartTimestamp - chartStartTimestamp) / totalTimeSpan;
+    startX = baseX + alertStartRelative * availableWidth;
+  }
+
+  const width = relativeSize * availableWidth;
+
+  return { startX, width, relativeSize };
+};
+
+/**
  * Calculates rectangle properties for alert bars
  */
 export const getRectangleProps = (
@@ -178,22 +204,50 @@ export const getRectangleProps = (
   startTimestamp: number,
   endTimestamp: number,
 ) => {
-  const { x, background } = props;
-  let startX = background.x;
+  const { background } = props;
   const width = background.width;
 
   const alertStartTimestamp = props[key][0];
   const alertEndTimestamp = props[key][1];
 
-  const start = Math.max(alertStartTimestamp, startTimestamp);
-  const end = Math.min(alertEndTimestamp, endTimestamp);
-  const relativeSize = (end - start) / (endTimestamp - startTimestamp);
-
-  if (alertStartTimestamp > startTimestamp) {
-    startX = x;
-  }
-
-  const rectWidth = relativeSize * width;
+  // Use shared calculation with background.x as baseX (includes margins)
+  const { startX, width: rectWidth } = calculateAlertPosition(
+    alertStartTimestamp,
+    alertEndTimestamp,
+    startTimestamp,
+    endTimestamp,
+    width,
+    background.x, // This is the key! background.x includes chart margins
+  );
 
   return { rectWidth, startX };
+};
+
+// =============================================================================
+// TOOLTIP UTILS
+// =============================================================================
+
+/**
+ * Calculates tooltip position for an alert based on its time range
+ */
+export const getTooltipPosition = (
+  alert: { startsAt: string; endsAt: string },
+  startTimestamp: number,
+  endTimestamp: number,
+  chartUsableWidth: number,
+) => {
+  const alertStart = new Date(alert.startsAt).getTime();
+  const alertEnd = new Date(alert.endsAt).getTime();
+
+  const { startX, width } = calculateAlertPosition(
+    alertStart,
+    alertEnd,
+    startTimestamp,
+    endTimestamp,
+    chartUsableWidth,
+    CHART_CONFIG.MARGINS.left, // Include left margin as baseX
+  );
+
+  // Return center position of the alert
+  return startX + width / 2;
 };

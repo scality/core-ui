@@ -13,12 +13,16 @@ import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../../index';
 import { Alert } from '../GlobalHealthBarRecharts.component';
 import { TooltipContentProps } from 'recharts';
 import { zIndex } from '../../../style/theme';
+import { CHART_CONFIG, getTooltipPosition } from '../healthBarUtils';
 
 interface GlobalHealthBarTooltipProps {
   tooltipData: Alert | null;
   coordinate?: { x: number; y: number };
   tooltipProps: TooltipContentProps<number, string>;
   chartContainerRef: React.RefObject<HTMLDivElement>;
+  isKeyboardActive?: boolean;
+  startTimestamp?: number;
+  endTimestamp?: number;
 }
 
 const TooltipContainer = styled.div`
@@ -40,7 +44,14 @@ const TooltipContainer = styled.div`
 `;
 
 export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
-  const { tooltipData, tooltipProps, chartContainerRef } = props;
+  const {
+    tooltipData,
+    tooltipProps,
+    chartContainerRef,
+    isKeyboardActive = false,
+    startTimestamp = 0,
+    endTimestamp = 0,
+  } = props;
   const { coordinate } = tooltipProps;
 
   const [virtualElement, setVirtualElement] = useState<any>(null);
@@ -49,32 +60,74 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
     elements: {
       reference: virtualElement,
     },
-    placement: 'bottom',
-    middleware: [offset(20), flip(), shift({ padding: 10 })],
+    middleware: [
+      offset(({ placement }) => {
+        // Use larger offset when tooltip is on top
+        // to avoid tooltip over bar
+        return placement.includes('top') ? 20 : 30;
+      }),
+      flip(),
+      shift({ padding: 10 }),
+    ],
     whileElementsMounted: autoUpdate,
   });
 
   // Create virtual element from coordinate
   useEffect(() => {
-    if (coordinate && chartContainerRef.current) {
+    if (chartContainerRef.current) {
       const chartRect = chartContainerRef.current.getBoundingClientRect();
+
+      let tooltipX: number;
+      let tooltipY: number;
+
+      if (isKeyboardActive && tooltipData && startTimestamp && endTimestamp) {
+        // Calculate the chart's usable width (excluding margins)
+        const chartUsableWidth =
+          chartRect.width -
+          CHART_CONFIG.MARGINS.left -
+          CHART_CONFIG.MARGINS.right;
+
+        // Use the same positioning logic as alert bars
+        const alertCenterX = getTooltipPosition(
+          tooltipData,
+          startTimestamp,
+          endTimestamp,
+          chartUsableWidth,
+        );
+
+        // Position tooltip at the center of the alert's time span
+        // alertCenterX already includes the margin offset, so just add chartRect.left
+        tooltipX = chartRect.left + alertCenterX;
+        tooltipY = chartRect.top + CHART_CONFIG.BAR_SIZE;
+      } else {
+        // For mouse navigation, use the provided coordinate
+        tooltipX = chartRect.left + coordinate?.x;
+        tooltipY = chartRect.top + coordinate?.y;
+      }
 
       setVirtualElement({
         getBoundingClientRect() {
           return {
             width: 0,
             height: 0,
-            x: chartRect.left + coordinate.x,
-            y: chartRect.top + coordinate.y,
-            left: chartRect.left + coordinate.x,
-            top: chartRect.top + coordinate.y,
-            right: chartRect.left + coordinate.x,
-            bottom: chartRect.top + coordinate.y,
+            x: tooltipX,
+            y: tooltipY,
+            left: tooltipX,
+            top: tooltipY,
+            right: tooltipX,
+            bottom: tooltipY,
           };
         },
       });
     }
-  }, [coordinate, chartContainerRef]);
+  }, [
+    coordinate,
+    chartContainerRef,
+    isKeyboardActive,
+    tooltipData,
+    startTimestamp,
+    endTimestamp,
+  ]);
 
   if (!tooltipData) return null;
 

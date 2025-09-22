@@ -8,7 +8,7 @@ import {
   TooltipContentProps,
   YAxis,
 } from 'recharts';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { AlertBar, createAlertBarRenderer } from './components/AlertBar';
 import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
 import { HealthBarXAxis } from './components/HealthBarXAxis';
@@ -22,8 +22,14 @@ export interface GlobalHealthProps {
   end: Date;
 }
 
+const ChartInteractiveContainer = styled.div`
+  position: relative;
+`;
+
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const [tooltipData, setTooltipData] = useState<Alert | null>(null);
+  const [focusedAlertIndex, setFocusedAlertIndex] = useState<number>(-1);
+  const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const startTimestamp = new Date(start).getTime();
@@ -49,10 +55,97 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   );
 
   const handlePointerLeave = useCallback(() => {
+    if (!keyboardActive) {
+      setTooltipData(null);
+    }
+  }, [keyboardActive]);
+
+  const { warningKeys, criticalKeys, unavailableKeys } = alertKeys;
+
+  // Get all alert keys in order for keyboard navigation
+  const allAlertKeys = useMemo(() => {
+    return Object.values(alertsMap).sort((a, b) => {
+      return new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime();
+    });
+  }, [alertsMap]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (allAlertKeys.length === 0) return;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          event.preventDefault();
+          setKeyboardActive(true);
+          setFocusedAlertIndex((prevIndex) => {
+            const newIndex =
+              prevIndex <= 0 ? allAlertKeys.length - 1 : prevIndex - 1;
+            setTooltipData(allAlertKeys[newIndex]);
+            return newIndex;
+          });
+          break;
+
+        case 'ArrowRight':
+        case 'ArrowDown':
+          event.preventDefault();
+          setKeyboardActive(true);
+          setFocusedAlertIndex((prevIndex) => {
+            const newIndex =
+              prevIndex >= allAlertKeys.length - 1 ? 0 : prevIndex + 1;
+            setTooltipData(allAlertKeys[newIndex]);
+            return newIndex;
+          });
+          break;
+
+        case 'Home':
+          event.preventDefault();
+          setKeyboardActive(true);
+          setFocusedAlertIndex(0);
+          setTooltipData(allAlertKeys[0]);
+          break;
+
+        case 'End':
+          event.preventDefault();
+          setKeyboardActive(true);
+          setFocusedAlertIndex(allAlertKeys.length - 1);
+          setTooltipData(allAlertKeys[allAlertKeys.length - 1]);
+          break;
+
+        case 'Escape':
+          event.preventDefault();
+          setKeyboardActive(false);
+          setFocusedAlertIndex(-1);
+          setTooltipData(null);
+          break;
+
+        default:
+          break;
+      }
+    },
+    [allAlertKeys],
+  );
+
+  // Handle focus events
+  const handleFocus = useCallback(() => {
+    if (allAlertKeys.length > 0 && focusedAlertIndex === -1) {
+      setFocusedAlertIndex(0);
+      setTooltipData(allAlertKeys[0]);
+      setKeyboardActive(true);
+    }
+  }, [allAlertKeys, focusedAlertIndex]);
+
+  const handleBlur = useCallback(() => {
+    setKeyboardActive(false);
+    setFocusedAlertIndex(-1);
     setTooltipData(null);
   }, []);
 
-  const { warningKeys, criticalKeys, unavailableKeys } = alertKeys;
+  // Handle mouse enter to disable keyboard mode
+  const handleMouseEnter = useCallback(() => {
+    setKeyboardActive(false);
+  }, []);
 
   const allAlertBars = useMemo(() => {
     const configs = [
@@ -67,74 +160,85 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   }, [unavailableKeys, warningKeys, criticalKeys, theme]);
 
   return (
-    <ResponsiveContainer
-      width={'100%'}
-      height={CHART_CONFIG.CHART_HEIGHT}
+    <ChartInteractiveContainer
       ref={chartContainerRef}
-      style={{ contain: 'layout', position: 'relative' }}
+      tabIndex={0}
+      role="application"
+      aria-label={`Health bar chart with ${allAlertKeys.length} alerts. Use arrow keys to navigate, Escape to close tooltip.`}
+      onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
     >
-      <BarChart
-        data={chartData}
-        layout="vertical"
-        barSize={CHART_CONFIG.BAR_SIZE}
-        accessibilityLayer
-        margin={CHART_CONFIG.MARGINS}
-      >
-        <HealthBarXAxis
-          startTimestamp={startTimestamp}
-          endTimestamp={endTimestamp}
-        />
-
-        <Tooltip
-          allowEscapeViewBox={{ x: true, y: true }}
-          isAnimationActive={false}
-          shared={false}
-          wrapperStyle={{
-            width: '20rem',
-            position: 'fixed',
-          }}
-          content={(props: TooltipContentProps<number, string>) => {
-            return (
-              <GlobalHealthBarTooltip
-                tooltipData={tooltipData}
-                tooltipProps={props}
-                chartContainerRef={chartContainerRef}
-              />
-            );
-          }}
-        />
-
-        {/* YAxis for the Background healthy bar */}
-        <YAxis yAxisId={'background'} type="category" hide />
-
-        {/* Generate YAxis for all alert keys */}
-        {allAlertBars.map(({ key }) => (
-          <YAxis key={`yAxis${key}`} yAxisId={key} type="category" hide />
-        ))}
-
-        {/* Background healthy bar */}
-        <Bar
-          dataKey="range"
-          fill={theme.statusHealthy}
-          radius={CHART_CONFIG.RADIUS_SIZE}
-          yAxisId="background"
-          isAnimationActive={false}
-        />
-
-        {/* Alert bars */}
-        {allAlertBars.map(({ key, fill }) => (
-          <AlertBar
-            key={key}
-            dataKey={key}
-            yAxisId={key}
-            fill={fill}
-            shape={(props: BarProps) => alertBarRenderer(props, key)}
-            onPointerEnter={() => handlePointerEnter(key)}
-            onPointerLeave={() => handlePointerLeave()}
+      <ResponsiveContainer width={'100%'} height={CHART_CONFIG.CHART_HEIGHT}>
+        <BarChart
+          data={chartData}
+          layout="vertical"
+          barSize={CHART_CONFIG.BAR_SIZE}
+          accessibilityLayer
+          margin={CHART_CONFIG.MARGINS}
+        >
+          <HealthBarXAxis
+            startTimestamp={startTimestamp}
+            endTimestamp={endTimestamp}
           />
-        ))}
-      </BarChart>
-    </ResponsiveContainer>
+
+          <Tooltip
+            allowEscapeViewBox={{ x: true, y: true }}
+            isAnimationActive={false}
+            shared={false}
+            wrapperStyle={{
+              width: '20rem',
+              position: 'fixed',
+            }}
+            content={(props: TooltipContentProps<number, string>) => {
+              // For keyboard navigation, calculate the actual bar position
+
+              return (
+                <GlobalHealthBarTooltip
+                  tooltipData={tooltipData}
+                  tooltipProps={props}
+                  chartContainerRef={chartContainerRef}
+                  isKeyboardActive={keyboardActive}
+                  startTimestamp={startTimestamp}
+                  endTimestamp={endTimestamp}
+                />
+              );
+            }}
+          />
+
+          {/* YAxis for the Background healthy bar */}
+          <YAxis yAxisId={'background'} type="category" hide />
+
+          {/* Generate YAxis for all alert keys */}
+          {allAlertBars.map(({ key }) => (
+            <YAxis key={`yAxis${key}`} yAxisId={key} type="category" hide />
+          ))}
+
+          {/* Background healthy bar */}
+          <Bar
+            dataKey="range"
+            fill={theme.statusHealthy}
+            radius={CHART_CONFIG.RADIUS_SIZE}
+            yAxisId="background"
+            isAnimationActive={false}
+          />
+
+          {/* Alert bars */}
+          {allAlertBars.map(({ key, fill }) => (
+            <AlertBar
+              key={key}
+              dataKey={key}
+              yAxisId={key}
+              fill={fill}
+              shape={(props: BarProps) => alertBarRenderer(props, key)}
+              onPointerEnter={() => handlePointerEnter(key)}
+              onPointerLeave={() => handlePointerLeave()}
+            />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
+    </ChartInteractiveContainer>
   );
 }
 

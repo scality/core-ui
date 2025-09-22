@@ -5,7 +5,6 @@ import {
   calculateHourTicks,
   getTicks,
   getEdgeMargin,
-  shouldShowTickLabel,
   calculateLabelVisibility,
   getRectangleProps,
   LabelVisibilityConfig,
@@ -187,84 +186,6 @@ describe('Health Bar Utils', () => {
   });
 
   describe('Label Visibility', () => {
-    describe('shouldShowTickLabel', () => {
-      it('should return true when there is enough space', () => {
-        const config: LabelVisibilityConfig = {
-          hasEnoughSpace: true,
-          timeSpan: TIME_CONSTANTS.ONE_DAY,
-          tickIndex: 1,
-          totalTicks: 5,
-        };
-
-        expect(shouldShowTickLabel(config)).toBe(true);
-      });
-
-      it('should apply modulo logic when space is limited for week span', () => {
-        const config: LabelVisibilityConfig = {
-          hasEnoughSpace: false,
-          timeSpan: TIME_CONSTANTS.ONE_WEEK,
-          tickIndex: 0,
-          totalTicks: 7,
-        };
-
-        expect(shouldShowTickLabel(config)).toBe(true);
-
-        config.tickIndex = 1;
-        expect(shouldShowTickLabel(config)).toBe(false);
-
-        config.tickIndex = 2;
-        expect(shouldShowTickLabel(config)).toBe(true);
-      });
-
-      it('should apply modulo logic when space is limited for day span', () => {
-        const config: LabelVisibilityConfig = {
-          hasEnoughSpace: false,
-          timeSpan: TIME_CONSTANTS.ONE_DAY,
-          tickIndex: 0,
-          totalTicks: 5,
-        };
-
-        expect(shouldShowTickLabel(config)).toBe(true);
-
-        config.tickIndex = 1;
-        expect(shouldShowTickLabel(config)).toBe(false);
-
-        config.tickIndex = 3;
-        expect(shouldShowTickLabel(config)).toBe(true);
-      });
-
-      it('should apply modulo logic when space is limited for hour span', () => {
-        const config: LabelVisibilityConfig = {
-          hasEnoughSpace: false,
-          timeSpan: TIME_CONSTANTS.ONE_HOUR,
-          tickIndex: 0,
-          totalTicks: 5,
-        };
-
-        expect(shouldShowTickLabel(config)).toBe(true);
-
-        config.tickIndex = 1;
-        expect(shouldShowTickLabel(config)).toBe(false);
-
-        config.tickIndex = 2;
-        expect(shouldShowTickLabel(config)).toBe(false);
-
-        config.tickIndex = 3;
-        expect(shouldShowTickLabel(config)).toBe(true);
-      });
-
-      it('should return false for unsupported time spans without enough space', () => {
-        const config: LabelVisibilityConfig = {
-          hasEnoughSpace: false,
-          timeSpan: 123456,
-          tickIndex: 0,
-          totalTicks: 5,
-        };
-
-        expect(shouldShowTickLabel(config)).toBe(false);
-      });
-    });
-
     describe('calculateLabelVisibility', () => {
       it('should return true when chart has enough space per tick', () => {
         const chartWidth = 500;
@@ -321,44 +242,9 @@ describe('Health Bar Utils', () => {
 
       it('should apply day span rules when space is limited', () => {
         const chartWidth = 200;
-        const totalTicks = 5;
+        const totalTicks = 4;
         const span = TIME_CONSTANTS.ONE_DAY;
-        const endTimestamp = Date.now();
-
-        expect(
-          calculateLabelVisibility(
-            chartWidth,
-            totalTicks,
-            span,
-            0,
-            endTimestamp,
-          ),
-        ).toBe(true);
-        expect(
-          calculateLabelVisibility(
-            chartWidth,
-            totalTicks,
-            span,
-            1,
-            endTimestamp,
-          ),
-        ).toBe(false);
-        expect(
-          calculateLabelVisibility(
-            chartWidth,
-            totalTicks,
-            span,
-            3,
-            endTimestamp,
-          ),
-        ).toBe(true);
-      });
-
-      it('should apply hour span rules when space is limited', () => {
-        const chartWidth = 200;
-        const totalTicks = 5;
-        const span = TIME_CONSTANTS.ONE_HOUR;
-        const endTimestamp = Date.now();
+        const endTimestamp = new Date('2023-12-07T12:10:00Z').getTime();
 
         expect(
           calculateLabelVisibility(
@@ -409,7 +295,77 @@ describe('Health Bar Utils', () => {
             chartWidth,
             totalTicks,
             span,
+            0,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
             2,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            4,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            3,
+            endTimestamp,
+          ),
+        ).toBe(false);
+      });
+      it('should apply day span rules when space is limited for non-round hour', () => {
+        const chartWidth = 200;
+        const totalTicks = 4;
+        const span = TIME_CONSTANTS.ONE_DAY;
+        const endTimestamp = new Date('2023-12-07T12:10:00Z').getTime();
+
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            0,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            1,
+            endTimestamp,
+          ),
+        ).toBe(false);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            2,
+            endTimestamp,
+          ),
+        ).toBe(false);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            3,
             endTimestamp,
           ),
         ).toBe(true);
@@ -426,10 +382,37 @@ describe('Health Bar Utils', () => {
             chartWidth,
             totalTicks,
             span,
+            0,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
             2,
             endTimestamp,
           ),
         ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            4,
+            endTimestamp,
+          ),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            3,
+            endTimestamp,
+          ),
+        ).toBe(false);
       });
 
       it('should return false for unsupported time spans when space is limited', () => {
@@ -508,9 +491,8 @@ describe('Health Bar Utils', () => {
         const endTimestamp = 4000;
 
         const props = {
-          x: 100,
           background: { x: 50, width: 200 },
-          alert: [2000, 6000],
+          alert: [2500, 6000],
         };
 
         const result = getRectangleProps(
@@ -520,11 +502,11 @@ describe('Health Bar Utils', () => {
           endTimestamp,
         );
 
-        const expectedRelativeSize = (4000 - 2000) / (4000 - 1000);
+        const expectedRelativeSize = (4000 - 2500) / (4000 - 1000);
         const expectedWidth = expectedRelativeSize * 200;
 
         expect(result.rectWidth).toBe(expectedWidth);
-        expect(result.startX).toBe(100);
+        expect(result.startX).toBe(150);
       });
 
       it('should handle alert spanning entire time range', () => {
@@ -532,7 +514,6 @@ describe('Health Bar Utils', () => {
         const endTimestamp = 4000;
 
         const props = {
-          x: 100,
           background: { x: 50, width: 200 },
           alert: [1000, 5000],
         };
