@@ -8,6 +8,11 @@ import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegen
 import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
 import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
 import {
+  useChartId,
+  useChartLegend,
+} from '../src/lib/components/chartlegend/ChartLegendWrapper';
+import { useEffect } from 'react';
+import {
   SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
   SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
 } from '../src/lib/components/constants';
@@ -745,5 +750,103 @@ export const CustomTooltipExample: Story = {
     renderTooltip: (props) => {
       return <div>Custom Tooltip</div>;
     },
+  },
+};
+
+// Dynamic colorSet example components
+const DynamicChart1 = (props) => {
+  const chartId = useChartId();
+  const { register } = useChartLegend();
+
+  useEffect(() => {
+    register(chartId, [
+      'ip-10-160-122-207.eu-north-1.compute.internal',
+      'ip-10-160-122-207.eu-north-2.compute.internal',
+    ]);
+  }, [chartId, register]);
+
+  return <LineTimeSerieChart {...props} />;
+};
+
+const DynamicChart2 = (props) => {
+  const chartId = useChartId();
+  const { register } = useChartLegend();
+
+  useEffect(() => {
+    register(chartId, ['ip-10-160-122-207.eu-north-1.compute.internal']);
+  }, [chartId, register]);
+
+  return <LineTimeSerieChart {...props} />;
+};
+
+const generateColors = (seriesNames: string[]) => {
+  const colors: Record<string, string> = {};
+  seriesNames.forEach((name, index) => {
+    colors[name] =
+      lineTimeSeriesColorRange[index % lineTimeSeriesColorRange.length];
+  });
+  return colors;
+};
+
+export const DynamicColorSetExample: Story = {
+  render: () => {
+    return (
+      <ChartLegendWrapper colorSet={generateColors}>
+        <div style={{ marginBottom: '20px' }}>
+          <h3>Chart 1 - Multiple Series</h3>
+          <DynamicChart1
+            series={{
+              above: [
+                {
+                  data: prometheusData as [number, string | number | null][],
+                  resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+                  metricPrefix: 'in',
+                  getTooltipLabel: (prefix, resource) =>
+                    `${resource}-${prefix}`,
+                },
+                {
+                  data: prometheusData2 as [number, string | number | null][],
+                  resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
+                  metricPrefix: 'in',
+                  getTooltipLabel: (prefix, resource) =>
+                    `${resource}-${prefix}`,
+                },
+              ],
+              below: [],
+            }}
+            title="Dynamic Chart 1"
+            height={200}
+            startingTimeStamp={Number(prometheusData[0][0])}
+            isLoading={false}
+            yAxisType={'symmetrical'}
+            interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+            duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <h3>Chart 2 - Single Series (Overlapping with Chart 1)</h3>
+          <DynamicChart2
+            series={[
+              {
+                data: prometheusData3 as [number, string | number | null][],
+                resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+                metricPrefix: 'instance:10.160.122.207:9100',
+                getTooltipLabel: (prefix, resource) => `${resource}`,
+              },
+            ]}
+            title="Dynamic Chart 2"
+            height={200}
+            startingTimeStamp={Number(prometheusData3[0][0])}
+            isLoading={false}
+            yAxisType={'percentage'}
+            interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+            duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          />
+        </div>
+
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    );
   },
 };

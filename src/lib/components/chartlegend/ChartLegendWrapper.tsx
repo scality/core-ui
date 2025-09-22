@@ -5,8 +5,21 @@ import {
   ReactNode,
   useMemo,
   useCallback,
+  useEffect,
+  useRef,
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { ChartColors } from '../../style/theme';
+
+export const useChartId = (): string => {
+  const idRef = useRef<string | null>(null);
+
+  if (idRef.current === null) {
+    idRef.current = uuidv4();
+  }
+
+  return idRef.current;
+};
 
 export type ChartLegendState = {
   selectedResources: string[];
@@ -18,22 +31,68 @@ export type ChartLegendState = {
   getColor: (resource: string) => string | undefined;
   listResources: () => string[];
   isOnlyOneSelected: () => boolean;
+  register: (chartId: string, seriesNames: string[]) => void;
 };
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
 
 export type ChartLegendWrapperProps = {
   children: ReactNode;
-  colorSet: Record<string, ChartColors | string>;
+  colorSet:
+    | Record<string, ChartColors | string>
+    | ((seriesNames: string[]) => Record<string, ChartColors | string>);
 };
 
 export const ChartLegendWrapper = ({
   children,
   colorSet,
 }: ChartLegendWrapperProps) => {
-  const allResources = Object.keys(colorSet);
+  const [registeredColorSets, setRegisteredColorSets] = useState<
+    Record<string, string[]>
+  >({});
+
+  const [internalColorSet, setInternalColorSet] = useState<
+    Record<string, ChartColors | string>
+  >(() => {
+    return typeof colorSet === 'function' ? {} : colorSet;
+  });
+
+  useEffect(() => {
+    if (typeof colorSet === 'function') {
+      const allUniqueSeriesNames = Array.from(
+        new Set(Object.values(registeredColorSets).flat()),
+      );
+
+      if (allUniqueSeriesNames.length > 0) {
+        const newColorSet = colorSet(allUniqueSeriesNames);
+        setInternalColorSet(newColorSet);
+      }
+    }
+  }, [registeredColorSets, colorSet]);
+
+  useEffect(() => {
+    if (typeof colorSet !== 'function') {
+      setInternalColorSet(colorSet);
+    }
+  }, [colorSet]);
+
+  const allResources = useMemo(
+    () => Object.keys(internalColorSet),
+    [internalColorSet],
+  );
   const [selectedResources, setSelectedResources] =
     useState<string[]>(allResources);
+
+  useEffect(() => {
+    setSelectedResources(allResources);
+  }, [allResources]);
+
+  const register = useCallback((chartId: string, seriesNames: string[]) => {
+    setRegisteredColorSets((prev) => ({
+      ...prev,
+      [chartId]: seriesNames,
+    }));
+  }, []);
 
   const addSelectedResource = useCallback((resource: string) => {
     setSelectedResources((prev) =>
@@ -46,8 +105,8 @@ export const ChartLegendWrapper = ({
   }, []);
 
   const selectAllResources = useCallback(() => {
-    setSelectedResources(allResources);
-  }, [allResources]);
+    setSelectedResources(Object.keys(internalColorSet));
+  }, [internalColorSet]);
 
   const selectOnlyResource = useCallback((resource: string) => {
     setSelectedResources([resource]);
@@ -65,7 +124,7 @@ export const ChartLegendWrapper = ({
 
   const getColor = useCallback(
     (resource: string) => {
-      const color = colorSet[resource];
+      const color = internalColorSet[resource];
       if (!color) {
         console.warn(
           `ChartLegendWrapper: No color defined for resource "${resource}"`,
@@ -74,12 +133,12 @@ export const ChartLegendWrapper = ({
       }
       return color;
     },
-    [colorSet],
+    [internalColorSet],
   );
 
   const listResources = useCallback(() => {
-    return Object.keys(colorSet);
-  }, [colorSet]);
+    return Object.keys(internalColorSet);
+  }, [internalColorSet]);
 
   const chartLegendState = useMemo(
     () => ({
@@ -92,6 +151,7 @@ export const ChartLegendWrapper = ({
       getColor,
       listResources,
       isOnlyOneSelected,
+      register,
     }),
     [
       selectedResources,
@@ -103,6 +163,7 @@ export const ChartLegendWrapper = ({
       getColor,
       listResources,
       isOnlyOneSelected,
+      register,
     ],
   );
 
@@ -113,7 +174,6 @@ export const ChartLegendWrapper = ({
   );
 };
 
-// Hook for accessing legend state in custom components
 export const useChartLegend = () => {
   const context = useContext(ChartLegendContext);
   if (!context) {
