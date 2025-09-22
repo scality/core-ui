@@ -2,14 +2,12 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import {
   Bar,
   BarChart,
-  BarProps,
   ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { AlertBar } from './components/AlertBar';
 import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
 import { HealthBarXAxis } from './components/HealthBarXAxis';
 import { CHART_CONFIG } from './healthBarUtils';
