@@ -4,7 +4,7 @@ export interface Alert {
   description: string;
   startsAt: string;
   endsAt: string;
-  severity: 'warning' | 'critical';
+  severity: 'warning' | 'critical' | 'unavailable';
 }
 
 export const useHealthBarData = (
