@@ -67,14 +67,10 @@ export const ChartLegendWrapper = ({
         const newColorSet = colorSet(allUniqueSeriesNames);
         setInternalColorSet(newColorSet);
       }
-    }
-  }, [registeredColorSets, colorSet]);
-
-  useEffect(() => {
-    if (typeof colorSet !== 'function') {
+    } else {
       setInternalColorSet(colorSet);
     }
-  }, [colorSet]);
+  }, [registeredColorSets, colorSet]);
 
   const allResources = useMemo(
     () => Object.keys(internalColorSet),
