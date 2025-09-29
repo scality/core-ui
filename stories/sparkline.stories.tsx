@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Sparkline } from '../src/lib/components/sparkline/sparkline.component';
+import { lineColor5, lineColor6 } from '../src/lib/style/theme';
 
 const meta: Meta<typeof Sparkline> = {
   title: 'Components/Data Display/Charts/Sparkline',
@@ -16,7 +17,7 @@ const meta: Meta<typeof Sparkline> = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 300, height: 100 }}>
+      <div style={{ width: 200, height: 100 }}>
         <Story />
       </div>
     ),
@@ -102,6 +103,7 @@ export const TrendingUp: Story = {
   args: {
     serie: {
       data: trendingUpData,
+      color: lineColor5, // Optional custom color (green)
     },
   },
   parameters: {
@@ -117,6 +119,7 @@ export const TrendingDown: Story = {
   args: {
     serie: {
       data: trendingDownData,
+      color: lineColor6,
     },
   },
   parameters: {
