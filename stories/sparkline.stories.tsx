@@ -39,7 +39,6 @@ const volatileData: [number, number][] = [
   [1740411360, 67.89],
   [1740412080, 12.45],
   [1740412800, 95.67],
-  [1740413520, 41.23],
 ];
 
 const trendingUpData: [number, number][] = [
@@ -53,7 +52,6 @@ const trendingUpData: [number, number][] = [
   [1740411360, 48.3],
   [1740412080, 55.9],
   [1740412800, 62.1],
-  [1740413520, 68.7],
 ];
 
 const trendingDownData: [number, number][] = [
@@ -67,7 +65,6 @@ const trendingDownData: [number, number][] = [
   [1740411360, 28.3],
   [1740412080, 25.9],
   [1740412800, 22.1],
-  [1740413520, 18.7],
 ];
 
 const flatData: [number, number][] = [
@@ -81,7 +78,6 @@ const flatData: [number, number][] = [
   [1740411360, 50.0],
   [1740412080, 50.0],
   [1740412800, 50.0],
-  [1740413520, 50.0],
 ];
 
 export const Default: Story = {

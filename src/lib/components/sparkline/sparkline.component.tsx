@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer } from "recharts";
 import { chartColors } from "../../style/theme";
+import { useTheme } from "styled-components";
 
 type SparklineProps = {
   serie: {
@@ -16,15 +16,10 @@ type SparklineProps = {
 export function Sparkline({ serie }: SparklineProps) {
   const data = serie.data.map(([x, y]) => ({ x, y }));
   const color = serie.color ?? chartColors.lineColor1;
-
-  const [chartWidth, setChartWidth] = useState(0);
-  const verticalPoints = useMemo(
-    () => Array.from({ length: 7 }, (_, i) => 5 + (i * (chartWidth - 10)) / 5),
-    [chartWidth]
-  );
+  const strokeGridColor = useTheme().border;
 
   return (
-    <ResponsiveContainer onResize={setChartWidth}>
+    <ResponsiveContainer>
       <AreaChart data={data}>
         <defs>
           <linearGradient id={`gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
@@ -32,15 +27,15 @@ export function Sparkline({ serie }: SparklineProps) {
             <stop offset="100%" stopColor={color} stopOpacity={0.1} />
           </linearGradient>
         </defs>
-        <CartesianGrid horizontal={false} strokeOpacity={0.4} verticalPoints={verticalPoints} />
-        <Area
-          type="linear"
-          dataKey="y"
-          stroke={color}
-          fill={`url(#gradient-${color})`}
-          dot={false}
-          activeDot={false}
-        />
+      <CartesianGrid horizontal={false} stroke={strokeGridColor} strokeOpacity={0.5} />
+      <Area
+        type="linear"
+        dataKey="y"
+        stroke={color}
+        fill={`url(#gradient-${color})`}
+        dot={false}
+        activeDot={false}
+      />
       </AreaChart>
     </ResponsiveContainer>
   );
