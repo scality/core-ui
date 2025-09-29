@@ -140,8 +140,8 @@ export const iconTable = {
   Stop: 'fas faStop',
   Play: 'fas faPlay',
   Mail: 'fas faEnvelope',
-  ThumbsUp: 'fas faThumbsUp',
-  ThumbsDown: 'fas faThumbsDown',
+  ThumbsUp: 'far faThumbsUp',
+  ThumbsDown: 'far faThumbsDown',
 };
 
 type IconProps = {
