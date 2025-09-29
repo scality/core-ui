@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer } from "recharts";
-import { chartColors } from "../../style/theme";
 import { useTheme } from "styled-components";
+import { chartColors } from "../../style/theme";
 
 type SparklineProps = {
   serie: {
@@ -14,7 +15,7 @@ type SparklineProps = {
  * Used to show trends in data over time.
  */
 export function Sparkline({ serie }: SparklineProps) {
-  const data = serie.data.map(([x, y]) => ({ x, y }));
+  const data = useMemo(() => serie.data.map(([x, y]) => ({ x, y })), [serie.data]);
   const color = serie.color ?? chartColors.lineColor1;
   const strokeGridColor = useTheme().border;
 
