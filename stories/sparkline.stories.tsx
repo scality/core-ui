@@ -67,15 +67,15 @@ const trendingDownData: [number, number][] = [
   [1740412800, 22.1],
 ];
 
-const flatData: [number, number][] = [
+const flatData: [number, number|null][] = [
   [1740405600, 50.0],
   [1740406320, 50.0],
   [1740407760, 50.0],
-  [1740408480, 50.0],
+  [1740408480, null],
   [1740409200, 50.0],
   [1740409920, 50.0],
   [1740410640, 50.0],
-  [1740411360, 50.0],
+  [1740411360, null],
   [1740412080, 50.0],
   [1740412800, 50.0],
 ];
@@ -127,7 +127,7 @@ export const TrendingDown: Story = {
   },
 };
 
-export const Flat: Story = {
+export const FlatWithMissingData: Story = {
   args: {
     serie: {
       data: flatData,
@@ -136,7 +136,7 @@ export const Flat: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Sparkline representing stable data with minimal fluctuations.',
+        story: 'Sparkline representing stable data with some missing values.',
       },
     },
   },

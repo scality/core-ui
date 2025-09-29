@@ -5,7 +5,7 @@ import { chartColors } from "../../style/theme";
 
 type SparklineProps = {
   serie: {
-    data: [number, number][],
+    data: [number, number|null][],
     color?: string, // exa color code like '#ff0000'
   }
 };
