@@ -36,6 +36,7 @@ export function Sparkline({ serie }: SparklineProps) {
         fill={`url(#gradient-${color})`}
         dot={false}
         activeDot={false}
+        isAnimationActive={false}
       />
       </AreaChart>
     </ResponsiveContainer>
