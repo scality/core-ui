@@ -26,7 +26,6 @@ export function Sparkline({ serie, startingTimeStamp, sampleDuration, sampleInte
     },
     [serie.data]
   );
-  console.log('Sparkline data:', data);
   const color = serie.color ?? chartColors.lineColor1;
   const strokeGridColor = useTheme().border;
 
