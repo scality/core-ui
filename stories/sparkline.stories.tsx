@@ -14,6 +14,18 @@ const meta: Meta<typeof Sparkline> = {
       control: 'object',
       description: 'Data series containing array of [timestamp, value] pairs'
     },
+    startingTimeStamp: { 
+      control: 'number',
+      description: 'Starting timestamp in seconds for the data series'
+    },
+    sampleDuration: { 
+      control: 'number',
+      description: 'Total duration in seconds to cover in the sparkline'
+    },
+    sampleInterval: { 
+      control: 'number',
+      description: 'Interval in seconds between data points'
+    },
   },
   decorators: [
     (Story) => (
@@ -31,6 +43,7 @@ type Story = StoryObj<typeof Sparkline>;
 const volatileData: [number, number][] = [
   [1740405600, 25.32],
   [1740406320, 78.45],
+  [1740407040, 45.67],
   [1740407760, 15.67],
   [1740408480, 92.33],
   [1740409200, 8.91],
@@ -44,6 +57,7 @@ const volatileData: [number, number][] = [
 const trendingUpData: [number, number][] = [
   [1740405600, 10.5],
   [1740406320, 15.2],
+  [1740407040, 20.3],
   [1740407760, 18.9],
   [1740408480, 22.1],
   [1740409200, 28.7],
@@ -57,6 +71,7 @@ const trendingUpData: [number, number][] = [
 const trendingDownData: [number, number][] = [
   [1740405600, 70.5],
   [1740406320, 65.2],
+  [1740407040, 58.9],
   [1740407760, 58.9],
   [1740408480, 52.1],
   [1740409200, 48.7],
@@ -71,11 +86,9 @@ const flatData: [number, number|null][] = [
   [1740405600, 50.0],
   [1740406320, 50.0],
   [1740407760, 50.0],
-  [1740408480, null],
   [1740409200, 50.0],
   [1740409920, 50.0],
   [1740410640, 50.0],
-  [1740411360, null],
   [1740412080, 50.0],
   [1740412800, 50.0],
 ];
@@ -85,6 +98,9 @@ export const Default: Story = {
     serie: {
       data: volatileData,
     },
+    startingTimeStamp: 1740405600,
+    sampleDuration: 7200,
+    sampleInterval: 720,
   },
   parameters: {
     docs: {
@@ -101,6 +117,9 @@ export const TrendingUp: Story = {
       data: trendingUpData,
       color: lineColor5, // Optional custom color (green)
     },
+    startingTimeStamp: 1740405600,
+    sampleDuration: 7200,
+    sampleInterval: 720,
   },
   parameters: {
     docs: {
@@ -117,6 +136,9 @@ export const TrendingDown: Story = {
       data: trendingDownData,
       color: lineColor6,
     },
+    startingTimeStamp: 1740405600,
+    sampleDuration: 7200,
+    sampleInterval: 720,
   },
   parameters: {
     docs: {
@@ -132,6 +154,9 @@ export const FlatWithMissingData: Story = {
     serie: {
       data: flatData,
     },
+    startingTimeStamp: 1740405600,
+    sampleDuration: 7200,
+    sampleInterval: 720,
   },
   parameters: {
     docs: {
