@@ -36,3 +36,4 @@ export {
 } from './components/charttooltip/ChartTooltip';
 export { CoreUITheme } from './style/theme';
 export { GlobalHealthBar } from './components/globalhealthbar/GlobalHealthBarRecharts.component';
+export { Sparkline } from './components/sparkline/sparkline.component';
