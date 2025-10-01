@@ -19,7 +19,10 @@ export type GlobalHealthProps = {
   height?: number;
   tooltipPosition?: Position;
 };
-
+/**
+ * @deprecated Use GlobalHealthBar v2 instead
+ * @example import { GlobalHealthBar } from '@scality/core-ui/dist/next';
+ */
 function GlobalHealthBar({
   id,
   alerts,

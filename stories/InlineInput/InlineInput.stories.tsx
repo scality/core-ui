@@ -26,7 +26,13 @@ export default {
         });
       },
     });
-    return <InlineInput {...args} changeMutation={changeMutation} />;
+    return (
+      <InlineInput
+        id="inline-input-story"
+        {...args}
+        changeMutation={changeMutation}
+      />
+    );
   },
 };
 

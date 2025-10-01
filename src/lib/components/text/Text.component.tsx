@@ -8,7 +8,8 @@ export type TextVariant =
   | 'Basic'
   | 'Smaller'
   | 'Larger'
-  | 'Large';
+  | 'Large'
+  | 'Small';
 
 type Status = 'unknown' | 'healthy' | 'warning' | 'critical';
 type Props = {
@@ -158,7 +159,12 @@ export const Text = styled.span<{
   line-height: 1.4;
   letter-spacing: 2%;// to be defined, percentage value is not valid
       `
-          : `
+          : props.variant === 'Small'
+            ? `
+  font-size: 0.85rem;
+  line-height: 1.4;
+      `
+            : `
   font-size: 1rem;
   line-height: ${spacing.r24};
       `}
