@@ -564,6 +564,7 @@ export function LineTimeSerieChart({
                     stroke={colorMapping[resource]}
                     dot={false}
                     isAnimationActive={false}
+                    strokeDasharray={serie.isLineDashed ? '4 4' : undefined}
                     onMouseEnter={() => setHoveredValue(label)}
                     onMouseLeave={() => setHoveredValue(undefined)}
                   />
