@@ -158,7 +158,7 @@ export const CustomTick = ({
   return (
     <foreignObject
       x={centerX}
-      y={y}
+      y={y - 8}
       width={tickWidth}
       color={theme.textSecondary}
       overflow="visible"
@@ -185,7 +185,7 @@ export const CustomTick = ({
   );
 };
 
-const StyledResponsiveContainer = styled(ResponsiveContainer)`
+export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   // Avoid tooltip over constrained text to be cut off
   & .recharts-surface {
     overflow: visible;
@@ -332,9 +332,13 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             barCategoryGap={type.type === 'category' ? type.gap : undefined}
           >
             <CartesianGrid
-              vertical={false}
-              horizontal={false}
-              fill={theme.backgroundLevel1}
+              vertical={true}
+              horizontal={true}
+              verticalPoints={[0]}
+              horizontalPoints={[0]}
+              stroke={theme.border}
+              fill={theme.backgroundLevel4}
+              strokeWidth={1}
             />
             {rechartsBars.map((bar) => {
               const { fill, dataKey, stackId } = bar;
@@ -354,29 +358,21 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
             <YAxis
               tickCount={1}
+              interval={0}
               unit={` ${unitLabel}`}
               domain={[0, roundReferenceValue]}
               tickFormatter={
                 (value) =>
                   new Intl.NumberFormat('fr-FR').format(value.toFixed(0)) // Add a space as thousand separator
               }
-              axisLine={false}
+              axisLine={{ stroke: theme.border }}
               tick={{
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
               }}
-              tickLine={false}
-              label={{
-                fill: theme.textSecondary,
-              }}
               orientation="right"
             />
 
-            <ReferenceLine
-              y={roundReferenceValue}
-              fill={theme.border}
-              strokeWidth={0.5} // Reduce stroke width to make it less visible
-            />
             <XAxis
               dataKey="category"
               tick={(props) => <CustomTick {...props} type={type} />}
@@ -384,10 +380,10 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               interval={0}
               allowDataOverflow={true}
               tickLine={{
-                stroke: theme.textSecondary,
+                stroke: theme.border,
               }}
               axisLine={{
-                stroke: theme.textSecondary,
+                stroke: theme.border,
               }}
             />
 
