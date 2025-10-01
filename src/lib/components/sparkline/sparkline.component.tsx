@@ -2,20 +2,30 @@ import { useMemo } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useTheme } from "styled-components";
 import { chartColors } from "../../style/theme";
+import { addMissingDataPoint } from "../linetemporalchart/ChartUtil";
 
 type SparklineProps = {
   serie: {
     data: [number, number|null][],
     color?: string, // exa color code like '#ff0000'
-  }
+  },
+  startingTimeStamp: number,
+  sampleDuration: number,
+  sampleInterval: number
 };
 
 /**
  * Sparkline is a simple dynamically sized area chart.
  * Used to show trends in data over time.
  */
-export function Sparkline({ serie }: SparklineProps) {
-  const data = useMemo(() => serie.data.map(([x, y]) => ({ x, y })), [serie.data]);
+export function Sparkline({ serie, startingTimeStamp, sampleDuration, sampleInterval }: SparklineProps) {
+  const data = useMemo(
+    () => {
+      const dataMdp = addMissingDataPoint(serie.data, startingTimeStamp, sampleDuration, sampleInterval);
+      return dataMdp.map(([x, y]) => ({ x, y }));
+    },
+    [serie.data]
+  );
   const color = serie.color ?? chartColors.lineColor1;
   const strokeGridColor = useTheme().border;
 
