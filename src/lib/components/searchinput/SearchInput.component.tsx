@@ -17,6 +17,8 @@ export type Props = {
   autoComplete?: 'on' | 'off';
   searchIcon?: IconName;
   searchIconColor?: keyof CoreUITheme;
+  onBlur?: () => void;
+  onClick?: () => void;
 };
 const SearchInputContainer = styled.div<{
   docked?: boolean;
@@ -69,6 +71,8 @@ const SearchInput = forwardRef(
       autoComplete = 'on',
       searchIcon = 'Search',
       searchIconColor = 'textSecondary',
+      onBlur,
+      onClick,
       ...rest
     }: Props,
     forwardedRef,
@@ -133,7 +137,8 @@ const SearchInput = forwardRef(
               forwardedRef.current = element;
             }
           }}
-          {...{ rest }}
+          onBlur={onBlur}
+          onClick={onClick}
         />
         {debouncedValue && (
           <ClearButton className="close-icon">
