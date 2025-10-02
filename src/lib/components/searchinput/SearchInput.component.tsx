@@ -1,9 +1,11 @@
 import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Icon } from '../icon/Icon.component';
+import { Icon, IconName } from '../icon/Icon.component';
 import { Input, InputSize } from '../inputv2/inputv2';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
+import { CoreUITheme } from '../../style/theme';
+
 export type Props = {
   placeholder?: string;
   value: string;
@@ -13,6 +15,8 @@ export type Props = {
   id?: string;
   size?: InputSize;
   autoComplete?: 'on' | 'off';
+  searchIcon?: IconName;
+  searchIconColor?: keyof CoreUITheme;
 };
 const SearchInputContainer = styled.div<{
   docked?: boolean;
@@ -63,6 +67,8 @@ const SearchInput = forwardRef(
       id,
       size,
       autoComplete = 'on',
+      searchIcon = 'Search',
+      searchIconColor = 'textSecondary',
       ...rest
     }: Props,
     forwardedRef,
@@ -115,7 +121,8 @@ const SearchInput = forwardRef(
           onChange={handleChange}
           onReset={reset}
           size={size}
-          leftIcon="Search"
+          leftIcon={searchIcon}
+          leftIconColor={searchIconColor}
           className="search-box"
           disabled={disabled}
           ref={(element) => {

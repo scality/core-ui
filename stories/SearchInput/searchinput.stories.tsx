@@ -97,3 +97,77 @@ export const Debounce = {
     );
   },
 };
+
+export const WithCustomIconColor = {
+  render: (args) => {
+    const [value, setValue] = useState('');
+    return (
+      <Wrapper>
+        <Title>SearchInput with Custom Icon Colors</Title>
+        <div
+          style={{
+            width: '250px',
+            marginBottom: '20px',
+          }}
+        >
+          <SearchInput
+            placeholder="Primary color..."
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              action('on input change')(e.target.value);
+            }}
+            onReset={() => {
+              setValue('');
+              action('on input reset')();
+            }}
+            searchIconColor="infoPrimary"
+            {...args}
+          />
+        </div>
+        <div
+          style={{
+            width: '250px',
+            marginBottom: '20px',
+          }}
+        >
+          <SearchInput
+            placeholder="Success color..."
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              action('on input change')(e.target.value);
+            }}
+            onReset={() => {
+              setValue('');
+              action('on input reset')();
+            }}
+            searchIconColor="statusHealthy"
+            {...args}
+          />
+        </div>
+        <div
+          style={{
+            width: '250px',
+            marginBottom: '20px',
+          }}
+        >
+          <SearchInput
+            placeholder="Warning color..."
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              action('on input change')(e.target.value);
+            }}
+            onReset={() => {
+              setValue('');
+              action('on input reset')();
+            }}
+            searchIconColor="statusWarning"
+            {...args}
+          />
+        </div>
+      </Wrapper>
+    );
+  },
+};

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
+import { CoreUITheme } from '../../style/theme';
 
 export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   if (size === '2/3') return '14rem';
@@ -92,9 +93,9 @@ const InputBorder = styled.div<{
   }
 `;
 
-const SelfCenterredIcon = styled(Icon)`
+const SelfCenterredIcon = styled(Icon)<{ color: keyof CoreUITheme }>`
   align-self: center;
-  color: ${(props) => props.theme.textSecondary};
+  color: ${(props) => props.theme[props.color]};
 `;
 
 export type InputSize = '1' | '2/3' | '1/2' | '1/3';
@@ -103,7 +104,9 @@ export type InputProps = {
   error?: string;
   id: string;
   leftIcon?: IconName;
+  leftIconColor?: keyof CoreUITheme;
   rightIcon?: IconName;
+  rightIconColor?: keyof CoreUITheme;
   size?: InputSize;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
@@ -114,7 +117,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       id,
       leftIcon,
+      leftIconColor = 'textSecondary',
       rightIcon,
+      rightIconColor = 'textSecondary',
       placeholder,
       size,
       ...inputProps
@@ -139,7 +144,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={!!(disabled || disabledFromFieldContext)}
           hasError={!!(error || errorFromFieldContext)}
         >
-          {leftIcon && <SelfCenterredIcon name={leftIcon} />}
+          {leftIcon && (
+            <SelfCenterredIcon name={leftIcon} color={leftIconColor} />
+          )}
           <StyledInput
             ref={ref}
             disabled={disabled || disabledFromFieldContext}
@@ -150,7 +157,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...inputProps}
             placeholder={placeholder}
           />
-          {rightIcon && <SelfCenterredIcon name={rightIcon} />}
+          {rightIcon && (
+            <SelfCenterredIcon name={rightIcon} color={rightIconColor} />
+          )}
         </InputContainer>
       </InputBorder>
     );
