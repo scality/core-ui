@@ -95,7 +95,7 @@ const InputBorder = styled.div<{
 
 const SelfCenterredIcon = styled(Icon)<{ color: keyof CoreUITheme }>`
   align-self: center;
-  color: ${(props) => props.color};
+  color: ${(props) => props.theme[props.color]};
 `;
 
 export type InputSize = '1' | '2/3' | '1/2' | '1/3';
