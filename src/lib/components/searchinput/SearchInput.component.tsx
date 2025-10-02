@@ -133,6 +133,7 @@ const SearchInput = forwardRef(
               forwardedRef.current = element;
             }
           }}
+          {...rest}
         />
         {debouncedValue && (
           <ClearButton className="close-icon">
