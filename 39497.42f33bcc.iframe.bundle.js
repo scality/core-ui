@@ -96,6 +96,7 @@ ${props=>{const brand=props.theme;return styled_components__WEBPACK_IMPORTED_MOD
         width: 4px;
         height: 4px;
         min-height: 20px;
+        background: ${brand.border}; // fallback for gradient themes
         background: ${brand.buttonSecondary};
         border-radius: 4px;
         -webkit-border-radius: 4px;
@@ -118,9 +119,10 @@ ${props=>{const brand=props.theme;return styled_components__WEBPACK_IMPORTED_MOD
       }
 
       // Firefox
+      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
       scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
       scrollbar-width: thin;
     }
   `}}
 `;function ScrollbarWrapper({children}){return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment,{children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle,{}),children]})}try{ScrollbarWrapper.displayName="ScrollbarWrapper",ScrollbarWrapper.__docgenInfo={description:"",displayName:"ScrollbarWrapper",props:{}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"]={docgenInfo:ScrollbarWrapper.__docgenInfo,name:"ScrollbarWrapper",path:"src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"})}catch(__react_docgen_typescript_loader_error){}}}]);
-//# sourceMappingURL=39497.45e9228c.iframe.bundle.js.map
+//# sourceMappingURL=39497.42f33bcc.iframe.bundle.js.map
