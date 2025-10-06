@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 type Props = {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ ${(props) => {
         width: 4px;
         height: 4px;
         min-height: 20px;
+        background: ${brand.border}; // fallback for gradient themes
         background: ${brand.buttonSecondary};
         border-radius: 4px;
         -webkit-border-radius: 4px;
@@ -46,6 +47,7 @@ ${(props) => {
       }
 
       // Firefox
+      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
       scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
       scrollbar-width: thin;
     }
