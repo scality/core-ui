@@ -22,7 +22,7 @@ import {
   getUnitLabel,
 } from '../linetemporalchart/ChartUtil';
 import { Loader } from '../loader/Loader.component';
-import { ChartTitleText, SmallerText } from '../text/Text.component';
+import { ChartTitleText, Text } from '../text/Text.component';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { formatXAxisLabel } from './utils';
 import {
@@ -453,7 +453,7 @@ export function LineTimeSerieChart({
           <Box ml={spacing.r4}>
             <TooltipComponent
               placement={'right'}
-              overlay={<SmallerText>{helpText}</SmallerText>}
+              overlay={<Text>{helpText}</Text>}
             >
               <Icon name="Info" color={theme.buttonSecondary} />
             </TooltipComponent>
