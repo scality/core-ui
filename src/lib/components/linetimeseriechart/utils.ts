@@ -6,6 +6,27 @@ import {
 
 export const ONE_YEAR_MILLISECONDS = 366 * 24 * 60 * 60 * 1000;
 
+export const BIT_PER_SECOND_UNIT_RANGE = [
+  { threshold: 1, label: 'B/s' },
+  { threshold: 1024, label: 'KiB/s' },
+  { threshold: 1024 * 1024, label: 'MiB/s' },
+  { threshold: 1024 * 1024 * 1024, label: 'GiB/s' },
+  { threshold: 1024 * 1024 * 1024 * 1024, label: 'TiB/s' },
+];
+
+export const SECOND_UNIT_RANGE = [
+  { threshold: 1, label: 'ms' },
+  { threshold: 1000, label: 's' },
+];
+
+export const DEFAULT_UNIT_RANGE = [
+  { threshold: 1, label: '' },
+  { threshold: 1000, label: 'K' },
+  { threshold: 1000 * 1000, label: 'M' },
+  { threshold: 1000 * 1000 * 1000, label: 'G' },
+  { threshold: 1000 * 1000 * 1000 * 1000, label: 'T' },
+];
+
 export type ChartDataPoint = {
   timestamp: number;
 } & Record<string, number | null>;

@@ -83,6 +83,18 @@ export type LineChartProps = (
   startingTimeStamp: number;
   interval: number;
   duration: number;
+  /**
+   * The unit range is used to determine the unit of the y axis
+   *
+   * @warning ⚠️ threshold must NOT be 0 - this will cause 0 division error
+   * @example
+   * ```typescript
+   * const unitRange: UnitRange = [
+   *   { threshold: 1, label: 'B/s' }  // ✅ Valid
+   *   { threshold: 0, label: 'B/s' }  // ❌ Invalid
+   * ];
+   * ```
+   */
   unitRange?: {
     threshold: number;
     label: string;
