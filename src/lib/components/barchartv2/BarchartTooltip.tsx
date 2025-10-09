@@ -1,7 +1,7 @@
 import { TooltipContentProps } from 'recharts';
 import { LegendShape } from '../chartlegend/ChartLegend';
 import {
-  ChartTooltipContainer,
+  ChartTooltipPortal,
   ChartTooltipHeader,
   ChartTooltipItem,
   ChartTooltipItemsContainer,
@@ -22,6 +22,7 @@ export const BarchartTooltip = <T extends BarchartBars>({
   hoveredValue,
   tooltip,
   unitLabel,
+  chartContainerRef,
 }: {
   type: TimeType | CategoryType;
   tooltipProps: TooltipContentProps<number, string>;
@@ -29,23 +30,25 @@ export const BarchartTooltip = <T extends BarchartBars>({
   hoveredValue: string | undefined;
   tooltip?: BarchartTooltipFn<T>;
   unitLabel?: string;
+  chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
-  const { active } = tooltipProps;
+  const { active, coordinate } = tooltipProps;
 
   if (!active) {
     return null;
   }
 
   const currentPoint = getCurrentPoint(tooltipProps, hoveredValue);
-  if (tooltip) {
-    return tooltip(currentPoint);
-  }
+
   const duration =
     type.type === 'time'
       ? type.timeRange.startDate.getTime() - type.timeRange.endDate.getTime()
       : 0;
-  return (
-    <ChartTooltipContainer>
+
+  const tooltipContent = tooltip ? (
+    tooltip(currentPoint)
+  ) : (
+    <>
       <ChartTooltipHeader>
         {type.type === 'time' ? (
           <TooltipHeader duration={duration} value={currentPoint.category} />
@@ -80,6 +83,16 @@ export const BarchartTooltip = <T extends BarchartBars>({
           );
         })}
       </ChartTooltipItemsContainer>
-    </ChartTooltipContainer>
+    </>
+  );
+
+  return (
+    <ChartTooltipPortal
+      coordinate={coordinate}
+      chartContainerRef={chartContainerRef}
+      isVisible={active}
+    >
+      {tooltipContent}
+    </ChartTooltipPortal>
   );
 };

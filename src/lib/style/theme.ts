@@ -60,7 +60,7 @@ export const coreUIAvailableThemesNames = [
   'darkRebrand',
   'artescaLight',
   'ring9dark',
-  'G-Dark'
+  'G-Dark',
 ] as const;
 export type CoreUIThemeName = (typeof coreUIAvailableThemesNames)[number];
 

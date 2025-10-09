@@ -16,6 +16,7 @@ describe('useHealthBarData', () => {
     severity,
     startsAt,
     endsAt,
+    key: `${severity}_${startsAt}`,
   });
 
   describe('Alert Filtering', () => {
@@ -231,6 +232,7 @@ describe('useHealthBarData', () => {
         severity: 'warning',
         startsAt: '2023-12-01T02:00:00Z',
         endsAt: '2023-12-01T04:00:00Z',
+        key: 'warning_0',
       });
     });
 

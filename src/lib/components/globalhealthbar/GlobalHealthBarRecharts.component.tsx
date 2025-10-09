@@ -26,12 +26,17 @@ export interface GlobalHealthProps {
 
 const ChartInteractiveContainer = styled.div`
   position: relative;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const [tooltipData, setTooltipData] = useState<Alert | null>(null);
   const [focusedAlertIndex, setFocusedAlertIndex] = useState<number>(-1);
   const [keyboardActive, setKeyboardActive] = useState<boolean>(false);
+  const [activeBarKey, setActiveBarKey] = useState<string | null>(null);
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const startTimestamp = new Date(start).getTime();
@@ -47,6 +52,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const handlePointerEnter = useCallback(
     (key: string) => {
       setTooltipData(alertsMap[key]);
+      setActiveBarKey(key);
     },
     [alertsMap],
   );
@@ -54,6 +60,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const handlePointerLeave = useCallback(() => {
     if (!keyboardActive) {
       setTooltipData(null);
+      setActiveBarKey(null);
     }
   }, [keyboardActive]);
 
@@ -83,6 +90,11 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       setFocusedAlertIndex(update.newIndex);
       setTooltipData(update.selectedAlert);
       setKeyboardActive(update.shouldActivateKeyboard);
+
+      // Set active bar key for keyboard navigation
+      if (update.selectedAlert) {
+        setActiveBarKey(update.selectedAlert.key);
+      }
     },
     [allAlertKeys, focusedAlertIndex],
   );
@@ -93,6 +105,9 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
       setFocusedAlertIndex(0);
       setTooltipData(allAlertKeys[0]);
       setKeyboardActive(true);
+
+      // Set active bar key for initial focus
+      setActiveBarKey(allAlertKeys[0].key);
     }
   }, [allAlertKeys, focusedAlertIndex]);
 
@@ -100,6 +115,7 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
     setKeyboardActive(false);
     setFocusedAlertIndex(-1);
     setTooltipData(null);
+    setActiveBarKey(null);
   }, []);
 
   // Handle mouse enter to disable keyboard mode
@@ -182,17 +198,46 @@ export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
             isAnimationActive={false}
           />
 
-          {/* Alert bars */}
-          {allAlertBars.map(({ key, fill }) => (
-            <Bar
-              dataKey={key}
-              yAxisId={key}
-              fill={fill}
-              onPointerEnter={() => handlePointerEnter(key)}
-              onPointerLeave={() => handlePointerLeave()}
-              isAnimationActive={false}
-            />
-          ))}
+          {/* Alert bars - render non-active bars first */}
+          {allAlertBars.map(({ key, fill }) => {
+            const isActive = key === activeBarKey;
+            // Skip active bar here - it will be rendered last
+            if (isActive) return null;
+
+            return (
+              <Bar
+                key={key}
+                dataKey={key}
+                yAxisId={key}
+                fill={fill}
+                onPointerEnter={() => handlePointerEnter(key)}
+                onPointerLeave={() => handlePointerLeave()}
+                isAnimationActive={false}
+              />
+            );
+          })}
+
+          {/* Render active bar last to ensure it's on top */}
+          {activeBarKey &&
+            (() => {
+              const activeBar = allAlertBars.find(
+                (bar) => bar.key === activeBarKey,
+              );
+              if (!activeBar) return null;
+
+              return (
+                <Bar
+                  key={`${activeBar.key}-active`}
+                  dataKey={activeBar.key}
+                  yAxisId={activeBar.key}
+                  fill={activeBar.fill}
+                  stroke={theme.selectedActive}
+                  onPointerEnter={() => handlePointerEnter(activeBar.key)}
+                  onPointerLeave={() => handlePointerLeave()}
+                  isAnimationActive={false}
+                />
+              );
+            })()}
         </BarChart>
       </ResponsiveContainer>
     </ChartInteractiveContainer>

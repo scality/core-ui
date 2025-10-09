@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
   Bar,
   BarChart,
@@ -183,6 +183,7 @@ export const CustomTick = ({
 export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   // Avoid tooltip over constrained text to be cut off
   & .recharts-surface {
+    outline: none;
     overflow: visible;
   }
 `;
@@ -257,6 +258,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
   const { getColor } = useChartLegend();
   const [hoveredValue, setHoveredValue] = useState<string | undefined>();
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const {
     height = CHART_CONSTANTS.DEFAULT_HEIGHT,
@@ -311,7 +313,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
       ) : isLoading ? (
         <Loading height={height} />
       ) : (
-        <StyledResponsiveContainer width="100%" height={height}>
+        <StyledResponsiveContainer ref={chartRef} width="100%" height={height}>
           <BarChart
             data={rechartsData}
             accessibilityLayer
@@ -391,6 +393,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                   hoveredValue={hoveredValue}
                   tooltip={tooltip}
                   unitLabel={unitLabel}
+                  chartContainerRef={chartRef}
                 />
               )}
               cursor={false}

@@ -24,7 +24,7 @@ import { ChartTitleText, Text } from '../text/Text.component';
 import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
 import { formatXAxisLabel } from './utils';
 import {
-  ChartTooltipContainer,
+  ChartTooltipPortal,
   ChartTooltipItem,
   ChartTooltipHeader,
   ChartTooltipItemsContainer,
@@ -112,6 +112,7 @@ const LineTimeSerieChartTooltip = ({
   renderTooltip,
   hoveredValue,
   isSymmetrical,
+  chartContainerRef,
 }: {
   tooltipProps: TooltipContentProps<number, string>;
   unitLabel?: string;
@@ -124,73 +125,87 @@ const LineTimeSerieChartTooltip = ({
   ) => React.ReactNode;
   hoveredValue?: string;
   isSymmetrical?: boolean;
+  chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
-  const { active, payload, label } = tooltipProps;
+  const { active, payload, label, coordinate } = tooltipProps;
 
   if (!active || !payload || !payload.length || !label || !isChartActive)
     return null;
 
-  if (renderTooltip) {
-    return renderTooltip(tooltipProps, unitLabel, duration);
-  }
-  // We can't use the default itemSorter method because it's a custom tooltip.
-  // Sort the payload here instead
-  const sortedPayload = [...payload].sort((a, b) => {
-    const aValue = a.value;
-    const bValue = b.value;
-
-    if (aValue >= 0 && bValue >= 0) {
-      return bValue - aValue; // Higher positive values first
-    }
-    if (aValue < 0 && bValue < 0) {
-      return bValue - aValue; // Lower negative values first
-    }
-    return bValue - aValue; // Positives before negatives
-  });
-
-  // Find the transition point between positive and negative values
-  const separatorIndex = sortedPayload.findIndex((entry) => entry.value < 0);
-  const hasBothPositiveAndNegative =
-    separatorIndex > 0 && separatorIndex < sortedPayload.length;
-
-  return (
-    <ChartTooltipContainer>
+  const tooltipContent = renderTooltip ? (
+    renderTooltip(tooltipProps, unitLabel, duration)
+  ) : (
+    <>
       <ChartTooltipHeader>
         <TooltipHeader duration={duration} value={label} />
       </ChartTooltipHeader>
       <ChartTooltipItemsContainer>
-        {sortedPayload.map((entry, index) => {
-          const legendIcon = (
-            <LegendShape
-              color={entry.color}
-              shape="line"
-              chartColors={{ [entry.color]: entry.color }}
-            />
+        {(() => {
+          // We can't use the default itemSorter method because it's a custom tooltip.
+          // Sort the payload here instead
+          const sortedPayload = [...payload].sort((a, b) => {
+            const aValue = a.value;
+            const bValue = b.value;
+
+            if (aValue >= 0 && bValue >= 0) {
+              return bValue - aValue; // Higher positive values first
+            }
+            if (aValue < 0 && bValue < 0) {
+              return bValue - aValue; // Lower negative values first
+            }
+            return bValue - aValue; // Positives before negatives
+          });
+
+          // Find the transition point between positive and negative values
+          const separatorIndex = sortedPayload.findIndex(
+            (entry) => entry.value < 0,
           );
+          const hasBothPositiveAndNegative =
+            separatorIndex > 0 && separatorIndex < sortedPayload.length;
 
-          const isHovered = entry.name === hoveredValue;
-
-          const formattedValue = !Number.isFinite(entry.value)
-            ? '-'
-            : `${entry.value.toFixed(2)} ${unitLabel}`;
-
-          return (
-            <React.Fragment key={index}>
-              {/* Add separator between positive and negative values for symmetrical charts */}
-              {isSymmetrical &&
-                hasBothPositiveAndNegative &&
-                index === separatorIndex && <ChartTooltipSeparator />}
-              <ChartTooltipItem
-                label={entry.name}
-                value={formattedValue}
-                legendIcon={legendIcon}
-                isHovered={isHovered}
+          return sortedPayload.map((entry, index) => {
+            const legendIcon = (
+              <LegendShape
+                color={entry.color}
+                shape="line"
+                chartColors={{ [entry.color]: entry.color }}
               />
-            </React.Fragment>
-          );
-        })}
+            );
+
+            const isHovered = entry.name === hoveredValue;
+
+            const formattedValue = !Number.isFinite(entry.value)
+              ? '-'
+              : `${entry.value.toFixed(2)} ${unitLabel}`;
+
+            return (
+              <React.Fragment key={index}>
+                {/* Add separator between positive and negative values for symmetrical charts */}
+                {isSymmetrical &&
+                  hasBothPositiveAndNegative &&
+                  index === separatorIndex && <ChartTooltipSeparator />}
+                <ChartTooltipItem
+                  label={entry.name}
+                  value={formattedValue}
+                  legendIcon={legendIcon}
+                  isHovered={isHovered}
+                />
+              </React.Fragment>
+            );
+          });
+        })()}
       </ChartTooltipItemsContainer>
-    </ChartTooltipContainer>
+    </>
+  );
+
+  return (
+    <ChartTooltipPortal
+      coordinate={coordinate}
+      chartContainerRef={chartContainerRef}
+      isVisible={active && isChartActive}
+    >
+      {tooltipContent}
+    </ChartTooltipPortal>
   );
 };
 
@@ -545,6 +560,7 @@ export function LineTimeSerieChart({
                   tooltipProps={props}
                   isChartActive={isChartActive}
                   hoveredValue={hoveredValue}
+                  chartContainerRef={chartRef}
                 />
               )}
             />
