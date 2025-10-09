@@ -31,6 +31,8 @@ export const FormattedDate = {
               'chart-date' as const,
               'year-month-day' as const,
               'month-day' as const,
+              'day-month-abbreviated' as const,
+              'chart-long-term-date' as const,
             ].map((format) => (
               <tr key={format}>
                 <td>{format}</td>

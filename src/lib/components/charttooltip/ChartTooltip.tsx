@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
+import { FormattedDateTime } from '../date/FormattedDateTime';
 
 export const ChartTooltipContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
@@ -81,3 +82,42 @@ export const ChartTooltipItemsContainer = styled.div`
   gap: ${spacing.r8};
   width: 100%;
 `;
+
+export const ChartTooltipSeparator = styled.div`
+  height: 1px;
+  background-color: ${({ theme }) => theme.border};
+  margin: ${spacing.r4} 0;
+  width: 100%;
+`;
+
+export type TooltipDateFormat =
+  | 'day-month-abbreviated-year-hour-minute'
+  | 'day-month-abbreviated-hour-minute-second'
+  | 'day-month-abbreviated-hour-minute';
+
+const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
+  duration: number,
+) => {
+  if (duration <= 60 * 60 * 1000) {
+    return 'day-month-abbreviated-hour-minute-second';
+  } else if (duration <= 7 * 24 * 60 * 60 * 1000) {
+    return 'day-month-abbreviated-hour-minute';
+  } else {
+    return 'day-month-abbreviated-year-hour-minute';
+  }
+};
+
+export const TooltipHeader = ({
+  duration,
+  value,
+}: {
+  duration: number;
+  value: string | number;
+}) => {
+  const timeFormat = getTooltipDateFormat(duration);
+  return (
+    <ChartTooltipHeader>
+      <FormattedDateTime format={timeFormat} value={new Date(value)} />
+    </ChartTooltipHeader>
+  );
+};

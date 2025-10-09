@@ -12,6 +12,7 @@ import {
   ChartTooltipItem,
   ChartTooltipHeader,
   ChartTooltipItemsContainer,
+  TooltipHeader,
 } from '../charttooltip/ChartTooltip';
 import { LegendShape } from '../chartlegend/ChartLegend';
 
@@ -40,19 +41,15 @@ export const BarchartTooltip = <T extends BarchartBars>({
   if (tooltip) {
     return tooltip(currentPoint);
   }
-
+  const duration =
+    type.type === 'time'
+      ? type.timeRange.startDate.getTime() - type.timeRange.endDate.getTime()
+      : 0;
   return (
     <ChartTooltipContainer>
       <ChartTooltipHeader>
         {type.type === 'time' ? (
-          <FormattedDateTime
-            format={
-              type.timeRange.interval < 24 * 60 * 60 * 1000
-                ? 'day-month-abbreviated-hour-minute-second'
-                : 'long-date-without-weekday'
-            }
-            value={new Date(currentPoint.category)}
-          />
+          <TooltipHeader duration={duration} value={currentPoint.category} />
         ) : (
           currentPoint.category
         )}

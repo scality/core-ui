@@ -1,7 +1,7 @@
 import {
-  DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
-  YEAR_MONTH_DAY_FORMATTER,
-  MONTH_DAY_FORMATTER,
+  TIME_FORMATER,
+  DAY_MONTH_ABBREVIATED,
+  DAY_MONTH_ABBREVIATED_YEAR,
 } from '../date/FormattedDateTime';
 
 export const ONE_YEAR_MILLISECONDS = 366 * 24 * 60 * 60 * 1000;
@@ -22,22 +22,18 @@ export type ChartDataPoint = {
  */
 export const formatXAxisLabel = (
   timestamp: number,
-  timeFormat: 'date-time' | 'date' = 'date-time',
-  chartData: ChartDataPoint[] = [],
+  duration: number,
 ): string => {
   const date = new Date(timestamp);
-  if (!chartData.length) {
-    return YEAR_MONTH_DAY_FORMATTER.format(date);
+  if (duration <= 24 * 60 * 60) {
+    return TIME_FORMATER.format(date);
+  } else if (duration <= 7 * 24 * 60 * 60) {
+    return DAY_MONTH_ABBREVIATED.format(date)
+      .replace(',', '')
+      .replace(/Sept/g, 'Sep');
+  } else {
+    return DAY_MONTH_ABBREVIATED_YEAR.format(date)
+      .replace(/[ ,]/g, '')
+      .replace(/Sept/g, 'Sep');
   }
-  if (timeFormat === 'date-time') {
-    return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date).replace(',', '');
-  }
-  const timestamps = chartData.map((d) => d.timestamp);
-  const minTimestamp = Math.min(...timestamps);
-  const maxTimestamp = Math.max(...timestamps);
-  const timeRangeMilliseconds = maxTimestamp - minTimestamp;
-
-  return timeRangeMilliseconds >= ONE_YEAR_MILLISECONDS
-    ? YEAR_MONTH_DAY_FORMATTER.format(date)
-    : MONTH_DAY_FORMATTER.format(date);
 };

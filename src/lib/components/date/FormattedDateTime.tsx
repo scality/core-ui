@@ -65,6 +65,27 @@ export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
 });
 
 /**
+ * @description Day month abbreviated formatter. Used for describing long term date.
+ * @example 6 Oct
+ */
+export const DAY_MONTH_ABBREVIATED = Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  hour12: false,
+});
+
+/**
+ * @description Day month abbreviated formatter. Used for describing long term date.
+ * @example 6 Oct 25
+ */
+export const DAY_MONTH_ABBREVIATED_YEAR = Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: '2-digit',
+  hour12: false,
+});
+
+/**
  * @description Day month abbreviated hour minute second formatter. Used for describing long term date.
  * @example 6 Oct 18:33:00
  */
@@ -91,6 +112,22 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   minute: '2-digit',
   hour12: false,
 });
+
+/**
+ * @description Day month abbreviated year hour minute formatter. Used for describing long term date.
+ * @example 6 Oct 2025 18:33
+ */
+export const DAY_MONTH_ABBREVIATED_YEAR_HOUR_MINUTE = Intl.DateTimeFormat(
+  'en-GB',
+  {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  },
+);
 
 /**
  * @description Year month day formatter, without time. Used for describing long term date.
@@ -121,11 +158,14 @@ type FormattedDateTimeProps = {
     | 'relative'
     | 'day-month-abbreviated-hour-minute'
     | 'day-month-abbreviated-hour-minute-second'
+    | 'day-month-abbreviated-year-hour-minute'
     | 'long-date'
     | 'long-date-without-weekday'
     | 'chart-date'
     | 'year-month-day'
-    | 'month-day';
+    | 'month-day'
+    | 'day-month-abbreviated'
+    | 'chart-long-term-date';
 
   value: Date;
 };
@@ -290,6 +330,31 @@ export const FormattedDateTime = ({
       return <>{YEAR_MONTH_DAY_FORMATTER.format(value)}</>;
     case 'month-day':
       return <>{MONTH_DAY_FORMATTER.format(value)}</>;
+    case 'day-month-abbreviated-year-hour-minute':
+      return (
+        <>
+          {DAY_MONTH_ABBREVIATED_YEAR_HOUR_MINUTE.format(value)
+            .replace(',', '')
+            .replace(/Sept/g, 'Sep')}
+        </>
+      );
+    case 'day-month-abbreviated':
+      return (
+        <>
+          {DAY_MONTH_ABBREVIATED.format(value)
+            .replace(',', '')
+            .replace(/Sept/g, 'Sep')}
+        </>
+      );
+    case 'chart-long-term-date':
+      return (
+        <>
+          {DAY_MONTH_ABBREVIATED_YEAR.format(value)
+            .replace(/[ ,]/g, '')
+            // replace Sept with Sep to keep 3 letter month
+            .replace(/Sept/g, 'Sep')}
+        </>
+      );
     default:
       return <></>;
   }
