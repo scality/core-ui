@@ -3,7 +3,7 @@ import { Tooltip } from '../tooltip/Tooltip.component';
 
 /**
  * @description Long date formatter, with weekday, year, month and day. Used for describing long term date.
- * @example Wednesday 6 October 2025
+ * @example Wednesday 06 October 2025
  */
 export const LONG_DATE_FORMATER = Intl.DateTimeFormat('en-GB', {
   weekday: 'long',
@@ -35,7 +35,7 @@ export const DATE_FORMATER = Intl.DateTimeFormat('fr-CA', {
 
 /**
  * @description Day month formatter, with weekday, day and month. Used for describing long term date.
- * @example Wed 6 Oct
+ * @example Wed 06 Oct
  */
 export const DAY_MONTH_FORMATER = Intl.DateTimeFormat('en-GB', {
   weekday: 'short',
@@ -66,7 +66,7 @@ export const TIME_FORMATER = Intl.DateTimeFormat('en-GB', {
 
 /**
  * @description Day month abbreviated formatter. Used for describing long term date.
- * @example 6 Oct
+ * @example 06 Oct
  */
 export const DAY_MONTH_ABBREVIATED = Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
@@ -76,7 +76,7 @@ export const DAY_MONTH_ABBREVIATED = Intl.DateTimeFormat('en-GB', {
 
 /**
  * @description Day month abbreviated formatter. Used for describing long term date.
- * @example 6 Oct 25
+ * @example 06 Oct 25
  */
 export const DAY_MONTH_ABBREVIATED_YEAR = Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
@@ -87,7 +87,7 @@ export const DAY_MONTH_ABBREVIATED_YEAR = Intl.DateTimeFormat('en-GB', {
 
 /**
  * @description Day month abbreviated hour minute second formatter. Used for describing long term date.
- * @example 6 Oct 18:33:00
+ * @example 06 Oct 18:33:00
  */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
   'en-GB',
@@ -103,7 +103,7 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE_SECOND = Intl.DateTimeFormat(
 
 /**
  * @description Day month abbreviated hour minute formatter. Used for describing long term date.
- * @example 6 Oct 18:33
+ * @example 06 Oct 18:33
  */
 export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
@@ -115,7 +115,7 @@ export const DAY_MONTH_ABBREVIATED_HOUR_MINUTE = Intl.DateTimeFormat('en-GB', {
 
 /**
  * @description Day month abbreviated year hour minute formatter. Used for describing long term date.
- * @example 6 Oct 2025 18:33
+ * @example 06 Oct 2025 18:33
  */
 export const DAY_MONTH_ABBREVIATED_YEAR_HOUR_MINUTE = Intl.DateTimeFormat(
   'en-GB',
@@ -190,10 +190,10 @@ const isItFutureOrIsItPast = (
  * time: '00:00'
  * 'time-second': '00:00:00'
  * relative: '1 month ago'
- * 'day-month-abbreviated-hour-minute': '6 Oct 18:33'
- * 'day-month-abbreviated-hour-minute-second': '6 Oct 18:33:00'
+ * 'day-month-abbreviated-hour-minute': '06 Oct 18:33'
+ * 'day-month-abbreviated-hour-minute-second': '06 Oct 18:33:00'
  * 'long-date': 'Wednesday 6 October 2025'
- * 'chart-date': '6 Oct'
+ * 'chart-date': '06 Oct'
  * 'year-month-day': '2025-10-06'
  */
 export const FormattedDateTime = ({
