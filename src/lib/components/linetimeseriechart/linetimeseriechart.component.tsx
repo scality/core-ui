@@ -3,7 +3,6 @@ import {
   Line,
   LineChart,
   ReferenceLine,
-  ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
   XAxis,
@@ -38,8 +37,6 @@ const LineTemporalChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex: 1;
-  gap: ${spacing.r8};
 `;
 
 const ChartHeader = styled.div`

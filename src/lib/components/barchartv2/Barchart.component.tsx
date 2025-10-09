@@ -304,7 +304,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     );
 
   return (
-    <Stack direction="vertical" gap="r8">
+    <Stack direction="vertical">
       <ChartHeader
         title={title}
         secondaryTitle={secondaryTitle}
