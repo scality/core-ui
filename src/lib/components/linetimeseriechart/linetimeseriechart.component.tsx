@@ -3,7 +3,6 @@ import {
   Line,
   LineChart,
   ReferenceLine,
-  ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
   XAxis,
@@ -32,12 +31,12 @@ import {
   ChartTooltipItemsContainer,
 } from '../charttooltip/ChartTooltip';
 import { LegendShape } from '../chartlegend/ChartLegend';
+import { StyledResponsiveContainer } from '../barchartv2/Barchart.component';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex: 1;
 `;
 
 const ChartHeader = styled.div`
@@ -467,7 +466,7 @@ export function LineTimeSerieChart({
         onFocusCapture={() => setIsChartActive(true)}
         onBlurCapture={() => setIsChartActive(false)}
       >
-        <ResponsiveContainer width="100%" height={height}>
+        <StyledResponsiveContainer width="100%" height={height}>
           <LineChart
             data={rechartsData}
             ref={chartRef}
@@ -476,6 +475,7 @@ export function LineTimeSerieChart({
             syncId={syncId}
             onMouseEnter={() => setIsChartActive(true)}
             onMouseLeave={() => setIsChartActive(false)}
+            accessibilityLayer
           >
             <CartesianGrid
               vertical={true}
@@ -501,7 +501,6 @@ export function LineTimeSerieChart({
             />
             <YAxis
               orientation="right"
-              allowDataOverflow={false}
               label={{
                 value: yAxisTitle,
                 angle: 90,
@@ -524,9 +523,11 @@ export function LineTimeSerieChart({
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
               }}
-              tickFormatter={(value) => Math.round(value).toString()}
+              tickFormatter={(value) =>
+                new Intl.NumberFormat('fr-FR').format(value.toFixed(0))
+              }
               tickCount={5}
-              interval={'preserveStartEnd'}
+              interval={0}
             />
             <Tooltip
               content={(props: TooltipContentProps<number, string>) => (
@@ -560,6 +561,7 @@ export function LineTimeSerieChart({
                     stroke={colorMapping[resource]}
                     dot={false}
                     isAnimationActive={false}
+                    strokeDasharray={serie.isLineDashed ? '4 4' : undefined}
                     onMouseEnter={() => setHoveredValue(label)}
                     onMouseLeave={() => setHoveredValue(undefined)}
                   />
@@ -567,7 +569,7 @@ export function LineTimeSerieChart({
               }),
             )}
           </LineChart>
-        </ResponsiveContainer>
+        </StyledResponsiveContainer>
       </div>
     </LineTemporalChartWrapper>
   );
