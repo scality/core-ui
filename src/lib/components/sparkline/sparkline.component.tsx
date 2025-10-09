@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer } from "recharts";
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, YAxis } from "recharts";
 import { useTheme } from "styled-components";
 import { chartColors } from "../../style/theme";
 import { addMissingDataPoint } from "../linetemporalchart/ChartUtil";
@@ -11,14 +11,15 @@ type SparklineProps = {
   },
   startingTimeStamp: number,
   sampleDuration: number,
-  sampleInterval: number
+  sampleInterval: number,
+  yAxisType?: 'default' | 'percentage',
 };
 
 /**
  * Sparkline is a simple dynamically sized area chart.
  * Used to show trends in data over time.
  */
-export function Sparkline({ serie, startingTimeStamp, sampleDuration, sampleInterval }: SparklineProps) {
+export function Sparkline({ serie, startingTimeStamp, sampleDuration, sampleInterval, yAxisType }: SparklineProps) {
   const data = useMemo(
     () => {
       const dataMdp = addMissingDataPoint(serie.data, startingTimeStamp, sampleDuration, sampleInterval);
@@ -48,6 +49,7 @@ export function Sparkline({ serie, startingTimeStamp, sampleDuration, sampleInte
         activeDot={false}
         isAnimationActive={false}
       />
+      {yAxisType === 'percentage' && <YAxis domain={[0, 100]} hide />}
       </AreaChart>
     </ResponsiveContainer>
   );

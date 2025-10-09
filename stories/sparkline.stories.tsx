@@ -166,3 +166,22 @@ export const FlatWithMissingData: Story = {
     },
   },
 };
+
+export const PercentageYAxis: Story = {
+  args: {
+    serie: {
+      data: trendingUpData,
+    },
+    startingTimeStamp: 1740405600,
+    sampleDuration: 7200,
+    sampleInterval: 720,
+    yAxisType: 'percentage',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Sparkline with Y-axis range is set as [0-100].',
+      },
+    },
+  },
+};
