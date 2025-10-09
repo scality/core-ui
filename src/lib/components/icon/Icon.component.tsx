@@ -142,6 +142,7 @@ export const iconTable = {
   Mail: 'fas faEnvelope',
   ThumbsUp: 'far faThumbsUp',
   ThumbsDown: 'far faThumbsDown',
+  Sidebar: 'fas faColumns',
 };
 
 type IconProps = {
