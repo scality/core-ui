@@ -21,7 +21,8 @@ export const ChartTooltipContainer = styled.div`
   font-size: ${fontSize.small};
   padding: ${spacing.r8};
   min-width: 10rem;
-  max-width: 250px;
+  max-width: 40rem;
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
