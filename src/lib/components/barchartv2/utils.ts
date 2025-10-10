@@ -1,8 +1,4 @@
-import {
-  BarchartProps,
-  BarchartBars,
-  BarchartTooltipFn,
-} from './Barchart.component';
+import { BarchartProps, BarchartBars } from './Barchart.component';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../style/theme';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';

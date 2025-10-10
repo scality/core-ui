@@ -1,20 +1,19 @@
+import { TooltipContentProps } from 'recharts';
+import { LegendShape } from '../chartlegend/ChartLegend';
+import {
+  ChartTooltipContainer,
+  ChartTooltipHeader,
+  ChartTooltipItem,
+  ChartTooltipItemsContainer,
+  TooltipHeader,
+} from '../charttooltip/ChartTooltip';
 import {
   BarchartBars,
   BarchartTooltipFn,
   CategoryType,
   TimeType,
 } from './Barchart.component';
-import { FormattedDateTime } from '../date/FormattedDateTime';
-import { TooltipContentProps } from 'recharts';
 import { getCurrentPoint } from './utils';
-import {
-  ChartTooltipContainer,
-  ChartTooltipItem,
-  ChartTooltipHeader,
-  ChartTooltipItemsContainer,
-  TooltipHeader,
-} from '../charttooltip/ChartTooltip';
-import { LegendShape } from '../chartlegend/ChartLegend';
 
 export const BarchartTooltip = <T extends BarchartBars>({
   type,

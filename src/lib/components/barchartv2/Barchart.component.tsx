@@ -3,7 +3,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
@@ -22,14 +21,6 @@ import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
 import { BarchartTooltip } from './BarchartTooltip';
 import { UnitRange, useChartData } from './utils';
-import {
-  LAST_ONE_HOUR,
-  SAMPLE_DURATION_LAST_SEVEN_DAYS,
-  SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-  SAMPLE_FREQUENCY_LAST_ONE_HOUR,
-  SAMPLE_FREQUENCY_LAST_SEVEN_DAYS,
-  SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
-} from '../constants';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 4,
