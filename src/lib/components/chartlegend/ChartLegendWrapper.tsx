@@ -133,7 +133,7 @@ export const ChartLegendWrapper = ({
   );
 
   const listResources = useCallback(() => {
-    return Object.keys(internalColorSet);
+    return Object.keys(internalColorSet).sort();
   }, [internalColorSet]);
 
   const chartLegendState = useMemo(
