@@ -1,87 +1,49 @@
 import { formatXAxisLabel } from './utils';
 
-const createChartData = (startDate: Date, endDate: Date) => [
-  { timestamp: startDate.getTime() },
-  { timestamp: endDate.getTime() },
-];
-
 describe('formatXAxisLabel', () => {
   const mockTimestamp = new Date('2025-09-15T14:30:00Z').getTime();
 
-  describe('date-time format', () => {
-    it('should format timestamp with day-month-abbreviated-hour-minute format', () => {
-      const chartData = createChartData(
-        new Date('2022-01-01'),
-        new Date('2022-01-02'),
-      );
-      const result = formatXAxisLabel(mockTimestamp, 'date-time', chartData);
-      expect(result).toBe('15 Sept 14:30');
+  describe('short duration (≤ 24 hours)', () => {
+    it('should format timestamp with time format', () => {
+      const duration = 12 * 60 * 60; // 12 hours
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('14:30');
     });
   });
 
-  describe('date format', () => {
-    it('should use YYYY-MM-DD format for time ranges greater than 1 year', () => {
-      const startDate = new Date('2022-01-01');
-      const endDate = new Date('2024-01-01'); // More than 1 year
-      const chartData = createChartData(startDate, endDate);
-
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-      expect(result).toBe('2025-09-15');
-    });
-
-    it('should use MM-DD format for time ranges less than 1 year', () => {
-      const startDate = new Date('2023-09-01');
-      const endDate = new Date('2023-12-01'); // Less than 1 year
-      const chartData = createChartData(startDate, endDate);
-
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-      expect(result).toBe('09-15');
-    });
-
-    it('should use YYYY-MM-DD format when chartData is empty', () => {
-      const result = formatXAxisLabel(mockTimestamp, 'date', []);
-      expect(result).toBe('2025-09-15');
-    });
-
-    it('should handle edge case of exactly 1 year time range', () => {
-      const startDate = new Date('2022-09-15');
-      const endDate = new Date('2023-09-15'); // Exactly 1 year
-      const chartData = createChartData(startDate, endDate);
-
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-      expect(result).toBe('09-15');
-    });
-
-    it('should handle leap year calculation correctly', () => {
-      const startDate = new Date('2023-01-01');
-      const endDate = new Date('2024-01-02'); // Just over 1 year including leap year
-      const chartData = createChartData(startDate, endDate);
-
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-
-      expect(result).toBe('2025-09-15');
+  describe('medium duration (≤ 7 days)', () => {
+    it('should format timestamp with day-month-abbreviated format', () => {
+      const duration = 3 * 24 * 60 * 60; // 3 days
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('15 Sep');
     });
   });
 
-  describe('chartData with various scenarios', () => {
-    it('should handle chartData with single data point', () => {
-      const chartData = [{ timestamp: mockTimestamp }];
+  describe('long duration (> 7 days)', () => {
+    it('should format timestamp with day-month-abbreviated-year format', () => {
+      const duration = 30 * 24 * 60 * 60; // 30 days
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('15Sep25');
+    });
+  });
 
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-
-      expect(result).toBe('09-15');
+  describe('edge cases', () => {
+    it('should handle exactly 24 hours duration', () => {
+      const duration = 24 * 60 * 60; // exactly 24 hours
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('14:30');
     });
 
-    it('should handle chartData with mixed timestamp values', () => {
-      const chartData = [
-        { timestamp: new Date('2023-01-01').getTime() },
-        { timestamp: new Date('2023-06-01').getTime() },
-        { timestamp: new Date('2023-12-01').getTime() },
-      ];
+    it('should handle exactly 7 days duration', () => {
+      const duration = 7 * 24 * 60 * 60; // exactly 7 days
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('15 Sep');
+    });
 
-      const result = formatXAxisLabel(mockTimestamp, 'date', chartData);
-
-      expect(result).toBe('09-15');
+    it('should handle just over 7 days duration', () => {
+      const duration = 8 * 24 * 60 * 60; // 8 days
+      const result = formatXAxisLabel(mockTimestamp, duration);
+      expect(result).toBe('15Sep25');
     });
   });
 });

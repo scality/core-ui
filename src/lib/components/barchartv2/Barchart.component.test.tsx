@@ -89,9 +89,9 @@ describe('Barchart', () => {
         </Wrapper>,
       );
 
-      expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
-      expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
-      expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
+      expect(screen.getByText('06 Jul')).toBeInTheDocument();
+      expect(screen.getByText('07 Jul')).toBeInTheDocument();
     });
     it('should render the Barchart component with error state', async () => {
       const { Wrapper } = getWrapper();
@@ -153,11 +153,11 @@ describe('Barchart', () => {
           </ChartLegendWrapper>
         </Wrapper>,
       );
-      expect(screen.getByText('Wed03Jul')).toBeInTheDocument();
-      expect(screen.getByText('Thu04Jul')).toBeInTheDocument();
-      expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
-      expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
-      expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
+      expect(screen.getByText('03 Jul')).toBeInTheDocument();
+      expect(screen.getByText('04 Jul')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
+      expect(screen.getByText('06 Jul')).toBeInTheDocument();
+      expect(screen.getByText('07 Jul')).toBeInTheDocument();
     });
     it('should render when there are missing data in the time range', async () => {
       const bars = [
@@ -203,10 +203,10 @@ describe('Barchart', () => {
 
       // Check that all days are present
       await waitFor(() => {
-        expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
-        expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
-        expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
-        expect(screen.getByText('Mon08Jul')).toBeInTheDocument();
+        expect(screen.getByText('05 Jul')).toBeInTheDocument();
+        expect(screen.getByText('06 Jul')).toBeInTheDocument();
+        expect(screen.getByText('07 Jul')).toBeInTheDocument();
+        expect(screen.getByText('08 Jul')).toBeInTheDocument();
       });
     });
     it('should render for a specific time range', async () => {
@@ -244,13 +244,13 @@ describe('Barchart', () => {
         </Wrapper>,
       );
       await waitFor(() => {
-        expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
-        expect(screen.getByText('Sat06Jul')).toBeInTheDocument();
-        expect(screen.getByText('Sun07Jul')).toBeInTheDocument();
-        expect(screen.getByText('Mon08Jul')).toBeInTheDocument();
-        expect(screen.getByText('Tue09Jul')).toBeInTheDocument();
-        expect(screen.getByText('Wed10Jul')).toBeInTheDocument();
-        expect(screen.getByText('Thu11Jul')).toBeInTheDocument();
+        expect(screen.getByText('05 Jul')).toBeInTheDocument();
+        expect(screen.getByText('06 Jul')).toBeInTheDocument();
+        expect(screen.getByText('07 Jul')).toBeInTheDocument();
+        expect(screen.getByText('08 Jul')).toBeInTheDocument();
+        expect(screen.getByText('09 Jul')).toBeInTheDocument();
+        expect(screen.getByText('10 Jul')).toBeInTheDocument();
+        expect(screen.getByText('11 Jul')).toBeInTheDocument();
       });
     });
     it('should render the Barchart component with hourly intervals', async () => {
@@ -411,7 +411,7 @@ describe('Barchart', () => {
           />
         </Wrapper>,
       );
-      expect(screen.getByText('Fri05Jul 10:00')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
     });
 
     it('should render the CustomTick component with day format', () => {
@@ -435,7 +435,7 @@ describe('Barchart', () => {
           />
         </Wrapper>,
       );
-      expect(screen.getByText('Fri05Jul')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
     });
     it('should render the CustomTick component with hour format', () => {
       const { Wrapper } = getWrapper();
@@ -458,7 +458,7 @@ describe('Barchart', () => {
           />
         </Wrapper>,
       );
-      expect(screen.getByText('10:00')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
     });
     it('should render the CustomTick component with minute format', () => {
       const { Wrapper } = getWrapper();
@@ -481,9 +481,7 @@ describe('Barchart', () => {
           />
         </Wrapper>,
       );
-      expect(
-        screen.getByText(new Date('2024-07-05T10:00:00').getTime()),
-      ).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
     });
   });
 });

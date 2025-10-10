@@ -837,6 +837,7 @@ export const DynamicColorSetExample: Story = {
             ]}
             title="Dynamic Chart 2"
             height={200}
+            unitRange={UNIT_RANGE_BS}
             startingTimeStamp={Number(prometheusData3[0][0])}
             isLoading={false}
             yAxisType={'percentage'}

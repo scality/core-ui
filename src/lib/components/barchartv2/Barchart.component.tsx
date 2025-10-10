@@ -3,7 +3,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
@@ -112,33 +111,19 @@ interface CustomTickProps {
 /* ---------------------------------- COMPONENTS ---------------------------------- */
 
 /**
- * Formats a date based on the interval
- * @param timestamp - Timestamp
- * @param interval - Interval in milliseconds
+ * Get the format of the date based on the duration
+ * @param duration - Duration in milliseconds
  * @returns Formatted string
  */
 export const formatDate = (
-  timestamp: number,
-  interval: number,
-): React.ReactNode => {
-  const date = new Date(timestamp);
-  // More than 24 hours interval - use day and time format
-  if (interval > 24 * 60 * 60 * 1000) {
-    return (
-      <>
-        <FormattedDateTime format="chart-date" value={date} />{' '}
-        <FormattedDateTime format="time" value={date} />
-      </>
-    );
-  } else if (interval === 24 * 60 * 60 * 1000) {
-    // Daily interval - use day format
-    return <FormattedDateTime format="chart-date" value={date} />;
-  } else if (interval >= 60 * 1000) {
-    //Hourly and minute intervals - use minute format
-    return <FormattedDateTime format="time" value={date} />;
+  duration: number,
+): 'time' | 'day-month-abbreviated' | 'chart-long-term-date' => {
+  if (duration <= 24 * 60 * 60 * 1000) {
+    return 'time';
+  } else if (duration <= 7 * 24 * 60 * 60 * 1000) {
+    return 'day-month-abbreviated';
   } else {
-    // minute interval or less - use full timestamp
-    return timestamp;
+    return 'chart-long-term-date';
   }
 };
 
@@ -155,6 +140,11 @@ export const CustomTick = ({
     width / visibleTicksCount - CHART_CONSTANTS.TICK_WIDTH_OFFSET;
   const centerX = x - tickWidth / 2;
 
+  const duration =
+    type.type === 'time'
+      ? type.timeRange.endDate.getTime() - type.timeRange.startDate.getTime()
+      : 0;
+
   return (
     <foreignObject
       x={centerX}
@@ -167,9 +157,14 @@ export const CustomTick = ({
         color="textSecondary"
         text={
           <Text variant="Smaller">
-            {type.type === 'time'
-              ? formatDate(payload.value, type.timeRange.interval)
-              : String(payload.value)}
+            {type.type === 'time' ? (
+              <FormattedDateTime
+                format={formatDate(duration)}
+                value={new Date(payload.value)}
+              />
+            ) : (
+              String(payload.value)
+            )}
           </Text>
         }
         centered

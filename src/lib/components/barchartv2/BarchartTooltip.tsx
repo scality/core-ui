@@ -1,19 +1,19 @@
+import { TooltipContentProps } from 'recharts';
+import { LegendShape } from '../chartlegend/ChartLegend';
+import {
+  ChartTooltipContainer,
+  ChartTooltipHeader,
+  ChartTooltipItem,
+  ChartTooltipItemsContainer,
+  TooltipHeader,
+} from '../charttooltip/ChartTooltip';
 import {
   BarchartBars,
   BarchartTooltipFn,
   CategoryType,
   TimeType,
 } from './Barchart.component';
-import { FormattedDateTime } from '../date/FormattedDateTime';
-import { TooltipContentProps } from 'recharts';
 import { getCurrentPoint } from './utils';
-import {
-  ChartTooltipContainer,
-  ChartTooltipItem,
-  ChartTooltipHeader,
-  ChartTooltipItemsContainer,
-} from '../charttooltip/ChartTooltip';
-import { LegendShape } from '../chartlegend/ChartLegend';
 
 export const BarchartTooltip = <T extends BarchartBars>({
   type,
@@ -40,19 +40,15 @@ export const BarchartTooltip = <T extends BarchartBars>({
   if (tooltip) {
     return tooltip(currentPoint);
   }
-
+  const duration =
+    type.type === 'time'
+      ? type.timeRange.startDate.getTime() - type.timeRange.endDate.getTime()
+      : 0;
   return (
     <ChartTooltipContainer>
       <ChartTooltipHeader>
         {type.type === 'time' ? (
-          <FormattedDateTime
-            format={
-              type.timeRange.interval < 24 * 60 * 60 * 1000
-                ? 'day-month-abbreviated-hour-minute-second'
-                : 'long-date-without-weekday'
-            }
-            value={new Date(currentPoint.category)}
-          />
+          <TooltipHeader duration={duration} value={currentPoint.category} />
         ) : (
           currentPoint.category
         )}

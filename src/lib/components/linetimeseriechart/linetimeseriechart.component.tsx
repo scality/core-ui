@@ -8,13 +8,12 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize } from '../../style/theme';
 import { Box } from '../box/Box';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { FormattedDateTime } from '../date/FormattedDateTime';
 import { Icon } from '../icon/Icon.component';
 import {
   addMissingDataPoint,
@@ -29,6 +28,8 @@ import {
   ChartTooltipItem,
   ChartTooltipHeader,
   ChartTooltipItemsContainer,
+  ChartTooltipSeparator,
+  TooltipHeader,
 } from '../charttooltip/ChartTooltip';
 import { LegendShape } from '../chartlegend/ChartLegend';
 import { StyledResponsiveContainer } from '../barchartv2/Barchart.component';
@@ -99,28 +100,30 @@ export type LineChartProps = (
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
-    timeFormat?: 'date-time' | 'date',
+    duration?: number,
   ) => React.ReactNode;
 };
 
 const LineTimeSerieChartTooltip = ({
   unitLabel,
-  timeFormat,
+  duration,
   isChartActive,
   tooltipProps,
   renderTooltip,
   hoveredValue,
+  isSymmetrical,
 }: {
   tooltipProps: TooltipContentProps<number, string>;
   unitLabel?: string;
-  timeFormat?: 'date-time' | 'date';
+  duration: number;
   isChartActive?: boolean;
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
-    timeFormat?: 'date-time' | 'date',
+    duration?: number,
   ) => React.ReactNode;
   hoveredValue?: string;
+  isSymmetrical?: boolean;
 }) => {
   const { active, payload, label } = tooltipProps;
 
@@ -128,7 +131,7 @@ const LineTimeSerieChartTooltip = ({
     return null;
 
   if (renderTooltip) {
-    return renderTooltip(tooltipProps, unitLabel, timeFormat);
+    return renderTooltip(tooltipProps, unitLabel, duration);
   }
   // We can't use the default itemSorter method because it's a custom tooltip.
   // Sort the payload here instead
@@ -145,17 +148,15 @@ const LineTimeSerieChartTooltip = ({
     return bValue - aValue; // Positives before negatives
   });
 
+  // Find the transition point between positive and negative values
+  const separatorIndex = sortedPayload.findIndex((entry) => entry.value < 0);
+  const hasBothPositiveAndNegative =
+    separatorIndex > 0 && separatorIndex < sortedPayload.length;
+
   return (
     <ChartTooltipContainer>
       <ChartTooltipHeader>
-        <FormattedDateTime
-          format={
-            timeFormat === 'date-time'
-              ? 'day-month-abbreviated-hour-minute-second'
-              : 'long-date-without-weekday'
-          }
-          value={new Date(label)}
-        />
+        <TooltipHeader duration={duration} value={label} />
       </ChartTooltipHeader>
       <ChartTooltipItemsContainer>
         {sortedPayload.map((entry, index) => {
@@ -174,13 +175,18 @@ const LineTimeSerieChartTooltip = ({
             : `${entry.value.toFixed(2)} ${unitLabel}`;
 
           return (
-            <ChartTooltipItem
-              key={index}
-              label={entry.name}
-              value={formattedValue}
-              legendIcon={legendIcon}
-              isHovered={isHovered}
-            />
+            <React.Fragment key={index}>
+              {/* Add separator between positive and negative values for symmetrical charts */}
+              {isSymmetrical &&
+                hasBothPositiveAndNegative &&
+                index === separatorIndex && <ChartTooltipSeparator />}
+              <ChartTooltipItem
+                label={entry.name}
+                value={formattedValue}
+                legendIcon={legendIcon}
+                isHovered={isHovered}
+              />
+            </React.Fragment>
           );
         })}
       </ChartTooltipItemsContainer>
@@ -438,8 +444,8 @@ export function LineTimeSerieChart({
 
   // Format time for display the tick in the x axis
   const formatXAxisLabelCallback = useCallback(
-    (timestamp: number) => formatXAxisLabel(timestamp, timeFormat, chartData),
-    [timeFormat, chartData],
+    (timestamp: number) => formatXAxisLabel(timestamp, duration),
+    [duration],
   );
 
   return (
@@ -533,8 +539,9 @@ export function LineTimeSerieChart({
               content={(props: TooltipContentProps<number, string>) => (
                 <LineTimeSerieChartTooltip
                   unitLabel={unitLabel}
-                  timeFormat={timeFormat}
+                  duration={duration}
                   renderTooltip={renderTooltip}
+                  isSymmetrical={yAxisType === 'symmetrical'}
                   tooltipProps={props}
                   isChartActive={isChartActive}
                   hoveredValue={hoveredValue}
