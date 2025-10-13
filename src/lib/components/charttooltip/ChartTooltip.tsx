@@ -1,4 +1,14 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
+import { useEffect, useState, useRef } from 'react';
+import {
+  useFloating,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+  Middleware,
+} from '@floating-ui/react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
@@ -12,7 +22,8 @@ export const ChartTooltipContainer = styled.div`
   font-size: ${fontSize.small};
   padding: ${spacing.r8};
   min-width: 10rem;
-  max-width: 250px;
+  max-width: 40rem;
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -120,4 +131,126 @@ export const TooltipHeader = ({
       <FormattedDateTime format={timeFormat} value={new Date(value)} />
     </ChartTooltipHeader>
   );
+};
+
+export interface ChartTooltipPortalProps {
+  children: React.ReactNode;
+  coordinate?: { x: number; y: number };
+  chartContainerRef: React.RefObject<HTMLDivElement>;
+  isVisible?: boolean;
+  middleware?: Middleware[];
+  offset?: number | (({ placement }: { placement: string }) => number);
+  customPosition?: (
+    chartRect: DOMRect,
+    coordinate?: { x: number; y: number },
+  ) => { x: number; y: number };
+  containerComponent?: React.ComponentType<any>;
+}
+
+export const ChartTooltipPortal: React.FC<ChartTooltipPortalProps> = ({
+  children,
+  coordinate,
+  chartContainerRef,
+  isVisible = true,
+  middleware,
+  offset: customOffset,
+  customPosition,
+  containerComponent: ContainerComponent = ChartTooltipContainer,
+}) => {
+  const [virtualElement, setVirtualElement] = useState<any>(null);
+  const previousPositionRef = useRef<{ x: number; y: number } | null>(null);
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(
+    null,
+  );
+
+  // Default middleware configuration
+  const defaultMiddleware = [
+    offset(customOffset || 20),
+    flip(),
+    shift({ padding: 10 }),
+  ];
+
+  const { refs, floatingStyles } = useFloating({
+    elements: {
+      reference: virtualElement,
+    },
+    placement: 'top',
+    middleware: middleware || defaultMiddleware,
+    whileElementsMounted: autoUpdate,
+  });
+
+  // Create portal container once
+  useEffect(() => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    setPortalContainer(container);
+
+    return () => {
+      document.body.removeChild(container);
+    };
+  }, []);
+
+  // Create virtual element from coordinate or custom position
+  useEffect(() => {
+    if (chartContainerRef.current) {
+      const chartRect = chartContainerRef.current.getBoundingClientRect();
+
+      let tooltipX: number;
+      let tooltipY: number;
+
+      if (customPosition) {
+        // Use custom positioning function
+        const position = customPosition(chartRect, coordinate);
+        tooltipX = position.x;
+        tooltipY = position.y;
+      } else if (coordinate) {
+        // Use default coordinate-based positioning
+        tooltipX = chartRect.left + coordinate.x;
+        tooltipY = chartRect.top + coordinate.y;
+      } else {
+        return; // No positioning method available
+      }
+
+      // Check if position has changed significantly
+      const hasPositionChanged =
+        !previousPositionRef.current ||
+        Math.abs(previousPositionRef.current.x - tooltipX) > 5 ||
+        Math.abs(previousPositionRef.current.y - tooltipY) > 5;
+
+      if (hasPositionChanged) {
+        previousPositionRef.current = { x: tooltipX, y: tooltipY };
+      }
+
+      setVirtualElement({
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: tooltipX,
+            y: tooltipY,
+            left: tooltipX,
+            top: tooltipY,
+            right: tooltipX,
+            bottom: tooltipY,
+          };
+        },
+      });
+    }
+  }, [coordinate, chartContainerRef, customPosition]);
+
+  if (!isVisible || !virtualElement || !portalContainer) return null;
+
+  const tooltipContent = (
+    <ContainerComponent
+      ref={refs.setFloating}
+      style={{
+        ...floatingStyles,
+        opacity: isVisible ? 1 : 0,
+      }}
+    >
+      {children}
+    </ContainerComponent>
+  );
+
+  return createPortal(tooltipContent, portalContainer);
 };

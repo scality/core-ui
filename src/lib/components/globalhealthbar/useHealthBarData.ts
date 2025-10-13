@@ -5,6 +5,7 @@ export interface Alert {
   startsAt: string;
   endsAt: string;
   severity: 'warning' | 'critical' | 'unavailable';
+  key: string;
 }
 
 export const useHealthBarData = (
@@ -44,6 +45,7 @@ export const useHealthBarData = (
       // Store alert data separately for tooltip access
       alertsMapData[uniqueKey] = {
         ...alert,
+        key: uniqueKey, // Add the consistent key to the alert object
       };
     });
 

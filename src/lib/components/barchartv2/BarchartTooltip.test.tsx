@@ -19,6 +19,30 @@ const testTooltipProps = {
 const testTooltip = () => <div>Test Tooltip</div>;
 const date = new Date('2024-07-01T00:00:00').getTime();
 
+// Create a mock DOM element for the chart container
+const mockChartContainer = document.createElement('div');
+mockChartContainer.getBoundingClientRect = jest.fn(() => ({
+  width: 800,
+  height: 400,
+  top: 0,
+  left: 0,
+  right: 800,
+  bottom: 400,
+  x: 0,
+  y: 0,
+  toJSON: () => ({
+    width: 800,
+    height: 400,
+    top: 0,
+    left: 0,
+    right: 800,
+    bottom: 400,
+    x: 0,
+    y: 0,
+  }),
+}));
+const mockChartContainerRef = { current: mockChartContainer };
+
 describe('ChartTooltip', () => {
   const selectors = {
     tooltip: () => screen.queryByText(/Test Tooltip/),
@@ -39,6 +63,7 @@ describe('ChartTooltip', () => {
         tooltipProps={testTooltipProps}
         hoveredValue="Success"
         tooltip={undefined}
+        chartContainerRef={mockChartContainerRef}
       />,
     );
     expect(selectors.category()).toBeInTheDocument();
@@ -54,6 +79,7 @@ describe('ChartTooltip', () => {
         tooltipProps={testTooltipProps}
         hoveredValue="Success"
         tooltip={testTooltip}
+        chartContainerRef={mockChartContainerRef}
       />,
     );
     expect(selectors.tooltip()).toBeInTheDocument();
@@ -65,6 +91,7 @@ describe('ChartTooltip', () => {
         tooltipProps={{ ...testTooltipProps, active: false }}
         hoveredValue="Success"
         tooltip={testTooltip}
+        chartContainerRef={mockChartContainerRef}
       />,
     );
     expect(selectors.tooltip()).not.toBeInTheDocument();
@@ -84,6 +111,7 @@ describe('ChartTooltip', () => {
         }}
         tooltipProps={{ ...testTooltipProps, label }}
         hoveredValue="Success"
+        chartContainerRef={mockChartContainerRef}
       />,
     );
     expect(selectors.success()).toBeInTheDocument();
@@ -107,6 +135,7 @@ describe('ChartTooltip', () => {
         }}
         tooltipProps={{ ...testTooltipProps, label }}
         hoveredValue="Success"
+        chartContainerRef={mockChartContainerRef}
       />,
     );
     expect(selectors.success()).toBeInTheDocument();
@@ -133,6 +162,7 @@ describe('ChartTooltip', () => {
         tooltipProps={tooltipProps}
         hoveredValue="Success"
         unitLabel="kB"
+        chartContainerRef={mockChartContainerRef}
       />,
     );
 
