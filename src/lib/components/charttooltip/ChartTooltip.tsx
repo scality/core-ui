@@ -7,6 +7,7 @@ import {
   offset,
   flip,
   shift,
+  Middleware,
 } from '@floating-ui/react';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
@@ -137,7 +138,7 @@ export interface ChartTooltipPortalProps {
   coordinate?: { x: number; y: number };
   chartContainerRef: React.RefObject<HTMLDivElement>;
   isVisible?: boolean;
-  middleware?: any[];
+  middleware?: Middleware[];
   offset?: number | (({ placement }: { placement: string }) => number);
   customPosition?: (
     chartRect: DOMRect,
