@@ -526,7 +526,7 @@ export function LineTimeSerieChart({
               label={{
                 value: yAxisTitle,
                 angle: 90,
-                dx: 12,
+                dx: 20,
                 style: {
                   fill: theme.textSecondary,
                   fontSize: fontSize.smaller,
