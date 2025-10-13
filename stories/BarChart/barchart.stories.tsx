@@ -39,17 +39,17 @@ export const Playground: Story = {
       {
         label: 'Success',
         data: [
-          ['category1', 2],
-          ['category2', 4],
-          ['category3', 6],
+          ['category1', 1],
+          ['category2', 1],
+          ['category3', 2],
         ],
       },
       {
         label: 'Failed',
         data: [
-          ['category1', 8],
-          ['category2', 10],
-          ['category3', 12],
+          ['category1', 1],
+          ['category2', 1],
+          ['category3', 2],
         ],
       },
     ] as const;
@@ -61,7 +61,11 @@ export const Playground: Story = {
         }}
       >
         <Stack direction="vertical" gap="r16">
-          <Barchart type={{ type: 'category' }} bars={exampleData} />
+          <Barchart
+            type={{ type: 'category' }}
+            bars={exampleData}
+            title="Playground"
+          />
           <ChartLegend shape="rectangle" direction="horizontal" />
         </Stack>
       </ChartLegendWrapper>
@@ -122,6 +126,7 @@ export const Time7Days: Story = {
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
+            title="Time 7 Days"
             type={{
               type: 'time',
               timeRange: {
@@ -192,6 +197,7 @@ export const Time7DaysWithMissingData: Story = {
         }}
       >
         <Barchart
+          title="Time 7 Days With Missing Data"
           type={{
             type: 'time',
             timeRange: {
@@ -285,6 +291,7 @@ export const TimeLast24Hours: Story = {
         }}
       >
         <Barchart
+          title="Time Last 24 Hours"
           type={{
             type: 'time',
             timeRange: {
@@ -332,6 +339,7 @@ export const CapacityWithUnitRange: Story = {
         }}
       >
         <Barchart
+          title="Capacity With Unit Range"
           type={{ type: 'category' }}
           bars={capacityDataWithUnitRange}
           unitRange={[
@@ -402,7 +410,12 @@ export const Stacked: Story = {
         }}
       >
         <Stack direction="vertical" gap="r16">
-          <Barchart type={{ type: 'category' }} bars={stackedData} stacked />
+          <Barchart
+            type={{ type: 'category' }}
+            bars={stackedData}
+            stacked
+            title="Stacked"
+          />
           <ChartLegend shape="rectangle" />
         </Stack>
       </ChartLegendWrapper>
@@ -457,6 +470,7 @@ export const DefaultSort: Story = {
           stacked
           bars={defaultSortData}
           defaultSort={customSort}
+          title="Default Sort"
         />
       </ChartLegendWrapper>
     );
@@ -531,6 +545,7 @@ export const WithCustomTooltip: Story = {
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
+              title="Custom Tooltip"
               type={{ type: 'category' }}
               bars={exampleData}
               tooltip={customTooltip}

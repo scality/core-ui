@@ -1,7 +1,7 @@
 import {
   TIME_FORMATER,
-  DAY_MONTH_ABBREVIATED,
   DAY_MONTH_ABBREVIATED_YEAR,
+  DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
 } from '../date/FormattedDateTime';
 
 export const ONE_YEAR_MILLISECONDS = 366 * 24 * 60 * 60 * 1000;
@@ -27,8 +27,9 @@ export const formatXAxisLabel = (
   const date = new Date(timestamp);
   if (duration <= 24 * 60 * 60) {
     return TIME_FORMATER.format(date);
+    //? At which point do we consider chart to be long term? 1 week? 2 weeks? 1 month?
   } else if (duration <= 7 * 24 * 60 * 60) {
-    return DAY_MONTH_ABBREVIATED.format(date)
+    return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date)
       .replace(',', '')
       .replace(/Sept/g, 'Sep');
   } else {
