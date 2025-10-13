@@ -338,7 +338,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
   }
 
   const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
-  const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
+  const topValue = maxValue / valueBase;
   const roundReferenceValue = getRoundReferenceValue(topValue);
   const rechartsData = data.map((dataPoint) => {
     const normalizedDataPoint = { ...dataPoint };

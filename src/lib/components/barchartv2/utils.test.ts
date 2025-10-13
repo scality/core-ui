@@ -504,21 +504,27 @@ describe('applySortingToData', () => {
 });
 
 describe('getRoundReferenceValue', () => {
-  it('should return appropriate rounded values', () => {
-    expect(getRoundReferenceValue(1)).toBe(5);
-    expect(getRoundReferenceValue(2)).toBe(5);
-    expect(getRoundReferenceValue(3)).toBe(5);
-    expect(getRoundReferenceValue(7)).toBe(10);
-    expect(getRoundReferenceValue(15)).toBe(25);
-    expect(getRoundReferenceValue(35)).toBe(50);
-    expect(getRoundReferenceValue(75)).toBe(100);
-    expect(getRoundReferenceValue(150)).toBe(250);
-    expect(getRoundReferenceValue(350)).toBe(500);
-    expect(getRoundReferenceValue(750)).toBe(1000);
-    expect(getRoundReferenceValue(1500)).toBe(2500);
-    expect(getRoundReferenceValue(3500)).toBe(5000);
-    expect(getRoundReferenceValue(7500)).toBe(10000);
-    expect(getRoundReferenceValue(15000)).toBe(25000);
+  it('should return appropriate rounded values with 10% buffer', () => {
+    // Small values (< 5) get minimum of 5
+    expect(getRoundReferenceValue(1)).toBe(5); // 1.1 → 1.5 → min 5
+    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → min 5
+    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → min 5
+
+    // Values 5-10 range
+    expect(getRoundReferenceValue(6)).toBe(10); // 6.6 → 10 (skip 7.5 for values < 10)
+    expect(getRoundReferenceValue(9)).toBe(10); // 9.9 → 10
+
+    // Larger values get 10% buffer applied
+    expect(getRoundReferenceValue(15)).toBe(20); // 16.5 → 20
+    expect(getRoundReferenceValue(35)).toBe(40); // 38.5 → 40
+    expect(getRoundReferenceValue(75)).toBe(100); // 82.5 → 100
+    expect(getRoundReferenceValue(150)).toBe(200); // 165 → 200
+    expect(getRoundReferenceValue(350)).toBe(400); // 385 → 400
+    expect(getRoundReferenceValue(750)).toBe(1000); // 825 → 1000
+    expect(getRoundReferenceValue(1500)).toBe(2000); // 1650 → 2000
+    expect(getRoundReferenceValue(3500)).toBe(4000); // 3850 → 4000
+    expect(getRoundReferenceValue(7500)).toBe(10000); // 8250 → 10000
+    expect(getRoundReferenceValue(15000)).toBe(20000); // 16500 → 20000
   });
 });
 
@@ -685,7 +691,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('kB');
-    expect(result.roundReferenceValue).toBe(10);
+    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 2 → min 5
+    expect(result.roundReferenceValue).toBe(5);
     expect(result.rechartsData).toEqual([
       {
         category: 'category1',
@@ -718,7 +725,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('B');
-    expect(result.roundReferenceValue).toBe(1000);
+    // 680 with buffer: 748 → rounds to 750 (7.5 * 100, value > 10)
+    expect(result.roundReferenceValue).toBe(750);
     expect(result.rechartsData).toEqual([
       { category: 'category1', success: 680 },
     ]);
