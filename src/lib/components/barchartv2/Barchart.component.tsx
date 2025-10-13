@@ -20,7 +20,7 @@ import { IconHelp } from '../iconhelper/IconHelper';
 import { Loader } from '../loader/Loader.component';
 import { Text } from '../text/Text.component';
 import { BarchartTooltip } from './BarchartTooltip';
-import { UnitRange, useChartData } from './utils';
+import { getTicks, UnitRange, useChartData } from './utils';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 4,
@@ -301,7 +301,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     );
 
   return (
-    <Stack direction="vertical">
+    <Stack direction="vertical" style={{ gap: '0' }}>
       <ChartHeader
         title={title}
         secondaryTitle={secondaryTitle}
@@ -354,13 +354,12 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             })}
 
             <YAxis
-              tickCount={1}
+              ticks={getTicks(roundReferenceValue, false)}
               interval={0}
               unit={` ${unitLabel}`}
               domain={[0, roundReferenceValue]}
               tickFormatter={
-                (value) =>
-                  new Intl.NumberFormat('fr-FR').format(value.toFixed(0)) // Add a space as thousand separator
+                (value) => new Intl.NumberFormat('fr-FR').format(value) // Add a space as thousand separator and max 2 decimal places
               }
               axisLine={{ stroke: theme.border }}
               tick={{

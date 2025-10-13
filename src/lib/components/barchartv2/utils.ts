@@ -4,23 +4,57 @@ import { chartColors, ChartColors } from '../../style/theme';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 export const getRoundReferenceValue = (value: number): number => {
-  if (value <= 0) return 10; // Default for zero or negative values
+  if (value <= 0) return 5; // Default for zero or negative values
 
   // Get the magnitude (10^n where n is the number of digits - 1)
   const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
 
+  // Buffer the value by 10% to avoid being too close to the edge of the chart
+  const bufferedValue = value * 1.1;
+
   // Normalized value between 1 and 10
-  const normalized = value / magnitude;
+  const normalized = bufferedValue / magnitude;
 
   // Round to nice numbers based on normalized value
   let result: number;
   if (normalized <= 1) result = magnitude;
-  else if (normalized <= 2.5) result = 2.5 * magnitude;
+  else if (normalized <= 1.5) result = 1.5 * magnitude;
+  else if (normalized <= 2) result = 2 * magnitude;
+  else if (normalized <= 3) result = 3 * magnitude;
+  else if (normalized <= 4) result = 4 * magnitude;
   else if (normalized <= 5) result = 5 * magnitude;
+  // skip 7.5 as top value (but not 75, 750, 7500, etc.) for better chart appearance
+  else if (value > 10 && normalized <= 7.5) result = 7.5 * magnitude;
   else result = 10 * magnitude;
 
-  // Ensure minimum value of 5 for better chart appearance
+  // Ensure minimum value of 5 for Round Reference Value
+  // for better chart appearance
   return Math.max(result, 5);
+};
+
+export const getTicks = (topValue: number, isSymmetrical: boolean) => {
+  if (topValue < 10) {
+    if (isSymmetrical) {
+      return [-topValue, 0, topValue];
+    } else {
+      return [0, topValue];
+    }
+  }
+  const numberOfTicks = topValue % 2 === 0 ? 3 : 4;
+  const tickInterval = topValue / (numberOfTicks - 1);
+  const ticks = Array.from(
+    { length: numberOfTicks },
+    (_, index) => index * tickInterval,
+  );
+  if (isSymmetrical) {
+    const negativeTicks = Array.from(
+      { length: numberOfTicks - 1 },
+      (_, index) => -(index + 1) * tickInterval,
+    );
+    ticks.unshift(...negativeTicks);
+  }
+
+  return ticks;
 };
 
 export const getMaxBarValue = (
