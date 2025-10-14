@@ -505,10 +505,11 @@ describe('applySortingToData', () => {
 
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values with 10% buffer', () => {
-    // Small values (< 5) get minimum of 5
-    expect(getRoundReferenceValue(1)).toBe(5); // 1.1 → 1.5 → min 5
-    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → min 5
-    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → min 5
+    // Small values (< 10)
+    expect(getRoundReferenceValue(0.1)).toBe(0.2); // 0.1 → 0.11 → 0.2
+    expect(getRoundReferenceValue(1)).toBe(2); // 1.1 → 1.5 → 2
+    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → 5
+    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → 5
 
     // Values 5-10 range
     expect(getRoundReferenceValue(6)).toBe(10); // 6.6 → 10 (skip 7.5 for values < 10)
@@ -691,8 +692,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('kB');
-    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 2 → min 5
-    expect(result.roundReferenceValue).toBe(5);
+    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 2
+    expect(result.roundReferenceValue).toBe(2);
     expect(result.rechartsData).toEqual([
       {
         category: 'category1',
