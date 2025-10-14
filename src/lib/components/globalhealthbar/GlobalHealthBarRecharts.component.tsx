@@ -27,6 +27,9 @@ export interface GlobalHealthProps {
 const ChartInteractiveContainer = styled.div`
   position: relative;
   outline: none;
+  .recharts-surface {
+    outline: none;
+  }
 `;
 
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
