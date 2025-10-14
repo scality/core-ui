@@ -21,9 +21,7 @@ export const getRoundReferenceValue = (value: number): number => {
   let result: number;
 
   if (normalized <= 1) result = magnitude;
-  else if (value > 10 && normalized <= 1.5) result = 1.5 * magnitude;
   else if (normalized <= 2) result = 2 * magnitude;
-  else if (value > 10 && normalized <= 3) result = 3 * magnitude;
   else if (value > 10 && normalized <= 4) result = 4 * magnitude;
   else if (normalized <= 5) result = 5 * magnitude;
   else if (value > 10 && normalized <= 7.5) result = 7.5 * magnitude;
