@@ -27,7 +27,6 @@ export const formatXAxisLabel = (
   const date = new Date(timestamp);
   if (duration <= 24 * 60 * 60) {
     return TIME_FORMATER.format(date);
-    //? At which point do we consider chart to be long term? 1 week? 2 weeks? 1 month?
   } else if (duration <= 7 * 24 * 60 * 60) {
     return DAY_MONTH_ABBREVIATED_HOUR_MINUTE.format(date)
       .replace(',', '')

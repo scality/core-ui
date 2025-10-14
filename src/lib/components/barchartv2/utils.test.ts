@@ -7,6 +7,7 @@ import {
   getCurrentPoint,
   getMaxBarValue,
   getRoundReferenceValue,
+  getTicks,
   sortStackedBars,
   transformCategoryData,
   transformTimeData,
@@ -526,6 +527,51 @@ describe('getRoundReferenceValue', () => {
     expect(getRoundReferenceValue(3500)).toBe(4000); // 3850 → 4000
     expect(getRoundReferenceValue(7500)).toBe(10000); // 8250 → 10000
     expect(getRoundReferenceValue(15000)).toBe(20000); // 16500 → 20000
+  });
+});
+
+describe('getTicks', () => {
+  describe('small values (< 10)', () => {
+    it('should return 2 ticks for non-symmetrical small values', () => {
+      expect(getTicks(1, false)).toEqual([0, 1]);
+      expect(getTicks(2, false)).toEqual([0, 2]);
+      expect(getTicks(5, false)).toEqual([0, 5]);
+    });
+
+    it('should return 3 ticks for symmetrical small values', () => {
+      expect(getTicks(1, true)).toEqual([-1, 0, 1]);
+      expect(getTicks(2, true)).toEqual([-2, 0, 2]);
+      expect(getTicks(5, true)).toEqual([-5, 0, 5]);
+    });
+  });
+
+  describe('even topValue (divisible by 2)', () => {
+    it('should return 3 ticks for non-symmetrical even values', () => {
+      expect(getTicks(10, false)).toEqual([0, 5, 10]);
+      expect(getTicks(20, false)).toEqual([0, 10, 20]);
+      expect(getTicks(40, false)).toEqual([0, 20, 40]);
+      expect(getTicks(50, false)).toEqual([0, 25, 50]);
+      expect(getTicks(100, false)).toEqual([0, 50, 100]);
+      expect(getTicks(1000, false)).toEqual([0, 500, 1000]);
+    });
+
+    it('should return 5 ticks for symmetrical even values', () => {
+      expect(getTicks(10, true)).toEqual([-10, -5, 0, 5, 10]);
+      expect(getTicks(100, true)).toEqual([-100, -50, 0, 50, 100]);
+    });
+  });
+
+  describe('odd topValue (not divisible by 2) - 7.5 multiples', () => {
+    it('should return 4 ticks for non-symmetrical values from 7.5 × magnitude', () => {
+      expect(getTicks(75, false)).toEqual([0, 25, 50, 75]);
+      expect(getTicks(750, false)).toEqual([0, 250, 500, 750]);
+      expect(getTicks(7500, false)).toEqual([0, 2500, 5000, 7500]);
+    });
+
+    it('should return 7 ticks for symmetrical values from 7.5 × magnitude', () => {
+      expect(getTicks(75, true)).toEqual([-75, -50, -25, 0, 25, 50, 75]);
+      expect(getTicks(750, true)).toEqual([-750, -500, -250, 0, 250, 500, 750]);
+    });
   });
 });
 

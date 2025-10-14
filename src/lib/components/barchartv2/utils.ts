@@ -38,20 +38,20 @@ export const getTicks = (topValue: number, isSymmetrical: boolean) => {
       return [0, topValue];
     }
   }
-  const numberOfTicks = topValue % 2 === 0 ? 3 : 4;
+  const numberOfTicks = topValue % 3 === 0 ? 4 : 3;
   const tickInterval = topValue / (numberOfTicks - 1);
   const ticks = Array.from(
     { length: numberOfTicks },
     (_, index) => index * tickInterval,
   );
   if (isSymmetrical) {
+    // Create negative ticks in order without 0
     const negativeTicks = Array.from(
       { length: numberOfTicks - 1 },
-      (_, index) => -(index + 1) * tickInterval,
+      (_, index) => -(numberOfTicks - 1 - index) * tickInterval,
     );
     ticks.unshift(...negativeTicks);
   }
-
   return ticks;
 };
 
