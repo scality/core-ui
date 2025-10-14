@@ -76,6 +76,7 @@ export type BarchartSortFn<T extends BarchartBars> = (
 
 export type BarchartProps<T extends BarchartBars> = {
   type: CategoryType | TimeType;
+  title: string;
   bars?: T;
   tooltip?: BarchartTooltipFn<T>;
   defaultSort?: BarchartSortFn<T>;
@@ -89,7 +90,6 @@ export type BarchartProps<T extends BarchartBars> = {
    * @default 'default'
    */
   stackedBarSort?: 'default' | 'legend';
-  title?: string;
   secondaryTitle?: string;
   rightTitle?: React.ReactNode;
   height?: number;
@@ -299,11 +299,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
       unitRange,
       stackedBarSort,
     );
-
+  const titleWithUnit = unitLabel ? `${title} (${unitLabel})` : title;
   return (
     <Stack direction="vertical" style={{ gap: '0' }}>
       <ChartHeader
-        title={title}
+        title={titleWithUnit}
         secondaryTitle={secondaryTitle}
         helpTooltip={helpTooltip}
         rightTitle={rightTitle}
@@ -354,12 +354,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             })}
 
             <YAxis
-              ticks={getTicks(roundReferenceValue, false)}
               interval={0}
-              unit={` ${unitLabel}`}
               domain={[0, roundReferenceValue]}
+              ticks={getTicks(roundReferenceValue, false)}
               tickFormatter={
-                (value) => new Intl.NumberFormat('fr-FR').format(value) // Add a space as thousand separator and max 2 decimal places
+                (value) => new Intl.NumberFormat('fr-FR').format(value) // Add a space as thousand separator
               }
               axisLine={{ stroke: theme.border }}
               tick={{

@@ -332,7 +332,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
 ) => {
   if (!unitRange) {
     const roundReferenceValue = getRoundReferenceValue(maxValue);
-    return { unitLabel: '', roundReferenceValue, rechartsData: data };
+    return { unitLabel: undefined, roundReferenceValue, rechartsData: data };
   }
 
   const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
