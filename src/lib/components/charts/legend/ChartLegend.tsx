@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useChartLegend } from './ChartLegendWrapper';
-import { Text, TextVariant } from '../text/Text.component';
-import { chartColors } from '../../style/theme';
+import { Text, TextVariant } from '../../text/Text.component';
+import { chartColors } from '../../../style/theme';
 import { useCallback } from 'react';
 
 type ChartLegendProps = {

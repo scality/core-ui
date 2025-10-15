@@ -1,33 +1,15 @@
-import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import {
   Alert,
   GlobalHealthBar,
   GlobalHealthProps,
 } from '../../src/lib/components/charts';
 
-import {
-  DATE_FORMATER,
-  TIME_SECOND_FORMATER,
-} from '../../src/lib/components/date/FormattedDateTime';
-import {
-  MetricsTimeSpanProvider,
-  useMetricsTimeSpan,
-} from '../../src/lib/next';
-import { Dropdown, Icon, Stack } from '../../src/lib';
-import {
-  LAST_ONE_HOUR,
-  LAST_SEVEN_DAYS,
-  LAST_TWENTY_FOUR_HOURS,
-  SAMPLE_DURATION_LAST_ONE_HOUR,
-  SAMPLE_DURATION_LAST_SEVEN_DAYS,
-  SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-} from '../../src/lib/components/constants';
-
 type Story = StoryObj<GlobalHealthProps>;
 
 const meta: Meta<GlobalHealthProps> = {
-  title: 'Components/GlobalHealthBarRecharts',
+  title: 'Components/GlobalHealthBar',
   component: GlobalHealthBar,
 };
 export default meta;

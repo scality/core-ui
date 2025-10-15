@@ -9,7 +9,7 @@ import {
   useRef,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ChartColors } from '../../style/theme';
+import { ChartColors } from '../../../style/theme';
 
 export const useChartId = (): string => {
   const idRef = useRef<string | null>(null);

@@ -2,7 +2,7 @@ import {
   TIME_FORMATER,
   DAY_MONTH_ABBREVIATED_YEAR,
   DAY_MONTH_ABBREVIATED_HOUR_MINUTE,
-} from '../date/FormattedDateTime';
+} from '../../date/FormattedDateTime';
 
 export const ONE_YEAR_MILLISECONDS = 366 * 24 * 60 * 60 * 1000;
 
