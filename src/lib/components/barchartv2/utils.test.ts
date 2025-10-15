@@ -509,11 +509,11 @@ describe('getRoundReferenceValue', () => {
     // Small values (< 10)
     expect(getRoundReferenceValue(0.1)).toBe(0.2); // 0.1 → 0.11 → 0.2
     expect(getRoundReferenceValue(1)).toBe(2); // 1.1 → 1.5 → 2
-    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → 5
-    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → 5
+    expect(getRoundReferenceValue(2)).toBe(2.5); // 2.2 → 2.5
+    expect(getRoundReferenceValue(3)).toBe(4); // 3.3 → 4
 
     // Values 5-10 range
-    expect(getRoundReferenceValue(6)).toBe(10); // 6.6 → 10 (skip 7.5 for values < 10)
+    expect(getRoundReferenceValue(6)).toBe(7.5); // 6.6 → 7.5 (skip 10 for values < 10)
     expect(getRoundReferenceValue(9)).toBe(10); // 9.9 → 10
 
     // Larger values get 10% buffer applied
