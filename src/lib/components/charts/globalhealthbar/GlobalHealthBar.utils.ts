@@ -1,4 +1,4 @@
-import { fontSize } from '../../style/theme';
+import { fontSize } from '../../../style/theme';
 
 // =============================================================================
 // CONSTANTS

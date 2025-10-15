@@ -1,4 +1,4 @@
-import { coreUIAvailableThemes } from '../../style/theme';
+import { coreUIAvailableThemes } from '../../../style/theme';
 import {
   applySortingToData,
   computeUnitLabelAndRoundReferenceValue,
@@ -12,7 +12,7 @@ import {
   transformCategoryData,
   transformTimeData,
   UnitRange,
-} from './utils';
+} from './Barchart.utils';
 
 // Test date constants to avoid repetition
 const TEST_DATES = {

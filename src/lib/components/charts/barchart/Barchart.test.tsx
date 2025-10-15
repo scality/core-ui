@@ -1,8 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { getWrapper } from '../../testUtils';
-import { Barchart, CustomTick } from './Barchart.component';
-import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
+import { getWrapper } from '../../../testUtils';
+import { Barchart } from './Barchart';
+import { ChartLegendWrapper } from '../legend/ChartLegendWrapper';
 import React from 'react';
+import { CustomTick } from '../common/SharedComponents';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
@@ -60,21 +61,27 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type={{ type: 'category' }} bars={testBars} />
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={testBars}
+            />
           </ChartLegendWrapper>
         </Wrapper>,
       );
-
+      expect(screen.getByText('Test Title')).toBeInTheDocument();
       expect(screen.getByText('category1')).toBeInTheDocument();
       expect(screen.getByText('category2')).toBeInTheDocument();
       expect(screen.getByText('category3')).toBeInTheDocument();
     });
+
     it('should render the Barchart component with time data', async () => {
       const { Wrapper } = getWrapper();
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
             <Barchart
+              title="Test Title"
               type={{
                 type: 'time',
                 timeRange: {
@@ -98,7 +105,12 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type={{ type: 'category' }} bars={[]} isError />
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={[]}
+              isError
+            />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -111,7 +123,12 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type={{ type: 'category' }} bars={[]} isLoading />
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={[]}
+              isLoading
+            />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -122,7 +139,11 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type={{ type: 'category' }} bars={undefined} />
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={undefined}
+            />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -139,6 +160,7 @@ describe('Barchart', () => {
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
             <Barchart
+              title="Test Title"
               type={{
                 type: 'time',
                 timeRange: {
@@ -196,7 +218,7 @@ describe('Barchart', () => {
               Failed: 'lineColor2',
             }}
           >
-            <Barchart type={type} bars={bars} />
+            <Barchart title="Test Title" type={type} bars={bars} />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -239,7 +261,7 @@ describe('Barchart', () => {
       render(
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
-            <Barchart type={type} bars={testTimeBars} />
+            <Barchart title="Test Title" type={type} bars={testTimeBars} />
           </ChartLegendWrapper>
         </Wrapper>,
       );
@@ -270,6 +292,7 @@ describe('Barchart', () => {
         <Wrapper>
           <ChartLegendWrapper colorSet={testColorSet}>
             <Barchart
+              title="Test Title"
               type={{
                 type: 'time',
                 timeRange: {
@@ -317,6 +340,7 @@ describe('Barchart', () => {
       <Wrapper>
         <ChartLegendWrapper colorSet={{ ...testColorSet, Failed: 'red' }}>
           <Barchart
+            title="Test Title"
             type={{ type: 'category' }}
             bars={testStackedBars}
             stacked
@@ -348,6 +372,7 @@ describe('Barchart', () => {
       <Wrapper>
         <ChartLegendWrapper colorSet={testColorSet}>
           <Barchart
+            title="Test Title"
             type={{ type: 'category' }}
             bars={testBars}
             defaultSort={(pointA, pointB) => {

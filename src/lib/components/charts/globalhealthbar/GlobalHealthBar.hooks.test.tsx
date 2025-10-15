@@ -1,4 +1,4 @@
-import { useHealthBarData, Alert } from './useHealthBarData';
+import { useHealthBarData, Alert } from './GlobalHealthBar.hooks';
 import { renderHook } from '@testing-library/react';
 describe('useHealthBarData', () => {
   const mockTimestamp = {

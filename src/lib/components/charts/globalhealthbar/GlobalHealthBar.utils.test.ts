@@ -10,7 +10,7 @@ import {
   getNavigationAction,
   calculateNavigationIndex,
   getNavigationStateUpdate,
-} from './healthBarUtils';
+} from './GlobalHealthBar.utils';
 
 describe('Health Bar Utils', () => {
   describe('Tick Calculations', () => {

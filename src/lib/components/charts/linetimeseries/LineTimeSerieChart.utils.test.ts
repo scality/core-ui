@@ -1,4 +1,4 @@
-import { formatXAxisLabel } from './utils';
+import { formatXAxisLabel } from './LineTimeSerieChart.utils';
 
 describe('formatXAxisLabel', () => {
   const mockTimestamp = new Date('2025-09-15T14:30:00Z').getTime();

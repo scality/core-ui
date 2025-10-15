@@ -1,12 +1,9 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import {
-  LineChartProps,
-  LineTimeSerieChart,
-} from './linetimeseriechart.component';
-import { ChartLegendWrapper } from '../chartlegend/ChartLegendWrapper';
+import { LineChartProps, LineTimeSerieChart } from './LineTimeSerieChart';
+import { ChartLegendWrapper } from '../legend/ChartLegendWrapper';
 import { ThemeProvider } from 'styled-components';
-import { coreUIAvailableThemes } from '../../style/theme';
+import { coreUIAvailableThemes } from '../../../style/theme';
 
 const TestSeries = [
   {
