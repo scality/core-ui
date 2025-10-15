@@ -9,7 +9,7 @@ import {
 type Story = StoryObj<GlobalHealthProps>;
 
 const meta: Meta<GlobalHealthProps> = {
-  title: 'Components/GlobalHealthBar',
+  title: 'Components/DataDisplay/Charts/GlobalHealthBar',
   component: GlobalHealthBar,
 };
 export default meta;
