@@ -16,15 +16,14 @@ export const getRoundReferenceValue = (value: number): number => {
   const normalized = bufferedValue / magnitude;
 
   // Round to nice numbers based on normalized value
-  // skip 1.5, 3, 4, 7.5 as top value for better chart
-  // appearance for small values
   let result: number;
 
   if (normalized <= 1) result = magnitude;
   else if (normalized <= 2) result = 2 * magnitude;
-  else if (value > 10 && normalized <= 4) result = 4 * magnitude;
+  else if (normalized <= 2.5) result = 2.5 * magnitude;
+  else if (normalized <= 4) result = 4 * magnitude;
   else if (normalized <= 5) result = 5 * magnitude;
-  else if (value > 10 && normalized <= 7.5) result = 7.5 * magnitude;
+  else if (normalized <= 7.5) result = 7.5 * magnitude;
   else result = 10 * magnitude;
 
   return result;
