@@ -10,18 +10,15 @@ import {
 } from 'recharts';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import { spacing } from '../../spacing';
+import { Stack } from '../../spacing';
 import { fontSize } from '../../style/theme';
-import { Box } from '../box/Box';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { Icon } from '../icon/Icon.component';
 import {
   addMissingDataPoint,
   getUnitLabel,
 } from '../linetemporalchart/ChartUtil';
 import { Loader } from '../loader/Loader.component';
-import { ChartTitleText, Text } from '../text/Text.component';
-import { Tooltip as TooltipComponent } from '../tooltip/Tooltip.component';
+import { ChartTitleText } from '../text/Text.component';
 import { formatXAxisLabel } from './utils';
 import {
   ChartTooltipPortal,
@@ -34,16 +31,14 @@ import {
 import { LegendShape } from '../chartlegend/ChartLegend';
 import { StyledResponsiveContainer } from '../barchartv2/Barchart.component';
 import { getRoundReferenceValue, getTicks } from '../barchartv2/utils';
+import { IconHelp } from '../iconhelper/IconHelper';
+
+const maxWidthTooltip = { maxWidth: '20rem' };
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-`;
-
-const ChartHeader = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 export type Serie = {
@@ -466,22 +461,15 @@ export function LineTimeSerieChart({
 
   return (
     <LineTemporalChartWrapper>
-      <ChartHeader>
+      <Stack gap="r4">
         <ChartTitleText>
           {title} {unitLabel && `(${unitLabel})`}
         </ChartTitleText>
         {helpText && (
-          <Box ml={spacing.r4}>
-            <TooltipComponent
-              placement={'right'}
-              overlay={<Text>{helpText}</Text>}
-            >
-              <Icon name="Info" color={theme.buttonSecondary} />
-            </TooltipComponent>
-          </Box>
+          <IconHelp tooltipMessage={helpText} overlayStyle={maxWidthTooltip} />
         )}
         {isLoading && <Loader />}
-      </ChartHeader>
+      </Stack>
       <div
         onFocus={() => setIsChartActive(true)}
         onBlur={() => setIsChartActive(false)}

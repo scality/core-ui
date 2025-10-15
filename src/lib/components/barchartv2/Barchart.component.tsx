@@ -34,6 +34,7 @@ const CHART_CONSTANTS = {
     bottom: 0,
   },
 };
+const maxWidthTooltip = { maxWidth: '20rem' };
 
 /* ---------------------------------- TYPE ---------------------------------- */
 
@@ -203,7 +204,12 @@ const ChartHeader = ({
     <Wrap>
       <Stack gap="r4">
         <Text variant="ChartTitle">{title}</Text>
-        {helpTooltip && <IconHelp tooltipMessage={helpTooltip} />}
+        {helpTooltip && (
+          <IconHelp
+            tooltipMessage={helpTooltip}
+            overlayStyle={maxWidthTooltip}
+          />
+        )}
 
         {secondaryTitle && (
           <Text
