@@ -12,10 +12,10 @@ describe('formatXAxisLabel', () => {
   });
 
   describe('medium duration (≤ 7 days)', () => {
-    it('should format timestamp with day-month-abbreviated format', () => {
+    it('should format timestamp with day-month-abbreviated-hour-minute format', () => {
       const duration = 3 * 24 * 60 * 60; // 3 days
       const result = formatXAxisLabel(mockTimestamp, duration);
-      expect(result).toBe('15 Sep');
+      expect(result).toBe('15 Sep 14:30');
     });
   });
 
@@ -37,7 +37,7 @@ describe('formatXAxisLabel', () => {
     it('should handle exactly 7 days duration', () => {
       const duration = 7 * 24 * 60 * 60; // exactly 7 days
       const result = formatXAxisLabel(mockTimestamp, duration);
-      expect(result).toBe('15 Sep');
+      expect(result).toBe('15 Sep 14:30');
     });
 
     it('should handle just over 7 days duration', () => {

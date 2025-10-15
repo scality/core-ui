@@ -7,6 +7,7 @@ import {
   getCurrentPoint,
   getMaxBarValue,
   getRoundReferenceValue,
+  getTicks,
   sortStackedBars,
   transformCategoryData,
   transformTimeData,
@@ -504,21 +505,73 @@ describe('applySortingToData', () => {
 });
 
 describe('getRoundReferenceValue', () => {
-  it('should return appropriate rounded values', () => {
-    expect(getRoundReferenceValue(1)).toBe(5);
-    expect(getRoundReferenceValue(2)).toBe(5);
-    expect(getRoundReferenceValue(3)).toBe(5);
-    expect(getRoundReferenceValue(7)).toBe(10);
-    expect(getRoundReferenceValue(15)).toBe(25);
-    expect(getRoundReferenceValue(35)).toBe(50);
-    expect(getRoundReferenceValue(75)).toBe(100);
-    expect(getRoundReferenceValue(150)).toBe(250);
-    expect(getRoundReferenceValue(350)).toBe(500);
-    expect(getRoundReferenceValue(750)).toBe(1000);
-    expect(getRoundReferenceValue(1500)).toBe(2500);
-    expect(getRoundReferenceValue(3500)).toBe(5000);
-    expect(getRoundReferenceValue(7500)).toBe(10000);
-    expect(getRoundReferenceValue(15000)).toBe(25000);
+  it('should return appropriate rounded values with 10% buffer', () => {
+    // Small values (< 10)
+    expect(getRoundReferenceValue(0.1)).toBe(0.2); // 0.1 → 0.11 → 0.2
+    expect(getRoundReferenceValue(1)).toBe(2); // 1.1 → 1.5 → 2
+    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → 5
+    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → 5
+
+    // Values 5-10 range
+    expect(getRoundReferenceValue(6)).toBe(10); // 6.6 → 10 (skip 7.5 for values < 10)
+    expect(getRoundReferenceValue(9)).toBe(10); // 9.9 → 10
+
+    // Larger values get 10% buffer applied
+    expect(getRoundReferenceValue(15)).toBe(20); // 16.5 → 20
+    expect(getRoundReferenceValue(35)).toBe(40); // 38.5 → 40
+    expect(getRoundReferenceValue(75)).toBe(100); // 82.5 → 100
+    expect(getRoundReferenceValue(150)).toBe(200); // 165 → 200
+    expect(getRoundReferenceValue(350)).toBe(400); // 385 → 400
+    expect(getRoundReferenceValue(750)).toBe(1000); // 825 → 1000
+    expect(getRoundReferenceValue(1500)).toBe(2000); // 1650 → 2000
+    expect(getRoundReferenceValue(3500)).toBe(4000); // 3850 → 4000
+    expect(getRoundReferenceValue(7500)).toBe(10000); // 8250 → 10000
+    expect(getRoundReferenceValue(15000)).toBe(20000); // 16500 → 20000
+  });
+});
+
+describe('getTicks', () => {
+  describe('small values (< 10)', () => {
+    it('should return 2 ticks for non-symmetrical small values', () => {
+      expect(getTicks(1, false)).toEqual([0, 1]);
+      expect(getTicks(2, false)).toEqual([0, 2]);
+      expect(getTicks(5, false)).toEqual([0, 5]);
+    });
+
+    it('should return 3 ticks for symmetrical small values', () => {
+      expect(getTicks(1, true)).toEqual([-1, 0, 1]);
+      expect(getTicks(2, true)).toEqual([-2, 0, 2]);
+      expect(getTicks(5, true)).toEqual([-5, 0, 5]);
+    });
+  });
+
+  describe('even topValue (divisible by 2)', () => {
+    it('should return 3 ticks for non-symmetrical even values', () => {
+      expect(getTicks(10, false)).toEqual([0, 5, 10]);
+      expect(getTicks(20, false)).toEqual([0, 10, 20]);
+      expect(getTicks(40, false)).toEqual([0, 20, 40]);
+      expect(getTicks(50, false)).toEqual([0, 25, 50]);
+      expect(getTicks(100, false)).toEqual([0, 50, 100]);
+      expect(getTicks(1000, false)).toEqual([0, 500, 1000]);
+    });
+
+    it('should return 5 ticks for symmetrical even values', () => {
+      expect(getTicks(10, true)).toEqual([-10, -5, 0, 5, 10]);
+      expect(getTicks(100, true)).toEqual([-100, -50, 0, 50, 100]);
+    });
+  });
+
+  describe('odd topValue (not divisible by 2) - 7.5 multiples', () => {
+    it('should return 4 ticks for non-symmetrical values from 7.5 × magnitude', () => {
+      expect(getTicks(75, false)).toEqual([0, 25, 50, 75]);
+      expect(getTicks(750, false)).toEqual([0, 250, 500, 750]);
+      expect(getTicks(7500, false)).toEqual([0, 2500, 5000, 7500]);
+    });
+
+    it('should return 7 ticks for symmetrical values from 7.5 × magnitude', () => {
+      expect(getTicks(75, true)).toEqual([-75, -50, -25, 0, 25, 50, 75]);
+      expect(getTicks(750, true)).toEqual([-750, -500, -250, 0, 250, 500, 750]);
+    });
   });
 });
 
@@ -685,7 +738,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('kB');
-    expect(result.roundReferenceValue).toBe(10);
+    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 2
+    expect(result.roundReferenceValue).toBe(2);
     expect(result.rechartsData).toEqual([
       {
         category: 'category1',
@@ -718,7 +772,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('B');
-    expect(result.roundReferenceValue).toBe(1000);
+    // 680 with buffer: 748 → rounds to 750 (7.5 * 100, value > 10)
+    expect(result.roundReferenceValue).toBe(750);
     expect(result.rechartsData).toEqual([
       { category: 'category1', success: 680 },
     ]);

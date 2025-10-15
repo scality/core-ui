@@ -47,7 +47,7 @@ const CustomTick = ({
           fontSize={fontSize.smaller}
           fill={theme.textSecondary}
         >
-          {is7DaySpan || isDaySpan ? (
+          {is7DaySpan ? (
             <FormattedDateTime
               format="day-month-abbreviated-hour-minute"
               value={new Date(payload.value)}

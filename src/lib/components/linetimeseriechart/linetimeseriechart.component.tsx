@@ -33,6 +33,7 @@ import {
 } from '../charttooltip/ChartTooltip';
 import { LegendShape } from '../chartlegend/ChartLegend';
 import { StyledResponsiveContainer } from '../barchartv2/Barchart.component';
+import { getRoundReferenceValue, getTicks } from '../barchartv2/utils';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -397,8 +398,8 @@ export function LineTimeSerieChart({
     const maxValue = Math.max(top, bottom);
 
     const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
-
-    const topValue = Math.ceil(maxValue / valueBase / 10) * 10;
+    // Use round reference value to add extra padding to the top value
+    const topValue = getRoundReferenceValue(maxValue / valueBase);
 
     const rechartsData = chartData.map((dataPoint) => {
       const normalizedDataPoint = { ...dataPoint };
@@ -525,9 +526,8 @@ export function LineTimeSerieChart({
               label={{
                 value: yAxisTitle,
                 angle: 90,
-                position: 'insideRight',
+                dx: 20,
                 style: {
-                  textAnchor: 'middle',
                   fill: theme.textSecondary,
                   fontSize: fontSize.smaller,
                 },
@@ -545,9 +545,9 @@ export function LineTimeSerieChart({
                 fontSize: fontSize.smaller,
               }}
               tickFormatter={(value) =>
-                new Intl.NumberFormat('fr-FR').format(value.toFixed(0))
+                new Intl.NumberFormat('fr-FR').format(value)
               }
-              tickCount={5}
+              ticks={getTicks(topValue, yAxisType === 'symmetrical')}
               interval={0}
             />
             <Tooltip
