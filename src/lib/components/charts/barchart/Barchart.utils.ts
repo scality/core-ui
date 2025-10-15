@@ -1,58 +1,15 @@
-import { BarchartProps, BarchartBars } from './Barchart.component';
+import { BarchartProps, BarchartBars } from './Barchart';
 import { TooltipContentProps } from 'recharts';
-import { chartColors, ChartColors } from '../../style/theme';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
+import { chartColors, ChartColors } from '../../../style/theme';
+import { useChartLegend } from '../legend/ChartLegendWrapper';
+import {
+  getRoundReferenceValue,
+  getTicks,
+  getUnitLabel,
+} from '../common/chartUtils';
 
-export const getRoundReferenceValue = (value: number): number => {
-  if (value <= 0) return 1; // Default for zero or negative values
-  
-  // Buffer the value by 10% to avoid being too close to the edge of the chart
-  const bufferedValue = value * 1.1;
-
-  if (value >= 10) {
-    const remainder = value % 10;
-    const incremented = value + (10 - remainder);
-
-    // If the remainder is less than 5, round down to the nearest 10
-    if (remainder < 5) {
-      return value - remainder;
-    }
-
-    // If incrementing would exceed the buffered max, also round down
-    if (incremented > bufferedValue) {
-      return value - remainder;
-    }
-
-    // Otherwise, round up to the next 10
-    return incremented;
-  }
-
-  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
-
-  const remainder = bufferedValue % magnitude;
-
-  return remainder === 0 ? bufferedValue : bufferedValue - remainder;
-};
-
-export const getTicks = (topValue: number, isSymmetrical: boolean) => {
-  const possibleTickNumbers = [4, 3];
-  const numberOfTicks =
-    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 3; // Default to 2 ticks if no match
-  const tickInterval = topValue / (numberOfTicks - 1);
-  const ticks = Array.from(
-    { length: numberOfTicks },
-    (_, index) => index * tickInterval,
-  );
-  if (isSymmetrical) {
-    // Create negative ticks in order without 0
-    const negativeTicks = Array.from(
-      { length: numberOfTicks - 1 },
-      (_, index) => -(numberOfTicks - 1 - index) * tickInterval,
-    );
-    ticks.unshift(...negativeTicks);
-  }
-  return ticks;
-};
+// Re-export shared utilities for convenience
+export { getRoundReferenceValue, getTicks, getUnitLabel };
 
 export const getMaxBarValue = (
   data: { [key: string]: string | number }[],
@@ -331,7 +288,12 @@ export const computeUnitLabelAndRoundReferenceValue = (
 ) => {
   if (!unitRange) {
     const roundReferenceValue = getRoundReferenceValue(maxValue);
-    return { unitLabel: undefined, roundReferenceValue, rechartsData: data, topDomain: maxValue * 1.1 };
+    return {
+      unitLabel: undefined,
+      roundReferenceValue,
+      rechartsData: data,
+      topDomain: maxValue * 1.1,
+    };
   }
 
   const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
@@ -346,60 +308,13 @@ export const computeUnitLabelAndRoundReferenceValue = (
     });
     return normalizedDataPoint;
   });
-  return { unitLabel, roundReferenceValue, rechartsData, topDomain: topValue * 1.1 };
-};
-
-/**
- * Return the unit label base on the current dataset, and the valueBase which is used to convert the data
- * @param {any} unitRange
- * @param {any} maxValue the maximum value among the data set
- * @returns {any}
- */
-export function getUnitLabel(
-  unitRange: {
-    threshold: number;
-    label: string;
-  }[],
-  maxValue: number,
-): {
-  valueBase: number;
-  unitLabel: string;
-} {
-  // first sort the unitRange
-  unitRange.sort(
-    (
-      unitA: {
-        threshold: number;
-        label: string;
-      },
-      unitB: {
-        threshold: number;
-        label: string;
-      },
-    ) => {
-      return unitA.threshold - unitB.threshold;
-    },
-  );
-  let index = unitRange.findIndex((range) => range.threshold > maxValue);
-
-  // last unit
-  if (index === -1) {
-    index = unitRange.length;
-  }
-
-  if (index === 0) {
-    return {
-      valueBase: unitRange[index].threshold,
-      unitLabel: unitRange[index].label,
-    };
-  }
-
   return {
-    // if the threshold is 0, we use 1 as the value base to avoid division by 0
-    valueBase: unitRange[index - 1].threshold || 1,
-    unitLabel: unitRange[index - 1].label,
+    unitLabel,
+    roundReferenceValue,
+    rechartsData,
+    topDomain: topValue * 1.1,
   };
-}
+};
 
 // Sort stacked bars by their average values in descending order or by legend order
 // This ensures the largest bars appear at the bottom of the stack (default) or follow legend order

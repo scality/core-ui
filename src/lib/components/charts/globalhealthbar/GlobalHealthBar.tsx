@@ -8,14 +8,14 @@ import {
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { GlobalHealthBarTooltip } from './components/GlobalHealthBarTooltip';
-import { HealthBarXAxis } from './components/HealthBarXAxis';
+import { GlobalHealthBarTooltip } from './GlobalHealthBarTooltip';
+import { HealthBarXAxis } from './HealthBarXAxis';
 import {
   CHART_CONFIG,
   getNavigationAction,
   getNavigationStateUpdate,
-} from './healthBarUtils';
-import { Alert, useHealthBarData } from './useHealthBarData';
+} from './GlobalHealthBar.utils';
+import { Alert, useHealthBarData } from './GlobalHealthBar.hooks';
 
 export interface GlobalHealthProps {
   id: string;

@@ -1,3 +1,4 @@
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -8,32 +9,31 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import { Stack } from '../../spacing';
-import { fontSize } from '../../style/theme';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
+import { Stack } from '../../../spacing';
+import { fontSize } from '../../../style/theme';
+import { IconHelp } from '../../iconhelper/IconHelper';
+import { Loader } from '../../loader/Loader.component';
+import { ChartTitleText } from '../../text/Text.component';
+import { LegendShape } from '../legend/ChartLegend';
+import { useChartLegend } from '../legend/ChartLegendWrapper';
+import { StyledResponsiveContainer } from '../common/SharedComponents';
 import {
-  addMissingDataPoint,
-  getUnitLabel,
-} from '../linetemporalchart/ChartUtil';
-import { Loader } from '../loader/Loader.component';
-import { ChartTitleText } from '../text/Text.component';
-import { formatXAxisLabel } from './utils';
-import {
-  ChartTooltipPortal,
-  ChartTooltipItem,
   ChartTooltipHeader,
+  ChartTooltipItem,
   ChartTooltipItemsContainer,
+  ChartTooltipPortal,
   ChartTooltipSeparator,
   TooltipHeader,
-} from '../charttooltip/ChartTooltip';
-import { LegendShape } from '../chartlegend/ChartLegend';
-import { StyledResponsiveContainer } from '../barchartv2/Barchart.component';
-import { getRoundReferenceValue, getTicks } from '../barchartv2/utils';
-import { IconHelp } from '../iconhelper/IconHelper';
-
-const maxWidthTooltip = { maxWidth: '20rem' };
+} from '../common/ChartTooltip';
+import {
+  addMissingDataPoint,
+  getRoundReferenceValue,
+  getTicks,
+  getUnitLabel,
+  maxWidthTooltip,
+} from '../common/chartUtils';
+import { formatXAxisLabel } from './LineTimeSerieChart.utils';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;

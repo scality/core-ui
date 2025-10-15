@@ -10,9 +10,9 @@ import {
   Middleware,
 } from '@floating-ui/react';
 import styled from 'styled-components';
-import { spacing } from '../../spacing';
-import { fontSize, fontWeight } from '../../style/theme';
-import { FormattedDateTime } from '../date/FormattedDateTime';
+import { spacing } from '../../../spacing';
+import { fontSize, fontWeight } from '../../../style/theme';
+import { FormattedDateTime } from '../../date/FormattedDateTime';
 
 export const ChartTooltipContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
@@ -106,6 +106,12 @@ export type TooltipDateFormat =
   | 'day-month-abbreviated-hour-minute-second'
   | 'day-month-abbreviated-hour-minute';
 
+/**
+ * Get the format of the date based on the duration
+ * Used by TooltipHeader component
+ * @param duration - Duration in seconds
+ * @returns Formatted string type
+ */
 const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
   duration: number,
 ) => {

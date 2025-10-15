@@ -6,7 +6,7 @@ import {
   calculateLabelVisibility,
   TIME_CONSTANTS,
   getEdgeMargin,
-} from '../healthBarUtils';
+} from './GlobalHealthBar.utils';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 
 interface HealthBarXAxisProps {

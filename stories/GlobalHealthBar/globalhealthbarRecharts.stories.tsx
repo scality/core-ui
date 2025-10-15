@@ -4,7 +4,7 @@ import {
   Alert,
   GlobalHealthBar,
   GlobalHealthProps,
-} from '../../src/lib/components/globalhealthbar/GlobalHealthBarRecharts.component';
+} from '../../src/lib/components/charts';
 
 import {
   DATE_FORMATER,

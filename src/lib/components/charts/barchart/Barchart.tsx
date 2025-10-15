@@ -1,26 +1,28 @@
 import { useState, useRef } from 'react';
 import {
   Bar,
-  BarChart,
+  BarChart as RechartsBarChart,
   CartesianGrid,
-  ResponsiveContainer,
   Tooltip,
   TooltipContentProps,
   XAxis,
   YAxis,
 } from 'recharts';
-import styled, { useTheme } from 'styled-components';
-import { spacing, Stack, Wrap } from '../../spacing';
-import { chartColors, ChartColors, fontSize } from '../../style/theme';
-import { Box } from '../box/Box';
-import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
-import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
-import { FormattedDateTime } from '../date/FormattedDateTime';
-import { IconHelp } from '../iconhelper/IconHelper';
-import { Loader } from '../loader/Loader.component';
-import { Text } from '../text/Text.component';
+import { useTheme } from 'styled-components';
+import { Stack } from '../../../spacing';
+import { chartColors, ChartColors, fontSize } from '../../../style/theme';
+import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
-import { getTicks, UnitRange, useChartData } from './utils';
+import { getTicks } from '../common/chartUtils';
+import { UnitRange, useChartData } from './Barchart.utils';
+import {
+  ChartHeader,
+  ChartError,
+  ChartLoading,
+  CustomTick,
+  StyledResponsiveContainer,
+} from '../common/SharedComponents';
+import { TimeType, CategoryType } from '../types';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 4,
@@ -34,23 +36,9 @@ const CHART_CONSTANTS = {
     bottom: 0,
   },
 };
-const maxWidthTooltip = { maxWidth: '20rem' };
 
 /* ---------------------------------- TYPE ---------------------------------- */
 
-export type TimeType = {
-  type: 'time';
-  timeRange: {
-    startDate: Date;
-    endDate: Date;
-    interval: number;
-  };
-};
-
-export type CategoryType = {
-  type: 'category';
-  gap?: number;
-};
 export type Point = {
   key: string | number;
   values: { label: string; value: number }[];
@@ -98,168 +86,6 @@ export type BarchartProps<T extends BarchartBars> = {
   isError?: boolean;
 };
 
-interface CustomTickProps {
-  x: number;
-  y: number;
-  payload: {
-    value: number;
-  };
-  visibleTicksCount: number;
-  width: number;
-  type: TimeType;
-}
-
-/* ---------------------------------- COMPONENTS ---------------------------------- */
-
-/**
- * Get the format of the date based on the duration
- * @param duration - Duration in seconds
- * @returns Formatted string
- */
-export const formatDate = (
-  duration: number,
-): 'time' | 'day-month-abbreviated' | 'chart-long-term-date' => {
-  if (duration <= 24 * 60 * 60) {
-    return 'time';
-  } else if (duration <= 7 * 24 * 60 * 60) {
-    return 'day-month-abbreviated';
-  } else {
-    return 'chart-long-term-date';
-  }
-};
-
-export const CustomTick = ({
-  x,
-  y,
-  payload,
-  visibleTicksCount,
-  width,
-  type,
-}: CustomTickProps) => {
-  const theme = useTheme();
-  const tickWidth =
-    width / visibleTicksCount - CHART_CONSTANTS.TICK_WIDTH_OFFSET;
-  const centerX = x - tickWidth / 2;
-
-  const duration =
-    type.type === 'time'
-      ? (type.timeRange.endDate.getTime() -
-          type.timeRange.startDate.getTime()) /
-        1000
-      : 0;
-
-  return (
-    <foreignObject
-      x={centerX}
-      y={y - 8}
-      width={tickWidth}
-      color={theme.textSecondary}
-      overflow="visible"
-    >
-      <ConstrainedText
-        color="textSecondary"
-        text={
-          <Text variant="Smaller">
-            {type.type === 'time' ? (
-              <FormattedDateTime
-                format={formatDate(duration)}
-                value={new Date(payload.value)}
-              />
-            ) : (
-              String(payload.value)
-            )}
-          </Text>
-        }
-        centered
-        tooltipStyle={{
-          backgroundColor: theme.backgroundLevel1,
-          padding: spacing.r10,
-          borderRadius: spacing.r8,
-          border: `1px solid ${theme.border}`,
-          position: 'absolute',
-        }}
-      />
-    </foreignObject>
-  );
-};
-
-export const StyledResponsiveContainer = styled(ResponsiveContainer)`
-  // Avoid tooltip over constrained text to be cut off
-  & .recharts-surface {
-    outline: none;
-    overflow: visible;
-  }
-`;
-
-const ChartHeader = ({
-  title,
-  secondaryTitle,
-  helpTooltip,
-  rightTitle,
-}: {
-  title?: string;
-  secondaryTitle?: string;
-  helpTooltip?: React.ReactNode;
-  rightTitle?: React.ReactNode;
-}) => {
-  return (
-    <Wrap>
-      <Stack gap="r4">
-        <Text variant="ChartTitle">{title}</Text>
-        {helpTooltip && (
-          <IconHelp
-            tooltipMessage={helpTooltip}
-            overlayStyle={maxWidthTooltip}
-          />
-        )}
-
-        {secondaryTitle && (
-          <Text
-            color="textSecondary"
-            style={{
-              marginLeft: spacing.r8,
-            }}
-          >
-            {secondaryTitle}
-          </Text>
-        )}
-      </Stack>
-
-      {rightTitle && <Text>{rightTitle}</Text>}
-    </Wrap>
-  );
-};
-
-const Error = ({ height }: { height: number }) => {
-  return (
-    <Box
-      height={height}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
-    >
-      <Text>Chart data is not available</Text>
-    </Box>
-  );
-};
-
-const Loading = ({ height }: { height: number }) => {
-  return (
-    <Box
-      height={height}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
-    >
-      <Loader size="larger" children={<Text>Loading Chart Data...</Text>} />
-    </Box>
-  );
-};
-
 /* ---------------------------------- MAIN COMPONENT ---------------------------------- */
 
 export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
@@ -297,16 +123,21 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     {} as Record<string, ChartColors | string>,
   );
 
-  const { rechartsBars, unitLabel, roundReferenceValue, rechartsData, topDomain } =
-    useChartData(
-      bars || [],
-      type,
-      colorSet || {},
-      stacked,
-      defaultSort,
-      unitRange,
-      stackedBarSort,
-    );
+  const {
+    rechartsBars,
+    unitLabel,
+    roundReferenceValue,
+    rechartsData,
+    topDomain,
+  } = useChartData(
+    bars || [],
+    type,
+    colorSet || {},
+    stacked,
+    defaultSort,
+    unitRange,
+    stackedBarSort,
+  );
   const titleWithUnit = unitLabel ? `${title} (${unitLabel})` : title;
   return (
     <Stack direction="vertical" style={{ gap: '0' }}>
@@ -317,12 +148,12 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         rightTitle={rightTitle}
       />
       {isError || (!bars && !isLoading) ? (
-        <Error height={height} />
+        <ChartError height={height} />
       ) : isLoading ? (
-        <Loading height={height} />
+        <ChartLoading height={height} />
       ) : (
         <StyledResponsiveContainer ref={chartRef} width="100%" height={height}>
-          <BarChart
+          <RechartsBarChart
             data={rechartsData}
             accessibilityLayer
             barSize={
@@ -378,7 +209,13 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
             <XAxis
               dataKey="category"
-              tick={(props) => <CustomTick {...props} type={type} />}
+              tick={(props) => (
+                <CustomTick
+                  {...props}
+                  type={type}
+                  tickWidthOffset={CHART_CONSTANTS.TICK_WIDTH_OFFSET}
+                />
+              )}
               type="category"
               interval={0}
               allowDataOverflow={true}
@@ -404,7 +241,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               )}
               cursor={false}
             />
-          </BarChart>
+          </RechartsBarChart>
         </StyledResponsiveContainer>
       )}
     </Stack>

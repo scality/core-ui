@@ -1,11 +1,15 @@
 import React from 'react';
 import styled, { css, useTheme } from 'styled-components';
-import { FormattedDateTime, Stack, Text, Wrap, spacing } from '../../../index';
-import { Alert } from '../GlobalHealthBarRecharts.component';
 import { TooltipContentProps } from 'recharts';
+import { FormattedDateTime } from '../../date/FormattedDateTime';
+import { Stack } from '../../../spacing';
+import { Text } from '../../text/Text.component';
+import { Wrap } from '../../../spacing';
+import { spacing } from '../../../spacing';
+import { Alert } from './GlobalHealthBar.hooks';
 import { zIndex } from '../../../style/theme';
-import { CHART_CONFIG, getTooltipPosition } from '../healthBarUtils';
-import { ChartTooltipPortal } from '../../charttooltip/ChartTooltip';
+import { CHART_CONFIG, getTooltipPosition } from './GlobalHealthBar.utils';
+import { ChartTooltipPortal } from '../common/ChartTooltip';
 
 interface GlobalHealthBarTooltipProps {
   tooltipData: Alert | null;

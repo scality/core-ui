@@ -1,6 +1,6 @@
 import React from 'react';
-import { BarChart } from '../../src/lib/components/barchart/BarChart.component';
-import { verticalStackedData } from '../data/barchart';
+// BarChart has been moved to the new charts folder
+// For examples, see stories/BarChart/barchart.stories.tsx
 // props for vertical stacked bar chart
 const idVerticalStacked = 'vis_vertical_stacked';
 const xAxisVerticalStacked = {

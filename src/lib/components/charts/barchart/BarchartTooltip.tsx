@@ -1,19 +1,15 @@
 import { TooltipContentProps } from 'recharts';
-import { LegendShape } from '../chartlegend/ChartLegend';
+import { LegendShape } from '../legend/ChartLegend';
 import {
   ChartTooltipPortal,
   ChartTooltipHeader,
   ChartTooltipItem,
   ChartTooltipItemsContainer,
   TooltipHeader,
-} from '../charttooltip/ChartTooltip';
-import {
-  BarchartBars,
-  BarchartTooltipFn,
-  CategoryType,
-  TimeType,
-} from './Barchart.component';
-import { getCurrentPoint } from './utils';
+} from '../common/ChartTooltip';
+import { BarchartBars, BarchartTooltipFn } from './Barchart';
+import { CategoryType, TimeType } from '../types';
+import { getCurrentPoint } from './Barchart.utils';
 
 export const BarchartTooltip = <T extends BarchartBars>({
   type,

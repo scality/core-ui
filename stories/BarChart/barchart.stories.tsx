@@ -6,14 +6,14 @@ import {
   BarchartProps,
   BarchartSortFn,
   BarchartTooltipFn,
-} from '../../src/lib/components/barchartv2/Barchart.component';
+  ChartLegendWrapper,
+  ChartLegend,
+} from '../../src/lib/components/charts';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
 import { spacing, Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
-import { ChartLegendWrapper } from '../../src/lib/components/chartlegend/ChartLegendWrapper';
-import { ChartLegend } from '../../src/lib/components/chartlegend/ChartLegend';
 
 type Story = StoryObj<typeof Barchart>;
 
