@@ -67,7 +67,7 @@ export const getTicks = (topValue: number, isSymmetrical: boolean) => {
     // Create negative ticks in order without 0
     const negativeTicks = Array.from(
       { length: numberOfTicks - 1 },
-      (_, index) => -(numberOfTicks - 1 - index) * tickInterval,
+      (_, index) => (index - numberOfTicks + 1) * tickInterval,
     );
     ticks.unshift(...negativeTicks);
   }
