@@ -89,12 +89,12 @@ export function getUnitLabel(
   maxValue: number,
 ): {
   valueBase: number;
-  unitLabel: string;
+  unitLabel: string | undefined;
 } {
   if (!unitRange || unitRange.length === 0) {
     return {
       valueBase: 1,
-      unitLabel: '',
+      unitLabel: undefined,
     };
   }
   // first sort the unitRange
@@ -121,7 +121,7 @@ export function getUnitLabel(
 
   if (index === 0) {
     return {
-      valueBase: unitRange[index].threshold,
+      valueBase: unitRange[index].threshold || 1,
       unitLabel: unitRange[index].label,
     };
   }

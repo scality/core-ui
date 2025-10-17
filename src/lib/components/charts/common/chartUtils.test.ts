@@ -60,42 +60,29 @@ describe('getTicks', () => {
 });
 
 describe('getUnitLabel', () => {
-  const unitRange = [
+  const unitRange: UnitRange = [
+    { threshold: 1, label: 'B' },
     { threshold: 1000, label: 'KB' },
     { threshold: 1000000, label: 'MB' },
     { threshold: 1000000000, label: 'GB' },
   ];
-
-  it('should return empty label when unitRange is empty', () => {
-    const result = getUnitLabel([], 1000);
-    expect(result).toEqual({ valueBase: 1, unitLabel: '' });
-  });
-
-  it('should return correct unit for small values', () => {
+  it('should return correct unit lable and threshold', () => {
     const result = getUnitLabel(unitRange, 500);
-    expect(result).toEqual({ valueBase: 1000, unitLabel: 'KB' });
+    expect(result).toEqual({ valueBase: 1, unitLabel: 'B' });
+    const result2 = getUnitLabel(unitRange, 500000);
+    expect(result2).toEqual({ valueBase: 1000, unitLabel: 'KB' });
+    const result3 = getUnitLabel(unitRange, 500000000);
+    expect(result3).toEqual({ valueBase: 1000000, unitLabel: 'MB' });
+    const result4 = getUnitLabel(unitRange, 500000000000);
+    expect(result4).toEqual({ valueBase: 1000000000, unitLabel: 'GB' });
   });
 
-  it('should return correct unit for medium values', () => {
-    const result = getUnitLabel(unitRange, 50000);
-    expect(result).toEqual({ valueBase: 1000, unitLabel: 'KB' });
-  });
-
-  it('should return correct unit for large values', () => {
-    const result = getUnitLabel(unitRange, 5000000);
-    expect(result).toEqual({ valueBase: 1000000, unitLabel: 'MB' });
-  });
-
-  it('should return last unit for very large values', () => {
-    const result = getUnitLabel(unitRange, 5000000000);
-    expect(result).toEqual({ valueBase: 1000000000, unitLabel: 'GB' });
-  });
-
-  it('should sort unitRange if not sorted', () => {
+  it('should return correct unit for medium values even if range is disordered', () => {
     const unsortedRange = [
       { threshold: 1000000, label: 'MB' },
       { threshold: 1000, label: 'KB' },
       { threshold: 1000000000, label: 'GB' },
+      { threshold: 1, label: 'B' },
     ];
     const result = getUnitLabel(unsortedRange, 50000);
     expect(result).toEqual({ valueBase: 1000, unitLabel: 'KB' });

@@ -4,7 +4,8 @@
 
 /**
  * Unit range configuration for automatic unit scaling
- * Used by LineTimeSerieChart and Barchart
+ * Should at least have base unit with threshold 1
+ * @example [{ threshold: 1, label: 'B' }, { threshold: 1000, label: 'kB' }]
  */
 export type UnitRange = {
   threshold: number;
@@ -13,7 +14,6 @@ export type UnitRange = {
 
 /**
  * Time-based chart configuration
- * Used by Barchart
  * @param startDate - Start date
  * @param endDate - End date
  * @param interval - Interval in milliseconds
@@ -29,7 +29,6 @@ export type TimeType = {
 
 /**
  * Category-based chart configuration
- * Used by Barchart
  */
 export type CategoryType = {
   type: 'category';
