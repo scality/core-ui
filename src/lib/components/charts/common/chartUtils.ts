@@ -1,4 +1,6 @@
 import { NAN_STRING } from '../../constants';
+import { TooltipDateFormat } from './ChartTooltip';
+import { UnitRange } from '../types';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -27,7 +29,6 @@ export const getRoundReferenceValue = (value: number): number => {
   const normalized = bufferedValue / magnitude;
 
   // Round to nice numbers based on normalized value
-  // skip 1.5, 3, 4, 7.5 as top value for better chart
   // appearance for small values
   let result: number;
 
@@ -53,7 +54,10 @@ export const getTicks = (topValue: number, isSymmetrical: boolean) => {
       return [0, topValue];
     }
   }
-  const numberOfTicks = topValue % 3 === 0 ? 4 : 3;
+  const possibleTickNumbers = [4, 3, 6];
+  const numberOfTicks =
+    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 2; // Default to 2 ticks if no match
+
   const tickInterval = topValue / (numberOfTicks - 1);
   const ticks = Array.from(
     { length: numberOfTicks },
@@ -130,6 +134,52 @@ export function getUnitLabel(
 }
 
 /**
+ * Computes unit label and normalizes chart data based on unit range.
+ * This is shared logic used by both Barchart and LineTimeSerieChart.
+ *
+ * @param data - Chart data to normalize
+ * @param maxValue - Maximum value in the dataset
+ * @param unitRange - Optional unit range configuration for automatic scaling
+ * @param excludeKey - Key to exclude from normalization (e.g., 'category' for Barchart, 'timestamp' for LineTimeSerieChart)
+ * @returns Object containing unit label, top value for Y-axis, and normalized data
+ */
+export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
+  data: T[],
+  maxValue: number,
+  unitRange: UnitRange | undefined,
+  excludeKey: string,
+): {
+  unitLabel: string | undefined;
+  topValue: number;
+  rechartsData: T[];
+} => {
+  // If no unit range provided, just calculate top value without unit conversion
+  if (!unitRange || unitRange.length === 0) {
+    const topValue = getRoundReferenceValue(maxValue);
+    return { unitLabel: undefined, topValue, rechartsData: data };
+  }
+
+  // Get appropriate unit and value base for normalization
+  const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
+  const topValue = getRoundReferenceValue(maxValue / valueBase);
+
+  // Normalize all numeric values by dividing by valueBase
+  const rechartsData = data.map((dataPoint) => {
+    const normalizedDataPoint: Record<string, number | string> = {
+      ...dataPoint,
+    };
+    Object.entries(dataPoint).forEach(([key, value]) => {
+      if (key !== excludeKey && typeof value === 'number') {
+        normalizedDataPoint[key] = value / valueBase;
+      }
+    });
+    return normalizedDataPoint as T;
+  });
+
+  return { unitLabel, topValue, rechartsData };
+};
+
+/**
  * This function manually adds the missing data points with `null` value caused by downtime of the VMs
  * Missing data points are only added when the gap between consecutive data points is bigger than 2 intervals
  * Used by LineTimeSerieChart and Sparkline
@@ -140,13 +190,13 @@ export function getUnitLabel(
  * @param sampleInterval - The time difference between two data points in seconds
  */
 export function addMissingDataPoint(
-  orginalValues: [number, number | string | null][],
+  originalValues: [number, number | string | null][],
   startingTimeStamp?: number,
   sampleDuration?: number,
   sampleInterval?: number,
 ): [number, number | string | null][] {
   if (
-    !orginalValues ||
+    !originalValues ||
     startingTimeStamp === undefined ||
     !sampleDuration ||
     !sampleInterval ||
@@ -158,7 +208,7 @@ export function addMissingDataPoint(
   }
 
   // If there are no original values, return empty array
-  if (orginalValues.length === 0) {
+  if (originalValues.length === 0) {
     return [];
   }
 
@@ -167,26 +217,26 @@ export function addMissingDataPoint(
   // add missing data points for the starting time
   for (
     let i = startingTimeStamp;
-    i < orginalValues[0][0];
+    i < originalValues[0][0];
     i += sampleInterval
   ) {
     newValues.push([i, NAN_STRING]);
   }
 
   // Process all but the last element
-  for (let i = 0; i < orginalValues.length - 1; i++) {
+  for (let i = 0; i < originalValues.length - 1; i++) {
     if (
-      orginalValues[i][0] < startingTimeStamp ||
-      orginalValues[i][0] > startingTimeStamp + sampleDuration
+      originalValues[i][0] < startingTimeStamp ||
+      originalValues[i][0] > startingTimeStamp + sampleDuration
     ) {
       continue;
     }
 
     // Always add the current data point
-    newValues.push(orginalValues[i]);
+    newValues.push(originalValues[i]);
 
-    const currentTimestamp = orginalValues[i][0];
-    const nextTimestamp = orginalValues[i + 1][0];
+    const currentTimestamp = originalValues[i][0];
+    const nextTimestamp = originalValues[i + 1][0];
     const gap = nextTimestamp - currentTimestamp;
 
     // Calculate how many missing points to add
@@ -200,11 +250,11 @@ export function addMissingDataPoint(
   }
 
   // Add the last element
-  newValues.push(orginalValues[orginalValues.length - 1]);
+  newValues.push(originalValues[originalValues.length - 1]);
 
   // add missing data points for the ending time
   for (
-    let i = orginalValues[orginalValues.length - 1][0] + sampleInterval;
+    let i = originalValues[originalValues.length - 1][0] + sampleInterval;
     i < startingTimeStamp + sampleDuration;
     i += sampleInterval
   ) {
@@ -213,21 +263,58 @@ export function addMissingDataPoint(
 
   return newValues;
 }
+/**
+ * Date Format Reference Table
+ * ============================
+ *
+ * This table documents the date formatting logic used across charts:
+ * - X-Axis Format: Used for chart axis labels (formatXAxisDate + LineTimeSerieChart's formatXAxisLabel)
+ * - Tooltip Format: Used for tooltip headers (getTooltipDateFormat)
+ *
+ * ┌─────────────────┬──────────────┬────────────────────────┬──────────────────┬──────────────────────────────────────────┬───────────────────────────┐
+ * │ Interval        │ Duration (s) │ X-axis format          │ Example (X-axis) │ Tooltip format                           │ Example (Tooltip)         │
+ * ├─────────────────┼──────────────┼────────────────────────┼──────────────────┼──────────────────────────────────────────┼───────────────────────────┤
+ * │ Last hour       │ ≤ 3,600      │ HH:MM                  │ 14:05            │ DD MMM HH:MM:SS                          │ 01 Oct 00:15:00           │
+ * │ Last 24 hours   │ ≤ 86,400     │ HH:MM                  │ 23:00            │ DD MMM HH:MM                             │ 01 Oct 00:15              │
+ * │ Last 7 days     │ ≤ 604,800    │ DD MMM HH:MM           │ 27 Sep 10:12     │ DD MMM HH:MM                             │ 01 Oct 00:15              │
+ * │ Long term       │ > 604,800    │ DDMMMYY                │ 15Sep25          │ DD MMM YYYY HH:MM                        │ 01 Oct 2025 00:15         │
+ * └─────────────────┴──────────────┴────────────────────────┴──────────────────┴──────────────────────────────────────────┴───────────────────────────┘
+ *
+ * Note: Duration is in seconds. Some intervals share the same format, which is why both functions only have 3 cases.
+ */
 
 /**
  * Get the format of the date based on the duration
  * Used by Barchart CustomTick component
- * @param duration - Duration in milliseconds
+ * @param duration - Duration in seconds
  * @returns Formatted string type
  */
-export const formatDate = (
+export const formatXAxisDate = (
   duration: number,
 ): 'time' | 'day-month-abbreviated' | 'chart-long-term-date' => {
-  if (duration <= 24 * 60 * 60 * 1000) {
+  if (duration <= 24 * 60 * 60) {
     return 'time';
-  } else if (duration <= 7 * 24 * 60 * 60 * 1000) {
+  } else if (duration <= 7 * 24 * 60 * 60) {
     return 'day-month-abbreviated';
   } else {
     return 'chart-long-term-date';
+  }
+};
+
+/**
+ * Get the format of the date based on the duration
+ * Used by TooltipHeader component
+ * @param duration - Duration in seconds
+ * @returns Formatted string type
+ */
+export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
+  duration: number,
+) => {
+  if (duration <= 60 * 60) {
+    return 'day-month-abbreviated-hour-minute-second';
+  } else if (duration <= 7 * 24 * 60 * 60) {
+    return 'day-month-abbreviated-hour-minute';
+  } else {
+    return 'day-month-abbreviated-year-hour-minute';
   }
 };

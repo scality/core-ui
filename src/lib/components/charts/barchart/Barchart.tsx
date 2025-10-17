@@ -14,7 +14,7 @@ import { chartColors, ChartColors, fontSize } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
 import { getTicks } from '../common/chartUtils';
-import { UnitRange, useChartData } from './Barchart.utils';
+import { useChartData } from './Barchart.utils';
 import {
   ChartHeader,
   ChartError,
@@ -22,7 +22,7 @@ import {
   CustomTick,
   StyledResponsiveContainer,
 } from '../common/SharedComponents';
-import { TimeType, CategoryType } from '../types';
+import { TimeType, CategoryType, UnitRange } from '../types';
 
 const CHART_CONSTANTS = {
   TICK_WIDTH_OFFSET: 4,

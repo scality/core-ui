@@ -2,14 +2,8 @@ import { BarchartProps, BarchartBars } from './Barchart';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
-import {
-  getRoundReferenceValue,
-  getTicks,
-  getUnitLabel,
-} from '../common/chartUtils';
-
-// Re-export shared utilities for convenience
-export { getRoundReferenceValue, getTicks, getUnitLabel };
+import { normalizeChartDataWithUnits } from '../common/chartUtils';
+import { UnitRange } from '../types';
 
 export const getMaxBarValue = (
   data: { [key: string]: string | number }[],
@@ -182,14 +176,19 @@ export const applySortingToData = <T extends BarchartBars>(
   defaultSort: BarchartProps<T>['defaultSort'],
 ) => {
   const points = data.map((item) => {
-    const point: any = { category: item.category };
+    const point: Record<string, string | number> = { category: item.category };
     barDataKeys.forEach((dataKey) => {
       point[dataKey] = Number(item[dataKey]) || 0;
     });
     return point;
   });
 
-  points.sort(defaultSort);
+  points.sort(
+    defaultSort as (
+      a: Record<string, string | number>,
+      b: Record<string, string | number>,
+    ) => number,
+  );
 
   return points.map((point) => {
     const dataItem: { [key: string]: string | number } = {
@@ -273,46 +272,6 @@ export const formatPrometheusDataToRechartsDataAndBars = <
   return {
     rechartsBars: sortedRechartsBars,
     data,
-  };
-};
-
-export type UnitRange = {
-  threshold: number;
-  label: string;
-}[];
-
-export const computeUnitLabelAndRoundReferenceValue = (
-  data: any,
-  maxValue: number,
-  unitRange: UnitRange | undefined,
-) => {
-  if (!unitRange) {
-    const roundReferenceValue = getRoundReferenceValue(maxValue);
-    return {
-      unitLabel: undefined,
-      roundReferenceValue,
-      rechartsData: data,
-      topDomain: maxValue * 1.1,
-    };
-  }
-
-  const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
-  const topValue = maxValue / valueBase;
-  const roundReferenceValue = getRoundReferenceValue(topValue);
-  const rechartsData = data.map((dataPoint) => {
-    const normalizedDataPoint = { ...dataPoint };
-    Object.entries(dataPoint).forEach(([key, value]) => {
-      if (key !== 'category' && typeof value === 'number') {
-        normalizedDataPoint[key] = value / valueBase;
-      }
-    });
-    return normalizedDataPoint;
-  });
-  return {
-    unitLabel,
-    roundReferenceValue,
-    rechartsData,
-    topDomain: topValue * 1.1,
   };
 };
 
@@ -441,14 +400,17 @@ export const useChartData = <T extends BarchartBars>(
 
   const maxValue = getMaxBarValue(filteredData, stacked);
 
-  const { unitLabel, roundReferenceValue, rechartsData, topDomain } =
-    computeUnitLabelAndRoundReferenceValue(filteredData, maxValue, unitRange);
+  const { unitLabel, topValue, rechartsData } = normalizeChartDataWithUnits(
+    filteredData,
+    maxValue,
+    unitRange,
+    'category',
+  );
 
   return {
     rechartsBars: filteredRechartsBars,
-    unitLabel,
-    topDomain,
-    roundReferenceValue,
+    unitLabel: unitLabel,
+    roundReferenceValue: topValue,
     rechartsData,
   };
 };

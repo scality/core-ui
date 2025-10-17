@@ -1,17 +1,13 @@
 import { coreUIAvailableThemes } from '../../../style/theme';
 import {
   applySortingToData,
-  computeUnitLabelAndRoundReferenceValue,
   filterChartDataAndBarsByLegendSelection,
   formatPrometheusDataToRechartsDataAndBars,
   getCurrentPoint,
   getMaxBarValue,
-  getRoundReferenceValue,
-  getTicks,
   sortStackedBars,
   transformCategoryData,
   transformTimeData,
-  UnitRange,
 } from './Barchart.utils';
 
 // Test date constants to avoid repetition
@@ -504,77 +500,6 @@ describe('applySortingToData', () => {
   });
 });
 
-describe('getRoundReferenceValue', () => {
-  it('should return appropriate rounded values with 10% buffer', () => {
-    // Small values (< 10)
-    expect(getRoundReferenceValue(0.1)).toBe(0.1); // 0.1 → 0.11 → 0.1 (magnitude 0.1, remainder 0.01)
-    expect(getRoundReferenceValue(1)).toBe(1); // 1 → 1.1 → 1 (magnitude 1, remainder 0.1)
-    expect(getRoundReferenceValue(2)).toBe(2); // 2 → 2.2 → 2 (magnitude 1, remainder 0.2)
-    expect(getRoundReferenceValue(3)).toBe(3); // 3 → 3.3 → 3 (magnitude 1, remainder 0.3)
-
-    // Values 5-10 range
-    expect(getRoundReferenceValue(6)).toBe(6); // 6 → 6.6 → 6 (magnitude 1, remainder 0.6)
-    expect(getRoundReferenceValue(9)).toBe(9); // 9 → 9.9 → 9 (magnitude 1, remainder 0.9)
-
-    // Larger values get 10% buffer applied
-    expect(getRoundReferenceValue(15)).toBe(10); // 15 → 16.5, remainder 5, incremented 20 > 16.5, so round down to 10
-    expect(getRoundReferenceValue(35)).toBe(30); // 35 → 38.5, remainder 5, incremented 40 > 38.5, so round down to 30
-    expect(getRoundReferenceValue(75)).toBe(80); // 75 → 82.5, remainder 5, incremented 80 <= 82.5, so round up to 80
-    expect(getRoundReferenceValue(150)).toBe(150); // 150 → 165, remainder 0, so return 150
-    expect(getRoundReferenceValue(350)).toBe(350); // 350 → 385, remainder 0, so return 350
-    expect(getRoundReferenceValue(750)).toBe(750); // 750 → 825, remainder 0, so return 750
-    expect(getRoundReferenceValue(1500)).toBe(1500); // 1500 → 1650, remainder 0, so return 1500
-    expect(getRoundReferenceValue(3500)).toBe(3500); // 3500 → 3850, remainder 0, so return 3500
-    expect(getRoundReferenceValue(7500)).toBe(7500); // 7500 → 8250, remainder 0, so return 7500
-    expect(getRoundReferenceValue(15000)).toBe(15000); // 15000 → 16500, remainder 0, so return 15000
-  });
-});
-
-describe('getTicks', () => {
-  describe('small values (< 10)', () => {
-    it('should return 2 ticks for non-symmetrical small values', () => {
-      expect(getTicks(1, false)).toEqual([0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks
-      expect(getTicks(2, false)).toEqual([0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks
-      expect(getTicks(5, false)).toEqual([0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks
-    });
-
-    it('should return 3 ticks for symmetrical small values', () => {
-      expect(getTicks(1, true)).toEqual([-1, -0.5, 0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks, symmetrical adds negatives
-      expect(getTicks(2, true)).toEqual([-2, -1, 0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks, symmetrical adds negatives
-      expect(getTicks(5, true)).toEqual([-5, -2.5, 0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks, symmetrical adds negatives
-    });
-  });
-
-  describe('even topValue (divisible by 2)', () => {
-    it('should return 3 ticks for non-symmetrical even values', () => {
-      expect(getTicks(10, false)).toEqual([0, 5, 10]);
-      expect(getTicks(20, false)).toEqual([0, 10, 20]);
-      expect(getTicks(40, false)).toEqual([0, 20, 40]);
-      expect(getTicks(50, false)).toEqual([0, 25, 50]);
-      expect(getTicks(100, false)).toEqual([0, 50, 100]);
-      expect(getTicks(1000, false)).toEqual([0, 500, 1000]);
-    });
-
-    it('should return 5 ticks for symmetrical even values', () => {
-      expect(getTicks(10, true)).toEqual([-10, -5, 0, 5, 10]);
-      expect(getTicks(100, true)).toEqual([-100, -50, 0, 50, 100]);
-    });
-  });
-
-  describe('odd topValue (not divisible by 2) - 7.5 multiples', () => {
-    it('should return 4 ticks for non-symmetrical values from 7.5 × magnitude', () => {
-      expect(getTicks(75, false)).toEqual([0, 25, 50, 75]);
-      expect(getTicks(750, false)).toEqual([0, 250, 500, 750]);
-      expect(getTicks(7500, false)).toEqual([0, 2500, 5000, 7500]);
-    });
-
-    it('should return 7 ticks for symmetrical values from 7.5 × magnitude', () => {
-      expect(getTicks(75, true)).toEqual([-75, -50, -25, 0, 25, 50, 75]);
-      expect(getTicks(750, true)).toEqual([-750, -500, -250, 0, 250, 500, 750]);
-    });
-  });
-});
-
 describe('getMaxBarValue', () => {
   it('should return the maximum value from chart data', () => {
     const data = [
@@ -713,70 +638,6 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
 
     // Should integrate: category transformation + custom sorting
     expect(result.data.map((item) => item.category)).toEqual(['A', 'B', 'C']);
-  });
-});
-
-describe('computeUnitLabelAndRoundReferenceValue', () => {
-  it('should compute the unit label and round reference value correctly when reaching threshold', () => {
-    const data = [
-      {
-        category: 'category1',
-        success: 1680,
-      },
-    ];
-    const maxValue = 1680;
-    const unitRange: UnitRange = [
-      {
-        threshold: 1000,
-        label: 'kB',
-      },
-    ];
-    const result = computeUnitLabelAndRoundReferenceValue(
-      data,
-      maxValue,
-      unitRange,
-    );
-
-    expect(result.unitLabel).toBe('kB');
-    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 1 (magnitude 1, remainder 0.848)
-    expect(result.roundReferenceValue).toBe(1);
-    expect(result.rechartsData).toEqual([
-      {
-        category: 'category1',
-        success: 1.68,
-      },
-    ]);
-  });
-  it('should compute the unit label and round reference value correctly when threshold is 0', () => {
-    const data = [
-      {
-        category: 'category1',
-        success: 680,
-      },
-    ];
-    const maxValue = 680;
-    const unitRange: UnitRange = [
-      {
-        threshold: 0,
-        label: 'B',
-      },
-      {
-        threshold: 1000,
-        label: 'kB',
-      },
-    ];
-    const result = computeUnitLabelAndRoundReferenceValue(
-      data,
-      maxValue,
-      unitRange,
-    );
-
-    expect(result.unitLabel).toBe('B');
-    // 680 with buffer: 748 → rounds to 680 (value >= 10, remainder 0, rounds down)
-    expect(result.roundReferenceValue).toBe(680);
-    expect(result.rechartsData).toEqual([
-      { category: 'category1', success: 680 },
-    ]);
   });
 });
 

@@ -153,7 +153,10 @@ type IconProps = {
   title?: string;
 };
 
-export const customIcons: Record<string, ((props: IconProps) => JSX.Element) & { displayName?: string }> = {
+export const customIcons: Record<
+  string,
+  ((props: IconProps) => JSX.Element) & { displayName?: string }
+> = {
   'Remote-user': ({ 'aria-label': ariaLabel, color, size }) => (
     <RemoteUser ariaLabel={ariaLabel} color={color} size={size} />
   ),
@@ -259,7 +262,8 @@ function NonWrappedIcon({
     }
 
     const [iconType, iconClass] = iconInfo.split(' ');
-    const fontAwesomeType = iconType === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons';
+    const fontAwesomeType =
+      iconType === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons';
     const cacheKey = `${fontAwesomeType}/${iconClass}`;
     if (iconCache[cacheKey]) {
       setIcon(iconCache[cacheKey]);
@@ -267,11 +271,10 @@ function NonWrappedIcon({
     }
 
     // Handle FontAwesome icons with dynamic import
-    import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`)
-      .then((module) => {
-        setIcon(module[iconClass]);
-        iconCache[cacheKey] = module[iconClass];
-      });
+    import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`).then((module) => {
+      setIcon(module[iconClass]);
+      iconCache[cacheKey] = module[iconClass];
+    });
     return () => setIcon(undefined);
   }, [name, iconInfo]);
 
@@ -292,7 +295,7 @@ function NonWrappedIcon({
       title={title}
       aria-label={`${name} ${ariaLabel}`}
       {...rest}
-      />
+    />
   );
 }
 

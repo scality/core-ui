@@ -24,6 +24,12 @@ type SparklineProps = {
 /**
  * Sparkline is a simple dynamically sized area chart.
  * Used to show trends in data over time.
+ * @param serie - The data series to display
+ * @param startingTimeStamp - The starting timestamp in seconds
+ * @param sampleDuration - The total duration in seconds to cover in the sparkline
+ * @param sampleInterval - The interval in seconds between data points
+ * @param yAxisType - The type of y-axis to display
+ * @returns The sparkline component
  */
 export function Sparkline({
   serie,

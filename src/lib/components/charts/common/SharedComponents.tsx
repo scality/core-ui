@@ -7,7 +7,8 @@ import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { IconHelp } from '../../iconhelper/IconHelper';
 import { Loader } from '../../loader/Loader.component';
 import { Text } from '../../text/Text.component';
-import { formatDate } from './chartUtils';
+import { formatXAxisDate, maxWidthTooltip } from './chartUtils';
+import { TimeType } from '../types';
 
 /**
  * Styled ResponsiveContainer for charts
@@ -62,8 +63,6 @@ export const ChartLoading = ({ height }: ChartLoadingOrErrorProps) => {
   );
 };
 
-const maxWidthTooltip = { maxWidth: '20rem' };
-
 interface ChartHeaderProps {
   title?: string;
   secondaryTitle?: string;
@@ -109,15 +108,6 @@ export const ChartHeader = ({
   );
 };
 
-interface TimeType {
-  type: 'time';
-  timeRange: {
-    startDate: Date;
-    endDate: Date;
-    interval: number;
-  };
-}
-
 interface CustomTickProps {
   x: number;
   y: number;
@@ -149,7 +139,9 @@ export const CustomTick = ({
 
   const duration =
     type.type === 'time'
-      ? type.timeRange.endDate.getTime() - type.timeRange.startDate.getTime()
+      ? (type.timeRange.endDate.getTime() -
+          type.timeRange.startDate.getTime()) /
+        1000
       : 0;
 
   return (
@@ -166,7 +158,7 @@ export const CustomTick = ({
           <Text variant="Smaller">
             {type.type === 'time' ? (
               <FormattedDateTime
-                format={formatDate(duration)}
+                format={formatXAxisDate(duration)}
                 value={new Date(payload.value)}
               />
             ) : (

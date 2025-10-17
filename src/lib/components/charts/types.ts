@@ -4,7 +4,7 @@
 
 /**
  * Unit range configuration for automatic unit scaling
- * Used by LineTimeSerieChart
+ * Used by LineTimeSerieChart and Barchart
  */
 export type UnitRange = {
   threshold: number;
@@ -14,6 +14,9 @@ export type UnitRange = {
 /**
  * Time-based chart configuration
  * Used by Barchart
+ * @param startDate - Start date
+ * @param endDate - End date
+ * @param interval - Interval in milliseconds
  */
 export type TimeType = {
   type: 'time';

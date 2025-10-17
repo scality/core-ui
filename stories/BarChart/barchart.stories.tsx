@@ -39,19 +39,19 @@ export const Playground: Story = {
       {
         label: 'Success',
         data: [
-          ['category1', 1],
-          ['category2', 1],
-          ['category3', 2],
+          ['category1', 0.001],
+          ['category2', 0.005],
+          ['category3', 0.002],
         ],
       },
-      {
-        label: 'Failed',
-        data: [
-          ['category1', 1],
-          ['category2', 1],
-          ['category3', 2],
-        ],
-      },
+      // {
+      //   label: 'Failed',
+      //   data: [
+      //     ['category1', 1],
+      //     ['category2', 1],
+      //     ['category3', 2],
+      //   ],
+      // },
     ] as const;
     return (
       <ChartLegendWrapper

@@ -28,10 +28,9 @@ import {
 } from '../common/ChartTooltip';
 import {
   addMissingDataPoint,
-  getRoundReferenceValue,
   getTicks,
-  getUnitLabel,
   maxWidthTooltip,
+  normalizeChartDataWithUnits,
 } from '../common/chartUtils';
 import { formatXAxisLabel } from './LineTimeSerieChart.utils';
 
@@ -211,6 +210,16 @@ const isSymmetricalSeries = (
   return 'above' in series && 'below' in series;
 };
 
+/**
+ * Props for LineTimeSerieChart component
+ * @param series - The data series to display
+ * @param title - The title of the chart
+ * @param height - The height of the chart in pixels
+ * @param startingTimeStamp - Starting timestamp in seconds
+ * @param interval - Interval between data points in seconds
+ * @param duration - Total duration of the chart in seconds
+ *
+ */
 export function LineTimeSerieChart({
   series,
   title,
@@ -361,7 +370,6 @@ export function LineTimeSerieChart({
 
   // 3. Transform the data base on the valuebase
   const { topValue, unitLabel, rechartsData, topDomain } = useMemo(() => {
-
     const values = chartData.flatMap((dataPoint) =>
       Object.entries(dataPoint)
         .filter(([key]) => key !== 'timestamp')
@@ -386,22 +394,20 @@ export function LineTimeSerieChart({
     const top = Math.abs(Math.max(...values));
     const bottom = Math.abs(Math.min(...values));
     const maxValue = Math.max(top, bottom);
-    const { valueBase, unitLabel } = yAxisType === 'percentage' ? { valueBase: 1, unitLabel: '%' } : getUnitLabel(unitRange ?? [], maxValue);
-    // Use round reference value to add extra padding to the top value
-    const basedValue = maxValue / valueBase
-    const topDomain = basedValue * 1.1;
-    const topValue = getRoundReferenceValue(basedValue);
-    const rechartsData = chartData.map((dataPoint) => {
-      const normalizedDataPoint = { ...dataPoint };
-      Object.entries(dataPoint).forEach(([key, value]) => {
-        if (key !== 'timestamp' && typeof value === 'number') {
-          normalizedDataPoint[key] = value / valueBase;
-        }
-      });
-      return normalizedDataPoint;
-    });
 
-    return { topValue, unitLabel, rechartsData, topDomain };
+    // Use shared normalization function
+    const result = normalizeChartDataWithUnits(
+      chartData,
+      maxValue,
+      unitRange,
+      'timestamp', // LineTimeSerieChart uses 'timestamp' as the key to exclude
+    );
+
+    return {
+      topValue: result.topValue,
+      unitLabel: result.unitLabel,
+      rechartsData: result.rechartsData,
+    };
   }, [chartData, yAxisType, unitRange]);
 
   // Group series by resource and create color mapping

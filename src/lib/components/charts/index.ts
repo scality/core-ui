@@ -44,7 +44,9 @@ export {
   getTicks,
   getUnitLabel,
   addMissingDataPoint,
-  formatDate,
+  formatXAxisDate,
+  getTooltipDateFormat,
+  normalizeChartDataWithUnits,
 } from './common/chartUtils';
 
 // Context Providers (for backward compatibility)

@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { spacing } from '../../../spacing';
 import { fontSize, fontWeight } from '../../../style/theme';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
+import { getTooltipDateFormat } from './chartUtils';
 
 export const ChartTooltipContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
@@ -106,31 +107,17 @@ export type TooltipDateFormat =
   | 'day-month-abbreviated-hour-minute-second'
   | 'day-month-abbreviated-hour-minute';
 
-/**
- * Get the format of the date based on the duration
- * Used by TooltipHeader component
- * @param duration - Duration in seconds
- * @returns Formatted string type
- */
-const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
-  duration: number,
-) => {
-  if (duration <= 60 * 60) {
-    return 'day-month-abbreviated-hour-minute-second';
-  } else if (duration <= 7 * 24 * 60 * 60) {
-    return 'day-month-abbreviated-hour-minute';
-  } else {
-    return 'day-month-abbreviated-year-hour-minute';
-  }
-};
-
-export const TooltipHeader = ({
-  duration,
-  value,
-}: {
+export type TooltipHeaderProps = {
   duration: number;
   value: string | number;
-}) => {
+};
+/**
+ * Tooltip header component
+ * @param duration - Duration in seconds
+ * @param value - Value to format
+ * @returns Formatted string type
+ */
+export const TooltipHeader = ({ duration, value }: TooltipHeaderProps) => {
   const timeFormat = getTooltipDateFormat(duration);
   return (
     <ChartTooltipHeader>

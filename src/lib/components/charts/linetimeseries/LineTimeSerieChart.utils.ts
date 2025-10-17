@@ -11,13 +11,11 @@ export type ChartDataPoint = {
 } & Record<string, number | null>;
 
 /**
- * Formats timestamp for X-axis labels based on time format and data range:
- * For 'date-time' format, return day-month-abbreviated-hour-minute format
- * For 'date' format, return YYYY-MM-DD format if time range is greater than 1 year, otherwise return MM-DD format
+ * Formats timestamp for X-axis labels based on duration
+ *
  *
  * @param timestamp - The timestamp to format in milliseconds
- * @param timeFormat - The format type ('date-time' or 'date')
- * @param chartData - The chart data to determine time range for optimal formatting
+ * @param duration - The duration in seconds
  * @returns Formatted string for display on X-axis
  */
 export const formatXAxisLabel = (
