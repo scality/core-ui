@@ -66,7 +66,7 @@ describe('getUnitLabel', () => {
     { threshold: 1000000, label: 'MB' },
     { threshold: 1000000000, label: 'GB' },
   ];
-  it('should return correct unit lable and threshold', () => {
+  it('should return correct unit label and threshold', () => {
     const result = getUnitLabel(unitRange, 500);
     expect(result).toEqual({ valueBase: 1, unitLabel: 'B' });
     const result2 = getUnitLabel(unitRange, 500000);
