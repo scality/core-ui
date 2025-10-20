@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Stack } from '../../spacing';
 import { fontSize } from '../../style/theme';
 import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
@@ -34,12 +34,6 @@ import { getRoundReferenceValue, getTicks } from '../barchartv2/utils';
 import { IconHelp } from '../iconhelper/IconHelper';
 
 const maxWidthTooltip = { maxWidth: '20rem' };
-
-const LineTemporalChartWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
 
 export type Serie = {
   // the name of the resource
@@ -460,7 +454,7 @@ export function LineTimeSerieChart({
   );
 
   return (
-    <LineTemporalChartWrapper>
+    <Stack direction="vertical" style={{ gap: '0' }}>
       <Stack gap="r4">
         <ChartTitleText>
           {title} {unitLabel && `(${unitLabel})`}
@@ -582,6 +576,6 @@ export function LineTimeSerieChart({
           </LineChart>
         </StyledResponsiveContainer>
       </div>
-    </LineTemporalChartWrapper>
+    </Stack>
   );
 }
