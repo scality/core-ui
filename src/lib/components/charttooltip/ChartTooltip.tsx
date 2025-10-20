@@ -109,9 +109,9 @@ export type TooltipDateFormat =
 const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
   duration: number,
 ) => {
-  if (duration <= 60 * 60 * 1000) {
+  if (duration <= 60 * 60) {
     return 'day-month-abbreviated-hour-minute-second';
-  } else if (duration <= 7 * 24 * 60 * 60 * 1000) {
+  } else if (duration <= 7 * 24 * 60 * 60) {
     return 'day-month-abbreviated-hour-minute';
   } else {
     return 'day-month-abbreviated-year-hour-minute';

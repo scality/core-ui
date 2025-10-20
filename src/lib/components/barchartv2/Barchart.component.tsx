@@ -113,15 +113,15 @@ interface CustomTickProps {
 
 /**
  * Get the format of the date based on the duration
- * @param duration - Duration in milliseconds
+ * @param duration - Duration in seconds
  * @returns Formatted string
  */
 export const formatDate = (
   duration: number,
 ): 'time' | 'day-month-abbreviated' | 'chart-long-term-date' => {
-  if (duration <= 24 * 60 * 60 * 1000) {
+  if (duration <= 24 * 60 * 60) {
     return 'time';
-  } else if (duration <= 7 * 24 * 60 * 60 * 1000) {
+  } else if (duration <= 7 * 24 * 60 * 60) {
     return 'day-month-abbreviated';
   } else {
     return 'chart-long-term-date';
@@ -160,7 +160,7 @@ export const CustomTick = ({
           <Text variant="Smaller">
             {type.type === 'time' ? (
               <FormattedDateTime
-                format={formatDate(duration)}
+                format={formatDate(duration / 1000)}
                 value={new Date(payload.value)}
               />
             ) : (
