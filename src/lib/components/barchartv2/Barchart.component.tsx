@@ -143,7 +143,9 @@ export const CustomTick = ({
 
   const duration =
     type.type === 'time'
-      ? type.timeRange.endDate.getTime() - type.timeRange.startDate.getTime()
+      ? (type.timeRange.endDate.getTime() -
+          type.timeRange.startDate.getTime()) /
+        1000
       : 0;
 
   return (
@@ -160,7 +162,7 @@ export const CustomTick = ({
           <Text variant="Smaller">
             {type.type === 'time' ? (
               <FormattedDateTime
-                format={formatDate(duration / 1000)}
+                format={formatDate(duration)}
                 value={new Date(payload.value)}
               />
             ) : (
