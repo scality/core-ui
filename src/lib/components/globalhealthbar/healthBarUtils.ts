@@ -7,7 +7,7 @@ import { fontSize } from '../../style/theme';
 export const CHART_CONFIG = {
   RADIUS_SIZE: 4,
   EDGE_THRESHOLD: 8,
-  CHART_HEIGHT: 50,
+  CHART_HEIGHT: 35,
   BAR_SIZE: 8,
   TICK_SIZE: 4,
   TOOLTIP_OFFSET: 24,

@@ -42,7 +42,7 @@ const CustomTick = ({
       <g transform={`translate(${payload.coordinate},${y})`}>
         <text
           textAnchor="middle"
-          dy={10}
+          dy={8}
           dx={edgeMargin}
           fontSize={fontSize.smaller}
           fill={theme.textSecondary}
@@ -76,6 +76,7 @@ export const HealthBarXAxis = ({
       domain={[startTimestamp, endTimestamp]}
       tickSize={5}
       minTickGap={10}
+      height={15}
       interval={0}
       tick={(props: any) => {
         return (
