@@ -179,7 +179,7 @@ const FormGroup = ({
               ref={labelRef}
               style={{ opacity: disabled ? 0.5 : 1 }}
             >
-              <Text>
+              <Text color="textSecondary">
                 {label}
                 {requireMode !== 'all' && required && ' *'}
                 {requireMode === 'all' && !required && ' (optional)'}
@@ -261,7 +261,7 @@ const FormSection = ({
           <Wrap>
             <Stack direction="horizontal" gap="r8">
               {title.icon && <Icon name={title.icon} color="textPrimary" />}
-              <Text isEmphazed>
+              <Text isEmphazed color="textSecondary">
                 {groupNotOptional
                   ? `${title.name}`
                   : `${title.name} (optional)`}
@@ -295,14 +295,14 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <Stack direction="vertical">
-                  <Text variant="Larger">
+                  <Text variant="Larger" color="textSecondary">
                     {layout.icon && (
                       <Icon name={layout.icon} color="textSecondary" />
                     )}{' '}
                     {layout.title}
                   </Text>
                   {layout.subTitle && (
-                    <Text variant="Large" isEmphazed>
+                    <Text variant="Large" isEmphazed color="textSecondary">
                       {layout.subTitle}
                     </Text>
                   )}
