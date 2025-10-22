@@ -31,7 +31,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
             ref={ref}
             {...rest}
           />
-          {label && <Text>{label}</Text>}
+          {label && <Text color="textPrimary">{label}</Text>}
         </Stack>
       </StyledCheckbox>
     );
