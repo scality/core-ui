@@ -21,10 +21,15 @@ export const getRoundReferenceValue = (value: number): number => {
   let result: number;
 
   if (normalized <= 1) result = magnitude;
+  else if (value > 10 && normalized <= 1.5) result = 1.5 * magnitude;
   else if (normalized <= 2) result = 2 * magnitude;
+  else if (value > 10 && normalized <= 2.5) result = 2.5 * magnitude;
+  else if (value > 10 && normalized <= 3) result = 3 * magnitude;
   else if (value > 10 && normalized <= 4) result = 4 * magnitude;
   else if (normalized <= 5) result = 5 * magnitude;
-  else if (value > 10 && normalized <= 7.5) result = 7.5 * magnitude;
+  else if (value > 10 && normalized <= 6) result = 6 * magnitude;
+  else if (value > 10 && normalized <= 8) result = 8 * magnitude;
+  else if (normalized <= 10) result = 10 * magnitude;
   else result = 10 * magnitude;
 
   return result;
@@ -38,7 +43,9 @@ export const getTicks = (topValue: number, isSymmetrical: boolean) => {
       return [0, topValue];
     }
   }
-  const numberOfTicks = topValue % 3 === 0 ? 4 : 3;
+  const possibleTickNumbers = [4, 3];
+  const numberOfTicks =
+    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 2; // Default to 2 ticks if no match
   const tickInterval = topValue / (numberOfTicks - 1);
   const ticks = Array.from(
     { length: numberOfTicks },

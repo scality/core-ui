@@ -772,8 +772,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('B');
-    // 680 with buffer: 748 → rounds to 750 (7.5 * 100, value > 10)
-    expect(result.roundReferenceValue).toBe(750);
+    // 680 with buffer: 748 → rounds to 800 (8 * 100, value > 10)
+    expect(result.roundReferenceValue).toBe(800);
     expect(result.rechartsData).toEqual([
       { category: 'category1', success: 680 },
     ]);
