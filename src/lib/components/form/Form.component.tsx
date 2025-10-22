@@ -131,10 +131,9 @@ const FormGroup = ({
   disabled,
 }: FormGroupProps) => {
   const ctxt = useContext(LabelContext);
-
   if (!ctxt) {
     //intentionaly breaking rules of hooks here
-    throw new Error('FormGroup cannot be used outside of Form');
+    throw new Error('FormGroup cannot be used outside of FormSection');
   }
 
   const { maxLabelWidth, setMaxLabelWidth } = ctxt;
@@ -151,7 +150,7 @@ const FormGroup = ({
         return currentMaxLabelWidth;
       });
     }
-  }, [labelRef]);
+  }, [labelRef, labelHelpTooltip, setMaxLabelWidth]);
 
   const value = {
     disabled: disabled || false,
