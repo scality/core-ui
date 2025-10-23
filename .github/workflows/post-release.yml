@@ -12,7 +12,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
       - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -22,7 +22,7 @@ jobs:
           branch: feature/bump-core-ui-version-to-${{ env.nextVersion }}
           commit-message: Bump core-ui version to  ${{ env.nextVersion }}
           title: Bump core-ui version to  ${{ env.nextVersion }}
-          body: ''
+          body: ""
           base: ${{ github.event.repository.default_branch }}
       - uses: actions/github-script@v5
         if: ${{ steps.cpr.outputs.pull-request-number }}
@@ -37,16 +37,17 @@ jobs:
             })
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC authentication
+      contents: read
     environment: npmjs
     steps:
       - uses: actions/checkout@v3
       # Setup .npmrc file to publish to npmjs.org
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "25"
+          registry-url: "https://registry.npmjs.org"
       - run: npm install
       - run: npm run build
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
