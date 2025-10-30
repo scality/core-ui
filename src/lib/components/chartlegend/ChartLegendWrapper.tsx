@@ -41,11 +41,13 @@ export type ChartLegendWrapperProps = {
   colorSet:
     | Record<string, ChartColors | string>
     | ((seriesNames: string[]) => Record<string, ChartColors | string>);
+  sortOrder?: 'alphabetical' | 'status' | ((a: string, b: string) => number);
 };
 
 export const ChartLegendWrapper = ({
   children,
   colorSet,
+  sortOrder = 'alphabetical',
 }: ChartLegendWrapperProps) => {
   const [registeredColorSets, setRegisteredColorSets] = useState<
     Record<string, string[]>
@@ -133,8 +135,20 @@ export const ChartLegendWrapper = ({
   );
 
   const listResources = useCallback(() => {
-    return Object.keys(internalColorSet).sort();
-  }, [internalColorSet]);
+    const resources = Object.keys(internalColorSet);
+
+    if (sortOrder === 'alphabetical') {
+      return resources.sort((a, b) => a.localeCompare(b));
+    } else if (sortOrder === 'status') {
+      return ['Success', 'Warning', 'Failed'].filter((status) =>
+        resources.includes(status),
+      );
+    } else if (typeof sortOrder === 'function') {
+      return resources.sort(sortOrder);
+    }
+
+    return resources;
+  }, [internalColorSet, sortOrder]);
 
   const chartLegendState = useMemo(
     () => ({
