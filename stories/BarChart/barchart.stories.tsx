@@ -59,6 +59,7 @@ export const Playground: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
@@ -123,6 +124,7 @@ export const Time7Days: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
@@ -408,6 +410,7 @@ export const Stacked: Story = {
           Failed: theme.statusCritical,
           Warning: theme.statusWarning,
         }}
+        sortOrder="status"
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
@@ -464,6 +467,7 @@ export const DefaultSort: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Barchart
           type={{ type: 'category' }}
@@ -542,6 +546,7 @@ export const WithCustomTooltip: Story = {
             Success: theme.statusHealthy,
             Failed: theme.statusCritical,
           }}
+          sortOrder="status"
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
@@ -614,6 +619,14 @@ export const StatusColors: Story = {
           'Failed Requests': theme.statusCritical,
           'Warning Events': theme.statusWarning,
         }}
+        sortOrder={(a, b) => {
+          const statusOrder: Record<string, number> = {
+            'Success Rate': 0,
+            'Warning Events': 1,
+            'Failed Requests': 2,
+          };
+          return statusOrder[a] - statusOrder[b];
+        }}
       >
         <Stack direction="vertical" gap="r16">
           <Barchart
@@ -668,6 +681,7 @@ export const LegendShapes: Story = {
             Failed: theme.statusCritical,
             Warning: theme.statusWarning,
           }}
+          sortOrder="status"
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
@@ -685,6 +699,7 @@ export const LegendShapes: Story = {
             Failed: theme.statusCritical,
             Warning: theme.statusWarning,
           }}
+          sortOrder="status"
         >
           <Stack direction="vertical" gap="r16">
             <Barchart
@@ -740,6 +755,7 @@ export const BarchartsWithSingleLegend: Story = {
             Failed: theme.statusCritical,
             Warning: theme.statusWarning,
           }}
+          sortOrder="status"
         >
           <Barchart
             type={{ type: 'category' }}
@@ -770,6 +786,7 @@ export const ErrorState: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Barchart
           type={{ type: 'category' }}
@@ -821,6 +838,7 @@ export const StackedBarSort: Story = {
           Warning: theme.statusWarning,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Barchart
           type={{ type: 'category' }}
@@ -896,6 +914,7 @@ export const CompleteExample: Story = {
             Success: 'lineColor1',
             Failed: 'lineColor2',
           }}
+          sortOrder="status"
         >
           <Barchart
             type={{ type: 'category' }}
