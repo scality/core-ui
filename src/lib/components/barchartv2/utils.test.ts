@@ -507,41 +507,41 @@ describe('applySortingToData', () => {
 describe('getRoundReferenceValue', () => {
   it('should return appropriate rounded values with 10% buffer', () => {
     // Small values (< 10)
-    expect(getRoundReferenceValue(0.1)).toBe(0.2); // 0.1 → 0.11 → 0.2
-    expect(getRoundReferenceValue(1)).toBe(2); // 1.1 → 1.5 → 2
-    expect(getRoundReferenceValue(2)).toBe(5); // 2.2 → 3 → 5
-    expect(getRoundReferenceValue(3)).toBe(5); // 3.3 → 4 → 5
+    expect(getRoundReferenceValue(0.1)).toBe(0.1); // 0.1 → 0.11 → 0.1 (magnitude 0.1, remainder 0.01)
+    expect(getRoundReferenceValue(1)).toBe(1); // 1 → 1.1 → 1 (magnitude 1, remainder 0.1)
+    expect(getRoundReferenceValue(2)).toBe(2); // 2 → 2.2 → 2 (magnitude 1, remainder 0.2)
+    expect(getRoundReferenceValue(3)).toBe(3); // 3 → 3.3 → 3 (magnitude 1, remainder 0.3)
 
     // Values 5-10 range
-    expect(getRoundReferenceValue(6)).toBe(10); // 6.6 → 10 (skip 7.5 for values < 10)
-    expect(getRoundReferenceValue(9)).toBe(10); // 9.9 → 10
+    expect(getRoundReferenceValue(6)).toBe(6); // 6 → 6.6 → 6 (magnitude 1, remainder 0.6)
+    expect(getRoundReferenceValue(9)).toBe(9); // 9 → 9.9 → 9 (magnitude 1, remainder 0.9)
 
     // Larger values get 10% buffer applied
-    expect(getRoundReferenceValue(15)).toBe(20); // 16.5 → 20
-    expect(getRoundReferenceValue(35)).toBe(40); // 38.5 → 40
-    expect(getRoundReferenceValue(75)).toBe(100); // 82.5 → 100
-    expect(getRoundReferenceValue(150)).toBe(200); // 165 → 200
-    expect(getRoundReferenceValue(350)).toBe(400); // 385 → 400
-    expect(getRoundReferenceValue(750)).toBe(1000); // 825 → 1000
-    expect(getRoundReferenceValue(1500)).toBe(2000); // 1650 → 2000
-    expect(getRoundReferenceValue(3500)).toBe(4000); // 3850 → 4000
-    expect(getRoundReferenceValue(7500)).toBe(10000); // 8250 → 10000
-    expect(getRoundReferenceValue(15000)).toBe(20000); // 16500 → 20000
+    expect(getRoundReferenceValue(15)).toBe(10); // 15 → 16.5, remainder 5, incremented 20 > 16.5, so round down to 10
+    expect(getRoundReferenceValue(35)).toBe(30); // 35 → 38.5, remainder 5, incremented 40 > 38.5, so round down to 30
+    expect(getRoundReferenceValue(75)).toBe(80); // 75 → 82.5, remainder 5, incremented 80 <= 82.5, so round up to 80
+    expect(getRoundReferenceValue(150)).toBe(150); // 150 → 165, remainder 0, so return 150
+    expect(getRoundReferenceValue(350)).toBe(350); // 350 → 385, remainder 0, so return 350
+    expect(getRoundReferenceValue(750)).toBe(750); // 750 → 825, remainder 0, so return 750
+    expect(getRoundReferenceValue(1500)).toBe(1500); // 1500 → 1650, remainder 0, so return 1500
+    expect(getRoundReferenceValue(3500)).toBe(3500); // 3500 → 3850, remainder 0, so return 3500
+    expect(getRoundReferenceValue(7500)).toBe(7500); // 7500 → 8250, remainder 0, so return 7500
+    expect(getRoundReferenceValue(15000)).toBe(15000); // 15000 → 16500, remainder 0, so return 15000
   });
 });
 
 describe('getTicks', () => {
   describe('small values (< 10)', () => {
     it('should return 2 ticks for non-symmetrical small values', () => {
-      expect(getTicks(1, false)).toEqual([0, 1]);
-      expect(getTicks(2, false)).toEqual([0, 2]);
-      expect(getTicks(5, false)).toEqual([0, 5]);
+      expect(getTicks(1, false)).toEqual([0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks
+      expect(getTicks(2, false)).toEqual([0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks
+      expect(getTicks(5, false)).toEqual([0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks
     });
 
     it('should return 3 ticks for symmetrical small values', () => {
-      expect(getTicks(1, true)).toEqual([-1, 0, 1]);
-      expect(getTicks(2, true)).toEqual([-2, 0, 2]);
-      expect(getTicks(5, true)).toEqual([-5, 0, 5]);
+      expect(getTicks(1, true)).toEqual([-1, -0.5, 0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks, symmetrical adds negatives
+      expect(getTicks(2, true)).toEqual([-2, -1, 0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks, symmetrical adds negatives
+      expect(getTicks(5, true)).toEqual([-5, -2.5, 0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks, symmetrical adds negatives
     });
   });
 
@@ -738,8 +738,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('kB');
-    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 2
-    expect(result.roundReferenceValue).toBe(2);
+    // 1680 / 1000 = 1.68, with buffer: 1.848 → rounds to 1 (magnitude 1, remainder 0.848)
+    expect(result.roundReferenceValue).toBe(1);
     expect(result.rechartsData).toEqual([
       {
         category: 'category1',
@@ -772,8 +772,8 @@ describe('computeUnitLabelAndRoundReferenceValue', () => {
     );
 
     expect(result.unitLabel).toBe('B');
-    // 680 with buffer: 748 → rounds to 800 (8 * 100, value > 10)
-    expect(result.roundReferenceValue).toBe(800);
+    // 680 with buffer: 748 → rounds to 680 (value >= 10, remainder 0, rounds down)
+    expect(result.roundReferenceValue).toBe(680);
     expect(result.rechartsData).toEqual([
       { category: 'category1', success: 680 },
     ]);
