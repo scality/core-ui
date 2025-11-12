@@ -5,47 +5,39 @@ import { useChartLegend } from '../chartlegend/ChartLegendWrapper';
 
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 1; // Default for zero or negative values
-
-  // Get the magnitude (10^n where n is the number of digits - 1)
-  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
-
+  
   // Buffer the value by 10% to avoid being too close to the edge of the chart
   const bufferedValue = value * 1.1;
 
-  // Normalized value between 1 and 10
-  const normalized = bufferedValue / magnitude;
+  if (value >= 10) {
+    const remainder = value % 10;
+    const incremented = value + (10 - remainder);
 
-  // Round to nice numbers based on normalized value
-  // skip 1.5, 3, 4, 7.5 as top value for better chart
-  // appearance for small values
-  let result: number;
+    // If the remainder is less than 5, round down to the nearest 10
+    if (remainder < 5) {
+      return value - remainder;
+    }
 
-  if (normalized <= 1) result = magnitude;
-  else if (value > 10 && normalized <= 1.5) result = 1.5 * magnitude;
-  else if (normalized <= 2) result = 2 * magnitude;
-  else if (value > 10 && normalized <= 2.5) result = 2.5 * magnitude;
-  else if (value > 10 && normalized <= 3) result = 3 * magnitude;
-  else if (value > 10 && normalized <= 4) result = 4 * magnitude;
-  else if (normalized <= 5) result = 5 * magnitude;
-  else if (value > 10 && normalized <= 6) result = 6 * magnitude;
-  else if (value > 10 && normalized <= 8) result = 8 * magnitude;
-  else if (normalized <= 10) result = 10 * magnitude;
-  else result = 10 * magnitude;
+    // If incrementing would exceed the buffered max, also round down
+    if (incremented > bufferedValue) {
+      return value - remainder;
+    }
 
-  return result;
+    // Otherwise, round up to the next 10
+    return incremented;
+  }
+
+  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
+
+  const remainder = bufferedValue % magnitude;
+
+  return remainder === 0 ? bufferedValue : bufferedValue - remainder;
 };
 
 export const getTicks = (topValue: number, isSymmetrical: boolean) => {
-  if (topValue < 10) {
-    if (isSymmetrical) {
-      return [-topValue, 0, topValue];
-    } else {
-      return [0, topValue];
-    }
-  }
   const possibleTickNumbers = [4, 3];
   const numberOfTicks =
-    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 2; // Default to 2 ticks if no match
+    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 3; // Default to 2 ticks if no match
   const tickInterval = topValue / (numberOfTicks - 1);
   const ticks = Array.from(
     { length: numberOfTicks },
@@ -339,7 +331,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
 ) => {
   if (!unitRange) {
     const roundReferenceValue = getRoundReferenceValue(maxValue);
-    return { unitLabel: undefined, roundReferenceValue, rechartsData: data };
+    return { unitLabel: undefined, roundReferenceValue, rechartsData: data, topDomain: maxValue * 1.1 };
   }
 
   const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
@@ -354,7 +346,7 @@ export const computeUnitLabelAndRoundReferenceValue = (
     });
     return normalizedDataPoint;
   });
-  return { unitLabel, roundReferenceValue, rechartsData };
+  return { unitLabel, roundReferenceValue, rechartsData, topDomain: topValue * 1.1 };
 };
 
 /**
@@ -534,12 +526,13 @@ export const useChartData = <T extends BarchartBars>(
 
   const maxValue = getMaxBarValue(filteredData, stacked);
 
-  const { unitLabel, roundReferenceValue, rechartsData } =
+  const { unitLabel, roundReferenceValue, rechartsData, topDomain } =
     computeUnitLabelAndRoundReferenceValue(filteredData, maxValue, unitRange);
 
   return {
     rechartsBars: filteredRechartsBars,
     unitLabel,
+    topDomain,
     roundReferenceValue,
     rechartsData,
   };

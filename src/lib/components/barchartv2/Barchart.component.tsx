@@ -297,7 +297,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     {} as Record<string, ChartColors | string>,
   );
 
-  const { rechartsBars, unitLabel, roundReferenceValue, rechartsData } =
+  const { rechartsBars, unitLabel, roundReferenceValue, rechartsData, topDomain } =
     useChartData(
       bars || [],
       type,
@@ -363,7 +363,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
             <YAxis
               interval={0}
-              domain={[0, roundReferenceValue]}
+              domain={[0, topDomain]}
               ticks={getTicks(roundReferenceValue, false)}
               tickFormatter={
                 (value) => new Intl.NumberFormat('fr-FR').format(value) // Add a space as thousand separator

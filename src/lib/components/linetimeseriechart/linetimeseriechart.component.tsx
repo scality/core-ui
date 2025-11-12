@@ -360,13 +360,7 @@ export function LineTimeSerieChart({
   }, [chartData]);
 
   // 3. Transform the data base on the valuebase
-  const { topValue, unitLabel, rechartsData } = useMemo(() => {
-    if (yAxisType === 'percentage')
-      return {
-        topValue: 100,
-        unitLabel: '%',
-        rechartsData: chartData,
-      };
+  const { topValue, unitLabel, rechartsData, topDomain } = useMemo(() => {
 
     const values = chartData.flatMap((dataPoint) =>
       Object.entries(dataPoint)
@@ -383,19 +377,20 @@ export function LineTimeSerieChart({
     if (values.length === 0) {
       return {
         topValue: 100, // Default value for empty charts
-        unitLabel: '',
+        unitLabel: yAxisType === 'percentage' ? '%' : '',
         rechartsData: [],
+        topDomain: 100,
       };
     }
 
     const top = Math.abs(Math.max(...values));
     const bottom = Math.abs(Math.min(...values));
     const maxValue = Math.max(top, bottom);
-
-    const { valueBase, unitLabel } = getUnitLabel(unitRange ?? [], maxValue);
+    const { valueBase, unitLabel } = yAxisType === 'percentage' ? { valueBase: 1, unitLabel: '%' } : getUnitLabel(unitRange ?? [], maxValue);
     // Use round reference value to add extra padding to the top value
-    const topValue = getRoundReferenceValue(maxValue / valueBase);
-
+    const basedValue = maxValue / valueBase
+    const topDomain = basedValue * 1.1;
+    const topValue = getRoundReferenceValue(basedValue);
     const rechartsData = chartData.map((dataPoint) => {
       const normalizedDataPoint = { ...dataPoint };
       Object.entries(dataPoint).forEach(([key, value]) => {
@@ -406,7 +401,7 @@ export function LineTimeSerieChart({
       return normalizedDataPoint;
     });
 
-    return { topValue, unitLabel, rechartsData };
+    return { topValue, unitLabel, rechartsData, topDomain };
   }, [chartData, yAxisType, unitRange]);
 
   // Group series by resource and create color mapping
@@ -522,10 +517,10 @@ export function LineTimeSerieChart({
               }}
               domain={
                 yAxisType === 'percentage'
-                  ? [0, 100]
+                  ? [0, topDomain]
                   : yAxisType === 'symmetrical'
-                    ? [-topValue, topValue]
-                    : [0, topValue]
+                    ? [-topDomain, topDomain]
+                    : [0, topDomain]
               }
               axisLine={{ stroke: theme.border }}
               tick={{
