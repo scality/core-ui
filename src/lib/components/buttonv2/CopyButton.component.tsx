@@ -14,14 +14,36 @@ export const useClipboard = () => {
     return () => clearTimeout(timer);
   }, [copyStatus]);
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string, asHtml?: boolean) => {
     if (!navigator || !navigator.clipboard) {
       setCopyStatus(COPY_STATE_UNSUPPORTED);
       return;
     }
 
-    navigator.clipboard.writeText(text);
-    setCopyStatus(COPY_STATE_SUCCESS);
+    if (asHtml) {
+      // Copy as HTML with plain text fallback
+      const el = document.createElement('div');
+      el.innerHTML = text;
+      const plainText = el.innerText;
+
+      const clipboardItem = new ClipboardItem({
+        'text/html': new Blob([text], { type: 'text/html' }),
+        'text/plain': new Blob([plainText], { type: 'text/plain' }),
+      });
+
+      navigator.clipboard
+        .write([clipboardItem])
+        .then(() => {
+          setCopyStatus(COPY_STATE_SUCCESS);
+        })
+        .catch(() => {
+          setCopyStatus(COPY_STATE_UNSUPPORTED);
+        });
+    } else {
+      // Copy as plain text only
+      navigator.clipboard.writeText(text);
+      setCopyStatus(COPY_STATE_SUCCESS);
+    }
   };
 
   return {
@@ -33,11 +55,13 @@ export const useClipboard = () => {
 export const CopyButton = ({
   label,
   textToCopy,
+  copyAsHtml,
   variant,
   ...props
 }: {
   label?: string;
   textToCopy: string;
+  copyAsHtml?: boolean;
   variant?: 'outline' | 'ghost';
 } & Props) => {
   const { copy, copyStatus } = useClipboard();
@@ -68,7 +92,7 @@ export const CopyButton = ({
         />
       }
       disabled={copyStatus === COPY_STATE_SUCCESS || props.disabled}
-      onClick={() => copy(textToCopy)}
+      onClick={() => copy(textToCopy, copyAsHtml)}
       type="button"
       tooltip={
         variant !== 'outline'
