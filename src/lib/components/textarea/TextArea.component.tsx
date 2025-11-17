@@ -3,6 +3,10 @@ import {
   forwardRef,
   TextareaHTMLAttributes,
   ForwardedRef,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  useCallback,
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
@@ -12,6 +16,11 @@ type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   variant?: TextAreaVariant;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
+  /**
+   * Automatically adjust height to fit content
+   * When enabled, the textarea will grow/shrink to show all content
+   */
+  autoGrow?: boolean;
 };
 type RefType = HTMLTextAreaElement | null;
 
@@ -19,6 +28,7 @@ const TextAreaContainer = styled.textarea<{
   variant: TextAreaVariant;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
+  autoGrow?: boolean;
 }>`
   padding: ${spacing.r12} ${spacing.r8};
   border-radius: 4px;
@@ -44,6 +54,12 @@ const TextAreaContainer = styled.textarea<{
     props.height &&
     css`
       height: ${props.height};
+    `}
+
+  ${(props) =>
+    props.autoGrow &&
+    css`
+      overflow: hidden;
     `}
 
   &:placeholder-shown {
@@ -77,9 +93,55 @@ const TextAreaContainer = styled.textarea<{
 `;
 
 function TextAreaElement(
-  { rows = 3, cols = 20, width, height, variant = 'code', ...rest }: Props,
+  {
+    rows = 3,
+    cols = 20,
+    width,
+    height,
+    variant = 'code',
+    autoGrow = false,
+    value,
+    defaultValue,
+    onChange,
+    ...rest
+  }: Props,
   ref: ForwardedRef<RefType>,
 ) {
+  const internalRef = useRef<HTMLTextAreaElement>(null);
+
+  // Expose the textarea element to parent components via forwarded ref
+  useImperativeHandle(ref, () => internalRef.current as HTMLTextAreaElement);
+
+  // Adjust height on mount and when value changes (for controlled components)
+  const adjustHeight = useCallback(() => {
+    const textarea = internalRef.current;
+    if (!textarea || !autoGrow) return;
+
+    // Reset height to auto to get the correct scrollHeight
+    textarea.style.height = 'auto';
+
+    // Set the height to match the content
+    const newHeight = textarea.scrollHeight;
+    textarea.style.height = `${newHeight}px`;
+  }, [autoGrow]);
+
+  useEffect(() => {
+    adjustHeight();
+  }, [adjustHeight, value]);
+
+  // Handle onChange to support both controlled and uncontrolled components
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (autoGrow) {
+        adjustHeight();
+      }
+      if (onChange) {
+        onChange(event);
+      }
+    },
+    [autoGrow, adjustHeight, onChange],
+  );
+
   if (width || height) {
     return (
       <TextAreaContainer
@@ -87,8 +149,12 @@ function TextAreaElement(
         width={width}
         height={height}
         variant={variant}
+        autoGrow={autoGrow}
+        value={value}
+        defaultValue={defaultValue}
+        onChange={handleChange}
         {...rest}
-        ref={ref}
+        ref={internalRef}
       />
     );
   }
@@ -99,8 +165,12 @@ function TextAreaElement(
       rows={rows}
       cols={cols}
       variant={variant}
+      autoGrow={autoGrow}
+      value={value}
+      defaultValue={defaultValue}
+      onChange={handleChange}
       {...rest}
-      ref={ref}
+      ref={internalRef}
     />
   );
 }

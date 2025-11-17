@@ -32,14 +32,14 @@ export const Playground = {};
 
 export const DefaultTextArea = {
   args: {
-    value: 'Some text',
+    defaultValue: 'Some text',
   },
 };
 
 export const TextVariantTextArea = {
   args: {
     variant: 'text',
-    value: 'Text area with "text" variant',
+    defaultValue: 'Text area with "text" variant',
   },
 };
 
@@ -65,5 +65,59 @@ export const RowsAndColsSet = {
     rows: 20,
     cols: 40,
     placeholder: 'With rows = 20 and cols = 40',
+  },
+};
+
+/**
+ * Auto-growing textarea adjusts its height based on content
+ * Perfect for displaying commands or long text where you want the entire content visible
+ * Simply set autoGrow={true} and the textarea will grow to show all content
+ */
+export const AutoGrowTextArea = {
+  args: {
+    autoGrow: true,
+    placeholder:
+      'Type or paste content here...\nThe textarea will automatically grow to fit all the content.',
+    defaultValue: `docker run -d \\
+  --name my-container \\
+  -p 8080:80 \\
+  -v /host/path:/container/path \\
+  -e ENV_VAR=value \\
+  my-image:latest`,
+    width: '500px',
+  },
+};
+
+/**
+ * Auto-growing textarea with long command example
+ * The entire command is visible without scrolling
+ */
+export const AutoGrowWithLongCommand = {
+  args: {
+    autoGrow: true,
+    variant: 'code',
+    defaultValue: `kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    env:
+    - name: DATABASE_URL
+      value: "postgresql://user:password@localhost:5432/db"
+    - name: API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: api-secret
+          key: api-key
+EOF`,
+    width: '600px',
   },
 };
