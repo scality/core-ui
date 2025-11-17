@@ -19,7 +19,6 @@ type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   /**
    * Automatically adjust height to fit content
    * When enabled, the textarea will grow/shrink to show all content
-   * It disables the resize property
    */
   autoGrow?: boolean;
 };
@@ -60,7 +59,6 @@ const TextAreaContainer = styled.textarea<{
   ${(props) =>
     props.autoGrow &&
     css`
-      resize: none;
       overflow: hidden;
     `}
 
@@ -114,6 +112,7 @@ function TextAreaElement(
   // Expose the textarea element to parent components via forwarded ref
   useImperativeHandle(ref, () => internalRef.current as HTMLTextAreaElement);
 
+  // Adjust height on mount and when value changes (for controlled components)
   const adjustHeight = useCallback(() => {
     const textarea = internalRef.current;
     if (!textarea || !autoGrow) return;
@@ -126,10 +125,22 @@ function TextAreaElement(
     textarea.style.height = `${newHeight}px`;
   }, [autoGrow]);
 
-  // Adjust height on mount to fit initial content
   useEffect(() => {
     adjustHeight();
-  }, []);
+  }, [adjustHeight, value]);
+
+  // Handle onChange to support both controlled and uncontrolled components
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (autoGrow) {
+        adjustHeight();
+      }
+      if (onChange) {
+        onChange(event);
+      }
+    },
+    [autoGrow, adjustHeight, onChange],
+  );
 
   if (width || height) {
     return (
@@ -141,7 +152,7 @@ function TextAreaElement(
         autoGrow={autoGrow}
         value={value}
         defaultValue={defaultValue}
-        onChange={onChange}
+        onChange={handleChange}
         {...rest}
         ref={internalRef}
       />
@@ -157,7 +168,7 @@ function TextAreaElement(
       autoGrow={autoGrow}
       value={value}
       defaultValue={defaultValue}
-      onChange={onChange}
+      onChange={handleChange}
       {...rest}
       ref={internalRef}
     />

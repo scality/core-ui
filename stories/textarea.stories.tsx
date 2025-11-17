@@ -32,14 +32,14 @@ export const Playground = {};
 
 export const DefaultTextArea = {
   args: {
-    value: 'Some text',
+    defaultValue: 'Some text',
   },
 };
 
 export const TextVariantTextArea = {
   args: {
     variant: 'text',
-    value: 'Text area with "text" variant',
+    defaultValue: 'Text area with "text" variant',
   },
 };
 
@@ -78,14 +78,13 @@ export const AutoGrowTextArea = {
     autoGrow: true,
     placeholder:
       'Type or paste content here...\nThe textarea will automatically grow to fit all the content.',
-    value: `docker run -d \\
+    defaultValue: `docker run -d \\
   --name my-container \\
   -p 8080:80 \\
   -v /host/path:/container/path \\
   -e ENV_VAR=value \\
   my-image:latest`,
     width: '500px',
-    readOnly: true,
   },
 };
 
@@ -97,7 +96,7 @@ export const AutoGrowWithLongCommand = {
   args: {
     autoGrow: true,
     variant: 'code',
-    value: `kubectl apply -f - <<EOF
+    defaultValue: `kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Pod
 metadata:
@@ -120,6 +119,5 @@ spec:
           key: api-key
 EOF`,
     width: '600px',
-    readOnly: true,
   },
 };
