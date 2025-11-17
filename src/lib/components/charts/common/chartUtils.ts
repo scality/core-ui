@@ -19,27 +19,34 @@ export const maxWidthTooltip = { maxWidth: '20rem' };
 export const getRoundReferenceValue = (value: number): number => {
   if (value <= 0) return 1; // Default for zero or negative values
 
-  // Get the magnitude (10^n where n is the number of digits - 1)
-  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
-
   // Buffer the value by 10% to avoid being too close to the edge of the chart
   const bufferedValue = value * 1.1;
 
-  // Normalized value between 1 and 10
-  const normalized = bufferedValue / magnitude;
+  if (value >= 10) {
+    const remainder = value % 10;
+    const incremented = value + (10 - remainder);
+
+    // If the remainder is less than 5, round down to the nearest 10
+    if (remainder < 5) {
+      return value - remainder;
+    }
+
+    // If incrementing would exceed the buffered max, also round down
+    if (incremented > bufferedValue) {
+      return value - remainder;
+    }
+
+    // Otherwise, round up to the next 10
+    return incremented;
+  }
+
+  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
+
+  const remainder = bufferedValue % magnitude;
 
   // Round to nice numbers based on normalized value
   // appearance for small values
-  let result: number;
-
-  if (normalized <= 1) result = magnitude;
-  else if (normalized <= 2) result = 2 * magnitude;
-  else if (value > 10 && normalized <= 4) result = 4 * magnitude;
-  else if (normalized <= 5) result = 5 * magnitude;
-  else if (value > 10 && normalized <= 7.5) result = 7.5 * magnitude;
-  else result = 10 * magnitude;
-
-  return result;
+  return remainder === 0 ? bufferedValue : bufferedValue - remainder;
 };
 
 /**
@@ -47,16 +54,9 @@ export const getRoundReferenceValue = (value: number): number => {
  * Used by Barchart and LineTimeSerieChart
  */
 export const getTicks = (topValue: number, isSymmetrical: boolean) => {
-  if (topValue < 10) {
-    if (isSymmetrical) {
-      return [-topValue, 0, topValue];
-    } else {
-      return [0, topValue];
-    }
-  }
-  const possibleTickNumbers = [4, 3, 6];
+  const possibleTickNumbers = [4, 3];
   const numberOfTicks =
-    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 2; // Default to 2 ticks if no match
+    possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 3; // Default to 3 ticks if no match
 
   const tickInterval = topValue / (numberOfTicks - 1);
   const ticks = Array.from(
@@ -152,17 +152,24 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
   unitLabel: string | undefined;
   topValue: number;
   rechartsData: T[];
+  topDomain: number;
 } => {
   // If no unit range provided, just calculate top value without unit conversion
   if (!unitRange || unitRange.length === 0) {
     const topValue = getRoundReferenceValue(maxValue);
-    return { unitLabel: undefined, topValue, rechartsData: data };
+    return {
+      unitLabel: undefined,
+      topValue,
+      rechartsData: data,
+      topDomain: maxValue * 1.1,
+    };
   }
 
   // Get appropriate unit and value base for normalization
   const { valueBase, unitLabel } = getUnitLabel(unitRange, maxValue);
-  const topValue = getRoundReferenceValue(maxValue / valueBase);
-
+  const basedValue = maxValue / valueBase;
+  const topValue = getRoundReferenceValue(basedValue);
+  const topDomain = basedValue * 1.1;
   // Normalize all numeric values by dividing by valueBase
   const rechartsData = data.map((dataPoint) => {
     const normalizedDataPoint: Record<string, number | string> = {
@@ -176,7 +183,7 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
     return normalizedDataPoint as T;
   });
 
-  return { unitLabel, topValue, rechartsData };
+  return { unitLabel, topValue, rechartsData, topDomain };
 };
 
 /**
@@ -317,4 +324,11 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
   } else {
     return 'day-month-abbreviated-year-hour-minute';
   }
+};
+
+export const formatToISONumber = (value: number): string => {
+  const formattedValue = new Intl.NumberFormat('fr-FR')
+    .format(value)
+    .replace(',', '.');
+  return formattedValue;
 };

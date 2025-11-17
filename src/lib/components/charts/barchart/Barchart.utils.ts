@@ -400,18 +400,15 @@ export const useChartData = <T extends BarchartBars>(
 
   const maxValue = getMaxBarValue(filteredData, stacked);
 
-  const { unitLabel, topValue, rechartsData } = normalizeChartDataWithUnits(
-    filteredData,
-    maxValue,
-    unitRange,
-    'category',
-  );
+  const { unitLabel, topValue, rechartsData, topDomain } =
+    normalizeChartDataWithUnits(filteredData, maxValue, unitRange, 'category');
 
   return {
     rechartsBars: filteredRechartsBars,
     unitLabel: unitLabel,
     roundReferenceValue: topValue,
     rechartsData,
+    topDomain,
   };
 };
 

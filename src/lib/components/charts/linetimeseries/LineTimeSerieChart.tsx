@@ -28,6 +28,7 @@ import {
 } from '../common/ChartTooltip';
 import {
   addMissingDataPoint,
+  formatToISONumber,
   getTicks,
   maxWidthTooltip,
   normalizeChartDataWithUnits,
@@ -407,6 +408,7 @@ export function LineTimeSerieChart({
       topValue: result.topValue,
       unitLabel: result.unitLabel,
       rechartsData: result.rechartsData,
+      topDomain: result.topDomain,
     };
   }, [chartData, yAxisType, unitRange]);
 
@@ -522,20 +524,16 @@ export function LineTimeSerieChart({
                 },
               }}
               domain={
-                yAxisType === 'percentage'
-                  ? [0, topDomain]
-                  : yAxisType === 'symmetrical'
-                    ? [-topDomain, topDomain]
-                    : [0, topDomain]
+                yAxisType === 'symmetrical'
+                  ? [-topDomain, topDomain]
+                  : [0, topDomain]
               }
               axisLine={{ stroke: theme.border }}
               tick={{
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
               }}
-              tickFormatter={(value) =>
-                new Intl.NumberFormat('fr-FR').format(value)
-              }
+              tickFormatter={(value) => formatToISONumber(value)}
               ticks={getTicks(topValue, yAxisType === 'symmetrical')}
               interval={0}
             />

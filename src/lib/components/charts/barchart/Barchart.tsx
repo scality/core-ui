@@ -13,7 +13,7 @@ import { Stack } from '../../../spacing';
 import { chartColors, ChartColors, fontSize } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
-import { getTicks } from '../common/chartUtils';
+import { formatToISONumber, getTicks } from '../common/chartUtils';
 import { useChartData } from './Barchart.utils';
 import {
   ChartHeader,
@@ -196,9 +196,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               interval={0}
               domain={[0, topDomain]}
               ticks={getTicks(roundReferenceValue, false)}
-              tickFormatter={
-                (value) => new Intl.NumberFormat('fr-FR').format(value) // Add a space as thousand separator
-              }
+              tickFormatter={(value) => formatToISONumber(value)}
               axisLine={{ stroke: theme.border }}
               tick={{
                 fill: theme.textSecondary,

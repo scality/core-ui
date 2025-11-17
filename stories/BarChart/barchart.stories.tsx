@@ -44,14 +44,14 @@ export const Playground: Story = {
           ['category3', 0.002],
         ],
       },
-      // {
-      //   label: 'Failed',
-      //   data: [
-      //     ['category1', 1],
-      //     ['category2', 1],
-      //     ['category3', 2],
-      //   ],
-      // },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 0.01],
+          ['category2', 0.05],
+          ['category3', 0.02],
+        ],
+      },
     ] as const;
     return (
       <ChartLegendWrapper
@@ -197,6 +197,7 @@ export const Time7DaysWithMissingData: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Barchart
           title="Time 7 Days With Missing Data"
