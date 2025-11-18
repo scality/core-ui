@@ -32,7 +32,7 @@ const TextAreaContainer = styled.textarea<{
 }>`
   padding: ${spacing.r12} ${spacing.r8};
   border-radius: 4px;
-  resize: vertical;
+  resize: ${(props) => (props.autoGrow ? 'none' : 'vertical')};
   font-family: ${(props) =>
     props.variant === 'code' ? 'Courier New' : 'Lato'};
   font-size: ${spacing.f14};
@@ -49,7 +49,7 @@ const TextAreaContainer = styled.textarea<{
     css`
       width: ${props.width};
     `}
-
+    
   ${(props) =>
     props.height &&
     css`
@@ -60,6 +60,7 @@ const TextAreaContainer = styled.textarea<{
     props.autoGrow &&
     css`
       overflow: hidden;
+      box-sizing: border-box;
     `}
 
   &:placeholder-shown {
@@ -118,7 +119,7 @@ function TextAreaElement(
     if (!textarea || !autoGrow) return;
 
     // Reset height to auto to get the correct scrollHeight
-    textarea.style.height = 'auto';
+    textarea.style.height = '0px';
 
     // Set the height to match the content
     const newHeight = textarea.scrollHeight;
