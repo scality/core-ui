@@ -68,6 +68,14 @@ export const RowsAndColsSet = {
   },
 };
 
+export const AutoGrowShortText = {
+  args: {
+    autoGrow: true,
+    defaultValue: 'Hello World!',
+    width: '400px',
+  },
+};
+
 /**
  * Auto-growing textarea adjusts its height based on content
  * Perfect for displaying commands or long text where you want the entire content visible
