@@ -8,6 +8,7 @@ type Props = {
   title: string | React.ReactNode;
   content: React.ReactNode;
   link?: string;
+  linkText?: string;
 };
 
 const InfoMessageContainer = styled.div`
@@ -20,7 +21,7 @@ const InfoMessageContainer = styled.div`
   color: white;
 `;
 
-export const InfoMessage = ({ title, content, link }: Props) => {
+export const InfoMessage = ({ title, content, link, linkText }: Props) => {
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
   const theme = useTheme();
 
@@ -38,7 +39,7 @@ export const InfoMessage = ({ title, content, link }: Props) => {
       </Text>
       {link && (
         <Link href={link} target="_blank" style={{ alignSelf: 'flex-end' }}>
-          More info <Icon name="External-link"></Icon>
+          {linkText || 'More info'} <Icon name="External-link"></Icon>
         </Link>
       )}
     </InfoMessageContainer>
