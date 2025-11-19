@@ -171,26 +171,30 @@ const FormGroup = ({
             flex: 'none',
           }}
         >
-          <Stack>
-            <label
-              htmlFor={id}
-              id={`${LABEL_PREFIX}${id}`}
-              ref={labelRef}
-              style={{ opacity: disabled ? 0.5 : 1 }}
-            >
-              <Text>
-                {label}
-                {requireMode !== 'all' && required && ' *'}
-                {requireMode === 'all' && !required && ' (optional)'}
-              </Text>
-            </label>
+          <label
+            htmlFor={id}
+            id={`${LABEL_PREFIX}${id}`}
+            ref={labelRef}
+            style={{ opacity: disabled ? 0.5 : 1 }}
+          >
+            <Text>
+              {label}
+              {requireMode !== 'all' && required && ' *'}
+              {requireMode === 'all' && !required && ' (optional)'}
+            </Text>
             {labelHelpTooltip && (
-              <IconHelp
-                tooltipMessage={labelHelpTooltip}
-                overlayStyle={maxWidthTooltip}
-              />
+              <Box
+                display="inline-block"
+                marginLeft={spacing.r8}
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                <IconHelp
+                  tooltipMessage={labelHelpTooltip}
+                  overlayStyle={maxWidthTooltip}
+                />
+              </Box>
             )}
-          </Stack>
+          </label>
         </div>
         <Stack
           direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
