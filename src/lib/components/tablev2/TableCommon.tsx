@@ -1,4 +1,10 @@
-import { ComponentType, LegacyRef, useCallback, useState } from 'react';
+import {
+  ComponentType,
+  LegacyRef,
+  useCallback,
+  useState,
+  forwardRef,
+} from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
@@ -17,6 +23,14 @@ import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
 import { CSSProperties } from 'styled-components';
 import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+
+const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => (
+  <div
+    ref={ref}
+    {...props}
+    style={{ ...props.style, scrollBehavior: 'smooth' }}
+  />
+));
 
 type VirtualizedRowsType<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -51,12 +65,13 @@ export const VirtualizedRows = <
       return (
         <List
           height={height - 1}
-          itemCount={rows.length} // how many items we are going to render
-          itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
+          itemCount={rows.length}
+          itemSize={convertRemToPixels(tableRowHeight[rowHeight])}
           width={'100%'}
           itemKey={itemKey}
           itemData={rows}
           ref={listRef}
+          outerElementType={SmoothScrollDiv}
           onItemsRendered={({
             visibleStartIndex,
             visibleStopIndex,
@@ -122,14 +137,23 @@ type TableRowsProps<
   RenderRow: React.MemoExoticComponent<
     ({ index, style }: RenderRowType) => JSX.Element
   >;
+  listRef?: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>>;
 };
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
->({ locale, children, customItemKey, RenderRow }: TableRowsProps<DATA_ROW>) {
+>({
+  locale,
+  children,
+  customItemKey,
+  RenderRow,
+  listRef: externalListRef,
+}: TableRowsProps<DATA_ROW>) {
   const { setHasScrollbar } = useTableScrollbar();
   const { rows, status, entityName, rowHeight, onBottom, onBottomOffset } =
-    useTableContext();
-  const { bodyRef } = useSyncedScroll();
+    useTableContext<DATA_ROW>();
+  const { bodyRef } = useSyncedScroll<DATA_ROW>();
+  const listRef: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>> =
+    externalListRef || bodyRef;
 
   function itemKey(index, data) {
     if (typeof customItemKey === 'function') {
@@ -153,9 +177,9 @@ export function TableRows<
     if (typeof children === 'function') {
       if (rows.length) {
         return children(
-          <VirtualizedRows
+          <VirtualizedRows<DATA_ROW>
             rows={rows}
-            listRef={bodyRef}
+            listRef={listRef}
             itemKey={itemKey}
             rowHeight={rowHeight}
             setHasScrollbar={setHasScrollbar}
@@ -175,9 +199,9 @@ export function TableRows<
       }
     } else if (rows.length) {
       return (
-        <VirtualizedRows
+        <VirtualizedRows<DATA_ROW>
           rows={rows}
-          listRef={bodyRef}
+          listRef={listRef}
           setHasScrollbar={setHasScrollbar}
           onBottom={onBottom}
           onBottomOffset={onBottomOffset}
