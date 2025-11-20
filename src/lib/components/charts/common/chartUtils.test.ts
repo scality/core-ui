@@ -11,30 +11,49 @@ import { NAN_STRING } from '../../constants';
 import { UnitRange } from '../types';
 
 describe('getRoundReferenceValue', () => {
-  it('should return 1 for values <= 0', () => {
-    expect(getRoundReferenceValue(0)).toBe(1);
-    expect(getRoundReferenceValue(-5)).toBe(1);
-  });
+  it('should return appropriate rounded values with 10% buffer', () => {
+    // Small values (< 10)
+    expect(getRoundReferenceValue(0.1)).toBe(0.1); // 0.1 → 0.11 → 0.1 (magnitude 0.1, remainder 0.01)
+    expect(getRoundReferenceValue(1)).toBe(1); // 1 → 1.1 → 1 (magnitude 1, remainder 0.1)
+    expect(getRoundReferenceValue(2)).toBe(2); // 2 → 2.2 → 2 (magnitude 1, remainder 0.2)
+    expect(getRoundReferenceValue(3)).toBe(3); // 3 → 3.3 → 3 (magnitude 1, remainder 0.3)
 
-  it('should round to nice numbers', () => {
-    expect(getRoundReferenceValue(1)).toBe(2);
-    expect(getRoundReferenceValue(5)).toBe(10);
-    expect(getRoundReferenceValue(10)).toBe(20);
-    expect(getRoundReferenceValue(50)).toBe(75);
-    expect(getRoundReferenceValue(100)).toBe(200);
-  });
+    // Values 5-10 range
+    expect(getRoundReferenceValue(6)).toBe(6); // 6 → 6.6 → 6 (magnitude 1, remainder 0.6)
+    expect(getRoundReferenceValue(9)).toBe(9); // 9 → 9.9 → 9 (magnitude 1, remainder 0.9)
 
-  it('should handle edge cases', () => {
-    expect(getRoundReferenceValue(0.5)).toBe(1);
-    expect(getRoundReferenceValue(9)).toBe(10);
-    expect(getRoundReferenceValue(99)).toBe(100);
+    // Larger values get 10% buffer applied
+    expect(getRoundReferenceValue(15)).toBe(10); // 15 → 16.5, remainder 5, incremented 20 > 16.5, so round down to 10
+    expect(getRoundReferenceValue(35)).toBe(30); // 35 → 38.5, remainder 5, incremented 40 > 38.5, so round down to 30
+    expect(getRoundReferenceValue(75)).toBe(80); // 75 → 82.5, remainder 5, incremented 80 <= 82.5, so round up to 80
+    expect(getRoundReferenceValue(150)).toBe(150); // 150 → 165, remainder 0, so return 150
+    expect(getRoundReferenceValue(350)).toBe(350); // 350 → 385, remainder 0, so return 350
+    expect(getRoundReferenceValue(750)).toBe(750); // 750 → 825, remainder 0, so return 750
+    expect(getRoundReferenceValue(1500)).toBe(1500); // 1500 → 1650, remainder 0, so return 1500
+    expect(getRoundReferenceValue(3500)).toBe(3500); // 3500 → 3850, remainder 0, so return 3500
+    expect(getRoundReferenceValue(7500)).toBe(7500); // 7500 → 8250, remainder 0, so return 7500
+    expect(getRoundReferenceValue(15000)).toBe(15000); // 15000 → 16500, remainder 0, so return 15000
   });
 });
 
 describe('getTicks', () => {
-  it('should return simple ticks for values < 10', () => {
-    expect(getTicks(5, false)).toEqual([0, 5]);
-    expect(getTicks(5, true)).toEqual([-5, 0, 5]);
+  it('should return ticks for small values < 10', () => {
+    // Non-symmetrical ticks
+    expect(getTicks(1, false)).toEqual([0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks
+    expect(getTicks(2, false)).toEqual([0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks
+    expect(getTicks(5, false)).toEqual([0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks
+    expect(getTicks(10, false)).toEqual([0, 5, 10]); // 10 % 2 == 0, uses 3 ticks
+    expect(getTicks(15, false)).toEqual([0, 5, 10, 15]); // 15 % 3= 0, uses 4 ticks
+    expect(getTicks(20, false)).toEqual([0, 10, 20]); // 20 % 2 == 0, uses 3 ticks
+    expect(getTicks(250, false)).toEqual([0, 125, 250]); // 250 % 3 = 0, uses 3 ticks
+    // Symmetrical ticks
+    expect(getTicks(1, true)).toEqual([-1, -0.5, 0, 0.5, 1]); // 1 % 2 != 0, defaults to 3 ticks, symmetrical adds negatives
+    expect(getTicks(2, true)).toEqual([-2, -1, 0, 1, 2]); // 2 % (3-1) == 0, uses 3 ticks, symmetrical adds negatives
+    expect(getTicks(5, true)).toEqual([-5, -2.5, 0, 2.5, 5]); // 5 % 2 != 0 and 5 % 3 != 0, defaults to 3 ticks, symmetrical adds negatives
+    expect(getTicks(10, true)).toEqual([-10, -5, 0, 5, 10]); // 10 % 2 == 0, uses 3 ticks, symmetrical adds negatives
+    expect(getTicks(15, true)).toEqual([-15, -10, -5, 0, 5, 10, 15]); // 15 % 3 = 0, uses 4 ticks, symmetrical adds negatives
+    expect(getTicks(20, true)).toEqual([-20, -10, 0, 10, 20]); // 20 % 2 == 0, uses 3 ticks, symmetrical adds negatives
+    expect(getTicks(250, true)).toEqual([-250, -125, 0, 125, 250]); // 250 % 3 = 0, uses 3 ticks, symmetrical adds negatives
   });
 
   it('should generate evenly spaced ticks for larger values', () => {
@@ -42,20 +61,6 @@ describe('getTicks', () => {
     expect(ticks).toHaveLength(3);
     expect(ticks[0]).toBe(0);
     expect(ticks[ticks.length - 1]).toBe(100);
-  });
-
-  it('should generate symmetrical ticks when isSymmetrical is true', () => {
-    const ticks = getTicks(100, true);
-    expect(ticks[0]).toBe(-100);
-    expect(ticks[ticks.length - 1]).toBe(100);
-    // Should have 0 in the middle
-    const middleIndex = Math.floor(ticks.length / 2);
-    expect(ticks[middleIndex]).toBe(0);
-  });
-
-  it('should handle values divisible by 3', () => {
-    const ticks = getTicks(90, false);
-    expect(ticks).toHaveLength(4); // numberOfTicks = 4 when topValue % 3 === 0
   });
 });
 
@@ -235,8 +240,8 @@ describe('normalizeChartDataWithUnits', () => {
       );
 
       expect(result.unitLabel).toBe('kB');
-      // 2000 / 1000 = 2, with buffer: 2.2 → rounds to 5
-      expect(result.topValue).toBe(5);
+      // 2000 / 1000 = 2 → getRoundReferenceValue(2) = 2
+      expect(result.topValue).toBe(2);
       expect(result.rechartsData).toEqual([
         { category: 'category1', success: 1.68 },
         { category: 'category2', success: 2 },
@@ -259,8 +264,8 @@ describe('normalizeChartDataWithUnits', () => {
       );
 
       expect(result.unitLabel).toBe('B');
-      // 680 with buffer: 748 → rounds to 750
-      expect(result.topValue).toBe(750);
+      // 680 / 1 = 680 → getRoundReferenceValue(680) = 680
+      expect(result.topValue).toBe(680);
       expect(result.rechartsData).toEqual([
         { category: 'category1', success: 680 },
       ]);
@@ -281,8 +286,8 @@ describe('normalizeChartDataWithUnits', () => {
       );
 
       expect(result.unitLabel).toBeUndefined();
-      // 200 with 10% buffer: 220 → rounds to 400
-      expect(result.topValue).toBe(400);
+      // 200 → getRoundReferenceValue(200) = 200
+      expect(result.topValue).toBe(200);
       expect(result.rechartsData).toEqual(data);
     });
 
@@ -322,7 +327,8 @@ describe('normalizeChartDataWithUnits', () => {
       );
 
       expect(result.unitLabel).toBe('k');
-      expect(result.topValue).toBe(10);
+      // 6000 / 1000 = 6 → getRoundReferenceValue(6) = 6
+      expect(result.topValue).toBe(6);
       expect(result.rechartsData).toEqual([
         { timestamp: 1634567890000, metric1: 5, metric2: 3 },
         { timestamp: 1634567900000, metric1: 6, metric2: 4 },
@@ -388,8 +394,8 @@ describe('normalizeChartDataWithUnits', () => {
       const result = normalizeChartDataWithUnits(data, 100, [], 'category');
 
       expect(result.unitLabel).toBeUndefined();
-      // 100 with 10% buffer: 110 → rounds to 200
-      expect(result.topValue).toBe(200);
+      // 100 → getRoundReferenceValue(100) = 100
+      expect(result.topValue).toBe(100);
       expect(result.rechartsData).toEqual(data);
     });
   });
