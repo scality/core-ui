@@ -1,10 +1,4 @@
-import {
-  ComponentType,
-  LegacyRef,
-  useCallback,
-  useState,
-  forwardRef,
-} from 'react';
+import { ComponentType, Ref, useCallback, useState, forwardRef } from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
@@ -45,7 +39,7 @@ type VirtualizedRowsType<
   itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
-  listRef?: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>>;
+  listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
 
 export const VirtualizedRows = <
@@ -137,7 +131,7 @@ type TableRowsProps<
   RenderRow: React.MemoExoticComponent<
     ({ index, style }: RenderRowType) => JSX.Element
   >;
-  listRef?: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>>;
+  listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -152,7 +146,7 @@ export function TableRows<
   const { rows, status, entityName, rowHeight, onBottom, onBottomOffset } =
     useTableContext<DATA_ROW>();
   const { bodyRef } = useSyncedScroll<DATA_ROW>();
-  const listRef: LegacyRef<FixedSizeList<Row<DATA_ROW>[]>> =
+  const listRef: Ref<FixedSizeList<Row<DATA_ROW>[]>> =
     externalListRef || bodyRef;
 
   function itemKey(index, data) {
