@@ -65,8 +65,8 @@ export const VirtualizedRows = <
       return (
         <List
           height={height - 1}
-          itemCount={rows.length}
-          itemSize={convertRemToPixels(tableRowHeight[rowHeight])}
+          itemCount={rows.length} // how many items we are going to render
+          itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
           width={'100%'}
           itemKey={itemKey}
           itemData={rows}
