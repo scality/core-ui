@@ -1,5 +1,5 @@
-import { memo, useEffect } from 'react';
-import { areEqual } from 'react-window';
+import { memo, useEffect, useRef } from 'react';
+import { areEqual, FixedSizeList } from 'react-window';
 import { Row } from 'react-table';
 import { useTableContext } from './Tablev2.component';
 import {
@@ -33,6 +33,7 @@ export type SingleSelectableContentProps<
   hasScrollbar?: boolean;
   isLoadingMoreItems?: boolean;
   children?: (rows: JSX.Element) => JSX.Element;
+  autoScrollToSelected?: boolean;
 };
 
 export function SingleSelectableContent<
@@ -47,18 +48,34 @@ export function SingleSelectableContent<
   onRowSelected,
   customItemKey,
   children,
+  autoScrollToSelected = false,
 }: SingleSelectableContentProps<DATA_ROW>) {
   if (selectedId && !onRowSelected) {
     console.error('Please specify the onRowSelected function.');
   }
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const listRef = useRef<FixedSizeList<Row<DATA_ROW>[]>>(null);
   const { headerGroups, prepareRow, rows, setRowHeight } =
     useTableContext<DATA_ROW>();
 
   useEffect(() => {
     setRowHeight(rowHeight);
   }, [rowHeight, setRowHeight]);
+
+  useEffect(() => {
+    if (!autoScrollToSelected || !selectedId || !listRef.current) return;
+
+    const selectedIndex = rows.findIndex((row) => row.id === selectedId);
+    if (selectedIndex < 0) return;
+
+    const timer = setTimeout(() => {
+      if (!listRef.current) return;
+      listRef.current.scrollToItem(selectedIndex, 'center');
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [autoScrollToSelected, selectedId, rows]);
 
   const RenderRow = memo(({ index, style }: RenderRowType) => {
     const row = rows[index];
@@ -180,6 +197,7 @@ export function SingleSelectableContent<
           children={children}
           customItemKey={customItemKey}
           RenderRow={RenderRow}
+          listRef={listRef}
         />
       </TableBody>
       {isLoadingMoreItems && (

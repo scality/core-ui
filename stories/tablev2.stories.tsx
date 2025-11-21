@@ -676,3 +676,59 @@ export const TableWithSyncButton = {
     );
   },
 };
+
+export const AutoScrollToSelected = {
+  render: () => {
+    const largeData: Entry[] = Array.from({ length: 100 }, (_, index) => ({
+      id: index + 1,
+      firstName: `FirstName${index + 1}`,
+      lastName: `LastName${index + 1}`,
+      health: ['healthy', 'warning', 'critical'][index % 3],
+    }));
+
+    const [selectedId, setSelectedId] = useState<string>(
+      'LastName80 FirstName80',
+    );
+
+    const handleRowSelected = (row: Row<Entry>) => {
+      const rowId = `${row.original.lastName} ${row.original.firstName}`;
+      setSelectedId(rowId);
+    };
+
+    const handleSelectRandom = () => {
+      const randomIndex = Math.floor(Math.random() * largeData.length);
+      const randomRow = largeData[randomIndex];
+      setSelectedId(`${randomRow.lastName} ${randomRow.firstName}`);
+    };
+
+    return (
+      <>
+        <Title>Auto Scroll to Selected Row</Title>
+        <Box mb={2}>
+          <Button
+            variant="secondary"
+            label="Select Random Row"
+            onClick={handleSelectRandom}
+          />
+          <Box mt={1}>Currently selected: {selectedId || 'None'}</Box>
+        </Box>
+        <div style={{ height: '400px' }}>
+          <Table
+            columns={columns}
+            data={largeData}
+            defaultSortingKey="firstName"
+            getRowId={getRowId}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              selectedId={selectedId}
+              onRowSelected={handleRowSelected}
+              autoScrollToSelected
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
+};
