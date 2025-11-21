@@ -687,7 +687,7 @@ export const AutoScrollToSelected = {
     }));
 
     const [selectedId, setSelectedId] = useState<string>(
-      'LastName80 FirstName80'
+      'LastName80 FirstName80',
     );
 
     const handleRowSelected = (row: Row<Entry>) => {
