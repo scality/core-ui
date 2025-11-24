@@ -1,5 +1,6 @@
 import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, zIndex } from '../../style/theme';
@@ -98,38 +99,42 @@ function Tooltip({
         if (tooltipRef.current) {
           Object.assign(tooltipRef.current.style, {
             opacity: '1',
-            // we set opacity to 1 to make sure the tooltip is not displayed before the position is computed
             left: `${x}px`,
             top: `${y}px`,
           });
         }
       });
     }
-  }, [tooltipRef.current, childrenRef.current, isTooltipVisible]);
+  }, [isTooltipVisible, placement]);
   return (
-    <TooltipContainer
-      className="sc-tooltip"
-      onPointerEnter={() => {
-        setIsTooltipVisible(true);
-      }}
-      onPointerLeave={() => {
-        setIsTooltipVisible(false);
-      }}
-    >
-      {isTooltipVisible && overlay ? (
-        <TooltipOverLayContainer
-          ref={tooltipRef}
-          className="sc-tooltip-overlay"
-          placement={placement}
-          style={overlayStyle}
-        >
-          <TooltipText className="sc-tooltip-overlay-text">
-            {overlay}
-          </TooltipText>
-        </TooltipOverLayContainer>
-      ) : null}
-      <div ref={childrenRef}>{children}</div>
-    </TooltipContainer>
+    <>
+      <TooltipContainer
+        className="sc-tooltip"
+        onPointerEnter={() => {
+          setIsTooltipVisible(true);
+        }}
+        onPointerLeave={() => {
+          setIsTooltipVisible(false);
+        }}
+      >
+        <div ref={childrenRef}>{children}</div>
+      </TooltipContainer>
+      {isTooltipVisible &&
+        overlay &&
+        createPortal(
+          <TooltipOverLayContainer
+            ref={tooltipRef}
+            className="sc-tooltip-overlay"
+            placement={placement}
+            style={overlayStyle}
+          >
+            <TooltipText className="sc-tooltip-overlay-text">
+              {overlay}
+            </TooltipText>
+          </TooltipOverLayContainer>,
+          document.body,
+        )}
+    </>
   );
 }
 
