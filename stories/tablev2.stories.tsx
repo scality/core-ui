@@ -651,7 +651,7 @@ export const TableWithSyncButton = {
     };
 
     return (
-      <Box>
+      <Box width="500px" height="250px">
         <Title>Table with Sync Button</Title>
         <Box
           display="flex"
