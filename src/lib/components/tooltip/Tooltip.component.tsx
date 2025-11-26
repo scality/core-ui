@@ -1,5 +1,5 @@
-import { computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { flip, offset, shift, useFloating } from '@floating-ui/react';
+import { CSSProperties, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
@@ -45,8 +45,6 @@ const TooltipOverLayContainer = styled.div<{
   style?: CSSProperties;
 }>`
   display: inline-block;
-  opacity: 0;
-  position: fixed;
   width: max-content;
   border: 1px solid ${getThemePropSelector('border')};
   background-color: ${(props) =>
@@ -86,26 +84,13 @@ function Tooltip({
   overlay,
   ...rest
 }: Props) {
-  const childrenRef = useRef<HTMLDivElement | null>(null);
-  const tooltipRef = useRef<HTMLDivElement | null>(null);
-
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  useEffect(() => {
-    if (childrenRef.current && tooltipRef.current) {
-      computePosition(childrenRef.current, tooltipRef.current, {
-        placement,
-        middleware: [offset(5), shift(), flip()],
-      }).then(({ x, y }) => {
-        if (tooltipRef.current) {
-          Object.assign(tooltipRef.current.style, {
-            opacity: '1',
-            left: `${x}px`,
-            top: `${y}px`,
-          });
-        }
-      });
-    }
-  }, [isTooltipVisible, placement]);
+
+  const { refs, floatingStyles } = useFloating({
+    placement,
+    open: isTooltipVisible,
+    middleware: [offset(5), shift(), flip()],
+  });
   return (
     <>
       <TooltipContainer
@@ -117,16 +102,16 @@ function Tooltip({
           setIsTooltipVisible(false);
         }}
       >
-        <div ref={childrenRef}>{children}</div>
+        <div ref={refs.setReference}>{children}</div>
       </TooltipContainer>
       {isTooltipVisible &&
         overlay &&
         createPortal(
           <TooltipOverLayContainer
-            ref={tooltipRef}
+            ref={refs.setFloating}
             className="sc-tooltip-overlay"
             placement={placement}
-            style={overlayStyle}
+            style={{ ...floatingStyles, ...overlayStyle }}
           >
             <TooltipText className="sc-tooltip-overlay-text">
               {overlay}
