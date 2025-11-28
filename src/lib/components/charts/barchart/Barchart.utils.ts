@@ -1,0 +1,435 @@
+import { BarchartProps, BarchartBars } from './Barchart';
+import { TooltipContentProps } from 'recharts';
+import { chartColors, ChartColors } from '../../../style/theme';
+import { useChartLegend } from '../legend/ChartLegendWrapper';
+import { normalizeChartDataWithUnits } from '../common/chartUtils';
+import { UnitRange } from '../types';
+
+export const getMaxBarValue = (
+  data: { [key: string]: string | number }[],
+  stacked?: boolean,
+) => {
+  const values = data.map((item) => {
+    // If stacked, we need to filter out category and sum the values in the same object
+    if (stacked) {
+      // Get objects keys except category
+      const filterOutCategory = Object.keys(item).filter(
+        (key) => key !== 'category',
+      );
+      // Sum the values in the same object (corresponding to one bar) based on the keys
+      const sumValues = filterOutCategory.reduce((acc, curr) => {
+        return acc + Number(item[curr]);
+      }, 0);
+      return sumValues;
+    }
+    //filter out the category key
+    const numberValues = Object.keys(item)
+      .filter((key) => key !== 'category')
+      .map((key) => Number(item[key]));
+    // Get the max value among the values in the object (corresponding to one bar)
+    return Math.max(...numberValues, 0); // Ensure we don't get -Infinity
+  });
+  return Math.max(...values, 0);
+};
+
+/**
+ * Generates time ranges between start and end dates based on the given interval
+ * @param startDate - Start date
+ * @param endDate - End date
+ * @param interval - Interval in milliseconds
+ * @returns Array of time ranges with start and end properties as Date objects
+ */
+const generateTimeRanges = (
+  startDate: Date,
+  endDate: Date,
+  interval: number,
+): { start: Date; end: Date }[] => {
+  const ranges: { start: Date; end: Date }[] = [];
+
+  let currentDate = new Date(startDate.getTime());
+  while (currentDate.getTime() <= endDate.getTime()) {
+    const rangeEnd = new Date(currentDate.getTime() + interval);
+
+    ranges.push({
+      start: new Date(currentDate.getTime()),
+      end: rangeEnd,
+    });
+
+    currentDate = new Date(currentDate.getTime() + interval);
+  }
+
+  return ranges;
+};
+
+/**
+ * Finds the time range that contains the given date
+ * @param date - Data point date
+ * @param ranges - Array of time ranges
+ * @returns The range that contains the date, or null if not found
+ */
+const findRangeForDate = (
+  date: Date,
+  ranges: { start: Date; end: Date }[],
+): { start: Date; end: Date } | null => {
+  const timestamp = date.getTime();
+  return (
+    ranges.find(
+      (range) =>
+        timestamp >= range.start.getTime() && timestamp < range.end.getTime(),
+    ) || null
+  );
+};
+
+/**
+ * Transforms time-based data into chart format
+ */
+export const transformTimeData = <T extends BarchartBars>(
+  bars: T,
+  type: {
+    type: 'time';
+    timeRange: {
+      startDate: Date;
+      endDate: Date;
+      interval: number;
+    };
+  },
+  barDataKeys: string[],
+) => {
+  const timeRanges = generateTimeRanges(
+    type.timeRange.startDate,
+    type.timeRange.endDate,
+    type.timeRange.interval,
+  );
+
+  const categoryMap = new Map<number, { [key: string]: string | number }>();
+
+  // Initialize all ranges with zeros
+  timeRanges.forEach((range) => {
+    const initialData: { [key: string]: string | number } = {
+      category: range.start.getTime(),
+    };
+    barDataKeys.forEach((dataKey) => {
+      initialData[dataKey] = 0;
+    });
+    categoryMap.set(range.start.getTime(), initialData);
+  });
+
+  // Populate with actual data
+  bars.forEach((bar) => {
+    bar.data.forEach(([dateValue, value]) => {
+      // Convert to Date if it's not already a Date object
+      const date =
+        dateValue instanceof Date
+          ? dateValue
+          : new Date(dateValue as string | number);
+      const range = findRangeForDate(date, timeRanges);
+      if (range) {
+        const existingData = categoryMap.get(range.start.getTime())!;
+        existingData[bar.label] = value;
+      }
+    });
+  });
+
+  return Array.from(categoryMap.values());
+};
+
+/**
+ * Transforms category-based data into chart format
+ */
+export const transformCategoryData = <T extends BarchartBars>(
+  bars: T,
+  barDataKeys: string[],
+) => {
+  const categoryMap = new Map<
+    string | number,
+    { [key: string]: string | number }
+  >();
+
+  bars.forEach((bar) => {
+    bar.data.forEach(([key, value]) => {
+      const categoryKey = String(key);
+
+      if (!categoryMap.has(categoryKey)) {
+        const newData: { [key: string]: string | number } = {
+          category: categoryKey,
+        };
+        barDataKeys.forEach((dataKey) => {
+          newData[dataKey] = 0;
+        });
+        categoryMap.set(categoryKey, newData);
+      }
+
+      const existingData = categoryMap.get(categoryKey)!;
+      existingData[bar.label] = value;
+    });
+  });
+
+  return Array.from(categoryMap.values());
+};
+
+/**
+ * Applies custom sorting to chart data
+ */
+export const applySortingToData = <T extends BarchartBars>(
+  data: { [key: string]: string | number }[],
+  barDataKeys: string[],
+  defaultSort: BarchartProps<T>['defaultSort'],
+) => {
+  const points = data.map((item) => {
+    const point: Record<string, string | number> = { category: item.category };
+    barDataKeys.forEach((dataKey) => {
+      point[dataKey] = Number(item[dataKey]) || 0;
+    });
+    return point;
+  });
+
+  points.sort(
+    defaultSort as (
+      a: Record<string, string | number>,
+      b: Record<string, string | number>,
+    ) => number,
+  );
+
+  return points.map((point) => {
+    const dataItem: { [key: string]: string | number } = {
+      category: point.category,
+    };
+    barDataKeys.forEach((dataKey) => {
+      dataItem[dataKey] = point[dataKey];
+    });
+    return dataItem;
+  });
+};
+
+const getRechartsBarsAndBarDataKeys = (
+  bars: BarchartBars,
+  colorSet: Record<string, ChartColors | string>,
+  stacked?: boolean,
+) => {
+  const rechartsBars: { dataKey: string; fill: string; stackId?: string }[] =
+    [];
+  const barDataKeys: string[] = [];
+
+  bars.forEach((bar) => {
+    const colorName = colorSet[bar.label];
+    const rechartsBar = {
+      dataKey: bar.label,
+      fill: chartColors[colorName] || colorName,
+      stackId: stacked ? 'stacked' : undefined,
+    };
+
+    rechartsBars.push(rechartsBar);
+    barDataKeys.push(bar.label);
+  });
+
+  return {
+    rechartsBars,
+    barDataKeys,
+  };
+};
+
+/**
+ * Converts prometheus data to recharts data format
+ * @param bars - The bars to convert
+ * @param type - The chart type (category or time)
+ * @returns Recharts data format
+ */
+export const formatPrometheusDataToRechartsDataAndBars = <
+  T extends BarchartBars,
+>(
+  bars: T,
+  type: BarchartProps<T>['type'],
+  colorSet: Record<string, ChartColors | string>,
+  stacked?: boolean,
+  defaultSort?: BarchartProps<T>['defaultSort'],
+  legendOrder?: string[],
+): {
+  data: { [key: string]: string | number }[];
+  rechartsBars: { dataKey: string; fill: string; stackId?: string }[];
+} => {
+  const { rechartsBars, barDataKeys } = getRechartsBarsAndBarDataKeys(
+    bars,
+    colorSet,
+    stacked,
+  );
+
+  let data =
+    type.type !== 'category' && type.type === 'time'
+      ? transformTimeData(bars, type, barDataKeys)
+      : transformCategoryData(bars, barDataKeys);
+
+  if (type.type === 'category' && defaultSort) {
+    data = applySortingToData(data, barDataKeys, defaultSort);
+  }
+
+  const sortedRechartsBars = sortStackedBars(
+    rechartsBars,
+    data,
+    stacked,
+    legendOrder,
+  );
+
+  return {
+    rechartsBars: sortedRechartsBars,
+    data,
+  };
+};
+
+// Sort stacked bars by their average values in descending order or by legend order
+// This ensures the largest bars appear at the bottom of the stack (default) or follow legend order
+export const sortStackedBars = (
+  rechartsBars: {
+    dataKey: string;
+    fill: string;
+    stackId?: string;
+  }[],
+  data: {
+    [key: string]: string | number;
+  }[],
+  stacked?: boolean,
+  legendOrder?: string[],
+) => {
+  if (!stacked) {
+    return rechartsBars;
+  }
+
+  // If legend order is provided, sort by legend order
+  if (legendOrder && legendOrder.length > 0) {
+    return [...rechartsBars].sort((a, b) => {
+      const indexA = legendOrder.indexOf(a.dataKey);
+      const indexB = legendOrder.indexOf(b.dataKey);
+
+      // If both items are in legend order, sort by their position
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+
+      // If only one item is in legend order, prioritize it
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+
+      // If neither is in legend order, maintain original order
+      return 0;
+    });
+  }
+
+  // Default behavior: sort by average values
+  const barAverages = rechartsBars.map((bar) => {
+    const values = data
+      .map((item) => Number(item[bar.dataKey]) || 0)
+      .filter((value) => !isNaN(value));
+    const average =
+      values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+    return { ...bar, average };
+  });
+
+  // Sort by average in descending order (largest first, which will be at bottom in stack)
+  barAverages.sort((a, b) => b.average - a.average);
+  // Remove the average property and keep only the bar data
+  return barAverages.map(({ average, ...bar }) => bar);
+};
+
+/**
+ * Filters both chart data and recharts bars to only include selected resources from legend
+ * @param data - Array of chart data objects with category and resource values
+ * @param rechartsBars - Array of recharts bar configurations
+ * @param selectedResources - Array of selected resource names
+ * @returns Object containing filtered data and recharts bars
+ */
+export const filterChartDataAndBarsByLegendSelection = (
+  data: { [key: string]: string | number }[],
+  rechartsBars: { dataKey: string; fill: string; stackId?: string }[],
+  selectedResources: string[],
+) => {
+  // If no resources are selected, show all data and bars (default behavior)
+  if (selectedResources.length === 0) {
+    return { filteredData: data, filteredRechartsBars: rechartsBars };
+  }
+
+  // Filter recharts bars
+  const filteredRechartsBars = rechartsBars.filter((bar) =>
+    selectedResources.includes(bar.dataKey),
+  );
+
+  // Filter data to only include selected resources
+  const filteredData = data.map((item) => {
+    const filteredItem: { [key: string]: string | number } = {
+      category: item.category,
+    };
+    selectedResources.forEach((resource) => {
+      if (resource in item) {
+        filteredItem[resource] = item[resource];
+      }
+    });
+    return filteredItem;
+  });
+
+  return { filteredData, filteredRechartsBars };
+};
+
+export const useChartData = <T extends BarchartBars>(
+  bars: T,
+  type: BarchartProps<T>['type'],
+  colorSet: Record<string, ChartColors | string>,
+  stacked?: boolean,
+  defaultSort?: BarchartProps<T>['defaultSort'],
+  unitRange?: UnitRange,
+  stackedBarSort?: 'default' | 'legend',
+) => {
+  const { selectedResources, listResources } = useChartLegend();
+
+  // Get legend order when stackedBarSort is 'legend'
+  const legendOrder = stackedBarSort === 'legend' ? listResources() : undefined;
+
+  const { data, rechartsBars } = formatPrometheusDataToRechartsDataAndBars(
+    bars,
+    type,
+    colorSet,
+    stacked,
+    defaultSort,
+    legendOrder,
+  );
+
+  // Filter both data and bars to only include selected resources for accurate maxValue calculation
+  const { filteredData, filteredRechartsBars } =
+    filterChartDataAndBarsByLegendSelection(
+      data,
+      rechartsBars,
+      selectedResources,
+    );
+
+  const maxValue = getMaxBarValue(filteredData, stacked);
+
+  const { unitLabel, topValue, rechartsData, topDomain } =
+    normalizeChartDataWithUnits(filteredData, maxValue, unitRange, 'category');
+
+  return {
+    rechartsBars: filteredRechartsBars,
+    unitLabel: unitLabel,
+    roundReferenceValue: topValue,
+    rechartsData,
+    topDomain,
+  };
+};
+
+export const getCurrentPoint = <T extends BarchartBars>(
+  props: TooltipContentProps<number, string>,
+  hoveredValue: string | undefined,
+) => {
+  const { payload, label } = props;
+
+  const tooltipValues: {
+    label: T[number]['label'];
+    value: number;
+    isHovered: boolean;
+  }[] = payload.map((item) => ({
+    label: item.name,
+    value: item.value,
+    isHovered: item.name === hoveredValue,
+  }));
+
+  return {
+    category: label as string | number,
+    values: tooltipValues,
+  };
+};

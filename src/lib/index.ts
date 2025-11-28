@@ -28,11 +28,13 @@ export { Tooltip } from './components/tooltip/Tooltip.component';
 export { ProgressBar } from './components/progressbar/ProgressBar.component';
 export { TextArea } from './components/textarea/TextArea.component';
 
-export { BarChart } from './components/barchart/BarChart.component';
+// BarChart (deprecated) - Use Barchart from @scality/core-ui/dist/next instead
+// export { BarChart } from './components/barchart/BarChart.component';
 export { CircularProgressBar } from './components/circularprogressbar/CircularProgressBar.component';
 
 export { LateralNavbarLayout } from './components/lateralnavbarlayout/LateralNavbarLayout.component';
-export { GlobalHealthBar } from './components/globalhealthbar/GlobalHealthBar.component';
+// GlobalHealthBar (deprecated vega version) - Use GlobalHealthBar from @scality/core-ui/dist/next instead
+// export { GlobalHealthBar } from './components/globalhealthbar/GlobalHealthBar.component';
 export { ConstrainedText } from './components/constrainedtext/Constrainedtext.component';
 export { EmptyState } from './components/emptystate/Emptystate.component';
 export { EmptyTable } from './components/emptytable/Emptytable.component';

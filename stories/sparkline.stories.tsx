@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Sparkline } from '../src/lib/components/sparkline/sparkline.component';
+import React from 'react';
+import { Sparkline } from '../src/lib/components/charts';
 import { lineColor5, lineColor6 } from '../src/lib/style/theme';
 
 const meta: Meta<typeof Sparkline> = {
@@ -10,21 +11,21 @@ const meta: Meta<typeof Sparkline> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    serie: { 
+    serie: {
       control: 'object',
-      description: 'Data series containing array of [timestamp, value] pairs'
+      description: 'Data series containing array of [timestamp, value] pairs',
     },
-    startingTimeStamp: { 
+    startingTimeStamp: {
       control: 'number',
-      description: 'Starting timestamp in seconds for the data series'
+      description: 'Starting timestamp in seconds for the data series',
     },
-    sampleDuration: { 
+    sampleDuration: {
       control: 'number',
-      description: 'Total duration in seconds to cover in the sparkline'
+      description: 'Total duration in seconds to cover in the sparkline',
     },
-    sampleInterval: { 
+    sampleInterval: {
       control: 'number',
-      description: 'Interval in seconds between data points'
+      description: 'Interval in seconds between data points',
     },
   },
   decorators: [
@@ -82,7 +83,7 @@ const trendingDownData: [number, number][] = [
   [1740412800, 22.1],
 ];
 
-const flatData: [number, number|null][] = [
+const flatData: [number, number | null][] = [
   [1740405600, 50.0],
   [1740406320, 50.0],
   [1740407760, 50.0],
@@ -105,7 +106,8 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Sparkline displaying highly volatile data with frequent peaks and valleys.',
+        story:
+          'Sparkline displaying highly volatile data with frequent peaks and valleys.',
       },
     },
   },

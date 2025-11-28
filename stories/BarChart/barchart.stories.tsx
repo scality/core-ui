@@ -6,14 +6,14 @@ import {
   BarchartProps,
   BarchartSortFn,
   BarchartTooltipFn,
-} from '../../src/lib/components/barchartv2/Barchart.component';
+  ChartLegendWrapper,
+  ChartLegend,
+} from '../../src/lib/components/charts';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../../src/lib/components/text/Text.component';
 import { spacing, Stack, Wrap } from '../../src/lib/spacing';
 import { CoreUITheme } from '../../src/lib/style/theme';
 import { Wrapper } from '../common';
-import { ChartLegendWrapper } from '../../src/lib/components/chartlegend/ChartLegendWrapper';
-import { ChartLegend } from '../../src/lib/components/chartlegend/ChartLegend';
 
 type Story = StoryObj<typeof Barchart>;
 
@@ -39,17 +39,17 @@ export const Playground: Story = {
       {
         label: 'Success',
         data: [
-          ['category1', 1],
-          ['category2', 1],
-          ['category3', 2],
+          ['category1', 0.001],
+          ['category2', 0.005],
+          ['category3', 0.002],
         ],
       },
       {
         label: 'Failed',
         data: [
-          ['category1', 1],
-          ['category2', 1],
-          ['category3', 2],
+          ['category1', 0.01],
+          ['category2', 0.05],
+          ['category3', 0.02],
         ],
       },
     ] as const;
@@ -197,6 +197,7 @@ export const Time7DaysWithMissingData: Story = {
           Success: theme.statusHealthy,
           Failed: theme.statusCritical,
         }}
+        sortOrder="status"
       >
         <Barchart
           title="Time 7 Days With Missing Data"

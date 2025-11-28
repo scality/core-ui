@@ -3,14 +3,12 @@ import { Meta, StoryObj } from '@storybook/react';
 import {
   LineTimeSerieChart,
   Serie,
-} from '../src/lib/components/linetimeseriechart/linetimeseriechart.component';
-import { ChartLegendWrapper } from '../src/lib/components/chartlegend/ChartLegendWrapper';
-import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
-import { ChartLegend } from '../src/lib/components/chartlegend/ChartLegend';
-import {
+  ChartLegendWrapper,
+  ChartLegend,
   useChartId,
   useChartLegend,
-} from '../src/lib/components/chartlegend/ChartLegendWrapper';
+} from '../src/lib/components/charts';
+import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
 import { useEffect } from 'react';
 import {
   SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,

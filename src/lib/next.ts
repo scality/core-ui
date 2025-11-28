@@ -4,36 +4,49 @@ export { Button } from './components/buttonv2/Buttonv2.component';
 export { CopyButton } from './components/buttonv2/CopyButton.component';
 export { Tabs, Tab } from './components/tabsv2/Tabsv2.component';
 export { Table } from './components/tablev2/Tablev2.component';
-export { LineTemporalChart } from './components/linetemporalchart/LineTemporalChart.component';
+
+// Keep MetricsTimeSpanProvider for backward compatibility (still used in external projects)
 export {
   MetricsTimeSpanProvider,
   useMetricsTimeSpan,
-} from './components/linetemporalchart/MetricTimespanProvider';
-export { SyncedCursorCharts } from './components/vegachartv2/SyncedCursorCharts';
+} from './components/charts/MetricsTimeSpanProvider';
+
 export { Select } from './components/selectv2/Selectv2.component';
 export { HealthSelector } from './components/healthselectorv2/HealthSelector.component';
 export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';
 export { Accordion } from './components/accordion/Accordion.component';
+
+// Export all chart components from the consolidated charts folder
 export {
   Barchart,
   BarchartSortFn,
   BarchartTooltipFn,
-} from './components/barchartv2/Barchart.component';
-export { BarchartTooltip } from './components/barchartv2/BarchartTooltip';
-export {
+  BarchartTooltip,
+  LineTimeSerieChart,
+  GlobalHealthBar,
+  Sparkline,
+  ChartLegend,
   ChartLegendWrapper,
   useChartId,
-} from './components/chartlegend/ChartLegendWrapper';
-export { ChartLegend } from './components/chartlegend/ChartLegend';
-export { LineTimeSerieChart } from './components/linetimeseriechart/linetimeseriechart.component';
-export {
+  useChartLegend,
   ChartTooltipContainer,
   ChartTooltipItem,
   ChartTooltipHeader,
   ChartTooltipItemsContainer,
-} from './components/charttooltip/ChartTooltip';
+} from './components/charts';
+
+export type {
+  BarchartProps,
+  BarchartBars,
+  LineChartProps,
+  Serie,
+  GlobalHealthProps,
+  Alert,
+  UnitRange,
+  TimeType,
+  CategoryType,
+} from './components/charts';
+
 export { CoreUITheme } from './style/theme';
-export { GlobalHealthBar } from './components/globalhealthbar/GlobalHealthBarRecharts.component';
-export { Sparkline } from './components/sparkline/sparkline.component';
