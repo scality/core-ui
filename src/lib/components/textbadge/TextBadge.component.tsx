@@ -24,7 +24,7 @@ const StyledTextBadge = styled.span<{ variant: TextBadgeVariant }>`
     `}
 `;
 type Props = {
-  text: string;
+  text: React.ReactNode;
   className?: string;
   variant?: TextBadgeVariant;
 } & React.HTMLAttributes<HTMLSpanElement>;
