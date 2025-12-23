@@ -2,11 +2,11 @@ import { ResponsiveContainer } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../../spacing';
 import { Box } from '../../box/Box';
-import { ConstrainedText } from '../../constrainedtext/Constrainedtext.component';
-import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { IconHelp } from '../../iconhelper/IconHelper';
 import { Loader } from '../../loader/Loader.component';
 import { Text } from '../../text/Text.component';
+import { ConstrainedText } from '../../constrainedtext/Constrainedtext.component';
+import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { formatXAxisDate, maxWidthTooltip } from './chartUtils';
 import { TimeType } from '../types';
 
@@ -21,6 +21,14 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
     outline: none;
     overflow: visible;
   }
+`;
+
+const TickContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 interface ChartLoadingOrErrorProps {
@@ -149,32 +157,37 @@ export const CustomTick = ({
       x={centerX}
       y={y - 10}
       width={tickWidth}
-      color={theme.textSecondary}
-      overflow="visible"
+      height={30}
+      style={{
+        overflow: 'visible',
+        pointerEvents: 'none',
+      }}
     >
-      <ConstrainedText
-        color="textSecondary"
-        text={
-          <Text variant="Smaller">
-            {type.type === 'time' ? (
-              <FormattedDateTime
-                format={formatXAxisDate(duration)}
-                value={new Date(payload.value)}
-              />
-            ) : (
-              String(payload.value)
-            )}
-          </Text>
-        }
-        centered
-        tooltipStyle={{
-          backgroundColor: theme.backgroundLevel1,
-          padding: spacing.r10,
-          borderRadius: spacing.r8,
-          border: `1px solid ${theme.border}`,
-          position: 'absolute',
-        }}
-      />
+      <TickContainer>
+        <ConstrainedText
+          color="textSecondary"
+          text={
+            <Text variant="Smaller">
+              {type.type === 'time' ? (
+                <FormattedDateTime
+                  format={formatXAxisDate(duration)}
+                  value={new Date(payload.value)}
+                />
+              ) : (
+                String(payload.value)
+              )}
+            </Text>
+          }
+          centered
+          tooltipStyle={{
+            backgroundColor: theme.backgroundLevel1,
+            padding: spacing.r10,
+            borderRadius: spacing.r8,
+            border: `1px solid ${theme.border}`,
+            position: 'absolute',
+          }}
+        />
+      </TickContainer>
     </foreignObject>
   );
 };
