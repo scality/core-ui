@@ -404,11 +404,17 @@ export function LineTimeSerieChart({
       'timestamp', // LineTimeSerieChart uses 'timestamp' as the key to exclude
     );
 
+    // For percentage charts, ensure Y-axis goes to at least 100%
+    const topDomain =
+      yAxisType === 'percentage'
+        ? Math.max(result.topDomain, 100)
+        : result.topDomain;
+
     return {
-      topValue: result.topValue,
+      topValue: yAxisType === 'percentage' ? Math.max(result.topValue, 100) : result.topValue,
       unitLabel: result.unitLabel ?? (yAxisType === 'percentage' ? '%' : undefined),
       rechartsData: result.rechartsData,
-      topDomain: result.topDomain,
+      topDomain,
     };
   }, [chartData, yAxisType, unitRange]);
 
