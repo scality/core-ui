@@ -479,12 +479,7 @@ export function LineTimeSerieChart({
         )}
         {isLoading && <Loader />}
       </Stack>
-      <div
-        onFocus={() => setIsChartActive(true)}
-        onBlur={() => setIsChartActive(false)}
-        onFocusCapture={() => setIsChartActive(true)}
-        onBlurCapture={() => setIsChartActive(false)}
-      >
+      <div>
         <StyledResponsiveContainer width="100%" height={height}>
           <LineChart
             data={rechartsData}
