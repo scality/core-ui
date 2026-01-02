@@ -172,7 +172,7 @@ const LineTimeSerieChartTooltip = ({
 
             const formattedValue = !Number.isFinite(entry.value)
               ? '-'
-              : `${entry.value.toFixed(2)} ${unitLabel}`;
+              : `${entry.value.toFixed(2)}${unitLabel ? ` ${unitLabel}` : ''}`;
 
             return (
               <React.Fragment key={index}>
@@ -375,9 +375,9 @@ export function LineTimeSerieChart({
       Object.entries(dataPoint)
         .filter(([key]) => key !== 'timestamp')
         .map(([_, value]) => {
-          const num =
-            typeof value === 'string' ? Number(value) : (value ?? Infinity);
-          return !isNaN(num) && num !== null ? num : null;
+          if (value === null || value === undefined) return null;
+          const num = typeof value === 'string' ? Number(value) : value;
+          return !isNaN(num) ? num : null;
         })
         .filter((value): value is number => value !== null),
     );
@@ -386,7 +386,7 @@ export function LineTimeSerieChart({
     if (values.length === 0) {
       return {
         topValue: 100, // Default value for empty charts
-        unitLabel: yAxisType === 'percentage' ? '%' : '',
+        unitLabel: yAxisType === 'percentage' ? '%' : undefined,
         rechartsData: [],
         topDomain: 100,
       };
@@ -406,7 +406,7 @@ export function LineTimeSerieChart({
 
     return {
       topValue: result.topValue,
-      unitLabel: result.unitLabel,
+      unitLabel: result.unitLabel ?? (yAxisType === 'percentage' ? '%' : undefined),
       rechartsData: result.rechartsData,
       topDomain: result.topDomain,
     };
