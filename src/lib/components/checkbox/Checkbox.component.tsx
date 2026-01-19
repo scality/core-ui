@@ -5,6 +5,19 @@ import { spacing, Stack } from '../../spacing';
 import { Text } from '../text/Text.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
+const getCheckmarkSvgUrl = (color: string) => {
+  const encodedColor = color.replace('#', '%23');
+  return `url('data:image/svg+xml,%3Csvg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M3 6.68646L5.0671 9L9 3" stroke="${encodedColor}" stroke-width="1.5"/%3E %3C/svg%3E')`;
+};
+
+const getIndeterminateSvgUrl = (color: string) => {
+  const encodedColor = color.replace('#', '%23');
+  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='6' y1='12' x2='20' y2='12' style='stroke:${encodedColor};stroke-width:4'/%3E %3C/svg%3E")`;
+};
+
+const CheckboxInput = styled.input`
+	transform: scale(1.5);`;
+
 export type Props = {
   label?: string;
   value?: string;
@@ -22,7 +35,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
         className="sc-checkbox"
       >
         <Stack>
-          <input
+          <CheckboxInput
             type="checkbox"
             checked={checked}
             disabled={disabled}
@@ -77,8 +90,7 @@ const StyledCheckbox = styled.label<{
     border: 0;
     background-color: transparent;
     background-size: contain;
-    box-shadow: inset 0 0 0 ${spacing.r1}
-      ${(props) => props.theme.textSecondary};
+    box-shadow: inset 0 0 0 ${spacing.r1} ${(props) => props.theme.textSecondary};
   }
 
   /* Checked */
@@ -89,13 +101,7 @@ const StyledCheckbox = styled.label<{
 
   [type='checkbox']:checked::before {
     box-shadow: none;
-    background-image: url('data:image/svg+xml,%3Csvg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M3 6.68646L5.0671 9L9 3" stroke="${(
-      props,
-    ) =>
-      props.theme.textPrimary.replace(
-        '#',
-        '%23',
-      )}" stroke-width="1.5"/%3E %3C/svg%3E');
+    background-image: ${(props) => getCheckmarkSvgUrl(props.theme.textPrimary)};
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -103,16 +109,9 @@ const StyledCheckbox = styled.label<{
   /* Indeterminate */
 
   [type='checkbox']:indeterminate::before {
-    box-shadow: inset 0 0 0 ${spacing.r1}
-      ${(props) => props.theme.selectedActive};
+    box-shadow: inset 0 0 0 ${spacing.r1} ${(props) => props.theme.selectedActive};
     background-color: ${(props) => props.theme.highlight};
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cline x1='6' y1='12' x2='20' y2='12' style='stroke:${(
-      props,
-    ) =>
-      props.theme.textPrimary.replace(
-        '#',
-        '%23',
-      )};stroke-width:4'/%3E %3C/svg%3E");
+    background-image: ${(props) => getIndeterminateSvgUrl(props.theme.textPrimary)};
   }
 
   /* Hover & focus */
@@ -142,4 +141,4 @@ const StyledCheckbox = styled.label<{
     cursor: not-allowed;
     background-color: ${(props) => props.theme.textSecondary};
   }
-`;
+`
