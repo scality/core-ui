@@ -58,7 +58,7 @@ const TooltipOverLayContainer = styled.div<{
     (props && props.style && props.style.fontSize) || fontSize.small};
   vertical-align: middle;
   padding: ${spacing.r4} ${spacing.r8};
-  max-width: 40rem;
+  max-width: 20rem;
 `;
 
 const TooltipText = styled.div`
