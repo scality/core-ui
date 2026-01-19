@@ -79,6 +79,9 @@ const DropdownMenuItemStyled = styled.li`
   &:active {
     background-color: ${getThemePropSelector('highlight')};
   }
+  &:last-child {
+    border-bottom: 0.3px solid ${getThemePropSelector('border')};
+  }
 `;
 const Caret = styled.span`
   margin-left: ${spacing.r16};
