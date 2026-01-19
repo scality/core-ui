@@ -32,7 +32,7 @@ export const InfoMessage = ({ title, content, link, linkText }: Props) => {
     >
       <Stack>
         <Icon name="Info-circle" color={theme.infoPrimary} size="lg" />
-        {typeof title === 'string' ? <Text isEmphazed>{title}</Text> : title}
+        {typeof title === 'string' ? <Text color="textPrimary" isEmphazed>{title}</Text> : title}
       </Stack>
       <Text color="textSecondary" isGentleEmphazed>
         {content}
