@@ -719,6 +719,51 @@ export const SyncIdExample: Story = {
           interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
           duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
         />
+
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={[
+            {
+              data: prometheusData as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+              metricPrefix: 'cpu',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="CPU Usage"
+          height={200}
+          startingTimeStamp={Number(prometheusData[0][0])}
+          isLoading={false}
+          yAxisType={'percentage'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={[
+            {
+              data: prometheusData3 as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+              metricPrefix: 'memory',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+            {
+              data: prometheusData4 as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
+              metricPrefix: 'memory',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Memory Usage"
+          height={200}
+          startingTimeStamp={Number(prometheusData3[0][0])}
+          isLoading={false}
+          yAxisType={'percentage'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
         <ChartLegend shape="line" direction="vertical" />
       </ChartLegendWrapper>
     );
@@ -849,3 +894,51 @@ export const DynamicColorSetExample: Story = {
     );
   },
 };
+
+export const EmptyDataExample: Story = {
+  render: () => {
+    const now = Date.now() / 1000;
+
+    return (
+      <ChartLegendWrapper
+        colorSet={{ Success: '#00FF00', Failure: '#FF0000' }}
+      >
+        <LineTimeSerieChart
+          series={[]}
+          title="Empty Data - Last Hour"
+          height={150}
+          duration={60 * 60} // 1 hour
+          interval={60} // 1 minute
+          startingTimeStamp={now - 60 * 60}
+          isLoading={false}
+          yAxisType="default"
+        />
+
+        <LineTimeSerieChart
+          series={[]}
+          title="Empty Data - Last 24 Hours"
+          height={150}
+          duration={60 * 60 * 24} // 24 hours
+          interval={60 * 12} // 12 minutes
+          startingTimeStamp={now - 60 * 60 * 24}
+          isLoading={false}
+          yAxisType="default"
+        />
+
+        <LineTimeSerieChart
+          series={[]}
+          title="Empty Data - Last 7 Days"
+          height={150}
+          duration={60 * 60 * 24 * 7} // 7 days
+          interval={60 * 60 * 24} // 1 day
+          startingTimeStamp={now - 60 * 60 * 24 * 7}
+          isLoading={false}
+          yAxisType="default"
+        />
+
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
