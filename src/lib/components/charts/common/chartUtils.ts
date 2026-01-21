@@ -214,9 +214,17 @@ export function addMissingDataPoint(
     return [];
   }
 
-  // If there are no original values, return empty array
+  // If there are no original values, generate placeholder timestamps for the entire duration
   if (originalValues.length === 0) {
-    return [];
+    const newValues: [number, number | string | null][] = [];
+    for (
+      let i = startingTimeStamp;
+      i < startingTimeStamp + sampleDuration;
+      i += sampleInterval
+    ) {
+      newValues.push([i, NAN_STRING]);
+    }
+    return newValues;
   }
 
   const newValues: [number, number | string | null][] = [];

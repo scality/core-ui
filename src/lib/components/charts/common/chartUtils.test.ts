@@ -95,8 +95,23 @@ describe('getUnitLabel', () => {
 });
 
 describe('addMissingDataPoint', () => {
+  it('should generate placeholder timestamps when original data is empty', () => {
+    const result = addMissingDataPoint([], 0, 100, 10);
+    expect(result).toEqual([
+      [0, NAN_STRING],
+      [10, NAN_STRING],
+      [20, NAN_STRING],
+      [30, NAN_STRING],
+      [40, NAN_STRING],
+      [50, NAN_STRING],
+      [60, NAN_STRING],
+      [70, NAN_STRING],
+      [80, NAN_STRING],
+      [90, NAN_STRING],
+    ]);
+  });
+
   it('should return empty array for invalid inputs', () => {
-    expect(addMissingDataPoint([], 0, 100, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], undefined, 100, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], 0, 0, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], -1, 100, 10)).toEqual([]);
