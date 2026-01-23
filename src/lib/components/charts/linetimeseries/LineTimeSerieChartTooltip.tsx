@@ -10,26 +10,25 @@ import {
 } from '../common/ChartTooltip';
 import { LineTimeSerieChartTooltipProps } from './LineTimeSerieChart.types';
 import { getCurrentlyHoveredChartId } from './useChartHover';
+import { formatISONumber } from '../../../utils';
 
 /**
  * Formats a numeric value for tooltip display
  * - Non-finite values (NaN, null, undefined) → "-"
  * - Zero → "0" with unit
- * - Very small values (< 0.01) → "< 0.01" with unit
- * - Normal values → 2 decimal places with unit
+ * - Large values (>= 1000) → compact notation (1k, 1M)
+ * - Normal values (1-999) → up to 2 decimal places
+ * - Small values (0.01-0.99) → 2 decimal places
+ * - Very small values (< 0.01) → scientific notation (e.g., 4.7e-5)
  */
 export const formatTooltipValue = (
   value: number,
   unitLabel?: string,
 ): string => {
   if (!Number.isFinite(value)) return '-';
-  if (value === 0) return `0${unitLabel ? ` ${unitLabel}` : ''}`;
-  const absValue = Math.abs(value);
-  if (absValue > 0 && absValue < 0.01) {
-    const sign = value < 0 ? '-' : '';
-    return `${sign}< 0.01${unitLabel ? ` ${unitLabel}` : ''}`;
-  }
-  return `${value.toFixed(2)}${unitLabel ? ` ${unitLabel}` : ''}`;
+
+  const formatted = formatISONumber(value, { fixedDecimals: true, compact: true });
+  return `${formatted}${unitLabel ? ` ${unitLabel}` : ''}`;
 };
 
 /**
