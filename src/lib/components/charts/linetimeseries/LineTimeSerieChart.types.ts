@@ -81,8 +81,6 @@ export type LineTimeSerieChartTooltipProps = {
   chartContainerRef: React.RefObject<HTMLDivElement>;
   /** The unique ID of this chart instance */
   chartId: string;
-  /** Whether the mouse is currently over this chart's container */
-  isChartHovered: boolean;
 };
 
 /**

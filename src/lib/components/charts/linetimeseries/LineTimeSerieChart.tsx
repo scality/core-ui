@@ -65,8 +65,7 @@ export function LineTimeSerieChart({
   const chartRef = useRef<HTMLDivElement>(null);
 
   // Hover state management for tooltip display
-  const { isChartHovered, handleMouseEnter, handleMouseLeave, chartId } =
-    useChartHover();
+  const { handleMouseEnter, handleMouseLeave, chartId } = useChartHover();
 
   // Process chart data
   const {
@@ -182,7 +181,6 @@ export function LineTimeSerieChart({
                   tooltipProps={props}
                   chartContainerRef={chartRef}
                   chartId={chartId}
-                  isChartHovered={isChartHovered}
                 />
               )}
             />

@@ -46,13 +46,12 @@ export const LineTimeSerieChartTooltip: React.FC<
   belowSeriesLabels,
   chartContainerRef,
   chartId,
-  isChartHovered,
 }) => {
     const { active, payload, label, coordinate } = tooltipProps;
 
-    // Check at call time if this chart is the currently hovered one
-    // This ensures we always have the latest value, not a stale render-time value
-    const isActiveChart = isChartHovered && getCurrentlyHoveredChartId() === chartId;
+    // Check at render time if this chart is the currently hovered one
+    // Using only the module-level variable avoids race conditions with React state updates
+    const isActiveChart = getCurrentlyHoveredChartId() === chartId;
 
     if (!active || !payload || !payload.length || !label || !isActiveChart)
       return null;

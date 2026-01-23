@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react';
+import { useCallback, useId } from 'react';
 
 /**
  * Module-level tracker to ensure only one chart tooltip is shown at a time
@@ -17,29 +17,19 @@ export function getCurrentlyHoveredChartId(): string | null {
 /**
  * Hook to manage chart hover state for tooltip display.
  * Ensures only one chart shows its tooltip at a time when using syncId.
- * 
- * @returns Object containing hover state and event handlers
  */
 export function useChartHover() {
-  const [isChartHovered, setIsChartHovered] = useState(false);
   const chartId = useId();
 
   const handleMouseEnter = useCallback(() => {
     currentlyHoveredChartId = chartId;
-    setIsChartHovered(true);
   }, [chartId]);
 
   const handleMouseLeave = useCallback(() => {
     if (currentlyHoveredChartId === chartId) {
       currentlyHoveredChartId = null;
     }
-    setIsChartHovered(false);
   }, [chartId]);
 
-  return {
-    isChartHovered,
-    handleMouseEnter,
-    handleMouseLeave,
-    chartId,
-  };
+  return { handleMouseEnter, handleMouseLeave, chartId };
 }
