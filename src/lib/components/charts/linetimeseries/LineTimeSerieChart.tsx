@@ -62,7 +62,7 @@ export function LineTimeSerieChart({
   renderTooltip,
 }: LineChartProps) {
   const theme = useTheme();
-  const chartRef = useRef(null);
+  const chartRef = useRef<HTMLDivElement>(null);
 
   // Hover state management for tooltip display
   const { isChartHovered, handleMouseEnter, handleMouseLeave, chartId } =
@@ -90,6 +90,12 @@ export function LineTimeSerieChart({
   const formatXAxisLabelCallback = useCallback(
     (timestamp: number) => formatXAxisLabel(timestamp, duration),
     [duration],
+  );
+
+  // Format Y-axis tick values
+  const tickFormatter = useCallback(
+    (value: number) => formatTickValue(value, topValue),
+    [topValue],
   );
 
   return (
@@ -161,9 +167,7 @@ export function LineTimeSerieChart({
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
               }}
-              tickFormatter={(value) =>
-                formatTickValue(value, topValue)
-              }
+              tickFormatter={tickFormatter}
               ticks={getTicks(topValue, yAxisType === 'symmetrical')}
               interval={0}
             />

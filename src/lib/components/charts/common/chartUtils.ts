@@ -79,7 +79,10 @@ export const getRoundReferenceValue = (value: number): number => {
  * Generate tick values for Y-axis
  * Used by Barchart and LineTimeSerieChart
  */
-export const getTicks = (topValue: number, isSymmetrical: boolean) => {
+export const getTicks = (
+  topValue: number,
+  isSymmetrical: boolean,
+): number[] => {
   const possibleTickNumbers = [4, 3];
   const numberOfTicks =
     possibleTickNumbers.find((number) => topValue % (number - 1) === 0) || 3; // Default to 3 ticks if no match
@@ -217,7 +220,7 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
  * Missing data points are only added when the gap between consecutive data points is bigger than 2 intervals
  * Used by LineTimeSerieChart and Sparkline
  *
- * @param orginalValues - The array of the data points are already sorted according to the time series
+ * @param originalValues - The array of the data points are already sorted according to the time series
  * @param startingTimeStamp - The starting timestamp in seconds
  * @param sampleDuration - The time span value in seconds
  * @param sampleInterval - The time difference between two data points in seconds

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import {
   Bar,
   BarChart as RechartsBarChart,
@@ -112,15 +112,19 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   } = props;
 
   // Create colorSet from ChartLegendWrapper
-  const colorSet = bars?.reduce(
-    (acc, bar) => {
-      const color = getColor(bar.label);
-      if (color) {
-        acc[bar.label] = color;
-      }
-      return acc;
-    },
-    {} as Record<string, ChartColors | string>,
+  const colorSet = useMemo(
+    () =>
+      bars?.reduce(
+        (acc, bar) => {
+          const color = getColor(bar.label);
+          if (color) {
+            acc[bar.label] = color;
+          }
+          return acc;
+        },
+        {} as Record<string, ChartColors | string>,
+      ),
+    [bars, getColor],
   );
 
   const {
@@ -139,6 +143,113 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     stackedBarSort,
   );
   const titleWithUnit = unitLabel ? `${title} (${unitLabel})` : title;
+
+  const tickFormatter = useCallback(
+    (value: number) => formatTickValue(value, roundReferenceValue),
+    [roundReferenceValue],
+  );
+
+  const renderChartContent = () => {
+    if (isError || (!bars && !isLoading)) {
+      return <ChartError height={height} />;
+    }
+    if (isLoading) {
+      return <ChartLoading height={height} />;
+    }
+
+    return (
+      <StyledResponsiveContainer ref={chartRef} width="100%" height={height}>
+        <RechartsBarChart
+          data={rechartsData}
+          accessibilityLayer
+          barSize={
+            type.type === 'category'
+              ? type.gap === 0
+                ? undefined
+                : CHART_CONSTANTS.BAR_SIZE
+              : CHART_CONSTANTS.BAR_SIZE
+          }
+          height={height}
+          margin={CHART_CONSTANTS.CHART_MARGIN}
+          barCategoryGap={type.type === 'category' ? type.gap : undefined}
+        >
+          <CartesianGrid
+            vertical={true}
+            horizontal={true}
+            verticalPoints={[0]}
+            horizontalPoints={[0]}
+            stroke={theme.border}
+            fill={theme.backgroundLevel4}
+            strokeWidth={1}
+          />
+          {rechartsBars.map((bar) => {
+            const { fill, dataKey, stackId } = bar;
+            return (
+              <Bar
+                key={dataKey}
+                dataKey={dataKey}
+                fill={chartColors[fill] || fill}
+                minPointSize={stacked ? 0 : CHART_CONSTANTS.MIN_POINT_SIZE}
+                stackId={stackId}
+                isAnimationActive={false}
+                onMouseOver={() => setHoveredValue(dataKey)}
+                onMouseLeave={() => setHoveredValue(undefined)}
+              />
+            );
+          })}
+
+          <YAxis
+            interval={0}
+            domain={[0, topDomain]}
+            ticks={getTicks(roundReferenceValue, false)}
+            tickFormatter={tickFormatter}
+            axisLine={{ stroke: theme.border }}
+            tick={{
+              fill: theme.textSecondary,
+              fontSize: fontSize.smaller,
+            }}
+            orientation="right"
+          />
+
+          <XAxis
+            dataKey="category"
+            tick={(props) => (
+              <CustomTick
+                {...props}
+                type={type}
+                tickWidthOffset={CHART_CONSTANTS.TICK_WIDTH_OFFSET}
+              />
+            )}
+            type="category"
+            interval={0}
+            allowDataOverflow={true}
+            tickLine={{
+              stroke: theme.border,
+            }}
+            axisLine={{
+              stroke: theme.border,
+            }}
+          />
+
+          <Tooltip
+            content={(props: TooltipContentProps<number, string>) => (
+              <BarchartTooltip
+                type={type}
+                colorSet={colorSet}
+                tooltipProps={props}
+                hoveredValue={hoveredValue}
+                tooltip={tooltip}
+                unitLabel={unitLabel}
+                chartContainerRef={chartRef}
+              />
+            )}
+            cursor={false}
+          />
+        </RechartsBarChart>
+      </StyledResponsiveContainer>
+    );
+  };
+
   return (
     <Stack direction="vertical" style={{ gap: '0' }}>
       <ChartHeader
@@ -147,103 +258,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
         helpTooltip={helpTooltip}
         rightTitle={rightTitle}
       />
-      {isError || (!bars && !isLoading) ? (
-        <ChartError height={height} />
-      ) : isLoading ? (
-        <ChartLoading height={height} />
-      ) : (
-        <StyledResponsiveContainer ref={chartRef} width="100%" height={height}>
-          <RechartsBarChart
-            data={rechartsData}
-            accessibilityLayer
-            barSize={
-              type.type === 'category'
-                ? type.gap === 0
-                  ? undefined
-                  : CHART_CONSTANTS.BAR_SIZE
-                : CHART_CONSTANTS.BAR_SIZE
-            }
-            height={height}
-            margin={CHART_CONSTANTS.CHART_MARGIN}
-            barCategoryGap={type.type === 'category' ? type.gap : undefined}
-          >
-            <CartesianGrid
-              vertical={true}
-              horizontal={true}
-              verticalPoints={[0]}
-              horizontalPoints={[0]}
-              stroke={theme.border}
-              fill={theme.backgroundLevel4}
-              strokeWidth={1}
-            />
-            {rechartsBars.map((bar) => {
-              const { fill, dataKey, stackId } = bar;
-              return (
-                <Bar
-                  key={dataKey}
-                  dataKey={dataKey}
-                  fill={chartColors[fill] || fill}
-                  minPointSize={stacked ? 0 : CHART_CONSTANTS.MIN_POINT_SIZE}
-                  stackId={stackId}
-                  isAnimationActive={false}
-                  onMouseOver={() => setHoveredValue(dataKey)}
-                  onMouseLeave={() => setHoveredValue(undefined)}
-                />
-              );
-            })}
-
-            <YAxis
-              interval={0}
-              domain={[0, topDomain]}
-              ticks={getTicks(roundReferenceValue, false)}
-              tickFormatter={(value) =>
-                formatTickValue(value, roundReferenceValue)
-              }
-              axisLine={{ stroke: theme.border }}
-              tick={{
-                fill: theme.textSecondary,
-                fontSize: fontSize.smaller,
-              }}
-              orientation="right"
-            />
-
-            <XAxis
-              dataKey="category"
-              tick={(props) => (
-                <CustomTick
-                  {...props}
-                  type={type}
-                  tickWidthOffset={CHART_CONSTANTS.TICK_WIDTH_OFFSET}
-                />
-              )}
-              type="category"
-              interval={0}
-              allowDataOverflow={true}
-              tickLine={{
-                stroke: theme.border,
-              }}
-              axisLine={{
-                stroke: theme.border,
-              }}
-            />
-
-            <Tooltip
-              content={(props: TooltipContentProps<number, string>) => (
-                <BarchartTooltip
-                  type={type}
-                  colorSet={colorSet}
-                  tooltipProps={props}
-                  hoveredValue={hoveredValue}
-                  tooltip={tooltip}
-                  unitLabel={unitLabel}
-                  chartContainerRef={chartRef}
-                />
-              )}
-              cursor={false}
-            />
-          </RechartsBarChart>
-        </StyledResponsiveContainer>
-      )}
+      {renderChartContent()}
     </Stack>
   );
 };
