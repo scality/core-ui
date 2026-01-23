@@ -16,7 +16,7 @@ import { IconHelp } from '../../iconhelper/IconHelper';
 import { Loader } from '../../loader/Loader.component';
 import { ChartTitleText } from '../../text/Text.component';
 import { StyledResponsiveContainer } from '../common/SharedComponents';
-import { formatToISONumber, getTicks, maxWidthTooltip } from '../common/chartUtils';
+import { formatTickValue, getTicks, maxWidthTooltip } from '../common/chartUtils';
 import { formatXAxisLabel } from './LineTimeSerieChart.utils';
 import { LineChartProps } from './LineTimeSerieChart.types';
 import { LineTimeSerieChartTooltip } from './LineTimeSerieChartTooltip';
@@ -161,7 +161,9 @@ export function LineTimeSerieChart({
                 fill: theme.textSecondary,
                 fontSize: fontSize.smaller,
               }}
-              tickFormatter={(value) => formatToISONumber(value)}
+              tickFormatter={(value) =>
+                formatTickValue(value, topValue)
+              }
               ticks={getTicks(topValue, yAxisType === 'symmetrical')}
               interval={0}
             />

@@ -13,7 +13,7 @@ import { Stack } from '../../../spacing';
 import { chartColors, ChartColors, fontSize } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
-import { formatToISONumber, getTicks } from '../common/chartUtils';
+import { formatTickValue, getTicks } from '../common/chartUtils';
 import { useChartData } from './Barchart.utils';
 import {
   ChartHeader,
@@ -196,7 +196,9 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
               interval={0}
               domain={[0, topDomain]}
               ticks={getTicks(roundReferenceValue, false)}
-              tickFormatter={(value) => formatToISONumber(value)}
+              tickFormatter={(value) =>
+                formatTickValue(value, roundReferenceValue)
+              }
               axisLine={{ stroke: theme.border }}
               tick={{
                 fill: theme.textSecondary,

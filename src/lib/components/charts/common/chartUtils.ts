@@ -1,6 +1,7 @@
 import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
+import { formatISONumber } from '../../../utils';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -13,6 +14,31 @@ export const maxWidthTooltip = { maxWidth: '20rem' };
 /* -------------------------------------------------------------------------- */
 
 /**
+ * Get the appropriate rounding increment based on value magnitude.
+ * - For values < 5 * magnitude: use half magnitude (finer granularity)
+ * - For values >= 5 * magnitude: use full magnitude
+ *
+ * Examples:
+ * - 150 → increment 50 (150 < 500, so use 100/2)
+ * - 550 → increment 100 (550 >= 500, so use 100)
+ * - 1500 → increment 500 (1500 < 5000, so use 1000/2)
+ * - 5500 → increment 1000 (5500 >= 5000, so use 1000)
+ */
+const getIncrement = (value: number): number => {
+  if (value < 10) return 1;
+
+  const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
+
+  // If value is in lower half of magnitude range, use half magnitude
+  if (value < 5 * magnitude) {
+    return magnitude / 2;
+  }
+
+  // Otherwise use full magnitude
+  return magnitude;
+};
+
+/**
  * Round a value to a nice number for chart display
  * Used by Barchart and LineTimeSerieChart for Y-axis scaling
  */
@@ -23,29 +49,29 @@ export const getRoundReferenceValue = (value: number): number => {
   const bufferedValue = value * 1.1;
 
   if (value >= 10) {
-    const remainder = value % 10;
-    const incremented = value + (10 - remainder);
+    const increment = getIncrement(value);
+    const remainder = value % increment;
+    const roundedDown = value - remainder;
+    const roundedUp = roundedDown + increment;
 
-    // If the remainder is less than 5, round down to the nearest 10
-    if (remainder < 5) {
-      return value - remainder;
+    // If remainder is less than half the increment, round down
+    if (remainder < increment / 2) {
+      return roundedDown;
     }
 
-    // If incrementing would exceed the buffered max, also round down
-    if (incremented > bufferedValue) {
-      return value - remainder;
+    // If rounding up would exceed the buffered max, round down
+    if (roundedUp > bufferedValue) {
+      return roundedDown;
     }
 
-    // Otherwise, round up to the next 10
-    return incremented;
+    // Otherwise, round up
+    return roundedUp;
   }
 
+  // For values < 10, use the magnitude-based approach
   const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
-
   const remainder = bufferedValue % magnitude;
 
-  // Round to nice numbers based on normalized value
-  // appearance for small values
   return remainder === 0 ? bufferedValue : bufferedValue - remainder;
 };
 
@@ -334,9 +360,16 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
   }
 };
 
-export const formatToISONumber = (value: number): string => {
-  const formattedValue = new Intl.NumberFormat('fr-FR')
-    .format(value)
-    .replace(',', '.');
-  return formattedValue;
+/**
+ * Formats a tick value for chart Y-axis display.
+ * - Fixed decimals for alignment when topValue < 1 (e.g., 0.1 → 0.10)
+ * - Compact notation for large values (>= 10k)
+ */
+export const formatTickValue = (value: number, topValue: number): string => {
+  const decimals = topValue < 1 ? Math.ceil(-Math.log10(topValue)) + 1 : 2;
+  return formatISONumber(value, {
+    decimals,
+    fixedDecimals: topValue < 1,
+    compact: topValue >= 10000,
+  });
 };
