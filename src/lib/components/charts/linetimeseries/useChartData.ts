@@ -224,12 +224,12 @@ export function useChartData({
     );
 
     // Default values for empty charts
-    if (values.length === 0) {
+    if (values.length === 0 || values.every((value) => value === 0)) {
       return {
-        topValue: 100,
+        topValue: 1,
         unitLabel: yAxisType === 'percentage' ? '%' : undefined,
         rechartsData: chartData,
-        topDomain: 100,
+        topDomain: 1,
       };
     }
 
