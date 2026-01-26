@@ -9,7 +9,7 @@ export default {
   component: Banner,
   decorators: [(story) => <Wrapper>{story()}</Wrapper>],
   args: {
-    icon: 'Exclamation-triangle',
+    icon: 'Exclamation-circle',
   },
   argTypes: {
     icon: iconArgType,

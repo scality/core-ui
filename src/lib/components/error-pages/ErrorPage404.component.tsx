@@ -36,7 +36,7 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   return (
     <ErrorPageContainer className="sc-error-page404" {...rest}>
       <Row>
-        <Icon name="Exclamation-triangle" size="2x" color="statusWarning" />
+        <Icon name="Exclamation-circle" size="2x" color="statusWarning" />
         <Title>{translations[locale].not_exist}</Title>
       </Row>
       <Row>

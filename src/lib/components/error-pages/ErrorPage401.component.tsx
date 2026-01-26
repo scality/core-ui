@@ -42,7 +42,7 @@ function ErrorPage401({
   return (
     <ErrorPageContainer className="sc-error-page401" {...rest}>
       <Row>
-        <Icon name="Exclamation-triangle" size="2x" color="statusWarning" />
+        <Icon name="Exclamation-circle" size="2x" color="statusWarning" />
         <Title>{translations[locale].unexpected_error}</Title>
       </Row>
       <Row>
