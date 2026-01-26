@@ -4,8 +4,8 @@
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/lib/index.js",
+  "types": "dist/src/lib/index.d.ts",
   "mainSrc": "src/lib/index.js",
   "sideEffects": false,
   "peerDependencies": {
