@@ -62,7 +62,7 @@ export function LineTimeSerieChart({
   renderTooltip,
 }: LineChartProps) {
   const theme = useTheme();
-  const chartRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef(null);
 
   // Hover state management for tooltip display
   const { handleMouseEnter, handleMouseLeave, chartId } = useChartHover();
@@ -109,101 +109,99 @@ export function LineTimeSerieChart({
         {isLoading && <Loader />}
       </Stack>
 
-      <div
-        ref={chartRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <StyledResponsiveContainer width="100%" height={height}>
-          <LineChart
-            data={rechartsData}
-            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-            aria-label={`Time series chart for ${title}`}
-            syncId={syncId}
-            accessibilityLayer
-          >
-            <CartesianGrid
-              vertical={true}
-              horizontal={true}
-              verticalPoints={[0]}
-              horizontalPoints={[0]}
-              stroke={theme.border}
-              fill={theme.backgroundLevel4}
-              strokeWidth={1}
-            />
-            <XAxis
-              dataKey="timestamp"
-              type="number"
-              domain={['dataMin', 'dataMax']}
-              ticks={xAxisTicks}
-              tickFormatter={formatXAxisLabelCallback}
-              tickCount={5}
-              tick={{
-                fill: theme.textSecondary,
-                fontSize: fontSize.smaller,
-              }}
-              axisLine={{ stroke: theme.border }}
-            />
-            <YAxis
-              orientation="right"
-              label={{
-                value: yAxisTitle,
-                angle: 90,
-                dx: 20,
-                style: {
-                  fill: theme.textSecondary,
-                  fontSize: fontSize.smaller,
-                },
-              }}
-              domain={
-                yAxisType === 'symmetrical'
-                  ? [-topDomain, topDomain]
-                  : [0, topDomain]
-              }
-              allowDataOverflow={true}
-              axisLine={{ stroke: theme.border }}
-              tick={{
-                fill: theme.textSecondary,
-                fontSize: fontSize.smaller,
-              }}
-              tickFormatter={tickFormatter}
-              ticks={getTicks(topValue, yAxisType === 'symmetrical')}
-              interval={0}
-            />
-            <Tooltip
-              content={(props: TooltipContentProps<number, string>) => (
-                <LineTimeSerieChartTooltip
-                  unitLabel={unitLabel}
-                  duration={duration}
-                  renderTooltip={renderTooltip}
-                  isSymmetrical={yAxisType === 'symmetrical'}
-                  belowSeriesLabels={belowSeriesLabels}
-                  tooltipProps={props}
-                  chartContainerRef={chartRef}
-                  chartId={chartId}
-                />
-              )}
-            />
-            {/* Add horizontal line at y=0 for symmetrical charts */}
-            {yAxisType === 'symmetrical' && (
-              <ReferenceLine y={0} stroke={theme.border} />
-            )}
+      <StyledResponsiveContainer width="100%" height={height}>
+        <LineChart
+          ref={chartRef}
 
-            {/* Chart lines */}
-            {linesToRender.map((line) => (
-              <Line
-                key={`${title}-${line.key}`}
-                type="monotone"
-                dataKey={line.dataKey}
-                stroke={line.stroke}
-                dot={false}
-                isAnimationActive={false}
-                strokeDasharray={line.strokeDasharray}
+          data={rechartsData}
+          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          aria-label={`Time series chart for ${title}`}
+          syncId={syncId}
+          accessibilityLayer
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <CartesianGrid
+            vertical={true}
+            horizontal={true}
+            verticalPoints={[0]}
+            horizontalPoints={[0]}
+            stroke={theme.border}
+            fill={theme.backgroundLevel4}
+            strokeWidth={1}
+          />
+          <XAxis
+            dataKey="timestamp"
+            type="number"
+            domain={['dataMin', 'dataMax']}
+            ticks={xAxisTicks}
+            tickFormatter={formatXAxisLabelCallback}
+            tickCount={5}
+            tick={{
+              fill: theme.textSecondary,
+              fontSize: fontSize.smaller,
+            }}
+            axisLine={{ stroke: theme.border }}
+          />
+          <YAxis
+            orientation="right"
+            label={{
+              value: yAxisTitle,
+              angle: 90,
+              dx: 20,
+              style: {
+                fill: theme.textSecondary,
+                fontSize: fontSize.smaller,
+              },
+            }}
+            domain={
+              yAxisType === 'symmetrical'
+                ? [-topDomain, topDomain]
+                : [0, topDomain]
+            }
+            allowDataOverflow={true}
+            axisLine={{ stroke: theme.border }}
+            tick={{
+              fill: theme.textSecondary,
+              fontSize: fontSize.smaller,
+            }}
+            tickFormatter={tickFormatter}
+            ticks={getTicks(topValue, yAxisType === 'symmetrical')}
+            interval={0}
+          />
+          <Tooltip
+            content={(props: TooltipContentProps<number, string>) => (
+              <LineTimeSerieChartTooltip
+                unitLabel={unitLabel}
+                duration={duration}
+                renderTooltip={renderTooltip}
+                isSymmetrical={yAxisType === 'symmetrical'}
+                belowSeriesLabels={belowSeriesLabels}
+                tooltipProps={props}
+                chartContainerRef={chartRef}
+                chartId={chartId}
               />
-            ))}
-          </LineChart>
-        </StyledResponsiveContainer>
-      </div>
-    </LineTemporalChartWrapper>
+            )}
+          />
+          {/* Add horizontal line at y=0 for symmetrical charts */}
+          {yAxisType === 'symmetrical' && (
+            <ReferenceLine y={0} stroke={theme.border} />
+          )}
+
+          {/* Chart lines */}
+          {linesToRender.map((line) => (
+            <Line
+              key={`${title}-${line.key}`}
+              type="monotone"
+              dataKey={line.dataKey}
+              stroke={line.stroke}
+              dot={false}
+              isAnimationActive={false}
+              strokeDasharray={line.strokeDasharray}
+            />
+          ))}
+        </LineChart>
+      </StyledResponsiveContainer>
+    </LineTemporalChartWrapper >
   );
 }
