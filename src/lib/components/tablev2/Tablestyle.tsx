@@ -8,7 +8,6 @@ import { HeaderGroup } from 'react-table';
 import { Icon } from '../icon/Icon.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
-import { Box } from '../box/Box';
 
 const borderSize = '4px';
 export const SortIncentive = styled.span`
@@ -65,7 +64,6 @@ export const HeadRow = styled.div<HeadRowType>`
   overflow: hidden;
   border-bottom: 1px solid
     ${(props) => props.theme[props.separationLineVariant]};
-  padding-right: ${borderSize};
   padding-left: ${spacing.r16};
 `;
 
@@ -105,7 +103,7 @@ export const TableRow = styled.div<TableRowType>`
     if (props.selectedId && props.isSelected) {
       return css`
         background-color: ${props.theme.highlight};
-        border-right: ${borderSize} solid ${props.theme.selectedActive};
+        box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};
       `;
     }
   }}
@@ -124,7 +122,7 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
     if (props.isSelected) {
       return css`
         background-color: ${(props) => props.theme.highlight};
-        border-right: ${borderSize} solid ${props.theme.selectedActive};
+        box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};
       `;
     }
   }}
