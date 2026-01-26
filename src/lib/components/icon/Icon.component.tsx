@@ -98,6 +98,8 @@ function NonWrappedIcon({
   style,
   ...rest
 }: Omit<Props, 'withWrapper'>) {
+  const accessibleLabel = ariaLabel || name;
+
   // Check for custom icons first
   const CustomIcon = customIcons[name];
   if (CustomIcon) {
@@ -106,7 +108,7 @@ function NonWrappedIcon({
         color={color}
         size={size}
         title={title}
-        aria-label={`${name} ${ariaLabel}`}
+        aria-label={accessibleLabel}
         {...rest}
       />
     );
@@ -124,7 +126,7 @@ function NonWrappedIcon({
       icon={icon}
       size={size}
       title={title}
-      aria-label={`${name} ${ariaLabel}`}
+      aria-label={accessibleLabel}
       style={style as React.CSSProperties & { [key: `--fa-${string}`]: string }}
       {...rest}
     />

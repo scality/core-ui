@@ -6,6 +6,8 @@ type IconHelpProps = {
   tooltipMessage: ReactNode;
   placement?: Position;
   overlayStyle?: CSSProperties;
+  ariaLabel?: string;
+  /** @deprecated Use ariaLabel instead for screen reader accessibility */
   title?: string;
 };
 
@@ -13,6 +15,7 @@ export const IconHelp = ({
   tooltipMessage,
   overlayStyle,
   placement = 'right',
+  ariaLabel,
   title,
 }: IconHelpProps) => (
   <Tooltip
@@ -20,6 +23,6 @@ export const IconHelp = ({
     placement={placement}
     overlayStyle={overlayStyle}
   >
-    <Icon name="Info" color="buttonSecondary" title={title} />
+    <Icon name="Info" color="buttonSecondary" ariaLabel={ariaLabel || title} />
   </Tooltip>
 );

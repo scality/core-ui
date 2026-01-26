@@ -13,7 +13,7 @@ describe('IconHelper', () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <IconHelp tooltipMessage={tooltipMessage} title="Info" />
+        <IconHelp tooltipMessage={tooltipMessage} ariaLabel="Info" />
       </Wrapper>,
     );
   };
@@ -35,13 +35,13 @@ describe('IconHelper', () => {
       expect(screen.getByText(tooltipMessage)).toBeVisible();
     });
   });
-  it('should be able to change accessible label with title', async () => {
+  it('should be able to change accessible label with ariaLabel', async () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
         <IconHelp
           tooltipMessage={'This is a tooltip'}
-          title="Info Helper Testing"
+          ariaLabel="Info Helper Testing"
         />
       </Wrapper>,
     );
