@@ -4,7 +4,7 @@
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
-  "main": "dist/src/lib/index.js",
+  "main": "dist/src/index.mjs",
   "types": "dist/src/lib/index.d.ts",
   "mainSrc": "src/lib/index.js",
   "sideEffects": false,
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'dist/*.js'",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && rslib build",
     "copy-files": "copyfiles -u 2 src/lib/style/fonts/* dist && copyfiles -u 2 src/lib/*.css dist",
     "lint": "eslint src/* --ext .js --no-error-on-unmatched-pattern",
     "prepare": "npm run build",
