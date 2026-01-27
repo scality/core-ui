@@ -10,7 +10,7 @@ import {
 import styled, { css } from 'styled-components';
 import { CoreUITheme } from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
-import { RemoteGroup, RemoteUser } from './CustomsIcons';
+import { Bucket, Buckets, RemoteGroup, RemoteUser } from './CustomsIcons';
 
 // Module-level cache for imported icons
 const iconCache: Record<string, any> = {};
@@ -24,7 +24,6 @@ export const iconTable = {
   'Node-pdf': 'fas faDatabase',
   'Volume-pdf': 'fas faCompactDisc',
   Network: 'fas faProjectDiagram',
-  Bucket: 'fas faGlassWhiskey',
   'Cloud-backend': 'fas faCloud',
   Datacenter: 'fas faWarehouse',
   'Simple-user': 'fas faUser',
@@ -164,10 +163,18 @@ export const customIcons: Record<
   'Remote-group': ({ 'aria-label': ariaLabel, color, size }) => (
     <RemoteGroup ariaLabel={ariaLabel} color={color} size={size} />
   ),
+  Bucket: ({ 'aria-label': ariaLabel, color, size }) => (
+    <Bucket ariaLabel={ariaLabel} color={color} size={size} />
+  ),
+  Buckets: ({ 'aria-label': ariaLabel, color, size }) => (
+    <Buckets ariaLabel={ariaLabel} color={color} size={size} />
+  ),
 };
 
 customIcons['Remote-user'].displayName = 'RemoteUser';
 customIcons['Remote-group'].displayName = 'RemoteGroup';
+customIcons['Bucket'].displayName = 'Bucket';
+customIcons['Buckets'].displayName = 'Buckets';
 
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {
