@@ -4,7 +4,7 @@
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
-  "main": "dist/src/index.mjs",
+  "main": "dist/index.mjs",
   "types": "dist/src/lib/index.d.ts",
   "mainSrc": "src/lib/index.js",
   "sideEffects": false,
