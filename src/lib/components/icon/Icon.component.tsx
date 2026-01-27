@@ -4,7 +4,7 @@ import { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { CoreUITheme } from '../../style/theme';
 import { RemoteGroup, RemoteUser } from './CustomsIcons';
-import { iconTable } from './iconDefinitions';
+import { iconTable, getIcon } from './iconDefinitions';
 
 type IconProps = {
   'aria-label'?: string;
@@ -114,8 +114,8 @@ function NonWrappedIcon({
     );
   }
 
-  // Get FontAwesome icon from static lookup
-  const icon = iconTable[name];
+  // Get FontAwesome icon using lazy getter (enables tree-shaking)
+  const icon = getIcon(name);
   if (!icon) {
     throw new Error(`${name}: is not a valid icon.`);
   }
