@@ -12,7 +12,7 @@ export { LineTimeSerieChart } from './linetimeseries/LineTimeSerieChart';
 export type {
   LineChartProps,
   Serie,
-} from './linetimeseries/LineTimeSerieChart';
+} from './linetimeseries/LineTimeSerieChart.types';
 
 export { GlobalHealthBar } from './globalhealthbar/GlobalHealthBar';
 export type { GlobalHealthProps } from './globalhealthbar/GlobalHealthBar';

@@ -55,3 +55,41 @@ export const convertRemToPixels = (rem: number): number => {
 
   return 0;
 };
+
+type FormatISONumberOptions = {
+  decimals?: number;
+  compact?: boolean;
+  fixedDecimals?: boolean;
+};
+
+/**
+ * Formats a number to ISO 80000-1 format:
+ * - Space as thousands separator
+ * - Dot as decimal separator
+ * - Optional compact notation (10K, 1M, etc.)
+ * - Very small values (< 0.001): scientific notation
+ */
+export const formatISONumber = (
+  value: number,
+  options: FormatISONumberOptions = {},
+): string => {
+  const { decimals = 2, compact = false, fixedDecimals = false } = options;
+
+  if (value === 0) return '0';
+
+  const absValue = Math.abs(value);
+
+  if (absValue < 0.001) {
+    return value.toExponential();
+  }
+
+  // ISO format: space as thousands separator, dot as decimal separator
+  // With optional compact notation (10K, 1M, etc.)
+  return new Intl.NumberFormat('fr-FR', {
+    minimumFractionDigits: fixedDecimals ? decimals : undefined,
+    maximumFractionDigits: decimals,
+    notation: compact ? 'compact' : 'standard',
+  })
+    .format(value)
+    .replace(',', '.');
+};

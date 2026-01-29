@@ -11,10 +11,13 @@ import {
 import { lineTimeSeriesColorRange } from '../src/lib/style/theme';
 import { useEffect } from 'react';
 import {
+  SAMPLE_DURATION_LAST_ONE_HOUR,
   SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+  SAMPLE_FREQUENCY_LAST_ONE_HOUR,
   SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
 } from '../src/lib/components/constants';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { useTheme } from 'styled-components';
 
 const ChartWithProviders = (props) => {
   return (
@@ -71,10 +74,6 @@ const meta: Meta<typeof LineTimeSerieChart> = {
       options: ['default', 'percentage', 'symmetrical'],
     },
     yAxisTitle: { control: 'text' },
-    timeFormat: {
-      control: 'select',
-      options: ['date-time', 'date'],
-    },
   },
 };
 
@@ -638,7 +637,6 @@ export const DateFormatExample: Story = {
     duration:
       longTermPrometheusData[longTermPrometheusData.length - 1][0] -
       longTermPrometheusData[0][0],
-    timeFormat: 'date',
   },
 };
 
@@ -719,6 +717,51 @@ export const SyncIdExample: Story = {
           interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
           duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
         />
+
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={[
+            {
+              data: prometheusData as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+              metricPrefix: 'cpu',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="CPU Usage"
+          height={200}
+          startingTimeStamp={Number(prometheusData[0][0])}
+          isLoading={false}
+          yAxisType={'percentage'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
+        <LineTimeSerieChart
+          syncId="sync-id"
+          series={[
+            {
+              data: prometheusData3 as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+              metricPrefix: 'memory',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+            {
+              data: prometheusData4 as [number, string | number | null][],
+              resource: 'ip-10-160-122-207.eu-north-2.compute.internal',
+              metricPrefix: 'memory',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Memory Usage"
+          height={200}
+          startingTimeStamp={Number(prometheusData3[0][0])}
+          isLoading={false}
+          yAxisType={'percentage'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
         <ChartLegend shape="line" direction="vertical" />
       </ChartLegendWrapper>
     );
@@ -744,7 +787,6 @@ export const CustomTooltipExample: Story = {
     yAxisTitle: '',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-    timeFormat: 'date-time',
     renderTooltip: (props) => {
       return <div>Custom Tooltip</div>;
     },
@@ -849,3 +891,280 @@ export const DynamicColorSetExample: Story = {
     );
   },
 };
+
+export const EmptyDataExample: Story = {
+  render: () => {
+    const theme = useTheme();
+    const now = Date.now() / 1000;
+
+    return (
+      <ChartLegendWrapper
+        // @ts-ignore
+        colorSet={{ Success: theme.statusHealthy, Failed: theme.statusCritical }}
+        sortOrder="status"
+      >
+        <LineTimeSerieChart
+          series={[]}
+          title="Empty Data - Last Hour"
+          height={150}
+          duration={60 * 60} // 1 hour
+          interval={60} // 1 minute
+          startingTimeStamp={now - 60 * 60}
+          isLoading={false}
+          yAxisType="default"
+        />
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
+
+// Generate 1-hour data with 30s intervals, all zeros
+const generateAllZeroValuesData = (): [number, string][] => {
+  const baseTimestamp = 1740405600;
+  const points: [number, string][] = [];
+  for (let i = 0; i <= 120; i++) {
+    const timestamp = baseTimestamp + i * 30;
+    points.push([timestamp, '0']);
+  }
+  return points;
+};
+
+const allZeroValuesData = generateAllZeroValuesData();
+
+export const AllZeroValuesExample: Story = {
+  render: () => {
+    return (
+      <ChartLegendWrapper colorSet={{ 'server-1': lineTimeSeriesColorRange[0] }}>
+        <LineTimeSerieChart yAxisType='default' startingTimeStamp={allZeroValuesData[0][0]} interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR} duration={SAMPLE_DURATION_LAST_ONE_HOUR}
+          series={[{ data: allZeroValuesData, resource: 'server-1', metricPrefix: 'bandwidth', getTooltipLabel: (prefix, resource) => `${resource}-${prefix}` }]} title="All Zero Values" height={200} />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
+// Data with small values (below 1)
+const smallValuesData: [number, string][] = [
+  [1740405600, '0.047'],
+  [1740406320, '0.053'],
+  [1740407760, '0.040'],
+  [1740408480, '0.059'],
+  [1740409200, '0.062'],
+  [1740409920, '0.057'],
+  [1740410640, '0.045'],
+  [1740411360, '0.058'],
+  [1740412080, '0.053'],
+  [1740412800, '0.064'],
+  [1740413520, '0.081'],
+  [1740414240, '0.064'],
+  [1740415680, '0.097'],
+  [1740416400, '0.055'],
+  [1740417120, '0.047'],
+  [1740417840, '0.072'],
+  [1740418560, '0.061'],
+  [1740419280, '0.051'],
+  [1740420000, '0.039'],
+  [1740420720, '0.046'],
+  [1740421440, '0.035'],
+  [1740422160, '0.046'],
+  [1740422880, '0.043'],
+  [1740423600, '0.036'],
+  [1740467520, '0.042'],
+  [1740468240, '0.053'],
+  [1740468960, '0.055'],
+  [1740469680, '0.046'],
+  [1740470400, '0.043'],
+  [1740471120, '0.055'],
+  [1740471840, '0.046'],
+  [1740472560, '0.047'],
+  [1740473280, '0.044'],
+  [1740474000, '0.055'],
+  [1740474720, '0.042'],
+  [1740475440, '0.061'],
+  [1740476160, '0.042'],
+  [1740476880, '0.038'],
+  [1740477600, '0.041'],
+  [1740478320, '0.052'],
+  [1740479040, '0.042'],
+  [1740479760, '0.034'],
+  [1740480480, '0.036'],
+  [1740481200, '0.037'],
+  [1740481920, '0.049'],
+  [1740482640, '0.041'],
+  [1740483360, '0.037'],
+  [1740484080, '0.035'],
+  [1740484800, '0.039'],
+  [1740485520, '0.047'],
+  [1740486240, '0.046'],
+  [1740486960, '0.042'],
+  [1740487680, '0.035'],
+  [1740488400, '0.034'],
+  [1740489120, '0.041'],
+  [1740489840, '0.058'],
+  [1740490560, '0.040'],
+  [1740491280, '0.045'],
+  [1740492000, '0.045'],
+];
+
+const verySmallValuesData: [number, string][] = [
+  [1740405600, '0.00000475'],
+  [1740406320, '0.00000530'],
+  [1740407760, '0.00000401'],
+  [1740408480, '0.00000591'],
+  [1740409200, '0.00000624'],
+  [1740409920, '0.00000574'],
+  [1740410640, '0.00000451'],
+  [1740411360, '0.00000586'],
+  [1740412080, '0.00000530'],
+  [1740412800, '0.00000649'],
+  [1740413520, '0.00000812'],
+  [1740414240, '0.00000648'],
+  [1740415680, '0.00000671'],
+  [1740416400, '0.00000552'],
+  [1740417120, '0.00000479'],
+  [1740417840, '0.00000721'],
+  [1740418560, '0.00000619'],
+  [1740419280, '0.00000510'],
+  [1740420000, '0.00000395'],
+  [1740420720, '0.00000469'],
+  [1740421440, '0.00000350'],
+  [1740422160, '0.00000466'],
+  [1740422880, '0.00000435'],
+  [1740423600, '0.00000367'],
+];
+
+
+
+export const SmallValuesExample: Story = {
+  render: () => {
+    return (
+      <ChartLegendWrapper
+        colorSet={{
+          'server-1': lineTimeSeriesColorRange[0],
+          'server-2': lineTimeSeriesColorRange[1],
+        }}
+      >
+        <LineTimeSerieChart
+          series={[
+            {
+              data: smallValuesData,
+              resource: 'server-1',
+              metricPrefix: 'rate',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Small Values (0.003 - 0.008 range)"
+          height={200}
+          startingTimeStamp={smallValuesData[0][0]}
+          isLoading={false}
+          yAxisType={'default'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+
+        <LineTimeSerieChart
+          series={[
+            {
+              data: verySmallValuesData,
+              resource: 'server-2',
+              metricPrefix: 'rate',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Very Small Values (0.000003 - 0.000008 range)"
+          height={200}
+          startingTimeStamp={verySmallValuesData[0][0]}
+          isLoading={false}
+          yAxisType={'default'}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        />
+        <ChartLegend shape="line" direction="vertical" />
+      </ChartLegendWrapper>
+    );
+  },
+};
+// Generate 1-hour data with 30s intervals (120 points)
+const generateBigValuesData = (): [number, string][] => {
+  const baseTimestamp = 1740405600;
+  const points: [number, string][] = [];
+  for (let i = 0; i <= 120; i++) {
+    const timestamp = baseTimestamp + i * 30;
+    // Exponential growth from 1000 to ~100M
+    const value = Math.floor(1000 * Math.pow(1.1, i));
+    points.push([timestamp, value.toString()]);
+  }
+  return points;
+};
+
+const generateBigValuesData2 = (): [number, string][] => {
+  const baseTimestamp = 1740405600;
+  const points: [number, string][] = [];
+  for (let i = 0; i <= 120; i++) {
+    const timestamp = baseTimestamp + i * 30;
+    // Fluctuating between 10000 and 15000 with random variation
+    const value = 12500 + Math.sin(i * 0.2) * 2500 + Math.random() * 500;
+    points.push([timestamp, value.toFixed(2)]);
+  }
+  return points;
+};
+
+const bigValuesData = generateBigValuesData();
+const bigValuesData2 = generateBigValuesData2();
+export const BigValuesExample: Story = {
+  render: () => {
+    return (
+      <ChartLegendWrapper
+        colorSet={{
+          'server-1': lineTimeSeriesColorRange[0],
+          'server-2': lineTimeSeriesColorRange[1],
+        }}
+      >
+        <LineTimeSerieChart
+          series={[
+            {
+              data: bigValuesData2,
+              resource: 'server-2',
+              metricPrefix: 'bandwidth',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Big Values"
+          height={200}
+          yAxisTitle='Big Number Example '
+          startingTimeStamp={bigValuesData2[0][0]}
+          isLoading={false}
+          yAxisType={'default'}
+          interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR}
+          duration={SAMPLE_DURATION_LAST_ONE_HOUR}
+        />
+        <LineTimeSerieChart
+          series={[
+            {
+              data: bigValuesData2,
+              resource: 'server-2',
+              metricPrefix: 'bandwidth',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="Big Values"
+          height={200}
+          yAxisTitle='Big Number Example '
+          startingTimeStamp={bigValuesData2[0][0]}
+          isLoading={false}
+          unitRange={UNIT_RANGE_BS}
+          yAxisType={'default'}
+          interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR}
+          duration={SAMPLE_DURATION_LAST_ONE_HOUR}
+        />
+      </ChartLegendWrapper>
+    );
+  },
+};
+
+
+
+
+
+

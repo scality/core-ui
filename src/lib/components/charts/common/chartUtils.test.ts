@@ -23,16 +23,16 @@ describe('getRoundReferenceValue', () => {
     expect(getRoundReferenceValue(9)).toBe(9); // 9 → 9.9 → 9 (magnitude 1, remainder 0.9)
 
     // Larger values get 10% buffer applied
-    expect(getRoundReferenceValue(15)).toBe(10); // 15 → 16.5, remainder 5, incremented 20 > 16.5, so round down to 10
-    expect(getRoundReferenceValue(35)).toBe(30); // 35 → 38.5, remainder 5, incremented 40 > 38.5, so round down to 30
+    expect(getRoundReferenceValue(15)).toBe(15); // 15 → increment 5, remainder 0, return 15
+    expect(getRoundReferenceValue(35)).toBe(35); // 35 → increment 5, remainder 0, return 35
     expect(getRoundReferenceValue(75)).toBe(80); // 75 → 82.5, remainder 5, incremented 80 <= 82.5, so round up to 80
-    expect(getRoundReferenceValue(150)).toBe(150); // 150 → 165, remainder 0, so return 150
-    expect(getRoundReferenceValue(350)).toBe(350); // 350 → 385, remainder 0, so return 350
-    expect(getRoundReferenceValue(750)).toBe(750); // 750 → 825, remainder 0, so return 750
-    expect(getRoundReferenceValue(1500)).toBe(1500); // 1500 → 1650, remainder 0, so return 1500
-    expect(getRoundReferenceValue(3500)).toBe(3500); // 3500 → 3850, remainder 0, so return 3500
-    expect(getRoundReferenceValue(7500)).toBe(7500); // 7500 → 8250, remainder 0, so return 7500
-    expect(getRoundReferenceValue(15000)).toBe(15000); // 15000 → 16500, remainder 0, so return 15000
+    expect(getRoundReferenceValue(150)).toBe(150); // increment 50, remainder 0
+    expect(getRoundReferenceValue(350)).toBe(350); // increment 50, remainder 0
+    expect(getRoundReferenceValue(750)).toBe(800); // increment 100, remainder 50, rounds up
+    expect(getRoundReferenceValue(1500)).toBe(1500); // increment 500, remainder 0
+    expect(getRoundReferenceValue(3500)).toBe(3500); // increment 500, remainder 0
+    expect(getRoundReferenceValue(7500)).toBe(8000); // increment 1000, remainder 500, rounds up
+    expect(getRoundReferenceValue(15000)).toBe(15000); // increment 5000, remainder 0
   });
 });
 
@@ -95,8 +95,23 @@ describe('getUnitLabel', () => {
 });
 
 describe('addMissingDataPoint', () => {
+  it('should generate placeholder timestamps when original data is empty', () => {
+    const result = addMissingDataPoint([], 0, 100, 10);
+    expect(result).toEqual([
+      [0, NAN_STRING],
+      [10, NAN_STRING],
+      [20, NAN_STRING],
+      [30, NAN_STRING],
+      [40, NAN_STRING],
+      [50, NAN_STRING],
+      [60, NAN_STRING],
+      [70, NAN_STRING],
+      [80, NAN_STRING],
+      [90, NAN_STRING],
+    ]);
+  });
+
   it('should return empty array for invalid inputs', () => {
-    expect(addMissingDataPoint([], 0, 100, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], undefined, 100, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], 0, 0, 10)).toEqual([]);
     expect(addMissingDataPoint([[10, 5]], -1, 100, 10)).toEqual([]);
@@ -264,8 +279,8 @@ describe('normalizeChartDataWithUnits', () => {
       );
 
       expect(result.unitLabel).toBe('B');
-      // 680 / 1 = 680 → getRoundReferenceValue(680) = 680
-      expect(result.topValue).toBe(680);
+      // 680 / 1 = 680 → getRoundReferenceValue(680) = 700 (rounds up since 80 >= 50)
+      expect(result.topValue).toBe(700);
       expect(result.rechartsData).toEqual([
         { category: 'category1', success: 680 },
       ]);
