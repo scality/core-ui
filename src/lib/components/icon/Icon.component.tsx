@@ -279,10 +279,13 @@ function NonWrappedIcon({
     }
 
     // Handle FontAwesome icons with dynamic import
-    import(`@fortawesome/${fontAwesomeType}/${iconClass}.js`).then((module) => {
-      setIcon(module[iconClass]);
-      iconCache[cacheKey] = module[iconClass];
-    });
+    import(
+      /* webpackExclude: /import\.macro\.js$/ */
+      `@fortawesome/${fontAwesomeType}/${iconClass}.js`).then((module) => {
+        console.log('module', module);
+        setIcon(module[iconClass]);
+        iconCache[cacheKey] = module[iconClass];
+      });
     return () => setIcon(undefined);
   }, [name, iconInfo]);
 
