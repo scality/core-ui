@@ -282,7 +282,6 @@ function NonWrappedIcon({
     import(
       /* webpackExclude: /import\.macro\.js$/ */
       `@fortawesome/${fontAwesomeType}/${iconClass}.js`).then((module) => {
-        console.log('module', module);
         setIcon(module[iconClass]);
         iconCache[cacheKey] = module[iconClass];
       });
