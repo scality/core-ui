@@ -21,8 +21,6 @@ export { Accordion } from './components/accordion/Accordion.component';
 // Export all chart components from the consolidated charts folder
 export {
   Barchart,
-  BarchartSortFn,
-  BarchartTooltipFn,
   BarchartTooltip,
   LineTimeSerieChart,
   GlobalHealthBar,
@@ -40,6 +38,8 @@ export {
 export type {
   BarchartProps,
   BarchartBars,
+  BarchartSortFn,
+  BarchartTooltipFn,
   LineChartProps,
   Serie,
   GlobalHealthProps,
@@ -49,4 +49,4 @@ export type {
   CategoryType,
 } from './components/charts';
 
-export { CoreUITheme } from './style/theme';
+export type { CoreUITheme } from './style/theme';

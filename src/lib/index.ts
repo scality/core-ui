@@ -11,8 +11,8 @@ export {
   STATUS_INFO,
   STATUS_UNKNOWN,
   STATUS_NONE,
-  Status,
 } from './components/constants';
+export type { Status } from './components/constants';
 export { Layout } from './components/layout/Layout.component';
 export { Loader } from './components/loader/Loader.component';
 export { Modal } from './components/modal/Modal.component';
@@ -78,5 +78,5 @@ export { InfoMessage } from './components/infomessage/InfoMessage.component';
 export { InputList } from './components/inputlist/InputList.component';
 export { InlineInput } from './components/inlineinput/InlineInput';
 export { UnsuccessfulResult } from './components/UnsuccessfulResult.component';
-export { CoreUITheme } from './style/theme';
+export type { CoreUITheme } from './style/theme';
 export { formatISONumber } from './utils';
