@@ -8,7 +8,7 @@ import { Text } from '../../text/Text.component';
 import { ConstrainedText } from '../../constrainedtext/Constrainedtext.component';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { formatXAxisDate, maxWidthTooltip } from './chartUtils';
-import { TimeType } from '../types';
+import { TimeType, CategoryType } from '../types';
 
 /**
  * Styled ResponsiveContainer for charts
@@ -117,14 +117,14 @@ export const ChartHeader = ({
 };
 
 interface CustomTickProps {
-  x: number;
-  y: number;
+  x: number | string;
+  y: number | string;
   payload: {
     value: number;
   };
-  visibleTicksCount: number;
-  width: number;
-  type: TimeType;
+  visibleTicksCount?: number;
+  width?: number | string;
+  type: TimeType | CategoryType;
   tickWidthOffset?: number;
 }
 
@@ -142,20 +142,24 @@ export const CustomTick = ({
   tickWidthOffset = 4,
 }: CustomTickProps) => {
   const theme = useTheme();
-  const tickWidth = width / visibleTicksCount - tickWidthOffset;
-  const centerX = x - tickWidth / 2;
+  const numX = typeof x === 'string' ? parseFloat(x) : x;
+  const numY = typeof y === 'string' ? parseFloat(y) : y;
+  const numWidth = typeof width === 'string' ? parseFloat(width) : (width ?? 0);
+  const tickCount = visibleTicksCount ?? 1;
+  const tickWidth = numWidth / tickCount - tickWidthOffset;
+  const centerX = numX - tickWidth / 2;
 
   const duration =
     type.type === 'time'
       ? (type.timeRange.endDate.getTime() -
-          type.timeRange.startDate.getTime()) /
-        1000
+        type.timeRange.startDate.getTime()) /
+      1000
       : 0;
 
   return (
     <foreignObject
       x={centerX}
-      y={y - 10}
+      y={numY - 10}
       width={tickWidth}
       height={30}
       style={{
