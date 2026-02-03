@@ -11,139 +11,10 @@ import styled, { css } from 'styled-components';
 import { CoreUITheme } from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { Bucket, Buckets, RemoteGroup, RemoteUser } from './CustomsIcons';
+import { iconTable } from './iconTable';
 
 // Module-level cache for imported icons
 const iconCache: Record<string, any> = {};
-
-export const iconTable = {
-  Account: 'fas faWallet',
-  Backend: 'fas faNetworkWired',
-  Tape: 'fas faTape',
-  'Node-backend': 'fas faServer',
-  'Volume-backend': 'fas faHdd',
-  'Node-pdf': 'fas faDatabase',
-  'Volume-pdf': 'fas faCompactDisc',
-  Network: 'fas faProjectDiagram',
-  'Cloud-backend': 'fas faCloud',
-  Datacenter: 'fas faWarehouse',
-  'Simple-user': 'fas faUser',
-  User: 'fas faUserCog',
-  Group: 'fas faUsers',
-  Alert: 'fas faBell',
-  Bell: 'far faBell',
-  'Lat-menu': 'fas faBars',
-  Dashboard: 'fas faDesktop',
-  Workflow: 'fas faRoute',
-  Expiration: 'fas faStopwatch',
-  Replication: 'fas faCoins',
-  Transition: 'fas faRocket',
-  Discovery: 'fas faReply',
-  Metrics: 'fas faChartLine',
-  Edit: 'fas faEdit',
-  Logs: 'far faFileAlt',
-  Lock: 'fa faLock',
-  'Lock-open': 'fa faLockOpen',
-  'Create-add': 'fas faPlus',
-  Delete: 'fas faTrash',
-  Save: 'fas faSave',
-  'External-link': 'fas faExternalLinkAlt',
-  Link: 'fas faLink',
-  Unlink: 'fas faUnlink',
-  Close: 'fas faTimes',
-  'Dropdown-down': 'fas faCaretDown',
-  'Dropdown-up': 'fas faCaretUp',
-  Search: 'fas faSearch',
-  More: 'fas faEllipsisV',
-  Info: 'fas faQuestionCircle',
-  Sync: 'fas faSync',
-  Export: 'fas faFileExport',
-  Copy: 'far faClone',
-  'Simple-upload': 'fas faUpload',
-  Upload: 'fas faFileUpload',
-  'Add-plus': 'fas faPlusSquare',
-  Minus: 'fas faMinus',
-  'Remove-minus': 'fas faMinusSquare',
-  Sort: 'fas faSort',
-  'Sort-up': 'fas faSortUp',
-  'Sort-down': 'fas faSortDown',
-  Calendar: 'fas faCalendarWeek',
-  'Calendar-minus': 'fas faCalendarMinus',
-  'Arrow-up': 'fas faArrowUp',
-  'Arrow-down': 'fas faArrowDown',
-  'Arrow-right': 'fas faArrowRight',
-  'Arrow-left': 'fas faArrowLeft',
-  'Arrow-alt-circle-up': 'fas faArrowAltCircleUp',
-  Folder: 'far faFolder',
-  File: 'far faFile',
-  'File-invoice': 'fas faFileInvoice',
-  License: 'fas faFileInvoice',
-  'Deletion-marker': 'fas faBan',
-  'Map-marker': 'fas faMapMarkerAlt',
-  Location: 'fas faMapMarkerAlt',
-  'Info-circle': 'fas faInfoCircle',
-  'Exclamation-triangle': 'fas faExclamationTriangle',
-  'Exclamation-circle': 'fas faExclamationCircle',
-  Exclamation: 'fas faExclamation',
-  Check: 'fas faCheck',
-  Protected: 'fas faShieldAlt',
-  'Chevron-left': 'fas faChevronLeft',
-  'Chevron-right': 'fas faChevronRight',
-  'Chevron-down': 'fas faChevronDown',
-  'Chevron-up': 'fas faChevronUp',
-  'Angle-right': 'fas faAngleRight',
-  'Angle-double-right': 'fas faAngleDoubleRight',
-  Language: 'fas faLanguage',
-  Theme: 'fas faPalette',
-  Documentation: 'fas faClipboardList',
-  Support: 'fas faComments',
-  EULA: 'fas faFileContract',
-  'Log-out': 'fas faSignOutAlt',
-  Hourglass: 'far faHourglass',
-  Pause: 'fas faPause',
-  'Pause-circle': 'far faPauseCircle',
-  'Play-circle': 'far faPlayCircle',
-  Upgrade: 'fas faLevelUpAlt',
-  Expansion: 'fas faExpandAlt',
-  Rebalance: 'fas faBalanceScale',
-  Maintenance: 'fas faHardHat',
-  Role: 'fas faHatCowboy',
-  'Change-erasure': 'fas faExchangeAlt',
-  'Circle-health': 'fas faCircle',
-  'Circle-empty': 'far faCircle',
-  'Dot-circle': 'fas faDotCircle',
-  'Check-circle': 'fas faCheckCircle',
-  'Times-circle': 'fas faTimesCircle',
-  Toolbox: 'fas faToolbox',
-  Cubes: 'fas faCubes',
-  Policy: 'fas faFileSignature',
-  Pen: 'fa faPen',
-  Pencil: 'fas faPencilAlt',
-  Eye: 'fas faEye',
-  EyeSlash: 'fas faEyeSlash',
-  Snowflake: 'fas faSnowflake',
-  Key: 'fas faKey',
-  Filter: 'fas faFilter',
-  Download: 'fas faDownload',
-  Certificate: 'fas faCertificate',
-  Redo: 'fas faRedoAlt',
-  Eraser: 'fas faEraser',
-  'ID-card': 'fas faIdCard',
-  Setting: 'fas faCog', //TODO: Rename to Gear in FA v6 <i class="fa-sharp fa-solid fa-gear"></i>
-  Desktop: 'fas faDesktop',
-  Globe: 'fas faGlobe',
-  Satellite: 'fas faSatelliteDish',
-  LightMode: 'fas faSun',
-  DarkMode: 'fas faMoon',
-  News: 'fas faBullhorn',
-  Ring: 'fas faRing',
-  Stop: 'fas faStop',
-  Play: 'fas faPlay',
-  Mail: 'fas faEnvelope',
-  ThumbsUp: 'far faThumbsUp',
-  ThumbsDown: 'far faThumbsDown',
-  Sidebar: 'fas faColumns',
-  Bookopen: 'fas faBookOpen',
-};
 
 type IconProps = {
   'aria-label'?: string;
@@ -193,10 +64,14 @@ type Props = {
   name: IconName;
   size?: SizeProp;
   color?: IconColor | CSSProperties['color'];
+  /** Accessible label for screen readers. Only add for semantic icons that convey meaning. */
   ariaLabel?: string;
   withWrapper?: boolean;
   style?: CSSProperties;
   onClick?: (event: React.MouseEvent) => void;
+  /**
+   * @deprecated Use ariaLabel instead. FA7 recommends aria-label over title for accessibility.
+   */
   title?: string;
 };
 
@@ -254,12 +129,16 @@ function NonWrappedIcon({
   name,
   size = '1x',
   color,
-  ariaLabel = '',
+  ariaLabel,
   title,
   ...rest
 }: Omit<Props, 'withWrapper'>) {
   const iconInfo = iconTable[name] || customIcons[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
+
+  // FA7: Use ariaLabel for accessibility, title is deprecated
+  // Only add aria-label for semantic icons (when explicitly provided)
+  const accessibleLabel = ariaLabel || title;
 
   // Loaded fortawesome icon if not a custom icon
   const [icon, setIcon] = useState();
@@ -290,7 +169,7 @@ function NonWrappedIcon({
 
   if (!icon && !customIcons[name]) {
     return (
-      <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
+      <DelayedFallback aria-label={accessibleLabel}>
         <Loader size="base" />
       </DelayedFallback>
     );
@@ -302,8 +181,7 @@ function NonWrappedIcon({
       color={color}
       icon={icon}
       size={size}
-      title={title}
-      aria-label={`${name} ${ariaLabel}`}
+      aria-label={accessibleLabel}
       {...rest}
     />
   );
@@ -321,4 +199,4 @@ function Icon({ withWrapper, ...props }: Props) {
   return <NonWrappedIcon {...props} />;
 }
 
-export { Icon };
+export { Icon, iconTable };
