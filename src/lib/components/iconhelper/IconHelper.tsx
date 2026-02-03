@@ -7,7 +7,8 @@ type IconHelpProps = {
   placement?: Position;
   overlayStyle?: CSSProperties;
   /**
-   * Accessible label for screen readers. Defaults to "Info".
+   * Accessible label for screen readers.
+   * Decorative by default (no aria-label) to avoid interfering with parent accessible names.
    */
   ariaLabel?: string;
   /**
@@ -20,7 +21,7 @@ export const IconHelp = ({
   tooltipMessage,
   overlayStyle,
   placement = 'right',
-  ariaLabel = 'Info',
+  ariaLabel,
   title,
 }: IconHelpProps) => (
   <Tooltip
@@ -31,7 +32,7 @@ export const IconHelp = ({
     <Icon
       name="Info"
       color="buttonSecondary"
-      ariaLabel={ariaLabel || title}
+      ariaLabel={ariaLabel ?? title}
     />
   </Tooltip>
 );

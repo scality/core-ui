@@ -7,13 +7,14 @@ import { IconHelp } from './IconHelper';
 
 describe('IconHelper', () => {
   const selectors = {
-    icon: () => screen.getByRole('img'),
+    // Use { hidden: true } because decorative icons are aria-hidden
+    icon: () => screen.getByRole('img', { hidden: true }),
   };
   const renderIcon = (tooltipMessage: React.ReactNode) => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <IconHelp tooltipMessage={tooltipMessage} title="Info" />
+        <IconHelp tooltipMessage={tooltipMessage} />
       </Wrapper>,
     );
   };

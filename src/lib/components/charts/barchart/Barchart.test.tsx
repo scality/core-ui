@@ -412,7 +412,10 @@ describe('Barchart', () => {
     expect(screen.getByText('Test Title')).toBeInTheDocument();
     expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
     expect(screen.getByText('Test Right Title')).toBeInTheDocument();
-    expect(screen.getByLabelText('Info')).toBeInTheDocument();
+    // IconHelp renders an Info icon (decorative by default, no aria-label)
+    await waitFor(() => {
+      expect(screen.getByRole('img', { hidden: true })).toBeInTheDocument();
+    });
   });
   describe('formatDate', () => {
     it('should render the CustomTick component with over a day interval', () => {
