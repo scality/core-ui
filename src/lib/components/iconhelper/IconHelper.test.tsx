@@ -7,14 +7,13 @@ import { IconHelp } from './IconHelper';
 
 describe('IconHelper', () => {
   const selectors = {
-    // Use { hidden: true } because decorative icons are aria-hidden
-    icon: () => screen.getByRole('img', { hidden: true }),
+    icon: () => screen.getByRole('img'),
   };
   const renderIcon = (tooltipMessage: React.ReactNode) => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <IconHelp tooltipMessage={tooltipMessage} />
+        <IconHelp tooltipMessage={tooltipMessage} title="Info" />
       </Wrapper>,
     );
   };
@@ -36,18 +35,18 @@ describe('IconHelper', () => {
       expect(screen.getByText(tooltipMessage)).toBeVisible();
     });
   });
-  it('should be able to change accessible label with ariaLabel', async () => {
+  it('should render with title prop (passed to FontAwesome as native tooltip)', async () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
         <IconHelp
           tooltipMessage={'This is a tooltip'}
-          ariaLabel="Info Helper Testing"
+          title="Info Helper Testing"
         />
       </Wrapper>,
     );
     await waitFor(() => {
-      expect(screen.getByLabelText('Info Helper Testing')).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: /Info/i })).toBeInTheDocument();
     });
   });
 });

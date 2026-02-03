@@ -64,14 +64,10 @@ type Props = {
   name: IconName;
   size?: SizeProp;
   color?: IconColor | CSSProperties['color'];
-  /** Accessible label for screen readers. Only add for semantic icons that convey meaning. */
   ariaLabel?: string;
   withWrapper?: boolean;
   style?: CSSProperties;
   onClick?: (event: React.MouseEvent) => void;
-  /**
-   * @deprecated Use ariaLabel instead. FA7 recommends aria-label over title for accessibility.
-   */
   title?: string;
 };
 
@@ -129,16 +125,12 @@ function NonWrappedIcon({
   name,
   size = '1x',
   color,
-  ariaLabel,
+  ariaLabel = '',
   title,
   ...rest
 }: Omit<Props, 'withWrapper'>) {
   const iconInfo = iconTable[name] || customIcons[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
-
-  // FA7: Use ariaLabel for accessibility, title is deprecated
-  // Only add aria-label for semantic icons (when explicitly provided)
-  const accessibleLabel = ariaLabel || title;
 
   // Loaded fortawesome icon if not a custom icon
   const [icon, setIcon] = useState();
@@ -169,7 +161,7 @@ function NonWrappedIcon({
 
   if (!icon && !customIcons[name]) {
     return (
-      <DelayedFallback aria-label={accessibleLabel}>
+      <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
         <Loader size="base" />
       </DelayedFallback>
     );
@@ -181,7 +173,8 @@ function NonWrappedIcon({
       color={color}
       icon={icon}
       size={size}
-      aria-label={accessibleLabel}
+      title={title}
+      aria-label={`${name} ${ariaLabel}`}
       {...rest}
     />
   );

@@ -412,9 +412,8 @@ describe('Barchart', () => {
     expect(screen.getByText('Test Title')).toBeInTheDocument();
     expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
     expect(screen.getByText('Test Right Title')).toBeInTheDocument();
-    // IconHelp renders an Info icon (decorative by default, no aria-label)
     await waitFor(() => {
-      expect(screen.getByRole('img', { hidden: true })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: /Info/i })).toBeInTheDocument();
     });
   });
   describe('formatDate', () => {
