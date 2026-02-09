@@ -25,6 +25,10 @@ export const getThemeVariantSelector = () => (props) => {
   return theme[key];
 };
 
+/** Returns the theme color key for a given variant (e.g. for use with Icon color prop). */
+export const getVariantThemeKey = (variant: string): string =>
+  variantMapping[variant] ?? variant;
+
 export const hex2RGB = (str: string): [number, number, number] => {
   const [, short, long] = String(str).match(RGB_HEX) || [];
 

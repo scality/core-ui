@@ -1,10 +1,26 @@
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
-import { getThemeVariantSelector } from '../../utils';
+import { getThemeVariantSelector, getVariantThemeKey } from '../../utils';
 import { Variant } from '../constants';
+import { Icon, type IconName } from '../icon/Icon.component';
+
+const BANNER_ICON_SIZE = 'lg';
+
+const DEFAULT_ICON_BY_VARIANT: Record<Variant, IconName> = {
+  base: 'Info-circle',
+  selected: 'Exclamation-circle',
+  healthy: 'Exclamation-circle',
+  warning: 'Exclamation-circle',
+  danger: 'Exclamation-circle',
+};
 
 export type Props = {
+  /** When true, shows the default icon (Info-circle for base, Exclamation-circle otherwise) with variant color and "lg" size. 
+   * Use icon prop to override the default icon.
+  */
+  withDefaultIcon?: boolean;
+  /** Custom icon element. Overrides withDefaultIcon when provided. */
   icon?: React.ReactNode;
   title?: string;
   children: React.ReactNode;
@@ -44,10 +60,23 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
 `;
 
-function Banner({ icon, title, children, variant, ...rest }: Props) {
+function Banner({ withDefaultIcon = false, icon, title, children, variant, ...rest }: Props) {
+  const iconContent =
+    icon !== undefined
+      ? icon
+      : withDefaultIcon
+        ? (
+          <Icon
+            name={DEFAULT_ICON_BY_VARIANT[variant]}
+            size={BANNER_ICON_SIZE}
+            color={getVariantThemeKey(variant)}
+          />
+        )
+        : null;
+
   return (
     <BannerContainer className="sc-banner" variant={variant}>
-      {icon}
+      {iconContent}
       <TextContainer>
         {title && <Title>{title}</Title>}
         <Text>{children}</Text>
