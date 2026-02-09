@@ -39,14 +39,32 @@ const BannerContainer = styled.div<{ variant: Variant }>`
     border-left: 5px solid;
     border-radius: 3px;
     border-color: ${getThemeVariantSelector()};
-    i {
-      display: flex;
-      align-items: center;
-      margin-left: ${spacing.r8};
-      color: ${getThemeVariantSelector()};
-    }
   `}
 `;
+
+const BannerIconContainerStyled = styled.div<{ variant: Variant }>`
+  ${(props) => css`
+    display: flex;
+    align-items: center;
+    margin-left: ${spacing.r8};
+    color: ${getThemeVariantSelector()};
+  `}
+`;
+
+function BannerIconContainer({
+  variant,
+  children,
+}: {
+  variant: Variant;
+  children: React.ReactNode;
+}) {
+  if (children == null) return null;
+  return (
+    <BannerIconContainerStyled variant={variant}>
+      {children}
+    </BannerIconContainerStyled>
+  );
+}
 
 const TextContainer = styled.div`
   display: flex;
@@ -75,8 +93,8 @@ function Banner({ withDefaultIcon = false, icon, title, children, variant, ...re
         : null;
 
   return (
-    <BannerContainer className="sc-banner" variant={variant}>
-      {iconContent}
+    <BannerContainer variant={variant}>
+      <BannerIconContainer variant={variant}>{iconContent}</BannerIconContainer>
       <TextContainer>
         {title && <Title>{title}</Title>}
         <Text>{children}</Text>
