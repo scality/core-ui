@@ -117,6 +117,7 @@ const SearchInput = forwardRef(
           aria-label="search"
           name="search"
           placeholder={placeholder}
+          noPlaceholderPrefix
           value={debouncedValue}
           onChange={handleChange}
           onReset={reset}

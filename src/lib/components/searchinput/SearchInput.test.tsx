@@ -15,7 +15,7 @@ describe('SearchInput', () => {
     clearButton: () => screen.queryByRole('button'),
   };
   it('should render the SearchInput component', async () => {
-    render(<SearchInputRender value="" onChange={() => {}} />);
+    render(<SearchInputRender value="" onChange={() => { }} />);
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
     const searchInput = selectors.searchInput();
@@ -24,15 +24,15 @@ describe('SearchInput', () => {
 
   it('should render the SearchInput component with placeholder', () => {
     render(
-      <SearchInputRender value="" onChange={() => {}} placeholder="Search" />,
+      <SearchInputRender value="" onChange={() => { }} placeholder="Search" />,
     );
 
-    const searchInput = screen.queryByPlaceholderText('Example: Search');
+    const searchInput = screen.queryByPlaceholderText('Search');
     expect(searchInput).toBeInTheDocument();
   });
 
   it('should render the SearchInput component with disabled prop', () => {
-    render(<SearchInputRender value="" onChange={() => {}} disabled />);
+    render(<SearchInputRender value="" onChange={() => { }} disabled />);
 
     const searchInput = selectors.searchInput();
     expect(searchInput).toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('SearchInput', () => {
   });
 
   it('should have a clear button when the input is not empty', () => {
-    render(<SearchInputRender value="" onChange={() => {}} />);
+    render(<SearchInputRender value="" onChange={() => { }} />);
 
     // clear button should not be rendered as value is empty
     let clearButton = selectors.clearButton();
@@ -72,7 +72,7 @@ describe('SearchInput', () => {
   it('should call the onReset function when the clear button is clicked and clear the input value', async () => {
     const onReset = jest.fn();
     render(
-      <SearchInputRender value="test" onChange={() => {}} onReset={onReset} />,
+      <SearchInputRender value="test" onChange={() => { }} onReset={onReset} />,
     );
     const searchInput = selectors.searchInput();
     const clearButton = selectors.clearButton();
