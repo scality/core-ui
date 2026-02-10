@@ -32,6 +32,7 @@ const ConstrainedTextContainer = styled.div`
   -webkit-box-orient: vertical;
   overflow-wrap: break-word;
   word-break: normal;
+  line-height: 1.2;
   `
       : `overflow-wrap: break-word;
       white-space: nowrap;

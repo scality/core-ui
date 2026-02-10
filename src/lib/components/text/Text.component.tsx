@@ -16,6 +16,13 @@ type Props = {
   children: React.ReactNode | string;
   status?: Status;
   id?: string;
+} & TextProps;
+type TextProps = {
+  color?: keyof CoreUITheme;
+  variant?: TextVariant;
+  isEmphazed?: boolean;
+  isGentleEmphazed?: boolean;
+  compact?: boolean;
 };
 const BasicTextStyle = styled.span`
   color: ${(props) => props.theme.textPrimary};
@@ -33,7 +40,7 @@ const LargerTextStyle = styled(BasicTextStyle)`
 const EmphaseTextStyle = styled(BasicTextStyle)`
   font-weight: 700;
 `;
-const StatusTextStyle = styled(BasicTextStyle)<{ statusColor: string }>`
+const StatusTextStyle = styled(BasicTextStyle) <{ statusColor: string }>`
   color: ${(props) => props.theme[`${props.statusColor}`]};
 `;
 const LargetStyle = styled(BasicTextStyle)`
@@ -70,7 +77,7 @@ const getStatusColor = (status?: Status) => {
   return statusColor;
 };
 
-export const SmallerEmphaseTextStyle = styled(SmallerTextStyle)<{
+export const SmallerEmphaseTextStyle = styled(SmallerTextStyle) <{
   statusColor: string;
 }>`
   font-weight: 700;
@@ -122,7 +129,7 @@ export function SmallerEmphaseText({ children, status, ...rest }: Props) {
 export function ChartTitleText({ children, ...rest }: Props) {
   return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
 }
-export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
+export const GentleEmphaseSecondaryText = styled(SecondaryText) <{
   alignRight?: boolean;
 }>`
   font-style: italic;
@@ -135,12 +142,7 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
       : ''}
 `;
 
-export const Text = styled.span<{
-  variant?: TextVariant;
-  color?: keyof CoreUITheme;
-  isEmphazed?: boolean;
-  isGentleEmphazed?: boolean;
-}>`
+export const Text = styled.span<TextProps>`
   ${(props) => props.color && `color: ${props.theme[props.color]};`}
   ${(props) =>
     props.variant === 'Larger'
@@ -187,8 +189,14 @@ export const Text = styled.span<{
     
   ${(props) =>
     props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
-`;
 
+  ${(props) => props.compact && `line-height: 1.2;`}
+`;
+export const HelperText = ({ children, color, ...rest }: Props) => {
+  return (
+    <Text variant="Smaller" isEmphazed compact color={color} {...rest}>{children}</Text>
+  );
+}
 export const Link = styled.a`
   font-size: 1rem;
   line-height: ${spacing.r24};

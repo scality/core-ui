@@ -18,7 +18,7 @@ import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
 import { IconHelp } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
-import { Text } from '../text/Text.component';
+import { HelperText, Text } from '../text/Text.component';
 
 const DESCRIPTION_PREFIX = 'describe-';
 const LABEL_PREFIX = 'label-';
@@ -202,33 +202,19 @@ const FormGroup = ({
         >
           {content}
           {error ? (
-            <Text
-              variant="Smaller"
-              color="statusCritical"
-              isEmphazed
-              id={`${DESCRIPTION_PREFIX}${id}`}
-            >
-              {error}
-            </Text>
+            <HelperText color="statusCritical" id={`${DESCRIPTION_PREFIX}${id}`}>{error}</HelperText>
           ) : help ? (
             <div
               style={{
                 opacity: disabled ? 0.5 : 1,
               }}
             >
-              <Text
-                variant="Smaller"
-                color="textSecondary"
-                isEmphazed
-                id={`${DESCRIPTION_PREFIX}${id}`}
-              >
-                {help}
-              </Text>
+              <HelperText color="textSecondary" id={`${DESCRIPTION_PREFIX}${id}`}>{help}</HelperText>
             </div>
           ) : (
-            <Text variant="Smaller" isEmphazed>
+            <HelperText>
               &nbsp;
-            </Text>
+            </HelperText>
           )}
         </Stack>
       </Box>
