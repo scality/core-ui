@@ -1,7 +1,7 @@
 import { HTMLProps, forwardRef } from 'react';
 import { RefCallBack } from 'react-hook-form';
 import { Box } from '../box/Box';
-import { Input } from '../inputv2/inputv2';
+import { Input, InputSize } from '../inputv2/inputv2';
 import { AddButton, SubButton } from './InputButtons';
 
 export type InputListProps<T> = Omit<HTMLProps<HTMLInputElement>, 'size'> & {
@@ -15,6 +15,7 @@ export type InputListProps<T> = Omit<HTMLProps<HTMLInputElement>, 'size'> & {
   disabled?: boolean;
   maxItems?: number;
   value: T[];
+  size?: InputSize;
 };
 
 function InternalInputList<
@@ -33,6 +34,7 @@ function InternalInputList<
     maxItems,
     value,
     name,
+    size = '1/2',
     ...rest
   }: InputListProps<T>,
   _,
@@ -64,7 +66,7 @@ function InternalInputList<
           <Input
             id={`${name}[${index}]`}
             aria-label={`${name}${index}`}
-            size="1/2"
+            size={size}
             value={val}
             onChange={(evt) => {
               const tempValues = [...value];
