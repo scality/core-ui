@@ -7,10 +7,28 @@ import { getThemePropSelector } from '../../utils';
 import { Dropdown, Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
 import { Button, FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
-type Action = {
-  type: string;
-  items?: Array<Item>;
+
+type DropdownAction = {
+  type: 'dropdown';
+  items: Array<Item>;
+  text?: string;
+  icon?: JSX.Element;
 };
+
+type ButtonAction = {
+  type: 'button';
+  icon?: JSX.Element;
+  label?: React.ReactNode;
+  tooltip: { overlay: string };
+  onClick?: () => void;
+};
+
+type CustomAction = {
+  type: 'custom';
+  render: React.ComponentType;
+};
+
+type Action = DropdownAction | ButtonAction | CustomAction;
 type Actions = Array<Action>;
 type Tab = {
   title?: string;
@@ -159,25 +177,32 @@ const LogoContainer = styled.div`
   }
 `;
 
-const getActionRenderer = ({ type, items = null, ...rest }, index) => {
-  if (type === 'dropdown') {
-    return items ? (
-      <Dropdown
-        key={`navbar_right_action_${index}`}
-        size="larger"
-        variant="backgroundLevel1"
-        items={items}
-        caret={false}
-        {...rest}
-      />
-    ) : null;
-  } else if (type === 'button') {
-    return <Button key={`navbar_right_action_${index}`} {...rest} />;
-  } else if (type === 'custom') {
-    return <rest.render key={`navbar_right_action_${index}`} />;
+const getActionRenderer = (action: Action, index: number) => {
+  switch (action.type) {
+    case 'dropdown': {
+      const { type, items, ...rest } = action;
+      return (
+        <Dropdown
+          key={`navbar_right_action_${index}`}
+          size="larger"
+          variant="backgroundLevel1"
+          items={items}
+          caret={false}
+          {...rest}
+        />
+      );
+    }
+    case 'button': {
+      const { type, ...rest } = action;
+      return <Button key={`navbar_right_action_${index}`} {...rest} />;
+    }
+    case 'custom': {
+      const CustomComponent = action.render;
+      return <CustomComponent key={`navbar_right_action_${index}`} />;
+    }
+    default:
+      return null;
   }
-
-  return null;
 };
 
 function NavBar({
@@ -192,7 +217,7 @@ function NavBar({
       <NavbarMenu>
         {onToggleClick && (
           <NavbarMenuItem onClick={onToggleClick}>
-            <Button icon={<Icon name="Lat-menu" />} title="Main Menu" />
+            <Button icon={<Icon name="Lat-menu" />} tooltip={{overlay: "Toggle Main Menu"}} />
           </NavbarMenuItem>
         )}
         <NavbarMenuItem>
@@ -234,7 +259,6 @@ function NavBar({
         <NavbarMenu>
           <NavbarMenuItem>
             {rightActions.map((action, index) =>
-              //@ts-ignore too costly to type this one now
               getActionRenderer(action, index),
             )}
           </NavbarMenuItem>

@@ -1,7 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { Form, FormGroup, FormSection, Icon, Stack } from '../../src/lib';
-import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+import {
+  Button,
+  Props as ButtonProps,
+} from '../../src/lib/components/buttonv2/Buttonv2.component';
 import { Input } from '../../src/lib/next';
 import { iconArgType } from '../controls';
 
@@ -9,9 +12,10 @@ export default {
   title: 'Components/Button',
   component: Button,
   args: {
+    label: 'Button',
     onClick: action('Button clicked'),
   },
-  render: ({ icon, ...args }) => {
+  render: ({ icon, ...args }: { icon?: string } & ButtonProps) => {
     return <Button {...args} icon={icon && <Icon name={icon} />} />;
   },
   argTypes: {
@@ -176,7 +180,7 @@ export const ButtonDisabled = {
         width: '120px',
       },
       overlay: 'The button is disabled',
-      placement: 'top',
+      placement: 'top' as const,
     },
   },
 };
@@ -189,10 +193,10 @@ export const ButtonLoading = {
 };
 
 export const IconButtonWithTooltip = {
-  render: ({ ...args }) => {
+  render: (args: ButtonProps) => {
     return (
       <Stack gap="r32" style={{ height: '5rem' }}>
-        <Button icon={<Icon name="Delete"></Icon>} {...args} />
+        <Button {...args} />
         <Button
           variant="secondary"
           icon={<Icon name="Sync"></Icon>}
@@ -201,16 +205,12 @@ export const IconButtonWithTooltip = {
               width: '80px',
             },
             overlay: 'Bound status',
-            placement: 'top',
+            placement: 'top' as const,
           }}
         />
 
-        <Button {...args} icon={<Icon name="Delete"></Icon>} variant="danger" />
-        <Button
-          {...args}
-          icon={<Icon name="Delete"></Icon>}
-          variant="outline"
-        />
+        <Button {...args} variant="danger" />
+        <Button {...args} icon={<Icon name="Delete"></Icon>} variant="outline" />
       </Stack>
     );
   },
@@ -222,7 +222,7 @@ export const IconButtonWithTooltip = {
         width: '80px',
       },
       overlay: 'Entity deletion',
-      placement: 'top',
+      placement: 'top' as const,
     },
   },
 };
@@ -234,9 +234,7 @@ export const GhostButtons = {
         <Button
           icon={<i className="fas fa-sync" />}
           tooltip={{
-            overlayStyle: {
-              width: '80px',
-            },
+           
             overlay: 'Refresh the metrics',
             placement: 'top',
           }}
@@ -244,18 +242,13 @@ export const GhostButtons = {
         <Button
           icon={<i className="fas fa-file-export" />}
           tooltip={{
-            overlayStyle: {
-              width: '120px',
-            },
             overlay: 'Export the data in predefined format',
-            placement: 'top',
           }}
         />
         <Button
           icon={<i className="fas fa-calendar-week" />}
           tooltip={{
             overlayStyle: {
-              width: '120px',
             },
             overlay: 'Metric over a period',
             placement: 'top',

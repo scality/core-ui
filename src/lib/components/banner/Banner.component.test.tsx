@@ -1,9 +1,9 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Banner } from './Banner.component';
-import { Icon } from '../icon/Icon.component';
+import React from 'react';
 import { getWrapper } from '../../testUtils';
+import { Icon } from '../icon/Icon.component';
+import { Banner } from './Banner.component';
 
 describe('Banner', () => {
   const { Wrapper } = getWrapper();
@@ -28,31 +28,30 @@ describe('Banner', () => {
   });
 
   it('should render with default icon when withDefaultIcon is true', async () => {
-    render(
+    const { container } = render(
       <Banner variant="base" withDefaultIcon>
         Message with default icon
       </Banner>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
     expect(screen.getByText('Message with default icon')).toBeInTheDocument();
-
+    // Icon is decorative (aria-hidden), verify it's rendered via DOM query
     await waitFor(() => {
-      expect(screen.getByLabelText('Info-circle')).toBeInTheDocument();
+      expect(container.querySelector('svg[data-icon="circle-info"]')).toBeInTheDocument();
     });
   });
 
   it('should render with custom icon when icon prop is provided', async () => {
-    render(
+    const { container } = render(
       <Banner variant="danger" icon={<Icon name="Check-circle" />}>
         Message with custom icon
       </Banner>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
     expect(screen.getByText('Message with custom icon')).toBeInTheDocument();
-
+    // Icon is decorative (aria-hidden), verify it's rendered via DOM query
     await waitFor(() => {
-      expect(screen.getByLabelText('Check-circle')).toBeInTheDocument();
+      expect(container.querySelector('svg[data-icon="circle-check"]')).toBeInTheDocument();
     });
-
   });
 });

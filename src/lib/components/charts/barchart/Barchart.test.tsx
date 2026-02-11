@@ -413,7 +413,9 @@ describe('Barchart', () => {
     expect(screen.getByText('Test Secondary Title')).toBeInTheDocument();
     expect(screen.getByText('Test Right Title')).toBeInTheDocument();
     await waitFor(() => {
-      expect(screen.getByRole('img', { name: /Info/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /More information/i }),
+      ).toBeInTheDocument();
     });
   });
   describe('formatDate', () => {

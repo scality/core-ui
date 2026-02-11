@@ -24,9 +24,8 @@ export function TableSync({
     <TableSyncContainer>
       <Button
         icon={<Icon name="Sync" />}
-        tooltip={tooltipOverlay ? { overlay: tooltipOverlay } : undefined}
+        tooltip={tooltipOverlay ? { overlay: tooltipOverlay } : {overlay: "Synchronize table data"}}
         onClick={onSync}
-        aria-label="Synchronize table data"
         role="button"
         isLoading={loading}
         {...rest}
