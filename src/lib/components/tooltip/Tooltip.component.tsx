@@ -101,6 +101,17 @@ function Tooltip({
         onPointerLeave={() => {
           setIsTooltipVisible(false);
         }}
+        onFocus={() => {
+          setIsTooltipVisible(true);
+        }}
+        onBlur={() => {
+          setIsTooltipVisible(false);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            setIsTooltipVisible(false);
+          }
+        }}
       >
         <div ref={refs.setReference}>{children}</div>
       </TooltipContainer>

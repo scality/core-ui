@@ -26,30 +26,30 @@ export const StatusIcon = ({ status }: { status: Status }) => {
           return {
             color: 'statusHealthy',
             name: 'Check-circle',
-            label: 'Healthy status icon',
+            label: 'Healthy status',
           };
 
         case STATUS_WARNING:
           return {
             color: 'statusWarning',
             name: 'Times-circle',
-            label: 'Warning status icon',
+            label: 'Warning status',
           };
 
         case STATUS_CRITICAL:
           return {
             color: 'statusCritical',
             name: 'Times-circle',
-            label: 'Critical status icon',
+            label: 'Critical status',
           };
         default:
           return {
             color: 'textTertiary',
             name: 'Info',
-            label: 'Information status icon',
+            label: 'Information status',
           };
       }
     })();
 
-  return <Icon color={icon.color} name={icon.name} aria-label={icon.label} />;
+  return <Icon color={icon.color} name={icon.name} ariaLabel={icon.label} />;
 };
