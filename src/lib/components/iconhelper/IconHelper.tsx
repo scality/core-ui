@@ -19,15 +19,15 @@ type IconHelpProps = {
 
 const HelpButton = styled.button`
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   background: none;
   border: none;
   padding: 0;
   margin: 0;
   cursor: pointer;
   color: inherit;
-
+  font: inherit;              /* Inherit font sizing */
+  vertical-align: text-bottom;     /* Align with text */
+  line-height: 1;    
   &:focus-visible {
     outline: 2px dashed ${(props) => props.theme.selectedActive};
     outline-offset: 2px;
@@ -51,7 +51,7 @@ export const IconHelp = ({
       type="button"
       aria-label={ariaLabel || title || 'More information'}
     >
-      <Icon name="Info" color="buttonSecondary" aria-hidden={true} />
+      <Icon name="Info" color="buttonSecondary" />
     </HelpButton>
   </Tooltip>
 );
