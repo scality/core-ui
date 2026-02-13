@@ -7,20 +7,20 @@ import { IconHelp } from './IconHelper';
 
 describe('IconHelper', () => {
   const selectors = {
-    icon: () => screen.getByRole('img'),
+    helpButton: () => screen.getByRole('button', { name: /Info/i }),
   };
   const renderIcon = (tooltipMessage: React.ReactNode) => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
-        <IconHelp tooltipMessage={tooltipMessage} title="Info" />
+        <IconHelp tooltipMessage={tooltipMessage} aria-label="Info" />
       </Wrapper>,
     );
   };
   it('should render correctly', async () => {
     renderIcon('This is a tooltip');
     await waitFor(() => {
-      expect(selectors.icon()).toBeInTheDocument();
+      expect(selectors.helpButton()).toBeInTheDocument();
     });
   });
   it('should display tooltip on hover', async () => {
@@ -28,25 +28,27 @@ describe('IconHelper', () => {
     renderIcon(tooltipMessage);
 
     await waitFor(() => {
-      expect(selectors.icon()).toBeInTheDocument();
+      expect(selectors.helpButton()).toBeInTheDocument();
     });
-    userEvent.hover(selectors.icon());
+    userEvent.hover(selectors.helpButton());
     await waitFor(() => {
       expect(screen.getByText(tooltipMessage)).toBeVisible();
     });
   });
-  it('should render with title prop (passed to FontAwesome as native tooltip)', async () => {
+  it('should render with aria-label prop for accessibility', async () => {
     const { Wrapper } = getWrapper();
     render(
       <Wrapper>
         <IconHelp
           tooltipMessage={'This is a tooltip'}
-          title="Info Helper Testing"
+          aria-label="Info Helper Testing"
         />
       </Wrapper>,
     );
     await waitFor(() => {
-      expect(screen.getByRole('img', { name: /Info/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Info Helper Testing/i }),
+      ).toBeInTheDocument();
     });
   });
 });

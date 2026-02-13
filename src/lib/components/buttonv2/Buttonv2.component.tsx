@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
@@ -11,7 +11,8 @@ export const FocusVisibleStyle = css`
   z-index: 1000;
 `;
 
-export type Props = Omit<
+/** Props used by ButtonStyled for styling (no tooltip) */
+type ButtonStyledProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'size' | 'label'
 > & {
@@ -21,10 +22,31 @@ export type Props = Omit<
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   label?: React.ReactNode;
-  tooltip?: Omit<TooltipProps, 'children'>;
   isLoading?: boolean;
 };
-export const ButtonStyled = styled.button<Props>`
+
+/** Button with a visible label - tooltip is optional */
+type ButtonWithLabel = ButtonStyledProps & {
+  label: React.ReactNode;
+  tooltip?: Omit<TooltipProps, 'children'>;
+};
+
+/** Icon-only button - requires either string tooltip OR explicit aria-label */
+type IconOnlyButton = ButtonStyledProps & {
+  label?: never;
+} & (
+  | {
+      tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
+      'aria-label'?: string;
+    }
+  | {
+      tooltip: Omit<TooltipProps, 'children'>;
+      'aria-label': string;
+    }
+);
+
+export type Props = ButtonWithLabel | IconOnlyButton;
+export const ButtonStyled = styled.button<ButtonStyledProps>`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -243,9 +265,11 @@ function Button({
     );
   }
 
-  if (!label && icon && !tooltip) {
-    console.warn('Please specify the tooltip for the standalone icon button.');
-  }
+  // For icon-only buttons, use tooltip.overlay as aria-label (typed as string for IconOnlyButton)
+  const buttonAriaLabel =
+    !label && icon && tooltip?.overlay
+      ? (tooltip.overlay as string)
+      : undefined;
 
   return (
     <Tooltip
@@ -261,31 +285,19 @@ function Button({
         icon={icon}
         onClick={onClick}
         size={size}
+        aria-label={buttonAriaLabel}
         {...rest}
       >
-        <>
-          {icon &&
-            (isLoading ? (
-              <ButtonLoader size="small" variant={variant} label={label} />
-            ) : (
-              <ButtonIcon
-                label={label}
-                aria-label={
-                  tooltip &&
-                  tooltip.overlay &&
-                  typeof tooltip.overlay === 'string'
-                    ? tooltip.overlay
-                    : undefined
-                }
-              >
-                {icon}
-              </ButtonIcon>
-            ))}
-          {!icon && isLoading && (
+        {icon &&
+          (isLoading ? (
             <ButtonLoader size="small" variant={variant} label={label} />
-          )}
-          <ButtonLabel>{label}</ButtonLabel>
-        </>
+          ) : (
+            <ButtonIcon label={label}>{icon}</ButtonIcon>
+          ))}
+        {!icon && isLoading && (
+          <ButtonLoader size="small" variant={variant} label={label} />
+        )}
+        <ButtonLabel>{label}</ButtonLabel>
       </ButtonStyled>
     </Tooltip>
   );

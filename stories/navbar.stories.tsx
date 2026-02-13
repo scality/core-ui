@@ -123,6 +123,7 @@ const rightActions = [
   {
     type: 'button',
     icon: <i className="fas fa-sun" />,
+    tooltip: { overlay: 'Toggle Theme' },
     onClick: action('Theme toggle clicked'),
   },
   {

@@ -196,6 +196,7 @@ function Sidebar({
                 setHovered(false);
                 onToggleClick();
               }}
+              tooltip={{overlay: "Toggle sidebar"}}
             />
           </MenuItemIcon>
         )}

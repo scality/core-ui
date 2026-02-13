@@ -44,8 +44,8 @@ export const customIcons: Record<
 
 customIcons['Remote-user'].displayName = 'RemoteUser';
 customIcons['Remote-group'].displayName = 'RemoteGroup';
-customIcons['Bucket'].displayName = 'Bucket';
-customIcons['Buckets'].displayName = 'Buckets';
+customIcons.Bucket.displayName = 'Bucket';
+customIcons.Buckets.displayName = 'Buckets';
 
 const IconStyled = styled(FontAwesomeIcon)`
   ${(props) => {
@@ -64,6 +64,11 @@ type Props = {
   name: IconName;
   size?: SizeProp;
   color?: IconColor | CSSProperties['color'];
+  /**
+   * Accessible label for meaningful icons.
+   * When provided, the icon is announced to screen readers.
+   * When omitted, the icon is decorative (hidden from assistive technologies).
+   */
   ariaLabel?: string;
   withWrapper?: boolean;
   style?: CSSProperties;
@@ -125,7 +130,7 @@ function NonWrappedIcon({
   name,
   size = '1x',
   color,
-  ariaLabel = '',
+  ariaLabel,
   title,
   ...rest
 }: Omit<Props, 'withWrapper'>) {
@@ -159,9 +164,15 @@ function NonWrappedIcon({
     return () => setIcon(undefined);
   }, [name, iconInfo]);
 
+  // Icons are decorative by default (aria-hidden: true)
+  // If ariaLabel is provided, the icon is meaningful (aria-hidden: false)
+  const accessibilityProps = ariaLabel
+    ? { 'aria-hidden': false as const, 'aria-label': ariaLabel }
+    : { 'aria-hidden': true as const };
+
   if (!icon && !customIcons[name]) {
     return (
-      <DelayedFallback aria-label={`${name} ${ariaLabel}`}>
+      <DelayedFallback {...accessibilityProps}>
         <Loader size="base" />
       </DelayedFallback>
     );
@@ -174,7 +185,7 @@ function NonWrappedIcon({
       icon={icon}
       size={size}
       title={title}
-      aria-label={`${name} ${ariaLabel}`}
+      {...accessibilityProps}
       {...rest}
     />
   );
