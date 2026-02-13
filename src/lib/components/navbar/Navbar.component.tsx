@@ -4,23 +4,18 @@ import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
 import { fontSize, navbarHeight, navbarItemWidth } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
-import { Dropdown, Item } from '../dropdown/Dropdown.component';
+import { Dropdown, type Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
-import { Button, FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+import { Button, FocusVisibleStyle, type Props as ButtonProps } from '../buttonv2/Buttonv2.component';
 
+type ButtonAction = {
+  type: 'button';
+} & ButtonProps;
 type DropdownAction = {
   type: 'dropdown';
   items: Array<Item>;
   text?: string;
   icon?: JSX.Element;
-};
-
-type ButtonAction = {
-  type: 'button';
-  icon?: JSX.Element;
-  label?: React.ReactNode;
-  tooltip: { overlay: string };
-  onClick?: () => void;
 };
 
 type CustomAction = {
