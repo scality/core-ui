@@ -31,11 +31,19 @@ type ButtonWithLabel = ButtonStyledProps & {
   tooltip?: Omit<TooltipProps, 'children'>;
 };
 
-/** Icon-only button - tooltip with string overlay is required (used as aria-label) */
+/** Icon-only button - requires either string tooltip OR explicit aria-label */
 type IconOnlyButton = ButtonStyledProps & {
   label?: never;
-  tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
-};
+} & (
+  | {
+      tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
+      'aria-label'?: string;
+    }
+  | {
+      tooltip: Omit<TooltipProps, 'children'>;
+      'aria-label': string;
+    }
+);
 
 export type Props = ButtonWithLabel | IconOnlyButton;
 export const ButtonStyled = styled.button<ButtonStyledProps>`
