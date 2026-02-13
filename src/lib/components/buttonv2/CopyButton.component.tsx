@@ -63,7 +63,7 @@ export const CopyButton = ({
   textToCopy: string;
   copyAsHtml?: boolean;
   variant?: 'outline' | 'ghost';
-} & Props) => {
+} & Omit<Props, 'tooltip' | 'label'>) => {
   const { copy, copyStatus } = useClipboard();
   return (
     <Button
