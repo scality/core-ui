@@ -1,3 +1,4 @@
+
 /**
  * Maps human-readable icon names to FontAwesome icon info.
  * Format: 'iconType iconClass' where:
@@ -134,4 +135,5 @@ export const iconTable = {
   ThumbsDown: 'far faThumbsDown',
   Sidebar: 'fas faTableColumns',
   Bookopen: 'fas faBookOpen',
+  Book: 'fas faBook',
 };
