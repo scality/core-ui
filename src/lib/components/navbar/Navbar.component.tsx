@@ -43,7 +43,7 @@ const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${css`
-    background-color: ${getThemePropSelector('backgroundLevel1')};
+    background-color: ${getThemePropSelector('navbarBackground')};
     color: ${getThemePropSelector('textPrimary')};
     .fas,
     .sc-trigger-text {
@@ -131,7 +131,7 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
-      background-color: ${getThemePropSelector('backgroundLevel1')};
+      background-color: ${getThemePropSelector('navbarBackground')};
       &:hover {
         background-color: ${getThemePropSelector('highlight')};
       }
@@ -148,7 +148,7 @@ const NavbarMenuItem = styled.div`
     border-radius: 0;
     height: ${navbarHeight};
     font-size: ${fontSize.base};
-    background-color: ${getThemePropSelector('backgroundLevel1')};
+    background-color: ${getThemePropSelector('navbarBackground')};
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }

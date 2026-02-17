@@ -49,6 +49,7 @@ export type CoreUITheme = {
   backgroundLevel2: string;
   backgroundLevel3: string;
   backgroundLevel4: string;
+  navbarBackground: string;
   textPrimary: string;
   textSecondary: string;
   textTertiary: string;
@@ -84,6 +85,7 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     backgroundLevel2: '#323245',
     backgroundLevel3: '#232331',
     backgroundLevel4: '#1B1B27',
+    navbarBackground: '#121219',
     textPrimary: '#EAEAEA',
     textSecondary: '#B5B5B5',
     textTertiary: '#DFDFDF',
@@ -109,6 +111,7 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     backgroundLevel2: '#F0F0F4',
     backgroundLevel3: '#E4E6EC',
     backgroundLevel4: '#FAFAF6',
+    navbarBackground: '#FCFCFC',
     textPrimary: '#0D0D0D',
     textSecondary: '#4F506D',
     textTertiary: '#DFDFDF', // TO CHECK
@@ -134,6 +137,7 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     backgroundLevel2: '#272020',
     backgroundLevel3: '#201B1A',
     backgroundLevel4: '#191515',
+    navbarBackground: '#120F0F',
     textPrimary: '#EAEAEA',
     textSecondary: '#A4ACB4',
     textTertiary: '#DFDFDF',
@@ -159,6 +163,7 @@ export const coreUIAvailableThemes: Record<CoreUIThemeName, CoreUITheme> = {
     backgroundLevel2: '#323245',
     backgroundLevel3: '#232331',
     backgroundLevel4: '#1B1B27',
+    navbarBackground: '#121219',
     textPrimary: '#EAEAEA',
     textSecondary: '#B5B5B5',
     textTertiary: '#DFDFDF',
