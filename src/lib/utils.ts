@@ -62,6 +62,10 @@ const luminanceOf = (hex: string): number => {
   return relativeLuminance(r, g, b);
 };
 
+// Minimum WCAG contrast ratio to consider a text color readable on a background.
+// 3.0 corresponds to WCAG AA for large text — same threshold used by MUI.
+const CONTRAST_THRESHOLD = 3;
+
 export const getContrastText = (
   bgColor: string,
   textPrimary: string,
@@ -69,9 +73,15 @@ export const getContrastText = (
 ): string | null => {
   try {
     const bgLum = luminanceOf(bgColor);
-    const primaryContrast = wcagContrastRatio(luminanceOf(textPrimary), bgLum);
-    const reverseContrast = wcagContrastRatio(luminanceOf(textReverse), bgLum);
-    return reverseContrast > primaryContrast ? textReverse : textPrimary;
+    const primaryLum = luminanceOf(textPrimary);
+    const reverseLum = luminanceOf(textReverse);
+
+    const lighterText = primaryLum >= reverseLum ? textPrimary : textReverse;
+    const darkerText = primaryLum >= reverseLum ? textReverse : textPrimary;
+
+    const lighterContrast = wcagContrastRatio(primaryLum >= reverseLum ? primaryLum : reverseLum, bgLum);
+
+    return lighterContrast >= CONTRAST_THRESHOLD ? lighterText : darkerText;
   } catch {
     return null;
   }
