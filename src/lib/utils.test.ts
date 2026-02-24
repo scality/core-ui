@@ -1,42 +1,48 @@
 import { getContrastText } from './utils';
 
+const LIGHT_TEXT = '#EAEAEA';
+const DARK_TEXT = '#000000';
+
 describe('getContrastText', () => {
-  it('returns white text for dark backgrounds', () => {
-    expect(getContrastText('#000000')).toBe('#FFFFFF');
-    expect(getContrastText('#1A1A1A')).toBe('#FFFFFF');
-    expect(getContrastText('#121219')).toBe('#FFFFFF'); // darkRebrand navbarBackground
-    expect(getContrastText('#2F4185')).toBe('#FFFFFF'); // darkRebrand buttonPrimary
+  it('returns textPrimary on dark backgrounds when textPrimary is light', () => {
+    expect(getContrastText('#000000', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
+    expect(getContrastText('#1A1A1A', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
+    expect(getContrastText('#121219', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
+    expect(getContrastText('#2F4185', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
   });
 
-  it('returns black text for light backgrounds', () => {
-    expect(getContrastText('#FFFFFF')).toBe('#000000');
-    expect(getContrastText('#F5F5F5')).toBe('#000000'); // light brandSecondary
-    expect(getContrastText('#FCFCFC')).toBe('#000000'); // artescaLight navbarBackground
-    expect(getContrastText('#ABB4F5')).toBe('#000000'); // artescaLight buttonPrimary
+  it('returns textReverse on light backgrounds when textPrimary is light', () => {
+    expect(getContrastText('#FFFFFF', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+    expect(getContrastText('#F5F5F5', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+    expect(getContrastText('#FCFCFC', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
   });
 
-  it('returns white text for SG red (#E9041E)', () => {
-    expect(getContrastText('#E9041E')).toBe('#FFFFFF');
+  it('picks the text color with better contrast against a vivid background', () => {
+    expect(getContrastText('#E9041E', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+    expect(getContrastText('#E9041E', '#FFFFFF', '#000000')).toBe('#FFFFFF');
   });
 
   it('handles 3-character hex shorthand', () => {
-    expect(getContrastText('#FFF')).toBe('#000000');
-    expect(getContrastText('#000')).toBe('#FFFFFF');
+    expect(getContrastText('#FFF', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+    expect(getContrastText('#000', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
   });
 
   it('handles hex without # prefix', () => {
-    expect(getContrastText('000000')).toBe('#FFFFFF');
-    expect(getContrastText('FFFFFF')).toBe('#000000');
+    expect(getContrastText('000000', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
+    expect(getContrastText('FFFFFF', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
   });
 
-  it('returns null for CSS gradients', () => {
+  it('returns null for non-hex values', () => {
     expect(
-      getContrastText('linear-gradient(130deg, #9355E7 0%, #2E4AA3 60%)'),
+      getContrastText(
+        'linear-gradient(130deg, #9355E7 0%, #2E4AA3 60%)',
+        LIGHT_TEXT,
+        DARK_TEXT,
+      ),
     ).toBeNull();
-  });
-
-  it('returns null for invalid color strings', () => {
-    expect(getContrastText('not-a-color')).toBeNull();
-    expect(getContrastText('rgb(255, 0, 0)')).toBeNull();
+    expect(getContrastText('not-a-color', LIGHT_TEXT, DARK_TEXT)).toBeNull();
+    expect(
+      getContrastText('rgb(255, 0, 0)', LIGHT_TEXT, DARK_TEXT),
+    ).toBeNull();
   });
 });

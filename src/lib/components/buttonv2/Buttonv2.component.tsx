@@ -73,7 +73,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
 
     switch (props.variant) {
       case 'primary': {
-        const primaryTextColor = getContrastText(brand.buttonPrimary) ?? brand.textPrimary;
+        const primaryTextColor = getContrastText(brand.buttonPrimary, brand.textPrimary, brand.textReverse) ?? brand.textPrimary;
         return css`
           background: ${brand.buttonPrimary};
           background-clip: padding-box, border-box;

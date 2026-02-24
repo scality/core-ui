@@ -39,7 +39,7 @@ export type Props = {
   tabs?: Array<Tab>;
 };
 const getNavbarTextColor = (props) =>
-  getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
+  getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
 
 const NavbarContainer = styled.div`
   height: ${navbarHeight};
@@ -79,7 +79,7 @@ const NavbarTabs = styled.div`
     border-top: ${spacing.r2} solid transparent;
     ${(props) => {
       const { selectedActive } = props.theme;
-      const navTextColor = getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
+      const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
       return css`
         color: ${navTextColor};
         &:hover {
@@ -107,7 +107,7 @@ const TabItem = styled.div<{ selected: boolean }>`
   align-items: center;
   padding: 0 ${spacing.r16};
   ${(props) => {
-    const navTextColor = getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
+    const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
     return css`
       color: ${navTextColor};
       &:hover {
@@ -153,14 +153,14 @@ const NavbarMenuItem = styled.div`
     height: ${navbarHeight};
     font-size: ${fontSize.base};
     background-color: ${getThemePropSelector('navbarBackground')};
-    color: ${(props) => getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary};
+    color: ${(props) => getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary};
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
     // :focus-visible is the keyboard-only version of :focus
     &:focus-visible {
       ${FocusVisibleStyle}
-      color: ${(props) => getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary};
+      color: ${(props) => getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary};
     }
     width: ${navbarItemWidth};
   }

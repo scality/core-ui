@@ -45,9 +45,7 @@ export const hex2RGB = (str: string): [number, number, number] => {
   throw new Error('Invalid hex string provided');
 };
 
-/**
- * Returns the relative luminance of an sRGB color (WCAG 2.0 formula).
- */
+// WCAG 2.0 relative luminance
 const relativeLuminance = (r: number, g: number, b: number): number => {
   const [rs, gs, bs] = [r, g, b].map((c) => {
     const s = c / 255;
@@ -56,27 +54,24 @@ const relativeLuminance = (r: number, g: number, b: number): number => {
   return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
 };
 
-/**
- * Returns the WCAG contrast ratio between two relative luminances.
- */
-const contrastRatio = (l1: number, l2: number): number => {
-  const lighter = Math.max(l1, l2);
-  const darker = Math.min(l1, l2);
-  return (lighter + 0.05) / (darker + 0.05);
+const wcagContrastRatio = (l1: number, l2: number): number =>
+  (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+
+const luminanceOf = (hex: string): number => {
+  const [r, g, b] = hex2RGB(hex);
+  return relativeLuminance(r, g, b);
 };
 
-/**
- * Returns '#FFFFFF' or '#000000' depending on which has better contrast
- * against the given background color. Returns null if the value is not
- * a valid hex color (e.g. CSS gradients).
- */
-export const getContrastText = (bgColor: string): string | null => {
+export const getContrastText = (
+  bgColor: string,
+  textPrimary: string,
+  textReverse: string,
+): string | null => {
   try {
-    const [r, g, b] = hex2RGB(bgColor);
-    const bgLuminance = relativeLuminance(r, g, b);
-    const whiteContrast = contrastRatio(1, bgLuminance);
-    const blackContrast = contrastRatio(bgLuminance, 0);
-    return whiteContrast >= blackContrast ? '#FFFFFF' : '#000000';
+    const bgLum = luminanceOf(bgColor);
+    const primaryContrast = wcagContrastRatio(luminanceOf(textPrimary), bgLum);
+    const reverseContrast = wcagContrastRatio(luminanceOf(textReverse), bgLum);
+    return reverseContrast > primaryContrast ? textReverse : textPrimary;
   } catch {
     return null;
   }
