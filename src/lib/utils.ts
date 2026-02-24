@@ -45,6 +45,43 @@ export const hex2RGB = (str: string): [number, number, number] => {
   throw new Error('Invalid hex string provided');
 };
 
+/**
+ * Returns the relative luminance of an sRGB color (WCAG 2.0 formula).
+ */
+const relativeLuminance = (r: number, g: number, b: number): number => {
+  const [rs, gs, bs] = [r, g, b].map((c) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+};
+
+/**
+ * Returns the WCAG contrast ratio between two relative luminances.
+ */
+const contrastRatio = (l1: number, l2: number): number => {
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+};
+
+/**
+ * Returns '#FFFFFF' or '#000000' depending on which has better contrast
+ * against the given background color. Returns null if the value is not
+ * a valid hex color (e.g. CSS gradients).
+ */
+export const getContrastText = (bgColor: string): string | null => {
+  try {
+    const [r, g, b] = hex2RGB(bgColor);
+    const bgLuminance = relativeLuminance(r, g, b);
+    const whiteContrast = contrastRatio(1, bgLuminance);
+    const blackContrast = contrastRatio(bgLuminance, 0);
+    return whiteContrast >= blackContrast ? '#FFFFFF' : '#000000';
+  } catch {
+    return null;
+  }
+};
+
 export const convertRemToPixels = (rem: number): number => {
   if (
     document.documentElement &&

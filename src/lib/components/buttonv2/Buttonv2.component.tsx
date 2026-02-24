@@ -2,6 +2,7 @@ import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { fontSize, fontWeight } from '../../style/theme';
+import { getContrastText } from '../../utils';
 import { Loader } from '../loader/Loader.component';
 import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
 
@@ -71,29 +72,31 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
     const brand = props.theme;
 
     switch (props.variant) {
-      case 'primary':
+      case 'primary': {
+        const primaryTextColor = getContrastText(brand.buttonPrimary) ?? brand.textPrimary;
         return css`
           background: ${brand.buttonPrimary};
           background-clip: padding-box, border-box;
           border: ${spacing.r1} solid transparent;
           border-color: ${brand.buttonPrimary};
-          color: ${brand.textPrimary};
+          color: ${primaryTextColor};
           &:hover:enabled {
             cursor: pointer;
             border: ${spacing.r1} solid ${brand.infoPrimary};
-            color: ${brand.textPrimary};
+            color: ${primaryTextColor};
           }
           // :focus-visible is the keyboard-only version of :focus
           &:focus-visible:enabled {
             ${FocusVisibleStyle}
-            color: ${brand.textPrimary};
+            color: ${primaryTextColor};
           }
           &:active:enabled {
             cursor: pointer;
-            color: ${brand.textPrimary};
+            color: ${primaryTextColor};
             border: ${spacing.r1} solid ${brand.infoSecondary};
           }
         `;
+      }
 
       case 'secondary':
         return css`

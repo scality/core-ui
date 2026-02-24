@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
 import { fontSize, navbarHeight, navbarItemWidth } from '../../style/theme';
-import { getThemePropSelector } from '../../utils';
+import { getContrastText, getThemePropSelector } from '../../utils';
 import { Dropdown, type Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
 import { Button, FocusVisibleStyle, type Props as ButtonProps } from '../buttonv2/Buttonv2.component';
@@ -38,16 +38,19 @@ export type Props = {
   logo?: JSX.Element;
   tabs?: Array<Tab>;
 };
+const getNavbarTextColor = (props) =>
+  getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
+
 const NavbarContainer = styled.div`
   height: ${navbarHeight};
   display: flex;
   justify-content: space-between;
   ${css`
     background-color: ${getThemePropSelector('navbarBackground')};
-    color: ${getThemePropSelector('textPrimary')};
+    color: ${getNavbarTextColor};
     .fas,
     .sc-trigger-text {
-      color: ${getThemePropSelector('textPrimary')};
+      color: ${getNavbarTextColor};
     }
     box-sizing: border-box;
     border-bottom: 0.5px solid ${(props) => props.theme.backgroundLevel2};
@@ -76,20 +79,21 @@ const NavbarTabs = styled.div`
     border-top: ${spacing.r2} solid transparent;
     ${(props) => {
       const { selectedActive } = props.theme;
+      const navTextColor = getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
       return css`
-        color: ${getThemePropSelector('textPrimary')};
+        color: ${navTextColor};
         &:hover {
           background-color: ${getThemePropSelector('highlight')};
         }
         &.selected {
-          color: ${getThemePropSelector('textPrimary')};
+          color: ${navTextColor};
           font-weight: bold;
           border-bottom-color: ${selectedActive};
         }
         // :focus-visible is the keyboard-only version of :focus
         &:focus-visible {
           ${FocusVisibleStyle}
-          color: ${props.theme.textPrimary};
+          color: ${navTextColor};
         }
       `;
     }};
@@ -103,9 +107,9 @@ const TabItem = styled.div<{ selected: boolean }>`
   align-items: center;
   padding: 0 ${spacing.r16};
   ${(props) => {
-    const { textPrimary } = props.theme;
+    const navTextColor = getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary;
     return css`
-      color: ${textPrimary};
+      color: ${navTextColor};
       &:hover {
         border-bottom: ${spacing.r2} solid;
         border-top: ${spacing.r2} solid;
@@ -114,7 +118,7 @@ const TabItem = styled.div<{ selected: boolean }>`
       // :focus-visible is the keyboard-only version of :focus
       &:focus-visible {
         ${FocusVisibleStyle}
-        color: ${props.theme.textPrimary};
+        color: ${navTextColor};
       }
     `;
   }};
@@ -149,13 +153,14 @@ const NavbarMenuItem = styled.div`
     height: ${navbarHeight};
     font-size: ${fontSize.base};
     background-color: ${getThemePropSelector('navbarBackground')};
+    color: ${(props) => getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary};
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
     }
     // :focus-visible is the keyboard-only version of :focus
     &:focus-visible {
       ${FocusVisibleStyle}
-      color: ${(props) => props.theme.textPrimary};
+      color: ${(props) => getContrastText(props.theme.navbarBackground) ?? props.theme.textPrimary};
     }
     width: ${navbarItemWidth};
   }
