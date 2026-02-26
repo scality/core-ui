@@ -46,11 +46,12 @@ export function createEditorTheme(theme: CoreUITheme): Extension {
       '&': {
         backgroundColor: theme.backgroundLevel1,
         color: theme.textPrimary,
+        fontFamily: "'Courier New', monospace",
+        fontSize: '12px',
+        lineHeight: '1.6',
       },
       '.cm-content': {
         caretColor: theme.textPrimary,
-        fontFamily: "'Courier New', monospace",
-        fontSize: '12px',
       },
       '.cm-cursor, .cm-dropCursor': {
         borderLeftColor: theme.textPrimary,
