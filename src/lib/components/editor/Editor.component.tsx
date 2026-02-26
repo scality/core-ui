@@ -154,6 +154,7 @@ export const Editor = ({
         autocompletion: true,
         highlightActiveLine: true,
         highlightActiveLineGutter: true,
+        highlightSelectionMatches: false,
         indentOnInput: true,
         bracketMatching: true,
         closeBrackets: true,
