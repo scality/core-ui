@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '../icon/Icon.component';
-import { Button, Props } from './Buttonv2.component';
+import { Button, type Props } from './Buttonv2.component';
 
 export const COPY_STATE_IDLE = 'idle';
 export const COPY_STATE_SUCCESS = 'success';
@@ -8,6 +8,7 @@ export const COPY_STATE_UNSUPPORTED = 'unsupported';
 export const useClipboard = () => {
   const [copyStatus, setCopyStatus] = useState(COPY_STATE_IDLE);
   useEffect(() => {
+    if (copyStatus === COPY_STATE_IDLE) return;
     const timer = setTimeout(() => {
       setCopyStatus(COPY_STATE_IDLE);
     }, 2000);
@@ -41,8 +42,14 @@ export const useClipboard = () => {
         });
     } else {
       // Copy as plain text only
-      navigator.clipboard.writeText(text);
-      setCopyStatus(COPY_STATE_SUCCESS);
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          setCopyStatus(COPY_STATE_SUCCESS);
+        })
+        .catch(() => {
+          setCopyStatus(COPY_STATE_UNSUPPORTED);
+        });
     }
   };
 
@@ -65,45 +72,45 @@ export const CopyButton = ({
   variant?: 'outline' | 'ghost';
 } & Omit<Props, 'tooltip' | 'label'>) => {
   const { copy, copyStatus } = useClipboard();
+  const isSuccess = copyStatus === COPY_STATE_SUCCESS;
   return (
     <Button
       {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
       style={{
+        ...props.style,
+        ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
         minWidth:
-          //Just to make sure the width of the button stays the same when copied!
           variant === 'outline'
-            ? (label ? label.length / 2 : 0) + 7 + 'rem'
+            ? `${(label ? label.length / 2 : 0) + 7}rem`
             : undefined,
       }}
       label={
         variant === 'outline'
-          ? copyStatus === COPY_STATE_SUCCESS
-            ? `Copied${label ? ' ' + label + '' : ''}!`
-            : `Copy${label ? ' ' + label : ''}`
+          ? isSuccess
+            ? `Copied${label ? ` ${label}` : ''}!`
+            : `Copy${label ? ` ${label}` : ''}`
           : undefined
       }
       icon={
         <Icon
-          name={copyStatus === COPY_STATE_SUCCESS ? 'Check' : 'Copy'}
-          color={
-            copyStatus === COPY_STATE_SUCCESS ? 'statusHealthy' : undefined
-          }
+          name={isSuccess ? 'Check' : 'Copy'}
+          color={isSuccess ? 'statusHealthy' : undefined}
         />
       }
-      disabled={copyStatus === COPY_STATE_SUCCESS || props.disabled}
-      onClick={() => copy(textToCopy, copyAsHtml)}
+      disabled={props.disabled}
+      aria-disabled={isSuccess || props.disabled}
+      onClick={() => {
+        if (!isSuccess) copy(textToCopy, copyAsHtml);
+      }}
       type="button"
       tooltip={
         variant !== 'outline'
           ? {
-              overlay:
-                copyStatus === COPY_STATE_SUCCESS
-                  ? 'Copied !'
-                  : `Copy${label ? ' ' + label : ''}`,
-              overlayStyle: {
-                maxWidth: '20rem',
-              },
+              overlay: isSuccess
+                ? 'Copied !'
+                : `Copy${label ? ` ${label}` : ''}`,
+              overlayStyle: { maxWidth: '20rem' },
               placement: 'top',
             }
           : undefined
