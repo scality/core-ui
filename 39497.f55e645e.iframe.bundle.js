@@ -25,7 +25,6 @@
   border: none;
   padding: 0;
   margin: 0;
-  cursor: pointer;
   color: inherit;
   font: inherit;              /* Inherit font sizing */
   vertical-align: text-bottom;     /* Align with text */
@@ -141,4 +140,4 @@ ${props=>{const brand=props.theme;return styled_components__WEBPACK_IMPORTED_MOD
     }
   `}}
 `;function ScrollbarWrapper({children}){return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment,{children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle,{}),children]})}try{ScrollbarWrapper.displayName="ScrollbarWrapper",ScrollbarWrapper.__docgenInfo={description:"",displayName:"ScrollbarWrapper",props:{}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"]={docgenInfo:ScrollbarWrapper.__docgenInfo,name:"ScrollbarWrapper",path:"src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"})}catch(__react_docgen_typescript_loader_error){}}}]);
-//# sourceMappingURL=39497.91c1cc8a.iframe.bundle.js.map
+//# sourceMappingURL=39497.f55e645e.iframe.bundle.js.map
