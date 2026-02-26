@@ -8,6 +8,7 @@ export const COPY_STATE_UNSUPPORTED = 'unsupported';
 export const useClipboard = () => {
   const [copyStatus, setCopyStatus] = useState(COPY_STATE_IDLE);
   useEffect(() => {
+    if (copyStatus === COPY_STATE_IDLE) return;
     const timer = setTimeout(() => {
       setCopyStatus(COPY_STATE_IDLE);
     }, 2000);
@@ -98,6 +99,7 @@ export const CopyButton = ({
         />
       }
       disabled={props.disabled}
+      aria-disabled={isSuccess || props.disabled}
       onClick={() => {
         if (!isSuccess) copy(textToCopy, copyAsHtml);
       }}
