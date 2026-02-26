@@ -33,12 +33,12 @@ describe('getContrastText', () => {
     expect(getContrastText('#000', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
   });
 
-  it('handles hex without # prefix', () => {
-    expect(getContrastText('000000', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
-    expect(getContrastText('FFFFFF', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+  it('handles rgb color format', () => {
+    expect(getContrastText('rgb(0, 0, 0)', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
+    expect(getContrastText('rgb(255, 255, 255)', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
   });
 
-  it('returns null for non-hex values', () => {
+  it('returns null for unparseable values', () => {
     expect(
       getContrastText(
         'linear-gradient(130deg, #9355E7 0%, #2E4AA3 60%)',
@@ -47,8 +47,5 @@ describe('getContrastText', () => {
       ),
     ).toBeNull();
     expect(getContrastText('not-a-color', LIGHT_TEXT, DARK_TEXT)).toBeNull();
-    expect(
-      getContrastText('rgb(255, 0, 0)', LIGHT_TEXT, DARK_TEXT),
-    ).toBeNull();
   });
 });

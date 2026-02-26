@@ -1,3 +1,5 @@
+import { getLuminance } from 'polished';
+
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
 
 /** Ensure the consistency of colors between old and new colors */
@@ -45,22 +47,8 @@ export const hex2RGB = (str: string): [number, number, number] => {
   throw new Error('Invalid hex string provided');
 };
 
-// WCAG 2.0 relative luminance
-const relativeLuminance = (r: number, g: number, b: number): number => {
-  const [rs, gs, bs] = [r, g, b].map((c) => {
-    const s = c / 255;
-    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
-  });
-  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
-};
-
 const wcagContrastRatio = (l1: number, l2: number): number =>
   (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-
-const luminanceOf = (hex: string): number => {
-  const [r, g, b] = hex2RGB(hex);
-  return relativeLuminance(r, g, b);
-};
 
 // Minimum WCAG contrast ratio to consider a text color readable on a background.
 // 3.0 corresponds to WCAG AA for large text — same threshold used by MUI.
@@ -72,9 +60,9 @@ export const getContrastText = (
   textReverse: string,
 ): string | null => {
   try {
-    const bgLum = luminanceOf(bgColor);
-    const primaryLum = luminanceOf(textPrimary);
-    const reverseLum = luminanceOf(textReverse);
+    const bgLum = getLuminance(bgColor);
+    const primaryLum = getLuminance(textPrimary);
+    const reverseLum = getLuminance(textReverse);
 
     const lighterText = primaryLum >= reverseLum ? textPrimary : textReverse;
     const darkerText = primaryLum >= reverseLum ? textReverse : textPrimary;
