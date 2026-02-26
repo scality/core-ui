@@ -17,6 +17,8 @@ export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThem
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';
 export { Accordion } from './components/accordion/Accordion.component';
+export { Editor } from './components/editor';
+export type { EditorProps } from './components/editor';
 
 // Export all chart components from the consolidated charts folder
 export {

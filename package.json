@@ -85,6 +85,9 @@
     }
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/language": "^6.12.2",
+    "@codemirror/view": "^6.39.15",
     "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.27.15",
     "@fortawesome/fontawesome-free": "^7.1.0",
@@ -93,7 +96,10 @@
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@js-temporal/polyfill": "^0.4.4",
+    "@lezer/highlight": "^1.2.3",
     "@storybook/preview-api": "^8.3.6",
+    "@uiw/react-codemirror": "^4.25.5",
+    "codemirror-json-schema": "^0.8.1",
     "downshift": "^7.0.5",
     "polished": "3.4.1",
     "pretty-bytes": "^5.6.0",
