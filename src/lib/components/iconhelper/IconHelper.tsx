@@ -23,7 +23,6 @@ const HelpButton = styled.button`
   border: none;
   padding: 0;
   margin: 0;
-  cursor: pointer;
   color: inherit;
   font: inherit;              /* Inherit font sizing */
   vertical-align: text-bottom;     /* Align with text */
