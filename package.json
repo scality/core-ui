@@ -5,8 +5,17 @@
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
   "main": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "mainSrc": "src/lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./eslint-plugin": "./src/lib/valalint/index.js"
+  },
   "sideEffects": false,
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -62,8 +71,8 @@
     "@types/styled-components": "^5.1.25",
     "@types/styled-system": "^5.1.15",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "copyfiles": "^2.4.1",
     "eslint": "^8.15.0",
     "eslint-config-react-app": "^7.0.1",

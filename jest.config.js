@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   clearMocks: true,
   globalSetup: './global-setup.js',
   setupFilesAfterEnv: ['./setupTests.js'],
