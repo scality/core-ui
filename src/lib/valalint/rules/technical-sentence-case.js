@@ -39,7 +39,21 @@ const technicalSentenceCase = {
       JSXElement(node) {
         const name = node.openingElement.name.name;
         if (!TARGET_COMPONENTS.includes(name)) return;
-        node.children.forEach(child => {
+
+        // Find the index of the first non-empty JSXText child that appears
+        // before any non-text node. Sentence case only applies to that child.
+        let firstTextChildIndex = -1;
+        for (let i = 0; i < node.children.length; i++) {
+          const child = node.children[i];
+          if (child.type === 'JSXText' && child.value.trim()) {
+            firstTextChildIndex = i;
+            break;
+          } else if (child.type !== 'JSXText') {
+            break; // expression comes first — can't determine sentence start
+          }
+        }
+
+        node.children.forEach((child, index) => {
           // Only check for JSXText (e.g., <Button>text</Button>)
           if (child.type === 'JSXText') {
             const text = child.value.trim();
@@ -48,8 +62,8 @@ const technicalSentenceCase = {
             // Compose the fixed text for both fixes if needed
             let fixedText = text;
 
-            // Sentence case fix
-            if (!checkSentenceCase(text)) {
+            // Sentence case fix — only on the first visible text fragment
+            if (index === firstTextChildIndex && !checkSentenceCase(text)) {
               fixedText = fixedText.charAt(0).toUpperCase() + fixedText.slice(1);
               context.report({
                 node: child,

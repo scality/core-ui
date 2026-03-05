@@ -34,6 +34,7 @@ tester.run('technical-sentence-case', rule, {
         // Empty / whitespace-only children are ignored
         { code: '<Button>   </Button>' },
         { code: '<Text>{variable}</Text>' },
+        { code: `<Text>Text with jsx text {"in the middle"} of it</Text>` },
     ],
 
     // ─── Invalid ──────────────────────────────────────────────────────────────
