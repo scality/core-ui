@@ -9,21 +9,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
       - name: Install node
         uses: actions/setup-node@v2
         with:
           node-version: "16"
       - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
+      - name: Push version bump branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b feature/bump-core-ui-version-to-${{ env.nextVersion }}
+          git add package.json package-lock.json
+          git commit -m "Bump core-ui version to ${{ env.nextVersion }}"
+          git push origin feature/bump-core-ui-version-to-${{ env.nextVersion }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: actions/github-script@v5
         id: cpr
         with:
-          token: ${{ secrets.GIT_ACCESS_TOKEN }}
-          branch: feature/bump-core-ui-version-to-${{ env.nextVersion }}
-          commit-message: Bump core-ui version to  ${{ env.nextVersion }}
-          title: Bump core-ui version to  ${{ env.nextVersion }}
-          body: ""
-          base: ${{ github.event.repository.default_branch }}
+          github-token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          script: |
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `feature/bump-core-ui-version-to-${process.env.nextVersion}`,
+              base: context.payload.repository.default_branch,
+              title: `Bump core-ui version to ${process.env.nextVersion}`,
+              body: ''
+            });
+            core.setOutput('pull-request-number', String(pr.data.number));
       - uses: actions/github-script@v5
         if: ${{ steps.cpr.outputs.pull-request-number }}
         with:
@@ -60,6 +75,6 @@ jobs:
         with:
           node-version: "25"
           registry-url: "https://registry.npmjs.org"
-      - run: npm install
+      - run: npm ci
       - run: npm run build
       - run: npm publish
