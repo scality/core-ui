@@ -1,13 +1,16 @@
 import tsParser from '@typescript-eslint/parser';
 import technicalSentenceCase from './rules/technical-sentence-case.js';
+import modalButtonForbiddenLabel from './rules/modal-button-forbidden-label.js';
 
 const rules = {
     'technical-sentence-case': technicalSentenceCase,
+    'modal-button-forbidden-label': modalButtonForbiddenLabel,
 };
 
 /** Default rule severity for the recommended config. */
 const recommendedRules = {
     'valalint/technical-sentence-case': 'warn',
+    'valalint/modal-button-forbidden-label': 'warn',
 };
 
 const plugin = {
