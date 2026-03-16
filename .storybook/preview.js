@@ -89,7 +89,7 @@ export const parameters = {
           'Navigation',
           'Data Display',
           'Inputs',
-          'Feedback',
+          ['Feedback', [['Modal', ['Guideline', '*']]]],
           'Progress & loading',
           'Styling',
           'Deprecated',
