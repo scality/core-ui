@@ -27,12 +27,12 @@ A modal interrupts the user to focus on a single task or decision. It blocks the
 
 ## Role: `dialog` vs `alertdialog`
 
-The `role` prop controls how assistive technologies treat the modal and defines the dismissal behavior.
+The `role` prop controls how assistive technologies treat the modal.
 
-| `role` | When to use | ESC closes it | Close button |
-|---|---|---|---|
-| `dialog` (default) | Standard interaction — form, optional confirmation | Yes | Present |
-| `alertdialog` | Critical or destructive action requiring a forced decision | No | Omit |
+| `role` | When to use | Close button |
+|---|---|---|
+| `dialog` (default) | Standard interaction — form, optional confirmation | Present |
+| `alertdialog` | Critical or destructive action requiring a forced decision | Omit |
 
 Use `alertdialog` when accidentally dismissing the modal would be dangerous or meaningless (e.g. a delete confirmation — ESC should not silently cancel the user's intent).
 
@@ -40,7 +40,7 @@ Use `alertdialog` when accidentally dismissing the modal would be dangerous or m
 
 - The **close button** (×) in the header is present by default via the `close` prop. Omit it only when using `role="alertdialog"` — the user must explicitly choose an action.
 - **Clicking the backdrop never closes the modal.** This prevents accidental data loss, especially in forms.
-- **ESC** closes `dialog`-role modals. It does not close `alertdialog`-role modals.
+- **ESC** closes the modal when the `close` prop is provided, regardless of the role.
 
 ## Title and subtitle
 
