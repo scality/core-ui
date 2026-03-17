@@ -47,7 +47,7 @@ Use `alertdialog` when accidentally dismissing the modal would be dangerous or m
 - `title` is always required and always text. It mirrors the verb of the action that triggered the modal: the button "Delete node" opens a modal titled "Delete node?".
 - For standard modals, the title describes the action: "Edit settings", "Create bucket".
 - For destructive or irreversible actions, the title is phrased as a question: "Delete node?", "Revoke access?". The question mark signals that a decision is required.
-- `subTitle` is used for step indicators in multi-step modals only (e.g. `"Step 1/2"`).
+- `subTitle` occupies the header slot when no close button is present. Use it for contextual information (e.g. a step indicator or a required-fields disclaimer).
 - `subTitle` occupies the same slot as the close button. When `subTitle` is used, `close` must be omitted and navigation must be handled in the footer.
 
 ## Body content
