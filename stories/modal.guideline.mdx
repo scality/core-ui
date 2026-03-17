@@ -87,7 +87,7 @@ On error: stay in the modal and display the error inline. Do not close the modal
 ## Forbidden patterns
 
 - **No modal on top of another modal.** If a flow requires a second modal, redesign as a full page or wizard.
-- **No event-triggered modals** at the application level (login, WebSocket events, etc.) — race conditions between modals create an uncontrollable stacking experience.
+- **Avoid event-triggered modals** at the application level (login, WebSocket events, etc.) — race conditions between modals create an uncontrollable stacking experience.
 - **No complex multi-step flows inside a modal.** Move to a full page. Exception: short download or export wizards.
 
 ## Within a table
