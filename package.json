@@ -1,6 +1,6 @@
 {
   "name": "@scality/core-ui",
-  "version": "0.205.0",
+  "version": "0.206.0",
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
@@ -14,7 +14,9 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./eslint-plugin": "./src/lib/valalint/index.js"
+    "./eslint-plugin": "./src/lib/valalint/index.js",
+    "./dist/*.css": "./dist/*.css",
+    "./dist/*": "./dist/*"
   },
   "sideEffects": false,
   "peerDependencies": {
