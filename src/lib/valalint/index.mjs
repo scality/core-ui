@@ -1,7 +1,7 @@
 import tsParser from "@typescript-eslint/parser";
-import modalButtonForbiddenLabel from "./rules/modal-button-forbidden-label.js";
-import noRawNumberInJsx from "./rules/no-raw-number-in-jsx.js";
-import technicalSentenceCase from "./rules/technical-sentence-case.js";
+import modalButtonForbiddenLabel from "./rules/modal-button-forbidden-label.mjs";
+import noRawNumberInJsx from "./rules/no-raw-number-in-jsx.mjs";
+import technicalSentenceCase from "./rules/technical-sentence-case.mjs";
 
 const rules = {
 	"technical-sentence-case": technicalSentenceCase,
