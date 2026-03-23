@@ -10,5 +10,10 @@ export default {
     '^@fortawesome/free-regular-svg-icons/(.+)\\.js$':
       '@fortawesome/free-regular-svg-icons/$1',
   },
+  // Transform both .js and .mjs files with Babel
+  transform: {
+    '^.+\\.(js|jsx|mjs)$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': 'babel-jest',
+  },
   testEnvironment: 'jsdom',
 };

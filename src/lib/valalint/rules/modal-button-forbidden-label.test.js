@@ -1,5 +1,5 @@
 import { RuleTester } from 'eslint';
-import rule from './modal-button-forbidden-label.js';
+import rule from './modal-button-forbidden-label.mjs';
 import * as tsParser from '@typescript-eslint/parser';
 
 const tester = new RuleTester({

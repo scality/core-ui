@@ -13,7 +13,7 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./eslint-plugin": "./src/lib/valalint/index.js",
+    "./eslint-plugin": "./src/lib/valalint/index.mjs",
     "./dist/*.css": "./dist/*.css",
     "./dist/*": "./dist/*"
   },

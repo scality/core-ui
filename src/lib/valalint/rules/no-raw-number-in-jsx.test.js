@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import rule from './no-raw-number-in-jsx.js';
+import rule from './no-raw-number-in-jsx.mjs';
 import path from 'path';
 
 // Jest runs from the project root, so process.cwd() is the workspace root

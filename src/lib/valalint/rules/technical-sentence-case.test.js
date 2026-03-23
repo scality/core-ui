@@ -1,5 +1,5 @@
 import { RuleTester } from 'eslint';
-import rule from './technical-sentence-case.js';
+import rule from './technical-sentence-case.mjs';
 import * as tsParser from '@typescript-eslint/parser';
 
 const tester = new RuleTester({
