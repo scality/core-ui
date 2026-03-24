@@ -1,14 +1,14 @@
-import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import type { SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  CSSProperties,
-  HTMLProps,
-  PropsWithChildren,
+  type CSSProperties,
+  type HTMLProps,
+  type PropsWithChildren,
   useEffect,
   useState,
 } from 'react';
 import styled, { css } from 'styled-components';
-import { CoreUITheme } from '../../style/theme';
+import type { CoreUITheme } from '../../style/theme';
 import { Loader } from '../loader/Loader.component';
 import { Bucket, Buckets, RemoteGroup, RemoteUser } from './CustomsIcons';
 import { iconTable } from './iconTable';
@@ -114,8 +114,8 @@ export const IconWrapper = styled.div<{ size: SizeProp }>`
         height: 1.5rem;
       `
             : `
-        width: ${parseInt(props.size.replace('x', '')) * 2}rem;
-        height: ${parseInt(props.size.replace('x', '')) * 2}rem;
+        width: ${parseInt(props.size.replace('x', ''), 10) * 2}rem;
+        height: ${parseInt(props.size.replace('x', ''), 10) * 2}rem;
       `}
     `;
   }}
@@ -157,9 +157,12 @@ function NonWrappedIcon({
     // Handle FontAwesome icons with dynamic import
     import(
       /* webpackExclude: /import\.macro\.js$/ */
-      `@fortawesome/${fontAwesomeType}/${iconClass}.js`).then((module) => {
+      /* webpackInclude: /\.js$/ */
+      `@fortawesome/${fontAwesomeType}/${iconClass}`).then((module) => {
         setIcon(module[iconClass]);
         iconCache[cacheKey] = module[iconClass];
+      }).catch((err) => {
+        console.warn(`Icon ${iconClass} could not be loaded:`, err.message);
       });
     return () => setIcon(undefined);
   }, [name, iconInfo]);
