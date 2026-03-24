@@ -15,7 +15,11 @@
     },
     "./eslint-plugin": "./src/lib/valalint/index.mjs",
     "./dist/*.css": "./dist/*.css",
-    "./dist/*": "./dist/*"
+    "./dist/*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js",
+      "default": "./dist/*.js"
+    }
   },
   "sideEffects": false,
   "peerDependencies": {
