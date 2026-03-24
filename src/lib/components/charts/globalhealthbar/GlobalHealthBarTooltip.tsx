@@ -4,7 +4,6 @@ import { TooltipContentProps } from 'recharts';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { Stack } from '../../../spacing';
 import { Text } from '../../text/Text.component';
-import { Wrap } from '../../../spacing';
 import { spacing } from '../../../spacing';
 import { Alert } from './GlobalHealthBar.hooks';
 import { zIndex } from '../../../style/theme';
@@ -21,22 +20,37 @@ interface GlobalHealthBarTooltipProps {
   endTimestamp?: number;
 }
 
-const TooltipContainer = styled.div`
+const TooltipContainer = styled.div<{ $severityColor: string }>`
   ${(props) => {
     const theme = useTheme();
 
     return css`
       border: 1px solid ${theme.border};
-      width: 24rem;
+      border-left: 3px solid ${props.$severityColor};
+      width: 22rem;
       z-index: ${zIndex.tooltip};
       color: ${theme.textSecondary};
-      background-color: ${theme.backgroundLevel1};
+      background-color: ${theme.backgroundLevel2};
       border-radius: 4px;
-      padding: ${spacing.r8};
+      padding: ${spacing.r12};
       pointer-events: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     `;
   }}
+`;
+
+const SeverityDot = styled.div<{ $color: string }>`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: ${({ $color }) => $color};
+  flex-shrink: 0;
+`;
+
+const DateRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${spacing.r8};
 `;
 
 export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
@@ -49,43 +63,44 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
     endTimestamp = 0,
   } = props;
   const { coordinate } = tooltipProps;
+  const theme = useTheme();
 
   if (!tooltipData) return null;
 
   const { description, startsAt, endsAt, severity } = tooltipData;
 
+  const severityColor =
+    severity === 'critical'
+      ? theme.statusCritical
+      : severity === 'warning'
+        ? theme.statusWarning
+        : theme.textSecondary;
+
   const tooltipContent = (
-    <Stack direction="vertical" gap="r8">
-      <Wrap>
-        <Text variant="Smaller">Severity</Text>
-        <Text color="textPrimary" variant="Smaller">
+    <Stack direction="vertical" gap="r12">
+      <Stack gap="r8" style={{ alignItems: 'center' }}>
+        <SeverityDot $color={severityColor} />
+        <Text color="textPrimary" variant="Smaller" isEmphazed style={{ textTransform: 'capitalize' }}>
           {severity}
         </Text>
-      </Wrap>
-      <Wrap>
-        <Text variant="Smaller">Start</Text>
-        <Text color="textPrimary" variant="Smaller">
-          <FormattedDateTime format="date-time" value={new Date(startsAt)} />
-        </Text>
-      </Wrap>
-      <Wrap>
-        <Text variant="Smaller">End</Text>
-        <Text color="textPrimary" variant="Smaller">
-          <FormattedDateTime format="date-time" value={new Date(endsAt)} />
-        </Text>
-      </Wrap>
-      <Wrap>
-        <Text variant="Smaller" style={{ paddingRight: spacing.r32 }}>
-          Description
-        </Text>
-        <Text
-          color="textPrimary"
-          variant="Smaller"
-          style={{ whiteSpace: 'wrap', textAlign: 'justify' }}
-        >
-          {description}
-        </Text>
-      </Wrap>
+      </Stack>
+      <Text color="textPrimary" variant="Basic">
+        {description}
+      </Text>
+      <Stack direction="vertical" gap="r4">
+        <DateRow>
+          <Text variant="Smaller" style={{ width: '2.5rem', flexShrink: 0 }}>From</Text>
+          <Text color="textPrimary" variant="Smaller">
+            <FormattedDateTime format="date-time" value={new Date(startsAt)} />
+          </Text>
+        </DateRow>
+        <DateRow>
+          <Text variant="Smaller" style={{ width: '2.5rem', flexShrink: 0 }}>To</Text>
+          <Text color="textPrimary" variant="Smaller">
+            <FormattedDateTime format="date-time" value={new Date(endsAt)} />
+          </Text>
+        </DateRow>
+      </Stack>
     </Stack>
   );
 
@@ -122,7 +137,7 @@ export const GlobalHealthBarTooltip = (props: GlobalHealthBarTooltipProps) => {
           };
         }
       }}
-      containerComponent={TooltipContainer}
+      containerComponent={(p) => <TooltipContainer $severityColor={severityColor} {...p} />}
       offset={({ placement }) => {
         // Use larger offset when tooltip is on top
         // to avoid tooltip over bar
