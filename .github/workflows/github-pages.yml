@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - name: Configure git credentials
+        run: git config --global url."https://x-access-token:${{ github.token }}@github.com/".insteadOf "https://github.com/"
       - run: npm run storybook:deploy
         env:
           STORYBOOK_DISABLE_TELEMETRY: 1
