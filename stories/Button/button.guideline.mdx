@@ -16,95 +16,109 @@ import * as ButtonStories from './button.stories';
 
 # Button
 
-Buttons are used to trigger an action or event when activated.
+Buttons trigger an action or state change.
 
-## Size & style
+## Hierarchy & grouping
 
-### Style
+**One primary button per view or modal.** A single `variant="primary"` defines the intended action at any given moment.
 
-- Height: 2rem
-- Border-radius: 3px
-- Minimum width: 5rem
+- Primary button: far right of the group.
+- Dismissive actions (Cancel, Go back): `variant="outline"`, placed on the left.
 
-### Padding
+Align button groups with the container's right side by default; adjust only when visual balance requires it.
 
-Button’s label measurement:
+### Wizard / multi-step flows
 
-- Line height: 1.25rem
-- Vertical padding: 0.5rem
-- Horizontal padding of 1rem
-- Space between icon & label: 0.5rem
+In multi-step flows, group all navigation buttons on the right. "Continue" (or the equivalent forward action) is always `primary`. "Back" sits to its left as `outline`.
 
-### Button spacing
+Never use "Next". It is not an action verb.
 
-- Horizontal spacing: 1rem
-- Vertical spacing: 0.75rem
-- Space between 2 buttons: 1.5rem - when there is no space constraint
+<Canvas layout="fullscreen" of={ButtonStories.SimpleForm} sourceState="none" />
 
 ## Usage
 
-Button labels should be as short and clear as possible and should describe the action the button performs.\
+Button labels must be short, clear, and describe the action performed.
 
-- Use one or two words if possible,
-- Remove most prepositions and articles (a, an, the).
-- Examples: Cancel, Close, Create, Delete, Edit, Learn More, Review, Save, Study, View Scores, etc.,
-- Stick to using verbs (Complete, Start, Finish, Search) or a simple verb + noun combination for buttons (Next page, Submit post, Learn more),
-- Capitalize the noun after the verb (Create Folder, Create Node, Edit Location).
-- Maintain labelling method consistency across all of your buttons,
-- Don't use punctuation or exclamation marks (!),
-- And, most importantly, don't write "Click here".
+**✅ Do**
+- Use an action verb + noun: "Save", "Create project", "Delete"
+- Prefer 1–2 words; 3 words maximum. A single verb ("Save", "Add", "Delete") is acceptable. Pairing it with a resource name ("Save settings", "Add node", "Delete volume") is preferred for clarity.
+- Sentence case but capitalize resource names: "Create Folder", "Edit Node"
+- Use a `Link` component instead when the action is purely navigational (no mutation, no side effect).
+
+**❌ Don't**
+- Use a noun alone: "Confirmation", "Settings"
+- Add punctuation or exclamation marks
+- Write "Click here" or generic labels like "Yes", "OK"
 
 ## Variations
 
-The button can be modified in different way to match its usage.
-
 ### Variant
 
-Buttons have a set of predefined variants to use in different context.
+Use this table to choose the right variant:
+
+| Situation | Variant |
+|---|---|
+| Main / intended action on the page or in a modal | `primary` |
+| Irreversible or destructive action (delete, reset) | `danger` |
+| Action that must be accessible but must not attract attention (dismissal, low-priority utility) | `outline` |
+| Secondary action alongside a primary | `secondary` |
+| Low-emphasis utility in a constrained space (table, key-value list) | ghost (no variant, icon only) |
 
 <Canvas layout="fullscreen" of={ButtonStories.DefaultButtons} />
 <br />
 
 #### Primary
 
-Used for the main action. It should only appear once within a group of buttons (or even a screen).
-For example, “Continue” in a form.
+Used for the main action. It must appear only once within a group of buttons or a screen.
+For example, "Continue" in a form.
 
 <Canvas of={ButtonStories.Primary} layout="fullscreen" />
 
 #### Secondary
 
-Used for a secondary action within a group of buttons.
+Used when two constructive actions coexist and both advance the flow, but one is more important.
+
+**Example:** "Save draft" (secondary) + "Publish" (primary). Both move the user forward, but publishing is the intended outcome.
 
 <Canvas layout="fullscreen" of={ButtonStories.Secondary} />
 
 #### Outline
 
-Used for low-emphasis action, as an alternative to Primary or Secondary buttons.
-It's suitable for dismissive action, such as the "Cancel" button.
+Used when an action must be accessible without attracting attention. It signals "available, but not the priority."
+
+Two typical cases:
+- **Dismissal / exit:** Cancel, Go back, Close. Any action that steps back from the current flow.
+- **Low-priority utility:** Export, Download, Preview, Copy link. Actions that are useful but must not compete visually with the primary action.
+
+Prefer Outline over Secondary when the action doesn't advance the main flow.
 
 <Canvas layout="fullscreen" of={ButtonStories.Outline} />
 
 #### Danger
 
-Used for critical action, typically delete actions.
-Actions triggered by such button often require additional validation, as the critical action cannot be undone.
+Used for critical, irreversible actions (typically delete). When the main action is destructive, use `danger` instead of `primary`. Never use them alongside each other. In a destructive confirmation context, `danger` takes the primary position (right side of the group).
+
+Destructive confirmation is always handled through a modal or an explicit checkbox. Never use a double-click pattern on the button itself.
 
 <Canvas layout="fullscreen" of={ButtonStories.Danger} />
 
-### Links
+### Button vs Link
 
-The Button component can be used as a link to another element of the UI.
-When the link send to another site, use the "External-link-alt" icon.
+Use a `Link` component for any navigation, internal or external. `Button` is reserved for actions that trigger a mutation or a state change.
 
-<Canvas layout="fullscreen" of={ButtonStories.LinkButton} />
+| Use case | Component |
+|---|---|
+| Navigate to another page or URL | `Link` |
+| Open an external site | `Link` with an external indicator |
+| Trigger a mutation, form submission, or state change | `Button` |
+| Open a modal, panel, or dialog | `Button` |
 
 ### Size
 
-Only 2 sizes are available for the button component : default and inline.
+Only 2 sizes are available: default and inline.
 
-Inline size is use for constraint spaces, like in tables or in key/values sections.
-On all others cases, use the default size.
+Inline is used for constrained spaces like tables or key/value sections.
+In all other cases, use default.
 
 <Canvas layout="fullscreen" of={ButtonStories.ButtonSizes} />
 
@@ -112,48 +126,36 @@ On all others cases, use the default size.
 
 #### Disabled state
 
-Clicks on the button should trigger no action, and the cursor should display a "not-allowed" indicator. \
-A tooltip explaining the reason for the button’s disabled state should appear on hover.
+The button triggers no action and shows a not-allowed cursor.
+A tooltip **must** appear on hover explaining why the button is disabled. Exception: when the reason is self-evident, such as a form with required fields not yet filled.
 
 <Canvas layout="fullscreen" of={ButtonStories.ButtonDisabled} />
 
-#### Loading State
+#### Loading state
 
-Display a spinner animation within the button. \
-Disable any interactions during the loading process.
+Displays a spinner within the button and disables all interactions.
+Use for async operations (API calls, form submissions) where the result is not immediate.
+The button label changes to the gerund form with ellipsis: "Save" becomes "Saving…", "Delete" becomes "Deleting…".
 
 <Canvas
   layout="fullscreen"
   of={ButtonStories.ButtonLoading}
-
 />
-
-## Group of Button
-
-- Primary buttons placed on the right of a group.
-- Dismissive actions placed on the left. It allows the user to return to the previous screen or step in the process.
-
-Align button groups with the container's right side by default; however, based on the use case and visual balance it can be aligned differently.
-
-<Canvas layout="fullscreen" of={ButtonStories.SimpleForm} sourceState="none" />
 
 ## Icon on buttons
 
 ### Usage
 
-Every button gets a label.\
-Icons are optional and mainly used to show how buttons are different, to aid memory and differentiation.\
-Universally understood icons work well (ie. print, close, play/pause, save).\
-Use standard icons when their use matches their meaning, or at least the user's intent.\
-Avoid creating new icons for every action, especially infrequently used ones.\
-Avoid using an icon alone in a button. If no label is provided, then use a tooltip.
+- Icons are optional. Use them to aid recognition and differentiation between actions.
+- An icon-only button (no label) is acceptable for universally understood actions such as edit, copy, delete, or refresh. For less obvious actions, prefer pairing the icon with a label.
+- Prefer universally understood icons (print, close, play/pause, save).
+- Use standard icons only when their meaning matches the action.
+- Avoid creating new icons for infrequently used actions.
+- If no label is provided, a tooltip is required.
 
 ### Placement
 
-Icons are to be positioned only on the left side of the text.\
-Icons should be vertically center-aligned with the text.\
-The icon should be (approximately) the same height as the text.\
-Seeing the icon first help users to scan the page more easily, except for few cases such as navigation (right arrow).
+Seeing the icon first helps users scan the page more easily, except for a few cases such as navigation (right arrow).
 
 <Canvas
   layout="fullscreen"
@@ -161,30 +163,18 @@ Seeing the icon first help users to scan the page more easily, except for few ca
   sourceState="none"
 />
 
-<Canvas
-  layout="fullscreen"
-  of={ButtonStories.IconButtonWithTooltip}
-  sourceState="none"
-/>
+### Ghost buttons (icon-only)
 
-### Accessibility
+Ghost buttons are low-emphasis, icon-only buttons without a `variant`. They are effective in space-limited areas like tables or key-value lists.
 
-- Icons in Button Design: \
-  Easily recognizable icons help with the quick recognition of a button’s function. If the icon is not clear enough, it loses its purpose, so in such cases, avoid using icons.
-- Aria Labels: \
-  Providing descriptive labels for screen readers is really helpful, especially for buttons that use icons only.
+**✅ Do**
+- Always include a tooltip with a verb phrase: "Refresh metrics", "Export data"
+- Limit ghost buttons to common, universally understood actions
 
-## Ghost Buttons
-
-Ghost buttons are subtle and contribute to a minimalist interface design.  
-They are low-emphasis, making them ideal for non-primary actions in UIs.  
-They're also effective in space-limited areas like tables or key-value lists.
-
-- Ensure tooltips are included for clarity
-- Don't confuse them with non-interactive elements like descriptive icons or status indicators
-- Use them for secondary or less crucial actions.
-- Don't opt for them over Outline buttons, which are more visibly recognizable as buttons.
-- Create too many different instances of ghost buttons; limit them to common actions (e.g. link to other UIs).
+**❌ Don't**
+- Use a standalone noun as tooltip text ("Refresh", "Export"). It must describe the action.
+- Use them instead of Outline buttons when the action needs to be clearly recognized as a button
+- Create too many different ghost button instances in the same context
 
 <Canvas
   layout="fullscreen"
@@ -192,7 +182,24 @@ They're also effective in space-limited areas like tables or key-value lists.
   sourceState="none"
 />
 
-### Playground
+### Accessibility
+
+- Use icons that are easily recognizable. If the icon is ambiguous, omit it. An unclear icon is worse than no icon.
+- For icon-only buttons, the `tooltip.overlay` text is automatically used as `aria-label`. It must describe the action with a verb.
+
+<Canvas
+  layout="fullscreen"
+  of={ButtonStories.IconButtonWithTooltip}
+  sourceState="none"
+/>
+
+## Empty states
+
+When a view has no content yet, use a single `primary` button as the main call to action. It should be centered, standalone, and paired with an `Icon` component to reinforce the action.
+
+Do not place secondary or outline buttons in empty states. The goal is a single, clear entry point.
+
+## Playground
 
 <Canvas of={ButtonStories.Playground} layout="fullscreen" />
 
