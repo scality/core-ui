@@ -22,7 +22,7 @@ const Radio = forwardRef<HTMLInputElement, Props>(
   ({ disabled, checked, label, name, value, onChange, ...rest }, ref) => {
     return (
       <StyledRadio checked={checked} disabled={disabled}>
-        <Stack gap={spacing.r12} style={{ alignItems: 'baseline' }}>
+        <Stack gap="r12" style={{ alignItems: 'baseline' }}>
           <RadioInput
             type="radio"
             name={name}
