@@ -692,7 +692,7 @@ const MaestroDeployments = () => {
     }
 
     if (groupBy === 'status') {
-      const order: DeploymentStatus[] = ['connected', 'degraded', 'disconnected'];
+      const order: DeploymentStatus[] = ['degraded', 'disconnected', 'connected'];
       const map: Record<string, Deployment[]> = {};
       for (const d of sortedFiltered) {
         if (!map[d.status]) map[d.status] = [];
@@ -1104,6 +1104,7 @@ const meta: Meta = {
   parameters: {
     layout: 'fullscreen',
     fullPage: true,
+    docs: { toc: { disable: true } },
   },
 };
 
@@ -1118,4 +1119,620 @@ export const Default: Story = {
       </ScrollbarWrapper>
     </CoreUiThemeProvider>
   ),
+};
+
+// ── Focused stories for design proposal (hidden from sidebar) ───────────────────
+
+const Padded = ({ children }: { children: React.ReactNode }) => (
+  <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+    <div style={{ padding: '1.5rem', background: coreUIAvailableThemes.darkRebrand.backgroundLevel2, display: 'inline-flex', flexDirection: 'column', gap: '0.75rem' }}>
+      {children}
+    </div>
+  </CoreUiThemeProvider>
+);
+
+export const FocusLabelSystem: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Label system',
+  render: () => {
+    const labels = ['production', 'eu-west', 'critical-client'];
+    return (
+      <Padded>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+          {labels.map((label) => {
+            const c = getLabelColor(label);
+            return (
+              <LabelPill key={label} $bg={c.bg} $color={c.text}>
+                {label}
+                <RemoveBtn aria-label={`Remove ${label}`}>×</RemoveBtn>
+              </LabelPill>
+            );
+          })}
+          <TagAddBtn style={{ opacity: 1 }}>
+            <i className="fas fa-tag" />
+          </TagAddBtn>
+        </div>
+        <CardLabelPicker style={{ borderRadius: 4 }}>
+          <Text variant="Smaller" color="textSecondary">Suggestions:</Text>
+          {['staging', 'us-east'].map((l) => {
+            const c = getLabelColor(l);
+            return (
+              <LabelPickerBtn key={l}>
+                <LabelPill $bg={c.bg} $color={c.text}>{l}</LabelPill>
+              </LabelPickerBtn>
+            );
+          })}
+          <LabelInput placeholder="New label..." defaultValue="" />
+        </CardLabelPicker>
+      </Padded>
+    );
+  },
+};
+
+export const FocusToolbar: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Sort & Group by',
+  render: () => (
+    <Padded>
+      <ToolbarRow>
+        <ControlRow>
+          <ControlLabel>Sort by</ControlLabel>
+          <SegmentGroup>
+            {(['Name', 'Managed data', 'Version'] as const).map((label, i) => (
+              <SegmentBtn key={label} $active={i === 0}>
+                {label}
+                {i === 0 && <span style={{ fontSize: 10, lineHeight: 1 }}>↓</span>}
+              </SegmentBtn>
+            ))}
+          </SegmentGroup>
+        </ControlRow>
+        <ControlRow>
+          <ControlLabel>Group by</ControlLabel>
+          <SegmentGroup>
+            {(['Label', 'Health', 'Version'] as const).map((label, i) => (
+              <SegmentBtn key={label} $active={i === 1}>{label}</SegmentBtn>
+            ))}
+          </SegmentGroup>
+        </ControlRow>
+      </ToolbarRow>
+    </Padded>
+  ),
+};
+
+export const FocusVersionIndicator: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Version indicator',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const rows = [
+      { version: '4.2.0', latest: true },
+      { version: '4.1.1', latest: false },
+      { version: '3.3.0', latest: false },
+    ];
+    return (
+      <Padded>
+        {rows.map(({ version, latest }) => (
+          <div key={version} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            <span style={{ width: 16, display: 'inline-flex', justifyContent: 'center' }}>
+              {latest && <i className="fas fa-check" style={{ fontSize: 10, color: theme.statusHealthy }} />}
+            </span>
+            <Text color="textSecondary">v {version}</Text>
+          </div>
+        ))}
+      </Padded>
+    );
+  },
+};
+
+export const FocusMetricAlignment: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Metric alignment',
+  render: () => (
+    <Padded>
+      <MetricGrid>
+        <MetricKey>Managed Data</MetricKey>
+        <MetricNum>234.56</MetricNum>
+        <MetricUnit>TiB</MetricUnit>
+        <MetricSecondary>(257.93 TB)</MetricSecondary>
+
+        <MetricKey>Managed Data</MetricKey>
+        <MetricNum>8.40</MetricNum>
+        <MetricUnit>TiB</MetricUnit>
+        <MetricSecondary>(9.24 TB)</MetricSecondary>
+
+        <MetricKey>Managed Data</MetricKey>
+        <MetricNum>0.45</MetricNum>
+        <MetricUnit>TiB</MetricUnit>
+        <MetricSecondary>(0.49 TB)</MetricSecondary>
+      </MetricGrid>
+    </Padded>
+  ),
+};
+
+export const FocusScrollFade: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Scroll fade',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const items = INITIAL_DEPLOYMENTS.slice(0, 6);
+    return (
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+        <div style={{ width: 400, background: theme.backgroundLevel2, borderRadius: 4, overflow: 'hidden' }}>
+          <ScrollableCardsWrapper style={{ height: 180 }}>
+            <ScrollableCards>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.r8, padding: spacing.r8 }}>
+                {items.map((d) => (
+                  <div key={d.id} style={{ background: theme.backgroundLevel3, borderRadius: 3, padding: `${spacing.r8} ${spacing.r12}`, fontSize: 13, fontFamily: 'Lato', color: theme.textPrimary }}>
+                    {d.name}
+                  </div>
+                ))}
+              </div>
+            </ScrollableCards>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 32, background: `linear-gradient(to bottom, transparent, ${theme.backgroundLevel2}bb)`, pointerEvents: 'none' }} />
+          </ScrollableCardsWrapper>
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusFullToolbar: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Full toolbar',
+  render: () => (
+    <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+      <div style={{ padding: '1rem', background: coreUIAvailableThemes.darkRebrand.backgroundLevel2 }}>
+        <ToolbarRow>
+          <div style={{ display: 'flex', alignItems: 'center', gap: spacing.r8, flexShrink: 0 }}>
+            <SearchInput value="" onChange={() => {}} onReset={() => {}} placeholder="Search..." size="2/3" />
+            <span style={{ fontSize: '0.8rem', color: coreUIAvailableThemes.darkRebrand.textSecondary, whiteSpace: 'nowrap', minWidth: '9rem', fontVariantNumeric: 'tabular-nums' }}>
+              11 deployments
+            </span>
+          </div>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: spacing.r16 }}>
+            <ControlRow>
+              <ControlLabel>Sort by</ControlLabel>
+              <SegmentGroup>
+                {(['Name', 'Managed data', 'Version'] as const).map((label, i) => (
+                  <SegmentBtn key={label} $active={i === 0}>{label}</SegmentBtn>
+                ))}
+              </SegmentGroup>
+            </ControlRow>
+            <ControlRow>
+              <ControlLabel>Group by</ControlLabel>
+              <SegmentGroup>
+                {(['Label', 'Health', 'Version'] as const).map((label) => (
+                  <SegmentBtn key={label} $active={false}>{label}</SegmentBtn>
+                ))}
+              </SegmentGroup>
+            </ControlRow>
+          </div>
+          <div style={{ flexShrink: 0 }}>
+            <Button variant="primary" size="default" label="Add deployment" icon={<i className="fas fa-plus" />} onClick={() => {}} />
+          </div>
+        </ToolbarRow>
+      </div>
+    </CoreUiThemeProvider>
+  ),
+};
+
+export const FocusActionButtons: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Action buttons',
+  render: () => (
+    <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+      <div style={{ padding: '1rem', background: coreUIAvailableThemes.darkRebrand.backgroundLevel2, display: 'inline-flex', gap: spacing.r4 }}>
+        <Tooltip overlay="Manage tokens" placement="top">
+          <span>
+            <Button variant="secondary" size="inline" icon={<i className="fas fa-key" />} aria-label="Manage tokens" onClick={() => {}} />
+          </span>
+        </Tooltip>
+        <Tooltip overlay="Remove deployment" placement="top">
+          <span>
+            <Button variant="danger" size="inline" icon={<i className="fas fa-trash" />} aria-label="Remove deployment" onClick={() => {}} />
+          </span>
+        </Tooltip>
+      </div>
+    </CoreUiThemeProvider>
+  ),
+};
+
+export const FocusSearchEmpty: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Search empty state',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    return (
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+        <div style={{ width: 480, background: theme.backgroundLevel2, display: 'flex', flexDirection: 'column', gap: spacing.r8 }}>
+          <div style={{ padding: `0 ${spacing.r8}`, display: 'flex', alignItems: 'center', gap: spacing.r8 }}>
+            <SearchInput value="xyz-not-found" onChange={() => {}} onReset={() => {}} placeholder="Search..." size="2/3" />
+            <span style={{ fontSize: '0.8rem', color: theme.textSecondary, whiteSpace: 'nowrap', minWidth: '9rem', fontVariantNumeric: 'tabular-nums' }}>
+              0 / 11 deployments
+            </span>
+          </div>
+          <div style={{ padding: `${spacing.r40} 0`, display: 'flex', justifyContent: 'center' }}>
+            <Text color="textSecondary">No deployments match your search.</Text>
+          </div>
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusFleetHealth: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Fleet health KPI',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const cases = [0, 2];
+    return (
+      <Padded>
+        {cases.map((issueCount) => (
+          <div key={issueCount} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <span style={{ fontSize: 13, fontFamily: 'Lato', color: theme.textSecondary }}>Fleet health</span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: spacing.r8, fontSize: 16, fontFamily: 'Lato', color: theme.textPrimary }}>
+              {issueCount === 0 ? (
+                <>
+                  <i className="fas fa-check-circle" style={{ fontSize: 14, color: theme.statusHealthy }} />
+                  <span>All deployments healthy</span>
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-exclamation-circle" style={{ fontSize: 14, color: theme.statusWarning }} />
+                  <span>{issueCount} deployments unhealthy</span>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+      </Padded>
+    );
+  },
+};
+
+export const FocusLatestVersion: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Latest version KPI',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const cases = [
+      { latestVersion: '4.2.0', onLatestCount: 11, total: 11 },
+      { latestVersion: '4.2.0', onLatestCount: 3, total: 11 },
+    ];
+    return (
+      <Padded>
+        {cases.map(({ latestVersion, onLatestCount, total }) => (
+          <div key={onLatestCount} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <span style={{ fontSize: 13, fontFamily: 'Lato', color: theme.textSecondary }}>ARTESCA latest version</span>
+            <KpiValueRow>
+              {latestVersion}
+              <span style={{ color: theme.textSecondary }}>
+                {onLatestCount === total ? '· all up to date' : `· ${onLatestCount} of ${total} up to date`}
+              </span>
+            </KpiValueRow>
+          </div>
+        ))}
+      </Padded>
+    );
+  },
+};
+
+export const FocusColorWheel: Story = {
+  tags: ['!dev'],
+  name: 'Focus — HSL color wheel',
+  render: () => {
+    const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    const size = 220;
+    const cx = size / 2;
+    const cy = size / 2;
+    const r = size / 2 - 8;
+
+    React.useEffect(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Draw the hue ring
+      for (let angle = 0; angle < 360; angle++) {
+        const start = (angle - 1) * Math.PI / 180;
+        const end = (angle + 1) * Math.PI / 180;
+        const gradient = ctx.createRadialGradient(cx, cy, r * 0.55, cx, cy, r);
+        gradient.addColorStop(0, `hsla(${angle}, 0%, 60%, 0)`);
+        gradient.addColorStop(1, `hsl(${angle}, 45%, 62%)`);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, start, end);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+
+      // Mark the 12 palette positions
+      const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+      const dotR = r * 0.78;
+      hues.forEach((hue) => {
+        const rad = (hue - 90) * Math.PI / 180;
+        const x = cx + dotR * Math.cos(rad);
+        const y = cy + dotR * Math.sin(rad);
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${hue}, 50%, 62%)`;
+        ctx.fill();
+      });
+    }, []);
+
+    return (
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+        <div style={{ padding: '1.5rem', background: coreUIAvailableThemes.darkRebrand.backgroundLevel2, display: 'inline-flex' }}>
+          <canvas ref={canvasRef} width={size} height={size} />
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusLabelPalette: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Label color palette',
+  render: () => {
+    const examples = [
+      'production', 'staging', 'eu-west', 'us-east',
+      'critical-client', 'dev', 'fra-dc01', 'sin-object',
+      'backup', 'dr-site', 'internal', 'partner',
+    ];
+    return (
+      <Padded>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing.r8, maxWidth: 480 }}>
+          {LABEL_COLOR_PALETTE.map((c, i) => (
+            <LabelPill key={i} $bg={c.bg} $color={c.text}>
+              {examples[i]}
+            </LabelPill>
+          ))}
+        </div>
+      </Padded>
+    );
+  },
+};
+
+export const FocusSearch: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Search',
+  render: () => {
+    const [value, setValue] = React.useState('prod');
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const all = INITIAL_DEPLOYMENTS;
+    const filtered = all.filter((d) =>
+      d.name.toLowerCase().includes(value.toLowerCase()) ||
+      d.version.toLowerCase().includes(value.toLowerCase()) ||
+      STATUS_META[d.status].label.toLowerCase().includes(value.toLowerCase()) ||
+      d.labels.some((l) => l.toLowerCase().includes(value.toLowerCase())),
+    );
+    return (
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+        <div style={{ padding: '1rem', background: theme.backgroundLevel2, display: 'flex', flexDirection: 'column', gap: spacing.r8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: spacing.r8 }}>
+            <SearchInput value={value} onChange={(e) => setValue(e.target.value)} onReset={() => setValue('')} placeholder="Search..." size="2/3" />
+            <span style={{ fontSize: '0.8rem', color: theme.textSecondary, whiteSpace: 'nowrap', minWidth: '9rem', fontVariantNumeric: 'tabular-nums' }}>
+              {value ? `${filtered.length} / ${all.length} deployments` : `${all.length} deployments`}
+            </span>
+          </div>
+          {filtered.map((d) => (
+            <div key={d.id} style={{ background: theme.backgroundLevel3, borderRadius: 3, padding: `${spacing.r8} ${spacing.r12}`, fontSize: 13, fontFamily: 'Lato', color: theme.textPrimary }}>
+              {d.name}
+            </div>
+          ))}
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusGroupBy: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Group by label',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const groups = [
+      { label: 'production', items: ['artesca-acme-prod', 'umbrella-corp-prod'] },
+      { label: 'staging', items: ['artesca-initech-stg', 'ams-dc01'] },
+    ];
+    return (
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+        <div style={{ width: 480, padding: `${spacing.r8} ${spacing.r16}`, background: theme.backgroundLevel2, display: 'flex', flexDirection: 'column' }}>
+          {groups.map((group, idx) => {
+            const c = getLabelColor(group.label);
+            return (
+              <React.Fragment key={group.label}>
+                <GroupHeaderRow $first={idx === 0}>
+                  <GroupHeaderLine />
+                  <LabelPill $bg={c.bg} $color={c.text}>{group.label} ({group.items.length})</LabelPill>
+                  <GroupHeaderLine />
+                </GroupHeaderRow>
+                {group.items.map((name) => (
+                  <div key={name} style={{ background: theme.backgroundLevel3, borderRadius: 3, padding: `${spacing.r8} ${spacing.r12}`, fontSize: 13, fontFamily: 'Lato', color: theme.textPrimary, marginBottom: spacing.r8 }}>
+                    {name}
+                  </div>
+                ))}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusBackgroundLevels: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Background levels',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const levels = [
+      { bg: theme.backgroundLevel1, label: 'backgroundLevel1', usage: 'Page background — outermost surface' },
+      { bg: theme.backgroundLevel2, label: 'backgroundLevel2', usage: 'Panels, sidebars, card list area' },
+      { bg: theme.backgroundLevel3, label: 'backgroundLevel3', usage: 'Cards, table rows, input fields' },
+      { bg: theme.backgroundLevel4, label: 'backgroundLevel4', usage: 'Card headers, nested inset sections' },
+    ];
+    return (
+      <CoreUiThemeProvider theme={theme}>
+        <div style={{ padding: '1.5rem', background: theme.backgroundLevel2, display: 'flex', gap: '2.5rem', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {levels.map(({ bg, label, usage }) => (
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ width: 36, height: 36, borderRadius: 4, background: bg, border: '1px solid rgba(255,255,255,0.08)', flexShrink: 0 }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <code style={{ fontSize: 12, fontFamily: 'monospace', color: theme.textPrimary }}>{label}</code>
+                  <span style={{ fontSize: 11, fontFamily: 'Lato', color: theme.textSecondary }}>{usage}</span>
+                </div>
+                <code style={{ marginLeft: '0.5rem', fontSize: 10, fontFamily: 'monospace', color: theme.textSecondary, background: theme.backgroundLevel3, padding: '2px 5px', borderRadius: 3 }}>{bg}</code>
+              </div>
+            ))}
+          </div>
+          <div style={{ padding: '1rem', background: theme.backgroundLevel1, borderRadius: 4 }}>
+            <div style={{ fontSize: 10, fontFamily: 'monospace', color: theme.textSecondary, marginBottom: '0.5rem' }}>Level 1</div>
+            <div style={{ padding: '0.75rem', background: theme.backgroundLevel2, borderRadius: 3 }}>
+              <div style={{ fontSize: 10, fontFamily: 'monospace', color: theme.textSecondary, marginBottom: '0.5rem' }}>Level 2</div>
+              <div style={{ padding: '0.5rem', background: theme.backgroundLevel3, borderRadius: 3 }}>
+                <div style={{ fontSize: 10, fontFamily: 'monospace', color: theme.textSecondary, marginBottom: '0.5rem' }}>Level 3</div>
+                <div style={{ padding: '0.4rem 0.6rem', background: theme.backgroundLevel4, borderRadius: 2 }}>
+                  <div style={{ fontSize: 10, fontFamily: 'monospace', color: theme.textSecondary }}>Level 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
+};
+
+export const FocusRedline: Story = {
+  tags: ['!dev'],
+  name: 'Focus — Layout redline',
+  render: () => {
+    const theme = coreUIAvailableThemes.darkRebrand;
+    const ac = '#ff6b6b';
+
+    // Intentionally neutral wireframe colors — not theme colors
+    const wfPage       = '#13131c';
+    const wfPanel      = '#1d1d2c';
+    const wfCard       = '#252538';
+    const wfCardHeader = '#2d2d46';
+    const wfBlock      = '#3a3a5a';
+    const wfBlockDim   = '#2e2e48';
+    const wfStatus0    = '#b87800';
+    const wfStatus1    = '#1f6e4a';
+    const wfBlue       = '#1a4a80';
+
+    const mockW = 400;
+    const kpiH = 56;
+    const toolbarH = 44;
+    const cardHeaderH = 40;
+    const cardBodyH = 60;
+    const listPad = 8;
+    const cardGap = 8;
+    const mockH = kpiH + toolbarH + listPad + cardHeaderH + cardBodyH + cardGap + cardHeaderH + cardBodyH + listPad;
+
+    const zones: Array<{ y1: number; y2: number; label: string; dim: string; bg: string }> = [
+      { y1: 0,                                         y2: kpiH,                                                     label: 'KPI row',     dim: '56px', bg: 'backgroundLevel2' },
+      { y1: kpiH,                                      y2: kpiH + toolbarH,                                          label: 'Toolbar',     dim: '44px', bg: 'backgroundLevel2' },
+      { y1: kpiH + toolbarH + listPad,                 y2: kpiH + toolbarH + listPad + cardHeaderH,                 label: 'Card header', dim: '40px', bg: 'backgroundLevel4' },
+      { y1: kpiH + toolbarH + listPad + cardHeaderH,   y2: kpiH + toolbarH + listPad + cardHeaderH + cardBodyH,     label: 'Card body',   dim: '60px', bg: 'backgroundLevel3' },
+    ];
+
+    const bracketX = mockW + 28;
+    const svgW = mockW + 290;
+
+    return (
+      <CoreUiThemeProvider theme={theme}>
+        <div style={{ padding: '1.5rem', background: theme.backgroundLevel2, display: 'inline-flex' }}>
+          <div style={{ position: 'relative', width: svgW, height: mockH }}>
+
+            {/* Layout mock — neutral wireframe palette, not the live theme colors */}
+            <div style={{ position: 'absolute', left: 0, top: 0, width: mockW, height: mockH, background: wfPage, borderRadius: 4, overflow: 'hidden' }}>
+              {/* KPI row */}
+              <div style={{ height: kpiH, background: wfPanel, display: 'flex', alignItems: 'center', padding: '0 16px', gap: 16 }}>
+                {[0, 1, 2].map((i) => (
+                  <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <div style={{ height: 9, background: wfBlockDim, borderRadius: 2 }} />
+                    <div style={{ height: 18, background: wfBlock, borderRadius: 2 }} />
+                  </div>
+                ))}
+              </div>
+              {/* Toolbar */}
+              <div style={{ height: toolbarH, background: wfPanel, display: 'flex', alignItems: 'center', padding: '0 16px', gap: 8 }}>
+                <div style={{ flex: 1, height: 28, background: wfCard, borderRadius: 3, border: `1px solid ${wfBlock}` }} />
+                <div style={{ width: 70, height: 28, background: wfCard, borderRadius: 3 }} />
+                <div style={{ width: 70, height: 28, background: wfCard, borderRadius: 3 }} />
+                <div style={{ width: 88, height: 32, background: wfBlue, borderRadius: 3 }} />
+              </div>
+              {/* Card list */}
+              <div style={{ padding: `${listPad}px 12px`, display: 'flex', flexDirection: 'column', gap: cardGap }}>
+                {[0, 1].map((i) => (
+                  <div key={i} style={{ background: wfCard, borderRadius: 3 }}>
+                    {/* Card header — fixed 40px */}
+                    <div style={{ height: cardHeaderH, background: wfCardHeader, borderRadius: '3px 3px 0 0', display: 'flex', alignItems: 'center', padding: '0 12px', gap: 8 }}>
+                      <div style={{ width: 10, height: 10, borderRadius: '50%', background: i === 0 ? wfStatus0 : wfStatus1, flexShrink: 0 }} />
+                      <div style={{ flex: 1, height: 10, background: wfBlock, borderRadius: 2 }} />
+                      <div style={{ width: 10, height: 10, background: wfBlock, borderRadius: '50%' }} />
+                      <div style={{ width: 10, height: 10, background: wfBlock, borderRadius: '50%' }} />
+                    </div>
+                    {/* Card body — fixed 60px */}
+                    <div style={{ height: cardBodyH, display: 'flex', alignItems: 'center', padding: '0 12px', gap: 10 }}>
+                      {[0, 1, 2, 3].map((j) => (
+                        <div key={j} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 5 }}>
+                          <div style={{ height: 9, background: wfBlockDim, borderRadius: 2 }} />
+                          <div style={{ height: 18, background: wfBlock, borderRadius: 2 }} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SVG redline overlay */}
+            <svg style={{ position: 'absolute', left: 0, top: 0, width: svgW, height: mockH, pointerEvents: 'none', overflow: 'visible' }}>
+              {/* Outer frame border */}
+              <rect x={0} y={0} width={mockW} height={mockH} rx={4} ry={4} fill="none" stroke={ac} strokeWidth={1} opacity={0.5} />
+
+              {/* Zone highlight borders */}
+              {zones.map(({ y1, y2 }, i) => (
+                <rect key={`zr${i}`} x={0.5} y={y1} width={mockW - 1} height={y2 - y1} fill={`${ac}08`} stroke={ac} strokeWidth={0.75} opacity={0.6} />
+              ))}
+
+              {/* Dimension brackets + labels */}
+              {zones.map(({ y1, y2, label, dim, bg }, i) => {
+                const mid = (y1 + y2) / 2;
+                return (
+                  <g key={i}>
+                    {/* Dashed guide lines from mock edge to bracket */}
+                    <line x1={mockW} y1={y1} x2={bracketX - 2} y2={y1} stroke={ac} strokeWidth={0.75} strokeDasharray="3 3" opacity={0.5} />
+                    <line x1={mockW} y1={y2} x2={bracketX - 2} y2={y2} stroke={ac} strokeWidth={0.75} strokeDasharray="3 3" opacity={0.5} />
+                    {/* Tick marks */}
+                    <line x1={bracketX - 5} y1={y1} x2={bracketX + 5} y2={y1} stroke={ac} strokeWidth={1.5} />
+                    <line x1={bracketX - 5} y1={y2} x2={bracketX + 5} y2={y2} stroke={ac} strokeWidth={1.5} />
+                    {/* Vertical bracket */}
+                    <line x1={bracketX} y1={y1 + 1} x2={bracketX} y2={y2 - 1} stroke={ac} strokeWidth={1.5} />
+                    {/* Horizontal leader */}
+                    <line x1={bracketX} y1={mid} x2={bracketX + 16} y2={mid} stroke={ac} strokeWidth={0.75} opacity={0.6} />
+                    {/* Label lines */}
+                    <text x={bracketX + 22} y={mid - 4} fontSize={12} fontFamily="monospace" fontWeight="600" fill={ac}>{label} · {dim}</text>
+                    <text x={bracketX + 22} y={mid + 10} fontSize={10} fontFamily="monospace" fill={ac} opacity={0.55}>{bg}</text>
+                  </g>
+                );
+              })}
+            </svg>
+
+          </div>
+        </div>
+      </CoreUiThemeProvider>
+    );
+  },
 };

@@ -1,0 +1,152 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as ArtescaDeploymentStories from './artesca-deployments.stories';
+
+<Meta of={ArtescaDeploymentStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2, .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+  .sbdocs-content { max-width: 70%; }
+`}</style>
+
+# Maestro: Deployments overview
+
+This page is the central entry point for operators managing multiple ARTESCA deployments from a single Maestro console. It builds on the existing card layout by adding the controls needed to organise, filter, and navigate a large fleet efficiently.
+
+<a href="iframe.html?globals=&args=&id=templates-maestro-deployments--default&viewMode=story" target="_blank" rel="noopener noreferrer">Open full screen ↗</a>
+
+---
+
+## What this page does
+
+Operators managing ARTESCA at scale need to quickly assess the state of their fleet, find a specific deployment, and act on it. The current card layout works for a handful of deployments but degrades as the fleet grows: cards are hard to scan, there is no way to group or filter, and comparing values across deployments requires scrolling back and forth.
+
+This proposal introduces:
+
+- A **search bar** that filters across name, version, status, and labels
+- **Sort controls** for name, managed data, and version
+- **Group by** for status, version, or label, togglable without losing the sort
+- A **label system** for organisational tagging
+- A **card layout** with a consistent metric grid for cross-deployment comparison
+- A **version indicator** that signals whether a deployment is on the latest version
+
+---
+
+## New interactions and design decisions
+
+### Search
+
+<Canvas of={ArtescaDeploymentStories.FocusSearch} />
+
+The search input filters across four fields: deployment name, version number, connection status (Connected, Degraded, Disconnected), and labels. Numeric values (nodes, volumes, capacity) are not included in the search scope.
+
+<Canvas of={ArtescaDeploymentStories.FocusSearchEmpty} />
+
+When no deployments match, the list is replaced by a centered message. The count in the toolbar updates to `0 / N deployments` to confirm the filter is active.
+
+### Sort by and Group by
+
+<Canvas of={ArtescaDeploymentStories.FocusToolbar} />
+
+Three sort keys are available: **Name**, **Managed data**, and **Version**. The active sort key is highlighted in the segment control. Clicking the active key toggles the direction. Clicking a new key resets direction to the most useful default for that dimension.
+
+When sorting by Managed data, the sort is performed on the primary binary unit (TiB). The secondary decimal value (TB) is displayed for reference only and does not affect ordering.
+
+Group by is a toggle: clicking an active group key a second time removes the grouping entirely. Clicking a different key switches to that grouping. Within each group, the active sort applies.
+
+<Canvas of={ArtescaDeploymentStories.FocusGroupBy} />
+
+Three grouping dimensions are available:
+
+- **Status:** separates deployments by health. Groups appear in fixed priority order: Warning first, then Unknown, then Healthy. This puts the deployments that need attention at the top. Most useful during an incident.
+- **Version:** groups are sorted descending, newest version first.
+- **Label:** groups are sorted alphabetically. Deployments with multiple labels appear in each relevant group. Deployments with no labels appear in a dedicated `Unlabeled` group at the end.
+
+### Label system
+
+<Canvas of={ArtescaDeploymentStories.FocusLabelSystem} />
+
+Labels are organisational tags for categorisation. They are not status indicators. Each label is displayed as a pill with a muted color derived from the HSL (Hue, Saturation, Lightness) color model.
+
+The palette contains 12 colors with hues spaced 30° apart on the HSL wheel. Each color uses a low-saturation tinted background (15% opacity) and a readable text color on dark backgrounds. The color assigned to a label is deterministic: it is derived from a hash of the label name, so `production` always maps to the same color across every deployment and every session.
+
+<Canvas of={ArtescaDeploymentStories.FocusColorWheel} />
+
+<Canvas of={ArtescaDeploymentStories.FocusLabelPalette} />
+
+There are no preset labels. The picker suggests labels already in use across the fleet, so the suggestion list grows organically as operators add labels. A new fleet starts with an empty picker.
+
+Labels can be added and removed inline, directly from the card, without navigating away.
+
+The tag icon button has three progressive opacity states:
+
+1. **At rest (15%):** barely visible, does not compete with the deployment name or metrics.
+2. **Hover on the label zone (50%):** when the cursor enters the area where labels sit, the icon brightens to signal it is actionable. This reveal is scoped to the label zone only, not the entire card.
+3. **Direct hover on the icon (100%):** the icon reaches full opacity. A tooltip appears after a 20ms delay to confirm the action (`Add label`). The delay prevents the tooltip from flashing during fast mouse movements across the card.
+
+Pressing Enter or clicking a suggestion adds the label immediately.
+
+To remove a label, hover the pill directly — a subtle `×` button appears on the right side of the pill. Clicking it removes the label from that deployment without any confirmation step.
+
+### Single-line toolbar
+
+<Canvas of={ArtescaDeploymentStories.FocusFullToolbar} />
+
+The search input, deployment count, sort controls, group by controls, and the `Add deployment` button all live on a single line. This keeps the static section compact and gives more vertical space to the card list.
+
+The count updates when a search is active, showing `N / total deployments` so the operator always knows how many results are visible.
+
+### Action buttons with tooltips
+
+<Canvas of={ArtescaDeploymentStories.FocusActionButtons} />
+
+Actions available on each card use `size="inline"` icon buttons instead of labelled buttons. This keeps the card header compact at 40px so the actions don't take over the visual hierarchy — the deployment name and status are what matters first. Each button shows a tooltip on hover so the action stays clear without repeating labels on every single row.
+
+### Numerical alignment
+
+<Canvas of={ArtescaDeploymentStories.FocusMetricAlignment} />
+
+All metric values in the card grid use `font-variant-numeric: tabular-nums` and right-aligned text within a fixed-width column. This ensures that values of different magnitudes align on their decimal point when cards are scanned vertically.
+
+Each metric is displayed with both a primary binary value and a secondary decimal value in a dimmer color. This dual-unit display lets operators work in whichever unit their context requires without switching views.
+
+### Fleet health KPI
+
+<Canvas of={ArtescaDeploymentStories.FocusFleetHealth} />
+
+The fleet health indicator in the KPI row aggregates the health of all deployments into a single signal. When all deployments are healthy it shows a green check with `All deployments healthy`. As soon as one deployment is in a non-healthy state it switches to a warning icon with a count. The message adapts to the number of affected deployments.
+
+### Latest version KPI
+
+<Canvas of={ArtescaDeploymentStories.FocusLatestVersion} />
+
+The KPI row also surfaces the latest version available in the fleet and how many deployments are already on it. When all deployments are up to date, it shows `all up to date`. Otherwise it shows the count: `X of N up to date`. Like the fleet health indicator, the latest version is derived dynamically from the dataset.
+
+### Version indicator
+
+<Canvas of={ArtescaDeploymentStories.FocusVersionIndicator} />
+
+Each card shows the deployment version. When a deployment is on the latest version in the fleet, a small check icon appears next to the version number. Deployments on older versions show no icon. The absence of the check is the signal. The latest version is derived dynamically from the dataset.
+
+### Scroll fade
+
+<Canvas of={ArtescaDeploymentStories.FocusScrollFade} />
+
+A subtle fade gradient at the bottom of the card list signals that more content is below. The gradient disappears when the list is scrolled to the bottom. The scrollbar gutter width is measured at mount and compensated in the header padding via a CSS custom property, so the static section and the card list stay horizontally aligned on both Chrome (stable gutter) and Firefox (overlay scrollbar).
+
+---
+
+## Background levels and layout
+
+### Background depth
+
+<Canvas of={ArtescaDeploymentStories.FocusBackgroundLevels} />
+
+The page uses four background levels from the design system to create depth without borders or shadows. Each level is one step lighter than the one below it. The nesting diagram shows the mapping: the page sits on Level 1, panels and the card list area on Level 2, individual cards on Level 3, and card headers and inset sections on Level 4.
+
+### Layout structure
+
+<Canvas of={ArtescaDeploymentStories.FocusRedline} />
+
+The page is divided into three vertical sections: the KPI row (56px), the toolbar (44px), and the scrollable card list. Each card has a fixed-height header (40px) and a fixed-height body (60px). The static header section and the scrollable list share the same horizontal padding, kept in sync via the `--sb-gutter` CSS custom property that accounts for the scrollbar width on each browser.

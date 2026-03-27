@@ -4,6 +4,53 @@ import { CoreUiThemeProvider } from '../src/lib/next';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import { Wrapper } from '../stories/common';
 import { ToastProvider } from '../src/lib';
+import { DocsContainer } from '@storybook/blocks';
+import { addons } from '@storybook/preview-api';
+import { create } from '@storybook/theming';
+
+const darkStorybookTheme = create({
+  base: 'dark',
+  fontBase: '"Open Sans", sans-serif',
+  fontCode: 'monospace',
+  brandTitle: 'Core UI',
+  brandUrl: './',
+  brandImage: './logo-core-ui.png',
+  brandTarget: '_self',
+});
+
+const lightStorybookTheme = create({
+  base: 'light',
+  fontBase: '"Open Sans", sans-serif',
+  fontCode: 'monospace',
+  brandTitle: 'Core UI',
+  brandUrl: './',
+  brandImage: './logo-core-ui.png',
+  brandTarget: '_self',
+});
+
+const LIGHT_THEMES = new Set(['artescaLight']);
+
+let _currentThemeName = 'darkRebrand';
+
+const ThemedDocsContainer = ({ context, children }) => {
+  const [themeName, setThemeName] = React.useState(() => _currentThemeName);
+
+  React.useEffect(() => {
+    const channel = addons.getChannel();
+    const handler = ({ globals }) => {
+      if (globals.theme) setThemeName(globals.theme);
+    };
+    channel.on('GLOBALS_UPDATED', handler);
+    return () => channel.off('GLOBALS_UPDATED', handler);
+  }, []);
+
+  const sbTheme = LIGHT_THEMES.has(themeName) ? lightStorybookTheme : darkStorybookTheme;
+  return (
+    <DocsContainer context={context} theme={sbTheme}>
+      {children}
+    </DocsContainer>
+  );
+};
 
 export const globalTypes = {
   theme: {
@@ -38,6 +85,7 @@ export const globalTypes = {
   },
 };
 const withThemeProvider = (Story, context) => {
+  _currentThemeName = context.globals.theme ?? 'darkRebrand';
   const theme = coreUIAvailableThemes[context.globals.theme];
   const { background } = context.globals;
   const { viewMode } = context;
@@ -47,7 +95,7 @@ const withThemeProvider = (Story, context) => {
         {/* Wrapper to make the stories take the full screen but not in docs */}
         <div style={viewMode === 'story' ? { height: 100 + 'vh' } : null}>
           <ToastProvider>
-            <Wrapper style={{ backgroundColor: background }}>
+            <Wrapper style={{ backgroundColor: background, ...(context.parameters.fullPage ? { padding: 0 } : {}) }}>
               <Story {...context} />
             </Wrapper>
           </ToastProvider>
@@ -62,7 +110,7 @@ export const decorators = [withThemeProvider];
 export const parameters = {
   layout: 'fullscreen',
   docs: {
-    toc: { headingSelector: 'h2,h3', title: 'Table of Contents' },
+    container: ThemedDocsContainer,
   },
   controls: {
     //All props with color in name will automatically have a control 'color'
@@ -84,6 +132,9 @@ export const parameters = {
         'Style',
         'Guidelines',
         'Templates',
+        [
+          'Maestro Deployments', ['Guideline', 'Default', 'Stories', '*'],
+        ],
         'Components',
         [
           'Navigation',
