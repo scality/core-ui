@@ -452,6 +452,270 @@ function StyleProposalsTemplate() {
   );
 }
 
+// ─── Format Validation ───────────────────────────────────────────────────────
+
+const DEPLOYMENT_NAME_REGEX = /^[a-zA-Z0-9._-]+$/;
+
+function validateDeploymentName(name: string): string | null {
+  if (name.length < 6) return 'Name must be at least 6 characters.';
+  if (!DEPLOYMENT_NAME_REGEX.test(name))
+    return 'Name must be alphanumeric and can only contain dots, dashes, and underscores.';
+  return null;
+}
+
+const NameInputValidated = styled(NameInput)<{ $hasError: boolean }>`
+  border-color: ${(props) =>
+    props.$hasError ? props.theme.statusCritical : props.theme.infoPrimary};
+  &:focus {
+    border-color: ${(props) =>
+      props.$hasError ? props.theme.statusCritical : props.theme.selectedActive};
+    box-shadow: 0 0 0 2px
+      ${(props) =>
+        props.$hasError
+          ? props.theme.statusCritical
+          : props.theme.selectedActive}33;
+  }
+`;
+
+const ValidationInputWrapper = styled.div`
+  position: relative;
+`;
+
+const ValidationError = styled.p`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: ${spacing.r4} 0 0;
+  padding: ${spacing.r2} ${spacing.r8};
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.statusCritical};
+  background: ${(props) => props.theme.backgroundLevel1};
+  border-radius: ${spacing.r4};
+  white-space: nowrap;
+`;
+
+function EditableDeploymentNameValidated({
+  name,
+  isPropagating,
+  onChange,
+}: {
+  name: string;
+  isPropagating: boolean;
+  onChange: (newName: string) => void;
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [pendingName, setPendingName] = useState(name);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const validationError = validateDeploymentName(pendingName.trim());
+
+  useEffect(() => {
+    if (isEditing) {
+      setPendingName(name);
+      setShowError(false);
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [isEditing, name]);
+
+  const handleEditStart = () => {
+    if (isPropagating) return;
+    setIsEditing(true);
+    setIsHovered(false);
+  };
+
+  const trySubmit = () => {
+    const trimmed = pendingName.trim();
+    if (validateDeploymentName(trimmed)) return; // block if invalid
+    if (trimmed && trimmed !== name) {
+      setIsEditing(false);
+      setModalOpen(true);
+    } else {
+      setIsEditing(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') trySubmit();
+    else if (e.key === 'Escape') setIsEditing(false);
+  };
+
+  const handleBlur = () => {
+    if (validationError) {
+      setShowError(true);
+    } else {
+      trySubmit();
+    }
+  };
+
+  const handleConfirm = () => {
+    onChange(pendingName.trim());
+    setModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    setModalOpen(false);
+  };
+
+  return (
+    <>
+      <Stack gap="r4" style={{ alignItems: 'center' }}>
+        {isEditing ? (
+          <ValidationInputWrapper>
+            <NameInputValidated
+              ref={inputRef}
+              $hasError={showError && !!validationError}
+              value={pendingName}
+              onChange={(e) => setPendingName(e.target.value)}
+              onKeyDown={handleKeyDown}
+              onBlur={handleBlur}
+              aria-label="Deployment name"
+              aria-describedby={showError && validationError ? 'name-error' : undefined}
+              aria-invalid={showError && !!validationError}
+            />
+            {showError && validationError && (
+              <ValidationError id="name-error" role="alert">
+                {validationError}
+              </ValidationError>
+            )}
+          </ValidationInputWrapper>
+        ) : (
+          <Tooltip
+            overlay={
+              isPropagating
+                ? 'Cannot edit while propagating'
+                : 'Edit deployment name'
+            }
+            placement="bottom"
+          >
+            <NameText
+              $hovered={isHovered && !isPropagating && !modalOpen}
+              $disabled={isPropagating || modalOpen}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={handleEditStart}
+              role={isPropagating ? undefined : 'button'}
+              tabIndex={isPropagating ? undefined : 0}
+              onKeyDown={(e) =>
+                !isPropagating && e.key === 'Enter' && handleEditStart()
+              }
+            >
+              <Text>{modalOpen ? pendingName.trim() : name}</Text>
+              {isPropagating && (
+                <InlineLoaderWrapper>
+                  <Loader size="smaller" />
+                </InlineLoaderWrapper>
+              )}
+            </NameText>
+          </Tooltip>
+        )}
+      </Stack>
+
+      <Modal
+        isOpen={modalOpen}
+        close={handleModalCancel}
+        title="Rename deployment?"
+        footer={
+          <Stack gap="r8" direction="horizontal" style={{ justifyContent: 'flex-end' }}>
+            <Button
+              variant="outline"
+              label="Cancel"
+              onClick={handleModalCancel}
+            />
+            <Button
+              variant="primary"
+              label="Rename"
+              onClick={handleConfirm}
+            />
+          </Stack>
+        }
+      >
+        <Stack direction="vertical" gap="r24">
+          <InfoMessage
+            title="About deployment names"
+            content="The deployment name uniquely identifies this ARTESCA instance. It is auto-generated by default but can be changed. It appears in alerts, in MFA to identify which ARTESCA your credentials apply to, and in Maestro to reference this deployment across orchestration workflows."
+          />
+          <Text>Are you sure you want to rename this deployment?</Text>
+          <KeyValueGrid>
+            <KeyLabel>Current name</KeyLabel>
+            <KeyValue>{name}</KeyValue>
+            <KeyLabel>New name</KeyLabel>
+            <KeyValue>{pendingName.trim()}</KeyValue>
+          </KeyValueGrid>
+          <ModalDivider />
+          <SecondaryText style={{ fontStyle: 'italic' }}>
+            This change may take a few minutes to propagate across all services.
+          </SecondaryText>
+        </Stack>
+      </Modal>
+    </>
+  );
+}
+
+function FormatValidationTemplate() {
+  const [deploymentName, setDeploymentName] = useState('magic-sandbox');
+  const [isPropagating, setIsPropagating] = useState(false);
+  const [alerts] = useState([{ id: 1 }, { id: 2 }]);
+
+  const handleRename = (newName: string) => {
+    setDeploymentName(newName);
+    setIsPropagating(true);
+    setTimeout(() => setIsPropagating(false), PROPAGATION_DURATION_MS);
+  };
+
+  return (
+    <PageWrapper>
+      <ModalSizeOverride />
+      <Navbar
+        tabs={[
+          { title: 'Overview', selected: true },
+          { title: 'Identity' },
+          { title: 'Platform' },
+          { title: 'Storage Services' },
+          { title: 'Data Services' },
+          {
+            render: (
+              <Stack gap="r4" style={{ alignItems: 'center' }}>
+                <span>Alerts</span>
+                {alerts.length > 0 && (
+                  <TextBadge
+                    text={String(alerts.length)}
+                    variant="statusWarning"
+                  />
+                )}
+              </Stack>
+            ),
+          },
+        ]}
+        rightActions={[
+          {
+            type: 'dropdown',
+            icon: <i className="fas fa-user-cog" style={{ fontSize: 14 }} />,
+            text: 'Sid Heller',
+            items: [
+              { label: 'My account', onClick: () => {} },
+              { label: 'Sign out', onClick: () => {} },
+            ],
+          },
+        ]}
+        logo={
+          <LogoArea>
+            <Logo />
+            <EditableDeploymentNameValidated
+              name={deploymentName}
+              isPropagating={isPropagating}
+              onChange={handleRename}
+            />
+          </LogoArea>
+        }
+      />
+    </PageWrapper>
+  );
+}
+
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
@@ -459,6 +723,7 @@ const meta: Meta = {
   component: DeploymentNameEditTemplate,
   parameters: {
     layout: 'fullscreen',
+    fullPage: true,
   },
 };
 
@@ -470,4 +735,8 @@ export const Default: StoryObj = {
 
 export const StyleProposals: StoryObj = {
   render: () => <StyleProposalsTemplate />,
+};
+
+export const FormatValidation: StoryObj = {
+  render: () => <FormatValidationTemplate />,
 };
