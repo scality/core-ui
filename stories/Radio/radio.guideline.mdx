@@ -1,0 +1,58 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as RadioStories from './radio.stories';
+
+<Meta of={RadioStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+`}</style>
+
+# Radio
+
+Radio buttons let users pick exactly one option from a group.
+
+For guidance on when to use Checkbox vs Toggle vs Radio vs Select, see [Guidelines/Selection Controls](?path=/docs/guidelines-selection-controls--stories).
+
+## Usage
+
+Radio buttons are always used in a group. A single radio button on its own is meaningless. Each button in the group shares the same `name` prop, which is what enforces mutual exclusivity: selecting one option automatically deselects the others.
+
+<Canvas of={RadioStories.RadioGroup} layout="fullscreen" sourceState="none" />
+
+Use Radio when:
+- The user must choose exactly one option from a set of 2 to 4 choices
+- All options have equal semantic weight and distinct labels
+- The options need to be visible at once (unlike Select, which hides them behind a dropdown)
+
+Use Select instead when the list of options is long or dynamic. Use Checkbox when multiple selections are valid.
+
+## Layout
+
+Radio buttons can be arranged vertically or horizontally. There is no rule: use whichever fits the available space and the length of the labels. Vertical is generally easier to scan when labels are long.
+
+## Label conventions
+
+Radio labels describe the option itself, not an action or a state. Keep them short and parallel in structure across the group.
+
+- "Governance / Compliance / None" not "Enable governance / Enable compliance / Disable"
+- "Small / Medium / Large" not "Set to small / Set to medium / Set to large"
+
+## States
+
+<Canvas of={RadioStories.AllStates} layout="fullscreen" sourceState="none" />
+
+The four visual states from left to right: unchecked, checked, disabled, disabled checked.
+
+**Unchecked** is the default state. You can pre-select the preferred or most common option by default. Place it at the top of the group. Alternatively, leave all options unchecked to force the user to make an explicit choice. Both are valid depending on context.
+
+**Disabled checked** indicates the current selection is locked and cannot be changed. Use it when a value is enforced by configuration or permissions and the user should see what is set without being able to modify it.
+
+**Disabled unchecked** means the option exists but is not available in the current context. Radio does not have a `disabledReason` prop (not yet implemented), so if an explanation is needed, it must come from elsewhere, for example a help text below the group.
+
+When an entire group is disabled, all options should be disabled together.
+
+<Canvas of={RadioStories.DisabledGroup} layout="fullscreen" sourceState="none" />
+

@@ -1,55 +1,66 @@
 import {
   Meta,
-  Story,
   Canvas,
-  Primary,
   Controls,
-  Unstyled,
-  Source,
 } from '@storybook/blocks';
-import { Checkbox } from '../../src/lib/components/checkbox/Checkbox.component';
 
 import * as CheckboxStories from './checkbox.stories';
 
 <Meta of={CheckboxStories} name="Guideline" />
 
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+`}</style>
+
 # Checkbox
 
-Checkboxes are used to select one or more options in a list.
+Checkboxes let users enable an option or select one or more items from a list.
 
-## Usage
+For guidance on when to use Checkbox vs Toggle vs Radio vs Select, see [Guidelines/Selection Controls](?path=/docs/guidelines-selection-controls--stories).
 
-Unlike the radio element it is possible to select more than one option. \
-A tick/check indicates that the element is selected. \
+## Patterns
 
-<Canvas of={CheckboxStories.ChoiceCheckbox} layout="fullscreen" />
+### Enable / disable an option
 
-It is possible to use the checkbox to enable or disable an option:
+The primary use case. The label sits on the left and describes what enabling the option does. The checkbox sits on the right.
 
-<Canvas of={CheckboxStories.OptionCheckbox} layout="fullscreen" />
+<Canvas of={CheckboxStories.OptionCheckbox} layout="fullscreen" sourceState="none" />
 
-## State Variations
+Label rules:
+- Use a verb phrase: "Enable compression", "Allow public access", "Send notifications"
+- The label describes the active (checked) state
+- Avoid nouns alone: "Compression" or "Notifications" are ambiguous
 
-### Indeterminate State
+### Multi-select in tables
 
-Apart from checked and unchecked, checkboxes can be in a third state : indeterminate. \
-When a checkbox has sub-options checkboxes, this state indicates that some of the sub-options are checked. \
-Clicking on the main checkbox select or unselect all the sub-options boxes.
+The primary multi-select use case is row selection in a table. This is handled by `Table.MultiSelectableContent`, which manages the checkboxes internally — the Checkbox component is not used directly here.
 
-<Canvas of={CheckboxStories.IndeterminateUseCase} layout="fullscreen" />
+<Canvas of={CheckboxStories.IndeterminateUseCase} layout="fullscreen" sourceState="none" />
 
-### Disabled state
+The header checkbox controls the full selection: checking it selects all rows, unchecking it deselects all. When some rows are selected, the header checkbox enters the indeterminate state.
 
-Checkboxes can be disabled, making it impossible to change the box state. \
-A not-allowed cursor inform the user about the unavaibility of the action.
+## States
 
-<Canvas
-  of={CheckboxStories.DisabledCheckboxes}
+<Canvas of={CheckboxStories.AllStates} layout="fullscreen" sourceState="none" />
 
-layout="fullscreen"
-/>
+All five visual states from left to right: unchecked, checked, indeterminate, disabled, disabled checked.
 
-### Playground
+### Indeterminate
 
-<Canvas of={CheckboxStories.Playground} layout="fullscreen" />
-<Controls of={CheckboxStories.Playground} />
+The indeterminate state indicates a partial selection: some children are checked, but not all. It appears on the header checkbox in a table when some rows are selected. It is never used as an initial or standalone state.
+
+<Canvas of={CheckboxStories.IndeterminateCheckbox} layout="fullscreen" sourceState="none" />
+
+### Disabled
+
+A disabled checkbox prevents the user from changing its state. Use when the option is unavailable due to permissions, dependencies, or system state. A not-allowed cursor informs the user that the action is unavailable.
+
+<Canvas of={CheckboxStories.DisabledCheckboxes} layout="fullscreen" sourceState="none" />
+
+When the reason for the disabled state is not obvious from context, add a tooltip to explain it.
+
+<Canvas of={CheckboxStories.DisabledWithReason} layout="fullscreen" sourceState="none" />
+

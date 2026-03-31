@@ -89,6 +89,12 @@ export const parameters = {
           'Navigation',
           'Data Display',
           'Inputs',
+          [
+            ['Checkbox', ['Guideline', '*']],
+            ['Toggle', ['Guideline', '*']],
+            ['Radio', ['Guideline', '*']],
+            ['Select', ['Guideline', '*']],
+          ],
           'Feedback',
           'Progress & loading',
           'Styling',
