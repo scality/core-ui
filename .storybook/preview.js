@@ -140,6 +140,12 @@ export const parameters = {
           'Navigation',
           'Data Display',
           'Inputs',
+          [
+            ['Checkbox', ['Guideline', '*']],
+            ['Toggle', ['Guideline', '*']],
+            ['Radio', ['Guideline', '*']],
+            ['Select', ['Guideline', '*']],
+          ],
           ['Feedback', [['Modal', ['Guideline', '*']]]],
           'Progress & loading',
           'Styling',

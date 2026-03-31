@@ -1,0 +1,95 @@
+import { Meta, Canvas, Unstyled } from '@storybook/blocks';
+import * as CheckboxStories from '../Checkbox/checkbox.stories';
+import * as ToggleStories from '../Toggle/toggle.stories';
+import * as RadioStories from '../Radio/radio.stories';
+import * as SelectStories from '../Select/selectv2.stories';
+import * as OverviewStories from './selection-controls-overview.stories';
+
+<Meta title="Guidelines/Selection Controls" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+`}</style>
+
+# Selection Controls
+
+The key decision is when the change takes effect and how many options can be selected.
+
+<Canvas of={OverviewStories.Overview} sourceState="none" />
+
+## Checkbox vs Toggle vs Radio vs Select
+
+### Checkbox: on submit, one or more
+
+Use Checkbox when the change takes effect only after the user submits a form (Save, Apply, Create). It works for both enabling a single option and selecting multiple items from a list.
+
+<Canvas of={CheckboxStories.OptionCheckbox} sourceState="none" />
+
+<Canvas of={CheckboxStories.IndeterminateUseCase} sourceState="none" />
+
+See [Components/Inputs/Checkbox](?path=/docs/components-inputs-checkbox--guideline) for the full guideline.
+
+### Toggle: immediate effect
+
+Use Toggle when the change takes effect instantly, with no confirmation step.
+
+<Canvas of={ToggleStories.FeatureToggle} sourceState="none" />
+
+Don't place a Toggle inside a form with a Save button. The user expects it to act immediately. Wrapping it in a submit flow creates a contradiction. Use a Checkbox instead.
+
+See [Components/Inputs/Toggle](?path=/docs/components-inputs-toggle--guideline) for the full guideline.
+
+### Radio: mutually exclusive single choice
+
+Use Radio when the user must pick one option from a group of 2 to 4 choices. Radio enforces mutual exclusivity by design: selecting one option automatically deselects the others.
+
+<Canvas of={RadioStories.RadioGroup} sourceState="none" />
+
+See [Components/Inputs/Radio](?path=/docs/components-inputs-radio--guideline) for the full guideline.
+
+### Select: single choice from a long or variable list
+
+Use Select when the list of options is too long for Radio buttons, or when the options are dynamic. Select also supports search when the number of options exceeds 8.
+
+<Canvas of={SelectStories.ForGuideline} sourceState="none" />
+
+A scrollbar appears automatically when options exceed 4. A search bar appears automatically when options exceed 8.
+
+See [Components/Inputs/Select](?path=/docs/components-inputs-select--guideline) for the full guideline.
+
+## Summary
+
+| | Checkbox | Toggle | Radio | Select |
+| --- | :--- | :--- | :--- | :--- |
+| Effect | On form submit | Immediately | On form submit | On form submit |
+| Number of selections | One or more | Single on/off | One from a group | One from a list |
+| Best for | Form options, multi-select lists | Instant settings | 2–4 mutually exclusive choices | Long or dynamic option lists |
+| Used alone | No, always in a form or list | Yes | No, always in a group | Yes |
+
+## Label conventions
+
+**Checkbox** labels use a verb phrase that describes what enabling the option does. The meaning must be clear when the box is checked.
+
+- `Enable versioning` not `Versioning`
+- `Allow public access` not `Public access`
+- `Send email notifications` not `Email notifications`
+
+**Radio** labels name the option itself. A noun or short noun phrase is enough. No verb needed.
+
+- `Governance`, `Compliance`, `None`
+- `Small`, `Medium`, `Large`
+
+**Toggle** labels describe the feature or setting. Use a verb phrase when the label sits to the left of the toggle (`Enable object lock`). Use a short feature name when the toggle sits to the left of the label (`List versions`). Avoid state words in both cases.
+
+**Select** labels identify the field. Place the label above or to the left of the control.
+
+- `Region`, `Storage class`, `Retention mode`
+
+For the placeholder inside the control, a contextual phrase is acceptable. Avoid generic ones that apply to any select.
+
+- `Select a region` or empty, not `Select an option`
+
+<div style={{ height: '5rem' }} />

@@ -11,9 +11,16 @@ type SelectStory = StoryObj<typeof Select>;
 const meta: Meta<typeof Select> = {
   title: 'Components/Inputs/Select',
   component: Select,
-  // decorators: [
-  //   (story) => <Wrapper style={{ minHeight: '15rem' }}>{story()}</Wrapper>,
-  // ],
+  decorators: [
+    (Story, context) =>
+      context.parameters.noMinHeight ? (
+        <Story />
+      ) : (
+        <div style={{ minHeight: '250px' }}>
+          <Story />
+        </div>
+      ),
+  ],
 };
 
 export default meta;
@@ -25,6 +32,7 @@ const SelectWrapper = styled.div`
   min-height: 20rem;
   height: 100%;
   justify-content: space-between;
+  padding-bottom: 12rem;
 `;
 
 const generateOptions = (n = 10) =>
@@ -101,6 +109,7 @@ export const LotsOfOptions: SelectStory = {
     children: thousandsOfOptions,
   },
 };
+
 export const WithDisabledOptionsWithoutMessage: SelectStory = {
   name: 'Options disabled',
   args: {
@@ -151,6 +160,7 @@ export const InsideModal: SelectStory = {
 
 export const NotEnoughPlaceAtTheBottom: SelectStory = {
   name: 'Menu open at the top',
+  parameters: { noMinHeight: true },
   render: (args) => (
     <div
       style={{
@@ -165,6 +175,45 @@ export const NotEnoughPlaceAtTheBottom: SelectStory = {
   ),
   args: {
     children: optionsWithSearchBar,
+  },
+};
+
+export const WithIcons: SelectStory = {
+  render: (args) => {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+      <Select
+        {...args}
+        onChange={(v) => updateArgs({ value: v })}
+        value={value}
+      />
+    );
+  },
+  args: {
+    placeholder: 'Select storage type',
+    children: [
+      <Select.Option key="cloud" value="cloud" icon={<Icon name="Cloud-backend" />}>Cloud</Select.Option>,
+      <Select.Option key="datacenter" value="datacenter" icon={<Icon name="Datacenter" />}>On-premises</Select.Option>,
+      <Select.Option key="tape" value="tape" icon={<Icon name="Tape" />}>Tape</Select.Option>,
+      <Select.Option key="network" value="network" icon={<Icon name="Network" />}>Network</Select.Option>,
+    ],
+  },
+};
+
+export const ForGuideline: SelectStory = {
+  render: (args) => {
+    const [{ value }, updateArgs] = useArgs();
+    return (
+      <Select
+        {...args}
+        onChange={(value) => updateArgs({ value })}
+        value={value}
+      />
+    );
+  },
+  args: {
+    children: defaultOptions,
+    placeholder: 'Select an option',
   },
 };
 

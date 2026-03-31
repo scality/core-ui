@@ -1,20 +1,74 @@
-import {
-  Meta,
-  Story,
-  Canvas,
-  Primary,
-  Controls,
-  Unstyled,
-  Source,
-} from '@storybook/blocks';
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as ToggleStories from './toggle.stories';
 
-import * as Stories from './toggle.stories';
+<Meta name="Guideline" of={ToggleStories} />
 
-<Meta name="Guideline" of={Stories} />
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+  .sbdocs-wrapper { padding-bottom: 5rem; }
+`}</style>
 
-<Primary>
-  <Stories.Playground />
-</Primary>
-<Controls />
+# Toggle
 
-<Source />
+A Toggle is an on/off switch that takes effect immediately, without any form submission.
+
+For guidance on when to use Checkbox vs Toggle vs Radio vs Select, see [Guidelines/Selection Controls](?path=/docs/guidelines-selection-controls--stories).
+
+<div style={{ height: '3rem' }} />
+
+## Usage
+
+Use Toggle for settings that apply instantly when switched. The user should see or experience the change right away.
+
+<Canvas of={ToggleStories.FeatureToggle} sourceState="none" />
+
+Don't place a Toggle inside a form with a Save button. The user expects it to act immediately. Wrapping it in a submit flow creates a contradiction. Use a Checkbox instead.
+
+## Label convention
+
+The toggle position (on/off) already communicates the state. Avoid adding a state word to the label.
+
+In forms and settings panels, prefer placing the label on the left and the toggle on the right. Use a verb phrase that describes what enabling the setting does. The meaning is unambiguous whether the toggle is on or off.
+
+<Canvas of={ToggleStories.LabelLeftToggleRight} sourceState="none" />
+
+When space is limited, the default layout (toggle on the left, label on the right) is acceptable. Use a short feature name rather than a verb phrase.
+
+<Canvas of={ToggleStories.LabelRightToggleLeft} sourceState="none" />
+
+In both cases, avoid state words in the label.
+
+- "Dark theme" not "Dark theme enabled"
+- "Maintenance mode" not "Maintenance mode active"
+
+### Avoid static state labels
+
+A label like "Active" is ambiguous: when the toggle is OFF, the user cannot tell whether "Active" describes the current state or what will happen after clicking.
+
+<Canvas of={ToggleStories.AmbiguousLabel} sourceState="none" />
+
+The correct approach is to avoid state words entirely. A verb phrase or a feature name is unambiguous regardless of the toggle position.
+
+<Canvas of={ToggleStories.LabelLeftToggleRight} sourceState="none" />
+
+<Canvas of={ToggleStories.LabelRightToggleLeft} sourceState="none" />
+
+## Feedback
+
+Toggle is the only control with a direct, immediate, automatic effect. This makes feedback especially important.
+
+- If the effect is immediately visible in the UI (a theme changes, a panel appears), the toggle state change is sufficient feedback.
+- If the effect is not immediately visible or triggers an async operation, use a toast to confirm the action was taken.
+- If the operation fails, revert the toggle to its previous state and show an error toast.
+
+## States
+
+<Canvas of={ToggleStories.AllStates} sourceState="none" />
+
+A disabled toggle prevents interaction. Use when the setting is unavailable due to permissions or system constraints.
+
+<div style={{ height: '5rem' }} />
+

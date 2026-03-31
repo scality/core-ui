@@ -5,9 +5,11 @@ import {
   Checkbox,
   Props,
 } from '../../src/lib/components/checkbox/Checkbox.component';
+import { Tooltip } from '../../src/lib/components/tooltip/Tooltip.component';
 import { Column } from '../../src/lib/components/tablev2/Tablev2.component';
 import { Box, Input, Table } from '../../src/lib/next';
 import { Form, FormGroup, FormSection } from '../../src/lib';
+import { Stack } from '../../src/lib/spacing';
 
 type CheckboxStory = StoryObj<Props>;
 
@@ -60,7 +62,7 @@ export const OptionCheckbox: CheckboxStory = {
         <FormSection>
           <FormGroup
             id="check"
-            label="Enable this option ?"
+            label="Enable this option"
             content={<Checkbox />}
           ></FormGroup>
         </FormSection>
@@ -112,6 +114,23 @@ export const DisabledCheckboxes: CheckboxStory = {
   },
 };
 
+export const DisabledWithReason: CheckboxStory = {
+  render: () => (
+    <Stack gap="r16">
+      <Tooltip overlay="You don't have the required permissions to change this setting.">
+        <span>
+          <Checkbox disabled label="Enable versioning" />
+        </span>
+      </Tooltip>
+      <Tooltip overlay="Object Lock can only be enabled at bucket creation and cannot be changed afterwards.">
+        <span>
+          <Checkbox disabled checked label="Object Lock" />
+        </span>
+      </Tooltip>
+    </Stack>
+  ),
+};
+
 export const DisabledCheckedCheckbox: CheckboxStory = {
   args: {
     checked: true,
@@ -122,6 +141,26 @@ export const DisabledUncheckedCheckbox: CheckboxStory = {
   args: {
     checked: false,
     disabled: true,
+  },
+};
+
+export const AllStates: CheckboxStory = {
+  render: () => {
+    const indeterminateRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+      if (indeterminateRef.current) {
+        indeterminateRef.current.indeterminate = true;
+      }
+    }, []);
+    return (
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+        <Checkbox label="Unchecked" checked={false} onChange={() => {}} />
+        <Checkbox label="Checked" checked={true} onChange={() => {}} />
+        <Checkbox ref={indeterminateRef} label="Indeterminate" onChange={() => {}} />
+        <Checkbox label="Disabled" disabled checked={false} onChange={() => {}} />
+        <Checkbox label="Disabled checked" disabled checked={true} onChange={() => {}} />
+      </div>
+    );
   },
 };
 
@@ -161,8 +200,8 @@ export const IndeterminateUseCase = {
     ];
 
     return (
-      <Box width="500px" height="200px">
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+      <Box width="100%" height="250px">
+        <Table columns={columns} data={data} defaultSortingKey={'name'}>
           <Table.MultiSelectableContent
             onMultiSelectionChanged={action('Selection changed')}
           />
