@@ -21,7 +21,6 @@ export const ProgressCircle = styled.circle<{
     ((100 - percent) / 100) * circumference};
   stroke: ${(props) => props.color || props.theme.statusHealthy};
   stroke-width: ${(props) => props.strokeWidth};
-  stroke-linecap: round;
   fill: none;
 `;
 export const BackgroundCircle = styled.circle<{ backgroundColor?: string }>`
