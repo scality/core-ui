@@ -34,9 +34,11 @@ export const spacing = {
 };
 
 const HSeparator = styled.div`
-  min-height: ${spacing.r40};
-  min-width: ${spacing.r2};
-  background: ${(props) => props.theme.border};
+  background: ${(props) => props.theme.backgroundLevel1};
+  width: 1px;
+  align-self: stretch; 
+  flex-shrink: 0;
+  margin: ${spacing.r12} 0px;
 `;
 
 const VSeparator = styled.div`
