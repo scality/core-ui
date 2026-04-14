@@ -11,9 +11,9 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "16"
       - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
@@ -59,9 +59,9 @@ jobs:
       contents: read
     environment: npmjs
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       # Setup .npmrc file to publish to npmjs.org
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
           node-version: "25"
           registry-url: "https://registry.npmjs.org"
