@@ -5,6 +5,52 @@ type Props = {
 };
 
 const GlobalStyle = createGlobalStyle`
+  /**
+   * scroll-fade utility
+   *
+   * Add class="scroll-fade" to any overflow-y: auto/scroll element to get a
+   * bottom fade that auto-hides when the user reaches the end of the list.
+   *
+   * Technique: CSS Scroll-Driven Animations + mask-image (Chrome/Edge 115+).
+   * The animated custom property --scroll-fade-bottom drives the mask stop:
+   *   • 0 rem  → no mask   (initial-value, used when timeline is inactive = no overflow)
+   *   • 2.5rem → full fade (fill-mode: both, held from scroll-top until near-bottom)
+   *   • 0 rem  → no mask   (fill-mode: both, held at scroll-bottom)
+   *
+   * Graceful degradation: browsers without scroll-driven animations receive an
+   * inactive timeline → initial-value 0rem → no mask at all (no clipped content,
+   * just no fade effect).
+   */
+  @property --scroll-fade-bottom {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0rem;
+  }
+
+  @keyframes scroll-fade-out {
+    from { --scroll-fade-bottom: 2.5rem; }
+    to   { --scroll-fade-bottom: 0rem; }
+  }
+
+  .scroll-fade {
+    animation: scroll-fade-out linear both;
+    animation-timeline: scroll(self);
+    /* Fire in the last 2.5rem of scroll range so the fade dissolves smoothly. */
+    animation-range: calc(100% - 2.5rem) 100%;
+    /* mask-image makes the element's own content transparent at the bottom —
+       no background-colour knowledge needed; whatever is behind shows through. */
+    mask-image: linear-gradient(
+      to bottom,
+      black calc(100% - var(--scroll-fade-bottom)),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black calc(100% - var(--scroll-fade-bottom)),
+      transparent 100%
+    );
+  }
+
 ${(props) => {
   const brand = props.theme;
   return css`
