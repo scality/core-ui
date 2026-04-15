@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunk_scality_core_ui=self.webpackChunk_scality_core_ui||[]).push([[36604],{"./src/lib/components/form/Form.component.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{Ag:()=>LABEL_PREFIX,_1:()=>DESCRIPTION_PREFIX,fY:()=>useFieldContext,gE:()=>FormGroup,lV:()=>Form,y9:()=>FormSection});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),react__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/react/index.js"),styled_components__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js"),_spacing__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__("./src/lib/spacing.tsx"),_utils__WEBPACK_IMPORTED_MODULE_4__=__webpack_require__("./src/lib/utils.ts"),_box_Box__WEBPACK_IMPORTED_MODULE_5__=__webpack_require__("./src/lib/components/box/Box.ts"),_icon_Icon_component__WEBPACK_IMPORTED_MODULE_6__=__webpack_require__("./src/lib/components/icon/Icon.component.tsx"),_iconhelper_IconHelper__WEBPACK_IMPORTED_MODULE_7__=__webpack_require__("./src/lib/components/iconhelper/IconHelper.tsx"),_scrollbarwrapper_ScrollbarWrapper_component__WEBPACK_IMPORTED_MODULE_8__=__webpack_require__("./src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx"),_text_Text_component__WEBPACK_IMPORTED_MODULE_9__=__webpack_require__("./src/lib/components/text/Text.component.tsx");const DESCRIPTION_PREFIX="describe-",LABEL_PREFIX="label-",maxWidthTooltip={maxWidth:"20rem"},StyledForm=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.form`
+"use strict";(self.webpackChunk_scality_core_ui=self.webpackChunk_scality_core_ui||[]).push([[39497],{"./src/lib/components/form/Form.component.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{Ag:()=>LABEL_PREFIX,_1:()=>DESCRIPTION_PREFIX,fY:()=>useFieldContext,gE:()=>FormGroup,lV:()=>Form,y9:()=>FormSection});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),react__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/react/index.js"),styled_components__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js"),_spacing__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__("./src/lib/spacing.tsx"),_utils__WEBPACK_IMPORTED_MODULE_4__=__webpack_require__("./src/lib/utils.ts"),_box_Box__WEBPACK_IMPORTED_MODULE_5__=__webpack_require__("./src/lib/components/box/Box.ts"),_icon_Icon_component__WEBPACK_IMPORTED_MODULE_6__=__webpack_require__("./src/lib/components/icon/Icon.component.tsx"),_iconhelper_IconHelper__WEBPACK_IMPORTED_MODULE_7__=__webpack_require__("./src/lib/components/iconhelper/IconHelper.tsx"),_scrollbarwrapper_ScrollbarWrapper_component__WEBPACK_IMPORTED_MODULE_8__=__webpack_require__("./src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx"),_text_Text_component__WEBPACK_IMPORTED_MODULE_9__=__webpack_require__("./src/lib/components/text/Text.component.tsx");const DESCRIPTION_PREFIX="describe-",LABEL_PREFIX="label-",maxWidthTooltip={maxWidth:"20rem"},StyledForm=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.form`
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -35,7 +35,125 @@
     outline-offset: 2px;
     border-radius: 2px;
   }
-`,IconHelp=({tooltipMessage,overlayStyle,placement="right","aria-label":ariaLabel,title})=>(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_tooltip_Tooltip_component__WEBPACK_IMPORTED_MODULE_3__.m_,{overlay:tooltipMessage,placement,overlayStyle,children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(HelpButton,{type:"button","aria-label":ariaLabel||title||"More information",children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_Icon_component__WEBPACK_IMPORTED_MODULE_2__.In,{name:"Info",color:"buttonSecondary"})})});try{IconHelp.displayName="IconHelp",IconHelp.__docgenInfo={description:"",displayName:"IconHelp",props:{tooltipMessage:{defaultValue:null,description:"",name:"tooltipMessage",required:!0,type:{name:"ReactNode"}},placement:{defaultValue:{value:"right"},description:"",name:"placement",required:!1,type:{name:"enum",value:[{value:'"top"'},{value:'"bottom"'},{value:'"left"'},{value:'"top-start"'},{value:'"top-end"'},{value:'"right"'},{value:'"right-start"'},{value:'"right-end"'},{value:'"bottom-end"'},{value:'"bottom-start"'},{value:'"left-start"'},{value:'"left-end"'}]}},overlayStyle:{defaultValue:null,description:"",name:"overlayStyle",required:!1,type:{name:"CSSProperties"}},"aria-label":{defaultValue:null,description:'Accessible label for the help button.\nShould describe what information the tooltip provides.\nExample: "More info about Veeam application"',name:"aria-label",required:!1,type:{name:"string"}},title:{defaultValue:null,description:"@deprecated Use aria-label instead",name:"title",required:!1,type:{name:"string"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/iconhelper/IconHelper.tsx#IconHelp"]={docgenInfo:IconHelp.__docgenInfo,name:"IconHelp",path:"src/lib/components/iconhelper/IconHelper.tsx#IconHelp"})}catch(__react_docgen_typescript_loader_error){}},"./src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{K:()=>ScrollbarWrapper});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),styled_components__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js");const GlobalStyle=styled_components__WEBPACK_IMPORTED_MODULE_1__.DU`
+`,IconHelp=({tooltipMessage,overlayStyle,placement="right","aria-label":ariaLabel,title})=>(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_tooltip_Tooltip_component__WEBPACK_IMPORTED_MODULE_3__.m_,{overlay:tooltipMessage,placement,overlayStyle,children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(HelpButton,{type:"button","aria-label":ariaLabel||title||"More information",children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_Icon_component__WEBPACK_IMPORTED_MODULE_2__.In,{name:"Info",color:"buttonSecondary"})})});try{IconHelp.displayName="IconHelp",IconHelp.__docgenInfo={description:"",displayName:"IconHelp",props:{tooltipMessage:{defaultValue:null,description:"",name:"tooltipMessage",required:!0,type:{name:"ReactNode"}},placement:{defaultValue:{value:"right"},description:"",name:"placement",required:!1,type:{name:"enum",value:[{value:'"top"'},{value:'"bottom"'},{value:'"left"'},{value:'"top-start"'},{value:'"top-end"'},{value:'"right"'},{value:'"right-start"'},{value:'"right-end"'},{value:'"bottom-end"'},{value:'"bottom-start"'},{value:'"left-start"'},{value:'"left-end"'}]}},overlayStyle:{defaultValue:null,description:"",name:"overlayStyle",required:!1,type:{name:"CSSProperties"}},"aria-label":{defaultValue:null,description:'Accessible label for the help button.\nShould describe what information the tooltip provides.\nExample: "More info about Veeam application"',name:"aria-label",required:!1,type:{name:"string"}},title:{defaultValue:null,description:"@deprecated Use aria-label instead",name:"title",required:!1,type:{name:"string"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/iconhelper/IconHelper.tsx#IconHelp"]={docgenInfo:IconHelp.__docgenInfo,name:"IconHelp",path:"src/lib/components/iconhelper/IconHelper.tsx#IconHelp"})}catch(__react_docgen_typescript_loader_error){}},"./src/lib/components/inputv2/inputv2.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{c:()=>convertSizeToRem,p:()=>Input});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),react__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/react/index.js"),styled_components__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js"),_spacing__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__("./src/lib/spacing.tsx"),_form_Form_component__WEBPACK_IMPORTED_MODULE_4__=__webpack_require__("./src/lib/components/form/Form.component.tsx"),_icon_Icon_component__WEBPACK_IMPORTED_MODULE_5__=__webpack_require__("./src/lib/components/icon/Icon.component.tsx");const convertSizeToRem=size=>"2/3"===size?"14rem":"1/3"===size?"6rem":"1/2"===size?"10rem":"20.5rem",StyledInput=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.input`
+  max-width: ${props=>props.hasIcon?`calc(100% - 1rem - ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f8})`:"100%"};
+
+  font-family: 'Lato';
+  ${props=>props.disabled&&"\n  cursor: not-allowed;\n  "}
+  background: ${props=>props.theme.backgroundLevel1};
+  font-size: 1rem;
+  color: ${props=>props.theme.textPrimary};
+  border: 0;
+  flex: 1;
+  border-radius: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r4};
+  line-height: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r20};
+  &:placeholder-shown {
+    font-style: italic;
+  }
+  &::placeholder {
+    color: ${props=>props.theme.textSecondary};
+    opacity: 0.5;
+  }
+  &:focus {
+    border: 0;
+    outline: none;
+  }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: ${props=>props.theme.textPrimary};
+    -webkit-background-clip: text;
+    caret-color: ${props=>props.theme.textPrimary};
+  }
+`,InputContainer=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f8};
+  padding: 0 ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r8} 0 ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r8};
+  background: ${props=>props.theme.backgroundLevel1};
+  border-radius: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r4};
+  ${props=>props.disabled?styled_components__WEBPACK_IMPORTED_MODULE_2__.AH`
+          opacity: 0.5;
+          cursor: not-allowed;
+        `:""}
+`,InputBorder=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.div`
+  box-sizing: border-box;
+  width: ${props=>props.width};
+  height: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r32};
+  border: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r1} solid
+    ${props=>props.hasError?props.theme.statusCritical:props.theme.border};
+  border-radius: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r4};
+  &:hover {
+    ${props=>!props.disabled&&`border: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r1} solid ${props.theme.infoPrimary};`}
+  }
+  &:focus-within {
+    border: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r1} solid ${props=>props.theme.infoPrimary};
+  }
+`,SelfCenterredIcon=(0,styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay)(_icon_Icon_component__WEBPACK_IMPORTED_MODULE_5__.In)`
+  align-self: center;
+  color: ${props=>props.theme[props.color]};
+`,Input=(0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(({error,disabled,id,leftIcon,leftIconColor="textSecondary",rightIcon,rightIconColor="textSecondary",placeholder,size,noPlaceholderPrefix,...inputProps},ref)=>{const{isContextAvailable,disabled:disabledFromFieldContext,error:errorFromFieldContext}=(0,_form_Form_component__WEBPACK_IMPORTED_MODULE_4__.fY)();return placeholder=placeholder?noPlaceholderPrefix?placeholder:`Example: ${placeholder}`:void 0,(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(InputBorder,{disabled:!(!disabled&&!disabledFromFieldContext),hasError:!(!error&&!errorFromFieldContext),width:convertSizeToRem(size),children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(InputContainer,{isContextAvailable,disabled:!(!disabled&&!disabledFromFieldContext),hasError:!(!error&&!errorFromFieldContext),children:[leftIcon&&(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SelfCenterredIcon,{name:leftIcon,color:leftIconColor}),(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(StyledInput,{ref,disabled:disabled||disabledFromFieldContext,"aria-invalid":!(!error&&!errorFromFieldContext),"aria-describedby":`${_form_Form_component__WEBPACK_IMPORTED_MODULE_4__._1}${id}`,hasIcon:!(!leftIcon&&!rightIcon),id,...inputProps,placeholder}),rightIcon&&(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SelfCenterredIcon,{name:rightIcon,color:rightIconColor})]})})});try{convertSizeToRem.displayName="convertSizeToRem",convertSizeToRem.__docgenInfo={description:"",displayName:"convertSizeToRem",props:{}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/inputv2/inputv2.tsx#convertSizeToRem"]={docgenInfo:convertSizeToRem.__docgenInfo,name:"convertSizeToRem",path:"src/lib/components/inputv2/inputv2.tsx#convertSizeToRem"})}catch(__react_docgen_typescript_loader_error){}try{Input.displayName="Input",Input.__docgenInfo={description:"",displayName:"Input",props:{error:{defaultValue:null,description:"",name:"error",required:!1,type:{name:"string"}},id:{defaultValue:null,description:"",name:"id",required:!1,type:{name:"string"}},leftIcon:{defaultValue:null,description:"",name:"leftIcon",required:!1,type:{name:"string"}},leftIconColor:{defaultValue:{value:"textSecondary"},description:"",name:"leftIconColor",required:!1,type:{name:"enum",value:[{value:'"statusHealthy"'},{value:'"statusWarning"'},{value:'"statusCritical"'},{value:'"infoPrimary"'},{value:'"infoSecondary"'},{value:'"selectedActive"'},{value:'"statusHealthyRGB"'},{value:'"statusWarningRGB"'},{value:'"statusCriticalRGB"'},{value:'"highlight"'},{value:'"border"'},{value:'"buttonPrimary"'},{value:'"buttonSecondary"'},{value:'"buttonDelete"'},{value:'"backgroundLevel1"'},{value:'"backgroundLevel2"'},{value:'"backgroundLevel3"'},{value:'"backgroundLevel4"'},{value:'"navbarBackground"'},{value:'"textPrimary"'},{value:'"textSecondary"'},{value:'"textTertiary"'},{value:'"textReverse"'},{value:'"textLink"'}]}},rightIcon:{defaultValue:null,description:"",name:"rightIcon",required:!1,type:{name:"string"}},rightIconColor:{defaultValue:{value:"textSecondary"},description:"",name:"rightIconColor",required:!1,type:{name:"enum",value:[{value:'"statusHealthy"'},{value:'"statusWarning"'},{value:'"statusCritical"'},{value:'"infoPrimary"'},{value:'"infoSecondary"'},{value:'"selectedActive"'},{value:'"statusHealthyRGB"'},{value:'"statusWarningRGB"'},{value:'"statusCriticalRGB"'},{value:'"highlight"'},{value:'"border"'},{value:'"buttonPrimary"'},{value:'"buttonSecondary"'},{value:'"buttonDelete"'},{value:'"backgroundLevel1"'},{value:'"backgroundLevel2"'},{value:'"backgroundLevel3"'},{value:'"backgroundLevel4"'},{value:'"navbarBackground"'},{value:'"textPrimary"'},{value:'"textSecondary"'},{value:'"textTertiary"'},{value:'"textReverse"'},{value:'"textLink"'}]}},size:{defaultValue:null,description:"",name:"size",required:!1,type:{name:"enum",value:[{value:'"1"'},{value:'"2/3"'},{value:'"1/2"'},{value:'"1/3"'}]}},noPlaceholderPrefix:{defaultValue:null,description:"",name:"noPlaceholderPrefix",required:!1,type:{name:"boolean"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/inputv2/inputv2.tsx#Input"]={docgenInfo:Input.__docgenInfo,name:"Input",path:"src/lib/components/inputv2/inputv2.tsx#Input"})}catch(__react_docgen_typescript_loader_error){}},"./src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{K:()=>ScrollbarWrapper});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),styled_components__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js");const GlobalStyle=styled_components__WEBPACK_IMPORTED_MODULE_1__.DU`
+  /**
+   * scroll-fade utility
+   *
+   * Add class="scroll-fade" to any overflow-y: auto/scroll element to get a
+   * bottom fade that auto-hides when the user reaches the end of the list.
+   *
+   * How the property cascade works:
+   *   • 0rem  — initial-value; used when timeline is inactive (no overflow)
+   *   • 2.5rem — fill-mode:both holds this from scroll-top until near-bottom
+   *   • 0rem  — fill-mode:both holds this once fully scrolled to the bottom
+   *
+   * animation-duration: 1ms
+   *   Gecko quirk: Firefox requires a non-zero time duration to initialise
+   *   the animation sampling loop, even for scroll-driven animations where
+   *   time is irrelevant. Harmless on Blink/WebKit. Can be removed once
+   *   Firefox 151+ (targeting stable ~May 2026, Interop 2026 focus area)
+   *   removes this requirement.
+   *
+   * @supports guard: mask-image creates a CSS stacking context, which
+   * resets the containing block of position:fixed descendants. Limiting
+   * the rule to browsers that understand animation-timeline means
+   * Firefox/Safari stable never receive mask-image.
+   *
+   * Individual animation-* longhand properties are used (not the shorthand)
+   * so that component-level animation declarations on more-specific selectors
+   * are never overridden.
+   */
+  @property --scroll-fade-bottom {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0rem;
+  }
+
+  @keyframes scroll-fade-out {
+    from { --scroll-fade-bottom: 2.5rem; }
+    to   { --scroll-fade-bottom: 0rem; }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-fade {
+      animation-name: scroll-fade-out;
+      animation-duration: 1ms; /* Firefox activation quirk — see note above */
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(self);
+      animation-range: calc(100% - 2.5rem) 100%;
+      mask-image: linear-gradient(
+        to bottom,
+        black calc(100% - var(--scroll-fade-bottom)),
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black calc(100% - var(--scroll-fade-bottom)),
+        transparent 100%
+      );
+    }
+  }
+
 ${props=>{const brand=props.theme;return styled_components__WEBPACK_IMPORTED_MODULE_1__.AH`
     // Custom scrollbar
     * {
@@ -81,47 +199,5 @@ ${props=>{const brand=props.theme;return styled_components__WEBPACK_IMPORTED_MOD
       scrollbar-width: thin;
     }
   `}}
-`;function ScrollbarWrapper({children}){return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment,{children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle,{}),children]})}try{ScrollbarWrapper.displayName="ScrollbarWrapper",ScrollbarWrapper.__docgenInfo={description:"",displayName:"ScrollbarWrapper",props:{}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"]={docgenInfo:ScrollbarWrapper.__docgenInfo,name:"ScrollbarWrapper",path:"src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"})}catch(__react_docgen_typescript_loader_error){}},"./src/lib/components/toggle/Toggle.component.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.d(__webpack_exports__,{l:()=>Toggle});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),react__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/react/index.js"),styled_components__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__("./node_modules/styled-components/dist/styled-components.browser.esm.js"),_form_Form_component__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__("./src/lib/components/form/Form.component.tsx"),_spacing__WEBPACK_IMPORTED_MODULE_4__=__webpack_require__("./src/lib/spacing.tsx"),_text_Text_component__WEBPACK_IMPORTED_MODULE_5__=__webpack_require__("./src/lib/components/text/Text.component.tsx");const ToggleContainer=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.span`
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  opacity: ${props=>props.disabled?.5:1};
-`,Switch=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.label`
-  position: relative;
-  width: ${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r24};
-  align-self: center;
-  ${props=>styled_components__WEBPACK_IMPORTED_MODULE_2__.AH`
-      ${props.disabled?"\n          cursor: not-allowed;\n        ":"\n          cursor: pointer;\n        "}
-    `}
-`,Slider=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.div`
-  width: 100%;
-  height: 1rem;
-  background-color: ${props=>props.theme.backgroundLevel1};
-  border: ${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r1} solid
-    ${props=>props.theme[props.toggle?"selectedActive":"infoPrimary"]};
-  border-radius: ${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r8};
-  transition: 0.4s;
-
-  &:before {
-    border-radius: 100%;
-    position: absolute;
-    content: '';
-    height: ${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r10};
-    width: ${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r10};
-    left: 3px;
-    top: 3.5px;
-    background-color: ${props=>props.theme[props.toggle?"textSecondary":"textPrimary"]};
-    transition: 0.4s;
-  }
-`,ToggleInput=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.input`
-  &:checked + ${Slider} {
-    background-color: ${props=>props.theme.selectedActive};
-  }
-  &:checked + ${Slider}:before {
-    transform: translateX(${_spacing__WEBPACK_IMPORTED_MODULE_4__.YK.r10});
-  }
-  display: none;
-`,StyledSwitchLabel=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.label`
-  color: ${props=>props.theme[(props.toggle,"textPrimary")]};
-`;const Toggle=function ToggleSwitch({toggle,label,onChange,disabled,...rest}){const{isContextAvailable}=(0,_form_Form_component__WEBPACK_IMPORTED_MODULE_3__.fY)(),checkboxRef=(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(StyledSwitchLabel,{toggle,className:"text",id:`${rest.id}-label`,htmlFor:rest.id,children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ToggleContainer,{className:"sc-toggle",disabled,children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_spacing__WEBPACK_IMPORTED_MODULE_4__.BJ,{gap:"r8",style:{alignItems:"baseline"},children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Switch,{htmlFor:rest.id,role:"checkbox","aria-checked":toggle,tabIndex:disabled?-1:0,"aria-disabled":disabled,disabled,onKeyDown:e=>{"Space"!==e.code&&"Enter"!==e.code||(e.preventDefault(),e.stopPropagation(),checkboxRef.current&&checkboxRef.current.click())},"aria-labelledby":label?`${rest.id}-label`:isContextAvailable?`${_form_Form_component__WEBPACK_IMPORTED_MODULE_3__.Ag}${rest.id}`:void 0,children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ToggleInput,{type:"checkbox",checked:toggle,onChange,disabled,ref:checkboxRef,...rest}),(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Slider,{className:"sc-slider",toggle})]}),label&&(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_text_Text_component__WEBPACK_IMPORTED_MODULE_5__.EY,{children:label})]})})})};try{Toggle.displayName="Toggle",Toggle.__docgenInfo={description:"",displayName:"Toggle",props:{toggle:{defaultValue:null,description:"",name:"toggle",required:!0,type:{name:"boolean"}},label:{defaultValue:null,description:"",name:"label",required:!1,type:{name:"string"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/toggle/Toggle.component.tsx#Toggle"]={docgenInfo:Toggle.__docgenInfo,name:"Toggle",path:"src/lib/components/toggle/Toggle.component.tsx#Toggle"})}catch(__react_docgen_typescript_loader_error){}},"./stories/Toggle/toggle.stories.tsx"(__unused_webpack_module,__webpack_exports__,__webpack_require__){__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{DisabledToggle:()=>DisabledToggle,LabelledToggle:()=>LabelledToggle,Playground:()=>Playground,__namedExportsOrder:()=>__namedExportsOrder,default:()=>__WEBPACK_DEFAULT_EXPORT__});var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/jsx-runtime.js"),react__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/react/index.js"),_src_lib_components_toggle_Toggle_component__WEBPACK_IMPORTED_MODULE_2__=__webpack_require__("./src/lib/components/toggle/Toggle.component.tsx"),_storybook_preview_api__WEBPACK_IMPORTED_MODULE_3__=__webpack_require__("storybook/internal/preview-api");const __WEBPACK_DEFAULT_EXPORT__={parameters:{storySource:{source:"import { jsx as _jsx } from \"react/jsx-runtime\";\nimport React, { useState } from 'react';\nimport { Toggle } from '../../src/lib/components/toggle/Toggle.component';\nimport { useArgs } from '@storybook/preview-api';\nconst meta = {\n    title: 'Components/Inputs/Toggle',\n    component: Toggle,\n    args: {\n        name: 'toggle'\n    }\n};\nexport default meta;\nexport const Playground = {\n    render: (args)=>{\n        const [{ toggle }, updateArgs] = useArgs();\n        return /*#__PURE__*/ _jsx(Toggle, {\n            ...args,\n            onChange: ()=>updateArgs({\n                    toggle: !toggle\n                }),\n            toggle: toggle\n        });\n    },\n    args: {\n        label: 'Playground'\n    }\n};\nexport const LabelledToggle = {\n    render: (args)=>{\n        const [toggle, setToggle] = useState(false);\n        return /*#__PURE__*/ _jsx(Toggle, {\n            ...args,\n            toggle: toggle,\n            onChange: ()=>setToggle(!toggle)\n        });\n    },\n    args: {\n        label: 'Airplane mode'\n    }\n};\nexport const DisabledToggle = {\n    ...Playground,\n    args: {\n        label: 'Disabled Toggle',\n        disabled: true,\n        toggle: false\n    }\n};\n",locationsMap:{playground:{startLoc:{col:26,line:13},endLoc:{col:1,line:27},startBody:{col:26,line:13},endBody:{col:1,line:27}},"labelled-toggle":{startLoc:{col:30,line:28},endLoc:{col:1,line:40},startBody:{col:30,line:28},endBody:{col:1,line:40}},"disabled-toggle":{startLoc:{col:30,line:41},endLoc:{col:1,line:48},startBody:{col:30,line:41},endBody:{col:1,line:48}}}}},title:"Components/Inputs/Toggle",component:_src_lib_components_toggle_Toggle_component__WEBPACK_IMPORTED_MODULE_2__.l,args:{name:"toggle"}},Playground={render:args=>{const[{toggle},updateArgs]=(0,_storybook_preview_api__WEBPACK_IMPORTED_MODULE_3__.useArgs)();return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_src_lib_components_toggle_Toggle_component__WEBPACK_IMPORTED_MODULE_2__.l,{...args,onChange:()=>updateArgs({toggle:!toggle}),toggle})},args:{label:"Playground"}},LabelledToggle={render:args=>{const[toggle,setToggle]=(0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(!1);return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_src_lib_components_toggle_Toggle_component__WEBPACK_IMPORTED_MODULE_2__.l,{...args,toggle,onChange:()=>setToggle(!toggle)})},args:{label:"Airplane mode"}},DisabledToggle={...Playground,args:{label:"Disabled Toggle",disabled:!0,toggle:!1}},__namedExportsOrder=["Playground","LabelledToggle","DisabledToggle"];Playground.parameters={...Playground.parameters,docs:{...Playground.parameters?.docs,source:{originalSource:"{\n  render: args => {\n    const [{\n      toggle\n    }, updateArgs] = useArgs<{\n      toggle: boolean;\n    }>();\n    return <Toggle {...args} onChange={() => updateArgs({\n      toggle: !toggle\n    })} toggle={toggle} />;\n  },\n  args: {\n    label: 'Playground'\n  }\n}",...Playground.parameters?.docs?.source}}},LabelledToggle.parameters={...LabelledToggle.parameters,docs:{...LabelledToggle.parameters?.docs,source:{originalSource:"{\n  render: args => {\n    const [toggle, setToggle] = useState(false);\n    return <Toggle {...args} toggle={toggle} onChange={() => setToggle(!toggle)} />;\n  },\n  args: {\n    label: 'Airplane mode'\n  }\n}",...LabelledToggle.parameters?.docs?.source}}},DisabledToggle.parameters={...DisabledToggle.parameters,docs:{...DisabledToggle.parameters?.docs,source:{originalSource:"{\n  ...Playground,\n  args: {\n    label: 'Disabled Toggle',\n    disabled: true,\n    toggle: false\n  }\n}",...DisabledToggle.parameters?.docs?.source}}}}}]);
-//# sourceMappingURL=Toggle-toggle-stories.f8306349.iframe.bundle.js.map
+`;function ScrollbarWrapper({children}){return(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment,{children:[(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle,{}),children]})}try{ScrollbarWrapper.displayName="ScrollbarWrapper",ScrollbarWrapper.__docgenInfo={description:"",displayName:"ScrollbarWrapper",props:{}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"]={docgenInfo:ScrollbarWrapper.__docgenInfo,name:"ScrollbarWrapper",path:"src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx#ScrollbarWrapper"})}catch(__react_docgen_typescript_loader_error){}}}]);
+//# sourceMappingURL=39497.dbd522b2.iframe.bundle.js.map
