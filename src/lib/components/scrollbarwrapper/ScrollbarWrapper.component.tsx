@@ -6,20 +6,36 @@ type Props = {
 
 const GlobalStyle = createGlobalStyle`
   /**
-   * scroll-fade utility
+   * Global scroll-fade — automatic bottom fade on every scrollable element.
    *
-   * Add class="scroll-fade" to any overflow-y: auto/scroll element to get a
-   * bottom fade that auto-hides when the user reaches the end of the list.
+   * No class or wrapper needed. The scroll-driven animation only activates
+   * when animation-timeline: scroll(self) has a non-zero range, i.e. only
+   * on elements whose content overflows. Non-scrollable elements keep an
+   * inactive timeline → @property initial-value 0rem → mask is identity
+   * (black 100%) → no compositing, no content clipping.
    *
-   * Technique: CSS Scroll-Driven Animations + mask-image (Chrome/Edge 115+).
-   * The animated custom property --scroll-fade-bottom drives the mask stop:
-   *   • 0 rem  → no mask   (initial-value, used when timeline is inactive = no overflow)
-   *   • 2.5rem → full fade (fill-mode: both, held from scroll-top until near-bottom)
-   *   • 0 rem  → no mask   (fill-mode: both, held at scroll-bottom)
+   * How the property cascade works:
+   *   • 0rem  — initial-value; used when timeline is inactive (no overflow)
+   *   • 2.5rem — fill-mode:both holds this from scroll-top until near-bottom
+   *   • 0rem  — fill-mode:both holds this once fully scrolled to the bottom
    *
-   * Graceful degradation: browsers without scroll-driven animations receive an
-   * inactive timeline → initial-value 0rem → no mask at all (no clipped content,
-   * just no fade effect).
+   * animation-duration: 1ms
+   *   Gecko quirk: Firefox requires a non-zero time duration to initialise
+   *   the animation sampling loop, even for scroll-driven animations where
+   *   time is irrelevant. Harmless on Blink/WebKit. Can be removed once
+   *   Firefox 151+ (targeting stable ~May 2026, Interop 2026 focus area)
+   *   removes this requirement.
+   *
+   * @supports guard: mask-image creates a CSS stacking context, which
+   * resets the containing block of position:fixed descendants. Limiting
+   * the rule to browsers that understand animation-timeline means
+   * Firefox/Safari stable never receive mask-image. In practice,
+   * position:fixed elements in this codebase are portalled to <body> so
+   * the issue doesn't arise even in supported browsers.
+   *
+   * Individual animation-* longhand properties are used (not the shorthand)
+   * so that component-level animation declarations on more-specific selectors
+   * are never overridden.
    */
   @property --scroll-fade-bottom {
     syntax: '<length>';
@@ -32,23 +48,28 @@ const GlobalStyle = createGlobalStyle`
     to   { --scroll-fade-bottom: 0rem; }
   }
 
-  .scroll-fade {
-    animation: scroll-fade-out linear both;
-    animation-timeline: scroll(self);
-    /* Fire in the last 2.5rem of scroll range so the fade dissolves smoothly. */
-    animation-range: calc(100% - 2.5rem) 100%;
-    /* mask-image makes the element's own content transparent at the bottom —
-       no background-colour knowledge needed; whatever is behind shows through. */
-    mask-image: linear-gradient(
-      to bottom,
-      black calc(100% - var(--scroll-fade-bottom)),
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      black calc(100% - var(--scroll-fade-bottom)),
-      transparent 100%
-    );
+  @supports (animation-timeline: scroll()) {
+    * {
+      animation-name: scroll-fade-out;
+      animation-duration: 1ms; /* Firefox activation quirk — see note above */
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(self);
+      /* Dissolve the fade over the final 2.5rem of scroll range. */
+      animation-range: calc(100% - 2.5rem) 100%;
+      /* mask-image uses the content's own alpha — no background-colour
+         knowledge required; whatever sits behind the element shows through. */
+      mask-image: linear-gradient(
+        to bottom,
+        black calc(100% - var(--scroll-fade-bottom)),
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black calc(100% - var(--scroll-fade-bottom)),
+        transparent 100%
+      );
+    }
   }
 
 ${(props) => {
