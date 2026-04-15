@@ -6,13 +6,10 @@ type Props = {
 
 const GlobalStyle = createGlobalStyle`
   /**
-   * Global scroll-fade — automatic bottom fade on every scrollable element.
+   * scroll-fade utility
    *
-   * No class or wrapper needed. The scroll-driven animation only activates
-   * when animation-timeline: scroll(self) has a non-zero range, i.e. only
-   * on elements whose content overflows. Non-scrollable elements keep an
-   * inactive timeline → @property initial-value 0rem → mask is identity
-   * (black 100%) → no compositing, no content clipping.
+   * Add class="scroll-fade" to any overflow-y: auto/scroll element to get a
+   * bottom fade that auto-hides when the user reaches the end of the list.
    *
    * How the property cascade works:
    *   • 0rem  — initial-value; used when timeline is inactive (no overflow)
@@ -29,9 +26,7 @@ const GlobalStyle = createGlobalStyle`
    * @supports guard: mask-image creates a CSS stacking context, which
    * resets the containing block of position:fixed descendants. Limiting
    * the rule to browsers that understand animation-timeline means
-   * Firefox/Safari stable never receive mask-image. In practice,
-   * position:fixed elements in this codebase are portalled to <body> so
-   * the issue doesn't arise even in supported browsers.
+   * Firefox/Safari stable never receive mask-image.
    *
    * Individual animation-* longhand properties are used (not the shorthand)
    * so that component-level animation declarations on more-specific selectors
@@ -49,16 +44,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @supports (animation-timeline: scroll()) {
-    * {
+    .scroll-fade {
       animation-name: scroll-fade-out;
       animation-duration: 1ms; /* Firefox activation quirk — see note above */
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: scroll(self);
-      /* Dissolve the fade over the final 2.5rem of scroll range. */
       animation-range: calc(100% - 2.5rem) 100%;
-      /* mask-image uses the content's own alpha — no background-colour
-         knowledge required; whatever sits behind the element shows through. */
       mask-image: linear-gradient(
         to bottom,
         black calc(100% - var(--scroll-fade-bottom)),
