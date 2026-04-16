@@ -11,6 +11,8 @@ export type Serie = {
   metricPrefix?: string;
   /** Whether the line should be dashed */
   isLineDashed?: boolean;
+  /** Whether to render a gradient fill under the line */
+  withGradient?: boolean;
 };
 
 export type NonSymmetricalChartSerie = {
@@ -59,6 +61,12 @@ export type LineChartProps = (
   yAxisTitle?: string;
   /** Help text displayed as a tooltip icon */
   helpText?: string;
+  /** Optional content rendered on the right side of the chart header */
+  rightTitle?: React.ReactNode;
+  /** Whether to display horizontal grid lines */
+  showHorizontalGridLines?: boolean;
+  /** Hide the chart header (title, help, loading indicator, rightTitle) */
+  noHeader?: boolean;
   /** Custom tooltip renderer */
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,

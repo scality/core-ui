@@ -76,29 +76,30 @@ interface ChartHeaderProps {
   secondaryTitle?: string;
   helpTooltip?: React.ReactNode;
   rightTitle?: React.ReactNode;
+  isLoading?: boolean;
 }
 
 /**
  * Shared chart header component
- * Used by Barchart and can be used by other charts
+ * Used by Barchart and LineTimeSerieChart
  */
 export const ChartHeader = ({
   title,
   secondaryTitle,
   helpTooltip,
   rightTitle,
+  isLoading,
 }: ChartHeaderProps) => {
   return (
     <Wrap>
       <Stack gap="r4">
-        <Text variant="ChartTitle">{title}</Text>
+        {title && <Text variant="ChartTitle">{title}</Text>}
         {helpTooltip && (
           <IconHelp
             tooltipMessage={helpTooltip}
             overlayStyle={maxWidthTooltip}
           />
         )}
-
         {secondaryTitle && (
           <Text
             color="textSecondary"
@@ -109,9 +110,10 @@ export const ChartHeader = ({
             {secondaryTitle}
           </Text>
         )}
+        {isLoading && <Loader />}
       </Stack>
 
-      {rightTitle && <Text>{rightTitle}</Text>}
+      {rightTitle}
     </Wrap>
   );
 };
