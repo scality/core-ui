@@ -793,6 +793,86 @@ export const CustomTooltipExample: Story = {
   },
 };
 
+// ─── showHorizontalGridLines ────────────────────────────────────────────────────────────
+
+export const WithGridLines: Story = {
+  args: {
+    series: [
+      {
+        data: prometheusData as [number, string | number | null][],
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        getTooltipLabel: (_prefix, resource) => `${resource}`,
+      },
+    ],
+    title: 'CPU Usage',
+    height: 200,
+    startingTimeStamp: prometheusData[0][0] as number,
+    yAxisType: 'percentage',
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    showHorizontalGridLines: true,
+  },
+};
+
+// ─── withGradient ─────────────────────────────────────────────────────────────
+
+export const WithGradient: Story = {
+  args: {
+    series: [
+      {
+        data: prometheusData as [number, string | number | null][],
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        getTooltipLabel: (_prefix, resource) => `${resource}`,
+        withGradient: true,
+      },
+    ],
+    title: 'CPU Usage',
+    height: 200,
+    startingTimeStamp: prometheusData[0][0] as number,
+    yAxisType: 'percentage',
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+  },
+};
+
+// ─── Combined: grid lines + gradient (two series, design-style) ───────────────
+
+export const WithGridLinesAndGradient: Story = {
+  render: () => (
+    <ChartLegendWrapper
+      colorSet={{
+        'net-capacity': lineTimeSeriesColorRange[0],
+        'total-capacity': lineTimeSeriesColorRange[2],
+      }}
+    >
+      <LineTimeSerieChart
+        series={[
+          {
+            data: prometheusData as [number, string | number | null][],
+            resource: 'net-capacity',
+            getTooltipLabel: () => 'Net capacity',
+            withGradient: true,
+          },
+          {
+            data: prometheusData2 as [number, string | number | null][],
+            resource: 'total-capacity',
+            getTooltipLabel: () => 'Total capacity',
+            isLineDashed: true,
+          },
+        ]}
+        title="Net Capacity"
+        height={200}
+        startingTimeStamp={prometheusData[0][0] as number}
+        yAxisType="default"
+        interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+        duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        showHorizontalGridLines
+      />
+      <ChartLegend shape="line" />
+    </ChartLegendWrapper>
+  ),
+};
+
 // Dynamic colorSet example components
 const DynamicChart1 = (props) => {
   const chartId = useChartId();

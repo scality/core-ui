@@ -20,6 +20,7 @@ export type LineToRender = {
   dataKey: string;
   stroke: string;
   strokeDasharray?: string;
+  withGradient?: boolean;
 };
 
 type ChartDataOutput = {
@@ -288,6 +289,7 @@ export function useChartData({
           dataKey: label,
           stroke: getColor(serie.resource) || '',
           strokeDasharray: serie.isLineDashed ? '4 4' : undefined,
+          withGradient: serie.withGradient,
         };
       });
   }, [series, getColor, selectedResources, isSeriesEmpty]);
