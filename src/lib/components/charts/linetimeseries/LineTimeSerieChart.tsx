@@ -57,6 +57,7 @@ export function LineTimeSerieChart({
   helpText,
   rightTitle,
   showHorizontalGridLines = false,
+  noBackground = false,
   noHeader = false,
   syncId,
   renderTooltip,
@@ -138,7 +139,7 @@ export function LineTimeSerieChart({
             horizontal={showHorizontalGridLines}
             stroke={theme.border}
             strokeOpacity={0.4}
-            fill={theme.backgroundLevel4}
+            fill={noBackground ? 'transparent' : theme.backgroundLevel4}
           />
           <XAxis
             dataKey="timestamp"
