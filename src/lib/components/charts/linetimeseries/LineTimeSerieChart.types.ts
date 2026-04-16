@@ -65,6 +65,8 @@ export type LineChartProps = (
   rightTitle?: React.ReactNode;
   /** Whether to display horizontal grid lines */
   showHorizontalGridLines?: boolean;
+  /** Remove the chart area background fill */
+  noBackground?: boolean;
   /** Hide the chart header (title, help, loading indicator, rightTitle) */
   noHeader?: boolean;
   /** Custom tooltip renderer */

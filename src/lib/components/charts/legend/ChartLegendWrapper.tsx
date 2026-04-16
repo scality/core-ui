@@ -29,10 +29,12 @@ export type ChartLegendState = {
   selectOnlyResource: (resource: string) => void;
   isSelected: (resource: string) => boolean;
   getColor: (resource: string) => string | undefined;
+  getLabel: (resource: string) => string;
   listResources: () => string[];
   isOnlyOneSelected: () => boolean;
   register: (chartId: string, seriesNames: string[]) => void;
 };
+
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
 
@@ -42,12 +44,15 @@ export type ChartLegendWrapperProps = {
     | Record<string, ChartColors | string>
     | ((seriesNames: string[]) => Record<string, ChartColors | string>);
   sortOrder?: 'alphabetical' | 'status' | ((a: string, b: string) => number);
+  /** Optional display labels for legend items, keyed by resource name */
+  labelMap?: Record<string, string>;
 };
 
 export const ChartLegendWrapper = ({
   children,
   colorSet,
   sortOrder = 'alphabetical',
+  labelMap,
 }: ChartLegendWrapperProps) => {
   const [registeredColorSets, setRegisteredColorSets] = useState<
     Record<string, string[]>
@@ -134,6 +139,11 @@ export const ChartLegendWrapper = ({
     [internalColorSet],
   );
 
+  const getLabel = useCallback(
+    (resource: string) => labelMap?.[resource] ?? resource,
+    [labelMap],
+  );
+
   const listResources = useCallback(() => {
     const resources = Object.keys(internalColorSet);
 
@@ -159,6 +169,7 @@ export const ChartLegendWrapper = ({
       selectOnlyResource,
       isSelected,
       getColor,
+      getLabel,
       listResources,
       isOnlyOneSelected,
       register,
@@ -171,6 +182,7 @@ export const ChartLegendWrapper = ({
       selectOnlyResource,
       isSelected,
       getColor,
+      getLabel,
       listResources,
       isOnlyOneSelected,
       register,

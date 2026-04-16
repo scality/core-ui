@@ -71,6 +71,7 @@ export const ChartLegend = ({
   const {
     listResources,
     getColor,
+    getLabel,
     isSelected,
     addSelectedResource,
     removeSelectedResource,
@@ -134,7 +135,7 @@ export const ChartLegend = ({
               shape={shape}
               chartColors={chartColors}
             />
-            <Text variant={legendSize}>{resource}</Text>
+            <Text variant={legendSize}>{getLabel(resource)}</Text>
           </LegendItem>
         );
       })}
