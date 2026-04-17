@@ -1,3 +1,4 @@
+import remarkGfm from 'remark-gfm';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 const config: StorybookConfig = {
   stories: ['../stories/**/*.@(mdx|stories.@(ts|tsx))'],
@@ -5,8 +6,17 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     '@storybook/addon-storysource',
-    '@storybook/addon-mdx-gfm',
     '@storybook/addon-webpack5-compiler-swc',
     '@chromatic-com/storybook',
   ],
