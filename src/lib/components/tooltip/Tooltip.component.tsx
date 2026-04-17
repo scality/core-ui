@@ -63,6 +63,7 @@ const TooltipOverLayContainer = styled.div<{
 
 const TooltipText = styled.div`
   width: 100%;
+  overflow-wrap: break-word;
   ul,
   ol {
     padding-inline-start: ${spacing.r16};
