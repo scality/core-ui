@@ -144,6 +144,7 @@ export const iconTable = {
   ThumbsDown: 'far faThumbsDown',
   Sidebar: 'fas faColumns',
   Bookopen: 'fas faBookOpen',
+  Astronaut: 'fas faUserAstronaut',
 };
 
 type IconProps = {
