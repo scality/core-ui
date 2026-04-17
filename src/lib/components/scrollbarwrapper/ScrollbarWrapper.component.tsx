@@ -51,22 +51,32 @@ const GlobalStyle = createGlobalStyle`
       animation-fill-mode: both;
       animation-timeline: scroll(self);
       animation-range: calc(100% - 2.5rem) 100%;
-      mask-image: linear-gradient(
-        to bottom,
-        black calc(100% - var(--scroll-fade-bottom)),
-        transparent 100%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black calc(100% - var(--scroll-fade-bottom)),
-        transparent 100%
-      );
+      mask-image:
+        linear-gradient(to top, black 1px, transparent 1px),
+        linear-gradient(to right, black 1px, transparent 1px),
+        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to bottom,
+          black calc(100% - var(--scroll-fade-bottom)),
+          transparent 100%
+        );
+      mask-composite: add, add, add, add;
+      -webkit-mask-image:
+        linear-gradient(to top, black 1px, transparent 1px),
+        linear-gradient(to right, black 1px, transparent 1px),
+        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to bottom,
+          black calc(100% - var(--scroll-fade-bottom)),
+          transparent 100%
+        );
+      -webkit-mask-composite: source-over, source-over, source-over, source-over;
     }
   }
 
 ${(props) => {
-  const brand = props.theme;
-  return css`
+    const brand = props.theme;
+    return css`
     // Custom scrollbar
     * {
       // Chrome / Safari / Edge
@@ -111,7 +121,7 @@ ${(props) => {
       scrollbar-width: thin;
     }
   `;
-}}
+  }}
 `;
 
 function ScrollbarWrapper({ children }: Props) {
