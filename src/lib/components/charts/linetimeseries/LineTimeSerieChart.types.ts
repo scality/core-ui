@@ -63,18 +63,28 @@ export type LineChartProps = (
   helpText?: string;
   /** Optional content rendered on the right side of the chart header */
   rightTitle?: React.ReactNode;
-  /** Whether to display horizontal grid lines */
-  showHorizontalGridLines?: boolean;
-  /** Remove the chart area background fill */
-  noBackground?: boolean;
-  /** Hide the chart header (title, help, loading indicator, rightTitle) */
-  noHeader?: boolean;
+  /** Named display preset; displayOptions overrides individual values */
+  preset?: 'default' | 'modern';
+  /** Display options — overrides the preset values */
+  displayOptions?: {
+    noBackground?: boolean;
+    showHorizontalGridLines?: boolean;
+    noHeader?: boolean;
+    noYAxisLine?: boolean;
+  };
   /** Custom tooltip renderer */
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
     duration?: number,
   ) => React.ReactNode;
+};
+
+type DisplayOptions = Required<NonNullable<LineChartProps['displayOptions']>>;
+
+export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
+  default: { noBackground: false, showHorizontalGridLines: false, noHeader: false, noYAxisLine: false },
+  modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: false, noYAxisLine: true  },
 };
 
 export type LineTimeSerieChartTooltipProps = {

@@ -15,7 +15,7 @@ import { fontSize } from '../../../style/theme';
 import { ChartHeader, StyledResponsiveContainer } from '../common/SharedComponents';
 import { formatTickValue, getTicks } from '../common/chartUtils';
 import { formatXAxisLabel } from './LineTimeSerieChart.utils';
-import { LineChartProps } from './LineTimeSerieChart.types';
+import { LineChartProps, CHART_PRESETS } from './LineTimeSerieChart.types';
 import { LineTimeSerieChartTooltip } from './LineTimeSerieChartTooltip';
 import { useChartHover } from './useChartHover';
 import { useChartData } from './useChartData';
@@ -56,12 +56,17 @@ export function LineTimeSerieChart({
   yAxisTitle,
   helpText,
   rightTitle,
-  showHorizontalGridLines = false,
-  noBackground = false,
-  noHeader = false,
+  preset = 'default',
+  displayOptions,
   syncId,
   renderTooltip,
 }: LineChartProps) {
+  const presetOptions = CHART_PRESETS[preset];
+  const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
+  const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
+  const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
+  const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+
   const theme = useTheme();
   const chartRef = useRef(null);
 
@@ -100,7 +105,7 @@ export function LineTimeSerieChart({
 
   return (
     <LineTemporalChartWrapper>
-      {!noHeader && (
+      {!resolvedNoHeader && (
         <ChartHeader
           title={`${title}${unitLabel ? ` (${unitLabel})` : ''}`}
           helpTooltip={helpText}
@@ -136,10 +141,11 @@ export function LineTimeSerieChart({
 
           <CartesianGrid
             vertical={false}
-            horizontal={showHorizontalGridLines}
+            horizontal={resolvedShowHorizontalGridLines}
             stroke={theme.border}
             strokeOpacity={0.4}
-            fill={noBackground ? 'transparent' : theme.backgroundLevel4}
+            syncWithTicks={true}
+            fill={resolvedNoBackground ? 'transparent' : theme.backgroundLevel4}
           />
           <XAxis
             dataKey="timestamp"
@@ -171,7 +177,7 @@ export function LineTimeSerieChart({
                 : [0, topDomain]
             }
             allowDataOverflow={true}
-            axisLine={{ stroke: theme.border }}
+            axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
             tick={{
               fill: theme.textSecondary,
               fontSize: fontSize.smaller,

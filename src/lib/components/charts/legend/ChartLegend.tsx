@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useChartLegend } from './ChartLegendWrapper';
 import { Text, TextVariant } from '../../text/Text.component';
-import { chartColors } from '../../../style/theme';
+import { chartColors, CoreUITheme } from '../../../style/theme';
 import { useCallback } from 'react';
 
 type ChartLegendProps = {
@@ -9,6 +9,7 @@ type ChartLegendProps = {
   disabled?: boolean;
   direction?: 'horizontal' | 'vertical';
   legendSize?: TextVariant;
+  legendColor?: keyof CoreUITheme;
 };
 
 const Legend = styled.div<{ direction: 'horizontal' | 'vertical' }>`
@@ -67,6 +68,7 @@ export const ChartLegend = ({
   disabled = false,
   direction = 'horizontal',
   legendSize = 'Basic',
+  legendColor,
 }: ChartLegendProps) => {
   const {
     listResources,
@@ -135,7 +137,7 @@ export const ChartLegend = ({
               shape={shape}
               chartColors={chartColors}
             />
-            <Text variant={legendSize}>{getLabel(resource)}</Text>
+            <Text variant={legendSize} color={legendColor}>{getLabel(resource)}</Text>
           </LegendItem>
         );
       })}

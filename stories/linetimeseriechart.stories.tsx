@@ -810,7 +810,7 @@ export const WithGridLines: Story = {
     yAxisType: 'percentage',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-    showHorizontalGridLines: true,
+    displayOptions: { showHorizontalGridLines: true },
   },
 };
 
@@ -866,7 +866,7 @@ export const WithGridLinesAndGradient: Story = {
         yAxisType="default"
         interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
         duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
-        showHorizontalGridLines
+        displayOptions={{ showHorizontalGridLines: true }}
       />
       <ChartLegend shape="line" />
     </ChartLegendWrapper>
@@ -1192,6 +1192,26 @@ const generateBigValuesData2 = (): [number, string][] => {
 
 const bigValuesData = generateBigValuesData();
 const bigValuesData2 = generateBigValuesData2();
+export const ModernPreset: Story = {
+  args: {
+    series: [
+      {
+        data: prometheusData as [number, string | number | null][],
+        resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+        getTooltipLabel: (_prefix, resource) => `${resource}`,
+        withGradient: true,
+      },
+    ],
+    title: 'CPU Usage',
+    height: 200,
+    startingTimeStamp: prometheusData[0][0] as number,
+    yAxisType: 'percentage',
+    interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
+    duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+    preset: 'modern',
+  },
+};
+
 export const BigValuesExample: Story = {
   render: () => {
     return (
