@@ -128,4 +128,108 @@ describe('TableV2', () => {
 
     expect(rows.length).toBe(4);
   });
+
+  test('it should not produce false positive when searching for JSON brace character', async () => {
+    const { getAllByRole } = render(
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+          globalFilter="{"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    const rows = getAllByRole('row');
+    // only the header row should remain, no data rows
+    expect(rows.length).toBe(1);
+  });
+
+  test('it should not produce false positive when searching for a column key name', async () => {
+    const { getAllByRole } = render(
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+          globalFilter="firstName"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    const rows = getAllByRole('row');
+    // only the header row should remain, no data rows
+    expect(rows.length).toBe(1);
+  });
+
+  test('it should not produce false positive when searching for ISO date millisecond component', async () => {
+    const dateData = [
+      { name: 'Alpha', createdAt: new Date('2023-01-01T00:00:00.000Z') },
+      { name: 'Beta', createdAt: new Date('2023-06-15T12:30:45.123Z') },
+    ];
+    const dateColumns: TableProps['columns'] = [
+      { Header: 'Name', accessor: 'name' },
+      {
+        Header: 'Created At',
+        accessor: 'createdAt',
+        Cell: ({ value }: { value: Date }) => value.toLocaleDateString(),
+      },
+    ];
+
+    const { getAllByRole } = render(
+      <div>
+        <Table
+          columns={dateColumns}
+          data={dateData}
+          globalFilter=".000"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    const rows = getAllByRole('row');
+    // only the header row should remain, no data rows
+    expect(rows.length).toBe(1);
+  });
+
+  test('it should still match rows when search term appears in a column value', async () => {
+    const { getAllByRole } = render(
+      <div>
+        <Table
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+          globalFilter="Yohann"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    const rows = getAllByRole('row');
+    expect(rows.length).toBe(2); // header + 1 matching data row
+    expect(rows[1]).toHaveTextContent(/Yohann/i);
+  });
 });

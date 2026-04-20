@@ -195,11 +195,11 @@ function Table<
 
   const stringifyFilter = useMemo(() => {
     return (rows: Row<object>[], columnIds: string[], value) => {
+      const searchTerm = (value || '').toLowerCase();
       const filteredRows = rows.filter((row) => {
-        // we stringify the object to make sure we can match the value
-        return JSON.stringify(row.values)
-          .toLowerCase()
-          .includes((value || '').toLowerCase());
+        return columnIds.some((columnId) =>
+          String(row.values[columnId]).toLowerCase().includes(searchTerm),
+        );
       });
       return filteredRows;
     };
