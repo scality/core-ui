@@ -1208,7 +1208,7 @@ export const ModernPreset: Story = {
     yAxisType: 'percentage',
     interval: SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS,
     duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
-    preset: 'modern',
+    displayPreset: 'modern',
   },
 };
 

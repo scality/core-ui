@@ -56,12 +56,12 @@ export function LineTimeSerieChart({
   yAxisTitle,
   helpText,
   rightTitle,
-  preset = 'default',
+  displayPreset = 'default',
   displayOptions,
   syncId,
   renderTooltip,
 }: LineChartProps) {
-  const presetOptions = CHART_PRESETS[preset];
+  const presetOptions = CHART_PRESETS[displayPreset];
   const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
   const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
   const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;

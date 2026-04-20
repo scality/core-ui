@@ -74,12 +74,12 @@ export type LineChartProps = (
    *
    * @example
    * // Use the modern preset as-is
-   * <LineTimeSerieChart preset="modern" ... />
+   * <LineTimeSerieChart displayPreset="modern" ... />
    *
    * // Use modern but keep the header
-   * <LineTimeSerieChart preset="modern" displayOptions={{ noHeader: false }} ... />
+   * <LineTimeSerieChart displayPreset="modern" displayOptions={{ noHeader: false }} ... />
    */
-  preset?: 'default' | 'modern';
+  displayPreset?: 'default' | 'modern';
   /**
    * Fine-grained overrides applied on top of the active `preset`.
    * Only the properties you specify are overridden; the rest come from the preset.
