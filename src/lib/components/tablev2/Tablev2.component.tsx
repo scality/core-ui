@@ -193,6 +193,12 @@ function Table<
     ...sortTypes,
   };
 
+  // Custom global filter that matches the search term against individual column
+  // values using String() coercion. This avoids false positives that occur with
+  // JSON.stringify(row.values) — which would match JSON structural characters
+  // (e.g. '{'), column accessor keys (e.g. 'firstName'), and ISO date
+  // millisecond components (e.g. '.000Z') as searchable text.
+  // See: RING-53752 / scality/agent-task#102
   const stringifyFilter = useMemo(() => {
     return (rows: Row<object>[], columnIds: string[], value) => {
       const searchTerm = (value || '').toLowerCase();
