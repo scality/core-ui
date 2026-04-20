@@ -63,9 +63,36 @@ export type LineChartProps = (
   helpText?: string;
   /** Optional content rendered on the right side of the chart header */
   rightTitle?: React.ReactNode;
-  /** Named display preset; displayOptions overrides individual values */
+  /**
+   * Named display preset that sets a group of visual defaults at once.
+   *
+   * - `'default'` — opaque background, no grid lines, header visible, Y-axis line visible.
+   * - `'modern'`  — transparent background, horizontal grid lines, no header, no Y-axis line.
+   *
+   * Individual values can be overridden with `displayOptions`.
+   * Defaults to `'default'` when omitted.
+   *
+   * @example
+   * // Use the modern preset as-is
+   * <LineTimeSerieChart preset="modern" ... />
+   *
+   * // Use modern but keep the header
+   * <LineTimeSerieChart preset="modern" displayOptions={{ noHeader: false }} ... />
+   */
   preset?: 'default' | 'modern';
-  /** Display options — overrides the preset values */
+  /**
+   * Fine-grained overrides applied on top of the active `preset`.
+   * Only the properties you specify are overridden; the rest come from the preset.
+   *
+   * - `noBackground`            — removes the chart background (transparent).
+   * - `showHorizontalGridLines` — draws horizontal grid lines across the plot area.
+   * - `noHeader`                — hides the title/help-text/right-title header row.
+   * - `noYAxisLine`             — hides the vertical Y-axis line.
+   *
+   * @example
+   * // Add grid lines to the default preset
+   * <LineTimeSerieChart displayOptions={{ showHorizontalGridLines: true }} ... />
+   */
   displayOptions?: {
     noBackground?: boolean;
     showHorizontalGridLines?: boolean;
