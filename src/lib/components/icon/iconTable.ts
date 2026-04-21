@@ -136,4 +136,8 @@ export const iconTable = {
   Sidebar: 'fas faTableColumns',
   Bookopen: 'fas faBookOpen',
   Book: 'fas faBook',
+  Sliders: "fas faSliders",
+  MedicalFile: "fas faFileMedical",
+  ArrowsUpDown: "fas faArrowsUpDown",
+  HeadSet: "fas faHeadset",
 };

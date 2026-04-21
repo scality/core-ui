@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import { RuleTester } from '@typescript-eslint/rule-tester';
-import rule from './no-raw-number-in-jsx.js';
+import rule from './no-raw-number-in-jsx.mjs';
 import path from 'path';
 
 // Jest runs from the project root, so process.cwd() is the workspace root
@@ -118,6 +118,28 @@ tester.run('no-raw-number-in-jsx', rule, {
             code: 'const el = <Text>{/* comment */}</Text>;',
             filename,
         },
+
+        // ── Broad union types containing number — not flagged ─────────────────
+        {
+            // string | number — broad union, not a pure number type
+            code: 'declare const value: string | number; const el = <Text>{value}</Text>;',
+            filename,
+        },
+        {
+            // boolean | number — broad union
+            code: 'declare const value: boolean | number; const el = <Text>{value}</Text>;',
+            filename,
+        },
+        {
+            // ReactNode type — includes number but is not a pure number type
+            code: 'import type { ReactNode } from "react"; declare const content: ReactNode; const el = <Text>{content}</Text>;',
+            filename,
+        },
+        {
+            // string | number | null — multiple non-nullish types
+            code: 'declare const value: string | number | null; const el = <Text>{value}</Text>;',
+            filename,
+        },
     ],
 
     // ─── Invalid ──────────────────────────────────────────────────────────────
@@ -192,16 +214,22 @@ tester.run('no-raw-number-in-jsx', rule, {
             errors: [{ message: ERROR }],
         },
 
-        // ── Union types that include number ───────────────────────────────────
+        // ── Pure number types with nullish companions ─────────────────────────
         {
-            // number | undefined — when defined it would render an unformatted number
+            // number | undefined — pure number type, only null/undefined companions
             code: 'declare const count: number | undefined; const el = <Text>{count}</Text>;',
             filename,
             errors: [{ message: ERROR }],
         },
         {
-            // string | number
-            code: 'declare const value: string | number; const el = <Text>{value}</Text>;',
+            // number | null — pure number type with null
+            code: 'declare const count: number | null; const el = <Text>{count}</Text>;',
+            filename,
+            errors: [{ message: ERROR }],
+        },
+        {
+            // number | null | undefined — pure number type with multiple nullish
+            code: 'declare const count: number | null | undefined; const el = <Text>{count}</Text>;',
             filename,
             errors: [{ message: ERROR }],
         },

@@ -95,7 +95,7 @@ export const parameters = {
             ['Radio', ['Guideline', '*']],
             ['Select', ['Guideline', '*']],
           ],
-          'Feedback',
+          ['Feedback', [['Modal', ['Guideline', '*']]]],
           'Progress & loading',
           'Styling',
           'Deprecated',

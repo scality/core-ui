@@ -5,8 +5,8 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-essentials',
-    '@storybook/addon-storysource',
     '@storybook/addon-mdx-gfm',
+    '@storybook/addon-storysource',
     '@storybook/addon-webpack5-compiler-swc',
     '@chromatic-com/storybook',
   ],

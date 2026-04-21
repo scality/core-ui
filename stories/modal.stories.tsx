@@ -5,6 +5,7 @@ import { Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { IconHelp } from '../src/lib/components/iconhelper/IconHelper';
 import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import { Icon } from '../src/lib/components/icon/Icon.component';
 import { useArgs } from '@storybook/preview-api';
 
 export default {
@@ -15,6 +16,12 @@ export default {
   ],
 };
 
+const FooterActions = ({ children }) => (
+  <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
+    {children}
+  </Stack>
+);
+
 export const SimpleModal = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
@@ -22,31 +29,26 @@ export const SimpleModal = {
       <>
         <Button
           onClick={() => updateArgs({ isOpen: true })}
-          label={'Show Modal'}
+          label={'Open modal'}
+          variant="primary"
         />
         <Modal
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
           footer={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
+            <FooterActions>
               <Button
-                label="No"
-                size="default"
+                label="Cancel"
                 variant="outline"
                 onClick={() => updateArgs({ isOpen: false })}
               />
               <Button
-                variant="secondary"
-                label="Yes"
-                size="inline"
-                onClick={action('Yes clicked')}
+                variant="primary"
+                label="Save changes"
+                icon={<Icon name="Save" />}
+                onClick={action('Save changes clicked')}
               />
-            </div>
+            </FooterActions>
           }
           {...args}
         />
@@ -54,8 +56,53 @@ export const SimpleModal = {
     );
   },
   args: {
-    title: 'Hello',
-    children: <span>Do you want a cookie?</span>,
+    title: 'Edit settings',
+    children: <span>Make your changes below.</span>,
+  },
+};
+
+export const DestructiveModal = {
+  render: (args) => {
+    const [{ isOpen }, updateArgs] = useArgs();
+    return (
+      <>
+        <Button
+          onClick={() => updateArgs({ isOpen: true })}
+          label={'Delete node'}
+          variant="danger"
+          icon={<Icon name="Delete" />}
+        />
+        <Modal
+          role="alertdialog"
+          isOpen={isOpen}
+          footer={
+            <FooterActions>
+              <Button
+                label="Cancel"
+                variant="outline"
+                onClick={() => updateArgs({ isOpen: false })}
+              />
+              <Button
+                variant="danger"
+                label="Delete node"
+                icon={<Icon name="Delete" />}
+                onClick={action('Delete node clicked')}
+              />
+            </FooterActions>
+          }
+          {...args}
+        />
+      </>
+    );
+  },
+  args: {
+    title: 'Delete node?',
+    children: (
+      <span>
+        <strong>my-node-name</strong> will be permanently deleted, this action
+        is irreversible.
+      </span>
+    ),
   },
 };
 
@@ -63,20 +110,21 @@ export const CustomizeTitle = {
   ...SimpleModal,
   args: {
     close: null,
-    title: 'Hello there',
-    children: <span>Do you want a cookie?</span>,
+    title: 'Create bucket',
+    children: <span>Fill in the details below.</span>,
     subTitle: (
       <Stack>
         <>Step 1/2</>
         <IconHelp
           tooltipMessage={
             <ul>
-              <li>Hello, this is the tooltip of the modal</li>
+              <li>Complete all required fields before proceeding.</li>
             </ul>
           }
         />
       </Stack>
     ),
+    isOpen: false,
   },
 };
 
@@ -86,31 +134,28 @@ const Demo = (myargs, args) => () => {
     <>
       <Button
         onClick={() => updateArgs({ isOpen: true })}
-        label={'Show Modal'}
+        label={'Delete'}
+        variant="danger"
+        icon={<Icon name="Delete" />}
+        size="inline"
       />
       <Modal
-        close={() => updateArgs({ isOpen: false })}
+        role="alertdialog"
         isOpen={isOpen}
         footer={
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+          <FooterActions>
             <Button
-              label="No"
-              size="default"
+              label="Cancel"
               variant="outline"
               onClick={() => updateArgs({ isOpen: false })}
             />
             <Button
-              variant="secondary"
-              label="Yes"
-              size="inline"
+              variant="danger"
+              label="Delete"
+              icon={<Icon name="Delete" />}
               onClick={() => updateArgs({ isOpen: false })}
             />
-          </div>
+          </FooterActions>
         }
         {...args}
       />
@@ -126,22 +171,17 @@ export const WithinTable = {
       {
         Header: 'First Name',
         accessor: 'firstName',
-        cellStyle: {
-          textAlign: 'left',
-        },
+        cellStyle: { textAlign: 'left' },
       },
       {
         Header: 'Last Name',
         accessor: 'lastName',
-        cellStyle: {
-          textAlign: 'left',
-        },
+        cellStyle: { textAlign: 'left' },
       },
       {
         Header: 'Actions',
         accessor: 'health',
         Cell: Demo(myArgs, args),
-        // disable the sorting on this column
         disableSortBy: true,
       },
     ];
@@ -153,12 +193,7 @@ export const WithinTable = {
       },
     ];
     return (
-      <div
-        style={{
-          height: '300px',
-          paddingTop: '20px',
-        }}
-      >
+      <div style={{ height: '300px', paddingTop: '20px' }}>
         <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h32"
@@ -169,7 +204,7 @@ export const WithinTable = {
     );
   },
   args: {
-    title: 'Hello',
-    children: <span>Do you want a cookie?</span>,
+    title: 'Delete node?',
+    children: <span>This action cannot be undone.</span>,
   },
 };

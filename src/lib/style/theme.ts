@@ -310,6 +310,7 @@ export const zIndex = {
   tooltip: 9990,
   notification: 9000,
   modal: 8500,
+  drawer: 8200,
   overlay: 8000,
   dropdown: 7000,
   nav: 500,

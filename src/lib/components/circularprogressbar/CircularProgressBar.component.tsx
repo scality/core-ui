@@ -1,9 +1,10 @@
 import {
-  CircularProgressBarContainer,
-  Title,
-  ProgressCircle,
   BackgroundCircle,
+  CircularProgressBarContainer,
+  ProgressCircle,
+  Title,
 } from './CircularProgressBar.component.style';
+
 type Props = {
   percent: number;
   radius: number;
@@ -14,6 +15,29 @@ type Props = {
   children?: JSX.Element;
 };
 
+/**
+ *
+ * 
+ * @example 
+ * <CircularProgressBar 
+ * title="Total Capacity" 
+ * percent={60} 
+ * radius={70} 
+ * color="red" 
+ * backgroundColor="blue" 
+ * strokeWidth={10} 
+ * > 
+ * 	<text
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"  
+        fontSize={fontSize.smaller}
+      >
+        text content
+      </text> 
+    </CircularProgressBar>
+ */
 function CircularProgressBar({
   percent,
   radius,

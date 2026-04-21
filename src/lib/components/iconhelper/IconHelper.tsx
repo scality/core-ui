@@ -26,7 +26,8 @@ const HelpButton = styled.button`
   color: inherit;
   font: inherit;              /* Inherit font sizing */
   vertical-align: text-bottom;     /* Align with text */
-  line-height: 1;    
+  line-height: 1;
+  cursor: default;
   &:focus-visible {
     outline: 2px dashed ${(props) => props.theme.selectedActive};
     outline-offset: 2px;

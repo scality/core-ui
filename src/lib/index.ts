@@ -14,6 +14,7 @@ export {
 } from './components/constants';
 export type { Status } from './components/constants';
 export { Layout } from './components/layout/Layout.component';
+export { Drawer } from './components/drawer/Drawer.component';
 export { Loader } from './components/loader/Loader.component';
 export { Modal } from './components/modal/Modal.component';
 export { Navbar } from './components/navbar/Navbar.component';

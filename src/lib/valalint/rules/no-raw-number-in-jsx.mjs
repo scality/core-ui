@@ -1,16 +1,38 @@
 import ts from 'typescript';
 
 /**
- * Returns true when the TypeScript type — or any member of a union — is a
- * numeric type (number primitive or a number literal type such as `42`).
+ * Returns true when the TypeScript type is a numeric type (number primitive or
+ * a number literal type such as `42`), or a union where number is the only
+ * non-nullish type (e.g., `number | undefined`, `number | null`).
+ *
+ * Does NOT match broad types like ReactNode where number is just one of many
+ * non-nullish options.
  */
-function typeIncludesNumber(type) {
+function isPureNumberType(type) {
     if (type.flags & ts.TypeFlags.Number) return true;
     if (type.flags & ts.TypeFlags.NumberLiteral) return true;
-    // Handle union types: `number | undefined`, `number | null`, `string | number`, …
+
+    // Handle union types: only flag if number is the primary type
+    // (i.e., the only non-nullish member)
     if (type.flags & ts.TypeFlags.Union) {
-        return type.types.some(t => typeIncludesNumber(t));
+        let hasNumber = false;
+        let hasOtherNonNullishType = false;
+
+        for (const t of type.types) {
+            // Check if this member is a number
+            if (t.flags & ts.TypeFlags.Number || t.flags & ts.TypeFlags.NumberLiteral) {
+                hasNumber = true;
+            }
+            // Check if this member is a non-nullish, non-number type
+            else if (!(t.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined | ts.TypeFlags.Void))) {
+                hasOtherNonNullishType = true;
+            }
+        }
+
+        // Only flag if we have number and no other non-nullish types
+        return hasNumber && !hasOtherNonNullishType;
     }
+
     return false;
 }
 
@@ -53,7 +75,7 @@ const noRawNumberInJsx = {
                 const tsNode = services.esTreeNodeToTSNodeMap.get(expression);
                 const type = checker.getTypeAtLocation(tsNode);
 
-                if (typeIncludesNumber(type)) {
+                if (isPureNumberType(type)) {
                     context.report({ node, messageId: 'rawNumber' });
                 }
             },

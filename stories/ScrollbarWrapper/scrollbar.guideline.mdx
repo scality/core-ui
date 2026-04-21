@@ -1,0 +1,60 @@
+import { Meta, Canvas, Source } from '@storybook/blocks';
+import * as ScrollbarWrapperStories from './scrollbar.stories';
+
+<Meta of={ScrollbarWrapperStories} name="Guideline" />
+
+# ScrollbarWrapper
+
+`ScrollbarWrapper` is a thin provider that injects global CSS into the styled-components theme. Render it **once**, near the root of your application, wrapping all content that should benefit from consistent scrollbars.
+
+It provides two things:
+
+- **Custom scrollbar styles** — a thin, themed scrollbar across Chrome, Safari, and Firefox.
+- **`scroll-fade` utility class** — an opt-in bottom fade on any scrollable element (see below).
+
+## Setup
+
+```tsx
+import { ScrollbarWrapper } from '@scality/core-ui';
+
+function App() {
+  return (
+    <ScrollbarWrapper>
+      {/* rest of your app */}
+    </ScrollbarWrapper>
+  );
+}
+```
+
+<Canvas of={ScrollbarWrapperStories.Default} />
+
+---
+
+## scroll-fade utility class
+
+Add `className="scroll-fade"` to any `overflow-y: auto` or `overflow-y: scroll` element to show a bottom gradient that fades out when the user reaches the end of the list.
+
+No JavaScript, no React state, no scroll listeners — the effect is driven entirely by CSS Scroll-Driven Animations.
+
+```tsx
+<ul style={{ overflowY: 'auto', height: '240px' }} className="scroll-fade">
+  {items.map((item) => (
+    <li key={item.id}>{item.name}</li>
+  ))}
+</ul>
+```
+
+### Behaviour
+
+| State | Effect |
+|---|---|
+| List overflows, scroll at top | Fade visible at the bottom |
+| List overflows, scrolled near bottom | Fade dissolves over the last ~40px |
+| List overflows, scrolled to the bottom | Fade gone |
+| List does not overflow | No fade, content never clipped |
+
+<Canvas of={ScrollbarWrapperStories.ScrollFadeUtility} />
+
+### Browser support
+
+The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures browsers that do not support it receive no mask at all — no fade, no clipping, no stacking context side effects.

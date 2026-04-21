@@ -168,3 +168,27 @@ export const WithoutOverlay = {
     );
   },
 };
+
+
+export const LongWordOverflow = {
+  render: () => {
+    return (
+      <Wrapper>
+        <div style={{ display: 'flex', gap: '4rem' }}>
+          <div>
+            <SubTitle>Long endpoint URL</SubTitle>
+            <Tooltip overlay="https://s3.us-east-1.amazonaws.com/my-very-long-bucket-name/path/to/some/deeply/nested/object-key.tar.gz">
+              <SubTitle>Hover here!</SubTitle>
+            </Tooltip>
+          </div>
+          <div>
+            <SubTitle>Normal text (still wraps at word boundaries)</SubTitle>
+            <Tooltip overlay="This is a longer tooltip message that should wrap naturally at word boundaries without breaking mid-word.">
+              <SubTitle>Hover here!</SubTitle>
+            </Tooltip>
+          </div>
+        </div>
+      </Wrapper>
+    );
+  },
+};

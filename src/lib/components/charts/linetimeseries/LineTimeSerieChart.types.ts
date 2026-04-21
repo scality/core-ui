@@ -11,6 +11,8 @@ export type Serie = {
   metricPrefix?: string;
   /** Whether the line should be dashed */
   isLineDashed?: boolean;
+  /** Whether to render a gradient fill under the line */
+  withGradient?: boolean;
 };
 
 export type NonSymmetricalChartSerie = {
@@ -59,12 +61,57 @@ export type LineChartProps = (
   yAxisTitle?: string;
   /** Help text displayed as a tooltip icon */
   helpText?: string;
+  /** Optional content rendered on the right side of the chart header */
+  rightTitle?: React.ReactNode;
+  /**
+   * Named display preset that sets a group of visual defaults at once.
+   *
+   * - `'default'` — opaque background, no grid lines, header visible, Y-axis line visible.
+   * - `'modern'`  — transparent background, horizontal grid lines, no header, no Y-axis line.
+   *
+   * Individual values can be overridden with `displayOptions`.
+   * Defaults to `'default'` when omitted.
+   *
+   * @example
+   * // Use the modern preset as-is
+   * <LineTimeSerieChart displayPreset="modern" ... />
+   *
+   * // Use modern but keep the header
+   * <LineTimeSerieChart displayPreset="modern" displayOptions={{ noHeader: false }} ... />
+   */
+  displayPreset?: 'default' | 'modern';
+  /**
+   * Fine-grained overrides applied on top of the active `preset`.
+   * Only the properties you specify are overridden; the rest come from the preset.
+   *
+   * - `noBackground`            — removes the chart background (transparent).
+   * - `showHorizontalGridLines` — draws horizontal grid lines across the plot area.
+   * - `noHeader`                — hides the title/help-text/right-title header row.
+   * - `noYAxisLine`             — hides the vertical Y-axis line.
+   *
+   * @example
+   * // Add grid lines to the default preset
+   * <LineTimeSerieChart displayOptions={{ showHorizontalGridLines: true }} ... />
+   */
+  displayOptions?: {
+    noBackground?: boolean;
+    showHorizontalGridLines?: boolean;
+    noHeader?: boolean;
+    noYAxisLine?: boolean;
+  };
   /** Custom tooltip renderer */
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
     unitLabel?: string,
     duration?: number,
   ) => React.ReactNode;
+};
+
+type DisplayOptions = Required<NonNullable<LineChartProps['displayOptions']>>;
+
+export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
+  default: { noBackground: false, showHorizontalGridLines: false, noHeader: false, noYAxisLine: false },
+  modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: true,  noYAxisLine: true  },
 };
 
 export type LineTimeSerieChartTooltipProps = {
