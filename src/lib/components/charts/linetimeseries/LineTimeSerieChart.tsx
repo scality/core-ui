@@ -1,8 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 import {
+  Area,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ReferenceLine,
   Tooltip,
   TooltipContentProps,
@@ -10,15 +11,11 @@ import {
   YAxis,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { Stack } from '../../../spacing';
 import { fontSize } from '../../../style/theme';
-import { IconHelp } from '../../iconhelper/IconHelper';
-import { Loader } from '../../loader/Loader.component';
-import { ChartTitleText } from '../../text/Text.component';
-import { StyledResponsiveContainer } from '../common/SharedComponents';
-import { formatTickValue, getTicks, maxWidthTooltip } from '../common/chartUtils';
+import { ChartHeader, StyledResponsiveContainer } from '../common/SharedComponents';
+import { formatTickValue, getTicks } from '../common/chartUtils';
 import { formatXAxisLabel } from './LineTimeSerieChart.utils';
-import { LineChartProps } from './LineTimeSerieChart.types';
+import { LineChartProps, CHART_PRESETS } from './LineTimeSerieChart.types';
 import { LineTimeSerieChartTooltip } from './LineTimeSerieChartTooltip';
 import { useChartHover } from './useChartHover';
 import { useChartData } from './useChartData';
@@ -58,9 +55,18 @@ export function LineTimeSerieChart({
   yAxisType = 'default',
   yAxisTitle,
   helpText,
+  rightTitle,
+  displayPreset = 'default',
+  displayOptions,
   syncId,
   renderTooltip,
 }: LineChartProps) {
+  const presetOptions = CHART_PRESETS[displayPreset];
+  const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
+  const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
+  const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
+  const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+
   const theme = useTheme();
   const chartRef = useRef(null);
 
@@ -99,20 +105,18 @@ export function LineTimeSerieChart({
 
   return (
     <LineTemporalChartWrapper>
-      <Stack gap="r4">
-        <ChartTitleText>
-          {title} {unitLabel && `(${unitLabel})`}
-        </ChartTitleText>
-        {helpText && (
-          <IconHelp tooltipMessage={helpText} overlayStyle={maxWidthTooltip} />
-        )}
-        {isLoading && <Loader />}
-      </Stack>
+      {!resolvedNoHeader && (
+        <ChartHeader
+          title={`${title}${unitLabel ? ` (${unitLabel})` : ''}`}
+          helpTooltip={helpText}
+          isLoading={isLoading}
+          rightTitle={rightTitle}
+        />
+      )}
 
       <StyledResponsiveContainer width="100%" height={height}>
-        <LineChart
+        <ComposedChart
           ref={chartRef}
-
           data={rechartsData}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           aria-label={`Time series chart for ${title}`}
@@ -121,14 +125,27 @@ export function LineTimeSerieChart({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          {/* Gradient definitions for series with withGradient */}
+          <defs>
+            {linesToRender.filter((l) => l.withGradient).map((line) => (
+              <linearGradient
+                key={`${title}-${line.key}`}
+                id={`gradient-${chartId}-${line.key}`}
+                x1="0" y1="0" x2="0" y2="1"
+              >
+                <stop offset="5%" stopColor={line.stroke} stopOpacity={0.18} />
+                <stop offset="95%" stopColor={line.stroke} stopOpacity={0} />
+              </linearGradient>
+            ))}
+          </defs>
+
           <CartesianGrid
-            vertical={true}
-            horizontal={true}
-            verticalPoints={[0]}
-            horizontalPoints={[0]}
+            vertical={false}
+            horizontal={resolvedShowHorizontalGridLines}
             stroke={theme.border}
-            fill={theme.backgroundLevel4}
-            strokeWidth={1}
+            strokeOpacity={0.4}
+            syncWithTicks={true}
+            fill={resolvedNoBackground ? 'transparent' : theme.backgroundLevel4}
           />
           <XAxis
             dataKey="timestamp"
@@ -160,7 +177,7 @@ export function LineTimeSerieChart({
                 : [0, topDomain]
             }
             allowDataOverflow={true}
-            axisLine={{ stroke: theme.border }}
+            axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
             tick={{
               fill: theme.textSecondary,
               fontSize: fontSize.smaller,
@@ -183,24 +200,38 @@ export function LineTimeSerieChart({
               />
             )}
           />
-          {/* Add horizontal line at y=0 for symmetrical charts */}
+          {/* Horizontal reference line at y=0 for symmetrical charts */}
           {yAxisType === 'symmetrical' && (
             <ReferenceLine y={0} stroke={theme.border} />
           )}
 
-          {/* Chart lines */}
-          {linesToRender.map((line) => (
-            <Line
-              key={`${title}-${line.key}`}
-              type="monotone"
-              dataKey={line.dataKey}
-              stroke={line.stroke}
-              dot={false}
-              isAnimationActive={false}
-              strokeDasharray={line.strokeDasharray}
-            />
-          ))}
-        </LineChart>
+          {/* Chart lines — Area for gradient series, Line otherwise */}
+          {linesToRender.map((line) =>
+            line.withGradient ? (
+              <Area
+                key={`${title}-${line.key}`}
+                type="monotone"
+                dataKey={line.dataKey}
+                stroke={line.stroke}
+                strokeWidth={1.5}
+                fill={`url(#gradient-${chartId}-${line.key})`}
+                fillOpacity={1}
+                dot={false}
+                isAnimationActive={false}
+              />
+            ) : (
+              <Line
+                key={`${title}-${line.key}`}
+                type="monotone"
+                dataKey={line.dataKey}
+                stroke={line.stroke}
+                dot={false}
+                isAnimationActive={false}
+                strokeDasharray={line.strokeDasharray}
+              />
+            )
+          )}
+        </ComposedChart>
       </StyledResponsiveContainer>
     </LineTemporalChartWrapper >
   );
