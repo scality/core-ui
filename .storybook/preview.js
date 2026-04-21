@@ -1,4 +1,5 @@
 import React from 'react';
+import '../src/lib/index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { CoreUiThemeProvider } from '../src/lib/next';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
