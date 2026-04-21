@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Wrap, spacing } from '../../spacing';
 import { zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
@@ -8,15 +8,36 @@ import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
 
-type Props = {
+type BaseProps = {
   isOpen: boolean;
-  close?: () => void;
+  /**
+   * Should be a plain string for correct accessibility (aria-labelledby).
+   * ReactNode is accepted for backwards compatibility.
+   */
   title: ReactNode;
-  footer?: ReactNode;
+  footer: ReactNode;
   children: ReactNode;
   subTitle?: ReactNode;
-  role?: 'dialog' | 'alertdialog';
+  /**
+   * When true, the modal sizes to its content (up to 90vw) instead of
+   * capping body content at 450px. Use for tables, complex forms, or any
+   * content that needs more horizontal space.
+   */
+  wide?: boolean;
 };
+
+type DialogProps = BaseProps & {
+  role?: 'dialog';
+  close?: () => void;
+};
+
+type AlertDialogProps = BaseProps & {
+  role: 'alertdialog';
+  close?: never;
+};
+
+type Props = DialogProps | AlertDialogProps;
+
 const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -29,6 +50,7 @@ const ModalContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: ${zIndex.modal};
 `;
+
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,23 +58,28 @@ const ModalContent = styled.div`
   color: ${getThemePropSelector('textPrimary')};
   border-radius: 5px;
   overflow: hidden;
-  min-width: 250px;
   min-height: 150px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   max-height: calc(100vh - ${spacing.r24} - ${spacing.r24});
+  max-width: 90vw;
 `;
+
 const ModalHeader = styled.div`
   display: flex;
   padding: ${spacing.r16} ${spacing.r16} ${spacing.r16} ${spacing.r32};
   background-color: ${(props) => props.theme.backgroundLevel3};
 `;
 
-const ModalBody = styled.div`
+const ModalBody = styled.div<{ $wide?: boolean }>`
   padding: ${spacing.r32};
   flex-grow: 1;
+  min-width: 450px;
+  box-sizing: border-box;
   background-color: ${(props) => props.theme.backgroundLevel4};
   overflow-y: auto;
+  ${({ $wide }) => !$wide && css`max-width: 450px;`}
 `;
+
 const ModalFooter = styled.div`
   padding: ${spacing.r16};
   background-color: ${(props) => props.theme.backgroundLevel3};
@@ -65,6 +92,7 @@ const Modal = ({
   children,
   footer,
   subTitle,
+  wide,
   role = 'dialog',
   ...rest
 }: Props) => {
@@ -94,45 +122,44 @@ const Modal = ({
       };
     }
   }, [isOpen]);
+
   return isOpen
     ? createPortal(
-        <ModalContainer
-          className="sc-modal"
-          role={role}
-          aria-modal="true"
-          aria-labelledby="dialog_label"
-          aria-describedby="dialog_desc"
-          {...rest}
-        >
-          <ModalContent className="sc-modal-content">
-            <ModalHeader className="sc-modal-header">
-              <Wrap style={{ flex: 1 }}>
-                <Text variant="Larger" id="dialog_label">
-                  {title}
-                </Text>
-                {close ? (
-                  <Button
-                    icon={<Icon name="Close" />}
-                    onClick={close}
-                    tooltip={{
-                      overlay: 'Close modal',
-                    }}
-                  />
-                ) : (
-                  <>{subTitle}</>
-                )}
-              </Wrap>
-            </ModalHeader>
-            <ModalBody className="sc-modal-body" id="dialog_desc">
-              {children}
-            </ModalBody>
-            {footer && (
-              <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
-            )}
-          </ModalContent>
-        </ModalContainer>,
-        modalContainer.current,
-      )
+      <ModalContainer
+        className="sc-modal"
+        role={role}
+        aria-modal="true"
+        aria-labelledby="dialog_label"
+        aria-describedby="dialog_desc"
+        {...rest}
+      >
+        <ModalContent className="sc-modal-content">
+          <ModalHeader className="sc-modal-header">
+            <Wrap style={{ flex: 1 }}>
+              <Text variant="Larger" id="dialog_label">
+                {title}
+              </Text>
+              {close ? (
+                <Button
+                  icon={<Icon name="Close" />}
+                  onClick={close}
+                  tooltip={{
+                    overlay: 'Close modal',
+                  }}
+                />
+              ) : (
+                <>{subTitle}</>
+              )}
+            </Wrap>
+          </ModalHeader>
+          <ModalBody className="sc-modal-body" id="dialog_desc" $wide={wide}>
+            {children}
+          </ModalBody>
+          <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
+        </ModalContent>
+      </ModalContainer>,
+      modalContainer.current,
+    )
     : null;
 };
 
