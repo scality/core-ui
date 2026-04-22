@@ -1,0 +1,29 @@
+name: build storybook
+
+on:
+  push:
+    branches:
+      - 'user/**'
+      - 'feature/**'
+      - 'improvement/**'
+      - 'bugfix/**'
+      - 'w/**'
+      - 'q/**'
+      - 'hotfix/**'
+      - 'dependabot/**'
+  pull_request:
+    branches: [development/*, stabilization/*, hotfix/*]
+  workflow_dispatch:
+
+jobs:
+  build-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build-storybook
+        env:
+          STORYBOOK_DISABLE_TELEMETRY: 1
