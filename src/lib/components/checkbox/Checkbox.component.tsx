@@ -19,6 +19,11 @@ const CheckboxInput = styled.input`
 	transform: scale(1.5);`;
 
 export type Props = {
+  /**
+   * Label displayed next to the checkbox.
+   * Use only for standalone checkboxes (not inside a FormGroup).
+   * When inside a FormGroup, set the label on FormGroup's `label` prop instead.
+   */
   label?: string;
   value?: string;
   checked?: boolean;
