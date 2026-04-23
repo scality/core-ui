@@ -18,7 +18,7 @@ export default {
     (story) => <Wrapper style={{ minHeight: '10vh' }}>{story()}</Wrapper>,
   ],
   argTypes: {
-    wide: { control: 'boolean', description: 'Allow modal to grow past 450px to fit content' },
+    wide: { control: 'boolean', description: 'Allow modal to grow past 480px to fit content' },
   },
 };
 
@@ -405,17 +405,17 @@ const CORE_UI_TABLE = (
 /**
  * Width layout stress-tests.
  * Each button opens a modal with a different content type so you can
- * verify the 450 px default / 90 vw max rules in one place.
+ * verify the 480 px default / 90 vw max rules in one place.
  */
 export const WidthLayoutCases = {
   render: () => (
     <Stack gap="r16">
-      {/* 1. Short text — modal should stay at 450px minimum */}
+      {/* 1. Short text — modal should stay at 480px minimum */}
       <ModalStory label="Short text" title="Short text">
         <span>Just a short sentence.</span>
       </ModalStory>
 
-      {/* 2. Long text / form — should wrap at 450px, never push wider */}
+      {/* 2. Long text / form — should wrap at 480px, never push wider */}
       <ModalStory label="Long text + input" title="Edit bucket">
         <Stack direction="vertical" gap="r16">
           <InfoMessage

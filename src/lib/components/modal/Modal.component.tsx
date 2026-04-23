@@ -20,7 +20,7 @@ type BaseProps = {
   subTitle?: ReactNode;
   /**
    * When true, the modal sizes to its content (up to 90vw) instead of
-   * capping body content at 450px. Use for tables, complex forms, or any
+   * capping body content at 480px. Use for tables, complex forms, or any
    * content that needs more horizontal space.
    */
   wide?: boolean;
@@ -73,11 +73,11 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div<{ $wide?: boolean }>`
   padding: ${spacing.r32};
   flex-grow: 1;
-  min-width: 450px;
+  min-width: 480px;
   box-sizing: border-box;
   background-color: ${(props) => props.theme.backgroundLevel4};
   overflow-y: auto;
-  ${({ $wide }) => !$wide && css`max-width: 450px;`}
+  ${({ $wide }) => !$wide && css`max-width: 480px;`}
 `;
 
 const ModalFooter = styled.div`
