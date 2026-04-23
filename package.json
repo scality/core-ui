@@ -121,6 +121,7 @@
     "react-virtualized-auto-sizer": "^1.0.24",
     "react-window": "^1.8.6",
     "recharts": "^3.0.2",
+    "remark-gfm": "^4.0.1",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
     "uuid": "^13.0.0"
