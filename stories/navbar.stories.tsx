@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar } from '../src/lib/components/navbar/Navbar.component';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Link } from '../src/lib/components/text/Text.component';
 import { InlineInput } from '../src/lib';
 import { Stack } from '../src/lib/spacing';

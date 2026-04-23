@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { TextArea } from '../src/lib';
 export default {
   title: 'Components/Inputs/TextArea',

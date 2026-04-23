@@ -64,6 +64,7 @@ export const parameters = {
   layout: 'fullscreen',
   docs: {
     toc: { headingSelector: 'h2,h3', title: 'Table of Contents' },
+    codePanel: true
   },
   controls: {
     //All props with color in name will automatically have a control 'color'

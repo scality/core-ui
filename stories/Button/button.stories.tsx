@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import React from 'react';
 import { Form, FormGroup, FormSection, Icon, Stack } from '../../src/lib';
 import {

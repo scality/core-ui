@@ -4,7 +4,7 @@ import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Select } from '../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from './common';
 import styled from 'styled-components';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-webpack5';
 
 const options = Array.from(new Array(10), (_, index) => (
   <Select.Option

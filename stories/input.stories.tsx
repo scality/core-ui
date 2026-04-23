@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input as InputV2 } from '../src/lib/components/inputv2/inputv2';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import styled from 'styled-components';
 import { Wrapper } from './common';
 

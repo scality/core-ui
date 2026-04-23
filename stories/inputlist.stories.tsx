@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
 import { InputList, InputListProps } from '../src/lib/components/inputlist/InputList.component';
 import { Wrapper as StoryWrapper } from './common';
