@@ -4,25 +4,52 @@ import { Meta } from "@storybook/addon-docs";
 
 # Typography
 
-## Font
+## Typefaces
 
-The font for the UI is **Lato**.\
-The numbers are monospaced, but the letters are not. Using this font in numerical columns in tables should be avoided.
+### Lato
 
-## Size
+**Lato** is the primary typeface for all UI text. Its numbers are monospaced, which makes it well-suited for numerical columns. However, since letters are not monospaced, avoid letter-based date formats in table columns as they cause alignment inconsistencies.
 
-The size base is 14 px (for a standard screen 1440\*900 px).
+The root font size is **14px**, so `1rem = 14px` throughout the system.
 
-Steps:
+### Fira Code
 
-|size  | level  |
-|-----:|--------|
-|  26  | h1     |
-| 22.5 | h2     |
-|  20  | h3     |
-|  18  | h4     |
-|  16  | h5     |
-|  14  | p      |
-| 12.5 | small  |
-|  11  | xsmall |
-|  9.8 | tbd    |
+**Fira Code** is the monospace typeface for code-heavy surfaces. Use it wherever the content is code, terminal output, or technical identifiers.
+
+Use for:
+
+- Code blocks and syntax-highlighted regions
+- Terminal and CLI output
+- Inline code snippets in technical prose
+- Technical value display: object keys, checksums, endpoints, version strings
+
+<pre style={{fontFamily: "'Fira Code', monospace", fontSize: "14px", lineHeight: "1.8", padding: "1rem 1.25rem", borderRadius: "4px", overflowX: "auto", fontVariantLigatures: "contextual", fontFeatureSettings: '"calt" 1'}}>
+{`aws s3api list-objects --bucket my-bucket --prefix backups/ --max-keys 100
+curl -X DELETE https://storage.example.com/v1/buckets/my-bucket/objects/file.tar.gz
+{ "key": "backups/2026-04-21/snapshot.tar.gz", "size": 1073741824, "etag": "a3f1b2c4" }`}
+</pre>
+
+Fira Code includes programming ligatures: sequences like `=>`, `!==`, `->`, `>=`, and `<=` render as composite glyphs. These are enabled by default.
+
+## Text color
+
+Use theme color tokens via the `color` prop. Do not use hardcoded hex values.
+
+| Token | Usage |
+| :--- | :--- |
+| `textPrimary` | Main text — set explicitly for any primary content |
+| `textSecondary` | Slightly dimmer text for descriptions and secondary content |
+| `textLink` | Clickable links — use `<Link>` instead of `<Text color="textLink">` |
+| `statusHealthy` | Status text only — healthy state |
+| `statusWarning` | Status text only — warning state |
+| `statusCritical` | Status text only — critical state |
+
+Do not use `statusCritical` for decorative red text. Status colors are reserved for system state communication.
+
+## Sentence case
+
+All UI text must use **sentence case**: capitalize only the first word and proper nouns.
+
+Exception: when displaying a list of resources (buckets, nodes, accounts…), each item may be capitalized as a proper noun if it represents a named entity.
+
+This rule is enforced by the `technical-sentence-case` ESLint rule.
