@@ -140,4 +140,5 @@ export const iconTable = {
   MedicalFile: "fas faFileMedical",
   ArrowsUpDown: "fas faArrowsUpDown",
   HeadSet: "fas faHeadset",
+  HandSparkles: 'fas faHandSparkles',
 };
