@@ -141,4 +141,5 @@ export const iconTable = {
   ArrowsUpDown: "fas faArrowsUpDown",
   HeadSet: "fas faHeadset",
   HandSparkles: 'fas faHandSparkles',
+  History: 'fas faClockRotateLeft',
 };
