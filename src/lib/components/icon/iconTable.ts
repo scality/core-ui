@@ -142,4 +142,6 @@ export const iconTable = {
   HeadSet: "fas faHeadset",
   HandSparkles: 'fas faHandSparkles',
   History: 'fas faClockRotateLeft',
+  Astronaut: 'fas faUserAstronaut',
+  Microchip: 'fas faMicrochip',
 };
