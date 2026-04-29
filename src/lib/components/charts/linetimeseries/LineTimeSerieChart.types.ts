@@ -88,6 +88,7 @@ export type LineChartProps = (
    * - `showHorizontalGridLines` — draws horizontal grid lines across the plot area.
    * - `noHeader`                — hides the title/help-text/right-title header row.
    * - `noYAxisLine`             — hides the vertical Y-axis line.
+   * - `noTickLine`              — hides the tick marks on the Y-axis.
    *
    * @example
    * // Add grid lines to the default preset
@@ -98,6 +99,7 @@ export type LineChartProps = (
     showHorizontalGridLines?: boolean;
     noHeader?: boolean;
     noYAxisLine?: boolean;
+    noTickLine?: boolean;
   };
   /** Custom tooltip renderer */
   renderTooltip?: (
@@ -110,8 +112,8 @@ export type LineChartProps = (
 type DisplayOptions = Required<NonNullable<LineChartProps['displayOptions']>>;
 
 export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: false, noHeader: false, noYAxisLine: false },
-  modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: true,  noYAxisLine: true  },
+  default: { noBackground: false, showHorizontalGridLines: false, noHeader: false, noYAxisLine: false, noTickLine: false },
+  modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: true,  noYAxisLine: true,  noTickLine: true  },
 };
 
 export type LineTimeSerieChartTooltipProps = {
