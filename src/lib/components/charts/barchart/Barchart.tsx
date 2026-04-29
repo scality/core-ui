@@ -44,13 +44,14 @@ type BarchartDisplayOptions = {
   showHorizontalGridLines?: boolean;
   noYAxisLine?: boolean;
   noTickLine?: boolean;
+  noHeader?: boolean;
 };
 
 type ResolvedBarchartDisplayOptions = Required<BarchartDisplayOptions>;
 
 const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: false, noYAxisLine: false, noTickLine: false },
-  modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true  },
+  default: { noBackground: false, showHorizontalGridLines: false, noYAxisLine: false, noTickLine: false, noHeader: false },
+  modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
 };
 
 export type Point = {
@@ -147,6 +148,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
   const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
   const resolvedNoTickLine = displayOptions?.noTickLine ?? presetOptions.noTickLine;
+  const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
 
   // Create colorSet from ChartLegendWrapper
   const colorSet = useMemo(
@@ -287,12 +289,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
   return (
     <Stack direction="vertical" style={{ gap: '0' }}>
-      <ChartHeader
-        title={titleWithUnit}
-        secondaryTitle={secondaryTitle}
-        helpTooltip={helpTooltip}
-        rightTitle={rightTitle}
-      />
+      {!resolvedNoHeader && (
+        <ChartHeader
+          title={titleWithUnit}
+          secondaryTitle={secondaryTitle}
+          helpTooltip={helpTooltip}
+          rightTitle={rightTitle}
+        />
+      )}
       {renderChartContent()}
     </Stack>
   );
