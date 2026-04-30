@@ -39,6 +39,21 @@ const CHART_CONSTANTS = {
 
 /* ---------------------------------- TYPE ---------------------------------- */
 
+type BarchartDisplayOptions = {
+  noBackground?: boolean;
+  showHorizontalGridLines?: boolean;
+  noYAxisLine?: boolean;
+  noTickLine?: boolean;
+  noHeader?: boolean;
+};
+
+type ResolvedBarchartDisplayOptions = Required<BarchartDisplayOptions>;
+
+const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOptions> = {
+  default: { noBackground: false, showHorizontalGridLines: false, noYAxisLine: false, noTickLine: false, noHeader: false },
+  modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
+};
+
 export type Point = {
   key: string | number;
   values: { label: string; value: number }[];
@@ -84,6 +99,21 @@ export type BarchartProps<T extends BarchartBars> = {
   height?: number;
   isLoading?: boolean;
   isError?: boolean;
+  /**
+   * Named display preset that sets a group of visual defaults at once.
+   *
+   * - `'default'` — opaque background, no grid lines, Y-axis line visible, tick marks visible.
+   * - `'modern'`  — transparent background, horizontal grid lines, no Y-axis line, no tick marks.
+   *
+   * Individual values can be overridden with `displayOptions`.
+   * Defaults to `'default'` when omitted.
+   */
+  displayPreset?: 'default' | 'modern';
+  /**
+   * Fine-grained overrides applied on top of the active `displayPreset`.
+   * Only the properties you specify are overridden; the rest come from the preset.
+   */
+  displayOptions?: BarchartDisplayOptions;
 };
 
 /* ---------------------------------- MAIN COMPONENT ---------------------------------- */
@@ -109,7 +139,16 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     rightTitle,
     isLoading,
     isError,
+    displayPreset = 'default',
+    displayOptions,
   } = props;
+
+  const presetOptions = BARCHART_PRESETS[displayPreset];
+  const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
+  const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
+  const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+  const resolvedNoTickLine = displayOptions?.noTickLine ?? presetOptions.noTickLine;
+  const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
 
   // Create colorSet from ChartLegendWrapper
   const colorSet = useMemo(
@@ -174,12 +213,13 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
           barCategoryGap={type.type === 'category' ? type.gap : undefined}
         >
           <CartesianGrid
-            vertical={true}
+            vertical={resolvedShowHorizontalGridLines ? false : true}
             horizontal={true}
-            verticalPoints={[0]}
-            horizontalPoints={[0]}
+            {...(!resolvedShowHorizontalGridLines ? { verticalPoints: [0], horizontalPoints: [0] } : {})}
             stroke={theme.border}
-            fill={theme.backgroundLevel4}
+            strokeOpacity={resolvedShowHorizontalGridLines ? 0.4 : 1}
+            syncWithTicks={resolvedShowHorizontalGridLines}
+            fill={resolvedNoBackground ? 'transparent' : theme.backgroundLevel4}
             strokeWidth={1}
           />
           {rechartsBars.map((bar) => {
@@ -203,7 +243,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             domain={[0, topDomain]}
             ticks={getTicks(roundReferenceValue, false)}
             tickFormatter={tickFormatter}
-            axisLine={{ stroke: theme.border }}
+            axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
+            tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
             tick={{
               fill: theme.textSecondary,
               fontSize: fontSize.smaller,
@@ -223,12 +264,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             type="category"
             interval={0}
             allowDataOverflow={true}
-            tickLine={{
-              stroke: theme.border,
-            }}
-            axisLine={{
-              stroke: theme.border,
-            }}
+            tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
+            axisLine={{ stroke: theme.border }}
           />
 
           <Tooltip
@@ -252,12 +289,14 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
   return (
     <Stack direction="vertical" style={{ gap: '0' }}>
-      <ChartHeader
-        title={titleWithUnit}
-        secondaryTitle={secondaryTitle}
-        helpTooltip={helpTooltip}
-        rightTitle={rightTitle}
-      />
+      {!resolvedNoHeader && (
+        <ChartHeader
+          title={titleWithUnit}
+          secondaryTitle={secondaryTitle}
+          helpTooltip={helpTooltip}
+          rightTitle={rightTitle}
+        />
+      )}
       {renderChartContent()}
     </Stack>
   );

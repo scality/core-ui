@@ -986,6 +986,91 @@ export const Histogram: Story = {
   },
 };
 
+export const ModernPreset: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const data = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 25],
+          ['category2', 40],
+          ['category3', 35],
+          ['category4', 28],
+          ['category5', 47],
+        ],
+      },
+      {
+        label: 'Failed',
+        data: [
+          ['category1', 8],
+          ['category2', 12],
+          ['category3', 6],
+          ['category4', 15],
+          ['category5', 9],
+        ],
+      },
+    ] as const;
+    return (
+      <Stack direction="vertical" gap="r24" style={{ width: '600px' }}>
+        <div
+          style={{
+            padding: spacing.r16,
+            borderRadius: spacing.r8,
+            backgroundColor: theme.backgroundLevel2,
+          }}
+        >
+          <Text variant="Large">Default preset</Text>
+          <ChartLegendWrapper
+            colorSet={{
+              Success: theme.statusHealthy,
+              Failed: theme.statusCritical,
+            }}
+            sortOrder="status"
+          >
+            <Stack direction="vertical" gap="r16">
+              <Barchart
+                type={{ type: 'category' }}
+                bars={data}
+                title="Operations"
+                displayPreset="default"
+              />
+              <ChartLegend shape="rectangle" direction="horizontal" />
+            </Stack>
+          </ChartLegendWrapper>
+        </div>
+
+        <div
+          style={{
+            padding: spacing.r16,
+            borderRadius: spacing.r8,
+            backgroundColor: theme.backgroundLevel2,
+          }}
+        >
+          <Text variant="Large">Modern preset</Text>
+          <ChartLegendWrapper
+            colorSet={{
+              Success: theme.statusHealthy,
+              Failed: theme.statusCritical,
+            }}
+            sortOrder="status"
+          >
+            <Stack direction="vertical" gap="r16">
+              <Barchart
+                type={{ type: 'category' }}
+                bars={data}
+                title="Operations"
+                displayPreset="modern"
+              />
+              <ChartLegend shape="rectangle" direction="horizontal" />
+            </Stack>
+          </ChartLegendWrapper>
+        </div>
+      </Stack>
+    );
+  },
+};
+
 export const StackedHistogram: Story = {
   render: () => {
     const histogramData = [

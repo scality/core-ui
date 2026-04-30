@@ -66,6 +66,7 @@ export function LineTimeSerieChart({
   const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
   const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
   const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+  const resolvedNoTickLine = displayOptions?.noTickLine ?? presetOptions.noTickLine;
 
   const theme = useTheme();
   const chartRef = useRef(null);
@@ -178,6 +179,7 @@ export function LineTimeSerieChart({
             }
             allowDataOverflow={true}
             axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
+            tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
             tick={{
               fill: theme.textSecondary,
               fontSize: fontSize.smaller,
