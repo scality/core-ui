@@ -9,7 +9,7 @@ import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Text } from '../src/lib/components/text/Text.component';
 import { Wrapper as StoryWrapper } from './common';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
 const Wrapper = styled.div`
   display: flex;

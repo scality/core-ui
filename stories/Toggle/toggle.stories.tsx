@@ -3,8 +3,8 @@ import {
   Props,
   Toggle,
 } from '../../src/lib/components/toggle/Toggle.component';
-import { useArgs } from '@storybook/preview-api';
-import { Meta, StoryObj } from '@storybook/react';
+import { useArgs } from 'storybook/preview-api';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 type Story = StoryObj<Props>;
 const meta: Meta = {

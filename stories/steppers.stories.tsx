@@ -1,6 +1,6 @@
 import React from 'react';
 import { Steppers } from '../src/lib/components/steppers/Steppers.component';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 const steps = [
   {

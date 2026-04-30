@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { SearchInput } from '../../src/lib/components/searchinput/SearchInput.component';
 import { Wrapper, Title } from '../common';
 export default {

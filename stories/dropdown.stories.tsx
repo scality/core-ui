@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import React from 'react';
 import { Icon } from '../src/lib';
 import { Dropdown } from '../src/lib/components/dropdown/Dropdown.component';

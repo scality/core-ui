@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
 import { useTheme } from 'styled-components';
 import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.component';

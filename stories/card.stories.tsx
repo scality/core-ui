@@ -9,7 +9,7 @@ import {
 import { CircularProgressBar } from '../src/lib/components/circularprogressbar/CircularProgressBar.component';
 import { Text } from './common';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 // RGB color in theme provoke an error, excludes from control options
 const colors = Object.keys(coreUIAvailableThemes.darkRebrand).filter(

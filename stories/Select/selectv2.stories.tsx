@@ -4,8 +4,8 @@ import { Icon } from '../../src/lib/components/icon/Icon.component';
 import { Modal } from '../../src/lib/components/modal/Modal.component';
 import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { Wrapper } from '../common';
-import { Meta, StoryObj } from '@storybook/react';
-import { useArgs } from '@storybook/preview-api';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { useArgs } from 'storybook/preview-api';
 
 type SelectStory = StoryObj<typeof Select>;
 const meta: Meta<typeof Select> = {

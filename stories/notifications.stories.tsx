@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Notifications } from '../src/lib/components/notifications/Notifications.component';
 import { Props } from '../src/lib/components/notifications/Notification.component';
 import { Wrapper } from './common';

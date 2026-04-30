@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
 import { Sparkline } from '../src/lib/components/charts';
 import { lineColor5, lineColor6 } from '../src/lib/style/theme';
