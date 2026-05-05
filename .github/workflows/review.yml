@@ -1,0 +1,10 @@
+name: Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    uses: scality/workflows/.github/workflows/claude-code-review.yml@v2
+    secrets: inherit
