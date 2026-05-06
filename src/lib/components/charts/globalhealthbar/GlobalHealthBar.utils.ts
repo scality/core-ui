@@ -28,6 +28,7 @@ export const TIME_CONSTANTS = {
 
 export const LABEL_CONFIG = {
   MIN_SPACE_PER_TICK: 80,
+  MIN_SPACE_PER_TICK_LONG_FORMAT: 120,
   MODULO_CONFIG: {
     [TIME_CONSTANTS.ONE_WEEK]: 2,
     [TIME_CONSTANTS.ONE_DAY]: 3,
@@ -130,8 +131,11 @@ export const calculateLabelVisibility = (
   index: number,
   endTimestamp: number,
 ): boolean => {
-  const hasEnoughSpace =
-    chartWidth / totalTicks > LABEL_CONFIG.MIN_SPACE_PER_TICK;
+  const minSpacePerTick =
+    span === TIME_CONSTANTS.ONE_WEEK
+      ? LABEL_CONFIG.MIN_SPACE_PER_TICK_LONG_FORMAT
+      : LABEL_CONFIG.MIN_SPACE_PER_TICK;
+  const hasEnoughSpace = chartWidth / totalTicks > minSpacePerTick;
 
   // If enough space, show all labels
   if (hasEnoughSpace) return true;
