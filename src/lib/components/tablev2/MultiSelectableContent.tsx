@@ -1,4 +1,4 @@
-import { useEffect, memo, CSSProperties } from 'react';
+import { useEffect, useState, memo, CSSProperties } from 'react';
 import { Row } from 'react-table';
 import { areEqual } from 'react-window';
 import { useTableContext } from './Tablev2.component';
@@ -86,6 +86,11 @@ export const MultiSelectableContent = <
     });
   }, [setHiddenColumns]);
 
+  // Tracks the row most recently activated via `onSingleRowSelected` (e.g. for
+  // a detail panel). Kept separate from react-table's `selectedRowIds` so that
+  // viewing a row does not mark it as checkbox-selected for bulk operations.
+  const [activeRowId, setActiveRowId] = useState<string | null>(null);
+
   const handleMultipleSelectedRows = (
     selectedRowIds,
     rows,
@@ -136,7 +141,7 @@ export const MultiSelectableContent = <
         ? () => {
             onSingleRowSelected(row);
             toggleAllRowsSelected(false);
-            row.toggleRowSelected(true);
+            setActiveRowId(row.id);
           }
         : () => handleMultipleSelectedRows(selectedRowIds, rows, row, index),
     };
@@ -144,7 +149,7 @@ export const MultiSelectableContent = <
     return (
       <TableRowMultiSelectable
         {...rowProps}
-        isSelected={row.isSelected}
+        isSelected={row.isSelected || activeRowId === row.id}
         separationLineVariant={separationLineVariant}
         className="tr"
       >
