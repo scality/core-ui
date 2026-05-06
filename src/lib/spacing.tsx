@@ -35,7 +35,7 @@ export const spacing = {
 
 const HSeparator = styled.div`
   background: ${(props) => props.theme.border};
-  width: ${spacing.r1};
+  width: 1px;
   align-self: stretch;
   flex-shrink: 0;
   margin: ${spacing.r12} 0px;
