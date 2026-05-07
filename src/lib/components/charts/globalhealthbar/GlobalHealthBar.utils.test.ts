@@ -207,6 +207,25 @@ describe('Health Bar Utils', () => {
         expect(visible).toBe(true);
       });
 
+      it('should apply week span thinning when space per tick is between 80 and 120px', () => {
+        // 7-day labels use long format (~100px wide); 700/7=100px passes the old 80px
+        // threshold but not the 120px threshold required for the long format
+        const chartWidth = 700;
+        const totalTicks = 7;
+        const span = TIME_CONSTANTS.ONE_WEEK;
+        const endTimestamp = Date.now();
+
+        expect(
+          calculateLabelVisibility(chartWidth, totalTicks, span, 0, endTimestamp),
+        ).toBe(true);
+        expect(
+          calculateLabelVisibility(chartWidth, totalTicks, span, 1, endTimestamp),
+        ).toBe(false);
+        expect(
+          calculateLabelVisibility(chartWidth, totalTicks, span, 2, endTimestamp),
+        ).toBe(true);
+      });
+
       it('should apply week span rules when space is limited', () => {
         const chartWidth = 200;
         const totalTicks = 7;
