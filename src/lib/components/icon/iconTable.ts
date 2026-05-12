@@ -85,6 +85,7 @@ export const iconTable = {
   'Angle-right': 'fas faAngleRight',
   'Angle-double-right': 'fas faAnglesRight',
   Language: 'fas faLanguage',
+  LayerGroup: 'fas faLayerGroup',
   Theme: 'fas faPalette',
   Documentation: 'fas faClipboardList',
   Support: 'fas faComments',
