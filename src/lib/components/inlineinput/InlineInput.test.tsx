@@ -5,7 +5,6 @@ import {
   useMutation,
   UseMutationResult,
 } from 'react-query';
-import { ToastProvider } from '../toast/ToastProvider';
 import {
   act,
   render,
@@ -19,13 +18,11 @@ import { InlineInput } from './InlineInput';
 const queryClient = new QueryClient();
 const Wrapper = ({ children }: PropsWithChildren<{}>) => {
   return (
-    <ToastProvider>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </ToastProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
-const ChangeMutationProvider = ({
+const MutationProvider = ({
   onChange,
   children,
 }: {
@@ -47,171 +44,333 @@ const ChangeMutationProvider = ({
   return <>{children({ changeMutation })}</>;
 };
 
-const selectors = {
-  confirmationModal: () => screen.getByRole('dialog', { name: /Confirm/i }),
+const renderInlineInput = (
+  ui: (args: {
+    changeMutation: UseMutationResult<unknown, unknown, { value: string }>;
+  }) => JSX.Element,
+  onChange: jest.Mock = jest.fn(),
+) => {
+  render(
+    <MutationProvider onChange={onChange}>
+      {({ changeMutation }) => ui({ changeMutation })}
+    </MutationProvider>,
+    { wrapper: Wrapper },
+  );
+  return { onChange };
+};
+
+const openEditMode = async (currentValue = 'test') => {
+  await userEvent.click(screen.getByRole('button', { name: /edit/i }));
+  // input renders once isEditing becomes true
+  await waitFor(() =>
+    expect(screen.getByRole('textbox')).toHaveValue(currentValue),
+  );
+};
+
+const typeNewValue = async (newValue: string) => {
+  const input = screen.getByRole('textbox');
+  await userEvent.clear(input);
+  await userEvent.type(input, newValue);
 };
 
 describe('InlineInput', () => {
-  describe('when the user clicks accepts the edit', () => {
-    test('without confirmation modal', async () => {
-      //S
+  it('renders the current value as a trigger in view mode', () => {
+    renderInlineInput(({ changeMutation }) => (
+      <InlineInput
+        id="test"
+        defaultValue="test"
+        changeMutation={changeMutation}
+      />
+    ));
+    expect(screen.getByRole('button', { name: /edit/i })).toHaveTextContent(
+      'test',
+    );
+    expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+  });
+
+  describe('submitting', () => {
+    it('commits the new value on Enter (no modal)', async () => {
       const mock = jest.fn();
-      render(
-        <ChangeMutationProvider onChange={mock}>
-          {({ changeMutation }) => (
-            <InlineInput
-              id="test"
-              defaultValue={'test'}
-              changeMutation={changeMutation}
-            />
-          )}
-        </ChangeMutationProvider>,
-        { wrapper: Wrapper },
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+          />
+        ),
+        mock,
       );
-      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
-      //E
-      /// First focus the edit button
-      await userEvent.tab();
-      /// Then press enter to edit the input
-      await act(() => userEvent.keyboard('{enter}'));
-      /// Then type a new value
-      await act(() => userEvent.type(document.activeElement!, 'new value'));
-      /// Then press enter to confirm the new value
-      await act(() => userEvent.keyboard('{enter}'));
-      await waitFor(() => screen.findByText('testnew value'));
-      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+      await openEditMode('test');
+      await typeNewValue('new value');
+      await act(() => userEvent.keyboard('{Enter}'));
 
-      //V
-      expect(mock).toHaveBeenCalledWith('testnew value');
+      await waitFor(() =>
+        expect(screen.queryByRole('textbox')).not.toBeInTheDocument(),
+      );
+      expect(mock).toHaveBeenCalledWith('new value');
       expect(mock).toHaveBeenCalledTimes(1);
-      expect(screen.getByText('testnew value')).toBeInTheDocument();
     });
 
-    test('with confirmation modal', async () => {
-      //S
+    it('commits the new value on blur when value changed', async () => {
       const mock = jest.fn();
-      render(
-        <ChangeMutationProvider onChange={mock}>
-          {({ changeMutation }) => (
-            <InlineInput
-              id="test"
-              defaultValue={'test'}
-              changeMutation={changeMutation}
-              confirmationModal={{
-                title: <div>Confirm</div>,
-                body: <div>Are you sure?</div>,
-              }}
-            />
-          )}
-        </ChangeMutationProvider>,
-        { wrapper: Wrapper },
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+          />
+        ),
+        mock,
       );
-      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
-      //E
-      /// First focus the edit button
+      await openEditMode('test');
+      await typeNewValue('renamed');
       await userEvent.tab();
-      /// Then press enter to edit the input
-      await act(() => userEvent.keyboard('{enter}'));
-      /// Then type a new value
-      await act(() => userEvent.type(document.activeElement!, 'new value'));
-      /// Then press enter to confirm the new value
-      
-      await act(() => userEvent.keyboard('{enter}'));
-      await waitFor(() => screen.findByRole('dialog', { name: /Confirm/i }));
-      /// Expect the confirmation modal to be opened
-      expect(selectors.confirmationModal()).toBeInTheDocument()
-      /// Click the confirm button
-      await act(() => userEvent.click(screen.getByRole('button', { name: /confirm/i })));
 
-      /// modal should be closed
-      expect(screen.queryByRole('dialog', { name: /Confirm/i })).not.toBeInTheDocument();
+      await waitFor(() => expect(mock).toHaveBeenCalledWith('renamed'));
+    });
 
-      //V
-      expect(mock).toHaveBeenCalledWith('testnew value');
-      expect(mock).toHaveBeenCalledTimes(1);
-      expect(screen.getByText('testnew value')).toBeInTheDocument();
+    it('does not commit on blur when value is unchanged', async () => {
+      const mock = jest.fn();
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+          />
+        ),
+        mock,
+      );
+
+      await openEditMode('test');
+      await userEvent.tab();
+
+      expect(mock).not.toHaveBeenCalled();
+      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
     });
   });
 
-  describe('when the user clicks reset the edit', () => {
-    test('without confirmation modal', async () => {
-      //S
+  describe('cancelling', () => {
+    it('reverts to the original value on Escape', async () => {
       const mock = jest.fn();
-      render(
-        <ChangeMutationProvider onChange={mock}>
-          {({ changeMutation }) => (
-            <InlineInput
-              id="test"
-              defaultValue={'test'}
-              changeMutation={changeMutation}
-            />
-          )}
-        </ChangeMutationProvider>,
-        { wrapper: Wrapper },
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+          />
+        ),
+        mock,
       );
-      await waitFor(() => screen.findByRole('img', { hidden: true }));
 
-      //E
-      /// First focus the edit button
-      await userEvent.tab();
-      /// Then press enter to edit the input
-      await act(() => userEvent.keyboard('{enter}'));
-      /// Then type a new value
-      await act(() => userEvent.type(document.activeElement!, 'new value'));
-      /// Then press escape to cancel the new value
-      await act(() => userEvent.keyboard('{esc}'));
+      await openEditMode('test');
+      await typeNewValue('new value');
+      await act(() => userEvent.keyboard('{Escape}'));
 
-      //V
       expect(mock).not.toHaveBeenCalled();
-      expect(screen.getByText('test')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /edit/i })).toHaveTextContent(
+        'test',
+      );
     });
-    test('with confirmation modal', async () => {
-      //S
+  });
+
+  describe('validation', () => {
+    it('shows an error and blocks submit when check returns hasError', async () => {
       const mock = jest.fn();
-      render(
-        <ChangeMutationProvider onChange={mock}>
-          {({ changeMutation }) => (
-            <InlineInput
-              id="test"
-              defaultValue={'test'}
-              changeMutation={changeMutation}
-              confirmationModal={{
-                title: <div>Confirm</div>,
-                body: <div>Are you sure?</div>,
-              }}
-            />
-          )}
-        </ChangeMutationProvider>,
-        { wrapper: Wrapper },
-      );
-      await waitFor(() => screen.findByRole('img', { hidden: true }));
-
-      //E
-      /// First focus the edit button
-      await userEvent.tab();
-      /// Then press enter to edit the input
-      await act(() => userEvent.keyboard('{enter}'));
-      /// Then type a new value
-      await act(() => userEvent.type(document.activeElement!, 'new value'));
-      /// Then press enter to confirm the new value
-      await act(() => userEvent.keyboard('{enter}'));
-      /// Expect the confirmation modal to be opened
-      await waitFor(() =>
-        expect(selectors.confirmationModal()).toBeInTheDocument(),
-      );
-      /// Click the cancel button
-      await userEvent.click(
-        within(selectors.confirmationModal()).getByRole('button', {
-          name: /Cancel/i,
-        }),
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+            check={(value) =>
+              value.length < 3
+                ? { hasError: true, message: 'Too short' }
+                : { hasError: false }
+            }
+          />
+        ),
+        mock,
       );
 
-      //V
+      await openEditMode('test');
+      await typeNewValue('ab');
+      expect(screen.getByText('Too short')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
+
+      await act(() => userEvent.keyboard('{Enter}'));
       expect(mock).not.toHaveBeenCalled();
       expect(screen.getByRole('textbox')).toBeInTheDocument();
-      expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('testnew value');
+    });
+
+    it('renders the error as an alert chip when helperTextPlacement is "bottom"', async () => {
+      renderInlineInput(({ changeMutation }) => (
+        <InlineInput
+          id="test"
+          defaultValue="test"
+          changeMutation={changeMutation}
+          helperTextPlacement="bottom"
+          check={(value) =>
+            value.length < 3
+              ? { hasError: true, message: 'Too short' }
+              : { hasError: false }
+          }
+        />
+      ));
+
+      await openEditMode('test');
+      await typeNewValue('ab');
+
+      const alert = screen.getByRole('alert');
+      expect(alert).toHaveTextContent('Too short');
+      expect(alert).toHaveAttribute('id', 'test-error');
+    });
+
+    it('does not render an alert role for the default "right" placement', async () => {
+      renderInlineInput(({ changeMutation }) => (
+        <InlineInput
+          id="test"
+          defaultValue="test"
+          changeMutation={changeMutation}
+          check={(value) =>
+            value.length < 3
+              ? { hasError: true, message: 'Too short' }
+              : { hasError: false }
+          }
+        />
+      ));
+
+      await openEditMode('test');
+      await typeNewValue('ab');
+
+      expect(screen.getByText('Too short')).toBeInTheDocument();
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('confirmation modal', () => {
+    const renderConfirm = ({ pendingValue, isOpen, onConfirm, onCancel }: {
+      pendingValue: string;
+      isOpen: boolean;
+      onConfirm: () => void;
+      onCancel: () => void;
+    }) =>
+      isOpen ? (
+        <div role="dialog" aria-label="Confirm">
+          <p>Rename to {pendingValue}?</p>
+          <button onClick={onCancel}>Cancel</button>
+          <button onClick={onConfirm}>Confirm</button>
+        </div>
+      ) : null;
+
+    it('opens the modal on submit and calls mutate on Confirm', async () => {
+      const mock = jest.fn();
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+            confirmationModal={(args) =>
+              renderConfirm({
+                pendingValue: args.pendingValue,
+                isOpen: args.isOpen,
+                onConfirm: args.onConfirm,
+                onCancel: args.onCancel,
+              })
+            }
+          />
+        ),
+        mock,
+      );
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      const modal = await screen.findByRole('dialog', { name: /confirm/i });
+      expect(modal).toHaveTextContent('Rename to renamed?');
+      expect(mock).not.toHaveBeenCalled();
+
+      await userEvent.click(within(modal).getByRole('button', { name: /confirm/i }));
+
+      await waitFor(() => expect(mock).toHaveBeenCalledWith('renamed'));
+      expect(
+        screen.queryByRole('dialog', { name: /confirm/i }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('closes the modal without mutating on Cancel', async () => {
+      const mock = jest.fn();
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+            confirmationModal={(args) =>
+              renderConfirm({
+                pendingValue: args.pendingValue,
+                isOpen: args.isOpen,
+                onConfirm: args.onConfirm,
+                onCancel: args.onCancel,
+              })
+            }
+          />
+        ),
+        mock,
+      );
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      const modal = await screen.findByRole('dialog', { name: /confirm/i });
+      await userEvent.click(within(modal).getByRole('button', { name: /cancel/i }));
+
+      expect(mock).not.toHaveBeenCalled();
+      expect(
+        screen.queryByRole('dialog', { name: /confirm/i }),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('loading state', () => {
+    it('disables the trigger while the mutation is loading', () => {
+      const loadingMutation = {
+        isLoading: true,
+        isError: false,
+        isSuccess: false,
+        isIdle: false,
+        status: 'loading',
+        error: null,
+        mutate: jest.fn(),
+        mutateAsync: jest.fn(),
+        reset: jest.fn(),
+        data: undefined,
+        variables: undefined,
+        context: undefined,
+        failureCount: 0,
+        failureReason: null,
+        isPaused: false,
+      } as unknown as UseMutationResult<unknown, unknown, { value: string }>;
+
+      render(
+        <InlineInput
+          id="test"
+          defaultValue="test"
+          changeMutation={loadingMutation}
+        />,
+        { wrapper: Wrapper },
+      );
+
+      const trigger = screen.getByLabelText(/edit/i);
+      expect(trigger).toHaveAttribute('data-disabled', 'true');
     });
   });
 });
