@@ -29,7 +29,6 @@ import { convertSizeToRem } from '../inputv2/inputv2';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import ReactSelect from 'react-select/src/Select';
 
-const ITEMS_PER_SCROLL_WINDOW = 4;
 // more/equal than NOPT_SEARCH options enable search
 const NOPT_SEARCH = 8;
 export type OptionProps = {
@@ -236,6 +235,7 @@ const MenuList = (props) => {
   const listRef = useRef<FixedSizeList<any> | null>(null);
   const { children, getValue } = props;
   const [selectedOption] = getValue();
+  const { itemsPerScrollWindow } = props.selectProps;
   const optionHeight =
     convertRemToPixels(
       parseFloat(props.selectProps.isDefault ? spacing.r40 : spacing.r24),
@@ -253,7 +253,7 @@ const MenuList = (props) => {
   }
 
   const initialOffset =
-    selectedIndex * optionHeight - (ITEMS_PER_SCROLL_WINDOW - 1) * optionHeight;
+    selectedIndex * optionHeight - (itemsPerScrollWindow - 1) * optionHeight;
   useEffect(() => {
     if (listRef && listRef.current) {
       listRef.current.scrollTo(
@@ -267,13 +267,13 @@ const MenuList = (props) => {
     }
   }, [children.length, focusedIndex, optionHeight, listRef]);
 
-  if (children.length > ITEMS_PER_SCROLL_WINDOW) {
+  if (children.length > itemsPerScrollWindow) {
     return (
       // @ts-ignore
       <List
         ref={listRef}
         className="sc-select__menu-list"
-        height={optionHeight * ITEMS_PER_SCROLL_WINDOW + optionHeight / 2}
+        height={optionHeight * itemsPerScrollWindow + optionHeight / 2}
         itemCount={children.length}
         itemSize={optionHeight}
         initialScrollOffset={initialOffset}
@@ -349,6 +349,10 @@ export type SelectProps = {
   className?: string;
   /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
+  /** number of items visible before the option list becomes scrollable
+   * @default 4
+   */
+  itemsPerScrollWindow?: number;
 };
 
 type SelectOptionProps = {
@@ -390,6 +394,7 @@ function SelectBox<
   size = '1',
   id,
   selectRef,
+  itemsPerScrollWindow = 4,
   ...rest
 }: SelectProps & {
   selectRef?: Ref<SelectRef<OptionType, IsMulti, GroupType>>;
@@ -526,7 +531,7 @@ function SelectBox<
               IndicatorSeparator: null,
             }}
             isDefault={isDefaultVariant}
-            ITEMS_PER_SCROLL_WINDOW={ITEMS_PER_SCROLL_WINDOW}
+            itemsPerScrollWindow={itemsPerScrollWindow}
             onChange={handleChange}
             onInputChange={handleSearchInput}
             ref={internalSelectRef}

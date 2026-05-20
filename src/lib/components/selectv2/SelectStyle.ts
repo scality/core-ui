@@ -156,10 +156,10 @@ const SelectStyle = styled(Select)`
         isDefault
           ? `
         max-height: calc(${spacing.r32} * ${(props) =>
-              props.ITEMS_PER_SCROLL_WINDOW} + ${spacing.r32} / 2);`
+              props.itemsPerScrollWindow} + ${spacing.r32} / 2);`
           : `
         max-height: calc(${spacing.r24} * ${(props) =>
-              props.ITEMS_PER_SCROLL_WINDOW} + ${spacing.r24} / 2);`}
+              props.itemsPerScrollWindow} + ${spacing.r24} / 2);`}
 
       .sc-select__menu-notice {
         color: ${({ isDefault }) =>
