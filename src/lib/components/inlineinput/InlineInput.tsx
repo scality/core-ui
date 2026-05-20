@@ -62,12 +62,12 @@ const NameTrigger = styled.span`
     border-color: ${(props) => props.theme.infoPrimary};
   }
 
-  &[data-disabled='true'] {
+  &[aria-disabled='true'] {
     opacity: 0.6;
     cursor: not-allowed;
   }
 
-  &:not([data-disabled='true']):hover {
+  &:not([aria-disabled='true']):hover {
     transition-delay: 150ms;
     border-color: ${(props) => props.theme.infoPrimary};
     background: ${(props) => props.theme.highlight};
@@ -121,11 +121,10 @@ export const InlineInput = ({
 
   useEffect(() => {
     if (isEditing) {
-      setPendingValue(defaultValue);
       inputRef.current?.focus();
       inputRef.current?.select();
     }
-  }, [isEditing, defaultValue]);
+  }, [isEditing]);
 
   const closeAndReset = () => {
     setIsEditing(false);
@@ -186,6 +185,7 @@ export const InlineInput = ({
     if (isLoading || isModalOpen) {
       return;
     }
+    setPendingValue(defaultValue);
     setIsEditing(true);
   };
 
@@ -262,9 +262,10 @@ export const InlineInput = ({
         overlay={isLoading ? loadingTooltip : editTooltip}
       >
         <NameTrigger
-          data-disabled={isLoading || isModalOpen ? 'true' : undefined}
-          role={isLoading ? undefined : 'button'}
-          tabIndex={isLoading ? -1 : 0}
+          role="button"
+          aria-disabled={isLoading || isModalOpen}
+          aria-busy={isLoading}
+          tabIndex={isLoading || isModalOpen ? -1 : 0}
           aria-label={editTooltip}
           onClick={handleEditStart}
           onKeyDown={handleTriggerKeyDown}

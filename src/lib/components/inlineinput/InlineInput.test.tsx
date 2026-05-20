@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import {
   QueryClient,
   QueryClientProvider,
@@ -537,7 +537,65 @@ describe('InlineInput', () => {
       );
 
       const trigger = screen.getByLabelText(/edit/i);
-      expect(trigger).toHaveAttribute('data-disabled', 'true');
+      expect(trigger).toHaveAttribute('aria-disabled', 'true');
+      expect(trigger).toHaveAttribute('aria-busy', 'true');
+      expect(trigger).toHaveAttribute('role', 'button');
+    });
+
+    it('marks the trigger as aria-disabled while the confirmation modal is open', async () => {
+      renderInlineInput(({ changeMutation }) => (
+        <InlineInput
+          id="test"
+          defaultValue="test"
+          changeMutation={changeMutation}
+          confirmationModal={({ isOpen }) =>
+            isOpen ? <div role="dialog" aria-label="Confirm" /> : null
+          }
+        />
+      ));
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      await screen.findByRole('dialog', { name: /confirm/i });
+      const trigger = screen.getByLabelText(/edit/i);
+      expect(trigger).toHaveAttribute('role', 'button');
+      expect(trigger).toHaveAttribute('aria-disabled', 'true');
+    });
+  });
+
+  describe('external defaultValue updates', () => {
+    it('does not overwrite the user input mid-edit when defaultValue changes', async () => {
+      const Harness = () => {
+        const [defaultValue, setDefaultValue] = useState('initial');
+        const changeMutation = useMutation<unknown, unknown, { value: string }>(
+          {
+            mutationFn: () => Promise.resolve(null),
+          },
+        );
+        return (
+          <>
+            <button onClick={() => setDefaultValue('server-update')}>
+              update
+            </button>
+            <InlineInput
+              id="test"
+              defaultValue={defaultValue}
+              changeMutation={changeMutation}
+            />
+          </>
+        );
+      };
+
+      render(<Harness />, { wrapper: Wrapper });
+
+      await openEditMode('initial');
+      await typeNewValue('user typing');
+
+      await userEvent.click(screen.getByRole('button', { name: 'update' }));
+
+      expect(screen.getByRole('textbox')).toHaveValue('user typing');
     });
   });
 });
