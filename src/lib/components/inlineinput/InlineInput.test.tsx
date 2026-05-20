@@ -13,12 +13,21 @@ import {
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
+import { coreUIAvailableThemes } from '../../style/theme';
+import { ToastProvider } from '../toast/ToastProvider';
 import { InlineInput } from './InlineInput';
 
 const queryClient = new QueryClient();
 const Wrapper = ({ children }: PropsWithChildren<{}>) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <CoreUiThemeProvider theme={coreUIAvailableThemes.darkRebrand}>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </ToastProvider>
+    </CoreUiThemeProvider>
   );
 };
 
@@ -337,6 +346,164 @@ describe('InlineInput', () => {
       expect(
         screen.queryByRole('dialog', { name: /confirm/i }),
       ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('review fixes', () => {
+    it('shows a toast when the mutation fails (no modal)', async () => {
+      const FailingMutationProvider = ({
+        children,
+      }: {
+        children: ({
+          changeMutation,
+        }: {
+          changeMutation: UseMutationResult<unknown, Error, { value: string }>;
+        }) => JSX.Element;
+      }) => {
+        const changeMutation = useMutation<unknown, Error, { value: string }>({
+          mutationFn: () => Promise.reject(new Error('boom')),
+        });
+        return <>{children({ changeMutation })}</>;
+      };
+
+      render(
+        <FailingMutationProvider>
+          {({ changeMutation }) => (
+            <InlineInput
+              id="test"
+              defaultValue="test"
+              changeMutation={
+                changeMutation as unknown as UseMutationResult<
+                  unknown,
+                  unknown,
+                  { value: string }
+                >
+              }
+            />
+          )}
+        </FailingMutationProvider>,
+        { wrapper: Wrapper },
+      );
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      const toast = await screen.findByRole('status');
+      expect(toast).toHaveTextContent(
+        'An error occurred while updating the value',
+      );
+    });
+
+    it('submit follows the visible validation state (uses pendingValue, not trimmed)', async () => {
+      const mock = jest.fn();
+      renderInlineInput(
+        ({ changeMutation }) => (
+          <InlineInput
+            id="test"
+            defaultValue="test"
+            changeMutation={changeMutation}
+            check={(value) =>
+              value.length < 3
+                ? { hasError: true, message: 'Too short' }
+                : { hasError: false }
+            }
+          />
+        ),
+        mock,
+      );
+
+      await openEditMode('test');
+      // pendingValue " ab " (length 4) → no visible error → submit must proceed
+      await typeNewValue(' ab ');
+      expect(screen.queryByText('Too short')).not.toBeInTheDocument();
+
+      await act(() => userEvent.keyboard('{Enter}'));
+      await waitFor(() => expect(mock).toHaveBeenCalledWith('ab'));
+    });
+
+    it('does not submit on blur while a mutation is in flight', async () => {
+      let resolveMutation: (() => void) | undefined;
+      const mock = jest.fn();
+      const SlowMutationProvider = ({
+        children,
+      }: {
+        children: ({
+          changeMutation,
+        }: {
+          changeMutation: UseMutationResult<unknown, unknown, { value: string }>;
+        }) => JSX.Element;
+      }) => {
+        const changeMutation = useMutation<unknown, unknown, { value: string }>(
+          {
+            mutationFn: ({ value }) => {
+              mock(value);
+              return new Promise<void>((resolve) => {
+                resolveMutation = resolve;
+              });
+            },
+          },
+        );
+        return <>{children({ changeMutation })}</>;
+      };
+
+      render(
+        <SlowMutationProvider>
+          {({ changeMutation }) => (
+            <InlineInput
+              id="test"
+              defaultValue="test"
+              changeMutation={changeMutation}
+            />
+          )}
+        </SlowMutationProvider>,
+        { wrapper: Wrapper },
+      );
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      // Mutation in-flight; blur the still-present input.
+      const input = screen.queryByRole('textbox');
+      if (input) {
+        await act(() => userEvent.tab());
+      }
+
+      expect(mock).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        resolveMutation?.();
+      });
+    });
+
+    it('does not enter edit mode while the confirmation modal is open', async () => {
+      renderInlineInput(({ changeMutation }) => (
+        <InlineInput
+          id="test"
+          defaultValue="test"
+          changeMutation={changeMutation}
+          confirmationModal={({ isOpen, pendingValue }) =>
+            isOpen ? (
+              <div role="dialog" aria-label="Confirm">
+                {pendingValue}
+              </div>
+            ) : null
+          }
+        />
+      ));
+
+      await openEditMode('test');
+      await typeNewValue('renamed');
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      await screen.findByRole('dialog', { name: /confirm/i });
+      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+
+      const trigger = screen.getByLabelText(/edit/i);
+      await userEvent.click(trigger);
+
+      expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
     });
   });
 

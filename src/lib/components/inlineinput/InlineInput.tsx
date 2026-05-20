@@ -11,6 +11,7 @@ import { spacing, Stack } from '../../spacing';
 import { Input, InputProps } from '../inputv2/inputv2';
 import { Loader } from '../loader/Loader.component';
 import { HelperText } from '../text/Text.component';
+import { useToast } from '../toast/ToastProvider';
 import { Tooltip } from '../tooltip/Tooltip.component';
 
 type InlineInputForm = { value: string };
@@ -112,6 +113,7 @@ export const InlineInput = ({
   const [pendingValue, setPendingValue] = useState(defaultValue);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { showToast } = useToast();
 
   const isLoading = changeMutation.isLoading;
   const validation = check ? check(pendingValue) : ({ hasError: false } as const);
@@ -138,16 +140,23 @@ export const InlineInput = ({
           setIsModalOpen(false);
           setIsEditing(false);
         },
+        onError: () => {
+          showToast({
+            open: true,
+            status: 'error',
+            message: 'An error occurred while updating the value',
+          });
+        },
       },
     );
   };
 
   const submit = () => {
-    const trimmed = pendingValue.trim();
-
-    if (check && check(trimmed).hasError) {
+    if (validationError) {
       return;
     }
+
+    const trimmed = pendingValue.trim();
 
     if (trimmed === defaultValue.trim()) {
       closeAndReset();
@@ -174,7 +183,7 @@ export const InlineInput = ({
   };
 
   const handleEditStart = () => {
-    if (isLoading) {
+    if (isLoading || isModalOpen) {
       return;
     }
     setIsEditing(true);
@@ -213,7 +222,9 @@ export const InlineInput = ({
         aria-describedby={validationError ? `${id}-error` : undefined}
         onChange={(e) => setPendingValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        onBlur={submit}
+        onBlur={() => {
+          if (!isLoading) submit();
+        }}
       />
     );
     const editingContent =
