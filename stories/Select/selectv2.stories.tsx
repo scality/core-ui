@@ -98,6 +98,14 @@ export const WithScrollbar: SelectStory = {
   },
 };
 
+export const WithCustomItemsPerScrollWindow: SelectStory = {
+  name: 'Custom items per scroll window (8)',
+  args: {
+    children: optionsWithSearchBar,
+    itemsPerScrollWindow: 8,
+  },
+};
+
 export const WithSearchBar: SelectStory = {
   args: {
     children: optionsWithSearchBar,
