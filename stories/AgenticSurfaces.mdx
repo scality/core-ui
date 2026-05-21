@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="UI and agentic surfaces" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+`}</style>
+
+# UI and agentic surfaces
+
+This reflects the state of the industry in Q2 2026, as agentic tools are entering the mainstream.
+
+## The new interaction landscape
+
+UI has traditionally been the primary surface between users and software. That is changing: the graphical interface is no longer the only point of contact. It is one representation of the system's state and capabilities.
+
+### New surfaces
+
+Natural language, conversational agents, voice-to-text, and agentic workflows are becoming legitimate interaction surfaces for any system. Sometimes alongside graphical interfaces, sometimes replacing them.
+
+### Designing for autonomous systems
+
+Designing for autonomous systems means designing their behavior, their limits, and the degree of supervision the user retains over them. Components must account for the expression of intent rather than explicit navigation. 
+
+### The role of UI
+
+The UI remains valuable precisely because it represents the mental model of the systems it exposes. That representation must be accurate, legible, and trustworthy. The UI library is one tool in a broader interaction stack.
+
+## Designed for humans and tools
+
+Core UI is currently designed for humans. Extending that to tools is the direction we are building toward.
+
+### Documented intent
+
+Every component, every rule, and every constraint exists for a reason, and that reason is documented. As AI-assisted development becomes standard, a design system that communicates intent only to human readers leaves half its audience behind. Where possible, these rules are enforced through tooling like a linter.
+
+### A shared body of knowledge
+
+The design principles in this Storybook, the component guidelines, the component code, and the composition patterns, from primitives to screens, together form a body of knowledge: not just how to use the library, but why it was built the way it was. That knowledge should be accessible to an AI tool generating a new component, to a developer evaluating a design decision, and to a designer questioning a pattern.
