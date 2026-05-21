@@ -1,58 +1,143 @@
+import {
+  KeyboardEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
-import { Button } from '../buttonv2/Buttonv2.component';
-import { Icon } from '../icon/Icon.component';
-import { Input, InputProps } from '../inputv2/inputv2';
-import { Modal } from '../modal/Modal.component';
-import { useToast } from '../toast/ToastProvider';
-import { useForm } from 'react-hook-form';
 import { UseMutationResult } from 'react-query';
-import { Text } from '../text/Text.component';
-import { useState } from 'react';
-import { Stack, Wrap } from '../../spacing';
+import { spacing, Stack } from '../../spacing';
+import { Input, InputProps } from '../inputv2/inputv2';
+import { Loader } from '../loader/Loader.component';
+import { HelperText } from '../text/Text.component';
+import { useToast } from '../toast/ToastProvider';
+import { Tooltip } from '../tooltip/Tooltip.component';
 
-const UnderlinedText = styled(Text)`
-  text-decoration-line: underline;
-  text-decoration-style: dashed;
-  cursor: text;
+type InlineInputForm = { value: string };
+
+type CheckResult =
+  | { hasError: true; message: string }
+  | { hasError: false };
+
+type ConfirmationModalRenderArgs = {
+  isOpen: boolean;
+  pendingValue: string;
+  currentValue: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  isLoading: boolean;
+  error: unknown;
+};
+
+export type InlineInputProps = {
+  defaultValue?: string;
+  changeMutation: UseMutationResult<unknown, unknown, InlineInputForm, unknown>;
+  check?: (value: string) => CheckResult;
+  confirmationModal?: (args: ConfirmationModalRenderArgs) => ReactNode;
+  editTooltip?: string;
+  loadingTooltip?: string;
+  helperTextPlacement?: 'bottom' | 'right';
+} & Omit<InputProps, 'defaultValue' | 'error' | 'value' | 'onChange'>;
+
+const NameTrigger = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: ${spacing.r4};
+  box-sizing: border-box;
+  height: ${spacing.r32};
+  padding: 0 ${spacing.r8};
+  border-radius: ${spacing.r16};
+  border: 1px solid ${(props) => props.theme.border};
+  background: transparent;
+  color: ${(props) => props.theme.textPrimary};
+  font-family: 'Lato';
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+
+  &:focus-visible {
+    outline: none;
+    border-color: ${(props) => props.theme.infoPrimary};
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:not([aria-disabled='true']):hover {
+    transition-delay: 150ms;
+    border-color: ${(props) => props.theme.infoPrimary};
+    background: ${(props) => props.theme.highlight};
+  }
 `;
 
-type InlineInputForm = {
-  value: string;
-};
-type InlineInputProps = {
-  defaultValue?: string;
-  confirmationModal?: {
-    title: JSX.Element;
-    body: JSX.Element;
-  };
-  changeMutation: UseMutationResult<unknown, unknown, InlineInputForm, unknown>;
-} & InputProps;
+const InlineLoaderWrapper = styled.span`
+  display: inline-flex;
+  align-items: center;
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+`;
+
+const FloatingErrorWrapper = styled.span`
+  position: relative;
+  display: inline-flex;
+`;
+
+const FloatingErrorContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0 ${spacing.r8};
+  white-space: nowrap;
+  z-index: 1;
+`;
 
 export const InlineInput = ({
-  defaultValue,
-  confirmationModal,
+  defaultValue = '',
   changeMutation,
-  ...props
+  check,
+  confirmationModal,
+  editTooltip = 'Edit',
+  loadingTooltip = 'Saving…',
+  helperTextPlacement = 'right',
+  id,
+  ...inputProps
 }: InlineInputProps) => {
-  const { register, handleSubmit, watch, reset } = useForm<InlineInputForm>({
-    defaultValues: {
-      value: defaultValue,
-    },
-  });
-  const [isConfirmationModalOpened, setIsConfirmationModalOpened] =
-    useState(false);
-  const handleSuccess = () => {
-    setIsConfirmationModalOpened(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [pendingValue, setPendingValue] = useState(defaultValue);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { showToast } = useToast();
+
+  const isLoading = changeMutation.isLoading;
+  const validation = check ? check(pendingValue) : ({ hasError: false } as const);
+  const validationError = validation.hasError ? validation.message : undefined;
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [isEditing]);
+
+  const closeAndReset = () => {
     setIsEditing(false);
-    setIsHover(false);
+    setPendingValue(defaultValue);
   };
-  const onSubmit = (data: InlineInputForm) => {
-    if (confirmationModal) {
-      setIsConfirmationModalOpened(true);
-    } else {
-      changeMutation.mutate(data, {
+
+  const commit = (value: string) => {
+    changeMutation.mutate(
+      { value },
+      {
         onSuccess: () => {
-          handleSuccess();
+          setIsModalOpen(false);
+          setIsEditing(false);
         },
         onError: () => {
           showToast({
@@ -61,119 +146,139 @@ export const InlineInput = ({
             message: 'An error occurred while updating the value',
           });
         },
-      });
-    }
-  };
-  const { showToast } = useToast();
-  const [isHover, setIsHover] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleReset = () => {
-    reset();
-    setIsEditing(false);
-    setIsHover(false);
+      },
+    );
   };
 
-  //handle esc key to cancel editing
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      handleReset();
+  const submit = () => {
+    if (validationError) {
+      return;
+    }
+
+    const trimmed = pendingValue.trim();
+
+    if (trimmed === defaultValue.trim()) {
+      closeAndReset();
+      return;
+    }
+
+    if (confirmationModal) {
+      setIsEditing(false);
+      setIsModalOpen(true);
+      return;
+    }
+
+    commit(trimmed);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      submit();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      closeAndReset();
     }
   };
+
+  const handleEditStart = () => {
+    if (isLoading || isModalOpen) {
+      return;
+    }
+    setPendingValue(defaultValue);
+    setIsEditing(true);
+  };
+
+  const handleTriggerKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleEditStart();
+    }
+  };
+
+  const modalNode =
+    confirmationModal &&
+    confirmationModal({
+      isOpen: isModalOpen,
+      pendingValue: pendingValue.trim(),
+      currentValue: defaultValue,
+      onConfirm: () => commit(pendingValue.trim()),
+      onCancel: () => {
+        setIsModalOpen(false);
+      },
+      isLoading,
+      error: changeMutation.error,
+    });
 
   if (isEditing) {
+    const inputNode = (
+      <Input
+        {...inputProps}
+        id={id}
+        ref={inputRef}
+        size="2/3"
+        value={pendingValue}
+        error={validationError}
+        aria-describedby={validationError ? `${id}-error` : undefined}
+        onChange={(e) => setPendingValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onBlur={() => {
+          if (!isLoading) submit();
+        }}
+      />
+    );
+    const editingContent =
+      helperTextPlacement === 'bottom' ? (
+        <FloatingErrorWrapper>
+          {inputNode}
+          {validationError && (
+            <FloatingErrorContainer id={`${id}-error`} role="alert">
+              <HelperText color="statusCritical">{validationError}</HelperText>
+            </FloatingErrorContainer>
+          )}
+        </FloatingErrorWrapper>
+      ) : (
+        <Stack direction="horizontal" gap="r8">
+          {inputNode}
+          {validationError && (
+            <HelperText id={`${id}-error`} color="statusCritical">
+              {validationError}
+            </HelperText>
+          )}
+        </Stack>
+      );
     return (
       <>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack>
-            <Input
-              {...register('value')}
-              size="1/3"
-              autoFocus
-              onKeyDown={handleKeyDown}
-              {...props}
-            />
-            <Button
-              icon={<Icon name="Close" />}
-              tooltip={{
-                overlay: 'Cancel',
-              }}
-              type="reset"
-              variant="outline"
-              onClick={handleReset}
-            />
-            <Button
-              icon={<Icon name="Check" />}
-              tooltip={{
-                overlay: 'Save',
-              }}
-              variant="primary"
-              type="submit"
-              isLoading={changeMutation.isLoading}
-            />
-          </Stack>
-        </form>
-        {confirmationModal && (
-          <Modal
-            isOpen={isConfirmationModalOpened}
-            title={confirmationModal.title}
-            footer={
-              <Wrap>
-                <p></p>
-                <Stack>
-                  <Button
-                    label="Cancel"
-                    variant="outline"
-                    onClick={() => setIsConfirmationModalOpened(false)}
-                  />
-                  <Button
-                    label="Confirm"
-                    variant="primary"
-                    isLoading={changeMutation.isLoading}
-                    onClick={() => {
-                      changeMutation.mutate(watch(), {
-                        onSuccess: () => {
-                          handleSuccess();
-                        },
-                        onError: () => {
-                          showToast({
-                            open: true,
-                            status: 'error',
-                            message:
-                              'An error occurred while updating the value',
-                          });
-                        },
-                      });
-                    }}
-                  />
-                </Stack>
-              </Wrap>
-            }
-          >
-            {confirmationModal.body}
-          </Modal>
-        )}
+        {editingContent}
+        {modalNode}
       </>
     );
   }
 
   return (
-    <Stack
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      onFocus={() => setIsHover(true)}
-      onBlur={() => setIsHover(false)}
-    >
-      <UnderlinedText>{watch('value')}</UnderlinedText>
-      <Button
-        icon={<Icon name="Pencil" />}
-        tooltip={{
-          overlay: 'Edit',
-        }}
-        variant="primary"
-        onClick={() => setIsEditing(true)}
-        style={{ opacity: !isHover ? '0' : '1' }}
-      />
-    </Stack>
+    <>
+      <Tooltip
+        placement="bottom"
+        overlay={isLoading ? loadingTooltip : editTooltip}
+      >
+        <NameTrigger
+          role="button"
+          aria-disabled={isLoading || isModalOpen}
+          aria-busy={isLoading}
+          tabIndex={isLoading || isModalOpen ? -1 : 0}
+          aria-label={editTooltip}
+          onClick={handleEditStart}
+          onKeyDown={handleTriggerKeyDown}
+        >
+          {isModalOpen ? pendingValue.trim() : defaultValue}
+          {isLoading && (
+            <InlineLoaderWrapper>
+              <Loader size="smaller" />
+            </InlineLoaderWrapper>
+          )}
+        </NameTrigger>
+      </Tooltip>
+      {modalNode}
+    </>
   );
 };
