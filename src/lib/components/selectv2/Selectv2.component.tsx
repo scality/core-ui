@@ -503,7 +503,15 @@ function SelectBox<
 
   return (
     <ScrollbarWrapper>
-      <>
+      {/* Consume Enter so react-select (which renders a real <input>) doesn't
+          trigger the browser's implicit <form> submission. display:contents
+          keeps this wrapper out of layout — no box, no width/flex impact. */}
+      <div
+        style={{ display: 'contents' }}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') event.preventDefault();
+        }}
+      >
         {options && (
           <SelectStyle
             inputId={id}
@@ -558,7 +566,7 @@ function SelectBox<
             {...rest}
           />
         )}
-      </>
+      </div>
     </ScrollbarWrapper>
   );
 }

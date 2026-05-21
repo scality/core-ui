@@ -4,7 +4,6 @@ import {
   FormHTMLAttributes,
   forwardRef,
   isValidElement,
-  KeyboardEvent,
   ReactElement,
   ReactNode,
   useContext,
@@ -272,22 +271,6 @@ const FormSection = ({
   );
 };
 
-const TEXT_INPUT_TYPES = ['text', 'search', 'url', 'tel', 'password', 'email', 'number'];
-
-const preventImplicitSubmission = (
-  event: KeyboardEvent<HTMLFormElement>,
-) => {
-  if (event.key !== 'Enter') return;
-  const target = event.target as HTMLElement;
-  const isTextInput =
-    target instanceof HTMLInputElement &&
-    TEXT_INPUT_TYPES.includes(target.type) &&
-    !target.readOnly;
-  if (!isTextInput && !(target instanceof HTMLButtonElement)) {
-    event.preventDefault();
-  }
-};
-
 const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
   (
     { layout, leftActions, rightActions, children, banner, ...formProps },
@@ -296,16 +279,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     const requireMode = useContext(RequireModeContext);
     return (
       <ScrollbarWrapper>
-        <StyledForm
-          {...formProps}
-          onKeyDown={(event) => {
-            preventImplicitSubmission(event);
-            formProps.onKeyDown?.(event);
-          }}
-          noValidate
-          ref={ref}
-          layout={layout}
-        >
+        <StyledForm {...formProps} noValidate ref={ref} layout={layout}>
           <FixedHeader layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
@@ -369,15 +343,7 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
   ({ leftActions, rightActions, children, banner, ...formProps }, ref) => {
     return (
       <ScrollbarWrapper>
-        <StyledForm
-          {...formProps}
-          onKeyDown={(event) => {
-            preventImplicitSubmission(event);
-            formProps.onKeyDown?.(event);
-          }}
-          noValidate
-          ref={ref}
-        >
+        <StyledForm {...formProps} noValidate ref={ref}>
           <FixedHeader layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
