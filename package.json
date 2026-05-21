@@ -124,7 +124,7 @@
     "remark-gfm": "^4.0.1",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   },
   "homepage": "https://scality.github.io/core-ui/",
   "publishConfig": {
