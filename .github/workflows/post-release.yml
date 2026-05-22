@@ -15,7 +15,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v6
         with:
-          node-version: "16"
+          node-version: "24"
       - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
       - name: Push version bump branch
         run: |
@@ -63,7 +63,7 @@ jobs:
       # Setup .npmrc file to publish to npmjs.org
       - uses: actions/setup-node@v6
         with:
-          node-version: "25"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
       - run: npm run build
