@@ -70,8 +70,8 @@ const RadioInput = styled.input`
   transform: scale(1.5);
 `;
 
-const RadioLabel = styled.label<{ disabled?: boolean }>`
-  ${(props) => (props.disabled ? 'opacity: 0.5;' : '')}
+const RadioLabel = styled.label<{ $disabled?: boolean }>`
+  ${(props) => (props.$disabled ? 'opacity: 0.5;' : '')}
 
   [type='radio'] {
     width: 0.75rem;
@@ -118,12 +118,12 @@ const RadioLabel = styled.label<{ disabled?: boolean }>`
 
   [type='radio']:hover {
     ${(props) =>
-      !props.disabled && `background-color: ${props.theme.highlight};`}
+      !props.$disabled && `background-color: ${props.theme.highlight};`}
   }
 
   [type='radio']:hover::before {
     ${(props) =>
-      !props.disabled &&
+      !props.$disabled &&
       `box-shadow: inset 0 0 0 ${spacing.r1} ${props.theme.selectedActive};`}
   }
 
@@ -162,7 +162,7 @@ const RadioOptionItem = ({
   };
 
   const input = (
-    <RadioLabel disabled={isDisabled} className="sc-radio">
+    <RadioLabel $disabled={isDisabled} className="sc-radio">
       <Stack>
         <RadioInput
           type="radio"

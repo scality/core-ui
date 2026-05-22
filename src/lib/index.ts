@@ -2,6 +2,10 @@ export { Banner } from './components/banner/Banner.component';
 export { Breadcrumb } from './components/breadcrumb/Breadcrumb.component';
 export { Checkbox } from './components/checkbox/Checkbox.component';
 export { RadioGroup } from './components/radio/RadioGroup.component';
+export type {
+  RadioGroupProps,
+  RadioOption,
+} from './components/radio/RadioGroup.component';
 export { Dropdown } from './components/dropdown/Dropdown.component';
 export {
   LOADER_SIZE,
