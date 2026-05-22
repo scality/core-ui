@@ -18,9 +18,9 @@ For guidance on when to use Checkbox vs Toggle vs Radio vs Select, see [Guidelin
 
 ## Usage
 
-Radio buttons are always used in a group. A single radio button on its own is meaningless. Each button in the group shares the same `name` prop, which is what enforces mutual exclusivity: selecting one option automatically deselects the others.
+Radio buttons are always used in a group. A single radio button on its own is meaningless. Use `RadioGroup` to render a set of options: it owns the selected value, the shared `name`, and the group's accessible label. Pass the choices as an `options` array of `{ value, label, disabled?, disabledReason? }`.
 
-<Canvas of={RadioStories.RadioGroup} layout="fullscreen" sourceState="none" />
+<Canvas of={RadioStories.RadioGroupExample} layout="fullscreen" sourceState="none" />
 
 Use Radio when:
 - The user must choose exactly one option from a set of 2 to 4 choices
@@ -31,7 +31,9 @@ Use Select instead when the list of options is long or dynamic. Use Checkbox whe
 
 ## Layout
 
-Radio buttons can be arranged vertically or horizontally. There is no rule: use whichever fits the available space and the length of the labels. Vertical is generally easier to scan when labels are long.
+Radio buttons can be arranged vertically (default) or horizontally via the `direction` prop. There is no rule: use whichever fits the available space and the length of the labels. Vertical is generally easier to scan when labels are long.
+
+<Canvas of={RadioStories.Horizontal} layout="fullscreen" sourceState="none" />
 
 ## Label conventions
 
@@ -50,9 +52,46 @@ The four visual states from left to right: unchecked, checked, disabled, disable
 
 **Disabled checked** indicates the current selection is locked and cannot be changed. Use it when a value is enforced by configuration or permissions and the user should see what is set without being able to modify it.
 
-**Disabled unchecked** means the option exists but is not available in the current context. Radio does not have a `disabledReason` prop (not yet implemented), so if an explanation is needed, it must come from elsewhere, for example a help text below the group.
+**Disabled unchecked** means the option exists but is not available in the current context. When an explanation is needed, set `disabledReason` on the option — a tooltip will appear on hover.
 
-When an entire group is disabled, all options should be disabled together.
+<Canvas of={RadioStories.WithDisabledReason} layout="fullscreen" sourceState="none" />
+
+When an entire group is disabled, pass `disabled` on `RadioGroup` rather than on each option — all options will be disabled together.
 
 <Canvas of={RadioStories.DisabledGroup} layout="fullscreen" sourceState="none" />
 
+## Accessibility
+
+Radio buttons are natively accessible when used correctly. The browser handles keyboard interaction automatically.
+
+### Keyboard behavior
+
+| Key | Action |
+| --- | --- |
+| Tab | Moves focus into the group (lands on the selected option, or the first if none selected) |
+| Arrow keys | Moves between options within the group and selects them |
+| Shift+Tab | Moves focus out of the group |
+
+Arrow-key navigation only works between radios that share the same `name`. This is why `name` is required on `RadioGroup`.
+
+### Group label
+
+A radio group needs an accessible name so screen readers can announce what the group is about. `RadioGroup` accepts the label from one of three sources — pick whichever fits the surrounding layout:
+
+1. **`label` prop** — renders a `<fieldset>` with a `<legend>`. Use this for standalone groups.
+2. **`aria-labelledby` prop** — points to an existing visible label rendered elsewhere. Use this when the label is provided by a wrapping component (e.g. `FormGroup`) so the label is not duplicated.
+3. **`aria-label` prop** — invisible label. Use this when the surrounding context (e.g. a table row) already makes the meaning clear visually but a screen reader still needs a name.
+
+Exactly one of these must be set. A `RadioGroup` with no accessible name is invisible to screen readers.
+
+#### Inside a FormGroup
+
+`FormGroup` already renders its own visible label and exposes it with the id `label-{id}`. Wire `RadioGroup` to that label via `aria-labelledby` — do not also pass `label` to `RadioGroup`, or the label would appear twice.
+
+<Canvas of={RadioStories.FormGroupExample} layout="fullscreen" sourceState="none" />
+
+#### Without a visible label
+
+When the radio group is used without a visible label — for example inside a table row where the row itself provides context — pass `aria-label` directly.
+
+<Canvas of={RadioStories.WithoutVisibleLabel} layout="fullscreen" sourceState="none" />
