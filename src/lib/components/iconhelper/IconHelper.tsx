@@ -1,6 +1,7 @@
 import { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../icon/Icon.component';
+import { fontSize } from '../../style/theme';
 import { Position, Tooltip } from '../tooltip/Tooltip.component';
 
 type IconHelpProps = {
@@ -19,14 +20,18 @@ type IconHelpProps = {
 
 const HelpButton = styled.button`
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: ${fontSize.base};
+  height: ${fontSize.base};
   background: none;
   border: none;
   padding: 0;
   margin: 0;
   color: inherit;
-  font: inherit;              /* Inherit font sizing */
-  vertical-align: text-bottom;     /* Align with text */
-  line-height: 1;
+  font-size: ${fontSize.base};
+  line-height: 0;
+  vertical-align: -0.125em;
   cursor: default;
   &:focus-visible {
     outline: 2px dashed ${(props) => props.theme.selectedActive};

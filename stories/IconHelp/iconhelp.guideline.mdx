@@ -1,0 +1,53 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Stories from './iconhelp.stories';
+
+<Meta name="Guideline" of={Stories} />
+
+# IconHelp
+
+`IconHelp` is a small info icon that reveals a tooltip on hover or focus. Use it to provide secondary information without overloading the interface.
+
+<Canvas of={Stories.Simple} sourceState="none" />
+
+## When to use it
+
+Reach for `IconHelp` whenever a user might have to **guess** what a label, value or concept means. If the wording is not self-explanatory and there is no room — or no need — to spell it out in the layout, an `IconHelp` should be considered.
+
+Typical cases:
+
+- A label or a settings name that uses a domain term (`Object lock`, `Replication policy`, `RPO`).
+- A value whose meaning is not transparent (`Governance`, `Compliance`, `Standard` storage class).
+- A column header, badge, or status that benefits from a one-line definition.
+
+## When not to use it
+
+- **Don't use it as the only way to convey critical information.** A tooltip is hidden by default — anything required to complete a task must remain visible (helper text, error message, inline description).
+- **Don't stack multiple `IconHelp` next to each other.** If a section needs that much explanation, write a short paragraph or link to documentation instead.
+- **Don't replace good labels with an `IconHelp`.** Fix the label first; add help only when the term itself cannot be made clearer.
+- **Don't put long content inside the tooltip.** Keep it to one or two short sentences. For longer explanations, use a dedicated documentation page.
+
+## Explaining values in a key/value list
+
+In summary or detail pages, attach an `IconHelp` only to the values whose meaning is not obvious. Leave plain values (a name, an email, an ID) without one.
+
+<Canvas of={Stories.InKeyValueList} sourceState="none" />
+
+## In a form
+
+In forms, `FormGroup` already exposes a `labelHelpTooltip` prop that renders an `IconHelp` next to the field label — you don't need to add one manually. Use it to clarify:
+
+- **What the field represents** — e.g. _"The name other users will see on your profile."_
+- **The accepted format or validation rule** — e.g. _"Must be 3–32 characters, letters and digits only."_
+- **The impact of the value** — e.g. _"Enabling versioning keeps a copy of every overwrite or delete."_
+
+## Placement
+
+The tooltip defaults to `right`. Pick another placement only when `right` is clipped by the container or overlaps important content.
+
+<Canvas of={Stories.WithPlacement} sourceState="none" />
+
+## Accessibility
+
+- Always pass an `aria-label` that describes _what the tooltip explains_, not just `"Help"`. Example: `aria-label="More info about replication policy"`.
+- The icon renders as a real `<button>`, so it is reachable by keyboard (`Tab`) and the tooltip opens on focus.
+- The tooltip content is the visible text — keep it informative and complete on its own.
