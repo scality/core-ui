@@ -1,4 +1,4 @@
-name: basic tests
+name: build storybook
 
 on:
   push:
@@ -12,21 +12,18 @@ on:
       - 'hotfix/**'
       - 'dependabot/**'
   pull_request:
-    types:
-      - opened
-    branches:
-      - 'feature/bump-core-ui-version-to-**'
+    branches: [development/*, stabilization/*, hotfix/*]
+  workflow_dispatch:
 
 jobs:
-  tests:
+  build-storybook:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Install node
-        uses: actions/setup-node@v6
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
       - run: npm ci
-      - run: npm run test
-      - run: npm run lint
+      - run: npm run build-storybook
+        env:
+          STORYBOOK_DISABLE_TELEMETRY: 1
