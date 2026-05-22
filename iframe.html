@@ -28,7 +28,8 @@
         font-weight: 700;
         font-display: swap;
         src: url('./sb-common-assets/nunito-sans-bold-italic.woff2') format('woff2');
-      }</style><base target="_parent"><style>/* While we aren't showing the main block yet, but still preparing, we want everything the user has rendered, which may or may not be in #storybook-root, to be display none */
+      }</style><base target="_parent"><style>/* While we aren't showing the main block yet, but still preparing, we want everything the user
+     has rendered, which may or may not be in #storybook-root, to be display none */
   .sb-show-preparing-story:not(.sb-show-main) > :not(.sb-preparing-story) {
     display: none;
   }
@@ -137,13 +138,7 @@
     margin: auto;
     padding: 30px;
     border-radius: 10px;
-    background: rgb(247, 247, 247);
-    color: rgb(46, 52, 56);
-
-    & * {
-      background: rgb(247, 247, 247);
-      color: rgb(46, 52, 56);
-    }
+    background: rgba(0, 0, 0, 0.03);
   }
 
   .sb-nopreview_heading {
@@ -157,33 +152,10 @@
     width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
-  }
-
-  .sb-errordisplay_main {
-    margin: auto;
-    padding: 24px;
-    display: flex;
-    box-sizing: border-box;
-
-    flex-direction: column;
-    min-height: 100%;
-    width: 100%;
-    border-radius: 6px;
-    background: white;
-    color: black;
-    border: 1px solid #ff0000;
-    box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
-    gap: 24px;
 
     & ol {
       padding-left: 18px;
       margin: 0;
-    }
-
-    /* Redefine colors to ensure readability regardless of user-provided * selectors. */
-    * {
-      background: white;
-      color: black;
     }
 
     & h1 {
@@ -223,35 +195,45 @@
     & a {
       color: currentColor;
     }
+  }
 
-    & .sb-errordisplay_code {
-      padding: 10px;
-      flex: 1;
-      background: #242424;
-      color: #c6c6c6;
-      box-sizing: border-box;
+  .sb-errordisplay_main {
+    margin: auto;
+    padding: 24px;
+    display: flex;
+    box-sizing: border-box;
 
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      border-radius: 4px;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
+    gap: 24px;
+  }
 
-      font-family:
-        'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
-        'Lucida Console', Consolas, Monaco, monospace;
-      margin: 0;
-      overflow: auto;
+  .sb-errordisplay_code {
+    padding: 10px;
+    flex: 1;
+    background: #242424;
+    color: #c6c6c6;
+    box-sizing: border-box;
 
-      & code {
-        background-color: inherit;
-        color: inherit;
-      }
-    }
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    border-radius: 4px;
 
-    & .sb-errordisplay pre {
-      white-space: pre-wrap;
-      white-space: revert;
-    }
+    font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
+      'Lucida Console', Consolas, Monaco, monospace;
+    margin: 0;
+    overflow: auto;
+  }
+
+  .sb-errordisplay pre {
+    white-space: pre-wrap;
+    white-space: revert;
   }
 
   @-webkit-keyframes sb-rotate360 {
@@ -477,28 +459,8 @@
     margin-right: 4px;
     margin-bottom: 4px;
     padding: 2px 5px;
-  }
-
-  .sb-sr-only,
-  .sb-hidden-until-focus:not(:focus) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0px;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: none;
-  }
-
-  .sb-hidden-until-focus {
-    opacity: 0;
-    transition: opacity 150ms ease-out;
-  }
-
-  .sb-hidden-until-focus:focus {
-    opacity: 1;
   }</style><script>/* globals window */
+  /* eslint-disable no-underscore-dangle */
   try {
     if (window.top !== window) {
       window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -612,7 +574,7 @@
           
       
           
-            window['FEATURES'] = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true,"viewport":true,"highlight":true,"controls":true,"interactions":true,"actions":true,"backgrounds":true,"outline":true,"measure":true,"sidebarOnboardingChecklist":true,"componentsManifest":false};
+            window['FEATURES'] = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true};
           
       
           
@@ -622,17 +584,15 @@
           
       
           
-            window['DOCS_OPTIONS'] = {"defaultName":"Stories"};
+            window['DOCS_OPTIONS'] = {"defaultName":"Stories","autodocs":"tag"};
           
       
           
-            window['TAGS_OPTIONS'] = {};</script><script type="module">import './sb-preview/runtime.js';
+            window['TAGS_OPTIONS'] = {"dev-only":{"excludeFromDocsStories":true},"docs-only":{"excludeFromSidebar":true},"test-only":{"excludeFromSidebar":true,"excludeFromDocsStories":true}};</script><script type="module">import './sb-preview/runtime.js';
 
       
-      import './mocker-runtime-injected.js';
+      import './runtime~main.5556d9d2.iframe.bundle.js';
       
-      import './runtime~main.2a188944.iframe.bundle.js';
+      import './47400.d9f7091d.iframe.bundle.js';
       
-      import './64411.c65221ba.iframe.bundle.js';
-      
-      import './main.4e4bfe1b.iframe.bundle.js';</script></body></html>
+      import './main.44c13d4f.iframe.bundle.js';</script></body></html>
