@@ -50,6 +50,14 @@ Use `alertdialog` when accidentally dismissing the modal would be dangerous or m
 - `subTitle` occupies the header slot when no close button is present. Use it for contextual information (e.g. a step indicator or a required-fields disclaimer).
 - `subTitle` occupies the same slot as the close button. When `subTitle` is used, `close` must be omitted and navigation must be handled in the footer.
 
+## Read-only modals
+
+Use a read-only modal to surface the details of a specific resource without allowing edits.
+
+- Title: "View [Resource]" or "View [Resource] details". Examples: "View Disk details", "View Certificate", "View Access key".
+- Use `role="dialog"` with a close button.
+- Footer: a single "Close" button (`variant="primary"`).
+
 ## Body content
 
 - When the action targets a specific resource, name it explicitly in the body: **"my-node-name** will be permanently deleted, this action is irreversible." This prevents the user from acting on the wrong resource.

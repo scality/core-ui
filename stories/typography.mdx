@@ -53,3 +53,11 @@ All UI text must use **sentence case**: capitalize only the first word and prope
 Exception: when displaying a list of resources (buckets, nodes, accounts…), each item may be capitalized as a proper noun if it represents a named entity.
 
 This rule is enforced by the `technical-sentence-case` ESLint rule.
+
+## Text overflow
+
+Two strategies are available when text overflows its container.
+
+**Wrap**: the text continues on the next line. When it does, the break must occur at a delimiter, a dot or a dash. Do not break mid-segment.
+
+**Ellipsis**: the text is clipped with a `…` and the full value is shown in a tooltip on hover. Use `ConstrainedText` for this behavior. Two placements are possible: trailing (`longvalue…`) or middle (`longv…lue`), preserving the end of the string. The middle variant is useful for filenames or paths where the extension or last segment carries meaning.

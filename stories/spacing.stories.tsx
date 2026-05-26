@@ -6,6 +6,7 @@ import {
   LargerText,
   SecondaryText,
   SmallerSecondaryText,
+  Text,
 } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { spacing, Stack, Wrap } from '../src/lib/spacing';
@@ -13,6 +14,31 @@ import { spacing, Stack, Wrap } from '../src/lib/spacing';
 export default {
   title: 'Components/Styling/Spacing Utils',
   component: Stack,
+};
+
+export const IconAndLabel = {
+  name: 'Icon and label (r8)',
+  parameters: { docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <Stack direction="vertical" gap="r16" style={{ padding: '1.5rem' }}>
+      <Stack gap="r8">
+        <Icon name="Check-circle" color="statusHealthy" />
+        <Text color="textPrimary">Healthy</Text>
+      </Stack>
+      <Stack gap="r8">
+        <Icon name="Exclamation-circle" color="statusWarning" />
+        <Text color="textPrimary">Warning</Text>
+      </Stack>
+      <Stack gap="r8">
+        <Icon name="Times-circle" color="statusCritical" />
+        <Text color="textPrimary">Critical</Text>
+      </Stack>
+      <Stack gap="r8">
+        <Icon name="Info-circle" color="infoPrimary" />
+        <Text color="textPrimary">Information</Text>
+      </Stack>
+    </Stack>
+  ),
 };
 
 export const Playground = {
