@@ -66,5 +66,9 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
+        env:
+          # storybook-webmcp is hosted on GitHub Packages (npm.pkg.github.com).
+          # Even public GHPR packages require an auth token.
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run build
       - run: npm publish
