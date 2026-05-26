@@ -65,10 +65,11 @@ jobs:
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
+      # GHPR auth for @jbwatenbergscality/storybook-webmcp. Written directly to
+      # ~/.npmrc instead of via NODE_AUTH_TOKEN to avoid leaking the GitHub
+      # token to registry.npmjs.org through setup-node's npmjs auth line
+      # (//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}).
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
       - run: npm ci
-        env:
-          # storybook-webmcp is hosted on GitHub Packages (npm.pkg.github.com).
-          # Even public GHPR packages require an auth token.
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run build
       - run: npm publish
