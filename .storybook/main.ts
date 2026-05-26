@@ -17,6 +17,7 @@ const config: StorybookConfig = {
         },
       },
     },
+    '@jbwatenbergscality/storybook-webmcp',
   ],
   framework: {
     name: '@storybook/react-webpack5',
