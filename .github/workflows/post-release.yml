@@ -57,6 +57,7 @@ jobs:
     permissions:
       id-token: write # Required for OIDC authentication
       contents: read
+      packages: read # to install @jbwatenbergscality/storybook-webmcp from GHPR
     environment: npmjs
     steps:
       - uses: actions/checkout@v6
