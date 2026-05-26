@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: read # to install @jbwatenbergscality/storybook-webmcp from GHPR
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
