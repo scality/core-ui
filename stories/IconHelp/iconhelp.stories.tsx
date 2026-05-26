@@ -13,13 +13,13 @@ export default {
 export const Simple = {
   name: 'Simple',
   render: () => (
-    <Text>
-      Replication policy{' '}
+    <Stack direction="horizontal" gap="r4">
+      <Text>Replication policy</Text>
       <IconHelp
         tooltipMessage="Defines how objects are replicated across locations."
         aria-label="More info about replication policy"
       />
-    </Text>
+    </Stack>
   ),
 };
 
@@ -27,49 +27,61 @@ export const WithPlacement = {
   name: 'Tooltip placement',
   render: () => (
     <Stack direction="vertical" gap="r24">
-      <Text>
-        Placement <b>top</b>{' '}
+      <Stack direction="horizontal" gap="r4">
+        <Text>
+          Placement <b>top</b>
+        </Text>
         <IconHelp
           placement="top"
           tooltipMessage="Appears above the icon."
           aria-label="Top tooltip"
         />
-      </Text>
-      <Text>
-        Placement <b>right</b> (default){' '}
+      </Stack>
+      <Stack direction="horizontal" gap="r4">
+        <Text>
+          Placement <b>right</b> (default)
+        </Text>
         <IconHelp
           placement="right"
           tooltipMessage="Appears to the right of the icon."
           aria-label="Right tooltip"
         />
-      </Text>
-      <Text>
-        Placement <b>bottom</b>{' '}
+      </Stack>
+      <Stack direction="horizontal" gap="r4">
+        <Text>
+          Placement <b>bottom</b>
+        </Text>
         <IconHelp
           placement="bottom"
           tooltipMessage="Appears below the icon."
           aria-label="Bottom tooltip"
         />
-      </Text>
-      <Text>
-        Placement <b>left</b>{' '}
+      </Stack>
+      <Stack direction="horizontal" gap="r4">
+        <Text>
+          Placement <b>left</b>
+        </Text>
         <IconHelp
           placement="left"
           tooltipMessage="Appears to the left of the icon."
           aria-label="Left tooltip"
         />
-      </Text>
+      </Stack>
     </Stack>
   ),
 };
 
 const KeyValueRow = ({
   label,
+  labelHelp,
+  labelAriaLabel,
   value,
   helpMessage,
   helpAriaLabel,
 }: {
   label: string;
+  labelHelp?: React.ReactNode;
+  labelAriaLabel?: string;
   value: React.ReactNode;
   helpMessage?: React.ReactNode;
   helpAriaLabel?: string;
@@ -77,42 +89,48 @@ const KeyValueRow = ({
   <div
     style={{
       display: 'grid',
-      gridTemplateColumns: '200px 1fr',
+      gridTemplateColumns: '220px 1fr',
       alignItems: 'baseline',
       gap: '16px',
       padding: '6px 0',
     }}
   >
-    <Text color="textSecondary">{label}</Text>
-    <Text>
-      {value}
-      {helpMessage && (
-        <>
-          {' '}
-          <IconHelp
-            tooltipMessage={helpMessage}
-            aria-label={helpAriaLabel ?? `More info about ${label}`}
-          />
-        </>
+    <Stack direction="horizontal" gap="r4">
+      <Text color="textSecondary">{label}</Text>
+      {labelHelp && (
+        <IconHelp
+          tooltipMessage={labelHelp}
+          aria-label={labelAriaLabel ?? `More info about ${label}`}
+        />
       )}
-    </Text>
+    </Stack>
+    <Stack direction="horizontal" gap="r4">
+      <Text>{value}</Text>
+      {helpMessage && (
+        <IconHelp
+          tooltipMessage={helpMessage}
+          aria-label={helpAriaLabel ?? `More info about ${label} value`}
+        />
+      )}
+    </Stack>
   </div>
 );
 
 export const InKeyValueList = {
-  name: 'Explaining values',
+  name: 'Explaining keys and values',
   render: () => (
-    <div style={{ maxWidth: 560 }}>
+    <div style={{ maxWidth: 620 }}>
       <KeyValueRow label="Bucket name" value="prod-customer-assets" />
       <KeyValueRow
-        label="Versioning"
-        value="Enabled"
-        helpMessage="Once enabled, every overwrite or delete keeps the previous version."
-      />
-      <KeyValueRow
         label="Object lock"
+        labelHelp="Object lock prevents objects from being deleted or overwritten for a fixed amount of time."
         value="Governance"
         helpMessage="Governance mode allows privileged users to change retention; Compliance mode does not."
+      />
+      <KeyValueRow
+        label="RPO"
+        labelHelp="Recovery Point Objective — the maximum acceptable amount of data loss measured in time."
+        value="15 minutes"
       />
       <KeyValueRow
         label="Storage class"

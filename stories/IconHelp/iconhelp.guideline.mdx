@@ -5,13 +5,13 @@ import * as Stories from './iconhelp.stories';
 
 # IconHelp
 
-`IconHelp` is a small info icon that reveals a tooltip on hover or focus. Use it to provide secondary information without overloading the interface.
+`IconHelp` is an inline icon button that reveals a tooltip on hover or focus.
 
 <Canvas of={Stories.Simple} sourceState="none" />
 
 ## When to use it
 
-Reach for `IconHelp` whenever a user might have to **guess** what a label, value or concept means. If the wording is not self-explanatory and there is no room — or no need — to spell it out in the layout, an `IconHelp` should be considered.
+Use `IconHelp` to provide secondary information without overloading the interface. Reach for it whenever a user might have to **guess** what a label, value or concept means — if the wording is not self-explanatory and there is no room (or no need) to spell it out in the layout, `IconHelp` should be considered.
 
 Typical cases:
 
@@ -22,23 +22,31 @@ Typical cases:
 ## When not to use it
 
 - **Don't use it as the only way to convey critical information.** A tooltip is hidden by default — anything required to complete a task must remain visible (helper text, error message, inline description).
-- **Don't stack multiple `IconHelp` next to each other.** If a section needs that much explanation, write a short paragraph or link to documentation instead.
+- **Don't stack multiple `IconHelp` next to each other.** If a section needs that much explanation, surface it directly: add a description paragraph under the section heading, or place an `InfoMessage` above the content area. For longer explanations, link to the dedicated documentation page from that `InfoMessage` — never put long text in a tooltip.
 - **Don't replace good labels with an `IconHelp`.** Fix the label first; add help only when the term itself cannot be made clearer.
 - **Don't put long content inside the tooltip.** Keep it to one or two short sentences. For longer explanations, use a dedicated documentation page.
 
-## Explaining values in a key/value list
+## Explaining keys and values in a key/value list
 
-In summary or detail pages, attach an `IconHelp` only to the values whose meaning is not obvious. Leave plain values (a name, an email, an ID) without one.
+`IconHelp` can sit on either side of a key/value pair:
+
+- On the **key** when the label itself is the opaque term (`Object lock`, `RPO`, `Replication policy`).
+- On the **value** when the label is clear but the value is the unclear term (`Governance`, `Standard` as a storage class).
+
+Leave plain entries (a name, an email, an ID, a region code) without one.
 
 <Canvas of={Stories.InKeyValueList} sourceState="none" />
 
 ## In a form
 
-In forms, `FormGroup` already exposes a `labelHelpTooltip` prop that renders an `IconHelp` next to the field label — you don't need to add one manually. Use it to clarify:
+Use `IconHelp` (via `FormGroup`'s `labelHelpTooltip`) only for **conceptual context** — what a field represents and why it matters. Anything the user needs to complete the field correctly (format, validation rule, required input) belongs in **helper text**, surfaced via `FormGroup`'s `help` prop, because helper text is always visible.
+
+Good uses of `labelHelpTooltip`:
 
 - **What the field represents** — e.g. _"The name other users will see on your profile."_
-- **The accepted format or validation rule** — e.g. _"Must be 3–32 characters, letters and digits only."_
 - **The impact of the value** — e.g. _"Enabling versioning keeps a copy of every overwrite or delete."_
+
+Format and validation hints should never live in a tooltip.
 
 ## Placement
 
