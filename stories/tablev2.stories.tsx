@@ -14,6 +14,9 @@ import {
 import { CellProps, Row } from 'react-table';
 import { Box, Button } from '../src/lib/next';
 import styled from 'styled-components';
+import { Icon } from '../src/lib/components/icon/Icon.component';
+import { Modal } from '../src/lib/components/modal/Modal.component';
+import { Stack } from '../src/lib/spacing';
 
 const Flex = styled(Box)`
   display: flex;
@@ -673,6 +676,101 @@ export const TableWithSyncButton = {
           />
         </Table>
       </Box>
+    );
+  },
+};
+
+export const TableWithViewAction = {
+  render: () => {
+    const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
+
+    const columnsWithAction: Column<Entry>[] = [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        cellStyle: { width: 'unset', flex: 2, textAlign: 'left' },
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        cellStyle: { width: 'unset', flex: 2, textAlign: 'left' },
+      },
+      {
+        Header: 'Health',
+        accessor: 'health',
+        cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+      },
+      {
+        Header: '',
+        id: 'actions',
+        cellStyle: {
+          width: 'unset',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'flex-end',
+        },
+        Cell: ({ row }: CellProps<Entry>) => (
+          <Button
+            size="inline"
+            variant="outline"
+            label="View details"
+            icon={<Icon name="Eye" />}
+            onClick={() => setSelectedEntry(row.original)}
+          />
+        ),
+      },
+    ];
+
+    return (
+      <>
+        <Box width="700px" height="260px">
+          <Table
+            columns={columnsWithAction}
+            data={data}
+            defaultSortingKey={'firstName'}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>
+        </Box>
+        <Modal
+          isOpen={selectedEntry !== null}
+          close={() => setSelectedEntry(null)}
+          title={`View Entry details`}
+          role="dialog"
+          isOpen={selectedEntry !== null}
+          close={() => setSelectedEntry(null)}
+          title={`View Entry details`}
+          footer={
+            <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
+              <Button
+                variant="primary"
+                label="Close"
+                onClick={() => setSelectedEntry(null)}
+              />
+            </Stack>
+          }
+        >
+          {selectedEntry && (
+            <Stack direction="vertical" gap="r8">
+              <div>
+                <strong>First name</strong>: {selectedEntry.firstName}
+              </div>
+              <div>
+                <strong>Last name</strong>: {selectedEntry.lastName}
+              </div>
+              <div>
+                <strong>Age</strong>: {selectedEntry.age ?? '—'}
+              </div>
+              <div>
+                <strong>Health</strong>: {selectedEntry.health}
+              </div>
+            </Stack>
+          )}
+        </Modal>
+      </>
     );
   },
 };

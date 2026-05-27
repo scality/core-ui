@@ -1,0 +1,31 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TableStories from './tablev2.stories';
+
+<Meta of={TableStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+`}</style>
+
+# Table
+
+A table displays structured data in rows and columns, allowing users to scan, sort, and act on multiple items.
+
+## Action column
+
+Tables may include an action column on the far right for row-level actions.
+
+- `Header` must be an empty string. Never "Actions", "Details", or any other label.
+- Buttons are right-aligned within the cell.
+- Prefer `size="inline"` buttons.
+
+### View action
+
+Use this button to open a read-only detail view for the row.
+
+- Use `variant="outline"`, `size="inline"`.
+- Label: `"View details"`.
+- Icon: `Eye`.
+
+<Canvas of={TableStories.TableWithViewAction} layout="fullscreen" />
