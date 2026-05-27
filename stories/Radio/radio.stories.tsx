@@ -1,73 +1,194 @@
 import { action } from 'storybook/actions';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React, { useState } from 'react';
-import { Radio, Props } from '../../src/lib/components/radio/Radio.component';
-import { Stack } from '../../src/lib/spacing';
+import {
+  RadioGroup,
+  RadioGroupProps,
+} from '../../src/lib/components/radio/RadioGroup.component';
+import {
+  Form,
+  FormGroup,
+  FormSection,
+} from '../../src/lib/components/form/Form.component';
 
-type RadioStory = StoryObj<Props>;
+type RadioGroupStory = StoryObj<RadioGroupProps>;
 
-const meta: Meta<Props> = {
+const retentionOptions = [
+  { value: 'governance', label: 'Governance' },
+  { value: 'compliance', label: 'Compliance' },
+  { value: 'none', label: 'None' },
+];
+
+const meta: Meta<RadioGroupProps> = {
   title: 'Components/Inputs/Radio',
-  component: Radio,
-  args: {
-    name: 'playground',
-    value: 'option',
-    label: 'Option',
-    onChange: action('Radio changed'),
-  },
+  component: RadioGroup,
 };
 
 export default meta;
 
-export const Playground: RadioStory = {};
+export const Playground: RadioGroupStory = {
+  args: {
+    name: 'playground',
+    label: 'Retention mode',
+    value: 'governance',
+    options: retentionOptions,
+    onChange: action('RadioGroup changed'),
+  },
+};
 
-export const RadioGroup: RadioStory = {
+export const RadioGroupExample: RadioGroupStory = {
   render: () => {
     const [selected, setSelected] = useState('governance');
     return (
-      <Stack gap="r12">
-        <Radio
-          name="retention-mode"
-          value="governance"
-          label="Governance"
-          checked={selected === 'governance'}
-          onChange={() => setSelected('governance')}
-        />
-        <Radio
-          name="retention-mode"
-          value="compliance"
-          label="Compliance"
-          checked={selected === 'compliance'}
-          onChange={() => setSelected('compliance')}
-        />
-        <Radio
-          name="retention-mode"
-          value="none"
-          label="None"
-          checked={selected === 'none'}
-          onChange={() => setSelected('none')}
-        />
-      </Stack>
+      <RadioGroup
+        name="retention-mode"
+        label="Retention mode"
+        value={selected}
+        onChange={setSelected}
+        options={retentionOptions}
+      />
     );
   },
 };
 
-export const AllStates: RadioStory = {
+export const Horizontal: RadioGroupStory = {
+  render: () => {
+    const [selected, setSelected] = useState('small');
+    return (
+      <RadioGroup
+        name="size"
+        label="Size"
+        direction="horizontal"
+        value={selected}
+        onChange={setSelected}
+        options={[
+          { value: 'small', label: 'Small' },
+          { value: 'medium', label: 'Medium' },
+          { value: 'large', label: 'Large' },
+        ]}
+      />
+    );
+  },
+};
+
+export const AllStates: RadioGroupStory = {
   render: () => (
     <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-      <Radio name="s1" value="a" label="Unchecked" checked={false} onChange={() => {}} />
-      <Radio name="s2" value="b" label="Checked" checked={true} onChange={() => {}} />
-      <Radio name="s3" value="c" label="Disabled" disabled checked={false} onChange={() => {}} />
-      <Radio name="s4" value="d" label="Disabled checked" disabled checked={true} onChange={() => {}} />
+      <RadioGroup
+        name="state-unchecked"
+        aria-label="Unchecked example"
+        value=""
+        onChange={() => {}}
+        options={[{ value: 'a', label: 'Unchecked' }]}
+      />
+      <RadioGroup
+        name="state-checked"
+        aria-label="Checked example"
+        value="a"
+        onChange={() => {}}
+        options={[{ value: 'a', label: 'Checked' }]}
+      />
+      <RadioGroup
+        name="state-disabled"
+        aria-label="Disabled example"
+        value=""
+        onChange={() => {}}
+        options={[{ value: 'a', label: 'Disabled', disabled: true }]}
+      />
+      <RadioGroup
+        name="state-disabled-checked"
+        aria-label="Disabled checked example"
+        value="a"
+        onChange={() => {}}
+        options={[{ value: 'a', label: 'Disabled checked', disabled: true }]}
+      />
     </div>
   ),
 };
 
-export const DisabledGroup: RadioStory = {
+export const DisabledGroup: RadioGroupStory = {
   render: () => (
-    <Stack gap="r12">
-      <Radio name="disabled" value="a" label="Option A" disabled checked={true} onChange={() => {}} />
-      <Radio name="disabled" value="b" label="Option B" disabled checked={false} onChange={() => {}} />
-    </Stack>
+    <RadioGroup
+      name="disabled-group"
+      label="Disabled group"
+      value="a"
+      onChange={() => {}}
+      disabled
+      options={[
+        { value: 'a', label: 'Option A' },
+        { value: 'b', label: 'Option B' },
+      ]}
+    />
   ),
+};
+
+export const WithDisabledReason: RadioGroupStory = {
+  render: () => {
+    const [selected, setSelected] = useState('governance');
+    return (
+      <RadioGroup
+        name="retention-mode-locked"
+        label="Retention mode"
+        value={selected}
+        onChange={setSelected}
+        options={[
+          { value: 'governance', label: 'Governance' },
+          {
+            value: 'compliance',
+            label: 'Compliance',
+            disabled: true,
+            disabledReason:
+              'Compliance mode requires an upgraded license.',
+          },
+          { value: 'none', label: 'None' },
+        ]}
+      />
+    );
+  },
+};
+
+export const WithoutVisibleLabel: RadioGroupStory = {
+  render: () => {
+    const [selected, setSelected] = useState('a');
+    return (
+      <RadioGroup
+        name="inline-row"
+        aria-label="Row selection"
+        direction="horizontal"
+        value={selected}
+        onChange={setSelected}
+        options={[
+          { value: 'a', label: 'Option A' },
+          { value: 'b', label: 'Option B' },
+        ]}
+      />
+    );
+  },
+};
+
+export const FormGroupExample: RadioGroupStory = {
+  render: () => {
+    const [retention, setRetention] = useState('governance');
+    return (
+      <Form layout={{ kind: 'tab' }}>
+        <FormSection>
+          <FormGroup
+            id="retention-mode"
+            label="Retention mode"
+            direction="vertical"
+            help="Choose how this bucket retains objects."
+            content={
+              <RadioGroup
+                name="retention-mode"
+                aria-labelledby="label-retention-mode"
+                value={retention}
+                onChange={setRetention}
+                options={retentionOptions}
+              />
+            }
+          />
+        </FormSection>
+      </Form>
+    );
+  },
 };
