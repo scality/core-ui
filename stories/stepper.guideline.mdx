@@ -1,0 +1,60 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as StepperStories from './stepper.stories';
+
+<Meta of={StepperStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2, .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Stepper
+
+A stepper breaks a process into ordered phases that must be completed in sequence.
+Use it when each phase has a distinct nature and the next phase cannot begin before the previous one is done.
+
+<Canvas of={StepperStories.SimpleStepper} sourceState="none" />
+
+## When to use
+
+- The task has 3 to 5 distinct phases with a clear sequence.
+- Each phase requires its own decisions or inputs before moving on.
+- Users benefit from knowing how far along they are.
+
+## When not to use
+
+- Steps can be completed in any order: use a checklist instead.
+- The task is non-linear or revisitable at any time.
+
+## Typical pattern
+
+Steps do not need to be of the same nature. A common structure is:
+
+1. **Form:** the user configures the operation (inputs, selects, options).
+2. **Execution:** the system performs actions one by one, shown as a table of tasks with their status.
+3. **Summary:** results are displayed and the user can confirm or exit.
+
+Whether the user can navigate back to a previous step depends on the process. In a sequence of forms, going back is safe and expected. When a step involves system actions (API calls, data mutations), going back may not be possible or meaningful.
+
+## Step states
+
+Each step can carry one of the following states:
+
+- **Pending:** not yet reached, shown with a numbered circle.
+- **Active:** the current step, shown with a filled circle.
+- **Completed:** passed successfully, shown with a green checkmark.
+- **In progress:** the active step is waiting on an async operation, shown with a spinner.
+- **Error:** the step failed, shown with a red circle.
+
+**Completed steps** (steps 1 and 2 done, step 3 active):
+
+<Canvas of={StepperStories.StateCompleted} sourceState="none" />
+
+**In progress** (step 2 waiting on an async operation):
+
+<Canvas of={StepperStories.StateInProgress} sourceState="none" />
+
+**Error** (step 2 failed):
+
+<Canvas of={StepperStories.StateError} sourceState="none" />

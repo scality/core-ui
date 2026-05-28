@@ -98,7 +98,7 @@ export const parameters = {
             ['Select', ['Guideline', '*']],
           ],
           ['Feedback', [['Modal', ['Guideline', '*']]]],
-          'Progress & loading',
+          ['Progress & loading', [['Stepper', ['Guideline', '*']]]],
           'Styling',
           'Deprecated',
         ],
