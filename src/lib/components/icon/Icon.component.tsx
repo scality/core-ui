@@ -137,21 +137,32 @@ function NonWrappedIcon({
   const iconInfo = iconTable[name] || customIcons[name];
   if (!iconInfo) throw new Error(`${name}: is not a valid icon.`);
 
-  // Loaded fortawesome icon if not a custom icon
-  const [icon, setIcon] = useState();
+  const [fontAwesomeType, iconClass] = customIcons[name]
+    ? []
+    : (() => {
+        const [type, cls] = iconInfo.split(' ');
+        return [
+          type === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons',
+          cls,
+        ];
+      })();
+  const cacheKey = iconClass ? `${fontAwesomeType}/${iconClass}` : undefined;
+
+  // Seed from the module-level cache synchronously so an already-loaded icon paints on the
+  // first render. Reading the cache only inside the effect (which runs after paint) makes a
+  // freshly-mounted icon — e.g. a virtualized table row scrolling into view — render the empty
+  // zero-width fallback for a frame, shifting neighbouring content before the real glyph appears.
+  const [icon, setIcon] = useState(() =>
+    cacheKey ? iconCache[cacheKey] : undefined,
+  );
 
   useEffect(() => {
-    if (customIcons[name]) {
+    if (!cacheKey || !iconClass) {
       return;
     }
-
-    const [iconType, iconClass] = iconInfo.split(' ');
-    const fontAwesomeType =
-      iconType === 'far' ? 'free-regular-svg-icons' : 'free-solid-svg-icons';
-    const cacheKey = `${fontAwesomeType}/${iconClass}`;
     if (iconCache[cacheKey]) {
       setIcon(iconCache[cacheKey]);
-      return () => setIcon(undefined);
+      return;
     }
 
     // Handle FontAwesome icons with dynamic import
@@ -164,8 +175,7 @@ function NonWrappedIcon({
       }).catch((err) => {
         console.warn(`Icon ${iconClass} could not be loaded:`, err.message);
       });
-    return () => setIcon(undefined);
-  }, [name, iconInfo]);
+  }, [cacheKey, fontAwesomeType, iconClass]);
 
   // Icons are decorative by default (aria-hidden: true)
   // If ariaLabel is provided, the icon is meaningful (aria-hidden: false)
