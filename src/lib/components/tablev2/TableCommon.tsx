@@ -128,9 +128,7 @@ type TableRowsProps<
   locale?: TableLocalType;
   children?: (children: JSX.Element) => JSX.Element;
   customItemKey?: (index: number, data: DATA_ROW) => string;
-  RenderRow: React.MemoExoticComponent<
-    ({ index, style }: RenderRowType) => JSX.Element
-  >;
+  RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
 export function TableRows<
