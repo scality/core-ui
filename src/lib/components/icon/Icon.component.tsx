@@ -84,7 +84,7 @@ const FallbackSpinner = styled.span`
   svg {
     width: 1em;
     height: 1em;
-    fill: currentColor;
+    fill: #a14fbf;
   }
 `;
 
