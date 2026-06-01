@@ -53,6 +53,18 @@ export type CellProps<
 export type TableProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
+  /**
+   * Column definitions for the table.
+   *
+   * IMPORTANT: memoize this (e.g. `useMemo`) and keep each column's `Cell`
+   * renderer stable across renders. react-table renders cells as
+   * `<column.Cell />`, so a new `Cell` function identity on every parent
+   * render is a new component type — React unmounts and remounts the whole
+   * cell subtree each render. For cells with async content or icons that
+   * causes flicker/refetch. Define columns outside the render or wrap them in
+   * `useMemo`, and hoist inline `Cell` components rather than redefining them
+   * inline. The same applies to `data`.
+   */
   columns: Array<Column<DATA_ROW>>;
   defaultSortingKey?: string;
   // We don't display the default sort key in the URL, so we need to specify here
