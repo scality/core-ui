@@ -77,9 +77,10 @@ type Props = {
 };
 
 const DelayedFallback = ({
+  size,
   children,
   ...rest
-}: PropsWithChildren<HTMLProps<HTMLElement>>) => {
+}: PropsWithChildren<Omit<HTMLProps<HTMLElement>, 'size'> & { size?: SizeProp }>) => {
   const [show, setShow] = useState(false);
   useEffect(() => {
     let timeout = setTimeout(() => setShow(true), 300);
@@ -88,7 +89,20 @@ const DelayedFallback = ({
     };
   }, []);
 
-  return <i {...rest}>{show && children}</i>;
+  // Reserve the icon's box so a cold-loading icon doesn't paint zero-width and shift
+  // neighbouring content. svg-inline--fa gives height:1em and the icon baseline, and
+  // fa-${size} scales font-size so 1em tracks the requested size. Width has no intrinsic
+  // SVG to derive from, so set a 1em square — matches the glyph height exactly and
+  // approximates its (variable) width without altering how loaded icons render.
+  return (
+    <i
+      {...rest}
+      className={`svg-inline--fa${size ? ` fa-${size}` : ''}`}
+      style={{ width: '1em' }}
+    >
+      {show && children}
+    </i>
+  );
 };
 
 export const IconWrapper = styled.div<{ size: SizeProp }>`
@@ -185,7 +199,7 @@ function NonWrappedIcon({
 
   if (!icon && !customIcons[name]) {
     return (
-      <DelayedFallback {...accessibilityProps}>
+      <DelayedFallback size={size} {...accessibilityProps}>
         <Loader size="base" />
       </DelayedFallback>
     );
