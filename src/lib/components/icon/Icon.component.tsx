@@ -76,6 +76,10 @@ type Props = {
   title?: string;
 };
 
+// Mirrors the <Loader> default spinner color (see Loader.component.tsx) so the
+// fallback looks identical to a real Loader while the icon resolves.
+const LOADER_SPINNER_COLOR = '#A14FBF';
+
 // The spinner shown while a cold icon loads. Sized in em so it scales with the
 // fa-${size} font-size of the fallback box, matching the glyph it stands in for —
 // unlike <Loader>, whose container forces a fixed px svg and resets font-size.
@@ -84,7 +88,7 @@ const FallbackSpinner = styled.span`
   svg {
     width: 1em;
     height: 1em;
-    fill: #a14fbf;
+    fill: ${LOADER_SPINNER_COLOR};
   }
 `;
 
@@ -195,6 +199,10 @@ function NonWrappedIcon({
       setIcon(iconCache[cacheKey]);
       return;
     }
+
+    // The name changed to an icon we haven't loaded yet: drop the previous glyph so the
+    // reserved fallback shows instead of a stale icon while the dynamic import resolves.
+    setIcon(undefined);
 
     // Handle FontAwesome icons with dynamic import
     import(
