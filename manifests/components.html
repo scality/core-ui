@@ -576,13 +576,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/318 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">23 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/321 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.1s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14058,8 +14058,8 @@ variant?: TextVariant</code></pre>
       <div class="badges">
         <label for="c-52-components-progress-loading-stepper-props" class="badge ok as-toggle">1 prop type</label>
         <label for="c-52-components-progress-loading-stepper-info" class="badge info as-toggle">1 info</label>
-        <label for="c-52-components-progress-loading-stepper-stories" class="badge ok as-toggle">1 story</label>
-        
+        <label for="c-52-components-progress-loading-stepper-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-52-components-progress-loading-stepper-docs" class="badge ok as-toggle">1 doc</label>
       </div>
     </div>
     <div class="meta" title="./stories/stepper.stories.tsx">components-progress-loading-stepper · ./stories/stepper.stories.tsx</div>
@@ -14072,7 +14072,7 @@ variant?: TextVariant</code></pre>
   
   <input id="c-52-components-progress-loading-stepper-info" class="tg tg-info" type="checkbox" hidden />
   <input id="c-52-components-progress-loading-stepper-stories" class="tg tg-stories" type="checkbox" hidden />
-  
+  <input id="c-52-components-progress-loading-stepper-docs" class="tg tg-docs" type="checkbox" hidden />
   <input id="c-52-components-progress-loading-stepper-props" class="tg tg-props" type="checkbox" hidden />
 
   <div class="panels">
@@ -14106,7 +14106,7 @@ variant?: TextVariant</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Box, Button, Stack, Stepper, Wrapper as StoryWrapper, Text } from "@scality/core-ui";</code></pre>
+                <pre><code>import { Button, Stepper, Steppers, Wrapper as StoryWrapper, Text } from "@scality/core-ui";</code></pre>
               </div>
           
           
@@ -14123,8 +14123,128 @@ variant?: TextVariant</code></pre>
   &lt;/StoryWrapper&gt;
 );</code></pre>
             </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">State Completed</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StateCompleted = () =&gt; (
+  &lt;Steppers steps={STATE_STEPS} activeStep={2} /&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">State In Progress</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StateInProgress = () =&gt; (
+  &lt;Steppers
+    steps={[
+      { title: &#39;Configure&#39; },
+      { title: &#39;Schedule&#39;, inProgress: true },
+      { title: &#39;Confirm&#39; },
+    ]}
+    activeStep={1}
+  /&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">State Error</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StateError = () =&gt; (
+  &lt;Steppers
+    steps={[
+      { title: &#39;Configure&#39; },
+      { title: &#39;Schedule&#39;, error: true },
+      { title: &#39;Confirm&#39; },
+    ]}
+    activeStep={1}
+  /&gt;
+);</code></pre>
+            </div>
         </div>
     
+        <div class="panel panel-docs">
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Guideline</span>
+                <span class="badge ok">doc ok</span>
+              </div>
+              <div class="hint">./stories/stepper.guideline.mdx</div>
+              
+              <div class="mdx-content"><pre><code>import { Meta, Canvas } from &#39;@storybook/addon-docs/blocks&#39;;
+import * as StepperStories from &#39;./stepper.stories&#39;;
+
+&lt;Meta of={StepperStories} name=&quot;Guideline&quot; /&gt;
+
+&lt;style&gt;{`
+  .sbdocs-content h2, .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}&lt;/style&gt;
+
+# Stepper
+
+A stepper breaks a process into ordered phases that must be completed in sequence.
+Use it when each phase has a distinct nature and the next phase cannot begin before the previous one is done.
+
+&lt;Canvas of={StepperStories.SimpleStepper} sourceState=&quot;none&quot; /&gt;
+
+## When to use
+
+- The task has 3 to 5 distinct phases with a clear sequence.
+- Each phase requires its own decisions or inputs before moving on.
+- Users benefit from knowing how far along they are.
+
+## When not to use
+
+- Steps can be completed in any order: use a checklist instead.
+- The task is non-linear or revisitable at any time.
+
+## Typical pattern
+
+Steps do not need to be of the same nature. A common structure is:
+
+1. **Form:** the user configures the operation (inputs, selects, options).
+2. **Execution:** the system performs actions one by one, shown as a table of tasks with their status.
+3. **Summary:** results are displayed and the user can confirm or exit.
+
+Whether the user can navigate back to a previous step depends on the process. In a sequence of forms, going back is safe and expected. When a step involves system actions (API calls, data mutations), going back may not be possible or meaningful.
+
+## Step states
+
+Each step can carry one of the following states:
+
+- **Pending:** not yet reached, shown with a numbered circle.
+- **Active:** the current step, shown with a filled circle.
+- **Completed:** passed successfully, shown with a green checkmark.
+- **In progress:** the active step is waiting on an async operation, shown with a spinner.
+- **Error:** the step failed, shown with a red circle.
+
+**Completed steps** (steps 1 and 2 done, step 3 active):
+
+&lt;Canvas of={StepperStories.StateCompleted} sourceState=&quot;none&quot; /&gt;
+
+**In progress** (step 2 waiting on an async operation):
+
+&lt;Canvas of={StepperStories.StateInProgress} sourceState=&quot;none&quot; /&gt;
+
+**Error** (step 2 failed):
+
+&lt;Canvas of={StepperStories.StateError} sourceState=&quot;none&quot; /&gt;
+</code></pre></div>
+            </div>
+        </div>
   </div>
 </article>
 <article
