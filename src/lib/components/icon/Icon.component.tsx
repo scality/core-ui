@@ -9,7 +9,7 @@ import {
 } from 'react';
 import styled, { css } from 'styled-components';
 import type { CoreUITheme } from '../../style/theme';
-import { Loader } from '../loader/Loader.component';
+import { LoaderIcon } from '../../icons/scality-loading';
 import { Bucket, Buckets, RemoteGroup, RemoteUser } from './CustomsIcons';
 import { iconTable } from './iconTable';
 
@@ -76,6 +76,18 @@ type Props = {
   title?: string;
 };
 
+// The spinner shown while a cold icon loads. Sized in em so it scales with the
+// fa-${size} font-size of the fallback box, matching the glyph it stands in for —
+// unlike <Loader>, whose container forces a fixed px svg and resets font-size.
+const FallbackSpinner = styled.span`
+  display: inline-flex;
+  svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+`;
+
 const DelayedFallback = ({
   size,
   children,
@@ -100,7 +112,12 @@ const DelayedFallback = ({
       className={`svg-inline--fa${size ? ` fa-${size}` : ''}`}
       style={{ width: '1em' }}
     >
-      {show && children}
+      {show &&
+        (children ?? (
+          <FallbackSpinner>
+            <LoaderIcon />
+          </FallbackSpinner>
+        ))}
     </i>
   );
 };
@@ -199,9 +216,7 @@ function NonWrappedIcon({
 
   if (!icon && !customIcons[name]) {
     return (
-      <DelayedFallback size={size} {...accessibilityProps}>
-        <Loader size="base" />
-      </DelayedFallback>
+      <DelayedFallback size={size} {...accessibilityProps} />
     );
   }
 
