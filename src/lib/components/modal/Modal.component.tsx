@@ -50,7 +50,7 @@ type WithLegacyFooter = {
    * and bypasses the documented stack/alignment guideline; it will be
    * removed in a future major release.
    */
-  footer: ReactNode;
+  footer?: ReactNode;
   actions?: never;
 };
 
@@ -111,7 +111,7 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div<{ $wide?: boolean }>`
   padding: ${spacing.r32};
   flex-grow: 1;
-  min-width: 480px;
+  min-width: min(480px, 100%);
   box-sizing: border-box;
   background-color: ${(props) => props.theme.backgroundLevel4};
   overflow-y: auto;
@@ -204,17 +204,19 @@ const Modal = ({
           <ModalBody className="sc-modal-body" id="dialog_desc" $wide={wide}>
             {children}
           </ModalBody>
-          <ModalFooter className="sc-modal-footer">
-            {actions ? (
-              <ActionsLayout>
-                {actions.extra && <ActionsExtra>{actions.extra}</ActionsExtra>}
-                {actions.secondary}
-                {actions.primary}
-              </ActionsLayout>
-            ) : (
-              footer
-            )}
-          </ModalFooter>
+          {(actions || footer) && (
+            <ModalFooter className="sc-modal-footer">
+              {actions ? (
+                <ActionsLayout>
+                  {actions.extra && <ActionsExtra>{actions.extra}</ActionsExtra>}
+                  {actions.secondary}
+                  {actions.primary}
+                </ActionsLayout>
+              ) : (
+                footer
+              )}
+            </ModalFooter>
+          )}
         </ModalContent>
       </ModalContainer>,
       modalContainer.current,
