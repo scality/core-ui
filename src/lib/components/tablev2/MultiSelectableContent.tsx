@@ -155,7 +155,6 @@ export const MultiSelectableContent = <
         const rows = data;
         const row = data[index];
         prepareRowRef.current(row);
-        const onSingleRowSelected = onSingleRowSelectedRef.current;
 
         const rowProps = {
           ...row.getRowProps({
@@ -166,19 +165,21 @@ export const MultiSelectableContent = <
              */
             style: { ...style },
           }),
-          onClick: onSingleRowSelected
-            ? () => {
-                onSingleRowSelected(row);
-                toggleAllRowsSelectedRef.current(false);
-                setActiveRowId(row.id);
-              }
-            : () =>
-                handleMultipleSelectedRowsRef.current(
-                  selectedRowIdsRef.current,
-                  rows,
-                  row,
-                  index,
-                ),
+          onClick: () => {
+            const onSingleRowSelected = onSingleRowSelectedRef.current;
+            if (onSingleRowSelected) {
+              onSingleRowSelected(row);
+              toggleAllRowsSelectedRef.current(false);
+              setActiveRowId(row.id);
+            } else {
+              handleMultipleSelectedRowsRef.current(
+                selectedRowIdsRef.current,
+                rows,
+                row,
+                index,
+              );
+            }
+          },
         };
 
         return (
@@ -204,19 +205,16 @@ export const MultiSelectableContent = <
                 return (
                   <div
                     {...cellProps}
-                    onClick={
-                      onSingleRowSelected
-                        ? (event) => {
-                            event.stopPropagation();
-                            handleMultipleSelectedRowsRef.current(
-                              selectedRowIdsRef.current,
-                              rows,
-                              row,
-                              index,
-                            );
-                          }
-                        : undefined
-                    }
+                    onClick={(event) => {
+                      if (!onSingleRowSelectedRef.current) return;
+                      event.stopPropagation();
+                      handleMultipleSelectedRowsRef.current(
+                        selectedRowIdsRef.current,
+                        rows,
+                        row,
+                        index,
+                      );
+                    }}
                   >
                     {cell.render('Cell')}
                   </div>

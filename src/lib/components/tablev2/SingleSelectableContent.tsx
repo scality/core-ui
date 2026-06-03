@@ -100,7 +100,6 @@ export function SingleSelectableContent<
       memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
         const row = data[index];
         prepareRowRef.current(row);
-        const onRowSelected = onRowSelectedRef.current;
         let rowProps = row.getRowProps({
           /**
            * Note: We need to pass the style property to the row component.
@@ -114,10 +113,12 @@ export function SingleSelectableContent<
           ...rowProps,
           ...{
             onClick: () => {
+              const onRowSelected = onRowSelectedRef.current;
               if (onRowSelected) return onRowSelected(row);
             },
-            tabIndex: onRowSelected ? 0 : undefined,
+            tabIndex: onRowSelectedRef.current ? 0 : undefined,
             onKeyDown: (event) => {
+              const onRowSelected = onRowSelectedRef.current;
               if (
                 onRowSelected &&
                 (event.key === ' ' ||
