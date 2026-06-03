@@ -8,14 +8,30 @@ import { Button } from '../buttonv2/Buttonv2.component';
 import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
 
-type BaseProps = {
+/**
+ * Structured footer actions, rendered with the canonical stack and
+ * alignment (extra left-aligned, secondary + primary right-aligned with
+ * primary as the rightmost action).
+ */
+export type ModalActions = {
+  primary: ReactNode;
+  secondary?: ReactNode;
+  extra?: ReactNode;
+};
+
+type CommonProps = {
   isOpen: boolean;
   /**
-   * Should be a plain string for correct accessibility (aria-labelledby).
-   * ReactNode is accepted for backwards compatibility.
+   * Modal title.
+   *
+   * Pass a plain string — the title is used as the accessible name
+   * (`aria-labelledby`); non-string content breaks screen reader
+   * announcement.
+   *
+   * @deprecated Passing a `ReactNode` is kept for backward compatibility
+   * and will be removed in a future major release. Use a plain string.
    */
-  title: ReactNode;
-  footer: ReactNode;
+  title: string | ReactNode;
   children: ReactNode;
   subTitle?: ReactNode;
   /**
@@ -26,15 +42,37 @@ type BaseProps = {
   wide?: boolean;
 };
 
-type DialogProps = BaseProps & {
-  role?: 'dialog';
-  close?: () => void;
+type WithLegacyFooter = {
+  /**
+   * Free-form footer content.
+   *
+   * @deprecated Use `actions` instead. `footer` accepts arbitrary content
+   * and bypasses the documented stack/alignment guideline; it will be
+   * removed in a future major release.
+   */
+  footer: ReactNode;
+  actions?: never;
 };
 
-type AlertDialogProps = BaseProps & {
-  role: 'alertdialog';
-  close?: never;
+type WithActions = {
+  footer?: never;
+  /** Structured footer actions (preferred over `footer`). */
+  actions: ModalActions;
 };
+
+type FooterProps = WithLegacyFooter | WithActions;
+
+type DialogProps = CommonProps &
+  FooterProps & {
+    role?: 'dialog';
+    close?: () => void;
+  };
+
+type AlertDialogProps = CommonProps &
+  FooterProps & {
+    role: 'alertdialog';
+    close?: never;
+  };
 
 type Props = DialogProps | AlertDialogProps;
 
@@ -85,12 +123,23 @@ const ModalFooter = styled.div`
   background-color: ${(props) => props.theme.backgroundLevel3};
 `;
 
+const ActionsLayout = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${spacing.r8};
+`;
+
+const ActionsExtra = styled.div`
+  margin-right: auto;
+`;
+
 const Modal = ({
   isOpen,
   close,
   title,
   children,
   footer,
+  actions,
   subTitle,
   wide,
   role = 'dialog',
@@ -155,7 +204,17 @@ const Modal = ({
           <ModalBody className="sc-modal-body" id="dialog_desc" $wide={wide}>
             {children}
           </ModalBody>
-          <ModalFooter className="sc-modal-footer">{footer}</ModalFooter>
+          <ModalFooter className="sc-modal-footer">
+            {actions ? (
+              <ActionsLayout>
+                {actions.extra && <ActionsExtra>{actions.extra}</ActionsExtra>}
+                {actions.secondary}
+                {actions.primary}
+              </ActionsLayout>
+            ) : (
+              footer
+            )}
+          </ModalFooter>
         </ModalContent>
       </ModalContainer>,
       modalContainer.current,

@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import { Modal } from '../src/lib/components/modal/Modal.component';
+import { Modal, ModalActions } from '../src/lib/components/modal/Modal.component';
 import { action } from 'storybook/actions';
 import { Wrapper } from './common';
 import { Table } from '../src/lib/components/tablev2/Tablev2.component';
@@ -7,7 +7,7 @@ import { IconHelp } from '../src/lib/components/iconhelper/IconHelper';
 import { Stack } from '../src/lib/spacing';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
-import { useArgs } from '@storybook/preview-api';
+import { useArgs } from 'storybook/preview-api';
 import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
 
@@ -22,12 +22,6 @@ export default {
   },
 };
 
-const FooterActions = ({ children }) => (
-  <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
-    {children}
-  </Stack>
-);
-
 export const SimpleModal = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
@@ -41,21 +35,23 @@ export const SimpleModal = {
         <Modal
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
-          footer={
-            <FooterActions>
+          actions={{
+            secondary: (
               <Button
                 label="Cancel"
                 variant="outline"
                 onClick={() => updateArgs({ isOpen: false })}
               />
+            ),
+            primary: (
               <Button
                 variant="primary"
                 label="Save changes"
                 icon={<Icon name="Save" />}
                 onClick={action('Save changes clicked')}
               />
-            </FooterActions>
-          }
+            ),
+          }}
           {...args}
         />
       </>
@@ -82,21 +78,23 @@ export const DestructiveModal = {
         <Modal
           role="alertdialog"
           isOpen={isOpen}
-          footer={
-            <FooterActions>
+          actions={{
+            secondary: (
               <Button
                 label="Cancel"
                 variant="outline"
                 onClick={() => updateArgs({ isOpen: false })}
               />
+            ),
+            primary: (
               <Button
                 variant="danger"
                 label="Delete node"
                 icon={<Icon name="Delete" />}
                 onClick={action('Delete node clicked')}
               />
-            </FooterActions>
-          }
+            ),
+          }}
           {...args}
         />
       </>
@@ -150,21 +148,23 @@ const Demo = (myargs, args) => () => {
       <Modal
         role="alertdialog"
         isOpen={isOpen}
-        footer={
-          <FooterActions>
+        actions={{
+          secondary: (
             <Button
               label="Cancel"
               variant="outline"
               onClick={() => updateArgs({ isOpen: false })}
             />
+          ),
+          primary: (
             <Button
               variant="danger"
               label="Delete"
               icon={<Icon name="Delete" />}
               onClick={() => updateArgs({ isOpen: false })}
             />
-          </FooterActions>
-        }
+          ),
+        }}
         {...args}
       />
     </>
@@ -230,21 +230,23 @@ export const WithLongTextContent = {
         <Modal
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
-          footer={
-            <FooterActions>
+          actions={{
+            secondary: (
               <Button
                 label="Cancel"
                 variant="outline"
                 onClick={() => updateArgs({ isOpen: false })}
               />
+            ),
+            primary: (
               <Button
                 variant="primary"
                 label="Save"
                 icon={<Icon name="Save" />}
                 onClick={action('Save clicked')}
               />
-            </FooterActions>
-          }
+            ),
+          }}
           {...args}
         />
       </>
@@ -297,15 +299,15 @@ export const WithTableContent = {
           wide
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
-          footer={
-            <FooterActions>
+          actions={{
+            primary: (
               <Button
                 label="Close"
                 variant="outline"
                 onClick={() => updateArgs({ isOpen: false })}
               />
-            </FooterActions>
-          }
+            ),
+          }}
           {...args}
         >
           <div style={{ height: '280px' }}>
@@ -330,23 +332,70 @@ export const WithTableContent = {
   },
 };
 
+/**
+ * Demonstrates the deprecated `footer` prop. Existing call sites can keep
+ * using `footer` until they migrate to the structured `actions` prop. New
+ * code should prefer `actions`.
+ */
+export const LegacyFooterProp = {
+  render: (args) => {
+    const [{ isOpen }, updateArgs] = useArgs();
+    return (
+      <>
+        <Button
+          onClick={() => updateArgs({ isOpen: true })}
+          label={'Open modal (legacy footer)'}
+          variant="primary"
+        />
+        <Modal
+          close={() => updateArgs({ isOpen: false })}
+          isOpen={isOpen}
+          footer={
+            <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
+              <Button
+                label="Cancel"
+                variant="outline"
+                onClick={() => updateArgs({ isOpen: false })}
+              />
+              <Button
+                variant="primary"
+                label="Save"
+                onClick={action('Save clicked')}
+              />
+            </Stack>
+          }
+          {...args}
+        />
+      </>
+    );
+  },
+  args: {
+    title: 'Edit settings',
+    children: <span>Make your changes below.</span>,
+    wide: false,
+  },
+};
+
 /** Renders a trigger button + modal, wiring open/close automatically. */
 const ModalStory = ({
   label,
   variant = 'primary',
   title,
   children,
-  footer,
+  actions,
   wide,
 }: {
   label: string;
   variant?: 'primary' | 'outline' | 'danger';
   title: string;
   children: ReactNode;
-  footer?: ReactNode;
+  actions?: ModalActions;
   wide?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const defaultActions: ModalActions = {
+    primary: <Button label="Close" variant="outline" onClick={() => setIsOpen(false)} />,
+  };
   return (
     <>
       <Button onClick={() => setIsOpen(true)} label={label} variant={variant} />
@@ -355,13 +404,7 @@ const ModalStory = ({
         close={() => setIsOpen(false)}
         isOpen={isOpen}
         title={title}
-        footer={
-          footer ?? (
-            <FooterActions>
-              <Button label="Close" variant="outline" onClick={() => setIsOpen(false)} />
-            </FooterActions>
-          )
-        }
+        actions={actions ?? defaultActions}
       >
         {children}
       </Modal>

@@ -46,7 +46,7 @@ const withThemeProvider = (Story, context) => {
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
         {/* Wrapper to make the stories take the full screen but not in docs */}
-        <div style={viewMode === 'story' ? { height: 100 + 'vh' } : null}>
+        <div style={viewMode === 'story' ? { height: 100 + 'vh' } : undefined}>
           <ToastProvider>
             <Wrapper style={{ backgroundColor: background }}>
               <Story {...context} />
