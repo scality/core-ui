@@ -75,6 +75,17 @@ export const DAY_MONTH_ABBREVIATED = Intl.DateTimeFormat('en-GB', {
 });
 
 /**
+ * @description Day month abbreviated as a plain string, with the locale comma
+ * stripped and "Sept" normalised to the 3-letter "Sep". Shared by the
+ * `day-month-abbreviated` formatter case and chart label helpers.
+ * @example 06 Jun
+ */
+export const formatDayMonthAbbreviated = (value: Date): string =>
+  DAY_MONTH_ABBREVIATED.format(value)
+    .replace(',', '')
+    .replace(/Sept/g, 'Sep');
+
+/**
  * @description Day month abbreviated formatter. Used for describing long term date.
  * @example 06 Oct 25
  */
@@ -339,13 +350,7 @@ export const FormattedDateTime = ({
         </>
       );
     case 'day-month-abbreviated':
-      return (
-        <>
-          {DAY_MONTH_ABBREVIATED.format(value)
-            .replace(',', '')
-            .replace(/Sept/g, 'Sep')}
-        </>
-      );
+      return <>{formatDayMonthAbbreviated(value)}</>;
     case 'chart-long-term-date':
       return (
         <>
