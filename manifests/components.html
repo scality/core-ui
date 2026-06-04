@@ -582,7 +582,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14398,6 +14398,18 @@ steps: StepProps[]</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>allFilters?: { id: string; value: string; }[]
 
+/**
+ * Column definitions for the table.
+ * 
+ * IMPORTANT: memoize this (e.g. `useMemo`) and keep each column&#39;s `Cell`
+ * renderer stable across renders. react-table renders cells as
+ * `&lt;column.Cell /&gt;`, so a new `Cell` function identity on every parent
+ * render is a new component type — React unmounts and remounts the whole
+ * cell subtree each render. For cells with async content or icons that
+ * causes flicker/refetch. Define columns outside the render or wrap them in
+ * `useMemo`, and hoist inline `Cell` components rather than redefining them
+ * inline. The same applies to `data`.
+ */
 columns: Column&lt;DATA_ROW&gt;[]
 
 data: DATA_ROW[]
