@@ -1,6 +1,6 @@
-import { useEffect, useState, memo, CSSProperties } from 'react';
+import { useEffect, useState, memo, useMemo, useRef } from 'react';
 import { Row } from 'react-table';
-import { areEqual } from 'react-window';
+import { areEqual, ListChildComponentProps } from 'react-window';
 import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
@@ -14,7 +14,7 @@ import {
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { RenderRowType, TableRows, useTableScrollbar } from './TableCommon';
+import { TableRows, useTableScrollbar } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
 import { Loader } from '../loader/Loader.component';
@@ -124,79 +124,114 @@ export const MultiSelectableContent = <
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
 
-  const RenderRow = memo(({ index, style }: RenderRowType) => {
-    const row = rows[index];
-    prepareRow(row);
+  /**
+   * These values change identity on (almost) every render. We read them through refs so the row
+   * renderer below can keep a stable identity (see RenderRow).
+   */
+  const prepareRowRef = useRef(prepareRow);
+  prepareRowRef.current = prepareRow;
+  const selectedRowIdsRef = useRef(selectedRowIds);
+  selectedRowIdsRef.current = selectedRowIds;
+  const onSingleRowSelectedRef = useRef(onSingleRowSelected);
+  onSingleRowSelectedRef.current = onSingleRowSelected;
+  const toggleAllRowsSelectedRef = useRef(toggleAllRowsSelected);
+  toggleAllRowsSelectedRef.current = toggleAllRowsSelected;
+  const handleMultipleSelectedRowsRef = useRef(handleMultipleSelectedRows);
+  handleMultipleSelectedRowsRef.current = handleMultipleSelectedRows;
 
-    const rowProps = {
-      ...row.getRowProps({
-        /**
-         * Note:We need to pass the style property to the row component.
-         * Otherwise when we scroll down, the next rows are flashing
-         * because they are re-rendered in loop.
-         */
-        style: { ...style },
-      }),
-      onClick: onSingleRowSelected
-        ? () => {
-            onSingleRowSelected(row);
-            toggleAllRowsSelected(false);
-            setActiveRowId(row.id);
-          }
-        : () => handleMultipleSelectedRows(selectedRowIds, rows, row, index),
-    };
+  /**
+   * RenderRow MUST keep a stable identity across re-renders. It used to be redefined inline on
+   * every render, so react-window saw a new component type each time and remounted (not just
+   * re-rendered) every row — and therefore every cell — whenever the table re-rendered for any
+   * reason. That made async cell content reload and flash. We now read the row from react-window's
+   * `data` (itemData) prop and the volatile callbacks/state from refs, so the component is only
+   * recreated when something that affects the rendered output (activeRowId / separationLineVariant)
+   * actually changes. Checkbox selection still updates because react-table rebuilds `rows` (and
+   * therefore `data`) when `selectedRowIds` changes.
+   */
+  const RenderRow = useMemo(
+    () =>
+      memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
+        const rows = data;
+        const row = data[index];
+        prepareRowRef.current(row);
 
-    return (
-      <TableRowMultiSelectable
-        {...rowProps}
-        isSelected={row.isSelected || activeRowId === row.id}
-        separationLineVariant={separationLineVariant}
-        className="tr"
-      >
-        {row.cells.map((cell) => {
-          const cellProps = cell.getCellProps({
-            style: {
-              ...cell.column.cellStyle,
-              // Vertically center the text in cells.
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-            },
-            role: 'gridcell',
-          });
+        const rowProps = {
+          ...row.getRowProps({
+            /**
+             * Note:We need to pass the style property to the row component.
+             * Otherwise when we scroll down, the next rows are flashing
+             * because they are re-rendered in loop.
+             */
+            style: { ...style },
+          }),
+          onClick: () => {
+            const onSingleRowSelected = onSingleRowSelectedRef.current;
+            if (onSingleRowSelected) {
+              onSingleRowSelected(row);
+              toggleAllRowsSelectedRef.current(false);
+              setActiveRowId(row.id);
+            } else {
+              handleMultipleSelectedRowsRef.current(
+                selectedRowIdsRef.current,
+                rows,
+                row,
+                index,
+              );
+            }
+          },
+        };
 
-          if (cell.column.id === 'selection') {
-            return (
-              <div
-                {...cellProps}
-                onClick={
-                  onSingleRowSelected
-                    ? (event) => {
-                        event.stopPropagation();
-                        handleMultipleSelectedRows(
-                          selectedRowIds,
-                          rows,
-                          row,
-                          index,
-                        );
-                      }
-                    : undefined
-                }
-              >
-                {cell.render('Cell')}
-              </div>
-            );
-          }
+        return (
+          <TableRowMultiSelectable
+            {...rowProps}
+            isSelected={row.isSelected || activeRowId === row.id}
+            separationLineVariant={separationLineVariant}
+            className="tr"
+          >
+            {row.cells.map((cell) => {
+              const cellProps = cell.getCellProps({
+                style: {
+                  ...cell.column.cellStyle,
+                  // Vertically center the text in cells.
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                },
+                role: 'gridcell',
+              });
 
-          return (
-            <div {...cellProps} className="td">
-              {cell.render('Cell')}
-            </div>
-          );
-        })}
-      </TableRowMultiSelectable>
-    );
-  }, areEqual);
+              if (cell.column.id === 'selection') {
+                return (
+                  <div
+                    {...cellProps}
+                    onClick={(event) => {
+                      if (!onSingleRowSelectedRef.current) return;
+                      event.stopPropagation();
+                      handleMultipleSelectedRowsRef.current(
+                        selectedRowIdsRef.current,
+                        rows,
+                        row,
+                        index,
+                      );
+                    }}
+                  >
+                    {cell.render('Cell')}
+                  </div>
+                );
+              }
+
+              return (
+                <div {...cellProps} className="td">
+                  {cell.render('Cell')}
+                </div>
+              );
+            })}
+          </TableRowMultiSelectable>
+        );
+      }, areEqual),
+    [activeRowId, separationLineVariant],
+  );
 
   return (
     <>

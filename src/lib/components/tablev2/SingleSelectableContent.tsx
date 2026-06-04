@@ -1,5 +1,5 @@
-import { memo, useEffect, useRef } from 'react';
-import { areEqual, FixedSizeList } from 'react-window';
+import { memo, useEffect, useMemo, useRef } from 'react';
+import { areEqual, FixedSizeList, ListChildComponentProps } from 'react-window';
 import { Row } from 'react-table';
 import { useTableContext } from './Tablev2.component';
 import {
@@ -14,7 +14,7 @@ import {
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { RenderRowType, TableRows, useTableScrollbar } from './TableCommon';
+import { TableRows, useTableScrollbar } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
@@ -77,69 +77,93 @@ export function SingleSelectableContent<
     return () => clearTimeout(timer);
   }, [autoScrollToSelected, selectedId, rows]);
 
-  const RenderRow = memo(({ index, style }: RenderRowType) => {
-    const row = rows[index];
-    prepareRow(row);
-    let rowProps = row.getRowProps({
-      /**
-       * Note: We need to pass the style property to the row component.
-       * Otherwise when we scroll down, the next rows are flashing
-       * because they are re-rendered in loop.
-       */
-      style: { ...style },
-    });
+  /**
+   * `prepareRow` and `onRowSelected` change identity on every render. We read them through refs
+   * so the row renderer below can keep a stable identity (see RenderRow).
+   */
+  const prepareRowRef = useRef(prepareRow);
+  prepareRowRef.current = prepareRow;
+  const onRowSelectedRef = useRef(onRowSelected);
+  onRowSelectedRef.current = onRowSelected;
 
-    rowProps = {
-      ...rowProps,
-      ...{
-        onClick: () => {
-          if (onRowSelected) return onRowSelected(row);
-        },
-        tabIndex: onRowSelected ? 0 : undefined,
-        onKeyDown: (event) => {
-          if (
-            onRowSelected &&
-            (event.key === ' ' ||
-              event.key === 'Enter' ||
-              event.key === 'Spacebar')
-          ) {
-            event.preventDefault();
-            onRowSelected(row);
-          }
-        },
-      },
-    };
+  /**
+   * RenderRow MUST keep a stable identity across re-renders. It used to be redefined inline on
+   * every render, so react-window saw a new component type each time and remounted (not just
+   * re-rendered) every row — and therefore every cell — whenever the table re-rendered for any
+   * reason. That made async cell content reload and flash. We now read the row from react-window's
+   * `data` (itemData) prop and the volatile callbacks from refs, so the component only needs to be
+   * recreated when something that affects the rendered output (selectedId / separationLineVariant)
+   * actually changes.
+   */
+  const RenderRow = useMemo(
+    () =>
+      memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
+        const row = data[index];
+        prepareRowRef.current(row);
+        let rowProps = row.getRowProps({
+          /**
+           * Note: We need to pass the style property to the row component.
+           * Otherwise when we scroll down, the next rows are flashing
+           * because they are re-rendered in loop.
+           */
+          style: { ...style },
+        });
 
-    return (
-      <TableRow
-        {...rowProps}
-        isSelected={selectedId === row.id}
-        aria-selected={selectedId === row.id ? 'true' : 'false'}
-        separationLineVariant={separationLineVariant}
-        selectedId={selectedId}
-        className="tr"
-      >
-        {row.cells.map((cell) => {
-          let cellProps = cell.getCellProps({
-            style: {
-              ...cell.column.cellStyle,
-              // Vertically center the text in cells.
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
+        rowProps = {
+          ...rowProps,
+          ...{
+            onClick: () => {
+              const onRowSelected = onRowSelectedRef.current;
+              if (onRowSelected) return onRowSelected(row);
             },
-            role: 'gridcell',
-          });
+            tabIndex: onRowSelectedRef.current ? 0 : undefined,
+            onKeyDown: (event) => {
+              const onRowSelected = onRowSelectedRef.current;
+              if (
+                onRowSelected &&
+                (event.key === ' ' ||
+                  event.key === 'Enter' ||
+                  event.key === 'Spacebar')
+              ) {
+                event.preventDefault();
+                onRowSelected(row);
+              }
+            },
+          },
+        };
 
-          return (
-            <div {...cellProps} className="td">
-              {cell.render('Cell')}
-            </div>
-          );
-        })}
-      </TableRow>
-    );
-  }, areEqual);
+        return (
+          <TableRow
+            {...rowProps}
+            isSelected={selectedId === row.id}
+            aria-selected={selectedId === row.id ? 'true' : 'false'}
+            separationLineVariant={separationLineVariant}
+            selectedId={selectedId}
+            className="tr"
+          >
+            {row.cells.map((cell) => {
+              let cellProps = cell.getCellProps({
+                style: {
+                  ...cell.column.cellStyle,
+                  // Vertically center the text in cells.
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                },
+                role: 'gridcell',
+              });
+
+              return (
+                <div {...cellProps} className="td">
+                  {cell.render('Cell')}
+                </div>
+              );
+            })}
+          </TableRow>
+        );
+      }, areEqual),
+    [selectedId, separationLineVariant],
+  );
 
   const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
     useTableScrollbar();
