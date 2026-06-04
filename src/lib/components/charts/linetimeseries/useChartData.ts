@@ -32,6 +32,8 @@ type ChartDataOutput = {
   topValue: number;
   /** Unit label (e.g., "KiB/s", "%") */
   unitLabel: string | undefined;
+  /** Factor the dataset was divided by during normalization (for tooltip re-scaling) */
+  valueBase: number;
   /** X-axis tick positions */
   xAxisTicks: number[];
   /** Line configurations ready for rendering */
@@ -207,7 +209,7 @@ export function useChartData({
    * - Applies unit range thresholds (e.g., B/s → KiB/s → MiB/s)
    * - Calculates Y-axis domain
    */
-  const { topValue, unitLabel, rechartsData, topDomain } = useMemo(() => {
+  const { topValue, unitLabel, rechartsData, topDomain, valueBase } = useMemo(() => {
     const values = chartData.flatMap((dataPoint) =>
       Object.entries(dataPoint)
         .filter(([key]) => key !== 'timestamp')
@@ -231,6 +233,7 @@ export function useChartData({
         unitLabel: yAxisType === 'percentage' ? '%' : undefined,
         rechartsData: chartData,
         topDomain: 1,
+        valueBase: 1,
       };
     }
 
@@ -258,6 +261,7 @@ export function useChartData({
       unitLabel: result.unitLabel ?? (yAxisType === 'percentage' ? '%' : undefined),
       rechartsData: result.rechartsData,
       topDomain: finalTopDomain,
+      valueBase: result.valueBase,
     };
   }, [chartData, yAxisType, unitRange]);
 
@@ -317,6 +321,7 @@ export function useChartData({
     topDomain,
     topValue,
     unitLabel,
+    valueBase,
     xAxisTicks,
     linesToRender,
     belowSeriesLabels,

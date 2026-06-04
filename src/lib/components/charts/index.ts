@@ -47,6 +47,7 @@ export {
   formatXAxisDate,
   getTooltipDateFormat,
   normalizeChartDataWithUnits,
+  formatTooltipValueWithUnit,
 } from './common/chartUtils';
 
 // Context Providers (for backward compatibility)

@@ -6,6 +6,7 @@ import {
   formatXAxisDate,
   normalizeChartDataWithUnits,
   getTooltipDateFormat,
+  formatTooltipValueWithUnit,
 } from './chartUtils';
 import { NAN_STRING } from '../../constants';
 import { UnitRange } from '../types';
@@ -413,5 +414,80 @@ describe('normalizeChartDataWithUnits', () => {
       expect(result.topValue).toBe(100);
       expect(result.rechartsData).toEqual(data);
     });
+  });
+
+  describe('valueBase', () => {
+    it('should expose the value base used for normalization', () => {
+      const data = [{ category: 'A', value: 2000 }];
+      const unitRange: UnitRange = [
+        { threshold: 1, label: 'op/s' },
+        { threshold: 1000, label: 'kop/s' },
+      ];
+
+      const result = normalizeChartDataWithUnits(
+        data,
+        2000,
+        unitRange,
+        'category',
+      );
+
+      expect(result.unitLabel).toBe('kop/s');
+      expect(result.valueBase).toBe(1000);
+    });
+
+    it('should default valueBase to 1 when no unit range is provided', () => {
+      const result = normalizeChartDataWithUnits(
+        [{ category: 'A', value: 100 }],
+        100,
+        undefined,
+        'category',
+      );
+
+      expect(result.valueBase).toBe(1);
+    });
+  });
+});
+
+describe('formatTooltipValueWithUnit', () => {
+  const unitRange: UnitRange = [
+    { threshold: 1, label: 'op/s' },
+    { threshold: 1000, label: 'kop/s' },
+    { threshold: 1000000, label: 'Mop/s' },
+  ];
+
+  it('re-derives a smaller unit for values that are small relative to the axis unit', () => {
+    // Axis is in kop/s (valueBase 1000). A point of 5 op/s is stored as 0.005.
+    // Without re-scaling it would read "0.01 kop/s"; instead it should read "5 op/s".
+    expect(formatTooltipValueWithUnit(0.005, 1000, unitRange, 'kop/s')).toBe(
+      '5.00 op/s',
+    );
+  });
+
+  it('keeps the axis unit for values that match its magnitude', () => {
+    // 2 (stored) * 1000 = 2000 op/s → 2 kop/s
+    expect(formatTooltipValueWithUnit(2, 1000, unitRange, 'kop/s')).toBe(
+      '2.00 kop/s',
+    );
+  });
+
+  it('re-derives a larger unit for values that exceed the axis unit', () => {
+    // 5000 (stored) * 1000 = 5,000,000 op/s → 5 Mop/s
+    expect(formatTooltipValueWithUnit(5000, 1000, unitRange, 'kop/s')).toBe(
+      '5.00 Mop/s',
+    );
+  });
+
+  it('handles negative values (symmetrical charts) using the magnitude', () => {
+    expect(formatTooltipValueWithUnit(-0.005, 1000, unitRange, 'kop/s')).toBe(
+      '-5.00 op/s',
+    );
+  });
+
+  it('falls back to the provided unit label when no unit range is given', () => {
+    expect(formatTooltipValueWithUnit(42.5, 1, undefined, '%')).toBe('42.50 %');
+  });
+
+  it('returns "-" for non-finite values', () => {
+    expect(formatTooltipValueWithUnit(NaN, 1000, unitRange, 'kop/s')).toBe('-');
   });
 });

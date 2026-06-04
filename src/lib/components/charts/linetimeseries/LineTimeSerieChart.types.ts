@@ -119,6 +119,11 @@ export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
 export type LineTimeSerieChartTooltipProps = {
   tooltipProps: TooltipContentProps<number, string>;
   unitLabel?: string;
+  valueBase?: number;
+  unitRange?: {
+    threshold: number;
+    label: string;
+  }[];
   duration: number;
   renderTooltip?: (
     tooltipProps: TooltipContentProps<number, string>,
