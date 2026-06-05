@@ -31,6 +31,22 @@ const TickContainer = styled.div`
   justify-content: center;
 `;
 
+// Stacks a multi-line tick label (e.g. time + date on a midnight crossover)
+// tightly. The reduced line-height keeps the two lines visually grouped; each
+// line stays its own ConstrainedText so it truncates independently.
+const MultilineTickContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & span {
+    line-height: 1.1;
+  }
+`;
+
+// Extra height granted per wrapped line so a second line is not clipped.
+const TICK_LINE_HEIGHT = 12;
+
 interface ChartLoadingOrErrorProps {
   height: number;
 }
@@ -158,42 +174,57 @@ export const CustomTick = ({
       1000
       : 0;
 
+  const tooltipStyle = {
+    backgroundColor: theme.backgroundLevel1,
+    padding: spacing.r10,
+    borderRadius: spacing.r8,
+    border: `1px solid ${theme.border}`,
+    position: 'absolute' as const,
+  };
+
+  const labelLine = (content: React.ReactNode, key?: React.Key) => (
+    <ConstrainedText
+      key={key}
+      color="textSecondary"
+      text={<Text variant="Smaller">{content}</Text>}
+      centered
+      tooltipStyle={tooltipStyle}
+    />
+  );
+
+  // A category label may carry a second line (e.g. a date on a midnight
+  // crossover) separated by "\n"; those lines are stacked tightly.
+  const lines = type.type === 'time' ? [] : String(payload.value).split('\n');
+  const isMultiline = lines.length > 1;
+
+  const content =
+    type.type === 'time' ? (
+      labelLine(
+        <FormattedDateTime
+          format={formatXAxisDate(duration)}
+          value={new Date(payload.value)}
+        />,
+      )
+    ) : isMultiline ? (
+      <MultilineTickContainer>
+        {lines.map((line, index) => labelLine(line, index))}
+      </MultilineTickContainer>
+    ) : (
+      labelLine(String(payload.value))
+    );
+
   return (
     <foreignObject
       x={centerX}
       y={numY - 10}
       width={tickWidth}
-      height={30}
+      height={30 + (isMultiline ? (lines.length - 1) * TICK_LINE_HEIGHT : 0)}
       style={{
         overflow: 'visible',
         pointerEvents: 'none',
       }}
     >
-      <TickContainer>
-        <ConstrainedText
-          color="textSecondary"
-          text={
-            <Text variant="Smaller">
-              {type.type === 'time' ? (
-                <FormattedDateTime
-                  format={formatXAxisDate(duration)}
-                  value={new Date(payload.value)}
-                />
-              ) : (
-                String(payload.value)
-              )}
-            </Text>
-          }
-          centered
-          tooltipStyle={{
-            backgroundColor: theme.backgroundLevel1,
-            padding: spacing.r10,
-            borderRadius: spacing.r8,
-            border: `1px solid ${theme.border}`,
-            position: 'absolute',
-          }}
-        />
-      </TickContainer>
+      <TickContainer>{content}</TickContainer>
     </foreignObject>
   );
 };

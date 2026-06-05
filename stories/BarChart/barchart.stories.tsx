@@ -986,6 +986,53 @@ export const Histogram: Story = {
   },
 };
 
+/**
+ * A bucket label may contain a `"\n"` to render on two lines — here the bucket
+ * that crosses midnight shows the date (`02 Jun`) on a second line. The caller
+ * supplies these strings; the chart renders them as-is via `CustomTick`'s
+ * multi-line support.
+ */
+export const HistogramWithMultilineLabels: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const labels = [
+      '11:00',
+      '14:00',
+      '17:00',
+      '20:00',
+      '23:00',
+      '02:00\n02 Jun',
+      '05:00',
+      '08:00',
+    ];
+    const values = [12, 30, 45, 50, 42, 20, 15, 25];
+    const histogramData = [
+      {
+        label: 'Requests',
+        data: labels.map(
+          (label, i) => [label, values[i]] as [string, number],
+        ),
+      },
+    ];
+    return (
+      <div style={{ width: '50%', padding: spacing.r16 }}>
+        <ChartLegendWrapper
+          colorSet={{
+            Requests: theme.statusHealthy,
+          }}
+        >
+          <Barchart
+            type={{ type: 'category', gap: 0 }}
+            bars={histogramData}
+            title="Requests over 24h"
+          />
+          <ChartLegend shape="rectangle" />
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
 export const ModernPreset: Story = {
   render: () => {
     const theme = useTheme() as CoreUITheme;
