@@ -576,7 +576,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/323 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/324 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -1110,7 +1110,7 @@ withDefaultIcon?: boolean = false</code></pre>
       <div class="badges">
         <label for="c-3-components-data-display-charts-barchartv2-props" class="badge ok as-toggle">16 prop types</label>
         <label for="c-3-components-data-display-charts-barchartv2-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">17 stories</label>
+        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">18 stories</label>
         
       </div>
     </div>
@@ -2033,6 +2033,52 @@ unitRange?: UnitRange</code></pre>
           type={{ type: &#39;category&#39;, gap: 0 }}
           bars={histogramData}
           title=&quot;Histogram&quot;
+        /&gt;
+        &lt;ChartLegend shape=&quot;rectangle&quot; /&gt;
+      &lt;/ChartLegendWrapper&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Histogram With Multiline Labels</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A bucket label may contain a `&quot;\n&quot;` to render on two lines — here the bucket that crosses midnight shows the date (`02 Jun`) on a second line. The caller supplies these strings; the chart renders them as-is via `CustomTick`&#39;s multi-line support.</div>
+              <pre><code>const HistogramWithMultilineLabels = () =&gt; {
+  const theme = useTheme() as CoreUITheme;
+  const labels = [
+    &#39;11:00&#39;,
+    &#39;14:00&#39;,
+    &#39;17:00&#39;,
+    &#39;20:00&#39;,
+    &#39;23:00&#39;,
+    &#39;02:00\n02 Jun&#39;,
+    &#39;05:00&#39;,
+    &#39;08:00&#39;,
+  ];
+  const values = [12, 30, 45, 50, 42, 20, 15, 25];
+  const histogramData = [
+    {
+      label: &#39;Requests&#39;,
+      data: labels.map(
+        (label, i) =&gt; [label, values[i]] as [string, number],
+      ),
+    },
+  ];
+  return (
+    &lt;div style={{ width: &#39;50%&#39;, padding: spacing.r16 }}&gt;
+      &lt;ChartLegendWrapper
+        colorSet={{
+          Requests: theme.statusHealthy,
+        }}
+      &gt;
+        &lt;Barchart
+          type={{ type: &#39;category&#39;, gap: 0 }}
+          bars={histogramData}
+          title=&quot;Requests over 24h&quot;
         /&gt;
         &lt;ChartLegend shape=&quot;rectangle&quot; /&gt;
       &lt;/ChartLegendWrapper&gt;
