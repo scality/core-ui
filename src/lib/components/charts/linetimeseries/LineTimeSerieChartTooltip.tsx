@@ -10,26 +10,7 @@ import {
 } from '../common/ChartTooltip';
 import { LineTimeSerieChartTooltipProps } from './LineTimeSerieChart.types';
 import { getCurrentlyHoveredChartId } from './useChartHover';
-import { formatISONumber } from '../../../utils';
-
-/**
- * Formats a numeric value for tooltip display
- * - Non-finite values (NaN, null, undefined) → "-"
- * - Zero → "0" with unit
- * - Large values (>= 1000) → compact notation (1k, 1M)
- * - Normal values (1-999) → up to 2 decimal places
- * - Small values (0.01-0.99) → 2 decimal places
- * - Very small values (< 0.01) → scientific notation (e.g., 4.7e-5)
- */
-export const formatTooltipValue = (
-  value: number,
-  unitLabel?: string,
-): string => {
-  if (!Number.isFinite(value)) return '-';
-
-  const formatted = formatISONumber(value, { fixedDecimals: true, compact: true });
-  return `${formatted}${unitLabel ? ` ${unitLabel}` : ''}`;
-};
+import { formatTooltipValueWithUnit } from '../common/chartUtils';
 
 /**
  * Custom tooltip component for LineTimeSerieChart
@@ -39,6 +20,8 @@ export const LineTimeSerieChartTooltip: React.FC<
   LineTimeSerieChartTooltipProps
 > = ({
   unitLabel,
+  valueBase = 1,
+  unitRange,
   duration,
   tooltipProps,
   renderTooltip,
@@ -104,7 +87,12 @@ export const LineTimeSerieChartTooltip: React.FC<
                 />
               );
 
-              const formattedValue = formatTooltipValue(entry.value, unitLabel);
+              const formattedValue = formatTooltipValueWithUnit(
+                entry.value,
+                valueBase,
+                unitRange,
+                unitLabel,
+              );
 
               return (
                 <React.Fragment key={index}>

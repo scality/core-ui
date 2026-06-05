@@ -182,6 +182,7 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
   topValue: number;
   rechartsData: T[];
   topDomain: number;
+  valueBase: number;
 } => {
   // If no unit range provided, just calculate top value without unit conversion
   if (!unitRange || unitRange.length === 0) {
@@ -191,6 +192,7 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
       topValue,
       rechartsData: data,
       topDomain: maxValue * 1.1,
+      valueBase: 1,
     };
   }
 
@@ -212,7 +214,50 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
     return normalizedDataPoint as T;
   });
 
-  return { unitLabel, topValue, rechartsData, topDomain };
+  return { unitLabel, topValue, rechartsData, topDomain, valueBase };
+};
+
+/**
+ * Formats a single value for tooltip display, re-deriving the unit from the
+ * value's own magnitude when a unitRange is provided.
+ *
+ * Chart data is normalized once against the dataset maximum so the Y-axis can
+ * use a single unit. A value that is small relative to that maximum would
+ * otherwise render with many decimals under the axis unit (e.g. "0.005 kop/s").
+ * Re-applying the unitRange per value keeps the tooltip readable (e.g. "5 op/s")
+ * independently of the axis unit.
+ *
+ * @param value - The normalized value as stored in the Recharts dataset
+ * @param valueBase - The factor the dataset was divided by during normalization
+ * @param unitRange - Unit range used for the chart; when empty the value is shown as-is
+ * @param fallbackUnitLabel - Unit label used when no unitRange is provided (e.g. "%")
+ */
+export const formatTooltipValueWithUnit = (
+  value: number,
+  valueBase: number,
+  unitRange: UnitRange | undefined,
+  fallbackUnitLabel?: string,
+): string => {
+  if (!Number.isFinite(value)) return '-';
+
+  if (!unitRange || unitRange.length === 0) {
+    const formatted = formatISONumber(value, {
+      fixedDecimals: true,
+      compact: true,
+    });
+    return `${formatted}${fallbackUnitLabel ? ` ${fallbackUnitLabel}` : ''}`;
+  }
+
+  const originalValue = value * valueBase;
+  const { valueBase: tooltipValueBase, unitLabel } = getUnitLabel(
+    unitRange,
+    Math.abs(originalValue),
+  );
+  const formatted = formatISONumber(originalValue / tooltipValueBase, {
+    fixedDecimals: true,
+    compact: true,
+  });
+  return `${formatted}${unitLabel ? ` ${unitLabel}` : ''}`;
 };
 
 /**

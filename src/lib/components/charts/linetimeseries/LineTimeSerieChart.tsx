@@ -80,6 +80,7 @@ export function LineTimeSerieChart({
     topDomain,
     topValue,
     unitLabel,
+    valueBase,
     xAxisTicks,
     linesToRender,
     belowSeriesLabels,
@@ -192,6 +193,8 @@ export function LineTimeSerieChart({
             content={(props: TooltipContentProps<number, string>) => (
               <LineTimeSerieChartTooltip
                 unitLabel={unitLabel}
+                valueBase={valueBase}
+                unitRange={unitRange}
                 duration={duration}
                 renderTooltip={renderTooltip}
                 isSymmetrical={yAxisType === 'symmetrical'}
