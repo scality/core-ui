@@ -576,13 +576,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/321 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/62 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">61/62 infos</a><a class="filter-pill err" data-k="story-errors" href="#filter-story-errors">8/323 story errors</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -3397,7 +3397,7 @@ width?: string = auto</code></pre>
       <div class="badges">
         <label for="c-8-components-data-display-charts-linetimeseriechart-err" class="badge err as-toggle">prop type error</label>
         <label for="c-8-components-data-display-charts-linetimeseriechart-info" class="badge info as-toggle">1 info</label>
-        <label for="c-8-components-data-display-charts-linetimeseriechart-stories" class="badge err as-toggle">8/16 story errors</label>
+        <label for="c-8-components-data-display-charts-linetimeseriechart-stories" class="badge err as-toggle">8/18 story errors</label>
         
       </div>
     </div>
@@ -4644,6 +4644,144 @@ export const ModernPreset: Story = {
   },
 };
 
+// ─── ARTESCA-17366: tooltip unit independent from axis unit ───────────────────
+// Operations per second. The dataset maximum is in the thousands, so the axis
+// (and chart title) settle on &quot;kop/s&quot;. A handful of points are only a few op/s.
+// Before the fix those points rendered as &quot;0.00 kop/s&quot; in the tooltip (the axis
+// unit forced on every value). Now the tooltip re-derives the unit per value, so
+// a 3 op/s point reads &quot;3.00 op/s&quot; while the axis stays in kop/s.
+const UNIT_RANGE_OPS = [
+  { threshold: 1, label: &#39;op/s&#39; },
+  { threshold: 1000, label: &#39;kop/s&#39; },
+  { threshold: 1000000, label: &#39;Mop/s&#39; },
+];
+
+const mixedMagnitudeOpsData: [number, string][] = [
+  [1740405600, &#39;4200&#39;],
+  [1740406320, &#39;3850&#39;],
+  [1740407760, &#39;4100&#39;],
+  [1740408480, &#39;3&#39;], // tiny spike-down → &quot;3.00 op/s&quot;, not &quot;0.00 kop/s&quot;
+  [1740409200, &#39;4500&#39;],
+  [1740409920, &#39;3920&#39;],
+  [1740410640, &#39;7&#39;], // tiny → &quot;7.00 op/s&quot;
+  [1740411360, &#39;4310&#39;],
+  [1740412080, &#39;3780&#39;],
+  [1740412800, &#39;4640&#39;],
+  [1740413520, &#39;5120&#39;],
+  [1740414240, &#39;120&#39;], // small → &quot;120.00 op/s&quot;
+  [1740415680, &#39;4170&#39;],
+  [1740416400, &#39;3550&#39;],
+  [1740417120, &#39;4790&#39;],
+  [1740417840, &#39;3210&#39;],
+  [1740418560, &#39;4410&#39;],
+  [1740419280, &#39;0.5&#39;], // sub-unit → &quot;0.50 op/s&quot;
+  [1740420000, &#39;3950&#39;],
+  [1740420720, &#39;4680&#39;],
+  [1740421440, &#39;3504&#39;],
+  [1740422160, &#39;4660&#39;],
+  [1740422880, &#39;4357&#39;],
+  [1740423600, &#39;3680&#39;],
+];
+
+export const TooltipUnitRangeExample: Story = {
+  render: () =&gt; {
+    return (
+      &lt;ChartLegendWrapper colorSet={{ &#39;operations&#39;: lineTimeSeriesColorRange[0] }}&gt;
+        &lt;LineTimeSerieChart
+          series={[
+            {
+              data: mixedMagnitudeOpsData,
+              resource: &#39;operations&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+          ]}
+          title=&quot;Operation&quot;
+          height={200}
+          startingTimeStamp={mixedMagnitudeOpsData[0][0]}
+          unitRange={UNIT_RANGE_OPS}
+          isLoading={false}
+          yAxisType={&#39;default&#39;}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          helpText=&quot;Axis is in kop/s; hover the low points (3, 7, 120, 0.5) — the tooltip re-applies the unit range so they read in op/s instead of 0.00 kop/s.&quot;
+        /&gt;
+        &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+      &lt;/ChartLegendWrapper&gt;
+    );
+  },
+};
+
+// Three series sharing the same timestamps but living in different magnitudes:
+// - &quot;deletes&quot; peaks in the millions  → axis settles on Mop/s
+// - &quot;reads&quot;  is in the thousands     → tooltip re-derives kop/s
+// - &quot;writes&quot; is a handful of op/s    → tooltip re-derives op/s
+// Hovering any point shows all three values, each with its own proper unit,
+// instead of the small ones collapsing to &quot;0.00 Mop/s&quot;.
+const opsTimestamps = mixedMagnitudeOpsData.map(([t]) =&gt; t);
+
+const readsData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (3500 + ((i * 137) % 1800)).toString(),
+]);
+
+const writesData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (2 + ((i * 7) % 40)).toString(),
+]);
+
+const deletesData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (1_200_000 + ((i * 91_000) % 900_000)).toString(),
+]);
+
+export const TooltipUnitRangeMultiSeriesExample: Story = {
+  render: () =&gt; {
+    return (
+      &lt;ChartLegendWrapper
+        colorSet={{
+          reads: lineTimeSeriesColorRange[0],
+          writes: lineTimeSeriesColorRange[1],
+          deletes: lineTimeSeriesColorRange[2],
+        }}
+      &gt;
+        &lt;LineTimeSerieChart
+          series={[
+            {
+              data: deletesData,
+              resource: &#39;deletes&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+            {
+              data: readsData,
+              resource: &#39;reads&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+            {
+              data: writesData,
+              resource: &#39;writes&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+          ]}
+          title=&quot;Operation&quot;
+          height={200}
+          startingTimeStamp={opsTimestamps[0]}
+          unitRange={UNIT_RANGE_OPS}
+          isLoading={false}
+          yAxisType={&#39;default&#39;}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          helpText=&quot;Axis is in Mop/s (largest series). Hover any point: deletes read in Mop/s, reads in kop/s and writes in op/s — each value gets its own unit, independent of the axis.&quot;
+        /&gt;
+        &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+      &lt;/ChartLegendWrapper&gt;
+    );
+  },
+};
+
 export const BigValuesExample: Story = {
   render: () =&gt; {
     return (
@@ -5194,6 +5332,92 @@ export const BigValuesExample: Story = {
         yAxisType={&#39;default&#39;}
         interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
         duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Tooltip Unit Range Example</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const TooltipUnitRangeExample = () =&gt; {
+  return (
+    &lt;ChartLegendWrapper colorSet={{ &#39;operations&#39;: lineTimeSeriesColorRange[0] }}&gt;
+      &lt;LineTimeSerieChart
+        series={[
+          {
+            data: mixedMagnitudeOpsData,
+            resource: &#39;operations&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+        ]}
+        title=&quot;Operation&quot;
+        height={200}
+        startingTimeStamp={mixedMagnitudeOpsData[0][0]}
+        unitRange={UNIT_RANGE_OPS}
+        isLoading={false}
+        yAxisType={&#39;default&#39;}
+        interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+        duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        helpText=&quot;Axis is in kop/s; hover the low points (3, 7, 120, 0.5) — the tooltip re-applies the unit range so they read in op/s instead of 0.00 kop/s.&quot;
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Tooltip Unit Range Multi Series Example</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const TooltipUnitRangeMultiSeriesExample = () =&gt; {
+  return (
+    &lt;ChartLegendWrapper
+      colorSet={{
+        reads: lineTimeSeriesColorRange[0],
+        writes: lineTimeSeriesColorRange[1],
+        deletes: lineTimeSeriesColorRange[2],
+      }}
+    &gt;
+      &lt;LineTimeSerieChart
+        series={[
+          {
+            data: deletesData,
+            resource: &#39;deletes&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+          {
+            data: readsData,
+            resource: &#39;reads&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+          {
+            data: writesData,
+            resource: &#39;writes&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+        ]}
+        title=&quot;Operation&quot;
+        height={200}
+        startingTimeStamp={opsTimestamps[0]}
+        unitRange={UNIT_RANGE_OPS}
+        isLoading={false}
+        yAxisType={&#39;default&#39;}
+        interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+        duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        helpText=&quot;Axis is in Mop/s (largest series). Hover any point: deletes read in Mop/s, reads in kop/s and writes in op/s — each value gets its own unit, independent of the axis.&quot;
       /&gt;
       &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
     &lt;/ChartLegendWrapper&gt;
@@ -16620,7 +16844,7 @@ status: &quot;loading&quot; | &quot;error&quot; | &quot;idle&quot; | &quot;noRes
       <div class="badges">
         <label for="c-error-0-components-data-display-charts-linetimeseriechart-err" class="badge err as-toggle">prop type error</label>
         <label for="c-error-0-components-data-display-charts-linetimeseriechart-info" class="badge info as-toggle">1 info</label>
-        <label for="c-error-0-components-data-display-charts-linetimeseriechart-stories" class="badge err as-toggle">8/16 story errors</label>
+        <label for="c-error-0-components-data-display-charts-linetimeseriechart-stories" class="badge err as-toggle">8/18 story errors</label>
         
       </div>
     </div>
@@ -17867,6 +18091,144 @@ export const ModernPreset: Story = {
   },
 };
 
+// ─── ARTESCA-17366: tooltip unit independent from axis unit ───────────────────
+// Operations per second. The dataset maximum is in the thousands, so the axis
+// (and chart title) settle on &quot;kop/s&quot;. A handful of points are only a few op/s.
+// Before the fix those points rendered as &quot;0.00 kop/s&quot; in the tooltip (the axis
+// unit forced on every value). Now the tooltip re-derives the unit per value, so
+// a 3 op/s point reads &quot;3.00 op/s&quot; while the axis stays in kop/s.
+const UNIT_RANGE_OPS = [
+  { threshold: 1, label: &#39;op/s&#39; },
+  { threshold: 1000, label: &#39;kop/s&#39; },
+  { threshold: 1000000, label: &#39;Mop/s&#39; },
+];
+
+const mixedMagnitudeOpsData: [number, string][] = [
+  [1740405600, &#39;4200&#39;],
+  [1740406320, &#39;3850&#39;],
+  [1740407760, &#39;4100&#39;],
+  [1740408480, &#39;3&#39;], // tiny spike-down → &quot;3.00 op/s&quot;, not &quot;0.00 kop/s&quot;
+  [1740409200, &#39;4500&#39;],
+  [1740409920, &#39;3920&#39;],
+  [1740410640, &#39;7&#39;], // tiny → &quot;7.00 op/s&quot;
+  [1740411360, &#39;4310&#39;],
+  [1740412080, &#39;3780&#39;],
+  [1740412800, &#39;4640&#39;],
+  [1740413520, &#39;5120&#39;],
+  [1740414240, &#39;120&#39;], // small → &quot;120.00 op/s&quot;
+  [1740415680, &#39;4170&#39;],
+  [1740416400, &#39;3550&#39;],
+  [1740417120, &#39;4790&#39;],
+  [1740417840, &#39;3210&#39;],
+  [1740418560, &#39;4410&#39;],
+  [1740419280, &#39;0.5&#39;], // sub-unit → &quot;0.50 op/s&quot;
+  [1740420000, &#39;3950&#39;],
+  [1740420720, &#39;4680&#39;],
+  [1740421440, &#39;3504&#39;],
+  [1740422160, &#39;4660&#39;],
+  [1740422880, &#39;4357&#39;],
+  [1740423600, &#39;3680&#39;],
+];
+
+export const TooltipUnitRangeExample: Story = {
+  render: () =&gt; {
+    return (
+      &lt;ChartLegendWrapper colorSet={{ &#39;operations&#39;: lineTimeSeriesColorRange[0] }}&gt;
+        &lt;LineTimeSerieChart
+          series={[
+            {
+              data: mixedMagnitudeOpsData,
+              resource: &#39;operations&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+          ]}
+          title=&quot;Operation&quot;
+          height={200}
+          startingTimeStamp={mixedMagnitudeOpsData[0][0]}
+          unitRange={UNIT_RANGE_OPS}
+          isLoading={false}
+          yAxisType={&#39;default&#39;}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          helpText=&quot;Axis is in kop/s; hover the low points (3, 7, 120, 0.5) — the tooltip re-applies the unit range so they read in op/s instead of 0.00 kop/s.&quot;
+        /&gt;
+        &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+      &lt;/ChartLegendWrapper&gt;
+    );
+  },
+};
+
+// Three series sharing the same timestamps but living in different magnitudes:
+// - &quot;deletes&quot; peaks in the millions  → axis settles on Mop/s
+// - &quot;reads&quot;  is in the thousands     → tooltip re-derives kop/s
+// - &quot;writes&quot; is a handful of op/s    → tooltip re-derives op/s
+// Hovering any point shows all three values, each with its own proper unit,
+// instead of the small ones collapsing to &quot;0.00 Mop/s&quot;.
+const opsTimestamps = mixedMagnitudeOpsData.map(([t]) =&gt; t);
+
+const readsData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (3500 + ((i * 137) % 1800)).toString(),
+]);
+
+const writesData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (2 + ((i * 7) % 40)).toString(),
+]);
+
+const deletesData: [number, string][] = opsTimestamps.map((t, i) =&gt; [
+  t,
+  (1_200_000 + ((i * 91_000) % 900_000)).toString(),
+]);
+
+export const TooltipUnitRangeMultiSeriesExample: Story = {
+  render: () =&gt; {
+    return (
+      &lt;ChartLegendWrapper
+        colorSet={{
+          reads: lineTimeSeriesColorRange[0],
+          writes: lineTimeSeriesColorRange[1],
+          deletes: lineTimeSeriesColorRange[2],
+        }}
+      &gt;
+        &lt;LineTimeSerieChart
+          series={[
+            {
+              data: deletesData,
+              resource: &#39;deletes&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+            {
+              data: readsData,
+              resource: &#39;reads&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+            {
+              data: writesData,
+              resource: &#39;writes&#39;,
+              metricPrefix: &#39;rate&#39;,
+              getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+            },
+          ]}
+          title=&quot;Operation&quot;
+          height={200}
+          startingTimeStamp={opsTimestamps[0]}
+          unitRange={UNIT_RANGE_OPS}
+          isLoading={false}
+          yAxisType={&#39;default&#39;}
+          interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+          duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+          helpText=&quot;Axis is in Mop/s (largest series). Hover any point: deletes read in Mop/s, reads in kop/s and writes in op/s — each value gets its own unit, independent of the axis.&quot;
+        /&gt;
+        &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+      &lt;/ChartLegendWrapper&gt;
+    );
+  },
+};
+
 export const BigValuesExample: Story = {
   render: () =&gt; {
     return (
@@ -18417,6 +18779,92 @@ export const BigValuesExample: Story = {
         yAxisType={&#39;default&#39;}
         interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
         duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Tooltip Unit Range Example</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const TooltipUnitRangeExample = () =&gt; {
+  return (
+    &lt;ChartLegendWrapper colorSet={{ &#39;operations&#39;: lineTimeSeriesColorRange[0] }}&gt;
+      &lt;LineTimeSerieChart
+        series={[
+          {
+            data: mixedMagnitudeOpsData,
+            resource: &#39;operations&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+        ]}
+        title=&quot;Operation&quot;
+        height={200}
+        startingTimeStamp={mixedMagnitudeOpsData[0][0]}
+        unitRange={UNIT_RANGE_OPS}
+        isLoading={false}
+        yAxisType={&#39;default&#39;}
+        interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+        duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        helpText=&quot;Axis is in kop/s; hover the low points (3, 7, 120, 0.5) — the tooltip re-applies the unit range so they read in op/s instead of 0.00 kop/s.&quot;
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Tooltip Unit Range Multi Series Example</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const TooltipUnitRangeMultiSeriesExample = () =&gt; {
+  return (
+    &lt;ChartLegendWrapper
+      colorSet={{
+        reads: lineTimeSeriesColorRange[0],
+        writes: lineTimeSeriesColorRange[1],
+        deletes: lineTimeSeriesColorRange[2],
+      }}
+    &gt;
+      &lt;LineTimeSerieChart
+        series={[
+          {
+            data: deletesData,
+            resource: &#39;deletes&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+          {
+            data: readsData,
+            resource: &#39;reads&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+          {
+            data: writesData,
+            resource: &#39;writes&#39;,
+            metricPrefix: &#39;rate&#39;,
+            getTooltipLabel: (_prefix, resource) =&gt; `${resource}`,
+          },
+        ]}
+        title=&quot;Operation&quot;
+        height={200}
+        startingTimeStamp={opsTimestamps[0]}
+        unitRange={UNIT_RANGE_OPS}
+        isLoading={false}
+        yAxisType={&#39;default&#39;}
+        interval={SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS}
+        duration={SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS}
+        helpText=&quot;Axis is in Mop/s (largest series). Hover any point: deletes read in Mop/s, reads in kop/s and writes in op/s — each value gets its own unit, independent of the axis.&quot;
       /&gt;
       &lt;ChartLegend shape=&quot;line&quot; direction=&quot;vertical&quot; /&gt;
     &lt;/ChartLegendWrapper&gt;
