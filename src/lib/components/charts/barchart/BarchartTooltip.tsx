@@ -8,8 +8,9 @@ import {
   TooltipHeader,
 } from '../common/ChartTooltip';
 import { BarchartBars, BarchartTooltipFn } from './Barchart';
-import { CategoryType, TimeType } from '../types';
+import { CategoryType, TimeType, UnitRange } from '../types';
 import { getCurrentPoint } from './Barchart.utils';
+import { formatTooltipValueWithUnit } from '../common/chartUtils';
 
 export const BarchartTooltip = <T extends BarchartBars>({
   type,
@@ -18,6 +19,8 @@ export const BarchartTooltip = <T extends BarchartBars>({
   hoveredValue,
   tooltip,
   unitLabel,
+  unitRange,
+  valueBase = 1,
   chartContainerRef,
 }: {
   type: TimeType | CategoryType;
@@ -26,6 +29,8 @@ export const BarchartTooltip = <T extends BarchartBars>({
   hoveredValue: string | undefined;
   tooltip?: BarchartTooltipFn<T>;
   unitLabel?: string;
+  unitRange?: UnitRange;
+  valueBase?: number;
   chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
   const { active, coordinate } = tooltipProps;
@@ -62,12 +67,13 @@ export const BarchartTooltip = <T extends BarchartBars>({
             />
           );
 
-          const formattedValue = Number.isInteger(value.value)
-            ? `${value.value}`
-            : value.value.toFixed(2);
-          const valueWithUnit = unitLabel
-            ? `${formattedValue} ${unitLabel}`
-            : formattedValue;
+          const valueWithUnit = formatTooltipValueWithUnit(
+            value.value,
+            valueBase,
+            unitRange,
+            unitLabel,
+            false,
+          );
           return (
             <ChartTooltipItem
               key={value.label}

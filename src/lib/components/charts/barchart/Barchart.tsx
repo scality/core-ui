@@ -13,7 +13,7 @@ import { Stack } from '../../../spacing';
 import { chartColors, ChartColors, fontSize } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
-import { formatTickValue, getTicks } from '../common/chartUtils';
+import { formatTickValue, getTicks, splitTickLines } from '../common/chartUtils';
 import { useChartData } from './Barchart.utils';
 import {
   ChartHeader,
@@ -21,6 +21,8 @@ import {
   ChartLoading,
   CustomTick,
   StyledResponsiveContainer,
+  TICK_BASE_HEIGHT,
+  TICK_LINE_HEIGHT,
 } from '../common/SharedComponents';
 import { TimeType, CategoryType, UnitRange } from '../types';
 
@@ -172,6 +174,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     roundReferenceValue,
     rechartsData,
     topDomain,
+    valueBase,
   } = useChartData(
     bars || [],
     type,
@@ -187,6 +190,20 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     (value: number) => formatTickValue(value, roundReferenceValue),
     [roundReferenceValue],
   );
+
+  // A category label may wrap to a second line (e.g. a date on a midnight
+  // crossover). Reserve matching x-axis height so the extra line is not clipped.
+  const maxTickLines = useMemo(() => {
+    if (type.type !== 'category') {
+      return 1;
+    }
+    return rechartsData.reduce((max, point) => {
+      const lineCount = splitTickLines(point.category ?? '').length;
+      return Math.max(max, lineCount);
+    }, 1);
+  }, [type.type, rechartsData]);
+
+  const xAxisHeight = TICK_BASE_HEIGHT + (maxTickLines - 1) * TICK_LINE_HEIGHT;
 
   const renderChartContent = () => {
     if (isError || (!bars && !isLoading)) {
@@ -254,6 +271,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
           <XAxis
             dataKey="category"
+            height={xAxisHeight}
             tick={(props) => (
               <CustomTick
                 {...props}
@@ -277,6 +295,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                 hoveredValue={hoveredValue}
                 tooltip={tooltip}
                 unitLabel={unitLabel}
+                unitRange={unitRange}
+                valueBase={valueBase}
                 chartContainerRef={chartRef}
               />
             )}

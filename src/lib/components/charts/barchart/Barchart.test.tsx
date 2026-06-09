@@ -512,5 +512,22 @@ describe('Barchart', () => {
       );
       expect(screen.getByText('05 Jul')).toBeInTheDocument();
     });
+    it('should render both lines of a multi-line category tick label', () => {
+      const { Wrapper } = getWrapper();
+      render(
+        <Wrapper>
+          <CustomTick
+            type={{ type: 'category' }}
+            x={100}
+            y={100}
+            payload={{ value: '00:00–03:00\n05 Jul' }}
+            visibleTicksCount={10}
+            width={100}
+          />
+        </Wrapper>,
+      );
+      expect(screen.getByText('00:00–03:00')).toBeInTheDocument();
+      expect(screen.getByText('05 Jul')).toBeInTheDocument();
+    });
   });
 });

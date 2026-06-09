@@ -991,6 +991,11 @@ export const Histogram: Story = {
  * that crosses midnight shows the date (`02 Jun`) on a second line. The caller
  * supplies these strings; the chart renders them as-is via `CustomTick`'s
  * multi-line support.
+ *
+ * The values span several orders of magnitude (like a response-code histogram),
+ * so `unitRange` scales the axis to `k` while the tooltip re-derives each unit
+ * per value — the `Success` bars read e.g. `4.5 k`, the small `Errors` series
+ * stays bare (`12`) in the same tooltip.
  */
 export const HistogramWithMultilineLabels: Story = {
   render: () => {
@@ -1005,25 +1010,35 @@ export const HistogramWithMultilineLabels: Story = {
       '05:00',
       '08:00',
     ];
-    const values = [12, 30, 45, 50, 42, 20, 15, 25];
+    const success = [1840, 3020, 4500, 5010, 4200, 2000, 1500, 2500];
+    const errors = [12, 30, 8, 45, 6, 9, 4, 15];
     const histogramData = [
       {
-        label: 'Requests',
-        data: labels.map(
-          (label, i) => [label, values[i]] as [string, number],
-        ),
+        label: 'Success',
+        data: labels.map((label, i) => [label, success[i]] as [string, number]),
+      },
+      {
+        label: 'Errors',
+        data: labels.map((label, i) => [label, errors[i]] as [string, number]),
       },
     ];
     return (
       <div style={{ width: '50%', padding: spacing.r16 }}>
         <ChartLegendWrapper
           colorSet={{
-            Requests: theme.statusHealthy,
+            Success: theme.statusHealthy,
+            Errors: theme.statusCritical,
           }}
         >
           <Barchart
             type={{ type: 'category', gap: 0 }}
             bars={histogramData}
+            stacked
+            unitRange={[
+              { threshold: 1, label: '' },
+              { threshold: 1000, label: 'k' },
+              { threshold: 1000000, label: 'M' },
+            ]}
             title="Requests over 24h"
           />
           <ChartLegend shape="rectangle" />

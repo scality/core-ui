@@ -9,6 +9,14 @@ import { formatISONumber } from '../../../utils';
 
 export const maxWidthTooltip = { maxWidth: '20rem' };
 
+/**
+ * Splits a tick label into its display lines. A category label may embed a
+ * second line (e.g. a date on a midnight crossover) using "\n" as the
+ * separator. Single source of truth for that convention.
+ */
+export const splitTickLines = (value: string | number): string[] =>
+  String(value).split('\n');
+
 /* -------------------------------------------------------------------------- */
 /*                               utils functions                              */
 /* -------------------------------------------------------------------------- */
@@ -231,18 +239,20 @@ export const normalizeChartDataWithUnits = <T extends Record<string, any>>(
  * @param valueBase - The factor the dataset was divided by during normalization
  * @param unitRange - Unit range used for the chart; when empty the value is shown as-is
  * @param fallbackUnitLabel - Unit label used when no unitRange is provided (e.g. "%")
+ * @param fixedDecimals - When true (default) always show 2 decimals; set false to keep whole values bare (e.g. counts)
  */
 export const formatTooltipValueWithUnit = (
   value: number,
   valueBase: number,
   unitRange: UnitRange | undefined,
   fallbackUnitLabel?: string,
+  fixedDecimals = true,
 ): string => {
   if (!Number.isFinite(value)) return '-';
 
   if (!unitRange || unitRange.length === 0) {
     const formatted = formatISONumber(value, {
-      fixedDecimals: true,
+      fixedDecimals,
       compact: true,
     });
     return `${formatted}${fallbackUnitLabel ? ` ${fallbackUnitLabel}` : ''}`;
@@ -254,7 +264,7 @@ export const formatTooltipValueWithUnit = (
     Math.abs(originalValue),
   );
   const formatted = formatISONumber(originalValue / tooltipValueBase, {
-    fixedDecimals: true,
+    fixedDecimals,
     compact: true,
   });
   return `${formatted}${unitLabel ? ` ${unitLabel}` : ''}`;

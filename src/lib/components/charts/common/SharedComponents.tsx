@@ -7,7 +7,7 @@ import { Loader } from '../../loader/Loader.component';
 import { Text } from '../../text/Text.component';
 import { ConstrainedText } from '../../constrainedtext/Constrainedtext.component';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
-import { formatXAxisDate, maxWidthTooltip } from './chartUtils';
+import { formatXAxisDate, maxWidthTooltip, splitTickLines } from './chartUtils';
 import { TimeType, CategoryType } from '../types';
 
 /**
@@ -23,29 +23,37 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   }
 `;
 
+// Tick labels are top-anchored (not vertically centered) at the tick, then grow
+// downward. The first line therefore sits at the same place for every tick —
+// single- or multi-line — instead of its position depending on the box height.
+// All lines share one line-height so the first line of a multi-line label is
+// identical to a single-line label.
 const TickContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  & span {
+    line-height: 0.9;
+  }
 `;
 
-// Stacks a multi-line tick label (e.g. time + date on a midnight crossover)
-// tightly. The reduced line-height keeps the two lines visually grouped; each
-// line stays its own ConstrainedText so it truncates independently.
+// Stacks the lines of a multi-line tick label (e.g. time + date on a midnight
+// crossover); each line stays its own ConstrainedText so it truncates
+// independently. Line spacing and first-line alignment come from TickContainer.
 const MultilineTickContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  & span {
-    line-height: 1.1;
-  }
 `;
 
 // Extra height granted per wrapped line so a second line is not clipped.
-const TICK_LINE_HEIGHT = 12;
+export const TICK_LINE_HEIGHT = 12;
+
+// Height of a single-line x-axis tick band (matches the foreignObject base height).
+export const TICK_BASE_HEIGHT = 30;
 
 interface ChartLoadingOrErrorProps {
   height: number;
@@ -138,7 +146,9 @@ interface CustomTickProps {
   x: number | string;
   y: number | string;
   payload: {
-    value: number;
+    // A timestamp for time ticks, or the category label (possibly "\n"-split
+    // into multiple lines) for category ticks.
+    value: number | string;
   };
   visibleTicksCount?: number;
   width?: number | string;
@@ -194,7 +204,7 @@ export const CustomTick = ({
 
   // A category label may carry a second line (e.g. a date on a midnight
   // crossover) separated by "\n"; those lines are stacked tightly.
-  const lines = type.type === 'time' ? [] : String(payload.value).split('\n');
+  const lines = type.type === 'time' ? [] : splitTickLines(payload.value);
   const isMultiline = lines.length > 1;
 
   const content =
@@ -216,9 +226,12 @@ export const CustomTick = ({
   return (
     <foreignObject
       x={centerX}
-      y={numY - 10}
+      y={numY}
       width={tickWidth}
-      height={30 + (isMultiline ? (lines.length - 1) * TICK_LINE_HEIGHT : 0)}
+      // Box is anchored at the tick; the first line sits at its top and extra
+      // lines overflow downward (visible) into the space the XAxis reserves via
+      // TICK_LINE_HEIGHT.
+      height={TICK_BASE_HEIGHT}
       style={{
         overflow: 'visible',
         pointerEvents: 'none',
