@@ -66,11 +66,16 @@ jobs:
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
-      # GHPR auth for @jbwatenbergscality/storybook-webmcp. Written directly to
-      # ~/.npmrc instead of via NODE_AUTH_TOKEN to avoid leaking the GitHub
-      # token to registry.npmjs.org through setup-node's npmjs auth line
-      # (//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}).
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+      # GHPR auth for @jbwatenbergscality/storybook-webmcp. Appended to the
+      # workspace .npmrc (project scope), NOT ~/.npmrc: the repo's own .npmrc
+      # already sets `//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}`, and
+      # project config outranks ~/.npmrc, so writing to ~/.npmrc gets clobbered
+      # by an empty token (NODE_AUTH_TOKEN is unset here) -> 401 on npm ci.
+      # Appending to the project .npmrc wins (last line wins within a file).
+      # Scoping the token to npm.pkg.github.com only (rather than setting
+      # NODE_AUTH_TOKEN) keeps the GitHub token from leaking to npmjs through
+      # setup-node's `//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}` line.
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       - run: npm ci
       - run: npm run build
       - run: npm publish
