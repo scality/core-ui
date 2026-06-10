@@ -582,7 +582,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.3s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -2046,7 +2046,7 @@ unitRange?: UnitRange</code></pre>
                 <span class="badge ok">story ok</span>
               </div>
               
-              <div class="hint">A bucket label may contain a `&quot;\n&quot;` to render on two lines — here the bucket that crosses midnight shows the date (`02 Jun`) on a second line. The caller supplies these strings; the chart renders them as-is via `CustomTick`&#39;s multi-line support.</div>
+              <div class="hint">A bucket label may contain a `&quot;\n&quot;` to render on two lines — here the bucket that crosses midnight shows the date (`02 Jun`) on a second line. The caller supplies these strings; the chart renders them as-is via `CustomTick`&#39;s multi-line support. The values span several orders of magnitude (like a response-code histogram), so `unitRange` scales the axis to `k` while the tooltip re-derives each unit per value — the `Success` bars read e.g. `4.5 k`, the small `Errors` series stays bare (`12`) in the same tooltip.</div>
               <pre><code>const HistogramWithMultilineLabels = () =&gt; {
   const theme = useTheme() as CoreUITheme;
   const labels = [
@@ -2059,25 +2059,35 @@ unitRange?: UnitRange</code></pre>
     &#39;05:00&#39;,
     &#39;08:00&#39;,
   ];
-  const values = [12, 30, 45, 50, 42, 20, 15, 25];
+  const success = [1840, 3020, 4500, 5010, 4200, 2000, 1500, 2500];
+  const errors = [12, 30, 8, 45, 6, 9, 4, 15];
   const histogramData = [
     {
-      label: &#39;Requests&#39;,
-      data: labels.map(
-        (label, i) =&gt; [label, values[i]] as [string, number],
-      ),
+      label: &#39;Success&#39;,
+      data: labels.map((label, i) =&gt; [label, success[i]] as [string, number]),
+    },
+    {
+      label: &#39;Errors&#39;,
+      data: labels.map((label, i) =&gt; [label, errors[i]] as [string, number]),
     },
   ];
   return (
     &lt;div style={{ width: &#39;50%&#39;, padding: spacing.r16 }}&gt;
       &lt;ChartLegendWrapper
         colorSet={{
-          Requests: theme.statusHealthy,
+          Success: theme.statusHealthy,
+          Errors: theme.statusCritical,
         }}
       &gt;
         &lt;Barchart
           type={{ type: &#39;category&#39;, gap: 0 }}
           bars={histogramData}
+          stacked
+          unitRange={[
+            { threshold: 1, label: &#39;&#39; },
+            { threshold: 1000, label: &#39;k&#39; },
+            { threshold: 1000000, label: &#39;M&#39; },
+          ]}
           title=&quot;Requests over 24h&quot;
         /&gt;
         &lt;ChartLegend shape=&quot;rectangle&quot; /&gt;
