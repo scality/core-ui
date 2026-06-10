@@ -490,4 +490,26 @@ describe('formatTooltipValueWithUnit', () => {
   it('returns "-" for non-finite values', () => {
     expect(formatTooltipValueWithUnit(NaN, 1000, unitRange, 'kop/s')).toBe('-');
   });
+
+  describe('with fixedDecimals = false (bare whole numbers)', () => {
+    it('drops the trailing ".00" for whole values on the re-derived unit', () => {
+      // Same input as the default case, which yields "5.00 op/s".
+      expect(
+        formatTooltipValueWithUnit(0.005, 1000, unitRange, 'kop/s', false),
+      ).toBe('5 op/s');
+    });
+
+    it('still keeps up to two decimals for fractional values', () => {
+      // 1.84 (stored) * 1000 = 1840 op/s → 1.84 kop/s
+      expect(
+        formatTooltipValueWithUnit(1.84, 1000, unitRange, 'kop/s', false),
+      ).toBe('1.84 kop/s');
+    });
+
+    it('drops the trailing ".00" in the no-unit-range fallback', () => {
+      expect(formatTooltipValueWithUnit(20, 1, undefined, 'kB', false)).toBe(
+        '20 kB',
+      );
+    });
+  });
 });
