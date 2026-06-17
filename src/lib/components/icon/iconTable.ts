@@ -145,4 +145,5 @@ export const iconTable = {
   History: 'fas faClockRotateLeft',
   Astronaut: 'fas faUserAstronaut',
   Microchip: 'fas faMicrochip',
+  Tag: 'fas faTag',
 };
