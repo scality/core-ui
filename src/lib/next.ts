@@ -2,6 +2,8 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import './index.css';
 export { Button } from './components/buttonv2/Buttonv2.component';
 export { CopyButton } from './components/buttonv2/CopyButton.component';
+export { ButtonGroup } from './components/buttongroup/ButtonGroup.component';
+export type { ButtonGroupProps } from './components/buttongroup/ButtonGroup.component';
 export { Tabs, Tab } from './components/tabsv2/Tabsv2.component';
 export { Table } from './components/tablev2/Tablev2.component';
 
