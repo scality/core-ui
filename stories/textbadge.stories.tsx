@@ -40,3 +40,36 @@ export const Default = {
     );
   },
 };
+
+export const CustomColorAndRemovable = {
+  render: ({}) => {
+    return (
+      <Wrapper>
+        <Title>Custom color</Title>
+        <TextBadge
+          text="env:prod"
+          customColor={{
+            text: 'hsl(210, 70%, 65%)',
+            backgroundColor: 'hsla(210, 70%, 65%, 0.16)',
+            borderColor: 'hsl(210, 70%, 65%)',
+          }}
+        />
+        <Title>Removable</Title>
+        <TextBadge
+          text="env:prod"
+          customColor={{
+            text: 'hsl(150, 70%, 60%)',
+            backgroundColor: 'hsla(150, 70%, 60%, 0.16)',
+          }}
+          onRemove={() => alert('remove env:prod')}
+          removeAriaLabel="Remove label env:prod"
+        />
+        <TextBadge
+          text="Removable badge"
+          variant="infoSecondary"
+          onRemove={() => alert('remove badge')}
+        />
+      </Wrapper>
+    );
+  },
+};
