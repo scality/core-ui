@@ -74,6 +74,23 @@ describe('ButtonGroup', () => {
     expect(onChange).toHaveBeenCalledWith('name');
   });
 
+  it('does not mark a valueless child as a toggle button in selectable mode', () => {
+    render(
+      <ButtonGroup value="name" onChange={jest.fn()}>
+        <Button value="name" label="Name" />
+        <Button label="Static" />
+      </ButtonGroup>,
+      { wrapper: Wrapper },
+    );
+
+    expect(screen.getByRole('button', { name: 'Name' })).toHaveAttribute(
+      'aria-pressed',
+    );
+    expect(screen.getByRole('button', { name: 'Static' })).not.toHaveAttribute(
+      'aria-pressed',
+    );
+  });
+
   it('does not inject selection props without onChange', () => {
     render(
       <ButtonGroup>

@@ -116,14 +116,16 @@ function ButtonGroup({
         const selected = childValue != null && childValue === value;
 
         return cloneElement(element, {
-          'aria-pressed': selected,
+          // Only a child with a `value` is a real toggle button; without one,
+          // clicking is a no-op, so it must not advertise a pressed state.
+          ...(childValue != null && { 'aria-pressed': selected }),
           onClick: (event: MouseEvent<HTMLButtonElement>) => {
             element.props.onClick?.(event);
             if (childValue != null) {
               onChange(childValue);
             }
           },
-        } as Partial<SelectableChildProps> & { 'aria-pressed': boolean });
+        } as Partial<SelectableChildProps> & { 'aria-pressed'?: boolean });
       })
     : children;
 
