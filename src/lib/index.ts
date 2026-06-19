@@ -49,7 +49,10 @@ export { ErrorPage401 } from './components/error-pages/ErrorPage401.component';
 export { ErrorPage404 } from './components/error-pages/ErrorPage404.component';
 export { ErrorPage500 } from './components/error-pages/ErrorPage500.component';
 export { ErrorPageAuth } from './components/error-pages/ErrorPageAuth.component';
-export { TextBadge } from './components/textbadge/TextBadge.component';
+export {
+  TextBadge,
+  type TextBadgeCustomColor,
+} from './components/textbadge/TextBadge.component';
 
 export { Layout as Layout2 } from './components/layout/v2';
 export { TwoPanelLayout } from './components/layout/v2/panels';
