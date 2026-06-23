@@ -177,6 +177,27 @@ export const NavbarWithOnlyLinkTabs = {
   },
 };
 
+export const NavbarWithLongUserName = {
+  args: {
+    rightActions: [
+      {
+        type: 'dropdown',
+        text: 'averylongusername.that-would-previously-wrap@example.com',
+        icon: <i className="fas fa-user" />,
+        items: [{ label: 'Log out', onClick: action('Logout clicked') }],
+      },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A long username stays on a single line, truncated with an ellipsis, and the trigger keeps the navbar height instead of wrapping to two lines. The trigger has no background fill so the navbar bottom border stays visible.',
+      },
+    },
+  },
+};
+
 export const NavbarDropdownShowcase = {
   args: {
     rightActions: [

@@ -135,12 +135,19 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
-      background-color: ${getThemePropSelector('navbarBackground')};
       &:hover {
         background-color: ${getThemePropSelector('highlight')};
       }
-      height: auto;
+      height: ${navbarHeight};
+      white-space: nowrap;
       font-size: ${fontSize.base};
+      .sc-trigger-text {
+        display: block;
+        max-width: 12rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
     .menu-item {
       max-height: unset;
