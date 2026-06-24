@@ -24,6 +24,14 @@ type ButtonStyledProps = Omit<
   icon?: React.ReactNode;
   label?: React.ReactNode;
   isLoading?: boolean;
+  /**
+   * When true, a button that has both an icon and a label collapses to
+   * icon-only: the label is hidden but kept as the accessible name and, unless
+   * a tooltip is already provided, shown as a tooltip on hover. Lets a parent
+   * (e.g. a toolbar measured with `useContainerWidth`) shrink its buttons when
+   * space runs out. Has no effect on icon-only or label-only buttons.
+   */
+  iconOnly?: boolean;
 };
 
 /** Button with a visible label - tooltip is optional */
@@ -260,6 +268,7 @@ function Button({
   onClick,
   tooltip,
   isLoading,
+  iconOnly,
   ...rest
 }: Props) {
   if (!icon && !label) {
@@ -268,23 +277,31 @@ function Button({
     );
   }
 
+  // When collapsing a labelled button to icon-only, drop the visible label but
+  // preserve it as the accessible name + tooltip.
+  const collapsed = Boolean(iconOnly && icon && label);
+  const effectiveLabel = collapsed ? undefined : label;
+  const labelText = typeof label === 'string' ? label : undefined;
+  const effectiveTooltip =
+    collapsed && !tooltip && labelText ? { overlay: labelText } : tooltip;
+
   // For icon-only buttons, use tooltip.overlay as aria-label (typed as string for IconOnlyButton)
   const buttonAriaLabel =
-    !label && icon && tooltip?.overlay
-      ? (tooltip.overlay as string)
+    !effectiveLabel && icon && effectiveTooltip?.overlay
+      ? (effectiveTooltip.overlay as string)
       : undefined;
 
   return (
     <Tooltip
-      placement={tooltip ? tooltip.placement : undefined}
-      overlay={tooltip && tooltip.overlay}
-      overlayStyle={tooltip && tooltip.overlayStyle}
+      placement={effectiveTooltip ? effectiveTooltip.placement : undefined}
+      overlay={effectiveTooltip && effectiveTooltip.overlay}
+      overlayStyle={effectiveTooltip && effectiveTooltip.overlayStyle}
     >
       <ButtonStyled
         className="sc-button"
         variant={variant}
         disabled={isLoading || disabled}
-        label={label}
+        label={effectiveLabel}
         icon={icon}
         onClick={onClick}
         size={size}
@@ -293,14 +310,14 @@ function Button({
       >
         {icon &&
           (isLoading ? (
-            <ButtonLoader size="small" variant={variant} label={label} />
+            <ButtonLoader size="small" variant={variant} label={effectiveLabel} />
           ) : (
-            <ButtonIcon label={label}>{icon}</ButtonIcon>
+            <ButtonIcon label={effectiveLabel}>{icon}</ButtonIcon>
           ))}
         {!icon && isLoading && (
-          <ButtonLoader size="small" variant={variant} label={label} />
+          <ButtonLoader size="small" variant={variant} label={effectiveLabel} />
         )}
-        <ButtonLabel>{label}</ButtonLabel>
+        <ButtonLabel>{effectiveLabel}</ButtonLabel>
       </ButtonStyled>
     </Tooltip>
   );

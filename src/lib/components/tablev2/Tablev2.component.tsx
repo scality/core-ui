@@ -34,6 +34,10 @@ import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import { Icon } from '../icon/Icon.component';
 import { TableSync } from './TableSync';
+import {
+  useContainerWidth,
+  TABLE_NARROW_BREAKPOINT_PX,
+} from '../responsive/useContainerWidth';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -290,6 +294,36 @@ function Table<
     useCheckbox,
   );
 
+  const hasResponsiveColumns = useMemo(
+    () => columns.some((column) => column.dropAt != null),
+    [columns],
+  );
+  const { ref: responsiveRef, width: containerWidth } =
+    useContainerWidth<HTMLDivElement>(TABLE_NARROW_BREAKPOINT_PX);
+
+  useEffect(() => {
+    if (!hasResponsiveColumns) {
+      return;
+    }
+    const managedIds = new Set(
+      columns
+        .filter((column) => column.dropAt != null)
+        .map((column) => String(column.id ?? column.accessor)),
+    );
+    const droppedIds = columns
+      .filter(
+        (column) =>
+          column.dropAt != null &&
+          containerWidth != null &&
+          containerWidth < column.dropAt,
+      )
+      .map((column) => String(column.id ?? column.accessor));
+    setHiddenColumns((previousHidden) => [
+      ...previousHidden.filter((id) => !managedIds.has(id)),
+      ...droppedIds,
+    ]);
+  }, [hasResponsiveColumns, columns, containerWidth, setHiddenColumns]);
+
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {
       setGlobalFilter(globalFilter);
@@ -343,7 +377,11 @@ function Table<
       //@ts-ignore
       value={contextValue}
     >
-      <TableWrapper role="grid" className="table">
+      <TableWrapper
+        role="grid"
+        className="table"
+        ref={hasResponsiveColumns ? responsiveRef : undefined}
+      >
         {children}
       </TableWrapper>
     </TableContext.Provider>

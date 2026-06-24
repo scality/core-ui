@@ -233,3 +233,69 @@ describe('TableV2', () => {
     expect(rows[1]).toHaveTextContent(/Yohann/i);
   });
 });
+
+describe('TableV2 responsive columns', () => {
+  // jsdom ships no ResizeObserver and getBoundingClientRect always reports 0,
+  // so we stub both to drive the container width the Table measures.
+  let mockWidth = 1000;
+  const originalResizeObserver = global.ResizeObserver;
+  const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
+
+  beforeAll(() => {
+    class ResizeObserverMock {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    // @ts-expect-error assigning a stub to the global
+    global.ResizeObserver = ResizeObserverMock;
+    Element.prototype.getBoundingClientRect = function () {
+      return { width: mockWidth, height: 600 } as DOMRect;
+    };
+  });
+
+  afterAll(() => {
+    global.ResizeObserver = originalResizeObserver;
+    Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
+  });
+
+  const responsiveColumns: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    { Header: 'Last Name', accessor: 'lastName' },
+    { Header: 'Age', accessor: 'age', dropAt: 500 },
+    { Header: 'Health', accessor: 'health', sortType: 'health' },
+  ];
+
+  const renderResponsiveTable = () =>
+    render(
+      <div>
+        <Table columns={responsiveColumns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+  test('it keeps a droppable column visible when the table is wide enough', async () => {
+    mockWidth = 1000;
+    renderResponsiveTable();
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    expect(screen.getByText('Age')).toBeInTheDocument();
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+  });
+
+  test('it hides a droppable column when the table is too narrow', async () => {
+    mockWidth = 400;
+    renderResponsiveTable();
+
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    // columns without a dropAt stay visible at any width
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+    expect(screen.getByText('Health')).toBeInTheDocument();
+  });
+});

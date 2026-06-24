@@ -96,6 +96,7 @@ const ScrollArea = styled(BasicPageLayout)`
 const LabelContext = createContext<{
   maxLabelWidth: number;
   setMaxLabelWidth: (setter: (value: number) => number) => void;
+  responsive: boolean;
 } | null>(null);
 
 const RequireModeContext = createContext<'all' | 'partial'>('partial');
@@ -136,7 +137,7 @@ const FormGroup = ({
     throw new Error('FormGroup cannot be used outside of FormSection');
   }
 
-  const { maxLabelWidth, setMaxLabelWidth } = ctxt;
+  const { maxLabelWidth, setMaxLabelWidth, responsive } = ctxt;
   const requireMode = useContext(RequireModeContext);
   const labelRef = useRef<HTMLLabelElement | null>(null);
   useEffect(() => {
@@ -155,7 +156,32 @@ const FormGroup = ({
   const value = {
     disabled: disabled || false,
     error: error || undefined,
+    responsive,
   };
+
+  const fieldContent = (
+    <Stack
+      direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
+      gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
+    >
+      {content}
+      {error ? (
+        <HelperText color="statusCritical" id={`${DESCRIPTION_PREFIX}${id}`}>{error}</HelperText>
+      ) : help ? (
+        <div
+          style={{
+            opacity: disabled ? 0.5 : 1,
+          }}
+        >
+          <HelperText color="textSecondary" id={`${DESCRIPTION_PREFIX}${id}`}>{help}</HelperText>
+        </div>
+      ) : (
+        <HelperText>
+          &nbsp;
+        </HelperText>
+      )}
+    </Stack>
+  );
 
   return (
     <FieldContext.Provider value={value}>
@@ -166,10 +192,24 @@ const FormGroup = ({
         gap={direction === 'horizontal' ? spacing['r32'] : spacing['r4']}
       >
         <div
-          style={{
-            width: maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
-            flex: 'none',
-          }}
+          style={
+            responsive
+              ? {
+                  // Respect maxLabelWidth as the preferred width but let the
+                  // column shrink (label text wraps) when space runs out.
+                  flex: '0 1 auto',
+                  flexBasis:
+                    maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
+                  maxWidth:
+                    maxLabelWidth === 0 ? undefined : `${maxLabelWidth}px`,
+                  minWidth: 0,
+                }
+              : {
+                  width:
+                    maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
+                  flex: 'none',
+                }
+          }
         >
           <label
             htmlFor={id}
@@ -196,27 +236,11 @@ const FormGroup = ({
             )}
           </label>
         </div>
-        <Stack
-          direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
-          gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
-        >
-          {content}
-          {error ? (
-            <HelperText color="statusCritical" id={`${DESCRIPTION_PREFIX}${id}`}>{error}</HelperText>
-          ) : help ? (
-            <div
-              style={{
-                opacity: disabled ? 0.5 : 1,
-              }}
-            >
-              <HelperText color="textSecondary" id={`${DESCRIPTION_PREFIX}${id}`}>{help}</HelperText>
-            </div>
-          ) : (
-            <HelperText>
-              &nbsp;
-            </HelperText>
-          )}
-        </Stack>
+        {responsive ? (
+          <div style={{ flex: '1 1 auto', minWidth: 0 }}>{fieldContent}</div>
+        ) : (
+          fieldContent
+        )}
       </Box>
     </FieldContext.Provider>
   );
@@ -227,6 +251,13 @@ type FormSectionProps = {
   title?: { name: string; icon?: IconName; helpTooltip?: string };
   forceLabelWidth?: number;
   rightActions?: ReactNode;
+  /**
+   * Opt in to responsive shrinking. When the container runs out of room, the
+   * label column shrinks (its text wraps) and inputs in this section become
+   * fluid (`max-width: 100%`) instead of overflowing. Off by default — no
+   * change to existing forms.
+   */
+  responsive?: boolean;
 };
 
 const FormSection = ({
@@ -234,6 +265,7 @@ const FormSection = ({
   title,
   forceLabelWidth,
   rightActions,
+  responsive = false,
 }: FormSectionProps) => {
   const [maxLabelWidth, setMaxLabelWidth] = useState<number>(
     forceLabelWidth || 0,
@@ -244,7 +276,9 @@ const FormSection = ({
   );
 
   return (
-    <LabelContext.Provider value={{ maxLabelWidth, setMaxLabelWidth }}>
+    <LabelContext.Provider
+      value={{ maxLabelWidth, setMaxLabelWidth, responsive }}
+    >
       <Stack direction="vertical" gap="r12">
         {title && (
           <Wrap>
@@ -383,6 +417,7 @@ type FieldState = {
   error?: string;
   disabled?: boolean;
   required?: boolean;
+  responsive?: boolean;
 };
 const FieldContext = createContext<null | FieldState>(null);
 

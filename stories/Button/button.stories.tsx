@@ -1,6 +1,13 @@
 import { action } from 'storybook/actions';
 import React from 'react';
-import { Form, FormGroup, FormSection, Icon, Stack } from '../../src/lib';
+import {
+  Form,
+  FormGroup,
+  FormSection,
+  Icon,
+  Stack,
+  useContainerWidth,
+} from '../../src/lib';
 import {
   Button,
   Props as ButtonProps,
@@ -288,5 +295,58 @@ export const LinkButton = {
       control: 'radio',
       options: ['External-link', 'No icon'],
     },
+  },
+};
+
+export const ResponsiveIconOnlyToolbar = {
+  render: () => {
+    const { ref, isNarrowerThan } = useContainerWidth<HTMLDivElement>();
+    // Collapse the labels to icons once the toolbar drops below 420px.
+    const iconOnly = isNarrowerThan(420);
+    return (
+      <>
+        <div style={{ marginBottom: '12px' }}>
+          Drag the right edge to resize. Below 420px the buttons collapse to
+          icon-only and surface their label as a tooltip on hover.
+        </div>
+        <div
+          ref={ref}
+          style={{
+            width: '600px',
+            minWidth: '160px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '12px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
+        >
+          <Stack gap="r16">
+            <Button
+              variant="primary"
+              icon={<Icon name="Create-add" />}
+              label="Create"
+              iconOnly={iconOnly}
+              onClick={action('Create clicked')}
+            />
+            <Button
+              variant="secondary"
+              icon={<Icon name="Sync" />}
+              label="Refresh"
+              iconOnly={iconOnly}
+              onClick={action('Refresh clicked')}
+            />
+            <Button
+              variant="danger"
+              icon={<Icon name="Delete" />}
+              label="Delete"
+              iconOnly={iconOnly}
+              onClick={action('Delete clicked')}
+            />
+          </Stack>
+        </div>
+      </>
+    );
   },
 };

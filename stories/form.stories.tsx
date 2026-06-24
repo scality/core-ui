@@ -430,3 +430,46 @@ export const FormWithAccordion = {
     requireMode: 'partial',
   },
 };
+
+export const ResponsiveFormSection = {
+  render: () => (
+    <>
+      <div style={{ marginBottom: '12px' }}>
+        Drag the right edge to resize. With <code>responsive</code> on the
+        FormSection, the label column shrinks (its text wraps) and the inputs
+        cap at 100% and shrink instead of overflowing.
+      </div>
+      <div
+        style={{
+          width: '640px',
+          minWidth: '240px',
+          maxWidth: '100%',
+          resize: 'horizontal',
+          overflow: 'hidden',
+          padding: '16px',
+          border: '1px dashed currentColor',
+          boxSizing: 'border-box',
+        }}
+      >
+        <Form layout={{ kind: 'tab' }}>
+          <FormSection responsive title={{ name: 'Account' }}>
+            <FormGroup
+              id="responsive-display-name"
+              label="Display name for this account"
+              content={
+                <Input id="responsive-display-name" placeholder="jane.doe" />
+              }
+            />
+            <FormGroup
+              id="responsive-email"
+              label="Email"
+              content={
+                <Input id="responsive-email" placeholder="jane@acme.io" />
+              }
+            />
+          </FormSection>
+        </Form>
+      </div>
+    </>
+  ),
+};
