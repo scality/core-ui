@@ -125,6 +125,51 @@ describe('Navbar responsiveness', () => {
     expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
   });
 
+  it('keeps the selected tab inline even when earlier tabs overflow', async () => {
+    // 220px only fits one tab alongside the More trigger. The selected tab sits
+    // last, so a plain prefix fit would hide it — it must stay inline instead.
+    stubNavbarWidth(220);
+    renderNavbar({
+      tabs: [
+        { title: 'Groups', link: <a href="/groups">Groups</a> },
+        { title: 'Users', link: <a href="/users">Users</a> },
+        { title: 'Policies', selected: true, link: <a href="/policies">Policies</a> },
+      ],
+      rightActions: [userAction],
+    });
+
+    expect(screen.getByRole('tab', { name: 'Policies' })).toBeInTheDocument();
+    expect(screen.queryByRole('tab', { name: 'Groups' })).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: /more/i }));
+    const menu = screen.getByRole('menu');
+    expect(within(menu).getByText('Groups')).toBeInTheDocument();
+    expect(within(menu).queryByText('Policies')).not.toBeInTheDocument();
+  });
+
+  it('keeps a custom render tab inline at every width instead of hiding it', async () => {
+    // An editable instance-name field cannot live inside a dropdown, so a
+    // render tab is pinned: it stays visible while plain nav tabs overflow.
+    stubNavbarWidth(220);
+    renderNavbar({
+      tabs: [
+        { render: <span>My instance</span> },
+        { title: 'Groups', selected: true, link: <a href="/groups">Groups</a> },
+        { title: 'Users', link: <a href="/users">Users</a> },
+        { title: 'Policies', link: <a href="/policies">Policies</a> },
+      ],
+      rightActions: [userAction],
+    });
+
+    expect(screen.getByText('My instance')).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Groups' })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: /more/i }));
+    const menu = screen.getByRole('menu');
+    expect(within(menu).getByText('Users')).toBeInTheDocument();
+    expect(within(menu).queryByText('My instance')).not.toBeInTheDocument();
+  });
+
   it('does not render a navigation menu when there are no tabs', () => {
     stubNavbarWidth(360);
     renderNavbar({ tabs: [], rightActions: [userAction] });

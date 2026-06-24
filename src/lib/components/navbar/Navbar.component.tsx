@@ -54,6 +54,50 @@ export function computeVisibleCount(
   return total;
 }
 
+/**
+ * Decide which tabs stay inline and which move into the "More" menu.
+ *
+ * Pinned tabs (the selected tab, custom `render` tabs, and any tab flagged
+ * `alwaysVisible`) never overflow — the current location and instance-level
+ * controls must stay reachable. The remaining tabs fill the leftover space
+ * left-to-right, priority+ style: as the navbar narrows they drop from the
+ * right, one by one, into the menu. Pure — no DOM. Indices are returned in
+ * original order so both rows preserve the author's tab order.
+ */
+export function selectVisibleTabs(
+  itemWidths: number[],
+  pinned: boolean[],
+  moreWidth: number,
+  available: number,
+): { visibleIndices: number[]; overflowIndices: number[] } {
+  const all = itemWidths.map((_, index) => index);
+  const fullWidth = itemWidths.reduce((sum, width) => sum + width, 0);
+  if (fullWidth <= available) {
+    return { visibleIndices: all, overflowIndices: [] };
+  }
+
+  // Something overflows, so the "More" trigger will be shown — reserve its
+  // width. Pinned tabs are always kept (even if they alone exceed the budget);
+  // non-pinned tabs then fill what's left, stopping at the first that no longer
+  // fits so the dropped tabs stay a contiguous run on the right.
+  const budget = available - moreWidth;
+  const keep = new Set<number>(all.filter((index) => pinned[index]));
+  let used = all
+    .filter((index) => pinned[index])
+    .reduce((sum, index) => sum + itemWidths[index], 0);
+  for (const index of all) {
+    if (pinned[index]) continue;
+    if (used + itemWidths[index] > budget) break;
+    used += itemWidths[index];
+    keep.add(index);
+  }
+
+  return {
+    visibleIndices: all.filter((index) => keep.has(index)),
+    overflowIndices: all.filter((index) => !keep.has(index)),
+  };
+}
+
 type ButtonAction = {
   type: 'button';
 } & ButtonProps;
@@ -77,6 +121,12 @@ type Tab = {
   onClick?: (arg0: any) => void;
   link?: JSX.Element;
   render?: JSX.Element;
+  /**
+   * Keep this tab inline at all widths instead of letting it overflow into the
+   * "More" menu. The selected tab and custom `render` tabs are pinned
+   * automatically; set this for any other tab that must always stay visible.
+   */
+  alwaysVisible?: boolean;
 };
 export type Props = {
   onToggleClick?: () => void;
@@ -422,6 +472,10 @@ const TabSlot = styled.span`
  * Tabs are assumed stable. If their labels ever become dynamic (e.g. i18n),
  * force a fresh measure by giving this component a `key` that changes with the
  * locale.
+ *
+ * The selected tab, custom `render` tabs, and any `alwaysVisible` tab are
+ * pinned: they always stay inline so the current location and instance-level
+ * controls (e.g. an editable deployment name) never disappear into the menu.
  */
 function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
   const { ref: containerRef, width } = useContainerWidth<HTMLDivElement>(0);
@@ -447,29 +501,32 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
     }
   }, []);
 
+  const pinned = tabs.map(
+    (tab) => Boolean(tab.alwaysVisible) || Boolean(tab.selected) || Boolean(tab.render),
+  );
   const measured = itemWidths.length === tabs.length;
   const available = width ?? Infinity;
-  const visibleCount = measured
-    ? computeVisibleCount(itemWidths, moreWidth, available)
-    : tabs.length;
-
-  const visible = tabs.slice(0, visibleCount);
-  const overflow = tabs.slice(visibleCount);
+  const { visibleIndices, overflowIndices } = measured
+    ? selectVisibleTabs(itemWidths, pinned, moreWidth, available)
+    : { visibleIndices: tabs.map((_, index) => index), overflowIndices: [] };
 
   return (
     <NavbarTabs ref={containerRef}>
-      {visible.map((tab, index) => (
+      {visibleIndices.map((index) => (
         <TabSlot
           key={`navbar_tab_slot_${index}`}
           ref={(el) => {
             itemRefs.current[index] = el;
           }}
         >
-          {renderTab(tab, index)}
+          {renderTab(tabs[index], index)}
         </TabSlot>
       ))}
-      {overflow.length > 0 && (
-        <NavbarTabsMenu tabs={overflow} triggerRef={measureMoreWidth} />
+      {overflowIndices.length > 0 && (
+        <NavbarTabsMenu
+          tabs={overflowIndices.map((index) => tabs[index])}
+          triggerRef={measureMoreWidth}
+        />
       )}
     </NavbarTabs>
   );
