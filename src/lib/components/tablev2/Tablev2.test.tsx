@@ -298,4 +298,32 @@ describe('TableV2 responsive columns', () => {
     expect(screen.getByText('First Name')).toBeInTheDocument();
     expect(screen.getByText('Health')).toBeInTheDocument();
   });
+
+  test('it hides a droppable column defined with a function accessor when narrow', async () => {
+    mockWidth = 400;
+    const columns: TableProps['columns'] = [
+      { Header: 'First Name', accessor: 'firstName' },
+      {
+        Header: 'Full Name',
+        id: 'fullName',
+        accessor: (row) => `${row.firstName} ${row.lastName}`,
+        dropAt: 500,
+      },
+    ];
+    render(
+      <div>
+        <Table columns={columns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+    await waitFor(() =>
+      expect(screen.queryByText('Full Name')).not.toBeInTheDocument(),
+    );
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+  });
 });

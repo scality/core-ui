@@ -66,7 +66,7 @@ describe('Navbar responsiveness', () => {
     expect(screen.getByRole('tab', { name: 'Users' })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: 'Policies' })).toBeInTheDocument();
     expect(
-      screen.queryByRole('button', { name: /navigation/i }),
+      screen.queryByRole('button', { name: /more/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -79,7 +79,7 @@ describe('Navbar responsiveness', () => {
     expect(screen.getByRole('tab', { name: 'Groups' })).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: 'Users' })).not.toBeInTheDocument();
 
-    const menuTrigger = screen.getByRole('button', { name: /navigation/i });
+    const menuTrigger = screen.getByRole('button', { name: /more/i });
     await userEvent.click(menuTrigger);
 
     const menu = screen.getByRole('menu');
@@ -102,6 +102,14 @@ describe('Navbar responsiveness', () => {
     expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
   });
 
+  it('keeps the account menu reachable by name when condensed to an icon', () => {
+    stubNavbarWidth(360);
+    renderNavbar({ tabs, rightActions: [userAction] });
+
+    expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
+    expect(screen.getByTitle('Carlito')).toBeInTheDocument();
+  });
+
   it('can condense the actions to icons while tabs are still shown inline', () => {
     // 900 < 1000 condenses the actions, but all three tabs (300 + More) still
     // fit inline at 900.
@@ -122,7 +130,7 @@ describe('Navbar responsiveness', () => {
     renderNavbar({ tabs: [], rightActions: [userAction] });
 
     expect(
-      screen.queryByRole('button', { name: /navigation/i }),
+      screen.queryByRole('button', { name: /more/i }),
     ).not.toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { cloneElement, Fragment, useLayoutEffect, useRef, useState } from 'react';
+import { cloneElement, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { flip, offset, shift } from '@floating-ui/dom';
 import {
@@ -189,6 +189,7 @@ const NavbarMenuItem = styled.div`
   align-items: center;
   .sc-dropdown {
     .trigger {
+      background-color: transparent;
       &:hover {
         background-color: ${getThemePropSelector('highlight')};
       }
@@ -243,11 +244,13 @@ const TabsMenuTrigger = styled.button`
   align-items: center;
   justify-content: center;
   height: ${navbarHeight};
-  width: ${navbarItemWidth};
+  padding: 0 ${spacing.r16};
   border: none;
   cursor: pointer;
-  color: ${getThemePropSelector('textPrimary')};
-  background-color: ${getThemePropSelector('navbarBackground')};
+  white-space: nowrap;
+  font-size: ${fontSize.base};
+  color: inherit;
+  background-color: transparent;
   &:hover {
     background-color: ${getThemePropSelector('highlight')};
   }
@@ -256,6 +259,20 @@ const TabsMenuTrigger = styled.button`
     ${FocusVisibleStyle}
   }
 `;
+
+const TabsMenuCaret = styled.span`
+  display: inline-flex;
+  margin-left: ${spacing.r8};
+`;
+
+const MoreTriggerContent = () => (
+  <>
+    More
+    <TabsMenuCaret>
+      <Icon name="Dropdown-down" />
+    </TabsMenuCaret>
+  </>
+);
 
 const TabsMenuList = styled.ul`
   margin: 0;
@@ -294,31 +311,43 @@ const TabsMenuList = styled.ul`
 const renderTab = (
   { link, title, selected, onClick, render }: Tab,
   index: number,
+  { inMenu = false }: { inMenu?: boolean } = {},
 ) => {
+  const key = `navbar_tab_item_${index}`;
   if (render) {
-    return <Fragment key={`navbar_tab_item_${index}`}>{render}</Fragment>;
+    return render;
   }
+  // Inside the "More" menu each tab sits in a role="menuitem" <li>, so the tab
+  // role/aria-selected would be invalid nesting — mark the current page with
+  // aria-current instead.
+  const selectionProps = inMenu
+    ? { 'aria-current': selected ? ('page' as const) : undefined }
+    : { role: 'tab', 'aria-selected': selected };
   return link ? (
     cloneElement(link, {
       className: selected ? 'selected' : '',
-      'aria-selected': selected,
-      role: 'tab',
-      key: `navbar_tab_item_${index}`,
+      key,
+      ...selectionProps,
     })
   ) : (
     <TabItem
       onClick={onClick}
-      role="tab"
       selected={!!selected}
-      aria-selected={selected}
-      key={`navbar_tab_item_${index}`}
+      key={key}
+      {...selectionProps}
     >
       <span>{title}</span>
     </TabItem>
   );
 };
 
-function NavbarTabsMenu({ tabs }: { tabs: Array<Tab> }) {
+function NavbarTabsMenu({
+  tabs,
+  triggerRef,
+}: {
+  tabs: Array<Tab>;
+  triggerRef?: (node: HTMLElement | null) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -333,15 +362,22 @@ function NavbarTabsMenu({ tabs }: { tabs: Array<Tab> }) {
     useRole(context, { role: 'menu' }),
   ]);
 
+  const setTriggerRef = useCallback(
+    (node: HTMLButtonElement | null) => {
+      refs.setReference(node);
+      triggerRef?.(node);
+    },
+    [refs, triggerRef],
+  );
+
   return (
     <>
       <TabsMenuTrigger
         type="button"
-        aria-label="Navigation"
-        ref={refs.setReference}
+        ref={setTriggerRef}
         {...getReferenceProps()}
       >
-        <Icon name="More" />
+        <MoreTriggerContent />
       </TabsMenuTrigger>
       {isOpen && (
         <FloatingPortal>
@@ -354,7 +390,7 @@ function NavbarTabsMenu({ tabs }: { tabs: Array<Tab> }) {
             >
               {tabs.map((tab, index) => (
                 <li role="menuitem" key={`navbar_tab_menu_item_${index}`}>
-                  {renderTab(tab, index)}
+                  {renderTab(tab, index, { inMenu: true })}
                 </li>
               ))}
             </TabsMenuList>
@@ -365,33 +401,51 @@ function NavbarTabsMenu({ tabs }: { tabs: Array<Tab> }) {
   );
 }
 
-const MeasureRow = styled.div`
-  position: absolute;
-  top: -9999px;
-  left: 0;
-  display: flex;
-  visibility: hidden;
-  pointer-events: none;
+const TabSlot = styled.span`
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
   white-space: nowrap;
 `;
 
 /**
  * Priority+ overflow: keep as many tabs inline as physically fit and move the
- * remainder into a "More" menu, recomputing as the container resizes. Widths
- * are captured from a hidden mirror row (always full-size) so hiding a tab
- * never zeroes its measured width.
+ * remainder into a "More" menu, recomputing as the container resizes.
+ *
+ * Widths come from the real row: every tab renders full-size on the first pass
+ * (before anything overflows), and each tab's measured width is cached per
+ * index. Collapsing a tab into the menu drops it from the row but keeps its
+ * cached width, so the fit math stays accurate without a hidden mirror. The
+ * "More" trigger measures itself through a ref the first time it appears; the
+ * fit then settles within the same commit, before paint.
+ *
+ * Tabs are assumed stable. If their labels ever become dynamic (e.g. i18n),
+ * force a fresh measure by giving this component a `key` that changes with the
+ * locale.
  */
 function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
   const { ref: containerRef, width } = useContainerWidth<HTMLDivElement>(0);
   const itemRefs = useRef<Array<HTMLElement | null>>([]);
-  const moreRef = useRef<HTMLDivElement | null>(null);
   const [itemWidths, setItemWidths] = useState<number[]>([]);
   const [moreWidth, setMoreWidth] = useState(0);
 
   useLayoutEffect(() => {
-    setItemWidths(itemRefs.current.map((el) => el?.offsetWidth ?? 0));
-    setMoreWidth(moreRef.current?.offsetWidth ?? 0);
+    setItemWidths((prev) =>
+      tabs.map((_, index) => {
+        const measured = itemRefs.current[index]?.offsetWidth;
+        // Keep the cached width for any tab not currently in the row (it sits
+        // in the "More" menu and is no longer rendered full-size here).
+        return measured && measured > 0 ? measured : prev[index] ?? 0;
+      }),
+    );
   }, [tabs]);
+
+  const measureMoreWidth = useCallback((node: HTMLElement | null) => {
+    if (node) {
+      const next = node.offsetWidth;
+      setMoreWidth((prev) => (prev === next ? prev : next));
+    }
+  }, []);
 
   const measured = itemWidths.length === tabs.length;
   const available = width ?? Infinity;
@@ -404,26 +458,19 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
 
   return (
     <NavbarTabs ref={containerRef}>
-      <MeasureRow aria-hidden>
-        {tabs.map((tab, index) => (
-          <span
-            key={`navbar_tab_measure_${index}`}
-            style={{ display: 'inline-flex', height: '100%' }}
-            ref={(el) => {
-              itemRefs.current[index] = el;
-            }}
-          >
-            {renderTab(tab, index)}
-          </span>
-        ))}
-        <div ref={moreRef}>
-          <TabsMenuTrigger type="button" tabIndex={-1}>
-            <Icon name="More" />
-          </TabsMenuTrigger>
-        </div>
-      </MeasureRow>
-      {visible.map((tab, index) => renderTab(tab, index))}
-      {overflow.length > 0 && <NavbarTabsMenu tabs={overflow} />}
+      {visible.map((tab, index) => (
+        <TabSlot
+          key={`navbar_tab_slot_${index}`}
+          ref={(el) => {
+            itemRefs.current[index] = el;
+          }}
+        >
+          {renderTab(tab, index)}
+        </TabSlot>
+      ))}
+      {overflow.length > 0 && (
+        <NavbarTabsMenu tabs={overflow} triggerRef={measureMoreWidth} />
+      )}
     </NavbarTabs>
   );
 }
@@ -436,6 +483,7 @@ const getActionRenderer = (
   switch (action.type) {
     case 'dropdown': {
       const { type, items, text, ...rest } = action;
+      const condenseToIcon = condensed && Boolean(action.icon);
       return (
         <Dropdown
           key={`navbar_right_action_${index}`}
@@ -443,7 +491,8 @@ const getActionRenderer = (
           variant="backgroundLevel1"
           items={items}
           caret={false}
-          text={condensed && action.icon ? undefined : text}
+          text={condenseToIcon ? undefined : text}
+          title={condenseToIcon ? text : undefined}
           {...rest}
         />
       );
@@ -469,11 +518,11 @@ function NavBar({
   condenseActionsBreakpoint = NAVBAR_COLLAPSE_BREAKPOINT_PX,
   ...rest
 }: Props) {
-  const { ref, isNarrowerThan } = useContainerWidth<HTMLDivElement>(
+  const { ref, isNarrow } = useContainerWidth<HTMLDivElement>(
     condenseActionsBreakpoint,
     { hysteresis: 24 },
   );
-  const condenseActions = isNarrowerThan(condenseActionsBreakpoint);
+  const condenseActions = isNarrow;
 
   return (
     <NavbarContainer className="sc-navbar" ref={ref} {...rest}>

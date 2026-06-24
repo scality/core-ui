@@ -72,6 +72,7 @@ declare module 'react-table' {
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D> {
     cellStyle?: CSSProperties;
+    dropAt?: number;
   }
 
   export interface CoreUIUseTableOptions<D extends object>

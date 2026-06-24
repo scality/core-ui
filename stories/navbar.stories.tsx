@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import React from 'react';
 import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from 'storybook/actions';
 import { Link } from '../src/lib/components/text/Text.component';
@@ -7,14 +6,7 @@ import { InlineInput } from '../src/lib';
 import { Stack } from '../src/lib/spacing';
 import { Logo } from '../src/lib/icons/branding-logo';
 import { Icon } from '../src/lib/components/icon/Icon.component';
-import { coreUIAvailableThemes } from '../src/lib/style/theme';
-import {
-  AdaptiveLabelTabStrip,
-  CollapsedNavMenu,
-  NAV_ITEMS,
-  PriorityTabStrip,
-  type CollapseTrigger,
-} from './navbarResponsivePrototypes';
+import { NAV_ITEMS, PriorityTabStrip } from './navbarResponsivePrototypes';
 
 // ARTESCA wordmark. The mark keeps its teal brand colour; the lettering uses
 // `currentColor` so it follows the navbar text colour across light/dark themes.
@@ -378,137 +370,6 @@ export const NavbarDropdownShowcase = {
   },
 };
 
-const ARTESCA_TABS = [
-  'Overview',
-  'Identity',
-  'Platform',
-  'Storage Services',
-  'Data Management',
-  'Alerts',
-];
-
-export const ArtescaInstance = {
-  render: () => {
-    const [themeName, setThemeName] = useState('darkRebrand');
-    const [guardianOpen, setGuardianOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('Overview');
-    const theme = coreUIAvailableThemes[themeName];
-
-    const tabs = ARTESCA_TABS.map((title) => ({
-      title,
-      selected: title === activeTab,
-      onClick: () => setActiveTab(title),
-    }));
-
-    const rightActions: React.ComponentProps<typeof Navbar>['rightActions'] = [
-      {
-        type: 'button',
-        icon: <Icon name={themeName === 'darkRebrand' ? 'LightMode' : 'DarkMode'} />,
-        tooltip: { overlay: 'Toggle theme' },
-        onClick: () =>
-          setThemeName((name) =>
-            name === 'darkRebrand' ? 'artescaLight' : 'darkRebrand',
-          ),
-      },
-      {
-        type: 'button',
-        icon: <Icon name="HandSparkles" />,
-        tooltip: { overlay: 'Guardian AI' },
-        onClick: () => setGuardianOpen((open) => !open),
-      },
-      {
-        type: 'button',
-        icon: <Icon name="Bell" />,
-        tooltip: { overlay: 'Notifications' },
-        onClick: action('notifications clicked'),
-      },
-      {
-        type: 'dropdown',
-        text: 'jean-baptiste.de-la-tour@artesca.example.com',
-        icon: <Icon name="Simple-user" />,
-        items: [
-          { label: 'Profile', onClick: action('Profile clicked') },
-          { label: 'Log out', onClick: action('Logout clicked') },
-        ],
-      },
-    ];
-
-    return (
-      <ThemeProvider theme={theme}>
-        <div
-          style={{
-            display: 'flex',
-            height: '420px',
-            width: '100%',
-            background: theme.backgroundLevel1,
-            color: theme.textPrimary,
-          }}
-        >
-          <div
-            style={{
-              flex: 1,
-              minWidth: 0,
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <Navbar
-              logo={
-                <>
-                  <ArtescaLogo />
-                  <InstanceName>prod-cluster-01</InstanceName>
-                </>
-              }
-              tabs={tabs}
-              rightActions={rightActions}
-              condenseActionsBreakpoint={1200}
-            />
-            <div style={{ flex: 1, padding: '1.5rem' }}>
-              <h3 style={{ marginTop: 0 }}>{activeTab}</h3>
-              <p style={{ opacity: 0.7 }}>
-                Toggle Guardian (hand-sparkles icon) to open the AI agent panel.
-                It narrows the navbar's container, so its tabs overflow into the
-                "More" menu one by one — the layout reacts to the available
-                width, not the viewport.
-              </p>
-            </div>
-          </div>
-          {guardianOpen && (
-            <aside
-              style={{
-                width: '360px',
-                flexShrink: 0,
-                borderLeft: `1px solid ${theme.border}`,
-                background: theme.backgroundLevel2,
-                padding: '1.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.75rem',
-              }}
-            >
-              <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Icon name="HandSparkles" /> Guardian
-              </strong>
-              <p style={{ opacity: 0.7, margin: 0 }}>
-                AI agent (rendered in an iframe in the real app). Opening it
-                takes width away from the main column.
-              </p>
-            </aside>
-          )}
-        </div>
-      </ThemeProvider>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'A realistic ARTESCA navbar: logo + instance name, the platform tabs, and theme / Guardian AI / notification actions (no left toggle). Toggling Guardian opens a side panel that shrinks the navbar container — the tabs overflow into the "More" menu as space runs out and, below 1200px, the action labels condense to icon-only. The theme toggle switches between the dark and light ARTESCA themes.',
-      },
-    },
-  },
-};
-
 // ---------------------------------------------------------------------------
 // Exploration: alternative responsive patterns (comparison stories only — not
 // part of the Navbar API). Each drives the real Navbar via a single `render`
@@ -559,59 +420,3 @@ export const PriorityOverflow = {
   },
 };
 
-export const AdaptiveLabelTabs = {
-  render: () => (
-    <ResizableNavbarFrame>
-      <Navbar
-        logo={explorationLogo}
-        rightActions={explorationActions}
-        tabs={[{ render: <AdaptiveLabelTabStrip items={NAV_ITEMS} /> }]}
-      />
-    </ResizableNavbarFrame>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Adaptive label density: as the navbar narrows, every tab stays visible but degrades from full label → short label → icon-only (full label available on hover). Nothing is hidden in a menu.',
-      },
-    },
-  },
-};
-
-const COLLAPSE_TRIGGERS: { trigger: CollapseTrigger; caption: string }[] = [
-  { trigger: 'more-caret', caption: '"More" + caret' },
-  { trigger: 'kebab', caption: 'Kebab — ⋮ (current default)' },
-  { trigger: 'burger', caption: 'Burger — ☰ (best for navigation)' },
-  { trigger: 'labelled', caption: 'Labelled menu (☰ + "Menu")' },
-  { trigger: 'more-horizontal', caption: 'Horizontal ellipsis — •••' },
-  { trigger: 'apps', caption: 'Apps grid — ▦' },
-  { trigger: 'list', caption: 'List — ≣' },
-];
-
-export const CollapseTriggerVariants = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {COLLAPSE_TRIGGERS.map(({ trigger, caption }) => (
-        <div key={trigger}>
-          <div style={{ marginBottom: '0.25rem', opacity: 0.7, fontSize: '0.85rem' }}>
-            {caption}
-          </div>
-          <Navbar
-            logo={explorationLogo}
-            rightActions={explorationActions}
-            tabs={[{ render: <CollapsedNavMenu items={NAV_ITEMS} trigger={trigger} /> }]}
-          />
-        </div>
-      ))}
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'The same collapsed navigation menu shown with four trigger affordances — "More" + caret, kebab (⋮, the current default), burger (☰), and a labelled menu — so the clearest affordance can be chosen. Each opens the same list of tabs.',
-      },
-    },
-  },
-};

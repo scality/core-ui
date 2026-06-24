@@ -259,6 +259,29 @@ export const ButtonLoader = styled(Loader)<{ label; variant }>`
   }}
 `;
 
+/**
+ * Best-effort accessible text for a label that may be a plain string or a
+ * simple ReactNode (e.g. `<span>Save</span>`). Used to preserve the accessible
+ * name when an icon-only collapse hides the visible label.
+ */
+function nodeToText(node: React.ReactNode): string | undefined {
+  if (node === null || node === undefined || typeof node === 'boolean') {
+    return undefined;
+  }
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (Array.isArray(node)) {
+    const text = node.map(nodeToText).filter(Boolean).join(' ').trim();
+    return text || undefined;
+  }
+  if (typeof node === 'object' && 'props' in node) {
+    return nodeToText(
+      (node as { props?: { children?: React.ReactNode } }).props?.children,
+    );
+  }
+  return undefined;
+}
+
 function Button({
   variant,
   size,
@@ -281,7 +304,7 @@ function Button({
   // preserve it as the accessible name + tooltip.
   const collapsed = Boolean(iconOnly && icon && label);
   const effectiveLabel = collapsed ? undefined : label;
-  const labelText = typeof label === 'string' ? label : undefined;
+  const labelText = nodeToText(label);
   const effectiveTooltip =
     collapsed && !tooltip && labelText ? { overlay: labelText } : tooltip;
 

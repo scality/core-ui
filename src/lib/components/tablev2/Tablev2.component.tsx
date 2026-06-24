@@ -1,6 +1,13 @@
 /// <reference path="react-table-config.ts" />
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   Column as TableColumn,
   CellProps as TableCellProps,
@@ -246,6 +253,7 @@ function Table<
     headerGroups,
     rows,
     prepareRow,
+    allColumns,
     selectedFlatRows,
     getTableBodyProps,
     state: { selectedRowIds },
@@ -301,28 +309,46 @@ function Table<
   const { ref: responsiveRef, width: containerWidth } =
     useContainerWidth<HTMLDivElement>(TABLE_NARROW_BREAKPOINT_PX);
 
+  // Ids this effect has itself hidden for responsiveness, so it can release
+  // exactly those when the container grows back — without clobbering columns a
+  // consumer hid manually via the context-exposed `setHiddenColumns`.
+  const responsivelyDroppedRef = useRef<Set<string>>(new Set());
+
   useEffect(() => {
     if (!hasResponsiveColumns) {
       return;
     }
-    const managedIds = new Set(
-      columns
-        .filter((column) => column.dropAt != null)
-        .map((column) => String(column.id ?? column.accessor)),
+    // Read ids from the table's resolved columns (react-table generates an id
+    // for function accessors), not the raw config where `id`/`accessor` may be
+    // absent or a function.
+    const shouldDrop = new Set(
+      allColumns
+        .filter(
+          (column) =>
+            column.dropAt != null &&
+            containerWidth != null &&
+            containerWidth < column.dropAt,
+        )
+        .map((column) => column.id),
     );
-    const droppedIds = columns
-      .filter(
-        (column) =>
-          column.dropAt != null &&
-          containerWidth != null &&
-          containerWidth < column.dropAt,
-      )
-      .map((column) => String(column.id ?? column.accessor));
-    setHiddenColumns((previousHidden) => [
-      ...previousHidden.filter((id) => !managedIds.has(id)),
-      ...droppedIds,
-    ]);
-  }, [hasResponsiveColumns, columns, containerWidth, setHiddenColumns]);
+    const previouslyDropped = responsivelyDroppedRef.current;
+    const unchanged =
+      shouldDrop.size === previouslyDropped.size &&
+      [...shouldDrop].every((id) => previouslyDropped.has(id));
+    if (unchanged) {
+      return;
+    }
+    setHiddenColumns((previousHidden) => {
+      const next = previousHidden.filter(
+        (id) => !previouslyDropped.has(id) || shouldDrop.has(id),
+      );
+      shouldDrop.forEach((id) => {
+        if (!next.includes(id)) next.push(id);
+      });
+      return next;
+    });
+    responsivelyDroppedRef.current = shouldDrop;
+  }, [hasResponsiveColumns, allColumns, containerWidth, setHiddenColumns]);
 
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {

@@ -69,12 +69,13 @@ export function useContainerWidth<T extends HTMLElement = HTMLDivElement>(
     const observer = new ResizeObserver((entries) => {
       const observedWidth = entries[0]?.contentRect.width;
       if (typeof observedWidth === 'number') {
-        setWidth(observedWidth);
+        const rounded = Math.round(observedWidth);
+        setWidth((prev) => (prev === rounded ? prev : rounded));
       }
     });
     observer.observe(node);
     observerRef.current = observer;
-    setWidth(node.getBoundingClientRect().width);
+    setWidth(Math.round(node.getBoundingClientRect().width));
   }, []);
 
   // Hysteresis: once narrow, require width >= breakpoint + hysteresis to leave
