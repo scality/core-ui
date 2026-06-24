@@ -16,4 +16,8 @@ export default {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
   testEnvironment: 'jsdom',
+  // Never discover tests or mocks inside git worktrees under .claude/ — they are
+  // separate checkouts with their own package boundary and break babel transforms.
+  testPathIgnorePatterns: ['/node_modules/', '/\\.claude/'],
+  modulePathIgnorePatterns: ['/\\.claude/'],
 };
