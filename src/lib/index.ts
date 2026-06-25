@@ -55,6 +55,15 @@ export { Layout as Layout2 } from './components/layout/v2';
 export { TwoPanelLayout } from './components/layout/v2/panels';
 export { AppContainer } from './components/layout/v2/AppContainer';
 export {
+  useContainerWidth,
+  NARROW_BREAKPOINT_PX,
+  TABLE_NARROW_BREAKPOINT_PX,
+} from './components/responsive/useContainerWidth';
+export type {
+  UseContainerWidthOptions,
+  UseContainerWidthResult,
+} from './components/responsive/useContainerWidth';
+export {
   BasicText,
   SecondaryText,
   LargerText,
