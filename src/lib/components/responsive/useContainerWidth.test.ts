@@ -63,46 +63,52 @@ describe('useContainerWidth', () => {
     observations = [];
   });
 
-  it('reports the wide layout before the container has been measured', () => {
+  // Tests below call useContainerWidth() with no breakpoint argument, so they
+  // exercise the default breakpoint (NARROW_BREAKPOINT_PX) and derive their
+  // widths from it to keep the relationship explicit.
+  const WIDE = NARROW_BREAKPOINT_PX + 160;
+  const NARROW = NARROW_BREAKPOINT_PX - 140;
+
+  it('should return false for isNarrow and isNarrowerThan() before the container is measured', () => {
     const { result } = renderHook(() => useContainerWidth());
 
     expect(result.current.width).toBeNull();
     expect(result.current.isNarrow).toBe(false);
-    expect(result.current.isNarrowerThan(100)).toBe(false);
+    expect(result.current.isNarrowerThan(NARROW)).toBe(false);
   });
 
-  it('stays wide for a container measured above the breakpoint', () => {
+  it('should return false for isNarrow when the container is wider than the default breakpoint', () => {
     const { result } = renderHook(() => useContainerWidth());
 
-    act(() => result.current.ref(makeNode(800)));
+    act(() => result.current.ref(makeNode(WIDE)));
 
-    expect(result.current.width).toBe(800);
+    expect(result.current.width).toBe(WIDE);
     expect(result.current.isNarrow).toBe(false);
   });
 
-  it('switches to narrow for a container measured below the breakpoint', () => {
+  it('should return true for isNarrow when the container is narrower than the default breakpoint', () => {
     const { result } = renderHook(() => useContainerWidth());
 
-    act(() => result.current.ref(makeNode(500)));
+    act(() => result.current.ref(makeNode(NARROW)));
 
-    expect(result.current.width).toBe(500);
+    expect(result.current.width).toBe(NARROW);
     expect(result.current.isNarrow).toBe(true);
   });
 
-  it('reacts to later resize events in both directions', () => {
+  it('should toggle isNarrow when the container is resized across the default breakpoint', () => {
     const { result } = renderHook(() => useContainerWidth());
-    const node = makeNode(800);
+    const node = makeNode(WIDE);
     act(() => result.current.ref(node));
     expect(result.current.isNarrow).toBe(false);
 
-    emitResize(node, 500);
+    emitResize(node, NARROW);
     expect(result.current.isNarrow).toBe(true);
 
-    emitResize(node, 800);
+    emitResize(node, WIDE);
     expect(result.current.isNarrow).toBe(false);
   });
 
-  it('rounds the measured width to the nearest pixel', () => {
+  it('should round the measured width to the nearest pixel', () => {
     const { result } = renderHook(() => useContainerWidth());
     const node = makeNode(640.4);
     act(() => result.current.ref(node));
@@ -112,7 +118,7 @@ describe('useContainerWidth', () => {
     expect(result.current.width).toBe(500);
   });
 
-  it('compares the measured width against an arbitrary width via isNarrowerThan', () => {
+  it('should return true from isNarrowerThan(px) only when the measured width is below px', () => {
     const { result } = renderHook(() => useContainerWidth());
 
     act(() => result.current.ref(makeNode(700)));
@@ -121,45 +127,47 @@ describe('useContainerWidth', () => {
     expect(result.current.isNarrowerThan(600)).toBe(false);
   });
 
-  it('honours a custom breakpoint', () => {
+  it('should use the breakpoint argument instead of the default breakpoint', () => {
     const { result } = renderHook(() =>
       useContainerWidth(TABLE_NARROW_BREAKPOINT_PX),
     );
 
-    // 800 is wide for the default 640 breakpoint but narrow for the table one.
-    act(() => result.current.ref(makeNode(800)));
+    // WIDE is above the default breakpoint but below the table breakpoint,
+    // so it is wide by default yet narrow once the table breakpoint is passed.
+    act(() => result.current.ref(makeNode(WIDE)));
 
     expect(result.current.isNarrow).toBe(true);
   });
 
-  it('requires the container to clear the hysteresis band before leaving narrow', () => {
+  it('should stay narrow until the width clears the breakpoint plus the hysteresis band', () => {
+    const hysteresis = 80;
     const { result } = renderHook(() =>
-      useContainerWidth(NARROW_BREAKPOINT_PX, { hysteresis: 80 }),
+      useContainerWidth(NARROW_BREAKPOINT_PX, { hysteresis }),
     );
-    const node = makeNode(500);
+    const node = makeNode(NARROW);
     act(() => result.current.ref(node));
     expect(result.current.isNarrow).toBe(true);
 
-    // Back above the breakpoint but still inside the band (640..720): stays narrow.
-    emitResize(node, 700);
+    // Back above the breakpoint but still inside the band: stays narrow.
+    emitResize(node, NARROW_BREAKPOINT_PX + hysteresis - 1);
     expect(result.current.isNarrow).toBe(true);
 
     // Clears breakpoint + hysteresis: now wide.
-    emitResize(node, 720);
+    emitResize(node, NARROW_BREAKPOINT_PX + hysteresis);
     expect(result.current.isNarrow).toBe(false);
   });
 
-  it('stops observing the previous node when the ref moves to another element', () => {
+  it('should stop updating width from a node once the ref moves to another node', () => {
     const { result } = renderHook(() => useContainerWidth());
-    const firstNode = makeNode(800);
+    const firstNode = makeNode(WIDE);
     act(() => result.current.ref(firstNode));
 
-    const secondNode = makeNode(500);
+    const secondNode = makeNode(NARROW);
     act(() => result.current.ref(secondNode));
-    expect(result.current.isNarrow).toBe(true);
+    expect(result.current.width).toBe(NARROW);
 
     // The detached node no longer drives the width.
-    emitResize(firstNode, 900);
-    expect(result.current.width).toBe(500);
+    emitResize(firstNode, WIDE);
+    expect(result.current.width).toBe(NARROW);
   });
 });
