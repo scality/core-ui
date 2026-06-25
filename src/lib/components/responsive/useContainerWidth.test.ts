@@ -7,9 +7,9 @@ import {
 
 // jsdom ships no ResizeObserver, so we stub a controllable one: each instance
 // registers the (callback, node) pairs it observes, and `emitResize` lets a
-// test push a new content-box width as if the element had been resized.
+// test push a new border-box width as if the element had been resized.
 type ResizeCallback = (
-  entries: { contentRect: { width: number } }[],
+  entries: { borderBoxSize: { inlineSize: number }[] }[],
   observer: ResizeObserver,
 ) => void;
 
@@ -31,9 +31,11 @@ class ResizeObserverMock {
   }
 }
 
-const makeNode = (initialWidth: number) => {
+// jsdom does no layout, so getBoundingClientRect always reports 0; stub it to
+// return the border-box width the hook reads on the initial sync measurement.
+const makeNode = (width: number) => {
   const node = document.createElement('div');
-  node.getBoundingClientRect = () => ({ width: initialWidth } as DOMRect);
+  node.getBoundingClientRect = () => ({ width } as DOMRect);
   return node;
 };
 
@@ -42,7 +44,10 @@ const emitResize = (node: Element, width: number) => {
     observations
       .filter((o) => o.node === node)
       .forEach((o) =>
-        o.callback([{ contentRect: { width } }], {} as ResizeObserver),
+        o.callback(
+          [{ borderBoxSize: [{ inlineSize: width }] }],
+          {} as ResizeObserver,
+        ),
       );
   });
 };
@@ -155,6 +160,41 @@ describe('useContainerWidth', () => {
     // Clears breakpoint + hysteresis: now wide.
     emitResize(node, NARROW_BREAKPOINT_PX + hysteresis);
     expect(result.current.isNarrow).toBe(false);
+  });
+
+  it('should report the same border-box width on the initial read and on resize', () => {
+    // The sync read (getBoundingClientRect) and the observer (borderBoxSize)
+    // must agree so a measured container does not flip isNarrow after mount.
+    const { result } = renderHook(() => useContainerWidth());
+    const node = makeNode(WIDE);
+    act(() => result.current.ref(node));
+    expect(result.current.width).toBe(WIDE);
+
+    emitResize(node, WIDE);
+    expect(result.current.width).toBe(WIDE);
+  });
+
+  it('should re-measure the target border-box when borderBoxSize is unavailable', () => {
+    let rectWidth = WIDE;
+    const node = document.createElement('div');
+    node.getBoundingClientRect = () => ({ width: rectWidth } as DOMRect);
+
+    const { result } = renderHook(() => useContainerWidth());
+    act(() => result.current.ref(node));
+    expect(result.current.width).toBe(WIDE);
+
+    // Browser without borderBoxSize support: the entry exposes only `target`.
+    rectWidth = NARROW;
+    act(() => {
+      observations
+        .filter((o) => o.node === node)
+        .forEach((o) =>
+          o.callback([{ target: node }] as never, {} as ResizeObserver),
+        );
+    });
+
+    expect(result.current.width).toBe(NARROW);
+    expect(result.current.isNarrow).toBe(true);
   });
 
   it('should stop updating width from a node once the ref moves to another node', () => {

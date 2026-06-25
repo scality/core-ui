@@ -29,7 +29,7 @@ export type UseContainerWidthOptions = {
 export type UseContainerWidthResult<T extends HTMLElement> = {
   /** Callback ref — attach to the element whose width should drive the layout. */
   ref: (node: T | null) => void;
-  /** Latest measured content-box width in px, or `null` before first measure. */
+  /** Latest measured border-box width in px, or `null` before first measure. */
   width: number | null;
   /** True when `width` is below the hook's `breakpoint`. Wide-first until measured. */
   isNarrow: boolean;
@@ -67,7 +67,14 @@ export function useContainerWidth<T extends HTMLElement = HTMLDivElement>(
       return;
     }
     const observer = new ResizeObserver((entries) => {
-      const observedWidth = entries[0]?.contentRect.width;
+      const entry = entries[0];
+      // Border-box width (matches the element's CSS width and the sync read
+      // below); where borderBoxSize is unsupported, re-measure the border box
+      // from the target rather than fall back to contentRect's content box,
+      // which would disagree with the sync read on padded elements.
+      const observedWidth =
+        entry?.borderBoxSize?.[0]?.inlineSize ??
+        entry?.target.getBoundingClientRect().width;
       if (typeof observedWidth === 'number') {
         const rounded = Math.round(observedWidth);
         setWidth((prev) => (prev === rounded ? prev : rounded));
