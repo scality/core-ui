@@ -148,6 +148,7 @@ const SidebarItem = styled.div<{ active?: boolean }>`
 `;
 const MenuItemText = styled.div`
   margin-right: ${spacing.r20};
+  white-space: nowrap;
 `;
 // selected border-right
 const MenuItemSelected = styled.div`
@@ -196,7 +197,7 @@ function Sidebar({
                 setHovered(false);
                 onToggleClick();
               }}
-              tooltip={{overlay: "Toggle sidebar"}}
+              tooltip={{ overlay: "Toggle sidebar" }}
             />
           </MenuItemIcon>
         )}
