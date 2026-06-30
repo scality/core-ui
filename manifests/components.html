@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">330 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">331 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.5s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -9942,7 +9942,7 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
       <div class="badges">
         <label for="c-37-components-navigation-navbar-props" class="badge ok as-toggle">4 prop types</label>
         <label for="c-37-components-navigation-navbar-info" class="badge info as-toggle">1 info</label>
-        <label for="c-37-components-navigation-navbar-stories" class="badge ok as-toggle">6 stories</label>
+        <label for="c-37-components-navigation-navbar-stories" class="badge ok as-toggle">7 stories</label>
         
         
       </div>
@@ -10066,6 +10066,26 @@ tabs?: Tab[]</code></pre>
     productName=&quot;Hardware UI&quot;
     rightActions={[rightActions[4]]}
     tabs={linkTabs}
+    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Navbar With Long User Name</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const NavbarWithLongUserName = () =&gt; &lt;Navbar
+    productName=&quot;Hardware UI&quot;
+    rightActions={[
+      {
+        type: &#39;dropdown&#39;,
+        text: &#39;averylongusername.that-would-previously-wrap@example.com&#39;,
+        icon: &lt;i className=&quot;fas fa-user&quot; /&gt;,
+        items: [{ label: &#39;Log out&#39;, onClick: action(&#39;Logout clicked&#39;) }],
+      },
+    ]}
+    tabs={tabs}
     logo={&lt;Logo /&gt;} /&gt;;</code></pre>
             </div>
             <div class="note ok">
