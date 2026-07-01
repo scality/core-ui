@@ -48,7 +48,10 @@ export function useContainerWidth<T extends HTMLElement = HTMLDivElement>(): Use
         setWidth(Math.round(observedWidth));
       }
     });
-    observer.observe(node);
+    // Observe the border-box so the callback fires on the same box we report
+    // below (a border-box-only change would not trigger the default content-box
+    // observation).
+    observer.observe(node, { box: 'border-box' });
     observerRef.current = observer;
     setWidth(Math.round(node.getBoundingClientRect().width));
   }, []);
