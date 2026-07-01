@@ -54,8 +54,6 @@ export { TextBadge } from './components/textbadge/TextBadge.component';
 export { Layout as Layout2 } from './components/layout/v2';
 export { TwoPanelLayout } from './components/layout/v2/panels';
 export { AppContainer } from './components/layout/v2/AppContainer';
-export { useContainerWidth } from './components/responsive/useContainerWidth';
-export type { UseContainerWidthResult } from './components/responsive/useContainerWidth';
 export {
   BasicText,
   SecondaryText,
