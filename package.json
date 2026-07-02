@@ -67,7 +67,6 @@
     "@types/react-table": "^7.7.11",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
-    "@types/styled-components": "^5.1.25",
     "@types/styled-system": "^5.1.15",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
@@ -123,8 +122,9 @@
     "react-window": "^1.8.6",
     "recharts": "^3.0.2",
     "remark-gfm": "^4.0.1",
-    "styled-components": "^5.2.1",
+    "styled-components": "^6.4.3",
     "styled-system": "^5.1.5",
+    "stylis": "^4.4.0",
     "uuid": "^14.0.0"
   },
   "homepage": "https://scality.github.io/core-ui/",
