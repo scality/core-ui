@@ -1,6 +1,13 @@
 /// <reference path="react-table-config.ts" />
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   Column as TableColumn,
   CellProps as TableCellProps,
@@ -32,8 +39,13 @@ import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper, TooltipContent } from './Tablestyle';
 import { compareHealth, TableHeightKeyType } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
+import {
+  useDroppedColumns,
+  DROPPED_COLUMNS_COLUMN_ID,
+} from './useDroppedColumns';
 import { Icon } from '../icon/Icon.component';
 import { TableSync } from './TableSync';
+import { useContainerWidth } from '../responsive/useContainerWidth';
 
 type UpdateTableData<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -86,6 +98,13 @@ export type TableProps<
     fr?: { singular: string; plural: string };
   };
   initiallySelectedRowsIds?: Set<string | number>;
+  /**
+   * When `true`, a trailing column is shown while one or more `dropAt` columns
+   * are responsively hidden. Its per-row trigger opens a popover listing the
+   * dropped columns' `Header: value` pairs, so the data stays reachable on
+   * narrow viewports. Opt-in; defaults to `false` (no behaviour change).
+   */
+  revealDroppedColumns?: boolean;
   //To call it from the Cell renderer to update the original data
 } & UpdateTableData<DATA_ROW>;
 
@@ -122,6 +141,8 @@ type TableContextType<
   setSyncScrollListener: (listener: (event: Event) => void) => void;
   setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
   hasScrollbar?: boolean;
+  /** Ids of the columns currently hidden by the responsive `dropAt` effect. */
+  droppedColumnIds: Set<string>;
 };
 const TableContext = createContext<TableContextType | null>(null);
 
@@ -197,6 +218,7 @@ function Table<
   updateTableData,
   status,
   entityName,
+  revealDroppedColumns = false,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -242,6 +264,7 @@ function Table<
     headerGroups,
     rows,
     prepareRow,
+    allColumns,
     selectedFlatRows,
     getTableBodyProps,
     state: { selectedRowIds },
@@ -271,7 +294,7 @@ function Table<
             ]
           : [],
         selectedRowIds: formattedInitiallySelectedRows,
-        hiddenColumns: ['selection'],
+        hiddenColumns: ['selection', DROPPED_COLUMNS_COLUMN_ID],
       },
       disableMultiSort: true,
       autoResetSortBy: false,
@@ -288,7 +311,79 @@ function Table<
     useExpanded,
     useRowSelect,
     useCheckbox,
+    useDroppedColumns,
   );
+
+  const hasResponsiveColumns = useMemo(
+    () => columns.some((column) => column.dropAt != null),
+    [columns],
+  );
+  const { ref: responsiveRef, width: containerWidth } =
+    useContainerWidth<HTMLDivElement>();
+
+  // Ids this effect has itself hidden for responsiveness, so it can release
+  // exactly those when the container grows back — without clobbering columns a
+  // consumer hid manually via the context-exposed `setHiddenColumns`.
+  const responsivelyDroppedRef = useRef<Set<string>>(new Set());
+
+  // State mirror of the dropped ids so the optional `revealDroppedColumns`
+  // popover cell (which reads this through context) re-renders when it changes.
+  const [droppedColumnIds, setDroppedColumnIds] = useState<Set<string>>(
+    new Set(),
+  );
+
+  useEffect(() => {
+    if (!hasResponsiveColumns) {
+      return;
+    }
+    // Read ids from the table's resolved columns (react-table generates an id
+    // for function accessors), not the raw config where `id`/`accessor` may be
+    // absent or a function.
+    const shouldDrop = new Set(
+      allColumns
+        .filter(
+          (column) =>
+            column.dropAt != null &&
+            containerWidth != null &&
+            containerWidth < column.dropAt,
+        )
+        .map((column) => column.id),
+    );
+    const previouslyDropped = responsivelyDroppedRef.current;
+    const unchanged =
+      shouldDrop.size === previouslyDropped.size &&
+      [...shouldDrop].every((id) => previouslyDropped.has(id));
+    if (unchanged) {
+      return;
+    }
+    setHiddenColumns((previousHidden) => {
+      const next = previousHidden.filter(
+        (id) => !previouslyDropped.has(id) || shouldDrop.has(id),
+      );
+      shouldDrop.forEach((id) => {
+        if (!next.includes(id)) next.push(id);
+      });
+      // Reveal the trailing "show dropped columns" column only while at least
+      // one responsive column is hidden and the feature is opted into.
+      const shouldReveal = revealDroppedColumns && shouldDrop.size > 0;
+      const isRevealHidden = next.includes(DROPPED_COLUMNS_COLUMN_ID);
+      if (shouldReveal && isRevealHidden) {
+        return next.filter((id) => id !== DROPPED_COLUMNS_COLUMN_ID);
+      }
+      if (!shouldReveal && !isRevealHidden) {
+        return [...next, DROPPED_COLUMNS_COLUMN_ID];
+      }
+      return next;
+    });
+    setDroppedColumnIds(shouldDrop);
+    responsivelyDroppedRef.current = shouldDrop;
+  }, [
+    hasResponsiveColumns,
+    allColumns,
+    containerWidth,
+    setHiddenColumns,
+    revealDroppedColumns,
+  ]);
 
   useEffect(() => {
     if (globalFilter !== undefined && globalFilter !== null) {
@@ -337,13 +432,18 @@ function Table<
     setSyncScrollListener,
     setHasScrollbar,
     hasScrollbar,
+    droppedColumnIds,
   };
   return (
     <TableContext.Provider
       //@ts-ignore
       value={contextValue}
     >
-      <TableWrapper role="grid" className="table">
+      <TableWrapper
+        role="grid"
+        className="table"
+        ref={hasResponsiveColumns ? responsiveRef : undefined}
+      >
         {children}
       </TableWrapper>
     </TableContext.Provider>

@@ -58,6 +58,13 @@ declare module 'react-table' {
 
   export type CoreUIColumn<D extends object = {}> = Column<D> & {
     cellStyle?: CSSProperties;
+    /**
+     * Optional responsive breakpoint, in pixels. When set, the column is
+     * hidden while the table container is narrower than this value. Columns
+     * without `dropAt` are always shown. Requires no extra wiring — the Table
+     * measures its own width.
+     */
+    dropAt?: number;
   };
   export interface ColumnInstance<D extends object = {}>
     extends UseFiltersColumnProps<D>,
@@ -65,6 +72,7 @@ declare module 'react-table' {
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D> {
     cellStyle?: CSSProperties;
+    dropAt?: number;
   }
 
   export interface CoreUIUseTableOptions<D extends object>
