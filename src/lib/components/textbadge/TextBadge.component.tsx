@@ -24,17 +24,17 @@ export type TextBadgeCustomColor = {
 };
 
 const StyledTextBadge = styled.span<{
-  variant: TextBadgeVariant;
+  $variant: TextBadgeVariant;
   $customColor?: TextBadgeCustomColor;
   $removable: boolean;
 }>`
-  ${({ theme, variant, $customColor, $removable }) => `
+  ${({ theme, $variant, $customColor, $removable }) => `
       ${$removable ? `display: inline-flex; align-items: center; gap: ${spacing.r4};` : ''}
-      background-color: ${$customColor ? $customColor.backgroundColor : theme[variant]};
+      background-color: ${$customColor ? $customColor.backgroundColor : theme[$variant]};
       color: ${
         $customColor
           ? $customColor.text
-          : variant === 'infoSecondary'
+          : $variant === 'infoSecondary'
             ? theme.textPrimary
             : theme.textReverse
       };
@@ -90,7 +90,7 @@ export function TextBadge({
   return (
     <StyledTextBadge
       className={['sc-text-badge', className].join(' ')}
-      variant={variant}
+      $variant={variant}
       $customColor={customColor}
       $removable={Boolean(onRemove)}
       {...rest}
