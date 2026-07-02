@@ -86,7 +86,7 @@ const DropdownMenuItemStyled = styled.li`
 const Caret = styled.span`
   margin-left: ${spacing.r16};
 `;
-const Trigger = ButtonStyled.withComponent('div');
+const Trigger = styled(ButtonStyled).attrs({ as: 'div' })``;
 const TriggerStyled = styled(Trigger)`
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {

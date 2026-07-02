@@ -238,7 +238,7 @@ export const ButtonText = styled.span`
 export const ButtonContent = styled.span`
   position: relative;
 `;
-const Anchor = ButtonStyled.withComponent('a');
+const Anchor = styled(ButtonStyled).attrs({ as: 'a' })``;
 
 /**
  * @deprecated
