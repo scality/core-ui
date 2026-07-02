@@ -135,10 +135,10 @@ export function SingleSelectableContent<
         return (
           <TableRow
             {...rowProps}
-            isSelected={selectedId === row.id}
+            $isSelected={selectedId === row.id}
             aria-selected={selectedId === row.id ? 'true' : 'false'}
-            separationLineVariant={separationLineVariant}
-            selectedId={selectedId}
+            $separationLineVariant={separationLineVariant}
+            $selectedId={selectedId}
             className="tr"
           >
             {row.cells.map((cell) => {
@@ -175,10 +175,10 @@ export function SingleSelectableContent<
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
             ref={headerRef}
-            separationLineVariant={separationLineVariant}
-            hasScrollBar={hasScrollbar}
-            scrollBarWidth={scrollBarWidth}
-            rowHeight={rowHeight}
+            $separationLineVariant={separationLineVariant}
+            $hasScrollBar={hasScrollbar}
+            $scrollBarWidth={scrollBarWidth}
+            $rowHeight={rowHeight}
             style={{ overflow: 'hidden' }}
           >
             {headerGroup.headers.map((column) => {

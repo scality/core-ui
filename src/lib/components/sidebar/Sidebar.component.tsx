@@ -25,9 +25,9 @@ export type Props = {
   onToggleClick?: () => void;
 };
 export type WrapperProps = {
-  expanded?: boolean;
-  hoverable?: boolean;
-  hovered?: boolean;
+  $expanded?: boolean;
+  $hoverable?: boolean;
+  $hovered?: boolean;
 };
 const Wrapper = styled.div<WrapperProps>`
   margin-top: 1px;
@@ -44,7 +44,7 @@ const Wrapper = styled.div<WrapperProps>`
   }}
   border-right: 1px solid ${(props) => props.theme.backgroundLevel3};
   ${(props) => {
-    if (props.expanded) {
+    if (props.$expanded) {
       return css`
         width: auto;
       `;
@@ -58,7 +58,7 @@ const Wrapper = styled.div<WrapperProps>`
   ${(props) => {
     const { backgroundLevel1 } = props.theme;
 
-    if (props.hoverable && props.hovered && !props.expanded) {
+    if (props.$hoverable && props.$hovered && !props.$expanded) {
       return css`
         .sc-sidebar {
           position: relative;
@@ -82,8 +82,8 @@ const SidebarContainer = styled.div<WrapperProps>`
 
   ${(props) => {
     if (
-      props.expanded ||
-      (props.hoverable && props.hovered && !props.expanded)
+      props.$expanded ||
+      (props.$hoverable && props.$hovered && !props.$expanded)
     ) {
       return css`
         width: auto;
@@ -110,7 +110,7 @@ const SidebarContainer = styled.div<WrapperProps>`
     padding: 0px;
   }
 `;
-const SidebarItem = styled.div<{ active?: boolean }>`
+const SidebarItem = styled.div<{ $active?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@ const SidebarItem = styled.div<{ active?: boolean }>`
 
   ${(props) => {
     const { textPrimary, highlight } = props.theme;
-    return props.active
+    return props.$active
       ? css`
           background-color: ${highlight};
           color: ${textPrimary};
@@ -178,15 +178,15 @@ function Sidebar({
     <Wrapper
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      hoverable={hoverable}
-      hovered={hovered}
-      expanded={expanded}
+      $hoverable={hoverable}
+      $hovered={hovered}
+      $expanded={expanded}
     >
       <SidebarContainer
-        expanded={expanded}
+        $expanded={expanded}
         className="sc-sidebar"
-        hoverable={hoverable}
-        hovered={hovered}
+        $hoverable={hoverable}
+        $hovered={hovered}
         {...rest}
       >
         {onToggleClick && (
@@ -207,7 +207,7 @@ function Sidebar({
               <SidebarItem
                 className="sc-sidebar-item"
                 key={index}
-                active={active}
+                $active={active}
                 title={label}
                 onClick={onClick}
                 onKeyDown={(event) => {

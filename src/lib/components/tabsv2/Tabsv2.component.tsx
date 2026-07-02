@@ -162,11 +162,11 @@ function Tabs({
         key={index}
         role="tab"
         onClick={() => navigate(getPushHistoryPath(realPath, query))}
-        selected={isSelected}
-        tabHoverColor={tabHoverColor}
-        inactiveTabColor={inactiveTabColor}
-        activeTabColor={activeTabColor}
-        activeTabSeparator={activeTabSeparator}
+        $selected={isSelected}
+        $tabHoverColor={tabHoverColor}
+        $inactiveTabColor={inactiveTabColor}
+        $activeTabColor={activeTabColor}
+        $activeTabSeparator={activeTabSeparator}
         tabIndex={isSelected ? 0 : -1}
         onKeyDown={(event) => {
           if (
@@ -180,7 +180,7 @@ function Tabs({
         }}
         {...childRest}
       >
-        {icon && <TabIcon label={label}>{icon}</TabIcon>}
+        {icon && <TabIcon $label={label}>{icon}</TabIcon>}
         {isSelected ? (
           <BasicText>{label}</BasicText>
         ) : (
@@ -195,8 +195,8 @@ function Tabs({
       <TabsContainer
         style={{ containerType: 'size' }}
         className={['sc-tabs', className].join(' ')}
-        tabLineColor={tabLineColor}
-        separatorColor={separatorColor}
+        $tabLineColor={tabLineColor}
+        $separatorColor={separatorColor}
         {...rest}
       >
         <ScrollableContainer>
@@ -241,8 +241,8 @@ function Tabs({
                   <>
                     <TabContent
                       className="sc-tabs-item-content"
-                      tabContentColor={tabContentColor}
-                      withoutPadding={tab.props.withoutPadding}
+                      $tabContentColor={tabContentColor}
+                      $withoutPadding={tab.props.withoutPadding}
                     >
                       {tab.props.children}
                     </TabContent>

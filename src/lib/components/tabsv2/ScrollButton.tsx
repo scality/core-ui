@@ -31,7 +31,7 @@ type Props = {
 const ScrollButton = forwardRef(({ direction, onClick }: Props, ref) => {
   return (
     // @ts-ignore
-    <StyledScrollButton direction={direction} onClick={onClick} ref={ref}>
+    <StyledScrollButton $direction={direction} onClick={onClick} ref={ref}>
       <Icon name={`Chevron-${direction}`} />
     </StyledScrollButton>
   );

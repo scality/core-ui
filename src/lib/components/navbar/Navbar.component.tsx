@@ -99,7 +99,7 @@ const NavbarTabs = styled.div`
     }};
   }
 `;
-const TabItem = styled.div<{ selected: boolean }>`
+const TabItem = styled.div<{ $selected: boolean }>`
   box-sizing: border-box;
   height: 100%;
   display: flex;
@@ -123,7 +123,7 @@ const TabItem = styled.div<{ selected: boolean }>`
     `;
   }};
   ${(props) =>
-    props.selected &&
+    props.$selected &&
     css`
       border-top: ${spacing.r2} solid;
       border-bottom: ${spacing.r2} solid;
@@ -252,7 +252,7 @@ function NavBar({
               <TabItem
                 onClick={onClick}
                 role="tab"
-                selected={!!selected}
+                $selected={!!selected}
                 aria-selected={selected}
                 key={`navbar_tab_item_${index}`}
               >
