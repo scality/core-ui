@@ -3,6 +3,22 @@ import { spacing } from '../../spacing';
 import { CoreUITheme } from '../../style/theme';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
+// Style-only props consumed by the Text family. styled-components v6 forwards
+// unknown props to the DOM, so these are filtered here rather than reaching the
+// rendered <span>. Kept as public prop names (not $-transient) to preserve the
+// Text API for all consumers.
+const NON_DOM_TEXT_PROPS = new Set([
+  'color',
+  'variant',
+  'isEmphazed',
+  'isGentleEmphazed',
+  'compact',
+  'status',
+  'statusColor',
+  'alignRight',
+]);
+const forwardTextProp = (prop: string) => !NON_DOM_TEXT_PROPS.has(prop);
+
 export type TextVariant =
   | 'ChartTitle'
   | 'Basic'
@@ -24,7 +40,9 @@ type TextProps = {
   isGentleEmphazed?: boolean;
   compact?: boolean;
 };
-const BasicTextStyle = styled.span`
+const BasicTextStyle = styled.span.withConfig({
+  shouldForwardProp: forwardTextProp,
+})`
   color: ${(props) => props.theme.textPrimary};
   font-size: 1rem;
   line-height: ${spacing.r24};
@@ -142,7 +160,9 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText) <{
       : ''}
 `;
 
-export const Text = styled.span<TextProps>`
+export const Text = styled.span.withConfig({
+  shouldForwardProp: forwardTextProp,
+})<TextProps>`
   ${(props) => props.color && `color: ${props.theme[props.color]};`}
   ${(props) =>
     props.variant === 'Larger'

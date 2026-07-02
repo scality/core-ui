@@ -11,23 +11,24 @@ type Props = {
   centered?: boolean;
 };
 const LoaderContainer = styled.div<{
-  size: keyof typeof SIZE;
-  centered?: boolean;
+  $size: keyof typeof SIZE;
+  $color?: string;
+  $centered?: boolean;
 }>`
   display: flex;
   ${(props) => {
     return css`
-      font-size: ${fontSize[props.size]};
+      font-size: ${fontSize[props.$size]};
       svg {
-        height: ${svgSize[props.size]};
-        width: ${svgSize[props.size]};
-        fill: ${props.color};
+        height: ${svgSize[props.$size]};
+        width: ${svgSize[props.$size]};
+        fill: ${props.$color};
       }
     `;
   }}
 
   ${(props) => {
-    if (props.centered)
+    if (props.$centered)
       return css`
         height: 100vh;
         justify-content: center;
@@ -54,9 +55,9 @@ function Loader({
 }: Props) {
   return (
     <LoaderContainer
-      size={size}
-      color={color}
-      centered={centered}
+      $size={size}
+      $color={color}
+      $centered={centered}
       className="sc-loader"
       {...rest}
     >

@@ -47,7 +47,15 @@ type IconOnlyButton = ButtonStyledProps & {
 );
 
 export type Props = ButtonWithLabel | IconOnlyButton;
-export const ButtonStyled = styled.button<ButtonStyledProps>`
+
+/** Transient (style-only) props consumed by ButtonStyled; not forwarded to the DOM in v6 */
+type ButtonStyledTransientProps = {
+  $variant?: ButtonStyledProps['variant'];
+  $size?: ButtonStyledProps['size'];
+  $icon?: React.ReactNode;
+  $label?: React.ReactNode;
+};
+export const ButtonStyled = styled.button<ButtonStyledTransientProps>`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -67,11 +75,11 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   font-size: ${fontSize.base};
   border-radius: ${spacing.r4};
   white-space: nowrap;
-  height: ${(props) => (props.size === 'inline' ? spacing.r24 : spacing.r32)};
+  height: ${(props) => (props.$size === 'inline' ? spacing.r24 : spacing.r32)};
   ${(props) => {
     const brand = props.theme;
 
-    switch (props.variant) {
+    switch (props.$variant) {
       case 'primary': {
         const primaryTextColor = getContrastText(brand.buttonPrimary, brand.textPrimary, brand.textReverse) ?? brand.textPrimary;
         return css`
@@ -197,7 +205,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   ${(props) => {
     const brand = props.theme;
     return css`
-      ${props.icon && !props.label && !props.variant
+      ${props.$icon && !props.$label && !props.$variant
         ? `
           background-color: transparent;
           border: none;
@@ -225,9 +233,9 @@ export const ButtonLabel = styled.span`
   justify-content: center;
   align-items: center;
 `;
-export const ButtonIcon = styled.span<{ label: React.ReactNode }>`
+export const ButtonIcon = styled.span<{ $label: React.ReactNode }>`
   ${(props) =>
-    props.label &&
+    props.$label &&
     css`
       padding-right: ${spacing.r8};
       display: inline-flex;
@@ -236,14 +244,17 @@ export const ButtonIcon = styled.span<{ label: React.ReactNode }>`
     `}
 `;
 
-export const ButtonLoader = styled(Loader)<{ label; variant }>`
+export const ButtonLoader = styled(Loader)<{
+  $label?: React.ReactNode;
+  $variant?: ButtonStyledProps['variant'];
+}>`
   ${(props) => {
     return css`
-      margin-right: ${props.label ? spacing.r8 : '0'};
+      margin-right: ${props.$label ? spacing.r8 : '0'};
       svg {
-        fill: ${props.variant === 'danger'
+        fill: ${props.$variant === 'danger'
           ? props.theme.statusCritical
-          : props.variant === 'outline'
+          : props.$variant === 'outline'
             ? props.theme.textPrimary
             : props.theme.textSecondary};
       }
@@ -282,23 +293,23 @@ function Button({
     >
       <ButtonStyled
         className="sc-button"
-        variant={variant}
+        $variant={variant}
         disabled={isLoading || disabled}
-        label={label}
-        icon={icon}
+        $label={label}
+        $icon={icon}
         onClick={onClick}
-        size={size}
+        $size={size}
         aria-label={buttonAriaLabel}
         {...rest}
       >
         {icon &&
           (isLoading ? (
-            <ButtonLoader size="small" variant={variant} label={label} />
+            <ButtonLoader size="small" $variant={variant} $label={label} />
           ) : (
-            <ButtonIcon label={label}>{icon}</ButtonIcon>
+            <ButtonIcon $label={label}>{icon}</ButtonIcon>
           ))}
         {!icon && isLoading && (
-          <ButtonLoader size="small" variant={variant} label={label} />
+          <ButtonLoader size="small" $variant={variant} $label={label} />
         )}
         <ButtonLabel>{label}</ButtonLabel>
       </ButtonStyled>

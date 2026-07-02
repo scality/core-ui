@@ -6,6 +6,7 @@ import {
   useRef,
   forwardRef,
   ForwardRefExoticComponent,
+  ComponentProps,
   RefAttributes,
   useImperativeHandle,
   ReactNode,
@@ -534,7 +535,14 @@ function SelectBox<
             itemsPerScrollWindow={itemsPerScrollWindow}
             onChange={handleChange}
             onInputChange={handleSearchInput}
-            ref={internalSelectRef}
+            // styled-components v6 types the wrapped react-select ref as its
+            // StateManager instance; internalSelectRef is typed against the inner
+            // Select. The runtime ref is unchanged from v5 — this is a type-only cast.
+            ref={
+              internalSelectRef as unknown as ComponentProps<
+                typeof SelectStyle
+              >['ref']
+            }
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
             onBlur={rest.onBlur}

@@ -126,31 +126,31 @@ const DelayedFallback = ({
   );
 };
 
-export const IconWrapper = styled.div<{ size: SizeProp }>`
+export const IconWrapper = styled.div<{ $size: SizeProp }>`
   ${(props) => {
     const brand = props.theme;
     return css`
       color: ${brand.infoPrimary};
       border: 1px solid ${brand.infoPrimary};
       background: ${brand.backgroundLevel1};
-      ${props.size === 'lg'
+      ${props.$size === 'lg'
         ? `
         width: 2.5rem;
         height: 2.5rem;
       `
-        : props.size === 'sm'
+        : props.$size === 'sm'
           ? `
         width: 1.75rem;
         height: 1.75rem;
       `
-          : props.size === 'xs'
+          : props.$size === 'xs'
             ? `
         width: 1.5rem;
         height: 1.5rem;
       `
             : `
-        width: ${parseInt(props.size.replace('x', ''), 10) * 2}rem;
-        height: ${parseInt(props.size.replace('x', ''), 10) * 2}rem;
+        width: ${parseInt(props.$size.replace('x', ''), 10) * 2}rem;
+        height: ${parseInt(props.$size.replace('x', ''), 10) * 2}rem;
       `}
     `;
   }}
@@ -244,7 +244,7 @@ function NonWrappedIcon({
 function Icon({ withWrapper, ...props }: Props) {
   if (withWrapper) {
     return (
-      <IconWrapper size={props.size || '1x'}>
+      <IconWrapper $size={props.size || '1x'}>
         <NonWrappedIcon {...props} />
       </IconWrapper>
     );
