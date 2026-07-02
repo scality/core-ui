@@ -51,7 +51,7 @@ export const ButtonStyled = styled.button`
   }
 
   ${(props) => {
-    switch (props.size) {
+    switch (props.$size) {
       case 'smaller':
         return css`
           padding: 7px 14px;
@@ -96,7 +96,7 @@ export const ButtonStyled = styled.button`
   }}
 
   ${(props) => {
-    if (props.isLoading) {
+    if (props.$isLoading) {
       return css`
         > span {
           display: flex;
@@ -110,7 +110,7 @@ export const ButtonStyled = styled.button`
       `;
     }
 
-    if (props.outlined) {
+    if (props.$outlined) {
       return css`
         border-width: 1px;
         border-style: solid;
@@ -124,7 +124,7 @@ export const ButtonStyled = styled.button`
           color: ${props.theme.textPrimary};
         }
       `;
-    } else if (props.variant === 'buttonPrimary') {
+    } else if (props.$variant === 'buttonPrimary') {
       return css`
         background-color: ${props.theme.buttonPrimary};
         border: 1px solid ${props.theme.buttonPrimary};
@@ -135,7 +135,7 @@ export const ButtonStyled = styled.button`
           border: 1px solid ${props.theme.infoPrimary};
         }
       `;
-    } else if (props.variant === 'buttonSecondary') {
+    } else if (props.$variant === 'buttonSecondary') {
       return css`
         background-color: ${props.theme.buttonSecondary};
         border: 1px solid ${props.theme.buttonSecondary};
@@ -145,7 +145,7 @@ export const ButtonStyled = styled.button`
           border: 1px solid ${props.theme.infoPrimary};
         }
       `;
-    } else if (props.variant === 'buttonDelete') {
+    } else if (props.$variant === 'buttonDelete') {
       return css`
         background-color: ${props.theme.buttonDelete};
         border: 1px solid ${props.theme.buttonDelete};
@@ -156,7 +156,7 @@ export const ButtonStyled = styled.button`
           color: ${props.theme.textPrimary};
         }
       `;
-    } else if (props.variant === 'backgroundLevel1') {
+    } else if (props.$variant === 'backgroundLevel1') {
       return css`
         background-color: ${props.theme.backgroundLevel1};
         color: ${props.theme.textPrimary};
@@ -179,7 +179,7 @@ export const ButtonStyled = styled.button`
   }}
 
 ${(props) => {
-    const brandLighter = lighten(0.2, props.theme[props.variant]).toString();
+    const brandLighter = lighten(0.2, props.theme[props.$variant]).toString();
     return css`
       ${props.disabled
         ? `
@@ -194,16 +194,16 @@ ${(props) => {
   }}
 
 ${(props) => {
-    const brandLighter = lighten(0.2, props.theme[props.variant]).toString();
-    const brandLight = lighten(0.1, props.theme[props.variant]).toString();
+    const brandLighter = lighten(0.2, props.theme[props.$variant]).toString();
+    const brandLight = lighten(0.1, props.theme[props.$variant]).toString();
     return css`
-      ${!props.text && props.icon && props.inverted
+      ${!props.$text && props.$icon && props.$inverted
         ? `
         padding: 0;
         height: auto;
         border: none;
         background-color: transparent;
-        color: ${props.disabled ? brandLight : props.theme[props.variant]};
+        color: ${props.disabled ? brandLight : props.theme[props.$variant]};
 
         &:hover{
           background-color: transparent;
@@ -222,7 +222,7 @@ ${(props) => {
 `;
 export const ButtonIcon = styled.span`
   ${(props) =>
-    props.text &&
+    props.$text &&
     css`
       padding-right: 8px;
       display: inline-flex;
@@ -265,15 +265,15 @@ function Button({
     <Anchor
       className="sc-button"
       href={href}
-      variant={variant}
-      outlined={outlined}
+      $variant={variant}
+      $outlined={outlined}
       disabled={disabled}
-      size={size}
+      $size={size}
       title={title}
       {...rest}
     >
       {icon && (
-        <ButtonIcon text={text} size={size}>
+        <ButtonIcon $text={text} $size={size}>
           {icon}
         </ButtonIcon>
       )}
@@ -282,24 +282,24 @@ function Button({
   ) : (
     <ButtonStyled
       className="sc-button"
-      variant={variant}
-      outlined={outlined}
+      $variant={variant}
+      $outlined={outlined}
       disabled={disabled || isLoading}
-      size={size}
+      $size={size}
       onClick={onClick}
       title={title}
-      isLoading={isLoading}
+      $isLoading={isLoading}
       type={type}
-      inverted={inverted}
-      icon={icon}
-      text={text}
+      $inverted={inverted}
+      $icon={icon}
+      $text={text}
       {...rest}
     >
       <ButtonContent>
         {isLoading && <Loader size={size} />}
         <span className="sc-button-text">
           {icon && (
-            <ButtonIcon text={text} size={size}>
+            <ButtonIcon $text={text} $size={size}>
               {icon}
             </ButtonIcon>
           )}

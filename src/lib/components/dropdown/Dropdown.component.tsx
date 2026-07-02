@@ -52,7 +52,7 @@ const DropdownMenuStyled = styled.ul`
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-  display: ${(props) => (props.isOpen ? 'auto' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'auto' : 'none')};
 `;
 
 const DropdownMenuItemStyled = styled.li`
@@ -63,7 +63,7 @@ const DropdownMenuItemStyled = styled.li`
   cursor: pointer;
   font-size: ${fontSize.base};
   ${(props) => {
-    return props.isSelected
+    return props.$isSelected
       ? `background-color: ${props.theme.highlight};`
       : `background-color: ${props.theme.backgroundLevel1};`;
   }}
@@ -127,21 +127,20 @@ function Dropdown({
 
   return (
     <DropdownStyled
-      variant={variant}
       className="sc-dropdown"
       {...rest}
       ref={refs.setReference}
     >
       <TriggerStyled
-        variant={variant}
-        size={size}
+        $variant={variant}
+        $size={size}
         className="trigger"
         title={title}
         {...getToggleButtonProps()}
         {...getReferenceProps()}
       >
         {icon && (
-          <ButtonIcon text={text} size={size}>
+          <ButtonIcon $text={text} $size={size}>
             {icon}
           </ButtonIcon>
         )}
@@ -154,7 +153,7 @@ function Dropdown({
       </TriggerStyled>
       <DropdownMenuStyled
         className="menu-item"
-        isOpen={isOpen}
+        $isOpen={isOpen}
         style={floatingStyles}
         {...getFloatingProps()}
         {...getMenuProps({ ref: refs.setFloating })}
@@ -164,14 +163,13 @@ function Dropdown({
             <DropdownMenuItemStyled
               className="menu-item-label"
               key={item.label}
-              variant={item.variant}
               {...item}
               {...getItemProps({
                 item,
                 index,
                 onClick: item.onClick,
               })}
-              isSelected={index === highlightedIndex}
+              $isSelected={index === highlightedIndex}
             >
               {item.label}
             </DropdownMenuItemStyled>
