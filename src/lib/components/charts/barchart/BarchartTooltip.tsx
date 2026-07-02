@@ -61,9 +61,9 @@ export const BarchartTooltip = <T extends BarchartBars>({
         {currentPoint.values.map((value) => {
           const legendIcon = colorSet && (
             <LegendShape
-              color={colorSet[value.label as keyof typeof colorSet]}
-              shape="rectangle"
-              chartColors={colorSet}
+              $color={colorSet[value.label as keyof typeof colorSet]}
+              $shape="rectangle"
+              $chartColors={colorSet}
             />
           );
 
