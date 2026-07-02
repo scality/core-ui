@@ -294,7 +294,9 @@ function Table<
             ]
           : [],
         selectedRowIds: formattedInitiallySelectedRows,
-        hiddenColumns: ['selection', DROPPED_COLUMNS_COLUMN_ID],
+        hiddenColumns: revealDroppedColumns
+          ? ['selection', DROPPED_COLUMNS_COLUMN_ID]
+          : ['selection'],
       },
       disableMultiSort: true,
       autoResetSortBy: false,
@@ -302,6 +304,9 @@ function Table<
       //@ts-ignore TODO investigate why this type is not matching
       globalFilter: stringifyFilter,
       autoResetHiddenColumns: false,
+      // Threaded onto the react-table instance so `useDroppedColumns` only
+      // injects its synthetic column when the feature is opted into.
+      revealDroppedColumns,
       updateTableData,
     },
     useBlockLayout,
@@ -332,6 +337,11 @@ function Table<
     new Set(),
   );
 
+  // Last `revealDroppedColumns` value the effect reconciled against, so a
+  // runtime toggle re-runs the reveal-column logic even when the dropped set is
+  // unchanged.
+  const previousRevealRef = useRef(revealDroppedColumns);
+
   useEffect(() => {
     if (!hasResponsiveColumns) {
       return;
@@ -350,10 +360,14 @@ function Table<
         .map((column) => column.id),
     );
     const previouslyDropped = responsivelyDroppedRef.current;
-    const unchanged =
-      shouldDrop.size === previouslyDropped.size &&
-      [...shouldDrop].every((id) => previouslyDropped.has(id));
-    if (unchanged) {
+    const dropSetChanged =
+      shouldDrop.size !== previouslyDropped.size ||
+      [...shouldDrop].some((id) => !previouslyDropped.has(id));
+    // Reconcile when the dropped set changed OR the reveal feature was toggled;
+    // the latter must still update the reveal column's visibility even though
+    // the same columns stay dropped.
+    const revealChanged = previousRevealRef.current !== revealDroppedColumns;
+    if (!dropSetChanged && !revealChanged) {
       return;
     }
     setHiddenColumns((previousHidden) => {
@@ -363,20 +377,21 @@ function Table<
       shouldDrop.forEach((id) => {
         if (!next.includes(id)) next.push(id);
       });
-      // Reveal the trailing "show dropped columns" column only while at least
-      // one responsive column is hidden and the feature is opted into.
+      // Show the trailing "reveal" column only while at least one responsive
+      // column is hidden and the feature is opted into; otherwise hide it.
       const shouldReveal = revealDroppedColumns && shouldDrop.size > 0;
-      const isRevealHidden = next.includes(DROPPED_COLUMNS_COLUMN_ID);
-      if (shouldReveal && isRevealHidden) {
-        return next.filter((id) => id !== DROPPED_COLUMNS_COLUMN_ID);
-      }
-      if (!shouldReveal && !isRevealHidden) {
-        return [...next, DROPPED_COLUMNS_COLUMN_ID];
-      }
-      return next;
+      const withoutReveal = next.filter(
+        (id) => id !== DROPPED_COLUMNS_COLUMN_ID,
+      );
+      return shouldReveal
+        ? withoutReveal
+        : [...withoutReveal, DROPPED_COLUMNS_COLUMN_ID];
     });
-    setDroppedColumnIds(shouldDrop);
-    responsivelyDroppedRef.current = shouldDrop;
+    previousRevealRef.current = revealDroppedColumns;
+    if (dropSetChanged) {
+      setDroppedColumnIds(shouldDrop);
+      responsivelyDroppedRef.current = shouldDrop;
+    }
   }, [
     hasResponsiveColumns,
     allColumns,

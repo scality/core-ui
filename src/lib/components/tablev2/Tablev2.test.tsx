@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Table, TableProps } from './Tablev2.component';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -381,5 +382,46 @@ describe('TableV2 responsive columns', () => {
     expect(
       screen.queryByRole('button', { name: /hidden column/i }),
     ).not.toBeInTheDocument();
+  });
+
+  test('starts offering the reveal trigger when the feature is enabled while a column is already dropped', async () => {
+    mockWidth = 400;
+    const TogglingTable = () => {
+      const [reveal, setReveal] = useState(false);
+      return (
+        <div>
+          <button type="button" onClick={() => setReveal(true)}>
+            enable reveal
+          </button>
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            revealDroppedColumns={reveal}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>
+        </div>
+      );
+    };
+    render(<TogglingTable />);
+
+    // Age is dropped, but with the feature still off there is no reveal trigger.
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
+
+    // Turning the feature on — while the same column stays dropped — reveals it.
+    await userEvent.click(
+      screen.getByRole('button', { name: /enable reveal/i }),
+    );
+    expect(
+      await screen.findAllByRole('button', { name: /show 1 hidden column/i }),
+    ).not.toHaveLength(0);
   });
 });

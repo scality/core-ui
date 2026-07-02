@@ -15,9 +15,10 @@ import {
   useRole,
 } from '@floating-ui/react';
 import { spacing } from '../../spacing';
-import { fontSize, fontWeight, zIndex } from '../../style/theme';
+import { zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
+import { Text } from '../text/Text.component';
 import { useTableContext } from './Tablev2.component';
 
 /**
@@ -66,15 +67,6 @@ const Field = styled.div`
   gap: ${spacing.r2};
   padding: ${spacing.r8} ${spacing.r16};
   color: ${getThemePropSelector('textPrimary')};
-`;
-
-const FieldLabel = styled.span`
-  font-size: ${fontSize.small};
-  color: ${getThemePropSelector('textSecondary')};
-`;
-
-const FieldValue = styled.div`
-  font-weight: ${fontWeight.base};
 `;
 
 const DroppedColumnsCell = ({ row }: { row: Row<object> }) => {
@@ -126,8 +118,10 @@ const DroppedColumnsCell = ({ row }: { row: Row<object> }) => {
             >
               {dropped.map((cell) => (
                 <Field key={cell.column.id}>
-                  <FieldLabel>{cell.column.render('Header')}</FieldLabel>
-                  <FieldValue>{cell.render('Cell')}</FieldValue>
+                  <Text variant="Small" color="textSecondary">
+                    {cell.column.render('Header')}
+                  </Text>
+                  <Text>{cell.render('Cell')}</Text>
                 </Field>
               ))}
             </Panel>
@@ -146,15 +140,25 @@ const DroppedColumnsCell = ({ row }: { row: Row<object> }) => {
  * driven by the table's existing responsive effect via `setHiddenColumns`.
  */
 export const useDroppedColumns = (hooks: Hooks<object>) => {
-  hooks.visibleColumns.push((columns) => [
-    ...columns,
-    {
-      id: DROPPED_COLUMNS_COLUMN_ID,
-      Header: () => null,
-      Cell: DroppedColumnsCell,
-      disableSortBy: true,
-      cellStyle: { width: '60px', justifyContent: 'center' },
-    },
+  hooks.visibleColumns.push((columns, { instance }) =>
+    instance.revealDroppedColumns
+      ? [
+          ...columns,
+          {
+            id: DROPPED_COLUMNS_COLUMN_ID,
+            Header: () => null,
+            Cell: DroppedColumnsCell,
+            disableSortBy: true,
+            cellStyle: { width: '60px', justifyContent: 'center' },
+          },
+        ]
+      : columns,
+  );
+  // Re-run the visibleColumns memo when the feature is toggled at runtime, so
+  // the synthetic column is added or removed accordingly.
+  hooks.visibleColumnsDeps.push((deps, { instance }) => [
+    ...deps,
+    instance.revealDroppedColumns,
   ]);
 };
 

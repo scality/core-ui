@@ -18,7 +18,14 @@ declare module 'react-table' {
       UsePaginationInstanceProps<D>,
       UseRowSelectInstanceProps<D>,
       UseRowStateInstanceProps<D>,
-      UseSortByInstanceProps<D> {}
+      UseSortByInstanceProps<D> {
+    /**
+     * Mirrors the `revealDroppedColumns` Table prop, threaded as a `useTable`
+     * option so the `useDroppedColumns` plugin can gate its synthetic column on
+     * the feature being opted into.
+     */
+    revealDroppedColumns?: boolean;
+  }
 
   export function useTable<D extends object = {}>(
     options: TableOptions<D>,
