@@ -104,6 +104,7 @@
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@js-temporal/polyfill": "^0.4.4",
     "@lezer/highlight": "^1.2.3",
+    "@styled-system/should-forward-prop": "^5.1.5",
     "@typescript-eslint/parser": "^8.56.1",
     "@uiw/react-codemirror": "^4.25.5",
     "codemirror-json-schema": "^0.8.1",

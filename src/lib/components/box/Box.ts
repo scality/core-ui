@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import shouldForwardProp from '@styled-system/should-forward-prop';
 import {
   layout,
   flexbox,
@@ -36,7 +37,9 @@ export type BoxComponentProps = LayoutProps &
   TypographyProps &
   ShadowProps & { gap?: string | number };
 
-const Box = styled.div<BoxComponentProps>`
+const Box = styled.div.withConfig({
+  shouldForwardProp: (prop) => shouldForwardProp(prop),
+})<BoxComponentProps>`
   ${layout}
   ${flexbox}
   ${grid}
