@@ -411,6 +411,13 @@ const TabsMenuPanel = styled.nav`
       text-decoration: none;
       border: none;
     }
+    // Match the inline tabs' keyboard focus ring so a tab looks the same
+    // whether it sits in the row or in the overflow panel.
+    a:focus-visible,
+    & > div:focus-visible {
+      ${FocusVisibleStyle}
+      color: inherit;
+    }
     a.selected,
     & > .selected {
       font-weight: ${fontWeight.bold};
