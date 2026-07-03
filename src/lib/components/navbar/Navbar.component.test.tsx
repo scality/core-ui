@@ -130,12 +130,14 @@ describe('Navbar responsiveness', () => {
     expect(screen.queryByRole('tab', { name: 'Users' })).not.toBeInTheDocument();
 
     const menuTrigger = screen.getByRole('button', { name: /more/i });
+    expect(menuTrigger).toHaveAttribute('aria-expanded', 'false');
     await userEvent.click(menuTrigger);
+    expect(menuTrigger).toHaveAttribute('aria-expanded', 'true');
 
-    const menu = screen.getByRole('menu');
-    expect(within(menu).getByText('Users')).toBeInTheDocument();
-    expect(within(menu).getByText('Policies')).toBeInTheDocument();
-    expect(within(menu).queryByText('Groups')).not.toBeInTheDocument();
+    const menu = screen.getByRole('navigation', { name: /more/i });
+    expect(within(menu).getByRole('link', { name: 'Users' })).toBeInTheDocument();
+    expect(within(menu).getByRole('link', { name: 'Policies' })).toBeInTheDocument();
+    expect(within(menu).queryByRole('link', { name: 'Groups' })).not.toBeInTheDocument();
   });
 
   it('keeps the username label visible when the navbar is wide', () => {
@@ -157,7 +159,21 @@ describe('Navbar responsiveness', () => {
     renderNavbar({ tabs, rightActions: [userAction] });
 
     expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
-    expect(screen.getByTitle('Carlito')).toBeInTheDocument();
+    expect(screen.getByLabelText('Carlito')).toBeInTheDocument();
+  });
+
+  it('gives the condensed name precedence over an aria-label on the action', () => {
+    // The action type is porous — a consumer can pass extra props. A stray
+    // aria-label must not clobber the condensed accessible name.
+    stubNavbarWidth(360);
+    renderNavbar({
+      tabs,
+      // @ts-ignore - exercising the porous action-prop boundary on purpose
+      rightActions: [{ ...userAction, 'aria-label': 'wrong name' }],
+    });
+
+    expect(screen.getByLabelText('Carlito')).toBeInTheDocument();
+    expect(screen.queryByLabelText('wrong name')).not.toBeInTheDocument();
   });
 
   it('can condense the actions to icons while tabs are still shown inline', () => {
@@ -192,9 +208,9 @@ describe('Navbar responsiveness', () => {
     expect(screen.queryByRole('tab', { name: 'Groups' })).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: /more/i }));
-    const menu = screen.getByRole('menu');
-    expect(within(menu).getByText('Groups')).toBeInTheDocument();
-    expect(within(menu).queryByText('Policies')).not.toBeInTheDocument();
+    const menu = screen.getByRole('navigation', { name: /more/i });
+    expect(within(menu).getByRole('link', { name: 'Groups' })).toBeInTheDocument();
+    expect(within(menu).queryByRole('link', { name: 'Policies' })).not.toBeInTheDocument();
   });
 
   it('keeps a custom render tab inline at every width instead of hiding it', async () => {
@@ -215,8 +231,8 @@ describe('Navbar responsiveness', () => {
     expect(screen.getByRole('tab', { name: 'Groups' })).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: /more/i }));
-    const menu = screen.getByRole('menu');
-    expect(within(menu).getByText('Users')).toBeInTheDocument();
+    const menu = screen.getByRole('navigation', { name: /more/i });
+    expect(within(menu).getByRole('link', { name: 'Users' })).toBeInTheDocument();
     expect(within(menu).queryByText('My instance')).not.toBeInTheDocument();
   });
 

@@ -2,6 +2,7 @@ import {
   cloneElement,
   useCallback,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -15,7 +16,6 @@ import {
   useDismiss,
   useFloating,
   useInteractions,
-  useRole,
 } from '@floating-ui/react';
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
@@ -48,29 +48,43 @@ export const NAVBAR_COLLAPSE_BREAKPOINT_PX = 768;
 const CONDENSE_HYSTERESIS_PX = 24;
 
 /**
+ * Width (px) reserved for the "More" trigger before it has measured itself, so
+ * the first overflow pass doesn't keep one tab too many. Corrected to the real
+ * width as soon as the trigger mounts.
+ */
+const ESTIMATED_MENU_TRIGGER_WIDTH_PX = 96;
+
+/**
  * Wraps the measure-only width primitive with a hysteresis band and reports a
  * single condense flag. Wide-first until the first measurement lands
- * (`undefined < n` is `false`), then condensed once the container drops below
+ * (`condensed` starts false), then condensed once the container drops below
  * `breakpoint`, staying condensed until it grows back past
  * `breakpoint + CONDENSE_HYSTERESIS_PX`. This is the one place the navbar needs
  * a threshold, so the hysteresis lives here rather than in the shared hook.
+ *
+ * The latch is applied in a layout effect (not during render) so it never
+ * mutates state as a render side effect — safe under StrictMode / concurrent
+ * rendering — and runs before paint so the condensed layout doesn't flash.
  */
 function useCondensedActions(breakpoint: number): {
   ref: (node: HTMLDivElement | null) => void;
   condensed: boolean;
 } {
   const { ref, width } = useContainerWidth<HTMLDivElement>();
-  const condensedRef = useRef(false);
+  const [condensed, setCondensed] = useState(false);
 
-  let condensed = condensedRef.current;
-  if (width !== undefined) {
-    if (condensed) {
-      if (width >= breakpoint + CONDENSE_HYSTERESIS_PX) condensed = false;
-    } else if (width < breakpoint) {
-      condensed = true;
-    }
-    condensedRef.current = condensed;
-  }
+  useLayoutEffect(() => {
+    if (width === undefined) return;
+    setCondensed((wasCondensed) =>
+      wasCondensed
+        ? width >= breakpoint + CONDENSE_HYSTERESIS_PX
+          ? false
+          : wasCondensed
+        : width < breakpoint
+          ? true
+          : wasCondensed,
+    );
+  }, [width, breakpoint]);
 
   return { ref, condensed };
 }
@@ -345,14 +359,17 @@ const MenuTriggerContent = () => (
   </>
 );
 
-const TabsMenuList = styled.ul`
-  margin: 0;
-  padding: ${spacing.r4} 0;
-  list-style: none;
+const TabsMenuPanel = styled.nav`
   min-width: 14rem;
   background-color: ${getThemePropSelector('backgroundLevel1')};
   border: 1px solid ${getThemePropSelector('border')};
   z-index: ${zIndex.dropdown};
+
+  ul {
+    margin: 0;
+    padding: ${spacing.r4} 0;
+    list-style: none;
+  }
 
   li {
     display: flex;
@@ -388,8 +405,8 @@ const renderTab = (
   if (render) {
     return render;
   }
-  // Inside the "More" menu each tab sits in a role="menuitem" <li>, so the tab
-  // role/aria-selected would be invalid nesting — mark the current page with
+  // In the overflow list a tab is a plain link inside a <li>, so the row's tab
+  // role/aria-selected would be out of place — mark the current page with
   // aria-current instead.
   const selectionProps = inMenu
     ? { 'aria-current': selected ? ('page' as const) : undefined }
@@ -430,7 +447,6 @@ function NavbarTabsMenu({
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useClick(context),
     useDismiss(context),
-    useRole(context, { role: 'menu' }),
   ]);
 
   const setTriggerRef = useCallback(
@@ -441,11 +457,16 @@ function NavbarTabsMenu({
     [refs, triggerRef],
   );
 
+  // The overflowed tabs are navigation links, so the panel is a disclosure
+  // revealing a <nav> list — not an ARIA `menu` (which would promise arrow-key
+  // navigation these links don't need). The links are reachable with Tab.
   return (
     <>
       <TabsMenuTrigger
         type="button"
         ref={setTriggerRef}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
         {...getReferenceProps()}
       >
         <MenuTriggerContent />
@@ -453,18 +474,21 @@ function NavbarTabsMenu({
       {isOpen && (
         <FloatingPortal>
           <FloatingFocusManager context={context} modal={false} initialFocus={-1}>
-            <TabsMenuList
+            <TabsMenuPanel
               ref={refs.setFloating}
               style={floatingStyles}
+              aria-label="More navigation"
               {...getFloatingProps()}
               onClick={() => setIsOpen(false)}
             >
-              {tabs.map((tab, index) => (
-                <li role="menuitem" key={`navbar_tab_menu_item_${index}`}>
-                  {renderTab(tab, index, { inMenu: true })}
-                </li>
-              ))}
-            </TabsMenuList>
+              <ul>
+                {tabs.map((tab, index) => (
+                  <li key={`navbar_tab_menu_item_${index}`}>
+                    {renderTab(tab, index, { inMenu: true })}
+                  </li>
+                ))}
+              </ul>
+            </TabsMenuPanel>
           </FloatingFocusManager>
         </FloatingPortal>
       )}
@@ -487,12 +511,12 @@ const TabSlot = styled.span`
  * (before anything overflows), and each tab's measured width is cached per
  * index. Collapsing a tab into the menu drops it from the row but keeps its
  * cached width, so the fit math stays accurate without a hidden mirror. The
- * menu trigger measures itself through a ref the first time it appears; the
- * fit then settles within the same commit, before paint.
+ * menu trigger measures itself through a ref the first time it appears (an
+ * estimate is reserved until then); the fit re-settles before paint.
  *
- * Tabs are assumed stable. If their labels ever become dynamic (e.g. i18n),
- * force a fresh measure by giving this component a `key` that changes with the
- * locale.
+ * Tabs are assumed stable — widths are cached by index. If their labels ever
+ * become dynamic (e.g. i18n) or tabs are reordered, force a fresh measure by
+ * giving this component a `key` that changes with them.
  *
  * The selected tab, custom `render` tabs, and any `alwaysVisible` tab are
  * pinned: they always stay inline so the current location and instance-level
@@ -505,14 +529,25 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
   const [menuTriggerWidth, setMenuTriggerWidth] = useState(0);
 
   useLayoutEffect(() => {
-    setTabWidths((previousWidths) =>
-      tabs.map((_, index) => {
+    // Drop cached widths for tabs that no longer exist so a shrunk `tabs` array
+    // can't be measured against a stale entry.
+    if (tabRefs.current.length > tabs.length) {
+      tabRefs.current.length = tabs.length;
+    }
+    setTabWidths((previousWidths) => {
+      const nextWidths = tabs.map((_, index) => {
         const measured = tabRefs.current[index]?.offsetWidth;
         // Keep the cached width for any tab not currently in the row (it sits
         // in the "More" menu and is no longer rendered full-size here).
         return measured && measured > 0 ? measured : previousWidths[index] ?? 0;
-      }),
-    );
+      });
+      // Return the previous array unchanged when nothing moved so React can bail
+      // out of the extra render (the mapped array is always a fresh reference).
+      const unchanged =
+        nextWidths.length === previousWidths.length &&
+        nextWidths.every((width, index) => width === previousWidths[index]);
+      return unchanged ? previousWidths : nextWidths;
+    });
   }, [tabs]);
 
   const measureMenuTrigger = useCallback((node: HTMLElement | null) => {
@@ -524,13 +559,25 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
     }
   }, []);
 
-  const pinned = tabs.map(
-    (tab) => Boolean(tab.alwaysVisible) || Boolean(tab.selected) || Boolean(tab.render),
+  const pinned = useMemo(
+    () =>
+      tabs.map(
+        (tab) =>
+          Boolean(tab.alwaysVisible) || Boolean(tab.selected) || Boolean(tab.render),
+      ),
+    [tabs],
   );
   const allTabsMeasured = tabWidths.length === tabs.length;
-  const { visibleTabIndices, overflowTabIndices } = allTabsMeasured
-    ? selectVisibleTabs(tabWidths, pinned, menuTriggerWidth, availableWidth ?? Infinity)
-    : { visibleTabIndices: tabs.map((_, index) => index), overflowTabIndices: [] };
+  // Until the trigger has measured itself, reserve an estimate so the first
+  // overflow pass doesn't keep one tab too many for a frame.
+  const reservedTriggerWidth = menuTriggerWidth || ESTIMATED_MENU_TRIGGER_WIDTH_PX;
+  const { visibleTabIndices, overflowTabIndices } = useMemo(
+    () =>
+      allTabsMeasured
+        ? selectVisibleTabs(tabWidths, pinned, reservedTriggerWidth, availableWidth ?? Infinity)
+        : { visibleTabIndices: tabs.map((_, index) => index), overflowTabIndices: [] },
+    [allTabsMeasured, tabWidths, pinned, reservedTriggerWidth, availableWidth, tabs],
+  );
 
   return (
     <NavbarTabs ref={containerRef}>
@@ -571,8 +618,11 @@ const getActionRenderer = (
           items={items}
           caret={false}
           text={condenseToIcon ? undefined : text}
-          title={condenseToIcon ? text : undefined}
           {...rest}
+          // Applied after `...rest` so the condense-mode name always wins over a
+          // stray title/aria-label on the action; omitted entirely otherwise so
+          // a consumer's own title/aria-label still passes through.
+          {...(condenseToIcon ? { title: text, 'aria-label': text } : {})}
         />
       );
     }
