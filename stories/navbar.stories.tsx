@@ -128,8 +128,9 @@ const rightActions = [
   },
   {
     type: 'dropdown',
-    text: 'Carlito',
+    text: 'Carlito Gonzalez',
     icon: <i className="fas fa-user" />,
+    abbreviateWhenCondensed: true,
     items: [
       {
         label: 'Log out',
@@ -217,7 +218,7 @@ export const ResponsiveTabOverflow = {
     docs: {
       description: {
         story:
-          'Drag the right edge to resize the container. As it narrows, tabs that no longer fit collapse from the right into a "More" menu (the selected tab and the custom instance-name field stay pinned inline), and below the condense breakpoint the right-action labels drop to icon-only. The navbar measures its own width, so this responds to the container, not the viewport.',
+          'Drag the right edge to resize the container. As it narrows, tabs that no longer fit collapse from the right into a "More" menu (the selected tab and the custom instance-name field stay pinned inline), and below the condense breakpoint the right-action labels drop to icon-only — except the account dropdown, which opts into `abbreviateWhenCondensed` and shows its initials ("CG") next to the icon while keeping the full name as its accessible name. The navbar measures its own width, so this responds to the container, not the viewport.',
       },
     },
   },

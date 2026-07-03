@@ -55,6 +55,22 @@ const CONDENSE_HYSTERESIS_PX = 24;
 const ESTIMATED_MENU_TRIGGER_WIDTH_PX = 96;
 
 /**
+ * Abbreviate a label to the uppercased first letters of its first `maxLetters`
+ * whitespace-separated words (e.g. "Carlito Gonzalez" → "CG", "Carlito" → "C").
+ * Used to condense an opted-in action to a compact chip instead of hiding its
+ * label entirely; the full label stays the accessible name.
+ */
+export function getInitials(text: string, maxLetters = 2): string {
+  return text
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, maxLetters)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('');
+}
+
+/**
  * Wraps the measure-only width primitive with a hysteresis band and reports a
  * single condense flag. Wide-first until the first measurement lands
  * (`condensed` starts false), then condensed once the container drops below
@@ -141,6 +157,12 @@ type DropdownAction = {
   items: Array<Item>;
   text?: string;
   icon?: JSX.Element;
+  /**
+   * When the navbar condenses, show the label's initials next to the icon
+   * (e.g. "Carlito Gonzalez" → "CG") instead of hiding it. The full label
+   * stays the accessible name. Requires an `icon`. Defaults to false.
+   */
+  abbreviateWhenCondensed?: boolean;
 };
 
 type CustomAction = {
@@ -608,8 +630,14 @@ const getActionRenderer = (
 ) => {
   switch (action.type) {
     case 'dropdown': {
-      const { type, items, text, ...rest } = action;
+      const { type, items, text, abbreviateWhenCondensed, ...rest } = action;
       const condenseToIcon = condensed && Boolean(action.icon);
+      // When condensed, either abbreviate the label to its initials (opt-in) or
+      // hide it (icon-only); the full text stays the accessible name below.
+      const condensedText =
+        condenseToIcon && abbreviateWhenCondensed && text
+          ? getInitials(text)
+          : undefined;
       return (
         <Dropdown
           key={`navbar_right_action_${index}`}
@@ -617,7 +645,7 @@ const getActionRenderer = (
           variant="backgroundLevel1"
           items={items}
           caret={false}
-          text={condenseToIcon ? undefined : text}
+          text={condenseToIcon ? condensedText : text}
           {...rest}
           // Applied after `...rest` so the condense-mode name always wins over a
           // stray title/aria-label on the action; omitted entirely otherwise so

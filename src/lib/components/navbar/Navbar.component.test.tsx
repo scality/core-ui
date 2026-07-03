@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
-import { Navbar, selectVisibleTabs } from './Navbar.component';
+import { Navbar, selectVisibleTabs, getInitials } from './Navbar.component';
 import { coreUIAvailableThemes } from '../../style/theme';
 
 const theme = coreUIAvailableThemes.darkRebrand;
@@ -55,6 +55,28 @@ afterAll(() => {
 
 afterEach(() => {
   jest.restoreAllMocks();
+});
+
+describe('getInitials', () => {
+  it('takes the first letter of a single-word name', () => {
+    expect(getInitials('Carlito')).toBe('C');
+  });
+
+  it('takes the first letters of the first two words', () => {
+    expect(getInitials('Carlito Gonzalez')).toBe('CG');
+  });
+
+  it('uses only the first letter for an unspaced token', () => {
+    expect(getInitials('jean-marc.millet')).toBe('J');
+  });
+
+  it('ignores surrounding and repeated whitespace', () => {
+    expect(getInitials('  Carlito   Gonzalez  ')).toBe('CG');
+  });
+
+  it('returns an empty string for empty input', () => {
+    expect(getInitials('')).toBe('');
+  });
 });
 
 describe('selectVisibleTabs (priority+ fit)', () => {
@@ -160,6 +182,26 @@ describe('Navbar responsiveness', () => {
 
     expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
     expect(screen.getByLabelText('Carlito')).toBeInTheDocument();
+  });
+
+  it('condenses an opted-in dropdown to its initials, keeping the full name accessible', () => {
+    stubNavbarWidth(360);
+    renderNavbar({
+      tabs,
+      rightActions: [
+        {
+          type: 'dropdown' as const,
+          text: 'Carlito Gonzalez',
+          icon: <i className="fas fa-user" />,
+          abbreviateWhenCondensed: true,
+          items: [{ label: 'Log out', onClick: () => {} }],
+        },
+      ],
+    });
+
+    expect(screen.getByText('CG')).toBeInTheDocument();
+    expect(screen.queryByText('Carlito Gonzalez')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Carlito Gonzalez')).toBeInTheDocument();
   });
 
   it('gives the condensed name precedence over an aria-label on the action', () => {
