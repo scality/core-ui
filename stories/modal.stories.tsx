@@ -20,6 +20,11 @@ export default {
   argTypes: {
     wide: { control: 'boolean', description: 'Allow modal to grow past 480px to fit content' },
   },
+  // The `actions` prop nests rendered React elements inside a plain object.
+  // Autodocs' dynamic "Show code" generator deep-walks that object into the
+  // element fiber tree and overflows the stack, so serve the static story
+  // source instead of re-serializing the rendered tree.
+  parameters: { docs: { source: { type: 'code' } } },
 };
 
 export const SimpleModal = {
