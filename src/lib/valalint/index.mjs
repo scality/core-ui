@@ -1,6 +1,5 @@
 import tsParser from "@typescript-eslint/parser";
 import modalButtonForbiddenLabel from "./rules/modal-button-forbidden-label.mjs";
-import noNonTransientStyleProp from "./rules/no-non-transient-style-prop.mjs";
 import noRawNumberInJsx from "./rules/no-raw-number-in-jsx.mjs";
 import technicalSentenceCase from "./rules/technical-sentence-case.mjs";
 
@@ -8,7 +7,6 @@ const rules = {
 	"technical-sentence-case": technicalSentenceCase,
 	"modal-button-forbidden-label": modalButtonForbiddenLabel,
 	"no-raw-number-in-jsx": noRawNumberInJsx,
-	"no-non-transient-style-prop": noNonTransientStyleProp,
 };
 
 /** Default rule severity for the recommended config. */
@@ -16,7 +14,6 @@ const recommendedRules = {
 	"valalint/technical-sentence-case": "warn",
 	"valalint/modal-button-forbidden-label": "warn",
 	"valalint/no-raw-number-in-jsx": "warn",
-	"valalint/no-non-transient-style-prop": "warn",
 };
 
 const plugin = {

@@ -127,7 +127,6 @@
     "react-window": "^1.8.6",
     "recharts": "^3.0.2",
     "remark-gfm": "^4.0.1",
-    "stylis": "^4.4.0",
     "uuid": "^14.0.0"
   },
   "homepage": "https://scality.github.io/core-ui/",
