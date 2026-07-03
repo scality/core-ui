@@ -5,18 +5,35 @@ import { Wrap, spacing } from '../../spacing';
 import { zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Button } from '../buttonv2/Buttonv2.component';
-import { Icon } from '../icon/Icon.component';
+import { Icon, IconName } from '../icon/Icon.component';
+import { Props as TooltipProps } from '../tooltip/Tooltip.component';
 import { Text } from '../text/Text.component';
 
+/** A single footer action. The Modal renders the button and owns its variant. */
+export type ModalAction = {
+  label: string;
+  onClick: () => void;
+  /** Icon name (the Modal renders the `<Icon />`), shown before the label. */
+  icon?: IconName;
+  disabled?: boolean;
+  /** Tooltip, e.g. to explain why a disabled `confirm` can't be used yet. */
+  tooltip?: Omit<TooltipProps, 'children'>;
+};
+
 /**
- * Structured footer actions, rendered with the canonical stack and
- * alignment (extra left-aligned, secondary + primary right-aligned with
- * primary as the rightmost action).
+ * Structured footer actions. All actions are right-aligned: `confirm` is the
+ * rightmost, `cancel` sits immediately to its left, and the optional neutral
+ * `extra` sits left of `cancel`. Two actions is the norm; three is acceptable;
+ * avoid four. The Modal fixes each button's variant so callers can't diverge
+ * from the guideline.
  */
 export type ModalActions = {
-  primary: ReactNode;
-  secondary?: ReactNode;
-  extra?: ReactNode;
+  /** Affirmative action, rendered rightmost. Defaults to the `primary` variant. */
+  confirm: ModalAction & { variant?: 'primary' | 'danger' };
+  /** Dismiss action, rendered with the `outline` variant. Label defaults to "Cancel". */
+  cancel?: Omit<ModalAction, 'label'> & { label?: string };
+  /** Optional neutral tertiary action, rendered with the `secondary` variant. */
+  extra?: ModalAction;
 };
 
 type CommonProps = {
@@ -133,12 +150,26 @@ const ModalFooter = styled.div`
 const ActionsLayout = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: ${spacing.r8};
 `;
 
-const ActionsExtra = styled.div`
-  margin-right: auto;
-`;
+const ActionButton = ({
+  action,
+  variant,
+}: {
+  action: ModalAction;
+  variant: 'primary' | 'danger' | 'outline' | 'secondary';
+}) => (
+  <Button
+    label={action.label}
+    variant={variant}
+    icon={action.icon ? <Icon name={action.icon} /> : undefined}
+    disabled={action.disabled}
+    tooltip={action.tooltip}
+    onClick={action.onClick}
+  />
+);
 
 const Modal = ({
   isOpen,
@@ -215,9 +246,22 @@ const Modal = ({
             <ModalFooter className="sc-modal-footer">
               {actions ? (
                 <ActionsLayout>
-                  {actions.extra && <ActionsExtra>{actions.extra}</ActionsExtra>}
-                  {actions.secondary}
-                  {actions.primary}
+                  {actions.extra && (
+                    <ActionButton action={actions.extra} variant="secondary" />
+                  )}
+                  {actions.cancel && (
+                    <ActionButton
+                      action={{
+                        ...actions.cancel,
+                        label: actions.cancel.label ?? 'Cancel',
+                      }}
+                      variant="outline"
+                    />
+                  )}
+                  <ActionButton
+                    action={actions.confirm}
+                    variant={actions.confirm.variant ?? 'primary'}
+                  />
                 </ActionsLayout>
               ) : (
                 footer

@@ -41,21 +41,14 @@ export const SimpleModal = {
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
           actions={{
-            secondary: (
-              <Button
-                label="Cancel"
-                variant="outline"
-                onClick={() => updateArgs({ isOpen: false })}
-              />
-            ),
-            primary: (
-              <Button
-                variant="primary"
-                label="Save changes"
-                icon={<Icon name="Save" />}
-                onClick={action('Save changes clicked')}
-              />
-            ),
+            cancel: {
+              onClick: () => updateArgs({ isOpen: false }),
+            },
+            confirm: {
+              label: 'Save changes',
+              icon: 'Save',
+              onClick: action('Save changes clicked'),
+            },
           }}
           {...args}
         />
@@ -84,21 +77,15 @@ export const DestructiveModal = {
           role="alertdialog"
           isOpen={isOpen}
           actions={{
-            secondary: (
-              <Button
-                label="Cancel"
-                variant="outline"
-                onClick={() => updateArgs({ isOpen: false })}
-              />
-            ),
-            primary: (
-              <Button
-                variant="danger"
-                label="Delete node"
-                icon={<Icon name="Delete" />}
-                onClick={action('Delete node clicked')}
-              />
-            ),
+            cancel: {
+              onClick: () => updateArgs({ isOpen: false }),
+            },
+            confirm: {
+              label: 'Delete node',
+              variant: 'danger',
+              icon: 'Delete',
+              onClick: action('Delete node clicked'),
+            },
           }}
           {...args}
         />
@@ -113,6 +100,123 @@ export const DestructiveModal = {
         is irreversible.
       </span>
     ),
+    wide: false,
+  },
+};
+
+/**
+ * A destructive modal whose `confirm` stays disabled until the user
+ * acknowledges the risk. The disabled `confirm` carries a `tooltip` explaining
+ * why it can't be used yet — the main reason a `ModalAction` accepts a tooltip.
+ */
+export const DestructiveWithAcknowledgement = {
+  render: (args) => {
+    const [{ isOpen }, updateArgs] = useArgs();
+    const [acknowledged, setAcknowledged] = useState(false);
+    const close = () => {
+      setAcknowledged(false);
+      updateArgs({ isOpen: false });
+    };
+    return (
+      <>
+        <Button
+          onClick={() => updateArgs({ isOpen: true })}
+          label="Delete bucket"
+          variant="danger"
+          icon={<Icon name="Delete" />}
+        />
+        <Modal
+          role="alertdialog"
+          isOpen={isOpen}
+          actions={{
+            cancel: { onClick: close },
+            confirm: {
+              label: 'Delete bucket',
+              variant: 'danger',
+              icon: 'Delete',
+              disabled: !acknowledged,
+              tooltip: acknowledged
+                ? undefined
+                : {
+                    overlay: 'Accept the risk before deleting',
+                    placement: 'top',
+                  },
+              onClick: () => {
+                action('Delete bucket clicked')();
+                close();
+              },
+            },
+          }}
+          {...args}
+        >
+          <Stack direction="vertical" gap="r16">
+            <span>
+              Deleting <strong>my-bucket</strong> permanently removes all of its
+              objects. This action cannot be undone.
+            </span>
+            <label
+              style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
+            >
+              <input
+                type="checkbox"
+                checked={acknowledged}
+                onChange={(e) => setAcknowledged(e.target.checked)}
+              />
+              I understand this action is irreversible.
+            </label>
+          </Stack>
+        </Modal>
+      </>
+    );
+  },
+  args: {
+    title: 'Delete bucket?',
+    isOpen: false,
+  },
+};
+
+/**
+ * Exercises all three action slots, all right-aligned: `extra` (secondary
+ * variant) is the leftmost of the group, then `cancel` (outline), then
+ * `confirm` (primary, rightmost). Also the alignment regression case — with
+ * or without `extra`, the group must hug the right edge.
+ */
+export const WithExtraAction = {
+  render: (args) => {
+    const [{ isOpen }, updateArgs] = useArgs();
+    return (
+      <>
+        <Button
+          onClick={() => updateArgs({ isOpen: true })}
+          label={'Open modal'}
+          variant="primary"
+        />
+        <Modal
+          close={() => updateArgs({ isOpen: false })}
+          isOpen={isOpen}
+          actions={{
+            extra: {
+              label: 'Learn more',
+              icon: 'External-link',
+              onClick: action('Learn more clicked'),
+            },
+            cancel: {
+              onClick: () => updateArgs({ isOpen: false }),
+            },
+            confirm: {
+              label: 'Save changes',
+              icon: 'Save',
+              onClick: action('Save changes clicked'),
+            },
+          }}
+          {...args}
+        />
+      </>
+    );
+  },
+  args: {
+    title: 'Edit settings',
+    children: <span>Make your changes below.</span>,
     wide: false,
   },
 };
@@ -154,21 +258,15 @@ const Demo = (myargs, args) => () => {
         role="alertdialog"
         isOpen={isOpen}
         actions={{
-          secondary: (
-            <Button
-              label="Cancel"
-              variant="outline"
-              onClick={() => updateArgs({ isOpen: false })}
-            />
-          ),
-          primary: (
-            <Button
-              variant="danger"
-              label="Delete"
-              icon={<Icon name="Delete" />}
-              onClick={() => updateArgs({ isOpen: false })}
-            />
-          ),
+          cancel: {
+            onClick: () => updateArgs({ isOpen: false }),
+          },
+          confirm: {
+            label: 'Delete',
+            variant: 'danger',
+            icon: 'Delete',
+            onClick: () => updateArgs({ isOpen: false }),
+          },
         }}
         {...args}
       />
@@ -236,21 +334,14 @@ export const WithLongTextContent = {
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
           actions={{
-            secondary: (
-              <Button
-                label="Cancel"
-                variant="outline"
-                onClick={() => updateArgs({ isOpen: false })}
-              />
-            ),
-            primary: (
-              <Button
-                variant="primary"
-                label="Save"
-                icon={<Icon name="Save" />}
-                onClick={action('Save clicked')}
-              />
-            ),
+            cancel: {
+              onClick: () => updateArgs({ isOpen: false }),
+            },
+            confirm: {
+              label: 'Save',
+              icon: 'Save',
+              onClick: action('Save clicked'),
+            },
           }}
           {...args}
         />
@@ -305,13 +396,10 @@ export const WithTableContent = {
           close={() => updateArgs({ isOpen: false })}
           isOpen={isOpen}
           actions={{
-            primary: (
-              <Button
-                label="Close"
-                variant="outline"
-                onClick={() => updateArgs({ isOpen: false })}
-              />
-            ),
+            confirm: {
+              label: 'Close',
+              onClick: () => updateArgs({ isOpen: false }),
+            },
           }}
           {...args}
         >
@@ -399,7 +487,7 @@ const ModalStory = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const defaultActions: ModalActions = {
-    primary: <Button label="Close" variant="outline" onClick={() => setIsOpen(false)} />,
+    confirm: { label: 'Close', onClick: () => setIsOpen(false) },
   };
   return (
     <>
