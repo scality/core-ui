@@ -111,11 +111,18 @@ const ModalHeader = styled.div`
 const ModalBody = styled.div<{ $wide?: boolean }>`
   padding: ${spacing.r32};
   flex-grow: 1;
-  min-width: min(480px, 100%);
   box-sizing: border-box;
   background-color: ${(props) => props.theme.backgroundLevel4};
   overflow-y: auto;
-  ${({ $wide }) => !$wide && css`max-width: 480px;`}
+  ${({ $wide }) =>
+    $wide
+      ? css`
+          min-width: min(480px, 90vw);
+        `
+      : css`
+          width: min(480px, 90vw);
+          max-width: 100%;
+        `}
 `;
 
 const ModalFooter = styled.div`
