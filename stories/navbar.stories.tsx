@@ -198,6 +198,31 @@ export const NavbarWithLongUserName = {
   },
 };
 
+export const ResponsiveTabOverflow = {
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: 720,
+          resize: 'horizontal',
+          overflow: 'auto',
+          border: '1px dashed #888',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Drag the right edge to resize the container. As it narrows, tabs that no longer fit collapse from the right into a "More" menu (the selected tab and the custom instance-name field stay pinned inline), and below the condense breakpoint the right-action labels drop to icon-only. The navbar measures its own width, so this responds to the container, not the viewport.',
+      },
+    },
+  },
+};
+
 export const NavbarDropdownShowcase = {
   args: {
     rightActions: [
