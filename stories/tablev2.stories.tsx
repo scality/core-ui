@@ -895,3 +895,44 @@ export const ResponsiveColumnDrop = {
     </>
   ),
 };
+
+export const ResponsiveColumnDropWithReveal = {
+  render: () => (
+    <>
+      <Title>Responsive column drop with reveal</Title>
+      <Box mb={2}>
+        Same responsive columns as above, but with <code>revealDroppedColumns</code>.
+        Once a column drops, a trailing column appears with a per-row{' '}
+        <code>+N</code> trigger; clicking it opens a popover listing the dropped
+        columns and their values for that row, so no data is lost on a narrow
+        viewport. Drag the bottom-right corner below 700px to see it.
+      </Box>
+      <div
+        style={{
+          height: '320px',
+          width: '900px',
+          minWidth: '320px',
+          maxWidth: '100%',
+          resize: 'horizontal',
+          overflow: 'hidden',
+          padding: '20px',
+          border: '1px dashed currentColor',
+          boxSizing: 'border-box',
+        }}
+      >
+        <Table
+          columns={responsiveColumns}
+          data={data}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          revealDroppedColumns
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+    </>
+  ),
+};

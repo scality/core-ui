@@ -1,5 +1,6 @@
 import { Table, TableProps } from './Tablev2.component';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -325,5 +326,60 @@ describe('TableV2 responsive columns', () => {
       expect(screen.queryByText('Full Name')).not.toBeInTheDocument(),
     );
     expect(screen.getByText('First Name')).toBeInTheDocument();
+  });
+
+  const renderRevealTable = () =>
+    render(
+      <div>
+        <Table columns={responsiveColumns} data={data} revealDroppedColumns>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+  test('lets the user read a dropped column value from a per-row popover', async () => {
+    mockWidth = 400;
+    renderRevealTable();
+
+    // Age (dropAt 500) is no longer shown inline at 400px wide...
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+
+    // ...but each row offers a trigger that reveals it.
+    const triggers = await screen.findAllByRole('button', {
+      name: /show 1 hidden column/i,
+    });
+    await userEvent.click(triggers[0]);
+
+    const popover = screen.getByRole('dialog');
+    expect(within(popover).getByText('Age')).toBeInTheDocument();
+    expect(within(popover).getByText('90')).toBeInTheDocument();
+  });
+
+  test('does not offer the reveal trigger while every column fits', async () => {
+    mockWidth = 1000;
+    renderRevealTable();
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    expect(screen.getByText('Age')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  test('shows no reveal trigger when the feature is not opted into', async () => {
+    mockWidth = 400;
+    renderResponsiveTable();
+
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
   });
 });
