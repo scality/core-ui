@@ -1,15 +1,15 @@
 import React, { ReactNode, useState } from 'react';
-import { Modal, ModalActions } from '../src/lib/components/modal/Modal.component';
+import { Modal, ModalActions } from '../../src/lib/components/modal/Modal.component';
 import { action } from 'storybook/actions';
-import { Wrapper } from './common';
-import { Table } from '../src/lib/components/tablev2/Tablev2.component';
-import { IconHelp } from '../src/lib/components/iconhelper/IconHelper';
-import { Stack } from '../src/lib/spacing';
-import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
-import { Icon } from '../src/lib/components/icon/Icon.component';
+import { Wrapper } from '../common';
+import { Table } from '../../src/lib/components/tablev2/Tablev2.component';
+import { IconHelp } from '../../src/lib/components/iconhelper/IconHelper';
+import { Stack } from '../../src/lib/spacing';
+import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+import { Icon } from '../../src/lib/components/icon/Icon.component';
 import { useArgs } from 'storybook/preview-api';
-import { InfoMessage } from '../src/lib/components/infomessage/InfoMessage.component';
-import { Input } from '../src/lib/components/inputv2/inputv2';
+import { InfoMessage } from '../../src/lib/components/infomessage/InfoMessage.component';
+import { Input } from '../../src/lib/components/inputv2/inputv2';
 
 export default {
   title: 'Components/Feedback/Modal',
