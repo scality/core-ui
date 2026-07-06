@@ -123,7 +123,7 @@ const FilledAreaContainer = styled.div<{
           width: 0%;
         }
         to {
-          width: ${props.$width} + "%";
+          width: ${props.$width}%;
         }
       }
       animation-duration: 1s;

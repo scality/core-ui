@@ -6,18 +6,32 @@ import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 // Style-only props consumed by the Text family. styled-components v6 forwards
 // unknown props to the DOM, so these are filtered here rather than reaching the
 // rendered <span>. Kept as public prop names (not $-transient) to preserve the
-// Text API for all consumers.
-const NON_DOM_TEXT_PROPS = new Set([
-  'color',
-  'variant',
-  'isEmphazed',
-  'isGentleEmphazed',
-  'compact',
-  'status',
-  'statusColor',
-  'alignRight',
-]);
-const forwardTextProp = (prop: string) => !NON_DOM_TEXT_PROPS.has(prop);
+// Text API for all consumers — the shared @styled-system/should-forward-prop
+// filter (used by Box) can't be reused here because these are custom design
+// flags, and `compact` is even a valid HTML attribute it would forward.
+//
+// Typed as Record<TextStyleProp, true> so the list can't silently drift: adding
+// a style prop to TextStyleProp without listing it below is a compile error.
+type TextStyleProp =
+  | 'color'
+  | 'variant'
+  | 'isEmphazed'
+  | 'isGentleEmphazed'
+  | 'compact'
+  | 'status'
+  | 'statusColor'
+  | 'alignRight';
+const NON_DOM_TEXT_PROPS: Record<TextStyleProp, true> = {
+  color: true,
+  variant: true,
+  isEmphazed: true,
+  isGentleEmphazed: true,
+  compact: true,
+  status: true,
+  statusColor: true,
+  alignRight: true,
+};
+const forwardTextProp = (prop: string) => !(prop in NON_DOM_TEXT_PROPS);
 
 export type TextVariant =
   | 'ChartTitle'

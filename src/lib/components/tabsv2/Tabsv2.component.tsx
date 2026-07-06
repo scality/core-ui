@@ -152,6 +152,12 @@ function Tabs({
       textBadge,
       children,
       icon,
+      // Style-only / routing flags consumed elsewhere — kept out of the spread
+      // so styled-components v6 does not forward them to the TabItem <div>.
+      withoutPadding,
+      exact,
+      strict,
+      sensitive,
       ...childRest
     }: TabProps = child.props;
     const isSelected = selectedTabIndex === index;
