@@ -39,16 +39,20 @@ export type ModalActions = {
 type CommonProps = {
   isOpen: boolean;
   /**
-   * Modal title.
-   *
-   * Pass a plain string — the title is used as the accessible name
-   * (`aria-labelledby`); non-string content breaks screen reader
+   * Modal title — always a short text string that mirrors the verb of the
+   * action that opened the modal (a "Delete node" button opens a modal
+   * titled "Delete node?"). The string is used as the accessible name
+   * (`aria-labelledby`); non-string content breaks screen-reader
    * announcement.
-   *
-   * @deprecated Passing a `ReactNode` is kept for backward compatibility
-   * and will be removed in a future major release. Use a plain string.
    */
-  title: string | ReactNode;
+  title:
+    | string
+    /**
+     * @deprecated Pass a plain string. Non-string titles violate the modal
+     * guideline (title is always text) and break the accessible name
+     * (`aria-labelledby`); support will be removed in a future major release.
+     */
+    | Exclude<ReactNode, string>;
   children: ReactNode;
   subTitle?: ReactNode;
   /**
