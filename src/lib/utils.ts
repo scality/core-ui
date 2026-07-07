@@ -23,7 +23,7 @@ export const getThemePropSelector = (key) => (props) => {
  * New names are also supported. */
 export const getThemeVariantSelector = () => (props) => {
   const theme = props.theme;
-  const key = variantMapping[props.variant] ?? props.variant;
+  const key = variantMapping[props.$variant] ?? props.$variant;
   return theme[key];
 };
 

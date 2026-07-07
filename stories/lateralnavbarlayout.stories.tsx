@@ -49,7 +49,7 @@ export default {
 export const Default = {
   args: {
     sidebar: {
-      ...DefaultSidebar,
+      ...DefaultSidebar.args,
       actions: sideBarActions,
     },
   },

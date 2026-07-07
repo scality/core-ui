@@ -143,7 +143,6 @@ export default {
   title: 'Components/Navigation/Navbar',
   component: Navbar,
   args: {
-    productName: 'Hardware UI',
     rightActions,
     tabs,
     logo: <Logo />,
