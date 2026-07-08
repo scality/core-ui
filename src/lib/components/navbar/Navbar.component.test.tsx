@@ -169,22 +169,7 @@ describe('Navbar responsiveness', () => {
     expect(screen.getByText('Carlito')).toBeInTheDocument();
   });
 
-  it('drops the username label to an icon-only trigger when narrow', () => {
-    stubNavbarWidth(360);
-    renderNavbar({ tabs, rightActions: [userAction] });
-
-    expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
-  });
-
-  it('keeps the account menu reachable by name when condensed to an icon', () => {
-    stubNavbarWidth(360);
-    renderNavbar({ tabs, rightActions: [userAction] });
-
-    expect(screen.queryByText('Carlito')).not.toBeInTheDocument();
-    expect(screen.getByLabelText('Carlito')).toBeInTheDocument();
-  });
-
-  it('condenses an opted-in dropdown to its initials, keeping the full name accessible', () => {
+  it('abbreviates the username to its initials when narrow, keeping the full name accessible', () => {
     stubNavbarWidth(360);
     renderNavbar({
       tabs,
@@ -193,7 +178,6 @@ describe('Navbar responsiveness', () => {
           type: 'dropdown' as const,
           text: 'Carlito Gonzalez',
           icon: <i className="fas fa-user" />,
-          abbreviateWhenCondensed: true,
           items: [{ label: 'Log out', onClick: () => {} }],
         },
       ],
@@ -202,6 +186,24 @@ describe('Navbar responsiveness', () => {
     expect(screen.getByText('CG')).toBeInTheDocument();
     expect(screen.queryByText('Carlito Gonzalez')).not.toBeInTheDocument();
     expect(screen.getByLabelText('Carlito Gonzalez')).toBeInTheDocument();
+  });
+
+  it('keeps an icon-only action icon-only when narrow instead of inventing initials', () => {
+    stubNavbarWidth(360);
+    renderNavbar({
+      tabs,
+      rightActions: [
+        {
+          type: 'dropdown' as const,
+          icon: <i className="fas fa-th" />,
+          items: [{ label: 'App 1', onClick: () => {} }],
+        },
+      ],
+    });
+
+    // No text label was provided, so nothing is abbreviated and no stray
+    // initial chip appears next to the icon.
+    expect(screen.queryByText(/^[A-Z]{1,2}$/)).not.toBeInTheDocument();
   });
 
   it('gives the condensed name precedence over an aria-label on the action', () => {

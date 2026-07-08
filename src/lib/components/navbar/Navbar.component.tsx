@@ -157,12 +157,6 @@ type DropdownAction = {
   items: Array<Item>;
   text?: string;
   icon?: JSX.Element;
-  /**
-   * When the navbar condenses, show the label's initials next to the icon
-   * (e.g. "Carlito Gonzalez" → "CG") instead of hiding it. The full label
-   * stays the accessible name. Requires an `icon`. Defaults to false.
-   */
-  abbreviateWhenCondensed?: boolean;
 };
 
 type CustomAction = {
@@ -637,14 +631,12 @@ const getActionRenderer = (
 ) => {
   switch (action.type) {
     case 'dropdown': {
-      const { type, items, text, abbreviateWhenCondensed, ...rest } = action;
+      const { type, items, text, ...rest } = action;
       const condenseToIcon = condensed && Boolean(action.icon);
-      // When condensed, either abbreviate the label to its initials (opt-in) or
-      // hide it (icon-only); the full text stays the accessible name below.
-      const condensedText =
-        condenseToIcon && abbreviateWhenCondensed && text
-          ? getInitials(text)
-          : undefined;
+      // When condensed to an icon, abbreviate a text label to its initials
+      // (e.g. "Carlito Gonzalez" → "CG"); the full text stays the accessible
+      // name below. Icon-only actions (no text) simply stay icon-only.
+      const condensedText = condenseToIcon && text ? getInitials(text) : undefined;
       return (
         <Dropdown
           key={`navbar_right_action_${index}`}
@@ -655,9 +647,9 @@ const getActionRenderer = (
           text={condenseToIcon ? condensedText : text}
           {...rest}
           // Applied after `...rest` so the condense-mode name always wins over a
-          // stray title/aria-label on the action; omitted entirely otherwise so
-          // a consumer's own title/aria-label still passes through.
-          {...(condenseToIcon ? { title: text, 'aria-label': text } : {})}
+          // stray title/aria-label on the action; only when there is a label to
+          // preserve, so an icon-only action's own title/aria-label passes through.
+          {...(condenseToIcon && text ? { title: text, 'aria-label': text } : {})}
         />
       );
     }
