@@ -6,21 +6,8 @@ import { InlineInput } from '../src/lib';
 import { Stack } from '../src/lib/spacing';
 import { Logo } from '../src/lib/icons/branding-logo';
 
+// A short, typical set of navigation tabs — the shape most apps start from.
 const tabs = [
-  {
-    render: (
-      <InlineInput
-        id="instanceName"
-        // @ts-ignore
-        changeMutation={{
-          isLoading: false,
-          mutate: () => {},
-        }}
-        defaultValue="My instance"
-        maxLength={14}
-      />
-    ),
-  },
   {
     selected: true,
     title: 'Groups',
@@ -39,6 +26,30 @@ const tabs = [
     link: <a href="/policies">Policies</a>,
     onClick: action('Policies clicked'),
   },
+];
+
+// A custom, non-link tab: an editable instance-name field. Render tabs stay
+// pinned inline and never collapse into the "More" menu.
+const instanceNameTab = {
+  render: (
+    <InlineInput
+      id="instanceName"
+      // @ts-ignore
+      changeMutation={{
+        isLoading: false,
+        mutate: () => {},
+      }}
+      defaultValue="My instance"
+      maxLength={14}
+    />
+  ),
+};
+
+// A longer tab set (with the custom instance-name tab) used to demonstrate
+// overflow into the "More" menu when width runs out.
+const overflowTabs = [
+  instanceNameTab,
+  ...tabs,
   {
     selected: false,
     title: 'Buckets',
@@ -52,25 +63,29 @@ const tabs = [
     onClick: action('Workflows clicked'),
   },
 ];
-const linkTabs = [
-  {
-    link: <a href="/groups">Groups</a>,
-    selected: true,
-  },
-  {
-    link: <a href="/users">Users</a>,
-  },
-  {
-    link: <a href="/policies">Policies</a>,
-  },
-  {
-    link: <a href="/buckets">Buckets</a>,
-  },
-  {
-    link: <a href="/workflows">Workflows</a>,
-  },
-];
-const rightActions = [
+
+// The account menu — the one right-action that pairs an icon with a text label.
+const userAction = {
+  type: 'dropdown',
+  text: 'Carlito Gonzalez',
+  icon: <i className="fas fa-user" />,
+  items: [
+    {
+      label: 'Log out',
+      onClick: action('Logout clicked'),
+    },
+  ],
+};
+
+const themeButton = {
+  type: 'button',
+  icon: <i className="fas fa-sun" />,
+  tooltip: { overlay: 'Toggle Theme' },
+  onClick: action('Theme toggle clicked'),
+};
+
+// A fuller set of right actions used to show icon-only condensing and overflow.
+const manyRightActions = [
   {
     type: 'dropdown',
     text: 'FR',
@@ -97,18 +112,9 @@ const rightActions = [
     type: 'dropdown',
     icon: <i className="fas fa-question-circle" />,
     items: [
-      {
-        label: 'About',
-        onClick: action('About clicked'),
-      },
-      {
-        label: 'Documentation',
-        onClick: action('Documentation clicked'),
-      },
-      {
-        label: 'Onboarding',
-        onClick: action('Onboarding clicked'),
-      },
+      { label: 'About', onClick: action('About clicked') },
+      { label: 'Documentation', onClick: action('Documentation clicked') },
+      { label: 'Onboarding', onClick: action('Onboarding clicked') },
     ],
   },
   {
@@ -120,24 +126,8 @@ const rightActions = [
       </Stack>
     ),
   },
-  {
-    type: 'button',
-    icon: <i className="fas fa-sun" />,
-    tooltip: { overlay: 'Toggle Theme' },
-    onClick: action('Theme toggle clicked'),
-  },
-  {
-    type: 'dropdown',
-    text: 'Carlito Gonzalez',
-    icon: <i className="fas fa-user" />,
-    abbreviateWhenCondensed: true,
-    items: [
-      {
-        label: 'Log out',
-        onClick: action('Logout clicked'),
-      },
-    ],
-  },
+  themeButton,
+  userAction,
 ];
 
 export default {
@@ -145,36 +135,84 @@ export default {
   component: Navbar,
   args: {
     productName: 'Hardware UI',
-    rightActions,
-    tabs,
     logo: <Logo />,
+    tabs,
+    rightActions: [],
   },
 };
 
-export const BasicNavbar = {};
+export const BasicNavbar = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The minimal navbar: a logo and a few navigation tabs.',
+      },
+    },
+  },
+};
+
+export const NavbarWithRightActions = {
+  args: {
+    rightActions: [themeButton, userAction],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A typical navbar: tabs on the left, an account menu and a theme-toggle button on the right.',
+      },
+    },
+  },
+};
 
 export const NavbarWithToggle = {
   args: {
     onToggleClick: action('toggle clicked'),
+    rightActions: [themeButton, userAction],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Passing `onToggleClick` adds a built-in menu button at the far left, used to toggle the host application\'s main/side menu.',
+      },
+    },
   },
 };
 
-export const NavbarWithCustomizedLogo = {
+export const NavbarWithLogo = {
   args: {
-    logo: <i className="fas fa-ring" />,
+    logo: (
+      <span
+        style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700 }}
+      >
+        <i className="fas fa-cube" /> Acme Cloud
+      </span>
+    ),
+    rightActions: [userAction],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The `logo` slot accepts any node, so a product can drop in its own brand mark instead of the default one.',
+      },
+    },
   },
 };
 
-export const NavbarWithOnlyTabs = {
+export const NavbarWithSpecialTab = {
   args: {
-    rightActions: [rightActions[4]],
+    tabs: [instanceNameTab, ...tabs],
+    rightActions: [userAction],
   },
-};
-
-export const NavbarWithOnlyLinkTabs = {
-  args: {
-    rightActions: [rightActions[4]],
-    tabs: linkTabs,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A tab can render arbitrary content via `render` instead of a link — here an editable instance-name field. Custom render tabs stay pinned inline and never collapse into the "More" menu.',
+      },
+    },
   },
 };
 
@@ -200,6 +238,10 @@ export const NavbarWithLongUserName = {
 };
 
 export const ResponsiveTabOverflow = {
+  args: {
+    tabs: overflowTabs,
+    rightActions: manyRightActions,
+  },
   decorators: [
     (Story) => (
       <div
@@ -218,109 +260,7 @@ export const ResponsiveTabOverflow = {
     docs: {
       description: {
         story:
-          'Drag the right edge to resize the container. As it narrows, tabs that no longer fit collapse from the right into a "More" menu (the selected tab and the custom instance-name field stay pinned inline), and below the condense breakpoint the right-action labels drop to icon-only — except the account dropdown, which opts into `abbreviateWhenCondensed` and shows its initials ("CG") next to the icon while keeping the full name as its accessible name. The navbar measures its own width, so this responds to the container, not the viewport.',
-      },
-    },
-  },
-};
-
-export const NavbarDropdownShowcase = {
-  args: {
-    rightActions: [
-      {
-        type: 'dropdown',
-        text: 'Language',
-        variant: 'secondary',
-        size: 'default',
-        items: [
-          {
-            label: 'English',
-            name: 'EN',
-            onClick: action('English selected'),
-          },
-          {
-            label: 'Français',
-            name: 'FR',
-            onClick: action('French selected'),
-          },
-          {
-            label: 'Español',
-            name: 'ES',
-            onClick: action('Spanish selected'),
-          },
-        ],
-      },
-      {
-        type: 'dropdown',
-        text: 'Help',
-        icon: <i className="fas fa-question-circle" />,
-        variant: 'outline',
-        size: 'default',
-        items: [
-          {
-            label: 'Documentation',
-            onClick: action('Documentation clicked'),
-          },
-          {
-            label: 'Tutorials',
-            onClick: action('Tutorials clicked'),
-          },
-          {
-            label: 'Contact Support',
-            onClick: action('Contact Support clicked'),
-          },
-          {
-            label: 'Release Notes',
-            onClick: action('Release Notes clicked'),
-          },
-        ],
-      },
-      {
-        type: 'dropdown',
-        icon: <i className="fas fa-user" />,
-        variant: 'primary',
-        size: 'default',
-        caret: false,
-        items: [
-          {
-            label: 'Profile Settings',
-            onClick: action('Profile clicked'),
-          },
-          {
-            label: 'Preferences',
-            onClick: action('Preferences clicked'),
-          },
-          {
-            label: 'API Keys',
-            onClick: action('API Keys clicked'),
-          },
-          {
-            label: 'Log out',
-            onClick: action('Logout clicked'),
-          },
-        ],
-      },
-    ],
-    tabs: [
-      {
-        selected: true,
-        title: 'Dashboard',
-        link: <a href="/dashboard">Dashboard</a>,
-        onClick: action('Dashboard clicked'),
-      },
-      {
-        selected: false,
-        title: 'Analytics',
-        link: <a href="/analytics">Analytics</a>,
-        onClick: action('Analytics clicked'),
-      },
-    ],
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'This story showcases different dropdown variants within the navbar. The dropdowns use the new ButtonV2 styling with variants: secondary, outline, and primary. Notice how the different variants provide visual hierarchy and the icon-only dropdown uses caret: false for a cleaner look.',
+          'Drag the right edge to resize the container. As it narrows, tabs that no longer fit collapse from the right into a "More" menu (the selected tab and the custom instance-name field stay pinned inline), and below the condense breakpoint each right-action label that has an icon condenses to its initials next to that icon (e.g. the account dropdown "Carlito Gonzalez" → "CG"), keeping the full label as its accessible name; icon-only actions stay icon-only. The navbar measures its own width, so this responds to the container, not the viewport.',
       },
     },
   },
