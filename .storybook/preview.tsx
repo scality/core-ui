@@ -5,6 +5,7 @@ import { CoreUiThemeProvider } from '../src/lib/next';
 import { coreUIAvailableThemes } from '../src/lib/style/theme';
 import { Wrapper } from '../stories/common';
 import { ToastProvider } from '../src/lib';
+import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
 
 export const globalTypes = {
   theme: {
@@ -45,14 +46,16 @@ const withThemeProvider = (Story, context) => {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <CoreUiThemeProvider theme={theme}>
-        {/* Wrapper to make the stories take the full screen but not in docs */}
-        <div style={viewMode === 'story' ? { height: 100 + 'vh' } : null}>
-          <ToastProvider>
-            <Wrapper style={{ backgroundColor: background }}>
-              <Story {...context} />
-            </Wrapper>
-          </ToastProvider>
-        </div>
+        <ScrollbarWrapper>
+          {/* Wrapper to make the stories take the full screen but not in docs */}
+          <div style={viewMode === 'story' ? { height: 100 + 'vh' } : null}>
+            <ToastProvider>
+              <Wrapper style={{ backgroundColor: background }}>
+                <Story {...context} />
+              </Wrapper>
+            </ToastProvider>
+          </div>
+        </ScrollbarWrapper>
       </CoreUiThemeProvider>
     </QueryClientProvider>
   );
