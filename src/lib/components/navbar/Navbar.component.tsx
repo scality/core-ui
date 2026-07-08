@@ -315,7 +315,10 @@ const NavbarMenuItem = styled.div`
     border-radius: 0;
     height: ${navbarHeight};
     font-size: ${fontSize.base};
-    background-color: ${getThemePropSelector('navbarBackground')};
+    // Transparent (like the dropdown triggers) so a full-height button doesn't
+    // paint over the navbar's bottom border. navbarBackground would match the
+    // navbar fill but still hide the border underneath.
+    background-color: transparent;
     color: ${(props) => getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary};
     &:hover {
       background-color: ${getThemePropSelector('highlight')};
