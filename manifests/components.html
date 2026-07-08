@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">331 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">333 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.7s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>3.6s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -13858,9 +13858,9 @@ steps: StepProps[]</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Table</h2>
       <div class="badges">
-        <label for="c-55-components-data-display-table-props" class="badge ok as-toggle">13 prop types</label>
+        <label for="c-55-components-data-display-table-props" class="badge ok as-toggle">14 prop types</label>
         <label for="c-55-components-data-display-table-info" class="badge info as-toggle">1 info</label>
-        <label for="c-55-components-data-display-table-stories" class="badge ok as-toggle">10 stories</label>
+        <label for="c-55-components-data-display-table-stories" class="badge ok as-toggle">12 stories</label>
         <label for="c-55-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -13894,7 +13894,7 @@ steps: StepProps[]</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">13 prop types</span>
+              <span class="badge ok">14 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/tablev2/Tablev2.component.tsx::Table</code></pre>
             <pre><code>Props:</code></pre>
@@ -13929,6 +13929,14 @@ initiallySelectedRowsIds?: Set&lt;string | number&gt;
 onBottom?: ((rowLength: number) =&gt; void)
 
 onBottomOffset?: number = 10
+
+/**
+ * When `true`, a trailing column is shown while one or more `dropAt` columns
+ * are responsively hidden. Its per-row trigger opens a popover listing the
+ * dropped columns&#39; `Header: value` pairs, so the data stays reachable on
+ * narrow viewports. Opt-in; defaults to `false` (no behaviour change).
+ */
+revealDroppedColumns?: boolean = false
 
 sortTypes?: Record&lt;string, SortByFn&lt;DATA_ROW&gt;&gt;
 
@@ -14701,6 +14709,96 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
     &lt;/&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Column Drop</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveColumnDrop = () =&gt; (
+  &lt;&gt;
+    &lt;Title&gt;Responsive column drop&lt;/Title&gt;
+    &lt;Box mb={2}&gt;
+      Drag the bottom-right corner to resize. Columns with a &lt;code&gt;dropAt&lt;/code&gt;{&#39; &#39;}
+      breakpoint hide as the table gets narrower (Age below 550px, Last Name
+      below 700px). First Name and Health have no breakpoint, so they always
+      stay.
+    &lt;/Box&gt;
+    &lt;div
+      style={{
+        height: &#39;320px&#39;,
+        width: &#39;900px&#39;,
+        minWidth: &#39;320px&#39;,
+        maxWidth: &#39;100%&#39;,
+        resize: &#39;horizontal&#39;,
+        overflow: &#39;hidden&#39;,
+        padding: &#39;20px&#39;,
+        border: &#39;1px dashed currentColor&#39;,
+        boxSizing: &#39;border-box&#39;,
+      }}
+    &gt;
+      &lt;Table
+        columns={responsiveColumns}
+        data={data}
+        defaultSortingKey={&#39;health&#39;}
+        getRowId={getRowId}
+      &gt;
+        &lt;Table.SingleSelectableContent
+          rowHeight=&quot;h40&quot;
+          separationLineVariant=&quot;backgroundLevel3&quot;
+        /&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+  &lt;/&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Column Drop With Reveal</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveColumnDropWithReveal = () =&gt; (
+  &lt;&gt;
+    &lt;Title&gt;Responsive column drop with reveal&lt;/Title&gt;
+    &lt;Box mb={2}&gt;
+      Same responsive columns as above, but with &lt;code&gt;revealDroppedColumns&lt;/code&gt;.
+      Once a column drops, a trailing column appears with a per-row{&#39; &#39;}
+      &lt;code&gt;+N&lt;/code&gt; trigger; clicking it opens a popover listing the dropped
+      columns and their values for that row, so no data is lost on a narrow
+      viewport. Drag the bottom-right corner below 700px to see it.
+    &lt;/Box&gt;
+    &lt;div
+      style={{
+        height: &#39;320px&#39;,
+        width: &#39;900px&#39;,
+        minWidth: &#39;320px&#39;,
+        maxWidth: &#39;100%&#39;,
+        resize: &#39;horizontal&#39;,
+        overflow: &#39;hidden&#39;,
+        padding: &#39;20px&#39;,
+        border: &#39;1px dashed currentColor&#39;,
+        boxSizing: &#39;border-box&#39;,
+      }}
+    &gt;
+      &lt;Table
+        columns={responsiveColumns}
+        data={data}
+        defaultSortingKey={&#39;health&#39;}
+        getRowId={getRowId}
+        revealDroppedColumns
+      &gt;
+        &lt;Table.SingleSelectableContent
+          rowHeight=&quot;h40&quot;
+          separationLineVariant=&quot;backgroundLevel3&quot;
+        /&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+  &lt;/&gt;
+);</code></pre>
             </div>
         </div>
     
