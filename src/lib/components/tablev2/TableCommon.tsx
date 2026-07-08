@@ -23,6 +23,7 @@ const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => (
     ref={ref}
     {...props}
     style={{ ...props.style, scrollBehavior: 'smooth' }}
+    className={['scroll-fade', props.className].filter(Boolean).join(' ')}
   />
 ));
 
