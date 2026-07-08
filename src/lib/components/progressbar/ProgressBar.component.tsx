@@ -130,7 +130,7 @@ const FilledAreaContainer = styled.div<{
       animation-fill-mode: both;
       animation-name: widthAnimation;
 
-      background-color: ${props.$color || props.theme.selectedActive}
+      background-color: ${props.$color || props.theme.selectedActive};
       width: ${props.$width}%;
     `;
     } else {
