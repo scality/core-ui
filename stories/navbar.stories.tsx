@@ -1,9 +1,7 @@
 import React from 'react';
 import { Navbar } from '../src/lib/components/navbar/Navbar.component';
 import { action } from 'storybook/actions';
-import { Link } from '../src/lib/components/text/Text.component';
 import { InlineInput } from '../src/lib';
-import { Stack } from '../src/lib/spacing';
 import { Logo } from '../src/lib/icons/branding-logo';
 
 // A short, typical set of navigation tabs — the shape most apps start from.
@@ -77,6 +75,20 @@ const userAction = {
   ],
 };
 
+const notificationsButton = {
+  type: 'button',
+  icon: <i className="fas fa-bell" />,
+  tooltip: { overlay: 'Notifications' },
+  onClick: action('Notifications clicked'),
+};
+
+const whatsNewButton = {
+  type: 'button',
+  icon: <i className="fas fa-magic" />,
+  tooltip: { overlay: "What's new" },
+  onClick: action("What's new clicked"),
+};
+
 const themeButton = {
   type: 'button',
   icon: <i className="fas fa-sun" />,
@@ -84,48 +96,12 @@ const themeButton = {
   onClick: action('Theme toggle clicked'),
 };
 
-// A fuller set of right actions used to show icon-only condensing and overflow.
-const manyRightActions = [
-  {
-    type: 'dropdown',
-    text: 'FR',
-    icon: <i className="fas fa-globe" />,
-    items: [
-      {
-        label: 'English',
-        name: 'EN',
-        onClick: action('English selected'),
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    icon: <i className="fas fa-th" />,
-    items: [
-      {
-        label: 'App 1',
-        onClick: action('App 1 clicked'),
-      },
-    ],
-  },
-  {
-    type: 'dropdown',
-    icon: <i className="fas fa-question-circle" />,
-    items: [
-      { label: 'About', onClick: action('About clicked') },
-      { label: 'Documentation', onClick: action('Documentation clicked') },
-      { label: 'Onboarding', onClick: action('Onboarding clicked') },
-    ],
-  },
-  {
-    type: 'custom',
-    render: () => (
-      <Stack>
-        <i className="fas fa-exclamation-circle" />{' '}
-        <Link>New version available</Link>
-      </Stack>
-    ),
-  },
+// A realistic right-actions set: a couple of icon-only buttons, the theme
+// toggle, then the account menu. Shared by the right-actions and responsive
+// stories so they represent the same navbar.
+const rightActions = [
+  notificationsButton,
+  whatsNewButton,
   themeButton,
   userAction,
 ];
@@ -153,13 +129,13 @@ export const BasicNavbar = {
 
 export const NavbarWithRightActions = {
   args: {
-    rightActions: [themeButton, userAction],
+    rightActions,
   },
   parameters: {
     docs: {
       description: {
         story:
-          'A typical navbar: tabs on the left, an account menu and a theme-toggle button on the right.',
+          'A typical navbar: tabs on the left, and on the right a set of icon buttons (notifications, what\'s new, theme toggle) followed by the account menu.',
       },
     },
   },
@@ -240,7 +216,7 @@ export const NavbarWithLongUserName = {
 export const ResponsiveTabOverflow = {
   args: {
     tabs: overflowTabs,
-    rightActions: manyRightActions,
+    rightActions,
   },
   decorators: [
     (Story) => (
