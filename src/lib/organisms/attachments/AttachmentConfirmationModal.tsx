@@ -2,7 +2,7 @@ import { ComponentType, useState } from 'react';
 import { useMutation, UseMutationOptions } from 'react-query';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
+import { Icon, LargerText, Modal, SecondaryText } from '../..';
 import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
 import { AttachmentAction, AttachmentOperation } from './AttachmentTypes';
@@ -137,37 +137,6 @@ export function AttachmentConfirmationModal<
     handleClose();
     navigate(redirectUrl);
   };
-  const modalFooter = () => {
-    return (
-      <Wrap>
-        <p></p>
-        <>
-          {isAttachNotDone ? (
-            <Stack>
-              <Button variant="outline" onClick={handleClose} label="Cancel" />
-              <Button
-                icon={<Icon name="Arrow-right" />}
-                variant="primary"
-                onClick={attach}
-                label="Confirm"
-                disabled={attachmentMutation.isLoading}
-              />
-            </Stack>
-          ) : (
-            <Button
-              icon={<Icon name="Arrow-right" />}
-              variant="primary"
-              onClick={() => {
-                handleExit();
-              }}
-              label="Exit"
-            />
-          )}
-        </>
-      </Wrap>
-    );
-  };
-
   function AttachmentList() {
     const theme = useTheme();
     const columns: Column<{
@@ -300,7 +269,6 @@ export function AttachmentConfirmationModal<
 
       <Modal
         close={isAttachNotDone ? handleClose : handleExit}
-        footer={modalFooter()}
         isOpen={isModalOpen}
         title={
           <Box display="flex" gap={8}>
@@ -309,6 +277,25 @@ export function AttachmentConfirmationModal<
             </LargerText>
             <LargerText>Attachment</LargerText>
           </Box>
+        }
+        actions={
+          isAttachNotDone
+            ? {
+                cancel: { label: 'Cancel', onClick: handleClose },
+                confirm: {
+                  label: 'Confirm',
+                  icon: 'Arrow-right',
+                  onClick: attach,
+                  disabled: attachmentMutation.isLoading,
+                },
+              }
+            : {
+                confirm: {
+                  label: 'Exit',
+                  icon: 'Arrow-right',
+                  onClick: handleExit,
+                },
+              }
         }
       >
         <AttachmentList />

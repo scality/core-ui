@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useLayoutEffect, useRef } from 'react';
+import { ReactNode, useEffect, useId, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
 import { Wrap, spacing } from '../../spacing';
@@ -65,13 +65,14 @@ type CommonProps = {
 
 type WithLegacyFooter = {
   /**
-   * Free-form footer content.
+   * Free-form footer content. Required on this branch — a modal must expose a
+   * footer, so callers not using `actions` have to provide one here.
    *
    * @deprecated Use `actions` instead. `footer` accepts arbitrary content
    * and bypasses the documented stack/alignment guideline; it will be
    * removed in a future major release.
    */
-  footer?: ReactNode;
+  footer: ReactNode;
   actions?: never;
 };
 
@@ -81,6 +82,11 @@ type WithActions = {
   actions: ModalActions;
 };
 
+/**
+ * Every modal must have a footer, so exactly one strategy is required:
+ * the structured `actions` prop (preferred) or the deprecated free-form
+ * `footer`. Passing both, or neither, fails to type-check.
+ */
 type FooterProps = WithLegacyFooter | WithActions;
 
 type DialogProps = CommonProps &
@@ -139,6 +145,7 @@ const ModalBody = styled.div<{ $wide?: boolean }>`
     $wide
       ? css`
           min-width: min(480px, 90vw);
+          overflow-x: auto;
         `
       : css`
           width: min(480px, 90vw);
@@ -188,6 +195,8 @@ const Modal = ({
   ...rest
 }: Props) => {
   const modalContainer = useRef(document.createElement('div'));
+  const labelId = useId();
+  const descId = useId();
 
   useLayoutEffect(() => {
     document.body && document.body.prepend(modalContainer.current);
@@ -201,18 +210,24 @@ const Modal = ({
       //Auto focus the modal when it opens
       modalContainer.current.setAttribute('tabindex', '0');
       modalContainer.current.focus();
-      //Listen to esc key to close the modal
-      const handleEsc = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-          close && close();
-        }
-      };
-      document.addEventListener('keydown', handleEsc);
-      return () => {
-        document.removeEventListener('keydown', handleEsc);
-      };
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    //Listen to esc key to close the modal
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        close?.();
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [isOpen, close]);
 
   return isOpen
     ? createPortal(
@@ -220,14 +235,14 @@ const Modal = ({
         className="sc-modal"
         role={role}
         aria-modal="true"
-        aria-labelledby="dialog_label"
-        aria-describedby="dialog_desc"
+        aria-labelledby={labelId}
+        aria-describedby={descId}
         {...rest}
       >
         <ModalContent className="sc-modal-content">
           <ModalHeader className="sc-modal-header">
             <Wrap style={{ flex: 1 }}>
-              <Text variant="Larger" id="dialog_label">
+              <Text variant="Larger" id={labelId}>
                 {title}
               </Text>
               {close ? (
@@ -243,7 +258,7 @@ const Modal = ({
               )}
             </Wrap>
           </ModalHeader>
-          <ModalBody className="sc-modal-body" id="dialog_desc" $wide={wide}>
+          <ModalBody className="sc-modal-body" id={descId} $wide={wide}>
             {children}
           </ModalBody>
           {(actions || footer) && (
