@@ -2,7 +2,7 @@ import { ComponentType, useState } from 'react';
 import { useMutation, UseMutationOptions } from 'react-query';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { Icon, LargerText, Modal, SecondaryText } from '../..';
+import { Icon, Modal, SecondaryText } from '../..';
 import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
 import { AttachmentAction, AttachmentOperation } from './AttachmentTypes';
@@ -270,14 +270,8 @@ export function AttachmentConfirmationModal<
       <Modal
         close={isAttachNotDone ? handleClose : handleExit}
         isOpen={isModalOpen}
-        title={
-          <Box display="flex" gap={8}>
-            <LargerText>
-              <Icon name="Link" />
-            </LargerText>
-            <LargerText>Attachment</LargerText>
-          </Box>
-        }
+        wide
+        title="Attachment"
         actions={
           isAttachNotDone
             ? {
