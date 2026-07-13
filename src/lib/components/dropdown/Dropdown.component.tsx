@@ -163,7 +163,6 @@ function Dropdown({
             <DropdownMenuItemStyled
               className="menu-item-label"
               key={item.label}
-              {...item}
               {...getItemProps({
                 item,
                 index,
