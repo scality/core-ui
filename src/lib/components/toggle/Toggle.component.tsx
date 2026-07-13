@@ -64,9 +64,8 @@ const ToggleInput = styled.input`
   }
   display: none;
 `;
-const StyledSwitchLabel = styled.label<{ $toggle?: boolean }>`
-  color: ${(props) =>
-    props.theme[props.$toggle ? 'textPrimary' : 'textPrimary']};
+const StyledSwitchLabel = styled.label`
+  color: ${(props) => props.theme.textPrimary};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
@@ -75,7 +74,6 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
 
   return (
     <StyledSwitchLabel
-      $toggle={toggle}
       className="text"
       id={`${rest['id']}-label`}
       htmlFor={rest['id']}
