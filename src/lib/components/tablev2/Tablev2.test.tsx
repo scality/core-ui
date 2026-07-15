@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Table, TableProps } from './Tablev2.component';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -231,5 +233,195 @@ describe('TableV2', () => {
     const rows = getAllByRole('row');
     expect(rows.length).toBe(2); // header + 1 matching data row
     expect(rows[1]).toHaveTextContent(/Yohann/i);
+  });
+});
+
+describe('TableV2 responsive columns', () => {
+  // jsdom ships no ResizeObserver and getBoundingClientRect always reports 0,
+  // so we stub both to drive the container width the Table measures.
+  let mockWidth = 1000;
+  const originalResizeObserver = global.ResizeObserver;
+  const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
+
+  beforeAll(() => {
+    class ResizeObserverMock {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    // @ts-expect-error assigning a stub to the global
+    global.ResizeObserver = ResizeObserverMock;
+    Element.prototype.getBoundingClientRect = function () {
+      return { width: mockWidth, height: 600 } as DOMRect;
+    };
+  });
+
+  afterAll(() => {
+    global.ResizeObserver = originalResizeObserver;
+    Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
+  });
+
+  const responsiveColumns: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    { Header: 'Last Name', accessor: 'lastName' },
+    { Header: 'Age', accessor: 'age', dropAt: 500 },
+    { Header: 'Health', accessor: 'health', sortType: 'health' },
+  ];
+
+  const renderResponsiveTable = () =>
+    render(
+      <div>
+        <Table columns={responsiveColumns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+  test('it keeps a droppable column visible when the table is wide enough', async () => {
+    mockWidth = 1000;
+    renderResponsiveTable();
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    expect(screen.getByText('Age')).toBeInTheDocument();
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+  });
+
+  test('it hides a droppable column when the table is too narrow', async () => {
+    mockWidth = 400;
+    renderResponsiveTable();
+
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    // columns without a dropAt stay visible at any width
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+    expect(screen.getByText('Health')).toBeInTheDocument();
+  });
+
+  test('it hides a droppable column defined with a function accessor when narrow', async () => {
+    mockWidth = 400;
+    const columns: TableProps['columns'] = [
+      { Header: 'First Name', accessor: 'firstName' },
+      {
+        Header: 'Full Name',
+        id: 'fullName',
+        accessor: (row) => `${row.firstName} ${row.lastName}`,
+        dropAt: 500,
+      },
+    ];
+    render(
+      <div>
+        <Table columns={columns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+    await waitFor(() =>
+      expect(screen.queryByText('Full Name')).not.toBeInTheDocument(),
+    );
+    expect(screen.getByText('First Name')).toBeInTheDocument();
+  });
+
+  const renderRevealTable = () =>
+    render(
+      <div>
+        <Table columns={responsiveColumns} data={data} revealDroppedColumns>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+  test('lets the user read a dropped column value from a per-row popover', async () => {
+    mockWidth = 400;
+    renderRevealTable();
+
+    // Age (dropAt 500) is no longer shown inline at 400px wide...
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+
+    // ...but each row offers a trigger that reveals it.
+    const triggers = await screen.findAllByRole('button', {
+      name: /show 1 hidden column/i,
+    });
+    await userEvent.click(triggers[0]);
+
+    const popover = screen.getByRole('dialog');
+    expect(within(popover).getByText('Age')).toBeInTheDocument();
+    expect(within(popover).getByText('90')).toBeInTheDocument();
+  });
+
+  test('does not offer the reveal trigger while every column fits', async () => {
+    mockWidth = 1000;
+    renderRevealTable();
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    expect(screen.getByText('Age')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  test('shows no reveal trigger when the feature is not opted into', async () => {
+    mockWidth = 400;
+    renderResponsiveTable();
+
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  test('starts offering the reveal trigger when the feature is enabled while a column is already dropped', async () => {
+    mockWidth = 400;
+    const TogglingTable = () => {
+      const [reveal, setReveal] = useState(false);
+      return (
+        <div>
+          <button type="button" onClick={() => setReveal(true)}>
+            enable reveal
+          </button>
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            revealDroppedColumns={reveal}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>
+        </div>
+      );
+    };
+    render(<TogglingTable />);
+
+    // Age is dropped, but with the feature still off there is no reveal trigger.
+    await waitFor(() =>
+      expect(screen.queryByText('Age')).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByRole('button', { name: /hidden column/i }),
+    ).not.toBeInTheDocument();
+
+    // Turning the feature on — while the same column stays dropped — reveals it.
+    await userEvent.click(
+      screen.getByRole('button', { name: /enable reveal/i }),
+    );
+    expect(
+      await screen.findAllByRole('button', { name: /show 1 hidden column/i }),
+    ).not.toHaveLength(0);
   });
 });

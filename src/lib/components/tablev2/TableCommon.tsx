@@ -1,4 +1,11 @@
-import { ComponentType, Ref, useCallback, useState, forwardRef } from 'react';
+import {
+  ComponentType,
+  Ref,
+  useCallback,
+  useMemo,
+  useState,
+  forwardRef,
+} from 'react';
 import { Row } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
@@ -40,6 +47,16 @@ type VirtualizedRowsType<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
+  /**
+   * Signature of the currently visible columns. Each row is rendered through
+   * `memo(RenderRow, areEqual)`, and react-window's `areEqual` skips the render
+   * when `itemData` is referentially unchanged. react-table keeps the `rows`
+   * array identity stable when only column visibility changes (responsive
+   * `dropAt`), so without this the header would update while the virtualized
+   * body kept its stale cells. Changing this key gives `itemData` a fresh
+   * identity, forcing the visible rows to re-render without remounting the list.
+   */
+  columnsKey?: string;
 };
 
 export const VirtualizedRows = <
@@ -53,43 +70,52 @@ export const VirtualizedRows = <
   RenderRow,
   listRef,
   itemKey,
-}: VirtualizedRowsType<DATA_ROW>) => (
-  <AutoSizer disableWidth>
-    {({ height }) => {
-      return (
-        <List
-          height={height - 1}
-          itemCount={rows.length} // how many items we are going to render
-          itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-          width={'100%'}
-          itemKey={itemKey}
-          itemData={rows}
-          ref={listRef}
-          outerElementType={SmoothScrollDiv}
-          onItemsRendered={({
-            visibleStartIndex,
-            visibleStopIndex,
-            overscanStopIndex,
-          }) => {
-            setHasScrollbar(
-              visibleStopIndex - visibleStartIndex < overscanStopIndex,
-            );
+  columnsKey,
+}: VirtualizedRowsType<DATA_ROW>) => {
+  // Fresh array identity whenever the rows or the visible-column set changes, so
+  // react-window's `areEqual` lets the body re-render in step with the header.
+  // `columnsKey` is deliberately a dependency though it is not read here — it is
+  // the signal that the visible-column set changed.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const itemData = useMemo(() => rows.slice(), [rows, columnsKey]);
+  return (
+    <AutoSizer disableWidth>
+      {({ height }) => {
+        return (
+          <List
+            height={height - 1}
+            itemCount={rows.length} // how many items we are going to render
+            itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
+            width={'100%'}
+            itemKey={itemKey}
+            itemData={itemData}
+            ref={listRef}
+            outerElementType={SmoothScrollDiv}
+            onItemsRendered={({
+              visibleStartIndex,
+              visibleStopIndex,
+              overscanStopIndex,
+            }) => {
+              setHasScrollbar(
+                visibleStopIndex - visibleStartIndex < overscanStopIndex,
+              );
 
-            if (
-              onBottom &&
-              onBottomOffset != null &&
-              overscanStopIndex >= rows.length - 1 - onBottomOffset
-            ) {
-              onBottom(rows.length);
-            }
-          }}
-        >
-          {RenderRow}
-        </List>
-      );
-    }}
-  </AutoSizer>
-);
+              if (
+                onBottom &&
+                onBottomOffset != null &&
+                overscanStopIndex >= rows.length - 1 - onBottomOffset
+              ) {
+                onBottom(rows.length);
+              }
+            }}
+          >
+            {RenderRow}
+          </List>
+        );
+      }}
+    </AutoSizer>
+  );
+};
 
 export const useTableScrollbar = () => {
   const { hasScrollbar, setHasScrollbar } = useTableContext();
@@ -141,9 +167,23 @@ export function TableRows<
   listRef: externalListRef,
 }: TableRowsProps<DATA_ROW>) {
   const { setHasScrollbar } = useTableScrollbar();
-  const { rows, status, entityName, rowHeight, onBottom, onBottomOffset } =
-    useTableContext<DATA_ROW>();
+  const {
+    rows,
+    status,
+    entityName,
+    rowHeight,
+    onBottom,
+    onBottomOffset,
+    headerGroups,
+  } = useTableContext<DATA_ROW>();
   const { bodyRef } = useSyncedScroll<DATA_ROW>();
+
+  // headerGroups only contains visible columns, so this string changes whenever
+  // a responsive column drops or reappears — used to re-sync the virtualized
+  // body with the header (see VirtualizedRows.columnsKey).
+  const columnsKey = headerGroups
+    .map((group) => group.headers.map((header) => header.id).join(','))
+    .join('|');
   const listRef: Ref<FixedSizeList<Row<DATA_ROW>[]>> =
     externalListRef || bodyRef;
 
@@ -178,6 +218,7 @@ export function TableRows<
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}
+            columnsKey={columnsKey}
           />,
         );
       } else {
@@ -200,6 +241,7 @@ export function TableRows<
           itemKey={itemKey}
           rowHeight={rowHeight}
           RenderRow={RenderRow}
+          columnsKey={columnsKey}
         />
       );
     } else {

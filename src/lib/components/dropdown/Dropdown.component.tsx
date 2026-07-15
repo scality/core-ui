@@ -31,6 +31,12 @@ type Props = {
   icon?: JSX.Element;
   caret?: boolean;
   placement?: Placement;
+  /**
+   * Accessible name for the trigger. Set this when the trigger is icon-only
+   * (no visible `text`) so it still has a name; falls back to `title` in that
+   * case. Overrides the label reference the underlying select would set.
+   */
+  'aria-label'?: string;
 };
 const DropdownStyled = styled.div`
   position: relative;
@@ -104,8 +110,12 @@ function Dropdown({
   title,
   caret = true,
   placement = 'bottom',
+  'aria-label': ariaLabel,
   ...rest
 }: Props) {
+  // Fall back to the tooltip text for an icon-only trigger so it still has an
+  // accessible name when the visible label is hidden.
+  const triggerAriaLabel = ariaLabel ?? (icon && !text ? title : undefined);
   const {
     isOpen,
     getToggleButtonProps,
@@ -138,6 +148,9 @@ function Dropdown({
         title={title}
         {...getToggleButtonProps()}
         {...getReferenceProps()}
+        {...(triggerAriaLabel
+          ? { 'aria-label': triggerAriaLabel, 'aria-labelledby': undefined }
+          : {})}
       >
         {icon && (
           <ButtonIcon $text={text} $size={size}>
