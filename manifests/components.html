@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.5s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.6s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -5605,7 +5605,7 @@ title: ReactNode</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Dropdown</h2>
       <div class="badges">
-        <label for="c-15-components-navigation-dropdown-props" class="badge ok as-toggle">8 prop types</label>
+        <label for="c-15-components-navigation-dropdown-props" class="badge ok as-toggle">9 prop types</label>
         <label for="c-15-components-navigation-dropdown-info" class="badge info as-toggle">1 info</label>
         <label for="c-15-components-navigation-dropdown-stories" class="badge ok as-toggle">6 stories</label>
         
@@ -5641,11 +5641,18 @@ title: ReactNode</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">8 prop types</span>
+              <span class="badge ok">9 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/dropdown/Dropdown.component.tsx::Dropdown</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>caret?: boolean = true
+            <pre><code>/**
+ * Accessible name for the trigger. Set this when the trigger is icon-only
+ * (no visible `text`) so it still has a name; falls back to `title` in that
+ * case. Overrides the label reference the underlying select would set.
+ */
+aria-label?: string
+
+caret?: boolean = true
 
 icon?: Element
 
@@ -9940,7 +9947,7 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Navbar</h2>
       <div class="badges">
-        <label for="c-37-components-navigation-navbar-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-37-components-navigation-navbar-props" class="badge ok as-toggle">5 prop types</label>
         <label for="c-37-components-navigation-navbar-info" class="badge info as-toggle">1 info</label>
         <label for="c-37-components-navigation-navbar-stories" class="badge ok as-toggle">7 stories</label>
         
@@ -9976,11 +9983,19 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">4 prop types</span>
+              <span class="badge ok">5 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/navbar/Navbar.component.tsx::Navbar</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>logo?: Element
+            <pre><code>/**
+ * Container width (px) below which right-action labels drop to icon-only
+ * (e.g. the username dropdown shows just its icon). Tabs overflow into a
+ * &quot;More&quot; menu automatically as space runs out, independent of this value.
+ * Defaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.
+ */
+condenseActionsBreakpoint?: number
+
+logo?: Element
 
 onToggleClick?: (() =&gt; void)
 
@@ -9998,7 +10013,7 @@ tabs?: Tab[]</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { InlineInput, Link, Logo, Navbar, Stack } from "@scality/core-ui";</code></pre>
+                <pre><code>import { InlineInput, Logo, Navbar } from "@scality/core-ui";</code></pre>
               </div>
           
           
@@ -10009,11 +10024,20 @@ tabs?: Tab[]</code></pre>
               </div>
               
               
-              <pre><code>const BasicNavbar = () =&gt; &lt;Navbar
+              <pre><code>const BasicNavbar = () =&gt; &lt;Navbar productName=&quot;Hardware UI&quot; logo={&lt;Logo /&gt;} tabs={tabs} rightActions={[]} /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Navbar With Right Actions</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const NavbarWithRightActions = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
-    rightActions={rightActions}
+    logo={&lt;Logo /&gt;}
     tabs={tabs}
-    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
+    rightActions={rightActions} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -10024,49 +10048,40 @@ tabs?: Tab[]</code></pre>
               
               <pre><code>const NavbarWithToggle = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
-    rightActions={rightActions}
-    tabs={tabs}
     logo={&lt;Logo /&gt;}
+    tabs={tabs}
+    rightActions={[themeButton, userAction]}
     onToggleClick={action(&#39;toggle clicked&#39;)} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Navbar With Customized Logo</span>
+                <span class="ex-name">Navbar With Logo</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const NavbarWithCustomizedLogo = () =&gt; &lt;Navbar
+              <pre><code>const NavbarWithLogo = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
-    rightActions={rightActions}
+    logo={(&lt;span
+      style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 8, fontWeight: 700 }}
+    &gt;
+      &lt;i className=&quot;fas fa-cube&quot; /&gt;Acme Cloud
+            &lt;/span&gt;)}
     tabs={tabs}
-    logo={&lt;i className=&quot;fas fa-ring&quot; /&gt;} /&gt;;</code></pre>
+    rightActions={[userAction]} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Navbar With Only Tabs</span>
+                <span class="ex-name">Navbar With Special Tab</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const NavbarWithOnlyTabs = () =&gt; &lt;Navbar
+              <pre><code>const NavbarWithSpecialTab = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
-    rightActions={[rightActions[4]]}
-    tabs={tabs}
-    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
-            </div>
-            <div class="note ok">
-              <div class="row">
-                <span class="ex-name">Navbar With Only Link Tabs</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const NavbarWithOnlyLinkTabs = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
-    rightActions={[rightActions[4]]}
-    tabs={linkTabs}
-    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
+    logo={&lt;Logo /&gt;}
+    tabs={[instanceNameTab, ...tabs]}
+    rightActions={[userAction]} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -10077,6 +10092,8 @@ tabs?: Tab[]</code></pre>
               
               <pre><code>const NavbarWithLongUserName = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
+    logo={&lt;Logo /&gt;}
+    tabs={tabs}
     rightActions={[
       {
         type: &#39;dropdown&#39;,
@@ -10084,109 +10101,20 @@ tabs?: Tab[]</code></pre>
         icon: &lt;i className=&quot;fas fa-user&quot; /&gt;,
         items: [{ label: &#39;Log out&#39;, onClick: action(&#39;Logout clicked&#39;) }],
       },
-    ]}
-    tabs={tabs}
-    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
+    ]} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Navbar Dropdown Showcase</span>
+                <span class="ex-name">Responsive Tab Overflow</span>
                 <span class="badge ok">story ok</span>
               </div>
               
               
-              <pre><code>const NavbarDropdownShowcase = () =&gt; &lt;Navbar
+              <pre><code>const ResponsiveTabOverflow = () =&gt; &lt;Navbar
     productName=&quot;Hardware UI&quot;
-    rightActions={[
-      {
-        type: &#39;dropdown&#39;,
-        text: &#39;Language&#39;,
-        variant: &#39;secondary&#39;,
-        size: &#39;default&#39;,
-        items: [
-          {
-            label: &#39;English&#39;,
-            name: &#39;EN&#39;,
-            onClick: action(&#39;English selected&#39;),
-          },
-          {
-            label: &#39;Français&#39;,
-            name: &#39;FR&#39;,
-            onClick: action(&#39;French selected&#39;),
-          },
-          {
-            label: &#39;Español&#39;,
-            name: &#39;ES&#39;,
-            onClick: action(&#39;Spanish selected&#39;),
-          },
-        ],
-      },
-      {
-        type: &#39;dropdown&#39;,
-        text: &#39;Help&#39;,
-        icon: &lt;i className=&quot;fas fa-question-circle&quot; /&gt;,
-        variant: &#39;outline&#39;,
-        size: &#39;default&#39;,
-        items: [
-          {
-            label: &#39;Documentation&#39;,
-            onClick: action(&#39;Documentation clicked&#39;),
-          },
-          {
-            label: &#39;Tutorials&#39;,
-            onClick: action(&#39;Tutorials clicked&#39;),
-          },
-          {
-            label: &#39;Contact Support&#39;,
-            onClick: action(&#39;Contact Support clicked&#39;),
-          },
-          {
-            label: &#39;Release Notes&#39;,
-            onClick: action(&#39;Release Notes clicked&#39;),
-          },
-        ],
-      },
-      {
-        type: &#39;dropdown&#39;,
-        icon: &lt;i className=&quot;fas fa-user&quot; /&gt;,
-        variant: &#39;primary&#39;,
-        size: &#39;default&#39;,
-        caret: false,
-        items: [
-          {
-            label: &#39;Profile Settings&#39;,
-            onClick: action(&#39;Profile clicked&#39;),
-          },
-          {
-            label: &#39;Preferences&#39;,
-            onClick: action(&#39;Preferences clicked&#39;),
-          },
-          {
-            label: &#39;API Keys&#39;,
-            onClick: action(&#39;API Keys clicked&#39;),
-          },
-          {
-            label: &#39;Log out&#39;,
-            onClick: action(&#39;Logout clicked&#39;),
-          },
-        ],
-      },
-    ]}
-    tabs={[
-      {
-        selected: true,
-        title: &#39;Dashboard&#39;,
-        link: &lt;a href=&quot;/dashboard&quot;&gt;Dashboard&lt;/a&gt;,
-        onClick: action(&#39;Dashboard clicked&#39;),
-      },
-      {
-        selected: false,
-        title: &#39;Analytics&#39;,
-        link: &lt;a href=&quot;/analytics&quot;&gt;Analytics&lt;/a&gt;,
-        onClick: action(&#39;Analytics clicked&#39;),
-      },
-    ]}
-    logo={&lt;Logo /&gt;} /&gt;;</code></pre>
+    logo={&lt;Logo /&gt;}
+    tabs={overflowTabs}
+    rightActions={rightActions} /&gt;;</code></pre>
             </div>
         </div>
     
