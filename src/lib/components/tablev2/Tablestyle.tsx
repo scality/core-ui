@@ -19,13 +19,13 @@ export const SortCaretWrapper = styled.span`
   position: absolute;
 `;
 export const TableHeader = styled.div<{
-  headerHeight?: number | string;
+  $headerHeight?: number | string;
   tabIndex: number | undefined;
 }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: ${(props) => props.headerHeight};
+  height: ${(props) => props.$headerHeight};
   cursor: ${(props) =>
     props.tabIndex !== undefined && props.tabIndex >= 0
       ? 'pointer'
@@ -41,10 +41,10 @@ export const TableHeader = styled.div<{
 `;
 
 type HeadRowType = {
-  hasScrollBar?: boolean;
-  scrollBarWidth: number;
-  rowHeight: TableHeightKeyType;
-  separationLineVariant: TableVariantType;
+  $hasScrollBar?: boolean;
+  $scrollBarWidth: number;
+  $rowHeight: TableHeightKeyType;
+  $separationLineVariant: TableVariantType;
 };
 
 export const HeadRow = styled.div<HeadRowType>`
@@ -54,29 +54,29 @@ export const HeadRow = styled.div<HeadRowType>`
   gap: ${spacing.r16};
   height: 2.286rem;
   width: ${(props) =>
-    props.hasScrollBar
-      ? `calc(100% - ${props.scrollBarWidth}px - ${borderSize} )!important` // -4px for border
+    props.$hasScrollBar
+      ? `calc(100% - ${props.$scrollBarWidth}px - ${borderSize} )!important` // -4px for border
       : `calc(100% - ${borderSize} ) !important`};
-  height: ${(props) => tableRowHeight[props.rowHeight]}rem;
+  height: ${(props) => tableRowHeight[props.$rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};
   font-weight: bold;
   overflow: hidden;
   border-bottom: 1px solid
-    ${(props) => props.theme[props.separationLineVariant]};
+    ${(props) => props.theme[props.$separationLineVariant]};
   padding-left: ${spacing.r16};
 `;
 
 type TableRowType = {
-  isSelected: boolean;
-  selectedId?: string;
-  separationLineVariant: TableVariantType;
+  $isSelected: boolean;
+  $selectedId?: string;
+  $separationLineVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
   color: ${(props) => props.theme.textPrimary};
   gap: ${spacing.r16};
   border-bottom: 1px solid
-    ${(props) => props.theme[props.separationLineVariant]};
+    ${(props) => props.theme[props.$separationLineVariant]};
   cursor: default;
   box-sizing: border-box;
   padding-left: ${spacing.r16};
@@ -84,7 +84,7 @@ export const TableRow = styled.div<TableRowType>`
 
   // single selectable case
   ${(props) => {
-    if (props.selectedId) {
+    if (props.$selectedId) {
       return css`
         &:hover,
         &:focus {
@@ -100,7 +100,7 @@ export const TableRow = styled.div<TableRowType>`
   }}
 
   ${(props) => {
-    if (props.selectedId && props.isSelected) {
+    if (props.$selectedId && props.$isSelected) {
       return css`
         background-color: ${props.theme.highlight};
         box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};
@@ -110,16 +110,16 @@ export const TableRow = styled.div<TableRowType>`
 `;
 
 type TableRowMultiSelectableType = {
-  isSelected: boolean;
-  separationLineVariant: TableVariantType;
+  $isSelected: boolean;
+  $separationLineVariant: TableVariantType;
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
   border-bottom: 1px solid
-    ${(props) => props.theme[props.separationLineVariant]};
+    ${(props) => props.theme[props.$separationLineVariant]};
   box-sizing: border-box;
   ${(props) => {
-    if (props.isSelected) {
+    if (props.$isSelected) {
       return css`
         background-color: ${(props) => props.theme.highlight};
         box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};

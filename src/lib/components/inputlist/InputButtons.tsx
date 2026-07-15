@@ -4,9 +4,9 @@ import { useCallback, useMemo } from 'react';
 import { Box } from '../box/Box';
 import { Icon } from '../icon/Icon.component';
 
-const CustomButton = styled(Button)<{ isVisible?: boolean }>`
+const CustomButton = styled(Button)<{ $isVisible?: boolean }>`
   ${(props) =>
-    !props.isVisible
+    !props.$isVisible
       ? `
         display: none;
     `
@@ -55,7 +55,7 @@ export const AddButton = ({
     <>
       {!isVisible && <Box ml={16} />}
       <CustomButton
-        isVisible={isVisible}
+        $isVisible={isVisible}
         type="button"
         variant="outline"
         disabled={isDisabled}

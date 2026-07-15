@@ -13,18 +13,23 @@ export const Title = styled(EmphaseText)`
   padding: ${spacing.r8};
 `;
 export const ProgressCircle = styled.circle<{
-  circumference: number;
-  percent: number;
+  $circumference: number;
+  $percent: number;
+  $color?: string;
+  $strokeWidth?: number;
 }>`
-  stroke-dasharray: ${({ circumference }) => circumference};
-  stroke-dashoffset: ${({ percent, circumference }) =>
-    ((100 - percent) / 100) * circumference};
-  stroke: ${(props) => props.color || props.theme.statusHealthy};
-  stroke-width: ${(props) => props.strokeWidth};
+  stroke-dasharray: ${({ $circumference }) => $circumference};
+  stroke-dashoffset: ${({ $percent, $circumference }) =>
+    ((100 - $percent) / 100) * $circumference};
+  stroke: ${(props) => props.$color || props.theme.statusHealthy};
+  stroke-width: ${(props) => props.$strokeWidth};
   fill: none;
 `;
-export const BackgroundCircle = styled.circle<{ backgroundColor?: string }>`
+export const BackgroundCircle = styled.circle<{
+  $backgroundColor?: string;
+  $strokeWidth?: number;
+}>`
   fill: none;
-  stroke: ${(props) => props.backgroundColor || props.theme.backgroundLevel1};
-  stroke-width: ${(props) => props.strokeWidth};
+  stroke: ${(props) => props.$backgroundColor || props.theme.backgroundLevel1};
+  stroke-width: ${(props) => props.$strokeWidth};
 `;

@@ -22,13 +22,13 @@ type Props = {
 const ConstrainedTextContainer = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: ${(props) => (props.centered ? 'center' : 'left')};
+  text-align: ${(props) => (props.$centered ? 'center' : 'left')};
 
   ${(props) =>
-    props.lineClamp > 1
+    props.$lineClamp > 1
       ? `
   display: -webkit-box;
-  -webkit-line-clamp: ${props.lineClamp};
+  -webkit-line-clamp: ${props.$lineClamp};
   -webkit-box-orient: vertical;
   overflow-wrap: break-word;
   word-break: normal;
@@ -64,8 +64,8 @@ function getConstrainedTextContainer(
     <ConstrainedTextContainer
       ref={constrainedTextRef}
       className="sc-constrainedtext"
-      lineClamp={lineClamp}
-      centered={centered}
+      $lineClamp={lineClamp}
+      $centered={centered}
     >
       {text}
     </ConstrainedTextContainer>

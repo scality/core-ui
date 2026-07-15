@@ -31,10 +31,10 @@ export type ButtonGroupProps = Omit<
   children: ReactNode;
 };
 
-const ButtonGroupContainer = styled.div<{ orientation: Orientation }>`
+const ButtonGroupContainer = styled.div<{ $orientation: Orientation }>`
   display: inline-flex;
   flex-direction: ${(props) =>
-    props.orientation === 'vertical' ? 'column' : 'row'};
+    props.$orientation === 'vertical' ? 'column' : 'row'};
   align-items: stretch;
   border: ${spacing.r1} solid ${(props) => props.theme.border};
   border-radius: ${spacing.r4};
@@ -65,7 +65,7 @@ const ButtonGroupContainer = styled.div<{ orientation: Orientation }>`
 
   /* A single hairline separator between adjacent buttons. */
   ${(props) =>
-    props.orientation === 'vertical'
+    props.$orientation === 'vertical'
       ? css`
           & > *:not(:last-child) .sc-button {
             border-bottom: ${spacing.r1} solid ${props.theme.border};
@@ -133,7 +133,7 @@ function ButtonGroup({
     <ButtonGroupContainer
       className="sc-button-group"
       role="group"
-      orientation={orientation}
+      $orientation={orientation}
       {...rest}
     >
       {items}

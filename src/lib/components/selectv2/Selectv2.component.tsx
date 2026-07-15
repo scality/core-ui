@@ -6,6 +6,7 @@ import {
   useRef,
   forwardRef,
   ForwardRefExoticComponent,
+  ComponentProps,
   RefAttributes,
   useImperativeHandle,
   ReactNode,
@@ -503,7 +504,15 @@ function SelectBox<
 
   return (
     <ScrollbarWrapper>
-      <>
+      {/* Consume Enter so react-select (which renders a real <input>) doesn't
+          trigger the browser's implicit <form> submission. display:contents
+          keeps this wrapper out of layout — no box, no width/flex impact. */}
+      <div
+        style={{ display: 'contents' }}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') event.preventDefault();
+        }}
+      >
         {options && (
           <SelectStyle
             inputId={id}
@@ -534,7 +543,14 @@ function SelectBox<
             itemsPerScrollWindow={itemsPerScrollWindow}
             onChange={handleChange}
             onInputChange={handleSearchInput}
-            ref={internalSelectRef}
+            // styled-components v6 types the wrapped react-select ref as its
+            // StateManager instance; internalSelectRef is typed against the inner
+            // Select. The runtime ref is unchanged from v5 — this is a type-only cast.
+            ref={
+              internalSelectRef as unknown as ComponentProps<
+                typeof SelectStyle
+              >['ref']
+            }
             isMenuBottom={isMenuBottom}
             setIsMenuBottom={setIsMenuBottom}
             onBlur={rest.onBlur}
@@ -558,7 +574,7 @@ function SelectBox<
             {...rest}
           />
         )}
-      </>
+      </div>
     </ScrollbarWrapper>
   );
 }

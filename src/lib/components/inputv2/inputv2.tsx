@@ -12,9 +12,9 @@ export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   else return '20.5rem';
 };
 
-const StyledInput = styled.input<{ hasIcon: boolean }>`
+const StyledInput = styled.input<{ $hasIcon: boolean }>`
   max-width: ${(props) =>
-    props.hasIcon ? `calc(100% - 1rem - ${spacing.f8})` : '100%'};
+    props.$hasIcon ? `calc(100% - 1rem - ${spacing.f8})` : '100%'};
 
   font-family: 'Lato';
   ${(props) =>
@@ -51,9 +51,9 @@ const StyledInput = styled.input<{ hasIcon: boolean }>`
 `;
 
 const InputContainer = styled.div<{
-  hasError: boolean;
-  disabled: boolean;
-  isContextAvailable: boolean;
+  $hasError: boolean;
+  $disabled: boolean;
+  $isContextAvailable: boolean;
 }>`
   height: 100%;
   display: flex;
@@ -63,7 +63,7 @@ const InputContainer = styled.div<{
   background: ${(props) => props.theme.backgroundLevel1};
   border-radius: ${spacing.r4};
   ${(props) =>
-    props.disabled
+    props.$disabled
       ? css`
           opacity: 0.5;
           cursor: not-allowed;
@@ -72,20 +72,20 @@ const InputContainer = styled.div<{
 `;
 
 const InputBorder = styled.div<{
-  disabled: boolean;
-  hasError: boolean;
-  width: string;
+  $disabled: boolean;
+  $hasError: boolean;
+  $width: string;
 }>`
   box-sizing: border-box;
-  width: ${(props) => props.width};
+  width: ${(props) => props.$width};
   height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
-    props.hasError ? props.theme.statusCritical : props.theme.border};
+    props.$hasError ? props.theme.statusCritical : props.theme.border};
   border-radius: ${spacing.r4};
   &:hover {
     ${(props) =>
-    !props.disabled &&
+    !props.$disabled &&
     `border: ${spacing.r1} solid ${props.theme.infoPrimary};`}
   }
   &:focus-within {
@@ -141,14 +141,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <InputBorder
-        disabled={!!(disabled || disabledFromFieldContext)}
-        hasError={!!(error || errorFromFieldContext)}
-        width={convertSizeToRem(size)}
+        $disabled={!!(disabled || disabledFromFieldContext)}
+        $hasError={!!(error || errorFromFieldContext)}
+        $width={convertSizeToRem(size)}
       >
         <InputContainer
-          isContextAvailable={isContextAvailable}
-          disabled={!!(disabled || disabledFromFieldContext)}
-          hasError={!!(error || errorFromFieldContext)}
+          $isContextAvailable={isContextAvailable}
+          $disabled={!!(disabled || disabledFromFieldContext)}
+          $hasError={!!(error || errorFromFieldContext)}
         >
           {leftIcon && (
             <SelfCenterredIcon name={leftIcon} color={leftIconColor} />
@@ -158,7 +158,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled || disabledFromFieldContext}
             aria-invalid={!!(error || errorFromFieldContext)}
             aria-describedby={`${DESCRIPTION_PREFIX}${id}`}
-            hasIcon={!!(leftIcon || rightIcon)}
+            $hasIcon={!!(leftIcon || rightIcon)}
             id={id}
             {...inputProps}
             placeholder={placeholder}

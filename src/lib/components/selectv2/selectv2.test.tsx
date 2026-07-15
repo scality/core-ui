@@ -220,6 +220,43 @@ describe('SelectV2', () => {
     expect(select).toHaveTextContent('Item 1');
   });
 
+  it('should not trigger implicit form submission when Enter is pressed on a closed Select', async () => {
+    const onSubmit = jest.fn((e) => e.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <SelectWrapper />
+        <button type="submit">Submit</button>
+      </form>,
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    userEvent.tab();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('should not trigger implicit form submission when Enter is pressed on a searchable Select', async () => {
+    const onSubmit = jest.fn((e) => e.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <SelectWrapper>{optionsWithScrollSearchBar}</SelectWrapper>
+        <button type="submit">Submit</button>
+      </form>,
+    );
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+    const select = selectors.select(true);
+    await act(() => userEvent.click(select));
+    const input = selectors.input();
+    await act(() => userEvent.type(input, 'Item 9'));
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    // Enter still selects the highlighted option, it just doesn't submit the form
+    expect(select).toHaveTextContent('Item 9');
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
   it('should scroll to selected value when opening select', async () => {
     render(
       <SelectWrapper value={optionsWithScrollSearchBar[9].props.value}>

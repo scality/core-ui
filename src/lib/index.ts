@@ -22,6 +22,7 @@ export { Layout } from './components/layout/Layout.component';
 export { Drawer } from './components/drawer/Drawer.component';
 export { Loader } from './components/loader/Loader.component';
 export { Modal } from './components/modal/Modal.component';
+export type { ModalAction, ModalActions } from './components/modal/Modal.component';
 export { Navbar } from './components/navbar/Navbar.component';
 export { Notifications } from './components/notifications/Notifications.component';
 export { SearchInput } from './components/searchinput/SearchInput.component';

@@ -2,7 +2,7 @@ import { ComponentType, useState } from 'react';
 import { useMutation, UseMutationOptions } from 'react-query';
 import { useNavigate } from 'react-router';
 import { useTheme } from 'styled-components';
-import { Icon, LargerText, Modal, SecondaryText, Stack, Wrap } from '../..';
+import { Icon, Modal, SecondaryText } from '../..';
 import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
 import { AttachmentAction, AttachmentOperation } from './AttachmentTypes';
@@ -137,37 +137,6 @@ export function AttachmentConfirmationModal<
     handleClose();
     navigate(redirectUrl);
   };
-  const modalFooter = () => {
-    return (
-      <Wrap>
-        <p></p>
-        <>
-          {isAttachNotDone ? (
-            <Stack>
-              <Button variant="outline" onClick={handleClose} label="Cancel" />
-              <Button
-                icon={<Icon name="Arrow-right" />}
-                variant="primary"
-                onClick={attach}
-                label="Confirm"
-                disabled={attachmentMutation.isLoading}
-              />
-            </Stack>
-          ) : (
-            <Button
-              icon={<Icon name="Arrow-right" />}
-              variant="primary"
-              onClick={() => {
-                handleExit();
-              }}
-              label="Exit"
-            />
-          )}
-        </>
-      </Wrap>
-    );
-  };
-
   function AttachmentList() {
     const theme = useTheme();
     const columns: Column<{
@@ -251,7 +220,26 @@ export function AttachmentConfirmationModal<
     ];
 
     return (
-      <div style={{ height: '25rem', width: '50rem' }}>
+      <div
+        style={{
+          height: '25rem',
+          // Shrink below 25rem on short viewports so the whole modal fits and
+          // only the table scrolls internally (avoids a modal + table double
+          // scrollbar).
+          //
+          // Limitation: 16rem is a hand-tuned approximation of the modal chrome
+          // outside this wrapper (viewport margins + header + footer + body
+          // padding). It is coupled to the Modal's internal spacing — if that
+          // spacing changes, this value can drift and the double scrollbar may
+          // reappear on borderline viewport heights. The proper fix is at the
+          // Modal level: make ModalBody a flex column so a single scrolling
+          // child shrinks to fit without a magic number here.
+          maxHeight: 'calc(100vh - 16rem)',
+          width: '50rem',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <div>The following entities will be attached or detached: </div>
         <Box display="flex" gap={24} alignItems="center">
           <SecondaryText>
@@ -259,19 +247,21 @@ export function AttachmentConfirmationModal<
           </SecondaryText>
           <p>{resourceName}</p>
         </Box>
-        <Table
-          columns={columns}
-          data={attachmentOperationsFlat}
-          defaultSortingKey={'entityName'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-            children={(Rows) => {
-              return <>{Rows}</>;
-            }}
-          ></Table.SingleSelectableContent>
-        </Table>
+        <div style={{ flex: 1, minHeight: 0 }}>
+          <Table
+            columns={columns}
+            data={attachmentOperationsFlat}
+            defaultSortingKey={'entityName'}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h32"
+              separationLineVariant="backgroundLevel3"
+              children={(Rows) => {
+                return <>{Rows}</>;
+              }}
+            ></Table.SingleSelectableContent>
+          </Table>
+        </div>
       </div>
     );
   }
@@ -300,15 +290,27 @@ export function AttachmentConfirmationModal<
 
       <Modal
         close={isAttachNotDone ? handleClose : handleExit}
-        footer={modalFooter()}
         isOpen={isModalOpen}
-        title={
-          <Box display="flex" gap={8}>
-            <LargerText>
-              <Icon name="Link" />
-            </LargerText>
-            <LargerText>Attachment</LargerText>
-          </Box>
+        wide
+        title="Attachment"
+        actions={
+          isAttachNotDone
+            ? {
+                cancel: { label: 'Cancel', onClick: handleClose },
+                confirm: {
+                  label: 'Confirm',
+                  icon: 'Arrow-right',
+                  onClick: attach,
+                  disabled: attachmentMutation.isLoading,
+                },
+              }
+            : {
+                confirm: {
+                  label: 'Exit',
+                  icon: 'Arrow-right',
+                  onClick: handleExit,
+                },
+              }
         }
       >
         <AttachmentList />

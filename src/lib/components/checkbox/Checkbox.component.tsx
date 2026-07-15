@@ -35,8 +35,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
   ({ disabled, checked, label, value, onChange, ...rest }, ref) => {
     return (
       <StyledCheckbox
-        checked={checked}
-        disabled={disabled}
+        $disabled={disabled}
         className="sc-checkbox"
       >
         <Stack>
@@ -59,10 +58,9 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
 export { Checkbox };
 
 const StyledCheckbox = styled.label<{
-  disabled?: boolean;
-  checked?: boolean;
+  $disabled?: boolean;
 }>`
-  ${(props) => (props.disabled ? 'opacity: 0.5;' : '')}
+  ${(props) => (props.$disabled ? 'opacity: 0.5;' : '')}
   /* Basic styling */
 
   [type='checkbox'] {
@@ -122,12 +120,12 @@ const StyledCheckbox = styled.label<{
   /* Hover & focus */
   [type='checkbox']:hover {
     ${(props) =>
-      !props.disabled && `background-color: ${props.theme.highlight};`}
+      !props.$disabled && `background-color: ${props.theme.highlight};`}
   }
 
   [type='checkbox']:hover::before {
     ${(props) =>
-      !props.disabled &&
+      !props.$disabled &&
       `box-shadow: inset 0 0 0 ${spacing.r1} ${props.theme.selectedActive};`}
   }
 

@@ -185,8 +185,8 @@ export const MultiSelectableContent = <
         return (
           <TableRowMultiSelectable
             {...rowProps}
-            isSelected={row.isSelected || activeRowId === row.id}
-            separationLineVariant={separationLineVariant}
+            $isSelected={row.isSelected || activeRowId === row.id}
+            $separationLineVariant={separationLineVariant}
             className="tr"
           >
             {row.cells.map((cell) => {
@@ -239,10 +239,10 @@ export const MultiSelectableContent = <
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            hasScrollBar={hasScrollbar}
-            scrollBarWidth={scrollBarWidth}
-            rowHeight={rowHeight}
-            separationLineVariant={separationLineVariant}
+            $hasScrollBar={hasScrollbar}
+            $scrollBarWidth={scrollBarWidth}
+            $rowHeight={rowHeight}
+            $separationLineVariant={separationLineVariant}
             ref={headerRef}
           >
             {headerGroup.headers.map((column) => {

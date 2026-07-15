@@ -26,6 +26,12 @@ type Props = {
   icon?: JSX.Element;
   caret?: boolean;
   placement?: Placement;
+  /**
+   * Accessible name for the trigger. Set this when the trigger is icon-only
+   * (no visible `text`) so it still has a name; falls back to `title` in that
+   * case. Overrides the label reference the underlying select would set.
+   */
+  'aria-label'?: string;
 };
 const DropdownStyled = styled.div`
   position: relative;
@@ -47,7 +53,7 @@ const DropdownMenuStyled = styled.ul`
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-  display: ${(props) => (props.isOpen ? 'auto' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'auto' : 'none')};
 `;
 
 const DropdownMenuItemStyled = styled.li`
@@ -58,7 +64,7 @@ const DropdownMenuItemStyled = styled.li`
   cursor: pointer;
   font-size: ${fontSize.base};
   ${(props) => {
-    return props.isSelected
+    return props.$isSelected
       ? `background-color: ${props.theme.highlight};`
       : `background-color: ${props.theme.backgroundLevel1};`;
   }}
@@ -104,7 +110,7 @@ const ButtonStyled = styled.button`
   }
 
   ${(props) => {
-    switch (props.size) {
+    switch (props.$size) {
       case 'smaller':
         return css`
           padding: 7px 14px;
@@ -149,7 +155,7 @@ const ButtonStyled = styled.button`
   }}
 
   ${(props) => {
-    if (props.variant === 'buttonPrimary') {
+    if (props.$variant === 'buttonPrimary') {
       return css`
         background-color: ${props.theme.buttonPrimary};
         border: 1px solid ${props.theme.buttonPrimary};
@@ -160,7 +166,7 @@ const ButtonStyled = styled.button`
           border: 1px solid ${props.theme.infoPrimary};
         }
       `;
-    } else if (props.variant === 'buttonSecondary') {
+    } else if (props.$variant === 'buttonSecondary') {
       return css`
         background-color: ${props.theme.buttonSecondary};
         border: 1px solid ${props.theme.buttonSecondary};
@@ -170,7 +176,7 @@ const ButtonStyled = styled.button`
           border: 1px solid ${props.theme.infoPrimary};
         }
       `;
-    } else if (props.variant === 'buttonDelete') {
+    } else if (props.$variant === 'buttonDelete') {
       return css`
         background-color: ${props.theme.buttonDelete};
         border: 1px solid ${props.theme.buttonDelete};
@@ -181,7 +187,7 @@ const ButtonStyled = styled.button`
           color: ${props.theme.textPrimary};
         }
       `;
-    } else if (props.variant === 'backgroundLevel1') {
+    } else if (props.$variant === 'backgroundLevel1') {
       return css`
         background-color: ${props.theme.backgroundLevel1};
         color: ${props.theme.textPrimary};
@@ -206,7 +212,7 @@ const ButtonStyled = styled.button`
 
 const ButtonIcon = styled.span`
   ${(props) =>
-    props.text &&
+    props.$text &&
     css`
       padding-right: 8px;
       display: inline-flex;
@@ -221,7 +227,7 @@ const ButtonText = styled.span`
   align-items: center;
 `;
 
-const Trigger = ButtonStyled.withComponent('div');
+const Trigger = styled(ButtonStyled).attrs({ as: 'div' })``;
 const TriggerStyled = styled(Trigger)`
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {
@@ -239,8 +245,12 @@ function Dropdown({
   title,
   caret = true,
   placement = 'bottom',
+  'aria-label': ariaLabel,
   ...rest
 }: Props) {
+  // Fall back to the tooltip text for an icon-only trigger so it still has an
+  // accessible name when the visible label is hidden.
+  const triggerAriaLabel = ariaLabel ?? (icon && !text ? title : undefined);
   const {
     isOpen,
     getToggleButtonProps,
@@ -262,21 +272,23 @@ function Dropdown({
 
   return (
     <DropdownStyled
-      variant={variant}
       className="sc-dropdown"
       {...rest}
       ref={refs.setReference}
     >
       <TriggerStyled
-        variant={variant}
-        size={size}
+        $variant={variant}
+        $size={size}
         className="trigger"
         title={title}
         {...getToggleButtonProps()}
         {...getReferenceProps()}
+        {...(triggerAriaLabel
+          ? { 'aria-label': triggerAriaLabel, 'aria-labelledby': undefined }
+          : {})}
       >
         {icon && (
-          <ButtonIcon text={text} size={size}>
+          <ButtonIcon $text={text} $size={size}>
             {icon}
           </ButtonIcon>
         )}
@@ -289,7 +301,7 @@ function Dropdown({
       </TriggerStyled>
       <DropdownMenuStyled
         className="menu-item"
-        isOpen={isOpen}
+        $isOpen={isOpen}
         style={floatingStyles}
         {...getFloatingProps()}
         {...getMenuProps({ ref: refs.setFloating })}
@@ -299,14 +311,12 @@ function Dropdown({
             <DropdownMenuItemStyled
               className="menu-item-label"
               key={item.label}
-              variant={item.variant}
-              {...item}
               {...getItemProps({
                 item,
                 index,
                 onClick: item.onClick,
               })}
-              isSelected={index === highlightedIndex}
+              $isSelected={index === highlightedIndex}
             >
               {item.label}
             </DropdownMenuItemStyled>

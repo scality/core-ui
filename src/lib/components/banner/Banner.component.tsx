@@ -27,7 +27,7 @@ export type Props = {
   variant: Variant;
 };
 
-const BannerContainer = styled.div<{ variant: Variant }>`
+const BannerContainer = styled.div<{ $variant: Variant }>`
   ${(props) => css`
     color: ${props.theme.textPrimary};
     background-color: ${props.theme.backgroundLevel1};
@@ -42,7 +42,7 @@ const BannerContainer = styled.div<{ variant: Variant }>`
   `}
 `;
 
-const BannerIconContainerStyled = styled.div<{ variant: Variant }>`
+const BannerIconContainerStyled = styled.div<{ $variant: Variant }>`
   ${(props) => css`
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@ function BannerIconContainer({
 }) {
   if (children == null) return null;
   return (
-    <BannerIconContainerStyled variant={variant}>
+    <BannerIconContainerStyled $variant={variant}>
       {children}
     </BannerIconContainerStyled>
   );
@@ -93,7 +93,7 @@ function Banner({ withDefaultIcon = false, icon, title, children, variant, ...re
         : null;
 
   return (
-    <BannerContainer variant={variant}>
+    <BannerContainer $variant={variant}>
       <BannerIconContainer variant={variant}>{iconContent}</BannerIconContainer>
       <TextContainer>
         {title && <Title>{title}</Title>}

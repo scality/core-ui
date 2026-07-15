@@ -29,16 +29,16 @@ export const ChartTooltipContainer = styled.div`
 `;
 
 const TooltipText = styled.div<{
-  isHovered?: boolean;
-  align?: 'left' | 'right';
+  $isHovered?: boolean;
+  $align?: 'left' | 'right';
 }>`
-  color: ${({ theme, isHovered }) =>
-    isHovered ? theme.textPrimary : theme.textSecondary};
+  color: ${({ theme, $isHovered }) =>
+    $isHovered ? theme.textPrimary : theme.textSecondary};
   font-size: ${fontSize.smaller};
-  font-weight: ${({ isHovered }) =>
-    isHovered ? fontWeight.bold : fontWeight.base};
-  text-align: ${({ align }) => align || 'left'};
-  ${({ align }) => align === 'right' && 'flex-shrink: 0;'}
+  font-weight: ${({ $isHovered }) =>
+    $isHovered ? fontWeight.bold : fontWeight.base};
+  text-align: ${({ $align }) => $align || 'left'};
+  ${({ $align }) => $align === 'right' && 'flex-shrink: 0;'}
 `;
 
 const TooltipRow = styled.div`
@@ -73,9 +73,9 @@ export const ChartTooltipItem: React.FC<ChartTooltipItemProps> = ({
   <TooltipRow>
     <TooltipLabel>
       {legendIcon}
-      <TooltipText isHovered={isHovered}>{label}</TooltipText>
+      <TooltipText $isHovered={isHovered}>{label}</TooltipText>
     </TooltipLabel>
-    <TooltipText isHovered={isHovered} align="right">
+    <TooltipText $isHovered={isHovered} $align="right">
       {value}
     </TooltipText>
   </TooltipRow>

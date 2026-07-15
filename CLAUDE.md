@@ -11,7 +11,7 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 ## Tech stack
 
 - **Language:** TypeScript (strict mode, `noImplicitAny` off)
-- **UI:** React 18/19, styled-components v5, styled-system, Floating UI
+- **UI:** React 18/19, styled-components v6, styled-system, Floating UI
 - **Charts:** Recharts
 - **Forms:** react-hook-form
 - **Tables:** react-table v7

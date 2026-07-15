@@ -41,7 +41,6 @@ const TooltipContainer = styled.div`
   display: inline-block;
 `;
 const TooltipOverLayContainer = styled.div<{
-  placement: Position;
   style?: CSSProperties;
 }>`
   display: inline-block;
@@ -122,7 +121,6 @@ function Tooltip({
           <TooltipOverLayContainer
             ref={refs.setFloating}
             className="sc-tooltip-overlay"
-            placement={placement}
             style={{ ...floatingStyles, ...overlayStyle }}
           >
             <TooltipText className="sc-tooltip-overlay-text">

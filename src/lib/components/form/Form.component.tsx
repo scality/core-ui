@@ -45,19 +45,21 @@ type PageFormProps = {
 } & FormProps;
 type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
-const StyledForm = styled.form<PageFormProps | TabFormProps>`
+const StyledForm = styled.form<{
+  $layout: PageFormProps['layout'] | TabFormProps['layout'];
+}>`
   display: flex;
   flex-direction: column;
   align-items: stretch;
   height: 100%;
   background-color: ${(props) =>
-    props.layout.kind === 'page' && props.theme.backgroundLevel4};
+    props.$layout.kind === 'page' && props.theme.backgroundLevel4};
 `;
 
-const BasicPageLayout = styled.div<{ layoutKind: 'page' | 'tab' }>`
+const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
   margin: 0 auto;
   ${(props) =>
-    props.layoutKind === 'page'
+    props.$layoutKind === 'page'
       ? `
   width: 45rem;
   padding-right: ${spacing.f16};
@@ -69,7 +71,7 @@ const BasicPageLayout = styled.div<{ layoutKind: 'page' | 'tab' }>`
 
 const FixedHeader = styled(BasicPageLayout)`
   ${(props) =>
-    props.layoutKind === 'page'
+    props.$layoutKind === 'page'
       ? `
   border-bottom: 1px solid ${props.theme.border};
   `
@@ -279,8 +281,8 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     const requireMode = useContext(RequireModeContext);
     return (
       <ScrollbarWrapper>
-        <StyledForm {...formProps} noValidate ref={ref} layout={layout}>
-          <FixedHeader layoutKind="page">
+        <StyledForm {...formProps} noValidate ref={ref} $layout={layout}>
+          <FixedHeader $layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <Stack direction="vertical">
@@ -310,7 +312,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             </PaddedForHeaderAndFooterContent>
           </FixedHeader>
 
-          <ScrollArea layoutKind="page">
+          <ScrollArea $layoutKind="page">
             <PaddedContent>
               <div
                 style={{
@@ -325,7 +327,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
             </PaddedContent>
           </ScrollArea>
 
-          <FixedFooter layoutKind="page">
+          <FixedFooter $layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
                 <div>{leftActions}</div>
@@ -340,18 +342,18 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
 );
 
 const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
-  ({ leftActions, rightActions, children, banner, ...formProps }, ref) => {
+  ({ layout, leftActions, rightActions, children, banner, ...formProps }, ref) => {
     return (
       <ScrollbarWrapper>
-        <StyledForm {...formProps} noValidate ref={ref}>
-          <FixedHeader layoutKind="tab">
+        <StyledForm {...formProps} noValidate ref={ref} $layout={layout}>
+          <FixedHeader $layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
               <div>{rightActions}</div>
             </Wrap>
           </FixedHeader>
 
-          <ScrollArea layoutKind="tab">
+          <ScrollArea $layoutKind="tab">
             <Stack direction="vertical" gap="r24">
               {banner}
               <Stack direction="vertical" withSeparators gap="r24">
