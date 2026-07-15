@@ -220,7 +220,26 @@ export function AttachmentConfirmationModal<
     ];
 
     return (
-      <div style={{ height: '25rem', width: '50rem' }}>
+      <div
+        style={{
+          height: '25rem',
+          // Shrink below 25rem on short viewports so the whole modal fits and
+          // only the table scrolls internally (avoids a modal + table double
+          // scrollbar).
+          //
+          // Limitation: 16rem is a hand-tuned approximation of the modal chrome
+          // outside this wrapper (viewport margins + header + footer + body
+          // padding). It is coupled to the Modal's internal spacing — if that
+          // spacing changes, this value can drift and the double scrollbar may
+          // reappear on borderline viewport heights. The proper fix is at the
+          // Modal level: make ModalBody a flex column so a single scrolling
+          // child shrinks to fit without a magic number here.
+          maxHeight: 'calc(100vh - 16rem)',
+          width: '50rem',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <div>The following entities will be attached or detached: </div>
         <Box display="flex" gap={24} alignItems="center">
           <SecondaryText>
@@ -228,19 +247,21 @@ export function AttachmentConfirmationModal<
           </SecondaryText>
           <p>{resourceName}</p>
         </Box>
-        <Table
-          columns={columns}
-          data={attachmentOperationsFlat}
-          defaultSortingKey={'entityName'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-            children={(Rows) => {
-              return <>{Rows}</>;
-            }}
-          ></Table.SingleSelectableContent>
-        </Table>
+        <div style={{ flex: 1, minHeight: 0 }}>
+          <Table
+            columns={columns}
+            data={attachmentOperationsFlat}
+            defaultSortingKey={'entityName'}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h32"
+              separationLineVariant="backgroundLevel3"
+              children={(Rows) => {
+                return <>{Rows}</>;
+              }}
+            ></Table.SingleSelectableContent>
+          </Table>
+        </div>
       </div>
     );
   }
