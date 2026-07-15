@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.6s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -839,7 +839,7 @@ The default style of the accordion container only includes padding.
             <pre><code>Props:</code></pre>
             <pre><code>entityName: { plural: string; singular: string; }
 
-filteredEntities: { status: &quot;idle&quot;; } | { status: &quot;loading&quot; | &quot;error&quot;; data?: { number: number; entities: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;[]; } | undefined; } | { status: &quot;success&quot;; data: { number: number; entities: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;[]; }; }
+filteredEntities: { status: &quot;idle&quot;; } | { status: &quot;error&quot; | &quot;loading&quot;; data?: { number: number; entities: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;[]; } | undefined; } | { status: &quot;success&quot;; data: { number: number; entities: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;[]; }; }
 
 getNameQuery?: ((entity: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;) =&gt; UseQueryOptions&lt;unknown, unknown, string, QueryKey&gt;)
 
@@ -847,7 +847,7 @@ initialAttachmentOperations: AttachmentOperation&lt;ENTITY_TYPE, ENTITY&gt;[]
 
 initiallyAttachedEntities: AttachableEntity&lt;ENTITY_TYPE, ENTITY&gt;[]
 
-initiallyAttachedEntitiesStatus: &quot;loading&quot; | &quot;error&quot; | &quot;idle&quot; | &quot;success&quot;
+initiallyAttachedEntitiesStatus: &quot;error&quot; | &quot;idle&quot; | &quot;loading&quot; | &quot;success&quot;
 
 onAttachmentsOperationsChanged: (attachmentOperations: AttachmentOperation&lt;ENTITY_TYPE, ENTITY&gt;[]) =&gt; void
 
@@ -2293,7 +2293,7 @@ unitRange?: UnitRange</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Box</h2>
       <div class="badges">
-        <label for="c-4-components-styling-box-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-4-components-styling-box-props" class="badge ok as-toggle">4 prop types</label>
         <label for="c-4-components-styling-box-info" class="badge info as-toggle">1 info</label>
         <label for="c-4-components-styling-box-stories" class="badge ok as-toggle">4 stories</label>
         
@@ -2329,19 +2329,17 @@ unitRange?: UnitRange</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">5 prop types</span>
+              <span class="badge ok">4 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/box/Box.ts::Box</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>as?: undefined
+            <pre><code>as?: any
 
-forwardedAs?: undefined
+forwardedAs?: any
 
-gap?: string | number
+style?: any
 
-ref?: ((instance: HTMLDivElement | null) =&gt; void) | RefObject&lt;HTMLDivElement&gt; | null
-
-theme?: DefaultTheme</code></pre>
+theme?: any</code></pre>
           </div>
         </div>
     
@@ -8944,7 +8942,7 @@ size?: InputSize</code></pre>
               
               <pre><code>const Default = () =&gt; &lt;LateralNavbarLayout
     sidebar={{
-      ...DefaultSidebar,
+      ...DefaultSidebar.args,
       actions: sideBarActions,
     }}&gt;&lt;Loader size=&quot;massive&quot; /&gt;&lt;/LateralNavbarLayout&gt;;</code></pre>
             </div>
@@ -10024,7 +10022,7 @@ tabs?: Tab[]</code></pre>
               </div>
               
               
-              <pre><code>const BasicNavbar = () =&gt; &lt;Navbar productName=&quot;Hardware UI&quot; logo={&lt;Logo /&gt;} tabs={tabs} rightActions={[]} /&gt;;</code></pre>
+              <pre><code>const BasicNavbar = () =&gt; &lt;Navbar logo={&lt;Logo /&gt;} tabs={tabs} rightActions={[]} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -10033,11 +10031,7 @@ tabs?: Tab[]</code></pre>
               </div>
               
               
-              <pre><code>const NavbarWithRightActions = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
-    logo={&lt;Logo /&gt;}
-    tabs={tabs}
-    rightActions={rightActions} /&gt;;</code></pre>
+              <pre><code>const NavbarWithRightActions = () =&gt; &lt;Navbar logo={&lt;Logo /&gt;} tabs={tabs} rightActions={rightActions} /&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -10047,7 +10041,6 @@ tabs?: Tab[]</code></pre>
               
               
               <pre><code>const NavbarWithToggle = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
     logo={&lt;Logo /&gt;}
     tabs={tabs}
     rightActions={[themeButton, userAction]}
@@ -10061,7 +10054,6 @@ tabs?: Tab[]</code></pre>
               
               
               <pre><code>const NavbarWithLogo = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
     logo={(&lt;span
       style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 8, fontWeight: 700 }}
     &gt;
@@ -10078,7 +10070,6 @@ tabs?: Tab[]</code></pre>
               
               
               <pre><code>const NavbarWithSpecialTab = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
     logo={&lt;Logo /&gt;}
     tabs={[instanceNameTab, ...tabs]}
     rightActions={[userAction]} /&gt;;</code></pre>
@@ -10091,7 +10082,6 @@ tabs?: Tab[]</code></pre>
               
               
               <pre><code>const NavbarWithLongUserName = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
     logo={&lt;Logo /&gt;}
     tabs={tabs}
     rightActions={[
@@ -10110,11 +10100,7 @@ tabs?: Tab[]</code></pre>
               </div>
               
               
-              <pre><code>const ResponsiveTabOverflow = () =&gt; &lt;Navbar
-    productName=&quot;Hardware UI&quot;
-    logo={&lt;Logo /&gt;}
-    tabs={overflowTabs}
-    rightActions={rightActions} /&gt;;</code></pre>
+              <pre><code>const ResponsiveTabOverflow = () =&gt; &lt;Navbar logo={&lt;Logo /&gt;} tabs={overflowTabs} rightActions={rightActions} /&gt;;</code></pre>
             </div>
         </div>
     
@@ -13868,7 +13854,7 @@ revealDroppedColumns?: boolean = false
 
 sortTypes?: Record&lt;string, SortByFn&lt;DATA_ROW&gt;&gt;
 
-status?: &quot;loading&quot; | &quot;error&quot; | &quot;idle&quot; | &quot;success&quot;
+status?: &quot;error&quot; | &quot;idle&quot; | &quot;loading&quot; | &quot;success&quot;
 
 updateTableData?: (&lt;DATA_ROW_KEY extends keyof DATA_ROW&gt;(rowId: string, columnName: DATA_ROW_KEY, value: DATA_ROW[DATA_ROW_KEY]) =&gt; void)</code></pre>
           </div>
@@ -16147,7 +16133,7 @@ name?: { en: { singular: string; plural: string; }; fr?: { singular: string; plu
 
 rowHeight?: TableHeightKeyType
 
-status: &quot;loading&quot; | &quot;error&quot; | &quot;idle&quot; | &quot;noResult&quot;</code></pre>
+status: &quot;error&quot; | &quot;idle&quot; | &quot;loading&quot; | &quot;noResult&quot;</code></pre>
           </div>
         </div>
     
