@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">333 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">340 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -799,7 +799,7 @@ The default style of the accordion container only includes padding.
       <div class="badges">
         <label for="c-1-components-attachmenttable-props" class="badge ok as-toggle">9 prop types</label>
         <label for="c-1-components-attachmenttable-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-components-attachmenttable-stories" class="badge ok as-toggle">2 stories</label>
+        <label for="c-1-components-attachmenttable-stories" class="badge ok as-toggle">3 stories</label>
         
         
       </div>
@@ -865,7 +865,14 @@ searchEntityPlaceholder: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { AttachmentProvider, AttachmentTable, Box } from "@scality/core-ui";</code></pre>
+                <pre><code>import {
+    AttachmentConfirmationModal,
+    AttachmentProvider,
+    AttachmentTable,
+    Box,
+    Icon,
+} from "@scality/core-ui";
+import { MemoryRouter } from "react-router";</code></pre>
               </div>
           
           
@@ -944,6 +951,51 @@ searchEntityPlaceholder: string</code></pre>
         /&gt;
       &lt;/AttachmentProvider&gt;
     &lt;/Box&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Confirmation Modal</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ConfirmationModal = () =&gt; {
+  const theme = useTheme();
+  // Enough rows to exceed the modal body height: the table must scroll
+  // internally, the modal itself must not gain a scrollbar.
+  const attachmentOperations: AttachmentOperation&lt;string&gt;[] = Array.from(
+    { length: 24 },
+    (_, index) =&gt; ({
+      action: index % 4 === 0 ? AttachmentAction.REMOVE : AttachmentAction.ADD,
+      entity: {
+        name: `bucket-${String(index + 1).padStart(2, &#39;0&#39;)}`,
+        id: `id-${index + 1}`,
+        type: &#39;Bucket&#39;,
+      },
+    }),
+  );
+  return (
+    &lt;MemoryRouter&gt;
+      &lt;Box
+        style={{ height: &#39;100%&#39;, backgroundColor: theme.backgroundLevel4 }}
+        p={&#39;2rem&#39;}
+      &gt;
+        &lt;p&gt;Click “Save” to open the attachment confirmation modal.&lt;/p&gt;
+        &lt;AttachmentConfirmationModal
+          attachmentOperations={attachmentOperations}
+          getAttachmentMutationOptions={() =&gt; ({
+            mutationFn: () =&gt;
+              new Promise&lt;void&gt;((resolve) =&gt; setTimeout(resolve, 800)),
+          })}
+          resourceType=&quot;storage-account&quot;
+          resourceName=&quot;my-storage-account&quot;
+          redirectUrl=&quot;/&quot;
+          EntityIcon={ConfirmationEntityIcon}
+        /&gt;
+      &lt;/Box&gt;
+    &lt;/MemoryRouter&gt;
   );
 };</code></pre>
             </div>
@@ -9587,14 +9639,14 @@ size?: Size = SIZE.large</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Modal</h2>
       <div class="badges">
-        <label for="c-36-components-feedback-modal-props" class="badge ok as-toggle">6 prop types</label>
+        <label for="c-36-components-feedback-modal-props" class="badge ok as-toggle">8 prop types</label>
         <label for="c-36-components-feedback-modal-info" class="badge info as-toggle">1 info</label>
-        <label for="c-36-components-feedback-modal-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-36-components-feedback-modal-stories" class="badge ok as-toggle">10 stories</label>
         <label for="c-36-components-feedback-modal-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
     </div>
-    <div class="meta" title="./stories/modal.stories.tsx">components-feedback-modal · ./stories/modal.stories.tsx</div>
+    <div class="meta" title="./stories/Modal/modal.stories.tsx">components-feedback-modal · ./stories/Modal/modal.stories.tsx</div>
     
     
     
@@ -9623,12 +9675,24 @@ size?: Size = SIZE.large</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">6 prop types</span>
+              <span class="badge ok">8 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/modal/Modal.component.tsx::Modal</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>close?: (() =&gt; void)
+            <pre><code>/**
+ * Structured footer actions (preferred over `footer`).
+ */
+actions?: ModalActions
 
+close?: (() =&gt; void)
+
+/**
+ * Free-form footer content. Required on this branch — a modal must expose a
+ * footer, so callers not using `actions` have to provide one here.
+ * @deprecated Use `actions` instead. `footer` accepts arbitrary content
+ * and bypasses the documented stack/alignment guideline; it will be
+ * removed in a future major release.
+ */
 footer?: ReactNode
 
 isOpen: boolean
@@ -9637,7 +9701,21 @@ role?: &quot;alertdialog&quot; | &quot;dialog&quot; = dialog
 
 subTitle?: ReactNode
 
-title: ReactNode</code></pre>
+/**
+ * Modal title — always a short text string that mirrors the verb of the
+ * action that opened the modal (a &quot;Delete node&quot; button opens a modal
+ * titled &quot;Delete node?&quot;). The string is used as the accessible name
+ * (`aria-labelledby`); non-string content breaks screen-reader
+ * announcement.
+ */
+title: string | number | boolean | ReactElement&lt;any, string | JSXElementConstructor&lt;any&gt;&gt; | Iterable&lt;ReactNode&gt; | ReactPortal | null | undefined
+
+/**
+ * When true, the modal sizes to its content (up to 90vw) instead of
+ * capping body content at 480px. Use for tables, complex forms, or any
+ * content that needs more horizontal space.
+ */
+wide?: boolean</code></pre>
           </div>
         </div>
     
@@ -9649,7 +9727,7 @@ title: ReactNode</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Button, Icon, IconHelp, Modal, Stack, Table, Wrapper } from "@scality/core-ui";</code></pre>
+                <pre><code>import { Button, Icon, IconHelp, InfoMessage, Input, Modal, Stack, Table, Wrapper } from "@scality/core-ui";</code></pre>
               </div>
           
           
@@ -9672,22 +9750,18 @@ title: ReactNode</code></pre>
             &lt;Modal
                 close={() =&gt; updateArgs({ isOpen: false })}
                 isOpen={isOpen}
-                footer={
-                  &lt;FooterActions&gt;
-                    &lt;Button
-                      label=&quot;Cancel&quot;
-                      variant=&quot;outline&quot;
-                      onClick={() =&gt; updateArgs({ isOpen: false })}
-                    /&gt;
-                    &lt;Button
-                      variant=&quot;primary&quot;
-                      label=&quot;Save changes&quot;
-                      icon={&lt;Icon name=&quot;Save&quot; /&gt;}
-                      onClick={action(&#39;Save changes clicked&#39;)}
-                    /&gt;
-                  &lt;/FooterActions&gt;
-                }
-                title=&quot;Edit settings&quot;&gt;&lt;span&gt;Make your changes below.&lt;/span&gt;&lt;/Modal&gt;
+                actions={{
+                  cancel: {
+                    onClick: () =&gt; updateArgs({ isOpen: false }),
+                  },
+                  confirm: {
+                    label: &#39;Save changes&#39;,
+                    icon: &#39;Save&#39;,
+                    onClick: action(&#39;Save changes clicked&#39;),
+                  },
+                }}
+                title=&quot;Edit settings&quot;
+                wide={false}&gt;&lt;span&gt;Make your changes below.&lt;/span&gt;&lt;/Modal&gt;
         &lt;/&gt;
     );
 };</code></pre>
@@ -9712,25 +9786,123 @@ title: ReactNode</code></pre>
             &lt;Modal
                 role=&quot;alertdialog&quot;
                 isOpen={isOpen}
-                footer={
-                  &lt;FooterActions&gt;
-                    &lt;Button
-                      label=&quot;Cancel&quot;
-                      variant=&quot;outline&quot;
-                      onClick={() =&gt; updateArgs({ isOpen: false })}
-                    /&gt;
-                    &lt;Button
-                      variant=&quot;danger&quot;
-                      label=&quot;Delete node&quot;
-                      icon={&lt;Icon name=&quot;Delete&quot; /&gt;}
-                      onClick={action(&#39;Delete node clicked&#39;)}
-                    /&gt;
-                  &lt;/FooterActions&gt;
-                }
-                title=&quot;Delete node?&quot;&gt;&lt;span&gt;
+                actions={{
+                  cancel: {
+                    onClick: () =&gt; updateArgs({ isOpen: false }),
+                  },
+                  confirm: {
+                    label: &#39;Delete node&#39;,
+                    variant: &#39;danger&#39;,
+                    icon: &#39;Delete&#39;,
+                    onClick: action(&#39;Delete node clicked&#39;),
+                  },
+                }}
+                title=&quot;Delete node?&quot;
+                wide={false}&gt;&lt;span&gt;
                     &lt;strong&gt;my-node-name&lt;/strong&gt;will be permanently deleted, this action
                             is irreversible.
                           &lt;/span&gt;&lt;/Modal&gt;
+        &lt;/&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Destructive With Acknowledgement</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A destructive modal whose `confirm` stays disabled until the user acknowledges the risk. The disabled `confirm` carries a `tooltip` explaining why it can&#39;t be used yet — the main reason a `ModalAction` accepts a tooltip.</div>
+              <pre><code>const DestructiveWithAcknowledgement = () =&gt; {
+    const [{ isOpen }, updateArgs] = useArgs();
+    const [acknowledged, setAcknowledged] = useState(false);
+    const close = () =&gt; {
+      setAcknowledged(false);
+      updateArgs({ isOpen: false });
+    };
+
+    return (
+        &lt;&gt;
+            &lt;Button
+                onClick={() =&gt; updateArgs({ isOpen: true })}
+                label=&quot;Delete bucket&quot;
+                variant=&quot;danger&quot;
+                icon={&lt;Icon name=&quot;Delete&quot; /&gt;} /&gt;
+            &lt;Modal
+                role=&quot;alertdialog&quot;
+                isOpen={isOpen}
+                actions={{
+                  cancel: { onClick: close },
+                  confirm: {
+                    label: &#39;Delete bucket&#39;,
+                    variant: &#39;danger&#39;,
+                    icon: &#39;Delete&#39;,
+                    disabled: !acknowledged,
+                    tooltip: acknowledged
+                      ? undefined
+                      : {
+                          overlay: &#39;Accept the risk before deleting&#39;,
+                          placement: &#39;top&#39;,
+                        },
+                    onClick: () =&gt; {
+                      action(&#39;Delete bucket clicked&#39;)();
+                      close();
+                    },
+                  },
+                }}
+                title=&quot;Delete bucket?&quot;&gt;
+                &lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+                    &lt;span&gt;Deleting &lt;strong&gt;my-bucket&lt;/strong&gt;permanently removes all of its
+                                      objects. This action cannot be undone.
+                                    &lt;/span&gt;
+                    &lt;label style={{ display: &#39;flex&#39;, gap: &#39;8px&#39;, alignItems: &#39;center&#39; }}&gt;
+                        &lt;input
+                            type=&quot;checkbox&quot;
+                            checked={acknowledged}
+                            onChange={(e) =&gt; setAcknowledged(e.target.checked)} /&gt;I understand this action is irreversible.
+                                    &lt;/label&gt;
+                &lt;/Stack&gt;
+            &lt;/Modal&gt;
+        &lt;/&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Extra Action</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">Exercises all three action slots, all right-aligned: `extra` (secondary variant) is the leftmost of the group, then `cancel` (outline), then `confirm` (primary, rightmost). Also the alignment regression case — with or without `extra`, the group must hug the right edge.</div>
+              <pre><code>const WithExtraAction = () =&gt; {
+    const [{ isOpen }, updateArgs] = useArgs();
+
+    return (
+        &lt;&gt;
+            &lt;Button
+                onClick={() =&gt; updateArgs({ isOpen: true })}
+                label={&#39;Open modal&#39;}
+                variant=&quot;primary&quot; /&gt;
+            &lt;Modal
+                close={() =&gt; updateArgs({ isOpen: false })}
+                isOpen={isOpen}
+                actions={{
+                  extra: {
+                    label: &#39;Learn more&#39;,
+                    icon: &#39;External-link&#39;,
+                    onClick: action(&#39;Learn more clicked&#39;),
+                  },
+                  cancel: {
+                    onClick: () =&gt; updateArgs({ isOpen: false }),
+                  },
+                  confirm: {
+                    label: &#39;Save changes&#39;,
+                    icon: &#39;Save&#39;,
+                    onClick: action(&#39;Save changes clicked&#39;),
+                  },
+                }}
+                title=&quot;Edit settings&quot;
+                wide={false}&gt;&lt;span&gt;Make your changes below.&lt;/span&gt;&lt;/Modal&gt;
         &lt;/&gt;
     );
 };</code></pre>
@@ -9804,6 +9976,186 @@ title: ReactNode</code></pre>
   );
 };</code></pre>
             </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Long Text Content</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithLongTextContent = () =&gt; {
+    const [{ isOpen }, updateArgs] = useArgs();
+
+    return (
+        &lt;&gt;
+            &lt;Button
+                onClick={() =&gt; updateArgs({ isOpen: true })}
+                label=&quot;Open modal&quot;
+                variant=&quot;primary&quot; /&gt;
+            &lt;Modal
+                close={() =&gt; updateArgs({ isOpen: false })}
+                isOpen={isOpen}
+                actions={{
+                  cancel: {
+                    onClick: () =&gt; updateArgs({ isOpen: false }),
+                  },
+                  confirm: {
+                    label: &#39;Save&#39;,
+                    icon: &#39;Save&#39;,
+                    onClick: action(&#39;Save clicked&#39;),
+                  },
+                }}
+                title=&quot;Edit bucket name&quot;
+                wide={false}&gt;&lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+                    &lt;InfoMessage
+                        title=&quot;Naming restrictions&quot;
+                        content=&quot;Bucket names must be between 3 and 63 characters long and can only contain lowercase letters, numbers, and hyphens. They must start and end with a letter or number, cannot contain consecutive hyphens, and cannot look like an IP address (e.g. 192.168.1.1).&quot; /&gt;
+                    &lt;Input id=&quot;bucket-name&quot; placeholder=&quot;my-bucket-name&quot; /&gt;
+                &lt;/Stack&gt;&lt;/Modal&gt;
+        &lt;/&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Table Content</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithTableContent = () =&gt; {
+    const [{ isOpen }, updateArgs] = useArgs();
+
+    return (
+        &lt;&gt;
+            &lt;Button
+                onClick={() =&gt; updateArgs({ isOpen: true })}
+                label=&quot;View nodes&quot;
+                variant=&quot;primary&quot; /&gt;
+            &lt;Modal
+                wide
+                close={() =&gt; updateArgs({ isOpen: false })}
+                isOpen={isOpen}
+                actions={{
+                  confirm: {
+                    label: &#39;Close&#39;,
+                    onClick: () =&gt; updateArgs({ isOpen: false }),
+                  },
+                }}
+                title=&quot;Storage nodes&quot;&gt;
+                &lt;div style={{ height: &#39;280px&#39; }}&gt;
+                    &lt;Table columns={NODE_COLUMNS} data={NODE_DATA} defaultSortingKey=&quot;name&quot;&gt;
+                        &lt;Table.SingleSelectableContent rowHeight=&quot;h32&quot; separationLineVariant=&quot;backgroundLevel3&quot; /&gt;
+                    &lt;/Table&gt;
+                &lt;/div&gt;
+            &lt;/Modal&gt;
+        &lt;/&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Legacy Footer Prop</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">Demonstrates the deprecated `footer` prop. Existing call sites can keep using `footer` until they migrate to the structured `actions` prop. New code should prefer `actions`.</div>
+              <pre><code>const LegacyFooterProp = () =&gt; {
+    const [{ isOpen }, updateArgs] = useArgs();
+
+    return (
+        &lt;&gt;
+            &lt;Button
+                onClick={() =&gt; updateArgs({ isOpen: true })}
+                label={&#39;Open modal (legacy footer)&#39;}
+                variant=&quot;primary&quot; /&gt;
+            &lt;Modal
+                close={() =&gt; updateArgs({ isOpen: false })}
+                isOpen={isOpen}
+                footer={
+                  &lt;Stack gap=&quot;r8&quot; style={{ justifyContent: &#39;flex-end&#39; }}&gt;
+                    &lt;Button
+                      label=&quot;Cancel&quot;
+                      variant=&quot;outline&quot;
+                      onClick={() =&gt; updateArgs({ isOpen: false })}
+                    /&gt;
+                    &lt;Button
+                      variant=&quot;primary&quot;
+                      label=&quot;Save&quot;
+                      onClick={action(&#39;Save clicked&#39;)}
+                    /&gt;
+                  &lt;/Stack&gt;
+                }
+                title=&quot;Edit settings&quot;
+                wide={false}&gt;&lt;span&gt;Make your changes below.&lt;/span&gt;&lt;/Modal&gt;
+        &lt;/&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Width Layout Cases</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">Width layout stress-tests. Each button opens a modal with a different content type so you can verify the 480 px default / 90 vw max rules in one place.</div>
+              <pre><code>const WidthLayoutCases = () =&gt; (
+  &lt;Stack gap=&quot;r16&quot;&gt;
+    {/* 1. Short text — modal should stay at 480px minimum */}
+    &lt;ModalStory label=&quot;Short text&quot; title=&quot;Short text&quot;&gt;
+      &lt;span&gt;Just a short sentence.&lt;/span&gt;
+    &lt;/ModalStory&gt;
+
+    {/* 2. Long text / form — should wrap at 480px, never push wider */}
+    &lt;ModalStory label=&quot;Long text + input&quot; title=&quot;Edit bucket&quot;&gt;
+      &lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+        &lt;InfoMessage
+          title=&quot;Naming restrictions&quot;
+          content=&quot;Bucket names must be between 3 and 63 characters long and can only contain lowercase letters, numbers, and hyphens. They must start and end with a letter or number, cannot contain consecutive hyphens, and cannot look like an IP address (e.g. 192.168.1.1).&quot;
+        /&gt;
+        &lt;InfoMessage
+          title=&quot;Region note&quot;
+          content=&quot;The bucket region cannot be changed after creation. Make sure to select the correct region before proceeding with the configuration.&quot;
+        /&gt;
+        &lt;Input id=&quot;bucket-name&quot; placeholder=&quot;my-bucket-name&quot; /&gt;
+        &lt;Input id=&quot;bucket-region&quot; placeholder=&quot;eu-west-1&quot; /&gt;
+      &lt;/Stack&gt;
+    &lt;/ModalStory&gt;
+
+    {/* 3. Native HTML &lt;table&gt; — wide: modal sizes to table content */}
+    &lt;ModalStory wide label=&quot;Native table&quot; title=&quot;Storage nodes (HTML table)&quot;&gt;
+      {HTML_TABLE}
+    &lt;/ModalStory&gt;
+
+    {/* 4. Core-UI Table — wide: modal sizes to table content */}
+    &lt;ModalStory wide label=&quot;Core-UI table&quot; title=&quot;Storage nodes (core-ui Table)&quot;&gt;
+      {CORE_UI_TABLE}
+    &lt;/ModalStory&gt;
+
+    {/* 5. Core-UI Table nested inside multiple wrappers — wide */}
+    &lt;ModalStory wide label=&quot;Nested table&quot; title=&quot;Storage nodes (nested wrappers)&quot;&gt;
+      &lt;div&gt;
+        &lt;div style={{ padding: &#39;8px&#39; }}&gt;
+          &lt;div&gt;
+            {CORE_UI_TABLE}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/ModalStory&gt;
+
+    {/* 6. Text above a core-UI table — wide: table drives width, text fills it */}
+    &lt;ModalStory wide label=&quot;Text + table&quot; title=&quot;Mixed content&quot;&gt;
+      &lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+        &lt;InfoMessage
+          title=&quot;Review before confirming&quot;
+          content=&quot;The following nodes will be affected by this operation. Make sure all nodes are healthy before proceeding.&quot;
+        /&gt;
+        {CORE_UI_TABLE}
+      &lt;/Stack&gt;
+    &lt;/ModalStory&gt;
+  &lt;/Stack&gt;
+);</code></pre>
+            </div>
         </div>
     
         <div class="panel panel-docs">
@@ -9814,7 +10166,7 @@ title: ReactNode</code></pre>
                 <span class="ex-name">Guideline</span>
                 <span class="badge ok">doc ok</span>
               </div>
-              <div class="hint">./stories/modal.guideline.mdx</div>
+              <div class="hint">./stories/Modal/modal.guideline.mdx</div>
               
               <div class="mdx-content"><pre><code>import { Meta, Canvas, Controls } from &#39;@storybook/addon-docs/blocks&#39;;
 import * as ModalStories from &#39;./modal.stories&#39;;
