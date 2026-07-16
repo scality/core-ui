@@ -104,6 +104,46 @@ const ScrollArea = styled(BasicPageLayout)`
   overflow-y: auto;
 `;
 
+const FieldRow = styled.div<{
+  $direction: 'vertical' | 'horizontal';
+  $responsive?: boolean;
+  $flipAt?: number;
+}>`
+  display: flex;
+  flex-direction: ${({ $direction }) =>
+    $direction === 'horizontal' ? 'row' : 'column'};
+  align-items: baseline;
+  gap: ${({ $direction }) =>
+    $direction === 'horizontal' ? spacing.r32 : spacing.r4};
+  ${({ $responsive }) =>
+    $responsive &&
+    css`
+      min-width: 0;
+    `}
+  ${({ $flipAt }) =>
+    $flipAt &&
+    css`
+      @container responsive (max-width: ${$flipAt}px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: ${spacing.r4};
+      }
+    `}
+`;
+
+const FieldLabelBox = styled.div<{ $width: string; $flipAt?: number }>`
+  width: ${({ $width }) => $width};
+  flex: none;
+  ${({ $flipAt }) =>
+    $flipAt &&
+    css`
+      @container responsive (max-width: ${$flipAt}px) {
+        width: auto;
+        flex: initial;
+      }
+    `}
+`;
+
 const LabelContext = createContext<{
   maxLabelWidth: number;
   setMaxLabelWidth: (setter: (value: number) => number) => void;
@@ -177,17 +217,10 @@ const FormGroup = ({
 
   return (
     <FieldContext.Provider value={value}>
-      <Box
-        display="flex"
-        flexDirection={direction === 'horizontal' ? 'row' : 'column'}
-        alignItems="baseline"
-        gap={direction === 'horizontal' ? spacing['r32'] : spacing['r4']}
-      >
-        <div
-          style={{
-            width: maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`,
-            flex: 'none',
-          }}
+      <FieldRow $direction={direction} $responsive={responsive} $flipAt={flipAt}>
+        <FieldLabelBox
+          $width={maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`}
+          $flipAt={flipAt}
         >
           <label
             htmlFor={id}
@@ -213,10 +246,11 @@ const FormGroup = ({
               </Box>
             )}
           </label>
-        </div>
+        </FieldLabelBox>
         <Stack
           direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
           gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
+          style={responsive ? { minWidth: 0 } : undefined}
         >
           {content}
           {error ? (
@@ -235,7 +269,7 @@ const FormGroup = ({
             </HelperText>
           )}
         </Stack>
-      </Box>
+      </FieldRow>
     </FieldContext.Provider>
   );
 };

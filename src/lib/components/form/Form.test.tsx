@@ -58,4 +58,22 @@ describe('Form', () => {
     await act(() => userEvent.click(screen.getByText('Submit')));
     expect(onSubmit).toHaveBeenCalled();
   });
+
+  it('keeps the labelled field visible and usable with responsive shrink and flipAt', async () => {
+    render(
+      <Form layout={{ kind: 'tab' }} responsive flipAt={400}>
+        <FormSection>
+          <FormGroup
+            id="email-field"
+            label="Email"
+            content={<input type="text" id="email-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+    expect(screen.getByText('Email')).toBeVisible();
+    const input = screen.getByRole('textbox');
+    await act(() => userEvent.type(input, 'x@y.z'));
+    expect(input).toHaveValue('x@y.z');
+  });
 });
