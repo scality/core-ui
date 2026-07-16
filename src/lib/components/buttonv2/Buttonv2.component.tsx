@@ -314,6 +314,18 @@ function Button({
     );
   }
 
+  if (
+    iconOnly &&
+    label &&
+    typeof label !== 'string' &&
+    !(rest as { 'aria-label'?: string })['aria-label'] &&
+    !tooltip?.overlay
+  ) {
+    console.warn(
+      'Button: `iconOnly` collapses a non-string label, which leaves the button with no accessible name. Pass a string label, an `aria-label`, or a `tooltip.overlay`.',
+    );
+  }
+
   const alwaysCollapsed = iconOnly === true;
   const collapseAt = typeof iconOnly === 'number' ? iconOnly : undefined;
 

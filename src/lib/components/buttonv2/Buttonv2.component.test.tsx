@@ -35,4 +35,46 @@ describe('Button iconOnly', () => {
     );
     expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument();
   });
+
+  it('warns when collapsing a non-string label that leaves no accessible name', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      render(
+        <Button
+          variant="primary"
+          icon={<span aria-hidden>+</span>}
+          label={<span>Create</span>}
+          iconOnly
+        />,
+        { wrapper: Wrapper },
+      );
+      expect(warn).toHaveBeenCalledWith(
+        expect.stringContaining('no accessible name'),
+      );
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it('does not warn when a non-string label is collapsed but an aria-label is provided', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      render(
+        <Button
+          variant="primary"
+          icon={<span aria-hidden>+</span>}
+          label={<span>Create</span>}
+          iconOnly
+          aria-label="Create"
+        />,
+        { wrapper: Wrapper },
+      );
+      expect(warn).not.toHaveBeenCalled();
+      expect(
+        screen.getByRole('button', { name: 'Create' }),
+      ).toBeInTheDocument();
+    } finally {
+      warn.mockRestore();
+    }
+  });
 });
