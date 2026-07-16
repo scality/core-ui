@@ -75,9 +75,16 @@ const InputBorder = styled.div<{
   $disabled: boolean;
   $hasError: boolean;
   $width: string;
+  $fluid: boolean;
 }>`
   box-sizing: border-box;
   width: ${(props) => props.$width};
+  ${(props) =>
+    props.$fluid &&
+    css`
+      max-width: 100%;
+      min-width: 0;
+    `}
   height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
@@ -109,6 +116,7 @@ export type InputProps = {
   rightIconColor?: keyof CoreUITheme;
   size?: InputSize;
   noPlaceholderPrefix?: boolean;
+  fluid?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -124,6 +132,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       size,
       noPlaceholderPrefix,
+      fluid,
       ...inputProps
     },
     ref,
@@ -132,7 +141,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       isContextAvailable,
       disabled: disabledFromFieldContext,
       error: errorFromFieldContext,
+      responsive: responsiveFromFieldContext,
     } = useFieldContext();
+    const isFluid = !!(fluid || responsiveFromFieldContext);
     placeholder = placeholder
       ? noPlaceholderPrefix
         ? placeholder
@@ -144,6 +155,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         $disabled={!!(disabled || disabledFromFieldContext)}
         $hasError={!!(error || errorFromFieldContext)}
         $width={convertSizeToRem(size)}
+        $fluid={isFluid}
       >
         <InputContainer
           $isContextAvailable={isContextAvailable}
