@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 import {
   layout,
@@ -35,11 +35,17 @@ export type BoxComponentProps = LayoutProps &
   BackgroundProps &
   BordersProps &
   TypographyProps &
-  ShadowProps & { gap?: string | number };
+  ShadowProps & { gap?: string | number; container?: boolean };
 
 const Box = styled.div.withConfig({
-  shouldForwardProp: (prop) => shouldForwardProp(prop),
+  shouldForwardProp: (prop) => prop !== 'container' && shouldForwardProp(prop),
 })<BoxComponentProps>`
+  ${({ container }) =>
+    container &&
+    css`
+      container-type: inline-size;
+      container-name: responsive;
+    `}
   ${layout}
   ${flexbox}
   ${grid}

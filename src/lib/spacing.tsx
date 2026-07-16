@@ -67,6 +67,7 @@ export const Stack = ({
   direction?: 'vertical' | 'horizontal';
   withSeparators?: boolean;
   children: ReactNode[];
+  container?: boolean;
 } & HTMLAttributes<HTMLDivElement>) => {
   gap = gap || 'r8';
   direction = direction || 'horizontal';
