@@ -75,6 +75,7 @@ export const ButtonStyled = styled.button<ButtonStyledTransientProps>`
   font-size: ${fontSize.base};
   border-radius: ${spacing.r4};
   white-space: nowrap;
+  cursor: pointer;
   height: ${(props) => (props.$size === 'inline' ? spacing.r24 : spacing.r32)};
   ${(props) => {
     const brand = props.theme;
