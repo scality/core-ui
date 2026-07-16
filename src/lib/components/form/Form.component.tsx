@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { convertRemToPixels } from '../../utils';
 import { Box } from '../box/Box';
@@ -33,6 +33,8 @@ type FormProps = Omit<
   leftActions?: ReactNode;
   rightActions?: ReactNode;
   banner?: ReactNode;
+  responsive?: boolean;
+  flipAt?: number;
 };
 
 type PageFormProps = {
@@ -47,6 +49,7 @@ type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
 const StyledForm = styled.form<{
   $layout: PageFormProps['layout'] | TabFormProps['layout'];
+  $flipAt?: number;
 }>`
   display: flex;
   flex-direction: column;
@@ -54,6 +57,12 @@ const StyledForm = styled.form<{
   height: 100%;
   background-color: ${(props) =>
     props.$layout.kind === 'page' && props.theme.backgroundLevel4};
+  ${({ $flipAt }) =>
+    $flipAt &&
+    css`
+      container-type: inline-size;
+      container-name: responsive;
+    `}
 `;
 
 const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
@@ -102,6 +111,11 @@ const LabelContext = createContext<{
 
 const RequireModeContext = createContext<'all' | 'partial'>('partial');
 
+const FormResponsiveContext = createContext<{
+  responsive: boolean;
+  flipAt?: number;
+}>({ responsive: false });
+
 type ContentProps = {
   helper: string;
   error: string;
@@ -140,6 +154,7 @@ const FormGroup = ({
 
   const { maxLabelWidth, setMaxLabelWidth } = ctxt;
   const requireMode = useContext(RequireModeContext);
+  const { responsive, flipAt } = useContext(FormResponsiveContext);
   const labelRef = useRef<HTMLLabelElement | null>(null);
   useEffect(() => {
     if (labelRef.current) {
@@ -157,6 +172,7 @@ const FormGroup = ({
   const value = {
     disabled: disabled || false,
     error: error || undefined,
+    responsive,
   };
 
   return (
@@ -279,9 +295,16 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     ref,
   ) => {
     const requireMode = useContext(RequireModeContext);
+    const { flipAt } = useContext(FormResponsiveContext);
     return (
       <ScrollbarWrapper>
-        <StyledForm {...formProps} noValidate ref={ref} $layout={layout}>
+        <StyledForm
+          {...formProps}
+          noValidate
+          ref={ref}
+          $layout={layout}
+          $flipAt={flipAt}
+        >
           <FixedHeader $layoutKind="page">
             <PaddedForHeaderAndFooterContent>
               <Wrap>
@@ -343,9 +366,16 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
 
 const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
   ({ layout, leftActions, rightActions, children, banner, ...formProps }, ref) => {
+    const { flipAt } = useContext(FormResponsiveContext);
     return (
       <ScrollbarWrapper>
-        <StyledForm {...formProps} noValidate ref={ref} $layout={layout}>
+        <StyledForm
+          {...formProps}
+          noValidate
+          ref={ref}
+          $layout={layout}
+          $flipAt={flipAt}
+        >
           <FixedHeader $layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
@@ -368,14 +398,18 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
 );
 
 const Form = forwardRef<HTMLFormElement, TabFormProps | PageFormProps>(
-  ({ layout, requireMode, ...formProps }, ref) => {
+  ({ layout, requireMode, responsive, flipAt, ...formProps }, ref) => {
     return (
       <RequireModeContext.Provider value={requireMode || 'partial'}>
-        {layout.kind === 'page' ? (
-          <PageForm layout={layout} {...formProps} ref={ref}></PageForm>
-        ) : (
-          <TabForm layout={layout} {...formProps} ref={ref}></TabForm>
-        )}
+        <FormResponsiveContext.Provider
+          value={{ responsive: !!responsive, flipAt }}
+        >
+          {layout.kind === 'page' ? (
+            <PageForm layout={layout} {...formProps} ref={ref}></PageForm>
+          ) : (
+            <TabForm layout={layout} {...formProps} ref={ref}></TabForm>
+          )}
+        </FormResponsiveContext.Provider>
       </RequireModeContext.Provider>
     );
   },
@@ -385,6 +419,7 @@ type FieldState = {
   error?: string;
   disabled?: boolean;
   required?: boolean;
+  responsive?: boolean;
 };
 const FieldContext = createContext<null | FieldState>(null);
 
