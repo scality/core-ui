@@ -281,6 +281,8 @@ export const ButtonIcon = styled.span<{
 export const ButtonLoader = styled(Loader)<{
   $label?: React.ReactNode;
   $variant?: ButtonStyledProps['variant'];
+  $collapseAt?: number;
+  $alwaysCollapsed?: boolean;
 }>`
   ${(props) => {
     return css`
@@ -294,6 +296,18 @@ export const ButtonLoader = styled(Loader)<{
       }
     `;
   }}
+  ${({ $alwaysCollapsed }) =>
+    $alwaysCollapsed &&
+    css`
+      margin-right: 0;
+    `}
+  ${({ $collapseAt }) =>
+    $collapseAt &&
+    css`
+      @container responsive (max-width: ${$collapseAt}px) {
+        margin-right: 0;
+      }
+    `}
 `;
 
 function Button({
@@ -366,7 +380,13 @@ function Button({
       >
         {icon &&
           (isLoading ? (
-            <ButtonLoader size="small" $variant={variant} $label={label} />
+            <ButtonLoader
+              size="small"
+              $variant={variant}
+              $label={label}
+              $collapseAt={collapseAt}
+              $alwaysCollapsed={alwaysCollapsed}
+            />
           ) : (
             <ButtonIcon
               $label={label}
