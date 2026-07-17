@@ -33,7 +33,19 @@ type FormProps = Omit<
   leftActions?: ReactNode;
   rightActions?: ReactNode;
   banner?: ReactNode;
+  /**
+   * Makes contained fields fluid: their `size`-derived width becomes a
+   * preferred width that shrinks to fit the column (capped at `max-width: 100%`)
+   * instead of overflowing. Note: only `Input` currently honors this — `Select`,
+   * `SearchInput`, `TextArea` and other size-driven field content keep their
+   * fixed width for now (tracked in CUI-36). Flex ancestors between the Form and
+   * the field must allow shrinking (`min-width: 0`) for this to take effect.
+   */
   responsive?: boolean;
+  /**
+   * Below this width (px), horizontal field rows flip to a stacked column
+   * layout via a `@container` query. Vertical `FormGroup`s are left untouched.
+   */
   flipAt?: number;
 };
 
@@ -201,6 +213,9 @@ const FormGroup = ({
   const { maxLabelWidth, setMaxLabelWidth } = ctxt;
   const requireMode = useContext(RequireModeContext);
   const { responsive, flipAt } = useContext(FormResponsiveContext);
+  // The row→column flip only makes sense for horizontal rows; a vertical
+  // FormGroup is already stacked and must keep its label-column alignment.
+  const rowFlipAt = direction === 'horizontal' ? flipAt : undefined;
   const labelRef = useRef<HTMLLabelElement | null>(null);
   useEffect(() => {
     if (labelRef.current) {
@@ -223,10 +238,14 @@ const FormGroup = ({
 
   return (
     <FieldContext.Provider value={value}>
-      <FieldRow $direction={direction} $responsive={responsive} $flipAt={flipAt}>
+      <FieldRow
+        $direction={direction}
+        $responsive={responsive}
+        $flipAt={rowFlipAt}
+      >
         <FieldLabelBox
           $width={maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`}
-          $flipAt={flipAt}
+          $flipAt={rowFlipAt}
         >
           <label
             htmlFor={id}
