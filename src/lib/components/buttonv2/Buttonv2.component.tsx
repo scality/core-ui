@@ -319,10 +319,10 @@ function Button({
     label &&
     typeof label !== 'string' &&
     !(rest as { 'aria-label'?: string })['aria-label'] &&
-    !tooltip?.overlay
+    typeof tooltip?.overlay !== 'string'
   ) {
     console.warn(
-      'Button: `iconOnly` collapses a non-string label, which leaves the button with no accessible name. Pass a string label, an `aria-label`, or a `tooltip.overlay`.',
+      'Button: `iconOnly` collapses a non-string label, which leaves the button with no accessible name. Pass a string label, an `aria-label`, or a string `tooltip.overlay`.',
     );
   }
 
@@ -330,10 +330,15 @@ function Button({
   const collapseAt = typeof iconOnly === 'number' ? iconOnly : undefined;
 
   // When collapsing a labelled button, the visible label may be CSS-hidden, so
-  // pin the accessible name from the (string) label unless one was passed explicitly.
+  // pin the accessible name unless one was passed explicitly: prefer a string
+  // label, otherwise fall back to a string tooltip overlay.
   const labelDrivenAriaLabel =
-    iconOnly && typeof label === 'string' && !(rest as { 'aria-label'?: string })['aria-label']
-      ? label
+    iconOnly && !(rest as { 'aria-label'?: string })['aria-label']
+      ? typeof label === 'string'
+        ? label
+        : typeof tooltip?.overlay === 'string'
+          ? tooltip.overlay
+          : undefined
       : undefined;
 
   // For icon-only buttons, use tooltip.overlay as aria-label (typed as string for IconOnlyButton)

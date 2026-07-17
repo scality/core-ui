@@ -56,6 +56,49 @@ describe('Button iconOnly', () => {
     }
   });
 
+  it('uses a string tooltip overlay as the accessible name when a non-string label is collapsed', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      render(
+        <Button
+          variant="primary"
+          icon={<span aria-hidden>+</span>}
+          label={<span>Create</span>}
+          iconOnly
+          tooltip={{ overlay: 'Create' }}
+        />,
+        { wrapper: Wrapper },
+      );
+      expect(warn).not.toHaveBeenCalled();
+      expect(
+        screen.getByRole('button', { name: 'Create' }),
+      ).toBeInTheDocument();
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it('warns when a non-string label is collapsed with only a non-string tooltip overlay', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      render(
+        <Button
+          variant="primary"
+          icon={<span aria-hidden>+</span>}
+          label={<span>Create</span>}
+          iconOnly
+          tooltip={{ overlay: <span>Create</span> }}
+        />,
+        { wrapper: Wrapper },
+      );
+      expect(warn).toHaveBeenCalledWith(
+        expect.stringContaining('no accessible name'),
+      );
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
   it('does not warn when a non-string label is collapsed but an aria-label is provided', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     try {
