@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -2651,7 +2651,7 @@ theme?: any</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Button</h2>
       <div class="badges">
-        <label for="c-6-components-button-props" class="badge ok as-toggle">6 prop types</label>
+        <label for="c-6-components-button-props" class="badge ok as-toggle">7 prop types</label>
         <label for="c-6-components-button-info" class="badge info as-toggle">1 info</label>
         <label for="c-6-components-button-stories" class="badge ok as-toggle">14 stories</label>
         <label for="c-6-components-button-docs" class="badge ok as-toggle">1 doc</label>
@@ -2687,11 +2687,16 @@ theme?: any</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">6 prop types</span>
+              <span class="badge ok">7 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/buttonv2/Buttonv2.component.tsx::Button</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>icon?: ReactNode
+
+/**
+ * Collapse to icon-only: true = always; number = below N px (needs a `responsive` container ancestor); omit = never.
+ */
+iconOnly?: number | boolean
 
 isLoading?: boolean
 
@@ -5317,7 +5322,7 @@ tooltipStyle?: any</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> CopyButton</h2>
       <div class="badges">
-        <label for="c-13-components-copybutton-props" class="badge ok as-toggle">7 prop types</label>
+        <label for="c-13-components-copybutton-props" class="badge ok as-toggle">8 prop types</label>
         <label for="c-13-components-copybutton-info" class="badge info as-toggle">1 info</label>
         <label for="c-13-components-copybutton-stories" class="badge ok as-toggle">5 stories</label>
         
@@ -5353,13 +5358,18 @@ tooltipStyle?: any</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">7 prop types</span>
+              <span class="badge ok">8 prop types</span>
             </div>
             <pre><code>Component: src/lib/next.ts::CopyButton</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>copyAsHtml?: boolean
 
 icon?: ReactNode
+
+/**
+ * Collapse to icon-only: true = always; number = below N px (needs a `responsive` container ancestor); omit = never.
+ */
+iconOnly?: number | boolean
 
 isLoading?: boolean
 
