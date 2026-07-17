@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getWrapper } from '../../testUtils';
 import { Button } from './Buttonv2.component';
@@ -76,6 +76,41 @@ describe('Button iconOnly', () => {
     } finally {
       warn.mockRestore();
     }
+  });
+
+  it('reveals its label in a tooltip on hover when collapsed to icon-only', async () => {
+    render(
+      <Button
+        variant="primary"
+        icon={<span aria-hidden>+</span>}
+        label="Create"
+        iconOnly
+      />,
+      { wrapper: Wrapper },
+    );
+    // Only the button's own (CSS-hidden) label is present before hover.
+    expect(screen.getAllByText('Create')).toHaveLength(1);
+    await userEvent.hover(screen.getByRole('button', { name: 'Create' }));
+    await waitFor(() =>
+      expect(screen.getAllByText('Create').length).toBeGreaterThan(1),
+    );
+  });
+
+  it('lets an explicit tooltip override the label as the hover hint', async () => {
+    render(
+      <Button
+        variant="primary"
+        icon={<span aria-hidden>+</span>}
+        label="Create"
+        iconOnly
+        tooltip={{ overlay: 'Create a new item' }}
+      />,
+      { wrapper: Wrapper },
+    );
+    await userEvent.hover(screen.getByRole('button', { name: 'Create' }));
+    await waitFor(() =>
+      expect(screen.getByText('Create a new item')).toBeVisible(),
+    );
   });
 
   it('warns when a non-string label is collapsed with only a non-string tooltip overlay', () => {

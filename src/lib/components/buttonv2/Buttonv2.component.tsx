@@ -361,11 +361,15 @@ function Button({
       ? (tooltip.overlay as string)
       : labelDrivenAriaLabel;
 
+  // An `iconOnly` button hides its label, so it must always offer a hover hint.
+  // An explicit tooltip wins; otherwise fall back to the label itself.
+  const tooltipOverlay = tooltip?.overlay ?? (iconOnly ? label : undefined);
+
   return (
     <Tooltip
-      placement={tooltip ? tooltip.placement : undefined}
-      overlay={tooltip && tooltip.overlay}
-      overlayStyle={tooltip && tooltip.overlayStyle}
+      placement={tooltip?.placement}
+      overlay={tooltipOverlay}
+      overlayStyle={tooltip?.overlayStyle}
     >
       <ButtonStyled
         className="sc-button"
