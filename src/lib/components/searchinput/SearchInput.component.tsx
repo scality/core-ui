@@ -19,8 +19,7 @@ export type Props = {
   searchIconColor?: keyof CoreUITheme;
 };
 const SearchInputContainer = styled.div<{
-  docked?: boolean;
-  disabled?: boolean;
+  $disabled?: boolean;
 }>`
   position: relative;
   width: max-content;
@@ -34,7 +33,7 @@ const SearchInputContainer = styled.div<{
   }
 
   ${(props) => {
-    if (props.disabled) {
+    if (props.$disabled) {
       return css`
         i {
           opacity: 0.3;
@@ -106,7 +105,7 @@ const SearchInput = forwardRef(
     return (
       <SearchInputContainer
         className="sc-searchinput"
-        disabled={disabled}
+        $disabled={disabled}
         {...rest}
       >
         <Input

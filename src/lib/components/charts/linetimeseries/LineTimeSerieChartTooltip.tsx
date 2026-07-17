@@ -81,9 +81,9 @@ export const LineTimeSerieChartTooltip: React.FC<
             return sortedPayload.map((entry, index) => {
               const legendIcon = (
                 <LegendShape
-                  color={entry.color}
-                  shape="line"
-                  chartColors={{ [entry.color]: entry.color }}
+                  $color={entry.color}
+                  $shape="line"
+                  $chartColors={{ [entry.color]: entry.color }}
                 />
               );
 

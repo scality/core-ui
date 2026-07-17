@@ -1,13 +1,8 @@
 // @ts-nocheck
-import styled from 'styled-components';
-import {
-  ButtonStyled,
-  ButtonIcon,
-  ButtonText,
-} from '../button/Button.component';
+import styled, { css } from 'styled-components';
 import { zIndex } from '../../style/theme';
 import { spacing } from '../../spacing';
-import { fontSize } from '../../style/theme';
+import { fontSize, fontWeight } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import { useSelect } from 'downshift';
@@ -31,6 +26,12 @@ type Props = {
   icon?: JSX.Element;
   caret?: boolean;
   placement?: Placement;
+  /**
+   * Accessible name for the trigger. Set this when the trigger is icon-only
+   * (no visible `text`) so it still has a name; falls back to `title` in that
+   * case. Overrides the label reference the underlying select would set.
+   */
+  'aria-label'?: string;
 };
 const DropdownStyled = styled.div`
   position: relative;
@@ -52,7 +53,7 @@ const DropdownMenuStyled = styled.ul`
   max-height: 200px;
   min-width: 100%;
   overflow: auto;
-  display: ${(props) => (props.isOpen ? 'auto' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'auto' : 'none')};
 `;
 
 const DropdownMenuItemStyled = styled.li`
@@ -63,7 +64,7 @@ const DropdownMenuItemStyled = styled.li`
   cursor: pointer;
   font-size: ${fontSize.base};
   ${(props) => {
-    return props.isSelected
+    return props.$isSelected
       ? `background-color: ${props.theme.highlight};`
       : `background-color: ${props.theme.backgroundLevel1};`;
   }}
@@ -86,7 +87,147 @@ const DropdownMenuItemStyled = styled.li`
 const Caret = styled.span`
   margin-left: ${spacing.r16};
 `;
-const Trigger = ButtonStyled.withComponent('div');
+
+const ButtonStyled = styled.button`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  display: inline-flex;
+  user-select: none;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  font-weight: ${fontWeight.base};
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    cursor: pointer;
+  }
+
+  ${(props) => {
+    switch (props.$size) {
+      case 'smaller':
+        return css`
+          padding: 7px 14px;
+          font-size: ${fontSize.smaller};
+          border-radius: 4px;
+          height: 27px;
+        `;
+
+      case 'small':
+        return css`
+          padding: 8px 16px;
+          font-size: ${fontSize.small};
+          border-radius: 5px;
+          height: 30px;
+        `;
+
+      case 'large':
+        return css`
+          padding: 10px 20px;
+          font-size: ${fontSize.large};
+          border-radius: 7px;
+          height: 40px;
+        `;
+
+      case 'larger':
+        return css`
+          padding: 11px 22px;
+          font-size: ${fontSize.larger};
+          border-radius: 8px;
+          height: 48px;
+        `;
+
+      case 'base':
+      default:
+        return css`
+          padding: 12px 16px;
+          font-size: ${fontSize.base};
+          border-radius: 6px;
+          height: 32px;
+        `;
+    }
+  }}
+
+  ${(props) => {
+    if (props.$variant === 'buttonPrimary') {
+      return css`
+        background-color: ${props.theme.buttonPrimary};
+        border: 1px solid ${props.theme.buttonPrimary};
+        color: ${props.theme.textPrimary};
+        &:hover {
+          background-color: ${props.theme.highlight};
+          outline: none;
+          border: 1px solid ${props.theme.infoPrimary};
+        }
+      `;
+    } else if (props.$variant === 'buttonSecondary') {
+      return css`
+        background-color: ${props.theme.buttonSecondary};
+        border: 1px solid ${props.theme.buttonSecondary};
+        color: ${props.theme.textPrimary};
+        &:hover {
+          background-color: ${props.theme.infoPrimary};
+          border: 1px solid ${props.theme.infoPrimary};
+        }
+      `;
+    } else if (props.$variant === 'buttonDelete') {
+      return css`
+        background-color: ${props.theme.buttonDelete};
+        border: 1px solid ${props.theme.buttonDelete};
+        color: ${props.theme.statusCritical};
+        &:hover {
+          background-color: ${props.theme.statusCritical};
+          border: 1px solid ${props.theme.infoPrimary};
+          color: ${props.theme.textPrimary};
+        }
+      `;
+    } else if (props.$variant === 'backgroundLevel1') {
+      return css`
+        background-color: ${props.theme.backgroundLevel1};
+        color: ${props.theme.textPrimary};
+        &:hover {
+          background-color: ${props.theme.highlight};
+        }
+      `;
+    } else {
+      return css`
+        background-color: ${props.theme.backgroundLevel1};
+        border: 1px solid ${props.theme.backgroundLevel1};
+        color: ${props.theme.statusCritical};
+        &:hover {
+          background-color: ${props.theme.backgroundLevel1};
+          border: 1px solid ${props.theme.infoPrimary};
+          color: ${props.theme.textPrimary};
+        }
+      `;
+    }
+  }}
+`;
+
+const ButtonIcon = styled.span`
+  ${(props) =>
+    props.$text &&
+    css`
+      padding-right: 8px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    `}
+`;
+
+const ButtonText = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Trigger = styled(ButtonStyled).attrs({ as: 'div' })``;
 const TriggerStyled = styled(Trigger)`
   // :focus-visible is the keyboard-only version of :focus
   &:focus-visible {
@@ -104,8 +245,12 @@ function Dropdown({
   title,
   caret = true,
   placement = 'bottom',
+  'aria-label': ariaLabel,
   ...rest
 }: Props) {
+  // Fall back to the tooltip text for an icon-only trigger so it still has an
+  // accessible name when the visible label is hidden.
+  const triggerAriaLabel = ariaLabel ?? (icon && !text ? title : undefined);
   const {
     isOpen,
     getToggleButtonProps,
@@ -127,21 +272,23 @@ function Dropdown({
 
   return (
     <DropdownStyled
-      variant={variant}
       className="sc-dropdown"
       {...rest}
       ref={refs.setReference}
     >
       <TriggerStyled
-        variant={variant}
-        size={size}
+        $variant={variant}
+        $size={size}
         className="trigger"
         title={title}
         {...getToggleButtonProps()}
         {...getReferenceProps()}
+        {...(triggerAriaLabel
+          ? { 'aria-label': triggerAriaLabel, 'aria-labelledby': undefined }
+          : {})}
       >
         {icon && (
-          <ButtonIcon text={text} size={size}>
+          <ButtonIcon $text={text} $size={size}>
             {icon}
           </ButtonIcon>
         )}
@@ -154,7 +301,7 @@ function Dropdown({
       </TriggerStyled>
       <DropdownMenuStyled
         className="menu-item"
-        isOpen={isOpen}
+        $isOpen={isOpen}
         style={floatingStyles}
         {...getFloatingProps()}
         {...getMenuProps({ ref: refs.setFloating })}
@@ -164,14 +311,12 @@ function Dropdown({
             <DropdownMenuItemStyled
               className="menu-item-label"
               key={item.label}
-              variant={item.variant}
-              {...item}
               {...getItemProps({
                 item,
                 index,
                 onClick: item.onClick,
               })}
-              isSelected={index === highlightedIndex}
+              $isSelected={index === highlightedIndex}
             >
               {item.label}
             </DropdownMenuItemStyled>

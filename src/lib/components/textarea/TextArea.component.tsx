@@ -25,16 +25,16 @@ type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 type RefType = HTMLTextAreaElement | null;
 
 const TextAreaContainer = styled.textarea<{
-  variant: TextAreaVariant;
-  width?: CSSProperties['width'];
-  height?: CSSProperties['height'];
-  autoGrow?: boolean;
+  $variant: TextAreaVariant;
+  $width?: CSSProperties['width'];
+  $height?: CSSProperties['height'];
+  $autoGrow?: boolean;
 }>`
   padding: ${spacing.r12} ${spacing.r8};
   border-radius: 4px;
-  resize: ${(props) => (props.autoGrow ? 'none' : 'vertical')};
+  resize: ${(props) => (props.$autoGrow ? 'none' : 'vertical')};
   font-family: ${(props) =>
-    props.variant === 'code' ? 'Courier New' : 'Lato'};
+    props.$variant === 'code' ? 'Courier New' : 'Lato'};
   font-size: ${spacing.f14};
 
   ${(props) =>
@@ -45,19 +45,19 @@ const TextAreaContainer = styled.textarea<{
     `}
 
   ${(props) =>
-    props.width &&
+    props.$width &&
     css`
-      width: ${props.width};
-    `}
-    
-  ${(props) =>
-    props.height &&
-    css`
-      height: ${props.height};
+      width: ${props.$width};
     `}
 
   ${(props) =>
-    props.autoGrow &&
+    props.$height &&
+    css`
+      height: ${props.$height};
+    `}
+
+  ${(props) =>
+    props.$autoGrow &&
     css`
       overflow: hidden;
       box-sizing: border-box;
@@ -147,10 +147,10 @@ function TextAreaElement(
     return (
       <TextAreaContainer
         className="sc-textarea"
-        width={width}
-        height={height}
-        variant={variant}
-        autoGrow={autoGrow}
+        $width={width}
+        $height={height}
+        $variant={variant}
+        $autoGrow={autoGrow}
         value={value}
         defaultValue={defaultValue}
         onChange={handleChange}
@@ -165,8 +165,8 @@ function TextAreaElement(
       className="sc-textarea"
       rows={rows}
       cols={cols}
-      variant={variant}
-      autoGrow={autoGrow}
+      $variant={variant}
+      $autoGrow={autoGrow}
       value={value}
       defaultValue={defaultValue}
       onChange={handleChange}

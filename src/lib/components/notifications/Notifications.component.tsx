@@ -19,12 +19,12 @@ type Props = {
   notifications: Array<NotificationProps>;
   onDismiss: (arg0: string) => void;
 };
-const NotificationsContainer = styled.div<{ position?: Position }>`
+const NotificationsContainer = styled.div<{ $position?: Position }>`
   position: fixed;
   z-index: ${zIndex.notification};
   margin: ${spacing.r24};
   ${(props) => {
-    switch (props.position) {
+    switch (props.$position) {
       case TOP_LEFT:
         return css`
           top: 0;
@@ -56,7 +56,7 @@ function Notifications({ position, notifications, onDismiss, ...rest }: Props) {
   return (
     <NotificationsContainer
       className="sc-notifications"
-      position={position}
+      $position={position}
       {...rest}
     >
       {notifications.map((notification) => (

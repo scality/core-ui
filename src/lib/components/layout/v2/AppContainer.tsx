@@ -21,10 +21,10 @@ const FillAvailableFlexBox = styled.div`
 const sectionDistance = spacing.r2;
 
 const ContextWrapper = styled.div<{
-  background?: ThemeColors;
+  $background?: ThemeColors;
 }>`
   background: ${(props) =>
-    props.background ? props.theme[props.background] : 'initial'};
+    props.$background ? props.theme[props.$background] : 'initial'};
   height: 2.5rem;
   min-height: 2.5rem;
   max-height: 2.5rem;
@@ -42,23 +42,23 @@ const ContextContainer = ({
   background?: ThemeColors;
   children: ReactElement | ReactElement[];
 }) => (
-  <ContextWrapper background={background}>
+  <ContextWrapper $background={background}>
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </ContextWrapper>
 );
 
 const OverallSummaryContainer = styled.div<{
-  noPadding?: boolean;
-  hasTopMargin?: boolean;
-  noBottomMargin?: boolean;
-  background?: ThemeColors;
+  $noPadding?: boolean;
+  $hasTopMargin?: boolean;
+  $noBottomMargin?: boolean;
+  $background?: ThemeColors;
 }>`
-  background: ${(props) => props.theme[props.background || 'backgroundLevel2']};
+  background: ${(props) => props.theme[props.$background || 'backgroundLevel2']};
   min-height: 6rem;
-  padding: ${({ noPadding }) => (noPadding ? '0' : '0 1rem')};
-  margin-bottom: ${({ noBottomMargin }) =>
-    noBottomMargin ? '0' : sectionDistance};
-  margin-top: ${({ hasTopMargin }) => (hasTopMargin ? '1rem' : '0')};
+  padding: ${({ $noPadding }) => ($noPadding ? '0' : '0 1rem')};
+  margin-bottom: ${({ $noBottomMargin }) =>
+    $noBottomMargin ? '0' : sectionDistance};
+  margin-top: ${({ $hasTopMargin }) => ($hasTopMargin ? '1rem' : '0')};
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -79,25 +79,25 @@ const OverallSummary = ({
   background?: ThemeColors;
 }) => (
   <OverallSummaryContainer
-    background={background}
-    noPadding={noPadding}
-    noBottomMargin={noBottomMargin}
-    hasTopMargin={hasTopMargin}
+    $background={background}
+    $noPadding={noPadding}
+    $noBottomMargin={noBottomMargin}
+    $hasTopMargin={hasTopMargin}
   >
     <FillAvailableFlexBox {...rest}>{children}</FillAvailableFlexBox>
   </OverallSummaryContainer>
 );
 
 const MainContentContainer = styled.div<{
-  hasPadding?: boolean;
-  hasTopMargin?: boolean;
-  background?: ThemeColors;
+  $hasPadding?: boolean;
+  $hasTopMargin?: boolean;
+  $background?: ThemeColors;
 }>`
   display: flex;
   flex: 1;
-  padding: ${(props) => (props.hasPadding ? '1rem' : 'initial')};
-  margin-top: ${({ hasTopMargin }) => (hasTopMargin ? '1rem' : '0')};
-  background: ${(props) => props.theme[props.background || 'backgroundLevel3']};
+  padding: ${(props) => (props.$hasPadding ? '1rem' : 'initial')};
+  margin-top: ${({ $hasTopMargin }) => ($hasTopMargin ? '1rem' : '0')};
+  background: ${(props) => props.theme[props.$background || 'backgroundLevel3']};
   overflow: hidden;
 `;
 
@@ -114,21 +114,21 @@ const MainContent = ({
   background?: ThemeColors;
 }) => (
   <MainContentContainer
-    hasPadding={hasPadding}
-    hasTopMargin={hasTopMargin}
-    background={background}
+    $hasPadding={hasPadding}
+    $hasTopMargin={hasTopMargin}
+    $background={background}
     {...rest}
   >
     {children}
   </MainContentContainer>
 );
 const AppChildrenContainer = styled.div<{
-  hasPadding?: boolean;
+  $hasPadding?: boolean;
 }>`
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: ${(props) => (props.hasPadding ? '0 1rem' : 'initial')};
+  padding: ${(props) => (props.$hasPadding ? '0 1rem' : 'initial')};
   width: 100%;
   box-sizing: border-box;
 `;
@@ -146,7 +146,7 @@ function AppContainer({
   return (
     <Container {...rest}>
       {sidebarNavigation}
-      <AppChildrenContainer hasPadding={hasPadding}>
+      <AppChildrenContainer $hasPadding={hasPadding}>
         {children}
       </AppChildrenContainer>
     </Container>

@@ -75,7 +75,7 @@ const DefaultIcon = ({ status }: { status: string }) => {
 
 const DEFAULT_WIDTH = '25rem';
 
-const IconContainer = styled.div<{ bgColor: string }>`
+const IconContainer = styled.div<{ $bgColor: string }>`
   align-items: center;
   align-self: stretch;
   border-radius: 4px 0px 0px 4px;
@@ -84,7 +84,7 @@ const IconContainer = styled.div<{ bgColor: string }>`
   justify-content: center;
   position: relative;
   width: 32px;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.$bgColor};
 `;
 
 const ContentContainer = styled.div`
@@ -165,7 +165,7 @@ function Toast({
       }}
     >
       <ToastEnter>
-        <IconContainer bgColor={rgbBgColor}>{icon}</IconContainer>
+        <IconContainer $bgColor={rgbBgColor}>{icon}</IconContainer>
         <ContentContainer>
           <BasicText>{message}</BasicText>
         </ContentContainer>

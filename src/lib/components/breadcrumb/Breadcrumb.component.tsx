@@ -13,7 +13,7 @@ const BreadcrumbContainer = styled.ol`
   margin: 0;
   overflow-y: auto;
 `;
-const BreadcrumbItem = styled.li<{ active: boolean }>`
+const BreadcrumbItem = styled.li<{ $active: boolean }>`
   box-sizing: border-box;
   height: 100%;
   font-size: ${fontSize.larger};
@@ -23,7 +23,7 @@ const BreadcrumbItem = styled.li<{ active: boolean }>`
   ${(props) => {
     const { textPrimary, selectedActive, textLink } = props.theme;
 
-    if (props.active) {
+    if (props.$active) {
       return css`
         * {
           text-decoration: none;
@@ -84,7 +84,7 @@ const Breadcrumb = ({ paths = [], ...rest }: Props) => {
         <BreadcrumbItem
           key={`sc-breadcrumb_item_${index}`}
           className="sc-breadcrumb_item"
-          active={index === lastIndex}
+          $active={index === lastIndex}
         >
           {item}
         </BreadcrumbItem>

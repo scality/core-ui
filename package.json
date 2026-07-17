@@ -1,6 +1,6 @@
 {
   "name": "@scality/core-ui",
-  "version": "0.225.0",
+  "version": "0.226.0",
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
@@ -67,7 +67,6 @@
     "@types/react-table": "^7.7.11",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
-    "@types/styled-components": "^5.1.25",
     "@types/styled-system": "^5.1.15",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
@@ -105,6 +104,7 @@
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@js-temporal/polyfill": "^0.4.4",
     "@lezer/highlight": "^1.2.3",
+    "@styled-system/should-forward-prop": "^5.1.5",
     "@typescript-eslint/parser": "^8.56.1",
     "@uiw/react-codemirror": "^4.25.5",
     "codemirror-json-schema": "^0.8.1",
@@ -123,7 +123,7 @@
     "react-window": "^1.8.6",
     "recharts": "^3.0.2",
     "remark-gfm": "^4.0.1",
-    "styled-components": "^5.2.1",
+    "styled-components": "^6.4.3",
     "styled-system": "^5.1.5",
     "uuid": "^14.0.0"
   },

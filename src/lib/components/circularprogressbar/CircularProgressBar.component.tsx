@@ -59,18 +59,18 @@ function CircularProgressBar({
         <BackgroundCircle
           cx={centerPointCoordinate}
           cy={centerPointCoordinate}
-          backgroundColor={backgroundColor}
+          $backgroundColor={backgroundColor}
           r={radius}
-          strokeWidth={strokeWidth}
+          $strokeWidth={strokeWidth}
         />
         <ProgressCircle
-          percent={percent}
-          color={color}
-          circumference={CIRCUMFERENCE}
+          $percent={percent}
+          $color={color}
+          $circumference={CIRCUMFERENCE}
           cx={centerPointCoordinate}
           cy={centerPointCoordinate}
           r={radius}
-          strokeWidth={strokeWidth}
+          $strokeWidth={strokeWidth}
           transform={`rotate(-90 ${centerPointCoordinate}  ${centerPointCoordinate})`} // To start at 0 o'clock
         />
         {children}

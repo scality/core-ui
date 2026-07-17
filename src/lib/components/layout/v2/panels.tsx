@@ -28,30 +28,30 @@ const FiftyFifty: Ratio = {
   right: 0.5,
 };
 
-const PanelsContainer = styled.div<{ noGap?: boolean }>`
+const PanelsContainer = styled.div<{ $noGap?: boolean }>`
   display: flex;
   flex: 1;
-  gap: ${({ noGap }) => (noGap ? 0 : AppContainer.sectionDistance)};
+  gap: ${({ $noGap }) => ($noGap ? 0 : AppContainer.sectionDistance)};
 `;
 
 const LeftPanel = styled.div<{
-  hasPadding?: boolean;
-  flex?: number;
-  background?: ThemeColors;
+  $hasPadding?: boolean;
+  $flex?: number;
+  $background?: ThemeColors;
 }>`
-  flex: ${(props) => props.flex || '0 auto'};
-  background: ${(props) => props.theme[props.background || 'backgroundLevel3']};
+  flex: ${(props) => props.$flex || '0 auto'};
+  background: ${(props) => props.theme[props.$background || 'backgroundLevel3']};
   display: flex;
   min-width: 0;
 `;
 
 const RightPanel = styled.div<{
-  hasPadding?: boolean;
-  flex?: number;
-  background?: ThemeColors;
+  $hasPadding?: boolean;
+  $flex?: number;
+  $background?: ThemeColors;
 }>`
-  flex: ${(props) => props.flex || '0 auto'};
-  background: ${(props) => props.theme[props.background || 'backgroundLevel4']};
+  flex: ${(props) => props.$flex || '0 auto'};
+  background: ${(props) => props.theme[props.$background || 'backgroundLevel4']};
   display: flex;
   min-width: 0;
 `;
@@ -87,16 +87,16 @@ export const TwoPanelLayout = ({
   const panelsObjectRatio = getPanelsObjectRation(panelsRatio);
 
   return (
-    <PanelsContainer noGap={noGap} {...rest}>
+    <PanelsContainer $noGap={noGap} {...rest}>
       <LeftPanel
-        flex={panelsObjectRatio.left}
-        background={leftPanel.background}
+        $flex={panelsObjectRatio.left}
+        $background={leftPanel.background}
       >
         {leftPanel.children}
       </LeftPanel>
       <RightPanel
-        flex={panelsObjectRatio.right}
-        background={rightPanel.background}
+        $flex={panelsObjectRatio.right}
+        $background={rightPanel.background}
       >
         {rightPanel.children}
       </RightPanel>

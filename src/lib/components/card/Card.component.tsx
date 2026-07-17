@@ -64,37 +64,37 @@ export const CardBody = withCompoundCheck(StyledCardBody);
 export const CardBodyContainer = withCompoundCheck(StyledCardBodyContainer);
 
 const StyledCard = styled.div<{
-  width: string;
-  height: string;
-  headerBackgroundColor: string;
-  bodyBackgroundColor: string;
-  colorStatus?: string;
-  activeBorderColor: string;
-  disabled: boolean;
+  $width: string;
+  $height: string;
+  $headerBackgroundColor: string;
+  $bodyBackgroundColor: string;
+  $colorStatus?: string;
+  $activeBorderColor: string;
+  $disabled: boolean;
 }>`
   border-radius: 3px;
   display: flex;
   flex-flow: column;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  background: ${(props) => props.theme[props.bodyBackgroundColor]};
+  width: ${(props) => props.$width};
+  height: ${(props) => props.$height};
+  background: ${(props) => props.theme[props.$bodyBackgroundColor]};
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
   ${StyledCardBody} {
-    opacity: ${(props) => (props.disabled ? '0.2' : '1')};
+    opacity: ${(props) => (props.$disabled ? '0.2' : '1')};
   }
 
   ${StyledCardHeader} {
     color: ${(props) => props.theme.textPrimary};
     background: ${(props) =>
-      props.colorStatus
-        ? `rgba(${hex2RGB(props.theme[props.colorStatus]).join(',')}, 0.7)`
-        : props.theme[props.headerBackgroundColor]};
+      props.$colorStatus
+        ? `rgba(${hex2RGB(props.theme[props.$colorStatus]).join(',')}, 0.7)`
+        : props.theme[props.$headerBackgroundColor]};
 
-    ${(props) => props.disabled && 'opacity: 0.3;'}
+    ${(props) => props.$disabled && 'opacity: 0.3;'}
   }
 
   ${(props) =>
-    props.onClick && !props.disabled
+    props.onClick && !props.$disabled
       ? css`
           cursor: pointer;
 
@@ -110,7 +110,7 @@ const StyledCard = styled.div<{
 
   &.active {
     box-shadow: 0 0 0 1px
-      ${(props) => props.theme[props.activeBorderColor || 'selectedActive']};
+      ${(props) => props.theme[props.$activeBorderColor || 'selectedActive']};
   }
 `;
 type CardProps = {
@@ -150,20 +150,19 @@ function Card({
     <CardContext.Provider value={true}>
       <StyledCard
         className={[`sc-card ${active ? 'active' : ''}`, className].join(' ')}
-        width={width}
-        height={height}
-        headerBackgroundColor={headerBackgroundColor}
-        bodyBackgroundColor={bodyBackgroundColor}
-        colorStatus={colorStatus}
-        activeBorderColor={
+        $width={width}
+        $height={height}
+        $headerBackgroundColor={headerBackgroundColor}
+        $bodyBackgroundColor={bodyBackgroundColor}
+        $colorStatus={colorStatus}
+        $activeBorderColor={
           !status || status === 'healthy' ? 'selectedActive' : colorStatus
         }
-        disabled={disabled}
+        $disabled={disabled}
         role={onClick && !disabled ? 'button' : null}
         aria-pressed={onClick && !disabled ? active : null}
         tabIndex={onClick && !disabled ? 0 : null}
         onClick={!disabled ? onClick : undefined}
-        active={active}
         onKeyDown={(event) => {
           if (
             !disabled &&

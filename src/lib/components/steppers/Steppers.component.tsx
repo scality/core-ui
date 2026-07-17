@@ -32,9 +32,9 @@ const Panel = styled.div`
   flex-direction: column;
 `;
 const Circle = styled.div<{
-  error?: boolean;
-  completed?: boolean;
-  active?: boolean;
+  $error?: boolean;
+  $completed?: boolean;
+  $active?: boolean;
 }>`
   display: flex;
   justify-content: center;
@@ -48,12 +48,12 @@ const Circle = styled.div<{
     const { statusCritical, statusHealthy, selectedActive, buttonSecondary } =
       props.theme;
 
-    if (props.error) {
+    if (props.$error) {
       return css`
         background-color: ${statusCritical};
         color: ${white};
       `;
-    } else if (props.active) {
+    } else if (props.$active) {
       return css`
         background-color: ${selectedActive};
         color: ${white};
@@ -61,7 +61,7 @@ const Circle = styled.div<{
           fill: ${white};
         }
       `;
-    } else if (props.completed) {
+    } else if (props.$completed) {
       return css`
         background-color: ${statusHealthy};
         color: ${white};
@@ -74,25 +74,25 @@ const Circle = styled.div<{
     }
   }};
 `;
-const StepHeader = styled.span<{ active?: boolean }>`
+const StepHeader = styled.span<{ $active?: boolean }>`
   margin-left: ${spacing.r8};
   line-height: 30px;
   color: ${(props) =>
-    props.active
+    props.$active
       ? getThemePropSelector('textPrimary')
       : getThemePropSelector('textSecondary')};
 `;
 const StepContent = styled.div`
   padding: ${spacing.r8} 0 ${spacing.r8} ${spacing.r8};
 `;
-const BottomBar = styled.hr<{ completed?: boolean }>`
+const BottomBar = styled.hr<{ $completed?: boolean }>`
   flex-grow: 1;
   margin: 0;
   border: none;
   margin: 4px 14px;
 
   ${(props) => {
-    if (props.completed) {
+    if (props.$completed) {
       return css`
         border-left: 2px solid ${props.theme.statusHealthy};
       `;
@@ -120,14 +120,14 @@ function Step(props: StepProps) {
   return (
     <StepContainer>
       <Panel>
-        <Circle active={active} error={error} completed={completed}>
+        <Circle $active={active} $error={error} $completed={completed}>
           {active && inProgress ? (
             <Loader size="base" />
           ) : (
             <span>{circleContent}</span>
           )}
         </Circle>
-        {!isLast && <BottomBar completed={completed} />}
+        {!isLast && <BottomBar $completed={completed} />}
       </Panel>
       <Panel>
         <div
@@ -137,7 +137,7 @@ function Step(props: StepProps) {
             alignItems: 'center',
           }}
         >
-          <StepHeader active={active}>{title}</StepHeader>
+          <StepHeader $active={active}>{title}</StepHeader>
         </div>
         {active && <StepContent>{content}</StepContent>}
       </Panel>

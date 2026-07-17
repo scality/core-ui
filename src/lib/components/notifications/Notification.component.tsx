@@ -20,7 +20,7 @@ export type Props = {
   dismissAfter?: number;
   onDismiss?: (arg0: string) => void;
 };
-const NotificationContainer = styled.div<{ variant?: Variant }>`
+const NotificationContainer = styled.div<{ $variant?: Variant }>`
   position: relative;
   padding: ${spacing.r16};
   margin-top: ${spacing.r16};
@@ -28,9 +28,9 @@ const NotificationContainer = styled.div<{ variant?: Variant }>`
   box-shadow: 0px 0px 3px ${grayDarkest};
 
   ${(props) => {
-    const variant = props.variant ?? 'backgroundLevel1';
+    const variant = props.$variant ?? 'backgroundLevel1';
     const background = getThemePropSelector(variant)(props);
-    switch (props.variant) {
+    switch (props.$variant) {
       case 'warning':
         return css`
           background-color: ${background};
@@ -54,9 +54,9 @@ const NotificationTitle = styled.div`
   font-weight: ${fontWeight.bold};
 `;
 const NotificationDismissProgress = styled.div<{
-  variant?: Variant;
-  value: number;
-  max: number;
+  $variant?: Variant;
+  $value: number;
+  $max: number;
 }>`
   position: absolute;
   bottom: 0;
@@ -64,12 +64,12 @@ const NotificationDismissProgress = styled.div<{
   height: 5px;
   border-radius: 5px;
   ${(props) => {
-    const variant = props.variant || 'backgroundLevel1';
+    const variant = props.$variant || 'backgroundLevel1';
     const background = getThemePropSelector(variant)(props);
     const brandDark = darken(0.1, background);
     return css`
       background-color: ${brandDark};
-      width: ${(props.value / props.max) * 100}%;
+      width: ${(props.$value / props.$max) * 100}%;
       transition: width 1s;
       transition-timing-function: linear;
     `;
@@ -136,7 +136,7 @@ function Notification({
   return (
     <NotificationContainer
       className="sc-notification"
-      variant={variant}
+      $variant={variant}
       onMouseEnter={clearTimer}
       onMouseLeave={resumeTimer}
       {...rest}
@@ -145,9 +145,9 @@ function Notification({
       <div>{message}</div>
       {!!dismissAfter && (
         <NotificationDismissProgress
-          value={dismissProgress}
-          max={dismissAfter}
-          variant={variant}
+          $value={dismissProgress}
+          $max={dismissAfter}
+          $variant={variant}
         />
       )}
       <NotificationClose onClick={dismiss}>

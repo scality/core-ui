@@ -6,11 +6,11 @@ export const TabBar = styled.div`
   height: ${spacing.r40};
 `;
 export const TabItem = styled.div<{
-  selected?: boolean;
-  activeTabColor?: string;
-  activeTabSeparator?: string;
-  inactiveTabColor?: string;
-  tabHoverColor?: string;
+  $selected?: boolean;
+  $activeTabColor?: string;
+  $activeTabSeparator?: string;
+  $inactiveTabColor?: string;
+  $tabHoverColor?: string;
 }>`
   display: flex;
   align-items: center;
@@ -32,12 +32,12 @@ export const TabItem = styled.div<{
   ${(props) => {
     const { highlight, backgroundLevel3, backgroundLevel4, selectedActive } =
       props.theme;
-    return props.selected
+    return props.$selected
       ? `
-        background-color: ${props.activeTabColor || backgroundLevel4};
+        background-color: ${props.$activeTabColor || backgroundLevel4};
         &:after {
           content: "";
-          background: ${props.activeTabSeparator || selectedActive};
+          background: ${props.$activeTabSeparator || selectedActive};
           position: absolute;
           border-radius: ${spacing.r2} ${spacing.r2} 0 0;
           bottom: 0;
@@ -48,17 +48,17 @@ export const TabItem = styled.div<{
         }
       `
       : `
-        background-color: ${props.inactiveTabColor || backgroundLevel3};
+        background-color: ${props.$inactiveTabColor || backgroundLevel3};
         &:hover {
           cursor: pointer;
-          border: ${spacing.r1} solid ${props.tabHoverColor || highlight};
+          border: ${spacing.r1} solid ${props.$tabHoverColor || highlight};
         }
       `;
   }}
 `;
 export const TabsContainer = styled.div<{
-  tabLineColor?: string;
-  separatorColor?: string;
+  $tabLineColor?: string;
+  $separatorColor?: string;
 }>`
   height: 100%;
   width: 100%;
@@ -66,7 +66,7 @@ export const TabsContainer = styled.div<{
   display: flex;
   flex-direction: column;
   background-color: ${(props) =>
-    props.tabLineColor || props.theme.backgroundLevel3};
+    props.$tabLineColor || props.theme.backgroundLevel3};
 
   & ${TabItem} {
     display: flex;
@@ -76,7 +76,7 @@ export const TabsContainer = styled.div<{
 
   & ${TabItem}::before {
     content: '';
-    background: ${(props) => props.separatorColor || props.theme.infoSecondary};
+    background: ${(props) => props.$separatorColor || props.theme.infoSecondary};
     position: absolute;
     bottom: 25%;
     right: 0;
@@ -86,17 +86,17 @@ export const TabsContainer = styled.div<{
   }
 `;
 export const TabContent = styled.div<{
-  tabContentColor?: string;
-  withoutPadding?: boolean;
+  $tabContentColor?: string;
+  $withoutPadding?: boolean;
 }>`
   margin: 0;
-  padding: ${(props) => (props.withoutPadding ? '0' : spacing.r16)};
+  padding: ${(props) => (props.$withoutPadding ? '0' : spacing.r16)};
   display: block;
   width: 100%;
   height: calc(100% - ${spacing.r40});
   box-sizing: border-box;
   background-color: ${(props) =>
-    props.tabContentColor || props.theme.backgroundLevel4};
+    props.$tabContentColor || props.theme.backgroundLevel4};
 `;
 export const ScrollableContainer = styled.div`
   display: flex;

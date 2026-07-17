@@ -11,19 +11,19 @@ export type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   disabled?: boolean;
 };
-const ToggleContainer = styled.span<{ disabled?: boolean }>`
+const ToggleContainer = styled.span<{ $disabled?: boolean }>`
   display: inline-flex;
   align-items: center;
   position: relative;
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
 `;
-const Switch = styled.label<{ disabled?: boolean }>`
+const Switch = styled.label<{ $disabled?: boolean }>`
   position: relative;
   width: ${spacing.r24};
   align-self: center;
   ${(props) => {
     return css`
-      ${props.disabled
+      ${props.$disabled
         ? `
           cursor: not-allowed;
         `
@@ -33,12 +33,12 @@ const Switch = styled.label<{ disabled?: boolean }>`
     `;
   }}
 `;
-const Slider = styled.div<{ toggle?: boolean }>`
+const Slider = styled.div<{ $toggle?: boolean }>`
   width: 100%;
   height: 1rem;
   background-color: ${(props) => props.theme.backgroundLevel1};
   border: ${spacing.r1} solid
-    ${(props) => props.theme[props.toggle ? 'selectedActive' : 'infoPrimary']};
+    ${(props) => props.theme[props.$toggle ? 'selectedActive' : 'infoPrimary']};
   border-radius: ${spacing.r8};
   transition: 0.4s;
 
@@ -51,7 +51,7 @@ const Slider = styled.div<{ toggle?: boolean }>`
     left: 3px;
     top: 3.5px;
     background-color: ${(props) =>
-      props.theme[props.toggle ? 'textSecondary' : 'textPrimary']};
+      props.theme[props.$toggle ? 'textSecondary' : 'textPrimary']};
     transition: 0.4s;
   }
 `;
@@ -64,9 +64,8 @@ const ToggleInput = styled.input`
   }
   display: none;
 `;
-const StyledSwitchLabel = styled.label<{ toggle?: boolean }>`
-  color: ${(props) =>
-    props.theme[props.toggle ? 'textPrimary' : 'textPrimary']};
+const StyledSwitchLabel = styled.label`
+  color: ${(props) => props.theme.textPrimary};
 `;
 
 function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
@@ -75,12 +74,11 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
 
   return (
     <StyledSwitchLabel
-      toggle={toggle}
       className="text"
       id={`${rest['id']}-label`}
       htmlFor={rest['id']}
     >
-      <ToggleContainer className="sc-toggle" disabled={disabled}>
+      <ToggleContainer className="sc-toggle" $disabled={disabled}>
         <Stack gap={'r8'} style={{ alignItems: 'baseline' }}>
           <Switch
             htmlFor={rest['id']}
@@ -88,7 +86,7 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
             aria-checked={toggle}
             tabIndex={disabled ? -1 : 0}
             aria-disabled={disabled}
-            disabled={disabled}
+            $disabled={disabled}
             onKeyDown={(e) => {
               if (e.code === 'Space' || e.code === 'Enter') {
                 e.preventDefault();
@@ -113,7 +111,7 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
               ref={checkboxRef}
               {...rest}
             />
-            <Slider className="sc-slider" toggle={toggle} />
+            <Slider className="sc-slider" $toggle={toggle} />
           </Switch>
           {label && <Text>{label}</Text>}
         </Stack>

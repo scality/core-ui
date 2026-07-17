@@ -20,13 +20,13 @@ export type Props = {
    */
   resourceToCreate?: string;
 };
-const EmptystateContainer = styled.div<{ backgroundColor?: keyof CoreUITheme }>`
+const EmptystateContainer = styled.div<{ $backgroundColor?: keyof CoreUITheme }>`
   ${(props) => {
-    const { theme, backgroundColor } = props;
+    const { theme, $backgroundColor } = props;
     return css`
       color: ${theme.textSecondary};
-      background-color: ${backgroundColor
-        ? theme[backgroundColor]
+      background-color: ${$backgroundColor
+        ? theme[$backgroundColor]
         : 'transparent'};
     `;
   }}
@@ -52,7 +52,7 @@ function EmptyState(props: Props) {
   return (
     <EmptystateContainer
       className="sc-emptystate"
-      backgroundColor={backgroundColor}
+      $backgroundColor={backgroundColor}
     >
       <EmptyStateRow>
         <Icon name={icon} color="infoPrimary" size="5x" withWrapper />

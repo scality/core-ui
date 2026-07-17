@@ -8,18 +8,18 @@ import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
 
 const DropzoneContainer = styled.div<{
-  isDragActive: boolean;
-  variant: 'inline' | 'large';
+  $isDragActive: boolean;
+  $variant: 'inline' | 'large';
 }>`
   padding: ${spacing.r24};
   border: ${spacing.f2} dashed
     ${(props) =>
-      !props.isDragActive
+      !props.$isDragActive
         ? props.theme.textSecondary
         : props.theme.selectedActive};
   box-sizing: border-box;
   display: flex;
-  ${(props) => (props.variant === 'large' ? `text-align: center;` : ``)}
+  ${(props) => (props.$variant === 'large' ? `text-align: center;` : ``)}
 `;
 
 const FileList = styled.div`
@@ -98,8 +98,8 @@ export function Dropzone({
     <Stack direction="vertical">
       <DropzoneContainer
         {...rootProps}
-        isDragActive={isDragActive}
-        variant={variant}
+        $isDragActive={isDragActive}
+        $variant={variant}
       >
         <input {...getInputProps()} />
         <div style={{ flex: '1' }}>

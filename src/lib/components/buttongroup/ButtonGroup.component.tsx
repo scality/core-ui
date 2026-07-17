@@ -31,10 +31,10 @@ export type ButtonGroupProps = Omit<
   children: ReactNode;
 };
 
-const ButtonGroupContainer = styled.div<{ orientation: Orientation }>`
+const ButtonGroupContainer = styled.div<{ $orientation: Orientation }>`
   display: inline-flex;
   flex-direction: ${(props) =>
-    props.orientation === 'vertical' ? 'column' : 'row'};
+    props.$orientation === 'vertical' ? 'column' : 'row'};
   align-items: stretch;
   border: ${spacing.r1} solid ${(props) => props.theme.border};
   border-radius: ${spacing.r4};
@@ -61,11 +61,24 @@ const ButtonGroupContainer = styled.div<{ orientation: Orientation }>`
     background: transparent;
     box-shadow: none;
     color: ${(props) => props.theme.textSecondary};
+    /* Trailing icon: the label reads first, the icon (e.g. the sort
+       direction arrow) sits to its right. */
+    flex-direction: row-reverse;
+  }
+  .sc-button:enabled {
+    cursor: pointer;
+  }
+
+  /* An icon accompanying a label carries a right gap from Button; with the
+     row reversed the gap belongs on its left instead. */
+  .sc-button > span:first-child:not(:last-child) {
+    padding-right: 0;
+    padding-left: ${spacing.r8};
   }
 
   /* A single hairline separator between adjacent buttons. */
   ${(props) =>
-    props.orientation === 'vertical'
+    props.$orientation === 'vertical'
       ? css`
           & > *:not(:last-child) .sc-button {
             border-bottom: ${spacing.r1} solid ${props.theme.border};
@@ -85,9 +98,10 @@ const ButtonGroupContainer = styled.div<{ orientation: Orientation }>`
   }
 
   && .sc-button[aria-pressed='true'] {
-    background: ${(props) => props.theme.backgroundLevel1};
+    background: ${(props) => props.theme.highlight};
     color: ${(props) => props.theme.textPrimary};
-    box-shadow: inset 0 0 0 ${spacing.r1} ${(props) => props.theme.selectedActive};
+    box-shadow: inset 0 calc(-1 * ${spacing.r2}) 0
+      ${(props) => props.theme.selectedActive};
   }
 `;
 
@@ -133,7 +147,7 @@ function ButtonGroup({
     <ButtonGroupContainer
       className="sc-button-group"
       role="group"
-      orientation={orientation}
+      $orientation={orientation}
       {...rest}
     >
       {items}
