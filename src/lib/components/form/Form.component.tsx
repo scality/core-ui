@@ -110,11 +110,17 @@ const FieldRow = styled.div<{
   $flipAt?: number;
 }>`
   display: flex;
-  flex-direction: ${({ $direction }) =>
-    $direction === 'horizontal' ? 'row' : 'column'};
   align-items: baseline;
-  gap: ${({ $direction }) =>
-    $direction === 'horizontal' ? spacing.r32 : spacing.r4};
+  ${({ $direction }) =>
+    $direction === 'horizontal'
+      ? css`
+          flex-direction: row;
+          gap: ${spacing.r32};
+        `
+      : css`
+          flex-direction: column;
+          gap: ${spacing.r4};
+        `}
   ${({ $responsive }) =>
     $responsive &&
     css`
