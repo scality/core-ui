@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -72,10 +72,38 @@ export const Accordion = ({
   isEmphazed = true,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(open);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   useMemo(() => {
     setIsOpen(open);
   }, [open]);
+
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    const syncHeight = () => {
+      content.style.height =
+        isOpen && wrapperRef.current
+          ? `${wrapperRef.current.offsetHeight}px`
+          : '0px';
+    };
+    syncHeight();
+
+    // While open, follow the content height so it is never clipped when it grows
+    // or shrinks (e.g. a responsive Form flipping its fields to a stacked layout).
+    if (
+      !isOpen ||
+      typeof ResizeObserver === 'undefined' ||
+      !wrapperRef.current
+    ) {
+      return;
+    }
+    const observer = new ResizeObserver(syncHeight);
+    observer.observe(wrapperRef.current);
+    return () => observer.disconnect();
+  }, [isOpen, children]);
 
   const handleToggleContent = (
     e:
@@ -114,19 +142,15 @@ export const Accordion = ({
       </h3>
 
       <AccordionContent
-        ref={(element) => {
-          if (isOpen) {
-            element?.style.setProperty('height', element.scrollHeight + 'px');
-          } else {
-            element?.style.setProperty('height', '0px');
-          }
-        }}
+        ref={contentRef}
         $isOpen={isOpen}
         id={id}
         aria-labelledby={`Accordion-header-${id}`}
         role="region"
       >
-        <Wrapper style={style}>{children}</Wrapper>
+        <Wrapper ref={wrapperRef} style={style}>
+          {children}
+        </Wrapper>
       </AccordionContent>
     </AccordionContainer>
   );
