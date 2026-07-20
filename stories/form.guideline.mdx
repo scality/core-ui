@@ -1,0 +1,79 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as FormStories from './form.stories';
+
+<Meta name="Guideline" of={FormStories} />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+`}</style>
+
+# Form
+
+`Form` lays out a titled set of fields with consistent label placement, help and
+error text, and a shared actions bar. Fields are grouped with `FormSection` and
+`FormGroup`.
+
+## Responsive forms
+
+Set `responsive` on the `Form` to make it adapt to the width it is given. It is
+**opt-in and non-breaking**: without the prop the Form keeps its current
+fixed-width, measurement-based layout unchanged.
+
+`responsive` does two things:
+
+1. **Fluid fields** — a field's `size`-derived width becomes a _preferred_ width
+   that shrinks to fit its column (capped at `max-width: 100%`) instead of
+   overflowing.
+2. **Auto-flipping layout** — each `FormSection` becomes a two-column grid (a
+   label track and a field track). When the section gets too narrow it flips to a
+   single stacked column, with each field dropping under its own label.
+
+<Canvas of={FormStories.ResponsiveForm} />
+
+Drag the right edge of the framed area in the story above to watch the whole
+section flip between the row and stacked layouts.
+
+### There is no breakpoint prop
+
+The flip is **content-derived, not a magic number you pass in**. A section stacks
+once it can no longer give its columns a readable minimum:
+
+- **field floor — 10rem** (the `1/2` Input size). Below this a field would be too
+  narrow to read, so the section stacks instead of shrinking further.
+- **label floor — ~24ch.** Long labels wrap to about two lines before the section
+  stacks.
+
+Concretely the section stacks below `calc(24ch + 10rem + 2rem)` (label floor +
+field floor + the column gap). These are a readability policy, not a per-field
+measurement — fluid fields carry `min-width: 0`, so there is no intrinsic minimum
+to read off the DOM.
+
+### It responds to its container, not the viewport
+
+A `responsive` Form establishes a CSS containment context
+(`container-type: inline-size`) and its `@container` queries key off **its own
+width**. Put the Form in a narrow panel, drawer, or split view and it flips based
+on the space it actually has — no viewport media queries, no JS resize listeners.
+
+### Alignment is per `FormSection`
+
+Labels align within a section, not across the whole Form, because each
+`FormSection` is its own grid scope (its `FormGroup`s are `subgrid` rows). This is
+deliberate: it means a section can be wrapped — e.g. an `Accordion` containing its
+own `FormSection` — without breaking the alignment of the sections around it. Do
+**not** expect labels in one section to line up with labels in another.
+
+### Per-field direction still wins
+
+`FormGroup`'s `direction` is still honored inside a responsive Form. A
+`horizontal` group participates in the row/stack flip; a `vertical` group is
+always stacked (label above field) at every width.
+
+### Current limitation
+
+Only `Input` honors the fluid width today. `Select`, `SearchInput`, `TextArea`
+and other size-driven content still render at their fixed `size` width inside a
+responsive Form (tracked in **CUI-36**). Prefer `Input`-based fields when building
+a form that needs to shrink cleanly, until the other inputs opt in.

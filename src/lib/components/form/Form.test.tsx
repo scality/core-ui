@@ -10,9 +10,7 @@ describe('Form', () => {
       <Form
         layout={{ kind: 'page', title: 'Test Form' }}
         onSubmit={onSubmit}
-        rightActions={
-          <button type="submit">Submit</button>
-        }
+        rightActions={<button type="submit">Submit</button>}
       >
         <FormSection>
           <FormGroup
@@ -31,13 +29,12 @@ describe('Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('still submits and keeps fields usable when responsive and flipAt are enabled', async () => {
+  it('still submits and keeps fields usable when responsive is enabled', async () => {
     const onSubmit = jest.fn((e) => e.preventDefault());
     render(
       <Form
         layout={{ kind: 'tab' }}
         responsive
-        flipAt={480}
         onSubmit={onSubmit}
         rightActions={<button type="submit">Submit</button>}
       >
@@ -59,9 +56,9 @@ describe('Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('keeps the labelled field visible and usable with responsive shrink and flipAt', async () => {
+  it('keeps the labelled field visible and usable with responsive shrink', async () => {
     render(
-      <Form layout={{ kind: 'tab' }} responsive flipAt={400}>
+      <Form layout={{ kind: 'tab' }} responsive>
         <FormSection>
           <FormGroup
             id="email-field"

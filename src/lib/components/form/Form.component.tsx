@@ -34,19 +34,16 @@ type FormProps = Omit<
   rightActions?: ReactNode;
   banner?: ReactNode;
   /**
-   * Makes contained fields fluid: their `size`-derived width becomes a
-   * preferred width that shrinks to fit the column (capped at `max-width: 100%`)
-   * instead of overflowing. Note: only `Input` currently honors this — `Select`,
-   * `SearchInput`, `TextArea` and other size-driven field content keep their
-   * fixed width for now (tracked in CUI-36). Flex ancestors between the Form and
-   * the field must allow shrinking (`min-width: 0`) for this to take effect.
+   * Makes contained fields fluid: their `size`-derived width becomes a preferred
+   * width that shrinks to fit the column (capped at `max-width: 100%`) instead of
+   * overflowing. It also lays each `FormSection` out as a two-column grid that
+   * auto-flips to a stacked single column on narrow widths — there is no
+   * breakpoint prop; the flip point is derived from the layout (see below).
+   * Note: only `Input` currently honors the fluid width — `Select`, `SearchInput`,
+   * `TextArea` and other size-driven content keep their fixed width for now
+   * (tracked in CUI-36).
    */
   responsive?: boolean;
-  /**
-   * Below this width (px), horizontal field rows flip to a stacked column
-   * layout via a `@container` query. Vertical `FormGroup`s are left untouched.
-   */
-  flipAt?: number;
 };
 
 type PageFormProps = {
@@ -59,9 +56,22 @@ type PageFormProps = {
 } & FormProps;
 type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
+// In a `responsive` Form a FormSection lays its FormGroups out as a two-column
+// CSS grid (label track + field track) and each FormGroup is a `subgrid` row, so
+// labels align per section from content alone — no measurement. Below STACK_BELOW
+// the grid collapses to a single column (fields stack under their labels) via a
+// `@container` query, so a field never shrinks small enough to truncate.
+// Both floors are a readability policy, not component-derived: fluid fields carry
+// `min-width: 0`, so there is no intrinsic minimum to read.
+// - field floor: the `1/2` Input size (10rem) — below this a field stacks.
+// - label floor: ~24ch — long labels wrap to about two lines before stacking.
+const FIELD_MIN_REM = 10;
+const LABEL_MIN_CH = 24;
+const STACK_BELOW = `calc(${LABEL_MIN_CH}ch + ${FIELD_MIN_REM}rem + ${spacing.r32})`;
+
 const StyledForm = styled.form<{
   $layout: PageFormProps['layout'] | TabFormProps['layout'];
-  $flipAt?: number;
+  $containerize?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -69,8 +79,8 @@ const StyledForm = styled.form<{
   height: 100%;
   background-color: ${(props) =>
     props.$layout.kind === 'page' && props.theme.backgroundLevel4};
-  ${({ $flipAt }) =>
-    $flipAt &&
+  ${({ $containerize }) =>
+    $containerize &&
     css`
       container-type: inline-size;
       container-name: responsive;
@@ -116,10 +126,10 @@ const ScrollArea = styled(BasicPageLayout)`
   overflow-y: auto;
 `;
 
+// Non-responsive layout: a flex row (horizontal) or column (vertical). The label
+// column width comes from measurement (see FormGroup / LabelContext).
 const FieldRow = styled.div<{
   $direction: 'vertical' | 'horizontal';
-  $responsive?: boolean;
-  $flipAt?: number;
 }>`
   display: flex;
   align-items: baseline;
@@ -133,45 +143,82 @@ const FieldRow = styled.div<{
           flex-direction: column;
           gap: ${spacing.r4};
         `}
-  ${({ $responsive }) =>
-    $responsive &&
-    css`
-      min-width: 0;
-    `}
-  ${({ $flipAt }) =>
-    $flipAt &&
-    css`
-      @container responsive (max-width: ${$flipAt}px) {
-        flex-direction: column;
-        align-items: stretch;
-        gap: ${spacing.r4};
-      }
-    `}
 `;
 
-const FieldLabelBox = styled.div<{ $width: string; $flipAt?: number }>`
+const FieldLabelBox = styled.div<{ $width: string }>`
   width: ${({ $width }) => $width};
   flex: none;
-  ${({ $flipAt }) =>
-    $flipAt &&
+  overflow-wrap: break-word;
+`;
+
+// Responsive layout: the FormSection grid. Every FormGroup subgrid row borrows
+// these two tracks, so labels align across the section with no measurement. The
+// label track hugs its content (or is frozen by `forceLabelWidth`); the field
+// track carries the field floor. Below STACK_BELOW the whole section stacks.
+const SectionGrid = styled.div<{ $labelTrack: string }>`
+  display: grid;
+  grid-template-columns:
+    ${({ $labelTrack }) => $labelTrack}
+    minmax(${FIELD_MIN_REM}rem, 1fr);
+  column-gap: ${spacing.r32};
+  row-gap: ${spacing.r12};
+
+  @container responsive (max-width: ${STACK_BELOW}) {
+    grid-template-columns: 1fr;
+    /* Stacked groups need more separation than side-by-side rows: each group is
+       now two lines (label over field), so widen the gap between groups. */
+    row-gap: ${spacing.r20};
+  }
+`;
+
+// A FormGroup as a subgrid row. Horizontal rows inherit the section's two tracks
+// and flip to a single column at STACK_BELOW; vertical rows are always a single
+// column (label stacked above its field).
+const FieldSubgridRow = styled.div<{
+  $direction: 'vertical' | 'horizontal';
+}>`
+  display: grid;
+  grid-column: 1 / -1;
+  row-gap: ${spacing.r4};
+  ${({ $direction }) =>
+    $direction === 'horizontal'
+      ? css`
+          grid-template-columns: subgrid;
+          align-items: baseline;
+
+          @container responsive (max-width: ${STACK_BELOW}) {
+            grid-template-columns: 1fr;
+            align-items: stretch;
+          }
+        `
+      : css`
+          grid-template-columns: 1fr;
+        `}
+`;
+
+const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
+  min-width: 0;
+  overflow-wrap: break-word;
+  ${({ $hasHelpTooltip }) =>
+    $hasHelpTooltip &&
     css`
-      @container responsive (max-width: ${$flipAt}px) {
-        width: auto;
-        flex: initial;
-      }
+      /* The non-responsive column reserves 2rem beyond the label for the help
+         icon affordance; reserve the same here so the label column is identical
+         in both layouts. */
+      padding-right: ${spacing.r32};
     `}
 `;
 
 const LabelContext = createContext<{
   maxLabelWidth: number;
   setMaxLabelWidth: (setter: (value: number) => number) => void;
+  isLabelWidthFixed: boolean;
 } | null>(null);
 
 const RequireModeContext = createContext<'all' | 'partial'>('partial');
 
 const FormResponsiveContext = createContext<{
   responsive: boolean;
-  flipAt?: number;
 }>({ responsive: false });
 
 type ContentProps = {
@@ -210,14 +257,14 @@ const FormGroup = ({
     throw new Error('FormGroup cannot be used outside of FormSection');
   }
 
-  const { maxLabelWidth, setMaxLabelWidth } = ctxt;
+  const { maxLabelWidth, setMaxLabelWidth, isLabelWidthFixed } = ctxt;
   const requireMode = useContext(RequireModeContext);
-  const { responsive, flipAt } = useContext(FormResponsiveContext);
-  // The row→column flip only makes sense for horizontal rows; a vertical
-  // FormGroup is already stacked and must keep its label-column alignment.
-  const rowFlipAt = direction === 'horizontal' ? flipAt : undefined;
+  const { responsive } = useContext(FormResponsiveContext);
   const labelRef = useRef<HTMLLabelElement | null>(null);
   useEffect(() => {
+    // The responsive grid sizes the label column from content (no measurement),
+    // and a fixed (forced) label width never grows to the label either.
+    if (responsive || isLabelWidthFixed) return;
     if (labelRef.current) {
       const width = labelRef.current.getBoundingClientRect().width;
       setMaxLabelWidth((currentMaxLabelWidth) => {
@@ -228,7 +275,13 @@ const FormGroup = ({
         return currentMaxLabelWidth;
       });
     }
-  }, [labelRef, labelHelpTooltip, setMaxLabelWidth]);
+  }, [
+    labelRef,
+    labelHelpTooltip,
+    setMaxLabelWidth,
+    isLabelWidthFixed,
+    responsive,
+  ]);
 
   const value = {
     disabled: disabled || false,
@@ -236,64 +289,78 @@ const FormGroup = ({
     responsive,
   };
 
+  const labelContent = (
+    <label
+      htmlFor={id}
+      id={`${LABEL_PREFIX}${id}`}
+      ref={labelRef}
+      style={{ opacity: disabled ? 0.5 : 1 }}
+    >
+      <Text>
+        {label}
+        {requireMode !== 'all' && required && ' *'}
+        {requireMode === 'all' && !required && ' (optional)'}
+      </Text>
+      {labelHelpTooltip && (
+        <Box
+          display="inline-block"
+          marginLeft={spacing.r8}
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          <IconHelp
+            tooltipMessage={labelHelpTooltip}
+            overlayStyle={maxWidthTooltip}
+          />
+        </Box>
+      )}
+    </label>
+  );
+
+  const fieldContent = (
+    <Stack
+      direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
+      gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
+      style={responsive ? { minWidth: 0 } : undefined}
+    >
+      {content}
+      {error ? (
+        <HelperText color="statusCritical" id={`${DESCRIPTION_PREFIX}${id}`}>
+          {error}
+        </HelperText>
+      ) : help ? (
+        <div style={{ opacity: disabled ? 0.5 : 1 }}>
+          <HelperText color="textSecondary" id={`${DESCRIPTION_PREFIX}${id}`}>
+            {help}
+          </HelperText>
+        </div>
+      ) : (
+        <HelperText>&nbsp;</HelperText>
+      )}
+    </Stack>
+  );
+
+  if (responsive) {
+    return (
+      <FieldContext.Provider value={value}>
+        <FieldSubgridRow $direction={direction}>
+          <GridLabelCell $hasHelpTooltip={!!labelHelpTooltip}>
+            {labelContent}
+          </GridLabelCell>
+          {fieldContent}
+        </FieldSubgridRow>
+      </FieldContext.Provider>
+    );
+  }
+
   return (
     <FieldContext.Provider value={value}>
-      <FieldRow
-        $direction={direction}
-        $responsive={responsive}
-        $flipAt={rowFlipAt}
-      >
+      <FieldRow $direction={direction}>
         <FieldLabelBox
           $width={maxLabelWidth === 0 ? 'max-content' : `${maxLabelWidth}px`}
-          $flipAt={rowFlipAt}
         >
-          <label
-            htmlFor={id}
-            id={`${LABEL_PREFIX}${id}`}
-            ref={labelRef}
-            style={{ opacity: disabled ? 0.5 : 1 }}
-          >
-            <Text>
-              {label}
-              {requireMode !== 'all' && required && ' *'}
-              {requireMode === 'all' && !required && ' (optional)'}
-            </Text>
-            {labelHelpTooltip && (
-              <Box
-                display="inline-block"
-                marginLeft={spacing.r8}
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                <IconHelp
-                  tooltipMessage={labelHelpTooltip}
-                  overlayStyle={maxWidthTooltip}
-                />
-              </Box>
-            )}
-          </label>
+          {labelContent}
         </FieldLabelBox>
-        <Stack
-          direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
-          gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
-          style={responsive ? { minWidth: 0 } : undefined}
-        >
-          {content}
-          {error ? (
-            <HelperText color="statusCritical" id={`${DESCRIPTION_PREFIX}${id}`}>{error}</HelperText>
-          ) : help ? (
-            <div
-              style={{
-                opacity: disabled ? 0.5 : 1,
-              }}
-            >
-              <HelperText color="textSecondary" id={`${DESCRIPTION_PREFIX}${id}`}>{help}</HelperText>
-            </div>
-          ) : (
-            <HelperText>
-              &nbsp;
-            </HelperText>
-          )}
-        </Stack>
+        {fieldContent}
       </FieldRow>
     </FieldContext.Provider>
   );
@@ -312,16 +379,31 @@ const FormSection = ({
   forceLabelWidth,
   rightActions,
 }: FormSectionProps) => {
-  const [maxLabelWidth, setMaxLabelWidth] = useState<number>(
-    forceLabelWidth || 0,
-  );
+  // `forceLabelWidth` is a hard cap: when set, the label column stays exactly
+  // that wide and label measurement never grows it (long labels wrap), mirroring
+  // how `Input`'s `size` fixes the field width. When unset, the column auto-sizes
+  // to the widest measured label.
+  const isLabelWidthFixed = forceLabelWidth != null;
+  const [measuredLabelWidth, setMaxLabelWidth] = useState<number>(0);
+  const maxLabelWidth = isLabelWidthFixed
+    ? forceLabelWidth
+    : measuredLabelWidth;
+  const { responsive } = useContext(FormResponsiveContext);
   //If all the formgroup are not required, add `(optional)` next to form section title.
   const groupNotOptional = Children.toArray(children).find((child) =>
     isValidElement(child) ? child.props.required === true : false,
   );
 
+  // In responsive mode the label column is a grid track, sized from content or
+  // frozen by `forceLabelWidth` (the hard cap).
+  const labelTrack = isLabelWidthFixed
+    ? `${forceLabelWidth}px`
+    : 'minmax(min-content, max-content)';
+
   return (
-    <LabelContext.Provider value={{ maxLabelWidth, setMaxLabelWidth }}>
+    <LabelContext.Provider
+      value={{ maxLabelWidth, setMaxLabelWidth, isLabelWidthFixed }}
+    >
       <Stack direction="vertical" gap="r12">
         {title && (
           <Wrap>
@@ -342,7 +424,11 @@ const FormSection = ({
             <div>{rightActions}</div>
           </Wrap>
         )}
-        {children}
+        {responsive ? (
+          <SectionGrid $labelTrack={labelTrack}>{children}</SectionGrid>
+        ) : (
+          children
+        )}
       </Stack>
     </LabelContext.Provider>
   );
@@ -354,7 +440,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
     ref,
   ) => {
     const requireMode = useContext(RequireModeContext);
-    const { flipAt } = useContext(FormResponsiveContext);
+    const { responsive } = useContext(FormResponsiveContext);
     return (
       <ScrollbarWrapper>
         <StyledForm
@@ -362,7 +448,7 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
           noValidate
           ref={ref}
           $layout={layout}
-          $flipAt={flipAt}
+          $containerize={responsive}
         >
           <FixedHeader $layoutKind="page">
             <PaddedForHeaderAndFooterContent>
@@ -424,8 +510,11 @@ const PageForm = forwardRef<HTMLFormElement, PageFormProps>(
 );
 
 const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
-  ({ layout, leftActions, rightActions, children, banner, ...formProps }, ref) => {
-    const { flipAt } = useContext(FormResponsiveContext);
+  (
+    { layout, leftActions, rightActions, children, banner, ...formProps },
+    ref,
+  ) => {
+    const { responsive } = useContext(FormResponsiveContext);
     return (
       <ScrollbarWrapper>
         <StyledForm
@@ -433,7 +522,7 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
           noValidate
           ref={ref}
           $layout={layout}
-          $flipAt={flipAt}
+          $containerize={responsive}
         >
           <FixedHeader $layoutKind="tab">
             <Wrap>
@@ -457,12 +546,10 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
 );
 
 const Form = forwardRef<HTMLFormElement, TabFormProps | PageFormProps>(
-  ({ layout, requireMode, responsive, flipAt, ...formProps }, ref) => {
+  ({ layout, requireMode, responsive, ...formProps }, ref) => {
     return (
       <RequireModeContext.Provider value={requireMode || 'partial'}>
-        <FormResponsiveContext.Provider
-          value={{ responsive: !!responsive, flipAt }}
-        >
+        <FormResponsiveContext.Provider value={{ responsive: !!responsive }}>
           {layout.kind === 'page' ? (
             <PageForm layout={layout} {...formProps} ref={ref}></PageForm>
           ) : (

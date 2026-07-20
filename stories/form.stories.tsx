@@ -6,11 +6,16 @@ import {
   FormGroup,
   FormSection,
 } from '../src/lib/components/form/Form.component';
+import { Checkbox } from '../src/lib/components/checkbox/Checkbox.component';
+import { ConstrainedText } from '../src/lib/components/constrainedtext/Constrainedtext.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
+import { RadioGroup } from '../src/lib/components/radio/RadioGroup.component';
 import { Select } from '../src/lib/components/selectv2/Selectv2.component';
 import { Text } from '../src/lib/components/text/Text.component';
+import { TextArea } from '../src/lib/components/textarea/TextArea.component';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
+import { Tooltip } from '../src/lib/components/tooltip/Tooltip.component';
 import { Stack } from '../src/lib/spacing';
 import { iconArgType } from './controls';
 import { Accordion } from '../src/lib/next';
@@ -50,6 +55,11 @@ export default {
     subTitle: {
       control: 'text',
       if: { arg: 'kind', eq: 'page' },
+    },
+    responsive: {
+      control: 'boolean',
+      description:
+        'Makes contained fields fluid and lays each FormSection out as a grid that auto-flips to a stacked column on narrow widths. Only `Input` honors the fluid width today.',
     },
   },
 };
@@ -224,6 +234,178 @@ export const PageForm = {
   },
   args: {
     requireMode: 'partial',
+  },
+};
+
+export const ResponsiveForm = {
+  render: ({ requireMode, responsive }) => {
+    const [analytics, setAnalytics] = useState(true);
+    const [versioning, setVersioning] = useState(false);
+    const [lockMode, setLockMode] = useState('governance');
+
+    return (
+      <div
+        style={{
+          resize: 'horizontal',
+          overflow: 'auto',
+          minWidth: '18rem',
+          maxWidth: '100%',
+          border: '1px dashed #666',
+          height: '40rem',
+        }}
+      >
+        <Form
+          layout={{ kind: 'tab' }}
+          requireMode={requireMode}
+          responsive={responsive}
+          rightActions={
+            <Stack gap={'r16'}>
+              <Button variant="outline" label="Cancel" />
+              <Button
+                variant="primary"
+                label="Save"
+                icon={<Icon name="Save" />}
+              />
+            </Stack>
+          }
+        >
+          <FormSection
+            title={{
+              name: 'Mixed field types',
+              helpTooltip: 'One of every common input, in horizontal rows',
+              icon: 'Node-backend',
+            }}
+            forceLabelWidth={200} // force the label column to 200px wide
+          >
+            <FormGroup
+              direction="horizontal"
+              label="Bucket name"
+              id="bucket-name"
+              labelHelpTooltip="The name of the bucket"
+              content={<Input id="bucket-name" />}
+              help="Optional helper text"
+              required
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Analytics"
+              id="analytics"
+              content={
+                <Checkbox
+                  id="analytics"
+                  label="Enable usage analytics"
+                  checked={analytics}
+                  onChange={() => setAnalytics(!analytics)}
+                />
+              }
+              error="Analytics must be enabled while the trial is active."
+              helpErrorPosition="right"
+              required={false}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Object Lock Mode"
+              id="lock-mode"
+              labelHelpTooltip="S3 Object Lock Retention"
+              content={
+                <RadioGroup
+                  name="lock-mode"
+                  aria-label="Object Lock Mode"
+                  value={lockMode}
+                  onChange={setLockMode}
+                  options={[
+                    { value: 'governance', label: 'Governance' },
+                    { value: 'compliance', label: 'Compliance' },
+                  ]}
+                />
+              }
+              required
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Versioning"
+              id="versioning"
+              content={
+                <Toggle
+                  name="versioning"
+                  toggle={versioning}
+                  onChange={() => setVersioning(!versioning)}
+                />
+              }
+              required={false}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Description"
+              id="description"
+              content={
+                <TextArea
+                  id="description"
+                  placeholder="Describe this bucket for other operators"
+                />
+              }
+              help="Shown in the destination console."
+              required={false}
+            />
+          </FormSection>
+
+          <FormSection
+            title={{
+              name: 'Read-only details',
+              helpTooltip:
+                'Text-only fields that display a value, not an input',
+              icon: 'Info-circle',
+            }}
+          >
+            <FormGroup
+              direction="horizontal"
+              label="User Type"
+              id="userType"
+              content={
+                <Text>
+                  <Stack>
+                    <Tooltip overlay={'Remote User'}>
+                      <Icon name="Simple-user" ariaLabel="Remote User" />
+                    </Tooltip>
+                    Remote
+                  </Stack>
+                </Text>
+              }
+              required={false}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Username"
+              id="username"
+              content={
+                <div style={{ overflow: 'hidden', width: '20.5rem' }}>
+                  <ConstrainedText
+                    text={
+                      <Text>
+                        a-very-long-username-that-will-be-clamped-across-two-lines-when-it-does-not-fit
+                      </Text>
+                    }
+                    lineClamp={2}
+                  />
+                </div>
+              }
+              required={false}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Created on"
+              id="createdOn"
+              content={<Text>2026-07-17 10:24 UTC</Text>}
+              required={false}
+            />
+          </FormSection>
+        </Form>
+      </div>
+    );
+  },
+  args: {
+    requireMode: 'partial',
+    responsive: true,
   },
 };
 
