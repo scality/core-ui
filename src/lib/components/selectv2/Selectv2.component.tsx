@@ -27,6 +27,7 @@ import { FixedSizeList, FixedSizeList as List } from 'react-window';
 import { convertRemToPixels } from '../../utils';
 import { spacing } from '../../spacing';
 import { convertSizeToRem } from '../inputv2/inputv2';
+import { useFieldContext } from '../form/Form.component';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import ReactSelect from 'react-select/src/Select';
 
@@ -348,6 +349,9 @@ export type SelectProps = {
   variant?: 'default' | 'rounded';
   size?: '1' | '2/3' | '1/2' | '1/3';
   className?: string;
+  /** When true (or inside a responsive Form), the control fills its container
+   *  down to a min instead of staying fixed at its `size` width. */
+  fluid?: boolean;
   /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
   /** number of items visible before the option list becomes scrollable
@@ -395,11 +399,14 @@ function SelectBox<
   size = '1',
   id,
   selectRef,
+  fluid,
   itemsPerScrollWindow = 4,
   ...rest
 }: SelectProps & {
   selectRef?: Ref<SelectRef<OptionType, IsMulti, GroupType>>;
 }) {
+  const { responsive: responsiveFromFieldContext } = useFieldContext();
+  const isFluid = !!(fluid || responsiveFromFieldContext);
   const [keyboardFocusEnabled, setKeyboardFocusEnabled] = useState(false);
   const [searchSelection, setSearchSelection] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -571,6 +578,7 @@ function SelectBox<
               }
             }}
             width={convertSizeToRem(size)}
+            fluid={isFluid}
             {...rest}
           />
         )}
@@ -599,11 +607,14 @@ const SelectWithOptionContext = forwardRef<
     });
   }, []);
 
-  const contextValue = useMemo(() => ({
-    options, 
-    register, 
-    unregister
-  }), [options, register, unregister]);
+  const contextValue = useMemo(
+    () => ({
+      options,
+      register,
+      unregister,
+    }),
+    [options, register, unregister],
+  );
 
   return (
     <OptionContext.Provider value={contextValue}>
