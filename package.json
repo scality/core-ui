@@ -36,6 +36,7 @@
     "test": "jest",
     "storybook": "storybook dev -p 3001",
     "build-storybook": "storybook build",
+    "test-storybook": "test-storybook",
     "storybook:deploy": "npm run build-storybook && gh-pages -d storybook-static -u \"github-actions-bot <support+actions@github.com>\""
   },
   "keywords": [],
@@ -56,6 +57,7 @@
     "@storybook/addon-docs": "10.4.6",
     "@storybook/addon-webpack5-compiler-swc": "^4.0.3",
     "@storybook/react-webpack5": "10.4.6",
+    "@storybook/test-runner": "^0.24.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^13.5.0",
