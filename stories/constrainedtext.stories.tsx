@@ -66,6 +66,16 @@ export const ShowsTooltipWhenClipped = {
     // the clipped label lives inside the 100px story container
     const label = canvas.getByText('This is a long long phrase');
 
+    // first assert the *cause*: the text really overflows its box. This is the
+    // exact `offsetWidth < scrollWidth` check the component uses, and it only
+    // holds in a real layout engine — in jsdom both read 0, so this is
+    // untestable there. scrollWidth > clientWidth ⟹ the ellipsis is active.
+    const clipped = canvasElement.querySelector(
+      '.sc-constrainedtext',
+    ) as HTMLElement;
+    await expect(clipped.scrollWidth).toBeGreaterThan(clipped.clientWidth);
+
+    // then the *effect*: hovering the clipped text reveals the full value
     await userEvent.hover(label);
 
     // the tooltip overlay is portaled to document.body → assert via `screen`,
@@ -74,5 +84,34 @@ export const ShowsTooltipWhenClipped = {
       selector: '.sc-tooltip-overlay-text',
     });
     await expect(overlay).toBeVisible();
+  },
+};
+
+// Contrast case: text that fits the 100px box is NOT clipped, so the component
+// mounts no tooltip at all. This is the negative half of the layout assertion —
+// it can only be told apart from the clipped case by a real layout engine, and
+// guards against a tooltip that fires when it shouldn't.
+export const NoTooltipWhenTextFits = {
+  ...Default,
+  args: {
+    ...Default.args,
+    text: 'Short',
+  },
+  tags: ['!dev', 'interaction-test'],
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const label = canvas.getByText('Short');
+
+    // the text fits, so it does not overflow its box → ellipsis inactive
+    const fitted = canvasElement.querySelector(
+      '.sc-constrainedtext',
+    ) as HTMLElement;
+    await expect(fitted.scrollWidth).toBeLessThanOrEqual(fitted.clientWidth);
+
+    // hovering must not surface any tooltip overlay
+    await userEvent.hover(label);
+    await expect(
+      screen.queryByText('Short', { selector: '.sc-tooltip-overlay-text' }),
+    ).not.toBeInTheDocument();
   },
 };
