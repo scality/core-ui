@@ -409,6 +409,213 @@ export const ResponsiveForm = {
   },
 };
 
+// Drag the frame's right edge to narrow the Form. Toggle the `responsive` control
+// to compare the two layout modes on the same fields.
+const ResizeFrame = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      resize: 'horizontal',
+      overflow: 'auto',
+      minWidth: '16rem',
+      maxWidth: '100%',
+      border: '1px dashed #666',
+      height: '26rem',
+    }}
+  >
+    {children}
+  </div>
+);
+
+// Case 1 — every field is an `Input`, so each carries a `size`-derived width.
+// Responsive: they shrink to fit the column as you narrow the frame, and their
+// left edges stay aligned. Non-responsive: they keep their fixed width.
+export const ResponsiveSizedInputs = {
+  render: ({ requireMode, responsive }) => (
+    <ResizeFrame>
+      <Form
+        layout={{ kind: 'tab' }}
+        requireMode={requireMode}
+        responsive={responsive}
+      >
+        <FormSection title={{ name: 'Sized inputs', icon: 'Node-backend' }}>
+          <FormGroup
+            direction="horizontal"
+            label="Default (size 1)"
+            id="w-default"
+            content={<Input id="w-default" placeholder="20.5rem" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Two thirds"
+            id="w-23"
+            content={<Input id="w-23" size="2/3" placeholder="14rem" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Half"
+            id="w-12"
+            content={<Input id="w-12" size="1/2" placeholder="10rem" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="One third"
+            id="w-13"
+            content={<Input id="w-13" size="1/3" placeholder="6rem" />}
+          />
+        </FormSection>
+      </Form>
+    </ResizeFrame>
+  ),
+  args: { requireMode: 'partial', responsive: true },
+};
+
+// Case 2 — none of these fields set a width (checkbox, toggle, radios, read-only
+// text). They can never overflow: the field column just reserves its floor and
+// the control sits at the start. Use this to sanity-check that a Form built
+// without `Input` behaves in both modes.
+export const ResponsiveWidthlessFields = {
+  render: ({ requireMode, responsive }) => {
+    const [subscribe, setSubscribe] = useState(true);
+    const [active, setActive] = useState(false);
+    const [tier, setTier] = useState('standard');
+    return (
+      <ResizeFrame>
+        <Form
+          layout={{ kind: 'tab' }}
+          requireMode={requireMode}
+          responsive={responsive}
+        >
+          <FormSection
+            title={{ name: 'Width-less fields', icon: 'Info-circle' }}
+          >
+            <FormGroup
+              direction="horizontal"
+              label="Notifications"
+              id="nw-check"
+              content={
+                <Checkbox
+                  id="nw-check"
+                  label="Email me updates"
+                  checked={subscribe}
+                  onChange={() => setSubscribe(!subscribe)}
+                />
+              }
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Active"
+              id="nw-toggle"
+              content={
+                <Toggle
+                  name="nw-toggle"
+                  toggle={active}
+                  onChange={() => setActive(!active)}
+                />
+              }
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Tier"
+              id="nw-radio"
+              content={
+                <RadioGroup
+                  name="nw-radio"
+                  aria-label="Tier"
+                  value={tier}
+                  onChange={setTier}
+                  options={[
+                    { value: 'standard', label: 'Standard' },
+                    { value: 'premium', label: 'Premium' },
+                  ]}
+                />
+              }
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Created on"
+              id="nw-text"
+              content={<Text>2026-07-22 09:14 UTC</Text>}
+            />
+          </FormSection>
+        </Form>
+      </ResizeFrame>
+    );
+  },
+  args: { requireMode: 'partial', responsive: true },
+};
+
+// Case 3 — a mix. `Input` opts into fluid and shrinks; `Select` and a `TextArea`
+// with no explicit width (browser-default size) do NOT yet, so they keep their
+// width and overflow a narrow column in responsive mode (tracked in CUI-36).
+// Narrow the frame to see which fields shrink and which spill.
+export const ResponsiveMixedFields = {
+  render: ({ requireMode, responsive }) => {
+    const [region, setRegion] = useState('');
+    return (
+      <ResizeFrame>
+        <Form
+          layout={{ kind: 'tab' }}
+          requireMode={requireMode}
+          responsive={responsive}
+        >
+          <FormSection title={{ name: 'Mixed widths', icon: 'Node-backend' }}>
+            <FormGroup
+              direction="horizontal"
+              label="Bucket name"
+              id="mx-input"
+              content={<Input id="mx-input" />}
+              help="Input — fluid, shrinks to fit"
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Region"
+              id="mx-select"
+              content={
+                <Select
+                  id="mx-select"
+                  placeholder="Choose a region"
+                  value={region}
+                  onChange={setRegion}
+                >
+                  <Select.Option value="us-east">US East</Select.Option>
+                  <Select.Option value="eu-west">EU West</Select.Option>
+                </Select>
+              }
+              help="Select — fixed width, overflows (CUI-36)"
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Description"
+              id="mx-textarea"
+              content={
+                <TextArea
+                  id="mx-textarea"
+                  placeholder="No width set → browser default"
+                />
+              }
+              help="TextArea — browser-default width, overflows (CUI-36)"
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Confirm"
+              id="mx-check"
+              content={
+                <Checkbox
+                  id="mx-check"
+                  label="I understand"
+                  checked
+                  onChange={() => undefined}
+                />
+              }
+            />
+          </FormSection>
+        </Form>
+      </ResizeFrame>
+    );
+  },
+  args: { requireMode: 'partial', responsive: true },
+};
+
 export const AllRequiredPageForm = {
   ...PageForm,
   args: {
