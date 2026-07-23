@@ -152,14 +152,10 @@ const SelectStyle = styled(Select)`
     .sc-select__menu-list {
       padding: 0;
       overflow: hidden;
-      ${({ isDefault }) =>
-        isDefault
-          ? `
-        max-height: calc(${spacing.r32} * ${(props) =>
-              props.itemsPerScrollWindow} + ${spacing.r32} / 2);`
-          : `
-        max-height: calc(${spacing.r24} * ${(props) =>
-              props.itemsPerScrollWindow} + ${spacing.r24} / 2);`}
+      ${({ isDefault, itemsPerScrollWindow }) => {
+        const optionHeight = isDefault ? spacing.r32 : spacing.r24;
+        return `max-height: calc(${optionHeight} * ${itemsPerScrollWindow} + ${optionHeight} / 2);`;
+      }}
 
       .sc-select__menu-notice {
         color: ${({ isDefault }) =>
@@ -250,12 +246,12 @@ const SelectStyle = styled(Select)`
       ${({ isDefault }) =>
         isDefault &&
         `
-          div > .react-window-option:first-of-type > .sc-select__option {
+          div > .react-window-option:first-of-type > .sc-select__option,
           .sc-select__option:first-of-type {
             border-radius: ${spacing.r4} ${spacing.r4} 0 0;
           }
 
-          div > .react-window-option:last-of-type > .sc-select__option {
+          div > .react-window-option:last-of-type > .sc-select__option,
           .sc-select__option:last-of-type {
             border-bottom: ${spacing.r1} solid transparent;
             border-radius: 0 0 ${spacing.r4} ${spacing.r4};
