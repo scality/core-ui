@@ -442,6 +442,7 @@ export const ResponsiveSizedInputs = {
             direction="horizontal"
             label="Default (size 1)"
             id="w-default"
+            labelHelpTooltip="The help icon reserves ~2rem in the label column"
             content={<Input id="w-default" placeholder="20.5rem" />}
           />
           <FormGroup
@@ -517,6 +518,7 @@ export const ResponsiveWidthlessFields = {
               direction="horizontal"
               label="Tier"
               id="nw-radio"
+              labelHelpTooltip="Determines the feature set available"
               content={
                 <RadioGroup
                   name="nw-radio"
@@ -614,6 +616,70 @@ export const ResponsiveMixedFields = {
     );
   },
   args: { requireMode: 'partial', responsive: true },
+};
+
+// Case 4 — edge cases the layout must survive: a non-FormGroup child dropped
+// straight into a section (a Banner), and a FormGroup nested inside a plain
+// wrapper div. Two sections show the difference the label width makes:
+//   - Fixed label (`forceLabelWidth`): rows are self-sufficient, so the nested
+//     group stays aligned with its siblings; the Banner spans the full width.
+//   - Auto label (no `forceLabelWidth`): rows align via subgrid; the Banner still
+//     spans full width, but the *nested* group can no longer share the section's
+//     columns and drops to a stacked layout — the documented residual. Wrap it in
+//     its own FormSection (or set forceLabelWidth) to keep it aligned.
+export const NestingAndNonFieldContent = {
+  render: ({ requireMode, responsive }) => (
+    <ResizeFrame>
+      <Form
+        layout={{ kind: 'tab' }}
+        requireMode={requireMode}
+        responsive={responsive}
+      >
+        <FormSection
+          title={{ name: 'Fixed label width' }}
+          forceLabelWidth={180}
+        >
+          <FormGroup
+            direction="horizontal"
+            label="Direct child"
+            id="fx-direct"
+            content={<Input id="fx-direct" size="1/2" />}
+          />
+          <Banner variant="base" icon={<Icon name="Info-circle" />}>
+            A non-FormGroup child (this Banner) spans the full section width.
+          </Banner>
+          <div>
+            <FormGroup
+              direction="horizontal"
+              label="Nested in a div"
+              id="fx-nested"
+              content={<Input id="fx-nested" size="1/2" />}
+            />
+          </div>
+        </FormSection>
+        <FormSection title={{ name: 'Auto label width' }}>
+          <FormGroup
+            direction="horizontal"
+            label="Direct child"
+            id="au-direct"
+            content={<Input id="au-direct" size="1/2" />}
+          />
+          <Banner variant="base" icon={<Icon name="Info-circle" />}>
+            A non-FormGroup child (this Banner) spans the full section width.
+          </Banner>
+          <div>
+            <FormGroup
+              direction="horizontal"
+              label="Nested in a div (stacks)"
+              id="au-nested"
+              content={<Input id="au-nested" size="1/2" />}
+            />
+          </div>
+        </FormSection>
+      </Form>
+    </ResizeFrame>
+  ),
+  args: { requireMode: 'partial', responsive: false },
 };
 
 export const AllRequiredPageForm = {
@@ -749,8 +815,8 @@ export const FormWithAccordion = {
               required={false}
             ></FormGroup>
           </FormSection>
-          <FormSection>
-            <Accordion title="Advanced Settings" id="advanced-settings">
+          <Accordion title="Advanced Settings" id="advanced-settings">
+            <FormSection>
               <FormGroup
                 direction="vertical"
                 label="Object Lock Mode"
@@ -809,8 +875,8 @@ export const FormWithAccordion = {
                   </Select>
                 }
               />
-            </Accordion>
-          </FormSection>
+            </FormSection>
+          </Accordion>
         </Form>
       </>
     );

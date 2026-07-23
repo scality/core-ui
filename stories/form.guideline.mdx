@@ -18,17 +18,18 @@ error text, and a shared actions bar. Fields are grouped with `FormSection` and
 ## Responsive forms
 
 Set `responsive` on the `Form` to make it adapt to the width it is given. It is
-**opt-in and non-breaking**: without the prop the Form keeps its current
-fixed-width, measurement-based layout unchanged.
+**opt-in**: without the prop the Form keeps its fixed-width layout, with fields at
+their `size`-derived widths and no flipping.
 
 `responsive` does two things:
 
 1. **Fluid fields** — a field's `size`-derived width becomes a _preferred_ width
    that shrinks to fit its column (capped at `max-width: 100%`) instead of
    overflowing.
-2. **Auto-flipping layout** — each `FormSection` becomes a two-column grid (a
-   label track and a field track). When the section gets too narrow it flips to a
-   single stacked column, with each field dropping under its own label.
+2. **Auto-flipping layout** — the field track becomes fluid and, when a section
+   gets too narrow, it flips to a single stacked column with each field dropping
+   under its own label. (A section is always laid out on CSS grid; `responsive`
+   only changes the field track and enables the flip.)
 
 <Canvas of={FormStories.ResponsiveForm} />
 
@@ -59,11 +60,38 @@ on the space it actually has — no viewport media queries, no JS resize listene
 
 ### Alignment is per `FormSection`
 
-Labels align within a section, not across the whole Form, because each
-`FormSection` is its own grid scope (its `FormGroup`s are `subgrid` rows). This is
-deliberate: it means a section can be wrapped — e.g. an `Accordion` containing its
-own `FormSection` — without breaking the alignment of the sections around it. Do
-**not** expect labels in one section to line up with labels in another.
+Labels align within a section, not across the whole Form — each `FormSection`
+sizes its own label column. Do **not** expect labels in one section to line up
+with labels in another. This is deliberate: a section can be wrapped (e.g. an
+`Accordion` holding its own `FormSection`) without disturbing the sections around
+it.
+
+### Nesting and non-field content
+
+How a section aligns its labels — and how tolerant it is of nesting — depends on
+whether you set `forceLabelWidth`:
+
+- **With `forceLabelWidth`** (a fixed pixel label column) each `FormGroup` row is
+  self-contained, so you can nest groups inside a wrapper — a `div`, a `Stack`, an
+  `Accordion` — and they stay aligned. This is the robust choice for forms with
+  collapsible or grouped fields.
+- **Without `forceLabelWidth`** the label column auto-sizes to the widest label,
+  shared across rows via CSS `subgrid` — which requires each `FormGroup` to be a
+  **direct child** of the `FormSection`. A group nested inside another element
+  loses its row layout and stacks. Either set `forceLabelWidth`, or give the
+  nested groups their own `FormSection`.
+
+Either way, non-`FormGroup` content dropped straight into a section (a `Banner`,
+an `InfoMessage`, explanatory `Text`) spans the full section width — place it
+freely.
+
+### Freezing the label column
+
+`FormSection`'s `forceLabelWidth` pins the label column to an exact pixel width.
+It is a **hard cap**: a label wider than it wraps rather than widening the column
+(mirroring how an `Input`'s `size` fixes the field width). Beyond fixing the
+width, it also makes the section's rows nesting-robust (see above). Leave it unset
+to let the column auto-size to the widest label.
 
 ### Per-field direction still wins
 

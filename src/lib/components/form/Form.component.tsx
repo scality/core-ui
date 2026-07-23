@@ -122,65 +122,122 @@ const ScrollArea = styled(BasicPageLayout)`
   overflow-y: auto;
 `;
 
-// A FormSection is always a two-column CSS grid (label track + field track), and
-// each FormGroup is a `subgrid` row — so labels align across the section from
-// content alone, no measurement in either mode. The two modes differ only in the
-// field track and whether the section can flip:
-//   - responsive: field track is fluid (minmax(10rem, 1fr)) and the section flips
-//     to a single stacked column below STACK_BELOW via an `@container` query.
-//   - non-responsive: field track hugs its content (max-content) and never flips.
-const SectionGrid = styled.div<{ $labelTrack: string; $responsive: boolean }>`
-  display: grid;
-  column-gap: ${spacing.r32};
-  row-gap: ${spacing.r12};
-  ${({ $labelTrack, $responsive }) =>
-    $responsive
-      ? css`
-          grid-template-columns: ${$labelTrack} minmax(
-              ${FIELD_MIN_REM}rem,
-              1fr
-            );
-
-          @container responsive (max-width: ${STACK_BELOW}) {
-            grid-template-columns: 1fr;
-            /* Stacked groups need more separation than side-by-side rows: each
-               group is now two lines (label over field), so widen the gap. */
-            row-gap: ${spacing.r20};
-          }
-        `
-      : css`
-          grid-template-columns: ${$labelTrack} max-content;
-        `}
-`;
-
-// A FormGroup as a subgrid row. Horizontal rows inherit the section's two tracks
-// (and, when responsive, flip to a single column at STACK_BELOW); vertical rows
-// are always a single column (label stacked above its field).
-const FieldSubgridRow = styled.div<{
-  $direction: 'vertical' | 'horizontal';
+// A FormSection lays its FormGroups out so labels align across the section from
+// content alone — no JS measurement. It picks one of two mechanisms based on
+// whether the label column is a fixed width (`forceLabelWidth`):
+//   - fixed label width: the section is a plain vertical stack and each FormGroup
+//     row is a *self-sufficient* two-column grid (see FieldSubgridRow). Every row
+//     uses the same fixed label track, so labels align — and because a row needs
+//     no parent grid, it keeps its layout even when nested inside another element
+//     (a div/Stack/Accordion).
+//   - auto label width: the section is a two-column grid and each FormGroup row is
+//     a `subgrid` row, so the auto-sized label column is shared across rows. This
+//     requires each row to be a direct grid item.
+// Either way, non-FormGroup children (an InfoMessage, a Banner) stack full-width.
+// `responsive` makes the field track fluid (minmax(10rem, 1fr)) and lets each row
+// flip to a stacked single column below STACK_BELOW via an `@container` query.
+const SectionGrid = styled.div<{
+  $labelTrack: string;
   $responsive: boolean;
+  $fixedLabel: boolean;
 }>`
-  display: grid;
-  grid-column: 1 / -1;
-  row-gap: ${spacing.r4};
-  ${({ $direction, $responsive }) =>
-    $direction === 'horizontal'
+  ${({ $labelTrack, $responsive, $fixedLabel }) =>
+    $fixedLabel
       ? css`
-          grid-template-columns: subgrid;
-          align-items: baseline;
+          display: flex;
+          flex-direction: column;
+          gap: ${spacing.r12};
           ${
             $responsive &&
             css`
               @container responsive (max-width: ${STACK_BELOW}) {
-                grid-template-columns: 1fr;
-                align-items: stretch;
+                gap: ${spacing.r20};
               }
             `
           }
         `
       : css`
-          grid-template-columns: 1fr;
+          display: grid;
+          column-gap: ${spacing.r32};
+          row-gap: ${spacing.r12};
+          /* The field track fills the remaining width (its floor keeps fields from
+             shrinking below content — 10rem when responsive, their own size when
+             not) so the grid reaches the container edge. That is what lets a
+             full-width child actually span it — with a content-sized track the
+             grid would stop at its content and a 1 / -1 span with it. */
+          grid-template-columns:
+            ${$labelTrack}
+            ${
+              $responsive
+                ? `minmax(${FIELD_MIN_REM}rem, 1fr)`
+                : 'minmax(max-content, 1fr)'
+            };
+          /* Non-FormGroup children (InfoMessage, Banner, …) span the full width
+             instead of being auto-placed into the label column. */
+          & > * {
+            grid-column: 1 / -1;
+          }
+          ${
+            $responsive &&
+            css`
+              @container responsive (max-width: ${STACK_BELOW}) {
+                grid-template-columns: 1fr;
+                /* Stacked groups need more separation than side-by-side rows: each
+                 group is now two lines (label over field), so widen the gap. */
+                row-gap: ${spacing.r20};
+              }
+            `
+          }
         `}
+`;
+
+// A FormGroup row. A horizontal row lays label + field on one line; a vertical row
+// stacks them. How a horizontal row gets its two columns depends on the label
+// width:
+//   - fixed (`forceLabelWidth`): the row is a *self-sufficient* two-column grid, so
+//     it keeps its layout anywhere in the DOM — including nested inside a div,
+//     Stack or Accordion — and all rows align because they share $labelTrack.
+//   - auto: the row is a `subgrid` of the SectionGrid so the auto-sized label
+//     column is shared across rows. NOTE: `subgrid` only works when this row is a
+//     *direct grid item* of a SectionGrid. A FormGroup nested inside another
+//     element breaks that chain and the row loses its columns — either set
+//     `forceLabelWidth` on the section, or wrap the nested groups in their own
+//     FormSection.
+const FieldSubgridRow = styled.div<{
+  $direction: 'vertical' | 'horizontal';
+  $responsive: boolean;
+  $labelTrack: string;
+  $fixedLabel: boolean;
+}>`
+  display: grid;
+  grid-column: 1 / -1;
+  row-gap: ${spacing.r4};
+  ${({ $direction, $responsive, $labelTrack, $fixedLabel }) => {
+    if ($direction === 'vertical') {
+      return css`
+        grid-template-columns: 1fr;
+      `;
+    }
+    const fieldTrack = $responsive
+      ? `minmax(${FIELD_MIN_REM}rem, 1fr)`
+      : 'max-content';
+    return css`
+      column-gap: ${spacing.r32};
+      align-items: baseline;
+      grid-template-columns: ${
+        $fixedLabel ? `${$labelTrack} ${fieldTrack}` : 'subgrid'
+      };
+      ${
+        $responsive &&
+        css`
+          @container responsive (max-width: ${STACK_BELOW}) {
+            grid-template-columns: 1fr;
+            align-items: stretch;
+          }
+        `
+      }
+    `;
+  }}
 `;
 
 const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
@@ -195,9 +252,13 @@ const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
     `}
 `;
 
-// Presence marker so a FormGroup can assert it is rendered inside a FormSection
-// (its `subgrid` row is meaningless without the section grid as its parent).
-const FormSectionContext = createContext<boolean>(false);
+// Carries the section's label-column config down to each FormGroup so a row can
+// build its own layout. Null outside a FormSection — a FormGroup then throws.
+type SectionLabelConfig = {
+  labelTrack: string;
+  fixedLabel: boolean;
+};
+const FormSectionContext = createContext<SectionLabelConfig | null>(null);
 
 const RequireModeContext = createContext<'all' | 'partial'>('partial');
 
@@ -235,10 +296,10 @@ const FormGroup = ({
   helpErrorPosition = 'right',
   disabled,
 }: FormGroupProps) => {
-  const insideSection = useContext(FormSectionContext);
+  const sectionLabel = useContext(FormSectionContext);
   const requireMode = useContext(RequireModeContext);
   const { responsive } = useContext(FormResponsiveContext);
-  if (!insideSection) {
+  if (!sectionLabel) {
     throw new Error('FormGroup cannot be used outside of FormSection');
   }
 
@@ -299,7 +360,12 @@ const FormGroup = ({
 
   return (
     <FieldContext.Provider value={value}>
-      <FieldSubgridRow $direction={direction} $responsive={responsive}>
+      <FieldSubgridRow
+        $direction={direction}
+        $responsive={responsive}
+        $labelTrack={sectionLabel.labelTrack}
+        $fixedLabel={sectionLabel.fixedLabel}
+      >
         <GridLabelCell $hasHelpTooltip={!!labelHelpTooltip}>
           {labelContent}
         </GridLabelCell>
@@ -312,6 +378,11 @@ const FormGroup = ({
 type FormSectionProps = {
   children: ReactElement<FormGroupProps> | ReactElement<FormGroupProps>[];
   title?: { name: string; icon?: IconName; helpTooltip?: string };
+  /**
+   * Freezes the label column to exactly this pixel width — a hard cap: labels
+   * wider than it wrap rather than widening the column. When unset, the column
+   * auto-sizes to the widest label in the section.
+   */
   forceLabelWidth?: number;
   rightActions?: ReactNode;
 };
@@ -328,21 +399,23 @@ const FormSection = ({
     isValidElement(child) ? child.props.required === true : false,
   );
 
-  // The label column is a grid track. `forceLabelWidth` is a hard cap that freezes
-  // it (long labels then wrap, mirroring how `Input`'s `size` fixes the field
-  // width). Otherwise it auto-sizes to the widest label from content — the grid
-  // aligns labels across the section, so no measurement is needed. Responsive
-  // lets the track shrink to its longest word (min-content) before the section
-  // flips; non-responsive hugs the widest label (max-content).
-  const labelTrack =
-    forceLabelWidth != null
-      ? `${forceLabelWidth}px`
-      : responsive
-        ? 'minmax(min-content, max-content)'
-        : 'max-content';
+  // The label column. `forceLabelWidth` is a hard cap that freezes it to an exact
+  // pixel width (long labels then wrap, mirroring how `Input`'s `size` fixes the
+  // field width); it also makes every FormGroup row self-sufficient, so nesting a
+  // group inside another element no longer breaks its layout. When unset, the
+  // column auto-sizes to the widest label from content, shared across rows via
+  // `subgrid` — no measurement. Responsive lets the track shrink to its longest
+  // word (min-content) before the section flips; non-responsive hugs it
+  // (max-content).
+  const fixedLabel = forceLabelWidth != null;
+  const labelTrack = fixedLabel
+    ? `${forceLabelWidth}px`
+    : responsive
+      ? 'minmax(min-content, max-content)'
+      : 'max-content';
 
   return (
-    <FormSectionContext.Provider value={true}>
+    <FormSectionContext.Provider value={{ labelTrack, fixedLabel }}>
       <Stack direction="vertical" gap="r12">
         {title && (
           <Wrap>
@@ -363,7 +436,11 @@ const FormSection = ({
             <div>{rightActions}</div>
           </Wrap>
         )}
-        <SectionGrid $labelTrack={labelTrack} $responsive={responsive}>
+        <SectionGrid
+          $labelTrack={labelTrack}
+          $responsive={responsive}
+          $fixedLabel={fixedLabel}
+        >
           {children}
         </SectionGrid>
       </Stack>
