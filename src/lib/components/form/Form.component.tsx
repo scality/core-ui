@@ -35,9 +35,8 @@ type FormProps = Omit<
    * overflowing. It also lays each `FormSection` out as a two-column grid that
    * auto-flips to a stacked single column on narrow widths — there is no
    * breakpoint prop; the flip point is derived from the layout (see below).
-   * Note: only `Input` currently honors the fluid width — `Select`, `SearchInput`,
-   * `TextArea` and other size-driven content keep their fixed width for now
-   * (tracked in CUI-36).
+   * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
+   * `TextArea` and other size-driven content keep their fixed width for now.
    */
   responsive?: boolean;
 };
