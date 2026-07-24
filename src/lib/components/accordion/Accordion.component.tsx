@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -50,8 +50,9 @@ const AccordionHeader = styled.button<{
 
 const AccordionContent = styled.div<{
   $isOpen: boolean;
+  $isExpanded: boolean;
 }>`
-  overflow: hidden;
+  overflow: ${(props) => (props.$isOpen && props.$isExpanded ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.$isOpen ? 1 : 0)};
   transition:
     height 0.3s ease-in,
@@ -72,10 +73,17 @@ export const Accordion = ({
   isEmphazed = true,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(open);
+  const [isExpanded, setIsExpanded] = useState(open);
 
   useMemo(() => {
     setIsOpen(open);
   }, [open]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsExpanded(false);
+    }
+  }, [isOpen]);
 
   const handleToggleContent = (
     e:
@@ -83,6 +91,18 @@ export const Accordion = ({
       | React.KeyboardEvent<HTMLButtonElement>,
   ) => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Only react to this element's own height transition finishing, not a
+    // height transition bubbling up from a descendant.
+    if (
+      e.target === e.currentTarget &&
+      e.propertyName === 'height' &&
+      isOpen
+    ) {
+      setIsExpanded(true);
+    }
   };
 
   return (
@@ -121,7 +141,9 @@ export const Accordion = ({
             element?.style.setProperty('height', '0px');
           }
         }}
+        onTransitionEnd={handleTransitionEnd}
         $isOpen={isOpen}
+        $isExpanded={isExpanded}
         id={id}
         aria-labelledby={`Accordion-header-${id}`}
         role="region"
