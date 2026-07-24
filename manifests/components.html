@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">340 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">24 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">345 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.5s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -6687,10 +6687,10 @@ supportLink?: string = undefined</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Form</h2>
       <div class="badges">
-        <label for="c-23-templates-form-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-23-templates-form-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-23-templates-form-info" class="badge info as-toggle">1 info</label>
-        <label for="c-23-templates-form-stories" class="badge ok as-toggle">5 stories</label>
-        
+        <label for="c-23-templates-form-stories" class="badge ok as-toggle">10 stories</label>
+        <label for="c-23-templates-form-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
     </div>
@@ -6704,7 +6704,7 @@ supportLink?: string = undefined</code></pre>
   
   <input id="c-23-templates-form-info" class="tg tg-info" type="checkbox" hidden />
   <input id="c-23-templates-form-stories" class="tg tg-stories" type="checkbox" hidden />
-  
+  <input id="c-23-templates-form-docs" class="tg tg-docs" type="checkbox" hidden />
   
   <input id="c-23-templates-form-props" class="tg tg-props" type="checkbox" hidden />
 
@@ -6723,7 +6723,7 @@ supportLink?: string = undefined</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">5 prop types</span>
+              <span class="badge ok">6 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/form/Form.component.tsx::Form</code></pre>
             <pre><code>Props:</code></pre>
@@ -6734,6 +6734,18 @@ layout: { kind: &quot;tab&quot;; } | { kind: &quot;page&quot;; title: string; su
 leftActions?: ReactNode
 
 requireMode?: &quot;all&quot; | &quot;partial&quot;
+
+/**
+ * Makes contained fields fluid: their `size`-derived width becomes a preferred
+ * width that shrinks to fit the column (capped at `max-width: 100%`) instead of
+ * overflowing. It also lays each `FormSection` out as a two-column grid that
+ * auto-flips to a stacked single column on narrow widths — there is no
+ * breakpoint prop; the flip point is derived from the layout (see below).
+ * Note: only `Input` currently honors the fluid width — `Select`, `SearchInput`,
+ * `TextArea` and other size-driven content keep their fixed width for now
+ * (tracked in CUI-36).
+ */
+responsive?: boolean
 
 rightActions?: ReactNode</code></pre>
           </div>
@@ -6751,15 +6763,20 @@ rightActions?: ReactNode</code></pre>
     Accordion,
     Banner,
     Button,
+    Checkbox,
+    ConstrainedText,
     Form,
     FormGroup,
     FormSection,
     Icon,
     Input,
+    RadioGroup,
     Select,
     Stack,
     Text,
+    TextArea,
     Toggle,
+    Tooltip,
 } from "@scality/core-ui";</code></pre>
               </div>
           
@@ -6941,6 +6958,431 @@ rightActions?: ReactNode</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
+                <span class="ex-name">Responsive Form</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveForm = ({ requireMode, responsive }) =&gt; {
+  const [analytics, setAnalytics] = useState(true);
+  const [versioning, setVersioning] = useState(false);
+  const [lockMode, setLockMode] = useState(&#39;governance&#39;);
+
+  return (
+    &lt;div
+      style={{
+        resize: &#39;horizontal&#39;,
+        overflow: &#39;auto&#39;,
+        minWidth: &#39;18rem&#39;,
+        maxWidth: &#39;100%&#39;,
+        border: &#39;1px dashed #666&#39;,
+        height: &#39;40rem&#39;,
+      }}
+    &gt;
+      &lt;Form
+        layout={{ kind: &#39;tab&#39; }}
+        requireMode={requireMode}
+        responsive={responsive}
+        rightActions={
+          &lt;Stack gap={&#39;r16&#39;}&gt;
+            &lt;Button variant=&quot;outline&quot; label=&quot;Cancel&quot; /&gt;
+            &lt;Button
+              variant=&quot;primary&quot;
+              label=&quot;Save&quot;
+              icon={&lt;Icon name=&quot;Save&quot; /&gt;}
+            /&gt;
+          &lt;/Stack&gt;
+        }
+      &gt;
+        &lt;FormSection
+          title={{
+            name: &#39;Mixed field types&#39;,
+            helpTooltip: &#39;One of every common input, in horizontal rows&#39;,
+            icon: &#39;Node-backend&#39;,
+          }}
+          forceLabelWidth={200} // force the label column to 200px wide
+        &gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Bucket name&quot;
+            id=&quot;bucket-name&quot;
+            labelHelpTooltip=&quot;The name of the bucket&quot;
+            content={&lt;Input id=&quot;bucket-name&quot; /&gt;}
+            help=&quot;Optional helper text&quot;
+            required
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Analytics&quot;
+            id=&quot;analytics&quot;
+            content={
+              &lt;Checkbox
+                id=&quot;analytics&quot;
+                label=&quot;Enable usage analytics&quot;
+                checked={analytics}
+                onChange={() =&gt; setAnalytics(!analytics)}
+              /&gt;
+            }
+            error=&quot;Analytics must be enabled while the trial is active.&quot;
+            helpErrorPosition=&quot;right&quot;
+            required={false}
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Object Lock Mode&quot;
+            id=&quot;lock-mode&quot;
+            labelHelpTooltip=&quot;S3 Object Lock Retention&quot;
+            content={
+              &lt;RadioGroup
+                name=&quot;lock-mode&quot;
+                aria-label=&quot;Object Lock Mode&quot;
+                value={lockMode}
+                onChange={setLockMode}
+                options={[
+                  { value: &#39;governance&#39;, label: &#39;Governance&#39; },
+                  { value: &#39;compliance&#39;, label: &#39;Compliance&#39; },
+                ]}
+              /&gt;
+            }
+            required
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Versioning&quot;
+            id=&quot;versioning&quot;
+            content={
+              &lt;Toggle
+                name=&quot;versioning&quot;
+                toggle={versioning}
+                onChange={() =&gt; setVersioning(!versioning)}
+              /&gt;
+            }
+            required={false}
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Description&quot;
+            id=&quot;description&quot;
+            content={
+              &lt;TextArea
+                id=&quot;description&quot;
+                placeholder=&quot;Describe this bucket for other operators&quot;
+              /&gt;
+            }
+            help=&quot;Shown in the destination console.&quot;
+            required={false}
+          /&gt;
+        &lt;/FormSection&gt;
+
+        &lt;FormSection
+          title={{
+            name: &#39;Read-only details&#39;,
+            helpTooltip:
+              &#39;Text-only fields that display a value, not an input&#39;,
+            icon: &#39;Info-circle&#39;,
+          }}
+        &gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;User Type&quot;
+            id=&quot;userType&quot;
+            content={
+              &lt;Text&gt;
+                &lt;Stack&gt;
+                  &lt;Tooltip overlay={&#39;Remote User&#39;}&gt;
+                    &lt;Icon name=&quot;Simple-user&quot; ariaLabel=&quot;Remote User&quot; /&gt;
+                  &lt;/Tooltip&gt;
+                  Remote
+                &lt;/Stack&gt;
+              &lt;/Text&gt;
+            }
+            required={false}
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Username&quot;
+            id=&quot;username&quot;
+            content={
+              &lt;div style={{ overflow: &#39;hidden&#39;, width: &#39;20.5rem&#39; }}&gt;
+                &lt;ConstrainedText
+                  text={
+                    &lt;Text&gt;
+                      a-very-long-username-that-will-be-clamped-across-two-lines-when-it-does-not-fit
+                    &lt;/Text&gt;
+                  }
+                  lineClamp={2}
+                /&gt;
+              &lt;/div&gt;
+            }
+            required={false}
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Created on&quot;
+            id=&quot;createdOn&quot;
+            content={&lt;Text&gt;2026-07-17 10:24 UTC&lt;/Text&gt;}
+            required={false}
+          /&gt;
+        &lt;/FormSection&gt;
+      &lt;/Form&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Sized Inputs</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveSizedInputs = ({ requireMode, responsive }) =&gt; (
+  &lt;ResizeFrame&gt;
+    &lt;Form
+      layout={{ kind: &#39;tab&#39; }}
+      requireMode={requireMode}
+      responsive={responsive}
+    &gt;
+      &lt;FormSection title={{ name: &#39;Sized inputs&#39;, icon: &#39;Node-backend&#39; }}&gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;Default (size 1)&quot;
+          id=&quot;w-default&quot;
+          labelHelpTooltip=&quot;The help icon reserves ~2rem in the label column&quot;
+          content={&lt;Input id=&quot;w-default&quot; placeholder=&quot;20.5rem&quot; /&gt;}
+        /&gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;Two thirds&quot;
+          id=&quot;w-23&quot;
+          content={&lt;Input id=&quot;w-23&quot; size=&quot;2/3&quot; placeholder=&quot;14rem&quot; /&gt;}
+        /&gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;Half&quot;
+          id=&quot;w-12&quot;
+          content={&lt;Input id=&quot;w-12&quot; size=&quot;1/2&quot; placeholder=&quot;10rem&quot; /&gt;}
+        /&gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;One third&quot;
+          id=&quot;w-13&quot;
+          content={&lt;Input id=&quot;w-13&quot; size=&quot;1/3&quot; placeholder=&quot;6rem&quot; /&gt;}
+        /&gt;
+      &lt;/FormSection&gt;
+    &lt;/Form&gt;
+  &lt;/ResizeFrame&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Widthless Fields</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveWidthlessFields = ({ requireMode, responsive }) =&gt; {
+  const [subscribe, setSubscribe] = useState(true);
+  const [active, setActive] = useState(false);
+  const [tier, setTier] = useState(&#39;standard&#39;);
+  return (
+    &lt;ResizeFrame&gt;
+      &lt;Form
+        layout={{ kind: &#39;tab&#39; }}
+        requireMode={requireMode}
+        responsive={responsive}
+      &gt;
+        &lt;FormSection
+          title={{ name: &#39;Width-less fields&#39;, icon: &#39;Info-circle&#39; }}
+        &gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Notifications&quot;
+            id=&quot;nw-check&quot;
+            content={
+              &lt;Checkbox
+                id=&quot;nw-check&quot;
+                label=&quot;Email me updates&quot;
+                checked={subscribe}
+                onChange={() =&gt; setSubscribe(!subscribe)}
+              /&gt;
+            }
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Active&quot;
+            id=&quot;nw-toggle&quot;
+            content={
+              &lt;Toggle
+                name=&quot;nw-toggle&quot;
+                toggle={active}
+                onChange={() =&gt; setActive(!active)}
+              /&gt;
+            }
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Tier&quot;
+            id=&quot;nw-radio&quot;
+            labelHelpTooltip=&quot;Determines the feature set available&quot;
+            content={
+              &lt;RadioGroup
+                name=&quot;nw-radio&quot;
+                aria-label=&quot;Tier&quot;
+                value={tier}
+                onChange={setTier}
+                options={[
+                  { value: &#39;standard&#39;, label: &#39;Standard&#39; },
+                  { value: &#39;premium&#39;, label: &#39;Premium&#39; },
+                ]}
+              /&gt;
+            }
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Created on&quot;
+            id=&quot;nw-text&quot;
+            content={&lt;Text&gt;2026-07-22 09:14 UTC&lt;/Text&gt;}
+          /&gt;
+        &lt;/FormSection&gt;
+      &lt;/Form&gt;
+    &lt;/ResizeFrame&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Mixed Fields</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveMixedFields = ({ requireMode, responsive }) =&gt; {
+  const [region, setRegion] = useState(&#39;&#39;);
+  return (
+    &lt;ResizeFrame&gt;
+      &lt;Form
+        layout={{ kind: &#39;tab&#39; }}
+        requireMode={requireMode}
+        responsive={responsive}
+      &gt;
+        &lt;FormSection title={{ name: &#39;Mixed widths&#39;, icon: &#39;Node-backend&#39; }}&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Bucket name&quot;
+            id=&quot;mx-input&quot;
+            content={&lt;Input id=&quot;mx-input&quot; /&gt;}
+            help=&quot;Input — fluid, shrinks to fit&quot;
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Region&quot;
+            id=&quot;mx-select&quot;
+            content={
+              &lt;Select
+                id=&quot;mx-select&quot;
+                placeholder=&quot;Choose a region&quot;
+                value={region}
+                onChange={setRegion}
+              &gt;
+                &lt;Select.Option value=&quot;us-east&quot;&gt;US East&lt;/Select.Option&gt;
+                &lt;Select.Option value=&quot;eu-west&quot;&gt;EU West&lt;/Select.Option&gt;
+              &lt;/Select&gt;
+            }
+            help=&quot;Select — fixed width, overflows (CUI-36)&quot;
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Description&quot;
+            id=&quot;mx-textarea&quot;
+            content={
+              &lt;TextArea
+                id=&quot;mx-textarea&quot;
+                placeholder=&quot;No width set → browser default&quot;
+              /&gt;
+            }
+            help=&quot;TextArea — browser-default width, overflows (CUI-36)&quot;
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Confirm&quot;
+            id=&quot;mx-check&quot;
+            content={
+              &lt;Checkbox
+                id=&quot;mx-check&quot;
+                label=&quot;I understand&quot;
+                checked
+                onChange={() =&gt; undefined}
+              /&gt;
+            }
+          /&gt;
+        &lt;/FormSection&gt;
+      &lt;/Form&gt;
+    &lt;/ResizeFrame&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Nesting And Non Field Content</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const NestingAndNonFieldContent = ({ requireMode, responsive }) =&gt; (
+  &lt;ResizeFrame&gt;
+    &lt;Form
+      layout={{ kind: &#39;tab&#39; }}
+      requireMode={requireMode}
+      responsive={responsive}
+    &gt;
+      &lt;FormSection
+        title={{ name: &#39;Fixed label width&#39; }}
+        forceLabelWidth={180}
+      &gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;Direct child&quot;
+          id=&quot;fx-direct&quot;
+          content={&lt;Input id=&quot;fx-direct&quot; size=&quot;1/2&quot; /&gt;}
+        /&gt;
+        &lt;Banner variant=&quot;base&quot; icon={&lt;Icon name=&quot;Info-circle&quot; /&gt;}&gt;
+          A non-FormGroup child (this Banner) spans the full section width.
+        &lt;/Banner&gt;
+        &lt;div&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Nested in a div&quot;
+            id=&quot;fx-nested&quot;
+            content={&lt;Input id=&quot;fx-nested&quot; size=&quot;1/2&quot; /&gt;}
+          /&gt;
+        &lt;/div&gt;
+      &lt;/FormSection&gt;
+      &lt;FormSection title={{ name: &#39;Auto label width&#39; }}&gt;
+        &lt;FormGroup
+          direction=&quot;horizontal&quot;
+          label=&quot;Direct child&quot;
+          id=&quot;au-direct&quot;
+          content={&lt;Input id=&quot;au-direct&quot; size=&quot;1/2&quot; /&gt;}
+        /&gt;
+        &lt;Banner variant=&quot;base&quot; icon={&lt;Icon name=&quot;Info-circle&quot; /&gt;}&gt;
+          A non-FormGroup child (this Banner) spans the full section width.
+        &lt;/Banner&gt;
+        &lt;div&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Nested in a div (stacks)&quot;
+            id=&quot;au-nested&quot;
+            content={&lt;Input id=&quot;au-nested&quot; size=&quot;1/2&quot; /&gt;}
+          /&gt;
+        &lt;/div&gt;
+      &lt;/FormSection&gt;
+    &lt;/Form&gt;
+  &lt;/ResizeFrame&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
                 <span class="ex-name">All Required Page Form</span>
                 <span class="badge ok">story ok</span>
               </div>
@@ -7088,8 +7530,8 @@ rightActions?: ReactNode</code></pre>
             required={false}
           &gt;&lt;/FormGroup&gt;
         &lt;/FormSection&gt;
-        &lt;FormSection&gt;
-          &lt;Accordion title=&quot;Advanced Settings&quot; id=&quot;advanced-settings&quot;&gt;
+        &lt;Accordion title=&quot;Advanced Settings&quot; id=&quot;advanced-settings&quot;&gt;
+          &lt;FormSection&gt;
             &lt;FormGroup
               direction=&quot;vertical&quot;
               label=&quot;Object Lock Mode&quot;
@@ -7148,8 +7590,8 @@ rightActions?: ReactNode</code></pre>
                 &lt;/Select&gt;
               }
             /&gt;
-          &lt;/Accordion&gt;
-        &lt;/FormSection&gt;
+          &lt;/FormSection&gt;
+        &lt;/Accordion&gt;
       &lt;/Form&gt;
     &lt;/&gt;
   );
@@ -7157,6 +7599,126 @@ rightActions?: ReactNode</code></pre>
             </div>
         </div>
     
+        <div class="panel panel-docs">
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Guideline</span>
+                <span class="badge ok">doc ok</span>
+              </div>
+              <div class="hint">./stories/form.guideline.mdx</div>
+              
+              <div class="mdx-content"><pre><code>import { Meta, Canvas } from &#39;@storybook/addon-docs/blocks&#39;;
+
+import * as FormStories from &#39;./form.stories&#39;;
+
+&lt;Meta name=&quot;Guideline&quot; of={FormStories} /&gt;
+
+&lt;style&gt;{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+`}&lt;/style&gt;
+
+# Form
+
+`Form` lays out a titled set of fields with consistent label placement, help and
+error text, and a shared actions bar. Fields are grouped with `FormSection` and
+`FormGroup`.
+
+## Responsive forms
+
+Set `responsive` on the `Form` to make it adapt to the width it is given. It is
+**opt-in**: without the prop the Form keeps its fixed-width layout, with fields at
+their `size`-derived widths and no flipping.
+
+`responsive` does two things:
+
+1. **Fluid fields** — a field&#39;s `size`-derived width becomes a _preferred_ width
+   that shrinks to fit its column (capped at `max-width: 100%`) instead of
+   overflowing.
+2. **Auto-flipping layout** — the field track becomes fluid and, when a section
+   gets too narrow, it flips to a single stacked column with each field dropping
+   under its own label. (A section is always laid out on CSS grid; `responsive`
+   only changes the field track and enables the flip.)
+
+&lt;Canvas of={FormStories.ResponsiveForm} /&gt;
+
+Drag the right edge of the framed area in the story above to watch the whole
+section flip between the row and stacked layouts.
+
+### There is no breakpoint prop
+
+The flip is **content-derived, not a magic number you pass in**. A section stacks
+once it can no longer give its columns a readable minimum:
+
+- **field floor — 10rem** (the `1/2` Input size). Below this a field would be too
+  narrow to read, so the section stacks instead of shrinking further.
+- **label floor — ~24ch.** Long labels wrap to about two lines before the section
+  stacks.
+
+Concretely the section stacks below `calc(24ch + 10rem + 2rem)` (label floor +
+field floor + the column gap). These are a readability policy, not a per-field
+measurement — fluid fields carry `min-width: 0`, so there is no intrinsic minimum
+to read off the DOM.
+
+### It responds to its container, not the viewport
+
+A `responsive` Form establishes a CSS containment context
+(`container-type: inline-size`) and its `@container` queries key off **its own
+width**. Put the Form in a narrow panel, drawer, or split view and it flips based
+on the space it actually has — no viewport media queries, no JS resize listeners.
+
+### Alignment is per `FormSection`
+
+Labels align within a section, not across the whole Form — each `FormSection`
+sizes its own label column. Do **not** expect labels in one section to line up
+with labels in another. This is deliberate: a section can be wrapped (e.g. an
+`Accordion` holding its own `FormSection`) without disturbing the sections around
+it.
+
+### Nesting and non-field content
+
+How a section aligns its labels — and how tolerant it is of nesting — depends on
+whether you set `forceLabelWidth`:
+
+- **With `forceLabelWidth`** (a fixed pixel label column) each `FormGroup` row is
+  self-contained, so you can nest groups inside a wrapper — a `div`, a `Stack`, an
+  `Accordion` — and they stay aligned. This is the robust choice for forms with
+  collapsible or grouped fields.
+- **Without `forceLabelWidth`** the label column auto-sizes to the widest label,
+  shared across rows via CSS `subgrid` — which requires each `FormGroup` to be a
+  **direct child** of the `FormSection`. A group nested inside another element
+  loses its row layout and stacks. Either set `forceLabelWidth`, or give the
+  nested groups their own `FormSection`.
+
+Either way, non-`FormGroup` content dropped straight into a section (a `Banner`,
+an `InfoMessage`, explanatory `Text`) spans the full section width — place it
+freely.
+
+### Freezing the label column
+
+`FormSection`&#39;s `forceLabelWidth` pins the label column to an exact pixel width.
+It is a **hard cap**: a label wider than it wraps rather than widening the column
+(mirroring how an `Input`&#39;s `size` fixes the field width). Beyond fixing the
+width, it also makes the section&#39;s rows nesting-robust (see above). Leave it unset
+to let the column auto-size to the widest label.
+
+### Per-field direction still wins
+
+`FormGroup`&#39;s `direction` is still honored inside a responsive Form. A
+`horizontal` group participates in the row/stack flip; a `vertical` group is
+always stacked (label above field) at every width.
+
+### Current limitation
+
+Only `Input` honors the fluid width today. `Select`, `SearchInput`, `TextArea`
+and other size-driven content still render at their fixed `size` width inside a
+responsive Form (tracked in **CUI-36**). Prefer `Input`-based fields when building
+a form that needs to shrink cleanly, until the other inputs opt in.
+</code></pre></div>
+            </div>
+        </div>
     
   </div>
 </article>
@@ -8358,7 +8920,7 @@ This component automatically adapts its background to contrast with its parent e
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> InlineInput</h2>
       <div class="badges">
-        <label for="c-30-components-inlineinput-props" class="badge ok as-toggle">14 prop types</label>
+        <label for="c-30-components-inlineinput-props" class="badge ok as-toggle">15 prop types</label>
         <label for="c-30-components-inlineinput-info" class="badge info as-toggle">1 info</label>
         <label for="c-30-components-inlineinput-stories" class="badge ok as-toggle">7 stories</label>
         
@@ -8394,7 +8956,7 @@ This component automatically adapts its background to contrast with its parent e
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">14 prop types</span>
+              <span class="badge ok">15 prop types</span>
             </div>
             <pre><code>Component: src/lib/index.ts::InlineInput</code></pre>
             <pre><code>Props:</code></pre>
@@ -8407,6 +8969,8 @@ confirmationModal?: ((args: ConfirmationModalRenderArgs) =&gt; ReactNode)
 defaultValue?: string
 
 editTooltip?: string = Edit
+
+fluid?: boolean
 
 helperTextPlacement?: &quot;bottom&quot; | &quot;right&quot; = right
 
@@ -8768,7 +9332,7 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from "@scality/core-u
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> InputV2</h2>
       <div class="badges">
-        <label for="c-32-components-inputs-input-props" class="badge ok as-toggle">8 prop types</label>
+        <label for="c-32-components-inputs-input-props" class="badge ok as-toggle">9 prop types</label>
         <label for="c-32-components-inputs-input-info" class="badge info as-toggle">1 info</label>
         <label for="c-32-components-inputs-input-stories" class="badge ok as-toggle">6 stories</label>
         
@@ -8804,11 +9368,13 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from "@scality/core-u
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">8 prop types</span>
+              <span class="badge ok">9 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/inputv2/inputv2.tsx::Input</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>error?: string
+
+fluid?: boolean
 
 id?: string
 
