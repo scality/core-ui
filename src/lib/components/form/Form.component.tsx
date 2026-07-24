@@ -391,9 +391,11 @@ type FormSectionProps = {
   children: ReactElement<FormGroupProps> | ReactElement<FormGroupProps>[];
   title?: { name: string; icon?: IconName; helpTooltip?: string };
   /**
-   * Freezes the label column to exactly this pixel width — a hard cap: labels
-   * wider than it wrap rather than widening the column. When unset, the column
-   * auto-sizes to the widest label in the section.
+   * Caps the label column at this pixel width: labels wider than it wrap rather
+   * than widening the column. In a `responsive` Form the column keeps this width
+   * while there is room but shrinks below it (down to the longest word) as the
+   * field track is squeezed, so rows stay aligned; otherwise it is pinned to this
+   * exact width. When unset, the column auto-sizes to the widest label.
    */
   forceLabelWidth?: number;
   rightActions?: ReactNode;
@@ -411,20 +413,19 @@ const FormSection = ({
     isValidElement(child) ? child.props.required === true : false,
   );
 
-  // The label column. `forceLabelWidth` is a hard cap that freezes it to an exact
-  // pixel width (long labels then wrap, mirroring how `Input`'s `size` fixes the
-  // field width); it also makes every FormGroup row self-sufficient, so nesting a
-  // group inside another element no longer breaks its layout. When unset, the
-  // column auto-sizes to the widest label from content, shared across rows via
-  // `subgrid` — no measurement. Responsive lets the track shrink to its longest
-  // word (min-content) before the section flips; non-responsive hugs it
-  // (max-content).
+  // The label column. `forceLabelWidth` sets the column's upper bound to an exact
+  // pixel width (labels wider than it wrap, mirroring how `Input`'s `size` fixes
+  // the field width); it also makes every FormGroup row self-sufficient, so nesting
+  // a group inside another element no longer breaks its layout. When unset, the
+  // column's cap is its widest label (`max-content`), shared across rows via
+  // `subgrid` — no measurement. Responsive then lets the column shrink from its
+  // longest word (`min-content`) up to that cap before the section flips;
+  // non-responsive pins it to the cap.
   const fixedLabel = forceLabelWidth != null;
-  const labelTrack = fixedLabel
-    ? `${forceLabelWidth}px`
-    : responsive
-      ? 'minmax(min-content, max-content)'
-      : 'max-content';
+  const labelWidthCap = fixedLabel ? `${forceLabelWidth}px` : 'max-content';
+  const labelTrack = responsive
+    ? `minmax(min-content, ${labelWidthCap})`
+    : labelWidthCap;
 
   return (
     <FormSectionContext.Provider value={{ labelTrack, fixedLabel }}>
