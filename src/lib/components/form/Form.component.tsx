@@ -339,7 +339,20 @@ const FormGroup = ({
     <Stack
       direction={helpErrorPosition === 'right' ? 'horizontal' : 'vertical'}
       gap={helpErrorPosition === 'right' ? 'r8' : 'r4'}
-      style={responsive ? { minWidth: 0 } : undefined}
+      style={
+        responsive
+          ? {
+              minWidth: 0,
+              // Left-align rather than stretch, so a width-less control (a
+              // TextArea sized only by its `cols`) keeps its intrinsic size in
+              // the fluid `1fr` field column instead of growing to fill it.
+              // Input is unaffected — it caps itself via `max-width: 100%`.
+              ...(helpErrorPosition === 'right'
+                ? {}
+                : { alignItems: 'flex-start' }),
+            }
+          : undefined
+      }
     >
       {content}
       {error ? (
