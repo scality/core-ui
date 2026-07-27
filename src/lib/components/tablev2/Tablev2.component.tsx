@@ -105,6 +105,14 @@ export type TableProps<
    * narrow viewports. Opt-in; defaults to `false` (no behaviour change).
    */
   revealDroppedColumns?: boolean;
+  /**
+   * When `true` (default), the virtualized body shows a bottom scroll fade that
+   * hints at more rows and auto-hides once the user reaches the end. Set to
+   * `false` to opt out when the fade is unnecessary or looks out of place
+   * (e.g. tables that never overflow, or those inside an already-faded
+   * container).
+   */
+  scrollFade?: boolean;
   //To call it from the Cell renderer to update the original data
 } & UpdateTableData<DATA_ROW>;
 
@@ -143,6 +151,8 @@ type TableContextType<
   hasScrollbar?: boolean;
   /** Ids of the columns currently hidden by the responsive `dropAt` effect. */
   droppedColumnIds: Set<string>;
+  /** Whether the virtualized body renders the bottom scroll fade. */
+  scrollFade: boolean;
 };
 const TableContext = createContext<TableContextType | null>(null);
 
@@ -219,6 +229,7 @@ function Table<
   status,
   entityName,
   revealDroppedColumns = false,
+  scrollFade = true,
 }: TableProps<DATA_ROW>) {
   sortTypes = {
     health: (row1, row2) => {
@@ -448,6 +459,7 @@ function Table<
     setHasScrollbar,
     hasScrollbar,
     droppedColumnIds,
+    scrollFade,
   };
   return (
     <TableContext.Provider
