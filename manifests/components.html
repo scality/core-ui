@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.5s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14702,7 +14702,7 @@ steps: StepProps[]</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Table</h2>
       <div class="badges">
-        <label for="c-55-components-data-display-table-props" class="badge ok as-toggle">14 prop types</label>
+        <label for="c-55-components-data-display-table-props" class="badge ok as-toggle">15 prop types</label>
         <label for="c-55-components-data-display-table-info" class="badge info as-toggle">1 info</label>
         <label for="c-55-components-data-display-table-stories" class="badge ok as-toggle">12 stories</label>
         <label for="c-55-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
@@ -14738,7 +14738,7 @@ steps: StepProps[]</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">14 prop types</span>
+              <span class="badge ok">15 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/tablev2/Tablev2.component.tsx::Table</code></pre>
             <pre><code>Props:</code></pre>
@@ -14781,6 +14781,15 @@ onBottomOffset?: number = 10
  * narrow viewports. Opt-in; defaults to `false` (no behaviour change).
  */
 revealDroppedColumns?: boolean = false
+
+/**
+ * When `true` (default), the virtualized body shows a bottom scroll fade that
+ * hints at more rows and auto-hides once the user reaches the end. Set to
+ * `false` to opt out when the fade is unnecessary or looks out of place
+ * (e.g. tables that never overflow, or those inside an already-faded
+ * container).
+ */
+scrollFade?: boolean = true
 
 sortTypes?: Record&lt;string, SortByFn&lt;DATA_ROW&gt;&gt;
 
