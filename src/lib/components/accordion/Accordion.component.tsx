@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -65,10 +65,14 @@ const AccordionContent = styled.div<{
     visibility 0.3s;
 `;
 
-// Clips the content while the row collapses; min-height: 0 lets the grid track
-// shrink below the content's min-content height so it can reach 0.
-const ContentClip = styled.div`
-  overflow: hidden;
+// Clips the content while the row collapses (min-height: 0 lets the grid track
+// shrink to 0). Once open and fully expanded, overflow is released so a child
+// that renders outside the box — a Select menu, dropdown or tooltip — is not
+// clipped by the accordion border (ARTESCA-17819).
+const ContentClip = styled.div<{
+  $isExpanded: boolean;
+}>`
+  overflow: ${(props) => (props.$isExpanded ? 'visible' : 'hidden')};
   min-height: 0;
 `;
 
@@ -86,6 +90,9 @@ export const Accordion = ({
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(open);
   const [previousOpenProp, setPreviousOpenProp] = useState(open);
+  // Gates overflow: true only once the open animation has finished, so the
+  // box still clips while it animates but lets content escape once settled.
+  const [isExpanded, setIsExpanded] = useState(open);
 
   // Sync to the `open` prop when it changes, while still letting the header
   // toggle drive state in between (adjusting state during render, per React docs).
@@ -94,8 +101,28 @@ export const Accordion = ({
     setIsOpen(open);
   }
 
+  useEffect(() => {
+    // Re-clip as soon as the accordion starts closing so nothing spills during
+    // the collapse animation, and so the next open starts clipped again.
+    if (!isOpen) {
+      setIsExpanded(false);
+    }
+  }, [isOpen]);
+
   const handleToggleContent = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Only react to this element's own row transition finishing, not a
+    // transition bubbling up from a descendant.
+    if (
+      e.target === e.currentTarget &&
+      e.propertyName === 'grid-template-rows' &&
+      isOpen
+    ) {
+      setIsExpanded(true);
+    }
   };
 
   return (
@@ -125,11 +152,12 @@ export const Accordion = ({
 
       <AccordionContent
         $isOpen={isOpen}
+        onTransitionEnd={handleTransitionEnd}
         id={id}
         aria-labelledby={`Accordion-header-${id}`}
         role="region"
       >
-        <ContentClip>
+        <ContentClip $isExpanded={isOpen && isExpanded}>
           <Wrapper style={style}>{children}</Wrapper>
         </ContentClip>
       </AccordionContent>
