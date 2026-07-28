@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -48,17 +48,30 @@ const AccordionHeader = styled.button<{
   `}
 `;
 
+// Animate open/closed by transitioning a single grid row from 0fr to 1fr.
+// A 1fr track always resolves to the content's current height, so content that
+// grows or shrinks while open follows instantly and is never clipped — no
+// height measurement needed.
 const AccordionContent = styled.div<{
   $isOpen: boolean;
 }>`
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: ${(props) => (props.$isOpen ? '1fr' : '0fr')};
   opacity: ${(props) => (props.$isOpen ? 1 : 0)};
+  visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
   transition:
-    height 0.3s ease-in,
+    grid-template-rows 0.3s ease-in,
     opacity 0.3s ease-in,
     visibility 0.3s;
-  visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
 `;
+
+// Clips the content while the row collapses; min-height: 0 lets the grid track
+// shrink below the content's min-content height so it can reach 0.
+const ContentClip = styled.div`
+  overflow: hidden;
+  min-height: 0;
+`;
+
 const Wrapper = styled.div`
   padding: ${spacing.r8} 0 ${spacing.r8} 0;
 `;
@@ -72,44 +85,16 @@ export const Accordion = ({
   isEmphazed = true,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(open);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [previousOpenProp, setPreviousOpenProp] = useState(open);
 
-  useMemo(() => {
+  // Sync to the `open` prop when it changes, while still letting the header
+  // toggle drive state in between (adjusting state during render, per React docs).
+  if (open !== previousOpenProp) {
+    setPreviousOpenProp(open);
     setIsOpen(open);
-  }, [open]);
+  }
 
-  useLayoutEffect(() => {
-    const content = contentRef.current;
-    if (!content) return;
-
-    const syncHeight = () => {
-      content.style.height =
-        isOpen && wrapperRef.current
-          ? `${wrapperRef.current.offsetHeight}px`
-          : '0px';
-    };
-    syncHeight();
-
-    // While open, follow the content height so it is never clipped when it grows
-    // or shrinks (e.g. a responsive Form flipping its fields to a stacked layout).
-    if (
-      !isOpen ||
-      typeof ResizeObserver === 'undefined' ||
-      !wrapperRef.current
-    ) {
-      return;
-    }
-    const observer = new ResizeObserver(syncHeight);
-    observer.observe(wrapperRef.current);
-    return () => observer.disconnect();
-  }, [isOpen, children]);
-
-  const handleToggleContent = (
-    e:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
+  const handleToggleContent = () => {
     setIsOpen((prev) => !prev);
   };
 
@@ -123,9 +108,6 @@ export const Accordion = ({
           onClick={handleToggleContent}
           aria-controls={id}
           aria-expanded={isOpen}
-          onKeyDown={(e) =>
-            (e.key === 'Enter' || e.key === ' ') && handleToggleContent
-          }
         >
           <Stack direction="horizontal" gap="r8">
             <Icon
@@ -142,15 +124,14 @@ export const Accordion = ({
       </h3>
 
       <AccordionContent
-        ref={contentRef}
         $isOpen={isOpen}
         id={id}
         aria-labelledby={`Accordion-header-${id}`}
         role="region"
       >
-        <Wrapper ref={wrapperRef} style={style}>
-          {children}
-        </Wrapper>
+        <ContentClip>
+          <Wrapper style={style}>{children}</Wrapper>
+        </ContentClip>
       </AccordionContent>
     </AccordionContainer>
   );
