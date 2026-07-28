@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
 import { Box } from '../box/Box';
@@ -109,21 +109,24 @@ export const Accordion = ({
     }
   }, [isOpen]);
 
-  const handleToggleContent = () => {
+  const handleToggleContent = useCallback(() => {
     setIsOpen((prev) => !prev);
-  };
+  }, []);
 
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    // Only react to this element's own row transition finishing, not a
-    // transition bubbling up from a descendant.
-    if (
-      e.target === e.currentTarget &&
-      e.propertyName === 'grid-template-rows' &&
-      isOpen
-    ) {
-      setIsExpanded(true);
-    }
-  };
+  const handleTransitionEnd = useCallback(
+    (e: React.TransitionEvent<HTMLDivElement>) => {
+      // Only react to this element's own row transition finishing, not a
+      // transition bubbling up from a descendant.
+      if (
+        e.target === e.currentTarget &&
+        e.propertyName === 'grid-template-rows' &&
+        isOpen
+      ) {
+        setIsExpanded(true);
+      }
+    },
+    [isOpen],
+  );
 
   return (
     <AccordionContainer>
