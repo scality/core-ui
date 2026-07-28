@@ -588,7 +588,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">345 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">346 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -613,7 +613,7 @@
       <div class="badges">
         <label for="c-0-components-accordion-props" class="badge ok as-toggle">5 prop types</label>
         <label for="c-0-components-accordion-info" class="badge info as-toggle">1 info</label>
-        <label for="c-0-components-accordion-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-0-components-accordion-stories" class="badge ok as-toggle">4 stories</label>
         <label for="c-0-components-accordion-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -671,7 +671,7 @@ title: string</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Accordion, Button, Stack, Text } from "@scality/core-ui";</code></pre>
+                <pre><code>import { Accordion, Button, Select, Stack, Text } from "@scality/core-ui";</code></pre>
               </div>
           
           
@@ -708,6 +708,27 @@ title: string</code></pre>
             &lt;Button label={&#39;Check&#39;} onClick={() =&gt; console.log(&#39;click&#39;)}&gt;&lt;/Button&gt;
         &lt;/Stack&gt;&lt;/Accordion&gt;
 &lt;/Stack&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Select At Bottom</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithSelectAtBottom = () =&gt; &lt;Accordion title=&quot;Advanced Settings&quot; open&gt;
+    &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+        &lt;Text&gt;Open the Select below — its menu must overflow past the accordion
+                      border and stay fully visible/scrollable (ARTESCA-17819).
+                    &lt;/Text&gt;
+        &lt;Select id=&quot;membership-type&quot; placeholder=&quot;Select a value...&quot;&gt;
+            &lt;Select.Option value=&quot;DN&quot;&gt;DN&lt;/Select.Option&gt;
+            &lt;Select.Option value=&quot;UID&quot;&gt;UID&lt;/Select.Option&gt;
+            &lt;Select.Option value=&quot;CN&quot;&gt;CN&lt;/Select.Option&gt;
+            &lt;Select.Option value=&quot;SAM&quot;&gt;sAMAccountName&lt;/Select.Option&gt;
+        &lt;/Select&gt;
+    &lt;/Stack&gt;
+&lt;/Accordion&gt;;</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
