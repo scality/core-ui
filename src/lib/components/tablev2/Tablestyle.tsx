@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import type { CSSProperties } from 'react';
 import {
   TableHeightKeyType,
   tableRowHeight,
@@ -12,11 +13,34 @@ import { spacing } from '../../spacing';
 const borderSize = '4px';
 export const SortIncentive = styled.span`
   position: absolute;
+  inset: 0;
   display: none;
+  align-items: center;
+  justify-content: center;
 `;
+// In-flow so it reserves its own width (never clipped/crowded on tight or
+// centered columns); the hover incentive stays absolute inside it so showing
+// it on hover causes no layout shift.
 export const SortCaretWrapper = styled.span`
-  padding-left: ${spacing.r4};
-  position: absolute;
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: ${spacing.r16};
+  margin-left: ${spacing.r4};
+`;
+export const HeaderContent = styled.div<{ $align?: CSSProperties['textAlign'] }>`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  justify-content: ${(props) =>
+    props.$align === 'right' || props.$align === 'end'
+      ? 'flex-end'
+      : props.$align === 'center'
+        ? 'center'
+        : 'flex-start'};
 `;
 export const TableHeader = styled.div<{
   $headerHeight?: number | string;
@@ -32,7 +56,7 @@ export const TableHeader = styled.div<{
       : 'default'};
   &:hover {
     ${SortIncentive} {
-      display: block;
+      display: flex;
     }
   }
   &:focus-visible {
