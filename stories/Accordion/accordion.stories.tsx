@@ -6,6 +6,7 @@ import {
   AccordionProps,
 } from '../../src/lib/components/accordion/Accordion.component';
 import { Button } from '../../src/lib/components/buttonv2/Buttonv2.component';
+import { Select } from '../../src/lib/components/selectv2/Selectv2.component';
 import { spacing, Stack } from '../../src/lib/spacing';
 import { Text } from '../../src/lib';
 
@@ -63,6 +64,28 @@ export const Stacked: AccordionStory = {
       <Accordion {...args} />
     </Stack>
   ),
+};
+
+export const WithSelectAtBottom: AccordionStory = {
+  render: (args) => (
+    <Accordion {...args} open>
+      <Stack direction="vertical" gap="r8">
+        <Text>
+          Open the Select below — its menu must overflow past the accordion
+          border and stay fully visible/scrollable (ARTESCA-17819).
+        </Text>
+        <Select id="membership-type" placeholder="Select a value...">
+          <Select.Option value="DN">DN</Select.Option>
+          <Select.Option value="UID">UID</Select.Option>
+          <Select.Option value="CN">CN</Select.Option>
+          <Select.Option value="SAM">sAMAccountName</Select.Option>
+        </Select>
+      </Stack>
+    </Accordion>
+  ),
+  args: {
+    title: 'Advanced Settings',
+  },
 };
 
 export const WithCustomStyle: AccordionStory = {
