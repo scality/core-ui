@@ -8,6 +8,7 @@ import {
   TableBody,
   TableHeader,
   SortCaret,
+  HeaderContent,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
@@ -205,10 +206,10 @@ export function SingleSelectableContent<
                     }
                   }}
                 >
-                  <div>
+                  <HeaderContent $align={column.cellStyle?.textAlign}>
                     {column.render('Header')}
                     <SortCaret column={column} />
-                  </div>
+                  </HeaderContent>
                 </TableHeader>
               );
             })}

@@ -8,6 +8,7 @@ import {
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
+  HeaderContent,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
@@ -270,7 +271,7 @@ export const MultiSelectableContent = <
                     }
                   }}
                 >
-                  <div>
+                  <HeaderContent $align={column?.cellStyle?.textAlign}>
                     {column.id === 'selection' ? (
                       <div
                         onClick={(event) => {
@@ -293,7 +294,7 @@ export const MultiSelectableContent = <
                       column.render('Header')
                     )}
                     <SortCaret column={column} />
-                  </div>
+                  </HeaderContent>
                 </TableHeader>
               );
             })}

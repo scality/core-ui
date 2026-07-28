@@ -10,9 +10,7 @@ describe('Form', () => {
       <Form
         layout={{ kind: 'page', title: 'Test Form' }}
         onSubmit={onSubmit}
-        rightActions={
-          <button type="submit">Submit</button>
-        }
+        rightActions={<button type="submit">Submit</button>}
       >
         <FormSection>
           <FormGroup
@@ -29,5 +27,50 @@ describe('Form', () => {
     await act(() => userEvent.keyboard('{Enter}'));
 
     expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('still submits and keeps fields usable when responsive is enabled', async () => {
+    const onSubmit = jest.fn((e) => e.preventDefault());
+    render(
+      <Form
+        layout={{ kind: 'tab' }}
+        responsive
+        onSubmit={onSubmit}
+        rightActions={<button type="submit">Submit</button>}
+      >
+        <FormSection>
+          <FormGroup
+            id="name-field"
+            label="Name"
+            content={<input type="text" id="name-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+
+    const input = screen.getByRole('textbox');
+    await act(() => userEvent.type(input, 'hello'));
+    expect(input).toHaveValue('hello');
+
+    await act(() => userEvent.click(screen.getByText('Submit')));
+    expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('keeps the labelled field visible and usable with responsive shrink', async () => {
+    render(
+      <Form layout={{ kind: 'tab' }} responsive>
+        <FormSection>
+          <FormGroup
+            id="email-field"
+            label="Email"
+            content={<input type="text" id="email-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+    expect(screen.getByText('Email')).toBeVisible();
+    const input = screen.getByRole('textbox');
+    await act(() => userEvent.type(input, 'x@y.z'));
+    expect(input).toHaveValue('x@y.z');
   });
 });

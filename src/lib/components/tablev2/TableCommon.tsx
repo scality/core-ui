@@ -25,13 +25,19 @@ import useSyncedScroll from './useSyncedScroll';
 import { CSSProperties } from 'styled-components';
 import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
 
-const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => (
-  <div
-    ref={ref}
-    {...props}
-    style={{ ...props.style, scrollBehavior: 'smooth' }}
-  />
-));
+const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
+  const { scrollFade } = useTableContext();
+  return (
+    <div
+      ref={ref}
+      {...props}
+      style={{ ...props.style, scrollBehavior: 'smooth' }}
+      className={[scrollFade && 'scroll-fade', props.className]
+        .filter(Boolean)
+        .join(' ')}
+    />
+  );
+});
 
 type VirtualizedRowsType<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,

@@ -30,11 +30,14 @@ type ButtonStyledProps = Omit<
 type ButtonWithLabel = ButtonStyledProps & {
   label: React.ReactNode;
   tooltip?: Omit<TooltipProps, 'children'>;
+  /** Collapse to icon-only: true = always; number = below N px (needs a `responsive` container ancestor); omit = never. */
+  iconOnly?: boolean | number;
 };
 
 /** Icon-only button - requires either string tooltip OR explicit aria-label */
 type IconOnlyButton = ButtonStyledProps & {
   label?: never;
+  iconOnly?: never;
 } & (
   | {
       tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
@@ -75,6 +78,7 @@ export const ButtonStyled = styled.button<ButtonStyledTransientProps>`
   font-size: ${fontSize.base};
   border-radius: ${spacing.r4};
   white-space: nowrap;
+  cursor: pointer;
   height: ${(props) => (props.$size === 'inline' ? spacing.r24 : spacing.r32)};
   ${(props) => {
     const brand = props.theme;
@@ -228,12 +232,31 @@ export const ButtonStyled = styled.button<ButtonStyledTransientProps>`
     `;
   }}
 `;
-export const ButtonLabel = styled.span`
+export const ButtonLabel = styled.span<{
+  $collapseAt?: number;
+  $alwaysCollapsed?: boolean;
+}>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  ${({ $alwaysCollapsed }) =>
+    $alwaysCollapsed &&
+    css`
+      display: none;
+    `}
+  ${({ $collapseAt }) =>
+    $collapseAt &&
+    css`
+      @container responsive (max-width: ${$collapseAt}px) {
+        display: none;
+      }
+    `}
 `;
-export const ButtonIcon = styled.span<{ $label: React.ReactNode }>`
+export const ButtonIcon = styled.span<{
+  $label: React.ReactNode;
+  $collapseAt?: number;
+  $alwaysCollapsed?: boolean;
+}>`
   ${(props) =>
     props.$label &&
     css`
@@ -242,11 +265,25 @@ export const ButtonIcon = styled.span<{ $label: React.ReactNode }>`
       justify-content: center;
       align-items: center;
     `}
+  ${({ $alwaysCollapsed }) =>
+    $alwaysCollapsed &&
+    css`
+      padding-right: 0;
+    `}
+  ${({ $collapseAt }) =>
+    $collapseAt &&
+    css`
+      @container responsive (max-width: ${$collapseAt}px) {
+        padding-right: 0;
+      }
+    `}
 `;
 
 export const ButtonLoader = styled(Loader)<{
   $label?: React.ReactNode;
   $variant?: ButtonStyledProps['variant'];
+  $collapseAt?: number;
+  $alwaysCollapsed?: boolean;
 }>`
   ${(props) => {
     return css`
@@ -260,6 +297,18 @@ export const ButtonLoader = styled(Loader)<{
       }
     `;
   }}
+  ${({ $alwaysCollapsed }) =>
+    $alwaysCollapsed &&
+    css`
+      margin-right: 0;
+    `}
+  ${({ $collapseAt }) =>
+    $collapseAt &&
+    css`
+      @container responsive (max-width: ${$collapseAt}px) {
+        margin-right: 0;
+      }
+    `}
 `;
 
 function Button({
@@ -271,6 +320,7 @@ function Button({
   onClick,
   tooltip,
   isLoading,
+  iconOnly,
   ...rest
 }: Props) {
   if (!icon && !label) {
@@ -279,17 +329,48 @@ function Button({
     );
   }
 
+  if (
+    iconOnly &&
+    label &&
+    typeof label !== 'string' &&
+    !(rest as { 'aria-label'?: string })['aria-label'] &&
+    typeof tooltip?.overlay !== 'string'
+  ) {
+    console.warn(
+      'Button: `iconOnly` collapses a non-string label, which leaves the button with no accessible name. Pass a string label, an `aria-label`, or a string `tooltip.overlay`.',
+    );
+  }
+
+  const alwaysCollapsed = iconOnly === true;
+  const collapseAt = typeof iconOnly === 'number' ? iconOnly : undefined;
+
+  // When collapsing a labelled button, the visible label may be CSS-hidden, so
+  // pin the accessible name unless one was passed explicitly: prefer a string
+  // label, otherwise fall back to a string tooltip overlay.
+  const labelDrivenAriaLabel =
+    iconOnly && !(rest as { 'aria-label'?: string })['aria-label']
+      ? typeof label === 'string'
+        ? label
+        : typeof tooltip?.overlay === 'string'
+          ? tooltip.overlay
+          : undefined
+      : undefined;
+
   // For icon-only buttons, use tooltip.overlay as aria-label (typed as string for IconOnlyButton)
   const buttonAriaLabel =
     !label && icon && tooltip?.overlay
       ? (tooltip.overlay as string)
-      : undefined;
+      : labelDrivenAriaLabel;
+
+  // An `iconOnly` button hides its label, so it must always offer a hover hint.
+  // An explicit tooltip wins; otherwise fall back to the label itself.
+  const tooltipOverlay = tooltip?.overlay ?? (iconOnly ? label : undefined);
 
   return (
     <Tooltip
-      placement={tooltip ? tooltip.placement : undefined}
-      overlay={tooltip && tooltip.overlay}
-      overlayStyle={tooltip && tooltip.overlayStyle}
+      placement={tooltip?.placement}
+      overlay={tooltipOverlay}
+      overlayStyle={tooltip?.overlayStyle}
     >
       <ButtonStyled
         className="sc-button"
@@ -304,14 +385,28 @@ function Button({
       >
         {icon &&
           (isLoading ? (
-            <ButtonLoader size="small" $variant={variant} $label={label} />
+            <ButtonLoader
+              size="small"
+              $variant={variant}
+              $label={label}
+              $collapseAt={collapseAt}
+              $alwaysCollapsed={alwaysCollapsed}
+            />
           ) : (
-            <ButtonIcon $label={label}>{icon}</ButtonIcon>
+            <ButtonIcon
+              $label={label}
+              $collapseAt={collapseAt}
+              $alwaysCollapsed={alwaysCollapsed}
+            >
+              {icon}
+            </ButtonIcon>
           ))}
         {!icon && isLoading && (
           <ButtonLoader size="small" $variant={variant} $label={label} />
         )}
-        <ButtonLabel>{label}</ButtonLabel>
+        <ButtonLabel $collapseAt={collapseAt} $alwaysCollapsed={alwaysCollapsed}>
+          {label}
+        </ButtonLabel>
       </ButtonStyled>
     </Tooltip>
   );

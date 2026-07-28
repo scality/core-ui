@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Box } from './Box';
+import { Stack } from '../../spacing';
 
 describe('Box', () => {
   it('keeps design-system style props out of the rendered HTML', () => {
@@ -50,5 +51,22 @@ describe('Box', () => {
   it('renders as the element given by the "as" prop', () => {
     render(<Box as="section" data-testid="b" />);
     expect(screen.getByTestId('b').tagName).toBe('SECTION');
+  });
+});
+
+describe('Box container', () => {
+  it('still shows its children when opted into being a responsive container', () => {
+    render(
+      <Stack container>
+        <span>panel content</span>
+      </Stack>,
+    );
+    expect(screen.getByText('panel content')).toBeVisible();
+  });
+
+  it('does not emit the container prop as a DOM attribute', () => {
+    render(<Box container data-testid="c" />);
+    const el = screen.getByTestId('c');
+    expect(el.hasAttribute('container')).toBe(false);
   });
 });
