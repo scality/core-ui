@@ -8,6 +8,7 @@ const SelectStyle = styled(Select)`
   font-size: ${fontSize.base};
   box-sizing: border-box;
   width: ${({ width }) => width};
+  ${({ fluid }) => fluid && `max-width: 100%; min-width: 0;`}
   ${({ isDefault }) =>
     isDefault ? `height: ${spacing.r32}` : `height: ${spacing.r24}`};
 
@@ -122,7 +123,7 @@ const SelectStyle = styled(Select)`
   }
 
   .sc-select__menu {
-    width: ${({ width }) => width};
+    width: ${({ fluid, width }) => (fluid ? '100%' : width)};
     border: ${spacing.r1} solid
       ${({ isDefault }) =>
         getThemePropSelector(isDefault ? 'border' : 'selectedActive')};
