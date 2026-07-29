@@ -6762,9 +6762,8 @@ requireMode?: &quot;all&quot; | &quot;partial&quot;
  * overflowing. It also lays each `FormSection` out as a two-column grid that
  * auto-flips to a stacked single column on narrow widths — there is no
  * breakpoint prop; the flip point is derived from the layout (see below).
- * Note: only `Input` currently honors the fluid width — `Select`, `SearchInput`,
- * `TextArea` and other size-driven content keep their fixed width for now
- * (tracked in CUI-36).
+ * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
+ * `TextArea` and other size-driven content keep their fixed width for now.
  */
 responsive?: boolean
 
@@ -8043,7 +8042,7 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> HealthSelector</h2>
       <div class="badges">
-        <label for="c-26-components-healthselector-props" class="badge ok as-toggle">13 prop types</label>
+        <label for="c-26-components-healthselector-props" class="badge ok as-toggle">14 prop types</label>
         <label for="c-26-components-healthselector-info" class="badge info as-toggle">1 info</label>
         <label for="c-26-components-healthselector-stories" class="badge ok as-toggle">3 stories</label>
         
@@ -8079,13 +8078,19 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">13 prop types</span>
+              <span class="badge ok">14 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/healthselectorv2/HealthSelector.component.tsx::HealthSelector</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>className?: string
 
 disabled?: boolean
+
+/**
+ * When true (or inside a responsive Form), the control fills its container
+ * down to a min instead of staying fixed at its `size` width.
+ */
+fluid?: boolean
 
 id: string
 
@@ -12592,7 +12597,7 @@ import * as Stories from &#39;./searchinput.stories&#39;;
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Select</h2>
       <div class="badges">
-        <label for="c-44-components-inputs-select-props" class="badge ok as-toggle">12 prop types</label>
+        <label for="c-44-components-inputs-select-props" class="badge ok as-toggle">13 prop types</label>
         <label for="c-44-components-inputs-select-info" class="badge info as-toggle">1 info</label>
         <label for="c-44-components-inputs-select-stories" class="badge ok as-toggle">15 stories</label>
         <label for="c-44-components-inputs-select-docs" class="badge ok as-toggle">1 doc</label>
@@ -12628,13 +12633,19 @@ import * as Stories from &#39;./searchinput.stories&#39;;
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">12 prop types</span>
+              <span class="badge ok">13 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/selectv2/Selectv2.component.tsx::Select</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>className?: string
 
 disabled?: boolean
+
+/**
+ * When true (or inside a responsive Form), the control fills its container
+ * down to a min instead of staying fixed at its `size` width.
+ */
+fluid?: boolean
 
 id: string
 
@@ -13018,7 +13029,7 @@ the dropdown menu opens toward the top to ensure visibility and usability.
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Select</h2>
       <div class="badges">
-        <label for="c-45-components-inputs-selectinput-props" class="badge ok as-toggle">12 prop types</label>
+        <label for="c-45-components-inputs-selectinput-props" class="badge ok as-toggle">13 prop types</label>
         <label for="c-45-components-inputs-selectinput-info" class="badge info as-toggle">1 info</label>
         <label for="c-45-components-inputs-selectinput-stories" class="badge ok as-toggle">5 stories</label>
         
@@ -13054,13 +13065,19 @@ the dropdown menu opens toward the top to ensure visibility and usability.
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">12 prop types</span>
+              <span class="badge ok">13 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/selectv2/Selectv2.component.tsx::Select</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>className?: string
 
 disabled?: boolean
+
+/**
+ * When true (or inside a responsive Form), the control fills its container
+ * down to a min instead of staying fixed at its `size` width.
+ */
+fluid?: boolean
 
 id: string
 
@@ -13180,7 +13197,7 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> SelectionControlsOverview</h2>
       <div class="badges">
-        <label for="c-46-guidelines-selectioncontrolsoverview-props" class="badge ok as-toggle">12 prop types</label>
+        <label for="c-46-guidelines-selectioncontrolsoverview-props" class="badge ok as-toggle">13 prop types</label>
         <label for="c-46-guidelines-selectioncontrolsoverview-info" class="badge info as-toggle">1 info</label>
         <label for="c-46-guidelines-selectioncontrolsoverview-stories" class="badge ok as-toggle">1 story</label>
         
@@ -13216,13 +13233,19 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">12 prop types</span>
+              <span class="badge ok">13 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/selectv2/Selectv2.component.tsx::Select</code></pre>
             <pre><code>Props:</code></pre>
             <pre><code>className?: string
 
 disabled?: boolean
+
+/**
+ * When true (or inside a responsive Form), the control fills its container
+ * down to a min instead of staying fixed at its `size` width.
+ */
+fluid?: boolean
 
 id: string
 
