@@ -11,6 +11,11 @@ import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
 
 const borderSize = '4px';
+const caretGlyphSize = spacing.r16;
+const caretGutter = spacing.r4;
+// The room HeaderContent reserves so the glyph never overflows its header.
+const caretSpace = spacing.r20;
+
 export const SortIncentive = styled.span`
   position: absolute;
   inset: 0;
@@ -18,29 +23,94 @@ export const SortIncentive = styled.span`
   align-items: center;
   justify-content: center;
 `;
-// In-flow so it reserves its own width (never clipped/crowded on tight or
-// centered columns); the hover incentive stays absolute inside it so showing
-// it on hover causes no layout shift.
-export const SortCaretWrapper = styled.span`
-  position: relative;
+
+/** The painted glyph, out of flow inside the zero-width anchor below. */
+export const SortCaretGlyph = styled.span`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: ${caretGlyphSize};
   display: inline-flex;
-  flex: none;
   align-items: center;
   justify-content: center;
-  min-width: ${spacing.r16};
-  margin-left: ${spacing.r4};
 `;
-export const HeaderContent = styled.div<{ $align?: CSSProperties['textAlign'] }>`
+
+/**
+ * A zero-width flex item. Being a real flex item is what keeps the glyph next to
+ * the label (and lets `order` move it to the label's other side) — anchoring it
+ * to `HeaderContent`'s edge instead would strand it at the far side of a wide
+ * column. Being zero-width is what keeps it out of the sizing equation: a caret
+ * with real width lifts every sortable header's min-content 20px above the
+ * matching body cell's, and the two rows then stop agreeing on column widths as
+ * soon as that floor binds. `HeaderContent` reserves the room with padding.
+ */
+export const SortCaretWrapper = styled.span`
+  position: relative;
+  flex: none;
+  width: 0;
+  align-self: stretch;
+`;
+
+/** Ellipsize rather than let a long header outgrow its column. */
+export const HeaderLabel = styled.span`
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const HeaderContent = styled.div<{
+  $align?: CSSProperties['textAlign'];
+  $sortable?: boolean;
+}>`
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  justify-content: ${(props) =>
-    props.$align === 'right' || props.$align === 'end'
-      ? 'flex-end'
-      : props.$align === 'center'
-        ? 'center'
-        : 'flex-start'};
+
+  ${({ $align, $sortable }) => {
+    const isEnd = $align === 'right' || $align === 'end';
+    const isCenter = $align === 'center';
+    const justify = isEnd ? 'flex-end' : isCenter ? 'center' : 'flex-start';
+
+    if (!$sortable) {
+      return css`
+        justify-content: ${justify};
+      `;
+    }
+
+    // End-aligned columns are the one case where the caret goes on the label's
+    // start side: the label has to stay flush with the trailing edge or it no
+    // longer lines up with the values below it, which leaves no room after it.
+    if (isEnd) {
+      return css`
+        justify-content: flex-end;
+        padding-inline-start: ${caretSpace};
+        ${SortCaretWrapper} {
+          order: -1;
+        }
+        ${SortCaretGlyph} {
+          inset-inline-end: ${caretGutter};
+        }
+      `;
+    }
+
+    // Centred columns reserve both sides so the label stays centred.
+    return css`
+      justify-content: ${justify};
+      ${isCenter
+        ? css`
+            padding-inline: ${caretSpace};
+          `
+        : css`
+            padding-inline-end: ${caretSpace};
+          `}
+      ${SortCaretGlyph} {
+        inset-inline-start: ${caretGutter};
+      }
+    `;
+  }}
 `;
 export const TableHeader = styled.div<{
   $headerHeight?: number | string;
@@ -49,6 +119,8 @@ export const TableHeader = styled.div<{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* The header must never be the reason a column is wider than its cells. */
+  min-width: 0;
   height: ${(props) => props.$headerHeight};
   cursor: ${(props) =>
     props.tabIndex !== undefined && props.tabIndex >= 0
@@ -187,17 +259,19 @@ export const SortCaret = <
 }) => {
   return !column.disableSortBy ? (
     <SortCaretWrapper>
-      {column.isSorted ? (
-        column.isSortedDesc ? (
-          <Icon name="Sort-down" />
+      <SortCaretGlyph>
+        {column.isSorted ? (
+          column.isSortedDesc ? (
+            <Icon name="Sort-down" />
+          ) : (
+            <Icon name="Sort-up" />
+          )
         ) : (
-          <Icon name="Sort-up" />
-        )
-      ) : (
-        <SortIncentive>
-          <Icon name="Sort" />
-        </SortIncentive>
-      )}
+          <SortIncentive>
+            <Icon name="Sort" />
+          </SortIncentive>
+        )}
+      </SortCaretGlyph>
     </SortCaretWrapper>
   ) : null;
 };

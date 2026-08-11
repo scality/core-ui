@@ -5,6 +5,7 @@ import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   SortCaret,
+  HeaderLabel,
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
@@ -271,7 +272,10 @@ export const MultiSelectableContent = <
                     }
                   }}
                 >
-                  <HeaderContent $align={column?.cellStyle?.textAlign}>
+                  <HeaderContent
+                    $align={column?.cellStyle?.textAlign}
+                    $sortable={!column.disableSortBy}
+                  >
                     {column.id === 'selection' ? (
                       <div
                         onClick={(event) => {
@@ -291,7 +295,7 @@ export const MultiSelectableContent = <
                         {column.render('Header')}
                       </div>
                     ) : (
-                      column.render('Header')
+                      <HeaderLabel>{column.render('Header')}</HeaderLabel>
                     )}
                     <SortCaret column={column} />
                   </HeaderContent>
