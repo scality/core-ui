@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">346 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">347 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14748,7 +14748,7 @@ steps: StepProps[]</code></pre>
       <div class="badges">
         <label for="c-55-components-data-display-table-props" class="badge ok as-toggle">15 prop types</label>
         <label for="c-55-components-data-display-table-info" class="badge info as-toggle">1 info</label>
-        <label for="c-55-components-data-display-table-stories" class="badge ok as-toggle">12 stories</label>
+        <label for="c-55-components-data-display-table-stories" class="badge ok as-toggle">13 stories</label>
         <label for="c-55-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -15691,6 +15691,58 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
         &lt;Table.SingleSelectableContent
           rowHeight=&quot;h40&quot;
           separationLineVariant=&quot;backgroundLevel3&quot;
+        /&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+  &lt;/&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Sort Caret Header Alignment</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SortCaretHeaderAlignment = () =&gt; (
+  &lt;&gt;
+    &lt;Title&gt;A — equal flex, sortable vs not, container too narrow for both headers&lt;/Title&gt;
+    &lt;div id=&quot;repro-a&quot; style={{ height: &#39;120px&#39;, width: &#39;220px&#39; }}&gt;
+      &lt;Table
+        columns={readingColumns}
+        data={readingData}
+        defaultSortingKey={&#39;label&#39;}
+      &gt;
+        &lt;Table.SingleSelectableContent
+          rowHeight=&quot;h32&quot;
+          separationLineVariant=&quot;backgroundLevel3&quot;
+        /&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+    &lt;Title&gt;B — end-aligned and centred sortable headers&lt;/Title&gt;
+    &lt;div id=&quot;repro-b&quot; style={{ height: &#39;140px&#39; }}&gt;
+      &lt;Table
+        columns={certificateColumns}
+        data={certificateData}
+        defaultSortingKey={&#39;expireOn&#39;}
+      &gt;
+        &lt;Table.SingleSelectableContent
+          rowHeight=&quot;h40&quot;
+          separationLineVariant=&quot;backgroundLevel3&quot;
+        /&gt;
+      &lt;/Table&gt;
+    &lt;/div&gt;
+    &lt;Title&gt;C — multi selectable, same columns as B&lt;/Title&gt;
+    &lt;div id=&quot;repro-c&quot; style={{ height: &#39;160px&#39; }}&gt;
+      &lt;Table
+        columns={certificateColumns}
+        data={certificateData}
+        defaultSortingKey={&#39;status&#39;}
+      &gt;
+        &lt;Table.MultiSelectableContent
+          rowHeight=&quot;h40&quot;
+          separationLineVariant=&quot;backgroundLevel3&quot;
+          onMultiSelectionChanged={action(&#39;selection changed&#39;)}
         /&gt;
       &lt;/Table&gt;
     &lt;/div&gt;
