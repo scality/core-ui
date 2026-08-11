@@ -936,3 +936,131 @@ export const ResponsiveColumnDropWithReveal = {
     </>
   ),
 };
+
+/**
+ * Guards the sort-caret header regression. Two independent defects:
+ *  - a sortable header's min-content is 20px above its body cell's, so the two
+ *    rows stop agreeing on column widths once that floor binds (Reproduction A);
+ *  - an end-aligned header label is pushed off the trailing edge by the caret
+ *    sitting after it (Reproduction B).
+ */
+type Reading = { label: string; mirror: string; value: string };
+
+const readingData: Reading[] = [
+  { label: '27', mirror: '27', value: '27' },
+  { label: '31', mirror: '31', value: '31' },
+];
+
+// Both columns carry the same flex and the same narrow body value; the only
+// difference is sortability. They must resolve to the same width.
+const readingColumns: Column<Reading>[] = [
+  {
+    Header: 'Temperature',
+    accessor: 'label',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+  },
+  {
+    Header: 'Temperature',
+    accessor: 'mirror',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+    disableSortBy: true,
+  },
+];
+
+type Certificate = {
+  name: string;
+  issuer: string;
+  status: string;
+  expireOn: string;
+};
+
+const certificateData: Certificate[] = [
+  {
+    name: 'artesca-ingress',
+    issuer: 'Scality Internal CA',
+    status: 'Valid',
+    expireOn: '2027-01-14',
+  },
+  {
+    name: 'shell-ui-oidc',
+    issuer: "Let's Encrypt X3",
+    status: 'Valid',
+    expireOn: '2026-11-02',
+  },
+];
+
+const certificateColumns: Column<Certificate>[] = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+  },
+  {
+    Header: 'Issuer',
+    accessor: 'issuer',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+    disableSortBy: true,
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+    cellStyle: { width: 'unset', flex: 0.75, textAlign: 'center' },
+  },
+  {
+    Header: 'Expire On',
+    accessor: 'expireOn',
+    cellStyle: {
+      width: 'unset',
+      flex: 0.75,
+      textAlign: 'right',
+      paddingRight: '36px',
+    },
+  },
+];
+
+export const SortCaretHeaderAlignment = {
+  render: () => (
+    <>
+      <Title>A — equal flex, sortable vs not, container too narrow for both headers</Title>
+      <div id="repro-a" style={{ height: '120px', width: '220px' }}>
+        <Table
+          columns={readingColumns}
+          data={readingData}
+          defaultSortingKey={'label'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h32"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+      <Title>B — end-aligned and centred sortable headers</Title>
+      <div id="repro-b" style={{ height: '140px' }}>
+        <Table
+          columns={certificateColumns}
+          data={certificateData}
+          defaultSortingKey={'expireOn'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+      <Title>C — multi selectable, same columns as B</Title>
+      <div id="repro-c" style={{ height: '160px' }}>
+        <Table
+          columns={certificateColumns}
+          data={certificateData}
+          defaultSortingKey={'status'}
+        >
+          <Table.MultiSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onMultiSelectionChanged={action('selection changed')}
+          />
+        </Table>
+      </div>
+    </>
+  ),
+};
