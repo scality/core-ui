@@ -159,6 +159,9 @@ export const IconWrapper = styled.div<{ $size: SizeProp }>`
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+  // The width/height above are a fixed square; without this a flex parent under
+  // pressure shrinks the width only, deforming the bordered circle into an ellipse.
+  flex-shrink: 0;
 `;
 
 function NonWrappedIcon({

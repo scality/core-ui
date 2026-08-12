@@ -125,6 +125,31 @@ export const Statuses = {
   },
 };
 
+export const StaysCircularUnderFlexPressure = {
+  name: 'Wrapped icon stays circular when squeezed',
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: '400px',
+        minWidth: '120px',
+        padding: '0.5rem',
+        border: '1px dashed grey',
+      }}
+    >
+      <Icon name="Account" size="2x" color="infoPrimary" withWrapper />
+      <span>
+        Drag the handle to squeeze this row — the bordered circle must not
+        flatten into an ellipse.
+      </span>
+    </div>
+  ),
+};
+
 export const AllIcons = {
   render: () => (
     <table>
