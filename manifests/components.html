@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">347 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">348 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -8207,7 +8207,7 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
       <div class="badges">
         <label for="c-27-components-icon-props" class="badge ok as-toggle">8 prop types</label>
         <label for="c-27-components-icon-info" class="badge info as-toggle">1 info</label>
-        <label for="c-27-components-icon-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-27-components-icon-stories" class="badge ok as-toggle">5 stories</label>
         <label for="c-27-components-icon-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -8388,6 +8388,35 @@ withWrapper?: boolean</code></pre>
     &lt;/table&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Wrapped icon stays circular when squeezed</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StaysCircularUnderFlexPressure = () =&gt; (
+  &lt;div
+    style={{
+      display: &#39;flex&#39;,
+      alignItems: &#39;center&#39;,
+      gap: &#39;0.5rem&#39;,
+      resize: &#39;horizontal&#39;,
+      overflow: &#39;auto&#39;,
+      width: &#39;400px&#39;,
+      minWidth: &#39;120px&#39;,
+      padding: &#39;0.5rem&#39;,
+      border: &#39;1px dashed grey&#39;,
+    }}
+  &gt;
+    &lt;Icon name=&quot;Account&quot; size=&quot;2x&quot; color=&quot;infoPrimary&quot; withWrapper /&gt;
+    &lt;span&gt;
+      Drag the handle to squeeze this row — the bordered circle must not
+      flatten into an ellipse.
+    &lt;/span&gt;
+  &lt;/div&gt;
+);</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
