@@ -1,6 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import {
   useFloating,
   autoUpdate,
@@ -140,6 +140,22 @@ export interface ChartTooltipPortalProps {
   containerComponent?: React.ComponentType<any>;
 }
 
+/** Zero-sized rect at a point, for anchoring the tooltip to a pointer position. */
+const pointRect = (x: number, y: number): DOMRect =>
+  ({
+    width: 0,
+    height: 0,
+    x,
+    y,
+    left: x,
+    top: y,
+    right: x,
+    bottom: y,
+  }) as DOMRect;
+
+/** Pointer moves smaller than this don't move the tooltip. */
+const POSITION_THRESHOLD = 5;
+
 export const ChartTooltipPortal: React.FC<ChartTooltipPortalProps> = ({
   children,
   coordinate,
@@ -150,29 +166,39 @@ export const ChartTooltipPortal: React.FC<ChartTooltipPortalProps> = ({
   customPosition,
   containerComponent: ContainerComponent = ChartTooltipContainer,
 }) => {
-  const [virtualElement, setVirtualElement] = useState<any>(null);
-  const previousPositionRef = useRef<{ x: number; y: number } | null>(null);
+  const positionRef = useRef<{ x: number; y: number } | null>(null);
+  const [isPositioned, setIsPositioned] = useState(false);
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(
     null,
   );
 
-  // Default middleware configuration
-  const defaultMiddleware = [
-    offset(customOffset || 20),
-    flip(),
-    shift({ padding: 10 }),
-  ];
+  const customPositionRef = useRef(customPosition);
+  customPositionRef.current = customPosition;
 
-  const { refs, floatingStyles } = useFloating({
-    elements: {
-      reference: virtualElement,
-    },
+  const defaultMiddleware = useMemo(
+    () => [offset(customOffset || 20), flip(), shift({ padding: 10 })],
+    [customOffset],
+  );
+
+  const { refs, floatingStyles, update } = useFloating({
     placement: 'top',
     middleware: middleware || defaultMiddleware,
     whileElementsMounted: autoUpdate,
   });
 
-  // Create portal container once
+  // One reference for the tooltip's whole life, reading the position from a ref.
+  // A new reference identity per mousemove would rebuild `autoUpdate` — and its
+  // ResizeObserver — ~60 times a second, which is what triggers
+  // "ResizeObserver loop completed with undelivered notifications".
+  useEffect(() => {
+    refs.setPositionReference({
+      getBoundingClientRect: () => {
+        const { x, y } = positionRef.current ?? { x: 0, y: 0 };
+        return pointRect(x, y);
+      },
+    });
+  }, [refs]);
+
   useEffect(() => {
     const container = document.createElement('div');
     document.body.appendChild(container);
@@ -183,55 +209,33 @@ export const ChartTooltipPortal: React.FC<ChartTooltipPortalProps> = ({
     };
   }, []);
 
-  // Create virtual element from coordinate or custom position
   useEffect(() => {
-    if (chartContainerRef.current) {
-      const chartRect = chartContainerRef.current.getBoundingClientRect();
+    if (!chartContainerRef.current) return;
+    const chartRect = chartContainerRef.current.getBoundingClientRect();
 
-      let tooltipX: number;
-      let tooltipY: number;
+    const next = customPositionRef.current
+      ? customPositionRef.current(chartRect, coordinate)
+      : coordinate && {
+          x: chartRect.left + coordinate.x,
+          y: chartRect.top + coordinate.y,
+        };
+    if (!next) return;
 
-      if (customPosition) {
-        // Use custom positioning function
-        const position = customPosition(chartRect, coordinate);
-        tooltipX = position.x;
-        tooltipY = position.y;
-      } else if (coordinate) {
-        // Use default coordinate-based positioning
-        tooltipX = chartRect.left + coordinate.x;
-        tooltipY = chartRect.top + coordinate.y;
-      } else {
-        return; // No positioning method available
-      }
-
-      // Check if position has changed significantly
-      const hasPositionChanged =
-        !previousPositionRef.current ||
-        Math.abs(previousPositionRef.current.x - tooltipX) > 5 ||
-        Math.abs(previousPositionRef.current.y - tooltipY) > 5;
-
-      if (hasPositionChanged) {
-        previousPositionRef.current = { x: tooltipX, y: tooltipY };
-      }
-
-      setVirtualElement({
-        getBoundingClientRect() {
-          return {
-            width: 0,
-            height: 0,
-            x: tooltipX,
-            y: tooltipY,
-            left: tooltipX,
-            top: tooltipY,
-            right: tooltipX,
-            bottom: tooltipY,
-          };
-        },
-      });
+    const previous = positionRef.current;
+    if (
+      previous &&
+      Math.abs(previous.x - next.x) <= POSITION_THRESHOLD &&
+      Math.abs(previous.y - next.y) <= POSITION_THRESHOLD
+    ) {
+      return;
     }
-  }, [coordinate, chartContainerRef, customPosition]);
 
-  if (!isVisible || !virtualElement || !portalContainer) return null;
+    positionRef.current = next;
+    setIsPositioned(true);
+    update();
+  }, [coordinate, chartContainerRef, update]);
+
+  if (!isVisible || !isPositioned || !portalContainer) return null;
 
   const tooltipContent = (
     <ContainerComponent
