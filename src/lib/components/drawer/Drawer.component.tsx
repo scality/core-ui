@@ -115,13 +115,19 @@ const Drawer = ({
   const [mounted, setMounted] = useState(isOpen);
   const [active, setActive] = useState(false);
 
+  // Same stacking rule as Modal: host the portal only while the drawer is
+  // mounted (which spans the closing transition) and append it, so the drawer
+  // opened last is the last `<body>` child and paints above the others.
   useLayoutEffect(() => {
+    if (!mounted) {
+      return;
+    }
     const container = drawerContainer.current;
-    document.body?.prepend(container);
+    document.body?.append(container);
     return () => {
-      document.body?.removeChild(container);
+      container.remove();
     };
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
     if (isOpen) {
