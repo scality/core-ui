@@ -411,15 +411,23 @@ export const ResponsiveForm = {
 
 // Drag the frame's right edge to narrow the Form. Toggle the `responsive` control
 // to compare the two layout modes on the same fields.
-const ResizeFrame = ({ children }: { children: React.ReactNode }) => (
+const ResizeFrame = ({
+  children,
+  minWidth = '16rem',
+  height = '26rem',
+}: {
+  children: React.ReactNode;
+  minWidth?: string;
+  height?: string;
+}) => (
   <div
     style={{
       resize: 'horizontal',
       overflow: 'auto',
-      minWidth: '16rem',
+      minWidth,
       maxWidth: '100%',
       border: '1px dashed #666',
-      height: '26rem',
+      height,
     }}
   >
     {children}
@@ -884,4 +892,69 @@ export const FormWithAccordion = {
   args: {
     requireMode: 'partial',
   },
+};
+
+const StepSidebar = () => (
+  <div
+    style={{
+      width: '324px',
+      flexShrink: 0,
+      padding: '1rem',
+      borderRight: '1px solid #666',
+    }}
+  >
+    <Stack direction="vertical" gap="r16">
+      <Text isEmphazed>Steps</Text>
+      <Text>1. Connection</Text>
+      <Text>2. Mapping</Text>
+      <Text>3. Review</Text>
+    </Stack>
+  </div>
+);
+
+const ProviderWizardForm = ({ requireMode, responsive }) => (
+  <Form
+    layout={{ kind: 'page', title: 'Create provider' }}
+    requireMode={requireMode}
+    responsive={responsive}
+    rightActions={<Button variant="primary" label="Continue" />}
+    leftActions={<Button variant="outline" label="Cancel" />}
+  >
+    <FormSection
+      title={{ name: 'Connection', icon: 'Node-backend' }}
+      forceLabelWidth={200}
+    >
+      <FormGroup
+        direction="horizontal"
+        label="Provider name"
+        id="wiz-name"
+        content={<Input id="wiz-name" />}
+        required
+      />
+      <FormGroup
+        direction="horizontal"
+        label="Endpoint"
+        id="wiz-endpoint"
+        content={<Input id="wiz-endpoint" />}
+        help="Optional helper text"
+        required
+      />
+    </FormSection>
+  </Form>
+);
+
+// A `page` Form in a flex row next to a fixed step sidebar — drag the frame's
+// right edge down to ~48rem. `responsive` containment removes the form's contents
+// from its own intrinsic width, so as a content-sized flex item it needs the width
+// to come from the row instead.
+export const ResponsivePageFormInFlexRow = {
+  render: ({ requireMode, responsive }) => (
+    <ResizeFrame minWidth="30rem" height="32rem">
+      <div style={{ display: 'flex', height: '100%' }}>
+        <StepSidebar />
+        <ProviderWizardForm requireMode={requireMode} responsive={responsive} />
+      </div>
+    </ResizeFrame>
+  ),
+  args: { requireMode: 'partial', responsive: true },
 };

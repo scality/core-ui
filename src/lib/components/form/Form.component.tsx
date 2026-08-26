@@ -77,17 +77,33 @@ const StyledForm = styled.form<{
   ${({ $containerize }) =>
     $containerize &&
     css`
+      /* Containment takes the contents out of the intrinsic width, so the width
+         has to come from the parent: as a content-sized flex item the form would
+         otherwise resolve to 0 and every child would overflow it. Same pairing as
+         LeftPanel/RightPanel in layout/v2/panels.tsx. */
+      flex: 1 1 auto;
+      min-width: 0;
       container-type: inline-size;
       container-name: responsive;
     `}
 `;
 
+// The header, the scroll area and the footer all extend this, so it decides how
+// wide a form's content is. 45rem is the page layout's *cap*, not its width — a
+// pinned width leaves the fields, the section actions and the fixed footer
+// outside the page, unreachable, as soon as there is less room than that.
+// `width: 100%` needs `box-sizing: border-box`, or the content-box padding
+// overflows the parent by exactly that padding. The cap then has to include the
+// padding to keep the same 45rem of *content* the pinned width gave.
+const PAGE_CONTENT_MAX_WIDTH = '45rem';
 const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
+  box-sizing: border-box;
   margin: 0 auto;
   ${(props) =>
     props.$layoutKind === 'page'
       ? `
-  width: 45rem;
+  width: 100%;
+  max-width: calc(${PAGE_CONTENT_MAX_WIDTH} + ${spacing.f16});
   padding-right: ${spacing.f16};
   `
       : `
