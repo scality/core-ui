@@ -149,7 +149,7 @@ export function SingleSelectableContent<
             $isSelected={selectedId === row.id}
             aria-selected={selectedId === row.id ? 'true' : 'false'}
             $separationLineVariant={separationLineVariant}
-            $selectedId={selectedId}
+            $selectable={Boolean(onRowSelectedRef.current)}
             className="tr"
           >
             {row.cells.map((cell) => {
