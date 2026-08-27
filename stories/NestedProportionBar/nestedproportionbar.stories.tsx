@@ -369,18 +369,89 @@ const NestedProportionBar = ({
 /*                                  STORIES                                   */
 /* -------------------------------------------------------------------------- */
 
-const meta: Meta = {
+type NpbArgs = Omit<BoxOptions, 'total' | 'levelHeight'> & {
+  /** Level height in px — the component takes a CSS length. */
+  levelHeight: number;
+  /** NestingDepth only. */
+  depth: number;
+  /** NestingDepth only: share of its parent each level keeps. */
+  shareOfParent: number;
+};
+
+const meta: Meta<NpbArgs> = {
   title: 'Components/Data Display/Charts/NestedProportionBar (composition)',
+  argTypes: {
+    variant: {
+      control: { type: 'radio' },
+      options: ['outline', 'filled'],
+      description:
+        'filled tints each box with its own colour on top of the outline',
+    },
+    valuePosition: {
+      control: { type: 'radio' },
+      options: ['auto', 'header'],
+      description:
+        'auto keeps the value beside the children while the remainder leaves room, and moves it onto the label row otherwise. header always uses the label row',
+    },
+    percentageBase: {
+      control: { type: 'radio' },
+      options: ['total', 'parent'],
+      description:
+        'Which share the printed value states. Widths always follow the parent, so total prints a number that does not match the box width — on purpose',
+    },
+    minInlineValueShare: {
+      control: { type: 'range', min: 0, max: 0.4, step: 0.01 },
+      description:
+        'How much width the unattributed remainder must leave for auto to inline the value',
+    },
+    levelHeight: {
+      control: { type: 'range', min: 12, max: 48, step: 1 },
+      description: 'Minimum height of one nesting level, in px',
+    },
+    depth: {
+      control: { type: 'range', min: 1, max: 8, step: 1 },
+      description: 'NestingDepth only',
+    },
+    shareOfParent: {
+      control: { type: 'range', min: 0.2, max: 0.95, step: 0.05 },
+      description: 'NestingDepth only',
+    },
+  },
 };
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<NpbArgs>;
+
+/** The option props, so one control governs every bar in a story. */
+const npbProps = (args: NpbArgs) => ({
+  variant: args.variant,
+  valuePosition: args.valuePosition,
+  percentageBase: args.percentageBase,
+  minInlineValueShare: args.minInlineValueShare,
+  levelHeight: `${args.levelHeight}px`,
+});
+
+/** Defaults matching the component's own, so a story starts where the code does. */
+const defaultArgs: NpbArgs = {
+  variant: 'outline',
+  valuePosition: 'auto',
+  percentageBase: 'total',
+  minInlineValueShare: 0.08,
+  levelHeight: 24,
+  depth: 4,
+  shareOfParent: 0.7,
+};
 
 /** 1:1 with the reference mock: four levels, the value beside the children where it fits. */
 export const ScreenshotEquivalent: Story = {
-  render: () => (
+  args: { ...defaultArgs },
+  render: (args) => (
     <Box maxWidth="60rem">
-      <NestedProportionBar title="True Reality" root={CAPACITY} />
+      <NestedProportionBar
+        title="True Reality"
+        root={CAPACITY}
+        {...npbProps(args)}
+      />
     </Box>
   ),
 };
@@ -390,12 +461,13 @@ export const ScreenshotEquivalent: Story = {
  * tokens are for. `outline` is what the mock shows.
  */
 export const FilledVariant: Story = {
-  render: () => (
+  args: { ...defaultArgs, variant: 'filled' },
+  render: (args) => (
     <Box maxWidth="60rem">
       <NestedProportionBar
         title="True Reality"
         root={CAPACITY}
-        variant="filled"
+        {...npbProps(args)}
       />
     </Box>
   ),
@@ -406,12 +478,13 @@ export const FilledVariant: Story = {
  * level. Compare the total height with `ScreenshotEquivalent`.
  */
 export const ValueInHeader: Story = {
-  render: () => (
+  args: { ...defaultArgs, valuePosition: 'header' },
+  render: (args) => (
     <Box maxWidth="60rem">
       <NestedProportionBar
         title="True Reality"
         root={CAPACITY}
-        valuePosition="header"
+        {...npbProps(args)}
       />
     </Box>
   ),
@@ -422,12 +495,13 @@ export const ValueInHeader: Story = {
  * than 56 %. The widths do not move — they always follow the parent.
  */
 export const PercentageOfParent: Story = {
-  render: () => (
+  args: { ...defaultArgs, percentageBase: 'parent' },
+  render: (args) => (
     <Box maxWidth="60rem">
       <NestedProportionBar
         title="True Reality"
         root={CAPACITY}
-        percentageBase="parent"
+        {...npbProps(args)}
       />
     </Box>
   ),
@@ -439,13 +513,15 @@ export const PercentageOfParent: Story = {
  * the root — and the labels run out of room before the widths do.
  */
 export const NestingDepth: Story = {
-  render: () => (
+  args: { ...defaultArgs },
+  render: (args) => (
     <Stack direction="vertical" gap="r24">
-      {[2, 4, 6].map((depth) => (
-        <Box key={depth} maxWidth="60rem">
+      {[2, args.depth, 6].map((depth, index) => (
+        <Box key={`${depth}-${index}`} maxWidth="60rem">
           <NestedProportionBar
             title={`${depth} levels`}
-            root={deepTree(depth, 0.7)}
+            root={deepTree(depth, args.shareOfParent)}
+            {...npbProps(args)}
           />
         </Box>
       ))}
@@ -455,7 +531,8 @@ export const NestingDepth: Story = {
 
 /** The payloads that break a proportional layout — every one of them is a real answer. */
 export const EdgeCases: Story = {
-  render: () => (
+  args: { ...defaultArgs },
+  render: (args) => (
     <Stack direction="vertical" gap="r24">
       <Box maxWidth="60rem">
         <NestedProportionBar
@@ -479,6 +556,7 @@ export const EdgeCases: Story = {
               },
             ],
           }}
+          {...npbProps(args)}
         />
       </Box>
       <Box maxWidth="60rem">
@@ -503,6 +581,7 @@ export const EdgeCases: Story = {
               },
             ],
           }}
+          {...npbProps(args)}
         />
       </Box>
       <Box maxWidth="60rem">
@@ -529,12 +608,14 @@ export const EdgeCases: Story = {
               },
             ],
           }}
+          {...npbProps(args)}
         />
       </Box>
       <Box maxWidth="60rem">
         <NestedProportionBar
           title="A total of zero"
           root={{ key: 'total', label: 'Total', value: 0 }}
+          {...npbProps(args)}
         />
       </Box>
     </Stack>

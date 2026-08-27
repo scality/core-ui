@@ -1563,3 +1563,57 @@ export const LogarithmicScaleBelowOne: Story = {
     );
   },
 };
+
+/**
+ * The scale as a control, for poking at it against your own shape of data.
+ *
+ * `zeros` is the one worth trying: it drops a stretch of zero samples into the series, and on the
+ * log axis they land on the reserved `0` at the bottom rather than disappearing.
+ */
+export const LogarithmicScalePlayground: StoryObj<{
+  yAxisScale: 'linear' | 'log';
+  baseline: number;
+  spikeTo: number;
+  zeros: boolean;
+}> = {
+  argTypes: {
+    yAxisScale: { control: { type: 'radio' }, options: ['linear', 'log'] },
+    baseline: {
+      control: { type: 'range', min: 0.001, max: 10, step: 0.001 },
+      description: 'Where the series idles',
+    },
+    spikeTo: {
+      control: { type: 'range', min: 1, max: 10000, step: 1 },
+      description:
+        'Peak value — pull it far from the baseline to see what linear cannot show',
+    },
+    zeros: {
+      control: 'boolean',
+      description:
+        'Insert a stretch of measured zeros, which a log axis has to place somewhere',
+    },
+  },
+  args: { yAxisScale: 'log', baseline: 2, spikeTo: 4000, zeros: true },
+  render: (args) => {
+    const data = Array.from({ length: 120 }, (_, index) => {
+      const isZero = args.zeros && index >= 60 && index < 72;
+      const value = isZero
+        ? 0
+        : index % 41 === 0
+          ? args.spikeTo
+          : args.baseline * (1 + (index % 7) * 0.2);
+      return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+        number,
+        number,
+      ];
+    });
+
+    return (
+      <ChartWithProviders
+        {...logChartArgs(data)}
+        title={`Request latency — ${args.yAxisScale}`}
+        yAxisScale={args.yAxisScale}
+      />
+    );
+  },
+};

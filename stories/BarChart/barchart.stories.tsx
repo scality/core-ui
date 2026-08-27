@@ -1332,3 +1332,61 @@ export const LogarithmicScaleIgnoredWhenStacked: Story = {
     );
   },
 };
+
+/**
+ * The scale as a control, for poking at it against your own numbers.
+ *
+ * `stacked` is here on purpose: turn it on and the axis snaps back to linear, because a stack
+ * places each segment at a cumulative sum and its height would stop matching its value.
+ */
+export const LogarithmicScalePlayground: StoryObj<{
+  yAxisScale: 'linear' | 'log';
+  stacked: boolean;
+  height: number;
+  spread: number;
+}> = {
+  argTypes: {
+    yAxisScale: { control: { type: 'radio' }, options: ['linear', 'log'] },
+    stacked: {
+      control: 'boolean',
+      description: 'Forces the axis back to linear — a log stack misreads',
+    },
+    height: { control: { type: 'range', min: 120, max: 480, step: 20 } },
+    spread: {
+      control: { type: 'range', min: 1, max: 6, step: 1 },
+      description: 'Orders of magnitude between the smallest and largest bar',
+    },
+  },
+  args: { yAxisScale: 'log', stacked: false, height: 240, spread: 4 },
+  render: (args) => {
+    const theme = useTheme() as CoreUITheme;
+    // One bar per decade, so the spread control is exactly what it says.
+    const bars = [
+      {
+        label: 'Requests',
+        data: Array.from(
+          { length: args.spread + 1 },
+          (_, index) => [`1e${index}`, 10 ** index * 2] as [string, number],
+        ),
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper colorSet={{ Requests: theme.statusHealthy }}>
+          <Stack direction="vertical" gap="r16">
+            <Barchart
+              type={{ type: 'category' }}
+              bars={bars}
+              title="Requests per endpoint"
+              height={args.height}
+              stacked={args.stacked}
+              yAxisScale={args.yAxisScale}
+            />
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
