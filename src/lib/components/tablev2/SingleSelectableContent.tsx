@@ -155,6 +155,15 @@ export function SingleSelectableContent<
             {row.cells.map((cell) => {
               let cellProps = cell.getCellProps({
                 style: {
+                  // Same reset as TableHeader. A flex item defaults to
+                  // `min-width: auto`, so without this a short cell freezes at
+                  // its content width while its header keeps shrinking — and
+                  // flexbox then redistributes that frozen item's share of the
+                  // negative free space onto the row's remaining shrinkable
+                  // cell, pushing it *below* its own header. Both rows have to
+                  // shrink by the same rules or the columns cannot agree.
+                  // Before the spread, so a consumer's cellStyle still wins.
+                  minWidth: 0,
                   ...cell.column.cellStyle,
                   // Vertically center the text in cells.
                   display: 'flex',

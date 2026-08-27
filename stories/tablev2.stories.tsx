@@ -1105,37 +1105,95 @@ const attachableRow = (i: number): Attachable => ({
 const fewAttachables = Array.from({ length: 2 }, (_, i) => attachableRow(i));
 const manyAttachables = Array.from({ length: 40 }, (_, i) => attachableRow(i));
 
+const alignmentFrame: React.CSSProperties = {
+  resize: 'horizontal',
+  overflow: 'hidden',
+  width: '46rem',
+  minWidth: '14rem',
+  maxWidth: '100%',
+  border: '1px dashed #666',
+  padding: '0.5rem',
+};
+
 export const HeaderBodyColumnAlignment = {
-  render: () => (
-    <>
-      <Title>A — few rows, no vertical scrollbar</Title>
-      <div id="align-no-scrollbar" style={{ height: '140px' }}>
-        <Table columns={attachmentShapeColumns} data={fewAttachables}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>B — enough rows to force a vertical scrollbar</Title>
-      <div id="align-with-scrollbar" style={{ height: '220px' }}>
-        <Table columns={attachmentShapeColumns} data={manyAttachables}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>C — multi selectable, scrollbar, same columns</Title>
-      <div id="align-multi-scrollbar" style={{ height: '220px' }}>
-        <Table columns={attachmentShapeColumns} data={manyAttachables}>
-          <Table.MultiSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            onMultiSelectionChanged={action('selection changed')}
-          />
-        </Table>
-      </div>
-    </>
-  ),
+  render: () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+
+    return (
+      <>
+        <Title>
+          Drag each frame's right edge. Every header label must stay directly
+          over its column at every width.
+        </Title>
+
+        <Title>A — single selectable, few rows, no vertical scrollbar</Title>
+        <div id="align-no-scrollbar" style={alignmentFrame}>
+          <div style={{ height: '140px' }}>
+            <Table columns={attachmentShapeColumns} data={fewAttachables}>
+              <Table.SingleSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+                selectedId={selected}
+                onRowSelected={(row) => setSelected(row.id)}
+              />
+            </Table>
+          </div>
+        </div>
+
+        <Title>
+          B — single selectable, enough rows to force a vertical scrollbar. Click
+          a row to select it; click "Detach" and the row must NOT select.
+        </Title>
+        <div id="align-with-scrollbar" style={alignmentFrame}>
+          <div style={{ height: '220px' }}>
+            <Table columns={attachmentShapeColumns} data={manyAttachables}>
+              <Table.SingleSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+                selectedId={selected}
+                onRowSelected={(row) => setSelected(row.id)}
+              />
+            </Table>
+          </div>
+        </div>
+
+        <Title>
+          C — single selectable with dropped columns and reveal. Below 700px a
+          per-row <code>+N</code> trigger appears; clicking it on an UNSELECTED
+          row must open the popover and leave it open.
+        </Title>
+        <div id="align-reveal" style={alignmentFrame}>
+          <div style={{ height: '220px' }}>
+            <Table
+              columns={responsiveColumns}
+              data={data}
+              defaultSortingKey={'health'}
+              getRowId={getRowId}
+              revealDroppedColumns
+            >
+              <Table.SingleSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+                selectedId={selected}
+                onRowSelected={(row) => setSelected(row.id)}
+              />
+            </Table>
+          </div>
+        </div>
+
+        <Title>D — multi selectable, scrollbar, same columns</Title>
+        <div id="align-multi-scrollbar" style={alignmentFrame}>
+          <div style={{ height: '220px' }}>
+            <Table columns={attachmentShapeColumns} data={manyAttachables}>
+              <Table.MultiSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+                onMultiSelectionChanged={action('selection changed')}
+              />
+            </Table>
+          </div>
+        </div>
+      </>
+    );
+  },
 };
