@@ -198,12 +198,21 @@ const Modal = ({
   const labelId = useId();
   const descId = useId();
 
+  // Host the portal only while open, and append rather than prepend: every
+  // ModalContainer shares one z-index, so `<body>` order alone decides which
+  // modal paints on top. Appending on open makes that the modal opened last;
+  // gating on `isOpen` stops a mounted-but-closed modal from holding a place
+  // in the stack it is not using.
   useLayoutEffect(() => {
-    document.body && document.body.prepend(modalContainer.current);
+    if (!isOpen) {
+      return;
+    }
+    const host = modalContainer.current;
+    document.body?.append(host);
     return () => {
-      document.body && document.body.removeChild(modalContainer.current);
+      host.remove();
     };
-  }, [modalContainer]);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {

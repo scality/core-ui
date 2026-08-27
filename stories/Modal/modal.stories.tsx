@@ -601,3 +601,55 @@ export const WidthLayoutCases = {
     </Stack>
   ),
 };
+
+// Stacking follows the order modals were *opened* in, not the order they were
+// mounted in. Open B then A: A is on top and its buttons take the clicks.
+export const StackedModals = {
+  render: () => {
+    const [isAOpen, setIsAOpen] = useState(false);
+    const [isBOpen, setIsBOpen] = useState(false);
+    return (
+      <>
+        <Stack gap="r8">
+          <Button
+            onClick={() => setIsAOpen(true)}
+            label="Open A"
+            variant="primary"
+          />
+          <Button
+            onClick={() => setIsBOpen(true)}
+            label="Open B"
+            variant="secondary"
+          />
+        </Stack>
+        {/* A is declared first, so it always mounts first. */}
+        <Modal
+          isOpen={isAOpen}
+          close={() => setIsAOpen(false)}
+          title="Modal A"
+          actions={{
+            confirm: {
+              label: 'Confirm A',
+              onClick: action('Confirm A clicked'),
+            },
+          }}
+        >
+          <span>Modal A — mounted first.</span>
+        </Modal>
+        <Modal
+          isOpen={isBOpen}
+          close={() => setIsBOpen(false)}
+          title="Modal B"
+          actions={{
+            confirm: {
+              label: 'Confirm B',
+              onClick: action('Confirm B clicked'),
+            },
+          }}
+        >
+          <span>Modal B — mounted second.</span>
+        </Modal>
+      </>
+    );
+  },
+};

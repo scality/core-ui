@@ -106,3 +106,52 @@ describe('Drawer', () => {
     ).not.toBeInTheDocument();
   });
 });
+
+/**
+ * Two open drawers share one `z-index`, so their order in `<body>` decides
+ * which paints on top — see the matching Modal.stacking tests.
+ */
+describe('Drawer stacking order', () => {
+  const { Wrapper } = getWrapper();
+
+  const bodyIndexOf = (text: string) => {
+    const node = screen.getByText(text);
+    return Array.from(document.body.children).findIndex((child) =>
+      child.contains(node),
+    );
+  };
+
+  const TwoDrawers = ({ aOpen, bOpen }: { aOpen: boolean; bOpen: boolean }) => (
+    <Wrapper>
+      <Drawer isOpen={aOpen} close={jest.fn()} title="A">
+        <p>first mounted</p>
+      </Drawer>
+      <Drawer isOpen={bOpen} close={jest.fn()} title="B">
+        <p>second mounted</p>
+      </Drawer>
+    </Wrapper>
+  );
+
+  it('claims no place in <body> while closed', () => {
+    render(<TwoDrawers aOpen={false} bOpen={false} />);
+
+    expect(document.body.children).toHaveLength(1);
+  });
+
+  it('paints an open drawer above one that merely mounted earlier', () => {
+    render(<TwoDrawers aOpen={false} bOpen={true} />);
+
+    expect(bodyIndexOf('second mounted')).toBe(document.body.children.length - 1);
+  });
+
+  it('orders two open drawers by open order, not mount order', () => {
+    const { rerender } = render(<TwoDrawers aOpen={false} bOpen={false} />);
+
+    rerender(<TwoDrawers aOpen={true} bOpen={false} />);
+    rerender(<TwoDrawers aOpen={true} bOpen={true} />);
+
+    expect(bodyIndexOf('first mounted')).toBeLessThan(
+      bodyIndexOf('second mounted'),
+    );
+  });
+});
