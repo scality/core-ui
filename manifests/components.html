@@ -588,7 +588,7 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">348 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">349 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
@@ -6710,7 +6710,7 @@ supportLink?: string = undefined</code></pre>
       <div class="badges">
         <label for="c-23-templates-form-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-23-templates-form-info" class="badge info as-toggle">1 info</label>
-        <label for="c-23-templates-form-stories" class="badge ok as-toggle">10 stories</label>
+        <label for="c-23-templates-form-stories" class="badge ok as-toggle">11 stories</label>
         <label for="c-23-templates-form-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -7616,6 +7616,22 @@ rightActions?: ReactNode</code></pre>
     &lt;/&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Page Form In Flex Row</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsivePageFormInFlexRow = ({ requireMode, responsive }) =&gt; (
+  &lt;ResizeFrame minWidth=&quot;30rem&quot; height=&quot;32rem&quot;&gt;
+    &lt;div style={{ display: &#39;flex&#39;, height: &#39;100%&#39; }}&gt;
+      &lt;StepSidebar /&gt;
+      &lt;ProviderWizardForm requireMode={requireMode} responsive={responsive} /&gt;
+    &lt;/div&gt;
+  &lt;/ResizeFrame&gt;
+);</code></pre>
             </div>
         </div>
     
