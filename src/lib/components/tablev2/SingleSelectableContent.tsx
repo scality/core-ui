@@ -9,14 +9,18 @@ import {
   TableHeader,
   SortCaret,
   HeaderContent,
-  HeaderLabel,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { TableRows, useTableScrollbar } from './TableCommon';
+import {
+  isInteractiveTarget,
+  TableRows,
+  TruncatableHeaderLabel,
+  useTableScrollbar,
+} from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
@@ -114,12 +118,17 @@ export function SingleSelectableContent<
         rowProps = {
           ...rowProps,
           ...{
-            onClick: () => {
+            onClick: (event) => {
+              if (isInteractiveTarget(event)) return;
               const onRowSelected = onRowSelectedRef.current;
               if (onRowSelected) return onRowSelected(row);
             },
             tabIndex: onRowSelectedRef.current ? 0 : undefined,
             onKeyDown: (event) => {
+              // `keydown` bubbles, so without the same guard Enter or Space on a
+              // focused in-cell control selects the row *and* preventDefault()s
+              // the control's own activation.
+              if (isInteractiveTarget(event)) return;
               const onRowSelected = onRowSelectedRef.current;
               if (
                 onRowSelected &&
@@ -211,7 +220,9 @@ export function SingleSelectableContent<
                     $align={column.cellStyle?.textAlign}
                     $sortable={!column.disableSortBy}
                   >
-                    <HeaderLabel>{column.render('Header')}</HeaderLabel>
+                    <TruncatableHeaderLabel header={column.Header}>
+                      {column.render('Header')}
+                    </TruncatableHeaderLabel>
                     <SortCaret column={column} />
                   </HeaderContent>
                 </TableHeader>

@@ -5,7 +5,6 @@ import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   SortCaret,
-  HeaderLabel,
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
@@ -16,7 +15,12 @@ import {
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { TableRows, useTableScrollbar } from './TableCommon';
+import {
+  isInteractiveTarget,
+  TableRows,
+  TruncatableHeaderLabel,
+  useTableScrollbar,
+} from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
 import { Loader } from '../loader/Loader.component';
@@ -167,7 +171,8 @@ export const MultiSelectableContent = <
              */
             style: { ...style },
           }),
-          onClick: () => {
+          onClick: (event) => {
+            if (isInteractiveTarget(event)) return;
             const onSingleRowSelected = onSingleRowSelectedRef.current;
             if (onSingleRowSelected) {
               onSingleRowSelected(row);
@@ -208,7 +213,11 @@ export const MultiSelectableContent = <
                   <div
                     {...cellProps}
                     onClick={(event) => {
-                      if (!onSingleRowSelectedRef.current) return;
+                      // Selecting the row is what this cell is for, so it owns
+                      // the click outright rather than relying on the bubble the
+                      // row's interactive-target guard now stops. Both former
+                      // paths — direct here, or bubbling to the row handler's
+                      // else branch — ended in this same call.
                       event.stopPropagation();
                       handleMultipleSelectedRowsRef.current(
                         selectedRowIdsRef.current,
@@ -295,7 +304,9 @@ export const MultiSelectableContent = <
                         {column.render('Header')}
                       </div>
                     ) : (
-                      <HeaderLabel>{column.render('Header')}</HeaderLabel>
+                      <TruncatableHeaderLabel header={column.Header}>
+                      {column.render('Header')}
+                    </TruncatableHeaderLabel>
                     )}
                     <SortCaret column={column} />
                   </HeaderContent>
