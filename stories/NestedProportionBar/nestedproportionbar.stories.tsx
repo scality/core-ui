@@ -376,6 +376,8 @@ type NpbArgs = Omit<BoxOptions, 'total' | 'levelHeight'> & {
   depth: number;
   /** NestingDepth only: share of its parent each level keeps. */
   shareOfParent: number;
+  /** Playground only: the breakdown itself. */
+  root: ProportionNode;
 };
 
 const meta: Meta<NpbArgs> = {
@@ -440,6 +442,35 @@ const defaultArgs: NpbArgs = {
   levelHeight: 24,
   depth: 4,
   shareOfParent: 0.7,
+  root: CAPACITY,
+};
+
+/**
+ * The interactive one: edit the breakdown itself.
+ *
+ * `root` is a real control — change a value, add a child, drop one, or set a
+ * `color` to any theme token, `chartColors` key or CSS colour. The widths follow,
+ * and so does the axis of the argument: make the children sum past their parent
+ * and watch them scale to fit while the labels keep stating what you typed.
+ */
+export const Playground: Story = {
+  argTypes: {
+    root: {
+      control: 'object',
+      description:
+        'A node is { key, label, value, color?, children? }. Values are absolute, in one unit across the whole tree',
+    },
+  },
+  args: { ...defaultArgs, root: CAPACITY },
+  render: (args) => (
+    <Box maxWidth="60rem">
+      <NestedProportionBar
+        title="True Reality"
+        root={args.root}
+        {...npbProps(args)}
+      />
+    </Box>
+  ),
 };
 
 /** 1:1 with the reference mock: four levels, the value beside the children where it fits. */
