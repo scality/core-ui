@@ -27,3 +27,22 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 - `npm run build` — compile TypeScript to `dist/`
 - `npm run lint` — run ESLint
 - `npm run storybook` — start Storybook dev server on port 3001
+
+## Tests
+
+**One test file per source module — never one per feature.** Before writing a
+test, find the file that already covers the module: `<Source>.test.ts(x)` beside
+`<Source>.ts(x)` (32 of the 42 test files mirror their source's filename
+exactly; the rest are folder-level files such as `Form.test.tsx` covering
+`Form.component.tsx`). Add a nested `describe` there.
+
+Create a new file only when the module genuinely has none, and name it after the
+**module**, not after the behaviour being added — `Toast.component.test.tsx` for
+`Toast.component.tsx`, not `toastAnchoring.test.ts`.
+
+Two names for one component (`Modal.test.tsx` *and* `Modal.component.test.tsx`)
+is the failure this prevents: both files pass CI, so nothing flags the split and
+the next person ends up testing the same component in two places.
+
+Tests assert user-facing behaviour, never CSS properties. A test that only reads
+a style declaration back out is worth deleting rather than keeping.
