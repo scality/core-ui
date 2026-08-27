@@ -67,7 +67,7 @@ describe('MultiSelectableContent', () => {
     expect(lastCallRows[0].original).toEqual(data[3]); // Ninette (firstName-sorted index 0)
   });
 
-  it('does not include a previously single-clicked row in subsequent multi-selection (ARTESCA-8467)', async () => {
+  it('does not include a previously single-clicked row in subsequent multi-selection', async () => {
     const onSingleRowSelected = jest.fn();
     const onMultiSelectionChanged = jest.fn();
     renderMultiSelectTable({ onSingleRowSelected, onMultiSelectionChanged });
