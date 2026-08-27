@@ -1,5 +1,5 @@
 import {
-  ErrorPageContainer,
+  ErrorPage404Container,
   Row,
   Title,
   Description,
@@ -27,6 +27,7 @@ const translations = {
 type Props = {
   locale?: string;
   onReturnHomeClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
 };
 
 function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
@@ -34,7 +35,7 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   // Ensure the locale formatting is consistent
   locale = locale.toLowerCase();
   return (
-    <ErrorPageContainer className="sc-error-page404" {...rest}>
+    <ErrorPage404Container {...rest}>
       <Row>
         <Icon name="Exclamation-circle" size="2x" color="statusWarning" />
         <Title>{translations[locale].not_exist}</Title>
@@ -56,7 +57,7 @@ function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
           onClick={onReturnHomeClick}
         />
       )}
-    </ErrorPageContainer>
+    </ErrorPage404Container>
   );
 }
 

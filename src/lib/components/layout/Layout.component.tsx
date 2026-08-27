@@ -10,8 +10,11 @@ type Props = {
   sidebar?: SidebarProps;
   navbarElement?: JSX.Element;
   children: JSX.Element;
+  className?: string;
 };
-const LayoutContainer = styled.div`
+const LayoutContainer = styled.div.withConfig({
+  componentId: 'sc-layout',
+})`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -28,7 +31,7 @@ const MainContent = styled.div`
 
 function Layout({ children, sidebar, navbar, navbarElement, ...rest }: Props) {
   return (
-    <LayoutContainer className="sc-layout" {...rest}>
+    <LayoutContainer {...rest}>
       {navbar && <Navbar {...navbar} />}
       {!navbar &&
         navbarElement !== undefined &&

@@ -31,7 +31,9 @@ export type ButtonGroupProps = Omit<
   children: ReactNode;
 };
 
-const ButtonGroupContainer = styled.div<{ $orientation: Orientation }>`
+const ButtonGroupContainer = styled.div.withConfig({
+  componentId: 'sc-button-group',
+})<{ $orientation: Orientation }>`
   display: inline-flex;
   flex-direction: ${(props) =>
     props.$orientation === 'vertical' ? 'column' : 'row'};
@@ -144,12 +146,7 @@ function ButtonGroup({
     : children;
 
   return (
-    <ButtonGroupContainer
-      className="sc-button-group"
-      role="group"
-      $orientation={orientation}
-      {...rest}
-    >
+    <ButtonGroupContainer role="group" $orientation={orientation} {...rest}>
       {items}
     </ButtonGroupContainer>
   );

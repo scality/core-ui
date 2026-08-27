@@ -5,8 +5,11 @@ import { fontSize } from '../../style/theme';
 import { Icon } from '../icon/Icon.component';
 type Props = {
   paths: Array<JSX.Element>;
+  className?: string;
 };
-const BreadcrumbContainer = styled.ol`
+const BreadcrumbContainer = styled.ol.withConfig({
+  componentId: 'sc-breadcrumb',
+})`
   display: flex;
   list-style-type: none;
   padding-left: 0;
@@ -91,11 +94,7 @@ const Breadcrumb = ({ paths = [], ...rest }: Props) => {
       );
     })
     .reduce(withBreadcrumbSeparator(lastIndex), []);
-  return (
-    <BreadcrumbContainer className="sc-breadcrumb" {...rest}>
-      {breadcrumbItems}
-    </BreadcrumbContainer>
-  );
+  return <BreadcrumbContainer {...rest}>{breadcrumbItems}</BreadcrumbContainer>;
 };
 
 export { Breadcrumb };

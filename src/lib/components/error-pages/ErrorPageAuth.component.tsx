@@ -1,6 +1,6 @@
 import { Icon } from '../icon/Icon.component';
 import {
-  ErrorPageContainer,
+  ErrorPageAuthContainer,
   Row,
   Title,
   Description,
@@ -27,6 +27,7 @@ const translations = {
 type Props = {
   supportLink?: string;
   locale?: string;
+  className?: string;
 };
 
 function ErrorPageAuth({
@@ -38,7 +39,7 @@ function ErrorPageAuth({
   // Ensure the locale formatting is consistent
   locale = locale.toLowerCase();
   return (
-    <ErrorPageContainer className="sc-error-pageauth" {...rest}>
+    <ErrorPageAuthContainer {...rest}>
       <Row>
         <Icon name="Info-circle" size="2x" color="textPrimary" />
         <Title>{translations[locale].unexpected_error}</Title>
@@ -62,7 +63,7 @@ function ErrorPageAuth({
           )}
         </Description>
       </Row>
-    </ErrorPageContainer>
+    </ErrorPageAuthContainer>
   );
 }
 

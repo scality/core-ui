@@ -16,6 +16,7 @@ type Item = {
   onClick: (arg0: any) => void;
   active?: boolean;
   icon?: JSX.Element;
+  className?: string;
 };
 type Items = Array<Item>;
 export type Props = {
@@ -23,6 +24,7 @@ export type Props = {
   actions: Items;
   hoverable?: boolean;
   onToggleClick?: () => void;
+  className?: string;
 };
 export type WrapperProps = {
   $expanded?: boolean;
@@ -72,7 +74,9 @@ const Wrapper = styled.div<WrapperProps>`
     }
   }}
 `;
-const SidebarContainer = styled.div<WrapperProps>`
+const SidebarContainer = styled.div.withConfig({
+  componentId: 'sc-sidebar',
+})<WrapperProps>`
   ${(props) => {
     const { backgroundLevel1 } = props.theme;
     return css`
@@ -110,7 +114,9 @@ const SidebarContainer = styled.div<WrapperProps>`
     padding: 0px;
   }
 `;
-const SidebarItem = styled.div<{ $active?: boolean }>`
+const SidebarItem = styled.div.withConfig({
+  componentId: 'sc-sidebar-item',
+})<{ $active?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -184,7 +190,6 @@ function Sidebar({
     >
       <SidebarContainer
         $expanded={expanded}
-        className="sc-sidebar"
         $hoverable={hoverable}
         $hovered={hovered}
         {...rest}
@@ -197,7 +202,7 @@ function Sidebar({
                 setHovered(false);
                 onToggleClick();
               }}
-              tooltip={{overlay: "Toggle sidebar"}}
+              tooltip={{ overlay: 'Toggle sidebar' }}
             />
           </MenuItemIcon>
         )}
@@ -205,7 +210,6 @@ function Sidebar({
           ({ active, label, onClick, icon = null, ...actionRest }, index) => {
             return (
               <SidebarItem
-                className="sc-sidebar-item"
                 key={index}
                 $active={active}
                 title={label}

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import styled from 'styled-components';
 import { getWrapper } from '../../testUtils';
 import { Modal } from './Modal.component';
 
@@ -65,5 +66,29 @@ describe('Modal stacking order', () => {
     expect(bodyIndexOf('first mounted')).toBeGreaterThan(
       bodyIndexOf('second mounted'),
     );
+  });
+});
+
+describe('Modal hook class', () => {
+  const { Wrapper } = getWrapper();
+
+  it('keeps the sc-modal hook class when wrapped in styled()', () => {
+    const WideModal = styled(Modal)`
+      width: 80vw;
+    `;
+    render(
+      <Wrapper>
+        <WideModal isOpen title="Styled" footer={null}>
+          <p>Content</p>
+        </WideModal>
+      </Wrapper>,
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toHaveClass('sc-modal');
+    // the styled() wrapper's generated class must survive alongside it
+    expect(
+      Array.from(dialog.classList).filter((c) => c !== 'sc-modal').length,
+    ).toBeGreaterThan(0);
   });
 });

@@ -18,8 +18,11 @@ type Props = {
   position?: Position;
   notifications: Array<NotificationProps>;
   onDismiss: (arg0: string) => void;
+  className?: string;
 };
-const NotificationsContainer = styled.div<{ $position?: Position }>`
+const NotificationsContainer = styled.div.withConfig({
+  componentId: 'sc-notifications',
+})<{ $position?: Position }>`
   position: fixed;
   z-index: ${zIndex.notification};
   margin: ${spacing.r24};
@@ -52,10 +55,14 @@ const NotificationsContainer = styled.div<{ $position?: Position }>`
   }};
 `;
 
-function Notifications({ position, notifications, onDismiss, ...rest }: Props) {
+function Notifications({
+  position,
+  notifications,
+  onDismiss,
+  ...rest
+}: Props) {
   return (
     <NotificationsContainer
-      className="sc-notifications"
       $position={position}
       {...rest}
     >

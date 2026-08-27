@@ -1,5 +1,5 @@
 import {
-  ErrorPageContainer,
+  ErrorPage500Container,
   Row,
   Title,
   Description,
@@ -34,6 +34,7 @@ type Props = {
   locale?: string;
   onReturnHomeClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   errorMessage?: { en: string; fr: string };
+  className?: string;
 };
 
 function ErrorPage500({
@@ -47,7 +48,7 @@ function ErrorPage500({
   // Ensure the locale formatting is consistent
   locale = locale.toLowerCase();
   return (
-    <ErrorPageContainer className="sc-error-page500" {...rest}>
+    <ErrorPage500Container {...rest}>
       <Row>
         <Icon name="Exclamation-circle" size="2x" color="statusWarning" />
         <Title>{translations[locale].unexpected_error}</Title>
@@ -80,7 +81,7 @@ function ErrorPage500({
           onClick={onReturnHomeClick}
         />
       )}
-    </ErrorPageContainer>
+    </ErrorPage500Container>
   );
 }
 

@@ -61,6 +61,7 @@ type CommonProps = {
    * content that needs more horizontal space.
    */
   wide?: boolean;
+  className?: string;
 };
 
 type WithLegacyFooter = {
@@ -103,7 +104,9 @@ type AlertDialogProps = CommonProps &
 
 type Props = DialogProps | AlertDialogProps;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div.withConfig({
+  componentId: 'sc-modal',
+})`
   position: fixed;
   top: 0;
   left: 0;
@@ -241,7 +244,6 @@ const Modal = ({
   return isOpen
     ? createPortal(
       <ModalContainer
-        className="sc-modal"
         role={role}
         aria-modal="true"
         aria-labelledby={labelId}

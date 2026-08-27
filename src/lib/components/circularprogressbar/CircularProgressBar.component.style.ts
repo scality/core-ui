@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { getThemePropSelector } from '../../utils';
 import { EmphaseText } from '../text/Text.component';
-export const CircularProgressBarContainer = styled.div`
+export const CircularProgressBarContainer = styled.div.withConfig({
+  componentId: 'sc-circularprogressbar',
+})`
   display: inline-block;
   color: ${getThemePropSelector('textPrimary')};
 `;

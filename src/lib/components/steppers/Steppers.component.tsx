@@ -17,8 +17,11 @@ type StepProps = {
 type Props = {
   steps: Array<StepProps>;
   activeStep: number;
+  className?: string;
 };
-const SteppersContainer = styled.div`
+const SteppersContainer = styled.div.withConfig({
+  componentId: 'sc-steppers',
+})`
   padding-top: 4rem;
   padding-left: 2rem;
 `;
@@ -147,7 +150,7 @@ function Step(props: StepProps) {
 
 function Steppers({ steps, activeStep, ...rest }: Props) {
   return (
-    <SteppersContainer className="sc-steppers" {...rest}>
+    <SteppersContainer {...rest}>
       {steps.map(({ title, content, ...stepRest }, index) => (
         <Step
           key={index}

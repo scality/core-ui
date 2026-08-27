@@ -6,8 +6,11 @@ import { getThemePropSelector } from '../../utils';
 type Props = {
   sidebar: SidebarProps;
   children: JSX.Element;
+  className?: string;
 };
-const LateralNavbarLayoutContainer = styled.div`
+const LateralNavbarLayoutContainer = styled.div.withConfig({
+  componentId: 'sc-lateralnavbarlayout',
+})`
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -25,7 +28,7 @@ const MainContent = styled.div`
 
 function LateralNavbarLayout({ children, sidebar, ...rest }: Props) {
   return (
-    <LateralNavbarLayoutContainer className="sc-lateralnavbarlayout" {...rest}>
+    <LateralNavbarLayoutContainer {...rest}>
       <ContentContainer>
         {sidebar && <Sidebar {...sidebar} />}
         <MainContent className="main">{children}</MainContent>

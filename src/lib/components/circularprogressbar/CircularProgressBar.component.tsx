@@ -13,6 +13,7 @@ type Props = {
   color?: string;
   backgroundColor?: string;
   children?: JSX.Element;
+  className?: string;
 };
 
 /**
@@ -52,7 +53,7 @@ function CircularProgressBar({
   const svgSize = centerPointCoordinate * 2;
   const CIRCUMFERENCE = Math.PI * (radius * 2);
   return (
-    <CircularProgressBarContainer className="sc-circularprogressbar" {...rest}>
+    <CircularProgressBarContainer {...rest}>
       {title && <Title>{title}</Title>}
 
       <svg width={svgSize} height={svgSize}>

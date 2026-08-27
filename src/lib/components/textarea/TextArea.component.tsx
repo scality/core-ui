@@ -24,7 +24,9 @@ type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 };
 type RefType = HTMLTextAreaElement | null;
 
-const TextAreaContainer = styled.textarea<{
+const TextAreaContainer = styled.textarea.withConfig({
+  componentId: 'sc-textarea',
+})<{
   $variant: TextAreaVariant;
   $width?: CSSProperties['width'];
   $height?: CSSProperties['height'];
@@ -146,7 +148,6 @@ function TextAreaElement(
   if (width || height) {
     return (
       <TextAreaContainer
-        className="sc-textarea"
         $width={width}
         $height={height}
         $variant={variant}
@@ -162,7 +163,6 @@ function TextAreaElement(
 
   return (
     <TextAreaContainer
-      className="sc-textarea"
       rows={rows}
       cols={cols}
       $variant={variant}

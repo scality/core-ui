@@ -26,7 +26,10 @@ import {
   navbarItemWidth,
   zIndex,
 } from '../../style/theme';
-import { getContrastText, getThemePropSelector } from '../../utils';
+import {
+  getContrastText,
+  getThemePropSelector,
+} from '../../utils';
 import { Dropdown, type Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
 import { Button, FocusVisibleStyle, type Props as ButtonProps } from '../buttonv2/Buttonv2.component';
@@ -191,11 +194,14 @@ export type Props = {
    * Defaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.
    */
   condenseActionsBreakpoint?: number;
+  className?: string;
 };
 const getNavbarTextColor = (props) =>
   getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
 
-const NavbarContainer = styled.div`
+const NavbarContainer = styled.div.withConfig({
+  componentId: 'sc-navbar',
+})`
   height: ${navbarHeight};
   display: flex;
   justify-content: space-between;
@@ -682,7 +688,10 @@ function NavBar({
   );
 
   return (
-    <NavbarContainer className="sc-navbar" ref={ref} {...rest}>
+    <NavbarContainer
+      ref={ref}
+      {...rest}
+    >
       <NavbarMenu>
         {onToggleClick && (
           <NavbarMenuItem onClick={onToggleClick}>

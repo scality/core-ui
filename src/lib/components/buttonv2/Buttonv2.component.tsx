@@ -58,7 +58,9 @@ type ButtonStyledTransientProps = {
   $icon?: React.ReactNode;
   $label?: React.ReactNode;
 };
-export const ButtonStyled = styled.button<ButtonStyledTransientProps>`
+export const ButtonStyled = styled.button.withConfig({
+  componentId: 'sc-button',
+})<ButtonStyledTransientProps>`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -373,7 +375,6 @@ function Button({
       overlayStyle={tooltip?.overlayStyle}
     >
       <ButtonStyled
-        className="sc-button"
         $variant={variant}
         disabled={isLoading || disabled}
         $label={label}
