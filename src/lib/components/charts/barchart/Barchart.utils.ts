@@ -2,7 +2,11 @@ import { BarchartProps, BarchartBars } from './Barchart';
 import { TooltipContentProps } from 'recharts';
 import { chartColors, ChartColors } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
-import { normalizeChartDataWithUnits } from '../common/chartUtils';
+import {
+  getMinPositiveValue,
+  normalizeChartDataWithUnits,
+  readLogPlottedValue,
+} from '../common/chartUtils';
 import { UnitRange } from '../types';
 
 export const getMaxBarValue = (
@@ -410,12 +414,25 @@ export const useChartData = <T extends BarchartBars>(
     rechartsData,
     topDomain,
     valueBase,
+    // Read off the normalized data, like topDomain: a log axis is bounded by
+    // the smallest bar it has to show, and that bound has to be in the same
+    // units as the axis.
+    minPositiveValue: getMinPositiveValue(rechartsData, 'category'),
+    // maxValue is pre-normalization; the log axis needs the value the axis will
+    // actually plot.
+    normalizedMaxValue: valueBase === 0 ? maxValue : maxValue / valueBase,
   };
 };
 
+/**
+ * @param logZeroValue - A log axis's reserved zero band, so a bar drawn there is
+ *   reported as the 0 it actually is — to the default tooltip and to a caller's
+ *   own `tooltip` renderer alike.
+ */
 export const getCurrentPoint = <T extends BarchartBars>(
   props: TooltipContentProps<number, string>,
   hoveredValue: string | undefined,
+  logZeroValue: number | null = null,
 ) => {
   const { payload, label } = props;
 
@@ -425,7 +442,7 @@ export const getCurrentPoint = <T extends BarchartBars>(
     isHovered: boolean;
   }[] = payload.map((item) => ({
     label: item.name,
-    value: item.value,
+    value: readLogPlottedValue(item.value, logZeroValue),
     isHovered: item.name === hoveredValue,
   }));
 

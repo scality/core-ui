@@ -10,7 +10,10 @@ import {
 } from '../common/ChartTooltip';
 import { LineTimeSerieChartTooltipProps } from './LineTimeSerieChart.types';
 import { getCurrentlyHoveredChartId } from './useChartHover';
-import { formatTooltipValueWithUnit } from '../common/chartUtils';
+import {
+  formatTooltipValueWithUnit,
+  readLogPlottedValue,
+} from '../common/chartUtils';
 
 /**
  * Custom tooltip component for LineTimeSerieChart
@@ -26,6 +29,7 @@ export const LineTimeSerieChartTooltip: React.FC<
   tooltipProps,
   renderTooltip,
   isSymmetrical,
+  logZeroValue = null,
   belowSeriesLabels,
   chartContainerRef,
   chartId,
@@ -88,7 +92,9 @@ export const LineTimeSerieChartTooltip: React.FC<
               );
 
               const formattedValue = formatTooltipValueWithUnit(
-                entry.value,
+                // A zero is plotted at the axis's reserved band so it can be
+                // drawn; the tooltip has to report the 0 that was measured.
+                readLogPlottedValue(entry.value, logZeroValue),
                 valueBase,
                 unitRange,
                 unitLabel,
