@@ -119,11 +119,14 @@ const percentage = (ratio: number) => `${Math.round(ratio * 100)}%`;
  */
 const NodeSlot = styled.div<{ $isRoot: boolean; $share: number }>`
   min-width: 0;
+  display: flex;
+  flex-direction: column;
   ${({ $isRoot, $share }) =>
     $isRoot ? 'width: 100%;' : `flex: 0 0 ${($share * 100).toFixed(4)}%;`}
 `;
 
 const NodeBox = styled.div<{ $color: string; $filled: boolean }>`
+  flex: 1;
   border: 1px solid ${({ $color }) => $color};
   border-radius: ${spacing.f8};
   padding: ${spacing.f4};
@@ -176,10 +179,27 @@ const NodeValue = styled.div`
   font-variant-numeric: tabular-nums;
 `;
 
-const Row = styled.div<{ $height: string; $gap: string }>`
+/**
+ * Holds a node's children.
+ *
+ * `stretch` is what makes siblings the same height: the row's cross size is set
+ * by its tallest child — the one with the deepest subtree — and every other
+ * child fills it. Without it a leaf sits at its own content height and the row
+ * reads as ragged, with a shallow branch floating beside a deep one.
+ */
+const ChildrenRow = styled.div<{ $height: string }>`
+  display: flex;
+  align-items: stretch;
+  gap: ${spacing.f2};
+  min-width: 0;
+  min-height: ${({ $height }) => $height};
+`;
+
+/** A node's own label and value, on one line. */
+const HeaderRow = styled.div<{ $height: string }>`
   display: flex;
   align-items: center;
-  gap: ${({ $gap }) => $gap};
+  gap: ${spacing.f8};
   min-width: 0;
   min-height: ${({ $height }) => $height};
 `;
@@ -299,25 +319,26 @@ const ProportionBox = ({
         {inlineValue ? (
           <>
             {label}
-            <Row $height={options.levelHeight} $gap={spacing.f2}>
+            <ChildrenRow $height={options.levelHeight}>
               {childBoxes}
               {/* Takes the leftover, so the value sits in the unattributed remainder rather
-                  than widening the row past its parent. */}
-              <Box flex="1 1 0" minWidth="0">
+                  than widening the row past its parent. The row stretches its children, so
+                  the value is centred back against the boxes beside it. */}
+              <Box flex="1 1 0" minWidth="0" display="flex" alignItems="center">
                 {value}
               </Box>
-            </Row>
+            </ChildrenRow>
           </>
         ) : (
           <>
-            <Row $height={options.levelHeight} $gap={spacing.f8}>
+            <HeaderRow $height={options.levelHeight}>
               {label}
               <Box flex="0 0 auto">{value}</Box>
-            </Row>
+            </HeaderRow>
             {children.length > 0 && (
-              <Row $height={options.levelHeight} $gap={spacing.f2}>
+              <ChildrenRow $height={options.levelHeight}>
                 {childBoxes}
-              </Row>
+              </ChildrenRow>
             )}
           </>
         )}
