@@ -1,8 +1,10 @@
 import {
   ComponentType,
+  ReactNode,
   Ref,
   useCallback,
   useMemo,
+  useRef,
   useState,
   forwardRef,
 } from 'react';
@@ -24,6 +26,7 @@ import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
 import { CSSProperties } from 'styled-components';
 import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+import { HeaderLabel } from './Tablestyle';
 
 const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { scrollFade } = useTableContext();
@@ -120,6 +123,86 @@ export const VirtualizedRows = <
         );
       }}
     </AutoSizer>
+  );
+};
+
+/**
+ * Controls a row-wide handler must not act on. A row's `onClick`/`onKeyDown`
+ * fires for any click inside it, so without this a click on a button in a cell
+ * both activates the button and selects the row — and the selection re-render
+ * remounts the cell, closing whatever the button just opened.
+ *
+ * `label` is included on purpose: clicking a label activates its control.
+ * `[role="button"]` catches div-based triggers, which core-ui has its own share
+ * of. The selection checkbox is deliberately NOT excluded here — its cell stops
+ * propagation itself, because selecting the row is exactly what it is for.
+ */
+const INTERACTIVE_SELECTOR =
+  'button, a, input, select, textarea, label, [role="button"], [role="link"], [role="checkbox"], [role="menuitem"]';
+
+export const isInteractiveTarget = (event: {
+  target: EventTarget | null;
+}): boolean =>
+  event.target instanceof Element &&
+  !!event.target.closest(INTERACTIVE_SELECTOR);
+
+/**
+ * Reports whether the element the returned ref is attached to is actually
+ * ellipsized. Re-measures on resize because a column's width here comes from a
+ * grow factor, not a fixed size, so whether a header truncates changes with the
+ * table's width and cannot be decided once at mount.
+ */
+const useIsEllipsized = <T extends HTMLElement>() => {
+  const [isEllipsized, setIsEllipsized] = useState(false);
+  const observerRef = useRef<ResizeObserver | null>(null);
+
+  const ref = useCallback((node: T | null) => {
+    observerRef.current?.disconnect();
+    observerRef.current = null;
+    if (!node) {
+      return;
+    }
+    const measure = () => setIsEllipsized(node.scrollWidth > node.clientWidth);
+    measure();
+    if (typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    observerRef.current = observer;
+  }, []);
+
+  return { ref, isEllipsized };
+};
+
+/**
+ * A header label that offers its full text once it no longer fits. Body cells
+ * already recover via `ConstrainedText`, so an ellipsized header was the one
+ * place a label became unreadable with no way to get it back.
+ *
+ * `title` rather than core-ui's `Tooltip`: `TooltipContainer` is an
+ * `inline-block` with no `min-width: 0`, so wrapping the label would replace the
+ * ellipsizing flex item with one that cannot shrink below its min-content — it
+ * would remove the truncation instead of explaining it. The attribute is also
+ * only attached when the label really is cut off, since a tooltip on a header
+ * that reads fine is noise.
+ */
+export const TruncatableHeaderLabel = ({
+  header,
+  children,
+}: {
+  header: unknown;
+  children: ReactNode;
+}) => {
+  const { ref, isEllipsized } = useIsEllipsized<HTMLSpanElement>();
+
+  return (
+    <HeaderLabel
+      ref={ref}
+      title={typeof header === 'string' && isEllipsized ? header : undefined}
+    >
+      {children}
+    </HeaderLabel>
   );
 };
 

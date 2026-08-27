@@ -211,6 +211,11 @@ type TableRowMultiSelectableType = {
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
+  /* Must match HeadRow's gap. Every column track has a grow factor and no basis,
+     so a gap the header reserves and the body does not is free space the body
+     redistributes — shifting every boundary by grow-share × total gap, at any
+     width. That is the header-not-over-its-value defect. */
+  gap: ${spacing.r16};
   border-bottom: 1px solid
     ${(props) => props.theme[props.$separationLineVariant]};
   box-sizing: border-box;

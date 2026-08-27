@@ -1064,3 +1064,78 @@ export const SortCaretHeaderAlignment = {
     </>
   ),
 };
+
+type Attachable = { name: string; isPending: boolean; action: string };
+
+// AttachmentTable's exact column shape: three tracks with grow factors summing
+// to 2.5, a right margin on the first, and `marginLeft: auto` plus a JSX Header
+// on the last. Reproduced here because the reported defect is that the header
+// tracks and the body tracks disagree, and only a real layout can show that.
+const attachmentShapeColumns: Column<Attachable>[] = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+    cellStyle: { flex: 1.5, marginRight: '1.5rem' },
+  },
+  {
+    Header: 'Attachment',
+    accessor: 'isPending',
+    cellStyle: { flex: 0.5 },
+    Cell: ({ value }: { value?: boolean }) => <>{value ? 'Pending' : 'Attached'}</>,
+  },
+  {
+    Header: <Box flex={0.5} />,
+    accessor: 'action',
+    cellStyle: {
+      textAlign: 'right',
+      flex: 0.5,
+      marginLeft: 'auto',
+      marginRight: '0.5rem',
+    },
+    Cell: () => <Button variant="outline" label="Detach" />,
+  },
+];
+
+const attachableRow = (i: number): Attachable => ({
+  name: `entity-${i}`,
+  isPending: i % 3 === 0,
+  action: 'detach',
+});
+
+const fewAttachables = Array.from({ length: 2 }, (_, i) => attachableRow(i));
+const manyAttachables = Array.from({ length: 40 }, (_, i) => attachableRow(i));
+
+export const HeaderBodyColumnAlignment = {
+  render: () => (
+    <>
+      <Title>A — few rows, no vertical scrollbar</Title>
+      <div id="align-no-scrollbar" style={{ height: '140px' }}>
+        <Table columns={attachmentShapeColumns} data={fewAttachables}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+      <Title>B — enough rows to force a vertical scrollbar</Title>
+      <div id="align-with-scrollbar" style={{ height: '220px' }}>
+        <Table columns={attachmentShapeColumns} data={manyAttachables}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>
+      <Title>C — multi selectable, scrollbar, same columns</Title>
+      <div id="align-multi-scrollbar" style={{ height: '220px' }}>
+        <Table columns={attachmentShapeColumns} data={manyAttachables}>
+          <Table.MultiSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onMultiSelectionChanged={action('selection changed')}
+          />
+        </Table>
+      </div>
+    </>
+  ),
+};
