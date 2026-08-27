@@ -43,6 +43,12 @@ const Box = styled.div.withConfig({
   ${({ container }) =>
     container &&
     css`
+      /* Containment takes the contents out of the intrinsic width, so a container
+         Box needs a definite width from its parent — a flex grow factor, a grid
+         track or block layout. min-width keeps it from being pinned to the content
+         width it no longer has; the Box itself stays unopinionated about where the
+         definite width comes from. */
+      min-width: 0;
       container-type: inline-size;
       container-name: responsive;
     `}
