@@ -29,3 +29,47 @@ Use this button to open a read-only detail view for the row.
 - Icon: `Eye`.
 
 <Canvas of={TableStories.TableWithViewAction} layout="fullscreen" />
+
+## Row selection
+
+Pass `onRowSelected` to `Table.SingleSelectableContent` to make rows selectable, and pair it with
+`selectedId` so the chosen row stays marked. A selectable row shows a pointer cursor and a hover
+highlight from the start — the affordance does not wait for a first selection.
+
+Clicking anywhere in a row selects it, **except** on an interactive control inside a cell. A
+button, link, input, checkbox or label in a cell keeps its own click. The same holds for the
+keyboard: Enter or Space on a focused control activates that control, not the row.
+
+This matters beyond the stray selection: selecting a row re-renders it, which remounts its cells
+and closes anything the control had just opened.
+
+<Canvas of={TableStories.SimpleContentTable} layout="fullscreen" />
+
+## Responsive columns
+
+Give a column a `dropAt` breakpoint and it hides once the table is narrower than that. Columns
+without one always stay. Below, Age drops at 550px and Last Name at 700px; First Name and Health
+have no breakpoint.
+
+Drag the frame's bottom-right corner to resize it.
+
+<Canvas of={TableStories.ResponsiveColumnDrop} layout="fullscreen" />
+
+### Recovering the dropped values
+
+Add `revealDroppedColumns` and each row gains a trailing `+N` trigger. Clicking it opens a popover
+listing the dropped columns and their values for that row, so nothing is lost at a narrow width.
+
+The trigger is a control inside a cell, so clicking it does not select the row — which is what
+keeps the popover open.
+
+<Canvas of={TableStories.ResponsiveColumnDropWithReveal} layout="fullscreen" />
+
+### A control that cannot shrink will overflow its column
+
+A column's width comes from its grow factor, and header and body cells shrink by the same rules,
+so a column can end up narrower than the control inside it. A text button will not shrink below
+its label, and it will overflow rather than clip.
+
+Give such a button `iconOnly={n}` so it collapses to its icon below `n` px instead. Prefer that to
+widening the column, which would cost every other column its share of the space.

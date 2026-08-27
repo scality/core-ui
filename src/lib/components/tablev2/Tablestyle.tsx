@@ -165,7 +165,13 @@ export const HeadRow = styled.div<HeadRowType>`
 
 type TableRowType = {
   $isSelected: boolean;
-  $selectedId?: string;
+  /**
+   * Whether the row can be selected at all — i.e. the content was given an
+   * `onRowSelected`. Not "something is currently selected": gating the hover
+   * affordance on that left a selectable table looking inert until its first
+   * click, with no pointer cursor to invite one.
+   */
+  $selectable?: boolean;
   $separationLineVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
@@ -180,7 +186,7 @@ export const TableRow = styled.div<TableRowType>`
 
   // single selectable case
   ${(props) => {
-    if (props.$selectedId) {
+    if (props.$selectable) {
       return css`
         &:hover,
         &:focus {
@@ -196,7 +202,7 @@ export const TableRow = styled.div<TableRowType>`
   }}
 
   ${(props) => {
-    if (props.$selectedId && props.$isSelected) {
+    if (props.$isSelected) {
       return css`
         background-color: ${props.theme.highlight};
         box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};

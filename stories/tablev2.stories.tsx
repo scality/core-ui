@@ -858,83 +858,82 @@ const responsiveColumns: Column<Entry>[] = [
 ];
 
 export const ResponsiveColumnDrop = {
-  render: () => (
-    <>
-      <Title>Responsive column drop</Title>
-      <Box mb={2}>
-        Drag the bottom-right corner to resize. Columns with a <code>dropAt</code>{' '}
-        breakpoint hide as the table gets narrower (Age below 550px, Last Name
-        below 700px). First Name and Health have no breakpoint, so they always
-        stay.
-      </Box>
-      <div
-        style={{
-          height: '320px',
-          width: '900px',
-          minWidth: '320px',
-          maxWidth: '100%',
-          resize: 'horizontal',
-          overflow: 'hidden',
-          padding: '20px',
-          border: '1px dashed currentColor',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Table
-          columns={responsiveColumns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
+  render: () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+
+    return (
+      <>
+        <Title>Responsive column drop</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
         >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-    </>
-  ),
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              selectedId={selected}
+              onRowSelected={(row) => setSelected(row.id)}
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
 };
 
 export const ResponsiveColumnDropWithReveal = {
-  render: () => (
-    <>
-      <Title>Responsive column drop with reveal</Title>
-      <Box mb={2}>
-        Same responsive columns as above, but with <code>revealDroppedColumns</code>.
-        Once a column drops, a trailing column appears with a per-row{' '}
-        <code>+N</code> trigger; clicking it opens a popover listing the dropped
-        columns and their values for that row, so no data is lost on a narrow
-        viewport. Drag the bottom-right corner below 700px to see it.
-      </Box>
-      <div
-        style={{
-          height: '320px',
-          width: '900px',
-          minWidth: '320px',
-          maxWidth: '100%',
-          resize: 'horizontal',
-          overflow: 'hidden',
-          padding: '20px',
-          border: '1px dashed currentColor',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Table
-          columns={responsiveColumns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-          revealDroppedColumns
+  render: () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+
+    return (
+      <>
+        <Title>Responsive column drop with reveal</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
         >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-    </>
-  ),
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+            revealDroppedColumns
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              selectedId={selected}
+              onRowSelected={(row) => setSelected(row.id)}
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
 };
 
 /**
@@ -1063,137 +1062,4 @@ export const SortCaretHeaderAlignment = {
       </div>
     </>
   ),
-};
-
-type Attachable = { name: string; isPending: boolean; action: string };
-
-// AttachmentTable's exact column shape: three tracks with grow factors summing
-// to 2.5, a right margin on the first, and `marginLeft: auto` plus a JSX Header
-// on the last. Reproduced here because the reported defect is that the header
-// tracks and the body tracks disagree, and only a real layout can show that.
-const attachmentShapeColumns: Column<Attachable>[] = [
-  {
-    Header: 'Name',
-    accessor: 'name',
-    cellStyle: { flex: 1.5, marginRight: '1.5rem' },
-  },
-  {
-    Header: 'Attachment',
-    accessor: 'isPending',
-    cellStyle: { flex: 0.5 },
-    Cell: ({ value }: { value?: boolean }) => <>{value ? 'Pending' : 'Attached'}</>,
-  },
-  {
-    Header: <Box flex={0.5} />,
-    accessor: 'action',
-    cellStyle: {
-      textAlign: 'right',
-      flex: 0.5,
-      marginLeft: 'auto',
-      marginRight: '0.5rem',
-    },
-    Cell: () => <Button variant="outline" label="Detach" />,
-  },
-];
-
-const attachableRow = (i: number): Attachable => ({
-  name: `entity-${i}`,
-  isPending: i % 3 === 0,
-  action: 'detach',
-});
-
-const fewAttachables = Array.from({ length: 2 }, (_, i) => attachableRow(i));
-const manyAttachables = Array.from({ length: 40 }, (_, i) => attachableRow(i));
-
-const alignmentFrame: React.CSSProperties = {
-  resize: 'horizontal',
-  overflow: 'hidden',
-  width: '46rem',
-  minWidth: '14rem',
-  maxWidth: '100%',
-  border: '1px dashed #666',
-  padding: '0.5rem',
-};
-
-export const HeaderBodyColumnAlignment = {
-  render: () => {
-    const [selected, setSelected] = useState<string | undefined>(undefined);
-
-    return (
-      <>
-        <Title>
-          Drag each frame's right edge. Every header label must stay directly
-          over its column at every width.
-        </Title>
-
-        <Title>A — single selectable, few rows, no vertical scrollbar</Title>
-        <div id="align-no-scrollbar" style={alignmentFrame}>
-          <div style={{ height: '140px' }}>
-            <Table columns={attachmentShapeColumns} data={fewAttachables}>
-              <Table.SingleSelectableContent
-                rowHeight="h40"
-                separationLineVariant="backgroundLevel3"
-                selectedId={selected}
-                onRowSelected={(row) => setSelected(row.id)}
-              />
-            </Table>
-          </div>
-        </div>
-
-        <Title>
-          B — single selectable, enough rows to force a vertical scrollbar. Click
-          a row to select it; click "Detach" and the row must NOT select.
-        </Title>
-        <div id="align-with-scrollbar" style={alignmentFrame}>
-          <div style={{ height: '220px' }}>
-            <Table columns={attachmentShapeColumns} data={manyAttachables}>
-              <Table.SingleSelectableContent
-                rowHeight="h40"
-                separationLineVariant="backgroundLevel3"
-                selectedId={selected}
-                onRowSelected={(row) => setSelected(row.id)}
-              />
-            </Table>
-          </div>
-        </div>
-
-        <Title>
-          C — single selectable with dropped columns and reveal. Below 700px a
-          per-row <code>+N</code> trigger appears; clicking it on an UNSELECTED
-          row must open the popover and leave it open.
-        </Title>
-        <div id="align-reveal" style={alignmentFrame}>
-          <div style={{ height: '220px' }}>
-            <Table
-              columns={responsiveColumns}
-              data={data}
-              defaultSortingKey={'health'}
-              getRowId={getRowId}
-              revealDroppedColumns
-            >
-              <Table.SingleSelectableContent
-                rowHeight="h40"
-                separationLineVariant="backgroundLevel3"
-                selectedId={selected}
-                onRowSelected={(row) => setSelected(row.id)}
-              />
-            </Table>
-          </div>
-        </div>
-
-        <Title>D — multi selectable, scrollbar, same columns</Title>
-        <div id="align-multi-scrollbar" style={alignmentFrame}>
-          <div style={{ height: '220px' }}>
-            <Table columns={attachmentShapeColumns} data={manyAttachables}>
-              <Table.MultiSelectableContent
-                rowHeight="h40"
-                separationLineVariant="backgroundLevel3"
-                onMultiSelectionChanged={action('selection changed')}
-              />
-            </Table>
-          </div>
-        </div>
-      </>
-    );
-  },
 };
