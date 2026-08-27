@@ -170,3 +170,46 @@ describe('ChartTooltip', () => {
     expect(screen.getByText('20 kB')).toBeInTheDocument();
   });
 });
+
+describe('BarchartTooltip on a logarithmic axis', () => {
+  it('reports a bar drawn at the reserved zero band as the 0 it is', () => {
+    // 0.1 is where getLogAxis put the band; the bar is drawn there, and the
+    // tooltip must not report the position as if it were the measurement.
+    render(
+      <BarchartTooltip
+        type={{ type: 'category' }}
+        tooltipProps={{
+          ...testTooltipProps,
+          payload: [
+            { name: 'Success', value: 0.1 },
+            { name: 'Failed', value: 42 },
+          ],
+        }}
+        hoveredValue={undefined}
+        logZeroValue={0.1}
+        chartContainerRef={mockChartContainerRef}
+      />,
+    );
+
+    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(screen.queryByText('0.1')).not.toBeInTheDocument();
+    // Every other value is untouched.
+    expect(screen.getByText(/42/)).toBeInTheDocument();
+  });
+
+  it('leaves the value alone with no band in play', () => {
+    render(
+      <BarchartTooltip
+        type={{ type: 'category' }}
+        tooltipProps={{
+          ...testTooltipProps,
+          payload: [{ name: 'Success', value: 0.1 }],
+        }}
+        hoveredValue={undefined}
+        chartContainerRef={mockChartContainerRef}
+      />,
+    );
+
+    expect(screen.getByText('0.1')).toBeInTheDocument();
+  });
+});

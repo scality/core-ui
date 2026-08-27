@@ -980,7 +980,10 @@ export const EmptyDataExample: Story = {
     return (
       <ChartLegendWrapper
         // @ts-ignore
-        colorSet={{ Success: theme.statusHealthy, Failed: theme.statusCritical }}
+        colorSet={{
+          Success: theme.statusHealthy,
+          Failed: theme.statusCritical,
+        }}
         sortOrder="status"
       >
         <LineTimeSerieChart
@@ -999,7 +1002,6 @@ export const EmptyDataExample: Story = {
   },
 };
 
-
 // Generate 1-hour data with 30s intervals, all zeros
 const generateAllZeroValuesData = (): [number, string][] => {
   const baseTimestamp = 1740405600;
@@ -1016,9 +1018,25 @@ const allZeroValuesData = generateAllZeroValuesData();
 export const AllZeroValuesExample: Story = {
   render: () => {
     return (
-      <ChartLegendWrapper colorSet={{ 'server-1': lineTimeSeriesColorRange[0] }}>
-        <LineTimeSerieChart yAxisType='default' startingTimeStamp={allZeroValuesData[0][0]} interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR} duration={SAMPLE_DURATION_LAST_ONE_HOUR}
-          series={[{ data: allZeroValuesData, resource: 'server-1', metricPrefix: 'bandwidth', getTooltipLabel: (prefix, resource) => `${resource}-${prefix}` }]} title="All Zero Values" height={200} />
+      <ChartLegendWrapper
+        colorSet={{ 'server-1': lineTimeSeriesColorRange[0] }}
+      >
+        <LineTimeSerieChart
+          yAxisType="default"
+          startingTimeStamp={allZeroValuesData[0][0]}
+          interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR}
+          duration={SAMPLE_DURATION_LAST_ONE_HOUR}
+          series={[
+            {
+              data: allZeroValuesData,
+              resource: 'server-1',
+              metricPrefix: 'bandwidth',
+              getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+            },
+          ]}
+          title="All Zero Values"
+          height={200}
+        />
       </ChartLegendWrapper>
     );
   },
@@ -1113,8 +1131,6 @@ const verySmallValuesData: [number, string][] = [
   [1740422880, '0.00000435'],
   [1740423600, '0.00000367'],
 ];
-
-
 
 export const SmallValuesExample: Story = {
   render: () => {
@@ -1254,7 +1270,9 @@ const mixedMagnitudeOpsData: [number, string][] = [
 export const TooltipUnitRangeExample: Story = {
   render: () => {
     return (
-      <ChartLegendWrapper colorSet={{ 'operations': lineTimeSeriesColorRange[0] }}>
+      <ChartLegendWrapper
+        colorSet={{ operations: lineTimeSeriesColorRange[0] }}
+      >
         <LineTimeSerieChart
           series={[
             {
@@ -1370,7 +1388,7 @@ export const BigValuesExample: Story = {
           ]}
           title="Big Values"
           height={200}
-          yAxisTitle='Big Number Example '
+          yAxisTitle="Big Number Example "
           startingTimeStamp={bigValuesData2[0][0]}
           isLoading={false}
           yAxisType={'default'}
@@ -1388,7 +1406,7 @@ export const BigValuesExample: Story = {
           ]}
           title="Big Values"
           height={200}
-          yAxisTitle='Big Number Example '
+          yAxisTitle="Big Number Example "
           startingTimeStamp={bigValuesData2[0][0]}
           isLoading={false}
           unitRange={UNIT_RANGE_BS}
@@ -1401,8 +1419,147 @@ export const BigValuesExample: Story = {
   },
 };
 
+/* -------------------------------------------------------------------------- */
+/*                            logarithmic Y axis                              */
+/* -------------------------------------------------------------------------- */
 
+const LOG_START = 1740405600;
 
+/**
+ * A latency-shaped series: a quiet baseline around 2 ms with occasional spikes into the seconds.
+ * Deterministic, so the two scales below are always compared on the same data.
+ */
+const spikyData = Array.from({ length: 120 }, (_, index) => {
+  const isSpike = index % 17 === 0;
+  const isBigSpike = index % 41 === 0;
+  const value = isBigSpike ? 4200 : isSpike ? 180 : 1.5 + (index % 7) * 0.4;
+  return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+    number,
+    number,
+  ];
+});
 
+/** The same series with a stretch of zeros — the values a log axis has no place for. */
+const spikyDataWithZeros = spikyData.map(
+  ([timestamp, value], index) =>
+    [timestamp, index >= 60 && index < 72 ? 0 : value] as [number, number],
+);
 
+const logSerie = (data: [number, number][]): Serie[] => [
+  {
+    data,
+    resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+    getTooltipLabel: (prefix, resource) => `${resource}`,
+  },
+];
 
+const logChartArgs = (data: [number, number][]) => ({
+  series: logSerie(data),
+  height: 200,
+  startingTimeStamp: LOG_START,
+  interval: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+  duration: SAMPLE_DURATION_LAST_ONE_HOUR,
+  yAxisTitle: 'ms',
+});
+
+/**
+ * The same series on both scales.
+ *
+ * A metric that idles at 2 ms and spikes to 4 s is the case a linear axis cannot serve: the axis is
+ * sized by the spike, so the baseline — where the metric spends nearly all its time — is pressed
+ * flat against zero and its variation is invisible. A log axis gives every decade the same height,
+ * so the quiet periods and the spikes are both readable.
+ *
+ * The scale is a display choice only: no value is rescaled, and the tooltip still reads the
+ * milliseconds the series carries.
+ *
+ * What you give up: distances no longer read as differences. Two points twice as far apart
+ * vertically are ten times apart in value, not twice. Use it to see shape across magnitudes, not
+ * to compare magnitudes by eye.
+ */
+export const LogarithmicScaleExample: Story = {
+  render: () => (
+    <div>
+      <ChartWithProviders
+        {...logChartArgs(spikyData)}
+        title="Request latency — linear"
+      />
+      <ChartWithProviders
+        {...logChartArgs(spikyData)}
+        title="Request latency — logarithmic"
+        yAxisScale="log"
+      />
+    </div>
+  ),
+};
+
+/**
+ * Zero has no logarithm, so the axis reserves one slot below its first decade and labels it `0`.
+ * The zero samples are drawn there. Note that the step from `0` to the first decade is that single
+ * reserved slot and not one more tenfold step — it is the one place on the axis where the spacing
+ * does not mean a factor of ten.
+ *
+ * This is what keeps "the metric read zero for twelve minutes" from looking like "we have no data
+ * for twelve minutes". Dropping the zeros would leave the same gap a missing sample leaves, and
+ * those are not the same fact; clamping them to the first decade would draw them as the smallest
+ * measured value, a number the reader would believe. The tooltip reports 0 either way.
+ *
+ * A negative sample has neither a logarithm nor a slot, so it is still dropped: a series that goes
+ * negative does not belong on a log axis at all.
+ */
+export const LogarithmicScaleWithZeros: Story = {
+  render: () => (
+    <div>
+      <ChartWithProviders
+        {...logChartArgs(spikyDataWithZeros)}
+        title="With a stretch of zeros — linear"
+      />
+      <ChartWithProviders
+        {...logChartArgs(spikyDataWithZeros)}
+        title="With a stretch of zeros — logarithmic, the zeros sit at the reserved 0"
+        yAxisScale="log"
+      />
+    </div>
+  ),
+};
+
+/**
+ * The axis follows the data's own decades — it is not anchored to 1.
+ *
+ * Here everything sits between 0.001 and 0.1 with occasional spikes to 32 and 50, and the axis
+ * comes out 0.001..100: six decades, one tick each, decimals on the low ones and none on the high
+ * ones. Nothing had to be configured for that; `getLogAxis` reads the smallest positive value and
+ * the largest, and rounds each outwards to a decade.
+ *
+ * On the linear chart above, the entire baseline is a flat line on zero — the axis is sized by the
+ * 50 spike, and 0.002 against 50 is 1/25000 of the plot height.
+ */
+export const LogarithmicScaleBelowOne: Story = {
+  render: () => {
+    // Baseline in the milli range, two spikes four decades above it. Deterministic.
+    const data = Array.from({ length: 120 }, (_, index) => {
+      const value =
+        index === 30 ? 32 : index === 78 ? 50 : 0.002 + (index % 9) * 0.011;
+      return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+        number,
+        number,
+      ];
+    });
+
+    return (
+      <div>
+        <ChartWithProviders
+          {...logChartArgs(data)}
+          title="Error rate — linear, the baseline is unreadable"
+          yAxisTitle="/s"
+        />
+        <ChartWithProviders
+          {...logChartArgs(data)}
+          title="Error rate — logarithmic, 0.001 to 100"
+          yAxisTitle="/s"
+          yAxisScale="log"
+        />
+      </div>
+    );
+  },
+};

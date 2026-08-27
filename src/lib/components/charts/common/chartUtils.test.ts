@@ -1,4 +1,10 @@
 import {
+  formatLogTickValue,
+  getLogAxis,
+  getMinPositiveValue,
+  hasZeroValue,
+  placeNonPositiveValues,
+  readLogPlottedValue,
   getRoundReferenceValue,
   getTicks,
   getUnitLabel,
@@ -511,5 +517,187 @@ describe('formatTooltipValueWithUnit', () => {
         '20 kB',
       );
     });
+  });
+});
+
+describe('getMinPositiveValue', () => {
+  it('ignores the excluded key, zeros, negatives and non-numbers', () => {
+    const data = [
+      { category: 'a', up: 0, down: 40 },
+      { category: 'b', up: 3, down: -10 },
+      { category: 'c', up: null, down: 'NAN' },
+    ];
+
+    // 'category' would sort as NaN, 0 and -10 have no logarithm, 'NAN' is a gap
+    // marker.
+    expect(getMinPositiveValue(data, 'category')).toBe(3);
+  });
+
+  it('returns null when nothing is positive', () => {
+    expect(getMinPositiveValue([{ category: 'a', up: 0, down: -1 }], 'category')).toBeNull();
+    expect(getMinPositiveValue([], 'category')).toBeNull();
+  });
+
+  it('reads a numeric string, because that is how prometheus data arrives', () => {
+    expect(getMinPositiveValue([{ timestamp: 1, load: '0.25' }], 'timestamp')).toBe(0.25);
+  });
+});
+
+describe('getLogAxis', () => {
+  it('bounds the axis with the decades enclosing the data', () => {
+    // 3..400 is not 0..400: a log axis cannot start at zero.
+    expect(getLogAxis(3, 400)).toMatchObject({
+      domain: [1, 1000],
+      ticks: [1, 10, 100, 1000],
+    });
+  });
+
+  it('keeps a max that already sits on a decade as its own bound', () => {
+    expect(getLogAxis(1, 1000).domain).toEqual([1, 1000]);
+  });
+
+  it('handles values below one', () => {
+    expect(getLogAxis(0.004, 0.5)).toMatchObject({
+      domain: [0.001, 1],
+      ticks: [0.001, 0.01, 0.1, 1],
+    });
+  });
+
+  it('still gives a decade of height when every value shares a magnitude', () => {
+    // Without this the domain would be [10, 10] and the plot would have no
+    // height.
+    expect(getLogAxis(20, 30)).toMatchObject({
+      domain: [10, 100],
+      ticks: [10, 100],
+    });
+  });
+
+  it('skips whole decades rather than crowding the axis, keeping both bounds', () => {
+    const { domain, ticks } = getLogAxis(1, 1e9, { maxTicks: 4 });
+
+    expect(domain).toEqual([1, 1e9]);
+    expect(ticks.length).toBeLessThanOrEqual(5);
+    expect(ticks[0]).toBe(1);
+    expect(ticks[ticks.length - 1]).toBe(1e9);
+    // Every tick is a decade — a log axis is never subdivided linearly.
+    ticks.forEach((tick) => expect(Number.isInteger(Math.log10(tick))).toBe(true));
+  });
+
+  it('falls back to one empty decade when there is nothing positive to plot', () => {
+    expect(getLogAxis(null, 0)).toMatchObject({ domain: [1, 10], ticks: [1, 10] });
+    expect(getLogAxis(0, 100)).toMatchObject({ domain: [1, 10], ticks: [1, 10] });
+  });
+
+  it('reserves a slot below the first decade for a measured zero', () => {
+    const axis = getLogAxis(3, 400, { withZeroBand: true });
+
+    // The scale still runs 1..1000; the slot sits one position below it.
+    expect(axis.zeroValue).toBe(0.1);
+    expect(axis.domain).toEqual([0.1, 1000]);
+    expect(axis.ticks).toEqual([0.1, 1, 10, 100, 1000]);
+  });
+
+  it('reserves nothing when not asked, so no height is spent on an empty band', () => {
+    const axis = getLogAxis(3, 400);
+
+    expect(axis.zeroValue).toBeNull();
+    expect(axis.domain).toEqual([1, 1000]);
+  });
+
+  it('puts the band below the first decade whatever the magnitude', () => {
+    expect(getLogAxis(0.004, 0.5, { withZeroBand: true })).toMatchObject({
+      zeroValue: 0.0001,
+      domain: [0.0001, 1],
+    });
+  });
+});
+
+describe('formatLogTickValue', () => {
+  it('takes its decimals from the tick, not from the axis maximum', () => {
+    // The same axis has to render both of these legibly.
+    expect(formatLogTickValue(0.001)).toBe('0.001');
+    expect(formatLogTickValue(1)).toBe('1');
+    expect(formatLogTickValue(100)).toBe('100');
+  });
+
+  it('goes compact past ten thousand, in the same ISO style as the linear axis', () => {
+    // formatISONumber separates the suffix with a non-breaking space, so match
+    // the shape rather than pinning the exact whitespace character.
+    expect(formatLogTickValue(1000000)).toMatch(/^1\sM$/);
+  });
+
+  it('renders nothing for a value a log axis has no place for', () => {
+    expect(formatLogTickValue(0)).toBe('');
+    expect(formatLogTickValue(-5)).toBe('');
+  });
+
+  it('labels the reserved band 0, not by the position it occupies', () => {
+    expect(formatLogTickValue(0.1, 0.1)).toBe('0');
+    // Without the band, the same position is just a tick like any other.
+    expect(formatLogTickValue(0.1)).toBe('0.1');
+  });
+});
+
+describe('hasZeroValue', () => {
+  it('is true only for a measured zero, not for a gap or a negative', () => {
+    expect(hasZeroValue([{ category: 'a', up: 0 }], 'category')).toBe(true);
+    expect(hasZeroValue([{ category: 'a', up: '0' }], 'category')).toBe(true);
+    expect(hasZeroValue([{ category: 'a', up: null }], 'category')).toBe(false);
+    expect(hasZeroValue([{ category: 'a', up: -1 }], 'category')).toBe(false);
+    expect(hasZeroValue([{ category: 'a', up: 3 }], 'category')).toBe(false);
+  });
+
+  it('never counts the excluded key, whose zero is not a value', () => {
+    expect(hasZeroValue([{ timestamp: 0, load: 2 }], 'timestamp')).toBe(false);
+  });
+});
+
+describe('placeNonPositiveValues', () => {
+  it('moves a zero to the reserved band, where the axis can draw it', () => {
+    const data = [
+      { category: 'a', up: 0, down: 40 },
+      { category: 'b', up: 0.5, down: 0 },
+    ];
+
+    expect(placeNonPositiveValues(data, 'category', 0.1)).toEqual([
+      { category: 'a', up: 0.1, down: 40 },
+      { category: 'b', up: 0.5, down: 0.1 },
+    ]);
+  });
+
+  it('drops a negative, which has no band and no logarithm', () => {
+    expect(
+      placeNonPositiveValues([{ category: 'a', up: -3 }], 'category', 0.1),
+    ).toEqual([{ category: 'a', up: null }]);
+  });
+
+  it('drops zeros when no band was reserved', () => {
+    expect(
+      placeNonPositiveValues([{ category: 'a', up: 0 }], 'category', null),
+    ).toEqual([{ category: 'a', up: null }]);
+  });
+
+  it('never touches the excluded key, even when it is zero', () => {
+    // A timestamp of 0 is a valid instant, not a value to move.
+    expect(
+      placeNonPositiveValues([{ timestamp: 0, load: 2 }], 'timestamp', 0.1),
+    ).toEqual([{ timestamp: 0, load: 2 }]);
+  });
+
+  it('leaves a gap marker as it found it', () => {
+    expect(
+      placeNonPositiveValues([{ timestamp: 1, load: null }], 'timestamp', 0.1),
+    ).toEqual([{ timestamp: 1, load: null }]);
+  });
+});
+
+describe('readLogPlottedValue', () => {
+  it('reports a value sitting at the band as the zero it is', () => {
+    expect(readLogPlottedValue(0.1, 0.1)).toBe(0);
+  });
+
+  it('leaves every other value alone', () => {
+    expect(readLogPlottedValue(0.5, 0.1)).toBe(0.5);
+    expect(readLogPlottedValue(0.1, null)).toBe(0.1);
   });
 });

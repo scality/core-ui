@@ -21,6 +21,7 @@ export const BarchartTooltip = <T extends BarchartBars>({
   unitLabel,
   unitRange,
   valueBase = 1,
+  logZeroValue = null,
   chartContainerRef,
 }: {
   type: TimeType | CategoryType;
@@ -31,6 +32,8 @@ export const BarchartTooltip = <T extends BarchartBars>({
   unitLabel?: string;
   unitRange?: UnitRange;
   valueBase?: number;
+  /** A log axis's reserved zero band, reported as 0 rather than as its position. */
+  logZeroValue?: number | null;
   chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
   const { active, coordinate } = tooltipProps;
@@ -39,7 +42,7 @@ export const BarchartTooltip = <T extends BarchartBars>({
     return null;
   }
 
-  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue);
+  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue, logZeroValue);
 
   const duration =
     type.type === 'time'
