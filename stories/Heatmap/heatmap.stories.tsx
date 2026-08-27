@@ -2,11 +2,9 @@ import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import {
-  Alert,
   Box,
   ChartLegend,
   ChartLegendWrapper,
-  GlobalHealthBar,
   useChartLegend,
 } from '../../src/lib/next';
 import { spacing, Stack } from '../../src/lib/spacing';
@@ -18,8 +16,8 @@ import { FormattedDateTime } from '../../src/lib/components/date/FormattedDateTi
  * Heatmap built by composing existing core-ui primitives — no new component.
  *
  * Two recipes:
- *  - `StatusHeatmap`    : Box (CSS grid) + Tooltip + ChartLegendWrapper/ChartLegend
- *  - `HealthBarHeatmap` : one GlobalHealthBar per row
+ *  - `StatusHeatmap`  : discrete statuses — Box (CSS grid) + Tooltip + ChartLegend
+ *  - `NumericHeatmap` : continuous values — the same grid under an opacity ramp
  */
 
 /* -------------------------------------------------------------------------- */
@@ -215,132 +213,7 @@ const StatusHeatmap = ({
 };
 
 /* -------------------------------------------------------------------------- */
-/*                    RECIPE 2 — one GlobalHealthBar per row                  */
-/* -------------------------------------------------------------------------- */
-
-const SEVERITY_BY_STATUS: Record<CellStatus, Alert['severity'] | null> = {
-  // OK needs no alert: the GlobalHealthBar background bar is already healthy
-  OK: null,
-  WARNING: 'warning',
-  CRITICAL: 'critical',
-  NONE: 'unavailable',
-};
-
-const statusRowToAlerts = (
-  row: HeatmapRow<CellStatus>,
-  buckets: Date[],
-  step: number,
-): Alert[] =>
-  row.cells.flatMap((status, colIndex) => {
-    const severity = SEVERITY_BY_STATUS[status];
-    if (!severity) return [];
-    const bucketStart = buckets[colIndex];
-    return [
-      {
-        key: `${row.label}-${colIndex}`,
-        severity,
-        description: `${row.label} — ${status}`,
-        startsAt: bucketStart.toISOString(),
-        endsAt: new Date(bucketStart.getTime() + step).toISOString(),
-      },
-    ];
-  });
-
-/**
- * GlobalHealthBar draws its own x-axis. On a stack of rows we keep only the
- * last one, and claw back the vertical space the hidden axes still occupy.
- */
-const HealthBarCell = styled.div<{ $hideAxis: boolean }>`
-  ${({ $hideAxis }) =>
-    $hideAxis &&
-    `
-      .recharts-xAxis {
-        visibility: hidden;
-      }
-      margin-bottom: -0.75rem;
-    `}
-`;
-
-const HealthBarHeatmap = ({
-  title,
-  rows,
-  buckets,
-  step,
-  start,
-  end,
-  labelWidth = '7rem',
-}: {
-  title: string;
-  rows: HeatmapRow<CellStatus>[];
-  buckets: Date[];
-  step: number;
-  start: Date;
-  end: Date;
-  labelWidth?: string;
-}) => {
-  const theme = useTheme();
-
-  return (
-    <ChartLegendWrapper
-      colorSet={{
-        OK: theme.statusHealthy,
-        WARNING: theme.statusWarning,
-        CRITICAL: theme.statusCritical,
-        NONE: theme.textSecondary,
-      }}
-      sortOrder={(a, b) =>
-        STATUS_ORDER.indexOf(a as CellStatus) -
-        STATUS_ORDER.indexOf(b as CellStatus)
-      }
-    >
-      <Stack direction="vertical" gap="r16">
-        <Text variant="Large" isEmphazed>
-          {title}
-        </Text>
-        <Box display="flex" gap={spacing.f24} alignItems="flex-start">
-          <Box
-            display="grid"
-            gridTemplateColumns={`${labelWidth} minmax(0, 1fr)`}
-            alignItems="center"
-            flex="1"
-          >
-            {rows.map((row, rowIndex) => (
-              <React.Fragment key={row.label}>
-                <Box textAlign="right" pr={spacing.f8}>
-                  <Text variant="Smaller" color="textSecondary">
-                    {row.label}
-                  </Text>
-                </Box>
-                <HealthBarCell $hideAxis={rowIndex !== rows.length - 1}>
-                  <GlobalHealthBar
-                    id={`healthmap-${row.label}`}
-                    start={start}
-                    end={end}
-                    alerts={statusRowToAlerts(row, buckets, step)}
-                  />
-                </HealthBarCell>
-              </React.Fragment>
-            ))}
-          </Box>
-          <Stack direction="vertical" gap="r8">
-            <Text variant="Smaller" isEmphazed>
-              Service Status
-            </Text>
-            <ChartLegend
-              shape="rectangle"
-              direction="vertical"
-              legendSize="Smaller"
-              legendColor="textSecondary"
-            />
-          </Stack>
-        </Box>
-      </Stack>
-    </ChartLegendWrapper>
-  );
-};
-
-/* -------------------------------------------------------------------------- */
-/*                    RECIPE 3 — continuous (numeric) heatmap                 */
+/*                   RECIPE 2 — continuous (numeric) heatmap                  */
 /* -------------------------------------------------------------------------- */
 
 const NumericHeatmap = ({
@@ -348,6 +221,7 @@ const NumericHeatmap = ({
   rows,
   buckets,
   unit,
+  minOpacity = 0.1,
   labelEvery = 1,
   labelWidth = '7rem',
 }: {
@@ -355,6 +229,8 @@ const NumericHeatmap = ({
   rows: HeatmapRow<number>[];
   buckets: Date[];
   unit: string;
+  /** Opacity given to the lowest value, so it stays visible instead of dissolving. */
+  minOpacity?: number;
   labelEvery?: number;
   labelWidth?: string;
 }) => {
@@ -402,8 +278,8 @@ const NumericHeatmap = ({
                 >
                   <Cell
                     $color={`rgba(${theme.statusHealthyRGB}, ${(
-                      0.1 +
-                      0.9 * (value / max)
+                      minOpacity +
+                      (1 - minOpacity) * (value / max)
                     ).toFixed(2)})`}
                     $dimmed={false}
                     $height={spacing.f20}
@@ -439,7 +315,7 @@ const NumericHeatmap = ({
               height="6rem"
               borderRadius={spacing.f2}
               style={{
-                background: `linear-gradient(to top, rgba(${theme.statusHealthyRGB}, 0.1), rgba(${theme.statusHealthyRGB}, 1))`,
+                background: `linear-gradient(to top, rgba(${theme.statusHealthyRGB}, ${minOpacity}), rgba(${theme.statusHealthyRGB}, 1))`,
               }}
             />
             <Box
@@ -465,30 +341,94 @@ const NumericHeatmap = ({
 /*                                  STORIES                                   */
 /* -------------------------------------------------------------------------- */
 
-const meta: Meta = {
+type HeatmapArgs = {
+  /** Rows to plot, taken from the story's own label source. */
+  rows: number;
+  /** Time buckets, i.e. columns. */
+  buckets: number;
+  /** Trailing columns reported as NONE — the "collection has not caught up" tail. */
+  noDataColumns: number;
+  cellHeight: number;
+  columnGap: number;
+  labelEvery: number;
+  labelWidth: string;
+  /** NumericHeatmap only: opacity given to the lowest value. */
+  minOpacity: number;
+};
+
+const meta: Meta<HeatmapArgs> = {
   title: 'Components/Data Display/Charts/Heatmap (composition)',
+  argTypes: {
+    rows: { control: { type: 'range', min: 1, max: 24, step: 1 } },
+    buckets: { control: { type: 'range', min: 1, max: 96, step: 1 } },
+    noDataColumns: { control: { type: 'range', min: 0, max: 12, step: 1 } },
+    cellHeight: {
+      control: { type: 'range', min: 4, max: 48, step: 1 },
+      description: 'Cell height in px',
+    },
+    columnGap: {
+      control: { type: 'range', min: 0, max: 16, step: 1 },
+      description:
+        'Gap between cells in px. At 0 the grid reads as a continuous timeline',
+    },
+    labelEvery: {
+      control: { type: 'range', min: 1, max: 12, step: 1 },
+      description: 'Show one column label every N columns',
+    },
+    labelWidth: {
+      control: 'text',
+      description: 'Row label gutter. Labels truncate rather than widen it',
+    },
+    minOpacity: {
+      control: { type: 'range', min: 0, max: 0.6, step: 0.05 },
+      description:
+        'NumericValues only: opacity floor, so low values stay visible',
+    },
+  },
 };
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<HeatmapArgs>;
 
 const HOUR_START = new Date('2026-08-25T10:00:00Z');
 const DAY_START = new Date('2026-08-25T00:00:00Z');
+
+/** Args every status story shares, so a control means the same thing in each. */
+const statusArgs = (args: HeatmapArgs) => ({
+  labelEvery: args.labelEvery,
+  labelWidth: args.labelWidth,
+  cellHeight: `${args.cellHeight}px`,
+  columnGap: `${args.columnGap}px`,
+});
+
+const nodeLabels = (count: number) =>
+  Array.from({ length: count }, (_, index) => `storage-node-${index + 1}`);
 
 /**
  * 1:1 with the reference screenshot: 5 services, 4 buckets, the last column
  * has no data yet.
  */
 export const ScreenshotEquivalent: Story = {
-  render: () => {
+  args: {
+    rows: MONITORING_SERVICES.length,
+    buckets: 4,
+    noDataColumns: 1,
+    cellHeight: 20,
+    columnGap: 4,
+    labelEvery: 1,
+    labelWidth: '7rem',
+  },
+  render: (args) => {
     const buckets = buildBuckets(
       new Date('2026-08-25T10:30:00Z'),
-      4,
+      args.buckets,
       FIVE_MINUTES,
     );
-    const rows = MONITORING_SERVICES.map((label) => ({
+    const rows = MONITORING_SERVICES.slice(0, args.rows).map((label) => ({
       label,
-      cells: ['OK', 'OK', 'OK', 'NONE'] as CellStatus[],
+      cells: Array.from({ length: args.buckets }, (_, colIndex) =>
+        colIndex >= args.buckets - args.noDataColumns ? 'NONE' : 'OK',
+      ) as CellStatus[],
     }));
 
     return (
@@ -497,6 +437,7 @@ export const ScreenshotEquivalent: Story = {
           title="Monitoring Services Status"
           rows={rows}
           buckets={buckets}
+          {...statusArgs(args)}
         />
       </Box>
     );
@@ -505,9 +446,22 @@ export const ScreenshotEquivalent: Story = {
 
 /** Realistic mix over one hour, 5-minute buckets, label every 15 minutes. */
 export const ServiceStatusOverOneHour: Story = {
-  render: () => {
-    const buckets = buildBuckets(HOUR_START, 12, FIVE_MINUTES);
-    const rows = buildStatusRows(MONITORING_SERVICES, 12, 10);
+  args: {
+    rows: MONITORING_SERVICES.length,
+    buckets: 12,
+    noDataColumns: 2,
+    cellHeight: 20,
+    columnGap: 4,
+    labelEvery: 3,
+    labelWidth: '7rem',
+  },
+  render: (args) => {
+    const buckets = buildBuckets(HOUR_START, args.buckets, FIVE_MINUTES);
+    const rows = buildStatusRows(
+      MONITORING_SERVICES.slice(0, args.rows),
+      args.buckets,
+      args.buckets - args.noDataColumns,
+    );
 
     return (
       <Box maxWidth="60rem">
@@ -515,7 +469,7 @@ export const ServiceStatusOverOneHour: Story = {
           title="Monitoring Services Status — last hour"
           rows={rows}
           buckets={buckets}
-          labelEvery={3}
+          {...statusArgs(args)}
         />
       </Box>
     );
@@ -523,35 +477,30 @@ export const ServiceStatusOverOneHour: Story = {
 };
 
 /**
- * Same data, rendered as one GlobalHealthBar per row: continuous timeline,
- * and you get the existing tooltip + keyboard navigation for free.
+ * Dense grid: 8 nodes x 48 buckets over 24 hours. Push the gap to 0 and the grid
+ * reads as a continuous timeline; the label frequency is what keeps the axis legible.
  */
-export const AsGlobalHealthBarRows: Story = {
-  render: () => {
-    const buckets = buildBuckets(HOUR_START, 12, FIVE_MINUTES);
-    const rows = buildStatusRows(MONITORING_SERVICES, 12, 10);
-
-    return (
-      <Box maxWidth="60rem">
-        <HealthBarHeatmap
-          title="Monitoring Services Status — last hour"
-          rows={rows}
-          buckets={buckets}
-          step={FIVE_MINUTES}
-          start={HOUR_START}
-          end={new Date(HOUR_START.getTime() + ONE_HOUR)}
-        />
-      </Box>
-    );
-  },
-};
-
-/** Dense grid: 8 nodes x 48 buckets of 30 minutes over 24 hours. */
 export const DenseGrid: Story = {
-  render: () => {
-    const buckets = buildBuckets(DAY_START, 48, ONE_DAY / 48);
-    const nodes = Array.from({ length: 8 }, (_, i) => `storage-node-${i + 1}`);
-    const rows = buildStatusRows(nodes, 48, 45);
+  args: {
+    rows: 8,
+    buckets: 48,
+    noDataColumns: 3,
+    cellHeight: 16,
+    columnGap: 1,
+    labelEvery: 6,
+    labelWidth: '9rem',
+  },
+  render: (args) => {
+    const buckets = buildBuckets(
+      DAY_START,
+      args.buckets,
+      ONE_DAY / args.buckets,
+    );
+    const rows = buildStatusRows(
+      nodeLabels(args.rows),
+      args.buckets,
+      args.buckets - args.noDataColumns,
+    );
 
     return (
       <Box maxWidth="75rem">
@@ -559,10 +508,7 @@ export const DenseGrid: Story = {
           title="Node health — last 24 hours"
           rows={rows}
           buckets={buckets}
-          labelEvery={6}
-          columnGap={spacing.f1}
-          cellHeight={spacing.f16}
-          labelWidth="9rem"
+          {...statusArgs(args)}
         />
       </Box>
     );
@@ -571,11 +517,21 @@ export const DenseGrid: Story = {
 
 /** Continuous values instead of statuses: opacity ramp + gradient scale. */
 export const NumericValues: Story = {
-  render: () => {
-    const buckets = buildBuckets(DAY_START, 24, ONE_HOUR);
-    const rows = Array.from({ length: 6 }, (_, rowIndex) => ({
-      label: `storage-node-${rowIndex + 1}`,
-      cells: Array.from({ length: 24 }, (_, colIndex) =>
+  args: {
+    rows: 6,
+    buckets: 24,
+    noDataColumns: 0,
+    cellHeight: 20,
+    columnGap: 2,
+    labelEvery: 3,
+    labelWidth: '9rem',
+    minOpacity: 0.1,
+  },
+  render: (args) => {
+    const buckets = buildBuckets(DAY_START, args.buckets, ONE_HOUR);
+    const rows = nodeLabels(args.rows).map((label, rowIndex) => ({
+      label,
+      cells: Array.from({ length: args.buckets }, (_, colIndex) =>
         Math.round(noise(rowIndex + 3, colIndex + 5)),
       ),
     }));
@@ -587,8 +543,9 @@ export const NumericValues: Story = {
           rows={rows}
           buckets={buckets}
           unit="%"
-          labelEvery={3}
-          labelWidth="9rem"
+          minOpacity={args.minOpacity}
+          labelEvery={args.labelEvery}
+          labelWidth={args.labelWidth}
         />
       </Box>
     );
