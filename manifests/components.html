@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">349 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><span class="filter-pill ok" aria-disabled="true">63 components ok</span><a class="filter-pill info" data-k="infos" href="#filter-infos">61/63 infos</a><span class="filter-pill ok" aria-disabled="true">350 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">25 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -10288,7 +10288,7 @@ size?: Size = SIZE.large</code></pre>
       <div class="badges">
         <label for="c-36-components-feedback-modal-props" class="badge ok as-toggle">8 prop types</label>
         <label for="c-36-components-feedback-modal-info" class="badge info as-toggle">1 info</label>
-        <label for="c-36-components-feedback-modal-stories" class="badge ok as-toggle">10 stories</label>
+        <label for="c-36-components-feedback-modal-stories" class="badge ok as-toggle">11 stories</label>
         <label for="c-36-components-feedback-modal-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -10802,6 +10802,61 @@ wide?: boolean</code></pre>
     &lt;/ModalStory&gt;
   &lt;/Stack&gt;
 );</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Stacked Modals</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StackedModals = () =&gt; {
+  const [isAOpen, setIsAOpen] = useState(false);
+  const [isBOpen, setIsBOpen] = useState(false);
+  return (
+    &lt;&gt;
+      &lt;Stack gap=&quot;r8&quot;&gt;
+        &lt;Button
+          onClick={() =&gt; setIsAOpen(true)}
+          label=&quot;Open A&quot;
+          variant=&quot;primary&quot;
+        /&gt;
+        &lt;Button
+          onClick={() =&gt; setIsBOpen(true)}
+          label=&quot;Open B&quot;
+          variant=&quot;secondary&quot;
+        /&gt;
+      &lt;/Stack&gt;
+      {/* A is declared first, so it always mounts first. */}
+      &lt;Modal
+        isOpen={isAOpen}
+        close={() =&gt; setIsAOpen(false)}
+        title=&quot;Modal A&quot;
+        actions={{
+          confirm: {
+            label: &#39;Confirm A&#39;,
+            onClick: action(&#39;Confirm A clicked&#39;),
+          },
+        }}
+      &gt;
+        &lt;span&gt;Modal A — mounted first.&lt;/span&gt;
+      &lt;/Modal&gt;
+      &lt;Modal
+        isOpen={isBOpen}
+        close={() =&gt; setIsBOpen(false)}
+        title=&quot;Modal B&quot;
+        actions={{
+          confirm: {
+            label: &#39;Confirm B&#39;,
+            onClick: action(&#39;Confirm B clicked&#39;),
+          },
+        }}
+      &gt;
+        &lt;span&gt;Modal B — mounted second.&lt;/span&gt;
+      &lt;/Modal&gt;
+    &lt;/&gt;
+  );
+};</code></pre>
             </div>
         </div>
     
