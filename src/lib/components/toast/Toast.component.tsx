@@ -8,6 +8,7 @@ import { ToastPosition, positionOutput } from './ToastPositionHelpers';
 import { DurationBasedProgressBar } from './DurationBasedProgressBar';
 import { useToastParameters } from './useToastParameters';
 import styled from 'styled-components';
+import { zIndex } from '../../style/theme';
 
 export type ToastStatus = 'success' | 'error' | 'warning' | 'info';
 
@@ -160,6 +161,7 @@ function Toast({
       aria-labelledby={`${status}_toast`}
       style={{
         position: 'fixed',
+        zIndex: zIndex.notification,
         ...(style || positionStyle),
         width,
       }}

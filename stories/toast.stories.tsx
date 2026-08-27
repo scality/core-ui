@@ -12,6 +12,14 @@ export default {
   title: 'Components/Feedback/Toast',
   component: Toast,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A toast is `position: fixed`, so its offsets resolve against the viewport. When a host embeds the application in a box narrower than the viewport — a panel opening beside it, for instance — the toast stays anchored to the browser and can end up outside that box. Whichever element owns the box has to declare `contain: layout`, which makes it the containing block for its fixed descendants; a component cannot do that from the inside.',
+      },
+    },
+  },
   argTypes: {
     open: {
       control: {
