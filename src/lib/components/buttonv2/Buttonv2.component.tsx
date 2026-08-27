@@ -30,7 +30,15 @@ type ButtonStyledProps = Omit<
 type ButtonWithLabel = ButtonStyledProps & {
   label: React.ReactNode;
   tooltip?: Omit<TooltipProps, 'children'>;
-  /** Collapse to icon-only: true = always; number = below N px (needs a `responsive` container ancestor); omit = never. */
+  /**
+   * Collapse to icon-only: `true` = always; a number = below N px; omit = never.
+   *
+   * The numeric form is a `@container responsive` query, so it only takes effect
+   * inside an ancestor that declares that container: `<Form responsive>`,
+   * `<Box container>`, or `<TwoPanelLayout container="left | right | both">`.
+   * Without one the query never matches and the label never collapses — see the
+   * "Responsive" guideline. `true` needs no container.
+   */
   iconOnly?: boolean | number;
 };
 

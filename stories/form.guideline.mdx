@@ -58,6 +58,11 @@ A `responsive` Form establishes a CSS containment context
 width**. Put the Form in a narrow panel, drawer, or split view and it flips based
 on the space it actually has — no viewport media queries, no JS resize listeners.
 
+It declares that container under the name `responsive`, which is the same one
+`Button iconOnly={number}` queries — so a collapsing button placed inside a
+`responsive` Form works with no extra wrapper. See the **Responsive** guideline
+for the full list of components that declare and query it.
+
 ### Alignment is per `FormSection`
 
 Labels align within a section, not across the whole Form — each `FormSection`
@@ -101,7 +106,7 @@ always stacked (label above field) at every width.
 
 ### Current limitation
 
-Only `Input` honors the fluid width today. `Select`, `SearchInput`, `TextArea`
-and other size-driven content still render at their fixed `size` width inside a
-responsive Form (tracked in **CUI-36**). Prefer `Input`-based fields when building
-a form that needs to shrink cleanly, until the other inputs opt in.
+`Input` and `Select` honor the fluid width. `SearchInput`, `TextArea` and other
+size-driven content still render at their fixed `size` width inside a responsive
+Form. Prefer `Input`- and `Select`-based fields when building a form that needs to
+shrink cleanly, until the rest opt in.

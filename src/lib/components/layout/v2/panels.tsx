@@ -98,6 +98,14 @@ export const TwoPanelLayout = ({
   leftPanel: { children: ReactElement; background?: ThemeColors };
   rightPanel: { children: ReactElement; background?: ThemeColors };
   noGap?: boolean;
+  /**
+   * Declare the named panel(s) the `responsive` container, so
+   * `@container responsive` queries inside them — `Button iconOnly={number}`, a
+   * `Form responsive` section's row/stack flip — resolve against the panel's
+   * width rather than looking further up the tree. A panel is usually much
+   * narrower than the page, which is what makes this worth opting into; see the
+   * "Responsive" guideline.
+   */
   container?: 'left' | 'right' | 'both';
 }) => {
   const panelsObjectRatio = getPanelsObjectRation(panelsRatio);

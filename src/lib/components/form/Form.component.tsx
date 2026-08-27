@@ -37,6 +37,10 @@ type FormProps = Omit<
    * breakpoint prop; the flip point is derived from the layout (see below).
    * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
    * `TextArea` and other size-driven content keep their fixed width for now.
+   *
+   * It also declares the Form the `responsive` container, so any
+   * `@container responsive` query inside it — `Button iconOnly={number}`, for
+   * one — resolves against the Form's width. See the "Responsive" guideline.
    */
   responsive?: boolean;
 };

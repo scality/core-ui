@@ -1,0 +1,97 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ResponsiveStories from './responsive.stories';
+
+<Meta title="Guidelines/Responsive" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+`}</style>
+
+# Responsive
+
+Several core-ui components can adapt to **the width they are given** rather than
+the width of the browser. This page covers what that takes: the container every
+responsive component queries, how to declare it, and the per-component props that
+make use of it.
+
+The viewport is usually the wrong box to measure. A panel opening beside the
+content, a split view, a drawer — each narrows what a component actually has to
+work with while `window.innerWidth` never moves. A `@media` query cannot see
+that; a CSS container query can. So responsive components here query a container
+named `responsive`, and it is opt-in: **nothing declares it by default.**
+
+## Declaring the container
+
+Three components declare it, each behind an explicit prop:
+
+| Component        | Prop                                |
+| ---------------- | ----------------------------------- |
+| `Form`           | `responsive`                        |
+| `Box`            | `container`                         |
+| `TwoPanelLayout` | `container="left \| right \| both"` |
+
+A responsive component with no declaring ancestor is **inert and silent** — it
+renders at its full size and nothing reports a problem. That is the failure to
+look for first when a responsive prop appears to do nothing.
+
+### Put it on the box whose width should drive the reaction
+
+Not as high up as possible. The query resolves against the _nearest_ declaring
+ancestor, so a container on the page wrapper makes everything inside it react to
+the page — which is usually the viewport again under another name.
+
+- A toolbar that should condense when its own column gets tight → `<Box container>`
+  on that column.
+- Fields that should stack when the panel holding them is narrow →
+  `<TwoPanelLayout container="right">`, so they follow the panel and not the page.
+- A form that should reflow inside whatever it is dropped into →
+  `<Form responsive>`, which declares and queries in one component.
+
+### Containment needs a width from the parent
+
+Declaring a container sets `container-type: inline-size`, and that takes the
+element's contents **out of its own intrinsic width**. The width has to arrive
+from the parent instead — a flex grow factor, a grid track, or ordinary block
+layout. As a content-sized flex item, a container would otherwise resolve to zero
+width and everything inside it would overflow.
+
+`Form` and the `TwoPanelLayout` panels pair the containment with `flex: 1 1 auto`
+and `min-width: 0` themselves. `Box` sets `min-width: 0` but stays deliberately
+unopinionated about where its width comes from, so a `<Box container>` used as a
+bare flex item needs a `flex` value from you.
+
+## Responsive components
+
+### `Button` — `iconOnly`
+
+`iconOnly={360}` drops the button's visible label below 360px of container width,
+leaving the icon. It is the container-query form, so it needs a declaring
+ancestor.
+
+<Canvas of={ResponsiveStories.WithAndWithoutContainer} sourceState="none" />
+
+Both frames above hold the same two `iconOnly={360}` buttons. Drag either right
+edge below 360px: only the frame whose content is wrapped in `<Box container>`
+collapses its buttons to icons. The other one never will, at any width.
+
+`iconOnly` on its own — or `iconOnly={true}` — collapses at every width, needs no
+container, and is the right choice for a button that is icon-only by design
+rather than under pressure.
+
+<Canvas of={ResponsiveStories.AlwaysCollapsed} sourceState="none" />
+
+Either way the label is kept as the accessible name and shown as a tooltip on
+hover, so a collapsed button stays findable by its label.
+
+### `Form` — `responsive`
+
+`Form` is both halves at once: `responsive` declares the container _and_ makes
+the form query it, so fields become fluid and each `FormSection` flips from a
+two-column row layout to a stacked one when it runs out of room. A collapsing
+`Button` placed inside a `responsive` Form therefore works with no extra wrapper.
+
+See the **Form → Guideline** page for the flip thresholds and the label-column
+rules.

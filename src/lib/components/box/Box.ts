@@ -35,7 +35,18 @@ export type BoxComponentProps = LayoutProps &
   BackgroundProps &
   BordersProps &
   TypographyProps &
-  ShadowProps & { gap?: string | number; container?: boolean };
+  ShadowProps & {
+    gap?: string | number;
+    /**
+     * Declare this Box the `responsive` container, so `@container responsive`
+     * queries inside it — `Button iconOnly={number}`, a `Form responsive`
+     * section's row/stack flip — resolve against its width instead of looking
+     * further up the tree. Containment takes the contents out of the intrinsic
+     * width, so the Box needs a definite width from its parent; see the
+     * "Responsive" guideline.
+     */
+    container?: boolean;
+  };
 
 const Box = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'container' && shouldForwardProp(prop),
