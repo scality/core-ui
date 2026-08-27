@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
   LineTimeSerieChart,
+  LineChartProps,
   Serie,
   ChartLegendWrapper,
   ChartLegend,
@@ -1445,13 +1446,25 @@ const spikyDataWithZeros = spikyData.map(
     [timestamp, index >= 60 && index < 72 ? 0 : value] as [number, number],
 );
 
+const LOG_RESOURCE = 'storage-node-1';
+
 const logSerie = (data: [number, number][]): Serie[] => [
   {
     data,
-    resource: 'ip-10-160-122-207.eu-north-1.compute.internal',
+    resource: LOG_RESOURCE,
     getTooltipLabel: (prefix, resource) => `${resource}`,
   },
 ];
+
+/** Own legend, so the generic resource label still resolves to a colour. */
+const LogChart = (props: LineChartProps) => (
+  <ChartLegendWrapper
+    colorSet={{ [LOG_RESOURCE]: lineTimeSeriesColorRange[0] }}
+  >
+    <LineTimeSerieChart {...props} />
+    <ChartLegend shape="line" />
+  </ChartLegendWrapper>
+);
 
 const logChartArgs = (data: [number, number][]) => ({
   series: logSerie(data),
@@ -1480,11 +1493,8 @@ const logChartArgs = (data: [number, number][]) => ({
 export const LogarithmicScaleExample: Story = {
   render: () => (
     <div>
-      <ChartWithProviders
-        {...logChartArgs(spikyData)}
-        title="Request latency — linear"
-      />
-      <ChartWithProviders
+      <LogChart {...logChartArgs(spikyData)} title="Request latency — linear" />
+      <LogChart
         {...logChartArgs(spikyData)}
         title="Request latency — logarithmic"
         yAxisScale="log"
@@ -1510,11 +1520,11 @@ export const LogarithmicScaleExample: Story = {
 export const LogarithmicScaleWithZeros: Story = {
   render: () => (
     <div>
-      <ChartWithProviders
+      <LogChart
         {...logChartArgs(spikyDataWithZeros)}
         title="With a stretch of zeros — linear"
       />
-      <ChartWithProviders
+      <LogChart
         {...logChartArgs(spikyDataWithZeros)}
         title="With a stretch of zeros — logarithmic, the zeros sit at the reserved 0"
         yAxisScale="log"
@@ -1548,12 +1558,12 @@ export const LogarithmicScaleBelowOne: Story = {
 
     return (
       <div>
-        <ChartWithProviders
+        <LogChart
           {...logChartArgs(data)}
           title="Error rate — linear, the baseline is unreadable"
           yAxisTitle="/s"
         />
-        <ChartWithProviders
+        <LogChart
           {...logChartArgs(data)}
           title="Error rate — logarithmic, 0.001 to 100"
           yAxisTitle="/s"
@@ -1609,7 +1619,7 @@ export const LogarithmicScalePlayground: StoryObj<{
     });
 
     return (
-      <ChartWithProviders
+      <LogChart
         {...logChartArgs(data)}
         title={`Request latency — ${args.yAxisScale}`}
         yAxisScale={args.yAxisScale}
