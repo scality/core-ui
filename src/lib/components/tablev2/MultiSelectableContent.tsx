@@ -16,7 +16,8 @@ import {
   TableVariantType,
 } from './TableUtils';
 import {
-  isInteractiveTarget,
+  bodyCellStyle,
+  shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
   useTableScrollbar,
@@ -172,7 +173,7 @@ export const MultiSelectableContent = <
             style: { ...style },
           }),
           onClick: (event) => {
-            if (isInteractiveTarget(event)) return;
+            if (shouldIgnoreRowEvent(event)) return;
             const onSingleRowSelected = onSingleRowSelectedRef.current;
             if (onSingleRowSelected) {
               onSingleRowSelected(row);
@@ -198,22 +199,7 @@ export const MultiSelectableContent = <
           >
             {row.cells.map((cell) => {
               const cellProps = cell.getCellProps({
-                style: {
-                  // Same reset as TableHeader. A flex item defaults to
-                  // `min-width: auto`, so without this a short cell freezes at
-                  // its content width while its header keeps shrinking — and
-                  // flexbox then redistributes that frozen item's share of the
-                  // negative free space onto the row's remaining shrinkable
-                  // cell, pushing it *below* its own header. Both rows have to
-                  // shrink by the same rules or the columns cannot agree.
-                  // Before the spread, so a consumer's cellStyle still wins.
-                  minWidth: 0,
-                  ...cell.column.cellStyle,
-                  // Vertically center the text in cells.
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                },
+                style: bodyCellStyle(cell.column.cellStyle),
                 role: 'gridcell',
               });
 
@@ -314,8 +300,8 @@ export const MultiSelectableContent = <
                       </div>
                     ) : (
                       <TruncatableHeaderLabel header={column.Header}>
-                      {column.render('Header')}
-                    </TruncatableHeaderLabel>
+                        {column.render('Header')}
+                      </TruncatableHeaderLabel>
                     )}
                     <SortCaret column={column} />
                   </HeaderContent>

@@ -48,12 +48,26 @@ and closes anything the control had just opened.
 ## Responsive columns
 
 Give a column a `dropAt` breakpoint and it hides once the table is narrower than that. Columns
-without one always stay. Below, Age drops at 550px and Last Name at 700px; First Name and Health
-have no breakpoint.
+without one always stay. Below, Age drops at 550px and Last Name at 700px; First Name and
+"Replication Health" have no breakpoint.
 
 Drag the frame's bottom-right corner to resize it.
 
 <Canvas of={TableStories.ResponsiveColumnDrop} layout="fullscreen" />
+
+### A long header ellipsizes rather than widening its column
+
+A header must never be the reason a column is wider than its cells, so a label too long for its
+column is truncated instead of widening it. "Replication Health" above sits on the narrowest track
+in the table — narrow the frame and it cuts off.
+
+Which width that happens at is not a fixed number: a column's width comes from its grow factor, so
+dropping a neighbour hands its space to the columns that remain. A header can therefore truncate,
+then read in full again at a narrower frame.
+
+Every string header carries its own text as a `title`, so the full label stays one hover away.
+Headers built from a node rather than a string get no `title` — give those their own affordance if
+the label can be lost.
 
 ### Recovering the dropped values
 

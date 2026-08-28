@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Table, TableProps } from './Tablev2.component';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createPortal } from 'react-dom';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -463,7 +464,9 @@ describe('TableV2 row click vs in-cell controls', () => {
     const onAction = jest.fn();
     renderWithAction(onRowSelected, onAction);
 
-    await userEvent.click(screen.getByRole('button', { name: /Detach Ninette/ }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /Detach Ninette/ }),
+    );
 
     expect(onAction).toHaveBeenCalledTimes(1);
     expect(onRowSelected).not.toHaveBeenCalled();
@@ -505,44 +508,79 @@ describe('TableV2 row click vs in-cell controls', () => {
     expect(onRowSelected).toHaveBeenCalledTimes(1);
     expect(onAction).not.toHaveBeenCalled();
   });
+
+  it('still selects the row when the whole table sits inside a label', async () => {
+    const onRowSelected = jest.fn();
+    render(
+      <label>
+        <Table columns={columns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onRowSelected={onRowSelected}
+          />
+        </Table>
+      </label>,
+    );
+
+    await userEvent.click(screen.getByText('Ninette'));
+
+    expect(onRowSelected).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves the row unselected when the click lands in a portalled overlay', async () => {
+    const onRowSelected = jest.fn();
+    const portalColumns: TableProps['columns'] = [
+      { Header: 'First Name', accessor: 'firstName' },
+      {
+        Header: 'Overlay',
+        accessor: 'lastName',
+        disableSortBy: true,
+        Cell: ({ row }) =>
+          createPortal(
+            <span>{`overlay-${row.original.firstName}`}</span>,
+            document.body,
+          ),
+      },
+    ];
+
+    render(
+      <div>
+        <Table columns={portalColumns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onRowSelected={onRowSelected}
+          />
+        </Table>
+      </div>,
+    );
+
+    await userEvent.click(screen.getByText('overlay-Ninette'));
+
+    expect(onRowSelected).not.toHaveBeenCalled();
+  });
 });
 
 describe('TableV2 truncated header labels', () => {
-  // jsdom reports 0 for both, so the widths have to be forced. `title` is only
-  // offered once the label really is cut off — this is the difference between a
-  // useful affordance and a tooltip on every header in the table.
+  // jsdom has no layout, so the label's widths have to be forced. The tooltip
+  // is only offered once the label really is cut off — a tooltip repeating a
+  // header that reads fine is noise, and this is the difference between them.
   const stubLabelWidths = (scrollWidth: number, clientWidth: number) => {
-    const proto = window.HTMLSpanElement.prototype;
-    const original = {
-      scrollWidth: Object.getOwnPropertyDescriptor(proto, 'scrollWidth'),
-      clientWidth: Object.getOwnPropertyDescriptor(proto, 'clientWidth'),
-    };
-    Object.defineProperty(proto, 'scrollWidth', {
-      configurable: true,
-      get: () => scrollWidth,
-    });
-    Object.defineProperty(proto, 'clientWidth', {
-      configurable: true,
-      get: () => clientWidth,
-    });
-    return () => {
-      if (original.scrollWidth) {
-        Object.defineProperty(proto, 'scrollWidth', original.scrollWidth);
-      } else {
-        delete (proto as Record<string, unknown>).scrollWidth;
-      }
-      if (original.clientWidth) {
-        Object.defineProperty(proto, 'clientWidth', original.clientWidth);
-      } else {
-        delete (proto as Record<string, unknown>).clientWidth;
-      }
-    };
+    jest
+      .spyOn(window.HTMLSpanElement.prototype, 'scrollWidth', 'get')
+      .mockReturnValue(scrollWidth);
+    jest
+      .spyOn(window.HTMLSpanElement.prototype, 'clientWidth', 'get')
+      .mockReturnValue(clientWidth);
   };
 
-  const renderTable = () =>
+  afterEach(() => jest.restoreAllMocks());
+
+  const renderTable = (cols = columns) =>
     render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table columns={cols} data={data} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -551,54 +589,61 @@ describe('TableV2 truncated header labels', () => {
       </div>,
     );
 
-  it('offers the full label when the header is ellipsized', async () => {
-    const restore = stubLabelWidths(400, 80);
-    try {
-      renderTable();
-      await waitFor(() =>
-        expect(screen.getByTitle('First Name')).toBeInTheDocument(),
-      );
-    } finally {
-      restore();
-    }
+  it('offers the full label in a tooltip when the header is ellipsized', async () => {
+    stubLabelWidths(400, 80);
+    renderTable();
+    const label = await screen.findByText('First Name');
+
+    await userEvent.hover(label);
+
+    await waitFor(() =>
+      expect(
+        document.querySelector('.sc-tooltip-overlay-text'),
+      ).toHaveTextContent('First Name'),
+    );
   });
 
-  it('offers no label when the header fits', async () => {
-    const restore = stubLabelWidths(80, 80);
-    try {
-      renderTable();
-      await waitFor(() => screen.getAllByRole('columnheader'));
-      expect(screen.queryByTitle('First Name')).not.toBeInTheDocument();
-    } finally {
-      restore();
-    }
+  it('offers no tooltip when the header fits', async () => {
+    stubLabelWidths(80, 80);
+    renderTable();
+    const label = await screen.findByText('First Name');
+
+    await userEvent.hover(label);
+
+    await waitFor(() => screen.getAllByRole('columnheader'));
+    expect(
+      document.querySelector('.sc-tooltip-overlay-text'),
+    ).not.toBeInTheDocument();
   });
 
-  it('offers no label when the header is not a string', async () => {
-    const restore = stubLabelWidths(400, 80);
-    try {
-      render(
-        <div>
-          <Table
-            columns={[
-              { Header: <span>Rendered</span>, accessor: 'firstName' },
-              ...columns.slice(1),
-            ]}
-            data={data}
-            defaultSortingKey={'firstName'}
-          >
-            <Table.SingleSelectableContent
-              rowHeight="h40"
-              separationLineVariant="backgroundLevel3"
-            />
-          </Table>
-        </div>,
-      );
-      await waitFor(() => screen.getAllByRole('columnheader'));
-      expect(screen.queryByTitle('Rendered')).not.toBeInTheDocument();
-      expect(screen.getByText('Rendered')).toBeInTheDocument();
-    } finally {
-      restore();
-    }
+  it('offers no tooltip when the header is not a string', async () => {
+    stubLabelWidths(400, 80);
+    renderTable([
+      { Header: <span>Rendered</span>, accessor: 'firstName' },
+      ...columns.slice(1),
+    ]);
+    const label = await screen.findByText('Rendered');
+
+    await userEvent.hover(label);
+
+    await waitFor(() => screen.getAllByRole('columnheader'));
+    expect(
+      document.querySelector('.sc-tooltip-overlay-text'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('keeps the label ellipsizable — the tooltip wrapper adds no width floor', async () => {
+    stubLabelWidths(400, 80);
+    renderTable();
+    const label = await screen.findByText('First Name');
+
+    // The measured element must still be the overflow-hidden label, not a
+    // wrapper the tooltip introduced above it.
+    expect(label.tagName).toBe('SPAN');
+    expect(getComputedStyle(label).overflow).toBe('hidden');
+    // `overflow`/`text-overflow` are inert on an inline box, and the label only
+    // got blockified for free while it was a flex item. Wrapping it in the
+    // tooltip took that away once already.
+    expect(getComputedStyle(label).display).toBe('block');
   });
 });
