@@ -139,6 +139,12 @@ const ScrollArea = styled(BasicPageLayout)`
   flex-grow: 1;
   align-self: stretch;
   overflow-y: auto;
+  /* Reserve the scrollbar's width whether or not it is showing. Without it a form
+     that grows past its box moves every field left by the scrollbar's width the
+     moment it becomes scrollable, and the bar sits directly against the fields
+     because the tab layout's 16px inset comes from an ancestor outside this
+     scroller. */
+  scrollbar-gutter: stable;
 `;
 
 // A FormSection lays its FormGroups out so labels align across the section from
@@ -334,7 +340,9 @@ const FormGroup = ({
       id={`${LABEL_PREFIX}${id}`}
       style={{ opacity: disabled ? 0.5 : 1 }}
     >
-      <Text>
+      {/* The key of a key/value pair: dimmer than the value beside it, so the two
+          are told apart by tone rather than by position alone. */}
+      <Text color="textSecondary">
         {label}
         {requireMode !== 'all' && required && ' *'}
         {requireMode === 'all' && !required && ' (optional)'}

@@ -958,3 +958,69 @@ export const ResponsivePageFormInFlexRow = {
   ),
   args: { requireMode: 'partial', responsive: true },
 };
+
+// The two things this pair of changes affects, in one view. The frame is short on
+// purpose so the form scrolls:
+//   - the scrollbar now has a reserved gutter, so it no longer sits against the
+//     field edges and the fields do not jump left when the form becomes scrollable
+//     (drag the bottom edge past the last field and back to see the difference);
+//   - the FormGroup label is `textSecondary`, so the key reads as dimmer than the
+//     value beside it. Compare the disabled row, which dims further at 50% opacity.
+export const ScrollGutterAndLabelTone = {
+  render: ({ requireMode }) => (
+    <div
+      style={{
+        resize: 'vertical',
+        overflow: 'auto',
+        height: '18rem',
+        width: '38rem',
+        maxWidth: '100%',
+        border: '1px dashed #666',
+      }}
+    >
+      <Form layout={{ kind: 'tab' }} requireMode={requireMode} responsive>
+        <FormSection title={{ name: 'Identity', icon: 'Account' }}>
+          <FormGroup
+            direction="horizontal"
+            label="User name"
+            id="gt-name"
+            content={<Input id="gt-name" />}
+            required
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Description"
+            id="gt-desc"
+            content={<Input id="gt-desc" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Created on"
+            id="gt-created"
+            content={<Input id="gt-created" />}
+            disabled
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Owner"
+            id="gt-owner"
+            content={<Input id="gt-owner" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Contact email"
+            id="gt-email"
+            content={<Input id="gt-email" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Notes"
+            id="gt-notes"
+            content={<Input id="gt-notes" />}
+          />
+        </FormSection>
+      </Form>
+    </div>
+  ),
+  args: { requireMode: 'partial' },
+};
