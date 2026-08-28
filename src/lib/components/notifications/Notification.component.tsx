@@ -19,8 +19,11 @@ export type Props = {
   variant?: Variant;
   dismissAfter?: number;
   onDismiss?: (arg0: string) => void;
+  className?: string;
 };
-const NotificationContainer = styled.div<{ $variant?: Variant }>`
+const NotificationContainer = styled.div.withConfig({
+  componentId: 'sc-notification',
+})<{ $variant?: Variant }>`
   position: relative;
   padding: ${spacing.r16};
   margin-top: ${spacing.r16};
@@ -135,7 +138,6 @@ function Notification({
 
   return (
     <NotificationContainer
-      className="sc-notification"
       $variant={variant}
       onMouseEnter={clearTimer}
       onMouseLeave={resumeTimer}

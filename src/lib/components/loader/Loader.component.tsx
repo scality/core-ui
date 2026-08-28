@@ -9,8 +9,11 @@ type Props = {
   color?: string;
   children?: JSX.Element;
   centered?: boolean;
+  className?: string;
 };
-const LoaderContainer = styled.div<{
+const LoaderContainer = styled.div.withConfig({
+  componentId: 'sc-loader',
+})<{
   $size: keyof typeof SIZE;
   $color?: string;
   $centered?: boolean;
@@ -54,13 +57,7 @@ function Loader({
   ...rest
 }: Props) {
   return (
-    <LoaderContainer
-      $size={size}
-      $color={color}
-      $centered={centered}
-      className="sc-loader"
-      {...rest}
-    >
+    <LoaderContainer $size={size} $color={color} $centered={centered} {...rest}>
       <LoaderTextDiv>
         <LoaderIcon />
         {children && <LoaderText> {children}</LoaderText>}

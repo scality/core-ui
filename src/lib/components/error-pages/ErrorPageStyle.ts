@@ -9,6 +9,19 @@ export const ErrorPageContainer = styled.div`
   align-items: center;
   height: 100%;
 `;
+
+export const ErrorPage401Container = styled(ErrorPageContainer).withConfig({
+  componentId: 'sc-error-page401',
+})``;
+export const ErrorPage404Container = styled(ErrorPageContainer).withConfig({
+  componentId: 'sc-error-page404',
+})``;
+export const ErrorPage500Container = styled(ErrorPageContainer).withConfig({
+  componentId: 'sc-error-page500',
+})``;
+export const ErrorPageAuthContainer = styled(ErrorPageContainer).withConfig({
+  componentId: 'sc-error-pageauth',
+})``;
 export const Title = styled.h2`
   color: ${getThemePropSelector('textPrimary')};
   margin: 0;

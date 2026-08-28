@@ -17,8 +17,11 @@ export type Props = {
   autoComplete?: 'on' | 'off';
   searchIcon?: IconName;
   searchIconColor?: keyof CoreUITheme;
+  className?: string;
 };
-const SearchInputContainer = styled.div<{
+const SearchInputContainer = styled.div.withConfig({
+  componentId: 'sc-searchinput',
+})<{
   $disabled?: boolean;
 }>`
   position: relative;
@@ -103,11 +106,7 @@ const SearchInput = forwardRef(
     };
 
     return (
-      <SearchInputContainer
-        className="sc-searchinput"
-        $disabled={disabled}
-        {...rest}
-      >
+      <SearchInputContainer $disabled={disabled} {...rest}>
         <Input
           autoComplete={autoComplete}
           min={'1'}

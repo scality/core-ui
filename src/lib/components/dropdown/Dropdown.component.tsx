@@ -32,8 +32,11 @@ type Props = {
    * case. Overrides the label reference the underlying select would set.
    */
   'aria-label'?: string;
+  className?: string;
 };
-const DropdownStyled = styled.div`
+const DropdownStyled = styled.div.withConfig({
+  componentId: 'sc-dropdown',
+})`
   position: relative;
   user-select: none;
   cursor: pointer;
@@ -271,11 +274,7 @@ function Dropdown({
   const { getReferenceProps, getFloatingProps } = useInteractions();
 
   return (
-    <DropdownStyled
-      className="sc-dropdown"
-      {...rest}
-      ref={refs.setReference}
-    >
+    <DropdownStyled {...rest} ref={refs.setReference}>
       <TriggerStyled
         $variant={variant}
         $size={size}

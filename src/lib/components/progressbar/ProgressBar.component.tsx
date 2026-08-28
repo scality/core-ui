@@ -17,8 +17,11 @@ export type ProgressBarProps = {
   // The animation to full the progress bar
   isAnimation?: boolean;
   height?: React.CSSProperties['height'];
+  className?: string;
 };
-const Container = styled.div``;
+const Container = styled.div.withConfig({
+  componentId: 'sc-progressbar',
+})``;
 const ProgressBarContainer = styled.div<{
   $backgroundColor: string;
   $size: keyof typeof fontSize | 'custom';
@@ -166,7 +169,9 @@ function ProgressBar({
     backgroundColor = theme.backgroundLevel2;
   }
   return (
-    <Container className="sc-progressbar" {...rest}>
+    <Container
+      {...rest}
+    >
       {(topLeftLabel || topRightLabel) && (
         <TopLabelsContainer>
           {topLeftLabel && (
