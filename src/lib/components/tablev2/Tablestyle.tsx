@@ -54,6 +54,12 @@ export const SortCaretWrapper = styled.span`
 /** Ellipsize rather than let a long header outgrow its column. */
 export const HeaderLabel = styled.span`
   min-width: 0;
+  /* overflow and text-overflow do nothing on an inline box, and a span is
+     inline by default. This used to be supplied for free by being a flex item
+     (flex blockifies its children), so the ellipsis silently disappeared the
+     moment the label was wrapped in anything. Stated outright so it no longer
+     depends on the parent's display. */
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

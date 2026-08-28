@@ -850,7 +850,11 @@ const responsiveColumns: Column<Entry>[] = [
     dropAt: 550,
   },
   {
-    Header: 'Health',
+    // Long enough to outgrow its column as the frame narrows, on the tightest
+    // track here (flex 1 against First Name's 2) and one that never drops, so
+    // the header ellipsis appears as soon as the frame leaves its default width
+    // and stays reachable all the way down.
+    Header: 'Replication Health',
     accessor: 'health',
     sortType: 'health',
     cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
