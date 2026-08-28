@@ -1021,3 +1021,12 @@ export const ResponsiveLabelSqueeze = {
     forceLabelWidth: { control: { type: 'number' } },
   },
 };
+
+// The same shape with a rem cap instead of a px one. A px value computed once at
+// module load cannot follow a root font size that changes with the viewport; a
+// string cap is resolved by the browser, so it tracks it.
+export const ResponsiveLabelSqueezeRemCap = {
+  ...ResponsiveLabelSqueeze,
+  args: { ...ResponsiveLabelSqueeze.args, forceLabelWidth: '15rem' },
+  argTypes: { forceLabelWidth: { control: { type: 'text' } } },
+};
