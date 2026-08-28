@@ -227,6 +227,62 @@ describe("CopyButton", () => {
 		});
 	});
 
+	// The one place the repo's "no CSS assertions" rule has to bend: the floor is a
+	// value this component computes, not a stylesheet rule read back, and jsdom has
+	// no layout to observe the collapse it blocks. Kept to a single test.
+	it("computes the outline width floor: default on, dropped by iconOnly, overridable", () => {
+		const { unmount } = render(
+			<CopyButton variant="outline" textToCopy="x" label="key" />,
+			{ wrapper: Wrapper },
+		);
+		expect(screen.getByRole("button", { name: "Copy key" })).toHaveStyle({
+			minWidth: "8.5rem",
+		});
+		unmount();
+
+		const collapsed = render(
+			<CopyButton variant="outline" textToCopy="x" label="key" iconOnly />,
+			{ wrapper: Wrapper },
+		);
+		expect(
+			screen.getByRole("button", { name: "Copy key" }).style.minWidth,
+		).toBe("");
+		collapsed.unmount();
+
+		render(
+			<CopyButton
+				variant="outline"
+				textToCopy="x"
+				label="key"
+				style={{ minWidth: "2rem" }}
+			/>,
+			{ wrapper: Wrapper },
+		);
+		expect(screen.getByRole("button", { name: "Copy key" })).toHaveStyle({
+			minWidth: "2rem",
+		});
+	});
+
+	it("keeps the label as the accessible name once collapsed to its icon", async () => {
+		const writeTextMock = navigator.clipboard.writeText as jest.Mock;
+		writeTextMock.mockResolvedValueOnce(undefined);
+
+		render(
+			<CopyButton variant="outline" textToCopy="x" label="key" iconOnly />,
+			{ wrapper: Wrapper },
+		);
+
+		await act(() =>
+			userEvent.click(screen.getByRole("button", { name: "Copy key" })),
+		);
+
+		await waitFor(() => {
+			expect(
+				screen.getByRole("button", { name: "Copied key!" }),
+			).toBeInTheDocument();
+		});
+	});
+
 	it("outline variant with label: tooltip is Copy {label} then Copied {label}! on success", async () => {
 		const writeTextMock = navigator.clipboard.writeText as jest.Mock;
 		writeTextMock.mockResolvedValueOnce(undefined);

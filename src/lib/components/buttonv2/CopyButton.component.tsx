@@ -78,12 +78,19 @@ export const CopyButton = ({
       {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
       style={{
-        ...props.style,
         ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
+        // The floor reserves room for the label swap ("Copy X" -> "Copied X!") so
+        // the button keeps its width when clicked. `iconOnly` asks for the opposite
+        // — a button narrower than its label — and the floor wins, because it is an
+        // inline style the container query cannot reach. So an `iconOnly` copy
+        // button gets no floor and may widen by the one character the swap adds.
         minWidth:
-          variant === 'outline'
+          variant === 'outline' && !props.iconOnly
             ? `${(label ? label.length / 2 : 0) + 7}rem`
             : undefined,
+        // Last, so a consumer can override the floor (or anything else) from
+        // `style`. It used to be first, which made every value here unreachable.
+        ...props.style,
       }}
       label={
         variant === 'outline'

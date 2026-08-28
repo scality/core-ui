@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
-import { CopyButton } from '../src/lib/next';
+import { Box, CopyButton, Stack, Text } from '../src/lib/next';
 import { Wrapper } from './common';
 
 type Story = StoryObj<typeof CopyButton>;
@@ -55,4 +55,53 @@ export const OutlinedCopyButtonWithBigLabel: Story = {
     label: 'Certificate',
     textToCopy: 'Certificate',
   },
+};
+
+// `iconOnly` on an outline copy button: the width floor that keeps the button from
+// resizing on click used to be applied unconditionally, so the button stayed ~8.5rem
+// wide with nothing in it. Both forms are shown — `true` collapses always, a number
+// collapses below that container width, which needs the `container` Box to resolve.
+export const OutlinedCopyButtonIconOnly: StoryObj = {
+  render: () => (
+    <Wrapper className="storybook-button" style={{ height: 'auto' }}>
+      <Stack direction="vertical" gap="r16">
+        <Stack direction="vertical" gap="r4">
+          <Text>iconOnly — collapsed at every width</Text>
+          <Box>
+            <CopyButton
+              variant="outline"
+              label="Certificate"
+              textToCopy="Certificate"
+              iconOnly
+            />
+          </Box>
+        </Stack>
+        <Stack direction="vertical" gap="r4">
+          <Text>
+            iconOnly={'{240}'} — drag the frame below 240px to collapse it
+          </Text>
+          <div
+            style={{
+              resize: 'horizontal',
+              overflow: 'auto',
+              width: '20rem',
+              minWidth: '8rem',
+              maxWidth: '100%',
+              border: '1px dashed #666',
+              padding: '0.5rem',
+            }}
+          >
+            <Box container>
+              <CopyButton
+                variant="outline"
+                label="Certificate"
+                textToCopy="Certificate"
+                iconOnly={240}
+              />
+            </Box>
+          </div>
+        </Stack>
+      </Stack>
+    </Wrapper>
+  ),
 };
