@@ -958,3 +958,66 @@ export const ResponsivePageFormInFlexRow = {
   ),
   args: { requireMode: 'partial', responsive: true },
 };
+
+// A detail-page shape: a `responsive` page form whose section
+// forces a label width, with labels long enough to actually need it. A grid track
+// satisfies its max before the flexible field track flexes, so with a constant cap
+// the label kept its full width while the field walked down to its 10rem floor and
+// the row stacked while there was still room for both. Drag the frame in and watch
+// the label column give ground with the field instead.
+// `forceLabelWidth` is an arg: 224 is a value in real use, 265 is the case whose
+// stacking threshold used to sit ~70px below the width it actually needs.
+export const ResponsiveLabelSqueeze = {
+  render: ({ forceLabelWidth, requireMode }) => (
+    <div
+      data-testid="squeeze-frame"
+      style={{
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: '60rem',
+        minWidth: '20rem',
+        maxWidth: '100%',
+        border: '1px dashed #666',
+        height: '30rem',
+      }}
+    >
+      <div style={{ display: 'flex', height: '100%' }}>
+        <Form
+          layout={{ kind: 'page', title: 'User' }}
+          requireMode={requireMode}
+          responsive
+          rightActions={<Button variant="primary" label="Save" />}
+        >
+          <FormSection
+            title={{ name: 'Identity', icon: 'Account' }}
+            forceLabelWidth={forceLabelWidth}
+          >
+            <FormGroup
+              direction="horizontal"
+              label="User name"
+              id="sq-name"
+              content={<Input id="sq-name" />}
+              required
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Multi-factor authentication"
+              id="sq-mfa"
+              content={<Input id="sq-mfa" />}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Account creation date"
+              id="sq-created"
+              content={<Input id="sq-created" />}
+            />
+          </FormSection>
+        </Form>
+      </div>
+    </div>
+  ),
+  args: { forceLabelWidth: 224, requireMode: 'partial' },
+  argTypes: {
+    forceLabelWidth: { control: { type: 'number' } },
+  },
+};
