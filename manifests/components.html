@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">352 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">353 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>3.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14056,9 +14056,9 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot;</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Stack</h2>
       <div class="badges">
-        <label for="c-50-components-styling-spacing-utils-props" class="badge ok as-toggle">4 prop types</label>
+        <label for="c-50-components-styling-spacing-utils-props" class="badge ok as-toggle">5 prop types</label>
         <label for="c-50-components-styling-spacing-utils-info" class="badge info as-toggle">1 info</label>
-        <label for="c-50-components-styling-spacing-utils-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-50-components-styling-spacing-utils-stories" class="badge ok as-toggle">5 stories</label>
         
         
       </div>
@@ -14092,7 +14092,7 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot;</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">4 prop types</span>
+              <span class="badge ok">5 prop types</span>
             </div>
             <pre><code>Component: src/lib/spacing.tsx::Stack</code></pre>
             <pre><code>Props:</code></pre>
@@ -14101,6 +14101,15 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot;</code></pre>
 direction?: &quot;horizontal&quot; | &quot;vertical&quot;
 
 gap?: &quot;r1&quot; | &quot;r2&quot; | &quot;r4&quot; | &quot;r8&quot; | &quot;r10&quot; | &quot;r12&quot; | &quot;r14&quot; | &quot;r16&quot; | &quot;r20&quot; | &quot;r24&quot; | &quot;r28&quot; | &quot;r32&quot; | &quot;r36&quot; | &quot;r40&quot; | &quot;f1&quot; | &quot;f2&quot; | &quot;f4&quot; | &quot;f8&quot; | &quot;f10&quot; | &quot;f12&quot; | &quot;f14&quot; | &quot;f16&quot; | &quot;f20&quot; | &quot;f24&quot; | &quot;f28&quot; | &quot;f32&quot; | &quot;f36&quot; | &quot;f40&quot;
+
+/**
+ * Below this container width (px) a horizontal Stack becomes vertical, and
+ * its separators become the vertical treatment along with it. Requires an
+ * ancestor that establishes the `responsive` container — `&lt;Box container&gt;`.
+ * Without one the query never matches and the Stack stays horizontal.
+ * Ignored when `direction=&quot;vertical&quot;`.
+ */
+stackBelow?: number
 
 withSeparators?: boolean</code></pre>
           </div>
@@ -14235,6 +14244,54 @@ withSeparators?: boolean</code></pre>
     &lt;/&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">stackBelow — direction follows the container width</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const StackBelowStory = ({}) =&gt; (
+  &lt;&gt;
+    &lt;h2&gt;Drag the bottom-right handle below 500px&lt;/h2&gt;
+    &lt;SecondaryText&gt;
+      One prop. The Stack flips from row to column in CSS only — no re-render
+      — and the separators switch from the row treatment (a full-height rule)
+      to the column treatment (a short dash) along with it.
+    &lt;/SecondaryText&gt;
+    &lt;ResizableContainer&gt;
+      &lt;Stack withSeparators gap=&quot;r24&quot; stackBelow={500}&gt;
+        &lt;Stack gap=&quot;r16&quot;&gt;
+          &lt;Icon name=&quot;Account&quot; size=&quot;2x&quot; color=&quot;infoPrimary&quot; withWrapper /&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r4&quot;&gt;
+            &lt;LargerText&gt;12&lt;/LargerText&gt;
+            &lt;SmallerSecondaryText&gt;Accounts&lt;/SmallerSecondaryText&gt;
+          &lt;/Stack&gt;
+        &lt;/Stack&gt;
+        &lt;Stack gap=&quot;r16&quot;&gt;
+          &lt;Icon name=&quot;Bucket&quot; size=&quot;2x&quot; color=&quot;infoPrimary&quot; withWrapper /&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r4&quot;&gt;
+            &lt;LargerText&gt;148&lt;/LargerText&gt;
+            &lt;SmallerSecondaryText&gt;Buckets&lt;/SmallerSecondaryText&gt;
+          &lt;/Stack&gt;
+        &lt;/Stack&gt;
+        &lt;Stack gap=&quot;r16&quot;&gt;
+          &lt;Icon
+            name=&quot;Node-backend&quot;
+            size=&quot;2x&quot;
+            color=&quot;infoPrimary&quot;
+            withWrapper
+          /&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r4&quot;&gt;
+            &lt;LargerText&gt;3&lt;/LargerText&gt;
+            &lt;SmallerSecondaryText&gt;Endpoints&lt;/SmallerSecondaryText&gt;
+          &lt;/Stack&gt;
+        &lt;/Stack&gt;
+      &lt;/Stack&gt;
+    &lt;/ResizableContainer&gt;
+  &lt;/&gt;
+);</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
