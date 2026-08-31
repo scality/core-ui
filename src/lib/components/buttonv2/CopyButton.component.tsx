@@ -1,6 +1,34 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { Icon } from '../icon/Icon.component';
 import { Button, type Props } from './Buttonv2.component';
+
+// The outline variant swaps its label on success ("Copy X" -> "Copied X!"), which
+// is a character wider, so the button reserves room for the longer string and keeps
+// its width when clicked.
+const outlineWidthFloor = (label?: string) =>
+  `${(label ? label.length / 2 : 0) + 7}rem`;
+
+/**
+ * A `Button` carrying the outline variant's width floor.
+ *
+ * The floor is a stylesheet rule rather than an inline `style` on purpose.
+ * `iconOnly` hides the label through a `@container` query, and an inline style
+ * outranks every stylesheet rule — so an inline floor held the button at its full
+ * labelled width with nothing in it, and the only way out was to switch the floor
+ * off in JS for every form of `iconOnly`, numeric ones included.
+ *
+ * The breakpoint is read from `iconOnly` itself rather than passed in beside it, so
+ * the floor and the label cannot end up answering to different widths: below it the
+ * label is hidden and the floor is gone, above it both are there and the button
+ * still does not resize on click.
+ */
+const FlooredButton = styled(Button)<{ $floor?: string }>`
+  min-width: ${({ $floor }) => $floor ?? 'auto'};
+  ${({ iconOnly }) =>
+    typeof iconOnly === 'number' &&
+    `@container responsive (max-width: ${iconOnly}px) { min-width: auto; }`}
+`;
 
 export const COPY_STATE_IDLE = 'idle';
 export const COPY_STATE_SUCCESS = 'success';
@@ -73,23 +101,21 @@ export const CopyButton = ({
 } & Omit<Props, 'tooltip' | 'label'>) => {
   const { copy, copyStatus } = useClipboard();
   const isSuccess = copyStatus === COPY_STATE_SUCCESS;
+  const { iconOnly } = props;
   return (
-    <Button
+    <FlooredButton
       {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
+      // A button collapsed at every width has no label to reserve room for.
+      $floor={
+        variant === 'outline' && iconOnly !== true
+          ? outlineWidthFloor(label)
+          : undefined
+      }
       style={{
         ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
-        // The floor reserves room for the label swap ("Copy X" -> "Copied X!") so
-        // the button keeps its width when clicked. `iconOnly` asks for the opposite
-        // — a button narrower than its label — and the floor wins, because it is an
-        // inline style the container query cannot reach. So an `iconOnly` copy
-        // button gets no floor and may widen by the one character the swap adds.
-        minWidth:
-          variant === 'outline' && !props.iconOnly
-            ? `${(label ? label.length / 2 : 0) + 7}rem`
-            : undefined,
-        // Last, so a consumer can override the floor (or anything else) from
-        // `style`. It used to be first, which made every value here unreachable.
+        // Last, so a consumer can override anything here from `style`. It used to
+        // be first, which made every value here unreachable.
         ...props.style,
       }}
       label={

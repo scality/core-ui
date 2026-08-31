@@ -59,10 +59,15 @@ export const OutlinedCopyButtonWithBigLabel: Story = {
   },
 };
 
-// `iconOnly` on an outline copy button: the width floor that keeps the button from
-// resizing on click used to be applied unconditionally, so the button stayed ~8.5rem
-// wide with nothing in it. Both forms are shown — `true` collapses always, a number
-// collapses below that container width, which needs the `container` Box to resolve.
+// `iconOnly` on an outline copy button. The floor that stops the button resizing
+// when its label swaps on success used to be applied unconditionally, so a collapsed
+// button kept its full labelled width with nothing in it.
+//
+// Both forms are shown. `true` collapses at every width, so there is no label to
+// reserve room for and no floor. A number collapses below that container width —
+// which needs the `container` Box to resolve — and keeps the floor above it, so
+// drag the second frame back over 240px and the button should stay put when
+// clicked rather than growing by the character "Copied" adds.
 export const OutlinedCopyButtonIconOnly: StoryObj = {
   render: () => (
     <Stack direction="vertical" gap="r16">
