@@ -86,18 +86,25 @@ export const HeaderContent = styled.div<{
           }
         `
       }
-
       ${
         $sortable &&
         isCenter &&
         css`
-          /* Flex centres label-plus-caret, which leaves the label itself half a
-           caret off centre. One caret width of leading padding corrects that
-           exactly — padding shrinks the box the content is centred in, so half
-           of it is absorbed. Capped as a share of the header so a column too
-           narrow to afford the correction spends its width on the label
-           instead: it drifts off centre rather than truncating sooner. */
-          padding-inline-start: min(${caretSpace}, 15%);
+          /* Flex centres label-plus-caret, so the label itself lands half a caret
+           off centre. This mirrors the caret on the label's other side to restore
+           the symmetry, and being a pseudo-element it is a flex item like any
+           other: weighted by basis times shrink factor against the label's own
+           basis, it gives up its width long before the label gives up a
+           character. A centred header is therefore exactly centred whenever the
+           label fits beside it, and spends the counterweight rather than the
+           label when it does not. A fixed reserve cannot do both -- it either
+           truncates early or drifts early, depending which value is chosen. */
+          &::before {
+            content: '';
+            order: -1;
+            flex: 0 1000 ${caretSpace};
+            min-width: 0;
+          }
         `
       }
     `;
