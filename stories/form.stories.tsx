@@ -960,47 +960,77 @@ export const ResponsivePageFormInFlexRow = {
 };
 
 // Key/value tone: the FormGroup label is `textSecondary` against the value's
-// `textPrimary`, so a two-column form is read as pairs rather than as two columns
-// of equally weighted text. The last row is disabled — it keeps the primary tone,
-// because its 0.5 opacity already dims it and compounding the two costs more
-// contrast than the pairing gains.
+// `textPrimary`, so a two-column form reads as pairs rather than as two columns of
+// equally weighted text.
+//
+// Both require modes are on the page at once, because the two markers are
+// deliberately NOT treated alike. `*` keeps the primary tone -- it carries an
+// obligation, so it must not end up quieter than the label it qualifies.
+// `(optional)` dims with that label, because it only says the obligation is absent.
+//
+// The last row of each form is disabled. It keeps the primary tone: the 0.5 opacity
+// on the label already dims it, and compounding the two costs more contrast than
+// the pairing gains.
 export const FormGroupLabelTone = {
-  render: ({ requireMode }) => (
-    <div style={{ width: '34rem', maxWidth: '100%' }}>
-      <Form layout={{ kind: 'tab' }} requireMode={requireMode} responsive>
-        <FormSection title={{ name: 'Identity', icon: 'Account' }}>
-          <FormGroup
-            direction="horizontal"
-            label="User name"
-            id="lt-name"
-            content={<Input id="lt-name" defaultValue="holly.day" />}
-            required
-          />
-          <FormGroup
-            direction="horizontal"
-            label="Description"
-            id="lt-desc"
-            content={<Input id="lt-desc" defaultValue="Platform operator" />}
-          />
-          <FormGroup
-            direction="horizontal"
-            label="Contact email"
-            id="lt-email"
-            content={
-              <Input id="lt-email" defaultValue="holly.day@example.com" />
-            }
-            labelHelpTooltip="Used for expiry notifications."
-          />
-          <FormGroup
-            direction="horizontal"
-            label="Created on"
-            id="lt-created"
-            content={<Input id="lt-created" defaultValue="2026-01-14" />}
-            disabled
-          />
-        </FormSection>
-      </Form>
-    </div>
+  render: () => (
+    <Stack direction="vertical" gap="r24">
+      {(['partial', 'all'] as const).map((requireMode) => (
+        <div key={requireMode} style={{ width: '34rem', maxWidth: '100%' }}>
+          <Form layout={{ kind: 'tab' }} requireMode={requireMode} responsive>
+            <FormSection
+              title={{ name: `requireMode="${requireMode}"`, icon: 'Account' }}
+            >
+              <FormGroup
+                direction="horizontal"
+                label="User name"
+                id={`lt-name-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-name-${requireMode}`}
+                    defaultValue="holly.day"
+                  />
+                }
+                required
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Description"
+                id={`lt-desc-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-desc-${requireMode}`}
+                    defaultValue="Platform operator"
+                  />
+                }
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Contact email"
+                id={`lt-email-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-email-${requireMode}`}
+                    defaultValue="holly.day@example.com"
+                  />
+                }
+                labelHelpTooltip="Used for expiry notifications."
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Created on"
+                id={`lt-created-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-created-${requireMode}`}
+                    defaultValue="2026-01-14"
+                  />
+                }
+                disabled
+              />
+            </FormSection>
+          </Form>
+        </div>
+      ))}
+    </Stack>
   ),
-  args: { requireMode: 'partial' },
 };
