@@ -1021,9 +1021,12 @@ const certificateColumns: Column<Certificate>[] = [
   },
 ];
 
-// Centred sortable columns pinned narrow enough that the counterweight keeping
-// the label centred cannot be paid in full. The label should drift off centre —
-// by at most half a caret — rather than lose characters to make room for it.
+// Narrow centred columns, each sortable one paired with an identical column that
+// is not sortable. The pair is the point: the sortable header carries a caret and
+// a counterweight, the plain one carries neither, so any difference in where the
+// two labels sit is the caret mechanism and nothing else. At 5rem and 7rem the
+// counterweight cap binds, so the sortable label should drift slightly off centre
+// rather than truncate earlier than its twin.
 const narrowCentredColumns: Column<Certificate>[] = [
   {
     Header: 'Name',
@@ -1033,12 +1036,28 @@ const narrowCentredColumns: Column<Certificate>[] = [
   {
     Header: 'Status',
     accessor: 'status',
+    id: 'status-sortable',
     cellStyle: { textAlign: 'center', width: '5rem' },
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+    id: 'status-plain',
+    cellStyle: { textAlign: 'center', width: '5rem' },
+    disableSortBy: true,
   },
   {
     Header: 'Expire On',
     accessor: 'expireOn',
+    id: 'expire-sortable',
     cellStyle: { textAlign: 'center', width: '7rem' },
+  },
+  {
+    Header: 'Expire On',
+    accessor: 'expireOn',
+    id: 'expire-plain',
+    cellStyle: { textAlign: 'center', width: '7rem' },
+    disableSortBy: true,
   },
 ];
 
@@ -1088,9 +1107,10 @@ export const SortCaretHeaderAlignment = {
         </Table>
       </div>
       <Title>
-        D — centred sortable headers too narrow for the full counterweight
+        D — narrow centred headers: each sortable column paired with an
+        identical column that is not sortable
       </Title>
-      <div id="repro-d" style={{ height: '140px', width: '380px' }}>
+      <div id="repro-d" style={{ height: '140px', width: '620px' }}>
         <Table
           columns={narrowCentredColumns}
           data={certificateData}
