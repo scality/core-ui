@@ -11,44 +11,35 @@ import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
 
 const borderSize = '4px';
-const caretGlyphSize = spacing.r16;
-const caretGutter = spacing.r4;
-// The room HeaderContent reserves so the glyph never overflows its header.
+// The caret's whole footprint: the glyph plus the gap that keeps it off the label.
 const caretSpace = spacing.r20;
 
+/** Hidden until the header is hovered — see `TableHeader`. */
 export const SortIncentive = styled.span`
-  position: absolute;
-  inset: 0;
   display: none;
   align-items: center;
-  justify-content: center;
-`;
-
-/** The painted glyph, out of flow inside the zero-width anchor below. */
-export const SortCaretGlyph = styled.span`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: ${caretGlyphSize};
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 /**
- * A zero-width flex item. Being a real flex item is what keeps the glyph next to
- * the label (and lets `order` move it to the label's other side) — anchoring it
- * to `HeaderContent`'s edge instead would strand it at the far side of a wide
- * column. Being zero-width is what keeps it out of the sizing equation: a caret
- * with real width lifts every sortable header's min-content 20px above the
- * matching body cell's, and the two rows then stop agreeing on column widths as
- * soon as that floor binds. `HeaderContent` reserves the room with padding.
+ * The caret carries its own width, in flow, so nothing else has to reserve room
+ * on its behalf: one value describes the footprint, and a sortable header's
+ * intrinsic width already includes it.
+ *
+ * Being a flex item is what keeps the glyph beside the label rather than
+ * stranded at the column's far edge, and lets `order` move it to the label's
+ * other side. `flex: none` stops a shrinking column squeezing it, so the label
+ * stays the element that runs out of room.
+ *
+ * The width is unconditional because the glyph is not: `SortIncentive` appears
+ * only on hover, and a reserve that came and went with it would shift the
+ * header out from under the pointer.
  */
 export const SortCaretWrapper = styled.span`
-  position: relative;
   flex: none;
-  width: 0;
-  align-self: stretch;
+  width: ${caretSpace};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 /** Ellipsize rather than let a long header outgrow its column. */
@@ -78,42 +69,36 @@ export const HeaderContent = styled.div<{
   ${({ $align, $sortable }) => {
     const isEnd = $align === 'right' || $align === 'end';
     const isCenter = $align === 'center';
-    const justify = isEnd ? 'flex-end' : isCenter ? 'center' : 'flex-start';
 
-    if (!$sortable) {
-      return css`
-        justify-content: ${justify};
-      `;
-    }
-
-    // End-aligned columns are the one case where the caret goes on the label's
-    // start side: the label has to stay flush with the trailing edge or it no
-    // longer lines up with the values below it, which leaves no room after it.
-    if (isEnd) {
-      return css`
-        justify-content: flex-end;
-        padding-inline-start: ${caretSpace};
-        ${SortCaretWrapper} {
-          order: -1;
-        }
-        ${SortCaretGlyph} {
-          inset-inline-end: ${caretGutter};
-        }
-      `;
-    }
-
-    // Centred columns reserve both sides so the label stays centred.
     return css`
-      justify-content: ${justify};
-      ${isCenter
-        ? css`
-            padding-inline: ${caretSpace};
-          `
-        : css`
-            padding-inline-end: ${caretSpace};
-          `}
-      ${SortCaretGlyph} {
-        inset-inline-start: ${caretGutter};
+      justify-content: ${
+        isEnd ? 'flex-end' : isCenter ? 'center' : 'flex-start'
+      };
+
+      ${
+        $sortable &&
+        isEnd &&
+        css`
+          /* An end-aligned label has to stay flush with the trailing edge to line
+           up with the values below it, which leaves no room after it. */
+          ${SortCaretWrapper} {
+            order: -1;
+          }
+        `
+      }
+
+      ${
+        $sortable &&
+        isCenter &&
+        css`
+          /* Flex centres label-plus-caret, which leaves the label itself half a
+           caret off centre. One caret width of leading padding corrects that
+           exactly — padding shrinks the box the content is centred in, so half
+           of it is absorbed. Capped as a share of the header so a column too
+           narrow to afford the correction spends its width on the label
+           instead: it drifts off centre rather than truncating sooner. */
+          padding-inline-start: min(${caretSpace}, 15%);
+        `
       }
     `;
   }}
@@ -276,19 +261,17 @@ export const SortCaret = <
 }) => {
   return !column.disableSortBy ? (
     <SortCaretWrapper>
-      <SortCaretGlyph>
-        {column.isSorted ? (
-          column.isSortedDesc ? (
-            <Icon name="Sort-down" />
-          ) : (
-            <Icon name="Sort-up" />
-          )
+      {column.isSorted ? (
+        column.isSortedDesc ? (
+          <Icon name="Sort-down" />
         ) : (
-          <SortIncentive>
-            <Icon name="Sort" />
-          </SortIncentive>
-        )}
-      </SortCaretGlyph>
+          <Icon name="Sort-up" />
+        )
+      ) : (
+        <SortIncentive>
+          <Icon name="Sort" />
+        </SortIncentive>
+      )}
     </SortCaretWrapper>
   ) : null;
 };

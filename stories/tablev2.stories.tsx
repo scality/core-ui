@@ -1021,10 +1021,33 @@ const certificateColumns: Column<Certificate>[] = [
   },
 ];
 
+// Centred sortable columns pinned narrow enough that the counterweight keeping
+// the label centred cannot be paid in full. The label should drift off centre —
+// by at most half a caret — rather than lose characters to make room for it.
+const narrowCentredColumns: Column<Certificate>[] = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+    cellStyle: { textAlign: 'center', width: '5rem' },
+  },
+  {
+    Header: 'Expire On',
+    accessor: 'expireOn',
+    cellStyle: { textAlign: 'center', width: '7rem' },
+  },
+];
+
 export const SortCaretHeaderAlignment = {
   render: () => (
     <>
-      <Title>A — equal flex, sortable vs not, container too narrow for both headers</Title>
+      <Title>
+        A — equal flex, sortable vs not, container too narrow for both headers
+      </Title>
       <div id="repro-a" style={{ height: '120px', width: '220px' }}>
         <Table
           columns={readingColumns}
@@ -1061,6 +1084,21 @@ export const SortCaretHeaderAlignment = {
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
             onMultiSelectionChanged={action('selection changed')}
+          />
+        </Table>
+      </div>
+      <Title>
+        D — centred sortable headers too narrow for the full counterweight
+      </Title>
+      <div id="repro-d" style={{ height: '140px', width: '380px' }}>
+        <Table
+          columns={narrowCentredColumns}
+          data={certificateData}
+          defaultSortingKey={'status'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h32"
+            separationLineVariant="backgroundLevel3"
           />
         </Table>
       </div>
