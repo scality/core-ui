@@ -57,16 +57,29 @@ type TabFormProps = { layout: { kind: 'tab' } } & FormProps;
 
 // In a `responsive` Form a FormSection lays its FormGroups out as a two-column
 // CSS grid (label track + field track) and each FormGroup is a `subgrid` row, so
-// labels align per section from content alone — no measurement. Below STACK_BELOW
-// the grid collapses to a single column (fields stack under their labels) via a
-// `@container` query, so a field never shrinks small enough to truncate.
+// labels align per section from content alone — no measurement. Below the section's
+// own stacking width the grid collapses to a single column (fields stack under
+// their labels) via a `@container` query, so a field never shrinks small enough to
+// truncate.
 // Both floors are a readability policy, not component-derived: fluid fields carry
 // `min-width: 0`, so there is no intrinsic minimum to read.
 // - field floor: the `1/2` Input size (10rem) — below this a field stacks.
 // - label floor: ~24ch — long labels wrap to about two lines before stacking.
 const FIELD_MIN_REM = 10;
 const LABEL_MIN_CH = 24;
-const STACK_BELOW = `calc(${LABEL_MIN_CH}ch + ${FIELD_MIN_REM}rem + ${spacing.r32})`;
+// Share of the container the label column may claim once there is not enough room
+// for its full cap. A grid track satisfies its max before the flexible field track
+// flexes, so a constant cap makes the label take its full width while the field
+// walks down to FIELD_MIN_REM and the row stacks earlier than it needs to. Capping
+// the label as a fraction of the container instead makes the two give ground
+// together; above ~2.5x the cap the fraction is the larger of the two and the
+// column is sized exactly as before.
+const LABEL_MAX_CQI = 40;
+// The width below which a section stacks: its own label column plus the field
+// floor plus the column gap. Derived per section rather than fixed, or a section
+// with a label cap wider than LABEL_MIN_CH overflows in the band between the two.
+const stackBelow = (labelFloor: string) =>
+  `calc(${labelFloor} + ${FIELD_MIN_REM}rem + ${spacing.r32})`;
 
 const StyledForm = styled.form<{
   $layout: PageFormProps['layout'] | TabFormProps['layout'];
@@ -154,13 +167,15 @@ const ScrollArea = styled(BasicPageLayout)`
 //     requires each row to be a direct grid item.
 // Either way, non-FormGroup children (an InfoMessage, a Banner) stack full-width.
 // `responsive` makes the field track fluid (minmax(10rem, 1fr)) and lets each row
-// flip to a stacked single column below STACK_BELOW via an `@container` query.
+// flip to a stacked single column below the section's stacking width via an
+// `@container` query.
 const SectionGrid = styled.div<{
   $labelTrack: string;
   $responsive: boolean;
   $fixedLabel: boolean;
+  $stackBelow: string;
 }>`
-  ${({ $labelTrack, $responsive, $fixedLabel }) =>
+  ${({ $labelTrack, $responsive, $fixedLabel, $stackBelow }) =>
     $fixedLabel
       ? css`
           display: flex;
@@ -169,7 +184,7 @@ const SectionGrid = styled.div<{
           ${
             $responsive &&
             css`
-              @container responsive (max-width: ${STACK_BELOW}) {
+              @container responsive (max-width: ${$stackBelow}) {
                 gap: ${spacing.r20};
               }
             `
@@ -199,7 +214,7 @@ const SectionGrid = styled.div<{
           ${
             $responsive &&
             css`
-              @container responsive (max-width: ${STACK_BELOW}) {
+              @container responsive (max-width: ${$stackBelow}) {
                 grid-template-columns: 1fr;
                 /* Stacked groups need more separation than side-by-side rows: each
                  group is now two lines (label over field), so widen the gap. */
@@ -227,11 +242,12 @@ const FieldSubgridRow = styled.div<{
   $responsive: boolean;
   $labelTrack: string;
   $fixedLabel: boolean;
+  $stackBelow: string;
 }>`
   display: grid;
   grid-column: 1 / -1;
   row-gap: ${spacing.r4};
-  ${({ $direction, $responsive, $labelTrack, $fixedLabel }) => {
+  ${({ $direction, $responsive, $labelTrack, $fixedLabel, $stackBelow }) => {
     if ($direction === 'vertical') {
       return css`
         grid-template-columns: 1fr;
@@ -249,7 +265,7 @@ const FieldSubgridRow = styled.div<{
       ${
         $responsive &&
         css`
-          @container responsive (max-width: ${STACK_BELOW}) {
+          @container responsive (max-width: ${$stackBelow}) {
             grid-template-columns: 1fr;
             align-items: stretch;
           }
@@ -276,6 +292,7 @@ const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
 type SectionLabelConfig = {
   labelTrack: string;
   fixedLabel: boolean;
+  stackBelow: string;
 };
 const FormSectionContext = createContext<SectionLabelConfig | null>(null);
 
@@ -397,6 +414,7 @@ const FormGroup = ({
         $responsive={responsive}
         $labelTrack={sectionLabel.labelTrack}
         $fixedLabel={sectionLabel.fixedLabel}
+        $stackBelow={sectionLabel.stackBelow}
       >
         <GridLabelCell $hasHelpTooltip={!!labelHelpTooltip}>
           {labelContent}
@@ -411,13 +429,19 @@ type FormSectionProps = {
   children: ReactElement<FormGroupProps> | ReactElement<FormGroupProps>[];
   title?: { name: string; icon?: IconName; helpTooltip?: string };
   /**
-   * Caps the label column at this pixel width: labels wider than it wrap rather
-   * than widening the column. In a `responsive` Form the column keeps this width
-   * while there is room but shrinks below it (down to the longest word) as the
-   * field track is squeezed, so rows stay aligned; otherwise it is pinned to this
-   * exact width. When unset, the column auto-sizes to the widest label.
+   * Caps the label column at this width: labels wider than it wrap rather than
+   * widening the column. A number is pixels; a string is an **absolute** length
+   * (`px`, `rem`, `em`, `ch`), so `'15rem'` follows the document's root font size
+   * where a px value computed once cannot. A percentage or a keyword such as
+   * `max-content` is not usable: the width is also fed to the container query
+   * that decides when the section stacks, and neither is valid there, so the rule
+   * is dropped whole and the section silently stops stacking. In a `responsive`
+   * Form the column keeps this width while there is room but shrinks below it
+   * (down to the longest word) as the field track is squeezed, so rows stay
+   * aligned; otherwise it is pinned to this exact width. When unset, the column
+   * auto-sizes to the widest label.
    */
-  forceLabelWidth?: number;
+  forceLabelWidth?: number | string;
   rightActions?: ReactNode;
 };
 
@@ -442,13 +466,28 @@ const FormSection = ({
   // longest word (`min-content`) up to that cap before the section flips;
   // non-responsive pins it to the cap.
   const fixedLabel = forceLabelWidth != null;
-  const labelWidthCap = fixedLabel ? `${forceLabelWidth}px` : 'max-content';
+  const labelWidth =
+    typeof forceLabelWidth === 'number'
+      ? `${forceLabelWidth}px`
+      : forceLabelWidth;
+  const labelWidthCap = labelWidth ?? 'max-content';
+  // Responsive clamps the cap to a share of the container so the label and the
+  // field give ground together (see LABEL_MAX_CQI). `min()` needs two lengths, so
+  // the clamp only applies to an explicit cap; an auto column's cap is its own
+  // text, which is its own limit.
   const labelTrack = responsive
-    ? `minmax(min-content, ${labelWidthCap})`
+    ? `minmax(min-content, ${
+        labelWidth ? `min(${labelWidth}, ${LABEL_MAX_CQI}cqi)` : labelWidthCap
+      })`
     : labelWidthCap;
+  // The auto column has no length to derive from, so it keeps the readability
+  // floor it has always used.
+  const sectionStackBelow = stackBelow(labelWidth ?? `${LABEL_MIN_CH}ch`);
 
   return (
-    <FormSectionContext.Provider value={{ labelTrack, fixedLabel }}>
+    <FormSectionContext.Provider
+      value={{ labelTrack, fixedLabel, stackBelow: sectionStackBelow }}
+    >
       <Stack direction="vertical" gap="r12">
         {title && (
           <Wrap>
@@ -473,6 +512,7 @@ const FormSection = ({
           $labelTrack={labelTrack}
           $responsive={responsive}
           $fixedLabel={fixedLabel}
+          $stackBelow={sectionStackBelow}
         >
           {children}
         </SectionGrid>
