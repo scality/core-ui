@@ -65,9 +65,10 @@ Which width that happens at is not a fixed number: a column's width comes from i
 dropping a neighbour hands its space to the columns that remain. A header can therefore truncate,
 then read in full again at a narrower frame.
 
-Every string header carries its own text as a `title`, so the full label stays one hover away.
-Headers built from a node rather than a string get no `title` — give those their own affordance if
-the label can be lost.
+A truncated string header shows its full text in a tooltip on hover, so nothing is lost. The
+tooltip appears only while the label is actually cut off — a tooltip repeating a header that reads
+fine is noise. Headers built from a node rather than a string get none, since there is no text to
+show: give those their own affordance if the label can be lost.
 
 ### Recovering the dropped values
 
