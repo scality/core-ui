@@ -973,27 +973,29 @@ export const FormGroupLabelTone = {
             direction="horizontal"
             label="User name"
             id="lt-name"
-            content={<Input id="lt-name" value="holly.day" />}
+            content={<Input id="lt-name" defaultValue="holly.day" />}
             required
           />
           <FormGroup
             direction="horizontal"
             label="Description"
             id="lt-desc"
-            content={<Input id="lt-desc" value="Platform operator" />}
+            content={<Input id="lt-desc" defaultValue="Platform operator" />}
           />
           <FormGroup
             direction="horizontal"
             label="Contact email"
             id="lt-email"
-            content={<Input id="lt-email" value="holly.day@example.com" />}
+            content={
+              <Input id="lt-email" defaultValue="holly.day@example.com" />
+            }
             labelHelpTooltip="Used for expiry notifications."
           />
           <FormGroup
             direction="horizontal"
             label="Created on"
             id="lt-created"
-            content={<Input id="lt-created" value="2026-01-14" />}
+            content={<Input id="lt-created" defaultValue="2026-01-14" />}
             disabled
           />
         </FormSection>
