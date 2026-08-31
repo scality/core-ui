@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Icon } from '../src/lib/components/icon/Icon.component';
 import {
   EmphaseText,
@@ -111,6 +111,64 @@ export const StackStory = {
       </>
     );
   },
+};
+
+// `stackBelow` queries the `responsive` container, so an ancestor has to
+// establish one. `<Box container>` does this in app code.
+const ResizableContainer = styled.div`
+  container-type: inline-size;
+  container-name: responsive;
+  resize: horizontal;
+  overflow: auto;
+  min-width: 240px;
+  max-width: 100%;
+  width: 700px;
+  background: ${(props) => props.theme.backgroundLevel2};
+  padding: ${spacing.r16};
+`;
+
+export const StackBelowStory = {
+  name: 'stackBelow — direction follows the container width',
+  render: ({}) => (
+    <>
+      <h2>Drag the bottom-right handle below 500px</h2>
+      <SecondaryText>
+        One prop. The Stack flips from row to column in CSS only — no re-render
+        — and the separators switch from the row treatment (a full-height rule)
+        to the column treatment (a short dash) along with it.
+      </SecondaryText>
+      <ResizableContainer>
+        <Stack withSeparators gap="r24" stackBelow={500}>
+          <Stack gap="r16">
+            <Icon name="Account" size="2x" color="infoPrimary" withWrapper />
+            <Stack direction="vertical" gap="r4">
+              <LargerText>12</LargerText>
+              <SmallerSecondaryText>Accounts</SmallerSecondaryText>
+            </Stack>
+          </Stack>
+          <Stack gap="r16">
+            <Icon name="Bucket" size="2x" color="infoPrimary" withWrapper />
+            <Stack direction="vertical" gap="r4">
+              <LargerText>148</LargerText>
+              <SmallerSecondaryText>Buckets</SmallerSecondaryText>
+            </Stack>
+          </Stack>
+          <Stack gap="r16">
+            <Icon
+              name="Node-backend"
+              size="2x"
+              color="infoPrimary"
+              withWrapper
+            />
+            <Stack direction="vertical" gap="r4">
+              <LargerText>3</LargerText>
+              <SmallerSecondaryText>Endpoints</SmallerSecondaryText>
+            </Stack>
+          </Stack>
+        </Stack>
+      </ResizableContainer>
+    </>
+  ),
 };
 
 export const WrapStory = {
