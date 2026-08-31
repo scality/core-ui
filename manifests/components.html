@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">353 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">355 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.7s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -6736,7 +6736,7 @@ supportLink?: string = undefined</code></pre>
       <div class="badges">
         <label for="c-23-templates-form-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-23-templates-form-info" class="badge info as-toggle">1 info</label>
-        <label for="c-23-templates-form-stories" class="badge ok as-toggle">11 stories</label>
+        <label for="c-23-templates-form-stories" class="badge ok as-toggle">13 stories</label>
         <label for="c-23-templates-form-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -7662,6 +7662,75 @@ rightActions?: ReactNode</code></pre>
     &lt;/div&gt;
   &lt;/ResizeFrame&gt;
 );</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Label Squeeze</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveLabelSqueeze = ({ forceLabelWidth, requireMode }) =&gt; (
+  &lt;div
+    data-testid=&quot;squeeze-frame&quot;
+    style={{
+      resize: &#39;horizontal&#39;,
+      overflow: &#39;auto&#39;,
+      width: &#39;60rem&#39;,
+      minWidth: &#39;20rem&#39;,
+      maxWidth: &#39;100%&#39;,
+      border: &#39;1px dashed #666&#39;,
+      height: &#39;30rem&#39;,
+    }}
+  &gt;
+    &lt;div style={{ display: &#39;flex&#39;, height: &#39;100%&#39; }}&gt;
+      &lt;Form
+        layout={{ kind: &#39;page&#39;, title: &#39;User&#39; }}
+        requireMode={requireMode}
+        responsive
+        rightActions={&lt;Button variant=&quot;primary&quot; label=&quot;Save&quot; /&gt;}
+      &gt;
+        &lt;FormSection
+          title={{ name: &#39;Identity&#39;, icon: &#39;Account&#39; }}
+          forceLabelWidth={forceLabelWidth}
+        &gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;User name&quot;
+            id=&quot;sq-name&quot;
+            content={&lt;Input id=&quot;sq-name&quot; /&gt;}
+            required
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Multi-factor authentication&quot;
+            id=&quot;sq-mfa&quot;
+            content={&lt;Input id=&quot;sq-mfa&quot; /&gt;}
+          /&gt;
+          &lt;FormGroup
+            direction=&quot;horizontal&quot;
+            label=&quot;Account creation date&quot;
+            id=&quot;sq-created&quot;
+            content={&lt;Input id=&quot;sq-created&quot; /&gt;}
+          /&gt;
+        &lt;/FormSection&gt;
+      &lt;/Form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Responsive Label Squeeze Rem Cap</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResponsiveLabelSqueezeRemCap = () =&gt; &lt;Form
+    kind=&quot;page&quot;
+    title=&quot;My Form&quot;
+    subTitle=&quot;Some Subtitle&quot;
+    forceLabelWidth=&quot;15rem&quot; /&gt;;</code></pre>
             </div>
         </div>
     
