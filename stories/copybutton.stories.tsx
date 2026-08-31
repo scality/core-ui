@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
-import { Box, CopyButton, Stack, Text } from '../src/lib/next';
+import { Box, CopyButton } from '../src/lib/next';
+import { Text } from '../src/lib/components/text/Text.component';
+import { Stack } from '../src/lib/spacing';
 import { Wrapper } from './common';
 
 type Story = StoryObj<typeof CopyButton>;
