@@ -430,12 +430,16 @@ type FormSectionProps = {
   title?: { name: string; icon?: IconName; helpTooltip?: string };
   /**
    * Caps the label column at this width: labels wider than it wrap rather than
-   * widening the column. A number is pixels; a string is any CSS length, so
-   * `'15rem'` follows the document's root font size where a px value computed once
-   * cannot. In a `responsive` Form the column keeps this width while there is
-   * room but shrinks below it (down to the longest word) as the field track is
-   * squeezed, so rows stay aligned; otherwise it is pinned to this exact width.
-   * When unset, the column auto-sizes to the widest label.
+   * widening the column. A number is pixels; a string is an **absolute** length
+   * (`px`, `rem`, `em`, `ch`), so `'15rem'` follows the document's root font size
+   * where a px value computed once cannot. A percentage or a keyword such as
+   * `max-content` is not usable: the width is also fed to the container query
+   * that decides when the section stacks, and neither is valid there, so the rule
+   * is dropped whole and the section silently stops stacking. In a `responsive`
+   * Form the column keeps this width while there is room but shrinks below it
+   * (down to the longest word) as the field track is squeezed, so rows stay
+   * aligned; otherwise it is pinned to this exact width. When unset, the column
+   * auto-sizes to the widest label.
    */
   forceLabelWidth?: number | string;
   rightActions?: ReactNode;
