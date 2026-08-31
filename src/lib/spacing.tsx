@@ -1,5 +1,5 @@
 import { Children, HTMLAttributes, HTMLProps, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Box, BoxComponentProps } from './components/box/Box';
 
 export const spacing = {
@@ -33,39 +33,89 @@ export const spacing = {
   f40: '40px',
 };
 
-const HSeparator = styled.div`
-  background: ${(props) => props.theme.border};
+// The two separator treatments. A row Stack draws a full-height rule between
+// its children; a column Stack draws a short dash. They are different shapes,
+// not one shape on two axes, so a single element cannot serve both by CSS alone
+// — which is why `stackBelow` below restyles the element rather than relying on
+// the flip.
+const ruleSeparator = css`
   width: 1px;
   align-self: stretch;
   flex-shrink: 0;
-  margin: ${spacing.r12} 0px;
+  margin: ${spacing.r12} 0;
 `;
 
-const VSeparator = styled.div`
-  height: 1px;
+const dashSeparator = css`
   width: ${spacing.r24};
-  background: ${(props) => props.theme.border};
+  height: 1px;
+  align-self: auto;
+  margin: 0;
 `;
 
-const Separator = ({ type }: { type?: 'vertical' | 'horizontal' }) => {
-  return (
-    <>
-      {type === 'horizontal' && <HSeparator>&nbsp;</HSeparator>}
-      {type === 'vertical' && <VSeparator>&nbsp;</VSeparator>}
-    </>
-  );
-};
+// One element for both directions. `Stack` used to pick between two components
+// at render time, which meant a CSS direction change left the separators
+// pointing the wrong way — CSS can restyle an element but cannot swap which one
+// React rendered.
+const Separator = styled.div<{
+  $direction: 'vertical' | 'horizontal';
+  $stackBelow?: number;
+}>`
+  background: ${(props) => props.theme.border};
+  ${(props) =>
+    props.$direction === 'horizontal' ? ruleSeparator : dashSeparator}
+
+  ${(props) =>
+    props.$direction === 'horizontal' &&
+    props.$stackBelow !== undefined &&
+    css`
+      @container responsive (max-width: ${props.$stackBelow}px) {
+        ${dashSeparator}
+      }
+    `}
+`;
+
+// Layout lives here rather than on `Box`'s props so the container query below
+// isn't fighting styled-system output for specificity.
+const StackBox = styled(Box)<{
+  $direction: 'vertical' | 'horizontal';
+  $stackBelow?: number;
+}>`
+  display: flex;
+  flex-direction: ${(props) =>
+    props.$direction === 'horizontal' ? 'row' : 'column'};
+  align-items: ${(props) =>
+    props.$direction === 'horizontal' ? 'center' : 'normal'};
+
+  ${(props) =>
+    props.$direction === 'horizontal' &&
+    props.$stackBelow !== undefined &&
+    css`
+      @container responsive (max-width: ${props.$stackBelow}px) {
+        flex-direction: column;
+        align-items: normal;
+      }
+    `}
+`;
 
 export const Stack = ({
   gap,
   direction,
   withSeparators,
+  stackBelow,
   children,
   ...rest
 }: {
   gap?: keyof typeof spacing;
   direction?: 'vertical' | 'horizontal';
   withSeparators?: boolean;
+  /**
+   * Below this container width (px) a horizontal Stack becomes vertical, and
+   * its separators become the vertical treatment along with it. Requires an
+   * ancestor that establishes the `responsive` container — `<Box container>`.
+   * Without one the query never matches and the Stack stays horizontal.
+   * Ignored when `direction="vertical"`.
+   */
+  stackBelow?: number;
   children: ReactNode[];
   container?: boolean;
 } & HTMLAttributes<HTMLDivElement>) => {
@@ -75,10 +125,9 @@ export const Stack = ({
   const numberOfChildren = Children.count(children);
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={direction === 'horizontal' ? 'row' : 'column'}
-      alignItems={direction === 'horizontal' ? 'center' : 'normal'}
+    <StackBox
+      $direction={direction}
+      $stackBelow={stackBelow}
       gap={spacing[gap]}
       {...rest}
     >
@@ -87,12 +136,12 @@ export const Stack = ({
           <>
             {node}
             {withSeparators && nodeIndex + 1 !== numberOfChildren && (
-              <Separator type={direction} />
+              <Separator $direction={direction} $stackBelow={stackBelow} />
             )}
           </>
         );
       })}
-    </Box>
+    </StackBox>
   );
 };
 

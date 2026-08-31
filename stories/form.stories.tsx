@@ -963,10 +963,11 @@ export const ResponsivePageFormInFlexRow = {
 // `textPrimary`, so a two-column form reads as pairs rather than as two columns of
 // equally weighted text.
 //
-// Both require modes are on the page at once, because the two markers are
-// deliberately NOT treated alike. `*` keeps the primary tone -- it carries an
-// obligation, so it must not end up quieter than the label it qualifies.
-// `(optional)` dims with that label, because it only says the obligation is absent.
+// Both require modes are on the page at once, so the require markers can be judged
+// against the label they sit on: `*` in the upper form, `(optional)` in the lower.
+// Both dim with the label rather than standing out from it, which keeps the whole
+// convention at one tone -- the page form's "* are required fields" legend is
+// already textSecondary.
 //
 // The last row of each form is disabled. It keeps the primary tone: the 0.5 opacity
 // on the label already dims it, and compounding the two costs more contrast than
@@ -1033,4 +1034,76 @@ export const FormGroupLabelTone = {
       ))}
     </Stack>
   ),
+};
+
+// A detail-page shape: a `responsive` page form whose section
+// forces a label width, with labels long enough to actually need it. A grid track
+// satisfies its max before the flexible field track flexes, so with a constant cap
+// the label kept its full width while the field walked down to its 10rem floor and
+// the row stacked while there was still room for both. Drag the frame in and watch
+// the label column give ground with the field instead.
+// `forceLabelWidth` is an arg: 224 is a value in real use, 265 is the case whose
+// stacking threshold used to sit ~70px below the width it actually needs.
+export const ResponsiveLabelSqueeze = {
+  render: ({ forceLabelWidth, requireMode }) => (
+    <div
+      data-testid="squeeze-frame"
+      style={{
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: '60rem',
+        minWidth: '20rem',
+        maxWidth: '100%',
+        border: '1px dashed #666',
+        height: '30rem',
+      }}
+    >
+      <div style={{ display: 'flex', height: '100%' }}>
+        <Form
+          layout={{ kind: 'page', title: 'User' }}
+          requireMode={requireMode}
+          responsive
+          rightActions={<Button variant="primary" label="Save" />}
+        >
+          <FormSection
+            title={{ name: 'Identity', icon: 'Account' }}
+            forceLabelWidth={forceLabelWidth}
+          >
+            <FormGroup
+              direction="horizontal"
+              label="User name"
+              id="sq-name"
+              content={<Input id="sq-name" />}
+              required
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Multi-factor authentication"
+              id="sq-mfa"
+              content={<Input id="sq-mfa" />}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Account creation date"
+              id="sq-created"
+              content={<Input id="sq-created" />}
+            />
+          </FormSection>
+        </Form>
+      </div>
+    </div>
+  ),
+  args: { forceLabelWidth: 224, requireMode: 'partial' },
+  argTypes: {
+    forceLabelWidth: { control: { type: 'number' } },
+  },
+};
+
+// The same shape with a rem cap instead of a px one. A px value computed once at
+// module load cannot follow a root font size that changes with the viewport; a
+// string cap is resolved by the browser, so it tracks it.
+export const ResponsiveLabelSqueezeRemCap = {
+  ...ResponsiveLabelSqueeze,
+  args: { ...ResponsiveLabelSqueeze.args, forceLabelWidth: '15rem' },
+  argTypes: { forceLabelWidth: { control: { type: 'text' } } },
 };
