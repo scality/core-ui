@@ -958,3 +958,47 @@ export const ResponsivePageFormInFlexRow = {
   ),
   args: { requireMode: 'partial', responsive: true },
 };
+
+// Key/value tone: the FormGroup label is `textSecondary` against the value's
+// `textPrimary`, so a two-column form is read as pairs rather than as two columns
+// of equally weighted text. The last row is disabled — it keeps the primary tone,
+// because its 0.5 opacity already dims it and compounding the two costs more
+// contrast than the pairing gains.
+export const FormGroupLabelTone = {
+  render: ({ requireMode }) => (
+    <div style={{ width: '34rem', maxWidth: '100%' }}>
+      <Form layout={{ kind: 'tab' }} requireMode={requireMode} responsive>
+        <FormSection title={{ name: 'Identity', icon: 'Account' }}>
+          <FormGroup
+            direction="horizontal"
+            label="User name"
+            id="lt-name"
+            content={<Input id="lt-name" value="holly.day" />}
+            required
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Description"
+            id="lt-desc"
+            content={<Input id="lt-desc" value="Platform operator" />}
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Contact email"
+            id="lt-email"
+            content={<Input id="lt-email" value="holly.day@example.com" />}
+            labelHelpTooltip="Used for expiry notifications."
+          />
+          <FormGroup
+            direction="horizontal"
+            label="Created on"
+            id="lt-created"
+            content={<Input id="lt-created" value="2026-01-14" />}
+            disabled
+          />
+        </FormSection>
+      </Form>
+    </div>
+  ),
+  args: { requireMode: 'partial' },
+};
