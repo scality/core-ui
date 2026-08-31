@@ -94,6 +94,18 @@ export function SingleSelectableContent<
   onRowSelectedRef.current = onRowSelected;
 
   /**
+   * Whether rows are selectable is *rendered* output -- tabIndex and the hover
+   * affordance -- not something only an event handler needs, so it comes from a
+   * plain value and a memo dependency rather than from the ref above. Today the
+   * ref happens to read fresh either way, because react-table hands react-window
+   * a new `rows` array on every render and the memoized row never gets to bail
+   * out; that is a coincidence of someone else's memoization, not a guarantee
+   * this component makes. Depending on it costs nothing: `onRowSelected` changes
+   * identity every render, this boolean almost never does.
+   */
+  const isSelectable = Boolean(onRowSelected);
+
+  /**
    * RenderRow MUST keep a stable identity across re-renders. It used to be redefined inline on
    * every render, so react-window saw a new component type each time and remounted (not just
    * re-rendered) every row — and therefore every cell — whenever the table re-rendered for any
@@ -104,71 +116,74 @@ export function SingleSelectableContent<
    */
   const RenderRow = useMemo(
     () =>
-      memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
-        const row = data[index];
-        prepareRowRef.current(row);
-        let rowProps = row.getRowProps({
-          /**
-           * Note: We need to pass the style property to the row component.
-           * Otherwise when we scroll down, the next rows are flashing
-           * because they are re-rendered in loop.
-           */
-          style: { ...style },
-        });
+      memo(
+        ({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
+          const row = data[index];
+          prepareRowRef.current(row);
+          let rowProps = row.getRowProps({
+            /**
+             * Note: We need to pass the style property to the row component.
+             * Otherwise when we scroll down, the next rows are flashing
+             * because they are re-rendered in loop.
+             */
+            style: { ...style },
+          });
 
-        rowProps = {
-          ...rowProps,
-          ...{
-            onClick: (event) => {
-              if (shouldIgnoreRowEvent(event)) return;
-              const onRowSelected = onRowSelectedRef.current;
-              if (onRowSelected) return onRowSelected(row);
+          rowProps = {
+            ...rowProps,
+            ...{
+              onClick: (event) => {
+                if (shouldIgnoreRowEvent(event)) return;
+                const onRowSelected = onRowSelectedRef.current;
+                if (onRowSelected) return onRowSelected(row);
+              },
+              tabIndex: isSelectable ? 0 : undefined,
+              onKeyDown: (event) => {
+                // `keydown` bubbles, so without the same guard Enter or Space on a
+                // focused in-cell control selects the row *and* preventDefault()s
+                // the control's own activation.
+                if (shouldIgnoreRowEvent(event)) return;
+                const onRowSelected = onRowSelectedRef.current;
+                if (
+                  onRowSelected &&
+                  (event.key === ' ' ||
+                    event.key === 'Enter' ||
+                    event.key === 'Spacebar')
+                ) {
+                  event.preventDefault();
+                  onRowSelected(row);
+                }
+              },
             },
-            tabIndex: onRowSelectedRef.current ? 0 : undefined,
-            onKeyDown: (event) => {
-              // `keydown` bubbles, so without the same guard Enter or Space on a
-              // focused in-cell control selects the row *and* preventDefault()s
-              // the control's own activation.
-              if (shouldIgnoreRowEvent(event)) return;
-              const onRowSelected = onRowSelectedRef.current;
-              if (
-                onRowSelected &&
-                (event.key === ' ' ||
-                  event.key === 'Enter' ||
-                  event.key === 'Spacebar')
-              ) {
-                event.preventDefault();
-                onRowSelected(row);
-              }
-            },
-          },
-        };
+          };
 
-        return (
-          <TableRow
-            {...rowProps}
-            $isSelected={selectedId === row.id}
-            aria-selected={selectedId === row.id ? 'true' : 'false'}
-            $separationLineVariant={separationLineVariant}
-            $selectable={Boolean(onRowSelectedRef.current)}
-            className="tr"
-          >
-            {row.cells.map((cell) => {
-              let cellProps = cell.getCellProps({
-                style: bodyCellStyle(cell.column.cellStyle),
-                role: 'gridcell',
-              });
+          return (
+            <TableRow
+              {...rowProps}
+              $isSelected={selectedId === row.id}
+              aria-selected={selectedId === row.id ? 'true' : 'false'}
+              $separationLineVariant={separationLineVariant}
+              $selectable={isSelectable}
+              className="tr"
+            >
+              {row.cells.map((cell) => {
+                let cellProps = cell.getCellProps({
+                  style: bodyCellStyle(cell.column.cellStyle),
+                  role: 'gridcell',
+                });
 
-              return (
-                <div {...cellProps} className="td">
-                  {cell.render('Cell')}
-                </div>
-              );
-            })}
-          </TableRow>
-        );
-      }, areEqual),
-    [selectedId, separationLineVariant],
+                return (
+                  <div {...cellProps} className="td">
+                    {cell.render('Cell')}
+                  </div>
+                );
+              })}
+            </TableRow>
+          );
+        },
+        areEqual,
+      ),
+    [selectedId, separationLineVariant, isSelectable],
   );
 
   const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =

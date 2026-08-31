@@ -74,7 +74,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -93,7 +93,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -117,7 +117,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -146,7 +146,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -169,7 +169,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -194,17 +194,13 @@ describe('TableV2', () => {
 
     const { getAllByRole } = render(
       <div>
-        <Table
-          columns={dateColumns}
-          data={dateData}
-          globalFilter=".000"
-        >
+        <Table columns={dateColumns} data={dateData} globalFilter=".000">
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -227,7 +223,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -559,6 +555,47 @@ describe('TableV2 row click vs in-cell controls', () => {
     await userEvent.click(screen.getByText('overlay-Ninette'));
 
     expect(onRowSelected).not.toHaveBeenCalled();
+  });
+});
+
+describe('TableV2 row selectability', () => {
+  const columns: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    { Header: 'Last Name', accessor: 'lastName' },
+  ];
+
+  const renderTable = (onRowSelected?: (row: unknown) => void) => (
+    <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+      <Table.SingleSelectableContent
+        rowHeight="h40"
+        separationLineVariant="backgroundLevel3"
+        onRowSelected={onRowSelected}
+      />
+    </Table>
+  );
+
+  it('stops offering rows to the keyboard once they are no longer selectable', () => {
+    const { rerender, getAllByRole } = render(renderTable(jest.fn()));
+
+    // [0] is the header row.
+    expect(getAllByRole('row')[1]).toHaveAttribute('tabindex', '0');
+
+    // Nothing else about the table changes, which is the point: the row
+    // renderer is memoized, so a value it reads has to be a dependency of that
+    // memo or the rows keep the affordance after it stops being true.
+    rerender(renderTable(undefined));
+
+    expect(getAllByRole('row')[1]).not.toHaveAttribute('tabindex');
+  });
+
+  it('offers rows to the keyboard once they become selectable', () => {
+    const { rerender, getAllByRole } = render(renderTable(undefined));
+
+    expect(getAllByRole('row')[1]).not.toHaveAttribute('tabindex');
+
+    rerender(renderTable(jest.fn()));
+
+    expect(getAllByRole('row')[1]).toHaveAttribute('tabindex', '0');
   });
 });
 
