@@ -154,7 +154,8 @@ export const bodyCellStyle = (cellStyle?: CSSProperties): CSSProperties => ({
  * both activates the button and selects the row — and the selection re-render
  * remounts the cell, closing whatever the button just opened.
  *
- * `label` is included on purpose: clicking a label activates its control.
+ * `label` is here for a label *inside a cell*, wrapping that cell's own control:
+ * clicking it activates the control, so the row must not also react.
  * `[role="button"]` catches div-based triggers, which core-ui has its own share
  * of. The selection checkbox is deliberately NOT excluded here — its cell stops
  * propagation itself, because selecting the row is exactly what it is for.
@@ -170,9 +171,11 @@ const INTERACTIVE_SELECTOR =
  * bound closes a real hole:
  *
  * - **Upwards.** An unbounded `closest()` walks past the row to the document,
- *   so a table rendered inside a `<label>`, an `<a>` or a `[role="button"]` —
- *   a whole table as one big click target is a real consumer pattern — matched
- *   that ancestor for *every* cell and disabled row selection entirely.
+ *   so a single element from the selector *anywhere* above the table — a
+ *   clickable card wrapping it, an enclosing link — matched for every cell and
+ *   disabled row selection across the whole table. The row has no say in what
+ *   it is nested inside, so the bound belongs here rather than in a rule about
+ *   where a table may be placed.
  * - **Downwards.** A React portal escapes the row in the DOM but still bubbles
  *   to it through the React tree, so plain text in a portalled popover (the
  *   `revealDroppedColumns` panel, a Select menu) reached this handler with
