@@ -18,18 +18,26 @@ type IconHelpProps = {
   title?: string;
 };
 
+/**
+ * The icon's footprint. Exported because a caller that has to reserve room for
+ * the icon in its own layout needs the same number: read independently, the two
+ * agree until the day this one changes, and then the reservation is silently
+ * wrong with nothing to catch it.
+ */
+export const HELP_ICON_SIZE = fontSize.base;
+
 const HelpButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: ${fontSize.base};
-  height: ${fontSize.base};
+  width: ${HELP_ICON_SIZE};
+  height: ${HELP_ICON_SIZE};
   background: none;
   border: none;
   padding: 0;
   margin: 0;
   color: inherit;
-  font-size: ${fontSize.base};
+  font-size: ${HELP_ICON_SIZE};
   line-height: 0;
   vertical-align: -0.125em;
   cursor: default;
