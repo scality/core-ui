@@ -134,3 +134,67 @@ export const ConfirmationModal = {
     );
   },
 };
+
+/**
+ * The table in a panel-sized column, which is the shape it actually ships in.
+ *
+ * Drag `frameWidth` down. At **360px** the row's `Remove` button drops its label and
+ * keeps only its icon, the label moving to a tooltip. Without that it is the button
+ * that stops the row shrinking -- it will not go below 88.89px -- and from 357.63px
+ * the row bleeds out of the panel: these panels are `overflow: visible`, so there is
+ * no scrollbar and no clipped edge to give it away, the row is simply outside the
+ * box. The overhang then grows a px per px, reaching 16.63px at 341.
+ *
+ * Keep going and the search box is the next floor, at **301px** -- its own 287px
+ * plus the toolbar's 14px left padding. That one is `SearchInput`'s fixed width and
+ * is not fixable from this component.
+ */
+export const NarrowPanel = {
+  argTypes: {
+    frameWidth: {
+      control: { type: 'range', min: 200, max: 900, step: 10 },
+    },
+  },
+  args: { frameWidth: 383 },
+  render: ({ frameWidth }: { frameWidth: number }) => {
+    const theme = useTheme();
+    return (
+      <Box
+        data-testid="panel-frame"
+        style={{
+          width: frameWidth,
+          height: '100%',
+          backgroundColor: theme.backgroundLevel4,
+          outline: '1px dashed #888',
+        }}
+        p={'1rem'}
+      >
+        <AttachmentProvider>
+          <AttachmentTable
+            entityName={{ plural: 'users', singular: 'user' }}
+            filteredEntities={{
+              status: 'success',
+              data: {
+                number: 1,
+                entities: [
+                  { name: 'jean.dupont@example.com', id: 'a', type: 'USER' },
+                  { name: 'storage-operators-emea', id: 'b', type: 'USER' },
+                ],
+              },
+            }}
+            initialAttachmentOperations={[]}
+            onEntitySearchChange={action('onEntitySearchChange')}
+            searchEntityPlaceholder="Search user by name"
+            initiallyAttachedEntities={[
+              { name: 'jean.dupont@example.com', id: 'a', type: 'USER' },
+              { name: 'storage-operators-emea', id: 'b', type: 'USER' },
+              { name: 'svc-backup', id: 'c', type: 'USER' },
+            ]}
+            initiallyAttachedEntitiesStatus={'success'}
+            onAttachmentsOperationsChanged={() => {}}
+          />
+        </AttachmentProvider>
+      </Box>
+    );
+  },
+};

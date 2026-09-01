@@ -115,6 +115,25 @@ const SearchBoxContainer = styled.div`
   padding: ${spacing.r16};
 `;
 
+/**
+ * `flex-grow: 1` reads as "the search box fills the toolbar". It does not, and it
+ * is worth knowing before someone relies on it: `SearchBoxContainer` is a block, so
+ * on the normal path there is no flex line to grow along and the declaration is
+ * inert. It applies only on the error path, where the input sits in a `Stack` next
+ * to a `Loader`. Left in place rather than moved, because the error path is the one
+ * place it does something and that appearance has not been measured.
+ *
+ * So the box is a fixed **287px** at every width, and this component cannot change
+ * that: `SearchInput` pins `width: max-content` on its own container and does not
+ * forward `fluid` to the `Input` inside it, which carries its own `20.5rem`.
+ * Overriding it from out here means reaching through two components' internals.
+ *
+ * It is the *second* floor this table hits. `SearchBoxContainer` has no minimum of
+ * its own -- it tracks its parent 1:1 -- but its 14px left padding plus the box's
+ * 287px anchors 301px of content, so the row bleeds again below a 301px container.
+ * That is 57px below the button's 357.63px crossover, which is why the button is
+ * the one this change addresses.
+ */
 const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
   flex-grow: 1;
 
@@ -126,9 +145,35 @@ const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
   }
 `;
 
-const AttachmentTableContainer = styled.div`
-  height: 100%;
-`;
+/**
+ * The container width, in px, at or below which the row's `Remove` button drops its
+ * label. Read by `iconOnly` as `@container responsive (max-width: Npx)`, against the
+ * container declared on this component's own wrapper.
+ *
+ * Measured, not chosen. The button is icon + "Remove" + padding and will not go
+ * below **88.89px** at any width -- its `min-width` is `0`, so that is intrinsic
+ * content width and no CSS floor relaxes it. Its column is `flex: 0.5` on a `0`
+ * basis, so as the table narrows the column's share falls until it can no longer
+ * pay for the button; from there the button's right edge simply stops moving while
+ * the panel keeps shrinking around it. It bleeds rather than scrolls or clips:
+ * these panels are `overflow: visible`, so `scrollWidth` never rises and there is
+ * no scrollbar and no clipped edge to notice -- the row is just outside the box.
+ *
+ * The crossover is a **357.63px** container, and past it the overhang grows one px
+ * per px: +0.63 at 357, +16.63 at 341. So the threshold has to sit *above* 357.63,
+ * not below -- 340 was tried first and left that whole band overflowing with the
+ * label still on. 360 clears it with ~2.4px to spare.
+ *
+ * Collapsed, the button is **32.5px**, so this buys back 56.39px of row.
+ *
+ * Below this the next floor is the search box: 287px, unconditional, anchored at
+ * the toolbar's 14px left padding, so the toolbar pins 301px of content and the row
+ * bleeds again below a **301px** container. The element that pokes out first there
+ * is actually this button again -- collapsed, its right edge lands 0.23px past the
+ * search box's -- but the search box is what sets the floor, and it is not fixable
+ * from here; see the note on `StyledSearchInput`.
+ */
+const REMOVE_COLLAPSE_PX = 360;
 
 const CenterredSecondaryText = styled(SecondaryText)`
   display: block;
@@ -488,265 +533,277 @@ export const AttachmentTable = <
   const [searchInputIsFocused, setSearchInputIsFocused] = useState(false);
 
   return (
-    <Table
-      columns={[
-        {
-          Header: 'Name',
-          accessor: 'name',
-          cellStyle: {
-            flex: 1.5,
-            marginRight: '1.5rem',
-          },
-          //@ts-expect-error
-          Cell: ({
-            value,
-            row: { original: entity },
-          }: {
-            value: string;
-            row: { original: AttachableEntity<ENTITY_TYPE, ENTITY> };
-          }) => {
-            const { data: asyncName, status } = useQuery({
-              ...(getNameQuery
-                ? getNameQuery(entity)
-                : { queryKey: ['fakeQuery'], queryFn: () => value }),
-              enabled: !value,
-            });
+    /* `iconOnly={REMOVE_COLLAPSE_PX}` is a `@container responsive` query, so it
+       needs an ancestor declaring that container -- and it has to be this table,
+       not whatever the consumer happens to provide, or the button would collapse
+       on someone else's width. The wrapper exists for that and nothing else; it
+       is `width`/`height: 100%` so `Table`, which is already both, keeps the box
+       it had. */
+    <Box container height="100%" width="100%">
+      <Table
+        columns={[
+          {
+            Header: 'Name',
+            accessor: 'name',
+            cellStyle: {
+              flex: 1.5,
+              marginRight: '1.5rem',
+            },
+            //@ts-expect-error
+            Cell: ({
+              value,
+              row: { original: entity },
+            }: {
+              value: string;
+              row: { original: AttachableEntity<ENTITY_TYPE, ENTITY> };
+            }) => {
+              const { data: asyncName, status } = useQuery({
+                ...(getNameQuery
+                  ? getNameQuery(entity)
+                  : { queryKey: ['fakeQuery'], queryFn: () => value }),
+                enabled: !value,
+              });
 
-            if (value) {
-              return <ConstrainedText text={value} lineClamp={2} />;
-            }
-            if (status === 'error') {
-              return (
-                <>An error occured while loading {entityName.singular} name</>
-              );
-            }
-            if (status === 'loading' || status === 'idle') {
-              return <>Loading...</>;
-            }
-            if (status === 'success') {
-              if (!asyncName) {
-                return <EmptyCell />;
+              if (value) {
+                return <ConstrainedText text={value} lineClamp={2} />;
               }
-              return <ConstrainedText text={asyncName} lineClamp={2} />;
-            }
+              if (status === 'error') {
+                return (
+                  <>An error occured while loading {entityName.singular} name</>
+                );
+              }
+              if (status === 'loading' || status === 'idle') {
+                return <>Loading...</>;
+              }
+              if (status === 'success') {
+                if (!asyncName) {
+                  return <EmptyCell />;
+                }
+                return <ConstrainedText text={asyncName} lineClamp={2} />;
+              }
 
-            return <EmptyCell />;
+              return <EmptyCell />;
+            },
           },
-        },
-        {
-          Header: 'Attachment',
-          accessor: 'isPending',
-          cellStyle: {
-            flex: 0.5,
+          {
+            Header: 'Attachment',
+            accessor: 'isPending',
+            cellStyle: {
+              flex: 0.5,
+            },
+            Cell: ({ value }: { value?: boolean }) => {
+              return value ? <>Pending</> : <>Attached</>;
+            },
           },
-          Cell: ({ value }: { value?: boolean }) => {
-            return value ? <>Pending</> : <>Attached</>;
-          },
-        },
-        {
-          Header: <Box flex={0.5} />,
-          accessor: 'action',
-          cellStyle: {
-            textAlign: 'right',
-            flex: 0.5,
-            marginLeft: 'auto',
-            marginRight: '0.5rem',
-          },
-          Cell: ({
-            row: { original: entity },
-          }: {
-            row: { original: AttachableEntity<ENTITY_TYPE> };
-          }) => (
-            <Button
-              size="inline"
-              onClick={() => {
-                dispatch({
-                  action: AttachmentAction.REMOVE,
-                  entity: {
-                    name: entity.name,
-                    id: entity.id,
-                    type: entity.type,
-                  },
-                });
-              }}
-              icon={<Icon name="Close" />}
-              label="Remove"
-              variant="danger"
-              disabled={!!entity.disableDetach}
-            />
-          ),
-        },
-      ]}
-      data={desiredAttachedEntities.map((entity) => ({
-        ...entity,
-        isPending: entity.isPending || false,
-        action: null,
-      }))}
-      defaultSortingKey="name"
-    >
-      <SearchBoxContainer
-        {...{
-          ref: (element) => {
-            if (element?.firstElementChild) {
-              setSearchWidth(
-                element.firstElementChild.getBoundingClientRect().width -
-                  2 +
-                  'px',
-              );
-            }
-          },
-        }}
-      >
-        {filteredEntities.status === 'error' ? (
-          <Tooltip
-            overlay={
-              <>We failed to load the entities, hence search is disabled</>
-            }
-          >
-            <Stack>
-              <StyledSearchInput
-                autoComplete="off"
-                placeholder={searchEntityPlaceholder}
-                {...getInputProps({
-                  ref: (element) => {
-                    if (element) searchInputRef.current = element;
-                  },
-                })}
-                onFocus={() => {
-                  openMenu();
-                  setSearchInputIsFocused(true);
+          {
+            Header: <Box flex={0.5} />,
+            accessor: 'action',
+            cellStyle: {
+              textAlign: 'right',
+              flex: 0.5,
+              marginLeft: 'auto',
+              marginRight: '0.5rem',
+            },
+            Cell: ({
+              row: { original: entity },
+            }: {
+              row: { original: AttachableEntity<ENTITY_TYPE> };
+            }) => (
+              <Button
+                size="inline"
+                iconOnly={REMOVE_COLLAPSE_PX}
+                onClick={() => {
+                  dispatch({
+                    action: AttachmentAction.REMOVE,
+                    entity: {
+                      name: entity.name,
+                      id: entity.id,
+                      type: entity.type,
+                    },
+                  });
                 }}
-                onBlur={() => {
-                  setSearchInputIsFocused(false);
-                }}
-                disabled={filteredEntities.status === 'error'}
+                icon={<Icon name="Close" />}
+                label="Remove"
+                variant="danger"
+                disabled={!!entity.disableDetach}
               />
-              <Loader />
-            </Stack>
-          </Tooltip>
-        ) : (
-          <StyledSearchInput
-            autoComplete="off"
-            placeholder={searchEntityPlaceholder}
-            {...getInputProps({
-              ref: (element) => {
-                if (element) searchInputRef.current = element;
-              },
-            })}
-            onFocus={() => {
-              openMenu();
-              setSearchInputIsFocused(true);
-            }}
-            onBlur={() => {
-              setSearchInputIsFocused(false);
-            }}
-            $searchInputIsFocused={searchInputIsFocused}
-          />
-        )}
-        <MenuContainer
-          {...getMenuProps()}
-          $width={searchWidth}
-          $isOpen={isOpen}
-          $searchInputIsFocused={searchInputIsFocused}
-        >
-          {isOpen &&
-            filteredEntities.status === 'success' &&
-            filteredEntities.data?.entities.map((item, index) => (
-              <li key={`${item.id}${index}`} {...getItemProps({ item, index })}>
-                <Text>{item.name}</Text>
-              </li>
-            ))}
-          {isOpen && filteredEntities.status === 'loading' && (
-            <li>
-              <Text>Searching...</Text>
-            </li>
-          )}
-          {isOpen && filteredEntities.status === 'error' && (
-            <li>
-              <Text color="statusCritical">
-                An error occured while searching
-              </Text>
-            </li>
-          )}
-          {isOpen &&
-            filteredEntities.status === 'success' &&
-            (filteredEntities.data?.number || 0) >
-              filteredEntities.data?.entities.length && (
-              <li>
-                <Text
-                  isGentleEmphazed={true}
-                  color="textSecondary"
-                  style={{ textAlign: 'right' }}
-                >
-                  There{' '}
-                  {(filteredEntities.data?.number || 0) -
-                    filteredEntities.data?.entities.length ===
-                  1
-                    ? 'is'
-                    : 'are'}{' '}
-                  {(filteredEntities.data?.number || 0) -
-                    filteredEntities.data?.entities.length}{' '}
-                  more{' '}
-                  {(filteredEntities.data?.number || 0) -
-                    filteredEntities.data?.entities.length ===
-                  1
-                    ? entityName.singular
-                    : entityName.plural}{' '}
-                  matching your search. Suggestion: try more specific search
-                  expression.
-                </Text>
-              </li>
-            )}
-          {isOpen &&
-            filteredEntities.status === 'success' &&
-            filteredEntities.data?.entities.length === 0 && (
-              <li>
-                <Text isGentleEmphazed={true} color="textSecondary">
-                  No {entityName.plural} found matching your search.
-                </Text>
-              </li>
-            )}
-        </MenuContainer>
-      </SearchBoxContainer>
-      <Table.SingleSelectableContent
-        rowHeight={rowHeight}
-        separationLineVariant="backgroundLevel2"
+            ),
+          },
+        ]}
+        data={desiredAttachedEntities.map((entity) => ({
+          ...entity,
+          isPending: entity.isPending || false,
+          action: null,
+        }))}
+        defaultSortingKey="name"
       >
-        {(rows) => (
-          <>
-            {initiallyAttachedEntitiesStatus === 'idle' ||
-            initiallyAttachedEntitiesStatus === 'loading' ? (
-              <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
-                <p></p>
-                <Stack>
-                  <Loader />
-                  <Text>Loading {entityName.plural}...</Text>
-                </Stack>
-                <p></p>
-              </Wrap>
-            ) : initiallyAttachedEntitiesStatus === 'error' ? (
-              <Stack
-                style={{
-                  justifyContent: 'center',
-                  height: `${tableRowHeight[rowHeight]}rem`,
-                }}
-              >
-                <Icon name="Exclamation-circle" color="statusWarning" />
-                <Text color="textSecondary">
-                  Failed to load attached {entityName.plural}.
-                </Text>
+        <SearchBoxContainer
+          {...{
+            ref: (element) => {
+              if (element?.firstElementChild) {
+                setSearchWidth(
+                  element.firstElementChild.getBoundingClientRect().width -
+                    2 +
+                    'px',
+                );
+              }
+            },
+          }}
+        >
+          {filteredEntities.status === 'error' ? (
+            <Tooltip
+              overlay={
+                <>We failed to load the entities, hence search is disabled</>
+              }
+            >
+              <Stack>
+                <StyledSearchInput
+                  autoComplete="off"
+                  placeholder={searchEntityPlaceholder}
+                  {...getInputProps({
+                    ref: (element) => {
+                      if (element) searchInputRef.current = element;
+                    },
+                  })}
+                  onFocus={() => {
+                    openMenu();
+                    setSearchInputIsFocused(true);
+                  }}
+                  onBlur={() => {
+                    setSearchInputIsFocused(false);
+                  }}
+                  disabled={filteredEntities.status === 'error'}
+                />
+                <Loader />
               </Stack>
-            ) : (
-              desiredAttachedEntities.length === 0 && (
-                <CenterredSecondaryText>
-                  No {entityName.plural} attached
-                </CenterredSecondaryText>
-              )
+            </Tooltip>
+          ) : (
+            <StyledSearchInput
+              autoComplete="off"
+              placeholder={searchEntityPlaceholder}
+              {...getInputProps({
+                ref: (element) => {
+                  if (element) searchInputRef.current = element;
+                },
+              })}
+              onFocus={() => {
+                openMenu();
+                setSearchInputIsFocused(true);
+              }}
+              onBlur={() => {
+                setSearchInputIsFocused(false);
+              }}
+              $searchInputIsFocused={searchInputIsFocused}
+            />
+          )}
+          <MenuContainer
+            {...getMenuProps()}
+            $width={searchWidth}
+            $isOpen={isOpen}
+            $searchInputIsFocused={searchInputIsFocused}
+          >
+            {isOpen &&
+              filteredEntities.status === 'success' &&
+              filteredEntities.data?.entities.map((item, index) => (
+                <li
+                  key={`${item.id}${index}`}
+                  {...getItemProps({ item, index })}
+                >
+                  <Text>{item.name}</Text>
+                </li>
+              ))}
+            {isOpen && filteredEntities.status === 'loading' && (
+              <li>
+                <Text>Searching...</Text>
+              </li>
             )}
-            {desiredAttachedEntities.length > 0 && rows}
-          </>
-        )}
-      </Table.SingleSelectableContent>
-    </Table>
+            {isOpen && filteredEntities.status === 'error' && (
+              <li>
+                <Text color="statusCritical">
+                  An error occured while searching
+                </Text>
+              </li>
+            )}
+            {isOpen &&
+              filteredEntities.status === 'success' &&
+              (filteredEntities.data?.number || 0) >
+                filteredEntities.data?.entities.length && (
+                <li>
+                  <Text
+                    isGentleEmphazed={true}
+                    color="textSecondary"
+                    style={{ textAlign: 'right' }}
+                  >
+                    There{' '}
+                    {(filteredEntities.data?.number || 0) -
+                      filteredEntities.data?.entities.length ===
+                    1
+                      ? 'is'
+                      : 'are'}{' '}
+                    {(filteredEntities.data?.number || 0) -
+                      filteredEntities.data?.entities.length}{' '}
+                    more{' '}
+                    {(filteredEntities.data?.number || 0) -
+                      filteredEntities.data?.entities.length ===
+                    1
+                      ? entityName.singular
+                      : entityName.plural}{' '}
+                    matching your search. Suggestion: try more specific search
+                    expression.
+                  </Text>
+                </li>
+              )}
+            {isOpen &&
+              filteredEntities.status === 'success' &&
+              filteredEntities.data?.entities.length === 0 && (
+                <li>
+                  <Text isGentleEmphazed={true} color="textSecondary">
+                    No {entityName.plural} found matching your search.
+                  </Text>
+                </li>
+              )}
+          </MenuContainer>
+        </SearchBoxContainer>
+        <Table.SingleSelectableContent
+          rowHeight={rowHeight}
+          separationLineVariant="backgroundLevel2"
+        >
+          {(rows) => (
+            <>
+              {initiallyAttachedEntitiesStatus === 'idle' ||
+              initiallyAttachedEntitiesStatus === 'loading' ? (
+                <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
+                  <p></p>
+                  <Stack>
+                    <Loader />
+                    <Text>Loading {entityName.plural}...</Text>
+                  </Stack>
+                  <p></p>
+                </Wrap>
+              ) : initiallyAttachedEntitiesStatus === 'error' ? (
+                <Stack
+                  style={{
+                    justifyContent: 'center',
+                    height: `${tableRowHeight[rowHeight]}rem`,
+                  }}
+                >
+                  <Icon name="Exclamation-circle" color="statusWarning" />
+                  <Text color="textSecondary">
+                    Failed to load attached {entityName.plural}.
+                  </Text>
+                </Stack>
+              ) : (
+                desiredAttachedEntities.length === 0 && (
+                  <CenterredSecondaryText>
+                    No {entityName.plural} attached
+                  </CenterredSecondaryText>
+                )
+              )}
+              {desiredAttachedEntities.length > 0 && rows}
+            </>
+          )}
+        </Table.SingleSelectableContent>
+      </Table>
+    </Box>
   );
 };
