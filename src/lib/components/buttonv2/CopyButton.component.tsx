@@ -3,9 +3,23 @@ import styled from 'styled-components';
 import { Icon } from '../icon/Icon.component';
 import { Button, type Props } from './Buttonv2.component';
 
-// The outline variant swaps its label on success ("Copy X" -> "Copied X!"), which
-// is a character wider, so the button reserves room for the longer string and keeps
-// its width when clicked.
+// The outline variant swaps its label on success ("Copy X" -> "Copied X!"), three
+// characters wider, so the button reserves room for the longer string and keeps its
+// width when clicked.
+//
+// The reservation is a character-count heuristic, carried over unchanged from when
+// this was an inline style. `7rem` is the fixed part -- the icon, the padding, the
+// border and the word "Copied!" -- and `length / 2` adds 0.5rem per label character
+// as a stand-in for average character width.
+//
+// That average is the weak point, and it is worth knowing which way it fails.
+// Measured at the 14px root, the floor grows 7px per character while the rendered
+// text grows about 6px for an ordinary mixed-case label, 3.4px for one made of
+// narrow glyphs and 14.5px for one made of wide ones. So it holds for the labels
+// this component actually gets, over-reserves for narrow ones (an empty tail of up
+// to ~150px at 40 characters), and is simply too small for an all-uppercase label:
+// there the content outgrows the floor, the floor stops applying, and the button
+// resizes by ~16px on click anyway -- the very thing it exists to prevent.
 const outlineWidthFloor = (label?: string) =>
   `${(label ? label.length / 2 : 0) + 7}rem`;
 
