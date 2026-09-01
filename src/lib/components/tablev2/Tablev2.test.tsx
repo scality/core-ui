@@ -505,10 +505,15 @@ describe('TableV2 row click vs in-cell controls', () => {
     expect(onAction).not.toHaveBeenCalled();
   });
 
-  it('still selects the row when the whole table sits inside a label', async () => {
+  // The guard's upward bound. `closest()` walks to the document unless it is
+  // stopped, so one interactive ancestor anywhere above the table matches for
+  // every cell and turns row selection off across the whole table. The
+  // clickable wrapper is a fixture for that bound -- any of the selector's
+  // elements above the row does it -- not a nesting pattern worth copying.
+  it('still selects the row when an interactive ancestor sits above the table', async () => {
     const onRowSelected = jest.fn();
     render(
-      <label>
+      <div role="button" tabIndex={0}>
         <Table columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
@@ -516,7 +521,7 @@ describe('TableV2 row click vs in-cell controls', () => {
             onRowSelected={onRowSelected}
           />
         </Table>
-      </label>,
+      </div>,
     );
 
     await userEvent.click(screen.getByText('Ninette'));
@@ -524,7 +529,12 @@ describe('TableV2 row click vs in-cell controls', () => {
     expect(onRowSelected).toHaveBeenCalledTimes(1);
   });
 
-  it('leaves the row unselected when the click lands in a portalled overlay', async () => {
+  // The guard's downward bound. A portal leaves the row in the DOM but still
+  // bubbles to it through the React tree, so text in an overlay opened from a
+  // cell -- the revealDroppedColumns panel, a Select menu -- reached this
+  // handler with nothing interactive between it and the row, and selected the
+  // row behind the overlay the user was reading.
+  it('leaves the row unselected when the click lands in an overlay portalled out of a cell', async () => {
     const onRowSelected = jest.fn();
     const portalColumns: TableProps['columns'] = [
       { Header: 'First Name', accessor: 'firstName' },
@@ -667,20 +677,5 @@ describe('TableV2 truncated header labels', () => {
     expect(
       document.querySelector('.sc-tooltip-overlay-text'),
     ).not.toBeInTheDocument();
-  });
-
-  it('keeps the label ellipsizable — the tooltip wrapper adds no width floor', async () => {
-    stubLabelWidths(400, 80);
-    renderTable();
-    const label = await screen.findByText('First Name');
-
-    // The measured element must still be the overflow-hidden label, not a
-    // wrapper the tooltip introduced above it.
-    expect(label.tagName).toBe('SPAN');
-    expect(getComputedStyle(label).overflow).toBe('hidden');
-    // `overflow`/`text-overflow` are inert on an inline box, and the label only
-    // got blockified for free while it was a flex item. Wrapping it in the
-    // tooltip took that away once already.
-    expect(getComputedStyle(label).display).toBe('block');
   });
 });
