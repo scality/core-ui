@@ -75,6 +75,12 @@ const BoxSlot = styled.span<{ $hasLabel: boolean }>`
 // context and the reserve below lands on the last of them. A `span` rather than a
 // `div` because everything here is inside a `<label>`, whose content model is
 // phrasing content.
+//
+// `min-width: 0` is load-bearing, not habit. `overflow-wrap: break-word` below does
+// not lower this box's min-content width -- measured, an unbreakable 40-character
+// label reports the same 284.63px min-content with it as without -- so as a flex
+// item defaulting to `min-width: auto` it would refuse to shrink past that and
+// overflow instead of wrapping. Zeroing the floor is what lets the break happen.
 const LabelBlock = styled.span`
   display: block;
   min-width: 0;
@@ -84,6 +90,27 @@ const LabelBlock = styled.span`
  * `overflow-wrap` because a label is not always prose: an event name such as
  * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break, so without
  * it the label does not wrap, it overflows.
+ *
+ * `break-word` is a last resort and defers to every real break opportunity, which
+ * is why it is the right one here rather than something more aggressive. Measured
+ * in Chrome at a 160px frame:
+ *
+ * - `multipart-upload-completed-notification` breaks after the hyphen at index 17
+ *   with `break-word` -- the same place it breaks with no `overflow-wrap` at all.
+ *   Hyphens are a break opportunity in their own right; the word is only split
+ *   when no opportunity leaves it able to fit.
+ * - `.`, `:` and `/` are *not* break opportunities. Left alone, `aws.s3.object.
+ *   created.completeMultipartUpload` runs 309px wide in a 160px box and overflows.
+ *   `break-word` then splits it mid-token, not at the dot -- so the separators buy
+ *   nothing, and getting a break at them would mean injecting `<wbr>` or U+200B
+ *   into the label, which lands in the accessible name and in anything copied out.
+ * - `word-break: break-all` would fill each line greedily and split the hyphenated
+ *   label at index 22 instead of 17, ignoring the hyphen. Denser, and worse to read.
+ * - `overflow-wrap: anywhere` breaks identically to `break-word` here, but it also
+ *   drops the min-content width to a single character (12.09px against 284.63px).
+ *   Anything sizing a label track to its content -- a form's label column -- would
+ *   collapse to one character wide. The floor is zeroed on `LabelBlock` instead,
+ *   where it affects this component only.
  */
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   overflow-wrap: break-word;
