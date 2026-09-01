@@ -115,6 +115,14 @@ export const SmallerEmphaseTextStyle = styled(SmallerTextStyle) <{
   font-weight: 700;
   color: ${(props) => props.theme[`${props.statusColor}`]};
 `;
+/**
+ * The `compact` line height. Exported because a caller that has to align
+ * something else against a compact line box -- a control that must sit on the
+ * label's *first* line rather than in the middle of a wrapped one -- needs this
+ * exact number, and a restated copy drifts silently the day this one changes.
+ */
+export const COMPACT_LINE_HEIGHT = 1.2;
+
 const ChartTitleTextStyle = styled(BasicTextStyle)`
   letter-spacing: ${spacing.r2};
 `;
@@ -224,7 +232,7 @@ export const Text = styled.span.withConfig({
   ${(props) =>
     props.variant === 'ChartTitle' && `letter-spacing: ${spacing.r2};`}
 
-  ${(props) => props.compact && `line-height: 1.2;`}
+  ${(props) => props.compact && `line-height: ${COMPACT_LINE_HEIGHT};`}
 `;
 export const HelperText = ({ children, color, ...rest }: Props) => {
   return (

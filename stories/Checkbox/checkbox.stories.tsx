@@ -26,6 +26,11 @@ const meta: Meta<Props> = {
         'Function to be called when the checkbox is clicked, optional',
     },
     label: { control: 'text', description: 'Label of the checkbox, optional' },
+    labelHelpTooltip: {
+      control: 'text',
+      description:
+        'Help text for a `?` icon at the end of the label, optional. Ignored without a `label`.',
+    },
     checked: {
       control: 'boolean',
       description: 'Control if the checkbox is checked, optional',
@@ -209,4 +214,62 @@ export const IndeterminateUseCase = {
       </Box>
     );
   },
+};
+
+/**
+ * The three things a label does once it stops fitting on one line: it wraps, it
+ * keeps its help icon on its last line, and — with no space to break at — it
+ * breaks inside the word rather than overflowing.
+ *
+ * Drag `frameWidth` down to about 200px to see all three at once. The box stays
+ * on each label's *first* line; it used to float to the vertical middle of a
+ * wrapped one, pointing at the gap between the lines.
+ *
+ * This story is also where the accessible name is checked. The help affordance is
+ * a `<button>` inside the `<label>`, and a button descendant contributes its own
+ * name to the name the label gives the control, so the box was announced as
+ * "Short label More information". The box is now named after the label text
+ * alone. jsdom does not reproduce the pollution, so this cannot be a unit test --
+ * read the names off the browser's accessibility tree here.
+ */
+export const WrappedLabel: StoryObj<{ frameWidth: number }> = {
+  argTypes: {
+    frameWidth: {
+      control: { type: 'range', min: 140, max: 600, step: 10 },
+      description: 'Width of the frame the checkboxes have to fit in.',
+    },
+  },
+  args: { frameWidth: 260 },
+  render: ({ frameWidth }) => (
+    <div
+      data-testid="wrapped-label-frame"
+      style={{
+        width: frameWidth,
+        border: '1px dashed #888',
+        padding: '0.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+      }}
+    >
+      <Checkbox
+        label="I understand the consequences of activating TLS Verification"
+        onChange={() => {}}
+      />
+      <Checkbox
+        label="Delete objects after successful replication when checked"
+        labelHelpTooltip="Objects are removed from the source only once the destination confirms the write."
+        onChange={() => {}}
+      />
+      <Checkbox
+        label="s3:ObjectCreated:CompleteMultipartUpload"
+        onChange={() => {}}
+      />
+      <Checkbox
+        label="Short label"
+        labelHelpTooltip="A one-line label keeps its icon on the same line, as before."
+        onChange={() => {}}
+      />
+    </div>
+  ),
 };
