@@ -68,11 +68,9 @@ type Entry = {
   health: string;
 };
 
-// The default columns, and the reference for how a column declares its layout.
-// All three alignments are here on purpose -- text reads left, a number right, a
-// status centred -- and the two right-hand ones are also the sortable headers that
-// are not left-aligned, where an end-aligned and a centred label have to keep
-// their track.
+// The default columns, and the reference for how a column declares its layout. All
+// three alignments on purpose: the right and centred ones are also the sortable
+// headers where a non-left-aligned label has to keep its track.
 const columns: Column<Entry>[] = [
   {
     Header: 'First Name',
@@ -126,9 +124,8 @@ const columns: Column<Entry>[] = [
     // No values to order, so no caret.
     disableSortBy: true,
     // A fixed track, not a grow factor: the button is `white-space: nowrap` and
-    // bleeds into the next column as soon as a grow share drops under its own
-    // width. 8.5rem is 119px against a measured 113.84px button, so ~5px of slack
-    // for a font that renders wider; it overflows below 8.13rem.
+    // bleeds into the next column once a grow share drops under its own width.
+    // 8.5rem is 119px against a measured 113.84px button, ~5px of slack.
     cellStyle: {
       width: '8.5rem',
       flex: 'none',
@@ -738,10 +735,9 @@ export const TableWithViewAction = {
       {
         Header: '',
         id: 'actions',
-        // Same shape as the default columns' action column, and for the same
-        // reason: on `flex: 1` the button hung 7px past its own column, and the
-        // `display`/`justifyContent` it used to carry were both dead -- the cell's
-        // own flex centring is applied after `cellStyle` and takes them.
+        // Same shape as the default columns' action column: on `flex: 1` the button
+        // hung past its own column, and `display`/`justifyContent` here are dead --
+        // the cell's own flex centring is applied after `cellStyle`.
         cellStyle: {
           width: '8.5rem',
           flex: 'none',
