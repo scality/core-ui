@@ -116,23 +116,16 @@ const SearchBoxContainer = styled.div`
 `;
 
 /**
- * `flex-grow: 1` reads as "the search box fills the toolbar". It does not, and it
- * is worth knowing before someone relies on it: `SearchBoxContainer` is a block, so
- * on the normal path there is no flex line to grow along and the declaration is
- * inert. It applies only on the error path, where the input sits in a `Stack` next
- * to a `Loader`. Left in place rather than moved, because the error path is the one
- * place it does something and that appearance has not been measured.
+ * `flex-grow: 1` reads as "the search box fills the toolbar". It does not:
+ * `SearchBoxContainer` is a block, so on the normal path there is no flex line to
+ * grow along and the declaration is inert. It applies only on the error path, where
+ * the input sits in a `Stack` beside a `Loader`, so it is left in place.
  *
- * So the box is a fixed **287px** at every width, and this component cannot change
- * that: `SearchInput` pins `width: max-content` on its own container and does not
- * forward `fluid` to the `Input` inside it, which carries its own `20.5rem`.
- * Overriding it from out here means reaching through two components' internals.
- *
- * It is the *second* floor this table hits. `SearchBoxContainer` has no minimum of
- * its own -- it tracks its parent 1:1 -- but its 14px left padding plus the box's
- * 287px anchors 301px of content, so the row bleeds again below a 301px container.
- * That is 57px below the button's 357.63px crossover, which is why the button is
- * the one this change addresses.
+ * The box is therefore a fixed 287px at every width, and this component cannot
+ * change that: `SearchInput` pins `width: max-content` on its own container and does
+ * not forward `fluid` to the `Input` inside it. That plus the toolbar's 14px left
+ * padding is this table's *second* floor, at a 301px container -- 57px below the
+ * button's crossover, which is why the button is what this change addresses.
  */
 const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
   flex-grow: 1;
@@ -147,31 +140,19 @@ const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
 
 /**
  * The container width, in px, at or below which the row's `Remove` button drops its
- * label. Read by `iconOnly` as `@container responsive (max-width: Npx)`, against the
- * container declared on this component's own wrapper.
+ * label. Read by `iconOnly` as `@container responsive (max-width: Npx)`.
  *
- * Measured, not chosen. The button is icon + "Remove" + padding and will not go
- * below **88.89px** at any width -- its `min-width` is `0`, so that is intrinsic
- * content width and no CSS floor relaxes it. Its column is `flex: 0.5` on a `0`
- * basis, so as the table narrows the column's share falls until it can no longer
- * pay for the button; from there the button's right edge simply stops moving while
- * the panel keeps shrinking around it. It bleeds rather than scrolls or clips:
- * these panels are `overflow: visible`, so `scrollWidth` never rises and there is
- * no scrollbar and no clipped edge to notice -- the row is just outside the box.
+ * Measured, not chosen. The button will not go below its intrinsic 88.89px, and its
+ * column is `flex: 0.5` on a `0` basis, so once the column's share stops paying for
+ * the button its right edge stays put while the panel shrinks around it. It bleeds
+ * rather than clips -- these panels are `overflow: visible`, so `scrollWidth` never
+ * rises and there is no scrollbar or clipped edge to notice.
  *
- * The crossover is a **357.63px** container, and past it the overhang grows one px
- * per px: +0.63 at 357, +16.63 at 341. So the threshold has to sit *above* 357.63,
- * not below -- 340 was tried first and left that whole band overflowing with the
- * label still on. 360 clears it with ~2.4px to spare.
- *
- * Collapsed, the button is **32.5px**, so this buys back 56.39px of row.
- *
- * Below this the next floor is the search box: 287px, unconditional, anchored at
- * the toolbar's 14px left padding, so the toolbar pins 301px of content and the row
- * bleeds again below a **301px** container. The element that pokes out first there
- * is actually this button again -- collapsed, its right edge lands 0.23px past the
- * search box's -- but the search box is what sets the floor, and it is not fixable
- * from here; see the note on `StyledSearchInput`.
+ * The crossover is a **357.63px** container, so the threshold has to sit *above*
+ * that, not below: 340 was tried first and left the whole 357-to-341 band
+ * overflowing with the label still on. 360 clears it with ~2.4px to spare, and buys
+ * back 56.39px of row. The next floor below is the search box's, at 301px -- see
+ * the note on `StyledSearchInput`.
  */
 const REMOVE_COLLAPSE_PX = 360;
 
