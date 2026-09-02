@@ -22,11 +22,9 @@ describe('Checkbox', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  // The label's DOM shape carries the help icon's reserved room, so it is
-  // layout-bearing and easy to break silently. jsdom has no layout, so the
-  // geometry is proven by the WrappedLabel story -- what is worth asserting here
-  // is that reserving that room did not push the affordance out of the label it
-  // annotates.
+  // jsdom has no layout, so the geometry is proven by the WrappedLabel story.
+  // What is worth asserting here is that reserving the icon's room did not push
+  // the affordance out of the label it annotates.
   it('keeps the help affordance inside the label it annotates', () => {
     render(
       <Checkbox
@@ -41,15 +39,11 @@ describe('Checkbox', () => {
     ).toContainElement(help);
   });
 
-  // There is deliberately no test here for the box being named after its label
-  // rather than after the help affordance, even though that is what the
-  // `aria-labelledby` in the component is for. jsdom's name computation stops
-  // short of the nested help button, so it reports the clean name whether the
-  // wiring is there or not -- checked by removing the `aria-labelledby`, and
-  // again by moving its target to the wrapper that holds the icon: every test
-  // here stays green through both. A test that passes with the fix removed is
-  // not a guard. Chrome's accessibility tree on the WrappedLabel story is the
-  // evidence instead.
+  // Deliberately no test for the box being named after its label rather than
+  // after the help affordance: jsdom's name computation stops short of the nested
+  // button, so it reports the clean name whether the `aria-labelledby` is wired or
+  // not. A test that passes with the fix removed is not a guard -- the WrappedLabel
+  // story is the evidence.
 
   it('renders no help affordance without a label to annotate', () => {
     render(<Checkbox labelHelpTooltip="Nothing to attach this to." />);

@@ -32,33 +32,23 @@ const CheckboxInput = styled.input`
 	transform: scale(1.5);`;
 
 /**
- * The box and its label, side by side.
- *
- * Typography is declared here rather than left to `Text` alone so `BoxSlot` can
- * read the line box in `em` and stay in step with it: `Text` renders at this same
- * font size and, with `compact`, this same line height.
+ * The box and its label, side by side. Typography is declared here so `BoxSlot`
+ * can read the line box in `em` and stay in step with it.
  */
 const CheckboxRow = styled.span<{ $hasLabel: boolean }>`
   display: flex;
   gap: ${spacing.r8};
   font-size: 1rem;
   line-height: ${COMPACT_LINE_HEIGHT};
-  /* A wrapped label has to hang under its own first line. Centring puts the box
-     in the gutter between two lines, pointing at neither -- invisible until a
-     label wraps, which is why it survived this long. */
+  /* A wrapped label hangs under its own first line; centring would put the box
+     in the gutter between two lines. */
   align-items: ${({ $hasLabel }) => ($hasLabel ? 'flex-start' : 'center')};
 `;
 
 /**
- * Holds the box on the label's first line.
- *
- * The box is shorter than a line of text, so `align-items: flex-start` alone would
- * hang it off the top of that line. A slot one line box tall, centring its own
- * content, puts it on the line's centre instead -- neither side has to know how
- * tall the other is.
- *
- * Sized only when there is a label: a bare `Checkbox` -- every table's row
- * selection, via `useCheckbox` -- keeps exactly the geometry it had.
+ * Holds the box on the label's first line: a slot one line box tall centring its
+ * own content, so neither side has to know how tall the other is. Sized only when
+ * there is a label, so a bare `Checkbox` keeps the geometry it had.
  */
 const BoxSlot = styled.span<{ $hasLabel: boolean }>`
   display: flex;
@@ -72,15 +62,10 @@ const BoxSlot = styled.span<{ $hasLabel: boolean }>`
 `;
 
 // A block, so the label's lines and its help icon share one inline formatting
-// context and the reserve below lands on the last of them. A `span` rather than a
-// `div` because everything here is inside a `<label>`, whose content model is
-// phrasing content.
-//
-// `min-width: 0` is load-bearing, not habit. `overflow-wrap: break-word` below does
-// not lower this box's min-content width -- measured, an unbreakable 40-character
-// label reports the same 284.63px min-content with it as without -- so as a flex
-// item defaulting to `min-width: auto` it would refuse to shrink past that and
-// overflow instead of wrapping. Zeroing the floor is what lets the break happen.
+// context and the reserve lands on the last of them. A `span`, because this is
+// inside a `<label>`. `min-width: 0` is load-bearing: `break-word` below does not
+// lower the min-content width, so without it this flex item refuses to shrink and
+// overflows instead of wrapping.
 const LabelBlock = styled.span`
   display: block;
   min-width: 0;
@@ -88,29 +73,10 @@ const LabelBlock = styled.span`
 
 /**
  * `overflow-wrap` because a label is not always prose: an event name such as
- * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break, so without
- * it the label does not wrap, it overflows.
- *
- * `break-word` is a last resort and defers to every real break opportunity, which
- * is why it is the right one here rather than something more aggressive. Measured
- * in Chrome at a 160px frame:
- *
- * - `multipart-upload-completed-notification` breaks after the hyphen at index 17
- *   with `break-word` -- the same place it breaks with no `overflow-wrap` at all.
- *   Hyphens are a break opportunity in their own right; the word is only split
- *   when no opportunity leaves it able to fit.
- * - `.`, `:` and `/` are *not* break opportunities. Left alone, `aws.s3.object.
- *   created.completeMultipartUpload` runs 309px wide in a 160px box and overflows.
- *   `break-word` then splits it mid-token, not at the dot -- so the separators buy
- *   nothing, and getting a break at them would mean injecting `<wbr>` or U+200B
- *   into the label, which lands in the accessible name and in anything copied out.
- * - `word-break: break-all` would fill each line greedily and split the hyphenated
- *   label at index 22 instead of 17, ignoring the hyphen. Denser, and worse to read.
- * - `overflow-wrap: anywhere` breaks identically to `break-word` here, but it also
- *   drops the min-content width to a single character (12.09px against 284.63px).
- *   Anything sizing a label track to its content -- a form's label column -- would
- *   collapse to one character wide. The floor is zeroed on `LabelBlock` instead,
- *   where it affects this component only.
+ * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break, so without it
+ * the label overflows instead of wrapping. `break-word` rather than `anywhere`:
+ * both break the same way here, but `anywhere` also drops the min-content width to
+ * one character, collapsing any label column sized to its content.
  */
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   overflow-wrap: break-word;
@@ -126,13 +92,7 @@ export type Props = {
   label?: string;
   /**
    * Help text for a `?` icon at the end of the label, mirroring `FormGroup`'s prop
-   * of the same name. Ignored without a `label` -- it annotates the label, and a
-   * bare box has nothing for it to annotate.
-   *
-   * `label` stays a `string` on purpose. Widening it to `ReactNode` is the wider
-   * contract, not the safer one: it admits block elements that break the row, and
-   * interactive elements inside what is a `<label>`, and it makes the accessible
-   * name unpredictable.
+   * of the same name. Ignored without a `label`.
    */
   labelHelpTooltip?: ReactNode;
   value?: string;
@@ -147,15 +107,10 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const hasLabel = !!label;
-    // The help affordance is a `<button>` inside the `<label>`, and a button
-    // descendant contributes its own accessible name to the name the label gives
-    // the control: measured in Chrome, the box was called
-    // "Short label More information". Naming the box after the label text alone
-    // keeps the icon reachable while leaving the box's name the label.
-    // jsdom does not reproduce this -- its name computation stops short of the
-    // nested button -- so a unit test cannot guard it; the story is the evidence.
-    // Skipped when the caller names the box itself, since `aria-labelledby`
-    // outranks an `aria-label` they passed on purpose.
+    // A `<button>` descendant of the `<label>` contributes its own name to the
+    // name the label gives the control, so the box was called "Short label More
+    // information". Pointing at the label text alone fixes that. Skipped when the
+    // caller names the box itself. jsdom cannot reproduce it -- see the story.
     const labelTextId = useId();
     const callerNamesIt =
       rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;

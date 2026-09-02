@@ -218,19 +218,13 @@ export const IndeterminateUseCase = {
 
 /**
  * The three things a label does once it stops fitting on one line: it wraps, it
- * keeps its help icon on its last line, and — with no space to break at — it
- * breaks inside the word rather than overflowing.
+ * keeps its help icon on its last line, and — with nowhere to break — it breaks
+ * inside the word rather than overflowing. Drag `frameWidth` down to about 200px
+ * to see all three; the box stays on each label's *first* line.
  *
- * Drag `frameWidth` down to about 200px to see all three at once. The box stays
- * on each label's *first* line; it used to float to the vertical middle of a
- * wrapped one, pointing at the gap between the lines.
- *
- * This story is also where the accessible name is checked. The help affordance is
- * a `<button>` inside the `<label>`, and a button descendant contributes its own
- * name to the name the label gives the control, so the box was announced as
- * "Short label More information". The box is now named after the label text
- * alone. jsdom does not reproduce the pollution, so this cannot be a unit test --
- * read the names off the browser's accessibility tree here.
+ * Also where the accessible name is checked, since jsdom cannot reproduce it: the
+ * box used to be announced as "Short label More information", the help button's
+ * name folded into the label's. Read the names off the accessibility tree here.
  */
 export const WrappedLabel: StoryObj<{ frameWidth: number }> = {
   argTypes: {
