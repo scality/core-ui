@@ -6,25 +6,19 @@ import { Button, type Props } from './Buttonv2.component';
 // The outline variant swaps its label on success ("Copy X" -> "Copied X!"), so the
 // button reserves room for the longer string and keeps its width when clicked.
 //
-// The reservation is a character-count heuristic, carried over unchanged from when
-// this was an inline style: `7rem` is the fixed part -- icon, padding, border and
-// the word "Copied!" -- and `length / 2` adds 0.5rem per label character as a
-// stand-in for average character width. That average is the weak point. Measured at
-// the 14px root the floor grows 7px per character against ~6px of real text, so it
-// over-reserves for a narrow label and is too small for an all-uppercase one, where
-// the content outgrows the floor and the button resizes on click anyway.
+// Character-count heuristic, inherited unchanged: `7rem` for the fixed part (icon,
+// padding, border, "Copied!") plus 0.5rem per label character as an average width.
+// The average under-reserves for an all-uppercase label, which still resizes.
 const outlineWidthFloor = (label?: string) =>
   `${(label ? label.length / 2 : 0) + 7}rem`;
 
 /**
  * A `Button` carrying the outline variant's width floor.
  *
- * The floor is a stylesheet rule rather than an inline `style` because `iconOnly`
- * hides the label through a `@container` query and an inline style outranks every
- * stylesheet rule — so an inline floor held a collapsed button at its full labelled
- * width with nothing in it. The breakpoint is read from `iconOnly` itself rather
- * than passed in beside it, so the floor and the label cannot answer to different
- * widths.
+ * A stylesheet rule, not an inline `style`: `iconOnly` hides the label via a
+ * `@container` query, which an inline style outranks -- so an inline floor held a
+ * collapsed button at its full labelled width. The breakpoint is read from
+ * `iconOnly` itself so the floor and the label cannot disagree.
  */
 const FlooredButton = styled(Button)<{ $floor?: string }>`
   min-width: ${({ $floor }) => $floor ?? 'auto'};
