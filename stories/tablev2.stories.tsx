@@ -740,9 +740,6 @@ export const TableWithViewAction = {
           close={() => setSelectedEntry(null)}
           title={`View Entry details`}
           role="dialog"
-          isOpen={selectedEntry !== null}
-          close={() => setSelectedEntry(null)}
-          title={`View Entry details`}
           footer={
             <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
               <Button
