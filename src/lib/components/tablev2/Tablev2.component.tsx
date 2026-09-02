@@ -203,11 +203,9 @@ const DefaultRenderer = ({ value }) => {
           ? 2
           : 3;
     /**
-     * No margin of its own. This used to be wrapped in a `Box mr={4}` -- 8px on
-     * one side only -- which offset every string value from where its header
-     * label sat: 4px for a centred column, the full 8px for an end-aligned one.
-     * Column separation is the row's own `gap`, which both rows share, so it
-     * cannot pull them out of agreement the way a body-only margin does.
+     * No margin of its own. A `Box mr={4}` here offset every string value from its
+     * header label, by 4px centred and the full 8px end-aligned. Column separation
+     * is the row's `gap`, which both rows share and so cannot disagree.
      */
     return <ConstrainedText text={value} lineClamp={lineClamp} />;
   }

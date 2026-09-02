@@ -94,11 +94,10 @@ export function SingleSelectableContent<
   onRowSelectedRef.current = onRowSelected;
 
   /**
-   * Whether rows are selectable is *rendered* output -- tabIndex and the hover
-   * affordance -- not something only a handler reads, so it is a plain value and a
-   * memo dependency rather than the ref above. The ref reads fresh today only
-   * because react-window never gets to bail out of the memo, which is someone
-   * else's memoization and not a guarantee this component makes.
+   * Rendered output -- tabIndex and the hover affordance -- not something only a
+   * handler reads, so a plain value and a memo dependency rather than the ref above.
+   * The ref reads fresh today only because react-window never bails out of the memo,
+   * which is not a guarantee this component makes.
    */
   const isSelectable = Boolean(onRowSelected);
 

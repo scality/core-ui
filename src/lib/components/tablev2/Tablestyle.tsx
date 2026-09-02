@@ -21,12 +21,11 @@ export const SortIncentive = styled.span`
 `;
 
 /**
- * The caret carries its own width, in flow, so nothing else reserves room on its
- * behalf and a sortable header's intrinsic width already includes it. Being a flex
- * item keeps the glyph beside the label and lets `order` move it to the other side;
- * `flex: none` stops a shrinking column squeezing it. The width is unconditional
- * because the glyph is not — `SortIncentive` appears only on hover, and a reserve
- * that came and went with it would shift the header out from under the pointer.
+ * The caret carries its own width in flow, so a sortable header's intrinsic width
+ * already includes it. A flex item so `order` can move it to the other side, and
+ * `flex: none` so a shrinking column cannot squeeze it. The width is unconditional
+ * although the glyph is not: `SortIncentive` shows on hover, and a reserve that came
+ * and went with it would shift the header out from under the pointer.
  */
 export const SortCaretWrapper = styled.span`
   flex: none;
@@ -83,11 +82,9 @@ export const HeaderContent = styled.div<{
         isCenter &&
         css`
           /* Flex centres label-plus-caret, so the label lands half a caret off
-           centre. A mirrored counterweight on the label's other side restores the
-           symmetry. The outsized shrink factor makes it yield its width long
-           before the label gives up a character, so the header is exactly centred
-           while the label fits and spends the counterweight when it does not --
-           a fixed reserve either truncates early or drifts early. */
+           centre; a mirrored counterweight restores it. The outsized shrink factor
+           spends the counterweight before the label gives up a character, which a
+           fixed reserve cannot do. */
           &::before {
             content: '';
             order: -1;
