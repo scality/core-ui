@@ -56,11 +56,9 @@ describe('Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  // The label's DOM shape carries the help icon's reserved room (see LabelText /
-  // HelpIconSlot), so it is layout-bearing and easy to break silently. jsdom has no
-  // layout, so the geometry itself is proven by the FormGroupHelpIconOrphan story --
-  // what is worth asserting here is that reserving that room did not cost the help
-  // affordance its identity or push it out of the label it belongs to.
+  // jsdom has no layout, so the geometry is proven by the FormGroupHelpIconOrphan
+  // story. What is worth asserting here is that reserving the icon's room did not
+  // cost the affordance its identity or push it out of its label.
   it('keeps the help affordance inside the label it annotates', () => {
     render(
       <Form layout={{ kind: 'page', title: 'Test Form' }}>

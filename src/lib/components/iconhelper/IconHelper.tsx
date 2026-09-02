@@ -19,10 +19,8 @@ type IconHelpProps = {
 };
 
 /**
- * The icon's footprint. Exported because a caller that has to reserve room for
- * the icon in its own layout needs the same number: read independently, the two
- * agree until the day this one changes, and then the reservation is silently
- * wrong with nothing to catch it.
+ * The icon's footprint. Exported because a caller reserving room for the icon in
+ * its own layout needs this exact number, not a copy that can drift.
  */
 export const HELP_ICON_SIZE = fontSize.base;
 

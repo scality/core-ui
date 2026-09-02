@@ -1033,19 +1033,15 @@ export const ResponsiveLabelSqueezeRemCap = {
 
 // A label's help icon has to stay on the label's last line. It is an inline-block,
 // so there is a soft-wrap opportunity in front of it that no amount of `nowrap`
-// *inside* it can suppress — once the column is narrow enough that the text fills
-// its last line, the icon breaks away and sits alone on the next one, left-aligned
-// under the label it belongs to.
+// *inside* it can suppress, and it used to break away onto the next line.
 //
-// The three labels are the three cases that matter, and the column is forced to a
-// width real forms use:
-//   - "Description" fits on one line, icon included — the case that must not move.
-//   - "Enable LDAP Over TLS" wraps, and is where the icon used to orphan.
-//   - "AuthenticationConfigurationEndpoint" is a single unbreakable word wider than
-//     the column. It is here because it rules out the cheaper fix: grouping the
-//     last word and the icon in a `nowrap` span keeps them together, but a `nowrap`
-//     group takes no soft-wrap opportunity at all, so this label would overflow the
-//     column outright instead of wrapping.
+// The three labels are the three cases that matter, at a column width real forms
+// use: "Description" fits on one line icon included (must not move), "Enable LDAP
+// Over TLS" wraps and is where the icon used to orphan, and
+// "AuthenticationConfigurationEndpoint" is one unbreakable word wider than the
+// column -- which is what rules out the cheaper fix, since a `nowrap` group around
+// the last word and the icon takes no soft-wrap opportunity at all and would
+// overflow the column outright.
 export const FormGroupHelpIconOrphan = {
   render: ({ forceLabelWidth }) => (
     <div

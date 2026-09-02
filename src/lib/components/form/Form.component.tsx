@@ -285,16 +285,11 @@ const HELP_ICON_RESERVE = `calc(${HELP_ICON_SIZE} + ${spacing.r8})`;
 /**
  * The label, holding the room its help icon will sit in.
  *
- * The icon is an atomic inline, so there is a soft-wrap opportunity in front of
- * it that nothing inside it can suppress -- `white-space: nowrap` on a box
- * containing only the icon prevents breaks *within* the box, not the break
- * *before* it. Once the last line of the label filled the column, the icon took
- * that opportunity and landed alone on the next line.
- *
- * So the room is reserved here, as end padding on the label's own inline box:
- * it lands at the end of the *last* line, which is exactly where the icon goes,
- * and it counts toward the label's min-content width, so a column that sizes
- * itself to its text sizes itself to the icon too.
+ * The icon is an atomic inline, so there is a soft-wrap opportunity in front of it
+ * that nothing inside it can suppress, and it used to land alone on the next line.
+ * End padding on the label's own inline box lands at the end of its *last* line --
+ * exactly where the icon goes -- and counts toward its min-content width, so a
+ * column sized to its text is sized to the icon too.
  */
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   ${({ $reserveHelpIcon }) =>
@@ -306,7 +301,7 @@ const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
 
 /**
  * Pulled back onto the room `LabelText` reserved, by exactly its own width, so
- * it costs the line nothing to place and no break is ever needed to fit it.
+ * placing it costs the line nothing and no break is needed to fit it.
  */
 const HelpIconSlot = styled.span`
   display: inline-block;
