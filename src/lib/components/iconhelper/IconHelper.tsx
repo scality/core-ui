@@ -20,10 +20,8 @@ type IconHelpProps = {
 };
 
 /**
- * The icon's footprint. Exported because a caller that has to reserve room for
- * the icon in its own layout needs the same number: read independently, the two
- * agree until the day this one changes, and then the reservation is silently
- * wrong with nothing to catch it.
+ * The icon's footprint. Exported so a caller reserving room for the icon reads this
+ * number rather than a copy that can drift.
  */
 export const HELP_ICON_SIZE = fontSize.base;
 
@@ -31,12 +29,10 @@ export const HELP_ICON_SIZE = fontSize.base;
  * A pair -- use both or neither. They keep an `IconHelp` on the last line of the
  * label it annotates.
  *
- * The icon is an atomic inline, so there is a soft-wrap opportunity in front of it
- * that nothing inside it can suppress, and it used to land alone on the next line.
- * `helpIconReserve` puts end padding on the label's own inline box, which lands at
- * the end of its last line and counts toward its min-content width; `HelpIconSlot`
- * pulls the icon back onto that room by its own width, so placing it costs the line
- * nothing. Both read `HELP_ICON_SIZE`, so the two cannot drift apart.
+ * The icon is an atomic inline with a soft-wrap opportunity in front of it that
+ * nothing inside it can suppress, so it landed alone on the next line.
+ * `helpIconReserve` pads the label's own inline box, which lands on its last line
+ * and counts toward min-content; `HelpIconSlot` pulls the icon back onto that room.
  */
 export const helpIconReserve = css`
   padding-right: calc(${HELP_ICON_SIZE} + ${spacing.r8});

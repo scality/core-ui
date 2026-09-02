@@ -61,11 +61,10 @@ const BoxSlot = styled.span<{ $hasLabel: boolean }>`
     `}
 `;
 
-// A block, so the label's lines and its help icon share one inline formatting
-// context and the reserve lands on the last of them. A `span`, because this is
-// inside a `<label>`. `min-width: 0` is load-bearing: `break-word` below does not
-// lower the min-content width, so without it this flex item refuses to shrink and
-// overflows instead of wrapping.
+// A block so the label's lines and its help icon share one inline formatting
+// context; a `span`, because this is inside a `<label>`. `min-width: 0` is
+// load-bearing -- `break-word` below does not lower the min-content width, so
+// without it this flex item overflows instead of wrapping.
 const LabelBlock = styled.span`
   display: block;
   min-width: 0;
@@ -73,10 +72,9 @@ const LabelBlock = styled.span`
 
 /**
  * `overflow-wrap` because a label is not always prose: an event name such as
- * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break, so without it
- * the label overflows instead of wrapping. `break-word` rather than `anywhere`:
- * both break the same way here, but `anywhere` also drops the min-content width to
- * one character, collapsing any label column sized to its content.
+ * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break. `break-word`
+ * and not `anywhere`, which would also drop min-content to one character and
+ * collapse a label column sized to its content.
  */
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   overflow-wrap: break-word;
@@ -107,10 +105,10 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const hasLabel = !!label;
-    // A `<button>` descendant of the `<label>` contributes its own name to the
-    // name the label gives the control, so the box was called "Short label More
-    // information". Pointing at the label text alone fixes that. Skipped when the
-    // caller names the box itself. jsdom cannot reproduce it -- see the story.
+    // A `<button>` inside the `<label>` folds its own name into the control's, so
+    // the box was called "Short label More information". Pointing at the label text
+    // alone fixes it; skipped when the caller names the box. jsdom cannot reproduce
+    // this -- see the story.
     const labelTextId = useId();
     const callerNamesIt =
       rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;

@@ -116,8 +116,8 @@ export const SmallerEmphaseTextStyle = styled(SmallerTextStyle) <{
   color: ${(props) => props.theme[`${props.statusColor}`]};
 `;
 /**
- * The `compact` line height. Exported because a caller aligning something against
- * a compact line box needs this exact number, not a copy that can drift.
+ * The `compact` line height. Exported so a caller aligning against a compact line
+ * box reads this number rather than a copy that can drift.
  */
 export const COMPACT_LINE_HEIGHT = 1.2;
 
