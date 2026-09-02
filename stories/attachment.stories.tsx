@@ -139,11 +139,9 @@ export const ConfirmationModal = {
  * The table in a panel-sized column, which is the shape it ships in.
  *
  * Drag `frameWidth` down. At **360px** the row's `Remove` button drops its label for
- * a tooltip. Without that the button is what stops the row shrinking, and from
- * 357.63px the row bleeds out of the panel -- these panels are `overflow: visible`,
- * so there is no scrollbar or clipped edge to give it away. Keep going and the
- * search box is the next floor at **301px**, which is `SearchInput`'s fixed width
- * and not fixable from this component.
+ * a tooltip; without it the row bleeds out of the panel with nothing to show it,
+ * since these panels are `overflow: visible`. The next floor is the search box at
+ * **301px**, which is `SearchInput`'s fixed width and not fixable from here.
  */
 export const NarrowPanel = {
   argTypes: {

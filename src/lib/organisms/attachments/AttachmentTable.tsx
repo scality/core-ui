@@ -116,16 +116,13 @@ const SearchBoxContainer = styled.div`
 `;
 
 /**
- * `flex-grow: 1` reads as "the search box fills the toolbar". It does not:
- * `SearchBoxContainer` is a block, so on the normal path there is no flex line to
- * grow along and the declaration is inert. It applies only on the error path, where
- * the input sits in a `Stack` beside a `Loader`, so it is left in place.
+ * `flex-grow: 1` is inert on the normal path -- `SearchBoxContainer` is a block, so
+ * there is no flex line to grow along. It is kept for the error path, where the
+ * input sits in a `Stack` beside a `Loader`.
  *
- * The box is therefore a fixed 287px at every width, and this component cannot
- * change that: `SearchInput` pins `width: max-content` on its own container and does
- * not forward `fluid` to the `Input` inside it. That plus the toolbar's 14px left
- * padding is this table's *second* floor, at a 301px container -- 57px below the
- * button's crossover, which is why the button is what this change addresses.
+ * So the box is a fixed 287px, and this component cannot change that: `SearchInput`
+ * pins `width: max-content` and does not forward `fluid`. That is this table's next
+ * floor, at a 301px container.
  */
 const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
   flex-grow: 1;
@@ -142,17 +139,10 @@ const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
  * The container width, in px, at or below which the row's `Remove` button drops its
  * label. Read by `iconOnly` as `@container responsive (max-width: Npx)`.
  *
- * Measured, not chosen. The button will not go below its intrinsic 88.89px, and its
- * column is `flex: 0.5` on a `0` basis, so once the column's share stops paying for
- * the button its right edge stays put while the panel shrinks around it. It bleeds
- * rather than clips -- these panels are `overflow: visible`, so `scrollWidth` never
- * rises and there is no scrollbar or clipped edge to notice.
- *
- * The crossover is a **357.63px** container, so the threshold has to sit *above*
- * that, not below: 340 was tried first and left the whole 357-to-341 band
- * overflowing with the label still on. 360 clears it with ~2.4px to spare, and buys
- * back 56.39px of row. The next floor below is the search box's, at 301px -- see
- * the note on `StyledSearchInput`.
+ * The button will not go below its intrinsic 88.89px, and its column is `flex: 0.5`
+ * on a `0` basis, so it overflows rather than shrinks -- invisibly, since these
+ * panels are `overflow: visible`. Measured: overflow starts just under 357px, so 360
+ * to keep some spare.
  */
 const REMOVE_COLLAPSE_PX = 360;
 
@@ -514,12 +504,9 @@ export const AttachmentTable = <
   const [searchInputIsFocused, setSearchInputIsFocused] = useState(false);
 
   return (
-    /* `iconOnly={REMOVE_COLLAPSE_PX}` is a `@container responsive` query, so it
-       needs an ancestor declaring that container -- and it has to be this table,
-       not whatever the consumer happens to provide, or the button would collapse
-       on someone else's width. The wrapper exists for that and nothing else; it
-       is `width`/`height: 100%` so `Table`, which is already both, keeps the box
-       it had. */
+    /* `iconOnly` is a `@container responsive` query and needs an ancestor declaring
+       that container -- this table's own box, not whatever the consumer provides.
+       `100%` both ways, so `Table` keeps the box it had. */
     <Box container height="100%" width="100%">
       <Table
         columns={[
