@@ -58,12 +58,9 @@ describe('Form', () => {
 
   /**
    * The marker is appended to the label inside the same Text, so it is the piece
-   * that silently falls out of the accessible name -- or loses the space before
-   * it -- if that composition is ever restructured. It was, mid-review, and back
-   * again; these are what caught the difference both times.
-   *
-   * Tone itself is deliberately not asserted: reading a colour declaration back
-   * out proves nothing a story does not show better.
+   * that silently falls out of the accessible name -- or loses the space before it
+   * -- if that composition is restructured. Tone itself is deliberately not
+   * asserted: reading a colour declaration back out proves nothing.
    */
   it.each([
     ['partial', 'User name', true, 'User name *'],

@@ -960,18 +960,15 @@ export const ResponsivePageFormInFlexRow = {
 };
 
 // Key/value tone: the FormGroup label is `textSecondary` against the value's
-// `textPrimary`, so a two-column form reads as pairs rather than as two columns of
+// `textPrimary`, so a two-column form reads as pairs rather than two columns of
 // equally weighted text.
 //
-// Both require modes are on the page at once, so the require markers can be judged
-// against the label they sit on: `*` in the upper form, `(optional)` in the lower.
-// Both dim with the label rather than standing out from it, which keeps the whole
-// convention at one tone -- the page form's "* are required fields" legend is
-// already textSecondary.
+// Both require modes are on the page at once so the markers can be judged against
+// the label they sit on -- `*` above, `(optional)` below. Both dim with the label,
+// matching the page form's already-secondary "* are required fields" legend.
 //
-// The last row of each form is disabled. It keeps the primary tone: the 0.5 opacity
-// on the label already dims it, and compounding the two costs more contrast than
-// the pairing gains.
+// The disabled last row of each form keeps the primary tone: the 0.5 opacity on the
+// label already dims it, and compounding the two costs more contrast than it gains.
 export const FormGroupLabelTone = {
   render: () => (
     <Stack direction="vertical" gap="r24">
