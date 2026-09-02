@@ -745,11 +745,19 @@ export const TableWithViewAction = {
       {
         Header: '',
         id: 'actions',
+        // Same shape as the default columns' action column, and for the same
+        // reason. On `flex: 1` this column measured 106.66px in this 700px table
+        // against a 113.84px button, so the button hung 7.18px past its own
+        // column -- in the story the guideline points at to show how an action
+        // column is built. `display` and `justifyContent` were also dead here:
+        // a body cell's own flex centring is applied after the column's
+        // `cellStyle` and takes both, so the button was never right-aligned
+        // either. `alignItems` is the cross axis and survives.
         cellStyle: {
-          width: 'unset',
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'flex-end',
+          width: '8.5rem',
+          flex: 'none',
+          textAlign: 'right',
+          alignItems: 'flex-end',
         },
         Cell: ({ row }: CellProps<Entry>) => (
           <Button
