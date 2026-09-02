@@ -12,6 +12,19 @@ import * as TableStories from './tablev2.stories';
 
 A table displays structured data in rows and columns, allowing users to scan, sort, and act on multiple items.
 
+## Column alignment
+
+A column states its alignment once, in `cellStyle.textAlign`, and it reaches the header label and
+every value in the column alike. Text reads left, a number reads right, a status or other short
+enum reads centred. Header and values sit on the same edge whichever edge that is — a column whose
+label and values disagree reads as two columns.
+
+Sorting does not change that. A sortable header's caret reserves its own width rather than taking
+it from the label, so an end-aligned label keeps the trailing edge; a centred label is balanced
+against the caret rather than pushed off centre by it. On a column too narrow to hold both, the
+centred label drifts off centre instead of truncating earlier than it would without a caret —
+losing the middle of a label costs more than losing its exact centring.
+
 ## Action column
 
 Tables may include an action column on the far right for row-level actions.
