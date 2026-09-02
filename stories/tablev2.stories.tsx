@@ -68,6 +68,13 @@ type Entry = {
   health: string;
 };
 
+// The default columns, and the reference for how a column declares its layout.
+// The three alignments are all here on purpose: a column states its alignment
+// once, in `cellStyle`, and it has to reach the header label and the values
+// alike -- text reads left, a number reads right, a status reads centred. The
+// two right-hand columns are also the two headers that carry a sort caret while
+// not being left-aligned, which is where an end-aligned label and a centred one
+// have to keep their track.
 const columns: Column<Entry>[] = [
   {
     Header: 'First Name',
@@ -99,7 +106,7 @@ const columns: Column<Entry>[] = [
     cellStyle: {
       width: 'unset',
       flex: 1,
-      textAlign: 'left',
+      textAlign: 'right',
     },
   },
   {
@@ -109,8 +116,43 @@ const columns: Column<Entry>[] = [
     cellStyle: {
       width: 'unset',
       flex: 1,
-      textAlign: 'left',
+      textAlign: 'center',
     },
+  },
+  // An action column: no header, one control per row. It is what makes the
+  // stories below demonstrate that a control in a cell keeps its own click --
+  // without a control there is nothing for a row-wide handler to steal.
+  {
+    Header: '',
+    id: 'actions',
+    // No values to order, so no caret. A caret over a blank header offers a
+    // sort the column cannot describe.
+    disableSortBy: true,
+    // A fixed track, not a grow factor. The button is `white-space: nowrap` and
+    // will not shrink below its label, so on a grow factor it overflows into the
+    // column beside it as soon as its share drops under its own width -- exactly
+    // the failure the guideline warns about. Measured at a 14px root the button
+    // is 113.84px: 1px border + 14px padding + 24.5px icon slot + 74.34px label.
+    // 8.5rem is 119px, so the label has 5.16px of slack for a font that renders
+    // slightly wider; below 8.13rem it bleeds.
+    cellStyle: {
+      width: '8.5rem',
+      flex: 'none',
+      textAlign: 'right',
+      // Cross axis, not `justifyContent`: a body cell's own vertical centring
+      // is applied after the column's `cellStyle` and takes the main axis, so
+      // this is where a control's horizontal placement has to be stated.
+      alignItems: 'flex-end',
+    },
+    Cell: () => (
+      <Button
+        size="inline"
+        variant="outline"
+        label="View details"
+        icon={<Icon name="Eye" />}
+        onClick={action('View details clicked')}
+      />
+    ),
   },
 ];
 const getRowId = (row: Entry, relativeIndex: number) => {
@@ -935,190 +977,4 @@ export const ResponsiveColumnDropWithReveal = {
       </>
     );
   },
-};
-
-/**
- * Guards the sort-caret header regression. Two independent defects:
- *  - a sortable header's min-content is 20px above its body cell's, so the two
- *    rows stop agreeing on column widths once that floor binds (Reproduction A);
- *  - an end-aligned header label is pushed off the trailing edge by the caret
- *    sitting after it (Reproduction B).
- */
-type Reading = { label: string; mirror: string; value: string };
-
-const readingData: Reading[] = [
-  { label: '27', mirror: '27', value: '27' },
-  { label: '31', mirror: '31', value: '31' },
-];
-
-// Both columns carry the same flex and the same narrow body value; the only
-// difference is sortability. They must resolve to the same width.
-const readingColumns: Column<Reading>[] = [
-  {
-    Header: 'Temperature',
-    accessor: 'label',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-  },
-  {
-    Header: 'Temperature',
-    accessor: 'mirror',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-    disableSortBy: true,
-  },
-];
-
-type Certificate = {
-  name: string;
-  issuer: string;
-  status: string;
-  expireOn: string;
-};
-
-const certificateData: Certificate[] = [
-  {
-    name: 'artesca-ingress',
-    issuer: 'Scality Internal CA',
-    status: 'Valid',
-    expireOn: '2027-01-14',
-  },
-  {
-    name: 'shell-ui-oidc',
-    issuer: "Let's Encrypt X3",
-    status: 'Valid',
-    expireOn: '2026-11-02',
-  },
-];
-
-const certificateColumns: Column<Certificate>[] = [
-  {
-    Header: 'Name',
-    accessor: 'name',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-  },
-  {
-    Header: 'Issuer',
-    accessor: 'issuer',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-    disableSortBy: true,
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-    cellStyle: { width: 'unset', flex: 0.75, textAlign: 'center' },
-  },
-  {
-    Header: 'Expire On',
-    accessor: 'expireOn',
-    cellStyle: {
-      width: 'unset',
-      flex: 0.75,
-      textAlign: 'right',
-      paddingRight: '36px',
-    },
-  },
-];
-
-// Narrow centred columns, each sortable one paired with an identical column that
-// is not sortable. The pair is the point: the sortable header carries a caret and
-// a counterweight, the plain one carries neither, so any difference in where the
-// two labels sit is the caret mechanism and nothing else. At 5rem and 7rem the
-// counterweight cap binds, so the sortable label should drift slightly off centre
-// rather than truncate earlier than its twin.
-const narrowCentredColumns: Column<Certificate>[] = [
-  {
-    Header: 'Name',
-    accessor: 'name',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-    id: 'status-sortable',
-    cellStyle: { textAlign: 'center', width: '5rem' },
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-    id: 'status-plain',
-    cellStyle: { textAlign: 'center', width: '5rem' },
-    disableSortBy: true,
-  },
-  {
-    Header: 'Expire On',
-    accessor: 'expireOn',
-    id: 'expire-sortable',
-    cellStyle: { textAlign: 'center', width: '7rem' },
-  },
-  {
-    Header: 'Expire On',
-    accessor: 'expireOn',
-    id: 'expire-plain',
-    cellStyle: { textAlign: 'center', width: '7rem' },
-    disableSortBy: true,
-  },
-];
-
-export const SortCaretHeaderAlignment = {
-  render: () => (
-    <>
-      <Title>
-        A — equal flex, sortable vs not, container too narrow for both headers
-      </Title>
-      <div id="repro-a" style={{ height: '120px', width: '220px' }}>
-        <Table
-          columns={readingColumns}
-          data={readingData}
-          defaultSortingKey={'label'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>B — end-aligned and centred sortable headers</Title>
-      <div id="repro-b" style={{ height: '140px' }}>
-        <Table
-          columns={certificateColumns}
-          data={certificateData}
-          defaultSortingKey={'expireOn'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>C — multi selectable, same columns as B</Title>
-      <div id="repro-c" style={{ height: '160px' }}>
-        <Table
-          columns={certificateColumns}
-          data={certificateData}
-          defaultSortingKey={'status'}
-        >
-          <Table.MultiSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            onMultiSelectionChanged={action('selection changed')}
-          />
-        </Table>
-      </div>
-      <Title>
-        D — narrow centred headers: each sortable column paired with an
-        identical column that is not sortable
-      </Title>
-      <div id="repro-d" style={{ height: '140px', width: '620px' }}>
-        <Table
-          columns={narrowCentredColumns}
-          data={certificateData}
-          defaultSortingKey={'status'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-    </>
-  ),
 };
