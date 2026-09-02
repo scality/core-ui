@@ -116,10 +116,10 @@ export const CopyButton = ({
           : undefined
       }
       style={{
-        ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
-        // Last, so a consumer can override anything here from `style`. It used to
-        // be first, which made every value here unreachable.
         ...props.style,
+        // Last, so the success state cannot be styled away while clicks are still
+        // being swallowed.
+        ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
       }}
       label={
         variant === 'outline'
