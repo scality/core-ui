@@ -1,7 +1,7 @@
 import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Icon, IconName } from '../icon/Icon.component';
-import { Input, InputSize } from '../inputv2/inputv2';
+import { convertSizeToRem, Input, InputSize } from '../inputv2/inputv2';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
 import { CoreUITheme } from '../../style/theme';
@@ -23,9 +23,20 @@ const SearchInputContainer = styled.div.withConfig({
   componentId: 'sc-searchinput',
 })<{
   $disabled?: boolean;
+  $width: string;
 }>`
   position: relative;
+  /* Hugs its content, no wider than the parent -- max-content alone pinned the box
+     and it overflowed. Two declarations, not min(max-content, 100%): an intrinsic
+     keyword inside a math function is invalid, so the whole width is dropped and the
+     box goes full-bleed.
+     Floor is the 1/2 size, never more than the width asked for. min-width beats
+     max-width, so past it the box overflows rather than shrink further: a field
+     rationed to a few px looks fine but is unusable, and the overflow is what tells
+     the layout around it to adapt. */
   width: max-content;
+  max-width: 100%;
+  min-width: min(${convertSizeToRem('1/2')}, ${(props) => props.$width});
 
   input[value] {
     max-width: calc(100% - 1rem - ${spacing.f8} - 1rem);
@@ -106,7 +117,11 @@ const SearchInput = forwardRef(
     };
 
     return (
-      <SearchInputContainer $disabled={disabled} {...rest}>
+      <SearchInputContainer
+        $disabled={disabled}
+        $width={convertSizeToRem(size)}
+        {...rest}
+      >
         <Input
           autoComplete={autoComplete}
           min={'1'}
@@ -120,6 +135,9 @@ const SearchInput = forwardRef(
           onChange={handleChange}
           onReset={reset}
           size={size}
+          /* The container above can now be narrower than `size`; without this the
+             input keeps that width and overflows it. The two move together. */
+          fluid
           leftIcon={searchIcon}
           leftIconColor={searchIconColor}
           className="search-box"

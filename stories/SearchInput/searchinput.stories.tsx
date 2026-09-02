@@ -171,3 +171,42 @@ export const WithCustomIconColor = {
     );
   },
 };
+
+/**
+ * The box shrinks with its container instead of overflowing it, down to the `1/2`
+ * size. Drag `frameWidth`: the default box gives ground from 287px to its 10rem
+ * floor, then overflows rather than shrink into uselessness. The `1/3` box is
+ * already at its own size -- the floor is never wider than the `size` asked for.
+ */
+export const Narrow = {
+  argTypes: {
+    frameWidth: { control: { type: 'range', min: 60, max: 500, step: 10 } },
+  },
+  args: { frameWidth: 250 },
+  render: ({ frameWidth }: { frameWidth: number }) => {
+    const [value, setValue] = useState('');
+    return (
+      <Wrapper>
+        <Title>Default size, in a {frameWidth}px frame</Title>
+        <div style={{ width: frameWidth, outline: '1px dashed #888' }}>
+          <SearchInput
+            value={value}
+            placeholder="Search server..."
+            onChange={(e) => setValue(e.target.value)}
+            onReset={() => setValue('')}
+          />
+        </div>
+        <Title>size="1/3", same frame</Title>
+        <div style={{ width: frameWidth, outline: '1px dashed #888' }}>
+          <SearchInput
+            value=""
+            size="1/3"
+            placeholder="Search server..."
+            onChange={action('on input change')}
+            onReset={action('on input reset')}
+          />
+        </div>
+      </Wrapper>
+    );
+  },
+};
