@@ -130,15 +130,10 @@ export const VirtualizedRows = <
 /**
  * Style every body cell gets, given the column's own `cellStyle`.
  *
- * `min-width: 0` is the same reset `TableHeader` carries. A flex item defaults
- * to `min-width: auto`, so without it a short cell freezes at its content width
- * while its header keeps shrinking — and flexbox then redistributes that frozen
- * item's share of the negative free space onto the row's remaining shrinkable
- * cell, pushing it *below* its own header. Both rows have to shrink by the same
- * rules or the columns cannot agree on their widths.
- *
- * It goes before the spread so a consumer's `cellStyle` still wins; the flex
- * centring goes after, because that is the cell's own layout and not a default.
+ * `min-width: 0` is the same reset `TableHeader` carries: without it a short cell
+ * freezes at its content width while its header keeps shrinking, and the two rows
+ * stop agreeing on their widths. It goes before the spread so a consumer's
+ * `cellStyle` still wins; the flex centring goes after, as the cell's own layout.
  */
 export const bodyCellStyle = (cellStyle?: CSSProperties): CSSProperties => ({
   minWidth: 0,
@@ -149,39 +144,23 @@ export const bodyCellStyle = (cellStyle?: CSSProperties): CSSProperties => ({
 });
 
 /**
- * Controls a row-wide handler must not act on. A row's `onClick`/`onKeyDown`
- * fires for any click inside it, so without this a click on a button in a cell
- * both activates the button and selects the row — and the selection re-render
- * remounts the cell, closing whatever the button just opened.
- *
- * `label` is here for a label *inside a cell*, wrapping that cell's own control:
- * clicking it activates the control, so the row must not also react.
- * `[role="button"]` catches div-based triggers, which core-ui has its own share
- * of. The selection checkbox is deliberately NOT excluded here — its cell stops
- * propagation itself, because selecting the row is exactly what it is for.
+ * Controls a row-wide handler must not act on. A row's `onClick`/`onKeyDown` fires
+ * for any click inside it, so without this a click on a button in a cell both
+ * activates the button and selects the row — and the selection re-render remounts
+ * the cell, closing whatever the button just opened. The selection checkbox is
+ * deliberately absent: its own cell stops propagation, because selecting the row is
+ * exactly what it is for.
  */
 const INTERACTIVE_SELECTOR =
   'button, a, input, select, textarea, label, [role="button"], [role="link"], [role="checkbox"], [role="menuitem"]';
 
 /**
- * Whether a bubbled event reached a row's handler from somewhere the row must
- * not treat as a click on itself.
- *
- * The search is bounded to the row (`currentTarget`) at both ends, and each
- * bound closes a real hole:
- *
- * - **Upwards.** An unbounded `closest()` walks past the row to the document,
- *   so a single element from the selector *anywhere* above the table — a
- *   clickable card wrapping it, an enclosing link — matched for every cell and
- *   disabled row selection across the whole table. The row has no say in what
- *   it is nested inside, so the bound belongs here rather than in a rule about
- *   where a table may be placed.
- * - **Downwards.** A React portal escapes the row in the DOM but still bubbles
- *   to it through the React tree, so plain text in a portalled popover (the
- *   `revealDroppedColumns` panel, a Select menu) reached this handler with
- *   nothing interactive between it and the row, and silently selected the row
- *   behind the open overlay. Anything not contained by the row is not a click
- *   on the row.
+ * Whether a bubbled event reached a row's handler from somewhere the row must not
+ * treat as a click on itself. Bounded to the row at both ends, and each bound
+ * closes a real hole: an unbounded `closest()` walks past the row to the document,
+ * so one matching element anywhere above the table disabled selection for every
+ * row; and a React portal escapes the row in the DOM while still bubbling to it
+ * through React, so plain text in a portalled popover selected the row behind it.
  */
 export const shouldIgnoreRowEvent = (event: {
   target: EventTarget | null;
@@ -200,9 +179,8 @@ export const shouldIgnoreRowEvent = (event: {
 
 /**
  * Reports whether the element the returned ref is attached to is actually
- * ellipsized. Re-measures on resize because a column's width here comes from a
- * grow factor, not a fixed size, so whether a header truncates changes with the
- * table's width and cannot be decided once at mount.
+ * ellipsized. Re-measures on resize: a column's width comes from a grow factor, so
+ * whether a header truncates changes with the table's width.
  */
 const useIsEllipsized = <T extends HTMLElement>() => {
   const [isEllipsized, setIsEllipsized] = useState(false);
@@ -228,16 +206,12 @@ const useIsEllipsized = <T extends HTMLElement>() => {
 };
 
 /**
- * Makes `Tooltip` safe to put around an ellipsizing flex item.
- *
- * `TooltipContainer` is an `inline-block` with no `min-width: 0`, and it wraps
- * its children in a second plain `div`. Left alone, both sit between the flex
- * item and the text and impose a content-based minimum, so the column stops
- * shrinking and the label never ellipsizes at all — the tooltip would remove
- * the truncation it exists to explain. Forcing the chain to shrinkable blocks
- * keeps `HeaderLabel` the element that runs out of room.
- *
- * Same problem `ConstrainedText` solves with its own `BlockTooltip`.
+ * Makes `Tooltip` safe to put around an ellipsizing flex item. `TooltipContainer`
+ * is an `inline-block` with no `min-width: 0` and wraps its children in a second
+ * `div`; left alone both impose a content-based minimum, so the column stops
+ * shrinking and the label never ellipsizes — the tooltip would remove the
+ * truncation it exists to explain. `ConstrainedText` has its own `BlockTooltip`
+ * for the same reason.
  */
 const HeaderLabelFrame = styled.div`
   /* Shrink-to-fit, exactly as the bare label was: HeaderContent aligns with
@@ -254,25 +228,15 @@ const HeaderLabelFrame = styled.div`
 `;
 
 /**
- * A header label that offers its full text through a `Tooltip` once it no
- * longer fits. Body cells already recover via `ConstrainedText`, so an
- * ellipsized header was the one place a label became unreadable with no way to
- * get it back.
+ * A header label that offers its full text through a `Tooltip` once it no longer
+ * fits. Body cells already recover via `ConstrainedText`, so an ellipsized header
+ * was the one label with no way back.
  *
- * `Tooltip` rather than a native `title`: `title` is drawn by the OS after a
- * ~1s delay that cannot be configured, which reads as nothing happening. It
- * also collides here — react-table's `getSortByToggleProps()` already puts
- * `title="Toggle SortBy"` on the header itself, so a sortable header would
- * carry two competing titles and which one appears depends on the pixel hovered.
- *
- * The wrapper chain is rendered in **every** state and only `overlay` is
- * conditional. Mounting the tooltip on the flip instead would change the DOM
- * under the element being measured, refire the ref against a differently-sized
- * container, and let the two states oscillate.
- *
- * Truncation costs nothing in the accessibility tree — the full text is still
- * in the DOM and still the header's accessible name — so this is a visual
- * affordance only.
+ * `Tooltip` rather than a native `title`: `title` has an unconfigurable ~1s delay,
+ * and react-table's `getSortByToggleProps()` already puts one on the header, so a
+ * sortable header would carry two competing titles. The wrapper chain renders in
+ * every state and only `overlay` is conditional, so the element being measured
+ * never changes size underneath the ref.
  */
 export const TruncatableHeaderLabel = ({
   header,
