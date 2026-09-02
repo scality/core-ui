@@ -19,8 +19,8 @@ type IconHelpProps = {
 };
 
 /**
- * The icon's footprint. Exported because a caller reserving room for the icon in
- * its own layout needs this exact number, not a copy that can drift.
+ * The icon's footprint. Exported so a caller reserving room for the icon reads this
+ * number rather than a copy that can drift.
  */
 export const HELP_ICON_SIZE = fontSize.base;
 

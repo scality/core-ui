@@ -285,11 +285,10 @@ const HELP_ICON_RESERVE = `calc(${HELP_ICON_SIZE} + ${spacing.r8})`;
 /**
  * The label, holding the room its help icon will sit in.
  *
- * The icon is an atomic inline, so there is a soft-wrap opportunity in front of it
- * that nothing inside it can suppress, and it used to land alone on the next line.
- * End padding on the label's own inline box lands at the end of its *last* line --
- * exactly where the icon goes -- and counts toward its min-content width, so a
- * column sized to its text is sized to the icon too.
+ * The icon is an atomic inline with a soft-wrap opportunity in front of it that
+ * nothing inside it can suppress, so it landed alone on the next line. End padding
+ * on the label's own inline box lands on its last line -- where the icon goes -- and
+ * counts toward min-content, so a column sized to its text fits the icon too.
  */
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   ${({ $reserveHelpIcon }) =>
