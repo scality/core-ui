@@ -351,20 +351,10 @@ const FormGroup = ({
       id={`${LABEL_PREFIX}${id}`}
       style={{ opacity: disabled ? 0.5 : 1 }}
     >
-      {/* The key of a key/value pair: dimmer than the value beside it, so the two
-          are told apart by tone rather than by position alone.
-
-          The require markers dim with it rather than standing out, so the whole
-          convention reads at one tone: PageForm's "* are required fields" legend
-          is already textSecondary, and a field marker brighter than the legend
-          explaining it is the inconsistency worth avoiding. Whether the required
-          marker should outweigh its label is a design question, and not one to
-          pre-empt here.
-
-          A disabled label keeps the primary tone — it is already dimmed by the
-          0.5 opacity above, and compounding the two drops it from 4.3:1 to 3.0:1
-          against backgroundLevel3. Neither figure reaches AA; this only avoids
-          making a pre-existing shortfall worse. */}
+      {/* The key of a key/value pair, dimmed so the pair reads by tone and not by
+          position alone. Disabled keeps the primary tone: the wrapping label is
+          already at 0.5 opacity, and compounding the two costs more contrast than
+          the pairing gains. */}
       <Text color={disabled ? undefined : 'textSecondary'}>
         {label}
         {requireMode !== 'all' && required && ' *'}
