@@ -21,18 +21,12 @@ export const SortIncentive = styled.span`
 `;
 
 /**
- * The caret carries its own width, in flow, so nothing else has to reserve room
- * on its behalf: one value describes the footprint, and a sortable header's
- * intrinsic width already includes it.
- *
- * Being a flex item is what keeps the glyph beside the label rather than
- * stranded at the column's far edge, and lets `order` move it to the label's
- * other side. `flex: none` stops a shrinking column squeezing it, so the label
- * stays the element that runs out of room.
- *
- * The width is unconditional because the glyph is not: `SortIncentive` appears
- * only on hover, and a reserve that came and went with it would shift the
- * header out from under the pointer.
+ * The caret carries its own width, in flow, so nothing else reserves room on its
+ * behalf and a sortable header's intrinsic width already includes it. Being a flex
+ * item keeps the glyph beside the label and lets `order` move it to the other side;
+ * `flex: none` stops a shrinking column squeezing it. The width is unconditional
+ * because the glyph is not — `SortIncentive` appears only on hover, and a reserve
+ * that came and went with it would shift the header out from under the pointer.
  */
 export const SortCaretWrapper = styled.span`
   flex: none;
@@ -45,11 +39,9 @@ export const SortCaretWrapper = styled.span`
 /** Ellipsize rather than let a long header outgrow its column. */
 export const HeaderLabel = styled.span`
   min-width: 0;
-  /* overflow and text-overflow do nothing on an inline box, and a span is
-     inline by default. This used to be supplied for free by being a flex item
-     (flex blockifies its children), so the ellipsis silently disappeared the
-     moment the label was wrapped in anything. Stated outright so it no longer
-     depends on the parent's display. */
+  /* overflow and text-overflow do nothing on an inline box, and a span is inline
+     by default. This used to come for free from being a flex item, so the ellipsis
+     disappeared the moment the label was wrapped in anything. */
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,15 +82,12 @@ export const HeaderContent = styled.div<{
         $sortable &&
         isCenter &&
         css`
-          /* Flex centres label-plus-caret, so the label itself lands half a caret
-           off centre. This mirrors the caret on the label's other side to restore
-           the symmetry, and being a pseudo-element it is a flex item like any
-           other: weighted by basis times shrink factor against the label's own
-           basis, it gives up its width long before the label gives up a
-           character. A centred header is therefore exactly centred whenever the
-           label fits beside it, and spends the counterweight rather than the
-           label when it does not. A fixed reserve cannot do both -- it either
-           truncates early or drifts early, depending which value is chosen. */
+          /* Flex centres label-plus-caret, so the label lands half a caret off
+           centre. A mirrored counterweight on the label's other side restores the
+           symmetry. The outsized shrink factor makes it yield its width long
+           before the label gives up a character, so the header is exactly centred
+           while the label fits and spends the counterweight when it does not --
+           a fixed reserve either truncates early or drifts early. */
           &::before {
             content: '';
             order: -1;
@@ -164,10 +153,9 @@ export const HeadRow = styled.div<HeadRowType>`
 type TableRowType = {
   $isSelected: boolean;
   /**
-   * Whether the row can be selected at all — i.e. the content was given an
-   * `onRowSelected`. Not "something is currently selected": gating the hover
-   * affordance on that left a selectable table looking inert until its first
-   * click, with no pointer cursor to invite one.
+   * Whether the row can be selected at all — i.e. an `onRowSelected` was given.
+   * Not "something is currently selected": gating the hover affordance on that left
+   * a selectable table looking inert until its first click.
    */
   $selectable?: boolean;
   $separationLineVariant: TableVariantType;
@@ -217,8 +205,7 @@ export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
   /* Must match HeadRow's gap. Every column track has a grow factor and no basis,
      so a gap the header reserves and the body does not is free space the body
-     redistributes — shifting every boundary by grow-share × total gap, at any
-     width. That is the header-not-over-its-value defect. */
+     redistributes, shifting every column boundary at any width. */
   gap: ${spacing.r16};
   border-bottom: 1px solid
     ${(props) => props.theme[props.$separationLineVariant]};

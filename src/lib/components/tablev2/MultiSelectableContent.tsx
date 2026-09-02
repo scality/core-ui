@@ -208,11 +208,9 @@ export const MultiSelectableContent = <
                   <div
                     {...cellProps}
                     onClick={(event) => {
-                      // Selecting the row is what this cell is for, so it owns
-                      // the click outright rather than relying on the bubble the
-                      // row's interactive-target guard now stops. Both former
-                      // paths — direct here, or bubbling to the row handler's
-                      // else branch — ended in this same call.
+                      // Selecting the row is what this cell is for, so it owns the
+                      // click outright rather than relying on a bubble the row's
+                      // guard now stops.
                       event.stopPropagation();
                       handleMultipleSelectedRowsRef.current(
                         selectedRowIdsRef.current,

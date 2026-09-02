@@ -95,13 +95,10 @@ export function SingleSelectableContent<
 
   /**
    * Whether rows are selectable is *rendered* output -- tabIndex and the hover
-   * affordance -- not something only an event handler needs, so it comes from a
-   * plain value and a memo dependency rather than from the ref above. Today the
-   * ref happens to read fresh either way, because react-table hands react-window
-   * a new `rows` array on every render and the memoized row never gets to bail
-   * out; that is a coincidence of someone else's memoization, not a guarantee
-   * this component makes. Depending on it costs nothing: `onRowSelected` changes
-   * identity every render, this boolean almost never does.
+   * affordance -- not something only a handler reads, so it is a plain value and a
+   * memo dependency rather than the ref above. The ref reads fresh today only
+   * because react-window never gets to bail out of the memo, which is someone
+   * else's memoization and not a guarantee this component makes.
    */
   const isSelectable = Boolean(onRowSelected);
 
@@ -139,8 +136,8 @@ export function SingleSelectableContent<
               },
               tabIndex: isSelectable ? 0 : undefined,
               onKeyDown: (event) => {
-                // `keydown` bubbles, so without the same guard Enter or Space on a
-                // focused in-cell control selects the row *and* preventDefault()s
+                // `keydown` bubbles, so without the same guard Enter or Space on
+                // a focused in-cell control selects the row *and* preventDefault()s
                 // the control's own activation.
                 if (shouldIgnoreRowEvent(event)) return;
                 const onRowSelected = onRowSelectedRef.current;

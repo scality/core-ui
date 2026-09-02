@@ -69,12 +69,10 @@ type Entry = {
 };
 
 // The default columns, and the reference for how a column declares its layout.
-// The three alignments are all here on purpose: a column states its alignment
-// once, in `cellStyle`, and it has to reach the header label and the values
-// alike -- text reads left, a number reads right, a status reads centred. The
-// two right-hand columns are also the two headers that carry a sort caret while
-// not being left-aligned, which is where an end-aligned label and a centred one
-// have to keep their track.
+// All three alignments are here on purpose -- text reads left, a number right, a
+// status centred -- and the two right-hand ones are also the sortable headers that
+// are not left-aligned, where an end-aligned and a centred label have to keep
+// their track.
 const columns: Column<Entry>[] = [
   {
     Header: 'First Name',
@@ -119,29 +117,24 @@ const columns: Column<Entry>[] = [
       textAlign: 'center',
     },
   },
-  // An action column: no header, one control per row. It is what makes the
-  // stories below demonstrate that a control in a cell keeps its own click --
-  // without a control there is nothing for a row-wide handler to steal.
+  // An action column: no header, one control per row. Without a control in a cell
+  // there is nothing for a row-wide handler to steal, so this is what lets the
+  // stories below demonstrate that an in-cell click stays its own.
   {
     Header: '',
     id: 'actions',
-    // No values to order, so no caret. A caret over a blank header offers a
-    // sort the column cannot describe.
+    // No values to order, so no caret.
     disableSortBy: true,
-    // A fixed track, not a grow factor. The button is `white-space: nowrap` and
-    // will not shrink below its label, so on a grow factor it overflows into the
-    // column beside it as soon as its share drops under its own width -- exactly
-    // the failure the guideline warns about. Measured at a 14px root the button
-    // is 113.84px: 1px border + 14px padding + 24.5px icon slot + 74.34px label.
-    // 8.5rem is 119px, so the label has 5.16px of slack for a font that renders
-    // slightly wider; below 8.13rem it bleeds.
+    // A fixed track, not a grow factor: the button is `white-space: nowrap` and
+    // bleeds into the next column as soon as a grow share drops under its own
+    // width. 8.5rem is 119px against a measured 113.84px button, so ~5px of slack
+    // for a font that renders wider; it overflows below 8.13rem.
     cellStyle: {
       width: '8.5rem',
       flex: 'none',
       textAlign: 'right',
-      // Cross axis, not `justifyContent`: a body cell's own vertical centring
-      // is applied after the column's `cellStyle` and takes the main axis, so
-      // this is where a control's horizontal placement has to be stated.
+      // Cross axis, not `justifyContent`: a body cell's own vertical centring is
+      // applied after `cellStyle` and takes the main axis.
       alignItems: 'flex-end',
     },
     Cell: () => (
@@ -746,13 +739,9 @@ export const TableWithViewAction = {
         Header: '',
         id: 'actions',
         // Same shape as the default columns' action column, and for the same
-        // reason. On `flex: 1` this column measured 106.66px in this 700px table
-        // against a 113.84px button, so the button hung 7.18px past its own
-        // column -- in the story the guideline points at to show how an action
-        // column is built. `display` and `justifyContent` were also dead here:
-        // a body cell's own flex centring is applied after the column's
-        // `cellStyle` and takes both, so the button was never right-aligned
-        // either. `alignItems` is the cross axis and survives.
+        // reason: on `flex: 1` the button hung 7px past its own column, and the
+        // `display`/`justifyContent` it used to carry were both dead -- the cell's
+        // own flex centring is applied after `cellStyle` and takes them.
         cellStyle: {
           width: '8.5rem',
           flex: 'none',
@@ -898,9 +887,8 @@ const responsiveColumns: Column<Entry>[] = [
   },
   {
     // Long enough to outgrow its column as the frame narrows, on the tightest
-    // track here (flex 1 against First Name's 2) and one that never drops, so
-    // the header ellipsis appears as soon as the frame leaves its default width
-    // and stays reachable all the way down.
+    // track here and one that never drops, so the header ellipsis shows up early
+    // and stays reachable.
     Header: 'Replication Health',
     accessor: 'health',
     sortType: 'health',
