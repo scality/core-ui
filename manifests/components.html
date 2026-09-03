@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -16273,6 +16273,8 @@ import * as TableStories from &#39;./tablev2.stories&#39;;
 &lt;style&gt;{`
   .sbdocs-content h2 { margin-top: 5rem; }
   .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
 `}&lt;/style&gt;
 
 # Table
@@ -16296,6 +16298,18 @@ Use this button to open a read-only detail view for the row.
 - Icon: `Eye`.
 
 &lt;Canvas of={TableStories.TableWithViewAction} layout=&quot;fullscreen&quot; /&gt;
+
+## Loading and empty states
+
+A table never tells the user a resource is empty before it has finished loading.
+
+- While loading, the table keeps its header and shows the loading placeholder in place of the rows. Nothing moves when the rows arrive.
+- &quot;No results&quot; is an answer, not a waiting screen. It appears only once loading has completed and there is genuinely nothing to show.
+- When the data cannot be loaded, the table says so. It never falls back to &quot;no results&quot;, which would tell the user the resource is empty when it is unknown.
+
+&lt;Canvas of={TableStories.LoadingTable} /&gt;
+
+&lt;Canvas of={TableStories.ErrorTable} /&gt;
 </code></pre></div>
             </div>
         </div>
