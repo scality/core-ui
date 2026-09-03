@@ -6,6 +6,8 @@ import * as TableStories from './tablev2.stories';
 <style>{`
   .sbdocs-content h2 { margin-top: 5rem; }
   .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
 `}</style>
 
 # Table
@@ -29,3 +31,15 @@ Use this button to open a read-only detail view for the row.
 - Icon: `Eye`.
 
 <Canvas of={TableStories.TableWithViewAction} layout="fullscreen" />
+
+## Loading and empty states
+
+A table never tells the user a resource is empty before it has finished loading.
+
+- While loading, the table keeps its header and shows the loading placeholder in place of the rows. Nothing moves when the rows arrive.
+- "No results" is an answer, not a waiting screen. It appears only once loading has completed and there is genuinely nothing to show.
+- When the data cannot be loaded, the table says so. It never falls back to "no results", which would tell the user the resource is empty when it is unknown.
+
+<Canvas of={TableStories.LoadingTable} />
+
+<Canvas of={TableStories.ErrorTable} />
