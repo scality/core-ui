@@ -66,7 +66,7 @@ export type LineChartProps = (
   /**
    * Named display preset that sets a group of visual defaults at once.
    *
-   * - `'default'` — opaque background, no grid lines, header visible, Y-axis line visible.
+   * - `'default'` — opaque background, horizontal grid lines, header visible, Y-axis line visible.
    * - `'modern'`  — transparent background, horizontal grid lines, no header, no Y-axis line.
    *
    * Individual values can be overridden with `displayOptions`.
@@ -91,8 +91,8 @@ export type LineChartProps = (
    * - `noTickLine`              — hides the tick marks on the Y-axis.
    *
    * @example
-   * // Add grid lines to the default preset
-   * <LineTimeSerieChart displayOptions={{ showHorizontalGridLines: true }} ... />
+   * // Remove grid lines from the default preset
+   * <LineTimeSerieChart displayOptions={{ showHorizontalGridLines: false }} ... />
    */
   displayOptions?: {
     noBackground?: boolean;
@@ -112,7 +112,7 @@ export type LineChartProps = (
 type DisplayOptions = Required<NonNullable<LineChartProps['displayOptions']>>;
 
 export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: false, noHeader: false, noYAxisLine: false, noTickLine: false },
+  default: { noBackground: false, showHorizontalGridLines: true, noHeader: false, noYAxisLine: false, noTickLine: false },
   modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: true,  noYAxisLine: true,  noTickLine: true  },
 };
 
