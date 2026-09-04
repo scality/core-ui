@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">355 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">357 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -820,7 +820,7 @@ The default style of the accordion container only includes padding.
       <div class="badges">
         <label for="c-1-components-attachmenttable-props" class="badge ok as-toggle">9 prop types</label>
         <label for="c-1-components-attachmenttable-info" class="badge info as-toggle">1 info</label>
-        <label for="c-1-components-attachmenttable-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-1-components-attachmenttable-stories" class="badge ok as-toggle">4 stories</label>
         
         
       </div>
@@ -1017,6 +1017,55 @@ import { MemoryRouter } from "react-router";</code></pre>
         /&gt;
       &lt;/Box&gt;
     &lt;/MemoryRouter&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Narrow Panel</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The table in a panel-sized column, which is the shape it ships in. Drag `frameWidth` down. At **360px** the row&#39;s `Remove` button drops its label for a tooltip; without it the row bleeds out of the panel with nothing to show it, since these panels are `overflow: visible`. The next floor is the search box at **301px**, which is `SearchInput`&#39;s fixed width and not fixable from here.</div>
+              <pre><code>const NarrowPanel = ({ frameWidth }: { frameWidth: number }) =&gt; {
+  const theme = useTheme();
+  return (
+    &lt;Box
+      data-testid=&quot;panel-frame&quot;
+      style={{
+        width: frameWidth,
+        height: &#39;100%&#39;,
+        backgroundColor: theme.backgroundLevel4,
+        outline: &#39;1px dashed #888&#39;,
+      }}
+      p={&#39;1rem&#39;}
+    &gt;
+      &lt;AttachmentProvider&gt;
+        &lt;AttachmentTable
+          entityName={{ plural: &#39;users&#39;, singular: &#39;user&#39; }}
+          filteredEntities={{
+            status: &#39;success&#39;,
+            data: {
+              number: 1,
+              entities: [
+                { name: &#39;jean.dupont@example.com&#39;, id: &#39;a&#39;, type: &#39;USER&#39; },
+                { name: &#39;storage-operators-emea&#39;, id: &#39;b&#39;, type: &#39;USER&#39; },
+              ],
+            },
+          }}
+          initialAttachmentOperations={[]}
+          onEntitySearchChange={action(&#39;onEntitySearchChange&#39;)}
+          searchEntityPlaceholder=&quot;Search user by name&quot;
+          initiallyAttachedEntities={[
+            { name: &#39;jean.dupont@example.com&#39;, id: &#39;a&#39;, type: &#39;USER&#39; },
+            { name: &#39;storage-operators-emea&#39;, id: &#39;b&#39;, type: &#39;USER&#39; },
+            { name: &#39;svc-backup&#39;, id: &#39;c&#39;, type: &#39;USER&#39; },
+          ]}
+          initiallyAttachedEntitiesStatus={&#39;success&#39;}
+          onAttachmentsOperationsChanged={() =&gt; {}}
+        /&gt;
+      &lt;/AttachmentProvider&gt;
+    &lt;/Box&gt;
   );
 };</code></pre>
             </div>
@@ -12743,7 +12792,7 @@ The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures br
       <div class="badges">
         <label for="c-44-components-inputs-searchinput-props" class="badge ok as-toggle">11 prop types</label>
         <label for="c-44-components-inputs-searchinput-info" class="badge info as-toggle">1 info</label>
-        <label for="c-44-components-inputs-searchinput-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-44-components-inputs-searchinput-stories" class="badge ok as-toggle">4 stories</label>
         <label for="c-44-components-inputs-searchinput-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -12988,6 +13037,40 @@ value: string</code></pre>
             &lt;/div&gt;
         &lt;/Wrapper&gt;
     );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Narrow</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The box shrinks with its container instead of overflowing it, down to the `1/2` size. Drag `frameWidth`: the default box gives ground from 287px to its 10rem floor, then overflows rather than shrink into uselessness. The `1/3` box is already at its own size -- the floor is never wider than the `size` asked for.</div>
+              <pre><code>const Narrow = ({ frameWidth }: { frameWidth: number }) =&gt; {
+  const [value, setValue] = useState(&#39;&#39;);
+  return (
+    &lt;Wrapper&gt;
+      &lt;Title&gt;Default size, in a {frameWidth}px frame&lt;/Title&gt;
+      &lt;div style={{ width: frameWidth, outline: &#39;1px dashed #888&#39; }}&gt;
+        &lt;SearchInput
+          value={value}
+          placeholder=&quot;Search server...&quot;
+          onChange={(e) =&gt; setValue(e.target.value)}
+          onReset={() =&gt; setValue(&#39;&#39;)}
+        /&gt;
+      &lt;/div&gt;
+      &lt;Title&gt;size=&quot;1/3&quot;, same frame&lt;/Title&gt;
+      &lt;div style={{ width: frameWidth, outline: &#39;1px dashed #888&#39; }}&gt;
+        &lt;SearchInput
+          value=&quot;&quot;
+          size=&quot;1/3&quot;
+          placeholder=&quot;Search server...&quot;
+          onChange={action(&#39;on input change&#39;)}
+          onReset={action(&#39;on input reset&#39;)}
+        /&gt;
+      &lt;/div&gt;
+    &lt;/Wrapper&gt;
+  );
 };</code></pre>
             </div>
         </div>

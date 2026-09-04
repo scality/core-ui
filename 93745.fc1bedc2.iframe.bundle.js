@@ -17,7 +17,7 @@
 `,BasicPageLayout=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.div`
   box-sizing: border-box;
   margin: 0 auto;
-  ${props=>"page"===props.$layoutKind?`\n  width: 100%;\n  max-width: calc(45rem + ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f16});\n  padding-right: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f16};\n  `:`\n  width: 100%;\n  padding-bottom: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r24};`}
+  ${props=>"page"===props.$layoutKind?`\n  width: 100%;\n  max-width: calc(45rem + ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f16});\n  padding-right: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f16};\n  `:`\n  width: 100%;\n  padding-right: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.f16};\n  padding-bottom: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r24};`}
 `,FixedHeader=(0,styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay)(BasicPageLayout)`
   ${props=>"page"===props.$layoutKind?`\n  border-bottom: 1px solid ${props.theme.border};\n  `:""}
 `,FixedFooter=(0,styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay)(BasicPageLayout)`
@@ -30,6 +30,10 @@
   flex-grow: 1;
   align-self: stretch;
   overflow-y: auto;
+  /* Reserve the bar's width whether or not it is showing, so the fields do not
+     shift left the moment the form starts scrolling. This reserves only the space
+     the bar occupies; the gap between bar and content is the padding-right above. */
+  scrollbar-gutter: stable;
 `,SectionGrid=styled_components__WEBPACK_IMPORTED_MODULE_2__.Ay.div`
   ${({$labelTrack,$responsive,$fixedLabel,$stackBelow})=>$fixedLabel?styled_components__WEBPACK_IMPORTED_MODULE_2__.AH`
           display: flex;
@@ -112,4 +116,4 @@
     border-radius: 2px;
   }
 `,IconHelp=({tooltipMessage,overlayStyle,placement="right","aria-label":ariaLabel,title})=>(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_tooltip_Tooltip_component__WEBPACK_IMPORTED_MODULE_4__.m_,{overlay:tooltipMessage,placement,overlayStyle,children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(HelpButton,{type:"button","aria-label":ariaLabel||title||"More information",children:(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_Icon_component__WEBPACK_IMPORTED_MODULE_2__.In,{name:"Info",color:"buttonSecondary"})})});try{IconHelp.displayName="IconHelp",IconHelp.__docgenInfo={description:"",displayName:"IconHelp",props:{tooltipMessage:{defaultValue:null,description:"",name:"tooltipMessage",required:!0,type:{name:"ReactNode"}},placement:{defaultValue:{value:"right"},description:"",name:"placement",required:!1,type:{name:"enum",value:[{value:'"top"'},{value:'"bottom"'},{value:'"left"'},{value:'"top-start"'},{value:'"top-end"'},{value:'"right"'},{value:'"right-start"'},{value:'"right-end"'},{value:'"bottom-end"'},{value:'"bottom-start"'},{value:'"left-start"'},{value:'"left-end"'}]}},overlayStyle:{defaultValue:null,description:"",name:"overlayStyle",required:!1,type:{name:"CSSProperties"}},"aria-label":{defaultValue:null,description:'Accessible label for the help button.\nShould describe what information the tooltip provides.\nExample: "More info about Veeam application"',name:"aria-label",required:!1,type:{name:"string"}},title:{defaultValue:null,description:"@deprecated Use aria-label instead",name:"title",required:!1,type:{name:"string"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/iconhelper/IconHelper.tsx#IconHelp"]={docgenInfo:IconHelp.__docgenInfo,name:"IconHelp",path:"src/lib/components/iconhelper/IconHelper.tsx#IconHelp"})}catch(__react_docgen_typescript_loader_error){}}}]);
-//# sourceMappingURL=93745.6095b3bd.iframe.bundle.js.map
+//# sourceMappingURL=93745.fc1bedc2.iframe.bundle.js.map
