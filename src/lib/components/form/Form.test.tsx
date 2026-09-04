@@ -57,10 +57,11 @@ describe('Form', () => {
   });
 
   /**
-   * The marker is appended to the label inside the same Text, so it is the piece
-   * that silently falls out of the accessible name -- or loses the space before it
-   * -- if that composition is restructured. Tone itself is deliberately not
-   * asserted: reading a colour declaration back out proves nothing.
+   * The marker is appended to the label inside the same `LabelText`, so it is
+   * the piece that silently falls out of the accessible name -- or loses the
+   * space before it -- if that composition is restructured. Tone itself is
+   * deliberately not asserted: reading a colour declaration back out proves
+   * nothing.
    */
   it.each([
     ['partial', 'User name', true, 'User name *'],
@@ -87,6 +88,28 @@ describe('Form', () => {
       expect(screen.getByRole('textbox')).toHaveAccessibleName(expected);
     },
   );
+
+  // jsdom has no layout, so the icon's position is out of reach here. What this pins
+  // is that moving the icon out of its old wrapper kept it inside its label.
+  it('keeps the help affordance inside the label it annotates', () => {
+    render(
+      <Form layout={{ kind: 'page', title: 'Test Form' }}>
+        <FormSection>
+          <FormGroup
+            id="tls-field"
+            label="Enable LDAP Over TLS"
+            labelHelpTooltip="Encrypt the connection to the directory server."
+            content={<input type="text" id="tls-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+
+    const help = screen.getByRole('button', { name: 'More information' });
+    expect(
+      screen.getByText('Enable LDAP Over TLS').closest('label'),
+    ).toContainElement(help);
+  });
 
   it('keeps the labelled field visible and usable with responsive shrink', async () => {
     render(
