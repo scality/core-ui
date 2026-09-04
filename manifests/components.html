@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">357 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">358 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.0s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -5404,7 +5404,7 @@ tooltipStyle?: any</code></pre>
       <div class="badges">
         <label for="c-13-components-copybutton-props" class="badge ok as-toggle">8 prop types</label>
         <label for="c-13-components-copybutton-info" class="badge info as-toggle">1 info</label>
-        <label for="c-13-components-copybutton-stories" class="badge ok as-toggle">5 stories</label>
+        <label for="c-13-components-copybutton-stories" class="badge ok as-toggle">6 stories</label>
         
         
       </div>
@@ -5477,7 +5477,7 @@ variant?: &quot;outline&quot;</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { CopyButton, Wrapper } from "@scality/core-ui";</code></pre>
+                <pre><code>import { Box, CopyButton, Stack, Text, Wrapper } from "@scality/core-ui";</code></pre>
               </div>
           
           
@@ -5525,6 +5525,54 @@ variant?: &quot;outline&quot;</code></pre>
               
               
               <pre><code>const OutlinedCopyButtonWithBigLabel = () =&gt; &lt;CopyButton label=&quot;Certificate&quot; textToCopy=&quot;Certificate&quot; /&gt;;</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Outlined Copy Button Icon Only</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const OutlinedCopyButtonIconOnly = () =&gt; (
+  &lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+    &lt;Stack direction=&quot;vertical&quot; gap=&quot;r4&quot;&gt;
+      &lt;Text&gt;iconOnly — collapsed at every width&lt;/Text&gt;
+      &lt;Box&gt;
+        &lt;CopyButton
+          variant=&quot;outline&quot;
+          label=&quot;Certificate&quot;
+          textToCopy=&quot;Certificate&quot;
+          iconOnly
+        /&gt;
+      &lt;/Box&gt;
+    &lt;/Stack&gt;
+    &lt;Stack direction=&quot;vertical&quot; gap=&quot;r4&quot;&gt;
+      &lt;Text&gt;
+        iconOnly={&#39;{240}&#39;} — drag the frame below 240px to collapse it
+      &lt;/Text&gt;
+      &lt;div
+        style={{
+          resize: &#39;horizontal&#39;,
+          overflow: &#39;auto&#39;,
+          width: &#39;20rem&#39;,
+          minWidth: &#39;8rem&#39;,
+          maxWidth: &#39;100%&#39;,
+          border: &#39;1px dashed #666&#39;,
+          padding: &#39;0.5rem&#39;,
+        }}
+      &gt;
+        &lt;Box container&gt;
+          &lt;CopyButton
+            variant=&quot;outline&quot;
+            label=&quot;Certificate&quot;
+            textToCopy=&quot;Certificate&quot;
+            iconOnly={240}
+          /&gt;
+        &lt;/Box&gt;
+      &lt;/div&gt;
+    &lt;/Stack&gt;
+  &lt;/Stack&gt;
+);</code></pre>
             </div>
         </div>
     
