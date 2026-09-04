@@ -1,6 +1,31 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { Icon } from '../icon/Icon.component';
 import { Button, type Props } from './Buttonv2.component';
+
+// The outline variant swaps its label on success ("Copy X" -> "Copied X!"), so the
+// button reserves room for the longer string and keeps its width when clicked.
+//
+// Character-count heuristic, inherited unchanged: `7rem` for the fixed part (icon,
+// padding, border, "Copied!") plus 0.5rem per label character as an average width.
+// The average under-reserves for an all-uppercase label, which still resizes.
+const outlineWidthFloor = (label?: string) =>
+  `${(label ? label.length / 2 : 0) + 7}rem`;
+
+/**
+ * A `Button` carrying the outline variant's width floor.
+ *
+ * A stylesheet rule, not an inline `style`: `iconOnly` hides the label via a
+ * `@container` query, which an inline style outranks -- so an inline floor held a
+ * collapsed button at its full labelled width. The breakpoint is read from
+ * `iconOnly` itself so the floor and the label cannot disagree.
+ */
+const FlooredButton = styled(Button)<{ $floor?: string }>`
+  min-width: ${({ $floor }) => $floor ?? 'auto'};
+  ${({ iconOnly }) =>
+    typeof iconOnly === 'number' &&
+    `@container responsive (max-width: ${iconOnly}px) { min-width: auto; }`}
+`;
 
 export const COPY_STATE_IDLE = 'idle';
 export const COPY_STATE_SUCCESS = 'success';
@@ -73,17 +98,22 @@ export const CopyButton = ({
 } & Omit<Props, 'tooltip' | 'label'>) => {
   const { copy, copyStatus } = useClipboard();
   const isSuccess = copyStatus === COPY_STATE_SUCCESS;
+  const { iconOnly } = props;
   return (
-    <Button
+    <FlooredButton
       {...props}
       variant={variant === 'outline' ? 'outline' : undefined}
+      // A button collapsed at every width has no label to reserve room for.
+      $floor={
+        variant === 'outline' && iconOnly !== true
+          ? outlineWidthFloor(label)
+          : undefined
+      }
       style={{
         ...props.style,
+        // Last, so the success state cannot be styled away while clicks are still
+        // being swallowed.
         ...(isSuccess && { cursor: 'not-allowed', opacity: 0.5 }),
-        minWidth:
-          variant === 'outline'
-            ? `${(label ? label.length / 2 : 0) + 7}rem`
-            : undefined,
       }}
       label={
         variant === 'outline'
