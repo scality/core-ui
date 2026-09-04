@@ -10,9 +10,8 @@ import {
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
-import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
-import { IconHelp } from '../iconhelper/IconHelper';
+import { HELP_ICON_SIZE, IconHelp } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
 
@@ -285,16 +284,37 @@ const FieldSubgridRow = styled.div<{
   }}
 `;
 
-const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
+const GridLabelCell = styled.div`
   min-width: 0;
-  ${({ $hasHelpTooltip }) =>
-    $hasHelpTooltip &&
+`;
+
+// The help icon's own footprint, taken from the icon rather than restated, and
+// the gap that keeps it off the label.
+const HELP_ICON_RESERVE = `calc(${HELP_ICON_SIZE} + ${spacing.r8})`;
+
+/**
+ * The label, holding the room its help icon will sit in.
+ *
+ * The icon is an atomic inline with a soft-wrap opportunity in front of it that
+ * nothing inside it can suppress, so it landed alone on the next line. End padding
+ * on the label's own inline box lands on its last line -- where the icon goes -- and
+ * counts toward min-content, so a column sized to its text fits the icon too.
+ */
+const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
+  ${({ $reserveHelpIcon }) =>
+    $reserveHelpIcon &&
     css`
-      /* The non-responsive column reserves 2rem beyond the label for the help
-         icon affordance; reserve the same here so the label column is identical
-         in both layouts. */
-      padding-right: ${spacing.r32};
+      padding-right: ${HELP_ICON_RESERVE};
     `}
+`;
+
+/**
+ * Pulled back onto the room `LabelText` reserved, by exactly its own width, so
+ * placing it costs the line nothing and no break is needed to fit it.
+ */
+const HelpIconSlot = styled.span`
+  display: inline-block;
+  margin-left: -${HELP_ICON_SIZE};
 `;
 
 // Carries the section's label-column config down to each FormGroup so a row can
@@ -361,22 +381,18 @@ const FormGroup = ({
       id={`${LABEL_PREFIX}${id}`}
       style={{ opacity: disabled ? 0.5 : 1 }}
     >
-      <Text>
+      <LabelText $reserveHelpIcon={!!labelHelpTooltip}>
         {label}
         {requireMode !== 'all' && required && ' *'}
         {requireMode === 'all' && !required && ' (optional)'}
-      </Text>
+      </LabelText>
       {labelHelpTooltip && (
-        <Box
-          display="inline-block"
-          marginLeft={spacing.r8}
-          style={{ whiteSpace: 'nowrap' }}
-        >
+        <HelpIconSlot>
           <IconHelp
             tooltipMessage={labelHelpTooltip}
             overlayStyle={maxWidthTooltip}
           />
-        </Box>
+        </HelpIconSlot>
       )}
     </label>
   );
@@ -426,9 +442,7 @@ const FormGroup = ({
         $fixedLabel={sectionLabel.fixedLabel}
         $stackBelow={sectionLabel.stackBelow}
       >
-        <GridLabelCell $hasHelpTooltip={!!labelHelpTooltip}>
-          {labelContent}
-        </GridLabelCell>
+        <GridLabelCell>{labelContent}</GridLabelCell>
         {fieldContent}
       </FieldSubgridRow>
     </FieldContext.Provider>
