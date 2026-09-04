@@ -361,7 +361,11 @@ const FormGroup = ({
       id={`${LABEL_PREFIX}${id}`}
       style={{ opacity: disabled ? 0.5 : 1 }}
     >
-      <Text>
+      {/* The key of a key/value pair, dimmed so the pair reads by tone and not by
+          position alone. Disabled keeps the primary tone: the wrapping label is
+          already at 0.5 opacity, and compounding the two costs more contrast than
+          the pairing gains. */}
+      <Text color={disabled ? undefined : 'textSecondary'}>
         {label}
         {requireMode !== 'all' && required && ' *'}
         {requireMode === 'all' && !required && ' (optional)'}
