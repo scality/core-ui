@@ -959,6 +959,80 @@ export const ResponsivePageFormInFlexRow = {
   args: { requireMode: 'partial', responsive: true },
 };
 
+// Key/value tone: the FormGroup label is `textSecondary` against the value's
+// `textPrimary`, so a two-column form reads as pairs rather than two columns of
+// equally weighted text.
+//
+// Both require modes are on the page at once so the markers can be judged against
+// the label they sit on -- `*` above, `(optional)` below. Both dim with the label,
+// matching the page form's already-secondary "* are required fields" legend.
+//
+// The disabled last row of each form keeps the primary tone: the 0.5 opacity on the
+// label already dims it, and compounding the two costs more contrast than it gains.
+export const FormGroupLabelTone = {
+  render: () => (
+    <Stack direction="vertical" gap="r24">
+      {(['partial', 'all'] as const).map((requireMode) => (
+        <div key={requireMode} style={{ width: '34rem', maxWidth: '100%' }}>
+          <Form layout={{ kind: 'tab' }} requireMode={requireMode} responsive>
+            <FormSection
+              title={{ name: `requireMode="${requireMode}"`, icon: 'Account' }}
+            >
+              <FormGroup
+                direction="horizontal"
+                label="User name"
+                id={`lt-name-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-name-${requireMode}`}
+                    defaultValue="holly.day"
+                  />
+                }
+                required
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Description"
+                id={`lt-desc-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-desc-${requireMode}`}
+                    defaultValue="Platform operator"
+                  />
+                }
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Contact email"
+                id={`lt-email-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-email-${requireMode}`}
+                    defaultValue="holly.day@example.com"
+                  />
+                }
+                labelHelpTooltip="Used for expiry notifications."
+              />
+              <FormGroup
+                direction="horizontal"
+                label="Created on"
+                id={`lt-created-${requireMode}`}
+                content={
+                  <Input
+                    id={`lt-created-${requireMode}`}
+                    defaultValue="2026-01-14"
+                  />
+                }
+                disabled
+              />
+            </FormSection>
+          </Form>
+        </div>
+      ))}
+    </Stack>
+  ),
+};
+
 // A detail-page shape: a `responsive` page form whose section
 // forces a label width, with labels long enough to actually need it. A grid track
 // satisfies its max before the flexible field track flexes, so with a constant cap
