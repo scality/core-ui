@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import {
   addMissingDataPoint,
+  getMinPositiveValue,
   normalizeChartDataWithUnits,
 } from '../common/chartUtils';
 import { Serie, isSymmetricalSeries } from './LineTimeSerieChart.types';
@@ -30,6 +31,12 @@ type ChartDataOutput = {
   topDomain: number;
   /** Value used for tick calculation */
   topValue: number;
+  /**
+   * Smallest positive value in the normalized data, or `null` when there is
+   * none. A log axis is bounded from below by the data; a linear one never
+   * needs this.
+   */
+  minPositiveValue: number | null;
   /** Unit label (e.g., "KiB/s", "%") */
   unitLabel: string | undefined;
   /** Factor the dataset was divided by during normalization (for tooltip re-scaling) */
@@ -316,10 +323,16 @@ export function useChartData({
     return labels;
   }, [series, yAxisType]);
 
+  const minPositiveValue = useMemo(
+    () => getMinPositiveValue(rechartsData, 'timestamp'),
+    [rechartsData],
+  );
+
   return {
     rechartsData,
     topDomain,
     topValue,
+    minPositiveValue,
     unitLabel,
     valueBase,
     xAxisTicks,

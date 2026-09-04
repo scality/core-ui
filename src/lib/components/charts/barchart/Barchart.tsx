@@ -13,7 +13,15 @@ import { Stack } from '../../../spacing';
 import { chartColors, ChartColors, fontSize } from '../../../style/theme';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import { BarchartTooltip } from './BarchartTooltip';
-import { formatTickValue, getTicks, splitTickLines } from '../common/chartUtils';
+import {
+  formatLogTickValue,
+  formatTickValue,
+  getLogAxis,
+  getTicks,
+  hasZeroValue,
+  placeNonPositiveValues,
+  splitTickLines,
+} from '../common/chartUtils';
 import { useChartData } from './Barchart.utils';
 import {
   ChartHeader,
@@ -55,6 +63,9 @@ const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOpti
   default: { noBackground: false, showHorizontalGridLines: false, noYAxisLine: false, noTickLine: false, noHeader: false },
   modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
 };
+
+/** A Recharts row. `null` is a value the axis cannot place — see `dropNonPositiveValues`. */
+type BarchartRow = { [key: string]: string | number | null };
 
 export type Point = {
   key: string | number;
@@ -116,6 +127,32 @@ export type BarchartProps<T extends BarchartBars> = {
    * Only the properties you specify are overridden; the rest come from the preset.
    */
   displayOptions?: BarchartDisplayOptions;
+  /**
+   * Y-axis scale.
+   *
+   * `'log'` is for a dataset whose values span orders of magnitude: on a linear
+   * axis the small bars collapse onto the baseline and only the largest one is
+   * readable, and a log axis gives each decade the same height instead. The
+   * axis is bounded by the decades enclosing the data, and its ticks are the
+   * decades themselves.
+   *
+   * It changes the display and nothing else: no value is rescaled, and the
+   * tooltip, the legend and the unit scaling all keep the numbers the caller
+   * passed in.
+   *
+   * Two things it cannot do:
+   * - A bar whose value is zero or negative is dropped, because a log axis
+   *   has nowhere to put it. It renders as a gap, which is the same thing an
+   *   absent bar renders as — so on a log axis "measured zero" and "no data"
+   *   become indistinguishable. They are not the same fact. Stay linear where
+   *   that difference matters.
+   * - `stacked` falls back to a linear axis. Stacking places each segment at
+   *   a cumulative sum, so on a log axis a segment's height stops matching
+   *   its value and the chart misreads.
+   *
+   * @default 'linear'
+   */
+  yAxisScale?: 'linear' | 'log';
 };
 
 /* ---------------------------------- MAIN COMPONENT ---------------------------------- */
@@ -141,6 +178,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     rightTitle,
     isLoading,
     isError,
+    yAxisScale = 'linear',
     displayPreset = 'default',
     displayOptions,
   } = props;
@@ -175,6 +213,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     rechartsData,
     topDomain,
     valueBase,
+    minPositiveValue,
+    normalizedMaxValue,
   } = useChartData(
     bars || [],
     type,
@@ -185,6 +225,37 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     stackedBarSort,
   );
   const titleWithUnit = unitLabel ? `${title} (${unitLabel})` : title;
+
+  // Stacking a log axis would put each segment at a cumulative sum, so its
+  // height would no longer match its value. Linear is the honest fallback.
+  const isLogScale = yAxisScale === 'log' && !stacked;
+
+  const logAxis = useMemo(
+    () =>
+      isLogScale
+        ? getLogAxis(minPositiveValue, normalizedMaxValue, {
+            // Only spend a band when there is a zero to put in it.
+            withZeroBand: hasZeroValue(rechartsData, 'category'),
+          })
+        : null,
+    [isLogScale, minPositiveValue, normalizedMaxValue, rechartsData],
+  );
+
+  // A zero would draw towards minus infinity, so it moves to the axis's zero
+  // band, where `minPointSize` gives it a visible stub at the `0` tick. An
+  // absent bar draws nothing at all, so the two stay distinguishable — which
+  // matters here, because `transformCategoryData` fills an absent bar with 0.
+  const chartData = useMemo<BarchartRow[]>(
+    () =>
+      logAxis
+        ? placeNonPositiveValues<BarchartRow>(
+            rechartsData,
+            'category',
+            logAxis.zeroValue,
+          )
+        : rechartsData,
+    [logAxis, rechartsData],
+  );
 
   const tickFormatter = useCallback(
     (value: number) => formatTickValue(value, roundReferenceValue),
@@ -197,11 +268,11 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     if (type.type !== 'category') {
       return 1;
     }
-    return rechartsData.reduce((max, point) => {
+    return chartData.reduce((max, point) => {
       const lineCount = splitTickLines(point.category ?? '').length;
       return Math.max(max, lineCount);
     }, 1);
-  }, [type.type, rechartsData]);
+  }, [type.type, chartData]);
 
   const xAxisHeight = TICK_BASE_HEIGHT + (maxTickLines - 1) * TICK_LINE_HEIGHT;
 
@@ -216,7 +287,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     return (
       <StyledResponsiveContainer ref={chartRef} width="100%" height={height}>
         <RechartsBarChart
-          data={rechartsData}
+          data={chartData}
           accessibilityLayer
           barSize={
             type.type === 'category'
@@ -257,9 +328,18 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
 
           <YAxis
             interval={0}
-            domain={[0, topDomain]}
-            ticks={getTicks(roundReferenceValue, false)}
-            tickFormatter={tickFormatter}
+            scale={logAxis ? 'log' : 'auto'}
+            domain={logAxis ? logAxis.domain : [0, topDomain]}
+            // A log axis is bounded by whole decades, so a value below the
+            // floor is clipped rather than dragging the axis down to it.
+            allowDataOverflow={logAxis !== null}
+            ticks={logAxis ? logAxis.ticks : getTicks(roundReferenceValue, false)}
+            tickFormatter={
+              logAxis
+                ? (value: number) =>
+                    formatLogTickValue(value, logAxis.zeroValue)
+                : tickFormatter
+            }
             axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
             tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
             tick={{
@@ -297,6 +377,7 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
                 unitLabel={unitLabel}
                 unitRange={unitRange}
                 valueBase={valueBase}
+                logZeroValue={logAxis?.zeroValue ?? null}
                 chartContainerRef={chartRef}
               />
             )}
