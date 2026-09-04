@@ -22,7 +22,12 @@ type Props = {
 const ConstrainedTextContainer = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: ${(props) => (props.$centered ? 'center' : 'left')};
+  /* inherit, not left: this is a rule on the element, so a hard-coded value
+     silently outranks whatever alignment the container set -- a table cell
+     declaring textAlign: center kept left-aligned text with nothing to explain
+     why. The centered prop stays as an explicit override, for a container that
+     sets no alignment of its own. */
+  text-align: ${(props) => (props.$centered ? 'center' : 'inherit')};
 
   ${(props) =>
     props.$lineClamp > 1

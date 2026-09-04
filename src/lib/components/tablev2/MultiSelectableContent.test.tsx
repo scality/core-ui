@@ -67,7 +67,7 @@ describe('MultiSelectableContent', () => {
     expect(lastCallRows[0].original).toEqual(data[3]); // Ninette (firstName-sorted index 0)
   });
 
-  it('does not include a previously single-clicked row in subsequent multi-selection (ARTESCA-8467)', async () => {
+  it('does not include a previously single-clicked row in subsequent multi-selection', async () => {
     const onSingleRowSelected = jest.fn();
     const onMultiSelectionChanged = jest.fn();
     renderMultiSelectTable({ onSingleRowSelected, onMultiSelectionChanged });
@@ -119,5 +119,81 @@ describe('MultiSelectableContent', () => {
     const activeRow = screen.getAllByRole('row')[1];
     expect(within(activeRow).getByRole('checkbox')).not.toBeChecked();
     expect(within(screen.getAllByRole('row')[3]).getByRole('checkbox')).toBeChecked();
+  });
+});
+
+describe('MultiSelectableContent row click vs in-cell controls', () => {
+  const columnsWithButton: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    {
+      Header: 'Action',
+      accessor: 'lastName',
+      disableSortBy: true,
+      Cell: ({ row }) => (
+        <button onClick={() => row.original.onAction()}>
+          Detach {row.original.firstName}
+        </button>
+      ),
+    },
+  ];
+
+  const renderWithAction = (
+    onAction: jest.Mock,
+    props: {
+      onMultiSelectionChanged?: jest.Mock;
+      onSingleRowSelected?: jest.Mock;
+    } = {},
+  ) =>
+    render(
+      <ThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+        <Table
+          columns={columnsWithButton}
+          data={data.map((entry) => ({ ...entry, onAction }))}
+          defaultSortingKey="firstName"
+        >
+          <Table.MultiSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            {...props}
+          />
+        </Table>
+      </ThemeProvider>,
+    );
+
+  it('does not single-select the row when a button inside a cell is clicked', async () => {
+    const onAction = jest.fn();
+    const onSingleRowSelected = jest.fn();
+    renderWithAction(onAction, { onSingleRowSelected });
+
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    fireEvent.click(screen.getByRole('button', { name: /Detach Ninette/ }));
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onSingleRowSelected).not.toHaveBeenCalled();
+  });
+
+  it('does not multi-select the row when a button inside a cell is clicked', async () => {
+    const onAction = jest.fn();
+    const onMultiSelectionChanged = jest.fn();
+    renderWithAction(onAction, { onMultiSelectionChanged });
+
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    onMultiSelectionChanged.mockClear();
+    fireEvent.click(screen.getByRole('button', { name: /Detach Ninette/ }));
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onMultiSelectionChanged).not.toHaveBeenCalled();
+  });
+
+  it('still single-selects the row when the click lands on plain cell content', async () => {
+    const onAction = jest.fn();
+    const onSingleRowSelected = jest.fn();
+    renderWithAction(onAction, { onSingleRowSelected });
+
+    await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    fireEvent.click(screen.getByText('Ninette'));
+
+    expect(onSingleRowSelected).toHaveBeenCalledTimes(1);
+    expect(onAction).not.toHaveBeenCalled();
   });
 });

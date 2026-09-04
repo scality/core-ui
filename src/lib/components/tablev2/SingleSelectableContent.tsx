@@ -9,14 +9,19 @@ import {
   TableHeader,
   SortCaret,
   HeaderContent,
-  HeaderLabel,
 } from './Tablestyle';
 import {
   TableHeightKeyType,
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { TableRows, useTableScrollbar } from './TableCommon';
+import {
+  bodyCellStyle,
+  shouldIgnoreRowEvent,
+  TableRows,
+  TruncatableHeaderLabel,
+  useTableScrollbar,
+} from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
 import { Box } from '../box/Box';
@@ -89,6 +94,14 @@ export function SingleSelectableContent<
   onRowSelectedRef.current = onRowSelected;
 
   /**
+   * Rendered output -- tabIndex and the hover affordance -- not something only a
+   * handler reads, so a plain value and a memo dependency rather than the ref above.
+   * The ref reads fresh today only because react-window never bails out of the memo,
+   * which is not a guarantee this component makes.
+   */
+  const isSelectable = Boolean(onRowSelected);
+
+  /**
    * RenderRow MUST keep a stable identity across re-renders. It used to be redefined inline on
    * every render, so react-window saw a new component type each time and remounted (not just
    * re-rendered) every row — and therefore every cell — whenever the table re-rendered for any
@@ -99,72 +112,74 @@ export function SingleSelectableContent<
    */
   const RenderRow = useMemo(
     () =>
-      memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
-        const row = data[index];
-        prepareRowRef.current(row);
-        let rowProps = row.getRowProps({
-          /**
-           * Note: We need to pass the style property to the row component.
-           * Otherwise when we scroll down, the next rows are flashing
-           * because they are re-rendered in loop.
-           */
-          style: { ...style },
-        });
+      memo(
+        ({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
+          const row = data[index];
+          prepareRowRef.current(row);
+          let rowProps = row.getRowProps({
+            /**
+             * Note: We need to pass the style property to the row component.
+             * Otherwise when we scroll down, the next rows are flashing
+             * because they are re-rendered in loop.
+             */
+            style: { ...style },
+          });
 
-        rowProps = {
-          ...rowProps,
-          ...{
-            onClick: () => {
-              const onRowSelected = onRowSelectedRef.current;
-              if (onRowSelected) return onRowSelected(row);
+          rowProps = {
+            ...rowProps,
+            ...{
+              onClick: (event) => {
+                if (shouldIgnoreRowEvent(event)) return;
+                const onRowSelected = onRowSelectedRef.current;
+                if (onRowSelected) return onRowSelected(row);
+              },
+              tabIndex: isSelectable ? 0 : undefined,
+              onKeyDown: (event) => {
+                // `keydown` bubbles, so without the same guard Enter or Space on
+                // a focused in-cell control selects the row *and* preventDefault()s
+                // the control's own activation.
+                if (shouldIgnoreRowEvent(event)) return;
+                const onRowSelected = onRowSelectedRef.current;
+                if (
+                  onRowSelected &&
+                  (event.key === ' ' ||
+                    event.key === 'Enter' ||
+                    event.key === 'Spacebar')
+                ) {
+                  event.preventDefault();
+                  onRowSelected(row);
+                }
+              },
             },
-            tabIndex: onRowSelectedRef.current ? 0 : undefined,
-            onKeyDown: (event) => {
-              const onRowSelected = onRowSelectedRef.current;
-              if (
-                onRowSelected &&
-                (event.key === ' ' ||
-                  event.key === 'Enter' ||
-                  event.key === 'Spacebar')
-              ) {
-                event.preventDefault();
-                onRowSelected(row);
-              }
-            },
-          },
-        };
+          };
 
-        return (
-          <TableRow
-            {...rowProps}
-            $isSelected={selectedId === row.id}
-            aria-selected={selectedId === row.id ? 'true' : 'false'}
-            $separationLineVariant={separationLineVariant}
-            $selectedId={selectedId}
-            className="tr"
-          >
-            {row.cells.map((cell) => {
-              let cellProps = cell.getCellProps({
-                style: {
-                  ...cell.column.cellStyle,
-                  // Vertically center the text in cells.
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                },
-                role: 'gridcell',
-              });
+          return (
+            <TableRow
+              {...rowProps}
+              $isSelected={selectedId === row.id}
+              aria-selected={selectedId === row.id ? 'true' : 'false'}
+              $separationLineVariant={separationLineVariant}
+              $selectable={isSelectable}
+              className="tr"
+            >
+              {row.cells.map((cell) => {
+                let cellProps = cell.getCellProps({
+                  style: bodyCellStyle(cell.column.cellStyle),
+                  role: 'gridcell',
+                });
 
-              return (
-                <div {...cellProps} className="td">
-                  {cell.render('Cell')}
-                </div>
-              );
-            })}
-          </TableRow>
-        );
-      }, areEqual),
-    [selectedId, separationLineVariant],
+                return (
+                  <div {...cellProps} className="td">
+                    {cell.render('Cell')}
+                  </div>
+                );
+              })}
+            </TableRow>
+          );
+        },
+        areEqual,
+      ),
+    [selectedId, separationLineVariant, isSelectable],
   );
 
   const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
@@ -211,7 +226,9 @@ export function SingleSelectableContent<
                     $align={column.cellStyle?.textAlign}
                     $sortable={!column.disableSortBy}
                   >
-                    <HeaderLabel>{column.render('Header')}</HeaderLabel>
+                    <TruncatableHeaderLabel header={column.Header}>
+                      {column.render('Header')}
+                    </TruncatableHeaderLabel>
                     <SortCaret column={column} />
                   </HeaderContent>
                 </TableHeader>

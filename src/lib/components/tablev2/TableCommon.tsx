@@ -1,8 +1,10 @@
 import {
   ComponentType,
+  ReactNode,
   Ref,
   useCallback,
   useMemo,
+  useRef,
   useState,
   forwardRef,
 } from 'react';
@@ -22,8 +24,10 @@ import {
 } from './TableUtils';
 import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
-import { CSSProperties } from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+import { Tooltip } from '../tooltip/Tooltip.component';
+import { HeaderLabel } from './Tablestyle';
 
 const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { scrollFade } = useTableContext();
@@ -120,6 +124,128 @@ export const VirtualizedRows = <
         );
       }}
     </AutoSizer>
+  );
+};
+
+/**
+ * Style every body cell gets, given the column's own `cellStyle`.
+ *
+ * `min-width: 0` is the same reset `TableHeader` carries -- without it a short cell
+ * freezes at its content width while its header keeps shrinking. Before the spread
+ * so a consumer's `cellStyle` wins; the flex centring after, as the cell's own.
+ */
+export const bodyCellStyle = (cellStyle?: CSSProperties): CSSProperties => ({
+  minWidth: 0,
+  ...cellStyle,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+});
+
+/**
+ * Controls a row-wide handler must not act on. A row's `onClick`/`onKeyDown` fires
+ * for any click inside it, so a click on an in-cell button also selected the row --
+ * and that re-render remounts the cell, closing whatever the button just opened.
+ * The selection checkbox is absent on purpose: its own cell stops propagation.
+ */
+const INTERACTIVE_SELECTOR =
+  'button, a, input, select, textarea, label, [role="button"], [role="link"], [role="checkbox"], [role="menuitem"]';
+
+/**
+ * Whether a bubbled event reached a row's handler from somewhere the row must not
+ * treat as a click on itself. Both bounds are load-bearing: an unbounded `closest()`
+ * walks past the row to the document, and a React portal leaves the row in the DOM
+ * while still bubbling to it through React.
+ */
+export const shouldIgnoreRowEvent = (event: {
+  target: EventTarget | null;
+  currentTarget: EventTarget | null;
+}): boolean => {
+  const { target, currentTarget } = event;
+  if (!(target instanceof Element) || !(currentTarget instanceof Element)) {
+    return false;
+  }
+  if (!currentTarget.contains(target)) {
+    return true;
+  }
+  const control = target.closest(INTERACTIVE_SELECTOR);
+  return !!control && currentTarget.contains(control);
+};
+
+/**
+ * Reports whether the element the returned ref is attached to is actually
+ * ellipsized. Re-measures on resize: a column's width comes from a grow factor, so
+ * whether a header truncates changes with the table's width.
+ */
+const useIsEllipsized = <T extends HTMLElement>() => {
+  const [isEllipsized, setIsEllipsized] = useState(false);
+  const observerRef = useRef<ResizeObserver | null>(null);
+
+  const ref = useCallback((node: T | null) => {
+    observerRef.current?.disconnect();
+    observerRef.current = null;
+    if (!node) {
+      return;
+    }
+    const measure = () => setIsEllipsized(node.scrollWidth > node.clientWidth);
+    measure();
+    if (typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    observerRef.current = observer;
+  }, []);
+
+  return { ref, isEllipsized };
+};
+
+/**
+ * Makes `Tooltip` safe around an ellipsizing flex item. `TooltipContainer` is an
+ * `inline-block` with no `min-width: 0` and wraps its children in a second `div`,
+ * both of which impose a content-based minimum -- so the column stops shrinking and
+ * the tooltip removes the truncation it exists to explain. `ConstrainedText` has its
+ * own `BlockTooltip` for the same reason.
+ */
+const HeaderLabelFrame = styled.div`
+  /* Shrink-to-fit, as the bare label was: HeaderContent aligns with
+     justify-content, inert once a child fills the row, and a growing frame also
+     strands the caret at the far edge. */
+  min-width: 0;
+
+  > .sc-tooltip,
+  > .sc-tooltip > div {
+    display: block;
+    min-width: 0;
+  }
+`;
+
+/**
+ * A header label that offers its full text through a `Tooltip` once it no longer
+ * fits. Body cells already recover via `ConstrainedText`; an ellipsized header had
+ * no way back.
+ *
+ * `Tooltip` and not a native `title`: `title` has an unconfigurable ~1s delay, and
+ * react-table's `getSortByToggleProps()` already sets one, so a sortable header
+ * would carry two. Only `overlay` is conditional, so the measured element never
+ * changes size under the ref.
+ */
+export const TruncatableHeaderLabel = ({
+  header,
+  children,
+}: {
+  header: unknown;
+  children: ReactNode;
+}) => {
+  const { ref, isEllipsized } = useIsEllipsized<HTMLSpanElement>();
+  const canRecover = typeof header === 'string' && isEllipsized;
+
+  return (
+    <HeaderLabelFrame>
+      <Tooltip overlay={canRecover ? header : undefined} placement="top">
+        <HeaderLabel ref={ref}>{children}</HeaderLabel>
+      </Tooltip>
+    </HeaderLabelFrame>
   );
 };
 

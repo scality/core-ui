@@ -5,7 +5,6 @@ import { useTableContext } from './Tablev2.component';
 import {
   HeadRow,
   SortCaret,
-  HeaderLabel,
   TableBody,
   TableHeader,
   TableRowMultiSelectable,
@@ -16,7 +15,13 @@ import {
   TableLocalType,
   TableVariantType,
 } from './TableUtils';
-import { TableRows, useTableScrollbar } from './TableCommon';
+import {
+  bodyCellStyle,
+  shouldIgnoreRowEvent,
+  TableRows,
+  TruncatableHeaderLabel,
+  useTableScrollbar,
+} from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
 import { Loader } from '../loader/Loader.component';
@@ -167,7 +172,8 @@ export const MultiSelectableContent = <
              */
             style: { ...style },
           }),
-          onClick: () => {
+          onClick: (event) => {
+            if (shouldIgnoreRowEvent(event)) return;
             const onSingleRowSelected = onSingleRowSelectedRef.current;
             if (onSingleRowSelected) {
               onSingleRowSelected(row);
@@ -193,13 +199,7 @@ export const MultiSelectableContent = <
           >
             {row.cells.map((cell) => {
               const cellProps = cell.getCellProps({
-                style: {
-                  ...cell.column.cellStyle,
-                  // Vertically center the text in cells.
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                },
+                style: bodyCellStyle(cell.column.cellStyle),
                 role: 'gridcell',
               });
 
@@ -208,7 +208,9 @@ export const MultiSelectableContent = <
                   <div
                     {...cellProps}
                     onClick={(event) => {
-                      if (!onSingleRowSelectedRef.current) return;
+                      // Selecting the row is what this cell is for, so it owns the
+                      // click outright rather than relying on a bubble the row's
+                      // guard now stops.
                       event.stopPropagation();
                       handleMultipleSelectedRowsRef.current(
                         selectedRowIdsRef.current,
@@ -295,7 +297,9 @@ export const MultiSelectableContent = <
                         {column.render('Header')}
                       </div>
                     ) : (
-                      <HeaderLabel>{column.render('Header')}</HeaderLabel>
+                      <TruncatableHeaderLabel header={column.Header}>
+                        {column.render('Header')}
+                      </TruncatableHeaderLabel>
                     )}
                     <SortCaret column={column} />
                   </HeaderContent>
