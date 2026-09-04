@@ -450,7 +450,7 @@ export const ResponsiveSizedInputs = {
             direction="horizontal"
             label="Default (size 1)"
             id="w-default"
-            labelHelpTooltip="The help icon reserves ~2rem in the label column"
+            labelHelpTooltip="The help icon reserves its own width plus a gap at the end of the label"
             content={<Input id="w-default" placeholder="20.5rem" />}
           />
           <FormGroup
@@ -1029,4 +1029,76 @@ export const ResponsiveLabelSqueezeRemCap = {
   ...ResponsiveLabelSqueeze,
   args: { ...ResponsiveLabelSqueeze.args, forceLabelWidth: '15rem' },
   argTypes: { forceLabelWidth: { control: { type: 'text' } } },
+};
+
+// A label's help icon has to stay on the label's last line. It is an inline-block,
+// so there is a soft-wrap opportunity in front of it that no amount of `nowrap`
+// *inside* it can suppress — once the column is narrow enough that the text fills
+// its last line, the icon breaks away and sits alone on the next one, left-aligned
+// under the label it belongs to.
+//
+// The three labels are the three cases that matter, and the column is forced to a
+// width real forms use:
+//   - "Description" fits on one line, icon included — the case that must not move.
+//   - "Enable LDAP Over TLS" wraps, and is where the icon used to orphan.
+//   - "AuthenticationConfigurationEndpoint" is a single unbreakable word wider than
+//     the column. It is here because it rules out the cheaper fix: grouping the
+//     last word and the icon in a `nowrap` span keeps them together, but a `nowrap`
+//     group takes no soft-wrap opportunity at all, so this label would overflow the
+//     column outright instead of wrapping.
+export const FormGroupHelpIconOrphan = {
+  render: ({ forceLabelWidth }) => (
+    <div
+      data-testid="orphan-frame"
+      style={{
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: '40rem',
+        minWidth: '20rem',
+        maxWidth: '100%',
+        border: '1px dashed #666',
+        height: '26rem',
+      }}
+    >
+      <div style={{ display: 'flex', height: '100%' }}>
+        <Form
+          layout={{ kind: 'page', title: 'Identity provider' }}
+          responsive
+          rightActions={<Button variant="primary" label="Save" />}
+        >
+          <FormSection
+            title={{ name: 'Connection', icon: 'Account' }}
+            forceLabelWidth={forceLabelWidth}
+          >
+            <FormGroup
+              direction="horizontal"
+              label="Description"
+              id="orphan-description"
+              labelHelpTooltip="Free-form text shown in the provider list."
+              content={<Input id="orphan-description" />}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="Enable LDAP Over TLS"
+              id="orphan-tls"
+              required
+              labelHelpTooltip="Encrypt the connection to the directory server."
+              content={<Input id="orphan-tls" />}
+            />
+            <FormGroup
+              direction="horizontal"
+              label="AuthenticationConfigurationEndpoint"
+              id="orphan-endpoint"
+              labelHelpTooltip="The URL the provider publishes its configuration on."
+              content={<Input id="orphan-endpoint" />}
+            />
+          </FormSection>
+        </Form>
+      </div>
+    </div>
+  ),
+  args: { forceLabelWidth: 150 },
+  argTypes: {
+    forceLabelWidth: { control: { type: 'number' } },
+  },
 };

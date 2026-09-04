@@ -56,6 +56,31 @@ describe('Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
+  // The label's DOM shape carries the help icon's reserved room (see LabelText /
+  // HelpIconSlot), so it is layout-bearing and easy to break silently. jsdom has no
+  // layout, so the geometry itself is proven by the FormGroupHelpIconOrphan story --
+  // what is worth asserting here is that reserving that room did not cost the help
+  // affordance its identity or push it out of the label it belongs to.
+  it('keeps the help affordance inside the label it annotates', () => {
+    render(
+      <Form layout={{ kind: 'page', title: 'Test Form' }}>
+        <FormSection>
+          <FormGroup
+            id="tls-field"
+            label="Enable LDAP Over TLS"
+            labelHelpTooltip="Encrypt the connection to the directory server."
+            content={<input type="text" id="tls-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+
+    const help = screen.getByRole('button', { name: 'More information' });
+    expect(
+      screen.getByText('Enable LDAP Over TLS').closest('label'),
+    ).toContainElement(help);
+  });
+
   it('keeps the labelled field visible and usable with responsive shrink', async () => {
     render(
       <Form layout={{ kind: 'tab' }} responsive>

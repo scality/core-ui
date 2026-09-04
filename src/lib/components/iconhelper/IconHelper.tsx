@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
 import { Icon } from '../icon/Icon.component';
 import { fontSize } from '../../style/theme';
 import { Position, Tooltip } from '../tooltip/Tooltip.component';
@@ -18,18 +19,42 @@ type IconHelpProps = {
   title?: string;
 };
 
+/**
+ * The icon's footprint. Exported so a caller reserving room for the icon reads this
+ * number rather than a copy that can drift.
+ */
+export const HELP_ICON_SIZE = fontSize.base;
+
+/**
+ * A pair -- use both or neither. They keep an `IconHelp` on the last line of the
+ * label it annotates.
+ *
+ * The icon is an atomic inline with a soft-wrap opportunity in front of it that
+ * nothing inside it can suppress, so it landed alone on the next line.
+ * `helpIconReserve` pads the label's own inline box, which lands on its last line
+ * and counts toward min-content; `HelpIconSlot` pulls the icon back onto that room.
+ */
+export const helpIconReserve = css`
+  padding-right: calc(${HELP_ICON_SIZE} + ${spacing.r8});
+`;
+
+export const HelpIconSlot = styled.span`
+  display: inline-block;
+  margin-left: -${HELP_ICON_SIZE};
+`;
+
 const HelpButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: ${fontSize.base};
-  height: ${fontSize.base};
+  width: ${HELP_ICON_SIZE};
+  height: ${HELP_ICON_SIZE};
   background: none;
   border: none;
   padding: 0;
   margin: 0;
   color: inherit;
-  font-size: ${fontSize.base};
+  font-size: ${HELP_ICON_SIZE};
   line-height: 0;
   vertical-align: -0.125em;
   cursor: default;
