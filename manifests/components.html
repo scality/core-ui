@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">358 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">357 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -15383,7 +15383,7 @@ steps: StepProps[]</code></pre>
       <div class="badges">
         <label for="c-56-components-data-display-table-props" class="badge ok as-toggle">15 prop types</label>
         <label for="c-56-components-data-display-table-info" class="badge info as-toggle">1 info</label>
-        <label for="c-56-components-data-display-table-stories" class="badge ok as-toggle">13 stories</label>
+        <label for="c-56-components-data-display-table-stories" class="badge ok as-toggle">12 stories</label>
         <label for="c-56-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -16110,11 +16110,14 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
     {
       Header: &#39;&#39;,
       id: &#39;actions&#39;,
+      // Same shape as the default columns&#39; action column: on `flex: 1` the button
+      // hung past its own column, and `display`/`justifyContent` here are dead --
+      // the cell&#39;s own flex centring is applied after `cellStyle`.
       cellStyle: {
-        width: &#39;unset&#39;,
-        flex: 1,
-        display: &#39;flex&#39;,
-        justifyContent: &#39;flex-end&#39;,
+        width: &#39;8.5rem&#39;,
+        flex: &#39;none&#39;,
+        textAlign: &#39;right&#39;,
+        alignItems: &#39;flex-end&#39;,
       },
       Cell: ({ row }: CellProps&lt;Entry&gt;) =&gt; (
         &lt;Button
@@ -16147,9 +16150,6 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
         close={() =&gt; setSelectedEntry(null)}
         title={`View Entry details`}
         role=&quot;dialog&quot;
-        isOpen={selectedEntry !== null}
-        close={() =&gt; setSelectedEntry(null)}
-        title={`View Entry details`}
         footer={
           &lt;Stack gap=&quot;r8&quot; style={{ justifyContent: &#39;flex-end&#39; }}&gt;
             &lt;Button
@@ -16249,42 +16249,42 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
               </div>
               
               
-              <pre><code>const ResponsiveColumnDrop = () =&gt; (
-  &lt;&gt;
-    &lt;Title&gt;Responsive column drop&lt;/Title&gt;
-    &lt;Box mb={2}&gt;
-      Drag the bottom-right corner to resize. Columns with a &lt;code&gt;dropAt&lt;/code&gt;{&#39; &#39;}
-      breakpoint hide as the table gets narrower (Age below 550px, Last Name
-      below 700px). First Name and Health have no breakpoint, so they always
-      stay.
-    &lt;/Box&gt;
-    &lt;div
-      style={{
-        height: &#39;320px&#39;,
-        width: &#39;900px&#39;,
-        minWidth: &#39;320px&#39;,
-        maxWidth: &#39;100%&#39;,
-        resize: &#39;horizontal&#39;,
-        overflow: &#39;hidden&#39;,
-        padding: &#39;20px&#39;,
-        border: &#39;1px dashed currentColor&#39;,
-        boxSizing: &#39;border-box&#39;,
-      }}
-    &gt;
-      &lt;Table
-        columns={responsiveColumns}
-        data={data}
-        defaultSortingKey={&#39;health&#39;}
-        getRowId={getRowId}
+              <pre><code>const ResponsiveColumnDrop = () =&gt; {
+  const [selected, setSelected] = useState&lt;string | undefined&gt;(undefined);
+
+  return (
+    &lt;&gt;
+      &lt;Title&gt;Responsive column drop&lt;/Title&gt;
+      &lt;div
+        style={{
+          height: &#39;320px&#39;,
+          width: &#39;900px&#39;,
+          minWidth: &#39;320px&#39;,
+          maxWidth: &#39;100%&#39;,
+          resize: &#39;horizontal&#39;,
+          overflow: &#39;hidden&#39;,
+          padding: &#39;20px&#39;,
+          border: &#39;1px dashed currentColor&#39;,
+          boxSizing: &#39;border-box&#39;,
+        }}
       &gt;
-        &lt;Table.SingleSelectableContent
-          rowHeight=&quot;h40&quot;
-          separationLineVariant=&quot;backgroundLevel3&quot;
-        /&gt;
-      &lt;/Table&gt;
-    &lt;/div&gt;
-  &lt;/&gt;
-);</code></pre>
+        &lt;Table
+          columns={responsiveColumns}
+          data={data}
+          defaultSortingKey={&#39;health&#39;}
+          getRowId={getRowId}
+        &gt;
+          &lt;Table.SingleSelectableContent
+            rowHeight=&quot;h40&quot;
+            separationLineVariant=&quot;backgroundLevel3&quot;
+            selectedId={selected}
+            onRowSelected={(row) =&gt; setSelected(row.id)}
+          /&gt;
+        &lt;/Table&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+};</code></pre>
             </div>
             <div class="note ok">
               <div class="row">
@@ -16293,96 +16293,43 @@ import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";</code
               </div>
               
               
-              <pre><code>const ResponsiveColumnDropWithReveal = () =&gt; (
-  &lt;&gt;
-    &lt;Title&gt;Responsive column drop with reveal&lt;/Title&gt;
-    &lt;Box mb={2}&gt;
-      Same responsive columns as above, but with &lt;code&gt;revealDroppedColumns&lt;/code&gt;.
-      Once a column drops, a trailing column appears with a per-row{&#39; &#39;}
-      &lt;code&gt;+N&lt;/code&gt; trigger; clicking it opens a popover listing the dropped
-      columns and their values for that row, so no data is lost on a narrow
-      viewport. Drag the bottom-right corner below 700px to see it.
-    &lt;/Box&gt;
-    &lt;div
-      style={{
-        height: &#39;320px&#39;,
-        width: &#39;900px&#39;,
-        minWidth: &#39;320px&#39;,
-        maxWidth: &#39;100%&#39;,
-        resize: &#39;horizontal&#39;,
-        overflow: &#39;hidden&#39;,
-        padding: &#39;20px&#39;,
-        border: &#39;1px dashed currentColor&#39;,
-        boxSizing: &#39;border-box&#39;,
-      }}
-    &gt;
-      &lt;Table
-        columns={responsiveColumns}
-        data={data}
-        defaultSortingKey={&#39;health&#39;}
-        getRowId={getRowId}
-        revealDroppedColumns
+              <pre><code>const ResponsiveColumnDropWithReveal = () =&gt; {
+  const [selected, setSelected] = useState&lt;string | undefined&gt;(undefined);
+
+  return (
+    &lt;&gt;
+      &lt;Title&gt;Responsive column drop with reveal&lt;/Title&gt;
+      &lt;div
+        style={{
+          height: &#39;320px&#39;,
+          width: &#39;900px&#39;,
+          minWidth: &#39;320px&#39;,
+          maxWidth: &#39;100%&#39;,
+          resize: &#39;horizontal&#39;,
+          overflow: &#39;hidden&#39;,
+          padding: &#39;20px&#39;,
+          border: &#39;1px dashed currentColor&#39;,
+          boxSizing: &#39;border-box&#39;,
+        }}
       &gt;
-        &lt;Table.SingleSelectableContent
-          rowHeight=&quot;h40&quot;
-          separationLineVariant=&quot;backgroundLevel3&quot;
-        /&gt;
-      &lt;/Table&gt;
-    &lt;/div&gt;
-  &lt;/&gt;
-);</code></pre>
-            </div>
-            <div class="note ok">
-              <div class="row">
-                <span class="ex-name">Sort Caret Header Alignment</span>
-                <span class="badge ok">story ok</span>
-              </div>
-              
-              
-              <pre><code>const SortCaretHeaderAlignment = () =&gt; (
-  &lt;&gt;
-    &lt;Title&gt;A — equal flex, sortable vs not, container too narrow for both headers&lt;/Title&gt;
-    &lt;div id=&quot;repro-a&quot; style={{ height: &#39;120px&#39;, width: &#39;220px&#39; }}&gt;
-      &lt;Table
-        columns={readingColumns}
-        data={readingData}
-        defaultSortingKey={&#39;label&#39;}
-      &gt;
-        &lt;Table.SingleSelectableContent
-          rowHeight=&quot;h32&quot;
-          separationLineVariant=&quot;backgroundLevel3&quot;
-        /&gt;
-      &lt;/Table&gt;
-    &lt;/div&gt;
-    &lt;Title&gt;B — end-aligned and centred sortable headers&lt;/Title&gt;
-    &lt;div id=&quot;repro-b&quot; style={{ height: &#39;140px&#39; }}&gt;
-      &lt;Table
-        columns={certificateColumns}
-        data={certificateData}
-        defaultSortingKey={&#39;expireOn&#39;}
-      &gt;
-        &lt;Table.SingleSelectableContent
-          rowHeight=&quot;h40&quot;
-          separationLineVariant=&quot;backgroundLevel3&quot;
-        /&gt;
-      &lt;/Table&gt;
-    &lt;/div&gt;
-    &lt;Title&gt;C — multi selectable, same columns as B&lt;/Title&gt;
-    &lt;div id=&quot;repro-c&quot; style={{ height: &#39;160px&#39; }}&gt;
-      &lt;Table
-        columns={certificateColumns}
-        data={certificateData}
-        defaultSortingKey={&#39;status&#39;}
-      &gt;
-        &lt;Table.MultiSelectableContent
-          rowHeight=&quot;h40&quot;
-          separationLineVariant=&quot;backgroundLevel3&quot;
-          onMultiSelectionChanged={action(&#39;selection changed&#39;)}
-        /&gt;
-      &lt;/Table&gt;
-    &lt;/div&gt;
-  &lt;/&gt;
-);</code></pre>
+        &lt;Table
+          columns={responsiveColumns}
+          data={data}
+          defaultSortingKey={&#39;health&#39;}
+          getRowId={getRowId}
+          revealDroppedColumns
+        &gt;
+          &lt;Table.SingleSelectableContent
+            rowHeight=&quot;h40&quot;
+            separationLineVariant=&quot;backgroundLevel3&quot;
+            selectedId={selected}
+            onRowSelected={(row) =&gt; setSelected(row.id)}
+          /&gt;
+        &lt;/Table&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+};</code></pre>
             </div>
         </div>
     
@@ -16411,6 +16358,19 @@ import * as TableStories from &#39;./tablev2.stories&#39;;
 # Table
 
 A table displays structured data in rows and columns, allowing users to scan, sort, and act on multiple items.
+
+## Column alignment
+
+A column states its alignment once, in `cellStyle.textAlign`, and it reaches the header label and
+every value in the column alike. Text reads left, a number reads right, a status or other short
+enum reads centred. Header and values sit on the same edge whichever edge that is — a column whose
+label and values disagree reads as two columns.
+
+Sorting does not change that. A sortable header&#39;s caret reserves its own width rather than taking
+it from the label, so an end-aligned label keeps the trailing edge; a centred label is balanced
+against the caret rather than pushed off centre by it. On a column too narrow to hold both, the
+centred label drifts off centre instead of truncating earlier than it would without a caret —
+losing the middle of a label costs more than losing its exact centring.
 
 ## Action column
 
@@ -16441,6 +16401,65 @@ A table never tells the user a resource is empty before it has finished loading.
 &lt;Canvas of={TableStories.LoadingTable} /&gt;
 
 &lt;Canvas of={TableStories.ErrorTable} /&gt;
+
+## Row selection
+
+Pass `onRowSelected` to `Table.SingleSelectableContent` to make rows selectable, and pair it with
+`selectedId` so the chosen row stays marked. A selectable row shows a pointer cursor and a hover
+highlight from the start — the affordance does not wait for a first selection.
+
+Clicking anywhere in a row selects it, **except** on an interactive control inside a cell. A
+button, link, input, checkbox or label in a cell keeps its own click. The same holds for the
+keyboard: Enter or Space on a focused control activates that control, not the row.
+
+This matters beyond the stray selection: selecting a row re-renders it, which remounts its cells
+and closes anything the control had just opened.
+
+&lt;Canvas of={TableStories.SimpleContentTable} layout=&quot;fullscreen&quot; /&gt;
+
+## Responsive columns
+
+Give a column a `dropAt` breakpoint and it hides once the table is narrower than that. Columns
+without one always stay. Below, Age drops at 550px and Last Name at 700px; First Name and
+&quot;Replication Health&quot; have no breakpoint.
+
+Drag the frame&#39;s bottom-right corner to resize it.
+
+&lt;Canvas of={TableStories.ResponsiveColumnDrop} layout=&quot;fullscreen&quot; /&gt;
+
+### A long header ellipsizes rather than widening its column
+
+A header must never be the reason a column is wider than its cells, so a label too long for its
+column is truncated instead of widening it. &quot;Replication Health&quot; above sits on the narrowest track
+in the table — narrow the frame and it cuts off.
+
+Which width that happens at is not a fixed number: a column&#39;s width comes from its grow factor, so
+dropping a neighbour hands its space to the columns that remain. A header can therefore truncate,
+then read in full again at a narrower frame.
+
+A truncated string header shows its full text in a tooltip on hover, so nothing is lost. The
+tooltip appears only while the label is actually cut off — a tooltip repeating a header that reads
+fine is noise. Headers built from a node rather than a string get none, since there is no text to
+show: give those their own affordance if the label can be lost.
+
+### Recovering the dropped values
+
+Add `revealDroppedColumns` and each row gains a trailing `+N` trigger. Clicking it opens a popover
+listing the dropped columns and their values for that row, so nothing is lost at a narrow width.
+
+The trigger is a control inside a cell, so clicking it does not select the row — which is what
+keeps the popover open.
+
+&lt;Canvas of={TableStories.ResponsiveColumnDropWithReveal} layout=&quot;fullscreen&quot; /&gt;
+
+### A control that cannot shrink will overflow its column
+
+A column&#39;s width comes from its grow factor, and header and body cells shrink by the same rules,
+so a column can end up narrower than the control inside it. A text button will not shrink below
+its label, and it will overflow rather than clip.
+
+Give such a button `iconOnly={n}` so it collapses to its icon below `n` px instead. Prefer that to
+widening the column, which would cost every other column its share of the space.
 </code></pre></div>
             </div>
         </div>
