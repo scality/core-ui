@@ -88,6 +88,29 @@ describe('Form', () => {
     },
   );
 
+  // jsdom has no layout, so the geometry is proven by the FormGroupHelpIconOrphan
+  // story. What is worth asserting here is that reserving the icon's room did not
+  // cost the affordance its identity or push it out of its label.
+  it('keeps the help affordance inside the label it annotates', () => {
+    render(
+      <Form layout={{ kind: 'page', title: 'Test Form' }}>
+        <FormSection>
+          <FormGroup
+            id="tls-field"
+            label="Enable LDAP Over TLS"
+            labelHelpTooltip="Encrypt the connection to the directory server."
+            content={<input type="text" id="tls-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+
+    const help = screen.getByRole('button', { name: 'More information' });
+    expect(
+      screen.getByText('Enable LDAP Over TLS').closest('label'),
+    ).toContainElement(help);
+  });
+
   it('keeps the labelled field visible and usable with responsive shrink', async () => {
     render(
       <Form layout={{ kind: 'tab' }} responsive>
