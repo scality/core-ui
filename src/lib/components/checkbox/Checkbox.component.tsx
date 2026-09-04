@@ -1,9 +1,22 @@
-import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react';
-import styled from 'styled-components';
-import { spacing, Stack } from '../../spacing';
+import {
+  ChangeEvent,
+  InputHTMLAttributes,
+  ReactNode,
+  forwardRef,
+  useId,
+} from 'react';
+import styled, { css } from 'styled-components';
+import { spacing } from '../../spacing';
 
-import { Text } from '../text/Text.component';
+import {
+  helpIconReserve,
+  HelpIconSlot,
+  IconHelp,
+} from '../iconhelper/IconHelper';
+import { COMPACT_LINE_HEIGHT, Text } from '../text/Text.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
+
+const maxWidthTooltip = { maxWidth: '20rem' };
 
 const getCheckmarkSvgUrl = (color: string) => {
   const encodedColor = color.replace('#', '%23');
@@ -18,6 +31,56 @@ const getIndeterminateSvgUrl = (color: string) => {
 const CheckboxInput = styled.input`
 	transform: scale(1.5);`;
 
+/**
+ * The box and its label, side by side. Typography is declared here so `BoxSlot`
+ * can read the line box in `em` and stay in step with it.
+ */
+const CheckboxRow = styled.span<{ $hasLabel: boolean }>`
+  display: flex;
+  gap: ${spacing.r8};
+  font-size: 1rem;
+  line-height: ${COMPACT_LINE_HEIGHT};
+  /* A wrapped label hangs under its own first line; centring would put the box
+     in the gutter between two lines. */
+  align-items: ${({ $hasLabel }) => ($hasLabel ? 'flex-start' : 'center')};
+`;
+
+/**
+ * Holds the box on the label's first line: a slot one line box tall centring its
+ * own content, so neither side has to know how tall the other is. Sized only when
+ * there is a label, so a bare `Checkbox` keeps the geometry it had.
+ */
+const BoxSlot = styled.span<{ $hasLabel: boolean }>`
+  display: flex;
+  align-items: center;
+  flex: none;
+  ${({ $hasLabel }) =>
+    $hasLabel &&
+    css`
+      height: ${COMPACT_LINE_HEIGHT}em;
+    `}
+`;
+
+// A block so the label's lines and its help icon share one inline formatting
+// context; a `span`, because this is inside a `<label>`. `min-width: 0` is
+// load-bearing -- `break-word` below does not lower the min-content width, so
+// without it this flex item overflows instead of wrapping.
+const LabelBlock = styled.span`
+  display: block;
+  min-width: 0;
+`;
+
+/**
+ * `overflow-wrap` because a label is not always prose: an event name such as
+ * `s3:ObjectCreated:CompleteMultipartUpload` offers nowhere to break. `break-word`
+ * and not `anywhere`, which would also drop min-content to one character and
+ * collapse a label column sized to its content.
+ */
+const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
+  overflow-wrap: break-word;
+  ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
+`;
+
 export type Props = {
   /**
    * Label displayed next to the checkbox.
@@ -25,6 +88,11 @@ export type Props = {
    * When inside a FormGroup, set the label on FormGroup's `label` prop instead.
    */
   label?: string;
+  /**
+   * Help text for a `?` icon at the end of the label, mirroring `FormGroup`'s prop
+   * of the same name. Ignored without a `label`.
+   */
+  labelHelpTooltip?: ReactNode;
   value?: string;
   checked?: boolean;
   disabled?: boolean;
@@ -32,24 +100,55 @@ export type Props = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Checkbox = forwardRef<HTMLInputElement, Props>(
-  ({ disabled, checked, label, value, onChange, ...rest }, ref) => {
+  (
+    { disabled, checked, label, labelHelpTooltip, value, onChange, ...rest },
+    ref,
+  ) => {
+    const hasLabel = !!label;
+    // A `<button>` inside the `<label>` folds its own name into the control's, so
+    // the box was called "Short label More information". Pointing at the label text
+    // alone fixes it; skipped when the caller names the box. jsdom cannot reproduce
+    // this -- see the story.
+    const labelTextId = useId();
+    const callerNamesIt =
+      rest['aria-label'] !== undefined || rest['aria-labelledby'] !== undefined;
     return (
-      <StyledCheckbox
-        $disabled={disabled}
-        className="sc-checkbox"
-      >
-        <Stack>
-          <CheckboxInput
-            type="checkbox"
-            checked={checked}
-            disabled={disabled}
-            value={value}
-            onChange={onChange}
-            ref={ref}
-            {...rest}
-          />
-          {label && <Text>{label}</Text>}
-        </Stack>
+      <StyledCheckbox $disabled={disabled} className="sc-checkbox">
+        <CheckboxRow $hasLabel={hasLabel}>
+          <BoxSlot $hasLabel={hasLabel}>
+            <CheckboxInput
+              type="checkbox"
+              checked={checked}
+              disabled={disabled}
+              value={value}
+              onChange={onChange}
+              ref={ref}
+              aria-labelledby={
+                hasLabel && !callerNamesIt ? labelTextId : undefined
+              }
+              {...rest}
+            />
+          </BoxSlot>
+          {hasLabel && (
+            <LabelBlock>
+              <LabelText
+                id={labelTextId}
+                compact
+                $reserveHelpIcon={!!labelHelpTooltip}
+              >
+                {label}
+              </LabelText>
+              {labelHelpTooltip && (
+                <HelpIconSlot>
+                  <IconHelp
+                    tooltipMessage={labelHelpTooltip}
+                    overlayStyle={maxWidthTooltip}
+                  />
+                </HelpIconSlot>
+              )}
+            </LabelBlock>
+          )}
+        </CheckboxRow>
       </StyledCheckbox>
     );
   },
