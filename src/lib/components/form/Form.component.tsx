@@ -112,6 +112,11 @@ const StyledForm = styled.form<{
 // `width: 100%` needs `box-sizing: border-box`, or the content-box padding
 // overflows the parent by exactly that padding. The cap then has to include the
 // padding to keep the same 45rem of *content* the pinned width gave.
+//
+// Both branches carry the same `padding-right`: padding on an ancestor insets the
+// scrollbar along with the content, so only the scroller's own layout can put
+// space between the two. The header and footer share it so their actions line up
+// with the fields.
 const PAGE_CONTENT_MAX_WIDTH = '45rem';
 const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
   box-sizing: border-box;
@@ -125,6 +130,7 @@ const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
   `
       : `
   width: 100%;
+  padding-right: ${spacing.f16};
   padding-bottom: ${spacing.r24};`}
 `;
 
@@ -152,6 +158,10 @@ const ScrollArea = styled(BasicPageLayout)`
   flex-grow: 1;
   align-self: stretch;
   overflow-y: auto;
+  /* Reserve the bar's width whether or not it is showing, so the fields do not
+     shift left the moment the form starts scrolling. This reserves only the space
+     the bar occupies; the gap between bar and content is the padding-right above. */
+  scrollbar-gutter: stable;
 `;
 
 // A FormSection lays its FormGroups out so labels align across the section from
