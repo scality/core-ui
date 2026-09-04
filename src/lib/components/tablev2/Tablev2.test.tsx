@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Table, TableProps } from './Tablev2.component';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createPortal } from 'react-dom';
 
 jest.mock('./TableUtils', () => ({
   ...jest.requireActual('./TableUtils'),
@@ -73,7 +74,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -92,7 +93,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -116,7 +117,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -145,7 +146,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -168,7 +169,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -193,17 +194,13 @@ describe('TableV2', () => {
 
     const { getAllByRole } = render(
       <div>
-        <Table
-          columns={dateColumns}
-          data={dateData}
-          globalFilter=".000"
-        >
+        <Table columns={dateColumns} data={dateData} globalFilter=".000">
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -226,7 +223,7 @@ describe('TableV2', () => {
             separationLineVariant="backgroundLevel3"
           />
         </Table>
-      </div>
+      </div>,
     );
     await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
@@ -423,5 +420,262 @@ describe('TableV2 responsive columns', () => {
     expect(
       await screen.findAllByRole('button', { name: /show 1 hidden column/i }),
     ).not.toHaveLength(0);
+  });
+});
+
+describe('TableV2 row click vs in-cell controls', () => {
+  const withButtonColumns: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    {
+      Header: 'Action',
+      accessor: 'lastName',
+      disableSortBy: true,
+      Cell: ({ row }) => (
+        <button onClick={() => row.original.onAction()}>
+          Detach {row.original.firstName}
+        </button>
+      ),
+    },
+  ];
+
+  const renderWithAction = (onRowSelected, onAction) =>
+    render(
+      <div>
+        <Table
+          columns={withButtonColumns}
+          data={data.map((entry) => ({ ...entry, onAction }))}
+          defaultSortingKey={'firstName'}
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onRowSelected={onRowSelected}
+          />
+        </Table>
+      </div>,
+    );
+
+  it('leaves the row unselected when a button inside a cell is clicked', async () => {
+    const onRowSelected = jest.fn();
+    const onAction = jest.fn();
+    renderWithAction(onRowSelected, onAction);
+
+    await userEvent.click(
+      screen.getByRole('button', { name: /Detach Ninette/ }),
+    );
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onRowSelected).not.toHaveBeenCalled();
+  });
+
+  it('still selects the row when the click lands on plain cell content', async () => {
+    const onRowSelected = jest.fn();
+    const onAction = jest.fn();
+    renderWithAction(onRowSelected, onAction);
+
+    await userEvent.click(screen.getByText('Ninette'));
+
+    expect(onRowSelected).toHaveBeenCalledTimes(1);
+    expect(onAction).not.toHaveBeenCalled();
+  });
+
+  it('leaves the row unselected when a button inside a cell is activated by keyboard', async () => {
+    const onRowSelected = jest.fn();
+    const onAction = jest.fn();
+    renderWithAction(onRowSelected, onAction);
+
+    const button = screen.getByRole('button', { name: /Detach Ninette/ });
+    button.focus();
+    await userEvent.keyboard('{Enter}');
+
+    expect(onAction).toHaveBeenCalledTimes(1);
+    expect(onRowSelected).not.toHaveBeenCalled();
+  });
+
+  it('still selects the row on Enter when the row itself has focus', async () => {
+    const onRowSelected = jest.fn();
+    const onAction = jest.fn();
+    const { getAllByRole } = renderWithAction(onRowSelected, onAction);
+
+    const row = getAllByRole('row')[1];
+    row.focus();
+    await userEvent.keyboard('{Enter}');
+
+    expect(onRowSelected).toHaveBeenCalledTimes(1);
+    expect(onAction).not.toHaveBeenCalled();
+  });
+
+  // The guard's upward bound. `closest()` walks to the document unless it is
+  // stopped, so one interactive ancestor anywhere above the table matches for
+  // every cell and turns row selection off across the whole table. The
+  // clickable wrapper is a fixture for that bound -- any of the selector's
+  // elements above the row does it -- not a nesting pattern worth copying.
+  it('still selects the row when an interactive ancestor sits above the table', async () => {
+    const onRowSelected = jest.fn();
+    render(
+      <div role="button" tabIndex={0}>
+        <Table columns={columns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onRowSelected={onRowSelected}
+          />
+        </Table>
+      </div>,
+    );
+
+    await userEvent.click(screen.getByText('Ninette'));
+
+    expect(onRowSelected).toHaveBeenCalledTimes(1);
+  });
+
+  // The guard's downward bound. A portal leaves the row in the DOM but still
+  // bubbles to it through the React tree, so text in an overlay opened from a
+  // cell -- the revealDroppedColumns panel, a Select menu -- reached this
+  // handler with nothing interactive between it and the row, and selected the
+  // row behind the overlay the user was reading.
+  it('leaves the row unselected when the click lands in an overlay portalled out of a cell', async () => {
+    const onRowSelected = jest.fn();
+    const portalColumns: TableProps['columns'] = [
+      { Header: 'First Name', accessor: 'firstName' },
+      {
+        Header: 'Overlay',
+        accessor: 'lastName',
+        disableSortBy: true,
+        Cell: ({ row }) =>
+          createPortal(
+            <span>{`overlay-${row.original.firstName}`}</span>,
+            document.body,
+          ),
+      },
+    ];
+
+    render(
+      <div>
+        <Table columns={portalColumns} data={data}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+            onRowSelected={onRowSelected}
+          />
+        </Table>
+      </div>,
+    );
+
+    await userEvent.click(screen.getByText('overlay-Ninette'));
+
+    expect(onRowSelected).not.toHaveBeenCalled();
+  });
+});
+
+describe('TableV2 row selectability', () => {
+  const columns: TableProps['columns'] = [
+    { Header: 'First Name', accessor: 'firstName' },
+    { Header: 'Last Name', accessor: 'lastName' },
+  ];
+
+  const renderTable = (onRowSelected?: (row: unknown) => void) => (
+    <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+      <Table.SingleSelectableContent
+        rowHeight="h40"
+        separationLineVariant="backgroundLevel3"
+        onRowSelected={onRowSelected}
+      />
+    </Table>
+  );
+
+  it('stops offering rows to the keyboard once they are no longer selectable', () => {
+    const { rerender, getAllByRole } = render(renderTable(jest.fn()));
+
+    // [0] is the header row.
+    expect(getAllByRole('row')[1]).toHaveAttribute('tabindex', '0');
+
+    // Nothing else about the table changes, which is the point: the row
+    // renderer is memoized, so a value it reads has to be a dependency of that
+    // memo or the rows keep the affordance after it stops being true.
+    rerender(renderTable(undefined));
+
+    expect(getAllByRole('row')[1]).not.toHaveAttribute('tabindex');
+  });
+
+  it('offers rows to the keyboard once they become selectable', () => {
+    const { rerender, getAllByRole } = render(renderTable(undefined));
+
+    expect(getAllByRole('row')[1]).not.toHaveAttribute('tabindex');
+
+    rerender(renderTable(jest.fn()));
+
+    expect(getAllByRole('row')[1]).toHaveAttribute('tabindex', '0');
+  });
+});
+
+describe('TableV2 truncated header labels', () => {
+  // jsdom has no layout, so the label's widths have to be forced. The tooltip
+  // is only offered once the label really is cut off — a tooltip repeating a
+  // header that reads fine is noise, and this is the difference between them.
+  const stubLabelWidths = (scrollWidth: number, clientWidth: number) => {
+    jest
+      .spyOn(window.HTMLSpanElement.prototype, 'scrollWidth', 'get')
+      .mockReturnValue(scrollWidth);
+    jest
+      .spyOn(window.HTMLSpanElement.prototype, 'clientWidth', 'get')
+      .mockReturnValue(clientWidth);
+  };
+
+  afterEach(() => jest.restoreAllMocks());
+
+  const renderTable = (cols = columns) =>
+    render(
+      <div>
+        <Table columns={cols} data={data} defaultSortingKey={'firstName'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </div>,
+    );
+
+  it('offers the full label in a tooltip when the header is ellipsized', async () => {
+    stubLabelWidths(400, 80);
+    renderTable();
+    const label = await screen.findByText('First Name');
+
+    await userEvent.hover(label);
+
+    await waitFor(() =>
+      expect(
+        document.querySelector('.sc-tooltip-overlay-text'),
+      ).toHaveTextContent('First Name'),
+    );
+  });
+
+  it('offers no tooltip when the header fits', async () => {
+    stubLabelWidths(80, 80);
+    renderTable();
+    const label = await screen.findByText('First Name');
+
+    await userEvent.hover(label);
+
+    await waitFor(() => screen.getAllByRole('columnheader'));
+    expect(
+      document.querySelector('.sc-tooltip-overlay-text'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('offers no tooltip when the header is not a string', async () => {
+    stubLabelWidths(400, 80);
+    renderTable([
+      { Header: <span>Rendered</span>, accessor: 'firstName' },
+      ...columns.slice(1),
+    ]);
+    const label = await screen.findByText('Rendered');
+
+    await userEvent.hover(label);
+
+    await waitFor(() => screen.getAllByRole('columnheader'));
+    expect(
+      document.querySelector('.sc-tooltip-overlay-text'),
+    ).not.toBeInTheDocument();
   });
 });

@@ -11,49 +11,37 @@ import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 import { spacing } from '../../spacing';
 
 const borderSize = '4px';
-const caretGlyphSize = spacing.r16;
-const caretGutter = spacing.r4;
-// The room HeaderContent reserves so the glyph never overflows its header.
+// The caret's whole footprint: the glyph plus the gap that keeps it off the label.
 const caretSpace = spacing.r20;
 
+/** Hidden until the header is hovered — see `TableHeader`. */
 export const SortIncentive = styled.span`
-  position: absolute;
-  inset: 0;
   display: none;
   align-items: center;
-  justify-content: center;
 `;
 
-/** The painted glyph, out of flow inside the zero-width anchor below. */
-export const SortCaretGlyph = styled.span`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: ${caretGlyphSize};
+/**
+ * The caret carries its own width in flow, so a sortable header's intrinsic width
+ * already includes it. A flex item so `order` can move it to the other side, and
+ * `flex: none` so a shrinking column cannot squeeze it. The width is unconditional
+ * although the glyph is not: `SortIncentive` shows on hover, and a reserve that came
+ * and went with it would shift the header out from under the pointer.
+ */
+export const SortCaretWrapper = styled.span`
+  flex: none;
+  width: ${caretSpace};
   display: inline-flex;
   align-items: center;
   justify-content: center;
 `;
 
-/**
- * A zero-width flex item. Being a real flex item is what keeps the glyph next to
- * the label (and lets `order` move it to the label's other side) — anchoring it
- * to `HeaderContent`'s edge instead would strand it at the far side of a wide
- * column. Being zero-width is what keeps it out of the sizing equation: a caret
- * with real width lifts every sortable header's min-content 20px above the
- * matching body cell's, and the two rows then stop agreeing on column widths as
- * soon as that floor binds. `HeaderContent` reserves the room with padding.
- */
-export const SortCaretWrapper = styled.span`
-  position: relative;
-  flex: none;
-  width: 0;
-  align-self: stretch;
-`;
-
 /** Ellipsize rather than let a long header outgrow its column. */
 export const HeaderLabel = styled.span`
   min-width: 0;
+  /* overflow and text-overflow do nothing on an inline box, and a span is inline
+     by default. This used to come for free from being a flex item, so the ellipsis
+     disappeared the moment the label was wrapped in anything. */
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -72,42 +60,38 @@ export const HeaderContent = styled.div<{
   ${({ $align, $sortable }) => {
     const isEnd = $align === 'right' || $align === 'end';
     const isCenter = $align === 'center';
-    const justify = isEnd ? 'flex-end' : isCenter ? 'center' : 'flex-start';
 
-    if (!$sortable) {
-      return css`
-        justify-content: ${justify};
-      `;
-    }
-
-    // End-aligned columns are the one case where the caret goes on the label's
-    // start side: the label has to stay flush with the trailing edge or it no
-    // longer lines up with the values below it, which leaves no room after it.
-    if (isEnd) {
-      return css`
-        justify-content: flex-end;
-        padding-inline-start: ${caretSpace};
-        ${SortCaretWrapper} {
-          order: -1;
-        }
-        ${SortCaretGlyph} {
-          inset-inline-end: ${caretGutter};
-        }
-      `;
-    }
-
-    // Centred columns reserve both sides so the label stays centred.
     return css`
-      justify-content: ${justify};
-      ${isCenter
-        ? css`
-            padding-inline: ${caretSpace};
-          `
-        : css`
-            padding-inline-end: ${caretSpace};
-          `}
-      ${SortCaretGlyph} {
-        inset-inline-start: ${caretGutter};
+      justify-content: ${
+        isEnd ? 'flex-end' : isCenter ? 'center' : 'flex-start'
+      };
+
+      ${
+        $sortable &&
+        isEnd &&
+        css`
+          /* An end-aligned label has to stay flush with the trailing edge to line
+           up with the values below it, which leaves no room after it. */
+          ${SortCaretWrapper} {
+            order: -1;
+          }
+        `
+      }
+      ${
+        $sortable &&
+        isCenter &&
+        css`
+          /* Flex centres label-plus-caret, so the label lands half a caret off
+           centre; a mirrored counterweight restores it. The outsized shrink factor
+           spends the counterweight before the label gives up a character, which a
+           fixed reserve cannot do. */
+          &::before {
+            content: '';
+            order: -1;
+            flex: 0 1000 ${caretSpace};
+            min-width: 0;
+          }
+        `
       }
     `;
   }}
@@ -165,7 +149,12 @@ export const HeadRow = styled.div<HeadRowType>`
 
 type TableRowType = {
   $isSelected: boolean;
-  $selectedId?: string;
+  /**
+   * Whether the row can be selected at all — i.e. an `onRowSelected` was given.
+   * Not "something is currently selected": gating the hover affordance on that left
+   * a selectable table looking inert until its first click.
+   */
+  $selectable?: boolean;
   $separationLineVariant: TableVariantType;
 };
 export const TableRow = styled.div<TableRowType>`
@@ -180,7 +169,7 @@ export const TableRow = styled.div<TableRowType>`
 
   // single selectable case
   ${(props) => {
-    if (props.$selectedId) {
+    if (props.$selectable) {
       return css`
         &:hover,
         &:focus {
@@ -196,7 +185,7 @@ export const TableRow = styled.div<TableRowType>`
   }}
 
   ${(props) => {
-    if (props.$selectedId && props.$isSelected) {
+    if (props.$isSelected) {
       return css`
         background-color: ${props.theme.highlight};
         box-shadow: inset -${borderSize} 0 0 ${props.theme.selectedActive};
@@ -211,6 +200,10 @@ type TableRowMultiSelectableType = {
 };
 export const TableRowMultiSelectable = styled.div<TableRowMultiSelectableType>`
   color: ${(props) => props.theme.textPrimary};
+  /* Must match HeadRow's gap. Every column track has a grow factor and no basis,
+     so a gap the header reserves and the body does not is free space the body
+     redistributes, shifting every column boundary at any width. */
+  gap: ${spacing.r16};
   border-bottom: 1px solid
     ${(props) => props.theme[props.$separationLineVariant]};
   box-sizing: border-box;
@@ -259,19 +252,17 @@ export const SortCaret = <
 }) => {
   return !column.disableSortBy ? (
     <SortCaretWrapper>
-      <SortCaretGlyph>
-        {column.isSorted ? (
-          column.isSortedDesc ? (
-            <Icon name="Sort-down" />
-          ) : (
-            <Icon name="Sort-up" />
-          )
+      {column.isSorted ? (
+        column.isSortedDesc ? (
+          <Icon name="Sort-down" />
         ) : (
-          <SortIncentive>
-            <Icon name="Sort" />
-          </SortIncentive>
-        )}
-      </SortCaretGlyph>
+          <Icon name="Sort-up" />
+        )
+      ) : (
+        <SortIncentive>
+          <Icon name="Sort" />
+        </SortIncentive>
+      )}
     </SortCaretWrapper>
   ) : null;
 };

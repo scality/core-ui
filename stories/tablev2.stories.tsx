@@ -68,6 +68,9 @@ type Entry = {
   health: string;
 };
 
+// The default columns, and the reference for how a column declares its layout. All
+// three alignments on purpose: the right and centred ones are also the sortable
+// headers where a non-left-aligned label has to keep its track.
 const columns: Column<Entry>[] = [
   {
     Header: 'First Name',
@@ -99,7 +102,7 @@ const columns: Column<Entry>[] = [
     cellStyle: {
       width: 'unset',
       flex: 1,
-      textAlign: 'left',
+      textAlign: 'right',
     },
   },
   {
@@ -109,8 +112,37 @@ const columns: Column<Entry>[] = [
     cellStyle: {
       width: 'unset',
       flex: 1,
-      textAlign: 'left',
+      textAlign: 'center',
     },
+  },
+  // An action column: no header, one control per row. Without a control in a cell
+  // there is nothing for a row-wide handler to steal, so this is what lets the
+  // stories below demonstrate that an in-cell click stays its own.
+  {
+    Header: '',
+    id: 'actions',
+    // No values to order, so no caret.
+    disableSortBy: true,
+    // A fixed track, not a grow factor: the button is `white-space: nowrap` and
+    // bleeds into the next column once a grow share drops under its own width.
+    // 8.5rem is 119px against a measured 113.84px button, ~5px of slack.
+    cellStyle: {
+      width: '8.5rem',
+      flex: 'none',
+      textAlign: 'right',
+      // Cross axis, not `justifyContent`: a body cell's own vertical centring is
+      // applied after `cellStyle` and takes the main axis.
+      alignItems: 'flex-end',
+    },
+    Cell: () => (
+      <Button
+        size="inline"
+        variant="outline"
+        label="View details"
+        icon={<Icon name="Eye" />}
+        onClick={action('View details clicked')}
+      />
+    ),
   },
 ];
 const getRowId = (row: Entry, relativeIndex: number) => {
@@ -703,11 +735,14 @@ export const TableWithViewAction = {
       {
         Header: '',
         id: 'actions',
+        // Same shape as the default columns' action column: on `flex: 1` the button
+        // hung past its own column, and `display`/`justifyContent` here are dead --
+        // the cell's own flex centring is applied after `cellStyle`.
         cellStyle: {
-          width: 'unset',
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'flex-end',
+          width: '8.5rem',
+          flex: 'none',
+          textAlign: 'right',
+          alignItems: 'flex-end',
         },
         Cell: ({ row }: CellProps<Entry>) => (
           <Button
@@ -740,9 +775,6 @@ export const TableWithViewAction = {
           close={() => setSelectedEntry(null)}
           title={`View Entry details`}
           role="dialog"
-          isOpen={selectedEntry !== null}
-          close={() => setSelectedEntry(null)}
-          title={`View Entry details`}
           footer={
             <Stack gap="r8" style={{ justifyContent: 'flex-end' }}>
               <Button
@@ -850,7 +882,10 @@ const responsiveColumns: Column<Entry>[] = [
     dropAt: 550,
   },
   {
-    Header: 'Health',
+    // Long enough to outgrow its column as the frame narrows, on the tightest
+    // track here and one that never drops, so the header ellipsis shows up early
+    // and stays reachable.
+    Header: 'Replication Health',
     accessor: 'health',
     sortType: 'health',
     cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
@@ -858,209 +893,80 @@ const responsiveColumns: Column<Entry>[] = [
 ];
 
 export const ResponsiveColumnDrop = {
-  render: () => (
-    <>
-      <Title>Responsive column drop</Title>
-      <Box mb={2}>
-        Drag the bottom-right corner to resize. Columns with a <code>dropAt</code>{' '}
-        breakpoint hide as the table gets narrower (Age below 550px, Last Name
-        below 700px). First Name and Health have no breakpoint, so they always
-        stay.
-      </Box>
-      <div
-        style={{
-          height: '320px',
-          width: '900px',
-          minWidth: '320px',
-          maxWidth: '100%',
-          resize: 'horizontal',
-          overflow: 'hidden',
-          padding: '20px',
-          border: '1px dashed currentColor',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Table
-          columns={responsiveColumns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
+  render: () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+
+    return (
+      <>
+        <Title>Responsive column drop</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
         >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-    </>
-  ),
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              selectedId={selected}
+              onRowSelected={(row) => setSelected(row.id)}
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
 };
 
 export const ResponsiveColumnDropWithReveal = {
-  render: () => (
-    <>
-      <Title>Responsive column drop with reveal</Title>
-      <Box mb={2}>
-        Same responsive columns as above, but with <code>revealDroppedColumns</code>.
-        Once a column drops, a trailing column appears with a per-row{' '}
-        <code>+N</code> trigger; clicking it opens a popover listing the dropped
-        columns and their values for that row, so no data is lost on a narrow
-        viewport. Drag the bottom-right corner below 700px to see it.
-      </Box>
-      <div
-        style={{
-          height: '320px',
-          width: '900px',
-          minWidth: '320px',
-          maxWidth: '100%',
-          resize: 'horizontal',
-          overflow: 'hidden',
-          padding: '20px',
-          border: '1px dashed currentColor',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Table
-          columns={responsiveColumns}
-          data={data}
-          defaultSortingKey={'health'}
-          getRowId={getRowId}
-          revealDroppedColumns
+  render: () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+
+    return (
+      <>
+        <Title>Responsive column drop with reveal</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
         >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-    </>
-  ),
-};
-
-/**
- * Guards the sort-caret header regression. Two independent defects:
- *  - a sortable header's min-content is 20px above its body cell's, so the two
- *    rows stop agreeing on column widths once that floor binds (Reproduction A);
- *  - an end-aligned header label is pushed off the trailing edge by the caret
- *    sitting after it (Reproduction B).
- */
-type Reading = { label: string; mirror: string; value: string };
-
-const readingData: Reading[] = [
-  { label: '27', mirror: '27', value: '27' },
-  { label: '31', mirror: '31', value: '31' },
-];
-
-// Both columns carry the same flex and the same narrow body value; the only
-// difference is sortability. They must resolve to the same width.
-const readingColumns: Column<Reading>[] = [
-  {
-    Header: 'Temperature',
-    accessor: 'label',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+          <Table
+            columns={responsiveColumns}
+            data={data}
+            defaultSortingKey={'health'}
+            getRowId={getRowId}
+            revealDroppedColumns
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+              selectedId={selected}
+              onRowSelected={(row) => setSelected(row.id)}
+            />
+          </Table>
+        </div>
+      </>
+    );
   },
-  {
-    Header: 'Temperature',
-    accessor: 'mirror',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-    disableSortBy: true,
-  },
-];
-
-type Certificate = {
-  name: string;
-  issuer: string;
-  status: string;
-  expireOn: string;
-};
-
-const certificateData: Certificate[] = [
-  {
-    name: 'artesca-ingress',
-    issuer: 'Scality Internal CA',
-    status: 'Valid',
-    expireOn: '2027-01-14',
-  },
-  {
-    name: 'shell-ui-oidc',
-    issuer: "Let's Encrypt X3",
-    status: 'Valid',
-    expireOn: '2026-11-02',
-  },
-];
-
-const certificateColumns: Column<Certificate>[] = [
-  {
-    Header: 'Name',
-    accessor: 'name',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-  },
-  {
-    Header: 'Issuer',
-    accessor: 'issuer',
-    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
-    disableSortBy: true,
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-    cellStyle: { width: 'unset', flex: 0.75, textAlign: 'center' },
-  },
-  {
-    Header: 'Expire On',
-    accessor: 'expireOn',
-    cellStyle: {
-      width: 'unset',
-      flex: 0.75,
-      textAlign: 'right',
-      paddingRight: '36px',
-    },
-  },
-];
-
-export const SortCaretHeaderAlignment = {
-  render: () => (
-    <>
-      <Title>A — equal flex, sortable vs not, container too narrow for both headers</Title>
-      <div id="repro-a" style={{ height: '120px', width: '220px' }}>
-        <Table
-          columns={readingColumns}
-          data={readingData}
-          defaultSortingKey={'label'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h32"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>B — end-aligned and centred sortable headers</Title>
-      <div id="repro-b" style={{ height: '140px' }}>
-        <Table
-          columns={certificateColumns}
-          data={certificateData}
-          defaultSortingKey={'expireOn'}
-        >
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>
-      </div>
-      <Title>C — multi selectable, same columns as B</Title>
-      <div id="repro-c" style={{ height: '160px' }}>
-        <Table
-          columns={certificateColumns}
-          data={certificateData}
-          defaultSortingKey={'status'}
-        >
-          <Table.MultiSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-            onMultiSelectionChanged={action('selection changed')}
-          />
-        </Table>
-      </div>
-    </>
-  ),
 };
