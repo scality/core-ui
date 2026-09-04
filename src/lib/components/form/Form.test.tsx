@@ -56,6 +56,38 @@ describe('Form', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
+  /**
+   * The marker is appended to the label inside the same Text, so it is the piece
+   * that silently falls out of the accessible name -- or loses the space before it
+   * -- if that composition is restructured. Tone itself is deliberately not
+   * asserted: reading a colour declaration back out proves nothing.
+   */
+  it.each([
+    ['partial', 'User name', true, 'User name *'],
+    ['all', 'Description', false, 'Description (optional)'],
+  ])(
+    'keeps the %s-mode marker in the field accessible name',
+    (requireMode, label, required, expected) => {
+      render(
+        <Form
+          layout={{ kind: 'tab' }}
+          requireMode={requireMode as 'all' | 'partial'}
+        >
+          <FormSection>
+            <FormGroup
+              id="marker-field"
+              label={label}
+              required={required}
+              content={<input type="text" id="marker-field" />}
+            />
+          </FormSection>
+        </Form>,
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAccessibleName(expected);
+    },
+  );
+
   it('keeps the labelled field visible and usable with responsive shrink', async () => {
     render(
       <Form layout={{ kind: 'tab' }} responsive>
