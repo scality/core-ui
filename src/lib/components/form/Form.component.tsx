@@ -75,8 +75,9 @@ const LABEL_MIN_CH = 24;
 // together; above ~2.5x the cap the fraction is the larger of the two and the
 // column is sized exactly as before.
 const LABEL_MAX_CQI = 40;
-// The width below which a section stacks: the label floor plus the field floor
-// plus the column gap.
+// The width below which a section stacks. The floor is a parameter rather than a
+// fixed value: a section whose label cap exceeds LABEL_MIN_CH would otherwise
+// overflow in the band between the two.
 const stackBelow = (labelFloor: string) =>
   `calc(${labelFloor} + ${FIELD_MIN_REM}rem + ${spacing.r32})`;
 
