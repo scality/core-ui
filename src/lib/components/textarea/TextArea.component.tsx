@@ -10,6 +10,7 @@ import {
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
+import { fontFamily } from '../../style/theme';
 
 type TextAreaVariant = 'code' | 'text';
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -36,7 +37,7 @@ const TextAreaContainer = styled.textarea.withConfig({
   border-radius: 4px;
   resize: ${(props) => (props.$autoGrow ? 'none' : 'vertical')};
   font-family: ${(props) =>
-    props.$variant === 'code' ? 'Courier New' : 'Lato'};
+    props.$variant === 'code' ? "'Courier New', monospace" : fontFamily};
   font-size: ${spacing.f14};
 
   ${(props) =>

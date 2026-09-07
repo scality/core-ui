@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 import { DESCRIPTION_PREFIX, useFieldContext } from '../form/Form.component';
 import { Icon, IconName } from '../icon/Icon.component';
-import { CoreUITheme } from '../../style/theme';
+import { CoreUITheme, fontFamily } from '../../style/theme';
 
 export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   if (size === '2/3') return '14rem';
@@ -16,7 +16,7 @@ const StyledInput = styled.input<{ $hasIcon: boolean }>`
   max-width: ${(props) =>
     props.$hasIcon ? `calc(100% - 1rem - ${spacing.f8})` : '100%'};
 
-  font-family: 'Lato';
+  font-family: ${fontFamily};
   ${(props) =>
     props.disabled &&
     `
