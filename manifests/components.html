@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">357 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">358 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -4750,9 +4750,9 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Checkbox</h2>
       <div class="badges">
-        <label for="c-10-components-inputs-checkbox-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-10-components-inputs-checkbox-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-10-components-inputs-checkbox-info" class="badge info as-toggle">1 info</label>
-        <label for="c-10-components-inputs-checkbox-stories" class="badge ok as-toggle">12 stories</label>
+        <label for="c-10-components-inputs-checkbox-stories" class="badge ok as-toggle">13 stories</label>
         <label for="c-10-components-inputs-checkbox-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -4786,7 +4786,7 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">5 prop types</span>
+              <span class="badge ok">6 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/checkbox/Checkbox.component.tsx::Checkbox</code></pre>
             <pre><code>Props:</code></pre>
@@ -4800,6 +4800,12 @@ disabled?: boolean
  * When inside a FormGroup, set the label on FormGroup&#39;s `label` prop instead.
  */
 label?: string
+
+/**
+ * Help text for a `?` icon at the end of the label, mirroring `FormGroup`&#39;s prop
+ * of the same name. Ignored without a `label`.
+ */
+labelHelpTooltip?: ReactNode
 
 onChange?: (((e: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; void) &amp; ChangeEventHandler&lt;HTMLInputElement&gt;)
 
@@ -5056,6 +5062,45 @@ value?: string | (string &amp; readonly string[])</code></pre>
     &lt;/Box&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Wrapped Label</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">What a label does once it stops fitting on one line: it wraps under its box, it keeps its help icon at the end of its last line, and with nowhere to break it breaks inside the word. Drag `frameWidth` down to about 200px.</div>
+              <pre><code>const WrappedLabel = ({ frameWidth }) =&gt; (
+  &lt;div
+    style={{
+      width: frameWidth,
+      border: &#39;1px dashed #888&#39;,
+      padding: &#39;0.5rem&#39;,
+      display: &#39;flex&#39;,
+      flexDirection: &#39;column&#39;,
+      gap: &#39;0.75rem&#39;,
+    }}
+  &gt;
+    &lt;Checkbox
+      label=&quot;I understand the consequences of activating TLS Verification&quot;
+      onChange={() =&gt; {}}
+    /&gt;
+    &lt;Checkbox
+      label=&quot;Delete objects after successful replication when checked&quot;
+      labelHelpTooltip=&quot;Objects are removed from the source only once the destination confirms the write.&quot;
+      onChange={() =&gt; {}}
+    /&gt;
+    &lt;Checkbox
+      label=&quot;s3:ObjectCreated:CompleteMultipartUpload&quot;
+      onChange={() =&gt; {}}
+    /&gt;
+    &lt;Checkbox
+      label=&quot;Short label&quot;
+      labelHelpTooltip=&quot;A one-line label keeps its icon on the same line, as before.&quot;
+      onChange={() =&gt; {}}
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
             </div>
         </div>
     
@@ -7295,7 +7340,7 @@ rightActions?: ReactNode</code></pre>
           direction=&quot;horizontal&quot;
           label=&quot;Default (size 1)&quot;
           id=&quot;w-default&quot;
-          labelHelpTooltip=&quot;The help icon reserves ~2rem in the label column&quot;
+          labelHelpTooltip=&quot;The help icon reserves its own width plus a gap at the end of the label&quot;
           content={&lt;Input id=&quot;w-default&quot; placeholder=&quot;20.5rem&quot; /&gt;}
         /&gt;
         &lt;FormGroup
