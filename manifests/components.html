@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.0s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -1304,7 +1304,7 @@ displayOptions?: BarchartDisplayOptions
 /**
  * Named display preset that sets a group of visual defaults at once.
  * 
- * - `&#39;default&#39;` — opaque background, no grid lines, Y-axis line visible, tick marks visible.
+ * - `&#39;default&#39;` — opaque background, horizontal grid lines, Y-axis line visible, tick marks visible.
  * - `&#39;modern&#39;`  — transparent background, horizontal grid lines, no Y-axis line, no tick marks.
  * 
  * Individual values can be overridden with `displayOptions`.
@@ -3892,15 +3892,15 @@ width?: string = auto</code></pre>
  * - `noHeader`                — hides the title/help-text/right-title header row.
  * - `noYAxisLine`             — hides the vertical Y-axis line.
  * - `noTickLine`              — hides the tick marks on the Y-axis.
- * @example // Add grid lines to the default preset
- * &lt;LineTimeSerieChart displayOptions={{ showHorizontalGridLines: true }} ... /&gt;
+ * @example // Remove grid lines from the default preset
+ * &lt;LineTimeSerieChart displayOptions={{ showHorizontalGridLines: false }} ... /&gt;
  */
 displayOptions?: { noBackground?: boolean; showHorizontalGridLines?: boolean; noHeader?: boolean | undefined; noYAxisLine?: boolean | undefined; noTickLine?: boolean | undefined; } | undefined
 
 /**
  * Named display preset that sets a group of visual defaults at once.
  * 
- * - `&#39;default&#39;` — opaque background, no grid lines, header visible, Y-axis line visible.
+ * - `&#39;default&#39;` — opaque background, horizontal grid lines, header visible, Y-axis line visible.
  * - `&#39;modern&#39;`  — transparent background, horizontal grid lines, no header, no Y-axis line.
  * 
  * Individual values can be overridden with `displayOptions`.
