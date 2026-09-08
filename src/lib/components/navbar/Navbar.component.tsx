@@ -20,6 +20,7 @@ import {
 import { Logo } from '../../icons/branding';
 import { spacing } from '../../spacing';
 import {
+  fontFamily,
   fontSize,
   fontWeight,
   navbarHeight,
@@ -358,6 +359,7 @@ const TabsMenuTrigger = styled.button`
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  font-family: ${fontFamily};
   font-size: ${fontSize.base};
   color: inherit;
   background-color: transparent;

@@ -15,7 +15,7 @@ import {
   useRole,
 } from '@floating-ui/react';
 import { spacing } from '../../spacing';
-import { zIndex } from '../../style/theme';
+import { fontFamily, zIndex } from '../../style/theme';
 import { getThemePropSelector } from '../../utils';
 import { Icon } from '../icon/Icon.component';
 import { Text } from '../text/Text.component';
@@ -46,6 +46,7 @@ const TriggerButton = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+  font-family: ${fontFamily};
   color: ${getThemePropSelector('textPrimary')};
   &:hover {
     background-color: ${getThemePropSelector('highlight')};
