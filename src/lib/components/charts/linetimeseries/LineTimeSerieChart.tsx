@@ -215,7 +215,7 @@ export function LineTimeSerieChart({
             line.withGradient ? (
               <Area
                 key={`${title}-${line.key}`}
-                type="monotone"
+                type="linear"
                 dataKey={line.dataKey}
                 stroke={line.stroke}
                 strokeWidth={1.5}
@@ -227,7 +227,7 @@ export function LineTimeSerieChart({
             ) : (
               <Line
                 key={`${title}-${line.key}`}
-                type="monotone"
+                type="linear"
                 dataKey={line.dataKey}
                 stroke={line.stroke}
                 dot={false}

@@ -52,7 +52,7 @@ type BarchartDisplayOptions = {
 type ResolvedBarchartDisplayOptions = Required<BarchartDisplayOptions>;
 
 const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: false, noYAxisLine: false, noTickLine: false, noHeader: false },
+  default: { noBackground: false, showHorizontalGridLines: true, noYAxisLine: false, noTickLine: false, noHeader: false },
   modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
 };
 
@@ -104,7 +104,7 @@ export type BarchartProps<T extends BarchartBars> = {
   /**
    * Named display preset that sets a group of visual defaults at once.
    *
-   * - `'default'` — opaque background, no grid lines, Y-axis line visible, tick marks visible.
+   * - `'default'` — opaque background, horizontal grid lines, Y-axis line visible, tick marks visible.
    * - `'modern'`  — transparent background, horizontal grid lines, no Y-axis line, no tick marks.
    *
    * Individual values can be overridden with `displayOptions`.
@@ -229,16 +229,31 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
           margin={CHART_CONSTANTS.CHART_MARGIN}
           barCategoryGap={type.type === 'category' ? type.gap : undefined}
         >
-          <CartesianGrid
-            vertical={resolvedShowHorizontalGridLines ? false : true}
-            horizontal={true}
-            {...(!resolvedShowHorizontalGridLines ? { verticalPoints: [0], horizontalPoints: [0] } : {})}
-            stroke={theme.border}
-            strokeOpacity={resolvedShowHorizontalGridLines ? 0.4 : 1}
-            syncWithTicks={resolvedShowHorizontalGridLines}
-            fill={resolvedNoBackground ? 'transparent' : theme.backgroundLevel4}
-            strokeWidth={1}
-          />
+          {/* The plot background and the two edges that frame it. They go
+              together: a preset without a background has no frame either. */}
+          {!resolvedNoBackground && (
+            <CartesianGrid
+              vertical
+              horizontal
+              verticalPoints={[0]}
+              horizontalPoints={[0]}
+              stroke={theme.border}
+              strokeWidth={1}
+              fill={theme.backgroundLevel4}
+            />
+          )}
+          {/* Grid lines proper, one per Y tick, kept behind the bars. */}
+          {resolvedShowHorizontalGridLines && (
+            <CartesianGrid
+              vertical={false}
+              horizontal
+              syncWithTicks
+              stroke={theme.border}
+              strokeOpacity={0.4}
+              strokeWidth={1}
+              fill="transparent"
+            />
+          )}
           {rechartsBars.map((bar) => {
             const { fill, dataKey, stackId } = bar;
             return (
