@@ -11,7 +11,11 @@ import {
 import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import { Icon, IconName } from '../icon/Icon.component';
-import { HELP_ICON_SIZE, IconHelp } from '../iconhelper/IconHelper';
+import {
+  helpIconReserve,
+  IconHelp,
+  LabelHelpIcon,
+} from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
 
@@ -288,29 +292,10 @@ const GridLabelCell = styled.div`
   min-width: 0;
 `;
 
-const HELP_ICON_RESERVE = `calc(${HELP_ICON_SIZE} + ${spacing.r8})`;
-
-/**
- * Reserves the room the help icon sits in. The break opportunity is in front of the
- * icon, so nothing on the icon's own box can suppress it. End padding on the label's
- * inline box lands on its last line instead -- where the icon goes -- and counts
- * toward min-content, so a column sized to the text fits the icon too.
- */
+// The label, holding the room its help icon will sit in. See `helpIconReserve`
+// for why the room has to be reserved on the label rather than around the icon.
 const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
-  ${({ $reserveHelpIcon }) =>
-    $reserveHelpIcon &&
-    css`
-      padding-right: ${HELP_ICON_RESERVE};
-    `}
-`;
-
-/**
- * Pulled back onto the room `LabelText` reserved, by exactly its own width, so
- * placing it costs the line nothing and no break is needed to fit it.
- */
-const HelpIconSlot = styled.span`
-  display: inline-block;
-  margin-left: -${HELP_ICON_SIZE};
+  ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
 `;
 
 // Carries the section's label-column config down to each FormGroup so a row can
@@ -389,14 +374,7 @@ const FormGroup = ({
         {requireMode !== 'all' && required && ' *'}
         {requireMode === 'all' && !required && ' (optional)'}
       </LabelText>
-      {labelHelpTooltip && (
-        <HelpIconSlot>
-          <IconHelp
-            tooltipMessage={labelHelpTooltip}
-            overlayStyle={maxWidthTooltip}
-          />
-        </HelpIconSlot>
-      )}
+      {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>
   );
 
