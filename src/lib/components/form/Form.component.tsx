@@ -10,9 +10,12 @@ import {
 } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
-import { Box } from '../box/Box';
 import { Icon, IconName } from '../icon/Icon.component';
-import { IconHelp } from '../iconhelper/IconHelper';
+import {
+  helpIconReserve,
+  IconHelp,
+  LabelHelpIcon,
+} from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
 
@@ -285,16 +288,14 @@ const FieldSubgridRow = styled.div<{
   }}
 `;
 
-const GridLabelCell = styled.div<{ $hasHelpTooltip: boolean }>`
+const GridLabelCell = styled.div`
   min-width: 0;
-  ${({ $hasHelpTooltip }) =>
-    $hasHelpTooltip &&
-    css`
-      /* The non-responsive column reserves 2rem beyond the label for the help
-         icon affordance; reserve the same here so the label column is identical
-         in both layouts. */
-      padding-right: ${spacing.r32};
-    `}
+`;
+
+// The label, holding the room its help icon will sit in. See `helpIconReserve`
+// for why the room has to be reserved on the label rather than around the icon.
+const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
+  ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
 `;
 
 // Carries the section's label-column config down to each FormGroup so a row can
@@ -365,23 +366,15 @@ const FormGroup = ({
           position alone. Disabled keeps the primary tone: the wrapping label is
           already at 0.5 opacity, and compounding the two costs more contrast than
           the pairing gains. */}
-      <Text color={disabled ? undefined : 'textSecondary'}>
+      <LabelText
+        color={disabled ? undefined : 'textSecondary'}
+        $reserveHelpIcon={!!labelHelpTooltip}
+      >
         {label}
         {requireMode !== 'all' && required && ' *'}
         {requireMode === 'all' && !required && ' (optional)'}
-      </Text>
-      {labelHelpTooltip && (
-        <Box
-          display="inline-block"
-          marginLeft={spacing.r8}
-          style={{ whiteSpace: 'nowrap' }}
-        >
-          <IconHelp
-            tooltipMessage={labelHelpTooltip}
-            overlayStyle={maxWidthTooltip}
-          />
-        </Box>
-      )}
+      </LabelText>
+      {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>
   );
 
@@ -430,9 +423,7 @@ const FormGroup = ({
         $fixedLabel={sectionLabel.fixedLabel}
         $stackBelow={sectionLabel.stackBelow}
       >
-        <GridLabelCell $hasHelpTooltip={!!labelHelpTooltip}>
-          {labelContent}
-        </GridLabelCell>
+        <GridLabelCell>{labelContent}</GridLabelCell>
         {fieldContent}
       </FieldSubgridRow>
     </FieldContext.Provider>

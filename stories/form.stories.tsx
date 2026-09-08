@@ -450,7 +450,7 @@ export const ResponsiveSizedInputs = {
             direction="horizontal"
             label="Default (size 1)"
             id="w-default"
-            labelHelpTooltip="The help icon reserves ~2rem in the label column"
+            labelHelpTooltip="The help icon reserves its own width plus a gap at the end of the label"
             content={<Input id="w-default" placeholder="20.5rem" />}
           />
           <FormGroup
