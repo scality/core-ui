@@ -23,7 +23,7 @@ import {
   Text,
   Tooltip,
 } from '../../index';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
 import {
   AttachableEntity,
@@ -75,22 +75,22 @@ export type AttachmentTableProps<
 const rowHeight = 'h48';
 
 /**
- * Anchored to `SearchBoxContainer`'s padding box with `left`/`right` rather than given a
- * width, so the menu follows the field through a resize that causes no re-render -- a
- * container query, or a side panel opening. Both insets also let the used width resolve
- * from the over-constrained equation, so the borders need no compensating.
+ * Anchored to `SearchAnchor`, which is exactly as wide as the field, with `left`/`right`
+ * rather than given a width -- so the menu follows the field through a resize that causes
+ * no re-render: a container query, or a side panel opening. The old `-2px` border
+ * compensation is gone with it -- an auto width between two insets already lands on the
+ * border box.
  */
 const MenuContainer = styled.ul<{
   $isOpen: boolean;
-  $searchInputIsFocused: boolean;
 }>`
   background-color: ${(props) => props.theme.backgroundLevel1};
   background-clip: content-box;
   padding: 0;
   list-style: none;
   position: absolute;
-  left: ${spacing.r16};
-  right: ${spacing.r16};
+  left: 0;
+  right: 0;
   z-index: 1;
   margin: 0;
   ${(props) =>
@@ -102,9 +102,7 @@ const MenuContainer = styled.ul<{
       border-bottom-left-radius: 4px;
       border: 1px solid ${props.theme.selectedActive};
   `
-      : props.$searchInputIsFocused
-        ? `border-bottom: 1px solid ${props.theme.selectedActive};`
-        : ''}
+      : ''}
   border-top: 0;
   li {
     padding: ${spacing.r8};
@@ -117,24 +115,48 @@ const MenuContainer = styled.ul<{
 `;
 
 const SearchBoxContainer = styled.div`
-  position: relative;
   padding: ${spacing.r16};
+`;
+
+/**
+ * The menu's containing block, sized to the field rather than to the padding box around
+ * it: the field hugs its own content, so a menu spanning the whole box would be wider
+ * than the field it belongs to.
+ */
+const SearchAnchor = styled.div`
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
 `;
 
 /**
  * `flex-grow: 1` is inert on the normal path -- `SearchBoxContainer` is a block, so
  * there is no flex line to grow along. It is kept for the error path, where the
  * input sits in a `Stack` beside a `Loader`.
+ *
+ * The seam with the open menu is keyed on the menu's own open state rather than on
+ * `:focus-within`. Both edges of the seam then move on one state change: an outside
+ * click blurs the input on `mousedown`, while the menu closes on the `mouseup` that
+ * follows, so a focus-driven seam reappeared under a menu that was still open.
+ *
+ * `&&` is load-bearing. `Input` paints its own border from `:hover` and
+ * `:focus-within`, both of which carry a pseudo-class and so outrank a plain
+ * `& > div`; the class has to be doubled to win. The old `& > div:focus-within`
+ * outranked them for free, which is why dropping the pseudo-class needed this.
  */
-const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
+const StyledSearchInput = styled(SearchInput)<{ $isOpen: boolean }>`
   flex-grow: 1;
 
-  & > div:focus-within {
-    border-color: ${(props) => props.theme.selectedActive};
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: 0;
-  }
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      && > div {
+        border-color: ${props.theme.selectedActive};
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 0;
+      }
+    `}
 `;
 
 /**
@@ -501,9 +523,6 @@ export const AttachmentTable = <
     resetRef.current = reset;
   }, [reset]);
 
-  // UI styling states
-  const [searchInputIsFocused, setSearchInputIsFocused] = useState(false);
-
   return (
     /* `iconOnly` is a `@container responsive` query and needs an ancestor declaring
        that container -- this table's own box, not whatever the consumer provides.
@@ -607,118 +626,105 @@ export const AttachmentTable = <
         defaultSortingKey="name"
       >
         <SearchBoxContainer>
-          {filteredEntities.status === 'error' ? (
-            <Tooltip
-              overlay={
-                <>We failed to load the entities, hence search is disabled</>
-              }
-            >
-              <Stack>
-                <StyledSearchInput
-                  autoComplete="off"
-                  placeholder={searchEntityPlaceholder}
-                  {...getInputProps({
-                    ref: (element) => {
-                      if (element) searchInputRef.current = element;
-                    },
-                  })}
-                  onFocus={() => {
-                    openMenu();
-                    setSearchInputIsFocused(true);
-                  }}
-                  onBlur={() => {
-                    setSearchInputIsFocused(false);
-                  }}
-                  disabled={filteredEntities.status === 'error'}
-                />
-                <Loader />
-              </Stack>
-            </Tooltip>
-          ) : (
-            <StyledSearchInput
-              autoComplete="off"
-              placeholder={searchEntityPlaceholder}
-              {...getInputProps({
-                ref: (element) => {
-                  if (element) searchInputRef.current = element;
-                },
-              })}
-              onFocus={() => {
-                openMenu();
-                setSearchInputIsFocused(true);
-              }}
-              onBlur={() => {
-                setSearchInputIsFocused(false);
-              }}
-              $searchInputIsFocused={searchInputIsFocused}
-            />
-          )}
-          <MenuContainer
-            {...getMenuProps()}
-            $isOpen={isOpen}
-            $searchInputIsFocused={searchInputIsFocused}
-          >
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              filteredEntities.data?.entities.map((item, index) => (
-                <li
-                  key={`${item.id}${index}`}
-                  {...getItemProps({ item, index })}
-                >
-                  <Text>{item.name}</Text>
-                </li>
-              ))}
-            {isOpen && filteredEntities.status === 'loading' && (
-              <li>
-                <Text>Searching...</Text>
-              </li>
+          <SearchAnchor>
+            {filteredEntities.status === 'error' ? (
+              <Tooltip
+                overlay={
+                  <>We failed to load the entities, hence search is disabled</>
+                }
+              >
+                <Stack>
+                  <StyledSearchInput
+                    autoComplete="off"
+                    placeholder={searchEntityPlaceholder}
+                    {...getInputProps({
+                      ref: (element) => {
+                        if (element) searchInputRef.current = element;
+                      },
+                    })}
+                    onFocus={openMenu}
+                    disabled={filteredEntities.status === 'error'}
+                    $isOpen={isOpen}
+                  />
+                  <Loader />
+                </Stack>
+              </Tooltip>
+            ) : (
+              <StyledSearchInput
+                autoComplete="off"
+                placeholder={searchEntityPlaceholder}
+                {...getInputProps({
+                  ref: (element) => {
+                    if (element) searchInputRef.current = element;
+                  },
+                })}
+                onFocus={openMenu}
+                $isOpen={isOpen}
+              />
             )}
-            {isOpen && filteredEntities.status === 'error' && (
-              <li>
-                <Text color="statusCritical">
-                  An error occured while searching
-                </Text>
-              </li>
-            )}
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              (filteredEntities.data?.number || 0) >
-                filteredEntities.data?.entities.length && (
-                <li>
-                  <Text
-                    isGentleEmphazed={true}
-                    color="textSecondary"
-                    style={{ textAlign: 'right' }}
+            <MenuContainer {...getMenuProps()} $isOpen={isOpen}>
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                filteredEntities.data?.entities.map((item, index) => (
+                  <li
+                    key={`${item.id}${index}`}
+                    {...getItemProps({ item, index })}
                   >
-                    There{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length ===
-                    1
-                      ? 'is'
-                      : 'are'}{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length}{' '}
-                    more{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length ===
-                    1
-                      ? entityName.singular
-                      : entityName.plural}{' '}
-                    matching your search. Suggestion: try more specific search
-                    expression.
-                  </Text>
-                </li>
-              )}
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              filteredEntities.data?.entities.length === 0 && (
+                    <Text>{item.name}</Text>
+                  </li>
+                ))}
+              {isOpen && filteredEntities.status === 'loading' && (
                 <li>
-                  <Text isGentleEmphazed={true} color="textSecondary">
-                    No {entityName.plural} found matching your search.
+                  <Text>Searching...</Text>
+                </li>
+              )}
+              {isOpen && filteredEntities.status === 'error' && (
+                <li>
+                  <Text color="statusCritical">
+                    An error occured while searching
                   </Text>
                 </li>
               )}
-          </MenuContainer>
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                (filteredEntities.data?.number || 0) >
+                  filteredEntities.data?.entities.length && (
+                  <li>
+                    <Text
+                      isGentleEmphazed={true}
+                      color="textSecondary"
+                      style={{ textAlign: 'right' }}
+                    >
+                      There{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length ===
+                      1
+                        ? 'is'
+                        : 'are'}{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length}{' '}
+                      more{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length ===
+                      1
+                        ? entityName.singular
+                        : entityName.plural}{' '}
+                      matching your search. Suggestion: try more specific search
+                      expression.
+                    </Text>
+                  </li>
+                )}
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                filteredEntities.data?.entities.length === 0 && (
+                  <li>
+                    <Text isGentleEmphazed={true} color="textSecondary">
+                      No {entityName.plural} found matching your search.
+                    </Text>
+                  </li>
+                )}
+            </MenuContainer>
+          </SearchAnchor>
         </SearchBoxContainer>
         <Table.SingleSelectableContent
           rowHeight={rowHeight}
