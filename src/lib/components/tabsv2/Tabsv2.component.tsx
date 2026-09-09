@@ -154,6 +154,7 @@ function Tabs({
       icon,
       // Style-only / routing flags consumed elsewhere — kept out of the spread
       // so styled-components v6 does not forward them to the TabItem <div>.
+      padding,
       withoutPadding,
       exact,
       strict,
@@ -248,7 +249,10 @@ function Tabs({
                     <TabContent
                       className="sc-tabs-item-content"
                       $tabContentColor={tabContentColor}
-                      $withoutPadding={tab.props.withoutPadding}
+                      $padding={
+                        tab.props.padding ??
+                        (tab.props.withoutPadding ? 'none' : 'all')
+                      }
                     >
                       {tab.props.children}
                     </TabContent>

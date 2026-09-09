@@ -167,6 +167,21 @@ const ScrollArea = styled(BasicPageLayout)`
   scrollbar-gutter: stable;
 `;
 
+// Same gutter as ScrollArea's `scrollbar-gutter: stable`; the bar's width is
+// engine-owned, so it cannot be read as a length. Kept empty because the overflow
+// would clip Dropdown/Selectv2/DatePicker popups, which are not portalled — and
+// that same overflow makes it a scroll container, whose automatic flex minimum is
+// 0, so it has to be told not to shrink.
+const ScrollbarGutterSpacer = styled.div`
+  flex-shrink: 0;
+  overflow-y: hidden;
+  scrollbar-gutter: stable;
+`;
+
+const ActionsEndingWithTheFields = styled.div`
+  display: flex;
+`;
+
 // A FormSection lays its FormGroups out so labels align across the section from
 // content alone — no JS measurement. It picks one of two mechanisms based on
 // whether the label column is a fixed width (`forceLabelWidth`):
@@ -623,7 +638,10 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
           <FixedHeader $layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
-              <div>{rightActions}</div>
+              <ActionsEndingWithTheFields>
+                {rightActions}
+                <ScrollbarGutterSpacer />
+              </ActionsEndingWithTheFields>
             </Wrap>
           </FixedHeader>
 

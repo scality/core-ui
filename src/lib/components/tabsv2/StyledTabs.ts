@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
+import type { TabPadding } from './Tab';
 
 export const TabBar = styled.div`
   display: flex;
@@ -85,12 +86,18 @@ export const TabsContainer = styled.div<{
     margin-right: -1px;
   }
 `;
+const tabContentPadding: Record<TabPadding, string> = {
+  all: spacing.r16,
+  exceptRight: `${spacing.r16} 0 ${spacing.r16} ${spacing.r16}`,
+  none: '0',
+};
+
 export const TabContent = styled.div<{
   $tabContentColor?: string;
-  $withoutPadding?: boolean;
+  $padding: TabPadding;
 }>`
   margin: 0;
-  padding: ${(props) => (props.$withoutPadding ? '0' : spacing.r16)};
+  padding: ${(props) => tabContentPadding[props.$padding]};
   display: block;
   width: 100%;
   height: calc(100% - ${spacing.r40});
