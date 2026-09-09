@@ -137,8 +137,7 @@ export const HeadRow = styled.div<HeadRowType>`
    * wider than the body's by the width of the scrollbar. Reserving the same gutter
    * on both makes them agree with no measurement. It has to be stable rather than
    * auto: this element is overflow hidden, so it never shows a bar of its own and
-   * auto would reserve nothing. The alternative -- measuring the bar and
-   * subtracting it -- shifted every column the moment a table gained a scrollbar.
+   * auto would reserve nothing.
    */
   scrollbar-gutter: stable;
   height: ${(props) => tableRowHeight[props.$rowHeight]}rem;
