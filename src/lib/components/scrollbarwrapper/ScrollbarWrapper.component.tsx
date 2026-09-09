@@ -75,21 +75,38 @@ const GlobalStyle = createGlobalStyle`
   }
 
 ${(props) => {
-    const brand = props.theme;
-    return css`
-    // Custom scrollbar
+  const brand = props.theme;
+  return css`
+    /*
+     * The scrollbar's appearance, in the two standard properties. This is what
+     * every current engine renders, and 'thin' is a keyword rather than a length:
+     * the engine picks the pixels, so nothing here can promise a width.
+     */
     * {
-      // Chrome / Safari / Edge
-      ::-webkit-scrollbar {
+      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
+      scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
+      scrollbar-width: thin;
+    }
+
+    /*
+     * The legacy WebKit pseudo-elements, as a fallback only. Setting either standard
+     * property on an element makes Chromium ignore its ::-webkit-scrollbar rules, and
+     * the block above sets both on every element -- so outside this guard the rules
+     * below never take effect, and the 8px they name is not the bar anyone sees.
+     * Selectors are written flat: nested under the universal selector they compile
+     * to a descendant combinator, which can never match the root scroller.
+     */
+    @supports not (scrollbar-width: thin) {
+      *::-webkit-scrollbar {
         width: 8px;
         height: 8px;
       }
 
-      ::-webkit-scrollbar-track {
+      *::-webkit-scrollbar-track {
         background: ${brand.backgroundLevel3};
       }
 
-      ::-webkit-scrollbar-thumb {
+      *::-webkit-scrollbar-thumb {
         width: 4px;
         height: 4px;
         min-height: 20px;
@@ -101,27 +118,23 @@ ${(props) => {
         border: 2px solid rgba(0, 0, 0, 0);
       }
 
-      ::-webkit-scrollbar-thumb:vertical:hover,
-      ::-webkit-scrollbar-thumb:horizontal:hover {
+      *::-webkit-scrollbar-thumb:vertical:hover,
+      *::-webkit-scrollbar-thumb:horizontal:hover {
         background-color: rgba(89, 90, 120, 0.5);
       }
 
-      ::-webkit-scrollbar-button {
+      *::-webkit-scrollbar-button {
         width: 0;
         height: 0;
         display: none;
       }
-      ::-webkit-scrollbar-corner {
+
+      *::-webkit-scrollbar-corner {
         background-color: transparent;
       }
-
-      // Firefox
-      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
-      scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
-      scrollbar-width: thin;
     }
   `;
-  }}
+}}
 `;
 
 function ScrollbarWrapper({ children }: Props) {
