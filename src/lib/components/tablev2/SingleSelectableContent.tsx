@@ -182,8 +182,7 @@ export function SingleSelectableContent<
     [selectedId, separationLineVariant, isSelectable],
   );
 
-  const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
-    useTableScrollbar();
+  const { setHasScrollbar } = useTableScrollbar();
 
   return (
     <>
@@ -193,8 +192,6 @@ export function SingleSelectableContent<
             {...headerGroup.getHeaderGroupProps()}
             ref={headerRef}
             $separationLineVariant={separationLineVariant}
-            $hasScrollBar={hasScrollbar}
-            $scrollBarWidth={scrollBarWidth}
             $rowHeight={rowHeight}
             style={{ overflow: 'hidden' }}
           >
@@ -237,7 +234,7 @@ export function SingleSelectableContent<
           </HeadRow>
         ))}
       </div>
-      <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
+      <TableBody role="rowgroup" className="tbody">
         <TableRows
           locale={locale}
           children={children}
