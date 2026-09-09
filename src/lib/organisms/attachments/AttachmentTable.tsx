@@ -74,8 +74,13 @@ export type AttachmentTableProps<
 
 const rowHeight = 'h48';
 
+/**
+ * Anchored to `SearchBoxContainer`'s padding box with `left`/`right` rather than given a
+ * width, so the menu follows the field through a resize that causes no re-render -- a
+ * container query, or a side panel opening. Both insets also let the used width resolve
+ * from the over-constrained equation, so the borders need no compensating.
+ */
 const MenuContainer = styled.ul<{
-  $width: string;
   $isOpen: boolean;
   $searchInputIsFocused: boolean;
 }>`
@@ -84,7 +89,8 @@ const MenuContainer = styled.ul<{
   padding: 0;
   list-style: none;
   position: absolute;
-  width: ${(props) => props.$width};
+  left: ${spacing.r16};
+  right: ${spacing.r16};
   z-index: 1;
   margin: 0;
   ${(props) =>
@@ -119,10 +125,6 @@ const SearchBoxContainer = styled.div`
  * `flex-grow: 1` is inert on the normal path -- `SearchBoxContainer` is a block, so
  * there is no flex line to grow along. It is kept for the error path, where the
  * input sits in a `Stack` beside a `Loader`.
- *
- * So the box is a fixed 287px, and this component cannot change that: `SearchInput`
- * pins `width: max-content` and does not forward `fluid`. That is this table's next
- * floor, at a 301px container.
  */
 const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
   flex-grow: 1;
@@ -500,7 +502,6 @@ export const AttachmentTable = <
   }, [reset]);
 
   // UI styling states
-  const [searchWidth, setSearchWidth] = useState('0px');
   const [searchInputIsFocused, setSearchInputIsFocused] = useState(false);
 
   return (
@@ -605,19 +606,7 @@ export const AttachmentTable = <
         }))}
         defaultSortingKey="name"
       >
-        <SearchBoxContainer
-          {...{
-            ref: (element) => {
-              if (element?.firstElementChild) {
-                setSearchWidth(
-                  element.firstElementChild.getBoundingClientRect().width -
-                    2 +
-                    'px',
-                );
-              }
-            },
-          }}
-        >
+        <SearchBoxContainer>
           {filteredEntities.status === 'error' ? (
             <Tooltip
               overlay={
@@ -666,7 +655,6 @@ export const AttachmentTable = <
           )}
           <MenuContainer
             {...getMenuProps()}
-            $width={searchWidth}
             $isOpen={isOpen}
             $searchInputIsFocused={searchInputIsFocused}
           >
