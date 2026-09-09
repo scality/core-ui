@@ -113,6 +113,31 @@ describe('Button iconOnly', () => {
     );
   });
 
+  it('falls back to the label when a conditional tooltip overlay resolves to false', async () => {
+    // The shape a consumer reaches for to explain why a button is unavailable.
+    // With every guard passing it resolves to `false`, not to `undefined`.
+    const canManage = true;
+    const providerDisabled = false;
+    const unavailableReason =
+      (!canManage && 'You need the manager role') ||
+      (providerDisabled && 'The provider is deactivated');
+
+    render(
+      <Button
+        variant="primary"
+        icon={<span aria-hidden>+</span>}
+        label="Create"
+        iconOnly
+        tooltip={{ overlay: unavailableReason }}
+      />,
+      { wrapper: Wrapper },
+    );
+    await userEvent.hover(screen.getByRole('button', { name: 'Create' }));
+    await waitFor(() =>
+      expect(screen.getAllByText('Create').length).toBeGreaterThan(1),
+    );
+  });
+
   it('warns when a non-string label is collapsed with only a non-string tooltip overlay', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     try {
