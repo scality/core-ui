@@ -78,9 +78,9 @@ const LABEL_MIN_CH = 24;
 // together; above ~2.5x the cap the fraction is the larger of the two and the
 // column is sized exactly as before.
 const LABEL_MAX_CQI = 40;
-// The width below which a section stacks: its own label column plus the field
-// floor plus the column gap. Derived per section rather than fixed, or a section
-// with a label cap wider than LABEL_MIN_CH overflows in the band between the two.
+// The width below which a section stacks. The floor is a parameter rather than a
+// fixed value: a section whose label cap exceeds LABEL_MIN_CH would otherwise
+// overflow in the band between the two.
 const stackBelow = (labelFloor: string) =>
   `calc(${labelFloor} + ${FIELD_MIN_REM}rem + ${spacing.r32})`;
 
@@ -485,9 +485,13 @@ const FormSection = ({
         labelWidth ? `min(${labelWidth}, ${LABEL_MAX_CQI}cqi)` : labelWidthCap
       })`
     : labelWidthCap;
-  // The auto column has no length to derive from, so it keeps the readability
-  // floor it has always used.
-  const sectionStackBelow = stackBelow(labelWidth ?? `${LABEL_MIN_CH}ch`);
+  // Stack on the readability floor, not the cap: the clamped label never occupies its
+  // cap at narrow widths, so a cap-derived threshold stacks the row while both columns
+  // still fit. A cap under the floor is its own floor — the label cannot use room it
+  // was never given.
+  const sectionStackBelow = stackBelow(
+    labelWidth ? `min(${labelWidth}, ${LABEL_MIN_CH}ch)` : `${LABEL_MIN_CH}ch`,
+  );
 
   return (
     <FormSectionContext.Provider
