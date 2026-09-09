@@ -1,0 +1,45 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TabsStories from './tabs.stories';
+
+<Meta of={TabsStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2, .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Tabs
+
+Tabs split one subject into views the user switches between, keeping the page and
+its context. Each `Tab` owns a route, so a view is linkable and survives a reload.
+
+<Canvas of={TabsStories.Default} sourceState="none" />
+
+## How much inset the content gets
+
+A tab insets its content on all four sides. Content that draws to the frame
+instead — a table, a list, anything painting its own background — asks for
+`withoutPadding`.
+
+```tsx
+<Tab path="/users" label="Users" withoutPadding>
+  <UserTable />
+</Tab>
+```
+
+Nothing else is a call-site decision. In particular, a `Form` with
+`layout={{ kind: 'tab' }}` reserves a gutter for its own scrollbar at its right
+edge, and takes the tab's inset back on that side by itself, at any depth, so
+the scrollbar sits at the tab's frame.
+
+A wrapper between the tab and such a form has to leave its own right edge alone
+— padding there pushes the form's gutter back inward, `overflow: hidden` clips
+the part reaching out — and has to leave the form the full width, which a
+row-direction flex container does not. The symptom is the same either way: the
+scrollbar sits away from the frame again. A wrapper that stacks vertically,
+styles or conditionally renders its child is fine.
+
+To drop the inset, use `withoutPadding`, not a CSS override on
+`.sc-tabs-item-content`: the override leaves a form inside reaching a full inset
+past the frame.

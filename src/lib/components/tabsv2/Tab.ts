@@ -12,6 +12,7 @@ export type TabProps = {
   exact?: boolean;
   strict?: boolean;
   sensitive?: boolean;
+  /** Drops the tab's inset, for content that draws to the tab's frame itself. */
   withoutPadding?: boolean;
 };
 

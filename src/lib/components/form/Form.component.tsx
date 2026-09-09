@@ -18,6 +18,7 @@ import {
   trimLabelEnd,
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
+import { TAB_CONTENT_INSET } from '../tabsv2/Tabs.constants';
 import { HelperText, Text } from '../text/Text.component';
 import { PAGE_FORM_WIDTH } from './Form.constants';
 
@@ -96,6 +97,15 @@ const StyledForm = styled.form<{
   height: 100%;
   background-color: ${(props) =>
     props.$layout.kind === 'page' && props.theme.backgroundLevel4};
+  ${(props) =>
+    props.$layout.kind === 'tab' &&
+    css`
+      /* Takes back the Tab's right inset, the form having a scrollbar gutter of
+         its own. A negative margin only grows a full-width box, hence the stretch
+         against wrappers that align their children. */
+      align-self: stretch;
+      margin-right: calc(-1 * var(${TAB_CONTENT_INSET}, 0px));
+    `}
   ${({ $containerize }) =>
     $containerize &&
     css`
