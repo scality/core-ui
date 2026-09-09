@@ -1,12 +1,12 @@
 import React from 'react';
-import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
-import { Tabs, Tab } from '../src/lib/components/tabsv2/Tabsv2.component';
-import { Wrapper, Title } from './common';
+import { TextBadge } from '../../src/lib/components/textbadge/TextBadge.component';
+import { Tabs, Tab } from '../../src/lib/components/tabsv2/Tabsv2.component';
+import { Wrapper, Title } from '../common';
 import { BrowserRouter } from 'react-router-dom';
-import { coreUIAvailableThemes } from '../src/lib/style/theme';
+import { coreUIAvailableThemes } from '../../src/lib/style/theme';
 import styled from 'styled-components';
 import { useLocation } from 'react-router';
-import { spacing } from '../src/lib';
+import { spacing } from '../../src/lib';
 
 const Content = styled.div`
   padding: ${spacing.r24};
