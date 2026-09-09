@@ -20,7 +20,6 @@ import {
   shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
-  useTableScrollbar,
 } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
@@ -125,8 +124,6 @@ export const MultiSelectableContent = <
     }
     currentRow.toggleRowSelected(!currentRow.isSelected);
   };
-
-  const { setHasScrollbar } = useTableScrollbar();
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
 

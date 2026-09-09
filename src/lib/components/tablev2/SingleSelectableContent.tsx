@@ -20,7 +20,6 @@ import {
   shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
-  useTableScrollbar,
 } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
@@ -181,8 +180,6 @@ export function SingleSelectableContent<
       ),
     [selectedId, separationLineVariant, isSelectable],
   );
-
-  const { setHasScrollbar } = useTableScrollbar();
 
   return (
     <>
