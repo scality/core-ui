@@ -90,7 +90,17 @@ export const TabContent = styled.div<{
   $withoutPadding?: boolean;
 }>`
   margin: 0;
-  padding: ${(props) => (props.$withoutPadding ? '0' : spacing.r16)};
+  /*
+   * No right padding: the right gutter belongs to whatever the tab renders. A tab
+   * form already carries one of its own -- its layout's padding plus the room it
+   * reserves for its scrollbar -- and a second one here lands on top of it, which
+   * is what put the form's scrollbar in the middle of a gap instead of near the
+   * edge. Content that wants a right inset and has none of its own has to supply it.
+   */
+  padding: ${(props) =>
+    props.$withoutPadding
+      ? '0'
+      : `${spacing.r16} 0 ${spacing.r16} ${spacing.r16}`};
   display: block;
   width: 100%;
   height: calc(100% - ${spacing.r40});
