@@ -1,4 +1,4 @@
-import { getContrastText } from './utils';
+import { formatISONumber, getContrastText } from './utils';
 
 const LIGHT_TEXT = '#EAEAEA';
 const DARK_TEXT = '#000000';
@@ -34,8 +34,12 @@ describe('getContrastText', () => {
   });
 
   it('handles rgb color format', () => {
-    expect(getContrastText('rgb(0, 0, 0)', LIGHT_TEXT, DARK_TEXT)).toBe(LIGHT_TEXT);
-    expect(getContrastText('rgb(255, 255, 255)', LIGHT_TEXT, DARK_TEXT)).toBe(DARK_TEXT);
+    expect(getContrastText('rgb(0, 0, 0)', LIGHT_TEXT, DARK_TEXT)).toBe(
+      LIGHT_TEXT,
+    );
+    expect(getContrastText('rgb(255, 255, 255)', LIGHT_TEXT, DARK_TEXT)).toBe(
+      DARK_TEXT,
+    );
   });
 
   it('returns null for unparseable values', () => {
@@ -47,5 +51,38 @@ describe('getContrastText', () => {
       ),
     ).toBeNull();
     expect(getContrastText('not-a-color', LIGHT_TEXT, DARK_TEXT)).toBeNull();
+  });
+});
+
+describe('formatISONumber', () => {
+  /** How the chart tooltips call it. */
+  const tooltip = (value: number) =>
+    formatISONumber(value, { fixedDecimals: true, compact: true });
+
+  it('should never render a non-zero value as zero', () => {
+    expect(tooltip(0.002)).toBe('0.002');
+    expect(tooltip(0.013)).toBe('0.013');
+    expect(tooltip(-0.002)).toBe('-0.002');
+  });
+
+  it('should keep two significant digits below one', () => {
+    expect(tooltip(0.0025)).toBe('0.0025');
+    expect(tooltip(0.00123)).toBe('0.0012');
+  });
+
+  it('should leave values from 0.01 up exactly as they were', () => {
+    expect(tooltip(0.09)).toBe('0.09');
+    expect(tooltip(0.5)).toBe('0.50');
+    expect(tooltip(42.5)).toBe('42.50');
+    // the compact separator is a narrow no-break space, hence the regex
+    expect(tooltip(40000)).toMatch(/^40\.00\sk$/);
+  });
+
+  it('should still reserve 0 for the value zero', () => {
+    expect(tooltip(0)).toBe('0');
+  });
+
+  it('should still fall back to exponential below the 0.001 floor', () => {
+    expect(tooltip(0.0009)).toBe('9e-4');
   });
 });
