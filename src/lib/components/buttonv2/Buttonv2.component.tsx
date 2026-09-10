@@ -373,8 +373,11 @@ function Button({
       : labelDrivenAriaLabel;
 
   // An `iconOnly` button hides its label, so it must always offer a hover hint.
-  // An explicit tooltip wins; otherwise fall back to the label itself.
-  const tooltipOverlay = tooltip?.overlay ?? (iconOnly ? label : undefined);
+  // An explicit tooltip wins; otherwise fall back to the label itself. Guarded
+  // on truthiness, not nullishness: a conditional overlay written as
+  // `(guard && reason) || ...` yields `false` when no guard matches, and a
+  // falsy overlay renders no tooltip at all.
+  const tooltipOverlay = tooltip?.overlay || (iconOnly ? label : undefined);
 
   return (
     <Tooltip
