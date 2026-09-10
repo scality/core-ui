@@ -104,6 +104,7 @@ type FormatISONumberOptions = {
  * - Space as thousands separator
  * - Dot as decimal separator
  * - Optional compact notation (10K, 1M, etc.)
+ * - Fractional values: enough decimals to keep two significant digits
  * - Very small values (< 0.001): scientific notation
  */
 export const formatISONumber = (
@@ -120,11 +121,24 @@ export const formatISONumber = (
     return value.toExponential();
   }
 
+  /**
+   * Below 1, `decimals` alone swallows the value: two decimals render 0.002 as
+   * "0.00", which reads as a zero the caller never measured — and on a chart
+   * that reserves a slot for measured zeros, the two are indistinguishable.
+   * The ceiling is raised to whatever keeps two significant digits, which is
+   * the rule `formatLogTickValue` already applies to a log axis tick. It only
+   * ever raises the ceiling, so values from 0.01 up are formatted as before.
+   */
+  const maximumFractionDigits =
+    absValue < 1
+      ? Math.max(decimals, Math.ceil(-Math.log10(absValue)) + 1)
+      : decimals;
+
   // ISO format: space as thousands separator, dot as decimal separator
   // With optional compact notation (10K, 1M, etc.)
   return new Intl.NumberFormat('fr-FR', {
     minimumFractionDigits: fixedDecimals ? decimals : undefined,
-    maximumFractionDigits: decimals,
+    maximumFractionDigits,
     notation: compact ? 'compact' : 'standard',
   })
     .format(value)

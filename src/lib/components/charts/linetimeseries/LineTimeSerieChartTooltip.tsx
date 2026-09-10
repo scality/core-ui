@@ -10,7 +10,10 @@ import {
 } from '../common/ChartTooltip';
 import { LineTimeSerieChartTooltipProps } from './LineTimeSerieChart.types';
 import { getCurrentlyHoveredChartId } from './useChartHover';
-import { formatTooltipValueWithUnit } from '../common/chartUtils';
+import {
+  formatTooltipValueWithUnit,
+  readLogPlottedValue,
+} from '../common/chartUtils';
 
 /**
  * Custom tooltip component for LineTimeSerieChart
@@ -26,6 +29,7 @@ export const LineTimeSerieChartTooltip: React.FC<
   tooltipProps,
   renderTooltip,
   isSymmetrical,
+  logZeroValue = null,
   belowSeriesLabels,
   chartContainerRef,
   chartId,
@@ -39,8 +43,27 @@ export const LineTimeSerieChartTooltip: React.FC<
     if (!active || !payload || !payload.length || !label || !isActiveChart)
       return null;
 
+    /**
+     * A zero is plotted at the axis's reserved band so it can be drawn, and
+     * every reader of the payload has to see the 0 that was measured instead.
+     * Mapping the payload once, here, is what keeps the default tooltip and a
+     * caller's `renderTooltip` reporting the same number — the same thing
+     * `getCurrentPoint` does for the Barchart's two paths.
+     */
+    const plottedPayload =
+      logZeroValue === null
+        ? payload
+        : payload.map((entry) => ({
+            ...entry,
+            value: readLogPlottedValue(entry.value, logZeroValue),
+          }));
+
     const tooltipContent = renderTooltip ? (
-      renderTooltip(tooltipProps, unitLabel, duration)
+      renderTooltip(
+        { ...tooltipProps, payload: plottedPayload },
+        unitLabel,
+        duration,
+      )
     ) : (
       <>
         <ChartTooltipHeader>
@@ -49,7 +72,7 @@ export const LineTimeSerieChartTooltip: React.FC<
         <ChartTooltipItemsContainer>
           {(() => {
             // Sort payload: above series first (descending), then below series (ascending by absolute value)
-            const sortedPayload = [...payload].sort((a, b) => {
+            const sortedPayload = [...plottedPayload].sort((a, b) => {
               const aIsBelow = belowSeriesLabels?.has(a.name) ?? false;
               const bIsBelow = belowSeriesLabels?.has(b.name) ?? false;
 

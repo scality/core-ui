@@ -18,6 +18,32 @@ export type Serie = {
 export type NonSymmetricalChartSerie = {
   yAxisType?: 'default' | 'percentage';
   series: Serie[] | undefined;
+  /**
+   * Y-axis scale.
+   *
+   * `'log'` is for a metric whose values span orders of magnitude: on a linear
+   * axis the quiet periods flatten onto the baseline and only the spikes are
+   * readable, and a log axis gives each decade the same height instead. The
+   * axis is bounded by the decades enclosing the data, and its ticks are the
+   * decades themselves.
+   *
+   * It changes the display and nothing else: no value is rescaled, and the
+   * tooltip, the legend and the unit scaling all keep the numbers the caller
+   * passed in.
+   *
+   * A zero has no logarithm, so the axis reserves one slot below its first
+   * decade, labels it `0`, and runs zeros along it. A sample that measured zero
+   * stays distinguishable from a missing one — different facts, which a gap
+   * would render identically. The slot costs a decade's worth of height, so it
+   * is only reserved when the series actually holds a zero.
+   *
+   * A negative sample is dropped and leaves a gap: a metric that goes negative
+   * does not belong on a log axis. The negative half of a `'symmetrical'` axis
+   * has no logarithm either, which is why the option does not exist there.
+   *
+   * @default 'linear'
+   */
+  yAxisScale?: 'linear' | 'log';
 };
 
 /**
@@ -26,6 +52,11 @@ export type NonSymmetricalChartSerie = {
  */
 export type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
+  /**
+   * Not available on a symmetrical chart: its axis spans negative values, which
+   * have no logarithm.
+   */
+  yAxisScale?: never;
   series:
     | {
         above: Serie[] | undefined;
@@ -131,6 +162,11 @@ export type LineTimeSerieChartTooltipProps = {
     duration?: number,
   ) => React.ReactNode;
   isSymmetrical?: boolean;
+  /**
+   * A log axis's reserved zero band. A value drawn there is reported as the 0 it
+   * actually is, not as the position it occupies.
+   */
+  logZeroValue?: number | null;
   belowSeriesLabels?: Set<string>;
   chartContainerRef: React.RefObject<HTMLDivElement>;
   /** The unique ID of this chart instance */
