@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import { UseMutationResult } from 'react-query';
 import { spacing, Stack } from '../../spacing';
+import { fontFamily } from '../../style/theme';
 import { Input, InputProps } from '../inputv2/inputv2';
 import { Loader } from '../loader/Loader.component';
 import { HelperText } from '../text/Text.component';
@@ -51,7 +52,7 @@ const NameTrigger = styled.span`
   border: 1px solid ${(props) => props.theme.border};
   background: transparent;
   color: ${(props) => props.theme.textPrimary};
-  font-family: 'Lato';
+  font-family: ${fontFamily};
   font-size: 1rem;
   white-space: nowrap;
   cursor: pointer;

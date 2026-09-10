@@ -217,6 +217,11 @@ export const chartColors = {
   lineColor8,
 };
 
+// The trailing generic is load-bearing on both: a family name with nothing
+// after it falls back to the browser's default font, which is a serif.
+export const fontFamily = "'Lato', system-ui, sans-serif";
+export const fontFamilyMonospace = "'Courier New', monospace";
+
 export const fontSize = {
   smaller: '0.71rem',
   small: '0.85rem',

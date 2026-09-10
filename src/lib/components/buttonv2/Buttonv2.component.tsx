@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
-import { fontSize, fontWeight } from '../../style/theme';
+import { fontFamily, fontSize, fontWeight } from '../../style/theme';
 import { getContrastText } from '../../utils';
 import { Loader } from '../loader/Loader.component';
 import { Tooltip, Props as TooltipProps } from '../tooltip/Tooltip.component';
@@ -82,7 +82,7 @@ export const ButtonStyled = styled.button.withConfig({
   text-decoration: none;
   border: none;
   text-decoration: none;
-  font-family: 'Lato';
+  font-family: ${fontFamily};
   font-weight: ${fontWeight.base};
   padding: ${spacing.r4} ${spacing.r8};
   font-size: ${fontSize.base};

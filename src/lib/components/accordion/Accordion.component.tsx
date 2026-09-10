@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { spacing, Stack } from '../../spacing';
+import { fontFamily } from '../../style/theme';
 import { Box } from '../box/Box';
 import { Icon } from '../icon/Icon.component';
 
@@ -38,7 +39,7 @@ const AccordionHeader = styled.button<{
   background-color: transparent;
   color: ${(props) => props.theme.textPrimary};
   padding: 0;
-  font-family: 'Lato';
+  font-family: ${fontFamily};
   ${({ $isOpen, theme }) =>
     $isOpen &&
     `

@@ -4,7 +4,7 @@ import { tags } from '@lezer/highlight';
 import { getLuminance } from 'polished';
 import type { Extension } from '@codemirror/state';
 import type { CoreUITheme } from '../../style/theme';
-import { lineColor5 } from '../../style/theme';
+import { fontFamilyMonospace, lineColor5 } from '../../style/theme';
 
 export function isDarkBackground(theme: CoreUITheme): boolean {
   try {
@@ -46,7 +46,7 @@ export function createEditorTheme(theme: CoreUITheme): Extension {
       '&': {
         backgroundColor: theme.backgroundLevel1,
         color: theme.textPrimary,
-        fontFamily: "'Courier New', monospace",
+        fontFamily: fontFamilyMonospace,
         fontSize: '12px',
         lineHeight: '1.6',
       },
