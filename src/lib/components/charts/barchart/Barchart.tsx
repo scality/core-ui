@@ -64,7 +64,7 @@ const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOpti
   modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
 };
 
-/** A Recharts row. `null` is a value the axis cannot place — see `dropNonPositiveValues`. */
+/** A Recharts row. `null` is a value the axis cannot place — see `placeNonPositiveValues`. */
 type BarchartRow = { [key: string]: string | number | null };
 
 export type Point = {
@@ -140,12 +140,15 @@ export type BarchartProps<T extends BarchartBars> = {
    * tooltip, the legend and the unit scaling all keep the numbers the caller
    * passed in.
    *
-   * Two things it cannot do:
-   * - A bar whose value is zero or negative is dropped, because a log axis
-   *   has nowhere to put it. It renders as a gap, which is the same thing an
-   *   absent bar renders as — so on a log axis "measured zero" and "no data"
-   *   become indistinguishable. They are not the same fact. Stay linear where
-   *   that difference matters.
+   * A zero has no logarithm, so the axis reserves one slot below its first
+   * decade, labels it `0`, and draws zeros there as a stub bar. A measured
+   * zero stays distinguishable from an absent one, which are different facts
+   * and which a gap would render identically. The slot costs a decade's worth
+   * of height, so it is only reserved when the data actually holds a zero.
+   *
+   * Two things it will not do:
+   * - A negative bar is dropped and leaves a gap. A dataset that goes negative
+   *   does not belong on a log axis at all.
    * - `stacked` falls back to a linear axis. Stacking places each segment at
    *   a cumulative sum, so on a log axis a segment's height stops matching
    *   its value and the chart misreads.

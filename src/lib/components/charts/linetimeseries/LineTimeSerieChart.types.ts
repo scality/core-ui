@@ -31,15 +31,15 @@ export type NonSymmetricalChartSerie = {
    * tooltip, the legend and the unit scaling all keep the numbers the caller
    * passed in.
    *
-   * One thing to know before reaching for it. Zero has no logarithm, so a
-   * sample of zero or less is dropped and leaves a gap — which is exactly what
-   * a missing sample leaves. On a log axis "measured zero" and "no data" become
-   * indistinguishable, and they are different facts: a zero is a measurement,
-   * missing data is the absence of one. A metric that legitimately reads zero
-   * belongs on a linear axis.
+   * A zero has no logarithm, so the axis reserves one slot below its first
+   * decade, labels it `0`, and runs zeros along it. A sample that measured zero
+   * stays distinguishable from a missing one — different facts, which a gap
+   * would render identically. The slot costs a decade's worth of height, so it
+   * is only reserved when the series actually holds a zero.
    *
-   * The negative half of a `'symmetrical'` axis has no logarithm either, which
-   * is why the option does not exist there.
+   * A negative sample is dropped and leaves a gap: a metric that goes negative
+   * does not belong on a log axis. The negative half of a `'symmetrical'` axis
+   * has no logarithm either, which is why the option does not exist there.
    *
    * @default 'linear'
    */
