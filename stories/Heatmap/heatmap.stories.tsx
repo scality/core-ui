@@ -6,7 +6,13 @@ import {
   HeatmapDiscreteScale,
   HeatmapRow,
 } from '../../src/lib/next';
-import { CoreUITheme } from '../../src/lib/style/theme';
+import { FormattedDateTime } from '../../src/lib/components/date/FormattedDateTime';
+import {
+  CoreUITheme,
+  lineColor1,
+  lineColor2,
+  lineColor3,
+} from '../../src/lib/style/theme';
 
 /* -------------------------------------------------------------------------- */
 /*                                    DATA                                    */
@@ -51,6 +57,89 @@ const buildStatusRows = (
     }),
   }));
 
+/* -- Value sets the colorSet stories are built on -------------------------- */
+
+const BACKUP_OUTCOMES = [
+  'Full',
+  'Incremental',
+  'Snapshot',
+  'Skipped',
+  'Failed',
+] as const;
+
+const BACKUP_POLICIES = [
+  'vault-01 nightly',
+  'vault-02 nightly',
+  'archive weekly',
+  'metadata hourly',
+  'config hourly',
+];
+
+const WORKLOAD_PROFILES = [
+  'Read-heavy',
+  'Write-heavy',
+  'Mixed',
+  'Idle',
+] as const;
+
+const BUCKETS = [
+  'ingest-raw',
+  'media-thumbnails',
+  'analytics-exports',
+  'backup-archive',
+  'user-uploads',
+  'logs-audit',
+];
+
+/** Codes, not sentences: the legend spells them out through `labelMap`. */
+const RESPONSE_CODES = ['200', '206', '403', '500'] as const;
+
+const S3_ENDPOINTS = [
+  'GET /objects',
+  'PUT /objects',
+  'POST /multipart',
+  'DELETE /objects',
+  'GET /buckets',
+];
+
+/** Picks from `values` by geometric share, given a 0-99 draw. */
+const pickWeighted = <T,>(values: readonly T[], draw: number): T => {
+  let remaining = draw;
+
+  for (let index = 0; index < values.length - 1; index++) {
+    const share = 100 / 2 ** (index + 1);
+    if (remaining < share) return values[index];
+    remaining -= share;
+  }
+
+  return values[values.length - 1];
+};
+
+/**
+ * Rows over any value set: the generated stories differ in what their values
+ * are called, not in how the grid is filled.
+ *
+ * Each value is half as frequent as the one before it, so a generated grid has
+ * a dominant value and a rare tail — an even wash would hide which color means
+ * what, which is the only thing these stories are about.
+ */
+const buildCategoryRows = <T extends string>(
+  labels: string[],
+  columnCount: number,
+  /** Values from most to least frequent. */
+  values: readonly T[],
+): HeatmapRow<T>[] =>
+  labels.map((label, rowIndex) => ({
+    label,
+    cells: Array.from({ length: columnCount }, (_, colIndex) =>
+      pickWeighted(values, noise(rowIndex + 2, colIndex + 3)),
+    ),
+  }));
+
+/** `sortOrder` that keeps the legend in the order the values are declared. */
+const inDeclaredOrder = (values: readonly string[]) => (a: string, b: string) =>
+  values.indexOf(a) - values.indexOf(b);
+
 /**
  * The one thing an app brings to a discrete heatmap: what its values mean, in
  * its own colors and its own order.
@@ -65,9 +154,7 @@ const useStatusScale = (): HeatmapDiscreteScale => {
       CRITICAL: theme.statusCritical,
       NONE: theme.textSecondary,
     },
-    sortOrder: (a, b) =>
-      STATUS_ORDER.indexOf(a as CellStatus) -
-      STATUS_ORDER.indexOf(b as CellStatus),
+    sortOrder: inDeclaredOrder(STATUS_ORDER),
   };
 };
 
@@ -350,6 +437,124 @@ export const NumericValues: StoryObj<
           }))}
           columns={buildTimeSlots(DAY_START, args.columns, ONE_HOUR)}
           formatValue={(value: number) => `${value} %`}
+          {...layoutProps(args)}
+        />
+      </Box>
+    );
+  },
+};
+
+/**
+ * The colors are the caller's, and so are the values. Five backup outcomes,
+ * none of them a health status, painted from the chart palette and the theme's
+ * own tokens side by side — `colorSet` takes any CSS color, wherever it comes
+ * from.
+ *
+ * `sortOrder` is what keeps the legend in pipeline order rather than
+ * alphabetical, so the rare outcomes stay at the bottom where they are looked
+ * for.
+ */
+export const CustomColorSet: StoryObj<LayoutArgs> = {
+  argTypes: layoutArgTypes,
+  args: { ...layoutArgs, labelEvery: 2, labelWidth: '9rem' },
+  render: (args) => {
+    const theme = useTheme() as CoreUITheme;
+
+    return (
+      <Box maxWidth="60rem">
+        <Heatmap
+          title="Backup jobs — last 14 days"
+          legendTitle="Job outcome"
+          scale={{
+            colorSet: {
+              Full: lineColor3,
+              Incremental: lineColor1,
+              Snapshot: lineColor2,
+              Skipped: theme.infoPrimary,
+              Failed: theme.statusCritical,
+            },
+            sortOrder: inDeclaredOrder(BACKUP_OUTCOMES),
+          }}
+          rows={buildCategoryRows(BACKUP_POLICIES, 14, BACKUP_OUTCOMES)}
+          columns={buildTimeSlots(DAY_START, 14, ONE_DAY)}
+          formatColumnTick={(column) => (
+            <FormattedDateTime format="month-day" value={column} />
+          )}
+          {...layoutProps(args)}
+        />
+      </Box>
+    );
+  },
+};
+
+/**
+ * Discrete does not mean three states of health. Here the values are workload
+ * profiles in four hand-picked hex colors that belong to no theme at all, and
+ * the grid behaves exactly the same: click *Write-heavy* in the legend and
+ * every other slot dims, leaving the write bursts alone on the timeline.
+ */
+export const NonStatusValues: StoryObj<LayoutArgs> = {
+  argTypes: layoutArgTypes,
+  args: { ...layoutArgs, labelEvery: 3, labelWidth: '10rem', cellGap: 2 },
+  render: (args) => (
+    <Box maxWidth="75rem">
+      <Heatmap
+        title="Bucket workload profile — last 24 hours"
+        legendTitle="Profile"
+        scale={{
+          colorSet: {
+            'Read-heavy': '#3B9EDB',
+            'Write-heavy': '#E8A33D',
+            Mixed: '#8E6FD8',
+            Idle: '#5A6270',
+          },
+          sortOrder: inDeclaredOrder(WORKLOAD_PROFILES),
+        }}
+        rows={buildCategoryRows(BUCKETS, 24, WORKLOAD_PROFILES)}
+        columns={buildTimeSlots(DAY_START, 24, ONE_HOUR)}
+        {...layoutProps(args)}
+      />
+    </Box>
+  ),
+};
+
+/**
+ * When the values in the data are not what a reader should see: the cells hold
+ * bare response codes, `labelMap` spells them out in the legend, `formatValue`
+ * does the same for the tooltip and the cell's `aria-label`, and `sortOrder`
+ * compares them as the numbers they are rather than as the strings they arrive
+ * as.
+ */
+export const LabelledValues: StoryObj<LayoutArgs> = {
+  argTypes: layoutArgTypes,
+  args: { ...layoutArgs, labelEvery: 3, labelWidth: '9rem' },
+  render: (args) => {
+    const theme = useTheme() as CoreUITheme;
+    const labelMap = {
+      '200': '200 OK',
+      '206': '206 Partial Content',
+      '403': '403 Forbidden',
+      '500': '500 Internal Error',
+    };
+
+    return (
+      <Box maxWidth="70rem">
+        <Heatmap
+          title="Dominant response code — last 12 hours"
+          legendTitle="HTTP status"
+          scale={{
+            colorSet: {
+              '200': theme.statusHealthy,
+              '206': lineColor1,
+              '403': theme.statusWarning,
+              '500': theme.statusCritical,
+            },
+            labelMap,
+            sortOrder: (a, b) => Number(a) - Number(b),
+          }}
+          rows={buildCategoryRows(S3_ENDPOINTS, 12, RESPONSE_CODES)}
+          columns={buildTimeSlots(HOUR_START, 12, ONE_HOUR)}
+          formatValue={(value) => labelMap[value] ?? value}
           {...layoutProps(args)}
         />
       </Box>
