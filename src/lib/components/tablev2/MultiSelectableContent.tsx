@@ -20,7 +20,6 @@ import {
   shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
-  useTableScrollbar,
 } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
@@ -125,9 +124,6 @@ export const MultiSelectableContent = <
     }
     currentRow.toggleRowSelected(!currentRow.isSelected);
   };
-
-  const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
-    useTableScrollbar();
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
 
@@ -243,8 +239,6 @@ export const MultiSelectableContent = <
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            $hasScrollBar={hasScrollbar}
-            $scrollBarWidth={scrollBarWidth}
             $rowHeight={rowHeight}
             $separationLineVariant={separationLineVariant}
             ref={headerRef}
@@ -310,7 +304,7 @@ export const MultiSelectableContent = <
         ))}
       </div>
 
-      <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
+      <TableBody role="rowgroup" className="tbody">
         <TableRows
           locale={locale}
           children={children}
