@@ -20,6 +20,20 @@ export type { Alert } from './globalhealthbar/GlobalHealthBar.hooks';
 
 export { Sparkline } from './sparkline/Sparkline';
 
+export { Heatmap } from './heatmap/Heatmap';
+export type {
+  HeatmapProps,
+  DiscreteHeatmapProps,
+  ContinuousHeatmapProps,
+  HeatmapRow,
+  HeatmapCell,
+  HeatmapDiscreteScale,
+  HeatmapContinuousScale,
+} from './heatmap/Heatmap';
+export { HeatmapGradientScale } from './heatmap/HeatmapGradientScale';
+export type { HeatmapGradientScaleProps } from './heatmap/HeatmapGradientScale';
+export { getHeatmapMaxValue } from './heatmap/Heatmap.utils';
+
 // Legend
 export { ChartLegend } from './legend/ChartLegend';
 export {
