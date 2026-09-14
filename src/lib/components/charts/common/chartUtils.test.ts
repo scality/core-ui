@@ -13,6 +13,8 @@ import {
   normalizeChartDataWithUnits,
   getTooltipDateFormat,
   formatTooltipValueWithUnit,
+  createSymlogScale,
+  getSymlogAxis,
 } from './chartUtils';
 import { NAN_STRING } from '../../constants';
 import { UnitRange } from '../types';
@@ -699,5 +701,114 @@ describe('readLogPlottedValue', () => {
   it('leaves every other value alone', () => {
     expect(readLogPlottedValue(0.5, 0.1)).toBe(0.5);
     expect(readLogPlottedValue(0.1, null)).toBe(0.1);
+  });
+});
+
+
+describe('getSymlogAxis', () => {
+  it('bounds the axis with the decades enclosing the data on each side', () => {
+    expect(getSymlogAxis(-700, 4000, 4).domain).toEqual([-1000, 10000]);
+  });
+
+  it('keeps the lower bound at zero when nothing goes negative', () => {
+    expect(getSymlogAxis(0, 700, 4).domain).toEqual([0, 1000]);
+  });
+
+  it('sizes the linear middle to the data rather than leaving it at 1', () => {
+    // With constant 1 these all fall in the flat middle and read as linear.
+    expect(getSymlogAxis(0, 50, 0.002).constant).toBe(0.001);
+    expect(getSymlogAxis(0, 50, 4).constant).toBe(1);
+    expect(getSymlogAxis(0, 5000, 250).constant).toBe(100);
+  });
+
+  it('falls back to a linear middle of 1 when the data is all zeros', () => {
+    expect(getSymlogAxis(0, 0, null).constant).toBe(1);
+    expect(getSymlogAxis(0, 0, null).domain).toEqual([0, 10]);
+  });
+
+  it('follows each side on its own rather than mirroring', () => {
+    // Mirroring to [-1000, 1000] would spend the quiet direction's whole half
+    // on empty decades, which is the readability symlog was chosen for.
+    expect(getSymlogAxis(-0.03, 200, 0.03).domain).toEqual([-0.1, 1000]);
+  });
+
+  it('ticks zero and the decades each side actually reaches', () => {
+    expect(getSymlogAxis(-100, 100, 1).ticks).toEqual([
+      -100, -10, -1, 0, 1, 10, 100,
+    ]);
+  });
+
+  it('ticks only the side that has data', () => {
+    expect(getSymlogAxis(0, 100, 1).ticks).toEqual([0, 1, 10, 100]);
+  });
+
+  it('skips whole decades rather than crowding the axis', () => {
+    // Ten decades: thinned rather than subdivided, both ends kept.
+    expect(getSymlogAxis(0, 1e6, 0.001).ticks).toEqual([
+      0, 0.1, 10, 1000, 100000, 1000000,
+    ]);
+  });
+
+  it('drops the decades it cannot keep apart from zero', () => {
+    // Symlog is linear near zero, so `constant` lands a few pixels from the
+    // zero tick and the two labels print on top of each other.
+    expect(getSymlogAxis(-1000, 1000, 0.03).ticks).toEqual([
+      -1000, -100, -1, 0, 1, 100, 1000,
+    ]);
+  });
+
+  it('halves the allowance per side when both sides carry decades', () => {
+    // Both halves share the height, so each side is thinned harder.
+    const { ticks } = getSymlogAxis(-1e6, 1e6, 0.001);
+    expect(ticks).toContain(0);
+    expect(ticks[0]).toBe(-1000000);
+    expect(ticks[ticks.length - 1]).toBe(1000000);
+    expect(ticks.filter((tick) => tick > 0).length).toBeLessThan(
+      getSymlogAxis(0, 1e6, 0.001).ticks.filter((tick) => tick > 0).length,
+    );
+  });
+});
+
+describe('createSymlogScale', () => {
+  const scale = createSymlogScale(1, [-1000, 1000], [200, 0]);
+
+  it('gives zero a position of its own, at the middle of the axis', () => {
+    expect(scale(0)).toBe(100);
+  });
+
+  it('places a value and its negation symmetrically', () => {
+    expect(scale(10)).toBeCloseTo(200 - (scale(-10) as number), 6);
+  });
+
+  it('orders values monotonically across zero', () => {
+    const positions = [-1000, -10, -1, 0, 1, 10, 1000].map(
+      (value) => scale(value) as number,
+    );
+    const descending = [...positions].sort((a, b) => b - a);
+    expect(positions).toEqual(descending);
+  });
+
+  it('reaches both ends of the range at the bounds of the domain', () => {
+    expect(scale(-1000)).toBeCloseTo(200, 6);
+    expect(scale(1000)).toBeCloseTo(0, 6);
+  });
+
+  it('gives the small values a real share of the axis', () => {
+    // With the d3 default of 1, this span collapses to a couple of pixels.
+    const tuned = createSymlogScale(0.001, [0, 50], [200, 0]);
+    const span = (tuned(0.001) as number) - (tuned(0.1) as number);
+    expect(span).toBeGreaterThan(50);
+  });
+
+  it('copies without sharing state with the original', () => {
+    const copy = scale.copy().domain([0, 1]).range([0, 10]);
+    expect(copy(1)).toBeCloseTo(10, 6);
+    // The original is untouched.
+    expect(scale(1000)).toBeCloseTo(0, 6);
+  });
+
+  it('reads back the domain and range it was given', () => {
+    expect(scale.domain()).toEqual([-1000, 1000]);
+    expect(scale.range()).toEqual([200, 0]);
   });
 });

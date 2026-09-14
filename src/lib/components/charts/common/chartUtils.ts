@@ -244,6 +244,201 @@ export const getLogAxis = (
   );
 };
 
+/* --------------------------------- SYMLOG ---------------------------------- */
+
+/** The decade at or below a positive value. */
+const decadeFloor = (value: number) => 10 ** Math.floor(Math.log10(value));
+/** The decade at or above a positive value. */
+const decadeCeil = (value: number) => 10 ** Math.ceil(Math.log10(value));
+
+/** How far apart two tick labels have to be, as a share of the axis height. */
+const MIN_TICK_GAP = 0.07;
+
+/** Thins decades down to `max`, keeping both ends: an axis states its bounds. */
+const strideDecades = (decades: number[], max: number): number[] => {
+  if (decades.length <= max) return decades;
+  const stride = Math.ceil(decades.length / max);
+  const kept = decades.filter((_, index) => index % stride === 0);
+  const last = decades[decades.length - 1];
+  return kept.includes(last) ? kept : [...kept, last];
+};
+
+/**
+ * Drops ticks the axis cannot keep apart, walking outwards from zero. Near zero
+ * symlog is linear, so the first decade lands a few pixels from the zero tick
+ * and the two labels overlap; `minGap` is a share of the axis, not a count.
+ */
+const separateTicks = (
+  side: number[],
+  position: (value: number) => number,
+  minGap: number,
+): number[] => {
+  if (side.length === 0) return side;
+  const furthest = side[side.length - 1];
+  const kept: number[] = [];
+  let last = position(0);
+
+  side.forEach((tick) => {
+    if (Math.abs(position(tick) - last) < minGap) return;
+    kept.push(tick);
+    last = position(tick);
+  });
+
+  // The axis states its own bound whatever the spacing, so the furthest tick
+  // goes back in — displacing the neighbour it would have collided with.
+  if (kept[kept.length - 1] !== furthest) {
+    if (
+      kept.length > 0 &&
+      Math.abs(position(furthest) - position(kept[kept.length - 1])) < minGap
+    ) {
+      kept.pop();
+    }
+    kept.push(furthest);
+  }
+  return kept;
+};
+
+/**
+ * Zero, then the decades each side of the domain reaches. The run starts at
+ * `constant`: below it the scale is linear and a decade would sit on top of zero.
+ */
+const symlogTicks = (
+  domain: readonly [number, number],
+  constant: number,
+  maxTicks: number,
+): number[] => {
+  const [bottom, top] = domain;
+  const decadesUpTo = (bound: number) => {
+    const magnitude = Math.abs(bound);
+    if (magnitude < constant) return [];
+    const decades: number[] = [];
+    for (let decade = constant; decade <= magnitude * 1.000001; decade *= 10) {
+      decades.push(decade);
+    }
+    return decades;
+  };
+
+  const below = decadesUpTo(bottom);
+  const above = decadesUpTo(top);
+  // Two sides share the height a one-sided axis gets to itself.
+  const perSide = below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
+
+  const scale = createSymlogScale(constant, [bottom, top], [0, 1]);
+  const position = (value: number) => scale(value) ?? 0;
+
+  return [
+    ...separateTicks(strideDecades(below, perSide), position, MIN_TICK_GAP)
+      .map((decade) => -decade)
+      .reverse(),
+    0,
+    ...separateTicks(strideDecades(above, perSide), position, MIN_TICK_GAP),
+  ];
+};
+
+/**
+ * A symlog scale — linear within `constant` of zero, logarithmic beyond — in the
+ * shape Recharts accepts as a custom `scale`. Zero and negatives get positions
+ * of their own, so nothing needs a reserved band.
+ *
+ * Written out rather than taken from d3 because Recharts only accepts the
+ * *string* `'symlog'`, which pins `constant` to 1 and flattens any data below it.
+ */
+export type SymlogScale = {
+  (input: number): number | undefined;
+  domain: (next?: readonly number[]) => number[] & SymlogScale;
+  range: (next?: readonly number[]) => number[] & SymlogScale;
+  copy: () => SymlogScale;
+  ticks: (count?: number) => number[];
+};
+
+export const createSymlogScale = (
+  constant: number,
+  initialDomain: readonly number[] = [0, 1],
+  initialRange: readonly number[] = [0, 1],
+): SymlogScale => {
+  let domain = [...initialDomain];
+  let range = [...initialRange];
+
+  const compress = (value: number) =>
+    Math.sign(value) * Math.log1p(Math.abs(value) / constant);
+
+  const scale = ((input: number) => {
+    if (typeof input !== 'number' || !Number.isFinite(input)) return undefined;
+    const from = compress(domain[0]);
+    const to = compress(domain[domain.length - 1]);
+    const span = to - from;
+    const ratio = span === 0 ? 0 : (compress(input) - from) / span;
+    return range[0] + ratio * (range[range.length - 1] - range[0]);
+  }) as SymlogScale;
+
+  // d3 shape: setters mutate and chain, no argument reads.
+  scale.domain = ((next?: readonly number[]) => {
+    if (next === undefined) return domain;
+    domain = [...next];
+    return scale;
+  }) as SymlogScale['domain'];
+
+  scale.range = ((next?: readonly number[]) => {
+    if (next === undefined) return range;
+    range = [...next];
+    return scale;
+  }) as SymlogScale['range'];
+
+  scale.copy = () => createSymlogScale(constant, domain, range);
+
+  scale.ticks = () =>
+    symlogTicks([domain[0], domain[domain.length - 1]], constant, 6);
+
+  return scale;
+};
+
+/**
+ * A symlog axis bounded by the decades enclosing the data.
+ *
+ * @param dataMin - The most negative value, or 0 when none is
+ * @param dataMax - The largest value, unbuffered: the decade rounding is the
+ *   headroom, and more on top can cost an empty decade
+ * @param minAbsNonZero - Smallest non-zero magnitude. Sets `constant`, so the
+ *   data lands in the log stretch instead of the flat middle
+ *
+ * Each side follows its own data rather than mirroring, even on a symmetrical
+ * chart: mirroring spends the quiet direction's half on empty decades, which is
+ * the readability a symlog axis was chosen for.
+ */
+export const getSymlogAxis = (
+  dataMin: number,
+  dataMax: number,
+  minAbsNonZero: number | null,
+  options: { maxTicks?: number } = {},
+): {
+  constant: number;
+  domain: [number, number];
+  ticks: number[];
+  scale: SymlogScale;
+} => {
+  const { maxTicks = 6 } = options;
+
+  const constant =
+    minAbsNonZero === null || !(minAbsNonZero > 0)
+      ? 1
+      : decadeFloor(minAbsNonZero);
+
+  const top = dataMax > 0 ? decadeCeil(dataMax) : 0;
+  const below = dataMin < 0 ? decadeCeil(Math.abs(dataMin)) : 0;
+  // `> 0` rather than a bare negation: -0 is an invalid axis bound.
+  const bottom = below > 0 ? -below : 0;
+  // Nothing to plot on either side: one empty decade, so the axis still draws.
+  const domain: [number, number] =
+    top === 0 && bottom === 0 ? [0, constant * 10] : [bottom, top];
+
+  return {
+    constant,
+    domain,
+    ticks: symlogTicks(domain, constant, maxTicks),
+    scale: createSymlogScale(constant, domain),
+  };
+};
+
 /**
  * Formats one tick of a logarithmic axis.
  *
@@ -261,12 +456,25 @@ export const formatLogTickValue = (
 ): string => {
   if (zeroValue !== null && value === zeroValue) return '0';
   if (!Number.isFinite(value) || value <= 0) return '';
+  return formatDecadeTick(value);
+};
+
+/** A decade's label: `0.001` keeps three decimals, `100` keeps none. */
+const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
   return formatISONumber(value, {
     decimals: exponent < 0 ? Math.ceil(-exponent) : 0,
     fixedDecimals: exponent < 0,
     compact: value >= 10000,
   });
+};
+
+/** A symlog tick: unlike a log axis it labels zero and negatives rather than
+ * blanking them. */
+export const formatSymlogTickValue = (value: number): string => {
+  if (!Number.isFinite(value)) return '';
+  if (value === 0) return '0';
+  return value < 0 ? `-${formatDecadeTick(-value)}` : formatDecadeTick(value);
 };
 
 /**

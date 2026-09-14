@@ -150,6 +150,92 @@ describe('LineTimeSerieChart logarithmic Y axis', () => {
     expect(yAxisTicks(container)).not.toContain('1000');
   });
 
+  it('plots a symlog axis without reserving anything for zero', () => {
+    // Symlog has a real position for the zero sample, so no slot is spent.
+    const { container } = renderChart({ yAxisScale: 'symlog' });
+
+    expect(yAxisTicks(container)).toEqual(['0', '1', '10', '100', '1000']);
+  });
+
+  it('labels both sides of a symmetrical symlog axis', () => {
+    const { container } = renderChart({
+      yAxisType: 'symmetrical',
+      yAxisScale: 'symlog',
+      series: {
+        above: SpanningSeries,
+        // A distinct label: above and below are keyed by it.
+        below: [
+          {
+            resource: 'Series 2',
+            getTooltipLabel: () => 'Series 2',
+            data: [
+              [1622505600, 4],
+              [1622509200, 0],
+              [1622512800, 700],
+            ] as [number, number][],
+          },
+        ],
+      },
+    });
+
+    const ticks = yAxisTicks(container);
+    expect(ticks).toContain('0');
+    expect(ticks.some((tick) => tick.startsWith('-'))).toBe(true);
+    // Decades, not the evenly spaced ticks of a linear axis.
+    expect(ticks).toContain('1000');
+    expect(ticks).toContain('-1000');
+  });
+
+  it('sizes the linear middle from the data, not from a fixed 1', () => {
+    // All below 1: with the d3 default constant this would read as linear.
+    const { container } = renderChart({
+      yAxisScale: 'symlog',
+      series: [
+        {
+          resource: 'Series 1',
+          getTooltipLabel: () => 'Series 1',
+          data: [
+            [1622505600, 0.002],
+            [1622509200, 0.05],
+            [1622512800, 0.4],
+          ] as [number, number][],
+        },
+      ],
+    });
+
+    // Decades below 1 only appear if the window was pulled down to the data.
+    expect(yAxisTicks(container)).toContain('0.001');
+  });
+
+  it('derives the linear window from normalized values, not raw ones', () => {
+    // The axis plots MB/s while the series carries B/s.
+    const { container } = renderChart({
+      yAxisScale: 'symlog',
+      unitRange: [
+        { threshold: 0, label: 'B/s' },
+        { threshold: 1000, label: 'kB/s' },
+        { threshold: 1000000, label: 'MB/s' },
+      ],
+      series: [
+        {
+          resource: 'Series 1',
+          getTooltipLabel: () => 'Series 1',
+          data: [
+            [1622505600, 30000],
+            [1622509200, 0],
+            [1622512800, 200000000],
+          ] as [number, number][],
+        },
+      ],
+    });
+
+    const ticks = yAxisTicks(container);
+    expect(ticks).toContain('0');
+    // 30 kB/s is 0.03 MB/s, so the window sits at 0.01 and the axis reaches
+    // 0.1. Left at the default 1 its lowest decade would be 1.
+    expect(ticks).toContain('0.1');
+  });
+
   it('ignores the scale on a symmetrical chart, whose axis goes negative', () => {
     // The prop type forbids this pairing; the cast is a plain-JS caller
     // reaching past it.

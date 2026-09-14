@@ -1581,13 +1581,17 @@ export const LogarithmicScaleBelowOne: Story = {
  * log axis they land on the reserved `0` at the bottom rather than disappearing.
  */
 export const LogarithmicScalePlayground: StoryObj<{
-  yAxisScale: 'linear' | 'log';
+  yAxisScale: 'linear' | 'log' | 'symlog';
   baseline: number;
   spikeTo: number;
   zeros: boolean;
 }> = {
   argTypes: {
-    yAxisScale: { control: { type: 'radio' }, options: ['linear', 'log'] },
+    yAxisScale: {
+      control: { type: 'radio' },
+      options: ['linear', 'log', 'symlog'],
+      description: 'symlog is linear near zero, logarithmic beyond — try it with `zeros` on',
+    },
     baseline: {
       control: { type: 'range', min: 0.001, max: 10, step: 0.001 },
       description: 'Where the series idles',
@@ -1626,4 +1630,122 @@ export const LogarithmicScalePlayground: StoryObj<{
       />
     );
   },
+};
+
+/* --------------------------- SYMMETRICAL / SYMLOG --------------------------- */
+
+const SYMLOG_IN = 'storage-node-1';
+const SYMLOG_OUT = 'storage-node-2';
+
+/**
+ * A read-heavy workload: reads in the hundreds with bursts into the thousands, writes a trickle of
+ * a few per second with its own bursts and a stretch of zeros. No `unitRange` on purpose — the
+ * tooltip re-derives a smaller unit for small values, and reading a tooltip in kB/s against an axis
+ * in MB/s buries the very comparison the story is making.
+ */
+const duplexData = Array.from({ length: 120 }, (_, index) => {
+  const reads = index % 19 === 0 ? 4800 : 240 * (1 + (index % 7) * 0.35);
+  const writes =
+    index % 23 === 0 ? 0 : index % 11 === 0 ? 18 : 0.8 * (1 + (index % 5) * 0.4);
+  return {
+    timestamp: LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+    reads,
+    writes,
+  };
+});
+
+const duplexSeries = {
+  above: [
+    {
+      data: duplexData.map(
+        ({ timestamp, reads }) => [timestamp, reads] as [number, number],
+      ),
+      resource: SYMLOG_IN,
+      metricPrefix: 'read',
+      getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+    },
+  ],
+  below: [
+    {
+      data: duplexData.map(
+        ({ timestamp, writes }) => [timestamp, writes] as [number, number],
+      ),
+      resource: SYMLOG_OUT,
+      metricPrefix: 'write',
+      getTooltipLabel: (prefix, resource) => `${resource}-${prefix}`,
+    },
+  ],
+};
+
+const SymlogChart = (props: LineChartProps) => (
+  <ChartLegendWrapper
+    colorSet={{
+      [SYMLOG_IN]: lineTimeSeriesColorRange[0],
+      [SYMLOG_OUT]: lineTimeSeriesColorRange[1],
+    }}
+  >
+    <LineTimeSerieChart {...props} />
+    <ChartLegend shape="line" />
+  </ChartLegendWrapper>
+);
+
+const symlogChartArgs = {
+  series: duplexSeries,
+  height: 220,
+  startingTimeStamp: LOG_START,
+  interval: SAMPLE_FREQUENCY_LAST_ONE_HOUR,
+  duration: SAMPLE_DURATION_LAST_ONE_HOUR,
+  yAxisType: 'symmetrical',
+  yAxisTitle: 'ops/s — read(+)/write(-)',
+} satisfies Partial<LineChartProps>;
+
+/**
+ * The same read/write pair on both scales. A symmetrical axis is sized by whichever direction is
+ * busiest, so on the linear chart the writes are a flat line on the centre — a few hundredths of a
+ * pixel of movement, indistinguishable from the axis itself.
+ *
+ * `log` is impossible here: half this axis is negative. `symlog` is linear within a window around
+ * zero and logarithmic outside, so both directions get a readable share of the height.
+ *
+ * Each side is bounded by its own data rather than mirrored, which is why zero does not sit in the
+ * middle: the centre line moving off centre is itself the statement that the two directions are
+ * orders of magnitude apart.
+ *
+ * What you give up: distances read as differences near zero and as ratios further out.
+ */
+export const SymmetricalSymlogScale: Story = {
+  render: () => (
+    <div>
+      <SymlogChart {...symlogChartArgs} title="Disk operations — linear" />
+      <SymlogChart
+        {...symlogChartArgs}
+        title="Disk operations — symlog"
+        yAxisScale="symlog"
+      />
+    </div>
+  ),
+};
+
+/**
+ * The two scales on a one-sided series. Both are readable; the difference is zero. `log` reserves a
+ * slot below its lowest decade and labels it `0`; symlog has a real position for zero and spends
+ * that height on the data instead, at the cost of a linear stretch near the centre.
+ *
+ * On data that never reaches zero and never goes negative, `log` is the simpler answer.
+ */
+export const SymlogVersusLog: Story = {
+  render: () => (
+    <div>
+      <LogChart
+        {...logChartArgs(spikyDataWithZeros)}
+        title="Request latency — log, with a reserved 0"
+        yAxisScale="log"
+      />
+      <LogChart
+        {...logChartArgs(spikyDataWithZeros)}
+        title="Request latency — symlog, zero on the scale"
+        yAxisScale="symlog"
+      />
+    </div>
+  ),
 };

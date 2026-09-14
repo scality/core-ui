@@ -19,31 +19,23 @@ export type NonSymmetricalChartSerie = {
   yAxisType?: 'default' | 'percentage';
   series: Serie[] | undefined;
   /**
-   * Y-axis scale.
+   * Y-axis scale, for a metric spanning orders of magnitude: on a linear axis
+   * the quiet periods flatten onto the baseline and only the spikes are
+   * readable. Display only — no value is rescaled, and the tooltip, legend and
+   * unit scaling keep the numbers you passed in.
    *
-   * `'log'` is for a metric whose values span orders of magnitude: on a linear
-   * axis the quiet periods flatten onto the baseline and only the spikes are
-   * readable, and a log axis gives each decade the same height instead. The
-   * axis is bounded by the decades enclosing the data, and its ticks are the
-   * decades themselves.
+   * `'log'` gives each decade the same height and ticks the decades. Zero has
+   * no logarithm, so it reserves the slot below the first decade, labels it
+   * `0`, and runs zeros there — a measured zero stays distinguishable from a
+   * missing sample, which a gap would not. Negatives are dropped.
    *
-   * It changes the display and nothing else: no value is rescaled, and the
-   * tooltip, the legend and the unit scaling all keep the numbers the caller
-   * passed in.
-   *
-   * A zero has no logarithm, so the axis reserves one slot below its first
-   * decade, labels it `0`, and runs zeros along it. A sample that measured zero
-   * stays distinguishable from a missing one — different facts, which a gap
-   * would render identically. The slot costs a decade's worth of height, so it
-   * is only reserved when the series actually holds a zero.
-   *
-   * A negative sample is dropped and leaves a gap: a metric that goes negative
-   * does not belong on a log axis. The negative half of a `'symmetrical'` axis
-   * has no logarithm either, which is why the option does not exist there.
+   * `'symlog'` is linear near zero and logarithmic beyond, so it plots both
+   * signs and zero itself with no reserved slot. Its price: distances read as
+   * differences near zero and as ratios further out.
    *
    * @default 'linear'
    */
-  yAxisScale?: 'linear' | 'log';
+  yAxisScale?: 'linear' | 'log' | 'symlog';
 };
 
 /**
@@ -53,10 +45,17 @@ export type NonSymmetricalChartSerie = {
 export type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
   /**
-   * Not available on a symmetrical chart: its axis spans negative values, which
-   * have no logarithm.
+   * Y-axis scale. `'log'` is not available here: half of a symmetrical axis is
+   * negative by construction, and negatives have no logarithm.
+   *
+   * `'symlog'` is linear within a window around zero and logarithmic outside
+   * it, so both halves compress and zero keeps the centre line. Worth it when
+   * the two directions span orders of magnitude — the usual shape of an in/out
+   * pair, where a linear axis sized by the busy side flattens the quiet one.
+   *
+   * @default 'linear'
    */
-  yAxisScale?: never;
+  yAxisScale?: 'linear' | 'symlog';
   series:
     | {
         above: Serie[] | undefined;
@@ -163,8 +162,12 @@ export type LineTimeSerieChartTooltipProps = {
   ) => React.ReactNode;
   isSymmetrical?: boolean;
   /**
-   * A log axis's reserved zero band. A value drawn there is reported as the 0 it
-   * actually is, not as the position it occupies.
+   * Where a measured zero was drawn, as a Y-axis value.
+   *
+   * A log axis has no position for `0`, so it reserves the decade below its
+   * lowest and plots zeros there. This is that coordinate, so a tooltip can
+   * report the `0` that was measured rather than where it was parked. `null`
+   * when no slot was reserved.
    */
   logZeroValue?: number | null;
   belowSeriesLabels?: Set<string>;
