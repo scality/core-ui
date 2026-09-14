@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useChartLegend } from '../legend/ChartLegendWrapper';
 import {
   addMissingDataPoint,
-  getMinPositiveValue,
   normalizeChartDataWithUnits,
 } from '../common/chartUtils';
 import { Serie, isSymmetricalSeries } from './LineTimeSerieChart.types';
@@ -37,6 +36,12 @@ type ChartDataOutput = {
    * needs this.
    */
   minPositiveValue: number | null;
+  /** Smallest non-zero magnitude, negatives included: a symlog axis sizes its
+   * linear middle from it. */
+  minAbsValue: number | null;
+  /** Normalized bounds, without the `topDomain` buffer. */
+  minValue: number;
+  maxValue: number;
   /** Unit label (e.g., "KiB/s", "%") */
   unitLabel: string | undefined;
   /** Factor the dataset was divided by during normalization (for tooltip re-scaling) */
@@ -216,7 +221,17 @@ export function useChartData({
    * - Applies unit range thresholds (e.g., B/s → KiB/s → MiB/s)
    * - Calculates Y-axis domain
    */
-  const { topValue, unitLabel, rechartsData, topDomain, valueBase } = useMemo(() => {
+  const {
+    topValue,
+    unitLabel,
+    rechartsData,
+    topDomain,
+    valueBase,
+    minPositiveValue,
+    minAbsValue,
+    minValue,
+    maxValue,
+  } = useMemo(() => {
     const values = chartData.flatMap((dataPoint) =>
       Object.entries(dataPoint)
         .filter(([key]) => key !== 'timestamp')
@@ -241,7 +256,29 @@ export function useChartData({
         rechartsData: chartData,
         topDomain: 1,
         valueBase: 1,
+        minPositiveValue: null,
+        minAbsValue: null,
+        minValue: 0,
+        maxValue: 0,
       };
+    }
+
+    // Read off `values` rather than walking the rows again.
+    let minPositive: number | null = null;
+    let minAbsNonZero: number | null = null;
+    let lowest = Infinity;
+    let highest = -Infinity;
+    for (const value of values) {
+      if (!Number.isFinite(value)) continue;
+      if (value < lowest) lowest = value;
+      if (value > highest) highest = value;
+      if (value > 0 && (minPositive === null || value < minPositive)) {
+        minPositive = value;
+      }
+      const magnitude = Math.abs(value);
+      if (magnitude > 0 && (minAbsNonZero === null || magnitude < minAbsNonZero)) {
+        minAbsNonZero = magnitude;
+      }
     }
 
     const top = Math.abs(Math.max(...values));
@@ -269,6 +306,15 @@ export function useChartData({
       rechartsData: result.rechartsData,
       topDomain: finalTopDomain,
       valueBase: result.valueBase,
+      // `values` predates normalization; the axis reads normalized data.
+      minPositiveValue:
+        minPositive === null ? null : minPositive / result.valueBase,
+      minAbsValue:
+        minAbsNonZero === null ? null : minAbsNonZero / result.valueBase,
+      // Unbuffered, unlike topDomain: a symlog axis rounds up to its own
+      // decade, and a buffer on top can cost a whole empty one.
+      minValue: Number.isFinite(lowest) ? lowest / result.valueBase : 0,
+      maxValue: Number.isFinite(highest) ? highest / result.valueBase : 0,
     };
   }, [chartData, yAxisType, unitRange]);
 
@@ -323,16 +369,14 @@ export function useChartData({
     return labels;
   }, [series, yAxisType]);
 
-  const minPositiveValue = useMemo(
-    () => getMinPositiveValue(rechartsData, 'timestamp'),
-    [rechartsData],
-  );
-
   return {
     rechartsData,
     topDomain,
     topValue,
     minPositiveValue,
+    minAbsValue,
+    minValue,
+    maxValue,
     unitLabel,
     valueBase,
     xAxisTicks,
