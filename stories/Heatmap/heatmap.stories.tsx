@@ -556,12 +556,16 @@ export const NonStatusValues: StoryObj<LayoutArgs> = {
  * does the same for the tooltip and the cell's `aria-label`, and `sortOrder`
  * compares them as the numbers they are rather than as the strings they arrive
  * as.
+ *
+ * The colors are the series palette, not the status tokens. A response code
+ * looks like a health status and is not one — a 403 is the server working
+ * correctly — and painting 500 with `statusCritical` would have every red cell
+ * in the product mean the same thing whether it does or not.
  */
 export const LabelledValues: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
   args: { ...layoutArgs, labelEvery: 3, labelWidth: '9rem' },
   render: (args) => {
-    const theme = useTheme() as CoreUITheme;
     const labelMap = {
       '200': '200 OK',
       '206': '206 Partial Content',
@@ -576,10 +580,10 @@ export const LabelledValues: StoryObj<LayoutArgs> = {
           legendTitle="HTTP status"
           scale={{
             colorSet: {
-              '200': theme.statusHealthy,
+              '200': lineColor3,
               '206': lineColor1,
-              '403': theme.statusWarning,
-              '500': theme.statusCritical,
+              '403': lineColor2,
+              '500': lineColor7,
             },
             labelMap,
             sortOrder: (a, b) => Number(a) - Number(b),
