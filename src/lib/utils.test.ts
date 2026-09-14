@@ -83,6 +83,33 @@ describe('formatISONumber', () => {
   });
 
   it('should still fall back to exponential below the 0.001 floor', () => {
-    expect(tooltip(0.0009)).toBe('9e-4');
+    expect(tooltip(0.0009)).toBe('9.00e-4');
+  });
+
+  it('should round in JS rather than leaning on Intl', () => {
+    // Intl's rounding mode has not always been consistent across engines, so
+    // the number it receives is already rounded and it only has to print.
+    // Half-way cases go away from zero, both signs alike.
+    expect(formatISONumber(0.125)).toBe('0.13');
+    expect(formatISONumber(-0.125)).toBe('-0.13');
+    expect(formatISONumber(0.00125)).toBe('0.0013');
+    expect(formatISONumber(-0.00125)).toBe('-0.0013');
+  });
+
+  it('should clear float noise before it reaches the display', () => {
+    expect(formatISONumber(1.005 - 1)).toBe('0.005');
+    expect(formatISONumber(0.07 * 3)).toBe('0.21');
+  });
+
+  it('should bound the mantissa of float noise', () => {
+    // Not all seventeen digits of 5.551115123125783e-17.
+    expect(tooltip(0.1 + 0.2 - 0.3)).toBe('5.55e-17');
+    expect(tooltip(Number.EPSILON)).toBe('2.22e-16');
+  });
+
+  it('should let the caller widen the mantissa', () => {
+    expect(formatISONumber(0.1 + 0.2 - 0.3, { decimals: 4 })).toBe(
+      '5.5511e-17',
+    );
   });
 });
