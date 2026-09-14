@@ -254,6 +254,21 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
     [roundReferenceValue],
   );
 
+  // `YAxis` is a `React.memo` comparing these by identity, so a value built
+  // inline re-renders the axis every time this component renders.
+  const yAxisTickFormatter = useMemo(
+    () =>
+      logAxis
+        ? (value: number) => formatLogTickValue(value, logAxis.zeroValue)
+        : tickFormatter,
+    [logAxis, tickFormatter],
+  );
+
+  const yAxisTicks = useMemo(
+    () => (logAxis ? logAxis.ticks : getTicks(roundReferenceValue, false)),
+    [logAxis, roundReferenceValue],
+  );
+
   // A category label may wrap to a second line (e.g. a date on a midnight
   // crossover). Reserve matching x-axis height so the extra line is not clipped.
   const maxTickLines = useMemo(() => {
@@ -340,13 +355,8 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
             // A log axis is bounded by whole decades, so a value below the
             // floor is clipped rather than dragging the axis down to it.
             allowDataOverflow={logAxis !== null}
-            ticks={logAxis ? logAxis.ticks : getTicks(roundReferenceValue, false)}
-            tickFormatter={
-              logAxis
-                ? (value: number) =>
-                    formatLogTickValue(value, logAxis.zeroValue)
-                : tickFormatter
-            }
+            ticks={yAxisTicks}
+            tickFormatter={yAxisTickFormatter}
             axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
             tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
             tick={{
