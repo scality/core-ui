@@ -46,3 +46,39 @@ export const getRampOpacity = (
   const ratio = Math.min(Math.max(value / max, 0), 1);
   return Math.round((minOpacity + (1 - minOpacity) * ratio) * 100) / 100;
 };
+
+/**
+ * The end of every column's slot, read off the axis: a column lasts until the
+ * next one starts. That is what lets the tooltip name the slot — "03:30 to
+ * 04:00" — rather than the instant it opens, which on its own says nothing
+ * about whether a cell covers five minutes or a day.
+ *
+ * The last column has no next one, so it reuses the gap before it. A single
+ * column has no gap at all, and gets an end equal to its start rather than an
+ * invented duration — the tooltip reads that back as "no slot to show".
+ */
+export const getColumnEnds = (columns: Date[]): Date[] =>
+  columns.map((column, index) => {
+    const next = columns[index + 1];
+    if (next) {
+      return next;
+    }
+
+    const previous = columns[index - 1];
+    return new Date(
+      column.getTime() + (previous ? column.getTime() - previous.getTime() : 0),
+    );
+  });
+
+/**
+ * Whether two instants land on the same calendar day, in the reader's own time
+ * zone — the one the axis and the tooltip are already printed in.
+ *
+ * Not an elapsed-time question, which is why `getDateDaysDiff` cannot answer
+ * it: 23:00 and 00:00 are an hour apart and two different days, and it is the
+ * day the tooltip has to name.
+ */
+export const isSameCalendarDay = (a: Date, b: Date): boolean =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();

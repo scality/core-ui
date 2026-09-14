@@ -1,0 +1,119 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as HeatmapStories from './heatmap.stories';
+
+<Meta of={HeatmapStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Heatmap
+
+A heatmap reads one metric across two axes at once: one row per entity, one column per time slot,
+each cell coloured by its value. It answers "which of these, and when" in a single glance — which
+service was degraded overnight, which node has been quiet all week.
+
+<Canvas of={HeatmapStories.ScreenshotEquivalent} sourceState="none" />
+
+## When to use it
+
+Use a heatmap when the pattern matters more than the number: a shape across many entities and many
+slots, where the reader is looking for a cluster, a gap or an outlier rather than a value.
+
+Use something else when:
+
+- **The exact values matter.** A table states them; a heatmap only implies them through colour, and
+  the reader has to hover every cell to recover what the table showed outright.
+- **There is one entity, or a handful.** A line chart shows the trend, the magnitude and the
+  direction of change, all of which a row of coloured squares throws away.
+- **There are two or three slots.** A grid that small is a status list wearing a grid's clothes.
+- **The reader needs to act on a row.** Cells are not actionable and never will be — see below.
+
+## Accessibility: colour is the only channel
+
+This is the component's central limitation, and it has to be stated rather than discovered.
+
+In a heatmap, colour carries the information on its own. There is no shape, no label and no
+position that distinguishes one value from another, so a reader who does not separate the hues does
+not read the grid. The tooltip is what makes the component usable at all: every cell is focusable,
+carries an `aria-label`, and opens its tooltip on focus as well as on hover, so the grid is
+traversable from the keyboard and by a screen reader.
+
+That is an acceptable trade for this component, because a heatmap without colour is not a heatmap.
+It is not an acceptable trade in general:
+
+- Never make a heatmap the **only** place a piece of information appears. Anything a user must act
+  on belongs somewhere a reader can find it without separating hues — a table, a list, an alert.
+- Do not treat this pattern as a precedent. A new component that leans on colour alone needs its
+  own justification, not this page as cover.
+- Keep the value set small. Four or five values is the ceiling at which distinct hues stay distinct;
+  past that, colours start to be told apart by their neighbours rather than on their own.
+
+## Colour sets
+
+Which palette applies follows from what the values mean, and the two cases do not mix.
+
+### Status values
+
+When the values are states of health, take the theme's status tokens — `statusHealthy`,
+`statusWarning`, `statusCritical` — and a theme neutral for the absence of data. They are the only
+colours that change with the theme, so a status grid stays legible in light and dark without
+anything else being done.
+
+### Categorical values
+
+When the values are categories — job types, workload profiles, regions, response codes — take the
+series colours (`lineColor1`…`lineColor8`, or `lineTimeSeriesColorRange`). Two rules:
+
+- **Never borrow the status palette for a category.** A value painted `statusHealthy` claims to be
+  healthy. A backup type is not healthy, and the reader who has learnt that colour elsewhere in the
+  product will read it that way here.
+- **Never hardcode a hex.** A colour written into a page belongs to no theme and follows none.
+
+<Canvas of={HeatmapStories.CustomColorSet} sourceState="none" />
+
+Whichever set applies, order the legend the way the values mean something — the pipeline's order,
+the severity order, the numeric order — through `scale.sortOrder`. Alphabetical is the default and
+is almost never what the reader is looking for. Where the stored value is not what a reader should
+see — a raw code, an enum — `scale.labelMap` names it in the legend and `formatValue` does the same
+for the tooltip and the `aria-label`.
+
+## Time
+
+**The axis** carries the start of each slot, thinned out by `labelEvery` so a dense grid stays
+legible. Time of day is the default. Where a slot is a day or longer, pass `formatColumnTick` with
+the `day-month-abbreviated` format — `25 Aug`, per the date guideline. Never a numeric month:
+`09-02` is 2 September to half the product's users and 9 February to the other half.
+
+The axis says nothing when the day changes. A tick rolls from `23:00` to `00:00` and that is all —
+the date is one hover away, and spelling it out on the axis costs more room than the change is
+worth.
+
+<Canvas of={HeatmapStories.AcrossMidnight} sourceState="none" />
+
+**The tooltip** carries the whole slot, not the instant it opens: `25 Aug 03:30 to 04:00`. A cell
+read on its own says nothing about whether it covers five minutes, an hour or a day, and the reader
+should not have to measure it against the next tick. The component reads the duration off the axis,
+so this is the default and needs nothing from the caller.
+
+## Empty and no-data states
+
+Two different absences, and they must not look alike.
+
+**No cell.** A `null` cell — or a row shorter than the axis — leaves its slot blank. Use it when the
+entity did not exist in that slot: a node added on Tuesday has nothing to say about Monday. The grid
+is driven by `columns` rather than by each row's cells, so a short row leaves the rest of its line
+empty instead of shifting everything below it.
+
+**Collected nothing.** When the entity existed and the value is unknown — collection has not caught
+up, the exporter was down — that is a value like any other. Give it a name in the `colorSet` and a
+theme neutral, so it appears in the legend, can be filtered, and reads as "we do not know" rather
+than as a hole in the grid.
+
+<Canvas of={HeatmapStories.DenseGrid} sourceState="none" />
+
+An entirely empty grid is not the component's business. A heatmap with no rows renders its axis and
+nothing else; the surrounding page is what should say why.

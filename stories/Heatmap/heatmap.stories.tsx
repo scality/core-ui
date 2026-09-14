@@ -12,15 +12,18 @@ import {
   lineColor1,
   lineColor2,
   lineColor3,
+  lineColor4,
+  lineColor6,
+  lineColor7,
 } from '../../src/lib/style/theme';
 
 /* -------------------------------------------------------------------------- */
 /*                                    DATA                                    */
 /* -------------------------------------------------------------------------- */
 
-type CellStatus = 'OK' | 'WARNING' | 'CRITICAL' | 'NONE';
+type CellStatus = 'Ok' | 'Warning' | 'Critical' | 'No data';
 
-const STATUS_ORDER: CellStatus[] = ['OK', 'WARNING', 'CRITICAL', 'NONE'];
+const STATUS_ORDER: CellStatus[] = ['Ok', 'Warning', 'Critical', 'No data'];
 
 const MONITORING_SERVICES = [
   'Alertmanager',
@@ -43,17 +46,17 @@ const noise = (a: number, b: number) => (a * 73 + b * 151 + a * b * 17) % 100;
 const buildStatusRows = (
   labels: string[],
   columnCount: number,
-  /** Index from which the whole column is reported as NONE (no data yet). */
+  /** Index from which the whole column is reported as 'No data' (not collected yet). */
   noDataFrom = columnCount,
 ): HeatmapRow<CellStatus>[] =>
   labels.map((label, rowIndex) => ({
     label,
     cells: Array.from({ length: columnCount }, (_, colIndex) => {
-      if (colIndex >= noDataFrom) return 'NONE' as CellStatus;
+      if (colIndex >= noDataFrom) return 'No data' as CellStatus;
       const value = noise(rowIndex + 1, colIndex + 1);
-      if (value < 7) return 'CRITICAL' as CellStatus;
-      if (value < 22) return 'WARNING' as CellStatus;
-      return 'OK' as CellStatus;
+      if (value < 7) return 'Critical' as CellStatus;
+      if (value < 22) return 'Warning' as CellStatus;
+      return 'Ok' as CellStatus;
     }),
   }));
 
@@ -149,10 +152,10 @@ const useStatusScale = (): HeatmapDiscreteScale => {
 
   return {
     colorSet: {
-      OK: theme.statusHealthy,
-      WARNING: theme.statusWarning,
-      CRITICAL: theme.statusCritical,
-      NONE: theme.textSecondary,
+      Ok: theme.statusHealthy,
+      Warning: theme.statusWarning,
+      Critical: theme.statusCritical,
+      'No data': theme.textSecondary,
     },
     sortOrder: inDeclaredOrder(STATUS_ORDER),
   };
@@ -179,7 +182,7 @@ type GeneratedArgs = LayoutArgs & {
   entities: number;
   /** Columns — one per time slot on the x-axis. */
   columns: number;
-  /** Trailing columns reported as NONE: the "collection has not caught up" tail. */
+  /** Trailing columns reported as 'No data': the "collection has not caught up" tail. */
   noDataColumns: number;
 };
 
@@ -238,8 +241,8 @@ const entityLabels = (count: number) =>
 /**
  * The interactive one: edit the grid itself.
  *
- * `rows` is a real control — add a row, rename one, or change any cell to OK,
- * WARNING, CRITICAL or NONE and the grid follows. The x-axis is derived from the
+ * `rows` is a real control — add a row, rename one, or change any cell to Ok,
+ * Warning, Critical or 'No data' and the grid follows. The x-axis is derived from the
  * longest row, so adding cells adds columns; a row with fewer cells leaves the
  * rest of its line empty rather than shifting anything.
  */
@@ -249,20 +252,23 @@ export const Playground: StoryObj<DataArgs> = {
     rows: {
       control: 'object',
       description:
-        'One entry per row: { label, cells }. A cell is OK | WARNING | CRITICAL | NONE',
+        "One entry per row: { label, cells }. A cell is Ok | Warning | Critical | 'No data'",
     },
   },
   args: {
     ...layoutArgs,
     rows: [
-      { label: 'Alertmanager', cells: ['OK', 'OK', 'WARNING', 'OK', 'NONE'] },
-      { label: 'Grafana', cells: ['OK', 'OK', 'OK', 'OK', 'NONE'] },
+      {
+        label: 'Alertmanager',
+        cells: ['Ok', 'Ok', 'Warning', 'Ok', 'No data'],
+      },
+      { label: 'Grafana', cells: ['Ok', 'Ok', 'Ok', 'Ok', 'No data'] },
       {
         label: 'Prometheus',
-        cells: ['WARNING', 'CRITICAL', 'CRITICAL', 'OK', 'NONE'],
+        cells: ['Warning', 'Critical', 'Critical', 'Ok', 'No data'],
       },
-      { label: 'Supervisor', cells: ['OK', 'OK', 'OK', 'OK', 'NONE'] },
-      { label: 'Thanos', cells: ['OK', 'WARNING', 'OK', 'OK', 'NONE'] },
+      { label: 'Supervisor', cells: ['Ok', 'Ok', 'Ok', 'Ok', 'No data'] },
+      { label: 'Thanos', cells: ['Ok', 'Warning', 'Ok', 'Ok', 'No data'] },
     ],
   },
   render: (args) => {
@@ -305,7 +311,7 @@ export const ScreenshotEquivalent: StoryObj<LayoutArgs> = {
           scale={scale}
           rows={MONITORING_SERVICES.map((label) => ({
             label,
-            cells: ['OK', 'OK', 'OK', 'NONE'] as CellStatus[],
+            cells: ['Ok', 'Ok', 'Ok', 'No data'] as CellStatus[],
           }))}
           columns={buildTimeSlots(
             new Date('2026-08-25T10:30:00Z'),
@@ -329,7 +335,7 @@ export const ServiceStatusOverOneHour: StoryObj<LayoutArgs> = {
     return (
       <Box maxWidth="60rem">
         <Heatmap
-          title="Monitoring Services Status — last hour"
+          title="Monitoring Services Status"
           legendTitle="Service Status"
           scale={scale}
           rows={buildStatusRows(MONITORING_SERVICES, 12, 10)}
@@ -375,7 +381,7 @@ export const DenseGrid: StoryObj<GeneratedArgs> = {
     return (
       <Box maxWidth="75rem">
         <Heatmap
-          title="Node health — last 24 hours"
+          title="Node health"
           legendTitle="Service Status"
           scale={scale}
           rows={buildStatusRows(
@@ -395,9 +401,22 @@ export const DenseGrid: StoryObj<GeneratedArgs> = {
   },
 };
 
-/** Continuous values instead of statuses: opacity ramp + gradient scale. */
+/**
+ * Continuous values instead of statuses: opacity ramp + gradient scale.
+ *
+ * `pinnedToHundred` is what the top of the ramp is worth. This grid peaks
+ * around 60 %, so leaving `max` to the data burns the whole ramp on the range
+ * the data happens to occupy and the busiest node reads as fully saturated —
+ * true of this chart, and a lie next to another one whose peak is 20 %. Pinning
+ * `max: 100` spends the ramp on the scale the unit actually has, so two grids
+ * side by side mean the same thing. Flip the control and watch both the cells
+ * and the number at the top of the gradient move.
+ */
 export const NumericValues: StoryObj<
-  Omit<GeneratedArgs, 'noDataColumns'> & { minOpacity: number }
+  Omit<GeneratedArgs, 'noDataColumns'> & {
+    minOpacity: number;
+    pinnedToHundred: boolean;
+  }
 > = {
   argTypes: {
     ...layoutArgTypes,
@@ -407,6 +426,11 @@ export const NumericValues: StoryObj<
       control: { type: 'range', min: 0, max: 0.6, step: 0.05 },
       description: 'Opacity floor, so the low values stay visible',
     },
+    pinnedToHundred: {
+      control: 'boolean',
+      description:
+        'Top of the ramp: 100 % (comparable between charts) or the largest value in the data',
+    },
   },
   args: {
     ...layoutArgs,
@@ -415,6 +439,7 @@ export const NumericValues: StoryObj<
     labelEvery: 3,
     labelWidth: '9rem',
     minOpacity: 0.1,
+    pinnedToHundred: true,
   },
   render: (args) => {
     const theme = useTheme() as CoreUITheme;
@@ -422,17 +447,21 @@ export const NumericValues: StoryObj<
     return (
       <Box maxWidth="75rem">
         <Heatmap
-          title="CPU usage — last 24 hours"
+          title="CPU usage"
           legendTitle="%"
           scale={{
             type: 'continuous',
             colorRGB: theme.statusHealthyRGB,
             minOpacity: args.minOpacity,
+            // undefined hands the top of the ramp back to the data
+            max: args.pinnedToHundred ? 100 : undefined,
           }}
           rows={entityLabels(args.entities).map((label, rowIndex) => ({
             label,
+            // a load that peaks around 60 %, so pinning the top to 100 is
+            // visible rather than a change of one percent
             cells: Array.from({ length: args.columns }, (_, colIndex) =>
-              Math.round(noise(rowIndex + 3, colIndex + 5)),
+              Math.round(noise(rowIndex + 3, colIndex + 5) * 0.6),
             ),
           }))}
           columns={buildTimeSlots(DAY_START, args.columns, ONE_HOUR)}
@@ -446,9 +475,10 @@ export const NumericValues: StoryObj<
 
 /**
  * The colors are the caller's, and so are the values. Five backup outcomes,
- * none of them a health status, painted from the chart palette and the theme's
- * own tokens side by side — `colorSet` takes any CSS color, wherever it comes
- * from.
+ * none of them a health status, and so none of them painted from the status
+ * tokens: a categorical scale takes the theme's series colors, and leaves
+ * `statusHealthy` and `statusCritical` to mean health where health is what is
+ * being shown.
  *
  * `sortOrder` is what keeps the legend in pipeline order rather than
  * alphabetical, so the rare outcomes stay at the bottom where they are looked
@@ -457,65 +487,67 @@ export const NumericValues: StoryObj<
 export const CustomColorSet: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
   args: { ...layoutArgs, labelEvery: 2, labelWidth: '9rem' },
+  render: (args) => (
+    <Box maxWidth="60rem">
+      <Heatmap
+        title="Backup jobs"
+        legendTitle="Job outcome"
+        scale={{
+          colorSet: {
+            Full: lineColor1,
+            Incremental: lineColor2,
+            Snapshot: lineColor3,
+            Skipped: lineColor4,
+            Failed: lineColor6,
+          },
+          sortOrder: inDeclaredOrder(BACKUP_OUTCOMES),
+        }}
+        rows={buildCategoryRows(BACKUP_POLICIES, 14, BACKUP_OUTCOMES)}
+        columns={buildTimeSlots(DAY_START, 14, ONE_DAY)}
+        formatColumnTick={(column) => (
+          <FormattedDateTime format="day-month-abbreviated" value={column} />
+        )}
+        {...layoutProps(args)}
+      />
+    </Box>
+  ),
+};
+
+/**
+ * Discrete does not mean three states of health. Here the values are workload
+ * profiles, colored from the series palette because that is what a categorical
+ * scale is for, and the grid behaves exactly the same: click *Write-heavy* in
+ * the legend and every other slot dims, leaving the write bursts alone on the
+ * timeline.
+ */
+export const NonStatusValues: StoryObj<LayoutArgs> = {
+  argTypes: layoutArgTypes,
+  args: { ...layoutArgs, labelEvery: 3, labelWidth: '10rem', cellGap: 2 },
   render: (args) => {
     const theme = useTheme() as CoreUITheme;
 
     return (
-      <Box maxWidth="60rem">
+      <Box maxWidth="75rem">
         <Heatmap
-          title="Backup jobs — last 14 days"
-          legendTitle="Job outcome"
+          title="Bucket workload profile"
+          legendTitle="Profile"
           scale={{
             colorSet: {
-              Full: lineColor3,
-              Incremental: lineColor1,
-              Snapshot: lineColor2,
-              Skipped: theme.infoPrimary,
-              Failed: theme.statusCritical,
+              'Read-heavy': lineColor3,
+              'Write-heavy': lineColor7,
+              Mixed: lineColor1,
+              // the one value that is an absence: a theme neutral, not a hue
+              Idle: theme.infoPrimary,
             },
-            sortOrder: inDeclaredOrder(BACKUP_OUTCOMES),
+            sortOrder: inDeclaredOrder(WORKLOAD_PROFILES),
           }}
-          rows={buildCategoryRows(BACKUP_POLICIES, 14, BACKUP_OUTCOMES)}
-          columns={buildTimeSlots(DAY_START, 14, ONE_DAY)}
-          formatColumnTick={(column) => (
-            <FormattedDateTime format="month-day" value={column} />
-          )}
+          rows={buildCategoryRows(BUCKETS, 24, WORKLOAD_PROFILES)}
+          columns={buildTimeSlots(DAY_START, 24, ONE_HOUR)}
           {...layoutProps(args)}
         />
       </Box>
     );
   },
-};
-
-/**
- * Discrete does not mean three states of health. Here the values are workload
- * profiles in four hand-picked hex colors that belong to no theme at all, and
- * the grid behaves exactly the same: click *Write-heavy* in the legend and
- * every other slot dims, leaving the write bursts alone on the timeline.
- */
-export const NonStatusValues: StoryObj<LayoutArgs> = {
-  argTypes: layoutArgTypes,
-  args: { ...layoutArgs, labelEvery: 3, labelWidth: '10rem', cellGap: 2 },
-  render: (args) => (
-    <Box maxWidth="75rem">
-      <Heatmap
-        title="Bucket workload profile — last 24 hours"
-        legendTitle="Profile"
-        scale={{
-          colorSet: {
-            'Read-heavy': '#3B9EDB',
-            'Write-heavy': '#E8A33D',
-            Mixed: '#8E6FD8',
-            Idle: '#5A6270',
-          },
-          sortOrder: inDeclaredOrder(WORKLOAD_PROFILES),
-        }}
-        rows={buildCategoryRows(BUCKETS, 24, WORKLOAD_PROFILES)}
-        columns={buildTimeSlots(DAY_START, 24, ONE_HOUR)}
-        {...layoutProps(args)}
-      />
-    </Box>
-  ),
 };
 
 /**
@@ -540,7 +572,7 @@ export const LabelledValues: StoryObj<LayoutArgs> = {
     return (
       <Box maxWidth="70rem">
         <Heatmap
-          title="Dominant response code — last 12 hours"
+          title="Dominant response code"
           legendTitle="HTTP status"
           scale={{
             colorSet: {
@@ -555,6 +587,38 @@ export const LabelledValues: StoryObj<LayoutArgs> = {
           rows={buildCategoryRows(S3_ENDPOINTS, 12, RESPONSE_CODES)}
           columns={buildTimeSlots(HOUR_START, 12, ONE_HOUR)}
           formatValue={(value) => labelMap[value] ?? value}
+          {...layoutProps(args)}
+        />
+      </Box>
+    );
+  },
+};
+
+/**
+ * The axis crosses midnight, which no other story does. The tick rolls from
+ * 23:00 to 00:00 and says nothing else about the day changing — the date is one
+ * hover away in the tooltip, and a date on the axis would cost more room than
+ * the change is worth. That is a decision rather than an oversight, which is
+ * why it has a story.
+ */
+export const AcrossMidnight: StoryObj<LayoutArgs> = {
+  argTypes: layoutArgTypes,
+  args: { ...layoutArgs, labelEvery: 1 },
+  render: (args) => {
+    const scale = useStatusScale();
+
+    return (
+      <Box maxWidth="60rem">
+        <Heatmap
+          title="Monitoring Services Status"
+          legendTitle="Service Status"
+          scale={scale}
+          rows={buildStatusRows(MONITORING_SERVICES, 10)}
+          columns={buildTimeSlots(
+            new Date('2026-08-25T19:00:00'),
+            10,
+            ONE_HOUR,
+          )}
           {...layoutProps(args)}
         />
       </Box>

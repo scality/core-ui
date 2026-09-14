@@ -16,8 +16,10 @@ import { HeatmapGradientScale } from './HeatmapGradientScale';
 import {
   DEFAULT_MIN_OPACITY,
   DIMMED_CELL_OPACITY,
+  getColumnEnds,
   getHeatmapMaxValue,
   getRampOpacity,
+  isSameCalendarDay,
 } from './Heatmap.utils';
 
 /** One line of the grid: a label in the gutter, then one cell per column. */
@@ -34,7 +36,14 @@ export type HeatmapRow<T extends string | number> = {
 /** What the tooltip and the value formatter are handed for one cell. */
 export type HeatmapCell<T extends string | number> = {
   row: HeatmapRow<T>;
+  /** When the slot opens — the column it sits under. */
   column: Date;
+  /**
+   * When the slot closes: the next column's start, or one axis step past the
+   * last column. Equal to `column` on a single-column axis, which has no step
+   * to read a duration from.
+   */
+  columnEnd: Date;
   columnIndex: number;
   value: T;
 };
@@ -118,7 +127,6 @@ const Cell = styled.div<{
   background-color: ${({ $color }) => $color};
   opacity: ${({ $opacity }) => $opacity};
   transition: opacity 0.15s ease;
-  cursor: pointer;
 
   /* outline, not border: it paints outside the box so nothing is re-laid out */
   &:hover,
@@ -128,16 +136,49 @@ const Cell = styled.div<{
   }
 `;
 
+/**
+ * The row label gutter. `labelWidth` fixes the track, so the label has to clip
+ * rather than widen it — `min-width` because a grid item defaults to the width
+ * of its content and would otherwise refuse to shrink into the track.
+ */
+const RowLabel = styled(Box)`
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
 const defaultTooltip = <T extends string | number>(
-  { row, column, value }: HeatmapCell<T>,
+  { row, column, columnEnd, value }: HeatmapCell<T>,
   formatValue: (value: T) => string,
 ) => (
   <Stack direction="vertical" gap="r2">
     <Text variant="Smaller" isEmphazed>
       {row.label}
     </Text>
+    {/* the whole slot, not the instant it opens: a cell read on its own says
+        nothing about whether it covers five minutes, an hour or a day */}
     <Text variant="Smaller" color="textSecondary">
-      <FormattedDateTime format="date-time" value={column} />
+      <FormattedDateTime
+        format="day-month-abbreviated-hour-minute"
+        value={column}
+      />
+      {columnEnd.getTime() > column.getTime() && (
+        <>
+          {' to '}
+          {/* the end repeats the date whenever the slot changes day, or a
+              nightly slot reads as "31 Aug 23:00 to 00:00" and a daily one as
+              "31 Aug 00:00 to 00:00" — the same instant twice, apparently */}
+          {isSameCalendarDay(column, columnEnd) ? (
+            <FormattedDateTime format="time" value={columnEnd} />
+          ) : (
+            <FormattedDateTime
+              format="day-month-abbreviated-hour-minute"
+              value={columnEnd}
+            />
+          )}
+        </>
+      )}
     </Text>
     <Text variant="Smaller">{formatValue(value)}</Text>
   </Stack>
@@ -200,76 +241,87 @@ const HeatmapGrid = <T extends string | number>({
   ),
   formatValue = (value) => String(value),
   renderTooltip,
-}: HeatmapGridProps<T>) => (
-  <Box
-    display="grid"
-    /* `repeat(0, …)` is invalid CSS, which would drop the whole template */
-    gridTemplateColumns={`${labelWidth} repeat(${Math.max(
-      columns.length,
-      1,
-    )}, minmax(0, 1fr))`}
-    gap={cellGap}
-    alignItems="center"
-    flex="1"
-  >
-    {rows.map((row, rowIndex) => (
-      <React.Fragment key={`${row.label}-${rowIndex}`}>
-        <Box textAlign="right" pr={spacing.f8}>
-          <Text variant="Smaller" color="textSecondary">
-            {row.label}
-          </Text>
-        </Box>
+}: HeatmapGridProps<T>) => {
+  // read off the axis once, not once per cell
+  const columnEnds = getColumnEnds(columns);
 
-        {/* driven by the columns, not by the cells: that is what keeps a short
+  return (
+    <Box
+      display="grid"
+      /* `repeat(0, …)` is invalid CSS, which would drop the whole template */
+      gridTemplateColumns={`${labelWidth} repeat(${Math.max(
+        columns.length,
+        1,
+      )}, minmax(0, 1fr))`}
+      gap={cellGap}
+      alignItems="center"
+      flex="1"
+    >
+      {rows.map((row, rowIndex) => (
+        <React.Fragment key={`${row.label}-${rowIndex}`}>
+          <RowLabel textAlign="right" pr={spacing.f8} title={row.label}>
+            <Text variant="Smaller" color="textSecondary">
+              {row.label}
+            </Text>
+          </RowLabel>
+
+          {/* driven by the columns, not by the cells: that is what keeps a short
             row from pulling the next row's label out of the gutter */}
-        {columns.map((column, columnIndex) => {
-          const value = row.cells[columnIndex] ?? null;
-          const key = `${row.label}-${rowIndex}-${columnIndex}`;
+          {columns.map((column, columnIndex) => {
+            const value = row.cells[columnIndex] ?? null;
+            const key = `${row.label}-${rowIndex}-${columnIndex}`;
 
-          if (value === null) {
-            return <Box key={key} />;
-          }
+            if (value === null) {
+              return <Box key={key} />;
+            }
 
-          const cell = { row, column, columnIndex, value };
-          const { color, opacity } = appearanceOf(value);
+            const cell = {
+              row,
+              column,
+              columnEnd: columnEnds[columnIndex],
+              columnIndex,
+              value,
+            };
+            const { color, opacity } = appearanceOf(value);
 
-          return (
-            <Tooltip
-              key={key}
-              placement="top"
-              overlay={
-                renderTooltip
-                  ? renderTooltip(cell)
-                  : defaultTooltip(cell, formatValue)
-              }
-            >
-              <Cell
-                $color={color}
-                $opacity={opacity}
-                $height={cellHeight}
-                tabIndex={0}
-                role="img"
-                aria-label={`${row.label} ${formatValue(value)}`}
-              />
-            </Tooltip>
-          );
-        })}
-      </React.Fragment>
-    ))}
+            return (
+              <Tooltip
+                key={key}
+                placement="top"
+                overlay={
+                  renderTooltip
+                    ? renderTooltip(cell)
+                    : defaultTooltip(cell, formatValue)
+                }
+              >
+                <Cell
+                  $color={color}
+                  $opacity={opacity}
+                  $height={cellHeight}
+                  tabIndex={0}
+                  role="img"
+                  aria-label={`${row.label} ${formatValue(value)}`}
+                />
+              </Tooltip>
+            );
+          })}
+        </React.Fragment>
+      ))}
 
-    {/* x-axis: an empty gutter cell, then one slot per column */}
-    <Box />
-    {columns.map((column, columnIndex) => (
-      <Box key={`tick-${columnIndex}`} textAlign="center" pt={spacing.f4}>
-        {columnIndex % labelEvery === 0 && (
-          <Text variant="Smaller" color="textSecondary">
-            {formatColumnTick(column)}
-          </Text>
-        )}
-      </Box>
-    ))}
-  </Box>
-);
+      {/* x-axis: an empty gutter cell, then one slot per column */}
+      <Box />
+      {columns.map((column, columnIndex) => (
+        <Box key={`tick-${columnIndex}`} textAlign="center" pt={spacing.f4}>
+          {columnIndex % labelEvery === 0 && (
+            <Text variant="Smaller" color="textSecondary">
+              {formatColumnTick(column)}
+            </Text>
+          )}
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 const DiscreteHeatmap = ({
   scale: _scale,

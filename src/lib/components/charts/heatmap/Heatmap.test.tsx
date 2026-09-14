@@ -229,6 +229,64 @@ describe('Heatmap', () => {
       expect(overlay).toHaveTextContent('WARNING');
     });
 
+    it('should name the whole slot, not the instant the column opens', () => {
+      renderStatusHeatmap();
+
+      act(() => screen.getByLabelText('Prometheus WARNING').focus());
+
+      // the axis is five-minute slots, and the cell has to say so on its own
+      expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
+        '25 Aug 10:05 to 10:10',
+      );
+    });
+
+    it('should repeat the date when the slot runs into the next day', () => {
+      renderStatusHeatmap({
+        columns: [
+          new Date('2026-08-31T23:00:00Z'),
+          new Date('2026-09-01T00:00:00Z'),
+        ],
+        rows: [{ label: 'Prometheus', cells: ['OK', 'OK'] }],
+      });
+
+      act(() => screen.getAllByLabelText('Prometheus OK')[0].focus());
+
+      // without the date the slot would read "31 Aug 23:00 to 00:00"
+      expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
+        '31 Aug 23:00 to 01 Sep 00:00',
+      );
+    });
+
+    it('should name both days of a slot a whole day long', () => {
+      renderStatusHeatmap({
+        columns: [
+          new Date('2026-08-31T00:00:00Z'),
+          new Date('2026-09-01T00:00:00Z'),
+        ],
+        rows: [{ label: 'Prometheus', cells: ['OK', 'OK'] }],
+      });
+
+      act(() => screen.getAllByLabelText('Prometheus OK')[0].focus());
+
+      // the end is midnight too, so only the date tells the two apart
+      expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
+        '31 Aug 00:00 to 01 Sep 00:00',
+      );
+    });
+
+    it('should fall back to the start alone when the axis has one column', () => {
+      renderStatusHeatmap({
+        columns: [columns[0]],
+        rows: [{ label: 'Prometheus', cells: ['OK'] }],
+      });
+
+      act(() => screen.getByLabelText('Prometheus OK').focus());
+
+      const overlay = document.querySelector('.sc-tooltip-overlay');
+      expect(overlay).toHaveTextContent('25 Aug 10:00');
+      expect(overlay).not.toHaveTextContent('to');
+    });
+
     it('should let the caller replace the tooltip content', () => {
       renderStatusHeatmap({
         renderTooltip: ({ row, columnIndex }) =>

@@ -1,4 +1,5 @@
 import {
+  getColumnEnds,
   getHeatmapMaxValue,
   getRampOpacity,
   DEFAULT_MIN_OPACITY,
@@ -42,5 +43,39 @@ describe('getRampOpacity', () => {
 
   it('should fall back to the floor on a degenerate domain', () => {
     expect(getRampOpacity(0, 0, DEFAULT_MIN_OPACITY)).toBe(DEFAULT_MIN_OPACITY);
+  });
+});
+
+describe('getColumnEnds', () => {
+  const at = (time: string) => new Date(`2026-08-25T${time}:00Z`);
+
+  it('should end every column where the next one starts', () => {
+    expect(getColumnEnds([at('10:00'), at('10:05'), at('10:10')])).toEqual([
+      at('10:05'),
+      at('10:10'),
+      at('10:15'),
+    ]);
+  });
+
+  it('should give the last column the gap that came before it', () => {
+    const [, , last] = getColumnEnds([at('10:00'), at('11:00'), at('12:00')]);
+
+    expect(last).toEqual(at('13:00'));
+  });
+
+  it('should follow an irregular axis rather than assume a fixed step', () => {
+    expect(getColumnEnds([at('10:00'), at('10:05'), at('11:05')])).toEqual([
+      at('10:05'),
+      at('11:05'),
+      at('12:05'),
+    ]);
+  });
+
+  it('should leave a single column without a duration to invent one from', () => {
+    expect(getColumnEnds([at('10:00')])).toEqual([at('10:00')]);
+  });
+
+  it('should hold on an empty axis', () => {
+    expect(getColumnEnds([])).toEqual([]);
   });
 });
