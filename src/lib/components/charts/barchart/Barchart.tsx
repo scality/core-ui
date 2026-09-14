@@ -128,30 +128,19 @@ export type BarchartProps<T extends BarchartBars> = {
    */
   displayOptions?: BarchartDisplayOptions;
   /**
-   * Y-axis scale.
+   * Y-axis scale, for a dataset spanning orders of magnitude: on a linear axis
+   * the small bars collapse onto the baseline and only the largest is readable.
+   * Display only — no value is rescaled, and the tooltip, legend and unit
+   * scaling keep the numbers you passed in.
    *
-   * `'log'` is for a dataset whose values span orders of magnitude: on a linear
-   * axis the small bars collapse onto the baseline and only the largest one is
-   * readable, and a log axis gives each decade the same height instead. The
-   * axis is bounded by the decades enclosing the data, and its ticks are the
-   * decades themselves.
+   * `'log'` gives each decade the same height and ticks the decades. Zero has
+   * no logarithm, so it reserves the slot below the first decade, labels it
+   * `0`, and draws zeros there as a stub bar — a measured zero stays
+   * distinguishable from an absent one, which a gap would not.
    *
-   * It changes the display and nothing else: no value is rescaled, and the
-   * tooltip, the legend and the unit scaling all keep the numbers the caller
-   * passed in.
-   *
-   * A zero has no logarithm, so the axis reserves one slot below its first
-   * decade, labels it `0`, and draws zeros there as a stub bar. A measured
-   * zero stays distinguishable from an absent one, which are different facts
-   * and which a gap would render identically. The slot costs a decade's worth
-   * of height, so it is only reserved when the data actually holds a zero.
-   *
-   * Two things it will not do:
-   * - A negative bar is dropped and leaves a gap. A dataset that goes negative
-   *   does not belong on a log axis at all.
-   * - `stacked` falls back to a linear axis. Stacking places each segment at
-   *   a cumulative sum, so on a log axis a segment's height stops matching
-   *   its value and the chart misreads.
+   * Two things it will not do: a negative bar is dropped, and `stacked` falls
+   * back to linear, since stacking places each segment at a cumulative sum and
+   * its height would stop matching its value.
    *
    * @default 'linear'
    */

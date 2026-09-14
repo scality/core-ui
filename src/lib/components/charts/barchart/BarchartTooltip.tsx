@@ -32,7 +32,14 @@ export const BarchartTooltip = <T extends BarchartBars>({
   unitLabel?: string;
   unitRange?: UnitRange;
   valueBase?: number;
-  /** A log axis's reserved zero band, reported as 0 rather than as its position. */
+  /**
+   * Where a measured zero was drawn, as a Y-axis value.
+   *
+   * A log axis has no position for `0`, so it reserves the decade below its
+   * lowest and plots zeros there. This is that coordinate, so a tooltip can
+   * report the `0` that was measured rather than where it was parked. `null`
+   * when no slot was reserved.
+   */
   logZeroValue?: number | null;
   chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
