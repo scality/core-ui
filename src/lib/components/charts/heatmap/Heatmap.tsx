@@ -12,18 +12,15 @@ import {
   useChartId,
   useChartLegend,
 } from '../legend/ChartLegendWrapper';
-import { HeatmapGradientScale } from './HeatmapGradientScale';
 import {
-  DEFAULT_MIN_OPACITY,
   DIMMED_CELL_OPACITY,
   getColumnEnds,
-  getHeatmapMaxValue,
-  getRampOpacity,
+  isDailyOrLongerSlot,
   isSameCalendarDay,
 } from './Heatmap.utils';
 
 /** One line of the grid: a label in the gutter, then one cell per column. */
-export type HeatmapRow<T extends string | number> = {
+export type HeatmapRow<T extends string> = {
   label: string;
   /**
    * Read positionally against `columns`: cell `i` sits under column `i`. `null`
@@ -34,7 +31,7 @@ export type HeatmapRow<T extends string | number> = {
 };
 
 /** What the tooltip and the value formatter are handed for one cell. */
-export type HeatmapCell<T extends string | number> = {
+export type HeatmapCell<T extends string> = {
   row: HeatmapRow<T>;
   /** When the slot opens — the column it sits under. */
   column: Date;
@@ -65,32 +62,17 @@ export type HeatmapDiscreteScale = {
   labelMap?: ChartLegendWrapperProps['labelMap'];
 };
 
-/** Continuous values — one color, ramped by opacity from `minOpacity` to 1. */
-export type HeatmapContinuousScale = {
-  type: 'continuous';
-  /**
-   * The color to ramp, as an RGB triple: `theme.statusHealthyRGB` and its
-   * siblings are exactly that, `'10,173,166'`.
-   */
-  colorRGB: string;
-  /** Value mapped to full opacity. Defaults to the largest value in `rows`. */
-  max?: number;
-  /** Opacity of the value 0, so the low end stays visible. Defaults to 0.1. */
-  minOpacity?: number;
-};
-
-type HeatmapBaseProps<T extends string | number> = {
+type HeatmapBaseProps<T extends string> = {
   rows: HeatmapRow<T>[];
   /** The x-axis. It defines the columns: a row is padded or truncated to fit. */
   columns: Date[];
   /** Heading above the grid. */
   title?: ReactNode;
-  /** Heading above the legend — what the colors mean, or the unit they ramp. */
+  /** Heading above the legend — what the colors mean. */
   legendTitle?: ReactNode;
   /**
    * Hide the legend, for a heatmap whose scale is stated elsewhere: several
-   * grids under one shared legend, a ramp beside its own
-   * `HeatmapGradientScale`.
+   * grids standing under one shared legend.
    */
   showLegend?: boolean;
   /** Show one x-axis tick every N columns, to keep a dense axis legible. */
@@ -99,7 +81,11 @@ type HeatmapBaseProps<T extends string | number> = {
   cellGap?: string;
   /** The row label gutter. Labels truncate rather than widen it. */
   labelWidth?: string;
-  /** How a column is spelled out on the x-axis. Defaults to the time of day. */
+  /**
+   * How a column is spelled out on the x-axis. The default reads the slot
+   * duration off the axis: the time of day below a day, the abbreviated date
+   * from a day up.
+   */
   formatColumnTick?: (column: Date) => ReactNode;
   /** How a value is spelled out, in the default tooltip and in `aria-label`. */
   formatValue?: (value: T) => string;
@@ -111,11 +97,7 @@ export type DiscreteHeatmapProps = HeatmapBaseProps<string> & {
   scale?: HeatmapDiscreteScale;
 };
 
-export type ContinuousHeatmapProps = HeatmapBaseProps<number> & {
-  scale: HeatmapContinuousScale;
-};
-
-export type HeatmapProps = DiscreteHeatmapProps | ContinuousHeatmapProps;
+export type HeatmapProps = DiscreteHeatmapProps;
 
 const Cell = styled.div<{
   $color: string;
@@ -148,7 +130,7 @@ const RowLabel = styled(Box)`
   text-overflow: ellipsis;
 `;
 
-const defaultTooltip = <T extends string | number>(
+const defaultTooltip = <T extends string>(
   { row, column, columnEnd, value }: HeatmapCell<T>,
   formatValue: (value: T) => string,
 ) => (
@@ -223,12 +205,12 @@ const LegendColumn = ({ title }: { title?: ReactNode }) => (
   </Stack>
 );
 
-type HeatmapGridProps<T extends string | number> = HeatmapBaseProps<T> & {
+type HeatmapGridProps<T extends string> = HeatmapBaseProps<T> & {
   /** How one value is painted. The only thing the two scales disagree on. */
   appearanceOf: (value: T) => { color: string; opacity: number };
 };
 
-const HeatmapGrid = <T extends string | number>({
+const HeatmapGrid = <T extends string>({
   rows,
   columns,
   appearanceOf,
@@ -236,9 +218,7 @@ const HeatmapGrid = <T extends string | number>({
   cellHeight = spacing.f20,
   cellGap = spacing.f4,
   labelWidth = '7rem',
-  formatColumnTick = (column) => (
-    <FormattedDateTime format="time" value={column} />
-  ),
+  formatColumnTick,
   formatValue = (value) => String(value),
   renderTooltip,
 }: HeatmapGridProps<T>) => {
@@ -314,7 +294,20 @@ const HeatmapGrid = <T extends string | number>({
         <Box key={`tick-${columnIndex}`} textAlign="center" pt={spacing.f4}>
           {columnIndex % labelEvery === 0 && (
             <Text variant="Smaller" color="textSecondary">
-              {formatColumnTick(column)}
+              {formatColumnTick ? (
+                formatColumnTick(column)
+              ) : (
+                /* the axis says what it is about: a daily grid labelled by the
+                   time of day prints "00:00" over every one of its columns */
+                <FormattedDateTime
+                  format={
+                    isDailyOrLongerSlot(column, columnEnds[columnIndex])
+                      ? 'day-month-abbreviated'
+                      : 'time'
+                  }
+                  value={column}
+                />
+              )}
             </Text>
           )}
         </Box>
@@ -390,80 +383,29 @@ const DiscreteHeatmap = ({
   );
 };
 
-const ContinuousHeatmap = ({
-  scale,
-  title,
-  legendTitle,
-  showLegend = true,
-  ...gridProps
-}: ContinuousHeatmapProps) => {
-  const { colorRGB, minOpacity = DEFAULT_MIN_OPACITY } = scale;
-  const max = scale.max ?? getHeatmapMaxValue(gridProps.rows);
-
-  const appearanceOf = useCallback(
-    (value: number) => ({
-      color: `rgb(${colorRGB})`,
-      opacity: getRampOpacity(value, max, minOpacity),
-    }),
-    [colorRGB, max, minOpacity],
-  );
-
-  return (
-    <HeatmapFrame
-      title={title}
-      legend={
-        showLegend ? (
-          // the ramp and the grid are handed the same domain, so the numbers
-          // printed beside the scale cannot drift from what the cells show
-          <HeatmapGradientScale
-            colorRGB={colorRGB}
-            max={max}
-            minOpacity={minOpacity}
-            label={legendTitle}
-          />
-        ) : undefined
-      }
-    >
-      <HeatmapGrid {...gridProps} appearanceOf={appearanceOf} />
-    </HeatmapFrame>
-  );
-};
-
 /**
- * A grid of one metric read over time: one row per entity, one column per time
- * slot, each cell colored by its value and describing itself on hover or focus.
- * Title, grid, x-axis and legend all belong to the component.
+ * A grid of one metric read across two dimensions: one row per entity, one
+ * column per slot, each cell colored by its value and describing itself on
+ * hover or focus. Title, grid, x-axis and legend all belong to the component.
  *
- * Two scales, and they type the data with them. `discrete` — the default —
- * colors named values through a legend that also filters the grid;
- * `continuous` ramps one color by opacity beside a gradient scale.
+ * The values are names — a status, a state, any small set — and the legend is
+ * where they get their color and their meaning. Clicking a legend item filters
+ * the grid.
  *
  * ```tsx
  * <Heatmap
- *   title="Monitoring Services Status"
- *   legendTitle="Service Status"
+ *   title="Monitoring services status"
+ *   legendTitle="Service status"
  *   rows={rows}
  *   columns={timeSlots}
- *   scale={{ colorSet: { OK: theme.statusHealthy, … } }}
+ *   scale={{ colorSet: { Ok: theme.statusHealthy, … } }}
  * />
  * ```
  */
-export const Heatmap = (props: HeatmapProps) => {
-  /**
-   * One implementation per scale rather than one branch inside it, because the
-   * discrete scale reads the legend context — a hook, so it cannot be called
-   * conditionally. The casts are the one thing TypeScript will not do for us:
-   * it narrows on a top-level discriminant, not on `scale.type` one level down.
-   */
-  if (props.scale?.type === 'continuous') {
-    return <ContinuousHeatmap {...(props as ContinuousHeatmapProps)} />;
-  }
-
-  const { scale, ...discreteProps } = props as DiscreteHeatmapProps;
-
+export const Heatmap = ({ scale, ...gridProps }: HeatmapProps) => {
   // no colorSet: a ChartLegendWrapper the caller owns is holding the colors
   if (!scale?.colorSet) {
-    return <DiscreteHeatmap scale={scale} {...discreteProps} />;
+    return <DiscreteHeatmap scale={scale} {...gridProps} />;
   }
 
   return (
@@ -472,7 +414,7 @@ export const Heatmap = (props: HeatmapProps) => {
       sortOrder={scale.sortOrder}
       labelMap={scale.labelMap}
     >
-      <DiscreteHeatmap {...discreteProps} />
+      <DiscreteHeatmap {...gridProps} />
     </ChartLegendWrapper>
   );
 };

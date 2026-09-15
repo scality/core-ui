@@ -281,8 +281,8 @@ export const Playground: StoryObj<DataArgs> = {
     return (
       <Box maxWidth="60rem">
         <Heatmap
-          title="Monitoring Services Status"
-          legendTitle="Service Status"
+          title="Monitoring services status"
+          legendTitle="Service status"
           scale={scale}
           rows={args.rows}
           columns={buildTimeSlots(HOUR_START, columnCount, FIVE_MINUTES)}
@@ -306,8 +306,8 @@ export const ScreenshotEquivalent: StoryObj<LayoutArgs> = {
     return (
       <Box maxWidth="60rem">
         <Heatmap
-          title="Monitoring Services Status"
-          legendTitle="Service Status"
+          title="Monitoring services status"
+          legendTitle="Service status"
           scale={scale}
           rows={MONITORING_SERVICES.map((label) => ({
             label,
@@ -335,8 +335,8 @@ export const ServiceStatusOverOneHour: StoryObj<LayoutArgs> = {
     return (
       <Box maxWidth="60rem">
         <Heatmap
-          title="Monitoring Services Status"
-          legendTitle="Service Status"
+          title="Monitoring services status"
+          legendTitle="Service status"
           scale={scale}
           rows={buildStatusRows(MONITORING_SERVICES, 12, 10)}
           columns={buildTimeSlots(HOUR_START, 12, FIVE_MINUTES)}
@@ -382,7 +382,7 @@ export const DenseGrid: StoryObj<GeneratedArgs> = {
       <Box maxWidth="75rem">
         <Heatmap
           title="Node health"
-          legendTitle="Service Status"
+          legendTitle="Service status"
           scale={scale}
           rows={buildStatusRows(
             entityLabels(args.entities),
@@ -394,78 +394,6 @@ export const DenseGrid: StoryObj<GeneratedArgs> = {
             args.columns,
             ONE_DAY / args.columns,
           )}
-          {...layoutProps(args)}
-        />
-      </Box>
-    );
-  },
-};
-
-/**
- * Continuous values instead of statuses: opacity ramp + gradient scale.
- *
- * `pinnedToHundred` is what the top of the ramp is worth. This grid peaks
- * around 60 %, so leaving `max` to the data burns the whole ramp on the range
- * the data happens to occupy and the busiest node reads as fully saturated —
- * true of this chart, and a lie next to another one whose peak is 20 %. Pinning
- * `max: 100` spends the ramp on the scale the unit actually has, so two grids
- * side by side mean the same thing. Flip the control and watch both the cells
- * and the number at the top of the gradient move.
- */
-export const NumericValues: StoryObj<
-  Omit<GeneratedArgs, 'noDataColumns'> & {
-    minOpacity: number;
-    pinnedToHundred: boolean;
-  }
-> = {
-  argTypes: {
-    ...layoutArgTypes,
-    entities: { control: { type: 'range', min: 1, max: 24, step: 1 } },
-    columns: { control: { type: 'range', min: 2, max: 48, step: 1 } },
-    minOpacity: {
-      control: { type: 'range', min: 0, max: 0.6, step: 0.05 },
-      description: 'Opacity floor, so the low values stay visible',
-    },
-    pinnedToHundred: {
-      control: 'boolean',
-      description:
-        'Top of the ramp: 100 % (comparable between charts) or the largest value in the data',
-    },
-  },
-  args: {
-    ...layoutArgs,
-    entities: 6,
-    columns: 24,
-    labelEvery: 3,
-    labelWidth: '9rem',
-    minOpacity: 0.1,
-    pinnedToHundred: true,
-  },
-  render: (args) => {
-    const theme = useTheme() as CoreUITheme;
-
-    return (
-      <Box maxWidth="75rem">
-        <Heatmap
-          title="CPU usage"
-          legendTitle="%"
-          scale={{
-            type: 'continuous',
-            colorRGB: theme.statusHealthyRGB,
-            minOpacity: args.minOpacity,
-            // undefined hands the top of the ramp back to the data
-            max: args.pinnedToHundred ? 100 : undefined,
-          }}
-          rows={entityLabels(args.entities).map((label, rowIndex) => ({
-            label,
-            // a load that peaks around 60 %, so pinning the top to 100 is
-            // visible rather than a change of one percent
-            cells: Array.from({ length: args.columns }, (_, colIndex) =>
-              Math.round(noise(rowIndex + 3, colIndex + 5) * 0.6),
-            ),
-          }))}
-          columns={buildTimeSlots(DAY_START, args.columns, ONE_HOUR)}
-          formatValue={(value: number) => `${value} %`}
           {...layoutProps(args)}
         />
       </Box>
@@ -614,8 +542,8 @@ export const AcrossMidnight: StoryObj<LayoutArgs> = {
     return (
       <Box maxWidth="60rem">
         <Heatmap
-          title="Monitoring Services Status"
-          legendTitle="Service Status"
+          title="Monitoring services status"
+          legendTitle="Service status"
           scale={scale}
           rows={buildStatusRows(MONITORING_SERVICES, 10)}
           columns={buildTimeSlots(

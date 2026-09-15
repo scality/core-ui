@@ -159,61 +159,15 @@ describe('Heatmap', () => {
     });
   });
 
-  describe('continuous scale', () => {
-    const numericRows: HeatmapRow<number>[] = [
-      { label: 'cpu', cells: [0, 50, 100] },
-    ];
+  describe('formatValue', () => {
+    it('should spell the value out in the aria-label', () => {
+      renderStatusHeatmap({
+        formatValue: (value: string) => `status ${value.toLowerCase()}`,
+      });
 
-    const renderNumericHeatmap = (
-      scale: Partial<{ max: number; minOpacity: number }> = {},
-      props = {},
-    ) => {
-      const { Wrapper } = getWrapper();
-
-      return render(
-        <Heatmap
-          legendTitle="%"
-          scale={{ type: 'continuous', colorRGB: '10,173,166', ...scale }}
-          rows={numericRows}
-          columns={columns}
-          {...props}
-        />,
-        { wrapper: Wrapper },
-      );
-    };
-
-    it('should ramp the opacity from the floor at 0 to 1 at the max', () => {
-      renderNumericHeatmap({ minOpacity: 0.2 });
-
-      expect(screen.getByLabelText('cpu 0')).toHaveStyle('opacity: 0.2');
-      expect(screen.getByLabelText('cpu 50')).toHaveStyle('opacity: 0.6');
-      expect(screen.getByLabelText('cpu 100')).toHaveStyle('opacity: 1');
-      expect(screen.getByLabelText('cpu 100')).toHaveStyle(
-        'background-color: rgb(10,173,166)',
-      );
-    });
-
-    it('should ramp against a pinned max rather than the data', () => {
-      renderNumericHeatmap({ max: 200, minOpacity: 0 });
-
-      expect(screen.getByLabelText('cpu 100')).toHaveStyle('opacity: 0.5');
-    });
-
-    it('should state the domain it ramped against beside the grid', () => {
-      renderNumericHeatmap();
-
-      expect(screen.getByText('%')).toBeInTheDocument();
-      expect(screen.getByText('100')).toBeInTheDocument();
-      expect(screen.getByText('0')).toBeInTheDocument();
-    });
-
-    it('should spell the value out through formatValue', () => {
-      renderNumericHeatmap(
-        {},
-        { formatValue: (value: number) => `${value} %` },
-      );
-
-      expect(screen.getByLabelText('cpu 100 %')).toBeInTheDocument();
+      expect(
+        screen.getByLabelText('Prometheus status warning'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -302,6 +256,29 @@ describe('Heatmap', () => {
   });
 
   describe('x-axis', () => {
+    it('should label a daily axis by date rather than by time of day', () => {
+      renderStatusHeatmap({
+        columns: [
+          new Date('2026-08-25T00:00:00Z'),
+          new Date('2026-08-26T00:00:00Z'),
+          new Date('2026-08-27T00:00:00Z'),
+        ],
+      });
+
+      // by time of day the three columns would all read "00:00"
+      expect(screen.getByText('25 Aug')).toBeInTheDocument();
+      expect(screen.getByText('26 Aug')).toBeInTheDocument();
+      expect(screen.getByText('27 Aug')).toBeInTheDocument();
+    });
+
+    it('should let the caller override the default tick', () => {
+      renderStatusHeatmap({
+        formatColumnTick: (column: Date) => `slot ${column.getUTCMinutes()}`,
+      });
+
+      expect(screen.getByText('slot 5')).toBeInTheDocument();
+    });
+
     it('should thin the ticks out with labelEvery', () => {
       const tickCount = () =>
         screen.getAllByText(/^\d{2}:\d{2}$/, { exact: false }).length;
