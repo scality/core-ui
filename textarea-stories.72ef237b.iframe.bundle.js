@@ -37,7 +37,7 @@
     border: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r1} solid ${props=>props.theme.infoPrimary};
   }
   ${props=>{const{border,textSecondary,backgroundLevel1,selectedActive}=props.theme;return styled_components__WEBPACK_IMPORTED_MODULE_2__.AH`
-      border-color: ${border};
+      border: ${_spacing__WEBPACK_IMPORTED_MODULE_3__.YK.r1} solid ${border};
       color: ${textSecondary};
       background: ${backgroundLevel1};
       &:focus {
@@ -46,4 +46,4 @@
       }
     `}}
 `;function TextAreaElement({rows=3,cols=20,width,height,variant="code",autoGrow=!1,value,defaultValue,onChange,...rest},ref){const internalRef=(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);(0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref,()=>internalRef.current);const adjustHeight=(0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(()=>{const textarea=internalRef.current;if(!textarea||!autoGrow)return;textarea.style.height="0px";const newHeight=textarea.scrollHeight;textarea.style.height=`${newHeight}px`},[autoGrow]);(0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{adjustHeight()},[adjustHeight,value]);const handleChange=(0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(event=>{autoGrow&&adjustHeight(),onChange&&onChange(event)},[autoGrow,adjustHeight,onChange]);return width||height?(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TextAreaContainer,{$width:width,$height:height,$variant:variant,$autoGrow:autoGrow,value,defaultValue,onChange:handleChange,...rest,ref:internalRef}):(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TextAreaContainer,{rows,cols,$variant:variant,$autoGrow:autoGrow,value,defaultValue,onChange:handleChange,...rest,ref:internalRef})}const TextArea=(0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(TextAreaElement);try{TextArea.displayName="TextArea",TextArea.__docgenInfo={description:"",displayName:"TextArea",props:{variant:{defaultValue:null,description:"",name:"variant",required:!1,type:{name:"enum",value:[{value:'"text"'},{value:'"code"'}]}},width:{defaultValue:null,description:"",name:"width",required:!1,type:{name:"Width<string | number>"}},height:{defaultValue:null,description:"",name:"height",required:!1,type:{name:"Height<string | number>"}},autoGrow:{defaultValue:null,description:"Automatically adjust height to fit content\nWhen enabled, the textarea will grow/shrink to show all content",name:"autoGrow",required:!1,type:{name:"boolean"}}}},"undefined"!=typeof STORYBOOK_REACT_CLASSES&&(STORYBOOK_REACT_CLASSES["src/lib/components/textarea/TextArea.component.tsx#TextArea"]={docgenInfo:TextArea.__docgenInfo,name:"TextArea",path:"src/lib/components/textarea/TextArea.component.tsx#TextArea"})}catch(__react_docgen_typescript_loader_error){}}}]);
-//# sourceMappingURL=textarea-stories.4b0371a7.iframe.bundle.js.map
+//# sourceMappingURL=textarea-stories.72ef237b.iframe.bundle.js.map
