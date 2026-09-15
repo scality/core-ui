@@ -1,33 +1,36 @@
-// @ts-nocheck
-import { $PropertyType } from 'utility-types';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { Props as TooltipProps } from '../tooltip/Tooltip.component';
-import { Text } from '../text/Text.component';
-import { CoreUITheme } from '../../style/theme';
+import { Text, TextProps } from '../text/Text.component';
+
+type Align = 'start' | 'center' | 'end';
 
 type Props = {
   text: string | number | JSX.Element | JSX.Element[];
-  tooltipStyle?: $PropertyType<TooltipProps, 'overlayStyle'>;
-  tooltipPlacement?: $PropertyType<TooltipProps, 'placement'>;
+  tooltipStyle?: TooltipProps['overlayStyle'];
+  tooltipPlacement?: TooltipProps['placement'];
   lineClamp?: number;
+  align?: Align;
+  /** @deprecated use `align="center"` instead. */
   centered?: boolean;
-  color?: keyof CoreUITheme;
-};
+} & TextProps;
+
 // for lineClamp cf https://css-tricks.com/almanac/properties/l/line-clamp/
 // it should work on all major navigator, despite the --webkit prefix
 // just in case if we don't use line clamp we can just use the classic way
-const ConstrainedTextContainer = styled.div`
+const ConstrainedTextContainer = styled.div<{
+  $lineClamp: number;
+  $align?: Align;
+}>`
   overflow: hidden;
   text-overflow: ellipsis;
-  /* inherit, not left: this is a rule on the element, so a hard-coded value
-     silently outranks whatever alignment the container set -- a table cell
-     declaring textAlign: center kept left-aligned text with nothing to explain
-     why. The centered prop stays as an explicit override, for a container that
-     sets no alignment of its own. */
-  text-align: ${(props) => (props.$centered ? 'center' : 'inherit')};
+  /* inherit when no align is given: this is a rule on the element, so a
+     hard-coded value silently outranks whatever alignment the container set --
+     a table cell declaring textAlign: center kept left-aligned text with
+     nothing to explain why. */
+  text-align: ${(props) => props.$align ?? 'inherit'};
 
   ${(props) =>
     props.$lineClamp > 1
@@ -59,38 +62,33 @@ function isEllipsisActive(element: HTMLDivElement) {
   );
 }
 
-function getConstrainedTextContainer(
-  constrainedTextRef,
-  lineClamp,
-  text,
-  centered,
-) {
-  return (
-    <ConstrainedTextContainer
-      ref={constrainedTextRef}
-      className="sc-constrainedtext"
-      $lineClamp={lineClamp}
-      $centered={centered}
-    >
-      {text}
-    </ConstrainedTextContainer>
-  );
-}
-
 function ConstrainedText({
   text,
   tooltipStyle,
   tooltipPlacement,
   lineClamp = 1,
-  color,
+  align,
   centered = false,
+  ...textProps
 }: Props): JSX.Element {
   const [displayToolTip, setDisplayToolTip] = useState(false);
   const constrainedTextRef = useCallback(
-    (element) => {
+    (element: HTMLDivElement | null) => {
       element && text && setDisplayToolTip(isEllipsisActive(element));
     },
     [text],
+  );
+  const constrainedText = (
+    <Text {...textProps}>
+      <ConstrainedTextContainer
+        ref={constrainedTextRef}
+        className="sc-constrainedtext"
+        $lineClamp={lineClamp}
+        $align={align ?? (centered ? 'center' : undefined)}
+      >
+        {text}
+      </ConstrainedTextContainer>
+    </Text>
   );
   return (
     <BlockTooltip>
@@ -100,24 +98,10 @@ function ConstrainedText({
           overlayStyle={tooltipStyle}
           placement={tooltipPlacement}
         >
-          <Text color={color}>
-            {getConstrainedTextContainer(
-              constrainedTextRef,
-              lineClamp,
-              text,
-              centered,
-            )}
-          </Text>
+          {constrainedText}
         </Tooltip>
       ) : (
-        <Text color={color}>
-          {getConstrainedTextContainer(
-            constrainedTextRef,
-            lineClamp,
-            text,
-            centered,
-          )}
-        </Text>
+        constrainedText
       )}
     </BlockTooltip>
   );
