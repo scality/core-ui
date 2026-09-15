@@ -27,6 +27,7 @@ export type {
   HeatmapRow,
   HeatmapCell,
   HeatmapDiscreteScale,
+  HeatmapLength,
 } from './heatmap/Heatmap';
 
 // Legend

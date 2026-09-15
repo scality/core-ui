@@ -54,6 +54,7 @@ export type {
   HeatmapRow,
   HeatmapCell,
   HeatmapDiscreteScale,
+  HeatmapLength,
   Alert,
   UnitRange,
   TimeType,

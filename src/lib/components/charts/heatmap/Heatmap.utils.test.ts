@@ -1,4 +1,8 @@
-import { getColumnEnds, isDailyOrLongerSlot } from './Heatmap.utils';
+import {
+  formatSlot,
+  getColumnEnds,
+  isDailyOrLongerSlot,
+} from './Heatmap.utils';
 
 describe('getColumnEnds', () => {
   const at = (time: string) => new Date(`2026-08-25T${time}:00Z`);
@@ -77,5 +81,33 @@ describe('isDailyOrLongerSlot', () => {
         at('2026-08-25T10:00:00Z'),
       ),
     ).toBe(false);
+  });
+});
+
+describe('formatSlot', () => {
+  const at = (iso: string) => new Date(iso);
+
+  it('should name the slot from its start to its end', () => {
+    expect(
+      formatSlot(at('2026-08-25T10:05:00Z'), at('2026-08-25T10:10:00Z')),
+    ).toBe('25 Aug 10:05 to 10:10');
+  });
+
+  it('should repeat the date when the slot runs into the next day', () => {
+    expect(
+      formatSlot(at('2026-08-31T23:00:00Z'), at('2026-09-01T00:00:00Z')),
+    ).toBe('31 Aug 23:00 to 01 Sep 00:00');
+  });
+
+  it('should keep a whole-day slot from reading as one instant twice', () => {
+    expect(
+      formatSlot(at('2026-08-31T00:00:00Z'), at('2026-09-01T00:00:00Z')),
+    ).toBe('31 Aug 00:00 to 01 Sep 00:00');
+  });
+
+  it('should give the start alone when the slot has no duration', () => {
+    expect(
+      formatSlot(at('2026-08-25T10:00:00Z'), at('2026-08-25T10:00:00Z')),
+    ).toBe('25 Aug 10:00');
   });
 });

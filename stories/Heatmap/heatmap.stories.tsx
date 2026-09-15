@@ -4,6 +4,8 @@ import {
   Box,
   Heatmap,
   HeatmapDiscreteScale,
+  HeatmapLength,
+  HeatmapProps,
   HeatmapRow,
 } from '../../src/lib/next';
 import { FormattedDateTime } from '../../src/lib/components/date/FormattedDateTime';
@@ -119,12 +121,9 @@ const pickWeighted = <T,>(values: readonly T[], draw: number): T => {
 };
 
 /**
- * Rows over any value set: the generated stories differ in what their values
- * are called, not in how the grid is filled.
- *
- * Each value is half as frequent as the one before it, so a generated grid has
- * a dominant value and a rare tail — an even wash would hide which color means
- * what, which is the only thing these stories are about.
+ * Rows over any value set. Each value is half as frequent as the one before it,
+ * so a grid has a dominant value and a rare tail rather than an even wash that
+ * would hide which color means what.
  */
 const buildCategoryRows = <T extends string>(
   labels: string[],
@@ -170,7 +169,7 @@ type LayoutArgs = {
   cellHeight: number;
   cellGap: number;
   labelEvery: number;
-  labelWidth: string;
+  labelWidth: HeatmapLength;
 };
 
 /** Stories whose grid is typed in by hand. The data is the source of truth. */
@@ -213,7 +212,14 @@ const layoutArgs: LayoutArgs = {
   labelWidth: '7rem',
 };
 
-const layoutProps = (args: LayoutArgs) => ({
+/* the return type is what tells the two templates below they are the lengths
+   `Heatmap` asks for, rather than the plain strings TS would infer */
+const layoutProps = (
+  args: LayoutArgs,
+): Pick<
+  HeatmapProps,
+  'labelEvery' | 'labelWidth' | 'cellHeight' | 'cellGap'
+> => ({
   labelEvery: args.labelEvery,
   labelWidth: args.labelWidth,
   cellHeight: `${args.cellHeight}px`,
@@ -403,14 +409,10 @@ export const DenseGrid: StoryObj<GeneratedArgs> = {
 
 /**
  * The colors are the caller's, and so are the values. Five backup outcomes,
- * none of them a health status, and so none of them painted from the status
- * tokens: a categorical scale takes the theme's series colors, and leaves
- * `statusHealthy` and `statusCritical` to mean health where health is what is
- * being shown.
+ * none of them a health status, so none of them painted from the status tokens:
+ * a categorical scale takes the theme's series colors instead.
  *
- * `sortOrder` is what keeps the legend in pipeline order rather than
- * alphabetical, so the rare outcomes stay at the bottom where they are looked
- * for.
+ * `sortOrder` keeps the legend in pipeline order rather than alphabetical.
  */
 export const CustomColorSet: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
@@ -442,11 +444,9 @@ export const CustomColorSet: StoryObj<LayoutArgs> = {
 };
 
 /**
- * Discrete does not mean three states of health. Here the values are workload
- * profiles, colored from the series palette because that is what a categorical
- * scale is for, and the grid behaves exactly the same: click *Write-heavy* in
- * the legend and every other slot dims, leaving the write bursts alone on the
- * timeline.
+ * Discrete does not mean three states of health: here the values are workload
+ * profiles, and the grid behaves the same. Click *Write-heavy* in the legend
+ * and every other slot dims, leaving the write bursts alone on the timeline.
  */
 export const NonStatusValues: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
@@ -479,16 +479,13 @@ export const NonStatusValues: StoryObj<LayoutArgs> = {
 };
 
 /**
- * When the values in the data are not what a reader should see: the cells hold
- * bare response codes, `labelMap` spells them out in the legend, `formatValue`
- * does the same for the tooltip and the cell's `aria-label`, and `sortOrder`
- * compares them as the numbers they are rather than as the strings they arrive
- * as.
+ * When the stored value is not what a reader should see: the cells hold bare
+ * response codes, `labelMap` spells them out in the legend, `formatValue` does
+ * the same for the tooltip and the `aria-label`, and `sortOrder` compares them
+ * as numbers.
  *
- * The colors are the series palette, not the status tokens. A response code
- * looks like a health status and is not one — a 403 is the server working
- * correctly — and painting 500 with `statusCritical` would have every red cell
- * in the product mean the same thing whether it does or not.
+ * Series colors, not status tokens: a response code looks like a health status
+ * and is not one — a 403 is the server working correctly.
  */
 export const LabelledValues: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
@@ -528,10 +525,8 @@ export const LabelledValues: StoryObj<LayoutArgs> = {
 
 /**
  * The axis crosses midnight, which no other story does. The tick rolls from
- * 23:00 to 00:00 and says nothing else about the day changing — the date is one
- * hover away in the tooltip, and a date on the axis would cost more room than
- * the change is worth. That is a decision rather than an oversight, which is
- * why it has a story.
+ * 23:00 to 00:00 and marks the day change no further — the date is one hover
+ * away in the tooltip. A decision rather than an oversight, hence the story.
  */
 export const AcrossMidnight: StoryObj<LayoutArgs> = {
   argTypes: layoutArgTypes,
@@ -551,6 +546,63 @@ export const AcrossMidnight: StoryObj<LayoutArgs> = {
             10,
             ONE_HOUR,
           )}
+          {...layoutProps(args)}
+        />
+      </Box>
+    );
+  },
+};
+
+/**
+ * A long axis on a narrow screen. Columns share whatever width there is, so
+ * without a floor a day of five-minute slots divides itself into slivers.
+ *
+ * `cellMinWidth` is that floor, `12px` by default, and the slider starts there:
+ * what loads is what a caller gets for free. Below it the grid scrolls sideways
+ * instead; drag the slider to `0` to remove the floor and get the slivers back.
+ * The row labels stay put, outside the scrolling area, so the scrollbar covers
+ * the tiles alone. Widen `frameWidth` and it goes away — the floor only bites
+ * while there is not enough room.
+ */
+export const HorizontalScroll: StoryObj<
+  LayoutArgs & { cellMinWidth: number; columns: number; frameWidth: string }
+> = {
+  argTypes: {
+    ...layoutArgTypes,
+    cellMinWidth: {
+      control: { type: 'range', min: 0, max: 64, step: 1 },
+      description:
+        "Smallest a cell may become, in px. Starts at the component's own default of 12; at 0 there is no floor, the grid always fits and never scrolls",
+    },
+    columns: {
+      control: { type: 'range', min: 12, max: 288, step: 12 },
+      description: 'Columns — one per five-minute slot',
+    },
+    frameWidth: {
+      control: 'text',
+      description: 'Width of the surrounding frame, to stand in for the screen',
+    },
+  },
+  args: {
+    ...layoutArgs,
+    cellMinWidth: 16,
+    columns: 144,
+    frameWidth: '48rem',
+    cellGap: 2,
+    labelEvery: 12,
+  },
+  render: (args) => {
+    const scale = useStatusScale();
+
+    return (
+      <Box width={args.frameWidth}>
+        <Heatmap
+          title="Monitoring services status"
+          legendTitle="Service status"
+          scale={scale}
+          cellMinWidth={`${args.cellMinWidth}px`}
+          rows={buildStatusRows(MONITORING_SERVICES, args.columns)}
+          columns={buildTimeSlots(HOUR_START, args.columns, FIVE_MINUTES)}
           {...layoutProps(args)}
         />
       </Box>

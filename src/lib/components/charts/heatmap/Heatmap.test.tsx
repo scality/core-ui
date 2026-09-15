@@ -81,7 +81,7 @@ describe('Heatmap', () => {
       expect(screen.queryByText('Service Status')).not.toBeInTheDocument();
       expect(screen.queryByLabelText('OK selected')).not.toBeInTheDocument();
       // the grid itself is untouched
-      expect(screen.getAllByRole('img')).toHaveLength(6);
+      expect(screen.getAllByRole('gridcell')).toHaveLength(6);
     });
 
     it('should read a ChartLegendWrapper the caller owns when given no colorSet', () => {
@@ -94,9 +94,9 @@ describe('Heatmap', () => {
         { wrapper: Wrapper },
       );
 
-      expect(screen.getByLabelText('Prometheus WARNING')).toHaveStyle(
-        'background-color: rgb(255, 165, 0)',
-      );
+      expect(
+        screen.getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING'),
+      ).toHaveStyle('background-color: rgb(255, 165, 0)');
     });
   });
 
@@ -106,19 +106,21 @@ describe('Heatmap', () => {
 
       expect(screen.getByText('Prometheus')).toBeInTheDocument();
       expect(screen.getByText('Grafana')).toBeInTheDocument();
-      expect(screen.getAllByRole('img')).toHaveLength(6);
-      expect(screen.getByLabelText('Prometheus WARNING')).toBeInTheDocument();
+      expect(screen.getAllByRole('gridcell')).toHaveLength(6);
+      expect(
+        screen.getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING'),
+      ).toBeInTheDocument();
     });
 
     it('should color a cell with the color the legend holds for its value', () => {
       renderStatusHeatmap();
 
-      expect(screen.getByLabelText('Prometheus WARNING')).toHaveStyle(
-        'background-color: rgb(255, 165, 0)',
-      );
-      expect(screen.getAllByLabelText('Grafana OK')[0]).toHaveStyle(
-        'background-color: rgb(0, 128, 0)',
-      );
+      expect(
+        screen.getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING'),
+      ).toHaveStyle('background-color: rgb(255, 165, 0)');
+      expect(
+        screen.getByLabelText('Grafana, 25 Aug 10:00 to 10:05, OK'),
+      ).toHaveStyle('background-color: rgb(0, 128, 0)');
     });
 
     it('should register its values, so a colorSet function is told what to color', () => {
@@ -134,12 +136,12 @@ describe('Heatmap', () => {
       // clicking a legend item selects it alone
       userEvent.click(screen.getByText('OK'));
 
-      expect(screen.getByLabelText('Prometheus WARNING')).toHaveStyle(
-        `opacity: ${DIMMED_CELL_OPACITY}`,
-      );
-      expect(screen.getAllByLabelText('Grafana OK')[0]).toHaveStyle(
-        'opacity: 1',
-      );
+      expect(
+        screen.getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING'),
+      ).toHaveStyle(`opacity: ${DIMMED_CELL_OPACITY}`);
+      expect(
+        screen.getByLabelText('Grafana, 25 Aug 10:00 to 10:05, OK'),
+      ).toHaveStyle('opacity: 1');
     });
   });
 
@@ -153,9 +155,11 @@ describe('Heatmap', () => {
         ],
       });
 
-      expect(screen.getAllByRole('img')).toHaveLength(3);
-      expect(screen.getAllByLabelText('Short OK')).toHaveLength(1);
-      expect(screen.getAllByLabelText('Holed OK')).toHaveLength(2);
+      // every slot is a cell of its row, painted or not, so the columns stay
+      // aligned for anyone stepping through them
+      expect(screen.getAllByRole('gridcell')).toHaveLength(6);
+      expect(screen.getAllByLabelText(/^Short, /)).toHaveLength(1);
+      expect(screen.getAllByLabelText(/^Holed, /)).toHaveLength(2);
     });
   });
 
@@ -166,7 +170,37 @@ describe('Heatmap', () => {
       });
 
       expect(
-        screen.getByLabelText('Prometheus status warning'),
+        screen.getByLabelText(
+          'Prometheus, 25 Aug 10:05 to 10:10, status warning',
+        ),
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe('assistive structure', () => {
+    it('should expose the grid as named rows of cells', () => {
+      renderStatusHeatmap();
+
+      expect(screen.getByRole('grid')).toBeInTheDocument();
+      // two rows of data, plus the x-axis
+      expect(screen.getAllByRole('row')).toHaveLength(3);
+      // the visible label column stands outside the grid, so the row carries
+      // the name rather than a screen reader hearing it from both
+      expect(
+        screen.getByRole('row', { name: 'Prometheus' }),
+      ).toBeInTheDocument();
+      expect(screen.getAllByRole('columnheader')).toHaveLength(columns.length);
+    });
+
+    it('should announce a cell with its row, its slot and its value', () => {
+      renderStatusHeatmap();
+
+      // the slot is the part a screen reader cannot get from anywhere else:
+      // without it the columns have to be counted to find out when this was
+      expect(
+        screen.getByRole('gridcell', {
+          name: 'Prometheus, 25 Aug 10:05 to 10:10, WARNING',
+        }),
       ).toBeInTheDocument();
     });
   });
@@ -175,7 +209,11 @@ describe('Heatmap', () => {
     it('should describe the cell on focus, so it is reachable from the keyboard', () => {
       renderStatusHeatmap();
 
-      act(() => screen.getByLabelText('Prometheus WARNING').focus());
+      act(() =>
+        screen
+          .getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING')
+          .focus(),
+      );
 
       const overlay = document.querySelector('.sc-tooltip-overlay');
       expect(overlay).not.toBeNull();
@@ -186,7 +224,11 @@ describe('Heatmap', () => {
     it('should name the whole slot, not the instant the column opens', () => {
       renderStatusHeatmap();
 
-      act(() => screen.getByLabelText('Prometheus WARNING').focus());
+      act(() =>
+        screen
+          .getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING')
+          .focus(),
+      );
 
       // the axis is five-minute slots, and the cell has to say so on its own
       expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
@@ -203,7 +245,11 @@ describe('Heatmap', () => {
         rows: [{ label: 'Prometheus', cells: ['OK', 'OK'] }],
       });
 
-      act(() => screen.getAllByLabelText('Prometheus OK')[0].focus());
+      act(() =>
+        screen
+          .getByLabelText('Prometheus, 31 Aug 23:00 to 01 Sep 00:00, OK')
+          .focus(),
+      );
 
       // without the date the slot would read "31 Aug 23:00 to 00:00"
       expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
@@ -220,7 +266,11 @@ describe('Heatmap', () => {
         rows: [{ label: 'Prometheus', cells: ['OK', 'OK'] }],
       });
 
-      act(() => screen.getAllByLabelText('Prometheus OK')[0].focus());
+      act(() =>
+        screen
+          .getByLabelText('Prometheus, 31 Aug 00:00 to 01 Sep 00:00, OK')
+          .focus(),
+      );
 
       // the end is midnight too, so only the date tells the two apart
       expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
@@ -234,7 +284,7 @@ describe('Heatmap', () => {
         rows: [{ label: 'Prometheus', cells: ['OK'] }],
       });
 
-      act(() => screen.getByLabelText('Prometheus OK').focus());
+      act(() => screen.getByLabelText('Prometheus, 25 Aug 10:00, OK').focus());
 
       const overlay = document.querySelector('.sc-tooltip-overlay');
       expect(overlay).toHaveTextContent('25 Aug 10:00');
@@ -247,7 +297,11 @@ describe('Heatmap', () => {
           `${row.label} at column ${columnIndex}`,
       });
 
-      act(() => screen.getByLabelText('Prometheus WARNING').focus());
+      act(() =>
+        screen
+          .getByLabelText('Prometheus, 25 Aug 10:05 to 10:10, WARNING')
+          .focus(),
+      );
 
       expect(document.querySelector('.sc-tooltip-overlay')).toHaveTextContent(
         'Prometheus at column 1',
