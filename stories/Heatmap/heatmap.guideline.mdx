@@ -65,6 +65,16 @@ more, up to the point where the grid stops being readable. Anything that lets a
 user change the window has to re-aggregate, and the answer on screen changes
 with it.
 
+How many slots fit is not that decision. Columns share the width available, so
+a long axis in a narrow frame would divide itself into slivers; `cellMinWidth`
+stops it, and past that floor the grid scrolls sideways rather than shrinking
+further. The row labels stay outside the scrolling area. Raise the floor to give
+each slot more room, but the reader then has to scroll to see the window they
+asked for, which is a worse way to lose the pattern than showing all of it
+smaller.
+
+<Canvas of={HeatmapStories.HorizontalScroll} sourceState="none" />
+
 ## Accessibility: colour is the only channel
 
 Colour carries the value on its own. No shape, no label and no position tells
