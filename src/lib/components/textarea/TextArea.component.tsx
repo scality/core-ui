@@ -85,7 +85,7 @@ const TextAreaContainer = styled.textarea.withConfig({
     const { border, textSecondary, backgroundLevel1, selectedActive } =
       props.theme;
     return css`
-      border-color: ${border};
+      border: ${spacing.r1} solid ${border};
       color: ${textSecondary};
       background: ${backgroundLevel1};
       &:focus {
