@@ -1,5 +1,5 @@
 import { flip, offset, shift, useFloating } from '@floating-ui/react';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
@@ -85,6 +85,11 @@ function Tooltip({
   ...rest
 }: Props) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const overlayId = useId();
+  // The overlay is conditionally rendered, so the description is only advertised
+  // while it is mounted -- a permanent aria-describedby would point at an id that
+  // is absent from the document most of the time.
+  const isOverlayShown = Boolean(isTooltipVisible && overlay);
 
   const { refs, floatingStyles } = useFloating({
     placement,
@@ -113,13 +118,19 @@ function Tooltip({
           }
         }}
       >
-        <div ref={refs.setReference}>{children}</div>
+        <div
+          ref={refs.setReference}
+          aria-describedby={isOverlayShown ? overlayId : undefined}
+        >
+          {children}
+        </div>
       </TooltipContainer>
-      {isTooltipVisible &&
-        overlay &&
+      {isOverlayShown &&
         createPortal(
           <TooltipOverLayContainer
             ref={refs.setFloating}
+            role="tooltip"
+            id={overlayId}
             className="sc-tooltip-overlay"
             style={{ ...floatingStyles, ...overlayStyle }}
           >
