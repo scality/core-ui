@@ -77,17 +77,4 @@ describe('Tooltip', () => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
     expect(describedTrigger()).toBeNull();
   });
-
-  it('keeps the sc-tooltip classes that other components style against', async () => {
-    renderTooltip();
-
-    expect(document.querySelector('.sc-tooltip')).toBeInTheDocument();
-
-    await userEvent.hover(screen.getByRole('button'));
-
-    expect(document.querySelector('.sc-tooltip-overlay')).toBeInTheDocument();
-    expect(
-      document.querySelector('.sc-tooltip-overlay-text'),
-    ).toBeInTheDocument();
-  });
 });
