@@ -111,6 +111,444 @@ export const getTicks = (
   return ticks;
 };
 
+/* -------------------------------------------------------------------------- */
+/*                             logarithmic Y axis                             */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Smallest strictly positive value in a chart dataset, or `null` when there is
+ * none.
+ *
+ * A log axis is bounded from below by the data, not by zero, so it needs this
+ * where a linear axis only ever needs the maximum.
+ *
+ * @param data - Recharts rows @param excludeKey - Row key that is not a value
+ * (e.g. 'category', 'timestamp')
+ */
+export const getMinPositiveValue = (
+  // Read-only and shape-agnostic: it is called on both charts' row types, which
+  // differ in whether a value may be null.
+  data: readonly Readonly<Record<string, unknown>>[],
+  excludeKey: string,
+): number | null => {
+  let min: number | null = null;
+  data.forEach((row) => {
+    Object.entries(row).forEach(([key, value]) => {
+      if (key === excludeKey) return;
+      const numberValue = typeof value === 'string' ? Number(value) : value;
+      if (typeof numberValue !== 'number' || !Number.isFinite(numberValue)) {
+        return;
+      }
+      if (numberValue > 0 && (min === null || numberValue < min)) {
+        min = numberValue;
+      }
+    });
+  });
+  return min;
+};
+
+/**
+ * A logarithmic Y axis: its domain, its ticks, and where a measured zero goes.
+ *
+ * Three things make a log axis unlike the linear one built by
+ * `getRoundReferenceValue` + `getTicks`:
+ *
+ * - **It cannot start at zero.** Zero has no logarithm, so the scale is
+ *   bounded by the decades that enclose the data — values from 3 to 400 give
+ *   a 1..1000 scale — and `allowDataOverflow` clips anything below rather than
+ *   letting the axis chase it.
+ * - **Its ticks are the decades.** Evenly spaced linear ticks on a log axis
+ *   crowd into the top of the plot and read as a broken chart. When the data
+ *   spans more decades than `maxTicks`, whole decades are skipped at a
+ *   regular stride — never subdivided.
+ * - **A measured zero needs somewhere to go.** With `withZeroBand`, the axis
+ *   reserves one slot below its first decade and returns it as `zeroValue`.
+ *   Zeros are drawn there and the tick is labelled `0`, so "the metric read
+ *   zero" stops being indistinguishable from "no data" — which is what
+ *   dropping them made it. The slot is a reserved position, not a decade:
+ *   nothing is ever plotted between it and the first decade.
+ *
+ * @param minPositive - Smallest positive value, from `getMinPositiveValue`
+ * @param max - Largest value in the dataset
+ * @param options.maxTicks - Upper bound on the number of decade ticks
+ * @param options.withZeroBand - Reserve a slot for measured zeros. Pass it only
+ *   when the data actually holds one, or the axis spends height on nothing.
+ */
+export const getLogAxis = (
+  minPositive: number | null,
+  max: number,
+  options: { maxTicks?: number; withZeroBand?: boolean } = {},
+): {
+  domain: [number, number];
+  ticks: number[];
+  /** Axis position standing in for a measured zero, or `null` when unused. */
+  zeroValue: number | null;
+} => {
+  const { maxTicks = 6, withZeroBand = false } = options;
+
+  const withBand = (decades: number[]) => {
+    const firstDecade = decades[0];
+    const top = decades[decades.length - 1];
+    const stride = Math.ceil(decades.length / maxTicks);
+    const decadeTicks =
+      stride <= 1
+        ? decades
+        : // Keep both ends: the axis must state its own bounds even when
+          // decades are skipped.
+          [
+            ...decades.filter((_, index) => index % stride === 0),
+            top,
+          ].filter((value, index, all) => all.indexOf(value) === index);
+
+    if (!withZeroBand) {
+      return {
+        domain: [firstDecade, top] as [number, number],
+        ticks: decadeTicks,
+        zeroValue: null,
+      };
+    }
+
+    // One decade's worth of height, below the scale, standing in for zero.
+    const zeroValue = firstDecade / 10;
+    return {
+      domain: [zeroValue, top] as [number, number],
+      ticks: [zeroValue, ...decadeTicks],
+      zeroValue,
+    };
+  };
+
+  // Nothing positive to plot: a single empty decade, so the axis still draws.
+  if (
+    minPositive === null ||
+    minPositive <= 0 ||
+    !Number.isFinite(max) ||
+    max <= 0
+  ) {
+    return withBand([1, 10]);
+  }
+
+  const lowExponent = Math.floor(Math.log10(minPositive));
+  // A max sitting exactly on a decade is already its own bound; anything else
+  // rounds up to the next.
+  const highExponent = Math.ceil(Math.log10(max));
+  // Guarantee at least one decade of height even when every value shares a
+  // magnitude.
+  const topExponent =
+    highExponent > lowExponent ? highExponent : lowExponent + 1;
+
+  return withBand(
+    Array.from(
+      { length: topExponent - lowExponent + 1 },
+      (_, index) => 10 ** (lowExponent + index),
+    ),
+  );
+};
+
+/* --------------------------------- SYMLOG ---------------------------------- */
+
+/** The decade at or below a positive value. */
+const decadeFloor = (value: number) => 10 ** Math.floor(Math.log10(value));
+/** The decade at or above a positive value. */
+const decadeCeil = (value: number) => 10 ** Math.ceil(Math.log10(value));
+
+/** How far apart two tick labels have to be, as a share of the axis height. */
+const MIN_TICK_GAP = 0.07;
+
+/** Thins decades down to `max`, keeping both ends: an axis states its bounds. */
+const strideDecades = (decades: number[], max: number): number[] => {
+  if (decades.length <= max) return decades;
+  const stride = Math.ceil(decades.length / max);
+  const kept = decades.filter((_, index) => index % stride === 0);
+  const last = decades[decades.length - 1];
+  return kept.includes(last) ? kept : [...kept, last];
+};
+
+/**
+ * Drops ticks the axis cannot keep apart, walking outwards from zero. Near zero
+ * symlog is linear, so the first decade lands a few pixels from the zero tick
+ * and the two labels overlap; `minGap` is a share of the axis, not a count.
+ */
+const separateTicks = (
+  side: number[],
+  position: (value: number) => number,
+  minGap: number,
+): number[] => {
+  if (side.length === 0) return side;
+  const furthest = side[side.length - 1];
+  const kept: number[] = [];
+  let last = position(0);
+
+  side.forEach((tick) => {
+    if (Math.abs(position(tick) - last) < minGap) return;
+    kept.push(tick);
+    last = position(tick);
+  });
+
+  // The axis states its own bound whatever the spacing, so the furthest tick
+  // goes back in — displacing the neighbour it would have collided with.
+  if (kept[kept.length - 1] !== furthest) {
+    if (
+      kept.length > 0 &&
+      Math.abs(position(furthest) - position(kept[kept.length - 1])) < minGap
+    ) {
+      kept.pop();
+    }
+    kept.push(furthest);
+  }
+  return kept;
+};
+
+/**
+ * Zero, then the decades each side of the domain reaches. The run starts at
+ * `constant`: below it the scale is linear and a decade would sit on top of zero.
+ */
+const symlogTicks = (
+  domain: readonly [number, number],
+  constant: number,
+  maxTicks: number,
+): number[] => {
+  const [bottom, top] = domain;
+  const decadesUpTo = (bound: number) => {
+    const magnitude = Math.abs(bound);
+    if (magnitude < constant) return [];
+    const decades: number[] = [];
+    for (let decade = constant; decade <= magnitude * 1.000001; decade *= 10) {
+      decades.push(decade);
+    }
+    return decades;
+  };
+
+  const below = decadesUpTo(bottom);
+  const above = decadesUpTo(top);
+  // Two sides share the height a one-sided axis gets to itself.
+  const perSide = below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
+
+  const scale = createSymlogScale(constant, [bottom, top], [0, 1]);
+  const position = (value: number) => scale(value) ?? 0;
+
+  return [
+    ...separateTicks(strideDecades(below, perSide), position, MIN_TICK_GAP)
+      .map((decade) => -decade)
+      .reverse(),
+    0,
+    ...separateTicks(strideDecades(above, perSide), position, MIN_TICK_GAP),
+  ];
+};
+
+/**
+ * A symlog scale — linear within `constant` of zero, logarithmic beyond — in the
+ * shape Recharts accepts as a custom `scale`. Zero and negatives get positions
+ * of their own, so nothing needs a reserved band.
+ *
+ * Written out rather than taken from d3 because Recharts only accepts the
+ * *string* `'symlog'`, which pins `constant` to 1 and flattens any data below it.
+ */
+export type SymlogScale = {
+  (input: number): number | undefined;
+  domain: (next?: readonly number[]) => number[] & SymlogScale;
+  range: (next?: readonly number[]) => number[] & SymlogScale;
+  copy: () => SymlogScale;
+  ticks: (count?: number) => number[];
+};
+
+export const createSymlogScale = (
+  constant: number,
+  initialDomain: readonly number[] = [0, 1],
+  initialRange: readonly number[] = [0, 1],
+): SymlogScale => {
+  let domain = [...initialDomain];
+  let range = [...initialRange];
+
+  const compress = (value: number) =>
+    Math.sign(value) * Math.log1p(Math.abs(value) / constant);
+
+  const scale = ((input: number) => {
+    if (typeof input !== 'number' || !Number.isFinite(input)) return undefined;
+    const from = compress(domain[0]);
+    const to = compress(domain[domain.length - 1]);
+    const span = to - from;
+    const ratio = span === 0 ? 0 : (compress(input) - from) / span;
+    return range[0] + ratio * (range[range.length - 1] - range[0]);
+  }) as SymlogScale;
+
+  // d3 shape: setters mutate and chain, no argument reads.
+  scale.domain = ((next?: readonly number[]) => {
+    if (next === undefined) return domain;
+    domain = [...next];
+    return scale;
+  }) as SymlogScale['domain'];
+
+  scale.range = ((next?: readonly number[]) => {
+    if (next === undefined) return range;
+    range = [...next];
+    return scale;
+  }) as SymlogScale['range'];
+
+  scale.copy = () => createSymlogScale(constant, domain, range);
+
+  scale.ticks = () =>
+    symlogTicks([domain[0], domain[domain.length - 1]], constant, 6);
+
+  return scale;
+};
+
+/**
+ * A symlog axis bounded by the decades enclosing the data.
+ *
+ * @param dataMin - The most negative value, or 0 when none is
+ * @param dataMax - The largest value, unbuffered: the decade rounding is the
+ *   headroom, and more on top can cost an empty decade
+ * @param minAbsNonZero - Smallest non-zero magnitude. Sets `constant`, so the
+ *   data lands in the log stretch instead of the flat middle
+ *
+ * Each side follows its own data rather than mirroring, even on a symmetrical
+ * chart: mirroring spends the quiet direction's half on empty decades, which is
+ * the readability a symlog axis was chosen for.
+ */
+export const getSymlogAxis = (
+  dataMin: number,
+  dataMax: number,
+  minAbsNonZero: number | null,
+  options: { maxTicks?: number } = {},
+): {
+  constant: number;
+  domain: [number, number];
+  ticks: number[];
+  scale: SymlogScale;
+} => {
+  const { maxTicks = 6 } = options;
+
+  const constant =
+    minAbsNonZero === null || !(minAbsNonZero > 0)
+      ? 1
+      : decadeFloor(minAbsNonZero);
+
+  const top = dataMax > 0 ? decadeCeil(dataMax) : 0;
+  const below = dataMin < 0 ? decadeCeil(Math.abs(dataMin)) : 0;
+  // `> 0` rather than a bare negation: -0 is an invalid axis bound.
+  const bottom = below > 0 ? -below : 0;
+  // Nothing to plot on either side: one empty decade, so the axis still draws.
+  const domain: [number, number] =
+    top === 0 && bottom === 0 ? [0, constant * 10] : [bottom, top];
+
+  return {
+    constant,
+    domain,
+    ticks: symlogTicks(domain, constant, maxTicks),
+    scale: createSymlogScale(constant, domain),
+  };
+};
+
+/**
+ * Formats one tick of a logarithmic axis.
+ *
+ * Unlike `formatTickValue`, the number of decimals comes from the tick's own
+ * magnitude rather than from the axis maximum: a 0.01..1000 axis has to render
+ * `0.01` and `1k` on the same axis, and a single decimal count cannot serve
+ * both.
+ *
+ * @param zeroValue - The reserved zero band from `getLogAxis`. It is labelled
+ *   `0`, not by the position it happens to occupy.
+ */
+export const formatLogTickValue = (
+  value: number,
+  zeroValue: number | null = null,
+): string => {
+  if (zeroValue !== null && value === zeroValue) return '0';
+  if (!Number.isFinite(value) || value <= 0) return '';
+  return formatDecadeTick(value);
+};
+
+/** A decade's label: `0.001` keeps three decimals, `100` keeps none. */
+const formatDecadeTick = (value: number): string => {
+  const exponent = Math.log10(value);
+  return formatISONumber(value, {
+    decimals: exponent < 0 ? Math.ceil(-exponent) : 0,
+    fixedDecimals: exponent < 0,
+    compact: value >= 10000,
+  });
+};
+
+/** A symlog tick: unlike a log axis it labels zero and negatives rather than
+ * blanking them. */
+export const formatSymlogTickValue = (value: number): string => {
+  if (!Number.isFinite(value)) return '';
+  if (value === 0) return '0';
+  return value < 0 ? `-${formatDecadeTick(-value)}` : formatDecadeTick(value);
+};
+
+/**
+ * Whether any value in the data is a measured zero.
+ *
+ * `getLogAxis` only reserves a zero band when asked, and asking costs a
+ * decade's worth of plot height — so ask only when there is a zero to show.
+ *
+ * @param data - Recharts rows
+ * @param excludeKey - Row key that is not a value (e.g. 'category', 'timestamp')
+ */
+export const hasZeroValue = (
+  data: readonly Readonly<Record<string, unknown>>[],
+  excludeKey: string,
+): boolean =>
+  data.some((row) =>
+    Object.entries(row).some(([key, value]) => {
+      if (key === excludeKey) return false;
+      const numberValue = typeof value === 'string' ? Number(value) : value;
+      return numberValue === 0;
+    }),
+  );
+
+/**
+ * Moves the values a log axis cannot plot to where the axis can show them.
+ *
+ * `log(0)` is minus infinity, so a zero left in the data draws a bar or a line
+ * segment reaching off the bottom of the plot. Given a `zeroValue` from
+ * `getLogAxis`, a zero is moved to that reserved band instead, where the axis
+ * labels it `0` — so a measured zero stays visible, and stays distinguishable
+ * from a missing sample. Dropping it could not do either.
+ *
+ * Negatives have no band and no logarithm, so they are dropped. A series that
+ * goes negative does not belong on a log axis at all.
+ *
+ * With no `zeroValue`, zeros are dropped too — the fallback for a caller that
+ * did not reserve a band.
+ *
+ * @param data - Recharts rows
+ * @param excludeKey - Row key that is not a value (e.g. 'category', 'timestamp')
+ * @param zeroValue - The reserved zero band, or `null` to drop zeros
+ */
+export const placeNonPositiveValues = <T extends Record<string, unknown>>(
+  data: readonly T[],
+  excludeKey: string,
+  zeroValue: number | null,
+): T[] =>
+  data.map((row) => {
+    const placed: Record<string, unknown> = { ...row };
+    Object.entries(row).forEach(([key, value]) => {
+      if (key === excludeKey) return;
+      const numberValue = typeof value === 'string' ? Number(value) : value;
+      if (typeof numberValue !== 'number') return;
+      if (numberValue === 0) {
+        placed[key] = zeroValue;
+      } else if (!(numberValue > 0)) {
+        placed[key] = null;
+      }
+    });
+    return placed as T;
+  });
+
+/**
+ * Turns a plotted value back into the value the caller gave, for display.
+ *
+ * A zero sits at its reserved band in the Recharts data so the axis can draw
+ * it; a tooltip must still say `0`. No real value can collide with the band —
+ * `getLogAxis` puts it below the smallest positive value in the data.
+ */
+export const readLogPlottedValue = (
+  value: number,
+  zeroValue: number | null,
+): number => (zeroValue !== null && value === zeroValue ? 0 : value);
+
 /**
  * Return the unit label based on the current dataset, and the valueBase which is used to convert the data
  * Used by LineTimeSerieChart

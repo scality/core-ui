@@ -153,6 +153,117 @@ describe('Barchart', () => {
     });
   });
 
+  describe('Logarithmic Y axis', () => {
+    const spanningBars = [
+      {
+        label: 'Success',
+        data: [
+          ['category1', 2],
+          ['category2', 300],
+          ['category3', 0],
+        ],
+      },
+    ] as const;
+
+    /**
+     * The Y-axis tick labels, whitespace stripped: formatISONumber groups
+     * thousands with a non-breaking space, which is not what a test wants to
+     * pin down.
+     */
+    const yAxisTicks = (container: HTMLElement) =>
+      Array.from(
+        container.querySelectorAll('.recharts-yAxis-tick-labels text'),
+      ).map((tick) => (tick.textContent ?? '').replace(/\s/g, ''));
+
+    const renderBarchart = (props: {
+      yAxisScale?: 'linear' | 'log';
+      stacked?: boolean;
+    }) => {
+      const { Wrapper } = getWrapper();
+      return render(
+        <Wrapper>
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={spanningBars}
+              {...props}
+            />
+          </ChartLegendWrapper>
+        </Wrapper>,
+      );
+    };
+
+    it('labels the axis with the decades enclosing the data, plus a zero', () => {
+      const { container } = renderBarchart({ yAxisScale: 'log' });
+
+      // 2..300 gives a 1..1000 scale — a log axis cannot start at zero — and the
+      // dataset holds a zero, so the axis reserves a slot below it for one.
+      expect(yAxisTicks(container)).toEqual(['0', '1', '10', '100', '1000']);
+    });
+
+    it('reserves no zero slot when the data has none', () => {
+      const { Wrapper } = getWrapper();
+      const { container } = render(
+        <Wrapper>
+          <ChartLegendWrapper colorSet={testColorSet}>
+            <Barchart
+              title="Test Title"
+              type={{ type: 'category' }}
+              bars={[
+                {
+                  label: 'Success',
+                  data: [
+                    ['category1', 2],
+                    ['category2', 300],
+                  ],
+                },
+              ]}
+              yAxisScale="log"
+            />
+          </ChartLegendWrapper>
+        </Wrapper>,
+      );
+
+      // An empty band would spend a decade's worth of plot height on nothing.
+      expect(yAxisTicks(container)).toEqual(['1', '10', '100', '1000']);
+    });
+
+    it('keeps the linear ticks when no scale is asked for', () => {
+      const { container } = renderBarchart({});
+
+      // A linear axis starts at zero and tops out at the data, not at a decade.
+      expect(yAxisTicks(container)[0]).toBe('0');
+      expect(yAxisTicks(container)).not.toContain('1000');
+    });
+
+    it('draws a measured zero at the reserved slot rather than hiding it', () => {
+      const { container } = renderBarchart({ yAxisScale: 'log' });
+
+      // category3 is 0. It gets a rectangle like the other two — minPointSize
+      // gives it a visible stub at the `0` tick — so a measured zero stays
+      // distinguishable from an absent bar, which draws nothing at all.
+      expect(screen.getByText('category3')).toBeInTheDocument();
+      const heights = Array.from(
+        container.querySelectorAll('.recharts-bar-rectangle path'),
+      )
+        .map((rect) => Number(rect.getAttribute('height')))
+        .sort((a, b) => a - b);
+
+      expect(heights).toHaveLength(3);
+      // The zero is the shortest bar, at the minPointSize floor.
+      expect(heights[0]).toBe(3);
+      expect(heights[1]).toBeGreaterThan(3);
+    });
+
+    it('falls back to a linear axis when stacked, whose segments log would misplace', () => {
+      const { container } = renderBarchart({ yAxisScale: 'log', stacked: true });
+
+      expect(yAxisTicks(container)[0]).toBe('0');
+      expect(yAxisTicks(container)).not.toContain('1000');
+    });
+  });
+
   describe('Time data', () => {
     it('should render the chart with correct starting days even if the data is missing', async () => {
       const { Wrapper } = getWrapper();

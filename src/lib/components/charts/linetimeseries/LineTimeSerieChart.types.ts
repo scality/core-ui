@@ -18,6 +18,24 @@ export type Serie = {
 export type NonSymmetricalChartSerie = {
   yAxisType?: 'default' | 'percentage';
   series: Serie[] | undefined;
+  /**
+   * Y-axis scale, for a metric spanning orders of magnitude: on a linear axis
+   * the quiet periods flatten onto the baseline and only the spikes are
+   * readable. Display only — no value is rescaled, and the tooltip, legend and
+   * unit scaling keep the numbers you passed in.
+   *
+   * `'log'` gives each decade the same height and ticks the decades. Zero has
+   * no logarithm, so it reserves the slot below the first decade, labels it
+   * `0`, and runs zeros there — a measured zero stays distinguishable from a
+   * missing sample, which a gap would not. Negatives are dropped.
+   *
+   * `'symlog'` is linear near zero and logarithmic beyond, so it plots both
+   * signs and zero itself with no reserved slot. Its price: distances read as
+   * differences near zero and as ratios further out.
+   *
+   * @default 'linear'
+   */
+  yAxisScale?: 'linear' | 'log' | 'symlog';
 };
 
 /**
@@ -26,6 +44,18 @@ export type NonSymmetricalChartSerie = {
  */
 export type SymmetricalChartSerie = {
   yAxisType: 'symmetrical';
+  /**
+   * Y-axis scale. `'log'` is not available here: half of a symmetrical axis is
+   * negative by construction, and negatives have no logarithm.
+   *
+   * `'symlog'` is linear within a window around zero and logarithmic outside
+   * it, so both halves compress and zero keeps the centre line. Worth it when
+   * the two directions span orders of magnitude — the usual shape of an in/out
+   * pair, where a linear axis sized by the busy side flattens the quiet one.
+   *
+   * @default 'linear'
+   */
+  yAxisScale?: 'linear' | 'symlog';
   series:
     | {
         above: Serie[] | undefined;
@@ -131,6 +161,15 @@ export type LineTimeSerieChartTooltipProps = {
     duration?: number,
   ) => React.ReactNode;
   isSymmetrical?: boolean;
+  /**
+   * Where a measured zero was drawn, as a Y-axis value.
+   *
+   * A log axis has no position for `0`, so it reserves the decade below its
+   * lowest and plots zeros there. This is that coordinate, so a tooltip can
+   * report the `0` that was measured rather than where it was parked. `null`
+   * when no slot was reserved.
+   */
+  logZeroValue?: number | null;
   belowSeriesLabels?: Set<string>;
   chartContainerRef: React.RefObject<HTMLDivElement>;
   /** The unique ID of this chart instance */

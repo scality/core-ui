@@ -21,6 +21,7 @@ export const BarchartTooltip = <T extends BarchartBars>({
   unitLabel,
   unitRange,
   valueBase = 1,
+  logZeroValue = null,
   chartContainerRef,
 }: {
   type: TimeType | CategoryType;
@@ -31,6 +32,15 @@ export const BarchartTooltip = <T extends BarchartBars>({
   unitLabel?: string;
   unitRange?: UnitRange;
   valueBase?: number;
+  /**
+   * Where a measured zero was drawn, as a Y-axis value.
+   *
+   * A log axis has no position for `0`, so it reserves the decade below its
+   * lowest and plots zeros there. This is that coordinate, so a tooltip can
+   * report the `0` that was measured rather than where it was parked. `null`
+   * when no slot was reserved.
+   */
+  logZeroValue?: number | null;
   chartContainerRef: React.RefObject<HTMLDivElement>;
 }) => {
   const { active, coordinate } = tooltipProps;
@@ -39,7 +49,7 @@ export const BarchartTooltip = <T extends BarchartBars>({
     return null;
   }
 
-  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue);
+  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue, logZeroValue);
 
   const duration =
     type.type === 'time'

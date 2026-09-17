@@ -104,7 +104,8 @@ type FormatISONumberOptions = {
  * - Space as thousands separator
  * - Dot as decimal separator
  * - Optional compact notation (10K, 1M, etc.)
- * - Very small values (< 0.001): scientific notation
+ * - Fractional values: enough decimals to keep two significant digits
+ * - Very small values (< 0.001): scientific notation, `decimals` mantissa digits
  */
 export const formatISONumber = (
   value: number,
@@ -117,16 +118,33 @@ export const formatISONumber = (
   const absValue = Math.abs(value);
 
   if (absValue < 0.001) {
-    return value.toExponential();
+    // Bounded: float noise lands here often, and an unbounded mantissa prints
+    // all seventeen digits of `0.1 + 0.2 - 0.3`.
+    return value.toExponential(decimals);
   }
+
+  // Below 1, `decimals` alone swallows the value: 0.002 renders as "0.00",
+  // a zero the caller never measured. Raised to keep two significant digits,
+  // never lowered, so values from 0.01 up are formatted as before.
+  const maximumFractionDigits =
+    absValue < 1
+      ? Math.max(decimals, Math.ceil(-Math.log10(absValue)) + 1)
+      : decimals;
+
+  // Rounded here, not by Intl, whose rounding mode has not always been
+  // consistent across engines — and it clears float noise on the way
+  // (`1.005 - 1` displays as 0.005). Below 1 only: toFixed goes exponential
+  // on large values.
+  const rounded =
+    absValue < 1 ? Number(value.toFixed(maximumFractionDigits)) : value;
 
   // ISO format: space as thousands separator, dot as decimal separator
   // With optional compact notation (10K, 1M, etc.)
   return new Intl.NumberFormat('fr-FR', {
     minimumFractionDigits: fixedDecimals ? decimals : undefined,
-    maximumFractionDigits: decimals,
+    maximumFractionDigits,
     notation: compact ? 'compact' : 'standard',
   })
-    .format(value)
+    .format(rounded)
     .replace(',', '.');
 };

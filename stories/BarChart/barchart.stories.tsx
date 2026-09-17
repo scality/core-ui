@@ -1194,3 +1194,199 @@ export const StackedHistogram: Story = {
     );
   },
 };
+
+/**
+ * The same dataset on both scales.
+ *
+ * Values spanning four orders of magnitude are the case a linear axis cannot serve: the axis is
+ * sized by the largest bar, so everything below one thousandth of it lands on the baseline and
+ * reads as zero. A log axis gives every decade the same height, so "2" and "40 000" are both
+ * legible — at the cost of no longer being able to compare bars by eye, which is the trade-off to
+ * make consciously.
+ *
+ * Note that the scale is a display choice only: no value is rescaled, and the tooltips still read
+ * 2, 45, 1200 and 40000.
+ *
+ * `category5` is 0. Zero has no logarithm, so the axis reserves a slot below its first decade,
+ * labels it `0`, and draws the bar there as a stub — visible, and distinct from an absent bar,
+ * which draws nothing at all. The tooltip still reads 0.
+ */
+export const LogarithmicScale: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const spanningData = [
+      {
+        label: 'Requests',
+        data: [
+          ['category1', 2],
+          ['category2', 45],
+          ['category3', 1200],
+          ['category4', 40000],
+          ['category5', 0],
+        ],
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper colorSet={{ Requests: theme.statusHealthy }}>
+          <Stack direction="vertical" gap="r24">
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                Linear — only the tallest bar is readable
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={spanningData}
+                title="Requests per endpoint"
+                height={200}
+              />
+            </Stack>
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                Logarithmic — one decade per step; category5 (0) sits at the
+                reserved 0
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={spanningData}
+                title="Requests per endpoint"
+                height={200}
+                yAxisScale="log"
+              />
+            </Stack>
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
+/**
+ * A log axis and a stack do not combine, so `yAxisScale="log"` is ignored here and the axis stays
+ * linear.
+ *
+ * Stacking places each segment at a running total, so on a log axis a segment's height would be
+ * `log(cumulative) - log(previous cumulative)` — unrelated to the value it represents. The chart
+ * would still draw, and it would be wrong. Compare the two: the ticks are identical.
+ */
+export const LogarithmicScaleIgnoredWhenStacked: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const stackedData = [
+      {
+        label: 'Test 1',
+        data: [
+          ['category1', 5],
+          ['category2', 500],
+        ],
+      },
+      {
+        label: 'Test 2',
+        data: [
+          ['category1', 3000],
+          ['category2', 40],
+        ],
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper
+          colorSet={{
+            'Test 1': theme.statusHealthy,
+            'Test 2': theme.statusWarning,
+          }}
+        >
+          <Stack direction="vertical" gap="r24">
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                stacked with yAxisScale="log" — falls back to linear
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={stackedData}
+                title="Stacked"
+                height={200}
+                stacked
+                yAxisScale="log"
+              />
+            </Stack>
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                stacked with no scale asked for
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={stackedData}
+                title="Stacked"
+                height={200}
+                stacked
+              />
+            </Stack>
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
+/**
+ * The scale as a control, for poking at it against your own numbers.
+ *
+ * `stacked` is here on purpose: turn it on and the axis snaps back to linear, because a stack
+ * places each segment at a cumulative sum and its height would stop matching its value.
+ */
+export const LogarithmicScalePlayground: StoryObj<{
+  yAxisScale: 'linear' | 'log';
+  stacked: boolean;
+  height: number;
+  spread: number;
+}> = {
+  argTypes: {
+    yAxisScale: { control: { type: 'radio' }, options: ['linear', 'log'] },
+    stacked: {
+      control: 'boolean',
+      description: 'Forces the axis back to linear — a log stack misreads',
+    },
+    height: { control: { type: 'range', min: 120, max: 480, step: 20 } },
+    spread: {
+      control: { type: 'range', min: 1, max: 6, step: 1 },
+      description: 'Orders of magnitude between the smallest and largest bar',
+    },
+  },
+  args: { yAxisScale: 'log', stacked: false, height: 240, spread: 4 },
+  render: (args) => {
+    const theme = useTheme() as CoreUITheme;
+    // One bar per decade, so the spread control is exactly what it says.
+    const bars = [
+      {
+        label: 'Requests',
+        data: Array.from(
+          { length: args.spread + 1 },
+          (_, index) => [`1e${index}`, 10 ** index * 2] as [string, number],
+        ),
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper colorSet={{ Requests: theme.statusHealthy }}>
+          <Stack direction="vertical" gap="r16">
+            <Barchart
+              type={{ type: 'category' }}
+              bars={bars}
+              title="Requests per endpoint"
+              height={args.height}
+              stacked={args.stacked}
+              yAxisScale={args.yAxisScale}
+            />
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
   Area,
   CartesianGrid,
@@ -13,7 +13,16 @@ import {
 import styled, { useTheme } from 'styled-components';
 import { fontSize } from '../../../style/theme';
 import { ChartHeader, StyledResponsiveContainer } from '../common/SharedComponents';
-import { formatTickValue, getTicks } from '../common/chartUtils';
+import {
+  formatLogTickValue,
+  formatSymlogTickValue,
+  formatTickValue,
+  getLogAxis,
+  getSymlogAxis,
+  getTicks,
+  hasZeroValue,
+  placeNonPositiveValues,
+} from '../common/chartUtils';
 import { formatXAxisLabel } from './LineTimeSerieChart.utils';
 import { LineChartProps, CHART_PRESETS } from './LineTimeSerieChart.types';
 import { LineTimeSerieChartTooltip } from './LineTimeSerieChartTooltip';
@@ -53,6 +62,7 @@ export function LineTimeSerieChart({
   unitRange,
   isLoading = false,
   yAxisType = 'default',
+  yAxisScale = 'linear',
   yAxisTitle,
   helpText,
   rightTitle,
@@ -79,6 +89,10 @@ export function LineTimeSerieChart({
     rechartsData,
     topDomain,
     topValue,
+    minPositiveValue,
+    minAbsValue,
+    minValue,
+    maxValue,
     unitLabel,
     valueBase,
     xAxisTicks,
@@ -93,6 +107,44 @@ export function LineTimeSerieChart({
     unitRange,
   });
 
+  // The type keeps 'log' off symmetrical charts; the guard keeps a plain JS
+  // caller from getting a half-drawn axis out of one.
+  const isLogScale = yAxisScale === 'log' && yAxisType !== 'symmetrical';
+
+  const logAxis = useMemo(
+    () =>
+      isLogScale
+        ? getLogAxis(minPositiveValue, topDomain, {
+            // Only spend a band when there is a zero to put in it.
+            withZeroBand: hasZeroValue(rechartsData, 'timestamp'),
+          })
+        : null,
+    [isLogScale, minPositiveValue, topDomain, rechartsData],
+  );
+
+  // Symlog needs no guard against a symmetrical axis: plotting both signs is
+  // the reason it exists.
+  const symlogAxis = useMemo(
+    () =>
+      yAxisScale === 'symlog'
+        ? getSymlogAxis(minValue, maxValue, minAbsValue)
+        : null,
+    [yAxisScale, minValue, maxValue, minAbsValue],
+  );
+
+  // A zero sample would draw the line towards minus infinity, so it moves to the
+  // axis's zero band, where the tick reads `0`. Dropping it instead would leave
+  // the same gap `addMissingDataPoint` leaves for a missing sample, and a
+  // measured zero is not missing data. A symlog axis needs none of this: zero
+  // and negatives have positions of their own on it.
+  const chartData = useMemo(
+    () =>
+      logAxis
+        ? placeNonPositiveValues(rechartsData, 'timestamp', logAxis.zeroValue)
+        : rechartsData,
+    [logAxis, rechartsData],
+  );
+
   // Format X-axis labels based on duration
   const formatXAxisLabelCallback = useCallback(
     (timestamp: number) => formatXAxisLabel(timestamp, duration),
@@ -104,6 +156,28 @@ export function LineTimeSerieChart({
     (value: number) => formatTickValue(value, topValue),
     [topValue],
   );
+
+  // `YAxis` is a `React.memo` comparing these by identity, so a value built
+  // inline re-renders the axis every time this component renders.
+  const yAxisTickFormatter = useMemo(() => {
+    if (logAxis) {
+      return (value: number) => formatLogTickValue(value, logAxis.zeroValue);
+    }
+    if (symlogAxis) return formatSymlogTickValue;
+    return tickFormatter;
+  }, [logAxis, symlogAxis, tickFormatter]);
+
+  const yAxisTicks = useMemo(() => {
+    if (logAxis) return logAxis.ticks;
+    if (symlogAxis) return symlogAxis.ticks;
+    return getTicks(topValue, yAxisType === 'symmetrical');
+  }, [logAxis, symlogAxis, topValue, yAxisType]);
+
+  const yAxisDomain = useMemo((): [number, number] => {
+    if (logAxis) return logAxis.domain;
+    if (symlogAxis) return symlogAxis.domain;
+    return yAxisType === 'symmetrical' ? [-topDomain, topDomain] : [0, topDomain];
+  }, [logAxis, symlogAxis, topDomain, yAxisType]);
 
   return (
     <LineTemporalChartWrapper>
@@ -119,7 +193,7 @@ export function LineTimeSerieChart({
       <StyledResponsiveContainer width="100%" height={height}>
         <ComposedChart
           ref={chartRef}
-          data={rechartsData}
+          data={chartData}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           aria-label={`Time series chart for ${title}`}
           syncId={syncId}
@@ -173,11 +247,8 @@ export function LineTimeSerieChart({
                 fontSize: fontSize.smaller,
               },
             }}
-            domain={
-              yAxisType === 'symmetrical'
-                ? [-topDomain, topDomain]
-                : [0, topDomain]
-            }
+            scale={logAxis ? 'log' : (symlogAxis?.scale ?? 'auto')}
+            domain={yAxisDomain}
             allowDataOverflow={true}
             axisLine={resolvedNoYAxisLine ? false : { stroke: theme.border }}
             tickLine={resolvedNoTickLine ? false : { stroke: theme.border }}
@@ -185,8 +256,8 @@ export function LineTimeSerieChart({
               fill: theme.textSecondary,
               fontSize: fontSize.smaller,
             }}
-            tickFormatter={tickFormatter}
-            ticks={getTicks(topValue, yAxisType === 'symmetrical')}
+            tickFormatter={yAxisTickFormatter}
+            ticks={yAxisTicks}
             interval={0}
           />
           <Tooltip
@@ -198,6 +269,7 @@ export function LineTimeSerieChart({
                 duration={duration}
                 renderTooltip={renderTooltip}
                 isSymmetrical={yAxisType === 'symmetrical'}
+                logZeroValue={logAxis?.zeroValue ?? null}
                 belowSeriesLabels={belowSeriesLabels}
                 tooltipProps={props}
                 chartContainerRef={chartRef}
