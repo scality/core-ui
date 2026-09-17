@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">358 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/64 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/64 infos</a><span class="filter-pill ok" aria-disabled="true">367 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">26 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>3.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -1251,9 +1251,9 @@ withDefaultIcon?: boolean = false</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Barchart</h2>
       <div class="badges">
-        <label for="c-3-components-data-display-charts-barchartv2-props" class="badge ok as-toggle">16 prop types</label>
+        <label for="c-3-components-data-display-charts-barchartv2-props" class="badge ok as-toggle">17 prop types</label>
         <label for="c-3-components-data-display-charts-barchartv2-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">18 stories</label>
+        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">21 stories</label>
         
         
       </div>
@@ -1287,7 +1287,7 @@ withDefaultIcon?: boolean = false</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">16 prop types</span>
+              <span class="badge ok">17 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/charts/index.ts::Barchart</code></pre>
             <pre><code>Props:</code></pre>
@@ -1339,7 +1339,24 @@ tooltip?: BarchartTooltipFn&lt;T&gt;
 
 type: TimeType | CategoryType
 
-unitRange?: UnitRange</code></pre>
+unitRange?: UnitRange
+
+/**
+ * Y-axis scale, for a dataset spanning orders of magnitude: on a linear axis
+ * the small bars collapse onto the baseline and only the largest is readable.
+ * Display only — no value is rescaled, and the tooltip, legend and unit
+ * scaling keep the numbers you passed in.
+ * 
+ * `&#39;log&#39;` gives each decade the same height and ticks the decades. Zero has
+ * no logarithm, so it reserves the slot below the first decade, labels it
+ * `0`, and draws zeros there as a stub bar — a measured zero stays
+ * distinguishable from an absent one, which a gap would not.
+ * 
+ * Two things it will not do: a negative bar is dropped, and `stacked` falls
+ * back to linear, since stacking places each segment at a cumulative sum and
+ * its height would stop matching its value.
+ */
+yAxisScale?: &quot;linear&quot; | &quot;log&quot; = &#39;linear&#39;</code></pre>
           </div>
         </div>
     
@@ -2396,6 +2413,168 @@ unitRange?: UnitRange</code></pre>
       &lt;/ChartLegendWrapper&gt;
     &lt;/div&gt;
   );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The same dataset on both scales. Values spanning four orders of magnitude are the case a linear axis cannot serve: the axis is sized by the largest bar, so everything below one thousandth of it lands on the baseline and reads as zero. A log axis gives every decade the same height, so &quot;2&quot; and &quot;40 000&quot; are both legible — at the cost of no longer being able to compare bars by eye, which is the trade-off to make consciously. Note that the scale is a display choice only: no value is rescaled, and the tooltips still read 2, 45, 1200 and 40000. `category5` is 0. Zero has no logarithm, so the axis reserves a slot below its first decade, labels it `0`, and draws the bar there as a stub — visible, and distinct from an absent bar, which draws nothing at all. The tooltip still reads 0.</div>
+              <pre><code>const LogarithmicScale = () =&gt; {
+  const theme = useTheme() as CoreUITheme;
+  const spanningData = [
+    {
+      label: &#39;Requests&#39;,
+      data: [
+        [&#39;category1&#39;, 2],
+        [&#39;category2&#39;, 45],
+        [&#39;category3&#39;, 1200],
+        [&#39;category4&#39;, 40000],
+        [&#39;category5&#39;, 0],
+      ],
+    },
+  ] as const;
+
+  return (
+    &lt;div style={{ width: &#39;60%&#39;, padding: spacing.r16 }}&gt;
+      &lt;ChartLegendWrapper colorSet={{ Requests: theme.statusHealthy }}&gt;
+        &lt;Stack direction=&quot;vertical&quot; gap=&quot;r24&quot;&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              Linear — only the tallest bar is readable
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={spanningData}
+              title=&quot;Requests per endpoint&quot;
+              height={200}
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              Logarithmic — one decade per step; category5 (0) sits at the
+              reserved 0
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={spanningData}
+              title=&quot;Requests per endpoint&quot;
+              height={200}
+              yAxisScale=&quot;log&quot;
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
+        &lt;/Stack&gt;
+      &lt;/ChartLegendWrapper&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Ignored When Stacked</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A log axis and a stack do not combine, so `yAxisScale=&quot;log&quot;` is ignored here and the axis stays linear. Stacking places each segment at a running total, so on a log axis a segment&#39;s height would be `log(cumulative) - log(previous cumulative)` — unrelated to the value it represents. The chart would still draw, and it would be wrong. Compare the two: the ticks are identical.</div>
+              <pre><code>const LogarithmicScaleIgnoredWhenStacked = () =&gt; {
+  const theme = useTheme() as CoreUITheme;
+  const stackedData = [
+    {
+      label: &#39;Test 1&#39;,
+      data: [
+        [&#39;category1&#39;, 5],
+        [&#39;category2&#39;, 500],
+      ],
+    },
+    {
+      label: &#39;Test 2&#39;,
+      data: [
+        [&#39;category1&#39;, 3000],
+        [&#39;category2&#39;, 40],
+      ],
+    },
+  ] as const;
+
+  return (
+    &lt;div style={{ width: &#39;60%&#39;, padding: spacing.r16 }}&gt;
+      &lt;ChartLegendWrapper
+        colorSet={{
+          &#39;Test 1&#39;: theme.statusHealthy,
+          &#39;Test 2&#39;: theme.statusWarning,
+        }}
+      &gt;
+        &lt;Stack direction=&quot;vertical&quot; gap=&quot;r24&quot;&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              stacked with yAxisScale=&quot;log&quot; — falls back to linear
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={stackedData}
+              title=&quot;Stacked&quot;
+              height={200}
+              stacked
+              yAxisScale=&quot;log&quot;
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              stacked with no scale asked for
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={stackedData}
+              title=&quot;Stacked&quot;
+              height={200}
+              stacked
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
+        &lt;/Stack&gt;
+      &lt;/ChartLegendWrapper&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Playground</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The scale as a control, for poking at it against your own numbers. `stacked` is here on purpose: turn it on and the axis snaps back to linear, because a stack places each segment at a cumulative sum and its height would stop matching its value.</div>
+              <pre><code>const LogarithmicScalePlayground = () =&gt; {
+    const theme = useTheme() as CoreUITheme;
+    // One bar per decade, so the spread control is exactly what it says.
+    const bars = [
+      {
+        label: &#39;Requests&#39;,
+        data: Array.from(
+          { length: args.spread + 1 },
+          (_, index) =&gt; [`1e${index}`, 10 ** index * 2] as [string, number],
+        ),
+      },
+    ] as const;
+
+    return (
+        &lt;div style={{ width: &#39;60%&#39;, padding: spacing.r16 }}&gt;
+            &lt;ChartLegendWrapper colorSet={{ Requests: theme.statusHealthy }}&gt;
+                &lt;Stack direction=&quot;vertical&quot; gap=&quot;r16&quot;&gt;
+                    &lt;Barchart
+                        type={{ type: &#39;category&#39; }}
+                        bars={bars}
+                        title=&quot;Requests per endpoint&quot;
+                        height={240}
+                        stacked={false}
+                        yAxisScale=&quot;log&quot; /&gt;
+                    &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
+                &lt;/Stack&gt;
+            &lt;/ChartLegendWrapper&gt;
+        &lt;/div&gt;
+    );
 };</code></pre>
             </div>
         </div>
@@ -3850,9 +4029,9 @@ width?: string = auto</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> ChartWithProviders</h2>
       <div class="badges">
-        <label for="c-9-components-data-display-charts-linetimeseriechart-props" class="badge ok as-toggle">16 prop types</label>
+        <label for="c-9-components-data-display-charts-linetimeseriechart-props" class="badge ok as-toggle">17 prop types</label>
         
-        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">18 stories</label>
+        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">24 stories</label>
         
         
       </div>
@@ -3879,7 +4058,7 @@ width?: string = auto</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">16 prop types</span>
+              <span class="badge ok">17 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/charts/index.ts::LineTimeSerieChart</code></pre>
             <pre><code>Props:</code></pre>
@@ -3969,6 +4148,30 @@ title: string
  * Unit range configuration for automatic unit scaling
  */
 unitRange?: { threshold: number; label: string; }[]
+
+/**
+ * Y-axis scale, for a metric spanning orders of magnitude: on a linear axis
+ * the quiet periods flatten onto the baseline and only the spikes are
+ * readable. Display only — no value is rescaled, and the tooltip, legend and
+ * unit scaling keep the numbers you passed in.
+ * 
+ * `&#39;log&#39;` gives each decade the same height and ticks the decades. Zero has
+ * no logarithm, so it reserves the slot below the first decade, labels it
+ * `0`, and runs zeros there — a measured zero stays distinguishable from a
+ * missing sample, which a gap would not. Negatives are dropped.
+ * 
+ * `&#39;symlog&#39;` is linear near zero and logarithmic beyond, so it plots both
+ * signs and zero itself with no reserved slot. Its price: distances read as
+ * differences near zero and as ratios further out.
+ * Y-axis scale. `&#39;log&#39;` is not available here: half of a symmetrical axis is
+ * negative by construction, and negatives have no logarithm.
+ * 
+ * `&#39;symlog&#39;` is linear within a window around zero and logarithmic outside
+ * it, so both halves compress and zero keeps the centre line. Worth it when
+ * the two directions span orders of magnitude — the usual shape of an in/out
+ * pair, where a linear axis sized by the busy side flattens the quiet one.
+ */
+yAxisScale?: &quot;linear&quot; | &quot;log&quot; | &quot;symlog&quot; = linear
 
 /**
  * Y-axis title label
@@ -4478,7 +4681,10 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
   return (
     &lt;ChartLegendWrapper
       // @ts-ignore
-      colorSet={{ Success: theme.statusHealthy, Failed: theme.statusCritical }}
+      colorSet={{
+        Success: theme.statusHealthy,
+        Failed: theme.statusCritical,
+      }}
       sortOrder=&quot;status&quot;
     &gt;
       &lt;LineTimeSerieChart
@@ -4505,9 +4711,25 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
               
               <pre><code>const AllZeroValuesExample = () =&gt; {
   return (
-    &lt;ChartLegendWrapper colorSet={{ &#39;server-1&#39;: lineTimeSeriesColorRange[0] }}&gt;
-      &lt;LineTimeSerieChart yAxisType=&#39;default&#39; startingTimeStamp={allZeroValuesData[0][0]} interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR} duration={SAMPLE_DURATION_LAST_ONE_HOUR}
-        series={[{ data: allZeroValuesData, resource: &#39;server-1&#39;, metricPrefix: &#39;bandwidth&#39;, getTooltipLabel: (prefix, resource) =&gt; `${resource}-${prefix}` }]} title=&quot;All Zero Values&quot; height={200} /&gt;
+    &lt;ChartLegendWrapper
+      colorSet={{ &#39;server-1&#39;: lineTimeSeriesColorRange[0] }}
+    &gt;
+      &lt;LineTimeSerieChart
+        yAxisType=&quot;default&quot;
+        startingTimeStamp={allZeroValuesData[0][0]}
+        interval={SAMPLE_FREQUENCY_LAST_ONE_HOUR}
+        duration={SAMPLE_DURATION_LAST_ONE_HOUR}
+        series={[
+          {
+            data: allZeroValuesData,
+            resource: &#39;server-1&#39;,
+            metricPrefix: &#39;bandwidth&#39;,
+            getTooltipLabel: (prefix, resource) =&gt; `${resource}-${prefix}`,
+          },
+        ]}
+        title=&quot;All Zero Values&quot;
+        height={200}
+      /&gt;
     &lt;/ChartLegendWrapper&gt;
   );
 };</code></pre>
@@ -4600,7 +4822,9 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
               
               <pre><code>const TooltipUnitRangeExample = () =&gt; {
   return (
-    &lt;ChartLegendWrapper colorSet={{ &#39;operations&#39;: lineTimeSeriesColorRange[0] }}&gt;
+    &lt;ChartLegendWrapper
+      colorSet={{ operations: lineTimeSeriesColorRange[0] }}
+    &gt;
       &lt;LineTimeSerieChart
         series={[
           {
@@ -4703,7 +4927,7 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
         ]}
         title=&quot;Big Values&quot;
         height={200}
-        yAxisTitle=&#39;Big Number Example &#39;
+        yAxisTitle=&quot;Big Number Example &quot;
         startingTimeStamp={bigValuesData2[0][0]}
         isLoading={false}
         yAxisType={&#39;default&#39;}
@@ -4721,7 +4945,7 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
         ]}
         title=&quot;Big Values&quot;
         height={200}
-        yAxisTitle=&#39;Big Number Example &#39;
+        yAxisTitle=&quot;Big Number Example &quot;
         startingTimeStamp={bigValuesData2[0][0]}
         isLoading={false}
         unitRange={UNIT_RANGE_BS}
@@ -4732,6 +4956,149 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
     &lt;/ChartLegendWrapper&gt;
   );
 };</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Example</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The same series on both scales. A metric that idles at 2 ms and spikes to 4 s is the case a linear axis cannot serve: the axis is sized by the spike, so the baseline — where the metric spends nearly all its time — is pressed flat against zero and its variation is invisible. A log axis gives every decade the same height, so the quiet periods and the spikes are both readable. The scale is a display choice only: no value is rescaled, and the tooltip still reads the milliseconds the series carries. What you give up: distances no longer read as differences. Two points twice as far apart vertically are ten times apart in value, not twice. Use it to see shape across magnitudes, not to compare magnitudes by eye.</div>
+              <pre><code>const LogarithmicScaleExample = () =&gt; (
+  &lt;div&gt;
+    &lt;LogChart {...logChartArgs(spikyData)} title=&quot;Request latency — linear&quot; /&gt;
+    &lt;LogChart
+      {...logChartArgs(spikyData)}
+      title=&quot;Request latency — logarithmic&quot;
+      yAxisScale=&quot;log&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale With Zeros</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">Zero has no logarithm, so the axis reserves one slot below its first decade and labels it `0`. The zero samples are drawn there. Note that the step from `0` to the first decade is that single reserved slot and not one more tenfold step — it is the one place on the axis where the spacing does not mean a factor of ten. This is what keeps &quot;the metric read zero for twelve minutes&quot; from looking like &quot;we have no data for twelve minutes&quot;. Dropping the zeros would leave the same gap a missing sample leaves, and those are not the same fact; clamping them to the first decade would draw them as the smallest measured value, a number the reader would believe. The tooltip reports 0 either way. A negative sample has neither a logarithm nor a slot, so it is still dropped: a series that goes negative does not belong on a log axis at all.</div>
+              <pre><code>const LogarithmicScaleWithZeros = () =&gt; (
+  &lt;div&gt;
+    &lt;LogChart
+      {...logChartArgs(spikyDataWithZeros)}
+      title=&quot;With a stretch of zeros — linear&quot;
+    /&gt;
+    &lt;LogChart
+      {...logChartArgs(spikyDataWithZeros)}
+      title=&quot;With a stretch of zeros — logarithmic, the zeros sit at the reserved 0&quot;
+      yAxisScale=&quot;log&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Below One</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The axis follows the data&#39;s own decades — it is not anchored to 1. Here everything sits between 0.001 and 0.1 with occasional spikes to 32 and 50, and the axis comes out 0.001..100: six decades, one tick each, decimals on the low ones and none on the high ones. Nothing had to be configured for that; `getLogAxis` reads the smallest positive value and the largest, and rounds each outwards to a decade. On the linear chart above, the entire baseline is a flat line on zero — the axis is sized by the 50 spike, and 0.002 against 50 is 1/25000 of the plot height.</div>
+              <pre><code>const LogarithmicScaleBelowOne = () =&gt; {
+  // Baseline in the milli range, two spikes four decades above it. Deterministic.
+  const data = Array.from({ length: 120 }, (_, index) =&gt; {
+    const value =
+      index === 30 ? 32 : index === 78 ? 50 : 0.002 + (index % 9) * 0.011;
+    return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+      number,
+      number,
+    ];
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;Error rate — linear, the baseline is unreadable&quot;
+        yAxisTitle=&quot;/s&quot;
+      /&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;Error rate — logarithmic, 0.001 to 100&quot;
+        yAxisTitle=&quot;/s&quot;
+        yAxisScale=&quot;log&quot;
+      /&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Playground</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The scale as a control, for poking at it against your own shape of data. `zeros` is the one worth trying: it drops a stretch of zero samples into the series, and on the log axis they land on the reserved `0` at the bottom rather than disappearing.</div>
+              <pre><code>const LogarithmicScalePlayground = () =&gt; {
+    const data = Array.from({ length: 120 }, (_, index) =&gt; {
+      const isZero = args.zeros &amp;&amp; index &gt;= 60 &amp;&amp; index &lt; 72;
+      const value = isZero
+        ? 0
+        : index % 41 === 0
+          ? args.spikeTo
+          : args.baseline * (1 + (index % 7) * 0.2);
+      return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+        number,
+        number,
+      ];
+    });
+
+    return (
+        &lt;LogChart
+            {...logChartArgs(data)}
+            title={`Request latency — ${args.yAxisScale}`}
+            yAxisScale=&quot;log&quot; /&gt;
+    );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Symmetrical Symlog Scale</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The same read/write pair on both scales. A symmetrical axis is sized by whichever direction is busiest, so on the linear chart the writes are a flat line on the centre — a few hundredths of a pixel of movement, indistinguishable from the axis itself. `log` is impossible here: half this axis is negative. `symlog` is linear within a window around zero and logarithmic outside, so both directions get a readable share of the height. Each side is bounded by its own data rather than mirrored, which is why zero does not sit in the middle: the centre line moving off centre is itself the statement that the two directions are orders of magnitude apart. What you give up: distances read as differences near zero and as ratios further out.</div>
+              <pre><code>const SymmetricalSymlogScale = () =&gt; (
+  &lt;div&gt;
+    &lt;SymlogChart {...symlogChartArgs} title=&quot;Disk operations — linear&quot; /&gt;
+    &lt;SymlogChart
+      {...symlogChartArgs}
+      title=&quot;Disk operations — symlog&quot;
+      yAxisScale=&quot;symlog&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Symlog Versus Log</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">The two scales on a one-sided series. Both are readable; the difference is zero. `log` reserves a slot below its lowest decade and labels it `0`; symlog has a real position for zero and spends that height on the data instead, at the cost of a linear stretch near the centre. On data that never reaches zero and never goes negative, `log` is the simpler answer.</div>
+              <pre><code>const SymlogVersusLog = () =&gt; (
+  &lt;div&gt;
+    &lt;LogChart
+      {...logChartArgs(spikyDataWithZeros)}
+      title=&quot;Request latency — log, with a reserved 0&quot;
+      yAxisScale=&quot;log&quot;
+    /&gt;
+    &lt;LogChart
+      {...logChartArgs(spikyDataWithZeros)}
+      title=&quot;Request latency — symlog, zero on the scale&quot;
+      yAxisScale=&quot;symlog&quot;
+    /&gt;
+  &lt;/div&gt;
+);</code></pre>
             </div>
         </div>
     
