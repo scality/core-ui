@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.8s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -5698,7 +5698,7 @@ title?: string</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> ConstrainedText</h2>
       <div class="badges">
-        <label for="c-12-components-constrained-text-props" class="badge ok as-toggle">6 prop types</label>
+        <label for="c-12-components-constrained-text-props" class="badge ok as-toggle">11 prop types</label>
         <label for="c-12-components-constrained-text-info" class="badge info as-toggle">1 info</label>
         <label for="c-12-components-constrained-text-stories" class="badge ok as-toggle">3 stories</label>
         
@@ -5734,21 +5734,34 @@ title?: string</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">6 prop types</span>
+              <span class="badge ok">11 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/constrainedtext/Constrainedtext.component.tsx::ConstrainedText</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>centered?: boolean = false
+            <pre><code>align?: Align
+
+/**
+ * @deprecated use `align=&quot;center&quot;` instead.
+ */
+centered?: boolean = false
 
 color?: keyof CoreUITheme
+
+compact?: boolean
+
+isEmphazed?: boolean
+
+isGentleEmphazed?: boolean
 
 lineClamp?: number = 1
 
 text: string | number | Element | Element[]
 
-tooltipPlacement?: any
+tooltipPlacement?: Position
 
-tooltipStyle?: any</code></pre>
+tooltipStyle?: CSSProperties
+
+variant?: TextVariant</code></pre>
           </div>
         </div>
     
