@@ -70,6 +70,7 @@ export {
   Text,
   Link,
 } from './components/text/Text.component';
+export type { TextProps } from './components/text/Text.component';
 export { Card } from './components/card/Card.component';
 export { PrettyBytes } from './components/prettybytes/PrettyBytes.component';
 export { Icon } from './components/icon/Icon.component';

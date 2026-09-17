@@ -47,7 +47,7 @@ type Props = {
   status?: Status;
   id?: string;
 } & TextProps;
-type TextProps = {
+export type TextProps = {
   color?: keyof CoreUITheme;
   variant?: TextVariant;
   isEmphazed?: boolean;
