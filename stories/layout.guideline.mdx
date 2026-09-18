@@ -1,0 +1,141 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+import * as LayoutStories from './layout.stories';
+
+<Meta of={LayoutStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Layout
+
+## Different pages
+
+- Resource listing pages
+- Dashboards
+- Forms
+
+## Main compositions
+
+A page is built from three slots: a context bar, an overall summary, and the main content.
+
+<div style={{ width: '534px', height: '300px', overflow: 'hidden', marginBottom: '2.5rem' }}>
+  <div
+    style={{
+      width: '1600px',
+      height: '900px',
+      fontSize: '36px',
+      transform: 'scale(0.3338)',
+      transformOrigin: 'top left',
+    }}
+  >
+    <Story of={LayoutStories.Layout2SimplestWithMainContentPadding} />
+  </div>
+</div>
+
+### Context bar
+
+The context bar is mostly there to carry the breadcrumb, when the page needs one. It can also hold a global refresh control.
+
+## Resource listing pages
+
+A resource listing page presents a collection of items of the same type.
+
+There are 2 types: the full page versus the list-detail page (in this case, when the attributes of the resources needs to be explored a bit, or are numerous)
+
+### Type
+
+#### Full page
+
+**What it is**<br />
+A single list occupying the whole content area.
+
+**When to use it**<br />
+Items are consulted in place and do not need a side-by-side detail view. It is also used when the collection is known to hold only one or two items. The table then looks nearly empty, and that is accepted: there is no pattern for presenting a small fixed number of resources.
+
+**Composition rules**
+
+- The overall summary is always present.
+  - It carries the resource icon as a Hero icon, the page title (often the resources name)
+  - Other information could be in the summary, on the other side (full right), like specific configuration (activation of a feature, download a top level config, etc.)
+- The main content holds the table and nothing else. The table owns the full area.
+- When the resources are "browseable", then the item count is put as a `TextBadge` next to the title. The same when the table used in the main content doesn't have the search + result (that provides the count)
+
+<Canvas of={LayoutStories.ResourceListPage} />
+
+#### List-detail page
+
+**What it is**<br />
+A list on the left, the detail of the selected item on the right.
+
+**When to use it**<br />
+Items are compared and edited without leaving the list. If the details are complex and do not fit a key-value presentation, use an edit control (via a "Edit" button, for instance) on the value instead of a right-hand detail panel, and present the resource on a full page (and its edition will be a form in full page).
+
+**Composition rules**
+
+- Selection drives the right panel. The selected row stays highlighted in the list.
+
+- Actions on the selected item sit at the top of the detail panel, not in the list.
+
+- The overall summary is present only when the collection is browsable, see below. When it is not, the detail panel carries its own header naming the selected item.
+
+Where the split between the two panels sits is an implementation detail, not a rule. Three ratios are available.
+
+<div style={{ marginBottom: '1.5rem' }}>
+  <div style={{ width: '680px', height: '383px', overflow: 'hidden' }}>
+    <div style={{ width: '1600px', height: '900px', transform: 'scale(0.425)', transformOrigin: 'top left' }}>
+      <Story of={LayoutStories.Layout2TwoEqualPanelsWithPadding} />
+    </div>
+  </div>
+  <div style={{ marginTop: '0.5rem' }}>50 / 50</div>
+</div>
+
+<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+  <div>
+    <div style={{ width: '328px', height: '185px', overflow: 'hidden' }}>
+      <div style={{ width: '1600px', height: '900px', transform: 'scale(0.205)', transformOrigin: 'top left' }}>
+        <Story of={LayoutStories.Layout2TwoPanelsThirtySeventy} />
+      </div>
+    </div>
+    <div style={{ marginTop: '0.5rem' }}>30 / 70</div>
+  </div>
+  <div>
+    <div style={{ width: '328px', height: '185px', overflow: 'hidden' }}>
+      <div style={{ width: '1600px', height: '900px', transform: 'scale(0.205)', transformOrigin: 'top left' }}>
+        <Story of={LayoutStories.Layout2TwoPanelsSeventyThirty} />
+      </div>
+    </div>
+    <div style={{ marginTop: '0.5rem' }}>70 / 30</div>
+  </div>
+</div>
+
+### Browsable collections
+
+A collection is browsable when an item can be opened to reveal what it contains, so the page has several levels.
+
+Browsability governs three things, that are tied:
+
+- the context bar carries a breadcrumb;
+- the overall summary is present, whichever form the page takes;
+- the header states the level currently being viewed, and changes as the user goes deeper.
+
+If not on the higher level, the overall summary also carries a control that moves up one level. It moves up the hierarchy, it does not go back in history.
+
+When a collection has a single level, these 3 rules don't apply.
+
+## Dashboards
+
+A dashboard answers a specific question about a specific system. 
+
+Its composition is deliberately not standardised: the blocks, their number and their arrangement follow the question being answered.
+
+This is the only page type here without a canonical composition. 
+
+Everything else still applies: same layout container, same header rules, charts follow the Chart guideline, and no block introduces a local component when one exists in the library.
+
+## Forms
+
+Form pages guidelines are to be defined. Until it is, follow the Form guideline for the component itself, plus the Modal guideline when the form is presented in a modal.
