@@ -25,6 +25,16 @@ Then install:
 npm install
 ```
 
+### Module Federation
+
+An application that composes federated remotes must share `react`, `react-dom` and
+`styled-components` as singletons in its federation config, loaded eagerly if the host
+renders before its remotes. Two copies of React break hooks; two copies of
+styled-components leave the second one with no theme, so those components render
+unstyled. `styled-components` is the one that catches people out: it is a dependency of
+this package rather than a peer, so a plain install needs no action and a federated
+build does.
+
 ## Usage
 
 Import a component from `@scality/core-ui/dist/next` or `@scality/core-ui`, and use props to change its appearance and behaviour:
