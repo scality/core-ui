@@ -72,7 +72,10 @@ Items are consulted in place and do not need a side-by-side detail view. It is a
 A list on the left, the detail of the selected item on the right.
 
 **When to use it**<br />
-Items are compared and edited without leaving the list. If the details are complex and do not fit a key-value presentation, use an edit control (via a "Edit" button, for instance) on the value instead of a right-hand detail panel, and present the resource on a full page (and its edition will be a form in full page).
+Items are compared and edited without leaving the list.
+
+**When not to use it**<br />
+When both sides are dense: the list needs several columns to be scanned, and the detail does not fit a key-value list. Use a full page for the collection and a dedicated page for the item. Editing then happens on the value itself (via an "Edit" button, for instance) or as a full page form.
 
 **Composition rules**
 
@@ -92,8 +95,6 @@ The split follows the information density on each side, measured on two things:
 - **65 / 35** when the list is the subject, scanned, sorted and compared over three or more columns, and the detail can be compacted in a key-value list. Key-value content is kept narrow on purpose (even if the values can be edited via forms or something else).
 
 - **50 / 50** when both sides carry a moderate amount. Most often needed when you have two tables, one for the list, one for an attribute of an item in the list.
-
-When both sides are dense, list-detail is not the correct pattern. Use a full page for the collection and a dedicated page for the item.
 
 <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
   <div>
