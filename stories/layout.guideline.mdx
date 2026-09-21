@@ -82,18 +82,20 @@ Items are compared and edited without leaving the list. If the details are compl
 
 - The overall summary is present only when the collection is browsable, see below. When it is not, the detail panel carries its own header naming the selected item.
 
-Where the split between the two panels sits is an implementation detail, not a rule. Three ratios are available.
+The split follows the information density on each side, measured on two things:
 
-<div style={{ marginBottom: '1.5rem' }}>
-  <div style={{ width: '680px', height: '383px', overflow: 'hidden' }}>
-    <div style={{ width: '1600px', height: '900px', transform: 'scale(0.425)', transformOrigin: 'top left' }}>
-      <Story of={LayoutStories.Layout2TwoEqualPanelsWithPadding} />
-    </div>
-  </div>
-  <div style={{ marginTop: '0.5rem' }}>50 / 50</div>
-</div>
+1/ how many columns the list needs to identify and compare an item,
+2/ and whether the detail part is a single key-value list, or also carries tabs, nested tables, charts, configuration, forms.
 
-<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+- **30 / 70** when the list only identifies items (a name, possibly with a status) and the detail is where the work happens: tabs, several sections, nested tables, configuration.
+
+- **65 / 35** when the list is the subject, scanned, sorted and compared over three or more columns, and the detail can be compacted in a key-value list. Key-value content is kept narrow on purpose (even if the values can be edited via forms or something else).
+
+- **50 / 50** when both sides carry a moderate amount. Most often needed when you have two tables, one for the list, one for an attribute of an item in the list.
+
+When both sides are dense, list-detail is not the correct pattern. Use a full page for the collection and a dedicated page for the item.
+
+<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
   <div>
     <div style={{ width: '328px', height: '185px', overflow: 'hidden' }}>
       <div style={{ width: '1600px', height: '900px', transform: 'scale(0.205)', transformOrigin: 'top left' }}>
@@ -108,8 +110,17 @@ Where the split between the two panels sits is an implementation detail, not a r
         <Story of={LayoutStories.Layout2TwoPanelsSeventyThirty} />
       </div>
     </div>
-    <div style={{ marginTop: '0.5rem' }}>70 / 30</div>
+    <div style={{ marginTop: '0.5rem' }}>65 / 35</div>
   </div>
+</div>
+
+<div style={{ marginBottom: '2.5rem' }}>
+  <div style={{ width: '680px', height: '383px', overflow: 'hidden' }}>
+    <div style={{ width: '1600px', height: '900px', transform: 'scale(0.425)', transformOrigin: 'top left' }}>
+      <Story of={LayoutStories.Layout2TwoEqualPanelsWithPadding} />
+    </div>
+  </div>
+  <div style={{ marginTop: '0.5rem' }}>50 / 50</div>
 </div>
 
 ### Browsable collections
