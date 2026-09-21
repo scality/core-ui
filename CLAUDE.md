@@ -28,6 +28,40 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 - `npm run lint` — run ESLint
 - `npm run storybook` — start Storybook dev server on port 3001
 
+Contributor process — branch naming, creating a component, release, build — is in
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Exports
+
+`src/lib/index.ts` is the stable surface. `src/lib/next.ts` holds newer versions of
+existing components, so a redesign ships without breaking the one in use — a new
+version of an existing component goes there, not into `index.ts`.
+
+Every exported component carries a JSDoc first sentence saying **what it is for**:
+when a reader should reach for it rather than its neighbour. It is what IDE hover
+and the Storybook props table show, and for most callers it is the only description
+they will read.
+
+Constraints belong in types, not lint rules — there is no custom lint plugin. Make
+an invalid prop combination unrepresentable with a discriminated union, narrow a
+prop that accepts more than the component supports, and mark a superseded prop
+`@deprecated` with a migration note. Keep it opt-in: deprecate before removing, and
+narrow behind a major or in `next.ts`.
+
+## Documentation
+
+Stories and guidelines live in `stories/<PascalCase>/`, with lowercase filenames
+inside — `stories/Modal/modal.stories.tsx`, `stories/Modal/modal.guideline.mdx`.
+Import from a story with `../../src/lib/components/<lowercase>/<Name>.component`,
+no file extension.
+
+Documentation that is not about a single component goes in `stories/guideline/`,
+titled `Guidelines/<Name>` — `Guidelines/Responsive` covers the container behaviour
+shared by several components. Use one when the subject is a choice between sibling
+components, or a behaviour crossing components that are not alternatives.
+
+MDX pages import from `@storybook/addon-docs/blocks`, never `@storybook/blocks`.
+
 ## Tests
 
 **One test file per source module — never one per feature.** Before writing a
