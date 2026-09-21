@@ -11,21 +11,14 @@ Core-UI is a component library containing all components, layouts, icons and the
 - Add `@scality/core-ui` in the `package.json`'s dependencies of your project.
 
 ```json
-    "@scality/core-ui": "^0.165.0",
+    "@scality/core-ui": "^0.230.0",
 ```
 
 - `@scality/core-ui` requires the peerDependencies below. Make sure that you have them in the `package.json`'s dependencies.
 
 ```json
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    // to provides a Provider to the components using react-query
-    "react-query": "^3.34.0",
-    // for the components using react router
-    "react-router": "^7.0.1",
-    "react-router-dom": "^7.0.1",
-    // for legacy chart components
-    "canvas": "^2.10.1",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
 ```
 
 - Install the dependencies :
@@ -36,7 +29,7 @@ npm install
 
 ### Usage
 
-- Import a component from `@scality/core-ui/dist/next'` or `@scality/core-ui`
+- Import a component from `@scality/core-ui/dist/next` or `@scality/core-ui`
 
 - Use props to change its appearance and behaviour
 
@@ -126,7 +119,7 @@ You should end with something like below :
         - Example.component.tsx
         - Example.test.tsx
 - stories/
-  - example/
+  - Example/
     - example.stories.tsx
     - example.guideline.mdx
 ```
@@ -141,9 +134,9 @@ Storybook helps to test and vizualize component in isolation.
 If it doesn't exist, write a [story](https://storybook.js.org/docs/get-started/whats-a-story) for the component:
 
 ```jsx
-// in stories/example/example.stories.tsx
+// in stories/Example/example.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
-import { Example } from '../src/lib/components/example/Example.component.tsx';
+import { Example } from '../../src/lib/components/example/Example.component';
 
 const meta: Meta<typeof Example> = {
   component: Example,
@@ -163,7 +156,7 @@ Then launch storybook:
 npm run storybook
 ```
 
-Storybook will be launched on `http://localhost:3000`.
+Storybook will be launched on `http://localhost:3001`.
 
 ### Lint
 
@@ -201,9 +194,9 @@ This guideline is an MDX file containing details about the component usage and i
 
 ```txt
 // in example.guideline.mdx
-import { Canvas, Meta } from '@storybook/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import * as ExampleStories from './Example.stories';
+import * as ExampleStories from './example.stories';
 
 <Meta of={ExampleStories} />
 
