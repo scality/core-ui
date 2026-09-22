@@ -652,4 +652,165 @@ describe('SelectV2', () => {
       expect(selectors.input()).not.toHaveFocus();
     });
   });
+  describe('option groups', () => {
+    const GroupedSelect = (props) => {
+      const [value, setValue] = useState<string | null>(null);
+      return (
+        <Select value={value} onChange={setValue} {...props}>
+          <Select.Group label="Europe">
+            <Option value="paris">Paris</Option>
+            <Option value="frankfurt">Frankfurt</Option>
+          </Select.Group>
+          <Select.Group label="North America">
+            <Option value="oregon">Oregon</Option>
+            <Option value="virginia" disabled>
+              Virginia
+            </Option>
+          </Select.Group>
+        </Select>
+      );
+    };
+
+    // Past NOPT_SEARCH options the trigger becomes a combobox rather than a
+    // listbox, and the virtualised case is deliberately over that threshold.
+    const openMenu = async () => {
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+      const trigger =
+        screen.queryByRole('listbox') ?? screen.getByRole('combobox');
+      await act(() => userEvent.click(trigger));
+    };
+
+    const heading = (name: string) =>
+      screen.getByText(name, { selector: '[role="presentation"]' });
+
+    const describedGroup = (option: string) => {
+      const id = selectors.option(option).getAttribute('aria-describedby');
+      return id && document.getElementById(id)?.textContent;
+    };
+
+    const ManyGroups = () => {
+      const [value, setValue] = useState<string | null>(null);
+      return (
+        <Select value={value} onChange={setValue}>
+          {Array.from(new Array(5), (_, group) => (
+            <Select.Group key={group} label={`Group ${group}`}>
+              {Array.from(new Array(3), (_, item) => (
+                <Option key={item} value={`${group}-${item}`}>
+                  {`Item ${group}-${item}`}
+                </Option>
+              ))}
+            </Select.Group>
+          ))}
+        </Select>
+      );
+    };
+
+    it('shows each group heading above the options it heads', async () => {
+      render(<GroupedSelect />);
+      await openMenu();
+
+      expect(heading('Europe')).toBeInTheDocument();
+      expect(heading('North America')).toBeInTheDocument();
+      expect(selectors.options().map((option) => option.textContent)).toEqual([
+        'Paris',
+        'Frankfurt',
+        'Oregon',
+        'Virginia',
+      ]);
+    });
+
+    it('keeps a heading out of the options, so only a disabled option reads as unavailable', async () => {
+      render(<GroupedSelect />);
+      await openMenu();
+
+      expect(selectors.options()).toHaveLength(4);
+      expect(heading('Europe')).not.toHaveAttribute('aria-disabled');
+      expect(selectors.option('Virginia')).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+    });
+
+    it('describes each option with the name of its own group', async () => {
+      render(<GroupedSelect />);
+      await openMenu();
+
+      expect(describedGroup('Paris')).toBe('Europe');
+      expect(describedGroup('Oregon')).toBe('North America');
+    });
+
+    it('still describes an option whose heading the virtualised window dropped', async () => {
+      render(<ManyGroups />);
+      await openMenu();
+
+      const rendered = screen.queryAllByRole('presentation');
+      expect(rendered.length).toBeLessThan(5);
+      selectors.options().forEach((option) => {
+        const group = option.textContent?.slice('Item '.length, -2);
+        expect(describedGroup(option.textContent || '')).toBe(`Group ${group}`);
+      });
+    });
+
+    it('selects the first option, not the heading, on the first arrow down', async () => {
+      render(<GroupedSelect />);
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      userEvent.tab();
+      act(() => userEvent.keyboard('{ArrowDown}'));
+      await act(() => userEvent.keyboard('{Enter}'));
+
+      expect(selectors.select()).toHaveTextContent('Paris');
+    });
+
+    it('gives every option its own row once the menu virtualises', async () => {
+      render(<ManyGroups />);
+      await openMenu();
+
+      const virtualisedRows = document.querySelectorAll('.react-window-option');
+      expect(virtualisedRows.length).toBeGreaterThan(0);
+      virtualisedRows.forEach((row) => {
+        expect(
+          row.querySelectorAll('[role="option"]').length,
+        ).toBeLessThanOrEqual(1);
+      });
+    });
+
+    it('keeps a group whole when its option values interleave with another group', async () => {
+      const InterleavedValues = () => {
+        const [value, setValue] = useState<string | null>(null);
+        return (
+          <Select value={value} onChange={setValue}>
+            <Select.Group label="Alpha">
+              <Option value="1">One</Option>
+              <Option value="3">Three</Option>
+            </Select.Group>
+            <Select.Group label="Beta">
+              <Option value="2">Two</Option>
+            </Select.Group>
+          </Select>
+        );
+      };
+      render(<InterleavedValues />);
+      await openMenu();
+
+      expect(
+        Array.from(document.querySelectorAll('[role="presentation"]')).map(
+          (heading) => heading.textContent,
+        ),
+      ).toEqual(['Alpha', 'Beta']);
+      expect(describedGroup('Three')).toBe('Alpha');
+    });
+
+    it('leaves a flat select without headings or descriptions', async () => {
+      render(<SelectWrapper />);
+      await openMenu();
+
+      expect(document.querySelectorAll('[role="presentation"]')).toHaveLength(
+        0,
+      );
+      expect(selectors.option('Item 0')).not.toHaveAttribute(
+        'aria-describedby',
+      );
+    });
+  });
 });

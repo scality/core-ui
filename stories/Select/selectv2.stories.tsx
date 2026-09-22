@@ -70,6 +70,46 @@ const optionsWithDisabledWithMessage = optionsWithDisabledWithoutMessage.map(
   },
 );
 
+const groupedOptions = [
+  <Select.Group key="europe" label="Europe">
+    <Select.Option value="paris">Paris</Select.Option>
+    <Select.Option value="frankfurt">Frankfurt</Select.Option>
+    <Select.Option
+      value="london"
+      disabled
+      disabledReason="Not available on this account"
+    >
+      London
+    </Select.Option>
+  </Select.Group>,
+  <Select.Group key="north-america" label="North America">
+    <Select.Option value="oregon">Oregon</Select.Option>
+    <Select.Option value="virginia">Virginia</Select.Option>
+  </Select.Group>,
+  <Select.Group key="asia-pacific" label="Asia Pacific">
+    <Select.Option value="singapore">Singapore</Select.Option>
+    <Select.Option value="tokyo">Tokyo</Select.Option>
+  </Select.Group>,
+];
+
+const manyGroupedOptions = Array.from(new Array(6), (_, group) => (
+  <Select.Group key={group} label={`Zone ${group + 1}`}>
+    {Array.from(new Array(4), (_, item) => (
+      <Select.Option
+        key={item}
+        value={`zone${group + 1}-${item + 1}`}
+      >{`Zone ${group + 1} \u2014 region ${item + 1}`}</Select.Option>
+    ))}
+  </Select.Group>
+));
+
+const mixedGroupedOptions = [
+  <Select.Option key="any" value="any">
+    No preference
+  </Select.Option>,
+  ...groupedOptions,
+];
+
 export const Playground: SelectStory = {
   args: {
     children: defaultOptions,
@@ -129,6 +169,30 @@ export const WithDisabledOptionsWithMessage: SelectStory = {
   name: 'Options disabled with message',
   args: {
     children: optionsWithDisabledWithMessage,
+  },
+};
+
+export const WithOptionGroups: SelectStory = {
+  name: 'Options grouped under headings',
+  args: {
+    children: groupedOptions,
+    placeholder: 'Select a region',
+  },
+};
+
+export const WithOptionGroupsVirtualised: SelectStory = {
+  name: 'Grouped options, past the scroll and search thresholds',
+  args: {
+    children: manyGroupedOptions,
+    placeholder: 'Select a region',
+  },
+};
+
+export const WithGroupedAndUngroupedOptions: SelectStory = {
+  name: 'Grouped and ungrouped options together',
+  args: {
+    children: mixedGroupedOptions,
+    placeholder: 'Select a region',
   },
 };
 
