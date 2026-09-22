@@ -73,6 +73,13 @@ each slot more room, but the reader then has to scroll to see the window they
 asked for, which is a worse way to lose the pattern than showing all of it
 smaller.
 
+The cells are the last thing to give way, because they are the only part a
+reader cannot get back. A narrowing frame first truncates the row labels, which
+keep the whole name in a tooltip; then drops the legend under the grid, which
+loses nothing at all; and only then narrows the cells towards `cellMinWidth`.
+`labelWidth` is the cap on the first of those, not a fixed gutter — the labels
+take the width they need up to it, and no more.
+
 <Canvas of={HeatmapStories.HorizontalScroll} sourceState="none" />
 
 ## Accessibility: colour is the only channel

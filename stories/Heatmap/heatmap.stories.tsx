@@ -35,6 +35,18 @@ const MONITORING_SERVICES = [
   'Thanos',
 ];
 
+/** Deliberately long: ResponsiveOrder is about watching the labels give way. */
+const CONNECTOR_SERVICES = [
+  'IAM & STS (vault)',
+  'Lifecycle service',
+  'Replication (CRR) service',
+  'S3 frontend',
+  'S3 metadata',
+  'S3 service (cloudserver)',
+  'RING connector (sproxyd)',
+  'UTAPI v1',
+];
+
 const FIVE_MINUTES = 5 * 60 * 1000;
 const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * ONE_HOUR;
@@ -212,8 +224,7 @@ const layoutArgs: LayoutArgs = {
   labelWidth: '7rem',
 };
 
-/* the return type is what tells the two templates below they are the lengths
-   `Heatmap` asks for, rather than the plain strings TS would infer */
+/* the return type is what types the templates below as lengths, not strings */
 const layoutProps = (
   args: LayoutArgs,
 ): Pick<
@@ -606,6 +617,73 @@ export const HorizontalScroll: StoryObj<
           {...layoutProps(args)}
         />
       </Box>
+    );
+  },
+};
+
+/**
+ * Drag the frame's bottom-right corner and watch what gives way, in order.
+ *
+ * The cells go last, because they are the only part a reader cannot get back.
+ * Wide, everything is comfortable. Narrow the frame and the row labels truncate
+ * first — they keep the whole name in a tooltip, so nothing is lost. Next the
+ * legend drops under the grid and turns horizontal, which costs nothing at all.
+ * Only then do the cells narrow, and past `cellMinWidth` the grid scrolls.
+ *
+ * `columns` moves every one of those thresholds, which is why they are not
+ * breakpoints: a longer axis wants more room, so it gives up the labels and the
+ * legend sooner. Set `labelWidth` shorter than the longest label to see that it
+ * caps the gutter rather than fixing it — the labels never take more than they
+ * need.
+ */
+export const ResponsiveOrder: StoryObj<
+  LayoutArgs & { columns: number; cellMinWidth: number }
+> = {
+  argTypes: {
+    ...layoutArgTypes,
+    columns: {
+      control: { type: 'range', min: 8, max: 96, step: 4 },
+      description: 'Columns — one per hourly slot',
+    },
+    cellMinWidth: {
+      control: { type: 'range', min: 0, max: 48, step: 1 },
+      description:
+        "Smallest a cell may become, in px. The component's own default is 12",
+    },
+  },
+  args: {
+    ...layoutArgs,
+    columns: 24,
+    cellMinWidth: 12,
+    labelWidth: '15rem',
+    labelEvery: 3,
+  },
+  render: (args) => {
+    const scale = useStatusScale();
+
+    return (
+      <div
+        style={{
+          /* the browser's own handle: no control needed for the one dimension */
+          resize: 'horizontal',
+          overflow: 'auto',
+          width: '56rem',
+          minWidth: '14rem',
+          maxWidth: '100%',
+          padding: '1rem',
+          outline: '1px dashed currentColor',
+        }}
+      >
+        <Heatmap
+          title="S3 connector services"
+          legendTitle="Service status"
+          scale={scale}
+          cellMinWidth={`${args.cellMinWidth}px`}
+          rows={buildStatusRows(CONNECTOR_SERVICES, args.columns)}
+          columns={buildTimeSlots(DAY_START, args.columns, ONE_HOUR)}
+          {...layoutProps(args)}
+        />
+      </div>
     );
   },
 };

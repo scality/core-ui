@@ -1,5 +1,13 @@
-import React, { ReactNode, useCallback, useEffect, useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import styled from 'styled-components';
 import { Box } from '../../box/Box';
 import { spacing, Stack } from '../../../spacing';
 import { Text } from '../../text/Text.component';
@@ -7,7 +15,6 @@ import { ConstrainedText } from '../../constrainedtext/Constrainedtext.component
 import { Tooltip } from '../../tooltip/Tooltip.component';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { ChartLegend } from '../legend/ChartLegend';
-import { CoreUITheme } from '../../../style/theme';
 import {
   ChartLegendWrapper,
   ChartLegendWrapperProps,
@@ -96,9 +103,9 @@ type HeatmapBaseProps<T extends string> = {
    */
   cellGap?: HeatmapLength;
   /**
-   * Width of the row label gutter. Defaults to `7rem`. Labels truncate rather
-   * than widen it, so a gutter too narrow costs the end of a label and never
-   * the alignment of the grid.
+   * Cap on the row label gutter. Defaults to `7rem`. The gutter sizes to the
+   * longest label it holds and only a label past this truncates, so a cap too
+   * low costs the end of a label and never the alignment of the grid.
    */
   labelWidth?: HeatmapLength;
   /**
@@ -126,6 +133,18 @@ export type DiscreteHeatmapProps = HeatmapBaseProps<string> & {
 
 export type HeatmapProps = DiscreteHeatmapProps;
 
+/**
+ * Narrowest the label gutter goes before the cells give up width instead. An
+ * ellipsized label keeps its tooltip; a narrowed cell only gets harder to hit.
+ */
+const LABEL_MIN_WIDTH = '5rem';
+
+/**
+ * The cell width the labels give way to protect. Deliberately above
+ * `cellMinWidth`, the floor a cell scrolls at, so the gutter yields first.
+ */
+const PREFERRED_CELL_WIDTH = '20px';
+
 const FOCUS_RING_OFFSET = spacing.f1;
 const FOCUS_RING_WIDTH = spacing.f2;
 
@@ -150,19 +169,29 @@ const Cell = styled.div<{
 
 /**
  * A row's label, outside the scroller so it holds still while the tiles move.
- * It carries its own width rather than handing it to `grid-template-columns`,
- * so a bad length costs one label instead of the whole template. `min-width`
- * because a grid item otherwise refuses to shrink into its track.
+ *
+ * `min-width` because a grid item otherwise refuses to shrink into its track,
+ * and `overflow: hidden` to make it a scroll container: its min-content is then
+ * zero, where the label's own `nowrap` would have been the gutter's floor.
  */
 const GutterCell = styled(Box)`
   box-sizing: border-box;
   min-width: 0;
+  overflow: hidden;
+`;
+
+/**
+ * One x-axis tick. It overflows its single-column cell either side rather than
+ * wrapping, and `min-width: 0` keeps it from widening the track it is centred in.
+ */
+const AxisTick = styled(Box)`
+  min-width: 0;
+  white-space: nowrap;
 `;
 
 /**
  * A row of the grid, for assistive technology and for layout at once: `subgrid`
- * makes it a real box spanning every column while its tracks stay the
- * scroller's, so columns line up across rows without a template of their own.
+ * makes it a real box spanning every column while its tracks stay the scroller's.
  */
 const GridRow = styled.div`
   display: grid;
@@ -179,8 +208,7 @@ const defaultTooltip = <T extends string>(
     <Text variant="Smaller" isEmphazed>
       {row.label}
     </Text>
-    {/* the whole slot, not the instant it opens: a cell read on its own says
-        nothing about whether it covers five minutes, an hour or a day */}
+    {/* the slot, not its opening instant: a cell alone says nothing of its span */}
     <Text variant="Smaller" color="textSecondary">
       {formatSlot(column, columnEnd)}
     </Text>
@@ -188,30 +216,75 @@ const defaultTooltip = <T extends string>(
   </Stack>
 );
 
-/** Title above, grid and legend side by side — the frame both scales share. */
+/**
+ * Title above, grid and legend side by side.
+ *
+ * The row wraps, so the legend drops under the grid rather than squeezing it;
+ * the grid's flex basis is what decides the break. The legend is handed the
+ * direction it ended up in, since the break depends on how many columns the axis
+ * has and there is no breakpoint to write. Measuring cannot oscillate: going
+ * under only makes the legend wider, which can only keep it under.
+ */
 const HeatmapFrame = ({
   title,
   legend,
   children,
 }: {
   title?: ReactNode;
-  legend?: ReactNode;
+  legend?: (direction: 'horizontal' | 'vertical') => ReactNode;
   children: ReactNode;
-}) => (
-  <Stack direction="vertical" gap="r16">
-    {title !== undefined && (
-      <Text variant="Large" isEmphazed>
-        {title}
-      </Text>
-    )}
-    <Box display="flex" gap={spacing.f24} alignItems="flex-start">
-      {children}
-      {legend}
-    </Box>
-  </Stack>
-);
+}) => {
+  const row = useRef<HTMLDivElement>(null);
+  const [isLegendBelow, setIsLegendBelow] = useState(false);
 
-const LegendColumn = ({ title }: { title?: ReactNode }) => (
+  const measure = useCallback(() => {
+    const element = row.current;
+    if (!element) return;
+    const [grid, slot] = Array.from(element.children) as HTMLElement[];
+    if (slot) setIsLegendBelow(slot.offsetTop > grid.offsetTop);
+  }, []);
+
+  // A longer axis re-decides the break without the row ever changing size.
+  useLayoutEffect(measure);
+
+  // And on resize, which no render reports.
+  useEffect(() => {
+    const element = row.current;
+    if (!element) return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [measure]);
+
+  // Beside the grid the gap parts two columns; under it, it only leads a line.
+  const legendGap = isLegendBelow ? spacing.f4 : spacing.f16;
+
+  return (
+    <Stack direction="vertical" gap="r16">
+      {/* the variant `ChartHeader` gives every other chart, so none shouts */}
+      {title !== undefined && <Text variant="ChartTitle">{title}</Text>}
+      <Box
+        ref={row}
+        display="flex"
+        flexWrap="wrap"
+        gap={legendGap}
+        alignItems="flex-start"
+      >
+        {children}
+        {legend?.(isLegendBelow ? 'horizontal' : 'vertical')}
+      </Box>
+    </Stack>
+  );
+};
+
+const LegendColumn = ({
+  title,
+  direction,
+}: {
+  title?: ReactNode;
+  direction: 'horizontal' | 'vertical';
+}) => (
+  // Only the items turn: the heading stays above, so two lines under, not five.
   <Stack direction="vertical" gap="r8">
     {title !== undefined && (
       <Text variant="Smaller" isEmphazed>
@@ -220,7 +293,7 @@ const LegendColumn = ({ title }: { title?: ReactNode }) => (
     )}
     <ChartLegend
       shape="rectangle"
-      direction="vertical"
+      direction={direction}
       legendSize="Smaller"
       legendColor="textSecondary"
     />
@@ -237,8 +310,7 @@ const HeatmapGrid = <T extends string>({
   columns,
   appearanceOf,
   labelEvery = 1,
-  /* `spacing` is not declared `as const`, so its members are `string` and have
-     to be told they are the lengths they visibly are */
+  /* `spacing` is not `as const`, so its members need telling they are lengths */
   cellHeight = spacing.f20 as HeatmapLength,
   cellGap = spacing.f4 as HeatmapLength,
   labelWidth = '7rem',
@@ -250,20 +322,24 @@ const HeatmapGrid = <T extends string>({
   // read off the axis once, not once per cell
   const columnEnds = getColumnEnds(columns);
   const columnCount = Math.max(columns.length, 1);
+  // The width the grid is worth defending: every column readable, plus the gaps.
+  const roomyGrid = `${columnCount} * ${PREFERRED_CELL_WIDTH} + ${
+    columnCount - 1
+  } * ${cellGap}`;
+  // Below this the cells give up room, after the gutter has reached its floor.
+  const roomyWidth = `calc(${LABEL_MIN_WIDTH} + ${roomyGrid})`;
 
   return (
-    /* Two columns: the labels, then everything that scrolls. Keeping the labels
-       out of the scroller is what makes the scrollbar cover the tiles alone,
-       and saves painting anything opaque for the tiles to pass under. The
-       trailing row is the scrollbar's own room, which it otherwise takes from
-       the x-axis. */
+    /* Labels outside the scroller, so the scrollbar covers the tiles alone. */
     <Box
       display="grid"
-      gridTemplateColumns="auto 1fr"
+      /* Capped by what a roomy grid leaves: the gutter yields before the cells. */
+      gridTemplateColumns={`fit-content(min(${labelWidth}, max(${LABEL_MIN_WIDTH}, calc(100% - (${roomyGrid}))))) 1fr`}
       gridTemplateRows={`repeat(${rows.length + 1}, auto) ${spacing.f8}`}
       gap={cellGap}
       alignItems="center"
-      flex="1"
+      /* A basis, not a floor: it breaks the legend away before the cells shrink. */
+      flex={`1 1 ${roomyWidth}`}
       minWidth={0}
     >
       {rows.map((row, rowIndex) => (
@@ -273,12 +349,11 @@ const HeatmapGrid = <T extends string>({
           key={`${row.label}-${rowIndex}`}
           gridColumn={1}
           gridRow={rowIndex + 1}
-          width={labelWidth}
+          maxWidth={labelWidth}
           textAlign="right"
           pr={spacing.f8}
         >
-          {/* ellipsizes, and shows the whole label in a tooltip only when the
-              ellipsis actually took something away */}
+          {/* tooltip only when the ellipsis actually took something away */}
           <ConstrainedText
             color="textSecondary"
             text={<Text variant="Smaller">{row.label}</Text>}
@@ -286,10 +361,7 @@ const HeatmapGrid = <T extends string>({
         </GutterCell>
       ))}
 
-      {/* `subgrid` keeps the two columns level: the scroller takes the rows it
-          is placed in rather than sizing its own, so a label cannot drift from
-          the tiles it names. `overflow-y: hidden` because a horizontal
-          scrollbar shortens the box enough to summon a vertical one. */}
+      {/* `subgrid` keeps the columns level; y scrolls on the x bar's height alone */}
       <Box
         role="grid"
         gridColumn={2}
@@ -308,8 +380,7 @@ const HeatmapGrid = <T extends string>({
             aria-label={row.label}
             key={`${row.label}-${rowIndex}`}
           >
-            {/* driven by the columns, not by the cells: a short row must not
-                pull the next one out of line */}
+            {/* driven by the columns: a short row must not pull the next one out */}
             {columns.map((column, columnIndex) => {
               const value = row.cells[columnIndex] ?? null;
               const key = `${row.label}-${rowIndex}-${columnIndex}`;
@@ -344,8 +415,7 @@ const HeatmapGrid = <T extends string>({
                     $height={cellHeight}
                     tabIndex={0}
                     role="gridcell"
-                    /* the same three things the tooltip shows: without the
-                       slot, a screen reader has to count columns to place it */
+                    /* without the slot, a screen reader counts columns to place it */
                     aria-label={`${row.label}, ${formatSlot(
                       column,
                       columnEnds[columnIndex],
@@ -359,7 +429,7 @@ const HeatmapGrid = <T extends string>({
 
         <GridRow role="row">
           {columns.map((column, columnIndex) => (
-            <Box
+            <AxisTick
               role="columnheader"
               key={`tick-${columnIndex}`}
               textAlign="center"
@@ -370,8 +440,7 @@ const HeatmapGrid = <T extends string>({
                   {formatColumnTick ? (
                     formatColumnTick(column)
                   ) : (
-                    /* a daily axis labelled by time of day prints "00:00" over
-                       every column */
+                    /* a daily axis by time of day prints "00:00" over every column */
                     <FormattedDateTime
                       format={
                         isDailyOrLongerSlot(column, columnEnds[columnIndex])
@@ -383,7 +452,7 @@ const HeatmapGrid = <T extends string>({
                   )}
                 </Text>
               )}
-            </Box>
+            </AxisTick>
           ))}
         </GridRow>
       </Box>
@@ -449,7 +518,13 @@ const DiscreteHeatmap = ({
   return (
     <HeatmapFrame
       title={title}
-      legend={showLegend ? <LegendColumn title={legendTitle} /> : undefined}
+      legend={
+        showLegend
+          ? (direction) => (
+              <LegendColumn title={legendTitle} direction={direction} />
+            )
+          : undefined
+      }
     >
       <HeatmapGrid {...gridProps} appearanceOf={appearanceOf} />
     </HeatmapFrame>
