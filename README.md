@@ -6,23 +6,15 @@ Core-UI is a component library containing all components, layouts, icons and the
 
 ## Installation
 
-Add `@scality/core-ui` to your project's dependencies:
-
-```json
-    "@scality/core-ui": "^0.230.0",
+```sh
+npm install @scality/core-ui
 ```
 
-It requires the peerDependencies below, so make sure they are in your `package.json` too:
-
-```json
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-```
-
-Then install:
+`react` and `react-dom` are peer dependencies — any version in `^18.0.0 || ^19.0.0`. Install them
+too if your project does not already have them:
 
 ```sh
-npm install
+npm install react react-dom
 ```
 
 ### Module Federation
