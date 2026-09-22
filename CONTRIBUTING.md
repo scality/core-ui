@@ -62,7 +62,7 @@ Storybook helps to test and visualize a component in isolation. If it doesn't ex
 
 ```jsx
 // in stories/Example/example.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Example } from '../../src/lib/components/example/Example.component';
 
 const meta: Meta<typeof Example> = {

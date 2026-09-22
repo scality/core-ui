@@ -60,7 +60,9 @@ titled `Guidelines/<Name>` — `Guidelines/Responsive` covers the container beha
 shared by several components. Use one when the subject is a choice between sibling
 components, or a behaviour crossing components that are not alternatives.
 
-MDX pages import from `@storybook/addon-docs/blocks`, never `@storybook/blocks`.
+Story files import their `Meta` and `StoryObj` types from `@storybook/react-webpack5`,
+never `@storybook/react` — only the former is a dependency of this package. MDX pages
+import from `@storybook/addon-docs/blocks`, never `@storybook/blocks`.
 
 ## Tests
 
