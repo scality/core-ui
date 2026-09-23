@@ -8,7 +8,8 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 ## Using a colour
 
-Pass the **token name**, not a colour:
+Use a colour from the palette below, never a custom one. Pass the token name to the
+`color` prop, or read the token from the theme inside a styled component:
 
 ```jsx
 <Box color="statusCritical" />
@@ -20,41 +21,38 @@ const Alert = styled.div`
 `;
 ```
 
-Both resolve against whichever theme is mounted, so they follow a theme switch and a
-rebrand. A raw colour does not, which is why `Box`'s colour props no longer accept one
-— a value outside the palette below fails to compile, and a near miss is corrected for
-you (`statusHealty` gives _Did you mean `statusHealthy`?_).
+`Box`'s colour props accept a token name and nothing else, so a value outside the
+palette fails to compile and a near miss is corrected for you (`statusHealty` gives
+_Did you mean `statusHealthy`?_). Three CSS keywords are also accepted, because they
+defer to the context rather than naming a colour: `currentColor`, `inherit` and
+`transparent`.
 
-Three keywords are still accepted, because they defer to the context rather than
-naming a colour: `currentColor`, `inherit` and `transparent`. For a gradient or an
-image, use `backgroundImage`.
-
-Reading the resolved value out of the theme and passing it straight back in is the one
-form to avoid:
+Passing a token's **value** as a prop is rejected too, since its type is `string`:
 
 ```jsx
-<Box color={theme.statusCritical} /> // no
+<Box color={theme.statusCritical} /> // does not compile
+<Box color="statusCritical" /> // the same colour, and checkable
 ```
 
-It looks equivalent, but it snapshots the colour at render and bypasses the scale, so
-a branded theme is not honoured.
+Both render identically and both follow a theme switch — the second is the one the
+compiler can check, so prefer it.
 
-### Overriding
+### If you need a colour outside the palette
 
-The props are the paved path, not a wall. `styled()` wraps a component to override its
-CSS, and the declarations inside it are plain CSS — anything the browser accepts:
+Use `styled()`. The CSS inside it is not type-checked, so any value the browser
+accepts works, and it overrides the component's own styles — including a token passed
+as a prop on the same element:
 
 ```js
-const Emphasis = styled(Box)`
-  color: red;
+const Illustration = styled(Box)`
+  color: #e40046;
   background: linear-gradient(90deg, #fff, #000);
 `;
 ```
 
-That still works, and it wins over a token passed as a prop on the same element, since
-the wrapper's class is generated after the component's own. Reach for it where a value
-genuinely belongs outside the palette — a one-off illustration, a third-party brand
-colour — and reach for a token everywhere else, which is nearly always.
+Keep this for values that genuinely sit outside the design system — a one-off
+illustration, a third-party brand colour. For a gradient or an image on a `Box`,
+`backgroundImage` also takes raw CSS.
 
 ## A-Dark
 
