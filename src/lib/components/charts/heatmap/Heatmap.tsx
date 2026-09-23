@@ -400,28 +400,28 @@ const HeatmapGrid = <T extends string>({
               const { color, opacity } = appearanceOf(value);
 
               return (
-                <Tooltip
-                  key={key}
-                  placement="top"
-                  overlay={
-                    renderTooltip
-                      ? renderTooltip(cell)
-                      : defaultTooltip(cell, formatValue)
-                  }
-                >
-                  <Cell
-                    $color={color}
-                    $opacity={opacity}
-                    $height={cellHeight}
-                    tabIndex={0}
-                    role="gridcell"
-                    /* without the slot, a screen reader counts columns to place it */
-                    aria-label={`${row.label}, ${formatSlot(
-                      column,
-                      columnEnds[columnIndex],
-                    )}, ${formatValue(value)}`}
-                  />
-                </Tooltip>
+                <Box role="gridcell" key={key} display="grid">
+                  <Tooltip
+                    placement="top"
+                    overlay={
+                      renderTooltip
+                        ? renderTooltip(cell)
+                        : defaultTooltip(cell, formatValue)
+                    }
+                  >
+                    <Cell
+                      $color={color}
+                      $opacity={opacity}
+                      $height={cellHeight}
+                      tabIndex={0}
+                      /* without the slot, a screen reader counts columns to place it */
+                      aria-label={`${row.label}, ${formatSlot(
+                        column,
+                        columnEnds[columnIndex],
+                      )}, ${formatValue(value)}`}
+                    />
+                  </Tooltip>
+                </Box>
               );
             })}
           </GridRow>

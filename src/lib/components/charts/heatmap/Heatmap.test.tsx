@@ -192,6 +192,18 @@ describe('Heatmap', () => {
       expect(screen.getAllByRole('columnheader')).toHaveLength(columns.length);
     });
 
+    it('should have each row own its cells rather than a wrapper above them', () => {
+      renderStatusHeatmap();
+
+      const [firstRow] = screen.getAllByRole('row');
+
+      expect(
+        Array.from(firstRow.children).map((child) =>
+          child.getAttribute('role'),
+        ),
+      ).toEqual(Array(columns.length).fill('gridcell'));
+    });
+
     it('should announce a cell with its row, its slot and its value', () => {
       renderStatusHeatmap();
 
