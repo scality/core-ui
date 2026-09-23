@@ -18,7 +18,7 @@ import { Wrapper } from '../common';
 type Story = StoryObj<typeof Barchart>;
 
 const meta: Meta<typeof Barchart> = {
-  title: 'Components/Data Display/Charts/Barchartv2',
+  title: 'Components/Data Display/Charts/Barchart',
   component: Barchart,
   decorators: [
     (story) => (

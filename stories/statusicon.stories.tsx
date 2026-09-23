@@ -7,7 +7,7 @@ import { Wrapper } from './common';
 import { Stack, Text } from '../src/lib';
 
 export default {
-  title: 'Components/statusIcon',
+  title: 'Components/StatusIcon',
   component: StatusIcon,
 };
 

@@ -20,7 +20,7 @@ const retentionOptions = [
 ];
 
 const meta: Meta<RadioGroupProps> = {
-  title: 'Components/Inputs/Radio',
+  title: 'Components/Inputs/RadioGroup',
   component: RadioGroup,
 };
 

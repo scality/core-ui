@@ -12,7 +12,7 @@ import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/Scrollb
 import { Meta } from '@storybook/react-webpack5';
 
 const meta: Meta<typeof Layout2> = {
-  title: 'Templates/Layout',
+  title: 'Templates/Layout2',
   component: Layout2,
   args: {},
 };
