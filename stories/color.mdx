@@ -39,6 +39,23 @@ form to avoid:
 It looks equivalent, but it snapshots the colour at render and bypasses the scale, so
 a branded theme is not honoured.
 
+### Overriding
+
+The props are the paved path, not a wall. `styled()` wraps a component to override its
+CSS, and the declarations inside it are plain CSS — anything the browser accepts:
+
+```js
+const Emphasis = styled(Box)`
+  color: red;
+  background: linear-gradient(90deg, #fff, #000);
+`;
+```
+
+That still works, and it wins over a token passed as a prop on the same element, since
+the wrapper's class is generated after the component's own. Reach for it where a value
+genuinely belongs outside the palette — a one-off illustration, a third-party brand
+colour — and reach for a token everywhere else, which is nearly always.
+
 ## A-Dark
 
 <ColorPalette>
