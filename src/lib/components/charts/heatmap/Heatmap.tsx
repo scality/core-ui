@@ -364,6 +364,7 @@ const HeatmapGrid = <T extends string>({
       {/* `subgrid` keeps the columns level; y scrolls on the x bar's height alone */}
       <Box
         role="grid"
+        padding={spacing.f4}
         gridColumn={2}
         gridRow="1 / -1"
         overflowX="auto"
