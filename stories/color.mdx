@@ -8,24 +8,29 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 ## Using a colour
 
-Use a colour from the palette below, never a custom one. Pass the token name to the
-`color` prop, or read the token from the theme inside a styled component:
+Every colour comes from the palette below. Pass a token name to any prop that takes a
+colour — `color`, `backgroundColor`, `borderColor` and the rest — or read the token off
+the theme inside a styled component:
 
 ```jsx
-<Box color="statusCritical" />
+<Box
+  color="textPrimary"
+  backgroundColor="backgroundLevel1"
+  borderColor="border"
+/>
 ```
 
 ```js
 const Alert = styled.div`
   color: ${(props) => props.theme.statusCritical};
+  border: 1px solid ${(props) => props.theme.border};
 `;
 ```
 
-`Box`'s colour props accept a token name and nothing else, so a value outside the
-palette fails to compile and a near miss is corrected for you (`statusHealty` gives
-_Did you mean `statusHealthy`?_). Three CSS keywords are also accepted, because they
-defer to the context rather than naming a colour: `currentColor`, `inherit` and
-`transparent`.
+These props accept a token name and nothing else, so a value outside the palette fails
+to compile and a near miss is corrected for you (`statusHealty` gives _Did you mean
+`statusHealthy`?_). Three CSS keywords are also accepted, because they defer to the
+context rather than naming a colour: `currentColor`, `inherit` and `transparent`.
 
 Passing a token's **value** as a prop is rejected too, since its type is `string`:
 
