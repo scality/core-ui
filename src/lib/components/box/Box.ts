@@ -27,17 +27,7 @@ import type {
   FontSizeProps,
   ShadowProps,
 } from 'styled-system';
-import type { CoreUITheme, CoreUIProvidedTheme } from '../../style/theme';
-
-/**
- * A colour the design system can resolve: a theme token, or one of the three CSS
- * keywords that defer to the context instead of naming a colour. A raw colour is
- * not accepted — outside the theme it cannot follow a theme switch or a rebrand,
- * so the token is the only value that stays correct. For a gradient or an image,
- * reach for `backgroundImage`, which is untouched.
- */
-export type BoxColor =
-  keyof CoreUITheme | 'currentColor' | 'inherit' | 'transparent';
+import type { CoreUIProvidedTheme, ThemeColor } from '../../style/theme';
 
 type BorderColorProp =
   | 'borderColor'
@@ -51,10 +41,10 @@ export type BoxComponentProps = LayoutProps &
   GridProps &
   SpaceProps &
   PositionProps &
-  ColorProps<CoreUIProvidedTheme, BoxColor> &
-  BackgroundProps<CoreUIProvidedTheme, BoxColor> &
+  ColorProps<CoreUIProvidedTheme, ThemeColor> &
+  BackgroundProps<CoreUIProvidedTheme, ThemeColor> &
   Omit<BordersProps, BorderColorProp> &
-  BorderColorProps<CoreUIProvidedTheme, BoxColor> &
+  BorderColorProps<CoreUIProvidedTheme, ThemeColor> &
   Omit<TypographyProps, 'fontSize'> &
   FontSizeProps<CoreUIProvidedTheme> &
   ShadowProps & {

@@ -54,4 +54,4 @@ export type {
   CategoryType,
 } from './components/charts';
 
-export type { CoreUITheme } from './style/theme';
+export type { CoreUITheme, ThemeColor } from './style/theme';

@@ -1,6 +1,4 @@
-// Imported for its side effect on the type system only: the module has to be
-// imported here for the `declare module` below to augment it rather than declare
-// a new one.
+// Makes the `declare module` below augment styled-components instead of shadowing it.
 import type {} from 'styled-components';
 import { lighten, darken } from 'polished';
 //== Colors
@@ -62,16 +60,16 @@ export type CoreUITheme = {
 };
 
 /**
- * What `CoreUiThemeProvider` installs: the flat token record above, plus the three
- * styled-system scales it derives from it. `colors` is that same record under the
- * name styled-system's colour props look up, which is what makes
- * `<Box color="statusHealthy" />` resolve.
- *
- * Deliberately separate from `CoreUITheme`: a theme is *authored* as the flat record
- * — the presets here, and the runtime-branded themes built by spreading one — and the
- * scales are added on the way in. Folding `colors` into `CoreUITheme` would make every
- * authored theme carry a copy of itself that a later spread could leave pointing at the
- * tokens it was branded away from.
+ * A colour the theme can resolve: a token, or a keyword that defers to the context.
+ * No raw colour — one outside the theme cannot follow a rebrand.
+ */
+export type ThemeColor =
+  keyof CoreUITheme | 'currentColor' | 'inherit' | 'transparent';
+
+/**
+ * What `CoreUiThemeProvider` installs: the tokens, plus the styled-system scales.
+ * Kept out of `CoreUITheme` because themes are authored flat and branded by
+ * spreading one — a `colors` field folded in would be carried over stale.
  */
 export type CoreUIProvidedTheme = CoreUITheme & {
   colors: CoreUITheme;
@@ -217,8 +215,6 @@ export const defaultTheme = coreUIAvailableThemes;
  */
 
 export const brand = coreUIAvailableThemes.darkRebrand;
-
-export type ThemeColors = keyof CoreUITheme;
 
 // LineChart colors
 export const lineColor1 = '#A14FBF';
