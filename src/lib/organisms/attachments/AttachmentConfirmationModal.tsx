@@ -157,7 +157,7 @@ export function AttachmentConfirmationModal<
               <Icon name="Link" /> Attach
             </span>
           ) : (
-            <Box color={theme.statusCritical}>
+            <Box color="statusCritical">
               <Icon name="Unlink" /> Detach
             </Box>
           );

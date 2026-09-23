@@ -22,19 +22,41 @@ import type {
   GridProps,
   BackgroundProps,
   BordersProps,
+  BorderColorProps,
   TypographyProps,
+  FontSizeProps,
   ShadowProps,
 } from 'styled-system';
+import type { CoreUITheme, CoreUIProvidedTheme } from '../../style/theme';
+
+/**
+ * A colour the design system can resolve: a theme token, or one of the three CSS
+ * keywords that defer to the context instead of naming a colour. A raw colour is
+ * not accepted — outside the theme it cannot follow a theme switch or a rebrand,
+ * so the token is the only value that stays correct. For a gradient or an image,
+ * reach for `backgroundImage`, which is untouched.
+ */
+export type BoxColor =
+  keyof CoreUITheme | 'currentColor' | 'inherit' | 'transparent';
+
+type BorderColorProp =
+  | 'borderColor'
+  | 'borderTopColor'
+  | 'borderRightColor'
+  | 'borderBottomColor'
+  | 'borderLeftColor';
 
 export type BoxComponentProps = LayoutProps &
   FlexboxProps &
   GridProps &
   SpaceProps &
   PositionProps &
-  ColorProps &
-  BackgroundProps &
-  BordersProps &
-  TypographyProps &
+  ColorProps<CoreUIProvidedTheme, BoxColor> &
+  BackgroundProps<CoreUIProvidedTheme, BoxColor> &
+  Omit<BordersProps, BorderColorProp> &
+  BorderColorProps<CoreUIProvidedTheme, BoxColor> &
+  Omit<TypographyProps, 'fontSize'> &
+  FontSizeProps<CoreUIProvidedTheme> &
   ShadowProps & {
     gap?: string | number;
     /**

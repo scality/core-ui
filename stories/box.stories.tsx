@@ -102,7 +102,7 @@ export const colors = {
   render: ({}) => {
     return (
       <HighlightBorder>
-        <Box color="red">red</Box>
+        <Box color="statusCritical">statusCritical</Box>
         <Box bg="backgroundLevel2" color="textPrimary">
           textPrimary with background color at backgroundLevel2
         </Box>

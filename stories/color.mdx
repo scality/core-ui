@@ -6,6 +6,39 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 # Colors
 
+## Using a colour
+
+Pass the **token name**, not a colour:
+
+```jsx
+<Box color="statusCritical" />
+```
+
+```js
+const Alert = styled.div`
+  color: ${(props) => props.theme.statusCritical};
+`;
+```
+
+Both resolve against whichever theme is mounted, so they follow a theme switch and a
+rebrand. A raw colour does not, which is why `Box`'s colour props no longer accept one
+— a value outside the palette below fails to compile, and a near miss is corrected for
+you (`statusHealty` gives _Did you mean `statusHealthy`?_).
+
+Three keywords are still accepted, because they defer to the context rather than
+naming a colour: `currentColor`, `inherit` and `transparent`. For a gradient or an
+image, use `backgroundImage`.
+
+Reading the resolved value out of the theme and passing it straight back in is the one
+form to avoid:
+
+```jsx
+<Box color={theme.statusCritical} /> // no
+```
+
+It looks equivalent, but it snapshots the colour at render and bypasses the scale, so
+a branded theme is not honoured.
+
 ## A-Dark
 
 <ColorPalette>

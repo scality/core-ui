@@ -1,6 +1,6 @@
 import { Table, TableProps } from './Tablev2.component';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../style/theme';
 
 jest.mock('./TableUtils', () => ({
@@ -37,7 +37,7 @@ const renderMultiSelectTable = (
   } = {},
 ) =>
   render(
-    <ThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+    <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
       <Table columns={columns} data={data} defaultSortingKey="firstName">
         <Table.MultiSelectableContent
           rowHeight="h40"
@@ -45,7 +45,7 @@ const renderMultiSelectTable = (
           {...props}
         />
       </Table>
-    </ThemeProvider>,
+    </CoreUiThemeProvider>,
   );
 
 describe('MultiSelectableContent', () => {
@@ -145,7 +145,7 @@ describe('MultiSelectableContent row click vs in-cell controls', () => {
     } = {},
   ) =>
     render(
-      <ThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
         <Table
           columns={columnsWithButton}
           data={data.map((entry) => ({ ...entry, onAction }))}
@@ -157,7 +157,7 @@ describe('MultiSelectableContent row click vs in-cell controls', () => {
             {...props}
           />
         </Table>
-      </ThemeProvider>,
+      </CoreUiThemeProvider>,
     );
 
   it('does not single-select the row when a button inside a cell is clicked', async () => {

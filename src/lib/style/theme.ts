@@ -1,3 +1,7 @@
+// Imported for its side effect on the type system only: the module has to be
+// imported here for the `declare module` below to augment it rather than declare
+// a new one.
+import type {} from 'styled-components';
 import { lighten, darken } from 'polished';
 //== Colors
 export const hotPink = '#E40046';
@@ -56,6 +60,28 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
+
+/**
+ * What `CoreUiThemeProvider` installs: the flat token record above, plus the three
+ * styled-system scales it derives from it. `colors` is that same record under the
+ * name styled-system's colour props look up, which is what makes
+ * `<Box color="statusHealthy" />` resolve.
+ *
+ * Deliberately separate from `CoreUITheme`: a theme is *authored* as the flat record
+ * — the presets here, and the runtime-branded themes built by spreading one — and the
+ * scales are added on the way in. Folding `colors` into `CoreUITheme` would make every
+ * authored theme carry a copy of itself that a later spread could leave pointing at the
+ * tokens it was branded away from.
+ */
+export type CoreUIProvidedTheme = CoreUITheme & {
+  colors: CoreUITheme;
+  space: typeof space;
+  fontSizes: typeof fontSize;
+};
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends CoreUIProvidedTheme {}
+}
 
 export const coreUIAvailableThemesNames = [
   'darkRebrand',
