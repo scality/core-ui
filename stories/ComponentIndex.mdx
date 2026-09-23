@@ -1,0 +1,204 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Component index" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 4rem; }
+  .sbdocs-content table { width: 100%; }
+  .sbdocs-content td:first-child { white-space: nowrap; }
+`}</style>
+
+# Component index
+
+Everything the library exports, what each one is for, and the path to import it from.
+
+There are two entry points. `@scality/core-ui` is the stable surface;
+`@scality/core-ui/dist/next` holds the newer version of a component whose predecessor is
+still in use, so a redesign ships without breaking what is already installed. `Drawer` is
+listed under both because both entry points export the same component.
+
+```jsx
+import { Icon, Stack } from '@scality/core-ui';
+import { Button, Box } from '@scality/core-ui/dist/next';
+```
+
+The groups follow the Storybook sidebar, and the exports the sidebar leaves uncategorised
+are filed under the group they belong to. **Docs** goes to a component's guideline where
+there is one and to its stories otherwise. An em dash means the fact is missing, not that
+the export is obsolete.
+
+## Buttons
+
+| Export        | Use it for                                                                                               | Import from                  | Docs                                                           |
+| ------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------- |
+| `Button`      | Runs an action. The variant says how prominent that action is on the page.                               | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-button--guideline)          |
+| `CopyButton`  | Copies a string to the clipboard and confirms the copy in place.                                         | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-copybutton--stories)          |
+| `ButtonGroup` | Groups related buttons, and becomes a single-choice segmented control when given `value` and `onChange`. | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-buttongroup--stories)         |
+| `Dropdown`    | A button that opens a menu of actions.                                                                   | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-dropdown--stories) |
+
+## Inputs
+
+Which of these to reach for is settled in [Guidelines/Selection Controls](?path=/docs/guidelines-selection-controls--stories).
+
+| Export           | Use it for                                                                          | Import from                  | Docs                                                              |
+| ---------------- | ----------------------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------- |
+| `Input`          | A single-line text field.                                                           | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-input--stories)           |
+| `TextArea`       | A multi-line text field, optionally growing with its content.                       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-textarea--stories)        |
+| `Checkbox`       | One option turned on or off, applied when the form is submitted.                    | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-checkbox--guideline)    |
+| `RadioGroup`     | One choice among two to four mutually exclusive options.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-radiogroup--guideline)  |
+| `Toggle`         | One setting turned on or off, taking effect immediately.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-toggle--guideline)      |
+| `Select`         | One choice from a long or dynamic list; it gains a search field past eight options. | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-inputs-select--guideline)      |
+| `HealthSelector` | A Select preset with the health statuses as its options.                            | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-healthselector--stories)         |
+| `SearchInput`    | A text field that filters what is shown as it is typed into.                        | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-searchinput--guideline) |
+| `InputList`      | A variable-length list of fields the user adds rows to and removes rows from.       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-inputlist--stories)       |
+| `InlineInput`    | A value shown as text that becomes editable in place and saves through a mutation.  | `@scality/core-ui`           | [Stories](?path=/docs/components-inlineinput--stories)            |
+| `Dropzone`       | A drop area for attaching files, with a button for picking them instead.            | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-dropzone--stories)        |
+| `Editor`         | A JSON editor with syntax highlighting and schema validation.                       | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-editor--stories)          |
+
+## Forms
+
+A `Form` holds `FormSection`s, and a section holds `FormGroup`s. Each level throws if used outside the one above it.
+
+| Export        | Use it for                                                                                | Import from        | Docs                                               |
+| ------------- | ----------------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------- |
+| `Form`        | Lays a form out as a page or inside a tab, with its title, its fields and its action bar. | `@scality/core-ui` | [Guideline](?path=/docs/templates-form--guideline) |
+| `FormSection` | A titled group of fields inside a Form, owning the width of the label column.             | `@scality/core-ui` | [Guideline](?path=/docs/templates-form--guideline) |
+| `FormGroup`   | One labelled field, with its help text, its error and its required marker.                | `@scality/core-ui` | [Guideline](?path=/docs/templates-form--guideline) |
+
+## Navigation
+
+| Export             | Use it for                                                              | Import from                  | Docs                                                                       |
+| ------------------ | ----------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------- |
+| `Navbar`           | The application bar across the top: logo, tabs and the account actions. | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-navbar--stories)               |
+| `Sidebar`          | The collapsible navigation rail down the side.                          | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-sidebar--stories)              |
+| `Breadcrumb`       | The path from the root of the application to the page being shown.      | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-breadcrumb--stories)           |
+| `Tabs`             | Switches between sibling views without leaving the page.                | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
+| `Tab`              | One view inside `Tabs`, carrying its own label.                         | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
+| `ScrollbarWrapper` | Applies the library's scrollbar styling to everything inside it.        | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-scrollbarwrapper--guideline) |
+| `ErrorPage401`     | The page for a user who is signed in but not allowed here.              | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-401--stories)      |
+| `ErrorPage404`     | The page for a route that does not exist.                               | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-404--stories)      |
+| `ErrorPage500`     | The page for a request the server could not complete.                   | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-500--stories)      |
+| `ErrorPageAuth`    | The full-page wait shown while authentication is still in progress.     | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-auth--stories)     |
+
+## Feedback
+
+Banner stays until the condition it reports clears; Toast reports something that already finished and dismisses itself.
+
+| Export                | Use it for                                                                                              | Import from                                       | Docs                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| `Banner`              | A condition that holds, shown for as long as it holds.                                                  | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-banner--stories)        |
+| `Toast`               | The outcome of an action that just completed. It dismisses itself.                                      | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-toast--stories)         |
+| `ToastProvider`       | Hosts the toasts. Wrap the application in it once.                                                      | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-toast--stories)         |
+| `useToast`            | Shows a toast from anywhere under the provider.                                                         | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-toast--stories)         |
+| `useMutationsHandler` | Turns a mutation's success or failure into a toast, including mutations that depend on another.         | `@scality/core-ui`                                | [Stories](?path=/docs/hooks-usemutationshandler--stories)         |
+| `Notifications`       | A fixed stack of dismissible notifications in one corner of the screen.                                 | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-notifications--stories) |
+| `Modal`               | Interrupts the user for a decision that has to be made before anything else continues.                  | `@scality/core-ui`                                | [Guideline](?path=/docs/components-feedback-modal--guideline)     |
+| `Drawer`              | A panel sliding in from an edge for a task done alongside the page.                                     | `@scality/core-ui` · `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-feedback-drawer--stories)        |
+| `Tooltip`             | Explanatory text shown on hover.                                                                        | `@scality/core-ui`                                | [Stories](?path=/docs/components-feedback-tooltip--stories)       |
+| `InfoMessage`         | A short explanation attached to a field or a section, with an optional link out.                        | `@scality/core-ui`                                | [Guideline](?path=/docs/components-infomessage--guideline)        |
+| `UnsuccessfulResult`  | What a table or a list shows instead of rows while it is loading, when it failed, and when it is empty. | `@scality/core-ui`                                | [Stories](?path=/docs/components-unsuccessfulresult--stories)     |
+
+## Data display
+
+| Export              | Use it for                                                                                             | Import from                  | Docs                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------- | --------------------------------------------------------------------- |
+| `Table`             | The data grid: sorting, selection, and virtualised rows.                                               | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-data-display-table--guideline)     |
+| `EmptyTable`        | The row a table shows in place of its body when it has none.                                           | `@scality/core-ui`           | —                                                                     |
+| `EmptyState`        | The screen for a resource list with nothing in it yet, carrying the action that creates the first one. | `@scality/core-ui`           | [Stories](?path=/docs/components-data-display-emptystate--stories)    |
+| `Card`              | A bounded block of content, optionally selectable and optionally carrying a status.                    | `@scality/core-ui`           | [Stories](?path=/docs/components-data-display-card--stories)          |
+| `Accordion`         | A titled section the reader expands and collapses.                                                     | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-accordion--guideline)              |
+| `TextBadge`         | A short label marking a value, optionally removable.                                                   | `@scality/core-ui`           | [Stories](?path=/docs/components-textbadge--stories)                  |
+| `StatusWrapper`     | Overlays a small status badge on whatever it wraps.                                                    | `@scality/core-ui`           | [Stories](?path=/docs/components-data-display-statuswrapper--stories) |
+| `ConstrainedText`   | Text clamped to a number of lines, with the whole value in a tooltip.                                  | `@scality/core-ui`           | [Stories](?path=/docs/components-constrainedtext--stories)            |
+| `PrettyBytes`       | A byte count written in the largest unit that keeps it readable.                                       | `@scality/core-ui`           | [Stories](?path=/docs/components-prettybytes--stories)                |
+| `FormattedDateTime` | A date in one of the library's formats, including relative to now.                                     | `@scality/core-ui`           | [Stories](?path=/docs/components-formatteddatetime--stories)          |
+
+## Charts
+
+The shared conventions — colours, axes, tooltips, time spans — are in [Guidelines/Chart](?path=/docs/guidelines-chart--stories).
+
+| Export                       | Use it for                                                                 | Import from                  | Docs                                                                               |
+| ---------------------------- | -------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| `Barchart`                   | Values compared across categories, as bars.                                | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-data-display-charts-barchart--stories)            |
+| `LineTimeSerieChart`         | One or more series plotted over time.                                      | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-data-display-charts-linetimeseriechart--stories)  |
+| `Sparkline`                  | A trend line small enough to sit inside a table row or a card.             | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-data-display-charts-sparkline--stories)           |
+| `GlobalHealthBar`            | Health across a time window as a single bar, with the alerts behind it.    | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-data-display-charts-globalhealthbar--guideline) |
+| `ChartLegend`                | The legend for a chart, and the control over which series are shown.       | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `ChartLegendWrapper`         | Shares one legend, its colour set and its selection across several charts. | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `useChartLegend`             | Reads and drives that shared legend state.                                 | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `useChartId`                 | A stable id for one chart instance, for registering it with the legend.    | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `MetricsTimeSpanProvider`    | Shares the selected time span across the charts under it.                  | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `useMetricsTimeSpan`         | Reads and sets that shared time span.                                      | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `BarchartTooltip`            | Barchart's own tooltip, for when the default needs replacing.              | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `ChartTooltipContainer`      | The frame of a hand-built chart tooltip.                                   | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `ChartTooltipHeader`         | The header of a hand-built chart tooltip.                                  | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `ChartTooltipItemsContainer` | The body of a hand-built chart tooltip.                                    | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+| `ChartTooltipItem`           | One series line inside a hand-built chart tooltip.                         | `@scality/core-ui/dist/next` | [Stories](?path=/docs/guidelines-chart--stories)                                   |
+
+## Progress and loading
+
+| Export                | Use it for                                                                       | Import from        | Docs                                                                            |
+| --------------------- | -------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------- |
+| `Loader`              | The spinner shown while something is on its way.                                 | `@scality/core-ui` | [Stories](?path=/docs/components-progress-loading-loader--stories)              |
+| `LOADER_SIZE`         | The sizes `Loader` accepts, as an object to index rather than a string to spell. | `@scality/core-ui` | [Stories](?path=/docs/components-progress-loading-loader--stories)              |
+| `ProgressBar`         | How far an operation of known length has got.                                    | `@scality/core-ui` | [Stories](?path=/docs/components-progress-loading-progressbar--stories)         |
+| `CircularProgressBar` | The same progress as a ring, where a bar does not fit.                           | `@scality/core-ui` | [Stories](?path=/docs/components-progress-loading-circularprogressbar--stories) |
+| `Stepper`             | Drives a multi-step flow: it renders the current step and moves between them.    | `@scality/core-ui` | [Guideline](?path=/docs/components-progress-loading-stepper--guideline)         |
+| `Steppers`            | The indicator showing the steps and which one the user is on.                    | `@scality/core-ui` | [Stories](?path=/docs/components-progress-loading-steppers--stories)            |
+
+## Layout
+
+The four frames place a whole page. `Box` places one thing inside it, and `Stack` and `Wrap` are built on `Box`.
+
+| Export                | Use it for                                                                                          | Import from                  | Docs                                                             |
+| --------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------- |
+| `Layout2`             | The application frame: a header navigation slot above everything else.                              | `@scality/core-ui`           | [Stories](?path=/docs/templates-layout2--stories)                |
+| `AppContainer`        | The content area inside `Layout2`, with its summary, context and main-content regions.              | `@scality/core-ui`           | —                                                                |
+| `TwoPanelLayout`      | Two panels side by side at a fixed ratio.                                                           | `@scality/core-ui`           | —                                                                |
+| `LateralNavbarLayout` | A frame with the navigation down the side instead of across the top.                                | `@scality/core-ui`           | [Stories](?path=/docs/templates-lateralnavbarlayout--stories)    |
+| `Layout`              | The first frame: navbar, sidebar and content. `Layout2` supersedes it.                              | `@scality/core-ui`           | —                                                                |
+| `Box`                 | The styling primitive: spacing, colour and layout applied as props.                                 | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-styling-box--stories)           |
+| `Stack`               | Children in a row or a column at one gap, optionally separated and optionally stacking when narrow. | `@scality/core-ui`           | [Stories](?path=/docs/components-styling-spacing-utils--stories) |
+| `Wrap`                | Two children pushed to opposite ends of a row.                                                      | `@scality/core-ui`           | [Stories](?path=/docs/components-styling-spacing-utils--stories) |
+| `spacing`             | The spacing scale, for use inside a styled component.                                               | `@scality/core-ui`           | [Stories](?path=/docs/style-spacing--stories)                    |
+
+## Text and icons
+
+The presets below `Text` are `Text` with its props already set. Reach for a preset first, and for `Text` itself when the combination is not one of them.
+
+| Export           | Use it for                                                              | Import from        | Docs                                                    |
+| ---------------- | ----------------------------------------------------------------------- | ------------------ | ------------------------------------------------------- |
+| `Text`           | Text at a chosen size and emphasis. Everything below is a preset of it. | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `BasicText`      | Text at the base size.                                                  | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `SecondaryText`  | Supporting text, in the secondary colour.                               | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `EmphaseText`    | Text standing out from what surrounds it.                               | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `StatusText`     | Text coloured by a status.                                              | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `LargeText`      | Text one size up.                                                       | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `LargerText`     | Text two sizes up.                                                      | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `SmallerText`    | Text one size down.                                                     | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `ChartTitleText` | The title sitting above a chart.                                        | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `Link`           | An anchor carrying the link styling.                                    | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
+| `Icon`           | One of the library's icons, sized and coloured from the theme.          | `@scality/core-ui` | [Stories](?path=/docs/components-icon--icon)            |
+| `IconHelp`       | The question mark that carries an explanation in a tooltip.             | `@scality/core-ui` | [Guideline](?path=/docs/components-iconhelp--guideline) |
+
+## Theme, values and helpers
+
+| Export                      | Use it for                                                                                                      | Import from                  | Docs                                         |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------- |
+| `CoreUiThemeProvider`       | Installs a theme. Wrap the application in it once.                                                              | `@scality/core-ui/dist/next` | [Stories](?path=/docs/style-colors--stories) |
+| `STATUS_HEALTHY`            | `'healthy'`                                                                                                     | `@scality/core-ui`           | —                                            |
+| `STATUS_WARNING`            | `'warning'`                                                                                                     | `@scality/core-ui`           | —                                            |
+| `STATUS_CRITICAL`           | `'critical'`                                                                                                    | `@scality/core-ui`           | —                                            |
+| `STATUS_SUCCESS`            | `'success'`                                                                                                     | `@scality/core-ui`           | —                                            |
+| `STATUS_INFO`               | `'info'`                                                                                                        | `@scality/core-ui`           | —                                            |
+| `STATUS_UNKNOWN`            | `'unknown'`                                                                                                     | `@scality/core-ui`           | —                                            |
+| `STATUS_NONE`               | `'none'`                                                                                                        | `@scality/core-ui`           | —                                            |
+| `formatISONumber`           | A number written to ISO 80000-1: space-separated thousands, and enough decimals to keep two significant digits. | `@scality/core-ui`           | [Stories](?path=/docs/style-format--stories) |
+| `formatDayMonthAbbreviated` | A date as `06 Oct`, for a long-range axis or a tight column.                                                    | `@scality/core-ui`           | [Stories](?path=/docs/style-format--stories) |
+| `TIME_FORMATER`             | The 24-hour `HH:mm` formatter the date components use.                                                          | `@scality/core-ui`           | [Stories](?path=/docs/style-format--stories) |
+| `getDateDaysDiff`           | The distance between two dates in months, days, hours or minutes.                                               | `@scality/core-ui`           | —                                            |
+
+## Documented but not exported
+
+`StatusIcon` and `AttachmentTable` each have a story in this Storybook and are exported
+from neither entry point, so nothing outside the repository can import them.
