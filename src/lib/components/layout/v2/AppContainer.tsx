@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../../spacing';
-import { ThemeColor } from '../../../style/theme';
+import { ThemeColorToken } from '../../../style/theme';
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const FillAvailableFlexBox = styled.div`
 const sectionDistance = spacing.r2;
 
 const ContextWrapper = styled.div<{
-  $background?: ThemeColor;
+  $background?: ThemeColorToken;
 }>`
   background: ${(props) =>
     props.$background ? props.theme[props.$background] : 'initial'};
@@ -39,7 +39,7 @@ const ContextContainer = ({
   background,
   ...rest
 }: {
-  background?: ThemeColor;
+  background?: ThemeColorToken;
   children: ReactElement | ReactElement[];
 }) => (
   <ContextWrapper $background={background}>
@@ -51,7 +51,7 @@ const OverallSummaryContainer = styled.div<{
   $noPadding?: boolean;
   $hasTopMargin?: boolean;
   $noBottomMargin?: boolean;
-  $background?: ThemeColor;
+  $background?: ThemeColorToken;
 }>`
   background: ${(props) => props.theme[props.$background || 'backgroundLevel2']};
   min-height: 6rem;
@@ -76,7 +76,7 @@ const OverallSummary = ({
   noPadding?: boolean;
   noBottomMargin?: boolean;
   hasTopMargin?: boolean;
-  background?: ThemeColor;
+  background?: ThemeColorToken;
 }) => (
   <OverallSummaryContainer
     $background={background}
@@ -91,7 +91,7 @@ const OverallSummary = ({
 const MainContentContainer = styled.div<{
   $hasPadding?: boolean;
   $hasTopMargin?: boolean;
-  $background?: ThemeColor;
+  $background?: ThemeColorToken;
 }>`
   display: flex;
   flex: 1;
@@ -111,7 +111,7 @@ const MainContent = ({
   children: ReactNode;
   hasPadding?: boolean;
   hasTopMargin?: boolean;
-  background?: ThemeColor;
+  background?: ThemeColorToken;
 }) => (
   <MainContentContainer
     $hasPadding={hasPadding}

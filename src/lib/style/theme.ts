@@ -59,12 +59,15 @@ export type CoreUITheme = {
   textLink: string;
 };
 
+/** A colour token. The only colour type safe to index the theme object with. */
+export type ThemeColorToken = keyof CoreUITheme;
+
 /**
- * A colour the theme can resolve: a token, or a keyword that defers to the context.
- * No raw colour — one outside the theme cannot follow a rebrand.
+ * A colour for a styled-system prop: a token, or a keyword that defers to the
+ * context. No raw colour — one outside the theme cannot follow a rebrand.
  */
 export type ThemeColor =
-  keyof CoreUITheme | 'currentColor' | 'inherit' | 'transparent';
+  ThemeColorToken | 'currentColor' | 'inherit' | 'transparent';
 
 /**
  * What `CoreUiThemeProvider` installs: the tokens, plus the styled-system scales.

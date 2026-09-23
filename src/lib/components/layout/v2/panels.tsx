@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactElement } from 'react';
-import { ThemeColor } from '../../../style/theme';
+import { ThemeColorToken } from '../../../style/theme';
 import { AppContainer } from './AppContainer';
 
 interface Ratio {
@@ -37,7 +37,7 @@ const PanelsContainer = styled.div<{ $noGap?: boolean }>`
 const LeftPanel = styled.div<{
   $hasPadding?: boolean;
   $flex?: number;
-  $background?: ThemeColor;
+  $background?: ThemeColorToken;
   $container?: boolean;
 }>`
   flex: ${(props) => props.$flex || '0 auto'};
@@ -55,7 +55,7 @@ const LeftPanel = styled.div<{
 const RightPanel = styled.div<{
   $hasPadding?: boolean;
   $flex?: number;
-  $background?: ThemeColor;
+  $background?: ThemeColorToken;
   $container?: boolean;
 }>`
   flex: ${(props) => props.$flex || '0 auto'};
@@ -95,8 +95,8 @@ export const TwoPanelLayout = ({
   ...rest
 }: {
   panelsRatio: RatioString;
-  leftPanel: { children: ReactElement; background?: ThemeColor };
-  rightPanel: { children: ReactElement; background?: ThemeColor };
+  leftPanel: { children: ReactElement; background?: ThemeColorToken };
+  rightPanel: { children: ReactElement; background?: ThemeColorToken };
   noGap?: boolean;
   /**
    * Declare the named panel(s) the `responsive` container, so
