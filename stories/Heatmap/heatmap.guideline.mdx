@@ -122,9 +122,23 @@ colour elsewhere in the product will read it the same way here. Avoid hardcoded
 hex values, they belong to no theme and follow none.
 
 Order the legend the way the values mean something, through `scale.sortOrder`.
-Alphabetical is the default and is rarely what the reader expects. Where the
-stored value is not what should be shown, `scale.labelMap` renames it in the
-legend and `formatValue` does the same for the tooltip and the `aria-label`.
+It takes three forms:
+
+- **`'alphabetical'`**, the default. It is rarely the order a reader is looking
+  for: severity, or the order a pipeline runs in, almost never sorts by name.
+- **`'status'`**, a shorthand for `Success`, `Warning`, `Failed`, in that order.
+  It keeps only those three, and a value named anything else still paints its
+  cells but loses its legend entry — neither readable nor filterable, the worst
+  outcome on a grid where colour is the only channel. Note that this catches the
+  absence value too, which a status history always carries, so the shorthand
+  rarely survives contact with a real grid.
+- **A comparator**, `(a, b) => number`, for everything else. This is the usual
+  answer — severity order, pipeline order, numeric order for values that are
+  numbers wearing strings.
+
+Where the stored value is not what should be shown, `scale.labelMap` renames it
+in the legend and `formatValue` does the same for the tooltip and the
+`aria-label`.
 
 ## Time
 
