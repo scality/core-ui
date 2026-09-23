@@ -27,7 +27,7 @@ export type ButtonGroupProps = Omit<
   value?: string | null;
   /** Called with the clicked child's `value` when selection is enabled. */
   onChange?: (value: string) => void;
-  /** The buttons to group — typically `Button` from `@scality/core-ui/next`. */
+  /** The buttons to group — typically `Button` from `@scality/core-ui/dist/next`. */
   children: ReactNode;
 };
 
