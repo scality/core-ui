@@ -62,9 +62,21 @@ export type HeatmapDiscreteScale = {
    */
   colorSet?: ChartLegendWrapperProps['colorSet'];
   /**
-   * Order of the legend items. Read only alongside `colorSet`: without one the
-   * `ChartLegendWrapper` the caller put above owns the ordering, and this is
-   * ignored.
+   * Order of the legend items, and with them the order the values are read in.
+   * Read only alongside `colorSet`: without one the `ChartLegendWrapper` the
+   * caller put above owns the ordering, and this is ignored.
+   *
+   * `'alphabetical'` sorts by name, and is the default.
+   *
+   * `'status'` is a whitelist rather than a sort. It keeps `Success`, `Warning`
+   * and `Failed`, in that order, and drops every other value from the legend —
+   * the absence value with them. A dropped value still paints its cells, so it
+   * is left coloured, unexplained and impossible to filter. Since a status
+   * history normally carries an absence value, expect to need a comparator.
+   *
+   * A comparator, `(a, b) => number`, is handed the `colorSet` keys, not the
+   * values behind them: it compares what the cells hold, which is what
+   * `labelMap` renames for display rather than replaces.
    */
   sortOrder?: ChartLegendWrapperProps['sortOrder'];
   /**

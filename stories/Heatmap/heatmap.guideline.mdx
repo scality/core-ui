@@ -127,11 +127,7 @@ It takes three forms:
 - **`'alphabetical'`**, the default. It is rarely the order a reader is looking
   for: severity, or the order a pipeline runs in, almost never sorts by name.
 - **`'status'`**, a shorthand for `Success`, `Warning`, `Failed`, in that order.
-  It keeps only those three, and a value named anything else still paints its
-  cells but loses its legend entry — neither readable nor filterable, the worst
-  outcome on a grid where colour is the only channel. Note that this catches the
-  absence value too, which a status history always carries, so the shorthand
-  rarely survives contact with a real grid.
+  Any other value is left out of the legend, including the absence value.
 - **A comparator**, `(a, b) => number`, for everything else. This is the usual
   answer — severity order, pipeline order, numeric order for values that are
   numbers wearing strings.
