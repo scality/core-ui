@@ -244,20 +244,49 @@ const SelectStyle = styled(Select)`
         }
       }
 
+      div > .react-window-option > .sc-select__group-heading,
+      .sc-select__group-heading {
+        height: ${({ isDefault }) => (isDefault ? spacing.r40 : spacing.r24)};
+        display: flex;
+        align-items: center;
+        padding: 0 ${spacing.r8} 0 ${spacing.r16};
+        background-color: ${getThemePropSelector('backgroundLevel1')};
+        color: ${getThemePropSelector('textSecondary')};
+        font-size: ${fontSize.smaller};
+        font-weight: ${fontWeight.bold};
+        text-transform: uppercase;
+        cursor: default;
+        ${(props) =>
+          props.isDefault &&
+          `border-bottom: ${spacing.r1} solid ${props.theme.border};`}
+      }
+
       ${({ isDefault }) =>
         isDefault &&
         `
           div > .react-window-option:first-of-type > .sc-select__option,
-          .sc-select__option:first-of-type {
+          div > .react-window-option:first-of-type > .sc-select__group-heading,
+          .sc-select__option:first-of-type,
+          .sc-select__group-heading:first-of-type {
             border-radius: ${spacing.r4} ${spacing.r4} 0 0;
           }
 
           div > .react-window-option:last-of-type > .sc-select__option,
+          div > .react-window-option:last-of-type > .sc-select__group-heading,
           .sc-select__option:last-of-type {
             border-bottom: ${spacing.r1} solid transparent;
             border-radius: 0 0 ${spacing.r4} ${spacing.r4};
           }
         `}
+    }
+
+    .sc-select__group-descriptions {
+      position: absolute;
+      width: ${spacing.r1};
+      height: ${spacing.r1};
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 `;

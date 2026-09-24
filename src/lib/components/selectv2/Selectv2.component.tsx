@@ -13,6 +13,7 @@ import {
   Ref,
   useMemo,
   useCallback,
+  useId,
 } from 'react';
 import { ScrollbarWrapper, Tooltip } from '../../index';
 import {
@@ -41,6 +42,10 @@ export type OptionProps = {
   value: string;
   disabledReason?: ReactNode;
 };
+export type GroupProps = {
+  label: string;
+  children?: ReactNode;
+};
 const usePreviousValue = (value) => {
   const ref = useRef(null);
   useEffect(() => {
@@ -67,6 +72,7 @@ export function Option({
   ...rest
 }: OptionProps): JSX.Element {
   const optionContext = useContext(OptionContext);
+  const groupContext = useContext(GroupContext);
   if (!optionContext)
     throw new Error('Option cannot be rendered outside the Select component');
 
@@ -82,15 +88,34 @@ export function Option({
       isDisabled: disabled || false,
       icon: icon,
       disabledReason: disabledReason,
+      groupLabel: groupContext?.label,
       optionProps: { ...rest },
     });
     return () => {
       optionContext.unregister(value);
     };
     //eslint-disable-next-line react-hooks/exhaustive-deps --  optionContext is mutable
-  }, [children, disabled, icon, value, prevValue]);
+  }, [children, disabled, icon, value, prevValue, groupContext?.label]);
 
   return <></>;
+}
+
+/**
+ * Groups the `Select.Option`s nested inside it under a heading. The heading is
+ * a label only: it is not selectable and keyboard focus steps over it.
+ */
+export function Group({ label, children }: GroupProps): JSX.Element {
+  const optionContext = useContext(OptionContext);
+  const groupContext = useMemo(() => ({ label }), [label]);
+
+  if (!optionContext)
+    throw new Error('Group cannot be rendered outside the Select component');
+
+  return (
+    <GroupContext.Provider value={groupContext}>
+      {children}
+    </GroupContext.Provider>
+  );
 }
 
 const Input = (props) => {
@@ -183,6 +208,14 @@ const InternalOption = (width, isDefaultVariant) => (props) => {
     role: 'option',
     'aria-disabled': props.isDisabled,
     'aria-selected': props.isSelected,
+    // role="group" has to contain the options it heads, which the flattened
+    // rows below rule out -- so each option names its heading instead.
+    'aria-describedby': props.data.groupLabel
+      ? groupHeadingId(
+          props.selectProps.groupIdPrefix,
+          props.selectProps.groupIndexByLabel[props.data.groupLabel],
+        )
+      : undefined,
   };
   return (
     <Tooltip
@@ -233,11 +266,37 @@ const getScrollOffset = (
   }
 };
 
+const GroupHeadingRow = ({ label }: { label: ReactNode }) => (
+  <div role="presentation" className="sc-select__group-heading">
+    {label}
+  </div>
+);
+
+// react-window unmounts a row once it scrolls out of the window, so the visible
+// heading cannot be what an option's aria-describedby points at -- the
+// description would come and go with the scroll position. These stay mounted.
+const GroupDescriptions = ({
+  prefix,
+  indexByLabel,
+}: {
+  prefix: string;
+  indexByLabel: Record<string, number>;
+}) => (
+  <div className="sc-select__group-descriptions">
+    {Object.entries(indexByLabel).map(([label, index]) => (
+      <div key={label} id={groupHeadingId(prefix, index)}>
+        {label}
+      </div>
+    ))}
+  </div>
+);
+
 const MenuList = (props) => {
   const listRef = useRef<FixedSizeList<any> | null>(null);
   const { children, getValue } = props;
   const [selectedOption] = getValue();
-  const { itemsPerScrollWindow } = props.selectProps;
+  const { itemsPerScrollWindow, groupIdPrefix, groupIndexByLabel } =
+    props.selectProps;
   const optionHeight =
     convertRemToPixels(
       parseFloat(props.selectProps.isDefault ? spacing.r40 : spacing.r24),
@@ -245,12 +304,34 @@ const MenuList = (props) => {
   let selectedIndex = 0;
   let focusedIndex = 0;
 
-  if (children && children.length > 0) {
-    selectedIndex = children.findIndex(
-      (child) => child.props.data === selectedOption,
-    );
+  // react-window sizes every row alike, so react-select's nested group -- one
+  // row holding a whole group -- is flattened here into a heading row plus its
+  // options.
+  const rows = Array.isArray(children)
+    ? children.flatMap((child) => {
+        const group = child?.props?.data;
+        if (!group?.options) {
+          return [child];
+        }
+        return [
+          <GroupHeadingRow
+            key={`heading-${group.label}`}
+            label={child.props.label}
+          />,
+          ...child.props.children,
+        ];
+      })
+    : children;
+
+  // A heading row carries no data, and neither does an empty selection -- so
+  // the match has to reject undefined rather than let the two meet.
+  const isRowFor = (row, option) =>
+    Boolean(option) && row?.props?.data === option;
+
+  if (rows && rows.length > 0) {
+    selectedIndex = rows.findIndex((row) => isRowFor(row, selectedOption));
     focusedIndex = props.focusedOption
-      ? children.findIndex((child) => child.props.data === props.focusedOption)
+      ? rows.findIndex((row) => isRowFor(row, props.focusedOption))
       : selectedIndex;
   }
 
@@ -262,38 +343,53 @@ const MenuList = (props) => {
         getScrollOffset(
           listRef.current,
           focusedIndex,
-          children.length,
+          rows.length,
           optionHeight / 2,
         ),
       );
     }
-  }, [children.length, focusedIndex, optionHeight, listRef]);
+  }, [rows.length, focusedIndex, optionHeight, listRef]);
 
-  if (children.length > itemsPerScrollWindow) {
+  const descriptions = Object.keys(groupIndexByLabel).length > 0 && (
+    <GroupDescriptions
+      prefix={groupIdPrefix}
+      indexByLabel={groupIndexByLabel}
+    />
+  );
+
+  if (rows.length > itemsPerScrollWindow) {
     return (
-      // @ts-ignore
-      <List
-        ref={listRef}
-        className="sc-select__menu-list"
-        height={optionHeight * itemsPerScrollWindow + optionHeight / 2}
-        itemCount={children.length}
-        itemSize={optionHeight}
-        initialScrollOffset={initialOffset}
-        // css prop willChange used by react-window causes display issues with tooltip
-        style={{ willChange: undefined }}
-      >
-        {({ index, style }) => {
-          return (
-            <div className="react-window-option" style={style}>
-              {children[index]}
-            </div>
-          );
-        }}
-      </List>
+      <>
+        {descriptions}
+        {/* @ts-ignore */}
+        <List
+          ref={listRef}
+          className="sc-select__menu-list"
+          height={optionHeight * itemsPerScrollWindow + optionHeight / 2}
+          itemCount={rows.length}
+          itemSize={optionHeight}
+          initialScrollOffset={initialOffset}
+          // css prop willChange used by react-window causes display issues with tooltip
+          style={{ willChange: undefined }}
+        >
+          {({ index, style }) => {
+            return (
+              <div className="react-window-option" style={style}>
+                {rows[index]}
+              </div>
+            );
+          }}
+        </List>
+      </>
     );
   }
 
-  return <components.MenuList {...props}>{children}</components.MenuList>;
+  return (
+    <>
+      {descriptions}
+      <components.MenuList {...props}>{rows}</components.MenuList>
+    </>
+  );
 };
 
 const ValueContainer = <
@@ -367,7 +463,48 @@ type SelectOptionProps = {
   icon?: ReactNode;
   optionProps: any;
   disabledReason?: ReactNode;
+  groupLabel?: string;
 };
+
+type SelectGroupProps = {
+  label: string;
+  options: SelectOptionProps[];
+};
+
+// Membership is keyed on the label, not on runs of adjacent options: the
+// registry is a plain object keyed by value, and JS returns numeric-like keys
+// in numeric order rather than declaration order.
+function groupOptions(options: SelectOptionProps[]): {
+  groupedOptions: Array<SelectOptionProps | SelectGroupProps>;
+  groupIndexByLabel: Record<string, number>;
+} {
+  const groupIndexByLabel: Record<string, number> = {};
+  if (!options.some((option) => option.groupLabel)) {
+    return { groupedOptions: options, groupIndexByLabel };
+  }
+
+  const groupedOptions: Array<SelectOptionProps | SelectGroupProps> = [];
+  const groupsByLabel: Record<string, SelectGroupProps> = {};
+
+  options.forEach((option) => {
+    const { groupLabel } = option;
+    if (!groupLabel) {
+      groupedOptions.push(option);
+      return;
+    }
+    if (!groupsByLabel[groupLabel]) {
+      groupIndexByLabel[groupLabel] = Object.keys(groupIndexByLabel).length;
+      groupsByLabel[groupLabel] = { label: groupLabel, options: [] };
+      groupedOptions.push(groupsByLabel[groupLabel]);
+    }
+    groupsByLabel[groupLabel].options.push(option);
+  });
+
+  return { groupedOptions, groupIndexByLabel };
+}
+
+const groupHeadingId = (prefix: string, index: number) =>
+  `${prefix}-group-${index}`;
 
 type SelectComponentType<
   OptionType extends OptionTypeBase,
@@ -377,6 +514,7 @@ type SelectComponentType<
   SelectProps & RefAttributes<SelectRef<OptionType, IsMulti, GroupType>>
 > & {
   Option: typeof Option;
+  Group: typeof Group;
 };
 
 const OptionContext = createContext<{
@@ -384,6 +522,8 @@ const OptionContext = createContext<{
   register: (option: SelectOptionProps) => void;
   unregister: (value: string) => void;
 } | null>(null);
+
+const GroupContext = createContext<{ label: string } | null>(null);
 
 function SelectBox<
   OptionType extends OptionTypeBase,
@@ -466,6 +606,13 @@ function SelectBox<
   );
 
   const options = useOptions();
+  // The flat list stays the source of truth -- every lookup by value, and the
+  // search threshold, must count real options rather than headings.
+  const { groupedOptions, groupIndexByLabel } = useMemo(
+    () => groupOptions(options),
+    [options],
+  );
+  const groupIdPrefix = useId();
 
   const handleChange = (option: SelectOptionProps) => {
     const newValue = option ? option.value : '';
@@ -532,7 +679,7 @@ function SelectBox<
             inputValue={options.length > NOPT_SEARCH ? searchValue : undefined}
             selectedOption={options.find((opt) => opt.value === value)}
             keyboardFocusEnabled={keyboardFocusEnabled}
-            options={options}
+            options={groupedOptions}
             isDisabled={disabled}
             placeholder={customPlaceholder}
             menuPlacement="auto"
@@ -548,6 +695,8 @@ function SelectBox<
             }}
             isDefault={isDefaultVariant}
             itemsPerScrollWindow={itemsPerScrollWindow}
+            groupIdPrefix={groupIdPrefix}
+            groupIndexByLabel={groupIndexByLabel}
             onChange={handleChange}
             onInputChange={handleSearchInput}
             // styled-components v6 types the wrapped react-select ref as its
@@ -632,4 +781,5 @@ const SelectWithOptionContext = forwardRef<
 
 SelectWithOptionContext.displayName = 'Select';
 SelectWithOptionContext.Option = Option;
+SelectWithOptionContext.Group = Group;
 export const Select = SelectWithOptionContext;
