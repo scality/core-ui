@@ -140,8 +140,8 @@ export const ConfirmationModal = {
  *
  * Drag `frameWidth` down. At **360px** the row's `Remove` button drops its label for
  * a tooltip; without it the row bleeds out of the panel with nothing to show it,
- * since these panels are `overflow: visible`. The next floor is the search box at
- * **301px**, which is `SearchInput`'s fixed width and not fixable from here.
+ * since these panels are `overflow: visible`. The search box below it now shrinks
+ * with the panel rather than pinning a width of its own.
  */
 export const NarrowPanel = {
   argTypes: {
