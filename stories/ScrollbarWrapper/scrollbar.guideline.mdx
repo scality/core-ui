@@ -10,6 +10,9 @@ import * as ScrollbarWrapperStories from './scrollbar.stories';
 It provides two things:
 
 - **Custom scrollbar styles** — a thin, themed scrollbar across Chrome, Safari, and Firefox.
+  The bar's width is the browser's own rendering of `scrollbar-width: thin`, not a length this
+  component sets: it differs per engine, per platform, and if a consumer overrides the property.
+  Reserve room for it with `scrollbar-gutter: stable`, never with a hard-coded pixel value.
 - **`scroll-fade` utility class** — an opt-in bottom fade on any scrollable element (see below).
 
 ## Setup
