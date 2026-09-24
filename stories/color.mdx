@@ -6,6 +6,59 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 # Colors
 
+## Using a colour
+
+Every colour comes from the palette below. Pass a token name to any prop that takes a
+colour — `color`, `backgroundColor`, `borderColor` and the rest — or read the token off
+the theme inside a styled component:
+
+```jsx
+<Box
+  color="textPrimary"
+  backgroundColor="backgroundLevel1"
+  borderColor="border"
+/>
+```
+
+```js
+const Alert = styled.div`
+  color: ${(props) => props.theme.statusCritical};
+  border: 1px solid ${(props) => props.theme.border};
+`;
+```
+
+These props accept a token name and nothing else, so a value outside the palette fails
+to compile and a near miss is corrected for you (`statusHealty` gives _Did you mean
+`statusHealthy`?_). Three CSS keywords are also accepted, because they defer to the
+context rather than naming a colour: `currentColor`, `inherit` and `transparent`.
+
+Passing a token's **value** as a prop is rejected too, since its type is `string`:
+
+```jsx
+<Box color={theme.statusCritical} /> // does not compile
+<Box color="statusCritical" /> // the same colour, and checkable
+```
+
+Both render identically and both follow a theme switch — the second is the one the
+compiler can check, so prefer it.
+
+### If you need a colour outside the palette
+
+Use `styled()`. The CSS inside it is not type-checked, so any value the browser
+accepts works, and it overrides the component's own styles — including a token passed
+as a prop on the same element:
+
+```js
+const Illustration = styled(Box)`
+  color: #e40046;
+  background: linear-gradient(90deg, #fff, #000);
+`;
+```
+
+Keep this for values that genuinely sit outside the design system — a one-off
+illustration, a third-party brand colour. For a gradient or an image on a `Box`,
+`backgroundImage` also takes raw CSS.
+
 ## A-Dark
 
 <ColorPalette>

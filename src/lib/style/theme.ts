@@ -1,3 +1,5 @@
+// Makes the `declare module` below augment styled-components instead of shadowing it.
+import type {} from 'styled-components';
 import { lighten, darken } from 'polished';
 //== Colors
 export const hotPink = '#E40046';
@@ -56,6 +58,31 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
+
+/** A colour token. The only colour type safe to index the theme object with. */
+export type ThemeColorToken = keyof CoreUITheme;
+
+/**
+ * A colour for a styled-system prop: a token, or a keyword that defers to the
+ * context. No raw colour — one outside the theme cannot follow a rebrand.
+ */
+export type ThemeColor =
+  ThemeColorToken | 'currentColor' | 'inherit' | 'transparent';
+
+/**
+ * What `CoreUiThemeProvider` installs: the tokens, plus the styled-system scales.
+ * Kept out of `CoreUITheme` because themes are authored flat and branded by
+ * spreading one — a `colors` field folded in would be carried over stale.
+ */
+export type CoreUIProvidedTheme = CoreUITheme & {
+  colors: CoreUITheme;
+  space: typeof space;
+  fontSizes: typeof fontSize;
+};
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends CoreUIProvidedTheme {}
+}
 
 export const coreUIAvailableThemesNames = [
   'darkRebrand',
@@ -191,8 +218,6 @@ export const defaultTheme = coreUIAvailableThemes;
  */
 
 export const brand = coreUIAvailableThemes.darkRebrand;
-
-export type ThemeColors = keyof CoreUITheme;
 
 // LineChart colors
 export const lineColor1 = '#A14FBF';
