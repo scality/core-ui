@@ -1,7 +1,11 @@
 import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
-import { formatISONumber } from '../../../utils';
+import {
+  DEFAULT_MANTISSA_DIGITS,
+  formatISONumber,
+  SCIENTIFIC_NOTATION_THRESHOLD,
+} from '../../../utils';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -195,10 +199,9 @@ export const getLogAxis = (
         ? decades
         : // Keep both ends: the axis must state its own bounds even when
           // decades are skipped.
-          [
-            ...decades.filter((_, index) => index % stride === 0),
-            top,
-          ].filter((value, index, all) => all.indexOf(value) === index);
+          [...decades.filter((_, index) => index % stride === 0), top].filter(
+            (value, index, all) => all.indexOf(value) === index,
+          );
 
     if (!withZeroBand) {
       return {
@@ -321,7 +324,8 @@ const symlogTicks = (
   const below = decadesUpTo(bottom);
   const above = decadesUpTo(top);
   // Two sides share the height a one-sided axis gets to itself.
-  const perSide = below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
+  const perSide =
+    below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
 
   const scale = createSymlogScale(constant, [bottom, top], [0, 1]);
   const position = (value: number) => scale(value) ?? 0;
@@ -459,11 +463,24 @@ export const formatLogTickValue = (
   return formatDecadeTick(value);
 };
 
-/** A decade's label: `0.001` keeps three decimals, `100` keeps none. */
+/**
+ * A decade's label: `0.001` keeps three decimals, `100` keeps none, and `1e-4` and below
+ * read as the bare power.
+ *
+ * Below 1e-3 `formatISONumber` switches to scientific notation, where `decimals` counts
+ * mantissa digits rather than fraction digits. A decade's mantissa is always 1, so the
+ * decimal count computed above would pad it with a zero per decade.
+ */
 const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
   return formatISONumber(value, {
-    decimals: exponent < 0 ? Math.ceil(-exponent) : 0,
+    // A decade's mantissa is exactly 1, so it needs no digits after the point.
+    decimals:
+      value < SCIENTIFIC_NOTATION_THRESHOLD
+        ? 0
+        : exponent < 0
+          ? Math.ceil(-exponent)
+          : 0,
     fixedDecimals: exponent < 0,
     compact: value >= 10000,
   });
@@ -862,7 +879,17 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
  * - Compact notation for large values (>= 10k)
  */
 export const formatTickValue = (value: number, topValue: number): string => {
-  const decimals = topValue < 1 ? Math.ceil(-Math.log10(topValue)) + 1 : 2;
+  // The count below is derived from the axis magnitude, which is the right number of
+  // *fraction* digits and the wrong number of *mantissa* digits: under the threshold
+  // formatISONumber reads it as the latter, and the label would gain a zero per decade.
+  // Scientific notation carries the magnitude in its exponent, so the mantissa keeps the
+  // library's own two digits whatever the decade.
+  const decimals =
+    Math.abs(value) < SCIENTIFIC_NOTATION_THRESHOLD
+      ? DEFAULT_MANTISSA_DIGITS
+      : topValue < 1
+        ? Math.ceil(-Math.log10(topValue)) + 1
+        : 2;
   return formatISONumber(value, {
     decimals,
     fixedDecimals: topValue < 1,
