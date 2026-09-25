@@ -1,7 +1,7 @@
 import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
-import { formatISONumber } from '../../../utils';
+import { formatISONumber, SCIENTIFIC_NOTATION_THRESHOLD } from '../../../utils';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -195,10 +195,9 @@ export const getLogAxis = (
         ? decades
         : // Keep both ends: the axis must state its own bounds even when
           // decades are skipped.
-          [
-            ...decades.filter((_, index) => index % stride === 0),
-            top,
-          ].filter((value, index, all) => all.indexOf(value) === index);
+          [...decades.filter((_, index) => index % stride === 0), top].filter(
+            (value, index, all) => all.indexOf(value) === index,
+          );
 
     if (!withZeroBand) {
       return {
@@ -321,7 +320,8 @@ const symlogTicks = (
   const below = decadesUpTo(bottom);
   const above = decadesUpTo(top);
   // Two sides share the height a one-sided axis gets to itself.
-  const perSide = below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
+  const perSide =
+    below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
 
   const scale = createSymlogScale(constant, [bottom, top], [0, 1]);
   const position = (value: number) => scale(value) ?? 0;
@@ -459,12 +459,20 @@ export const formatLogTickValue = (
   return formatDecadeTick(value);
 };
 
-/** A decade's label: `0.001` keeps three decimals, `100` keeps none. */
+/**
+ * A decade's label: `0.001` keeps three decimals, `100` keeps none, and `1e-4` and below
+ * read as the bare power.
+ *
+ * Below 1e-3 `formatISONumber` switches to scientific notation, where `decimals` counts
+ * mantissa digits rather than fraction digits. A decade's mantissa is always 1, so the
+ * decimal count computed above would pad it with a zero per decade.
+ */
 const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
+  const isScientific = value < SCIENTIFIC_NOTATION_THRESHOLD;
   return formatISONumber(value, {
-    decimals: exponent < 0 ? Math.ceil(-exponent) : 0,
-    fixedDecimals: exponent < 0,
+    decimals: isScientific ? 0 : exponent < 0 ? Math.ceil(-exponent) : 0,
+    fixedDecimals: !isScientific && exponent < 0,
     compact: value >= 10000,
   });
 };

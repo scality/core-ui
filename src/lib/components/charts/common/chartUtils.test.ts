@@ -15,6 +15,7 @@ import {
   formatTooltipValueWithUnit,
   createSymlogScale,
   getSymlogAxis,
+  formatSymlogTickValue,
 } from './chartUtils';
 import { NAN_STRING } from '../../constants';
 import { UnitRange } from '../types';
@@ -536,12 +537,16 @@ describe('getMinPositiveValue', () => {
   });
 
   it('returns null when nothing is positive', () => {
-    expect(getMinPositiveValue([{ category: 'a', up: 0, down: -1 }], 'category')).toBeNull();
+    expect(
+      getMinPositiveValue([{ category: 'a', up: 0, down: -1 }], 'category'),
+    ).toBeNull();
     expect(getMinPositiveValue([], 'category')).toBeNull();
   });
 
   it('reads a numeric string, because that is how prometheus data arrives', () => {
-    expect(getMinPositiveValue([{ timestamp: 1, load: '0.25' }], 'timestamp')).toBe(0.25);
+    expect(
+      getMinPositiveValue([{ timestamp: 1, load: '0.25' }], 'timestamp'),
+    ).toBe(0.25);
   });
 });
 
@@ -582,12 +587,20 @@ describe('getLogAxis', () => {
     expect(ticks[0]).toBe(1);
     expect(ticks[ticks.length - 1]).toBe(1e9);
     // Every tick is a decade — a log axis is never subdivided linearly.
-    ticks.forEach((tick) => expect(Number.isInteger(Math.log10(tick))).toBe(true));
+    ticks.forEach((tick) =>
+      expect(Number.isInteger(Math.log10(tick))).toBe(true),
+    );
   });
 
   it('falls back to one empty decade when there is nothing positive to plot', () => {
-    expect(getLogAxis(null, 0)).toMatchObject({ domain: [1, 10], ticks: [1, 10] });
-    expect(getLogAxis(0, 100)).toMatchObject({ domain: [1, 10], ticks: [1, 10] });
+    expect(getLogAxis(null, 0)).toMatchObject({
+      domain: [1, 10],
+      ticks: [1, 10],
+    });
+    expect(getLogAxis(0, 100)).toMatchObject({
+      domain: [1, 10],
+      ticks: [1, 10],
+    });
   });
 
   it('reserves a slot below the first decade for a measured zero', () => {
@@ -637,6 +650,35 @@ describe('formatLogTickValue', () => {
     expect(formatLogTickValue(0.1, 0.1)).toBe('0');
     // Without the band, the same position is just a tick like any other.
     expect(formatLogTickValue(0.1)).toBe('0.1');
+  });
+
+  it('spells a decade under the scientific threshold as a bare power', () => {
+    // formatISONumber reads `decimals` as mantissa digits down here, and a decade's
+    // mantissa is 1 — so anything past `1e-4` would pad it a zero per decade.
+    expect(formatLogTickValue(1e-4)).toBe('1e-4');
+    expect(formatLogTickValue(1e-5)).toBe('1e-5');
+    expect(formatLogTickValue(1e-9)).toBe('1e-9');
+    // The decade above the threshold still reads in full, so the axis changes
+    // notation exactly where formatISONumber does.
+    expect(formatLogTickValue(1e-3)).toBe('0.001');
+  });
+});
+
+describe('formatSymlogTickValue', () => {
+  it('labels zero and negatives, which a log axis blanks', () => {
+    expect(formatSymlogTickValue(0)).toBe('0');
+    expect(formatSymlogTickValue(-1)).toBe('-1');
+    expect(formatSymlogTickValue(-0.01)).toBe('-0.01');
+  });
+
+  it('spells a decade under the scientific threshold as a bare power, either sign', () => {
+    expect(formatSymlogTickValue(1e-5)).toBe('1e-5');
+    expect(formatSymlogTickValue(-1e-5)).toBe('-1e-5');
+  });
+
+  it('renders nothing for a value that is not a number', () => {
+    expect(formatSymlogTickValue(NaN)).toBe('');
+    expect(formatSymlogTickValue(Infinity)).toBe('');
   });
 });
 
@@ -703,7 +745,6 @@ describe('readLogPlottedValue', () => {
     expect(readLogPlottedValue(0.1, null)).toBe(0.1);
   });
 });
-
 
 describe('getSymlogAxis', () => {
   it('bounds the axis with the decades enclosing the data on each side', () => {

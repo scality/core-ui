@@ -70,7 +70,10 @@ export const getContrastText = (
     const lighterText = primaryLum >= reverseLum ? textPrimary : textReverse;
     const darkerText = primaryLum >= reverseLum ? textReverse : textPrimary;
 
-    const lighterContrast = wcagContrastRatio(primaryLum >= reverseLum ? primaryLum : reverseLum, bgLum);
+    const lighterContrast = wcagContrastRatio(
+      primaryLum >= reverseLum ? primaryLum : reverseLum,
+      bgLum,
+    );
 
     return lighterContrast >= CONTRAST_THRESHOLD ? lighterText : darkerText;
   } catch {
@@ -100,6 +103,13 @@ type FormatISONumberOptions = {
 };
 
 /**
+ * Below this, `formatISONumber` switches to scientific notation — and with it `decimals`
+ * changes meaning, from fraction digits to mantissa digits. Exported because a caller
+ * computing `decimals` has to know which of the two it is computing.
+ */
+export const SCIENTIFIC_NOTATION_THRESHOLD = 0.001;
+
+/**
  * Formats a number to ISO 80000-1 format:
  * - Space as thousands separator
  * - Dot as decimal separator
@@ -117,7 +127,7 @@ export const formatISONumber = (
 
   const absValue = Math.abs(value);
 
-  if (absValue < 0.001) {
+  if (absValue < SCIENTIFIC_NOTATION_THRESHOLD) {
     // Bounded: float noise lands here often, and an unbounded mantissa prints
     // all seventeen digits of `0.1 + 0.2 - 0.3`.
     return value.toExponential(decimals);

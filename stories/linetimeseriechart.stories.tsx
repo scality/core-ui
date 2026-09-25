@@ -1575,6 +1575,52 @@ export const LogarithmicScaleBelowOne: Story = {
 };
 
 /**
+ * An axis whose decades fall under the scientific threshold.
+ *
+ * Below `1e-3` the tick labels switch from decimals to scientific notation — `0.001` is the last
+ * decade written out in full, and everything under it reads as a bare power. The switch is
+ * `formatISONumber`'s, so the axis changes notation exactly where every other number in the
+ * library does.
+ *
+ * This is the shape a 5xx error rate takes on a healthy platform: a baseline in the millionths
+ * with occasional excursions three or four decades above it. On the linear chart the whole series
+ * is a flat line on zero.
+ */
+export const LogarithmicScaleBelowTheScientificThreshold: Story = {
+  render: () => {
+    // Baseline in the millionths, two excursions four decades up. Deterministic.
+    const data = Array.from({ length: 120 }, (_, index) => {
+      const value =
+        index === 40
+          ? 0.02
+          : index === 92
+            ? 0.05
+            : 0.0000015 + (index % 7) * 0.0000004;
+      return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+        number,
+        number,
+      ];
+    });
+
+    return (
+      <div>
+        <LogChart
+          {...logChartArgs(data)}
+          title="5xx error rate — linear, the series is flat on zero"
+          yAxisTitle="%"
+        />
+        <LogChart
+          {...logChartArgs(data)}
+          title="5xx error rate — logarithmic, 1e-6 to 0.1"
+          yAxisTitle="%"
+          yAxisScale="log"
+        />
+      </div>
+    );
+  },
+};
+
+/**
  * The scale as a control, for poking at it against your own shape of data.
  *
  * `zeros` is the one worth trying: it drops a stretch of zero samples into the series, and on the
@@ -1590,7 +1636,8 @@ export const LogarithmicScalePlayground: StoryObj<{
     yAxisScale: {
       control: { type: 'radio' },
       options: ['linear', 'log', 'symlog'],
-      description: 'symlog is linear near zero, logarithmic beyond — try it with `zeros` on',
+      description:
+        'symlog is linear near zero, logarithmic beyond — try it with `zeros` on',
     },
     baseline: {
       control: { type: 'range', min: 0.001, max: 10, step: 0.001 },
@@ -1646,7 +1693,11 @@ const SYMLOG_OUT = 'storage-node-2';
 const duplexData = Array.from({ length: 120 }, (_, index) => {
   const reads = index % 19 === 0 ? 4800 : 240 * (1 + (index % 7) * 0.35);
   const writes =
-    index % 23 === 0 ? 0 : index % 11 === 0 ? 18 : 0.8 * (1 + (index % 5) * 0.4);
+    index % 23 === 0
+      ? 0
+      : index % 11 === 0
+        ? 18
+        : 0.8 * (1 + (index % 5) * 0.4);
   return {
     timestamp: LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR,
     reads,

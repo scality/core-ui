@@ -1264,6 +1264,69 @@ export const LogarithmicScale: Story = {
 };
 
 /**
+ * An axis whose decades fall under the scientific threshold.
+ *
+ * Below `1e-3` the tick labels switch from decimals to scientific notation — `0.001` is the last
+ * decade written out in full, and everything under it reads as a bare power. The switch is
+ * `formatISONumber`'s, so the axis changes notation exactly where every other number in the
+ * library does.
+ *
+ * A 5xx error rate is the shape that gets here: healthy endpoints sit several decades below the
+ * one endpoint that is failing, and a linear axis collapses all of them onto zero.
+ */
+export const LogarithmicScaleBelowTheScientificThreshold: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const tinyData = [
+      {
+        label: 'Error rate',
+        data: [
+          ['frontend', 0.42],
+          ['cloudserver', 0.0031],
+          ['iam', 0.000042],
+          ['metadata', 0.0000015],
+          ['sproxyd', 0],
+        ],
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper colorSet={{ 'Error rate': theme.statusWarning }}>
+          <Stack direction="vertical" gap="r24">
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                Linear — every endpoint but the first reads as zero
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={tinyData}
+                title="5xx error rate per service (%)"
+                height={200}
+              />
+            </Stack>
+            <Stack direction="vertical" gap="r8">
+              <Text variant="Basic" isEmphazed>
+                Logarithmic — 0.001 is spelled out, 1e-4 and below are bare
+                powers
+              </Text>
+              <Barchart
+                type={{ type: 'category' }}
+                bars={tinyData}
+                title="5xx error rate per service (%)"
+                height={200}
+                yAxisScale="log"
+              />
+            </Stack>
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
+/**
  * A log axis and a stack do not combine, so `yAxisScale="log"` is ignored here and the axis stays
  * linear.
  *
