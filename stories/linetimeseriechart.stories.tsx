@@ -1621,6 +1621,46 @@ export const LogarithmicScaleBelowTheScientificThreshold: Story = {
 };
 
 /**
+ * A **linear** axis whose whole domain sits under the scientific threshold.
+ *
+ * The tick labels are what this one is about, not the scale: with no value above `4e-4`, every
+ * tick of the linear axis is written in scientific notation. The mantissa keeps a fixed two
+ * digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude, which is
+ * what `formatISONumber` would read as mantissa digits.
+ *
+ * This is the shape that has nothing to do with a log axis: a series that never leaves the
+ * millionths needs no decades to be mislabelled, only a small enough maximum.
+ */
+export const LinearAxisUnderTheScientificThreshold: Story = {
+  render: () => {
+    // Everything between 2.1e-6 and 3.8e-4, so the axis maximum lands under a thousandth.
+    const data = Array.from({ length: 120 }, (_, index) => {
+      const value = 0.0000021 + (index % 11) * 0.000038;
+      return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+        number,
+        number,
+      ];
+    });
+
+    return (
+      <div>
+        <LogChart
+          {...logChartArgs(data)}
+          title="Linear — ticks read 2.00e-4, not 2.00000e-4"
+          yAxisTitle="%"
+        />
+        <LogChart
+          {...logChartArgs(data)}
+          title="Logarithmic — the same series, decade by decade"
+          yAxisTitle="%"
+          yAxisScale="log"
+        />
+      </div>
+    );
+  },
+};
+
+/**
  * The scale as a control, for poking at it against your own shape of data.
  *
  * `zeros` is the one worth trying: it drops a stretch of zero samples into the series, and on the

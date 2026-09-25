@@ -1327,6 +1327,53 @@ export const LogarithmicScaleBelowTheScientificThreshold: Story = {
 };
 
 /**
+ * A **linear** axis whose whole domain sits under the scientific threshold.
+ *
+ * The tick labels are what this one is about, not the scale: with no bar above `4.2e-4`, every
+ * tick of the linear axis is written in scientific notation. The mantissa keeps a fixed two
+ * digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude.
+ *
+ * No log axis is involved: a dataset that never leaves the millionths needs no decades to be
+ * mislabelled, only a small enough maximum.
+ */
+export const LinearAxisUnderTheScientificThreshold: Story = {
+  render: () => {
+    const theme = useTheme() as CoreUITheme;
+    const tinyDomain = [
+      {
+        label: 'Error rate',
+        data: [
+          ['frontend', 0.00042],
+          ['cloudserver', 0.00008],
+          ['iam', 0.000013],
+          ['metadata', 0.0000021],
+          ['sproxyd', 0],
+        ],
+      },
+    ] as const;
+
+    return (
+      <div style={{ width: '60%', padding: spacing.r16 }}>
+        <ChartLegendWrapper colorSet={{ 'Error rate': theme.statusWarning }}>
+          <Stack direction="vertical" gap="r8">
+            <Text variant="Basic" isEmphazed>
+              Linear — ticks read 2.00e-4, not 2.00000e-4
+            </Text>
+            <Barchart
+              type={{ type: 'category' }}
+              bars={tinyDomain}
+              title="5xx error rate per service (%)"
+              height={200}
+            />
+            <ChartLegend shape="rectangle" direction="horizontal" />
+          </Stack>
+        </ChartLegendWrapper>
+      </div>
+    );
+  },
+};
+
+/**
  * A log axis and a stack do not combine, so `yAxisScale="log"` is ignored here and the axis stays
  * linear.
  *
