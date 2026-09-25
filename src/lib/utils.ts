@@ -109,6 +109,9 @@ type FormatISONumberOptions = {
  */
 export const SCIENTIFIC_NOTATION_THRESHOLD = 0.001;
 
+/** `formatISONumber`'s own `decimals` default, and the mantissa width under the threshold. */
+export const DEFAULT_MANTISSA_DIGITS = 2;
+
 /**
  * Formats a number to ISO 80000-1 format:
  * - Space as thousands separator
@@ -121,7 +124,11 @@ export const formatISONumber = (
   value: number,
   options: FormatISONumberOptions = {},
 ): string => {
-  const { decimals = 2, compact = false, fixedDecimals = false } = options;
+  const {
+    decimals = DEFAULT_MANTISSA_DIGITS,
+    compact = false,
+    fixedDecimals = false,
+  } = options;
 
   if (value === 0) return '0';
 

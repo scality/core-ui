@@ -16,6 +16,7 @@ import {
   createSymlogScale,
   getSymlogAxis,
   formatSymlogTickValue,
+  formatTickValue,
 } from './chartUtils';
 import { NAN_STRING } from '../../constants';
 import { UnitRange } from '../types';
@@ -661,6 +662,30 @@ describe('formatLogTickValue', () => {
     // The decade above the threshold still reads in full, so the axis changes
     // notation exactly where formatISONumber does.
     expect(formatLogTickValue(1e-3)).toBe('0.001');
+  });
+});
+
+describe('formatTickValue', () => {
+  it('keeps the mantissa the same width whatever the decade', () => {
+    // The decimal count is derived from the axis magnitude, which is the right number of
+    // fraction digits and the wrong number of mantissa digits. Widths must not track the
+    // exponent: scientific notation already carries the magnitude in the exponent.
+    const widths = [5e-4, 5e-5, 5e-6, 5e-9].map(
+      (top) => formatTickValue(top / 5, top).split('e')[0].length,
+    );
+
+    expect(new Set(widths).size).toBe(1);
+  });
+
+  it('spells a tick under the scientific threshold with two mantissa digits', () => {
+    expect(formatTickValue(1e-5, 5e-5)).toBe('1.00e-5');
+    // Two digits are what keeps a tick that is not a round decade readable.
+    expect(formatTickValue(2.5e-6, 1e-5)).toBe('2.50e-6');
+  });
+
+  it('is unchanged above the threshold, where the count is fraction digits', () => {
+    expect(formatTickValue(0.002, 0.01)).toBe('0.002');
+    expect(formatTickValue(42, 100)).toBe('42');
   });
 });
 

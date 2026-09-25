@@ -1,7 +1,11 @@
 import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
-import { formatISONumber, SCIENTIFIC_NOTATION_THRESHOLD } from '../../../utils';
+import {
+  DEFAULT_MANTISSA_DIGITS,
+  formatISONumber,
+  SCIENTIFIC_NOTATION_THRESHOLD,
+} from '../../../utils';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -469,10 +473,15 @@ export const formatLogTickValue = (
  */
 const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
-  const isScientific = value < SCIENTIFIC_NOTATION_THRESHOLD;
   return formatISONumber(value, {
-    decimals: isScientific ? 0 : exponent < 0 ? Math.ceil(-exponent) : 0,
-    fixedDecimals: !isScientific && exponent < 0,
+    // A decade's mantissa is exactly 1, so it needs no digits after the point.
+    decimals:
+      value < SCIENTIFIC_NOTATION_THRESHOLD
+        ? 0
+        : exponent < 0
+          ? Math.ceil(-exponent)
+          : 0,
+    fixedDecimals: exponent < 0,
     compact: value >= 10000,
   });
 };
@@ -870,7 +879,17 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
  * - Compact notation for large values (>= 10k)
  */
 export const formatTickValue = (value: number, topValue: number): string => {
-  const decimals = topValue < 1 ? Math.ceil(-Math.log10(topValue)) + 1 : 2;
+  // The count below is derived from the axis magnitude, which is the right number of
+  // *fraction* digits and the wrong number of *mantissa* digits: under the threshold
+  // formatISONumber reads it as the latter, and the label would gain a zero per decade.
+  // Scientific notation carries the magnitude in its exponent, so the mantissa keeps the
+  // library's own two digits whatever the decade.
+  const decimals =
+    Math.abs(value) < SCIENTIFIC_NOTATION_THRESHOLD
+      ? DEFAULT_MANTISSA_DIGITS
+      : topValue < 1
+        ? Math.ceil(-Math.log10(topValue)) + 1
+        : 2;
   return formatISONumber(value, {
     decimals,
     fixedDecimals: topValue < 1,
