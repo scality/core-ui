@@ -104,13 +104,14 @@ type FormatISONumberOptions = {
 
 /**
  * Below this, `formatISONumber` switches to scientific notation — and with it `decimals`
- * changes meaning, from fraction digits to mantissa digits. Exported because a caller
- * computing `decimals` has to know which of the two it is computing.
+ * changes meaning: above the threshold it counts the digits after the point in the value,
+ * below it the digits after the point in the part before the `e`. Exported because a
+ * caller computing `decimals` has to know which of the two it is computing.
  */
 export const SCIENTIFIC_NOTATION_THRESHOLD = 0.001;
 
-/** `formatISONumber`'s own `decimals` default, and the mantissa width under the threshold. */
-export const DEFAULT_MANTISSA_DIGITS = 2;
+/** `formatISONumber`'s own `decimals` default, and what it keeps before the `e`. */
+export const SCIENTIFIC_NOTATION_DECIMALS = 2;
 
 /**
  * Formats a number to ISO 80000-1 format:
@@ -118,14 +119,14 @@ export const DEFAULT_MANTISSA_DIGITS = 2;
  * - Dot as decimal separator
  * - Optional compact notation (10K, 1M, etc.)
  * - Fractional values: enough decimals to keep two significant digits
- * - Very small values (< 0.001): scientific notation, `decimals` mantissa digits
+ * - Very small values (< 0.001): scientific notation, `decimals` digits before the `e`
  */
 export const formatISONumber = (
   value: number,
   options: FormatISONumberOptions = {},
 ): string => {
   const {
-    decimals = DEFAULT_MANTISSA_DIGITS,
+    decimals = SCIENTIFIC_NOTATION_DECIMALS,
     compact = false,
     fixedDecimals = false,
   } = options;

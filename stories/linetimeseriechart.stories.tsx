@@ -1624,9 +1624,9 @@ export const LogarithmicScaleBelowTheScientificThreshold: Story = {
  * A **linear** axis whose whole domain sits under the scientific threshold.
  *
  * The tick labels are what this one is about, not the scale: with no value above `4e-4`, every
- * tick of the linear axis is written in scientific notation. The mantissa keeps a fixed two
- * digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude, which is
- * what `formatISONumber` would read as mantissa digits.
+ * tick of the linear axis is written in scientific notation. What precedes the `e` keeps a fixed
+ * two digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude, which
+ * is what `formatISONumber` reads it as down there.
  *
  * This is the shape that has nothing to do with a log axis: a series that never leaves the
  * millionths needs no decades to be mislabelled, only a small enough maximum.

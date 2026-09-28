@@ -654,8 +654,8 @@ describe('formatLogTickValue', () => {
   });
 
   it('spells a decade under the scientific threshold as a bare power', () => {
-    // formatISONumber reads `decimals` as mantissa digits down here, and a decade's
-    // mantissa is 1 — so anything past `1e-4` would pad it a zero per decade.
+    // formatISONumber reads `decimals` as the digits before the `e` down here, and a
+    // decade is exactly 1 there — so anything past `1e-4` would gain a zero per decade.
     expect(formatLogTickValue(1e-4)).toBe('1e-4');
     expect(formatLogTickValue(1e-5)).toBe('1e-5');
     expect(formatLogTickValue(1e-9)).toBe('1e-9');
@@ -666,10 +666,10 @@ describe('formatLogTickValue', () => {
 });
 
 describe('formatTickValue', () => {
-  it('keeps the mantissa the same width whatever the decade', () => {
-    // The decimal count is derived from the axis magnitude, which is the right number of
-    // fraction digits and the wrong number of mantissa digits. Widths must not track the
-    // exponent: scientific notation already carries the magnitude in the exponent.
+  it('keeps the digits before the `e` the same width whatever the decade', () => {
+    // The decimal count is derived from the axis magnitude: right for the decimals of the
+    // value, wrong for the digits before the `e`. Widths must not track the exponent,
+    // which already carries the magnitude on its own.
     const widths = [5e-4, 5e-5, 5e-6, 5e-9].map(
       (top) => formatTickValue(top / 5, top).split('e')[0].length,
     );
@@ -677,7 +677,7 @@ describe('formatTickValue', () => {
     expect(new Set(widths).size).toBe(1);
   });
 
-  it('spells a tick under the scientific threshold with two mantissa digits', () => {
+  it('spells a tick under the scientific threshold with two digits before the `e`', () => {
     expect(formatTickValue(1e-5, 5e-5)).toBe('1.00e-5');
     // Two digits are what keeps a tick that is not a round decade readable.
     expect(formatTickValue(2.5e-6, 1e-5)).toBe('2.50e-6');

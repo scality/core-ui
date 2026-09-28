@@ -2,8 +2,8 @@ import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
 import {
-  DEFAULT_MANTISSA_DIGITS,
   formatISONumber,
+  SCIENTIFIC_NOTATION_DECIMALS,
   SCIENTIFIC_NOTATION_THRESHOLD,
 } from '../../../utils';
 
@@ -467,14 +467,14 @@ export const formatLogTickValue = (
  * A decade's label: `0.001` keeps three decimals, `100` keeps none, and `1e-4` and below
  * read as the bare power.
  *
- * Below 1e-3 `formatISONumber` switches to scientific notation, where `decimals` counts
- * mantissa digits rather than fraction digits. A decade's mantissa is always 1, so the
- * decimal count computed above would pad it with a zero per decade.
+ * Below 1e-3 `formatISONumber` switches to scientific notation, where `decimals` counts the
+ * digits before the `e` rather than the decimals of the value. A decade is exactly 1 before
+ * the `e`, so the count computed above would pad it with a zero per decade.
  */
 const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
   return formatISONumber(value, {
-    // A decade's mantissa is exactly 1, so it needs no digits after the point.
+    // A decade is exactly 1 before the `e`, so it needs no digits after the point.
     decimals:
       value < SCIENTIFIC_NOTATION_THRESHOLD
         ? 0
@@ -879,14 +879,13 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
  * - Compact notation for large values (>= 10k)
  */
 export const formatTickValue = (value: number, topValue: number): string => {
-  // The count below is derived from the axis magnitude, which is the right number of
-  // *fraction* digits and the wrong number of *mantissa* digits: under the threshold
-  // formatISONumber reads it as the latter, and the label would gain a zero per decade.
-  // Scientific notation carries the magnitude in its exponent, so the mantissa keeps the
-  // library's own two digits whatever the decade.
+  // The count below is derived from the axis magnitude: right for the decimals of the
+  // value, wrong for the digits before the `e`, which is what formatISONumber reads it as
+  // under the threshold — the label would gain a zero per decade. The exponent already
+  // carries the magnitude, so what precedes it keeps the library's own two digits.
   const decimals =
     Math.abs(value) < SCIENTIFIC_NOTATION_THRESHOLD
-      ? DEFAULT_MANTISSA_DIGITS
+      ? SCIENTIFIC_NOTATION_DECIMALS
       : topValue < 1
         ? Math.ceil(-Math.log10(topValue)) + 1
         : 2;
