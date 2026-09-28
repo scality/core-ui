@@ -8,8 +8,8 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';
 
 ## Using a colour
 
-Every colour comes from the palette below. Pass a token name to any prop that takes a
-colour — `color`, `backgroundColor`, `borderColor` and the rest — or read the token off
+Every colour comes from the palette below. Pass a token name to a prop that takes a
+colour on its own — `color`, `backgroundColor`, `borderColor` — or read the token off
 the theme inside a styled component:
 
 ```jsx
@@ -41,6 +41,9 @@ Passing a token's **value** as a prop is rejected too, since its type is `string
 
 Both render identically and both follow a theme switch — the second is the one the
 compiler can check, so prefer it.
+
+A prop that bundles a colour in among other values stays raw CSS. Name the colour
+through its own prop to have it checked.
 
 ### If you need a colour outside the palette
 

@@ -93,5 +93,6 @@ export { InfoMessage } from './components/infomessage/InfoMessage.component';
 export { InputList } from './components/inputlist/InputList.component';
 export { InlineInput } from './components/inlineinput/InlineInput';
 export { UnsuccessfulResult } from './components/UnsuccessfulResult.component';
+export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export type { CoreUITheme, ThemeColor, ThemeColorToken } from './style/theme';
 export { formatISONumber } from './utils';

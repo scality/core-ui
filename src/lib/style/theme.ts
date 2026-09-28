@@ -62,6 +62,9 @@ export type CoreUITheme = {
 /** A colour token. The only colour type safe to index the theme object with. */
 export type ThemeColorToken = keyof CoreUITheme;
 
+/** @deprecated Renamed to `ThemeColorToken`. */
+export type ThemeColors = ThemeColorToken;
+
 /**
  * A colour for a styled-system prop: a token, or a keyword that defers to the
  * context. No raw colour — one outside the theme cannot follow a rebrand.
@@ -80,8 +83,14 @@ export type CoreUIProvidedTheme = CoreUITheme & {
   fontSizes: typeof fontSize;
 };
 
+// The scales are optional: this same type constrains what ThemeProvider accepts,
+// and themes are authored flat.
 declare module 'styled-components' {
-  export interface DefaultTheme extends CoreUIProvidedTheme {}
+  export interface DefaultTheme extends CoreUITheme {
+    colors?: CoreUITheme;
+    space?: typeof space;
+    fontSizes?: typeof fontSize;
+  }
 }
 
 export const coreUIAvailableThemesNames = [
