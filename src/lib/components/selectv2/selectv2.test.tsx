@@ -259,7 +259,11 @@ describe('SelectV2', () => {
 
   it('should scroll to selected value when opening select', async () => {
     render(
-      <SelectWrapper value={optionsWithScrollSearchBar[9].props.value}>
+      // A window narrower than the ten options, so there is an offset to assert on.
+      <SelectWrapper
+        value={optionsWithScrollSearchBar[9].props.value}
+        itemsPerScrollWindow={4}
+      >
         {optionsWithScrollSearchBar}
       </SelectWrapper>,
     );

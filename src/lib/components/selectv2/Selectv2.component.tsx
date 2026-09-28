@@ -228,7 +228,14 @@ const InternalOption = (width, isDefaultVariant) => (props) => {
         innerProps={innerProps}
         isFocused={props.isFocused && props.selectProps.keyboardFocusEnabled}
       >
-        <div className="option-value-wrapper">
+        <div
+          className={[
+            'option-value-wrapper',
+            props.data.groupLabel && 'option-value-wrapper--grouped',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
           <div className="option-icon">{props.data.icon}</div>
           {formatOptionLabel()}
         </div>
@@ -266,8 +273,22 @@ const getScrollOffset = (
   }
 };
 
-const GroupHeadingRow = ({ label }: { label: ReactNode }) => (
-  <div role="presentation" className="sc-select__group-heading">
+const GroupHeadingRow = ({
+  label,
+  isFirst,
+}: {
+  label: ReactNode;
+  isFirst: boolean;
+}) => (
+  <div
+    role="presentation"
+    className={[
+      'sc-select__group-heading',
+      isFirst && 'sc-select__group-heading--first',
+    ]
+      .filter(Boolean)
+      .join(' ')}
+  >
     {label}
   </div>
 );
@@ -308,7 +329,7 @@ const MenuList = (props) => {
   // row holding a whole group -- is flattened here into a heading row plus its
   // options.
   const rows = Array.isArray(children)
-    ? children.flatMap((child) => {
+    ? children.flatMap((child, childIndex) => {
         const group = child?.props?.data;
         if (!group?.options) {
           return [child];
@@ -317,6 +338,7 @@ const MenuList = (props) => {
           <GroupHeadingRow
             key={`heading-${group.label}`}
             label={child.props.label}
+            isFirst={childIndex === 0}
           />,
           ...child.props.children,
         ];
@@ -540,7 +562,7 @@ function SelectBox<
   id,
   selectRef,
   fluid,
-  itemsPerScrollWindow = 4,
+  itemsPerScrollWindow = 7,
   ...rest
 }: SelectProps & {
   selectRef?: Ref<SelectRef<OptionType, IsMulti, GroupType>>;
