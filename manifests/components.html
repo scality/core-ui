@@ -588,13 +588,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><span class="filter-pill ok" aria-disabled="true">377 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">27 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 prop type error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><span class="filter-pill ok" aria-disabled="true">381 stories ok</span><a class="filter-pill ok" data-k="docs" href="#filter-docs">27 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -1253,7 +1253,7 @@ withDefaultIcon?: boolean = false</code></pre>
       <div class="badges">
         <label for="c-3-components-data-display-charts-barchartv2-props" class="badge ok as-toggle">17 prop types</label>
         <label for="c-3-components-data-display-charts-barchartv2-info" class="badge info as-toggle">1 info</label>
-        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">21 stories</label>
+        <label for="c-3-components-data-display-charts-barchartv2-stories" class="badge ok as-toggle">23 stories</label>
         
         
       </div>
@@ -2465,6 +2465,105 @@ yAxisScale?: &quot;linear&quot; | &quot;log&quot; = &#39;linear&#39;</code></pre
               yAxisScale=&quot;log&quot;
             /&gt;
           &lt;/Stack&gt;
+          &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
+        &lt;/Stack&gt;
+      &lt;/ChartLegendWrapper&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Below The Scientific Threshold</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">An axis whose decades fall under the scientific threshold. Below `1e-3` the tick labels switch from decimals to scientific notation — `0.001` is the last decade written out in full, and everything under it reads as a bare power. The switch is `formatISONumber`&#39;s, so the axis changes notation exactly where every other number in the library does. A 5xx error rate is the shape that gets here: healthy endpoints sit several decades below the one endpoint that is failing, and a linear axis collapses all of them onto zero.</div>
+              <pre><code>const LogarithmicScaleBelowTheScientificThreshold = () =&gt; {
+  const theme = useTheme() as CoreUITheme;
+  const tinyData = [
+    {
+      label: &#39;Error rate&#39;,
+      data: [
+        [&#39;frontend&#39;, 0.42],
+        [&#39;cloudserver&#39;, 0.0031],
+        [&#39;iam&#39;, 0.000042],
+        [&#39;metadata&#39;, 0.0000015],
+        [&#39;sproxyd&#39;, 0],
+      ],
+    },
+  ] as const;
+
+  return (
+    &lt;div style={{ width: &#39;60%&#39;, padding: spacing.r16 }}&gt;
+      &lt;ChartLegendWrapper colorSet={{ &#39;Error rate&#39;: theme.statusWarning }}&gt;
+        &lt;Stack direction=&quot;vertical&quot; gap=&quot;r24&quot;&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              Linear — every endpoint but the first reads as zero
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={tinyData}
+              title=&quot;5xx error rate per service (%)&quot;
+              height={200}
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+            &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+              Logarithmic — 0.001 is spelled out, 1e-4 and below are bare
+              powers
+            &lt;/Text&gt;
+            &lt;Barchart
+              type={{ type: &#39;category&#39; }}
+              bars={tinyData}
+              title=&quot;5xx error rate per service (%)&quot;
+              height={200}
+              yAxisScale=&quot;log&quot;
+            /&gt;
+          &lt;/Stack&gt;
+          &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
+        &lt;/Stack&gt;
+      &lt;/ChartLegendWrapper&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Linear Axis Under The Scientific Threshold</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A **linear** axis whose whole domain sits under the scientific threshold. The tick labels are what this one is about, not the scale: with no bar above `4.2e-4`, every tick of the linear axis is written in scientific notation. What precedes the `e` keeps a fixed two digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude. No log axis is involved: a dataset that never leaves the millionths needs no decades to be mislabelled, only a small enough maximum.</div>
+              <pre><code>const LinearAxisUnderTheScientificThreshold = () =&gt; {
+  const theme = useTheme() as CoreUITheme;
+  const tinyDomain = [
+    {
+      label: &#39;Error rate&#39;,
+      data: [
+        [&#39;frontend&#39;, 0.00042],
+        [&#39;cloudserver&#39;, 0.00008],
+        [&#39;iam&#39;, 0.000013],
+        [&#39;metadata&#39;, 0.0000021],
+        [&#39;sproxyd&#39;, 0],
+      ],
+    },
+  ] as const;
+
+  return (
+    &lt;div style={{ width: &#39;60%&#39;, padding: spacing.r16 }}&gt;
+      &lt;ChartLegendWrapper colorSet={{ &#39;Error rate&#39;: theme.statusWarning }}&gt;
+        &lt;Stack direction=&quot;vertical&quot; gap=&quot;r8&quot;&gt;
+          &lt;Text variant=&quot;Basic&quot; isEmphazed&gt;
+            Linear — ticks read 2.00e-4, not 2.00000e-4
+          &lt;/Text&gt;
+          &lt;Barchart
+            type={{ type: &#39;category&#39; }}
+            bars={tinyDomain}
+            title=&quot;5xx error rate per service (%)&quot;
+            height={200}
+          /&gt;
           &lt;ChartLegend shape=&quot;rectangle&quot; direction=&quot;horizontal&quot; /&gt;
         &lt;/Stack&gt;
       &lt;/ChartLegendWrapper&gt;
@@ -4031,7 +4130,7 @@ width?: string = auto</code></pre>
       <div class="badges">
         <label for="c-9-components-data-display-charts-linetimeseriechart-props" class="badge ok as-toggle">17 prop types</label>
         
-        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">24 stories</label>
+        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">26 stories</label>
         
         
       </div>
@@ -5025,6 +5124,79 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot; | &quot;symmetrical&quo
         {...logChartArgs(data)}
         title=&quot;Error rate — logarithmic, 0.001 to 100&quot;
         yAxisTitle=&quot;/s&quot;
+        yAxisScale=&quot;log&quot;
+      /&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Logarithmic Scale Below The Scientific Threshold</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">An axis whose decades fall under the scientific threshold. Below `1e-3` the tick labels switch from decimals to scientific notation — `0.001` is the last decade written out in full, and everything under it reads as a bare power. The switch is `formatISONumber`&#39;s, so the axis changes notation exactly where every other number in the library does. This is the shape a 5xx error rate takes on a healthy platform: a baseline in the millionths with occasional excursions three or four decades above it. On the linear chart the whole series is a flat line on zero.</div>
+              <pre><code>const LogarithmicScaleBelowTheScientificThreshold = () =&gt; {
+  // Baseline in the millionths, two excursions four decades up. Deterministic.
+  const data = Array.from({ length: 120 }, (_, index) =&gt; {
+    const value =
+      index === 40
+        ? 0.02
+        : index === 92
+          ? 0.05
+          : 0.0000015 + (index % 7) * 0.0000004;
+    return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+      number,
+      number,
+    ];
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;5xx error rate — linear, the series is flat on zero&quot;
+        yAxisTitle=&quot;%&quot;
+      /&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;5xx error rate — logarithmic, 1e-6 to 0.1&quot;
+        yAxisTitle=&quot;%&quot;
+        yAxisScale=&quot;log&quot;
+      /&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Linear Axis Under The Scientific Threshold</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A **linear** axis whose whole domain sits under the scientific threshold. The tick labels are what this one is about, not the scale: with no value above `4e-4`, every tick of the linear axis is written in scientific notation. What precedes the `e` keeps a fixed two digits — `2.00e-4`, `4.00e-4` — rather than a width derived from the axis magnitude, which is what `formatISONumber` reads it as down there. This is the shape that has nothing to do with a log axis: a series that never leaves the millionths needs no decades to be mislabelled, only a small enough maximum.</div>
+              <pre><code>const LinearAxisUnderTheScientificThreshold = () =&gt; {
+  // Everything between 2.1e-6 and 3.8e-4, so the axis maximum lands under a thousandth.
+  const data = Array.from({ length: 120 }, (_, index) =&gt; {
+    const value = 0.0000021 + (index % 11) * 0.000038;
+    return [LOG_START + index * SAMPLE_FREQUENCY_LAST_ONE_HOUR, value] as [
+      number,
+      number,
+    ];
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;Linear — ticks read 2.00e-4, not 2.00000e-4&quot;
+        yAxisTitle=&quot;%&quot;
+      /&gt;
+      &lt;LogChart
+        {...logChartArgs(data)}
+        title=&quot;Logarithmic — the same series, decade by decade&quot;
+        yAxisTitle=&quot;%&quot;
         yAxisScale=&quot;log&quot;
       /&gt;
     &lt;/div&gt;
