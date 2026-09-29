@@ -45,7 +45,7 @@ const generateOptions = (n = 10) =>
   ));
 
 const optionsWithSearchBar = generateOptions(25);
-const optionsWithoutSearchBar = generateOptions(7);
+const optionsWithoutSearchBar = generateOptions(8);
 const defaultOptions = generateOptions(5);
 const thousandsOfOptions = generateOptions(1000);
 const optionsWithDisabledWithoutMessage = optionsWithSearchBar.map(
@@ -132,7 +132,7 @@ export const DisabledSelect: SelectStory = {
 };
 
 export const WithScrollbar: SelectStory = {
-  name: 'More than 4 items',
+  name: 'More than 7 items',
   args: {
     children: optionsWithoutSearchBar,
   },

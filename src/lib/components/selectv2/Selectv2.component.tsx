@@ -473,7 +473,7 @@ export type SelectProps = {
   /** use menuPositon='fixed' inside modal to avoid display issue */
   menuPosition?: 'fixed' | 'absolute';
   /** number of items visible before the option list becomes scrollable
-   * @default 4
+   * @default 7
    */
   itemsPerScrollWindow?: number;
 };
