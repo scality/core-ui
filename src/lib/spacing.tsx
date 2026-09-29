@@ -32,7 +32,7 @@ export const spacing = {
   f32: '32px',
   f36: '36px',
   f40: '40px',
-};
+} as const;
 
 // The two separator treatments. A row Stack draws a full-height rule between
 // its children; a column Stack draws a short dash. They are different shapes,

@@ -249,7 +249,7 @@ export const chartColors = {
   lineColor6,
   lineColor7,
   lineColor8,
-};
+} as const;
 
 // The trailing generic is load-bearing on both: a family name with nothing
 // after it falls back to the browser's default font, which is a serif.
@@ -265,7 +265,7 @@ export const fontSize = {
   huge: '1.57rem',
   // no use case for the moment
   massive: '1.71rem', // no use case for the moment
-};
+} as const;
 
 /**
  * @deprecated
@@ -293,7 +293,7 @@ export const fontWeight = {
   base: '400',
   semibold: '600',
   bold: '700',
-};
+} as const;
 
 /**
  * @deprecated
@@ -312,7 +312,7 @@ export const padding = {
   base: '16px',
   large: '20px',
   larger: '24px',
-};
+} as const;
 
 /**
  * @deprecated
@@ -344,7 +344,7 @@ export const svgSize = {
   larger: '22px',
   huge: '30px',
   massive: '40px',
-};
+} as const;
 export const zIndex = {
   tooltip: 9990,
   notification: 9000,
@@ -356,7 +356,7 @@ export const zIndex = {
   sidebar: 100,
   scrollbarButton: 2,
   base: 1,
-};
+} as const;
 //navbar
 export const navbarHeight = '3rem';
 export const navbarItemWidth = '4.286rem';
