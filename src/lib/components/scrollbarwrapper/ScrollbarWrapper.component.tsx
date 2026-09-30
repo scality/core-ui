@@ -45,6 +45,13 @@ const GlobalStyle = createGlobalStyle`
 
   @supports (animation-timeline: scroll()) {
     .scroll-fade {
+      /*
+       * The right-hand strip the bottom fade must leave alone: the 1px border plus
+       * the scrollbar. Measured at 11px, Chromium's rendering of scrollbar-width:
+       * thin -- the engine owns that width, so a consumer on an engine that renders
+       * a wider bar overrides this rather than seeing the bar's foot fade out.
+       */
+      --scroll-fade-gutter: 12px;
       animation-name: scroll-fade-out;
       animation-duration: 1ms; /* Firefox activation quirk — see note above */
       animation-timing-function: linear;
@@ -54,7 +61,11 @@ const GlobalStyle = createGlobalStyle`
       mask-image:
         linear-gradient(to top, black 1px, transparent 1px),
         linear-gradient(to right, black 1px, transparent 1px),
-        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to left,
+          black var(--scroll-fade-gutter),
+          transparent var(--scroll-fade-gutter)
+        ),
         linear-gradient(
           to bottom,
           black calc(100% - var(--scroll-fade-bottom)),
@@ -64,7 +75,11 @@ const GlobalStyle = createGlobalStyle`
       -webkit-mask-image:
         linear-gradient(to top, black 1px, transparent 1px),
         linear-gradient(to right, black 1px, transparent 1px),
-        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to left,
+          black var(--scroll-fade-gutter),
+          transparent var(--scroll-fade-gutter)
+        ),
         linear-gradient(
           to bottom,
           black calc(100% - var(--scroll-fade-bottom)),
