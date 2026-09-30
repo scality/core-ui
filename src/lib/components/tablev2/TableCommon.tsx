@@ -35,7 +35,11 @@ const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
     <div
       ref={ref}
       {...props}
-      style={{ ...props.style, scrollBehavior: 'smooth' }}
+      style={{
+        ...props.style,
+        scrollBehavior: 'smooth',
+        scrollbarGutter: 'stable',
+      }}
       className={[scrollFade && 'scroll-fade', props.className]
         .filter(Boolean)
         .join(' ')}
@@ -251,27 +255,10 @@ export const TruncatableHeaderLabel = ({
 
 export const useTableScrollbar = () => {
   const { hasScrollbar, setHasScrollbar } = useTableContext();
-  const [scrollBarWidth, setScrollBarWidth] = useState(0);
-
-  const handleScrollbarWidth = useCallback((node) => {
-    if (node) {
-      const scrollDiv = document.createElement('div');
-      scrollDiv.setAttribute(
-        'style',
-        'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;',
-      );
-      node.appendChild(scrollDiv);
-      const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      node.removeChild(scrollDiv);
-      setScrollBarWidth(scrollbarWidth);
-    }
-  }, []);
 
   return {
     hasScrollbar,
     setHasScrollbar,
-    scrollBarWidth,
-    handleScrollbarWidth,
   };
 };
 
