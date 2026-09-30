@@ -594,7 +594,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -2862,7 +2862,7 @@ theme?: any</code></pre>
               <pre><code>const colors = ({}) =&gt; {
   return (
     &lt;HighlightBorder&gt;
-      &lt;Box color=&quot;red&quot;&gt;red&lt;/Box&gt;
+      &lt;Box color=&quot;statusCritical&quot;&gt;statusCritical&lt;/Box&gt;
       &lt;Box bg=&quot;backgroundLevel2&quot; color=&quot;textPrimary&quot;&gt;
         textPrimary with background color at backgroundLevel2
       &lt;/Box&gt;
@@ -15484,7 +15484,7 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot;</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Stack</h2>
       <div class="badges">
-        <label for="c-51-components-styling-spacing-utils-props" class="badge ok as-toggle">5 prop types</label>
+        <label for="c-51-components-styling-spacing-utils-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-51-components-styling-spacing-utils-info" class="badge info as-toggle">1 info</label>
         <label for="c-51-components-styling-spacing-utils-stories" class="badge ok as-toggle">5 stories</label>
         
@@ -15520,11 +15520,16 @@ yAxisType?: &quot;default&quot; | &quot;percentage&quot;</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">5 prop types</span>
+              <span class="badge ok">6 prop types</span>
             </div>
             <pre><code>Component: src/lib/spacing.tsx::Stack</code></pre>
             <pre><code>Props:</code></pre>
-            <pre><code>container?: boolean
+            <pre><code>/**
+ * Narrower than `HTMLAttributes[&#39;color&#39;]`, which is `string`.
+ */
+color?: ThemeColor
+
+container?: boolean
 
 direction?: &quot;horizontal&quot; | &quot;vertical&quot;
 
@@ -19490,6 +19495,65 @@ import { coreUIAvailableThemes } from &#39;../src/lib/style/theme&#39;;
 &lt;Meta title=&quot;Style/Colors&quot; /&gt;
 
 # Colors
+
+## Using a colour
+
+Every colour comes from the palette below. Pass a token name to a prop that takes a
+colour on its own — `color`, `backgroundColor`, `borderColor` — or read the token off
+the theme inside a styled component:
+
+```jsx
+&lt;Box
+  color=&quot;textPrimary&quot;
+  backgroundColor=&quot;backgroundLevel1&quot;
+  borderColor=&quot;border&quot;
+/&gt;
+```
+
+```js
+const Alert = styled.div`
+  color: ${(props) =&gt; props.theme.statusCritical};
+  border: 1px solid ${(props) =&gt; props.theme.border};
+`;
+```
+
+These props accept a token name and nothing else, so a value outside the palette fails
+to compile and a near miss is corrected for you (`statusHealty` gives _Did you mean
+`statusHealthy`?_). Three CSS keywords are also accepted, because they defer to the
+context rather than naming a colour: `currentColor`, `inherit` and `transparent`.
+
+Passing a token&#39;s **value** as a prop is rejected too, since its type is `string`:
+
+```jsx
+&lt;Box color={theme.statusCritical} /&gt; // does not compile
+&lt;Box color=&quot;statusCritical&quot; /&gt; // the same colour, and checkable
+```
+
+Both render identically and both follow a theme switch — the second is the one the
+compiler can check, so prefer it.
+
+A prop that bundles a colour in among other values stays raw CSS. Name the colour
+through its own prop to have it checked.
+
+### If you need a colour outside the palette
+
+A colour outside the palette cannot follow a theme switch, so it drifts from the rest
+of the product as soon as the theme changes. Stay on the tokens unless the value
+genuinely sits outside the design system — a one-off illustration, a third-party brand
+colour.
+
+For those, use `styled()`. The CSS inside it is not type-checked, so any value the
+browser accepts works, and it overrides the component&#39;s own styles — including a token
+passed as a prop on the same element:
+
+```js
+const Illustration = styled(Box)`
+  color: #e40046;
+  background: linear-gradient(90deg, #fff, #000);
+`;
+```
+
+For a gradient or an image on a `Box`, `backgroundImage` also takes raw CSS.
 
 ## A-Dark
 
