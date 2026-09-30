@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
        * The right-hand strip the bottom fade must leave alone: the 1px border plus
        * the scrollbar. Measured at 11px, Chromium's rendering of scrollbar-width:
        * thin -- the engine owns that width, so a consumer on an engine that renders
-       * a wider bar overrides this rather than seeing the bar's foot fade out.
+       * a wider bar overrides this rather than watch its inner columns fade out.
        */
       --scroll-fade-gutter: 12px;
       animation-name: scroll-fade-out;
