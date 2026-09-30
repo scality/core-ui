@@ -6,5 +6,8 @@ on:
 
 jobs:
   review:
+    # Dependabot events use a separate secret store, so `secrets: inherit` yields
+    # nothing and the call is rejected before any step runs.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     uses: scality/workflows/.github/workflows/claude-code-review.yml@v2
     secrets: inherit
