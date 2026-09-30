@@ -1,7 +1,6 @@
 import { ComponentType, useState } from 'react';
 import { useMutation, UseMutationOptions } from 'react-query';
 import { useNavigate } from 'react-router';
-import { useTheme } from 'styled-components';
 import { Icon, Modal, SecondaryText } from '../..';
 import { Column, Table } from '../../components/tablev2/Tablev2.component';
 import { Box, Button } from '../../next';
@@ -138,7 +137,6 @@ export function AttachmentConfirmationModal<
     navigate(redirectUrl);
   };
   function AttachmentList() {
-    const theme = useTheme();
     const columns: Column<{
       action: AttachmentAction;
       type: ENTITY_TYPE;
@@ -157,7 +155,7 @@ export function AttachmentConfirmationModal<
               <Icon name="Link" /> Attach
             </span>
           ) : (
-            <Box color={theme.statusCritical}>
+            <Box color="statusCritical">
               <Icon name="Unlink" /> Detach
             </Box>
           );

@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { LineChartProps, LineTimeSerieChart } from './LineTimeSerieChart';
 import { ChartLegendWrapper } from '../legend/ChartLegendWrapper';
-import { ThemeProvider } from 'styled-components';
+import { CoreUiThemeProvider } from '../../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../../style/theme';
 
 // ResponsiveContainer measures its parent, which has no size in jsdom, so the
@@ -49,7 +49,7 @@ const ColorSet = {
 
 const renderLineTimeSerieChart = (props: Partial<LineChartProps> = {}) => {
   return render(
-    <ThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+    <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
       <ChartLegendWrapper colorSet={ColorSet}>
         <LineTimeSerieChart
           {...({
@@ -67,7 +67,7 @@ const renderLineTimeSerieChart = (props: Partial<LineChartProps> = {}) => {
           } as LineChartProps)}
         />
       </ChartLegendWrapper>
-    </ThemeProvider>,
+    </CoreUiThemeProvider>,
   );
 };
 
@@ -98,7 +98,7 @@ describe('LineTimeSerieChart logarithmic Y axis', () => {
 
   const renderChart = (props: Record<string, unknown>) =>
     render(
-      <ThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+      <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
         <ChartLegendWrapper colorSet={{ 'Series 1': '#FF0000' }}>
           <LineTimeSerieChart
             {...({
@@ -112,7 +112,7 @@ describe('LineTimeSerieChart logarithmic Y axis', () => {
             } as LineChartProps)}
           />
         </ChartLegendWrapper>
-      </ThemeProvider>,
+      </CoreUiThemeProvider>,
     );
 
   it('labels the axis with the decades enclosing the data, plus a zero', () => {

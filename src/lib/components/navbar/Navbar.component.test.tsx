@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from 'styled-components';
+import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { Navbar, selectVisibleTabs, getInitials } from './Navbar.component';
 import { coreUIAvailableThemes } from '../../style/theme';
 
@@ -8,9 +8,9 @@ const theme = coreUIAvailableThemes.darkRebrand;
 
 const renderNavbar = (props) =>
   render(
-    <ThemeProvider theme={theme}>
+    <CoreUiThemeProvider theme={theme}>
       <Navbar {...props} />
-    </ThemeProvider>,
+    </CoreUiThemeProvider>,
   );
 
 const tabs = [

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { EditorView } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { coreUIAvailableThemes } from '../../style/theme';
@@ -41,7 +41,7 @@ const darkTheme = coreUIAvailableThemes.darkRebrand;
 const lightTheme = coreUIAvailableThemes.artescaLight;
 
 const renderWithTheme = (ui: React.ReactElement, theme = darkTheme) =>
-  render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
+  render(<CoreUiThemeProvider theme={theme}>{ui}</CoreUiThemeProvider>);
 
 beforeEach(() => {
   mockJsonSchema.mockClear();
