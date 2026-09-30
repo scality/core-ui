@@ -6,6 +6,12 @@ import {
 import { Steppers } from '../src/lib/components/steppers/Steppers.component';
 import styled from 'styled-components';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
+import {
+  Form,
+  FormGroup,
+  FormSection,
+} from '../src/lib/components/form/Form.component';
+import { Input } from '../src/lib/components/inputv2/inputv2';
 import { Text } from '../src/lib/components/text/Text.component';
 import { Wrapper as StoryWrapper } from './common';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
@@ -109,6 +115,46 @@ export const SimpleStepper: Story = {
       <Stepper steps={STEPS} />
     </StoryWrapper>
   ),
+};
+
+const PAGE_STEPS = [
+  { label: 'Connection', Component: () => <PageStep title="Connection" /> },
+  { label: 'Mapping', Component: () => <PageStep title="Mapping" /> },
+  { label: 'Review', Component: () => <PageStep title="Review" /> },
+] as const;
+
+const PageStep = ({ title }: { title: string }) => (
+  <Form
+    layout={{ kind: 'page', title: `Create provider — ${title}` }}
+    responsive
+    leftActions={<Button variant="outline" label="Cancel" onClick={() => {}} />}
+    rightActions={<Button variant="primary" label="Continue" onClick={() => {}} />}
+  >
+    <FormSection title={{ name: title, icon: 'Node-backend' }}>
+      <FormGroup
+        direction="horizontal"
+        label="Provider name"
+        id="page-step-name"
+        content={<Input id="page-step-name" />}
+      />
+      <FormGroup
+        direction="horizontal"
+        label="Endpoint"
+        id="page-step-endpoint"
+        content={<Input id="page-step-endpoint" />}
+      />
+    </FormSection>
+  </Form>
+);
+
+// The production shape: each step is a `page` Form, which centres its own content
+// and — being a container — fills whatever column it is given. The rail would
+// otherwise push that centre half a rail to the right, so the Stepper reserves the
+// rail's width again on the other side. Narrow the window: the reservation gives
+// way before the form's content does.
+export const StepperWithPageForms: Story = {
+  name: 'Steps as page forms',
+  render: () => <Stepper steps={PAGE_STEPS} />,
 };
 
 const STATE_STEPS = [
