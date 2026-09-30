@@ -77,11 +77,6 @@ const GlobalStyle = createGlobalStyle`
 ${(props) => {
   const brand = props.theme;
   return css`
-    /*
-     * The scrollbar's appearance, in the two standard properties. This is what
-     * every current engine renders, and 'thin' is a keyword rather than a length:
-     * the engine picks the pixels, so nothing here can promise a width.
-     */
     * {
       scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
       scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
@@ -89,12 +84,11 @@ ${(props) => {
     }
 
     /*
-     * The legacy WebKit pseudo-elements, as a fallback only. Setting either standard
-     * property on an element makes Chromium ignore its ::-webkit-scrollbar rules, and
-     * the block above sets both on every element -- so outside this guard the rules
-     * below never take effect, and the 8px they name is not the bar anyone sees.
-     * Selectors are written flat: nested under the universal selector they compile
-     * to a descendant combinator, which can never match the root scroller.
+     * A fallback for engines without the standard properties. The rule above sets
+     * scrollbar-width on every element, and Chromium then ignores that element's
+     * ::-webkit-scrollbar rules -- so dropping this guard would not revive the block.
+     * Flat rather than nested under the universal selector, which would compile to a
+     * descendant combinator and never match the root scroller.
      */
     @supports not (scrollbar-width: thin) {
       *::-webkit-scrollbar {
