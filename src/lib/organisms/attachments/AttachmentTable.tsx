@@ -74,13 +74,6 @@ export type AttachmentTableProps<
 
 const rowHeight = 'h48';
 
-/**
- * Anchored to `SearchAnchor`, which is exactly as wide as the field, with `left`/`right`
- * rather than given a width -- so the menu follows the field through a resize that causes
- * no re-render: a container query, or a side panel opening. The old `-2px` border
- * compensation is gone with it -- an auto width between two insets already lands on the
- * border box.
- */
 const MenuContainer = styled.ul<{
   $isOpen: boolean;
 }>`
@@ -118,11 +111,6 @@ const SearchBoxContainer = styled.div`
   padding: ${spacing.r16};
 `;
 
-/**
- * The menu's containing block, sized to the field rather than to the padding box around
- * it: the field hugs its own content, so a menu spanning the whole box would be wider
- * than the field it belongs to.
- */
 const SearchAnchor = styled.div`
   position: relative;
   width: fit-content;
@@ -134,15 +122,8 @@ const SearchAnchor = styled.div`
  * there is no flex line to grow along. It is kept for the error path, where the
  * input sits in a `Stack` beside a `Loader`.
  *
- * The seam with the open menu is keyed on the menu's own open state rather than on
- * `:focus-within`. Both edges of the seam then move on one state change: an outside
- * click blurs the input on `mousedown`, while the menu closes on the `mouseup` that
- * follows, so a focus-driven seam reappeared under a menu that was still open.
- *
- * `&&` is load-bearing. `Input` paints its own border from `:hover` and
- * `:focus-within`, both of which carry a pseudo-class and so outrank a plain
- * `& > div`; the class has to be doubled to win. The old `& > div:focus-within`
- * outranked them for free, which is why dropping the pseudo-class needed this.
+ * `&&` doubles the class so this rule outranks `Input`'s own `:hover`/`:focus-within`
+ * border, which carry a pseudo-class that a plain `& > div` cannot beat.
  */
 const StyledSearchInput = styled(SearchInput)<{ $isOpen: boolean }>`
   flex-grow: 1;
@@ -516,6 +497,17 @@ export const AttachmentTable = <
       onInputValueChange: ({ inputValue }) => {
         onEntitySearchChange(inputValue);
       },
+      // Blur must close the list without committing the highlighted row: selecting
+      // here runs `onSelectedItemChange`, which attaches the entity outright, so
+      // tabbing out of a list with a row under the cursor would attach it.
+      stateReducer: (state, { type, changes }) =>
+        type === useCombobox.stateChangeTypes.InputBlur
+          ? {
+              ...changes,
+              selectedItem: state.selectedItem,
+              inputValue: state.inputValue,
+            }
+          : changes,
     });
 
   useMemo(() => {
