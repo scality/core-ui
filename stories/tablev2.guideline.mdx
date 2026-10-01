@@ -27,6 +27,19 @@ against the caret rather than pushed off centre by it. On a column too narrow to
 centred label drifts off centre instead of truncating earlier than it would without a caret —
 losing the middle of a label costs more than losing its exact centring.
 
+## Hidden values
+
+No value is hidden.<br />
+When a cell cannot show all of its content, the rest is reached through a visible trigger.<br />
+That trigger is a question mark placed next to the content, and it reveals the rest on hover.
+
+A list of values that can be enumerated is a particular case: show the first value, then the
+number of remaining ones as "+1" or "+2", then the question mark listing them all.
+
+`IconHelp` provides the question mark. There is no component for the count, compose it from a
+`ConstrainedText` for the first value and the count as plain text. Values hidden by a `dropAt`
+breakpoint are a separate case, handled by `revealDroppedColumns` below.
+
 ## Action column
 
 Tables may include an action column on the far right for row-level actions.
@@ -62,6 +75,9 @@ A table never tells the user a resource is empty before it has finished loading.
 Pass `onRowSelected` to `Table.SingleSelectableContent` to make rows selectable, and pair it with
 `selectedId` so the chosen row stays marked. A selectable row shows a pointer cursor and a hover
 highlight from the start — the affordance does not wait for a first selection.
+
+A table with no `onRowSelected` has neither. Do not add a hover highlight to a read-only table as
+visual feedback: it announces a click that leads nowhere.
 
 Clicking anywhere in a row selects it, **except** on an interactive control inside a cell. A
 button, link, input, checkbox or label in a cell keeps its own click. The same holds for the
