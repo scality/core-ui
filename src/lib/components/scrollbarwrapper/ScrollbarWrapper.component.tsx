@@ -51,12 +51,10 @@ const GlobalStyle = createGlobalStyle`
   @supports (animation-timeline: scroll()) {
     .scroll-fade {
       /*
-       * The right-hand strip the bottom fade must leave alone: the 1px border plus
-       * the scrollbar. Measured at 11px, Chromium's rendering of scrollbar-width:
-       * thin -- the engine owns that width, so a consumer on an engine that renders
-       * a wider bar overrides this rather than watch its inner columns fade out.
+       * 11px is Chromium's rendering of scrollbar-width: thin; the engine
+       * owns that width, so an engine that draws a wider bar overrides it.
        */
-      --scroll-fade-gutter: 12px;
+      --scroll-fade-gutter: calc(11px + var(--scroll-fade-border, 0px));
       animation-name: scroll-fade-out;
       animation-duration: 1ms; /* Firefox activation quirk — see note above */
       animation-timing-function: linear;
@@ -64,8 +62,16 @@ const GlobalStyle = createGlobalStyle`
       animation-timeline: scroll(self);
       animation-range: calc(100% - 2.5rem) 100%;
       mask-image:
-        linear-gradient(to top, black 1px, transparent 1px),
-        linear-gradient(to right, black 1px, transparent 1px),
+        linear-gradient(
+          to top,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to right,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
         linear-gradient(
           to left,
           black var(--scroll-fade-gutter),
@@ -78,8 +84,16 @@ const GlobalStyle = createGlobalStyle`
         );
       mask-composite: add, add, add, add;
       -webkit-mask-image:
-        linear-gradient(to top, black 1px, transparent 1px),
-        linear-gradient(to right, black 1px, transparent 1px),
+        linear-gradient(
+          to top,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to right,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
         linear-gradient(
           to left,
           black var(--scroll-fade-gutter),

@@ -58,6 +58,20 @@ No JavaScript, no React state, no scroll listeners — the effect is driven enti
 
 <Canvas of={ScrollbarWrapperStories.ScrollFadeUtility} />
 
+### Bordered elements
+
+The fade leaves the scrollbar alone, so the bar never dissolves along with the content. An element
+that also has a border declares its width, and the border gets the same treatment:
+
+```css
+.my-list {
+  --scroll-fade-border: 1px;
+}
+```
+
+Leave it unset otherwise. On an element with no border it keeps a one-pixel line of content sharp
+along the edge, under a fade that has already gone.
+
 ### Browser support
 
 The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures browsers that do not support it receive no mask at all — no fade, no clipping, no stacking context side effects.
