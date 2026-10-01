@@ -21,10 +21,7 @@ type Props = {
 };
 const RAIL_PADDING_LEFT = '2rem';
 const STEP_MIN_WIDTH = '20rem';
-/**
- * The rail's natural width — the step row's floor plus the container's own left
- * padding. A step title too long for `STEP_MIN_WIDTH` pushes the rail past it.
- */
+/** Lower bound only: a step title too long for `STEP_MIN_WIDTH` widens the rail past it. */
 export const STEPPERS_WIDTH = `calc(${STEP_MIN_WIDTH} + ${RAIL_PADDING_LEFT})`;
 
 const SteppersContainer = styled.div.withConfig({
