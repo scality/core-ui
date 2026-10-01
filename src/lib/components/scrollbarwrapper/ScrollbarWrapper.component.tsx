@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
    * bottom fade that auto-hides when the user reaches the end of the list.
    *
    * How the property cascade works:
-   *   • 0rem  — initial-value; used when timeline is inactive (no overflow)
+   *   • 0px  — initial-value; used when timeline is inactive (no overflow)
    *   • 2.5rem — fill-mode:both holds this from scroll-top until near-bottom
    *   • 0rem  — fill-mode:both holds this once fully scrolled to the bottom
    *
@@ -32,10 +32,15 @@ const GlobalStyle = createGlobalStyle`
    * so that component-level animation declarations on more-specific selectors
    * are never overridden.
    */
+  /*
+   * initial-value must be computationally independent: a font-relative unit
+   * invalidates @property, leaving it unregistered so the animation steps
+   * instead of interpolating.
+   */
   @property --scroll-fade-bottom {
     syntax: '<length>';
     inherits: false;
-    initial-value: 0rem;
+    initial-value: 0px;
   }
 
   @keyframes scroll-fade-out {
