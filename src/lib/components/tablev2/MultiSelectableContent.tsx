@@ -20,6 +20,7 @@ import {
   shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
+  useTableScrollbar,
 } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Box } from '../box/Box';
@@ -126,6 +127,7 @@ export const MultiSelectableContent = <
   };
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const { hasScrollbar } = useTableScrollbar();
 
   /**
    * These values change identity on (almost) every render. We read them through refs so the row
@@ -241,6 +243,7 @@ export const MultiSelectableContent = <
             {...headerGroup.getHeaderGroupProps()}
             $rowHeight={rowHeight}
             $separationLineVariant={separationLineVariant}
+            $hasScrollBar={hasScrollbar}
             ref={headerRef}
           >
             {headerGroup.headers.map((column) => {
