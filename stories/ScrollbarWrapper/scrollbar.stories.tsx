@@ -38,6 +38,7 @@ const List = styled.ul`
   list-style: none;
   border: 1px solid ${({ theme }) => theme.border};
   border-radius: 4px;
+  --scroll-fade-border: 1px;
 `;
 
 const Item = styled.li`

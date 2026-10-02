@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
    * bottom fade that auto-hides when the user reaches the end of the list.
    *
    * How the property cascade works:
-   *   • 0rem  — initial-value; used when timeline is inactive (no overflow)
+   *   • 0px  — initial-value; used when timeline is inactive (no overflow)
    *   • 2.5rem — fill-mode:both holds this from scroll-top until near-bottom
    *   • 0rem  — fill-mode:both holds this once fully scrolled to the bottom
    *
@@ -32,10 +32,15 @@ const GlobalStyle = createGlobalStyle`
    * so that component-level animation declarations on more-specific selectors
    * are never overridden.
    */
+  /*
+   * initial-value must be computationally independent: a font-relative unit
+   * invalidates @property, leaving it unregistered so the animation steps
+   * instead of interpolating.
+   */
   @property --scroll-fade-bottom {
     syntax: '<length>';
     inherits: false;
-    initial-value: 0rem;
+    initial-value: 0px;
   }
 
   @keyframes scroll-fade-out {
@@ -45,6 +50,11 @@ const GlobalStyle = createGlobalStyle`
 
   @supports (animation-timeline: scroll()) {
     .scroll-fade {
+      /*
+       * 11px is Chromium's rendering of scrollbar-width: thin; the engine
+       * owns that width, so an engine that draws a wider bar overrides it.
+       */
+      --scroll-fade-gutter: calc(11px + var(--scroll-fade-border, 0px));
       animation-name: scroll-fade-out;
       animation-duration: 1ms; /* Firefox activation quirk — see note above */
       animation-timing-function: linear;
@@ -52,9 +62,21 @@ const GlobalStyle = createGlobalStyle`
       animation-timeline: scroll(self);
       animation-range: calc(100% - 2.5rem) 100%;
       mask-image:
-        linear-gradient(to top, black 1px, transparent 1px),
-        linear-gradient(to right, black 1px, transparent 1px),
-        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to top,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to right,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to left,
+          black var(--scroll-fade-gutter),
+          transparent var(--scroll-fade-gutter)
+        ),
         linear-gradient(
           to bottom,
           black calc(100% - var(--scroll-fade-bottom)),
@@ -62,9 +84,21 @@ const GlobalStyle = createGlobalStyle`
         );
       mask-composite: add, add, add, add;
       -webkit-mask-image:
-        linear-gradient(to top, black 1px, transparent 1px),
-        linear-gradient(to right, black 1px, transparent 1px),
-        linear-gradient(to left, black 9px, transparent 9px),
+        linear-gradient(
+          to top,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to right,
+          black var(--scroll-fade-border, 0px),
+          transparent var(--scroll-fade-border, 0px)
+        ),
+        linear-gradient(
+          to left,
+          black var(--scroll-fade-gutter),
+          transparent var(--scroll-fade-gutter)
+        ),
         linear-gradient(
           to bottom,
           black calc(100% - var(--scroll-fade-bottom)),
@@ -75,21 +109,32 @@ const GlobalStyle = createGlobalStyle`
   }
 
 ${(props) => {
-    const brand = props.theme;
-    return css`
-    // Custom scrollbar
+  const brand = props.theme;
+  return css`
     * {
-      // Chrome / Safari / Edge
-      ::-webkit-scrollbar {
+      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
+      scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
+      scrollbar-width: thin;
+    }
+
+    /*
+     * A fallback for engines without the standard properties. The rule above sets
+     * scrollbar-width on every element, and Chromium then ignores that element's
+     * ::-webkit-scrollbar rules -- so dropping this guard would not revive the block.
+     * Flat rather than nested under the universal selector, which would compile to a
+     * descendant combinator and never match the root scroller.
+     */
+    @supports not (scrollbar-width: thin) {
+      *::-webkit-scrollbar {
         width: 8px;
         height: 8px;
       }
 
-      ::-webkit-scrollbar-track {
+      *::-webkit-scrollbar-track {
         background: ${brand.backgroundLevel3};
       }
 
-      ::-webkit-scrollbar-thumb {
+      *::-webkit-scrollbar-thumb {
         width: 4px;
         height: 4px;
         min-height: 20px;
@@ -101,27 +146,23 @@ ${(props) => {
         border: 2px solid rgba(0, 0, 0, 0);
       }
 
-      ::-webkit-scrollbar-thumb:vertical:hover,
-      ::-webkit-scrollbar-thumb:horizontal:hover {
+      *::-webkit-scrollbar-thumb:vertical:hover,
+      *::-webkit-scrollbar-thumb:horizontal:hover {
         background-color: rgba(89, 90, 120, 0.5);
       }
 
-      ::-webkit-scrollbar-button {
+      *::-webkit-scrollbar-button {
         width: 0;
         height: 0;
         display: none;
       }
-      ::-webkit-scrollbar-corner {
+
+      *::-webkit-scrollbar-corner {
         background-color: transparent;
       }
-
-      // Firefox
-      scrollbar-color: ${brand.border} ${brand.backgroundLevel3}; // fallback for gradient themes
-      scrollbar-color: ${brand.buttonSecondary} ${brand.backgroundLevel3};
-      scrollbar-width: thin;
     }
   `;
-  }}
+}}
 `;
 
 function ScrollbarWrapper({ children }: Props) {
