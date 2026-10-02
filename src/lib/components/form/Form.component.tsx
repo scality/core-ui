@@ -15,6 +15,7 @@ import {
   helpIconReserve,
   IconHelp,
   LabelHelpIcon,
+  trimLabelEnd,
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
@@ -370,9 +371,11 @@ const FormGroup = ({
         color={disabled ? undefined : 'textSecondary'}
         $reserveHelpIcon={!!labelHelpTooltip}
       >
-        {label}
-        {requireMode !== 'all' && required && ' *'}
-        {requireMode === 'all' && !required && ' (optional)'}
+        {trimLabelEnd(label)}
+        {/* Non-breaking spaces: a marker is an annotation on the label's last
+            word, and a plain space lets it wrap onto a line of its own. */}
+        {requireMode !== 'all' && required && '\u00a0*'}
+        {requireMode === 'all' && !required && '\u00a0(optional)'}
       </LabelText>
       {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>
