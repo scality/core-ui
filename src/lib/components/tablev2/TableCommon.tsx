@@ -3,6 +3,7 @@ import {
   ReactNode,
   Ref,
   useCallback,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -30,7 +31,7 @@ import { Tooltip } from '../tooltip/Tooltip.component';
 import { HeaderLabel } from './Tablestyle';
 
 const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
-  const { scrollFade } = useTableContext();
+  const { scrollFade, hasScrollbar } = useTableContext();
   return (
     <div
       ref={ref}
@@ -38,7 +39,7 @@ const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
       style={{
         ...props.style,
         scrollBehavior: 'smooth',
-        scrollbarGutter: 'stable',
+        scrollbarGutter: hasScrollbar ? 'stable' : 'auto',
       }}
       className={[scrollFade && 'scroll-fade', props.className]
         .filter(Boolean)
@@ -55,8 +56,6 @@ type VirtualizedRowsType<
     React.PropsWithChildren<ListChildComponentProps<Row<DATA_ROW>[]>>
   >;
   rowHeight: TableHeightKeyType;
-  setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
-  hasScrollbar?: boolean;
   itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
@@ -73,12 +72,63 @@ type VirtualizedRowsType<
   columnsKey?: string;
 };
 
+const VirtualizedList = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
+  height,
+  rows,
+  rowHeight,
+  itemData,
+  itemKey,
+  listRef,
+  onBottom,
+  onBottomOffset,
+  RenderRow,
+}: Omit<VirtualizedRowsType<DATA_ROW>, 'columnsKey'> & {
+  height: number;
+  itemData: Row<DATA_ROW>[];
+}) => {
+  const { setHasScrollbar } = useTableContext();
+  const itemSize = convertRemToPixels(tableRowHeight[rowHeight]);
+
+  // useLayoutEffect, not useEffect: with useEffect the body could already have
+  // lost a scrollbar's width to its bar for a frame before the head row's own
+  // gutter followed, leaving the columns briefly a scrollbar apart.
+  const hasScrollbar = rows.length * itemSize > height - 1;
+  useLayoutEffect(() => {
+    setHasScrollbar(hasScrollbar);
+  }, [hasScrollbar, setHasScrollbar]);
+
+  return (
+    <List
+      height={height - 1}
+      itemCount={rows.length} // how many items we are going to render
+      itemSize={itemSize} // height of each row in pixel
+      width={'100%'}
+      itemKey={itemKey}
+      itemData={itemData}
+      ref={listRef}
+      outerElementType={SmoothScrollDiv}
+      onItemsRendered={({ overscanStopIndex }) => {
+        if (
+          onBottom &&
+          onBottomOffset != null &&
+          overscanStopIndex >= rows.length - 1 - onBottomOffset
+        ) {
+          onBottom(rows.length);
+        }
+      }}
+    >
+      {RenderRow}
+    </List>
+  );
+};
+
 export const VirtualizedRows = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
   rows,
   rowHeight,
-  setHasScrollbar,
   onBottom,
   onBottomOffset,
   RenderRow,
@@ -94,39 +144,19 @@ export const VirtualizedRows = <
   const itemData = useMemo(() => rows.slice(), [rows, columnsKey]);
   return (
     <AutoSizer disableWidth>
-      {({ height }) => {
-        return (
-          <List
-            height={height - 1}
-            itemCount={rows.length} // how many items we are going to render
-            itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-            width={'100%'}
-            itemKey={itemKey}
-            itemData={itemData}
-            ref={listRef}
-            outerElementType={SmoothScrollDiv}
-            onItemsRendered={({
-              visibleStartIndex,
-              visibleStopIndex,
-              overscanStopIndex,
-            }) => {
-              setHasScrollbar(
-                visibleStopIndex - visibleStartIndex < overscanStopIndex,
-              );
-
-              if (
-                onBottom &&
-                onBottomOffset != null &&
-                overscanStopIndex >= rows.length - 1 - onBottomOffset
-              ) {
-                onBottom(rows.length);
-              }
-            }}
-          >
-            {RenderRow}
-          </List>
-        );
-      }}
+      {({ height }) => (
+        <VirtualizedList<DATA_ROW>
+          height={height}
+          rows={rows}
+          rowHeight={rowHeight}
+          itemData={itemData}
+          itemKey={itemKey}
+          listRef={listRef}
+          onBottom={onBottom}
+          onBottomOffset={onBottomOffset}
+          RenderRow={RenderRow}
+        />
+      )}
     </AutoSizer>
   );
 };
@@ -285,7 +315,6 @@ export function TableRows<
   RenderRow,
   listRef: externalListRef,
 }: TableRowsProps<DATA_ROW>) {
-  const { setHasScrollbar } = useTableScrollbar();
   const {
     rows,
     status,
@@ -333,7 +362,6 @@ export function TableRows<
             listRef={listRef}
             itemKey={itemKey}
             rowHeight={rowHeight}
-            setHasScrollbar={setHasScrollbar}
             onBottom={onBottom}
             onBottomOffset={onBottomOffset}
             RenderRow={RenderRow}
@@ -354,7 +382,6 @@ export function TableRows<
         <VirtualizedRows<DATA_ROW>
           rows={rows}
           listRef={listRef}
-          setHasScrollbar={setHasScrollbar}
           onBottom={onBottom}
           onBottomOffset={onBottomOffset}
           itemKey={itemKey}

@@ -20,6 +20,7 @@ import {
   shouldIgnoreRowEvent,
   TableRows,
   TruncatableHeaderLabel,
+  useTableScrollbar,
 } from './TableCommon';
 import useSyncedScroll from './useSyncedScroll';
 import { Loader } from '../loader/Loader.component';
@@ -61,6 +62,7 @@ export function SingleSelectableContent<
   }
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const { hasScrollbar } = useTableScrollbar();
   const listRef = useRef<FixedSizeList<Row<DATA_ROW>[]>>(null);
   const { headerGroups, prepareRow, rows, setRowHeight } =
     useTableContext<DATA_ROW>();
@@ -190,6 +192,7 @@ export function SingleSelectableContent<
             ref={headerRef}
             $separationLineVariant={separationLineVariant}
             $rowHeight={rowHeight}
+            $hasScrollBar={hasScrollbar}
             style={{ overflow: 'hidden' }}
           >
             {headerGroup.headers.map((column) => {
