@@ -1,7 +1,25 @@
 /// <reference path="./Stepper.component.d.ts" />
 import { createContext, useContext, useState, useCallback, useMemo } from 'react';
-import { Steppers } from './Steppers.component';
+import styled from 'styled-components';
+import { Steppers, STEPPERS_WIDTH } from './Steppers.component';
+import { PAGE_FORM_WIDTH } from '../form/Form.constants';
 import { Box } from '../box/Box';
+
+const STEP_GAP_PX = 32;
+
+const RESERVED_WIDTH = `calc(${STEPPERS_WIDTH} + ${STEP_GAP_PX}px)`;
+// The row gap is laid out even when this item collapses to zero width, so the
+// width includes one gap and the negative margin cancels it.
+const RailMirror = styled.div`
+  flex: 0 0 auto;
+  width: ${RESERVED_WIDTH};
+  margin-left: -${STEP_GAP_PX}px;
+  min-width: 0;
+  max-width: min(
+    ${RESERVED_WIDTH},
+    calc(100% - ${STEPPERS_WIDTH} - ${STEP_GAP_PX}px - ${PAGE_FORM_WIDTH})
+  );
+`;
 export interface StepperContextType {
   next: (props: Record<string, unknown>) => void;
   prev: (props: Record<string, unknown>) => void;
@@ -48,7 +66,7 @@ export const Stepper: Stepper = ({ steps }) => {
 
   return (
     <StepperContext.Provider value={stepperValue}>
-      <Box display="flex" gap={32} flex={1} height="100%">
+      <Box display="flex" gap={STEP_GAP_PX} flex={1} height="100%">
         <Steppers
           activeStep={stepProps.step}
           steps={steps.map((step) => {
@@ -58,6 +76,7 @@ export const Stepper: Stepper = ({ steps }) => {
           })}
         />
         <Component {...stepProps.props} />
+        <RailMirror aria-hidden="true" />
       </Box>
     </StepperContext.Provider>
   );

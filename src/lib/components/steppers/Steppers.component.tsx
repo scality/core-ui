@@ -19,16 +19,21 @@ type Props = {
   activeStep: number;
   className?: string;
 };
+const RAIL_PADDING_LEFT = '2rem';
+const STEP_MIN_WIDTH = '20rem';
+/** Lower bound only: a step title too long for `STEP_MIN_WIDTH` widens the rail past it. */
+export const STEPPERS_WIDTH = `calc(${STEP_MIN_WIDTH} + ${RAIL_PADDING_LEFT})`;
+
 const SteppersContainer = styled.div.withConfig({
   componentId: 'sc-steppers',
 })`
   padding-top: 4rem;
-  padding-left: 2rem;
+  padding-left: ${RAIL_PADDING_LEFT};
 `;
 const StepContainer = styled.div`
   display: flex;
   min-height: 50px;
-  min-width: 20rem;
+  min-width: ${STEP_MIN_WIDTH};
 `;
 const Panel = styled.div`
   display: flex;

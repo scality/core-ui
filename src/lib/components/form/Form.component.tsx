@@ -18,6 +18,7 @@ import {
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
+import { PAGE_FORM_WIDTH } from './Form.constants';
 
 const DESCRIPTION_PREFIX = 'describe-';
 const LABEL_PREFIX = 'label-';
@@ -120,7 +121,6 @@ const StyledForm = styled.form<{
 // scrollbar along with the content, so only the scroller's own layout can put
 // space between the two. The header and footer share it so their actions line up
 // with the fields.
-const PAGE_CONTENT_MAX_WIDTH = '45rem';
 const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
   box-sizing: border-box;
   margin: 0 auto;
@@ -128,7 +128,7 @@ const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
     props.$layoutKind === 'page'
       ? `
   width: 100%;
-  max-width: calc(${PAGE_CONTENT_MAX_WIDTH} + ${spacing.f16});
+  max-width: ${PAGE_FORM_WIDTH};
   padding-right: ${spacing.f16};
   `
       : `
