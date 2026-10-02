@@ -14,14 +14,15 @@ The root font size is **14px**, so `1rem = 14px` throughout the system.
 
 ### Fira Code
 
-**Fira Code** is the monospace typeface for code-heavy surfaces. Use it wherever the content is code, terminal output, or technical identifiers.
+**Fira Code** is the monospace typeface for code.
 
 Use for:
 
-- Code blocks and syntax-highlighted regions
-- Terminal and CLI output
-- Inline code snippets in technical prose
-- Technical value display: object keys, checksums, endpoints, version strings
+- Code blocks and the Editor
+- Commands and configuration snippets to copy
+- Technical values inside running text, such as an ID or an endpoint in a chat answer or a documentation page
+
+Do not use it in the interface itself. A technical value in a table, a key-value list or a form uses Lato, like the rest of the UI. The cell or the field already sets it apart.
 
 <pre style={{fontFamily: "'Fira Code', monospace", fontSize: "14px", lineHeight: "1.8", padding: "1rem 1.25rem", borderRadius: "4px", overflowX: "auto", fontVariantLigatures: "contextual", fontFeatureSettings: '"calt" 1'}}>
 {`aws s3api list-objects --bucket my-bucket --prefix backups/ --max-keys 100
