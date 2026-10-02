@@ -10,7 +10,7 @@ A modal interrupts the user to focus on a single task or decision. It blocks the
 ## When to use / When not to use
 
 **✅ Use a modal for:**
-- A confirmation before a consequential action (delete, reset, publish)
+- A confirmation before a consequential action, whatever its label: delete, remove from a list, revoke, reset, publish. An action that cannot be undone is always consequential.
 - A short, focused form that doesn't warrant a full page
 - A required decision the user must address before continuing
 
@@ -80,7 +80,7 @@ Use a read-only modal to surface the details of a specific resource without allo
 
 Use `role="alertdialog"`, omit the close button, and use `variant="danger"` on the confirm action. Only the button carries the danger signal — the modal chrome does not change.
 
-If the action targets a named resource, that name must appear in the body. If there is no named resource (e.g. resetting a configuration), it is optional.
+If the action targets a named resource, that name must appear in the body. If there is no named resource, such as when resetting a configuration, it is optional.
 
 ## Async actions
 
