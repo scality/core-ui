@@ -45,6 +45,21 @@ import { Icon } from '@scality/core-ui';
 
 `@scality/core-ui` holds the stable components; `@scality/core-ui/dist/next` holds newer versions of existing components, so a redesign can ship without breaking the one in use.
 
+## Guidelines
+
+The package ships the design system guidelines in `stories/`:
+
+- `stories/<Component>/<component>.guideline.mdx`: when and how to use a component. A few older ones sit directly under `stories/`, such as `form.guideline.mdx`.
+- The other `.mdx` files directly under `stories/` and under `stories/guideline/`: rules for every screen, such as typography, formats and the design principles in `Introduction.mdx`.
+
+Read the guideline of a component before using it, and the cross-cutting pages before building a screen. The same pages are on the [documentation site](https://scality.github.io/core-ui/).
+
+AI agents do not read this README on their own. They read the instruction file of the project they work in, such as `CLAUDE.md` or `AGENTS.md`. To make an agent follow the guidelines, add this line to that file:
+
+```
+Before using a @scality/core-ui component, read its guideline in node_modules/@scality/core-ui/stories/, and the .mdx pages directly under stories/ and stories/guideline/.
+```
+
 ## Theming
 
 Components are themed through the [styled-components theming concept](https://www.styled-components.com/docs/advanced). Wrap your app in a `ThemeProvider` and give it a theme:
