@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>3.6s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -14016,7 +14016,7 @@ A modal interrupts the user to focus on a single task or decision. It blocks the
 ## When to use / When not to use
 
 **✅ Use a modal for:**
-- A confirmation before a consequential action (delete, reset, publish)
+- A confirmation before a consequential action, whatever its label: delete, remove from a list, revoke, reset, publish. An action that cannot be undone is always consequential.
 - A short, focused form that doesn&#39;t warrant a full page
 - A required decision the user must address before continuing
 
@@ -14040,7 +14040,7 @@ The `role` prop controls how assistive technologies treat the modal.
 | `dialog` (default) | Standard interaction — form, optional confirmation | Present |
 | `alertdialog` | Critical or destructive action requiring a forced decision | Omit |
 
-Use `alertdialog` when accidentally dismissing the modal would be dangerous or meaningless (e.g. a delete confirmation — ESC should not silently cancel the user&#39;s intent).
+Use `alertdialog` when accidentally dismissing the modal would be dangerous or meaningless (such as a delete confirmation — ESC should not silently cancel the user&#39;s intent).
 
 ## Close button and backdrop
 
@@ -14053,7 +14053,7 @@ Use `alertdialog` when accidentally dismissing the modal would be dangerous or m
 - `title` is always required and always text. It mirrors the verb of the action that triggered the modal: the button &quot;Delete node&quot; opens a modal titled &quot;Delete node?&quot;.
 - For standard modals, the title describes the action: &quot;Edit settings&quot;, &quot;Create bucket&quot;.
 - For destructive or irreversible actions, the title is phrased as a question: &quot;Delete node?&quot;, &quot;Revoke access?&quot;. The question mark signals that a decision is required.
-- `subTitle` occupies the header slot when no close button is present. Use it for contextual information (e.g. a step indicator or a required-fields disclaimer).
+- `subTitle` occupies the header slot when no close button is present. Use it for contextual information (such as a step indicator or a required-fields disclaimer).
 - `subTitle` occupies the same slot as the close button. When `subTitle` is used, `close` must be omitted and navigation must be handled in the footer.
 
 ## Read-only modals
@@ -14086,7 +14086,7 @@ Use a read-only modal to surface the details of a specific resource without allo
 
 Use `role=&quot;alertdialog&quot;`, omit the close button, and use `variant=&quot;danger&quot;` on the confirm action. Only the button carries the danger signal — the modal chrome does not change.
 
-If the action targets a named resource, that name must appear in the body. If there is no named resource (e.g. resetting a configuration), it is optional.
+If the action targets a named resource, that name must appear in the body. If there is no named resource, such as when resetting a configuration, it is optional.
 
 ## Async actions
 
@@ -19863,6 +19863,19 @@ against the caret rather than pushed off centre by it. On a column too narrow to
 centred label drifts off centre instead of truncating earlier than it would without a caret —
 losing the middle of a label costs more than losing its exact centring.
 
+## Hidden values
+
+No value is hidden.&lt;br /&gt;
+When a cell cannot show all of its content, the rest is reached through a visible trigger.&lt;br /&gt;
+That trigger is a question mark placed next to the content, and it reveals the rest on hover.
+
+A list of values that can be enumerated is a particular case: show the first value, then the
+number of remaining ones as &quot;+1&quot; or &quot;+2&quot;, then the question mark listing them all.
+
+`IconHelp` provides the question mark. There is no component for the count, compose it from a
+`ConstrainedText` for the first value and the count as plain text. Values hidden by a `dropAt`
+breakpoint are a separate case, handled by `revealDroppedColumns` below.
+
 ## Action column
 
 Tables may include an action column on the far right for row-level actions.
@@ -19898,6 +19911,9 @@ A table never tells the user a resource is empty before it has finished loading.
 Pass `onRowSelected` to `Table.SingleSelectableContent` to make rows selectable, and pair it with
 `selectedId` so the chosen row stays marked. A selectable row shows a pointer cursor and a hover
 highlight from the start — the affordance does not wait for a first selection.
+
+A table with no `onRowSelected` has neither. Do not add a hover highlight to a read-only table as
+visual feedback: it announces a click that leads nowhere.
 
 Clicking anywhere in a row selects it, **except** on an interactive control inside a cell. A
 button, link, input, checkbox or label in a cell keeps its own click. The same holds for the
