@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">384 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/384 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">28 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">385 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/385 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">29 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.8s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -12555,8 +12555,8 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
       <div class="badges">
         <label for="c-35-templates-layout2-props" class="badge ok as-toggle">2 prop types</label>
         <label for="c-35-templates-layout2-info" class="badge info as-toggle">1 info</label>
-        <label for="c-35-templates-layout2-stories" class="badge ok as-toggle">9 stories</label>
-        
+        <label for="c-35-templates-layout2-stories" class="badge ok as-toggle">10 stories</label>
+        <label for="c-35-templates-layout2-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
     </div>
@@ -12570,7 +12570,7 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
   
   <input id="c-35-templates-layout2-info" class="tg tg-info" type="checkbox" hidden />
   <input id="c-35-templates-layout2-stories" class="tg tg-stories" type="checkbox" hidden />
-  
+  <input id="c-35-templates-layout2-docs" class="tg tg-docs" type="checkbox" hidden />
   
   <input id="c-35-templates-layout2-props" class="tg tg-props" type="checkbox" hidden />
 
@@ -12610,18 +12610,73 @@ variant?: &quot;transparent&quot;</code></pre>
                 <pre><code>import {
   AppContainer,
   Breadcrumb,
+  Button,
   Icon,
   Layout as Layout2,
   Link,
   ScrollbarWrapper,
   Stack,
+  Table,
   Text,
   TextBadge,
   TwoPanelLayout,
-} from '@scality/core-ui';</code></pre>
+} from '@scality/core-ui';
+import { BrowserRouter } from 'react-router-dom';</code></pre>
               </div>
           
           
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Resource List Page</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const ResourceListPage = () =&gt; (
+  &lt;BrowserRouter&gt;
+    &lt;Layout2
+      headerNavigation={
+        &lt;AppHeader&gt;
+          &lt;Text isEmphazed&gt;Product name&lt;/Text&gt;
+        &lt;/AppHeader&gt;
+      }
+    &gt;
+      &lt;AppContainer&gt;
+        &lt;AppContainer.OverallSummary&gt;
+          &lt;Stack gap=&quot;r20&quot;&gt;
+            &lt;Icon name=&quot;Account&quot; size=&quot;2x&quot; withWrapper /&gt;
+            &lt;Text variant=&quot;Larger&quot;&gt;Accounts&lt;/Text&gt;
+          &lt;/Stack&gt;
+        &lt;/AppContainer.OverallSummary&gt;
+        &lt;AppContainer.MainContent&gt;
+          &lt;TableArea&gt;
+            &lt;Table
+              columns={accountColumns}
+              data={accountData}
+              defaultSortingKey=&quot;name&quot;
+              entityName={{ en: { singular: &#39;account&#39;, plural: &#39;accounts&#39; } }}
+            &gt;
+              &lt;TableToolbar&gt;
+                &lt;Table.SearchWithQueryParams /&gt;
+                &lt;Button
+                  variant=&quot;primary&quot;
+                  label=&quot;Create account&quot;
+                  icon={&lt;Icon name=&quot;Create-add&quot; /&gt;}
+                /&gt;
+              &lt;/TableToolbar&gt;
+              &lt;Table.SingleSelectableContent
+                rowHeight=&quot;h40&quot;
+                separationLineVariant=&quot;backgroundLevel3&quot;
+              /&gt;
+            &lt;/Table&gt;
+          &lt;/TableArea&gt;
+        &lt;/AppContainer.MainContent&gt;
+      &lt;/AppContainer&gt;
+    &lt;/Layout2&gt;
+  &lt;/BrowserRouter&gt;
+);</code></pre>
+              
+            </div>
             <div class="note ok">
               <div class="row">
                 <span class="ex-name">Layout 2 Simplest</span>
@@ -13001,6 +13056,172 @@ variant?: &quot;transparent&quot;</code></pre>
             </div>
         </div>
     
+        <div class="panel panel-docs">
+          
+          
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Guideline</span>
+                <span class="badge ok">doc ok</span>
+              </div>
+              <div class="hint">./stories/layout.guideline.mdx</div>
+              <div># Layout ## Different pages - Resource listing pages - Dashboards - Forms ## Main composit...</div>
+              <div class="mdx-content"><pre><code>import { Meta, Canvas, Story } from &#39;@storybook/addon-docs/blocks&#39;;
+import * as LayoutStories from &#39;./layout.stories&#39;;
+
+&lt;Meta of={LayoutStories} name=&quot;Guideline&quot; /&gt;
+
+&lt;style&gt;{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}&lt;/style&gt;
+
+# Layout
+
+## Different pages
+
+- Resource listing pages
+- Dashboards
+- Forms
+
+## Main compositions
+
+A page is built from three slots: a context bar, an overall summary, and the main content.
+
+&lt;div style={{ width: &#39;534px&#39;, height: &#39;300px&#39;, overflow: &#39;hidden&#39;, marginBottom: &#39;2.5rem&#39; }}&gt;
+  &lt;div
+    style={{
+      width: &#39;1600px&#39;,
+      height: &#39;900px&#39;,
+      fontSize: &#39;36px&#39;,
+      transform: &#39;scale(0.3338)&#39;,
+      transformOrigin: &#39;top left&#39;,
+    }}
+  &gt;
+    &lt;Story of={LayoutStories.Layout2SimplestWithMainContentPadding} /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+### Context bar
+
+The context bar is mostly there to carry the breadcrumb, when the page needs one. It can also hold a global refresh control.
+
+## Resource listing pages
+
+A resource listing page presents a collection of items of the same type.
+
+There are 2 types: the full page versus the list-detail page (in this case, when the attributes of the resources needs to be explored a bit, or are numerous)
+
+### Type
+
+#### Full page
+
+**What it is**&lt;br /&gt;
+A single list occupying the whole content area.
+
+**When to use it**&lt;br /&gt;
+Items are consulted in place and do not need a side-by-side detail view. It is also used when the collection is known to hold only one or two items. The table then looks nearly empty, and that is accepted: there is no pattern for presenting a small fixed number of resources.
+
+**Composition rules**
+
+- The overall summary is always present.
+  - It carries the resource icon as a Hero icon, the page title (often the resources name)
+  - Other information could be in the summary, on the other side (full right), like specific configuration (activation of a feature, download a top level config, etc.)
+- The main content holds the table and nothing else. The table owns the full area.
+- When the resources are &quot;browseable&quot;, then the item count is put as a `TextBadge` next to the title. The same when the table used in the main content doesn&#39;t have the search + result (that provides the count)
+
+&lt;Canvas of={LayoutStories.ResourceListPage} /&gt;
+
+#### List-detail page
+
+**What it is**&lt;br /&gt;
+A list on the left, the detail of the selected item on the right.
+
+**When to use it**&lt;br /&gt;
+Items are compared and edited without leaving the list.
+
+**When not to use it**&lt;br /&gt;
+When both sides are dense: the list needs several columns to be scanned, and the detail does not fit a key-value list. Use a full page for the collection and a dedicated page for the item. Editing then happens on the value itself (via an &quot;Edit&quot; button, for instance) or as a full page form.
+
+**Composition rules**
+
+- Selection drives the right panel. The selected row stays highlighted in the list.
+
+- Actions on the selected item sit at the top of the detail panel, not in the list.
+
+- The overall summary is present only when the collection is browsable, see below. When it is not, the detail panel carries its own header naming the selected item.
+
+The split follows the information density on each side, measured on two things:
+
+1/ how many columns the list needs to identify and compare an item,
+2/ and whether the detail part is a single key-value list, or also carries tabs, nested tables, charts, configuration, forms.
+
+- **30 / 70** when the list only identifies items (a name, possibly with a status) and the detail is where the work happens: tabs, several sections, nested tables, configuration.
+
+- **65 / 35** when the list is the subject, scanned, sorted and compared over three or more columns, and the detail can be compacted in a key-value list. Key-value content is kept narrow on purpose (even if the values can be edited via forms or something else).
+
+- **50 / 50** when both sides carry a moderate amount. Most often needed when you have two tables, one for the list, one for an attribute of an item in the list.
+
+&lt;div style={{ display: &#39;flex&#39;, gap: &#39;1.5rem&#39;, flexWrap: &#39;wrap&#39;, marginBottom: &#39;1.5rem&#39; }}&gt;
+  &lt;div&gt;
+    &lt;div style={{ width: &#39;328px&#39;, height: &#39;185px&#39;, overflow: &#39;hidden&#39; }}&gt;
+      &lt;div style={{ width: &#39;1600px&#39;, height: &#39;900px&#39;, transform: &#39;scale(0.205)&#39;, transformOrigin: &#39;top left&#39; }}&gt;
+        &lt;Story of={LayoutStories.Layout2TwoPanelsThirtySeventy} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style={{ marginTop: &#39;0.5rem&#39; }}&gt;30 / 70&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div style={{ width: &#39;328px&#39;, height: &#39;185px&#39;, overflow: &#39;hidden&#39; }}&gt;
+      &lt;div style={{ width: &#39;1600px&#39;, height: &#39;900px&#39;, transform: &#39;scale(0.205)&#39;, transformOrigin: &#39;top left&#39; }}&gt;
+        &lt;Story of={LayoutStories.Layout2TwoPanelsSeventyThirty} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style={{ marginTop: &#39;0.5rem&#39; }}&gt;65 / 35&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style={{ marginBottom: &#39;2.5rem&#39; }}&gt;
+  &lt;div style={{ width: &#39;680px&#39;, height: &#39;383px&#39;, overflow: &#39;hidden&#39; }}&gt;
+    &lt;div style={{ width: &#39;1600px&#39;, height: &#39;900px&#39;, transform: &#39;scale(0.425)&#39;, transformOrigin: &#39;top left&#39; }}&gt;
+      &lt;Story of={LayoutStories.Layout2TwoEqualPanelsWithPadding} /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style={{ marginTop: &#39;0.5rem&#39; }}&gt;50 / 50&lt;/div&gt;
+&lt;/div&gt;
+
+### Browsable collections
+
+A collection is browsable when an item can be opened to reveal what it contains, so the page has several levels.
+
+Browsability governs three things, that are tied:
+
+- the context bar carries a breadcrumb;
+- the overall summary is present, whichever form the page takes;
+- the header states the level currently being viewed, and changes as the user goes deeper.
+
+If not on the higher level, the overall summary also carries a control that moves up one level. It moves up the hierarchy, it does not go back in history.
+
+When a collection has a single level, these 3 rules don&#39;t apply.
+
+## Dashboards
+
+A dashboard answers a specific question about a specific system. 
+
+Its composition is deliberately not standardised: the blocks, their number and their arrangement follow the question being answered.
+
+This is the only page type here without a canonical composition. 
+
+Everything else still applies: same layout container, same header rules, charts follow the Chart guideline, and no block introduces a local component when one exists in the library.
+
+## Forms
+
+Form pages guidelines are to be defined. Until it is, follow the Form guideline for the component itself, plus the Modal guideline when the form is presented in a modal.
+</code></pre></div>
+            </div>
+        </div>
     
   </div>
 </article>
