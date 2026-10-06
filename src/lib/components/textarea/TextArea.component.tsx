@@ -150,9 +150,8 @@ function TextAreaElement(
               entries[0]?.borderBoxSize?.[0]?.inlineSize ??
               textarea.getBoundingClientRect().width;
             if (width === lastWidth) return;
-            const isFirstObservation = lastWidth === undefined;
             lastWidth = width;
-            if (!isFirstObservation) adjustHeight();
+            adjustHeight();
           });
     observer?.observe(textarea, { box: 'border-box' });
 

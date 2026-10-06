@@ -94,6 +94,17 @@ describe('TextArea autoGrow', () => {
     expect(textarea.style.height).toBe('120px');
   });
 
+  it('re-fits on the first observed width, in case layout changed since mount', () => {
+    contentHeight = 60;
+    renderTextArea({ value: 'a long line', readOnly: true, autoGrow: true });
+    const textarea = screen.getByLabelText('code');
+
+    contentHeight = 120;
+    emitResize(textarea, 250);
+
+    expect(textarea.style.height).toBe('120px');
+  });
+
   it('does not observe resizes when autoGrow is off', () => {
     renderTextArea({ value: 'text', readOnly: true });
     expect(observations).toHaveLength(0);
