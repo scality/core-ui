@@ -133,6 +133,38 @@ function TextAreaElement(
     adjustHeight();
   }, [adjustHeight, value]);
 
+  // Lines re-wrap when the width changes or a web font finishes loading, so the
+  // height measured on mount goes stale and overflowing rows get clipped.
+  // Only width changes are acted on: our own height writes also notify the
+  // observer and must not re-trigger a measure.
+  useEffect(() => {
+    const textarea = internalRef.current;
+    if (!textarea || !autoGrow) return;
+
+    let lastWidth: number | undefined;
+    const observer =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver((entries) => {
+            const width =
+              entries[0]?.borderBoxSize?.[0]?.inlineSize ??
+              textarea.getBoundingClientRect().width;
+            if (width === lastWidth) return;
+            const isFirstObservation = lastWidth === undefined;
+            lastWidth = width;
+            if (!isFirstObservation) adjustHeight();
+          });
+    observer?.observe(textarea, { box: 'border-box' });
+
+    const fonts = typeof document !== 'undefined' ? document.fonts : undefined;
+    fonts?.addEventListener?.('loadingdone', adjustHeight);
+
+    return () => {
+      observer?.disconnect();
+      fonts?.removeEventListener?.('loadingdone', adjustHeight);
+    };
+  }, [autoGrow, adjustHeight]);
+
   // Handle onChange to support both controlled and uncontrolled components
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
