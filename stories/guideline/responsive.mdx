@@ -63,6 +63,12 @@ and `min-width: 0` themselves. `Box` sets `min-width: 0` but stays deliberately
 unopinionated about where its width comes from, so a `<Box container>` used as a
 bare flex item needs a `flex` value from you.
 
+Taking the width from the parent means a container **fills its column**, and
+anything it centres inside itself is then centred on that column rather than on
+the page. A row that puts something beside it — a rail, a sidebar, a legend — has
+to balance that space on the other side, or the centred content settles half the
+rail off centre.
+
 ## Responsive components
 
 ### `Button` — `iconOnly`
