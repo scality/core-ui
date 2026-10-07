@@ -970,3 +970,71 @@ export const ResponsiveColumnDropWithReveal = {
     );
   },
 };
+
+const tightRowColumns: Column<Entry>[] = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    cellStyle: {
+      width: 'unset',
+      flex: 2,
+      minWidth: '10rem',
+      textAlign: 'left',
+    },
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    cellStyle: { width: 'unset', flex: 2, textAlign: 'left' },
+    dropAt: 700,
+  },
+  {
+    Header: 'Age',
+    accessor: 'age',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+    dropAt: 550,
+  },
+  {
+    Header: 'Actions',
+    accessor: 'health',
+    disableSortBy: true,
+    cellStyle: { flex: '0 0 78px' },
+    Cell: () => <Button size="inline" variant="secondary" label="Edit" />,
+  },
+];
+
+export const RevealTriggerInATightRow = {
+  render: () => {
+    return (
+      <>
+        <Title>Reveal trigger in a row with no room left</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
+        >
+          <Table
+            columns={tightRowColumns}
+            data={data}
+            defaultSortingKey={'firstName'}
+            getRowId={getRowId}
+            revealDroppedColumns
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
+};
