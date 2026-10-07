@@ -11661,9 +11661,14 @@
           "id": "components-progress-loading-stepper--state-error",
           "name": "State Error",
           "snippet": "const StateError = () => (\n  <Steppers\n    steps={[\n      { title: 'Configure' },\n      { title: 'Schedule', error: true },\n      { title: 'Confirm' },\n    ]}\n    activeStep={1}\n  />\n);"
+        },
+        {
+          "id": "components-progress-loading-stepper--guided-setup",
+          "name": "Guided setup — form, actions, summary",
+          "snippet": "const GuidedSetup = () => <Stepper steps={SETUP_STEPS} />;"
         }
       ],
-      "import": "import { Button, Stepper, Steppers, Wrapper as StoryWrapper, Text } from '@scality/core-ui';",
+      "import": "import {\n  Banner,\n  Button,\n  CopyButton,\n  Form,\n  FormGroup,\n  FormSection,\n  Icon,\n  Input,\n  Select,\n  Stack,\n  StatusIcon,\n  Stepper,\n  Steppers,\n  Wrapper as StoryWrapper,\n  Table,\n  Text,\n  Toggle,\n} from '@scality/core-ui';",
       "docs": {
         "components-progress-loading-stepper--guideline": {
           "id": "components-progress-loading-stepper--guideline",
@@ -12301,6 +12306,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 4166
+    "durationMs": 4036
   }
 }

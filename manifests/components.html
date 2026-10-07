@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">385 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/385 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">29 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">386 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/386 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">29 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.0s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -18477,7 +18477,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
       <div class="badges">
         <label for="c-55-components-progress-loading-stepper-props" class="badge ok as-toggle">1 prop type</label>
         <label for="c-55-components-progress-loading-stepper-info" class="badge info as-toggle">1 info</label>
-        <label for="c-55-components-progress-loading-stepper-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-55-components-progress-loading-stepper-stories" class="badge ok as-toggle">5 stories</label>
         <label for="c-55-components-progress-loading-stepper-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -18527,7 +18527,25 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
                 <div class="row">
                   <span class="ex-name">Imports</span>
                 </div>
-                <pre><code>import { Button, Stepper, Steppers, Wrapper as StoryWrapper, Text } from '@scality/core-ui';</code></pre>
+                <pre><code>import {
+  Banner,
+  Button,
+  CopyButton,
+  Form,
+  FormGroup,
+  FormSection,
+  Icon,
+  Input,
+  Select,
+  Stack,
+  StatusIcon,
+  Stepper,
+  Steppers,
+  Wrapper as StoryWrapper,
+  Table,
+  Text,
+  Toggle,
+} from '@scality/core-ui';</code></pre>
               </div>
           
           
@@ -18593,6 +18611,16 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
     activeStep={1}
   /&gt;
 );</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Guided setup — form, actions, summary</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const GuidedSetup = () =&gt; &lt;Stepper steps={SETUP_STEPS} /&gt;;</code></pre>
               
             </div>
         </div>
@@ -22752,6 +22780,12 @@ width and everything inside it would overflow.
 and `min-width: 0` themselves. `Box` sets `min-width: 0` but stays deliberately
 unopinionated about where its width comes from, so a `&lt;Box container&gt;` used as a
 bare flex item needs a `flex` value from you.
+
+Taking the width from the parent means a container **fills its column**, and
+anything it centres inside itself is then centred on that column rather than on
+the page. A row that puts something beside it — a rail, a sidebar, a legend — has
+to balance that space on the other side, or the centred content settles half the
+rail off centre.
 
 ## Responsive components
 
