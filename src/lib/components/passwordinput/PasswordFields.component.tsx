@@ -72,9 +72,6 @@ export const PasswordFields = ({
         required={required}
         error={errorOf(names.confirmation)}
         content={
-          // Same row and slot as the password field, buttons aside: the two fields
-          // have to stop shrinking at the same width, or the pair gives ground
-          // unevenly and a reader blames the form.
           <PasswordRow>
             <PasswordFieldSlot>
               <Input

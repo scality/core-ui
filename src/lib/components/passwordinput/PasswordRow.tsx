@@ -3,9 +3,9 @@ import { spacing } from '../../spacing';
 import { INPUT_MIN_WIDTH } from '../inputv2/inputv2';
 
 /**
- * `width: 100%` and `min-width: 0` are what give the field's own `max-width: 100%`
- * something to resolve against. Without them the row sizes to its content, and the
- * field cannot give ground however it is configured.
+ * `min-width: 0` overrides the row's automatic grid/flex minimum so it can shrink
+ * below its own content; without it the field's `max-width: 100%` has nothing to
+ * resolve against and the row refuses to give ground.
  */
 export const PasswordRow = styled.div`
   display: flex;
@@ -15,11 +15,6 @@ export const PasswordRow = styled.div`
   min-width: 0;
 `;
 
-/**
- * `flex-grow: 0` on purpose. `Input` caps itself at `max-width: 100%` but never grows
- * past the width its `size` asks for, so a growing slot would stretch away from the
- * field and leave the gap between the field and its buttons rather than after them.
- */
 export const PasswordFieldSlot = styled.div`
   flex: 0 1 auto;
   min-width: ${INPUT_MIN_WIDTH};
