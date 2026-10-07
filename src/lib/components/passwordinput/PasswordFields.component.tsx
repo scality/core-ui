@@ -35,6 +35,10 @@ export const PasswordFields = ({
   // the field would render with no message while the form refuses to submit.
   const errorOf = (name: string) =>
     getFieldState(name, formState).error?.message?.toString() ?? '';
+  // `Form` renders with `noValidate`, so the `required` attribute enforces nothing
+  // on its own: without a rule an empty field submits silently.
+  const requiredRule = (label: string) =>
+    required ? { required: `${label} is required` } : {};
   const [revealed, setRevealed] = useState(false);
   const toggle = () => setRevealed((current) => !current);
 
@@ -56,10 +60,16 @@ export const PasswordFields = ({
             onToggleReveal={toggle}
             required={required}
             {...register(names.password, {
+              ...requiredRule(labels.password),
               // The confirmation's rule reads the password, so it has to be re-run
-              // when the password changes; without this a "do not match" error stays
-              // on screen after the user has already fixed it.
-              onChange: () => trigger(names.confirmation),
+              // when the password changes, but only once the confirmation is dirty —
+              // otherwise the first keystroke here raises the confirmation's error
+              // before the user has reached that field.
+              onChange: () => {
+                if (getFieldState(names.confirmation).isDirty) {
+                  trigger(names.confirmation);
+                }
+              },
             })}
           />
         }
@@ -80,7 +90,10 @@ export const PasswordFields = ({
                 required={required}
                 autoComplete="new-password"
                 type={revealed ? 'text' : 'password'}
-                {...register(names.confirmation, confirmationRules)}
+                {...register(names.confirmation, {
+                  ...requiredRule(labels.confirmation),
+                  ...confirmationRules,
+                })}
               />
             </PasswordFieldSlot>
           </PasswordRow>

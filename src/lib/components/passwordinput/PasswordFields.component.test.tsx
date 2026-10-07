@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -84,5 +84,53 @@ describe('PasswordFields', () => {
     expect(
       await screen.findByText('Passwords do not match'),
     ).toBeInTheDocument();
+  });
+
+  it('leaves an untouched confirmation alone while the password is typed', async () => {
+    render(
+      <PasswordFields
+        confirmationRules={{ required: 'Confirmation is required' }}
+      />,
+      { wrapper: WithForm },
+    );
+
+    await userEvent.type(screen.getByLabelText(/^Password$/), 'a');
+
+    await expect(
+      screen.findByText('Confirmation is required', undefined, {
+        timeout: 500,
+      }),
+    ).rejects.toThrow();
+  });
+
+  it('refuses to submit an empty required field, and says which', async () => {
+    const onSubmit = jest.fn();
+    const WithSubmit = ({ children }: { children: ReactNode }) => {
+      const methods = useForm({ mode: 'onChange' });
+      return (
+        <Wrapper>
+          <FormProvider {...methods}>
+            <Form
+              layout={{ kind: 'tab' }}
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
+              <FormSection>{children}</FormSection>
+            </Form>
+          </FormProvider>
+        </Wrapper>
+      );
+    };
+
+    const { container } = render(<PasswordFields required />, {
+      wrapper: WithSubmit,
+    });
+
+    fireEvent.submit(container.querySelector('form')!);
+
+    expect(await screen.findByText('Password is required')).toBeInTheDocument();
+    expect(
+      screen.getByText('Password confirmation is required'),
+    ).toBeInTheDocument();
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });
