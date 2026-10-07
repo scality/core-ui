@@ -12,6 +12,8 @@ export const convertSizeToRem = (size?: '1' | '2/3' | '1/2' | '1/3') => {
   else return '20.5rem';
 };
 
+export const INPUT_MIN_WIDTH = convertSizeToRem('1/3');
+
 const StyledInput = styled.input<{ $hasIcon: boolean }>`
   max-width: ${(props) =>
     props.$hasIcon ? `calc(100% - 1rem - ${spacing.f8})` : '100%'};

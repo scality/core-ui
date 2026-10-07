@@ -18,6 +18,8 @@ export { HealthSelector } from './components/healthselectorv2/HealthSelector.com
 export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
 export { Box } from './components/box/Box';
 export { Input } from './components/inputv2/inputv2';
+export { PasswordInput } from './components/passwordinput/PasswordInput.component';
+export type { PasswordInputProps } from './components/passwordinput/PasswordInput.component';
 export { Accordion } from './components/accordion/Accordion.component';
 export { Drawer } from './components/drawer/Drawer.component';
 export { Editor } from './components/editor';
