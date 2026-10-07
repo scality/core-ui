@@ -25,6 +25,7 @@ import {
 } from '../../index';
 import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
+import { SEARCH_INPUT_MIN_WIDTH } from '../../components/searchinput/SearchInput.component';
 import {
   AttachableEntity,
   AttachmentOperation,
@@ -91,16 +92,16 @@ const MenuContainer = styled.ul<{
       ? `
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      border-bottom-right-radius: 4px;
-      border-bottom-left-radius: 4px;
-      border: 1px solid ${props.theme.selectedActive};
+      border-bottom-right-radius: ${spacing.r4};
+      border-bottom-left-radius: ${spacing.r4};
+      border: ${spacing.r1} solid ${props.theme.selectedActive};
   `
       : ''}
   border-top: 0;
   li {
     padding: ${spacing.r8};
     cursor: pointer;
-    border-top: 1px solid ${(props) => props.theme.backgroundLevel2};
+    border-top: ${spacing.f1} solid ${(props) => props.theme.backgroundLevel2};
     &[aria-selected='true'] {
       background: ${(props) => props.theme.highlight};
     }
@@ -111,10 +112,12 @@ const SearchBoxContainer = styled.div`
   padding: ${spacing.r16};
 `;
 
+/** Matches SearchInput's min-width: the list is sized from this anchor, so a narrower anchor draws the list narrower than the field. */
 const SearchAnchor = styled.div`
   position: relative;
   width: fit-content;
   max-width: 100%;
+  min-width: ${SEARCH_INPUT_MIN_WIDTH};
 `;
 
 /**

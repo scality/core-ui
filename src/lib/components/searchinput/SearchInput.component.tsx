@@ -19,6 +19,9 @@ export type Props = {
   searchIconColor?: keyof CoreUITheme;
   className?: string;
 };
+/** Exported so a dependent layout can match the field's floor directly, instead of duplicating the value. */
+export const SEARCH_INPUT_MIN_WIDTH = convertSizeToRem('1/2');
+
 const SearchInputContainer = styled.div.withConfig({
   componentId: 'sc-searchinput',
 })<{
@@ -36,7 +39,7 @@ const SearchInputContainer = styled.div.withConfig({
      the layout around it to adapt. */
   width: max-content;
   max-width: 100%;
-  min-width: min(${convertSizeToRem('1/2')}, ${(props) => props.$width});
+  min-width: min(${SEARCH_INPUT_MIN_WIDTH}, ${(props) => props.$width});
 
   input[value] {
     max-width: calc(100% - 1rem - ${spacing.f8} - 1rem);
