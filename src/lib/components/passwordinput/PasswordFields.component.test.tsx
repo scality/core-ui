@@ -39,10 +39,10 @@ describe('PasswordFields', () => {
   it('gives the confirmation no reveal or copy affordance of its own', () => {
     render(<PasswordFields copyable />, { wrapper: WithForm });
 
-    expect(screen.getAllByRole('button', { name: /password$/i })).toHaveLength(
-      1,
-    );
-    expect(screen.getAllByRole('button', { name: /copy/i })).toHaveLength(1);
+    expect(
+      screen.getAllByRole('button', { name: /^(Show|Hide) password$/ }),
+    ).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: /^Copy/ })).toHaveLength(1);
   });
 
   it('marks both fields required when asked to', () => {
@@ -65,5 +65,24 @@ describe('PasswordFields', () => {
     await userEvent.type(screen.getByLabelText(/^Password$/), 'b');
 
     expect(validate.mock.calls.length).toBeGreaterThan(callsBefore);
+  });
+
+  it('shows the confirmation error when the fields are registered under a path', async () => {
+    render(
+      <PasswordFields
+        names={{
+          password: 'credentials.password',
+          confirmation: 'credentials.passwordConfirm',
+        }}
+        confirmationRules={{ validate: () => 'Passwords do not match' }}
+      />,
+      { wrapper: WithForm },
+    );
+
+    await userEvent.type(screen.getByLabelText(/^Password confirmation$/), 'a');
+
+    expect(
+      await screen.findByText('Passwords do not match'),
+    ).toBeInTheDocument();
   });
 });

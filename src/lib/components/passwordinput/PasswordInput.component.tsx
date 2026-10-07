@@ -61,14 +61,20 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           type="button"
           variant="outline"
           disabled={isDisabled}
-          style={{ width: spacing.r36 }}
+          // flexShrink because a flex item's automatic minimum is its min-content
+          // width: without it the buttons compress below the 36px every other button
+          // in a form keeps, and the field's floor stops being the only thing that
+          // gives before the row overflows.
+          style={{ width: spacing.r36, flexShrink: 0 }}
           icon={<Icon name={isRevealed ? 'EyeSlash' : 'Eye'} />}
           tooltip={{ overlay: isRevealed ? 'Hide password' : 'Show password' }}
           onClick={toggle}
         />
         {copyable && (
           <CopyButton
+            label="password"
             disabled={isDisabled}
+            style={{ flexShrink: 0 }}
             textToCopy={() => fieldRef.current?.value ?? ''}
           />
         )}

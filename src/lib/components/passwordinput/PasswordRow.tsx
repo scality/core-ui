@@ -15,7 +15,12 @@ export const PasswordRow = styled.div`
   min-width: 0;
 `;
 
+/**
+ * `flex-grow: 0` on purpose. `Input` caps itself at `max-width: 100%` but never grows
+ * past the width its `size` asks for, so a growing slot would stretch away from the
+ * field and leave the gap between the field and its buttons rather than after them.
+ */
 export const PasswordFieldSlot = styled.div`
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: ${INPUT_MIN_WIDTH};
 `;

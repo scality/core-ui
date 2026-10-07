@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getWrapper } from '../../testUtils';
+import { Form, FormGroup, FormSection } from '../form/Form.component';
 import { PasswordInput } from './PasswordInput.component';
 
 const { Wrapper } = getWrapper();
@@ -75,6 +76,27 @@ describe('PasswordInput', () => {
     );
 
     expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+  });
+
+  it('disables both buttons when the surrounding field group is disabled', () => {
+    render(
+      <Form layout={{ kind: 'tab' }}>
+        <FormSection>
+          <FormGroup
+            id="pwd"
+            label="Password"
+            disabled
+            content={
+              <PasswordInput id="pwd" autoComplete="new-password" copyable />
+            }
+          />
+        </FormSection>
+      </Form>,
+      { wrapper: Wrapper },
+    );
+
+    expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /copy/i })).toBeDisabled();
   });
 
   it('comes back masked after being unmounted and mounted again', async () => {

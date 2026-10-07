@@ -3,6 +3,7 @@ import { RegisterOptions, useFormContext } from 'react-hook-form';
 import { FormGroup } from '../form/Form.component';
 import { Input } from '../inputv2/inputv2';
 import { PasswordInput } from './PasswordInput.component';
+import { PasswordFieldSlot, PasswordRow } from './PasswordRow';
 
 export type PasswordFieldsProps = {
   names?: { password: string; confirmation: string };
@@ -17,7 +18,9 @@ export type PasswordFieldsProps = {
  * the two values match: a form with a `resolver` ignores field-level validation, so
  * that rule belongs in the caller's schema.
  *
- * Requires a `FormProvider` ancestor.
+ * Renders two `FormGroup`s and registers their fields itself, so it needs a
+ * `FormProvider` ancestor for the registration and a `Form` / `FormSection` ancestor
+ * for the rows.
  */
 export const PasswordFields = ({
   names = { password: 'password', confirmation: 'passwordConfirm' },
@@ -26,11 +29,12 @@ export const PasswordFields = ({
   copyable = false,
   confirmationRules,
 }: PasswordFieldsProps) => {
-  const {
-    register,
-    trigger,
-    formState: { errors },
-  } = useFormContext();
+  const { register, trigger, getFieldState, formState } = useFormContext();
+  // Read through getFieldState rather than indexing formState.errors: a name may be
+  // a path, and errors are nested, so errors['credentials.password'] is undefined and
+  // the field would render with no message while the form refuses to submit.
+  const errorOf = (name: string) =>
+    getFieldState(name, formState).error?.message?.toString() ?? '';
   const [revealed, setRevealed] = useState(false);
   const toggle = () => setRevealed((current) => !current);
 
@@ -42,7 +46,7 @@ export const PasswordFields = ({
         helpErrorPosition="bottom"
         label={labels.password}
         required={required}
-        error={errors[names.password]?.message?.toString() ?? ''}
+        error={errorOf(names.password)}
         content={
           <PasswordInput
             id={names.password}
@@ -66,16 +70,23 @@ export const PasswordFields = ({
         helpErrorPosition="bottom"
         label={labels.confirmation}
         required={required}
-        error={errors[names.confirmation]?.message?.toString() ?? ''}
+        error={errorOf(names.confirmation)}
         content={
-          <Input
-            id={names.confirmation}
-            fluid
-            required={required}
-            autoComplete="new-password"
-            type={revealed ? 'text' : 'password'}
-            {...register(names.confirmation, confirmationRules)}
-          />
+          // Same row and slot as the password field, buttons aside: the two fields
+          // have to stop shrinking at the same width, or the pair gives ground
+          // unevenly and a reader blames the form.
+          <PasswordRow>
+            <PasswordFieldSlot>
+              <Input
+                id={names.confirmation}
+                fluid
+                required={required}
+                autoComplete="new-password"
+                type={revealed ? 'text' : 'password'}
+                {...register(names.confirmation, confirmationRules)}
+              />
+            </PasswordFieldSlot>
+          </PasswordRow>
         }
       />
     </>
