@@ -102,4 +102,58 @@ describe('PasswordInput', () => {
 
     expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'password');
   });
+
+  it('renders no copy affordance unless one is asked for', () => {
+    render(
+      <PasswordInput
+        id="pwd"
+        aria-label="Password"
+        autoComplete="new-password"
+      />,
+      { wrapper: Wrapper },
+    );
+
+    expect(
+      screen.queryByRole('button', { name: /copy/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('copies what is currently typed, not what was there at the last render', async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    render(
+      <PasswordInput
+        id="pwd"
+        aria-label="Password"
+        autoComplete="new-password"
+        copyable
+      />,
+      { wrapper: Wrapper },
+    );
+
+    await userEvent.type(screen.getByLabelText('Password'), 'correct horse');
+    await userEvent.click(screen.getByRole('button', { name: /copy/i }));
+
+    expect(writeText).toHaveBeenCalledWith('correct horse');
+  });
+
+  it('does not copy an empty field', async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+
+    render(
+      <PasswordInput
+        id="pwd"
+        aria-label="Password"
+        autoComplete="new-password"
+        copyable
+      />,
+      { wrapper: Wrapper },
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /copy/i }));
+
+    expect(writeText).not.toHaveBeenCalled();
+  });
 });
