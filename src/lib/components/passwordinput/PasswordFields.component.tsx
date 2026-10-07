@@ -14,7 +14,8 @@ export type PasswordFieldsProps = {
 };
 
 /**
- * A password and its confirmation, sharing one reveal toggle. It does not enforce that
+ * Reach for this wherever a user sets a password rather than typing an existing one:
+ * it is the password and its confirmation, sharing one reveal toggle. It does not enforce that
  * the two values match: a form with a `resolver` ignores field-level validation, so
  * that rule belongs in the caller's schema.
  *

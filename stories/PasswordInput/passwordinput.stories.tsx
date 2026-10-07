@@ -56,7 +56,17 @@ export const SetAPassword: Story = {
             <input
               type="text"
               autoComplete="username"
-              style={{ display: 'none' }}
+              style={{
+                position: 'absolute',
+                width: '1px',
+                height: '1px',
+                overflow: 'hidden',
+                clip: 'rect(0 0 0 0)',
+                whiteSpace: 'nowrap',
+                border: 0,
+                padding: 0,
+                margin: '-1px',
+              }}
               {...methods.register('username')}
             />
             <PasswordFields required copyable />
@@ -67,10 +77,19 @@ export const SetAPassword: Story = {
   },
 };
 
-/** Outside a form: the field still gives ground, down to its floor. */
+/** Outside a form, in a resizable container: the field gives ground to its floor. */
 export const InANarrowContainer: Story = {
   render: () => (
-    <div style={{ width: '18rem' }}>
+    <div
+      style={{
+        width: '14rem',
+        minWidth: 0,
+        resize: 'horizontal',
+        overflow: 'auto',
+        padding: '0.5rem',
+        border: '1px dashed #6e6e6e',
+      }}
+    >
       <PasswordInput
         id="password"
         aria-label="Password"
