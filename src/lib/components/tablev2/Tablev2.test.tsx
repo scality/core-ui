@@ -715,3 +715,98 @@ describe('TableV2 truncated header labels', () => {
     ).not.toBeInTheDocument();
   });
 });
+
+describe('TableV2', () => {
+  describe('status', () => {
+    let warnSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      warnSpy.mockRestore();
+    });
+
+    const renderStatusTable = (props: Record<string, unknown>) =>
+      render(
+        <Table columns={columns} data={data} {...(props as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>,
+      );
+
+    it('renders all rows without loader or warning when status is omitted and data is not empty', async () => {
+      renderStatusTable({});
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('shows "No results found" when a global filter matches nothing with status success', async () => {
+      renderStatusTable({ status: 'success', globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when a global filter matches nothing with status omitted', async () => {
+      renderStatusTable({ globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('shows the loader when status is loading and data is empty', async () => {
+      renderStatusTable({ status: 'loading', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when status is success and data is empty', async () => {
+      renderStatusTable({ status: 'success', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('requires the status prop at the type level', () => {
+      const renderWithoutStatus = () => (
+        // @ts-expect-error status is required
+        <Table columns={columns} data={data} />
+      );
+      expect(renderWithoutStatus).toBeDefined();
+    });
+
+    it('shows the loader and warns once when status is omitted and data is empty', async () => {
+      const { rerender } = renderStatusTable({ data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+
+      rerender(
+        <Table columns={columns} data={[]} {...({} as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>,
+      );
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+});
