@@ -1,29 +1,29 @@
 name: Test review
 
+# core-ui is public, so it cannot call test-review-agent's reusable workflow (that repo is
+# internal). Instead this asks test-review-agent to run the review itself: the review happens
+# there, and its comment lands on this pull request.
 on:
   pull_request:
     types: [opened, synchronize]
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: Pull request number (leave empty to use the selected branch's open PR)
-        type: string
-        required: false
+
+permissions:
+  contents: read
 
 jobs:
-  review:
-    # core-ui is public: GitHub withholds secrets from fork and Dependabot PRs, so the job would
-    # fail red there. Only run it when the secrets are actually available.
+  trigger:
+    # Fork and Dependabot PRs get no secrets, so the dispatch could not authenticate.
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.pull_request.head.repo.full_name == github.repository &&
-       github.event.pull_request.user.login != 'dependabot[bot]')
-    uses: scality/test-review-agent/.github/workflows/review.yml@v1
-    with:
-      pr: ${{ inputs.pr }}
-    secrets:
-      GIT_ACCESS_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
-      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-      GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-      ANTHROPIC_VERTEX_PROJECT_ID: ${{ secrets.ANTHROPIC_VERTEX_PROJECT_ID }}
-      CLOUD_ML_REGION: ${{ secrets.CLOUD_ML_REGION }}
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request a test review
+        env:
+          GH_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
+          SUBJECT_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh workflow run review-external.yml \
+            --repo scality/test-review-agent --ref v1 \
+            -f repo="$SUBJECT_REPO" -f pr="$PR_NUMBER"
