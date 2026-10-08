@@ -12,6 +12,12 @@ on:
 
 jobs:
   review:
+    # core-ui is public: GitHub withholds secrets from fork and Dependabot PRs, so the job would
+    # fail red there. Only run it when the secrets are actually available.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+       github.event.pull_request.user.login != 'dependabot[bot]')
     uses: scality/test-review-agent/.github/workflows/review.yml@main
     with:
       pr: ${{ inputs.pr }}
