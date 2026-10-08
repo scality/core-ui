@@ -68,7 +68,12 @@ describe('TableV2', () => {
   test('it should display all the data', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -87,7 +92,12 @@ describe('TableV2', () => {
   test('it should sort by defaultSortingKey', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -107,6 +117,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -136,6 +147,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -159,6 +171,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -194,7 +207,12 @@ describe('TableV2', () => {
 
     const { getAllByRole } = render(
       <div>
-        <Table columns={dateColumns} data={dateData} globalFilter=".000">
+        <Table
+          status="success"
+          columns={dateColumns}
+          data={dateData}
+          globalFilter=".000"
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -213,6 +231,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -268,7 +287,7 @@ describe('TableV2 responsive columns', () => {
   const renderResponsiveTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data}>
+        <Table status="success" columns={responsiveColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -311,7 +330,7 @@ describe('TableV2 responsive columns', () => {
     ];
     render(
       <div>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -329,7 +348,12 @@ describe('TableV2 responsive columns', () => {
   const renderRevealTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data} revealDroppedColumns>
+        <Table
+          status="success"
+          columns={responsiveColumns}
+          data={data}
+          revealDroppedColumns
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -391,6 +415,7 @@ describe('TableV2 responsive columns', () => {
             enable reveal
           </button>
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             revealDroppedColumns={reveal}
@@ -442,6 +467,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     render(
       <div>
         <Table
+          status="success"
           columns={withButtonColumns}
           data={data.map((entry) => ({ ...entry, onAction }))}
           defaultSortingKey={'firstName'}
@@ -514,7 +540,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     const onRowSelected = jest.fn();
     render(
       <div role="button" tabIndex={0}>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -552,7 +578,7 @@ describe('TableV2 row click vs in-cell controls', () => {
 
     render(
       <div>
-        <Table columns={portalColumns} data={data}>
+        <Table status="success" columns={portalColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -575,7 +601,12 @@ describe('TableV2 row selectability', () => {
   ];
 
   const renderTable = (onRowSelected?: (row: unknown) => void) => (
-    <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+    <Table
+      status="success"
+      columns={columns}
+      data={data}
+      defaultSortingKey={'firstName'}
+    >
       <Table.SingleSelectableContent
         rowHeight="h40"
         separationLineVariant="backgroundLevel3"
@@ -627,7 +658,12 @@ describe('TableV2 truncated header labels', () => {
   const renderTable = (cols = columns) =>
     render(
       <div>
-        <Table columns={cols} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={cols}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
