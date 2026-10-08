@@ -82,30 +82,48 @@ export const parameters = {
     exclude: ['data-cy'],
   },
   options: {
-    storySort: {
-      order: [
+    /**
+     * Inline on purpose: Storybook parses `storySort` statically and rejects a
+     * reference to a function defined elsewhere, and it runs the extracted
+     * source as plain JavaScript, so TS parameter types here would also fail.
+     */
+    storySort: (a, b) => {
+      const SECTIONS = [
         'Introduction',
         'Component index',
         'Style',
         'Guidelines',
         'Templates',
         'Components',
-        [
-          'Navigation',
-          'Data Display',
-          'Inputs',
-          [
-            ['Checkbox', ['Guideline', '*']],
-            ['Toggle', ['Guideline', '*']],
-            ['Radio', ['Guideline', '*']],
-            ['Select', ['Guideline', '*']],
-          ],
-          ['Feedback', [['Modal', ['Guideline', '*']]]],
-          ['Progress & loading', [['Stepper', ['Guideline', '*']]]],
-          'Styling',
-          'Deprecated',
-        ],
-      ],
+      ];
+      const CATEGORIES = [
+        'Navigation',
+        'Data Display',
+        'Inputs',
+        'Feedback',
+        'Progress & loading',
+        'Styling',
+        'Deprecated',
+      ];
+      const PAGES = ['Guideline', 'Stories'];
+      const rankIn = (order, value) => {
+        const index = order.indexOf(value);
+        return index === -1 ? order.length : index;
+      };
+
+      const left = a.title.split('/');
+      const right = b.title.split('/');
+      for (let depth = 0; depth < Math.max(left.length, right.length); depth++) {
+        if (left[depth] === right[depth]) continue;
+        const order =
+          depth === 0
+            ? SECTIONS
+            : depth === 1 && left[0] === 'Components'
+              ? CATEGORIES
+              : [];
+        return rankIn(order, left[depth] ?? '') - rankIn(order, right[depth] ?? '');
+      }
+      return rankIn(PAGES, a.name) - rankIn(PAGES, b.name);
     },
   },
 };
