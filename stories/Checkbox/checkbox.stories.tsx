@@ -206,7 +206,7 @@ export const IndeterminateUseCase = {
 
     return (
       <Box width="100%" height="250px">
-        <Table columns={columns} data={data} defaultSortingKey={'name'}>
+        <Table status="success" columns={columns} data={data} defaultSortingKey={'name'}>
           <Table.MultiSelectableContent
             onMultiSelectionChanged={action('Selection changed')}
           />

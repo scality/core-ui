@@ -162,6 +162,7 @@ export const SimpleContentTable = {
             {location.search}
           </span>
           <Table
+            status="success"
             columns={columns}
             data={data}
             defaultSortingKey={'health'}
@@ -197,7 +198,7 @@ export const SimpleContentTable = {
             paddingTop: '20px',
           }}
         >
-          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table status="success" columns={columns} data={data} defaultSortingKey={'health'}>
             <Table.SingleSelectableContent
               rowHeight="h32"
               separationLineVariant="backgroundLevel3"
@@ -212,6 +213,7 @@ export const SimpleContentTable = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={data}
             defaultSortingKey={'health'}
@@ -244,6 +246,7 @@ export const SimpleContentTable = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={[]}
             defaultSortingKey={'health'}
@@ -375,6 +378,7 @@ export const asyncTable = {
         >
           <BrowserRouter>
             <Table
+              status="success"
               columns={columnAsync}
               data={data}
               defaultSortingKey={'health'}
@@ -435,6 +439,7 @@ export const OnBottomCallback = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={randomData}
             onBottom={onBottom}
@@ -538,6 +543,7 @@ export const MultiTable = {
         <Flex justifyContent="center" gap="2rem">
           <Box width="500px" height="200px">
             <Table
+              status="success"
               columns={columns2}
               data={data1}
               defaultSortingKey="name"
@@ -575,7 +581,7 @@ export const MultiTable = {
             />
           </Box>
           <Box width="500px" height="200px">
-            <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
+            <Table status="success" columns={columns2} data={data2} defaultSortingKey={'health'}>
               <Table.MultiSelectableContent
                 onMultiSelectionChanged={(rows) => {
                   console.log(
@@ -597,7 +603,39 @@ export const EmptyTable = {
     const { background } = args;
     return (
       <Box width="500px" height="200px">
-        <Table columns={columns} data={[]} defaultSortingKey={'firstName'}>
+        <Table status="success" columns={columns} data={[]} defaultSortingKey={'firstName'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant={background}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
+      </Box>
+    );
+  },
+  argTypes: {
+    background: {
+      control: {
+        type: 'select',
+        description: 'Background color',
+        defaultValue: 'backgroundLevel3',
+      },
+      options: [
+        'backgroundLevel1',
+        'backgroundLevel2',
+        'backgroundLevel3',
+        'backgroundLevel4',
+      ],
+    },
+  },
+};
+
+export const LoadingTable = {
+  render: (args) => {
+    const { background } = args;
+    return (
+      <Box width="500px" height="200px">
+        <Table status="loading" columns={columns} data={[]} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant={background}
@@ -701,7 +739,7 @@ export const TableWithSyncButton = {
             tooltipOverlay="Synchronize table data"
           />
         </Box>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -760,6 +798,7 @@ export const TableWithViewAction = {
       <>
         <Box width="700px" height="260px">
           <Table
+            status="success"
             columns={columnsWithAction}
             data={data}
             defaultSortingKey={'firstName'}
@@ -844,6 +883,7 @@ export const AutoScrollToSelected = {
         </Box>
         <div style={{ height: '400px' }}>
           <Table
+            status="success"
             columns={columns}
             data={largeData}
             defaultSortingKey="firstName"
@@ -913,6 +953,7 @@ export const ResponsiveColumnDrop = {
           }}
         >
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             defaultSortingKey={'health'}
@@ -952,6 +993,7 @@ export const ResponsiveColumnDropWithReveal = {
           }}
         >
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             defaultSortingKey={'health'}
