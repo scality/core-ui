@@ -67,7 +67,7 @@ export const PasswordFields = ({
               // otherwise the first keystroke here raises the confirmation's error
               // before the user has reached that field.
               onChange: () => {
-                if (getFieldState(names.confirmation).isDirty) {
+                if (getFieldState(names.confirmation, formState).isDirty) {
                   trigger(names.confirmation);
                 }
               },

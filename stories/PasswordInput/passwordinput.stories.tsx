@@ -82,10 +82,10 @@ export const InANarrowContainer: Story = {
   render: () => (
     <div
       style={{
-        width: '14rem',
+        width: '20rem',
         minWidth: 0,
         resize: 'horizontal',
-        overflow: 'auto',
+        overflow: 'hidden',
         padding: '0.5rem',
         border: '1px dashed #6e6e6e',
       }}

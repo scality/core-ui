@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
-import { INPUT_MIN_WIDTH } from '../inputv2/inputv2';
+import { convertSizeToRem } from '../inputv2/inputv2';
+
+const FIELD_MIN_WIDTH = convertSizeToRem('1/3');
 
 /**
  * `min-width: 0` overrides the row's automatic grid/flex minimum so it can shrink
@@ -17,5 +19,5 @@ export const PasswordRow = styled.div`
 
 export const PasswordFieldSlot = styled.div`
   flex: 0 1 auto;
-  min-width: ${INPUT_MIN_WIDTH};
+  min-width: ${FIELD_MIN_WIDTH};
 `;

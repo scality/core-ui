@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -132,5 +132,37 @@ describe('PasswordFields', () => {
       screen.getByText('Password confirmation is required'),
     ).toBeInTheDocument();
     expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it("lets the caller's own confirmation rule override required", async () => {
+    const onSubmit = jest.fn();
+    const WithSubmit = ({ children }: { children: ReactNode }) => {
+      const methods = useForm({ mode: 'onChange' });
+      return (
+        <Wrapper>
+          <FormProvider {...methods}>
+            <Form
+              layout={{ kind: 'tab' }}
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
+              <FormSection>{children}</FormSection>
+            </Form>
+          </FormProvider>
+        </Wrapper>
+      );
+    };
+
+    const { container } = render(
+      <PasswordFields required confirmationRules={{ required: false }} />,
+      { wrapper: WithSubmit },
+    );
+
+    await userEvent.type(screen.getByLabelText('Password *'), 'secret');
+    fireEvent.submit(container.querySelector('form')!);
+
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    expect(
+      screen.queryByText('Password confirmation is required'),
+    ).not.toBeInTheDocument();
   });
 });

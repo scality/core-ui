@@ -24,8 +24,8 @@ export type PasswordInputProps = Omit<
   );
 
 /**
- * A password field with a reveal toggle. Reach for this rather than an `Input` of
- * type `password` whenever a user types a password.
+ * Reach for this rather than an `Input` of type `password` whenever a user types a
+ * password: it carries the reveal toggle, and an optional copy button.
  */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ revealed, onToggleReveal, copyable, disabled, ...inputProps }, ref) => {
