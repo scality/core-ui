@@ -18,7 +18,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.pull_request.head.repo.full_name == github.repository &&
        github.event.pull_request.user.login != 'dependabot[bot]')
-    uses: scality/test-review-agent/.github/workflows/review.yml@main
+    uses: scality/test-review-agent/.github/workflows/review.yml@v1
     with:
       pr: ${{ inputs.pr }}
     secrets:
