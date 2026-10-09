@@ -25,6 +25,25 @@ describe('Checkbox', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  /**
+   * A trailing space is a soft-wrap opportunity in front of the room reserved for
+   * the help icon, which drops the icon onto a line of its own. jsdom has no
+   * layout, so what is pinned here is the trim itself -- with an identity
+   * normalizer, since the default one would collapse the space away.
+   */
+  it('strips a trailing space from a label that carries a help icon', () => {
+    render(
+      <Checkbox
+        label="Platform Admin "
+        labelHelpTooltip="Can manage users and groups."
+      />,
+    );
+
+    expect(
+      screen.getByText('Platform Admin', { normalizer: (text) => text }),
+    ).toBeInTheDocument();
+  });
+
   it('keeps the help affordance inside the label it annotates', () => {
     render(
       <Checkbox
