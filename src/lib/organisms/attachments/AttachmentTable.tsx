@@ -23,8 +23,9 @@ import {
   Text,
   Tooltip,
 } from '../../index';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { spacing, Stack, Wrap } from '../../spacing';
+import { SEARCH_INPUT_MIN_WIDTH } from '../../components/searchinput/SearchInput.component';
 import {
   AttachableEntity,
   AttachmentOperation,
@@ -75,16 +76,15 @@ export type AttachmentTableProps<
 const rowHeight = 'h48';
 
 const MenuContainer = styled.ul<{
-  $width: string;
   $isOpen: boolean;
-  $searchInputIsFocused: boolean;
 }>`
   background-color: ${(props) => props.theme.backgroundLevel1};
   background-clip: content-box;
   padding: 0;
   list-style: none;
   position: absolute;
-  width: ${(props) => props.$width};
+  left: 0;
+  right: 0;
   z-index: 1;
   margin: 0;
   ${(props) =>
@@ -92,18 +92,16 @@ const MenuContainer = styled.ul<{
       ? `
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      border-bottom-right-radius: 4px;
-      border-bottom-left-radius: 4px;
-      border: 1px solid ${props.theme.selectedActive};
+      border-bottom-right-radius: ${spacing.r4};
+      border-bottom-left-radius: ${spacing.r4};
+      border: ${spacing.r1} solid ${props.theme.selectedActive};
   `
-      : props.$searchInputIsFocused
-        ? `border-bottom: 1px solid ${props.theme.selectedActive};`
-        : ''}
+      : ''}
   border-top: 0;
   li {
     padding: ${spacing.r8};
     cursor: pointer;
-    border-top: 1px solid ${(props) => props.theme.backgroundLevel2};
+    border-top: ${spacing.f1} solid ${(props) => props.theme.backgroundLevel2};
     &[aria-selected='true'] {
       background: ${(props) => props.theme.highlight};
     }
@@ -111,8 +109,15 @@ const MenuContainer = styled.ul<{
 `;
 
 const SearchBoxContainer = styled.div`
-  position: relative;
   padding: ${spacing.r16};
+`;
+
+/** Matches SearchInput's min-width: the list is sized from this anchor, so a narrower anchor draws the list narrower than the field. */
+const SearchAnchor = styled.div`
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  min-width: ${SEARCH_INPUT_MIN_WIDTH};
 `;
 
 /**
@@ -120,19 +125,22 @@ const SearchBoxContainer = styled.div`
  * there is no flex line to grow along. It is kept for the error path, where the
  * input sits in a `Stack` beside a `Loader`.
  *
- * So the box is a fixed 287px, and this component cannot change that: `SearchInput`
- * pins `width: max-content` and does not forward `fluid`. That is this table's next
- * floor, at a 301px container.
+ * `&&` doubles the class so this rule outranks `Input`'s own `:hover`/`:focus-within`
+ * border, which carry a pseudo-class that a plain `& > div` cannot beat.
  */
-const StyledSearchInput = styled(SearchInput)<{ $searchInputIsFocused }>`
+const StyledSearchInput = styled(SearchInput)<{ $isOpen: boolean }>`
   flex-grow: 1;
 
-  & > div:focus-within {
-    border-color: ${(props) => props.theme.selectedActive};
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: 0;
-  }
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      && > div {
+        border-color: ${props.theme.selectedActive};
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 0;
+      }
+    `}
 `;
 
 /**
@@ -492,16 +500,23 @@ export const AttachmentTable = <
       onInputValueChange: ({ inputValue }) => {
         onEntitySearchChange(inputValue);
       },
+      // Blur must close the list without committing the highlighted row: selecting
+      // here runs `onSelectedItemChange`, which attaches the entity outright, so
+      // tabbing out of a list with a row under the cursor would attach it.
+      stateReducer: (state, { type, changes }) =>
+        type === useCombobox.stateChangeTypes.InputBlur
+          ? {
+              ...changes,
+              selectedItem: state.selectedItem,
+              inputValue: state.inputValue,
+            }
+          : changes,
     });
 
   useMemo(() => {
     //@ts-expect-error assigning to the ref is expected here
     resetRef.current = reset;
   }, [reset]);
-
-  // UI styling states
-  const [searchWidth, setSearchWidth] = useState('0px');
-  const [searchInputIsFocused, setSearchInputIsFocused] = useState(false);
 
   return (
     /* `iconOnly` is a `@container responsive` query and needs an ancestor declaring
@@ -605,132 +620,106 @@ export const AttachmentTable = <
         }))}
         defaultSortingKey="name"
       >
-        <SearchBoxContainer
-          {...{
-            ref: (element) => {
-              if (element?.firstElementChild) {
-                setSearchWidth(
-                  element.firstElementChild.getBoundingClientRect().width -
-                    2 +
-                    'px',
-                );
-              }
-            },
-          }}
-        >
-          {filteredEntities.status === 'error' ? (
-            <Tooltip
-              overlay={
-                <>We failed to load the entities, hence search is disabled</>
-              }
-            >
-              <Stack>
-                <StyledSearchInput
-                  autoComplete="off"
-                  placeholder={searchEntityPlaceholder}
-                  {...getInputProps({
-                    ref: (element) => {
-                      if (element) searchInputRef.current = element;
-                    },
-                  })}
-                  onFocus={() => {
-                    openMenu();
-                    setSearchInputIsFocused(true);
-                  }}
-                  onBlur={() => {
-                    setSearchInputIsFocused(false);
-                  }}
-                  disabled={filteredEntities.status === 'error'}
-                />
-                <Loader />
-              </Stack>
-            </Tooltip>
-          ) : (
-            <StyledSearchInput
-              autoComplete="off"
-              placeholder={searchEntityPlaceholder}
-              {...getInputProps({
-                ref: (element) => {
-                  if (element) searchInputRef.current = element;
-                },
-              })}
-              onFocus={() => {
-                openMenu();
-                setSearchInputIsFocused(true);
-              }}
-              onBlur={() => {
-                setSearchInputIsFocused(false);
-              }}
-              $searchInputIsFocused={searchInputIsFocused}
-            />
-          )}
-          <MenuContainer
-            {...getMenuProps()}
-            $width={searchWidth}
-            $isOpen={isOpen}
-            $searchInputIsFocused={searchInputIsFocused}
-          >
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              filteredEntities.data?.entities.map((item, index) => (
-                <li
-                  key={`${item.id}${index}`}
-                  {...getItemProps({ item, index })}
-                >
-                  <Text>{item.name}</Text>
-                </li>
-              ))}
-            {isOpen && filteredEntities.status === 'loading' && (
-              <li>
-                <Text>Searching...</Text>
-              </li>
+        <SearchBoxContainer>
+          <SearchAnchor>
+            {filteredEntities.status === 'error' ? (
+              <Tooltip
+                overlay={
+                  <>We failed to load the entities, hence search is disabled</>
+                }
+              >
+                <Stack>
+                  <StyledSearchInput
+                    autoComplete="off"
+                    placeholder={searchEntityPlaceholder}
+                    {...getInputProps({
+                      ref: (element) => {
+                        if (element) searchInputRef.current = element;
+                      },
+                    })}
+                    onFocus={openMenu}
+                    disabled={filteredEntities.status === 'error'}
+                    $isOpen={isOpen}
+                  />
+                  <Loader />
+                </Stack>
+              </Tooltip>
+            ) : (
+              <StyledSearchInput
+                autoComplete="off"
+                placeholder={searchEntityPlaceholder}
+                {...getInputProps({
+                  ref: (element) => {
+                    if (element) searchInputRef.current = element;
+                  },
+                })}
+                onFocus={openMenu}
+                $isOpen={isOpen}
+              />
             )}
-            {isOpen && filteredEntities.status === 'error' && (
-              <li>
-                <Text color="statusCritical">
-                  An error occured while searching
-                </Text>
-              </li>
-            )}
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              (filteredEntities.data?.number || 0) >
-                filteredEntities.data?.entities.length && (
-                <li>
-                  <Text
-                    isGentleEmphazed={true}
-                    color="textSecondary"
-                    style={{ textAlign: 'right' }}
+            <MenuContainer {...getMenuProps()} $isOpen={isOpen}>
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                filteredEntities.data?.entities.map((item, index) => (
+                  <li
+                    key={`${item.id}${index}`}
+                    {...getItemProps({ item, index })}
                   >
-                    There{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length ===
-                    1
-                      ? 'is'
-                      : 'are'}{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length}{' '}
-                    more{' '}
-                    {(filteredEntities.data?.number || 0) -
-                      filteredEntities.data?.entities.length ===
-                    1
-                      ? entityName.singular
-                      : entityName.plural}{' '}
-                    matching your search. Suggestion: try more specific search
-                    expression.
-                  </Text>
-                </li>
-              )}
-            {isOpen &&
-              filteredEntities.status === 'success' &&
-              filteredEntities.data?.entities.length === 0 && (
+                    <Text>{item.name}</Text>
+                  </li>
+                ))}
+              {isOpen && filteredEntities.status === 'loading' && (
                 <li>
-                  <Text isGentleEmphazed={true} color="textSecondary">
-                    No {entityName.plural} found matching your search.
+                  <Text>Searching...</Text>
+                </li>
+              )}
+              {isOpen && filteredEntities.status === 'error' && (
+                <li>
+                  <Text color="statusCritical">
+                    An error occured while searching
                   </Text>
                 </li>
               )}
-          </MenuContainer>
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                (filteredEntities.data?.number || 0) >
+                  filteredEntities.data?.entities.length && (
+                  <li>
+                    <Text
+                      isGentleEmphazed={true}
+                      color="textSecondary"
+                      style={{ textAlign: 'right' }}
+                    >
+                      There{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length ===
+                      1
+                        ? 'is'
+                        : 'are'}{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length}{' '}
+                      more{' '}
+                      {(filteredEntities.data?.number || 0) -
+                        filteredEntities.data?.entities.length ===
+                      1
+                        ? entityName.singular
+                        : entityName.plural}{' '}
+                      matching your search. Suggestion: try more specific search
+                      expression.
+                    </Text>
+                  </li>
+                )}
+              {isOpen &&
+                filteredEntities.status === 'success' &&
+                filteredEntities.data?.entities.length === 0 && (
+                  <li>
+                    <Text isGentleEmphazed={true} color="textSecondary">
+                      No {entityName.plural} found matching your search.
+                    </Text>
+                  </li>
+                )}
+            </MenuContainer>
+          </SearchAnchor>
         </SearchBoxContainer>
         <Table.SingleSelectableContent
           rowHeight={rowHeight}
