@@ -66,7 +66,16 @@ A table never tells the user a resource is empty before it has finished loading.
 - "No results" is an answer, not a waiting screen. It appears only once loading has completed and there is genuinely nothing to show.
 - When the data cannot be loaded, the table says so. It never falls back to "no results", which would tell the user the resource is empty when it is unknown.
 
+`status` is required: `'idle' | 'loading' | 'success' | 'error'`. The table cannot tell "still loading"
+from "loaded and empty" by looking at `data` alone, so it never guesses. Map your query state onto it
+(for example `status={isLoading ? 'loading' : isError ? 'error' : 'success'}`) and always pass it.
+
+Empty `data` with `status="success"` is the only way to show "No results". Omitting `status` does not
+mean success: the table shows the loading placeholder and warns in the console.
+
 <Canvas of={TableStories.LoadingTable} />
+
+<Canvas of={TableStories.EmptyTable} />
 
 <Canvas of={TableStories.ErrorTable} />
 

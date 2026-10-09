@@ -124,6 +124,7 @@ export const ResourceListPage = {
           <AppContainer.MainContent>
             <TableArea>
               <Table
+                status="success"
                 columns={accountColumns}
                 data={accountData}
                 defaultSortingKey="name"
