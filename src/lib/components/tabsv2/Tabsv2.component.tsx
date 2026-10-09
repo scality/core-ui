@@ -19,6 +19,7 @@ import {
 import styled from 'styled-components';
 import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
+import { spacing } from '../../spacing';
 import { ScrollButton } from './ScrollButton';
 import {
   ScrollableContainer,
@@ -46,6 +47,10 @@ export const TabsContext = createContext<boolean>(false);
 
 const TabIcon = styled(ButtonIcon)`
   color: ${(props) => props.theme.textSecondary};
+`;
+
+const TabBadge = styled.span`
+  margin-left: ${spacing.r4};
 `;
 
 function Tabs({
@@ -192,7 +197,11 @@ function Tabs({
         ) : (
           <SecondaryText>{label}</SecondaryText>
         )}
-        {textBadge && <EmphaseText>{textBadge}</EmphaseText>}
+        {textBadge && (
+          <TabBadge>
+            <EmphaseText>{textBadge}</EmphaseText>
+          </TabBadge>
+        )}
       </TabItem>
     );
   });

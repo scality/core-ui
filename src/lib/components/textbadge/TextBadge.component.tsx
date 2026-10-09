@@ -43,7 +43,6 @@ const StyledTextBadge = styled.span<{
       border-radius: 4px;
       font-size: 0.9rem;
       font-weight: ${fontWeight.bold};
-      margin: 0 ${spacing.r4} 0 ${spacing.r4};
     `}
 `;
 
