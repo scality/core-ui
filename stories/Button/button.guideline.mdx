@@ -59,7 +59,7 @@ Use this table to choose the right variant:
 | Situation | Variant |
 |---|---|
 | Main / intended action on the page or in a modal | `primary` |
-| Irreversible or destructive action (delete, reset) | `danger` |
+| Destructive action, or one that interrupts something running (delete, reset, stop, disable, revoke) | `danger` |
 | Action that must be accessible but must not attract attention (dismissal, low-priority utility) | `outline` |
 | Secondary action alongside a primary | `secondary` |
 | Low-emphasis utility in a constrained space (table, key-value list) | ghost (no variant, icon only) |
@@ -96,7 +96,7 @@ Prefer Outline over Secondary when the action doesn't advance the main flow.
 
 #### Danger
 
-Used for critical, irreversible actions (typically delete). When the main action is destructive, use `danger` instead of `primary`. Never use them alongside each other. In a destructive confirmation context, `danger` takes the primary position (right side of the group).
+Used for actions that destroy data or interrupt something that is running: delete, reset, stop, disable, revoke. An action does not have to be irreversible: stopping a running service can be undone and still takes `danger`. When the main action is destructive, use `danger` instead of `primary`. Never use them alongside each other. In a destructive confirmation context, `danger` takes the primary position (right side of the group).
 
 Destructive confirmation is always handled through a modal or an explicit checkbox. Never use a double-click pattern on the button itself.
 
