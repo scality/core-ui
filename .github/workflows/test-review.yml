@@ -1,0 +1,29 @@
+name: Test review
+
+# core-ui is public, so it cannot call test-review-agent's reusable workflow (that repo is
+# internal). Instead this asks test-review-agent to run the review itself: the review happens
+# there, and its comment lands on this pull request.
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  trigger:
+    # Fork and Dependabot PRs get no secrets, so the dispatch could not authenticate.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request a test review
+        env:
+          GH_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
+          SUBJECT_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh workflow run review-external.yml \
+            --repo scality/test-review-agent --ref v1 \
+            -f repo="$SUBJECT_REPO" -f pr="$PR_NUMBER"
