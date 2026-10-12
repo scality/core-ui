@@ -67,21 +67,31 @@ describe('storySort', () => {
     ]);
   });
 
-  it('orders the sections and the component categories', () => {
+  // A misspelled category name here goes unranked rather than erroring,
+  // dropping it below the categories that still rank.
+  it('orders the sections and every component category', () => {
     const sorted = sidebar([
       entry('Components/Styling/Box', 'Stories'),
       entry('Introduction', 'Introduction'),
-      entry('Components/Feedback/Banner', 'Stories'),
+      entry('Components/Progress & loading/Stepper', 'Stories'),
+      entry('Components/Deprecated/Banner', 'Stories'),
+      entry('Components/Feedback/Toast', 'Stories'),
       entry('Templates/Form', 'Stories'),
+      entry('Components/Data Display/Card', 'Stories'),
       entry('Components/Navigation/Tabs', 'Stories'),
+      entry('Components/Inputs/Checkbox', 'Stories'),
     ]);
 
     expect(sorted).toEqual([
       'Introduction :: Introduction',
       'Templates/Form :: Stories',
       'Components/Navigation/Tabs :: Stories',
-      'Components/Feedback/Banner :: Stories',
+      'Components/Data Display/Card :: Stories',
+      'Components/Inputs/Checkbox :: Stories',
+      'Components/Feedback/Toast :: Stories',
+      'Components/Progress & loading/Stepper :: Stories',
       'Components/Styling/Box :: Stories',
+      'Components/Deprecated/Banner :: Stories',
     ]);
   });
 
