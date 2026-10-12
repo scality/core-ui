@@ -97,7 +97,7 @@ import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import * as ExampleStories from './example.stories';
 
-<Meta of={ExampleStories} />
+<Meta of={ExampleStories} name="Guideline" />
 
 # Example Component
 
@@ -105,6 +105,10 @@ An Example component is used for example.
 
 <Canvas of={ExampleStories.Default} />
 ```
+
+`name="Guideline"` is what puts the page above the generated props table in the
+sidebar. Without it the page is named after `docs.defaultName` instead, takes the
+props table's place, and the component loses the page it was meant to gain.
 
 Documentation that is not about a single component goes in `stories/guideline/` and is titled `Guidelines/<Name>`, the way `Guidelines/Responsive` covers the container behaviour shared by several components. Use one of these when the subject is a choice between sibling components, or a behaviour that crosses components that are not alternatives to each other.
 

@@ -111,17 +111,23 @@ export const parameters = {
         return index === -1 ? order.length : index;
       };
 
-      const left = a.title.split('/');
-      const right = b.title.split('/');
+      const left = a.title.trim().split(/\s*\/\s*/);
+      const right = b.title.trim().split(/\s*\/\s*/);
       for (let depth = 0; depth < Math.max(left.length, right.length); depth++) {
         if (left[depth] === right[depth]) continue;
+        if (left[depth] === undefined) return -1;
+        if (right[depth] === undefined) return 1;
         const order =
           depth === 0
             ? SECTIONS
             : depth === 1 && left[0] === 'Components'
               ? CATEGORIES
               : [];
-        return rankIn(order, left[depth] ?? '') - rankIn(order, right[depth] ?? '');
+        const ranked = rankIn(order, left[depth]) - rankIn(order, right[depth]);
+        // Falls back to name comparison instead of 0: a sort cannot move an entry
+        // across a run it was told is equal, so returning 0 here would silently
+        // strand any guideline page whose file doesn't sit beside its stories.
+        return ranked !== 0 ? ranked : left[depth].localeCompare(right[depth]);
       }
       return rankIn(PAGES, a.name) - rankIn(PAGES, b.name);
     },
