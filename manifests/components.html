@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -21844,6 +21844,14 @@ Complex tasks should be achievable through interfaces that feel simple. This is 
 ### Predictability
 
 Rely on recognized patterns and proven conventions. Consistent use across contexts builds user confidence. Deviate only when the use case genuinely requires it.
+
+### Avoid layout shift
+
+Showing, hiding or updating an element must not move the rest of the page.
+
+- Reserve the space of an element that is not always displayed, such as a banner shown after an input or an action bar shown on selection.
+- Give a refreshed value a fixed width, for example by always showing one decimal.
+- Do not use bold for an active state: bold text is wider and pushes the elements next to it.
 
 ### Consistency
 
