@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">386 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/386 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">29 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/65 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/65 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">1/65 without API description</a><span class="filter-pill ok" aria-disabled="true">386 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/386 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">30 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -22262,10 +22262,55 @@ For a gradient or an image on a `Box`, `backgroundImage` also takes raw CSS.
   aria-label="Stories">
   <div class="head">
     <div class="title">
+      <h2><span class="status-dot dot-ok"></span> Style/Content</h2>
+      <div class="badges">
+        
+        <label for="doc-3-style-content-stories-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./stories/content.mdx">style-content--stories · ./stories/content.mdx</div>
+    <div># Content ## Placeholder A placeholder shows an example of the expected value. The Input a...</div>
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-3-style-content-stories-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+
+&lt;Meta title=&quot;Style/Content&quot; /&gt;
+
+# Content
+
+## Placeholder
+
+A placeholder shows an example of the expected value. The Input adds `Example: ` in front of it, unless `noPlaceholderPrefix` is set. A Select placeholder can be a contextual phrase instead, see the Inputs guideline. The rule below applies to both.
+
+Use a generic example. Do not name a third-party product, such as a monitoring tool or a backup software. A standard or a de facto standard, such as LDAP, S3 or Active Directory, is fine.
+
+- `production-monitoring`, not `ACME Monitor production`
+
+A tooltip can name a third-party product when it helps to understand the field.
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Stories">
+  <div class="head">
+    <div class="title">
       <h2><span class="status-dot dot-ok"></span> Style/Format</h2>
       <div class="badges">
         
-        <label for="doc-3-style-format-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-4-style-format-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/format.mdx">style-format--stories · ./stories/format.mdx</div>
@@ -22274,7 +22319,7 @@ For a gradient or an image on a `Box`, `backgroundImage` also takes raw CSS.
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-3-style-format-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-4-style-format-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22347,7 +22392,7 @@ This applies anywhere key-value pairs appear: modal bodies, detail panels, drawe
       <h2><span class="status-dot dot-ok"></span> Style/Spacing</h2>
       <div class="badges">
         
-        <label for="doc-4-style-spacing-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-5-style-spacing-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/spacing.mdx">style-spacing--stories · ./stories/spacing.mdx</div>
@@ -22356,7 +22401,7 @@ This applies anywhere key-value pairs appear: modal bodies, detail panels, drawe
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-4-style-spacing-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-5-style-spacing-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22434,7 +22479,7 @@ When placing an icon next to a text label (for example in a status cell or an in
       <h2><span class="status-dot dot-ok"></span> Style/Typography</h2>
       <div class="badges">
         
-        <label for="doc-5-style-typography-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-6-style-typography-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/typography.mdx">style-typography--stories · ./stories/typography.mdx</div>
@@ -22443,7 +22488,7 @@ When placing an icon next to a text label (for example in a status cell or an in
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-5-style-typography-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-6-style-typography-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22527,7 +22572,7 @@ Two strategies are available when text overflows its container.
       <h2><span class="status-dot dot-ok"></span> Guidelines/Chart</h2>
       <div class="badges">
         
-        <label for="doc-6-guidelines-chart-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-7-guidelines-chart-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/guideline/chart-guideline.mdx">guidelines-chart--stories · ./stories/guideline/chart-guideline.mdx</div>
@@ -22536,7 +22581,7 @@ Two strategies are available when text overflows its container.
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-6-guidelines-chart-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-7-guidelines-chart-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22583,7 +22628,7 @@ _produce an example WIP_
       <h2><span class="status-dot dot-ok"></span> Guidelines/Selection Controls</h2>
       <div class="badges">
         
-        <label for="doc-7-guidelines-selection-controls-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-8-guidelines-selection-controls-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/guideline/inputs-guideline.mdx">guidelines-selection-controls--stories · ./stories/guideline/inputs-guideline.mdx</div>
@@ -22592,7 +22637,7 @@ _produce an example WIP_
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-7-guidelines-selection-controls-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-8-guidelines-selection-controls-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22708,7 +22753,7 @@ For the placeholder inside the control, a contextual phrase is acceptable. Avoid
       <h2><span class="status-dot dot-ok"></span> Guidelines/Responsive</h2>
       <div class="badges">
         
-        <label for="doc-8-guidelines-responsive-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-9-guidelines-responsive-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/guideline/responsive.mdx">guidelines-responsive--stories · ./stories/guideline/responsive.mdx</div>
@@ -22717,7 +22762,7 @@ For the placeholder inside the control, a contextual phrase is acceptable. Avoid
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-8-guidelines-responsive-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-9-guidelines-responsive-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22841,7 +22886,7 @@ rules.
       <h2><span class="status-dot dot-ok"></span> UI and agentic surfaces</h2>
       <div class="badges">
         
-        <label for="doc-9-ui-and-agentic-surfaces-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-10-ui-and-agentic-surfaces-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/AgenticSurfaces.mdx">ui-and-agentic-surfaces--stories · ./stories/AgenticSurfaces.mdx</div>
@@ -22850,7 +22895,7 @@ rules.
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-9-ui-and-agentic-surfaces-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-10-ui-and-agentic-surfaces-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22911,7 +22956,7 @@ The design principles in this Storybook, the component guidelines, the component
       <h2><span class="status-dot dot-ok"></span> Hooks/useMutationsHandler</h2>
       <div class="badges">
         
-        <label for="doc-10-hooks-usemutationshandler-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-11-hooks-usemutationshandler-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/Hooks/useMutationsHandler.mdx">hooks-usemutationshandler--stories · ./stories/Hooks/useMutationsHandler.mdx</div>
@@ -22920,7 +22965,7 @@ The design principles in this Storybook, the component guidelines, the component
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-10-hooks-usemutationshandler-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-11-hooks-usemutationshandler-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
