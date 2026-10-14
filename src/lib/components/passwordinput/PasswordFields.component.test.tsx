@@ -52,6 +52,15 @@ describe('PasswordFields', () => {
     expect(screen.getByLabelText('Password confirmation *')).toBeRequired();
   });
 
+  it('disables both fields and the shared toggle when asked to', () => {
+    render(<PasswordFields disabled copyable />, { wrapper: WithForm });
+
+    expect(screen.getByLabelText(/^Password$/)).toBeDisabled();
+    expect(screen.getByLabelText(/^Password confirmation$/)).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /^Copy/ })).toBeDisabled();
+  });
+
   it('re-runs the confirmation rule when the password changes', async () => {
     const validate = jest.fn().mockReturnValue(true);
 

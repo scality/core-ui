@@ -9,6 +9,7 @@ export type PasswordFieldsProps = {
   names?: { password: string; confirmation: string };
   labels?: { password: string; confirmation: string };
   required?: boolean;
+  disabled?: boolean;
   copyable?: boolean;
   confirmationRules?: RegisterOptions;
 };
@@ -27,6 +28,7 @@ export const PasswordFields = ({
   names = { password: 'password', confirmation: 'passwordConfirm' },
   labels = { password: 'Password', confirmation: 'Password confirmation' },
   required = false,
+  disabled = false,
   copyable = false,
   confirmationRules,
 }: PasswordFieldsProps) => {
@@ -51,6 +53,7 @@ export const PasswordFields = ({
         helpErrorPosition="bottom"
         label={labels.password}
         required={required}
+        disabled={disabled}
         error={errorOf(names.password)}
         content={
           <PasswordInput
@@ -81,6 +84,7 @@ export const PasswordFields = ({
         helpErrorPosition="bottom"
         label={labels.confirmation}
         required={required}
+        disabled={disabled}
         error={errorOf(names.confirmation)}
         content={
           <PasswordRow>
