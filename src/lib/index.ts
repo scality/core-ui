@@ -77,7 +77,6 @@ export { Icon } from './components/icon/Icon.component';
 export {
   Routes,
   useCurrentRoutePattern,
-  toRoutePattern,
 } from './components/routes/Routes.component';
 export { StatusWrapper } from './components/statuswrapper/Statuswrapper.component';
 export { Stack, Wrap, spacing } from './spacing';
