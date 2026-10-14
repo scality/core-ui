@@ -19,8 +19,9 @@ type RoutePatternStore = {
 };
 
 // Every micro-app bundles its own copy of core-ui, so the store lives on
-// globalThis for the host and its remotes to share one.
-const STORE_KEY = Symbol.for('@scality/core-ui/route-pattern');
+// globalThis for the host and its remotes to share one. Its shape is shared
+// across core-ui versions: change it only under a new key version.
+const STORE_KEY = Symbol.for('@scality/core-ui/route-pattern/v1');
 
 const getStore = (): RoutePatternStore => {
   const global = globalThis as typeof globalThis & {
@@ -101,8 +102,7 @@ const RoutePatternReporter = () => {
 
 const withReporter = (routes: RouteObject[]): RouteObject[] =>
   routes.map(({ Component, element, children, ...route }) => {
-    const content =
-      element !== undefined ? element : Component ? <Component /> : <Outlet />;
+    const content = Component ? <Component /> : element || <Outlet />;
     return {
       ...route,
       element: (

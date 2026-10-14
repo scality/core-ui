@@ -85,6 +85,27 @@ describe('Routes', () => {
     );
   });
 
+  it('renders the children of a layout route without an element', () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <MemoryRouter initialEntries={['/settings/profile']}>
+          <CurrentPattern />
+          <Routes>
+            <Route path="settings" element={null}>
+              <Route path="profile" element={<>Profile</>} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('Profile')).toBeInTheDocument();
+    expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
+      '/settings/profile',
+    );
+  });
+
   it('forgets the pattern of unmounted routes', () => {
     const { unmount } = renderAt('/platform/about');
     expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
