@@ -630,7 +630,7 @@ export const EmptyTable = {
   },
 };
 
-export const LoadingTable = {
+export const LoadingEmptyTable = {
   render: (args) => {
     const { background } = args;
     return (
