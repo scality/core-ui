@@ -60,6 +60,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         <Button
           type="button"
           variant="outline"
+          aria-pressed={isRevealed}
           disabled={isDisabled}
           // `flexShrink: 0` keeps this button at its fixed width; flex items shrink by
           // default even with a set width, so without it the button — not the field —

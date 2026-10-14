@@ -7,6 +7,9 @@ import { PasswordInput } from './PasswordInput.component';
 const { Wrapper } = getWrapper();
 
 describe('PasswordInput', () => {
+  const clipboard = navigator.clipboard;
+  afterEach(() => Object.assign(navigator, { clipboard }));
+
   it('hides what is typed until the reveal button is pressed, and hides it again', async () => {
     render(
       <PasswordInput
@@ -27,6 +30,25 @@ describe('PasswordInput', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Hide password' }));
     expect(field).toHaveAttribute('type', 'password');
+  });
+
+  it('announces whether the password is shown', async () => {
+    render(
+      <PasswordInput
+        id="pwd"
+        aria-label="Password"
+        autoComplete="new-password"
+      />,
+      { wrapper: Wrapper },
+    );
+
+    const toggle = screen.getByRole('button', { name: 'Show password' });
+    expect(toggle).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(toggle);
+    expect(
+      screen.getByRole('button', { name: 'Hide password' }),
+    ).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('lets a caller drive the reveal state from outside', async () => {
@@ -95,6 +117,7 @@ describe('PasswordInput', () => {
       { wrapper: Wrapper },
     );
 
+    expect(screen.getByLabelText('Password')).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
     expect(screen.getByRole('button', { name: /copy/i })).toBeDisabled();
   });

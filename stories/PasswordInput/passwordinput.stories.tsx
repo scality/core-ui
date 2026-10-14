@@ -56,6 +56,8 @@ export const SetAPassword: Story = {
             <input
               type="text"
               autoComplete="username"
+              tabIndex={-1}
+              aria-hidden="true"
               style={{
                 position: 'absolute',
                 width: '1px',
