@@ -1,32 +1,42 @@
+import { parseSync } from '@babel/core';
 import fs from 'fs';
 import path from 'path';
 
 type Entry = { title: string; name: string };
 
+const previewPath = path.join(__dirname, 'preview.tsx');
+const previewSource = fs.readFileSync(previewPath, 'utf8');
+
 /**
- * Storybook extracts this arrow's source as text and evaluates it separately
- * from the module — so it must stay inline and carry no TypeScript annotations.
+ * Storybook extracts this arrow's source as text and evaluates it apart from the
+ * module, not as an imported function — so the test re-implements that same
+ * extraction.
  */
 const readSortSidebar = (): ((a: Entry, b: Entry) => number) => {
-  const source = fs.readFileSync(path.join(__dirname, 'preview.tsx'), 'utf8');
-  const start = source.indexOf('storySort:');
-  if (start === -1) throw new Error('no storySort in preview.tsx');
+  const ast = parseSync(previewSource, { filename: previewPath });
+  const property = (node, key) =>
+    node?.properties?.find((candidate) => candidate.key?.name === key)?.value;
 
-  let depth = 0;
-  let end = source.indexOf('{', start);
-  for (let i = end; i < source.length; i++) {
-    if (source[i] === '{') depth += 1;
-    if (source[i] === '}') {
-      depth -= 1;
-      if (depth === 0) {
-        end = i + 1;
-        break;
-      }
-    }
-  }
-  const arrow = source.slice(source.indexOf('(', start), end);
+  const parameters = ast.program.body
+    .flatMap((node) =>
+      node.type === 'ExportNamedDeclaration'
+        ? (node.declaration?.declarations ?? [])
+        : [],
+    )
+    .find((declaration) => declaration.id.name === 'parameters')?.init;
+  const storySort = property(property(parameters, 'options'), 'storySort');
+
+  if (storySort?.type !== 'ArrowFunctionExpression')
+    throw new Error(
+      'storySort must stay an inline arrow under parameters.options: Storybook reads it statically and rejects a reference to a function defined elsewhere',
+    );
+  if (storySort.params.some((parameter) => parameter.typeAnnotation))
+    throw new Error(
+      'storySort cannot annotate its parameters: Storybook evaluates its source as plain JavaScript',
+    );
+
   // eslint-disable-next-line no-eval
-  return (0, eval)(`(${arrow})`);
+  return (0, eval)(`(${previewSource.slice(storySort.start, storySort.end)})`);
 };
 
 const sortSidebar = readSortSidebar();
@@ -157,19 +167,13 @@ const documented = new Set(
     }),
 );
 
-// Deliberately no assertion: most story files predate this rule, so asserting
-// would fail the suite for untouched legacy files. console.warn surfaces the
-// backlog to whoever next touches one of them.
-it('reports the components that have no guideline yet', () => {
-  const missing = filesUnder(storiesDir, '.stories.tsx').filter(
-    (file) => !documented.has(file),
-  );
-  if (missing.length === 0) return;
-
+const missingGuideline = filesUnder(storiesDir, '.stories.tsx').filter(
+  (file) => !documented.has(file),
+);
+if (missingGuideline.length > 0)
   console.warn(
     [
-      `${missing.length} components have no guideline:`,
-      ...missing.map((file) => `  ${path.relative(storiesDir, file)}`),
+      `${missingGuideline.length} components have no guideline:`,
+      ...missingGuideline.map((file) => `  ${path.relative(storiesDir, file)}`),
     ].join('\n'),
   );
-});
