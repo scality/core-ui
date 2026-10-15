@@ -1,4 +1,4 @@
-import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import * as RoutesStories from './routes.stories';
 
@@ -14,36 +14,28 @@ The pattern names the page without its values: it says which page is shown, not 
 
 Render `RoutePatternProvider` once, inside the host app's router and around its routes. Read the pattern anywhere below it with `useCurrentRoutePattern`, which returns `null` until a core-ui `Routes` matches.
 
-<Source
-  language="tsx"
-  dark
-  code={`import {
-  RoutePatternProvider,
-  Routes,
-  useCurrentRoutePattern,
-} from '@scality/core-ui';
+```tsx
+import { RoutePatternProvider, Routes } from '@scality/core-ui';
 import { BrowserRouter, Route } from 'react-router';
 
 const App = () => (
-
-<BrowserRouter>
-  <RoutePatternProvider>
-    <Routes>
-      <Route path="/nodes" element={<Nodes />} />
-      <Route path="/nodes/:nodeName/*" element={<NodeRoutes />} />
-    </Routes>
-  </RoutePatternProvider>
-</BrowserRouter>
+  <BrowserRouter>
+    <RoutePatternProvider>
+      <Routes>
+        <Route path="/nodes" element={<Nodes />} />
+        <Route path="/nodes/:nodeName/*" element={<NodeRoutes />} />
+      </Routes>
+    </RoutePatternProvider>
+  </BrowserRouter>
 );
 
 const NodeRoutes = () => (
-
   <Routes>
     <Route path="/" element={<NodeOverview />} />
     <Route path="alerts" element={<NodeAlerts />} />
   </Routes>
-);`}
-/>
+);
+```
 
 Each nested `Routes` adds its matched path to the pattern of the routes around it, across micro-app boundaries: a page rendered by a micro-app inside the shell reports the shell's path followed by the micro-app's.
 
