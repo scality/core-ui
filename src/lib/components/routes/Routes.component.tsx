@@ -19,33 +19,28 @@ import {
 
 type Entry = { depth: number; order: number; pattern: string };
 
-type RoutePatternRegistry = {
+type RoutePatternScope = {
+  depth: number;
+  prefix: string;
   pattern: string | null;
-  register: (depth: number, pattern: string) => () => void;
+  register?: (depth: number, pattern: string) => () => void;
 };
 
-type RouteScope = { depth: number; prefix: string };
+const CONTEXT_KEY = Symbol.for('@scality/core-ui/route-pattern-context/v1');
 
-// A micro-app may bundle its own copy of core-ui, so these context objects live
-// on globalThis for the host's routes and provider to reach the remotes' routes.
-// Their values are shared across core-ui versions: change a shape only under a
+// A micro-app may bundle its own copy of core-ui, so the context object lives
+// on globalThis for the host's provider and routes to reach the remotes' routes.
+// Its value is shared across core-ui versions: change its shape only under a
 // new key.
-const sharedContext = <T,>(name: string, defaultValue: T): Context<T> => {
-  const key = Symbol.for(`@scality/core-ui/${name}`);
-  const global = globalThis as typeof globalThis &
-    Record<symbol, Context<T> | undefined>;
-  return (global[key] ??= createContext(defaultValue));
-};
-
-const RoutePatternContext = sharedContext<RoutePatternRegistry | null>(
-  'route-pattern-context/v1',
-  null,
-);
-
-const RouteScopeContext = sharedContext<RouteScope>('route-scope-context/v1', {
+const RoutePatternContext = ((
+  globalThis as typeof globalThis & {
+    [CONTEXT_KEY]?: Context<RoutePatternScope>;
+  }
+)[CONTEXT_KEY] ??= createContext<RoutePatternScope>({
   depth: 0,
   prefix: '',
-});
+  pattern: null,
+}));
 
 /** Joins a route path to the pattern of its parent routes, such as `/nodes` and `:name/*` into `/nodes/:name/*`. */
 export const joinRoutePath = (prefix: string, path = '') =>
@@ -91,7 +86,11 @@ export const RoutePatternProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const value = useMemo(() => ({ pattern, register }), [pattern, register]);
+  const parent = useContext(RoutePatternContext);
+  const value = useMemo(
+    () => ({ ...parent, pattern, register }),
+    [parent, pattern, register],
+  );
 
   return (
     <RoutePatternContext.Provider value={value}>
@@ -101,7 +100,7 @@ export const RoutePatternProvider = ({ children }: { children: ReactNode }) => {
 };
 
 const RoutePatternReporter = ({ depth, pattern }: Omit<Entry, 'order'>) => {
-  const register = useContext(RoutePatternContext)?.register;
+  const { register } = useContext(RoutePatternContext);
 
   useLayoutEffect(() => {
     if (register) {
@@ -116,7 +115,7 @@ const RoutePatternReporter = ({ depth, pattern }: Omit<Entry, 'order'>) => {
 // URL root, so `base` is the pattern of the routes around that Routes.
 const withReporter = (
   routes: RouteObject[],
-  parent: RouteScope,
+  parent: RoutePatternScope,
   base: string,
 ): RouteObject[] =>
   routes.map(({ Component, element, children, ...route }) => {
@@ -124,15 +123,19 @@ const withReporter = (
       route.path?.startsWith('/') ? base : parent.prefix,
       route.path,
     );
-    const scope = { depth: parent.depth + 1, prefix: withoutSplat(pattern) };
+    const scope = {
+      ...parent,
+      depth: parent.depth + 1,
+      prefix: withoutSplat(pattern),
+    };
     const content = Component ? <Component /> : element || <Outlet />;
     return {
       ...route,
       element: (
-        <RouteScopeContext.Provider value={scope}>
+        <RoutePatternContext.Provider value={scope}>
           <RoutePatternReporter depth={scope.depth} pattern={pattern} />
           {content}
-        </RouteScopeContext.Provider>
+        </RoutePatternContext.Provider>
       ),
       children: children && withReporter(children, scope, base),
     } as RouteObject;
@@ -145,7 +148,7 @@ const withReporter = (
  * rendered by react-router's `Routes` is missing from the pattern.
  */
 export const Routes = ({ children, location }: RoutesProps) => {
-  const parent = useContext(RouteScopeContext);
+  const parent = useContext(RoutePatternContext);
   return useRoutes(
     withReporter(createRoutesFromChildren(children), parent, parent.prefix),
     location,
@@ -158,4 +161,4 @@ export const Routes = ({ children, location }: RoutesProps) => {
  * `/platform/nodes/:name/overview`, or `null` when none matches.
  */
 export const useCurrentRoutePattern = () =>
-  useContext(RoutePatternContext)?.pattern ?? null;
+  useContext(RoutePatternContext).pattern;
