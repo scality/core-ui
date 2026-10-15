@@ -1,0 +1,72 @@
+import { Canvas, Meta, Source } from '@storybook/addon-docs/blocks';
+
+import * as RoutesStories from './routes.stories';
+
+<Meta name="Guideline" of={RoutesStories} />
+
+# Routes
+
+`Routes` is a drop-in replacement for react-router's `Routes`. It renders the same routes, and also reports the pattern of the matched route, such as `/nodes/:nodeName/alerts`, to the closest `RoutePatternProvider`. `useCurrentRoutePattern` returns that pattern.
+
+The pattern names the page without its values: it says which page is shown, not which node, bucket or user it shows. Use it for page-level concerns such as usage telemetry.
+
+## Usage
+
+Render `RoutePatternProvider` once, inside the host app's router and around its routes. Read the pattern anywhere below it with `useCurrentRoutePattern`, which returns `null` until a core-ui `Routes` matches.
+
+<Source
+  language="tsx"
+  dark
+  code={`import {
+  RoutePatternProvider,
+  Routes,
+  useCurrentRoutePattern,
+} from '@scality/core-ui';
+import { BrowserRouter, Route } from 'react-router';
+
+const App = () => (
+
+<BrowserRouter>
+  <RoutePatternProvider>
+    <Routes>
+      <Route path="/nodes" element={<Nodes />} />
+      <Route path="/nodes/:nodeName/*" element={<NodeRoutes />} />
+    </Routes>
+  </RoutePatternProvider>
+</BrowserRouter>
+);
+
+const NodeRoutes = () => (
+
+  <Routes>
+    <Route path="/" element={<NodeOverview />} />
+    <Route path="alerts" element={<NodeAlerts />} />
+  </Routes>
+);`}
+/>
+
+Each nested `Routes` adds its matched path to the pattern of the routes around it, across micro-app boundaries: a page rendered by a micro-app inside the shell reports the shell's path followed by the micro-app's.
+
+<Canvas of={RoutesStories.NestedRoutes} sourceState="none" />
+
+`Tabs` already renders its tabs with core-ui `Routes`, so a page shown by a tab is reported without any change.
+
+## When to use core-ui Routes
+
+Use core-ui `Routes` instead of react-router's in every app rendered by the shell, at every level of routing: the app's top-level routes and each nested `Routes` below them.
+
+react-router's `Routes` is still fine where the route pattern does not matter: a standalone app with no `RoutePatternProvider`, a story, or a test. Without a provider, core-ui `Routes` behaves exactly like react-router's.
+
+## Routes rendered by react-router's Routes are invisible
+
+`useCurrentRoutePattern` only sees routes rendered by core-ui `Routes`. A level rendered by react-router's `Routes` reports nothing, so the pattern stops at the last core-ui `Routes` above it and never names the deeper page. Below, the node routes use react-router's `Routes`: the overview and alerts pages both report `/nodes/:nodeName/*`.
+
+<Canvas of={RoutesStories.MixedWithReactRouterRoutes} sourceState="none" />
+
+The same happens below such a level: a core-ui `Routes` nested under react-router's `Routes` reports its path without the paths of the react-router level above it. When converting an app, replace every `Routes` between the provider and the page, starting from the top.
+
+## Reading the pattern
+
+The pattern is updated in a layout effect, after the route renders. On a navigation, a component that reads both the URL and the pattern can see the new URL with the previous pattern for one render. React to a change of the pattern, not of the URL.
+
+A navigation between two pages with the same pattern, such as from one node to another, does not change the pattern.
