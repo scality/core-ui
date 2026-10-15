@@ -11257,7 +11257,7 @@ withWrapper?: boolean</code></pre>
           
             <div class="note ok">
               <div class="row">
-                <span class="ex-name">Icon</span>
+                <span class="ex-name">Guideline</span>
                 <span class="badge ok">doc ok</span>
               </div>
               <div class="hint">./stories/Icon.mdx</div>
@@ -11274,7 +11274,7 @@ withWrapper?: boolean</code></pre>
 import { Icon } from &#39;../src/lib/components/icon/Icon.component&#39;;
 import * as IconStories from &#39;./icon.stories&#39;;
 
-&lt;Meta of={IconStories} /&gt;
+&lt;Meta of={IconStories} name=&quot;Guideline&quot; /&gt;
 
 # Icons
 
@@ -22083,7 +22083,7 @@ The presets below `Text` are `Text` with its props already set. Reach for a pres
 | `SmallerText`    | Text one size down.                                                     | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
 | `ChartTitleText` | The title sitting above a chart.                                        | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
 | `Link`           | An anchor carrying the link styling.                                    | `@scality/core-ui` | [Stories](?path=/docs/components-styling-text--stories) |
-| `Icon`           | One of the library&#39;s icons, sized and coloured from the theme.          | `@scality/core-ui` | [Stories](?path=/docs/components-icon--icon)            |
+| `Icon`           | One of the library&#39;s icons, sized and coloured from the theme.          | `@scality/core-ui` | [Guideline](?path=/docs/components-icon--guideline)     |
 | `IconHelp`       | The question mark that carries an explanation in a tooltip.             | `@scality/core-ui` | [Guideline](?path=/docs/components-iconhelp--guideline) |
 
 ## Theme, values and helpers
@@ -22625,135 +22625,10 @@ _produce an example WIP_
   aria-label="Stories">
   <div class="head">
     <div class="title">
-      <h2><span class="status-dot dot-ok"></span> Guidelines/Selection Controls</h2>
-      <div class="badges">
-        
-        <label for="doc-8-guidelines-selection-controls-stories-content" class="badge ok as-toggle">view content</label>
-      </div>
-    </div>
-    <div class="meta" title="./stories/guideline/inputs-guideline.mdx">guidelines-selection-controls--stories · ./stories/guideline/inputs-guideline.mdx</div>
-    <div># Selection Controls The key decision is when the change takes effect and how many options...</div>
-  </div>
-
-  <!-- Hidden toggles must be siblings BEFORE .panels -->
-  
-  <input id="doc-8-guidelines-selection-controls-stories-content" class="tg tg-content" type="checkbox" hidden />
-
-  <div class="panels">
-    
-    
-        <div class="panel panel-content">
-          <div class="mdx-content">
-            <pre><code>import { Meta, Canvas, Unstyled } from &#39;@storybook/addon-docs/blocks&#39;;
-import * as CheckboxStories from &#39;../Checkbox/checkbox.stories&#39;;
-import * as ToggleStories from &#39;../Toggle/toggle.stories&#39;;
-import * as RadioStories from &#39;../Radio/radio.stories&#39;;
-import * as SelectStories from &#39;../Select/selectv2.stories&#39;;
-import * as OverviewStories from &#39;./selection-controls-overview.stories&#39;;
-
-&lt;Meta title=&quot;Guidelines/Selection Controls&quot; /&gt;
-
-&lt;style&gt;{`
-  .sbdocs-content h2 { margin-top: 5rem; }
-  .sbdocs-content h3 { margin-top: 3rem; }
-  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
-  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
-`}&lt;/style&gt;
-
-# Selection Controls
-
-The key decision is when the change takes effect and how many options can be selected.
-
-&lt;Canvas of={OverviewStories.Overview} sourceState=&quot;none&quot; /&gt;
-
-## Checkbox vs Toggle vs Radio vs Select
-
-### Checkbox: on submit, one or more
-
-Use Checkbox when the change takes effect only after the user submits a form (Save, Apply, Create). It works for both enabling a single option and selecting multiple items from a list.
-
-&lt;Canvas of={CheckboxStories.OptionCheckbox} sourceState=&quot;none&quot; /&gt;
-
-&lt;Canvas of={CheckboxStories.IndeterminateUseCase} sourceState=&quot;none&quot; /&gt;
-
-See [Components/Inputs/Checkbox](?path=/docs/components-inputs-checkbox--guideline) for the full guideline.
-
-### Toggle: immediate effect
-
-Use Toggle when the change takes effect instantly, with no confirmation step.
-
-&lt;Canvas of={ToggleStories.FeatureToggle} sourceState=&quot;none&quot; /&gt;
-
-Don&#39;t place a Toggle inside a form with a Save button. The user expects it to act immediately. Wrapping it in a submit flow creates a contradiction. Use a Checkbox instead.
-
-See [Components/Inputs/Toggle](?path=/docs/components-inputs-toggle--guideline) for the full guideline.
-
-### Radio: mutually exclusive single choice
-
-Use Radio when the user must pick one option from a group of 2 to 4 choices. Radio enforces mutual exclusivity by design: selecting one option automatically deselects the others.
-
-&lt;Canvas of={RadioStories.RadioGroupExample} sourceState=&quot;none&quot; /&gt;
-
-See [Components/Inputs/RadioGroup](?path=/docs/components-inputs-radiogroup--guideline) for the full guideline.
-
-### Select: single choice from a long or variable list
-
-Use Select when the list of options is too long for Radio buttons, or when the options are dynamic. Select also supports search when the number of options exceeds 8.
-
-&lt;Canvas of={SelectStories.ForGuideline} sourceState=&quot;none&quot; /&gt;
-
-A scrollbar appears automatically when options exceed 4. A search bar appears automatically when options exceed 8.
-
-See [Components/Inputs/Select](?path=/docs/components-inputs-select--guideline) for the full guideline.
-
-## Summary
-
-| | Checkbox | Toggle | Radio | Select |
-| --- | :--- | :--- | :--- | :--- |
-| Effect | On form submit | Immediately | On form submit | On form submit |
-| Number of selections | One or more | Single on/off | One from a group | One from a list |
-| Best for | Form options, multi-select lists | Instant settings | 2–4 mutually exclusive choices | Long or dynamic option lists |
-| Used alone | No, always in a form or list | Yes | No, always in a group | Yes |
-
-## Label conventions
-
-**Checkbox** labels use a verb phrase that describes what enabling the option does. The meaning must be clear when the box is checked.
-
-- `Enable versioning` not `Versioning`
-- `Allow public access` not `Public access`
-- `Send email notifications` not `Email notifications`
-
-**Radio** labels name the option itself. A noun or short noun phrase is enough. No verb needed.
-
-- `Governance`, `Compliance`, `None`
-- `Small`, `Medium`, `Large`
-
-**Toggle** labels describe the feature or setting. Use a verb phrase when the label sits to the left of the toggle (`Enable object lock`). Use a short feature name when the toggle sits to the left of the label (`List versions`). Avoid state words in both cases.
-
-**Select** labels identify the field. Place the label above or to the left of the control.
-
-- `Region`, `Storage class`, `Retention mode`
-
-For the placeholder inside the control, a contextual phrase is acceptable. Avoid generic ones that apply to any select.
-
-- `Select a region` or empty, not `Select an option`
-
-&lt;div style={{ height: &#39;5rem&#39; }} /&gt;
-</code></pre>
-          </div>
-        </div>
-  </div>
-</article>
-<article
-  class="card is-doc no-doc-error"
-  role="listitem"
-  aria-label="Stories">
-  <div class="head">
-    <div class="title">
       <h2><span class="status-dot dot-ok"></span> Guidelines/Responsive</h2>
       <div class="badges">
         
-        <label for="doc-9-guidelines-responsive-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-8-guidelines-responsive-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/guideline/responsive.mdx">guidelines-responsive--stories · ./stories/guideline/responsive.mdx</div>
@@ -22762,7 +22637,7 @@ For the placeholder inside the control, a contextual phrase is acceptable. Avoid
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-9-guidelines-responsive-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-8-guidelines-responsive-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -22883,65 +22758,120 @@ rules.
   aria-label="Stories">
   <div class="head">
     <div class="title">
-      <h2><span class="status-dot dot-ok"></span> UI and agentic surfaces</h2>
+      <h2><span class="status-dot dot-ok"></span> Guidelines/Selection Controls</h2>
       <div class="badges">
         
-        <label for="doc-10-ui-and-agentic-surfaces-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-9-guidelines-selection-controls-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
-    <div class="meta" title="./stories/AgenticSurfaces.mdx">ui-and-agentic-surfaces--stories · ./stories/AgenticSurfaces.mdx</div>
-    <div># UI and agentic surfaces This reflects the state of the industry in Q2 2026, as agentic t...</div>
+    <div class="meta" title="./stories/guideline/inputs-guideline.mdx">guidelines-selection-controls--stories · ./stories/guideline/inputs-guideline.mdx</div>
+    <div># Selection Controls The key decision is when the change takes effect and how many options...</div>
   </div>
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-10-ui-and-agentic-surfaces-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-9-guidelines-selection-controls-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
     
         <div class="panel panel-content">
           <div class="mdx-content">
-            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+            <pre><code>import { Meta, Canvas, Unstyled } from &#39;@storybook/addon-docs/blocks&#39;;
+import * as CheckboxStories from &#39;../Checkbox/checkbox.stories&#39;;
+import * as ToggleStories from &#39;../Toggle/toggle.stories&#39;;
+import * as RadioStories from &#39;../Radio/radio.stories&#39;;
+import * as SelectStories from &#39;../Select/selectv2.stories&#39;;
+import * as OverviewStories from &#39;./selection-controls-overview.stories&#39;;
 
-&lt;Meta title=&quot;UI and agentic surfaces&quot; /&gt;
+&lt;Meta title=&quot;Guidelines/Selection Controls&quot; /&gt;
 
 &lt;style&gt;{`
   .sbdocs-content h2 { margin-top: 5rem; }
   .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
 `}&lt;/style&gt;
 
-# UI and agentic surfaces
+# Selection Controls
 
-This reflects the state of the industry in Q2 2026, as agentic tools are entering the mainstream.
+The key decision is when the change takes effect and how many options can be selected.
 
-## The new interaction landscape
+&lt;Canvas of={OverviewStories.Overview} sourceState=&quot;none&quot; /&gt;
 
-UI has traditionally been the primary surface between users and software. That is changing: the graphical interface is no longer the only point of contact. It is one representation of the system&#39;s state and capabilities.
+## Checkbox vs Toggle vs Radio vs Select
 
-### New surfaces
+### Checkbox: on submit, one or more
 
-Natural language, conversational agents, voice-to-text, and agentic workflows are becoming legitimate interaction surfaces for any system. Sometimes alongside graphical interfaces, sometimes replacing them.
+Use Checkbox when the change takes effect only after the user submits a form (Save, Apply, Create). It works for both enabling a single option and selecting multiple items from a list.
 
-### Designing for autonomous systems
+&lt;Canvas of={CheckboxStories.OptionCheckbox} sourceState=&quot;none&quot; /&gt;
 
-Designing for autonomous systems means designing their behavior, their limits, and the degree of supervision the user retains over them. Components must account for the expression of intent rather than explicit navigation. 
+&lt;Canvas of={CheckboxStories.IndeterminateUseCase} sourceState=&quot;none&quot; /&gt;
 
-### The role of UI
+See [Components/Inputs/Checkbox](?path=/docs/components-inputs-checkbox--guideline) for the full guideline.
 
-The UI remains valuable precisely because it represents the mental model of the systems it exposes. That representation must be accurate, legible, and trustworthy. The UI library is one tool in a broader interaction stack.
+### Toggle: immediate effect
 
-## Designed for humans and tools
+Use Toggle when the change takes effect instantly, with no confirmation step.
 
-Core UI is currently designed for humans. Extending that to tools is the direction we are building toward.
+&lt;Canvas of={ToggleStories.FeatureToggle} sourceState=&quot;none&quot; /&gt;
 
-### Documented intent
+Don&#39;t place a Toggle inside a form with a Save button. The user expects it to act immediately. Wrapping it in a submit flow creates a contradiction. Use a Checkbox instead.
 
-Every component, every rule, and every constraint exists for a reason, and that reason is documented. As AI-assisted development becomes standard, a design system that communicates intent only to human readers leaves half its audience behind. Where possible, these rules are enforced through tooling like a linter.
+See [Components/Inputs/Toggle](?path=/docs/components-inputs-toggle--guideline) for the full guideline.
 
-### A shared body of knowledge
+### Radio: mutually exclusive single choice
 
-The design principles in this Storybook, the component guidelines, the component code, and the composition patterns, from primitives to screens, together form a body of knowledge: not just how to use the library, but why it was built the way it was. That knowledge should be accessible to an AI tool generating a new component, to a developer evaluating a design decision, and to a designer questioning a pattern.
+Use Radio when the user must pick one option from a group of 2 to 4 choices. Radio enforces mutual exclusivity by design: selecting one option automatically deselects the others.
+
+&lt;Canvas of={RadioStories.RadioGroupExample} sourceState=&quot;none&quot; /&gt;
+
+See [Components/Inputs/RadioGroup](?path=/docs/components-inputs-radiogroup--guideline) for the full guideline.
+
+### Select: single choice from a long or variable list
+
+Use Select when the list of options is too long for Radio buttons, or when the options are dynamic. Select also supports search when the number of options exceeds 8.
+
+&lt;Canvas of={SelectStories.ForGuideline} sourceState=&quot;none&quot; /&gt;
+
+A scrollbar appears automatically when options exceed 4. A search bar appears automatically when options exceed 8.
+
+See [Components/Inputs/Select](?path=/docs/components-inputs-select--guideline) for the full guideline.
+
+## Summary
+
+| | Checkbox | Toggle | Radio | Select |
+| --- | :--- | :--- | :--- | :--- |
+| Effect | On form submit | Immediately | On form submit | On form submit |
+| Number of selections | One or more | Single on/off | One from a group | One from a list |
+| Best for | Form options, multi-select lists | Instant settings | 2–4 mutually exclusive choices | Long or dynamic option lists |
+| Used alone | No, always in a form or list | Yes | No, always in a group | Yes |
+
+## Label conventions
+
+**Checkbox** labels use a verb phrase that describes what enabling the option does. The meaning must be clear when the box is checked.
+
+- `Enable versioning` not `Versioning`
+- `Allow public access` not `Public access`
+- `Send email notifications` not `Email notifications`
+
+**Radio** labels name the option itself. A noun or short noun phrase is enough. No verb needed.
+
+- `Governance`, `Compliance`, `None`
+- `Small`, `Medium`, `Large`
+
+**Toggle** labels describe the feature or setting. Use a verb phrase when the label sits to the left of the toggle (`Enable object lock`). Use a short feature name when the toggle sits to the left of the label (`List versions`). Avoid state words in both cases.
+
+**Select** labels identify the field. Place the label above or to the left of the control.
+
+- `Region`, `Storage class`, `Retention mode`
+
+For the placeholder inside the control, a contextual phrase is acceptable. Avoid generic ones that apply to any select.
+
+- `Select a region` or empty, not `Select an option`
+
+&lt;div style={{ height: &#39;5rem&#39; }} /&gt;
 </code></pre>
           </div>
         </div>
@@ -22956,7 +22886,7 @@ The design principles in this Storybook, the component guidelines, the component
       <h2><span class="status-dot dot-ok"></span> Hooks/useMutationsHandler</h2>
       <div class="badges">
         
-        <label for="doc-11-hooks-usemutationshandler-stories-content" class="badge ok as-toggle">view content</label>
+        <label for="doc-10-hooks-usemutationshandler-stories-content" class="badge ok as-toggle">view content</label>
       </div>
     </div>
     <div class="meta" title="./stories/Hooks/useMutationsHandler.mdx">hooks-usemutationshandler--stories · ./stories/Hooks/useMutationsHandler.mdx</div>
@@ -22965,7 +22895,7 @@ The design principles in this Storybook, the component guidelines, the component
 
   <!-- Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="doc-11-hooks-usemutationshandler-stories-content" class="tg tg-content" type="checkbox" hidden />
+  <input id="doc-10-hooks-usemutationshandler-stories-content" class="tg tg-content" type="checkbox" hidden />
 
   <div class="panels">
     
@@ -23093,6 +23023,76 @@ For more information on toastProps, see [here](?path=/docs/components-feedback-t
 - Type: () =&gt; void
 - Description: The callback to call after all the mutations succeeded
 - Optional
+</code></pre>
+          </div>
+        </div>
+  </div>
+</article>
+<article
+  class="card is-doc no-doc-error"
+  role="listitem"
+  aria-label="Stories">
+  <div class="head">
+    <div class="title">
+      <h2><span class="status-dot dot-ok"></span> UI and agentic surfaces</h2>
+      <div class="badges">
+        
+        <label for="doc-11-ui-and-agentic-surfaces-stories-content" class="badge ok as-toggle">view content</label>
+      </div>
+    </div>
+    <div class="meta" title="./stories/AgenticSurfaces.mdx">ui-and-agentic-surfaces--stories · ./stories/AgenticSurfaces.mdx</div>
+    <div># UI and agentic surfaces This reflects the state of the industry in Q2 2026, as agentic t...</div>
+  </div>
+
+  <!-- Hidden toggles must be siblings BEFORE .panels -->
+  
+  <input id="doc-11-ui-and-agentic-surfaces-stories-content" class="tg tg-content" type="checkbox" hidden />
+
+  <div class="panels">
+    
+    
+        <div class="panel panel-content">
+          <div class="mdx-content">
+            <pre><code>import { Meta } from &#39;@storybook/addon-docs/blocks&#39;;
+
+&lt;Meta title=&quot;UI and agentic surfaces&quot; /&gt;
+
+&lt;style&gt;{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+`}&lt;/style&gt;
+
+# UI and agentic surfaces
+
+This reflects the state of the industry in Q2 2026, as agentic tools are entering the mainstream.
+
+## The new interaction landscape
+
+UI has traditionally been the primary surface between users and software. That is changing: the graphical interface is no longer the only point of contact. It is one representation of the system&#39;s state and capabilities.
+
+### New surfaces
+
+Natural language, conversational agents, voice-to-text, and agentic workflows are becoming legitimate interaction surfaces for any system. Sometimes alongside graphical interfaces, sometimes replacing them.
+
+### Designing for autonomous systems
+
+Designing for autonomous systems means designing their behavior, their limits, and the degree of supervision the user retains over them. Components must account for the expression of intent rather than explicit navigation. 
+
+### The role of UI
+
+The UI remains valuable precisely because it represents the mental model of the systems it exposes. That representation must be accurate, legible, and trustworthy. The UI library is one tool in a broader interaction stack.
+
+## Designed for humans and tools
+
+Core UI is currently designed for humans. Extending that to tools is the direction we are building toward.
+
+### Documented intent
+
+Every component, every rule, and every constraint exists for a reason, and that reason is documented. As AI-assisted development becomes standard, a design system that communicates intent only to human readers leaves half its audience behind. Where possible, these rules are enforced through tooling like a linter.
+
+### A shared body of knowledge
+
+The design principles in this Storybook, the component guidelines, the component code, and the composition patterns, from primitives to screens, together form a body of knowledge: not just how to use the library, but why it was built the way it was. That knowledge should be accessible to an AI tool generating a new component, to a developer evaluating a design decision, and to a designer questioning a pattern.
 </code></pre>
           </div>
         </div>
