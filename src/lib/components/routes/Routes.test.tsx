@@ -1,13 +1,20 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Link, MemoryRouter, Route, useLocation } from 'react-router';
+import {
+  Link,
+  MemoryRouter,
+  Outlet,
+  Route,
+  Routes as ReactRouterRoutes,
+  useLocation,
+} from 'react-router';
 import { getWrapper } from '../../testUtils';
 import { Tabs } from '../tabsv2/Tabsv2.component';
 import {
   RoutePatternProvider,
   Routes,
-  toRoutePattern,
+  joinRoutePath,
   useCurrentRoutePattern,
 } from './Routes.component';
 
@@ -130,6 +137,56 @@ describe('Routes', () => {
     );
   });
 
+  it('resolves absolute paths against the enclosing Routes', () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <MemoryRouter initialEntries={['/platform/volumes/new']}>
+          <RoutePatternProvider>
+            <CurrentPattern />
+            <Routes>
+              <Route
+                path="/platform/*"
+                element={
+                  <Routes>
+                    <Route path="/volumes" element={<Outlet />}>
+                      <Route path="/volumes/new" element={<>New volume</>} />
+                    </Route>
+                  </Routes>
+                }
+              />
+            </Routes>
+          </RoutePatternProvider>
+        </MemoryRouter>
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('New volume')).toBeInTheDocument();
+    expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
+      '/platform/volumes/new',
+    );
+  });
+
+  it('misses the segment of a router that is not core-ui Routes', () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <MemoryRouter initialEntries={['/platform/about']}>
+          <RoutePatternProvider>
+            <CurrentPattern />
+            <ReactRouterRoutes>
+              <Route path="/platform/*" element={<MicroApp />} />
+            </ReactRouterRoutes>
+          </RoutePatternProvider>
+        </MemoryRouter>
+      </Wrapper>,
+    );
+
+    expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
+      /^\/about$/,
+    );
+  });
+
   it('renders routes without a provider', () => {
     const { Wrapper } = getWrapper();
     render(
@@ -150,18 +207,15 @@ describe('Routes', () => {
   });
 });
 
-describe('toRoutePattern', () => {
-  it('drops the splat of every parent and keeps index routes out', () => {
-    expect(
-      toRoutePattern([
-        { route: { path: '/platform/*' } },
-        { route: { path: 'volumes/*' } },
-        { route: { index: true } },
-      ] as Parameters<typeof toRoutePattern>[0]),
-    ).toBe('/platform/volumes');
+describe('joinRoutePath', () => {
+  it('appends a relative path to its parent pattern', () => {
+    expect(joinRoutePath('/platform/nodes', ':name/*')).toBe(
+      '/platform/nodes/:name/*',
+    );
   });
 
-  it('returns null without matches', () => {
-    expect(toRoutePattern([])).toBeNull();
+  it('gives the parent pattern for index and layout routes', () => {
+    expect(joinRoutePath('/platform/volumes')).toBe('/platform/volumes');
+    expect(joinRoutePath('')).toBe('/');
   });
 });

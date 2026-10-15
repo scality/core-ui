@@ -12,9 +12,7 @@ import {
 import {
   createRoutesFromChildren,
   Outlet,
-  UNSAFE_RouteContext,
   useRoutes,
-  type RouteMatch,
   type RouteObject,
   type RoutesProps,
 } from 'react-router';
@@ -26,28 +24,34 @@ type RoutePatternRegistry = {
   register: (depth: number, pattern: string) => () => void;
 };
 
-// A micro-app may bundle its own copy of core-ui, so the context object lives
-// on globalThis for the host's provider to reach the remotes' routes. Its value
-// is shared across core-ui versions: change its shape only under a new key.
-const CONTEXT_KEY = Symbol.for('@scality/core-ui/route-pattern-context/v1');
+type RouteScope = { depth: number; prefix: string };
 
-const RoutePatternContext = ((
-  globalThis as typeof globalThis & {
-    [CONTEXT_KEY]?: Context<RoutePatternRegistry | null>;
-  }
-)[CONTEXT_KEY] ??= createContext<RoutePatternRegistry | null>(null));
-
-/** Builds the full route pattern, such as `/nodes/:name/overview`, from the matches of nested routes. */
-export const toRoutePattern = (matches: RouteMatch[]): string | null => {
-  if (!matches.length) {
-    return null;
-  }
-  const paths = matches.map(({ route }, index) => {
-    const path = route.path ?? '';
-    return index < matches.length - 1 ? path.replace(/\/?\*$/, '') : path;
-  });
-  return '/' + paths.join('/').split('/').filter(Boolean).join('/');
+// A micro-app may bundle its own copy of core-ui, so these context objects live
+// on globalThis for the host's routes and provider to reach the remotes' routes.
+// Their values are shared across core-ui versions: change a shape only under a
+// new key.
+const sharedContext = <T,>(name: string, defaultValue: T): Context<T> => {
+  const key = Symbol.for(`@scality/core-ui/${name}`);
+  const global = globalThis as typeof globalThis &
+    Record<symbol, Context<T> | undefined>;
+  return (global[key] ??= createContext(defaultValue));
 };
+
+const RoutePatternContext = sharedContext<RoutePatternRegistry | null>(
+  'route-pattern-context/v1',
+  null,
+);
+
+const RouteScopeContext = sharedContext<RouteScope>('route-scope-context/v1', {
+  depth: 0,
+  prefix: '',
+});
+
+/** Joins a route path to the pattern of its parent routes, such as `/nodes` and `:name/*` into `/nodes/:name/*`. */
+export const joinRoutePath = (prefix: string, path = '') =>
+  '/' + `${prefix}/${path}`.split('/').filter(Boolean).join('/');
+
+const withoutSplat = (pattern: string) => pattern.replace(/\/?\*$/, '');
 
 const deepestPattern = (entries: Map<symbol, Entry>) => {
   let deepest: Entry | undefined;
@@ -96,42 +100,57 @@ export const RoutePatternProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const RoutePatternReporter = () => {
+const RoutePatternReporter = ({ depth, pattern }: Omit<Entry, 'order'>) => {
   const register = useContext(RoutePatternContext)?.register;
-  const { matches } = useContext(UNSAFE_RouteContext);
-  const pattern = toRoutePattern(matches);
 
   useLayoutEffect(() => {
-    if (register && pattern) {
-      return register(matches.length, pattern);
+    if (register) {
+      return register(depth, pattern);
     }
-  }, [register, matches.length, pattern]);
+  }, [register, depth, pattern]);
 
   return null;
 };
 
-const withReporter = (routes: RouteObject[]): RouteObject[] =>
+// react-router resolves an absolute path against the enclosing Routes, not the
+// URL root, so `base` is the pattern of the routes around that Routes.
+const withReporter = (
+  routes: RouteObject[],
+  parent: RouteScope,
+  base: string,
+): RouteObject[] =>
   routes.map(({ Component, element, children, ...route }) => {
+    const pattern = joinRoutePath(
+      route.path?.startsWith('/') ? base : parent.prefix,
+      route.path,
+    );
+    const scope = { depth: parent.depth + 1, prefix: withoutSplat(pattern) };
     const content = Component ? <Component /> : element || <Outlet />;
     return {
       ...route,
       element: (
-        <>
-          <RoutePatternReporter />
+        <RouteScopeContext.Provider value={scope}>
+          <RoutePatternReporter depth={scope.depth} pattern={pattern} />
           {content}
-        </>
+        </RouteScopeContext.Provider>
       ),
-      children: children && withReporter(children),
+      children: children && withReporter(children, scope, base),
     } as RouteObject;
   });
 
 /**
  * Drop-in replacement for react-router's `Routes` that reports the matched route
  * pattern to the closest `RoutePatternProvider`, across nested and federated
- * routers.
+ * routers. Every router between the host and the page must use it: a level
+ * rendered by react-router's `Routes` is missing from the pattern.
  */
-export const Routes = ({ children, location }: RoutesProps) =>
-  useRoutes(withReporter(createRoutesFromChildren(children)), location);
+export const Routes = ({ children, location }: RoutesProps) => {
+  const parent = useContext(RouteScopeContext);
+  return useRoutes(
+    withReporter(createRoutesFromChildren(children), parent, parent.prefix),
+    location,
+  );
+};
 
 /**
  * Returns the full pattern of the deepest route rendered by core-ui `Routes`
