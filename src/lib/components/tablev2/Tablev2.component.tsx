@@ -92,7 +92,12 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
-  status?: 'idle' | 'loading' | 'error' | 'success';
+  /**
+   * Fetch state of the data. Must reflect the actual request: 'idle' or
+   * 'loading' while fetching, 'error' on failure, and 'success' only once the
+   * data is loaded. An empty table with 'success' means "no results".
+   */
+  status: 'idle' | 'loading' | 'error' | 'success';
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -140,7 +145,9 @@ type TableContextType<
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
-  status?: 'idle' | 'loading' | 'error' | 'success';
+  status: 'idle' | 'loading' | 'error' | 'success';
+  /** True when the raw `data` prop is empty, regardless of any active filter. */
+  isDataEmpty: boolean;
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -454,6 +461,7 @@ function Table<
     isAllRowsSelected,
     toggleAllRowsSelected,
     status,
+    isDataEmpty: data.length === 0,
     entityName,
     syncScrollListener,
     setSyncScrollListener,

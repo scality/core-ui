@@ -509,6 +509,7 @@ export const AttachmentTable = <
        `100%` both ways, so `Table` keeps the box it had. */
     <Box container height="100%" width="100%">
       <Table
+        status="success"
         columns={[
           {
             Header: 'Name',
