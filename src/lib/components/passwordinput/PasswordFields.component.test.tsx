@@ -143,6 +143,34 @@ describe('PasswordFields', () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
+  it('does not hold up a submit on required fields the user cannot fill', async () => {
+    const onSubmit = jest.fn();
+    const WithSubmit = ({ children }: { children: ReactNode }) => {
+      const methods = useForm({ mode: 'onChange' });
+      return (
+        <Wrapper>
+          <FormProvider {...methods}>
+            <Form
+              layout={{ kind: 'tab' }}
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
+              <FormSection>{children}</FormSection>
+            </Form>
+          </FormProvider>
+        </Wrapper>
+      );
+    };
+
+    const { container } = render(<PasswordFields required disabled />, {
+      wrapper: WithSubmit,
+    });
+
+    fireEvent.submit(container.querySelector('form')!);
+
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    expect(screen.queryByText('Password is required')).not.toBeInTheDocument();
+  });
+
   it("lets the caller's own confirmation rule override required", async () => {
     const onSubmit = jest.fn();
     const WithSubmit = ({ children }: { children: ReactNode }) => {

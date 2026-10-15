@@ -14,6 +14,11 @@ export type PasswordFieldsProps = {
    * constraint has to live in the schema.
    */
   required?: boolean;
+  /**
+   * Also passed to `register`: react-hook-form keeps evaluating a disabled
+   * field's rules otherwise, so a `required` field left disabled would block
+   * the submit forever.
+   */
   disabled?: boolean;
   copyable?: boolean;
   confirmationRules?: RegisterOptions;
@@ -69,6 +74,7 @@ export const PasswordFields = ({
             onToggleReveal={toggle}
             required={required}
             {...register(names.password, {
+              disabled,
               ...requiredRule(labels.password),
               // The confirmation's rule reads the password, so it has to be re-run
               // when the password changes, but only once the confirmation is dirty —
@@ -101,6 +107,7 @@ export const PasswordFields = ({
                 autoComplete="new-password"
                 type={revealed ? 'text' : 'password'}
                 {...register(names.confirmation, {
+                  disabled,
                   ...requiredRule(labels.confirmation),
                   ...confirmationRules,
                 })}
