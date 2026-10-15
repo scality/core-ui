@@ -8,6 +8,11 @@ import { PasswordFieldSlot, PasswordRow } from './PasswordRow';
 export type PasswordFieldsProps = {
   names?: { password: string; confirmation: string };
   labels?: { password: string; confirmation: string };
+  /**
+   * Marks both fields required and registers the rule. A form with a `resolver`
+   * ignores field-level rules, so there this only draws the asterisk and the
+   * constraint has to live in the schema.
+   */
   required?: boolean;
   disabled?: boolean;
   copyable?: boolean;
