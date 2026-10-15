@@ -1,4 +1,14 @@
-import { useContext, useLayoutEffect, useSyncExternalStore } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type Context,
+  type ReactNode,
+} from 'react';
 import {
   createRoutesFromChildren,
   Outlet,
@@ -11,69 +21,21 @@ import {
 
 type Entry = { depth: number; order: number; pattern: string };
 
-type RoutePatternStore = {
-  entries: Map<symbol, Entry>;
-  listeners: Set<() => void>;
-  current: string | null;
-  order: number;
+type RoutePatternRegistry = {
+  pattern: string | null;
+  register: (depth: number, pattern: string) => () => void;
 };
 
-// Every micro-app bundles its own copy of core-ui, so the store lives on
-// globalThis for the host and its remotes to share one. Its shape is shared
-// across core-ui versions: change it only under a new key version.
-const STORE_KEY = Symbol.for('@scality/core-ui/route-pattern/v1');
+// A micro-app may bundle its own copy of core-ui, so the context object lives
+// on globalThis for the host's provider to reach the remotes' routes. Its value
+// is shared across core-ui versions: change its shape only under a new key.
+const CONTEXT_KEY = Symbol.for('@scality/core-ui/route-pattern-context/v1');
 
-const getStore = (): RoutePatternStore => {
-  const global = globalThis as typeof globalThis & {
-    [STORE_KEY]?: RoutePatternStore;
-  };
-  global[STORE_KEY] ??= {
-    entries: new Map(),
-    listeners: new Set(),
-    current: null,
-    order: 0,
-  };
-  return global[STORE_KEY];
-};
-
-const refresh = (store: RoutePatternStore) => {
-  let deepest: Entry | undefined;
-  store.entries.forEach((entry) => {
-    if (
-      !deepest ||
-      entry.depth > deepest.depth ||
-      (entry.depth === deepest.depth && entry.order > deepest.order)
-    ) {
-      deepest = entry;
-    }
-  });
-  const next = deepest?.pattern ?? null;
-  if (next !== store.current) {
-    store.current = next;
-    store.listeners.forEach((listener) => listener());
+const RoutePatternContext = ((
+  globalThis as typeof globalThis & {
+    [CONTEXT_KEY]?: Context<RoutePatternRegistry | null>;
   }
-};
-
-const register = (depth: number, pattern: string) => {
-  const store = getStore();
-  const id = Symbol();
-  store.entries.set(id, { depth, pattern, order: ++store.order });
-  refresh(store);
-  return () => {
-    store.entries.delete(id);
-    refresh(store);
-  };
-};
-
-const subscribe = (listener: () => void) => {
-  const { listeners } = getStore();
-  listeners.add(listener);
-  return () => {
-    listeners.delete(listener);
-  };
-};
-
-const getSnapshot = () => getStore().current;
+)[CONTEXT_KEY] ??= createContext<RoutePatternRegistry | null>(null));
 
 /** Builds the full route pattern, such as `/nodes/:name/overview`, from the matches of nested routes. */
 export const toRoutePattern = (matches: RouteMatch[]): string | null => {
@@ -87,15 +49,63 @@ export const toRoutePattern = (matches: RouteMatch[]): string | null => {
   return '/' + paths.join('/').split('/').filter(Boolean).join('/');
 };
 
+const deepestPattern = (entries: Map<symbol, Entry>) => {
+  let deepest: Entry | undefined;
+  entries.forEach((entry) => {
+    if (
+      !deepest ||
+      entry.depth > deepest.depth ||
+      (entry.depth === deepest.depth && entry.order > deepest.order)
+    ) {
+      deepest = entry;
+    }
+  });
+  return deepest?.pattern ?? null;
+};
+
+/**
+ * Collects the route patterns reported by core-ui `Routes` below it, so
+ * `useCurrentRoutePattern` can tell which page is shown. Render it once, around
+ * the host app's routes.
+ */
+export const RoutePatternProvider = ({ children }: { children: ReactNode }) => {
+  const entries = useRef(new Map<symbol, Entry>());
+  const order = useRef(0);
+  const [pattern, setPattern] = useState<string | null>(null);
+
+  const register = useCallback((depth: number, routePattern: string) => {
+    const id = Symbol();
+    entries.current.set(id, {
+      depth,
+      pattern: routePattern,
+      order: ++order.current,
+    });
+    setPattern(deepestPattern(entries.current));
+    return () => {
+      entries.current.delete(id);
+      setPattern(deepestPattern(entries.current));
+    };
+  }, []);
+
+  const value = useMemo(() => ({ pattern, register }), [pattern, register]);
+
+  return (
+    <RoutePatternContext.Provider value={value}>
+      {children}
+    </RoutePatternContext.Provider>
+  );
+};
+
 const RoutePatternReporter = () => {
+  const register = useContext(RoutePatternContext)?.register;
   const { matches } = useContext(UNSAFE_RouteContext);
   const pattern = toRoutePattern(matches);
 
   useLayoutEffect(() => {
-    if (pattern) {
+    if (register && pattern) {
       return register(matches.length, pattern);
     }
-  }, [matches.length, pattern]);
+  }, [register, matches.length, pattern]);
 
   return null;
 };
@@ -117,16 +127,16 @@ const withReporter = (routes: RouteObject[]): RouteObject[] =>
 
 /**
  * Drop-in replacement for react-router's `Routes` that reports the matched route
- * pattern, so the host can read it with `useCurrentRoutePattern` across nested
- * and federated routers.
+ * pattern to the closest `RoutePatternProvider`, across nested and federated
+ * routers.
  */
 export const Routes = ({ children, location }: RoutesProps) =>
   useRoutes(withReporter(createRoutesFromChildren(children)), location);
 
 /**
  * Returns the full pattern of the deepest route rendered by core-ui `Routes`
- * anywhere on the page, such as `/platform/nodes/:name/overview`, or `null`
- * when none matches.
+ * under the closest `RoutePatternProvider`, such as
+ * `/platform/nodes/:name/overview`, or `null` when none matches.
  */
 export const useCurrentRoutePattern = () =>
-  useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  useContext(RoutePatternContext)?.pattern ?? null;

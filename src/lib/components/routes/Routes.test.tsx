@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, useLocation } from 'react-router';
+import { Link, MemoryRouter, Route, useLocation } from 'react-router';
 import { getWrapper } from '../../testUtils';
 import { Tabs } from '../tabsv2/Tabsv2.component';
 import {
+  RoutePatternProvider,
   Routes,
   toRoutePattern,
   useCurrentRoutePattern,
@@ -47,10 +48,13 @@ const renderAt = (path: string) => {
   return render(
     <Wrapper>
       <MemoryRouter initialEntries={[path]}>
-        <CurrentPattern />
-        <Routes>
-          <Route path="/platform/*" element={<MicroApp />} />
-        </Routes>
+        <RoutePatternProvider>
+          <CurrentPattern />
+          <Link to="/platform/about">Go to about</Link>
+          <Routes>
+            <Route path="/platform/*" element={<MicroApp />} />
+          </Routes>
+        </RoutePatternProvider>
       </MemoryRouter>
     </Wrapper>,
   );
@@ -90,12 +94,14 @@ describe('Routes', () => {
     render(
       <Wrapper>
         <MemoryRouter initialEntries={['/settings/profile']}>
-          <CurrentPattern />
-          <Routes>
-            <Route path="settings" element={null}>
-              <Route path="profile" element={<>Profile</>} />
-            </Route>
-          </Routes>
+          <RoutePatternProvider>
+            <CurrentPattern />
+            <Routes>
+              <Route path="settings" element={null}>
+                <Route path="profile" element={<>Profile</>} />
+              </Route>
+            </Routes>
+          </RoutePatternProvider>
         </MemoryRouter>
       </Wrapper>,
     );
@@ -106,14 +112,38 @@ describe('Routes', () => {
     );
   });
 
-  it('forgets the pattern of unmounted routes', () => {
-    const { unmount } = renderAt('/platform/about');
+  it('forgets the pattern of routes that unmount', async () => {
+    renderAt('/platform/nodes/node-1/overview');
+
+    await userEvent.click(screen.getByRole('link', { name: 'Go to about' }));
+
     expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
       '/platform/about',
     );
-    unmount();
+  });
 
+  it('reports nothing for a path no route matches', () => {
     renderAt('/elsewhere');
+
+    expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
+      'none',
+    );
+  });
+
+  it('renders routes without a provider', () => {
+    const { Wrapper } = getWrapper();
+    render(
+      <Wrapper>
+        <MemoryRouter initialEntries={['/platform/about']}>
+          <CurrentPattern />
+          <Routes>
+            <Route path="/platform/*" element={<MicroApp />} />
+          </Routes>
+        </MemoryRouter>
+      </Wrapper>,
+    );
+
+    expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByRole('status', { name: 'pattern' })).toHaveTextContent(
       'none',
     );

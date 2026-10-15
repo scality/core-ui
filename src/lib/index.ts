@@ -76,6 +76,7 @@ export { PrettyBytes } from './components/prettybytes/PrettyBytes.component';
 export { Icon } from './components/icon/Icon.component';
 export {
   Routes,
+  RoutePatternProvider,
   useCurrentRoutePattern,
 } from './components/routes/Routes.component';
 export { StatusWrapper } from './components/statuswrapper/Statuswrapper.component';
