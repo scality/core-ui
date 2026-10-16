@@ -17,7 +17,8 @@ export type PasswordInputProps = Omit<
    * about the result looking visibly wrong.
    */
   autoComplete: 'current-password' | 'new-password';
-  copyable?: boolean;
+  /** Copies the field's current value whether or not it is masked. */
+  withCopyButton?: boolean;
 } & (
     | { revealed?: undefined; onToggleReveal?: undefined }
     | { revealed: boolean; onToggleReveal: () => void }
@@ -28,7 +29,7 @@ export type PasswordInputProps = Omit<
  * password: it carries the reveal toggle, and an optional copy button.
  */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ revealed, onToggleReveal, copyable, disabled, ...inputProps }, ref) => {
+  ({ revealed, onToggleReveal, withCopyButton, disabled, ...inputProps }, ref) => {
     const [internalRevealed, setInternalRevealed] = useState(false);
     const { disabled: disabledFromFieldContext } = useFieldContext();
     const fieldRef = useRef<HTMLInputElement | null>(null);
@@ -70,7 +71,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           tooltip={{ overlay: isRevealed ? 'Hide password' : 'Show password' }}
           onClick={toggle}
         />
-        {copyable && (
+        {withCopyButton && (
           <CopyButton
             label="password"
             disabled={isDisabled}

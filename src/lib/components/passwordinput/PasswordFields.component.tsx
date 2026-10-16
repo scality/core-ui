@@ -20,7 +20,8 @@ export type PasswordFieldsProps = {
    * the submit forever.
    */
   disabled?: boolean;
-  copyable?: boolean;
+  /** Applies to the password field only, not the confirmation. */
+  withCopyButton?: boolean;
   confirmationRules?: RegisterOptions;
 };
 
@@ -39,7 +40,7 @@ export const PasswordFields = ({
   labels = { password: 'Password', confirmation: 'Password confirmation' },
   required = false,
   disabled = false,
-  copyable = false,
+  withCopyButton = false,
   confirmationRules,
 }: PasswordFieldsProps) => {
   const { register, trigger, getFieldState, formState } = useFormContext();
@@ -69,7 +70,7 @@ export const PasswordFields = ({
           <PasswordInput
             id={names.password}
             autoComplete="new-password"
-            copyable={copyable}
+            withCopyButton={withCopyButton}
             revealed={revealed}
             onToggleReveal={toggle}
             required={required}

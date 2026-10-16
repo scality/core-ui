@@ -37,7 +37,7 @@ describe('PasswordFields', () => {
   });
 
   it('gives the confirmation no reveal or copy affordance of its own', () => {
-    render(<PasswordFields copyable />, { wrapper: WithForm });
+    render(<PasswordFields withCopyButton />, { wrapper: WithForm });
 
     expect(
       screen.getAllByRole('button', { name: /^(Show|Hide) password$/ }),
@@ -53,7 +53,7 @@ describe('PasswordFields', () => {
   });
 
   it('disables both fields and the shared toggle when asked to', () => {
-    render(<PasswordFields disabled copyable />, { wrapper: WithForm });
+    render(<PasswordFields disabled withCopyButton />, { wrapper: WithForm });
 
     expect(screen.getByLabelText(/^Password$/)).toBeDisabled();
     expect(screen.getByLabelText(/^Password confirmation$/)).toBeDisabled();

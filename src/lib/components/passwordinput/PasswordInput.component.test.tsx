@@ -109,7 +109,7 @@ describe('PasswordInput', () => {
             label="Password"
             disabled
             content={
-              <PasswordInput id="pwd" autoComplete="new-password" copyable />
+              <PasswordInput id="pwd" autoComplete="new-password" withCopyButton />
             }
           />
         </FormSection>
@@ -172,7 +172,7 @@ describe('PasswordInput', () => {
         id="pwd"
         aria-label="Password"
         autoComplete="new-password"
-        copyable
+        withCopyButton
       />,
       { wrapper: Wrapper },
     );
@@ -192,7 +192,7 @@ describe('PasswordInput', () => {
         id="pwd"
         aria-label="Password"
         autoComplete="new-password"
-        copyable
+        withCopyButton
       />,
       { wrapper: Wrapper },
     );

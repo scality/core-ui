@@ -71,7 +71,7 @@ export const SetAPassword: Story = {
               }}
               {...methods.register('username')}
             />
-            <PasswordFields required copyable />
+            <PasswordFields required withCopyButton />
           </FormSection>
         </Form>
       </FormProvider>
@@ -96,7 +96,7 @@ export const InANarrowContainer: Story = {
         id="password"
         aria-label="Password"
         autoComplete="new-password"
-        copyable
+        withCopyButton
       />
     </div>
   ),
