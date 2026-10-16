@@ -269,4 +269,41 @@ describe("CopyButton", () => {
 			).toBeInTheDocument();
 		});
 	});
+
+	it("reads a function source at the click, not at the render", async () => {
+		const writeTextMock = navigator.clipboard.writeText as jest.Mock;
+		writeTextMock.mockResolvedValue(undefined);
+		let secret = "before";
+
+		render(<CopyButton textToCopy={() => secret} />, { wrapper: Wrapper });
+
+		secret = "after";
+		await act(() =>
+			userEvent.click(screen.getByRole("button", { name: "Copy" })),
+		);
+
+		await waitFor(() => {
+			expect(writeTextMock).toHaveBeenCalledWith("after");
+		});
+	});
+
+	it("copies nothing and stays idle when the source is empty", async () => {
+		const writeTextMock = navigator.clipboard.writeText as jest.Mock;
+		writeTextMock.mockResolvedValue(undefined);
+
+		render(<CopyButton textToCopy="" />, { wrapper: Wrapper });
+
+		await act(() =>
+			userEvent.click(screen.getByRole("button", { name: "Copy" })),
+		);
+
+		expect(writeTextMock).not.toHaveBeenCalled();
+		expect(
+			screen.queryByRole("button", { name: "Copied !" }),
+		).not.toBeInTheDocument();
+		expect(screen.getByRole("button", { name: "Copy" })).not.toHaveAttribute(
+			"aria-disabled",
+			"true",
+		);
+	});
 });

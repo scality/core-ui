@@ -92,7 +92,7 @@ export const CopyButton = ({
   ...props
 }: {
   label?: string;
-  textToCopy: string;
+  textToCopy: string | (() => string);
   copyAsHtml?: boolean;
   variant?: 'outline' | 'ghost';
 } & Omit<Props, 'tooltip' | 'label'>) => {
@@ -131,7 +131,13 @@ export const CopyButton = ({
       disabled={props.disabled}
       aria-disabled={isSuccess || props.disabled}
       onClick={() => {
-        if (!isSuccess) copy(textToCopy, copyAsHtml);
+        if (isSuccess) return;
+        // Read at click time, not at render: a caller whose source is an
+        // uncontrolled field does not re-render as it is typed into, so a string
+        // captured at render would be the one from before the typing.
+        const text =
+          typeof textToCopy === 'function' ? textToCopy() : textToCopy;
+        if (text) copy(text, copyAsHtml);
       }}
       type="button"
       tooltip={
