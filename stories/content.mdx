@@ -1,8 +1,311 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ContentExamples from './content.stories';
 
 <Meta title="Style/Content" />
 
+export const UI = ({ children }) => <span className="ui-text">{children}</span>;
+
+<style>{`
+  .sbdocs-content .ui-text { font-family: 'Lato', system-ui, sans-serif; background: #f1f2f4; border-radius: 4px; padding: 1px 5px; font-size: 14px; }
+  .sbdocs-content .write-not td, .sbdocs-content .write-not-rows td, .sbdocs-content .ui-table td { font-family: 'Lato', system-ui, sans-serif; }
+  .sbdocs-content .write-not th:nth-child(1) { color: #1f7a4a; border-bottom: 2px solid #1f7a4a; }
+  .sbdocs-content .write-not th:nth-child(2) { color: #b42318; border-bottom: 2px solid #b42318; }
+  .sbdocs-content .write-not td:nth-child(1) { background: #eaf6ee; }
+  .sbdocs-content .write-not td:nth-child(2) { background: #fdeeed; }
+  .sbdocs-content .write-not td:nth-child(2):empty { background: transparent; }
+  .sbdocs-content .write-not-rows tbody tr:nth-child(1) td { background: #eaf6ee; }
+  .sbdocs-content .write-not-rows tbody tr:nth-child(2) td { background: #fdeeed; }
+  .sbdocs-content .write-not-rows tbody tr:nth-child(1) td:first-child { color: #1f7a4a; font-weight: 700; }
+  .sbdocs-content .write-not-rows tbody tr:nth-child(2) td:first-child { color: #b42318; font-weight: 700; }
+`}</style>
+
+
 # Content
+
+## Voice and tone
+
+These rules apply to the text written for the interface, such as labels, tooltips, helper text, messages, empty states and confirmations.
+
+Capitalization follows the [Typography](?path=/docs/style-typography--stories) rules: sentence case, only the first word and proper nouns take a capital.
+
+A button label or a title also capitalizes the name of the resource, as in the [Button](?path=/docs/components-button--guideline) rules: <UI>{"Create Service Account"}</UI>, <UI>{"Delete Group"}</UI>.
+
+A word that is not a resource stays in sentence case: <UI>{"Monthly capacity report"}</UI>, <UI>{"Create and download Token"}</UI>.
+
+Placeholders follow the Placeholder section below and the [Select](?path=/docs/components-inputs-select--guideline) guideline.
+
+### Point of view
+
+The text describes the object or the situation. It does not address the user as "you", and the product does not speak as "we" or "I".
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Deleting this group requires the Admin role. | You must have the Admin role to delete this group. |
+| The identity provider of the current session cannot be deleted. | You cannot delete the provider you belong to. |
+
+</div>
+
+A message names the resource it is about. When the code does not have the name, the message names at least the type of resource. Getting the name is still preferred.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Group "Billing team" deleted. | Group deleted. |
+| <UI>{"The bucket could not be deleted."}</UI>, when the name is not available | Delete failed |
+
+</div>
+
+A consent checkbox is the one place where "I" is used, because the user is the one speaking: <UI>{"I understand this will remove registered devices"}</UI>.
+
+### Statement and action
+
+A message states what happened in a neutral sentence. A second sentence gives the action, only when the fix is not obvious from the first one.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| The client ID sa-reporting is already in use. Try another name to get a different client ID. |  |
+| The username cannot contain spaces. | The username cannot contain spaces. Remove the spaces. |
+| No service accounts yet. Create a service account to give an application access. |  |
+
+</div>
+
+A message that only informs has no action: <UI>{"The session ended after 15 minutes of inactivity."}</UI> An empty state has an action only when the user can act. Otherwise the statement is enough: <UI>{"No accounts reported yet."}</UI>
+
+A text does not promise a future feature.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Not supported | Not yet supported |
+
+</div>
+
+### Actions
+
+An action is written as an imperative, in helper text, error messages and empty states alike. A page title can be an instruction when the page serves a single action.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Select an LDAP provider to load preset configurations. | Choose your LDAP provider to load preset configurations. |
+| Enter the encryption key | Enter your encryption key |
+
+</div>
+
+When the action alone reads as an order, say what it achieves, only if that is known and true. A reason or a consequence that cannot be verified is left out.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Try another name to get a different client ID. | Choose another name. |
+
+</div>
+
+### Failures
+
+A failure is written as <UI>{"The <object> could not be <action>."}</UI> When the cause is known, it follows with "because". When a new attempt has a real chance to succeed, such as after a network failure or a timeout, the message ends with "Try again."
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| The groups could not be loaded. | An error occurred while loading the groups. |
+| The identity provider could not be deleted. | Failed to delete the identity provider. |
+| The folder "Archive" could not be deleted because it is not empty. | Cannot delete folder: The folder is not empty |
+| The monthly report could not be generated. Try again. | Failed to generate the monthly report. Please try again. |
+
+</div>
+
+### Conditional effects
+
+When an effect depends on conditions, "might" says so: <UI>{"Some services might be unavailable during the upgrade."}</UI>
+
+### Please and sorry
+
+"Please" and "sorry" are not used. "Please" makes a required action sound optional, and "sorry" does not help to solve the problem.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| <UI>{"Select a group"}</UI> (placeholder) | Please select a group |
+
+</div>
+
+### Confirmations and success messages
+
+A confirmation asks a question with the verb of the button, in the title of the modal. The body says what will happen. When a deletion cannot be undone, "delete" comes with "permanently": <UI>{"Delete Group \"Billing team\" permanently?"}</UI>
+
+<Canvas of={ContentExamples.ConfirmationModal} sourceState="none" />
+
+A success message says what was done, without an exclamation mark: <UI>{"Service account sa-reporting created."}</UI>
+
+### Inline validation
+
+A validation message under a field is a short sentence, ending with a period. A required field left empty gets an instruction. A value that is entered but not valid gets a description of the problem.
+
+<Canvas of={ContentExamples.ValidationMessages} sourceState="none" />
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Select a filter type. | A filter type is required. |
+| The passwords do not match. | Both password fields need to be the same |
+
+</div>
+
+### Progress text
+
+A text that shows an action in progress is a verb ending in "-ing", followed by the resource and an ellipsis, with no period.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Loading identity providers... | Please wait... |
+| Checking bucket... |  |
+| Deleting objects... |  |
+
+</div>
+
+In a table, the component writes the loading text from the entity name (<UI>{"Loading groups..."}</UI>). It is not written by hand.
+
+### Dynamic values
+
+The noun agrees with the count.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| 1 user updated | 1 users updated |
+
+</div>
+
+A name chosen by the user, such as a group name, a bucket name or an object key, is quoted with straight double quotes. An identifier generated or derived by the product is not quoted when it contains no space.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Bucket "my-bucket" deleted. | Bucket my-bucket deleted. |
+| The client ID sa-reporting is already in use. | The client ID "sa-reporting" is already in use. |
+
+</div>
+
+Numbers and dates follow the [Format](?path=/docs/style-format--stories) rules.
+
+Text returned by the server is not covered by these rules. When that text is known in advance, such as the error for a name already in use, it is replaced by a text written for the interface.
+
+### Long forms
+
+Negations are written in full.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| cannot | can't |
+| could not | couldn't |
+| does not | doesn't |
+| is not | isn't |
+
+</div>
+
+### Punctuation
+
+A tooltip, a helper text or a message ends with a period. A label, a title, a button or a placeholder does not.
+
+<div className="ui-table">
+
+| Type | Example |
+| --- | --- |
+| Helper text | Letters, digits and hyphens only. |
+| Label | Client ID |
+| Button | Create Service Account |
+
+</div>
+
+An example is introduced with "such as", never "e.g.", and without parentheses.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| The URL is not valid. Use a format such as https://example.com. | Must be a valid URL (e.g., https://example.com) |
+
+</div>
+
+## Vocabulary
+
+### One verb per action
+
+For a given resource, the button, the confirmation and the notification use the same verb. A synonym, even meant to clarify, makes the user wonder whether it is the same action.
+
+<div className="write-not-rows">
+
+| | Button | Confirmation | Notification |
+| --- | --- | --- | --- |
+| Write | Delete Group | Delete Group "Billing team" permanently? | Group "Billing team" deleted. |
+| Not | Delete Group | Remove Group "Billing team" permanently? |  |
+
+</div>
+
+The same rule applies to what the system does on its own: <UI>{"Deleting this identity provider will delete all synced users."}</UI>
+
+### Verb meanings
+
+<div className="ui-table">
+
+| Verb | Meaning | Example |
+| --- | --- | --- |
+| Create | The resource is born in the product. | A user, a group, a service account |
+| Add | Connects something that exists elsewhere. | An identity provider |
+| Import | Brings in resources from an external source. | Users from a directory |
+| Delete | Destroys the resource. | A group |
+| Remove | Takes an item out of a set without destroying it. | A registered device |
+| Detach | Undoes a link. | A role attached to a user |
+| Generate | Creates something computed by the product. | A temporary access link |
+
+</div>
+
+This list covers verbs that are easy to confuse. Other verbs, such as <UI>{"Empty"}</UI> for a bucket or <UI>{"Restore"}</UI> for an archived object, name a specific feature and are used as they are.
+
+### States
+
+A state that can be switched on and off uses one pair of words, in every place of the product. The pair follows the convention of the domain, such as <UI>{"Enabled"}</UI> and <UI>{"Disabled"}</UI> for a setting, or <UI>{"Active"}</UI> and <UI>{"Inactive"}</UI> where the domain says so.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| <UI>{"Enable Notifications"}</UI>, then <UI>{"A disabled rule is saved but not applied."}</UI> | <UI>{"Enable Notifications"}</UI>, then <UI>{"An inactive rule is saved but not applied."}</UI> |
+
+</div>
+
+### Technical vocabulary
+
+Words from the code, the database or the API do not reach the interface: `drop`, `fetch`, `upsert`, HTTP methods, API field names, technical abbreviations. The objects the user handles keep their domain name, such as a bucket, a certificate or an access key.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Delete Synced Users | Drop synced |
+| Blocks new public ACLs on this bucket and its objects. | Rejects PUT requests that include public ACL grants. |
+| Owner | ownerId |
+| Abort incomplete multipart uploads | Abort Incomplete MPU |
+
+</div>
 
 ## Placeholder
 
@@ -13,3 +316,5 @@ Use a generic example. Do not name a third-party product, such as a monitoring t
 - `production-monitoring`, not `ACME Monitor production`
 
 A tooltip can name a third-party product when it helps to understand the field.
+
+<small>Validation messages follow the approach of the [GOV.UK Design System](https://design-system.service.gov.uk/components/error-message/).</small>
