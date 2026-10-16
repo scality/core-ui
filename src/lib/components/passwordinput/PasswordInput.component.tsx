@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { spacing } from '../../spacing';
 import { Button } from '../buttonv2/Buttonv2.component';
 import { CopyButton } from '../buttonv2/CopyButton.component';
@@ -29,18 +29,13 @@ export type PasswordInputProps = Omit<
  * password: it carries the reveal toggle, and an optional copy button.
  */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ revealed, onToggleReveal, withCopyButton, disabled, ...inputProps }, ref) => {
+  (
+    { revealed, onToggleReveal, withCopyButton, disabled, ...inputProps },
+    ref,
+  ) => {
     const [internalRevealed, setInternalRevealed] = useState(false);
     const { disabled: disabledFromFieldContext } = useFieldContext();
-    const fieldRef = useRef<HTMLInputElement | null>(null);
-    const setFieldRef = useCallback(
-      (node: HTMLInputElement | null) => {
-        fieldRef.current = node;
-        if (typeof ref === 'function') ref(node);
-        else if (ref) ref.current = node;
-      },
-      [ref],
-    );
+    const rowRef = useRef<HTMLDivElement>(null);
 
     const isRevealed = revealed ?? internalRevealed;
     const toggle =
@@ -48,10 +43,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     const isDisabled = !!(disabled || disabledFromFieldContext);
 
     return (
-      <PasswordRow>
+      <PasswordRow ref={rowRef}>
         <PasswordFieldSlot>
           <Input
-            ref={setFieldRef}
+            ref={ref}
             fluid
             disabled={disabled}
             type={isRevealed ? 'text' : 'password'}
@@ -76,7 +71,11 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             label="password"
             disabled={isDisabled}
             style={{ flexShrink: 0 }}
-            textToCopy={() => fieldRef.current?.value ?? ''}
+            // The field's own ref slot belongs to the caller, so the value is
+            // read through the row, which holds exactly one input.
+            textToCopy={() =>
+              rowRef.current?.querySelector('input')?.value ?? ''
+            }
           />
         )}
       </PasswordRow>
