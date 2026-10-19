@@ -1,6 +1,29 @@
 {
   "v": 0,
   "components": {
+    "style-contentexamples": {
+      "id": "style-contentexamples",
+      "name": "ContentExamples",
+      "path": "./stories/content.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n   6 | import { Input } from '../src/lib/components/inputv2/inputv2';\n   7 |\n>  8 | export default {\n     | ^\n   9 |   title: 'Style/ContentExamples',\n  10 |   tags: ['!dev', '!autodocs'],\n  11 | };\n\n./stories/content.stories.tsx:\nimport React, { useState } from 'react';\nimport { Modal } from '../src/lib/components/modal/Modal.component';\nimport { Button } from '../src/lib/components/buttonv2/Buttonv2.component';\nimport { Icon } from '../src/lib/components/icon/Icon.component';\nimport { FormGroup, FormSection } from '../src/lib/components/form/Form.component';\nimport { Input } from '../src/lib/components/inputv2/inputv2';\n\nexport default {\n  title: 'Style/ContentExamples',\n  tags: ['!dev', '!autodocs'],\n};\n\nexport const ConfirmationModal = {\n  render: () => {\n    const [isOpen, setIsOpen] = useState(false);\n    return (\n      <>\n        <Button\n          variant=\"secondary\"\n          icon={<Icon name=\"Download\" />}\n          label=\"Download connection details\"\n          onClick={() => setIsOpen(true)}\n        />\n        <Modal\n          isOpen={isOpen}\n          title='Download new connection details for \"prod-paris\"?'\n          close={() => setIsOpen(false)}\n          actions={{\n            cancel: { onClick: () => setIsOpen(false) },\n            confirm: {\n              label: 'Download',\n              variant: 'primary',\n              onClick: () => setIsOpen(false),\n            },\n          }}\n        >\n          The connection details downloaded before will stop working.\n        </Modal>\n      </>\n    );\n  },\n};\n\nexport const ValidationMessages = {\n  render: () => (\n    <FormSection>\n      <FormGroup\n        direction=\"vertical\"\n        label=\"Rule name\"\n        id=\"rule-name\"\n        required\n        content={<Input id=\"rule-name\" value=\"\" onChange={() => {}} />}\n        error=\"Enter a rule name.\"\n        helpErrorPosition=\"bottom\"\n      />\n      <FormGroup\n        direction=\"vertical\"\n        label=\"Days\"\n        id=\"days\"\n        required\n        content={<Input id=\"days\" type=\"number\" value=\"0\" onChange={() => {}} />}\n        error=\"The number of days must be at least 1.\"\n        helpErrorPosition=\"bottom\"\n      />\n    </FormSection>\n  ),\n};\n"
+      },
+      "stories": [
+        {
+          "id": "style-contentexamples--confirmation-modal",
+          "name": "Confirmation Modal",
+          "snippet": "const ConfirmationModal = () => {\n  const [isOpen, setIsOpen] = useState(false);\n  return (\n    <>\n      <Button\n        variant=\"secondary\"\n        icon={<Icon name=\"Download\" />}\n        label=\"Download connection details\"\n        onClick={() => setIsOpen(true)}\n      />\n      <Modal\n        isOpen={isOpen}\n        title='Download new connection details for \"prod-paris\"?'\n        close={() => setIsOpen(false)}\n        actions={{\n          cancel: { onClick: () => setIsOpen(false) },\n          confirm: {\n            label: 'Download',\n            variant: 'primary',\n            onClick: () => setIsOpen(false),\n          },\n        }}\n      >\n        The connection details downloaded before will stop working.\n      </Modal>\n    </>\n  );\n};"
+        },
+        {
+          "id": "style-contentexamples--validation-messages",
+          "name": "Validation Messages",
+          "snippet": "const ValidationMessages = () => (\n  <FormSection>\n    <FormGroup\n      direction=\"vertical\"\n      label=\"Rule name\"\n      id=\"rule-name\"\n      required\n      content={<Input id=\"rule-name\" value=\"\" onChange={() => {}} />}\n      error=\"Enter a rule name.\"\n      helpErrorPosition=\"bottom\"\n    />\n    <FormGroup\n      direction=\"vertical\"\n      label=\"Days\"\n      id=\"days\"\n      required\n      content={<Input id=\"days\" type=\"number\" value=\"0\" onChange={() => {}} />}\n      error=\"The number of days must be at least 1.\"\n      helpErrorPosition=\"bottom\"\n    />\n  </FormSection>\n);"
+        }
+      ],
+      "import": "import { Button, FormGroup, FormSection, Icon, Input, Modal } from '@scality/core-ui';"
+    },
     "guidelines-responsiveoverview": {
       "id": "guidelines-responsiveoverview",
       "name": "ResponsiveOverview",
@@ -865,13 +888,13 @@
               "raw": "Placement",
               "value": [
                 {
-                  "value": "\"left\""
-                },
-                {
                   "value": "\"right\""
                 },
                 {
                   "value": "\"bottom\""
+                },
+                {
+                  "value": "\"left\""
                 },
                 {
                   "value": "\"top\""
@@ -2357,13 +2380,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"linear\" | \"log\"",
+              "raw": "\"log\" | \"linear\"",
               "value": [
                 {
-                  "value": "\"linear\""
+                  "value": "\"log\""
                 },
                 {
-                  "value": "\"log\""
+                  "value": "\"linear\""
                 }
               ]
             }
@@ -3016,13 +3039,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"linear\" | \"log\" | \"symlog\"",
+              "raw": "\"log\" | \"linear\" | \"symlog\"",
               "value": [
                 {
-                  "value": "\"linear\""
+                  "value": "\"log\""
                 },
                 {
-                  "value": "\"log\""
+                  "value": "\"linear\""
                 },
                 {
                   "value": "\"symlog\""
@@ -3953,13 +3976,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"loading\" | \"error\" | \"idle\" | \"success\"",
+              "raw": "\"error\" | \"loading\" | \"idle\" | \"success\"",
               "value": [
                 {
-                  "value": "\"loading\""
+                  "value": "\"error\""
                 },
                 {
-                  "value": "\"error\""
+                  "value": "\"loading\""
                 },
                 {
                   "value": "\"idle\""
@@ -5421,13 +5444,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"horizontal\" | \"vertical\"",
+              "raw": "\"vertical\" | \"horizontal\"",
               "value": [
                 {
-                  "value": "\"horizontal\""
+                  "value": "\"vertical\""
                 },
                 {
-                  "value": "\"vertical\""
+                  "value": "\"horizontal\""
                 }
               ]
             }
@@ -6543,10 +6566,10 @@
               "raw": "TextAreaVariant",
               "value": [
                 {
-                  "value": "\"code\""
+                  "value": "\"text\""
                 },
                 {
-                  "value": "\"text\""
+                  "value": "\"code\""
                 }
               ]
             }
@@ -6825,13 +6848,13 @@
               "raw": "Variant",
               "value": [
                 {
-                  "value": "\"danger\""
-                },
-                {
                   "value": "\"base\""
                 },
                 {
                   "value": "\"selected\""
+                },
+                {
+                  "value": "\"danger\""
                 },
                 {
                   "value": "\"healthy\""
@@ -6962,13 +6985,13 @@
               "raw": "DrawerPosition",
               "value": [
                 {
-                  "value": "\"left\""
-                },
-                {
                   "value": "\"right\""
                 },
                 {
                   "value": "\"bottom\""
+                },
+                {
+                  "value": "\"left\""
                 },
                 {
                   "value": "\"top\""
@@ -7213,13 +7236,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"dialog\" | \"alertdialog\"",
+              "raw": "\"alertdialog\" | \"dialog\"",
               "value": [
                 {
-                  "value": "\"dialog\""
+                  "value": "\"alertdialog\""
                 },
                 {
-                  "value": "\"alertdialog\""
+                  "value": "\"dialog\""
                 }
               ]
             }
@@ -7723,13 +7746,13 @@
               "raw": "Position",
               "value": [
                 {
-                  "value": "\"left\""
-                },
-                {
                   "value": "\"right\""
                 },
                 {
                   "value": "\"bottom\""
+                },
+                {
+                  "value": "\"left\""
                 },
                 {
                   "value": "\"top\""
@@ -8802,13 +8825,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"horizontal\" | \"vertical\"",
+              "raw": "\"vertical\" | \"horizontal\"",
               "value": [
                 {
-                  "value": "\"horizontal\""
+                  "value": "\"vertical\""
                 },
                 {
-                  "value": "\"vertical\""
+                  "value": "\"horizontal\""
                 }
               ]
             }
@@ -9432,13 +9455,13 @@
             "required": true,
             "type": {
               "name": "enum",
-              "raw": "\"loading\" | \"error\" | \"idle\" | \"success\"",
+              "raw": "\"error\" | \"loading\" | \"idle\" | \"success\"",
               "value": [
                 {
-                  "value": "\"loading\""
+                  "value": "\"error\""
                 },
                 {
-                  "value": "\"error\""
+                  "value": "\"loading\""
                 },
                 {
                   "value": "\"idle\""
@@ -9536,7 +9559,7 @@
             ],
             "required": true,
             "type": {
-              "name": "{ status: \"idle\"; } | { status: \"loading\" | \"error\"; data?: { number: number; entities: AttachableEntity<ENTITY_TYPE, ENTITY>[]; } | undefined; } | { status: \"success\"; data: { number: number; entities: AttachableEntity<ENTITY_TYPE, ENTITY>[]; }; }"
+              "name": "{ status: \"idle\"; } | { status: \"error\" | \"loading\"; data?: { number: number; entities: AttachableEntity<ENTITY_TYPE, ENTITY>[]; } | undefined; } | { status: \"success\"; data: { number: number; entities: AttachableEntity<ENTITY_TYPE, ENTITY>[]; }; }"
             }
           },
           "onEntitySearchChange": {
@@ -9607,8 +9630,11 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"primary\" | \"secondary\" | \"danger\" | \"outline\"",
+              "raw": "\"outline\" | \"primary\" | \"secondary\" | \"danger\"",
               "value": [
+                {
+                  "value": "\"outline\""
+                },
                 {
                   "value": "\"primary\""
                 },
@@ -9617,9 +9643,6 @@
                 },
                 {
                   "value": "\"danger\""
-                },
-                {
-                  "value": "\"outline\""
                 }
               ]
             }
@@ -9637,13 +9660,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"default\" | \"inline\"",
+              "raw": "\"inline\" | \"default\"",
               "value": [
                 {
-                  "value": "\"default\""
+                  "value": "\"inline\""
                 },
                 {
-                  "value": "\"inline\""
+                  "value": "\"default\""
                 }
               ]
             }
@@ -9872,10 +9895,10 @@
               "raw": "Orientation",
               "value": [
                 {
-                  "value": "\"horizontal\""
+                  "value": "\"vertical\""
                 },
                 {
-                  "value": "\"vertical\""
+                  "value": "\"horizontal\""
                 }
               ]
             }
@@ -10004,13 +10027,13 @@
               "raw": "Position",
               "value": [
                 {
-                  "value": "\"left\""
-                },
-                {
                   "value": "\"right\""
                 },
                 {
                   "value": "\"bottom\""
+                },
+                {
+                  "value": "\"left\""
                 },
                 {
                   "value": "\"top\""
@@ -10391,13 +10414,13 @@
             "required": false,
             "type": {
               "name": "enum",
-              "raw": "\"default\" | \"inline\"",
+              "raw": "\"inline\" | \"default\"",
               "value": [
                 {
-                  "value": "\"default\""
+                  "value": "\"inline\""
                 },
                 {
-                  "value": "\"inline\""
+                  "value": "\"default\""
                 }
               ]
             }
@@ -10516,16 +10539,16 @@
             "required": true,
             "type": {
               "name": "enum",
-              "raw": "\"time\" | \"relative\" | \"date\" | \"date-time\" | \"date-time-second\" | \"time-second\" | \"day-month-abbreviated-hour-minute\" | \"day-month-abbreviated-hour-minute-second\" | \"day-month-abbreviated-year-hour-minute\" | \"long-date\" | \"long-date-without-weekday\" | \"chart-date\" | \"year-month-day\" | \"month-day\" | \"day-month-abbreviated\" | \"chart-long-term-date\"",
+              "raw": "\"date\" | \"time\" | \"relative\" | \"date-time\" | \"date-time-second\" | \"time-second\" | \"day-month-abbreviated-hour-minute\" | \"day-month-abbreviated-hour-minute-second\" | \"day-month-abbreviated-year-hour-minute\" | \"long-date\" | \"long-date-without-weekday\" | \"chart-date\" | \"year-month-day\" | \"month-day\" | \"day-month-abbreviated\" | \"chart-long-term-date\"",
               "value": [
+                {
+                  "value": "\"date\""
+                },
                 {
                   "value": "\"time\""
                 },
                 {
                   "value": "\"relative\""
-                },
-                {
-                  "value": "\"date\""
                 },
                 {
                   "value": "\"date-time\""
@@ -11146,13 +11169,13 @@
               "raw": "Position",
               "value": [
                 {
-                  "value": "\"left\""
-                },
-                {
                   "value": "\"right\""
                 },
                 {
                   "value": "\"bottom\""
+                },
+                {
+                  "value": "\"left\""
                 },
                 {
                   "value": "\"top\""
@@ -11553,21 +11576,6 @@
               ]
             }
           },
-          "fluid": {
-            "defaultValue": null,
-            "description": "",
-            "name": "fluid",
-            "declarations": [
-              {
-                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
-                "name": "TypeLiteral"
-              }
-            ],
-            "required": false,
-            "type": {
-              "name": "boolean"
-            }
-          },
           "leftIcon": {
             "defaultValue": null,
             "description": "",
@@ -11782,6 +11790,21 @@
             "defaultValue": null,
             "description": "",
             "name": "noPlaceholderPrefix",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "boolean"
+            }
+          },
+          "fluid": {
+            "defaultValue": null,
+            "description": "",
+            "name": "fluid",
             "declarations": [
               {
                 "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
@@ -12211,13 +12234,13 @@
             "required": true,
             "type": {
               "name": "enum",
-              "raw": "\"loading\" | \"error\" | \"idle\" | \"noResult\"",
+              "raw": "\"error\" | \"loading\" | \"idle\" | \"noResult\"",
               "value": [
                 {
-                  "value": "\"loading\""
+                  "value": "\"error\""
                 },
                 {
-                  "value": "\"error\""
+                  "value": "\"loading\""
                 },
                 {
                   "value": "\"idle\""
@@ -12306,6 +12329,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5350
+    "durationMs": 5370
   }
 }
