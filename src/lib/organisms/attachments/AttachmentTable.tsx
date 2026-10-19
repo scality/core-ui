@@ -664,7 +664,10 @@ export const AttachmentTable = <
                     key={`${item.id}${index}`}
                     {...getItemProps({ item, index })}
                   >
-                    <Text>{item.name}</Text>
+                    <ConstrainedText
+                      text={item.name}
+                      tooltipPlacement="right"
+                    />
                   </li>
                 ))}
               {isOpen && filteredEntities.status === 'loading' && (

@@ -12,6 +12,19 @@ jest.mock('@uiw/react-codemirror', () => ({
 }));
 jest.mock('codemirror-json-schema', () => ({ jsonSchema: () => [] }));
 
+// jsdom reports 0 for every offsetWidth/scrollWidth; without this stub `ConstrainedText`
+// always takes its fitting branch, never the overflow branch a narrow panel renders.
+beforeAll(() => {
+  Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+    configurable: true,
+    value: 10,
+  });
+  Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+    configurable: true,
+    value: 1000,
+  });
+});
+
 const { Wrapper } = getWrapper();
 
 const entities = [
@@ -58,6 +71,15 @@ describe('AttachmentTable', () => {
     await userEvent.click(await screen.findByText('User B'));
 
     await waitFor(() => expect(attachedNames()).toContain('User B'));
+  });
+
+  it('gives a suggestion its full name when the list is too narrow to show it', async () => {
+    renderAttachmentTable();
+
+    await userEvent.click(screen.getByRole('searchbox'));
+    await userEvent.hover(await screen.findByText('User B'));
+
+    expect(await screen.findByRole('tooltip')).toHaveTextContent('User B');
   });
 
   it('attaches nothing when the field loses focus on a highlighted suggestion', async () => {
