@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.0s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.3s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -1071,8 +1071,7 @@ import { MemoryRouter } from 'react-router';</code></pre>
 
 Drag `frameWidth` down. At **360px** the row&#39;s `Remove` button drops its label for
 a tooltip; without it the row bleeds out of the panel with nothing to show it,
-since these panels are `overflow: visible`. The next floor is the search box at
-**301px**, which is `SearchInput`&#39;s fixed width and not fixable from here.</div>
+since these panels are `overflow: visible`.</div>
               <pre><code>const NarrowPanel = ({ frameWidth }: { frameWidth: number }) =&gt; {
   const theme = useTheme();
   return (

@@ -9639,7 +9639,7 @@
           "id": "components-attachmenttable--narrow-panel",
           "name": "Narrow Panel",
           "snippet": "const NarrowPanel = ({ frameWidth }: { frameWidth: number }) => {\n  const theme = useTheme();\n  return (\n    <Box\n      data-testid=\"panel-frame\"\n      style={{\n        width: frameWidth,\n        height: '100%',\n        backgroundColor: theme.backgroundLevel4,\n        outline: '1px dashed #888',\n      }}\n      p={'1rem'}\n    >\n      <AttachmentProvider>\n        <AttachmentTable\n          entityName={{ plural: 'users', singular: 'user' }}\n          filteredEntities={{\n            status: 'success',\n            data: {\n              number: 1,\n              entities: [\n                { name: 'jean.dupont@example.com', id: 'a', type: 'USER' },\n                { name: 'storage-operators-emea', id: 'b', type: 'USER' },\n              ],\n            },\n          }}\n          initialAttachmentOperations={[]}\n          onEntitySearchChange={action('onEntitySearchChange')}\n          searchEntityPlaceholder=\"Search user by name\"\n          initiallyAttachedEntities={[\n            { name: 'jean.dupont@example.com', id: 'a', type: 'USER' },\n            { name: 'storage-operators-emea', id: 'b', type: 'USER' },\n            { name: 'svc-backup', id: 'c', type: 'USER' },\n          ]}\n          initiallyAttachedEntitiesStatus={'success'}\n          onAttachmentsOperationsChanged={() => {}}\n        />\n      </AttachmentProvider>\n    </Box>\n  );\n};",
-          "description": "The table in a panel-sized column, which is the shape it ships in.\n\nDrag `frameWidth` down. At **360px** the row's `Remove` button drops its label for\na tooltip; without it the row bleeds out of the panel with nothing to show it,\nsince these panels are `overflow: visible`. The next floor is the search box at\n**301px**, which is `SearchInput`'s fixed width and not fixable from here."
+          "description": "The table in a panel-sized column, which is the shape it ships in.\n\nDrag `frameWidth` down. At **360px** the row's `Remove` button drops its label for\na tooltip; without it the row bleeds out of the panel with nothing to show it,\nsince these panels are `overflow: visible`."
         }
       ],
       "import": "import { AttachmentConfirmationModal, AttachmentProvider, AttachmentTable, Box, Icon } from '@scality/core-ui';\nimport { MemoryRouter } from 'react-router';"
@@ -12368,6 +12368,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 4025
+    "durationMs": 5303
   }
 }
