@@ -14,6 +14,7 @@ export const TabItem = styled.div<{
 }>`
   display: flex;
   align-items: center;
+  gap: ${spacing.r4};
   padding: 0 ${spacing.r24} 0 ${spacing.r24};
   border-radius: ${spacing.r4} ${spacing.r4} 0 0;
   border: ${spacing.r1} solid transparent;

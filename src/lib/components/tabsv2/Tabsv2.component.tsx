@@ -47,10 +47,9 @@ export const TabsContext = createContext<boolean>(false);
 
 const TabIcon = styled(ButtonIcon)`
   color: ${(props) => props.theme.textSecondary};
-`;
-
-const TabBadge = styled.span`
-  margin-left: ${spacing.r4};
+  /* TabItem's gap already supplies r4; ButtonIcon's own r8 would stack on top of
+     it, so trim it to r4 to keep the icon r8 away from the label. */
+  padding-right: ${spacing.r4};
 `;
 
 function Tabs({
@@ -197,11 +196,7 @@ function Tabs({
         ) : (
           <SecondaryText>{label}</SecondaryText>
         )}
-        {textBadge && (
-          <TabBadge>
-            <EmphaseText>{textBadge}</EmphaseText>
-          </TabBadge>
-        )}
+        {textBadge && <EmphaseText>{textBadge}</EmphaseText>}
       </TabItem>
     );
   });
