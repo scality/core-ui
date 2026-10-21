@@ -91,13 +91,10 @@ export const LongLabelInNarrowContainer = {
             padding: 0,
           }}
         >
-          <Stack direction="vertical" gap="r8">
-            <TextBadge
-              text="A very long badge label that wraps onto several lines"
-              variant="infoSecondary"
-            />
-            <TextBadge text="Badge" variant="statusHealthy" />
-          </Stack>
+          <TextBadge
+            text="A very long badge label that wraps onto several lines"
+            variant="infoSecondary"
+          />
         </div>
       </Wrapper>
     );
