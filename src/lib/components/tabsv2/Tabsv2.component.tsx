@@ -48,8 +48,9 @@ export const TabsContext = createContext<boolean>(false);
 const TabIcon = styled(ButtonIcon)`
   color: ${(props) => props.theme.textSecondary};
   /* TabItem's gap already supplies r4; ButtonIcon's own r8 would stack on top of
-     it, so trim it to r4 to keep the icon r8 away from the label. */
-  padding-right: ${spacing.r4};
+     it, so trim it to r4 to keep the icon r8 away from the label. Like
+     ButtonIcon, an icon with no label gets none. */
+  padding-right: ${(props) => (props.$label ? spacing.r4 : '0')};
 `;
 
 function Tabs({
