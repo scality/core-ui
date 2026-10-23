@@ -302,6 +302,7 @@ const SETUP_ACTION_COLUMNS: Column<ActionRow>[] = [
 const SetupActionsTable = ({ rows }: { rows: ActionRow[] }) => (
   <div style={{ height: '17rem' }}>
     <Table
+      status="success"
       columns={SETUP_ACTION_COLUMNS}
       data={rows}
       defaultSortingKey="position"

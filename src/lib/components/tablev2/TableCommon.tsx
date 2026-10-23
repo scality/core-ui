@@ -306,6 +306,8 @@ type TableRowsProps<
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
+let hasWarnedMissingStatus = false;
+
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -318,6 +320,7 @@ export function TableRows<
   const {
     rows,
     status,
+    isDataEmpty,
     entityName,
     rowHeight,
     onBottom,
@@ -353,7 +356,26 @@ export function TableRows<
       />
     );
   }
-  if (status === 'success' || status === undefined) {
+  if ((status as unknown) === undefined && isDataEmpty) {
+    if (!hasWarnedMissingStatus) {
+      hasWarnedMissingStatus = true;
+      console.warn(
+        'Table: the `status` prop is required. Rendering the loading state because no status was provided and the data is empty.',
+      );
+    }
+    const loadingResult = (
+      <UnsuccessfulResult
+        name={entityName}
+        status="loading"
+        locale={locale}
+        rowHeight={rowHeight}
+      />
+    );
+    return typeof children === 'function'
+      ? children(loadingResult)
+      : loadingResult;
+  }
+  if (status === 'success' || (status as unknown) === undefined) {
     if (typeof children === 'function') {
       if (rows.length) {
         return children(
