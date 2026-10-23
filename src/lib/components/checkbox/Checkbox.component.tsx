@@ -8,7 +8,11 @@ import {
 import styled, { css } from 'styled-components';
 import { spacing } from '../../spacing';
 
-import { helpIconReserve, LabelHelpIcon } from '../iconhelper/IconHelper';
+import {
+  helpIconReserve,
+  LabelHelpIcon,
+  trimLabelEnd,
+} from '../iconhelper/IconHelper';
 import { COMPACT_LINE_HEIGHT, Text } from '../text/Text.component';
 import { FocusVisibleStyle } from '../buttonv2/Buttonv2.component';
 
@@ -132,7 +136,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(
                 compact
                 $reserveHelpIcon={hasHelpIcon}
               >
-                {label}
+                {trimLabelEnd(label)}
               </LabelText>
               {hasHelpIcon && (
                 <LabelHelpIcon tooltipMessage={labelHelpTooltip} />
