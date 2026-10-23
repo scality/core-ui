@@ -58,7 +58,7 @@ A message names the resource it is about. When the code does not have the name, 
 
 </div>
 
-A consent checkbox is the one place where "I" is used, because the user is the one speaking: <UI>{"I understand this will remove registered devices"}</UI>.
+A consent checkbox is the one place where "I" is used, because the user is the one speaking: <UI>{"I understand this will remove registered devices."}</UI>
 
 ### Statement and action
 
@@ -187,7 +187,7 @@ The noun agrees with the count.
 
 | Write | Not |
 | --- | --- |
-| 1 user updated | 1 users updated |
+| 1 user updated. | 1 users updated. |
 
 </div>
 
@@ -223,13 +223,30 @@ Negations are written in full.
 
 ### Punctuation
 
-A tooltip, a helper text or a message ends with a period. A label, a title, a button or a placeholder does not.
+A sentence ends with a period, whatever component holds it: a tooltip, a helper text, a message. A fragment does not, such as a label, a title, a button, a placeholder, a formula, or a list item that is a noun phrase.
+
+A sentence has a verb, such as <UI>{"The license is not valid."}</UI> A fragment has none, such as <UI>{"Number of running jobs"}</UI>.
+
+A message that reports what happened is a sentence, even in short form, such as <UI>{"Group \"Billing team\" deleted."}</UI>
+
+When a text holds a fragment and a sentence, both end with a period, such as <UI>{"Read-only. The value comes from the license."}</UI>
+
+A list keeps one form: all its items are sentences, or none are.
+
+<div className="write-not">
+
+| Write | Not |
+| --- | --- |
+| Used capacity / Total capacity | Used capacity / Total capacity. |
+| The license is not valid. | The license is not valid |
+
+</div>
 
 <div className="ui-table">
 
 | Type | Example |
 | --- | --- |
-| Helper text | Letters, digits and hyphens only. |
+| Helper text | Use letters, digits and hyphens only. |
 | Label | Client ID |
 | Button | Create Service Account |
 
