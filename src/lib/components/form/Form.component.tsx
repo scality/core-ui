@@ -39,8 +39,8 @@ type FormProps = Omit<
    * overflowing. It also lays each `FormSection` out as a two-column grid that
    * auto-flips to a stacked single column on narrow widths — there is no
    * breakpoint prop; the flip point is derived from the layout (see below).
-   * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
-   * `TextArea` and other size-driven content keep their fixed width for now.
+   * Note: `Input`, `PasswordInput`, `Select` and `SearchInput` honor the fluid
+   * width — a `TextArea`, sized from its own `cols`, keeps that width.
    *
    * It also declares the Form the `responsive` container, so any
    * `@container responsive` query inside it — `Button iconOnly={number}`, for
