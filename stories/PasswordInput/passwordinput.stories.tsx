@@ -42,7 +42,11 @@ export const Authenticate: Story = {
   },
 };
 
-/** Setting a password: the pair, with the copy affordance on the first field. */
+/**
+ * Setting a password: the pair, with the copy affordance on the first field. The
+ * match rule is the caller's, as it is in any form with a resolver — type two
+ * different values to see the confirmation report it.
+ */
 export const SetAPassword: Story = {
   render: () => {
     const methods = useForm({ mode: 'onChange' });
@@ -71,7 +75,14 @@ export const SetAPassword: Story = {
               }}
               {...methods.register('username')}
             />
-            <PasswordFields required withCopyButton />
+            <PasswordFields
+              required
+              withCopyButton
+              confirmationRules={{
+                validate: (value, { password }) =>
+                  value === password || 'Passwords do not match',
+              }}
+            />
           </FormSection>
         </Form>
       </FormProvider>
