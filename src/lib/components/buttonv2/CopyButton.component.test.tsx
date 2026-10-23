@@ -5,6 +5,14 @@ import React from "react";
 import { getWrapper } from "../../testUtils";
 import { CopyButton } from "./CopyButton.component";
 
+// JSDOM's Blob has no `text()`, so the flavours are read back through FileReader.
+const readBlob = (blob: Blob) =>
+	new Promise<string>((resolve) => {
+		const reader = new FileReader();
+		reader.onload = () => resolve(String(reader.result));
+		reader.readAsText(blob);
+	});
+
 describe("CopyButton", () => {
 	const { Wrapper } = getWrapper();
 	const originalClipboard = navigator.clipboard;
@@ -16,11 +24,15 @@ describe("CopyButton", () => {
 				write: jest.fn(),
 			},
 		});
-		// JSDOM doesn't define ClipboardItem; needed for copyAsHtml path. Stub only — full interface not needed for tests.
-		if (typeof globalThis.ClipboardItem === "undefined") {
-			// @ts-expect-error — intentional stub for JSDOM; global ClipboardItem type expects full interface (getType, types, etc.)
-			globalThis.ClipboardItem = class {};
-		}
+		// JSDOM doesn't define ClipboardItem. The stub keeps the record it is built
+		// with, so a test can read back what each flavour of the clipboard was given.
+		// @ts-expect-error — intentional stub for JSDOM; global ClipboardItem type expects full interface (getType, types, etc.)
+		globalThis.ClipboardItem = class {
+			parts: Record<string, Blob>;
+			constructor(parts: Record<string, Blob>) {
+				this.parts = parts;
+			}
+		};
 	});
 
 	afterEach(() => {
@@ -304,6 +316,25 @@ describe("CopyButton", () => {
 		expect(screen.getByRole("button", { name: "Copy" })).not.toHaveAttribute(
 			"aria-disabled",
 			"true",
+		);
+	});
+
+	it("copyAsHtml: puts the HTML's text, and nothing of its markup, in the plain-text flavour", async () => {
+		const writeMock = navigator.clipboard.write as jest.Mock;
+		writeMock.mockResolvedValueOnce(undefined);
+		const html = "<h2>Title</h2><p>First para.</p><p>Second<br>line</p>";
+
+		render(<CopyButton textToCopy={html} copyAsHtml />, { wrapper: Wrapper });
+
+		await act(() =>
+			userEvent.click(screen.getByRole("button", { name: "Copy" })),
+		);
+		await waitFor(() => expect(writeMock).toHaveBeenCalled());
+
+		const { parts } = writeMock.mock.calls[0][0][0];
+		expect(await readBlob(parts["text/html"])).toBe(html);
+		expect(await readBlob(parts["text/plain"])).toBe(
+			"TitleFirst para.Secondline",
 		);
 	});
 });

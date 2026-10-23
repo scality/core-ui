@@ -47,10 +47,13 @@ export const useClipboard = () => {
     }
 
     if (asHtml) {
-      // Copy as HTML with plain text fallback
-      const el = document.createElement('div');
-      el.innerHTML = text;
-      const plainText = el.innerText;
+      // Copy as HTML with plain text fallback.
+      //
+      // A detached div is no sandbox: assigning text to its innerHTML still
+      // builds real elements, so an `<img onerror>` in the source runs.
+      const plainText =
+        new DOMParser().parseFromString(text, 'text/html').body.textContent ??
+        '';
 
       const clipboardItem = new ClipboardItem({
         'text/html': new Blob([text], { type: 'text/html' }),
