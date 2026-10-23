@@ -19,6 +19,7 @@ import styled from 'styled-components';
 import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import { Routes } from '../routes/Routes.component';
 import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
+import { spacing } from '../../spacing';
 import { ScrollButton } from './ScrollButton';
 import {
   ScrollableContainer,
@@ -46,6 +47,10 @@ export const TabsContext = createContext<boolean>(false);
 
 const TabIcon = styled(ButtonIcon)`
   color: ${(props) => props.theme.textSecondary};
+  /* TabItem's gap already supplies r4; ButtonIcon's own r8 would stack on top of
+     it, so trim it to r4 to keep the icon r8 away from the label. Like
+     ButtonIcon, an icon with no label gets none. */
+  padding-right: ${(props) => (props.$label ? spacing.r4 : '0')};
 `;
 
 function Tabs({
