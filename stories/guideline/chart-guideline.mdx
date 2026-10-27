@@ -1,26 +1,137 @@
-import { Meta } from '@storybook/addon-docs/blocks';
-import { SuccessBanner } from '../banner.stories';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as AnatomyStories from './charts-anatomy.stories';
+import * as StatesStories from './charts-states.stories';
 
 <Meta title="Guidelines/Chart" />
 
-# Charts
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 1.5rem; }
+`}</style>
 
-Used mostly for monitoring-related tasks.
+# Charts and data visualisations
 
-## UI
+A chart turns a set of values into a shape the user can read at a glance.
 
-### Tooltips
+It is the right tool when the values only mean something read against each other.
 
-Don’t depend too heavily on tooltips. They are as providing supplemental or expanded information, but shouldn’t be the only way a user can see the plotted value.
+## When to use a chart
 
-### Elements
+There are two dimensions to it.
 
-- Title
-- Axis
-- Legend
+**When the data is a series.** A series is a set of values whose meaning comes from the comparison between them, over time, across categories, or as parts of a whole.
 
-_produce an example WIP_
+- "Throughput right now" is a number.
 
-## Type
+- "Throughput over the last hour" is a series, because the reader is looking for
+  the trend, the peak and the drop, none of which exist in a single value.
 
-{/* TODO: add Guidelines for charts types and add date format guidelines  here or in format.mdx */}
+**In a dashboard.**
+A dashboard is a set of visualisations read together, in one view, to know the state of something. The reader is monitoring, not acting: they scan, they notice what is out of the ordinary, and they move on.
+
+### When not to use one
+
+- **A single current value.** Write it as a number with its unit. When it is a share of a known total, a `ProgressBar` says it more directly than any chart.
+
+- **Values that are read one by one.** When the reader needs the exact figure per row, needs to sort it or search it, the need is a table, not a chart.
+
+## Anatomy
+
+Every chart in the library is built from the same parts. These are the names used
+throughout this guideline, and they are the names the components use in their
+props.
+
+Hover a number to highlight the part it names.
+
+<Canvas of={AnatomyStories.ChartFrame} />
+
+1. **Header** or **Title**
+
+   - The band above the plot area. It carries the title, and optionally a help tooltip. The help icon sits immediately after the title, not at the far end of the band.
+   - The title names what is measured, and it carries the unit. The ticks hold bare numbers, so a title such as "Network throughput (MB/s)" is the only place the reader learns what the values count.
+   - A chart without a header exists (the `modern` preset drops it), but then the surrounding layout has to name the chart instead.
+
+2. **Plot area.** The region where the marks are drawn. Nothing but marks and
+   grid lines belongs inside it.
+
+3. **Y axis.** The value scale, placed on the **right**. It is made of an axis
+   line, ticks and tick labels.
+
+4. **X axis.** The category or time scale, along the bottom. Its labels are the
+   categories or the timestamps.
+
+5. **Tick, tick label and tick step.**
+
+   - A tick is one graduation of a scale, and the tick label is the text beside it.
+   - The tick step is the distance between two ticks, counted in units of the measure. On 0, 25, 50, 75, 100 the step is 25.
+
+6. **Mark.** The drawn form of a data point: a line segment, a bar, a dot, a
+   cell. The mark is what carries the series color.
+
+7. **Baseline.** The zero line.
+
+   - On a chart with a zero-based axis it coincides with the X axis, which is why bars appear to sit on the axis.
+
+   - On a symmetrical axis it sits in the middle instead, with one series above and its counterpart below.
+
+8. **Legend.**
+
+   - The key mapping each shape and color to a series.
+
+   - It is required as soon as there are two series. With a single series, the title directly names it.
+
+9. **Grid line.** A recessive horizontal rule that carries a tick value across
+   the plot area, so a mark can be read without travelling back to the axis.
+
+### The hover layer
+
+A chart in the product is never a static picture. Hovering it is how the reader
+gets the exact value that the axis can only approximate.
+
+<Canvas of={AnatomyStories.HoverLayer} />
+
+10. **Crosshair.** The vertical marker that follows the pointer on a time chart.
+    When several charts share a time window, the crosshair is shared too, so the
+    same instant is marked on all of them at once.
+11. **Hovered data point.** The sample the tooltip is describing, highlighted on
+    the mark so the reader can see where the numbers come from.
+12. **Tooltip header.** What identifies the hovered position: the timestamp on a
+    time chart, the category otherwise.
+13. **Tooltip item.** One line per series, made of the series color, the series
+    name and the value with its unit.
+
+The tooltip supplements the chart, it does not replace it. A reader who never
+hovers must still be able to read the chart: the shape, the axis and the legend
+carry the meaning, and the tooltip only adds precision.
+
+### Data terms
+
+- **Series.** One entity followed across the chart, such as one disk, one node,
+  one operation type. A series owns its color for as long as it exists.
+- **Data point.** One measured value in a series. On a time chart it is also called a *sample*.
+- **Gap.** A position where no value was measured.
+  - An absence has to read differently from a zero. A measured zero and a missing measurement are different facts, and drawing one as the other is a lie about the data.
+- **Stack.** Several series drawn on top of each other, where the height read is
+  their sum. Stacking answers "what is the total, and who contributes what", and
+  it costs the reader the ability to compare the individual series accurately.
+
+### States
+
+Besides its nominal rendering, a chart has three states:
+
+<Canvas of={StatesStories.ChartStates} />
+
+- **Loading.** The query is in flight, and `isLoading` renders it. The chart keeps its footprint so the page does not move once the data lands.
+- **Error.** The query failed, and `isError` renders it. The reader is told the data could not be retrieved, which is not the same as being shown an empty chart. The chart keeps its frame, so it stays visible that what failed to load is this chart's data and not the page.
+- **Empty.** The query succeeded and returned nothing. This is a fact about the data, not a failure, and the reader has to be able to tell the two apart. The component has no prop for it today: an empty result renders a bare frame, with no axes and no message.
+
+## Forms that read poorly
+
+Circular forms (pie, donut), angular forms (gauges, dials) and stacked areas all
+ask the eye to compare arcs, angles or thicknesses, which it does badly.
+
+A bar chart answers the same question and is read correctly.
+
+<div style={{ height: '5rem' }} />
