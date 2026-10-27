@@ -1,12 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { ReactNode, useState } from 'react';
+import { brand, lineColor1, lineColor2 } from '../../src/lib/style/theme';
 
 /**
  * Annotation diagrams for the Charts guideline.
  *
- * These are schematics, not live charts. They use a neutral wireframe palette
- * on purpose, so the reader never mistakes the diagram for the real UI, and
- * they are drawn in SVG so every callout lands on an exact pixel.
+ * These are schematics, not live charts, drawn in SVG so every callout lands on
+ * an exact pixel. They take their colors from the default theme and the chart
+ * series palette, so the diagram looks like the chart the reader will get. Only
+ * the numbered callouts use a color of their own.
  *
  * Hovering a numbered bullet highlights the part it names and spells it out
  * under the diagram. The numbers match the list in `chart-guideline.mdx`, so
@@ -17,16 +19,16 @@ import { ReactNode, useState } from 'react';
  * in the title, since the ticks carry bare numbers.
  */
 
-const WIREFRAME = {
-  page: '#13131c',
-  panel: '#1d1d2c',
-  surface: '#252538',
-  border: '#2e2e42',
-  tooltipBorder: '#5f5f7e',
-  ink: '#e8e8f0',
-  inkMuted: '#8a8aa3',
-  serieA: '#6f9dd9',
-  serieB: '#c99a6b',
+const COLORS = {
+  page: brand.backgroundLevel1,
+  panel: brand.backgroundLevel3,
+  surface: brand.backgroundLevel2,
+  border: brand.border,
+  tooltipBorder: brand.border,
+  ink: brand.textPrimary,
+  inkMuted: brand.textSecondary,
+  serieA: lineColor1,
+  serieB: lineColor2,
   callout: '#f0b429',
 };
 
@@ -64,7 +66,7 @@ const Frame = ({
       role="img"
       style={{ display: 'block' }}
     >
-      <rect width={width} height={height} fill={WIREFRAME.page} />
+      <rect width={width} height={height} fill={COLORS.page} />
       {children}
     </svg>
   </div>
@@ -77,9 +79,9 @@ const Highlight = ({ zone }: { zone: Zone }) => (
     width={zone.width}
     height={zone.height}
     rx={2}
-    fill={WIREFRAME.callout}
+    fill={COLORS.callout}
     fillOpacity={0.14}
-    stroke={WIREFRAME.callout}
+    stroke={COLORS.callout}
     strokeOpacity={0.8}
   />
 );
@@ -102,8 +104,8 @@ const Bullet = ({
       cx={part.bullet.x}
       cy={part.bullet.y}
       r={active ? 11 : 9}
-      fill={WIREFRAME.callout}
-      stroke={active ? WIREFRAME.ink : 'none'}
+      fill={COLORS.callout}
+      stroke={active ? COLORS.ink : 'none'}
     />
     <text
       x={part.bullet.x}
@@ -112,7 +114,7 @@ const Bullet = ({
       fontFamily={FONT}
       fontSize={11}
       fontWeight={700}
-      fill={WIREFRAME.page}
+      fill={COLORS.page}
       style={{ pointerEvents: 'none' }}
     >
       {String(part.n)}
@@ -135,7 +137,7 @@ const Caption = ({
     textAnchor="middle"
     fontFamily={FONT}
     fontSize={11}
-    fill={part ? WIREFRAME.ink : WIREFRAME.inkMuted}
+    fill={part ? COLORS.ink : COLORS.inkMuted}
   >
     {part ? `${part.n} · ${part.label}` : 'Hover a number to name the part'}
   </text>
@@ -248,8 +250,8 @@ const ChartFrameDiagram = () => {
         width={520}
         height={350}
         rx={4}
-        fill={WIREFRAME.panel}
-        stroke={WIREFRAME.border}
+        fill={COLORS.panel}
+        stroke={COLORS.border}
       />
 
       {active?.zone && <Highlight zone={active.zone} />}
@@ -261,18 +263,18 @@ const ChartFrameDiagram = () => {
         fontFamily={FONT}
         fontSize={13}
         fontWeight={600}
-        fill={WIREFRAME.ink}
+        fill={COLORS.ink}
       >
         Network throughput (MB/s)
       </text>
-      <circle cx={252} cy={51} r={7} fill="none" stroke={WIREFRAME.inkMuted} />
+      <circle cx={252} cy={51} r={7} fill="none" stroke={COLORS.inkMuted} />
       <text
         x={252}
         y={55}
         textAnchor="middle"
         fontFamily={FONT}
         fontSize={9}
-        fill={WIREFRAME.inkMuted}
+        fill={COLORS.inkMuted}
       >
         ?
       </text>
@@ -285,7 +287,7 @@ const ChartFrameDiagram = () => {
           y1={t.y}
           x2={PLOT.right}
           y2={t.y}
-          stroke={on('grid') ? WIREFRAME.callout : WIREFRAME.border}
+          stroke={on('grid') ? COLORS.callout : COLORS.border}
           strokeWidth={on('grid') ? 1.5 : 1}
           strokeDasharray="3 4"
         />
@@ -297,7 +299,7 @@ const ChartFrameDiagram = () => {
         y1={PLOT.top}
         x2={PLOT.right}
         y2={PLOT.bottom}
-        stroke={WIREFRAME.inkMuted}
+        stroke={COLORS.inkMuted}
       />
       {Y_TICKS.map((t) => (
         <g key={`ytick-${t.label}`}>
@@ -306,14 +308,14 @@ const ChartFrameDiagram = () => {
             y1={t.y}
             x2={PLOT.right + 4}
             y2={t.y}
-            stroke={WIREFRAME.inkMuted}
+            stroke={COLORS.inkMuted}
           />
           <text
             x={PLOT.right + 10}
             y={t.y + 4}
             fontFamily={FONT}
             fontSize={10}
-            fill={WIREFRAME.inkMuted}
+            fill={COLORS.inkMuted}
           >
             {t.label}
           </text>
@@ -326,7 +328,7 @@ const ChartFrameDiagram = () => {
         y1={PLOT.bottom}
         x2={PLOT.right}
         y2={PLOT.bottom}
-        stroke={on('baseline') ? WIREFRAME.callout : WIREFRAME.inkMuted}
+        stroke={on('baseline') ? COLORS.callout : COLORS.inkMuted}
         strokeWidth={on('baseline') ? 2.5 : 1}
       />
       {X_TICKS.map((t) => (
@@ -336,7 +338,7 @@ const ChartFrameDiagram = () => {
             y1={PLOT.bottom}
             x2={t.x}
             y2={PLOT.bottom + 4}
-            stroke={WIREFRAME.inkMuted}
+            stroke={COLORS.inkMuted}
           />
           <text
             x={t.x}
@@ -344,7 +346,7 @@ const ChartFrameDiagram = () => {
             textAnchor="middle"
             fontFamily={FONT}
             fontSize={10}
-            fill={WIREFRAME.inkMuted}
+            fill={COLORS.inkMuted}
           >
             {t.label}
           </text>
@@ -355,13 +357,13 @@ const ChartFrameDiagram = () => {
       <polyline
         points={SERIE_A}
         fill="none"
-        stroke={on('mark') ? WIREFRAME.callout : WIREFRAME.serieA}
+        stroke={on('mark') ? COLORS.callout : COLORS.serieA}
         strokeWidth={on('mark') ? 3.5 : 2}
       />
       <polyline
         points={SERIE_B}
         fill="none"
-        stroke={WIREFRAME.serieB}
+        stroke={COLORS.serieB}
         strokeWidth={2}
       />
 
@@ -369,30 +371,23 @@ const ChartFrameDiagram = () => {
       {on('legend') && (
         <Highlight zone={{ x: 62, y: 340, width: 150, height: 22 }} />
       )}
-      <rect x={70} y={346} width={8} height={8} rx={1} fill={WIREFRAME.serieA} />
+      <rect x={70} y={346} width={8} height={8} rx={1} fill={COLORS.serieA} />
       <text
         x={84}
         y={354}
         fontFamily={FONT}
         fontSize={10}
-        fill={WIREFRAME.inkMuted}
+        fill={COLORS.inkMuted}
       >
         Read
       </text>
-      <rect
-        x={140}
-        y={346}
-        width={8}
-        height={8}
-        rx={1}
-        fill={WIREFRAME.serieB}
-      />
+      <rect x={140} y={346} width={8} height={8} rx={1} fill={COLORS.serieB} />
       <text
         x={154}
         y={354}
         fontFamily={FONT}
         fontSize={10}
-        fill={WIREFRAME.inkMuted}
+        fill={COLORS.inkMuted}
       >
         Write
       </text>
@@ -462,20 +457,20 @@ const HoverLayerDiagram = () => {
         y={HOVER_PLOT.top}
         width={HOVER_PLOT.right - HOVER_PLOT.left}
         height={HOVER_PLOT.bottom - HOVER_PLOT.top}
-        fill={WIREFRAME.panel}
-        stroke={WIREFRAME.border}
+        fill={COLORS.panel}
+        stroke={COLORS.border}
       />
 
       <polyline
         points={HOVER_SERIE_A}
         fill="none"
-        stroke={WIREFRAME.serieA}
+        stroke={COLORS.serieA}
         strokeWidth={2}
       />
       <polyline
         points={HOVER_SERIE_B}
         fill="none"
-        stroke={WIREFRAME.serieB}
+        stroke={COLORS.serieB}
         strokeWidth={2}
       />
 
@@ -484,14 +479,14 @@ const HoverLayerDiagram = () => {
         y1={HOVER_PLOT.top}
         x2={CROSSHAIR_X}
         y2={HOVER_PLOT.bottom}
-        stroke={on('crosshair') ? WIREFRAME.callout : WIREFRAME.inkMuted}
+        stroke={on('crosshair') ? COLORS.callout : COLORS.inkMuted}
         strokeWidth={on('crosshair') ? 2.5 : 1}
         strokeDasharray="4 4"
       />
 
       {[
-        { cy: HOVERED_A, fill: WIREFRAME.serieA },
-        { cy: HOVERED_B, fill: WIREFRAME.serieB },
+        { cy: HOVERED_A, fill: COLORS.serieA },
+        { cy: HOVERED_B, fill: COLORS.serieB },
       ].map((p) => (
         <circle
           key={p.cy}
@@ -499,7 +494,7 @@ const HoverLayerDiagram = () => {
           cy={p.cy}
           r={on('point') ? 7 : 5}
           fill={p.fill}
-          stroke={on('point') ? WIREFRAME.callout : WIREFRAME.panel}
+          stroke={on('point') ? COLORS.callout : COLORS.panel}
           strokeWidth={2}
         />
       ))}
@@ -511,8 +506,8 @@ const HoverLayerDiagram = () => {
         width={TOOLTIP.width}
         height={TOOLTIP.height}
         rx={4}
-        fill={WIREFRAME.surface}
-        stroke={WIREFRAME.tooltipBorder}
+        fill={COLORS.surface}
+        stroke={COLORS.tooltipBorder}
         strokeWidth={1.5}
       />
 
@@ -524,7 +519,7 @@ const HoverLayerDiagram = () => {
         fontFamily={FONT}
         fontSize={11}
         fontWeight={600}
-        fill={WIREFRAME.ink}
+        fill={COLORS.ink}
       >
         12:32
       </text>
@@ -533,22 +528,15 @@ const HoverLayerDiagram = () => {
         y1={98}
         x2={TOOLTIP.x + TOOLTIP.width}
         y2={98}
-        stroke={WIREFRAME.tooltipBorder}
+        stroke={COLORS.tooltipBorder}
       />
-      <rect
-        x={226}
-        y={112}
-        width={8}
-        height={8}
-        rx={1}
-        fill={WIREFRAME.serieA}
-      />
+      <rect x={226} y={112} width={8} height={8} rx={1} fill={COLORS.serieA} />
       <text
         x={242}
         y={120}
         fontFamily={FONT}
         fontSize={11}
-        fill={WIREFRAME.inkMuted}
+        fill={COLORS.inkMuted}
       >
         Read
       </text>
@@ -558,24 +546,17 @@ const HoverLayerDiagram = () => {
         textAnchor="end"
         fontFamily={FONT}
         fontSize={11}
-        fill={WIREFRAME.ink}
+        fill={COLORS.ink}
       >
         42 MB/s
       </text>
-      <rect
-        x={226}
-        y={138}
-        width={8}
-        height={8}
-        rx={1}
-        fill={WIREFRAME.serieB}
-      />
+      <rect x={226} y={138} width={8} height={8} rx={1} fill={COLORS.serieB} />
       <text
         x={242}
         y={146}
         fontFamily={FONT}
         fontSize={11}
-        fill={WIREFRAME.inkMuted}
+        fill={COLORS.inkMuted}
       >
         Write
       </text>
@@ -585,7 +566,7 @@ const HoverLayerDiagram = () => {
         textAnchor="end"
         fontFamily={FONT}
         fontSize={11}
-        fill={WIREFRAME.ink}
+        fill={COLORS.ink}
       >
         18 MB/s
       </text>
