@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { ReactNode, useState } from 'react';
-import { brand, lineColor1, lineColor2 } from '../../src/lib/style/theme';
+import { useTheme } from 'styled-components';
+import { CoreUITheme, lineColor1, lineColor2 } from '../../src/lib/style/theme';
 
 /**
  * Annotation diagrams for the Charts guideline.
  *
  * These are schematics, not live charts, drawn in SVG so every callout lands on
- * an exact pixel. They take their colors from the default theme and the chart
+ * an exact pixel. They take their colors from the active theme and the chart
  * series palette, so the diagram looks like the chart the reader will get. Only
  * the numbered callouts use a color of their own.
  *
@@ -19,17 +20,20 @@ import { brand, lineColor1, lineColor2 } from '../../src/lib/style/theme';
  * in the title, since the ticks carry bare numbers.
  */
 
-const COLORS = {
-  page: brand.backgroundLevel1,
-  panel: brand.backgroundLevel3,
-  surface: brand.backgroundLevel2,
-  border: brand.border,
-  tooltipBorder: brand.border,
-  ink: brand.textPrimary,
-  inkMuted: brand.textSecondary,
-  serieA: lineColor1,
-  serieB: lineColor2,
-  callout: '#f0b429',
+const useColors = () => {
+  const theme = useTheme() as CoreUITheme;
+  return {
+    page: theme.backgroundLevel1,
+    panel: theme.backgroundLevel3,
+    surface: theme.backgroundLevel2,
+    border: theme.border,
+    tooltipBorder: theme.border,
+    ink: theme.textPrimary,
+    inkMuted: theme.textSecondary,
+    serieA: lineColor1,
+    serieB: lineColor2,
+    callout: '#f0b429',
+  };
 };
 
 const FONT =
@@ -58,33 +62,39 @@ const Frame = ({
   width: number;
   height: number;
   children: ReactNode;
-}) => (
-  <div style={{ width: '100%', maxWidth: width, margin: '0 auto' }}>
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      width="100%"
-      role="img"
-      style={{ display: 'block' }}
-    >
-      <rect width={width} height={height} fill={COLORS.page} />
-      {children}
-    </svg>
-  </div>
-);
+}) => {
+  const COLORS = useColors();
+  return (
+    <div style={{ width: '100%', maxWidth: width, margin: '0 auto' }}>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        width="100%"
+        role="img"
+        style={{ display: 'block' }}
+      >
+        <rect width={width} height={height} fill={COLORS.page} />
+        {children}
+      </svg>
+    </div>
+  );
+};
 
-const Highlight = ({ zone }: { zone: Zone }) => (
-  <rect
-    x={zone.x}
-    y={zone.y}
-    width={zone.width}
-    height={zone.height}
-    rx={2}
-    fill={COLORS.callout}
-    fillOpacity={0.14}
-    stroke={COLORS.callout}
-    strokeOpacity={0.8}
-  />
-);
+const Highlight = ({ zone }: { zone: Zone }) => {
+  const COLORS = useColors();
+  return (
+    <rect
+      x={zone.x}
+      y={zone.y}
+      width={zone.width}
+      height={zone.height}
+      rx={2}
+      fill={COLORS.callout}
+      fillOpacity={0.14}
+      stroke={COLORS.callout}
+      strokeOpacity={0.8}
+    />
+  );
+};
 
 const Bullet = ({
   part,
@@ -94,33 +104,36 @@ const Bullet = ({
   part: Part;
   active: boolean;
   onHover: (key: string | null) => void;
-}) => (
-  <g
-    onMouseEnter={() => onHover(part.key)}
-    onMouseLeave={() => onHover(null)}
-    style={{ cursor: 'pointer' }}
-  >
-    <circle
-      cx={part.bullet.x}
-      cy={part.bullet.y}
-      r={active ? 11 : 9}
-      fill={COLORS.callout}
-      stroke={active ? COLORS.ink : 'none'}
-    />
-    <text
-      x={part.bullet.x}
-      y={part.bullet.y + 4}
-      textAnchor="middle"
-      fontFamily={FONT}
-      fontSize={11}
-      fontWeight={700}
-      fill={COLORS.page}
-      style={{ pointerEvents: 'none' }}
+}) => {
+  const COLORS = useColors();
+  return (
+    <g
+      onMouseEnter={() => onHover(part.key)}
+      onMouseLeave={() => onHover(null)}
+      style={{ cursor: 'pointer' }}
     >
-      {String(part.n)}
-    </text>
-  </g>
-);
+      <circle
+        cx={part.bullet.x}
+        cy={part.bullet.y}
+        r={active ? 11 : 9}
+        fill={COLORS.callout}
+        stroke={active ? COLORS.ink : 'none'}
+      />
+      <text
+        x={part.bullet.x}
+        y={part.bullet.y + 4}
+        textAnchor="middle"
+        fontFamily={FONT}
+        fontSize={11}
+        fontWeight={700}
+        fill={COLORS.page}
+        style={{ pointerEvents: 'none' }}
+      >
+        {String(part.n)}
+      </text>
+    </g>
+  );
+};
 
 const Caption = ({
   y,
@@ -130,18 +143,21 @@ const Caption = ({
   y: number;
   width: number;
   part?: Part;
-}) => (
-  <text
-    x={width / 2}
-    y={y}
-    textAnchor="middle"
-    fontFamily={FONT}
-    fontSize={11}
-    fill={part ? COLORS.ink : COLORS.inkMuted}
-  >
-    {part ? `${part.n} · ${part.label}` : 'Hover a number to name the part'}
-  </text>
-);
+}) => {
+  const COLORS = useColors();
+  return (
+    <text
+      x={width / 2}
+      y={y}
+      textAnchor="middle"
+      fontFamily={FONT}
+      fontSize={11}
+      fill={part ? COLORS.ink : COLORS.inkMuted}
+    >
+      {part ? `${part.n} · ${part.label}` : 'Hover a number to name the part'}
+    </text>
+  );
+};
 
 /* -------------------------------------------------------------------------- */
 /*                              Diagram: the frame                            */
@@ -238,6 +254,7 @@ const FRAME_PARTS: Part[] = [
 ];
 
 const ChartFrameDiagram = () => {
+  const COLORS = useColors();
   const [hovered, setHovered] = useState<string | null>(null);
   const active = FRAME_PARTS.find((p) => p.key === hovered);
   const on = (key: string) => hovered === key;
@@ -446,6 +463,7 @@ const HOVER_PARTS: Part[] = [
 ];
 
 const HoverLayerDiagram = () => {
+  const COLORS = useColors();
   const [hovered, setHovered] = useState<string | null>(null);
   const active = HOVER_PARTS.find((p) => p.key === hovered);
   const on = (key: string) => hovered === key;
