@@ -50,7 +50,7 @@ Hover a number to highlight the part it names.
 1. **Header** or **Title**
 
    - The band above the plot area. It carries the title, and optionally a help tooltip. The help icon sits immediately after the title, not at the far end of the band.
-   - The title names what is measured, and it carries the unit. The ticks hold bare numbers, so a title such as "Network throughput (MB/s)" is the only place the reader learns what the values count.
+   - The title names what is measured, and the unit appears with it, such as "Network throughput (MB/s)". The ticks hold bare numbers, so the title is the only place the reader learns what the values count.
    - A chart without a header exists (the `modern` preset drops it), but then the surrounding layout has to name the chart instead.
 
 2. **Plot area.** The region where the marks are drawn. Nothing but marks and
@@ -123,9 +123,9 @@ Besides its nominal rendering, a chart has three states:
 
 <Canvas of={StatesStories.ChartStates} />
 
-- **Loading.** The query is in flight, and `isLoading` renders it. The chart keeps its footprint so the page does not move once the data lands.
-- **Error.** The query failed, and `isError` renders it. The reader is told the data could not be retrieved, which is not the same as being shown an empty chart. The chart keeps its frame, so it stays visible that what failed to load is this chart's data and not the page.
-- **Empty.** The query succeeded and returned nothing. This is a fact about the data, not a failure, and the reader has to be able to tell the two apart. The component has no prop for it today: an empty result renders a bare frame, with no axes and no message.
+- **Loading.** The query is in flight. The chart keeps its footprint so the page does not move once the data lands.
+- **Error.** The query failed. The reader is told the data could not be retrieved, which is not the same as being shown an empty chart. The chart keeps its frame, so it stays visible that what failed to load is this chart's data and not the page.
+- **Empty.** The query succeeded and returned nothing. This is a fact about the data, not a failure, and the reader has to be able to tell the two apart.
 
 ## Forms that read poorly
 
