@@ -154,7 +154,7 @@ const Caption = ({
       fontSize={11}
       fill={part ? COLORS.ink : COLORS.inkMuted}
     >
-      {part ? `${part.n} · ${part.label}` : 'Hover a number to name the part'}
+      {part ? `${part.n}: ${part.label}` : 'Hover a number to name the part'}
     </text>
   );
 };
