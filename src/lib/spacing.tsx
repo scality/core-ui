@@ -1,6 +1,7 @@
 import { Children, HTMLAttributes, HTMLProps, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { Box, BoxComponentProps } from './components/box/Box';
+import type { ThemeColor } from './style/theme';
 
 export const spacing = {
   r1: '0.0625rem',
@@ -31,7 +32,7 @@ export const spacing = {
   f32: '32px',
   f36: '36px',
   f40: '40px',
-};
+} as const;
 
 // The two separator treatments. A row Stack draws a full-height rule between
 // its children; a column Stack draws a short dash. They are different shapes,
@@ -118,7 +119,9 @@ export const Stack = ({
   stackBelow?: number;
   children: ReactNode[];
   container?: boolean;
-} & HTMLAttributes<HTMLDivElement>) => {
+  /** Narrower than `HTMLAttributes['color']`, which is `string`. */
+  color?: ThemeColor;
+} & Omit<HTMLAttributes<HTMLDivElement>, 'color'>) => {
   gap = gap || 'r8';
   direction = direction || 'horizontal';
 

@@ -146,4 +146,5 @@ export const iconTable = {
   Astronaut: 'fas faUserAstronaut',
   Microchip: 'fas faMicrochip',
   Tag: 'fas faTag',
+  'Window-restore': 'fas faWindowRestore',
 };

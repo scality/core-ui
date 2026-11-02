@@ -1,7 +1,11 @@
 import { NAN_STRING } from '../../constants';
 import { TooltipDateFormat } from './ChartTooltip';
 import { UnitRange } from '../types';
-import { formatISONumber } from '../../../utils';
+import {
+  formatISONumber,
+  SCIENTIFIC_NOTATION_DECIMALS,
+  SCIENTIFIC_NOTATION_THRESHOLD,
+} from '../../../utils';
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -195,10 +199,9 @@ export const getLogAxis = (
         ? decades
         : // Keep both ends: the axis must state its own bounds even when
           // decades are skipped.
-          [
-            ...decades.filter((_, index) => index % stride === 0),
-            top,
-          ].filter((value, index, all) => all.indexOf(value) === index);
+          [...decades.filter((_, index) => index % stride === 0), top].filter(
+            (value, index, all) => all.indexOf(value) === index,
+          );
 
     if (!withZeroBand) {
       return {
@@ -321,7 +324,8 @@ const symlogTicks = (
   const below = decadesUpTo(bottom);
   const above = decadesUpTo(top);
   // Two sides share the height a one-sided axis gets to itself.
-  const perSide = below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
+  const perSide =
+    below.length > 0 && above.length > 0 ? Math.ceil(maxTicks / 2) : maxTicks;
 
   const scale = createSymlogScale(constant, [bottom, top], [0, 1]);
   const position = (value: number) => scale(value) ?? 0;
@@ -459,11 +463,24 @@ export const formatLogTickValue = (
   return formatDecadeTick(value);
 };
 
-/** A decade's label: `0.001` keeps three decimals, `100` keeps none. */
+/**
+ * A decade's label: `0.001` keeps three decimals, `100` keeps none, and `1e-4` and below
+ * read as the bare power.
+ *
+ * Below 1e-3 `formatISONumber` switches to scientific notation, where `decimals` counts the
+ * digits before the `e` rather than the decimals of the value. A decade is exactly 1 before
+ * the `e`, so the count computed above would pad it with a zero per decade.
+ */
 const formatDecadeTick = (value: number): string => {
   const exponent = Math.log10(value);
   return formatISONumber(value, {
-    decimals: exponent < 0 ? Math.ceil(-exponent) : 0,
+    // A decade is exactly 1 before the `e`, so it needs no digits after the point.
+    decimals:
+      value < SCIENTIFIC_NOTATION_THRESHOLD
+        ? 0
+        : exponent < 0
+          ? Math.ceil(-exponent)
+          : 0,
     fixedDecimals: exponent < 0,
     compact: value >= 10000,
   });
@@ -862,7 +879,16 @@ export const getTooltipDateFormat: (duration: number) => TooltipDateFormat = (
  * - Compact notation for large values (>= 10k)
  */
 export const formatTickValue = (value: number, topValue: number): string => {
-  const decimals = topValue < 1 ? Math.ceil(-Math.log10(topValue)) + 1 : 2;
+  // The count below is derived from the axis magnitude: right for the decimals of the
+  // value, wrong for the digits before the `e`, which is what formatISONumber reads it as
+  // under the threshold — the label would gain a zero per decade. The exponent already
+  // carries the magnitude, so what precedes it keeps the library's own two digits.
+  const decimals =
+    Math.abs(value) < SCIENTIFIC_NOTATION_THRESHOLD
+      ? SCIENTIFIC_NOTATION_DECIMALS
+      : topValue < 1
+        ? Math.ceil(-Math.log10(topValue)) + 1
+        : 2;
   return formatISONumber(value, {
     decimals,
     fixedDecimals: topValue < 1,

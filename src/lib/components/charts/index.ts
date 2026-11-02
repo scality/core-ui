@@ -20,6 +20,16 @@ export type { Alert } from './globalhealthbar/GlobalHealthBar.hooks';
 
 export { Sparkline } from './sparkline/Sparkline';
 
+export { Heatmap } from './heatmap/Heatmap';
+export type {
+  HeatmapProps,
+  DiscreteHeatmapProps,
+  HeatmapRow,
+  HeatmapCell,
+  HeatmapDiscreteScale,
+  HeatmapLength,
+} from './heatmap/Heatmap';
+
 // Legend
 export { ChartLegend } from './legend/ChartLegend';
 export {

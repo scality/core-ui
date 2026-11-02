@@ -49,6 +49,14 @@ Complex tasks should be achievable through interfaces that feel simple. This is 
 
 Rely on recognized patterns and proven conventions. Consistent use across contexts builds user confidence. Deviate only when the use case genuinely requires it.
 
+### Avoid layout shift
+
+Showing, hiding or updating an element must not move the rest of the page.
+
+- Reserve the space of an element that is not always displayed, such as a banner shown after an input or an action bar shown on selection.
+- Give a refreshed value a fixed width, for example by always showing one decimal.
+- Do not use bold for an active state: bold text is wider and pushes the elements next to it.
+
 ### Consistency
 
 Use the same component for the same pattern. The same problem or action should not be solved by different solutions. It creates confusion for users who learn one interaction and encounter a different one elsewhere.

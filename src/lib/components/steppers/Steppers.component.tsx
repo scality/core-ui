@@ -19,16 +19,20 @@ type Props = {
   activeStep: number;
   className?: string;
 };
+const RAIL_PADDING_LEFT = '2rem';
+const STEP_MIN_WIDTH = '18rem';
+export const STEPPERS_WIDTH = `calc(${STEP_MIN_WIDTH} + ${RAIL_PADDING_LEFT})`;
+
 const SteppersContainer = styled.div.withConfig({
   componentId: 'sc-steppers',
 })`
   padding-top: 4rem;
-  padding-left: 2rem;
+  padding-left: ${RAIL_PADDING_LEFT};
 `;
 const StepContainer = styled.div`
   display: flex;
   min-height: 50px;
-  min-width: 20rem;
+  min-width: ${STEP_MIN_WIDTH};
 `;
 const Panel = styled.div`
   display: flex;
@@ -80,6 +84,7 @@ const Circle = styled.div<{
 const StepHeader = styled.span<{ $active?: boolean }>`
   margin-left: ${spacing.r8};
   line-height: 30px;
+  overflow-wrap: anywhere;
   color: ${(props) =>
     props.$active
       ? getThemePropSelector('textPrimary')
@@ -135,7 +140,7 @@ function Step(props: StepProps) {
       <Panel>
         <div
           style={{
-            height: '30px',
+            minHeight: '30px',
             display: 'flex',
             alignItems: 'center',
           }}

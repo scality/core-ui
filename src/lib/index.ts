@@ -74,6 +74,11 @@ export type { TextProps } from './components/text/Text.component';
 export { Card } from './components/card/Card.component';
 export { PrettyBytes } from './components/prettybytes/PrettyBytes.component';
 export { Icon } from './components/icon/Icon.component';
+export {
+  Routes,
+  RoutePatternProvider,
+  useCurrentRoutePattern,
+} from './components/routes/Routes.component';
 export { StatusWrapper } from './components/statuswrapper/Statuswrapper.component';
 export { Stack, Wrap, spacing } from './spacing';
 export { Form, FormSection, FormGroup } from './components/form/Form.component';
@@ -93,5 +98,6 @@ export { InfoMessage } from './components/infomessage/InfoMessage.component';
 export { InputList } from './components/inputlist/InputList.component';
 export { InlineInput } from './components/inlineinput/InlineInput';
 export { UnsuccessfulResult } from './components/UnsuccessfulResult.component';
-export type { CoreUITheme } from './style/theme';
+export { CoreUiThemeProvider } from './components/coreuithemeprovider/CoreUiThemeProvider';
+export type { CoreUITheme, ThemeColor, ThemeColorToken } from './style/theme';
 export { formatISONumber } from './utils';

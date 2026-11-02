@@ -22,19 +22,31 @@ import type {
   GridProps,
   BackgroundProps,
   BordersProps,
+  BorderColorProps,
   TypographyProps,
+  FontSizeProps,
   ShadowProps,
 } from 'styled-system';
+import type { CoreUIProvidedTheme, ThemeColor } from '../../style/theme';
+
+type BorderColorProp =
+  | 'borderColor'
+  | 'borderTopColor'
+  | 'borderRightColor'
+  | 'borderBottomColor'
+  | 'borderLeftColor';
 
 export type BoxComponentProps = LayoutProps &
   FlexboxProps &
   GridProps &
   SpaceProps &
   PositionProps &
-  ColorProps &
-  BackgroundProps &
-  BordersProps &
-  TypographyProps &
+  ColorProps<CoreUIProvidedTheme, ThemeColor> &
+  BackgroundProps<CoreUIProvidedTheme, ThemeColor> &
+  Omit<BordersProps, BorderColorProp> &
+  BorderColorProps<CoreUIProvidedTheme, ThemeColor> &
+  Omit<TypographyProps, 'fontSize'> &
+  FontSizeProps<CoreUIProvidedTheme> &
   ShadowProps & {
     gap?: string | number;
     /**

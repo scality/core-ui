@@ -1,3 +1,5 @@
+// Makes the `declare module` below augment styled-components instead of shadowing it.
+import type {} from 'styled-components';
 import { lighten, darken } from 'polished';
 //== Colors
 export const hotPink = '#E40046';
@@ -56,6 +58,40 @@ export type CoreUITheme = {
   textReverse: string;
   textLink: string;
 };
+
+/** A colour token. The only colour type safe to index the theme object with. */
+export type ThemeColorToken = keyof CoreUITheme;
+
+/** @deprecated Renamed to `ThemeColorToken`. */
+export type ThemeColors = ThemeColorToken;
+
+/**
+ * A colour for a styled-system prop: a token, or a keyword that defers to the
+ * context. No raw colour — one outside the theme cannot follow a rebrand.
+ */
+export type ThemeColor =
+  ThemeColorToken | 'currentColor' | 'inherit' | 'transparent';
+
+/**
+ * What `CoreUiThemeProvider` installs: the tokens, plus the styled-system scales.
+ * Kept out of `CoreUITheme` because themes are authored flat and branded by
+ * spreading one — a `colors` field folded in would be carried over stale.
+ */
+export type CoreUIProvidedTheme = CoreUITheme & {
+  colors: CoreUITheme;
+  space: typeof space;
+  fontSizes: typeof fontSize;
+};
+
+// The scales are optional: this same type constrains what ThemeProvider accepts,
+// and themes are authored flat.
+declare module 'styled-components' {
+  export interface DefaultTheme extends CoreUITheme {
+    colors?: CoreUITheme;
+    space?: typeof space;
+    fontSizes?: typeof fontSize;
+  }
+}
 
 export const coreUIAvailableThemesNames = [
   'darkRebrand',
@@ -192,8 +228,6 @@ export const defaultTheme = coreUIAvailableThemes;
 
 export const brand = coreUIAvailableThemes.darkRebrand;
 
-export type ThemeColors = keyof CoreUITheme;
-
 // LineChart colors
 export const lineColor1 = '#A14FBF';
 export const lineColor2 = '#BE9A40';
@@ -215,7 +249,7 @@ export const chartColors = {
   lineColor6,
   lineColor7,
   lineColor8,
-};
+} as const;
 
 // The trailing generic is load-bearing on both: a family name with nothing
 // after it falls back to the browser's default font, which is a serif.
@@ -231,7 +265,7 @@ export const fontSize = {
   huge: '1.57rem',
   // no use case for the moment
   massive: '1.71rem', // no use case for the moment
-};
+} as const;
 
 /**
  * @deprecated
@@ -259,7 +293,7 @@ export const fontWeight = {
   base: '400',
   semibold: '600',
   bold: '700',
-};
+} as const;
 
 /**
  * @deprecated
@@ -278,7 +312,7 @@ export const padding = {
   base: '16px',
   large: '20px',
   larger: '24px',
-};
+} as const;
 
 /**
  * @deprecated
@@ -310,7 +344,7 @@ export const svgSize = {
   larger: '22px',
   huge: '30px',
   massive: '40px',
-};
+} as const;
 export const zIndex = {
   tooltip: 9990,
   notification: 9000,
@@ -322,7 +356,7 @@ export const zIndex = {
   sidebar: 100,
   scrollbarButton: 2,
   base: 1,
-};
+} as const;
 //navbar
 export const navbarHeight = '3rem';
 export const navbarItemWidth = '4.286rem';
