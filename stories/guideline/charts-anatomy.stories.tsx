@@ -33,6 +33,7 @@ const useColors = () => {
     serieA: lineColor1,
     serieB: lineColor2,
     callout: '#f0b429',
+    calloutInk: '#1a1a1a',
   };
 };
 
@@ -126,7 +127,7 @@ const Bullet = ({
         fontFamily={FONT}
         fontSize={11}
         fontWeight={700}
-        fill={COLORS.page}
+        fill={COLORS.calloutInk}
         style={{ pointerEvents: 'none' }}
       >
         {String(part.n)}
