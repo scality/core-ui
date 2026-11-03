@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.3s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -15754,8 +15754,6 @@ const frameStyle: React.CSSProperties = {
 
 const captionStyle: React.CSSProperties = {
   fontSize: &#39;0.75rem&#39;,
-  textTransform: &#39;uppercase&#39;,
-  letterSpacing: &#39;0.05em&#39;,
   opacity: 0.5,
   marginBottom: &#39;0.5rem&#39;,
 };
@@ -17523,8 +17521,6 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
 
   const labelStyle: React.CSSProperties = {
     fontSize: &#39;0.75rem&#39;,
-    textTransform: &#39;uppercase&#39;,
-    letterSpacing: &#39;0.05em&#39;,
     opacity: 0.5,
     marginBottom: &#39;0.75rem&#39;,
   };
@@ -21338,8 +21334,6 @@ toggle: boolean</code></pre>
               <pre><code>const AllStates = () =&gt; {
   const labelStyle: React.CSSProperties = {
     fontSize: &#39;0.75rem&#39;,
-    textTransform: &#39;uppercase&#39;,
-    letterSpacing: &#39;0.05em&#39;,
     opacity: 0.5,
     marginBottom: &#39;0.75rem&#39;,
   };
@@ -22199,8 +22193,6 @@ const frameStyle: React.CSSProperties = {
 
 const captionStyle: React.CSSProperties = {
   fontSize: &#39;0.75rem&#39;,
-  textTransform: &#39;uppercase&#39;,
-  letterSpacing: &#39;0.05em&#39;,
   opacity: 0.5,
   marginBottom: &#39;0.5rem&#39;,
 };
@@ -22933,7 +22925,7 @@ A message names the resource it is about. When the code does not have the name, 
 
 &lt;/div&gt;
 
-A consent checkbox is the one place where &quot;I&quot; is used, because the user is the one speaking: &lt;UI&gt;{&quot;I understand this will remove registered devices&quot;}&lt;/UI&gt;.
+A consent checkbox is the one place where &quot;I&quot; is used, because the user is the one speaking: &lt;UI&gt;{&quot;I understand this will remove registered devices.&quot;}&lt;/UI&gt;
 
 ### Statement and action
 
@@ -23062,7 +23054,7 @@ The noun agrees with the count.
 
 | Write | Not |
 | --- | --- |
-| 1 user updated | 1 users updated |
+| 1 user updated. | 1 users updated. |
 
 &lt;/div&gt;
 
@@ -23098,13 +23090,30 @@ Negations are written in full.
 
 ### Punctuation
 
-A tooltip, a helper text or a message ends with a period. A label, a title, a button or a placeholder does not.
+A sentence ends with a period, whatever component holds it: a tooltip, a helper text, a message. A fragment does not, such as a label, a title, a button, a placeholder, a formula, or a list item that is a noun phrase.
+
+A sentence has a conjugated verb, such as &lt;UI&gt;{&quot;The license is not valid.&quot;}&lt;/UI&gt; A fragment has none, such as &lt;UI&gt;{&quot;Number of running jobs&quot;}&lt;/UI&gt;.
+
+A message that reports what happened is a sentence, even in short form, such as &lt;UI&gt;{&quot;Group \&quot;Billing team\&quot; deleted.&quot;}&lt;/UI&gt;
+
+When a text holds a fragment and a sentence, both end with a period, such as &lt;UI&gt;{&quot;Read-only. The value comes from the license.&quot;}&lt;/UI&gt;
+
+A list keeps one form: all its items are sentences, or none are.
+
+&lt;div className=&quot;write-not&quot;&gt;
+
+| Write | Not |
+| --- | --- |
+| Used capacity / Total capacity | Used capacity / Total capacity. |
+| The license is not valid. | The license is not valid |
+
+&lt;/div&gt;
 
 &lt;div className=&quot;ui-table&quot;&gt;
 
 | Type | Example |
 | --- | --- |
-| Helper text | Letters, digits and hyphens only. |
+| Helper text | Use letters, digits and hyphens only. |
 | Label | Client ID |
 | Button | Create Service Account |
 
@@ -23458,7 +23467,7 @@ All UI text must use **sentence case**: capitalize only the first word and prope
 
 Exception: when displaying a list of resources (buckets, nodes, accounts…), each item may be capitalized as a proper noun if it represents a named entity.
 
-This rule is enforced by the `technical-sentence-case` ESLint rule.
+Do not use a full uppercase style. An uppercase label is harder to read than the same label in sentence case. An acronym keeps its capitals, such as S3, LDAP or URL.
 
 ## Text overflow
 
