@@ -154,7 +154,10 @@ const SelectStyle = styled(Select)`
       padding: 0;
       overflow: hidden;
       ${({ isDefault, itemsPerScrollWindow }) => {
-        const optionHeight = isDefault ? spacing.r32 : spacing.r24;
+        // Has to be the option height the rows are actually drawn at, which
+        // MenuList also measures react-window's rows with -- a smaller value
+        // here silently caps the window below itemsPerScrollWindow.
+        const optionHeight = isDefault ? spacing.r40 : spacing.r24;
         return `max-height: calc(${optionHeight} * ${itemsPerScrollWindow} + ${optionHeight} / 2);`;
       }}
 
@@ -241,6 +244,30 @@ const SelectStyle = styled(Select)`
           align-items: center;
           width: stretch;
           padding: ${spacing.r4} ${spacing.r8} ${spacing.r4} ${spacing.r16};
+
+          &.option-value-wrapper--grouped {
+            padding-left: ${spacing.r32};
+          }
+        }
+      }
+
+      div > .react-window-option > .sc-select__group-heading,
+      .sc-select__group-heading {
+        box-sizing: border-box;
+        height: ${({ isDefault }) => (isDefault ? spacing.r40 : spacing.r24)};
+        display: flex;
+        align-items: center;
+        padding: 0 ${spacing.r8} 0 ${spacing.r16};
+        background-color: ${getThemePropSelector('backgroundLevel1')};
+        color: ${getThemePropSelector('textSecondary')};
+        font-weight: ${fontWeight.bold};
+        cursor: default;
+        border-top: ${spacing.r1} solid ${getThemePropSelector('border')};
+        border-bottom: ${spacing.r1} solid
+          ${getThemePropSelector('backgroundLevel3')};
+
+        &.sc-select__group-heading--first {
+          border-top: none;
         }
       }
 
@@ -248,16 +275,28 @@ const SelectStyle = styled(Select)`
         isDefault &&
         `
           div > .react-window-option:first-of-type > .sc-select__option,
-          .sc-select__option:first-of-type {
+          div > .react-window-option:first-of-type > .sc-select__group-heading,
+          .sc-select__option:first-of-type,
+          .sc-select__group-heading:first-of-type {
             border-radius: ${spacing.r4} ${spacing.r4} 0 0;
           }
 
           div > .react-window-option:last-of-type > .sc-select__option,
+          div > .react-window-option:last-of-type > .sc-select__group-heading,
           .sc-select__option:last-of-type {
             border-bottom: ${spacing.r1} solid transparent;
             border-radius: 0 0 ${spacing.r4} ${spacing.r4};
           }
         `}
+    }
+
+    .sc-select__group-descriptions {
+      position: absolute;
+      width: ${spacing.r1};
+      height: ${spacing.r1};
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
   }
 `;

@@ -70,7 +70,10 @@ export const getContrastText = (
     const lighterText = primaryLum >= reverseLum ? textPrimary : textReverse;
     const darkerText = primaryLum >= reverseLum ? textReverse : textPrimary;
 
-    const lighterContrast = wcagContrastRatio(primaryLum >= reverseLum ? primaryLum : reverseLum, bgLum);
+    const lighterContrast = wcagContrastRatio(
+      primaryLum >= reverseLum ? primaryLum : reverseLum,
+      bgLum,
+    );
 
     return lighterContrast >= CONTRAST_THRESHOLD ? lighterText : darkerText;
   } catch {
@@ -100,24 +103,39 @@ type FormatISONumberOptions = {
 };
 
 /**
+ * Below this, `formatISONumber` switches to scientific notation — and with it `decimals`
+ * changes meaning: above the threshold it counts the digits after the point in the value,
+ * below it the digits after the point in the part before the `e`. Exported because a
+ * caller computing `decimals` has to know which of the two it is computing.
+ */
+export const SCIENTIFIC_NOTATION_THRESHOLD = 0.001;
+
+/** `formatISONumber`'s own `decimals` default, and what it keeps before the `e`. */
+export const SCIENTIFIC_NOTATION_DECIMALS = 2;
+
+/**
  * Formats a number to ISO 80000-1 format:
  * - Space as thousands separator
  * - Dot as decimal separator
  * - Optional compact notation (10K, 1M, etc.)
  * - Fractional values: enough decimals to keep two significant digits
- * - Very small values (< 0.001): scientific notation, `decimals` mantissa digits
+ * - Very small values (< 0.001): scientific notation, `decimals` digits before the `e`
  */
 export const formatISONumber = (
   value: number,
   options: FormatISONumberOptions = {},
 ): string => {
-  const { decimals = 2, compact = false, fixedDecimals = false } = options;
+  const {
+    decimals = SCIENTIFIC_NOTATION_DECIMALS,
+    compact = false,
+    fixedDecimals = false,
+  } = options;
 
   if (value === 0) return '0';
 
   const absValue = Math.abs(value);
 
-  if (absValue < 0.001) {
+  if (absValue < SCIENTIFIC_NOTATION_THRESHOLD) {
     // Bounded: float noise lands here often, and an unbounded mantissa prints
     // all seventeen digits of `0.1 + 0.2 - 0.3`.
     return value.toExponential(decimals);

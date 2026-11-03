@@ -62,6 +62,7 @@ export function SingleSelectableContent<
   }
 
   const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const { hasScrollbar } = useTableScrollbar();
   const listRef = useRef<FixedSizeList<Row<DATA_ROW>[]>>(null);
   const { headerGroups, prepareRow, rows, setRowHeight } =
     useTableContext<DATA_ROW>();
@@ -182,9 +183,6 @@ export function SingleSelectableContent<
     [selectedId, separationLineVariant, isSelectable],
   );
 
-  const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
-    useTableScrollbar();
-
   return (
     <>
       <div className="thead" role="rowgroup">
@@ -193,9 +191,8 @@ export function SingleSelectableContent<
             {...headerGroup.getHeaderGroupProps()}
             ref={headerRef}
             $separationLineVariant={separationLineVariant}
-            $hasScrollBar={hasScrollbar}
-            $scrollBarWidth={scrollBarWidth}
             $rowHeight={rowHeight}
+            $hasScrollBar={hasScrollbar}
             style={{ overflow: 'hidden' }}
           >
             {headerGroup.headers.map((column) => {
@@ -237,7 +234,7 @@ export function SingleSelectableContent<
           </HeadRow>
         ))}
       </div>
-      <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
+      <TableBody role="rowgroup" className="tbody">
         <TableRows
           locale={locale}
           children={children}

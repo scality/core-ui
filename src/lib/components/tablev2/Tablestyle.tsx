@@ -122,7 +122,6 @@ export const TableHeader = styled.div<{
 
 type HeadRowType = {
   $hasScrollBar?: boolean;
-  $scrollBarWidth: number;
   $rowHeight: TableHeightKeyType;
   $separationLineVariant: TableVariantType;
 };
@@ -133,10 +132,13 @@ export const HeadRow = styled.div<HeadRowType>`
   align-items: center;
   gap: ${spacing.r16};
   height: 2.286rem;
-  width: ${(props) =>
-    props.$hasScrollBar
-      ? `calc(100% - ${props.$scrollBarWidth}px - ${borderSize} )!important` // -4px for border
-      : `calc(100% - ${borderSize} ) !important`};
+  width: calc(100% - ${borderSize});
+  /*
+   * The head row sits outside the body's scroll container, so its track would
+   * otherwise be a scrollbar's width different from the body's. Stable, not
+   * auto, because this element is overflow hidden and never shows its own bar.
+   */
+  scrollbar-gutter: ${(props) => (props.$hasScrollBar ? 'stable' : 'auto')};
   height: ${(props) => tableRowHeight[props.$rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};

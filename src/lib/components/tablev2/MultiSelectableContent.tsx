@@ -126,10 +126,8 @@ export const MultiSelectableContent = <
     currentRow.toggleRowSelected(!currentRow.isSelected);
   };
 
-  const { hasScrollbar, scrollBarWidth, handleScrollbarWidth } =
-    useTableScrollbar();
-
   const { headerRef } = useSyncedScroll<DATA_ROW>();
+  const { hasScrollbar } = useTableScrollbar();
 
   /**
    * These values change identity on (almost) every render. We read them through refs so the row
@@ -243,10 +241,9 @@ export const MultiSelectableContent = <
         {headerGroups.map((headerGroup) => (
           <HeadRow
             {...headerGroup.getHeaderGroupProps()}
-            $hasScrollBar={hasScrollbar}
-            $scrollBarWidth={scrollBarWidth}
             $rowHeight={rowHeight}
             $separationLineVariant={separationLineVariant}
+            $hasScrollBar={hasScrollbar}
             ref={headerRef}
           >
             {headerGroup.headers.map((column) => {
@@ -310,7 +307,7 @@ export const MultiSelectableContent = <
         ))}
       </div>
 
-      <TableBody role="rowgroup" className="tbody" ref={handleScrollbarWidth}>
+      <TableBody role="rowgroup" className="tbody">
         <TableRows
           locale={locale}
           children={children}

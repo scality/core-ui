@@ -1,7 +1,33 @@
 /// <reference path="./Stepper.component.d.ts" />
 import { createContext, useContext, useState, useCallback, useMemo } from 'react';
-import { Steppers } from './Steppers.component';
+import styled from 'styled-components';
+import { Steppers, STEPPERS_WIDTH } from './Steppers.component';
+import { PAGE_FORM_WIDTH } from '../form/Form.constants';
 import { Box } from '../box/Box';
+
+const STEP_GAP_PX = 32;
+
+const RAIL_COLUMN = `calc(${STEPPERS_WIDTH} + ${STEP_GAP_PX}px)`;
+
+const Rail = styled(Steppers)`
+  padding-right: ${STEP_GAP_PX}px;
+`;
+
+// A percentage in a grid-template-columns value resolves against the grid
+// container, which is this row. The same percentage written in padding-right
+// or inside a container-type wrapper would resolve against the parent instead.
+const StepRow = styled(Box)`
+  display: grid;
+  grid-template-columns: ${RAIL_COLUMN} minmax(0, 1fr)
+    max(0px, min(${RAIL_COLUMN}, calc(100% - ${RAIL_COLUMN} - ${PAGE_FORM_WIDTH})));
+  grid-template-rows: minmax(0, 1fr);
+`;
+
+const StepSlot = styled.div`
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-width: 0;
+`;
 export interface StepperContextType {
   next: (props: Record<string, unknown>) => void;
   prev: (props: Record<string, unknown>) => void;
@@ -48,8 +74,8 @@ export const Stepper: Stepper = ({ steps }) => {
 
   return (
     <StepperContext.Provider value={stepperValue}>
-      <Box display="flex" gap={32} flex={1} height="100%">
-        <Steppers
+      <StepRow flex={1} height="100%">
+        <Rail
           activeStep={stepProps.step}
           steps={steps.map((step) => {
             return {
@@ -57,8 +83,10 @@ export const Stepper: Stepper = ({ steps }) => {
             };
           })}
         />
-        <Component {...stepProps.props} />
-      </Box>
+        <StepSlot>
+          <Component {...stepProps.props} />
+        </StepSlot>
+      </StepRow>
     </StepperContext.Provider>
   );
 };

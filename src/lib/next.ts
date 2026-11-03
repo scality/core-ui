@@ -30,6 +30,7 @@ export {
   LineTimeSerieChart,
   GlobalHealthBar,
   Sparkline,
+  Heatmap,
   ChartLegend,
   ChartLegendWrapper,
   useChartId,
@@ -48,10 +49,16 @@ export type {
   LineChartProps,
   Serie,
   GlobalHealthProps,
+  HeatmapProps,
+  DiscreteHeatmapProps,
+  HeatmapRow,
+  HeatmapCell,
+  HeatmapDiscreteScale,
+  HeatmapLength,
   Alert,
   UnitRange,
   TimeType,
   CategoryType,
 } from './components/charts';
 
-export type { CoreUITheme } from './style/theme';
+export type { CoreUITheme, ThemeColor, ThemeColorToken } from './style/theme';

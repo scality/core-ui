@@ -8,7 +8,7 @@ import {
 type Story = StoryObj<UnsuccessfulResultProps>;
 
 const meta: Meta<UnsuccessfulResultProps> = {
-  title: 'Components/NoResult',
+  title: 'Components/UnsuccessfulResult',
   component: UnsuccessfulResult,
 };
 

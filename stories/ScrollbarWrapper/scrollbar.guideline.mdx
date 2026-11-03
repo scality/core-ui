@@ -10,6 +10,9 @@ import * as ScrollbarWrapperStories from './scrollbar.stories';
 It provides two things:
 
 - **Custom scrollbar styles** — a thin, themed scrollbar across Chrome, Safari, and Firefox.
+  The bar's width is the browser's own rendering of `scrollbar-width: thin`, not a length this
+  component sets: it differs per engine, per platform, and if a consumer overrides the property.
+  Reserve room for it with `scrollbar-gutter: stable`, never with a hard-coded pixel value.
 - **`scroll-fade` utility class** — an opt-in bottom fade on any scrollable element (see below).
 
 ## Setup
@@ -54,6 +57,20 @@ No JavaScript, no React state, no scroll listeners — the effect is driven enti
 | List does not overflow | No fade, content never clipped |
 
 <Canvas of={ScrollbarWrapperStories.ScrollFadeUtility} />
+
+### Bordered elements
+
+The fade leaves the scrollbar alone, so the bar never dissolves along with the content. An element
+that also has a border declares its width, and the border gets the same treatment:
+
+```css
+.my-list {
+  --scroll-fade-border: 1px;
+}
+```
+
+Leave it unset otherwise. On an element with no border it keeps a one-pixel line of content sharp
+along the edge, under a fade that has already gone.
 
 ### Browser support
 

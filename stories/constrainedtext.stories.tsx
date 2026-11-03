@@ -4,7 +4,7 @@ import { Wrapper } from './common';
 import { placementOptions } from './controls';
 import { Text } from '../src/lib/components/text/Text.component';
 export default {
-  title: 'Components/Constrained Text',
+  title: 'Components/ConstrainedText',
   component: ConstrainedText,
   decorators: [
     (story) => (

@@ -1,0 +1,163 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as HeatmapStories from './heatmap.stories';
+
+<Meta of={HeatmapStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2 { margin-top: 5rem; }
+  .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Heatmap chart
+
+A heatmap chart is a matrix. One row per entity, one column per slice of a
+second dimension, and a colour at each crossing standing for the value there.
+
+That second dimension is time in most cases, and status history is the case this
+component was built for: one column per time slot, the colour saying how each
+entity was doing then. Time is not a requirement. Any second dimension with few
+enough values works.
+
+<Canvas of={HeatmapStories.ScreenshotEquivalent} sourceState="none" />
+
+A note on the name: in UX research, a heatmap is a different object, clicks,
+scrolls or gaze painted over a screenshot of a page. Both are called heatmaps
+and they have nothing to do with each other. Here it should be understood as
+"heatmap chart".
+
+## When to use it
+
+Use it when the pattern matters more than the number, and when there are enough
+rows and enough columns **for a pattern to exist**.
+
+Use something else when:
+
+- The exact values matter. A table states them, a heatmap only implies them
+  through colour.
+- There is one entity, or a handful. A line chart shows the trend and the
+  magnitude, which a row of coloured squares throws away.
+- There are two or three columns. That is a status list, not a grid.
+
+## Every cell is an aggregate
+
+A cell covers a slice and says one thing about it, so something was dropped on
+the way. The rule that dropped it decides what the reader sees, and the same
+data under two rules produces two different grids.
+
+- **Worst value wins.** One minute of outage colours the whole hour. Nothing is
+  missed, but a brief incident and a sustained one look alike.
+- **Average.** Brief incidents disappear into the slots around them.
+- **Last value.** The grid shows the state at the end of each slot and says
+  nothing about what happened inside it.
+
+Worst value wins is the usual choice for status history, because missing an
+outage is worse than overstating one. It is still a choice, and one the reader
+cannot recover from the picture. Say which rule applies, in the legend title or
+beside the chart.
+
+The aggregation happens before the component. `Heatmap` paints the values it is
+given and never computes them, so this is a decision for the page, not a prop.
+
+Slot width is part of the same decision. Narrower slots aggregate less and show
+more, up to the point where the grid stops being readable. Anything that lets a
+user change the window has to re-aggregate, and the answer on screen changes
+with it.
+
+How many slots fit is not that decision. Columns share the width available, so
+a long axis in a narrow frame would divide itself into slivers; `cellMinWidth`
+stops it, and past that floor the grid scrolls sideways rather than shrinking
+further. The row labels stay outside the scrolling area. Raise the floor to give
+each slot more room, but the reader then has to scroll to see the window they
+asked for, which is a worse way to lose the pattern than showing all of it
+smaller.
+
+The cells are the last thing to give way, because they are the only part a
+reader cannot get back. A narrowing frame first truncates the row labels, which
+keep the whole name in a tooltip; then drops the legend under the grid, which
+loses nothing at all; and only then narrows the cells towards `cellMinWidth`.
+`labelWidth` is the cap on the first of those, not a fixed gutter — the labels
+take the width they need up to it, and no more.
+
+<Canvas of={HeatmapStories.HorizontalScroll} sourceState="none" />
+
+## Accessibility: colour is the only channel
+
+Colour carries the value on its own. No shape, no label and no position tells
+one cell from another, so the grid stays closed to a reader who does not
+separate the hues. The tooltip is what makes it usable: every cell takes focus,
+carries an `aria-label`, and opens its tooltip on focus as well as on hover, so
+the grid can be read from the keyboard and by a screen reader.
+
+That trade is acceptable here, because a heatmap chart without colour is not a
+heatmap chart. It is not acceptable as a habit:
+
+- Pick colours that stay apart from one another, including for the most common
+  colour vision deficiencies. Two neighbouring hues in the same set are the
+  first thing to check.
+- Keep the value set small. Four or five values is the ceiling at which distinct
+  hues stay distinct.
+- Do not treat this page as a precedent for the next component that leans on
+  colour alone.
+
+## Colour sets
+
+Which palette applies follows from what the values mean, and the two cases do
+not mix.
+
+**Status values**, meaning states of health, take the theme status tokens
+(`statusHealthy`, `statusWarning`, `statusCritical`) and a theme neutral for the
+absence of data. They follow the theme, so a status grid holds in light and
+dark with nothing else to do.
+
+**Categorical values**, meaning anything else, take the series colours
+(`lineColor1` to `lineColor8`, or `lineTimeSeriesColorRange`).
+
+<Canvas of={HeatmapStories.CustomColorSet} sourceState="none" />
+
+Two rules hold in both cases. Never borrow the status palette for a category: a
+value painted `statusHealthy` claims to be healthy, and a reader who learnt that
+colour elsewhere in the product will read it the same way here. Avoid hardcoded
+hex values, they belong to no theme and follow none.
+
+Order the legend the way the values mean something, through `scale.sortOrder`.
+It takes three forms:
+
+- **`'alphabetical'`**, the default. It is rarely the order a reader is looking
+  for: severity, or the order a pipeline runs in, almost never sorts by name.
+- **`'status'`**, a shorthand for `Success`, `Warning`, `Failed`, in that order.
+  Any other value is left out of the legend, including the absence value.
+- **A comparator**, `(a, b) => number`, for everything else. This is the usual
+  answer — severity order, pipeline order, numeric order for values that are
+  numbers wearing strings.
+
+Where the stored value is not what should be shown, `scale.labelMap` renames it
+in the legend and `formatValue` does the same for the tooltip and the
+`aria-label`.
+
+## Time
+
+The axis carries the start of each slot, thinned out by `labelEvery` so a dense
+axis stays legible.
+
+The axis does not mark the change of day. A slot that opens a new day carries
+the same kind of label as the others, and the date is only in the tooltip.
+
+<Canvas of={HeatmapStories.AcrossMidnight} sourceState="none" />
+
+## Empty and no data
+
+Two cases have to be distinguished: a slot where the entity had nothing to
+report, and a slot where a value exists but was not collected.
+
+**No cell.** A `null` cell, or a row shorter than the axis, leaves its slot
+empty. It applies when the entity did not exist during that slot. The grid
+follows `columns` rather than the length of each row, so a short row keeps its
+place and the rows below it are not shifted.
+
+**No value collected.** When the entity existed but its value is unknown, it is
+treated as a value of its own. Declare it in the `colorSet` with a theme
+neutral, so that it appears in the legend and can be filtered like the others.
+
+<Canvas of={HeatmapStories.DenseGrid} sourceState="none" />
