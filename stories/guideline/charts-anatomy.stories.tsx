@@ -58,10 +58,12 @@ type Part = {
 const Frame = ({
   width,
   height,
+  label,
   children,
 }: {
   width: number;
   height: number;
+  label: string;
   children: ReactNode;
 }) => {
   const COLORS = useColors();
@@ -71,6 +73,7 @@ const Frame = ({
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
         role="img"
+        aria-label={label}
         style={{ display: 'block' }}
       >
         <rect width={width} height={height} fill={COLORS.page} />
@@ -261,7 +264,7 @@ const ChartFrameDiagram = () => {
   const on = (key: string) => hovered === key;
 
   return (
-    <Frame width={600} height={420}>
+    <Frame width={600} height={420} label="Chart anatomy: frame">
       <rect
         x={40}
         y={28}
@@ -470,7 +473,7 @@ const HoverLayerDiagram = () => {
   const on = (key: string) => hovered === key;
 
   return (
-    <Frame width={600} height={320}>
+    <Frame width={600} height={320} label="Chart anatomy: hover layer">
       <rect
         x={HOVER_PLOT.left}
         y={HOVER_PLOT.top}
@@ -518,7 +521,7 @@ const HoverLayerDiagram = () => {
         />
       ))}
 
-      {/* tooltip: a lighter border, so it reads as a panel above the plot */}
+      {/* tooltip */}
       <rect
         x={TOOLTIP.x}
         y={TOOLTIP.y}

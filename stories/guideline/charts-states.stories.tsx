@@ -10,13 +10,7 @@ import { Text } from '../../src/lib/components/text/Text.component';
 import { CoreUITheme } from '../../src/lib/style/theme';
 
 /**
- * The non-nominal states of a chart, rendered by the real Barchart rather than
- * drawn, so the guideline shows what the component actually does.
- *
- * The third panel is the gap: a query that succeeded and returned nothing
- * renders an empty frame, with no axes and no message. The component has no
- * prop for it, so it cannot say "no data for this period" the way it says
- * "chart data is not available" for a failure.
+ * The loading and error states of a chart, rendered by the real Barchart.
  */
 
 const BARS = [
@@ -89,17 +83,6 @@ const ChartStatesDiagram = () => {
             type={{ type: 'category' }}
             bars={BARS}
             isError
-            title="Capacity by node (TiB)"
-            height={180}
-          />
-        </ChartLegendWrapper>
-      </Panel>
-
-      <Panel caption="Empty (no message today)">
-        <ChartLegendWrapper colorSet={colorSet}>
-          <Barchart
-            type={{ type: 'category' }}
-            bars={[]}
             title="Capacity by node (TiB)"
             height={180}
           />

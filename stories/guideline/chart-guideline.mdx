@@ -39,7 +39,7 @@ A dashboard is a set of visualisations read together, in one view, to know the s
 
 ## Anatomy
 
-Every chart in the library is built from the same parts. These are the names used
+Every chart with axes is built from the same parts. These are the names used
 throughout this guideline.
 
 Hover a number to highlight the part it names.
@@ -124,7 +124,7 @@ Besides its nominal rendering, a chart has three states:
 
 - **Loading.** The query is in flight. The chart keeps its footprint so the page does not move once the data lands.
 - **Error.** The query failed. The reader is told the data could not be retrieved, which is not the same as being shown an empty chart. The chart keeps its frame, so it stays visible that what failed to load is this chart's data and not the page.
-- **Empty.** The query succeeded and returned nothing. This is a fact about the data, not a failure, and the reader has to be able to tell the two apart.
+- **Empty.** The query succeeded but returned no data. The chart keeps its frame and displays a "no data" message, different from the error message.
 
 ## Forms that read poorly
 
