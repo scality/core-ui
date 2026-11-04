@@ -404,7 +404,7 @@
           },
           "responsive": {
             "defaultValue": null,
-            "description": "Makes contained fields fluid: their `size`-derived width becomes a preferred\nwidth that shrinks to fit the column (capped at `max-width: 100%`) instead of\noverflowing. It also lays each `FormSection` out as a two-column grid that\nauto-flips to a stacked single column on narrow widths — there is no\nbreakpoint prop; the flip point is derived from the layout (see below).\nNote: `Input` and `Select` currently honor the fluid width — `SearchInput`,\n`TextArea` and other size-driven content keep their fixed width for now.\n\nIt also declares the Form the `responsive` container, so any\n`@container responsive` query inside it — `Button iconOnly={number}`, for\none — resolves against the Form's width. See the \"Responsive\" guideline.",
+            "description": "Makes contained fields fluid: their `size`-derived width becomes a preferred\nwidth that shrinks to fit the column (capped at `max-width: 100%`) instead of\noverflowing. It also lays each `FormSection` out as a two-column grid that\nauto-flips to a stacked single column on narrow widths — there is no\nbreakpoint prop; the flip point is derived from the layout (see below).\nNote: `Input`, `PasswordInput`, `Select` and `SearchInput` honor the fluid\nwidth — a `TextArea`, sized from its own `cols`, keeps that width.\n\nIt also declares the Form the `responsive` container, so any\n`@container responsive` query inside it — `Button iconOnly={number}`, for\none — resolves against the Form's width. See the \"Responsive\" guideline.",
             "name": "responsive",
             "declarations": [
               {
@@ -5382,6 +5382,420 @@
         }
       ],
       "import": "import { Controller } from 'react-hook-form';\nimport { FormSection, InputList, Wrapper as StoryWrapper } from '@scality/core-ui';"
+    },
+    "components-inputs-passwordinput": {
+      "id": "components-inputs-passwordinput",
+      "name": "PasswordInput",
+      "path": "./stories/PasswordInput/passwordinput.stories.tsx",
+      "jsDocTags": {},
+      "description": "Reach for this rather than an `Input` of type `password` whenever a user types a\npassword: it carries the reveal toggle, and an optional copy button.",
+      "reactDocgenTypescript": {
+        "tags": {},
+        "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+        "description": "Reach for this rather than an `Input` of type `password` whenever a user types a\npassword: it carries the reveal toggle, and an optional copy button.",
+        "displayName": "PasswordInput",
+        "methods": [],
+        "props": {
+          "id": {
+            "defaultValue": null,
+            "description": "",
+            "name": "id",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              },
+              {
+                "fileName": "core-ui/node_modules/@types/react/index.d.ts",
+                "name": "HTMLAttributes"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "string"
+            }
+          },
+          "error": {
+            "defaultValue": null,
+            "description": "",
+            "name": "error",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "string"
+            }
+          },
+          "size": {
+            "defaultValue": null,
+            "description": "",
+            "name": "size",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "enum",
+              "raw": "InputSize",
+              "value": [
+                {
+                  "value": "\"1\""
+                },
+                {
+                  "value": "\"2/3\""
+                },
+                {
+                  "value": "\"1/2\""
+                },
+                {
+                  "value": "\"1/3\""
+                }
+              ]
+            }
+          },
+          "leftIcon": {
+            "defaultValue": null,
+            "description": "",
+            "name": "leftIcon",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "string"
+            }
+          },
+          "leftIconColor": {
+            "defaultValue": null,
+            "description": "",
+            "name": "leftIconColor",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "enum",
+              "raw": "keyof CoreUITheme",
+              "value": [
+                {
+                  "value": "\"border\""
+                },
+                {
+                  "value": "\"statusHealthy\""
+                },
+                {
+                  "value": "\"statusHealthyRGB\""
+                },
+                {
+                  "value": "\"statusWarning\""
+                },
+                {
+                  "value": "\"statusWarningRGB\""
+                },
+                {
+                  "value": "\"statusCritical\""
+                },
+                {
+                  "value": "\"statusCriticalRGB\""
+                },
+                {
+                  "value": "\"selectedActive\""
+                },
+                {
+                  "value": "\"highlight\""
+                },
+                {
+                  "value": "\"buttonPrimary\""
+                },
+                {
+                  "value": "\"buttonSecondary\""
+                },
+                {
+                  "value": "\"buttonDelete\""
+                },
+                {
+                  "value": "\"infoPrimary\""
+                },
+                {
+                  "value": "\"infoSecondary\""
+                },
+                {
+                  "value": "\"backgroundLevel1\""
+                },
+                {
+                  "value": "\"backgroundLevel2\""
+                },
+                {
+                  "value": "\"backgroundLevel3\""
+                },
+                {
+                  "value": "\"backgroundLevel4\""
+                },
+                {
+                  "value": "\"navbarBackground\""
+                },
+                {
+                  "value": "\"textPrimary\""
+                },
+                {
+                  "value": "\"textSecondary\""
+                },
+                {
+                  "value": "\"textTertiary\""
+                },
+                {
+                  "value": "\"textReverse\""
+                },
+                {
+                  "value": "\"textLink\""
+                }
+              ]
+            }
+          },
+          "rightIcon": {
+            "defaultValue": null,
+            "description": "",
+            "name": "rightIcon",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "string"
+            }
+          },
+          "rightIconColor": {
+            "defaultValue": null,
+            "description": "",
+            "name": "rightIconColor",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "enum",
+              "raw": "keyof CoreUITheme",
+              "value": [
+                {
+                  "value": "\"border\""
+                },
+                {
+                  "value": "\"statusHealthy\""
+                },
+                {
+                  "value": "\"statusHealthyRGB\""
+                },
+                {
+                  "value": "\"statusWarning\""
+                },
+                {
+                  "value": "\"statusWarningRGB\""
+                },
+                {
+                  "value": "\"statusCritical\""
+                },
+                {
+                  "value": "\"statusCriticalRGB\""
+                },
+                {
+                  "value": "\"selectedActive\""
+                },
+                {
+                  "value": "\"highlight\""
+                },
+                {
+                  "value": "\"buttonPrimary\""
+                },
+                {
+                  "value": "\"buttonSecondary\""
+                },
+                {
+                  "value": "\"buttonDelete\""
+                },
+                {
+                  "value": "\"infoPrimary\""
+                },
+                {
+                  "value": "\"infoSecondary\""
+                },
+                {
+                  "value": "\"backgroundLevel1\""
+                },
+                {
+                  "value": "\"backgroundLevel2\""
+                },
+                {
+                  "value": "\"backgroundLevel3\""
+                },
+                {
+                  "value": "\"backgroundLevel4\""
+                },
+                {
+                  "value": "\"navbarBackground\""
+                },
+                {
+                  "value": "\"textPrimary\""
+                },
+                {
+                  "value": "\"textSecondary\""
+                },
+                {
+                  "value": "\"textTertiary\""
+                },
+                {
+                  "value": "\"textReverse\""
+                },
+                {
+                  "value": "\"textLink\""
+                }
+              ]
+            }
+          },
+          "noPlaceholderPrefix": {
+            "defaultValue": null,
+            "description": "",
+            "name": "noPlaceholderPrefix",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/inputv2/inputv2.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "boolean"
+            }
+          },
+          "autoComplete": {
+            "defaultValue": null,
+            "description": "Required, no default: a field announcing `new-password` while asking for the\ncurrent password gets offered for saving instead of autofilled, with nothing\nabout the result looking visibly wrong.",
+            "name": "autoComplete",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": true,
+            "type": {
+              "name": "enum",
+              "raw": "\"current-password\" | \"new-password\"",
+              "value": [
+                {
+                  "value": "\"current-password\""
+                },
+                {
+                  "value": "\"new-password\""
+                }
+              ]
+            }
+          },
+          "withCopyButton": {
+            "defaultValue": null,
+            "description": "Copies the field's current value whether or not it is masked.",
+            "name": "withCopyButton",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "boolean"
+            }
+          },
+          "revealed": {
+            "defaultValue": null,
+            "description": "",
+            "name": "revealed",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              },
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "boolean"
+            }
+          },
+          "onToggleReveal": {
+            "defaultValue": null,
+            "description": "",
+            "name": "onToggleReveal",
+            "declarations": [
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              },
+              {
+                "fileName": "core-ui/src/lib/components/passwordinput/PasswordInput.component.tsx",
+                "name": "TypeLiteral"
+              }
+            ],
+            "required": false,
+            "type": {
+              "name": "(() => void)"
+            }
+          }
+        },
+        "exportName": "PasswordInput"
+      },
+      "stories": [
+        {
+          "id": "components-inputs-passwordinput--authenticate",
+          "name": "Authenticate",
+          "snippet": "const Authenticate = () => {\n  const methods = useForm();\n  return (\n    <FormProvider {...methods}>\n      <Form responsive layout={{ kind: 'tab' }}>\n        <FormSection>\n          <FormGroup\n            id=\"password\"\n            direction=\"horizontal\"\n            label=\"Password\"\n            content={\n              <PasswordInput\n                id=\"password\"\n                autoComplete=\"current-password\"\n                {...methods.register('password')}\n              />\n            }\n          />\n        </FormSection>\n      </Form>\n    </FormProvider>\n  );\n};",
+          "description": "Authenticating: one field, no copy affordance, the current password."
+        },
+        {
+          "id": "components-inputs-passwordinput--set-a-password",
+          "name": "Set A Password",
+          "snippet": "const SetAPassword = () => {\n  const methods = useForm({ mode: 'onChange' });\n  return (\n    <FormProvider {...methods}>\n      <Form responsive layout={{ kind: 'tab' }}>\n        <FormSection>\n          {/* A password form carries a username field, visible or hidden, or\n              password managers offer the wrong credential. It belongs to the\n              application, which is the only side that has the username. */}\n          <input\n            type=\"text\"\n            autoComplete=\"username\"\n            tabIndex={-1}\n            aria-hidden=\"true\"\n            style={{\n              position: 'absolute',\n              width: '1px',\n              height: '1px',\n              overflow: 'hidden',\n              clip: 'rect(0 0 0 0)',\n              whiteSpace: 'nowrap',\n              border: 0,\n              padding: 0,\n              margin: '-1px',\n            }}\n            {...methods.register('username')}\n          />\n          <PasswordFields\n            required\n            withCopyButton\n            confirmationRules={{\n              validate: (value, { password }) =>\n                value === password || 'Passwords do not match',\n            }}\n          />\n        </FormSection>\n      </Form>\n    </FormProvider>\n  );\n};",
+          "description": "Setting a password: the pair, with the copy affordance on the first field. The\nmatch rule is the caller's, as it is in any form with a resolver — type two\ndifferent values to see the confirmation report it."
+        },
+        {
+          "id": "components-inputs-passwordinput--in-a-narrow-container",
+          "name": "In A Narrow Container",
+          "snippet": "const InANarrowContainer = () => (\n  <div\n    style={{\n      width: '20rem',\n      minWidth: 0,\n      resize: 'horizontal',\n      overflow: 'hidden',\n      padding: '0.5rem',\n      border: '1px dashed #6e6e6e',\n    }}\n  >\n    <PasswordInput\n      id=\"password\"\n      aria-label=\"Password\"\n      autoComplete=\"new-password\"\n      withCopyButton\n    />\n  </div>\n);",
+          "description": "Outside a form, in a resizable container: the field gives ground to its floor."
+        }
+      ],
+      "import": "import { Form, FormGroup, FormSection, PasswordFields, PasswordInput } from '@scality/core-ui';\nimport { FormProvider } from 'react-hook-form';",
+      "docs": {
+        "components-inputs-passwordinput--guideline": {
+          "id": "components-inputs-passwordinput--guideline",
+          "name": "Guideline",
+          "path": "./stories/PasswordInput/passwordinput.guideline.mdx",
+          "title": "Components/Inputs/PasswordInput",
+          "content": "import { Meta, Canvas } from '@storybook/addon-docs/blocks';\n\nimport * as Stories from './passwordinput.stories';\n\n<Meta of={Stories} name=\"Guideline\" />\n\n# Password Input\n\nUse `PasswordInput` wherever a user types a password, rather than an `Input` of type\n`password`. It is a field, not a labelled row: wrap it in a `FormGroup` as you would\nany other field, so it works the same in a two-column form, in a modal, and in a\nlayout nobody has designed yet.\n\nUse `PasswordFields` when the user is **setting** a password rather than typing one\nthey already have. It renders the password and its confirmation as two `FormGroup`s\nand registers both fields itself, so it needs a `FormProvider` ancestor.\n\n## `autoComplete` is required, and the value matters\n\nThere is no default, because both values look right on screen and only one of them\nbehaves. `current-password` asks the browser to fill in a password the user already\nhas; `new-password` asks it to offer a generated one and to save what is typed. A\nfield that announces `new-password` while asking for the current password gets\noffered for saving instead of filled in.\n\n<Canvas of={Stories.Authenticate} />\n\n## Setting a password\n\nOne reveal toggle drives both fields. The copy affordance is opt-in through\n`withCopyButton` and belongs on the first field only.\n\n`PasswordFields` does not enforce that the two values match. A form with a\n`resolver` ignores field-level validation, so that rule belongs in the caller's\nschema; `confirmationRules` is there for forms that have no resolver.\n\nA password form also needs a `username` field for password managers to offer the\nright credential. It belongs to the application — the only side that knows the\nusername — so render it yourself, visible or hidden off-screen.\n\n<Canvas of={Stories.SetAPassword} />\n\n## Narrow containers\n\nThe field is always shrinkable: it stops at the narrowest width an `Input` can be\ngiven, after which the row overflows rather than letting the field collapse. The\nreveal and copy buttons keep their width throughout, so the field is the only thing\nthat gives.\n\n<Canvas of={Stories.InANarrowContainer} />\n",
+          "summary": "# Password Input Use `PasswordInput` wherever a user types a password, rather than an `Inp..."
+        }
+      }
     },
     "components-inputs-radiogroup": {
       "id": "components-inputs-radiogroup",
@@ -10397,7 +10811,7 @@
             ],
             "required": true,
             "type": {
-              "name": "string"
+              "name": "string | (() => string)"
             }
           },
           "copyAsHtml": {
@@ -12368,6 +12782,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5152
+    "durationMs": 5521
   }
 }
