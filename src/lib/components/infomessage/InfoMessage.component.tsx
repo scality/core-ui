@@ -21,6 +21,12 @@ const InfoMessageContainer = styled.div`
   color: white;
 `;
 
+/**
+ * An explanatory panel sitting inside the content it explains, with a title,
+ * a body and an optional link out to fuller documentation. It carries no
+ * status, so it is for teaching rather than alerting — a condition the user
+ * should act on is a Banner.
+ */
 export const InfoMessage = ({ title, content, link, linkText }: Props) => {
   const { containerRef, backgroundColor } = useComputeBackgroundColor();
   const theme = useTheme();

@@ -185,6 +185,12 @@ const ActionButton = ({
   />
 );
 
+/**
+ * A dialog centered over the page that takes focus and blocks the content
+ * behind it, for a decision the user has to settle before going on. Reserve it
+ * for work that genuinely interrupts: secondary work that belongs alongside
+ * the page is a Drawer, and a message needing no answer is a Toast.
+ */
 const Modal = ({
   isOpen,
   close,
