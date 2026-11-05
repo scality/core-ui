@@ -126,8 +126,9 @@ const ChartTitleTextStyle = styled(BasicTextStyle)`
 `;
 /**
  * Body text at the design system's default size and weight, in the primary
- * text color. Equivalent to `<Text>`, which is the one to reach for in new
- * code because a single prop changes size, weight or color.
+ * text color. Equivalent to `<Text color="textPrimary">`; a bare `<Text>`
+ * inherits its color instead. `Text` is the one to reach for in new code,
+ * since a single prop changes size, weight or color.
  */
 export function BasicText({ children, ...rest }: Props) {
   return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
@@ -141,22 +142,22 @@ export function SecondaryText({ children, ...rest }: Props) {
 }
 /**
  * The largest step of the type scale, for the heading that names a page or a
- * panel. Equivalent to `<Text variant="Larger">`.
+ * panel. Equivalent to `<Text variant="Larger" color="textPrimary">`.
  */
 export function LargerText({ children, ...rest }: Props) {
   return <LargerTextStyle {...rest}>{children}</LargerTextStyle>;
 }
 /**
  * Body text in bold, to pick one value out of the text around it. Equivalent
- * to `<Text isEmphazed>`.
+ * to `<Text isEmphazed color="textPrimary">`.
  */
 export function EmphaseText({ children, ...rest }: Props) {
   return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
 }
 /**
  * Body text colored from a health status rather than from a theme key, so the
- * caller passes the status and not the color it maps to. The one member of the
- * family with no `Text` equivalent, since `Text` takes a literal color.
+ * caller passes the status and not the color it maps to. `Text` takes a
+ * literal color, so it has no equivalent for this.
  */
 export function StatusText({ children, status, ...rest }: Props) {
   const statusColor = getStatusColor(status);
@@ -168,14 +169,16 @@ export function StatusText({ children, status, ...rest }: Props) {
 }
 /**
  * One step above body text, for a section heading inside a page rather than
- * the page's own title. Equivalent to `<Text variant="Large">`.
+ * the page's own title. Equivalent to `<Text variant="Large"
+ * color="textPrimary">`.
  */
 export function LargeText({ children, ...rest }: Props) {
   return <LargetStyle {...rest}>{children}</LargetStyle>;
 }
 /**
  * The smallest step of the type scale, for dense secondary information such as
- * a table's units or a timestamp. Equivalent to `<Text variant="Smaller">`.
+ * a table's units or a timestamp. Equivalent to `<Text variant="Smaller"
+ * color="textPrimary">`.
  */
 export function SmallerText({ children, ...rest }: Props) {
   return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
@@ -206,7 +209,8 @@ export function SmallerEmphaseText({ children, status, ...rest }: Props) {
 
 /**
  * Body text with the extra letter-spacing charts use, for the title sitting
- * above a graph. Equivalent to `<Text variant="ChartTitle">`.
+ * above a graph. Equivalent to `<Text variant="ChartTitle"
+ * color="textPrimary">`.
  */
 export function ChartTitleText({ children, ...rest }: Props) {
   return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
@@ -233,8 +237,8 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText) <{
  * The text primitive the design system's type scale is expressed through:
  * `variant` picks the size, `isEmphazed` the weight, `isGentleEmphazed`
  * italics and `color` any theme color key. Reach for it rather than one of
- * the fixed-purpose components in this file, each of which covers a single
- * combination of those props and cannot be adjusted.
+ * the fixed-purpose components in this file, which mostly pin one combination
+ * of those props and cannot be adjusted.
  */
 export const Text = styled.span.withConfig({
   shouldForwardProp: forwardTextProp,
@@ -289,8 +293,8 @@ export const Text = styled.span.withConfig({
   ${(props) => props.compact && `line-height: ${COMPACT_LINE_HEIGHT};`}
 `;
 /**
- * The short hint that sits under a form field, set small, bold and on a
- * compact line so it tucks against the control above it.
+ * The short hint accompanying a form field, set small, bold and on a compact
+ * line so it reads as secondary to the control.
  */
 export const HelperText = ({ children, color, ...rest }: Props) => {
   return (

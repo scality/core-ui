@@ -57,8 +57,8 @@ const NotificationsContainer = styled.div.withConfig({
 
 /**
  * Stacks a list of dismissible messages in one corner of the screen, driven by
- * an array the caller owns and keeps. For a single message the application
- * fires and forgets, Toast manages its own lifetime instead.
+ * an array the caller owns. Toast is the single-message counterpart: it needs
+ * no such list and dismisses itself by default.
  */
 function Notifications({
   position,

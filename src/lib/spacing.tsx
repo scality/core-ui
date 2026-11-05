@@ -5,10 +5,10 @@ import type { ThemeColor } from './style/theme';
 
 /**
  * The design system's spacing scale, keyed by the pixel value each step came
- * from (`r8` is `0.5rem`, 8px at the default root size) and expressed in rem
- * so it follows the user's text size. Prefer a key from here to a literal
- * length for any margin, padding or gap, so spacing stays consistent when the
- * scale moves.
+ * from. The `r*` half is in rem, so it follows the user's text size (`r8` is
+ * `0.5rem`, 8px at the default root size); the `f*` half is the same scale
+ * pinned to literal pixels. Prefer a key from here to a length of your own for
+ * any margin, padding or gap, so spacing stays consistent when the scale moves.
  */
 export const spacing = {
   r1: '0.0625rem',
