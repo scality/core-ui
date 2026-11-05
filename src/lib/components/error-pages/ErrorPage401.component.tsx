@@ -31,6 +31,11 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page screen for a request the user is authenticated for but not
+ * allowed to make: it says the credentials supplied do not grant access and
+ * offers a way back home. ErrorPage404 covers an address that does not exist.
+ */
 function ErrorPage401({
   supportLink = undefined,
   locale = 'en',

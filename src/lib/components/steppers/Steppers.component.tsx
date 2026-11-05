@@ -153,6 +153,12 @@ function Step(props: StepProps) {
   );
 }
 
+/**
+ * Draws the vertical progress rail for a multi-step flow — the steps, which
+ * one is active and which are behind — without owning any of it: the caller
+ * passes `activeStep`. Stepper is the component that drives a whole flow and
+ * renders this rail itself.
+ */
 function Steppers({ steps, activeStep, ...rest }: Props) {
   return (
     <SteppersContainer {...rest}>
