@@ -49,6 +49,10 @@ const LoaderTextDiv = styled.span`
   align-items: center;
 `;
 
+/**
+ * The spinner for a wait whose length is not known, with optional text beneath
+ * it. As soon as the progress can be measured, ProgressBar tells the user more.
+ */
 function Loader({
   children,
   color = '#A14FBF',

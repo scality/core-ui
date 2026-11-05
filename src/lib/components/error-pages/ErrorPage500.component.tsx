@@ -37,6 +37,11 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page screen for a request that failed on the server, where nothing
+ * the user did explains it and retrying is the suggestion. The other error
+ * pages cover causes the user can act on: a wrong address, or missing rights.
+ */
 function ErrorPage500({
   supportLink = undefined,
   locale = 'en',

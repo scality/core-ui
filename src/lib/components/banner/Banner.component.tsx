@@ -78,6 +78,12 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
 `;
 
+/**
+ * A message pinned in the page flow, carrying a status color and an icon, for
+ * a condition the user keeps seeing while it lasts — a degraded service, a
+ * read-only mode. Toast is the transient counterpart that reports the outcome
+ * of an action and then disappears.
+ */
 function Banner({ withDefaultIcon = false, icon, title, children, variant, ...rest }: Props) {
   const iconContent =
     icon !== undefined

@@ -3,6 +3,13 @@ import styled, { css } from 'styled-components';
 import { Box, BoxComponentProps } from './components/box/Box';
 import type { ThemeColor } from './style/theme';
 
+/**
+ * The design system's spacing scale, keyed by the pixel value each step came
+ * from (`r8` is `0.5rem`, 8px at the default root size) and expressed in rem
+ * so it follows the user's text size. Prefer a key from here to a literal
+ * length for any margin, padding or gap, so spacing stays consistent when the
+ * scale moves.
+ */
 export const spacing = {
   r1: '0.0625rem',
   r2: '0.125rem',
@@ -98,6 +105,12 @@ const StackBox = styled(Box)<{
     `}
 `;
 
+/**
+ * Lays its children out in a row or a column with one spacing token between
+ * them, optionally separated by a rule, and can flip a row to a column below a
+ * given container width. Prefer it to a bare Box whenever the children are
+ * siblings at the same level, since the gap is named rather than measured.
+ */
 export const Stack = ({
   gap,
   direction,
@@ -148,6 +161,11 @@ export const Stack = ({
   );
 };
 
+/**
+ * Pushes its children to opposite ends of a row and shares the leftover space
+ * between them — the title-on-the-left, actions-on-the-right header. Use Stack
+ * instead when the children should sit together with a fixed gap.
+ */
 export const Wrap = ({
   children,
   ...rest

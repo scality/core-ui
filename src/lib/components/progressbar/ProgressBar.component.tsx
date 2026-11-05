@@ -150,6 +150,12 @@ const BuildinLabel = styled.div`
   white-space: nowrap;
 `;
 
+/**
+ * Draws a known proportion as a horizontal bar, with room for labels around
+ * it. Use it when the progress can be measured: a wait of unknown length is a
+ * Loader, and a ring that keeps its middle free for the figure is a
+ * CircularProgressBar.
+ */
 function ProgressBar({
   percentage = 50,
   size = 'base',
