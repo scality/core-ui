@@ -125,10 +125,11 @@ const ToastEnter = styled(FadingToast)`
 `;
 
 /**
- * A short message that floats over a corner of the screen and dismisses itself,
- * reporting the outcome of an action the user has just taken. It does not
- * interrupt: anything the user must acknowledge before continuing belongs in a
- * Modal, and anything that stays true belongs in a Banner.
+ * A short message that floats over the page near one of its edges and
+ * dismisses itself, reporting the outcome of an action the user has just
+ * taken. It does not interrupt: anything the user must acknowledge before
+ * continuing belongs in a Modal, and anything that stays true belongs in a
+ * Banner.
  */
 function Toast({
   open,
