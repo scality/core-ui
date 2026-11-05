@@ -38,9 +38,9 @@ type Props = {
 };
 
 /**
- * The full-page screen for a request that failed on the server, where nothing
- * the user did explains it and retrying is the suggestion. The other error
- * pages cover causes the user can act on: a wrong address, or missing rights.
+ * The full-page screen for a request that failed unexpectedly, where the page
+ * cannot name the cause. Reach for ErrorPage404 when the address is known not
+ * to exist, and ErrorPage401 when the credentials are known to be the problem.
  */
 function ErrorPage500({
   supportLink = undefined,
