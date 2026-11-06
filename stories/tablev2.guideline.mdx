@@ -70,8 +70,10 @@ A table never tells the user a resource is empty before it has finished loading.
 from "loaded and empty" by looking at `data` alone, so it never guesses. Map your query state onto it
 (for example `status={isLoading ? 'loading' : isError ? 'error' : 'success'}`) and always pass it.
 
-Empty `data` with `status="success"` is the only way to show "No results". Omitting `status` does not
-mean success: the table shows the loading placeholder and warns in the console.
+Empty `data` with `status="success"` is the only way to show "No results". Any other `status` is a type
+error. If a caller works around the type, the table warns in the console with the value it received and
+shows the error state when there is no data. Rows still render when data is present, and "No results"
+shows if the filter matches nothing. The table never guesses loading or empty.
 
 <Canvas of={TableStories.LoadingTable} />
 

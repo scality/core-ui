@@ -306,7 +306,7 @@ type TableRowsProps<
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
-let hasWarnedMissingStatus = false;
+const TABLE_STATUSES: string[] = ['idle', 'loading', 'error', 'success'];
 
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -346,82 +346,41 @@ export function TableRows<
     return index;
   }
 
-  if (status === 'idle' || status === 'loading' || status === 'error') {
-    return (
-      <UnsuccessfulResult
-        name={entityName}
-        status={status}
-        locale={locale}
-        rowHeight={rowHeight}
-      />
+  const rawStatus: string = status as string;
+  if (!TABLE_STATUSES.includes(rawStatus)) {
+    console.warn(
+      `Table: received invalid \`status\` ${JSON.stringify(rawStatus) ?? String(rawStatus)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
     );
-  }
-  if ((status as unknown) === undefined && isDataEmpty) {
-    if (!hasWarnedMissingStatus) {
-      hasWarnedMissingStatus = true;
-      console.warn(
-        'Table: the `status` prop is required. Rendering the loading state because no status was provided and the data is empty.',
-      );
-    }
-    const loadingResult = (
-      <UnsuccessfulResult
-        name={entityName}
-        status="loading"
-        locale={locale}
-        rowHeight={rowHeight}
-      />
-    );
-    return typeof children === 'function'
-      ? children(loadingResult)
-      : loadingResult;
-  }
-  if (status === 'success' || (status as unknown) === undefined) {
-    if (typeof children === 'function') {
-      if (rows.length) {
-        return children(
-          <VirtualizedRows<DATA_ROW>
-            rows={rows}
-            listRef={listRef}
-            itemKey={itemKey}
-            rowHeight={rowHeight}
-            onBottom={onBottom}
-            onBottomOffset={onBottomOffset}
-            RenderRow={RenderRow}
-            columnsKey={columnsKey}
-          />,
-        );
-      } else {
-        return children(
-          <UnsuccessfulResult
-            rowHeight={rowHeight}
-            name={entityName}
-            status="noResult"
-          />,
-        );
-      }
-    } else if (rows.length) {
-      return (
-        <VirtualizedRows<DATA_ROW>
-          rows={rows}
-          listRef={listRef}
-          onBottom={onBottom}
-          onBottomOffset={onBottomOffset}
-          itemKey={itemKey}
-          rowHeight={rowHeight}
-          RenderRow={RenderRow}
-          columnsKey={columnsKey}
-        />
-      );
-    } else {
-      return (
-        <UnsuccessfulResult
-          rowHeight={rowHeight}
-          name={entityName}
-          status="noResult"
-        />
-      );
-    }
   }
 
-  return null;
+  let messageStatus: 'idle' | 'loading' | 'error' | 'noResult' | undefined;
+  if (status === 'idle' || status === 'loading' || status === 'error') {
+    messageStatus = status;
+  } else if (!TABLE_STATUSES.includes(rawStatus) && isDataEmpty) {
+    messageStatus = 'error';
+  } else if (rows.length === 0) {
+    messageStatus = 'noResult';
+  }
+
+  const result = messageStatus ? (
+    <UnsuccessfulResult
+      name={entityName}
+      status={messageStatus}
+      locale={locale}
+      rowHeight={rowHeight}
+    />
+  ) : (
+    <VirtualizedRows<DATA_ROW>
+      rows={rows}
+      listRef={listRef}
+      itemKey={itemKey}
+      rowHeight={rowHeight}
+      onBottom={onBottom}
+      onBottomOffset={onBottomOffset}
+      RenderRow={RenderRow}
+      columnsKey={columnsKey}
+    />
+  );
+
+  return typeof children === 'function' ? children(result) : result;
 }

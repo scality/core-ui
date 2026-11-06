@@ -738,14 +738,15 @@ describe('TableV2', () => {
         </Table>,
       );
 
-    it('renders all rows without loader or warning when status is omitted and data is not empty', async () => {
+    it('renders all rows and warns when status is omitted and data is not empty', async () => {
       renderStatusTable({});
       await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
       expect(screen.getAllByRole('row').length).toBe(data.length + 1);
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
-      expect(warnSpy).not.toHaveBeenCalled();
+      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
     });
 
     it('shows "No results found" when a global filter matches nothing with status success', async () => {
@@ -756,13 +757,13 @@ describe('TableV2', () => {
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
     });
 
-    it('shows "No results found" when a global filter matches nothing with status omitted', async () => {
-      renderStatusTable({ globalFilter: 'zzzzzz' });
+    it('shows "No results found" when a global filter matches nothing with an unknown status', async () => {
+      renderStatusTable({ status: 'ok', globalFilter: 'zzzzzz' });
       await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
       expect(screen.getByText(/no results found/i)).toBeInTheDocument();
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
-      expect(warnSpy).not.toHaveBeenCalled();
+      expect(warnSpy.mock.calls[0][0]).toContain('ok');
     });
 
     it('shows the loader when status is loading and data is empty', async () => {
@@ -790,23 +791,76 @@ describe('TableV2', () => {
       expect(renderWithoutStatus).toBeDefined();
     });
 
-    it('shows the loader and warns once when status is omitted and data is empty', async () => {
-      const { rerender } = renderStatusTable({ data: [] });
+    it('shows the error message and warns when status is omitted and data is empty', async () => {
+      renderStatusTable({ data: [] });
       await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
+      expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
       expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
-      expect(screen.getByText(/loading/i)).toBeInTheDocument();
-      expect(warnSpy).toHaveBeenCalledTimes(1);
-
-      rerender(
-        <Table columns={columns} data={[]} {...({} as any)}>
-          <Table.SingleSelectableContent
-            rowHeight="h40"
-            separationLineVariant="backgroundLevel3"
-          />
-        </Table>,
-      );
-      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
     });
+
+    it('shows the error message and names the value when status is unknown and data is empty', async () => {
+      renderStatusTable({ status: 'pending', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
+      expect(warnSpy.mock.calls[0][0]).toContain('pending');
+    });
+
+    it('renders rows and names the value when status is unknown and data is not empty', async () => {
+      renderStatusTable({ status: 'ok' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
+      expect(warnSpy.mock.calls[0][0]).toContain('ok');
+    });
+
+    it('warns on every render with an invalid status', async () => {
+      const { rerender } = renderStatusTable({ status: 'pending', data: [] });
+      const callsAfterMount = warnSpy.mock.calls.length;
+      expect(callsAfterMount).toBeGreaterThanOrEqual(1);
+
+      const rerenderTable = () =>
+        rerender(
+          <Table
+            columns={columns}
+            data={[]}
+            {...({ status: 'pending' } as any)}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>,
+        );
+      rerenderTable();
+      rerenderTable();
+
+      expect(warnSpy.mock.calls.length).toBeGreaterThan(callsAfterMount);
+      expect(warnSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('shows the loader and hides rows when status is loading with data', async () => {
+      renderStatusTable({ status: 'loading' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+    });
+
+    it.each(['idle', 'loading', 'error', 'success'])(
+      'does not warn when status is %s',
+      async (status) => {
+        renderStatusTable({ status });
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(warnSpy).not.toHaveBeenCalled();
+      },
+    );
   });
 });

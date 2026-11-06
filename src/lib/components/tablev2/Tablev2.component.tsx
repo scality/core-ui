@@ -95,7 +95,9 @@ export type TableProps<
   /**
    * Fetch state of the data. Must reflect the actual request: 'idle' or
    * 'loading' while fetching, 'error' on failure, and 'success' only once the
-   * data is loaded. An empty table with 'success' means "no results".
+   * data is loaded. An empty table with 'success' means "no results". Any
+   * other value is a type error; if bypassed, the table warns in the console
+   * and shows the error state when there is no data.
    */
   status: 'idle' | 'loading' | 'error' | 'success';
   entityName?: {
