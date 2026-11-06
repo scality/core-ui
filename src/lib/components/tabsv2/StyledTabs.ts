@@ -5,6 +5,16 @@ export const TabBar = styled.div`
   display: flex;
   height: ${spacing.r40};
 `;
+export const TabIcon = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.textSecondary};
+
+  &:not(:last-child) {
+    margin-right: ${spacing.r4};
+  }
+`;
 export const TabItem = styled.div<{
   $selected?: boolean;
   $activeTabColor?: string;
