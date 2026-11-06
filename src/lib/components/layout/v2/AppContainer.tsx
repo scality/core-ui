@@ -126,6 +126,10 @@ const AppChildrenContainer = styled.div<{
   $hasPadding?: boolean;
 }>`
   flex: 1;
+  /* Without this, the column's automatic minimum is the smaller of its content's min-content width
+     and the width: 100% below, which resolves against Container rather than the space left beside a
+     sidebar — so it cannot shrink to fit, and Container (overflow: hidden) clips the surplus. */
+  min-width: 0;
   display: flex;
   flex-direction: column;
   padding: ${(props) => (props.$hasPadding ? '0 1rem' : 'initial')};
