@@ -305,7 +305,7 @@ export const WithinTable = {
     ];
     return (
       <div style={{ height: '300px', paddingTop: '20px' }}>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table status="success" columns={columns} data={data} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h32"
             separationLineVariant="backgroundLevel3"
@@ -405,6 +405,7 @@ export const WithTableContent = {
         >
           <div style={{ height: '280px' }}>
             <Table
+              status="success"
               columns={NODE_COLUMNS}
               data={NODE_DATA}
               defaultSortingKey="name"
@@ -532,7 +533,7 @@ const HTML_TABLE = (
 
 const CORE_UI_TABLE = (
   <div style={{ height: '280px' }}>
-    <Table columns={NODE_COLUMNS} data={NODE_DATA} defaultSortingKey="name">
+    <Table status="success" columns={NODE_COLUMNS} data={NODE_DATA} defaultSortingKey="name">
       <Table.SingleSelectableContent rowHeight="h32" separationLineVariant="backgroundLevel3" />
     </Table>
   </div>

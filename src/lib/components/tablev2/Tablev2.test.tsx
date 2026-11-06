@@ -68,7 +68,12 @@ describe('TableV2', () => {
   test('it should display all the data', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -87,7 +92,12 @@ describe('TableV2', () => {
   test('it should sort by defaultSortingKey', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -107,6 +117,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -136,6 +147,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -159,6 +171,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -194,7 +207,12 @@ describe('TableV2', () => {
 
     const { getAllByRole } = render(
       <div>
-        <Table columns={dateColumns} data={dateData} globalFilter=".000">
+        <Table
+          status="success"
+          columns={dateColumns}
+          data={dateData}
+          globalFilter=".000"
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -213,6 +231,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -268,7 +287,7 @@ describe('TableV2 responsive columns', () => {
   const renderResponsiveTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data}>
+        <Table status="success" columns={responsiveColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -311,7 +330,7 @@ describe('TableV2 responsive columns', () => {
     ];
     render(
       <div>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -329,7 +348,12 @@ describe('TableV2 responsive columns', () => {
   const renderRevealTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data} revealDroppedColumns>
+        <Table
+          status="success"
+          columns={responsiveColumns}
+          data={data}
+          revealDroppedColumns
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -391,6 +415,7 @@ describe('TableV2 responsive columns', () => {
             enable reveal
           </button>
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             revealDroppedColumns={reveal}
@@ -442,6 +467,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     render(
       <div>
         <Table
+          status="success"
           columns={withButtonColumns}
           data={data.map((entry) => ({ ...entry, onAction }))}
           defaultSortingKey={'firstName'}
@@ -514,7 +540,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     const onRowSelected = jest.fn();
     render(
       <div role="button" tabIndex={0}>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -552,7 +578,7 @@ describe('TableV2 row click vs in-cell controls', () => {
 
     render(
       <div>
-        <Table columns={portalColumns} data={data}>
+        <Table status="success" columns={portalColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -575,7 +601,12 @@ describe('TableV2 row selectability', () => {
   ];
 
   const renderTable = (onRowSelected?: (row: unknown) => void) => (
-    <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+    <Table
+      status="success"
+      columns={columns}
+      data={data}
+      defaultSortingKey={'firstName'}
+    >
       <Table.SingleSelectableContent
         rowHeight="h40"
         separationLineVariant="backgroundLevel3"
@@ -627,7 +658,12 @@ describe('TableV2 truncated header labels', () => {
   const renderTable = (cols = columns) =>
     render(
       <div>
-        <Table columns={cols} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={cols}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -677,5 +713,154 @@ describe('TableV2 truncated header labels', () => {
     expect(
       document.querySelector('.sc-tooltip-overlay-text'),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe('TableV2', () => {
+  describe('status', () => {
+    let warnSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      warnSpy.mockRestore();
+    });
+
+    const renderStatusTable = (props: Record<string, unknown>) =>
+      render(
+        <Table columns={columns} data={data} {...(props as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>,
+      );
+
+    it('renders all rows and warns when status is omitted and data is not empty', async () => {
+      renderStatusTable({});
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
+    });
+
+    it('shows "No results found" when a global filter matches nothing with status success', async () => {
+      renderStatusTable({ status: 'success', globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when a global filter matches nothing with an unknown status', async () => {
+      renderStatusTable({ status: 'ok', globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy.mock.calls[0][0]).toContain('ok');
+    });
+
+    it('shows the loader when status is loading and data is empty', async () => {
+      renderStatusTable({ status: 'loading', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when status is success and data is empty', async () => {
+      renderStatusTable({ status: 'success', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('requires the status prop at the type level', () => {
+      const renderWithoutStatus = () => (
+        // @ts-expect-error status is required
+        <Table columns={columns} data={data} />
+      );
+      expect(renderWithoutStatus).toBeDefined();
+    });
+
+    it('shows the error message and warns when status is omitted and data is empty', async () => {
+      renderStatusTable({ data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
+    });
+
+    it('shows the error message and names the value when status is unknown and data is empty', async () => {
+      renderStatusTable({ status: 'pending', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
+      expect(warnSpy.mock.calls[0][0]).toContain('pending');
+    });
+
+    it('renders rows and names the value when status is unknown and data is not empty', async () => {
+      renderStatusTable({ status: 'ok' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
+      expect(warnSpy.mock.calls[0][0]).toContain('ok');
+    });
+
+    it('warns on every render with an invalid status', async () => {
+      const { rerender } = renderStatusTable({ status: 'pending', data: [] });
+      const callsAfterMount = warnSpy.mock.calls.length;
+      expect(callsAfterMount).toBeGreaterThanOrEqual(1);
+
+      const rerenderTable = () =>
+        rerender(
+          <Table
+            columns={columns}
+            data={[]}
+            {...({ status: 'pending' } as any)}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>,
+        );
+      rerenderTable();
+      rerenderTable();
+
+      expect(warnSpy.mock.calls.length).toBeGreaterThan(callsAfterMount);
+      expect(warnSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('shows the loader and hides rows when status is loading with data', async () => {
+      renderStatusTable({ status: 'loading' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+    });
+
+    it.each(['idle', 'loading', 'error', 'success'])(
+      'does not warn when status is %s',
+      async (status) => {
+        renderStatusTable({ status });
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(warnSpy).not.toHaveBeenCalled();
+      },
+    );
   });
 });
