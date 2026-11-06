@@ -156,8 +156,9 @@ export function EmphaseText({ children, ...rest }: Props) {
 }
 /**
  * Body text colored from a health status rather than from a theme key, so the
- * caller passes the status and not the color it maps to. `Text` takes a
- * literal color, so it has no equivalent for this.
+ * caller passes the status and not the color it maps to. `Text` takes the
+ * theme key itself (`statusHealthy`, `statusWarning`…), so the caller must do
+ * that mapping.
  */
 export function StatusText({ children, status, ...rest }: Props) {
   const statusColor = getStatusColor(status);
@@ -195,8 +196,8 @@ export function SmallerSecondaryText({ children, ...rest }: Props) {
 }
 /**
  * The smallest step of the type scale, in bold, colored from a health status
- * the way StatusText is. For a small bold value with no status behind it,
- * `<Text variant="Smaller" isEmphazed>` says the same thing.
+ * the way StatusText is. With no status behind it, equivalent to
+ * `<Text variant="Smaller" isEmphazed color="textSecondary">`.
  */
 export function SmallerEmphaseText({ children, status, ...rest }: Props) {
   const statusColor = getStatusColor(status);
