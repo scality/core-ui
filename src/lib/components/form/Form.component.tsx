@@ -15,6 +15,7 @@ import {
   helpIconReserve,
   IconHelp,
   LabelHelpIcon,
+  trimLabelEnd,
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
@@ -298,6 +299,12 @@ const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
 `;
 
+// The separator stays an ordinary space: U+00A0 would reach the field's
+// accessible name and break an exact-match assertion such as 'User name *'.
+const LabelMarker = styled.span`
+  white-space: nowrap;
+`;
+
 // Carries the section's label-column config down to each FormGroup so a row can
 // build its own layout. Null outside a FormSection — a FormGroup then throws.
 type SectionLabelConfig = {
@@ -370,9 +377,11 @@ const FormGroup = ({
         color={disabled ? undefined : 'textSecondary'}
         $reserveHelpIcon={!!labelHelpTooltip}
       >
-        {label}
-        {requireMode !== 'all' && required && ' *'}
-        {requireMode === 'all' && !required && ' (optional)'}
+        {trimLabelEnd(label)}
+        {requireMode !== 'all' && required && <LabelMarker>{' *'}</LabelMarker>}
+        {requireMode === 'all' && !required && (
+          <LabelMarker>{' (optional)'}</LabelMarker>
+        )}
       </LabelText>
       {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>
