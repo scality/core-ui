@@ -1,0 +1,51 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TabsStories from './tabs.stories';
+
+<Meta of={TabsStories} name="Guideline" />
+
+<style>{`
+  .sbdocs-content h2, .sbdocs-content h3 { margin-top: 3rem; }
+  .sbdocs-content .sb-story { margin-bottom: 0.5rem; }
+  .sbdocs-content .sbdocs-preview { margin-bottom: 0.5rem; }
+`}</style>
+
+# Tabs
+
+Tabs split one subject into views the user switches between, keeping the page and
+its context. Each `Tab` owns a route, so a view is linkable and survives a reload.
+
+<Canvas of={TabsStories.Default} sourceState="none" />
+
+## How much inset the content gets
+
+A tab insets its content on all four sides. The right side is the one the tab
+cannot decide alone: whether a gutter is already there is known to the content
+and to nothing else. `padding` is how the call site says so.
+
+| Value               | Pick it when                                                                                                         |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `'all'` _(default)_ | The content owns none of its own edges and leaves all four to the tab.                                               |
+| `'exceptRight'`     | The content owns its right edge because it scrolls itself and reserves a gutter for its scrollbar.                   |
+| `'none'`            | The content draws to the tab's frame on all four sides — a table or a list, or anything painting its own background. |
+
+**The case to recognise for `'exceptRight'`** is a `Form` with
+`layout={{ kind: 'tab' }}`: a fixed header with the fields scrolling under it.
+Such a form reserves room for its scrollbar at its own right edge, so left on
+`'all'` the tab's inset stacks on top of that reserve and the scrollbar ends up
+in the middle of a gap instead of near the edge.
+
+```tsx
+<Tab path="/settings" label="Settings" padding="exceptRight">
+  <SettingsForm />
+</Tab>
+```
+
+The rule follows the content, not the component that happens to be the tab's
+direct child. A form behind a wrapper still owns the right edge, and the wrapper
+cannot pass that fact up — so the call site sets `padding` itself.
+
+Content with no gutter of its own and nothing to paint to the frame keeps the
+default; there is no reason to set `padding` on most tabs.
+
+`withoutPadding` is the former spelling of `padding="none"`. It still works and
+is ignored when `padding` is also set, but new code uses `padding`.
