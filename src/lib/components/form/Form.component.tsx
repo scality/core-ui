@@ -15,6 +15,7 @@ import {
   helpIconReserve,
   IconHelp,
   LabelHelpIcon,
+  trimLabelEnd,
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
@@ -39,8 +40,8 @@ type FormProps = Omit<
    * overflowing. It also lays each `FormSection` out as a two-column grid that
    * auto-flips to a stacked single column on narrow widths — there is no
    * breakpoint prop; the flip point is derived from the layout (see below).
-   * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
-   * `TextArea` and other size-driven content keep their fixed width for now.
+   * Note: `Input`, `PasswordInput`, `Select` and `SearchInput` honor the fluid
+   * width — a `TextArea`, sized from its own `cols`, keeps that width.
    *
    * It also declares the Form the `responsive` container, so any
    * `@container responsive` query inside it — `Button iconOnly={number}`, for
@@ -298,6 +299,12 @@ const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
 `;
 
+// The separator stays an ordinary space: U+00A0 would reach the field's
+// accessible name and break an exact-match assertion such as 'User name *'.
+const LabelMarker = styled.span`
+  white-space: nowrap;
+`;
+
 // Carries the section's label-column config down to each FormGroup so a row can
 // build its own layout. Null outside a FormSection — a FormGroup then throws.
 type SectionLabelConfig = {
@@ -370,9 +377,11 @@ const FormGroup = ({
         color={disabled ? undefined : 'textSecondary'}
         $reserveHelpIcon={!!labelHelpTooltip}
       >
-        {label}
-        {requireMode !== 'all' && required && ' *'}
-        {requireMode === 'all' && !required && ' (optional)'}
+        {trimLabelEnd(label)}
+        {requireMode !== 'all' && required && <LabelMarker>{' *'}</LabelMarker>}
+        {requireMode === 'all' && !required && (
+          <LabelMarker>{' (optional)'}</LabelMarker>
+        )}
       </LabelText>
       {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>

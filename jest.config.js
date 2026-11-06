@@ -3,7 +3,7 @@ export default {
   globalSetup: './global-setup.js',
   setupFilesAfterEnv: ['./setupTests.js'],
   moduleNameMapper: {
-    '\\.(css|less)$': 'identity-obj-proxy',
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
     // Strip .js extension for FA dynamic imports (webpack needs .js, Jest doesn't)
     '^@fortawesome/free-solid-svg-icons/(.+)\\.js$':
       '@fortawesome/free-solid-svg-icons/$1',

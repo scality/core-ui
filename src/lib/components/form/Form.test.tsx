@@ -57,11 +57,8 @@ describe('Form', () => {
   });
 
   /**
-   * The marker is appended to the label inside the same `LabelText`, so it is
-   * the piece that silently falls out of the accessible name -- or loses the
-   * space before it -- if that composition is restructured. Tone itself is
-   * deliberately not asserted: reading a colour declaration back out proves
-   * nothing.
+   * The separator must stay an ordinary space: the marker is held on the label's
+   * last line by its wrapper, so a consumer's assertion on this name keeps matching.
    */
   it.each([
     ['partial', 'User name', true, 'User name *'],
@@ -88,6 +85,29 @@ describe('Form', () => {
       expect(screen.getByRole('textbox')).toHaveAccessibleName(expected);
     },
   );
+
+  /**
+   * The accessible name and the default `getByText` normalizer both collapse a
+   * trailing space, so read the label's own text with an identity normalizer.
+   */
+  it('trims a trailing space off the label it renders', () => {
+    render(
+      <Form layout={{ kind: 'tab' }}>
+        <FormSection>
+          <FormGroup
+            id="spaced-field"
+            label="User name "
+            required
+            content={<input type="text" id="spaced-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
+
+    expect(
+      screen.getByText('User name', { normalizer: (text) => text }),
+    ).toBeInTheDocument();
+  });
 
   // jsdom has no layout, so the icon's position is out of reach here. What this pins
   // is that moving the icon out of its old wrapper kept it inside its label.
