@@ -31,6 +31,12 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page screen for a request the supplied credentials do not grant
+ * access to — whether sign-in failed or the account simply lacks the right.
+ * ErrorPage404 covers an address that does not exist, and ErrorPage500 a
+ * failure whose cause the page cannot name.
+ */
 function ErrorPage401({
   supportLink = undefined,
   locale = 'en',

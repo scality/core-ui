@@ -32,6 +32,12 @@ export type UnsuccessfulResultProps = {
   | { rowHeight?: never; heightInRem?: number | string }
 );
 
+/**
+ * The message a table shows in place of rows: a translated sentence for every
+ * `status`, with a spinner added while loading and a warning icon on error.
+ * Give it the table's `rowHeight` so it occupies the same space as the rows it
+ * stands in for.
+ */
 export const UnsuccessfulResult = (props: UnsuccessfulResultProps) => {
   const { heightInRem = 5, name, locale, status, rowHeight } = props;
   const height = rowHeight ? tableRowHeight[rowHeight] : heightInRem;

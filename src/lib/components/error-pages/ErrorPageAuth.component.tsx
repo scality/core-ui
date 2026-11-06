@@ -30,6 +30,11 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page screen shown while authentication is still in progress, not an
+ * error: it reports that sign-in is under way and suggests a refresh if it
+ * lasts. Once authentication has failed, ErrorPage401 is the screen to show.
+ */
 function ErrorPageAuth({
   supportLink = undefined,
   locale = 'en',

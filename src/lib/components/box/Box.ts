@@ -60,6 +60,12 @@ export type BoxComponentProps = LayoutProps &
     container?: boolean;
   };
 
+/**
+ * The escape hatch for a one-off arrangement no existing component covers: a
+ * `div` taking the styled-system style props directly, so the layout needs no
+ * new styled-component of its own. For a row or column of siblings separated
+ * by a spacing token, Stack says more than a bare Box.
+ */
 const Box = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'container' && shouldForwardProp(prop),
 })<BoxComponentProps>`

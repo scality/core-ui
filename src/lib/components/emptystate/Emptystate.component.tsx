@@ -45,6 +45,11 @@ export const ActionWrapper = styled.div`
   justify-content: space-around;
 `;
 
+/**
+ * Fills the area given to a page that has nothing to list yet, inviting the
+ * user to create the first resource and naming it. For the body of a table
+ * that came back with no rows, UnsuccessfulResult is the smaller fit.
+ */
 function EmptyState(props: Props) {
   const { icon, listedResource, link, resourceToCreate, backgroundColor } =
     props;
