@@ -77,6 +77,12 @@ type Props = {
   /** Accessible label for the remove button. Defaults to "Remove". */
   removeAriaLabel?: string;
 } & React.HTMLAttributes<HTMLSpanElement>;
+
+/**
+ * Small inline badge. It has no outer horizontal margin (since CUI-51), so
+ * when placing it next to a label or another badge, provide the spacing from
+ * the parent, e.g. wrap them in a gapped `Stack` or flex container.
+ */
 export function TextBadge({
   text,
   variant = 'infoPrimary',

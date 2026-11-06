@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactElement,
+  ReactNode,
   useCallback,
   useEffect,
   useState,
@@ -17,7 +18,6 @@ import {
   useRoutes,
 } from 'react-router';
 import styled from 'styled-components';
-import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
 import { spacing } from '../../spacing';
 import { ScrollButton } from './ScrollButton';
@@ -45,10 +45,12 @@ type TabsProps = {
 };
 export const TabsContext = createContext<boolean>(false);
 
-const TabIcon = styled(ButtonIcon)`
+const TabIcon = styled.span<{ $label: ReactNode }>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   color: ${(props) => props.theme.textSecondary};
-  /* TabItem's gap already supplies r4; ButtonIcon's own r8 would stack on top of
-     it, so trim it to r4 to keep the icon r8 away from the label. */
+  /* TabItem's gap already supplies r4 of the icon-to-label spacing. */
   padding-right: ${(props) => (props.$label ? spacing.r4 : '0')};
 `;
 

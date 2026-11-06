@@ -1,12 +1,20 @@
 import React from 'react';
-import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
-import { Wrapper, Title } from './common';
-import { IconHelp } from '../src/lib/components/iconhelper/IconHelper';
-import { Text } from '../src/lib/components/text/Text.component';
-import { Stack } from '../src/lib/spacing';
+import { TextBadge } from '../../src/lib/components/textbadge/TextBadge.component';
+import { Wrapper, Title } from '../common';
+import { IconHelp } from '../../src/lib/components/iconhelper/IconHelper';
+import { Text } from '../../src/lib/components/text/Text.component';
+import { Stack } from '../../src/lib/spacing';
 export default {
   title: 'Components/TextBadge',
   component: TextBadge,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'TextBadge has no outer horizontal margin (since CUI-51). When placing it next to a label or another badge, provide the spacing from the parent, e.g. wrap them in a gapped `Stack` or flex container.',
+      },
+    },
+  },
 };
 
 export const Playground = {
@@ -79,18 +87,12 @@ export const CustomColorAndRemovable = {
   },
 };
 
-export const LongLabelInNarrowContainer = {
+export const LongLabelWraps = {
   render: ({}) => {
     return (
       <Wrapper>
-        <Title>Long label in a narrow container</Title>
-        <div
-          style={{
-            width: '160px',
-            outline: '1px dashed currentColor',
-            padding: 0,
-          }}
-        >
+        <Title>Long label wraps</Title>
+        <div style={{ maxWidth: '240px' }}>
           <TextBadge
             text="A very long badge label that wraps onto several lines"
             variant="infoSecondary"
