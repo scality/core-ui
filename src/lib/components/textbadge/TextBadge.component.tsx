@@ -84,9 +84,8 @@ type Props = {
  * text; prefer `StatusText` to tint running text by status, and `StatusIcon`
  * where a glyph alone carries the meaning.
  *
- * It has no outer horizontal margin, so when placing it next to a label or
- * another badge, provide the spacing from the parent — e.g. wrap them in a
- * gapped `Stack` or flex container.
+ * It has no outer horizontal margin, so wrap adjacent badges (or a badge next
+ * to a label) in a gapped parent, e.g. `<Stack gap="r8">`.
  */
 export function TextBadge({
   text,

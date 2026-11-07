@@ -154,6 +154,32 @@ export const ScrollableTabs = {
   ),
 };
 
+export const WithIconOnlyTab = {
+  render: (args) => (
+    <Tabs {...args}>
+      <Tab
+        path="/path"
+        label=""
+        icon={<i className="fas fa-hat-cowboy" />}
+        query={{ tab: 'icon' }}
+      >
+        <Content>Icon only tab content</Content>
+      </Tab>
+      <Tab
+        path="/path"
+        label="With icon"
+        icon={<i className="fas fa-hat-cowboy" />}
+        query={{ tab: 'icon-label' }}
+      >
+        <Content>Icon and label tab content</Content>
+      </Tab>
+      <Tab path="/path" label="Label only" query={{ tab: 'label' }}>
+        <Content>Label only tab content</Content>
+      </Tab>
+    </Tabs>
+  ),
+};
+
 export const WithQueryParams = {
   render: (args) => {
     const obj = { search: 'test' };

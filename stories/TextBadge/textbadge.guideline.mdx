@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+
+import * as Stories from './textbadge.stories.tsx';
+
+<Meta name="Guideline" of={Stories} />
+
+# TextBadge
+
+A short label or count shown inline next to text: tags, counters, status labels.
+
+## Usage
+
+Use it when the value should stand apart from the surrounding text.
+To tint running text by status, prefer `StatusText`; where a glyph alone carries the meaning, prefer `StatusIcon`.
+
+<Controls of={Stories.Playground} />
+
+## Spacing
+
+The badge has no outer margin. The parent provides the spacing between a badge and its siblings.
+
+<Canvas of={Stories.Default} />
+
+### Migration
+
+Wrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `<Stack gap="r8">`.
