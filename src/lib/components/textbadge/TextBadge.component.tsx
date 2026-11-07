@@ -81,8 +81,7 @@ type Props = {
 /**
  * Short label or count rendered inline as a filled chip — tags, counters,
  * status labels. Use it when the value should stand apart from the surrounding
- * text; prefer `StatusText` to tint running text by status, and `StatusIcon`
- * where a glyph alone carries the meaning.
+ * text; prefer `StatusText` to tint running text by status.
  *
  * It has no outer horizontal margin, so wrap adjacent badges (or a badge next
  * to a label) in a gapped parent, e.g. `<Stack gap="r8">`.
