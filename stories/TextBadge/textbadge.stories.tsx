@@ -92,7 +92,7 @@ export const LongLabelWraps = {
     return (
       <Wrapper>
         <Title>Long label wraps</Title>
-        <div style={{ maxWidth: '240px' }}>
+        <div style={{ width: '240px' }}>
           <TextBadge
             text="A very long badge label that wraps onto several lines"
             variant="infoSecondary"
