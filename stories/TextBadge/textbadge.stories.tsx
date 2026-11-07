@@ -11,7 +11,7 @@ export default {
     docs: {
       description: {
         component:
-          'TextBadge has no outer horizontal margin (since CUI-51). When placing it next to a label or another badge, provide the spacing from the parent, e.g. wrap them in a gapped `Stack` or flex container.',
+          'Short label or count rendered inline as a filled chip — tags, counters, status labels. It has no outer horizontal margin, so when placing it next to a label or another badge, provide the spacing from the parent, e.g. wrap them in a gapped `Stack` or flex container.',
       },
     },
   },

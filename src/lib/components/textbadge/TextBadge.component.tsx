@@ -79,9 +79,14 @@ type Props = {
 } & React.HTMLAttributes<HTMLSpanElement>;
 
 /**
- * Small inline badge. It has no outer horizontal margin (since CUI-51), so
- * when placing it next to a label or another badge, provide the spacing from
- * the parent, e.g. wrap them in a gapped `Stack` or flex container.
+ * Short label or count rendered inline as a filled chip — tags, counters,
+ * status labels. Use it when the value should stand apart from the surrounding
+ * text; prefer `StatusText` to tint running text by status, and `StatusIcon`
+ * where a glyph alone carries the meaning.
+ *
+ * It has no outer horizontal margin, so when placing it next to a label or
+ * another badge, provide the spacing from the parent — e.g. wrap them in a
+ * gapped `Stack` or flex container.
  */
 export function TextBadge({
   text,
