@@ -15,8 +15,6 @@ import {
   useNavigate,
   useRoutes,
 } from 'react-router';
-import styled from 'styled-components';
-import { ButtonIcon } from '../buttonv2/Buttonv2.component';
 import { Routes } from '../routes/Routes.component';
 import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
@@ -24,6 +22,7 @@ import {
   ScrollableContainer,
   TabBar,
   TabContent,
+  TabIcon,
   TabItem,
   TabsContainer,
   TabsScroller,
@@ -43,10 +42,6 @@ type TabsProps = {
   className?: string;
 };
 export const TabsContext = createContext<boolean>(false);
-
-const TabIcon = styled(ButtonIcon)`
-  color: ${(props) => props.theme.textSecondary};
-`;
 
 function Tabs({
   activeTabColor,
@@ -186,12 +181,13 @@ function Tabs({
         }}
         {...childRest}
       >
-        {icon && <TabIcon $label={label}>{icon}</TabIcon>}
-        {isSelected ? (
-          <BasicText>{label}</BasicText>
-        ) : (
-          <SecondaryText>{label}</SecondaryText>
-        )}
+        {icon && <TabIcon>{icon}</TabIcon>}
+        {label &&
+          (isSelected ? (
+            <BasicText>{label}</BasicText>
+          ) : (
+            <SecondaryText>{label}</SecondaryText>
+          ))}
         {textBadge && <EmphaseText>{textBadge}</EmphaseText>}
       </TabItem>
     );
