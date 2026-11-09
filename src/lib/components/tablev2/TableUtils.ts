@@ -51,6 +51,39 @@ export type TableStatus = (typeof TABLE_STATUSES)[number];
 export const isTableStatus = (value: unknown): value is TableStatus =>
   (TABLE_STATUSES as readonly unknown[]).includes(value);
 
+/**
+ * The fields of a react-query v3 or TanStack Query v5 result that
+ * `getTableStatus` reads, so a whole query result can be passed to it.
+ */
+export type TableQueryState = {
+  status: TableStatus | 'pending';
+  fetchStatus?: 'fetching' | 'paused' | 'idle';
+};
+
+/**
+ * Turns a react-query v3 or TanStack Query v5 result into the Table's `status`,
+ * for a table fed by a query; a table fed by a redux store maps its flags by
+ * hand, as the Table guideline shows.
+ *
+ * v3 statuses already match and pass through. v5 reports `'pending'` until the
+ * first response: it becomes `'loading'` while a request is in flight or paused
+ * offline, and `'idle'` when nothing is fetching, i.e. a disabled query. Both
+ * versions keep `'success'` during a background refetch, so the rows stay.
+ *
+ * @example
+ * const usersQuery = useQuery({ queryKey: ['users'], queryFn: fetchUsers });
+ * <Table status={getTableStatus(usersQuery)} data={usersQuery.data ?? []} ... />
+ */
+export const getTableStatus = ({
+  status,
+  fetchStatus,
+}: TableQueryState): TableStatus => {
+  if (status === 'pending') {
+    return fetchStatus === 'idle' ? 'idle' : 'loading';
+  }
+  return status;
+};
+
 export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
 
 export type TableVariantType =

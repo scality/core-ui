@@ -6,6 +6,11 @@ export { ButtonGroup } from './components/buttongroup/ButtonGroup.component';
 export type { ButtonGroupProps } from './components/buttongroup/ButtonGroup.component';
 export { Tabs, Tab } from './components/tabsv2/Tabsv2.component';
 export { Table } from './components/tablev2/Tablev2.component';
+export { getTableStatus } from './components/tablev2/TableUtils';
+export type {
+  TableQueryState,
+  TableStatus,
+} from './components/tablev2/TableUtils';
 
 // Keep MetricsTimeSpanProvider for backward compatibility (still used in external projects)
 export {
