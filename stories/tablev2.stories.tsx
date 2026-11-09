@@ -730,6 +730,251 @@ export const ErrorTable = {
   },
 };
 
+const usersEntityName = {
+  en: { singular: 'user', plural: 'users' },
+  fr: { singular: 'utilisateur', plural: 'utilisateurs' },
+};
+
+type FetchStatesArgs = {
+  result: 'no result yet' | 'empty' | 'rows';
+  loading: boolean;
+  failed: boolean;
+  withRetry: boolean;
+  search: string;
+  locale: 'en' | 'fr';
+};
+
+/**
+ * The fetch state props one at a time: `data`, `loading`, `error` and
+ * `onRetry`. Turn `loading` on while rows are shown to see the refresh bar,
+ * and `failed` to see the stale-data notice.
+ */
+export const FetchStates = {
+  args: {
+    result: 'rows',
+    loading: false,
+    failed: false,
+    withRetry: true,
+    search: '',
+    locale: 'en',
+  },
+  argTypes: {
+    result: {
+      control: { type: 'radio' },
+      options: ['no result yet', 'empty', 'rows'],
+      description: '`data`: `undefined`, `[]`, or rows',
+    },
+    loading: {
+      control: 'boolean',
+      description: '`loading`: a request is in flight',
+    },
+    failed: {
+      control: 'boolean',
+      description: '`error`: the last request failed',
+    },
+    withRetry: { control: 'boolean', description: 'Pass `onRetry`' },
+    search: { control: 'text', description: '`globalFilter`' },
+    locale: { control: { type: 'radio' }, options: ['en', 'fr'] },
+  },
+  render: ({
+    result,
+    loading,
+    failed,
+    withRetry,
+    search,
+    locale,
+  }: FetchStatesArgs) => (
+    <Box width="600px" height="300px">
+      <Table
+        columns={columns}
+        data={
+          result === 'no result yet'
+            ? undefined
+            : result === 'empty'
+              ? []
+              : data
+        }
+        loading={loading}
+        error={failed ? new Error('Request failed') : null}
+        onRetry={withRetry ? action('onRetry') : undefined}
+        globalFilter={search}
+        getRowId={getRowId}
+        entityName={usersEntityName}
+      >
+        <Table.SingleSelectableContent
+          rowHeight="h40"
+          separationLineVariant="backgroundLevel3"
+          locale={locale}
+        />
+      </Table>
+    </Box>
+  ),
+};
+
+type FetchStateExample = {
+  title: string;
+  data: Entry[] | undefined;
+  loading: boolean;
+  error?: Error;
+  globalFilter?: string;
+};
+
+const FETCH_STATE_EXAMPLES: FetchStateExample[] = [
+  { title: 'First load', data: undefined, loading: true },
+  { title: 'First load, initialData: []', data: [], loading: true },
+  { title: 'Refreshing', data, loading: true },
+  {
+    title: 'Refresh failed',
+    data,
+    loading: false,
+    error: new Error('Request failed'),
+  },
+  {
+    title: 'Load failed',
+    data: undefined,
+    loading: false,
+    error: new Error('Request failed'),
+  },
+  { title: 'Empty', data: [], loading: false },
+  { title: 'No match', data, loading: false, globalFilter: 'zzz' },
+  { title: 'Nothing requested', data: undefined, loading: false },
+];
+
+/** Every body the fetch state props can produce, side by side. */
+export const AllFetchStates = {
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(440px, 1fr))',
+        gap: '1.5rem',
+      }}
+    >
+      {FETCH_STATE_EXAMPLES.map(({ title, ...props }) => (
+        <div key={title}>
+          <Title>{title}</Title>
+          <Box height="220px">
+            <Table
+              columns={columns}
+              getRowId={getRowId}
+              entityName={usersEntityName}
+              onRetry={action('onRetry')}
+              {...props}
+            >
+              <Table.SingleSelectableContent
+                rowHeight="h40"
+                separationLineVariant="backgroundLevel3"
+              />
+            </Table>
+          </Box>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+const REFETCH_INTERVAL_MS = 6000;
+const REQUEST_DURATION_MS = 1200;
+
+/** A stand-in for react-query's `useQuery` with `refetchInterval`. */
+const useSimulatedUsersQuery = ({
+  failing,
+  empty,
+}: {
+  failing: boolean;
+  empty: boolean;
+}) => {
+  const [state, setState] = useState<{
+    data: Entry[] | undefined;
+    isFetching: boolean;
+    error: Error | null;
+  }>({ data: undefined, isFetching: true, error: null });
+  const optionsRef = React.useRef({ failing, empty });
+  React.useEffect(() => {
+    optionsRef.current = { failing, empty };
+  }, [failing, empty]);
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
+
+  const refetch = React.useCallback(() => {
+    setState((previous) => ({ ...previous, isFetching: true }));
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      const options = optionsRef.current;
+      // Like react-query: a failure keeps the previous data.
+      setState((previous) =>
+        options.failing
+          ? {
+              ...previous,
+              isFetching: false,
+              error: new Error('Request failed'),
+            }
+          : {
+              data: options.empty ? [] : data,
+              isFetching: false,
+              error: null,
+            },
+      );
+    }, REQUEST_DURATION_MS);
+  }, []);
+
+  React.useEffect(() => {
+    refetch();
+    const interval = setInterval(refetch, REFETCH_INTERVAL_MS);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeoutRef.current);
+    };
+  }, [refetch]);
+
+  return { ...state, refetch };
+};
+
+/**
+ * A polled list over time: the first load, then a refresh every 6 seconds
+ * that keeps the rows on screen. Make requests fail to see the rows stay under
+ * the notice, and Retry to recover.
+ */
+export const PolledQuery = {
+  render: () => {
+    const [failing, setFailing] = useState(false);
+    const [empty, setEmpty] = useState(false);
+    const users = useSimulatedUsersQuery({ failing, empty });
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <Flex style={{ gap: '0.5rem' }}>
+          <Button
+            variant="secondary"
+            label={failing ? 'Let requests succeed' : 'Make requests fail'}
+            onClick={() => setFailing((value) => !value)}
+          />
+          <Button
+            variant="secondary"
+            label={empty ? 'Return the users' : 'Return no users'}
+            onClick={() => setEmpty((value) => !value)}
+          />
+        </Flex>
+        <Box width="600px" height="300px">
+          <Table
+            columns={columns}
+            data={users.data}
+            loading={users.isFetching}
+            error={users.error}
+            onRetry={users.refetch}
+            getRowId={getRowId}
+            entityName={usersEntityName}
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
+            />
+          </Table>
+        </Box>
+      </div>
+    );
+  },
+};
+
 export const TableWithSyncButton = {
   render: ({}) => {
     const [isLoading, setIsLoading] = React.useState(false);
