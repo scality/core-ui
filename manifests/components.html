@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/68 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/68 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/68 without API description</a><span class="filter-pill ok" aria-disabled="true">396 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/396 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/68 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/68 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/68 without API description</a><span class="filter-pill ok" aria-disabled="true">397 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/397 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>3.7s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -19541,7 +19541,7 @@ import { action } from 'storybook/actions';</code></pre>
       <div class="badges">
         <label for="c-60-components-data-display-table-props" class="badge ok as-toggle">15 prop types</label>
         <label for="c-60-components-data-display-table-info" class="badge info as-toggle">1 info</label>
-        <label for="c-60-components-data-display-table-stories" class="badge ok as-toggle">13 stories</label>
+        <label for="c-60-components-data-display-table-stories" class="badge ok as-toggle">14 stories</label>
         <label for="c-60-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
         
       </div>
@@ -20533,6 +20533,48 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
             separationLineVariant=&quot;backgroundLevel3&quot;
             selectedId={selected}
             onRowSelected={(row) =&gt; setSelected(row.id)}
+          /&gt;
+        &lt;/Table&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+};</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Reveal Trigger In A Tight Row</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const RevealTriggerInATightRow = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Title&gt;Reveal trigger in a row with no room left&lt;/Title&gt;
+      &lt;div
+        style={{
+          height: &#39;320px&#39;,
+          width: &#39;900px&#39;,
+          minWidth: &#39;320px&#39;,
+          maxWidth: &#39;100%&#39;,
+          resize: &#39;horizontal&#39;,
+          overflow: &#39;hidden&#39;,
+          padding: &#39;20px&#39;,
+          border: &#39;1px dashed currentColor&#39;,
+          boxSizing: &#39;border-box&#39;,
+        }}
+      &gt;
+        &lt;Table
+          columns={tightRowColumns}
+          data={data}
+          defaultSortingKey={&#39;firstName&#39;}
+          getRowId={getRowId}
+          revealDroppedColumns
+        &gt;
+          &lt;Table.SingleSelectableContent
+            rowHeight=&quot;h40&quot;
+            separationLineVariant=&quot;backgroundLevel3&quot;
           /&gt;
         &lt;/Table&gt;
       &lt;/div&gt;

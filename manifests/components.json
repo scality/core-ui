@@ -4184,6 +4184,11 @@
           "id": "components-data-display-table--responsive-column-drop-with-reveal",
           "name": "Responsive Column Drop With Reveal",
           "snippet": "const ResponsiveColumnDropWithReveal = () => {\n  const [selected, setSelected] = useState<string | undefined>(undefined);\n\n  return (\n    <>\n      <Title>Responsive column drop with reveal</Title>\n      <div\n        style={{\n          height: '320px',\n          width: '900px',\n          minWidth: '320px',\n          maxWidth: '100%',\n          resize: 'horizontal',\n          overflow: 'hidden',\n          padding: '20px',\n          border: '1px dashed currentColor',\n          boxSizing: 'border-box',\n        }}\n      >\n        <Table\n          status=\"success\"\n          columns={responsiveColumns}\n          data={data}\n          defaultSortingKey={'health'}\n          getRowId={getRowId}\n          revealDroppedColumns\n        >\n          <Table.SingleSelectableContent\n            rowHeight=\"h40\"\n            separationLineVariant=\"backgroundLevel3\"\n            selectedId={selected}\n            onRowSelected={(row) => setSelected(row.id)}\n          />\n        </Table>\n      </div>\n    </>\n  );\n};"
+        },
+        {
+          "id": "components-data-display-table--reveal-trigger-in-a-tight-row",
+          "name": "Reveal Trigger In A Tight Row",
+          "snippet": "const RevealTriggerInATightRow = () => {\n  return (\n    <>\n      <Title>Reveal trigger in a row with no room left</Title>\n      <div\n        style={{\n          height: '320px',\n          width: '900px',\n          minWidth: '320px',\n          maxWidth: '100%',\n          resize: 'horizontal',\n          overflow: 'hidden',\n          padding: '20px',\n          border: '1px dashed currentColor',\n          boxSizing: 'border-box',\n        }}\n      >\n        <Table\n          columns={tightRowColumns}\n          data={data}\n          defaultSortingKey={'firstName'}\n          getRowId={getRowId}\n          revealDroppedColumns\n        >\n          <Table.SingleSelectableContent\n            rowHeight=\"h40\"\n            separationLineVariant=\"backgroundLevel3\"\n          />\n        </Table>\n      </div>\n    </>\n  );\n};"
         }
       ],
       "import": "import { Box, Button, EmptyCell, Icon, Modal, Stack, Table, Title } from '@scality/core-ui';\nimport { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';",
@@ -12808,6 +12813,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5242
+    "durationMs": 3729
   }
 }
