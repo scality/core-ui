@@ -232,6 +232,8 @@ export const TableBody = styled.div`
   display: block;
   flex-grow: 1;
   height: 100%;
+  /* Positioning context for TableRefreshIndicator. */
+  position: relative;
 `;
 export const TableWrapper = styled.div`
   display: flex;

@@ -18,7 +18,9 @@ import {
 import {
   bodyCellStyle,
   shouldIgnoreRowEvent,
+  TableRefreshIndicator,
   TableRows,
+  TableStaleNotice,
   TruncatableHeaderLabel,
   useTableScrollbar,
 } from './TableCommon';
@@ -306,8 +308,9 @@ export const MultiSelectableContent = <
           </HeadRow>
         ))}
       </div>
-
+      <TableStaleNotice locale={locale} />
       <TableBody role="rowgroup" className="tbody">
+        <TableRefreshIndicator locale={locale} />
         <TableRows
           locale={locale}
           children={children}

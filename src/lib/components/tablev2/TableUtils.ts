@@ -52,36 +52,100 @@ export const isTableStatus = (value: unknown): value is TableStatus =>
   (TABLE_STATUSES as readonly unknown[]).includes(value);
 
 /**
- * The fields of a react-query v3 or TanStack Query v5 result that
- * `getTableStatus` reads, so a whole query result can be passed to it.
+ * What fills the table body. `idle`, `loader` and `error` stand in for the
+ * rows; `empty`, `noMatch` and `rows` are an answer.
  */
-export type TableQueryState = {
-  status: TableStatus | 'pending';
-  fetchStatus?: 'fetching' | 'paused' | 'idle';
+export type TableBodyKind =
+  'idle' | 'loader' | 'error' | 'empty' | 'noMatch' | 'rows';
+
+/**
+ * What the table shows: the body, plus the two marks an answer can carry while
+ * a request is in flight (`refreshing`) or after one failed with rows on screen
+ * (`stale`).
+ */
+export type TableView = {
+  body: TableBodyKind;
+  refreshing: boolean;
+  stale: boolean;
+};
+
+const standIn = (body: TableBodyKind): TableView => ({
+  body,
+  refreshing: false,
+  stale: false,
+});
+
+/**
+ * Decides what the table shows from the facts its caller has: the data, whether
+ * a request is in flight and whether the last one failed. Rows already loaded
+ * always stay; a refresh or a failed refresh only marks them.
+ */
+export const resolveTableView = ({
+  data,
+  visibleRowCount,
+  loading,
+  error,
+  hasSettled,
+}: {
+  /** `undefined` until a first result arrives. */
+  data: readonly unknown[] | undefined;
+  /** Rows left once search and filters apply. */
+  visibleRowCount: number;
+  loading?: boolean;
+  error?: unknown;
+  /** Whether this table has rendered once with `loading` not `true`. */
+  hasSettled: boolean;
+}): TableView => {
+  if (data === undefined) {
+    // No `loading` at all most likely means a query whose caller only passed
+    // `data`: assume it is loading rather than claim anything.
+    if (loading ?? true) {
+      return standIn('loader');
+    }
+    return standIn(error ? 'error' : 'idle');
+  }
+  if (data.length === 0) {
+    // `data ?? []` and `initialData: []` hand over an empty array before the
+    // first answer; until a request has settled it cannot mean "empty".
+    if (loading && !hasSettled) {
+      return standIn('loader');
+    }
+    if (error) {
+      return standIn('error');
+    }
+    return { body: 'empty', refreshing: Boolean(loading), stale: false };
+  }
+  return {
+    body: visibleRowCount === 0 ? 'noMatch' : 'rows',
+    refreshing: Boolean(loading),
+    stale: Boolean(error),
+  };
 };
 
 /**
- * Turns a react-query v3 or TanStack Query v5 result into the Table's `status`,
- * for a table fed by a query; a table fed by a redux store maps its flags by
- * hand, as the Table guideline shows.
- *
- * v3 statuses already match and pass through. v5 reports `'pending'` until the
- * first response: it becomes `'loading'` while a request is in flight or paused
- * offline, and `'idle'` when nothing is fetching, i.e. a disabled query. Both
- * versions keep `'success'` during a background refetch, so the rows stay.
- *
- * @example
- * const usersQuery = useQuery({ queryKey: ['users'], queryFn: fetchUsers });
- * <Table status={getTableStatus(usersQuery)} data={usersQuery.data ?? []} ... />
+ * What the deprecated `status` prop shows, unchanged from 0.235.0 apart from
+ * `'idle'`: every status but `'success'` replaces the rows, and an unknown
+ * value with no data shows the error.
  */
-export const getTableStatus = ({
+export const resolveLegacyTableView = ({
   status,
-  fetchStatus,
-}: TableQueryState): TableStatus => {
-  if (status === 'pending') {
-    return fetchStatus === 'idle' ? 'idle' : 'loading';
+  isDataEmpty,
+  visibleRowCount,
+}: {
+  status: TableStatus;
+  isDataEmpty: boolean;
+  visibleRowCount: number;
+}): TableView => {
+  if (status === 'idle') {
+    return standIn('idle');
   }
-  return status;
+  if (status === 'loading') {
+    return standIn('loader');
+  }
+  if (status === 'error' || (!isTableStatus(status) && isDataEmpty)) {
+    return standIn('error');
+  }
+  return standIn(visibleRowCount === 0 ? 'empty' : 'rows');
 };
 
 export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
@@ -100,7 +164,16 @@ export const tableRowHeight = {
   h64: '4.572', //3 line
 };
 
-type TableMessagesType = 'error' | 'loading' | 'idle' | 'noResult';
+type TableMessagesType =
+  | 'error'
+  | 'loading'
+  | 'idle'
+  | 'noResult'
+  | 'noMatch'
+  | 'errorWithRetry'
+  | 'refreshError'
+  | 'refreshing'
+  | 'retry';
 
 export const translatedMessages = (
   type: TableMessagesType,
@@ -132,6 +205,39 @@ export const translatedMessages = (
       return `Aucun ${entityName?.fr?.singular || 'résultat'} trouvé`;
     }
     return `No ${entityName?.en.plural || 'results'} found`;
+  }
+  if (type === 'noMatch') {
+    if (locale === 'fr') {
+      return `Aucun ${entityName?.fr?.singular || 'résultat'} correspondant`;
+    }
+    return `No matching ${entityName?.en.plural || 'results'}`;
+  }
+  if (type === 'errorWithRetry') {
+    if (locale === 'fr') {
+      return `Erreur lors du chargement des ${entityName?.fr?.plural || 'données'}.`;
+    }
+    return `An error occurred while loading ${
+      entityName ? `the ${entityName.en.plural}` : 'data'
+    }.`;
+  }
+  if (type === 'refreshError') {
+    if (locale === 'fr') {
+      return `Impossible d'actualiser les ${
+        entityName?.fr?.plural || 'données'
+      }. Affichage des dernières données chargées.`;
+    }
+    return `Could not refresh ${
+      entityName ? `the ${entityName.en.plural}` : 'data'
+    }. Showing the last loaded data.`;
+  }
+  if (type === 'refreshing') {
+    if (locale === 'fr') {
+      return `Actualisation des ${entityName?.fr?.plural || 'données'}`;
+    }
+    return `Refreshing ${entityName?.en.plural || 'data'}`;
+  }
+  if (type === 'retry') {
+    return locale === 'fr' ? 'Réessayer' : 'Retry';
   }
 
   return '';
