@@ -67,19 +67,134 @@ A table never tells the user a resource is empty before it has finished loading.
 - When the data cannot be loaded, the table says so. It never falls back to "no results", which would tell the user the resource is empty when it is unknown.
 
 `status` is required: `'idle' | 'loading' | 'success' | 'error'`. The table cannot tell "still loading"
-from "loaded and empty" by looking at `data` alone, so it never guesses. Map your query state onto it
-(for example `status={isLoading ? 'loading' : isError ? 'error' : 'success'}`) and always pass it.
+from "loaded and empty" by looking at `data` alone, so it never guesses.
 
-Empty `data` with `status="success"` is the only way to show "No results". Any other `status` is a type
-error. If a caller works around the type, the table warns in the console with the value it received and
-shows the error state when there is no data. Rows still render when data is present, and "No results"
-shows if the filter matches nothing. The table never guesses loading or empty.
+### What each status shows
+
+| `status`    | Below the header, the table shows                                       |
+| ----------- | ----------------------------------------------------------------------- |
+| `'idle'`    | An empty body: no loader, no message                                    |
+| `'loading'` | The loader, "Loading data..." or "Loading users..." with `entityName`   |
+| `'error'`   | The error message                                                       |
+| `'success'` | The rows, or "No results" when `data` is empty or a filter matches none |
+
+Every status but `'success'` replaces the rows, including rows already on screen. A table that
+receives `'loading'` on every refresh goes blank for the length of each request, so map your state
+so that only the first load is `'loading'`, as below.
+
+`'idle'` means nothing was requested: a disabled query, or one waiting for an input the user has
+not given yet. Nothing is on its way, so there is no loader — it would spin forever — and nothing
+has answered, so there is no "No results". If the user has to act before rows can load, such as
+picking a node, say so next to the table.
+
+Empty `data` with `status="success"` is the only way to show "No results". Any other `status` is a
+type error. If a caller works around the type, the table warns in the console once for each value
+it receives, and shows the error state when there is no data. Rows still render when data is
+present, and "No results" shows if the filter matches nothing. The table never guesses loading or
+empty.
+
+<Canvas of={TableStories.IdleTable} />
 
 <Canvas of={TableStories.LoadingTable} />
 
 <Canvas of={TableStories.EmptyTable} />
 
 <Canvas of={TableStories.ErrorTable} />
+
+### Mapping a query onto `status`
+
+For react-query v3 and TanStack Query v5, pass the query result to `getTableStatus`:
+
+```tsx
+import { Table, getTableStatus } from '@scality/core-ui/dist/next';
+
+const usersQuery = useQuery({ queryKey: ['users'], queryFn: fetchUsers });
+
+<Table
+  status={getTableStatus(usersQuery)}
+  data={usersQuery.data ?? []}
+  columns={columns}
+>
+```
+
+v3 statuses pass through unchanged. v5 has no `'loading'` or `'idle'`: it reports `'pending'` until
+the first response, which `getTableStatus` turns into `'loading'` while a request runs and into
+`'idle'` when the query is disabled (`fetchStatus === 'idle'`). Both versions keep `'success'`
+during a background refetch, so a polled table keeps its rows.
+
+A dependent query is `'idle'` while the query it depends on loads. Pass `'loading'` for that wait,
+or the table shows an empty body before the loader:
+
+```tsx
+status={nodeQuery.isLoading ? 'loading' : getTableStatus(volumesQuery)}
+```
+
+A redux or saga store usually raises one `isLoading` flag for every request and keeps the previous
+rows meanwhile. Show the loader only while there is nothing to show:
+
+```tsx
+import type { TableStatus } from '@scality/core-ui/dist/next';
+
+const status: TableStatus = error
+  ? 'error'
+  : isLoading && data.length === 0
+    ? 'loading'
+    : 'success';
+```
+
+`data.length === 0` stands in for "never loaded", and it is wrong in two cases. A store that starts
+with `isLoading: false` reads as loaded and empty before its first request, so "No results" flashes.
+A resource that really is empty shows the loader again on every refresh. If either shows, keep a
+"loaded once" flag in the store and test it instead of `data.length`.
+
+### Paginated tables
+
+A table that grows page by page through `onBottom` takes the status of its **first page**. Once the
+first page is in, the table is `'success'` and later pages append rows. A status covering every
+page would keep the loader up until the last one arrives.
+
+- `useInfiniteQuery` already works this way: `status` stays `'success'` while a next page loads, so
+  `getTableStatus(query)` is the first-page status.
+- A hook that fetches every page itself exposes the overall status and, beside it, the first page's.
+  zenko-ui's `useAwsPaginatedEntities` returns `status`, which turns `'success'` after the last page,
+  and `firstPageStatus`, which turns `'success'` after the first. Pass `firstPageStatus` to the
+  table, and keep `status` for what needs every page, such as a total count.
+
+### When a refetch fails
+
+When a refetch fails while rows are on screen, react-query (v3 and v5) sets `status` to `'error'`
+once its retries run out, and keeps the previous `data`. The table follows `status`: the error
+message replaces the cached rows, and they come back on the next successful fetch. On a polled
+table, one failed poll blanks it until the next one succeeds.
+
+If the cached rows are still worth showing, keep `'success'` while there are rows and report the
+failure next to the table, for example in a banner:
+
+```tsx
+const status =
+  usersQuery.isError && usersQuery.data?.length
+    ? 'success'
+    : getTableStatus(usersQuery);
+```
+
+The redux mapping above makes the same choice in its first check: `error` replaces the rows,
+`error && data.length === 0` keeps them.
+
+### Migrating to a required `status`
+
+Up to 0.233.x, `status` was optional and a missing one meant `'success'`. It is required since
+0.234.0.
+
+- Do not hard-code `status="success"` on a table whose data is fetched. During the first load it
+  shows "No results", the message this prop exists to prevent. Hard-code it only for data that is
+  never fetched, such as rows built in the page.
+- For react-query or TanStack Query, pass `getTableStatus(query)`. Passing a TanStack
+  `query.status` as is is a type error, because `'pending'` is not a table status; if the type is
+  bypassed, every first load shows the error state.
+- For a redux or saga store, use the first-load mapping above rather than
+  `isLoading ? 'loading' : ...`, which blanks the rows on every refresh.
+- `'idle'` used to show the loader, like `'loading'`. It now shows an empty body, so a table that
+  passes `'idle'` while a request is in flight should pass `'loading'` instead.
 
 ## Row selection
 
