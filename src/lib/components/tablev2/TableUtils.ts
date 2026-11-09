@@ -52,33 +52,15 @@ export const isTableStatus = (value: unknown): value is TableStatus =>
   (TABLE_STATUSES as readonly unknown[]).includes(value);
 
 /**
- * What fills the table body. `idle`, `loader` and `error` stand in for the
- * rows; `empty`, `noMatch` and `rows` are an answer.
+ * What fills the table body: a stand-in for the rows (`idle`, `loader`,
+ * `error`) or an answer (`empty`, `rows`).
  */
-export type TableBodyKind =
-  'idle' | 'loader' | 'error' | 'empty' | 'noMatch' | 'rows';
+export type TableView = 'idle' | 'loader' | 'error' | 'empty' | 'rows';
 
 /**
- * What the table shows: the body, plus the two marks an answer can carry while
- * a request is in flight (`refreshing`) or after one failed with rows on screen
- * (`stale`).
- */
-export type TableView = {
-  body: TableBodyKind;
-  refreshing: boolean;
-  stale: boolean;
-};
-
-const standIn = (body: TableBodyKind): TableView => ({
-  body,
-  refreshing: false,
-  stale: false,
-});
-
-/**
- * Decides what the table shows from the facts its caller has: the data, whether
- * a request is in flight and whether the last one failed. Rows already loaded
- * always stay; a refresh or a failed refresh only marks them.
+ * Decides what the table body shows from the facts its caller has: the data,
+ * whether a request is in flight and whether the last one failed. Rows stay
+ * on screen while a request runs; a failed request shows the error.
  */
 export const resolveTableView = ({
   data,
@@ -100,26 +82,19 @@ export const resolveTableView = ({
     // No `loading` at all most likely means a query whose caller only passed
     // `data`: assume it is loading rather than claim anything.
     if (loading ?? true) {
-      return standIn('loader');
+      return 'loader';
     }
-    return standIn(error ? 'error' : 'idle');
+    return error ? 'error' : 'idle';
   }
-  if (data.length === 0) {
-    // `data ?? []` and `initialData: []` hand over an empty array before the
-    // first answer; until a request has settled it cannot mean "empty".
-    if (loading && !hasSettled) {
-      return standIn('loader');
-    }
-    if (error) {
-      return standIn('error');
-    }
-    return { body: 'empty', refreshing: Boolean(loading), stale: false };
+  // `data ?? []` and `initialData: []` hand over an empty array before the
+  // first answer; until a request has settled it cannot mean "empty".
+  if (data.length === 0 && loading && !hasSettled) {
+    return 'loader';
   }
-  return {
-    body: visibleRowCount === 0 ? 'noMatch' : 'rows',
-    refreshing: Boolean(loading),
-    stale: Boolean(error),
-  };
+  if (error) {
+    return 'error';
+  }
+  return visibleRowCount === 0 ? 'empty' : 'rows';
 };
 
 /**
@@ -137,15 +112,15 @@ export const resolveLegacyTableView = ({
   visibleRowCount: number;
 }): TableView => {
   if (status === 'idle') {
-    return standIn('idle');
+    return 'idle';
   }
   if (status === 'loading') {
-    return standIn('loader');
+    return 'loader';
   }
   if (status === 'error' || (!isTableStatus(status) && isDataEmpty)) {
-    return standIn('error');
+    return 'error';
   }
-  return standIn(visibleRowCount === 0 ? 'empty' : 'rows');
+  return visibleRowCount === 0 ? 'empty' : 'rows';
 };
 
 export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
@@ -164,16 +139,7 @@ export const tableRowHeight = {
   h64: '4.572', //3 line
 };
 
-type TableMessagesType =
-  | 'error'
-  | 'loading'
-  | 'idle'
-  | 'noResult'
-  | 'noMatch'
-  | 'errorWithRetry'
-  | 'refreshError'
-  | 'refreshing'
-  | 'retry';
+type TableMessagesType = 'error' | 'loading' | 'idle' | 'noResult';
 
 export const translatedMessages = (
   type: TableMessagesType,
@@ -205,39 +171,6 @@ export const translatedMessages = (
       return `Aucun ${entityName?.fr?.singular || 'résultat'} trouvé`;
     }
     return `No ${entityName?.en.plural || 'results'} found`;
-  }
-  if (type === 'noMatch') {
-    if (locale === 'fr') {
-      return `Aucun ${entityName?.fr?.singular || 'résultat'} correspondant`;
-    }
-    return `No matching ${entityName?.en.plural || 'results'}`;
-  }
-  if (type === 'errorWithRetry') {
-    if (locale === 'fr') {
-      return `Erreur lors du chargement des ${entityName?.fr?.plural || 'données'}.`;
-    }
-    return `An error occurred while loading ${
-      entityName ? `the ${entityName.en.plural}` : 'data'
-    }.`;
-  }
-  if (type === 'refreshError') {
-    if (locale === 'fr') {
-      return `Impossible d'actualiser les ${
-        entityName?.fr?.plural || 'données'
-      }. Affichage des dernières données chargées.`;
-    }
-    return `Could not refresh ${
-      entityName ? `the ${entityName.en.plural}` : 'data'
-    }. Showing the last loaded data.`;
-  }
-  if (type === 'refreshing') {
-    if (locale === 'fr') {
-      return `Actualisation des ${entityName?.fr?.plural || 'données'}`;
-    }
-    return `Refreshing ${entityName?.en.plural || 'data'}`;
-  }
-  if (type === 'retry') {
-    return locale === 'fr' ? 'Réessayer' : 'Retry';
   }
 
   return '';

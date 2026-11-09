@@ -739,22 +739,20 @@ type FetchStatesArgs = {
   result: 'no result yet' | 'empty' | 'rows';
   loading: boolean;
   failed: boolean;
-  withRetry: boolean;
   search: string;
   locale: 'en' | 'fr';
 };
 
 /**
- * The fetch state props one at a time: `data`, `loading`, `error` and
- * `onRetry`. Turn `loading` on while rows are shown to see the refresh bar,
- * and `failed` to see the stale-data notice.
+ * The fetch state props one at a time: `data`, `loading` and `error`. Rows
+ * stay on screen while `loading` is on; `failed` shows the error in their
+ * place.
  */
 export const FetchStates = {
   args: {
     result: 'rows',
     loading: false,
     failed: false,
-    withRetry: true,
     search: '',
     locale: 'en',
   },
@@ -772,18 +770,10 @@ export const FetchStates = {
       control: 'boolean',
       description: '`error`: the last request failed',
     },
-    withRetry: { control: 'boolean', description: 'Pass `onRetry`' },
     search: { control: 'text', description: '`globalFilter`' },
     locale: { control: { type: 'radio' }, options: ['en', 'fr'] },
   },
-  render: ({
-    result,
-    loading,
-    failed,
-    withRetry,
-    search,
-    locale,
-  }: FetchStatesArgs) => (
+  render: ({ result, loading, failed, search, locale }: FetchStatesArgs) => (
     <Box width="600px" height="300px">
       <Table
         columns={columns}
@@ -796,7 +786,6 @@ export const FetchStates = {
         }
         loading={loading}
         error={failed ? new Error('Request failed') : null}
-        onRetry={withRetry ? action('onRetry') : undefined}
         globalFilter={search}
         getRowId={getRowId}
         entityName={usersEntityName}
@@ -822,7 +811,7 @@ type FetchStateExample = {
 const FETCH_STATE_EXAMPLES: FetchStateExample[] = [
   { title: 'First load', data: undefined, loading: true },
   { title: 'First load, initialData: []', data: [], loading: true },
-  { title: 'Refreshing', data, loading: true },
+  { title: 'Refreshing: the rows stay', data, loading: true },
   {
     title: 'Refresh failed',
     data,
@@ -836,7 +825,12 @@ const FETCH_STATE_EXAMPLES: FetchStateExample[] = [
     error: new Error('Request failed'),
   },
   { title: 'Empty', data: [], loading: false },
-  { title: 'No match', data, loading: false, globalFilter: 'zzz' },
+  {
+    title: 'Filters hide every row',
+    data,
+    loading: false,
+    globalFilter: 'zzz',
+  },
   { title: 'Nothing requested', data: undefined, loading: false },
 ];
 
@@ -858,7 +852,6 @@ export const AllFetchStates = {
               columns={columns}
               getRowId={getRowId}
               entityName={usersEntityName}
-              onRetry={action('onRetry')}
               {...props}
             >
               <Table.SingleSelectableContent
@@ -931,8 +924,8 @@ const useSimulatedUsersQuery = ({
 
 /**
  * A polled list over time: the first load, then a refresh every 6 seconds
- * that keeps the rows on screen. Make requests fail to see the rows stay under
- * the notice, and Retry to recover.
+ * that keeps the rows on screen. Make requests fail to see the error replace
+ * the rows until a refresh succeeds again.
  */
 export const PolledQuery = {
   render: () => {
@@ -960,7 +953,6 @@ export const PolledQuery = {
             data={users.data}
             loading={users.isFetching}
             error={users.error}
-            onRetry={users.refetch}
             getRowId={getRowId}
             entityName={usersEntityName}
           >

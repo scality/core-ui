@@ -22,18 +22,13 @@ import {
   TableHeightKeyType,
   TableLocalType,
   tableRowHeight,
-  translatedMessages,
 } from './TableUtils';
 import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
-import styled, { CSSProperties, keyframes } from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { NoResult, UnsuccessfulResult } from '../UnsuccessfulResult.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { HeaderLabel } from './Tablestyle';
-import { Button } from '../buttonv2/Buttonv2.component';
-import { Icon } from '../icon/Icon.component';
-import { Text } from '../text/Text.component';
-import { spacing } from '../../spacing';
 
 const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
   const { scrollFade, hasScrollbar } = useTableContext();
@@ -351,28 +346,24 @@ export function TableRows<
 
   // The stand-ins below skip the children render function: render functions
   // often hide `rows` when their own data is empty.
-  if (view.body === 'idle') {
+  if (view === 'idle') {
     // Nothing was requested (e.g. a disabled query): a loader would spin
     // forever and "No results" would answer a question nobody asked.
     return <NoResult height={tableRowHeight[rowHeight]} />;
   }
-  if (view.body === 'loader') {
+  if (view === 'loader' || view === 'error') {
     return (
       <UnsuccessfulResult
         name={entityName}
-        status="loading"
+        status={view === 'loader' ? 'loading' : 'error'}
         locale={locale}
         rowHeight={rowHeight}
       />
     );
   }
-  if (view.body === 'error') {
-    return <TableErrorMessage locale={locale} />;
-  }
 
-  let result: JSX.Element;
-  if (view.body === 'rows') {
-    result = (
+  const result =
+    view === 'rows' ? (
       <VirtualizedRows<DATA_ROW>
         rows={rows}
         listRef={listRef}
@@ -383,17 +374,7 @@ export function TableRows<
         RenderRow={RenderRow}
         columnsKey={columnsKey}
       />
-    );
-  } else if (view.body === 'noMatch') {
-    result = (
-      <NoResult height={tableRowHeight[rowHeight]}>
-        <Text color="textSecondary">
-          {translatedMessages('noMatch', entityName, locale)}
-        </Text>
-      </NoResult>
-    );
-  } else {
-    result = (
+    ) : (
       <UnsuccessfulResult
         name={entityName}
         status="noResult"
@@ -401,138 +382,6 @@ export function TableRows<
         rowHeight={rowHeight}
       />
     );
-  }
 
   return typeof children === 'function' ? children(result) : result;
 }
-
-const RetryButton = ({ locale }: { locale?: TableLocalType }) => {
-  const { onRetry } = useTableContext();
-  if (!onRetry) {
-    return null;
-  }
-  return (
-    <Button
-      variant="outline"
-      size="inline"
-      label={translatedMessages('retry', undefined, locale)}
-      // Called without the click event, so `onRetry={query.refetch}` does not
-      // receive it as refetch options.
-      onClick={() => onRetry()}
-    />
-  );
-};
-
-/**
- * The error a failed request shows in place of the rows. With `onRetry` it
- * offers a Retry button; without, it asks to refresh the page as before.
- */
-const TableErrorMessage = ({ locale }: { locale?: TableLocalType }) => {
-  const { entityName, rowHeight, onRetry } = useTableContext();
-  if (!onRetry) {
-    return (
-      <UnsuccessfulResult
-        name={entityName}
-        status="error"
-        locale={locale}
-        rowHeight={rowHeight}
-      />
-    );
-  }
-  return (
-    <NoResult height={tableRowHeight[rowHeight]}>
-      <Icon name="Exclamation-circle" color="statusWarning" />
-      <Text color="textSecondary">
-        {translatedMessages('errorWithRetry', entityName, locale)}
-      </Text>
-      <RetryButton locale={locale} />
-    </NoResult>
-  );
-};
-
-const indeterminate = keyframes`
-  from { transform: translateX(-100%); }
-  to { transform: translateX(250%); }
-`;
-
-const RefreshBar = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 40%;
-    background: ${(props) => props.theme.selectedActive};
-    animation: ${indeterminate} 1.2s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::after {
-      width: 100%;
-      animation: none;
-      opacity: 0.6;
-    }
-  }
-`;
-
-/**
- * A thin bar over the top of the body while a request runs with an answer
- * already on screen, so a refresh never hides the rows. Renders inside
- * `TableBody`, which is its positioning context.
- */
-export const TableRefreshIndicator = ({
-  locale,
-}: {
-  locale?: TableLocalType;
-}) => {
-  const { view, entityName } = useTableContext();
-  if (!view.refreshing) {
-    return null;
-  }
-  return (
-    <RefreshBar
-      role="progressbar"
-      aria-label={translatedMessages('refreshing', entityName, locale)}
-    />
-  );
-};
-
-const StaleNotice = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: ${spacing.r8};
-  padding: ${spacing.r8} ${spacing.r16};
-  border-bottom: 1px solid ${(props) => props.theme.backgroundLevel1};
-`;
-
-/**
- * Says the rows on screen are from an earlier request because the last one
- * failed, with a Retry button when `onRetry` is given. Sits between the header
- * and the body so the rows keep their place.
- */
-export const TableStaleNotice = ({ locale }: { locale?: TableLocalType }) => {
-  const { view, entityName } = useTableContext();
-  if (!view.stale) {
-    return null;
-  }
-  return (
-    <StaleNotice role="status">
-      <Icon name="Exclamation-circle" color="statusWarning" />
-      <Text color="textSecondary">
-        {translatedMessages('refreshError', entityName, locale)}
-      </Text>
-      <RetryButton locale={locale} />
-    </StaleNotice>
-  );
-};

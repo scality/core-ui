@@ -29,68 +29,52 @@ describe('resolveTableView', () => {
   const base = { visibleRowCount: 0, hasSettled: true };
 
   it.each([
-    [
-      'no result yet, loading not given',
-      { data: undefined },
-      { body: 'loader', refreshing: false, stale: false },
-    ],
+    ['no result yet, loading not given', { data: undefined }, 'loader'],
     [
       'no result yet, request in flight',
       { data: undefined, loading: true },
-      { body: 'loader', refreshing: false, stale: false },
+      'loader',
     ],
     [
       'no result yet, nothing requested',
       { data: undefined, loading: false },
-      { body: 'idle', refreshing: false, stale: false },
+      'idle',
     ],
     [
       'no result yet, request failed',
       { data: undefined, loading: false, error: failure },
-      { body: 'error', refreshing: false, stale: false },
+      'error',
     ],
     [
       'empty array during the first request',
       { data: [], loading: true, hasSettled: false },
-      { body: 'loader', refreshing: false, stale: false },
+      'loader',
     ],
     [
       'empty array refreshing after a settled request',
       { data: [], loading: true },
-      { body: 'empty', refreshing: true, stale: false },
+      'empty',
     ],
-    [
-      'empty result',
-      { data: [] },
-      { body: 'empty', refreshing: false, stale: false },
-    ],
+    ['empty result', { data: [] }, 'empty'],
     [
       'empty result whose last request failed',
       { data: [], error: failure },
-      { body: 'error', refreshing: false, stale: false },
+      'error',
     ],
-    [
-      'rows',
-      { data: rows, visibleRowCount: 2 },
-      { body: 'rows', refreshing: false, stale: false },
-    ],
+    ['rows', { data: rows, visibleRowCount: 2 }, 'rows'],
     [
       'rows refreshing',
       { data: rows, visibleRowCount: 2, loading: true, hasSettled: false },
-      { body: 'rows', refreshing: true, stale: false },
+      'rows',
     ],
     [
       'rows whose refresh failed',
       { data: rows, visibleRowCount: 2, error: failure },
-      { body: 'rows', refreshing: false, stale: true },
+      'error',
     ],
-    [
-      'rows hidden by the filters',
-      { data: rows, visibleRowCount: 0 },
-      { body: 'noMatch', refreshing: false, stale: false },
-    ],
-  ] as const)('%s', (_, input, expected) => {
-    expect(resolveTableView({ ...base, ...input })).toEqual(expected);
+    ['rows hidden by the filters', { data: rows, visibleRowCount: 0 }, 'empty'],
+  ] as const)('%s: %s', (_, input, expected) => {
+    expect(resolveTableView({ ...base, ...input })).toBe(expected);
   });
 });
 
@@ -106,14 +90,14 @@ describe('resolveLegacyTableView', () => {
     ['pending', false, 2, 'rows'],
   ])(
     'status %s, data empty %s, %s visible rows: %s',
-    (status, isDataEmpty, visibleRowCount, body) => {
+    (status, isDataEmpty, visibleRowCount, view) => {
       expect(
         resolveLegacyTableView({
           status: status as any,
           isDataEmpty,
           visibleRowCount,
         }),
-      ).toEqual({ body, refreshing: false, stale: false });
+      ).toBe(view);
     },
   );
 });

@@ -73,7 +73,7 @@ export type CellProps<
 
 /**
  * The fetch state as facts the caller already has. react-query v3 and TanStack
- * v5 results map one to one: `data`, `isFetching`, `error` and `refetch`.
+ * v5 results map one to one: `data`, `isFetching` and `error`.
  */
 type TableFetchStateProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -81,7 +81,7 @@ type TableFetchStateProps<
   /**
    * Rows to show. Pass `undefined` until a first result arrives, as react-query's
    * `data` does, so the table shows its loader rather than "No results". Rows
-   * already shown stay on screen while a refresh runs or after one fails.
+   * already shown stay on screen while a refresh runs.
    *
    * Pass the query's `data` as is rather than `data ?? []`. An empty array
    * shows the loader only until a first request completes in this table;
@@ -90,22 +90,16 @@ type TableFetchStateProps<
    */
   data: DATA_ROW[] | undefined;
   /**
-   * Whether a request for `data` is in flight: react-query's `isFetching`. With
-   * rows on screen a progress bar runs above them; with none, the loader
-   * shows. Leave it out for rows built in the page.
+   * Whether a request for `data` is in flight: react-query's `isFetching`.
+   * Rows on screen stay while it runs; with none, the loader shows. Leave it
+   * out for rows built in the page.
    */
   loading?: boolean;
   /**
    * The last request's error: react-query's `error`. Any truthy value means the
-   * request failed. With rows on screen they stay under a notice; with none,
-   * the error message replaces the body.
+   * request failed, and the error message replaces the body, rows included.
    */
   error?: unknown;
-  /**
-   * Called from the Retry button shown with an error, e.g. react-query's
-   * `refetch`. Without it the error message asks to refresh the page.
-   */
-  onRetry?: () => void;
   status?: never;
 };
 
@@ -124,7 +118,6 @@ type TableStatusProps<
   status: TableStatus;
   loading?: never;
   error?: never;
-  onRetry?: never;
 };
 
 export type TableProps<
@@ -214,7 +207,6 @@ type TableContextType<
   isDataEmpty: boolean;
   /** What the body shows, resolved from the fetch state props or `status`. */
   view: TableView;
-  onRetry?: () => void;
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -308,7 +300,6 @@ function Table<
   status,
   loading,
   error,
-  onRetry,
   entityName,
   revealDroppedColumns = false,
   scrollFade = true,
@@ -578,7 +569,6 @@ function Table<
     status,
     isDataEmpty,
     view,
-    onRetry,
     entityName,
     syncScrollListener,
     setSyncScrollListener,

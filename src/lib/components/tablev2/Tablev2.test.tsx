@@ -935,7 +935,6 @@ describe('TableV2', () => {
       data: Record<string, unknown>[] | undefined;
       loading?: boolean;
       error?: unknown;
-      onRetry?: () => void;
       globalFilter?: string;
     };
 
@@ -975,32 +974,12 @@ describe('TableV2', () => {
       expect(screen.queryByText(/error/i)).not.toBeInTheDocument();
     });
 
-    it('offers Retry when the first request fails', async () => {
-      const onRetry = jest.fn();
-      await renderWith({
-        data: undefined,
-        loading: false,
-        error: failure,
-        onRetry,
-      });
+    it('shows the error when the first request fails', async () => {
+      await renderWith({ data: undefined, loading: false, error: failure });
 
       expect(
         screen.getByText(/an error occurred while loading the volumes/i),
       ).toBeInTheDocument();
-      expect(screen.queryByText(/refresh the page/i)).not.toBeInTheDocument();
-
-      await userEvent.click(screen.getByRole('button', { name: 'Retry' }));
-
-      expect(onRetry).toHaveBeenCalledTimes(1);
-    });
-
-    it('asks to refresh the page when a failed request has no onRetry', async () => {
-      await renderWith({ data: undefined, loading: false, error: failure });
-
-      expect(screen.getByText(/refresh the/i)).toBeInTheDocument();
-      expect(
-        screen.queryByRole('button', { name: 'Retry' }),
-      ).not.toBeInTheDocument();
     });
 
     it('shows the loader for an empty array during the first request', async () => {
@@ -1014,18 +993,14 @@ describe('TableV2', () => {
       await renderWith({ data: [] });
 
       expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
     });
 
-    it('keeps "No results" and shows a progress bar when an empty result refreshes', async () => {
+    it('keeps "No results" while an empty result refreshes', async () => {
       const { rerender } = await renderWith({ data: [], loading: true });
       rerender(tableWith({ data: [], loading: false }));
       rerender(tableWith({ data: [], loading: true }));
 
       expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
-      expect(
-        screen.getByRole('progressbar', { name: /refreshing volumes/i }),
-      ).toBeInTheDocument();
       expect(screen.queryByText(/loading volumes/i)).not.toBeInTheDocument();
     });
 
@@ -1045,38 +1020,28 @@ describe('TableV2', () => {
       expect(screen.queryAllByRole('row')).toHaveLength(1);
     });
 
-    it('keeps the rows and shows a progress bar while refreshing', async () => {
+    it('keeps the rows while they refresh', async () => {
       await renderWith({ data, loading: true });
 
       expect(screen.getAllByRole('row').length).toBe(data.length + 1);
-      expect(
-        screen.getByRole('progressbar', { name: /refreshing volumes/i }),
-      ).toBeInTheDocument();
       expect(screen.queryByText(/loading volumes/i)).not.toBeInTheDocument();
     });
 
-    it('keeps the rows under a notice with Retry when a refresh fails', async () => {
-      const onRetry = jest.fn();
-      await renderWith({ data, error: failure, onRetry });
+    it('replaces the rows with the error when a refresh fails', async () => {
+      await renderWith({ data, error: failure });
 
-      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
-      const notice = screen.getByRole('status');
       expect(
-        within(notice).getByText(/could not refresh the volumes/i),
+        screen.getByText(/an error occurred while loading the volumes/i),
       ).toBeInTheDocument();
-
-      await userEvent.click(
-        within(notice).getByRole('button', { name: 'Retry' }),
-      );
-
-      expect(onRetry).toHaveBeenCalledTimes(1);
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
     });
 
-    it('says no rows match when the filters hide every row', async () => {
+    it('shows "No results" when the filters hide every row', async () => {
       await renderWith({ data, globalFilter: 'zzzzzz' });
 
-      expect(screen.getByText(/no matching volumes/i)).toBeInTheDocument();
-      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
     });
 
     it('does not warn without a status', async () => {
@@ -1108,22 +1073,12 @@ describe('TableV2', () => {
       },
     );
 
-    it.each([
-      ['no-results message', { data: [] }, /no volumes found/i],
-      [
-        'no-match message',
-        { data, globalFilter: 'zzzzzz' },
-        /no matching volumes/i,
-      ],
-    ])(
-      'passes the %s through the children render function',
-      async (_, props: FetchProps, message) => {
-        render(tableWith(props, renderFunction));
-        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    it('passes the no-results message through the children render function', async () => {
+      render(tableWith({ data: [] }, renderFunction));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
-        const output = screen.getByTestId('render-function-output');
-        expect(within(output).getByText(message)).toBeInTheDocument();
-      },
-    );
+      const output = screen.getByTestId('render-function-output');
+      expect(within(output).getByText(/no volumes found/i)).toBeInTheDocument();
+    });
   });
 });
