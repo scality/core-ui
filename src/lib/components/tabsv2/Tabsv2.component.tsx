@@ -16,10 +16,11 @@ import {
   useRoutes,
 } from 'react-router';
 import { Routes } from '../routes/Routes.component';
-import { BasicText, EmphaseText, SecondaryText } from '../text/Text.component';
+import { BasicText, SecondaryText } from '../text/Text.component';
 import { ScrollButton } from './ScrollButton';
 import {
   ScrollableContainer,
+  TabBadge,
   TabBar,
   TabContent,
   TabIcon,
@@ -181,14 +182,14 @@ function Tabs({
         }}
         {...childRest}
       >
-        {icon && <TabIcon>{icon}</TabIcon>}
+        {icon && <TabIcon $label={label}>{icon}</TabIcon>}
         {label &&
           (isSelected ? (
             <BasicText>{label}</BasicText>
           ) : (
             <SecondaryText>{label}</SecondaryText>
           ))}
-        {textBadge && <EmphaseText>{textBadge}</EmphaseText>}
+        {textBadge && <TabBadge>{textBadge}</TabBadge>}
       </TabItem>
     );
   });

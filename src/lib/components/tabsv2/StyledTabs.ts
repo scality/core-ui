@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
+import { EmphaseText } from '../text/Text.component';
 
 export const TabBar = styled.div`
   display: flex;
   height: ${spacing.r40};
 `;
-export const TabIcon = styled.span`
+export const TabIcon = styled.span<{ $label?: JSX.Element | string }>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.textSecondary};
 
-  &:not(:last-child) {
-    margin-right: ${spacing.r4};
-  }
+  /* TabItem's gap already separates the icon from a badge; only a label needs extra room */
+  ${(props) => (props.$label ? `margin-right: ${spacing.r4};` : '')}
+`;
+export const TabBadge = styled(EmphaseText)`
+  margin-right: ${spacing.r4};
 `;
 export const TabItem = styled.div<{
   $selected?: boolean;
