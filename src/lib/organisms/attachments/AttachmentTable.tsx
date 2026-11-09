@@ -12,21 +12,20 @@ import {
   useState,
 } from 'react';
 import { useCombobox, UseComboboxStateChange } from 'downshift';
-import { Box } from '../../components/box/Box';
-import { Button } from '../../components/buttonv2/Buttonv2.component';
-import { Table } from '../../components/tablev2/Tablev2.component';
+import { Box, Button, Table } from '../../next';
 
-import { ConstrainedText } from '../../components/constrainedtext/Constrainedtext.component';
-import { Icon } from '../../components/icon/Icon.component';
-import { Loader } from '../../components/loader/Loader.component';
 import {
+  ConstrainedText,
+  Icon,
+  Loader,
   SearchInput,
-  SEARCH_INPUT_MIN_WIDTH,
-} from '../../components/searchinput/SearchInput.component';
-import { SecondaryText, Text } from '../../components/text/Text.component';
-import { Tooltip } from '../../components/tooltip/Tooltip.component';
+  SecondaryText,
+  Text,
+  Tooltip,
+} from '../../index';
 import styled, { css } from 'styled-components';
 import { spacing, Stack } from '../../spacing';
+import { SEARCH_INPUT_MIN_WIDTH } from '../../components/searchinput/SearchInput.component';
 import {
   AttachableEntity,
   AttachmentOperation,
