@@ -746,7 +746,9 @@ describe('TableV2', () => {
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
       expect(warnSpy).toHaveBeenCalled();
-      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('undefined'),
+      );
     });
 
     it('shows "No results found" when a global filter matches nothing with status success', async () => {
@@ -763,7 +765,7 @@ describe('TableV2', () => {
 
       expect(screen.getByText(/no results found/i)).toBeInTheDocument();
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
-      expect(warnSpy.mock.calls[0][0]).toContain('ok');
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ok'));
     });
 
     it('shows the loader when status is loading and data is empty', async () => {
@@ -798,7 +800,9 @@ describe('TableV2', () => {
       expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
       expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
       expect(warnSpy).toHaveBeenCalled();
-      expect(warnSpy.mock.calls[0][0]).toContain('undefined');
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('undefined'),
+      );
     });
 
     it('shows the error message and names the value when status is unknown and data is empty', async () => {
@@ -806,7 +810,7 @@ describe('TableV2', () => {
       await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
       expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
-      expect(warnSpy.mock.calls[0][0]).toContain('pending');
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('pending'));
     });
 
     it('renders rows and names the value when status is unknown and data is not empty', async () => {
@@ -815,7 +819,7 @@ describe('TableV2', () => {
 
       expect(screen.getAllByRole('row').length).toBe(data.length + 1);
       expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
-      expect(warnSpy.mock.calls[0][0]).toContain('ok');
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ok'));
     });
 
     it('warns on every render with an invalid status', async () => {
@@ -851,6 +855,48 @@ describe('TableV2', () => {
       expect(
         screen.queryByText(data[0].firstName as string),
       ).not.toBeInTheDocument();
+    });
+
+    const renderWithEmptyStateRenderFunction = (status: string) =>
+      render(
+        <Table columns={columns} data={[]} {...({ status } as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          >
+            {(rows) => (
+              <div data-testid="render-function-output">
+                {rows}
+                <span>Nothing attached</span>
+              </div>
+            )}
+          </Table.SingleSelectableContent>
+        </Table>,
+      );
+
+    it.each([
+      ['idle', /loading/i],
+      ['loading', /loading/i],
+      ['error', /an error occurred/i],
+      ['pending', /an error occurred/i],
+    ])(
+      'shows the %s placeholder without calling the children render function',
+      async (status, placeholder) => {
+        renderWithEmptyStateRenderFunction(status);
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(screen.getByText(placeholder)).toBeInTheDocument();
+        expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+      },
+    );
+
+    it('passes the no-results message through the children render function', async () => {
+      renderWithEmptyStateRenderFunction('success');
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      const output = screen.getByTestId('render-function-output');
+      expect(within(output).getByText(/no results found/i)).toBeInTheDocument();
+      expect(within(output).getByText('Nothing attached')).toBeInTheDocument();
     });
 
     it.each(['idle', 'loading', 'error', 'success'])(

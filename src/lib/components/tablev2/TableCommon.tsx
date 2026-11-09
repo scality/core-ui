@@ -19,6 +19,8 @@ import {
 } from 'react-window';
 import {
   convertRemToPixels,
+  isTableStatus,
+  TABLE_STATUSES,
   TableHeightKeyType,
   TableLocalType,
   tableRowHeight,
@@ -306,7 +308,6 @@ type TableRowsProps<
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
-const TABLE_STATUSES: string[] = ['idle', 'loading', 'error', 'success'];
 
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
@@ -346,17 +347,17 @@ export function TableRows<
     return index;
   }
 
-  const rawStatus: string = status as string;
-  if (!TABLE_STATUSES.includes(rawStatus)) {
+  const isValidStatus = isTableStatus(status);
+  if (!isValidStatus) {
     console.warn(
-      `Table: received invalid \`status\` ${JSON.stringify(rawStatus) ?? String(rawStatus)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
+      `Table: received invalid \`status\` ${JSON.stringify(status) ?? String(status)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
     );
   }
 
   let messageStatus: 'idle' | 'loading' | 'error' | 'noResult' | undefined;
   if (status === 'idle' || status === 'loading' || status === 'error') {
     messageStatus = status;
-  } else if (!TABLE_STATUSES.includes(rawStatus) && isDataEmpty) {
+  } else if (!isValidStatus && isDataEmpty) {
     messageStatus = 'error';
   } else if (rows.length === 0) {
     messageStatus = 'noResult';
@@ -381,6 +382,12 @@ export function TableRows<
       columnsKey={columnsKey}
     />
   );
+
+  // Render functions often hide `rows` when their own data is empty, so a
+  // fetch-state placeholder must not go through them.
+  if (messageStatus && messageStatus !== 'noResult') {
+    return result;
+  }
 
   return typeof children === 'function' ? children(result) : result;
 }

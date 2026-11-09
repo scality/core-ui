@@ -110,6 +110,15 @@ describe('AttachmentTable', () => {
     expect(screen.getByText('First entity')).toBeInTheDocument();
   });
 
+  it('should render the table error message when attached entities fail to load', () => {
+    renderWithAttachedEntitiesStatus('error');
+
+    expect(
+      screen.getByText(/an error occurred while loading the entities/i),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('First entity')).not.toBeInTheDocument();
+  });
+
   it('attaches the suggestion the user picks', async () => {
     const { attachedNames } = renderAttachmentTable();
 

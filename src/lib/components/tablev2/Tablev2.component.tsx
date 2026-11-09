@@ -37,7 +37,7 @@ import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper, TooltipContent } from './Tablestyle';
-import { compareHealth, TableHeightKeyType } from './TableUtils';
+import { compareHealth, TableHeightKeyType, TableStatus } from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import {
   useDroppedColumns,
@@ -99,7 +99,7 @@ export type TableProps<
    * other value is a type error; if bypassed, the table warns in the console
    * and shows the error state when there is no data.
    */
-  status: 'idle' | 'loading' | 'error' | 'success';
+  status: TableStatus;
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -147,7 +147,7 @@ type TableContextType<
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
-  status: 'idle' | 'loading' | 'error' | 'success';
+  status: TableStatus;
   /** True when the raw `data` prop is empty, regardless of any active filter. */
   isDataEmpty: boolean;
   entityName?: {

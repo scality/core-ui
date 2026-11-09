@@ -730,22 +730,7 @@ export const AttachmentTable = <
           separationLineVariant="backgroundLevel2"
         >
           {(rows) =>
-            initiallyAttachedEntitiesStatus === 'idle' ||
-            initiallyAttachedEntitiesStatus === 'loading' ? (
-              rows
-            ) : initiallyAttachedEntitiesStatus === 'error' ? (
-              <Stack
-                style={{
-                  justifyContent: 'center',
-                  height: `${tableRowHeight[rowHeight]}rem`,
-                }}
-              >
-                <Icon name="Exclamation-circle" color="statusWarning" />
-                <Text color="textSecondary">
-                  Failed to load attached {entityName.plural}.
-                </Text>
-              </Stack>
-            ) : desiredAttachedEntities.length === 0 ? (
+            desiredAttachedEntities.length === 0 ? (
               <CenterredSecondaryText>
                 No {entityName.plural} attached
               </CenterredSecondaryText>

@@ -44,6 +44,13 @@ export function convertRemToPixels(rem) {
 }
 export type TableLocalType = 'en' | 'fr';
 
+export const TABLE_STATUSES = ['idle', 'loading', 'error', 'success'] as const;
+
+export type TableStatus = (typeof TABLE_STATUSES)[number];
+
+export const isTableStatus = (value: unknown): value is TableStatus =>
+  (TABLE_STATUSES as readonly unknown[]).includes(value);
+
 export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
 
 export type TableVariantType =
