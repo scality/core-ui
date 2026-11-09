@@ -822,29 +822,51 @@ describe('TableV2', () => {
       expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ok'));
     });
 
-    it('warns on every render with an invalid status', async () => {
-      const { rerender } = renderStatusTable({ status: 'pending', data: [] });
-      const callsAfterMount = warnSpy.mock.calls.length;
-      expect(callsAfterMount).toBeGreaterThanOrEqual(1);
+    it('warns once per invalid value rather than on every render', async () => {
+      const tableWithStatus = (status: unknown) => (
+        <Table columns={columns} data={[]} {...({ status } as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      );
+      const { rerender } = render(tableWithStatus('pending'));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+      rerender(tableWithStatus('pending'));
+      rerender(tableWithStatus('pending'));
 
-      const rerenderTable = () =>
-        rerender(
-          <Table
-            columns={columns}
-            data={[]}
-            {...({ status: 'pending' } as any)}
-          >
-            <Table.SingleSelectableContent
-              rowHeight="h40"
-              separationLineVariant="backgroundLevel3"
-            />
-          </Table>,
-        );
-      rerenderTable();
-      rerenderTable();
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('pending'));
 
-      expect(warnSpy.mock.calls.length).toBeGreaterThan(callsAfterMount);
-      expect(warnSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
+      rerender(tableWithStatus('ok'));
+
+      expect(warnSpy).toHaveBeenCalledTimes(2);
+      expect(warnSpy).toHaveBeenLastCalledWith(expect.stringContaining('ok'));
+
+      rerender(tableWithStatus('success'));
+
+      expect(warnSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('shows neither the loader nor "No results" when status is idle', async () => {
+      renderStatusTable({ status: 'idle', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText('First Name')).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
+    });
+
+    it('hides rows without showing the loader when status is idle with data', async () => {
+      renderStatusTable({ status: 'idle' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
     });
 
     it('shows the loader and hides rows when status is loading with data', async () => {
@@ -875,7 +897,6 @@ describe('TableV2', () => {
       );
 
     it.each([
-      ['idle', /loading/i],
       ['loading', /loading/i],
       ['error', /an error occurred/i],
       ['pending', /an error occurred/i],
@@ -889,6 +910,14 @@ describe('TableV2', () => {
         expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
       },
     );
+
+    it('keeps the idle body out of the children render function', async () => {
+      renderWithEmptyStateRenderFunction('idle');
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
 
     it('passes the no-results message through the children render function', async () => {
       renderWithEmptyStateRenderFunction('success');

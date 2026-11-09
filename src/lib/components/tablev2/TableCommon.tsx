@@ -20,7 +20,6 @@ import {
 import {
   convertRemToPixels,
   isTableStatus,
-  TABLE_STATUSES,
   TableHeightKeyType,
   TableLocalType,
   tableRowHeight,
@@ -28,7 +27,7 @@ import {
 import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
 import styled, { CSSProperties } from 'styled-components';
-import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+import { NoResult, UnsuccessfulResult } from '../UnsuccessfulResult.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { HeaderLabel } from './Tablestyle';
 
@@ -347,15 +346,18 @@ export function TableRows<
     return index;
   }
 
-  const isValidStatus = isTableStatus(status);
-  if (!isValidStatus) {
-    console.warn(
-      `Table: received invalid \`status\` ${JSON.stringify(status) ?? String(status)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
-    );
+  // Nothing was requested (e.g. a disabled query): a loader would spin forever
+  // and "No results" would answer a question nobody asked, so the body stays
+  // empty at placeholder height. UnsuccessfulResult keeps its own 'idle'
+  // loader, since it is a stable export used outside the table.
+  if (status === 'idle') {
+    return <NoResult height={tableRowHeight[rowHeight]} />;
   }
 
-  let messageStatus: 'idle' | 'loading' | 'error' | 'noResult' | undefined;
-  if (status === 'idle' || status === 'loading' || status === 'error') {
+  const isValidStatus = isTableStatus(status);
+
+  let messageStatus: 'loading' | 'error' | 'noResult' | undefined;
+  if (status === 'loading' || status === 'error') {
     messageStatus = status;
   } else if (!isValidStatus && isDataEmpty) {
     messageStatus = 'error';

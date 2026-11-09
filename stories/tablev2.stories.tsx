@@ -683,6 +683,27 @@ export const LoadingTable = {
   },
 };
 
+export const IdleTable = {
+  render: ({}) => {
+    return (
+      <Box width="500px" height="200px">
+        <Table
+          columns={columns}
+          data={[]}
+          defaultSortingKey={'health'}
+          getRowId={getRowId}
+          status="idle"
+        >
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      </Box>
+    );
+  },
+};
+
 export const ErrorTable = {
   render: ({}) => {
     return (

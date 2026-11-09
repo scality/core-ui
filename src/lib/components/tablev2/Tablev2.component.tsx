@@ -37,7 +37,13 @@ import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper, TooltipContent } from './Tablestyle';
-import { compareHealth, TableHeightKeyType, TableStatus } from './TableUtils';
+import {
+  compareHealth,
+  isTableStatus,
+  TABLE_STATUSES,
+  TableHeightKeyType,
+  TableStatus,
+} from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import {
   useDroppedColumns,
@@ -93,11 +99,13 @@ export type TableProps<
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
   /**
-   * Fetch state of the data. Must reflect the actual request: 'idle' or
-   * 'loading' while fetching, 'error' on failure, and 'success' only once the
-   * data is loaded. An empty table with 'success' means "no results". Any
+   * Fetch state of `data`, which decides whether the rows or a placeholder
+   * show. 'loading' shows the loader and 'error' the error message in place
+   * of the rows; 'idle' (nothing requested, e.g. a disabled query) shows an
+   * empty body; 'success' shows the rows, or "No results" when there are none.
+   * For a react-query or TanStack query, pass `getTableStatus(query)`. Any
    * other value is a type error; if bypassed, the table warns in the console
-   * and shows the error state when there is no data.
+   * once per value and shows the error state when there is no data.
    */
   status: TableStatus;
   entityName?: {
@@ -241,6 +249,14 @@ function Table<
   revealDroppedColumns = false,
   scrollFade = true,
 }: TableProps<DATA_ROW>) {
+  useEffect(() => {
+    if (!isTableStatus(status)) {
+      console.warn(
+        `Table: received invalid \`status\` ${JSON.stringify(status) ?? String(status)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
+      );
+    }
+  }, [status]);
+
   sortTypes = {
     health: (row1, row2) => {
       return compareHealth(row2.values.health, row1.values.health) || 0;
