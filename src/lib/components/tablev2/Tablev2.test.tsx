@@ -1018,7 +1018,8 @@ describe('TableV2', () => {
     });
 
     it('keeps "No results" and shows a progress bar when an empty result refreshes', async () => {
-      const { rerender } = await renderWith({ data: [], loading: false });
+      const { rerender } = await renderWith({ data: [], loading: true });
+      rerender(tableWith({ data: [], loading: false }));
       rerender(tableWith({ data: [], loading: true }));
 
       expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
@@ -1026,6 +1027,22 @@ describe('TableV2', () => {
         screen.getByRole('progressbar', { name: /refreshing volumes/i }),
       ).toBeInTheDocument();
       expect(screen.queryByText(/loading volumes/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the loader when a query that mounted disabled turns on with an empty array', async () => {
+      const { rerender } = await renderWith({ data: [], loading: false });
+      rerender(tableWith({ data: [], loading: true }));
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the loader when a new query key hands over undefined data', async () => {
+      const { rerender } = await renderWith({ data, loading: false });
+      rerender(tableWith({ data: undefined, loading: true }));
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryAllByRole('row')).toHaveLength(1);
     });
 
     it('keeps the rows and shows a progress bar while refreshing', async () => {

@@ -82,6 +82,11 @@ type TableFetchStateProps<
    * Rows to show. Pass `undefined` until a first result arrives, as react-query's
    * `data` does, so the table shows its loader rather than "No results". Rows
    * already shown stay on screen while a refresh runs or after one fails.
+   *
+   * Pass the query's `data` as is rather than `data ?? []`. An empty array
+   * shows the loader only until a first request completes in this table;
+   * after that it is an answer, so a new query key handing over `[]` shows
+   * "No results" while its request runs.
    */
   data: DATA_ROW[] | undefined;
   /**
@@ -356,13 +361,20 @@ function Table<
 
   const [hasScrollbar, setHasScrollbar] = useState<boolean>(false);
 
-  // Until a request has settled, an empty `data` is a placeholder (`?? []`,
-  // `initialData: []`), not an answer. Derived during render, as React's docs
-  // recommend for state that follows a prop.
-  const [hasSettled, setHasSettled] = useState(loading !== true);
-  if (!hasSettled && loading !== true) {
-    setHasSettled(true);
+  // Until a request has completed, an empty `data` is a placeholder (`?? []`,
+  // `initialData: []`), not an answer. A request completes when `loading` goes
+  // from `true` to anything else; mounting with `loading: false`, as a query
+  // that starts disabled does, completes nothing. Derived during render, as
+  // React's docs recommend for state that follows a prop.
+  const [requestState, setRequestState] = useState<
+    'none' | 'inFlight' | 'settled'
+  >(loading === true ? 'inFlight' : 'none');
+  if (requestState === 'none' && loading === true) {
+    setRequestState('inFlight');
+  } else if (requestState === 'inFlight' && loading !== true) {
+    setRequestState('settled');
   }
+  const hasSettled = requestState === 'settled';
 
   const tableData = data ?? (NO_ROWS as DATA_ROW[]);
 

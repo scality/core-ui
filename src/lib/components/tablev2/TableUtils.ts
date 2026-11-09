@@ -93,7 +93,7 @@ export const resolveTableView = ({
   visibleRowCount: number;
   loading?: boolean;
   error?: unknown;
-  /** Whether this table has rendered once with `loading` not `true`. */
+  /** Whether a request has completed in this table: `loading` went from `true` to not. */
   hasSettled: boolean;
 }): TableView => {
   if (data === undefined) {
