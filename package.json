@@ -1,6 +1,6 @@
 {
   "name": "@scality/core-ui",
-  "version": "0.233.0",
+  "version": "0.234.0",
   "description": "Scality common React component library",
   "author": "Scality Engineering",
   "license": "SEE LICENSE IN LICENSE",
@@ -81,7 +81,7 @@
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.0",
     "source-map-explorer": "^2.0.1",
-    "storybook": "10.6.1",
+    "storybook": "10.6.3",
     "typescript": "^5.3.2"
   },
   "husky": {
@@ -118,7 +118,7 @@
     "react-test-renderer": "^18.3.1",
     "react-virtualized-auto-sizer": "^1.0.24",
     "react-window": "^1.8.6",
-    "recharts": "^3.0.2",
+    "recharts": "^3.7.0",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.4.3",
     "styled-system": "^5.1.5",
