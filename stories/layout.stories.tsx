@@ -191,7 +191,7 @@ export const Layout2Simplest = {
                 </Stack>
               </Stack>
               <Stack direction="vertical" gap="r4">
-                <Stack gap="r4">
+                <Stack gap="r8">
                   <Text isEmphazed>Alerts</Text>
                   <TextBadge text="0" variant="infoPrimary" />
                 </Stack>

@@ -86,7 +86,7 @@ export const StackStory = {
               </Stack>
             </Stack>
             <Stack direction="vertical" gap="r4">
-              <Stack gap="r4">
+              <Stack gap="r8">
                 <EmphaseText>Alerts</EmphaseText>
                 <TextBadge text="0" variant="infoPrimary" />
               </Stack>
