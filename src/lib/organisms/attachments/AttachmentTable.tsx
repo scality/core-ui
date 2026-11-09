@@ -24,7 +24,7 @@ import {
   Tooltip,
 } from '../../index';
 import styled from 'styled-components';
-import { spacing, Stack, Wrap } from '../../spacing';
+import { spacing, Stack } from '../../spacing';
 import {
   AttachableEntity,
   AttachmentOperation,
@@ -509,7 +509,8 @@ export const AttachmentTable = <
        `100%` both ways, so `Table` keeps the box it had. */
     <Box container height="100%" width="100%">
       <Table
-        status="success"
+        status={initiallyAttachedEntitiesStatus}
+        entityName={{ en: entityName }}
         columns={[
           {
             Header: 'Name',
@@ -737,40 +738,30 @@ export const AttachmentTable = <
           rowHeight={rowHeight}
           separationLineVariant="backgroundLevel2"
         >
-          {(rows) => (
-            <>
-              {initiallyAttachedEntitiesStatus === 'idle' ||
-              initiallyAttachedEntitiesStatus === 'loading' ? (
-                <Wrap style={{ height: `${tableRowHeight[rowHeight]}rem` }}>
-                  <p></p>
-                  <Stack>
-                    <Loader />
-                    <Text>Loading {entityName.plural}...</Text>
-                  </Stack>
-                  <p></p>
-                </Wrap>
-              ) : initiallyAttachedEntitiesStatus === 'error' ? (
-                <Stack
-                  style={{
-                    justifyContent: 'center',
-                    height: `${tableRowHeight[rowHeight]}rem`,
-                  }}
-                >
-                  <Icon name="Exclamation-circle" color="statusWarning" />
-                  <Text color="textSecondary">
-                    Failed to load attached {entityName.plural}.
-                  </Text>
-                </Stack>
-              ) : (
-                desiredAttachedEntities.length === 0 && (
-                  <CenterredSecondaryText>
-                    No {entityName.plural} attached
-                  </CenterredSecondaryText>
-                )
-              )}
-              {desiredAttachedEntities.length > 0 && rows}
-            </>
-          )}
+          {(rows) =>
+            initiallyAttachedEntitiesStatus === 'idle' ||
+            initiallyAttachedEntitiesStatus === 'loading' ? (
+              rows
+            ) : initiallyAttachedEntitiesStatus === 'error' ? (
+              <Stack
+                style={{
+                  justifyContent: 'center',
+                  height: `${tableRowHeight[rowHeight]}rem`,
+                }}
+              >
+                <Icon name="Exclamation-circle" color="statusWarning" />
+                <Text color="textSecondary">
+                  Failed to load attached {entityName.plural}.
+                </Text>
+              </Stack>
+            ) : desiredAttachedEntities.length === 0 ? (
+              <CenterredSecondaryText>
+                No {entityName.plural} attached
+              </CenterredSecondaryText>
+            ) : (
+              rows
+            )
+          }
         </Table.SingleSelectableContent>
       </Table>
     </Box>
