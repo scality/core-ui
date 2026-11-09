@@ -631,7 +631,7 @@
         {
           "id": "templates-layout2--layout-2-simplest",
           "name": "Layout 2 Simplest",
-          "snippet": "const Layout2Simplest = () => {\n  return (\n    <Layout2\n      headerNavigation={\n        <HeaderComponent>\n          <h3>Header navigation</h3>\n        </HeaderComponent>\n      }\n    >\n      <AppContainer>\n        <AppContainer.ContextContainer background=\"backgroundLevel1\">\n          <>Context bar</>\n        </AppContainer.ContextContainer>\n        <AppContainer.OverallSummary noPadding>\n          <Stack withSeparators={true} gap=\"r32\">\n            <Stack gap=\"r20\">\n              <Icon name=\"Account\" size=\"2x\" withWrapper />\n              <Stack direction=\"vertical\" gap=\"r4\">\n                <Text variant=\"Larger\">Title</Text>\n                <Text variant=\"Smaller\" color=\"textSecondary\">\n                  subtitle\n                </Text>\n              </Stack>\n            </Stack>\n            <Stack gap=\"r32\">\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 1</Text>\n              </Stack>\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 2</Text>\n              </Stack>\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 3</Text>\n              </Stack>\n            </Stack>\n            <Stack direction=\"vertical\" gap=\"r4\">\n              <Stack gap=\"r4\">\n                <Text isEmphazed>Alerts</Text>\n                <TextBadge text=\"0\" variant=\"infoPrimary\" />\n              </Stack>\n              <Text variant=\"Smaller\" color=\"textSecondary\">\n                No alerts\n              </Text>\n            </Stack>\n          </Stack>\n        </AppContainer.OverallSummary>\n        <AppContainer.MainContent>Main content</AppContainer.MainContent>\n      </AppContainer>\n    </Layout2>\n  );\n};"
+          "snippet": "const Layout2Simplest = () => {\n  return (\n    <Layout2\n      headerNavigation={\n        <HeaderComponent>\n          <h3>Header navigation</h3>\n        </HeaderComponent>\n      }\n    >\n      <AppContainer>\n        <AppContainer.ContextContainer background=\"backgroundLevel1\">\n          <>Context bar</>\n        </AppContainer.ContextContainer>\n        <AppContainer.OverallSummary noPadding>\n          <Stack withSeparators={true} gap=\"r32\">\n            <Stack gap=\"r20\">\n              <Icon name=\"Account\" size=\"2x\" withWrapper />\n              <Stack direction=\"vertical\" gap=\"r4\">\n                <Text variant=\"Larger\">Title</Text>\n                <Text variant=\"Smaller\" color=\"textSecondary\">\n                  subtitle\n                </Text>\n              </Stack>\n            </Stack>\n            <Stack gap=\"r32\">\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 1</Text>\n              </Stack>\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 2</Text>\n              </Stack>\n              <Stack>\n                <Icon name={'Check-circle'} color={'statusHealthy'} />\n                <Text color=\"textSecondary\">Status 3</Text>\n              </Stack>\n            </Stack>\n            <Stack direction=\"vertical\" gap=\"r4\">\n              <Stack gap=\"r8\">\n                <Text isEmphazed>Alerts</Text>\n                <TextBadge text=\"0\" variant=\"infoPrimary\" />\n              </Stack>\n              <Text variant=\"Smaller\" color=\"textSecondary\">\n                No alerts\n              </Text>\n            </Stack>\n          </Stack>\n        </AppContainer.OverallSummary>\n        <AppContainer.MainContent>Main content</AppContainer.MainContent>\n      </AppContainer>\n    </Layout2>\n  );\n};"
         },
         {
           "id": "templates-layout2--layout-2-simplest-with-main-content-padding",
@@ -1863,6 +1863,11 @@
           "id": "components-navigation-tabs--scrollable-tabs",
           "name": "Scrollable Tabs",
           "snippet": "const ScrollableTabs = () => <>\n    <Title>Default Tabs - scrollable 10 tabs</Title>\n    <Tabs>{generateTab(10, 10)}</Tabs>\n    <Title>Default Tabs - scrollable 20 tabs</Title>\n    <Tabs>{generateTab(20, 10)}</Tabs>\n    <Title>Default Tabs - scrollable 35 tabs</Title>\n    <Tabs>{generateTab(35, 10)}</Tabs>\n</>;"
+        },
+        {
+          "id": "components-navigation-tabs--with-icon-only-tab",
+          "name": "With Icon Only Tab",
+          "snippet": "const WithIconOnlyTab = () => <Tabs>\n    <Tab\n        path=\"/path\"\n        label=\"\"\n        icon={<i className=\"fas fa-hat-cowboy\" />}\n        query={{ tab: 'icon' }}>\n        <Content>Icon only tab content</Content>\n    </Tab>\n    <Tab\n        path=\"/path\"\n        label=\"\"\n        icon={<i className=\"fas fa-hat-cowboy\" />}\n        textBadge={<TextBadge text=\"3\" />}\n        query={{ tab: 'icon-badge' }}>\n        <Content>Icon and badge tab content</Content>\n    </Tab>\n    <Tab\n        path=\"/path\"\n        label=\"With icon\"\n        icon={<i className=\"fas fa-hat-cowboy\" />}\n        query={{ tab: 'icon-label' }}>\n        <Content>Icon and label tab content</Content>\n    </Tab>\n    <Tab path=\"/path\" label=\"Label only\" query={{ tab: 'label' }}>\n        <Content>Label only tab content</Content>\n    </Tab>\n</Tabs>;"
         },
         {
           "id": "components-navigation-tabs--with-query-params",
@@ -9455,7 +9460,7 @@
         {
           "id": "components-styling-spacing-utils--stack-story",
           "name": "Stack Story",
-          "snippet": "const StackStory = ({}) => {\n  const theme = useTheme();\n  return (\n    <>\n      <h2>Banner example</h2>\n      <div\n        style={{\n          background: theme.backgroundLevel2,\n          padding: spacing.r8,\n          paddingLeft: spacing.r36,\n        }}\n      >\n        <Stack withSeparators={true} gap=\"r32\">\n          <Stack gap=\"r20\">\n            <Icon name=\"Account\" size=\"2x\" color=\"infoPrimary\" withWrapper />\n            <Stack direction=\"vertical\" gap=\"r4\">\n              <LargerText>Title</LargerText>\n              <SmallerSecondaryText>Subtitle</SmallerSecondaryText>\n            </Stack>\n          </Stack>\n          <Stack gap=\"r32\">\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 1</SecondaryText>\n            </Stack>\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 2</SecondaryText>\n            </Stack>\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 3</SecondaryText>\n            </Stack>\n          </Stack>\n          <Stack direction=\"vertical\" gap=\"r4\">\n            <Stack gap=\"r4\">\n              <EmphaseText>Alerts</EmphaseText>\n              <TextBadge text=\"0\" variant=\"infoPrimary\" />\n            </Stack>\n            <SmallerSecondaryText>No alerts</SmallerSecondaryText>\n          </Stack>\n        </Stack>\n      </div>\n\n      <h2>Vertical divided example</h2>\n      <div\n        style={{\n          background: theme.backgroundLevel4,\n          padding: spacing.r8,\n          paddingLeft: spacing.r36,\n        }}\n      >\n        <Stack direction=\"vertical\" gap=\"r24\" withSeparators>\n          <EmphaseText>Section 1</EmphaseText>\n          <EmphaseText>Section 2</EmphaseText>\n        </Stack>\n      </div>\n    </>\n  );\n};"
+          "snippet": "const StackStory = ({}) => {\n  const theme = useTheme();\n  return (\n    <>\n      <h2>Banner example</h2>\n      <div\n        style={{\n          background: theme.backgroundLevel2,\n          padding: spacing.r8,\n          paddingLeft: spacing.r36,\n        }}\n      >\n        <Stack withSeparators={true} gap=\"r32\">\n          <Stack gap=\"r20\">\n            <Icon name=\"Account\" size=\"2x\" color=\"infoPrimary\" withWrapper />\n            <Stack direction=\"vertical\" gap=\"r4\">\n              <LargerText>Title</LargerText>\n              <SmallerSecondaryText>Subtitle</SmallerSecondaryText>\n            </Stack>\n          </Stack>\n          <Stack gap=\"r32\">\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 1</SecondaryText>\n            </Stack>\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 2</SecondaryText>\n            </Stack>\n            <Stack>\n              <Icon name={'Check-circle'} color={'statusHealthy'} />\n              <SecondaryText>Status 3</SecondaryText>\n            </Stack>\n          </Stack>\n          <Stack direction=\"vertical\" gap=\"r4\">\n            <Stack gap=\"r8\">\n              <EmphaseText>Alerts</EmphaseText>\n              <TextBadge text=\"0\" variant=\"infoPrimary\" />\n            </Stack>\n            <SmallerSecondaryText>No alerts</SmallerSecondaryText>\n          </Stack>\n        </Stack>\n      </div>\n\n      <h2>Vertical divided example</h2>\n      <div\n        style={{\n          background: theme.backgroundLevel4,\n          padding: spacing.r8,\n          paddingLeft: spacing.r36,\n        }}\n      >\n        <Stack direction=\"vertical\" gap=\"r24\" withSeparators>\n          <EmphaseText>Section 1</EmphaseText>\n          <EmphaseText>Section 2</EmphaseText>\n        </Stack>\n      </div>\n    </>\n  );\n};"
         },
         {
           "id": "components-styling-spacing-utils--stack-below-story",
@@ -12478,12 +12483,13 @@
     "components-textbadge": {
       "id": "components-textbadge",
       "name": "TextBadge",
-      "path": "./stories/textbadge.stories.tsx",
+      "path": "./stories/TextBadge/textbadge.stories.tsx",
       "jsDocTags": {},
+      "description": "Short label or count rendered inline as a filled chip — tags, counters,\nstatus labels. Use it when the value should stand apart from the surrounding\ntext; prefer `StatusText` to tint running text by status.\n\nIt has no outer horizontal margin, so wrap adjacent badges (or a badge next\nto a label) in a gapped parent, e.g. `<Stack gap=\"r8\">`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/textbadge/TextBadge.component.tsx",
-        "description": "",
+        "description": "Short label or count rendered inline as a filled chip — tags, counters,\nstatus labels. Use it when the value should stand apart from the surrounding\ntext; prefer `StatusText` to tint running text by status.\n\nIt has no outer horizontal margin, so wrap adjacent badges (or a badge next\nto a label) in a gapped parent, e.g. `<Stack gap=\"r8\">`.",
         "displayName": "TextBadge",
         "methods": [],
         "props": {
@@ -12618,15 +12624,30 @@
         {
           "id": "components-textbadge--default",
           "name": "Default",
-          "snippet": "const Default = ({}) => {\n  return (\n    <Wrapper>\n      <Title>Text Badges</Title>\n      <TextBadge text=\"0\" />\n      <TextBadge text=\"1\" variant=\"statusHealthy\" />\n      <TextBadge text=\"2\" variant=\"statusWarning\" />\n      <TextBadge text=\"3\" variant=\"statusCritical\" />\n      <TextBadge text=\"Badge\" variant=\"infoSecondary\" />\n      <TextBadge\n        text={\n          <>\n            <Text>This is a badge with a tooltip</Text>\n            <span style={{ marginLeft: '8px' }}>\n              <IconHelp\n                tooltipMessage={<div>This is a tooltip</div>}\n                title=\"Info\"\n              />\n            </span>\n          </>\n        }\n      />\n    </Wrapper>\n  );\n};"
+          "snippet": "const Default = ({}) => {\n  return (\n    <Wrapper>\n      <Title>Text Badges</Title>\n      <Stack gap=\"r8\">\n        <TextBadge text=\"0\" />\n        <TextBadge text=\"1\" variant=\"statusHealthy\" />\n        <TextBadge text=\"2\" variant=\"statusWarning\" />\n        <TextBadge text=\"3\" variant=\"statusCritical\" />\n        <TextBadge text=\"Badge\" variant=\"infoSecondary\" />\n        <TextBadge\n          text={\n            <>\n              <Text>This is a badge with a tooltip</Text>\n              <span style={{ marginLeft: '8px' }}>\n                <IconHelp\n                  tooltipMessage={<div>This is a tooltip</div>}\n                  title=\"Info\"\n                />\n              </span>\n            </>\n          }\n        />\n      </Stack>\n    </Wrapper>\n  );\n};"
         },
         {
           "id": "components-textbadge--custom-color-and-removable",
           "name": "Custom Color And Removable",
-          "snippet": "const CustomColorAndRemovable = ({}) => {\n  return (\n    <Wrapper>\n      <Title>Custom color</Title>\n      <TextBadge\n        text=\"env:prod\"\n        customColor={{\n          text: 'hsl(210, 70%, 65%)',\n          backgroundColor: 'hsla(210, 70%, 65%, 0.16)',\n          borderColor: 'hsl(210, 70%, 65%)',\n        }}\n      />\n      <Title>Removable</Title>\n      <TextBadge\n        text=\"env:prod\"\n        customColor={{\n          text: 'hsl(150, 70%, 60%)',\n          backgroundColor: 'hsla(150, 70%, 60%, 0.16)',\n        }}\n        onRemove={() => alert('remove env:prod')}\n        removeAriaLabel=\"Remove label env:prod\"\n      />\n      <TextBadge\n        text=\"Removable badge\"\n        variant=\"infoSecondary\"\n        onRemove={() => alert('remove badge')}\n      />\n    </Wrapper>\n  );\n};"
+          "snippet": "const CustomColorAndRemovable = ({}) => {\n  return (\n    <Wrapper>\n      <Title>Custom color</Title>\n      <TextBadge\n        text=\"env:prod\"\n        customColor={{\n          text: 'hsl(210, 70%, 65%)',\n          backgroundColor: 'hsla(210, 70%, 65%, 0.16)',\n          borderColor: 'hsl(210, 70%, 65%)',\n        }}\n      />\n      <Title>Removable</Title>\n      <Stack gap=\"r8\">\n        <TextBadge\n          text=\"env:prod\"\n          customColor={{\n            text: 'hsl(150, 70%, 60%)',\n            backgroundColor: 'hsla(150, 70%, 60%, 0.16)',\n          }}\n          onRemove={() => alert('remove env:prod')}\n          removeAriaLabel=\"Remove label env:prod\"\n        />\n        <TextBadge\n          text=\"Removable badge\"\n          variant=\"infoSecondary\"\n          onRemove={() => alert('remove badge')}\n        />\n      </Stack>\n    </Wrapper>\n  );\n};"
+        },
+        {
+          "id": "components-textbadge--long-label-wraps",
+          "name": "Long Label Wraps",
+          "snippet": "const LongLabelWraps = ({}) => {\n  return (\n    <Wrapper>\n      <Title>Long label wraps</Title>\n      <div style={{ width: '240px' }}>\n        <TextBadge\n          text=\"A very long badge label that wraps onto several lines\"\n          variant=\"infoSecondary\"\n        />\n      </div>\n    </Wrapper>\n  );\n};"
         }
       ],
-      "import": "import { IconHelp, Text, TextBadge, Title, Wrapper } from '@scality/core-ui';"
+      "import": "import { IconHelp, Stack, Text, TextBadge, Title, Wrapper } from '@scality/core-ui';",
+      "docs": {
+        "components-textbadge--guideline": {
+          "id": "components-textbadge--guideline",
+          "name": "Guideline",
+          "path": "./stories/TextBadge/textbadge.guideline.mdx",
+          "title": "Components/TextBadge",
+          "content": "import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';\n\nimport * as Stories from './textbadge.stories.tsx';\n\n<Meta name=\"Guideline\" of={Stories} />\n\n# TextBadge\n\nA short label or count shown inline next to text: tags, counters, status labels.\n\n## Usage\n\nUse it when the value should stand apart from the surrounding text.\nTo tint running text by status, prefer `StatusText`.\n\n<Controls of={Stories.Playground} />\n\n## Spacing\n\nThe badge has no outer margin. The parent provides the spacing between a badge and its siblings.\n\n<Canvas of={Stories.Default} />\n\n### Migration\n\nWrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `<Stack gap=\"r8\">`.\n",
+          "summary": "# TextBadge A short label or count shown inline next to text: tags, counters, status label..."
+        }
+      }
     },
     "components-unsuccessfulresult": {
       "id": "components-unsuccessfulresult",
@@ -12787,6 +12808,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 3991
+    "durationMs": 5416
   }
 }
