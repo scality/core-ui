@@ -80,8 +80,9 @@ export const resolveTableView = ({
 }): TableView => {
   if (data === undefined) {
     // No `loading` at all most likely means a query whose caller only passed
-    // `data`: assume it is loading rather than claim anything.
-    if (loading ?? true) {
+    // `data`: assume it is loading rather than claim anything, unless it
+    // reports an error.
+    if (loading ?? !error) {
       return 'loader';
     }
     return error ? 'error' : 'idle';

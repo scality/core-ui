@@ -31,6 +31,11 @@ describe('resolveTableView', () => {
   it.each([
     ['no result yet, loading not given', { data: undefined }, 'loader'],
     [
+      'no result yet, loading not given, request failed',
+      { data: undefined, error: failure },
+      'error',
+    ],
+    [
       'no result yet, request in flight',
       { data: undefined, loading: true },
       'loader',
