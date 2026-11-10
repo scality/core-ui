@@ -41,8 +41,19 @@ export const LegendShape = styled.div<{
   $color?: string;
   $shape: 'line' | 'rectangle';
   $chartColors: Record<string, string>;
+  /** Draws a dashed line whatever the shape, so the swatch matches a dashed series. */
+  $isLineDashed?: boolean;
 }>`
-  ${({ $shape, $color, $chartColors }) => {
+  ${({ $shape, $color, $chartColors, $isLineDashed }) => {
+    const resolvedColor =
+      $chartColors[$color as keyof typeof $chartColors] || $color;
+    if ($isLineDashed) {
+      return `
+        width: ${$shape === 'line' ? 20 : 12}px;
+        height: 2px;
+        background: repeating-linear-gradient(90deg, ${resolvedColor} 0 4px, transparent 4px 8px);
+      `;
+    }
     if ($shape === 'line') {
       return `
         width: 20px;
@@ -76,6 +87,7 @@ export const ChartLegend = ({
     getColor,
     getLabel,
     isSelected,
+    isLineDashed,
     addSelectedResource,
     removeSelectedResource,
     selectAllResources,
@@ -137,6 +149,7 @@ export const ChartLegend = ({
               $color={color}
               $shape={shape}
               $chartColors={chartColors}
+              $isLineDashed={isLineDashed(resource)}
             />
             <Text variant={legendSize} color={legendColor}>{getLabel(resource)}</Text>
           </LegendItem>

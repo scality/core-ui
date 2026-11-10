@@ -194,4 +194,82 @@ describe('ChartLegendWrapper', () => {
       );
     });
   });
+
+  describe('Line styles', () => {
+    const ChartDeclaringStyles = ({
+      isDashedByResource,
+    }: {
+      isDashedByResource: Record<string, boolean>;
+    }) => {
+      const chartId = useChartId();
+      const { registerLineStyles } = useChartLegend();
+
+      useEffect(
+        () => registerLineStyles(chartId, isDashedByResource),
+        [chartId, registerLineStyles, isDashedByResource],
+      );
+
+      return null;
+    };
+
+    const LineStyleReadout = ({ resource }: { resource: string }) => {
+      const { isLineDashed } = useChartLegend();
+      return (
+        <span>{`${resource} ${isLineDashed(resource) ? 'dashed' : 'solid'}`}</span>
+      );
+    };
+
+    const cpuDashed = { CPU: true };
+    const cpuSolid = { CPU: false };
+
+    it('reports a resource as dashed when its only chart draws it dashed', () => {
+      render(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <ChartDeclaringStyles isDashedByResource={cpuDashed} />
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      expect(screen.getByText('CPU dashed')).toBeInTheDocument();
+    });
+
+    it('reports a resource as solid when another chart draws it solid', () => {
+      render(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <ChartDeclaringStyles isDashedByResource={cpuDashed} />
+          <ChartDeclaringStyles isDashedByResource={cpuSolid} />
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      expect(screen.getByText('CPU solid')).toBeInTheDocument();
+    });
+
+    it('reports a resource as solid when no chart declares it', () => {
+      render(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      expect(screen.getByText('CPU solid')).toBeInTheDocument();
+    });
+
+    it('forgets the styles of a chart once it unmounts', () => {
+      const { rerender } = render(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <ChartDeclaringStyles isDashedByResource={cpuDashed} />
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      rerender(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      expect(screen.getByText('CPU solid')).toBeInTheDocument();
+    });
+  });
 });

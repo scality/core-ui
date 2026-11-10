@@ -52,6 +52,17 @@ type ChartDataOutput = {
   linesToRender: LineToRender[];
   /** Set of labels belonging to "below" series (for symmetrical charts) */
   belowSeriesLabels: Set<string> | undefined;
+  /** Tooltip labels of the series drawn dashed */
+  dashedSeriesLabels: Set<string>;
+  /** Per resource, whether every series drawing it is dashed */
+  isDashedByResource: Record<string, boolean>;
+};
+
+const listAllSeries = (series: ChartDataInput['series']): Serie[] => {
+  if (!series) return [];
+  return isSymmetricalSeries(series)
+    ? [...(series.above || []), ...(series.below || [])]
+    : (series as Serie[]);
 };
 
 /**
@@ -333,11 +344,7 @@ export function useChartData({
     }
 
     // For populated series, create lines from actual series data
-    const allSeries = isSymmetricalSeries(series!)
-      ? [...(series!.above || []), ...(series!.below || [])]
-      : (series as Serie[]);
-
-    return allSeries
+    return listAllSeries(series)
       .filter((serie) => selectedResources.includes(serie.resource))
       .map((serie, index) => {
         const label = serie.getTooltipLabel(serie.metricPrefix, serie.resource);
@@ -369,6 +376,31 @@ export function useChartData({
     return labels;
   }, [series, yAxisType]);
 
+  const dashedSeriesLabels = useMemo(
+    () =>
+      new Set(
+        listAllSeries(series)
+          .filter((serie) => serie.isLineDashed)
+          .map((serie) =>
+            serie.getTooltipLabel(serie.metricPrefix, serie.resource),
+          ),
+      ),
+    [series],
+  );
+
+  const isDashedByResource = useMemo(
+    () =>
+      listAllSeries(series).reduce<Record<string, boolean>>(
+        (isDashed, serie) => ({
+          ...isDashed,
+          [serie.resource]:
+            (isDashed[serie.resource] ?? true) && !!serie.isLineDashed,
+        }),
+        {},
+      ),
+    [series],
+  );
+
   return {
     rechartsData,
     topDomain,
@@ -382,5 +414,7 @@ export function useChartData({
     xAxisTicks,
     linesToRender,
     belowSeriesLabels,
+    dashedSeriesLabels,
+    isDashedByResource,
   };
 }

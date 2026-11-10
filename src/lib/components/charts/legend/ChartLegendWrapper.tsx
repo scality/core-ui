@@ -33,8 +33,27 @@ export type ChartLegendState = {
   listResources: () => string[];
   isOnlyOneSelected: () => boolean;
   register: (chartId: string, seriesNames: string[]) => void;
+  /**
+   * Declares, for one chart, which of its resources are drawn dashed. Returns
+   * the unregister function, to call when the chart unmounts.
+   */
+  registerLineStyles: (
+    chartId: string,
+    isDashedByResource: Record<string, boolean>,
+  ) => () => void;
+  /** True when every chart drawing the resource draws it dashed. */
+  isLineDashed: (resource: string) => boolean;
 };
 
+
+// Equal maps keep the state reference, so a chart re-registering on every render cannot loop.
+const hasSameLineStyles = (
+  current: Record<string, boolean> | undefined,
+  next: Record<string, boolean>,
+) =>
+  current !== undefined &&
+  Object.keys(current).length === Object.keys(next).length &&
+  Object.entries(next).every(([resource, isDashed]) => current[resource] === isDashed);
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
 
@@ -96,6 +115,36 @@ export const ChartLegendWrapper = ({
       [chartId]: seriesNames,
     }));
   }, []);
+
+  const [lineStylesByChart, setLineStylesByChart] = useState<
+    Record<string, Record<string, boolean>>
+  >({});
+
+  const registerLineStyles = useCallback(
+    (chartId: string, isDashedByResource: Record<string, boolean>) => {
+      setLineStylesByChart((prev) =>
+        hasSameLineStyles(prev[chartId], isDashedByResource)
+          ? prev
+          : { ...prev, [chartId]: isDashedByResource },
+      );
+      return () =>
+        setLineStylesByChart((prev) => {
+          const { [chartId]: _unregistered, ...rest } = prev;
+          return rest;
+        });
+    },
+    [],
+  );
+
+  const isLineDashed = useCallback(
+    (resource: string) => {
+      const styles = Object.values(lineStylesByChart)
+        .map((isDashedByResource) => isDashedByResource[resource])
+        .filter((isDashed) => isDashed !== undefined);
+      return styles.length > 0 && styles.every(Boolean);
+    },
+    [lineStylesByChart],
+  );
 
   const addSelectedResource = useCallback((resource: string) => {
     setSelectedResources((prev) =>
@@ -173,6 +222,8 @@ export const ChartLegendWrapper = ({
       listResources,
       isOnlyOneSelected,
       register,
+      registerLineStyles,
+      isLineDashed,
     }),
     [
       selectedResources,
@@ -186,6 +237,8 @@ export const ChartLegendWrapper = ({
       listResources,
       isOnlyOneSelected,
       register,
+      registerLineStyles,
+      isLineDashed,
     ],
   );
 
