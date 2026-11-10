@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>3.7s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -19539,7 +19539,7 @@ import { action } from 'storybook/actions';</code></pre>
     <div class="title">
       <h2><span class="status-dot dot-ok"></span> Table</h2>
       <div class="badges">
-        <label for="c-60-components-data-display-table-props" class="badge ok as-toggle">15 prop types</label>
+        <label for="c-60-components-data-display-table-props" class="badge ok as-toggle">17 prop types</label>
         <label for="c-60-components-data-display-table-info" class="badge info as-toggle">1 info</label>
         <label for="c-60-components-data-display-table-stories" class="badge ok as-toggle">14 stories</label>
         <label for="c-60-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
@@ -19575,7 +19575,7 @@ import { action } from 'storybook/actions';</code></pre>
           <div class="note ok">
             <div class="row">
               <span class="ex-name">Prop types <small>(react-docgen-typescript)</small></span>
-              <span class="badge ok">15 prop types</span>
+              <span class="badge ok">17 prop types</span>
             </div>
             <pre><code>Component: src/lib/components/tablev2/Tablev2.component.tsx::Table</code></pre>
             <pre><code>Props:</code></pre>
@@ -19595,17 +19595,41 @@ import { action } from 'storybook/actions';</code></pre>
  */
 columns: Column&lt;DATA_ROW&gt;[]
 
-data: DATA_ROW[]
+/**
+ * Rows to show. Pass `undefined` until a first result arrives, as react-query&#39;s
+ * `data` does, so the table shows its loader rather than &quot;No results&quot;. Rows
+ * already shown stay on screen while a refresh runs.
+ * 
+ * Pass the query&#39;s `data` as is rather than `data ?? []`. An empty array
+ * shows the loader only until a first request completes in this table;
+ * after that it is an answer, so a new query key handing over `[]` shows
+ * &quot;No results&quot; while its request runs.
+ */
+data: DATA_ROW[] | undefined
 
 defaultSortingKey?: string
 
 entityName?: { en: { singular: string; plural: string; }; fr?: { singular: string; plural: string; }; }
+
+/**
+ * The last request&#39;s error: react-query&#39;s `error`. Any truthy value means the
+ * request failed, and the error message replaces the body, rows included,
+ * until it is cleared, even while a retry runs.
+ */
+error?: unknown
 
 getRowId?: ((originalRow: DATA_ROW, relativeIndex: number, parent?: Row&lt;DATA_ROW&gt;) =&gt; string)
 
 globalFilter?: string
 
 initiallySelectedRowsIds?: Set&lt;string | number&gt;
+
+/**
+ * Whether a request for `data` is in flight: react-query&#39;s `isFetching`.
+ * Rows on screen stay while it runs; with none, the loader shows. Leave it
+ * out for rows built in the page.
+ */
+loading?: boolean
 
 onBottom?: ((rowLength: number) =&gt; void)
 
@@ -19631,13 +19655,14 @@ scrollFade?: boolean = true
 sortTypes?: Record&lt;string, SortByFn&lt;DATA_ROW&gt;&gt;
 
 /**
- * Fetch state of the data. Must reflect the actual request: &#39;idle&#39; or
- * &#39;loading&#39; while fetching, &#39;error&#39; on failure, and &#39;success&#39; only once the
- * data is loaded. An empty table with &#39;success&#39; means &quot;no results&quot;. Any
- * other value is a type error; if bypassed, the table warns in the console
- * and shows the error state when there is no data.
+ * @deprecated Pass `data`, `loading` and `error` instead, so rows stay on
+ * screen while they refresh and the table never says &quot;No results&quot; before a
+ * first answer. `status` keeps its 0.235.0 behaviour: &#39;loading&#39; and &#39;error&#39;
+ * replace the rows with the loader or the error message, &#39;idle&#39; shows an
+ * empty body, and an unknown value warns once and shows the error when there
+ * is no data.
  */
-status: &quot;error&quot; | &quot;loading&quot; | &quot;idle&quot; | &quot;success&quot;
+status?: &quot;error&quot; | &quot;loading&quot; | &quot;idle&quot; | &quot;success&quot;
 
 updateTableData?: (&lt;DATA_ROW_KEY extends keyof DATA_ROW&gt;(rowId: string, columnName: DATA_ROW_KEY, value: DATA_ROW[DATA_ROW_KEY]) =&gt; void)</code></pre>
           </div>
@@ -20142,7 +20167,7 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
   const { background } = args;
   return (
     &lt;Box width=&quot;500px&quot; height=&quot;200px&quot;&gt;
-      &lt;Table status=&quot;success&quot; columns={columns} data={[]} defaultSortingKey={&#39;firstName&#39;}&gt;
+      &lt;Table columns={columns} data={[]} defaultSortingKey={&#39;firstName&#39;}&gt;
         &lt;Table.SingleSelectableContent
           rowHeight=&quot;h40&quot;
           separationLineVariant={background}
@@ -20189,10 +20214,10 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
     &lt;Box width=&quot;500px&quot; height=&quot;200px&quot;&gt;
       &lt;Table
         columns={columns}
-        data={data}
+        data={undefined}
+        loading
         defaultSortingKey={&#39;health&#39;}
         getRowId={getRowId}
-        status=&quot;loading&quot;
       &gt;
         &lt;Table.SingleSelectableContent
           rowHeight=&quot;h40&quot;
@@ -20219,7 +20244,7 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
         data={data}
         defaultSortingKey={&#39;health&#39;}
         getRowId={getRowId}
-        status=&quot;error&quot;
+        error={new Error(&#39;Request failed&#39;)}
         entityName={{
           en: { singular: &#39;user&#39;, plural: &#39;users&#39; },
           fr: { singular: &#39;utilisateur&#39;, plural: &#39;utilisateurs&#39; },
@@ -20659,18 +20684,20 @@ Use this button to open a read-only detail view for the row.
 
 A table never tells the user a resource is empty before it has finished loading.
 
-- While loading, the table keeps its header and shows the loading placeholder in place of the rows. Nothing moves when the rows arrive.
+- During the first load, the table keeps its header and shows the loading placeholder in place of the rows. Nothing moves when the rows arrive.
 - &quot;No results&quot; is an answer, not a waiting screen. It appears only once loading has completed and there is genuinely nothing to show.
 - When the data cannot be loaded, the table says so. It never falls back to &quot;no results&quot;, which would tell the user the resource is empty when it is unknown.
 
-`status` is required: `&#39;idle&#39; | &#39;loading&#39; | &#39;success&#39; | &#39;error&#39;`. The table cannot tell &quot;still loading&quot;
-from &quot;loaded and empty&quot; by looking at `data` alone, so it never guesses. Map your query state onto it
-(for example `status={isLoading ? &#39;loading&#39; : isError ? &#39;error&#39; : &#39;success&#39;}`) and always pass it.
+Give the table the facts, not a conclusion: `data`, left `undefined` until a first result arrives,
+`loading` while a request is in flight, and `error` when the last one failed. A react-query query passes
+its `data`, `isFetching` and `error` as they are; rows built in the page need only `data`. The table
+shows &quot;No results&quot; neither for `undefined` data nor for an empty array while its first request is still
+in flight. Rows on screen stay while a request runs; a failed request shows the error.
 
-Empty `data` with `status=&quot;success&quot;` is the only way to show &quot;No results&quot;. Any other `status` is a type
-error. If a caller works around the type, the table warns in the console with the value it received and
-shows the error state when there is no data. Rows still render when data is present, and &quot;No results&quot;
-shows if the filter matches nothing. The table never guesses loading or empty.
+`status` (`&#39;idle&#39; | &#39;loading&#39; | &#39;success&#39; | &#39;error&#39;`) is deprecated and keeps its earlier behaviour:
+`&#39;loading&#39;` and `&#39;error&#39;` replace the rows with the loader and the error message, and `&#39;idle&#39;` leaves the
+body empty. Combining it with `loading` or `error` is a type error. An unknown value warns once in the
+console and shows the error state when there is no data.
 
 &lt;Canvas of={TableStories.LoadingTable} /&gt;
 
