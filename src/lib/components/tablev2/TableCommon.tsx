@@ -19,8 +19,6 @@ import {
 } from 'react-window';
 import {
   convertRemToPixels,
-  isTableStatus,
-  TABLE_STATUSES,
   TableHeightKeyType,
   TableLocalType,
   tableRowHeight,
@@ -28,7 +26,7 @@ import {
 import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
 import styled, { CSSProperties } from 'styled-components';
-import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+import { NoResult, UnsuccessfulResult } from '../UnsuccessfulResult.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { HeaderLabel } from './Tablestyle';
 
@@ -320,8 +318,7 @@ export function TableRows<
 }: TableRowsProps<DATA_ROW>) {
   const {
     rows,
-    status,
-    isDataEmpty,
+    view,
     entityName,
     rowHeight,
     onBottom,
@@ -347,47 +344,44 @@ export function TableRows<
     return index;
   }
 
-  const isValidStatus = isTableStatus(status);
-  if (!isValidStatus) {
-    console.warn(
-      `Table: received invalid \`status\` ${JSON.stringify(status) ?? String(status)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
+  // The stand-ins below skip the children render function: render functions
+  // often hide `rows` when their own data is empty.
+  if (view === 'idle') {
+    // Nothing was requested (e.g. a disabled query): a loader would spin
+    // forever and "No results" would answer a question nobody asked.
+    return <NoResult height={tableRowHeight[rowHeight]} />;
+  }
+  if (view === 'loader' || view === 'error') {
+    return (
+      <UnsuccessfulResult
+        name={entityName}
+        status={view === 'loader' ? 'loading' : 'error'}
+        locale={locale}
+        rowHeight={rowHeight}
+      />
     );
   }
 
-  let messageStatus: 'idle' | 'loading' | 'error' | 'noResult' | undefined;
-  if (status === 'idle' || status === 'loading' || status === 'error') {
-    messageStatus = status;
-  } else if (!isValidStatus && isDataEmpty) {
-    messageStatus = 'error';
-  } else if (rows.length === 0) {
-    messageStatus = 'noResult';
-  }
-
-  const result = messageStatus ? (
-    <UnsuccessfulResult
-      name={entityName}
-      status={messageStatus}
-      locale={locale}
-      rowHeight={rowHeight}
-    />
-  ) : (
-    <VirtualizedRows<DATA_ROW>
-      rows={rows}
-      listRef={listRef}
-      itemKey={itemKey}
-      rowHeight={rowHeight}
-      onBottom={onBottom}
-      onBottomOffset={onBottomOffset}
-      RenderRow={RenderRow}
-      columnsKey={columnsKey}
-    />
-  );
-
-  // Render functions often hide `rows` when their own data is empty, so a
-  // fetch-state placeholder must not go through them.
-  if (messageStatus && messageStatus !== 'noResult') {
-    return result;
-  }
+  const result =
+    view === 'rows' ? (
+      <VirtualizedRows<DATA_ROW>
+        rows={rows}
+        listRef={listRef}
+        itemKey={itemKey}
+        rowHeight={rowHeight}
+        onBottom={onBottom}
+        onBottomOffset={onBottomOffset}
+        RenderRow={RenderRow}
+        columnsKey={columnsKey}
+      />
+    ) : (
+      <UnsuccessfulResult
+        name={entityName}
+        status="noResult"
+        locale={locale}
+        rowHeight={rowHeight}
+      />
+    );
 
   return typeof children === 'function' ? children(result) : result;
 }

@@ -37,7 +37,16 @@ import { TableSearch as Search } from './Search';
 import { SearchWithQueryParams } from './SearchWithQueryParams';
 import { SingleSelectableContent } from './SingleSelectableContent';
 import { TableWrapper, TooltipContent } from './Tablestyle';
-import { compareHealth, TableHeightKeyType, TableStatus } from './TableUtils';
+import {
+  compareHealth,
+  isTableStatus,
+  resolveLegacyTableView,
+  resolveTableView,
+  TABLE_STATUSES,
+  TableHeightKeyType,
+  TableStatus,
+  TableView,
+} from './TableUtils';
 import { useCheckbox } from './useCheckbox';
 import {
   useDroppedColumns,
@@ -62,7 +71,62 @@ export type CellProps<
   V = unknown,
 > = TableCellProps<D, V> & UpdateTableData<D>;
 
+/**
+ * The fetch state as facts the caller already has. react-query v3 and TanStack
+ * v5 results map one to one: `data`, `isFetching` and `error`.
+ */
+type TableFetchStateProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  /**
+   * Rows to show. Pass `undefined` until a first result arrives, as react-query's
+   * `data` does, so the table shows its loader rather than "No results". Rows
+   * already shown stay on screen while a refresh runs.
+   *
+   * Pass the query's `data` as is rather than `data ?? []`. An empty array
+   * shows the loader only until a first request completes in this table;
+   * after that it is an answer, so a new query key handing over `[]` shows
+   * "No results" while its request runs.
+   */
+  data: DATA_ROW[] | undefined;
+  /**
+   * Whether a request for `data` is in flight: react-query's `isFetching`.
+   * Rows on screen stay while it runs; with none, the loader shows. Leave it
+   * out for rows built in the page.
+   */
+  loading?: boolean;
+  /**
+   * The last request's error: react-query's `error`. Any truthy value means the
+   * request failed, and the error message replaces the body, rows included,
+   * until it is cleared, even while a retry runs.
+   */
+  error?: unknown;
+  status?: never;
+};
+
+type TableStatusProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  data: DATA_ROW[];
+  /**
+   * @deprecated Pass `data`, `loading` and `error` instead, so rows stay on
+   * screen while they refresh and the table never says "No results" before a
+   * first answer. `status` keeps its 0.235.0 behaviour: 'loading' and 'error'
+   * replace the rows with the loader or the error message, 'idle' shows an
+   * empty body, and an unknown value warns once and shows the error when there
+   * is no data.
+   */
+  status: TableStatus;
+  loading?: never;
+  error?: never;
+};
+
 export type TableProps<
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+> = TableBaseProps<DATA_ROW> &
+  (TableFetchStateProps<DATA_ROW> | TableStatusProps<DATA_ROW>);
+
+type TableBaseProps<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 > = {
   /**
@@ -78,9 +142,8 @@ export type TableProps<
    * inline. The same applies to `data`.
    */
   columns: Array<Column<DATA_ROW>>;
-  defaultSortingKey?: string;
   // We don't display the default sort key in the URL, so we need to specify here
-  data: DATA_ROW[];
+  defaultSortingKey?: string;
   children: JSX.Element | JSX.Element[];
   getRowId?: (
     originalRow: DATA_ROW,
@@ -92,14 +155,6 @@ export type TableProps<
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
   allFilters?: { id: string; value: string }[];
-  /**
-   * Fetch state of the data. Must reflect the actual request: 'idle' or
-   * 'loading' while fetching, 'error' on failure, and 'success' only once the
-   * data is loaded. An empty table with 'success' means "no results". Any
-   * other value is a type error; if bypassed, the table warns in the console
-   * and shows the error state when there is no data.
-   */
-  status: TableStatus;
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -147,9 +202,8 @@ type TableContextType<
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
-  status: TableStatus;
-  /** True when the raw `data` prop is empty, regardless of any active filter. */
-  isDataEmpty: boolean;
+  /** What the body shows, resolved from the fetch state props or `status`. */
+  view: TableView;
   entityName?: {
     en: { singular: string; plural: string };
     fr?: { singular: string; plural: string };
@@ -221,6 +275,10 @@ const DefaultRenderer = ({ value }) => {
 
   return value;
 };
+// One shared empty array, so a missing `data` keeps the same identity across
+// renders and react-table does not recompute its rows each time.
+const NO_ROWS: never[] = [];
+
 function Table<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -237,10 +295,20 @@ function Table<
   initiallySelectedRowsIds,
   updateTableData,
   status,
+  loading,
+  error,
   entityName,
   revealDroppedColumns = false,
   scrollFade = true,
 }: TableProps<DATA_ROW>) {
+  useEffect(() => {
+    if (status !== undefined && !isTableStatus(status)) {
+      console.warn(
+        `Table: received invalid \`status\` ${JSON.stringify(status) ?? String(status)}. Accepted values are ${TABLE_STATUSES.map((value) => `'${value}'`).join(', ')}.`,
+      );
+    }
+  }, [status]);
+
   sortTypes = {
     health: (row1, row2) => {
       return compareHealth(row2.values.health, row1.values.health) || 0;
@@ -281,6 +349,23 @@ function Table<
 
   const [hasScrollbar, setHasScrollbar] = useState<boolean>(false);
 
+  // Until a request has completed, an empty `data` is a placeholder (`?? []`,
+  // `initialData: []`), not an answer. A request completes when `loading` goes
+  // from `true` to anything else; mounting with `loading: false`, as a query
+  // that starts disabled does, completes nothing. Derived during render, as
+  // React's docs recommend for state that follows a prop.
+  const [requestState, setRequestState] = useState<
+    'none' | 'inFlight' | 'settled'
+  >(loading === true ? 'inFlight' : 'none');
+  if (requestState === 'none' && loading === true) {
+    setRequestState('inFlight');
+  } else if (requestState === 'inFlight' && loading !== true) {
+    setRequestState('settled');
+  }
+  const hasSettled = requestState === 'settled';
+
+  const tableData = data ?? (NO_ROWS as DATA_ROW[]);
+
   const {
     headerGroups,
     rows,
@@ -303,7 +388,7 @@ function Table<
         Cell: DefaultRenderer,
       },
       columns: columns as TableColumn<DATA_ROW>[],
-      data,
+      data: tableData,
       getRowId,
       initialState: {
         sortBy: defaultSortingKey
@@ -444,6 +529,22 @@ function Table<
     }
   }, [filters, setAllFilters]);
 
+  const isDataEmpty = tableData.length === 0;
+  const view =
+    status !== undefined
+      ? resolveLegacyTableView({
+          status,
+          isDataEmpty,
+          visibleRowCount: rows.length,
+        })
+      : resolveTableView({
+          data,
+          visibleRowCount: rows.length,
+          loading,
+          error,
+          hasSettled,
+        });
+
   const contextValue: TableContextType<DATA_ROW> = {
     headerGroups,
     rows,
@@ -462,8 +563,7 @@ function Table<
     setHiddenColumns,
     isAllRowsSelected,
     toggleAllRowsSelected,
-    status,
-    isDataEmpty: data.length === 0,
+    view,
     entityName,
     syncScrollListener,
     setSyncScrollListener,

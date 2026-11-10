@@ -51,6 +51,80 @@ export type TableStatus = (typeof TABLE_STATUSES)[number];
 export const isTableStatus = (value: unknown): value is TableStatus =>
   (TABLE_STATUSES as readonly unknown[]).includes(value);
 
+/**
+ * What fills the table body: a stand-in for the rows (`idle`, `loader`,
+ * `error`) or an answer (`empty`, `rows`).
+ */
+export type TableView = 'idle' | 'loader' | 'error' | 'empty' | 'rows';
+
+/**
+ * Decides what the table body shows from the facts its caller has: the data,
+ * whether a request is in flight and whether the last one failed. Rows stay
+ * on screen while a request runs; a failed request shows the error until a
+ * request succeeds, retry or not.
+ */
+export const resolveTableView = ({
+  data,
+  visibleRowCount,
+  loading,
+  error,
+  hasSettled,
+}: {
+  /** `undefined` until a first result arrives. */
+  data: readonly unknown[] | undefined;
+  /** Rows left once search and filters apply. */
+  visibleRowCount: number;
+  loading?: boolean;
+  error?: unknown;
+  /** Whether a request has completed in this table: `loading` went from `true` to not. */
+  hasSettled: boolean;
+}): TableView => {
+  // The error wins over a request in flight, with or without rows, so the
+  // same facts always get the same answer. react-query clears `error` when it
+  // retries a query that has no data, and keeps it until a retry succeeds
+  // when there is data.
+  if (error) {
+    return 'error';
+  }
+  if (data === undefined) {
+    // No `loading` at all most likely means a query whose caller only passed
+    // `data`: assume it is loading rather than claim anything.
+    return (loading ?? true) ? 'loader' : 'idle';
+  }
+  // `data ?? []` and `initialData: []` hand over an empty array before the
+  // first answer; until a request has settled it cannot mean "empty".
+  if (data.length === 0 && loading && !hasSettled) {
+    return 'loader';
+  }
+  return visibleRowCount === 0 ? 'empty' : 'rows';
+};
+
+/**
+ * What the deprecated `status` prop shows, unchanged from 0.235.0 apart from
+ * `'idle'`: every status but `'success'` replaces the rows, and an unknown
+ * value with no data shows the error.
+ */
+export const resolveLegacyTableView = ({
+  status,
+  isDataEmpty,
+  visibleRowCount,
+}: {
+  status: TableStatus;
+  isDataEmpty: boolean;
+  visibleRowCount: number;
+}): TableView => {
+  if (status === 'idle') {
+    return 'idle';
+  }
+  if (status === 'loading') {
+    return 'loader';
+  }
+  if (status === 'error' || (!isTableStatus(status) && isDataEmpty)) {
+    return 'error';
+  }
+  return visibleRowCount === 0 ? 'empty' : 'rows';
+};
+
 export type TableHeightKeyType = 'h32' | 'h40' | 'h48' | 'h64';
 
 export type TableVariantType =
