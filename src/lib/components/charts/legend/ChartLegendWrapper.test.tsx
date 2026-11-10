@@ -202,11 +202,14 @@ describe('ChartLegendWrapper', () => {
       isDashedByResource: Record<string, boolean>;
     }) => {
       const chartId = useChartId();
-      const { registerLineStyles } = useChartLegend();
+      const { registerLineStyles, unregisterLineStyles } = useChartLegend();
 
+      useEffect(() => {
+        registerLineStyles(chartId, isDashedByResource);
+      }, [chartId, registerLineStyles, isDashedByResource]);
       useEffect(
-        () => registerLineStyles(chartId, isDashedByResource),
-        [chartId, registerLineStyles, isDashedByResource],
+        () => () => unregisterLineStyles(chartId),
+        [chartId, unregisterLineStyles],
       );
 
       return null;

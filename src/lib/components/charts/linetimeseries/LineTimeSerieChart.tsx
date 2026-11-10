@@ -110,11 +110,15 @@ export function LineTimeSerieChart({
     unitRange,
   });
 
-  const { registerLineStyles } = useChartLegend();
+  const { registerLineStyles, unregisterLineStyles } = useChartLegend();
   // The legend never sees `series`; registering keeps `isLineDashed` the only place a caller declares a dash.
+  useEffect(() => {
+    registerLineStyles(chartId, isDashedByResource);
+  }, [registerLineStyles, chartId, isDashedByResource]);
+  // Separate from registration, so a new `series` identity updates the entry instead of dropping it.
   useEffect(
-    () => registerLineStyles(chartId, isDashedByResource),
-    [registerLineStyles, chartId, isDashedByResource],
+    () => () => unregisterLineStyles(chartId),
+    [unregisterLineStyles, chartId],
   );
 
   // The type keeps 'log' off symmetrical charts; the guard keeps a plain JS

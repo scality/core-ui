@@ -33,14 +33,13 @@ export type ChartLegendState = {
   listResources: () => string[];
   isOnlyOneSelected: () => boolean;
   register: (chartId: string, seriesNames: string[]) => void;
-  /**
-   * Declares, for one chart, which of its resources are drawn dashed. Returns
-   * the unregister function, to call when the chart unmounts.
-   */
+  /** Declares, for one chart, which of its resources are drawn dashed. */
   registerLineStyles: (
     chartId: string,
     isDashedByResource: Record<string, boolean>,
-  ) => () => void;
+  ) => void;
+  /** Drops a chart's line styles, when it unmounts. */
+  unregisterLineStyles: (chartId: string) => void;
   /** True when every chart drawing the resource draws it dashed. */
   isLineDashed: (resource: string) => boolean;
 };
@@ -127,14 +126,16 @@ export const ChartLegendWrapper = ({
           ? prev
           : { ...prev, [chartId]: isDashedByResource },
       );
-      return () =>
-        setLineStylesByChart((prev) => {
-          const { [chartId]: _unregistered, ...rest } = prev;
-          return rest;
-        });
     },
     [],
   );
+
+  const unregisterLineStyles = useCallback((chartId: string) => {
+    setLineStylesByChart((prev) => {
+      const { [chartId]: _unregistered, ...rest } = prev;
+      return rest;
+    });
+  }, []);
 
   const isLineDashed = useCallback(
     (resource: string) => {
@@ -223,6 +224,7 @@ export const ChartLegendWrapper = ({
       isOnlyOneSelected,
       register,
       registerLineStyles,
+      unregisterLineStyles,
       isLineDashed,
     }),
     [
@@ -238,6 +240,7 @@ export const ChartLegendWrapper = ({
       isOnlyOneSelected,
       register,
       registerLineStyles,
+      unregisterLineStyles,
       isLineDashed,
     ],
   );
