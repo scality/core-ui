@@ -842,6 +842,7 @@ describe('TableV2', () => {
       await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
       expect(screen.getByText('First Name')).toBeInTheDocument();
+      expect(screen.getAllByRole('row')).toHaveLength(1);
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
@@ -969,6 +970,7 @@ describe('TableV2', () => {
       await renderWith({ data: undefined, loading: false });
 
       expect(screen.getByText('First Name')).toBeInTheDocument();
+      expect(screen.getAllByRole('row')).toHaveLength(1);
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/error/i)).not.toBeInTheDocument();

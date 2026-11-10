@@ -103,6 +103,14 @@ describe('AttachmentTable', () => {
     expect(screen.getAllByText(/^Loading/)).toHaveLength(1);
   });
 
+  it('should render neither a loader nor the entities when attached entities are idle', () => {
+    const { container } = renderWithAttachedEntitiesStatus('idle');
+
+    expect(container.querySelectorAll('.sc-loader')).toHaveLength(0);
+    expect(screen.queryByText(/^Loading/)).not.toBeInTheDocument();
+    expect(screen.queryByText('First entity')).not.toBeInTheDocument();
+  });
+
   it('should render no loader when attached entities are loaded', () => {
     const { container } = renderWithAttachedEntitiesStatus('success');
 

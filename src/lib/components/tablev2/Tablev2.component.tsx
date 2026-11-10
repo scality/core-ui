@@ -97,7 +97,8 @@ type TableFetchStateProps<
   loading?: boolean;
   /**
    * The last request's error: react-query's `error`. Any truthy value means the
-   * request failed, and the error message replaces the body, rows included.
+   * request failed, and the error message replaces the body, rows included,
+   * until it is cleared, even while a retry runs.
    */
   error?: unknown;
   status?: never;
@@ -201,10 +202,6 @@ type TableContextType<
   setHiddenColumns: (param: string[] | setHiddenColumnFuncType) => void;
   isAllRowsSelected?: boolean;
   toggleAllRowsSelected: (value?: boolean) => void;
-  /** The deprecated `status` prop; `undefined` for the fetch state props. */
-  status?: TableStatus;
-  /** True when the raw `data` prop is empty or absent, regardless of any active filter. */
-  isDataEmpty: boolean;
   /** What the body shows, resolved from the fetch state props or `status`. */
   view: TableView;
   entityName?: {
@@ -566,8 +563,6 @@ function Table<
     setHiddenColumns,
     isAllRowsSelected,
     toggleAllRowsSelected,
-    status,
-    isDataEmpty,
     view,
     entityName,
     syncScrollListener,

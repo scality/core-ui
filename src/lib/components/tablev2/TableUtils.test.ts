@@ -50,10 +50,23 @@ describe('resolveTableView', () => {
       { data: undefined, loading: false, error: failure },
       'error',
     ],
+    // A failure is reported until a request succeeds, whether or not a retry
+    // is running. react-query clears `error` itself when it retries a query
+    // that has no data, so this case comes from callers that keep it.
+    [
+      'no result yet, retry in flight after a failure',
+      { data: undefined, loading: true, error: failure },
+      'error',
+    ],
     [
       'empty array during the first request',
       { data: [], loading: true, hasSettled: false },
       'loader',
+    ],
+    [
+      'empty array during the first request, after a failure',
+      { data: [], loading: true, hasSettled: false, error: failure },
+      'error',
     ],
     [
       'empty array refreshing after a settled request',
@@ -77,6 +90,11 @@ describe('resolveTableView', () => {
       { data: rows, visibleRowCount: 2, error: failure },
       'error',
     ],
+    [
+      'rows, retry in flight after a failed refresh',
+      { data: rows, visibleRowCount: 2, loading: true, error: failure },
+      'error',
+    ],
     ['rows hidden by the filters', { data: rows, visibleRowCount: 0 }, 'empty'],
   ] as const)('%s: %s', (_, input, expected) => {
     expect(resolveTableView({ ...base, ...input })).toBe(expected);
@@ -86,6 +104,8 @@ describe('resolveTableView', () => {
 describe('resolveLegacyTableView', () => {
   it.each([
     ['idle', true, 0, 'idle'],
+    // Rows present on purpose: the deprecated loading and error statuses
+    // replace them.
     ['loading', false, 2, 'loader'],
     ['error', false, 2, 'error'],
     ['success', true, 0, 'empty'],

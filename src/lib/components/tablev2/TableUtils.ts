@@ -60,7 +60,8 @@ export type TableView = 'idle' | 'loader' | 'error' | 'empty' | 'rows';
 /**
  * Decides what the table body shows from the facts its caller has: the data,
  * whether a request is in flight and whether the last one failed. Rows stay
- * on screen while a request runs; a failed request shows the error.
+ * on screen while a request runs; a failed request shows the error until a
+ * request succeeds, retry or not.
  */
 export const resolveTableView = ({
   data,
@@ -78,22 +79,22 @@ export const resolveTableView = ({
   /** Whether a request has completed in this table: `loading` went from `true` to not. */
   hasSettled: boolean;
 }): TableView => {
+  // The error wins over a request in flight, with or without rows, so the
+  // same facts always get the same answer. react-query clears `error` when it
+  // retries a query that has no data, and keeps it until a retry succeeds
+  // when there is data.
+  if (error) {
+    return 'error';
+  }
   if (data === undefined) {
     // No `loading` at all most likely means a query whose caller only passed
-    // `data`: assume it is loading rather than claim anything, unless it
-    // reports an error.
-    if (loading ?? !error) {
-      return 'loader';
-    }
-    return error ? 'error' : 'idle';
+    // `data`: assume it is loading rather than claim anything.
+    return (loading ?? true) ? 'loader' : 'idle';
   }
   // `data ?? []` and `initialData: []` hand over an empty array before the
   // first answer; until a request has settled it cannot mean "empty".
   if (data.length === 0 && loading && !hasSettled) {
     return 'loader';
-  }
-  if (error) {
-    return 'error';
   }
   return visibleRowCount === 0 ? 'empty' : 'rows';
 };
