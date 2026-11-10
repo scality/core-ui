@@ -603,7 +603,7 @@ export const EmptyTable = {
     const { background } = args;
     return (
       <Box width="500px" height="200px">
-        <Table status="success" columns={columns} data={[]} defaultSortingKey={'firstName'}>
+        <Table columns={columns} data={[]} defaultSortingKey={'firstName'}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant={background}
@@ -668,10 +668,10 @@ export const LoadingTable = {
       <Box width="500px" height="200px">
         <Table
           columns={columns}
-          data={data}
+          data={undefined}
+          loading
           defaultSortingKey={'health'}
           getRowId={getRowId}
-          status="loading"
         >
           <Table.SingleSelectableContent
             rowHeight="h40"
@@ -692,7 +692,7 @@ export const ErrorTable = {
           data={data}
           defaultSortingKey={'health'}
           getRowId={getRowId}
-          status="error"
+          error={new Error('Request failed')}
           entityName={{
             en: { singular: 'user', plural: 'users' },
             fr: { singular: 'utilisateur', plural: 'utilisateurs' },
