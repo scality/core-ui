@@ -127,8 +127,7 @@ const ChartTitleTextStyle = styled(BasicTextStyle)`
 /**
  * Body text at the design system's default size and weight, in the primary
  * text color. Equivalent to `<Text color="textPrimary">`; a bare `<Text>`
- * inherits its color instead. `Text` is the one to reach for in new code,
- * since a single prop changes size, weight or color.
+ * inherits its color instead.
  */
 export function BasicText({ children, ...rest }: Props) {
   return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
@@ -294,8 +293,9 @@ export const Text = styled.span.withConfig({
   ${(props) => props.compact && `line-height: ${COMPACT_LINE_HEIGHT};`}
 `;
 /**
- * The short hint accompanying a form field, set small, bold and on a compact
- * line so it reads as secondary to the control.
+ * The short hint accompanying a form field, set tight under the control rather
+ * than spaced like body text. Equivalent to
+ * `<Text variant="Smaller" isEmphazed compact>`.
  */
 export const HelperText = ({ children, color, ...rest }: Props) => {
   return (

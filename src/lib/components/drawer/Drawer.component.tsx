@@ -102,9 +102,9 @@ const DrawerFooter = styled.div`
 /**
  * A panel that slides in from one edge of the screen and holds secondary work
  * — details, filters, a form — alongside the page rather than centered over
- * it. Clicking outside always closes it; `overlay` adds the dimming and the
- * modal semantics. A decision the user must settle before going on belongs in
- * a Modal instead.
+ * it. Clicking anywhere outside always closes it, so the page behind cannot be
+ * used while it is open; `overlay` adds the dimming and the modal semantics. A
+ * decision the user must settle before going on belongs in a Modal instead.
  */
 const Drawer = ({
   isOpen,
