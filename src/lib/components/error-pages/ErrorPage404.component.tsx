@@ -33,8 +33,7 @@ type Props = {
 /**
  * The full-page screen for an address that resolves to nothing — a wrong URL
  * or a page that has moved. Use ErrorPage401 when the page exists but the user
- * may not see it, and ErrorPage500 when the failure has no cause the page can
- * name.
+ * may not see it, and ErrorPage500 for any other failure.
  */
 function ErrorPage404({ locale = 'en', onReturnHomeClick, ...rest }: Props) {
   if (!translations[locale]) locale = 'en';
