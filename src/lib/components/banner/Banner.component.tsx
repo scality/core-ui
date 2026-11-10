@@ -79,8 +79,9 @@ const Title = styled.div`
 `;
 
 /**
- * A message pinned in the page flow, colored by its `variant`, for a condition
- * the user keeps seeing while it lasts — a degraded service, a read-only mode.
+ * A message in the page flow, its border and icon colored by its `variant`,
+ * for a condition the user keeps seeing while it lasts — a degraded service,
+ * a read-only mode.
  * Toast is the transient counterpart that reports the outcome of an action and
  * then disappears.
  */
