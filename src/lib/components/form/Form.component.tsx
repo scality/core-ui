@@ -168,6 +168,20 @@ const ScrollArea = styled(BasicPageLayout)`
   scrollbar-gutter: stable;
 `;
 
+// Mirrors ScrollArea's `scrollbar-gutter: stable`; the bar's width is
+// engine-owned, so it cannot be written as a length. Kept empty: its overflow
+// would clip non-portalled popups. As a scroll container its flex minimum is 0,
+// hence `flex-shrink: 0`.
+const ScrollbarGutterSpacer = styled.div`
+  flex-shrink: 0;
+  overflow-y: hidden;
+  scrollbar-gutter: stable;
+`;
+
+const ActionsEndingWithTheFields = styled.div`
+  display: flex;
+`;
+
 // A FormSection lays its FormGroups out so labels align across the section from
 // content alone — no JS measurement. It picks one of two mechanisms based on
 // whether the label column is a fixed width (`forceLabelWidth`):
@@ -632,7 +646,10 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
           <FixedHeader $layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
-              <div>{rightActions}</div>
+              <ActionsEndingWithTheFields>
+                {rightActions}
+                <ScrollbarGutterSpacer />
+              </ActionsEndingWithTheFields>
             </Wrap>
           </FixedHeader>
 
