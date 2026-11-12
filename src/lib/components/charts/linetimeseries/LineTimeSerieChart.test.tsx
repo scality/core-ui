@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { LineChartProps, LineTimeSerieChart } from './LineTimeSerieChart';
-import { ChartLegendWrapper } from '../legend/ChartLegendWrapper';
+import { Serie } from './LineTimeSerieChart.types';
+import { ChartLegendWrapper, useChartLegend } from '../legend/ChartLegendWrapper';
 import { CoreUiThemeProvider } from '../../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../../style/theme';
 
@@ -259,5 +260,55 @@ describe('LineTimeSerieChart', () => {
   it('should render when no unitRange is provided', async () => {
     const { container } = renderLineTimeSerieChart({ unitRange: undefined });
     expect(container).toBeInTheDocument();
+  });
+
+  // @test-review-deferred: shared-tooltip-label — tooltip labels key the chart data, so two series sharing one already overwrite each other
+  describe('dashed series', () => {
+    const LineStyleReadout = ({ resource }: { resource: string }) => {
+      const { isLineDashed } = useChartLegend();
+      return (
+        <span>{`${resource} ${isLineDashed(resource) ? 'dashed' : 'solid'}`}</span>
+      );
+    };
+
+    const [solidSerie, otherSerie] = TestSeries;
+
+    const renderWithReadout = (series: Serie[]) =>
+      render(
+        <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
+          <ChartLegendWrapper colorSet={ColorSet}>
+            <LineTimeSerieChart
+              title="Test Chart"
+              series={series}
+              height={400}
+              startingTimeStamp={solidSerie.data[0][0]}
+              interval={solidSerie.data[1][0] - solidSerie.data[0][0]}
+              duration={solidSerie.data[2][0] - solidSerie.data[0][0]}
+            />
+            <LineStyleReadout resource="Series 1" />
+            <LineStyleReadout resource="Series 2" />
+          </ChartLegendWrapper>
+        </CoreUiThemeProvider>,
+      );
+
+    it('declares its dashed resources to the legend', () => {
+      renderWithReadout([solidSerie, { ...otherSerie, isLineDashed: true }]);
+
+      expect(screen.getByText('Series 1 solid')).toBeInTheDocument();
+      expect(screen.getByText('Series 2 dashed')).toBeInTheDocument();
+    });
+
+    it('keeps a resource solid when it is drawn both solid and dashed', () => {
+      renderWithReadout([
+        solidSerie,
+        {
+          ...solidSerie,
+          getTooltipLabel: () => 'Series 1 forecast',
+          isLineDashed: true,
+        },
+      ]);
+
+      expect(screen.getByText('Series 1 solid')).toBeInTheDocument();
+    });
   });
 });

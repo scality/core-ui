@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Area,
   CartesianGrid,
@@ -28,6 +28,7 @@ import { LineChartProps, CHART_PRESETS } from './LineTimeSerieChart.types';
 import { LineTimeSerieChartTooltip } from './LineTimeSerieChartTooltip';
 import { useChartHover } from './useChartHover';
 import { useChartData } from './useChartData';
+import { useChartLegend } from '../legend/ChartLegendWrapper';
 
 const LineTemporalChartWrapper = styled.div`
   display: flex;
@@ -98,6 +99,8 @@ export function LineTimeSerieChart({
     xAxisTicks,
     linesToRender,
     belowSeriesLabels,
+    dashedSeriesLabels,
+    isDashedByResource,
   } = useChartData({
     series,
     startingTimeStamp,
@@ -106,6 +109,17 @@ export function LineTimeSerieChart({
     yAxisType,
     unitRange,
   });
+
+  const { registerLineStyles, unregisterLineStyles } = useChartLegend();
+  // The legend never sees `series`; registering keeps `isLineDashed` the only place a caller declares a dash.
+  useEffect(() => {
+    registerLineStyles(chartId, isDashedByResource);
+  }, [registerLineStyles, chartId, isDashedByResource]);
+  // Must stay separate: merged, an inline `series` would unregister and re-register on every render, forever.
+  useEffect(
+    () => () => unregisterLineStyles(chartId),
+    [unregisterLineStyles, chartId],
+  );
 
   // The type keeps 'log' off symmetrical charts; the guard keeps a plain JS
   // caller from getting a half-drawn axis out of one.
@@ -271,6 +285,7 @@ export function LineTimeSerieChart({
                 isSymmetrical={yAxisType === 'symmetrical'}
                 logZeroValue={logAxis?.zeroValue ?? null}
                 belowSeriesLabels={belowSeriesLabels}
+                dashedSeriesLabels={dashedSeriesLabels}
                 tooltipProps={props}
                 chartContainerRef={chartRef}
                 chartId={chartId}
