@@ -41,24 +41,21 @@ export const LegendShape = styled.div<{
   $color?: string;
   $shape: 'line' | 'rectangle';
   $chartColors: Record<string, string>;
-  /** Draws a dashed line whatever the shape, so the swatch matches a dashed series. */
+  /** Dashes a `line` swatch to match a dashed series; a `rectangle` ignores it. */
   $isLineDashed?: boolean;
 }>`
   ${({ $shape, $color, $chartColors, $isLineDashed }) => {
     const resolvedColor =
       $chartColors[$color as keyof typeof $chartColors] || $color;
-    if ($isLineDashed) {
-      return `
-        width: ${$shape === 'line' ? 20 : 12}px;
-        height: 2px;
-        background: repeating-linear-gradient(90deg, ${resolvedColor} 0 4px, transparent 4px 8px);
-      `;
-    }
     if ($shape === 'line') {
       return `
         width: 20px;
         height: 2px;
-        background-color: ${resolvedColor};
+        ${
+          $isLineDashed
+            ? `background: repeating-linear-gradient(90deg, ${resolvedColor} 0 4px, transparent 4px 8px);`
+            : `background-color: ${resolvedColor};`
+        }
       `;
     } else if ($shape === 'rectangle') {
       return `

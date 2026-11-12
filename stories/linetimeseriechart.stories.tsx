@@ -1918,8 +1918,8 @@ const dashedChartArgs = {
 } satisfies Partial<LineChartProps>;
 
 /**
- * A series with `isLineDashed` gets a dashed swatch in the legend and the tooltip, whatever the
- * legend `shape`: the chart declares its dashed resources to `ChartLegendWrapper`, nothing to wire.
+ * A series with `isLineDashed` gets a dashed swatch in the legend and the tooltip: the chart
+ * declares its dashed resources to `ChartLegendWrapper`, nothing to wire.
  *
  * The legend has one entry per resource. When a resource is drawn both solid and dashed, as with
  * measured and forecast below, its entry stays solid and only the tooltip tells the two apart.
@@ -1931,15 +1931,7 @@ export const DashedSeries: Story = {
         <LineTimeSerieChart
           {...dashedChartArgs}
           series={capacitySeries}
-          title="Capacity — rectangle legend"
-        />
-        <ChartLegend shape="rectangle" />
-      </ChartLegendWrapper>
-      <ChartLegendWrapper colorSet={capacityColorSet}>
-        <LineTimeSerieChart
-          {...dashedChartArgs}
-          series={capacitySeries}
-          title="Capacity — line legend"
+          title="Capacity"
         />
         <ChartLegend shape="line" />
       </ChartLegendWrapper>
@@ -1954,7 +1946,7 @@ export const DashedSeries: Story = {
           series={forecastSeries}
           title="Forecast — one resource, both styles"
         />
-        <ChartLegend shape="rectangle" />
+        <ChartLegend shape="line" />
       </ChartLegendWrapper>
     </div>
   ),
