@@ -263,6 +263,7 @@ describe('LineTimeSerieChart', () => {
   });
 });
 
+// @test-review-deferred: shared-tooltip-label — tooltip labels key the chart data, so two series sharing one already overwrite each other
 describe('LineTimeSerieChart dashed series', () => {
   const LineStyleReadout = ({ resource }: { resource: string }) => {
     const { isLineDashed } = useChartLegend();
