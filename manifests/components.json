@@ -3470,6 +3470,12 @@
           "name": "Symlog Versus Log",
           "snippet": "const SymlogVersusLog = () => (\n  <div>\n    <LogChart\n      {...logChartArgs(spikyDataWithZeros)}\n      title=\"Request latency — log, with a reserved 0\"\n      yAxisScale=\"log\"\n    />\n    <LogChart\n      {...logChartArgs(spikyDataWithZeros)}\n      title=\"Request latency — symlog, zero on the scale\"\n      yAxisScale=\"symlog\"\n    />\n  </div>\n);",
           "description": "The two scales on a one-sided series. Both are readable; the difference is zero. `log` reserves a\nslot below its lowest decade and labels it `0`; symlog has a real position for zero and spends\nthat height on the data instead, at the cost of a linear stretch near the centre.\n\nOn data that never reaches zero and never goes negative, `log` is the simpler answer."
+        },
+        {
+          "id": "components-data-display-charts-linetimeseriechart--dashed-series",
+          "name": "Dashed Series",
+          "snippet": "const DashedSeries = () => (\n  <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>\n    <ChartLegendWrapper colorSet={capacityColorSet}>\n      <LineTimeSerieChart\n        {...dashedChartArgs}\n        series={capacitySeries}\n        title=\"Capacity\"\n      />\n      <ChartLegend shape=\"line\" />\n    </ChartLegendWrapper>\n    <ChartLegendWrapper\n      colorSet={{\n        'node-1': lineTimeSeriesColorRange[0],\n        'node-2': lineTimeSeriesColorRange[2],\n      }}\n    >\n      <LineTimeSerieChart\n        {...dashedChartArgs}\n        series={forecastSeries}\n        title=\"Forecast — one resource, both styles\"\n      />\n      <ChartLegend shape=\"line\" />\n    </ChartLegendWrapper>\n  </div>\n);",
+          "description": "A series with `isLineDashed` gets a dashed swatch in the legend and the tooltip: the chart\ndeclares its dashed resources to `ChartLegendWrapper`, nothing to wire.\n\nThe legend has one entry per resource. When a resource is drawn both solid and dashed, as with\nmeasured and forecast below, its entry stays solid and only the tooltip tells the two apart."
         }
       ],
       "import": "import { ChartLegend, ChartLegendWrapper, LineTimeSerieChart } from '@scality/core-ui';\nimport { SAMPLE_FREQUENCY_LAST_TWENTY_FOUR_HOURS, SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS } from '../src/lib/components/constants';"
@@ -12859,6 +12865,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5312
+    "durationMs": 5390
   }
 }

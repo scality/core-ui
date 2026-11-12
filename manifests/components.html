@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/68 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/68 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/68 without API description</a><span class="filter-pill ok" aria-disabled="true">397 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/397 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">2/68 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">62/68 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/68 without API description</a><span class="filter-pill ok" aria-disabled="true">398 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/398 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.3s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.4s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -4476,7 +4476,7 @@ import { CardHeader, CardBodyContainer, CardBody } from '../src/lib/components/c
       <div class="badges">
         <label for="c-9-components-data-display-charts-linetimeseriechart-props" class="badge ok as-toggle">17 prop types</label>
         
-        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">26 stories · 9 incomplete</label>
+        <label for="c-9-components-data-display-charts-linetimeseriechart-stories" class="badge ok as-toggle">27 stories · 9 incomplete</label>
         
         
       </div>
@@ -5749,6 +5749,44 @@ On data that never reaches zero and never goes negative, `log` is the simpler an
       title=&quot;Request latency — symlog, zero on the scale&quot;
       yAxisScale=&quot;symlog&quot;
     /&gt;
+  &lt;/div&gt;
+);</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Dashed Series</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              <div class="hint">A series with `isLineDashed` gets a dashed swatch in the legend and the tooltip: the chart
+declares its dashed resources to `ChartLegendWrapper`, nothing to wire.
+
+The legend has one entry per resource. When a resource is drawn both solid and dashed, as with
+measured and forecast below, its entry stays solid and only the tooltip tells the two apart.</div>
+              <pre><code>const DashedSeries = () =&gt; (
+  &lt;div style={{ display: &#39;flex&#39;, flexDirection: &#39;column&#39;, gap: 32 }}&gt;
+    &lt;ChartLegendWrapper colorSet={capacityColorSet}&gt;
+      &lt;LineTimeSerieChart
+        {...dashedChartArgs}
+        series={capacitySeries}
+        title=&quot;Capacity&quot;
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
+    &lt;ChartLegendWrapper
+      colorSet={{
+        &#39;node-1&#39;: lineTimeSeriesColorRange[0],
+        &#39;node-2&#39;: lineTimeSeriesColorRange[2],
+      }}
+    &gt;
+      &lt;LineTimeSerieChart
+        {...dashedChartArgs}
+        series={forecastSeries}
+        title=&quot;Forecast — one resource, both styles&quot;
+      /&gt;
+      &lt;ChartLegend shape=&quot;line&quot; /&gt;
+    &lt;/ChartLegendWrapper&gt;
   &lt;/div&gt;
 );</code></pre>
               
