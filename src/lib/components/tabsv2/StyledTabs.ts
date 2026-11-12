@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
 import { EmphaseText } from '../text/Text.component';
+import { TAB_CONTENT_INSET } from './Tabs.constants';
 
 export const TabBar = styled.div`
   display: flex;
@@ -104,7 +105,10 @@ export const TabContent = styled.div<{
   $withoutPadding?: boolean;
 }>`
   margin: 0;
-  padding: ${(props) => (props.$withoutPadding ? '0' : spacing.r16)};
+  /* Read by Form's tab layout to cancel this inset. */
+  ${TAB_CONTENT_INSET}: ${(props) =>
+    props.$withoutPadding ? '0px' : spacing.r16};
+  padding: var(${TAB_CONTENT_INSET});
   display: block;
   width: 100%;
   height: calc(100% - ${spacing.r40});
