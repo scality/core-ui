@@ -132,6 +132,7 @@ export const ChartLegendWrapper = ({
 
   const unregisterLineStyles = useCallback((chartId: string) => {
     setLineStylesByChart((prev) => {
+      if (!(chartId in prev)) return prev;
       const { [chartId]: _unregistered, ...rest } = prev;
       return rest;
     });

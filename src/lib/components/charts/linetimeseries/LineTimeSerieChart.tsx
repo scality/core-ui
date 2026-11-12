@@ -115,7 +115,7 @@ export function LineTimeSerieChart({
   useEffect(() => {
     registerLineStyles(chartId, isDashedByResource);
   }, [registerLineStyles, chartId, isDashedByResource]);
-  // Separate from registration, so a new `series` identity updates the entry instead of dropping it.
+  // Must stay separate: merged, an inline `series` would unregister and re-register on every render, forever.
   useEffect(
     () => () => unregisterLineStyles(chartId),
     [unregisterLineStyles, chartId],

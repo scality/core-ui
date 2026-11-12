@@ -58,13 +58,13 @@ export const LegendShape = styled.div<{
       return `
         width: 20px;
         height: 2px;
-        background-color: ${$chartColors[$color as keyof typeof $chartColors] || $color};
+        background-color: ${resolvedColor};
       `;
     } else if ($shape === 'rectangle') {
       return `
         width: 12px;
         height: 12px;
-        background-color: ${$chartColors[$color as keyof typeof $chartColors] || $color};
+        background-color: ${resolvedColor};
         border-radius: 2px;
       `;
     } else {

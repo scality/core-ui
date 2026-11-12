@@ -391,11 +391,11 @@ export function useChartData({
   const isDashedByResource = useMemo(
     () =>
       listAllSeries(series).reduce<Record<string, boolean>>(
-        (isDashed, serie) => ({
-          ...isDashed,
-          [serie.resource]:
-            (isDashed[serie.resource] ?? true) && !!serie.isLineDashed,
-        }),
+        (isDashed, serie) => {
+          isDashed[serie.resource] =
+            (isDashed[serie.resource] ?? true) && !!serie.isLineDashed;
+          return isDashed;
+        },
         {},
       ),
     [series],
