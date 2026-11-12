@@ -258,6 +258,25 @@ describe('ChartLegendWrapper', () => {
       expect(screen.getByText('CPU solid')).toBeInTheDocument();
     });
 
+    it('follows a chart that switches a resource from dashed to solid', () => {
+      const { rerender } = render(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <ChartDeclaringStyles isDashedByResource={cpuDashed} />
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+      expect(screen.getByText('CPU dashed')).toBeInTheDocument();
+
+      rerender(
+        <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
+          <ChartDeclaringStyles isDashedByResource={cpuSolid} />
+          <LineStyleReadout resource="CPU" />
+        </ChartLegendWrapper>,
+      );
+
+      expect(screen.getByText('CPU solid')).toBeInTheDocument();
+    });
+
     it('forgets the styles of a chart once it unmounts', () => {
       const { rerender } = render(
         <ChartLegendWrapper colorSet={{ CPU: 'red' }}>
