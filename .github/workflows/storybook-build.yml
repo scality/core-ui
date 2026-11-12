@@ -32,4 +32,4 @@ jobs:
         env:
           STORYBOOK_DISABLE_TELEMETRY: 1
       - name: Check the component index against the library's exports
-        run: npm run check:ai-readiness -- --storybook-index storybook-static/index.json
+        run: npm run check:component-index -- --storybook-index storybook-static/index.json
