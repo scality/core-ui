@@ -221,4 +221,30 @@ ${row('Beta')}
     expect(status).toBe(1);
     expect(output).toContain('is not a Storybook index');
   });
+
+  it('does not accept a row inside a tilde fence as a real row', () => {
+    const { status, output } = run({
+      entry: write('entry.ts', `export { Alpha, Beta } from './alpha';\n`),
+      indexPage: write(
+        'page.mdx',
+        `${page([row('Alpha')])}\n~~~md\n${row('Beta')}\n~~~\n`,
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('Beta');
+  });
+
+  it('keeps a longer fence open across the shorter one it quotes', () => {
+    const { status, output } = run({
+      entry: write('entry.ts', `export { Alpha, Beta } from './alpha';\n`),
+      indexPage: write(
+        'page.mdx',
+        `${page([row('Alpha')])}\n\`\`\`\`md\n\`\`\`md\n${row('Beta')}\n\`\`\`\n\`\`\`\`\n`,
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('Beta');
+  });
 });

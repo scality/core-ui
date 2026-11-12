@@ -175,8 +175,14 @@ function scanIndexPage(absolutePath) {
       if (line.includes('*/}')) inComment = false;
       return;
     }
-    if (line.startsWith('```')) {
-      inFence = !inFence;
+    // A fence closes only on its own marker, repeated at least as many times,
+    // so a longer fence can quote a shorter one without ending it.
+    const fence = line.match(/^(`{3,}|~{3,})/)?.[1];
+    if (
+      fence &&
+      (!inFence || (fence[0] === inFence[0] && fence.length >= inFence.length))
+    ) {
+      inFence = inFence ? false : fence;
       return;
     }
     if (inFence) return;
