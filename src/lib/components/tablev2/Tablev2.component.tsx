@@ -245,7 +245,7 @@ export const EmptyCell = ({
       <Tooltip
         overlay={<TooltipContent>{tooltipContent || 'unknown'}</TooltipContent>}
       >
-        <Icon name="Minus" ariaLabel="Unknown"  />
+        <Icon name="Minus" ariaLabel="Unknown" />
       </Tooltip>
     </Box>
   );

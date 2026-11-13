@@ -101,8 +101,8 @@ const ContentContainer = styled.div`
 
 const FadingToast = styled.div`
   align-items: flex-end;
-  background-color: ${props => props.theme.backgroundLevel1};
-  border: 1px solid ${props => props.theme.border};
+  background-color: ${(props) => props.theme.backgroundLevel1};
+  border: 1px solid ${(props) => props.theme.border};
   box-shadow: 0px 4px 10px 4px #000;
   display: flex;
   border-radius: 4px;

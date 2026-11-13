@@ -27,13 +27,14 @@ import {
   navbarItemWidth,
   zIndex,
 } from '../../style/theme';
-import {
-  getContrastText,
-  getThemePropSelector,
-} from '../../utils';
+import { getContrastText, getThemePropSelector } from '../../utils';
 import { Dropdown, type Item } from '../dropdown/Dropdown.component';
 import { Icon } from '../icon/Icon.component';
-import { Button, FocusVisibleStyle, type Props as ButtonProps } from '../buttonv2/Buttonv2.component';
+import {
+  Button,
+  FocusVisibleStyle,
+  type Props as ButtonProps,
+} from '../buttonv2/Buttonv2.component';
 import { useContainerWidth } from '../responsive/useContainerWidth';
 
 /**
@@ -136,7 +137,9 @@ export function selectVisibleTabs(
   // non-pinned tabs then fill what's left, stopping at the first that no longer
   // fits so the dropped tabs stay a contiguous run on the right.
   const widthBudget = availableWidth - menuTriggerWidth;
-  const keptTabIndices = new Set<number>(allTabIndices.filter((index) => pinned[index]));
+  const keptTabIndices = new Set<number>(
+    allTabIndices.filter((index) => pinned[index]),
+  );
   let usedWidth = allTabIndices
     .filter((index) => pinned[index])
     .reduce((sum, index) => sum + tabWidths[index], 0);
@@ -148,8 +151,12 @@ export function selectVisibleTabs(
   }
 
   return {
-    visibleTabIndices: allTabIndices.filter((index) => keptTabIndices.has(index)),
-    overflowTabIndices: allTabIndices.filter((index) => !keptTabIndices.has(index)),
+    visibleTabIndices: allTabIndices.filter((index) =>
+      keptTabIndices.has(index),
+    ),
+    overflowTabIndices: allTabIndices.filter(
+      (index) => !keptTabIndices.has(index),
+    ),
   };
 }
 
@@ -198,7 +205,11 @@ export type Props = {
   className?: string;
 };
 const getNavbarTextColor = (props) =>
-  getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
+  getContrastText(
+    props.theme.navbarBackground,
+    props.theme.textPrimary,
+    props.theme.textReverse,
+  ) ?? props.theme.textPrimary;
 
 const NavbarContainer = styled.div.withConfig({
   componentId: 'sc-navbar',
@@ -240,9 +251,14 @@ const NavbarTabs = styled.div`
     border-bottom: ${spacing.r2} solid transparent;
     border-top: ${spacing.r2} solid transparent;
     ${(props) => {
-    const { selectedActive } = props.theme;
-    const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
-    return css`
+      const { selectedActive } = props.theme;
+      const navTextColor =
+        getContrastText(
+          props.theme.navbarBackground,
+          props.theme.textPrimary,
+          props.theme.textReverse,
+        ) ?? props.theme.textPrimary;
+      return css`
         color: ${navTextColor};
         &:hover {
           background-color: ${getThemePropSelector('highlight')};
@@ -258,7 +274,7 @@ const NavbarTabs = styled.div`
           color: ${navTextColor};
         }
       `;
-  }};
+    }};
   }
 `;
 const TabItem = styled.div<{ $selected: boolean }>`
@@ -269,7 +285,12 @@ const TabItem = styled.div<{ $selected: boolean }>`
   align-items: center;
   padding: 0 ${spacing.r16};
   ${(props) => {
-    const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
+    const navTextColor =
+      getContrastText(
+        props.theme.navbarBackground,
+        props.theme.textPrimary,
+        props.theme.textReverse,
+      ) ?? props.theme.textPrimary;
     return css`
       color: ${navTextColor};
       &:hover {
@@ -507,7 +528,11 @@ function NavbarTabsMenu({
       </TabsMenuTrigger>
       {isOpen && (
         <FloatingPortal>
-          <FloatingFocusManager context={context} modal={false} initialFocus={-1}>
+          <FloatingFocusManager
+            context={context}
+            modal={false}
+            initialFocus={-1}
+          >
             <TabsMenuPanel
               ref={refs.setFloating}
               style={floatingStyles}
@@ -557,7 +582,8 @@ const TabSlot = styled.span`
  * controls (e.g. an editable deployment name) never disappear into the menu.
  */
 function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
-  const { ref: containerRef, width: availableWidth } = useContainerWidth<HTMLDivElement>();
+  const { ref: containerRef, width: availableWidth } =
+    useContainerWidth<HTMLDivElement>();
   const tabRefs = useRef<Array<HTMLElement | null>>([]);
   const [tabWidths, setTabWidths] = useState<number[]>([]);
   const [menuTriggerWidth, setMenuTriggerWidth] = useState(0);
@@ -573,7 +599,9 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
         const measured = tabRefs.current[index]?.offsetWidth;
         // Keep the cached width for any tab not currently in the row (it sits
         // in the "More" menu and is no longer rendered full-size here).
-        return measured && measured > 0 ? measured : previousWidths[index] ?? 0;
+        return measured && measured > 0
+          ? measured
+          : (previousWidths[index] ?? 0);
       });
       // Return the previous array unchanged when nothing moved so React can bail
       // out of the extra render (the mapped array is always a fresh reference).
@@ -597,20 +625,38 @@ function NavbarTabsRow({ tabs }: { tabs: Array<Tab> }) {
     () =>
       tabs.map(
         (tab) =>
-          Boolean(tab.alwaysVisible) || Boolean(tab.selected) || Boolean(tab.render),
+          Boolean(tab.alwaysVisible) ||
+          Boolean(tab.selected) ||
+          Boolean(tab.render),
       ),
     [tabs],
   );
   const allTabsMeasured = tabWidths.length === tabs.length;
   // Until the trigger has measured itself, reserve an estimate so the first
   // overflow pass doesn't keep one tab too many for a frame.
-  const reservedTriggerWidth = menuTriggerWidth || ESTIMATED_MENU_TRIGGER_WIDTH_PX;
+  const reservedTriggerWidth =
+    menuTriggerWidth || ESTIMATED_MENU_TRIGGER_WIDTH_PX;
   const { visibleTabIndices, overflowTabIndices } = useMemo(
     () =>
       allTabsMeasured
-        ? selectVisibleTabs(tabWidths, pinned, reservedTriggerWidth, availableWidth ?? Infinity)
-        : { visibleTabIndices: tabs.map((_, index) => index), overflowTabIndices: [] },
-    [allTabsMeasured, tabWidths, pinned, reservedTriggerWidth, availableWidth, tabs],
+        ? selectVisibleTabs(
+            tabWidths,
+            pinned,
+            reservedTriggerWidth,
+            availableWidth ?? Infinity,
+          )
+        : {
+            visibleTabIndices: tabs.map((_, index) => index),
+            overflowTabIndices: [],
+          },
+    [
+      allTabsMeasured,
+      tabWidths,
+      pinned,
+      reservedTriggerWidth,
+      availableWidth,
+      tabs,
+    ],
   );
 
   return (
@@ -647,7 +693,8 @@ const getActionRenderer = (
       // When condensed to an icon, abbreviate a text label to its initials
       // (e.g. "Carlito Gonzalez" → "CG"); the full text stays the accessible
       // name below. Icon-only actions (no text) simply stay icon-only.
-      const condensedText = condenseToIcon && text ? getInitials(text) : undefined;
+      const condensedText =
+        condenseToIcon && text ? getInitials(text) : undefined;
       return (
         <Dropdown
           key={`navbar_right_action_${index}`}
@@ -660,7 +707,9 @@ const getActionRenderer = (
           // Applied after `...rest` so the condense-mode name always wins over a
           // stray title/aria-label on the action; only when there is a label to
           // preserve, so an icon-only action's own title/aria-label passes through.
-          {...(condenseToIcon && text ? { title: text, 'aria-label': text } : {})}
+          {...(condenseToIcon && text
+            ? { title: text, 'aria-label': text }
+            : {})}
         />
       );
     }
@@ -690,14 +739,14 @@ function NavBar({
   );
 
   return (
-    <NavbarContainer
-      ref={ref}
-      {...rest}
-    >
+    <NavbarContainer ref={ref} {...rest}>
       <NavbarMenu>
         {onToggleClick && (
           <NavbarMenuItem onClick={onToggleClick}>
-            <Button icon={<Icon name="Lat-menu" />} tooltip={{ overlay: "Toggle Main Menu" }} />
+            <Button
+              icon={<Icon name="Lat-menu" />}
+              tooltip={{ overlay: 'Toggle Main Menu' }}
+            />
           </NavbarMenuItem>
         )}
         <NavbarMenuItem>

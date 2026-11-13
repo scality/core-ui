@@ -25,9 +25,7 @@ const testTooltipProps = {
 };
 
 const renderTooltip = (
-  props: Partial<
-    React.ComponentProps<typeof LineTimeSerieChartTooltip>
-  > = {},
+  props: Partial<React.ComponentProps<typeof LineTimeSerieChartTooltip>> = {},
 ) =>
   render(
     <LineTimeSerieChartTooltip

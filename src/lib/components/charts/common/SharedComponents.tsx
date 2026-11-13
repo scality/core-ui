@@ -180,8 +180,8 @@ export const CustomTick = ({
   const duration =
     type.type === 'time'
       ? (type.timeRange.endDate.getTime() -
-        type.timeRange.startDate.getTime()) /
-      1000
+          type.timeRange.startDate.getTime()) /
+        1000
       : 0;
 
   const tooltipStyle = {

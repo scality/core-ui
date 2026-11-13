@@ -138,21 +138,22 @@ const attachedPages = filesUnder(storiesDir, '.mdx').flatMap((file) => {
   const tag = source.match(/<Meta\b([^>]*)>/);
   const of = tag?.[1].match(/\bof=\{(\w+)\}/);
   if (!of) return [];
-  return [{ file, of: of[1], name: tag?.[1].match(/\bname="([^"]*)"/)?.[1], source }];
+  return [
+    { file, of: of[1], name: tag?.[1].match(/\bname="([^"]*)"/)?.[1], source },
+  ];
 });
 
 // A page attached with `of={...}` and no name is named after `docs.defaultName`
 // and takes the generated props table's place, so the component silently loses a
 // page instead of gaining one. The name is also what `storySort` ranks it by.
-it.each(attachedPages.map((page) => path.relative(storiesDir, page.file)))(
-  'stories/%s declares name="Guideline"',
-  (file) => {
-    const page = attachedPages.find(
-      (candidate) => path.relative(storiesDir, candidate.file) === file,
-    );
-    expect(page?.name).toBe('Guideline');
-  },
-);
+it.each(
+  attachedPages.map((page) => path.relative(storiesDir, page.file)),
+)('stories/%s declares name="Guideline"', (file) => {
+  const page = attachedPages.find(
+    (candidate) => path.relative(storiesDir, candidate.file) === file,
+  );
+  expect(page?.name).toBe('Guideline');
+});
 
 const documented = new Set(
   attachedPages

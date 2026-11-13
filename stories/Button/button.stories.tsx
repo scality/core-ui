@@ -210,7 +210,11 @@ export const IconButtonWithTooltip = {
         />
 
         <Button {...args} variant="danger" />
-        <Button {...args} icon={<Icon name="Delete"></Icon>} variant="outline" />
+        <Button
+          {...args}
+          icon={<Icon name="Delete"></Icon>}
+          variant="outline"
+        />
       </Stack>
     );
   },
@@ -234,7 +238,6 @@ export const GhostButtons = {
         <Button
           icon={<i className="fas fa-sync" />}
           tooltip={{
-           
             overlay: 'Refresh the metrics',
             placement: 'top',
           }}
@@ -248,8 +251,7 @@ export const GhostButtons = {
         <Button
           icon={<i className="fas fa-calendar-week" />}
           tooltip={{
-            overlayStyle: {
-            },
+            overlayStyle: {},
             overlay: 'Metric over a period',
             placement: 'top',
           }}

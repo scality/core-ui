@@ -1,4 +1,9 @@
-import { act, screen, render as testingRender, waitFor } from '@testing-library/react';
+import {
+  act,
+  screen,
+  render as testingRender,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState, useRef } from 'react';
 import { Option, Select, SelectRef } from '../selectv2/Selectv2.component';
@@ -68,7 +73,9 @@ describe('SelectV2', () => {
 
   it('should throw error if <Option/> is outside <Select/>', () => {
     // mock console.error as this is the only way to silent expected error thrown by the component
-    const consoleErrorFn = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
+    const consoleErrorFn = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => jest.fn());
     expect(() => render(<Option value="Option 1" />)).toThrow();
     consoleErrorFn.mockRestore();
   });
@@ -358,7 +365,9 @@ describe('SelectV2', () => {
     const singleSelect = screen.getByRole('listbox');
     await act(() => userEvent.click(singleSelect));
 
-    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: /account 1/i })),
+    );
   });
 
   it('should be testable if we have several select', async () => {
@@ -421,11 +430,15 @@ describe('SelectV2', () => {
 
     await act(() => userEvent.click(screen.getByLabelText(/select account/i)));
 
-    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: /account 1/i })),
+    );
 
     await act(() => userEvent.click(screen.getByLabelText(/select user/i)));
 
-    await act(() => userEvent.click(screen.getByRole('option', { name: /user 1/i })));
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: /user 1/i })),
+    );
   });
 
   it('should be testable even if we have several select with the same value, the placeholder should be different', async () => {
@@ -487,7 +500,9 @@ describe('SelectV2', () => {
     render(<MyWrapperWith2Select />);
 
     await act(() => userEvent.click(screen.getByLabelText(/select account/i)));
-    await act(() => userEvent.click(screen.getByLabelText(/Select Second Account/i)));
+    await act(() =>
+      userEvent.click(screen.getByLabelText(/Select Second Account/i)),
+    );
 
     /**
      * This is possible because only 1 select can be open at a time
@@ -497,13 +512,18 @@ describe('SelectV2', () => {
      * const selectContainer = select?.parentElement?.parentElement;
      * const option = within(selectContainer).getByRole('option', { name: /account 1/i });
      */
-    await act(() => userEvent.click(screen.getByRole('option', { name: /account 1/i })));
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: /account 1/i })),
+    );
   });
 
   describe('Ref API', () => {
     it('should expose focus method via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
+        const selectRef =
+          useRef<
+            SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>
+          >(null);
         const [value, setValue] = useState<string>('');
 
         return (
@@ -525,13 +545,18 @@ describe('SelectV2', () => {
       render(<RefTestComponent />);
       expect(selectors.input()).not.toHaveFocus();
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Focus/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Focus/i })),
+      );
       expect(selectors.input()).toHaveFocus();
     });
 
     it('should expose openMenu and closeMenu methods via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
+        const selectRef =
+          useRef<
+            SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>
+          >(null);
         const [value, setValue] = useState<string>('');
 
         return (
@@ -558,14 +583,18 @@ describe('SelectV2', () => {
       render(<RefTestComponent />);
       expect(selectors.options()).toHaveLength(0);
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Open Menu/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Open Menu/i })),
+      );
       expect(selectors.options().length).toBeGreaterThan(0);
       simpleOptions.forEach((opt) => {
         const option = selectors.option(opt.props.label);
         expect(option).toBeInTheDocument();
       });
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Close Menu/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Close Menu/i })),
+      );
       expect(selectors.options()).toHaveLength(0);
     });
 
@@ -574,7 +603,10 @@ describe('SelectV2', () => {
 
       const RefTestComponent = () => {
         const [value, setValue] = useState('');
-        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
+        const selectRef =
+          useRef<
+            SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>
+          >(null);
 
         return (
           <div>
@@ -618,16 +650,23 @@ describe('SelectV2', () => {
       });
       expect(select).toHaveTextContent('Select with ref');
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Set Value/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Set Value/i })),
+      );
       expect(select).toHaveTextContent('Item 0');
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Clear/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Clear/i })),
+      );
       expect(select).toHaveTextContent('Select with ref');
     });
 
     it('should expose blur method via ref', async () => {
       const RefTestComponent = () => {
-        const selectRef = useRef<SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>>(null);
+        const selectRef =
+          useRef<
+            SelectRef<OptionTypeBase, boolean, GroupTypeBase<OptionTypeBase>>
+          >(null);
         const [value, setValue] = useState<string>('');
 
         return (
@@ -649,10 +688,14 @@ describe('SelectV2', () => {
 
       render(<RefTestComponent />);
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Focus/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Focus/i })),
+      );
       expect(selectors.input()).toHaveFocus();
 
-      await act(() => userEvent.click(screen.getByRole('button', { name: /Blur/i })));
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: /Blur/i })),
+      );
       expect(selectors.input()).not.toHaveFocus();
     });
   });

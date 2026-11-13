@@ -55,17 +55,9 @@ const NotificationsContainer = styled.div.withConfig({
   }};
 `;
 
-function Notifications({
-  position,
-  notifications,
-  onDismiss,
-  ...rest
-}: Props) {
+function Notifications({ position, notifications, onDismiss, ...rest }: Props) {
   return (
-    <NotificationsContainer
-      $position={position}
-      {...rest}
-    >
+    <NotificationsContainer $position={position} {...rest}>
       {notifications.map((notification) => (
         <Notification
           key={notification.uid}

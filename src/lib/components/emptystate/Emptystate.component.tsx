@@ -20,14 +20,16 @@ export type Props = {
    */
   resourceToCreate?: string;
 };
-const EmptystateContainer = styled.div<{ $backgroundColor?: keyof CoreUITheme }>`
+const EmptystateContainer = styled.div<{
+  $backgroundColor?: keyof CoreUITheme;
+}>`
   ${(props) => {
     const { theme, $backgroundColor } = props;
     return css`
       color: ${theme.textSecondary};
-      background-color: ${$backgroundColor
-        ? theme[$backgroundColor]
-        : 'transparent'};
+      background-color: ${
+        $backgroundColor ? theme[$backgroundColor] : 'transparent'
+      };
     `;
   }}
   display: flex;

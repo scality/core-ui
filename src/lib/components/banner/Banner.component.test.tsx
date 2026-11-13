@@ -9,10 +9,9 @@ describe('Banner', () => {
   const { Wrapper } = getWrapper();
 
   it('should render with text content', () => {
-    render(
-      <Banner variant="base">Some text content</Banner>,
-      { wrapper: Wrapper }
-    );
+    render(<Banner variant="base">Some text content</Banner>, {
+      wrapper: Wrapper,
+    });
     expect(screen.getByText('Some text content')).toBeInTheDocument();
   });
 
@@ -21,7 +20,7 @@ describe('Banner', () => {
       <Banner variant="base" title="My Title">
         Body text
       </Banner>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
     expect(screen.getByText('My Title')).toBeInTheDocument();
     expect(screen.getByText('Body text')).toBeInTheDocument();
@@ -37,7 +36,9 @@ describe('Banner', () => {
     expect(screen.getByText('Message with default icon')).toBeInTheDocument();
     // Icon is decorative (aria-hidden), verify it's rendered via DOM query
     await waitFor(() => {
-      expect(container.querySelector('svg[data-icon="circle-info"]')).toBeInTheDocument();
+      expect(
+        container.querySelector('svg[data-icon="circle-info"]'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -51,7 +52,9 @@ describe('Banner', () => {
     expect(screen.getByText('Message with custom icon')).toBeInTheDocument();
     // Icon is decorative (aria-hidden), verify it's rendered via DOM query
     await waitFor(() => {
-      expect(container.querySelector('svg[data-icon="circle-check"]')).toBeInTheDocument();
+      expect(
+        container.querySelector('svg[data-icon="circle-check"]'),
+      ).toBeInTheDocument();
     });
   });
 });

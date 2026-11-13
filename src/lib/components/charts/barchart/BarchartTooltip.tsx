@@ -49,7 +49,11 @@ export const BarchartTooltip = <T extends BarchartBars>({
     return null;
   }
 
-  const currentPoint = getCurrentPoint(tooltipProps, hoveredValue, logZeroValue);
+  const currentPoint = getCurrentPoint(
+    tooltipProps,
+    hoveredValue,
+    logZeroValue,
+  );
 
   const duration =
     type.type === 'time'

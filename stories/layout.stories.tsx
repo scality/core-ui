@@ -9,10 +9,7 @@ import { Link, Text } from '../src/lib/components/text/Text.component';
 import { TextBadge } from '../src/lib/components/textbadge/TextBadge.component';
 import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.component';
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
-import {
-  Column,
-  Table,
-} from '../src/lib/components/tablev2/Tablev2.component';
+import { Column, Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Button } from '../src/lib/next';
 import { BrowserRouter } from 'react-router-dom';
 import { Meta } from '@storybook/react-webpack5';
@@ -73,12 +70,42 @@ type AccountRow = {
 };
 
 const accountData: AccountRow[] = [
-  { id: '1', name: 'analytics-team', owner: 'Dana Moreau', createdOn: '2026-01-14 09:24' },
-  { id: '2', name: 'archive-long-term', owner: 'Priya Raman', createdOn: '2025-11-02 17:03' },
-  { id: '3', name: 'backup-primary', owner: 'Dana Moreau', createdOn: '2026-03-21 08:15' },
-  { id: '4', name: 'media-delivery', owner: 'Tomas Lind', createdOn: '2024-09-09 14:47' },
-  { id: '5', name: 'research-sandbox', owner: 'Priya Raman', createdOn: '2026-06-30 11:52' },
-  { id: '6', name: 'shared-services', owner: 'Tomas Lind', createdOn: '2025-02-28 06:38' },
+  {
+    id: '1',
+    name: 'analytics-team',
+    owner: 'Dana Moreau',
+    createdOn: '2026-01-14 09:24',
+  },
+  {
+    id: '2',
+    name: 'archive-long-term',
+    owner: 'Priya Raman',
+    createdOn: '2025-11-02 17:03',
+  },
+  {
+    id: '3',
+    name: 'backup-primary',
+    owner: 'Dana Moreau',
+    createdOn: '2026-03-21 08:15',
+  },
+  {
+    id: '4',
+    name: 'media-delivery',
+    owner: 'Tomas Lind',
+    createdOn: '2024-09-09 14:47',
+  },
+  {
+    id: '5',
+    name: 'research-sandbox',
+    owner: 'Priya Raman',
+    createdOn: '2026-06-30 11:52',
+  },
+  {
+    id: '6',
+    name: 'shared-services',
+    owner: 'Tomas Lind',
+    createdOn: '2025-02-28 06:38',
+  },
 ];
 
 const accountColumns: Column<AccountRow>[] = [
@@ -253,7 +280,7 @@ export const Layout2MainContentOnly = {
 export const Layout2TransparentBackground = {
   render: () => (
     <Layout2
-      variant='transparent'
+      variant="transparent"
       headerNavigation={
         <HeaderComponent>
           <h3>Header navigation</h3>

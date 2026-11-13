@@ -13,7 +13,7 @@ body {
   src:
     url('./style/fonts/Lato-Regular.woff2') format('woff2'),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('./style/fonts/Lato-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('./style/fonts/Lato-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /* Lato-Bold */
@@ -25,7 +25,7 @@ body {
   src:
     url('./style/fonts/Lato-Bold.woff2') format('woff2'),
     /* Chrome 26+, Opera 23+, Firefox 39+ */ url('./style/fonts/Lato-Bold.woff')
-      format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /* FiraCode-Regular */

@@ -103,7 +103,8 @@ export const ConfirmationModal = {
     const attachmentOperations: AttachmentOperation<string>[] = Array.from(
       { length: 24 },
       (_, index) => ({
-        action: index % 4 === 0 ? AttachmentAction.REMOVE : AttachmentAction.ADD,
+        action:
+          index % 4 === 0 ? AttachmentAction.REMOVE : AttachmentAction.ADD,
         entity: {
           name: `bucket-${String(index + 1).padStart(2, '0')}`,
           id: `id-${index + 1}`,

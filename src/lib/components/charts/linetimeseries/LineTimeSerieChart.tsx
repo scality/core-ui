@@ -12,7 +12,10 @@ import {
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
 import { fontSize } from '../../../style/theme';
-import { ChartHeader, StyledResponsiveContainer } from '../common/SharedComponents';
+import {
+  ChartHeader,
+  StyledResponsiveContainer,
+} from '../common/SharedComponents';
 import {
   formatLogTickValue,
   formatSymlogTickValue,
@@ -73,11 +76,16 @@ export function LineTimeSerieChart({
   renderTooltip,
 }: LineChartProps) {
   const presetOptions = CHART_PRESETS[displayPreset];
-  const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
-  const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
+  const resolvedNoBackground =
+    displayOptions?.noBackground ?? presetOptions.noBackground;
+  const resolvedShowHorizontalGridLines =
+    displayOptions?.showHorizontalGridLines ??
+    presetOptions.showHorizontalGridLines;
   const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
-  const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
-  const resolvedNoTickLine = displayOptions?.noTickLine ?? presetOptions.noTickLine;
+  const resolvedNoYAxisLine =
+    displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+  const resolvedNoTickLine =
+    displayOptions?.noTickLine ?? presetOptions.noTickLine;
 
   const theme = useTheme();
   const chartRef = useRef(null);
@@ -190,7 +198,9 @@ export function LineTimeSerieChart({
   const yAxisDomain = useMemo((): [number, number] => {
     if (logAxis) return logAxis.domain;
     if (symlogAxis) return symlogAxis.domain;
-    return yAxisType === 'symmetrical' ? [-topDomain, topDomain] : [0, topDomain];
+    return yAxisType === 'symmetrical'
+      ? [-topDomain, topDomain]
+      : [0, topDomain];
   }, [logAxis, symlogAxis, topDomain, yAxisType]);
 
   return (
@@ -217,16 +227,25 @@ export function LineTimeSerieChart({
         >
           {/* Gradient definitions for series with withGradient */}
           <defs>
-            {linesToRender.filter((l) => l.withGradient).map((line) => (
-              <linearGradient
-                key={`${title}-${line.key}`}
-                id={`gradient-${chartId}-${line.key}`}
-                x1="0" y1="0" x2="0" y2="1"
-              >
-                <stop offset="5%" stopColor={line.stroke} stopOpacity={0.18} />
-                <stop offset="95%" stopColor={line.stroke} stopOpacity={0} />
-              </linearGradient>
-            ))}
+            {linesToRender
+              .filter((l) => l.withGradient)
+              .map((line) => (
+                <linearGradient
+                  key={`${title}-${line.key}`}
+                  id={`gradient-${chartId}-${line.key}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    stopColor={line.stroke}
+                    stopOpacity={0.18}
+                  />
+                  <stop offset="95%" stopColor={line.stroke} stopOpacity={0} />
+                </linearGradient>
+              ))}
           </defs>
 
           <CartesianGrid
@@ -321,10 +340,10 @@ export function LineTimeSerieChart({
                 isAnimationActive={false}
                 strokeDasharray={line.strokeDasharray}
               />
-            )
+            ),
           )}
         </ComposedChart>
       </StyledResponsiveContainer>
-    </LineTemporalChartWrapper >
+    </LineTemporalChartWrapper>
   );
 }

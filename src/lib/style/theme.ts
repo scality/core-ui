@@ -70,7 +70,10 @@ export type ThemeColors = ThemeColorToken;
  * context. No raw colour — one outside the theme cannot follow a rebrand.
  */
 export type ThemeColor =
-  ThemeColorToken | 'currentColor' | 'inherit' | 'transparent';
+  | ThemeColorToken
+  | 'currentColor'
+  | 'inherit'
+  | 'transparent';
 
 /**
  * What `CoreUiThemeProvider` installs: the tokens, plus the styled-system scales.

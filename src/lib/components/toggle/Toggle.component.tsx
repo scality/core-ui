@@ -23,13 +23,15 @@ const Switch = styled.label<{ $disabled?: boolean }>`
   align-self: center;
   ${(props) => {
     return css`
-      ${props.$disabled
-        ? `
+      ${
+        props.$disabled
+          ? `
           cursor: not-allowed;
         `
-        : `
+          : `
           cursor: pointer;
-        `}
+        `
+      }
     `;
   }}
 `;
@@ -99,8 +101,8 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
               label
                 ? `${rest['id']}-label`
                 : isContextAvailable
-                ? `${LABEL_PREFIX}${rest['id']}`
-                : undefined
+                  ? `${LABEL_PREFIX}${rest['id']}`
+                  : undefined
             }
           >
             <ToggleInput

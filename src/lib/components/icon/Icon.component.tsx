@@ -96,7 +96,9 @@ const DelayedFallback = ({
   size,
   children,
   ...rest
-}: PropsWithChildren<Omit<HTMLProps<HTMLElement>, 'size'> & { size?: SizeProp }>) => {
+}: PropsWithChildren<
+  Omit<HTMLProps<HTMLElement>, 'size'> & { size?: SizeProp }
+>) => {
   const [show, setShow] = useState(false);
   useEffect(() => {
     let timeout = setTimeout(() => setShow(true), 300);
@@ -133,25 +135,27 @@ export const IconWrapper = styled.div<{ $size: SizeProp }>`
       color: ${brand.infoPrimary};
       border: 1px solid ${brand.infoPrimary};
       background: ${brand.backgroundLevel1};
-      ${props.$size === 'lg'
-        ? `
+      ${
+        props.$size === 'lg'
+          ? `
         width: 2.5rem;
         height: 2.5rem;
       `
-        : props.$size === 'sm'
-          ? `
+          : props.$size === 'sm'
+            ? `
         width: 1.75rem;
         height: 1.75rem;
       `
-          : props.$size === 'xs'
-            ? `
+            : props.$size === 'xs'
+              ? `
         width: 1.5rem;
         height: 1.5rem;
       `
-            : `
+              : `
         width: ${parseInt(props.$size.replace('x', ''), 10) * 2}rem;
         height: ${parseInt(props.$size.replace('x', ''), 10) * 2}rem;
-      `}
+      `
+      }
     `;
   }}
 
@@ -211,10 +215,13 @@ function NonWrappedIcon({
     import(
       /* webpackExclude: /import\.macro\.js$/ */
       /* webpackInclude: /\.js$/ */
-      `@fortawesome/${fontAwesomeType}/${iconClass}`).then((module) => {
+      `@fortawesome/${fontAwesomeType}/${iconClass}`
+    )
+      .then((module) => {
         setIcon(module[iconClass]);
         iconCache[cacheKey] = module[iconClass];
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.warn(`Icon ${iconClass} could not be loaded:`, err.message);
       });
   }, [cacheKey, fontAwesomeType, iconClass]);
@@ -226,9 +233,7 @@ function NonWrappedIcon({
     : { 'aria-hidden': true as const };
 
   if (!icon && !customIcons[name]) {
-    return (
-      <DelayedFallback size={size} {...accessibilityProps} />
-    );
+    return <DelayedFallback size={size} {...accessibilityProps} />;
   }
 
   const IconComponent = customIcons[name] ?? IconStyled;

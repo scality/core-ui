@@ -9,7 +9,7 @@ import {
   isEditAttempt,
   createReadOnlyTooltipExtension,
 } from './Editor.component';
-import React from "react";
+import React from 'react';
 
 const mockJsonSchema = jest.fn(() => []);
 
@@ -34,7 +34,8 @@ jest.mock('@uiw/react-codemirror', () => {
 });
 
 jest.mock('codemirror-json-schema', () => ({
-  jsonSchema: (...args: unknown[]) => (mockJsonSchema as (...a: unknown[]) => unknown).apply(null, args),
+  jsonSchema: (...args: unknown[]) =>
+    (mockJsonSchema as (...a: unknown[]) => unknown).apply(null, args),
 }));
 
 const darkTheme = coreUIAvailableThemes.darkRebrand;
@@ -104,7 +105,7 @@ describe('Editor', () => {
   });
 
   it('does not call jsonSchema extension without schema', () => {
-    renderWithTheme(<Editor value='{}' language="json" />);
+    renderWithTheme(<Editor value="{}" language="json" />);
     expect(mockJsonSchema).not.toHaveBeenCalled();
   });
 

@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getWrapper } from '../../testUtils';
-import {
-  RadioGroup,
-  RadioOption,
-} from './RadioGroup.component';
+import { RadioGroup, RadioOption } from './RadioGroup.component';
 
 const renderInWrapper = (ui: React.ReactElement) => {
   const { Wrapper } = getWrapper();

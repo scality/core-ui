@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import { InputList, InputListProps } from './InputList.component';
 import { FormSection } from '../form/Form.component';
 
@@ -14,7 +20,7 @@ describe('InputList', () => {
           value={props.value}
           name="inputListTest"
         />
-      </FormSection>
+      </FormSection>,
     );
   };
 
