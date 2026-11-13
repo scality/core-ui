@@ -124,18 +124,41 @@ export const COMPACT_LINE_HEIGHT = 1.2;
 const ChartTitleTextStyle = styled(BasicTextStyle)`
   letter-spacing: ${spacing.r2};
 `;
+/**
+ * Body text at the design system's default size and weight, in the primary
+ * text color. Equivalent to `<Text color="textPrimary">`; a bare `<Text>`
+ * inherits its color instead.
+ */
 export function BasicText({ children, ...rest }: Props) {
   return <BasicTextStyle {...rest}>{children}</BasicTextStyle>;
 }
+/**
+ * Body text in the muted secondary color, for a label or a caption sitting
+ * beside the value it describes. Equivalent to `<Text color="textSecondary">`.
+ */
 export function SecondaryText({ children, ...rest }: Props) {
   return <SecondaryTextStyle {...rest}>{children}</SecondaryTextStyle>;
 }
+/**
+ * The largest step of the type scale, for the heading that names a page or a
+ * panel. Equivalent to `<Text variant="Larger" color="textPrimary">`.
+ */
 export function LargerText({ children, ...rest }: Props) {
   return <LargerTextStyle {...rest}>{children}</LargerTextStyle>;
 }
+/**
+ * Body text in bold, to pick one value out of the text around it. Equivalent
+ * to `<Text isEmphazed color="textPrimary">`.
+ */
 export function EmphaseText({ children, ...rest }: Props) {
   return <EmphaseTextStyle {...rest}>{children}</EmphaseTextStyle>;
 }
+/**
+ * Body text colored from a health status rather than from a theme key, so the
+ * caller passes the status and not the color it maps to. `Text` takes the
+ * theme key itself (`statusHealthy`, `statusWarning`…), so the caller must do
+ * that mapping.
+ */
 export function StatusText({ children, status, ...rest }: Props) {
   const statusColor = getStatusColor(status);
   return (
@@ -144,17 +167,37 @@ export function StatusText({ children, status, ...rest }: Props) {
     </StatusTextStyle>
   );
 }
+/**
+ * One step above body text, for a section heading inside a page rather than
+ * the page's own title. Equivalent to `<Text variant="Large"
+ * color="textPrimary">`.
+ */
 export function LargeText({ children, ...rest }: Props) {
   return <LargetStyle {...rest}>{children}</LargetStyle>;
 }
+/**
+ * The smallest step of the type scale, for dense secondary information such as
+ * a table's units or a timestamp. Equivalent to `<Text variant="Smaller"
+ * color="textPrimary">`.
+ */
 export function SmallerText({ children, ...rest }: Props) {
   return <SmallerTextStyle {...rest}>{children}</SmallerTextStyle>;
 }
+/**
+ * The smallest step of the type scale in the muted secondary color, for dense
+ * supporting detail. Equivalent to `<Text variant="Smaller"
+ * color="textSecondary">`.
+ */
 export function SmallerSecondaryText({ children, ...rest }: Props) {
   return (
     <SmallerSecondaryTextStyle {...rest}>{children}</SmallerSecondaryTextStyle>
   );
 }
+/**
+ * The smallest step of the type scale, in bold, colored from a health status
+ * the way StatusText is. With no status behind it, equivalent to
+ * `<Text variant="Smaller" isEmphazed color="textSecondary">`.
+ */
 export function SmallerEmphaseText({ children, status, ...rest }: Props) {
   const statusColor = getStatusColor(status);
   return (
@@ -164,9 +207,19 @@ export function SmallerEmphaseText({ children, status, ...rest }: Props) {
   );
 }
 
+/**
+ * Body text with the extra letter-spacing charts use, for the title sitting
+ * above a graph. Equivalent to `<Text variant="ChartTitle"
+ * color="textPrimary">`.
+ */
 export function ChartTitleText({ children, ...rest }: Props) {
   return <ChartTitleTextStyle {...rest}>{children}</ChartTitleTextStyle>;
 }
+/**
+ * Secondary body text in italics, for an aside or an editorial note, with
+ * `alignRight` to push it to the end of its line. Equivalent to
+ * `<Text color="textSecondary" isGentleEmphazed>`.
+ */
 export const GentleEmphaseSecondaryText = styled(SecondaryText) <{
   alignRight?: boolean;
 }>`
@@ -180,6 +233,13 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText) <{
       : ''}
 `;
 
+/**
+ * The text primitive the design system's type scale is expressed through:
+ * `variant` picks the size, `isEmphazed` the weight, `isGentleEmphazed`
+ * italics and `color` any theme color key. Reach for it rather than one of
+ * the fixed-purpose components in this file, which mostly pin one combination
+ * of those props and cannot be adjusted.
+ */
 export const Text = styled.span.withConfig({
   shouldForwardProp: forwardTextProp,
 })<TextProps>`
@@ -232,11 +292,21 @@ export const Text = styled.span.withConfig({
 
   ${(props) => props.compact && `line-height: ${COMPACT_LINE_HEIGHT};`}
 `;
+/**
+ * The short hint accompanying a form field, set tight under the control rather
+ * than spaced like body text. Equivalent to
+ * `<Text variant="Smaller" isEmphazed compact>`.
+ */
 export const HelperText = ({ children, color, ...rest }: Props) => {
   return (
     <Text variant="Smaller" isEmphazed compact color={color} {...rest}>{children}</Text>
   );
 }
+/**
+ * An anchor carrying the theme's link color, an underline on hover and the
+ * keyboard focus ring. For navigation that changes the page; an action that
+ * stays on the current page is a Button, even when it looks like a link.
+ */
 export const Link = styled.a`
   font-size: 1rem;
   line-height: ${spacing.r24};

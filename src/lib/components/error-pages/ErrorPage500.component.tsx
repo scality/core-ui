@@ -37,6 +37,12 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page screen for a request that failed unexpectedly, where neither
+ * the address nor the credentials are at fault. Reach for ErrorPage404 when
+ * the address is known not to exist, and ErrorPage401 when the credentials are
+ * known to be the problem.
+ */
 function ErrorPage500({
   supportLink = undefined,
   locale = 'en',

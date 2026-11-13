@@ -17,9 +17,12 @@ type Props = {
 };
 
 /**
+ * Draws a proportion as a ring, leaving its center free for whatever the
+ * number means — a capacity figure, a count. Reach for ProgressBar instead
+ * when the value sits in a row of text or a table, where a bar reads better
+ * at small sizes.
  *
- * 
- * @example 
+ * @example
  * <CircularProgressBar 
  * title="Total Capacity" 
  * percent={60} 

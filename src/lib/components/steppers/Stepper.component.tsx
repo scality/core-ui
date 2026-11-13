@@ -53,6 +53,11 @@ export const useStepper: UseStepper = (index, steps) => {
   return { next, prev };
 };
 
+/**
+ * Runs a multi-step flow and owns where the user is in it, giving each step a
+ * way to move forward and back. Use Steppers on its own only when the
+ * surrounding page already decides which step is current.
+ */
 export const Stepper: Stepper = ({ steps }) => {
   const [stepProps, setStepProps] = useState<{
     step: number;
