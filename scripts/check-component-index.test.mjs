@@ -21,25 +21,38 @@ const page = (rows) => `# Component index
 ${rows.join('\n')}
 `;
 
-const row = (name, docsId = 'components-alpha--stories') =>
-  `| \`${name}\` | Does a thing. | \`@scality/core-ui\` | [Stories](?path=/docs/${docsId}) |`;
+const STABLE = '@scality/core-ui';
+const NEXT = '@scality/core-ui/dist/next';
+
+const row = (name, docsId = 'components-alpha--stories', from = [STABLE]) =>
+  `| \`${name}\` | Does a thing. | ${from
+    .map((specifier) => `\`${specifier}\``)
+    .join(' · ')} | [Stories](?path=/docs/${docsId}) |`;
 
 const STORYBOOK_INDEX = JSON.stringify({
   v: 5,
   entries: { 'components-alpha--stories': { id: 'components-alpha--stories' } },
 });
 
-const run = ({ entry, indexPage, storybookIndex }) => {
-  const args = [SCRIPT, '--entry', entry, '--index-page', indexPage];
-  if (storybookIndex) args.push('--storybook-index', storybookIndex);
+const runRaw = (args) => {
   try {
     return {
       status: 0,
-      output: execFileSync('node', args, { encoding: 'utf8' }),
+      output: execFileSync('node', [SCRIPT, ...args], { encoding: 'utf8' }),
     };
   } catch (error) {
     return { status: error.status, output: `${error.stdout}${error.stderr}` };
   }
+};
+
+const run = ({ entry, entries, indexPage, storybookIndex }) => {
+  const args = [];
+  for (const declaration of entries ?? [`${entry}=${STABLE}`]) {
+    args.push('--entry', declaration);
+  }
+  args.push('--index-page', indexPage);
+  if (storybookIndex) args.push('--storybook-index', storybookIndex);
+  return runRaw(args);
 };
 
 beforeEach(() => {
@@ -167,22 +180,12 @@ ${row('Beta')}
   it('rejects a mistyped argument instead of checking half of what was asked', () => {
     const entry = write('entry.ts', `export { Alpha } from './alpha';\n`);
     const indexPage = write('page.mdx', page([row('Alpha')]));
-    let result;
-    try {
-      execFileSync(
-        'node',
-        [SCRIPT, '--entry', entry, '--index-pag', indexPage],
-        {
-          encoding: 'utf8',
-        },
-      );
-      result = { status: 0, output: '' };
-    } catch (error) {
-      result = {
-        status: error.status,
-        output: `${error.stdout}${error.stderr}`,
-      };
-    }
+    const result = runRaw([
+      '--entry',
+      `${entry}=${STABLE}`,
+      '--index-pag',
+      indexPage,
+    ]);
 
     expect(result.status).toBe(1);
     expect(result.output).toContain('Unrecognised argument');
@@ -246,5 +249,111 @@ ${row('Beta')}
 
     expect(status).toBe(1);
     expect(output).toContain('Beta');
+  });
+
+  it('names a row sending the reader to an entry point that does not export it', () => {
+    const { status, output } = run({
+      entry: write('entry.ts', `export { Alpha } from './alpha';\n`),
+      indexPage: write(
+        'page.mdx',
+        page([row('Alpha', 'components-alpha--stories', [NEXT])]),
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('do not name the entry point(s)');
+    expect(output).toContain('Alpha');
+  });
+
+  it('accepts a row listing both entry points when both export the name', () => {
+    const { status } = run({
+      entries: [
+        `${write('stable.ts', `export { Alpha } from './alpha';\n`)}=${STABLE}`,
+        `${write('next.ts', `export { Alpha } from './alpha';\n`)}=${NEXT}`,
+      ],
+      indexPage: write(
+        'page.mdx',
+        page([row('Alpha', 'components-alpha--stories', [STABLE, NEXT])]),
+      ),
+    });
+
+    expect(status).toBe(0);
+  });
+
+  it('names a row listing one entry point when both export the name', () => {
+    const { status, output } = run({
+      entries: [
+        `${write('stable.ts', `export { Alpha } from './alpha';\n`)}=${STABLE}`,
+        `${write('next.ts', `export { Alpha } from './alpha';\n`)}=${NEXT}`,
+      ],
+      indexPage: write('page.mdx', page([row('Alpha')])),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('do not name the entry point(s)');
+    expect(output).toContain(NEXT);
+  });
+
+  it('refuses an entry point given without the import path readers type', () => {
+    const result = runRaw([
+      '--entry',
+      write('entry.ts', `export { Alpha } from './alpha';\n`),
+      '--index-page',
+      write('page.mdx', page([row('Alpha')])),
+    ]);
+
+    expect(result.status).toBe(1);
+    expect(result.output).toContain('needs the import path');
+  });
+
+  it('reads the import path past an escaped pipe earlier in the row', () => {
+    const { status, output } = run({
+      entry: write('entry.ts', `export { Alpha } from './alpha';\n`),
+      indexPage: write(
+        'page.mdx',
+        page([
+          `| \`Alpha\` | Pairs \\| with \`${STABLE}\` here. | \`${NEXT}\` | [S](?path=/docs/x--stories) |`,
+        ]),
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('do not name the entry point(s)');
+  });
+
+  it('refuses a table that does not head the checked column with Import from', () => {
+    const { status, output } = run({
+      entry: write('entry.ts', `export { Alpha } from './alpha';\n`),
+      indexPage: write(
+        'page.mdx',
+        `# Component index
+
+| Export | Import from | Use it for | Docs |
+| --- | --- | --- | --- |
+| \`Alpha\` | \`${STABLE}\` | Does a thing. | [S](?path=/docs/x--stories) |
+`,
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('do not head the column this check reads');
+  });
+
+  it('does not read one cell holding two comma-separated paths as two paths', () => {
+    const { status, output } = run({
+      entries: [
+        `${write('stable.ts', `export { Alpha } from './alpha';\n`)}=${STABLE}`,
+        `${write('next.ts', `export { Alpha } from './alpha';\n`)}=${NEXT}`,
+      ],
+      indexPage: write(
+        'page.mdx',
+        page([
+          row('Alpha', 'components-alpha--stories', [`${STABLE},${NEXT}`]),
+        ]),
+      ),
+    });
+
+    expect(status).toBe(1);
+    expect(output).toContain('do not name the entry point(s)');
   });
 });

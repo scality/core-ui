@@ -13,13 +13,20 @@ const repoRoot = path.resolve(
   '..',
 );
 
-const DEFAULT_ENTRY_POINTS = ['src/lib/index.ts', 'src/lib/next.ts'];
+// The subpath each entry point is published under, which the file cannot
+// state itself.
+const DEFAULT_ENTRY_POINTS = {
+  'src/lib/index.ts': '',
+  'src/lib/next.ts': 'dist/next',
+};
 const DEFAULT_INDEX_PAGE = 'stories/ComponentIndex.mdx';
 
 const USAGE = `Usage: node scripts/check-component-index.mjs [options]
 
-  --entry <file>            An entry point to read exports from. Repeatable.
-                            Default: ${DEFAULT_ENTRY_POINTS.join(', ')}
+  --entry <file>=<package>  An entry point, and the import path a reader types
+                            to reach what it exports. Repeatable. Default:
+                            ${Object.keys(DEFAULT_ENTRY_POINTS).join(' and ')},
+                            under the name package.json publishes.
   --index-page <file>       The index page to check. Default: ${DEFAULT_INDEX_PAGE}
   --storybook-index <file>  A built storybook-static/index.json. Without it,
                             the Docs links are not resolved.
@@ -27,6 +34,33 @@ const USAGE = `Usage: node scripts/check-component-index.mjs [options]
 Paths are relative to the current directory.`;
 
 const FLAGS = ['--entry', '--index-page', '--storybook-index'];
+
+function parseEntry(value) {
+  const separator = value.indexOf('=');
+  const specifier = value.slice(separator + 1);
+  if (separator === -1 || !specifier) {
+    throw new Error(
+      `--entry needs the import path readers type as well as the file: ` +
+        `--entry ${value.replace(/=$/, '')}=<package>\n\n${USAGE}`,
+    );
+  }
+  return { file: path.resolve(value.slice(0, separator)), specifier };
+}
+
+function defaultEntryPoints() {
+  const manifest = path.join(repoRoot, 'package.json');
+  const { name } = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+  if (!name) {
+    throw new Error(
+      `${relative(manifest)} has no "name", so the import paths the page gives ` +
+        `cannot be checked.`,
+    );
+  }
+  return Object.entries(DEFAULT_ENTRY_POINTS).map(([file, subpath]) => ({
+    file: path.join(repoRoot, file),
+    specifier: subpath ? `${name}/${subpath}` : name,
+  }));
+}
 
 /** An unrecognised argument stops the run, rather than leaving half the check silently off. */
 function parseArguments(argv) {
@@ -48,15 +82,13 @@ function parseArguments(argv) {
       throw new Error(`${flag} needs a file path.\n\n${USAGE}`);
     }
 
-    if (flag === '--entry') entryPoints.push(value);
+    if (flag === '--entry') entryPoints.push(parseEntry(value));
     else if (flag === '--index-page') indexPage = value;
     else storybookIndex = value;
   }
 
   return {
-    entryPoints: entryPoints.length
-      ? entryPoints.map((entry) => path.resolve(entry))
-      : DEFAULT_ENTRY_POINTS.map((entry) => path.join(repoRoot, entry)),
+    entryPoints: entryPoints.length ? entryPoints : defaultEntryPoints(),
     indexPage: indexPage
       ? path.resolve(indexPage)
       : path.join(repoRoot, DEFAULT_INDEX_PAGE),
@@ -151,6 +183,16 @@ function collectValueExports(absolutePath) {
   return names;
 }
 
+// Splitting a row leaves an empty first element, so the columns of
+// `| Export | Use it for | Import from | Docs |` start at 1.
+const EXPORT_COLUMN = 1;
+const IMPORT_COLUMN = 3;
+const IMPORT_HEADING = 'Import from';
+
+// A literal pipe in a cell is written `\|`; splitting on it would shift
+// every later column.
+const splitRow = (line) => line.split(/(?<!\\)\|/);
+
 const isSeparatorRow = (line) =>
   line.startsWith('|') && line.includes('-') && /^[\s|:-]+$/.test(line);
 
@@ -164,6 +206,7 @@ function scanIndexPage(absolutePath) {
   const links = new Map();
   const duplicateRows = [];
   const unreadableRows = [];
+  const wrongHeadings = [];
   let inFence = false;
   let inComment = false;
 
@@ -196,9 +239,21 @@ function scanIndexPage(absolutePath) {
     }
 
     if (!line.startsWith('|') || isSeparatorRow(line)) return;
-    if (isSeparatorRow(lines[zeroBasedLine + 1]?.trim() ?? '')) return;
 
-    const firstCell = line.split('|')[1]?.trim() ?? '';
+    // A reordered table would otherwise blame every row for one misplaced
+    // column.
+    if (isSeparatorRow(lines[zeroBasedLine + 1]?.trim() ?? '')) {
+      const heading = splitRow(line)[IMPORT_COLUMN]?.trim();
+      if (heading !== IMPORT_HEADING) {
+        wrongHeadings.push(
+          `line ${lineNumber}: column ${IMPORT_COLUMN} is ${heading || '(nothing)'}`,
+        );
+      }
+      return;
+    }
+
+    const cells = splitRow(line);
+    const firstCell = cells[EXPORT_COLUMN]?.trim() ?? '';
     const named = firstCell.match(/^`([A-Za-z_$][\w$]*)`$/);
     if (!named) {
       unreadableRows.push(
@@ -208,10 +263,15 @@ function scanIndexPage(absolutePath) {
     }
     if (rows.has(named[1])) {
       duplicateRows.push(
-        `${named[1]} (lines ${rows.get(named[1])} and ${lineNumber})`,
+        `${named[1]} (lines ${rows.get(named[1]).line} and ${lineNumber})`,
       );
     } else {
-      rows.set(named[1], lineNumber);
+      rows.set(named[1], {
+        line: lineNumber,
+        imports: [...(cells[IMPORT_COLUMN] ?? '').matchAll(/`([^`]+)`/g)].map(
+          (match) => match[1],
+        ),
+      });
     }
   });
 
@@ -221,7 +281,7 @@ function scanIndexPage(absolutePath) {
         `tell markup from entries.`,
     );
   }
-  return { rows, links, duplicateRows, unreadableRows };
+  return { rows, links, duplicateRows, unreadableRows, wrongHeadings };
 }
 
 function readStorybookEntryIds(absolutePath) {
@@ -248,21 +308,33 @@ function readStorybookEntryIds(absolutePath) {
 
 const indented = (items) => items.map((item) => `  ${item}`).join('\n');
 
-const withLineNumbers = (names, lineOfName) =>
-  indented(names.map((name) => `${name} (line ${lineOfName.get(name)})`));
+const withLineNumbers = (names, lineOf) =>
+  indented(names.map((name) => `${name} (line ${lineOf(name)})`));
 
 function check(argv) {
   const { entryPoints, indexPage, storybookIndex } = parseArguments(argv);
 
-  const exported = new Set();
-  for (const entryPoint of entryPoints) {
-    for (const name of collectValueExports(entryPoint)) exported.add(name);
+  const exportedFrom = new Map();
+  for (const { file, specifier } of entryPoints) {
+    for (const name of collectValueExports(file)) {
+      const specifiers = exportedFrom.get(name);
+      if (!specifiers) exportedFrom.set(name, [specifier]);
+      else if (!specifiers.includes(specifier)) specifiers.push(specifier);
+    }
   }
 
   const page = relative(indexPage);
-  const { rows, links, duplicateRows, unreadableRows } =
+  const { rows, links, duplicateRows, unreadableRows, wrongHeadings } =
     scanIndexPage(indexPage);
   const failures = [];
+
+  if (wrongHeadings.length) {
+    failures.push(
+      `${wrongHeadings.length} table(s) in ${page} do not head the column this ` +
+        `check reads with "${IMPORT_HEADING}", so it would read a neighbour:\n` +
+        indented(wrongHeadings),
+    );
+  }
 
   if (unreadableRows.length) {
     failures.push(
@@ -279,7 +351,9 @@ function check(argv) {
     );
   }
 
-  const missingRows = [...exported].filter((name) => !rows.has(name)).sort();
+  const missingRows = [...exportedFrom.keys()]
+    .filter((name) => !rows.has(name))
+    .sort();
   if (missingRows.length) {
     failures.push(
       `${missingRows.length} export(s) have no row in ${page}. Add one each:\n` +
@@ -288,13 +362,37 @@ function check(argv) {
   }
 
   const staleRows = [...rows.keys()]
-    .filter((name) => !exported.has(name))
+    .filter((name) => !exportedFrom.has(name))
     .sort();
   if (staleRows.length) {
     failures.push(
       `${staleRows.length} row(s) in ${page} name something no entry point ` +
         `exports. Remove them, or export them:\n` +
-        withLineNumbers(staleRows, rows),
+        withLineNumbers(staleRows, (name) => rows.get(name).line),
+    );
+  }
+
+  // Joined on a newline because a specifier cannot hold one: on a comma, the
+  // one cell `a,b` would compare equal to the two specifiers a and b.
+  const sameSpecifiers = (one, other) =>
+    [...one].sort().join('\n') === [...other].sort().join('\n');
+
+  const wrongImports = [];
+  for (const [name, { line, imports }] of rows) {
+    const actual = exportedFrom.get(name);
+    if (!actual) continue;
+    if (!sameSpecifiers(imports, actual)) {
+      wrongImports.push(
+        `${name} (line ${line}): page says ${imports.join(' · ') || 'nothing'}, ` +
+          `exported from ${actual.join(' · ')}`,
+      );
+    }
+  }
+  if (wrongImports.length) {
+    failures.push(
+      `${wrongImports.length} row(s) in ${page} do not name the entry point(s) ` +
+        `that export them:\n` +
+        indented(wrongImports),
     );
   }
 
@@ -308,15 +406,15 @@ function check(argv) {
       failures.push(
         `${brokenLinks.length} Docs link(s) in ${page} point at a story or docs ` +
           `id that does not exist:\n` +
-          withLineNumbers(brokenLinks, links),
+          withLineNumbers(brokenLinks, (id) => links.get(id)),
       );
     }
     linkSummary = `${links.size} Docs link(s) resolved against ${entryIds.size} Storybook entries`;
   }
 
   const counts =
-    `${exported.size} value export(s) across ` +
-    `${entryPoints.map(relative).join(' and ')}, ` +
+    `${exportedFrom.size} value export(s) across ` +
+    `${entryPoints.map(({ file }) => relative(file)).join(' and ')}, ` +
     `${rows.size + duplicateRows.length} row(s) in ${page}, ${linkSummary}.`;
 
   return failures.length
