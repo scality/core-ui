@@ -24,7 +24,11 @@ export function TableSync({
     <TableSyncContainer>
       <Button
         icon={<Icon name="Sync" />}
-        tooltip={tooltipOverlay ? { overlay: tooltipOverlay } : {overlay: "Synchronize table data"}}
+        tooltip={
+          tooltipOverlay
+            ? { overlay: tooltipOverlay }
+            : { overlay: 'Synchronize table data' }
+        }
         onClick={onSync}
         role="button"
         isLoading={loading}

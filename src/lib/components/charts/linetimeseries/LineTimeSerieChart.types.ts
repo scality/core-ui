@@ -142,8 +142,20 @@ export type LineChartProps = (
 type DisplayOptions = Required<NonNullable<LineChartProps['displayOptions']>>;
 
 export const CHART_PRESETS: Record<'default' | 'modern', DisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: true, noHeader: false, noYAxisLine: false, noTickLine: false },
-  modern:  { noBackground: true,  showHorizontalGridLines: true,  noHeader: true,  noYAxisLine: true,  noTickLine: true  },
+  default: {
+    noBackground: false,
+    showHorizontalGridLines: true,
+    noHeader: false,
+    noYAxisLine: false,
+    noTickLine: false,
+  },
+  modern: {
+    noBackground: true,
+    showHorizontalGridLines: true,
+    noHeader: true,
+    noYAxisLine: true,
+    noTickLine: true,
+  },
 };
 
 export type LineTimeSerieChartTooltipProps = {

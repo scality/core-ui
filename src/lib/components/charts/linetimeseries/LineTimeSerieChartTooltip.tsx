@@ -35,116 +35,116 @@ export const LineTimeSerieChartTooltip: React.FC<
   chartContainerRef,
   chartId,
 }) => {
-    const { active, payload, label, coordinate } = tooltipProps;
+  const { active, payload, label, coordinate } = tooltipProps;
 
-    // Check at render time if this chart is the currently hovered one
-    // Using only the module-level variable avoids race conditions with React state updates
-    const isActiveChart = getCurrentlyHoveredChartId() === chartId;
+  // Check at render time if this chart is the currently hovered one
+  // Using only the module-level variable avoids race conditions with React state updates
+  const isActiveChart = getCurrentlyHoveredChartId() === chartId;
 
-    if (!active || !payload || !payload.length || !label || !isActiveChart)
-      return null;
+  if (!active || !payload || !payload.length || !label || !isActiveChart)
+    return null;
 
-    /**
-     * A zero is plotted at the axis's reserved band so it can be drawn, and
-     * every reader of the payload has to see the 0 that was measured instead.
-     * Mapping the payload once, here, is what keeps the default tooltip and a
-     * caller's `renderTooltip` reporting the same number — the same thing
-     * `getCurrentPoint` does for the Barchart's two paths.
-     */
-    const plottedPayload =
-      logZeroValue === null
-        ? payload
-        : payload.map((entry) => ({
-            ...entry,
-            value: readLogPlottedValue(entry.value, logZeroValue),
-          }));
+  /**
+   * A zero is plotted at the axis's reserved band so it can be drawn, and
+   * every reader of the payload has to see the 0 that was measured instead.
+   * Mapping the payload once, here, is what keeps the default tooltip and a
+   * caller's `renderTooltip` reporting the same number — the same thing
+   * `getCurrentPoint` does for the Barchart's two paths.
+   */
+  const plottedPayload =
+    logZeroValue === null
+      ? payload
+      : payload.map((entry) => ({
+          ...entry,
+          value: readLogPlottedValue(entry.value, logZeroValue),
+        }));
 
-    const tooltipContent = renderTooltip ? (
-      renderTooltip(
-        { ...tooltipProps, payload: plottedPayload },
-        unitLabel,
-        duration,
-      )
-    ) : (
-      <>
-        <ChartTooltipHeader>
-          <TooltipHeader duration={duration} value={label} />
-        </ChartTooltipHeader>
-        <ChartTooltipItemsContainer>
-          {(() => {
-            // Sort payload: above series first (descending), then below series (ascending by absolute value)
-            const sortedPayload = [...plottedPayload].sort((a, b) => {
-              const aIsBelow = belowSeriesLabels?.has(a.name) ?? false;
-              const bIsBelow = belowSeriesLabels?.has(b.name) ?? false;
+  const tooltipContent = renderTooltip ? (
+    renderTooltip(
+      { ...tooltipProps, payload: plottedPayload },
+      unitLabel,
+      duration,
+    )
+  ) : (
+    <>
+      <ChartTooltipHeader>
+        <TooltipHeader duration={duration} value={label} />
+      </ChartTooltipHeader>
+      <ChartTooltipItemsContainer>
+        {(() => {
+          // Sort payload: above series first (descending), then below series (ascending by absolute value)
+          const sortedPayload = [...plottedPayload].sort((a, b) => {
+            const aIsBelow = belowSeriesLabels?.has(a.name) ?? false;
+            const bIsBelow = belowSeriesLabels?.has(b.name) ?? false;
 
-              // Above series come before below series
-              if (aIsBelow !== bIsBelow) {
-                return aIsBelow ? 1 : -1;
-              }
+            // Above series come before below series
+            if (aIsBelow !== bIsBelow) {
+              return aIsBelow ? 1 : -1;
+            }
 
-              // Within the same group:
-              // - Above series: higher values first (descending)
-              // - Below series: higher absolute values last (ascending)
-              if (aIsBelow) {
-                return Math.abs(a.value) - Math.abs(b.value);
-              }
-              return Math.abs(b.value) - Math.abs(a.value);
-            });
+            // Within the same group:
+            // - Above series: higher values first (descending)
+            // - Below series: higher absolute values last (ascending)
+            if (aIsBelow) {
+              return Math.abs(a.value) - Math.abs(b.value);
+            }
+            return Math.abs(b.value) - Math.abs(a.value);
+          });
 
-            // Find the transition point between above and below series
-            const separatorIndex = sortedPayload.findIndex((entry) =>
-              belowSeriesLabels?.has(entry.name),
+          // Find the transition point between above and below series
+          const separatorIndex = sortedPayload.findIndex((entry) =>
+            belowSeriesLabels?.has(entry.name),
+          );
+          const hasBothAboveAndBelow =
+            isSymmetrical &&
+            belowSeriesLabels &&
+            belowSeriesLabels.size > 0 &&
+            separatorIndex > 0 &&
+            separatorIndex < sortedPayload.length;
+
+          return sortedPayload.map((entry, index) => {
+            const legendIcon = (
+              <LegendShape
+                $color={entry.color}
+                $shape="line"
+                $chartColors={{ [entry.color]: entry.color }}
+                $isLineDashed={dashedSeriesLabels?.has(entry.name)}
+              />
             );
-            const hasBothAboveAndBelow =
-              isSymmetrical &&
-              belowSeriesLabels &&
-              belowSeriesLabels.size > 0 &&
-              separatorIndex > 0 &&
-              separatorIndex < sortedPayload.length;
 
-            return sortedPayload.map((entry, index) => {
-              const legendIcon = (
-                <LegendShape
-                  $color={entry.color}
-                  $shape="line"
-                  $chartColors={{ [entry.color]: entry.color }}
-                  $isLineDashed={dashedSeriesLabels?.has(entry.name)}
+            const formattedValue = formatTooltipValueWithUnit(
+              entry.value,
+              valueBase,
+              unitRange,
+              unitLabel,
+            );
+
+            return (
+              <React.Fragment key={index}>
+                {/* Add separator between above and below series for symmetrical charts */}
+                {hasBothAboveAndBelow && index === separatorIndex && (
+                  <ChartTooltipSeparator />
+                )}
+                <ChartTooltipItem
+                  label={entry.name}
+                  value={formattedValue}
+                  legendIcon={legendIcon}
                 />
-              );
+              </React.Fragment>
+            );
+          });
+        })()}
+      </ChartTooltipItemsContainer>
+    </>
+  );
 
-              const formattedValue = formatTooltipValueWithUnit(
-                entry.value,
-                valueBase,
-                unitRange,
-                unitLabel,
-              );
-
-              return (
-                <React.Fragment key={index}>
-                  {/* Add separator between above and below series for symmetrical charts */}
-                  {hasBothAboveAndBelow && index === separatorIndex && (
-                    <ChartTooltipSeparator />
-                  )}
-                  <ChartTooltipItem
-                    label={entry.name}
-                    value={formattedValue}
-                    legendIcon={legendIcon}
-                  />
-                </React.Fragment>
-              );
-            });
-          })()}
-        </ChartTooltipItemsContainer>
-      </>
-    );
-
-    return (
-      <ChartTooltipPortal
-        coordinate={coordinate}
-        chartContainerRef={chartContainerRef}
-        isVisible={active && isActiveChart}
-      >
-        {tooltipContent}
-      </ChartTooltipPortal>
-    );
-  };
+  return (
+    <ChartTooltipPortal
+      coordinate={coordinate}
+      chartContainerRef={chartContainerRef}
+      isVisible={active && isActiveChart}
+    >
+      {tooltipContent}
+    </ChartTooltipPortal>
+  );
+};

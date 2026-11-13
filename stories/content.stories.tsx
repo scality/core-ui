@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Modal } from '../src/lib/components/modal/Modal.component';
 import { Button } from '../src/lib/components/buttonv2/Buttonv2.component';
 import { Icon } from '../src/lib/components/icon/Icon.component';
-import { FormGroup, FormSection } from '../src/lib/components/form/Form.component';
+import {
+  FormGroup,
+  FormSection,
+} from '../src/lib/components/form/Form.component';
 import { Input } from '../src/lib/components/inputv2/inputv2';
 
 export default {
@@ -58,7 +61,9 @@ export const ValidationMessages = {
         label="Days"
         id="days"
         required
-        content={<Input id="days" type="number" value="0" onChange={() => {}} />}
+        content={
+          <Input id="days" type="number" value="0" onChange={() => {}} />
+        }
         error="The number of days must be at least 1."
         helpErrorPosition="bottom"
       />

@@ -156,82 +156,85 @@ export const MultiSelectableContent = <
    */
   const RenderRow = useMemo(
     () =>
-      memo(({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
-        const rows = data;
-        const row = data[index];
-        prepareRowRef.current(row);
+      memo(
+        ({ index, style, data }: ListChildComponentProps<Row<DATA_ROW>[]>) => {
+          const rows = data;
+          const row = data[index];
+          prepareRowRef.current(row);
 
-        const rowProps = {
-          ...row.getRowProps({
-            /**
-             * Note:We need to pass the style property to the row component.
-             * Otherwise when we scroll down, the next rows are flashing
-             * because they are re-rendered in loop.
-             */
-            style: { ...style },
-          }),
-          onClick: (event) => {
-            if (shouldIgnoreRowEvent(event)) return;
-            const onSingleRowSelected = onSingleRowSelectedRef.current;
-            if (onSingleRowSelected) {
-              onSingleRowSelected(row);
-              toggleAllRowsSelectedRef.current(false);
-              setActiveRowId(row.id);
-            } else {
-              handleMultipleSelectedRowsRef.current(
-                selectedRowIdsRef.current,
-                rows,
-                row,
-                index,
-              );
-            }
-          },
-        };
+          const rowProps = {
+            ...row.getRowProps({
+              /**
+               * Note:We need to pass the style property to the row component.
+               * Otherwise when we scroll down, the next rows are flashing
+               * because they are re-rendered in loop.
+               */
+              style: { ...style },
+            }),
+            onClick: (event) => {
+              if (shouldIgnoreRowEvent(event)) return;
+              const onSingleRowSelected = onSingleRowSelectedRef.current;
+              if (onSingleRowSelected) {
+                onSingleRowSelected(row);
+                toggleAllRowsSelectedRef.current(false);
+                setActiveRowId(row.id);
+              } else {
+                handleMultipleSelectedRowsRef.current(
+                  selectedRowIdsRef.current,
+                  rows,
+                  row,
+                  index,
+                );
+              }
+            },
+          };
 
-        return (
-          <TableRowMultiSelectable
-            {...rowProps}
-            $isSelected={row.isSelected || activeRowId === row.id}
-            $separationLineVariant={separationLineVariant}
-            className="tr"
-          >
-            {row.cells.map((cell) => {
-              const cellProps = cell.getCellProps({
-                style: bodyCellStyle(cell.column.cellStyle),
-                role: 'gridcell',
-              });
+          return (
+            <TableRowMultiSelectable
+              {...rowProps}
+              $isSelected={row.isSelected || activeRowId === row.id}
+              $separationLineVariant={separationLineVariant}
+              className="tr"
+            >
+              {row.cells.map((cell) => {
+                const cellProps = cell.getCellProps({
+                  style: bodyCellStyle(cell.column.cellStyle),
+                  role: 'gridcell',
+                });
 
-              if (cell.column.id === 'selection') {
+                if (cell.column.id === 'selection') {
+                  return (
+                    <div
+                      {...cellProps}
+                      onClick={(event) => {
+                        // Selecting the row is what this cell is for, so it owns the
+                        // click outright rather than relying on a bubble the row's
+                        // guard now stops.
+                        event.stopPropagation();
+                        handleMultipleSelectedRowsRef.current(
+                          selectedRowIdsRef.current,
+                          rows,
+                          row,
+                          index,
+                        );
+                      }}
+                    >
+                      {cell.render('Cell')}
+                    </div>
+                  );
+                }
+
                 return (
-                  <div
-                    {...cellProps}
-                    onClick={(event) => {
-                      // Selecting the row is what this cell is for, so it owns the
-                      // click outright rather than relying on a bubble the row's
-                      // guard now stops.
-                      event.stopPropagation();
-                      handleMultipleSelectedRowsRef.current(
-                        selectedRowIdsRef.current,
-                        rows,
-                        row,
-                        index,
-                      );
-                    }}
-                  >
+                  <div {...cellProps} className="td">
                     {cell.render('Cell')}
                   </div>
                 );
-              }
-
-              return (
-                <div {...cellProps} className="td">
-                  {cell.render('Cell')}
-                </div>
-              );
-            })}
-          </TableRowMultiSelectable>
-        );
-      }, areEqual),
+              })}
+            </TableRowMultiSelectable>
+          );
+        },
+        areEqual,
+      ),
     [activeRowId, separationLineVariant],
   );
 

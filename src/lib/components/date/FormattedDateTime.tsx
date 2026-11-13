@@ -81,9 +81,7 @@ export const DAY_MONTH_ABBREVIATED = Intl.DateTimeFormat('en-GB', {
  * @example 06 Jun
  */
 export const formatDayMonthAbbreviated = (value: Date): string =>
-  DAY_MONTH_ABBREVIATED.format(value)
-    .replace(',', '')
-    .replace(/Sept/g, 'Sep');
+  DAY_MONTH_ABBREVIATED.format(value).replace(',', '').replace(/Sept/g, 'Sep');
 
 /**
  * @description Day month abbreviated formatter. Used for describing long term date.

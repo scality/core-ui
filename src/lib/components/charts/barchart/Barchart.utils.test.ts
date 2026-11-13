@@ -630,9 +630,10 @@ describe('formatPrometheusDataToRechartsDataAndBars', () => {
       false,
       (pointA, pointB) => {
         // Sort alphabetically by category
-        return String(pointA.category).localeCompare(
-          String(pointB.category),
-        ) as -1 | 0 | 1;
+        return String(pointA.category).localeCompare(String(pointB.category)) as
+          | -1
+          | 0
+          | 1;
       },
     );
 

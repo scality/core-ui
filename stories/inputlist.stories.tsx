@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import React from 'react';
-import { InputList, InputListProps } from '../src/lib/components/inputlist/InputList.component';
+import {
+  InputList,
+  InputListProps,
+} from '../src/lib/components/inputlist/InputList.component';
 import { Wrapper as StoryWrapper } from './common';
 import { FormSection } from '../src/lib/components/form/Form.component';
 import { Controller, useForm } from 'react-hook-form';
@@ -27,7 +30,6 @@ interface InputListForm {
   firstNames: string[];
   lastNames: string[];
 }
-
 
 const ExampleList = ({ size }: { size?: InputListProps<string>['size'] }) => {
   const { control } = useForm<InputListForm>({

@@ -47,15 +47,15 @@ type IconOnlyButton = ButtonStyledProps & {
   label?: never;
   iconOnly?: never;
 } & (
-  | {
-      tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
-      'aria-label'?: string;
-    }
-  | {
-      tooltip: Omit<TooltipProps, 'children'>;
-      'aria-label': string;
-    }
-);
+    | {
+        tooltip: Omit<TooltipProps, 'children'> & { overlay: string };
+        'aria-label'?: string;
+      }
+    | {
+        tooltip: Omit<TooltipProps, 'children'>;
+        'aria-label': string;
+      }
+  );
 
 export type Props = ButtonWithLabel | IconOnlyButton;
 
@@ -95,7 +95,12 @@ export const ButtonStyled = styled.button.withConfig({
 
     switch (props.$variant) {
       case 'primary': {
-        const primaryTextColor = getContrastText(brand.buttonPrimary, brand.textPrimary, brand.textReverse) ?? brand.textPrimary;
+        const primaryTextColor =
+          getContrastText(
+            brand.buttonPrimary,
+            brand.textPrimary,
+            brand.textReverse,
+          ) ?? brand.textPrimary;
         return css`
           background: ${brand.buttonPrimary};
           background-clip: padding-box, border-box;
@@ -205,13 +210,15 @@ export const ButtonStyled = styled.button.withConfig({
 
   ${(props) => {
     return css`
-      ${props.disabled
-        ? `
+      ${
+        props.disabled
+          ? `
           cursor: not-allowed !important;
           pointer-events: auto !important;
           opacity: 0.5;
         `
-        : null}
+          : null
+      }
     `;
   }}
 
@@ -219,8 +226,9 @@ export const ButtonStyled = styled.button.withConfig({
   ${(props) => {
     const brand = props.theme;
     return css`
-      ${props.$icon && !props.$label && !props.$variant
-        ? `
+      ${
+        props.$icon && !props.$label && !props.$variant
+          ? `
           background-color: transparent;
           border: none;
           color: ${brand.textSecondary};
@@ -238,7 +246,8 @@ export const ButtonStyled = styled.button.withConfig({
           color: ${brand.textPrimary};
         }
         `
-        : null}
+          : null
+      }
     `;
   }}
 `;
@@ -299,11 +308,13 @@ export const ButtonLoader = styled(Loader)<{
     return css`
       margin-right: ${props.$label ? spacing.r8 : '0'};
       svg {
-        fill: ${props.$variant === 'danger'
-          ? props.theme.statusCritical
-          : props.$variant === 'outline'
-            ? props.theme.textPrimary
-            : props.theme.textSecondary};
+        fill: ${
+          props.$variant === 'danger'
+            ? props.theme.statusCritical
+            : props.$variant === 'outline'
+              ? props.theme.textPrimary
+              : props.theme.textSecondary
+        };
       }
     `;
   }}
@@ -416,7 +427,10 @@ function Button({
         {!icon && isLoading && (
           <ButtonLoader size="small" $variant={variant} $label={label} />
         )}
-        <ButtonLabel $collapseAt={collapseAt} $alwaysCollapsed={alwaysCollapsed}>
+        <ButtonLabel
+          $collapseAt={collapseAt}
+          $alwaysCollapsed={alwaysCollapsed}
+        >
           {label}
         </ButtonLabel>
       </ButtonStyled>

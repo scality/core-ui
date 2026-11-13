@@ -30,7 +30,9 @@ describe('PasswordFields', () => {
     expect(password).toHaveAttribute('type', 'password');
     expect(confirmation).toHaveAttribute('type', 'password');
 
-    await userEvent.click(screen.getByRole('button', { name: 'Show password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Show password' }),
+    );
 
     expect(password).toHaveAttribute('type', 'text');
     expect(confirmation).toHaveAttribute('type', 'text');
@@ -57,7 +59,9 @@ describe('PasswordFields', () => {
 
     expect(screen.getByLabelText(/^Password$/)).toBeDisabled();
     expect(screen.getByLabelText(/^Password confirmation$/)).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+    expect(
+      screen.getByRole('button', { name: 'Show password' }),
+    ).toBeDisabled();
     expect(screen.getByRole('button', { name: /^Copy/ })).toBeDisabled();
   });
 

@@ -1,10 +1,4 @@
-import {
-  KeyboardEvent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { KeyboardEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { UseMutationResult } from 'react-query';
 import { spacing, Stack } from '../../spacing';
@@ -17,9 +11,7 @@ import { Tooltip } from '../tooltip/Tooltip.component';
 
 type InlineInputForm = { value: string };
 
-type CheckResult =
-  | { hasError: true; message: string }
-  | { hasError: false };
+type CheckResult = { hasError: true; message: string } | { hasError: false };
 
 type ConfirmationModalRenderArgs = {
   isOpen: boolean;
@@ -117,7 +109,9 @@ export const InlineInput = ({
   const { showToast } = useToast();
 
   const isLoading = changeMutation.isLoading;
-  const validation = check ? check(pendingValue) : ({ hasError: false } as const);
+  const validation = check
+    ? check(pendingValue)
+    : ({ hasError: false } as const);
   const validationError = validation.hasError ? validation.message : undefined;
 
   useEffect(() => {

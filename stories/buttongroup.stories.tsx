@@ -74,9 +74,17 @@ export const GroupByClearable = () => {
   return (
     <Wrapper>
       <Title>Group by (clearable)</Title>
-      <ButtonGroup value={groupBy} onChange={handleChange} aria-label="Group by">
+      <ButtonGroup
+        value={groupBy}
+        onChange={handleChange}
+        aria-label="Group by"
+      >
         {GROUP_OPTIONS.map((option) => (
-          <Button key={option.value} value={option.value} label={option.label} />
+          <Button
+            key={option.value}
+            value={option.value}
+            label={option.label}
+          />
         ))}
       </ButtonGroup>
     </Wrapper>
@@ -97,7 +105,11 @@ export const Vertical = () => {
         aria-label="View"
       >
         <Button value="list" label="List" icon={<Icon name="LayerGroup" />} />
-        <Button value="network" label="Network" icon={<Icon name="Network" />} />
+        <Button
+          value="network"
+          label="Network"
+          icon={<Icon name="Network" />}
+        />
         <Button value="map" label="Map" icon={<Icon name="Map-marker" />} />
       </ButtonGroup>
     </Wrapper>

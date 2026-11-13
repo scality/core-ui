@@ -1,5 +1,8 @@
 import React, { ReactNode, useState } from 'react';
-import { Modal, ModalActions } from '../../src/lib/components/modal/Modal.component';
+import {
+  Modal,
+  ModalActions,
+} from '../../src/lib/components/modal/Modal.component';
 import { action } from 'storybook/actions';
 import { Wrapper } from '../common';
 import { Table } from '../../src/lib/components/tablev2/Tablev2.component';
@@ -18,7 +21,10 @@ export default {
     (story) => <Wrapper style={{ minHeight: '10vh' }}>{story()}</Wrapper>,
   ],
   argTypes: {
-    wide: { control: 'boolean', description: 'Allow modal to grow past 480px to fit content' },
+    wide: {
+      control: 'boolean',
+      description: 'Allow modal to grow past 480px to fit content',
+    },
   },
   // The `actions` prop nests rendered React elements inside a plain object.
   // Autodocs' dynamic "Show code" generator deep-walks that object into the
@@ -305,7 +311,12 @@ export const WithinTable = {
     ];
     return (
       <div style={{ height: '300px', paddingTop: '20px' }}>
-        <Table status="success" columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h32"
             separationLineVariant="backgroundLevel3"
@@ -365,20 +376,76 @@ export const WithLongTextContent = {
 };
 
 const NODE_DATA = [
-  { name: 'artesca-storage-node-eu-west-1a', status: 'Healthy', capacity: '128 TB', used: '97.4 TB', location: 'eu-west-1a' },
-  { name: 'artesca-storage-node-eu-west-1b', status: 'Degraded', capacity: '128 TB', used: '112.8 TB', location: 'eu-west-1b' },
-  { name: 'artesca-storage-node-us-east-1a', status: 'Healthy', capacity: '64 TB', used: '31.1 TB', location: 'us-east-1a' },
-  { name: 'artesca-storage-node-us-east-1b', status: 'Offline', capacity: '64 TB', used: '0 TB', location: 'us-east-1b' },
-  { name: 'artesca-storage-node-ap-south-1a', status: 'Healthy', capacity: '256 TB', used: '198.6 TB', location: 'ap-south-1a' },
-  { name: 'artesca-storage-node-ap-south-1b', status: 'Healthy', capacity: '256 TB', used: '204.2 TB', location: 'ap-south-1b' },
+  {
+    name: 'artesca-storage-node-eu-west-1a',
+    status: 'Healthy',
+    capacity: '128 TB',
+    used: '97.4 TB',
+    location: 'eu-west-1a',
+  },
+  {
+    name: 'artesca-storage-node-eu-west-1b',
+    status: 'Degraded',
+    capacity: '128 TB',
+    used: '112.8 TB',
+    location: 'eu-west-1b',
+  },
+  {
+    name: 'artesca-storage-node-us-east-1a',
+    status: 'Healthy',
+    capacity: '64 TB',
+    used: '31.1 TB',
+    location: 'us-east-1a',
+  },
+  {
+    name: 'artesca-storage-node-us-east-1b',
+    status: 'Offline',
+    capacity: '64 TB',
+    used: '0 TB',
+    location: 'us-east-1b',
+  },
+  {
+    name: 'artesca-storage-node-ap-south-1a',
+    status: 'Healthy',
+    capacity: '256 TB',
+    used: '198.6 TB',
+    location: 'ap-south-1a',
+  },
+  {
+    name: 'artesca-storage-node-ap-south-1b',
+    status: 'Healthy',
+    capacity: '256 TB',
+    used: '204.2 TB',
+    location: 'ap-south-1b',
+  },
 ];
 
 const NODE_COLUMNS = [
-  { Header: 'Node name', accessor: 'name' as const, cellStyle: { textAlign: 'left' as const } },
-  { Header: 'Status', accessor: 'status' as const, cellStyle: { textAlign: 'left' as const } },
-  { Header: 'Capacity', accessor: 'capacity' as const, cellStyle: { textAlign: 'right' as const } },
-  { Header: 'Used', accessor: 'used' as const, cellStyle: { textAlign: 'right' as const } },
-  { Header: 'Location', accessor: 'location' as const, cellStyle: { textAlign: 'left' as const } },
+  {
+    Header: 'Node name',
+    accessor: 'name' as const,
+    cellStyle: { textAlign: 'left' as const },
+  },
+  {
+    Header: 'Status',
+    accessor: 'status' as const,
+    cellStyle: { textAlign: 'left' as const },
+  },
+  {
+    Header: 'Capacity',
+    accessor: 'capacity' as const,
+    cellStyle: { textAlign: 'right' as const },
+  },
+  {
+    Header: 'Used',
+    accessor: 'used' as const,
+    cellStyle: { textAlign: 'right' as const },
+  },
+  {
+    Header: 'Location',
+    accessor: 'location' as const,
+    cellStyle: { textAlign: 'left' as const },
+  },
 ];
 
 export const WithTableContent = {
@@ -511,7 +578,15 @@ const HTML_TABLE = (
     <thead>
       <tr>
         {['Node name', 'Status', 'Capacity', 'Used', 'Location'].map((h) => (
-          <th key={h} style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #444', whiteSpace: 'nowrap' }}>
+          <th
+            key={h}
+            style={{
+              textAlign: 'left',
+              padding: '8px 12px',
+              borderBottom: '1px solid #444',
+              whiteSpace: 'nowrap',
+            }}
+          >
             {h}
           </th>
         ))}
@@ -520,7 +595,9 @@ const HTML_TABLE = (
     <tbody>
       {NODE_DATA.map((row) => (
         <tr key={row.name}>
-          <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>{row.name}</td>
+          <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>
+            {row.name}
+          </td>
           <td style={{ padding: '8px 12px' }}>{row.status}</td>
           <td style={{ padding: '8px 12px' }}>{row.capacity}</td>
           <td style={{ padding: '8px 12px' }}>{row.used}</td>
@@ -533,8 +610,16 @@ const HTML_TABLE = (
 
 const CORE_UI_TABLE = (
   <div style={{ height: '280px' }}>
-    <Table status="success" columns={NODE_COLUMNS} data={NODE_DATA} defaultSortingKey="name">
-      <Table.SingleSelectableContent rowHeight="h32" separationLineVariant="backgroundLevel3" />
+    <Table
+      status="success"
+      columns={NODE_COLUMNS}
+      data={NODE_DATA}
+      defaultSortingKey="name"
+    >
+      <Table.SingleSelectableContent
+        rowHeight="h32"
+        separationLineVariant="backgroundLevel3"
+      />
     </Table>
   </div>
 );
@@ -574,17 +659,23 @@ export const WidthLayoutCases = {
       </ModalStory>
 
       {/* 4. Core-UI Table — wide: modal sizes to table content */}
-      <ModalStory wide label="Core-UI table" title="Storage nodes (core-ui Table)">
+      <ModalStory
+        wide
+        label="Core-UI table"
+        title="Storage nodes (core-ui Table)"
+      >
         {CORE_UI_TABLE}
       </ModalStory>
 
       {/* 5. Core-UI Table nested inside multiple wrappers — wide */}
-      <ModalStory wide label="Nested table" title="Storage nodes (nested wrappers)">
+      <ModalStory
+        wide
+        label="Nested table"
+        title="Storage nodes (nested wrappers)"
+      >
         <div>
           <div style={{ padding: '8px' }}>
-            <div>
-              {CORE_UI_TABLE}
-            </div>
+            <div>{CORE_UI_TABLE}</div>
           </div>
         </div>
       </ModalStory>

@@ -889,16 +889,13 @@ describe('TableV2', () => {
       ['loading', /loading/i],
       ['error', /an error occurred/i],
       ['pending', /an error occurred/i],
-    ])(
-      'shows the %s placeholder without calling the children render function',
-      async (status, placeholder) => {
-        renderWithEmptyStateRenderFunction(status);
-        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    ])('shows the %s placeholder without calling the children render function', async (status, placeholder) => {
+      renderWithEmptyStateRenderFunction(status);
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
-        expect(screen.getByText(placeholder)).toBeInTheDocument();
-        expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
-      },
-    );
+      expect(screen.getByText(placeholder)).toBeInTheDocument();
+      expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+    });
 
     it('keeps the idle body out of the children render function', async () => {
       renderWithEmptyStateRenderFunction('idle');
@@ -917,15 +914,17 @@ describe('TableV2', () => {
       expect(within(output).getByText('Nothing attached')).toBeInTheDocument();
     });
 
-    it.each(['idle', 'loading', 'error', 'success'])(
-      'does not warn when status is %s',
-      async (status) => {
-        renderStatusTable({ status });
-        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    it.each([
+      'idle',
+      'loading',
+      'error',
+      'success',
+    ])('does not warn when status is %s', async (status) => {
+      renderStatusTable({ status });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
-        expect(warnSpy).not.toHaveBeenCalled();
-      },
-    );
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('fetch state props', () => {
@@ -1065,15 +1064,12 @@ describe('TableV2', () => {
       ['loader', { data: undefined }],
       ['empty body', { data: undefined, loading: false }],
       ['error', { data: undefined, loading: false, error: failure }],
-    ])(
-      'keeps the %s out of the children render function',
-      async (_, props: FetchProps) => {
-        render(tableWith(props, renderFunction));
-        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+    ])('keeps the %s out of the children render function', async (_, props: FetchProps) => {
+      render(tableWith(props, renderFunction));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
 
-        expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
-      },
-    );
+      expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+    });
 
     it('passes the no-results message through the children render function', async () => {
       render(tableWith({ data: [] }, renderFunction));

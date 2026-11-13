@@ -88,19 +88,19 @@ const InputBorder = styled.div<{
   height: ${spacing.r32};
   border: ${spacing.r1} solid
     ${(props) =>
-    props.$hasError ? props.theme.statusCritical : props.theme.border};
+      props.$hasError ? props.theme.statusCritical : props.theme.border};
   border-radius: ${spacing.r4};
   &:hover {
     ${(props) =>
-    !props.$disabled &&
-    `border: ${spacing.r1} solid ${props.theme.infoPrimary};`}
+      !props.$disabled &&
+      `border: ${spacing.r1} solid ${props.theme.infoPrimary};`}
   }
   &:focus-within {
     border: ${spacing.r1} solid ${(props) => props.theme.infoPrimary};
   }
 `;
 
-const SelfCenterredIcon = styled(Icon) <{ color: keyof CoreUITheme }>`
+const SelfCenterredIcon = styled(Icon)<{ color: keyof CoreUITheme }>`
   align-self: center;
   color: ${(props) => props.theme[props.color]};
 `;

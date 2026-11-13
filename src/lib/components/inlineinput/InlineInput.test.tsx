@@ -5,13 +5,7 @@ import {
   useMutation,
   UseMutationResult,
 } from 'react-query';
-import {
-  act,
-  render,
-  screen,
-  waitFor,
-  within,
-} from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../style/theme';
@@ -210,7 +204,10 @@ describe('InlineInput', () => {
       await openEditMode('test');
       await typeNewValue('ab');
       expect(screen.getByText('Too short')).toBeInTheDocument();
-      expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true',
+      );
 
       await act(() => userEvent.keyboard('{Enter}'));
       expect(mock).not.toHaveBeenCalled();
@@ -263,7 +260,12 @@ describe('InlineInput', () => {
   });
 
   describe('confirmation modal', () => {
-    const renderConfirm = ({ pendingValue, isOpen, onConfirm, onCancel }: {
+    const renderConfirm = ({
+      pendingValue,
+      isOpen,
+      onConfirm,
+      onCancel,
+    }: {
       pendingValue: string;
       isOpen: boolean;
       onConfirm: () => void;
@@ -306,7 +308,9 @@ describe('InlineInput', () => {
       expect(modal).toHaveTextContent('Rename to renamed?');
       expect(mock).not.toHaveBeenCalled();
 
-      await userEvent.click(within(modal).getByRole('button', { name: /confirm/i }));
+      await userEvent.click(
+        within(modal).getByRole('button', { name: /confirm/i }),
+      );
 
       await waitFor(() => expect(mock).toHaveBeenCalledWith('renamed'));
       expect(
@@ -340,7 +344,9 @@ describe('InlineInput', () => {
       await act(() => userEvent.keyboard('{Enter}'));
 
       const modal = await screen.findByRole('dialog', { name: /confirm/i });
-      await userEvent.click(within(modal).getByRole('button', { name: /cancel/i }));
+      await userEvent.click(
+        within(modal).getByRole('button', { name: /cancel/i }),
+      );
 
       expect(mock).not.toHaveBeenCalled();
       expect(
@@ -431,7 +437,11 @@ describe('InlineInput', () => {
         children: ({
           changeMutation,
         }: {
-          changeMutation: UseMutationResult<unknown, unknown, { value: string }>;
+          changeMutation: UseMutationResult<
+            unknown,
+            unknown,
+            { value: string }
+          >;
         }) => JSX.Element;
       }) => {
         const changeMutation = useMutation<unknown, unknown, { value: string }>(

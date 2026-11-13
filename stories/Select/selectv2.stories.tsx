@@ -264,10 +264,30 @@ export const WithIcons: SelectStory = {
   args: {
     placeholder: 'Select storage type',
     children: [
-      <Select.Option key="cloud" value="cloud" icon={<Icon name="Cloud-backend" />}>Cloud</Select.Option>,
-      <Select.Option key="datacenter" value="datacenter" icon={<Icon name="Datacenter" />}>On-premises</Select.Option>,
-      <Select.Option key="tape" value="tape" icon={<Icon name="Tape" />}>Tape</Select.Option>,
-      <Select.Option key="network" value="network" icon={<Icon name="Network" />}>Network</Select.Option>,
+      <Select.Option
+        key="cloud"
+        value="cloud"
+        icon={<Icon name="Cloud-backend" />}
+      >
+        Cloud
+      </Select.Option>,
+      <Select.Option
+        key="datacenter"
+        value="datacenter"
+        icon={<Icon name="Datacenter" />}
+      >
+        On-premises
+      </Select.Option>,
+      <Select.Option key="tape" value="tape" icon={<Icon name="Tape" />}>
+        Tape
+      </Select.Option>,
+      <Select.Option
+        key="network"
+        value="network"
+        icon={<Icon name="Network" />}
+      >
+        Network
+      </Select.Option>,
     ],
   },
 };

@@ -14,7 +14,9 @@ it('should return -1 or 1 to sort the status', () => {
   expect(result2).toEqual(-1);
 });
 it('should return undefined for the unknown status', () => {
-  const consoleErrorMockHandle = jest.spyOn(console, 'error').mockImplementation(() => {});
+  const consoleErrorMockHandle = jest
+    .spyOn(console, 'error')
+    .mockImplementation(() => {});
   const result = compareHealth('invalidStatus' as any, 'healthy');
   const result2 = compareHealth('none', 'invalidStatus' as any);
   expect(consoleErrorMockHandle).toHaveBeenCalled();
@@ -113,16 +115,13 @@ describe('resolveLegacyTableView', () => {
     ['success', false, 2, 'rows'],
     ['pending', true, 0, 'error'],
     ['pending', false, 2, 'rows'],
-  ])(
-    'status %s, data empty %s, %s visible rows: %s',
-    (status, isDataEmpty, visibleRowCount, view) => {
-      expect(
-        resolveLegacyTableView({
-          status: status as any,
-          isDataEmpty,
-          visibleRowCount,
-        }),
-      ).toBe(view);
-    },
-  );
+  ])('status %s, data empty %s, %s visible rows: %s', (status, isDataEmpty, visibleRowCount, view) => {
+    expect(
+      resolveLegacyTableView({
+        status: status as any,
+        isDataEmpty,
+        visibleRowCount,
+      }),
+    ).toBe(view);
+  });
 });

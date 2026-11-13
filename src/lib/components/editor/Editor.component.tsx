@@ -13,7 +13,8 @@ const EDIT_KEYS = new Set(['Backspace', 'Delete', 'Enter', 'Tab']);
 
 export function isEditAttempt(e: KeyboardEvent): boolean {
   const isTyping = !e.ctrlKey && !e.metaKey && !e.altKey && e.key.length === 1;
-  const isCutPaste = (e.ctrlKey || e.metaKey) && (e.key === 'x' || e.key === 'v');
+  const isCutPaste =
+    (e.ctrlKey || e.metaKey) && (e.key === 'x' || e.key === 'v');
   return isTyping || EDIT_KEYS.has(e.key) || isCutPaste;
 }
 
