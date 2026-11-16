@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.6s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -25808,22 +25808,24 @@ The root font size is **14px**, so `1rem = 14px` throughout the system.
 
 ### Fira Code
 
-**Fira Code** is the monospace typeface for code-heavy surfaces. Use it wherever the content is code, terminal output, or technical identifiers.
+**Fira Code** is the monospace typeface for code.
 
 Use for:
 
-- Code blocks and syntax-highlighted regions
-- Terminal and CLI output
-- Inline code snippets in technical prose
-- Technical value display: object keys, checksums, endpoints, version strings
+- Code blocks and the Editor
+- Terminal, CLI and log output
+- Commands and configuration snippets to copy
+- Technical values inside running text, such as an ID or an endpoint in a chat answer or a documentation page
 
-&lt;pre style={{fontFamily: &quot;&#39;Fira Code&#39;, monospace&quot;, fontSize: &quot;14px&quot;, lineHeight: &quot;1.8&quot;, padding: &quot;1rem 1.25rem&quot;, borderRadius: &quot;4px&quot;, overflowX: &quot;auto&quot;, fontVariantLigatures: &quot;contextual&quot;, fontFeatureSettings: &#39;&quot;calt&quot; 1&#39;}}&gt;
+Do not use it in the interface itself. A technical value in a table, a key-value list or a form uses Lato, like the rest of the UI. The cell or the field already sets it apart. A field where the user writes code, such as `TextArea` with `variant=&quot;code&quot;`, still uses the monospace font. `TextArea` defaults to `variant=&quot;code&quot;`: pass `variant=&quot;text&quot;` for a free-text field.
+
+&lt;pre style={{fontFamily: &quot;&#39;Fira Code&#39;, monospace&quot;, fontSize: &quot;14px&quot;, lineHeight: &quot;1.8&quot;, padding: &quot;1rem 1.25rem&quot;, borderRadius: &quot;4px&quot;, overflowX: &quot;auto&quot;, fontVariantLigatures: &quot;none&quot;}}&gt;
 {`aws s3api list-objects --bucket my-bucket --prefix backups/ --max-keys 100
 curl -X DELETE https://storage.example.com/v1/buckets/my-bucket/objects/file.tar.gz
 { &quot;key&quot;: &quot;backups/2026-04-21/snapshot.tar.gz&quot;, &quot;size&quot;: 1073741824, &quot;etag&quot;: &quot;a3f1b2c4&quot; }`}
 &lt;/pre&gt;
 
-Fira Code includes programming ligatures: sequences like `=&gt;`, `!==`, `-&gt;`, `&gt;=`, and `&lt;=` render as composite glyphs. These are enabled by default.
+Fira Code includes programming ligatures, where sequences like `=&gt;`, `!==`, `-&gt;`, `&gt;=` and `&lt;=` render as a single glyph. Ligatures are disabled by default, so every character stays visible as typed.
 
 ## Text color
 
