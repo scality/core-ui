@@ -120,7 +120,17 @@ To make sure your code is correctly linted, run:
 npm run lint
 ```
 
-It runs ESLint with `eslint-config-react-app` — a shareable configuration used by [Create React App](https://github.com/facebook/create-react-app) — together with `plugin:storybook/recommended`.
+It runs [Biome](https://biomejs.dev), which checks formatting and lints in one pass, on the version `package.json` pins exactly. `npm run format` reformats in place, `npm run format:check` checks the formatting alone, and `npm run typecheck` runs the compiler without emitting. CI runs the lint and typecheck gates.
+
+Biome's recommended rules are on, and the gate fails on any diagnostic Biome raises as an error. The rules listed under `linter.rules` in `biome.json` would be errors too, but the repository still violates them, so they are set to `warn` and only report. That list is the backlog, and it is the only thing holding an error-level rule back: every rule off the list still fails the build, so new code cannot add to the debt those rules cover. Clearing a rule's occurrences means deleting its line.
+
+A further set reports as warnings by Biome's own defaults and so can never fail the gate — `useImportType`, `noUnusedImports` and `noExplicitAny` account for most of the output, and `noBannedTypes` and `noTsIgnore` are in it too. Read what the run prints rather than only its exit code: a `@ts-ignore` added to new code passes lint and defeats the typecheck gate below.
+
+`npm run typecheck` runs against the single `tsconfig.json`, which excludes test files and the `stories/` tree, and never sees `.storybook/` because TypeScript's default include skips dot-directories. It covers `src/` minus its tests, and nothing else type-checks the rest: Jest transforms through `babel-jest` and Storybook through SWC, both of which strip types without checking them. So a `@ts-expect-error` in a test is still inert.
+
+To keep a violation on purpose, put a `// biome-ignore lint/<group>/<rule>: <reason>` comment on the single line directly above the line Biome points at — for a hook rule that is the hook call, not its dependency array. The comment has to be one line: a second line of prose below it breaks the suppression.
+
+The `pre-commit` hook runs `npm run lint` over the whole tree, not over the staged files, so an unrelated unformatted file blocks the commit until `npm run format` has run.
 
 Core-UI has no custom lint rules. Where a constraint can be expressed in a type, express it there instead: make the invalid combination unrepresentable with a discriminated union, narrow a prop that accepts more than the component supports, and mark a superseded prop `@deprecated` with a migration note. A type is checked in every consumer repo across the package boundary, with no adoption step and nothing to install.
 

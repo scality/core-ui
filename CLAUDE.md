@@ -18,14 +18,16 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 - **Testing:** Jest + Testing Library
 - **Storybook:** v10 with Webpack 5
 - **Build:** TypeScript compiler (`tsc`) — no bundler
-- **Linting:** ESLint
+- **Formatting and linting:** Biome, pinned exactly
 - **Package:** Published to npm as `@scality/core-ui`
 
 ## Commands
 
 - `npm test` — run Jest tests
 - `npm run build` — compile TypeScript to `dist/`
-- `npm run lint` — run ESLint
+- `npm run typecheck` — type-check without emitting
+- `npm run lint` — Biome's formatter and linter, the same gate CI runs
+- `npm run format` — reformat in place; `npm run format:check` checks without writing
 - `npm run storybook` — start Storybook dev server on port 3001
 
 Contributor process — branch naming, creating a component, release, build — is in

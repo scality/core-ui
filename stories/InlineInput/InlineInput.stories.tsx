@@ -165,9 +165,9 @@ export const Loading = {
   render: (args: React.ComponentProps<typeof InlineInput>) => {
     // Force a long-running mutation that's pre-triggered when the story mounts.
     const changeMutation = useFakeMutation({ delay: 60_000 });
+    // biome-ignore lint/correctness/useExhaustiveDependencies: the story fires the mutation once, on mount.
     React.useEffect(() => {
       changeMutation.mutate({ value: 'My instance' });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return <InlineInput {...args} changeMutation={changeMutation} />;
   },

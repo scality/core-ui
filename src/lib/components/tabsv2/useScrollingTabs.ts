@@ -218,36 +218,33 @@ const useScrollingTabs = (selectedTabIndex: number | null | undefined) => {
       selectedTabMeta,
     };
   }, [selectedTabIndex]);
-  const scrollSelectedIntoView = useCallback(
-    () => {
-      const { tabsMeta, selectedTabMeta } = getTabsMeta();
-      if (!selectedTabMeta || !tabsMeta) return;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: re-running on a change of displayScroll.start / displayScroll.end would re-trigger the scroll this has just settled.
+  const scrollSelectedIntoView = useCallback(() => {
+    const { tabsMeta, selectedTabMeta } = getTabsMeta();
+    if (!selectedTabMeta || !tabsMeta) return;
 
-      if (selectedTabMeta.left < tabsMeta.left) {
-        // left side of button is out of view
-        const nextScrollStart =
-          tabsMeta.scrollLeft + (selectedTabMeta.left - tabsMeta.left);
-        scroll(nextScrollStart);
-      } else if (selectedTabMeta.right > tabsMeta.right) {
-        // right side of button is out of view
-        let nextScrollStart =
-          tabsMeta.scrollLeft + (selectedTabMeta.right - tabsMeta.right);
+    if (selectedTabMeta.left < tabsMeta.left) {
+      // left side of button is out of view
+      const nextScrollStart =
+        tabsMeta.scrollLeft + (selectedTabMeta.left - tabsMeta.left);
+      scroll(nextScrollStart);
+    } else if (selectedTabMeta.right > tabsMeta.right) {
+      // right side of button is out of view
+      let nextScrollStart =
+        tabsMeta.scrollLeft + (selectedTabMeta.right - tabsMeta.right);
 
-        if (
-          scrollButtonEndRef.current &&
-          ((displayScroll.start && !displayScroll.end) ||
-            (!displayScroll.start && displayScroll.end))
-        ) {
-          nextScrollStart +=
-            scrollButtonEndRef.current.getBoundingClientRect().width;
-        }
-
-        scroll(nextScrollStart);
+      if (
+        scrollButtonEndRef.current &&
+        ((displayScroll.start && !displayScroll.end) ||
+          (!displayScroll.start && displayScroll.end))
+      ) {
+        nextScrollStart +=
+          scrollButtonEndRef.current.getBoundingClientRect().width;
       }
-    }, // we do not want to re-trigger this function if display.start / display.end are modified
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [getTabsMeta],
-  );
+
+      scroll(nextScrollStart);
+    }
+  }, [getTabsMeta]);
   const updateScrollButtonState = useCallback(() => {
     if (tabsRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = tabsRef.current;

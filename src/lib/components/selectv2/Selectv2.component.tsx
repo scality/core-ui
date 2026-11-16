@@ -78,6 +78,7 @@ export function Option({
 
   const prevValue = usePreviousValue(value);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: optionContext is left out on purpose — it is mutable, so listing it would re-run this on every render.
   useEffect(() => {
     if (prevValue && prevValue !== value) {
       optionContext.unregister(prevValue);
@@ -94,7 +95,6 @@ export function Option({
     return () => {
       optionContext.unregister(value);
     };
-    //eslint-disable-next-line react-hooks/exhaustive-deps --  optionContext is mutable
   }, [children, disabled, icon, value, prevValue, groupContext?.label]);
 
   return <></>;

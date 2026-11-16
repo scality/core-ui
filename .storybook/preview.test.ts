@@ -35,7 +35,7 @@ const readSortSidebar = (): ((a: Entry, b: Entry) => number) => {
       'storySort cannot annotate its parameters: Storybook evaluates its source as plain JavaScript',
     );
 
-  // eslint-disable-next-line no-eval
+  // biome-ignore lint/security/noGlobalEval: the evaluated text is this repository's own preview.tsx, never input.
   return (0, eval)(`(${previewSource.slice(storySort.start, storySort.end)})`);
 };
 

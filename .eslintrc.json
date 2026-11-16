@@ -1,7 +1,0 @@
-{
-  "extends": [
-    "react-app",
-    "plugin:storybook/recommended"
-  ],
-  "ignorePatterns": "stories"
-}

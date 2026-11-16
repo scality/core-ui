@@ -27,10 +27,15 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-      - run: npm ci
+      # --ignore-scripts keeps the `prepare` hook from building here. Without it
+      # `npm ci` type-checks as a side effect, so a type error fails the install
+      # step and reports as a prepare-hook failure instead of reaching the
+      # typecheck step below. Nothing in this job needs what the hooks produce.
+      - run: npm ci --ignore-scripts
         env:
           # storybook-webmcp is hosted on GitHub Packages (npm.pkg.github.com).
           # Even public GHPR packages require an auth token.
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run test
+      - run: npm run typecheck
       - run: npm run lint
+      - run: npm run test

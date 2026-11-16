@@ -138,9 +138,7 @@ export const VirtualizedRows = <
 }: VirtualizedRowsType<DATA_ROW>) => {
   // Fresh array identity whenever the rows or the visible-column set changes, so
   // react-window's `areEqual` lets the body re-render in step with the header.
-  // `columnsKey` is deliberately a dependency though it is not read here — it is
-  // the signal that the visible-column set changed.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `columnsKey` is deliberately a dependency though it is not read here — it is the signal that the visible-column set changed.
   const itemData = useMemo(() => rows.slice(), [rows, columnsKey]);
   return (
     <AutoSizer disableWidth>
