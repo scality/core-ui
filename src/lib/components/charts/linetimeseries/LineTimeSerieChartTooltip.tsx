@@ -31,6 +31,7 @@ export const LineTimeSerieChartTooltip: React.FC<
   isSymmetrical,
   logZeroValue = null,
   belowSeriesLabels,
+  dashedSeriesLabels,
   chartContainerRef,
   chartId,
 }) => {
@@ -107,6 +108,7 @@ export const LineTimeSerieChartTooltip: React.FC<
                   $color={entry.color}
                   $shape="line"
                   $chartColors={{ [entry.color]: entry.color }}
+                  $isLineDashed={dashedSeriesLabels?.has(entry.name)}
                 />
               );
 

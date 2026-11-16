@@ -247,6 +247,7 @@ export function AttachmentConfirmationModal<
         </Box>
         <div style={{ flex: 1, minHeight: 0 }}>
           <Table
+            status="success"
             columns={columns}
             data={attachmentOperationsFlat}
             defaultSortingKey={'entityName'}

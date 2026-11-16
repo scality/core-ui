@@ -1,5 +1,11 @@
 import { Table, TableProps } from './Tablev2.component';
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import { CoreUiThemeProvider } from '../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../style/theme';
 
@@ -38,7 +44,12 @@ const renderMultiSelectTable = (
 ) =>
   render(
     <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
-      <Table columns={columns} data={data} defaultSortingKey="firstName">
+      <Table
+        status="success"
+        columns={columns}
+        data={data}
+        defaultSortingKey="firstName"
+      >
         <Table.MultiSelectableContent
           rowHeight="h40"
           separationLineVariant="backgroundLevel3"
@@ -118,7 +129,9 @@ describe('MultiSelectableContent', () => {
     // `isSelected` prop on the styled-component (covered in storybook).
     const activeRow = screen.getAllByRole('row')[1];
     expect(within(activeRow).getByRole('checkbox')).not.toBeChecked();
-    expect(within(screen.getAllByRole('row')[3]).getByRole('checkbox')).toBeChecked();
+    expect(
+      within(screen.getAllByRole('row')[3]).getByRole('checkbox'),
+    ).toBeChecked();
   });
 });
 
@@ -147,6 +160,7 @@ describe('MultiSelectableContent row click vs in-cell controls', () => {
     render(
       <CoreUiThemeProvider theme={coreUIAvailableThemes.artescaLight}>
         <Table
+          status="success"
           columns={columnsWithButton}
           data={data.map((entry) => ({ ...entry, onAction }))}
           defaultSortingKey="firstName"

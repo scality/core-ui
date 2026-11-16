@@ -47,10 +47,13 @@ export const useClipboard = () => {
     }
 
     if (asHtml) {
-      // Copy as HTML with plain text fallback
-      const el = document.createElement('div');
-      el.innerHTML = text;
-      const plainText = el.innerText;
+      // Copy as HTML with plain text fallback.
+      //
+      // A detached div is no sandbox: assigning text to its innerHTML still
+      // builds real elements, so an `<img onerror>` in the source runs.
+      const plainText =
+        new DOMParser().parseFromString(text, 'text/html').body.textContent ??
+        '';
 
       const clipboardItem = new ClipboardItem({
         'text/html': new Blob([text], { type: 'text/html' }),
@@ -92,7 +95,7 @@ export const CopyButton = ({
   ...props
 }: {
   label?: string;
-  textToCopy: string;
+  textToCopy: string | (() => string);
   copyAsHtml?: boolean;
   variant?: 'outline' | 'ghost';
 } & Omit<Props, 'tooltip' | 'label'>) => {
@@ -131,7 +134,13 @@ export const CopyButton = ({
       disabled={props.disabled}
       aria-disabled={isSuccess || props.disabled}
       onClick={() => {
-        if (!isSuccess) copy(textToCopy, copyAsHtml);
+        if (isSuccess) return;
+        // Read at click time, not at render: a caller whose source is an
+        // uncontrolled field does not re-render as it is typed into, so a string
+        // captured at render would be the one from before the typing.
+        const text =
+          typeof textToCopy === 'function' ? textToCopy() : textToCopy;
+        if (text) copy(text, copyAsHtml);
       }}
       type="button"
       tooltip={

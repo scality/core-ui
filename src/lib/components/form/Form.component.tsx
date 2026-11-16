@@ -15,9 +15,11 @@ import {
   helpIconReserve,
   IconHelp,
   LabelHelpIcon,
+  trimLabelEnd,
 } from '../iconhelper/IconHelper';
 import { ScrollbarWrapper } from '../scrollbarwrapper/ScrollbarWrapper.component';
 import { HelperText, Text } from '../text/Text.component';
+import { PAGE_FORM_WIDTH } from './Form.constants';
 
 const DESCRIPTION_PREFIX = 'describe-';
 const LABEL_PREFIX = 'label-';
@@ -38,8 +40,8 @@ type FormProps = Omit<
    * overflowing. It also lays each `FormSection` out as a two-column grid that
    * auto-flips to a stacked single column on narrow widths — there is no
    * breakpoint prop; the flip point is derived from the layout (see below).
-   * Note: `Input` and `Select` currently honor the fluid width — `SearchInput`,
-   * `TextArea` and other size-driven content keep their fixed width for now.
+   * Note: `Input`, `PasswordInput`, `Select` and `SearchInput` honor the fluid
+   * width — a `TextArea`, sized from its own `cols`, keeps that width.
    *
    * It also declares the Form the `responsive` container, so any
    * `@container responsive` query inside it — `Button iconOnly={number}`, for
@@ -120,7 +122,6 @@ const StyledForm = styled.form<{
 // scrollbar along with the content, so only the scroller's own layout can put
 // space between the two. The header and footer share it so their actions line up
 // with the fields.
-const PAGE_CONTENT_MAX_WIDTH = '45rem';
 const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
   box-sizing: border-box;
   margin: 0 auto;
@@ -128,7 +129,7 @@ const BasicPageLayout = styled.div<{ $layoutKind: 'page' | 'tab' }>`
     props.$layoutKind === 'page'
       ? `
   width: 100%;
-  max-width: calc(${PAGE_CONTENT_MAX_WIDTH} + ${spacing.f16});
+  max-width: ${PAGE_FORM_WIDTH};
   padding-right: ${spacing.f16};
   `
       : `
@@ -165,6 +166,20 @@ const ScrollArea = styled(BasicPageLayout)`
      shift left the moment the form starts scrolling. This reserves only the space
      the bar occupies; the gap between bar and content is the padding-right above. */
   scrollbar-gutter: stable;
+`;
+
+// Mirrors ScrollArea's `scrollbar-gutter: stable`; the bar's width is
+// engine-owned, so it cannot be written as a length. Kept empty: its overflow
+// would clip non-portalled popups. As a scroll container its flex minimum is 0,
+// hence `flex-shrink: 0`.
+const ScrollbarGutterSpacer = styled.div`
+  flex-shrink: 0;
+  overflow-y: hidden;
+  scrollbar-gutter: stable;
+`;
+
+const ActionsEndingWithTheFields = styled.div`
+  display: flex;
 `;
 
 // A FormSection lays its FormGroups out so labels align across the section from
@@ -298,6 +313,12 @@ const LabelText = styled(Text)<{ $reserveHelpIcon: boolean }>`
   ${({ $reserveHelpIcon }) => $reserveHelpIcon && helpIconReserve}
 `;
 
+// The separator stays an ordinary space: U+00A0 would reach the field's
+// accessible name and break an exact-match assertion such as 'User name *'.
+const LabelMarker = styled.span`
+  white-space: nowrap;
+`;
+
 // Carries the section's label-column config down to each FormGroup so a row can
 // build its own layout. Null outside a FormSection — a FormGroup then throws.
 type SectionLabelConfig = {
@@ -370,9 +391,11 @@ const FormGroup = ({
         color={disabled ? undefined : 'textSecondary'}
         $reserveHelpIcon={!!labelHelpTooltip}
       >
-        {label}
-        {requireMode !== 'all' && required && ' *'}
-        {requireMode === 'all' && !required && ' (optional)'}
+        {trimLabelEnd(label)}
+        {requireMode !== 'all' && required && <LabelMarker>{' *'}</LabelMarker>}
+        {requireMode === 'all' && !required && (
+          <LabelMarker>{' (optional)'}</LabelMarker>
+        )}
       </LabelText>
       {labelHelpTooltip && <LabelHelpIcon tooltipMessage={labelHelpTooltip} />}
     </label>
@@ -623,7 +646,10 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
           <FixedHeader $layoutKind="tab">
             <Wrap>
               <div>{leftActions}</div>
-              <div>{rightActions}</div>
+              <ActionsEndingWithTheFields>
+                {rightActions}
+                <ScrollbarGutterSpacer />
+              </ActionsEndingWithTheFields>
             </Wrap>
           </FixedHeader>
 

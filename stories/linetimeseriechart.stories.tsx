@@ -1840,3 +1840,114 @@ export const SymlogVersusLog: Story = {
     </div>
   ),
 };
+
+// ─── Dashed series ──────────────────────────────────────────────────────────
+
+const DASHED_POINT_COUNT = 120;
+const DASHED_START = 1740405600;
+const DASHED_INTERVAL = SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS / DASHED_POINT_COUNT;
+
+const buildSmoothSerie = (
+  valueAt: (progress: number) => number,
+): [number, number][] =>
+  Array.from({ length: DASHED_POINT_COUNT }, (_, index) => [
+    DASHED_START + index * DASHED_INTERVAL,
+    valueAt(index / DASHED_POINT_COUNT),
+  ]);
+
+const usedCapacityData = buildSmoothSerie(
+  (t) => 40 + 30 * t + 6 * Math.sin(t * 18),
+);
+
+const capacitySeries: Serie[] = [
+  {
+    data: usedCapacityData,
+    resource: 'Used capacity',
+    getTooltipLabel: () => 'Used capacity',
+  },
+  {
+    data: buildSmoothSerie((t) => (t < 0.6 ? 100 : 130)),
+    resource: 'Total capacity',
+    getTooltipLabel: () => 'Total capacity',
+    isLineDashed: true,
+  },
+  {
+    data: buildSmoothSerie(() => 85),
+    resource: 'Quota',
+    getTooltipLabel: () => 'Quota',
+    isLineDashed: true,
+  },
+];
+
+const capacityColorSet = {
+  'Used capacity': lineTimeSeriesColorRange[0],
+  'Total capacity': lineTimeSeriesColorRange[2],
+  Quota: lineTimeSeriesColorRange[4],
+};
+
+const forecastSeries: Serie[] = [
+  {
+    data: usedCapacityData,
+    resource: 'node-1',
+    getTooltipLabel: () => 'node-1 measured',
+  },
+  {
+    data: buildSmoothSerie((t) => 45 + 40 * t),
+    resource: 'node-1',
+    getTooltipLabel: () => 'node-1 forecast',
+    isLineDashed: true,
+  },
+  {
+    data: buildSmoothSerie((t) => 20 + 25 * t + 4 * Math.cos(t * 14)),
+    resource: 'node-2',
+    getTooltipLabel: () => 'node-2 measured',
+  },
+  {
+    data: buildSmoothSerie((t) => 22 + 30 * t),
+    resource: 'node-2',
+    getTooltipLabel: () => 'node-2 forecast',
+    isLineDashed: true,
+  },
+];
+
+const dashedChartArgs = {
+  height: 180,
+  startingTimeStamp: DASHED_START,
+  interval: DASHED_INTERVAL,
+  duration: SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS,
+} satisfies Partial<LineChartProps>;
+
+/**
+ * A series with `isLineDashed` gets a dashed swatch in the legend and the tooltip: the chart
+ * declares its dashed resources to `ChartLegendWrapper`, nothing to wire.
+ *
+ * The legend has one entry per resource. When a resource is drawn both solid and dashed, as with
+ * measured and forecast below, its entry stays solid and only the tooltip tells the two apart.
+ */
+export const DashedSeries: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+      <ChartLegendWrapper colorSet={capacityColorSet}>
+        <LineTimeSerieChart
+          {...dashedChartArgs}
+          series={capacitySeries}
+          title="Capacity"
+        />
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>
+      <ChartLegendWrapper
+        colorSet={{
+          'node-1': lineTimeSeriesColorRange[0],
+          'node-2': lineTimeSeriesColorRange[2],
+        }}
+      >
+        <LineTimeSerieChart
+          {...dashedChartArgs}
+          series={forecastSeries}
+          title="Forecast — one resource, both styles"
+        />
+        <ChartLegend shape="line" />
+      </ChartLegendWrapper>
+    </div>
+  ),
+};

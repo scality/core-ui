@@ -171,6 +171,8 @@ export type LineTimeSerieChartTooltipProps = {
    */
   logZeroValue?: number | null;
   belowSeriesLabels?: Set<string>;
+  /** Tooltip labels of the series drawn dashed, which get a dashed swatch */
+  dashedSeriesLabels?: Set<string>;
   chartContainerRef: React.RefObject<HTMLDivElement>;
   /** The unique ID of this chart instance */
   chartId: string;

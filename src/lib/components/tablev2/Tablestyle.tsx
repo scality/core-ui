@@ -121,6 +121,7 @@ export const TableHeader = styled.div<{
 `;
 
 type HeadRowType = {
+  $hasScrollBar?: boolean;
   $rowHeight: TableHeightKeyType;
   $separationLineVariant: TableVariantType;
 };
@@ -133,13 +134,11 @@ export const HeadRow = styled.div<HeadRowType>`
   height: 2.286rem;
   width: calc(100% - ${borderSize});
   /*
-   * The head row sits outside the body's scroll container, so its tracks would be
-   * wider than the body's by the width of the scrollbar. Reserving the same gutter
-   * on both makes them agree with no measurement. It has to be stable rather than
-   * auto: this element is overflow hidden, so it never shows a bar of its own and
-   * auto would reserve nothing.
+   * The head row sits outside the body's scroll container, so its track would
+   * otherwise be a scrollbar's width different from the body's. Stable, not
+   * auto, because this element is overflow hidden and never shows its own bar.
    */
-  scrollbar-gutter: stable;
+  scrollbar-gutter: ${(props) => (props.$hasScrollBar ? 'stable' : 'auto')};
   height: ${(props) => tableRowHeight[props.$rowHeight]}rem;
   table-layout: fixed;
   color: ${(props) => props.theme.textPrimary};

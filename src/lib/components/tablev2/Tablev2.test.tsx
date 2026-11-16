@@ -68,7 +68,12 @@ describe('TableV2', () => {
   test('it should display all the data', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'health'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'health'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -87,7 +92,12 @@ describe('TableV2', () => {
   test('it should sort by defaultSortingKey', async () => {
     const { getAllByRole } = render(
       <div>
-        <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={columns}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -107,6 +117,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -136,6 +147,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -159,6 +171,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -194,7 +207,12 @@ describe('TableV2', () => {
 
     const { getAllByRole } = render(
       <div>
-        <Table columns={dateColumns} data={dateData} globalFilter=".000">
+        <Table
+          status="success"
+          columns={dateColumns}
+          data={dateData}
+          globalFilter=".000"
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -213,6 +231,7 @@ describe('TableV2', () => {
     const { getAllByRole } = render(
       <div>
         <Table
+          status="success"
           columns={columns}
           data={data}
           defaultSortingKey={'firstName'}
@@ -268,7 +287,7 @@ describe('TableV2 responsive columns', () => {
   const renderResponsiveTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data}>
+        <Table status="success" columns={responsiveColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -311,7 +330,7 @@ describe('TableV2 responsive columns', () => {
     ];
     render(
       <div>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -329,7 +348,12 @@ describe('TableV2 responsive columns', () => {
   const renderRevealTable = () =>
     render(
       <div>
-        <Table columns={responsiveColumns} data={data} revealDroppedColumns>
+        <Table
+          status="success"
+          columns={responsiveColumns}
+          data={data}
+          revealDroppedColumns
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -391,6 +415,7 @@ describe('TableV2 responsive columns', () => {
             enable reveal
           </button>
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             revealDroppedColumns={reveal}
@@ -442,6 +467,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     render(
       <div>
         <Table
+          status="success"
           columns={withButtonColumns}
           data={data.map((entry) => ({ ...entry, onAction }))}
           defaultSortingKey={'firstName'}
@@ -514,7 +540,7 @@ describe('TableV2 row click vs in-cell controls', () => {
     const onRowSelected = jest.fn();
     render(
       <div role="button" tabIndex={0}>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -552,7 +578,7 @@ describe('TableV2 row click vs in-cell controls', () => {
 
     render(
       <div>
-        <Table columns={portalColumns} data={data}>
+        <Table status="success" columns={portalColumns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -575,7 +601,12 @@ describe('TableV2 row selectability', () => {
   ];
 
   const renderTable = (onRowSelected?: (row: unknown) => void) => (
-    <Table columns={columns} data={data} defaultSortingKey={'firstName'}>
+    <Table
+      status="success"
+      columns={columns}
+      data={data}
+      defaultSortingKey={'firstName'}
+    >
       <Table.SingleSelectableContent
         rowHeight="h40"
         separationLineVariant="backgroundLevel3"
@@ -627,7 +658,12 @@ describe('TableV2 truncated header labels', () => {
   const renderTable = (cols = columns) =>
     render(
       <div>
-        <Table columns={cols} data={data} defaultSortingKey={'firstName'}>
+        <Table
+          status="success"
+          columns={cols}
+          data={data}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -677,5 +713,374 @@ describe('TableV2 truncated header labels', () => {
     expect(
       document.querySelector('.sc-tooltip-overlay-text'),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe('TableV2', () => {
+  describe('status', () => {
+    let warnSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      warnSpy.mockRestore();
+    });
+
+    const renderStatusTable = (props: Record<string, unknown>) =>
+      render(
+        <Table columns={columns} data={data} {...(props as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>,
+      );
+
+    it('shows "No results found" when a global filter matches nothing with status success', async () => {
+      renderStatusTable({ status: 'success', globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when a global filter matches nothing with an unknown status', async () => {
+      renderStatusTable({ status: 'ok', globalFilter: 'zzzzzz' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ok'));
+    });
+
+    it('shows the loader when status is loading and data is empty', async () => {
+      renderStatusTable({ status: 'loading', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results found" when status is success and data is empty', async () => {
+      renderStatusTable({ status: 'success', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('keeps status and the fetch state props apart at the type level', () => {
+      const mixed = () => (
+        // @ts-expect-error status cannot be combined with loading
+        <Table columns={columns} data={data} status="success" loading>
+          <></>
+        </Table>
+      );
+      const undefinedDataWithStatus = () => (
+        // @ts-expect-error status needs data to be an array
+        <Table columns={columns} data={undefined} status="success">
+          <></>
+        </Table>
+      );
+      const withoutStatus = () => (
+        <Table columns={columns} data={undefined}>
+          <></>
+        </Table>
+      );
+      expect([mixed, undefinedDataWithStatus, withoutStatus]).toHaveLength(3);
+    });
+
+    it('shows the error message and names the value when status is unknown and data is empty', async () => {
+      renderStatusTable({ status: 'pending', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/an error occurred/i)).toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('pending'));
+    });
+
+    it('renders rows and names the value when status is unknown and data is not empty', async () => {
+      renderStatusTable({ status: 'ok' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ok'));
+    });
+
+    it('warns once per invalid value rather than on every render', async () => {
+      const tableWithStatus = (status: unknown) => (
+        <Table columns={columns} data={[]} {...({ status } as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          />
+        </Table>
+      );
+      const { rerender } = render(tableWithStatus('pending'));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+      rerender(tableWithStatus('pending'));
+      rerender(tableWithStatus('pending'));
+
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('pending'));
+
+      rerender(tableWithStatus('ok'));
+
+      expect(warnSpy).toHaveBeenCalledTimes(2);
+      expect(warnSpy).toHaveBeenLastCalledWith(expect.stringContaining('ok'));
+
+      rerender(tableWithStatus('success'));
+
+      expect(warnSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('shows neither the loader nor "No results" when status is idle', async () => {
+      renderStatusTable({ status: 'idle', data: [] });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText('First Name')).toBeInTheDocument();
+      expect(screen.getAllByRole('row')).toHaveLength(1);
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/no results found/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/an error occurred/i)).not.toBeInTheDocument();
+    });
+
+    it('hides rows without showing the loader when status is idle with data', async () => {
+      renderStatusTable({ status: 'idle' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the loader and hides rows when status is loading with data', async () => {
+      renderStatusTable({ status: 'loading' });
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+    });
+
+    const renderWithEmptyStateRenderFunction = (status: string) =>
+      render(
+        <Table columns={columns} data={[]} {...({ status } as any)}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant="backgroundLevel3"
+          >
+            {(rows) => (
+              <div data-testid="render-function-output">
+                {rows}
+                <span>Nothing attached</span>
+              </div>
+            )}
+          </Table.SingleSelectableContent>
+        </Table>,
+      );
+
+    it.each([
+      ['loading', /loading/i],
+      ['error', /an error occurred/i],
+      ['pending', /an error occurred/i],
+    ])(
+      'shows the %s placeholder without calling the children render function',
+      async (status, placeholder) => {
+        renderWithEmptyStateRenderFunction(status);
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(screen.getByText(placeholder)).toBeInTheDocument();
+        expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+      },
+    );
+
+    it('keeps the idle body out of the children render function', async () => {
+      renderWithEmptyStateRenderFunction('idle');
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
+
+    it('passes the no-results message through the children render function', async () => {
+      renderWithEmptyStateRenderFunction('success');
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      const output = screen.getByTestId('render-function-output');
+      expect(within(output).getByText(/no results found/i)).toBeInTheDocument();
+      expect(within(output).getByText('Nothing attached')).toBeInTheDocument();
+    });
+
+    it.each(['idle', 'loading', 'error', 'success'])(
+      'does not warn when status is %s',
+      async (status) => {
+        renderStatusTable({ status });
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(warnSpy).not.toHaveBeenCalled();
+      },
+    );
+  });
+
+  describe('fetch state props', () => {
+    const entityName = { en: { singular: 'volume', plural: 'volumes' } };
+    const failure = new Error('Request failed');
+
+    type FetchProps = {
+      data: Record<string, unknown>[] | undefined;
+      loading?: boolean;
+      error?: unknown;
+      globalFilter?: string;
+    };
+
+    const tableWith = (
+      props: FetchProps,
+      children?: (rows: JSX.Element) => JSX.Element,
+    ) => (
+      <Table columns={columns} entityName={entityName} {...props}>
+        <Table.SingleSelectableContent
+          rowHeight="h40"
+          separationLineVariant="backgroundLevel3"
+        >
+          {children}
+        </Table.SingleSelectableContent>
+      </Table>
+    );
+
+    const renderWith = async (props: FetchProps) => {
+      const result = render(tableWith(props));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+      return result;
+    };
+
+    it('shows the loader while no result has arrived, even without loading', async () => {
+      await renderWith({ data: undefined });
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows neither the loader nor "No results" when nothing is requested', async () => {
+      await renderWith({ data: undefined, loading: false });
+
+      expect(screen.getByText('First Name')).toBeInTheDocument();
+      expect(screen.getAllByRole('row')).toHaveLength(1);
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/error/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the error when the first request fails', async () => {
+      await renderWith({ data: undefined, loading: false, error: failure });
+
+      expect(
+        screen.getByText(/an error occurred while loading the volumes/i),
+      ).toBeInTheDocument();
+    });
+
+    it('shows the loader for an empty array during the first request', async () => {
+      await renderWith({ data: [], loading: true });
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows "No results" for an empty result', async () => {
+      await renderWith({ data: [] });
+
+      expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
+    });
+
+    it('keeps "No results" while an empty result refreshes', async () => {
+      const { rerender } = await renderWith({ data: [], loading: true });
+      rerender(tableWith({ data: [], loading: false }));
+      rerender(tableWith({ data: [], loading: true }));
+
+      expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
+      expect(screen.queryByText(/loading volumes/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the loader when a query that mounted disabled turns on with an empty array', async () => {
+      const { rerender } = await renderWith({ data: [], loading: false });
+      rerender(tableWith({ data: [], loading: true }));
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryByText(/no volumes found/i)).not.toBeInTheDocument();
+    });
+
+    it('shows the loader when a new query key hands over undefined data', async () => {
+      const { rerender } = await renderWith({ data, loading: false });
+      rerender(tableWith({ data: undefined, loading: true }));
+
+      expect(screen.getByText(/loading volumes/i)).toBeInTheDocument();
+      expect(screen.queryAllByRole('row')).toHaveLength(1);
+    });
+
+    it('keeps the rows while they refresh', async () => {
+      await renderWith({ data, loading: true });
+
+      expect(screen.getAllByRole('row').length).toBe(data.length + 1);
+      expect(screen.queryByText(/loading volumes/i)).not.toBeInTheDocument();
+    });
+
+    it('replaces the rows with the error when a refresh fails', async () => {
+      await renderWith({ data, error: failure });
+
+      expect(
+        screen.getByText(/an error occurred while loading the volumes/i),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(data[0].firstName as string),
+      ).not.toBeInTheDocument();
+    });
+
+    it('shows "No results" when the filters hide every row', async () => {
+      await renderWith({ data, globalFilter: 'zzzzzz' });
+
+      expect(screen.getByText(/no volumes found/i)).toBeInTheDocument();
+    });
+
+    it('does not warn without a status', async () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      await renderWith({ data: undefined });
+
+      expect(warnSpy).not.toHaveBeenCalled();
+      warnSpy.mockRestore();
+    });
+
+    const renderFunction = (rows: JSX.Element) => (
+      <div data-testid="render-function-output">
+        {rows}
+        <span>Nothing attached</span>
+      </div>
+    );
+
+    it.each([
+      ['loader', { data: undefined }],
+      ['empty body', { data: undefined, loading: false }],
+      ['error', { data: undefined, loading: false, error: failure }],
+    ])(
+      'keeps the %s out of the children render function',
+      async (_, props: FetchProps) => {
+        render(tableWith(props, renderFunction));
+        await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+        expect(screen.queryByText('Nothing attached')).not.toBeInTheDocument();
+      },
+    );
+
+    it('passes the no-results message through the children render function', async () => {
+      render(tableWith({ data: [] }, renderFunction));
+      await waitFor(() => screen.queryAllByRole('img', { hidden: true }));
+
+      const output = screen.getByTestId('render-function-output');
+      expect(within(output).getByText(/no volumes found/i)).toBeInTheDocument();
+    });
   });
 });

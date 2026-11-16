@@ -49,7 +49,7 @@ export const useCheckbox = (hooks: Hooks<object>) => {
             </CheckBoxContainer>
           );
         },
-        cellStyle: { width: '50px' },
+        cellStyle: { flex: '0 0 50px' },
         disableSortBy: true,
       },
       ...columns,

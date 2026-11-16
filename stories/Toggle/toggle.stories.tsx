@@ -88,8 +88,6 @@ export const AllStates: Story = {
   render: () => {
     const labelStyle: React.CSSProperties = {
       fontSize: '0.75rem',
-      textTransform: 'uppercase',
-      letterSpacing: '0.05em',
       opacity: 0.5,
       marginBottom: '0.75rem',
     };

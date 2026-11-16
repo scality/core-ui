@@ -162,6 +162,7 @@ export const SimpleContentTable = {
             {location.search}
           </span>
           <Table
+            status="success"
             columns={columns}
             data={data}
             defaultSortingKey={'health'}
@@ -197,7 +198,7 @@ export const SimpleContentTable = {
             paddingTop: '20px',
           }}
         >
-          <Table columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table status="success" columns={columns} data={data} defaultSortingKey={'health'}>
             <Table.SingleSelectableContent
               rowHeight="h32"
               separationLineVariant="backgroundLevel3"
@@ -212,6 +213,7 @@ export const SimpleContentTable = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={data}
             defaultSortingKey={'health'}
@@ -244,6 +246,7 @@ export const SimpleContentTable = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={[]}
             defaultSortingKey={'health'}
@@ -375,6 +378,7 @@ export const asyncTable = {
         >
           <BrowserRouter>
             <Table
+              status="success"
               columns={columnAsync}
               data={data}
               defaultSortingKey={'health'}
@@ -435,6 +439,7 @@ export const OnBottomCallback = {
           }}
         >
           <Table
+            status="success"
             columns={columns}
             data={randomData}
             onBottom={onBottom}
@@ -538,6 +543,7 @@ export const MultiTable = {
         <Flex justifyContent="center" gap="2rem">
           <Box width="500px" height="200px">
             <Table
+              status="success"
               columns={columns2}
               data={data1}
               defaultSortingKey="name"
@@ -575,7 +581,7 @@ export const MultiTable = {
             />
           </Box>
           <Box width="500px" height="200px">
-            <Table columns={columns2} data={data2} defaultSortingKey={'health'}>
+            <Table status="success" columns={columns2} data={data2} defaultSortingKey={'health'}>
               <Table.MultiSelectableContent
                 onMultiSelectionChanged={(rows) => {
                   console.log(
@@ -624,16 +630,48 @@ export const EmptyTable = {
   },
 };
 
+export const LoadingEmptyTable = {
+  render: (args) => {
+    const { background } = args;
+    return (
+      <Box width="500px" height="200px">
+        <Table status="loading" columns={columns} data={[]} defaultSortingKey={'firstName'}>
+          <Table.SingleSelectableContent
+            rowHeight="h40"
+            separationLineVariant={background}
+            onRowSelected={action('Table Row Clicked')}
+          />
+        </Table>
+      </Box>
+    );
+  },
+  argTypes: {
+    background: {
+      control: {
+        type: 'select',
+        description: 'Background color',
+        defaultValue: 'backgroundLevel3',
+      },
+      options: [
+        'backgroundLevel1',
+        'backgroundLevel2',
+        'backgroundLevel3',
+        'backgroundLevel4',
+      ],
+    },
+  },
+};
+
 export const LoadingTable = {
   render: ({}) => {
     return (
       <Box width="500px" height="200px">
         <Table
           columns={columns}
-          data={data}
+          data={undefined}
+          loading
           defaultSortingKey={'health'}
           getRowId={getRowId}
-          status="loading"
         >
           <Table.SingleSelectableContent
             rowHeight="h40"
@@ -654,7 +692,7 @@ export const ErrorTable = {
           data={data}
           defaultSortingKey={'health'}
           getRowId={getRowId}
-          status="error"
+          error={new Error('Request failed')}
           entityName={{
             en: { singular: 'user', plural: 'users' },
             fr: { singular: 'utilisateur', plural: 'utilisateurs' },
@@ -701,7 +739,7 @@ export const TableWithSyncButton = {
             tooltipOverlay="Synchronize table data"
           />
         </Box>
-        <Table columns={columns} data={data}>
+        <Table status="success" columns={columns} data={data}>
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant="backgroundLevel3"
@@ -760,6 +798,7 @@ export const TableWithViewAction = {
       <>
         <Box width="700px" height="260px">
           <Table
+            status="success"
             columns={columnsWithAction}
             data={data}
             defaultSortingKey={'firstName'}
@@ -844,6 +883,7 @@ export const AutoScrollToSelected = {
         </Box>
         <div style={{ height: '400px' }}>
           <Table
+            status="success"
             columns={columns}
             data={largeData}
             defaultSortingKey="firstName"
@@ -913,6 +953,7 @@ export const ResponsiveColumnDrop = {
           }}
         >
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             defaultSortingKey={'health'}
@@ -952,6 +993,7 @@ export const ResponsiveColumnDropWithReveal = {
           }}
         >
           <Table
+            status="success"
             columns={responsiveColumns}
             data={data}
             defaultSortingKey={'health'}
@@ -963,6 +1005,74 @@ export const ResponsiveColumnDropWithReveal = {
               separationLineVariant="backgroundLevel3"
               selectedId={selected}
               onRowSelected={(row) => setSelected(row.id)}
+            />
+          </Table>
+        </div>
+      </>
+    );
+  },
+};
+
+const tightRowColumns: Column<Entry>[] = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    cellStyle: {
+      width: 'unset',
+      flex: 2,
+      minWidth: '10rem',
+      textAlign: 'left',
+    },
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    cellStyle: { width: 'unset', flex: 2, textAlign: 'left' },
+    dropAt: 700,
+  },
+  {
+    Header: 'Age',
+    accessor: 'age',
+    cellStyle: { width: 'unset', flex: 1, textAlign: 'left' },
+    dropAt: 550,
+  },
+  {
+    Header: 'Actions',
+    accessor: 'health',
+    disableSortBy: true,
+    cellStyle: { flex: '0 0 78px' },
+    Cell: () => <Button size="inline" variant="secondary" label="Edit" />,
+  },
+];
+
+export const RevealTriggerInATightRow = {
+  render: () => {
+    return (
+      <>
+        <Title>Reveal trigger in a row with no room left</Title>
+        <div
+          style={{
+            height: '320px',
+            width: '900px',
+            minWidth: '320px',
+            maxWidth: '100%',
+            resize: 'horizontal',
+            overflow: 'hidden',
+            padding: '20px',
+            border: '1px dashed currentColor',
+            boxSizing: 'border-box',
+          }}
+        >
+          <Table
+            columns={tightRowColumns}
+            data={data}
+            defaultSortingKey={'firstName'}
+            getRowId={getRowId}
+            revealDroppedColumns
+          >
+            <Table.SingleSelectableContent
+              rowHeight="h40"
+              separationLineVariant="backgroundLevel3"
             />
           </Table>
         </div>

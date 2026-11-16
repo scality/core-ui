@@ -39,6 +39,7 @@ const renderTooltip = (
     />,
   );
 
+// @test-review-deferred: tooltip-dashed-swatch — dashed and solid swatches differ only in CSS; the dashed labels are covered in useChartData.test.tsx
 describe('LineTimeSerieChartTooltip', () => {
   it('should render a series and its value', () => {
     renderTooltip();

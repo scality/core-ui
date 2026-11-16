@@ -38,6 +38,16 @@ export const helpIconReserve = css`
   padding-right: calc(${HELP_ICON_SIZE} + ${spacing.r8});
 `;
 
+/**
+ * Strips a label's trailing whitespace before `helpIconReserve` is applied to it.
+ * The reserve sits at the end of the label's own inline box, so a trailing space
+ * leaves a soft-wrap opportunity in front of it and the icon lands alone on the
+ * next line -- the one thing the reserve exists to prevent. A label built from a
+ * template literal picks one up easily: `` `${name} ${suffix}` `` with an empty
+ * suffix ends in a space.
+ */
+export const trimLabelEnd = (label: string) => label.trimEnd();
+
 const HelpIconSlot = styled.span`
   display: inline-block;
   margin-left: -${HELP_ICON_SIZE};

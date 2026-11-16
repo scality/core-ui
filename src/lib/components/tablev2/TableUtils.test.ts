@@ -1,4 +1,8 @@
-import { compareHealth } from './TableUtils';
+import {
+  compareHealth,
+  resolveLegacyTableView,
+  resolveTableView,
+} from './TableUtils';
 it('should return 0 for the equal status', () => {
   const result = compareHealth('healthy', 'healthy');
   expect(result).toEqual(0);
@@ -17,4 +21,108 @@ it('should return undefined for the unknown status', () => {
   consoleErrorMockHandle.mockRestore();
   expect(result).toEqual(undefined);
   expect(result2).toEqual(undefined);
+});
+
+describe('resolveTableView', () => {
+  const rows = [{ name: 'vol-1' }, { name: 'vol-2' }];
+  const failure = new Error('Request failed');
+  const base = { visibleRowCount: 0, hasSettled: true };
+
+  it.each([
+    ['no result yet, loading not given', { data: undefined }, 'loader'],
+    [
+      'no result yet, loading not given, request failed',
+      { data: undefined, error: failure },
+      'error',
+    ],
+    [
+      'no result yet, request in flight',
+      { data: undefined, loading: true },
+      'loader',
+    ],
+    [
+      'no result yet, nothing requested',
+      { data: undefined, loading: false },
+      'idle',
+    ],
+    [
+      'no result yet, request failed',
+      { data: undefined, loading: false, error: failure },
+      'error',
+    ],
+    // A failure is reported until a request succeeds, whether or not a retry
+    // is running. react-query clears `error` itself when it retries a query
+    // that has no data, so this case comes from callers that keep it.
+    [
+      'no result yet, retry in flight after a failure',
+      { data: undefined, loading: true, error: failure },
+      'error',
+    ],
+    [
+      'empty array during the first request',
+      { data: [], loading: true, hasSettled: false },
+      'loader',
+    ],
+    [
+      'empty array during the first request, after a failure',
+      { data: [], loading: true, hasSettled: false, error: failure },
+      'error',
+    ],
+    [
+      'empty array refreshing after a settled request',
+      { data: [], loading: true },
+      'empty',
+    ],
+    ['empty result', { data: [] }, 'empty'],
+    [
+      'empty result whose last request failed',
+      { data: [], error: failure },
+      'error',
+    ],
+    ['rows', { data: rows, visibleRowCount: 2 }, 'rows'],
+    [
+      'rows refreshing',
+      { data: rows, visibleRowCount: 2, loading: true, hasSettled: false },
+      'rows',
+    ],
+    [
+      'rows whose refresh failed',
+      { data: rows, visibleRowCount: 2, error: failure },
+      'error',
+    ],
+    [
+      'rows, retry in flight after a failed refresh',
+      { data: rows, visibleRowCount: 2, loading: true, error: failure },
+      'error',
+    ],
+    ['rows hidden by the filters', { data: rows, visibleRowCount: 0 }, 'empty'],
+  ] as const)('%s: %s', (_, input, expected) => {
+    expect(resolveTableView({ ...base, ...input })).toBe(expected);
+  });
+});
+
+describe('resolveLegacyTableView', () => {
+  it.each([
+    ['idle', true, 0, 'idle'],
+    // Rows present on purpose: the deprecated loading and error statuses
+    // replace them.
+    ['loading', false, 2, 'loader'],
+    ['error', false, 2, 'error'],
+    ['success', true, 0, 'empty'],
+    ['success', false, 0, 'empty'],
+    ['success', false, 2, 'rows'],
+    ['pending', true, 0, 'error'],
+    ['pending', false, 2, 'rows'],
+  ])(
+    'status %s, data empty %s, %s visible rows: %s',
+    (status, isDataEmpty, visibleRowCount, view) => {
+      expect(
+        resolveLegacyTableView({
+          status: status as any,
+          isDataEmpty,
+          visibleRowCount,
+        }),
+      ).toBe(view);
+    },
+  );
 });

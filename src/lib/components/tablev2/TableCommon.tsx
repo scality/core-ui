@@ -3,6 +3,7 @@ import {
   ReactNode,
   Ref,
   useCallback,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -25,12 +26,12 @@ import {
 import { useTableContext } from './Tablev2.component';
 import useSyncedScroll from './useSyncedScroll';
 import styled, { CSSProperties } from 'styled-components';
-import { UnsuccessfulResult } from '../UnsuccessfulResult.component';
+import { NoResult, UnsuccessfulResult } from '../UnsuccessfulResult.component';
 import { Tooltip } from '../tooltip/Tooltip.component';
 import { HeaderLabel } from './Tablestyle';
 
 const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
-  const { scrollFade } = useTableContext();
+  const { scrollFade, hasScrollbar } = useTableContext();
   return (
     <div
       ref={ref}
@@ -38,7 +39,7 @@ const SmoothScrollDiv = forwardRef<HTMLDivElement, any>((props, ref) => {
       style={{
         ...props.style,
         scrollBehavior: 'smooth',
-        scrollbarGutter: 'stable',
+        scrollbarGutter: hasScrollbar ? 'stable' : 'auto',
       }}
       className={[scrollFade && 'scroll-fade', props.className]
         .filter(Boolean)
@@ -55,8 +56,6 @@ type VirtualizedRowsType<
     React.PropsWithChildren<ListChildComponentProps<Row<DATA_ROW>[]>>
   >;
   rowHeight: TableHeightKeyType;
-  setHasScrollbar: React.Dispatch<React.SetStateAction<boolean>>;
-  hasScrollbar?: boolean;
   itemKey?: ListItemKeySelector<Row<DATA_ROW>[]>;
   onBottom?: (rowLength: number) => void;
   onBottomOffset?: number;
@@ -73,12 +72,63 @@ type VirtualizedRowsType<
   columnsKey?: string;
 };
 
+const VirtualizedList = <
+  DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
+>({
+  height,
+  rows,
+  rowHeight,
+  itemData,
+  itemKey,
+  listRef,
+  onBottom,
+  onBottomOffset,
+  RenderRow,
+}: Omit<VirtualizedRowsType<DATA_ROW>, 'columnsKey'> & {
+  height: number;
+  itemData: Row<DATA_ROW>[];
+}) => {
+  const { setHasScrollbar } = useTableContext();
+  const itemSize = convertRemToPixels(tableRowHeight[rowHeight]);
+
+  // useLayoutEffect, not useEffect: with useEffect the body could already have
+  // lost a scrollbar's width to its bar for a frame before the head row's own
+  // gutter followed, leaving the columns briefly a scrollbar apart.
+  const hasScrollbar = rows.length * itemSize > height - 1;
+  useLayoutEffect(() => {
+    setHasScrollbar(hasScrollbar);
+  }, [hasScrollbar, setHasScrollbar]);
+
+  return (
+    <List
+      height={height - 1}
+      itemCount={rows.length} // how many items we are going to render
+      itemSize={itemSize} // height of each row in pixel
+      width={'100%'}
+      itemKey={itemKey}
+      itemData={itemData}
+      ref={listRef}
+      outerElementType={SmoothScrollDiv}
+      onItemsRendered={({ overscanStopIndex }) => {
+        if (
+          onBottom &&
+          onBottomOffset != null &&
+          overscanStopIndex >= rows.length - 1 - onBottomOffset
+        ) {
+          onBottom(rows.length);
+        }
+      }}
+    >
+      {RenderRow}
+    </List>
+  );
+};
+
 export const VirtualizedRows = <
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
   rows,
   rowHeight,
-  setHasScrollbar,
   onBottom,
   onBottomOffset,
   RenderRow,
@@ -94,39 +144,19 @@ export const VirtualizedRows = <
   const itemData = useMemo(() => rows.slice(), [rows, columnsKey]);
   return (
     <AutoSizer disableWidth>
-      {({ height }) => {
-        return (
-          <List
-            height={height - 1}
-            itemCount={rows.length} // how many items we are going to render
-            itemSize={convertRemToPixels(tableRowHeight[rowHeight])} // height of each row in pixel
-            width={'100%'}
-            itemKey={itemKey}
-            itemData={itemData}
-            ref={listRef}
-            outerElementType={SmoothScrollDiv}
-            onItemsRendered={({
-              visibleStartIndex,
-              visibleStopIndex,
-              overscanStopIndex,
-            }) => {
-              setHasScrollbar(
-                visibleStopIndex - visibleStartIndex < overscanStopIndex,
-              );
-
-              if (
-                onBottom &&
-                onBottomOffset != null &&
-                overscanStopIndex >= rows.length - 1 - onBottomOffset
-              ) {
-                onBottom(rows.length);
-              }
-            }}
-          >
-            {RenderRow}
-          </List>
-        );
-      }}
+      {({ height }) => (
+        <VirtualizedList<DATA_ROW>
+          height={height}
+          rows={rows}
+          rowHeight={rowHeight}
+          itemData={itemData}
+          itemKey={itemKey}
+          listRef={listRef}
+          onBottom={onBottom}
+          onBottomOffset={onBottomOffset}
+          RenderRow={RenderRow}
+        />
+      )}
     </AutoSizer>
   );
 };
@@ -276,6 +306,7 @@ type TableRowsProps<
   RenderRow: ComponentType<ListChildComponentProps<Row<DATA_ROW>[]>>;
   listRef?: Ref<FixedSizeList<Row<DATA_ROW>[]>>;
 };
+
 export function TableRows<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -285,10 +316,9 @@ export function TableRows<
   RenderRow,
   listRef: externalListRef,
 }: TableRowsProps<DATA_ROW>) {
-  const { setHasScrollbar } = useTableScrollbar();
   const {
     rows,
-    status,
+    view,
     entityName,
     rowHeight,
     onBottom,
@@ -314,65 +344,44 @@ export function TableRows<
     return index;
   }
 
-  if (status === 'idle' || status === 'loading' || status === 'error') {
+  // The stand-ins below skip the children render function: render functions
+  // often hide `rows` when their own data is empty.
+  if (view === 'idle') {
+    // Nothing was requested (e.g. a disabled query): a loader would spin
+    // forever and "No results" would answer a question nobody asked.
+    return <NoResult height={tableRowHeight[rowHeight]} />;
+  }
+  if (view === 'loader' || view === 'error') {
     return (
       <UnsuccessfulResult
         name={entityName}
-        status={status}
+        status={view === 'loader' ? 'loading' : 'error'}
         locale={locale}
         rowHeight={rowHeight}
       />
     );
   }
-  if (status === 'success' || status === undefined) {
-    if (typeof children === 'function') {
-      if (rows.length) {
-        return children(
-          <VirtualizedRows<DATA_ROW>
-            rows={rows}
-            listRef={listRef}
-            itemKey={itemKey}
-            rowHeight={rowHeight}
-            setHasScrollbar={setHasScrollbar}
-            onBottom={onBottom}
-            onBottomOffset={onBottomOffset}
-            RenderRow={RenderRow}
-            columnsKey={columnsKey}
-          />,
-        );
-      } else {
-        return children(
-          <UnsuccessfulResult
-            rowHeight={rowHeight}
-            name={entityName}
-            status="noResult"
-          />,
-        );
-      }
-    } else if (rows.length) {
-      return (
-        <VirtualizedRows<DATA_ROW>
-          rows={rows}
-          listRef={listRef}
-          setHasScrollbar={setHasScrollbar}
-          onBottom={onBottom}
-          onBottomOffset={onBottomOffset}
-          itemKey={itemKey}
-          rowHeight={rowHeight}
-          RenderRow={RenderRow}
-          columnsKey={columnsKey}
-        />
-      );
-    } else {
-      return (
-        <UnsuccessfulResult
-          rowHeight={rowHeight}
-          name={entityName}
-          status="noResult"
-        />
-      );
-    }
-  }
 
-  return null;
+  const result =
+    view === 'rows' ? (
+      <VirtualizedRows<DATA_ROW>
+        rows={rows}
+        listRef={listRef}
+        itemKey={itemKey}
+        rowHeight={rowHeight}
+        onBottom={onBottom}
+        onBottomOffset={onBottomOffset}
+        RenderRow={RenderRow}
+        columnsKey={columnsKey}
+      />
+    ) : (
+      <UnsuccessfulResult
+        name={entityName}
+        status="noResult"
+        locale={locale}
+        rowHeight={rowHeight}
+      />
+    );
+
+  return typeof children === 'function' ? children(result) : result;
 }

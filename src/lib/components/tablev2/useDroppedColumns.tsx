@@ -150,7 +150,9 @@ export const useDroppedColumns = (hooks: Hooks<object>) => {
             Header: () => null,
             Cell: DroppedColumnsCell,
             disableSortBy: true,
-            cellStyle: { width: '60px', justifyContent: 'center' },
+            /* `flex`, not `width`: cells are reset to `min-width: 0`, so a bare width
+               stays shrinkable and an overflowing row squeezes this cell to zero. */
+            cellStyle: { flex: '0 0 60px', justifyContent: 'center' },
           },
         ]
       : columns,
