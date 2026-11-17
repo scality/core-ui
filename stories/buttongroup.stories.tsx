@@ -23,8 +23,8 @@ const GROUP_OPTIONS = [
 
 /**
  * Single-select segmented control — provide `value` + `onChange` and give each
- * child `Button` a `value`. This is the "Sort by" use case from maestro: the
- * selected criterion is highlighted, and re-selecting it toggles the direction.
+ * child `Button` a `value`. The selected criterion is highlighted, and
+ * re-selecting it toggles the direction.
  */
 export const SortBy = () => {
   const [sortBy, setSortBy] = useState<string>('name');
@@ -61,8 +61,7 @@ export const SortBy = () => {
 };
 
 /**
- * `null` value renders no selection — re-selecting the active option clears it,
- * matching maestro's optional "Group by".
+ * `null` value renders no selection — re-selecting the active option clears it.
  */
 export const GroupByClearable = () => {
   const [groupBy, setGroupBy] = useState<string | null>(null);

@@ -1282,10 +1282,10 @@ export const LogarithmicScaleBelowTheScientificThreshold: Story = {
         label: 'Error rate',
         data: [
           ['frontend', 0.42],
-          ['cloudserver', 0.0031],
+          ['objects', 0.0031],
           ['iam', 0.000042],
           ['metadata', 0.0000015],
-          ['sproxyd', 0],
+          ['storage', 0],
         ],
       },
     ] as const;
@@ -1344,10 +1344,10 @@ export const LinearAxisUnderTheScientificThreshold: Story = {
         label: 'Error rate',
         data: [
           ['frontend', 0.00042],
-          ['cloudserver', 0.00008],
+          ['objects', 0.00008],
           ['iam', 0.000013],
           ['metadata', 0.0000021],
-          ['sproxyd', 0],
+          ['storage', 0],
         ],
       },
     ] as const;
