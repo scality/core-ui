@@ -22,7 +22,6 @@ import { spacing } from '../../spacing';
 import {
   fontFamily,
   fontSize,
-  fontWeight,
   navbarHeight,
   navbarItemWidth,
   zIndex,
@@ -423,10 +422,6 @@ const TabsMenuPanel = styled.nav`
     & > div:focus-visible {
       ${FocusVisibleStyle}
       color: inherit;
-    }
-    a.selected,
-    & > .selected {
-      font-weight: ${fontWeight.bold};
     }
   }
 `;
