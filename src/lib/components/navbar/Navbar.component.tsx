@@ -242,14 +242,14 @@ const NavbarTabs = styled.div`
     ${(props) => {
     const { selectedActive } = props.theme;
     const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
+    const inactiveColor = navTextColor === props.theme.textPrimary ? props.theme.textSecondary : navTextColor;
     return css`
-        color: ${navTextColor};
+        color: ${inactiveColor};
         &:hover {
           background-color: ${getThemePropSelector('highlight')};
         }
         &.selected {
           color: ${navTextColor};
-          font-weight: bold;
           border-bottom-color: ${selectedActive};
         }
         // :focus-visible is the keyboard-only version of :focus
