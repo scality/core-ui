@@ -199,6 +199,11 @@ export type Props = {
 const getNavbarTextColor = (props) =>
   getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
 
+const getNavbarInactiveTextColor = (props) => {
+  const navTextColor = getNavbarTextColor(props);
+  return navTextColor === props.theme.textPrimary ? props.theme.textSecondary : navTextColor;
+};
+
 const NavbarContainer = styled.div.withConfig({
   componentId: 'sc-navbar',
 })`
@@ -240,8 +245,8 @@ const NavbarTabs = styled.div`
     border-top: ${spacing.r2} solid transparent;
     ${(props) => {
     const { selectedActive } = props.theme;
-    const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
-    const inactiveColor = navTextColor === props.theme.textPrimary ? props.theme.textSecondary : navTextColor;
+    const navTextColor = getNavbarTextColor(props);
+    const inactiveColor = getNavbarInactiveTextColor(props);
     return css`
         color: ${inactiveColor};
         &:hover {
@@ -268,8 +273,8 @@ const TabItem = styled.div<{ $selected: boolean }>`
   align-items: center;
   padding: 0 ${spacing.r16};
   ${(props) => {
-    const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
-    const inactiveColor = navTextColor === props.theme.textPrimary ? props.theme.textSecondary : navTextColor;
+    const navTextColor = getNavbarTextColor(props);
+    const inactiveColor = getNavbarInactiveTextColor(props);
     return css`
       color: ${props.$selected ? navTextColor : inactiveColor};
       &:hover {
