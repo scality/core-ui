@@ -270,8 +270,9 @@ const TabItem = styled.div<{ $selected: boolean }>`
   padding: 0 ${spacing.r16};
   ${(props) => {
     const navTextColor = getContrastText(props.theme.navbarBackground, props.theme.textPrimary, props.theme.textReverse) ?? props.theme.textPrimary;
+    const inactiveColor = navTextColor === props.theme.textPrimary ? props.theme.textSecondary : navTextColor;
     return css`
-      color: ${navTextColor};
+      color: ${props.$selected ? navTextColor : inactiveColor};
       &:hover {
         border-bottom: ${spacing.r2} solid;
         border-top: ${spacing.r2} solid;
