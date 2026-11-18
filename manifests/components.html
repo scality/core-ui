@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">4/70 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">64/70 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/70 without API description</a><span class="filter-pill ok" aria-disabled="true">401 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/401 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">4/70 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">64/70 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/70 without API description</a><span class="filter-pill ok" aria-disabled="true">402 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/402 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>4.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.9s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -15317,7 +15317,7 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
       <div class="badges">
         <label for="c-41-components-navigation-navbar-props" class="badge ok as-toggle">6 prop types</label>
         <label for="c-41-components-navigation-navbar-info" class="badge info as-toggle">1 info</label>
-        <label for="c-41-components-navigation-navbar-stories" class="badge ok as-toggle">7 stories · 5 incomplete</label>
+        <label for="c-41-components-navigation-navbar-stories" class="badge ok as-toggle">8 stories · 5 incomplete</label>
         
         
       </div>
@@ -15416,6 +15416,50 @@ import { action } from 'storybook/actions';</code></pre>
         title: &#39;Policies&#39;,
         link: &lt;a href=&quot;/policies&quot;&gt;Policies&lt;/a&gt;,
         onClick: action(&#39;Policies clicked&#39;),
+      },
+    ]}
+    rightActions={[]} /&gt;;</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Selected Tab In Middle</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const SelectedTabInMiddle = () =&gt; &lt;Navbar
+    logo={&lt;Logo /&gt;}
+    tabs={[
+      {
+        selected: false,
+        title: &#39;Groups&#39;,
+        link: &lt;a href=&quot;/groups&quot;&gt;Groups&lt;/a&gt;,
+        onClick: action(&#39;Groups clicked&#39;),
+      },
+      {
+        selected: false,
+        title: &#39;Users&#39;,
+        link: &lt;a href=&quot;/users&quot;&gt;Users&lt;/a&gt;,
+        onClick: action(&#39;Users clicked&#39;),
+      },
+      {
+        selected: true,
+        title: &#39;Policies&#39;,
+        link: &lt;a href=&quot;/policies&quot;&gt;Policies&lt;/a&gt;,
+        onClick: action(&#39;Policies clicked&#39;),
+      },
+      {
+        selected: false,
+        title: &#39;Buckets&#39;,
+        link: &lt;a href=&quot;/buckets&quot;&gt;Buckets&lt;/a&gt;,
+        onClick: action(&#39;Buckets clicked&#39;),
+      },
+      {
+        selected: false,
+        title: &#39;Workflows&#39;,
+        link: &lt;a href=&quot;/workflows&quot;&gt;Workflows&lt;/a&gt;,
+        onClick: action(&#39;Workflows clicked&#39;),
       },
     ]}
     rightActions={[]} /&gt;;</code></pre>

@@ -1515,6 +1515,11 @@
           "snippet": "const BasicNavbar = () => <Navbar\n    logo={<Logo />}\n    tabs={[\n      {\n        selected: true,\n        title: 'Groups',\n        link: <a href=\"/groups\">Groups</a>,\n        onClick: action('Groups clicked'),\n      },\n      {\n        selected: false,\n        title: 'Users',\n        link: <a href=\"/users\">Users</a>,\n        onClick: action('Users clicked'),\n      },\n      {\n        selected: false,\n        title: 'Policies',\n        link: <a href=\"/policies\">Policies</a>,\n        onClick: action('Policies clicked'),\n      },\n    ]}\n    rightActions={[]} />;"
         },
         {
+          "id": "components-navigation-navbar--selected-tab-in-middle",
+          "name": "Selected Tab In Middle",
+          "snippet": "const SelectedTabInMiddle = () => <Navbar\n    logo={<Logo />}\n    tabs={[\n      {\n        selected: false,\n        title: 'Groups',\n        link: <a href=\"/groups\">Groups</a>,\n        onClick: action('Groups clicked'),\n      },\n      {\n        selected: false,\n        title: 'Users',\n        link: <a href=\"/users\">Users</a>,\n        onClick: action('Users clicked'),\n      },\n      {\n        selected: true,\n        title: 'Policies',\n        link: <a href=\"/policies\">Policies</a>,\n        onClick: action('Policies clicked'),\n      },\n      {\n        selected: false,\n        title: 'Buckets',\n        link: <a href=\"/buckets\">Buckets</a>,\n        onClick: action('Buckets clicked'),\n      },\n      {\n        selected: false,\n        title: 'Workflows',\n        link: <a href=\"/workflows\">Workflows</a>,\n        onClick: action('Workflows clicked'),\n      },\n    ]}\n    rightActions={[]} />;"
+        },
+        {
           "id": "components-navigation-navbar--navbar-with-right-actions",
           "name": "Navbar With Right Actions",
           "snippet": "const NavbarWithRightActions = () => <Navbar\n    logo={<Logo />}\n    tabs={[\n      {\n        selected: true,\n        title: 'Groups',\n        link: <a href=\"/groups\">Groups</a>,\n        onClick: action('Groups clicked'),\n      },\n      {\n        selected: false,\n        title: 'Users',\n        link: <a href=\"/users\">Users</a>,\n        onClick: action('Users clicked'),\n      },\n      {\n        selected: false,\n        title: 'Policies',\n        link: <a href=\"/policies\">Policies</a>,\n        onClick: action('Policies clicked'),\n      },\n    ]}\n    rightActions={[\n      notificationsButton,\n      whatsNewButton,\n      themeButton,\n      userAction,\n    ]} />;",
@@ -12905,6 +12910,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 4187
+    "durationMs": 5860
   }
 }
