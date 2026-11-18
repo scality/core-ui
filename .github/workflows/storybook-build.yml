@@ -1,18 +1,12 @@
 name: build storybook
 
 on:
+  # Bert-E still waits for these checks on its integration branches. Drop this
+  # push trigger once the repository no longer goes through Bert-E.
   push:
-    branches:
-      - 'user/**'
-      - 'feature/**'
-      - 'improvement/**'
-      - 'bugfix/**'
-      - 'w/**'
-      - 'q/**'
-      - 'hotfix/**'
-      - 'dependabot/**'
+    branches: ['w/**', 'q/**']
+  # No base-branch filter, so a pull request stacked on another one is tested too.
   pull_request:
-    branches: [development/*, stabilization/*, hotfix/*]
   workflow_dispatch:
 
 jobs:
