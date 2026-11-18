@@ -8,11 +8,17 @@ import { Banner } from './Banner.component';
 describe('Banner', () => {
   const { Wrapper } = getWrapper();
 
-  it('should render with text content', () => {
-    render(<Banner variant="base">Some text content</Banner>, {
-      wrapper: Wrapper,
-    });
+  it('should render with text content and no icon by default', () => {
+    const { container } = render(
+      <Banner variant="base">Some text content</Banner>,
+      { wrapper: Wrapper },
+    );
     expect(screen.getByText('Some text content')).toBeInTheDocument();
+    // Icon lazy-loads its glyph: an <i class="svg-inline--fa"> placeholder renders
+    // before any <svg> exists, so `svg` alone would pass even with an icon present.
+    expect(
+      container.querySelector('svg, .svg-inline--fa'),
+    ).not.toBeInTheDocument();
   });
 
   it('should render with title', () => {
