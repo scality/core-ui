@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -1029,7 +1029,8 @@ import { MemoryRouter } from 'react-router';</code></pre>
   const attachmentOperations: AttachmentOperation&lt;string&gt;[] = Array.from(
     { length: 24 },
     (_, index) =&gt; ({
-      action: index % 4 === 0 ? AttachmentAction.REMOVE : AttachmentAction.ADD,
+      action:
+        index % 4 === 0 ? AttachmentAction.REMOVE : AttachmentAction.ADD,
       entity: {
         name: `bucket-${String(index + 1).padStart(2, &#39;0&#39;)}`,
         id: `id-${index + 1}`,
@@ -1185,7 +1186,7 @@ title?: string
 variant: Variant
 
 /**
- * When true, shows the default icon (Info-circle for base, Exclamation-circle otherwise) with variant color and &quot;lg&quot; size. 
+ * When true, shows the default icon (Info-circle for base, Exclamation-circle otherwise) with variant color and &quot;lg&quot; size.
  * Use icon prop to override the default icon.
  */
 withDefaultIcon?: boolean = false</code></pre>
@@ -3665,7 +3666,6 @@ import { Icon } from '../../src/lib';</code></pre>
       &lt;Button
         icon={&lt;i className=&quot;fas fa-sync&quot; /&gt;}
         tooltip={{
-         
           overlay: &#39;Refresh the metrics&#39;,
           placement: &#39;top&#39;,
         }}
@@ -3679,8 +3679,7 @@ import { Icon } from '../../src/lib';</code></pre>
       &lt;Button
         icon={&lt;i className=&quot;fas fa-calendar-week&quot; /&gt;}
         tooltip={{
-          overlayStyle: {
-          },
+          overlayStyle: {},
           overlay: &#39;Metric over a period&#39;,
           placement: &#39;top&#39;,
         }}
@@ -4089,9 +4088,17 @@ re-selecting it toggles the direction.</div>
   return (
     &lt;Wrapper&gt;
       &lt;Title&gt;Group by (clearable)&lt;/Title&gt;
-      &lt;ButtonGroup value={groupBy} onChange={handleChange} aria-label=&quot;Group by&quot;&gt;
+      &lt;ButtonGroup
+        value={groupBy}
+        onChange={handleChange}
+        aria-label=&quot;Group by&quot;
+      &gt;
         {GROUP_OPTIONS.map((option) =&gt; (
-          &lt;Button key={option.value} value={option.value} label={option.label} /&gt;
+          &lt;Button
+            key={option.value}
+            value={option.value}
+            label={option.label}
+          /&gt;
         ))}
       &lt;/ButtonGroup&gt;
     &lt;/Wrapper&gt;
@@ -4119,7 +4126,11 @@ re-selecting it toggles the direction.</div>
         aria-label=&quot;View&quot;
       &gt;
         &lt;Button value=&quot;list&quot; label=&quot;List&quot; icon={&lt;Icon name=&quot;LayerGroup&quot; /&gt;} /&gt;
-        &lt;Button value=&quot;network&quot; label=&quot;Network&quot; icon={&lt;Icon name=&quot;Network&quot; /&gt;} /&gt;
+        &lt;Button
+          value=&quot;network&quot;
+          label=&quot;Network&quot;
+          icon={&lt;Icon name=&quot;Network&quot; /&gt;}
+        /&gt;
         &lt;Button value=&quot;map&quot; label=&quot;Map&quot; icon={&lt;Icon name=&quot;Map-marker&quot; /&gt;} /&gt;
       &lt;/ButtonGroup&gt;
     &lt;/Wrapper&gt;
@@ -6995,9 +7006,23 @@ import { action } from 'storybook/actions';</code></pre>
     &lt;div style={{ display: &#39;flex&#39;, gap: &#39;2rem&#39;, alignItems: &#39;center&#39; }}&gt;
       &lt;Checkbox label=&quot;Unchecked&quot; checked={false} onChange={() =&gt; {}} /&gt;
       &lt;Checkbox label=&quot;Checked&quot; checked={true} onChange={() =&gt; {}} /&gt;
-      &lt;Checkbox ref={indeterminateRef} label=&quot;Indeterminate&quot; onChange={() =&gt; {}} /&gt;
-      &lt;Checkbox label=&quot;Disabled&quot; disabled checked={false} onChange={() =&gt; {}} /&gt;
-      &lt;Checkbox label=&quot;Disabled checked&quot; disabled checked={true} onChange={() =&gt; {}} /&gt;
+      &lt;Checkbox
+        ref={indeterminateRef}
+        label=&quot;Indeterminate&quot;
+        onChange={() =&gt; {}}
+      /&gt;
+      &lt;Checkbox
+        label=&quot;Disabled&quot;
+        disabled
+        checked={false}
+        onChange={() =&gt; {}}
+      /&gt;
+      &lt;Checkbox
+        label=&quot;Disabled checked&quot;
+        disabled
+        checked={true}
+        onChange={() =&gt; {}}
+      /&gt;
     &lt;/div&gt;
   );
 };</code></pre>
@@ -7046,7 +7071,12 @@ import { action } from 'storybook/actions';</code></pre>
 
   return (
     &lt;Box width=&quot;100%&quot; height=&quot;250px&quot;&gt;
-      &lt;Table status=&quot;success&quot; columns={columns} data={data} defaultSortingKey={&#39;name&#39;}&gt;
+      &lt;Table
+        status=&quot;success&quot;
+        columns={columns}
+        data={data}
+        defaultSortingKey={&#39;name&#39;}
+      &gt;
         &lt;Table.MultiSelectableContent
           onMultiSelectionChanged={action(&#39;Selection changed&#39;)}
         /&gt;
@@ -7501,20 +7531,23 @@ import { Text } from '../src/lib/components/text/Text.component';</code></pre>
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
-   6 | import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
-   7 |
-&gt;  8 | export default {
+   9 | import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
+  10 |
+&gt; 11 | export default {
      | ^
-   9 |   title: &#39;Style/ContentExamples&#39;,
-  10 |   tags: [&#39;!dev&#39;, &#39;!autodocs&#39;],
-  11 | };
+  12 |   title: &#39;Style/ContentExamples&#39;,
+  13 |   tags: [&#39;!dev&#39;, &#39;!autodocs&#39;],
+  14 | };
 
 ./stories/content.stories.tsx:
 import React, { useState } from &#39;react&#39;;
 import { Modal } from &#39;../src/lib/components/modal/Modal.component&#39;;
 import { Button } from &#39;../src/lib/components/buttonv2/Buttonv2.component&#39;;
 import { Icon } from &#39;../src/lib/components/icon/Icon.component&#39;;
-import { FormGroup, FormSection } from &#39;../src/lib/components/form/Form.component&#39;;
+import {
+  FormGroup,
+  FormSection,
+} from &#39;../src/lib/components/form/Form.component&#39;;
 import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
 
 export default {
@@ -7570,7 +7603,9 @@ export const ValidationMessages = {
         label=&quot;Days&quot;
         id=&quot;days&quot;
         required
-        content={&lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;}
+        content={
+          &lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;
+        }
         error=&quot;The number of days must be at least 1.&quot;
         helpErrorPosition=&quot;bottom&quot;
       /&gt;
@@ -7662,7 +7697,9 @@ export const ValidationMessages = {
       label=&quot;Days&quot;
       id=&quot;days&quot;
       required
-      content={&lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;}
+      content={
+        &lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;
+      }
       error=&quot;The number of days must be at least 1.&quot;
       helpErrorPosition=&quot;bottom&quot;
     /&gt;
@@ -13977,7 +14014,7 @@ import { BrowserRouter } from 'react-router-dom';</code></pre>
               
               <pre><code>const Layout2TransparentBackground = () =&gt; (
   &lt;Layout2
-    variant=&#39;transparent&#39;
+    variant=&quot;transparent&quot;
     headerNavigation={
       &lt;HeaderComponent&gt;
         &lt;h3&gt;Header navigation&lt;/h3&gt;
@@ -14911,7 +14948,12 @@ or without `extra`, the group must hug the right edge.</div>
   ];
   return (
     &lt;div style={{ height: &#39;300px&#39;, paddingTop: &#39;20px&#39; }}&gt;
-      &lt;Table status=&quot;success&quot; columns={columns} data={data} defaultSortingKey={&#39;firstName&#39;}&gt;
+      &lt;Table
+        status=&quot;success&quot;
+        columns={columns}
+        data={data}
+        defaultSortingKey={&#39;firstName&#39;}
+      &gt;
         &lt;Table.SingleSelectableContent
           rowHeight=&quot;h32&quot;
           separationLineVariant=&quot;backgroundLevel3&quot;
@@ -15085,17 +15127,23 @@ verify the 480 px default / 90 vw max rules in one place.</div>
     &lt;/ModalStory&gt;
 
     {/* 4. Core-UI Table — wide: modal sizes to table content */}
-    &lt;ModalStory wide label=&quot;Core-UI table&quot; title=&quot;Storage nodes (core-ui Table)&quot;&gt;
+    &lt;ModalStory
+      wide
+      label=&quot;Core-UI table&quot;
+      title=&quot;Storage nodes (core-ui Table)&quot;
+    &gt;
       {CORE_UI_TABLE}
     &lt;/ModalStory&gt;
 
     {/* 5. Core-UI Table nested inside multiple wrappers — wide */}
-    &lt;ModalStory wide label=&quot;Nested table&quot; title=&quot;Storage nodes (nested wrappers)&quot;&gt;
+    &lt;ModalStory
+      wide
+      label=&quot;Nested table&quot;
+      title=&quot;Storage nodes (nested wrappers)&quot;
+    &gt;
       &lt;div&gt;
         &lt;div style={{ padding: &#39;8px&#39; }}&gt;
-          &lt;div&gt;
-            {CORE_UI_TABLE}
-          &lt;/div&gt;
+          &lt;div&gt;{CORE_UI_TABLE}&lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/ModalStory&gt;
@@ -15543,7 +15591,12 @@ import { action } from 'storybook/actions';</code></pre>
               
               <pre><code>const NavbarWithLogo = () =&gt; &lt;Navbar
     logo={(&lt;span
-      style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: 8, fontWeight: 700 }}
+      style={{
+        display: &#39;flex&#39;,
+        alignItems: &#39;center&#39;,
+        gap: 8,
+        fontWeight: 700,
+      }}
     &gt;
       &lt;i className=&quot;fas fa-cube&quot; /&gt;Acme Cloud
             &lt;/span&gt;)}
@@ -16778,8 +16831,7 @@ import { action } from 'storybook/actions';</code></pre>
           value: &#39;compliance&#39;,
           label: &#39;Compliance&#39;,
           disabled: true,
-          disabledReason:
-            &#39;Compliance mode requires an upgraded license.&#39;,
+          disabledReason: &#39;Compliance mode requires an upgraded license.&#39;,
         },
         { value: &#39;none&#39;, label: &#39;None&#39; },
       ]}
@@ -17421,56 +17473,54 @@ A navigation between two pages with the same pattern, such as from one node to a
     &lt;Title&gt;Wrapper for custom scrollbar&lt;/Title&gt;
     &lt;ScrollbarWrapper&gt;
       &lt;Demo&gt;
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-        varius urna sed rutrum blandit. Nunc neque libero, gravida at
-        pharetra id, fringilla eget tortor. Proin ut nunc auctor, aliquet
-        neque ut, dignissim nisl. Mauris ut odio nibh. Cras et faucibus
-        mauris, non tincidunt est. Ut sed dolor arcu. Proin sollicitudin
-        ante ac lectus faucibus, vitae ullamcorper mi convallis. Sed at
-        porttitor nunc. Vestibulum est leo, ornare ut tellus vitae, dictum
-        posuere quam. Ut vitae lectus a metus consequat scelerisque. Mauris
-        feugiat pretium dui non blandit. Mauris ut consequat nisi, at
-        aliquam purus. Vivamus a pretium urna, ut rutrum libero. Etiam
-        gravida sed nisi lobortis tincidunt. Aenean mauris urna, varius quis
-        aliquam ac, consequat quis elit. Phasellus rhoncus ipsum vitae
-        fermentum suscipit. Sed purus diam, venenatis ut quam eget,
-        venenatis pretium mi. Vivamus aliquam orci eu ante bibendum tempus.
-        Donec ullamcorper sapien velit, et fermentum massa rhoncus sit amet.
-        Quisque est tortor, pellentesque eu hendrerit non, placerat sed
-        odio. Proin id nisi cursus odio convallis pretium. Sed non nibh
-        quam. Proin accumsan mi ac orci convallis aliquam ac eu neque.
-        Suspendisse lorem ligula, aliquet vel dictum in, imperdiet nec
-        mauris. Vivamus consequat mattis est eu scelerisque. Class aptent
-        taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-        himenaeos. Fusce et quam id quam eleifend auctor. Ut ultrices
-        placerat leo vitae tristique. Nulla sit amet eleifend eros, et
-        vestibulum mauris. Sed fringilla orci vitae arcu feugiat, eu
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius
+        urna sed rutrum blandit. Nunc neque libero, gravida at pharetra id,
+        fringilla eget tortor. Proin ut nunc auctor, aliquet neque ut,
+        dignissim nisl. Mauris ut odio nibh. Cras et faucibus mauris, non
+        tincidunt est. Ut sed dolor arcu. Proin sollicitudin ante ac lectus
+        faucibus, vitae ullamcorper mi convallis. Sed at porttitor nunc.
+        Vestibulum est leo, ornare ut tellus vitae, dictum posuere quam. Ut
+        vitae lectus a metus consequat scelerisque. Mauris feugiat pretium dui
+        non blandit. Mauris ut consequat nisi, at aliquam purus. Vivamus a
+        pretium urna, ut rutrum libero. Etiam gravida sed nisi lobortis
+        tincidunt. Aenean mauris urna, varius quis aliquam ac, consequat quis
+        elit. Phasellus rhoncus ipsum vitae fermentum suscipit. Sed purus
+        diam, venenatis ut quam eget, venenatis pretium mi. Vivamus aliquam
+        orci eu ante bibendum tempus. Donec ullamcorper sapien velit, et
+        fermentum massa rhoncus sit amet. Quisque est tortor, pellentesque eu
+        hendrerit non, placerat sed odio. Proin id nisi cursus odio convallis
+        pretium. Sed non nibh quam. Proin accumsan mi ac orci convallis
+        aliquam ac eu neque. Suspendisse lorem ligula, aliquet vel dictum in,
+        imperdiet nec mauris. Vivamus consequat mattis est eu scelerisque.
+        Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+        per inceptos himenaeos. Fusce et quam id quam eleifend auctor. Ut
+        ultrices placerat leo vitae tristique. Nulla sit amet eleifend eros,
+        et vestibulum mauris. Sed fringilla orci vitae arcu feugiat, eu
         tincidunt tortor tempus. Aliquam facilisis purus in nisi gravida
         sagittis. Donec dictum finibus purus nec luctus. Nullam ultrices
         bibendum risus condimentum sollicitudin. Quisque ac ultricies dolor.
         In dictum vel ipsum at porta. Aenean id mi at orci ultrices faucibus
         eu id odio. Morbi non vehicula lorem. Ut aliquet molestie sagittis.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-        lacinia odio a arcu ultricies, ut mollis nisl suscipit. Etiam sem
-        lectus, cursus in ultrices ut, aliquet id libero. Aliquam at lorem
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacinia
+        odio a arcu ultricies, ut mollis nisl suscipit. Etiam sem lectus,
+        cursus in ultrices ut, aliquet id libero. Aliquam at lorem
         scelerisque, tempor ligula eu, congue eros. Maecenas vel enim eget
         odio venenatis viverra. Morbi eu magna tincidunt, ultrices urna id,
         varius mauris. Suspendisse lorem purus, hendrerit vel leo eu, dictum
         fermentum mauris. Donec a convallis orci. Morbi est nisi, sodales id
         scelerisque ac, sollicitudin et ex. Sed consequat interdum semper.
         Integer imperdiet eleifend sem eu vulputate. Nunc porttitor aliquet
-        sem, nec tempus ipsum eleifend nec. Duis accumsan pulvinar
-        ultricies. Cras vel commodo diam, id tempor urna. Aliquam in
-        ultrices justo, vitae condimentum sapien. Maecenas viverra nisl ut
-        ante fermentum vehicula. Duis ultrices, orci a fringilla posuere,
-        ante diam laoreet velit, vitae condimentum mi turpis sed ipsum.
-        Nullam rhoncus erat turpis, at interdum ligula venenatis non.
-        Maecenas auctor sapien ac sem maximus vestibulum. Proin eget congue
-        tellus. Suspendisse metus eros, egestas in nisl in, viverra feugiat
-        orci. Maecenas sodales lorem libero, a maximus ex malesuada
-        sagittis. Etiam tempor, tellus id suscipit congue, mauris nulla
-        fermentum nibh, quis fringilla mi tellus at ex. Nam mattis placerat
-        lacus, nec laoreet libero faucibus et.
+        sem, nec tempus ipsum eleifend nec. Duis accumsan pulvinar ultricies.
+        Cras vel commodo diam, id tempor urna. Aliquam in ultrices justo,
+        vitae condimentum sapien. Maecenas viverra nisl ut ante fermentum
+        vehicula. Duis ultrices, orci a fringilla posuere, ante diam laoreet
+        velit, vitae condimentum mi turpis sed ipsum. Nullam rhoncus erat
+        turpis, at interdum ligula venenatis non. Maecenas auctor sapien ac
+        sem maximus vestibulum. Proin eget congue tellus. Suspendisse metus
+        eros, egestas in nisl in, viverra feugiat orci. Maecenas sodales lorem
+        libero, a maximus ex malesuada sagittis. Etiam tempor, tellus id
+        suscipit congue, mauris nulla fermentum nibh, quis fringilla mi tellus
+        at ex. Nam mattis placerat lacus, nec laoreet libero faucibus et.
       &lt;/Demo&gt;
     &lt;/ScrollbarWrapper&gt;
   &lt;/Wrapper&gt;
@@ -18310,10 +18360,30 @@ import { Icon } from '../../src/lib/components/icon/Icon.component';</code></pre
             placeholder=&quot;Select storage type&quot;
             onChange={(v) =&gt; updateArgs({ value: v })}
             value={value}&gt;{[
-              &lt;Select.Option key=&quot;cloud&quot; value=&quot;cloud&quot; icon={&lt;Icon name=&quot;Cloud-backend&quot; /&gt;}&gt;Cloud&lt;/Select.Option&gt;,
-              &lt;Select.Option key=&quot;datacenter&quot; value=&quot;datacenter&quot; icon={&lt;Icon name=&quot;Datacenter&quot; /&gt;}&gt;On-premises&lt;/Select.Option&gt;,
-              &lt;Select.Option key=&quot;tape&quot; value=&quot;tape&quot; icon={&lt;Icon name=&quot;Tape&quot; /&gt;}&gt;Tape&lt;/Select.Option&gt;,
-              &lt;Select.Option key=&quot;network&quot; value=&quot;network&quot; icon={&lt;Icon name=&quot;Network&quot; /&gt;}&gt;Network&lt;/Select.Option&gt;,
+              &lt;Select.Option
+                key=&quot;cloud&quot;
+                value=&quot;cloud&quot;
+                icon={&lt;Icon name=&quot;Cloud-backend&quot; /&gt;}
+              &gt;
+                Cloud
+              &lt;/Select.Option&gt;,
+              &lt;Select.Option
+                key=&quot;datacenter&quot;
+                value=&quot;datacenter&quot;
+                icon={&lt;Icon name=&quot;Datacenter&quot; /&gt;}
+              &gt;
+                On-premises
+              &lt;/Select.Option&gt;,
+              &lt;Select.Option key=&quot;tape&quot; value=&quot;tape&quot; icon={&lt;Icon name=&quot;Tape&quot; /&gt;}&gt;
+                Tape
+              &lt;/Select.Option&gt;,
+              &lt;Select.Option
+                key=&quot;network&quot;
+                value=&quot;network&quot;
+                icon={&lt;Icon name=&quot;Network&quot; /&gt;}
+              &gt;
+                Network
+              &lt;/Select.Option&gt;,
             ]}&lt;/Select&gt;
     );
 };</code></pre>
@@ -18807,17 +18877,33 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
   };
 
   return (
-    &lt;div style={{ display: &#39;flex&#39;, gap: &#39;3rem&#39;, alignItems: &#39;flex-start&#39;, paddingTop: &#39;1.5rem&#39;, minHeight: &#39;220px&#39; }}&gt;
+    &lt;div
+      style={{
+        display: &#39;flex&#39;,
+        gap: &#39;3rem&#39;,
+        alignItems: &#39;flex-start&#39;,
+        paddingTop: &#39;1.5rem&#39;,
+        minHeight: &#39;220px&#39;,
+      }}
+    &gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Checkbox&lt;/div&gt;
         &lt;div style={{ display: &#39;flex&#39;, alignItems: &#39;center&#39;, gap: &#39;0.5rem&#39; }}&gt;
           &lt;span&gt;Enable versioning&lt;/span&gt;
-          &lt;Checkbox checked={checked} onChange={(e) =&gt; setChecked(e.target.checked)} /&gt;
+          &lt;Checkbox
+            checked={checked}
+            onChange={(e) =&gt; setChecked(e.target.checked)}
+          /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Toggle&lt;/div&gt;
-        &lt;Toggle name=&quot;overview-toggle&quot; toggle={toggle} label=&quot;List versions&quot; onChange={() =&gt; setToggle(!toggle)} /&gt;
+        &lt;Toggle
+          name=&quot;overview-toggle&quot;
+          toggle={toggle}
+          label=&quot;List versions&quot;
+          onChange={() =&gt; setToggle(!toggle)}
+        /&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Radio&lt;/div&gt;
@@ -18834,7 +18920,12 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Select&lt;/div&gt;
-        &lt;Select id=&quot;overview-select&quot; placeholder=&quot;Select an option&quot; value={select} onChange={(v) =&gt; setSelect(v as string)}&gt;
+        &lt;Select
+          id=&quot;overview-select&quot;
+          placeholder=&quot;Select an option&quot;
+          value={select}
+          onChange={(v) =&gt; setSelect(v as string)}
+        &gt;
           &lt;Select.Option value=&quot;a&quot;&gt;Option A&lt;/Select.Option&gt;
           &lt;Select.Option value=&quot;b&quot;&gt;Option B&lt;/Select.Option&gt;
           &lt;Select.Option value=&quot;c&quot;&gt;Option C&lt;/Select.Option&gt;
@@ -20222,9 +20313,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
               </div>
               
               
-              <pre><code>const StateCompleted = () =&gt; (
-  &lt;Steppers steps={STATE_STEPS} activeStep={2} /&gt;
-);</code></pre>
+              <pre><code>const StateCompleted = () =&gt; &lt;Steppers steps={STATE_STEPS} activeStep={2} /&gt;;</code></pre>
               
             </div>
             <div class="note ok">
@@ -20738,7 +20827,12 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
           paddingTop: &#39;20px&#39;,
         }}
       &gt;
-        &lt;Table status=&quot;success&quot; columns={columns} data={data} defaultSortingKey={&#39;health&#39;}&gt;
+        &lt;Table
+          status=&quot;success&quot;
+          columns={columns}
+          data={data}
+          defaultSortingKey={&#39;health&#39;}
+        &gt;
           &lt;Table.SingleSelectableContent
             rowHeight=&quot;h32&quot;
             separationLineVariant=&quot;backgroundLevel3&quot;
@@ -21140,7 +21234,12 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
           /&gt;
         &lt;/Box&gt;
         &lt;Box width=&quot;500px&quot; height=&quot;200px&quot;&gt;
-          &lt;Table status=&quot;success&quot; columns={columns2} data={data2} defaultSortingKey={&#39;health&#39;}&gt;
+          &lt;Table
+            status=&quot;success&quot;
+            columns={columns2}
+            data={data2}
+            defaultSortingKey={&#39;health&#39;}
+          &gt;
             &lt;Table.MultiSelectableContent
               onMultiSelectionChanged={(rows) =&gt; {
                 console.log(
@@ -21191,7 +21290,12 @@ import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';</code
   const { background } = args;
   return (
     &lt;Box width=&quot;500px&quot; height=&quot;200px&quot;&gt;
-      &lt;Table status=&quot;loading&quot; columns={columns} data={[]} defaultSortingKey={&#39;firstName&#39;}&gt;
+      &lt;Table
+        status=&quot;loading&quot;
+        columns={columns}
+        data={[]}
+        defaultSortingKey={&#39;firstName&#39;}
+      &gt;
         &lt;Table.SingleSelectableContent
           rowHeight=&quot;h40&quot;
           separationLineVariant={background}
@@ -22617,10 +22721,10 @@ import { BasicText } from '../src/lib';</code></pre>
       args.status === &#39;error&#39;
         ? &#39;Times-circle&#39;
         : args.status === &#39;warning&#39;
-        ? &#39;Exclamation-circle&#39;
-        : args.status === &#39;success&#39;
-        ? &#39;Check-circle&#39;
-        : &#39;Info-circle&#39;;
+          ? &#39;Exclamation-circle&#39;
+          : args.status === &#39;success&#39;
+            ? &#39;Check-circle&#39;
+            : &#39;Info-circle&#39;;
 
     return (
         &lt;div style={{ height: &#39;30vh&#39; }}&gt;
@@ -22786,7 +22890,12 @@ toggle: boolean</code></pre>
               <pre><code>const AmbiguousLabel = () =&gt; {
   const [toggle, setToggle] = useState(false);
   return (
-    &lt;Toggle name=&quot;ambiguous&quot; toggle={toggle} label=&quot;Active&quot; onChange={() =&gt; setToggle(!toggle)} /&gt;
+    &lt;Toggle
+      name=&quot;ambiguous&quot;
+      toggle={toggle}
+      label=&quot;Active&quot;
+      onChange={() =&gt; setToggle(!toggle)}
+    /&gt;
   );
 };</code></pre>
               
@@ -22801,9 +22910,20 @@ toggle: boolean</code></pre>
               <pre><code>const LabelLeftToggleRight = () =&gt; {
   const [toggle, setToggle] = useState(false);
   return (
-    &lt;div style={{ display: &#39;flex&#39;, justifyContent: &#39;space-between&#39;, alignItems: &#39;center&#39;, width: &#39;16rem&#39; }}&gt;
+    &lt;div
+      style={{
+        display: &#39;flex&#39;,
+        justifyContent: &#39;space-between&#39;,
+        alignItems: &#39;center&#39;,
+        width: &#39;16rem&#39;,
+      }}
+    &gt;
       &lt;span&gt;Enable object lock&lt;/span&gt;
-      &lt;Toggle name=&quot;label-left&quot; toggle={toggle} onChange={() =&gt; setToggle(!toggle)} /&gt;
+      &lt;Toggle
+        name=&quot;label-left&quot;
+        toggle={toggle}
+        onChange={() =&gt; setToggle(!toggle)}
+      /&gt;
     &lt;/div&gt;
   );
 };</code></pre>
@@ -22819,7 +22939,12 @@ toggle: boolean</code></pre>
               <pre><code>const LabelRightToggleLeft = () =&gt; {
   const [toggle, setToggle] = useState(false);
   return (
-    &lt;Toggle name=&quot;label-right&quot; toggle={toggle} label=&quot;List versions&quot; onChange={() =&gt; setToggle(!toggle)} /&gt;
+    &lt;Toggle
+      name=&quot;label-right&quot;
+      toggle={toggle}
+      label=&quot;List versions&quot;
+      onChange={() =&gt; setToggle(!toggle)}
+    /&gt;
   );
 };</code></pre>
               
@@ -22838,10 +22963,22 @@ toggle: boolean</code></pre>
     marginBottom: &#39;0.75rem&#39;,
   };
   return (
-    &lt;div style={{ display: &#39;flex&#39;, gap: &#39;3rem&#39;, alignItems: &#39;flex-start&#39;, paddingTop: &#39;1.5rem&#39; }}&gt;
+    &lt;div
+      style={{
+        display: &#39;flex&#39;,
+        gap: &#39;3rem&#39;,
+        alignItems: &#39;flex-start&#39;,
+        paddingTop: &#39;1.5rem&#39;,
+      }}
+    &gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Off&lt;/div&gt;
-        &lt;Toggle name=&quot;s1&quot; toggle={false} label=&quot;Feature&quot; onChange={() =&gt; {}} /&gt;
+        &lt;Toggle
+          name=&quot;s1&quot;
+          toggle={false}
+          label=&quot;Feature&quot;
+          onChange={() =&gt; {}}
+        /&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;On&lt;/div&gt;
@@ -22849,11 +22986,23 @@ toggle: boolean</code></pre>
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Disabled&lt;/div&gt;
-        &lt;Toggle name=&quot;s3&quot; toggle={false} label=&quot;Feature&quot; disabled onChange={() =&gt; {}} /&gt;
+        &lt;Toggle
+          name=&quot;s3&quot;
+          toggle={false}
+          label=&quot;Feature&quot;
+          disabled
+          onChange={() =&gt; {}}
+        /&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;div style={labelStyle}&gt;Disabled on&lt;/div&gt;
-        &lt;Toggle name=&quot;s4&quot; toggle={true} label=&quot;Feature&quot; disabled onChange={() =&gt; {}} /&gt;
+        &lt;Toggle
+          name=&quot;s4&quot;
+          toggle={true}
+          label=&quot;Feature&quot;
+          disabled
+          onChange={() =&gt; {}}
+        /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );
@@ -24365,20 +24514,23 @@ export const ChartStates: StoryObj = {
     <div class="note err">
       <div class="note-title">API error</div>
       <div class="note-body"><pre><code>We could not detect the component from your story file. Specify meta.component.
-   6 | import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
-   7 |
-&gt;  8 | export default {
+   9 | import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
+  10 |
+&gt; 11 | export default {
      | ^
-   9 |   title: &#39;Style/ContentExamples&#39;,
-  10 |   tags: [&#39;!dev&#39;, &#39;!autodocs&#39;],
-  11 | };
+  12 |   title: &#39;Style/ContentExamples&#39;,
+  13 |   tags: [&#39;!dev&#39;, &#39;!autodocs&#39;],
+  14 | };
 
 ./stories/content.stories.tsx:
 import React, { useState } from &#39;react&#39;;
 import { Modal } from &#39;../src/lib/components/modal/Modal.component&#39;;
 import { Button } from &#39;../src/lib/components/buttonv2/Buttonv2.component&#39;;
 import { Icon } from &#39;../src/lib/components/icon/Icon.component&#39;;
-import { FormGroup, FormSection } from &#39;../src/lib/components/form/Form.component&#39;;
+import {
+  FormGroup,
+  FormSection,
+} from &#39;../src/lib/components/form/Form.component&#39;;
 import { Input } from &#39;../src/lib/components/inputv2/inputv2&#39;;
 
 export default {
@@ -24434,7 +24586,9 @@ export const ValidationMessages = {
         label=&quot;Days&quot;
         id=&quot;days&quot;
         required
-        content={&lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;}
+        content={
+          &lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;
+        }
         error=&quot;The number of days must be at least 1.&quot;
         helpErrorPosition=&quot;bottom&quot;
       /&gt;
@@ -24526,7 +24680,9 @@ export const ValidationMessages = {
       label=&quot;Days&quot;
       id=&quot;days&quot;
       required
-      content={&lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;}
+      content={
+        &lt;Input id=&quot;days&quot; type=&quot;number&quot; value=&quot;0&quot; onChange={() =&gt; {}} /&gt;
+      }
       error=&quot;The number of days must be at least 1.&quot;
       helpErrorPosition=&quot;bottom&quot;
     /&gt;
