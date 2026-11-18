@@ -11,7 +11,7 @@ import { Breadcrumb } from '../src/lib/components/breadcrumb/Breadcrumb.componen
 import { ScrollbarWrapper } from '../src/lib/components/scrollbarwrapper/ScrollbarWrapper.component';
 import { Column, Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Button } from '../src/lib/next';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { Meta } from '@storybook/react-webpack5';
 
 const meta: Meta<typeof Layout2> = {
