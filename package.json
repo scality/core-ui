@@ -30,6 +30,7 @@
     "build": "rimraf dist && tsc",
     "copy-files": "copyfiles -u 2 src/lib/style/fonts/* dist && copyfiles -u 2 src/lib/*.css dist",
     "lint": "eslint src/* --ext .js --no-error-on-unmatched-pattern",
+    "check:component-index": "node scripts/check-component-index.mjs",
     "prepare": "npm run build",
     "postbuild": "npm run copy-files",
     "test": "jest",
