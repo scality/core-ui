@@ -365,12 +365,12 @@ export const WithLongTextContent = {
 };
 
 const NODE_DATA = [
-  { name: 'artesca-storage-node-eu-west-1a', status: 'Healthy', capacity: '128 TB', used: '97.4 TB', location: 'eu-west-1a' },
-  { name: 'artesca-storage-node-eu-west-1b', status: 'Degraded', capacity: '128 TB', used: '112.8 TB', location: 'eu-west-1b' },
-  { name: 'artesca-storage-node-us-east-1a', status: 'Healthy', capacity: '64 TB', used: '31.1 TB', location: 'us-east-1a' },
-  { name: 'artesca-storage-node-us-east-1b', status: 'Offline', capacity: '64 TB', used: '0 TB', location: 'us-east-1b' },
-  { name: 'artesca-storage-node-ap-south-1a', status: 'Healthy', capacity: '256 TB', used: '198.6 TB', location: 'ap-south-1a' },
-  { name: 'artesca-storage-node-ap-south-1b', status: 'Healthy', capacity: '256 TB', used: '204.2 TB', location: 'ap-south-1b' },
+  { name: 'storage-node-eu-west-1a', status: 'Healthy', capacity: '128 TB', used: '97.4 TB', location: 'eu-west-1a' },
+  { name: 'storage-node-eu-west-1b', status: 'Degraded', capacity: '128 TB', used: '112.8 TB', location: 'eu-west-1b' },
+  { name: 'storage-node-us-east-1a', status: 'Healthy', capacity: '64 TB', used: '31.1 TB', location: 'us-east-1a' },
+  { name: 'storage-node-us-east-1b', status: 'Offline', capacity: '64 TB', used: '0 TB', location: 'us-east-1b' },
+  { name: 'storage-node-ap-south-1a', status: 'Healthy', capacity: '256 TB', used: '198.6 TB', location: 'ap-south-1a' },
+  { name: 'storage-node-ap-south-1b', status: 'Healthy', capacity: '256 TB', used: '204.2 TB', location: 'ap-south-1b' },
 ];
 
 const NODE_COLUMNS = [
