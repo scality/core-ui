@@ -14,6 +14,12 @@ then install the dependencies:
 npm install
 ```
 
+The whole repository was reformatted in one commit when Biome replaced Prettier. GitHub's blame view skips that commit on its own; to make `git blame` skip it locally too, run once:
+
+```sh
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
+
 ## Create a new branch
 
 Give your branch an explicit name with the reference to the Jira ticket or issue if it exists, and prefix it with:
@@ -167,7 +173,7 @@ After merging one or more PRs in Core-UI, it is possible to publish a new releas
 2. In the `Choose a tag` select menu, create a new tag (the current tag incremented by 1)
 3. `Generate release notes`: it will add all the PR infos since the last release. You can add details if necessary
 4. `Publish release`
-5. It will create a PR that needs to be approved
+5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens and merges a PR that moves `package.json` to the next minor version. A patch release therefore needs the version set by hand first.
 
 ## Build
 
