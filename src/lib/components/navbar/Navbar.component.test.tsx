@@ -49,7 +49,11 @@ beforeAll(() => {
 });
 afterAll(() => {
   if (originalOffsetWidth) {
-    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', originalOffsetWidth);
+    Object.defineProperty(
+      HTMLElement.prototype,
+      'offsetWidth',
+      originalOffsetWidth,
+    );
   }
 });
 
@@ -124,8 +128,12 @@ describe('selectVisibleTabs (priority+ fit)', () => {
       80,
       300,
     );
-    expect(visibleTabIndices).toEqual([...visibleTabIndices].sort((a, b) => a - b));
-    expect(overflowTabIndices).toEqual([...overflowTabIndices].sort((a, b) => a - b));
+    expect(visibleTabIndices).toEqual(
+      [...visibleTabIndices].sort((a, b) => a - b),
+    );
+    expect(overflowTabIndices).toEqual(
+      [...overflowTabIndices].sort((a, b) => a - b),
+    );
   });
 });
 
@@ -149,7 +157,9 @@ describe('Navbar responsiveness', () => {
     renderNavbar({ tabs, rightActions: [userAction] });
 
     expect(screen.getByRole('tab', { name: 'Groups' })).toBeInTheDocument();
-    expect(screen.queryByRole('tab', { name: 'Users' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('tab', { name: 'Users' }),
+    ).not.toBeInTheDocument();
 
     const menuTrigger = screen.getByRole('button', { name: /more/i });
     expect(menuTrigger).toHaveAttribute('aria-expanded', 'false');
@@ -157,9 +167,15 @@ describe('Navbar responsiveness', () => {
     expect(menuTrigger).toHaveAttribute('aria-expanded', 'true');
 
     const menu = screen.getByRole('navigation', { name: /more/i });
-    expect(within(menu).getByRole('link', { name: 'Users' })).toBeInTheDocument();
-    expect(within(menu).getByRole('link', { name: 'Policies' })).toBeInTheDocument();
-    expect(within(menu).queryByRole('link', { name: 'Groups' })).not.toBeInTheDocument();
+    expect(
+      within(menu).getByRole('link', { name: 'Users' }),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).getByRole('link', { name: 'Policies' }),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).queryByRole('link', { name: 'Groups' }),
+    ).not.toBeInTheDocument();
   });
 
   it('keeps the username label visible when the navbar is wide', () => {
@@ -243,18 +259,28 @@ describe('Navbar responsiveness', () => {
       tabs: [
         { title: 'Groups', link: <a href="/groups">Groups</a> },
         { title: 'Users', link: <a href="/users">Users</a> },
-        { title: 'Policies', selected: true, link: <a href="/policies">Policies</a> },
+        {
+          title: 'Policies',
+          selected: true,
+          link: <a href="/policies">Policies</a>,
+        },
       ],
       rightActions: [userAction],
     });
 
     expect(screen.getByRole('tab', { name: 'Policies' })).toBeInTheDocument();
-    expect(screen.queryByRole('tab', { name: 'Groups' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('tab', { name: 'Groups' }),
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: /more/i }));
     const menu = screen.getByRole('navigation', { name: /more/i });
-    expect(within(menu).getByRole('link', { name: 'Groups' })).toBeInTheDocument();
-    expect(within(menu).queryByRole('link', { name: 'Policies' })).not.toBeInTheDocument();
+    expect(
+      within(menu).getByRole('link', { name: 'Groups' }),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).queryByRole('link', { name: 'Policies' }),
+    ).not.toBeInTheDocument();
   });
 
   it('keeps a custom render tab inline at every width instead of hiding it', async () => {
@@ -276,7 +302,9 @@ describe('Navbar responsiveness', () => {
 
     await userEvent.click(screen.getByRole('button', { name: /more/i }));
     const menu = screen.getByRole('navigation', { name: /more/i });
-    expect(within(menu).getByRole('link', { name: 'Users' })).toBeInTheDocument();
+    expect(
+      within(menu).getByRole('link', { name: 'Users' }),
+    ).toBeInTheDocument();
     expect(within(menu).queryByText('My instance')).not.toBeInTheDocument();
   });
 

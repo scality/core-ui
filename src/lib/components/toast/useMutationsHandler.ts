@@ -7,23 +7,21 @@ export type MutationConfig<T> = {
   name: string;
 };
 
-declare type GetResults<T> = T extends MutationConfig<
-  MinimalMutationResult<infer TData, infer TError>
->
-  ? MutationConfig<MinimalMutationResult<TData, TError>>
-  : T extends MinimalMutationResult<infer TData, infer TError>
-  ? MutationConfig<MinimalMutationResult<TData, TError>>
-  : MutationConfig<MinimalMutationResult<unknown, unknown>>;
+declare type GetResults<T> =
+  T extends MutationConfig<MinimalMutationResult<infer TData, infer TError>>
+    ? MutationConfig<MinimalMutationResult<TData, TError>>
+    : T extends MinimalMutationResult<infer TData, infer TError>
+      ? MutationConfig<MinimalMutationResult<TData, TError>>
+      : MutationConfig<MinimalMutationResult<unknown, unknown>>;
 
-declare type GetDescriptionBuilder<T> = T extends MutationConfig<
-  MinimalMutationResult<infer TData, infer TError>
->
-  ? DescriptionBuilder<TData, TError>
-  : T extends MutationConfig<UseMutationOptions<infer TData, infer TError>>
-  ? DescriptionBuilder<TData, TError>
-  : T extends MinimalMutationResult<infer TData, infer TError>
-  ? DescriptionBuilder<TData, TError>
-  : never;
+declare type GetDescriptionBuilder<T> =
+  T extends MutationConfig<MinimalMutationResult<infer TData, infer TError>>
+    ? DescriptionBuilder<TData, TError>
+    : T extends MutationConfig<UseMutationOptions<infer TData, infer TError>>
+      ? DescriptionBuilder<TData, TError>
+      : T extends MinimalMutationResult<infer TData, infer TError>
+        ? DescriptionBuilder<TData, TError>
+        : never;
 
 /**
  * MutationResults reducer recursively maps type param to results
@@ -31,12 +29,12 @@ declare type GetDescriptionBuilder<T> = T extends MutationConfig<
 declare type MutationsResults<T extends unknown[]> = T extends []
   ? []
   : T extends [infer Head, ...infer Tail]
-  ? [GetResults<Head>, ...MutationsResults<Tail>]
-  : T extends [infer Head]
-  ? [GetResults<Head>]
-  : unknown[] extends T
-  ? T
-  : never;
+    ? [GetResults<Head>, ...MutationsResults<Tail>]
+    : T extends [infer Head]
+      ? [GetResults<Head>]
+      : unknown[] extends T
+        ? T
+        : never;
 
 enum DescriptionBuilderStatus {
   Success = 'success',
@@ -54,19 +52,19 @@ type DescriptionBuilder<Data = unknown, Error = unknown> = {
 declare type DescriptionBuilders<T extends any[]> = T extends []
   ? []
   : T extends [infer Head, ...infer Tail]
-  ? [GetDescriptionBuilder<Head>, ...DescriptionBuilders<Tail>]
-  : T extends [infer Head]
-  ? [GetDescriptionBuilder<Head>]
-  : T extends UseMutationOptions<
-      infer TMutationFnData,
-      infer TError,
-      infer TData
-    >[]
-  ? DescriptionBuilder<
-      unknown extends TData ? TMutationFnData : TData,
-      TError
-    >[]
-  : DescriptionBuilder[];
+    ? [GetDescriptionBuilder<Head>, ...DescriptionBuilders<Tail>]
+    : T extends [infer Head]
+      ? [GetDescriptionBuilder<Head>]
+      : T extends UseMutationOptions<
+            infer TMutationFnData,
+            infer TError,
+            infer TData
+          >[]
+        ? DescriptionBuilder<
+            unknown extends TData ? TMutationFnData : TData,
+            TError
+          >[]
+        : DescriptionBuilder[];
 
 type Props<MainMutationType, T extends any[]> = {
   mainMutation: MutationConfig<MainMutationType>;
@@ -126,8 +124,8 @@ export const useMutationsHandler = <
       status: mainMutation.mutation?.isSuccess
         ? DescriptionBuilderStatus.Success
         : mainMutation.mutation?.isIdle
-        ? DescriptionBuilderStatus.Idle
-        : DescriptionBuilderStatus.Error,
+          ? DescriptionBuilderStatus.Idle
+          : DescriptionBuilderStatus.Error,
       name: mainMutation.name,
     } as GetDescriptionBuilder<MainMutationType>;
     const descriptionBuilders = [
@@ -138,8 +136,8 @@ export const useMutationsHandler = <
         status: mutation.isSuccess
           ? DescriptionBuilderStatus.Success
           : mutation.isIdle
-          ? DescriptionBuilderStatus.Idle
-          : DescriptionBuilderStatus.Error,
+            ? DescriptionBuilderStatus.Idle
+            : DescriptionBuilderStatus.Error,
         name,
       })) as DescriptionBuilders<T>) || ([] as DescriptionBuilders<T>)),
     ] as T extends []

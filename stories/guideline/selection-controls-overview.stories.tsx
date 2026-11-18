@@ -23,17 +23,33 @@ export const Overview = {
     };
 
     return (
-      <div style={{ display: 'flex', gap: '3rem', alignItems: 'flex-start', paddingTop: '1.5rem', minHeight: '220px' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: '3rem',
+          alignItems: 'flex-start',
+          paddingTop: '1.5rem',
+          minHeight: '220px',
+        }}
+      >
         <div>
           <div style={labelStyle}>Checkbox</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span>Enable versioning</span>
-            <Checkbox checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+            <Checkbox
+              checked={checked}
+              onChange={(e) => setChecked(e.target.checked)}
+            />
           </div>
         </div>
         <div>
           <div style={labelStyle}>Toggle</div>
-          <Toggle name="overview-toggle" toggle={toggle} label="List versions" onChange={() => setToggle(!toggle)} />
+          <Toggle
+            name="overview-toggle"
+            toggle={toggle}
+            label="List versions"
+            onChange={() => setToggle(!toggle)}
+          />
         </div>
         <div>
           <div style={labelStyle}>Radio</div>
@@ -50,7 +66,12 @@ export const Overview = {
         </div>
         <div>
           <div style={labelStyle}>Select</div>
-          <Select id="overview-select" placeholder="Select an option" value={select} onChange={(v) => setSelect(v as string)}>
+          <Select
+            id="overview-select"
+            placeholder="Select an option"
+            value={select}
+            onChange={(v) => setSelect(v as string)}
+          >
             <Select.Option value="a">Option A</Select.Option>
             <Select.Option value="b">Option B</Select.Option>
             <Select.Option value="c">Option C</Select.Option>

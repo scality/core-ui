@@ -31,7 +31,7 @@ class ResizeObserverMock {
 // return the border-box width the hook reads on the initial sync measurement.
 const makeNode = (width: number) => {
   const node = document.createElement('div');
-  node.getBoundingClientRect = () => ({ width } as DOMRect);
+  node.getBoundingClientRect = () => ({ width }) as DOMRect;
   return node;
 };
 
@@ -113,7 +113,7 @@ describe('useContainerWidth', () => {
   it('should re-measure the target border-box when borderBoxSize is unavailable', () => {
     let rectWidth = 800;
     const node = document.createElement('div');
-    node.getBoundingClientRect = () => ({ width: rectWidth } as DOMRect);
+    node.getBoundingClientRect = () => ({ width: rectWidth }) as DOMRect;
 
     const { result } = renderHook(() => useContainerWidth());
     act(() => result.current.ref(node));

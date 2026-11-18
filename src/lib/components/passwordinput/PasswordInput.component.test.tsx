@@ -24,11 +24,15 @@ describe('PasswordInput', () => {
     await userEvent.type(field, 'correct horse');
     expect(field).toHaveAttribute('type', 'password');
 
-    await userEvent.click(screen.getByRole('button', { name: 'Show password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Show password' }),
+    );
     expect(field).toHaveAttribute('type', 'text');
     expect(field).toHaveValue('correct horse');
 
-    await userEvent.click(screen.getByRole('button', { name: 'Hide password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Hide password' }),
+    );
     expect(field).toHaveAttribute('type', 'password');
   });
 
@@ -65,7 +69,9 @@ describe('PasswordInput', () => {
     );
 
     expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'text');
-    await userEvent.click(screen.getByRole('button', { name: 'Hide password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Hide password' }),
+    );
     expect(onToggleReveal).toHaveBeenCalledTimes(1);
   });
 
@@ -82,7 +88,9 @@ describe('PasswordInput', () => {
       { wrapper: Wrapper },
     );
 
-    await userEvent.click(screen.getByRole('button', { name: 'Show password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Show password' }),
+    );
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
@@ -97,7 +105,9 @@ describe('PasswordInput', () => {
       { wrapper: Wrapper },
     );
 
-    expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+    expect(
+      screen.getByRole('button', { name: 'Show password' }),
+    ).toBeDisabled();
   });
 
   it('disables both buttons when the surrounding field group is disabled', () => {
@@ -109,7 +119,11 @@ describe('PasswordInput', () => {
             label="Password"
             disabled
             content={
-              <PasswordInput id="pwd" autoComplete="new-password" withCopyButton />
+              <PasswordInput
+                id="pwd"
+                autoComplete="new-password"
+                withCopyButton
+              />
             }
           />
         </FormSection>
@@ -118,7 +132,9 @@ describe('PasswordInput', () => {
     );
 
     expect(screen.getByLabelText('Password')).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Show password' })).toBeDisabled();
+    expect(
+      screen.getByRole('button', { name: 'Show password' }),
+    ).toBeDisabled();
     expect(screen.getByRole('button', { name: /copy/i })).toBeDisabled();
   });
 
@@ -132,7 +148,9 @@ describe('PasswordInput', () => {
       { wrapper: Wrapper },
     );
 
-    await userEvent.click(screen.getByRole('button', { name: 'Show password' }));
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Show password' }),
+    );
     expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'text');
 
     unmount();
@@ -145,7 +163,10 @@ describe('PasswordInput', () => {
       { wrapper: Wrapper },
     );
 
-    expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'password');
+    expect(screen.getByLabelText('Password')).toHaveAttribute(
+      'type',
+      'password',
+    );
   });
 
   it('renders no copy affordance unless one is asked for', () => {

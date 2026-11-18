@@ -22,10 +22,7 @@ import {
   Status,
   StatusIcon,
 } from '../src/lib/components/statusicon/StatusIcon.component';
-import {
-  Column,
-  Table,
-} from '../src/lib/components/tablev2/Tablev2.component';
+import { Column, Table } from '../src/lib/components/tablev2/Tablev2.component';
 import { Toggle } from '../src/lib/components/toggle/Toggle.component';
 import { Stack } from '../src/lib/spacing';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
@@ -65,8 +62,14 @@ const FirstStepComponent = (props: Record<string, never>) => {
         <Text>First Step</Text>
       </StepBody>
       <StepActions>
-        <Hidden><Button label="Back" variant="secondary" onClick={() => {}} /></Hidden>
-        <Button label="Next" variant="primary" onClick={() => next({ name: 'something' })} />
+        <Hidden>
+          <Button label="Back" variant="secondary" onClick={() => {}} />
+        </Hidden>
+        <Button
+          label="Next"
+          variant="primary"
+          onClick={() => next({ name: 'something' })}
+        />
       </StepActions>
     </Wrapper>
   );
@@ -81,7 +84,11 @@ const SecondStepComponent = ({ name }: { name: string }) => {
       </StepBody>
       <StepActions>
         <Button label="Back" variant="secondary" onClick={() => prev({})} />
-        <Button label="Next" variant="primary" onClick={() => next({ type: 'anything' })} />
+        <Button
+          label="Next"
+          variant="primary"
+          onClick={() => next({ type: 'anything' })}
+        />
       </StepActions>
     </Wrapper>
   );
@@ -95,8 +102,14 @@ const ThirdStepComponent = ({ type }: { type: string }) => {
         <Text>Third Step: {type}</Text>
       </StepBody>
       <StepActions>
-        <Button label="Back" variant="secondary" onClick={() => prev({ name: 'something' })} />
-        <Hidden><Button label="Next" variant="primary" onClick={() => {}} /></Hidden>
+        <Button
+          label="Back"
+          variant="secondary"
+          onClick={() => prev({ name: 'something' })}
+        />
+        <Hidden>
+          <Button label="Next" variant="primary" onClick={() => {}} />
+        </Hidden>
       </StepActions>
     </Wrapper>
   );
@@ -139,9 +152,7 @@ const STATE_STEPS = [
 
 export const StateCompleted = {
   tags: ['!dev'],
-  render: () => (
-    <Steppers steps={STATE_STEPS} activeStep={2} />
-  ),
+  render: () => <Steppers steps={STATE_STEPS} activeStep={2} />,
 };
 
 export const StateInProgress = {
@@ -328,7 +339,12 @@ const SetupConfigureStep = () => {
       requireMode="partial"
       responsive
       leftActions={
-        <Button type="button" variant="outline" label="Cancel" onClick={() => {}} />
+        <Button
+          type="button"
+          variant="outline"
+          label="Cancel"
+          onClick={() => {}}
+        />
       }
       rightActions={
         <Button
@@ -404,8 +420,8 @@ const SetupApplyStep = (props: Record<string, unknown>) => {
       <SetupActionsTable rows={rows} />
       {hasOptionalFailure && allRequiredComplete && (
         <Banner icon={<Icon name="Exclamation-circle" />} variant="warning">
-          One optional action was unsuccessful. You can continue and configure it
-          by hand later.
+          One optional action was unsuccessful. You can continue and configure
+          it by hand later.
         </Banner>
       )}
       <Button
@@ -452,7 +468,12 @@ const SetupSummaryStep = ({
         />
       }
       rightActions={
-        <Button type="button" variant="primary" label="Close" onClick={() => {}} />
+        <Button
+          type="button"
+          variant="primary"
+          label="Close"
+          onClick={() => {}}
+        />
       }
     >
       <FormSection title={{ name: 'Integration' }} forceLabelWidth="12rem">
@@ -478,7 +499,10 @@ const SetupSummaryStep = ({
           label="Service endpoint"
           required
           content={
-            <SummaryValue value={SUMMARY_ENDPOINT} label="copy service endpoint" />
+            <SummaryValue
+              value={SUMMARY_ENDPOINT}
+              label="copy service endpoint"
+            />
           }
         />
         <FormGroup

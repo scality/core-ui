@@ -16,9 +16,9 @@ const DEFAULT_ICON_BY_VARIANT: Record<Variant, IconName> = {
 };
 
 export type Props = {
-  /** When true, shows the default icon (Info-circle for base, Exclamation-circle otherwise) with variant color and "lg" size. 
+  /** When true, shows the default icon (Info-circle for base, Exclamation-circle otherwise) with variant color and "lg" size.
    * Use icon prop to override the default icon.
-  */
+   */
   withDefaultIcon?: boolean;
   /** Custom icon element. Overrides withDefaultIcon when provided. */
   icon?: React.ReactNode;
@@ -78,19 +78,24 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
 `;
 
-function Banner({ withDefaultIcon = false, icon, title, children, variant, ...rest }: Props) {
+function Banner({
+  withDefaultIcon = false,
+  icon,
+  title,
+  children,
+  variant,
+  ...rest
+}: Props) {
   const iconContent =
-    icon !== undefined
-      ? icon
-      : withDefaultIcon
-        ? (
-          <Icon
-            name={DEFAULT_ICON_BY_VARIANT[variant]}
-            size={BANNER_ICON_SIZE}
-            color={getVariantThemeKey(variant)}
-          />
-        )
-        : null;
+    icon !== undefined ? (
+      icon
+    ) : withDefaultIcon ? (
+      <Icon
+        name={DEFAULT_ICON_BY_VARIANT[variant]}
+        size={BANNER_ICON_SIZE}
+        color={getVariantThemeKey(variant)}
+      />
+    ) : null;
 
   return (
     <BannerContainer $variant={variant}>

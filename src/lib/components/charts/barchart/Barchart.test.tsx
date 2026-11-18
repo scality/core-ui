@@ -257,7 +257,10 @@ describe('Barchart', () => {
     });
 
     it('falls back to a linear axis when stacked, whose segments log would misplace', () => {
-      const { container } = renderBarchart({ yAxisScale: 'log', stacked: true });
+      const { container } = renderBarchart({
+        yAxisScale: 'log',
+        stacked: true,
+      });
 
       expect(yAxisTicks(container)[0]).toBe('0');
       expect(yAxisTicks(container)).not.toContain('1000');

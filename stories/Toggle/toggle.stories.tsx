@@ -58,7 +58,12 @@ export const AmbiguousLabel: Story = {
   render: () => {
     const [toggle, setToggle] = useState(false);
     return (
-      <Toggle name="ambiguous" toggle={toggle} label="Active" onChange={() => setToggle(!toggle)} />
+      <Toggle
+        name="ambiguous"
+        toggle={toggle}
+        label="Active"
+        onChange={() => setToggle(!toggle)}
+      />
     );
   },
 };
@@ -67,9 +72,20 @@ export const LabelLeftToggleRight: Story = {
   render: () => {
     const [toggle, setToggle] = useState(false);
     return (
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '16rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '16rem',
+        }}
+      >
         <span>Enable object lock</span>
-        <Toggle name="label-left" toggle={toggle} onChange={() => setToggle(!toggle)} />
+        <Toggle
+          name="label-left"
+          toggle={toggle}
+          onChange={() => setToggle(!toggle)}
+        />
       </div>
     );
   },
@@ -79,7 +95,12 @@ export const LabelRightToggleLeft: Story = {
   render: () => {
     const [toggle, setToggle] = useState(false);
     return (
-      <Toggle name="label-right" toggle={toggle} label="List versions" onChange={() => setToggle(!toggle)} />
+      <Toggle
+        name="label-right"
+        toggle={toggle}
+        label="List versions"
+        onChange={() => setToggle(!toggle)}
+      />
     );
   },
 };
@@ -92,10 +113,22 @@ export const AllStates: Story = {
       marginBottom: '0.75rem',
     };
     return (
-      <div style={{ display: 'flex', gap: '3rem', alignItems: 'flex-start', paddingTop: '1.5rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: '3rem',
+          alignItems: 'flex-start',
+          paddingTop: '1.5rem',
+        }}
+      >
         <div>
           <div style={labelStyle}>Off</div>
-          <Toggle name="s1" toggle={false} label="Feature" onChange={() => {}} />
+          <Toggle
+            name="s1"
+            toggle={false}
+            label="Feature"
+            onChange={() => {}}
+          />
         </div>
         <div>
           <div style={labelStyle}>On</div>
@@ -103,11 +136,23 @@ export const AllStates: Story = {
         </div>
         <div>
           <div style={labelStyle}>Disabled</div>
-          <Toggle name="s3" toggle={false} label="Feature" disabled onChange={() => {}} />
+          <Toggle
+            name="s3"
+            toggle={false}
+            label="Feature"
+            disabled
+            onChange={() => {}}
+          />
         </div>
         <div>
           <div style={labelStyle}>Disabled on</div>
-          <Toggle name="s4" toggle={true} label="Feature" disabled onChange={() => {}} />
+          <Toggle
+            name="s4"
+            toggle={true}
+            label="Feature"
+            disabled
+            onChange={() => {}}
+          />
         </div>
       </div>
     );

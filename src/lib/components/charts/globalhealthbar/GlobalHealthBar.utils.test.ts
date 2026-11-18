@@ -216,13 +216,31 @@ describe('Health Bar Utils', () => {
         const endTimestamp = Date.now();
 
         expect(
-          calculateLabelVisibility(chartWidth, totalTicks, span, 0, endTimestamp),
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            0,
+            endTimestamp,
+          ),
         ).toBe(true);
         expect(
-          calculateLabelVisibility(chartWidth, totalTicks, span, 1, endTimestamp),
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            1,
+            endTimestamp,
+          ),
         ).toBe(false);
         expect(
-          calculateLabelVisibility(chartWidth, totalTicks, span, 2, endTimestamp),
+          calculateLabelVisibility(
+            chartWidth,
+            totalTicks,
+            span,
+            2,
+            endTimestamp,
+          ),
         ).toBe(true);
       });
 

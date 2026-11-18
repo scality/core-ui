@@ -137,8 +137,7 @@ export const WithDisabledReason: RadioGroupStory = {
             value: 'compliance',
             label: 'Compliance',
             disabled: true,
-            disabledReason:
-              'Compliance mode requires an upgraded license.',
+            disabledReason: 'Compliance mode requires an upgraded license.',
           },
           { value: 'none', label: 'None' },
         ]}

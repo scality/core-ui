@@ -7,7 +7,10 @@ import {
 import { Serie, isSymmetricalSeries } from './LineTimeSerieChart.types';
 
 type ChartDataInput = {
-  series: Serie[] | { above: Serie[] | undefined; below: Serie[] | undefined } | undefined;
+  series:
+    | Serie[]
+    | { above: Serie[] | undefined; below: Serie[] | undefined }
+    | undefined;
   startingTimeStamp: number;
   duration: number;
   interval: number;
@@ -193,7 +196,15 @@ export function useChartData({
     return Object.values(dataPointsByTime).sort(
       (a, b) => (a.timestamp as number) - (b.timestamp as number),
     );
-  }, [series, startingTimeStamp, duration, interval, yAxisType, selectedResources, isSeriesEmpty]);
+  }, [
+    series,
+    startingTimeStamp,
+    duration,
+    interval,
+    yAxisType,
+    selectedResources,
+    isSeriesEmpty,
+  ]);
 
   /**
    * Calculates evenly spaced X-axis tick positions.
@@ -287,7 +298,10 @@ export function useChartData({
         minPositive = value;
       }
       const magnitude = Math.abs(value);
-      if (magnitude > 0 && (minAbsNonZero === null || magnitude < minAbsNonZero)) {
+      if (
+        magnitude > 0 &&
+        (minAbsNonZero === null || magnitude < minAbsNonZero)
+      ) {
         minAbsNonZero = magnitude;
       }
     }
@@ -313,7 +327,8 @@ export function useChartData({
         yAxisType === 'percentage'
           ? Math.max(result.topValue, 100)
           : result.topValue,
-      unitLabel: result.unitLabel ?? (yAxisType === 'percentage' ? '%' : undefined),
+      unitLabel:
+        result.unitLabel ?? (yAxisType === 'percentage' ? '%' : undefined),
       rechartsData: result.rechartsData,
       topDomain: finalTopDomain,
       valueBase: result.valueBase,
@@ -363,7 +378,11 @@ export function useChartData({
    * Used to reliably determine separator placement in the tooltip.
    */
   const belowSeriesLabels = useMemo(() => {
-    if (yAxisType !== 'symmetrical' || !series || !isSymmetricalSeries(series)) {
+    if (
+      yAxisType !== 'symmetrical' ||
+      !series ||
+      !isSymmetricalSeries(series)
+    ) {
       return undefined;
     }
 

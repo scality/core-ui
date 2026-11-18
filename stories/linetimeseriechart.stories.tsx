@@ -1845,7 +1845,8 @@ export const SymlogVersusLog: Story = {
 
 const DASHED_POINT_COUNT = 120;
 const DASHED_START = 1740405600;
-const DASHED_INTERVAL = SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS / DASHED_POINT_COUNT;
+const DASHED_INTERVAL =
+  SAMPLE_DURATION_LAST_TWENTY_FOUR_HOURS / DASHED_POINT_COUNT;
 
 const buildSmoothSerie = (
   valueAt: (progress: number) => number,

@@ -1,4 +1,3 @@
-
 /**
  * Maps human-readable icon names to FontAwesome icon info.
  * Format: 'iconType iconClass' where:
@@ -137,10 +136,10 @@ export const iconTable = {
   Sidebar: 'fas faTableColumns',
   Bookopen: 'fas faBookOpen',
   Book: 'fas faBook',
-  Sliders: "fas faSliders",
-  MedicalFile: "fas faFileMedical",
-  ArrowsUpDown: "fas faArrowsUpDown",
-  HeadSet: "fas faHeadset",
+  Sliders: 'fas faSliders',
+  MedicalFile: 'fas faFileMedical',
+  ArrowsUpDown: 'fas faArrowsUpDown',
+  HeadSet: 'fas faHeadset',
   HandSparkles: 'fas faHandSparkles',
   History: 'fas faClockRotateLeft',
   Astronaut: 'fas faUserAstronaut',

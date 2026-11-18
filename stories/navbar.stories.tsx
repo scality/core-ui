@@ -179,7 +179,7 @@ export const NavbarWithRightActions = {
     docs: {
       description: {
         story:
-          'A typical navbar: tabs on the left, and on the right a set of icon buttons (notifications, what\'s new, theme toggle) followed by the account menu.',
+          "A typical navbar: tabs on the left, and on the right a set of icon buttons (notifications, what's new, theme toggle) followed by the account menu.",
       },
     },
   },
@@ -194,7 +194,7 @@ export const NavbarWithToggle = {
     docs: {
       description: {
         story:
-          'Passing `onToggleClick` adds a built-in menu button at the far left, used to toggle the host application\'s main/side menu.',
+          "Passing `onToggleClick` adds a built-in menu button at the far left, used to toggle the host application's main/side menu.",
       },
     },
   },
@@ -204,7 +204,12 @@ export const NavbarWithLogo = {
   args: {
     logo: (
       <span
-        style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700 }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          fontWeight: 700,
+        }}
       >
         <i className="fas fa-cube" /> Acme Cloud
       </span>

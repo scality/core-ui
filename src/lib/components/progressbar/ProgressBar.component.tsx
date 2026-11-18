@@ -169,9 +169,7 @@ function ProgressBar({
     backgroundColor = theme.backgroundLevel2;
   }
   return (
-    <Container
-      {...rest}
-    >
+    <Container {...rest}>
       {(topLeftLabel || topRightLabel) && (
         <TopLabelsContainer>
           {topLeftLabel && (

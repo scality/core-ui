@@ -63,28 +63,25 @@ describe('Form', () => {
   it.each([
     ['partial', 'User name', true, 'User name *'],
     ['all', 'Description', false, 'Description (optional)'],
-  ])(
-    'keeps the %s-mode marker in the field accessible name',
-    (requireMode, label, required, expected) => {
-      render(
-        <Form
-          layout={{ kind: 'tab' }}
-          requireMode={requireMode as 'all' | 'partial'}
-        >
-          <FormSection>
-            <FormGroup
-              id="marker-field"
-              label={label}
-              required={required}
-              content={<input type="text" id="marker-field" />}
-            />
-          </FormSection>
-        </Form>,
-      );
+  ])('keeps the %s-mode marker in the field accessible name', (requireMode, label, required, expected) => {
+    render(
+      <Form
+        layout={{ kind: 'tab' }}
+        requireMode={requireMode as 'all' | 'partial'}
+      >
+        <FormSection>
+          <FormGroup
+            id="marker-field"
+            label={label}
+            required={required}
+            content={<input type="text" id="marker-field" />}
+          />
+        </FormSection>
+      </Form>,
+    );
 
-      expect(screen.getByRole('textbox')).toHaveAccessibleName(expected);
-    },
-  );
+    expect(screen.getByRole('textbox')).toHaveAccessibleName(expected);
+  });
 
   /**
    * The accessible name and the default `getByText` normalizer both collapse a

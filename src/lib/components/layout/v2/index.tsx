@@ -7,7 +7,7 @@ const LayoutContainer = styled.div<{ $variant?: 'transparent' }>`
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-  background: ${props => props.$variant === 'transparent' ? 'transparent' : props.theme.backgroundLevel1};
+  background: ${(props) => (props.$variant === 'transparent' ? 'transparent' : props.theme.backgroundLevel1)};
 `;
 
 const Navigation = styled.div`

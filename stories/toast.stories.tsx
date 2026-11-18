@@ -93,10 +93,10 @@ const Template = (args: Omit<ToastProps, 'open' | 'onClose'>) => {
     args.status === 'error'
       ? 'Times-circle'
       : args.status === 'warning'
-      ? 'Exclamation-circle'
-      : args.status === 'success'
-      ? 'Check-circle'
-      : 'Info-circle';
+        ? 'Exclamation-circle'
+        : args.status === 'success'
+          ? 'Check-circle'
+          : 'Info-circle';
   return (
     <div style={{ height: '30vh' }}>
       {!open && (

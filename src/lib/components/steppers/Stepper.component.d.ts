@@ -22,14 +22,14 @@ export type Steps<
 > = Depth['length'] extends MAXIMUM_DEPTH
   ? Step<unknown>[]
   : T extends []
-  ? []
-  : T extends [infer Head]
-  ? [...Result, GetResults<Head>]
-  : T extends [infer Head, ...infer Tail]
-  ? Steps<[...Tail], [...Result, GetResults<Head>], [...Depth, 1]>
-  : unknown[] extends T
-  ? T
-  : never;
+    ? []
+    : T extends [infer Head]
+      ? [...Result, GetResults<Head>]
+      : T extends [infer Head, ...infer Tail]
+        ? Steps<[...Tail], [...Result, GetResults<Head>], [...Depth, 1]>
+        : unknown[] extends T
+          ? T
+          : never;
 export type Add<A extends number, B extends number> = Length<
   [...BuildTuple<A>, ...BuildTuple<B>]
 >;
@@ -56,10 +56,10 @@ declare global {
     (PrevIndex extends -1
       ? Record<string, unknown>
       : PrevIndex extends number
-      ? {
-          prev: (props: ExctractProps<T[PrevIndex]>) => void;
-        }
-      : Record<string, unknown>);
+        ? {
+            prev: (props: ExctractProps<T[PrevIndex]>) => void;
+          }
+        : Record<string, unknown>);
   export declare type Stepper = <T extends any[]>({
     steps,
   }: {

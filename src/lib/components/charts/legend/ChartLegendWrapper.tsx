@@ -44,7 +44,6 @@ export type ChartLegendState = {
   isLineDashed: (resource: string) => boolean;
 };
 
-
 // Equal maps keep the state reference, so a chart re-registering on every render cannot loop.
 const hasSameLineStyles = (
   current: Record<string, boolean> | undefined,
@@ -52,7 +51,9 @@ const hasSameLineStyles = (
 ) =>
   current !== undefined &&
   Object.keys(current).length === Object.keys(next).length &&
-  Object.entries(next).every(([resource, isDashed]) => current[resource] === isDashed);
+  Object.entries(next).every(
+    ([resource, isDashed]) => current[resource] === isDashed,
+  );
 
 const ChartLegendContext = createContext<ChartLegendState | null>(null);
 

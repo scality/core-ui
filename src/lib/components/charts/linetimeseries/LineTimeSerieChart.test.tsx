@@ -2,7 +2,10 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { LineChartProps, LineTimeSerieChart } from './LineTimeSerieChart';
 import { Serie } from './LineTimeSerieChart.types';
-import { ChartLegendWrapper, useChartLegend } from '../legend/ChartLegendWrapper';
+import {
+  ChartLegendWrapper,
+  useChartLegend,
+} from '../legend/ChartLegendWrapper';
 import { CoreUiThemeProvider } from '../../coreuithemeprovider/CoreUiThemeProvider';
 import { coreUIAvailableThemes } from '../../../style/theme';
 
@@ -71,7 +74,6 @@ const renderLineTimeSerieChart = (props: Partial<LineChartProps> = {}) => {
     </CoreUiThemeProvider>,
   );
 };
-
 
 describe('LineTimeSerieChart logarithmic Y axis', () => {
   /**
@@ -247,7 +249,9 @@ describe('LineTimeSerieChart logarithmic Y axis', () => {
     });
 
     // A negative tick is proof the axis stayed linear.
-    expect(yAxisTicks(container).some((tick) => tick.startsWith('-'))).toBe(true);
+    expect(yAxisTicks(container).some((tick) => tick.startsWith('-'))).toBe(
+      true,
+    );
   });
 });
 

@@ -23,7 +23,9 @@ export type UseContainerWidthResult<T extends HTMLElement> = {
  * async loading state, where a `useEffect([])` would have run too early (while
  * the node was still null) and never observed it.
  */
-export function useContainerWidth<T extends HTMLElement = HTMLDivElement>(): UseContainerWidthResult<T> {
+export function useContainerWidth<
+  T extends HTMLElement = HTMLDivElement,
+>(): UseContainerWidthResult<T> {
   const [width, setWidth] = useState<number | undefined>(undefined);
   const observerRef = useRef<ResizeObserver | null>(null);
 

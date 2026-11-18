@@ -47,7 +47,9 @@ const withThemeProvider = (Story, context) => {
       <CoreUiThemeProvider theme={theme}>
         <ScrollbarWrapper>
           {/* Wrapper to make the stories take the full screen but not in docs */}
-          <div style={viewMode === 'story' ? { height: 100 + 'vh' } : undefined}>
+          <div
+            style={viewMode === 'story' ? { height: 100 + 'vh' } : undefined}
+          >
             <ToastProvider>
               <Wrapper style={{ backgroundColor: background }}>
                 <Story {...context} />
@@ -66,7 +68,7 @@ export const parameters = {
   layout: 'fullscreen',
   docs: {
     toc: { headingSelector: 'h2,h3', title: 'Table of Contents' },
-    codePanel: true
+    codePanel: true,
   },
   controls: {
     //All props with color in name will automatically have a control 'color'
@@ -113,7 +115,11 @@ export const parameters = {
 
       const left = a.title.trim().split(/\s*\/\s*/);
       const right = b.title.trim().split(/\s*\/\s*/);
-      for (let depth = 0; depth < Math.max(left.length, right.length); depth++) {
+      for (
+        let depth = 0;
+        depth < Math.max(left.length, right.length);
+        depth++
+      ) {
         if (left[depth] === right[depth]) continue;
         if (left[depth] === undefined) return -1;
         if (right[depth] === undefined) return 1;

@@ -1,4 +1,12 @@
-import { CSSProperties, type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { spacing } from '../../spacing';
@@ -61,7 +69,14 @@ const DrawerPanel = styled.div<{
   transform: ${({ $position, $isOpen }) => getTransform($position, $isOpen)};
 
   ${({ $position, $size, theme }) => {
-    const borderSide = $position === 'left' ? 'right' : $position === 'right' ? 'left' : $position === 'top' ? 'bottom' : 'top';
+    const borderSide =
+      $position === 'left'
+        ? 'right'
+        : $position === 'right'
+          ? 'left'
+          : $position === 'top'
+            ? 'bottom'
+            : 'top';
     const border = `border-${borderSide}: 1px solid ${theme.border};`;
     switch ($position) {
       case 'left':
@@ -199,9 +214,7 @@ const Drawer = ({
         </DrawerHeader>
         <DrawerBody className="sc-drawer-body">{children}</DrawerBody>
         {footer && (
-          <DrawerFooter className="sc-drawer-footer">
-            {footer}
-          </DrawerFooter>
+          <DrawerFooter className="sc-drawer-footer">{footer}</DrawerFooter>
         )}
       </DrawerPanel>
     </>,

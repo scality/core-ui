@@ -1,5 +1,11 @@
 /// <reference path="./Stepper.component.d.ts" />
-import { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import styled from 'styled-components';
 import { Steppers, STEPPERS_WIDTH } from './Steppers.component';
 import { PAGE_FORM_WIDTH } from '../form/Form.constants';
@@ -60,11 +66,11 @@ export const Stepper: Stepper = ({ steps }) => {
   }>({ step: 0, props: {} });
 
   const next = useCallback((props: Record<string, unknown>) => {
-    setStepProps(current => ({ step: current.step + 1, props }));
+    setStepProps((current) => ({ step: current.step + 1, props }));
   }, []);
 
   const prev = useCallback((props: Record<string, unknown>) => {
-    setStepProps(current => ({ step: current.step - 1, props }));
+    setStepProps((current) => ({ step: current.step - 1, props }));
   }, []);
 
   const { Component } = steps[stepProps.step];

@@ -161,7 +161,6 @@ export const WithFloatingError = {
   },
 };
 
-
 export const Loading = {
   render: (args: React.ComponentProps<typeof InlineInput>) => {
     // Force a long-running mutation that's pre-triggered when the story mounts.

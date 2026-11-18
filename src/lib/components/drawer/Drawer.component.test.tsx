@@ -141,7 +141,9 @@ describe('Drawer stacking order', () => {
   it('paints an open drawer above one that merely mounted earlier', () => {
     render(<TwoDrawers aOpen={false} bOpen={true} />);
 
-    expect(bodyIndexOf('second mounted')).toBe(document.body.children.length - 1);
+    expect(bodyIndexOf('second mounted')).toBe(
+      document.body.children.length - 1,
+    );
   });
 
   it('orders two open drawers by open order, not mount order', () => {

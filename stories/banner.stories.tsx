@@ -59,7 +59,8 @@ export const WithIcon = {
     withDefaultIcon: true,
     variant: 'base',
     title: 'Info',
-    children: 'Use withDefaultIcon for the default icon (Info-circle on base, Exclamation-circle on warning/danger/etc.).',
+    children:
+      'Use withDefaultIcon for the default icon (Info-circle on base, Exclamation-circle on warning/danger/etc.).',
   },
 };
 
@@ -102,6 +103,7 @@ export const WithCustomIcon = {
     withDefaultIcon: false,
     icon: 'Exclamation-circle',
     title: 'Custom',
-    children: 'Use the icon prop when you need a specific icon other than the withDefaultIcon default.',
+    children:
+      'Use the icon prop when you need a specific icon other than the withDefaultIcon default.',
   },
 };

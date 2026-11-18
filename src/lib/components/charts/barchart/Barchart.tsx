@@ -59,9 +59,24 @@ type BarchartDisplayOptions = {
 
 type ResolvedBarchartDisplayOptions = Required<BarchartDisplayOptions>;
 
-const BARCHART_PRESETS: Record<'default' | 'modern', ResolvedBarchartDisplayOptions> = {
-  default: { noBackground: false, showHorizontalGridLines: true, noYAxisLine: false, noTickLine: false, noHeader: false },
-  modern:  { noBackground: true,  showHorizontalGridLines: true,  noYAxisLine: true,  noTickLine: true,  noHeader: true  },
+const BARCHART_PRESETS: Record<
+  'default' | 'modern',
+  ResolvedBarchartDisplayOptions
+> = {
+  default: {
+    noBackground: false,
+    showHorizontalGridLines: true,
+    noYAxisLine: false,
+    noTickLine: false,
+    noHeader: false,
+  },
+  modern: {
+    noBackground: true,
+    showHorizontalGridLines: true,
+    noYAxisLine: true,
+    noTickLine: true,
+    noHeader: true,
+  },
 };
 
 /** A Recharts row. `null` is a value the axis cannot place — see `placeNonPositiveValues`. */
@@ -176,10 +191,15 @@ export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   } = props;
 
   const presetOptions = BARCHART_PRESETS[displayPreset];
-  const resolvedNoBackground = displayOptions?.noBackground ?? presetOptions.noBackground;
-  const resolvedShowHorizontalGridLines = displayOptions?.showHorizontalGridLines ?? presetOptions.showHorizontalGridLines;
-  const resolvedNoYAxisLine = displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
-  const resolvedNoTickLine = displayOptions?.noTickLine ?? presetOptions.noTickLine;
+  const resolvedNoBackground =
+    displayOptions?.noBackground ?? presetOptions.noBackground;
+  const resolvedShowHorizontalGridLines =
+    displayOptions?.showHorizontalGridLines ??
+    presetOptions.showHorizontalGridLines;
+  const resolvedNoYAxisLine =
+    displayOptions?.noYAxisLine ?? presetOptions.noYAxisLine;
+  const resolvedNoTickLine =
+    displayOptions?.noTickLine ?? presetOptions.noTickLine;
   const resolvedNoHeader = displayOptions?.noHeader ?? presetOptions.noHeader;
 
   // Create colorSet from ChartLegendWrapper

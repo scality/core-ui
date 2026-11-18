@@ -198,7 +198,12 @@ export const SimpleContentTable = {
             paddingTop: '20px',
           }}
         >
-          <Table status="success" columns={columns} data={data} defaultSortingKey={'health'}>
+          <Table
+            status="success"
+            columns={columns}
+            data={data}
+            defaultSortingKey={'health'}
+          >
             <Table.SingleSelectableContent
               rowHeight="h32"
               separationLineVariant="backgroundLevel3"
@@ -581,7 +586,12 @@ export const MultiTable = {
             />
           </Box>
           <Box width="500px" height="200px">
-            <Table status="success" columns={columns2} data={data2} defaultSortingKey={'health'}>
+            <Table
+              status="success"
+              columns={columns2}
+              data={data2}
+              defaultSortingKey={'health'}
+            >
               <Table.MultiSelectableContent
                 onMultiSelectionChanged={(rows) => {
                   console.log(
@@ -635,7 +645,12 @@ export const LoadingEmptyTable = {
     const { background } = args;
     return (
       <Box width="500px" height="200px">
-        <Table status="loading" columns={columns} data={[]} defaultSortingKey={'firstName'}>
+        <Table
+          status="loading"
+          columns={columns}
+          data={[]}
+          defaultSortingKey={'firstName'}
+        >
           <Table.SingleSelectableContent
             rowHeight="h40"
             separationLineVariant={background}

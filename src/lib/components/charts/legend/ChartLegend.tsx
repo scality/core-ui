@@ -148,7 +148,9 @@ export const ChartLegend = ({
               $chartColors={chartColors}
               $isLineDashed={isLineDashed(resource)}
             />
-            <Text variant={legendSize} color={legendColor}>{getLabel(resource)}</Text>
+            <Text variant={legendSize} color={legendColor}>
+              {getLabel(resource)}
+            </Text>
           </LegendItem>
         );
       })}

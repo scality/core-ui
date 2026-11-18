@@ -243,65 +243,68 @@ const Modal = ({
 
   return isOpen
     ? createPortal(
-      <ModalContainer
-        role={role}
-        aria-modal="true"
-        aria-labelledby={labelId}
-        aria-describedby={descId}
-        {...rest}
-      >
-        <ModalContent className="sc-modal-content">
-          <ModalHeader className="sc-modal-header">
-            <Wrap style={{ flex: 1 }}>
-              <Text variant="Larger" id={labelId}>
-                {title}
-              </Text>
-              {close ? (
-                <Button
-                  icon={<Icon name="Close" />}
-                  onClick={close}
-                  tooltip={{
-                    overlay: 'Close modal',
-                  }}
-                />
-              ) : (
-                <>{subTitle}</>
-              )}
-            </Wrap>
-          </ModalHeader>
-          <ModalBody className="sc-modal-body" id={descId} $wide={wide}>
-            {children}
-          </ModalBody>
-          {(actions || footer) && (
-            <ModalFooter className="sc-modal-footer">
-              {actions ? (
-                <ActionsLayout>
-                  {actions.extra && (
-                    <ActionButton action={actions.extra} variant="secondary" />
-                  )}
-                  {actions.cancel && (
-                    <ActionButton
-                      action={{
-                        ...actions.cancel,
-                        label: actions.cancel.label ?? 'Cancel',
-                      }}
-                      variant="outline"
-                    />
-                  )}
-                  <ActionButton
-                    action={actions.confirm}
-                    variant={actions.confirm.variant ?? 'primary'}
+        <ModalContainer
+          role={role}
+          aria-modal="true"
+          aria-labelledby={labelId}
+          aria-describedby={descId}
+          {...rest}
+        >
+          <ModalContent className="sc-modal-content">
+            <ModalHeader className="sc-modal-header">
+              <Wrap style={{ flex: 1 }}>
+                <Text variant="Larger" id={labelId}>
+                  {title}
+                </Text>
+                {close ? (
+                  <Button
+                    icon={<Icon name="Close" />}
+                    onClick={close}
+                    tooltip={{
+                      overlay: 'Close modal',
+                    }}
                   />
-                </ActionsLayout>
-              ) : (
-                footer
-              )}
-            </ModalFooter>
-          )}
-        </ModalContent>
-      </ModalContainer>,
-      modalContainer.current,
-    )
+                ) : (
+                  <>{subTitle}</>
+                )}
+              </Wrap>
+            </ModalHeader>
+            <ModalBody className="sc-modal-body" id={descId} $wide={wide}>
+              {children}
+            </ModalBody>
+            {(actions || footer) && (
+              <ModalFooter className="sc-modal-footer">
+                {actions ? (
+                  <ActionsLayout>
+                    {actions.extra && (
+                      <ActionButton
+                        action={actions.extra}
+                        variant="secondary"
+                      />
+                    )}
+                    {actions.cancel && (
+                      <ActionButton
+                        action={{
+                          ...actions.cancel,
+                          label: actions.cancel.label ?? 'Cancel',
+                        }}
+                        variant="outline"
+                      />
+                    )}
+                    <ActionButton
+                      action={actions.confirm}
+                      variant={actions.confirm.variant ?? 'primary'}
+                    />
+                  </ActionsLayout>
+                ) : (
+                  footer
+                )}
+              </ModalFooter>
+            )}
+          </ModalContent>
+        </ModalContainer>,
+        modalContainer.current,
+      )
     : null;
 };
 
