@@ -22,7 +22,6 @@ import { spacing } from '../../spacing';
 import {
   fontFamily,
   fontSize,
-  fontWeight,
   navbarHeight,
   navbarItemWidth,
   zIndex,
@@ -211,6 +210,13 @@ const getNavbarTextColor = (props) =>
     props.theme.textReverse,
   ) ?? props.theme.textPrimary;
 
+const getNavbarInactiveTextColor = (props) => {
+  const navTextColor = getNavbarTextColor(props);
+  return navTextColor === props.theme.textPrimary
+    ? props.theme.textSecondary
+    : navTextColor;
+};
+
 const NavbarContainer = styled.div.withConfig({
   componentId: 'sc-navbar',
 })`
@@ -252,20 +258,15 @@ const NavbarTabs = styled.div`
     border-top: ${spacing.r2} solid transparent;
     ${(props) => {
       const { selectedActive } = props.theme;
-      const navTextColor =
-        getContrastText(
-          props.theme.navbarBackground,
-          props.theme.textPrimary,
-          props.theme.textReverse,
-        ) ?? props.theme.textPrimary;
+      const navTextColor = getNavbarTextColor(props);
+      const inactiveColor = getNavbarInactiveTextColor(props);
       return css`
-        color: ${navTextColor};
+        color: ${inactiveColor};
         &:hover {
           background-color: ${getThemePropSelector('highlight')};
         }
         &.selected {
           color: ${navTextColor};
-          font-weight: bold;
           border-bottom-color: ${selectedActive};
         }
         // :focus-visible is the keyboard-only version of :focus
@@ -285,14 +286,10 @@ const TabItem = styled.div<{ $selected: boolean }>`
   align-items: center;
   padding: 0 ${spacing.r16};
   ${(props) => {
-    const navTextColor =
-      getContrastText(
-        props.theme.navbarBackground,
-        props.theme.textPrimary,
-        props.theme.textReverse,
-      ) ?? props.theme.textPrimary;
+    const navTextColor = getNavbarTextColor(props);
+    const inactiveColor = getNavbarInactiveTextColor(props);
     return css`
-      color: ${navTextColor};
+      color: ${props.$selected ? navTextColor : inactiveColor};
       &:hover {
         border-bottom: ${spacing.r2} solid;
         border-top: ${spacing.r2} solid;
@@ -443,10 +440,6 @@ const TabsMenuPanel = styled.nav`
     & > div:focus-visible {
       ${FocusVisibleStyle}
       color: inherit;
-    }
-    a.selected,
-    & > .selected {
-      font-weight: ${fontWeight.bold};
     }
   }
 `;

@@ -126,6 +126,51 @@ export const BasicNavbar = {
   },
 };
 
+export const SelectedTabInMiddle = {
+  args: {
+    tabs: [
+      {
+        selected: false,
+        title: 'Groups',
+        link: <a href="/groups">Groups</a>,
+        onClick: action('Groups clicked'),
+      },
+      {
+        selected: false,
+        title: 'Users',
+        link: <a href="/users">Users</a>,
+        onClick: action('Users clicked'),
+      },
+      {
+        selected: true,
+        title: 'Policies',
+        link: <a href="/policies">Policies</a>,
+        onClick: action('Policies clicked'),
+      },
+      {
+        selected: false,
+        title: 'Buckets',
+        link: <a href="/buckets">Buckets</a>,
+        onClick: action('Buckets clicked'),
+      },
+      {
+        selected: false,
+        title: 'Workflows',
+        link: <a href="/workflows">Workflows</a>,
+        onClick: action('Workflows clicked'),
+      },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The active tab is marked by colour and an underline, not by bold weight, so selecting a tab in the middle of the row does not shift the tabs to its right.',
+      },
+    },
+  },
+};
+
 export const NavbarWithRightActions = {
   args: {
     rightActions,

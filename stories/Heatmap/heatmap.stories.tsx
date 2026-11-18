@@ -30,21 +30,21 @@ const STATUS_ORDER: CellStatus[] = ['Ok', 'Warning', 'Critical', 'No data'];
 const MONITORING_SERVICES = [
   'Alertmanager',
   'Grafana',
+  'Node exporter',
   'Prometheus',
-  'Supervisor',
   'Thanos',
 ];
 
 /** Deliberately long: ResponsiveOrder is about watching the labels give way. */
 const CONNECTOR_SERVICES = [
-  'IAM & STS (vault)',
+  'IAM & STS service',
   'Lifecycle service',
   'Replication (CRR) service',
   'S3 frontend',
   'S3 metadata',
-  'S3 service (cloudserver)',
-  'RING connector (sproxyd)',
-  'UTAPI v1',
+  'S3 object service (API)',
+  'Object storage connector',
+  'Usage metrics API v1',
 ];
 
 const FIVE_MINUTES = 5 * 60 * 1000;
@@ -280,11 +280,11 @@ export const Playground: StoryObj<DataArgs> = {
         cells: ['Ok', 'Ok', 'Warning', 'Ok', 'No data'],
       },
       { label: 'Grafana', cells: ['Ok', 'Ok', 'Ok', 'Ok', 'No data'] },
+      { label: 'Node exporter', cells: ['Ok', 'Ok', 'Ok', 'Ok', 'No data'] },
       {
         label: 'Prometheus',
         cells: ['Warning', 'Critical', 'Critical', 'Ok', 'No data'],
       },
-      { label: 'Supervisor', cells: ['Ok', 'Ok', 'Ok', 'Ok', 'No data'] },
       { label: 'Thanos', cells: ['Ok', 'Warning', 'Ok', 'Ok', 'No data'] },
     ],
   },
