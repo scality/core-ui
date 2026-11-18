@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.9s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>5.3s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -2620,10 +2620,10 @@ one endpoint that is failing, and a linear axis collapses all of them onto zero.
       label: &#39;Error rate&#39;,
       data: [
         [&#39;frontend&#39;, 0.42],
-        [&#39;cloudserver&#39;, 0.0031],
+        [&#39;objects&#39;, 0.0031],
         [&#39;iam&#39;, 0.000042],
         [&#39;metadata&#39;, 0.0000015],
-        [&#39;sproxyd&#39;, 0],
+        [&#39;storage&#39;, 0],
       ],
     },
   ] as const;
@@ -2685,10 +2685,10 @@ mislabelled, only a small enough maximum.</div>
       label: &#39;Error rate&#39;,
       data: [
         [&#39;frontend&#39;, 0.00042],
-        [&#39;cloudserver&#39;, 0.00008],
+        [&#39;objects&#39;, 0.00008],
         [&#39;iam&#39;, 0.000013],
         [&#39;metadata&#39;, 0.0000021],
-        [&#39;sproxyd&#39;, 0],
+        [&#39;storage&#39;, 0],
       ],
     },
   ] as const;
@@ -4035,8 +4035,8 @@ value?: string | null</code></pre>
               </div>
               
               <div class="hint">Single-select segmented control — provide `value` + `onChange` and give each
-child `Button` a `value`. This is the &quot;Sort by&quot; use case from maestro: the
-selected criterion is highlighted, and re-selecting it toggles the direction.</div>
+child `Button` a `value`. The selected criterion is highlighted, and
+re-selecting it toggles the direction.</div>
               <pre><code>const SortBy = () =&gt; {
   const [sortBy, setSortBy] = useState&lt;string&gt;(&#39;name&#39;);
   const [direction, setDirection] = useState&lt;&#39;asc&#39; | &#39;desc&#39;&gt;(&#39;asc&#39;);
@@ -4078,8 +4078,7 @@ selected criterion is highlighted, and re-selecting it toggles the direction.</d
                 <span class="badge ok">story ok</span>
               </div>
               
-              <div class="hint">`null` value renders no selection — re-selecting the active option clears it,
-matching maestro&#39;s optional &quot;Group by&quot;.</div>
+              <div class="hint">`null` value renders no selection — re-selecting the active option clears it.</div>
               <pre><code>const GroupByClearable = () =&gt; {
   const [groupBy, setGroupBy] = useState&lt;string | null&gt;(null);
 
@@ -11643,11 +11642,11 @@ rest of its line empty rather than shifting anything.</div>
                     cells: [&#39;Ok&#39;, &#39;Ok&#39;, &#39;Warning&#39;, &#39;Ok&#39;, &#39;No data&#39;],
                   },
                   { label: &#39;Grafana&#39;, cells: [&#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;No data&#39;] },
+                  { label: &#39;Node exporter&#39;, cells: [&#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;No data&#39;] },
                   {
                     label: &#39;Prometheus&#39;,
                     cells: [&#39;Warning&#39;, &#39;Critical&#39;, &#39;Critical&#39;, &#39;Ok&#39;, &#39;No data&#39;],
                   },
-                  { label: &#39;Supervisor&#39;, cells: [&#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;No data&#39;] },
                   { label: &#39;Thanos&#39;, cells: [&#39;Ok&#39;, &#39;Warning&#39;, &#39;Ok&#39;, &#39;Ok&#39;, &#39;No data&#39;] },
                 ]}
                 columns={buildTimeSlots(HOUR_START, columnCount, FIVE_MINUTES)}
