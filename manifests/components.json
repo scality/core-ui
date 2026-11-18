@@ -12408,7 +12408,7 @@
         {
           "id": "components-inlineinput--loading",
           "name": "Loading",
-          "snippet": "const Loading = () => {\n    // Force a long-running mutation that's pre-triggered when the story mounts.\n    const changeMutation = useFakeMutation({ delay: 60_000 });\n    React.useEffect(() => {\n      changeMutation.mutate({ value: 'My instance' });\n      // eslint-disable-next-line react-hooks/exhaustive-deps\n    }, []);\n\n    return (\n        <InlineInput\n            id=\"instanceName\"\n            defaultValue=\"My instance\"\n            changeMutation={changeMutation} />\n    );\n};"
+          "snippet": "const Loading = () => {\n    // Force a long-running mutation that's pre-triggered when the story mounts.\n    const changeMutation = useFakeMutation({ delay: 60_000 });\n    // biome-ignore lint/correctness/useExhaustiveDependencies: the story fires the mutation once, on mount.\n    React.useEffect(() => {\n      changeMutation.mutate({ value: 'My instance' });\n    }, []);\n\n    return (\n        <InlineInput\n            id=\"instanceName\"\n            defaultValue=\"My instance\"\n            changeMutation={changeMutation} />\n    );\n};"
         },
         {
           "id": "components-inlineinput--with-confirmation-modal",
@@ -12910,6 +12910,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5150
+    "durationMs": 4136
   }
 }

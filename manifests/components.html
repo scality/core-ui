@@ -626,7 +626,7 @@
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.2s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.1s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -13213,9 +13213,9 @@ size?: InputSize</code></pre>
               <pre><code>const Loading = () =&gt; {
     // Force a long-running mutation that&#39;s pre-triggered when the story mounts.
     const changeMutation = useFakeMutation({ delay: 60_000 });
+    // biome-ignore lint/correctness/useExhaustiveDependencies: the story fires the mutation once, on mount.
     React.useEffect(() =&gt; {
       changeMutation.mutate({ value: &#39;My instance&#39; });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
