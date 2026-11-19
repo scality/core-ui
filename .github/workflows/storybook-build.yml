@@ -3,6 +3,7 @@ name: build storybook
 on:
   # No base-branch filter, so a pull request stacked on another one is tested too.
   pull_request:
+  merge_group:
   workflow_dispatch:
 
 jobs:
