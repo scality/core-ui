@@ -1,21 +1,8 @@
 name: basic tests
 
 on:
-  push:
-    branches:
-      - 'user/**'
-      - 'feature/**'
-      - 'improvement/**'
-      - 'bugfix/**'
-      - 'w/**'
-      - 'q/**'
-      - 'hotfix/**'
-      - 'dependabot/**'
+  # No base-branch filter, so a pull request stacked on another one is tested too.
   pull_request:
-    types:
-      - opened
-    branches:
-      - 'feature/bump-core-ui-version-to-**'
 
 jobs:
   tests:

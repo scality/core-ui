@@ -1,18 +1,8 @@
 name: build storybook
 
 on:
-  push:
-    branches:
-      - 'user/**'
-      - 'feature/**'
-      - 'improvement/**'
-      - 'bugfix/**'
-      - 'w/**'
-      - 'q/**'
-      - 'hotfix/**'
-      - 'dependabot/**'
+  # No base-branch filter, so a pull request stacked on another one is tested too.
   pull_request:
-    branches: [development/*, stabilization/*, hotfix/*]
   workflow_dispatch:
 
 jobs:
