@@ -11,6 +11,11 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { ChartColors } from '../../../style/theme';
 
+/**
+ * A stable id for one chart, kept for as long as it is mounted. Pass it to
+ * `useChartLegend`'s `register` so a chart's series are keyed to it and two
+ * charts cannot overwrite each other's.
+ */
 export const useChartId = (): string => {
   const idRef = useRef<string | null>(null);
 
@@ -67,6 +72,12 @@ export type ChartLegendWrapperProps = {
   labelMap?: Record<string, string>;
 };
 
+/**
+ * Puts several charts and their `ChartLegend` on one selection: which resources
+ * are shown, and their colours from `colorSet`. It is required rather than
+ * optional — every chart here calls `useChartLegend`, which throws outside a
+ * wrapper.
+ */
 export const ChartLegendWrapper = ({
   children,
   colorSet,
@@ -254,6 +265,11 @@ export const ChartLegendWrapper = ({
   );
 };
 
+/**
+ * Reads the selection a `ChartLegendWrapper` holds — which resources are shown,
+ * their colours and labels — and registers a chart's own series with it. It
+ * throws outside a wrapper.
+ */
 export const useChartLegend = () => {
   const context = useContext(ChartLegendContext);
   if (!context) {
