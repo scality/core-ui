@@ -3,6 +3,9 @@ name: basic tests
 on:
   # No base-branch filter, so a pull request stacked on another one is tested too.
   pull_request:
+  # Required by the merge queue: without it the required checks are never
+  # reported on queue entries and the merge fails. Do not remove.
+  merge_group:
 
 jobs:
   tests:
