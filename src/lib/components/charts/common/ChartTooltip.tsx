@@ -66,8 +66,9 @@ interface ChartTooltipItemProps {
 }
 
 /**
- * One label-and-value row of a chart tooltip, with the series' legend swatch.
- * `isHovered` bolds the row of the series under the pointer.
+ * One label-and-value row of a chart tooltip. `legendIcon` is the swatch, which
+ * the caller supplies, and `isHovered` bolds the row of the series under the
+ * pointer.
  */
 export const ChartTooltipItem: React.FC<ChartTooltipItemProps> = ({
   label,
