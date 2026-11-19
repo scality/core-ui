@@ -14,8 +14,7 @@ describe('Banner', () => {
       { wrapper: Wrapper },
     );
     expect(screen.getByText('Some text content')).toBeInTheDocument();
-    // Icon lazy-loads its glyph: an <i class="svg-inline--fa"> placeholder renders
-    // before any <svg> exists, so `svg` alone would pass even with an icon present.
+    // Icon lazy-loads: an <i class="svg-inline--fa"> placeholder renders before any <svg>.
     expect(
       container.querySelector('svg, .svg-inline--fa'),
     ).not.toBeInTheDocument();
