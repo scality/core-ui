@@ -6,6 +6,12 @@ type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * Puts a core-ui theme in reach of everything below it. It wraps
+ * styled-components' own provider and adds the styled-system scales — `space`,
+ * `fontSizes` and `colors` — that `Box` and the spacing props resolve against,
+ * so the bare `ThemeProvider` is not a substitute.
+ */
 const CoreUiThemeProvider = ({ theme, children }: Props) => {
   const newTheme = {
     ...theme,

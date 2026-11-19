@@ -2,6 +2,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { QueryTimeSpan, queryTimeSpansCodes } from '../constants';
 import { useLocation } from 'react-router';
 export const MetricsTimeSpanContext = createContext<QueryTimeSpan | null>(null);
+/**
+ * Holds the time span the charts below it query, taken from the `from` search
+ * parameter of `location` and defaulting to the last 24 hours. Mount it above
+ * the charts that should move together when the span changes.
+ */
 export const MetricsTimeSpanProvider = ({
   children,
   location,
@@ -37,6 +42,10 @@ export const MetricsTimeSpanProvider = ({
     </MetricsTimeSpanContext.Provider>
   );
 };
+/**
+ * The time span a `MetricsTimeSpanProvider` holds: its query string, its label,
+ * its duration and its sampling interval. It throws outside a provider.
+ */
 export const useMetricsTimeSpan = (): QueryTimeSpan => {
   const metricsTimeSpanContext = useContext(MetricsTimeSpanContext);
 

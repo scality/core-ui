@@ -164,6 +164,11 @@ export type BarchartProps<T extends BarchartBars> = {
 
 /* ---------------------------------- MAIN COMPONENT ---------------------------------- */
 
+/**
+ * Bars over a category or a time axis, one series per entry of `bars`. It owns
+ * its own title, loading and error states, so a caller hands it data rather than
+ * assembling a chart; `stacked` folds the series into one bar per point.
+ */
 export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();
   const { getColor } = useChartLegend();

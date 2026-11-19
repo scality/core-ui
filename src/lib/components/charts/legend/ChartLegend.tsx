@@ -72,6 +72,11 @@ export const LegendShape = styled.div<{
   }}
 `;
 
+/**
+ * The legend for the charts inside a `ChartLegendWrapper`, one swatch per
+ * resource, and clicking a swatch filters what those charts draw. It reads
+ * everything from the wrapper, so it takes no series of its own.
+ */
 export const ChartLegend = ({
   shape,
   disabled = false,
