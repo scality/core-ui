@@ -14,7 +14,7 @@ then install the dependencies:
 npm install
 ```
 
-The whole repository was reformatted in one commit when Biome replaced Prettier. GitHub's blame view skips that commit on its own; to make `git blame` skip it locally too, run once:
+The sources were reformatted in one commit when Biome replaced Prettier. GitHub's blame view skips that commit on its own; to make `git blame` skip it locally too, run once:
 
 ```sh
 git config blame.ignoreRevsFile .git-blame-ignore-revs
@@ -163,17 +163,17 @@ Write one test file per source module, named after the module rather than the be
 - Push your code on a branch following the [branch naming convention](#create-a-new-branch)
 - Create a pull request
 - Obtain the approval of at least one reviewer, and wait for the required checks to pass
-- Then merge it from GitHub: `development/1.0` accepts no direct push, only an approved pull request
+- Then merge it from GitHub: the development branch accepts no direct push
 
 ## Release
 
 After merging one or more PRs in Core-UI, it is possible to publish a new release. In the Core-UI repo, follow these steps:
 
 1. Go to `Releases`, then `Draft a new release`
-2. In the `Choose a tag` select menu, create a new tag (the current tag incremented by 1)
+2. In the `Choose a tag` select menu, create a new tag matching the `version` in `package.json`
 3. `Generate release notes`: it will add all the PR infos since the last release. You can add details if necessary
 4. `Publish release`
-5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens and merges a PR that moves `package.json` to the next minor version. A patch release therefore needs the version set by hand first.
+5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens and merges a PR that moves `package.json` to the next minor version. A patch release therefore needs a pull request setting `package.json` to the patch version, merged before step 1.
 
 ## Build
 
