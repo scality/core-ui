@@ -119,6 +119,12 @@ export type InputProps = {
   fluid?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
+/**
+ * The library's single-line text field. `size` picks one of four fixed widths
+ * rather than sizing to the content; `fluid` lets that width give way to the
+ * column instead of overflowing it, and a field inside a `FormGroup` of a
+ * `responsive` Form is fluid already.
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {

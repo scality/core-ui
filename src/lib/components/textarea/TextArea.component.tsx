@@ -208,4 +208,9 @@ function TextAreaElement(
   );
 }
 
+/**
+ * A multi-line field for free-form text, set in the monospace face by default;
+ * `variant="text"` switches it to the proportional face. `autoGrow` makes it
+ * follow its content instead of scrolling inside a fixed height.
+ */
 export const TextArea = forwardRef<RefType, Props>(TextAreaElement);

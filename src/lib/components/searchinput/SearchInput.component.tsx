@@ -71,6 +71,12 @@ const ClearButton = styled.div`
   top: 0px;
 `;
 
+/**
+ * A field that narrows what is already on screen — a table, a list — rather than
+ * one whose value is submitted; that one is an `Input`. It shows what is typed at
+ * once but holds `onChange` back 300ms, so the filtering runs on a pause rather
+ * than on every keystroke.
+ */
 const SearchInput = forwardRef(
   (
     {
