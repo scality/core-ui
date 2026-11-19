@@ -1,4 +1,3 @@
-import '@fortawesome/fontawesome-free/css/all.css';
 import './index.css';
 export { Button } from './components/buttonv2/Buttonv2.component';
 export { CopyButton } from './components/buttonv2/CopyButton.component';
