@@ -279,6 +279,11 @@ const DefaultRenderer = ({ value }) => {
 // renders and react-table does not recompute its rows each time.
 const NO_ROWS: never[] = [];
 
+/**
+ * A virtualized table of rows the user reads and selects. The body is a
+ * `Table.SingleSelectableContent` or `Table.MultiSelectableContent` child, and
+ * `Table.Search` filters them from a query the caller holds.
+ */
 function Table<
   DATA_ROW extends Record<string, unknown> = Record<string, unknown>,
 >({

@@ -165,6 +165,11 @@ ${(props) => {
 }}
 `;
 
+/**
+ * Applies the library's scrollbar styling to the whole page. Mount it once near
+ * the root — it is a global style, not a per-region wrapper, and `Table`'s bottom
+ * fade depends on it.
+ */
 function ScrollbarWrapper({ children }: Props) {
   return (
     <>
