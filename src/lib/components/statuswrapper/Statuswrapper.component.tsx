@@ -57,6 +57,12 @@ type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * Pins a small status badge to whatever it wraps, for an icon or an avatar that
+ * has to carry a health alongside its own meaning. Only `warning`, `critical`
+ * and `unknown` get a badge; any other status leaves the wrapper in place with
+ * nothing pinned to it.
+ */
 function StatusWrapper({ status, children }: Props) {
   const icon = getBadgeIcon(status);
   return (

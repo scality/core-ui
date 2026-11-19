@@ -81,6 +81,12 @@ const Wrapper = styled.div`
   padding: ${spacing.r8} 0 ${spacing.r8} 0;
 `;
 
+/**
+ * A titled section the user opens and closes, for detail that would otherwise
+ * crowd the page. `open` sets the starting state and re-applies whenever it
+ * changes; once the opening transition finishes, content such as a menu may
+ * overflow the box unclipped.
+ */
 export const Accordion = ({
   title,
   id,
