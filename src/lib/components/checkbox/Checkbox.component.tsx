@@ -98,6 +98,10 @@ export type Props = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
+/**
+ * A box the user ticks for a choice that stands on its own, rather than one that
+ * rules the others out — RadioGroup is what offers a single choice among several.
+ */
 const Checkbox = forwardRef<HTMLInputElement, Props>(
   (
     { disabled, checked, label, labelHelpTooltip, value, onChange, ...rest },

@@ -32,7 +32,7 @@ import { useFieldContext } from '../form/Form.component';
 import { ConstrainedText } from '../constrainedtext/Constrainedtext.component';
 import ReactSelect from 'react-select/src/Select';
 
-// more/equal than NOPT_SEARCH options enable search
+// more than NOPT_SEARCH options enable search
 const NOPT_SEARCH = 8;
 export type OptionProps = {
   title?: string;
@@ -804,4 +804,10 @@ const SelectWithOptionContext = forwardRef<
 SelectWithOptionContext.displayName = 'Select';
 SelectWithOptionContext.Option = Option;
 SelectWithOptionContext.Group = Group;
+/**
+ * One choice among a list that drops down, declared as `Select.Option` children
+ * and optionally gathered under `Select.Group` headings. Prefer a RadioGroup
+ * while the options are few enough to show at once; past eight of them this one
+ * turns searchable and filters as the user types.
+ */
 export const Select = SelectWithOptionContext;

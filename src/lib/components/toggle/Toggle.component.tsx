@@ -122,4 +122,9 @@ function ToggleSwitch({ toggle, label, onChange, disabled, ...rest }: Props) {
   );
 }
 
+/**
+ * A switch for a setting that applies as it is flipped, with nothing to submit
+ * afterwards. A value that only takes effect when the surrounding form is
+ * submitted is a Checkbox.
+ */
 export const Toggle = ToggleSwitch;
