@@ -162,8 +162,8 @@ Write one test file per source module, named after the module rather than the be
 
 - Push your code on a branch following the [branch naming convention](#create-a-new-branch)
 - Create a pull request
-- Obtain the approval of at least one reviewer
-- Then comment with `/approve` to merge the PR
+- Obtain the approval of at least one reviewer, and wait for the required checks to pass
+- Then merge it from GitHub: `development/1.0` accepts no direct push, only an approved pull request
 
 ## Release
 
