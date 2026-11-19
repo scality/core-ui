@@ -62,6 +62,12 @@ const EmptytableContentDiv = styled.div`
   }}
 `;
 
+/**
+ * Centers arbitrary content in the body of a table that has no rows, leaving
+ * the caller to say why. UnsuccessfulResult writes that message for the usual
+ * cases — loading, error, no match — so reach for this one only when the
+ * message is specific to the screen.
+ */
 function EmptyTable(props: Props) {
   if (props.useDiv)
     return (
