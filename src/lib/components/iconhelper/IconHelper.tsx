@@ -77,6 +77,11 @@ const HelpButton = styled.button`
   }
 `;
 
+/**
+ * A help button beside a label, revealing `tooltipMessage` for a field whose
+ * name is not enough on its own. Inside a `FormGroup` or a `Checkbox`, pass
+ * their `labelHelpTooltip` instead and let them place it.
+ */
 export const IconHelp = ({
   tooltipMessage,
   overlayStyle,

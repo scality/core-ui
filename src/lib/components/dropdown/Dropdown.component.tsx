@@ -239,6 +239,11 @@ const TriggerStyled = styled(Trigger)`
   }
 `;
 
+/**
+ * A trigger that opens a short list of `items`, each carrying its own `onClick`
+ * — a menu of actions, not a form field. Reach for `Select` when the user is
+ * choosing a value rather than doing something.
+ */
 function Dropdown({
   items,
   text,

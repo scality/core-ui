@@ -100,4 +100,10 @@ function HealthSelectorv2(props: Props) {
   );
 }
 
+/**
+ * The `Select` preset for filtering by health: All Status, Healthy, Warning,
+ * Critical and Unknown, each with an icon of its own. Pass `options` to narrow
+ * or reorder that set; with no `value` it falls back to the first option of
+ * whichever list is in effect.
+ */
 export const HealthSelector = HealthSelectorv2;

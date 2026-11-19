@@ -5,6 +5,11 @@ type Props = {
   unit?: 'iB' | 'B';
 };
 
+/**
+ * A byte count formatted for display, in binary units by default (1024 reads as
+ * 1 KiB); pass `unit="B"` for decimal units. A missing value, or a finite
+ * negative one, renders as `-`.
+ */
 function PrettyBytes({ bytes, decimals = 0, unit = 'iB' }: Props) {
   if (bytes === undefined || bytes === null) return <>-</>;
   let fractionDigits = decimals;
