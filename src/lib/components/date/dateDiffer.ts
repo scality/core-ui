@@ -1,5 +1,10 @@
 import { Temporal } from '@js-temporal/polyfill';
 
+/**
+ * Whole `unit`s from `startDate` to `endDate`, counted against `startDate`'s
+ * calendar, so a month is not a fixed number of days. Rounds down when positive
+ * and to nearest when negative.
+ */
 export function getDateDaysDiff(
   startDate: Date,
   endDate: Date,

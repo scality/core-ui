@@ -22,6 +22,10 @@ interface ToastProviderProps {
   children: ReactNode;
 }
 
+/**
+ * Holds the one toast an application shows at a time, and renders it. Mount it
+ * once near the root; anything below asks for a toast through `useToast`.
+ */
 export const ToastProvider: React.FC<
   React.PropsWithChildren<ToastProviderProps>
 > = ({ children }) => {
@@ -39,6 +43,10 @@ export const ToastProvider: React.FC<
   );
 };
 
+/**
+ * Returns `showToast`, which puts a toast on screen in place of whatever is
+ * already there. It throws outside a `ToastProvider`.
+ */
 export const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {

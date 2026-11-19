@@ -15,6 +15,7 @@ import { fontSize, fontWeight } from '../../../style/theme';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { getTooltipDateFormat } from './chartUtils';
 
+/** Wrapper for a chart tooltip's contents. */
 export const ChartTooltipContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.backgroundLevel1};
@@ -64,6 +65,10 @@ interface ChartTooltipItemProps {
   legendIcon?: React.ReactNode;
 }
 
+/**
+ * One label-and-value row of a chart tooltip, with the series' legend swatch.
+ * `isHovered` bolds the row of the series under the pointer.
+ */
 export const ChartTooltipItem: React.FC<ChartTooltipItemProps> = ({
   label,
   value,
@@ -81,6 +86,7 @@ export const ChartTooltipItem: React.FC<ChartTooltipItemProps> = ({
   </TooltipRow>
 );
 
+/** The first line of a chart tooltip, naming the point. */
 export const ChartTooltipHeader = styled.div`
   color: ${({ theme }) => theme.textPrimary};
   font-weight: ${fontWeight.bold};
@@ -88,6 +94,7 @@ export const ChartTooltipHeader = styled.div`
   margin-bottom: ${spacing.r8};
 `;
 
+/** Stacks a chart tooltip's `ChartTooltipItem` rows. */
 export const ChartTooltipItemsContainer = styled.div`
   display: flex;
   flex-direction: column;

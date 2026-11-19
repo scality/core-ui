@@ -1,3 +1,4 @@
+/** Named values for `Loader`'s `size` prop; `LOADER_SIZE.large` is its default. */
 export const LOADER_SIZE: { [Key in Size]: Key } = {
   smaller: 'smaller',
   small: 'small',
@@ -76,6 +77,12 @@ export const queryTimeSpansCodes: QueryTimeSpan[] = [
 
 export const NAN_STRING = 'NAN';
 
+/**
+ * Health values. Sorting a `Table` on health accepts only `critical`, `warning`,
+ * `none` and `healthy`; any other value is rejected with a console error.
+ * `StatusWrapper` badges only `warning`, `critical` and `unknown`. `success` is
+ * the colour-palette key for `healthy`, not a health of its own.
+ */
 export const STATUS_CRITICAL = 'critical';
 export const STATUS_WARNING = 'warning';
 export const STATUS_SUCCESS = 'success';

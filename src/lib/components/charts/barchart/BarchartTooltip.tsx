@@ -12,6 +12,11 @@ import { CategoryType, TimeType, UnitRange } from '../types';
 import { getCurrentPoint } from './Barchart.utils';
 import { formatTooltipValueWithUnit } from '../common/chartUtils';
 
+/**
+ * The default hover tooltip of `Barchart`: every series at the hovered category,
+ * the one under the pointer emphasised. Supply `Barchart`'s `tooltip` prop to
+ * replace its contents.
+ */
 export const BarchartTooltip = <T extends BarchartBars>({
   type,
   tooltipProps,
