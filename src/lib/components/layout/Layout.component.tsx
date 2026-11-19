@@ -29,6 +29,12 @@ const MainContent = styled.div`
   background-color: ${getThemePropSelector('backgroundLevel1')};
 `;
 
+/**
+ * The application frame that builds its own navigation: a `Navbar` across the
+ * top from `navbar`, an optional `Sidebar` down the side, and the page in what
+ * is left. `navbarElement` supplies a bar of your own instead, and `navbar` wins
+ * when both are given.
+ */
 function Layout({ children, sidebar, navbar, navbarElement, ...rest }: Props) {
   return (
     <LayoutContainer {...rest}>

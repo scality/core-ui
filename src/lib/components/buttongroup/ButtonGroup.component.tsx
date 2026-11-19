@@ -112,6 +112,11 @@ type SelectableChildProps = {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
+/**
+ * Buttons framed as one control instead of a row of separate ones. Give it
+ * `onChange` and children carrying a `value` become a single-select segmented
+ * control; without `onChange` it is only a visual grouping.
+ */
 function ButtonGroup({
   orientation = 'horizontal',
   value,

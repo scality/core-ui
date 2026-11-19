@@ -87,6 +87,12 @@ export const useClipboard = () => {
   };
 };
 
+/**
+ * A `Button` that puts `textToCopy` on the clipboard and reports back for two
+ * seconds, refusing clicks meanwhile. Reach for it rather than wiring
+ * `navigator.clipboard` to a plain Button; `copyAsHtml` copies rich text with a
+ * plain-text fallback.
+ */
 export const CopyButton = ({
   label,
   textToCopy,

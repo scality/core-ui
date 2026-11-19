@@ -332,6 +332,11 @@ export const ButtonLoader = styled(Loader)<{
     `}
 `;
 
+/**
+ * The library's action control, from a page's primary call to action down to a
+ * bare icon in a row. An icon-only button always needs a `tooltip`, whose
+ * `overlay` has to be a string unless an `aria-label` names the button instead.
+ */
 function Button({
   variant,
   size,
