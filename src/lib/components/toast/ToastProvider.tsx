@@ -44,8 +44,8 @@ export const ToastProvider: React.FC<
 };
 
 /**
- * Returns `showToast`, which puts a toast on screen in place of whatever is
- * already there. It throws outside a `ToastProvider`.
+ * The context of the nearest `ToastProvider`, whose `showToast` puts a toast on
+ * screen in place of whatever is already there. It throws outside a provider.
  */
 export const useToast = () => {
   const context = useContext(ToastContext);
