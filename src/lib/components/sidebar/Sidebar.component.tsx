@@ -172,6 +172,12 @@ const MenuItemIcon = styled.div`
   height: ${sidebarItemHeight};
 `;
 
+/**
+ * The vertical strip of `actions` beside the content, icons alone until it is
+ * expanded. It does not own that state: `expanded` comes from the caller
+ * and `onToggleClick` renders the toggle that asks for it, while `hoverable`
+ * reveals the labels on hover without changing `expanded`.
+ */
 function Sidebar({
   expanded,
   actions,

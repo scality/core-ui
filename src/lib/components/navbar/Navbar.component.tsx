@@ -195,9 +195,11 @@ export type Props = {
   logo?: JSX.Element;
   tabs?: Array<Tab>;
   /**
-   * Container width (px) below which right-action labels drop to icon-only
-   * (e.g. the username dropdown shows just its icon). Tabs overflow into a
-   * "More" menu automatically as space runs out, independent of this value.
+   * Container width (px) below which a dropdown right action with an icon
+   * shortens its label to initials (the username dropdown shows "CG" beside its
+   * icon, the full name moving to the tooltip). Button and custom actions are
+   * unaffected. Tabs overflow into a "More" menu automatically as space runs
+   * out, independent of this value.
    * Defaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.
    */
   condenseActionsBreakpoint?: number;
@@ -762,4 +764,10 @@ function NavBar({
   );
 }
 
+/**
+ * The bar across the top of an application: its logo, its top-level `tabs` and
+ * the `rightActions` reachable from anywhere. It handles its own crowding: tabs
+ * overflow into a "More" menu as room runs out, and right actions condense below
+ * `condenseActionsBreakpoint`.
+ */
 export const Navbar = NavBar;

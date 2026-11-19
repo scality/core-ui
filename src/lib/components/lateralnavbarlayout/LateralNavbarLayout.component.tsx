@@ -26,6 +26,11 @@ const MainContent = styled.div`
   background-color: ${getThemePropSelector('backgroundLevel1')};
 `;
 
+/**
+ * A full-viewport frame whose navigation is entirely lateral: a `Sidebar` and
+ * the page beside it, with no bar above. The v1 `Layout` is the one that puts a
+ * Navbar on top of the same arrangement.
+ */
 function LateralNavbarLayout({ children, sidebar, ...rest }: Props) {
   return (
     <LateralNavbarLayoutContainer {...rest}>

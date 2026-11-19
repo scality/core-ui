@@ -137,6 +137,11 @@ const AppChildrenContainer = styled.div<{
   box-sizing: border-box;
 `;
 
+/**
+ * The body of a v2 `Layout`: it claims the height the Layout leaves and lays the
+ * page out beside an optional `sidebarNavigation`. It clips what overflows and
+ * never scrolls itself, so a scrolling region has to come from inside it.
+ */
 function AppContainer({
   children,
   sidebarNavigation,
