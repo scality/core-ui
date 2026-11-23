@@ -210,5 +210,6 @@ function TextAreaElement(
 
 /**
  * A multi-line field for free-form text, set in the monospace face by default.
+ * A single-line value is an `Input`.
  */
 export const TextArea = forwardRef<RefType, Props>(TextAreaElement);
