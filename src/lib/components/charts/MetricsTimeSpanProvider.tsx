@@ -43,8 +43,8 @@ export const MetricsTimeSpanProvider = ({
   );
 };
 /**
- * The time span a `MetricsTimeSpanProvider` holds: its query string, its label,
- * its duration and its sampling interval. It throws outside a provider.
+ * The time span the nearest `MetricsTimeSpanProvider` holds. It throws outside
+ * a provider.
  */
 export const useMetricsTimeSpan = (): QueryTimeSpan => {
   const metricsTimeSpanContext = useContext(MetricsTimeSpanContext);

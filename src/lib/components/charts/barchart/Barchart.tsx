@@ -167,8 +167,7 @@ export type BarchartProps<T extends BarchartBars> = {
 /**
  * Bars over a category or a time axis, one series per entry of `bars` that the
  * enclosing `ChartLegendWrapper`'s `colorSet` names — a label the colorSet omits
- * is dropped with a console warning. It handles its own title, loading and error
- * states, and `stacked` folds the series into one bar per point.
+ * is dropped with a console warning.
  */
 export const Barchart = <T extends BarchartBars>(props: BarchartProps<T>) => {
   const theme = useTheme();

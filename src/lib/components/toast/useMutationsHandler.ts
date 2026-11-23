@@ -92,8 +92,7 @@ export type MinimalMutationResult<TData, TError> = Pick<
 
 /**
  * Reports the outcome of a mutation, and of the mutations that depend on it, as
- * a single toast, once none of them is still loading. Use it instead of calling
- * `showToast` from each mutation's callbacks.
+ * a single toast, once none of them is still loading.
  */
 export const useMutationsHandler = <
   MainMutationType extends MinimalMutationResult<unknown, unknown>,

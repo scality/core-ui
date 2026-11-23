@@ -15,7 +15,7 @@ import { fontSize, fontWeight } from '../../../style/theme';
 import { FormattedDateTime } from '../../date/FormattedDateTime';
 import { getTooltipDateFormat } from './chartUtils';
 
-/** Wrapper for a chart tooltip's contents. */
+/** The outer frame of a chart tooltip, around a `ChartTooltipHeader` and its rows. */
 export const ChartTooltipContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
   background-color: ${({ theme }) => theme.backgroundLevel1};
@@ -95,7 +95,7 @@ export const ChartTooltipHeader = styled.div`
   margin-bottom: ${spacing.r8};
 `;
 
-/** Stacks a chart tooltip's `ChartTooltipItem` rows. */
+/** Holds the `ChartTooltipItem` rows below a `ChartTooltipHeader`. */
 export const ChartTooltipItemsContainer = styled.div`
   display: flex;
   flex-direction: column;

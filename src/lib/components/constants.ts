@@ -81,9 +81,7 @@ export const NAN_STRING = 'NAN';
  * Health values. `Table`'s `health` sort orders them critical, warning, none,
  * healthy; it does not understand `success`, `info` or `unknown`, which log a
  * console error and then compare equal to everything, so one such row can
- * disorder the whole column. `StatusWrapper` badges only `warning`, `critical`
- * and `unknown`. `success` is a legacy alias of `healthy` that
- * `getThemePropSelector` translates, not a health of its own.
+ * disorder the whole column. `success` is a legacy alias of `healthy`.
  */
 export const STATUS_CRITICAL = 'critical';
 export const STATUS_WARNING = 'warning';

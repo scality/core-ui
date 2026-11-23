@@ -266,9 +266,8 @@ export const ChartLegendWrapper = ({
 };
 
 /**
- * Reads the selection a `ChartLegendWrapper` holds — which resources are shown,
- * their colours and labels — and registers a chart's own series with it. It
- * throws outside a wrapper.
+ * Reads the selection the nearest `ChartLegendWrapper` holds and registers a
+ * chart's own series with it. It throws outside a wrapper.
  */
 export const useChartLegend = () => {
   const context = useContext(ChartLegendContext);
