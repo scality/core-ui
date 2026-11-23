@@ -234,11 +234,10 @@ export const GentleEmphaseSecondaryText = styled(SecondaryText)<{
 `;
 
 /**
- * The text primitive the design system's type scale is expressed through:
- * `variant` picks the size, `isEmphazed` the weight, `isGentleEmphazed`
- * italics and `color` any theme color key. Reach for it rather than one of
- * the fixed-purpose components in this file, which mostly pin one combination
- * of those props and cannot be adjusted.
+ * The text primitive the design system's type scale is expressed through, with
+ * the size, the weight, italics and the theme color each left to the caller.
+ * Reach for it rather than one of the fixed-purpose components in this file,
+ * which mostly pin one combination of those props and cannot be adjusted.
  */
 export const Text = styled.span.withConfig({
   shouldForwardProp: forwardTextProp,

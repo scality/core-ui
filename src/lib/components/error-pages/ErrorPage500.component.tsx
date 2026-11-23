@@ -38,8 +38,8 @@ type Props = {
 };
 
 /**
- * The full-page fallback for an unexpected failure, naming the cause only when
- * the caller passes `errorMessage`. Reach for ErrorPage404 when the address is
+ * The full-page fallback for an unexpected failure. Reach for ErrorPage404
+ * when the address is
  * known not to exist, and ErrorPage401 when the credentials are known to be
  * the problem.
  */

@@ -22,8 +22,8 @@ const InfoMessageContainer = styled.div`
 `;
 
 /**
- * An explanatory panel sitting inside the content it explains, with a title, a
- * body and an optional link out to fuller documentation. Its tone is fixed and
+ * An explanatory panel sitting inside the content it explains. Its tone is
+ * fixed and
  * informational — there is no severity to choose — so it teaches rather than
  * alerts; a condition the user should act on is a Banner.
  */
