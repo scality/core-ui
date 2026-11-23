@@ -86,6 +86,10 @@ function getPanelsObjectRation(ratio: RatioString) {
   throw new Error('Unsupported ratio');
 }
 
+/**
+ * Splits the content area in two at one of three fixed ratios, for a list beside
+ * its detail or a form beside its preview.
+ */
 export const TwoPanelLayout = ({
   panelsRatio,
   leftPanel,

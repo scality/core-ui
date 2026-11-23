@@ -79,6 +79,12 @@ const withBreadcrumbSeparator = (lastIndex) => (acc, item, index) => {
     : [...acc, item];
 };
 
+/**
+ * The trail back up from where the user is, showing a position in a hierarchy
+ * rather than switching between peers — that is Tabs. Pass each level as an
+ * element of `paths`; the last is styled as the current page, in the plain text
+ * colour and without the hover underline the others carry.
+ */
 const Breadcrumb = ({ paths = [], ...rest }: Props) => {
   const lastIndex = paths.length - 1;
   const breadcrumbItems = paths
