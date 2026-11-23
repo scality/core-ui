@@ -46,8 +46,7 @@ const defaultDropzoneLabels = {
 /**
  * How a form takes files rather than typed values: a drop target that also picks
  * through a button of its own, keeping the accepted list and reporting it
- * through `onChange`. `variant` chooses between a centred panel and a single
- * inline row.
+ * through `onChange`.
  */
 export function Dropzone({
   labels,

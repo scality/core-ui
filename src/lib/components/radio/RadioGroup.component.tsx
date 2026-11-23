@@ -195,9 +195,7 @@ const RadioOptionItem = ({
 /**
  * One choice among a short list of `options`, all of them visible at once. Reach
  * for a Select once showing every option costs more than it helps, and for
- * Checkbox when the choices do not exclude each other. The group names itself
- * through `label`, `aria-label` or `aria-labelledby`; the type requires exactly
- * one of the three.
+ * Checkbox when the choices do not exclude each other.
  */
 const RadioGroup = (props: RadioGroupProps) => {
   const {

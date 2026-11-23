@@ -120,10 +120,9 @@ export type InputProps = {
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
 /**
- * The library's single-line text field. `size` picks one of four fixed widths
- * rather than sizing to the content; `fluid` lets that width give way to the
- * column instead of overflowing it, and a field inside a `FormGroup` of a
- * `responsive` Form is fluid already.
+ * The library's single-line text field, for a value the surrounding form
+ * submits. A field that narrows what is already on screen is a `SearchInput`,
+ * and one edited in place with no form around it is an `InlineInput`.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (

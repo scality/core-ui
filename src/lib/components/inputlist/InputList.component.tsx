@@ -100,6 +100,6 @@ function InternalInputList<
 /**
  * The field for a value that is legitimately a list rather than one entry. It
  * holds an `Input` per item of a single array value, with the add and remove
- * buttons that keep the two in step, and `maxItems` bounds how far it grows.
+ * buttons that keep the two in step.
  */
 export const InputList = forwardRef(InternalInputList);
