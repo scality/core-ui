@@ -106,9 +106,7 @@ export interface EditorProps {
 }
 
 /**
- * A code pane for JSON, validated and completed against a schema when `language`
- * carries one. With `readOnly`, a refused edit shows a "Cannot edit" notice
- * rather than being swallowed in silence.
+ * A code pane for JSON, validated and completed against a schema.
  */
 export const Editor = ({
   value,
