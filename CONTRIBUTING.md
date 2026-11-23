@@ -170,10 +170,10 @@ Write one test file per source module, named after the module rather than the be
 After merging one or more PRs in Core-UI, it is possible to publish a new release. In the Core-UI repo, follow these steps:
 
 1. Go to `Releases`, then `Draft a new release`
-2. In the `Choose a tag` select menu, create a new tag matching the `version` in `package.json`
+2. In the `Choose a tag` select menu, create a new tag named after the version to publish: the last tag with its minor incremented (after `0.236.0` comes `0.237.0`), or its patch for a patch release
 3. `Generate release notes`: it will add all the PR infos since the last release. You can add details if necessary
 4. `Publish release`
-5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens and merges a PR that moves `package.json` to the next minor version. A patch release therefore needs a pull request setting `package.json` to the patch version, merged before step 1.
+5. The `post-release` workflow publishes that tag's version to npm. The `version` in `package.json` stays `0.0.0-development` on the branch and is never published, so nothing needs to change in the repository before or after a release.
 
 ## Build
 

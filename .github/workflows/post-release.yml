@@ -5,53 +5,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  bump-version:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-      - run: echo "nextVersion=$(npm version --no-git-tag minor)" >> $GITHUB_ENV
-      - name: Push version bump branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b feature/bump-core-ui-version-to-${{ env.nextVersion }}
-          git add package.json package-lock.json
-          git commit -m "Bump core-ui version to ${{ env.nextVersion }}"
-          git push origin feature/bump-core-ui-version-to-${{ env.nextVersion }}
-      - name: Create Pull Request
-        uses: actions/github-script@v5
-        id: cpr
-        with:
-          script: |
-            const pr = await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: `feature/bump-core-ui-version-to-${process.env.nextVersion}`,
-              base: context.payload.repository.default_branch,
-              title: `Bump core-ui version to ${process.env.nextVersion}`,
-              body: ''
-            });
-            core.setOutput('pull-request-number', String(pr.data.number));
-      - name: Merge Pull Request
-        uses: actions/github-script@v5
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        with:
-          github-token: ${{ secrets.GIT_ACCESS_TOKEN }}
-          script: |
-            await github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: ${{ steps.cpr.outputs.pull-request-number }},
-              merge_method: 'merge'
-            })
-
   publish-npm:
     runs-on: ubuntu-latest
     permissions:
@@ -60,6 +13,13 @@ jobs:
       packages: read # to install @jbwatenbergscality/storybook-webmcp from GHPR
     environment: npmjs
     steps:
+      # The published version is the ref name, so a manual run started on a branch
+      # would fail only after the install and build; stop it here instead.
+      - name: Refuse to publish from a branch
+        if: github.ref_type != 'tag'
+        run: |
+          echo "::error::Run this workflow on a release tag, not on the branch $GITHUB_REF_NAME"
+          exit 1
       - uses: actions/checkout@v6
       # Setup .npmrc file to publish to npmjs.org
       - uses: actions/setup-node@v6
@@ -77,5 +37,7 @@ jobs:
       # setup-node's `//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}` line.
       - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       - run: npm ci
+      - name: Set the version from the tag
+        run: npm version "$GITHUB_REF_NAME" --no-git-tag-version
       - run: npm run build
       - run: npm publish
