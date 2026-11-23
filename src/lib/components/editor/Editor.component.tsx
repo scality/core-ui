@@ -106,7 +106,8 @@ export interface EditorProps {
 }
 
 /**
- * A code pane for JSON, validated and completed against a schema.
+ * A code pane for JSON. Give `language` a schema and it also validates and
+ * completes against it.
  */
 export const Editor = ({
   value,

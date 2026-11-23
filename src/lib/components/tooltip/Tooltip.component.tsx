@@ -79,8 +79,8 @@ const TooltipText = styled.div`
 
 /**
  * Names or explains something already on screen: the `overlay` appears beside its
- * child on hover or focus, and Escape dismisses it while the focus is inside it.
- * Anything the user has to act on belongs in the page instead.
+ * child on hover or focus, and Escape dismisses it while the focus is on the
+ * child. Anything the user has to act on belongs in the page instead.
  */
 function Tooltip({
   placement = TOP,
