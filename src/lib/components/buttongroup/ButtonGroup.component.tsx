@@ -19,10 +19,9 @@ export type ButtonGroupProps = Omit<
   /** Lay the buttons out in a row (default) or a column. */
   orientation?: Orientation;
   /**
-   * Value of the selected button. Providing `value` together with `onChange`
-   * turns the group into a single-select segmented control: every child must
-   * carry a `value`, and the child whose `value` matches is rendered selected.
-   * Pass `null` to render no selection.
+   * Value of the selected child, once `onChange` has made the group selectable.
+   * The child whose `value` matches renders selected; a child without one is
+   * not selectable and shows no pressed state. Pass `null` for no selection.
    */
   value?: string | null;
   /** Called with the clicked child's `value` when selection is enabled. */

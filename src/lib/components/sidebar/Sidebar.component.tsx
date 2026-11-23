@@ -174,7 +174,8 @@ const MenuItemIcon = styled.div`
 
 /**
  * The vertical strip of `actions` beside the content, icons alone until it is
- * expanded. It does not own that state — the caller holds it.
+ * expanded. The caller holds `expanded`; `hoverable` adds an internal peek
+ * while the pointer is over the strip.
  */
 function Sidebar({
   expanded,

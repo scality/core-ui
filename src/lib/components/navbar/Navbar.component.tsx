@@ -37,10 +37,10 @@ import {
 import { useContainerWidth } from '../responsive/useContainerWidth';
 
 /**
- * Default container width (px) below which the navbar condenses its
- * right-action labels to icon-only. Content-dependent — override per app via
- * the `condenseActionsBreakpoint` prop. Tabs overflow into a "More" menu
- * automatically as space runs out, independent of this value.
+ * Default container width (px) below which a dropdown right action with an
+ * icon shortens its label to its initials beside the icon. Content-dependent —
+ * override per app via the `condenseActionsBreakpoint` prop. Tabs overflow into
+ * a "More" menu automatically as space runs out, independent of this value.
  */
 export const NAVBAR_COLLAPSE_BREAKPOINT_PX = 768;
 
