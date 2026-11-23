@@ -74,9 +74,9 @@ export type ChartLegendWrapperProps = {
 
 /**
  * Puts several charts and their `ChartLegend` on one selection: which resources
- * are shown, and their colours from `colorSet`. It is required rather than
- * optional — every chart here calls `useChartLegend`, which throws outside a
- * wrapper.
+ * are shown, and their colours from `colorSet`. `Barchart`, `LineTimeSerieChart`
+ * and `Heatmap` require it even standing alone — they call `useChartLegend`,
+ * which throws outside a wrapper. `GlobalHealthBar` and `Sparkline` do not.
  */
 export const ChartLegendWrapper = ({
   children,
