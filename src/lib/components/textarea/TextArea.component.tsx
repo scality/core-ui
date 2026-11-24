@@ -38,6 +38,7 @@ const TextAreaContainer = styled.textarea.withConfig({
   resize: ${(props) => (props.$autoGrow ? 'none' : 'vertical')};
   font-family: ${(props) =>
     props.$variant === 'code' ? fontFamilyMonospace : fontFamily};
+  ${(props) => props.$variant === 'code' && 'font-variant-ligatures: none;'}
   font-size: ${spacing.f14};
 
   ${(props) =>
