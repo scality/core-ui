@@ -352,6 +352,11 @@ type FormGroupProps = {
   disabled?: boolean;
 };
 
+/**
+ * One labelled row of a `FormSection`: the label, the required marker and the
+ * error text around the control passed as `content`. Name the field here rather
+ * than on the control, so the labels of a section align.
+ */
 const FormGroup = ({
   direction = 'horizontal',
   label,
@@ -473,6 +478,10 @@ type FormSectionProps = {
   rightActions?: ReactNode;
 };
 
+/**
+ * A block of related `FormGroup`s inside a `Form`, whose labels share one column
+ * so every row lines up.
+ */
 const FormSection = ({
   children,
   title,
@@ -667,6 +676,10 @@ const TabForm = forwardRef<HTMLFormElement, TabFormProps>(
   },
 );
 
+/**
+ * The frame a screen's fields live in: `FormSection`s with the actions held
+ * fixed around them, either as a whole page or inside a tab.
+ */
 const Form = forwardRef<HTMLFormElement, TabFormProps | PageFormProps>(
   ({ layout, requireMode, responsive, ...formProps }, ref) => {
     return (

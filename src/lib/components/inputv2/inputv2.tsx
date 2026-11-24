@@ -119,6 +119,11 @@ export type InputProps = {
   fluid?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
+/**
+ * The library's single-line text field, for a value the surrounding form
+ * submits. A field that narrows what is already on screen is a `SearchInput`,
+ * and one edited in place with no form around it is an `InlineInput`.
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {

@@ -71,6 +71,10 @@ const ClearButton = styled.div`
   top: 0px;
 `;
 
+/**
+ * A field that narrows what is already on screen — a table, a list — rather than
+ * one whose value is submitted; that one is an `Input`.
+ */
 const SearchInput = forwardRef(
   (
     {

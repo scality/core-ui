@@ -43,6 +43,10 @@ const defaultDropzoneLabels = {
   buttonAddMoreLabel: 'Add more files',
 };
 
+/**
+ * How a form takes files rather than typed values: a drop target with a button
+ * of its own for picking them, holding the accepted list itself.
+ */
 export function Dropzone({
   labels,
   onChange,

@@ -91,6 +91,11 @@ const FloatingErrorContainer = styled.div`
   z-index: 1;
 `;
 
+/**
+ * A value shown as text that becomes an `Input` when clicked and saves itself
+ * through `changeMutation`, for editing one field in place where there is no form
+ * to submit.
+ */
 export const InlineInput = ({
   defaultValue = '',
   changeMutation,
