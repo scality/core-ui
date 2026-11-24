@@ -37,6 +37,12 @@ type Props = {
   className?: string;
 };
 
+/**
+ * The full-page fallback for an unexpected failure. Reach for ErrorPage404
+ * when the address is
+ * known not to exist, and ErrorPage401 when the credentials are known to be
+ * the problem.
+ */
 function ErrorPage500({
   supportLink = undefined,
   locale = 'en',
