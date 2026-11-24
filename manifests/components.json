@@ -93,10 +93,11 @@
       "name": "SelectionControlsOverview",
       "path": "./stories/guideline/selection-controls-overview.stories.tsx",
       "jsDocTags": {},
+      "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/selectv2/Selectv2.component.tsx",
-        "description": "",
+        "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
         "displayName": "Select",
         "methods": [],
         "props": {
@@ -347,10 +348,11 @@
       "name": "Form",
       "path": "./stories/form.stories.tsx",
       "jsDocTags": {},
+      "description": "The frame a screen's fields live in: `FormSection`s with the actions held\nfixed around them, either as a whole page or inside a tab.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/form/Form.component.tsx",
-        "description": "",
+        "description": "The frame a screen's fields live in: `FormSection`s with the actions held\nfixed around them, either as a whole page or inside a tab.",
         "displayName": "Form",
         "methods": [],
         "props": {
@@ -544,10 +546,11 @@
       "name": "LateralNavbarLayout",
       "path": "./stories/lateralnavbarlayout.stories.tsx",
       "jsDocTags": {},
+      "description": "A full-viewport frame whose navigation is entirely lateral: a `Sidebar` and\nthe page beside it, with no bar above. The v1 `Layout` is the one that puts a\nNavbar on top of the same arrangement.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/lateralnavbarlayout/LateralNavbarLayout.component.tsx",
-        "description": "",
+        "description": "A full-viewport frame whose navigation is entirely lateral: a `Sidebar` and\nthe page beside it, with no bar above. The v1 `Layout` is the one that puts a\nNavbar on top of the same arrangement.",
         "displayName": "LateralNavbarLayout",
         "methods": [],
         "props": {
@@ -616,10 +619,11 @@
       "name": "Layout2",
       "path": "./stories/layout.stories.tsx",
       "jsDocTags": {},
+      "description": "The application frame that takes its navigation already built: it reserves the\nnavbar's height for `headerNavigation` and puts the app below. The app child\nhas to claim the remaining height itself, as `AppContainer` does. Reach for the\nv1 `Layout` instead when the Navbar and Sidebar should be built from props.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/layout/v2/index.tsx",
-        "description": "",
+        "description": "The application frame that takes its navigation already built: it reserves the\nnavbar's height for `headerNavigation` and puts the app below. The app child\nhas to claim the remaining height itself, as `AppContainer` does. Reach for the\nv1 `Layout` instead when the Navbar and Sidebar should be built from props.",
         "displayName": "Layout",
         "methods": [],
         "props": {
@@ -731,10 +735,11 @@
       "name": "Breadcrumb",
       "path": "./stories/breadcrumb.stories.tsx",
       "jsDocTags": {},
+      "description": "The trail back up from where the user is, showing a position in a hierarchy\nrather than switching between peers — that is Tabs. Pass each level as an\nelement of `paths`; the last is styled as the current page, in the plain text\ncolour and without the hover underline the others carry.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/breadcrumb/Breadcrumb.component.tsx",
-        "description": "",
+        "description": "The trail back up from where the user is, showing a position in a hierarchy\nrather than switching between peers — that is Tabs. Pass each level as an\nelement of `paths`; the last is styled as the current page, in the plain text\ncolour and without the hover underline the others carry.",
         "displayName": "Breadcrumb",
         "methods": [],
         "props": {
@@ -792,10 +797,11 @@
       "name": "Dropdown",
       "path": "./stories/dropdown.stories.tsx",
       "jsDocTags": {},
+      "description": "A trigger that opens a short list of `items`, each carrying its own `onClick`\n— a menu of actions, not a form field. Reach for `Select` when the user is\nchoosing a value rather than doing something.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/dropdown/Dropdown.component.tsx",
-        "description": "",
+        "description": "A trigger that opens a short list of `items`, each carrying its own `onClick`\n— a menu of actions, not a form field. Reach for `Select` when the user is\nchoosing a value rather than doing something.",
         "displayName": "Dropdown",
         "methods": [],
         "props": {
@@ -1038,10 +1044,11 @@
       "name": "ErrorPage401",
       "path": "./stories/errorpage401.stories.tsx",
       "jsDocTags": {},
+      "description": "The full-page screen for a request the supplied credentials do not grant\naccess to — whether sign-in failed or the account simply lacks the right.\nErrorPage404 covers an address that does not exist, and ErrorPage500 any\nother failure.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/error-pages/ErrorPage401.component.tsx",
-        "description": "",
+        "description": "The full-page screen for a request the supplied credentials do not grant\naccess to — whether sign-in failed or the account simply lacks the right.\nErrorPage404 covers an address that does not exist, and ErrorPage500 any\nother failure.",
         "displayName": "ErrorPage401",
         "methods": [],
         "props": {
@@ -1131,10 +1138,11 @@
       "name": "ErrorPage404",
       "path": "./stories/errorpage404.stories.tsx",
       "jsDocTags": {},
+      "description": "The full-page screen for an address that resolves to nothing — a wrong URL\nor a page that has moved. Use ErrorPage401 when the page exists but the user\nmay not see it, and ErrorPage500 for any other failure.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/error-pages/ErrorPage404.component.tsx",
-        "description": "",
+        "description": "The full-page screen for an address that resolves to nothing — a wrong URL\nor a page that has moved. Use ErrorPage401 when the page exists but the user\nmay not see it, and ErrorPage500 for any other failure.",
         "displayName": "ErrorPage404",
         "methods": [],
         "props": {
@@ -1207,10 +1215,11 @@
       "name": "ErrorPage500",
       "path": "./stories/errorpage500.stories.tsx",
       "jsDocTags": {},
+      "description": "The full-page fallback for an unexpected failure. Reach for ErrorPage404\nwhen the address is\nknown not to exist, and ErrorPage401 when the credentials are known to be\nthe problem.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/error-pages/ErrorPage500.component.tsx",
-        "description": "",
+        "description": "The full-page fallback for an unexpected failure. Reach for ErrorPage404\nwhen the address is\nknown not to exist, and ErrorPage401 when the credentials are known to be\nthe problem.",
         "displayName": "ErrorPage500",
         "methods": [],
         "props": {
@@ -1325,10 +1334,11 @@
       "name": "ErrorPageAuth",
       "path": "./stories/errorpageauth.stories.tsx",
       "jsDocTags": {},
+      "description": "The full-page screen shown while authentication is still in progress, not an\nerror: it reports that sign-in is under way and suggests a refresh if it\nlasts. Once authentication has failed, ErrorPage401 is the screen to show.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/error-pages/ErrorPageAuth.component.tsx",
-        "description": "",
+        "description": "The full-page screen shown while authentication is still in progress, not an\nerror: it reports that sign-in is under way and suggests a refresh if it\nlasts. Once authentication has failed, ErrorPage401 is the screen to show.",
         "displayName": "ErrorPageAuth",
         "methods": [],
         "props": {
@@ -1408,10 +1418,11 @@
       "name": "Navbar",
       "path": "./stories/navbar.stories.tsx",
       "jsDocTags": {},
+      "description": "The bar across the top of an application: its logo, its top-level `tabs` and\nthe `rightActions` reachable from anywhere. It handles its own crowding: tabs\noverflow into a \"More\" menu as room runs out, and right actions condense below\n`condenseActionsBreakpoint`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/navbar/Navbar.component.tsx",
-        "description": "",
+        "description": "The bar across the top of an application: its logo, its top-level `tabs` and\nthe `rightActions` reachable from anywhere. It handles its own crowding: tabs\noverflow into a \"More\" menu as room runs out, and right actions condense below\n`condenseActionsBreakpoint`.",
         "displayName": "Navbar",
         "methods": [],
         "props": {
@@ -1477,7 +1488,7 @@
           },
           "condenseActionsBreakpoint": {
             "defaultValue": null,
-            "description": "Container width (px) below which right-action labels drop to icon-only\n(e.g. the username dropdown shows just its icon). Tabs overflow into a\n\"More\" menu automatically as space runs out, independent of this value.\nDefaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.",
+            "description": "Container width (px) below which a dropdown right action with an icon\nshortens its label to its initials beside the icon, the full label staying\nas the accessible name. Button and custom actions are unaffected. Tabs\noverflow into a \"More\" menu automatically as space runs out, independent of\nthis value.\nDefaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.",
             "name": "condenseActionsBreakpoint",
             "declarations": [
               {
@@ -1601,10 +1612,11 @@
       "name": "ScrollbarWrapper",
       "path": "./stories/ScrollbarWrapper/scrollbar.stories.tsx",
       "jsDocTags": {},
+      "description": "Applies the library's scrollbar styling to the whole page. Mount it once near\nthe root — it is a global style, not a per-region wrapper, and `Table`'s bottom\nfade depends on it.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/scrollbarwrapper/ScrollbarWrapper.component.tsx",
-        "description": "",
+        "description": "Applies the library's scrollbar styling to the whole page. Mount it once near\nthe root — it is a global style, not a per-region wrapper, and `Table`'s bottom\nfade depends on it.",
         "displayName": "ScrollbarWrapper",
         "methods": [],
         "props": {},
@@ -1639,10 +1651,11 @@
       "name": "Sidebar",
       "path": "./stories/sidebar.stories.tsx",
       "jsDocTags": {},
+      "description": "The vertical strip of `actions` beside the content, icons alone until it is\nexpanded. The caller holds `expanded`; `hoverable` adds an internal peek\nwhile the pointer is over the strip.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/sidebar/Sidebar.component.tsx",
-        "description": "",
+        "description": "The vertical strip of `actions` beside the content, icons alone until it is\nexpanded. The caller holds `expanded`; `hoverable` adds an internal peek\nwhile the pointer is over the strip.",
         "displayName": "Sidebar",
         "methods": [],
         "props": {
@@ -1763,10 +1776,11 @@
       "name": "Tabs",
       "path": "./stories/tabsv2.stories.tsx",
       "jsDocTags": {},
+      "description": "Sibling views of one subject, switched through the URL rather than local\nstate: each `Tab` declares a `path` and the router decides which is open.\nReach for it when the views are peers — a sequence the user walks through in\norder is Steppers.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/tabsv2/Tabsv2.component.tsx",
-        "description": "",
+        "description": "Sibling views of one subject, switched through the URL rather than local\nstate: each `Tab` declares a `path` and the router decides which is open.\nReach for it when the views are peers — a sequence the user walks through in\norder is Steppers.",
         "displayName": "Tabs",
         "methods": [],
         "props": {
@@ -1927,10 +1941,11 @@
       "name": "Card",
       "path": "./stories/card.stories.tsx",
       "jsDocTags": {},
+      "description": "A framed block for one subject among several shown side by side — a resource, a\nsummary. Build it from `Card.Header` and `Card.Body`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/card/Card.component.tsx",
-        "description": "",
+        "description": "A framed block for one subject among several shown side by side — a resource, a\nsummary. Build it from `Card.Header` and `Card.Body`.",
         "displayName": "Card",
         "methods": [],
         "props": {
@@ -2187,10 +2202,11 @@
       "name": "Barchart",
       "path": "./stories/BarChart/barchart.stories.tsx",
       "jsDocTags": {},
+      "description": "Bars over a category or a time axis, one series per entry of `bars` that the\nenclosing `ChartLegendWrapper`'s `colorSet` names — a label the colorSet omits\nis dropped with a console warning.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/charts/index.ts",
-        "description": "",
+        "description": "Bars over a category or a time axis, one series per entry of `bars` that the\nenclosing `ChartLegendWrapper`'s `colorSet` names — a label the colorSet omits\nis dropped with a console warning.",
         "displayName": "Barchart",
         "methods": [],
         "props": {
@@ -2613,10 +2629,11 @@
       "name": "GlobalHealthBar",
       "path": "./stories/GlobalHealthBar/globalhealthbar.stories.tsx",
       "jsDocTags": {},
+      "description": "A single band showing when `alerts` fired between `start` and `end` — a\nperiod's health at a glance, not a measured value. The arrow keys walk the\nalerts one by one, so it is readable without a pointer.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/charts/index.ts",
-        "description": "",
+        "description": "A single band showing when `alerts` fired between `start` and `end` — a\nperiod's health at a glance, not a measured value. The arrow keys walk the\nalerts one by one, so it is readable without a pointer.",
         "displayName": "GlobalHealthBar",
         "methods": [],
         "props": {
@@ -3667,10 +3684,11 @@
       "name": "EmptyState",
       "path": "./stories/emptystate.stories.tsx",
       "jsDocTags": {},
+      "description": "Fills the area given to a page that has nothing to list yet, inviting the\nuser to create the first resource and naming it. For the body of a table\nthat came back with no rows, UnsuccessfulResult is the smaller fit.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/emptystate/Emptystate.component.tsx",
-        "description": "",
+        "description": "Fills the area given to a page that has nothing to list yet, inviting the\nuser to create the first resource and naming it. For the body of a table\nthat came back with no rows, UnsuccessfulResult is the smaller fit.",
         "displayName": "EmptyState",
         "methods": [],
         "props": {
@@ -3846,10 +3864,11 @@
       "name": "StatusWrapper",
       "path": "./stories/statuswrapper.stories.tsx",
       "jsDocTags": {},
+      "description": "Pins a small status badge to whatever it wraps, for an icon or an avatar that\nhas to carry a health alongside its own meaning. Only `warning`, `critical`\nand `unknown` get a badge; any other status leaves the wrapper in place with\nnothing pinned to it.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/statuswrapper/Statuswrapper.component.tsx",
-        "description": "",
+        "description": "Pins a small status badge to whatever it wraps, for an icon or an avatar that\nhas to carry a health alongside its own meaning. Only `warning`, `critical`\nand `unknown` get a badge; any other status leaves the wrapper in place with\nnothing pinned to it.",
         "displayName": "StatusWrapper",
         "methods": [],
         "props": {
@@ -3914,10 +3933,11 @@
       "name": "Table",
       "path": "./stories/tablev2.stories.tsx",
       "jsDocTags": {},
+      "description": "A virtualized table of rows the user reads and selects. The body is a\n`Table.SingleSelectableContent` or `Table.MultiSelectableContent` child, and\n`Table.Search` filters them from a query the caller holds.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/tablev2/Tablev2.component.tsx",
-        "description": "",
+        "description": "A virtualized table of rows the user reads and selects. The body is a\n`Table.SingleSelectableContent` or `Table.MultiSelectableContent` child, and\n`Table.Search` filters them from a query the caller holds.",
         "displayName": "Table",
         "methods": [],
         "props": {
@@ -4305,10 +4325,11 @@
       "name": "Checkbox",
       "path": "./stories/Checkbox/checkbox.stories.tsx",
       "jsDocTags": {},
+      "description": "A box the user ticks for a choice that stands on its own, rather than one that\nrules the others out — RadioGroup is what offers a single choice among several.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/checkbox/Checkbox.component.tsx",
-        "description": "",
+        "description": "A box the user ticks for a choice that stands on its own, rather than one that\nrules the others out — RadioGroup is what offers a single choice among several.",
         "displayName": "Checkbox",
         "methods": [],
         "props": {
@@ -4506,10 +4527,11 @@
       "name": "Dropzone",
       "path": "./stories/dropzone.stories.tsx",
       "jsDocTags": {},
+      "description": "How a form takes files rather than typed values: a drop target with a button\nof its own for picking them, holding the accepted list itself.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/dropzone/Dropzone.tsx",
-        "description": "",
+        "description": "How a form takes files rather than typed values: a drop target with a button\nof its own for picking them, holding the accepted list itself.",
         "displayName": "Dropzone",
         "methods": [],
         "props": {
@@ -4904,10 +4926,11 @@
       "name": "Editor",
       "path": "./stories/editor.stories.tsx",
       "jsDocTags": {},
+      "description": "A code pane for JSON. Give `language` a schema and it also validates and\ncompletes against it.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/next.ts",
-        "description": "",
+        "description": "A code pane for JSON. Give `language` a schema and it also validates and\ncompletes against it.",
         "displayName": "Editor",
         "methods": [],
         "props": {
@@ -5074,10 +5097,11 @@
       "name": "InputV2",
       "path": "./stories/input.stories.tsx",
       "jsDocTags": {},
+      "description": "The library's single-line text field, for a value the surrounding form\nsubmits. A field that narrows what is already on screen is a `SearchInput`,\nand one edited in place with no form around it is an `InlineInput`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/inputv2/inputv2.tsx",
-        "description": "",
+        "description": "The library's single-line text field, for a value the surrounding form\nsubmits. A field that narrows what is already on screen is a `SearchInput`,\nand one edited in place with no form around it is an `InlineInput`.",
         "displayName": "Input",
         "methods": [],
         "props": {
@@ -5431,10 +5455,11 @@
       "name": "InputList",
       "path": "./stories/inputlist.stories.tsx",
       "jsDocTags": {},
+      "description": "The field for a value that is legitimately a list rather than one entry. It\nholds an `Input` per item of a single array value, with the add and remove\nbuttons that keep the two in step.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/inputlist/InputList.component.tsx",
-        "description": "",
+        "description": "The field for a value that is legitimately a list rather than one entry. It\nholds an `Input` per item of a single array value, with the add and remove\nbuttons that keep the two in step.",
         "displayName": "InputList",
         "methods": [],
         "props": {
@@ -5914,10 +5939,11 @@
       "name": "RadioGroup",
       "path": "./stories/Radio/radio.stories.tsx",
       "jsDocTags": {},
+      "description": "One choice among a short list of `options`, all of them visible at once. Reach\nfor a Select once showing every option costs more than it helps, and for\nCheckbox when the choices do not exclude each other.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/radio/RadioGroup.component.tsx",
-        "description": "",
+        "description": "One choice among a short list of `options`, all of them visible at once. Reach\nfor a Select once showing every option costs more than it helps, and for\nCheckbox when the choices do not exclude each other.",
         "displayName": "RadioGroup",
         "methods": [],
         "props": {
@@ -6151,10 +6177,11 @@
       "name": "SearchInput",
       "path": "./stories/SearchInput/searchinput.stories.tsx",
       "jsDocTags": {},
+      "description": "A field that narrows what is already on screen — a table, a list — rather than\none whose value is submitted; that one is an `Input`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/searchinput/SearchInput.component.tsx",
-        "description": "",
+        "description": "A field that narrows what is already on screen — a table, a list — rather than\none whose value is submitted; that one is an `Input`.",
         "displayName": "SearchInput",
         "methods": [],
         "props": {
@@ -6471,10 +6498,11 @@
       "name": "Select",
       "path": "./stories/Select/selectv2.stories.tsx",
       "jsDocTags": {},
+      "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/selectv2/Selectv2.component.tsx",
-        "description": "",
+        "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
         "displayName": "Select",
         "methods": [],
         "props": {
@@ -6834,10 +6862,11 @@
       "name": "Select",
       "path": "./stories/selectinput.stories.tsx",
       "jsDocTags": {},
+      "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/selectv2/Selectv2.component.tsx",
-        "description": "",
+        "description": "One choice among a list that drops down, declared as `Select.Option` children\nand optionally gathered under `Select.Group` headings. Prefer a RadioGroup\nwhile the options are few enough to show at once; past eight of them this one\nturns searchable and filters as the user types.",
         "displayName": "Select",
         "methods": [],
         "props": {
@@ -7108,10 +7137,11 @@
       "name": "TextArea",
       "path": "./stories/textarea.stories.tsx",
       "jsDocTags": {},
+      "description": "A multi-line field for free-form text, set in the monospace face by default.\nA single-line value is an `Input`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/index.ts",
-        "description": "",
+        "description": "A multi-line field for free-form text, set in the monospace face by default.\nA single-line value is an `Input`.",
         "displayName": "TextArea",
         "methods": [],
         "props": {
@@ -7244,10 +7274,11 @@
       "name": "Toggle",
       "path": "./stories/Toggle/toggle.stories.tsx",
       "jsDocTags": {},
+      "description": "A switch for a setting that applies as it is flipped, with nothing to submit\nafterwards. A value that only takes effect when the surrounding form is\nsubmitted is a Checkbox.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/toggle/Toggle.component.tsx",
-        "description": "",
+        "description": "A switch for a setting that applies as it is flipped, with nothing to submit\nafterwards. A value that only takes effect when the surrounding form is\nsubmitted is a Checkbox.",
         "displayName": "Toggle",
         "methods": [],
         "props": {
@@ -7343,10 +7374,11 @@
       "name": "Banner",
       "path": "./stories/banner.stories.tsx",
       "jsDocTags": {},
+      "description": "A message in the page flow, for a condition the user keeps seeing while it\nlasts — a degraded service, a read-only mode.\nToast is the transient counterpart that reports the outcome of an action and\nthen disappears.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/banner/Banner.component.tsx",
-        "description": "",
+        "description": "A message in the page flow, for a condition the user keeps seeing while it\nlasts — a degraded service, a read-only mode.\nToast is the transient counterpart that reports the outcome of an action and\nthen disappears.",
         "displayName": "Banner",
         "methods": [],
         "props": {
@@ -7480,10 +7512,11 @@
       "name": "Drawer",
       "path": "./stories/drawer.stories.tsx",
       "jsDocTags": {},
+      "description": "A panel that slides in from one edge of the screen and holds secondary work\n— details, filters, a form — alongside the page rather than centered over\nit. Clicking anywhere outside always closes it, so the page behind cannot be\nused while it is open. A decision the user must settle before going on\nbelongs in a Modal instead.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/drawer/Drawer.component.tsx",
-        "description": "",
+        "description": "A panel that slides in from one edge of the screen and holds secondary work\n— details, filters, a form — alongside the page rather than centered over\nit. Clicking anywhere outside always closes it, so the page behind cannot be\nused while it is open. A decision the user must settle before going on\nbelongs in a Modal instead.",
         "displayName": "Drawer",
         "methods": [],
         "props": {
@@ -7662,10 +7695,11 @@
       "name": "Modal",
       "path": "./stories/Modal/modal.stories.tsx",
       "jsDocTags": {},
+      "description": "A dialog centered over the page that takes focus and blocks the content\nbehind it, for a decision the user has to settle before going on. Reserve it\nfor work that genuinely interrupts: secondary work that belongs alongside\nthe page is a Drawer, and a message needing no answer is a Toast.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/modal/Modal.component.tsx",
-        "description": "",
+        "description": "A dialog centered over the page that takes focus and blocks the content\nbehind it, for a decision the user has to settle before going on. Reserve it\nfor work that genuinely interrupts: secondary work that belongs alongside\nthe page is a Drawer, and a message needing no answer is a Toast.",
         "displayName": "Modal",
         "methods": [],
         "props": {
@@ -7912,10 +7946,11 @@
       "name": "Notifications",
       "path": "./stories/notifications.stories.tsx",
       "jsDocTags": {},
+      "description": "Stacks a list of dismissible messages in one corner of the screen, driven by\nan array the caller owns. Toast is the single-message counterpart: it needs\nno such list and dismisses itself by default.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/notifications/Notifications.component.tsx",
-        "description": "",
+        "description": "Stacks a list of dismissible messages in one corner of the screen, driven by\nan array the caller owns. Toast is the single-message counterpart: it needs\nno such list and dismisses itself by default.",
         "displayName": "Notifications",
         "methods": [],
         "props": {
@@ -8037,10 +8072,11 @@
       "name": "Toast",
       "path": "./stories/toast.stories.tsx",
       "jsDocTags": {},
+      "description": "A short message that floats over the page near one of its edges and\ndismisses itself by default, reporting the outcome of an action the user\nhas just taken. It does not interrupt: anything the user must acknowledge\nbefore continuing belongs in a Modal, and anything that stays true belongs\nin a Banner.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/toast/Toast.component.tsx",
-        "description": "",
+        "description": "A short message that floats over the page near one of its edges and\ndismisses itself by default, reporting the outcome of an action the user\nhas just taken. It does not interrupt: anything the user must acknowledge\nbefore continuing belongs in a Modal, and anything that stays true belongs\nin a Banner.",
         "displayName": "Toast",
         "methods": [],
         "props": {
@@ -8286,10 +8322,11 @@
       "name": "Tooltip",
       "path": "./stories/tooltip.stories.tsx",
       "jsDocTags": {},
+      "description": "Names or explains something already on screen: the `overlay` appears beside its\nchild on hover or focus, and Escape dismisses it while the focus is on the\nchild. Anything the user has to act on belongs in the page instead.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/tooltip/Tooltip.component.tsx",
-        "description": "",
+        "description": "Names or explains something already on screen: the `overlay` appears beside its\nchild on hover or focus, and Escape dismisses it while the focus is on the\nchild. Anything the user has to act on belongs in the page instead.",
         "displayName": "Tooltip",
         "methods": [],
         "props": {
@@ -8426,12 +8463,13 @@
       "name": "CircularProgressBar",
       "path": "./stories/circularprogressbar.stories.tsx",
       "jsDocTags": {},
+      "description": "Draws a proportion as a ring, leaving its center free for whatever the\nnumber means — a capacity figure, a count. Reach for ProgressBar instead\nwhen the value sits in a row of text or a table, where a bar reads better\nat small sizes.",
       "reactDocgenTypescript": {
         "tags": {
           "example": "<CircularProgressBar \ntitle=\"Total Capacity\" \npercent={60} \nradius={70} \ncolor=\"red\" \nbackgroundColor=\"blue\" \nstrokeWidth={10} \n> \n\t<text\n     x=\"50%\"\n     y=\"50%\"\n     dominantBaseline=\"middle\"\n     textAnchor=\"middle\"  \n     fontSize={fontSize.smaller}\n   >\n     text content\n   </text> \n </CircularProgressBar>"
         },
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/circularprogressbar/CircularProgressBar.component.tsx",
-        "description": "",
+        "description": "Draws a proportion as a ring, leaving its center free for whatever the\nnumber means — a capacity figure, a count. Reach for ProgressBar instead\nwhen the value sits in a row of text or a table, where a bar reads better\nat small sizes.",
         "displayName": "CircularProgressBar",
         "methods": [],
         "props": {
@@ -8564,10 +8602,11 @@
       "name": "Loader",
       "path": "./stories/loader.stories.tsx",
       "jsDocTags": {},
+      "description": "The spinner for a wait whose length is not known. As soon as the progress can\nbe measured, ProgressBar tells the user more.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/loader/Loader.component.tsx",
-        "description": "",
+        "description": "The spinner for a wait whose length is not known. As soon as the progress can\nbe measured, ProgressBar tells the user more.",
         "displayName": "Loader",
         "methods": [],
         "props": {
@@ -8693,10 +8732,11 @@
       "name": "ProgressBar",
       "path": "./stories/progressbar.stories.tsx",
       "jsDocTags": {},
+      "description": "Draws a known proportion as a horizontal bar, with room for labels around\nit. Use it when the progress can be measured: a wait of unknown length is a\nLoader, and a ring that keeps its middle free for the figure is a\nCircularProgressBar.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/progressbar/ProgressBar.component.tsx",
-        "description": "",
+        "description": "Draws a known proportion as a horizontal bar, with room for labels around\nit. Use it when the progress can be measured: a wait of unknown length is a\nLoader, and a ring that keeps its middle free for the figure is a\nCircularProgressBar.",
         "displayName": "ProgressBar",
         "methods": [],
         "props": {
@@ -8955,10 +8995,11 @@
       "name": "Stepper",
       "path": "./stories/stepper.stories.tsx",
       "jsDocTags": {},
+      "description": "Runs a multi-step flow and owns where the user is in it, giving each step a\nway to move forward and back. Use Steppers on its own only when the\nsurrounding page already decides which step is current.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/steppers/Stepper.component.tsx",
-        "description": "",
+        "description": "Runs a multi-step flow and owns where the user is in it, giving each step a\nway to move forward and back. Use Steppers on its own only when the\nsurrounding page already decides which step is current.",
         "displayName": "Stepper",
         "methods": [],
         "props": {
@@ -9024,10 +9065,11 @@
       "name": "Steppers",
       "path": "./stories/steppers.stories.tsx",
       "jsDocTags": {},
+      "description": "Draws the vertical progress rail for a multi-step flow — the steps, which\none is active and which are behind — plus the active step's own `content`,\nwithout owning where the user is: the caller passes `activeStep`. Stepper is\nthe component that drives a whole flow and renders this rail itself.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/steppers/Steppers.component.tsx",
-        "description": "",
+        "description": "Draws the vertical progress rail for a multi-step flow — the steps, which\none is active and which are behind — plus the active step's own `content`,\nwithout owning where the user is: the caller passes `activeStep`. Stepper is\nthe component that drives a whole flow and renders this rail itself.",
         "displayName": "Steppers",
         "methods": [],
         "props": {
@@ -9105,10 +9147,11 @@
       "name": "Box",
       "path": "./stories/box.stories.tsx",
       "jsDocTags": {},
+      "description": "The escape hatch for a one-off arrangement no existing component covers: a\n`div` taking the styled-system style props directly, so the layout needs no\nnew styled-component of its own. For a row or column of siblings separated\nby a spacing token, Stack says more than a bare Box.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/box/Box.ts",
-        "description": "",
+        "description": "The escape hatch for a one-off arrangement no existing component covers: a\n`div` taking the styled-system style props directly, so the layout needs no\nnew styled-component of its own. For a row or column of siblings separated\nby a spacing token, Stack says more than a bare Box.",
         "displayName": "Box",
         "methods": [],
         "props": {
@@ -9268,10 +9311,11 @@
       "name": "Stack",
       "path": "./stories/spacing.stories.tsx",
       "jsDocTags": {},
+      "description": "Lays its children out in a row or a column with one spacing token between\nthem, optionally separated by a rule, and can flip a row to a column below a\ngiven container width. Prefer it to a bare Box whenever the children are\nsiblings at the same level, since the gap is named rather than measured.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/spacing.tsx",
-        "description": "",
+        "description": "Lays its children out in a row or a column with one spacing token between\nthem, optionally separated by a rule, and can flip a row to a column below a\ngiven container width. Prefer it to a bare Box whenever the children are\nsiblings at the same level, since the gap is named rather than measured.",
         "displayName": "Stack",
         "methods": [],
         "props": {
@@ -9582,10 +9626,11 @@
       "name": "StatusText",
       "path": "./stories/text.stories.tsx",
       "jsDocTags": {},
+      "description": "Body text colored from a health status rather than from a theme key, so the\ncaller passes the status and not the color it maps to. `Text` takes the\ntheme key itself (`statusHealthy`, `statusWarning`…), so the caller must do\nthat mapping.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/text/Text.component.tsx",
-        "description": "",
+        "description": "Body text colored from a health status rather than from a theme key, so the\ncaller passes the status and not the color it maps to. `Text` takes the\ntheme key itself (`statusHealthy`, `statusWarning`…), so the caller must do\nthat mapping.",
         "displayName": "StatusText",
         "methods": [],
         "props": {
@@ -9857,10 +9902,11 @@
       "name": "Accordion",
       "path": "./stories/Accordion/accordion.stories.tsx",
       "jsDocTags": {},
+      "description": "A titled section the user opens and closes, for detail that would otherwise\ncrowd the page. Once the opening transition finishes, content such as a menu\nmay overflow the box unclipped.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/accordion/Accordion.component.tsx",
-        "description": "",
+        "description": "A titled section the user opens and closes, for detail that would otherwise\ncrowd the page. Once the opening transition finishes, content such as a menu\nmay overflow the box unclipped.",
         "displayName": "Accordion",
         "methods": [],
         "props": {
@@ -10175,10 +10221,11 @@
       "name": "Button",
       "path": "./stories/Button/button.stories.tsx",
       "jsDocTags": {},
+      "description": "The library's action control, from a page's primary call to action down to a\nbare icon in a row.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/buttonv2/Buttonv2.component.tsx",
-        "description": "",
+        "description": "The library's action control, from a page's primary call to action down to a\nbare icon in a row.",
         "displayName": "Button",
         "methods": [],
         "props": {
@@ -10435,10 +10482,11 @@
       "name": "ButtonGroup",
       "path": "./stories/buttongroup.stories.tsx",
       "jsDocTags": {},
+      "description": "Buttons framed as one control instead of a row of separate ones. Give it\n`onChange` and children carrying a `value` become a single-select segmented\ncontrol; without `onChange` it is only a visual grouping.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/next.ts",
-        "description": "",
+        "description": "Buttons framed as one control instead of a row of separate ones. Give it\n`onChange` and children carrying a `value` become a single-select segmented\ncontrol; without `onChange` it is only a visual grouping.",
         "displayName": "ButtonGroup",
         "methods": [],
         "props": {
@@ -10470,7 +10518,7 @@
           },
           "value": {
             "defaultValue": null,
-            "description": "Value of the selected button. Providing `value` together with `onChange`\nturns the group into a single-select segmented control: every child must\ncarry a `value`, and the child whose `value` matches is rendered selected.\nPass `null` to render no selection.",
+            "description": "Value of the selected child, once `onChange` has made the group selectable.\nThe child whose `value` matches renders selected; a child without one is\nnot selectable and shows no pressed state. Pass `null` for no selection.",
             "name": "value",
             "declarations": [
               {
@@ -10539,10 +10587,11 @@
       "name": "ConstrainedText",
       "path": "./stories/constrainedtext.stories.tsx",
       "jsDocTags": {},
+      "description": "Text for a value whose length is the caller's and not yours — a table cell, a\nname in a list. It clamps to `lineClamp` lines and shows the whole value in a\ntooltip when it finds the text truncated.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/constrainedtext/Constrainedtext.component.tsx",
-        "description": "",
+        "description": "Text for a value whose length is the caller's and not yours — a table cell, a\nname in a list. It clamps to `lineClamp` lines and shows the whole value in a\ntooltip when it finds the text truncated.",
         "displayName": "ConstrainedText",
         "methods": [],
         "props": {
@@ -10889,10 +10938,11 @@
       "name": "CopyButton",
       "path": "./stories/copybutton.stories.tsx",
       "jsDocTags": {},
+      "description": "A `Button` that puts `textToCopy` on the clipboard and reports back for two\nseconds, refusing clicks meanwhile. Reach for it rather than wiring\n`navigator.clipboard` to a plain Button.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/next.ts",
-        "description": "",
+        "description": "A `Button` that puts `textToCopy` on the clipboard and reports back for two\nseconds, refusing clicks meanwhile. Reach for it rather than wiring\n`navigator.clipboard` to a plain Button.",
         "displayName": "CopyButton",
         "methods": [],
         "props": {
@@ -11189,10 +11239,11 @@
       "name": "HealthSelector",
       "path": "./stories/healthselectorv2.stories.tsx",
       "jsDocTags": {},
+      "description": "The `Select` preset for filtering by health: All Status, Healthy, Warning,\nCritical and Unknown, each with an icon of its own.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/healthselectorv2/HealthSelector.component.tsx",
-        "description": "",
+        "description": "The `Select` preset for filtering by health: All Status, Healthy, Warning,\nCritical and Unknown, each with an icon of its own.",
         "displayName": "HealthSelector",
         "methods": [],
         "props": {
@@ -11469,10 +11520,11 @@
       "name": "Icon",
       "path": "./stories/icon.stories.tsx",
       "jsDocTags": {},
+      "description": "One icon from the library's set, chosen by `name`; the `name` type lists the\nwhole set, so an icon that is not in it has to be the caller's own SVG.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/icon/Icon.component.tsx",
-        "description": "",
+        "description": "One icon from the library's set, chosen by `name`; the `name` type lists the\nwhole set, so an icon that is not in it has to be the caller's own SVG.",
         "displayName": "Icon",
         "methods": [],
         "props": {
@@ -11694,10 +11746,11 @@
       "name": "IconHelp",
       "path": "./stories/IconHelp/iconhelp.stories.tsx",
       "jsDocTags": {},
+      "description": "A help button beside a label, revealing `tooltipMessage` for a field whose\nname is not enough on its own. Inside a `FormGroup` or a `Checkbox`, pass\ntheir `labelHelpTooltip` instead and let them place it.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/iconhelper/IconHelper.tsx",
-        "description": "",
+        "description": "A help button beside a label, revealing `tooltipMessage` for a field whose\nname is not enough on its own. Inside a `FormGroup` or a `Checkbox`, pass\ntheir `labelHelpTooltip` instead and let them place it.",
         "displayName": "IconHelp",
         "methods": [],
         "props": {
@@ -11854,10 +11907,11 @@
       "name": "InfoMessage",
       "path": "./stories/InfoMessage/infomessage.stories.tsx",
       "jsDocTags": {},
+      "description": "An explanatory panel sitting inside the content it explains. Its tone is\nfixed and\ninformational — there is no severity to choose — so it teaches rather than\nalerts; a condition the user should act on is a Banner.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/infomessage/InfoMessage.component.tsx",
-        "description": "",
+        "description": "An explanatory panel sitting inside the content it explains. Its tone is\nfixed and\ninformational — there is no severity to choose — so it teaches rather than\nalerts; a condition the user should act on is a Banner.",
         "displayName": "InfoMessage",
         "methods": [],
         "props": {
@@ -11963,10 +12017,11 @@
       "name": "InlineInput",
       "path": "./stories/InlineInput/InlineInput.stories.tsx",
       "jsDocTags": {},
+      "description": "A value shown as text that becomes an `Input` when clicked and saves itself\nthrough `changeMutation`, for editing one field in place where there is no form\nto submit.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/index.ts",
-        "description": "",
+        "description": "A value shown as text that becomes an `Input` when clicked and saves itself\nthrough `changeMutation`, for editing one field in place where there is no form\nto submit.",
         "displayName": "InlineInput",
         "methods": [],
         "props": {
@@ -12428,10 +12483,11 @@
       "name": "PrettyBytes",
       "path": "./stories/prettybytes.stories.tsx",
       "jsDocTags": {},
+      "description": "A byte count formatted for display, in binary units by default (1024 reads as\n1 KiB). A missing value, or a finite negative one, renders as `-`.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/prettybytes/PrettyBytes.component.tsx",
-        "description": "",
+        "description": "A byte count formatted for display, in binary units by default (1024 reads as\n1 KiB). A missing value, or a finite negative one, renders as `-`.",
         "displayName": "PrettyBytes",
         "methods": [],
         "props": {
@@ -12756,10 +12812,11 @@
       "name": "UnsuccessfulResult",
       "path": "./stories/noresult.stories.tsx",
       "jsDocTags": {},
+      "description": "The message a table shows in place of rows: a translated sentence for every\n`status`, with a spinner while loading or idle and a warning icon on error.",
       "reactDocgenTypescript": {
         "tags": {},
         "filePath": "/home/runner/work/core-ui/core-ui/src/lib/components/UnsuccessfulResult.component.tsx",
-        "description": "",
+        "description": "The message a table shows in place of rows: a translated sentence for every\n`status`, with a spinner while loading or idle and a warning icon on error.",
         "displayName": "UnsuccessfulResult",
         "methods": [],
         "props": {
@@ -12910,6 +12967,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 5513
+    "durationMs": 4621
   }
 }

@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">4/70 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">64/70 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/70 without API description</a><span class="filter-pill ok" aria-disabled="true">402 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/402 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">4/70 API errors</a><a class="filter-pill info" data-k="infos" href="#filter-infos">7/70 infos</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">2/70 without API description</a><span class="filter-pill ok" aria-disabled="true">402 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">51/402 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">33 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note ok" style="margin-bottom: 16px;">
-              Using <code>react-docgen-typescript</code>. Generation took <strong>5.5s</strong>.
+              Using <code>react-docgen-typescript</code>. Generation took <strong>4.6s</strong>.
             </div>
     <h2 class="section-title">Components</h2>
     <div class="grid" role="list">
@@ -635,7 +635,7 @@
   id="components-accordion"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -647,7 +647,7 @@
       <h2><span class="status-dot dot-ok"></span> Accordion</h2>
       <div class="badges">
         <label for="c-0-components-accordion-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-0-components-accordion-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-0-components-accordion-stories" class="badge ok as-toggle">4 stories</label>
         <label for="c-0-components-accordion-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -655,13 +655,15 @@
     </div>
     <div class="meta" title="./stories/Accordion/accordion.stories.tsx">components-accordion · ./stories/Accordion/accordion.stories.tsx</div>
     
-    
+    <div class="hint">A titled section the user opens and closes, for detail that would otherwise
+crowd the page. Once the opening transition finishes, content such as a menu
+may overflow the box unclipped.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-0-components-accordion-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-0-components-accordion-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-0-components-accordion-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -670,13 +672,6 @@
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -1125,7 +1120,7 @@ since these panels are `overflow: visible`.</div>
   id="components-feedback-banner"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -1137,7 +1132,7 @@ since these panels are `overflow: visible`.</div>
       <h2><span class="status-dot dot-ok"></span> Banner</h2>
       <div class="badges">
         <label for="c-2-components-feedback-banner-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-2-components-feedback-banner-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-2-components-feedback-banner-stories" class="badge ok as-toggle">7 stories</label>
         
         
@@ -1145,13 +1140,16 @@ since these panels are `overflow: visible`.</div>
     </div>
     <div class="meta" title="./stories/banner.stories.tsx">components-feedback-banner · ./stories/banner.stories.tsx</div>
     
-    
+    <div class="hint">A message in the page flow, for a condition the user keeps seeing while it
+lasts — a degraded service, a read-only mode.
+Toast is the transient counterpart that reports the outcome of an action and
+then disappears.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-2-components-feedback-banner-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-2-components-feedback-banner-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -1160,13 +1158,6 @@ since these panels are `overflow: visible`.</div>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -1336,7 +1327,7 @@ withDefaultIcon?: boolean = false</code></pre>
   id="components-data-display-charts-barchart"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -1348,7 +1339,7 @@ withDefaultIcon?: boolean = false</code></pre>
       <h2><span class="status-dot dot-ok"></span> Barchart</h2>
       <div class="badges">
         <label for="c-3-components-data-display-charts-barchart-props" class="badge ok as-toggle">17 prop types</label>
-        <label for="c-3-components-data-display-charts-barchart-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-3-components-data-display-charts-barchart-stories" class="badge ok as-toggle">23 stories</label>
         
         
@@ -1356,13 +1347,15 @@ withDefaultIcon?: boolean = false</code></pre>
     </div>
     <div class="meta" title="./stories/BarChart/barchart.stories.tsx">components-data-display-charts-barchart · ./stories/BarChart/barchart.stories.tsx</div>
     
-    
+    <div class="hint">Bars over a category or a time axis, one series per entry of `bars` that the
+enclosing `ChartLegendWrapper`&#39;s `colorSet` names — a label the colorSet omits
+is dropped with a console warning.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-3-components-data-display-charts-barchart-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-3-components-data-display-charts-barchart-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -1371,13 +1364,6 @@ withDefaultIcon?: boolean = false</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -2839,7 +2825,7 @@ places each segment at a cumulative sum and its height would stop matching its v
   id="components-styling-box"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -2851,7 +2837,7 @@ places each segment at a cumulative sum and its height would stop matching its v
       <h2><span class="status-dot dot-ok"></span> Box</h2>
       <div class="badges">
         <label for="c-4-components-styling-box-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-4-components-styling-box-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-4-components-styling-box-stories" class="badge ok as-toggle">4 stories</label>
         
         
@@ -2859,13 +2845,16 @@ places each segment at a cumulative sum and its height would stop matching its v
     </div>
     <div class="meta" title="./stories/box.stories.tsx">components-styling-box · ./stories/box.stories.tsx</div>
     
-    
+    <div class="hint">The escape hatch for a one-off arrangement no existing component covers: a
+`div` taking the styled-system style props directly, so the layout needs no
+new styled-component of its own. For a row or column of siblings separated
+by a spacing token, Stack says more than a bare Box.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-4-components-styling-box-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-4-components-styling-box-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -2874,13 +2863,6 @@ places each segment at a cumulative sum and its height would stop matching its v
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -3042,7 +3024,7 @@ theme?: any</code></pre>
   id="components-navigation-breadcrumb"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -3054,7 +3036,7 @@ theme?: any</code></pre>
       <h2><span class="status-dot dot-ok"></span> Breadcrumb</h2>
       <div class="badges">
         <label for="c-5-components-navigation-breadcrumb-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-5-components-navigation-breadcrumb-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-5-components-navigation-breadcrumb-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -3062,13 +3044,16 @@ theme?: any</code></pre>
     </div>
     <div class="meta" title="./stories/breadcrumb.stories.tsx">components-navigation-breadcrumb · ./stories/breadcrumb.stories.tsx</div>
     
-    
+    <div class="hint">The trail back up from where the user is, showing a position in a hierarchy
+rather than switching between peers — that is Tabs. Pass each level as an
+element of `paths`; the last is styled as the current page, in the plain text
+colour and without the hover underline the others carry.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-5-components-navigation-breadcrumb-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-5-components-navigation-breadcrumb-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -3077,13 +3062,6 @@ theme?: any</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -3159,7 +3137,7 @@ paths?: Element[] = []</code></pre>
   id="components-button"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -3171,7 +3149,7 @@ paths?: Element[] = []</code></pre>
       <h2><span class="status-dot dot-ok"></span> Button</h2>
       <div class="badges">
         <label for="c-6-components-button-props" class="badge ok as-toggle">7 prop types</label>
-        <label for="c-6-components-button-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-6-components-button-stories" class="badge ok as-toggle">14 stories</label>
         <label for="c-6-components-button-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -3179,13 +3157,14 @@ paths?: Element[] = []</code></pre>
     </div>
     <div class="meta" title="./stories/Button/button.stories.tsx">components-button · ./stories/Button/button.stories.tsx</div>
     
-    
+    <div class="hint">The library&#39;s action control, from a page&#39;s primary call to action down to a
+bare icon in a row.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-6-components-button-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-6-components-button-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-6-components-button-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -3194,13 +3173,6 @@ paths?: Element[] = []</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -3944,7 +3916,7 @@ Do not place secondary or outline buttons in empty states. The goal is a single,
   id="components-buttongroup"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -3956,7 +3928,7 @@ Do not place secondary or outline buttons in empty states. The goal is a single,
       <h2><span class="status-dot dot-ok"></span> ButtonGroup</h2>
       <div class="badges">
         <label for="c-7-components-buttongroup-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-7-components-buttongroup-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-7-components-buttongroup-stories" class="badge ok as-toggle">5 stories</label>
         
         
@@ -3964,13 +3936,15 @@ Do not place secondary or outline buttons in empty states. The goal is a single,
     </div>
     <div class="meta" title="./stories/buttongroup.stories.tsx">components-buttongroup · ./stories/buttongroup.stories.tsx</div>
     
-    
+    <div class="hint">Buttons framed as one control instead of a row of separate ones. Give it
+`onChange` and children carrying a `value` become a single-select segmented
+control; without `onChange` it is only a visual grouping.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-7-components-buttongroup-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-7-components-buttongroup-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -3979,13 +3953,6 @@ Do not place secondary or outline buttons in empty states. The goal is a single,
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -4006,10 +3973,9 @@ onChange?: ((value: string) =&gt; void)
 orientation?: Orientation = horizontal
 
 /**
- * Value of the selected button. Providing `value` together with `onChange`
- * turns the group into a single-select segmented control: every child must
- * carry a `value`, and the child whose `value` matches is rendered selected.
- * Pass `null` to render no selection.
+ * Value of the selected child, once `onChange` has made the group selectable.
+ * The child whose `value` matches renders selected; a child without one is
+ * not selectable and shows no pressed state. Pass `null` for no selection.
  */
 value?: string | null</code></pre>
           </div>
@@ -4197,7 +4163,7 @@ each child keeps its own `onClick`.</div>
   id="components-data-display-card"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -4209,7 +4175,7 @@ each child keeps its own `onClick`.</div>
       <h2><span class="status-dot dot-ok"></span> Card</h2>
       <div class="badges">
         <label for="c-8-components-data-display-card-props" class="badge ok as-toggle">9 prop types</label>
-        <label for="c-8-components-data-display-card-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-8-components-data-display-card-stories" class="badge ok as-toggle">10 stories · 8 incomplete</label>
         
         
@@ -4217,13 +4183,14 @@ each child keeps its own `onClick`.</div>
     </div>
     <div class="meta" title="./stories/card.stories.tsx">components-data-display-card · ./stories/card.stories.tsx</div>
     
-    
+    <div class="hint">A framed block for one subject among several shown side by side — a resource, a
+summary. Build it from `Card.Header` and `Card.Body`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-8-components-data-display-card-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-8-components-data-display-card-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -4232,13 +4199,6 @@ each child keeps its own `onClick`.</div>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -6730,7 +6690,7 @@ measured and forecast below, its entry stays solid and only the tooltip tells th
   id="components-inputs-checkbox"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -6742,7 +6702,7 @@ measured and forecast below, its entry stays solid and only the tooltip tells th
       <h2><span class="status-dot dot-ok"></span> Checkbox</h2>
       <div class="badges">
         <label for="c-12-components-inputs-checkbox-props" class="badge ok as-toggle">6 prop types</label>
-        <label for="c-12-components-inputs-checkbox-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-12-components-inputs-checkbox-stories" class="badge ok as-toggle">13 stories</label>
         <label for="c-12-components-inputs-checkbox-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -6750,13 +6710,14 @@ measured and forecast below, its entry stays solid and only the tooltip tells th
     </div>
     <div class="meta" title="./stories/Checkbox/checkbox.stories.tsx">components-inputs-checkbox · ./stories/Checkbox/checkbox.stories.tsx</div>
     
-    
+    <div class="hint">A box the user ticks for a choice that stands on its own, rather than one that
+rules the others out — RadioGroup is what offers a single choice among several.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-12-components-inputs-checkbox-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-12-components-inputs-checkbox-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-12-components-inputs-checkbox-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -6765,13 +6726,6 @@ measured and forecast below, its entry stays solid and only the tooltip tells th
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -7216,7 +7170,7 @@ When the reason for the disabled state is not obvious from context, add a toolti
   id="components-progress-loading-circularprogressbar"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -7228,7 +7182,7 @@ When the reason for the disabled state is not obvious from context, add a toolti
       <h2><span class="status-dot dot-ok"></span> CircularProgressBar</h2>
       <div class="badges">
         <label for="c-13-components-progress-loading-circularprogressbar-props" class="badge ok as-toggle">7 prop types</label>
-        <label for="c-13-components-progress-loading-circularprogressbar-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-13-components-progress-loading-circularprogressbar-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -7236,13 +7190,16 @@ When the reason for the disabled state is not obvious from context, add a toolti
     </div>
     <div class="meta" title="./stories/circularprogressbar.stories.tsx">components-progress-loading-circularprogressbar · ./stories/circularprogressbar.stories.tsx</div>
     
-    
+    <div class="hint">Draws a proportion as a ring, leaving its center free for whatever the
+number means — a capacity figure, a count. Reach for ProgressBar instead
+when the value sits in a row of text or a table, where a bar reads better
+at small sizes.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-13-components-progress-loading-circularprogressbar-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-13-components-progress-loading-circularprogressbar-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -7251,13 +7208,6 @@ When the reason for the disabled state is not obvious from context, add a toolti
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -7355,7 +7305,7 @@ import { Text } from './common';</code></pre>
   id="components-constrainedtext"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -7367,7 +7317,7 @@ import { Text } from './common';</code></pre>
       <h2><span class="status-dot dot-ok"></span> ConstrainedText</h2>
       <div class="badges">
         <label for="c-14-components-constrainedtext-props" class="badge ok as-toggle">11 prop types</label>
-        <label for="c-14-components-constrainedtext-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-14-components-constrainedtext-stories" class="badge ok as-toggle">3 stories</label>
         
         
@@ -7375,13 +7325,15 @@ import { Text } from './common';</code></pre>
     </div>
     <div class="meta" title="./stories/constrainedtext.stories.tsx">components-constrainedtext · ./stories/constrainedtext.stories.tsx</div>
     
-    
+    <div class="hint">Text for a value whose length is the caller&#39;s and not yours — a table cell, a
+name in a list. It clamps to `lineClamp` lines and shows the whole value in a
+tooltip when it finds the text truncated.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-14-components-constrainedtext-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-14-components-constrainedtext-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -7390,13 +7342,6 @@ import { Text } from './common';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -7716,7 +7661,7 @@ export const ValidationMessages = {
   id="components-copybutton"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -7728,7 +7673,7 @@ export const ValidationMessages = {
       <h2><span class="status-dot dot-ok"></span> CopyButton</h2>
       <div class="badges">
         <label for="c-16-components-copybutton-props" class="badge ok as-toggle">8 prop types</label>
-        <label for="c-16-components-copybutton-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-16-components-copybutton-stories" class="badge ok as-toggle">6 stories</label>
         
         
@@ -7736,13 +7681,15 @@ export const ValidationMessages = {
     </div>
     <div class="meta" title="./stories/copybutton.stories.tsx">components-copybutton · ./stories/copybutton.stories.tsx</div>
     
-    
+    <div class="hint">A `Button` that puts `textToCopy` on the clipboard and reports back for two
+seconds, refusing clicks meanwhile. Reach for it rather than wiring
+`navigator.clipboard` to a plain Button.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-16-components-copybutton-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-16-components-copybutton-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -7751,13 +7698,6 @@ export const ValidationMessages = {
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -7914,7 +7854,7 @@ variant?: &quot;outline&quot;</code></pre>
   id="components-feedback-drawer"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -7926,7 +7866,7 @@ variant?: &quot;outline&quot;</code></pre>
       <h2><span class="status-dot dot-ok"></span> Drawer</h2>
       <div class="badges">
         <label for="c-17-components-feedback-drawer-props" class="badge ok as-toggle">8 prop types</label>
-        <label for="c-17-components-feedback-drawer-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-17-components-feedback-drawer-stories" class="badge ok as-toggle">4 stories</label>
         
         
@@ -7934,13 +7874,17 @@ variant?: &quot;outline&quot;</code></pre>
     </div>
     <div class="meta" title="./stories/drawer.stories.tsx">components-feedback-drawer · ./stories/drawer.stories.tsx</div>
     
-    
+    <div class="hint">A panel that slides in from one edge of the screen and holds secondary work
+— details, filters, a form — alongside the page rather than centered over
+it. Clicking anywhere outside always closes it, so the page behind cannot be
+used while it is open. A decision the user must settle before going on
+belongs in a Modal instead.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-17-components-feedback-drawer-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-17-components-feedback-drawer-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -7949,13 +7893,6 @@ variant?: &quot;outline&quot;</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8129,7 +8066,7 @@ title: ReactNode</code></pre>
   id="components-navigation-dropdown"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -8141,7 +8078,7 @@ title: ReactNode</code></pre>
       <h2><span class="status-dot dot-ok"></span> Dropdown</h2>
       <div class="badges">
         <label for="c-18-components-navigation-dropdown-props" class="badge ok as-toggle">10 prop types</label>
-        <label for="c-18-components-navigation-dropdown-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-18-components-navigation-dropdown-stories" class="badge ok as-toggle">6 stories</label>
         
         
@@ -8149,13 +8086,15 @@ title: ReactNode</code></pre>
     </div>
     <div class="meta" title="./stories/dropdown.stories.tsx">components-navigation-dropdown · ./stories/dropdown.stories.tsx</div>
     
-    
+    <div class="hint">A trigger that opens a short list of `items`, each carrying its own `onClick`
+— a menu of actions, not a form field. Reach for `Select` when the user is
+choosing a value rather than doing something.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-18-components-navigation-dropdown-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-18-components-navigation-dropdown-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8164,13 +8103,6 @@ title: ReactNode</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8323,7 +8255,7 @@ import { action } from 'storybook/actions';</code></pre>
   id="components-inputs-dropzone"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -8335,7 +8267,7 @@ import { action } from 'storybook/actions';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Dropzone</h2>
       <div class="badges">
         <label for="c-19-components-inputs-dropzone-props" class="badge ok as-toggle">23 prop types</label>
-        <label for="c-19-components-inputs-dropzone-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-19-components-inputs-dropzone-stories" class="badge ok as-toggle">5 stories</label>
         
         
@@ -8343,13 +8275,14 @@ import { action } from 'storybook/actions';</code></pre>
     </div>
     <div class="meta" title="./stories/dropzone.stories.tsx">components-inputs-dropzone · ./stories/dropzone.stories.tsx</div>
     
-    
+    <div class="hint">How a form takes files rather than typed values: a drop target with a button
+of its own for picking them, holding the accepted list itself.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-19-components-inputs-dropzone-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-19-components-inputs-dropzone-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8358,13 +8291,6 @@ import { action } from 'storybook/actions';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8499,7 +8425,7 @@ variant: &quot;inline&quot; | &quot;large&quot;</code></pre>
   id="components-inputs-editor"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -8511,7 +8437,7 @@ variant: &quot;inline&quot; | &quot;large&quot;</code></pre>
       <h2><span class="status-dot dot-ok"></span> Editor</h2>
       <div class="badges">
         <label for="c-20-components-inputs-editor-props" class="badge ok as-toggle">6 prop types</label>
-        <label for="c-20-components-inputs-editor-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-20-components-inputs-editor-stories" class="badge ok as-toggle">5 stories · 2 incomplete</label>
         
         
@@ -8519,13 +8445,14 @@ variant: &quot;inline&quot; | &quot;large&quot;</code></pre>
     </div>
     <div class="meta" title="./stories/editor.stories.tsx">components-inputs-editor · ./stories/editor.stories.tsx</div>
     
-    
+    <div class="hint">A code pane for JSON. Give `language` a schema and it also validates and
+completes against it.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-20-components-inputs-editor-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-20-components-inputs-editor-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8534,13 +8461,6 @@ variant: &quot;inline&quot; | &quot;large&quot;</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8710,7 +8630,7 @@ Hover over the red-underlined values to see error messages.</div>
   id="components-data-display-emptystate"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -8722,7 +8642,7 @@ Hover over the red-underlined values to see error messages.</div>
       <h2><span class="status-dot dot-ok"></span> EmptyState</h2>
       <div class="badges">
         <label for="c-21-components-data-display-emptystate-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-21-components-data-display-emptystate-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-21-components-data-display-emptystate-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -8730,13 +8650,15 @@ Hover over the red-underlined values to see error messages.</div>
     </div>
     <div class="meta" title="./stories/emptystate.stories.tsx">components-data-display-emptystate · ./stories/emptystate.stories.tsx</div>
     
-    
+    <div class="hint">Fills the area given to a page that has nothing to list yet, inviting the
+user to create the first resource and naming it. For the body of a table
+that came back with no rows, UnsuccessfulResult is the smaller fit.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-21-components-data-display-emptystate-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-21-components-data-display-emptystate-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8745,13 +8667,6 @@ Hover over the red-underlined values to see error messages.</div>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8829,7 +8744,7 @@ resourceToCreate?: string</code></pre>
   id="components-navigation-error-pages-401"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -8841,7 +8756,7 @@ resourceToCreate?: string</code></pre>
       <h2><span class="status-dot dot-ok"></span> ErrorPage401</h2>
       <div class="badges">
         <label for="c-22-components-navigation-error-pages-401-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-22-components-navigation-error-pages-401-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-22-components-navigation-error-pages-401-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -8849,13 +8764,16 @@ resourceToCreate?: string</code></pre>
     </div>
     <div class="meta" title="./stories/errorpage401.stories.tsx">components-navigation-error-pages-401 · ./stories/errorpage401.stories.tsx</div>
     
-    
+    <div class="hint">The full-page screen for a request the supplied credentials do not grant
+access to — whether sign-in failed or the account simply lacks the right.
+ErrorPage404 covers an address that does not exist, and ErrorPage500 any
+other failure.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-22-components-navigation-error-pages-401-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-22-components-navigation-error-pages-401-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8864,13 +8782,6 @@ resourceToCreate?: string</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -8936,7 +8847,7 @@ supportLink?: string = undefined</code></pre>
   id="components-navigation-error-pages-404"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -8948,7 +8859,7 @@ supportLink?: string = undefined</code></pre>
       <h2><span class="status-dot dot-ok"></span> ErrorPage404</h2>
       <div class="badges">
         <label for="c-23-components-navigation-error-pages-404-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-23-components-navigation-error-pages-404-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-23-components-navigation-error-pages-404-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -8956,13 +8867,15 @@ supportLink?: string = undefined</code></pre>
     </div>
     <div class="meta" title="./stories/errorpage404.stories.tsx">components-navigation-error-pages-404 · ./stories/errorpage404.stories.tsx</div>
     
-    
+    <div class="hint">The full-page screen for an address that resolves to nothing — a wrong URL
+or a page that has moved. Use ErrorPage401 when the page exists but the user
+may not see it, and ErrorPage500 for any other failure.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-23-components-navigation-error-pages-404-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-23-components-navigation-error-pages-404-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -8971,13 +8884,6 @@ supportLink?: string = undefined</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -9036,7 +8942,7 @@ onReturnHomeClick?: ((event: MouseEvent&lt;HTMLButtonElement, MouseEvent&gt;) =&
   id="components-navigation-error-pages-500"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -9048,7 +8954,7 @@ onReturnHomeClick?: ((event: MouseEvent&lt;HTMLButtonElement, MouseEvent&gt;) =&
       <h2><span class="status-dot dot-ok"></span> ErrorPage500</h2>
       <div class="badges">
         <label for="c-24-components-navigation-error-pages-500-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-24-components-navigation-error-pages-500-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-24-components-navigation-error-pages-500-stories" class="badge ok as-toggle">4 stories</label>
         
         
@@ -9056,13 +8962,16 @@ onReturnHomeClick?: ((event: MouseEvent&lt;HTMLButtonElement, MouseEvent&gt;) =&
     </div>
     <div class="meta" title="./stories/errorpage500.stories.tsx">components-navigation-error-pages-500 · ./stories/errorpage500.stories.tsx</div>
     
-    
+    <div class="hint">The full-page fallback for an unexpected failure. Reach for ErrorPage404
+when the address is
+known not to exist, and ErrorPage401 when the credentials are known to be
+the problem.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-24-components-navigation-error-pages-500-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-24-components-navigation-error-pages-500-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -9071,13 +8980,6 @@ onReturnHomeClick?: ((event: MouseEvent&lt;HTMLButtonElement, MouseEvent&gt;) =&
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -9171,7 +9073,7 @@ supportLink?: string = undefined</code></pre>
   id="components-navigation-error-pages-auth"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -9183,7 +9085,7 @@ supportLink?: string = undefined</code></pre>
       <h2><span class="status-dot dot-ok"></span> ErrorPageAuth</h2>
       <div class="badges">
         <label for="c-25-components-navigation-error-pages-auth-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-25-components-navigation-error-pages-auth-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-25-components-navigation-error-pages-auth-stories" class="badge ok as-toggle">3 stories</label>
         
         
@@ -9191,13 +9093,15 @@ supportLink?: string = undefined</code></pre>
     </div>
     <div class="meta" title="./stories/errorpageauth.stories.tsx">components-navigation-error-pages-auth · ./stories/errorpageauth.stories.tsx</div>
     
-    
+    <div class="hint">The full-page screen shown while authentication is still in progress, not an
+error: it reports that sign-in is under way and suggests a refresh if it
+lasts. Once authentication has failed, ErrorPage401 is the screen to show.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-25-components-navigation-error-pages-auth-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-25-components-navigation-error-pages-auth-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -9206,13 +9110,6 @@ supportLink?: string = undefined</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -9286,7 +9183,7 @@ supportLink?: string = undefined</code></pre>
   id="templates-form"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -9298,7 +9195,7 @@ supportLink?: string = undefined</code></pre>
       <h2><span class="status-dot dot-ok"></span> Form</h2>
       <div class="badges">
         <label for="c-26-templates-form-props" class="badge ok as-toggle">6 prop types</label>
-        <label for="c-26-templates-form-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-26-templates-form-stories" class="badge ok as-toggle">13 stories</label>
         <label for="c-26-templates-form-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -9306,13 +9203,14 @@ supportLink?: string = undefined</code></pre>
     </div>
     <div class="meta" title="./stories/form.stories.tsx">templates-form · ./stories/form.stories.tsx</div>
     
-    
+    <div class="hint">The frame a screen&#39;s fields live in: `FormSection`s with the actions held
+fixed around them, either as a whole page or inside a tab.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-26-templates-form-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-26-templates-form-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-26-templates-form-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -9321,13 +9219,6 @@ supportLink?: string = undefined</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -11118,7 +11009,7 @@ value: Date</code></pre>
   id="components-data-display-charts-globalhealthbar"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -11130,7 +11021,7 @@ value: Date</code></pre>
       <h2><span class="status-dot dot-ok"></span> GlobalHealthBar</h2>
       <div class="badges">
         <label for="c-28-components-data-display-charts-globalhealthbar-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-28-components-data-display-charts-globalhealthbar-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-28-components-data-display-charts-globalhealthbar-stories" class="badge ok as-toggle">3 stories · 1 incomplete</label>
         <label for="c-28-components-data-display-charts-globalhealthbar-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -11138,13 +11029,15 @@ value: Date</code></pre>
     </div>
     <div class="meta" title="./stories/GlobalHealthBar/globalhealthbar.stories.tsx">components-data-display-charts-globalhealthbar · ./stories/GlobalHealthBar/globalhealthbar.stories.tsx</div>
     
-    
+    <div class="hint">A single band showing when `alerts` fired between `start` and `end` — a
+period&#39;s health at a glance, not a measured value. The arrow keys walk the
+alerts one by one, so it is readable without a pointer.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-28-components-data-display-charts-globalhealthbar-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-28-components-data-display-charts-globalhealthbar-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-28-components-data-display-charts-globalhealthbar-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -11153,13 +11046,6 @@ value: Date</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -11336,7 +11222,7 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
   id="components-healthselector"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -11348,7 +11234,7 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
       <h2><span class="status-dot dot-ok"></span> HealthSelector</h2>
       <div class="badges">
         <label for="c-29-components-healthselector-props" class="badge ok as-toggle">14 prop types</label>
-        <label for="c-29-components-healthselector-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-29-components-healthselector-stories" class="badge ok as-toggle">3 stories · 1 incomplete</label>
         
         
@@ -11356,13 +11242,14 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
     </div>
     <div class="meta" title="./stories/healthselectorv2.stories.tsx">components-healthselector · ./stories/healthselectorv2.stories.tsx</div>
     
-    
+    <div class="hint">The `Select` preset for filtering by health: All Status, Healthy, Warning,
+Critical and Unknown, each with an icon of its own.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-29-components-healthselector-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-29-components-healthselector-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -11371,13 +11258,6 @@ import * as GlobalHealthBarStories from &#39;./globalhealthbar.stories&#39;;
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -12203,7 +12083,7 @@ neutral, so that it appears in the legend and can be filtered like the others.
   id="components-icon"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -12215,7 +12095,7 @@ neutral, so that it appears in the legend and can be filtered like the others.
       <h2><span class="status-dot dot-ok"></span> Icon</h2>
       <div class="badges">
         <label for="c-31-components-icon-props" class="badge ok as-toggle">8 prop types</label>
-        <label for="c-31-components-icon-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-31-components-icon-stories" class="badge ok as-toggle">5 stories</label>
         <label for="c-31-components-icon-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -12223,13 +12103,14 @@ neutral, so that it appears in the legend and can be filtered like the others.
     </div>
     <div class="meta" title="./stories/icon.stories.tsx">components-icon · ./stories/icon.stories.tsx</div>
     
-    
+    <div class="hint">One icon from the library&#39;s set, chosen by `name`; the `name` type lists the
+whole set, so an icon that is not in it has to be the caller&#39;s own SVG.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-31-components-icon-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-31-components-icon-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-31-components-icon-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -12238,13 +12119,6 @@ neutral, so that it appears in the legend and can be filtered like the others.
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -12513,7 +12387,7 @@ import * as IconStories from &#39;./icon.stories&#39;;
   id="components-iconhelp"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -12525,7 +12399,7 @@ import * as IconStories from &#39;./icon.stories&#39;;
       <h2><span class="status-dot dot-ok"></span> IconHelp</h2>
       <div class="badges">
         <label for="c-32-components-iconhelp-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-32-components-iconhelp-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-32-components-iconhelp-stories" class="badge ok as-toggle">3 stories</label>
         <label for="c-32-components-iconhelp-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -12533,13 +12407,15 @@ import * as IconStories from &#39;./icon.stories&#39;;
     </div>
     <div class="meta" title="./stories/IconHelp/iconhelp.stories.tsx">components-iconhelp · ./stories/IconHelp/iconhelp.stories.tsx</div>
     
-    
+    <div class="hint">A help button beside a label, revealing `tooltipMessage` for a field whose
+name is not enough on its own. Inside a `FormGroup` or a `Checkbox`, pass
+their `labelHelpTooltip` instead and let them place it.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-32-components-iconhelp-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-32-components-iconhelp-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-32-components-iconhelp-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -12548,13 +12424,6 @@ import * as IconStories from &#39;./icon.stories&#39;;
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -12781,7 +12650,7 @@ The tooltip defaults to `right`. Pick another placement only when `right` is cli
   id="components-infomessage"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -12793,7 +12662,7 @@ The tooltip defaults to `right`. Pick another placement only when `right` is cli
       <h2><span class="status-dot dot-ok"></span> InfoMessage</h2>
       <div class="badges">
         <label for="c-33-components-infomessage-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-33-components-infomessage-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-33-components-infomessage-stories" class="badge ok as-toggle">4 stories</label>
         <label for="c-33-components-infomessage-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -12801,13 +12670,16 @@ The tooltip defaults to `right`. Pick another placement only when `right` is cli
     </div>
     <div class="meta" title="./stories/InfoMessage/infomessage.stories.tsx">components-infomessage · ./stories/InfoMessage/infomessage.stories.tsx</div>
     
-    
+    <div class="hint">An explanatory panel sitting inside the content it explains. Its tone is
+fixed and
+informational — there is no severity to choose — so it teaches rather than
+alerts; a condition the user should act on is a Banner.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-33-components-infomessage-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-33-components-infomessage-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-33-components-infomessage-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -12816,13 +12688,6 @@ The tooltip defaults to `right`. Pick another placement only when `right` is cli
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -13001,7 +12866,7 @@ This component automatically adapts its background to contrast with its parent e
   id="components-inlineinput"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -13013,7 +12878,7 @@ This component automatically adapts its background to contrast with its parent e
       <h2><span class="status-dot dot-ok"></span> InlineInput</h2>
       <div class="badges">
         <label for="c-34-components-inlineinput-props" class="badge ok as-toggle">15 prop types</label>
-        <label for="c-34-components-inlineinput-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-34-components-inlineinput-stories" class="badge ok as-toggle">7 stories</label>
         
         
@@ -13021,13 +12886,15 @@ This component automatically adapts its background to contrast with its parent e
     </div>
     <div class="meta" title="./stories/InlineInput/InlineInput.stories.tsx">components-inlineinput · ./stories/InlineInput/InlineInput.stories.tsx</div>
     
-    
+    <div class="hint">A value shown as text that becomes an `Input` when clicked and saves itself
+through `changeMutation`, for editing one field in place where there is no form
+to submit.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-34-components-inlineinput-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-34-components-inlineinput-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -13036,13 +12903,6 @@ This component automatically adapts its background to contrast with its parent e
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -13336,7 +13196,7 @@ size?: InputSize</code></pre>
   id="components-inputs-inputlist"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -13348,7 +13208,7 @@ size?: InputSize</code></pre>
       <h2><span class="status-dot dot-ok"></span> InputList</h2>
       <div class="badges">
         <label for="c-35-components-inputs-inputlist-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-35-components-inputs-inputlist-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-35-components-inputs-inputlist-stories" class="badge ok as-toggle">1 story</label>
         
         
@@ -13356,13 +13216,15 @@ size?: InputSize</code></pre>
     </div>
     <div class="meta" title="./stories/inputlist.stories.tsx">components-inputs-inputlist · ./stories/inputlist.stories.tsx</div>
     
-    
+    <div class="hint">The field for a value that is legitimately a list rather than one entry. It
+holds an `Input` per item of a single array value, with the add and remove
+buttons that keep the two in step.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-35-components-inputs-inputlist-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-35-components-inputs-inputlist-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -13371,13 +13233,6 @@ size?: InputSize</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -13427,7 +13282,7 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from '@scality/core-u
   id="components-inputs-input"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -13439,7 +13294,7 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from '@scality/core-u
       <h2><span class="status-dot dot-ok"></span> InputV2</h2>
       <div class="badges">
         <label for="c-36-components-inputs-input-props" class="badge ok as-toggle">9 prop types</label>
-        <label for="c-36-components-inputs-input-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-36-components-inputs-input-stories" class="badge ok as-toggle">6 stories</label>
         
         
@@ -13447,13 +13302,15 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from '@scality/core-u
     </div>
     <div class="meta" title="./stories/input.stories.tsx">components-inputs-input · ./stories/input.stories.tsx</div>
     
-    
+    <div class="hint">The library&#39;s single-line text field, for a value the surrounding form
+submits. A field that narrows what is already on screen is a `SearchInput`,
+and one edited in place with no form around it is an `InlineInput`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-36-components-inputs-input-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-36-components-inputs-input-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -13462,13 +13319,6 @@ import { FormSection, InputList, Wrapper as StoryWrapper } from '@scality/core-u
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -13610,7 +13460,7 @@ import { action } from 'storybook/actions';</code></pre>
   id="templates-lateralnavbarlayout"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -13622,7 +13472,7 @@ import { action } from 'storybook/actions';</code></pre>
       <h2><span class="status-dot dot-ok"></span> LateralNavbarLayout</h2>
       <div class="badges">
         <label for="c-37-templates-lateralnavbarlayout-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-37-templates-lateralnavbarlayout-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-37-templates-lateralnavbarlayout-stories" class="badge ok as-toggle">4 stories · 3 incomplete</label>
         
         
@@ -13630,13 +13480,15 @@ import { action } from 'storybook/actions';</code></pre>
     </div>
     <div class="meta" title="./stories/lateralnavbarlayout.stories.tsx">templates-lateralnavbarlayout · ./stories/lateralnavbarlayout.stories.tsx</div>
     
-    
+    <div class="hint">A full-viewport frame whose navigation is entirely lateral: a `Sidebar` and
+the page beside it, with no bar above. The v1 `Layout` is the one that puts a
+Navbar on top of the same arrangement.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-37-templates-lateralnavbarlayout-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-37-templates-lateralnavbarlayout-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -13645,13 +13497,6 @@ import { action } from 'storybook/actions';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -13752,7 +13597,7 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
   id="templates-layout2"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -13764,7 +13609,7 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
       <h2><span class="status-dot dot-ok"></span> Layout2</h2>
       <div class="badges">
         <label for="c-38-templates-layout2-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-38-templates-layout2-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-38-templates-layout2-stories" class="badge ok as-toggle">10 stories</label>
         <label for="c-38-templates-layout2-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -13772,13 +13617,16 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
     </div>
     <div class="meta" title="./stories/layout.stories.tsx">templates-layout2 · ./stories/layout.stories.tsx</div>
     
-    
+    <div class="hint">The application frame that takes its navigation already built: it reserves the
+navbar&#39;s height for `headerNavigation` and puts the app below. The app child
+has to claim the remaining height itself, as `AppContainer` does. Reach for the
+v1 `Layout` instead when the Navbar and Sidebar should be built from props.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-38-templates-layout2-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-38-templates-layout2-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-38-templates-layout2-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -13787,13 +13635,6 @@ import { Loader } from '../src/lib/components/loader/Loader.component';</code></
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -14440,7 +14281,7 @@ Form pages guidelines are to be defined. Until it is, follow the Form guideline 
   id="components-progress-loading-loader"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -14452,7 +14293,7 @@ Form pages guidelines are to be defined. Until it is, follow the Form guideline 
       <h2><span class="status-dot dot-ok"></span> Loader</h2>
       <div class="badges">
         <label for="c-39-components-progress-loading-loader-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-39-components-progress-loading-loader-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-39-components-progress-loading-loader-stories" class="badge ok as-toggle">4 stories</label>
         
         
@@ -14460,13 +14301,14 @@ Form pages guidelines are to be defined. Until it is, follow the Form guideline 
     </div>
     <div class="meta" title="./stories/loader.stories.tsx">components-progress-loading-loader · ./stories/loader.stories.tsx</div>
     
-    
+    <div class="hint">The spinner for a wait whose length is not known. As soon as the progress can
+be measured, ProgressBar tells the user more.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-39-components-progress-loading-loader-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-39-components-progress-loading-loader-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -14475,13 +14317,6 @@ Form pages guidelines are to be defined. Until it is, follow the Form guideline 
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -14572,7 +14407,7 @@ size?: Size = SIZE.large</code></pre>
   id="components-feedback-modal"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -14584,7 +14419,7 @@ size?: Size = SIZE.large</code></pre>
       <h2><span class="status-dot dot-ok"></span> Modal</h2>
       <div class="badges">
         <label for="c-40-components-feedback-modal-props" class="badge ok as-toggle">9 prop types</label>
-        <label for="c-40-components-feedback-modal-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-40-components-feedback-modal-stories" class="badge ok as-toggle">11 stories</label>
         <label for="c-40-components-feedback-modal-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -14592,13 +14427,16 @@ size?: Size = SIZE.large</code></pre>
     </div>
     <div class="meta" title="./stories/Modal/modal.stories.tsx">components-feedback-modal · ./stories/Modal/modal.stories.tsx</div>
     
-    
+    <div class="hint">A dialog centered over the page that takes focus and blocks the content
+behind it, for a decision the user has to settle before going on. Reserve it
+for work that genuinely interrupts: secondary work that belongs alongside
+the page is a Drawer, and a message needing no answer is a Toast.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-40-components-feedback-modal-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-40-components-feedback-modal-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-40-components-feedback-modal-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -14607,13 +14445,6 @@ size?: Size = SIZE.large</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -15351,7 +15182,7 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
   id="components-navigation-navbar"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -15363,7 +15194,7 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
       <h2><span class="status-dot dot-ok"></span> Navbar</h2>
       <div class="badges">
         <label for="c-41-components-navigation-navbar-props" class="badge ok as-toggle">6 prop types</label>
-        <label for="c-41-components-navigation-navbar-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-41-components-navigation-navbar-stories" class="badge ok as-toggle">8 stories · 5 incomplete</label>
         
         
@@ -15371,13 +15202,16 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
     </div>
     <div class="meta" title="./stories/navbar.stories.tsx">components-navigation-navbar · ./stories/navbar.stories.tsx</div>
     
-    
+    <div class="hint">The bar across the top of an application: its logo, its top-level `tabs` and
+the `rightActions` reachable from anywhere. It handles its own crowding: tabs
+overflow into a &quot;More&quot; menu as room runs out, and right actions condense below
+`condenseActionsBreakpoint`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-41-components-navigation-navbar-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-41-components-navigation-navbar-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -15386,13 +15220,6 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -15405,9 +15232,11 @@ Modals triggered from table row actions are valid. Use `size=&quot;inline&quot;`
             <pre><code>className?: string
 
 /**
- * Container width (px) below which right-action labels drop to icon-only
- * (e.g. the username dropdown shows just its icon). Tabs overflow into a
- * &quot;More&quot; menu automatically as space runs out, independent of this value.
+ * Container width (px) below which a dropdown right action with an icon
+ * shortens its label to its initials beside the icon, the full label staying
+ * as the accessible name. Button and custom actions are unaffected. Tabs
+ * overflow into a &quot;More&quot; menu automatically as space runs out, independent of
+ * this value.
  * Defaults to {@link NAVBAR_COLLAPSE_BREAKPOINT_PX}.
  */
 condenseActionsBreakpoint?: number
@@ -15717,7 +15546,7 @@ import { action } from 'storybook/actions';</code></pre>
   id="components-feedback-notifications"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -15729,7 +15558,7 @@ import { action } from 'storybook/actions';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Notifications</h2>
       <div class="badges">
         <label for="c-42-components-feedback-notifications-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-42-components-feedback-notifications-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-42-components-feedback-notifications-stories" class="badge ok as-toggle">6 stories · 1 incomplete</label>
         
         
@@ -15737,13 +15566,15 @@ import { action } from 'storybook/actions';</code></pre>
     </div>
     <div class="meta" title="./stories/notifications.stories.tsx">components-feedback-notifications · ./stories/notifications.stories.tsx</div>
     
-    
+    <div class="hint">Stacks a list of dismissible messages in one corner of the screen, driven by
+an array the caller owns. Toast is the single-message counterpart: it needs
+no such list and dismisses itself by default.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-42-components-feedback-notifications-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-42-components-feedback-notifications-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -15752,13 +15583,6 @@ import { action } from 'storybook/actions';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -16213,7 +16037,7 @@ that gives.
   id="components-prettybytes"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -16225,7 +16049,7 @@ that gives.
       <h2><span class="status-dot dot-ok"></span> PrettyBytes</h2>
       <div class="badges">
         <label for="c-44-components-prettybytes-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-44-components-prettybytes-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-44-components-prettybytes-stories" class="badge ok as-toggle">1 story</label>
         
         
@@ -16233,13 +16057,14 @@ that gives.
     </div>
     <div class="meta" title="./stories/prettybytes.stories.tsx">components-prettybytes · ./stories/prettybytes.stories.tsx</div>
     
-    
+    <div class="hint">A byte count formatted for display, in binary units by default (1024 reads as
+1 KiB). A missing value, or a finite negative one, renders as `-`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-44-components-prettybytes-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-44-components-prettybytes-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -16248,13 +16073,6 @@ that gives.
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -16314,7 +16132,7 @@ unit?: &quot;iB&quot; | &quot;B&quot; = iB</code></pre>
   id="components-progress-loading-progressbar"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -16326,7 +16144,7 @@ unit?: &quot;iB&quot; | &quot;B&quot; = iB</code></pre>
       <h2><span class="status-dot dot-ok"></span> ProgressBar</h2>
       <div class="badges">
         <label for="c-45-components-progress-loading-progressbar-props" class="badge ok as-toggle">12 prop types</label>
-        <label for="c-45-components-progress-loading-progressbar-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-45-components-progress-loading-progressbar-stories" class="badge ok as-toggle">6 stories</label>
         
         
@@ -16334,13 +16152,16 @@ unit?: &quot;iB&quot; | &quot;B&quot; = iB</code></pre>
     </div>
     <div class="meta" title="./stories/progressbar.stories.tsx">components-progress-loading-progressbar · ./stories/progressbar.stories.tsx</div>
     
-    
+    <div class="hint">Draws a known proportion as a horizontal bar, with room for labels around
+it. Use it when the progress can be measured: a wait of unknown length is a
+Loader, and a ring that keeps its middle free for the figure is a
+CircularProgressBar.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-45-components-progress-loading-progressbar-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-45-components-progress-loading-progressbar-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -16349,13 +16170,6 @@ unit?: &quot;iB&quot; | &quot;B&quot; = iB</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -16597,7 +16411,7 @@ topRightLabel?: string</code></pre>
   id="components-inputs-radiogroup"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -16609,7 +16423,7 @@ topRightLabel?: string</code></pre>
       <h2><span class="status-dot dot-ok"></span> RadioGroup</h2>
       <div class="badges">
         <label for="c-46-components-inputs-radiogroup-props" class="badge ok as-toggle">9 prop types</label>
-        <label for="c-46-components-inputs-radiogroup-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-46-components-inputs-radiogroup-stories" class="badge ok as-toggle">8 stories</label>
         <label for="c-46-components-inputs-radiogroup-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -16617,13 +16431,15 @@ topRightLabel?: string</code></pre>
     </div>
     <div class="meta" title="./stories/Radio/radio.stories.tsx">components-inputs-radiogroup · ./stories/Radio/radio.stories.tsx</div>
     
-    
+    <div class="hint">One choice among a short list of `options`, all of them visible at once. Reach
+for a Select once showing every option costs more than it helps, and for
+Checkbox when the choices do not exclude each other.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-46-components-inputs-radiogroup-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-46-components-inputs-radiogroup-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-46-components-inputs-radiogroup-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -16632,13 +16448,6 @@ topRightLabel?: string</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -17405,7 +17214,7 @@ A navigation between two pages with the same pattern, such as from one node to a
   id="components-navigation-scrollbarwrapper"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   missing-api
@@ -17417,7 +17226,7 @@ A navigation between two pages with the same pattern, such as from one node to a
       <h2><span class="status-dot dot-ok"></span> ScrollbarWrapper</h2>
       <div class="badges">
         <span class="badge">no API description</span>
-        <label for="c-49-components-navigation-scrollbarwrapper-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-49-components-navigation-scrollbarwrapper-stories" class="badge ok as-toggle">2 stories</label>
         <label for="c-49-components-navigation-scrollbarwrapper-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -17425,13 +17234,15 @@ A navigation between two pages with the same pattern, such as from one node to a
     </div>
     <div class="meta" title="./stories/ScrollbarWrapper/scrollbar.stories.tsx">components-navigation-scrollbarwrapper · ./stories/ScrollbarWrapper/scrollbar.stories.tsx</div>
     
-    
+    <div class="hint">Applies the library&#39;s scrollbar styling to the whole page. Mount it once near
+the root — it is a global style, not a per-region wrapper, and `Table`&#39;s bottom
+fade depends on it.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-49-components-navigation-scrollbarwrapper-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-49-components-navigation-scrollbarwrapper-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-49-components-navigation-scrollbarwrapper-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -17440,13 +17251,6 @@ A navigation between two pages with the same pattern, such as from one node to a
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
     
         <div class="panel panel-stories">
@@ -17668,7 +17472,7 @@ The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures br
   id="components-inputs-searchinput"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -17680,7 +17484,7 @@ The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures br
       <h2><span class="status-dot dot-ok"></span> SearchInput</h2>
       <div class="badges">
         <label for="c-50-components-inputs-searchinput-props" class="badge ok as-toggle">11 prop types</label>
-        <label for="c-50-components-inputs-searchinput-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-50-components-inputs-searchinput-stories" class="badge ok as-toggle">4 stories</label>
         <label for="c-50-components-inputs-searchinput-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -17688,13 +17492,14 @@ The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures br
     </div>
     <div class="meta" title="./stories/SearchInput/searchinput.stories.tsx">components-inputs-searchinput · ./stories/SearchInput/searchinput.stories.tsx</div>
     
-    
+    <div class="hint">A field that narrows what is already on screen — a table, a list — rather than
+one whose value is submitted; that one is an `Input`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-50-components-inputs-searchinput-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-50-components-inputs-searchinput-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-50-components-inputs-searchinput-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -17703,13 +17508,6 @@ The effect requires CSS Scroll-Driven Animations. A `@supports` guard ensures br
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -18011,7 +17809,7 @@ import * as Stories from &#39;./searchinput.stories&#39;;
   id="components-inputs-select"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -18023,7 +17821,7 @@ import * as Stories from &#39;./searchinput.stories&#39;;
       <h2><span class="status-dot dot-ok"></span> Select</h2>
       <div class="badges">
         <label for="c-51-components-inputs-select-props" class="badge ok as-toggle">13 prop types</label>
-        <label for="c-51-components-inputs-select-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-51-components-inputs-select-stories" class="badge ok as-toggle">18 stories · 14 incomplete</label>
         <label for="c-51-components-inputs-select-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -18031,13 +17829,16 @@ import * as Stories from &#39;./searchinput.stories&#39;;
     </div>
     <div class="meta" title="./stories/Select/selectv2.stories.tsx">components-inputs-select · ./stories/Select/selectv2.stories.tsx</div>
     
-    
+    <div class="hint">One choice among a list that drops down, declared as `Select.Option` children
+and optionally gathered under `Select.Group` headings. Prefer a RadioGroup
+while the options are few enough to show at once; past eight of them this one
+turns searchable and filters as the user types.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-51-components-inputs-select-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-51-components-inputs-select-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-51-components-inputs-select-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -18046,13 +17847,6 @@ import * as Stories from &#39;./searchinput.stories&#39;;
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -18567,7 +18361,7 @@ the dropdown menu opens toward the top to ensure visibility and usability.
   id="components-inputs-select-in-a-form"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -18579,7 +18373,7 @@ the dropdown menu opens toward the top to ensure visibility and usability.
       <h2><span class="status-dot dot-ok"></span> Select</h2>
       <div class="badges">
         <label for="c-52-components-inputs-select-in-a-form-props" class="badge ok as-toggle">13 prop types</label>
-        <label for="c-52-components-inputs-select-in-a-form-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-52-components-inputs-select-in-a-form-stories" class="badge ok as-toggle">5 stories</label>
         
         
@@ -18587,13 +18381,16 @@ the dropdown menu opens toward the top to ensure visibility and usability.
     </div>
     <div class="meta" title="./stories/selectinput.stories.tsx">components-inputs-select-in-a-form · ./stories/selectinput.stories.tsx</div>
     
-    
+    <div class="hint">One choice among a list that drops down, declared as `Select.Option` children
+and optionally gathered under `Select.Group` headings. Prefer a RadioGroup
+while the options are few enough to show at once; past eight of them this one
+turns searchable and filters as the user types.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-52-components-inputs-select-in-a-form-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-52-components-inputs-select-in-a-form-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -18602,13 +18399,6 @@ the dropdown menu opens toward the top to ensure visibility and usability.
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -18756,7 +18546,7 @@ import { Select } from '../src/lib/components/selectv2/Selectv2.component';</cod
   id="guidelines-selectioncontrolsoverview"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -18768,7 +18558,7 @@ import { Select } from '../src/lib/components/selectv2/Selectv2.component';</cod
       <h2><span class="status-dot dot-ok"></span> SelectionControlsOverview</h2>
       <div class="badges">
         <label for="c-53-guidelines-selectioncontrolsoverview-props" class="badge ok as-toggle">13 prop types</label>
-        <label for="c-53-guidelines-selectioncontrolsoverview-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-53-guidelines-selectioncontrolsoverview-stories" class="badge ok as-toggle">1 story</label>
         
         
@@ -18776,13 +18566,16 @@ import { Select } from '../src/lib/components/selectv2/Selectv2.component';</cod
     </div>
     <div class="meta" title="./stories/guideline/selection-controls-overview.stories.tsx">guidelines-selectioncontrolsoverview · ./stories/guideline/selection-controls-overview.stories.tsx</div>
     
-    
+    <div class="hint">One choice among a list that drops down, declared as `Select.Option` children
+and optionally gathered under `Select.Group` headings. Prefer a RadioGroup
+while the options are few enough to show at once; past eight of them this one
+turns searchable and filters as the user types.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-53-guidelines-selectioncontrolsoverview-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-53-guidelines-selectioncontrolsoverview-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -18791,13 +18584,6 @@ import { Select } from '../src/lib/components/selectv2/Selectv2.component';</cod
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -18947,7 +18733,7 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
   id="components-navigation-sidebar"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -18959,7 +18745,7 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
       <h2><span class="status-dot dot-ok"></span> Sidebar</h2>
       <div class="badges">
         <label for="c-54-components-navigation-sidebar-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-54-components-navigation-sidebar-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-54-components-navigation-sidebar-stories" class="badge ok as-toggle">6 stories</label>
         
         
@@ -18967,13 +18753,15 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
     </div>
     <div class="meta" title="./stories/sidebar.stories.tsx">components-navigation-sidebar · ./stories/sidebar.stories.tsx</div>
     
-    
+    <div class="hint">The vertical strip of `actions` beside the content, icons alone until it is
+expanded. The caller holds `expanded`; `hoverable` adds an internal peek
+while the pointer is over the strip.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-54-components-navigation-sidebar-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-54-components-navigation-sidebar-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -18982,13 +18770,6 @@ variant?: &quot;default&quot; | &quot;rounded&quot;</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -19357,7 +19138,7 @@ import { lineColor5, lineColor6 } from '../src/lib/style/theme';</code></pre>
   id="components-styling-spacing-utils"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -19369,7 +19150,7 @@ import { lineColor5, lineColor6 } from '../src/lib/style/theme';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Stack</h2>
       <div class="badges">
         <label for="c-56-components-styling-spacing-utils-props" class="badge ok as-toggle">6 prop types</label>
-        <label for="c-56-components-styling-spacing-utils-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-56-components-styling-spacing-utils-stories" class="badge ok as-toggle">5 stories</label>
         
         
@@ -19377,13 +19158,16 @@ import { lineColor5, lineColor6 } from '../src/lib/style/theme';</code></pre>
     </div>
     <div class="meta" title="./stories/spacing.stories.tsx">components-styling-spacing-utils · ./stories/spacing.stories.tsx</div>
     
-    
+    <div class="hint">Lays its children out in a row or a column with one spacing token between
+them, optionally separated by a rule, and can flip a row to a column below a
+given container width. Prefer it to a bare Box whenever the children are
+siblings at the same level, since the gap is named rather than measured.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-56-components-styling-spacing-utils-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-56-components-styling-spacing-utils-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -19392,13 +19176,6 @@ import { lineColor5, lineColor6 } from '../src/lib/style/theme';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -19778,7 +19555,7 @@ withSeparators?: boolean</code></pre>
   id="components-styling-text"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -19790,7 +19567,7 @@ withSeparators?: boolean</code></pre>
       <h2><span class="status-dot dot-ok"></span> StatusText</h2>
       <div class="badges">
         <label for="c-58-components-styling-text-props" class="badge ok as-toggle">7 prop types</label>
-        <label for="c-58-components-styling-text-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-58-components-styling-text-stories" class="badge ok as-toggle">8 stories</label>
         
         
@@ -19798,13 +19575,16 @@ withSeparators?: boolean</code></pre>
     </div>
     <div class="meta" title="./stories/text.stories.tsx">components-styling-text · ./stories/text.stories.tsx</div>
     
-    
+    <div class="hint">Body text colored from a health status rather than from a theme key, so the
+caller passes the status and not the color it maps to. `Text` takes the
+theme key itself (`statusHealthy`, `statusWarning`…), so the caller must do
+that mapping.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-58-components-styling-text-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-58-components-styling-text-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -19813,13 +19593,6 @@ withSeparators?: boolean</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -20029,7 +19802,7 @@ variant?: TextVariant</code></pre>
   id="components-data-display-statuswrapper"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -20041,7 +19814,7 @@ variant?: TextVariant</code></pre>
       <h2><span class="status-dot dot-ok"></span> StatusWrapper</h2>
       <div class="badges">
         <label for="c-59-components-data-display-statuswrapper-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-59-components-data-display-statuswrapper-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-59-components-data-display-statuswrapper-stories" class="badge ok as-toggle">2 stories</label>
         
         
@@ -20049,13 +19822,16 @@ variant?: TextVariant</code></pre>
     </div>
     <div class="meta" title="./stories/statuswrapper.stories.tsx">components-data-display-statuswrapper · ./stories/statuswrapper.stories.tsx</div>
     
-    
+    <div class="hint">Pins a small status badge to whatever it wraps, for an icon or an avatar that
+has to carry a health alongside its own meaning. Only `warning`, `critical`
+and `unknown` get a badge; any other status leaves the wrapper in place with
+nothing pinned to it.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-59-components-data-display-statuswrapper-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-59-components-data-display-statuswrapper-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -20064,13 +19840,6 @@ variant?: TextVariant</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -20207,7 +19976,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
   id="components-progress-loading-stepper"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -20219,7 +19988,7 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Stepper</h2>
       <div class="badges">
         <label for="c-60-components-progress-loading-stepper-props" class="badge ok as-toggle">1 prop type</label>
-        <label for="c-60-components-progress-loading-stepper-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-60-components-progress-loading-stepper-stories" class="badge ok as-toggle">5 stories</label>
         <label for="c-60-components-progress-loading-stepper-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -20227,13 +19996,15 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
     </div>
     <div class="meta" title="./stories/stepper.stories.tsx">components-progress-loading-stepper · ./stories/stepper.stories.tsx</div>
     
-    
+    <div class="hint">Runs a multi-step flow and owns where the user is in it, giving each step a
+way to move forward and back. Use Steppers on its own only when the
+surrounding page already decides which step is current.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-60-components-progress-loading-stepper-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-60-components-progress-loading-stepper-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-60-components-progress-loading-stepper-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -20242,13 +20013,6 @@ import { Icon } from '../src/lib/components/icon/Icon.component';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -20446,7 +20210,7 @@ Each step can carry one of the following states:
   id="components-progress-loading-steppers"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   has-story-warning
   
@@ -20458,7 +20222,7 @@ Each step can carry one of the following states:
       <h2><span class="status-dot dot-ok"></span> Steppers</h2>
       <div class="badges">
         <label for="c-61-components-progress-loading-steppers-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-61-components-progress-loading-steppers-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-61-components-progress-loading-steppers-stories" class="badge ok as-toggle">3 stories · 2 incomplete</label>
         
         
@@ -20466,13 +20230,16 @@ Each step can carry one of the following states:
     </div>
     <div class="meta" title="./stories/steppers.stories.tsx">components-progress-loading-steppers · ./stories/steppers.stories.tsx</div>
     
-    
+    <div class="hint">Draws the vertical progress rail for a multi-step flow — the steps, which
+one is active and which are behind — plus the active step&#39;s own `content`,
+without owning where the user is: the caller passes `activeStep`. Stepper is
+the component that drives a whole flow and renders this rail itself.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-61-components-progress-loading-steppers-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-61-components-progress-loading-steppers-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -20481,13 +20248,6 @@ Each step can carry one of the following states:
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -20618,7 +20378,7 @@ import { action } from 'storybook/actions';</code></pre>
   id="components-data-display-table"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -20630,7 +20390,7 @@ import { action } from 'storybook/actions';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Table</h2>
       <div class="badges">
         <label for="c-62-components-data-display-table-props" class="badge ok as-toggle">17 prop types</label>
-        <label for="c-62-components-data-display-table-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-62-components-data-display-table-stories" class="badge ok as-toggle">14 stories</label>
         <label for="c-62-components-data-display-table-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -20638,13 +20398,15 @@ import { action } from 'storybook/actions';</code></pre>
     </div>
     <div class="meta" title="./stories/tablev2.stories.tsx">components-data-display-table · ./stories/tablev2.stories.tsx</div>
     
-    
+    <div class="hint">A virtualized table of rows the user reads and selects. The body is a
+`Table.SingleSelectableContent` or `Table.MultiSelectableContent` child, and
+`Table.Search` filters them from a query the caller holds.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-62-components-data-display-table-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-62-components-data-display-table-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-62-components-data-display-table-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -20653,13 +20415,6 @@ import { action } from 'storybook/actions';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -21881,7 +21636,7 @@ widening the column, which would cost every other column its share of the space.
   id="components-navigation-tabs"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -21893,7 +21648,7 @@ widening the column, which would cost every other column its share of the space.
       <h2><span class="status-dot dot-ok"></span> Tabs</h2>
       <div class="badges">
         <label for="c-63-components-navigation-tabs-props" class="badge ok as-toggle">8 prop types</label>
-        <label for="c-63-components-navigation-tabs-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-63-components-navigation-tabs-stories" class="badge ok as-toggle">5 stories</label>
         
         
@@ -21901,13 +21656,16 @@ widening the column, which would cost every other column its share of the space.
     </div>
     <div class="meta" title="./stories/tabsv2.stories.tsx">components-navigation-tabs · ./stories/tabsv2.stories.tsx</div>
     
-    
+    <div class="hint">Sibling views of one subject, switched through the URL rather than local
+state: each `Tab` declares a `path` and the router decides which is open.
+Reach for it when the views are peers — a sequence the user walks through in
+order is Steppers.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-63-components-navigation-tabs-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-63-components-navigation-tabs-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -21916,13 +21674,6 @@ widening the column, which would cost every other column its share of the space.
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -22081,7 +21832,7 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';</code></pre>
   id="components-inputs-textarea"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -22093,7 +21844,7 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';</code></pre>
       <h2><span class="status-dot dot-ok"></span> TextArea</h2>
       <div class="badges">
         <label for="c-64-components-inputs-textarea-props" class="badge ok as-toggle">4 prop types</label>
-        <label for="c-64-components-inputs-textarea-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-64-components-inputs-textarea-stories" class="badge ok as-toggle">9 stories</label>
         
         
@@ -22101,13 +21852,14 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';</code></pre>
     </div>
     <div class="meta" title="./stories/textarea.stories.tsx">components-inputs-textarea · ./stories/textarea.stories.tsx</div>
     
-    
+    <div class="hint">A multi-line field for free-form text, set in the monospace face by default.
+A single-line value is an `Input`.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-64-components-inputs-textarea-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-64-components-inputs-textarea-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -22116,13 +21868,6 @@ import { coreUIAvailableThemes } from '../src/lib/style/theme';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -22564,7 +22309,7 @@ Wrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `&lt;
   id="components-feedback-toast"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -22576,7 +22321,7 @@ Wrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `&lt;
       <h2><span class="status-dot dot-ok"></span> Toast</h2>
       <div class="badges">
         <label for="c-66-components-feedback-toast-props" class="badge ok as-toggle">11 prop types</label>
-        <label for="c-66-components-feedback-toast-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-66-components-feedback-toast-stories" class="badge ok as-toggle">3 stories</label>
         
         
@@ -22584,13 +22329,17 @@ Wrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `&lt;
     </div>
     <div class="meta" title="./stories/toast.stories.tsx">components-feedback-toast · ./stories/toast.stories.tsx</div>
     
-    
+    <div class="hint">A short message that floats over the page near one of its edges and
+dismisses itself by default, reporting the outcome of an action the user
+has just taken. It does not interrupt: anything the user must acknowledge
+before continuing belongs in a Modal, and anything that stays true belongs
+in a Banner.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-66-components-feedback-toast-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-66-components-feedback-toast-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -22599,13 +22348,6 @@ Wrap adjacent badges (or a badge next to a label) in a gapped parent, e.g. `&lt;
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -22751,7 +22493,7 @@ import { BasicText } from '../src/lib';</code></pre>
   id="components-inputs-toggle"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -22763,7 +22505,7 @@ import { BasicText } from '../src/lib';</code></pre>
       <h2><span class="status-dot dot-ok"></span> Toggle</h2>
       <div class="badges">
         <label for="c-67-components-inputs-toggle-props" class="badge ok as-toggle">2 prop types</label>
-        <label for="c-67-components-inputs-toggle-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-67-components-inputs-toggle-stories" class="badge ok as-toggle">8 stories</label>
         <label for="c-67-components-inputs-toggle-docs" class="badge ok as-toggle">1 doc</label>
         
@@ -22771,13 +22513,15 @@ import { BasicText } from '../src/lib';</code></pre>
     </div>
     <div class="meta" title="./stories/Toggle/toggle.stories.tsx">components-inputs-toggle · ./stories/Toggle/toggle.stories.tsx</div>
     
-    
+    <div class="hint">A switch for a setting that applies as it is flipped, with nothing to submit
+afterwards. A value that only takes effect when the surrounding form is
+submitted is a Checkbox.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-67-components-inputs-toggle-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-67-components-inputs-toggle-stories" class="tg tg-stories" type="checkbox" hidden />
   <input id="c-67-components-inputs-toggle-docs" class="tg tg-docs" type="checkbox" hidden />
   
@@ -22786,13 +22530,6 @@ import { BasicText } from '../src/lib';</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -23126,7 +22863,7 @@ A disabled toggle prevents interaction. Use when the setting is unavailable due 
   id="components-feedback-tooltip"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -23138,7 +22875,7 @@ A disabled toggle prevents interaction. Use when the setting is unavailable due 
       <h2><span class="status-dot dot-ok"></span> Tooltip</h2>
       <div class="badges">
         <label for="c-68-components-feedback-tooltip-props" class="badge ok as-toggle">3 prop types</label>
-        <label for="c-68-components-feedback-tooltip-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-68-components-feedback-tooltip-stories" class="badge ok as-toggle">7 stories</label>
         
         
@@ -23146,13 +22883,15 @@ A disabled toggle prevents interaction. Use when the setting is unavailable due 
     </div>
     <div class="meta" title="./stories/tooltip.stories.tsx">components-feedback-tooltip · ./stories/tooltip.stories.tsx</div>
     
-    
+    <div class="hint">Names or explains something already on screen: the `overlay` appears beside its
+child on hover or focus, and Escape dismisses it while the focus is on the
+child. Anything the user has to act on belongs in the page instead.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-68-components-feedback-tooltip-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-68-components-feedback-tooltip-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -23161,13 +22900,6 @@ A disabled toggle prevents interaction. Use when the setting is unavailable due 
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
@@ -23425,7 +23157,7 @@ placement?: Position = top</code></pre>
   id="components-unsuccessfulresult"
   class="card 
   no-error
-  has-info
+  no-info
   no-story-error
   no-story-warning
   
@@ -23437,7 +23169,7 @@ placement?: Position = top</code></pre>
       <h2><span class="status-dot dot-ok"></span> UnsuccessfulResult</h2>
       <div class="badges">
         <label for="c-69-components-unsuccessfulresult-props" class="badge ok as-toggle">5 prop types</label>
-        <label for="c-69-components-unsuccessfulresult-info" class="badge info as-toggle">1 info</label>
+        
         <label for="c-69-components-unsuccessfulresult-stories" class="badge ok as-toggle">3 stories</label>
         
         
@@ -23445,13 +23177,14 @@ placement?: Position = top</code></pre>
     </div>
     <div class="meta" title="./stories/noresult.stories.tsx">components-unsuccessfulresult · ./stories/noresult.stories.tsx</div>
     
-    
+    <div class="hint">The message a table shows in place of rows: a translated sentence for every
+`status`, with a spinner while loading or idle and a warning icon on error.</div>
     
   </div>
 
   <!-- ⬇️ Hidden toggles must be siblings BEFORE .panels -->
   
-  <input id="c-69-components-unsuccessfulresult-info" class="tg tg-info" type="checkbox" hidden />
+  
   <input id="c-69-components-unsuccessfulresult-stories" class="tg tg-stories" type="checkbox" hidden />
   
   
@@ -23460,13 +23193,6 @@ placement?: Position = top</code></pre>
   <div class="panels">
     
     
-        <div class="panel panel-info">
-          
-    <div class="note info">
-      <div class="note-title">Info</div>
-      <div class="note-body">No description found. Write a jsdoc comment such as /** Component description */.</div>
-    </div>
-        </div>
     
         <div class="panel panel-props">
           <div class="note ok">
