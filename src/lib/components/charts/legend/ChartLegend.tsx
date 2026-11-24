@@ -72,6 +72,12 @@ export const LegendShape = styled.div<{
   }}
 `;
 
+/**
+ * The legend for the charts inside a `ChartLegendWrapper`, one swatch per
+ * resource. A click isolates that series and hides the rest; clicking the
+ * isolated one again brings them all back, and ctrl- or cmd-click adds and
+ * removes one at a time.
+ */
 export const ChartLegend = ({
   shape,
   disabled = false,

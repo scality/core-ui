@@ -32,6 +32,11 @@ const ChartInteractiveContainer = styled.div`
   }
 `;
 
+/**
+ * A single band showing when `alerts` fired between `start` and `end` — a
+ * period's health at a glance, not a measured value. The arrow keys walk the
+ * alerts one by one, so it is readable without a pointer.
+ */
 export function GlobalHealthBar({ id, alerts, start, end }: GlobalHealthProps) {
   const [tooltipData, setTooltipData] = useState<Alert | null>(null);
   const [focusedAlertIndex, setFocusedAlertIndex] = useState<number>(-1);
