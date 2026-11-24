@@ -1,4 +1,3 @@
-import './index.css';
 export { Button } from './components/buttonv2/Buttonv2.component';
 export { CopyButton } from './components/buttonv2/CopyButton.component';
 export { ButtonGroup } from './components/buttongroup/ButtonGroup.component';
