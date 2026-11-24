@@ -33,6 +33,8 @@
     "format:check": "biome format",
     "lint": "biome check",
     "typecheck": "tsc --noEmit",
+    "generate:component-index": "node scripts/component-index.mjs --write",
+    "check:component-index": "node scripts/component-index.mjs",
     "prepare": "npm run build",
     "postbuild": "npm run copy-files",
     "test": "jest",

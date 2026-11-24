@@ -29,3 +29,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run test
+      # Without the Storybook index this skips resolving the Docs links, which
+      # the storybook-build job does. The half that runs here is the one worth
+      # knowing early: a missing row fails before the slow build.
+      - run: npm run check:component-index

@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["src/**", "stories/**", ".storybook/**"]
+    "includes": ["src/**", "stories/**", ".storybook/**", "scripts/**"]
   },
   "formatter": {
     "enabled": true,
