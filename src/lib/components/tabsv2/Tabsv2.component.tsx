@@ -44,6 +44,12 @@ type TabsProps = {
 };
 export const TabsContext = createContext<boolean>(false);
 
+/**
+ * Sibling views of one subject, switched through the URL rather than local
+ * state: each `Tab` declares a `path` and the router decides which is open.
+ * Reach for it when the views are peers — a sequence the user walks through in
+ * order is Steppers.
+ */
 function Tabs({
   activeTabColor,
   activeTabSeparator,

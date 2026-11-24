@@ -15,6 +15,11 @@ export type TabProps = {
   withoutPadding?: boolean;
 };
 
+/**
+ * Declares one tab of a `Tabs`: the `path` that opens it, its label, and the
+ * content to show while that path matches. It renders nothing itself and throws
+ * outside a `Tabs`.
+ */
 function Tab(_: TabProps) {
   const context = useContext(TabsContext);
 

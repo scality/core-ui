@@ -14,6 +14,12 @@ const Navigation = styled.div`
   height: ${navbarHeight};
 `;
 
+/**
+ * The application frame that takes its navigation already built: it reserves the
+ * navbar's height for `headerNavigation` and puts the app below. The app child
+ * has to claim the remaining height itself, as `AppContainer` does. Reach for the
+ * v1 `Layout` instead when the Navbar and Sidebar should be built from props.
+ */
 export function Layout({
   children: app,
   headerNavigation,

@@ -332,6 +332,10 @@ export const ButtonLoader = styled(Loader)<{
     `}
 `;
 
+/**
+ * The library's action control, from a page's primary call to action down to a
+ * bare icon in a row.
+ */
 function Button({
   variant,
   size,

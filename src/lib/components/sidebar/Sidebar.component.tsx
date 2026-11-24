@@ -172,6 +172,11 @@ const MenuItemIcon = styled.div`
   height: ${sidebarItemHeight};
 `;
 
+/**
+ * The vertical strip of `actions` beside the content, icons alone until it is
+ * expanded. The caller holds `expanded`; `hoverable` adds an internal peek
+ * while the pointer is over the strip.
+ */
 function Sidebar({
   expanded,
   actions,
