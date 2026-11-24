@@ -62,6 +62,11 @@ function isEllipsisActive(element: HTMLDivElement) {
   );
 }
 
+/**
+ * Text for a value whose length is the caller's and not yours — a table cell, a
+ * name in a list. It clamps to `lineClamp` lines and shows the whole value in a
+ * tooltip when it finds the text truncated.
+ */
 function ConstrainedText({
   text,
   tooltipStyle,

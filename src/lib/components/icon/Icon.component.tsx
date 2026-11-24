@@ -249,6 +249,10 @@ function NonWrappedIcon({
   );
 }
 
+/**
+ * One icon from the library's set, chosen by `name`; the `name` type lists the
+ * whole set, so an icon that is not in it has to be the caller's own SVG.
+ */
 function Icon({ withWrapper, ...props }: Props) {
   if (withWrapper) {
     return (

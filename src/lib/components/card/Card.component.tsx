@@ -125,6 +125,10 @@ type CardProps = {
   children: React.ReactNode;
   className?: string;
 } & HTMLProps<HTMLDivElement>;
+/**
+ * A framed block for one subject among several shown side by side — a resource, a
+ * summary. Build it from `Card.Header` and `Card.Body`.
+ */
 function Card({
   width = 'auto',
   height = 'auto',

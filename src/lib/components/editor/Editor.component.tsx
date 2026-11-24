@@ -105,6 +105,10 @@ export interface EditorProps {
   width?: string;
 }
 
+/**
+ * A code pane for JSON. Give `language` a schema and it also validates and
+ * completes against it.
+ */
 export const Editor = ({
   value,
   onChange,
