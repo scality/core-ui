@@ -173,7 +173,7 @@ After merging one or more PRs in Core-UI, it is possible to publish a new releas
 2. In the `Choose a tag` select menu, create a new tag matching the `version` in `package.json`
 3. `Generate release notes`: it will add all the PR infos since the last release. You can add details if necessary
 4. `Publish release`
-5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens and merges a PR that moves `package.json` to the next minor version. A patch release therefore needs a pull request setting `package.json` to the patch version, merged before step 1.
+5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens a PR that moves `package.json` to the next minor version. A code owner approves that PR, and it merges through the merge queue on its own. A patch release therefore needs a pull request setting `package.json` to the patch version, merged before step 1.
 
 ## Build
 
