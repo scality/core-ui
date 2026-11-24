@@ -46,9 +46,14 @@ export function createEditorTheme(theme: CoreUITheme): Extension {
       '&': {
         backgroundColor: theme.backgroundLevel1,
         color: theme.textPrimary,
-        fontFamily: fontFamilyMonospace,
         fontSize: '12px',
         lineHeight: '1.6',
+      },
+      // CodeMirror's base theme sets `font-family: monospace` on `.cm-scroller`,
+      // so a font set on the editor root never reaches the text.
+      '.cm-scroller': {
+        fontFamily: fontFamilyMonospace,
+        fontVariantLigatures: 'none',
       },
       '.cm-content': {
         caretColor: theme.textPrimary,
