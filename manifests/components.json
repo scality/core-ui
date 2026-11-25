@@ -718,7 +718,7 @@
           "snippet": "const Layout2TwoPanelsSeventyThirty = () => (\n  <Layout2\n    headerNavigation={\n      <HeaderComponent>\n        <h3>Header navigation</h3>\n      </HeaderComponent>\n    }\n  >\n    <AppContainer\n      sidebarNavigation={\n        <div style={{ background: '#fff3e8' }}>Navigation</div>\n      }\n    >\n      <AppContainer.ContextContainer background=\"backgroundLevel1\">\n        <>Context bar</>\n      </AppContainer.ContextContainer>\n      <AppContainer.OverallSummary>\n        <div>Overall summary (optional)</div>\n      </AppContainer.OverallSummary>\n      <AppContainer.MainContent background=\"selectedActive\">\n        <TwoPanelLayout\n          panelsRatio=\"65-35\"\n          leftPanel={{\n            children: <div style={{ flex: 1 }}>Left Panel content</div>,\n            background: 'backgroundLevel3',\n          }}\n          rightPanel={{\n            children: <div style={{ flex: 1 }}>Right Panel content</div>,\n            background: 'backgroundLevel4',\n          }}\n        />\n      </AppContainer.MainContent>\n    </AppContainer>\n  </Layout2>\n);"
         }
       ],
-      "import": "import {\n  AppContainer,\n  Breadcrumb,\n  Button,\n  Icon,\n  Layout as Layout2,\n  Link,\n  ScrollbarWrapper,\n  Stack,\n  Table,\n  Text,\n  TextBadge,\n  TwoPanelLayout,\n} from '@scality/core-ui';\nimport { BrowserRouter } from 'react-router-dom';",
+      "import": "import {\n  AppContainer,\n  Breadcrumb,\n  Button,\n  Icon,\n  Layout as Layout2,\n  Link,\n  ScrollbarWrapper,\n  Stack,\n  Table,\n  Text,\n  TextBadge,\n  TwoPanelLayout,\n} from '@scality/core-ui';\nimport { BrowserRouter } from 'react-router';",
       "docs": {
         "templates-layout2--guideline": {
           "id": "templates-layout2--guideline",
@@ -1934,7 +1934,7 @@
           "snippet": "const WithQueryParams = () => {\n    const obj = { search: 'test' };\n\n    return (\n        <Tabs>\n            <Tab\n                path={'/path'}\n                label={`Tab 1`}\n                query={{ ...obj, tab: '1' }}\n                textBadge={<TextBadge text=\"test\" />}\n                icon={<i className=\"fas fa-hat-cowboy\" />}>\n                <Content>Tab 1 content</Content>\n            </Tab>\n            <Tab path={'/path'} label={`Tab 2`} query={{ ...obj, tab: '2' }}>\n                <Content>Tab 2 content</Content>\n            </Tab>\n        </Tabs>\n    );\n};"
         }
       ],
-      "import": "import { BrowserRouter } from 'react-router-dom';\nimport { Tab, Tabs, TextBadge, Title, Wrapper } from '@scality/core-ui';\nimport { coreUIAvailableThemes } from '../src/lib/style/theme';"
+      "import": "import { BrowserRouter } from 'react-router';\nimport { Tab, Tabs, TextBadge, Title, Wrapper } from '@scality/core-ui';\nimport { coreUIAvailableThemes } from '../src/lib/style/theme';"
     },
     "components-data-display-card": {
       "id": "components-data-display-card",
@@ -4308,7 +4308,7 @@
           "snippet": "const RevealTriggerInATightRow = () => {\n  return (\n    <>\n      <Title>Reveal trigger in a row with no room left</Title>\n      <div\n        style={{\n          height: '320px',\n          width: '900px',\n          minWidth: '320px',\n          maxWidth: '100%',\n          resize: 'horizontal',\n          overflow: 'hidden',\n          padding: '20px',\n          border: '1px dashed currentColor',\n          boxSizing: 'border-box',\n        }}\n      >\n        <Table\n          columns={tightRowColumns}\n          data={data}\n          defaultSortingKey={'firstName'}\n          getRowId={getRowId}\n          revealDroppedColumns\n        >\n          <Table.SingleSelectableContent\n            rowHeight=\"h40\"\n            separationLineVariant=\"backgroundLevel3\"\n          />\n        </Table>\n      </div>\n    </>\n  );\n};"
         }
       ],
-      "import": "import { Box, Button, EmptyCell, Icon, Modal, Stack, Table, Title } from '@scality/core-ui';\nimport { BrowserRouter, BrowserRouter as Router } from 'react-router-dom';",
+      "import": "import { Box, Button, EmptyCell, Icon, Modal, Stack, Table, Title } from '@scality/core-ui';\nimport { BrowserRouter, BrowserRouter as Router } from 'react-router';",
       "docs": {
         "components-data-display-table--guideline": {
           "id": "components-data-display-table--guideline",
@@ -12967,6 +12967,6 @@
   },
   "meta": {
     "docgen": "react-docgen-typescript",
-    "durationMs": 4621
+    "durationMs": 3641
   }
 }
