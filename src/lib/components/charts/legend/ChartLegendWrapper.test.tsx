@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import React, { useEffect } from 'react';
 import {
   ChartLegendWrapper,
@@ -32,6 +32,23 @@ describe('ChartLegendWrapper', () => {
     });
     return colors;
   };
+
+  describe('useChartId', () => {
+    it('keeps the same id across re-renders', () => {
+      const { result, rerender } = renderHook(() => useChartId());
+      const firstId = result.current;
+
+      rerender();
+
+      expect(result.current).toBe(firstId);
+    });
+
+    it('gives each chart its own id', () => {
+      const { result } = renderHook(() => [useChartId(), useChartId()]);
+
+      expect(result.current[0]).not.toBe(result.current[1]);
+    });
+  });
 
   describe('Dynamic Color Generation', () => {
     it('should generate colors dynamically based on registered series', () => {

@@ -10,7 +10,7 @@ import {
   BrowserRouter,
   BrowserRouter as Router,
   useLocation,
-} from 'react-router-dom';
+} from 'react-router';
 import { CellProps, Row } from 'react-table';
 import { Box, Button } from '../src/lib/next';
 import styled from 'styled-components';
