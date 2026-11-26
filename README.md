@@ -82,6 +82,16 @@ Two themes ship with the library, `darkRebrand` and `artescaLight`, both defined
 import { CoreUITheme } from '@scality/core-ui/dist/next';
 ```
 
+### Fonts
+
+Most components inherit the page's font, and a few, such as buttons and inputs, set `'Lato', system-ui, sans-serif` themselves. Code views ask for `'Fira Code'` instead, falling back to `'Courier New'` — the editor, and `TextArea`, whose `variant` is `code` unless it is set to `text`.
+
+Importing a component loads no font and no global style, so the page keeps its own root font size and font declarations. To use the Lato and Fira Code files that ship with the library, import their stylesheet once, in the application that owns the page:
+
+```js
+import '@scality/core-ui/dist/index.css';
+```
+
 ## Contributing
 
 Everything about working *on* core-ui — cloning, branch naming, creating a component, writing stories and guidelines, linting, testing, releasing — is in [CONTRIBUTING.md](CONTRIBUTING.md).
