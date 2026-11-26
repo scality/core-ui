@@ -1,3 +1,4 @@
+{/* Generated from ComponentIndex.template.md and ComponentIndex.data.json — run `npm run generate:component-index`. */}
 import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Component index" />
@@ -40,22 +41,22 @@ the export is obsolete.
 
 Which of these to reach for is settled in [Guidelines/Selection Controls](?path=/docs/guidelines-selection-controls--stories).
 
-| Export           | Use it for                                                                          | Import from                  | Docs                                                              |
-| ---------------- | ----------------------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------- |
-| `Input`          | A single-line text field.                                                           | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-input--stories)           |
+| Export           | Use it for                                                                          | Import from                  | Docs                                                                |
+| ---------------- | ----------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------- |
+| `Input`          | A single-line text field.                                                           | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-input--stories)             |
 | `PasswordInput`  | A password field with a reveal toggle and an optional copy affordance.              | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-inputs-passwordinput--guideline) |
 | `PasswordFields` | A password and its confirmation, sharing one reveal toggle.                         | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-inputs-passwordinput--guideline) |
-| `TextArea`       | A multi-line text field, optionally growing with its content.                       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-textarea--stories)        |
-| `Checkbox`       | One option turned on or off, applied when the form is submitted.                    | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-checkbox--guideline)    |
-| `RadioGroup`     | One choice among two to four mutually exclusive options.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-radiogroup--guideline)  |
-| `Toggle`         | One setting turned on or off, taking effect immediately.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-toggle--guideline)      |
-| `Select`         | One choice from a long or dynamic list; it gains a search field past eight options. | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-inputs-select--guideline)      |
-| `HealthSelector` | A Select preset with the health statuses as its options.                            | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-healthselector--stories)         |
-| `SearchInput`    | A text field that filters what is shown as it is typed into.                        | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-searchinput--guideline) |
-| `InputList`      | A variable-length list of fields the user adds rows to and removes rows from.       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-inputlist--stories)       |
-| `InlineInput`    | A value shown as text that becomes editable in place and saves through a mutation.  | `@scality/core-ui`           | [Stories](?path=/docs/components-inlineinput--stories)            |
-| `Dropzone`       | A drop area for attaching files, with a button for picking them instead.            | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-dropzone--stories)        |
-| `Editor`         | A JSON editor with syntax highlighting and schema validation.                       | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-editor--stories)          |
+| `TextArea`       | A multi-line text field, optionally growing with its content.                       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-textarea--stories)          |
+| `Checkbox`       | One option turned on or off, applied when the form is submitted.                    | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-checkbox--guideline)      |
+| `RadioGroup`     | One choice among two to four mutually exclusive options.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-radiogroup--guideline)    |
+| `Toggle`         | One setting turned on or off, taking effect immediately.                            | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-toggle--guideline)        |
+| `Select`         | One choice from a long or dynamic list; it gains a search field past eight options. | `@scality/core-ui/dist/next` | [Guideline](?path=/docs/components-inputs-select--guideline)        |
+| `HealthSelector` | A Select preset with the health statuses as its options.                            | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-healthselector--stories)           |
+| `SearchInput`    | A text field that filters what is shown as it is typed into.                        | `@scality/core-ui`           | [Guideline](?path=/docs/components-inputs-searchinput--guideline)   |
+| `InputList`      | A variable-length list of fields the user adds rows to and removes rows from.       | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-inputlist--stories)         |
+| `InlineInput`    | A value shown as text that becomes editable in place and saves through a mutation.  | `@scality/core-ui`           | [Stories](?path=/docs/components-inlineinput--stories)              |
+| `Dropzone`       | A drop area for attaching files, with a button for picking them instead.            | `@scality/core-ui`           | [Stories](?path=/docs/components-inputs-dropzone--stories)          |
+| `Editor`         | A JSON editor with syntax highlighting and schema validation.                       | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-inputs-editor--stories)            |
 
 ## Forms
 
@@ -69,18 +70,21 @@ A `Form` holds `FormSection`s, and a section holds `FormGroup`s. Each level thro
 
 ## Navigation
 
-| Export             | Use it for                                                              | Import from                  | Docs                                                                       |
-| ------------------ | ----------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------- |
-| `Navbar`           | The application bar across the top: logo, tabs and the account actions. | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-navbar--stories)               |
-| `Sidebar`          | The collapsible navigation rail down the side.                          | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-sidebar--stories)              |
-| `Breadcrumb`       | The path from the root of the application to the page being shown.      | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-breadcrumb--stories)           |
-| `Tabs`             | Switches between sibling views without leaving the page.                | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
-| `Tab`              | One view inside `Tabs`, carrying its own label.                         | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
-| `ScrollbarWrapper` | Applies the library's scrollbar styling to everything inside it.        | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-scrollbarwrapper--guideline) |
-| `ErrorPage401`     | The page for a user who is signed in but not allowed here.              | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-401--stories)      |
-| `ErrorPage404`     | The page for a route that does not exist.                               | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-404--stories)      |
-| `ErrorPage500`     | The page for a request the server could not complete.                   | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-500--stories)      |
-| `ErrorPageAuth`    | The full-page wait shown while authentication is still in progress.     | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-auth--stories)     |
+| Export                   | Use it for                                                              | Import from                  | Docs                                                                       |
+| ------------------------ | ----------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------- |
+| `Navbar`                 | The application bar across the top: logo, tabs and the account actions. | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-navbar--stories)               |
+| `Sidebar`                | The collapsible navigation rail down the side.                          | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-sidebar--stories)              |
+| `Breadcrumb`             | The path from the root of the application to the page being shown.      | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-breadcrumb--stories)           |
+| `Tabs`                   | Switches between sibling views without leaving the page.                | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
+| `Tab`                    | One view inside `Tabs`, carrying its own label.                         | `@scality/core-ui/dist/next` | [Stories](?path=/docs/components-navigation-tabs--stories)                 |
+| `Routes`                 | react-router's `Routes`, reporting which route pattern matched.         | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-routes--guideline)           |
+| `RoutePatternProvider`   | Collects what those `Routes` report. Wrap the application in it once.   | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-routes--guideline)           |
+| `useCurrentRoutePattern` | The pattern of the page being shown, such as `/nodes/:name/alerts`.     | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-routes--guideline)           |
+| `ScrollbarWrapper`       | Applies the library's scrollbar styling to everything inside it.        | `@scality/core-ui`           | [Guideline](?path=/docs/components-navigation-scrollbarwrapper--guideline) |
+| `ErrorPage401`           | The page for a user who is signed in but not allowed here.              | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-401--stories)      |
+| `ErrorPage404`           | The page for a route that does not exist.                               | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-404--stories)      |
+| `ErrorPage500`           | The page for a request the server could not complete.                   | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-500--stories)      |
+| `ErrorPageAuth`          | The full-page wait shown while authentication is still in progress.     | `@scality/core-ui`           | [Stories](?path=/docs/components-navigation-error-pages-auth--stories)     |
 
 ## Feedback
 

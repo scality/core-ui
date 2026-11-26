@@ -29,6 +29,12 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 - `npm run lint` — Biome's formatter and linter, the same gate CI runs
 - `npm run format` — reformat in place; `npm run format:check` checks without writing
 - `npm run storybook` — start Storybook dev server on port 3001
+- `npm run generate:component-index` — rebuild `stories/ComponentIndex.mdx` from its data and
+  its template; `npm run check:component-index` runs the same generation and compares it with
+  the committed page, which is what CI runs
+
+Everything under `scripts/` is plain ESM, run by `node` directly, so it sits outside
+`tsconfig.json` and `npm run typecheck` never sees it. Biome does.
 
 Contributor process — branch naming, creating a component, release, build — is in
 [CONTRIBUTING.md](CONTRIBUTING.md).

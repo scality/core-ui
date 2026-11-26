@@ -62,6 +62,20 @@ export const DeleteConfirmationModal = (...)
 
 That one line is what appears on IDE hover and in the Storybook props table, and it is the only description most callers will ever read.
 
+Then give the export a row on the component index. That page is generated, so edit
+`stories/ComponentIndex.data.json` rather than `ComponentIndex.mdx`: add the export under the
+group it belongs to, with the sentence a reader needs to pick it and the id of the page
+documenting it, or `null` where there is none. Its prose lives in
+`stories/ComponentIndex.template.md`, kept out of Storybook's `.mdx` glob so it is not loaded
+as a second page of its own. Then rebuild the page:
+
+```sh
+npm run generate:component-index
+```
+
+CI generates it again and fails when the committed page differs, so an export with no row — or
+a row naming something no entry point exports — stops the build.
+
 ## Use Storybook
 
 Storybook helps to test and visualize a component in isolation. If it doesn't exist, write a [story](https://storybook.js.org/docs/get-started/whats-a-story) for the component:

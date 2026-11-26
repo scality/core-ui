@@ -1,0 +1,546 @@
+{
+  "Buttons": [
+    {
+      "export": "Button",
+      "use": "Runs an action. The variant says how prominent that action is on the page.",
+      "docs": "components-button--guideline"
+    },
+    {
+      "export": "CopyButton",
+      "use": "Copies a string to the clipboard and confirms the copy in place.",
+      "docs": "components-copybutton--stories"
+    },
+    {
+      "export": "ButtonGroup",
+      "use": "Groups related buttons, and becomes a single-choice segmented control when given `value` and `onChange`.",
+      "docs": "components-buttongroup--stories"
+    },
+    {
+      "export": "Dropdown",
+      "use": "A button that opens a menu of actions.",
+      "docs": "components-navigation-dropdown--stories"
+    }
+  ],
+  "Inputs": [
+    {
+      "export": "Input",
+      "use": "A single-line text field.",
+      "docs": "components-inputs-input--stories"
+    },
+    {
+      "export": "PasswordInput",
+      "use": "A password field with a reveal toggle and an optional copy affordance.",
+      "docs": "components-inputs-passwordinput--guideline"
+    },
+    {
+      "export": "PasswordFields",
+      "use": "A password and its confirmation, sharing one reveal toggle.",
+      "docs": "components-inputs-passwordinput--guideline"
+    },
+    {
+      "export": "TextArea",
+      "use": "A multi-line text field, optionally growing with its content.",
+      "docs": "components-inputs-textarea--stories"
+    },
+    {
+      "export": "Checkbox",
+      "use": "One option turned on or off, applied when the form is submitted.",
+      "docs": "components-inputs-checkbox--guideline"
+    },
+    {
+      "export": "RadioGroup",
+      "use": "One choice among two to four mutually exclusive options.",
+      "docs": "components-inputs-radiogroup--guideline"
+    },
+    {
+      "export": "Toggle",
+      "use": "One setting turned on or off, taking effect immediately.",
+      "docs": "components-inputs-toggle--guideline"
+    },
+    {
+      "export": "Select",
+      "use": "One choice from a long or dynamic list; it gains a search field past eight options.",
+      "docs": "components-inputs-select--guideline"
+    },
+    {
+      "export": "HealthSelector",
+      "use": "A Select preset with the health statuses as its options.",
+      "docs": "components-healthselector--stories"
+    },
+    {
+      "export": "SearchInput",
+      "use": "A text field that filters what is shown as it is typed into.",
+      "docs": "components-inputs-searchinput--guideline"
+    },
+    {
+      "export": "InputList",
+      "use": "A variable-length list of fields the user adds rows to and removes rows from.",
+      "docs": "components-inputs-inputlist--stories"
+    },
+    {
+      "export": "InlineInput",
+      "use": "A value shown as text that becomes editable in place and saves through a mutation.",
+      "docs": "components-inlineinput--stories"
+    },
+    {
+      "export": "Dropzone",
+      "use": "A drop area for attaching files, with a button for picking them instead.",
+      "docs": "components-inputs-dropzone--stories"
+    },
+    {
+      "export": "Editor",
+      "use": "A JSON editor with syntax highlighting and schema validation.",
+      "docs": "components-inputs-editor--stories"
+    }
+  ],
+  "Forms": [
+    {
+      "export": "Form",
+      "use": "Lays a form out as a page or inside a tab, with its title, its fields and its action bar.",
+      "docs": "templates-form--guideline"
+    },
+    {
+      "export": "FormSection",
+      "use": "A titled group of fields inside a Form, owning the width of the label column.",
+      "docs": "templates-form--guideline"
+    },
+    {
+      "export": "FormGroup",
+      "use": "One labelled field, with its help text, its error and its required marker.",
+      "docs": "templates-form--guideline"
+    }
+  ],
+  "Navigation": [
+    {
+      "export": "Navbar",
+      "use": "The application bar across the top: logo, tabs and the account actions.",
+      "docs": "components-navigation-navbar--stories"
+    },
+    {
+      "export": "Sidebar",
+      "use": "The collapsible navigation rail down the side.",
+      "docs": "components-navigation-sidebar--stories"
+    },
+    {
+      "export": "Breadcrumb",
+      "use": "The path from the root of the application to the page being shown.",
+      "docs": "components-navigation-breadcrumb--stories"
+    },
+    {
+      "export": "Tabs",
+      "use": "Switches between sibling views without leaving the page.",
+      "docs": "components-navigation-tabs--stories"
+    },
+    {
+      "export": "Tab",
+      "use": "One view inside `Tabs`, carrying its own label.",
+      "docs": "components-navigation-tabs--stories"
+    },
+    {
+      "export": "Routes",
+      "use": "react-router's `Routes`, reporting which route pattern matched.",
+      "docs": "components-navigation-routes--guideline"
+    },
+    {
+      "export": "RoutePatternProvider",
+      "use": "Collects what those `Routes` report. Wrap the application in it once.",
+      "docs": "components-navigation-routes--guideline"
+    },
+    {
+      "export": "useCurrentRoutePattern",
+      "use": "The pattern of the page being shown, such as `/nodes/:name/alerts`.",
+      "docs": "components-navigation-routes--guideline"
+    },
+    {
+      "export": "ScrollbarWrapper",
+      "use": "Applies the library's scrollbar styling to everything inside it.",
+      "docs": "components-navigation-scrollbarwrapper--guideline"
+    },
+    {
+      "export": "ErrorPage401",
+      "use": "The page for a user who is signed in but not allowed here.",
+      "docs": "components-navigation-error-pages-401--stories"
+    },
+    {
+      "export": "ErrorPage404",
+      "use": "The page for a route that does not exist.",
+      "docs": "components-navigation-error-pages-404--stories"
+    },
+    {
+      "export": "ErrorPage500",
+      "use": "The page for a request the server could not complete.",
+      "docs": "components-navigation-error-pages-500--stories"
+    },
+    {
+      "export": "ErrorPageAuth",
+      "use": "The full-page wait shown while authentication is still in progress.",
+      "docs": "components-navigation-error-pages-auth--stories"
+    }
+  ],
+  "Feedback": [
+    {
+      "export": "Banner",
+      "use": "A condition that holds, shown for as long as it holds.",
+      "docs": "components-feedback-banner--stories"
+    },
+    {
+      "export": "Toast",
+      "use": "The outcome of an action that just completed. It dismisses itself.",
+      "docs": "components-feedback-toast--stories"
+    },
+    {
+      "export": "ToastProvider",
+      "use": "Hosts the toasts. Wrap the application in it once.",
+      "docs": "components-feedback-toast--stories"
+    },
+    {
+      "export": "useToast",
+      "use": "Shows a toast from anywhere under the provider.",
+      "docs": "components-feedback-toast--stories"
+    },
+    {
+      "export": "useMutationsHandler",
+      "use": "Turns a mutation's success or failure into a toast, including mutations that depend on another.",
+      "docs": "hooks-usemutationshandler--stories"
+    },
+    {
+      "export": "Notifications",
+      "use": "A fixed stack of dismissible notifications in one corner of the screen.",
+      "docs": "components-feedback-notifications--stories"
+    },
+    {
+      "export": "Modal",
+      "use": "Interrupts the user for a decision that has to be made before anything else continues.",
+      "docs": "components-feedback-modal--guideline"
+    },
+    {
+      "export": "Drawer",
+      "use": "A panel sliding in from an edge for a task done alongside the page.",
+      "docs": "components-feedback-drawer--stories"
+    },
+    {
+      "export": "Tooltip",
+      "use": "Explanatory text shown on hover.",
+      "docs": "components-feedback-tooltip--stories"
+    },
+    {
+      "export": "InfoMessage",
+      "use": "A short explanation attached to a field or a section, with an optional link out.",
+      "docs": "components-infomessage--guideline"
+    },
+    {
+      "export": "UnsuccessfulResult",
+      "use": "What a table or a list shows instead of rows while it is loading, when it failed, and when it is empty.",
+      "docs": "components-unsuccessfulresult--stories"
+    }
+  ],
+  "Data display": [
+    {
+      "export": "Table",
+      "use": "The data grid: sorting, selection, and virtualised rows.",
+      "docs": "components-data-display-table--guideline"
+    },
+    {
+      "export": "EmptyTable",
+      "use": "The row a table shows in place of its body when it has none.",
+      "docs": null
+    },
+    {
+      "export": "EmptyState",
+      "use": "The screen for a resource list with nothing in it yet, carrying the action that creates the first one.",
+      "docs": "components-data-display-emptystate--stories"
+    },
+    {
+      "export": "Card",
+      "use": "A bounded block of content, optionally selectable and optionally carrying a status.",
+      "docs": "components-data-display-card--stories"
+    },
+    {
+      "export": "Accordion",
+      "use": "A titled section the reader expands and collapses.",
+      "docs": "components-accordion--guideline"
+    },
+    {
+      "export": "TextBadge",
+      "use": "A short label marking a value, optionally removable.",
+      "docs": "components-textbadge--stories"
+    },
+    {
+      "export": "StatusWrapper",
+      "use": "Overlays a small status badge on whatever it wraps.",
+      "docs": "components-data-display-statuswrapper--stories"
+    },
+    {
+      "export": "ConstrainedText",
+      "use": "Text clamped to a number of lines, with the whole value in a tooltip.",
+      "docs": "components-constrainedtext--stories"
+    },
+    {
+      "export": "PrettyBytes",
+      "use": "A byte count written in the largest unit that keeps it readable.",
+      "docs": "components-prettybytes--stories"
+    },
+    {
+      "export": "FormattedDateTime",
+      "use": "A date in one of the library's formats, including relative to now.",
+      "docs": "components-formatteddatetime--stories"
+    }
+  ],
+  "Charts": [
+    {
+      "export": "Barchart",
+      "use": "Values compared across categories, as bars.",
+      "docs": "components-data-display-charts-barchart--stories"
+    },
+    {
+      "export": "LineTimeSerieChart",
+      "use": "One or more series plotted over time.",
+      "docs": "components-data-display-charts-linetimeseriechart--stories"
+    },
+    {
+      "export": "Sparkline",
+      "use": "A trend line small enough to sit inside a table row or a card.",
+      "docs": "components-data-display-charts-sparkline--stories"
+    },
+    {
+      "export": "GlobalHealthBar",
+      "use": "Health across a time window as a single bar, with the alerts behind it.",
+      "docs": "components-data-display-charts-globalhealthbar--guideline"
+    },
+    {
+      "export": "Heatmap",
+      "use": "A matrix of entities against time slots, each cell coloured by its value.",
+      "docs": "components-data-display-charts-heatmap--guideline"
+    },
+    {
+      "export": "ChartLegend",
+      "use": "The legend for a chart, and the control over which series are shown.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "ChartLegendWrapper",
+      "use": "Shares one legend, its colour set and its selection across several charts.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "useChartLegend",
+      "use": "Reads and drives that shared legend state.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "useChartId",
+      "use": "A stable id for one chart instance, for registering it with the legend.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "MetricsTimeSpanProvider",
+      "use": "Shares the selected time span across the charts under it.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "useMetricsTimeSpan",
+      "use": "Reads and sets that shared time span.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "BarchartTooltip",
+      "use": "Barchart's own tooltip, for when the default needs replacing.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "ChartTooltipContainer",
+      "use": "The frame of a hand-built chart tooltip.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "ChartTooltipHeader",
+      "use": "The header of a hand-built chart tooltip.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "ChartTooltipItemsContainer",
+      "use": "The body of a hand-built chart tooltip.",
+      "docs": "guidelines-chart--stories"
+    },
+    {
+      "export": "ChartTooltipItem",
+      "use": "One series line inside a hand-built chart tooltip.",
+      "docs": "guidelines-chart--stories"
+    }
+  ],
+  "Progress and loading": [
+    {
+      "export": "Loader",
+      "use": "The spinner shown while something is on its way.",
+      "docs": "components-progress-loading-loader--stories"
+    },
+    {
+      "export": "LOADER_SIZE",
+      "use": "The sizes `Loader` accepts, as an object to index rather than a string to spell.",
+      "docs": "components-progress-loading-loader--stories"
+    },
+    {
+      "export": "ProgressBar",
+      "use": "How far an operation of known length has got.",
+      "docs": "components-progress-loading-progressbar--stories"
+    },
+    {
+      "export": "CircularProgressBar",
+      "use": "The same progress as a ring, where a bar does not fit.",
+      "docs": "components-progress-loading-circularprogressbar--stories"
+    },
+    {
+      "export": "Stepper",
+      "use": "Drives a multi-step flow: it renders the current step and moves between them.",
+      "docs": "components-progress-loading-stepper--guideline"
+    },
+    {
+      "export": "Steppers",
+      "use": "The indicator showing the steps and which one the user is on.",
+      "docs": "components-progress-loading-steppers--stories"
+    }
+  ],
+  "Layout": [
+    {
+      "export": "Layout2",
+      "use": "The application frame: a header navigation slot above everything else.",
+      "docs": "templates-layout2--stories"
+    },
+    {
+      "export": "AppContainer",
+      "use": "The content area inside `Layout2`, with its summary, context and main-content regions.",
+      "docs": null
+    },
+    {
+      "export": "TwoPanelLayout",
+      "use": "Two panels side by side at a fixed ratio.",
+      "docs": null
+    },
+    {
+      "export": "LateralNavbarLayout",
+      "use": "A frame with the navigation down the side instead of across the top.",
+      "docs": "templates-lateralnavbarlayout--stories"
+    },
+    {
+      "export": "Layout",
+      "use": "The first frame: navbar, sidebar and content. `Layout2` supersedes it.",
+      "docs": null
+    },
+    {
+      "export": "Box",
+      "use": "The styling primitive: spacing, colour and layout applied as props.",
+      "docs": "components-styling-box--stories"
+    },
+    {
+      "export": "Stack",
+      "use": "Children in a row or a column at one gap, optionally separated and optionally stacking when narrow.",
+      "docs": "components-styling-spacing-utils--stories"
+    },
+    {
+      "export": "Wrap",
+      "use": "Two children pushed to opposite ends of a row.",
+      "docs": "components-styling-spacing-utils--stories"
+    },
+    {
+      "export": "spacing",
+      "use": "The spacing scale, for use inside a styled component.",
+      "docs": "style-spacing--stories"
+    }
+  ],
+  "Text and icons": [
+    {
+      "export": "Text",
+      "use": "Text at a chosen size and emphasis. Everything below is a preset of it.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "BasicText",
+      "use": "Text at the base size.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "SecondaryText",
+      "use": "Supporting text, in the secondary colour.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "EmphaseText",
+      "use": "Text standing out from what surrounds it.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "StatusText",
+      "use": "Text coloured by a status.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "LargeText",
+      "use": "Text one size up.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "LargerText",
+      "use": "Text two sizes up.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "SmallerText",
+      "use": "Text one size down.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "ChartTitleText",
+      "use": "The title sitting above a chart.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "Link",
+      "use": "An anchor carrying the link styling.",
+      "docs": "components-styling-text--stories"
+    },
+    {
+      "export": "Icon",
+      "use": "One of the library's icons, sized and coloured from the theme.",
+      "docs": "components-icon--guideline"
+    },
+    {
+      "export": "IconHelp",
+      "use": "The question mark that carries an explanation in a tooltip.",
+      "docs": "components-iconhelp--guideline"
+    }
+  ],
+  "Theme, values and helpers": [
+    {
+      "export": "CoreUiThemeProvider",
+      "use": "Installs a theme. Wrap the application in it once.",
+      "docs": "style-colors--stories"
+    },
+    { "export": "STATUS_HEALTHY", "use": "`'healthy'`", "docs": null },
+    { "export": "STATUS_WARNING", "use": "`'warning'`", "docs": null },
+    { "export": "STATUS_CRITICAL", "use": "`'critical'`", "docs": null },
+    { "export": "STATUS_SUCCESS", "use": "`'success'`", "docs": null },
+    { "export": "STATUS_INFO", "use": "`'info'`", "docs": null },
+    { "export": "STATUS_UNKNOWN", "use": "`'unknown'`", "docs": null },
+    { "export": "STATUS_NONE", "use": "`'none'`", "docs": null },
+    {
+      "export": "formatISONumber",
+      "use": "A number written to ISO 80000-1: space-separated thousands, and enough decimals to keep two significant digits.",
+      "docs": "style-format--stories"
+    },
+    {
+      "export": "formatDayMonthAbbreviated",
+      "use": "A date as `06 Oct`, for a long-range axis or a tight column.",
+      "docs": "style-format--stories"
+    },
+    {
+      "export": "TIME_FORMATER",
+      "use": "The 24-hour `HH:mm` formatter the date components use.",
+      "docs": "style-format--stories"
+    },
+    {
+      "export": "getDateDaysDiff",
+      "use": "The distance between two dates in months, days, hours or minutes.",
+      "docs": null
+    }
+  ]
+}
