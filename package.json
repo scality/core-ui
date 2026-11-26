@@ -97,7 +97,6 @@
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
-    "@js-temporal/polyfill": "^0.4.4",
     "@lezer/highlight": "^1.2.3",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@uiw/react-codemirror": "^4.25.5",
