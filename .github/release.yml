@@ -1,0 +1,14 @@
+changelog:
+  exclude:
+    labels:
+      - release-bump
+  categories:
+    - title: Breaking changes
+      labels:
+        - breaking-change
+    - title: Action required in applications
+      labels:
+        - consumer-action
+    - title: Other changes
+      labels:
+        - "*"

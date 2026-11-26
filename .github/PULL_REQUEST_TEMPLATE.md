@@ -6,10 +6,18 @@
 
 **Design**:
 
-**Breaking Changes**:
+**Impact on applications**:
 
-- [] Breaking Changes
+<!--
+Label the PR so the release notes list it in the right section:
+- `breaking-change`: applications break unless they change code.
+- `consumer-action`: applications must change code to benefit from this.
 
+Either label requires this line, with a string an application's source contains
+once the action is done, or the action in words when there is no such string:
+
+Consumer action: `<string>`
+-->
 
 ---
 
