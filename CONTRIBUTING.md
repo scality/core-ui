@@ -162,6 +162,7 @@ Write one test file per source module, named after the module rather than the be
 
 - Push your code on a branch following the [branch naming convention](#create-a-new-branch)
 - Create a pull request
+- If applications break unless they change code, label it `breaking-change`; if they must change code to benefit from it, label it `consumer-action`. Either label needs the `Consumer action:` line described in the PR template
 - Obtain the approval of at least one reviewer, and wait for the required checks to pass
 - Then merge it from GitHub: the development branch accepts no direct push
 
@@ -171,7 +172,7 @@ After merging one or more PRs in Core-UI, it is possible to publish a new releas
 
 1. Go to `Releases`, then `Draft a new release`
 2. In the `Choose a tag` select menu, create a new tag matching the `version` in `package.json`
-3. `Generate release notes`: it will add all the PR infos since the last release. You can add details if necessary
+3. `Generate release notes`: it lists the PRs merged since the last release, grouped by label (`.github/release.yml`): `breaking-change` first, then `consumer-action`, then the rest. Label a PR before generating, or it lands under "Other changes". You can add details if necessary
 4. `Publish release`
 5. The `post-release` workflow publishes the version in `package.json` to npm and, in parallel, opens a PR that moves `package.json` to the next minor version. A code owner approves that PR, and it merges through the merge queue on its own. A patch release therefore needs a pull request setting `package.json` to the patch version, merged before step 1.
 

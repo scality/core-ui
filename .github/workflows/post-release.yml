@@ -38,6 +38,10 @@ jobs:
             --title "Bump core-ui version to ${{ env.nextVersion }}" \
             --body "Opens ${{ env.nextVersion }} after the release. Approve it and it merges through the merge queue.")
           gh pr merge "$url" --auto
+          # Keeps the bump out of the release notes (.github/release.yml). Last and
+          # non-fatal: a missing label must not stop the bump from merging.
+          gh api "repos/${{ github.repository }}/issues/${url##*/}/labels" -f "labels[]=release-bump" \
+            || echo "::warning::Could not label $url release-bump; it will appear in the next release notes."
 
   publish-npm:
     runs-on: ubuntu-latest

@@ -33,6 +33,10 @@ This is **Scality's shared React component library** (`@scality/core-ui`). It co
 Contributor process — branch naming, creating a component, release, build — is in
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+A PR that applications must act on carries the `breaking-change` or `consumer-action`
+label and a `Consumer action:` line, as the PR template describes: the release notes
+group PRs by these labels, so an unlabelled one lands under "Other changes".
+
 ## Exports
 
 `src/lib/index.ts` is the stable surface. `src/lib/next.ts` holds newer versions of
